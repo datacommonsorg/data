@@ -163,7 +163,8 @@ def write_csv(csv_file_path, reader):
             county = ('dcid:geoId/' + observation['State Code'] +
                       observation['County Code'])
             raw_unit_str = observation.get('Units of Measure', '')
-            unit = UNIT_MAP.get(raw_unit_str.strip().lower()) if raw_unit_str else ''
+            unit = UNIT_MAP.get(
+                raw_unit_str.strip().lower()) if raw_unit_str else ''
             if not unit and raw_unit_str:
                 unit = get_camel_case(raw_unit_str)
             new_row = {
@@ -218,13 +219,12 @@ def main(_):
     logging.info(f'Processing from {start_year} upto {end_year}')
     create_csv('EPA_AirQuality.csv')
     session = requests.Session()
-    adapter = requests.adapters.HTTPAdapter(
-        max_retries=Retry(
-            total=10,
-            backoff_factor=2,
-            status_forcelist=[429, 500, 502, 503, 504],
-            raise_on_status=False,
-        ))
+    adapter = requests.adapters.HTTPAdapter(max_retries=Retry(
+        total=10,
+        backoff_factor=2,
+        status_forcelist=[429, 500, 502, 503, 504],
+        raise_on_status=False,
+    ))
     session.mount('https://', adapter)
     session.mount('http://', adapter)
     for pollutant in POLLUTANTS:

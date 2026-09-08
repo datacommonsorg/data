@@ -60,6 +60,49 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     self.assertEqual(test_str, expected_str)
             os.remove(test_tmcf)
 
+    def test_filter_cross_border_monitors(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            create_csv(test_csv)
+            observations = [
+                {
+                    'State Code': '80',
+                    'County Code': '001',
+                    'Site Num': '0001',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '32.5',
+                    'Longitude': '-117.0',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Mexico Monitor',
+                },
+                {
+                    'State Code': 'CC',
+                    'County Code': '004',
+                    'Site Num': '0002',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '44.8',
+                    'Longitude': '-66.9',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Canada Monitor',
+                },
+            ]
+            write_csv(test_csv, iter(observations))
+            with open(test_csv, 'r') as f:
+                reader = list(csv.DictReader(f))
+                self.assertEqual(len(reader), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
