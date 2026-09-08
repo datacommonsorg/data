@@ -20,8 +20,8 @@ California Department of Education / Educational Testing Service (ETS) research 
 (2015–2019, 2021–present; 2020 was cancelled statewide due to COVID-19).
 
 It automatically handles differences in delimiter (comma vs caret) and column naming across
-eras, filters State and County aggregate records, and normalizes them into a unified format
-ready for processing by Data Commons stat_var_processor.py.
+eras, filters State and County aggregate records, preserves raw source archives in raw_files/,
+and streams normalization into a unified format ready for processing by Data Commons stat_var_processor.py.
 
 Usage:
   python3 download.py --years=all
@@ -37,6 +37,8 @@ import os
 import shutil
 import sys
 import tempfile
+import time
+import urllib.error
 import urllib.request
 import zipfile
 from absl import app
@@ -60,6 +62,11 @@ flags.DEFINE_string(
     'output_dir',
     '',
     'Directory to extract files into. Defaults to input_files/ under the script directory.',
+)
+flags.DEFINE_string(
+    'raw_dir',
+    '',
+    'Directory to store downloaded raw zip files. Defaults to raw_files/ under the script directory.',
 )
 flags.DEFINE_boolean(
     'test_mode',
@@ -110,14 +117,58 @@ UNIFIED_HEADER = [
 ]
 
 
-def probe_url_exists(url: str, timeout: int = 10) -> bool:
-    """Checks if a remote URL exists using an HTTP HEAD probe."""
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT}, method='HEAD')
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return resp.status == 200
-    except Exception:
-        return False
+def probe_url_exists(url: str, timeout: int = 10, max_retries: int = 3) -> bool:
+    """Checks if a remote URL exists using an HTTP HEAD probe with retries for transient errors."""
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT}, method='HEAD')
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.status == 200
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                return False
+            logging.warning('HTTP error %d probing %s (attempt %d/%d)', e.code, url, attempt + 1, max_retries)
+            if attempt < max_retries - 1 and e.code in (429, 500, 502, 503, 504):
+                time.sleep(2 ** attempt)
+                continue
+            return False
+        except urllib.error.URLError as e:
+            logging.warning('Network error probing %s (attempt %d/%d): %s', url, attempt + 1, max_retries, e)
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+                continue
+            return False
+        except Exception as e:
+            logging.warning('Unexpected error probing %s: %s', url, e)
+            return False
+    return False
+
+
+def download_url_with_retries(url: str, target_file: str, timeout: int = 180, max_retries: int = 3) -> None:
+    """Downloads a remote URL to target_file atomically with retry and exponential backoff."""
+    target_dir = os.path.dirname(os.path.abspath(target_file))
+    os.makedirs(target_dir, exist_ok=True)
+
+    for attempt in range(max_retries):
+        temp_file = tempfile.NamedTemporaryFile(dir=target_dir, suffix='.zip.tmp', delete=False)
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                shutil.copyfileobj(resp, temp_file)
+            temp_file.flush()
+            os.fsync(temp_file.fileno())
+            temp_file.close()
+            os.replace(temp_file.name, target_file)
+            return
+        except Exception as e:
+            temp_file.close()
+            if os.path.exists(temp_file.name):
+                os.unlink(temp_file.name)
+            logging.warning('Download attempt %d/%d failed for %s: %s', attempt + 1, max_retries, url, e)
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+            else:
+                raise
 
 
 def discover_year_urls(year: int) -> tuple[str, str] | None:
@@ -172,18 +223,16 @@ def parse_years(years_str: str) -> list[int]:
     return sorted(years)
 
 
-def normalize_and_filter_records(raw_bytes: bytes, keep_all_entities: bool = False) -> list[list[str]]:
-    """Normalizes raw CAASPP records across all eras into unified columns."""
-    text_io = io.StringIO(raw_bytes.decode('latin1'))
-    first_line = text_io.readline()
+def normalize_and_filter_stream(text_stream, keep_all_entities: bool = False):
+    """Yields normalized CAASPP records row-by-row from a text stream."""
+    first_line = text_stream.readline()
     if not first_line:
-        return []
+        return
 
     delim = '^' if '^' in first_line else ','
-    text_io.seek(0)
-    reader = csv.DictReader(text_io, delimiter=delim)
+    text_stream.seek(0)
+    reader = csv.DictReader(text_stream, delimiter=delim)
 
-    rows = []
     for r in reader:
         # Strip quotes and whitespace from all keys/values
         cleaned = {k.strip().strip('"'): (v.strip().strip('"') if v else '') for k, v in r.items() if k}
@@ -223,13 +272,24 @@ def normalize_and_filter_records(raw_bytes: bytes, keep_all_entities: bool = Fal
             cleaned.get('Percentage Standard Nearly Met', ''),
             cleaned.get('Percentage Standard Not Met', ''),
         ]
-        rows.append(row)
-
-    return rows
+        yield row
 
 
-def download_and_process_year(year: int, data_mode: str, output_dir: str, keep_all_entities: bool) -> str:
-    """Downloads zip for a given year, normalizes records, and saves sb_ca{year}_normalized.txt."""
+def normalize_and_filter_records(raw_bytes: bytes, keep_all_entities: bool = False) -> list[list[str]]:
+    """Normalizes raw CAASPP records across all eras into unified columns."""
+    text_io = io.StringIO(raw_bytes.decode('latin1'))
+    return list(normalize_and_filter_stream(text_io, keep_all_entities=keep_all_entities))
+
+
+def download_and_process_year(
+    year: int,
+    data_mode: str,
+    output_dir: str,
+    keep_all_entities: bool,
+    raw_dir: str = '',
+    out_filename: str = '',
+) -> str:
+    """Downloads and preserves raw zip, streams normalized records, and saves output atomically."""
     urls = discover_year_urls(year)
     if not urls:
         raise RuntimeError(f'Year {year} is not available from CAASPP portal.')
@@ -238,34 +298,47 @@ def download_and_process_year(year: int, data_mode: str, output_dir: str, keep_a
     filename = all_groups_file if data_mode == 'all_groups' else all_students_file
     url = BASE_URL + filename
 
-    logging.info('Fetching Year %d: %s', year, url)
-    req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
+    if not raw_dir:
+        raw_dir = os.path.join(os.path.dirname(os.path.abspath(output_dir)), 'raw_files')
+    os.makedirs(raw_dir, exist_ok=True)
+    raw_zip_path = os.path.join(raw_dir, filename)
 
-    # Download to temporary disk file to avoid unbounded RAM usage
-    with tempfile.NamedTemporaryFile(suffix='.zip', delete=True) as temp_zip:
-        try:
-            with urllib.request.urlopen(req, timeout=180) as resp:
-                shutil.copyfileobj(resp, temp_zip)
-            temp_zip.flush()
+    if not os.path.exists(raw_zip_path) or os.path.getsize(raw_zip_path) == 0:
+        logging.info('Fetching Year %d raw zip: %s', year, url)
+        download_url_with_retries(url, raw_zip_path)
+    else:
+        logging.info('Year %d: Using preserved raw archive: %s', year, raw_zip_path)
 
-            with zipfile.ZipFile(temp_zip.name, 'r') as z:
-                candidates = [f for f in z.namelist() if f.startswith(f'sb_ca{year}') and 'entities' not in f]
-                if not candidates:
-                    raise RuntimeError(f'No matching data file found in zip for year {year}')
-                raw_bytes = z.read(candidates[0])
-        except Exception as e:
-            logging.error('Failed to download or extract %s: %s', url, e)
-            raise
+    out_name = out_filename or f'sb_ca{year}_normalized.txt'
+    out_file = os.path.join(output_dir, out_name)
+    temp_out = tempfile.NamedTemporaryFile('w', dir=output_dir, delete=False, encoding='utf-8', newline='', suffix='.tmp')
+    row_count = 0
 
-    normalized_rows = normalize_and_filter_records(raw_bytes, keep_all_entities=keep_all_entities)
-    logging.info('Year %d: Extracted %d normalized rows', year, len(normalized_rows))
+    try:
+        with zipfile.ZipFile(raw_zip_path, 'r') as z:
+            candidates = [f for f in z.namelist() if f.startswith(f'sb_ca{year}') and 'entities' not in f]
+            if not candidates:
+                raise RuntimeError(f'No matching data file found in zip for year {year}')
 
-    out_file = os.path.join(output_dir, f'sb_ca{year}_normalized.txt')
-    with open(out_file, 'w', encoding='utf-8', newline='') as f:
-        writer = csv.writer(f, delimiter='^')
-        writer.writerow(UNIFIED_HEADER)
-        writer.writerows(normalized_rows)
+            writer = csv.writer(temp_out, delimiter='^')
+            writer.writerow(UNIFIED_HEADER)
+            with z.open(candidates[0]) as member_file:
+                text_stream = io.TextIOWrapper(member_file, encoding='latin1')
+                for row in normalize_and_filter_stream(text_stream, keep_all_entities=keep_all_entities):
+                    writer.writerow(row)
+                    row_count += 1
 
+        temp_out.flush()
+        os.fsync(temp_out.fileno())
+        temp_out.close()
+        os.replace(temp_out.name, out_file)
+    except Exception:
+        temp_out.close()
+        if os.path.exists(temp_out.name):
+            os.unlink(temp_out.name)
+        raise
+
+    logging.info('Year %d: Extracted %d normalized rows -> %s', year, row_count, out_file)
     return out_file
 
 
@@ -274,7 +347,9 @@ def main(argv):
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_dir = FLAGS.output_dir or os.path.join(script_dir, 'input_files')
+    raw_dir = FLAGS.raw_dir or os.path.join(script_dir, 'raw_files')
     os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(raw_dir, exist_ok=True)
 
     if FLAGS.clean:
         logging.info('Cleaning output directory: %s', output_dir)
@@ -287,11 +362,16 @@ def main(argv):
 
     if FLAGS.test_mode:
         logging.info('Test mode: downloading 2024 sample...')
-        test_file = download_and_process_year(2024, 'all_students', output_dir, FLAGS.keep_all_entities)
-        # In test mode, also create sb_ca_all_years_normalized.txt so the downstream pipeline can execute
-        master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
-        shutil.copyfile(test_file, master_file)
-        logging.info('Created test master file: %s', master_file)
+        test_file = download_and_process_year(
+            2024,
+            'all_students',
+            output_dir,
+            FLAGS.keep_all_entities,
+            raw_dir=raw_dir,
+            out_filename='sb_ca_test_normalized.txt',
+        )
+        logging.info('Test mode completed. Created test file: %s', test_file)
+        logging.info('Master all-years file was not modified in test mode.')
         return
 
     years = parse_years(FLAGS.years)
@@ -301,7 +381,13 @@ def main(argv):
     failed_years = []
     for year in years:
         try:
-            res = download_and_process_year(year, FLAGS.data_mode, output_dir, FLAGS.keep_all_entities)
+            res = download_and_process_year(
+                year,
+                FLAGS.data_mode,
+                output_dir,
+                FLAGS.keep_all_entities,
+                raw_dir=raw_dir,
+            )
             if res:
                 all_normalized_files.append(res)
         except Exception as e:
@@ -314,22 +400,37 @@ def main(argv):
     if not all_normalized_files:
         raise RuntimeError('No files were successfully downloaded and processed.')
 
-    # Combine all downloaded years into a unified master file
-    master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
-    total_master_rows = 0
-    with open(master_file, 'w', encoding='utf-8', newline='') as f_out:
-        writer = csv.writer(f_out, delimiter='^')
-        writer.writerow(UNIFIED_HEADER)
-        for nf in all_normalized_files:
-            with open(nf, 'r', encoding='utf-8') as f_in:
-                reader = csv.reader(f_in, delimiter='^')
-                next(reader)  # Skip header
-                for row in reader:
-                    writer.writerow(row)
-                    total_master_rows += 1
+    # Only combine into master multi-year file if all years were requested.
+    # Single-year or subset downloads must NOT overwrite the consolidated master dataset.
+    if FLAGS.years.strip().lower() in ('all', '*'):
+        master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
+        temp_master = tempfile.NamedTemporaryFile('w', dir=output_dir, delete=False, encoding='utf-8', newline='', suffix='.tmp')
+        total_master_rows = 0
+        try:
+            writer = csv.writer(temp_master, delimiter='^')
+            writer.writerow(UNIFIED_HEADER)
+            for nf in all_normalized_files:
+                with open(nf, 'r', encoding='utf-8') as f_in:
+                    reader = csv.reader(f_in, delimiter='^')
+                    next(reader)  # Skip header
+                    for row in reader:
+                        writer.writerow(row)
+                        total_master_rows += 1
+            temp_master.flush()
+            os.fsync(temp_master.fileno())
+            temp_master.close()
+            os.replace(temp_master.name, master_file)
+        except Exception:
+            temp_master.close()
+            if os.path.exists(temp_master.name):
+                os.unlink(temp_master.name)
+            raise
 
-    logging.info('Created master multi-year file: %s (%d records across %d years)',
-                 master_file, total_master_rows, len(all_normalized_files))
+        logging.info('Created master multi-year file: %s (%d records across %d years)',
+                     master_file, total_master_rows, len(all_normalized_files))
+    else:
+        logging.info('Individual year processing completed for: %s. Master multi-year file was not modified.',
+                     [os.path.basename(f) for f in all_normalized_files])
 
 
 if __name__ == '__main__':

@@ -17,10 +17,8 @@ The data covers student achievement in **English Language Arts/Literacy (ELA)** 
 california_school_performance/
 ├── config/
 │   ├── california_school_performance_metadata.csv     # Processor configurations (delimiters, headers, output columns)
-│   ├── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
-│   └── california_school_performance_stat_vars.mcf    # Predefined StatisticalVariable nodes (5,966 variables)
+│   └── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
 ├── download.py                                        # Automated data fetch and extraction script
-├── run_download_process.sh                            # End-to-end download & stat_var_processor pipeline runner
 ├── manifest.json                                      # Data Commons import specification
 ├── README.md                                          # Documentation and usage guide
 ├── input_files/                                       # Raw downloaded files (sb_ca*.txt, StudentGroups.txt, etc.)
@@ -40,7 +38,7 @@ The pipeline maps raw test records into **5,966 distinct Statistical Variables**
   - `Mathematics` (Test ID: 2)
 - **Grade Levels**:
   - Grades 3, 4, 5, 6, 7, 8, 11 (`dcid:SchoolGrade3` – `dcid:SchoolGrade11`)
-  - Grade 13 representing "All Grades combined" (`dcid:SchoolGrade13`)
+  - Grade 13 represents "All Grades combined", mapped to unconstrained student population StatVars without grade constraints (e.g. `Count_Student_EnglishLanguageArts`)
 - **Demographic Subgroups (55 groups)**:
   - Gender (`Male`, `Female`)
   - Race / Ethnicity (`White`, `BlackOrAfricanAmericanAlone`, `Asian`, `Filipino`, `HispanicOrLatino`, `AmericanIndianOrAlaskaNative`, `NativeHawaiianOrOtherPacificIslanderAlone`, `TwoOrMoreRaces`)
@@ -66,7 +64,17 @@ The pipeline maps raw test records into **5,966 distinct Statistical Variables**
 ### 1. Download and Process the Entire Dataset (All Available Years: 2015–2025)
 To download and process all years present at source (skipping 2020 when CAASPP was cancelled statewide due to COVID-19):
 ```bash
-./run_download_process.sh --years=all
+# Step 1: Download and normalize data
+python3 download.py --years=all
+
+# Step 2: Generate TMCF and CSV observations using stat_var_processor
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/sb_ca_all_years_normalized.txt \
+  --pv_map=config/california_school_performance_pvmap.csv \
+  --config_file=config/california_school_performance_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_path=output_files/california_school_performance_all_years_output \
+  --output_counters=counters/california_school_performance_counters.csv
 ```
 This automatically fetches each year, normalizes differences across formats, and runs `stat_var_processor.py` over the consolidated multi-year dataset (`sb_ca_all_years_normalized.txt`), generating **64,000+ observations** across all 10 years.
 
@@ -74,16 +82,16 @@ This automatically fetches each year, normalizes differences across formats, and
 To fetch and process specific years:
 ```bash
 # Specific range
-./run_download_process.sh --years=2015-2024
+python3 download.py --years=2015-2024
 
 # Specific single year
-./run_download_process.sh --years=2024
+python3 download.py --years=2024
 ```
 
 ### 3. Quick Test Run
 To download a lightweight test sample and verify the pipeline:
 ```bash
-./run_download_process.sh --test_mode
+python3 download.py --test_mode
 ```
 
 ---

@@ -19,7 +19,8 @@
                 }
             ],
             "source_files": [
-                "input_files/sb_ca_all_years_normalized.txt",
+                "raw_files/*.zip",
+                "input_files/*.txt",
                 "golden_data/*.csv",
                 "counters/*.csv",
                 "config/*.csv"
