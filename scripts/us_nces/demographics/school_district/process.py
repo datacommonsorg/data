@@ -51,7 +51,8 @@ class NCESDistrictSchool(USEducation):
     _renaming_columns = RENAMING_DISTRICT_COLUMNS
 
 
-if __name__ == '__main__':
+def main(argv):
+    del argv  # Unused
     try:
         logging.set_verbosity(logging.INFO)
         logging.info("Main Method Starts For School District ")
@@ -102,4 +103,8 @@ if __name__ == '__main__':
         error_msg = str(e)[:1000]
         logging.fatal(
             f"Error While Running District School Process: {error_msg}")
-        sys.exit(1)
+
+
+if __name__ == '__main__':
+    app.run(main)
+
