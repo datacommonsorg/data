@@ -1,0 +1,8 @@
+Node: E:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->E0
+observationAbout: C:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->observationAbout
+observationDate: C:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->observationDate
+value: C:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->value
+variableMeasured: C:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->variableMeasured
+unit: C:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->unit
+scalingFactor: C:Renda_Mensal_Vitalicia_RMV_por_municipio_pagador->scalingFactor
+typeOf: dcs:StatVarObservation

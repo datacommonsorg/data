@@ -1,0 +1,8 @@
+Node: E:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->E0
+observationAbout: C:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->observationAbout
+observationDate: C:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->observationDate
+value: C:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->value
+variableMeasured: C:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->variableMeasured
+unit: C:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->unit
+scalingFactor: C:Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor->scalingFactor
+typeOf: dcs:StatVarObservation

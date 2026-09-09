@@ -1,0 +1,37 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_input/Beneficiarios_Do_BPC_No_Cadastro_Unico - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/pv_map/Beneficiarios_Do_BPC_No_Cadastro_Unico - pvmap.csv --config_file=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/config_metadata/Beneficiarios_Do_BPC_No_Cadastro_Unico - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_output/Beneficiarios_Do_BPC_No_Cadastro_Unico --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-06-16 10:14:33.074849
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único na categoria Idoso (Idade>60 Anos)@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+descriptionUrl: "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-da-pessoa-idosa"
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Cadastrados no Cadastro Único@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+descriptionUrl: "https://www.gov.br/mds/pt-br/acoes-e-programas/suas/beneficios-assistenciais/bpc-no-cadastro-unico"
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disablity"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob PCD@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+descriptionUrl: "https://www.gov.br/mds/pt-br/acoes-e-programas/suas/beneficios-assistenciais/beneficio-assistencial-ao-idoso-e-a-pessoa-com-deficiencia-bpc"
+disabilityStatus: dcid:PermanentDisablity
+registrationStatus: dcid:Brazil_SingleRegistry
+
