@@ -20,7 +20,6 @@ and Statewide.
 """
 
 import os
-import sys
 from absl import app
 from absl import flags
 from absl import logging
@@ -28,6 +27,7 @@ import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+
 
 FLAGS = flags.FLAGS
 
@@ -41,21 +41,6 @@ flags.DEFINE_string(
     'https://health.data.ny.gov/resource/jsy7-eb4n.json',
     'Health Data NY BRFSS Socrata API endpoint.',
 )
-
-# Mapping of NY DOH short indicator names to PV map column names
-INDICATOR_COLUMN_MAP = {
-    'Diabetes': 'Percentage of adults with diabetes',
-    'Prediabetes': 'Percentage of adults with prediabetes',
-    'Asthma': 'Percentage of adults with asthma',
-    'Arthritis': 'Percentage of adults with arthritis',
-    'Cardiovascular Disease': 'Percentage of adults with cardiovascular disease',
-    'COPD': 'Percentage of adults with COPD',
-    'High Blood Pressure': 'Percentage of adults with high blood pressure',
-    'Elevated Cholesterol': 'Percentage of adults with elevated cholesterol',
-    'Obesity': 'Percentage of adults with obesity',
-    'Overweight or Obese': 'Percentage of adults overweight or obese',
-    'Depressive Disorder': 'Percentage of adults with depression',
-}
 
 
 def create_session() -> requests.Session:
@@ -75,21 +60,6 @@ def create_session() -> requests.Session:
       'Accept': 'application/json, text/csv, */*',
   })
   return session
-
-
-def normalize_year(raw_year: str) -> str:
-  """Normalizes survey year interval to a 4-digit numeric observation year."""
-  raw_year = str(raw_year).strip()
-  if '-' in raw_year:
-    parts = raw_year.split('-')
-    start = parts[0].strip()
-    end = parts[1].strip()
-    if len(end) == 2 and len(start) == 4:
-      return f'{start[:2]}{end}'
-    if len(end) == 4:
-      return end
-    return end
-  return raw_year
 
 
 def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
@@ -116,10 +86,12 @@ def download_health_indicators(endpoint: str, output_dir: str) -> tuple[int, lis
     logging.info('GET %s with params %s', endpoint, params)
     resp = session.get(endpoint, params=params, timeout=60)
     if resp.status_code != 200:
-      logging.fatal(
+      logging.error(
           'Health Data NY API returned HTTP %d: %s', resp.status_code, resp.text[:200]
       )
-      return 0, []
+      raise RuntimeError(
+          f'Health Data NY API returned HTTP {resp.status_code}: {resp.text[:200]}'
+      )
 
     chunk = resp.json()
     if not chunk:
@@ -131,8 +103,8 @@ def download_health_indicators(endpoint: str, output_dir: str) -> tuple[int, lis
     offset += limit
 
   if not records:
-    logging.fatal('Health Data NY API returned 0 records.')
-    return 0, []
+    logging.error('Health Data NY API returned 0 records.')
+    raise RuntimeError('Health Data NY API returned 0 records.')
 
   logging.info('Received %d total raw records from Health Data NY API.', len(records))
   raw_df = pd.DataFrame(records)

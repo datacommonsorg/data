@@ -3,5 +3,5 @@ observationAbout: C:sample_expected_output->observationAbout
 observationDate: C:sample_expected_output->observationDate
 value: C:sample_expected_output->value
 variableMeasured: C:sample_expected_output->variableMeasured
-typeOf: dcs:StatVarObservation
 unit: Percent
+typeOf: dcs:StatVarObservation
