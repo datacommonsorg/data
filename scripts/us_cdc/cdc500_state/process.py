@@ -76,6 +76,10 @@ svo_percent AS (
       'Percent_Person_21To65Years_Female_ReceivedPapSmearTest',
       'Percent_Person_50To75Years_ReceivedColorectalCancerScreening'
     )
+  QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
+    ORDER BY O.last_update_timestamp DESC
+  ) = 1
 ),
 
 svo_count AS (
@@ -99,7 +103,7 @@ svo_count AS (
     AND LENGTH(O.entity1) = 13
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date
-    ORDER BY O.facet_id DESC
+    ORDER BY O.last_update_timestamp DESC
   ) = 1
 )
 

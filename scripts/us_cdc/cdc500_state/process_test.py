@@ -38,6 +38,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("LENGTH(O.entity1) = 13", query)
         self.assertIn("REGEXP_CONTAINS", query)
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
+        self.assertIn("O.last_update_timestamp DESC", query)
         self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography", query)
         self.assertIn("Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening", query)
         self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest", query)
