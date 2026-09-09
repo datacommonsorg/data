@@ -11,4 +11,3 @@ comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured"
 header_rows,1
 reconcile_nodes,False
-output_counters,bev_3240_wiki/counters/zurich_population_bev_3240_wiki_counters.csv

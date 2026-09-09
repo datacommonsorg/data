@@ -3,7 +3,7 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "description": "Checks that deleted records do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1

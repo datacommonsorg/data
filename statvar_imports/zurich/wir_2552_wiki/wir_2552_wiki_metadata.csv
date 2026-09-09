@@ -12,4 +12,3 @@ output_columns,"observationAbout,observationDate,value,variableMeasured"
 header_rows,1
 #aggregate_duplicate_svobs,sum
 reconcile_nodes,False
-output_counters,wir_2552_wiki/counters/zurich_population_wir_2552_wiki_counters.csv
