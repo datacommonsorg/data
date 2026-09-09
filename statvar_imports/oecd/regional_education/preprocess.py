@@ -1,55 +1,132 @@
+import csv
 import os
 import re
-from absl import logging
+import shutil
 
-# --- Add this line to set verbosity ---
-logging.set_verbosity(logging.INFO)
-# For even more detail if you have debug messages:
-# logging.set_verbosity(logging.DEBUG)
-# --------------------------------------
+try:
+    from absl import logging
+    logging.set_verbosity(logging.INFO)
+except ImportError:
+    import logging as std_logging
 
-def rename_target_file(base_path='.'):
+    class _CompatLogger:
+        def __init__(self):
+            self._logger = std_logging.getLogger(__name__)
+            self._logger.setLevel(std_logging.INFO)
+            if not self._logger.handlers:
+                handler = std_logging.StreamHandler()
+                handler.setFormatter(
+                    std_logging.Formatter('%(levelname)s:%(message)s'))
+                self._logger.addHandler(handler)
+
+        def set_verbosity(self, level):
+            self._logger.setLevel(level)
+
+        def info(self, msg, *args, **kwargs):
+            self._logger.info(msg, *args, **kwargs)
+
+        def warning(self, msg, *args, **kwargs):
+            self._logger.warning(msg, *args, **kwargs)
+
+        def error(self, msg, *args, **kwargs):
+            self._logger.error(msg, *args, **kwargs)
+
+    logging = _CompatLogger()
+    logging.set_verbosity(std_logging.INFO)
+
+
+def preprocess(base_path='.'):
     folder_name = 'gcs_output/source_files'
     target_folder = os.path.join(base_path, folder_name)
+    counters_folder = os.path.join(base_path, 'counters')
+    os.makedirs(counters_folder, exist_ok=True)
+    output_folder = os.path.join(base_path, 'output')
+    os.makedirs(output_folder, exist_ok=True)
 
-    try:
-        # Check if the folder exists
-        if not os.path.isdir(target_folder):
-            logging.fatal(f"Folder '{folder_name}' not found in '{base_path}'") # Changed to error for non-fatal issues
-            return # Exit function if folder not found
+    custom_schema_file = os.path.join(
+        base_path, 'oecd_regional_education_custom_schema.mcf')
+    if os.path.isfile(custom_schema_file):
+        shutil.copyfile(
+            custom_schema_file,
+            os.path.join(output_folder, 'oecd_regional_education_custom_schema.mcf'))
+        logging.info(f"Copied custom schema to {output_folder}")
 
-        # Pattern to match any file starting with 'A'
-        pattern = re.compile(r'^A.*$', re.IGNORECASE)
-        renamed = False
+    places_resolved_file = os.path.join(
+        base_path, 'oecd_regional_education_places_resolved.csv')
+    valid_places = set()
+    if os.path.isfile(places_resolved_file):
+        with open(places_resolved_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if row.get('dcid', '').strip():
+                    valid_places.add(row['place_name'].strip())
+        logging.info(f"Loaded {len(valid_places)} valid places from {places_resolved_file}")
+    else:
+        logging.warning(f"Places resolved file not found: {places_resolved_file}")
 
-        # Search through files in the folder
-        for filename in os.listdir(target_folder):
-            logging.info(f"Checking file: {filename}")
-            if pattern.match(filename):
-                old_path = os.path.join(target_folder, filename)
-                new_path = os.path.join(target_folder, 'oecd_regional_education_data.csv')
+    if not os.path.isdir(target_folder):
+        logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
+        return
 
-                try:
-                    os.rename(old_path, new_path)
-                    logging.info(f"Renamed '{filename}' to 'oecd_regional_education_data.csv'")
-                    renamed = True
-                except PermissionError:
-                    logging.warning(f"Permission denied while renaming '{filename}'.") # Changed to warning
-                except OSError as e:
-                    logging.fatal(f"OS error while renaming '{filename}': {e}") # Changed to error
-                break  # Rename only the first match
+    pattern = re.compile(r'^A.*$', re.IGNORECASE)
+    raw_file = None
+    for filename in os.listdir(target_folder):
+        if pattern.match(filename):
+            raw_file = filename
+            break
 
-        if not renamed:
-            logging.info("No matching file starting with 'A' found to rename.")
+    target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
 
-    except FileNotFoundError as e:
-        # This block might not be hit if caught earlier, but good for other FileNotFoundError
-        logging.fatal(f"File system error: {e}")
-    except PermissionError as e:
-        # This block might not be hit if caught earlier, but good for other PermissionError
-        logging.fatal(f"Global permission error: {e}")
-    except Exception as e:
-        logging.fatal(f"An unexpected critical error occurred: {e}") # Changed to critical for unexpected errors
+    if raw_file:
+        src_path = os.path.join(target_folder, raw_file)
+        tmp_path = os.path.join(target_folder, 'filtered_tmp.csv')
+        logging.info(f"Filtering '{raw_file}' into 'oecd_regional_education_data.csv'...")
+        _filter_csv(src_path, tmp_path, valid_places)
+        if os.path.exists(target_csv):
+            os.remove(target_csv)
+        os.rename(tmp_path, target_csv)
+        if src_path != target_csv and os.path.exists(src_path):
+            os.remove(src_path)
+        logging.info("Preprocessing and filtering completed successfully.")
+    elif os.path.isfile(target_csv) and valid_places:
+        tmp_path = os.path.join(target_folder, 'filtered_tmp.csv')
+        logging.info(f"Checking and filtering existing '{target_csv}'...")
+        _filter_csv(target_csv, tmp_path, valid_places)
+        os.replace(tmp_path, target_csv)
+        logging.info("Filtering completed successfully.")
+    else:
+        logging.info("No matching source data file found to process.")
 
-# Run it
-rename_target_file()
+
+def _filter_csv(src_path: str, dst_path: str, valid_places: set):
+    with open(src_path, 'r', encoding='utf-8', errors='replace') as fin, \
+         open(dst_path, 'w', encoding='utf-8', newline='') as fout:
+        reader = csv.reader(fin)
+        writer = csv.writer(fout)
+
+        header = next(reader, None)
+        if not header:
+            return
+        writer.writerow(header)
+
+        ref_area_idx = header.index('REF_AREA') if 'REF_AREA' in header else None
+        if ref_area_idx is None:
+            logging.warning("REF_AREA column not found in header, copying all rows.")
+            for row in reader:
+                writer.writerow(row)
+            return
+
+        kept = 0
+        dropped = 0
+        for row in reader:
+            if len(row) > ref_area_idx and row[ref_area_idx].strip() in valid_places:
+                writer.writerow(row)
+                kept += 1
+            else:
+                dropped += 1
+
+        logging.info(f"Filtered source data: {kept} rows kept, {dropped} rows with unresolved places dropped.")
+
+
+if __name__ == '__main__':
+    preprocess()
