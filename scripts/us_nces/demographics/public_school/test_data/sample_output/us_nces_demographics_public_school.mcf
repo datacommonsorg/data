@@ -1,0 +1,216 @@
+Node: dcid:Count_Student
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_AmericanIndianOrAlaskaNative
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:AmericanIndianOrAlaskaNative
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Asian
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:Asian
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Black
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:Black
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_DirectCertificationLunch
+lunchEligibility: dcs:DirectCertificationLunch
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_FreeLunch
+lunchEligibility: dcs:FreeLunch
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_HawaiianNativeOrPacificIslander
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:HawaiianNativeOrPacificIslander
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_HispanicOrLatino
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:HispanicOrLatino
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Kindergarten
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:Kindergarten
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_AmericanIndianOrAlaskaNative
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:AmericanIndianOrAlaskaNative
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_PreKindergarten
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:PreKindergarten
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_ReducedLunch
+lunchEligibility: dcs:ReducedLunch
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade1
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade1
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade10
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade10
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade11
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade11
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade12
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade12
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade1To8
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade1To8
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade2
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade2
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade3
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade3
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade4
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade4
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade5
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade5
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade6
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade6
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade7
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade7
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade8
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade8
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade9
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade9
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade9To12
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade9To12
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_TwoOrMoreRaces
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:TwoOrMoreRaces
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_UngradedClasses
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:NCESUngradedClasses
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_White
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:White
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable

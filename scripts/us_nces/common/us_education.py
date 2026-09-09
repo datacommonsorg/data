@@ -28,7 +28,6 @@ import warnings
 import numpy as np
 import pandas as pd
 from absl import logging
-from google.cloud import storage
 
 CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
@@ -77,7 +76,7 @@ def _format_fips_code(val, length: int) -> str:
     if pd.isna(val):
         return ''
     s = str(val).strip()
-    if not s or s in ('nan', 'None'):
+    if not s or s.lower() in ('nan', 'none', '<na>'):
         return ''
     if s.endswith('.0'):
         s = s[:-2]
@@ -112,7 +111,7 @@ class USEducation:
                  cleaned_csv_place: str = None,
                  duplicate_csv_place: str = None,
                  tmcf_file_place: str = None) -> None:
-        self.storage_client = storage.Client()
+        self._place_dfs = []
         self._input_files = input_files
         self._cleaned_csv_file_path = cleaned_csv_path
         self._mcf_file_path = mcf_file_path
@@ -226,8 +225,8 @@ class USEducation:
             position = regex["position"]
             if True in data_df[curr_prop_column].str.contains(
                     pattern).values.tolist():
-                data_df[curr_prop_column] = data_df[curr_prop_column].str.split(
-                    pattern, expand=True)[position]
+                data_df[curr_prop_column] = data_df[
+                    curr_prop_column].str.split(pattern, expand=True)[position]
                 data_df[curr_prop_column] = data_df[curr_prop_column].fillna(
                     'None')
             else:
@@ -272,9 +271,9 @@ class USEducation:
                 "curr_prop", curr_value_column
             ]].apply(conf["pv_format"], axis=1)
             unique_rows[[curr_value_column
-                        ]] = replace_values(unique_rows[[curr_value_column]],
-                                            replace_with_all_mappers=False,
-                                            regex_flag=True)
+                         ]] = replace_values(unique_rows[[curr_value_column]],
+                                             replace_with_all_mappers=False,
+                                             regex_flag=True)
             curr_val_mapper = dict(
                 zip(unique_rows[column], unique_rows[curr_value_column]))
 
@@ -310,8 +309,8 @@ class USEducation:
 
         stat_var_with_dcs = dict(
             zip(data_df["all_prop"], data_df[sv_node_column]))
-        stat_var_without_dcs = dict(zip(data_df["all_prop"],
-                                        data_df['sv_name']))
+        stat_var_without_dcs = dict(
+            zip(data_df["all_prop"], data_df['sv_name']))
 
         return (stat_var_with_dcs, stat_var_without_dcs)
 
@@ -355,8 +354,8 @@ class USEducation:
             data_df["all_prop"] += '_' + data_df[col]
         sv_node_column = "prop_sv_node"
         data_df["prop_sv_node"] = ""
-        unique_props = data_df.drop_duplicates(subset=["all_prop"]).reset_index(
-            drop=True)
+        unique_props = data_df.drop_duplicates(
+            subset=["all_prop"]).reset_index(drop=True)
 
         unique_props = unique_props.replace('', np.nan)
         if self._generate_statvars:
@@ -390,7 +389,8 @@ class USEducation:
                 if year != self._year:
                     year_match = False
                     logging.info(
-                        f"Column {header} is not for expectd year {self._year}")
+                        f"Column {header} is not for expectd year {self._year}"
+                    )
         return year_match
 
     @log_method_execution
@@ -398,6 +398,10 @@ class USEducation:
         """
         The Data for Place Entities is cleaned and written to a file.
         """
+        if self._place_dfs:
+            self._final_df_place = pd.concat(self._place_dfs,
+                                             ignore_index=True)
+            self._place_dfs = []
         # Renaming column names in the dataframe.
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
@@ -466,9 +470,9 @@ class USEducation:
         # Generating a column for place property.
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
             'ZIP'].apply(lambda x: x + ',' if x != '' else ''
-                        ) + self._final_df_place['County_code'].apply(
-                            lambda x: x + ',' if x != '' else ''
-                        ) + self._final_df_place['State_code']
+                         ) + self._final_df_place['County_code'].apply(
+                             lambda x: x + ',' if x != '' else ''
+                         ) + self._final_df_place['State_code']
         # Camel casing Physical Address and School Name.
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
@@ -478,8 +482,8 @@ class USEducation:
             self._final_df_place["Private_School_Name"],
             self._final_df_place["Private_School_Name"].str.title())
         # Sorting values in descending order and dropping duplicates.
-        self._final_df_place = self._final_df_place.sort_values(by=["year"],
-                                                                ascending=False)
+        self._final_df_place = self._final_df_place.sort_values(
+            by=["year"], ascending=False)
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
@@ -488,6 +492,10 @@ class USEducation:
         """
         The Data for Place Entities is cleaned and written to a file.
         """
+        if self._place_dfs:
+            self._final_df_place = pd.concat(self._place_dfs,
+                                             ignore_index=True)
+            self._place_dfs = []
         # FIX: Work on a copy to prevent SettingWithCopyWarning
         self._final_df_place = self._final_df_place.copy()
 
@@ -519,7 +527,11 @@ class USEducation:
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
         # across disjoint files/years without empty-string shadowing.
-        self._final_df_place.replace(r'^\s*$', np.nan, regex=True, inplace=True)
+        self._final_df_place.replace(
+            [r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+            np.nan,
+            regex=True,
+            inplace=True)
         self._final_df_place = (self._final_df_place.sort_values(
             by=["year"], ascending=False).groupby("school_state_code",
                                                   as_index=False,
@@ -609,8 +621,8 @@ class USEducation:
                                                 config) if zip_list else {}
         dcid_check_county = dc_api_is_defined_dcid(
             county_list, config) if county_list else {}
-        dcid_check_state = dc_api_is_defined_dcid(state_list,
-                                                  config) if state_list else {}
+        dcid_check_state = dc_api_is_defined_dcid(
+            state_list, config) if state_list else {}
 
         # Add safety defaults
         dcid_check_county[""] = False
@@ -638,10 +650,10 @@ class USEducation:
         # Generating a column for place property.
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
             'ZIP'].apply(lambda x: x + ',' if x != '' else ''
-                        ) + self._final_df_place['County_code'].apply(
-                            lambda x: x + ',' if x != '' else ''
-                        ) + self._final_df_place['State_code'].apply(
-                            lambda x: x if x != '' else '')
+                         ) + self._final_df_place['County_code'].apply(
+                             lambda x: x + ',' if x != '' else ''
+                         ) + self._final_df_place['State_code'].apply(
+                             lambda x: x if x != '' else '')
 
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].str.replace(
             "zip/", "")
@@ -690,18 +702,26 @@ class USEducation:
         """
         The Data for Place Entities is cleaned and written to a file.
         """
+        if self._place_dfs:
+            self._final_df_place = pd.concat(self._place_dfs,
+                                             ignore_index=True)
+            self._place_dfs = []
         # Ensure we are working on a copy to reduce SettingWithCopyWarning risks
         self._final_df_place = self._final_df_place.copy()
 
-        self._final_df_place[
-            'geoID'] = "sch" + self._final_df_place['Agency ID - NCES Assigned']
+        self._final_df_place['geoID'] = "sch" + self._final_df_place[
+            'Agency ID - NCES Assigned']
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
 
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
         # across disjoint files/years without empty-string shadowing.
-        self._final_df_place.replace(r'^\s*$', np.nan, regex=True, inplace=True)
+        self._final_df_place.replace(
+            [r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+            np.nan,
+            regex=True,
+            inplace=True)
         self._final_df_place = (self._final_df_place.sort_values(
             by=["year"], ascending=False).groupby("school_state_code",
                                                   as_index=False,
@@ -869,15 +889,18 @@ class USEducation:
         elif self._import_name == "public_school":
             # Ensure School ID is formatted correctly with leading zeros
             df_cleaned["School ID (12-digit) - NCES Assigned"] = df_cleaned[
-                "School ID (12-digit) - NCES Assigned"].astype(str).str.zfill(
-                    12)
-            df_cleaned["school_state_code"] = "nces/" + df_cleaned[
-                "School ID (12-digit) - NCES Assigned"]
+                "School ID (12-digit) - NCES Assigned"].apply(
+                    lambda x: _format_fips_code(x, 12))
+            df_cleaned["school_state_code"] = df_cleaned[
+                "School ID (12-digit) - NCES Assigned"].apply(
+                    lambda x: "nces/" + x if x else "")
         elif self._import_name == "district_school":
             df_cleaned['Agency ID - NCES Assigned'] = df_cleaned[
-                'Agency ID - NCES Assigned'].astype(str).str.zfill(7)
-            df_cleaned["school_state_code"] = \
-                "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
+                'Agency ID - NCES Assigned'].apply(
+                    lambda x: _format_fips_code(x, 7))
+            df_cleaned["school_state_code"] = df_cleaned[
+                'Agency ID - NCES Assigned'].apply(lambda x: "geoId/sch" + x
+                                                   if x else "")
 
         curr_cols = df_cleaned.columns.values.tolist()
         curr_place = curr_cols
@@ -936,8 +959,7 @@ class USEducation:
         ]:
             df_place.loc[:, 'year'] = self._year[0:4].strip()
             df_place = df_place.loc[:, ~df_place.columns.duplicated()]
-            self._final_df_place = pd.concat([self._final_df_place, df_place],
-                                             ignore_index=True)
+            self._place_dfs.append(df_place)
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
@@ -1013,13 +1035,15 @@ class USEducation:
                         by=["year", "sv_name", "school_state_code"])
                     df_parsed = self._generate_prop(df_parsed,
                                                     DF_DEFAULT_MCF_PROP,
-                                                    SV_PROP_ORDER, FORM_STATVAR)
+                                                    SV_PROP_ORDER,
+                                                    FORM_STATVAR)
                     df_parsed = self._generate_stat_var_and_mcf(
                         df_parsed, SV_PROP_ORDER)
                     # Adding new columns scaling_factor:100 and unit:dcs:Percent
                     # wherever the SV is Percent.
                     df_parsed["scaling_factor"] = np.where(
-                        df_parsed["sv_name"].str.contains("Percent"), '100', '')
+                        df_parsed["sv_name"].str.contains("Percent"), '100',
+                        '')
                     df_parsed["unit"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"),
                         "dcs:Percent", '')
@@ -1091,7 +1115,8 @@ class USEducation:
             unique_nodes_df = self._df.drop_duplicates(
                 subset=["prop_node"]).reset_index(drop=True)
 
-            mcf_ = unique_nodes_df.sort_values(by=["prop_node"])["mcf"].tolist()
+            mcf_ = unique_nodes_df.sort_values(
+                by=["prop_node"])["mcf"].tolist()
         else:
             mcf_ = self._df["mcf"].tolist()
 
@@ -1125,8 +1150,9 @@ class USEducation:
             None
         """
 
-        tmcf = TMCF_TEMPLATE.format(import_name=self._import_name,
-                                    observation_period=self._observation_period)
+        tmcf = TMCF_TEMPLATE.format(
+            import_name=self._import_name,
+            observation_period=self._observation_period)
         # Writing Genereated TMCF to local path.
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))

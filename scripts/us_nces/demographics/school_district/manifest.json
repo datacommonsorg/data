@@ -12,7 +12,8 @@
                 "process.py"
             ],
             "source_files": [
-                "gcs_folder/input_files/*/*.csv"
+                "gcs_folder/input_files/*/*.csv",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {

@@ -100,4 +100,6 @@ if __name__ == '__main__':
     except Exception as e:
         # Only log the first 1000 characters of the error message
         error_msg = str(e)[:1000]
-        logging.fatal(f"Error While Running Public School Process: {error_msg}")
+        logging.fatal(
+            f"Error While Running Public School Process: {error_msg}")
+        sys.exit(1)
