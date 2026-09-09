@@ -51,6 +51,23 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 ---
 
+### Operational Notes & Downloader Architecture
+
+* **Rate-Limit Handling (HTTP 429)**: CDC WONDER enforces a 30-minute IP block when query thresholds are exceeded. The downloader detects HTTP 429 responses, pauses in complete silence for 31 minutes (`1,860s`), and automatically refreshes the session before resuming. Do not terminate the process during this cooldown.
+* **Large State Partitioning**: High-population states (e.g. California `06`, Florida `12`, New York `36`, Texas `48`) exceed CDC WONDER's 75,000-row query cap when queried across all years at once. The downloader automatically queries these states in 2-year chunks (or 1-year chunks for Texas) to prevent HTTP 400 ("Too Much Data") and HTTP 504 timeouts.
+* **Stale Partition Cleanup**: When a state is re-downloaded, the downloader purges existing chunk and combined files for that state before writing new data, preventing duplicate observations when `stat_var_processor.py` processes `input_files/*.csv`.
+* **Failure Isolation**: If an individual state query encounters network or server errors, the downloader logs the failure, continues with the remaining states, and raises a summary exception at the end of the batch run to ensure non-zero exit code while preserving downloaded progress.
+* **Lazy Session Initialization**: The session agreement with CDC WONDER is only initialized when at least one state actually requires downloading, avoiding unnecessary network calls during dry runs or when data is already cached.
+
+---
+
+### Validation
+
+Validation is configured in `validation_config.json`:
+* `check_deleted_records_percent`: Strictly enforces a historical deletion average threshold of `0.1%`. Per consensus on initial imports, golden regression files are omitted from initial submission.
+
+---
+
 ### Important Files
 
 | File | Description |
