@@ -14,7 +14,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "../aggregations.tmcf",
-                    "cleaned_csv": "aggregation.csv"
+                    "cleaned_csv": "aggregation.csv",
+                    "node_mcf": "*.mcf"
                 }
             ],
             "source_files": [
