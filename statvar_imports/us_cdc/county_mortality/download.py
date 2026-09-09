@@ -573,6 +573,14 @@ def download_county_mortality_data(
             batch_size,
         )
 
+        # Remove any existing/stale chunk or combined files for this state before re-downloading
+        # to prevent duplicate ingestion by stat_var_processor (which globs input_files/*.csv).
+        for stale_file in Path(output_dir).glob(f"UnderlyingCauseofDeath_County_{state_fips}*.csv"):
+            try:
+                stale_file.unlink()
+            except OSError as e:
+                logging.warning("Could not remove stale file %s: %s", stale_file, e)
+
         try:
             results = downloader.download_state(state_fips, years)
             for chunk_label, tsv_data in results:

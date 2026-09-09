@@ -285,7 +285,33 @@ class DownloadTest(unittest.TestCase):
             mock_init.assert_not_called()
             mock_download.assert_not_called()
 
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "download_state")
+    def test_download_county_mortality_data_purges_stale_files(
+        self, mock_download, mock_init
+    ):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Pre-create an old chunk file that should be purged when re-downloading
+            old_chunk = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2018_2019.csv"
+            old_chunk.write_text("Notes,Year,County,Deaths\n" + ",2018,Kent County,10\n" * 5)
+            self.assertTrue(old_chunk.exists())
+
+            mock_download.return_value = [("all", "Notes\tCounty Code\tDeaths\n\t10001\t25\n")]
+
+            download.download_county_mortality_data(
+                states=["10"],
+                years=["2018", "2024"],
+                output_dir=temp_dir,
+                skip_existing=False,
+            )
+
+            # Assert the old chunk file was deleted and new combined file was written
+            self.assertFalse(old_chunk.exists())
+            combined_file = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
+            self.assertTrue(combined_file.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
+
 
