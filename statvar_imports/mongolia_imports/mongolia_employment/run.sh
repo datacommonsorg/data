@@ -14,7 +14,14 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --inp
 
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=$SCRIPT_PATH/input_files/labour_underutilization_by_region_gender_and_agegroup.csv --pv_map=$SCRIPT_PATH/labour_underutilization_by_region_gender_and_agegroup_pvmap.csv --config_file=$SCRIPT_PATH/metadata.csv --output_path=$SCRIPT_PATH/output_files/labour_underutilization_by_region_gender_and_agegroup_output --output_counters=$SCRIPT_PATH/counters/labour_underutilization_by_region_gender_and_agegroup_output_counters.csv --places_resolved_csv=$SCRIPT_PATH/places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf || { echo "Error: Processing labour_under_utilization_by_region_gender_and_agegroup failed!"; exit 1; }
 
+INPUT_5="$SCRIPT_PATH/input_files/registered_unemployed_by_education_level_region_gender_month.csv"
+if [ -f "$INPUT_5" ] && grep -q '^"[^"]*","  Ulaanbaatar"' "$INPUT_5"; then
+    echo "Stripping duplicate indented Ulaanbaatar entries from $INPUT_5"
+    sed -i '/^"[^"]*","  Ulaanbaatar"/d' "$INPUT_5"
+fi
+
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=$SCRIPT_PATH/input_files/registered_unemployed_by_education_level_region_gender_month.csv --pv_map=$SCRIPT_PATH/registered_unemployed_by_education_level_region_gender_month_pvmap.csv --config_file=$SCRIPT_PATH/metadata.csv --output_path=$SCRIPT_PATH/output_files/registered_unemployed_by_education_level_region_gender_month_output --output_counters=$SCRIPT_PATH/counters/registered_unemployed_by_education_level_region_gender_month_output_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/places_resolved.csv || { echo "Error: Processing registered_unemployed_by_education_level_region_gender_month failed!"; exit 1; }
+
 
 echo "All processing steps completed successfully."
 exit 0

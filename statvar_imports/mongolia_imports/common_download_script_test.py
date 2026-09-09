@@ -155,6 +155,22 @@ class CommonDownloadScriptTest(unittest.TestCase):
         common_download_script.main(None)
         self.assertEqual(mock_fetch.call_count, 25)
 
+    def test_registered_unemployed_query_excludes_duplicate_ulaanbaatar(self):
+        """Verifies registered unemployed table defines query excluding code 511."""
+        target_table = [
+            t
+            for t in common_download_script.EMPLOYMENT_TABLES
+            if t['filename']
+            == 'registered_unemployed_by_education_level_region_gender_month.csv'
+        ][0]
+        self.assertIn('query', target_table)
+        query = target_table['query']
+        self.assertEqual(query[0]['code'], 'Бүс')
+        values = query[0]['selection']['values']
+        self.assertIn('5', values)
+        self.assertNotIn('511', values)
+
 
 if __name__ == '__main__':
     unittest.main()
+
