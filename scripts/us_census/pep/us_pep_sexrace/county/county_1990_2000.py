@@ -57,7 +57,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             # reading the input file and converting to dataframe
             df = pd.read_table(_url,
                                index_col=False,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                skiprows=16,
                                skipfooter=14,
                                engine='python',
@@ -71,11 +71,10 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
                                                            errors='coerce')))
             df = num_df[num_df[_cols].notnull().all(axis=1)]
             df.loc[:, 1:] = df.loc[:, 1:].apply(pd.to_numeric)
-            df.loc[:, 'geo_ID'] = df.loc[:, 'geo_ID'].astype(int)
 
             # providing geoId to the dataframe
             # and making the geoId of 5 digit as county
-            df.loc[:, 'geo_ID'] = [f'{x:05}' for x in df.loc[:, 'geo_ID']]
+            df['geo_ID'] = df['geo_ID'].astype(int).astype(str).str.zfill(5)
             # columns after 11 where having origin hence not required
             df.drop(df[df['Race'] >= 11].index, inplace=True)
 
