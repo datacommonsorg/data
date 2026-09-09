@@ -63,10 +63,8 @@ class TestProcess(unittest.TestCase):
 
         with patch(
                 "common.us_education.dc_api_is_defined_dcid",
-                side_effect=lambda nodes, *args, **kwargs: {
-                    n: (n.startswith("zip/") or n.startswith("geoId/"))
-                    for n in nodes
-                },
+                side_effect=lambda nodes, *args, **kwargs:
+            {n: True for n in nodes},
         ):
             loader.generate_csv()
             loader.generate_mcf()
