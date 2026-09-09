@@ -1,0 +1,334 @@
+{
+    "URLS_CONFIG": [
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/53T_111220253720381F6FEB46769E9A3BA1775126F7.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_pattern_of_land_use_gross_sown_area.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/54T_111220257E02BB1F59FC46F2B936CC773BBC0874.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_pattern_of_land_use_net_sown_area.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/55T_11122025AFBC97CC9BA44E54BC31B3E58DBF2E21.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_pattern_of_land_use_gross_irrigated_area.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/56T_1112202564A24EAD0AA44A278DB069916CA8FECB.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_pattern_of_land_use_net_irrigated_area.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/57T_111220253F1BCFDCDF5047B495821F992E4D87B6.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_pattern_of_land_use_cropping_intensity.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/58T_111220250E85BAD71CD64324A6F4E28DD0A05129.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_foodgrains_rice.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/59T_1112202571AAC5A686F74224A1DF55D2B9D62D77.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_foodgrains_wheat.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/60T_111220251CE8EB785C6E40FAA8BA4EE805D01B93.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_foodgrains_coarse_cereals.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/61T_111220251C3BA74BCC3742A7BA09518C4DDD0BE5.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_foodgrains_pulses.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/62T_11122025F9D0951B74274E99A9C236A5CFAC1858.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_total_foodgrains.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/63T_1112202514B06350BA2849F98C3551060541C568.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_non_foodgrains_oilseeds.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/64T_111220251AE568D097A740F18A52EFEB30BDDA02.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_non_foodgrains_cotton_lintt.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/65T_11122025FF1A1A01BD604A1A9A63E572FF11B5B5.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_non_foodgrains_sugarcane.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/66T_1112202551DDDB3EE6624BE9B30EB1692CC0CBA6.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_non_foodgrains_raw_jute_mesta.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/67T_1112202594892EEE85FF4BAC9AAB5DC35661E62A.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_foodgrains_rice.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/68T_11122025D202C9C812754B4FBC0F25A348940AA8.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_foodgrains_wheat.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/69T_111220258B2ACEEE047E482AA3EDF0C09F7E3A86.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_foodgrains_coarse_cereals.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/70T_11122025A43EF0C6E0154357B8E404D9CF42998C.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_foodgrains_pulses.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/71T_111220252D54659F49874E689923BF46C29E01A5.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_total_foodgrains.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/72T_11122025D573A69D2317423FBCFB65F5622AF929.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_total_fruits.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/73T_11122025E35C4283EAE7430A88B1BF32B236A976.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_total_vegetables.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/74T_11122025EBF01225C48441C2A23B436CCC589BF1.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_total_fruits.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/75T_11122025C8A307B91418448DBF5B5E54997E7355.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_production_of_total_vegetables.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/76T_1112202535D900531AEA4C71B96F562B9AE59835.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_non_foodgrains_oilseeds.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/77T_11122025DA3881A5159A4760B53AC35C5BFBA8D9.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_non_foodgrains_cotton_lintt.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/78T_111220252516A0D23AA94A6B809CFB3B1953DC7B.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_non_foodgrains_sugarcane.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/79T_1112202567B7934A72A04BF988AAC0656AA9DB66.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_area_of_non_foodgrains_raw_jute_mesta.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/80T_111220251421B93FB22A4B8BAE3E52809636B603.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_rice.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/81T_11122025F795A58AD4964BFD9C1AF74F0557164E.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_wheat.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/82T_1112202534205116BBCA4010AC1792E31FADC9C9.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_coarse_cereals.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/83T_111220255A0477BFBDFD45AF93EDA200B2A5A66F.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_pulses.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/84T_11122025D106F74C0F98465DAF95013CB77F3A20.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_total_foodgrains.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/85T_111220250039FAA1932944E5B7627528B147FAFC.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_oilseeds.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/86T_111220258B6992228C504C2D84CBD88574260E87.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_cotton_lintt.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/87T_1112202547D1DA4285204EAFA0BAAA6CA47834C7.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_sugarcane.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/88T_1112202507582D4179654DC292A6311E3BDB2AB5.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_estimates_of_yield_raw_jute_mesta.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/89T_11122025CC34A78CE2D64C1D880A9B4B6FA1135D.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_per_hectare_consumption_of_fertiliser_n_p_k.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/90T_1112202558892C39CD554E4098A8EB79C63D47D9.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_meat_production.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/91T_11122025A7A12D69EA1645129226BEAE5783E1A4.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_milk_production.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/92T_11122025867917E0AC5644ADB035966AAF9D220B.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_egg_production.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/93T_1112202561B6558711FE4088998165985924266E.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_fish_production.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/94T_111220254142688D61EB497BA75DAFDDB72F7160.XLSX",
+            "category": "agriculture",
+            "filename": "state_wise_wool_production.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/99T_111220251AFF6E04A39B48E499CE9CDE9E66838B.XLSX",
+            "category": "environment",
+            "filename": "state_wise_forest_cover.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/101T_11122025C61D6934B6D74891B15B91679CFE1689.XLSX",
+            "category": "environment",
+            "filename": "state_wise_tree_cover.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/102T_11122025C0C87B2909234302A1F4A52A9A42E4DF.XLSX",
+            "category": "environment",
+            "filename": "sub_division_wise_annual_rainfall.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/105T_11122025454345A0E067418D9326DD30AE67BF6F.XLSX",
+            "category": "environment",
+            "filename": "state_wise_expenditure_on_relief_on_natural_calamities.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/106T_111220251B177E8F85CA412DB39DCE90BCBD724A.XLSX",
+            "category": "environment",
+            "filename": "state_wise_sustainable_development_goals_score_SDGs.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/138T_111220252D21BC51E5A842E4B25E954391C10A41.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_per_capita_availability_of_power.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/139T_111220256569FF1C11E248B7A8ED64D31C999776.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_availability_of_power.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/140T_111220254D8DA0B69B444492B6E9BAF30F3395C8.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_installed_capacity_of_power.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/141T_11122025615E98A72EA6475CAACFFD12FFC83057.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_power_requirement.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/144T_111220250497208D070C44219818788DB5BCE35A.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_length_of_national_highways.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/145T_111220259E033C52098E4732A6101C940DEF1222.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_railway_route.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/146T_11122025B89449F4159B420E8305A9509F27FE82.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_length_of_roads.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/147T_111220255C153B31AB2E4835ABEEAC91D7494BFA.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_length_of_state_highways.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/148T_11122025D741C3CB2CC24F448DC99D907589DD71.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_electricity_transmission_distribution_losses.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/149T_1112202538D6A609C55B4FEFBBC44BB6C5ED20F7.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_telephones_per_100_population.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/150T_11122025C30EFE7568EA472C8AB0290288B160C0.XLSX",
+            "category": "infrastructure",
+            "filename": "state_wise_road_constructed_under_PMGSY.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/108T_111220251942D16B3BED4D73BE851D15D2329168.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_inflation_CPI_general.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/109T_111220250E067E49350B48659E5A50C3D357BB46.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_inflation_CPI_food_and_beverages.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/110T_11122025784C1BDC2482496B9E25DA1BA4B38A3D.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_inflation_CPI_fuel_and_light.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/111T_111220252F7D9704AB664C35A58770BAC73518DE.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_inflation_CPI_housing_urban.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/112T_11122025771E55EB688044CE8A85E52A901B5D22.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_daily_wage_rates_in _rural_india_men_construction_workers.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/113T_111220256FEBCC253D4A47419892925F897E2537.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_daily_wage_rates_in _rural_india_men_general_agricultural_labourers.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/114T_111220259CA566982E7F4BF38B3FDAC0D7587F2E.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_Average Daily Wage Rates in Rural_india_men_horticulture_workers.xlsx"
+        },
+        {
+            "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/115T_1112202585CF99F21E654CED8990A734A043B3DA.XLSX",
+            "category": "price_and_wages",
+            "filename": "state_wise_average_daily_wage_rates_in_rural_india_men_non_agricultural_labourers.xlsx"
+        }
+    ]
+}

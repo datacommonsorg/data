@@ -15,7 +15,8 @@
                 "input_files/agriculture/*.xlsx",
                 "input_files/environment/*.xlsx",
                 "input_files/infrastructure/*.xlsx",
-                "input_files/price_and_wages/*.xlsx"
+                "input_files/price_and_wages/*.xlsx",
+                "counters/*.csv"
             ],
             "import_inputs": [
                 {
