@@ -28,7 +28,6 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
@@ -44,89 +43,90 @@ flags.DEFINE_string(
 
 
 def create_session() -> requests.Session:
-  """Creates a requests session configured with retries and connection pooling."""
-  session = requests.Session()
-  retries = Retry(
-      total=5,
-      backoff_factor=1.5,
-      status_forcelist=[429, 500, 502, 503, 504],
-      raise_on_status=False,
-  )
-  adapter = HTTPAdapter(max_retries=retries)
-  session.mount('https://', adapter)
-  session.mount('http://', adapter)
-  session.headers.update({
-      'User-Agent': 'Mozilla/5.0 (DataCommons Ingestion; +https://datacommons.org)',
-      'Accept': 'application/json, text/csv, */*',
-  })
-  return session
+    """Creates a requests session configured with retries and connection pooling."""
+    session = requests.Session()
+    retries = Retry(
+        total=5,
+        backoff_factor=1.5,
+        status_forcelist=[429, 500, 502, 503, 504],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retries)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (DataCommons Ingestion; +https://datacommons.org)',
+        'Accept':
+            'application/json, text/csv, */*',
+    })
+    return session
 
 
 def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
-  """Writes a DataFrame to a CSV file atomically via a temporary file."""
-  temp_path = f'{target_path}.tmp'
-  df.to_csv(temp_path, index=False)
-  os.replace(temp_path, target_path)
+    """Writes a DataFrame to a CSV file atomically via a temporary file."""
+    temp_path = f'{target_path}.tmp'
+    df.to_csv(temp_path, index=False)
+    os.replace(temp_path, target_path)
 
 
-def download_health_indicators(endpoint: str, output_dir: str) -> tuple[int, list[str]]:
-  """Downloads all health indicators for all NY counties and regions."""
-  session = create_session()
-  os.makedirs(output_dir, exist_ok=True)
+def download_health_indicators(endpoint: str,
+                               output_dir: str) -> tuple[int, list[str]]:
+    """Downloads all health indicators for all NY counties and regions."""
+    session = create_session()
+    os.makedirs(output_dir, exist_ok=True)
 
-  records = []
-  offset = 0
-  limit = 50000
+    records = []
+    offset = 0
+    limit = 50000
 
-  while True:
-    params = {
-        '$limit': limit,
-        '$offset': offset,
-    }
-    logging.info('GET %s with params %s', endpoint, params)
-    resp = session.get(endpoint, params=params, timeout=60)
-    if resp.status_code != 200:
-      logging.error(
-          'Health Data NY API returned HTTP %d: %s', resp.status_code, resp.text[:200]
-      )
-      raise RuntimeError(
-          f'Health Data NY API returned HTTP {resp.status_code}: {resp.text[:200]}'
-      )
+    while True:
+        params = {
+            '$limit': limit,
+            '$offset': offset,
+        }
+        logging.info('GET %s with params %s', endpoint, params)
+        resp = session.get(endpoint, params=params, timeout=60)
+        if resp.status_code != 200:
+            logging.error('Health Data NY API returned HTTP %d: %s',
+                          resp.status_code, resp.text[:200])
+            raise RuntimeError(
+                f'Health Data NY API returned HTTP {resp.status_code}: {resp.text[:200]}'
+            )
 
-    chunk = resp.json()
-    if not chunk:
-      break
-    records.extend(chunk)
-    logging.info('Fetched %d records (offset %d).', len(chunk), offset)
-    if len(chunk) < limit:
-      break
-    offset += limit
+        chunk = resp.json()
+        if not chunk:
+            break
+        records.extend(chunk)
+        logging.info('Fetched %d records (offset %d).', len(chunk), offset)
+        if len(chunk) < limit:
+            break
+        offset += limit
 
-  if not records:
-    logging.error('Health Data NY API returned 0 records.')
-    raise RuntimeError('Health Data NY API returned 0 records.')
+    if not records:
+        logging.error('Health Data NY API returned 0 records.')
+        raise RuntimeError('Health Data NY API returned 0 records.')
 
-  logging.info('Received %d total raw records from Health Data NY API.', len(records))
-  raw_df = pd.DataFrame(records)
+    logging.info('Received %d total raw records from Health Data NY API.',
+                 len(records))
+    raw_df = pd.DataFrame(records)
 
-  # Save complete raw unpivoted dataset (all 17,000+ API records)
-  raw_file = os.path.join(output_dir, 'ny_brfss_health_indicators_raw.csv')
-  atomic_to_csv(raw_df, raw_file)
-  saved_files = [raw_file]
-  logging.info('Wrote raw unpivoted dataset (%d records) -> %s', len(raw_df), raw_file)
+    # Save complete raw unpivoted dataset (all 17,000+ API records)
+    raw_file = os.path.join(output_dir, 'ny_brfss_health_indicators_raw.csv')
+    atomic_to_csv(raw_df, raw_file)
+    saved_files = [raw_file]
+    logging.info('Wrote raw unpivoted dataset (%d records) -> %s', len(raw_df),
+                 raw_file)
 
-  return len(raw_df), saved_files
+    return len(raw_df), saved_files
 
 
 def main(_):
-  script_dir = os.path.dirname(os.path.abspath(__file__))
-  output_dir = (
-      FLAGS.output_dir
-      if os.path.isabs(FLAGS.output_dir)
-      else os.path.join(script_dir, FLAGS.output_dir)
-  )
-  download_health_indicators(FLAGS.endpoint, output_dir)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = (FLAGS.output_dir if os.path.isabs(FLAGS.output_dir) else
+                  os.path.join(script_dir, FLAGS.output_dir))
+    download_health_indicators(FLAGS.endpoint, output_dir)
 
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

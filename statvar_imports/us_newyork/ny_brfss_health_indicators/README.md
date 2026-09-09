@@ -44,9 +44,13 @@ statvar_imports/us_newyork/ny_brfss_health_indicators/
 ├── validation_config.json                              # Import validation rules (historical deletion threshold)
 ├── ny_brfss_health_indicators_metadata.csv             # Processor configuration metadata
 ├── ny_brfss_health_indicators_pv_map.csv               # Property-value mapping for all 75 StatVars & 62 counties
-├── schema.mcf                                          # Combined local test schema (provisional StatVars & enums)
 ├── download.py                                         # Multi-year Socrata downloader
-├── download_test.py                                    # Downloader unit test suite
+├── test_data/                                          # Sample fixtures for integration testing
+│   ├── sample_input.csv                                # Representative raw slice of API data (21 rows)
+│   ├── sample_expected_output.csv                      # Expected golden observations
+│   ├── sample_expected_output.tmcf                     # Expected golden TMCF
+│   ├── sample_expected_output_stat_vars.mcf            # Expected generated StatVars
+│   └── sample_expected_output_stat_vars_schema.mcf     # Expected generated schema
 ├── input_files/                                        # Multi-year source datasets from NYSDOH API
 │   └── ny_brfss_health_indicators_raw.csv              # Complete raw unpivoted dataset (all 17,700 records)
 ├── output_files/                                       # Generated Data Commons artifacts
@@ -81,9 +85,15 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_counters=counters/ny_brfss_health_indicators_counters.csv
 ```
 
-### Step 3: Run Unit Tests
+### Step 3: Run Sample Integration Test
+Verify property-value mapping against the sample test fixtures:
 ```bash
-python3 -m unittest download_test.py
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data="test_data/sample_input.csv" \
+  --pv_map=ny_brfss_health_indicators_pv_map.csv \
+  --config_file=ny_brfss_health_indicators_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_path=test_data/sample_expected_output
 ```
 
 ### Step 4: Validate with Data Commons Import Tool
@@ -91,7 +101,8 @@ python3 -m unittest download_test.py
 java -jar ~/Downloads/import_tools_import-tool.jar lint \
   output_files/ny_brfss_health_indicators_output.csv \
   output_files/ny_brfss_health_indicators_output.tmcf \
-  schema.mcf
+  output_files/ny_brfss_health_indicators_output_stat_vars.mcf \
+  output_files/ny_brfss_health_indicators_output_stat_vars_schema.mcf
 ```
 
 ---

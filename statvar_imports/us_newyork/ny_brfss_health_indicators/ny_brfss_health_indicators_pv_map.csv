@@ -6,7 +6,17 @@ unadjusted_rate,value,{Number}
 DSRIP region,#IgnoreRow,True
 NYS Exclusive of NYC,#IgnoreRow,True
 Statewide,#IgnoreRow,True
+REGION: Capital Region,#IgnoreRow,True
+REGION: Central NY,#IgnoreRow,True
+REGION: Finger Lakes,#IgnoreRow,True
+REGION: Long Island,#IgnoreRow,True
+REGION: Mid-Hudson,#IgnoreRow,True
+REGION: Mohawk Valley,#IgnoreRow,True
 REGION: New York City,#IgnoreRow,True
+REGION: North Country,#IgnoreRow,True
+REGION: Southern Tier,#IgnoreRow,True
+REGION: Tug Hill Seaway,#IgnoreRow,True
+REGION: Western NY,#IgnoreRow,True
 Diabetes,populationType,Person,measuredProperty,percent,healthOutcome,Diabetes,unit,Percent
 Prediabetes,populationType,Person,measuredProperty,percent,healthOutcome,Prediabetes,unit,Percent
 Asthma,populationType,Person,measuredProperty,percent,healthOutcome,Asthma,unit,Percent
