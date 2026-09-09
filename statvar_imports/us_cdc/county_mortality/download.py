@@ -457,6 +457,24 @@ def save_tsv_as_csv(raw_tsv: str, output_csv_path: str) -> int:
     return row_count
 
 
+def _has_data_rows(file_path: Path) -> bool:
+    """Checks whether a CSV file contains at least one observation data row beyond the header."""
+    if not file_path.exists() or file_path.stat().st_size == 0:
+        return False
+    try:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+            reader = csv.reader(f)
+            header = next(reader, None)
+            if not header:
+                return False
+            for row in reader:
+                if row and not row[0].startswith("---") and not row[0].startswith("Total"):
+                    return True
+        return False
+    except Exception:
+        return False
+
+
 def is_state_downloaded(
     output_dir: str, state_fips: str, years: Optional[List[str]] = None
 ) -> bool:
@@ -465,33 +483,46 @@ def is_state_downloaded(
     matches = list(Path(output_dir).glob(pattern))
     if not matches:
         return False
-    if not all(f.stat().st_size > 100 for f in matches):
-        return False
-    if years:
-        # Check if the single combined file exists and contains all years
-        single_file = Path(output_dir) / f"UnderlyingCauseofDeath_County_{state_fips}.csv"
-        if single_file.exists():
-            found_years = set()
-            with open(single_file, "r", encoding="utf-8", errors="replace") as f:
-                for line in f:
-                    for y in years:
-                        if line.startswith(f",{y},"):
-                            found_years.add(y)
-                    if len(found_years) == len(years):
-                        return True
 
-        # Otherwise, check if every year in years is covered by at least one chunk file
-        for y in years:
-            year_covered = False
-            for f in matches:
-                if f.name == single_file.name:
-                    continue
-                if f"_{y}.csv" in f.name or f"_{y}_" in f.name:
-                    year_covered = True
-                    break
-            if not year_covered:
-                return False
-        return True
+    # Check if a single combined file exists and contains data rows for all requested years
+    single_file = Path(output_dir) / f"UnderlyingCauseofDeath_County_{state_fips}.csv"
+    if single_file.exists():
+        found_years = set()
+        try:
+            with open(single_file, "r", encoding="utf-8", errors="replace") as f:
+                reader = csv.reader(f)
+                header = next(reader, None)
+                if header:
+                    year_col_idx = 1
+                    if "Year" in header:
+                        year_col_idx = header.index("Year")
+                    for row in reader:
+                        if len(row) > year_col_idx:
+                            year_val = row[year_col_idx].strip()
+                            if years is None or year_val in years:
+                                found_years.add(year_val)
+                    if years is None and found_years:
+                        return True
+                    if years and len(found_years) == len(years):
+                        return True
+        except Exception:
+            pass
+
+    # If no specific years requested, check if any matching file has valid data rows
+    if not years:
+        return any(_has_data_rows(f) for f in matches)
+
+    # Otherwise, check if every year in years is covered by at least one chunk file with data rows
+    for y in years:
+        year_covered = False
+        for f in matches:
+            if f.name == single_file.name:
+                continue
+            if (f"_{y}.csv" in f.name or f"_{y}_" in f.name) and _has_data_rows(f):
+                year_covered = True
+                break
+        if not year_covered:
+            return False
     return True
 
 
@@ -508,7 +539,6 @@ def download_county_mortality_data(
     """Downloads CDC County Mortality data for specified states and years."""
     os.makedirs(output_dir, exist_ok=True)
     downloader = CdcWonderCountyMortalityDownloader(timeout=timeout, delay=delay)
-    downloader.init_session()
 
     total_files = 0
     total_rows = 0
@@ -529,6 +559,9 @@ def download_county_mortality_data(
                 len(existing_files),
             )
             continue
+
+        if downloader.action_url is None:
+            downloader.init_session()
 
         logging.info(
             "[%d/%d] Processing %s (FIPS %s) (Session batch item %d/%d)...",

@@ -194,6 +194,10 @@ class DownloadTest(unittest.TestCase):
             self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
             f.unlink()
 
+            # Chunk file that is header-only (e.g. CDC header without data rows) -> should be False
+            chunk_2020.write_text("Notes,Year,Year Code,County,County Code,Deaths\n")
+            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
     def test_execute_query_429_backoff(self, mock_init, mock_sleep):
@@ -260,6 +264,28 @@ class DownloadTest(unittest.TestCase):
             state_11_csv = Path(temp_dir) / "UnderlyingCauseofDeath_County_11.csv"
             self.assertTrue(state_11_csv.exists())
 
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "download_state")
+    def test_download_county_mortality_data_lazy_session_skipped(
+        self, mock_download, mock_init
+    ):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Pre-populate state 10 so it is skipped
+            f = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
+            f.write_text("Notes,Year,County,Deaths\n" + ",2024,Kent County,10\n" * 5)
+
+            download.download_county_mortality_data(
+                states=["10"],
+                years=["2024"],
+                output_dir=temp_dir,
+                skip_existing=True,
+            )
+
+            # Assert init_session was NOT called because all states were skipped
+            mock_init.assert_not_called()
+            mock_download.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()
+
