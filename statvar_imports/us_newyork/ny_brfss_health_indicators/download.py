@@ -84,6 +84,7 @@ def download_health_indicators(endpoint: str,
         params = {
             '$limit': limit,
             '$offset': offset,
+            '$order': ':id',
         }
         logging.info('GET %s with params %s', endpoint, params)
         resp = session.get(endpoint, params=params, timeout=60)

@@ -10,7 +10,7 @@ This import ingests health indicator prevalence rates across **all 62 counties**
 * **Socrata API Endpoint**: `https://health.data.ny.gov/resource/jsy7-eb4n.json`
 * **Geographic Coverage**: **All 62 NY Counties** (`geoId/36001` through `geoId/36123`) and **New York City** (`geoId/3651000`).
 * **Temporal Coverage**: 2014, 2016, 2018, 2021, and 2024 survey releases.
-* **Unit & Measurement Method**: Direct survey unadjusted crude prevalence percentages (`Percent`, `scalingFactor: 100`).
+* **Unit & Measurement Method**: Direct survey unadjusted crude prevalence percentages (`Percent`).
 
 ---
 
@@ -29,9 +29,9 @@ The import supports **all 75 health indicators** in the NYSDOH dataset across 6 
 | **Total** | **75** | **13,479 Observations** |
 
 ### Statistical Variable Resolution
-* **Canonical StatVars (12)**: Already established in the Data Commons Knowledge Graph (e.g. `Percent_Person_WithDiabetes`, `Percent_Person_WithAsthma`, `Percent_Person_WithArthritis`, `Percent_Person_WithChronicObstructivePulmonaryDisease`, `Percent_Person_WithHighBloodPressure`, `Percent_Person_WithHighCholesterol`, `Percent_Person_Obesity`, `Percent_Person_18OrMoreYears_WithDepression`, `Percent_Person_Smoking`, `Percent_Person_BingeDrinking`, `Percent_Person_18OrMoreYears_WithPoorGeneralHealth`, `Percent_Person_WithMentalHealthNotGood`, `Percent_Person_WithPhysicalHealthNotGood`).
-* **Provisional StatVars (63)**: Synthesized with formal property-value graphs and emitted into `output_files/ny_brfss_health_indicators_output_stat_vars.mcf`.
-* **Supporting Schema Nodes (58)**: Provisional enums, properties, and types emitted into `output_files/ny_brfss_health_indicators_output_stat_vars_schema.mcf`.
+* **Canonical StatVars (20)**: Reused directly from the Data Commons Knowledge Graph (e.g. `Percent_Person_WithDiabetes`, `Percent_Person_WithAsthma`, `Percent_Person_WithArthritis`, `Percent_Person_WithChronicObstructivePulmonaryDisease`, `Percent_Person_WithHighBloodPressure`, `Percent_Person_WithHighCholesterol`, `Percent_Person_Obesity`, `Percent_Person_18OrMoreYears_WithDepression`, `Percent_Person_Smoking`, `Percent_Person_BingeDrinking`, `Percent_Person_18OrMoreYears_WithPoorGeneralHealth`, `Percent_Person_WithMentalHealthNotGood`, `Percent_Person_WithPhysicalHealthNotGood`, `Percent_Person_18OrMoreYears_WithAnyDisability`, `Percent_Person_ReceivedDentalVisit`, `Percent_Person_ReceivedCholesterolScreening`, `Percent_Person_50To74Years_Female_ReceivedMammography`, `Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening`, `Percent_Person_50To75Years_ReceivedColorectalCancerScreening`, `Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication`).
+* **Provisional StatVars (55)**: Synthesized with formal property-value graphs and emitted into `output_files/ny_brfss_health_indicators_output_stat_vars.mcf`.
+* **Supporting Schema Nodes (56)**: Provisional enums, properties, and types emitted into `output_files/ny_brfss_health_indicators_output_stat_vars_schema.mcf`.
 
 ---
 
@@ -56,8 +56,8 @@ statvar_imports/us_newyork/ny_brfss_health_indicators/
 ├── output_files/                                       # Generated Data Commons artifacts
 │   ├── ny_brfss_health_indicators_output.csv           # Cleaned StatVarObservations (13,479 rows)
 │   ├── ny_brfss_health_indicators_output.tmcf          # Template MCF mapping file
-│   ├── ny_brfss_health_indicators_output_stat_vars.mcf # 63 Provisional StatVar nodes
-│   └── ny_brfss_health_indicators_output_stat_vars_schema.mcf # 58 Provisional schema definitions
+│   ├── ny_brfss_health_indicators_output_stat_vars.mcf # 55 Provisional StatVar nodes
+│   └── ny_brfss_health_indicators_output_stat_vars_schema.mcf # 56 Provisional schema definitions
 └── counters/                                           # Processor execution statistics
     └── ny_brfss_health_indicators_counters.csv
 ```
@@ -111,6 +111,6 @@ java -jar ~/Downloads/import_tools_import-tool.jar lint \
 
 * **Observations Generated**: **13,479** `StatVarObservation` records.
 * **Geographies Resolved**: **63 unique entities** (all 62 NY counties `geoId/36001` - `geoId/36123` plus New York City `geoId/3651000`).
-* **Non-County Regions Dropped**: **2,831 records** (sub-state DSRIP regions, Rest of State, and Statewide rows cleanly dropped by PV map).
-* **Statistical Variables Generated**: **75 unique variables** (12 matched to existing canonical DCIDs, 63 provisional StatVars, 58 schema enums/properties).
+* **Non-County Regions Dropped**: **3,081 records** (sub-state DSRIP regions, Rest of State, and Statewide rows cleanly dropped by PV map).
+* **Statistical Variables Generated**: **75 unique variables** (20 matched to existing canonical DCIDs, 55 provisional StatVars, 56 schema enums/properties).
 * **Linter Status**: **0 fatal, 0 errors, 0 missing references** (`NumRowSuccesses: 13,479 / 13,479`).
