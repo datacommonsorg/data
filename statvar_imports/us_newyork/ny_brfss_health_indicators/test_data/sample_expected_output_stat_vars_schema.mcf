@@ -1,0 +1,15 @@
+Node: dcid:Prediabetes
+typeOf: dcid:HealthOutcomeEnum
+name: "Prediabetes"
+isProvisional: dcs:True
+
+Node: dcid:healthOutcome
+typeOf: dcs:Property
+name: "healthOutcome"
+rangeIncludes: dcid:MedicalConditionIncidentTypeEnum,dcid:BodyMassIndexClassificationEnum
+
+Node: dcid:OverweightOrObese
+typeOf: dcid:HealthOutcomeEnum
+name: "Overweight Or Obese"
+isProvisional: dcs:True
+

@@ -1,0 +1,38 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/us_newyork/ny_brfss_health_indicators/test_data/sample_input.csv --pv_map=statvar_imports/us_newyork/ny_brfss_health_indicators/ny_brfss_health_indicators_pv_map.csv --config_file=statvar_imports/us_newyork/ny_brfss_health_indicators/ny_brfss_health_indicators_metadata.csv --output_path=statvar_imports/us_newyork/ny_brfss_health_indicators/test_data/sample_expected_output" on 2026-09-03 14:13:29.017132
+
+Node: dcid:Percent_Person_WithCardiovascularDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:CardiovascularDisease
+
+Node: dcid:Percent_Person_WithObesity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Obesity
+
+Node: dcid:Percent_Person_WithOverweightOrObese
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:OverweightOrObese
+
+Node: dcid:Percent_Person_WithPrediabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Prediabetes
+
+Node: dcid:Percent_Person_Years18Onwards_WithDepression
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: dcid:Years18Onwards
+healthOutcome: dcid:Depression
+

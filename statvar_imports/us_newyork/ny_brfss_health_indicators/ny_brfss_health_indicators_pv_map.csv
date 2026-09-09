@@ -1,0 +1,148 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,p9,v9,p10,v10,p11,v11,p12,v12,p13,v13
+years,observationDate,{@Data}
+2013-14,observationDate,2014
+region_county,observationAbout,{@Data}
+unadjusted_rate,value,{Number}
+DSRIP region,#IgnoreRow,True
+NYS Exclusive of NYC,#IgnoreRow,True
+Statewide,#IgnoreRow,True
+REGION: New York City,#IgnoreRow,True
+Diabetes,populationType,Person,measuredProperty,percent,healthOutcome,Diabetes,unit,Percent
+Prediabetes,populationType,Person,measuredProperty,percent,healthOutcome,Prediabetes,unit,Percent
+Asthma,populationType,Person,measuredProperty,percent,healthOutcome,Asthma,unit,Percent
+Arthritis,populationType,Person,measuredProperty,percent,healthOutcome,Arthritis,unit,Percent
+Cardiovascular Disease,populationType,Person,measuredProperty,percent,healthOutcome,CardiovascularDisease,unit,Percent
+COPD,populationType,Person,measuredProperty,percent,healthOutcome,ChronicObstructivePulmonaryDisease,unit,Percent
+High Blood Pressure,populationType,Person,measuredProperty,percent,healthOutcome,HighBloodPressure,unit,Percent
+Elevated Cholesterol,populationType,Person,measuredProperty,percent,healthOutcome,HighCholesterol,unit,Percent
+Obesity,dcid,Percent_Person_Obesity,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthBehavior,Obesity,unit,Percent
+Overweight or Obese,populationType,Person,measuredProperty,percent,healthOutcome,OverweightOrObese,unit,Percent
+Depressive Disorder,dcid,Percent_Person_18OrMoreYears_WithDepression,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthOutcome,Depression,unit,Percent
+2+ Adverse Childhood Experiences,populationType,Person,measuredProperty,percent,healthStatus,TwoOrMoreAdverseChildhoodExperiences,unit,Percent
+Active Transportation,populationType,Person,measuredProperty,percent,healthBehavior,ActiveTransportation,unit,Percent
+Asthma Ever,populationType,Person,measuredProperty,percent,healthOutcome,AsthmaEver,unit,Percent
+Binge Drinking,dcid,Percent_Person_BingeDrinking,populationType,Person,measuredProperty,percent,healthBehavior,BingeDrinking,unit,Percent
+Binge or Heavy Drinking,populationType,Person,measuredProperty,percent,healthBehavior,BingeOrHeavyDrinking,unit,Percent
+Breast Cancer Screening,dcid,Percent_Person_50To74Years_Female_ReceivedMammography,populationType,Person,gender,Female,age,Years50To74,measuredProperty,percent,healthCareUtilization,Mammography,unit,Percent
+Breast Cancer Screening Low Income 50-74,populationType,Person,gender,Female,age,Years50To74,income,USDollar0To24999,measuredProperty,percent,healthCareUtilization,Mammography,unit,Percent
+Cardiovascular Disease Disability,populationType,Person,healthStatus,WithDisability,measuredProperty,percent,healthOutcome,CardiovascularDisease,unit,Percent
+Cervical Cancer Screening,dcid,Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening,populationType,Person,gender,Female,age,Years21To65,measuredProperty,percent,healthCareUtilization,CervicalCancerScreening,unit,Percent
+Cervical Cancer Screening (2012 guidelines),populationType,Person,gender,Female,age,Years21To65,measuredProperty,percent,healthCareUtilization,CervicalCancerScreening2012Guidelines,unit,Percent
+Cervical Cancer Screening (2012 guidelines) 21-29,populationType,Person,gender,Female,age,Years21To29,measuredProperty,percent,healthCareUtilization,CervicalCancerScreening2012Guidelines,unit,Percent
+Cervical Cancer Screening (pre-2012 guidelines),populationType,Person,gender,Female,age,Years21To65,measuredProperty,percent,healthCareUtilization,CervicalCancerScreeningPre2012Guidelines,unit,Percent
+Cervical Cancer Screening (pre-2012 guidelines) Low Income,populationType,Person,gender,Female,age,Years21To65,income,USDollar0To24999,measuredProperty,percent,healthCareUtilization,CervicalCancerScreeningPre2012Guidelines,unit,Percent
+Cholesterol Checked,dcid,Percent_Person_ReceivedCholesterolScreening,populationType,Person,measuredProperty,percent,healthCareUtilization,CholesterolScreening,unit,Percent
+Chronic Disease Self-Management,populationType,Person,measuredProperty,percent,healthBehavior,ChronicDiseaseSelfManagement,unit,Percent
+Colorectal Cancer Screening,dcid,Percent_Person_50To75Years_ReceivedColorectalCancerScreening,populationType,Person,age,Years50To75,measuredProperty,percent,healthCareUtilization,ColorectalCancerScreening,unit,Percent
+Colorectal Cancer Screening 50-64,populationType,Person,age,Years50To64,measuredProperty,percent,healthCareUtilization,ColorectalCancerScreening,unit,Percent
+Colorectal Cancer Screening Low Income,populationType,Person,age,Years50To75,income,USDollar0To24999,measuredProperty,percent,healthCareUtilization,ColorectalCancerScreening,unit,Percent
+Current Cannabis Use,populationType,Person,measuredProperty,percent,healthBehavior,CannabisUse,unit,Percent
+Current Medical Cannabis Use,populationType,Person,measuredProperty,percent,healthBehavior,MedicalCannabisUse,unit,Percent
+Current Smoking,dcid,Percent_Person_Smoking,populationType,Person,measuredProperty,percent,healthBehavior,SmokingStatus_CurrentSmoker,unit,Percent
+Current Smoking 18-24,populationType,Person,age,Years18To24,measuredProperty,percent,healthBehavior,SmokingStatus_CurrentSmoker,unit,Percent
+Current Smoking Disability,populationType,Person,healthStatus,WithDisability,measuredProperty,percent,healthBehavior,SmokingStatus_CurrentSmoker,unit,Percent
+Current Smoking Low Income,populationType,Person,income,USDollar0To24999,measuredProperty,percent,healthBehavior,SmokingStatus_CurrentSmoker,unit,Percent
+Current Smoking Poor Mental Health,populationType,Person,healthStatus,PoorMentalHealth,measuredProperty,percent,healthBehavior,SmokingStatus_CurrentSmoker,unit,Percent
+DWI,populationType,Person,measuredProperty,percent,healthBehavior,DrivingWhileIntoxicated,unit,Percent
+Diabetes and Prediabetes Testing,populationType,Person,measuredProperty,percent,healthCareUtilization,DiabetesOrPrediabetesTesting,unit,Percent
+Disability,dcid,Percent_Person_18OrMoreYears_WithAnyDisability,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthStatus,WithDisability,unit,Percent
+Fall within Past Year 65+,populationType,Person,age,Years65Onwards,measuredProperty,percent,healthOutcome,FallPastYear,unit,Percent
+Falls Resulting in Injury 65+,populationType,Person,age,Years65Onwards,measuredProperty,percent,healthOutcome,FallWithInjuryPastYear,unit,Percent
+Fast Food Consumption,populationType,Person,measuredProperty,percent,healthBehavior,FastFoodConsumption3OrMoreTimesPerWeek,unit,Percent
+Flu-Shot,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthCareUtilization,InfluenzaVaccinePastYear,unit,Percent
+Flu-Shot 65+,populationType,Person,age,Years65Onwards,measuredProperty,percent,healthCareUtilization,InfluenzaVaccinePastYear,unit,Percent
+Food Insecurity,populationType,Person,measuredProperty,percent,socialSecurityStatus,FoodInsecurityPast12Months,unit,Percent
+Food Security,populationType,Person,measuredProperty,percent,socialSecurityStatus,FoodSecurityPast12Months,unit,Percent
+HCV Ever Tested,populationType,Person,measuredProperty,percent,healthCareUtilization,HepatitisCTestingEver,unit,Percent
+HCV Ever Tested 47-68,populationType,Person,age,Years47To68,measuredProperty,percent,healthCareUtilization,HepatitisCTestingEver,unit,Percent
+Health Care Coverage,populationType,Person,age,Years18To64,measuredProperty,percent,healthInsurance,WithHealthInsurance,unit,Percent
+Health Care Coverage Female 18-64,populationType,Person,gender,Female,age,Years18To64,measuredProperty,percent,healthInsurance,WithHealthInsurance,unit,Percent
+Health Care Provider,populationType,Person,measuredProperty,percent,healthCareProviderStatus,HasPersonalHealthCareProvider,unit,Percent
+High Blood Pressure Taking Medication,dcid,Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication,populationType,Person,age,Years18Onwards,measuredProperty,percent,medicalCondition,HighBloodPressureMedication,unit,Percent
+Housing Insecurity,populationType,Person,measuredProperty,percent,socialSecurityStatus,HousingInsecurityPast12Months,unit,Percent
+Housing or Utility Insecurity,populationType,Person,measuredProperty,percent,socialSecurityStatus,HousingOrUtilityInsecurityPast12Months,unit,Percent
+Leisure-Time Physical Activity,populationType,Person,measuredProperty,percent,healthBehavior,LeisureTimePhysicalActivity,unit,Percent
+Limitation Status,populationType,Person,measuredProperty,percent,healthStatus,WithLimitation,unit,Percent
+No Fruits or Vegetables,populationType,Person,measuredProperty,percent,healthBehavior,ConsumesNoFruitsOrVegetables,unit,Percent
+No Medical Care Due to Cost,populationType,Person,measuredProperty,percent,healthCareAccessStatus,DidNotReceiveCareDueToCost,unit,Percent
+Obesity Disability,populationType,Person,healthStatus,WithDisability,measuredProperty,percent,healthBehavior,Obesity,unit,Percent
+Obesity Limitation Status,populationType,Person,healthStatus,WithLimitation,measuredProperty,percent,healthBehavior,Obesity,unit,Percent
+Obesity Low Income,populationType,Person,income,USDollar0To24999,measuredProperty,percent,healthBehavior,Obesity,unit,Percent
+PSA Screening,populationType,Person,gender,Male,age,Years55To69,measuredProperty,percent,healthCareUtilization,ProstateSpecificAntigenScreeningSharedDecision,unit,Percent
+Pneumonia Shot 65+,populationType,Person,age,Years65Onwards,measuredProperty,percent,healthCareUtilization,PneumococcalVaccineEver,unit,Percent
+Poor General Health,dcid,Percent_Person_18OrMoreYears_WithPoorGeneralHealth,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthOutcome,PoorGeneralHealth,unit,Percent
+Poor Mental Health,dcid,Percent_Person_WithMentalHealthNotGood,populationType,Person,measuredProperty,percent,healthOutcome,MentalHealthNotGood,unit,Percent
+Poor Physical Health,dcid,Percent_Person_WithPhysicalHealthNotGood,populationType,Person,measuredProperty,percent,healthOutcome,PhysicalHealthNotGood,unit,Percent
+Provider Discussed Healthy Pregnancy,populationType,Person,gender,Female,age,Years18To44,measuredProperty,percent,healthCareUtilization,ProviderDiscussedHealthyPregnancy,unit,Percent
+Recent Checkup,dcid,Percent_Person_ReceivedAnnualCheckup,populationType,Person,age,Years18To64,measuredProperty,percent,healthCareUtilization,RoutineCheckupWithinPastYear,unit,Percent
+Recent Checkup Female 18-44,populationType,Person,gender,Female,age,Years18To44,measuredProperty,percent,healthCareUtilization,RoutineCheckupWithinPastYear,unit,Percent
+Recent Checkup Female 18-64,populationType,Person,gender,Female,age,Years18To64,measuredProperty,percent,healthCareUtilization,RoutineCheckupWithinPastYear,unit,Percent
+Recent Dental Visit,dcid,Percent_Person_ReceivedDentalVisit,populationType,Person,measuredProperty,percent,healthCareUtilization,DentalVisitWithinPastYear,unit,Percent
+Recent Dental Visit Female 18-44,populationType,Person,gender,Female,age,Years18To44,measuredProperty,percent,healthCareUtilization,DentalVisitWithinPastYear,unit,Percent
+Sugar-Sweetened Beverages,populationType,Person,measuredProperty,percent,healthBehavior,DailySugarSweetenedBeverages,unit,Percent
+Walkable Neighborhood,populationType,Person,measuredProperty,percent,environmentStatus,WalkableNeighborhood,unit,Percent
+e-Cigarettes,populationType,Person,measuredProperty,percent,healthBehavior,ElectronicCigaretteUse,unit,Percent
+Albany,observationAbout,geoId/36001
+Allegany,observationAbout,geoId/36003
+Bronx,observationAbout,geoId/36005
+Broome,observationAbout,geoId/36007
+Cattaraugus,observationAbout,geoId/36009
+Cayuga,observationAbout,geoId/36011
+Chautauqua,observationAbout,geoId/36013
+Chemung,observationAbout,geoId/36015
+Chenango,observationAbout,geoId/36017
+Clinton,observationAbout,geoId/36019
+Columbia,observationAbout,geoId/36021
+Cortland,observationAbout,geoId/36023
+Delaware,observationAbout,geoId/36025
+Dutchess,observationAbout,geoId/36027
+Erie,observationAbout,geoId/36029
+Essex,observationAbout,geoId/36031
+Franklin,observationAbout,geoId/36033
+Fulton,observationAbout,geoId/36035
+Genesee,observationAbout,geoId/36037
+Greene,observationAbout,geoId/36039
+Hamilton,observationAbout,geoId/36041
+Herkimer,observationAbout,geoId/36043
+Jefferson,observationAbout,geoId/36045
+Kings,observationAbout,geoId/36047
+Lewis,observationAbout,geoId/36049
+Livingston,observationAbout,geoId/36051
+Madison,observationAbout,geoId/36053
+Monroe,observationAbout,geoId/36055
+Montgomery,observationAbout,geoId/36057
+Nassau,observationAbout,geoId/36059
+New York City,observationAbout,geoId/3651000
+New York,observationAbout,geoId/36061
+Niagara,observationAbout,geoId/36063
+Oneida,observationAbout,geoId/36065
+Onondaga,observationAbout,geoId/36067
+Ontario,observationAbout,geoId/36069
+Orange,observationAbout,geoId/36071
+Orleans,observationAbout,geoId/36073
+Oswego,observationAbout,geoId/36075
+Otsego,observationAbout,geoId/36077
+Putnam,observationAbout,geoId/36079
+Queens,observationAbout,geoId/36081
+Rensselaer,observationAbout,geoId/36083
+Richmond,observationAbout,geoId/36085
+Rockland,observationAbout,geoId/36087
+Saratoga,observationAbout,geoId/36091
+Schenectady,observationAbout,geoId/36093
+Schoharie,observationAbout,geoId/36095
+Schuyler,observationAbout,geoId/36097
+Seneca,observationAbout,geoId/36099
+St Lawrence,observationAbout,geoId/36089
+St. Lawrence,observationAbout,geoId/36089
+Steuben,observationAbout,geoId/36101
+Suffolk,observationAbout,geoId/36103
+Sullivan,observationAbout,geoId/36105
+Tioga,observationAbout,geoId/36107
+Tompkins,observationAbout,geoId/36109
+Ulster,observationAbout,geoId/36111
+Warren,observationAbout,geoId/36113
+Washington,observationAbout,geoId/36115
+Wayne,observationAbout,geoId/36117
+Westchester,observationAbout,geoId/36119
+Wyoming,observationAbout,geoId/36121
+Yates,observationAbout,geoId/36123
