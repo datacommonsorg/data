@@ -21,6 +21,7 @@
       "validation_config_file": "validation_config.json",
       "source_files": [
         "output/Poverty_original.csv",
+        "counters/Poverty_counters.csv",
         "validation_config.json",
         "Povertymetadata.csv",
         "Povertypvmap.csv",

@@ -49,6 +49,9 @@ class TestProcessPoverty(unittest.TestCase):
                 "County D,2090,7.6,7.8,9.6,qux\n"
                 "County E,0100,5.0,4.2,3.1,quux\n"
                 "County F,01005,150.0,20.0,25.0,corge\n"
+                "County G,01007,-5.0,18.0,14.0,grault\n"
+                "County H,01009,,,,garply\n"
+                "County I,01011,-10.0,120.0,NA,waldo\n"
             )
             with open(input_csv, "w") as f:
                 f.write(input_data)
@@ -63,12 +66,14 @@ class TestProcessPoverty(unittest.TestCase):
             # 01003 (County B): 11.5, 9.8, 8.2
             # 02090 (County D): 7.6, 7.8, 9.6
             # 01005 (County F): NaN (out-of-bounds 150.0 masked), 20.0, 25.0
-            # abc and 0100 (00100) dropped
+            # 01007 (County G): NaN (negative -5.0 masked), 18.0, 14.0
+            # County C (abc) and County E (0100 -> 00100): dropped due to invalid GEOID
+            # County H (all blank) and County I (all out-of-bounds/NA): dropped due to all-NaN poverty rates
             expected_data = {
-                "GEOID": ["01001", "01003", "02090", "01005"],
-                "poverty_rate_1990": [15.2, 11.5, 7.6, None],
-                "poverty_rate_2000": [12.1, 9.8, 7.8, 20.0],
-                "poverty_rate_recent": [10.5, 8.2, 9.6, 25.0],
+                "GEOID": ["01001", "01003", "02090", "01005", "01007"],
+                "poverty_rate_1990": [15.2, 11.5, 7.6, None, None],
+                "poverty_rate_2000": [12.1, 9.8, 7.8, 20.0, 18.0],
+                "poverty_rate_recent": [10.5, 8.2, 9.6, 25.0, 14.0],
             }
             df_expected = pd.DataFrame(expected_data)
 

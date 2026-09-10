@@ -68,34 +68,5 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --output_counters=counters/Poverty_counters.csv
 ```
 
-### 3. Run Validation
-Validate generated outputs using the Import Validation Framework and `validation_config.json`:
-```bash
-python3 -m tools.import_validation.runner \
-  --validation_config=validation_config.json \
-  --stats_summary=dc_generated/summary_report.csv \
-  --differ_output=dc_generated/summary_report.csv \
-  --validation_output=dc_generated/validation_report.json
-```
-
----
-
-## Testing
-
-Run unit tests verifying GEOID standardization, out-of-bounds sanitation, and pipeline processing:
-```bash
-python3 -m unittest statvar_imports.commerce_eda_poverty.process_poverty_test
-```
-Or via the test runner script:
-```bash
-./run_tests.sh -p statvar_imports/commerce_eda_poverty
-```
-
----
-
-## Maintenance & Updates
-
-The preprocessing script downloads from `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`. When a new PPC dataset is released by EDA or Treasury CDFI:
-1. Upload the updated upstream file to GCS.
-2. Run `python3 process_poverty.py` to verify schema and row count sanity thresholds ($\ge 3,000$ counties).
-3. Execute `stat_var_processor.py` and verify zero errors in `counters/Poverty_counters.csv`.
+## Future Updates
+- The preprocessing script (`process_poverty.py`) copies the source file from GCS. In future release cycles, if the source file in `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv` is updated, running the script will automatically process the updated data. If the source portal structure or URL changes, the script may need to be updated to fetch directly from the website.
