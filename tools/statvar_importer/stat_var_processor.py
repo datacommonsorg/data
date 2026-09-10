@@ -1049,6 +1049,7 @@ class StatVarsMap:
                             'nameWithLanguage',
                             'description',
                             'descriptionUrl',
+                            'definition',
                         ],
                         # Retain SVs with new PVs like alternateName
                         'output_nodes_with_additions': True,
