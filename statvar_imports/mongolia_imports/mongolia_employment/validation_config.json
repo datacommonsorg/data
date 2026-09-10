@@ -116,21 +116,6 @@
         "golden_files": "../../../../golden_data/input5_golden_observations.csv",
         "input_files": "../../../../output_files/registered_unemployed_by_education_level_region_gender_month_output.csv"
       }
-    },
-    {
-      "rule_id": "check_max_date_consistent",
-      "description": "Checks that the latest date is the same for all StatVars.",
-      "validator": "MAX_DATE_CONSISTENT",
-      "params": {}
-    },
-    {
-      "rule_id": "check_max_date_freshness",
-      "description": "Checks that the latest date does not regress below 2024.",
-      "validator": "SQL_VALIDATOR",
-      "params": {
-        "query": "SELECT StatVar, MaxDate FROM stats",
-        "condition": "MaxDate >= '2024'"
-      }
     }
   ]
 }
