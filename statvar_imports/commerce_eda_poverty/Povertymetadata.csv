@@ -1,12 +1,13 @@
 parameter,value
-url,https://www.cdfifund.gov/
+url,https://www.cdfifund.gov/documents/geographic-reports
 description,Persistent Poverty County Status (sourced from Treasury CDFI Fund)
-#place_type,AdministrativeArea1
+#place_type,County
 #places_within,country/USA
 #start_date,1990
 #end_date,2021
 release_frequency,Decadal
 process,
 comments,
-output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor"
 header_rows,1
+output_only_new_statvars,True

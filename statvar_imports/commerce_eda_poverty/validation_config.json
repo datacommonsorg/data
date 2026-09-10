@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_percent_min_value",
+      "validator": "MIN_VALUE_CHECK",
+      "params": {
+        "minimum": 0
+      }
+    },
+    {
+      "rule_id": "check_percent_max_value",
+      "validator": "MAX_VALUE_CHECK",
+      "params": {
+        "maximum": 100
+      }
+    },
+    {
+      "rule_id": "check_num_places_county_count",
+      "validator": "NUM_PLACES_COUNT",
+      "params": {
+        "minimum": 3100,
+        "maximum": 3250
+      }
+    },
+    {
+      "rule_id": "check_date_span_sql",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate FROM stats",
+        "condition": "TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021"
+      }
+    },
+    {
+      "rule_id": "check_missing_refs_count",
+      "validator": "MISSING_REFS_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_deleted_records_percent",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    }
+  ]
+}

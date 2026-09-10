@@ -1,24 +1,63 @@
-# Commerce_EDA_Poverty (Persistent Poverty Counties)
+# Commerce EDA Poverty: Persistent Poverty County Status and Rates
 
-This importer fetches and processes U.S. Treasury CDFI Fund datasets detailing the list of U.S. counties classified as Persistent Poverty Counties (PPCs).
+Author: Shivangi Singh  
+Date: *September 2026*
 
-- **Source**: [CDFI Fund Geographic Reports](https://www.cdfifund.gov/documents/geographic-reports)
-- **Place Type**: U.S. Counties and County Equivalents (`County`)
-- **Time Coverage**: 1990, 2000, 2021 (based on 1990 Decennial Census, 2000 Decennial Census, and 2016-2020 American Community Survey)
-- **Import Type**: Automated download and preprocess
-- **Release Frequency**: Decadal / Periodic
+| Parameter | Details |
+| :--- | :--- |
+| Link to dataset preview or raw data | [Treasury CDFI Geographic Reports](https://www.cdfifund.gov/documents/geographic-reports) / [EDA PPCs](https://www.eda.gov/performance/disclaimers) |
+| Place types covered | U.S. Counties and County Equivalents (`County`) |
+| Place ID resolution | `country/USA` county FIPS (`geoId/XXXXX`) |
+| Date range covered | 1990, 2000, 2021 (1990 Decennial Census, 2000 Decennial Census, 2021 Census SAIPE / ACS) |
+| Statistical Variables | `Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person` |
+| Unit / Scaling | `Percent` / `100` |
+| Refresh Cycle | Periodic / Decadal (aligned with EDA/Census benchmark releases) |
+| GCS Source Path | `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv` |
 
-## Pipeline Steps
+---
 
-### 1. Preprocessing (`process_poverty.py`)
-Run the python script to copy the original Poverty CSV dataset from GCS (`gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`), clean the columns, format GEOID/FIPS codes, and structure it into a clean format:
+## Overview
+
+This dataset import contains historical and recent county-level poverty percentage rates compiled by the U.S. Economic Development Administration (EDA) and Treasury CDFI Fund for evaluating Persistent Poverty County (PPC) status. The dataset benchmarks county poverty rates across three official periods:
+- **1990**: 1990 Decennial Census
+- **2000**: 2000 Decennial Census
+- **2021**: 2021 Small Area Income and Poverty Estimates (SAIPE) / American Community Survey (ACS 5-Year)
+
+The dataset covers all ~3,143 U.S. counties and island territories with valid 5-digit FIPS codes (`01` through `56`, `60`, `66`, `69`, `72`, `78`).
+
+---
+
+## Statistical Variable
+
+```mcf
+Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population: Below Poverty Level in The Past 12 Months (Per Capita)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
+```
+
+---
+
+## Pipeline Execution
+
+### Prerequisites
+Ensure python dependencies and google cloud storage utilities are available:
+```bash
+pip install pandas absl-py duckdb
+```
+
+### 1. Preprocess Raw Dataset (`process_poverty.py`)
+Downloads `Poverty.csv` from GCS (`gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`), cleans and normalizes headers, standardizes FIPS codes with state prefix validation, enforces value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
 ```bash
 python3 process_poverty.py
 ```
-This writes the formatted data to `output/Poverty_cleaned.csv`.
 
-### 2. Statistical Variable Processing
-Run the Data Commons `stat_var_processor.py` to generate the final MCF and CSV files for import:
+### 2. Generate Data Commons Observations (`stat_var_processor.py`)
+Runs the Data Commons StatVar processor to generate cleaned observations and template MCF:
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=output/Poverty_cleaned.csv \
@@ -29,5 +68,34 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --output_counters=counters/Poverty_counters.csv
 ```
 
-## Future Updates
-- The preprocessing script (`process_poverty.py`) copies the source file from GCS. In future release cycles, if the source file in `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv` is updated, running the script will automatically process the updated data. If the source portal structure or URL changes, the script may need to be updated to fetch directly from the website.
+### 3. Run Validation
+Validate generated outputs using the Import Validation Framework and `validation_config.json`:
+```bash
+python3 -m tools.import_validation.runner \
+  --validation_config=validation_config.json \
+  --stats_summary=dc_generated/summary_report.csv \
+  --differ_output=dc_generated/summary_report.csv \
+  --validation_output=dc_generated/validation_report.json
+```
+
+---
+
+## Testing
+
+Run unit tests verifying GEOID standardization, out-of-bounds sanitation, and pipeline processing:
+```bash
+python3 -m unittest statvar_imports.commerce_eda_poverty.process_poverty_test
+```
+Or via the test runner script:
+```bash
+./run_tests.sh -p statvar_imports/commerce_eda_poverty
+```
+
+---
+
+## Maintenance & Updates
+
+The preprocessing script downloads from `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`. When a new PPC dataset is released by EDA or Treasury CDFI:
+1. Upload the updated upstream file to GCS.
+2. Run `python3 process_poverty.py` to verify schema and row count sanity thresholds ($\ge 3,000$ counties).
+3. Execute `stat_var_processor.py` and verify zero errors in `counters/Poverty_counters.csv`.

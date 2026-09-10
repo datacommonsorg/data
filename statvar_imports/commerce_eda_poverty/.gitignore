@@ -1,0 +1,8 @@
+output/
+counters/
+dc_generated/
+testdata/
+*.tmp
+__pycache__/
+*.pyc
+http_cache.sqlite
