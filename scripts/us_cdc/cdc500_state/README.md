@@ -56,16 +56,16 @@ The following age-bracketed cancer screening indicators are omitted from state-l
 ### Artifacts
 
 #### Scripts
-[`process.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/cdc500_state/process.py)
+[`process.py`](process.py)
 
 #### Unit Tests
-[`process_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/cdc500_state/process_test.py)
+[`process_test.py`](process_test.py)
 
 #### tMCF Template
-[`cdc500_state.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/cdc500_state/cdc500_state.tmcf)
+[`cdc500_state.tmcf`](cdc500_state.tmcf)
 
 #### Validation Config
-[`validation_config.json`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/cdc500_state/validation_config.json)
+[`validation_config.json`](validation_config.json)
 
 ### Import Procedure
 
@@ -89,6 +89,12 @@ To specify a custom output directory:
 
 ```bash
 $ python3 scripts/us_cdc/cdc500_state/process.py --output_dir=/path/to/output
+```
+
+To specify a GCP project for BigQuery jobs (if not set in ambient environment):
+
+```bash
+$ python3 scripts/us_cdc/cdc500_state/process.py --project=my-gcp-project
 ```
 
 #### Running Unit Tests
