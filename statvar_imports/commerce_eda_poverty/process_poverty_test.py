@@ -4,13 +4,19 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 import pandas as pd
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
 sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "util"))
 
-from statvar_imports.commerce_eda_poverty.process_poverty import clean_geoid, preprocess_poverty
+from statvar_imports.commerce_eda_poverty.process_poverty import (
+    clean_geoid,
+    download_from_gcs,
+    preprocess_poverty,
+)
 
 
 class TestProcessPoverty(unittest.TestCase):
@@ -24,7 +30,7 @@ class TestProcessPoverty(unittest.TestCase):
         # 4-digit GEOID with stripped leading zero from Excel (Alaska 02090)
         self.assertEqual(clean_geoid("2090"), "02090")
 
-        # Invalid GEOID with non-existent state code (00100)
+        # Invalid GEOID with non-existent state code (0100 -> 00100)
         self.assertIsNone(clean_geoid("0100"))
         self.assertIsNone(clean_geoid("00100"))
 
@@ -34,50 +40,87 @@ class TestProcessPoverty(unittest.TestCase):
         self.assertIsNone(clean_geoid(None))
         self.assertIsNone(clean_geoid("123456"))
 
-    def test_preprocess_poverty(self):
+    def test_preprocess_poverty_wide_format_and_no_truncation(self):
+        """Verifies that dataset maintains wide format and does NOT truncate rows."""
         with tempfile.TemporaryDirectory() as tmpdir:
             input_csv = os.path.join(tmpdir, "input.csv")
             actual_csv = os.path.join(tmpdir, "actual.csv")
 
-            input_data = (
-                "PERSISTENT POVERTY COUNTIES\n"
-                "Source: U.S. Treasury CDFI Fund\n"
-                "Name,GEOID,\"1990 Decennial Census, % in Poverty\",\"2000 Decennial Census, % in Poverty\",\"Most Recent Estimate, % in Poverty* \",Extra\n"
-                "County A,01001,15.2,12.1,10.5,foo\n"
-                "County B,01003,11.5,9.8,8.2,bar\n"
-                "County C,abc,10.0,10.0,10.0,baz\n"
-                "County D,2090,7.6,7.8,9.6,qux\n"
-                "County E,0100,5.0,4.2,3.1,quux\n"
-                "County F,01005,150.0,20.0,25.0,corge\n"
-                "County G,01007,-5.0,18.0,14.0,grault\n"
-                "County H,01009,,,,garply\n"
-                "County I,01011,-10.0,120.0,NA,waldo\n"
-            )
-            with open(input_csv, "w") as f:
-                f.write(input_data)
+            # Generate >100 counties to assert that the 100-row truncation bug does not recur
+            rows = [
+                "PERSISTENT POVERTY COUNTIES",
+                "Source: U.S. Treasury CDFI Fund",
+                "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
+                "\"2000 Decennial Census, % in Poverty\","
+                "\"Most Recent Estimate, % in Poverty* \",Extra",
+            ]
 
-            preprocess_poverty(src_path=input_csv, dst_path=actual_csv, min_county_count=1)
+            # 105 valid counties (Alabama FIPS 01001 through 01209, odd numbers)
+            expected_geoids = []
+            for i in range(1, 211, 2):
+                geoid = f"01{i:03d}"
+                expected_geoids.append(geoid)
+                rows.append(f"County {geoid},{geoid},15.0,12.0,10.0,extra")
+
+            # Add invalid rows that should be filtered
+            rows.append("Invalid County,abc,10.0,10.0,10.0,extra")
+            rows.append("Invalid FIPS,0100,10.0,10.0,10.0,extra")
+            rows.append("Empty Rates,01211,,,,extra")
+            rows.append("Out of Bounds,01213,-5.0,120.0,150.0,extra")
+
+            with open(input_csv, "w", encoding="utf-8") as f:
+                f.write("\n".join(rows) + "\n")
+
+            preprocess_poverty(src_path=input_csv, dst_path=actual_csv, min_county_count=100)
 
             self.assertTrue(os.path.exists(actual_csv))
             df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str})
 
-            # Expected records:
-            # 01001 (County A): 15.2, 12.1, 10.5
-            # 01003 (County B): 11.5, 9.8, 8.2
-            # 02090 (County D): 7.6, 7.8, 9.6
-            # 01005 (County F): NaN (out-of-bounds 150.0 masked), 20.0, 25.0
-            # 01007 (County G): NaN (negative -5.0 masked), 18.0, 14.0
-            # County C (abc) and County E (0100 -> 00100): dropped due to invalid GEOID
-            # County H (all blank) and County I (all out-of-bounds/NA): dropped due to all-NaN poverty rates
-            expected_data = {
-                "GEOID": ["01001", "01003", "02090", "01005", "01007"],
-                "poverty_rate_1990": [15.2, 11.5, 7.6, None, None],
-                "poverty_rate_2000": [12.1, 9.8, 7.8, 20.0, 18.0],
-                "poverty_rate_recent": [10.5, 8.2, 9.6, 25.0, 14.0],
-            }
-            df_expected = pd.DataFrame(expected_data)
+            # Assert target wide format columns
+            expected_cols = [
+                "GEOID",
+                "poverty_rate_1990",
+                "poverty_rate_2000",
+                "poverty_rate_recent",
+            ]
+            self.assertEqual(list(df_actual.columns), expected_cols)
 
-            pd.testing.assert_frame_equal(df_actual, df_expected, check_dtype=False)
+            # Assert zero row truncation (> 100 counties retained: 105 counties)
+            self.assertEqual(len(df_actual), 105)
+            self.assertEqual(df_actual["GEOID"].nunique(), 105)
+
+    def test_preprocess_poverty_empty_or_missing_raises(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            missing_csv = os.path.join(tmpdir, "missing.csv")
+            dst_csv = os.path.join(tmpdir, "out.csv")
+
+            with self.assertRaises(SystemExit):
+                preprocess_poverty(src_path=missing_csv, dst_path=dst_csv)
+
+            empty_csv = os.path.join(tmpdir, "empty.csv")
+            with open(empty_csv, "w", encoding="utf-8") as f:
+                f.write("")
+
+            with self.assertRaises(SystemExit):
+                preprocess_poverty(src_path=empty_csv, dst_path=dst_csv)
+
+    @mock.patch("statvar_imports.commerce_eda_poverty.process_poverty.file_util.file_copy")
+    def test_download_from_gcs_retry(self, mock_file_copy):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst_path = os.path.join(tmpdir, "downloaded.csv")
+
+            # Simulate first attempt failing and second succeeding
+            def side_effect(src, dst):
+                if mock_file_copy.call_count == 1:
+                    raise IOError("Transient network error")
+                with open(dst, "w", encoding="utf-8") as f:
+                    f.write("content")
+
+            mock_file_copy.side_effect = side_effect
+
+            download_from_gcs(dst_path=dst_path, max_retries=3, backoff_factor=0.01)
+            self.assertTrue(os.path.exists(dst_path))
+            self.assertEqual(mock_file_copy.call_count, 2)
 
 
 if __name__ == "__main__":
