@@ -1,21 +1,32 @@
 1. import_name": "Zurich_Population_Number_Of_Company_Workplace_Employees"
 
 2. Import Overview
-Zurich population data at Province and City Level.
-Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv)
+Number of companies, workplaces and employees in Zurich city at City, District (Kreise), and Quarter (Quartiere) Level.
+Source URL: [BFS WIR STATENT Data](https://data.stadt-zuerich.ch/dataset/bfs_wir_statent_ast_beschaeftigte_vza_rechtsform_betrgr_jahr_od2552)
 Import Type: Fully Autorefresh
-Source Data Availability: 2011 to 2022
+Source Data Availability: 2011 to 2024
 Release Frequency: P1Y
 
-3. Preprocessing Steps (No)
+3. Preprocessing Steps (Yes)
+Generate rollups from the downloaded dataset:
+python3 wir_2552_wiki/generate_rollups.py
+
+Rollup Logic & Explanation (`wir_2552_wiki/generate_rollups.py`):
+- **Why Filter on Value `'0'` (`RechtsformSort == 0` & `BetriebsgrSort == 0`)**:
+  - In the upstream dataset (`WIR255OD2552.csv`), category code **`0` represents the official aggregate total row** across all sub-categories: `RechtsformSort == 0` is *"Alle Rechtsformen"* (all legal forms combined) and `BetriebsgrSort == 0` is *"Alle Betriebsgrössen"* (all company sizes combined). Non-zero values (`1`, `2`, etc.) represent granular sub-category breakdowns (e.g., public-law vs. private-law entities, micro-businesses `<10` vs. small businesses `10–49`).
+  - **Matches Target StatVar Schema**: The Data Commons StatVars emitted by this import (`Count_Company`, `Count_Person_Employed`, `Count_Person_Employed_Female`, `Count_Person_Employed_Male`, `Count_Person_FullTimeEmployee`, etc.) represent overall totals per place and year without legal form or company size constraints.
+  - **Prevents Conflicting Duplicate Observations**: Retaining non-zero breakdown rows would cause `stat_var_processor.py` to map multiple sub-category rows to the exact same `(place, year, StatVar)` tuple, causing observation collisions.
+  - **Avoids Undercounting from Suppressed Cells (`'K'`)**: Individual sub-category breakdown rows frequently contain `'K'` (confidentiality suppression for small counts). Summing non-zero breakdown rows manually would undercount true totals, whereas the official `(0, 0)` row provides the complete, authoritative total published by Statistics Zurich.
+- **Unknown Region Exclusion**: Filters out unknown/unassigned region rows (`RaumSort` `990` ["Kreis Unbekannt"] and `999` ["Quartier Unbekannt"]) that do not map to valid geographic places.
+- **Numeric Coercion**: Coerces metric columns (`Arbeitsstaetten`, `AnzBesch`, `AnzBeschW`, `AnzBeschM`, `AnzVZA`, `AnzVZAW`, `AnzVZAM`) to numeric values, converting non-numeric markers (e.g., `'K'` for confidential/suppressed entries) to `NaN` so they are cleanly skipped during StatVar observation generation.
 
 4. Autorefresh Type
 
-Fully Autorefresh:"0 2 29 * * " (Runs at 2:00 AM on the 29th day of every month).
+Fully Autorefresh:"0 2 1,15 * * " (Runs at 2:00 AM on the 1st and 15th day of every month).
 
 5. Script Execution Details
 
-" python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/zurich/wir_2552_wiki/test_data/wir_2552_wiki_input.csv' --pv_map='../../statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_pvmap.csv' --config_file='../../statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_metadata.csv' --output_path=../../statvar_imports/zurich/wir_2552_wiki/output/zurich_population_wir_2552_wiki_output  "
+" python3 ../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bfs_wir_statent_ast_beschaeftigte_vza_rechtsform_betrgr_jahr_od2552/download/WIR255OD2552.csv --output_folder=wir_2552_wiki/input_files && python3 wir_2552_wiki/generate_rollups.py && python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=wir_2552_wiki/input_files/WIR255OD2552_rollups.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=wir_2552_wiki/output/zurich_population_wir_2552_wiki --output_counters=wir_2552_wiki/counters/zurich_population_wir_2552_wiki_counters.csv "
 
 #####
 
@@ -23,7 +34,7 @@ Fully Autorefresh:"0 2 29 * * " (Runs at 2:00 AM on the 29th day of every month)
 1. import_name": "Zurich_Population_By_Age"
 
 2. Import Overview
-Zurich population data at Province and City Level.
+Zurich population data at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv)
 Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
@@ -45,21 +56,21 @@ Fully Autorefresh:" 0 6 29 * * " (Runs at 6:00 AM on the 29th of every month).
 1. import_name": "Zurich_Population"
 
 2. Import Overview
-Zurich population data at Province and City Level.
-Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv)
+Total population of Zurich city by quarter and year at Quarter (Quartiere) Level.
+Source URL: [BEV324OD3240 Dataset](https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240)
 Import Type: Fully Autorefresh
-Source Data Availability: 1941 to 2023
+Source Data Availability: 1941 to 2025
 Release Frequency: P1Y
 
 3. Preprocessing Steps (No)
 
 4. Autorefresh Type
 
-Fully Autorefresh:" 30 11 29 * * " (Runs at 11:30 AM on the 29th of every month).
+Fully Autorefresh:" 30 11 1,15 * * " (Runs at 11:30 AM on the 1st and 15th of every month).
 
 5. Script Execution Details
 
-" python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/zurich/bev_3240_wiki/test_data/bev_3240_wiki_input.csv' --pv_map='../../statvar_imports/zurich/bev_3240_wiki/bev_3240_wiki_pvmap.csv' --config_file='../../statvar_imports/zurich/bev_3240_wiki/bev_3240_wiki_metadata.csv' --output_path=../../statvar_imports/zurich/bev_3240_wiki/output/zurich_population_bev_3240_wiki.csv_output "
+" python3 ../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240/download/BEV324OD3240.csv --output_folder=bev_3240_wiki/input_files && python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3240_wiki/input_files/BEV324OD3240.csv --pv_map=bev_3240_wiki/bev_3240_wiki_pvmap.csv --config_file=bev_3240_wiki/bev_3240_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=bev_3240_wiki/output/zurich_population_bev_3240_wiki --output_counters=bev_3240_wiki/counters/zurich_population_bev_3240_wiki_counters.csv "
 
 #####
 
@@ -67,7 +78,7 @@ Fully Autorefresh:" 30 11 29 * * " (Runs at 11:30 AM on the 29th of every month)
 1. import_name": "Zurich_Population_Number_Of_Birth_By_Origin"
 
 2. Import Overview
-Zurich population data at Province and City Level.
+Zurich population data at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv)
 Import Type: Fully Autorefresh
 Source Data Availability: 1998 to 2023
@@ -89,7 +100,7 @@ Fully Autorefresh:" 45 15 29 * * " (Runs at 3:45 PM on the 29th of every month).
 1. import_name": "Zurich_Population_Number_Of_Birth"
 
 2. Import Overview
-Zurich population data at Province and City Level.
+Zurich population data at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv)
 Import Type: Fully Autorefresh
 Source Data Availability: 1998 to 2023
@@ -111,7 +122,7 @@ Fully Autorefresh:" 0 20 29 * * " (Runs at 8:00 PM on the 29th of every month).
 1. import_name": "Zurich_Population_By_Origin"
 
 2. Import Overview
-Zurich population data at Province and City Level.
+Zurich population data at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv)
 Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
@@ -134,7 +145,7 @@ Fully Autorefresh:" 15 1 29 * * " (Runs at 1:15 AM on the 29th of every month).
 1. import_name": "Zurich_Population_Number_Of_Birth_By_Sex"
 
 2. Import Overview
-Zurich population data at Province and City Level.
+Zurich population data at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv)
 Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
@@ -156,7 +167,7 @@ Fully Autorefresh:" 07 19 29 * * " (Runs at 7:07 PM on the 29th of every month).
 1. import_name": "Zurich_Population_By_Sex"
 
 2. Import Overview
-Zurich population data at Province and City Level.
+Zurich population data at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv)
 Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
