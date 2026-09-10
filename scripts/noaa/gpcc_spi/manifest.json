@@ -35,7 +35,13 @@
                     "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
                 }
             ],
-            "cron_schedule": "0 9 1,15 * *"
+            "cron_schedule": "0 9 1,15 * *",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 64,
+                "memory": 256,
+                "disk": 4096
+            }
         }
     ]
 }
