@@ -28,10 +28,13 @@ class FemaDownloadTest(unittest.TestCase):
     def setUp(self):
         """Set up a temporary directory for testing."""
         self.test_dir = tempfile.mkdtemp()
+        self.test_input_dir = os.path.join(self.test_dir, 'input_file')
+        self.test_temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
 
     def tearDown(self):
         """Remove the temporary directory after tests."""
-        shutil.rmtree(self.test_dir)
+        if os.path.exists(self.test_dir):
+            shutil.rmtree(self.test_dir)
 
     @patch('fema_download.requests.get')
     def test_get_total_records_success(self, mock_get):
@@ -66,6 +69,17 @@ class FemaDownloadTest(unittest.TestCase):
                 'Failed to parse the total record count from the response.'):
             fema_download.get_total_records('http://fake-api.com')
 
+    @patch('fema_download.get_total_records')
+    def test_download_data_zero_records_fails(self, mock_get_total_records):
+        """Test failure when total record count is 0."""
+        mock_get_total_records.return_value = 0
+        with self.assertRaisesRegex(
+                RuntimeError,
+                'Download failed: API metadata reported 0 records.'):
+            fema_download.download_data(api_url='http://fake-api.com',
+                                        temp_dir=self.test_temp_dir,
+                                        output_dir=self.test_input_dir)
+
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
@@ -74,8 +88,6 @@ class FemaDownloadTest(unittest.TestCase):
         """
         Test the integrated logic of downloading, merging, and cleaning up.
         """
-        # Temporarily change the PAGE_SIZE for this test to a small value
-        # to control the pagination logic without creating massive dummy files.
         original_page_size = fema_download.PAGE_SIZE
         fema_download.PAGE_SIZE = 2
 
@@ -87,56 +99,337 @@ class FemaDownloadTest(unittest.TestCase):
             # Chunk 2 has the remaining 1 record.
             chunk2_content = b"headerA,headerB\n3,C"
 
-            # This side effect simulates the download_file utility's behavior
             def download_side_effect(url, output_folder, **kwargs):
                 util_output_path = os.path.join(output_folder,
                                                 "FimaNfipClaims.xlsx")
-                # The skip_count in the URL should correspond to the test's PAGE_SIZE
                 if "$skip=0" in url:
                     with open(util_output_path, 'wb') as f:
                         f.write(chunk1_content)
-                elif f"$skip={fema_download.PAGE_SIZE}" in url:  # e.g., $skip=2
+                elif f"$skip={fema_download.PAGE_SIZE}" in url:
                     with open(util_output_path, 'wb') as f:
                         f.write(chunk2_content)
                 else:
-                    return False  # Fail for any unexpected URL
+                    return False
                 return True
 
             mock_download_file.side_effect = download_side_effect
 
-            # The function writes to directories relative to the current working directory.
-            # We change into our temporary test directory to isolate file operations.
-            original_cwd = os.getcwd()
-            os.chdir(self.test_dir)
+            fema_download.download_data('http://fake-api.com',
+                                        self.test_temp_dir,
+                                        output_dir=self.test_input_dir)
 
-            try:
-                fema_download.download_data('http://fake-api.com',
-                                            'temp_fema_data')
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
 
-                # Verify the final merged file exists and has the correct content
-                final_filepath = os.path.join('input_file',
-                                              'fema_nfip_claims.csv')
-                self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
 
-                with open(final_filepath, 'rb') as f:
-                    content = f.read()
-
-                # Should contain the header from the first chunk and data from both
-                expected_content = b"headerA,headerB\n1,A\n2,B\n3,C"
-                self.assertEqual(content.strip(), expected_content)
-
-                # Verify that download_file was called twice
-                self.assertEqual(mock_download_file.call_count, 2)
-
-                # Verify the temporary directory was removed
-                mock_rmtree.assert_called_with('temp_fema_data')
-
-            finally:
-                # Restore the original working directory
-                os.chdir(original_cwd)
+            expected_content = b"headerA,headerB\n1,A\n2,B\n3,C"
+            self.assertEqual(content.strip(), expected_content)
+            self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
-            # Restore the original PAGE_SIZE to avoid side effects in other tests
             fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    def test_download_data_bulk_success(self, mock_download_file, mock_rmtree):
+        """Test successful direct bulk download."""
+
+        def download_side_effect(url, output_folder, **kwargs):
+            os.makedirs(output_folder, exist_ok=True)
+            with open(os.path.join(output_folder, "FimaNfipClaims.csv"),
+                      'wb') as f:
+                f.write(b"policyCount,dateOfLoss\n1,2020-01-01\n2,2020-01-02\n")
+            return True
+
+        mock_download_file.side_effect = download_side_effect
+
+        fema_download.download_data(
+            'http://fake-api.com',
+            self.test_temp_dir,
+            bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+            output_dir=self.test_input_dir)
+
+        final_filepath = os.path.join(self.test_input_dir,
+                                      'fema_nfip_claims.csv')
+        self.assertTrue(os.path.exists(final_filepath))
+        with open(final_filepath, 'rb') as f:
+            content = f.read()
+        self.assertEqual(
+            content.strip(),
+            b"policyCount,dateOfLoss\n1,2020-01-01\n2,2020-01-02")
+        mock_download_file.assert_called_once()
+        mock_rmtree.assert_called_with(self.test_temp_dir)
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_failure_fallback(self, mock_get_total_records,
+                                                 mock_download_file,
+                                                 mock_rmtree):
+        """Test fallback to pagination when direct bulk download fails."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def download_side_effect(url, output_folder, **kwargs):
+                if url == 'http://fake-bulk.com/FimaNfipClaims.csv':
+                    return False
+                util_output_path = os.path.join(output_folder,
+                                                "FimaNfipClaims.xlsx")
+                with open(util_output_path, 'wb') as f:
+                    f.write(b"headerA,headerB\n1,A\n2,B")
+                return True
+
+            mock_download_file.side_effect = download_side_effect
+
+            fema_download.download_data(
+                'http://fake-api.com',
+                self.test_temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=self.test_input_dir)
+
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+            mock_rmtree.assert_called_with(self.test_temp_dir)
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_empty_file_fallback(self,
+                                                    mock_get_total_records,
+                                                    mock_download_file,
+                                                    mock_rmtree):
+        """Test fallback to pagination when direct bulk download produces an empty 0-byte file."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def download_side_effect(url, output_folder, **kwargs):
+                if url == 'http://fake-bulk.com/FimaNfipClaims.csv':
+                    os.makedirs(output_folder, exist_ok=True)
+                    # Write an empty 0-byte file
+                    with open(
+                            os.path.join(output_folder, "FimaNfipClaims.csv"),
+                            'wb'):
+                        pass
+                    return True
+                util_output_path = os.path.join(output_folder,
+                                                "FimaNfipClaims.xlsx")
+                with open(util_output_path, 'wb') as f:
+                    f.write(b"headerA,headerB\n1,A\n2,B")
+                return True
+
+            mock_download_file.side_effect = download_side_effect
+
+            fema_download.download_data(
+                'http://fake-api.com',
+                self.test_temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=self.test_input_dir)
+
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+            self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_header_only_chunk_no_blank_lines(
+            self, mock_get_total_records, mock_download_file, mock_rmtree):
+        """Test that header-only chunk does not add blank lines."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 3
+
+            def download_side_effect(url, output_folder, **kwargs):
+                util_output_path = os.path.join(output_folder,
+                                                "FimaNfipClaims.xlsx")
+                if "$skip=0" in url:
+                    with open(util_output_path, 'wb') as f:
+                        f.write(b"headerA,headerB\n1,A\n2,B\n")
+                else:
+                    # Second chunk contains only header
+                    with open(util_output_path, 'wb') as f:
+                        f.write(b"headerA,headerB\n")
+                return True
+
+            mock_download_file.side_effect = download_side_effect
+
+            with self.assertRaisesRegex(
+                    RuntimeError,
+                    r"Download incomplete: only 2 of 3 records downloaded\."):
+                fema_download.download_data('http://fake-api.com',
+                                            self.test_temp_dir,
+                                            output_dir=self.test_input_dir)
+
+            self.assertEqual(mock_download_file.call_count, 2)
+
+            # Staging merged file should only contain chunk 1 data without extra blank lines
+            temp_merged_filepath = os.path.join(self.test_temp_dir,
+                                                'merged_fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(temp_merged_filepath))
+            with open(temp_merged_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content, b"headerA,headerB\n1,A\n2,B\n")
+            mock_rmtree.assert_called_with(self.test_temp_dir)
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_html_fallback(self, mock_get_total_records,
+                                              mock_download_file, mock_rmtree):
+        """Test fallback to pagination when direct bulk download returns an HTML error page."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def download_side_effect(url, output_folder, **kwargs):
+                if url == 'http://fake-bulk.com/FimaNfipClaims.csv':
+                    os.makedirs(output_folder, exist_ok=True)
+                    with open(os.path.join(output_folder, "FimaNfipClaims.csv"),
+                              'wb') as f:
+                        f.write(
+                            b"<!DOCTYPE html><html><body>Error 503</body></html>\n"
+                        )
+                    return True
+                util_output_path = os.path.join(output_folder,
+                                                "FimaNfipClaims.xlsx")
+                with open(util_output_path, 'wb') as f:
+                    f.write(b"headerA,headerB\n1,A\n2,B")
+                return True
+
+            mock_download_file.side_effect = download_side_effect
+
+            fema_download.download_data(
+                'http://fake-api.com',
+                self.test_temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=self.test_input_dir)
+
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+            self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_missing_header_fallback(
+            self, mock_get_total_records, mock_download_file, mock_rmtree):
+        """Test fallback to pagination when direct bulk download lacks expected CSV headers."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def download_side_effect(url, output_folder, **kwargs):
+                if url == 'http://fake-bulk.com/FimaNfipClaims.csv':
+                    os.makedirs(output_folder, exist_ok=True)
+                    with open(os.path.join(output_folder, "FimaNfipClaims.csv"),
+                              'wb') as f:
+                        f.write(b"randomCol1,randomCol2\n1,X\n2,Y\n")
+                    return True
+                util_output_path = os.path.join(output_folder,
+                                                "FimaNfipClaims.xlsx")
+                with open(util_output_path, 'wb') as f:
+                    f.write(b"headerA,headerB\n1,A\n2,B")
+                return True
+
+            mock_download_file.side_effect = download_side_effect
+
+            fema_download.download_data(
+                'http://fake-api.com',
+                self.test_temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=self.test_input_dir)
+
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+            self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_chunk_different_filename(self, mock_get_total_records,
+                                                    mock_download_file,
+                                                    mock_rmtree):
+        """Test dynamic chunk detection when download utility saves under an arbitrary filename."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def download_side_effect(url, output_folder, **kwargs):
+                # Save under a non-standard filename (not FimaNfipClaims.xlsx)
+                custom_output_path = os.path.join(output_folder,
+                                                  "custom_chunk_name.csv")
+                with open(custom_output_path, 'wb') as f:
+                    f.write(b"headerA,headerB\n1,A\n2,B")
+                return True
+
+            mock_download_file.side_effect = download_side_effect
+
+            fema_download.download_data('http://fake-api.com',
+                                        self.test_temp_dir,
+                                        output_dir=self.test_input_dir)
+
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+            self.assertEqual(mock_download_file.call_count, 1)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.download_data')
+    def test_main(self, mock_download_data):
+        """Test main entrypoint passing flags."""
+        fema_download.flags.FLAGS(['fema_download'])
+        fema_download.main([])
+        mock_download_data.assert_called_once_with(
+            fema_download.flags.FLAGS.api_url,
+            fema_download.flags.FLAGS.temp_dir,
+            fema_download.flags.FLAGS.bulk_url,
+            fema_download.flags.FLAGS.output_dir,
+        )
 
 
 if __name__ == '__main__':
