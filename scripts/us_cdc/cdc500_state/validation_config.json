@@ -29,7 +29,7 @@
         },
         {
             "rule_id": "check_num_places_state_count",
-            "description": "Checks that state-level observations cover all 50-52 US state entities.",
+            "description": "Checks that state-level observations cover all 50-52 US states.",
             "validator": "NUM_PLACES_COUNT",
             "params": {
                 "minimum": 50,
