@@ -167,10 +167,17 @@ class YearUnavailableError(Exception):
     """Raised when CDC WONDER indicates that the requested year is unavailable."""
 
 
-def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.Session = None) -> str:
+def query_cdc_wonder(
+    xml_payload: str,
+    max_retries: int = 3,
+    session: requests.Session = None,
+    vertical: str = None,
+    year: str = None,
+) -> str:
     """Sends an HTTP POST query to CDC WONDER API with retry handling."""
     if session is None:
         session = get_session()
+    context = f"vertical={vertical}, year={year}, url={CDC_WONDER_ENDPOINT}"
     data = {
         'request_xml': xml_payload,
         'accept_datause_restrictions': 'true',
@@ -178,7 +185,7 @@ def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.S
     for attempt in range(1, max_retries + 1):
         _rate_limit_wait()
         try:
-            logging.info(f"Sending HTTP POST request to {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries})...")
+            logging.debug(f"Sending HTTP POST request to {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries})...")
             resp = session.post(CDC_WONDER_ENDPOINT, data=data, timeout=300)
             res = resp.text
             if '<title>Processing Error</title>' in res:
@@ -192,20 +199,30 @@ def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.S
                 if 'd130.v1' in res.lower() or ('year' in err_msg.lower() and ('valid' in err_msg.lower() or 'unavailable' in err_msg.lower())):
                     raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {err_msg}")
 
-                logging.error(f"CDC WONDER Processing Error on POST {CDC_WONDER_ENDPOINT}: {res}")
-                raise RuntimeError(f"CDC WONDER processing error: {res}")
+                logging.fatal(f"CDC WONDER processing error ({context}): {res}")
+                raise RuntimeError(f"CDC WONDER processing error ({context}): {res}")
             resp.raise_for_status()
-            logging.info(f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}")
+            logging.debug(f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}")
             if '<data-table' not in res and '<message>' in res:
                 msg_match = re.search(r'<message>(.*?)</message>', res, re.DOTALL | re.IGNORECASE)
-                if msg_match and ('dataset or year is currently unavailable' in msg_match.group(1).lower() or ('year' in msg_match.group(1).lower() and 'unavailable' in msg_match.group(1).lower())):
-                    raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {msg_match.group(1).strip()}")
+                if msg_match:
+                    err_text = msg_match.group(1).strip()
+                    if 'dataset or year is currently unavailable' in err_text.lower() or ('year' in err_text.lower() and 'unavailable' in err_text.lower()):
+                        raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {err_text}")
+                    logging.fatal(f"CDC WONDER error response ({context}): {err_text}")
+                    raise RuntimeError(f"CDC WONDER error response ({context}): {err_text}")
             return res
-        except requests.RequestException as e:
-            logging.warning(f"Network error on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}): {e}")
+        except requests.HTTPError as e:
+            if resp.status_code < 500:
+                logging.fatal(f"Fatal HTTP client error ({context}): {e}")
+                raise RuntimeError(f"Fatal HTTP client error ({context}): {e}") from e
+            logging.warning(f"Server error ({context}) (attempt {attempt}/{max_retries}): {e}")
             time.sleep(10 * attempt)
-    logging.error("Failed to fetch data from CDC WONDER after maximum retries.")
-    raise RuntimeError("Failed to fetch data from CDC WONDER after maximum retries.")
+        except requests.RequestException as e:
+            logging.warning(f"Network error ({context}) (attempt {attempt}/{max_retries}): {e}")
+            time.sleep(10 * attempt)
+    logging.fatal(f"Failed to fetch data from CDC WONDER after maximum retries. ({context})")
+    raise RuntimeError(f"Failed to fetch data from CDC WONDER after maximum retries. ({context})")
 
 
 def parse_xml_to_csv_rows(xml_response: str, vertical: str) -> list:
@@ -298,11 +315,12 @@ def download_vertical_year(vertical: str, year: str, output_dir: str, session: r
     logging.info(f"Downloading vertical '{vertical}' for year {year}...")
     try:
         xml_payload = build_request_xml(vertical, year)
-        xml_response = query_cdc_wonder(xml_payload, session=session)
+        xml_response = query_cdc_wonder(
+            xml_payload, session=session, vertical=vertical, year=year
+        )
     except YearUnavailableError as e:
         logging.warning(
-            f"Data unavailable for vertical '{vertical}' and year {year}: {e}. "
-            f"Skipping download."
+            f"Skipping download (vertical={vertical}, year={year}, url={CDC_WONDER_ENDPOINT}): {e}"
         )
         return False
 
@@ -334,13 +352,15 @@ def download_all(verticals: list, years: list, output_dir: str, session: request
     """Downloads all requested verticals and years sequentially."""
     if session is None:
         session = get_session()
-    total_tasks = len(verticals) * len(years)
+    # Sort years chronologically so early termination on the first unavailable year works correctly.
+    sorted_years = sorted(years, key=lambda x: int(x) if str(x).isdigit() else str(x))
+    total_tasks = len(verticals) * len(sorted_years)
     idx = 1
     successful_downloads = 0
     unavailable_downloads = 0
     unavailable_years = set()
     for v in verticals:
-        for y in years:
+        for idx_y, y in enumerate(sorted_years):
             str_y = str(y)
             logging.info(f"[{idx}/{total_tasks}] Processing {v} ({str_y})...")
             if str_y in unavailable_years:
@@ -352,10 +372,24 @@ def download_all(verticals: list, years: list, output_dir: str, session: request
                 continue
             if download_vertical_year(v, str_y, output_dir, session=session):
                 successful_downloads += 1
+                idx += 1
             else:
-                unavailable_years.add(str_y)
+                # Mark this and all subsequent years as unavailable since CDC WONDER
+                # publishes data chronologically. Stop probing further years for this vertical.
+                for remaining_y in sorted_years[idx_y:]:
+                    unavailable_years.add(str(remaining_y))
                 unavailable_downloads += 1
-            idx += 1
+                idx += 1
+                remaining_count = len(sorted_years) - idx_y - 1
+                if remaining_count > 0:
+                    remaining_years = [str(ry) for ry in sorted_years[idx_y + 1:]]
+                    logging.info(
+                        f"Year {str_y} is unavailable. Stopping further year probes for {v} "
+                        f"(skipping future years: {remaining_years})."
+                    )
+                    unavailable_downloads += remaining_count
+                    idx += remaining_count
+                break
     logging.info(
         f"All downloads finished: {successful_downloads} successful, "
         f"{unavailable_downloads} unavailable."

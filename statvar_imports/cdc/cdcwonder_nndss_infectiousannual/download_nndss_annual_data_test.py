@@ -253,12 +253,89 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         self.assertIn("Failed to fetch data from CDC WONDER after maximum retries.", str(ctx.exception))
         self.assertEqual(mock_session.post.call_count, 3)
 
+    @mock.patch('download_nndss_annual_data.logging.fatal')
+    @mock.patch('download_nndss_annual_data.time.sleep')
+    @mock.patch('download_nndss_annual_data._rate_limit_wait')
+    def test_query_cdc_wonder_network_error_logs_fatal(self, _mock_rate_limit, _mock_sleep, mock_log_fatal):
+        """Verify network errors exhaust retries and log fatal with context."""
+        mock_session = mock.MagicMock(spec=requests.Session)
+        mock_session.post.side_effect = requests.RequestException("Connection timed out")
+
+        with self.assertRaises(RuntimeError) as ctx:
+            download_nndss_annual_data.query_cdc_wonder("<xml/>", vertical='age', year='2020', session=mock_session)
+        self.assertIn("Failed to fetch data from CDC WONDER after maximum retries.", str(ctx.exception))
+        mock_log_fatal.assert_called_once()
+        log_msg = mock_log_fatal.call_args[0][0]
+        self.assertIn("vertical=age", log_msg)
+        self.assertIn("year=2020", log_msg)
+
+    @mock.patch('download_nndss_annual_data.logging.fatal')
+    @mock.patch('download_nndss_annual_data.time.sleep')
+    @mock.patch('download_nndss_annual_data._rate_limit_wait')
+    def test_query_cdc_wonder_fatal_error_logs_context(self, _mock_rate_limit, _mock_sleep, mock_log_fatal):
+        """Verify processing errors log fatal with context and abort."""
+        mock_session = mock.MagicMock(spec=requests.Session)
+        fatal_resp = mock.MagicMock()
+        fatal_resp.text = PROCESSING_ERROR_FATAL
+        mock_session.post.return_value = fatal_resp
+
+        with self.assertRaises(RuntimeError) as ctx:
+            download_nndss_annual_data.query_cdc_wonder(
+                "<xml/>", vertical='sex', year='2023', session=mock_session
+            )
+        self.assertIn("vertical=sex", str(ctx.exception))
+        self.assertIn("year=2023", str(ctx.exception))
+        self.assertIn(download_nndss_annual_data.CDC_WONDER_ENDPOINT, str(ctx.exception))
+        mock_log_fatal.assert_called_once()
+        log_msg = mock_log_fatal.call_args[0][0]
+        self.assertIn("vertical=sex", log_msg)
+        self.assertIn("year=2023", log_msg)
+        self.assertIn(download_nndss_annual_data.CDC_WONDER_ENDPOINT, log_msg)
+
+    @mock.patch('download_nndss_annual_data.logging.fatal')
+    @mock.patch('download_nndss_annual_data._rate_limit_wait')
+    def test_query_cdc_wonder_client_error_aborts_immediately(self, _mock_rate_limit, mock_log_fatal):
+        """Verify HTTP 4xx errors abort immediately without retries."""
+        mock_session = mock.MagicMock(spec=requests.Session)
+        client_err_resp = mock.MagicMock()
+        client_err_resp.status_code = 400
+        client_err_resp.text = "Bad Request"
+        client_err_resp.raise_for_status.side_effect = requests.HTTPError("400 Client Error", response=client_err_resp)
+        mock_session.post.return_value = client_err_resp
+
+        with self.assertRaises(RuntimeError) as ctx:
+            download_nndss_annual_data.query_cdc_wonder("<xml/>", vertical='sex', year='2023', session=mock_session)
+        self.assertIn("Fatal HTTP client error", str(ctx.exception))
+        self.assertEqual(mock_session.post.call_count, 1)
+        mock_log_fatal.assert_called_once()
+
+    @mock.patch('download_nndss_annual_data.logging.fatal')
+    @mock.patch('download_nndss_annual_data._rate_limit_wait')
+    def test_query_cdc_wonder_known_error_message_aborts(self, _mock_rate_limit, mock_log_fatal):
+        """Verify known error message responses abort immediately."""
+        mock_session = mock.MagicMock(spec=requests.Session)
+        err_resp = mock.MagicMock()
+        err_resp.status_code = 200
+        err_resp.text = "<response><message>Invalid parameter B_3 specified.</message></response>"
+        err_resp.raise_for_status.return_value = None
+        mock_session.post.return_value = err_resp
+
+        with self.assertRaises(RuntimeError) as ctx:
+            download_nndss_annual_data.query_cdc_wonder("<xml/>", vertical='age', year='2022', session=mock_session)
+        self.assertIn("Invalid parameter B_3 specified.", str(ctx.exception))
+        mock_log_fatal.assert_called_once()
+
     @mock.patch('download_nndss_annual_data.query_cdc_wonder')
     def test_download_vertical_year(self, mock_query):
         mock_query.return_value = SAMPLE_XML_RESPONSE_SEX
 
         with tempfile.TemporaryDirectory() as temp_dir:
             download_nndss_annual_data.download_vertical_year('sex', '2023', temp_dir)
+
+            mock_query.assert_called_once()
+            _, kwargs = mock_query.call_args
+            self.assertEqual(kwargs.get('vertical'), 'sex')
+            self.assertEqual(kwargs.get('year'), '2023')
 
             target_csv = os.path.join(temp_dir, 'sex', 'NNDSS_Annual_Summary_Data_2023.csv')
             self.assertTrue(os.path.exists(target_csv))
@@ -344,6 +421,18 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             # Must not crash or raise exception
             download_nndss_annual_data.download_all(['sex'], ['2023', '2024'], temp_dir)
+            self.assertEqual(mock_download_vy.call_count, 2)
+
+    @mock.patch('download_nndss_annual_data.download_vertical_year')
+    def test_download_all_early_termination_stops_probing_later_years(self, mock_download_vy):
+        """Verify that when a year is unavailable, later future years are not queried."""
+        # 2023 succeeds, 2024 is unavailable. 2025 and 2026 must NEVER be queried.
+        mock_download_vy.side_effect = [True, False]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            download_nndss_annual_data.download_all(
+                ['sex'], ['2023', '2024', '2025', '2026'], temp_dir
+            )
+            # Only 2023 and 2024 should be queried; 2025 and 2026 are skipped early.
             self.assertEqual(mock_download_vy.call_count, 2)
 
     @mock.patch('download_nndss_annual_data.download_vertical_year')
