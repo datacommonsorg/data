@@ -30,8 +30,8 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_, 'test_data/test_import_data.csv'),
-                    'r') as f:
+                    os.path.join(module_dir_,
+                                 'test_data/test_import_data.csv'), 'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
 
@@ -59,6 +59,96 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     expected_str: str = expected.read()
                     self.assertEqual(test_str, expected_str)
             os.remove(test_tmcf)
+
+    def test_filter_cross_border_monitors(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            create_csv(test_csv)
+            observations = [
+                {
+                    'State Code': '80',
+                    'County Code': '001',
+                    'Site Num': '0001',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '32.5',
+                    'Longitude': '-117.0',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Mexico Monitor',
+                },
+                {
+                    'State Code': 'CC',
+                    'County Code': '004',
+                    'Site Num': '0002',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '44.8',
+                    'Longitude': '-66.9',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Canada Monitor',
+                },
+            ]
+            write_csv(test_csv, iter(observations))
+            with open(test_csv, 'r') as f:
+                reader = list(csv.DictReader(f))
+                self.assertEqual(len(reader), 0)
+
+    def test_unit_mapping(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            create_csv(test_csv)
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '0023',
+                    'Parameter Code': '88101',
+                    'POC': '1',
+                    'Latitude': '33.55',
+                    'Longitude': '-86.81',
+                    'Pollutant Standard': 'PM25 24-hour 2012',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Micrograms/cubic meter (LC)',
+                    'Arithmetic Mean': '3.8',
+                    '1st Max Value': '3.8',
+                    'AQI': '16',
+                    'Local Site Name': 'North Birmingham',
+                },
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '0023',
+                    'Parameter Code': '81102',
+                    'POC': '4',
+                    'Latitude': '33.55',
+                    'Longitude': '-86.81',
+                    'Pollutant Standard': 'PM10 24-hour 2006',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Micrograms/cubic meter (25 C)',
+                    'Arithmetic Mean': '11',
+                    '1st Max Value': '11',
+                    'AQI': '10',
+                    'Local Site Name': 'North Birmingham',
+                },
+            ]
+            write_csv(test_csv, iter(observations))
+            with open(test_csv, 'r') as f:
+                rows = list(csv.DictReader(f))
+                self.assertEqual(len(rows), 2)
+                self.assertEqual(rows[0]['Units'],
+                                 'MicrogramsPerCubicMeter_lc')
+                self.assertEqual(rows[1]['Units'],
+                                 'MicrogramsPerCubicMeter_25C')
 
 
 if __name__ == '__main__':

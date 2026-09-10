@@ -143,3 +143,102 @@ populationType: dcs:Atmosphere
 measuredProperty: dcs:airQualityIndex
 statType: dcs:measuredValue
 pollutant: dcs:PM10
+
+## Custom Units
+
+Node: dcid:MicrogramsPerCubicMeter_lc
+typeOf: dcs:UnitOfMeasure
+name: "MicrogramsPerCubicMeter_lc"
+description: "Micrograms per cubic meter (local conditions)"
+
+Node: dcid:MicrogramsPerCubicMeter_25C
+typeOf: dcs:UnitOfMeasure
+name: "MicrogramsPerCubicMeter_25C"
+description: "Micrograms per cubic meter at 25 degrees Celsius"
+
+## Measurement Standards
+
+Node: dcid:Ozone_8hour_2015
+typeOf: dcs:MeasurementMethodEnum
+name: "Ozone_8hour_2015"
+
+Node: dcid:Ozone_8hour_2008
+typeOf: dcs:MeasurementMethodEnum
+name: "Ozone_8hour_2008"
+
+Node: dcid:Ozone_8hour_1997
+typeOf: dcs:MeasurementMethodEnum
+name: "Ozone_8hour_1997"
+
+Node: dcid:Ozone_1hour_1979
+typeOf: dcs:MeasurementMethodEnum
+name: "Ozone_1hour_1979"
+
+Node: dcid:SO2_1hour_2010
+typeOf: dcs:MeasurementMethodEnum
+name: "SO2_1hour_2010"
+
+Node: dcid:SO2_24hour_1971
+typeOf: dcs:MeasurementMethodEnum
+name: "SO2_24hour_1971"
+
+Node: dcid:SO2_3hour_1971
+typeOf: dcs:MeasurementMethodEnum
+name: "SO2_3hour_1971"
+
+Node: dcid:SO2_Annual_1971
+typeOf: dcs:MeasurementMethodEnum
+name: "SO2_Annual_1971"
+
+Node: dcid:CO_1hour_1971
+typeOf: dcs:MeasurementMethodEnum
+name: "CO_1hour_1971"
+
+Node: dcid:CO_8hour_1971
+typeOf: dcs:MeasurementMethodEnum
+name: "CO_8hour_1971"
+
+Node: dcid:NO2_1hour
+typeOf: dcs:MeasurementMethodEnum
+name: "NO2_1hour"
+
+Node: dcid:NO2_1hour_2010
+typeOf: dcs:MeasurementMethodEnum
+name: "NO2_1hour_2010"
+
+Node: dcid:NO2_Annual_1971
+typeOf: dcs:MeasurementMethodEnum
+name: "NO2_Annual_1971"
+
+Node: dcid:PM25_24hour_2012
+typeOf: dcs:MeasurementMethodEnum
+name: "PM25_24hour_2012"
+
+Node: dcid:PM25_24hour_2006
+typeOf: dcs:MeasurementMethodEnum
+name: "PM25_24hour_2006"
+
+Node: dcid:PM25_24hour_1997
+typeOf: dcs:MeasurementMethodEnum
+name: "PM25_24hour_1997"
+
+Node: dcid:PM25_Annual_2012
+typeOf: dcs:MeasurementMethodEnum
+name: "PM25_Annual_2012"
+
+Node: dcid:PM25_Annual_2006
+typeOf: dcs:MeasurementMethodEnum
+name: "PM25_Annual_2006"
+
+Node: dcid:PM25_Annual_1997
+typeOf: dcs:MeasurementMethodEnum
+name: "PM25_Annual_1997"
+
+Node: dcid:PM10_24hour_2006
+typeOf: dcs:MeasurementMethodEnum
+name: "PM10_24hour_2006"
+
+Node: dcid:PM10_Annual_1987
+typeOf: dcs:MeasurementMethodEnum
+name: "PM10_Annual_1987"
+

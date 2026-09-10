@@ -17,6 +17,7 @@ Generates cleaned CSV and template MCF files for the EPA AirData.
 Usage: python3 air_quality.py <end_year>
 '''
 import csv, os, sys, requests, io, zipfile
+from urllib3.util import Retry
 
 from absl import app
 from absl import flags
@@ -39,6 +40,13 @@ POLLUTANTS = {
     '42602': 'NO2',
     '88101': 'PM2.5',
     '81102': 'PM10',
+}
+
+UNIT_MAP = {
+    'micrograms/cubic meter (lc)': 'MicrogramsPerCubicMeter_lc',
+    'micrograms/cubic meter (25 c)': 'MicrogramsPerCubicMeter_25C',
+    'parts per million': 'PartsPerMillion',
+    'parts per billion': 'PartsPerBillion',
 }
 
 CSV_COLUMNS = [
@@ -127,6 +135,9 @@ def write_csv(csv_file_path, reader):
         monitors = {}
         keys = set()
         for observation in reader:
+            # Skip cross-border monitors outside US (80 = Mexico, CC = Canada)
+            if observation.get('State Code') in ('80', 'CC'):
+                continue
             # For a given site and pollutant standard, select the same monitor
             monitor_key = (
                 observation['State Code'],
@@ -149,6 +160,13 @@ def write_csv(csv_file_path, reader):
                 continue
             keys.add(key)
             suffix = POLLUTANTS[observation["Parameter Code"]]
+            county = ('dcid:geoId/' + observation['State Code'] +
+                      observation['County Code'])
+            raw_unit_str = observation.get('Units of Measure', '')
+            unit = UNIT_MAP.get(
+                raw_unit_str.strip().lower()) if raw_unit_str else ''
+            if not unit and raw_unit_str:
+                unit = get_camel_case(raw_unit_str)
             new_row = {
                 'Date':
                     observation['Date Local'],
@@ -164,12 +182,11 @@ def write_csv(csv_file_path, reader):
                         lat=observation['Latitude'],
                         long=observation['Longitude']),
                 'County':
-                    'dcid:geoId/' + observation['State Code'] +
-                    observation['County Code'],
+                    county,
                 'POC':
                     observation['POC'],
                 'Units':
-                    get_camel_case(observation['Units of Measure']),
+                    unit,
                 'Method':
                     get_pollutant_standard(observation['Pollutant Standard']),
                 'Mean':
@@ -201,12 +218,22 @@ def main(_):
         end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} upto {end_year}')
     create_csv('EPA_AirQuality.csv')
+    session = requests.Session()
+    adapter = requests.adapters.HTTPAdapter(max_retries=Retry(
+        total=10,
+        backoff_factor=2,
+        status_forcelist=[429, 500, 502, 503, 504],
+        raise_on_status=False,
+    ))
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
     for pollutant in POLLUTANTS:
         for year in range(start_year, int(end_year) + 1):
             filename = f'daily_{pollutant}_{year}'
             print(filename)
-            response = requests.get(
-                f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+            url = f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip'
+            response = session.get(url, timeout=120)
+            response.raise_for_status()
             with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
                 with zf.open(f'{filename}.csv', 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
