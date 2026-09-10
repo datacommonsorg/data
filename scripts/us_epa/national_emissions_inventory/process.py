@@ -188,57 +188,51 @@ class USAirEmissionTrends:
         Returns:
             df (pd.DataFrame): provides the cleaned df as output
         """
-        try:
-            logging.info(f"Processing file: {file_path}")
-            df = pd.read_csv(file_path, header=0, low_memory=False)
+        logging.info(f"Processing file: {file_path}")
+        df = pd.read_csv(file_path, header=0, low_memory=False)
 
-            pd.set_option('display.max_columns', 14)
-            df = self._regularize_columns(df, file_path)
-            df['pollutant code'] = df['pollutant code'].astype(str)
-            df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
+        pd.set_option('display.max_columns', 14)
+        df = self._regularize_columns(df, file_path)
+        df['pollutant code'] = df['pollutant code'].astype(str)
+        df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
 
-            # Convert geo_Id to numeric and filter based on range
-            df['geo_Id'] = pd.to_numeric(
-                df['geo_Id'], errors='coerce'
-            )  # Convert to numeric, invalid parsing will be set as NaN
-            df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
+        # Convert geo_Id to numeric and filter based on range
+        df['geo_Id'] = pd.to_numeric(
+            df['geo_Id'], errors='coerce'
+        )  # Convert to numeric, invalid parsing will be set as NaN
+        df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
 
-            # Remove if Tribal Details are needed
-            df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
-            df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
-            df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
-            df['geo_Id'] = df['geo_Id'].astype(str)
+        # Remove if Tribal Details are needed
+        df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
+        df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
+        df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
+        df['geo_Id'] = df['geo_Id'].astype(str)
 
-            # Remove if Tribal Details are needed
-            df['scc'] = df['scc'].astype(str)
-            df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
-                                 df['scc'].str[0])
-            df['geo_Id'] = 'geoId/' + df['geo_Id']
-            df.rename(columns=replacement_17, inplace=True)
-            df_pollutants = df[df['pollutant code'].isin(pollutants)]
-            df_pollutants = self._data_standardize(df_pollutants,
-                                                   'pollutant code')
-            df['pollutant code'] = ''
-            df = pd.concat([df, df_pollutants])
-            df = self._data_standardize(df, 'unit')
-            df['scc_name'] = df['scc'].astype(str)
-            df = df.replace({'scc_name': replace_source_metadata})
-            df['scc_name'] = df['scc_name'].str.replace(' ', '')
-            df['SV'] = ('Annual_Amount_Emissions_' +
-                        df['pollutant code'].astype(str) + '_SCC_' +
-                        df['scc'].astype(str)) + '_' + df['scc_name']
+        # Remove if Tribal Details are needed
+        df['scc'] = df['scc'].astype(str)
+        df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
+                             df['scc'].str[0])
+        df['geo_Id'] = 'geoId/' + df['geo_Id']
+        df.rename(columns=replacement_17, inplace=True)
+        df_pollutants = df[df['pollutant code'].isin(pollutants)]
+        df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
+        df['pollutant code'] = ''
+        df = pd.concat([df, df_pollutants])
+        df = self._data_standardize(df, 'unit')
+        df['scc_name'] = df['scc'].astype(str)
+        df = df.replace({'scc_name': replace_source_metadata})
+        df['scc_name'] = df['scc_name'].str.replace(' ', '')
+        df['SV'] = ('Annual_Amount_Emissions_' +
+                    df['pollutant code'].astype(str) + '_SCC_' +
+                    df['scc'].astype(str)) + '_' + df['scc_name']
 
-            df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
-            df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
-            df = df.drop(columns=drop_df)
-            df = df.drop(df[df['observation'] == '.'].index)
-            # safely turn any non-numeric values into NaN
-            df['observation'] = pd.to_numeric(df['observation'],
-                                              errors='coerce')
-            return df
-        except Exception as e:
-            logging.exception(f"Error processing file {file_path}: {e}")
-            raise
+        df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
+        df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
+        df = df.drop(columns=drop_df)
+        df = df.drop(df[df['observation'] == '.'].index)
+        # safely turn any non-numeric values into NaN
+        df['observation'] = pd.to_numeric(df['observation'], errors='coerce')
+        return df
 
     def _process_file(self, file_path: str) -> None:
         """
@@ -326,7 +320,6 @@ class USAirEmissionTrends:
                 dfs.append(pd.read_csv(f, low_memory=False))
                 logging.info(f"Appending {f}")
             except Exception as e:
-                logging.exception(f"Error reading intermediate file {f}: {e}")
                 logging.fatal(
                     f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
                 )
@@ -419,7 +412,6 @@ def process_files(input_path: str, output_file_path: str,
             if file.lower().endswith('.csv')
         ]
     except Exception as e:
-        logging.exception(f"Error finding input files: {e}")
         logging.fatal(
             f"Error finding input files: {e}. Run the download script first.\n{traceback.format_exc()}"
         )
@@ -444,7 +436,6 @@ def process_files(input_path: str, output_file_path: str,
         loader.generate_mcf()
         loader.generate_tmcf()
     except Exception as e:
-        logging.exception(f"An unexpected error occurred: {e}")
         logging.fatal(
             f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
 
