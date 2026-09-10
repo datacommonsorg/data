@@ -14,6 +14,7 @@
 """Processes CDC 500 cities data into aggregated state-level health indicators."""
 
 import os
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -25,6 +26,9 @@ _DEFAULT_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'CDC500State_Output')
 
 flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
                     'Directory to write output CSV.')
+flags.DEFINE_string(
+    'project', None,
+    'GCP project ID for BigQuery. Defaults to ambient environment if omitted.')
 
 QUERY = """
 WITH cdc_sv AS (
@@ -115,7 +119,9 @@ SELECT
   p.statvar, 
   SUBSTR(p.observation_about, 1, 8) AS observation_about,
   p.observation_date, 
-  CONCAT('dcAggregate/', p.measurement_method) AS measurement_method,
+  COALESCE(
+    CONCAT('dcAggregate/', p.measurement_method), 'dcAggregate'
+  ) AS measurement_method,
   p.pop_statvar AS population_statvar,
   SAFE_DIVIDE(
     SUM(SAFE_CAST(c.population AS FLOAT64) * SAFE_CAST(p.percent AS FLOAT64)),
@@ -160,7 +166,7 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
 
 def main(argv):
     del argv  # Unused.
-    client = bigquery.Client()
+    client = bigquery.Client(project=_FLAGS.project)
     output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
     run_process(client, output_file)
 

@@ -18,7 +18,9 @@ import re
 import tempfile
 import unittest
 from unittest import mock
+
 from absl import flags
+from absl.testing import flagsaver
 import pandas as pd
 
 from scripts.us_cdc.cdc500_state import process
@@ -27,8 +29,16 @@ FLAGS = flags.FLAGS
 
 
 class CDC500StateProcessTest(unittest.TestCase):
+    """Unit tests for CDC 500 State aggregation processing."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        if not FLAGS.is_parsed():
+            FLAGS(['test'])
 
     def test_query_constants(self):
+        """Verifies key SQL clauses and excluded variables in process.QUERY."""
         query = process.QUERY
         self.assertIn("spanner_dc_graph_prod_DEFAULT.TimeSeries", query)
         self.assertIn("spanner_dc_graph_prod_DEFAULT.Observation", query)
@@ -115,6 +125,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertAlmostEqual(weighted_avg, 36.0, places=4)
 
     def test_run_process_success(self):
+        """Tests successful query execution and atomic output writing."""
         mock_client = mock.MagicMock()
         sample_data = pd.DataFrame({
             'statvar': ['Percent_Person_18OrMoreYears_WithAnyDisability'],
@@ -130,7 +141,7 @@ class CDC500StateProcessTest(unittest.TestCase):
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
             result = process.run_process(mock_client, output_file)
             self.assertTrue(result)
-            mock_client.query.assert_called_once()
+            mock_client.query.assert_called_once_with(process.QUERY)
             self.assertTrue(os.path.exists(output_file))
             self.assertFalse(os.path.exists(output_file + '.tmp'))
             saved_df = pd.read_csv(output_file)
@@ -138,6 +149,7 @@ class CDC500StateProcessTest(unittest.TestCase):
             self.assertEqual(saved_df['observation_about'].iloc[0], 'geoId/06')
 
     def test_run_process_empty_dataframe_raises_runtime_error(self):
+        """Tests that empty query results raise RuntimeError."""
         mock_client = mock.MagicMock()
         mock_client.query.return_value.to_dataframe.return_value = pd.DataFrame()
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -146,6 +158,7 @@ class CDC500StateProcessTest(unittest.TestCase):
                 process.run_process(mock_client, output_file)
 
     def test_run_process_query_error(self):
+        """Tests propagation of BigQuery query execution errors."""
         mock_client = mock.MagicMock()
         mock_client.query.side_effect = RuntimeError("BigQuery Access Denied")
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -154,6 +167,7 @@ class CDC500StateProcessTest(unittest.TestCase):
                 process.run_process(mock_client, output_file)
 
     def test_run_process_dataframe_error(self):
+        """Tests propagation of query result download errors."""
         mock_client = mock.MagicMock()
         mock_query_job = mock.MagicMock()
         mock_query_job.to_dataframe.side_effect = RuntimeError(
@@ -167,14 +181,16 @@ class CDC500StateProcessTest(unittest.TestCase):
     @mock.patch('scripts.us_cdc.cdc500_state.process.run_process')
     @mock.patch('google.cloud.bigquery.Client')
     def test_main(self, mock_bq_client_cls, mock_run_process):
+        """Tests process.main flag parsing and client instantiation."""
         mock_client_instance = mock.MagicMock()
         mock_bq_client_cls.return_value = mock_client_instance
         with tempfile.TemporaryDirectory() as tmp_dir:
-            FLAGS(['test_process', f'--output_dir={tmp_dir}'])
-            process.main([])
-            expected_output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            mock_run_process.assert_called_once_with(mock_client_instance,
-                                                     expected_output_file)
+            with flagsaver.flagsaver(output_dir=tmp_dir, project='test-project'):
+                process.main([])
+                expected_output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+                mock_bq_client_cls.assert_called_once_with(project='test-project')
+                mock_run_process.assert_called_once_with(mock_client_instance,
+                                                         expected_output_file)
 
 
 if __name__ == '__main__':

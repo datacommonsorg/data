@@ -7,6 +7,11 @@
             "validator": "MAX_VALUE_CHECK",
             "params": {
                 "maximum": 100
+            },
+            "scope": {
+                "variables": {
+                    "contains_all": ["Percent"]
+                }
             }
         },
         {
@@ -15,6 +20,11 @@
             "validator": "MIN_VALUE_CHECK",
             "params": {
                 "minimum": 0
+            },
+            "scope": {
+                "variables": {
+                    "contains_all": ["Percent"]
+                }
             }
         },
         {
