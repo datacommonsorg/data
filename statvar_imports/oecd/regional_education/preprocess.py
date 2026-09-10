@@ -45,14 +45,6 @@ def preprocess(base_path=None):
     output_folder = os.path.join(base_path, 'output')
     os.makedirs(output_folder, exist_ok=True)
 
-    custom_schema_file = os.path.join(
-        base_path, 'oecd_regional_education_custom_schema.mcf')
-    if os.path.isfile(custom_schema_file):
-        shutil.copyfile(
-            custom_schema_file,
-            os.path.join(output_folder, 'oecd_regional_education_custom_schema.mcf'))
-        logging.info(f"Copied custom schema to {output_folder}")
-
     places_resolved_file = os.path.join(
         base_path, 'oecd_regional_education_places_resolved.csv')
     valid_places = set()
@@ -76,14 +68,11 @@ def preprocess(base_path=None):
 
     if not os.path.isdir(target_folder):
         logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
-        return
+        raise FileNotFoundError(f"Folder '{folder_name}' not found in '{base_path}'")
 
     pattern = re.compile(r'^A.*$', re.IGNORECASE)
-    raw_file = None
-    for filename in os.listdir(target_folder):
-        if pattern.match(filename):
-            raw_file = filename
-            break
+    candidate_files = sorted([f for f in os.listdir(target_folder) if pattern.match(f)])
+    raw_file = candidate_files[0] if candidate_files else None
 
     target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
     unmapped_log_path = os.path.join(counters_folder, 'unresolved_places.csv')
@@ -93,9 +82,7 @@ def preprocess(base_path=None):
         tmp_path = os.path.join(target_folder, 'filtered_tmp.csv')
         logging.info(f"Filtering '{raw_file}' into 'oecd_regional_education_data.csv'...")
         _filter_csv(src_path, tmp_path, valid_places, unmapped_log_path=unmapped_log_path)
-        if os.path.exists(target_csv):
-            os.remove(target_csv)
-        os.rename(tmp_path, target_csv)
+        os.replace(tmp_path, target_csv)
         # Preserve original downloaded raw file in GCS source_files per Data Commons guidelines
         logging.info(f"Retained raw downloaded source file at '{src_path}'.")
         logging.info("Preprocessing and filtering completed successfully.")
@@ -106,7 +93,9 @@ def preprocess(base_path=None):
         os.replace(tmp_path, target_csv)
         logging.info("Filtering completed successfully.")
     else:
-        logging.info("No matching source data file found to process.")
+        logging.error("No matching source data file found to process.")
+        raise FileNotFoundError(
+            f"No candidate raw data file found to process in '{target_folder}'.")
 
 
 def _filter_csv(src_path: str, dst_path: str, valid_places: set, unmapped_log_path: str = None):
