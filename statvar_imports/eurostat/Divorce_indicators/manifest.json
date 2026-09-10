@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStat_Divorce_Indicators",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/demo_ndivind/default/table?lang=en",
+      "provenance_description": "Annual national and regional European demographic statistics on marriages, divorces, and related indicators (such as crude rates, age at first marriage, and citizenship breakdowns) compiled by Eurostat from data voluntarily and mandatorily provided by National Statistical Institutes via the POPSTAT questionnaire.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "final_output/Divorce_indicators_output.tmcf",
+          "cleaned_csv": "final_output/Divorce_indicators_output.csv"
+        }
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
+        }
+   ]
+}
