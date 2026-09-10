@@ -3,6 +3,7 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
+            "description": "Disabled because differ tool is bypassed (invoke_differ_tool: false) due to large dataset volume.",
             "enabled": false
         },
         {
@@ -12,19 +13,34 @@
         },
         {
             "rule_id": "check_missing_refs_count",
+            "description": "Allow expected latLong coordinates warnings from site location property in local resolution mode.",
             "validator": "MISSING_REFS_COUNT",
             "params": {
-                "threshold": 0
+                "threshold": 4500000
             }
         },
         {
             "rule_id": "check_lint_error_count",
+            "description": "Allow expected missing observationAbout reference lint errors for newly added upstream EPA monitoring sites awaiting Knowledge Graph ingestion.",
             "validator": "LINT_ERROR_COUNT",
             "params": {
-                "threshold": 0
+                "threshold": 100000
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verifies that MaxDate is uniform across all air quality StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_date_freshness",
+            "description": "Verifies that the dataset maximum observation date meets freshness requirements (>= 2024).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "condition": "latest_date >= '2024'"
             }
         }
     ]
 }
-
-
