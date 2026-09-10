@@ -171,14 +171,14 @@ def main(_):
     os.makedirs(demographics_dir, exist_ok=True)
     for table in DEMOGRAPHICS_TABLES:
         filepath = os.path.join(demographics_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Education Data
     education_dir = os.path.join(_SCRIPT_DIR, "mongolia_education", "input_files")
     os.makedirs(education_dir, exist_ok=True)
     for table in EDUCATION_TABLES:
         filepath = os.path.join(education_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Health Data
     health_dir = os.path.join(_SCRIPT_DIR, "mongolia_health", "input_files")
