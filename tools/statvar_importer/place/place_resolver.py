@@ -243,8 +243,6 @@ class PlaceResolver:
                 )
             if maps_result:
                 results[key] = maps_result
-            else:
-                self._set_failed_cache_value(key, {})
 
         # Collect all placeIds to be resolved that are not in cache.
         places_ids = {}
@@ -619,7 +617,6 @@ class PlaceResolver:
 
         # Lookup Google Maps API.
         if not self._maps_api_key:
-            self._set_failed_cache_value(place_key, {})
             logging.log_every_n(
                 logging.ERROR,
                 f'No maps key. Please set --maps_api_key for place lookup.',
@@ -684,7 +681,6 @@ class PlaceResolver:
 
         # Lookup Google Maps API.
         if not self._maps_api_key:
-            self._set_failed_cache_value(place_key, {})
             logging.log_every_n(
                 logging.ERROR,
                 f'No maps key. Please set --maps_api_key for place lookup.',
