@@ -51,15 +51,13 @@ class TestProcess(unittest.TestCase):
         mcf_file_path = os.path.join(tmp_dir, "test_public_school.mcf")
         tmcf_file_path = os.path.join(tmp_dir, "test_public_school.tmcf")
         csv_path_place = os.path.join(tmp_dir, "test_public_school_place.csv")
-        tmcf_path_place = os.path.join(tmp_dir,
-                                       "test_public_school_place.tmcf")
+        tmcf_path_place = os.path.join(tmp_dir, "test_public_school_place.tmcf")
         dup_csv_path_place = os.path.join(tmp_dir,
                                           "test_public_school_place_dup.csv")
 
         loader = NCESPublicSchool(cls.ip_data, cleaned_csv_file_path,
-                                  mcf_file_path, tmcf_file_path,
-                                  csv_path_place, dup_csv_path_place,
-                                  tmcf_path_place)
+                                  mcf_file_path, tmcf_file_path, csv_path_place,
+                                  dup_csv_path_place, tmcf_path_place)
 
         with patch(
                 "common.us_education.dc_api_is_defined_dcid",

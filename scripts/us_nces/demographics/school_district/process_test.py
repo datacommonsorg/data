@@ -51,12 +51,11 @@ class TestProcess(unittest.TestCase):
                                              "test_school_district.csv")
         mcf_file_path = os.path.join(tmp_dir, "test_school_district.mcf")
         tmcf_file_path = os.path.join(tmp_dir, "test_school_district.tmcf")
-        csv_path_place = os.path.join(tmp_dir,
-                                      "test_school_district_place.csv")
+        csv_path_place = os.path.join(tmp_dir, "test_school_district_place.csv")
         tmcf_path_place = os.path.join(tmp_dir,
                                        "test_school_district_place.tmcf")
-        dup_csv_path_place = os.path.join(
-            tmp_dir, "test_school_district_place_dup.csv")
+        dup_csv_path_place = os.path.join(tmp_dir,
+                                          "test_school_district_place_dup.csv")
 
         loader = NCESDistrictSchool(cls.ip_data, cleaned_csv_file_path,
                                     mcf_file_path, tmcf_file_path,
