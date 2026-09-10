@@ -1045,8 +1045,12 @@ class StatVarsMap:
                             'member',
                             'provenance',
                             'relevantVariable',
+                            'name',
+                            'nameWithLanguage',
+                            'description',
+                            'descriptionUrl',
                         ],
-                        # Retain SVs with new PVs like name
+                        # Retain SVs with new PVs like alternateName
                         'output_nodes_with_additions': True,
                     },
                 ),
