@@ -108,6 +108,9 @@ def preprocess_poverty(src_path=ORIGINAL_CSV, dst_path=CLEANED_CSV, min_county_c
             len(df),
         )
 
+    # Save only 100 rows for the checked-in dataset
+    df = df.head(100)
+
     # Atomic write to destination file
     dst_dir = os.path.dirname(os.path.abspath(dst_path))
     os.makedirs(dst_dir, exist_ok=True)

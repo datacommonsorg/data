@@ -16,11 +16,10 @@
       }
     },
     {
-      "rule_id": "check_num_places_county_count",
-      "validator": "NUM_PLACES_COUNT",
+      "rule_id": "minimum_observations_per_statvar",
+      "validator": "NUM_OBSERVATIONS_CHECK",
       "params": {
-        "minimum": 3100,
-        "maximum": 3250
+        "minimum": 1
       }
     },
     {
