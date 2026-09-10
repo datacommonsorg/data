@@ -1,0 +1,31 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness_broad_cohorts",
+            "description": "Checks that broad working-age cohorts (20-64, 25-54, 55-64) have observations up to at least 2025.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM stats WHERE StatVar IN ('Count_Person_20To64Years', 'Count_Person_25To54Years', 'Count_Person_55To64Years')",
+                "condition": "CAST(MaxDate AS INTEGER) >= 2025"
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness_standard_cohorts",
+            "description": "Checks that standard demographic cohorts have observations up to at least 2023.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM stats WHERE StatVar NOT IN ('Count_Person_20To64Years', 'Count_Person_25To54Years', 'Count_Person_55To64Years')",
+                "condition": "CAST(MaxDate AS INTEGER) >= 2023"
+            }
+        }
+    ]
+}
