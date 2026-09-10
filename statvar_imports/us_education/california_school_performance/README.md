@@ -1,0 +1,113 @@
+# California School Performance (CAASPP) Data Commons Import
+
+## Overview
+This directory contains the automated Data Commons import pipeline for California public school academic performance data from the **California Assessment of Student Performance and Progress (CAASPP)** Smarter Balanced Summative Assessments.
+
+The data covers student achievement in **English Language Arts/Literacy (ELA)** and **Mathematics** across California public schools, school districts, counties, and statewide aggregates from 2015 to the present.
+
+- **Primary Source**: California Department of Education (CDE) / Educational Testing Service (ETS)
+- **Research Portal**: [https://caaspp-elpac.ets.org/caaspp/ResearchFileListSB](https://caaspp-elpac.ets.org/caaspp/ResearchFileListSB)
+- **Import Tier**: Automated StatVar Import
+
+---
+
+## Directory Structure
+
+```
+california_school_performance/
+├── config/
+│   ├── california_school_performance_metadata.csv     # Processor configurations (delimiters, headers, output columns)
+│   └── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
+├── counters/
+│   └── california_school_performance_counters.csv     # Transformation counter summary
+├── golden_data/
+│   ├── golden_observations.csv                        # Critical golden entity/place observations
+│   └── golden_summary_report.csv                      # Golden summary report for statvar validation
+├── test_data/                                         # Test fixtures for E2E validation
+│   ├── sample_input.txt                               # Sample raw CAASPP input records
+│   ├── sample_state_output.csv                        # Expected sample CSV observations
+│   └── sample_state_output.tmcf                       # Expected sample TMCF mapping
+├── california_school_performance_test.py              # Unit tests for download and stream normalization
+├── download.py                                        # Automated data fetch and extraction script
+├── manifest.json                                      # Data Commons import specification
+├── README.md                                          # Documentation and usage guide
+└── validation_config.json                             # Production import validation rules
+```
+
+
+---
+
+## Statistical Variables (StatVars)
+
+The pipeline maps raw test records into **5,966 distinct Statistical Variables** conforming to the Data Commons education schema:
+
+- **Population Type**: `Student`
+- **School Subjects**:
+  - `EnglishLanguageArts` (Test ID: 1)
+  - `Mathematics` (Test ID: 2)
+- **Grade Levels**:
+  - Grades 3, 4, 5, 6, 7, 8, 11 (`dcid:SchoolGrade3` – `dcid:SchoolGrade11`)
+  - Grade 13 represents "All Grades combined", mapped to unconstrained student population StatVars without grade constraints (e.g. `Count_Student_EnglishLanguageArts`)
+- **Demographic Subgroups (55 groups)**:
+  - Gender (`Male`, `Female`)
+  - Race / Ethnicity (`White`, `BlackOrAfricanAmericanAlone`, `Asian`, `Filipino`, `HispanicOrLatino`, `AmericanIndianOrAlaskaNative`, `NativeHawaiianOrOtherPacificIslanderAlone`, `TwoOrMoreRaces`)
+  - Socioeconomic Status (`EconomicallyDisadvantaged`, `NotEconomicallyDisadvantaged`)
+  - Intersection of Race × Socioeconomic Status (16 groups)
+  - Disability Status (`WithDisability`, `NoDisability`)
+  - English Learner & Fluency Status (`InitialFluentProficient`, `ReclassifiedFluentProficient`, `OnlyEnglish`, `CurrentLearner`, `EverLearned`, `Adult`, `ToBeDetermined`, duration `< 12 months`, duration `>= 12 months`)
+  - Parent Education Level (`LessThanHighSchoolGraduate`, `HighSchoolGraduateIncludesEquivalency`, `SomeCollegeNoDegree`, `CollegeGraduate`, `GraduateSchoolOrPostGraduate`, `CA_DeclinedToState`)
+  - Special Student Populations (`Homeless`, `HavingHome`, `Foster`, `NotFoster`, `Migrant`, `NotMigrant`, `FamilyOfArmedForces`, `NotFamilyOfArmedForces`)
+- **Metrics**:
+  - `Total Students Tested with Scores`: Count of students (`measuredProperty: count`)
+  - `Mean Scale Score`: Mean assessment score (`measuredProperty: assessmentScore`, `statType: meanValue`)
+  - `Percentage Standard Exceeded`: Educational achievement level `CA_StandardExceeded` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Met`: Educational achievement level `CA_StandardMet` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Met and Above`: Educational achievement level `CA_StandardMetAndAbove` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Nearly Met`: Educational achievement level `CA_StandardNearlyMet` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Not Met`: Educational achievement level `CA_StandardNotMet` (`scalingFactor: 100`, `unit: Percent`)
+
+---
+
+## How to Run
+
+### 1. Download and Process the Entire Dataset (All Available Years: 2015–2025)
+To download and process all years present at source (skipping 2020 when CAASPP was cancelled statewide due to COVID-19):
+```bash
+# Step 1: Download and normalize data
+python3 download.py --years=all
+
+# Step 2: Generate TMCF and CSV observations using stat_var_processor
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/sb_ca_all_years_normalized.txt \
+  --pv_map=config/california_school_performance_pvmap.csv \
+  --config_file=config/california_school_performance_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_path=output_files/california_school_performance_all_years_output \
+  --output_counters=counters/california_school_performance_counters.csv
+```
+This automatically fetches each year, normalizes differences across formats, and runs `stat_var_processor.py` over the consolidated multi-year dataset (`sb_ca_all_years_normalized.txt`), generating **64,000+ observations** across all 10 years.
+
+### 2. Download and Process Specific Years
+To fetch and process specific years:
+```bash
+# Specific range
+python3 download.py --years=2015-2024
+
+# Specific single year
+python3 download.py --years=2024
+```
+
+### 3. Quick Test Run
+To download a lightweight test sample and verify the pipeline:
+```bash
+python3 download.py --test_mode
+```
+
+---
+
+## Output Files
+The pipeline produces standard Data Commons import artifacts in `output_files/`:
+- `california_school_performance_all_years_output.csv`: Complete multi-year observations table (~64,000 rows across 2015–2025)
+- `california_school_performance_all_years_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
+- `california_school_performance_{YEAR}_output.csv`: Per-year individual observation tables
+
