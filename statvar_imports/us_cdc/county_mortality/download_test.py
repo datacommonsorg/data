@@ -159,11 +159,15 @@ class DownloadTest(unittest.TestCase):
             self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
 
             # Create file with both initial (2018) and latest (2024) -> should be True
-            f.write_text("Header,col1,col2,col3\n" + ",2018,val2,val3\n" * 5 + ",2024,val2,val3\n" * 5)
+            f.write_text(
+                "Header,col1,col2,col3\n"
+                + ",2018,val2,val3\n" * 5
+                + ",2024,val2,val3\n" * 5
+            )
             self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
             self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2025"]))
 
-            # Create file with only 2018 data, but Deaths column equals 2024 -> should NOT match 2024
+            # Create file with only 2018 data, Deaths column equals 2024 (should not match)
             f.write_text("Notes,Year,County,Deaths\n" + ",2018,Kent County,2024\n" * 5)
             self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
 
@@ -180,23 +184,39 @@ class DownloadTest(unittest.TestCase):
             self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
 
             # If intermediate year (e.g. 2021) is requested but missing chunk -> should be False
-            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+            self.assertFalse(
+                download.is_state_downloaded(
+                    temp_dir, "10", years=["2018", "2021", "2024"]
+                )
+            )
 
             # Add intermediate chunk covering 2021 -> should now be True
             chunk_2020 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2020_2021.csv"
             chunk_2020.write_text("Header,col1\n" + "val1,val2\n" * 10)
-            self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+            self.assertTrue(
+                download.is_state_downloaded(
+                    temp_dir, "10", years=["2018", "2021", "2024"]
+                )
+            )
 
             # If an incomplete single combined file also exists (e.g. from an aborted run),
             # but chunk files cover all requested years, it should still return True
             f = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
             f.write_text("Header,col1\n,2018,val1\n" * 5)  # only contains 2018
-            self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+            self.assertTrue(
+                download.is_state_downloaded(
+                    temp_dir, "10", years=["2018", "2021", "2024"]
+                )
+            )
             f.unlink()
 
             # Chunk file that is header-only (e.g. CDC header without data rows) -> should be False
             chunk_2020.write_text("Notes,Year,Year Code,County,County Code,Deaths\n")
-            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+            self.assertFalse(
+                download.is_state_downloaded(
+                    temp_dir, "10", years=["2018", "2021", "2024"]
+                )
+            )
 
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")

@@ -11,15 +11,6 @@ This import acquires and processes county-level mortality statistics across all 
 
 ---
 
-### Prerequisites
-
-Ensure the required Python libraries are installed:
-```bash
-pip install requests beautifulsoup4 lxml retry absl-py
-```
-
----
-
 ### Workflow
 
 The import consists of two fully automated steps:

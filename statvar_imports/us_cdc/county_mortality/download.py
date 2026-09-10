@@ -39,7 +39,9 @@ from urllib.parse import urljoin
 from absl import app, flags, logging
 from bs4 import BeautifulSoup
 import requests
+from requests.adapters import HTTPAdapter
 from retry import retry
+from urllib3.util import Retry
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_INPUT_DIR = os.path.join(script_dir, "input_files")
@@ -165,7 +167,7 @@ def parse_year_list(year_str: str) -> List[str]:
 
 
 class CdcWonderCountyMortalityDownloader:
-    """Automates CDC WONDER sessions and queries for County-Level Mortality data across all causes."""
+    """Automates CDC WONDER sessions and queries for County-Level Mortality data."""
 
     def __init__(
         self,
@@ -176,12 +178,29 @@ class CdcWonderCountyMortalityDownloader:
         self.landing_url = landing_url
         self.timeout = timeout
         self.delay = delay
-        self.session = requests.Session()
-        self.session.headers.update(
-            {"User-Agent": "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"}
-        )
+        self.session = self._create_session()
         self.action_url: Optional[str] = None
         self.base_post_data: List[Tuple[str, str]] = []
+
+    def _create_session(self) -> requests.Session:
+        """Creates a requests.Session with connection pooling and HTTP retries."""
+        session = requests.Session()
+        session.headers.update({
+            "User-Agent": (
+                "Mozilla/5.0 (DataCommons CDC Importer; contact:"
+                " support@datacommons.org)"
+            )
+        })
+        retries = Retry(
+            total=3,
+            backoff_factor=1,
+            status_forcelist=[500, 502, 503, 504],
+            raise_on_status=False,
+        )
+        adapter = HTTPAdapter(max_retries=retries)
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+        return session
 
     @retry(
         tries=3,
@@ -190,16 +209,13 @@ class CdcWonderCountyMortalityDownloader:
         exceptions=(requests.RequestException, ValueError),
     )
     def init_session(self):
-        """Connects to landing page, agrees to data use terms, and stores pre-populated form state."""
+        """Connects to landing page, agrees to terms, and stores pre-populated form state."""
         if hasattr(self, "session") and self.session:
             try:
                 self.session.close()
             except Exception:
                 pass
-        self.session = requests.Session()
-        self.session.headers.update(
-            {"User-Agent": "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"}
-        )
+        self.session = self._create_session()
         self.action_url = None
         self.base_post_data = []
 
@@ -314,11 +330,25 @@ class CdcWonderCountyMortalityDownloader:
 
         for attempt in range(1, max_retries + 1):
             try:
-                res = self.session.post(self.action_url, data=payload, timeout=self.timeout)
+                logging.info(
+                    "Dispatching HTTP POST to %s for state FIPS %s, years %s (attempt %d/%d)...",
+                    self.action_url,
+                    state_fips,
+                    years,
+                    attempt,
+                    max_retries,
+                )
+                res = self.session.post(
+                    self.action_url, data=payload, timeout=self.timeout
+                )
 
                 if res.status_code == 429:
                     retry_after = res.headers.get("Retry-After")
-                    wait_seconds = int(retry_after) if retry_after and retry_after.isdigit() else 1860
+                    wait_seconds = (
+                        int(retry_after)
+                        if retry_after and retry_after.isdigit()
+                        else 1860
+                    )
                     logging.warning(
                         "Encountered HTTP 429 (Too Many Requests). CDC WONDER enforces a 30-minute "
                         "IP block. Waiting %d seconds (%d min) in complete silence for block to "
@@ -333,9 +363,27 @@ class CdcWonderCountyMortalityDownloader:
                     payload = self._build_post_data(state_fips, years)
                     continue
 
-                if res.status_code == 400 and ("too much data" in res.text or "simplify your filters" in res.text):
+                if res.status_code in (401, 403) or (
+                    res.text
+                    and (
+                        "session has expired" in res.text.lower()
+                        or "session timeout" in res.text.lower()
+                    )
+                ):
                     logging.warning(
-                        "FIPS %s query returned 'too much data' (HTTP 400). Returning response for partitioning.",
+                        "Session expired or rejected for FIPS %s. Re-initializing session...",
+                        state_fips,
+                    )
+                    self.init_session()
+                    payload = self._build_post_data(state_fips, years)
+                    continue
+
+                if res.status_code == 400 and (
+                    "too much data" in res.text or "simplify your filters" in res.text
+                ):
+                    logging.warning(
+                        "FIPS %s query returned 'too much data' (HTTP 400). "
+                        "Returning response for partitioning.",
                         state_fips,
                     )
                     return res.text
@@ -344,14 +392,20 @@ class CdcWonderCountyMortalityDownloader:
                 return res.text
 
             except requests.RequestException as e:
-                logging.warning("Query failed for FIPS %s (attempt %d/%d): %s", state_fips, attempt, max_retries, e)
+                logging.warning(
+                    "Query failed for FIPS %s (attempt %d/%d): %s",
+                    state_fips,
+                    attempt,
+                    max_retries,
+                    e,
+                )
                 if attempt == max_retries:
                     raise
                 time.sleep(self.delay * attempt)
-                self.init_session()
-                payload = self._build_post_data(state_fips, years)
 
-        raise RuntimeError(f"Failed to fetch data for state FIPS {state_fips} after {max_retries} retries.")
+        raise RuntimeError(
+            f"Failed to fetch data for state FIPS {state_fips} after {max_retries} retries."
+        )
 
     def download_state(
         self, state_fips: str, years: List[str]
@@ -362,7 +416,12 @@ class CdcWonderCountyMortalityDownloader:
         need_partitioning = state_fips in LARGE_STATES
 
         if not need_partitioning:
-            logging.info("Querying full year range (%s) for state FIPS %s (%s)...", years, state_fips, state_name)
+            logging.info(
+                "Querying full year range (%s) for state FIPS %s (%s)...",
+                years,
+                state_fips,
+                state_name,
+            )
             try:
                 tsv_text = self.execute_query(state_fips, years)
                 first_line = tsv_text.splitlines()[0] if tsv_text else ""
@@ -371,7 +430,7 @@ class CdcWonderCountyMortalityDownloader:
                     time.sleep(self.delay)
                     return results
                 logging.warning(
-                    "%s response not TSV (likely exceeded 75k rows / too much data). Partitioning into chunks...",
+                    "%s response not TSV (likely exceeded 75k rows). Partitioning into chunks...",
                     state_name,
                 )
                 need_partitioning = True
@@ -404,13 +463,15 @@ class CdcWonderCountyMortalityDownloader:
                             success = True
                         else:
                             logging.warning(
-                                "Chunk %s response for %s did not contain valid TSV data. Splitting into single years.",
+                                "Chunk %s response for %s did not contain valid TSV data. "
+                                "Splitting into single years.",
                                 chunk_label,
                                 state_name,
                             )
                     except Exception as e:
                         logging.warning(
-                            "Chunk %s for %s failed with %s. Falling back to single-year queries for this state.",
+                            "Chunk %s for %s failed with %s. Falling back to single-year "
+                            "queries for this state.",
                             chunk_label,
                             state_name,
                             e,
@@ -429,7 +490,9 @@ class CdcWonderCountyMortalityDownloader:
                 sy_text = self.execute_query(state_fips, [single_year])
                 first_line = sy_text.splitlines()[0] if sy_text else ""
                 if "County Code" not in first_line:
-                    raise ValueError(f"Failed to query {state_name} even for single year {single_year}.")
+                    raise ValueError(
+                        f"Failed to query {state_name} even for single year {single_year}."
+                    )
                 results.append((single_year, sy_text))
                 i += 1
 
@@ -549,7 +612,11 @@ def download_county_mortality_data(
         state_name = US_STATES.get(state_fips, f"FIPS-{state_fips}")
 
         if skip_existing and is_state_downloaded(output_dir, state_fips, years=years):
-            existing_files = list(Path(output_dir).glob(f"UnderlyingCauseofDeath_County_{state_fips}*.csv"))
+            existing_files = list(
+                Path(output_dir).glob(
+                    f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
+                )
+            )
             logging.info(
                 "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
                 idx,
@@ -600,7 +667,8 @@ def download_county_mortality_data(
             # Proactive session rotation after batch_size states
             if states_in_batch >= batch_size and idx < len(states):
                 logging.info(
-                    "Processed batch of %d states. Taking a %.1fs cooldown and refreshing session...",
+                    "Processed batch of %d states. Taking a %.1fs cooldown and refreshing "
+                    "session...",
                     states_in_batch,
                     batch_cooldown,
                 )
@@ -609,12 +677,24 @@ def download_county_mortality_data(
                 states_in_batch = 0
 
         except Exception as e:
-            logging.error("Failed downloading state %s (FIPS %s): %s", state_name, state_fips, e)
+            logging.error(
+                "Failed downloading state %s (FIPS %s): %s",
+                state_name,
+                state_fips,
+                e,
+            )
             failed_states.append(state_name)
 
-    logging.info("Download complete: Saved %d files with %d total rows in %s.", total_files, total_rows, output_dir)
+    logging.info(
+        "Download complete: Saved %d files with %d total rows in %s.",
+        total_files,
+        total_rows,
+        output_dir,
+    )
     if failed_states:
-        raise RuntimeError(f"Failed to download data for states: {', '.join(failed_states)}")
+        raise RuntimeError(
+            f"Failed to download data for states: {', '.join(failed_states)}"
+        )
 
 
 def main(_):
@@ -625,7 +705,11 @@ def main(_):
     else:
         states = [s.strip().zfill(2) for s in FLAGS.states.split(",") if s.strip()]
 
-    logging.info("Starting CDC County Mortality live download for %d states, years: %s", len(states), years)
+    logging.info(
+        "Starting CDC County Mortality live download for %d states, years: %s",
+        len(states),
+        years,
+    )
     download_county_mortality_data(
         states=states,
         years=years,
