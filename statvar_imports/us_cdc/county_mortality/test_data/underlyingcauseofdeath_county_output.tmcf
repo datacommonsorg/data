@@ -3,6 +3,5 @@ observationAbout: C:underlyingcauseofdeath_county_output->observationAbout
 observationDate: C:underlyingcauseofdeath_county_output->observationDate
 variableMeasured: C:underlyingcauseofdeath_county_output->variableMeasured
 value: C:underlyingcauseofdeath_county_output->value
-unit: C:underlyingcauseofdeath_county_output->unit
 typeOf: dcs:StatVarObservation
 observationPeriod: P1Y

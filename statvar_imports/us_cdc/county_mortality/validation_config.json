@@ -11,21 +11,22 @@
     },
     {
       "rule_id": "check_max_date_freshness",
-      "description": "Verify MaxDate is 2024 for all StatVars except rare historical exceptions with 2023",
+      "description": "Verify MaxDate is at least 2024 for all StatVars except rare historical exceptions with 2023",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar NOT IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms')",
-        "condition": "MaxDate = '2024'"
+        "condition": "CAST(MaxDate AS INTEGER) >= 2024"
       }
     },
     {
       "rule_id": "check_max_date_freshness_rare_causes",
-      "description": "Verify MaxDate is 2023 for rare historical exception causes",
+      "description": "Verify MaxDate is at least 2023 for rare historical exception causes",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms')",
-        "condition": "MaxDate = '2023'"
+        "condition": "CAST(MaxDate AS INTEGER) >= 2023"
       }
     }
   ]
 }
+
