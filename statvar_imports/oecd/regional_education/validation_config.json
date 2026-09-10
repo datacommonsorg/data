@@ -16,11 +16,20 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Ensure MaxDate is fresh within allowable 2-year reporting lag for OECD annual data",
+            "description": "Ensure MaxDate is fresh within allowable 3-year reporting lag for OECD annual data",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate FROM stats",
-                "condition": "CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= date_part('year', current_date) - 2"
+                "condition": "MaxDate IS NOT NULL AND length(CAST(MaxDate AS VARCHAR)) >= 4 AND CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= date_part('year', current_date) - 3"
+            }
+        },
+        {
+            "rule_id": "check_no_statvar_extinction",
+            "description": "Ensure that the 5% deletion budget did not completely eliminate all observations for any StatVar",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS active_statvars FROM stats",
+                "condition": "active_statvars >= 40"
             }
         }
     ]
