@@ -489,16 +489,16 @@
             "locationOfCrime": "CommercialOrOfficeBuilding"
         },
         "Grocery/Supermarket": {
-            "locationOfCrime": "GroceryStore__Supermarket"
+            "locationOfCrime": "GroceryStore&Supermarket"
         },
         "School-Elementary/Secondary": {
-            "locationOfCrime": "ElementarySchool__HighSchool"
+            "locationOfCrime": "ElementarySchool&HighSchool"
         },
         "Construction Site": {
             "locationOfCrime": "ConstructionSite"
         },
         "Air/Bus/Train Terminal": {
-            "locationOfCrime": "Airport__BusStation__TrainStation"
+            "locationOfCrime": "Airport&BusStation&TrainStation"
         },
         "Camp/Campground": {
             "locationOfCrime": "Campground"
@@ -513,7 +513,7 @@
             "locationOfCrime": "PlaceOfWorship"
         },
         "Park/Playground": {
-            "locationOfCrime": "Park__Playground"
+            "locationOfCrime": "Park&Playground"
         },
         "Farm Facility": {
             "locationOfCrime": "FarmFacility"
@@ -564,7 +564,7 @@
             "locationOfCrime": "IndustrialSite"
         },
         "School/College": {
-            "locationOfCrime": "School__CollegeOrUniversity"
+            "locationOfCrime": "School&CollegeOrUniversity"
         },
         "Residence/Home": {
             "locationOfCrime": "Residence"
@@ -600,10 +600,10 @@
             "locationOfCrime": "DockOrWharfOrFreightOrModalTerminal"
         },
         "Bar/Nightclub": {
-            "locationOfCrime": "BarOrPub__NightClub"
+            "locationOfCrime": "BarOrPub&NightClub"
         },
         "Lake/Waterway/Beach": {
-            "locationOfCrime": "BodyOfWater__Beach"
+            "locationOfCrime": "BodyOfWater&Beach"
         },
         "Shopping Mall": {
             "locationOfCrime": "ShoppingCenter"

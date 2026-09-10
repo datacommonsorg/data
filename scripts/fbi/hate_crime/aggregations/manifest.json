@@ -14,11 +14,11 @@
             "import_inputs": [
                 {
                     "template_mcf": "../aggregations.tmcf",
-                    "cleaned_csv": "aggregation.csv",
-                    "node_mcf": "*.mcf"
+                    "cleaned_csv": "aggregation.csv"
                 }
             ],
             "source_files": [
+                "golden_data/*.csv",
                 "hate_crime_data/*"
             ],
             "cron_schedule": "0 10 21 * *",
