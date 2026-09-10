@@ -26,28 +26,24 @@
                 },
                 {
                     "template_mcf": "output_files/environment/state_wise_expenditure_on_relief_on_natural_calamities_output.tmcf",
-                    "cleaned_csv": "output_files/environment/state_wise_expenditure_on_relief_on_natural_calamities_output.csv",
-                    "node_mcf": "output_files/environment/*.mcf"
+                    "cleaned_csv": "output_files/environment/state_wise_expenditure_on_relief_on_natural_calamities_output.csv"
                 },
                 {
                     "template_mcf": "output_files/environment/state_wise_forest_cover_output.tmcf",
-                    "cleaned_csv": "output_files/environment/state_wise_forest_cover_output.csv",
-                    "node_mcf": "output_files/environment/*.mcf"
+                    "cleaned_csv": "output_files/environment/state_wise_forest_cover_output.csv"
                 },
                 {
                     "template_mcf": "output_files/environment/state_wise_sdg_score_output.tmcf",
                     "cleaned_csv": "output_files/environment/state_wise_sdg_score_output.csv",
-                    "node_mcf": "output_files/environment/*.mcf"
+                    "node_mcf": "output_files/environment/state_wise_sdg_score_output*.mcf"
                 },
                 {
                     "template_mcf": "output_files/environment/state_wise_tree_cover_output.tmcf",
-                    "cleaned_csv": "output_files/environment/state_wise_tree_cover_output.csv",
-                    "node_mcf": "output_files/environment/*.mcf"
+                    "cleaned_csv": "output_files/environment/state_wise_tree_cover_output.csv"
                 },
                 {
                     "template_mcf": "output_files/environment/sub_division_wise_annual_rainfall_output.tmcf",
-                    "cleaned_csv": "output_files/environment/sub_division_wise_annual_rainfall_output.csv",
-                    "node_mcf": "output_files/environment/*.mcf"
+                    "cleaned_csv": "output_files/environment/sub_division_wise_annual_rainfall_output.csv"
                 },
                 {
                     "template_mcf": "output_files/price_and_wages/price_and_wages_output.tmcf",

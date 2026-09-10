@@ -43,12 +43,16 @@ class PreprocessFilesTest(absltest.TestCase):
                      pd.DataFrame,
                      'map',
                      side_effect=ValueError('transform failed')), \
-                 mock.patch.object(rbi_download.logging, 'error') as mock_error:
-                rbi_download.preprocess_files(directory)
+                 mock.patch.object(rbi_download.logging, 'error') as mock_error, \
+                 mock.patch.object(rbi_download.logging, 'fatal') as mock_fatal:
+                failed = rbi_download.preprocess_files(directory)
 
             self.assertEqual(workbook.read_bytes(), b'original workbook')
             mock_error.assert_called_once_with(
                 'Error processing source.xlsx: transform failed')
+            mock_fatal.assert_called_once()
+            self.assertIn('source.xlsx', mock_fatal.call_args[0][0])
+            self.assertEqual(failed, ['source.xlsx'])
 
     def test_preprocess_files_converts_numeric_headers(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -288,14 +292,40 @@ class DownloadFilesTest(absltest.TestCase):
             ]
 
             with mock.patch.object(rbi_download, 'INPUT_DIR', temp_dir):
-                rbi_download.download_files(configs,
-                                            session=mock_session,
-                                            delay=0)
+                failed = rbi_download.download_files(configs,
+                                                     session=mock_session,
+                                                     delay=0)
 
             success_file = pathlib.Path(temp_dir) / 'agri' / 'success.xlsx'
             self.assertTrue(success_file.exists())
             self.assertEqual(success_file.read_bytes(),
                              b'PK\x03\x04success content')
+            self.assertEqual(failed, ['fail.xlsx'])
+
+
+class MainExecutionTest(absltest.TestCase):
+
+    def test_main_fatal_when_download_fails(self):
+        with mock.patch.object(
+                rbi_download, 'reads_config_file', return_value={'URLS_CONFIG': []}), \
+             mock.patch.object(
+                rbi_download, 'download_files', return_value=['failed_table.xlsx']), \
+             mock.patch.object(rbi_download.logging, 'fatal') as mock_fatal:
+            rbi_download.main([])
+            mock_fatal.assert_called_once()
+            self.assertIn('failed_table.xlsx', mock_fatal.call_args[0][0])
+
+    def test_main_fatal_when_preprocessing_fails(self):
+        with mock.patch.object(
+                rbi_download, 'reads_config_file', return_value={'URLS_CONFIG': []}), \
+             mock.patch.object(
+                rbi_download, 'download_files', return_value=[]), \
+             mock.patch.object(
+                rbi_download, 'preprocess_files', side_effect=[['broken.xlsx'], [], [], []]), \
+             mock.patch.object(rbi_download.logging, 'fatal') as mock_fatal:
+            rbi_download.main([])
+            mock_fatal.assert_called_once()
+            self.assertIn('broken.xlsx', mock_fatal.call_args[0][0])
 
 
 if __name__ == '__main__':

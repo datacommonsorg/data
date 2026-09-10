@@ -24,11 +24,7 @@ from google.cloud import storage
 import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
-import urllib3
 from urllib3.util import Retry
-
-# Suppress unverified HTTPS warnings for RBI endpoints
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
@@ -70,7 +66,6 @@ def create_retry_session(
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.headers.update(DEFAULT_HEADERS)
-    session.verify = False
     return session
 
 
@@ -140,10 +135,12 @@ def reads_config_file():
 def download_files(URL_CONFIG, session=None, delay=0.5):
     if not URL_CONFIG:
         logging.warning("No URL configurations provided to download.")
-        return
+        return []
 
     if session is None:
         session = create_retry_session()
+
+    failed_downloads = []
 
     for config in URL_CONFIG:
         config_url = config.get("url")
@@ -187,6 +184,7 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
                 logging.error(
                     f"Empty response received for {file_name} from {config_url}"
                 )
+                failed_downloads.append(file_name)
                 continue
 
             if not content.startswith(XLSX_ZIP_SIGNATURE):
@@ -194,6 +192,7 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
                 logging.error(
                     f"Invalid file format received for {file_name} from {config_url}: "
                     f"expected XLSX ZIP signature, got: {snippet!r}")
+                failed_downloads.append(file_name)
                 continue
 
             # Write atomically to a temporary file, then move into place
@@ -214,10 +213,15 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
         except Exception as e:
             logging.error(
                 f"Failed to download table {file_name} from {config_url}: {e}")
+            failed_downloads.append(file_name)
+
+    return failed_downloads
 
 
 def _apply_map(df, func):
-    """Version-agnostic element-wise DataFrame mapping (uses df.map if available, else df.applymap)."""
+    """Version-agnostic element-wise DataFrame mapping
+    (uses df.map if available, else df.applymap).
+    """
     if hasattr(df, 'map'):
         return df.map(func)
     return df.applymap(func)
@@ -226,18 +230,20 @@ def _apply_map(df, func):
 def preprocess_files(directory_path):
     if not os.path.isdir(directory_path):
         logging.fatal(f"Error: Directory not found at '{directory_path}'")
-        return
+        return [directory_path]
 
     xlsx_files = [f for f in os.listdir(directory_path) if f.endswith('.xlsx')]
 
     if not xlsx_files:
         logging.fatal(
             f"No XLSX files found in the directory: {directory_path}")
-        return
+        return [directory_path]
 
     logging.info(
         f"Found {len(xlsx_files)} XLSX files to process in '{directory_path}'."
     )
+
+    failed_files = []
 
     for file_name in sorted(xlsx_files):
         file_path = os.path.join(directory_path, file_name)
@@ -308,20 +314,41 @@ def preprocess_files(directory_path):
 
         except Exception as e:
             logging.error(f"Error processing {file_name}: {e}")
+            failed_files.append(file_name)
+
+    if failed_files:
+        logging.fatal(
+            f"Failed to process {len(failed_files)} file(s) in '{directory_path}': {failed_files}"
+        )
+        return failed_files
 
     logging.info("All specified XLSX files have been processed.")
+    return []
 
 
 def main(_):
     configs = reads_config_file()
     RBI_URL = configs['URLS_CONFIG']
-    download_files(RBI_URL)
+    failed_downloads = download_files(RBI_URL)
+    if failed_downloads:
+        logging.fatal(
+            f"Download failed for {len(failed_downloads)} table(s): {failed_downloads}"
+        )
+        return
     logging.info("Download process Completed successfully")
     directories = [
         'agriculture', 'environment', 'infrastructure', 'price_and_wages'
     ]
+    failed_preprocesses = []
     for directory in directories:
-        preprocess_files(os.path.join(INPUT_DIR, directory))
+        failed = preprocess_files(os.path.join(INPUT_DIR, directory))
+        if failed:
+            failed_preprocesses.extend(failed)
+    if failed_preprocesses:
+        logging.fatal(
+            f"Preprocessing failed for {len(failed_preprocesses)} file(s): {failed_preprocesses}"
+        )
+        return
     logging.info("Pre-process Completed successfully")
 
 

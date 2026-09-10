@@ -294,7 +294,7 @@ python3 stat_var_processor.py \
 
 ## Validation Configuration and Thresholds
 
-This import uses `validation_config.json` with a 7% record deletion threshold (`DELETED_RECORDS_PERCENT: 7`).
+This import uses `validation_config.json` with a 6% record deletion threshold (`DELETED_RECORDS_PERCENT: 7`).
 - **Rationale & Analysis**: Up to 7% of records may be deleted or modified across historical revisions and cleanups of unmapped sub-divisions and regional reporting structures across RBI state tables.
-- **Justification Document**: For detailed root cause analysis, table breakdown, and justification, see the [RBI State Statistics Deletion Threshold Justification Doc](https://docs.google.com/document/d/19k3zyNk_KR9D4dVpXdGvlXKk6AMOzoYU2I1khJSsX8w/edit?resourcekey=0-JR3lDK9eNfo3ftEV6YpGxQ&tab=t.0#heading=h.iiqodx2yoqc8).
+- **Justification Document**: For detailed root cause analysis, table breakdown, and justification, see the [RBI State Statistics Deletion Threshold Justification Doc](https://docs.google.com/document/d/1BLArT3T2-2EVql0Ol8tSYw9QtjFjzCzockJBquMC4AY/edit).
 
