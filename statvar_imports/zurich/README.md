@@ -56,7 +56,7 @@ Fully Autorefresh:" 0 6 29 * * " (Runs at 6:00 AM on the 29th of every month).
 1. import_name": "Zurich_Population"
 
 2. Import Overview
-Total population of Zurich city by quarter and year at City, District (Kreise), and Quarter (Quartiere) Level.
+Total population of Zurich city by quarter and year at Quarter (Quartiere) Level.
 Source URL: [BEV324OD3240 Dataset](https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240)
 Import Type: Fully Autorefresh
 Source Data Availability: 1941 to 2025
