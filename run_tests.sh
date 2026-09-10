@@ -17,7 +17,7 @@
 set -e
 
 # Array of top-level folders with Python code.
-PYTHON_FOLDERS="util/ tools/ import-automation/executor scripts/"
+PYTHON_FOLDERS="util/ tools/ import-automation/executor scripts/ agents/common/"
 
 # Allow overriding via environment; default to false when unset.
 PYTHON_REQUIREMENTS_INSTALLED="${PYTHON_REQUIREMENTS_INSTALLED:-false}"

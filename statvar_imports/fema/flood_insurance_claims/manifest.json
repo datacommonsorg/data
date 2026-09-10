@@ -18,6 +18,11 @@
         "source_files": [
           "input_file/fema_nfip_claims.csv"
         ],
+        "resource_limits": {
+                "cpu": 64,
+                "memory": 256,
+                "disk": 4096
+        },
         "cron_schedule": "0 11 1 * *",
         "validation_config_file": "validation_config.json"
       }

@@ -1,0 +1,39 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Strictly enforce historical deletion average threshold of 0.1%",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "description": "Validates summary_report.csv against the golden summary data",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_observations",
+            "description": "Verifies that prominent place DCIDs in golden_observations.csv are present in the output dataset",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../data/output/NORS_NonInfectious_Disease.csv"
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that the dataset's maximum observation date meets freshness requirements (>= 2023-12)",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "condition": "latest_date >= '2023-12'"
+            }
+        }
+    ]
+}

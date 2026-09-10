@@ -28,6 +28,7 @@ def national1900(output_folder: str):
     # Used to collect data after every loop for every file's df
     final_df = pd.DataFrame()
     # The numbers 00 to 60 signify the available files as per year numbers
+    session = requests.Session()
     for i in range(00, 60):
         j = f'{i:02}'
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
@@ -45,7 +46,7 @@ def national1900(output_folder: str):
         # reading the csv format input file and converting it to a dataframe
         try:
             # Check if the URL is accessible
-            response = requests.head(url, allow_redirects=True)
+            response = session.head(url, allow_redirects=True, timeout=5)
             if response.status_code != 200:
                 logging.warning(f"Skipping {url} as it is not accessible.")
                 continue

@@ -113,7 +113,7 @@ def download_data(api_url: str, temp_dir: str):
         logging.info("Starting download to file: %s", final_filepath)
 
         # The main download loop for pagination
-        while records_downloaded < total_records:
+        while total_records == 0 or records_downloaded < total_records:
             csv_url = f"{api_url}?$format=csv&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
 

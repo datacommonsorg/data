@@ -18,16 +18,16 @@ typeOf: StatVarObservation
 
 dcid: InterestRate_TreasuryBill_1Month
 maturity: [1 Month]
-measuredProperty: dcs:interestRate
+measuredProperty: dcid:interestRate
 name: "InterestRate_TreasuryBill_1Month"
-populationType: dcs:TreasuryBill
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
+populationType: dcid:TreasuryBill
+statType: dcid:measuredValue
+typeOf: dcid:StatisticalVariable
 
 dcid: InterestRate_TreasuryBill_3Month
 maturity: [3 Month]
-measuredProperty: dcs:interestRate
+measuredProperty: dcid:interestRate
 name: "InterestRate_TreasuryBill_3Month"
-populationType: dcs:TreasuryBill
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
+populationType: dcid:TreasuryBill
+statType: dcid:measuredValue
+typeOf: dcid:StatisticalVariable
