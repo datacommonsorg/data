@@ -14,6 +14,7 @@
 """Unit tests for CDC 500 State aggregation script."""
 
 import os
+import re
 import tempfile
 import unittest
 from unittest import mock
@@ -34,19 +35,20 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("dc/base/CDC500", query)
         self.assertIn("dc/base/CensusACS5YearSurvey", query)
         self.assertIn("SAFE_DIVIDE", query)
+        self.assertIn("SAFE_CAST", query)
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
         self.assertIn("LENGTH(O.entity1) = 13", query)
         self.assertIn("REGEXP_CONTAINS", query)
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
-        self.assertIn("O.last_update_timestamp DESC", query)
+        self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)
         self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography", query)
-        self.assertIn("Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening", query)
+        self.assertIn(
+            "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening", query)
         self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest", query)
         self.assertIn("Percent_Person_50To75Years_ReceivedColorectalCancerScreening", query)
 
     def test_demographic_cohort_regex_mapping(self):
         """Verifies that representative StatVars match the intended demographic regex rules."""
-        import re
         female_pattern = r'65OrMoreYears.*Female|Female.*65OrMoreYears'
         male_pattern = r'65OrMoreYears.*Male|Male.*65OrMoreYears'
 
@@ -69,14 +71,20 @@ class CDC500StateProcessTest(unittest.TestCase):
                 return 'Count_Person'
 
         test_cases = [
-            ('Percent_Person_65OrMoreYears_Female_CorePreventiveServices', 'Count_Person_65OrMoreYears_Female'),
-            ('Percent_Person_Female_65OrMoreYears_CorePreventiveServices', 'Count_Person_65OrMoreYears_Female'),
-            ('Percent_Person_65OrMoreYears_Male_CorePreventiveServices', 'Count_Person_65OrMoreYears_Male'),
-            ('Percent_Person_Male_65OrMoreYears_CorePreventiveServices', 'Count_Person_65OrMoreYears_Male'),
-            ('Percent_Person_65OrMoreYears_CorePreventiveServices', 'Count_Person_65OrMoreYears'),
+            ('Percent_Person_65OrMoreYears_Female_CorePreventiveServices',
+             'Count_Person_65OrMoreYears_Female'),
+            ('Percent_Person_Female_65OrMoreYears_CorePreventiveServices',
+             'Count_Person_65OrMoreYears_Female'),
+            ('Percent_Person_65OrMoreYears_Male_CorePreventiveServices',
+             'Count_Person_65OrMoreYears_Male'),
+            ('Percent_Person_Male_65OrMoreYears_CorePreventiveServices',
+             'Count_Person_65OrMoreYears_Male'),
+            ('Percent_Person_65OrMoreYears_CorePreventiveServices',
+             'Count_Person_65OrMoreYears'),
             ('Percent_Person_18To64Years_HealthInsurance', 'Count_Person_18To64Years'),
             ('Percent_Person_18OrMoreYears_WithAnyDisability', 'Count_Person_18OrMoreYears'),
-            ('Percent_Person_18OrMoreYears_WithHighBloodPressure', 'Count_Person_18OrMoreYears'),
+            ('Percent_Person_18OrMoreYears_WithHighBloodPressure',
+             'Count_Person_18OrMoreYears'),
             ('Percent_Person_WithArthritis', 'Count_Person'),
             ('Percent_Person_WithHighCholesterol', 'Count_Person'),
         ]
@@ -86,7 +94,8 @@ class CDC500StateProcessTest(unittest.TestCase):
                 self.assertEqual(map_statvar(sv), expected)
 
     def test_population_weighted_average_calculation(self):
-        """Verifies the population-weighted average calculation and city-to-state FIPS aggregation."""
+        """Verifies the population-weighted average calculation and city-to-state
+        FIPS aggregation."""
         # Simulated city-level records for California (geoId/06)
         city_records = pd.DataFrame({
             'city_geoid': ['geoId/0644000', 'geoId/0666000', 'geoId/0667000'],
@@ -101,7 +110,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         total_pop = city_records['city_pop'].sum()
         weighted_avg = total_weighted / total_pop
 
-        # Expected: (10000*20 + 20000*30 + 70000*40) / 100000 = (200000 + 600000 + 2800000) / 100000 = 36.0
+        # Expected: (10000*20 + 20000*30 + 70000*40) / 100000 = 36.0
         self.assertEqual(total_pop, 100000)
         self.assertAlmostEqual(weighted_avg, 36.0, places=4)
 

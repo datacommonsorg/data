@@ -31,8 +31,12 @@ WITH cdc_sv AS (
   SELECT
     variable_measured AS cdc500,
     CASE
-      WHEN REGEXP_CONTAINS(variable_measured, r'65OrMoreYears.*Female|Female.*65OrMoreYears') THEN 'Count_Person_65OrMoreYears_Female'
-      WHEN REGEXP_CONTAINS(variable_measured, r'65OrMoreYears.*Male|Male.*65OrMoreYears') THEN 'Count_Person_65OrMoreYears_Male'
+      WHEN REGEXP_CONTAINS(
+        variable_measured, r'65OrMoreYears.*Female|Female.*65OrMoreYears'
+      ) THEN 'Count_Person_65OrMoreYears_Female'
+      WHEN REGEXP_CONTAINS(
+        variable_measured, r'65OrMoreYears.*Male|Male.*65OrMoreYears'
+      ) THEN 'Count_Person_65OrMoreYears_Male'
       WHEN variable_measured LIKE '%65OrMoreYears%' THEN 'Count_Person_65OrMoreYears'
       WHEN variable_measured LIKE '%18To64Years%' THEN 'Count_Person_18To64Years'
       WHEN variable_measured LIKE '%18OrMoreYears%' THEN 'Count_Person_18OrMoreYears'
@@ -78,7 +82,7 @@ svo_percent AS (
     )
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
-    ORDER BY O.last_update_timestamp DESC
+    ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
   ) = 1
 ),
 
@@ -103,7 +107,7 @@ svo_count AS (
     AND LENGTH(O.entity1) = 13
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date
-    ORDER BY O.last_update_timestamp DESC
+    ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
   ) = 1
 )
 
@@ -114,8 +118,8 @@ SELECT
   CONCAT('dcAggregate/', p.measurement_method) AS measurement_method,
   p.pop_statvar AS population_statvar,
   SAFE_DIVIDE(
-    SUM(CAST(c.population AS FLOAT64) * CAST(p.percent AS FLOAT64)),
-    SUM(CAST(c.population AS FLOAT64))
+    SUM(SAFE_CAST(c.population AS FLOAT64) * SAFE_CAST(p.percent AS FLOAT64)),
+    SUM(SAFE_CAST(c.population AS FLOAT64))
   ) AS percent
 FROM svo_percent AS p
 INNER JOIN svo_count AS c
@@ -130,6 +134,7 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
     """Executes the BigQuery query and writes the resulting DataFrame to output_file."""
     logging.info("Running BigQuery aggregation query...")
     query_job = client.query(QUERY)
+    logging.info("BigQuery job started with ID: %s", query_job.job_id)
 
     logging.info("Fetching query results into dataframe...")
     df = query_job.to_dataframe()
@@ -142,8 +147,14 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
         os.makedirs(output_dir, exist_ok=True)
     logging.info("Writing %d rows to %s", len(df), output_file)
     temp_file = output_file + ".tmp"
-    df.to_csv(temp_file, index=False)
-    os.replace(temp_file, output_file)
+    try:
+        df.to_csv(temp_file, index=False)
+        if not os.path.exists(temp_file) or os.path.getsize(temp_file) == 0:
+            raise RuntimeError(f"Output file {temp_file} was created empty or missing.")
+        os.replace(temp_file, output_file)
+    finally:
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
     return True
 
 

@@ -39,6 +39,8 @@ $$\text{State Percent} = \frac{\sum (\text{City Population} \times \text{City Pe
 
 The output measurement method is prefixed with `dcAggregate/` (e.g., `dcAggregate/CrudePrevalence`).
 
+*Note on Demographic Cohorts:* Several adult health indicators (such as `Percent_Person_Smoking`, `Percent_Person_Obesity`, `Percent_Person_WithDiabetes`) lack explicit age tokens in their DCID and intentionally fall back to `Count_Person` weighting to preserve bitwise parity with existing Data Commons baseline observations.
+
 #### Excluded Indicators
 
 The following age-bracketed cancer screening indicators are omitted from state-level aggregation:
@@ -77,7 +79,7 @@ $ gcloud auth application-default login
 
 #### Running the Script
 
-To run the BigQuery aggregation and write the output CSV to the default output directory (`CDC500State_Output/CDC500State_Output.csv`):
+To run the BigQuery aggregation and write the output CSV to the default output directory (`scripts/us_cdc/cdc500_state/CDC500State_Output/CDC500State_Output.csv` when run from repository root):
 
 ```bash
 $ python3 scripts/us_cdc/cdc500_state/process.py
