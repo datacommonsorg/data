@@ -41,7 +41,7 @@ The import supports **all 75 health indicators** in the NYSDOH dataset across 6 
 statvar_imports/us_newyork/ny_brfss_health_indicators/
 ├── README.md                                           # Comprehensive import documentation
 ├── manifest.json                                       # Data Commons import automation manifest
-├── validation_config.json                              # Import validation rules (historical deletion threshold)
+├── validation_config.json                              # Import validation rules (historical deletion and date freshness)
 ├── ny_brfss_health_indicators_metadata.csv             # Processor configuration metadata
 ├── ny_brfss_health_indicators_pv_map.csv               # Property-value mapping for all 75 StatVars & 62 counties
 ├── download.py                                         # Multi-year Socrata downloader
@@ -96,21 +96,19 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_path=test_data/sample_expected_output
 ```
 
-### Step 4: Validate with Data Commons Import Tool
-```bash
-java -jar ~/Downloads/import_tools_import-tool.jar lint \
-  output_files/ny_brfss_health_indicators_output.csv \
-  output_files/ny_brfss_health_indicators_output.tmcf \
-  output_files/ny_brfss_health_indicators_output_stat_vars.mcf \
-  output_files/ny_brfss_health_indicators_output_stat_vars_schema.mcf
-```
+### Validation Configuration
+
+Validation is configured in `validation_config.json`:
+* `check_deleted_records_percent`: Strictly enforces a historical deletion average threshold of `0.1%`. Note that on the initial import run, this rule expectedly reports missing differ summary because there is no prior version in prod GCS to diff against; it is configured to safeguard future recurring refreshes. Per consensus on initial imports, golden regression files are omitted from initial submission.
+* `check_max_date_freshness`: Enforces date freshness (`CAST(MaxDate AS INTEGER) >= 2024`) across active recurring health indicator StatVars (e.g. Diabetes, Obesity, Smoking, Asthma, Hypertension, Cardiovascular Disease, Depression, Dental Visits, Routine Checkups) to ensure the latest published survey wave is always captured.
+* `check_import_max_date_freshness`: Enforces that the overall import contains observations through at least 2024 (`CAST(max_date AS INTEGER) >= 2024`).
 
 ---
 
-## 5. Verification Results
+## 5. Summary Results
 
 * **Observations Generated**: **13,479** `StatVarObservation` records.
 * **Geographies Resolved**: **63 unique entities** (all 62 NY counties `geoId/36001` - `geoId/36123` plus New York City `geoId/3651000`).
 * **Non-County Regions Dropped**: **3,081 records** (sub-state DSRIP regions, Rest of State, and Statewide rows cleanly dropped by PV map).
 * **Statistical Variables Generated**: **75 unique variables** (20 matched to existing canonical DCIDs, 55 provisional StatVars, 56 schema enums/properties).
-* **Linter Status**: **0 fatal, 0 errors, 0 missing references** (`NumRowSuccesses: 13,479 / 13,479`).
+

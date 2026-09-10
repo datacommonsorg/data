@@ -8,6 +8,24 @@
       "params": {
         "threshold": 0.1
       }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verify MaxDate is at least 2024 for recurring health indicators",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Percent_Person_WithDiabetes', 'Percent_Person_Obesity', 'Percent_Person_Smoking', 'Percent_Person_WithAsthma', 'Percent_Person_WithArthritis', 'Percent_Person_WithHighBloodPressure', 'Percent_Person_WithCardiovascularDisease', 'Percent_Person_WithChronicObstructivePulmonaryDisease', 'Percent_Person_18OrMoreYears_WithDepression', 'Percent_Person_18OrMoreYears_WithPoorGeneralHealth', 'Percent_Person_BingeDrinking', 'Percent_Person_LeisureTimePhysicalActivity', 'Percent_Person_ReceivedDentalVisit', 'Percent_Person_WithPrediabetes', 'Percent_Person_18To64Years_WithHealthInsurance', 'Percent_Person_18OrMoreYears_WithAnyDisability', 'Percent_Person_Years18To64_RoutineCheckupWithinPastYear', 'Percent_Person_50To74Years_Female_ReceivedMammography')",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2024"
+      }
+    },
+    {
+      "rule_id": "check_import_max_date_freshness",
+      "description": "Verify the import contains latest survey wave observations through at least 2024",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(MaxDate) AS max_date FROM stats",
+        "condition": "CAST(max_date AS INTEGER) >= 2024"
+      }
     }
   ]
 }
