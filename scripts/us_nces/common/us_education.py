@@ -1113,14 +1113,14 @@ class USEducation:
 
         f_deno = []
         for dcnode in mcf_:
-            deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
+            deno_matched = re.findall(r"(Node: dcid:)(\w+)", dcnode)[0][1]
             f_deno.append(deno_matched)
         # Passes the Node through check_dcid_existance to check if the SV is
         # already existing.
         node_status = dc_api_is_defined_dcid(f_deno)
         f_deno = []
         for dcnode in mcf_:
-            deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
+            deno_matched = re.findall(r"(Node: dcid:)(\w+)", dcnode)[0][1]
             status = node_status[deno_matched]
             if not status:
                 f_deno.append(dcnode)
