@@ -1,0 +1,5 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+GEOID,observationAbout,geoId/{Data},measuredProperty,count,statType,measuredValue,populationType,Person,,,,,,
+poverty_rate_1990,observationDate,1990,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus
+poverty_rate_2000,observationDate,2000,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus
+poverty_rate_recent,observationDate,2021,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus

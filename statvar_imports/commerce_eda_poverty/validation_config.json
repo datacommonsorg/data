@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_percent_min_value",
+      "description": "Verifies that poverty rate values are non-negative (minimum >= 0%).",
+      "validator": "MIN_VALUE_CHECK",
+      "params": {
+        "minimum": 0
+      }
+    },
+    {
+      "rule_id": "check_percent_max_value",
+      "description": "Verifies that poverty rate values do not exceed 100%.",
+      "validator": "MAX_VALUE_CHECK",
+      "params": {
+        "maximum": 100
+      }
+    },
+    {
+      "rule_id": "check_num_places_county_count",
+      "description": "Verifies that county place count falls within expected range (3100-3250).",
+      "validator": "NUM_PLACES_COUNT",
+      "params": {
+        "minimum": 3100,
+        "maximum": 3250
+      }
+    },
+    {
+      "rule_id": "check_date_span_sql",
+      "description": "Verifies time series spans from 1990 through at least 2021.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate FROM stats",
+        "condition": "TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021"
+      }
+    },
+    {
+      "rule_id": "check_missing_refs_count",
+      "description": "Ensures no unresolvable property or node references exist in output MCF.",
+      "validator": "MISSING_REFS_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensures zero MCF/TMCF syntax or lint errors in generated outputs.",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Allows up to 0.1% deleted records for minor county FIPS boundary changes.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    }
+  ]
+}
