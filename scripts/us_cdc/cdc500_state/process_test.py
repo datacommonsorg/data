@@ -52,10 +52,18 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
         self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)
         self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography", query)
-        self.assertIn(
-            "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening", query)
         self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest", query)
-        self.assertIn("Percent_Person_50To75Years_ReceivedColorectalCancerScreening", query)
+        self.assertIn(
+            "Percent_Person_50To75Years_ReceivedColorectalCancerScreening", query)
+        self.assertIn("'Count_Person_65OrMoreYears_Female'", query)
+        self.assertIn("'Count_Person_65OrMoreYears_Male'", query)
+        self.assertIn("'Count_Person_65OrMoreYears'", query)
+        self.assertIn("'Count_Person_18To64Years'", query)
+        self.assertIn("'Count_Person_18OrMoreYears'", query)
+        self.assertIn("'Count_Person'", query)
+        self.assertIn(
+            "SUM(SAFE_CAST(c.population AS FLOAT64) * "
+            "SAFE_CAST(p.percent AS FLOAT64))", query)
 
     def test_demographic_cohort_regex_mapping(self):
         """Verifies that representative StatVars match the intended demographic regex rules."""
@@ -177,6 +185,26 @@ class CDC500StateProcessTest(unittest.TestCase):
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
             with self.assertRaises(RuntimeError):
                 process.run_process(mock_client, output_file)
+
+    def test_run_process_empty_output_file_raises_runtime_error(self):
+        """Tests that creating an empty (0-byte) output file raises RuntimeError."""
+        mock_client = mock.MagicMock()
+        mock_df = mock.MagicMock()
+        mock_df.__len__.return_value = 1
+
+        def fake_to_csv(filepath, index=False):
+            del index  # Unused.
+            with open(filepath, 'w'):
+                pass  # Create 0-byte file
+
+        mock_df.to_csv.side_effect = fake_to_csv
+        mock_client.query.return_value.to_dataframe.return_value = mock_df
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+            with self.assertRaises(RuntimeError):
+                process.run_process(mock_client, output_file)
+            self.assertFalse(os.path.exists(output_file))
+            self.assertFalse(os.path.exists(output_file + '.tmp'))
 
     @mock.patch('scripts.us_cdc.cdc500_state.process.run_process')
     @mock.patch('google.cloud.bigquery.Client')

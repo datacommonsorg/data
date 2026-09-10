@@ -78,12 +78,6 @@ svo_percent AS (
   WHERE O.entity1 LIKE 'geoId/%'
     AND LENGTH(O.entity1) = 13
     AND O.variable_measured LIKE 'Percent_%'
-    AND O.variable_measured NOT IN (
-      'Percent_Person_50To74Years_Female_ReceivedMammography',
-      'Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening',
-      'Percent_Person_21To65Years_Female_ReceivedPapSmearTest',
-      'Percent_Person_50To75Years_ReceivedColorectalCancerScreening'
-    )
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
