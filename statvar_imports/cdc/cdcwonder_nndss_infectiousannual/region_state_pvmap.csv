@@ -1,34 +1,6 @@
 key,prop,val,,,,
 Year,observationDate,{Number},populationType,MedicalConditionIncident
 
-Sex Code:1,gender,Female,observationAbout,country/USA
-Sex Code:2,gender,Male,observationAbout,country/USA
-Sex Code:99,gender,CDC_GenderUnknownOrNotStated,observationAbout,country/USA
-Race Code:1,race,AmericanIndianAndAlaskaNativeAlone,observationAbout,country/USA
-Race Code:2,race,AsianOrPacificIslander,observationAbout,country/USA
-Race Code:3,race,BlackOrAfricanAmericanAlone,observationAbout,country/USA
-Race Code:4,race,WhiteAlone,observationAbout,country/USA
-Race Code:5,race,CDC_OtherRace,observationAbout,country/USA
-Race Code:99,race,CDC_RaceUnknownOrNotStated,observationAbout,country/USA
-Race Code:98,#ignore,suppressed data,,
-
-Ethnicity Code:1,ethnicity,HispanicOrLatino,observationAbout,country/USA
-Ethnicity Code:non-,ethnicity,NotHispanicOrLatino,observationAbout,country/USA
-Ethnicity Code:99,ethnicity,CDC_EthnicityUnknownOrNotStated,observationAbout,country/USA
-Ethnicity Code:98,#ignore,suppressed data
-Regions Code:U.S.,residentStatus,USResident,observationAbout,country/USA
-Regions Code:REGION1,#ignore,unsupported place grouping,
-Regions Code:REGION2,#ignore,unsupported place grouping,
-Regions Code:REGION3,#ignore,unsupported place grouping,
-Regions Code:REGION4,#ignore,unsupported place grouping,
-Regions Code:REGION5,#ignore,unsupported place grouping,
-Regions Code:REGION6,#ignore,unsupported place grouping,
-Regions Code:REGION7,#ignore,unsupported place grouping,
-Regions Code:REGION8,#ignore,unsupported place grouping,
-Regions Code:REGION9,#ignore,unsupported place grouping,
-Regions Code:REGION10,#ignore,unsupported place grouping,
-Regions Code:REGION11,residentStatus,NonUSResident,observationAbout,country/USA
-
 Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,observationPeriod,P1Y
 Disease Code:10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,SerotypeB
 Disease Code:10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,NonSerotypeB
