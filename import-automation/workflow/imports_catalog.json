@@ -1,0 +1,3112 @@
+[
+  {
+    "dag_id": "NCBI_Taxonomy",
+    "import_name": "NCBI_Taxonomy",
+    "full_import_name": "scripts/biomedical/NCBI_Taxonomy:NCBI_Taxonomy",
+    "script_dir": "scripts/biomedical/NCBI_Taxonomy",
+    "cron_schedule": "0 0 1 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "NCBI Taxonomy the Taxonomy database of the National Center for Biotechnology Information (NCBI), which is part of the National Library of Medicine (NLM). It provides a curated classification and nomenclature for organisms found in public sequence databases, covering approximately 10% of all described species",
+    "provenance_url": "https://www.ncbi.nlm.nih.gov/taxonomy/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "biomedical"
+  },
+  {
+    "dag_id": "CensusCountyBusinessPatterns",
+    "import_name": "CensusCountyBusinessPatterns",
+    "full_import_name": "scripts/census_county_business_patterns:CensusCountyBusinessPatterns",
+    "script_dir": "scripts/census_county_business_patterns",
+    "cron_schedule": "0 9 5,25 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "County Business Patterns (CBP) is an annual series that provides subnational economic data for establishments with paid employees by industry and employment size.",
+    "provenance_url": "https://www2.census.gov/programs-surveys/cbp/datasets/{year}/cbp{last_two_digit_of_year}co.zip",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 64,
+      "memory": 512,
+      "disk": 4096
+    },
+    "category": "census_county_business_patterns"
+  },
+  {
+    "dag_id": "covid19IndiaCasesCountStatesData",
+    "import_name": "covid19IndiaCasesCountStatesData",
+    "full_import_name": "scripts/covid19_india/cases_count_states_data:covid19IndiaCasesCountStatesData",
+    "script_dir": "scripts/covid19_india/cases_count_states_data",
+    "cron_schedule": "0 5 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Community collected, cleaned and organized COVID-19/India datasets, sourced from various government websites.",
+    "provenance_url": "https://github.com/datameet/covid19",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "covid19_india"
+  },
+  {
+    "dag_id": "covid19IndiaMedicalTestsInData",
+    "import_name": "covid19IndiaMedicalTestsInData",
+    "full_import_name": "scripts/covid19_india/medical_tests_in_data:covid19IndiaMedicalTestsInData",
+    "script_dir": "scripts/covid19_india/medical_tests_in_data",
+    "cron_schedule": "0 6 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Community collected, cleaned and organized COVID-19/India datasets, sourced from various government websites.",
+    "provenance_url": "https://github.com/datameet/covid19",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "covid19_india"
+  },
+  {
+    "dag_id": "COVIDTracking_HistoricStateData",
+    "import_name": "COVIDTracking_HistoricStateData",
+    "full_import_name": "scripts/covid_tracking_project/historic_state_data:COVIDTracking_HistoricStateData",
+    "script_dir": "scripts/covid_tracking_project/historic_state_data",
+    "cron_schedule": "45 3 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The COVID Tracking Project is a volunteer organization launched from The Atlantic and dedicated to collecting and publishing the data required to understand the COVID-19 outbreak in the United States.",
+    "provenance_url": "https://www.covidtracking.com",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "covid_tracking_project"
+  },
+  {
+    "dag_id": "COVIDTracking_HistoricUSData",
+    "import_name": "COVIDTracking_HistoricUSData",
+    "full_import_name": "scripts/covid_tracking_project/historic_us_data:COVIDTracking_HistoricUSData",
+    "script_dir": "scripts/covid_tracking_project/historic_us_data",
+    "cron_schedule": "30 3 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The COVID Tracking Project is a volunteer organization launched from The Atlantic and dedicated to collecting and publishing the data required to understand the COVID-19 outbreak in the United States.",
+    "provenance_url": "https://www.covidtracking.com",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "covid_tracking_project"
+  },
+  {
+    "dag_id": "EuroStatHealth_AlcoholConsumption",
+    "import_name": "EuroStatHealth_AlcoholConsumption",
+    "full_import_name": "scripts/eurostat/health_determinants:EuroStatHealth_AlcoholConsumption",
+    "script_dir": "scripts/eurostat/health_determinants",
+    "cron_schedule": "0 2 2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "European Union (EU) Eurostat",
+    "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EuroStatHealth_BodyMassIndex",
+    "import_name": "EuroStatHealth_BodyMassIndex",
+    "full_import_name": "scripts/eurostat/health_determinants:EuroStatHealth_BodyMassIndex",
+    "script_dir": "scripts/eurostat/health_determinants",
+    "cron_schedule": "0 7 2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "European Union (EU) Eurostat",
+    "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EuroStatHealth_FruitsAndVegetables",
+    "import_name": "EuroStatHealth_FruitsAndVegetables",
+    "full_import_name": "scripts/eurostat/health_determinants:EuroStatHealth_FruitsAndVegetables",
+    "script_dir": "scripts/eurostat/health_determinants",
+    "cron_schedule": "0 6 2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "European Union (EU) Eurostat",
+    "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EuroStatHealth_PhysicalActivity",
+    "import_name": "EuroStatHealth_PhysicalActivity",
+    "full_import_name": "scripts/eurostat/health_determinants:EuroStatHealth_PhysicalActivity",
+    "script_dir": "scripts/eurostat/health_determinants",
+    "cron_schedule": "0 5 2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "European Union (EU) Eurostat",
+    "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EuroStatHealth_SocialEnvironment",
+    "import_name": "EuroStatHealth_SocialEnvironment",
+    "full_import_name": "scripts/eurostat/health_determinants:EuroStatHealth_SocialEnvironment",
+    "script_dir": "scripts/eurostat/health_determinants",
+    "cron_schedule": "0 4 2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "European Union (EU) Eurostat",
+    "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatHealth_Tobacco_Consumption",
+    "import_name": "EurostatHealth_Tobacco_Consumption",
+    "full_import_name": "scripts/eurostat/health_determinants:EurostatHealth_Tobacco_Consumption",
+    "script_dir": "scripts/eurostat/health_determinants",
+    "cron_schedule": "0 3 2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "European Union (EU) Eurostat",
+    "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_Demographic_Balance_Crude_Rates",
+    "import_name": "EurostatData_Demographic_Balance_Crude_Rates",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/birth_death_migration:EurostatData_Demographic_Balance_Crude_Rates",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/birth_death_migration",
+    "cron_schedule": "00 02 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_gind3/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_Education_Attainment",
+    "import_name": "EurostatData_Education_Attainment",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/education_attainment:EurostatData_Education_Attainment",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/education_attainment",
+    "cron_schedule": "30 02 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/edat_lfse_04/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_Education_Enrollment",
+    "import_name": "EurostatData_Education_Enrollment",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/education_enrollment:EurostatData_Education_Enrollment",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/education_enrollment",
+    "cron_schedule": "00 03 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/trng_lfse_04/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_Employment_Per_Sector",
+    "import_name": "EurostatData_Employment_Per_Sector",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/employed_per_sector:EurostatData_Employment_Per_Sector",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/employed_per_sector",
+    "cron_schedule": "30 03 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3empers/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_Fertility",
+    "import_name": "EurostatData_Fertility",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age:EurostatData_Fertility",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age",
+    "cron_schedule": "00 04 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_find3/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_GDP",
+    "import_name": "EurostatData_GDP",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/gdp:EurostatData_GDP",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/gdp",
+    "cron_schedule": "30 04 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_LifeExpectancy",
+    "import_name": "EurostatData_LifeExpectancy",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/life_expectancy:EurostatData_LifeExpectancy",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/life_expectancy",
+    "cron_schedule": "00 05 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_mlifexp/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "EurostatData_PopulationDensity",
+    "import_name": "EurostatData_PopulationDensity",
+    "full_import_name": "scripts/eurostat/regional_statistics_by_nuts/population_density:EurostatData_PopulationDensity",
+    "script_dir": "scripts/eurostat/regional_statistics_by_nuts/population_density",
+    "cron_schedule": "30 05 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional Statistics by NUTS Classification.",
+    "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_d3dens/?format=TSV&compressed=true",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "eurostat"
+  },
+  {
+    "dag_id": "FBIHateCrime",
+    "import_name": "FBIHateCrime",
+    "full_import_name": "scripts/fbi/hate_crime/aggregations:FBIHateCrime",
+    "script_dir": "scripts/fbi/hate_crime/aggregations",
+    "cron_schedule": "0 10 21 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US Hate Crime Statistics",
+    "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 300
+    },
+    "category": "fbi"
+  },
+  {
+    "dag_id": "FBIHateCrimePublications",
+    "import_name": "FBIHateCrimePublications",
+    "full_import_name": "scripts/fbi/hate_crime:FBIHateCrimePublications",
+    "script_dir": "scripts/fbi/hate_crime",
+    "cron_schedule": "0 10 21 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US Hate Crime Statistics",
+    "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "fbi"
+  },
+  {
+    "dag_id": "NASA_VIIRSActiveFiresEvents",
+    "import_name": "NASA_VIIRSActiveFiresEvents",
+    "full_import_name": "scripts/fires/firms:NASA_VIIRSActiveFiresEvents",
+    "script_dir": "scripts/fires/firms",
+    "cron_schedule": "0 5 1 * *",
+    "curator_emails": [
+      "ajaits@google.com"
+    ],
+    "provenance_description": "Active fire data across the world as detected by VIIRS onboard the Suomi NPP satellite at 375m resolution.",
+    "provenance_url": "https://www.earthdata.nasa.gov/learn/find-data/near-real-time/firms/vnp14imgtdlnrt",
+    "config_override": {
+      "skip_gcs_upload": true,
+      "invoke_differ_tool": false,
+      "invoke_import_validation": false,
+      "invoke_import_tool": false
+    },
+    "resource_limits": {},
+    "category": "fires"
+  },
+  {
+    "dag_id": "FireWFIGS",
+    "import_name": "FireWFIGS",
+    "full_import_name": "scripts/fires:FireWFIGS",
+    "script_dir": "scripts/fires",
+    "cron_schedule": "0 6 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Wildland Fire Interagency Geospatial Services (WFIGS) Group provides authoritative geospatial data products under the interagency Wildland Fire Data Program. ",
+    "provenance_url": "https://data-nifc.opendata.arcgis.com/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "fires"
+  },
+  {
+    "dag_id": "FirePerimetersWFIGS",
+    "import_name": "FirePerimetersWFIGS",
+    "full_import_name": "scripts/fires/perimeter:FirePerimetersWFIGS",
+    "script_dir": "scripts/fires/perimeter",
+    "cron_schedule": "0 6 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Wildland Fire Interagency Geospatial Services (WFIGS) Group provides authoritative geospatial data products under the interagency Wildland Fire Data Program for the USA. This dataset provides perimeters for all reported wildland fires in the United States. We simplify those parameters by using Ramer-Douglas-Peucker algorithm on geoJsonCoordinates with epsilon of 0.01.",
+    "provenance_url": "https://data-nifc.opendata.arcgis.com/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "fires"
+  },
+  {
+    "dag_id": "DynamicWorld_FloodEvents_AutoRefresh",
+    "import_name": "DynamicWorld_FloodEvents_AutoRefresh",
+    "full_import_name": "scripts/floods:DynamicWorld_FloodEvents_AutoRefresh",
+    "script_dir": "scripts/floods",
+    "cron_schedule": "0 5 1 * *",
+    "curator_emails": [
+      "ajaits@google.com"
+    ],
+    "provenance_description": "Flood events inferred from areas marked with high probability of water outside the permanent water bodies.",
+    "provenance_url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "floods"
+  },
+  {
+    "dag_id": "Google_COVID19Mobility",
+    "import_name": "Google_COVID19Mobility",
+    "full_import_name": "scripts/google_covid/mobility:Google_COVID19Mobility",
+    "script_dir": "scripts/google_covid/mobility",
+    "cron_schedule": "30 2 10 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "These Community Mobility Reports aim to provide insights into what has changed in response to policies aimed at combating COVID-19. The reports chart movement trends over time by geography, across different categories of places such as retail and recreation, groceries and pharmacies, parks, transit stations, workplaces, and residential.",
+    "provenance_url": "https://www.google.com/covid19/mobility",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "google_covid"
+  },
+  {
+    "dag_id": "Google_CovidMobility",
+    "import_name": "Google_CovidMobility",
+    "full_import_name": "scripts/google_datasets/covid_mobility:Google_CovidMobility",
+    "script_dir": "scripts/google_datasets/covid_mobility",
+    "cron_schedule": "30 11 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "These Community Mobility Reports aim to provide insights into what has changed in response to policies aimed at combating COVID-19. The reports chart movement trends over time by geography, across different categories of places such as retail and recreation, groceries and pharmacies, parks, transit stations, workplaces, and residential.",
+    "provenance_url": "https://www.google.com/covid19/mobility",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "google_datasets"
+  },
+  {
+    "dag_id": "India_CPCB_AirQualityData",
+    "import_name": "India_CPCB_AirQualityData",
+    "full_import_name": "scripts/india_cpcb:India_CPCB_AirQualityData",
+    "script_dir": "scripts/india_cpcb",
+    "cron_schedule": "00 * * * *",
+    "curator_emails": [
+      "vishg@google.com"
+    ],
+    "provenance_description": "India CPCB Air Quality Data",
+    "provenance_url": "https://airquality.cpcb.gov.in/caaqms/rss_feed/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "india_cpcb"
+  },
+  {
+    "dag_id": "India_CPCB_AirQualitySites",
+    "import_name": "India_CPCB_AirQualitySites",
+    "full_import_name": "scripts/india_cpcb:India_CPCB_AirQualitySites",
+    "script_dir": "scripts/india_cpcb",
+    "cron_schedule": "00 3 * * *",
+    "curator_emails": [
+      "vishg@google.com"
+    ],
+    "provenance_description": "India CPCB Air Quality Sites",
+    "provenance_url": "https://airquality.cpcb.gov.in/caaqms/rss_feed/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "india_cpcb"
+  },
+  {
+    "dag_id": "IndiaPovertyData",
+    "import_name": "IndiaPovertyData",
+    "full_import_name": "scripts/india_rbi/below_poverty_line:IndiaPovertyData",
+    "script_dir": "scripts/india_rbi/below_poverty_line",
+    "cron_schedule": null,
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Number and Percentage of Population Below Poverty Line Table published as part of Reserve Bank of India's Handbook of Statistics on the Indian Economy",
+    "provenance_url": "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+Economy",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "india_rbi"
+  },
+  {
+    "dag_id": "NOAA_GPCC_StandardardizedPrecipitationIndex",
+    "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
+    "full_import_name": "scripts/noaa/gpcc_spi:NOAA_GPCC_StandardardizedPrecipitationIndex",
+    "script_dir": "scripts/noaa/gpcc_spi",
+    "cron_schedule": "0 9 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "SPI for 1 degree grids calculated from monthly precipitation data using the Pearson distribution.",
+    "provenance_url": "https://www.drought.gov/data-maps-tools/global-precipitation-climatology-centre-gpcc-standardized-precipitation-index-spi",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "noaa"
+  },
+  {
+    "dag_id": "NOAA_GlobalForecastSystem",
+    "import_name": "NOAA_GlobalForecastSystem",
+    "full_import_name": "scripts/noaa_gfs:NOAA_GlobalForecastSystem",
+    "script_dir": "scripts/noaa_gfs",
+    "cron_schedule": "30 04,10,16,22 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "NOAA Global Forecast System (GFS) data",
+    "provenance_url": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/",
+    "config_override": {
+      "skip_gcs_upload": true,
+      "invoke_differ_tool": false,
+      "invoke_import_validation": false,
+      "invoke_import_tool": false
+    },
+    "resource_limits": {
+      "cpu": 64,
+      "memory": 256,
+      "disk": 4096
+    },
+    "category": "noaa_gfs"
+  },
+  {
+    "dag_id": "OECDRegionalDemography_Deaths",
+    "import_name": "OECDRegionalDemography_Deaths",
+    "full_import_name": "scripts/oecd/regional_demography/deaths:OECDRegionalDemography_Deaths",
+    "script_dir": "scripts/oecd/regional_demography/deaths",
+    "cron_schedule": "0 7 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Regional demographic statistics of deaths by age and sex measured by OECD (Organisation for Economic Co-operation and Development).",
+    "provenance_url": "https://data-explorer.oecd.org/vis?df[ds]=DisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_DEATH_5Y&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&to[TIME_PERIOD]=false&pd=%2C",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "oecd"
+  },
+  {
+    "dag_id": "OECDRegionalDemography_LifeExpectancy",
+    "import_name": "OECDRegionalDemography_LifeExpectancy",
+    "full_import_name": "scripts/oecd/regional_demography/life_expectancy:OECDRegionalDemography_LifeExpectancy",
+    "script_dir": "scripts/oecd/regional_demography/life_expectancy",
+    "cron_schedule": "0 8 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Life Expectancy statistics by gender measured by OECD (Organisation for Economic Co-operation and Development).",
+    "provenance_url": "https://data-explorer.oecd.org/vis?df[ds]=DisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_LIFE_EXP&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&pd=%2C&to[TIME_PERIOD]=false&vw=tb",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "oecd"
+  },
+  {
+    "dag_id": "OECDRegionalDemography_PopulationDensity",
+    "import_name": "OECDRegionalDemography_PopulationDensity",
+    "full_import_name": "scripts/oecd/regional_demography/pop_density:OECDRegionalDemography_PopulationDensity",
+    "script_dir": "scripts/oecd/regional_demography/pop_density",
+    "cron_schedule": "0 9 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population density statistics measured by OECD (Organisation for Economic Co-operation and Development).",
+    "provenance_url": "https://data-explorer.oecd.org/vis?pg=0&snb=1&tm=pop%20density&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_DENSITY&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&pd=%2C&to[TIME_PERIOD]=false&vw=tb",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "oecd"
+  },
+  {
+    "dag_id": "OECDRegionalDemography_Population",
+    "import_name": "OECDRegionalDemography_Population",
+    "full_import_name": "scripts/oecd/regional_demography/population:OECDRegionalDemography_Population",
+    "script_dir": "scripts/oecd/regional_demography/population",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population statistics by age and sex measured by OECD (Organisation for Economic Co-operation and Development).",
+    "provenance_url": "https://data-explorer.oecd.org/vis?fs[0]=Topic%2C0%7CRegional%252C%20rural%20and%20urban%20development%23GEO%23&pg=40&fc=Topic&bp=true&snb=117&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_POP_5Y&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&to[TIME_PERIOD]=false&vw=tb&pd=%2C",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "oecd"
+  },
+  {
+    "dag_id": "OWID_COVID19",
+    "import_name": "OWID_COVID19",
+    "full_import_name": "scripts/ourworldindata/covid19:OWID_COVID19",
+    "script_dir": "scripts/ourworldindata/covid19",
+    "cron_schedule": "0 2 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Our World In Data maintains COVID-19 dataset, updates daily. It includes data on confirmed cases, deaths, hospitalizations, and testing, as well as other variables of potential interest.",
+    "provenance_url": "https://ourworldindata.org/coronavirus",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "ourworldindata"
+  },
+  {
+    "dag_id": "ItalyPCMDPC_COVID19",
+    "import_name": "ItalyPCMDPC_COVID19",
+    "full_import_name": "scripts/pcm-dpc/covid-19:ItalyPCMDPC_COVID19",
+    "script_dir": "scripts/pcm-dpc/covid-19",
+    "cron_schedule": "0 18 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Cumulative positive cases of COVID-19 at regional, provincial, and national level in Italy from Italy department of Civil protection.",
+    "provenance_url": "https://github.com/pcm-dpc/COVID-19",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "pcm-dpc"
+  },
+  {
+    "dag_id": "UNEnergy",
+    "import_name": "UNEnergy",
+    "full_import_name": "scripts/un/energy:UNEnergy",
+    "script_dir": "scripts/un/energy",
+    "cron_schedule": "0 4 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The data is provided by the United Nations Statistics Division (UNSD) and is based on energy statistics collected through a variety of methods. The primary source for the data is the Annual Questionnaire on Energy Statistics (AQES), which is part of UNSD's regular data collection program. ",
+    "provenance_url": "https://unstats.un.org/unsd/energystats/data/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "un"
+  },
+  {
+    "dag_id": "BEA_USStatesQuarterlyGDP",
+    "import_name": "BEA_USStatesQuarterlyGDP",
+    "full_import_name": "scripts/us_bea/states_gdp:BEA_USStatesQuarterlyGDP",
+    "script_dir": "scripts/us_bea/states_gdp",
+    "cron_schedule": "30 10 30 1,4,7,10,12 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Quarterly data on inflation-adjusted GDP at a state level in the United States from the US Bureau of Economic Analysis.",
+    "provenance_url": "https://www.bea.gov/data/gdp/gdp-state",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_bea"
+  },
+  {
+    "dag_id": "USNationalPrisonerStatistics",
+    "import_name": "USNationalPrisonerStatistics",
+    "full_import_name": "scripts/us_bjs/nps:USNationalPrisonerStatistics",
+    "script_dir": "scripts/us_bjs/nps",
+    "cron_schedule": "0 9 5,25 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Data Refresh for US National Prisoner Statistics and Crime StatVarAgg Import",
+    "provenance_url": "https://www.bjs.gov/index.cfm?ty=dcdetail&iid=269",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_bjs"
+  },
+  {
+    "dag_id": "BLS_CPI",
+    "import_name": "BLS_CPI",
+    "full_import_name": "scripts/us_bls/cpi:BLS_CPI",
+    "script_dir": "scripts/us_bls/cpi",
+    "cron_schedule": "0 3 2,16 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index.BLS publishes three main types of CPIs: CPI-U, CPI-W, and C-CPI-U. CPI-U stands for CPI for All Urban Consumers. CPI-W stands for CPI for Urban Wage Earners and Clerical Workers. The two are both unchained and use the same basket of goods and prices. The difference is their population group. C-CPI-U stands for Chained CPI for All Urban Consumers. It is the chained version of CPI-U. Each of the three can have seasonally adjusted and unadjusted series.",
+    "provenance_url": "https://www.bls.gov/cpi/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_bls"
+  },
+  {
+    "dag_id": "BLS_JOLTS",
+    "import_name": "BLS_JOLTS",
+    "full_import_name": "scripts/us_bls/jolts:BLS_JOLTS",
+    "script_dir": "scripts/us_bls/jolts",
+    "cron_schedule": "30 02 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. Bureau of Labor Statistics data on job openings, hires, and separations.",
+    "provenance_url": "https://www.bls.gov/jlt/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_bls"
+  },
+  {
+    "dag_id": "USBTS_Tract_Household_Transportation",
+    "import_name": "USBTS_Tract_Household_Transportation",
+    "full_import_name": "scripts/us_bts/latch:USBTS_Tract_Household_Transportation",
+    "script_dir": "scripts/us_bts/latch",
+    "cron_schedule": "0 1 6 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US BTS Tract Household Transportation",
+    "provenance_url": "https://data.bts.gov/resource/va72-z8hz",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 128,
+      "disk": 300
+    },
+    "category": "us_bts"
+  },
+  {
+    "dag_id": "CDC500",
+    "import_name": "CDC500",
+    "full_import_name": "scripts/us_cdc/500_places:CDC500",
+    "script_dir": "scripts/us_cdc/500_places",
+    "cron_schedule": "0 4 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Variables related to health from the CDC",
+    "provenance_url": "https://www.cdc.gov/places/index.html",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 500
+    },
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC500_States",
+    "import_name": "CDC500_States",
+    "full_import_name": "scripts/us_cdc/cdc500_state:CDC500_States",
+    "script_dir": "scripts/us_cdc/cdc500_state",
+    "cron_schedule": "0 1 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Variables related to health from the CDC",
+    "provenance_url": "https://www.cdc.gov/places/index.html",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_StandardizedPrecipitationEvapotranspirationIndex",
+    "import_name": "CDC_StandardizedPrecipitationEvapotranspirationIndex",
+    "full_import_name": "scripts/us_cdc/cdc_standardized_precipitation/evapotranspiration_index:CDC_StandardizedPrecipitationEvapotranspirationIndex",
+    "script_dir": "scripts/us_cdc/cdc_standardized_precipitation/evapotranspiration_index",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Evapotranspiration Index",
+    "provenance_url": "https://data.cdc.gov/resource/6nbv-ifib",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_StandardizedPrecipitationIndex",
+    "import_name": "CDC_StandardizedPrecipitationIndex",
+    "full_import_name": "scripts/us_cdc/cdc_standardized_precipitation/index:CDC_StandardizedPrecipitationIndex",
+    "script_dir": "scripts/us_cdc/cdc_standardized_precipitation/index",
+    "cron_schedule": "0 11 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Index",
+    "provenance_url": "https://data.cdc.gov/resource/xbk2-5i4e",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_PalmerDroughtSeverityIndex",
+    "import_name": "CDC_PalmerDroughtSeverityIndex",
+    "full_import_name": "scripts/us_cdc/cdc_standardized_precipitation/palmer_drought:CDC_PalmerDroughtSeverityIndex",
+    "script_dir": "scripts/us_cdc/cdc_standardized_precipitation/palmer_drought",
+    "cron_schedule": "0 12 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology - Palmer Drought Severity Index",
+    "provenance_url": "https://data.cdc.gov/resource/en5r-5ds4",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_PM25CensusTract",
+    "import_name": "CDC_PM25CensusTract",
+    "full_import_name": "scripts/us_cdc/environmental_health_toxicology:CDC_PM25CensusTract",
+    "script_dir": "scripts/us_cdc/environmental_health_toxicology",
+    "cron_schedule": "0 1  2 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology",
+    "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_OzoneCensusTract",
+    "import_name": "CDC_OzoneCensusTract",
+    "full_import_name": "scripts/us_cdc/environmental_health_toxicology:CDC_OzoneCensusTract",
+    "script_dir": "scripts/us_cdc/environmental_health_toxicology",
+    "cron_schedule": "0 1  3 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology",
+    "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_PM25County",
+    "import_name": "CDC_PM25County",
+    "full_import_name": "scripts/us_cdc/environmental_health_toxicology:CDC_PM25County",
+    "script_dir": "scripts/us_cdc/environmental_health_toxicology",
+    "cron_schedule": "0 1  4 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology",
+    "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 128,
+      "disk": 200
+    },
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_OzoneCounty",
+    "import_name": "CDC_OzoneCounty",
+    "full_import_name": "scripts/us_cdc/environmental_health_toxicology:CDC_OzoneCounty",
+    "script_dir": "scripts/us_cdc/environmental_health_toxicology",
+    "cron_schedule": "0 1  5 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Environmental Health Toxicology",
+    "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 512,
+      "disk": 500
+    },
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "EPHHeatRelatedIllness",
+    "import_name": "EPHHeatRelatedIllness",
+    "full_import_name": "scripts/us_cdc/heat_related_illness:EPHHeatRelatedIllness",
+    "script_dir": "scripts/us_cdc/heat_related_illness",
+    "cron_schedule": "0 3 3 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Heat-related illness, mortality, and emergency department visits data from the US CDC's Environmental Public Health Tracking Network.",
+    "provenance_url": "https://ephtracking.cdc.gov/qrlist/35",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "CDC_NORS_NonInfectious",
+    "import_name": "CDC_NORS_NonInfectious",
+    "full_import_name": "scripts/us_cdc/non_infectious_diseases:CDC_NORS_NonInfectious",
+    "script_dir": "scripts/us_cdc/non_infectious_diseases",
+    "cron_schedule": "0 2 15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Reports of foodborne, waterborne disease outbreaks and disease outbreaks spread by contact with environmental sources, infected people or animals, and other means. StatVars are created for the count of disease outbreaks making aggregations by transmission modes, etiology and etiology status only. Current import has statvars with at most one etiology.",
+    "provenance_url": "https://wwwn.cdc.gov/norsdashboard/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_cdc"
+  },
+  {
+    "dag_id": "GenderIncomeInequality",
+    "import_name": "GenderIncomeInequality",
+    "full_import_name": "scripts/us_census/gender_income_inequality:GenderIncomeInequality",
+    "script_dir": "scripts/us_census/gender_income_inequality",
+    "cron_schedule": "0 03 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. Census Bureau Data",
+    "provenance_url": "https://data.census.gov/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_Annual_Population",
+    "import_name": "USCensusPEP_Annual_Population",
+    "full_import_name": "scripts/us_census/pep/annual_population:USCensusPEP_Annual_Population",
+    "script_dir": "scripts/us_census/pep/annual_population",
+    "cron_schedule": "0 10 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. Census Bureau PEP Annual Population",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_MonthlyPopulation",
+    "import_name": "USCensusPEP_MonthlyPopulation",
+    "full_import_name": "scripts/us_census/pep/monthly_population_estimate:USCensusPEP_MonthlyPopulation",
+    "script_dir": "scripts/us_census/pep/monthly_population_estimate",
+    "cron_schedule": "0 7 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Census Bureau's Population Estimates Program (PEP) produces estimates of the population for the United States.",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_By_SexRaceHispanicOrigin",
+    "import_name": "USCensusPEP_By_SexRaceHispanicOrigin",
+    "full_import_name": "scripts/us_census/pep/pep_by_srh:USCensusPEP_By_SexRaceHispanicOrigin",
+    "script_dir": "scripts/us_census/pep/pep_by_srh",
+    "cron_schedule": "0 06 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. census population estimate by sex race hispanic origin",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_PopulationEstimatebyRace",
+    "import_name": "USCensusPEP_PopulationEstimatebyRace",
+    "full_import_name": "scripts/us_census/pep/population_estimate_by_race:USCensusPEP_PopulationEstimatebyRace",
+    "script_dir": "scripts/us_census/pep/population_estimate_by_race",
+    "cron_schedule": "0 04 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Census Bureau's Population Estimates Program (PEP) produces estimates of the population for the United States.",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_AgeSexRace",
+    "import_name": "USCensusPEP_AgeSexRace",
+    "full_import_name": "scripts/us_census/pep/population_estimates_by_asr:USCensusPEP_AgeSexRace",
+    "script_dir": "scripts/us_census/pep/population_estimates_by_asr",
+    "cron_schedule": "0 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": ".The Census Bureau's Population Estimates Program (PEP) produces estimates of the population for the United States.",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 32,
+      "memory": 512,
+      "disk": 300
+    },
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_Sex",
+    "import_name": "USCensusPEP_Sex",
+    "full_import_name": "scripts/us_census/pep/us_pep_sex:USCensusPEP_Sex",
+    "script_dir": "scripts/us_census/pep/us_pep_sex",
+    "cron_schedule": "0 03 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US Census Population Estimates Program (PEP).",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "USCensusPEP_By_Sex_Race",
+    "import_name": "USCensusPEP_By_Sex_Race",
+    "full_import_name": "scripts/us_census/pep/us_pep_sexrace:USCensusPEP_By_Sex_Race",
+    "script_dir": "scripts/us_census/pep/us_pep_sexrace",
+    "cron_schedule": "0 10 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US Census Population Estimates Program (PEP)",
+    "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_census"
+  },
+  {
+    "dag_id": "EIA_Coal",
+    "import_name": "EIA_Coal",
+    "full_import_name": "scripts/us_eia/opendata:EIA_Coal",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 14 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Coal dataset has country, state-level level information .",
+    "provenance_url": "https://www.eia.gov/opendata/qb.php?category=717234",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_Electricity",
+    "import_name": "EIA_Electricity",
+    "full_import_name": "scripts/us_eia/opendata:EIA_Electricity",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 7 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and \u201csectors\u201d (like residential, commercial, etc.).",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_NaturalGas",
+    "import_name": "EIA_NaturalGas",
+    "full_import_name": "scripts/us_eia/opendata:EIA_NaturalGas",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 8 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Natural gas dataset has country and state-level data.",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_NuclearOutages",
+    "import_name": "EIA_NuclearOutages",
+    "full_import_name": "scripts/us_eia/opendata:EIA_NuclearOutages",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 9 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Nuclear outage dataset has nuclear-plant and national data about Nuclear energy generation capacity and planned outages.",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_Petroleum",
+    "import_name": "EIA_Petroleum",
+    "full_import_name": "scripts/us_eia/opendata:EIA_Petroleum",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 10 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "EIA Petroleum dataset has country and state-level data.",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_International",
+    "import_name": "EIA_International",
+    "full_import_name": "scripts/us_eia/opendata:EIA_International",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 11 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "EIA International Energy dataset has country, continent and world-level data.",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_SEDS",
+    "import_name": "EIA_SEDS",
+    "full_import_name": "scripts/us_eia/opendata:EIA_SEDS",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 12 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "EIA SEDS International Energy dataset has US country-level and state-level data.",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EIA_TotalEnergy",
+    "import_name": "EIA_TotalEnergy",
+    "full_import_name": "scripts/us_eia/opendata:EIA_TotalEnergy",
+    "script_dir": "scripts/us_eia/opendata",
+    "cron_schedule": "0 13 5,20 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Total Energy dataset has US country-level data.",
+    "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_eia"
+  },
+  {
+    "dag_id": "EPA_USAirPollutantEmissionTrends_NationalAndState",
+    "import_name": "EPA_USAirPollutantEmissionTrends_NationalAndState",
+    "full_import_name": "scripts/us_epa/air_emissions_inventory/national_state:EPA_USAirPollutantEmissionTrends_NationalAndState",
+    "script_dir": "scripts/us_epa/air_emissions_inventory/national_state",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US Environment Protection Agency (EPA) Air Pollutant Emissions Trends Data.",
+    "provenance_url": "https://www.epa.gov/air-emissions-inventories/air-pollutant-emissions-trends-data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_epa"
+  },
+  {
+    "dag_id": "EPACriteriaAirPollutants",
+    "import_name": "EPACriteriaAirPollutants",
+    "full_import_name": "scripts/us_epa/airdata:EPACriteriaAirPollutants",
+    "script_dir": "scripts/us_epa/airdata",
+    "cron_schedule": "15 22 10 1,7 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Air quality data collected from outdoor monitors on the county, CBSA, and site monitor level.",
+    "provenance_url": "https://www.epa.gov/outdoor-air-quality-data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_epa"
+  },
+  {
+    "dag_id": "EPAAirQualityIndex",
+    "import_name": "EPAAirQualityIndex",
+    "full_import_name": "scripts/us_epa/airqualityindex:EPAAirQualityIndex",
+    "script_dir": "scripts/us_epa/airqualityindex",
+    "cron_schedule": "15 22 10 1,7 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Air quality data collected from outdoor monitors on the county, CBSA, and site monitor level.",
+    "provenance_url": "https://aqs.epa.gov/aqsweb/airdata/download_files.html",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 32,
+      "memory": 128,
+      "disk": 300
+    },
+    "category": "us_epa"
+  },
+  {
+    "dag_id": "EPA_EJSCREEN",
+    "import_name": "EPA_EJSCREEN",
+    "full_import_name": "scripts/us_epa/ejscreen:EPA_EJSCREEN",
+    "script_dir": "scripts/us_epa/ejscreen",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "EJSCREEN combines Census demographic data and environmental data from EPA sources",
+    "provenance_url": "https://www.epa.gov/ejscreen",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 256,
+      "disk": 300
+    },
+    "category": "us_epa"
+  },
+  {
+    "dag_id": "EPA_GHGRP",
+    "import_name": "EPA_GHGRP",
+    "full_import_name": "scripts/us_epa/ghgrp:EPA_GHGRP",
+    "script_dir": "scripts/us_epa/ghgrp",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "EPA emissions data reported as part of the Greenhouse Gas Reporting Program (GHGRP).",
+    "provenance_url": "https://www.epa.gov/ghgreporting",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_epa"
+  },
+  {
+    "dag_id": "EPA_AirPollutantEmission_Level1",
+    "import_name": "EPA_AirPollutantEmission_Level1",
+    "full_import_name": "scripts/us_epa/national_emissions_inventory:EPA_AirPollutantEmission_Level1",
+    "script_dir": "scripts/us_epa/national_emissions_inventory",
+    "cron_schedule": "0 0 1 1-12/3 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The import has variables that are directly available from EPA source for National Emissions Inventory on SCC Level 1.",
+    "provenance_url": "https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 128,
+      "disk": 100
+    },
+    "category": "us_epa"
+  },
+  {
+    "dag_id": "USFed_ConstantMaturityRates_Test",
+    "import_name": "USFed_ConstantMaturityRates_Test",
+    "full_import_name": "scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test",
+    "script_dir": "scripts/us_fed/treasury_constant_maturity_rates",
+    "cron_schedule": "15 3 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. Federal Reserve Treasury Nominal and Inflation-Indexed Constant Maturity Series",
+    "provenance_url": "https://www.federalreserve.gov/releases/h15/",
+    "config_override": {
+      "enable_skip_status": false
+    },
+    "resource_limits": {},
+    "category": "us_fed"
+  },
+  {
+    "dag_id": "USFed_ConstantMaturityRates",
+    "import_name": "USFed_ConstantMaturityRates",
+    "full_import_name": "scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates",
+    "script_dir": "scripts/us_fed/treasury_constant_maturity_rates",
+    "cron_schedule": "15 3 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "U.S. Federal Reserve Treasury Nominal and Inflation-Indexed Constant Maturity Series",
+    "provenance_url": "https://www.federalreserve.gov/releases/h15/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_fed"
+  },
+  {
+    "dag_id": "USFEMA_NationalRiskIndex",
+    "import_name": "USFEMA_NationalRiskIndex",
+    "full_import_name": "scripts/us_fema/national_risk_index:USFEMA_NationalRiskIndex",
+    "script_dir": "scripts/us_fema/national_risk_index",
+    "cron_schedule": "0 4 2,16 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "USFEMA National RiskIndex",
+    "provenance_url": "https://hazards.fema.gov/nri/data-resources",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_fema"
+  },
+  {
+    "dag_id": "USGS_Earthquake",
+    "import_name": "USGS_Earthquake",
+    "full_import_name": "scripts/us_gs/earthquake:USGS_Earthquake",
+    "script_dir": "scripts/us_gs/earthquake",
+    "cron_schedule": "0 */3 * * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "USGS earthquake data for historical earthquake events globally.",
+    "provenance_url": "https://www.usgs.gov/programs/earthquake-hazards/earthquakes",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_gs"
+  },
+  {
+    "dag_id": "HUD_IncomeLimits",
+    "import_name": "HUD_IncomeLimits",
+    "full_import_name": "scripts/us_hud/income:HUD_IncomeLimits",
+    "script_dir": "scripts/us_hud/income",
+    "cron_schedule": "15 23 * * 7",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "HUD sets income limits for eligibility in assisted housing programs based on Median Family Income for metropolitan and non-metropolitan areas.",
+    "provenance_url": "https://www.huduser.gov/portal/datasets/il.html",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_hud"
+  },
+  {
+    "dag_id": "NCES_PrivateSchool",
+    "import_name": "NCES_PrivateSchool",
+    "full_import_name": "scripts/us_nces/demographics/private_school:NCES_PrivateSchool",
+    "script_dir": "scripts/us_nces/demographics/private_school",
+    "cron_schedule": "30 3 1 3,6,9,12 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US nces school data for private",
+    "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 32,
+      "memory": 512,
+      "disk": 300
+    },
+    "category": "us_nces"
+  },
+  {
+    "dag_id": "NCES_PublicSchool",
+    "import_name": "NCES_PublicSchool",
+    "full_import_name": "scripts/us_nces/demographics/public_school:NCES_PublicSchool",
+    "script_dir": "scripts/us_nces/demographics/public_school",
+    "cron_schedule": "30 3 2 3,6,9,12 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US nces school data for public",
+    "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 32,
+      "memory": 512,
+      "disk": 300
+    },
+    "category": "us_nces"
+  },
+  {
+    "dag_id": "NCES_SchoolDistrict",
+    "import_name": "NCES_SchoolDistrict",
+    "full_import_name": "scripts/us_nces/demographics/school_district:NCES_SchoolDistrict",
+    "script_dir": "scripts/us_nces/demographics/school_district",
+    "cron_schedule": "30 3 3 3,6,9,12 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US nces school data for district",
+    "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 32,
+      "memory": 512,
+      "disk": 300
+    },
+    "category": "us_nces"
+  },
+  {
+    "dag_id": "USDA_AgricultureCensus",
+    "import_name": "USDA_AgricultureCensus",
+    "full_import_name": "scripts/us_usda/nass_census:USDA_AgricultureCensus",
+    "script_dir": "scripts/us_usda/nass_census",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "USDA census provides data on food, agriculture, nutrition, and other issues based on public policy, available science, and effective management.",
+    "provenance_url": "https://www.nass.usda.gov/datasets/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_usda"
+  },
+  {
+    "dag_id": "USDA_AgricultureSurvey",
+    "import_name": "USDA_AgricultureSurvey",
+    "full_import_name": "scripts/us_usda/quickstats:USDA_AgricultureSurvey",
+    "script_dir": "scripts/us_usda/quickstats",
+    "cron_schedule": "30 3 10 3,6,9,12 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The National Agricultural Statistics Service (NASS) offers Quick Stats, an on-line database containing official published aggregate estimates related to U.S. agricultural production.",
+    "provenance_url": "https://quickstats.nass.usda.gov/api/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "us_usda"
+  },
+  {
+    "dag_id": "WorldBankDatasets",
+    "import_name": "WorldBankDatasets",
+    "full_import_name": "scripts/world_bank/datasets:WorldBankDatasets",
+    "script_dir": "scripts/world_bank/datasets",
+    "cron_schedule": "0 9 5,25 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The WorldBankDatasets contains data about multiple databases like World development Indicators,Jobs,Education Statistics",
+    "provenance_url": "https://databank.worldbank.org/source/world-development-indicators",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 500
+    },
+    "category": "world_bank"
+  },
+  {
+    "dag_id": "WorldBankWDI",
+    "import_name": "WorldBankWDI",
+    "full_import_name": "scripts/world_bank/wdi/download_indicators:WorldBankWDI",
+    "script_dir": "scripts/world_bank/wdi/download_indicators",
+    "cron_schedule": "0 0 1 * *",
+    "curator_emails": [
+      "cbari@google.com"
+    ],
+    "provenance_description": "World Bank dataset containing various statistics for countries.",
+    "provenance_url": "https://databank.worldbank.org/source/world-development-indicators",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "world_bank"
+  },
+  {
+    "dag_id": "WorldDevelopmentIndicators",
+    "import_name": "WorldDevelopmentIndicators",
+    "full_import_name": "scripts/world_bank/wdi:WorldDevelopmentIndicators",
+    "script_dir": "scripts/world_bank/wdi",
+    "cron_schedule": "0 11 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Variables related to demographics, energy, health, labor, etc. from the World Bank",
+    "provenance_url": "https://datacatalog.worldbank.org/dataset/world-development-indicators/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "world_bank"
+  },
+  {
+    "dag_id": "sample_rsi_import",
+    "import_name": "sample_rsi_import",
+    "full_import_name": "simple_imports/sample:sample_rsi_import",
+    "script_dir": "simple_imports/sample",
+    "cron_schedule": "0 20 * * *",
+    "curator_emails": [
+      "ajaits@google.com"
+    ],
+    "provenance_description": "Sample import to be run on Cloud run",
+    "provenance_url": "https://github.com/datacommonsorg/import/tree/master/simple/sample",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "simple_imports"
+  },
+  {
+    "dag_id": "WHO_TuberculosisBacteriologicallyConfirmed",
+    "import_name": "WHO_TuberculosisBacteriologicallyConfirmed",
+    "full_import_name": "statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed:WHO_TuberculosisBacteriologicallyConfirmed",
+    "script_dir": "statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed",
+    "cron_schedule": "0 0 1 1,4,7,10 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Number of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
+    "provenance_url": "https://data.who.int/indicators/i/1891124/5D51DB1",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 4,
+      "memory": 8,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "BIS_CentralBankPolicyRate",
+    "import_name": "BIS_CentralBankPolicyRate",
+    "full_import_name": "statvar_imports/bis/bis_central_bank_policy_rate:BIS_CentralBankPolicyRate",
+    "script_dir": "statvar_imports/bis/bis_central_bank_policy_rate",
+    "cron_schedule": "0 05 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Bank for International Settlements (2025), Central bank policy rates, BIS WS_CBPOL 1.0 (data set)",
+    "provenance_url": "https://data.bis.org/topics/CBPOL/data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Brazil_SIDRA_IBGE",
+    "import_name": "Brazil_SIDRA_IBGE",
+    "full_import_name": "statvar_imports/brazil_sidra_ibge:Brazil_SIDRA_IBGE",
+    "script_dir": "statvar_imports/brazil_sidra_ibge",
+    "cron_schedule": "30 09 25 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population Census on Economy Statistics for Brazil at country and state level.",
+    "provenance_url": "https://sidra.ibge.gov.br/home/pnadct/brazil",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Brazil_RuralDevelopmentProgram",
+    "import_name": "Brazil_RuralDevelopmentProgram",
+    "full_import_name": "statvar_imports/brazil_visdata/brazil_rural_development_program:Brazil_RuralDevelopmentProgram",
+    "script_dir": "statvar_imports/brazil_visdata/brazil_rural_development_program",
+    "cron_schedule": "0 06 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Different population benefiting from Brazil Rural Development Program.",
+    "provenance_url": "https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCHS_BRFSS_Asthma",
+    "import_name": "NCHS_BRFSS_Asthma",
+    "full_import_name": "statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma:NCHS_BRFSS_Asthma",
+    "script_dir": "statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma",
+    "cron_schedule": "0 02 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset mainly focused on Adult and child Self-Reported Lifetime Asthma Prevalence.",
+    "provenance_url": "https://www.cdc.gov/asthma/brfss/default.htm",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CanadaStatisticsAgeGender",
+    "import_name": "CanadaStatisticsAgeGender",
+    "full_import_name": "statvar_imports/canada_statistics_age_gender:CanadaStatisticsAgeGender",
+    "script_dir": "statvar_imports/canada_statistics_age_gender",
+    "cron_schedule": "30 5 1 *  *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Canada Population Yearly Esitmates at Country, Province and Territories level across different age groups and gender.",
+    "provenance_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000501",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_CCD_Enrollment",
+    "import_name": "US_CCD_Enrollment",
+    "full_import_name": "statvar_imports/ccd/enrollment:US_CCD_Enrollment",
+    "script_dir": "statvar_imports/ccd/enrollment",
+    "cron_schedule": "0 06 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Enrollment in public elementary and secondary schools, by level, grade, and race/ethnicity.",
+    "provenance_url": "https://nces.ed.gov/programs/digest/d24/tables/dt24_203.65.asp",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CDCWonder_NNDSS_Infectious_Weekly",
+    "import_name": "CDCWonder_NNDSS_Infectious_Weekly",
+    "full_import_name": "statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly:CDCWonder_NNDSS_Infectious_Weekly",
+    "script_dir": "statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly",
+    "cron_schedule": "00 11 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the incident counts of different infectious diseases per week that are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.",
+    "provenance_url": "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 32,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CDC_Social_Vulnerability_Index",
+    "import_name": "CDC_Social_Vulnerability_Index",
+    "full_import_name": "statvar_imports/cdc/social_vulnerability_index:CDC_Social_Vulnerability_Index",
+    "script_dir": "statvar_imports/cdc/social_vulnerability_index",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Social Vulnerability Index (CDC/ATSDR SVI or SVI) identifies communities experiencing social vulnerability.",
+    "provenance_url": "https://www.atsdr.cdc.gov/place-health/php/svi/svi-data-documentation-download.html",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CensusSAHIE",
+    "import_name": "CensusSAHIE",
+    "full_import_name": "statvar_imports/census_v2/sahie:CensusSAHIE",
+    "script_dir": "statvar_imports/census_v2/sahie",
+    "cron_schedule": "0 0 15 12 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Small Area Health Insurance Estimates (SAHIE) program provides the only up-to-date, state-based estimates of health insurance coverage for all counties in the United States.",
+    "provenance_url": "https://www.census.gov/programs-surveys/sahie.html",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 128,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CensusSAIPE",
+    "import_name": "CensusSAIPE",
+    "full_import_name": "statvar_imports/census_v2/saipe:CensusSAIPE",
+    "script_dir": "statvar_imports/census_v2/saipe",
+    "cron_schedule": "0 5 3,17 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Small Area Income and Poverty Estimates (SAIPE) program provides the only up-to-date, state-based estimates of poverty for school districts for all counties in the United States.",
+    "provenance_url": "https://www.census.gov/programs-surveys/saipe.html",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "usa_child_birth",
+    "import_name": "usa_child_birth",
+    "full_import_name": "statvar_imports/child_birth:usa_child_birth",
+    "script_dir": "statvar_imports/child_birth",
+    "cron_schedule": "0 07 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The data set contains USA birth data",
+    "provenance_url": "https://www.cdc.gov/nchs/nvss/vsrr/provisional-tables.html",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "ClimateTrace",
+    "import_name": "ClimateTrace",
+    "full_import_name": "statvar_imports/climate_trace:ClimateTrace",
+    "script_dir": "statvar_imports/climate_trace",
+    "cron_schedule": "30 05 7,24 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Climate Trace data provides comprehensive, granular, and up-to-date greenhouse gas emissions data using satellite imagery and other public data sources.",
+    "provenance_url": "https://climatetrace.org/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Commerce_EDA",
+    "import_name": "Commerce_EDA",
+    "full_import_name": "statvar_imports/commerce_eda:Commerce_EDA",
+    "script_dir": "statvar_imports/commerce_eda",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Commerce - EDA has led the federal economic development agenda by promoting innovation and competitiveness, preparing American regions for growth and success in the worldwide economy.",
+    "provenance_url": "https://www.census.gov/retail/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "crdc_instructional_wifi_devices",
+    "import_name": "crdc_instructional_wifi_devices",
+    "full_import_name": "statvar_imports/crdc/instructional_wifi_devices:crdc_instructional_wifi_devices",
+    "script_dir": "statvar_imports/crdc/instructional_wifi_devices",
+    "cron_schedule": "0 0 1 */2 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Civil Rights Data Collection (CRDC) has released data concerning the total number of devices (computers, laptops, tablets, etc.) that can connect via Wi-Fi and are used by students for instructional purposes",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CRDC_EducationSchool_HarassmentOrBullying",
+    "import_name": "CRDC_EducationSchool_HarassmentOrBullying",
+    "full_import_name": "statvar_imports/crdc_import/crdc_harassment_or_bullying:CRDC_EducationSchool_HarassmentOrBullying",
+    "script_dir": "statvar_imports/crdc_import/crdc_harassment_or_bullying",
+    "cron_schedule": "0 0 15 7 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on harassment or bullying data.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CRDC_Education_Discipline_Attendance",
+    "import_name": "CRDC_Education_Discipline_Attendance",
+    "full_import_name": "statvar_imports/crdc_import:CRDC_Education_Discipline_Attendance",
+    "script_dir": "statvar_imports/crdc_import",
+    "cron_schedule": "0 8 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on chronic absenteeism, offenses, and restraint and seclusion data.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 32,
+      "memory": 512,
+      "disk": 400
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "India_RBI_State_Statistics",
+    "import_name": "India_RBI_State_Statistics",
+    "full_import_name": "statvar_imports/database_on_indian_economy/india_rbi_state_statistics:India_RBI_State_Statistics",
+    "script_dir": "statvar_imports/database_on_indian_economy/india_rbi_state_statistics",
+    "cron_schedule": "0 10 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Handbook of statistics on Indian states from Reserve Bank of India.",
+    "provenance_url": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Denmark_Demographics",
+    "import_name": "Denmark_Demographics",
+    "full_import_name": "statvar_imports/denmark_demographics:Denmark_Demographics",
+    "script_dir": "statvar_imports/denmark_demographics",
+    "cron_schedule": "0 10 20 2,5,8,11 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population data for Denmark from Statbank",
+    "provenance_url": "https://www.statbank.dk/statbank5a/default.asp?w=1280",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCSES_DoctorateDegreeEmployment",
+    "import_name": "NCSES_DoctorateDegreeEmployment",
+    "full_import_name": "statvar_imports/doctoratedegreeemployment:NCSES_DoctorateDegreeEmployment",
+    "script_dir": "statvar_imports/doctoratedegreeemployment",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Science,engineering and health doctorate holders employed in universities and 4-year colleges by broad occupation,sex,race,ethnicity and tenure status",
+    "provenance_url": "https://ncses.nsf.gov/pubs/nsf19304/assets/data/tables/wmpd19-sr-tab09-026.xlsx",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "FAO_Currency_statvar",
+    "import_name": "FAO_Currency_statvar",
+    "full_import_name": "statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar:FAO_Currency_statvar",
+    "script_dir": "statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar",
+    "cron_schedule": "0 07 * * 4",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The exchange rate of currency broken down by country, currency standardization type, and currency (using ISO 4217 Currency Code).",
+    "provenance_url": "https://bulks-faostat.fao.org/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "FBIGovCrime",
+    "import_name": "FBIGovCrime",
+    "full_import_name": "statvar_imports/fbi/fbigovcrime:FBIGovCrime",
+    "script_dir": "statvar_imports/fbi/fbigovcrime",
+    "cron_schedule": "30 05 1 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Federal Bureau of Investigation (FBI), a part of the U.S. Department of Justice, for their nationwide Uniform Crime Reporting (UCR) Program, which compiles and publishes national crime statistics.",
+    "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "USFEMA_FloodInsuranceClaims",
+    "import_name": "USFEMA_FloodInsuranceClaims",
+    "full_import_name": "statvar_imports/fema/flood_insurance_claims:USFEMA_FloodInsuranceClaims",
+    "script_dir": "statvar_imports/fema/flood_insurance_claims",
+    "cron_schedule": "0 11 1 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "National flood insurance claims data",
+    "provenance_url": "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 64,
+      "memory": 256,
+      "disk": 4096
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Finland_Census",
+    "import_name": "Finland_Census",
+    "full_import_name": "statvar_imports/finland_census:Finland_Census",
+    "script_dir": "statvar_imports/finland_census",
+    "cron_schedule": "30 5 1 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "National statistical data and socio-economic indicators for Finland, provided by Statistics Finland",
+    "provenance_url": "https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/StatFin__vaerak/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "France_Demographics",
+    "import_name": "France_Demographics",
+    "full_import_name": "statvar_imports/france_demographics:France_Demographics",
+    "script_dir": "statvar_imports/france_demographics",
+    "cron_schedule": "0 10 21 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population data for France from INSEE",
+    "provenance_url": "https://www.insee.fr/en/statistiques/8333211?sommaire=8333329",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 32,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "BEAGDPv2",
+    "import_name": "BEAGDPv2",
+    "full_import_name": "statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2:BEAGDPv2",
+    "script_dir": "statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2",
+    "cron_schedule": "0 07 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The data set contains GDP by  county, Metro, and Other Areas",
+    "provenance_url": "https://apps.bea.gov/regional/zip/CAGDP9.zip",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Google_SustainabilityFinancialIncentives",
+    "import_name": "Google_SustainabilityFinancialIncentives",
+    "full_import_name": "statvar_imports/google_sustainability_financial_incentives:Google_SustainabilityFinancialIncentives",
+    "script_dir": "statvar_imports/google_sustainability_financial_incentives",
+    "cron_schedule": "0 06 * * 3",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "A set of energy and transportation related financial incentives offered by government and utility organizations.",
+    "provenance_url": "https://www.google.com",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "IndiaNSS_HealthAilments",
+    "import_name": "IndiaNSS_HealthAilments",
+    "full_import_name": "statvar_imports/india_ndap/india_nss_health_ailments:IndiaNSS_HealthAilments",
+    "script_dir": "statvar_imports/india_ndap/india_nss_health_ailments",
+    "cron_schedule": "0 0 1 1 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "A quantitative dataset from the NSS Report No. 556 on Health in India, providing a profile of ailments, healthcare facility usage, and expenditures based on a survey",
+    "provenance_url": "https://ndap.niti.gov.in/dataset/7300",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "India_LifeExpectancy",
+    "import_name": "India_LifeExpectancy",
+    "full_import_name": "statvar_imports/india_ndap/ndap:India_LifeExpectancy",
+    "script_dir": "statvar_imports/india_ndap/ndap",
+    "cron_schedule": "00 11 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Life expectancy of a person in India based on gender at state level.",
+    "provenance_url": "https://ndap.niti.gov.in/dataset/7375",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "India_NFHS",
+    "import_name": "India_NFHS",
+    "full_import_name": "statvar_imports/india_nfhs:India_NFHS",
+    "script_dir": "statvar_imports/india_nfhs",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "India National Family Health Survey - Data on population dynamics and health indicators as well as data on emerging issues in health and family welfare and associated domains in District Level. National Data and Analytics Platform (NDAP).(2022 January 02). Datasets. Retrieved October, 10 2023 from National Data and Analytics Platform (NDAP): https://ndap.niti.gov.in/",
+    "provenance_url": "https://ndap.niti.gov.in/dataset/6821",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "India_RBIStateDomesticProduct",
+    "import_name": "India_RBIStateDomesticProduct",
+    "full_import_name": "statvar_imports/india_rbistatedomesticproduct:India_RBIStateDomesticProduct",
+    "script_dir": "statvar_imports/india_rbistatedomesticproduct",
+    "cron_schedule": "0 09 4,18 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "RBI State Domestic Product data",
+    "provenance_url": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "INPE_Fire_Event_Count",
+    "import_name": "INPE_Fire_Event_Count",
+    "full_import_name": "statvar_imports/inpe_fire:INPE_Fire_Event_Count",
+    "script_dir": "statvar_imports/inpe_fire",
+    "cron_schedule": "00 11 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Life expectancy of a person in India based on gender at state level.",
+    "provenance_url": "https://ndap.niti.gov.in/dataset/7375",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "IPEDS_StudentToFacultyRatio",
+    "import_name": "IPEDS_StudentToFacultyRatio",
+    "full_import_name": "statvar_imports/ipeds/student_to_faculty_ratio:IPEDS_StudentToFacultyRatio",
+    "script_dir": "statvar_imports/ipeds/student_to_faculty_ratio",
+    "cron_schedule": "0 0 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Integrated Postsecondary Education Data System (IPEDS) is the official online home for the primary federal source of data on U.S. colleges, universities, and technical/vocational institutions.. This import focuses on Student to Faculty Ratio data.",
+    "provenance_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=859539d0-db09-4d03-a36a-eabf93d07355&rtid=7",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Ireland_Census",
+    "import_name": "Ireland_Census",
+    "full_import_name": "statvar_imports/ireland_census:Ireland_Census",
+    "script_dir": "statvar_imports/ireland_census",
+    "cron_schedule": "0 05 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Ireland Demographics, Health and Economy data from Central Statistics Office(CSO) by country, county and city",
+    "provenance_url": "https://data.cso.ie/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "MexicoCensus_AA2",
+    "import_name": "MexicoCensus_AA2",
+    "full_import_name": "statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2:MexicoCensus_AA2",
+    "script_dir": "statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2",
+    "cron_schedule": "0 07 * * 3",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Mexican Demographics data from The Humanitarian Data Exchange(HDX) at Municipal Level.",
+    "provenance_url": "https://data.humdata.org/dataset/cod-ps-mex",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Mongolia_Demographics",
+    "import_name": "Mongolia_Demographics",
+    "full_import_name": "statvar_imports/mongolia_imports/mongolia_demographics:Mongolia_Demographics",
+    "script_dir": "statvar_imports/mongolia_imports/mongolia_demographics",
+    "cron_schedule": "0 04 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Data related to the Mongolia's population and households at country level",
+    "provenance_url": "https://www.1212.mn/en/statcate",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Mongolia_Education",
+    "import_name": "Mongolia_Education",
+    "full_import_name": "statvar_imports/mongolia_imports/mongolia_education:Mongolia_Education",
+    "script_dir": "statvar_imports/mongolia_imports/mongolia_education",
+    "cron_schedule": "0 04 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Data related to the Mongolia's education at country level",
+    "provenance_url": "https://www.1212.mn/en/statcate",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Mongolia_Employment",
+    "import_name": "Mongolia_Employment",
+    "full_import_name": "statvar_imports/mongolia_imports/mongolia_employment:Mongolia_Employment",
+    "script_dir": "statvar_imports/mongolia_imports/mongolia_employment",
+    "cron_schedule": "0 02 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Data related to the Mongolia's labour and business at country level",
+    "provenance_url": "https://www.1212.mn/en/statcate",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Mongolia_Health",
+    "import_name": "Mongolia_Health",
+    "full_import_name": "statvar_imports/mongolia_imports/mongolia_health:Mongolia_Health",
+    "script_dir": "statvar_imports/mongolia_imports/mongolia_health",
+    "cron_schedule": "0 03 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Statistical data related to births and deaths in Mongolia",
+    "provenance_url": "https://www.1212.mn/en/statcate",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCSES_Demographics_SEH_Import",
+    "import_name": "NCSES_Demographics_SEH_Import",
+    "full_import_name": "statvar_imports/ncses/ncses_demographics_seh_import:NCSES_Demographics_SEH_Import",
+    "script_dir": "statvar_imports/ncses/ncses_demographics_seh_import",
+    "cron_schedule": "30 05 12,28 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health.",
+    "provenance_url": "https://ncses.nsf.gov/pubs/nsf25316",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCSES_Median_Annual_Salary_Import",
+    "import_name": "NCSES_Median_Annual_Salary_Import",
+    "full_import_name": "statvar_imports/ncses/ncses_median_annual_salary:NCSES_Median_Annual_Salary_Import",
+    "script_dir": "statvar_imports/ncses/ncses_median_annual_salary",
+    "cron_schedule": "30 05 13,27 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Median salary of full-time employed college graduates, by sex, major occupation, age, ethnicity, race, disability status, and citizenship status",
+    "provenance_url": "https://ncses.nsf.gov/pubs/nsf23306#section13069",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCSES_Research_Doctorate_Recipients_Import",
+    "import_name": "NCSES_Research_Doctorate_Recipients_Import",
+    "full_import_name": "statvar_imports/ncses/research_doctorate_recipients:NCSES_Research_Doctorate_Recipients_Import",
+    "script_dir": "statvar_imports/ncses/research_doctorate_recipients",
+    "cron_schedule": "30 05 12,26 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Research doctorate recipients by ethnicity, race and citizenship status",
+    "provenance_url": "https://ncses.nsf.gov/pubs/nsf23300/data-tables",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Commerce_NTIA",
+    "import_name": "Commerce_NTIA",
+    "full_import_name": "statvar_imports/ntia_internet_use_survey/commerce_ntia:Commerce_NTIA",
+    "script_dir": "statvar_imports/ntia_internet_use_survey/commerce_ntia",
+    "cron_schedule": "0 06 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "NTIA programs and policymaking focus largely on expanding broadband Internet access and adoption in America, expanding the use of spectrum by all users.",
+    "provenance_url": "https://www.ntia.gov/sites/default/files/data_central_downloads/datasets/ntia-analyze-table.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NYU_Tennessee_Diabetes",
+    "import_name": "NYU_Tennessee_Diabetes",
+    "full_import_name": "statvar_imports/nyu_diabetes/tennessee:NYU_Tennessee_Diabetes",
+    "script_dir": "statvar_imports/nyu_diabetes/tennessee",
+    "cron_schedule": "0 05 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This import utilizes official diabetes mortality data from the Tennessee Department of Health, detailing county-level death statistics.",
+    "provenance_url": "https://www.tn.gov/health/health-program-areas/statistics/health-data/death-statistics.html",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_Texas_Diabetes",
+    "import_name": "US_Texas_Diabetes",
+    "full_import_name": "statvar_imports/nyu_diabetes/texas:US_Texas_Diabetes",
+    "script_dir": "statvar_imports/nyu_diabetes/texas",
+    "cron_schedule": "0 05 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This import utilizes official diabetes mortality data from the Tennessee Department of Health, detailing county-level death statistics.",
+    "provenance_url": "https://healthdata.dshs.texas.gov/dashboard/births-and-deaths/deaths",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "OECDQuarterlyGDP",
+    "import_name": "OECDQuarterlyGDP",
+    "full_import_name": "statvar_imports/oecd/quarterly_gdp:OECDQuarterlyGDP",
+    "script_dir": "statvar_imports/oecd/quarterly_gdp",
+    "cron_schedule": "0 8 1 */3 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Quarterly GDP data from the Organisation for Economic Co-operation and Development (OECD). This data is retrieved using the SDMX API.",
+    "provenance_url": "https://data.oecd.org/gdp/quarterly-gdp.htm",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "OECDRegionalEducation",
+    "import_name": "OECDRegionalEducation",
+    "full_import_name": "statvar_imports/oecd/regional_education:OECDRegionalEducation",
+    "script_dir": "statvar_imports/oecd/regional_education",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
+    "provenance_url": "https://stats.oecd.org/Index.aspx?DataSetCode=REGION_EDUCAT",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "OECD_Waste_Water_Treatment",
+    "import_name": "OECD_Waste_Water_Treatment",
+    "full_import_name": "statvar_imports/oecd/wastewater_treatment:OECD_Waste_Water_Treatment",
+    "script_dir": "statvar_imports/oecd/wastewater_treatment",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Data on wastewater treatment from the OECD.",
+    "provenance_url": "https://stats.oecd.org/Index.aspx?DataSetCode=WATER_TREAT",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Kenya_Census",
+    "import_name": "Kenya_Census",
+    "full_import_name": "statvar_imports/opendataforafrica/kenya_census:Kenya_Census",
+    "script_dir": "statvar_imports/opendataforafrica/kenya_census",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs.",
+    "provenance_url": "https://kenya.opendataforafrica.org/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Rwanda_Census",
+    "import_name": "Rwanda_Census",
+    "full_import_name": "statvar_imports/opendataforafrica/rwanda_census:Rwanda_Census",
+    "script_dir": "statvar_imports/opendataforafrica/rwanda_census",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Rwanda Census: Demographics, Economy, Education",
+    "provenance_url": "https://rwanda.opendataforafrica.org/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_UrbanSchool_Algebra1",
+    "import_name": "US_UrbanSchool_Algebra1",
+    "full_import_name": "statvar_imports/school_algebra1:US_UrbanSchool_Algebra1",
+    "script_dir": "statvar_imports/school_algebra1",
+    "cron_schedule": "30 08 25 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset from the Civil Rights Data Collection (CRDC) contains information about student enrollment and passing rates in Algebra 1 courses in US schools, disaggregated by grade level, race, gender, and other demographics.",
+    "provenance_url": "https://ocrdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 256,
+      "disk": 200
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_UrbanSchool_Finances",
+    "import_name": "US_UrbanSchool_Finances",
+    "full_import_name": "statvar_imports/school_finance:US_UrbanSchool_Finances",
+    "script_dir": "statvar_imports/school_finance",
+    "cron_schedule": "30 08 25 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "School Finance dataset contains financial and identifying information for educational institutions, including details on salaries and expenditures for teachers.",
+    "provenance_url": "https://ocrdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 128,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_UrbanSchool_Retention",
+    "import_name": "US_UrbanSchool_Retention",
+    "full_import_name": "statvar_imports/school_retention:US_UrbanSchool_Retention",
+    "script_dir": "statvar_imports/school_retention",
+    "cron_schedule": "30 07 27 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This data provides an overview of student retention rates, categorized by gender, race/ethnicity, disability status, and language fluency, specifically for School Grades 1 to 12.",
+    "provenance_url": "https://ocrdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 128,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Singapore_Census",
+    "import_name": "Singapore_Census",
+    "full_import_name": "statvar_imports/singapore_census:Singapore_Census",
+    "script_dir": "statvar_imports/singapore_census",
+    "cron_schedule": "30 05 14,28 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population Census and Health Statistics for Singapore based on gender, age and ethnicity.",
+    "provenance_url": "https://tablebuilder.singstat.gov.sg/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "SouthKorea_Demographics",
+    "import_name": "SouthKorea_Demographics",
+    "full_import_name": "statvar_imports/southkorea_statistics/demographics:SouthKorea_Demographics",
+    "script_dir": "statvar_imports/southkorea_statistics/demographics",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the demographic statistics of South Korea",
+    "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "SouthKorea_Education",
+    "import_name": "SouthKorea_Education",
+    "full_import_name": "statvar_imports/southkorea_statistics/education:SouthKorea_Education",
+    "script_dir": "statvar_imports/southkorea_statistics/education",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the education statistics of South Korea",
+    "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "SouthKorea_Employment",
+    "import_name": "SouthKorea_Employment",
+    "full_import_name": "statvar_imports/southkorea_statistics/employment:SouthKorea_Employment",
+    "script_dir": "statvar_imports/southkorea_statistics/employment",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the employment statistics of South Korea",
+    "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "SouthKorea_Health",
+    "import_name": "SouthKorea_Health",
+    "full_import_name": "statvar_imports/southkorea_statistics/health:SouthKorea_Health",
+    "script_dir": "statvar_imports/southkorea_statistics/health",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the health statistics of South Korea",
+    "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "New_Zealand_Census",
+    "import_name": "New_Zealand_Census",
+    "full_import_name": "statvar_imports/statistics_new_zealand/new_zealand_census:New_Zealand_Census",
+    "script_dir": "statvar_imports/statistics_new_zealand/new_zealand_census",
+    "cron_schedule": "0 06 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population census and health statistics for New Zealand at country, district and city level",
+    "provenance_url": "https://www.stats.govt.nz/large-datasets/csv-files-for-download/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "statistics_poland",
+    "import_name": "statistics_poland",
+    "full_import_name": "statvar_imports/statistics_poland:statistics_poland",
+    "script_dir": "statvar_imports/statistics_poland",
+    "cron_schedule": "0 0 1 1,4,7,10 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population data for demographic variables such as population counts, age distributions, and other census-related metrics in Poland",
+    "provenance_url": "https://bdl.stat.gov.pl/bdl/dane/podgrup/tablica",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 32,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "WHO_TuberculosisBacteriologicallyConfirmedPercentage",
+    "import_name": "WHO_TuberculosisBacteriologicallyConfirmedPercentage",
+    "full_import_name": "statvar_imports/tuberculosis_percentage:WHO_TuberculosisBacteriologicallyConfirmedPercentage",
+    "script_dir": "statvar_imports/tuberculosis_percentage",
+    "cron_schedule": "0 0 1 1,4,7,10 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Percentage of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
+    "provenance_url": "https://data.who.int/indicators/i/1891124/449F55C",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "UAE_Population",
+    "import_name": "UAE_Population",
+    "full_import_name": "statvar_imports/uae_bayanat/uae_population:UAE_Population",
+    "script_dir": "statvar_imports/uae_bayanat/uae_population",
+    "cron_schedule": "0 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "UAE_Population statical data",
+    "provenance_url": "https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "UNData",
+    "import_name": "UNData",
+    "full_import_name": "statvar_imports/undata:UNData",
+    "script_dir": "statvar_imports/undata",
+    "cron_schedule": "0 05 * * 3",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population data for countries, capital cities, urban and rural areas not covered by other sources. Outliers were removed from the output",
+    "provenance_url": "https://data.un.org/Data.aspx?q=city+population&d=POP&f=tableCode%3a240",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCES_Bachelors_Degree_By_Field_Import",
+    "import_name": "NCES_Bachelors_Degree_By_Field_Import",
+    "full_import_name": "statvar_imports/us_bachelors_degree_data/nces_bachelors_degree_by_field_import:NCES_Bachelors_Degree_By_Field_Import",
+    "script_dir": "statvar_imports/us_bachelors_degree_data/nces_bachelors_degree_by_field_import",
+    "cron_schedule": "0 05 * * 4",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Bachelor's degrees conferred to (fe)males by postsecondary institutions, by race/ethnicity and field of study",
+    "provenance_url": "https://nces.ed.gov/programs/digest/d22/tables/dt22_322.50.asp",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "BLS_CES",
+    "import_name": "BLS_CES",
+    "full_import_name": "statvar_imports/us_bls/bls_ces:BLS_CES",
+    "script_dir": "statvar_imports/us_bls/bls_ces",
+    "cron_schedule": "0 06 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Industry estimates of nonfarm employment, hours, and earnings of workers on payrolls",
+    "provenance_url": "https://www.bls.gov/webapps/legacy/cesbtab5.htm",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "BLS_CES_State",
+    "import_name": "BLS_CES_State",
+    "full_import_name": "statvar_imports/us_bls/bls_ces_state:BLS_CES_State",
+    "script_dir": "statvar_imports/us_bls/bls_ces_state",
+    "cron_schedule": "0 06 * * 3",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Industry estimates of nonfarm employment, hours, and earnings of workers on payrolls",
+    "provenance_url": "https://www.bls.gov/webapps/legacy/cesbtab5.htm",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "BLS_CPI_Category",
+    "import_name": "BLS_CPI_Category",
+    "full_import_name": "statvar_imports/us_bls/cpi_category:BLS_CPI_Category",
+    "script_dir": "statvar_imports/us_bls/cpi_category",
+    "cron_schedule": "0 10 21 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Consumer Price Index by Category",
+    "provenance_url": "https://www.bls.gov/cpi/tables/supplemental-files/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_CPI",
+    "import_name": "US_CPI",
+    "full_import_name": "statvar_imports/us_bls/us_cpi:US_CPI",
+    "script_dir": "statvar_imports/us_bls/us_cpi",
+    "cron_schedule": "0 10 21 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Consumer Price Index by Category",
+    "provenance_url": "https://www.bls.gov/cpi/tables/supplemental-files/",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 8,
+      "memory": 64,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "CDC_Mortality_UnderlyingCause_SingleRace",
+    "import_name": "CDC_Mortality_UnderlyingCause_SingleRace",
+    "full_import_name": "statvar_imports/us_cdc/single_race:CDC_Mortality_UnderlyingCause_SingleRace",
+    "script_dir": "statvar_imports/us_cdc/single_race",
+    "cron_schedule": "30 08 8-14 * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level.",
+    "provenance_url": "https://wonder.cdc.gov/ucd-icd10-expanded.html",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "USCensusPEP_AgeSexRaceHispanicOrigin",
+    "import_name": "USCensusPEP_AgeSexRaceHispanicOrigin",
+    "full_import_name": "statvar_imports/us_census/pep/us_census_pep_asrh:USCensusPEP_AgeSexRaceHispanicOrigin",
+    "script_dir": "statvar_imports/us_census/pep/us_census_pep_asrh",
+    "cron_schedule": "0 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "US Census PEP by Age, Sex, Race and Hispanic Origin",
+    "provenance_url": "https://www.census.gov/en.html",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 128,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "USMonthlyRetailSales",
+    "import_name": "USMonthlyRetailSales",
+    "full_import_name": "statvar_imports/us_census/us_monthly_retail_sales:USMonthlyRetailSales",
+    "script_dir": "statvar_imports/us_census/us_monthly_retail_sales",
+    "cron_schedule": "30 05 * * 1",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Advance Monthly and Monthly Retail Trade Surveys (MARTS and MRTS), the Annual Retail Trade Survey (ARTS), and the Quarterly E-Commerce Report work together to produce the most comprehensive data available on retail economic activity in the United States.",
+    "provenance_url": "https://www.census.gov/retail/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "FARS_CrashData",
+    "import_name": "FARS_CrashData",
+    "full_import_name": "statvar_imports/us_crash/fars_crashdata:FARS_CrashData",
+    "script_dir": "statvar_imports/us_crash/fars_crashdata",
+    "cron_schedule": "0 05 * * 2",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Data on fatal motor vehicle crashes in the US.",
+    "provenance_url": "https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NewYork_Education",
+    "import_name": "NewYork_Education",
+    "full_import_name": "statvar_imports/us_education/new_york_education:NewYork_Education",
+    "script_dir": "statvar_imports/us_education/new_york_education",
+    "cron_schedule": "0 0 1 1,4,7,10 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Official public data from the NYC Department of Education, including student performance (test scores, graduation rates), school quality metrics, and student demographics across all five boroughs",
+    "provenance_url": "https://data.cityofnewyork.us/browse?category=Education",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_Federal_Rates",
+    "import_name": "US_Federal_Rates",
+    "full_import_name": "statvar_imports/us_federal_reserve_h15_interest_rates/us_federal_rates:US_Federal_Rates",
+    "script_dir": "statvar_imports/us_federal_reserve_h15_interest_rates/us_federal_rates",
+    "cron_schedule": "0 06 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Federal Reserve System H.15 Selected Interest Rates",
+    "provenance_url": "https://www.federalreserve.gov/DataDownload/Choose.aspx?rel=H15",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCES_HBCU_Enrollment_Import",
+    "import_name": "NCES_HBCU_Enrollment_Import",
+    "full_import_name": "statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import:NCES_HBCU_Enrollment_Import",
+    "script_dir": "statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import",
+    "cron_schedule": "0 07 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "TStatistics on degree-granting historically Black colleges and universities, by control and level of institution",
+    "provenance_url": "https://nces.ed.gov/programs/digest/d23/tables/dt23_313.30.asp",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCSES_Employed_College_Grads_Import",
+    "import_name": "NCSES_Employed_College_Grads_Import",
+    "full_import_name": "statvar_imports/us_nces/nces_employed_college_grads:NCSES_Employed_College_Grads_Import",
+    "script_dir": "statvar_imports/us_nces/nces_employed_college_grads",
+    "cron_schedule": "0 07 4,18 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "NCSES is the U.S. agency that collects and reports data on science, engineering, and technology",
+    "provenance_url": "https://ncsesdata.nsf.gov/explorer/datatables?term=race&exactMatch=no&page=1&filterSuperTopic=Demographics&filterTopic=Sex&datatablespage=2",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NewYorkUniversity_Diabetes",
+    "import_name": "NewYorkUniversity_Diabetes",
+    "full_import_name": "statvar_imports/us_newyork/ny_diabetes:NewYorkUniversity_Diabetes",
+    "script_dir": "statvar_imports/us_newyork/ny_diabetes",
+    "cron_schedule": "0 0 1 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The Behavioral Risk Factor Surveillance System (BRFSS) is an annual statewide telephone survey of adults developed by the Centers for Disease Control and Prevention (CDC) and administered by the New York State Department of Health. This data represents the percentage of adults with diagnosed diabetes by county in New York for the years 2016, 2018, and 2021.",
+    "provenance_url": "https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 4,
+      "memory": 8,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "NCES_STEM_Degrees_Import",
+    "import_name": "NCES_STEM_Degrees_Import",
+    "full_import_name": "statvar_imports/us_steam_degrees_data/nces_stem_degrees_import:NCES_STEM_Degrees_Import",
+    "script_dir": "statvar_imports/us_steam_degrees_data/nces_stem_degrees_import",
+    "cron_schedule": "0 05 4,18 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "NCES STEM Degrees Dataset",
+    "provenance_url": "https://nces.ed.gov/programs/digest/d24/tables/dt24_318.45.asp",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_AP_ENROLLMENT",
+    "import_name": "US_AP_ENROLLMENT",
+    "full_import_name": "statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements:US_AP_ENROLLMENT",
+    "script_dir": "statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements",
+    "cron_schedule": "0 08 8,23 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset contains enrollment in Advanced Placement (AP) for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_GT_ENROLLMENT",
+    "import_name": "US_GT_ENROLLMENT",
+    "full_import_name": "statvar_imports/us_urban_school/ap_ib_gt_enrollment/gifted_and_talented:US_GT_ENROLLMENT",
+    "script_dir": "statvar_imports/us_urban_school/ap_ib_gt_enrollment/gifted_and_talented",
+    "cron_schedule": "0 11 8,23 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset contains enrollment in Gifted and Talented (GT) for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_IB_ENROLLMENT",
+    "import_name": "US_IB_ENROLLMENT",
+    "full_import_name": "statvar_imports/us_urban_school/ap_ib_gt_enrollment/international_baccalaureate:US_IB_ENROLLMENT",
+    "script_dir": "statvar_imports/us_urban_school/ap_ib_gt_enrollment/international_baccalaureate",
+    "cron_schedule": "0 14 8,23 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset contains enrollment in International Baccalaureate (IB) for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_UrbanSchool_Covid_Directional_Indicators",
+    "import_name": "US_UrbanSchool_Covid_Directional_Indicators",
+    "full_import_name": "statvar_imports/us_urban_school/covid_directional_indicators:US_UrbanSchool_Covid_Directional_Indicators",
+    "script_dir": "statvar_imports/us_urban_school/covid_directional_indicators",
+    "cron_schedule": "0 05 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_UrbanSchool_Enrollment",
+    "import_name": "US_UrbanSchool_Enrollment",
+    "full_import_name": "statvar_imports/us_urban_school/enrollment:US_UrbanSchool_Enrollment",
+    "script_dir": "statvar_imports/us_urban_school/enrollment",
+    "cron_schedule": "0 05 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This import utilizes US Urban School Enrollment data for student enrollment counts, broken down by gender, race, Limited English Proficiency, and disability status (Section 504 and Individualized Education Program).",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_Urban_MathsAndScience_Course_Enrollment",
+    "import_name": "US_Urban_MathsAndScience_Course_Enrollment",
+    "full_import_name": "statvar_imports/us_urban_school/maths_and_science_enrollment:US_Urban_MathsAndScience_Course_Enrollment",
+    "script_dir": "statvar_imports/us_urban_school/maths_and_science_enrollment",
+    "cron_schedule": "0 04 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This import contains data on enrollment in Biology, Chemistry, Advanced Math, Calculus, Algebra II, Physics, and Geometry courses.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 64,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_SAT_ACT_Participation",
+    "import_name": "US_SAT_ACT_Participation",
+    "full_import_name": "statvar_imports/us_urban_school/sat_act_participation/school:US_SAT_ACT_Participation",
+    "script_dir": "statvar_imports/us_urban_school/sat_act_participation/school",
+    "cron_schedule": "0 05 8,23 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset contains participation in Scholastic Assessment Test or American College Testing for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 16,
+      "memory": 256,
+      "disk": 500
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_SAT_ACT_Participation_state",
+    "import_name": "US_SAT_ACT_Participation_state",
+    "full_import_name": "statvar_imports/us_urban_school/sat_act_participation/state:US_SAT_ACT_Participation_state",
+    "script_dir": "statvar_imports/us_urban_school/sat_act_participation/state",
+    "cron_schedule": "0 05 8,23 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This dataset contains participation in Scholastic Assessment Test or American College Testing for each state by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "US_Urban_Schools_Teachers_And_Staff",
+    "import_name": "US_Urban_Schools_Teachers_And_Staff",
+    "full_import_name": "statvar_imports/us_urban_school/teachers:US_Urban_Schools_Teachers_And_Staff",
+    "script_dir": "statvar_imports/us_urban_school/teachers",
+    "cron_schedule": "0 5 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "This import contains US data on the number of FTE teachers and staff at each school.",
+    "provenance_url": "https://civilrightsdata.ed.gov/data",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "USA_DOL_Wages",
+    "import_name": "USA_DOL_Wages",
+    "full_import_name": "statvar_imports/usa_dol/minimum_wage:USA_DOL_Wages",
+    "script_dir": "statvar_imports/usa_dol/minimum_wage",
+    "cron_schedule": "30 09 * * 5",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "USA minimum wages presents the minimum wages for every year at country and state level. The data comes from the US Department of Labor.",
+    "provenance_url": "https://www.dol.gov/",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Adolescent_Birth_Rate",
+    "import_name": "Adolescent_Birth_Rate",
+    "full_import_name": "statvar_imports/who/adolescent_birth_rate:Adolescent_Birth_Rate",
+    "script_dir": "statvar_imports/who/adolescent_birth_rate",
+    "cron_schedule": "0 0 20 6 *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "The annual number of births to females aged 10-14 or 15-19 years per 1,000 females in the respective age group.",
+    "provenance_url": "https://data.who.int/indicators/i/24C65FE/27D371A",
+    "config_override": {},
+    "resource_limits": {
+      "cpu": 4,
+      "memory": 8,
+      "disk": 100
+    },
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "WHO_COVID19",
+    "import_name": "WHO_COVID19",
+    "full_import_name": "statvar_imports/who_covid19:WHO_COVID19",
+    "script_dir": "statvar_imports/who_covid19",
+    "cron_schedule": "0 9 1 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "World Health Organization's (WHO) raw data and statistical releases covering global COVID-19 cases, deaths, hospitalizations, and vaccination coverage",
+    "provenance_url": "https://data.who.int/dashboards/covid19/cases?n=c",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "WHO_TuberculosisAndHIVTreatmentOutcome",
+    "import_name": "WHO_TuberculosisAndHIVTreatmentOutcome",
+    "full_import_name": "statvar_imports/who_tuberculosis/treatmentoutcome_tb_hiv:WHO_TuberculosisAndHIVTreatmentOutcome",
+    "script_dir": "statvar_imports/who_tuberculosis/treatmentoutcome_tb_hiv",
+    "cron_schedule": "0 10 10,21 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Percentage of people with TB/HIV who started dug-susceptible TB treatment and whose treatment outcome was recorded as treatment success (cured or treatment completed), treatment failed, died, lost to follow-up, or not evaluated, within the reporting period.",
+    "provenance_url": "https://data.who.int/indicators/i/DCDC2EB/625E736",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "WorldBank_CommodityMarket",
+    "import_name": "WorldBank_CommodityMarket",
+    "full_import_name": "statvar_imports/world_bank/commodity_market:WorldBank_CommodityMarket",
+    "script_dir": "statvar_imports/world_bank/commodity_market",
+    "cron_schedule": "0 10 1,15 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
+    "provenance_url": "https://www.worldbank.org/en/research/commodity-markets",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Subnational_Demographics_Stats",
+    "import_name": "Subnational_Demographics_Stats",
+    "full_import_name": "statvar_imports/world_bank/subnational_demographics_stats:Subnational_Demographics_Stats",
+    "script_dir": "statvar_imports/world_bank/subnational_demographics_stats",
+    "cron_schedule": "0 06 * * 6",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Sub-national Demographic data - Worldbank Population for Country and States.",
+    "provenance_url": "https://databank.worldbank.org/source/subnational-population",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "WorldBank_IDS",
+    "import_name": "WorldBank_IDS",
+    "full_import_name": "statvar_imports/world_bank/worldbank_ids:WorldBank_IDS",
+    "script_dir": "statvar_imports/world_bank/worldbank_ids",
+    "cron_schedule": "0 4 7,23 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "World Bank principal, currency composition, interest and disbursed and outstanding of debt for different countries.",
+    "provenance_url": "https://databank.worldbank.org/source/international-debt-statistics",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_Number_Of_Company_Workplace_Employees",
+    "import_name": "Zurich_Population_Number_Of_Company_Workplace_Employees",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_Number_Of_Company_Workplace_Employees",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "0 2 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Number of companys, workplaces and employees of Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_By_Age",
+    "import_name": "Zurich_Population_By_Age",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_By_Age",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "0 6 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population by 10 years age categories of Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population",
+    "import_name": "Zurich_Population",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "30 11 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population of Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_Number_Of_Birth_By_Origin",
+    "import_name": "Zurich_Population_Number_Of_Birth_By_Origin",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_Number_Of_Birth_By_Origin",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "45 15 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population of births by origin in Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_Number_Of_Birth",
+    "import_name": "Zurich_Population_Number_Of_Birth",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_Number_Of_Birth",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "0 20 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population of births in Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_By_Origin",
+    "import_name": "Zurich_Population_By_Origin",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_By_Origin",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "15 1 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population by origin of Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_Number_Of_Birth_By_Sex",
+    "import_name": "Zurich_Population_Number_Of_Birth_By_Sex",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_Number_Of_Birth_By_Sex",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "07 19 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population birth by sex in Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  },
+  {
+    "dag_id": "Zurich_Population_By_Sex",
+    "import_name": "Zurich_Population_By_Sex",
+    "full_import_name": "statvar_imports/zurich:Zurich_Population_By_Sex",
+    "script_dir": "statvar_imports/zurich",
+    "cron_schedule": "55 10 29 * *",
+    "curator_emails": [
+      "support@datacommons.org"
+    ],
+    "provenance_description": "Population by sex of Zurich city contains structure and organization of the city administration",
+    "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv",
+    "config_override": {},
+    "resource_limits": {},
+    "category": "statvar_imports"
+  }
+]
