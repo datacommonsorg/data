@@ -1,0 +1,75 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Cloud Build configuration to compile manifest.json files and sync Airflow DAGs to Cloud Composer.
+#
+# Usage:
+#   gcloud builds submit . \
+#     --config=import-automation/cloudbuild/cloudbuild.workflow.yaml \
+#     --project=datcom-ci \
+#     --substitutions=_PROJECT_ID=datcom-import-automation-prod,_COMPOSER_ENV_NAME=import-automation-airflow,_LOCATION=us-central1
+
+substitutions:
+  _PROJECT_ID: 'datcom-import-automation-prod'
+  _LOCATION: 'us-central1'
+  _COMPOSER_ENV_NAME: 'import-automation-airflow'
+  _DAG_SUBDIR: 'datacommons_airflow'
+  _DAG_BUCKET: ''
+
+steps:
+  # 1. Compile all manifest.json files in data repository into imports_catalog.json
+  - id: 'build-catalog'
+    name: 'python:3.11-slim'
+    entrypoint: 'python'
+    args:
+      - 'import-automation/workflow/build_manifest_catalog.py'
+      - '--data-dir=.'
+      - '--output=import-automation/workflow/imports_catalog.json'
+
+  # 2. Validate DAG and factory syntax
+  - id: 'validate-dags'
+    name: 'python:3.11-slim'
+    entrypoint: 'python'
+    args:
+      - '-c'
+      - |
+        python -m py_compile import-automation/workflow/import_automation_workflow.py
+        python -m py_compile import-automation/workflow/import_dags_factory.py
+        echo "DAG syntax validation passed."
+
+  # 3. Deploy/Sync DAGs, factory, and catalog to Cloud Composer GCS bucket
+  - id: 'deploy-dags'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ -n "${_DAG_BUCKET}" ]; then
+          TARGET_GCS="gs://${_DAG_BUCKET}/dags/${_DAG_SUBDIR}"
+        else
+          DAG_PREFIX=$(gcloud composer environments describe ${_COMPOSER_ENV_NAME} \
+            --location=${_LOCATION} \
+            --project=${_PROJECT_ID} \
+            --format="value(config.dagGcsPrefix)")
+          TARGET_GCS="$${DAG_PREFIX}/${_DAG_SUBDIR}"
+        fi
+
+        echo "Deploying Airflow DAGs to: $${TARGET_GCS}"
+        gcloud storage cp import-automation/workflow/import_automation_workflow.py "$${TARGET_GCS}/import_automation_workflow.py"
+        gcloud storage cp import-automation/workflow/import_dags_factory.py "$${TARGET_GCS}/import_dags_factory.py"
+        gcloud storage cp import-automation/workflow/imports_catalog.json "$${TARGET_GCS}/imports_catalog.json"
+        echo "Successfully deployed Airflow DAGs."
+
+options:
+  logging: CLOUD_LOGGING_ONLY
