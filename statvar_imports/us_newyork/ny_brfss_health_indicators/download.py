@@ -104,9 +104,7 @@ def download_health_indicators(endpoint: str,
             break
         records.extend(chunk)
         logging.info('Fetched %d records (offset %d).', len(chunk), offset)
-        if len(chunk) < limit:
-            break
-        offset += limit
+        offset += len(chunk)
 
     if not records:
         logging.error('Health Data NY API returned 0 records.')
