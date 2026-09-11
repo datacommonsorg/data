@@ -12,79 +12,74 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat BMI process script.
+Script to automate the testing for CDC PRAMS process script.
 """
 
 import os
 import unittest
 import sys
 import tempfile
-# module_dir is the path to where this test is running from.
-MODULE_DIR = os.path.dirname(__file__)
+
+# MODULE_DIR is the absolute path to where this test is running from.
+MODULE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, MODULE_DIR)
-# pylint: disable=wrong-import-position
+
 from process import USPrams
-# pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
-
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
 
 
 class TestProcess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
+    TestProcess is inheriting unittest class properties for unit testing.
+    Generates CSV, MCF and TMCF files based on sample input and compares
+    them with the expected golden files.
     """
-    test_data_files = [
-        'Alabama-PRAMS-MCH-Indicators-508.pdf',
-        'Connecticut-PRAMS-MCH-Indicators-508.pdf',
-        'Hawaii-PRAMS-MCH-Indicators-508.pdf'
-        'Maine-PRAMS-MCH-Indicators-508.pdf',
-        'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
-        'Montana-PRAMS-MCH-Indicators-508.pdf',
-        'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
-        'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
-        'Wyoming-PRAMS-MCH-Indicators-508.pdf'
-    ]
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
-    ip_data = os.listdir(TEST_DATASET_DIR)
-    ip_data = [os.path.join(TEST_DATASET_DIR, file) for file in ip_data]
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
+    @classmethod
+    def setUpClass(cls):
+        test_data_files = [
+            'Alabama-PRAMS-MCH-Indicators-508.pdf',
+            'Connecticut-PRAMS-MCH-Indicators-508.pdf',
+            'Hawaii-PRAMS-MCH-Indicators-508.pdf',
+            'Maine-PRAMS-MCH-Indicators-508.pdf',
+            'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
+            'Montana-PRAMS-MCH-Indicators-508.pdf',
+            'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
+            'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
+            'Wyoming-PRAMS-MCH-Indicators-508.pdf'
+        ]
+        ip_data = [
+            os.path.join(TEST_DATASET_DIR, file_name)
+            for file_name in test_data_files
+        ]
+        cls.tmp_dir = tempfile.TemporaryDirectory()
+        cleaned_csv_path = os.path.join(cls.tmp_dir.name, "data.csv")
+        mcf_path = os.path.join(cls.tmp_dir.name, "test_census.mcf")
+        tmcf_path = os.path.join(cls.tmp_dir.name, "test_census.tmcf")
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
-            MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
-            TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
+        base = USPrams(ip_data, cleaned_csv_path, mcf_path, tmcf_path)
+        base.process()
 
-            base = USPrams(self.ip_data, CLEANED_CSV_FILE_PATH, MCF_FILE_PATH,
-                           TMCF_FILE_PATH)
-            base.process()
+        with open(mcf_path, encoding="UTF-8") as mcf_file:
+            cls.actual_mcf_data = mcf_file.read()
 
-            with open(MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+        with open(tmcf_path, encoding="UTF-8") as tmcf_file:
+            cls.actual_tmcf_data = tmcf_file.read()
 
-            with open(TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+        with open(cleaned_csv_path, encoding="utf-8-sig") as csv_file:
+            cls.actual_csv_data = csv_file.read()
 
-            with open(CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp_dir.cleanup()
 
     def test_mcf_tmcf_files(self):
         """
-        This method is required to test between output generated
-        preprocess script and excepted output files like MCF File
+        Tests whether generated MCF and TMCF match expected files.
         """
         expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.mcf")
-
         expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.tmcf")
 
         with open(expected_mcf_file_path,
@@ -102,15 +97,17 @@ class TestProcess(unittest.TestCase):
 
     def test_create_csv(self):
         """
-        This method is required to test between output generated
-        preprocess script and excepted output files like CSV
+        Tests whether generated CSV matches expected file.
         """
         expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.csv")
 
-        expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
                          self.actual_csv_data.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()

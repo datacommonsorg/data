@@ -1,0 +1,51 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_empty_import",
+            "description": "Ensures the import produces non-zero records",
+            "validator": "EMPTY_IMPORT_CHECK"
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Verifies that lint errors remain within threshold",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "description": "Verifies that missing references remain within threshold",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "description": "Validates summary_report.csv against golden summary data",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data contains established golden places",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output/PRAMS.csv"
+            }
+        }
+    ]
+}

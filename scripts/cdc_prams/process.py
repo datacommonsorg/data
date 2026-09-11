@@ -40,22 +40,34 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+flags.DEFINE_string("output_path", None,
+                    "Directory path where output files need to be written")
 input_years = ["2016", "2017", "2018", "2019", "2020"]
 flags.DEFINE_list("input_years", input_years, "Import Data File's List")
 
 
-def _merging_multiline_sv(df, geo):
+def _merging_multiline_sv(df, geo, years=None):
     '''
     StatVar column which are present in multiline format are converted into
     one single statvar
-    Args: DataFrame, Flag
+    Args: DataFrame, Flag, Optional[List[str]]
     Returns: df1: DataFrame
     '''
+    if years is None:
+        years = _FLAGS.input_years if _FLAGS.is_parsed() else input_years
     multiline = [
         'Multivitamin use ≥4 times a week during the month before',
         'Heavy drinking (≥8 drinks a week) during the 3 months before',
         'Experienced IPV during pregnancy by a husband or partner'
     ]
+    for year in years:
+        sample_col = year + '_sampleSize'
+        if sample_col in df.columns:
+            df[sample_col] = df[sample_col].astype(object)
+        ci_col = year + '_CI'
+        if ci_col in df.columns:
+            df[ci_col] = df[ci_col].astype(object)
+
     # Converting the multiline statistical variable into single line
     # statistical variable
     for line in multiline:
@@ -63,7 +75,7 @@ def _merging_multiline_sv(df, geo):
             if df.loc[i, 'statVar'] == line:
                 df.loc[i,'statVar'] = \
                     f"{df.loc[i,'statVar']}{' '}{df.loc[i + 2,'statVar']}"
-                for year in _FLAGS.input_years:
+                for year in years:
                     if year == "2016":
                         df.loc[i, year + '_sampleSize'] = df.loc[i + 1,
                                                                  'statVar']
@@ -181,13 +193,13 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
                                  pd.NA)
     df['main_header_delete_flag'] = df['main_header']
     df['main_header_delete_flag'] = df['main_header_delete_flag'].fillna("")
-    df['main_header'] = df['main_header'].fillna(method='ffill')
+    df['main_header'] = df['main_header'].ffill()
 
     df['sub_header'] = np.where(df['statVar'].isin(sub_header), df['statVar'],
                                 pd.NA)
     df['sub_header_delete_flag'] = df['sub_header']
     df['sub_header_delete_flag'] = df['sub_header_delete_flag'].fillna("")
-    df['sub_header'] = df['sub_header'].fillna(method='ffill', limit=2)
+    df['sub_header'] = df['sub_header'].ffill(limit=2)
     index = df[df['statVar'] == 'Postpartum'].index.values[0]
     df.loc[index, 'sub_header'] = "Any cigarette smoking"
     df['sub_header'] = df['sub_header'].fillna("")
@@ -207,7 +219,7 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
     df = df.replace({'Geo': _PLACE_MAP})
     df = df.reset_index(drop=True)
     # Creating a new column named as 'ScalingFactor'
-    df.insert(1, 'ScalingFactor', np.NaN)
+    df.insert(1, 'ScalingFactor', np.nan)
     return df
 
 
@@ -224,7 +236,7 @@ state_columns = [
 def _splitting_ci_columns(df, geo):
     '''
     The CI has percent, lower confidence and upper confidence values
-    within one column. This method is used to seperated into three
+    within one column. This method is used to separated into three
     different columns for State. Ex: 39.3 (36.4-42.2)
     Args: DataFrame, Flag
     Returns: df: DataFrame
@@ -232,26 +244,30 @@ def _splitting_ci_columns(df, geo):
     if geo == "State":
         split_col = ['2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI']
         for i in split_col:
-            df[i] = df[i].fillna(pd.NA)
+            df[i] = df[i].fillna('').astype(str).replace({
+                '<NA>': '',
+                'nan': '',
+                'None': ''
+            })
             # Splitting the column based on space and "-"
             df_split = df[i].str.split(r"\s+|-", expand=True)
-            # determinign the size of the column after splitting it.
+            # determining the size of the column after splitting it.
             siz = df_split.shape[1]
-            # If the column is empty the size is 1 it is spit and
-            # the columns remain empty
             if siz == 1:
                 df_split = df_split.rename(
                     columns={df_split.columns[0]: i + '_PERCENT'})
                 df_split[i + '_LOWER'] = ""
                 df_split[i + '_UPPER'] = ""
-            # If the column size is 3, it is split into 3 different columns.
-            elif siz == 3:
+            elif siz == 2:
                 df_split = df_split.rename(
                     columns={
                         df_split.columns[0]: i + '_PERCENT',
-                        df_split.columns[1]: i + '_LOWER',
-                        df_split.columns[2]: i + '_UPPER'
+                        df_split.columns[1]: i + '_LOWER'
                     })
+                df_split[i + '_UPPER'] = ""
+            elif siz >= 3:
+                df_split = df_split.iloc[:, :3]
+                df_split.columns = [i + '_PERCENT', i + '_LOWER', i + '_UPPER']
                 # Removing unwanted characters.
                 df_split[i + '_LOWER'] = df_split[i + '_LOWER'].str.replace(
                     '(', '', regex=False)
@@ -354,14 +370,17 @@ def _stat_var(df, geo):
     return df_all
 
 
-def prams(input_url: list) -> pd.DataFrame:
+def prams(input_url: list, years: list = None) -> pd.DataFrame:
     '''
         Cleans the files for concatenation in Final CSV
          Args:
             input_url (list) : List of input urls
+            years (list, optional): List of years to process
         Returns:
             df_all : DataFrame
     '''
+    if years is None:
+        years = _FLAGS.input_years if _FLAGS.is_parsed() else input_years
     final_df = pd.DataFrame()
     # Creatd flag as the format for state and national file are different and
     # requires different modifications.
@@ -402,10 +421,10 @@ def prams(input_url: list) -> pd.DataFrame:
             df = df.drop(['2017_Nan', '2018_Nan', '2019_Nan', '2020_Nan'],
                          axis=1)
         # inserting an extra column so that the first column
-        df.insert(1, '2016_sampleSize', np.NaN)
+        df.insert(1, '2016_sampleSize', np.nan)
         # Removing unwanted charaters
         df['statVar'] = df['statVar'].str.replace('• ', '')
-        df = _merging_multiline_sv(df, geo)
+        df = _merging_multiline_sv(df, geo, years=years)
         df = _split_statvar_value(df, geo)
         df = _cleaning_national_file(df, geo)
         df = _flatten_header_and_sub_header(df)
@@ -426,12 +445,18 @@ class USPrams:
     MCF and TMCF Files.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
+    def __init__(self,
+                 input_files: list,
+                 csv_file_path: str,
+                 mcf_file_path: str,
+                 tmcf_file_path: str,
+                 years: list = None) -> None:
         self.input_files = input_files
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
+        self.years = years or (_FLAGS.input_years
+                               if _FLAGS.is_parsed() else input_years)
 
     def _generate_tmcf(self) -> None:
         """
@@ -666,14 +691,14 @@ class USPrams:
         Arguments: None
         Returns: None
         """
-        df = prams(self.input_files)
+        df = prams(self.input_files, self.years)
         sv_names = df.SV.unique().tolist()
         sv_names.sort()
 
         # Creating Output Directory
         output_path = os.path.dirname(self.cleaned_csv_file_path)
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
+        if output_path and not os.path.exists(output_path):
+            os.makedirs(output_path, exist_ok=True)
 
         updated_sv = self._generate_mcf(sv_names, self.mcf_file_path)
         # Replacing dummy statvars with the Statistical variables generated from
@@ -686,12 +711,22 @@ class USPrams:
 
 
 def main(_):
-    input_path = FLAGS.input_path
-    ip_files = os.listdir(input_path)
-    ip_files = [os.path.join(input_path, file) for file in ip_files]
+    input_path = _FLAGS.input_path
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"Input path not found: {input_path}")
+    ip_files = [
+        os.path.join(input_path, file)
+        for file in os.listdir(input_path)
+        if file.endswith('.pdf')
+    ]
+    if not ip_files:
+        raise FileNotFoundError(f"No PDF files found in {input_path}")
+    ip_files.sort()
+
     # Defining Output Files
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
+    data_file_path = _FLAGS.output_path or os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "output")
+    os.makedirs(data_file_path, exist_ok=True)
     csv_name = "PRAMS.csv"
     mcf_name = "PRAMS.mcf"
     tmcf_name = "PRAMS.tmcf"
