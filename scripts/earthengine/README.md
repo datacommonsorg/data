@@ -11,7 +11,7 @@ The scripts use [Google Earth Engine](https://earthengine.google.com/)
 to extract flooded regions as a [geoTIFF](https://en.wikipedia.org/wiki/GeoTIFF)
 file.  These `.tif` files are exported to [Google Cloud
 Storage](https://cloud.google.com/storage) (GCS).
-The raster files are then copied over using `gsutil` to be processed into `.csv` locally.
+The raster files are then copied over using `gcloud storage` to be processed into `.csv` locally.
 
 
 The tools can be installed as follows:
@@ -36,7 +36,7 @@ earthengine authenticate --quiet
 ```
 
 ### Google Cloud SDK
-Install the `gsutil` command to copy files from GCS to the local
+Install the `gcloud storage` command to copy files from GCS to the local
 machine.
 
 1. Install GCS tools using the command:
@@ -55,7 +55,7 @@ gcloud auth login
 To copy files on GCS, create a storage bucket with the following command or on
 the cloud console.
 ```
-gsutil mb gs://<GCS-BUCKET-NAME>/
+gcloud storage buckets create gs://<GCS-BUCKET-NAME>/
 ```
 
 ## Extract geoTIFF from EarthEngine (EE)
@@ -99,7 +99,7 @@ in the previous step into a StatVarObservation MCF nodes for
 following:
 ```
 # Download the geoTiff from GCS
-gsutil cp gs://<GCS_BUCKET>/<GCS_FOLDER>/*.tif .
+gcloud storage cp gs://<GCS_BUCKET>/<GCS_FOLDER>/*.tif .
 # Convert the geoTiff into raster
 python3 raster_to_csv.py \
   --input_geotiff=ee_image_dynamic_world-band_water-r_max-mask_land-s_1000-from_2022-01-01.tif \
