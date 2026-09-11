@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted records is within the 7% threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 7
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that each table meets its expected freshness threshold according to RBI publishing cadence.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CASE WHEN StatVar IN ('Length_Transportation_Road', 'Length_Transportation_StateHighway') THEN MAX(MaxDate) >= '2020' WHEN StatVar IN ('Consumption_FarmInventory_Fertilizer') THEN MAX(MaxDate) >= '2022' WHEN StatVar IN ('Area_LandCover_Forest', 'Score_SustainableDevelopmentGoals', 'Area_LandCover_Tree', 'Loss_Electricity_TransmissionAndDistribution_AsAFractionOf_Annual_Generation_Electricity', 'GrossValue_Area_LandCover_Cropland', 'NetValue_Area_LandCover_Cropland', 'Gross_Area_LandCover_IrrigatedLand', 'NetValue_Area_LandCover_IrrigatedLand', 'GrossValue_Area_LandCover_Cropland_AsAFractionOf_NetValue_Area_LandCover_Cropland') THEN MAX(MaxDate) >= '2023' ELSE MAX(MaxDate) >= '2024' END AS is_fresh, COUNT(*) AS row_cnt FROM stats GROUP BY StatVar",
+                "condition": "is_fresh = TRUE AND row_cnt > 0"
+            }
+        }
+    ]
+}

@@ -10,19 +10,22 @@ This import pipeline processes various socio-economic and agricultural statistic
 
 ## Configuration
 
-The `rbi_download.py` script relies on a configuration file named `configs.py` to fetch the URLs, filenames, and categories for the data to be downloaded. 
+The `rbi_download.py` script relies on a local, version-controlled JSON configuration file named `configs.json` to specify URLs, filenames, and categories for the data to be downloaded.
 
-Sample data of the config file:
-URLS_CONFIG=[
+Sample structure of `configs.json`:
+```json
+{
+  "URLS_CONFIG": [
     {
-        "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/58T_xxxxxxxxxxxxx.XLSX",
-        "category": "agriculture",
-        "filename": "state_wise_pattern_of_land_use_gross_sown_area.xlsx"
-    },
-    ...
-    ]
+      "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/58T_xxxxxxxxxxxxx.XLSX",
+      "category": "agriculture",
+      "filename": "state_wise_pattern_of_land_use_gross_sown_area.xlsx"
+    }
+  ]
+}
+```
 
-This approach makes the import process semi-automatic: if the download URLs change in future RBI releases (which commonly happens due to shifting table numbers or publication structures), only this configuration file needs to be updated, rather than modifying the Python script itself.
+This makes the import process **Semi-Automated**: if download URLs change in future RBI releases (due to updated publication links or revised tables), only `configs.json` needs to be updated without modifying script logic. Additionally, `rbi_download.py` employs connection pooling with `requests.Session()` + `HTTPAdapter(Retry(...))`, validates file magic bytes (`PK\x03\x04`), and atomically writes downloaded files to prevent corrupted/partial files.
 
 ## Data Acquisition and Initial Preprocessing
 
@@ -288,3 +291,10 @@ python3 stat_var_processor.py \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_road_constructed_under_pmgsy_output
 ```
+
+## Validation Configuration and Thresholds
+
+This import uses `validation_config.json` with a 7% record deletion threshold (`DELETED_RECORDS_PERCENT: 7`).
+- **Rationale & Analysis**: Up to 7% of records may be deleted or modified across historical revisions and cleanups of unmapped sub-divisions and regional reporting structures across RBI state tables.
+- **Justification Document**: For detailed root cause analysis, table breakdown, and justification, see the [RBI State Statistics Deletion Threshold Justification Doc](https://docs.google.com/document/d/1BLArT3T2-2EVql0Ol8tSYw9QtjFjzCzockJBquMC4AY/edit).
+
