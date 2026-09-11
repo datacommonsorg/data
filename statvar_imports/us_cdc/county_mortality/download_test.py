@@ -16,9 +16,12 @@
 
 import os
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 from unittest import mock
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import requests
 
@@ -144,6 +147,15 @@ class DownloadTest(unittest.TestCase):
             self.assertEqual(len(lines), 2)
             self.assertEqual(lines[0], "Notes,Year,County,County Code,Deaths")
             self.assertEqual(lines[1], ',2018,"Kent County, DE",10001,20')
+
+    def test_save_tsv_as_csv_empty_raises(self):
+        header_only_tsv = "Notes\tYear\tCounty\tCounty Code\tDeaths\n---\nCaveats:\n"
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_csv = os.path.join(temp_dir, "test_output.csv")
+            with self.assertRaises(ValueError):
+                download.save_tsv_as_csv(header_only_tsv, output_csv)
+            self.assertFalse(os.path.exists(output_csv))
+            self.assertFalse(os.path.exists(f"{output_csv}.tmp"))
 
     def test_is_state_downloaded(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -329,6 +341,55 @@ class DownloadTest(unittest.TestCase):
             self.assertFalse(old_chunk.exists())
             combined_file = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
             self.assertTrue(combined_file.exists())
+
+    def test_filter_available_years(self):
+        downloader = download.CdcWonderCountyMortalityDownloader()
+        downloader.available_years = ["2018", "2019", "2020", "2021", "2022", "2023", "2024"]
+
+        # Filters out unreleased future years
+        requested = ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
+        filtered = downloader.filter_available_years(requested)
+        self.assertEqual(
+            filtered,
+            ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+        )
+
+        # Subset passes through untouched
+        subset = ["2020", "2021"]
+        self.assertEqual(downloader.filter_available_years(subset), ["2020", "2021"])
+
+        # No available_years means no filtering
+        downloader.available_years = []
+        self.assertEqual(downloader.filter_available_years(requested), requested)
+
+    @mock.patch.object(download.requests, "Session")
+    def test_init_session_discovers_available_years(self, mock_session_cls):
+        mock_session = mock.MagicMock()
+        mock_session_cls.return_value = mock_session
+
+        mock_res1 = mock.MagicMock()
+        mock_res1.text = '<form id="wonderform" action="/test"><input name="a" value="1"/></form>'
+        mock_res1.raise_for_status.return_value = None
+
+        mock_res2 = mock.MagicMock()
+        mock_res2.text = """
+        <form id="wonderform" action="/test2">
+            <select name="F_D158.V1">
+                <option value="*All*">All</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+            </select>
+        </form>
+        """
+        mock_res2.raise_for_status.return_value = None
+
+        mock_session.get.return_value = mock_res1
+        mock_session.post.return_value = mock_res2
+
+        downloader = download.CdcWonderCountyMortalityDownloader()
+        downloader.init_session()
+        self.assertEqual(downloader.available_years, ["2018", "2019", "2020"])
 
 
 if __name__ == "__main__":

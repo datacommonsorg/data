@@ -56,8 +56,8 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 Validation is configured in `validation_config.json`:
 * `check_deleted_records_percent`: Strictly enforces a historical deletion average threshold of `0.1%`. Note that on the initial import run, this rule expectedly yields `DATA_ERROR` ("Differ summary is missing required field: 'previous_obs_count'") because there is no prior version to diff against; it is configured to safeguard future recurring refreshes. Per consensus on initial imports, golden regression files are omitted from initial submission.
-* `check_max_date_freshness`: Enforces date freshness (`CAST(MaxDate AS INTEGER) >= 2024`) across 116 cause-of-death StatVars to ensure latest published data is ingested.
-* `check_max_date_freshness_rare_causes`: Enforces date freshness (`CAST(MaxDate AS INTEGER) >= 2023`) for 2 rare historical exception causes with low observation frequency due to CDC sub-national cell suppression (< 10 deaths).
+* `check_max_date_freshness`: Enforces date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)`) across 116 cause-of-death StatVars to ensure latest published data is ingested relative to annual publication lag.
+* `check_max_date_freshness_rare_causes`: Enforces date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)`) for 2 rare historical exception causes with low observation frequency due to CDC sub-national cell suppression (< 10 deaths).
 
 ---
 

@@ -29,6 +29,7 @@ queries state by state, automatically detects if a state query exceeds the
 """
 
 import csv
+import datetime
 import io
 import os
 from pathlib import Path
@@ -113,6 +114,7 @@ LARGE_STATES: set[str] = {
 SINGLE_YEAR_STATES: set[str] = {"48"}
 
 FLAGS = flags.FLAGS
+CURRENT_YEAR = datetime.date.today().year
 
 flags.DEFINE_string(
     "states",
@@ -121,8 +123,8 @@ flags.DEFINE_string(
 )
 flags.DEFINE_string(
     "years",
-    "2018-2024",
-    "Year range ('2018-2024') or comma-separated years ('2018,2019,2020').",
+    f"2018-{CURRENT_YEAR}",
+    f"Year range (e.g. '2018-{CURRENT_YEAR}') or comma-separated years ('2018,2019,2020').",
 )
 flags.DEFINE_string(
     "output_dir",
@@ -181,6 +183,7 @@ class CdcWonderCountyMortalityDownloader:
         self.session = self._create_session()
         self.action_url: Optional[str] = None
         self.base_post_data: List[Tuple[str, str]] = []
+        self.available_years: List[str] = []
 
     def _create_session(self) -> requests.Session:
         """Creates a requests.Session with connection pooling and HTTP retries."""
@@ -275,7 +278,43 @@ class CdcWonderCountyMortalityDownloader:
             elif el.name == "textarea":
                 self.base_post_data.append((name, el.text or ""))
 
+        # Discover available year options from the year selection dropdown (F_D158.V1)
+        self.available_years = []
+        year_select = form_req.find("select", attrs={"name": "F_D158.V1"})
+        if year_select:
+            for opt in year_select.find_all("option"):
+                val = opt.get("value", "").strip()
+                if val.isdigit():
+                    self.available_years.append(val)
+            if self.available_years:
+                logging.info(
+                    "Discovered available years on CDC WONDER: %s", self.available_years
+                )
+
         logging.info("Successfully established CDC WONDER session with action: %s", self.action_url)
+
+    def filter_available_years(self, years: List[str]) -> List[str]:
+        """Filters requested years against available years discovered on CDC WONDER."""
+        if not self.available_years:
+            return years
+        valid_years = [y for y in years if y in self.available_years]
+        if not valid_years:
+            logging.warning(
+                "None of the requested years %s exist on CDC WONDER (available: %s). "
+                "Falling back to all available years.",
+                years,
+                self.available_years,
+            )
+            return list(self.available_years)
+        if len(valid_years) < len(years):
+            dropped = [y for y in years if y not in self.available_years]
+            logging.info(
+                "Filtered out unsupported years %s (not yet published on CDC WONDER). "
+                "Querying: %s",
+                dropped,
+                valid_years,
+            )
+        return valid_years
 
     def _build_post_data(
         self, state_fips: str, years: Optional[List[str]] = None
@@ -412,6 +451,8 @@ class CdcWonderCountyMortalityDownloader:
     ) -> List[Tuple[str, str]]:
         """Downloads county mortality data for a state, automatically partitioning if needed."""
         state_name = US_STATES.get(state_fips, f"FIPS-{state_fips}")
+        if self.available_years:
+            years = self.filter_available_years(years)
         results: List[Tuple[str, str]] = []
         need_partitioning = state_fips in LARGE_STATES
 
@@ -515,6 +556,14 @@ def save_tsv_as_csv(raw_tsv: str, output_csv_path: str) -> int:
                 break
             csv_writer.writerow(row)
             row_count += 1
+
+    if row_count <= 1:
+        if os.path.exists(temp_csv_path):
+            os.unlink(temp_csv_path)
+        raise ValueError(
+            f"Extracted TSV for {output_csv_path} contains no observation data "
+            f"(row_count={row_count})."
+        )
 
     os.replace(temp_csv_path, output_csv_path)
     return row_count
@@ -629,6 +678,24 @@ def download_county_mortality_data(
 
         if downloader.action_url is None:
             downloader.init_session()
+            years = downloader.filter_available_years(years)
+            if skip_existing and is_state_downloaded(
+                output_dir, state_fips, years=years
+            ):
+                existing_files = list(
+                    Path(output_dir).glob(
+                        f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
+                    )
+                )
+                logging.info(
+                    "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
+                    idx,
+                    len(states),
+                    state_name,
+                    state_fips,
+                    len(existing_files),
+                )
+                continue
 
         logging.info(
             "[%d/%d] Processing %s (FIPS %s) (Session batch item %d/%d)...",
