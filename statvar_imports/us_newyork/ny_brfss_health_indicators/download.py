@@ -77,34 +77,34 @@ def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
 def download_health_indicators(endpoint: str,
                                output_dir: str) -> tuple[int, list[str]]:
     """Downloads all health indicators for all NY counties and regions."""
-    session = create_session()
     os.makedirs(output_dir, exist_ok=True)
 
     records = []
     offset = 0
     limit = 50000
 
-    while True:
-        params = {
-            '$limit': limit,
-            '$offset': offset,
-            '$order': ':id',
-        }
-        logging.info('GET %s with params %s', endpoint, params)
-        resp = session.get(endpoint, params=params, timeout=60)
-        if resp.status_code != 200:
-            logging.error('Health Data NY API returned HTTP %d: %s',
-                          resp.status_code, resp.text[:200])
-            raise RuntimeError(
-                f'Health Data NY API returned HTTP {resp.status_code}: {resp.text[:200]}'
-            )
+    with create_session() as session:
+        while True:
+            params = {
+                '$limit': limit,
+                '$offset': offset,
+                '$order': ':id',
+            }
+            logging.info('GET %s with params %s', endpoint, params)
+            resp = session.get(endpoint, params=params, timeout=60)
+            if resp.status_code != 200:
+                logging.error('Health Data NY API returned HTTP %d: %s',
+                              resp.status_code, resp.text[:200])
+                raise RuntimeError(
+                    f'Health Data NY API returned HTTP {resp.status_code}: {resp.text[:200]}'
+                )
 
-        chunk = resp.json()
-        if not chunk:
-            break
-        records.extend(chunk)
-        logging.info('Fetched %d records (offset %d).', len(chunk), offset)
-        offset += len(chunk)
+            chunk = resp.json()
+            if not chunk:
+                break
+            records.extend(chunk)
+            logging.info('Fetched %d records (offset %d).', len(chunk), offset)
+            offset += len(chunk)
 
     if not records:
         logging.error('Health Data NY API returned 0 records.')

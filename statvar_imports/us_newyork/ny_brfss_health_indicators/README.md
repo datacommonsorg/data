@@ -31,7 +31,7 @@ The import process involves querying the NYSDOH Socrata API and running a proces
 
 *   **Data Quality Checks**:
     *   The `dc_generated/` directory contains `report.json` and `summary_report.csv`, which provide validation and summary statistics for the generated data.
-    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%) and date freshness (`CAST(MaxDate AS INTEGER) >= 2024`).
+    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%) and date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)`).
 
 ---
 
