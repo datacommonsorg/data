@@ -1,0 +1,3 @@
+CSAFP	GEOID	NAME	CBSA_TYPE	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                             
+434	10260	Adjuntas, PR Micro Area	2	172725731	1051789	66.69	0.406	18.181611	-66.758165                                                                                                                  
+220	10300	Adrian, MI Micro Area	2	1941541486	30482189	749.633	11.769	41.896022	-84.074356                                                                                                               

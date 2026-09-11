@@ -1,0 +1,3 @@
+USPS	GEOID	ANSICODE	NAME	FUNCSTAT	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                      
+AL	0100190171	00161593	Autaugaville CCD	S	478151753	13897907	184.615	5.366	32.457413	-86.729003                                                                                                         
+AL	0100190315	00165647	Billingsley CCD	S	386865281	1575402	149.37	0.608	32.606138	-86.748985                                                                                                            
