@@ -1,0 +1,28 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USCensusGeos_SurfaceArea",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.census.gov/geographies/reference-files.html",
+      "provenance_description": "Surface area measurements (land and water) for US geographic entities from Census Gazetteer files.",
+      "scripts": [
+        "preprocess.py"
+      ],
+      "source_files": [
+        "input_files/*",
+        "golden_data/*",
+        "validation_config.json"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/surface_area.tmcf",
+          "cleaned_csv": "output_files/surface_area.csv"
+        }
+      ],
+      "cron_schedule": "0 0 1 * *",
+      "validation_config_file": "validation_config.json"
+    }
+  ]
+}
