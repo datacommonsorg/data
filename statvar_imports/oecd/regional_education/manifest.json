@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://stats.oecd.org/Index.aspx?DataSetCode=REGION_EDUCAT",
-            "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
+            "provenance_description": "dataset contains regional educational attainment statistics for OECD regions and cities",
             "scripts": [
                 "../../../util/download_util_script.py --download_url='https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_EDU@DF_ATTAIN,/A.........?dimensionAtObservation=AllDimensions&format=csvfilewithlabels' --output_folder=gcs_output/source_files",
                 "preprocess.py",
