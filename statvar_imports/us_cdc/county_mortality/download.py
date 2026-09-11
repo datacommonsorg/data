@@ -638,6 +638,33 @@ def is_state_downloaded(
     return True
 
 
+def _should_skip_state(
+    output_dir: str,
+    state_fips: str,
+    years: List[str],
+    state_name: str,
+    idx: int,
+    total_states: int,
+) -> bool:
+    """Checks if state files already exist on disk and logs skip message."""
+    if not is_state_downloaded(output_dir, state_fips, years=years):
+        return False
+    existing_files = list(
+        Path(output_dir).glob(
+            f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
+        )
+    )
+    logging.info(
+        "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
+        idx,
+        total_states,
+        state_name,
+        state_fips,
+        len(existing_files),
+    )
+    return True
+
+
 def download_county_mortality_data(
     states: List[str],
     years: List[str],
@@ -660,41 +687,17 @@ def download_county_mortality_data(
     for idx, state_fips in enumerate(states, start=1):
         state_name = US_STATES.get(state_fips, f"FIPS-{state_fips}")
 
-        if skip_existing and is_state_downloaded(output_dir, state_fips, years=years):
-            existing_files = list(
-                Path(output_dir).glob(
-                    f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
-                )
-            )
-            logging.info(
-                "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
-                idx,
-                len(states),
-                state_name,
-                state_fips,
-                len(existing_files),
-            )
+        if skip_existing and _should_skip_state(
+            output_dir, state_fips, years, state_name, idx, len(states)
+        ):
             continue
 
         if downloader.action_url is None:
             downloader.init_session()
             years = downloader.filter_available_years(years)
-            if skip_existing and is_state_downloaded(
-                output_dir, state_fips, years=years
+            if skip_existing and _should_skip_state(
+                output_dir, state_fips, years, state_name, idx, len(states)
             ):
-                existing_files = list(
-                    Path(output_dir).glob(
-                        f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
-                    )
-                )
-                logging.info(
-                    "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
-                    idx,
-                    len(states),
-                    state_name,
-                    state_fips,
-                    len(existing_files),
-                )
                 continue
 
         logging.info(
