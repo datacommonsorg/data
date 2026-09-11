@@ -1,80 +1,71 @@
-# NewYork_BRFSS_Health_Indicators
+# New York BRFSS Health Indicators Data
 
 ## 1. Import Overview
 
-This import ingests health indicator prevalence rates across **all 62 counties** in New York State and New York City. The dataset is sourced directly from the **New York State Department of Health (NYSDOH) Behavioral Risk Factor Surveillance System (eBRFSS)**.
+This project processes and imports health indicator prevalence rates across all 62 counties in New York State and New York City, provided by the New York State Department of Health. The dataset provides annual county-level estimates across 5 survey releases (2014, 2016, 2018, 2021, and 2024).
 
-* **Import Directory**: `statvar_imports/us_newyork/ny_brfss_health_indicators/`
-* **Import Name**: `NewYork_BRFSS_Health_Indicators`
-* **Dataset Landing Page**: [https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data](https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data)
-* **Socrata API Endpoint**: `https://health.data.ny.gov/resource/jsy7-eb4n.json`
-* **Geographic Coverage**: **All 62 NY Counties** (`geoId/36001` through `geoId/36123`) and **New York City** (`geoId/3651000`).
-* **Temporal Coverage**: 2014, 2016, 2018, 2021, and 2024 survey releases.
-* **Unit & Measurement Method**: Direct survey unadjusted crude prevalence percentages (`Percent`).
+*   **Source URL**: [https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data](https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data)
+*   **Import Type**: Automated
+*   **Source Data Availability**: Data is available for 2014, 2016, 2018, 2021, and 2024.
+*   **Release Frequency**: Periodic survey releases (biennial / triennial survey waves).
+*   **Notes**: This dataset provides county-level estimates across 75 health indicators spanning chronic disease, mental health, substance use, disability, immunizations, and social determinants of health. The data originates from the Behavioral Risk Factor Surveillance System (BRFSS).
 
 ---
 
-## 2. Health Indicators & Statistical Variables
+## 2. Preprocessing Steps
 
-The import supports **all 75 health indicators** in the NYSDOH dataset across 6 primary health domains:
+The import process involves querying the NYSDOH Socrata API and running a processing script on downloaded source data to generate the final artifacts for ingestion.
 
-| Health Domain | Indicators | Key Topics Covered |
-|---|:---:|---|
-| **Prevent Chronic Diseases** | 42 | Arthritis, Asthma, Cardiovascular Disease, COPD, Diabetes, High Blood Pressure, Obesity, Overweight, Current Smoking (all age/income/disability subsets), e-Cigarettes, Breast/Cervical/Colorectal/PSA Screenings, Physical Activity, Fast Food, Sugary Drinks, Fruits/Vegetables |
-| **Improve Health Status & Reduce Disparities** | 13 | Disability (6-question ACA standard), Limitation Status, Health Care Coverage, Personal Health Care Provider, Annual Checkup, Dental Visit, Medical Care Cost Barrier, Poor General & Physical Health, Food Insecurity, Food Security, Housing Insecurity |
-| **Promote Mental Health & Substance Abuse** | 9 | Depressive Disorder, Poor Mental Health ($\ge 14$ days), Binge Drinking, Heavy Drinking, DWI, Cannabis Use, Medical Cannabis Use, Smoking with Poor Mental Health, Adverse Childhood Experiences (ACEs) |
-| **Prevent HIV/STDs, Vaccine-Preventable Diseases & HAIs** | 5 | Influenza Immunization (Ages 18+, Ages 65+), Pneumococcal Immunization (Ages 65+), Hepatitis C (HCV) Testing (All Adults, Ages 47-68) |
-| **Promote Healthy Women, Infants, and Children** | 5 | Female Health Care Coverage (18-64), Female Routine Checkups (18-44, 18-64), Female Dental Visits (18-44), Health Care Provider Discussed Healthy Pregnancy |
-| **Promote a Healthy and Safe Environment** | 1 | Walkable Neighborhoods Suitable for Physical Activity |
-| **Total** | **75** | **13,479 Observations** |
+*   **Input files**:
+    *   `input_files/`: This directory contains the raw unpivoted data file (`ny_brfss_health_indicators_raw.csv`) containing all 17,700 records across all survey years (2014, 2016, 2018, 2021, 2024).
+    *   `ny_brfss_health_indicators_metadata.csv`: Configuration file for the data processing script specifying column mappings, header row offset, and provenance URL.
+    *   `ny_brfss_health_indicators_pv_map.csv`: Property-value mapping file used by the processor to map indicators and county locations to Data Commons entities.
+    *   `validation_config.json`: Configuration defining historical deletion and date freshness validation rules.
+    *   `schema.mcf`: Consolidated provisional StatVars (55) and schema nodes (56) for Piper CL ingestion.
+    *   `test_data/`: Sample input data and expected output files for integration testing.
 
-### Statistical Variable Resolution
-* **Canonical StatVars (20)**: Reused directly from the Data Commons Knowledge Graph (e.g. `Percent_Person_WithDiabetes`, `Percent_Person_WithAsthma`, `Percent_Person_WithArthritis`, `Percent_Person_WithChronicObstructivePulmonaryDisease`, `Percent_Person_WithHighBloodPressure`, `Percent_Person_WithHighCholesterol`, `Percent_Person_Obesity`, `Percent_Person_18OrMoreYears_WithDepression`, `Percent_Person_Smoking`, `Percent_Person_BingeDrinking`, `Percent_Person_18OrMoreYears_WithPoorGeneralHealth`, `Percent_Person_WithMentalHealthNotGood`, `Percent_Person_WithPhysicalHealthNotGood`, `Percent_Person_18OrMoreYears_WithAnyDisability`, `Percent_Person_ReceivedDentalVisit`, `Percent_Person_ReceivedCholesterolScreening`, `Percent_Person_50To74Years_Female_ReceivedMammography`, `Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening`, `Percent_Person_50To75Years_ReceivedColorectalCancerScreening`, `Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication`).
-* **Provisional StatVars (55)**: Synthesized with formal property-value graphs and emitted into `output_files/ny_brfss_health_indicators_output_stat_vars.mcf`.
-* **Supporting Schema Nodes (56)**: Provisional enums, properties, and types emitted into `output_files/ny_brfss_health_indicators_output_stat_vars_schema.mcf`.
+*   **Transformation pipeline**:
+    1.  The raw data is queried from the NYSDOH Socrata API using deterministic pagination (`$order: ':id'`) via `download.py` and placed in the `input_files/` directory.
+    2.  The `stat_var_processor.py` tool is run on the raw data against `ny_brfss_health_indicators_pv_map.csv` and `ny_brfss_health_indicators_metadata.csv`, referencing canonical schema `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
+    3.  The processor filters non-county regional rows, resolves county FIPS DCIDs, maps indicators to canonical or provisional StatVars, and generates the final `ny_brfss_health_indicators_output.csv`, `ny_brfss_health_indicators_output.tmcf`, and supporting StatVar and schema MCF files in the `output_files/` directory.
+    4.  Processor statistics and metrics are recorded in `counters/ny_brfss_health_indicators_counters.csv`.
 
----
-
-## 3. Directory Layout
-
-```
-statvar_imports/us_newyork/ny_brfss_health_indicators/
-├── README.md                                           # Comprehensive import documentation
-├── manifest.json                                       # Data Commons import automation manifest
-├── validation_config.json                              # Import validation rules (historical deletion and date freshness)
-├── ny_brfss_health_indicators_metadata.csv             # Processor configuration metadata
-├── ny_brfss_health_indicators_pv_map.csv               # Property-value mapping for all 75 StatVars & 62 counties
-├── download.py                                         # Multi-year Socrata downloader
-├── test_data/                                          # Sample fixtures for integration testing
-│   ├── sample_input.csv                                # Representative raw slice of API data (21 rows)
-│   ├── sample_expected_output.csv                      # Expected golden observations
-│   ├── sample_expected_output.tmcf                     # Expected golden TMCF
-│   ├── sample_expected_output_stat_vars.mcf            # Expected generated StatVars
-│   └── sample_expected_output_stat_vars_schema.mcf     # Expected generated schema
-├── input_files/                                        # Multi-year source datasets from NYSDOH API
-│   └── ny_brfss_health_indicators_raw.csv              # Complete raw unpivoted dataset (all 17,700 records)
-├── output_files/                                       # Generated Data Commons artifacts
-│   ├── ny_brfss_health_indicators_output.csv           # Cleaned StatVarObservations (13,479 rows)
-│   ├── ny_brfss_health_indicators_output.tmcf          # Template MCF mapping file
-│   ├── ny_brfss_health_indicators_output_stat_vars.mcf # 55 Provisional StatVar nodes
-│   └── ny_brfss_health_indicators_output_stat_vars_schema.mcf # 56 Provisional schema definitions
-└── counters/                                           # Processor execution statistics
-    └── ny_brfss_health_indicators_counters.csv
-```
+*   **Data Quality Checks**:
+    *   The `dc_generated/` directory contains `report.json` and `summary_report.csv`, which provide validation and summary statistics for the generated data.
+    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%) and date freshness (`CAST(MaxDate AS INTEGER) >= 2024`).
 
 ---
 
-## 4. Execution Workflow
+## 3. Automated Import
 
-### Step 1: Download Raw Health Data
-To fetch the full historical survey data:
+This import is designed to be fully automated and autorefreshed. Future survey releases are automatically queried, processed, and validated.
+
+### Automated Steps
+1. The automated job triggers annually based on cron schedule `0 0 1 8 *` configured in `manifest.json`.
+2. `download.py` queries the NYSDOH Socrata API endpoint with deterministic pagination (`$order: ':id'`) and updates `input_files/ny_brfss_health_indicators_raw.csv`.
+3. `stat_var_processor.py` executes to regenerate the output CSV, TMCF, and MCF artifacts.
+4. `validator.py` enforces validation rules from `validation_config.json` before publication.
+
+---
+
+## 4. Script Execution Details
+
+To run the import pipeline, execute the processing scripts as detailed below.
+
+### Download the Data
+
+This script downloads the multi-year health indicators dataset from the NYSDOH Socrata API into `input_files/`:
+
+**Usage**:
 ```bash
 python3 download.py
 ```
-This queries the NYSDOH Socrata API for all 17,700 records across all 75 indicators and 5 survey waves, writing directly to `input_files/ny_brfss_health_indicators_raw.csv`.
 
-### Step 2: Generate StatVar Observations & TMCF
-Run `stat_var_processor.py` directly on the raw dataset from within the import directory:
+### Process the Data
+
+This script processes the raw input file to generate the final `ny_brfss_health_indicators_output.csv` file, `ny_brfss_health_indicators_output.tmcf` template, and supporting MCF files.
+
+**Usage**:
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="input_files/ny_brfss_health_indicators_raw.csv" \
@@ -85,8 +76,11 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_counters=counters/ny_brfss_health_indicators_counters.csv
 ```
 
-### Step 3: Run Sample Integration Test
-Verify property-value mapping against the sample test fixtures:
+### Run Sample Integration Test
+
+This script verifies property-value mapping against the test data fixtures:
+
+**Usage**:
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="test_data/sample_input.csv" \
@@ -96,19 +90,16 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_path=test_data/sample_expected_output
 ```
 
-### Validation Configuration
-
-Validation is configured in `validation_config.json`:
-* `check_deleted_records_percent`: Strictly enforces a historical deletion average threshold of `0.1%`. Note that on the initial import run, this rule expectedly reports missing differ summary because there is no prior version in prod GCS to diff against; it is configured to safeguard future recurring refreshes. Per consensus on initial imports, golden regression files are omitted from initial submission.
-* `check_max_date_freshness`: Enforces date freshness (`CAST(MaxDate AS INTEGER) >= 2024`) across active recurring health indicator StatVars (e.g. Diabetes, Obesity, Smoking, Asthma, Hypertension, Cardiovascular Disease, Depression, Dental Visits, Routine Checkups) to ensure the latest published survey wave is always captured.
-* `check_import_max_date_freshness`: Enforces that the overall import contains observations through at least 2024 (`CAST(max_date AS INTEGER) >= 2024`).
-
 ---
 
-## 5. Summary Results
+### Step 5: Validate the Output Files
 
-* **Observations Generated**: **13,479** `StatVarObservation` records.
-* **Geographies Resolved**: **63 unique entities** (all 62 NY counties `geoId/36001` - `geoId/36123` plus New York City `geoId/3651000`).
-* **Non-County Regions Dropped**: **3,081 records** (sub-state DSRIP regions, Rest of State, and Statewide rows cleanly dropped by PV map).
-* **Statistical Variables Generated**: **75 unique variables** (20 matched to existing canonical DCIDs, 55 provisional StatVars, 56 schema enums/properties).
+This command validates the generated files for formatting and semantic consistency before ingestion.
 
+**Usage**:
+```bash
+java -jar /path/to/datacommons-import-tool.jar lint -d 'output_files/'
+```
+This step ensures that the generated artifacts are ready for ingestion into Data Commons.
+
+---
