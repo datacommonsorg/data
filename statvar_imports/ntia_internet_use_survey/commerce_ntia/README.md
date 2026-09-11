@@ -5,8 +5,8 @@
 - NTIA programs and policymaking focus largely on expanding broadband Internet access and adoption in America, expanding the use of spectrum by all users.
 
 - how to download data: 
-    To download and process the data, you'll need to run the provided preprocess script, `preprocess.py`. This script will automatically create an "input_files" folder where you should place the file to be processed.
-    By using this script, we are creating two more columns in the input files such as 'universeAgeResol', 'variableAgeResol'. This columns are created based on the universe and variable columns in the existing data.
+    To download and process the data, you'll need to run the provided preprocess script, `preprocess.py`. This script will automatically create an "input_files" folder and download the file to be processed.
+    This script organizes the data and splits it into general survey data and age-breakdown data.
 
 - type of place: Demographics.
 
@@ -16,10 +16,10 @@
 
 ```
 python3 stat_var_processor.py 
---input_data='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/input_files/<input_file.csv>' 
---pv_map='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<filename of pv_map.csv>' --config_file='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<filename of metadata.csv>' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<output_folder_name>/<filename>'
---output_counters='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<counters_folder_name>/<filename_counters.csv>'
+--input_data='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/<input_file.csv>' 
+--pv_map='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<filename of pv_map.csv>' --config_file='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<filename of metadata.csv>' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<output_folder_name>/<filename>'
+--output_counters='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<counters_folder_name>/<filename_counters.csv>'
 ```
 
 #### Download the data: 
@@ -37,19 +37,19 @@ Execute the script inside the folder `/data/tools/statvar_importer/`
 
 ```
 python3 stat_var_processor.py 
---input_data=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/input_files/ntia-data.csv 
---pv_map=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_pvmap.csv 
---config_file=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/output_files/ntia_output
---output_counters=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/counters/ntia_output_counters.csv
+--input_data=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/ntia-data.csv 
+--pv_map=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_pvmap.csv 
+--config_file=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/output_files/ntia_output
+--output_counters=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/counters/ntia_output_counters.csv
 ```
 
 ```
 python3 stat_var_processor.py 
---input_data=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/input_files/ntia-data-age-only.csv 
---pv_map=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_age_pvmap.csv 
---config_file=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/output_files/ntia_age_output
---output_counters=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/counters/ntia_age_output_counters.csv
+--input_data=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/ntia-data-age-only.csv 
+--pv_map=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_age_pvmap.csv 
+--config_file=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/output_files/ntia_age_output
+--output_counters=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/counters/ntia_age_output_counters.csv
 ```
 

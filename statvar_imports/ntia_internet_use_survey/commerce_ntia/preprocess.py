@@ -30,7 +30,8 @@ INPUT_DIR = os.path.join(script_dir, "input_files")
 
 COMMON_COLUMNS = ["dataset", "variable", "description", "universe"]
 AGE_COLUMNS = [
-    "age314Count", "age1524Count", "age2544Count", "age4564Count", "age65pCount"
+    "age314Count", "age1524Count", "age2544Count", "age4564Count",
+    "age65pCount"
 ]
 INPUT_FILE = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
 INPUT_FILE_1 = os.path.join(INPUT_DIR, "ntia-data-age-only.csv")
@@ -39,7 +40,8 @@ INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
 HEADERS = {
     'User-Agent': ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
                    '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'),
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept':
+    'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 }
 
 
@@ -59,6 +61,7 @@ def preprocess_data():
         os.makedirs(INPUT_DIR, exist_ok=True)
         org_df = pd.read_csv(INPUT_FILE)
 
+        # 1. Process Age-only data
         df1 = org_df[COMMON_COLUMNS + AGE_COLUMNS].copy()
         df1['universeAgeResol'] = df1['universe'].apply(
             lambda x: 'CivilPerson'
@@ -69,6 +72,7 @@ def preprocess_data():
         df1_moved = move_column_left(df1, 'universe', 'variable')
         df1_moved.to_csv(INPUT_FILE_1, index=False)
 
+        # 2. Process General survey data
         df2_cols_to_keep = [
             col for col in org_df.columns if not col.startswith('age')
         ]
@@ -101,10 +105,10 @@ def main(argv):
         )
         if not success or not os.path.exists(INPUT_FILE):
             logging.fatal("Failed to download Commerce_NTIA file.")
-            sys.exit(1)
+            return
     except Exception as e:
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
-        sys.exit(1)
+        return
 
     preprocess_data()
 

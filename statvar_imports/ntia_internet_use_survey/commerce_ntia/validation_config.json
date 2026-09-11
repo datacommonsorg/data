@@ -8,6 +8,15 @@
       "params": {
         "threshold": 0.1
       }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Checks that the latest observation date is at least 2023.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(MaxDate) AS max_date FROM stats",
+        "condition": "max_date >= '2023'"
+      }
     }
   ]
 }
