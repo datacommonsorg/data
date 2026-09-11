@@ -1,0 +1,10 @@
+Node: dcid:Prediabetes
+typeOf: dcid:HealthOutcomeEnum
+name: "Prediabetes"
+isProvisional: dcs:True
+
+Node: dcid:healthOutcome
+typeOf: dcs:Property
+name: "healthOutcome"
+rangeIncludes: dcid:MedicalConditionIncidentTypeEnum
+

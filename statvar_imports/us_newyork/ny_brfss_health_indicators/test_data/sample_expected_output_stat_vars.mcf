@@ -1,0 +1,16 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/sample_input.csv --pv_map=ny_brfss_health_indicators_pv_map.csv --config_file=ny_brfss_health_indicators_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=test_data/sample_expected_output" on 2026-09-09 08:44:05.973952
+
+Node: dcid:Percent_Person_WithCardiovascularDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:CardiovascularDisease
+
+Node: dcid:Percent_Person_WithPrediabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Prediabetes
+
