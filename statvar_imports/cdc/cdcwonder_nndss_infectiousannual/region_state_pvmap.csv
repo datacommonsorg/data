@@ -324,5 +324,5 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 "Wisconsin",observationAbout,"geoId/55",
 "Wyo.",observationAbout,"geoId/56",
 "Wyoming",observationAbout,"geoId/56"
-"New York (excluding New York City)",#ignore,unsupported place grouping
-"New York City",#ignore,unsupported place grouping
+"New York (excluding New York City)",#ignore,unsupported place
+"New York City",#ignore,unsupported place
