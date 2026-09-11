@@ -59,8 +59,8 @@ steps:
         && docker push ${_DOCKER_IMAGE}:stable
 
 substitutions:
-  _DOCKER_IMAGE: 'us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-validator'
-  _TAG: 'latest'
+  _DOCKER_IMAGE: 'us-docker.pkg.dev/${PROJECT_ID}/gcr.io/dc-import-validator'
+  _TAG: '${COMMIT_SHA:-latest}'
 
 options:
   logging: CLOUD_LOGGING_ONLY
