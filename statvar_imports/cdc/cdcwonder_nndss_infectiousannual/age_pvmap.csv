@@ -17,23 +17,23 @@ Race Code:3,race,BlackOrAfricanAmericanAlone,
 Race Code:4,race,WhiteAlone,
 Race Code:5,race,CDC_OtherRace,
 Race Code:99,race,CDC_RaceUnknownOrNotStated,
-Race Code:98,#ignore,Race,,
+Race Code:98,#ignore,suppressed data,,
 
 Ethnicity Code:1,ethnicity,HispanicOrLatino
 Ethnicity Code:non-,ethnicity,NotHispanicOrLatino
 Ethnicity Code:99,ethnicity,CDC_EthnicityUnknownOrNotStated
-Ethnicity Code:98,#ignore,Ignore
+Ethnicity Code:98,#ignore,suppressed data
 Regions Code:U.S.,residentStatus,USResident
-Regions Code:REGION1,#ignore,Ignore,
-Regions Code:REGION2,#ignore,Ignore,
-Regions Code:REGION3,#ignore,Ignore,
-Regions Code:REGION4,#ignore,Ignore,
-Regions Code:REGION5,#ignore,Ignore,
-Regions Code:REGION6,#ignore,Ignore,
-Regions Code:REGION7,#ignore,Ignore,
-Regions Code:REGION8,#ignore,Ignore,
-Regions Code:REGION9,#ignore,Ignore,
-Regions Code:REGION10,#ignore,Ignore,
+Regions Code:REGION1,#ignore,unsupported place grouping,
+Regions Code:REGION2,#ignore,unsupported place grouping,
+Regions Code:REGION3,#ignore,unsupported place grouping,
+Regions Code:REGION4,#ignore,unsupported place grouping,
+Regions Code:REGION5,#ignore,unsupported place grouping,
+Regions Code:REGION6,#ignore,unsupported place grouping,
+Regions Code:REGION7,#ignore,unsupported place grouping,
+Regions Code:REGION8,#ignore,unsupported place grouping,
+Regions Code:REGION9,#ignore,unsupported place grouping,
+Regions Code:REGION10,#ignore,unsupported place grouping,
 Regions Code:REGION11,residentStatus,NonUSResident
 
 Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,observationPeriod,P1Y
@@ -135,7 +135,7 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 10460,medicalCondition,Rabiesinhuman,,,,
 10200,medicalCondition,Rubella,,,,
 10370,medicalCondition,CongenitalDisease__Rubella,,,,
-50266,#ignore,Ignore,,,,
+50266,#ignore,unsupported medical condition,,,,
 50265,medicalCondition,SalmonellosisExceptTyphiAndParatyphi,,,,
 11563,medicalCondition,ShigaToxinEColi,,,,
 11010,medicalCondition,Shigellosis,,,,
@@ -168,27 +168,27 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 50223,medicalCondition,ZikaVirusDisease__NonCongenitalDisease,,,,
 50222,medicalCondition,ZikaVirusInfection__CongenitalDisease,,,,
 50221,medicalCondition,ZikaVirusInfection__NonCongenitalDisease,,,,
-10062,#ignore,Ignore
-10052,#ignore,Ignore
-10065,#ignore,Ignore
-50272,#ignore,Ignore
-11067,#ignore,Ignore
-11068,#ignore,Ignore
-11585,#ignore,Ignore
-11801,#ignore,Ignore
-10340,#ignore,Ignore
-50267,#ignore,Ignore
-11000,#ignore,Ignore
-50242,#ignore,Ignore
-10575,#ignore,Ignore
-11647,#ignore,Ignore
-11649,#ignore,Ignore
-11640,#ignore,Ignore
-11630,#ignore,Ignore
-11644,#ignore,Ignore
-11637,#ignore,Ignore
-11631,#ignore,Ignore
-11639,#ignore,Ignore
-11722,#ignore,Ignore
-50232,#ignore,Ignore
-50233,#ignore,Ignore
+10062,#ignore,unsupported medical condition
+10052,#ignore,unsupported medical condition
+10065,#ignore,unsupported medical condition
+50272,#ignore,unsupported medical condition
+11067,#ignore,unsupported medical condition
+11068,#ignore,unsupported medical condition
+11585,#ignore,unsupported medical condition
+11801,#ignore,unsupported medical condition
+10340,#ignore,unsupported medical condition
+50267,#ignore,unsupported medical condition
+11000,#ignore,unsupported medical condition
+50242,#ignore,unsupported medical condition
+10575,#ignore,unsupported medical condition
+11647,#ignore,unsupported medical condition
+11649,#ignore,unsupported medical condition
+11640,#ignore,unsupported medical condition
+11630,#ignore,unsupported medical condition
+11644,#ignore,unsupported medical condition
+11637,#ignore,unsupported medical condition
+11631,#ignore,unsupported medical condition
+11639,#ignore,unsupported medical condition
+11722,#ignore,unsupported medical condition
+50232,#ignore,unsupported medical condition
+50233,#ignore,unsupported medical condition
