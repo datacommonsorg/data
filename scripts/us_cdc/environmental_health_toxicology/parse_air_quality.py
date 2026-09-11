@@ -116,7 +116,8 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                     total_rows = sum(1 for _ in f) - 1
                                 if total_rows <= 0:
                                     raise ValueError(
-                                        f"Input file {input_file_path} contains no data rows (total_rows={total_rows})."
+                                        f"Input file {input_file_path} contains "
+                                        f"no data rows (total_rows={total_rows})."
                                     )
                                 base_size = total_rows // num_shards
                                 rem_size = total_rows % num_shards
@@ -168,8 +169,9 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                         shard_written += len(sub_chunk)
                                         start_idx = end_idx
 
-                                        if shard_idx < num_shards - 1 and shard_written >= shard_sizes[
-                                                shard_idx]:
+                                        if (shard_idx < num_shards - 1 and
+                                                shard_written
+                                                >= shard_sizes[shard_idx]):
                                             shard_idx += 1
                                             shard_written = 0
 
