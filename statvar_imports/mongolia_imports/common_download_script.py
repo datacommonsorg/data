@@ -94,7 +94,19 @@ EMPLOYMENT_TABLES = [
     },
     {
         "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_002V5.px",
-        "filename": "registered_unemployed_by_education_level_region_gender_month.csv"
+        "filename": "registered_unemployed_by_education_level_region_gender_month.csv",
+        "query": [{
+            "code": "Бүс",
+            "selection": {
+                "filter": "item",
+                "values": [
+                    "0", "1", "183", "182", "181", "185", "184", "2",
+                    "265", "264", "263", "261", "262", "267", "3", "342",
+                    "345", "344", "348", "346", "343", "341", "4", "421",
+                    "422", "423", "5"
+                ]
+            }
+        }]
     }
 ]
 
@@ -159,14 +171,14 @@ def main(_):
     os.makedirs(demographics_dir, exist_ok=True)
     for table in DEMOGRAPHICS_TABLES:
         filepath = os.path.join(demographics_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Education Data
     education_dir = os.path.join(_SCRIPT_DIR, "mongolia_education", "input_files")
     os.makedirs(education_dir, exist_ok=True)
     for table in EDUCATION_TABLES:
         filepath = os.path.join(education_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Health Data
     health_dir = os.path.join(_SCRIPT_DIR, "mongolia_health", "input_files")
@@ -180,7 +192,7 @@ def main(_):
     os.makedirs(employment_dir, exist_ok=True)
     for table in EMPLOYMENT_TABLES:
         filepath = os.path.join(employment_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     logging.info("All tasks completed")
 

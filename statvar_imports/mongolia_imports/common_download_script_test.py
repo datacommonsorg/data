@@ -155,6 +155,42 @@ class CommonDownloadScriptTest(unittest.TestCase):
         common_download_script.main(None)
         self.assertEqual(mock_fetch.call_count, 25)
 
+    def test_registered_unemployed_query_excludes_duplicate_ulaanbaatar(self):
+        """Verifies registered unemployed table defines query excluding code 511."""
+        target_table = [
+            t
+            for t in common_download_script.EMPLOYMENT_TABLES
+            if t['filename']
+            == 'registered_unemployed_by_education_level_region_gender_month.csv'
+        ][0]
+        self.assertIn('query', target_table)
+        query = target_table['query']
+        self.assertEqual(query[0]['code'], 'Бүс')
+        values = query[0]['selection']['values']
+        self.assertIn('5', values)
+        self.assertNotIn('511', values)
+
+    @mock.patch('common_download_script.fetch_and_save_data')
+    @mock.patch('os.makedirs')
+    def test_main_passes_query_for_registered_unemployed(
+        self, mock_makedirs, mock_fetch
+    ):
+        """Verifies that main() forwards query filter for registered unemployed."""
+        common_download_script.main(None)
+        unemployed_calls = [
+            c
+            for c in mock_fetch.call_args_list
+            if 'registered_unemployed_by_education_level_region_gender_month.csv'
+            in c[0][1]
+        ]
+        self.assertEqual(len(unemployed_calls), 1)
+        args, kwargs = unemployed_calls[0]
+        query = args[2] if len(args) > 2 else kwargs.get('query')
+        self.assertIsNotNone(query)
+        self.assertEqual(query[0]['code'], 'Бүс')
+        self.assertNotIn('511', query[0]['selection']['values'])
+
 
 if __name__ == '__main__':
     unittest.main()
+
