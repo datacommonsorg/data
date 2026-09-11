@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verify MaxDate is within allowable 3-year publication lag for all StatVars except rare historical exceptions",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar NOT IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)"
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness_rare_causes",
+      "description": "Verify MaxDate is within allowable 4-year publication lag for rare historical exception causes",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4)"
+      }
+    }
+  ]
+}
+
