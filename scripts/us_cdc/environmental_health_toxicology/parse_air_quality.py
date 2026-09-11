@@ -14,10 +14,13 @@
 
 import json
 import os
-import pandas as pd
-from absl import app, logging, flags
 from pathlib import Path
 import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
@@ -48,6 +51,20 @@ STATVARS = {
     "O3_mean_pred": "Mean_Concentration_AirPollutant_Ozone",
     "O3_pop_pred": "PopulationWeighted_Concentration_AirPollutant_Ozone"
 }
+
+
+def format_date_column(df: pd.DataFrame, date_col: str = "date") -> pd.Series:
+    """Parses CDC date format %d%b%Y (e.g. 01Jan2001) to ISO %Y-%m-%d."""
+    return pd.to_datetime(df[date_col], format="%d%b%Y",
+                          errors="raise").dt.strftime("%Y-%m-%d")
+
+
+def format_county_dcid(df: pd.DataFrame,
+                       state_col: str = "statefips",
+                       county_col: str = "countyfips") -> pd.Series:
+    """Constructs county DCID from state and county FIPS columns."""
+    return ("geoId/" + df[state_col].astype(str).str.zfill(2) +
+            df[county_col].astype(str).str.zfill(3))
 
 
 def clean_air_quality_data(configs, importname, inputpath, outputpath):
@@ -115,16 +132,12 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
 
                                 for chunk in pd.read_csv(input_file_path,
                                                          chunksize=chunk_size):
-                                    chunk["date"] = pd.to_datetime(
-                                        chunk["date"],
-                                        format="%d%b%Y",
-                                        errors="raise").dt.strftime("%Y-%m-%d")
+                                    chunk["date"] = format_date_column(chunk)
                                     chunk["statefips"] = chunk[
                                         "statefips"].astype(str).str.zfill(2)
                                     chunk["countyfips"] = chunk[
                                         "countyfips"].astype(str).str.zfill(3)
-                                    chunk["dcid"] = "geoId/" + chunk[
-                                        "statefips"] + chunk["countyfips"]
+                                    chunk["dcid"] = format_county_dcid(chunk)
 
                                     if first_chunk:
                                         for p in shard_paths:
@@ -169,16 +182,12 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                 first_chunk = True
                                 for chunk in pd.read_csv(input_file_path,
                                                          chunksize=chunk_size):
-                                    chunk["date"] = pd.to_datetime(
-                                        chunk["date"],
-                                        format="%d%b%Y",
-                                        errors="raise").dt.strftime("%Y-%m-%d")
+                                    chunk["date"] = format_date_column(chunk)
                                     chunk["statefips"] = chunk[
                                         "statefips"].astype(str).str.zfill(2)
                                     chunk["countyfips"] = chunk[
                                         "countyfips"].astype(str).str.zfill(3)
-                                    chunk["dcid"] = "geoId/" + chunk[
-                                        "statefips"] + chunk["countyfips"]
+                                    chunk["dcid"] = format_county_dcid(chunk)
                                     if first_chunk:
                                         chunk.to_csv(output_file_path,
                                                      float_format='%.6f',
@@ -209,10 +218,7 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
 
                                 for chunk in pd.read_csv(input_file_path,
                                                          chunksize=chunk_size):
-                                    chunk["date"] = pd.to_datetime(
-                                        chunk["date"],
-                                        format="%d%b%Y",
-                                        errors="raise").dt.strftime("%Y-%m-%d")
+                                    chunk["date"] = format_date_column(chunk)
 
                                     if "Census" in input_file_name:
                                         if "PM2.5" in input_file_name:
@@ -280,11 +286,15 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                 f"Import name '{importname}' not found in configuration")
     except Exception as e:
         logging.fatal(f"Error while processing the data: {e}")
-        raise
 
 
 def main(argv):
     """Main function to generate the cleaned csv file."""
+    if len(argv) < 2:
+        logging.fatal(
+            "Missing import name argument. Usage: parse_air_quality.py <import_name>"
+        )
+        return
     global _INPUT_FILE_PATH, _OUTPUT_FILE_PATH
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)

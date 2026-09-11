@@ -12,9 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json, os, requests, sys
+import json
+import os
 from pathlib import Path
-from absl import app, logging, flags
+import shutil
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import requests
 from retry import retry
 
 _FLAGS = flags.FLAGS
@@ -37,12 +44,30 @@ def download_files(importname, configs):
     def download_with_retry(url, input_file_name):
         logging.info(f"Downloading file from URL: {url}")
         filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
-        with requests.get(url, stream=True, timeout=(30, 300)) as response:
-            response.raise_for_status()
-            with open(filename, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=16 * 1024 * 1024):
-                    if chunk:
-                        f.write(chunk)
+        tmp_filename = f"{filename}.tmp"
+        try:
+            with requests.get(url, stream=True, timeout=(30, 300)) as response:
+                response.raise_for_status()
+                with open(tmp_filename, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=16 * 1024 *
+                                                       1024):
+                        if chunk:
+                            f.write(chunk)
+            if not os.path.exists(tmp_filename) or os.path.getsize(
+                    tmp_filename) <= 0:
+                raise IOError(
+                    f"Downloaded file {tmp_filename} is empty or missing.")
+            shutil.move(tmp_filename, filename)
+            logging.info(
+                f"Successfully saved {filename} ({os.path.getsize(filename)} bytes)"
+            )
+        except Exception as e:
+            if os.path.exists(tmp_filename):
+                try:
+                    os.remove(tmp_filename)
+                except OSError:
+                    pass
+            raise e
 
     @retry(tries=3, delay=2, backoff=2)
     def get_record_count_with_retry(count_url):
@@ -79,11 +104,15 @@ def download_files(importname, configs):
 
     except Exception as e:
         logging.fatal(f"Error downloading URL {url_new or 'unknown'} - {e}")
-        raise
 
 
 def main(argv):
     """Main function to download the csv files."""
+    if len(argv) < 2:
+        logging.fatal(
+            "Missing import name argument. Usage: download_files.py <import_name>"
+        )
+        return
     global _INPUT_FILE_PATH
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)

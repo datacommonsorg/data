@@ -12,7 +12,8 @@
                 "parse_air_quality.py CDC_PM25CensusTract"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "validation_config_census_tract.json"
             ],
             "resource_limits": {
                 "cpu": 32,
@@ -55,7 +56,8 @@
                 "parse_air_quality.py CDC_OzoneCensusTract"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "validation_config_census_tract.json"
             ],
             "resource_limits": {
                 "cpu": 32,
@@ -98,7 +100,8 @@
                 "parse_air_quality.py CDC_PM25County"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "validation_config_county.json"
             ],
             "resource_limits": {
                 "cpu": 32,
@@ -138,7 +141,8 @@
                 "parse_air_quality.py CDC_OzoneCounty"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "validation_config_county.json"
             ],
             "resource_limits": {
                 "cpu": 32,

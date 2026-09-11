@@ -7,6 +7,15 @@
             "validator": "MAX_DATE_CONSISTENT"
         },
         {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that dataset observation dates meet historical coverage boundary (>= 2005-01-01 across shards).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "condition": "latest_date >= '2005-01-01'"
+            }
+        },
+        {
             "rule_id": "check_deleted_records_percent",
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
