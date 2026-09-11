@@ -191,6 +191,25 @@ class ReadsConfigFileTest(absltest.TestCase):
             self.assertIn('URLS_CONFIG', configs)
             self.assertGreater(len(configs['URLS_CONFIG']), 0)
 
+    def test_reads_gcs_python_config_logs_deprecation(self):
+        mock_blob = mock.MagicMock()
+        mock_blob.download_as_text.return_value = 'URLS_CONFIG = [{"url": "http://example.com/test.xlsx", "category": "cat", "filename": "test.xlsx"}]\n'
+        mock_bucket = mock.MagicMock()
+        mock_bucket.blob.return_value = mock_blob
+        mock_client = mock.MagicMock()
+        mock_client.bucket.return_value = mock_bucket
+
+        with flagsaver.flagsaver(config_file_path='gs://bucket/legacy_configs.py'), \
+             mock.patch.object(rbi_download.storage, 'Client', return_value=mock_client), \
+             mock.patch.object(rbi_download.logging, 'warning') as mock_warning:
+            configs = rbi_download.reads_config_file()
+            self.assertIn('URLS_CONFIG', configs)
+            deprecation_logged = any(
+                'DEPRECATION WARNING' in str(call[0][0])
+                for call in mock_warning.call_args_list
+            )
+            self.assertTrue(deprecation_logged)
+
 
 class DownloadFilesTest(absltest.TestCase):
 
@@ -266,6 +285,26 @@ class DownloadFilesTest(absltest.TestCase):
                                             session=mock_session,
                                             delay=0)
                 target_file = pathlib.Path(temp_dir) / 'agri' / 'blocked.xlsx'
+                self.assertFalse(target_file.exists())
+
+    def test_treats_404_as_failure(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            configs = [{
+                'url': 'http://example.com/missing.xlsx',
+                'category': 'agri',
+                'filename': 'missing.xlsx'
+            }]
+            mock_session = mock.MagicMock()
+            mock_response = mock.MagicMock()
+            mock_response.status_code = 404
+            mock_session.get.return_value = mock_response
+
+            with mock.patch.object(rbi_download, 'INPUT_DIR', temp_dir):
+                failed = rbi_download.download_files(configs,
+                                                     session=mock_session,
+                                                     delay=0)
+                self.assertEqual(failed, ['missing.xlsx'])
+                target_file = pathlib.Path(temp_dir) / 'agri' / 'missing.xlsx'
                 self.assertFalse(target_file.exists())
 
     def test_isolates_download_failures(self):

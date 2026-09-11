@@ -111,6 +111,12 @@ def reads_config_file():
             file_contents = blob.download_as_text()
             if config_file_path.endswith('.json'):
                 return json.loads(file_contents)
+            # Deprecated: Legacy Python config (.py) via exec().
+            # All imports should standardize on version-controlled JSON configuration.
+            logging.warning(
+                f"DEPRECATION WARNING: Loading Python configuration via exec() "
+                f"from '{config_file_path}' is deprecated and will be removed. "
+                "Please migrate to JSON format ('configs.json').")
             local_vars = {}
             exec(file_contents, {}, local_vars)
             return local_vars
@@ -172,9 +178,10 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
             response = session.get(config_url, timeout=45)
 
             if response.status_code == 404:
-                logging.warning(
-                    f"Table not found (HTTP 404) at {config_url}, skipping {file_name}"
+                logging.error(
+                    f"Table not found (HTTP 404) at {config_url} for {file_name}"
                 )
+                failed_downloads.append(file_name)
                 continue
 
             response.raise_for_status()
