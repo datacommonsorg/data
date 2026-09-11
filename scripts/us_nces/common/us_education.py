@@ -541,8 +541,8 @@ class USEducation:
         # Restructuring School District ID according to Data Commons.
         self._final_df_place["State_District_ID"] = (
             self._final_df_place["State_District_ID"].apply(
-                lambda x: "geoId/sch" + _format_fips_code(x, 7)
-                if _format_fips_code(x, 7) else ""))
+                lambda x: (lambda c: f"geoId/sch{c}"
+                           if c else "")(_format_fips_code(x, 7))))
 
         # List of columns to be considered under 'dcs'
         col_to_dcs = [

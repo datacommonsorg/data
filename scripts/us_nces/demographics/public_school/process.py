@@ -23,7 +23,6 @@ output_files - output files (mcf, tmcf and csv are written here)
 
 import os
 import sys
-from absl import flags
 from absl import app
 from absl import logging
 
@@ -96,7 +95,7 @@ def main(argv):
         loader.generate_csv()
         loader.generate_mcf()
         loader.generate_tmcf()
-        logging.info("Main Method Completed For Public School District ")
+        logging.info("Main Method Completed For Public School")
 
     except Exception as e:
         # Only log the first 1000 characters of the error message
