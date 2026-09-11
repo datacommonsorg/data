@@ -106,19 +106,26 @@ for file in "$SHARD_DIR"/*_shard_*.csv; do
         
         echo "INFO: Processing shard: $file (Prefix: $prefix)" >&2
         
-        # Execute the Python processing script in the background (&)
-        # We assume statvar_processpr.py takes these arguments.
-        # If there are other arguments (the '...' in your original snippet), add them here.
-        python3 "$STATVAR_PROCESSOR_SCRIPT" \
-            --input_data="$file" \
-            --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-            --pv_map="censuscountybusinesspatterns_pvmap.csv" \
-            --config_file="censuscountybusinesspatterns_metadata.csv" \
-            --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" \
-            --counters_print_interval=-1
-            # --output_counters="$DEBUG_DIR/counters_${prefix}" \ # uncomment this line to debug the script like to get the details like memory utlization etc.
-            # Add any other required arguments for statvar_processpr.py here \
-            # Run in background
+        # Execute the Python processing script with retry on failure
+        success=0
+        for attempt in 1 2 3; do
+            if python3 "$STATVAR_PROCESSOR_SCRIPT" \
+                --input_data="$file" \
+                --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+                --pv_map="censuscountybusinesspatterns_pvmap.csv" \
+                --config_file="censuscountybusinesspatterns_metadata.csv" \
+                --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" \
+                --counters_print_interval=-1; then
+                success=1
+                break
+            fi
+            echo "WARNING: Processor failed on shard $file (Attempt $attempt/3). Retrying in 15s..." >&2
+            sleep 15
+        done
+        if [ $success -ne 1 ]; then
+            echo "ERROR: Processor failed on shard $file after 3 attempts. Aborting." >&2
+            exit 1
+        fi
         
         # Manage parallelism: pause if too many jobs are running
         # We monitor the 'statvar_processpr.py' script's processes.
