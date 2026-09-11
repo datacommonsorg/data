@@ -1,0 +1,36 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Allow up to 5% deleted records due to OECD dataflow 2.5 NUTS 2024 regional restructuring and historical series revisions.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 5
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Ensure MaxDate is uniform across all StatVars",
+            "validator": "MAX_DATE_CONSISTENT"
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Ensure MaxDate is fresh within allowable 3-year reporting lag for OECD annual data",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "COALESCE(TRY_CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= date_part('year', current_date) - 3, FALSE)"
+            }
+        },
+        {
+            "rule_id": "check_no_statvar_extinction",
+            "description": "Ensure that the 5% deletion budget did not completely eliminate all observations for any StatVar",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS active_statvars FROM stats",
+                "condition": "active_statvars >= 42"
+            }
+        }
+    ]
+}
