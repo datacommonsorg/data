@@ -21,7 +21,6 @@ The import process involves querying the NYSDOH Socrata API and running a proces
     *   `ny_brfss_health_indicators_metadata.csv`: Configuration file for the data processing script specifying column mappings, header row offset, and provenance URL.
     *   `ny_brfss_health_indicators_pv_map.csv`: Property-value mapping file used by the processor to map indicators and county locations to Data Commons entities.
     *   `validation_config.json`: Configuration defining historical deletion and date freshness validation rules.
-    *   `schema.mcf`: Consolidated provisional StatVars (55) and schema nodes (56) for Piper CL ingestion.
     *   `test_data/`: Sample input data and expected output files for integration testing.
 
 *   **Transformation pipeline**:
@@ -89,17 +88,3 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_path=test_data/sample_expected_output
 ```
-
----
-
-### Step 5: Validate the Output Files
-
-This command validates the generated files for formatting and semantic consistency before ingestion.
-
-**Usage**:
-```bash
-java -jar /path/to/datacommons-import-tool.jar lint -d 'output_files/'
-```
-This step ensures that the generated artifacts are ready for ingestion into Data Commons.
-
----

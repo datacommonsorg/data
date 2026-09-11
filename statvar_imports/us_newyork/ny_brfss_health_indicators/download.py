@@ -67,6 +67,10 @@ def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
     """Writes a DataFrame to a CSV file atomically via a temporary file."""
     temp_path = f'{target_path}.tmp'
     df.to_csv(temp_path, index=False)
+    if not (os.path.exists(temp_path) and os.path.getsize(temp_path) > 0):
+        raise RuntimeError(
+            f'Atomic write failed: {temp_path} is empty or missing.'
+        )
     os.replace(temp_path, target_path)
 
 
