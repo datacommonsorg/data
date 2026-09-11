@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "CDC_Mortality_Count",
+            "import_name": "CDC_Mortality_UnderlyingCause",
             "curator_emails": [
                 "support@datacommons.org"
             ],
