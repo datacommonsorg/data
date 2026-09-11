@@ -70,7 +70,7 @@ def preprocess(base_path=None):
         logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
         raise FileNotFoundError(f"Folder '{folder_name}' not found in '{base_path}'")
 
-    pattern = re.compile(r'^A.*$', re.IGNORECASE)
+    pattern = re.compile(r'^A\.{9}$', re.IGNORECASE)
     candidate_files = sorted([f for f in os.listdir(target_folder) if pattern.match(f)])
     raw_file = candidate_files[0] if candidate_files else None
 

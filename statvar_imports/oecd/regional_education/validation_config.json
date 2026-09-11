@@ -29,7 +29,7 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT COUNT(DISTINCT StatVar) AS active_statvars FROM stats",
-                "condition": "active_statvars >= 40"
+                "condition": "active_statvars >= 42"
             }
         }
     ]
