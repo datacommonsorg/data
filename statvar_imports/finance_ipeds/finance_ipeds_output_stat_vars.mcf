@@ -1,0 +1,2942 @@
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --pv_map=finance_ipeds_pvmap.csv --config_file=finance_ipeds_metadata.csv --output_path=finance_ipeds_output --debug" on 2026-01-03 19:48:05.440617
+
+Node: dcid:Count_ExpenditureActivity_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Count_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Count_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Count_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Count_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Count_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Count_ExpenditureActivity_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Count_ExpenditureActivity_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Count_ExpenditureActivity_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_AcademicSupport_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AcademicSupport
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_AuxiliaryEnterprises_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AuxiliaryEnterprises
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AuxiliaryEnterprises_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AuxiliaryEnterprises
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AuxiliaryEnterprises_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AuxiliaryEnterprises
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AuxiliaryEnterprises_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AuxiliaryEnterprises
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_AuxiliaryEnterprises_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AuxiliaryEnterprises
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_AuxiliaryEnterprises_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:AuxiliaryEnterprises
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_GrantAid_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:GrantAid
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_GrantAid_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:GrantAid
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_GrantAid_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:GrantAid
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_GrantAid_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:GrantAid
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_GrantAid_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:GrantAid
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_GrantAid_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:GrantAid
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_HospitalServices_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:HospitalServices
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_InstitutionalSupport_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:InstitutionalSupport
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_Instruction_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Instruction
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpensesAndDeductions_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpensesAndDeductions
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpensesAndDeductions_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpensesAndDeductions
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpensesAndDeductions_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpensesAndDeductions
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpenses_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpenses
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpenses_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpenses
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpenses_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpenses
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpenses_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpenses
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpenses_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpenses
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_OtherExpenses_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:OtherExpenses
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_PublicService_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:PublicService
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_Research_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:Research
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFellowships_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:ScholarshipFellowships
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFellowships_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:ScholarshipFellowships
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFellowships_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:ScholarshipFellowships
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_StudentServices_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:StudentServices
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PrivateNonProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PrivateNonProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PublicInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Expenditure_ExpenditureActivity_TotalExpenses_PublicInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:expenditure
+statType: dcid:measuredValue
+expenditureType: dcid:TotalExpenses
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_EducationalSales_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_FederalFundingExcludesFDSLLoans_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFundingExcludesFDSLLoans
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_FederalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_FederalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_GrantsAndContracts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:GrantsAndContracts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_HospitalRevenue_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:HospitalRevenue
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_InvestmentIncomeAndGains_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:InvestmentIncomeAndGains
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_LocalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_LocalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_OtherRevenues_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_SalesAndServicesOfAuxiliaryEnterprises_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:SalesAndServicesOfAuxiliaryEnterprises
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_StateFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_StateFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_TotalRevenueInvestmentReturn_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_FourYear_TuitionAndFees_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_EducationalSales_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_FederalFundingExcludesFDSLLoans_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFundingExcludesFDSLLoans
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_FederalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_FederalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_GrantsAndContracts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:GrantsAndContracts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_InvestmentIncomeAndGains_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:InvestmentIncomeAndGains
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_LocalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_LocalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_OtherRevenues_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_StateFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_StateFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_TotalRevenueInvestmentReturn_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_LessThanTwoYear_TuitionAndFees_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_EducationalSales_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_FederalFundingExcludesFDSLLoans_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFundingExcludesFDSLLoans
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_FederalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_FederalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_GrantsAndContracts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:GrantsAndContracts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_HospitalRevenue_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:HospitalRevenue
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_InvestmentIncomeAndGains_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:InvestmentIncomeAndGains
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_LocalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_LocalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_OtherRevenues_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_SalesAndServicesOfAuxiliaryEnterprises_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:SalesAndServicesOfAuxiliaryEnterprises
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_StateFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_StateFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_TotalRevenueInvestmentReturn_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateForProfitInstitution_TwoYear_TuitionAndFees_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateForProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_AffiliatedEntities_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:AffiliatedEntities
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_EducationalSales_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_FederalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_FederalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_Gifts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:Gifts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_HospitalRevenue_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:HospitalRevenue
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_IndependentOperationsRevenue_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:IndependentOperationsRevenue
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_IndependentOperations_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:IndependentOperations
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_InvestmentReturn_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:InvestmentReturn
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_LocalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_LocalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_OtherRevenues_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_PrivateGrantsAndContracts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:PrivateGrantsAndContracts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_SalesAndServicesOfAuxiliaryEnterprises_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:SalesAndServicesOfAuxiliaryEnterprises
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_StateFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_StateFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_TotalRevenueInvestmentReturn_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_FourYear_TuitionAndFees_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_AffiliatedEntities_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:AffiliatedEntities
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_EducationalSales_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_FederalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_FederalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_Gifts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:Gifts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_InvestmentReturn_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:InvestmentReturn
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_LocalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_LocalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_OtherRevenues_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_PrivateGrantsAndContracts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:PrivateGrantsAndContracts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_StateFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_StateFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_TotalRevenueInvestmentReturn_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_LessThanTwoYear_TuitionAndFees_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_AffiliatedEntities_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:AffiliatedEntities
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_EducationalSales_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_FederalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_FederalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_Gifts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:Gifts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_HospitalRevenue_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:HospitalRevenue
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_IndependentOperationsRevenue_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:IndependentOperationsRevenue
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_IndependentOperations_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:IndependentOperations
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_InvestmentReturn_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:InvestmentReturn
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_LocalFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_LocalFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_OtherRevenues_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_PrivateGrantsAndContracts_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:PrivateGrantsAndContracts
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_SalesAndServicesOfAuxiliaryEnterprises_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:SalesAndServicesOfAuxiliaryEnterprises
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_StateFunding_GovernmentAppropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentAppropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_StateFunding_GovernmentGrantsAndContracts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:GovernmentGrantsAndContracts
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_TotalRevenueInvestmentReturn_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PrivateNonProfitInstitution_TwoYear_TuitionAndFees_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PrivateNonProfitInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_AdditionsPermanent_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:AdditionsPermanent
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_CapitalAppropriations_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:CapitalAppropriations
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_CapitalGrantsGifts_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:CapitalGrantsGifts
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_EducationalSales_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_FederalFundingExcludesFDSLLoans_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFundingExcludesFDSLLoans
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_FederalFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_FederalFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_FederalFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_Gifts_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:Gifts
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_GrantsAndContracts_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:GrantsAndContracts
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_HospitalSales_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:HospitalSales
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_IndependentOperations_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:IndependentOperations
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_IndependentOperations_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:IndependentOperations
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_InvestmentIncome_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:InvestmentIncome
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_LocalFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_LocalFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_LocalFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_NonOperating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueType: dcid:NonOperating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_OtherNonOperatingRevenue_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:OtherNonOperatingRevenue
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_OtherOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:OtherOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_OtherRevenues_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_PrivateFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:PrivateFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_SalesAndServicesOfAuxiliaryEnterprises_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:SalesAndServicesOfAuxiliaryEnterprises
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_StateFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_StateFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_StateFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_TotalNonOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TotalNonOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_TotalOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TotalOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_TotalOtherRevenues_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TotalOtherRevenues
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_TotalRevenueInvestmentReturn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_FourYear_TuitionAndFees_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:FourYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_EducationalSales_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_FederalFundingExcludesFDSLLoans_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFundingExcludesFDSLLoans
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_FederalFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_FederalFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_FederalFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_Gifts_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:Gifts
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_GrantsAndContracts_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:GrantsAndContracts
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_InvestmentIncome_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:InvestmentIncome
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_LocalFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_LocalFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_LocalFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_NonOperating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueType: dcid:NonOperating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_OtherNonOperatingRevenue_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:OtherNonOperatingRevenue
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_OtherOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:OtherOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_OtherRevenues_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_PrivateFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:PrivateFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_StateFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_StateFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_StateFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_TotalNonOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TotalNonOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_TotalOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TotalOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_TotalOtherRevenues_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TotalOtherRevenues
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_TotalRevenueInvestmentReturn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_LessThanTwoYear_TuitionAndFees_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:LessThanTwoYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_AdditionsPermanent_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:AdditionsPermanent
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_CapitalAppropriations_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:CapitalAppropriations
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_CapitalGrantsGifts_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:CapitalGrantsGifts
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_EducationalSales_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:EducationalSales
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_FederalFundingExcludesFDSLLoans_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFundingExcludesFDSLLoans
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_FederalFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_FederalFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_FederalFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:FederalFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_Gifts_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:Gifts
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_GrantsAndContracts_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:GrantsAndContracts
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_HospitalSales_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:HospitalSales
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_IndependentOperations_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:IndependentOperations
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_IndependentOperations_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:IndependentOperations
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_InvestmentIncome_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:InvestmentIncome
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_LocalFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_LocalFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_LocalFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:LocalFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_NonOperating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueType: dcid:NonOperating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_OtherNonOperatingRevenue_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:OtherNonOperatingRevenue
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_OtherOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:OtherOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_OtherRevenues_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:OtherRevenues
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_PrivateFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:PrivateFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_SalesAndServicesOfAuxiliaryEnterprises_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:SalesAndServicesOfAuxiliaryEnterprises
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_StateFunding_Appropriations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:Appropriations
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_StateFunding_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_StateFunding_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:StateFunding
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_TotalNonOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TotalNonOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_TotalOperatingRevenues_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TotalOperatingRevenues
+revenueType: dcid:Operating
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_TotalOtherRevenues_NonOperatingGrants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TotalOtherRevenues
+revenueType: dcid:NonOperatingGrants
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_TotalRevenueInvestmentReturn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TotalRevenueInvestmentReturn
+
+Node: dcid:Revenue_ExpenditureActivity_PublicInstitution_TwoYear_TuitionAndFees_Operating
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:revenue
+statType: dcid:measuredValue
+institutionControl: dcid:PublicInstitution
+institutionLevel: dcid:TwoYear
+revenueSource: dcid:TuitionAndFees
+revenueType: dcid:Operating
+

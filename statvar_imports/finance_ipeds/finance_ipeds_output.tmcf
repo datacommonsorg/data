@@ -1,0 +1,7 @@
+Node: E:finance_ipeds_output->E0
+observationDate: C:finance_ipeds_output->observationDate
+value: C:finance_ipeds_output->value
+observationAbout: C:finance_ipeds_output->observationAbout
+variableMeasured: C:finance_ipeds_output->variableMeasured
+unit: C:finance_ipeds_output->unit
+typeOf: dcs:StatVarObservation
