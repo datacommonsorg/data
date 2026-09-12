@@ -1,0 +1,14 @@
+Node: E:dbsnp_hg19_positions->E1
+typeOf: dcs:GenomicPosition
+dcid: C:dbsnp_hg19_positions->dcid_pos
+name: C:dbsnp_hg19_positions->name_pos
+inChromosome: C:dbsnp_hg19_positions->inChromosome
+inGenomeAssembly: dcs:bio/GCA_000001405.14
+position:  C:dbsnp_hg19_positions->position
+
+Node: E:dbsnp_hg19_positions->E2
+typeOf: dcs:GeneticVariant
+dcid: C:dbsnp_hg19_positions->dcid
+name: C:dbsnp_hg19_positions->name
+hg19GenomicPosition: E:dbsnp_hg19_positions->E1
+rsID: C:dbsnp_hg19_positions->rsID
