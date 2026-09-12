@@ -1,0 +1,32 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCBI_Assembly_Summary_Reports",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.ncbi.nlm.nih.gov/assembly/",
+            "provenance_description": "provides information on the structure of assembled genomes, assembly names, metadata, statistical reports, and links to genomic sequence data",
+            "scripts": [
+                "format_NCBI_Chromosome.py",
+                "Summary_Report/download.sh",
+                "Summary_Report/scripts/process.py"
+                
+                
+                
+            ],
+            "source_files": [
+                "scripts/input/assembly_summary_genbank.txt",
+                "scripts/input/assembly_summary_refseq.txt"
+            ],
+            "import_inputs": [
+                {
+                    "cleaned_csv": "Summary_Report/scripts/output/ncbi_assembly_summary.csv",
+	                "node_mcf": "hg38_genome_assembly.mcf"
+
+                }
+            ],
+            "cron_schedule": "0 0 * * 0"
+        }
+    ]
+}

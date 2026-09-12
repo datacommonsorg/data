@@ -18,4 +18,4 @@
 #!/bin/bash
 
 # Command
-python3 scripts/process_test.py
+python3 Summary_Report/scripts/process_test.py
