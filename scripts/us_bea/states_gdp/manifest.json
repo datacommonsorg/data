@@ -1,33 +1,33 @@
 {
-    "import_specifications": [
+  "import_specifications": [
+    {
+      "import_name": "BEA_USStatesQuarterlyGDP",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.bea.gov/data/gdp/gdp-state",
+      "provenance_description": "Quarterly data on inflation-adjusted GDP at a state level in the United States from the US Bureau of Economic Analysis.",
+      "scripts": [
+        "../../../util/download_util_script.py --download_url=https://apps.bea.gov/regional/zip/SQGDP.zip --output_folder=input_files --unzip=True",
+        "preprocess_csv.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/preprocessed_data.csv --pv_map=bea_gdp_pv_map.csv --config_file=bea_gdp_metadata.csv --places_resolved_csv=bea_gdp_place_map.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/BEA_GDP_output"
+      ],
+      "source_files": [
+        "input_data/*.csv"
+      ],
+      "import_inputs": [
         {
-            "import_name": "BEA_USStatesQuarterlyGDP",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.bea.gov/data/gdp/gdp-state",
-            "provenance_description": "Quarterly data on inflation-adjusted GDP at a state level in the United States from the US Bureau of Economic Analysis.",
-            "scripts": [
-                "common_download.py",
-                "import_data.py",
-                "import_industry_data_and_gen_mcf.py"
-            ],
-            "source_files": [
-                "input_data/*.csv"
-            ],
-            "import_inputs": [
-                {
-                    "cleaned_csv": "states_gdp.csv",
-                    "template_mcf": "states_gdp.tmcf",
-                    "node_mcf": "states_gdp_statvars.mcf"
-                },
-                {
-                    "cleaned_csv": "states_industry_gdp.csv",
-                    "node_mcf": "states_gdp_industry_statvars.mcf",
-                    "template_mcf": "states_industry_gdp.tmcf"
-                }
-            ],
-            "cron_schedule": "30 10 30 1,4,7,10,12 *"
+          "cleaned_csv": "states_gdp.csv",
+          "template_mcf": "states_gdp.tmcf",
+          "node_mcf": "states_gdp_statvars.mcf"
+        },
+        {
+          "cleaned_csv": "states_industry_gdp.csv",
+          "node_mcf": "states_gdp_industry_statvars.mcf",
+          "template_mcf": "states_industry_gdp.tmcf"
         }
-    ]
+      ],
+      "cron_schedule": "30 10 30 1,4,7,10,12 *"
+    }
+  ]
 }

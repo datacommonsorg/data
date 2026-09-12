@@ -1,26 +1,27 @@
 {
-    "import_specifications": [
+  "import_specifications": [
+    {
+      "import_name": "US_CCD_Enrollment",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://nces.ed.gov/programs/digest/d24/tables/dt24_203.65.asp",
+      "provenance_description": "Enrollment in public elementary and secondary schools, by level, grade, and race/ethnicity.",
+      "scripts": [
+        "../../../util/download_util_script.py --download_url=https://nces.ed.gov/programs/digest/d24/tables/xls/tabn203.65.xlsx --output_folder=source_files",
+        "preprocess.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=place_resolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/enrollment_output"
+      ],
+      "source_files": [
+        "input_files/ccd_enrollment_input.csv"
+      ],
+      "import_inputs": [
         {
-            "import_name": "US_CCD_Enrollment",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://nces.ed.gov/programs/digest/d24/tables/dt24_203.65.asp",
-            "provenance_description": "Enrollment in public elementary and secondary schools, by level, grade, and race/ethnicity.",
-            "scripts": [
-                "download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ccd_enrollment_input.csv --pv_map=CCD_Enrollment_pvmap.csv --config_file=CCD_Enrollment_metadata.csv --output_path=output/CCD_Enrollment_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-            ],
-            "source_files": [
-                "input_files/ccd_enrollment_input.csv"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "output/CCD_Enrollment_output.tmcf",
-                    "cleaned_csv": "output/CCD_Enrollment_output.csv"
-                }
-            ],
-            "cron_schedule": "0 06 * * 5"
+          "template_mcf": "output/CCD_Enrollment_output.tmcf",
+          "cleaned_csv": "output/CCD_Enrollment_output.csv"
         }
-    ]
+      ],
+      "cron_schedule": "0 06 * * 5"
+    }
+  ]
 }
