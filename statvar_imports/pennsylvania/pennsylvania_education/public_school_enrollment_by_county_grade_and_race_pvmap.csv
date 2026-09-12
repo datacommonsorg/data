@@ -1,0 +1,27 @@
+key,p1,v1,p2,v2,,,,
+County,observationAbout,{Data},populationType,Student,measuredProperty,count,observationDate,2017
+Pre-Kindergarten Half Day,schoolGradeLevel,PreKindergarten,schoolDayType,HalfDay,value,{Number},,
+Pre-Kindergarten Full Day,schoolGradeLevel,PreKindergarten,schoolDayType,FullDay,value,{Number},,
+K4 Half Day,schoolGradeLevel,PreKindergarten,age,[4 Years],schoolDayType,HalfDay,value,{Number}
+K4 Full Day,schoolGradeLevel,PreKindergarten,age,[4 Years],schoolDayType,FullDay,value,{Number}
+K5 Half Day,schoolGradeLevel,Kindergarten,age,[5 Years],schoolDayType,HalfDay,value,{Number}
+K5 Full Day,schoolGradeLevel,Kindergarten,age,[5 Years],schoolDayType,FullDay,value,{Number}
+1st Grade,schoolGradeLevel,SchoolGrade1,value,{Number},,,,
+2nd Grade,schoolGradeLevel,SchoolGrade2,value,{Number},,,,
+3rd Grade,schoolGradeLevel,SchoolGrade3,value,{Number},,,,
+4th Grade,schoolGradeLevel,SchoolGrade4,value,{Number},,,,
+5th Grade,schoolGradeLevel,SchoolGrade5,value,{Number},,,,
+6th Grade,schoolGradeLevel,SchoolGrade6,value,{Number},,,,
+7th Grade,schoolGradeLevel,SchoolGrade7,value,{Number},,,,
+8th Grade,schoolGradeLevel,SchoolGrade8,value,{Number},,,,
+9th Grade,schoolGradeLevel,SchoolGrade9,value,{Number},,,,
+10th Grade,schoolGradeLevel,SchoolGrade10,value,{Number},,,,
+11th Grade,schoolGradeLevel,SchoolGrade11,value,{Number},,,,
+12th Grade,schoolGradeLevel,SchoolGrade12,value,{Number},,,,
+American Indian / Alaskan Native,race,AmericanIndianOrAlaskaNative,,,,,,
+Asian,race,Asian,,,,,,
+Black or African American,race,BlackOrAfricanAmericanAlone,,,,,,
+Hispanic,race,HispanicOrLatino,,,,,,
+Multi-Racial,race,TwoOrMoreRaces,,,,,,
+Native Hawaiian or other Pacific Islander(not hispanic),race,NativeHawaiianOrOtherPacificIslanderAlone,,,,,,
+White,race,WhiteAlone,,,,,,
