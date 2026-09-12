@@ -1,0 +1,15 @@
+parameter,value
+url,https://nigeria.opendataforafrica.org/jgngifg
+description,Health Sector
+#place_type,Country
+#places_within,country/NGA
+start_date,2007
+end_date,2012
+release_frequency,P1Y
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
+header_rows,1
+#drop_statvars_without_svobs,0
+mapped_columns,11
+mapped_rows,1
