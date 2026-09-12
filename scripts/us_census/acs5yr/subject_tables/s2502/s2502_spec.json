@@ -17,7 +17,61 @@
 		"MarginOfError_Count_HousingUnit_HouseholderRaceTwoOrMoreRaces_OccupiedHousingUnit": "MarginOfError_Count_HousingUnit_HouseholderRaceTwoOrMoreRaces",
 		"MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAlone_OccupiedHousingUnit": "MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAlone",
 		"MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino_OccupiedHousingUnit": "MarginOfError_Count_HousingUnit_HouseholderRaceWhiteAloneNotHispanicOrLatino",
-		"MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_OccupiedHousingUnit": "MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone"
+		"MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_OccupiedHousingUnit": "MarginOfError_Count_HousingUnit_HouseholderRaceAmericanIndianOrAlaskaNativeAlone",
+		"Count_HousingUnit_MovedInDate1990To1999_OccupiedHousingUnit": "Count_HousingUnit_1990To1999Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1990To1999_OwnerOccupied": "Count_HousingUnit_1990To1999Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1990To1999_RenterOccupied": "Count_HousingUnit_1990To1999Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2000To2009_OccupiedHousingUnit": "Count_HousingUnit_2000To2009Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2000To2009_OwnerOccupied": "Count_HousingUnit_2000To2009Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2000To2009_RenterOccupied": "Count_HousingUnit_2000To2009Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate1989OrEarlier_OwnerOccupied": "Count_HousingUnit_1989OrEarlierDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1989OrEarlier_OccupiedHousingUnit": "Count_HousingUnit_1989OrEarlierDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1989OrEarlier_RenterOccupied": "Count_HousingUnit_1989OrEarlierDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2010To2014_OwnerOccupied": "Count_HousingUnit_2010To2014Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2010To2014_OccupiedHousingUnit": "Count_HousingUnit_2010To2014Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2010To2014_RenterOccupied": "Count_HousingUnit_2010To2014Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2018To2020_OccupiedHousingUnit": "Count_HousingUnit_2018To2020Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2021OrLater_OwnerOccupied": "Count_HousingUnit_2021OrLaterDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2010To2017_OccupiedHousingUnit": "Count_HousingUnit_2010To2017Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2018To2020_RenterOccupied": "Count_HousingUnit_2018To2020Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2021OrLater_RenterOccupied": "Count_HousingUnit_2021OrLaterDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2018To2020_OwnerOccupied": "Count_HousingUnit_2018To2020Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2021OrLater_OccupiedHousingUnit": "Count_HousingUnit_2021OrLaterDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2010To2017_RenterOccupied": "Count_HousingUnit_2010To2017Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2010To2017_OwnerOccupied": "Count_HousingUnit_2010To2017Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2019OrLater_OccupiedHousingUnit": "Count_HousingUnit_2019OrLaterDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2015To2018_OwnerOccupied": "Count_HousingUnit_2015To2018Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2019OrLater_OwnerOccupied": "Count_HousingUnit_2019OrLaterDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2015To2018_RenterOccupied": "Count_HousingUnit_2015To2018Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2019OrLater_RenterOccupied": "Count_HousingUnit_2019OrLaterDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2015To2018_OccupiedHousingUnit": "Count_HousingUnit_2015To2018Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1980To1989_OccupiedHousingUnit": "Count_HousingUnit_1980To1989Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1980To1989_OwnerOccupied": "Count_HousingUnit_1980To1989Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1980To1989_RenterOccupied": "Count_HousingUnit_1980To1989Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2015OrLater_OccupiedHousingUnit": "Count_HousingUnit_2015OrLaterDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2015OrLater_OwnerOccupied": "Count_HousingUnit_2015OrLaterDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1979OrEarlier_OwnerOccupied": "Count_HousingUnit_1979OrEarlierDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1979OrEarlier_OccupiedHousingUnit": "Count_HousingUnit_1979OrEarlierDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1979OrEarlier_RenterOccupied": "Count_HousingUnit_1979OrEarlierDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2015OrLater_RenterOccupied": "Count_HousingUnit_2015OrLaterDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2017OrLater_OccupiedHousingUnit": "Count_HousingUnit_2017OrLaterDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2015To2016_OwnerOccupied": "Count_HousingUnit_2015To2016Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2015To2016_RenterOccupied": "Count_HousingUnit_2015To2016Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2017OrLater_RenterOccupied": "Count_HousingUnit_2017OrLaterDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2017OrLater_OwnerOccupied": "Count_HousingUnit_2017OrLaterDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2015To2016_OccupiedHousingUnit": "Count_HousingUnit_2015To2016Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1969OrEarlier_OccupiedHousingUnit": "Count_HousingUnit_1969OrEarlierDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1970To1979_OccupiedHousingUnit": "Count_HousingUnit_1970To1979Date_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2010OrLater_OccupiedHousingUnit": "Count_HousingUnit_2010OrLaterDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate2000OrLater_OccupiedHousingUnit": "Count_HousingUnit_2000OrLaterDate_OccupiedHousingUnit",
+		"Count_HousingUnit_MovedInDate1970To1979_OwnerOccupied": "Count_HousingUnit_1970To1979Date_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1969OrEarlier_OwnerOccupied": "Count_HousingUnit_1969OrEarlierDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2010OrLater_OwnerOccupied": "Count_HousingUnit_2010OrLaterDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate2000OrLater_OwnerOccupied": "Count_HousingUnit_2000OrLaterDate_OwnerOccupied",
+		"Count_HousingUnit_MovedInDate1970To1979_RenterOccupied": "Count_HousingUnit_1970To1979Date_RenterOccupied",
+		"Count_HousingUnit_MovedInDate1969OrEarlier_RenterOccupied": "Count_HousingUnit_1969OrEarlierDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2010OrLater_RenterOccupied": "Count_HousingUnit_2010OrLaterDate_RenterOccupied",
+		"Count_HousingUnit_MovedInDate2000OrLater_RenterOccupied": "Count_HousingUnit_2000OrLaterDate_RenterOccupied"
 	},
 	"populationType": {
 		"_DEFAULT": "HousingUnit"
@@ -60,6 +114,11 @@
 			"Bachelor's degree or higher": "BachelorsDegreeOrHigher"
 		},
 		"dateMovedIn": {
+			"Moved in 2021 or later": "[2021 - Date]",
+			"Moved in 2019 or later": "[2019 - Date]",
+			"Moved in 2015 to 2018": "[2015 2018 Date]",
+			"Moved in 2018 to 2020": "[2018 2020 Date]",
+			"Moved in 2010 to 2017": "[2010 2017 Date]",
 			"Moved in 2017 or later": "[2017 - Date]",
 			"Moved in 2015 to 2016": "[2015 2016 Date]",
 			"Moved in 2015 or later": "[2015 - Date]",
@@ -85,13 +144,17 @@
 			"Occupied housing units MOE": "OccupiedHousingUnit"
 		}
 	},
-	"universePVs": [{
-		"populationType": "HousingUnit",
-		"constraintProperties": ["occupancyTenure"],
-		"dependentPVs": {
-			"occupancyStatus": "OccupiedHousingUnit"
+	"universePVs": [
+		{
+			"populationType": "HousingUnit",
+			"constraintProperties": [
+				"occupancyTenure"
+			],
+			"dependentPVs": {
+				"occupancyStatus": "OccupiedHousingUnit"
+			}
 		}
-	}],
+	],
 	"ignoreColumns": [
 		"id",
 		"Geographic Area Name",
