@@ -1,0 +1,8 @@
+Node: E:mesh_desc_descriptor->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_desc_descriptor->DescriptorParentID
+
+Node: E:mesh_desc_descriptor->E2
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_desc_descriptor->Descriptor_dcid
+specializationOf: E:mesh_desc_descriptor->E1

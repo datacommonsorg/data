@@ -1,0 +1,10 @@
+Node: E:mesh_desc_descriptor_qualifier_mapping->E1
+typeOf: dcs:MeSHQualifier
+dcid: C:mesh_desc_descriptor_qualifier_mapping->Qualifier_dcid
+identifier: C:mesh_desc_descriptor_qualifier_mapping->QualifierID
+
+Node: E:mesh_desc_descriptor_qualifier_mapping->E2
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_desc_descriptor_qualifier_mapping->Descriptor_dcid
+identifier: C:mesh_desc_descriptor_qualifier_mapping->DescriptorID
+hasMeSHQualifier: E:mesh_desc_descriptor_qualifier_mapping->E1
