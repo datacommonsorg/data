@@ -1,0 +1,52 @@
+{
+  "group_by": {
+    "SB_1": "D149.V21-level2",
+    "SB_2": "D149.V20"
+  },
+  "measure": [
+    "CM_002",
+    "CM_070",
+    "CM_080",
+    "CM_090",
+    "CM_095",
+    "CM_100",
+    "CM_110",
+    "CM_120",
+    "CM_130"
+  ],
+  "select": {
+    "RO_ageD149.V39": {
+      "radio":"RO_ageD149.V39"
+    },
+    "SD149.V39":{
+      "name":"MAge"
+    },
+    "SD149.V5": {
+      "name": "MEdu",
+      "exclude_options": ["Exc", "NR"]
+    },
+    "SD149.V27": {
+      "name": "MtalStatus",
+      "exclude_options": ["NR"]
+    },
+    "RO_raceD149.V49":{
+      "radio":"RO_raceD149.V49"
+    },
+    "SD149.V49": {
+      "name": "MRace",
+      "exclude_options": ["100"]
+    },
+    "SD149.V43": {
+      "name": "MEth"
+    },
+    "SD149.V48":{
+      "name":"MNat",
+      "exclude_options":["10"]
+    }
+  },
+  "year":{
+    "_comment": "The source had data devided into sets ex:2003-2006. Downloaded only the latest year data set.",
+    "element": "SD149.V20",
+    "include_list":["2016","2017","2018","2019","2020","2021","2022"]
+  }
+}
