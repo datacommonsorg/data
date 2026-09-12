@@ -1,0 +1,5 @@
+observationAbout,observationDate,value,variableMeasured
+nces/010000500871,2018,0,dcid:Count_Student_DualEnrollment_HispanicOrLatino_Male
+nces/010000500871,2018,6,dcid:Count_Student_DualEnrollment_HispanicOrLatino_Female
+nces/010000500871,2018,0,dcid:Count_Student_DualEnrollment_Male_AmericanIndianOrAlaskaNative
+nces/010000500871,2018,0,dcid:Count_Student_DualEnrollment_Female_AmericanIndianOrAlaskaNative
