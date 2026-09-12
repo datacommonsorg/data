@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+Referência,observationDate,{Data},benefitProgram,Brazil_RuralProductiveInclusionAidProgram,populationType,Person,householdType,FarmingFamily,observationPeriod,P1M
+Código,observationAbout,{Data},,,,,,,,
+Agricultores beneficiários do AIPR,value,{Number},,,name,"""The total number of farmers benefiting from the Rural Productive Inclusion Aid Program.""",alternateName,"""Total de agricultores beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural @pt""",,
+Agricultores do AIPR com benefício suspenso,value,{Number},benefitsStatus,Suspended,name,"""The total number of farmers who benefited from the Rural Productive Inclusion Aid Program and had their benefits suspended.""",alternateName,"""Total de agricultores que foram beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural e tiveram seus benefícios suspensos  @pt""",,
+Agricultores do AIPR com benefício cancelado,value,{Number},benefitsStatus,Canceled,name,"""The total number of farmers who benefited from the Rural Productive Inclusion Aid Program and had their benefits canceled.""",alternateName,"""Total de agricultores que foram beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural e tiveram seus benefícios cancelados @pt""",,
