@@ -1,0 +1,186 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "ISBE_Illinois_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.isbe.net/Pages/Illinois-State-Report-Card-Data.aspx",
+            "provenance_description": "Illinois School Report Card data from the Illinois State Board of Education (ISBE), detailing school and district-level statistics categorized by student demographics and state assessment results.",
+            "scripts": [
+                "download_script.py",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2018_DLM_data.csv --pv_map=configs/DLM_AA_dlm2018_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa_2018_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2019_DLM_data.csv --pv_map=configs/DLM_AA_dlm2019_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa_2019_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2021_DLM_data.csv --pv_map=configs/DLM_AA_dlm2021_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa_2021_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2022_DLM_AA_data.csv --pv_map=configs/DLM_AA_inputfiles_2022_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa_2022_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_DLM_AA_data.csv --pv_map=configs/DLM_AA_dlm2023_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa_2023_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2024_DLM_AA_data.csv --pv_map=configs/DLM_AA_dlm2024_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa_2024_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2022_DLM_AA_2__data.csv --pv_map=configs/DLM_AA_AA2_2022_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa2_2022_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_DLM_AA_2__data.csv --pv_map=configs/DLM_AA_AA2_2023_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa2_2023_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2024_DLM_AA_2__data.csv --pv_map=configs/DLM_AA_AA2_2024_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/dlm_aa2_2024_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2018_ELA_and_Math_data.csv --pv_map=configs/ELA_Math_Science_2018_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2018_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2019_ELA_Math_Science_data.csv --pv_map=configs/ELA_Math_Science_2019_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2019_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2020_ELA_Math_Science_data.csv --pv_map=configs/ELA_Math_Science_2020_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2020_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2021_ELA_Math_Science_data.csv --pv_map=configs/ELA_Math_Science_2021_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2021_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2022_ELA_Math_Science_data.csv --pv_map=configs/ELA_Math_Science_2022_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2022_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_ELA_Math_Science_data.csv --pv_map=configs/ELA_Math_Science_2023_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2023_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2024_ELAMathScience_data.csv --pv_map=configs/ELA_Math_Science_2024_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2024_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2019_IAR_data.csv --pv_map=configs/IAR_IAR2019_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar_2019_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2021_IAR_data.csv --pv_map=configs/IAR_iar2021_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar_2021_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2022_IAR_data.csv --pv_map=configs/IAR_2022_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar_2022_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_IAR_data.csv --pv_map=configs/IAR_iar2023_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar_2023_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2024_IAR_data.csv --pv_map=configs/IAR_iar2024_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar_2024_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2022_IAR_2__data.csv --pv_map=configs/IAR_IAR2_2022_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar2_2022_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_IAR_2__data.csv --pv_map=configs/IAR_IAR2_2023_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar2_2023_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2024_IAR_2__data.csv --pv_map=configs/IAR_IAR2_2024_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/iar2_2024_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2018_ISA_data.csv --pv_map=configs/ISA_2018_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/isa_2018_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2019_ISA_data.csv --pv_map=configs/ISA_2019_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/isa_2019_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2021_ISA_data.csv --pv_map=configs/ISA_2021_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/isa_2021_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2022_ISA_data.csv --pv_map=configs/ISA_2022_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/isa_2022_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_ISA_data.csv --pv_map=configs/ISA_2023_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/isa_2023_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2024_ISA_data.csv --pv_map=configs/ISA_2024_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/isa_2024_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2018_PARCC_data.csv --pv_map=configs/PARCC_pvmap.csv --config_file=metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/parcc_2018_output",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/trend_data_15_Year_Trend_Report_data.csv --pv_map=configs/trenddata_pvmap.csv --config_file=trenddata_metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/trenddata_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/dlm_aa_2018_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa_2018_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa_2019_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa_2019_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa_2021_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa_2021_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa_2022_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa_2022_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa_2023_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa_2023_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa_2024_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa_2024_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa2_2022_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa2_2022_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa2_2023_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa2_2023_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/dlm_aa2_2024_output.tmcf",
+                    "cleaned_csv": "output_files/dlm_aa2_2024_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2018_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2018_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2019_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2019_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2020_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2020_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2021_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2021_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2022_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2022_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2023_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2023_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/ela_2024_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2024_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2019_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2019_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2021_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2021_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2022_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2022_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2023_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2023_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2024_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2024_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar2_2022_output.tmcf",
+                    "cleaned_csv": "output_files/iar2_2022_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar2_2023_output.tmcf",
+                    "cleaned_csv": "output_files/iar2_2023_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar2_2024_output.tmcf",
+                    "cleaned_csv": "output_files/iar2_2024_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/isa_2018_output.tmcf",
+                    "cleaned_csv": "output_files/isa_2018_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/isa_2019_output.tmcf",
+                    "cleaned_csv": "output_files/isa_2019_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/isa_2021_output.tmcf",
+                    "cleaned_csv": "output_files/isa_2021_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/isa_2022_output.tmcf",
+                    "cleaned_csv": "output_files/isa_2022_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/isa_2023_output.tmcf",
+                    "cleaned_csv": "output_files/isa_2023_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/isa_2024_output.tmcf",
+                    "cleaned_csv": "output_files/isa_2024_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/parcc_2018_output.tmcf",
+                    "cleaned_csv": "output_files/parcc_2018_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/trenddata_output.tmcf",
+                    "cleaned_csv": "output_files/trenddata_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 0 15 12 *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 128,
+                "disk": 100
+            }
+        }
+    ]
+}
