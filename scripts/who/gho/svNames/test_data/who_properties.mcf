@@ -1,0 +1,20 @@
+Node: dcid:who/AIR_1
+name: "who/AIR_1"
+description: "Ambient air pollution attributable deaths"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
+Node: dcid:who/AIR_7
+name: "who/AIR_7"
+description: "Ambient air pollution attributable DALYs"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
+Node: dcid:who/AIR_43
+name: "who/AIR_43"
+description: "Ambient air pollution attributable DALYs"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
