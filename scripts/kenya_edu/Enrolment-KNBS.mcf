@@ -1,0 +1,48 @@
+Node: dcid:Count_Student_EnrolledInSchool_PrimaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolEnrollment: dcid:EnrolledInSchool
+schoolGradeLevel: dcid:PrimaryEducation
+
+Node: dcid:Count_Student_EnrolledInSchool_SecondaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolEnrollment: dcid:EnrolledInSchool
+schoolGradeLevel: dcid:SecondaryEducation
+
+Node: dcid:Count_Student_Female_PrimaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+schoolGradeLevel: dcid:PrimaryEducation
+
+Node: dcid:Count_Student_Female_SecondaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+schoolGradeLevel: dcid:SecondaryEducation
+
+Node: dcid:Count_Student_Male_PrimaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+schoolGradeLevel: dcid:PrimaryEducation
+
+Node: dcid:Count_Student_Male_SecondaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+schoolGradeLevel: dcid:SecondaryEducation
+
