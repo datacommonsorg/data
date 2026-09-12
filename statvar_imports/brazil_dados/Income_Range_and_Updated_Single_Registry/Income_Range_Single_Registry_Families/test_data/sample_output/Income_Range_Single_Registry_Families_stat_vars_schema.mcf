@@ -1,0 +1,51 @@
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household
+
+Node: dcid:registeredIn
+typeOf: dcs:Property
+name: "registeredIn"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:RegisteredInEnum
+
+Node: dcid:RegisteredInEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "RegisteredInEnum"
+
+Node: dcid:Brazil_SingleRegistry
+typeOf: dcid:RegisteredInEnum
+name: "Brazil_ Single Registry"
+
+Node: dcid:povertyStatus
+typeOf: dcs:Property
+name: "povertyStatus"
+domainIncludes: dcid:Household
+
+Node: dcid:InPovertyAccordingToBolsaFamilyProgram
+typeOf: dcid:PovertyStatusEnum
+name: "In Poverty According To Bolsa Family Program"
+
+Node: dcid:incomeStatus
+typeOf: dcs:Property
+name: "incomeStatus"
+domainIncludes: dcid:Household
+
+Node: dcid:LowIncome
+typeOf: dcid:IncomeStatusEnum
+name: "Low Income"
+
+Node: dcid:UptoHalfOfMinimumWage
+typeOf: dcid:IncomeStatusEnum
+name: "Upto Half Of Minimum Wage"
+
+Node: dcid:HalfOfMinimumWageOrMore
+typeOf: dcid:IncomeStatusEnum
+name: "Half Of Minimum Wage Or More"
+
+Node: dcid:PovertyStatusEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "PovertyStatusEnum"
+

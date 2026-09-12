@@ -1,0 +1,9 @@
+Node: E:Income_Range_Single_Registry_Families->E0
+observationAbout: C:Income_Range_Single_Registry_Families->observationAbout
+observationDate: C:Income_Range_Single_Registry_Families->observationDate
+observationPeriod: C:Income_Range_Single_Registry_Families->observationPeriod
+value: C:Income_Range_Single_Registry_Families->value
+unit: C:Income_Range_Single_Registry_Families->unit
+scalingFactor: C:Income_Range_Single_Registry_Families->scalingFactor
+variableMeasured: C:Income_Range_Single_Registry_Families->variableMeasured
+typeOf: dcs:StatVarObservation
