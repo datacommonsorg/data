@@ -1,0 +1,10 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4
+ObservationAbout,observationAbout,{Data},measurementQualifier,Annual,populationType,Coal,,,,
+0-300,depth,[0 300 Meter],measuredProperty,reserves,energySource,Coal,unit,Meter,,
+600-1200,depth,[600 1200 Meter],measuredProperty,reserves,energySource,Coal,unit,Meter,,
+300-600,depth,[300 600 Meter],measuredProperty,reserves,energySource,Coal,unit,Meter,,
+INDICATED,reserves,Coal,measuredProperty,reserves,reserveType,Indicated,,,,
+INFERRED,reserves,Coal,measuredProperty,reserves,reserveType,Inferred,,,,
+PROVED,reserves,Coal,measuredProperty,reserves,reserveType,Proved,,,,
+Year,observationDate,{Number},,,,,,,,
+Reserves in Billion Tonne,value,{Number},,,,,,,,
