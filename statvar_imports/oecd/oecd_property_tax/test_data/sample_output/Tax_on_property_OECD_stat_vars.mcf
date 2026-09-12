@@ -1,0 +1,20 @@
+Node: dcid:PropertyTax_EconomicActivity_AsAFractionOf_Amount_EconomicActivity_GrossDomesticProduction_RealValue
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:propertyTax
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_EconomicActivity_GrossDomesticProduction_RealValue
+
+Node: dcid:PropertyTax_EconomicActivity_AsAFractionOf_TotalTax_EconomicActivity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:propertyTax
+statType: dcid:measuredValue
+measurementDenominator: dcid:TotalTax_EconomicActivity
+
+Node: dcid:TotalTax_EconomicActivity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:totalTax
+statType: dcid:measuredValue
+
