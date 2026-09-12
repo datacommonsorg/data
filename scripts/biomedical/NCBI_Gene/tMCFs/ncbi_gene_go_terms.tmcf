@@ -1,0 +1,14 @@
+Node: E:ncbi_gene_go_terms->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_go_terms->GeneID
+
+Node: E:ncbi_gene_go_terms->E2
+typeOf: dcs:GeneOntologyTerm
+dcid: C:ncbi_gene_go_terms->dcid
+name: C:ncbi_gene_go_terms->GO_term
+geneID: E:ncbi_gene_go_terms->E1
+geneGeneOntologyTermRelationshipQualifier: C:ncbi_gene_go_terms->Qualifier
+geneOntologyCategory: C:ncbi_gene_go_terms->Category
+geneOntologyEvidenceCode: C:ncbi_gene_go_terms->Evidence
+geneOntologyId: C:ncbi_gene_go_terms->GO_ID
+pubMedID: C:ncbi_gene_go_terms->PubMed

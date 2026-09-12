@@ -1,0 +1,4 @@
+Node: E:ncbi_gene_pubmed->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_pubmed->GeneID
+pubMedID: C:ncbi_gene_pubmed->PubMed_ID
