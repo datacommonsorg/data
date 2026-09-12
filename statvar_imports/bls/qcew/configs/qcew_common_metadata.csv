@@ -1,0 +1,8 @@
+parameter,value
+multi_value_properties,"observationDate, observationAbout, observationPeriod, establishmentOwnership"
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit, observationPeriod, #input"
+word_delimiter,
+mapped_columns,8
+#reconcile_nodes,False
+#input_rows,6
