@@ -1,0 +1,25 @@
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+    
+    
+       'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Number of home deliveries attended by StandbyAssist (Doctor/Nurse/Auxillary Nurse Midwife)',
+        
+        
+        
+         Count_BirthControlEvent_Sterilisation 
+         Count_BirthControlEvent_Sterilization
+         
+(Need to add these two nodes while raising CL for India NHM Birth Control)         
+Node: dcid:Count_BirthControlEvent_Sterilization
+description: "Total Sterilisation Conducted"
+typeOf: dcid:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcid:Count_BirthControlEvent_Sterilization
+statType: dcid:measuredValue
+
+Node: dcid:Count_Death_BirthControlSterilization
+description: "Total cases of deaths following Sterilisation (Male and Female)"
+typeOf: dcid:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcid:Count_Death_BirthControlSterilization
+statType: dcid:measuredValue
