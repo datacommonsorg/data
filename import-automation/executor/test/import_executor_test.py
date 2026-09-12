@@ -22,7 +22,8 @@ import tempfile
 import threading
 
 from app.executor import import_executor
-from app.executor.import_executor import ImportStatus
+from app.executor.import_executor import ImportStatus, ImportStatusSummary
+from tools.import_validation.result import ValidationResult, ValidationStatus
 
 
 class ImportExecutorTest(unittest.TestCase):
@@ -120,3 +121,194 @@ class ImportExecutorTest(unittest.TestCase):
                     '[Subprocess command]: exit 0\n'
                     '[Subprocess return code]: 0')
         self.assertEqual(expected, message)
+
+    @mock.patch.object(import_executor, 'log_import_status')
+    @mock.patch.object(import_executor, 'log_metric')
+    @mock.patch.object(import_executor, 'ValidationRunner')
+    def test_validation_results_are_added_to_final_import_status(
+            self, mock_validation_runner, mock_log_metric,
+            mock_log_import_status):
+        first_runner = mock.Mock()
+        first_runner.run_validations.return_value = (False, [
+            ValidationResult(ValidationStatus.FAILED,
+                             'check_deleted_records_percent',
+                             details={
+                                 'percent': 10,
+                                 'threshold': 1.5,
+                                 'enabled': True,
+                                 'note': 'short value',
+                                 'long_value': 'x' * 257,
+                                 'missing_goldens': ['dcid:example'],
+                                 'not_a_number': float('nan'),
+                                 'too_large': 10**10000,
+                             }),
+            ValidationResult(ValidationStatus.PASSED,
+                             'check_non_scalar_details',
+                             details={'failed_rows': []}),
+        ])
+        second_runner = mock.Mock()
+        second_runner.run_validations.return_value = (True, [
+            ValidationResult(ValidationStatus.PASSED,
+                             123,
+                             details={'missing_refs_count': 2})
+        ])
+        mock_validation_runner.side_effect = [first_runner, second_runner]
+
+        config = mock.Mock(invoke_differ_tool=True,
+                           ignore_validation_status=False,
+                           enable_skip_status=True)
+        executor = import_executor.ImportExecutor(mock.Mock(), mock.Mock(),
+                                                  config)
+        executor._get_latest_version = mock.Mock(return_value='previous')
+        executor._invoke_differ_summary = mock.Mock(return_value={
+            'obs_diff_count': 1,
+            'schema_diff_count': 0,
+        })
+        executor._get_validation_config_file = mock.Mock(
+            return_value='validation_config.json')
+        executor._upload_file_helper = mock.Mock()
+        import_summary = ImportStatusSummary('test_import')
+
+        with tempfile.TemporaryDirectory() as import_dir:
+            status = executor._invoke_import_validation(
+                'repo', 'relative', import_dir, {
+                    'import_name': 'test_import',
+                    'import_inputs': [{}, {}],
+                }, 'version', import_summary)
+
+        self.assertFalse(status)
+        self.assertEqual(2, mock_log_metric.call_count)
+        for call in mock_log_metric.call_args_list:
+            self.assertEqual(import_executor.AUTO_IMPORT_JOB_STAGE,
+                             call.args[0])
+            self.assertEqual('ERROR', call.args[1])
+            self.assertEqual('Import: test_import, validation: False',
+                             call.args[2])
+            self.assertEqual({'stage', 'latency', 'status'}, set(call.args[3]))
+            self.assertEqual('VALIDATION', call.args[3]['stage'])
+            self.assertEqual('FAILURE', call.args[3]['status'])
+
+        self.assertEqual(ImportStatus.FAILURE,
+                         mock_log_import_status.call_args.args[2])
+        logged_results = mock_log_import_status.call_args.kwargs[
+            'validation_results']
+        self.assertEqual([
+            ('input0', 'check_deleted_records_percent', 'FAILED'),
+            ('input0', 'check_non_scalar_details', 'PASSED'),
+            ('input1', '123', 'PASSED'),
+        ], [(result['input_prefix'], result['rule_id'], result['status'])
+            for result in logged_results])
+        self.assertEqual([
+            {
+                'field': 'percent',
+                'number_value': 10.0,
+            },
+            {
+                'field': 'threshold',
+                'number_value': 1.5,
+            },
+            {
+                'field': 'enabled',
+                'bool_value': True,
+            },
+            {
+                'field': 'note',
+                'string_value': 'short value',
+            },
+        ], logged_results[0]['details'])
+        self.assertEqual([], logged_results[1]['details'])
+        self.assertEqual([{
+            'field': 'missing_refs_count',
+            'number_value': 2.0,
+        }], logged_results[2]['details'])
+
+    @mock.patch.object(import_executor, 'log_import_status')
+    @mock.patch.object(import_executor, 'log_metric')
+    @mock.patch.object(import_executor, 'ValidationRunner')
+    def test_successful_validation_logs_results_when_an_input_has_no_rules(
+            self, mock_validation_runner, _, mock_log_import_status):
+        mock_validation_runner.return_value.run_validations.side_effect = [
+            (True, []),
+            (True, [
+                ValidationResult(ValidationStatus.PASSED,
+                                 'check_missing_refs',
+                                 details={'missing_refs_count': 0})
+            ]),
+        ]
+        config = mock.Mock(invoke_differ_tool=False,
+                           ignore_validation_status=False,
+                           enable_skip_status=False)
+        executor = import_executor.ImportExecutor(mock.Mock(), mock.Mock(),
+                                                  config)
+        executor._get_latest_version = mock.Mock(return_value='previous')
+        executor._get_validation_config_file = mock.Mock(
+            return_value='validation_config.json')
+        import_summary = ImportStatusSummary('test_import')
+
+        with tempfile.TemporaryDirectory() as import_dir:
+            status = executor._invoke_import_validation(
+                'repo', 'relative', import_dir, {
+                    'import_name': 'test_import',
+                    'import_inputs': [{}, {}],
+                }, 'version', import_summary)
+
+        self.assertTrue(status)
+        self.assertEqual(ImportStatus.SUCCESS,
+                         mock_log_import_status.call_args.args[2])
+        self.assertEqual([{
+            'input_prefix': 'input1',
+            'rule_id': 'check_missing_refs',
+            'status': 'PASSED',
+            'details': [{
+                'field': 'missing_refs_count',
+                'number_value': 0.0,
+            }],
+        }], mock_log_import_status.call_args.kwargs['validation_results'])
+
+    @mock.patch.object(import_executor, 'log_metric')
+    def test_log_import_status_includes_validation_results(
+            self, mock_log_metric):
+        for validation_results in ([{
+                'input_prefix': 'input0',
+                'rule_id': 'check_empty_import',
+                'status': 'PASSED',
+                'details': [],
+        }], []):
+            with self.subTest(validation_results=validation_results):
+                import_executor.log_import_status(
+                    'test_import',
+                    import_executor.ImportStage.VALIDATION,
+                    ImportStatus.SUCCESS,
+                    validation_results=validation_results)
+
+                self.assertEqual(
+                    validation_results,
+                    mock_log_metric.call_args.args[3]['validation_results'])
+                self.assertNotIn('validation_results_omitted_count',
+                                 mock_log_metric.call_args.args[3])
+                mock_log_metric.reset_mock()
+
+    @mock.patch.object(import_executor, 'log_metric')
+    def test_log_import_status_omits_oversized_validation_results(
+            self, mock_log_metric):
+        validation_results = [{
+            'input_prefix': 'input0',
+            'rule_id': 'check_empty_import',
+            'status': 'PASSED',
+            'details': [],
+        }]
+
+        with mock.patch.object(import_executor,
+                               'MAX_VALIDATION_RESULTS_LOG_SIZE_BYTES', 1):
+            import_executor.log_import_status(
+                'test_import',
+                import_executor.ImportStage.VALIDATION,
+                ImportStatus.SUCCESS,
+                validation_results=validation_results)
+
+        metrics = mock_log_metric.call_args.args[3]
+        self.assertEqual([], metrics['validation_results'])
+        self.assertEqual(1, metrics['validation_results_omitted_count'])
+        self.assertEqual('test_import', metrics['import_name'])
+        self.assertEqual('VALIDATION', metrics['stage_name'])
+        self.assertEqual('SUCCESS', metrics['status'])
