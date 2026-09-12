@@ -1,0 +1,3 @@
+observationAbout,observationDate,value,variableMeasured,#input
+dcid:country/LVA,2010,16.122,dcid:Count_Student_PrimaryEducation_GovernmentOwned_AsAFractionOf_Count_ClassRoom_PrimaryEducation_GovernmentOwned,/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/test_data/sample_input/Student_Teacher_Ratio_OECD_test_data.csv:20:10
+dcid:country/LVA,2010,16.122,dcid:Count_Student_PrimaryEducation_GovernmentOwned_AsAFractionOf_-populationType,/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/test_data/sample_input/Student_Teacher_Ratio_OECD_test_data.csv:20:10
