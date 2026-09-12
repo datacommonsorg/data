@@ -1,0 +1,539 @@
+I1212 09:34:40.025246 139927248581504 stat_var_processor.py:2977] Not running under Cloud
+I1212 09:34:40.027067 139927248581504 file_util.py:580] Loading dict from file: statvar_imports/IPEDS/2016_2019/metadata.csv with key: config, value: value
+I1212 09:34:40.027252 139927248581504 file_util.py:613] Loaded 5 rows from statvar_imports/IPEDS/2016_2019/metadata.csv into dict
+I1212 09:34:40.027355 139927248581504 config_flags.py:479] Logging verbosity 0
+I1212 09:34:40.027520 139927248581504 stat_var_processor.py:2920] Processing data ['statvar_imports/IPEDS/2016_2019/input.csv'] into statvar_imports/IPEDS/2016_2019/output using config: {'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/IPEDS/2016_2019/input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': 9223372036854775807, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': [], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': [], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/IPEDS/2016_2019/output', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': ['observationDate', 'observationAbout', 'value', 'variableMeasured'], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/IPEDS/2016_2019/pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 7, 'ignore_rows': [0], 'header_rows': 11, 'header_columns': 2, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False, 'provenance_url': 'https://nces.ed.gov/ipeds/Search?query=&query2=&resultType=all&page=1&sortBy=date_desc&overlayTableId=36417'}...
+I1212 09:34:40.027641 139927248581504 utils.py:470] Converting statvar_imports/IPEDS/2016_2019/input.csv into csv for []
+I1212 09:34:40.027728 139927248581504 stat_var_processor.py:2929] Creating output directory: statvar_imports/IPEDS/2016_2019
+I1212 09:34:40.027815 139927248581504 stat_var_processor.py:2933] Processing data ['statvar_imports/IPEDS/2016_2019/input.csv'] into statvar_imports/IPEDS/2016_2019/output...
+I1212 09:34:40.028118 139927248581504 property_value_mapper.py:143] Loading PV maps for GLOBAL from csv file: statvar_imports/IPEDS/2016_2019/pvmap.csv
+I1212 09:34:40.028653 139927248581504 property_value_mapper.py:241] Loaded 39 property-value mappings for "GLOBAL"
+I1212 09:34:40.028811 139927248581504 schema_resolver.py:136] Loaded 0 schema MCF nodes: 
+I1212 09:34:40.028877 139927248581504 stat_var_processor.py:181] Loaded 0 remapped statvar dcids: {}
+I1212 09:34:40.029017 139927248581504 place_name_matcher.py:134] Setting up PlaceNameMatcher with config: {'parent_place_types': ['Country', 'State', 'AdministrativeArea', 'AdministrativeArea1', 'EurostatNUTS1', 'District', 'AdministrativeArea2', 'EurostatNUTS2', 'County', 'AdministrativeArea3', 'EurostatNUTS3', 'AdministrativeArea4', 'AdministrativeArea5', 'City', 'Village', 'Place', 'Neighborhood'], 'ngram_size': 4, 'ignore_non_alphanum': True, 'min_match_fraction': 0.1, 'num_results': 10, 'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/IPEDS/2016_2019/input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': 9223372036854775807, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': [], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': [], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/IPEDS/2016_2019/output', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': ['observationDate', 'observationAbout', 'value', 'variableMeasured'], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/IPEDS/2016_2019/pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 7, 'ignore_rows': [0], 'header_rows': 11, 'header_columns': 2, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False, 'provenance_url': 'https://nces.ed.gov/ipeds/Search?query=&query2=&resultType=all&page=1&sortBy=date_desc&overlayTableId=36417'}
+I1212 09:34:40.029097 139927248581504 place_name_matcher.py:177] Loaded 0 places from [''] within []
+I1212 09:34:40.029165 139927248581504 place_name_matcher.py:191] Loaded 0 names into ngram matcher with 0 ngrams
+I1212 09:34:40.030425 139927248581504 counters.py:381] Counters:
+                         1:process_input_processed =          0
+                        1:process_input_start_time =  872861.07
+                                       process-mem =  561618944
+                                   process-mem-rss =  129363968
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.37
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time =  872861.07
+I1212 09:34:40.030966 139927248581504 counters.py:346] Counters:
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129368064
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.37
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time =  690000.00
+                         1:process_input_processed =          0
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =         69
+                                       process-mem =  561618944
+                                   process-mem-rss =  129363968
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.37
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time =  872861.07
+I1212 09:34:40.031041 139927248581504 stat_var_processor.py:1846] Processing input data file statvar_imports/IPEDS/2016_2019/input.csv with encoding:utf-8...
+I1212 09:34:40.031831 139927248581504 counters.py:346] Counters:
+             1:process_input_input-files-processed =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129368064
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.37
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time =  690000.00
+                         1:process_input_processed =          0
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+                                       process-mem =  561618944
+                                   process-mem-rss =  129372160
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.37
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time =  872861.07
+                      warning-missing-property-key =          1
+I1212 09:34:40.050911 139927248581504 counters.py:346] Counters:
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =          0
+                                      resolve-miss =          1
+                                        start_time =  872861.07
+I1212 09:34:40.051750 139927248581504 counters.py:346] Counters:
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          4
+                1:process_input_input-rows-ignored =          1
+              1:process_input_input-rows-processed =          4
+                1:process_input_input-rows-skipped =          7
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129368064
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.37
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time =  690000.00
+                         1:process_input_processed =         13
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+      1:process_input_warning-unresolved-value-ref =        123
+                                generated-statvars =          1
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =          0
+                                        start_time =  872861.07
+                      warning-missing-property-key =       1626
+I1212 09:34:40.238255 139927248581504 counters.py:346] Counters:
+                   1:process_input_generated-svobs =        288
+         1:process_input_generated-svobs-input.csv =        288
+                   1:process_input_input-data-rows =         24
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          9
+                1:process_input_input-rows-ignored =          8
+              1:process_input_input-rows-processed =         33
+                1:process_input_input-rows-skipped =          7
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129855488
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.58
+              1:process_input_process_elapsed_time =       0.21
+            1:process_input_process_remaining_time =       0.39
+                         1:process_input_processed =         48
+           1:process_input_processing-time-seconds =       0.21
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2016_2019/input.csv =       0.21
+                   1:process_input_processing_rate =     231.21
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+      1:process_input_warning-unresolved-value-ref =        558
+                                generated-statvars =        288
+                         generated-unique-statvars =        288
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =          0
+                                        start_time =  872861.07
+                                       svobs-added =        288
+                      warning-missing-property-key =      15717
+I1212 09:34:40.238395 139927248581504 stat_var_processor.py:1920] Processed 48 lines from statvar_imports/IPEDS/2016_2019/input.csv @ 232.11 lines/sec.
+I1212 09:34:40.238475 139927248581504 stat_var_processor.py:1934] Processed 33 rows from 1 files @ 158.68 rows/sec.
+I1212 09:34:40.238549 139927248581504 stat_var_processor.py:2789] Generating output: statvar_imports/IPEDS/2016_2019/output
+I1212 09:34:40.238937 139927248581504 counters.py:381] Counters:
+                   1:process_input_generated-svobs =        288
+         1:process_input_generated-svobs-input.csv =        288
+                   1:process_input_input-data-rows =         24
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          9
+                1:process_input_input-rows-ignored =          8
+              1:process_input_input-rows-processed =         33
+                1:process_input_input-rows-skipped =          7
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129859584
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.58
+              1:process_input_process_elapsed_time =       0.21
+            1:process_input_process_remaining_time =       0.39
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =     158.68
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2016_2019/input.csv =     232.11
+           1:process_input_processing-time-seconds =       0.21
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2016_2019/input.csv =       0.21
+                   1:process_input_processing_rate =     230.41
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+      1:process_input_warning-unresolved-value-ref =        558
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  872861.28
+                                generated-statvars =        288
+                         generated-unique-statvars =        288
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =          0
+                                        start_time =  872861.07
+                                       svobs-added =        288
+                      warning-missing-property-key =      15717
+I1212 09:34:40.241406 139927248581504 counters.py:381] Counters:
+                   1:process_input_generated-svobs =        288
+         1:process_input_generated-svobs-input.csv =        288
+                   1:process_input_input-data-rows =         24
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          9
+                1:process_input_input-rows-ignored =          8
+              1:process_input_input-rows-processed =         33
+                1:process_input_input-rows-skipped =          7
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129859584
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.58
+              1:process_input_process_elapsed_time =       0.21
+            1:process_input_process_remaining_time =       0.39
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =     158.68
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2016_2019/input.csv =     232.11
+           1:process_input_processing-time-seconds =       0.21
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2016_2019/input.csv =       0.21
+                   1:process_input_processing_rate =     230.41
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+      1:process_input_warning-unresolved-value-ref =        558
+                      2:prepare_output_process-mem =  561618944
+                  2:prepare_output_process-mem-rss =  129875968
+            2:prepare_output_process-time-sys-secs =       0.33
+           2:prepare_output_process-time-user-secs =       1.58
+             2:prepare_output_process_elapsed_time =       0.00
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  872861.28
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time =  872861.28
+                                generated-statvars =        288
+                         generated-unique-statvars =        288
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =          0
+                                        start_time =  872861.07
+                                       svobs-added =        288
+                      warning-missing-property-key =      15717
+I1212 09:34:41.054145 139927248581504 mcf_filter.py:86] Filtering 288 nodes with 0 ignored nodes
+I1212 09:34:41.054559 139927248581504 stat_var_processor.py:1057] Removed 0 existing nodes from 288 statvars
+I1212 09:34:41.054726 139927248581504 stat_var_processor.py:1085] Generating 288 statvars into statvar_imports/IPEDS/2016_2019/output_stat_vars.mcf
+I1212 09:34:41.193225 139927248581504 schema_spell_checker.py:349] Loading allowed words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 09:34:41.224112 139927248581504 schema_spell_checker.py:360] Spell checker loaded with 24 words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 09:34:41.224696 139927248581504 schema_checker.py:182] Loaded 0 urls from 
+E1212 09:34:41.228240 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_AllInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.228425 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_AllInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.229171 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_AllInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.229568 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_AllInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.230090 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_AllInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.230449 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_AllInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.230952 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.231282 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.231876 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.232218 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.232489 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_AllInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.232622 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_AllInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.232875 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.233005 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.233245 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.233356 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.233579 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.233691 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.233917 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.234039 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.235914 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.236307 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.236815 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.237178 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.245321 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.245872 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.246453 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.246607 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.247150 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_FourYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.247283 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_FourYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.247539 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.247638 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.247888 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.248008 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.248282 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.248394 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.248813 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.248996 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.249286 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.249413 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.249645 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.249761 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.249995 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.250127 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.250366 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.250478 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.250705 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.250820 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.258020 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.258406 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.258753 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.258905 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.259216 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.259343 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.259636 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.259763 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.260064 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.260260 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.260833 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.261141 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.261498 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.261646 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.261894 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.262010 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.262361 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.262547 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.262821 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.263027 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.263333 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.263508 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.263794 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.263971 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.273663 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.274019 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.274411 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.274587 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.274995 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.275150 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.275485 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.275628 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.276057 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.276205 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.276743 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.276974 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.277328 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.277568 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.277981 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.278224 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.278657 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.283673 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.284328 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.284608 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.284948 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received:educationAid:{'pell'}
+E1212 09:34:41.285107 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received: {'educationAid': 'pell'}
+E1212 09:34:41.285356 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation:educationAid:{'pell'}
+E1212 09:34:41.285503 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.292886 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.293212 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.293591 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.293797 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.294174 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_TwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.294375 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_TwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.294730 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.294937 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.295230 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.295359 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.295706 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.295895 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.296181 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.296335 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.296621 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.296764 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.297022 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.297147 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.297380 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.297498 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.297727 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.297852 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.298119 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.298364 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.306018 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.306204 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.306616 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.306751 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.307077 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.307199 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.307496 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.307617 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.307941 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.308064 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.308377 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.308505 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.308818 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.308977 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.309264 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.309411 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.309682 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.309828 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.310115 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted:educationAid:{'pell'}
+E1212 09:34:41.310260 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted: {'educationAid': 'pell'}
+E1212 09:34:41.310529 139927248581504 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received:educationAid:{'pell'}
+E1212 09:34:41.310675 139927248581504 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received: {'educationAid': 'pell'}
+E1212 09:34:41.310958 139927248581504 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation:educationAid:{'pell'}
+E1212 09:34:41.311104 139927248581504 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation: {'educationAid': 'pell'}
+E1212 09:34:41.314684 139927248581504 schema_spell_checker.py:278] Words with spell errors: {'pell'}
+I1212 09:34:41.320111 139927248581504 schema_checker.py:360] Sanity checked: nodes: 288, spell errors: 72, URL errors: 0
+I1212 09:34:42.518762 139927248581504 schema_generator.py:210] Got schema for 8 dcids out of 23
+I1212 09:34:44.728810 139927248581504 schema_generator.py:210] Got schema for 19 dcids out of 19
+I1212 09:34:45.582714 139927248581504 schema_generator.py:210] Got schema for 24 dcids out of 36
+I1212 09:34:46.581627 139927248581504 schema_generator.py:210] Got schema for 15 dcids out of 18
+I1212 09:34:46.988320 139927248581504 schema_generator.py:210] Got schema for 3 dcids out of 10
+I1212 09:34:46.988788 139927248581504 schema_generator.py:210] Got schema for 0 dcids out of 0
+I1212 09:34:47.038565 139927248581504 schema_generator.py:495] Generated 18 new nodes with 4 new properties and 14 new values.
+I1212 09:34:47.039019 139927248581504 stat_var_processor.py:1123] Generating new schema for 18 nodes into statvar_imports/IPEDS/2016_2019/output_stat_vars_schema.mcf
+I1212 09:34:47.179883 139927248581504 schema_spell_checker.py:349] Loading allowed words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 09:34:47.206600 139927248581504 schema_spell_checker.py:360] Spell checker loaded with 24 words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 09:34:47.206784 139927248581504 schema_checker.py:182] Loaded 0 urls from 
+E1212 09:34:47.208232 139927248581504 schema_spell_checker.py:230] SpellError: dcid:PellGrant:name:{'pell'}
+E1212 09:34:47.208445 139927248581504 schema_spell_checker.py:273] SpellError: dcid:PellGrant: {'name': 'pell'}
+E1212 09:34:47.209327 139927248581504 schema_spell_checker.py:278] Words with spell errors: {'pell'}
+I1212 09:34:47.209631 139927248581504 schema_checker.py:360] Sanity checked: nodes: 18, spell errors: 1, URL errors: 0
+I1212 09:34:47.215867 139927248581504 stat_var_processor.py:1148] Got 73 errors: {0: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_AllInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 1: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_AllInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 2: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_AllInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 3: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 4: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 5: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_AllInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 6: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 7: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 8: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 9: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 10: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 11: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 12: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 13: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 14: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_FourYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 15: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 16: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 17: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 18: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 19: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 20: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 21: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 22: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 23: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 24: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 25: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 26: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 27: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 28: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 29: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 30: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 31: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 32: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 33: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 34: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 35: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 36: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 37: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 38: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 39: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 40: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 41: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 42: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 43: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 44: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 45: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 46: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received', 'property': 'educationAid', 'error': 'pell'}, 47: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation', 'property': 'educationAid', 'error': 'pell'}, 48: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 49: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 50: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_TwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 51: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 52: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 53: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 54: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 55: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 56: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 57: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 58: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 59: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 60: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 61: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 62: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 63: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 64: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 65: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 66: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 67: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 68: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 69: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted', 'property': 'educationAid', 'error': 'pell'}, 70: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received', 'property': 'educationAid', 'error': 'pell'}, 71: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation', 'property': 'educationAid', 'error': 'pell'}, 72: {'check': 'SPELL', 'dcid': 'dcid:PellGrant', 'property': 'name', 'error': 'pell'}}
+I1212 09:34:47.216552 139927248581504 counters.py:381] Counters:
+                   1:process_input_generated-svobs =        288
+         1:process_input_generated-svobs-input.csv =        288
+                   1:process_input_input-data-rows =         24
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          9
+                1:process_input_input-rows-ignored =          8
+              1:process_input_input-rows-processed =         33
+                1:process_input_input-rows-skipped =          7
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129859584
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.58
+              1:process_input_process_elapsed_time =       0.21
+            1:process_input_process_remaining_time =       0.39
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =     158.68
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2016_2019/input.csv =     232.11
+           1:process_input_processing-time-seconds =       0.21
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2016_2019/input.csv =       0.21
+                   1:process_input_processing_rate =     230.41
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+      1:process_input_warning-unresolved-value-ref =        558
+                      2:prepare_output_process-mem =  561618944
+                  2:prepare_output_process-mem-rss =  129875968
+            2:prepare_output_process-time-sys-secs =       0.33
+           2:prepare_output_process-time-user-secs =       1.58
+             2:prepare_output_process_elapsed_time =       0.00
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  872861.28
+                   3:write_statvar_mcf_process-mem =  569106432
+               3:write_statvar_mcf_process-mem-rss =  138440704
+         3:write_statvar_mcf_process-time-sys-secs =       0.43
+        3:write_statvar_mcf_process-time-user-secs =       2.13
+          3:write_statvar_mcf_process_elapsed_time =       6.97
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time =  872861.28
+                       4:write_svobs_csv_processed =          0
+                      4:write_svobs_csv_start_time =  872868.26
+                       dropped-output-statvars-mcf =          0
+                                 error-spell-words =          2
+                           existing-nodes-from-api =          0
+                                generated-statvars =        288
+                         generated-unique-statvars =        288
+                             output-new-schema-mcf =         18
+                               output-statvars-mcf =        288
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =        306
+                              spell-allowlist-file =          2
+                             spell-allowlist-words =         48
+                           spell-check-ignored-pvs =        306
+                                 spell-check-nodes =        306
+                          spell-check-nodes-errors =         73
+                                   spell-check-pvs =       2294
+                            spell-check-pvs-errors =         73
+                                        start_time =  872861.07
+                                       svobs-added =        288
+                                             total =        306
+                                    urls-allowlist =          0
+                      warning-missing-property-key =      15717
+I1212 09:34:47.216637 139927248581504 stat_var_processor.py:1243] Writing 288 SVObs  into statvar_imports/IPEDS/2016_2019/output.csv with ['observationDate', 'observationAbout', 'value', 'variableMeasured']
+I1212 09:34:47.225920 139927248581504 stat_var_processor.py:1300] Writing SVObs tmcf statvar_imports/IPEDS/2016_2019/output.tmcf with ['observationDate', 'observationAbout', 'value', 'variableMeasured'] into statvar_imports/IPEDS/2016_2019/output.tmcf.
+I1212 09:34:47.228897 139927248581504 counters.py:346] Counters:
+                   1:process_input_generated-svobs =        288
+         1:process_input_generated-svobs-input.csv =        288
+                   1:process_input_input-data-rows =         24
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          9
+                1:process_input_input-rows-ignored =          8
+              1:process_input_input-rows-processed =         33
+                1:process_input_input-rows-skipped =          7
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2016_2019/input.csv =         69
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  129859584
+             1:process_input_process-time-sys-secs =       0.33
+            1:process_input_process-time-user-secs =       1.58
+              1:process_input_process_elapsed_time =       0.21
+            1:process_input_process_remaining_time =       0.39
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =     158.68
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2016_2019/input.csv =     232.11
+           1:process_input_processing-time-seconds =       0.21
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2016_2019/input.csv =       0.21
+                   1:process_input_processing_rate =     230.41
+                        1:process_input_start_time =  872861.07
+                             1:process_input_total =        138
+      1:process_input_warning-unresolved-value-ref =        558
+                      2:prepare_output_process-mem =  561618944
+                  2:prepare_output_process-mem-rss =  129875968
+            2:prepare_output_process-time-sys-secs =       0.33
+           2:prepare_output_process-time-user-secs =       1.58
+             2:prepare_output_process_elapsed_time =       0.00
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  872861.28
+                   3:write_statvar_mcf_process-mem =  569106432
+               3:write_statvar_mcf_process-mem-rss =  138440704
+         3:write_statvar_mcf_process-time-sys-secs =       0.43
+        3:write_statvar_mcf_process-time-user-secs =       2.13
+          3:write_statvar_mcf_process_elapsed_time =       6.97
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time =  872861.28
+                     4:write_svobs_csv_process-mem =  569245696
+                 4:write_svobs_csv_process-mem-rss =  138465280
+           4:write_svobs_csv_process-time-sys-secs =       0.43
+          4:write_svobs_csv_process-time-user-secs =       2.13
+            4:write_svobs_csv_process_elapsed_time =       0.01
+                       4:write_svobs_csv_processed =          0
+                      4:write_svobs_csv_start_time =  872868.26
+                       dropped-output-statvars-mcf =          0
+                                 error-spell-words =          2
+                           existing-nodes-from-api =          0
+                                generated-statvars =        288
+                         generated-unique-statvars =        288
+                             output-new-schema-mcf =         18
+                               output-statvars-mcf =        288
+                             output-svobs-csv-rows =        288
+              output-svobs-unique-observationAbout =          1
+               output-svobs-unique-observationDate =          1
+                        output-svobs-unique-typeOf =          1
+                         output-svobs-unique-value =        282
+              output-svobs-unique-variableMeasured =        288
+                                       process-mem =  561618944
+                                   process-mem-rss =  129429504
+                             process-time-sys-secs =       0.33
+                            process-time-user-secs =       1.39
+                              process_elapsed_time =       0.02
+                                         processed =        306
+                              spell-allowlist-file =          2
+                             spell-allowlist-words =         48
+                           spell-check-ignored-pvs =        306
+                                 spell-check-nodes =        306
+                          spell-check-nodes-errors =         73
+                                   spell-check-pvs =       2294
+                            spell-check-pvs-errors =         73
+                                        start_time =  872861.07
+                                       svobs-added =        288
+                                             total =        306
+                                    urls-allowlist =          0
+                      warning-missing-property-key =      15717
+I1212 09:34:47.229314 139927248581504 stat_var_processor.py:2814] Writing counters to 
+I1212 09:34:47.229610 139927248581504 stat_var_processor.py:2950] Error Counters: ['error-spell-words=2']

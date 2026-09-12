@@ -1,0 +1,28 @@
+I1218 09:40:07.462386 139654903980928 stat_var_processor.py:2977] Not running under Cloud
+I1218 09:40:07.462760 139654903980928 config_flags.py:479] Logging verbosity 0
+I1218 09:40:07.462999 139654903980928 stat_var_processor.py:2920] Processing data ['statvar_imports/IPEDS/2010_2013/input.csv'] into statvar_imports/IPEDS/2010_2013/output1 using config: {'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/IPEDS/2010_2013/input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': 9223372036854775807, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': [], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': [], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/IPEDS/2010_2013/output1', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': [], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/IPEDS/2010_2013/pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 0, 'ignore_rows': [0], 'header_rows': -1, 'header_columns': -1, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False}...
+Traceback (most recent call last):
+  File "/usr/local/google/home/susmitakumari/data/tools/statvar_importer/stat_var_processor.py", line 2998, in <module>
+    app.run(main)
+    ~~~~~~~^^^^^^
+  File "/usr/local/google/home/susmitakumari/data/.venv/lib/python3.13/site-packages/absl/app.py", line 316, in run
+    _run_main(main, args)
+    ~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/local/google/home/susmitakumari/data/.venv/lib/python3.13/site-packages/absl/app.py", line 261, in _run_main
+    sys.exit(main(argv))
+             ~~~~^^^^^^
+  File "/usr/local/google/home/susmitakumari/data/tools/statvar_importer/stat_var_processor.py", line 2987, in main
+    process(
+    ~~~~~~~^
+        StatVarDataProcessor,
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        parallelism=_FLAGS.parallelism,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/google/home/susmitakumari/data/tools/statvar_importer/stat_var_processor.py", line 2923, in process
+    input_data = prepare_input_data(config_dict)
+  File "/usr/local/google/home/susmitakumari/data/tools/statvar_importer/utils.py", line 551, in prepare_input_data
+    raise RuntimeError(f'Provide data with --data_url or --input_data.')
+RuntimeError: Provide data with --data_url or --input_data.
