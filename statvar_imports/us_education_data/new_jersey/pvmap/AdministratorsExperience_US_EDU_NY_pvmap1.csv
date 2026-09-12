@@ -1,0 +1,11 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},populationType,Faculty,facultyType,SchoolAdministrator,,,,,,,,
+Year,facultyType,SchoolAdministrator,observationDate,{Number},,,,,,,,,,
+AdminCount,facultyType,SchoolAdministrator,value,{Number},unit,Years,,,,,,,,
+AdminCount_State,facultyType,SchoolAdministrator,value,{Number},observationAbout,geoId/34,unit,Years,,,,,,
+AdminAvgYearsExpInSchool,facultyType,SchoolAdministrator,meanValue,workExperience,value,{Number},unit,Years,,,,,,
+AdminAvgYearsExpInSchool_State,facultyType,SchoolAdministrator,meanValue,workExperience,value,{Number},observationAbout,geoId/34,unit,Years,,,,
+AdminAvgYearsExpInDistrict,facultyType,SchoolAdministrator,meanValue,workExperience,workExperiencePlace,District,value,{Number},unit,Years,,,,
+AdminAvgYearsExpInDistrict_State,facultyType,SchoolAdministrator,meanValue,workExperience,workExperiencePlace,District,value,{Number},observationAbout,geoId/34,unit,Years,,
+AdminInDistrict4YearsOrMore,facultyType,SchoolAdministrator,workExperiencePlace,District,value,{Number},workExperience,[4 - Years],unit,Years,,,,
+AdminInDistrict4YearsOrMore_State,facultyType,SchoolAdministrator,workExperiencePlace,District,value,{Number},workExperience,[4 - Years],observationAbout,geoId/34,unit,Years,,

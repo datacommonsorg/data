@@ -1,0 +1,10 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+Violence,populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},crimeType,ViolentCrime,,,,,,
+Weapons,populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},crimeType,WeaponLawViolations,,,,,,
+Vandalism,populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},crimeType,DestructionOrDamageOrVandalismOfProperty,,,,,,
+Substances,populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},crimeType,SubstanceCrime,,,,,,
+"Harassment, Intimidation, Bullying (HIB)",populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},crimeType,HarassmentOrIntimidationOrBullying,,,,,,
+Total Unique Incidents,populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},,,,,,,,
+Incidents Per 100 Students Enrolled,populationType,HateCrimeIncidents,measuredProperty,count,value,{Number},scalingFactor,100,measurementDenominator,Count_Student,unit,Percent,,

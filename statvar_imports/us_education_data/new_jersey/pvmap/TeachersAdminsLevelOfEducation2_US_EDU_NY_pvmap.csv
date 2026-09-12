@@ -1,0 +1,8 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+ObservationAbout,observationAbout,{Data},,,,,,
+Year,observationDate,{Number},,,,,,
+Admin,populationType,Faculty,facultyType,SchoolAdministrator,measuredProperty,count,,
+Teachers,populationType,Faculty,facultyType,Teacher,measuredProperty,count,,
+Bachelors,value,{Number},educationalAttainment,BachelorsDegreeOrHigher,unit,Percent,measurementDenominator,-educationalAttainment
+Masters,value,{Number},educationalAttainment,MastersDegreeOrHigher,unit,Percent,measurementDenominator,-educationalAttainment
+Doctoral,value,{Number},educationalAttainment,DoctorateDegree,unit,Percent,measurementDenominator,-educationalAttainment
