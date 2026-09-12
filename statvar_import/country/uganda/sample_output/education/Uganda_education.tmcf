@@ -1,0 +1,8 @@
+Node: E:Uganda_education->E0
+observationAbout: C:Uganda_education->observationAbout
+observationDate: C:Uganda_education->observationDate
+value: C:Uganda_education->value
+variableMeasured: C:Uganda_education->variableMeasured
+unit: C:Uganda_education->unit
+scalingFactor: C:Uganda_education->scalingFactor
+typeOf: dcs:StatVarObservation
