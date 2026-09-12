@@ -1,0 +1,13 @@
+Node: E:phenotypes_mesh_supplementary_concept_record->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:phenotypes_mesh_supplementary_concept_record->dcid_mesh
+name: C:phenotypes_mesh_supplementary_concept_record->Name
+medicalDictionaryForRegulatoryActivitiesId: C:phenotypes_mesh_supplementary_concept_record->MedDRA
+medicalSubjectHeadingID: C:phenotypes_mesh_supplementary_concept_record->MeSH
+mondoID: C:phenotypes_mesh_supplementary_concept_record->MONDO
+nationalDrugFileReferenceTerminologyCode: C:phenotypes_mesh_supplementary_concept_record->NDFRT
+pharmGKBID: C:phenotypes_mesh_supplementary_concept_record->pharmGKBID
+snomedCT: C:phenotypes_mesh_supplementary_concept_record->SnoMedCT
+synonym: C:phenotypes_mesh_supplementary_concept_record->synonyms
+umlsConceptUniqueID: C:phenotypes_mesh_supplementary_concept_record->UMLS
+url: C:phenotypes_mesh_supplementary_concept_record->URL
