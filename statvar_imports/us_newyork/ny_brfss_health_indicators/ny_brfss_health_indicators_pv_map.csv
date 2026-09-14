@@ -3,19 +3,45 @@ years,observationDate,{@Data}
 2013-14,observationDate,2014
 region_county,observationAbout,{@Data}
 unadjusted_rate,value,{Number}
-NYS Exclusive of NYC,#IgnoreRow,True
-Statewide,#IgnoreRow,True
-REGION: Capital Region,#IgnoreRow,True
-REGION: Central NY,#IgnoreRow,True
-REGION: Finger Lakes,#IgnoreRow,True
-REGION: Long Island,#IgnoreRow,True
-REGION: Mid-Hudson,#IgnoreRow,True
-REGION: Mohawk Valley,#IgnoreRow,True
-REGION: New York City,#IgnoreRow,True
-REGION: North Country,#IgnoreRow,True
-REGION: Southern Tier,#IgnoreRow,True
-REGION: Tug Hill Seaway,#IgnoreRow,True
-REGION: Western NY,#IgnoreRow,True
+NYS Exclusive of NYC,#IgnoreRow,True,#ignore,non-county regional aggregate
+Statewide,#IgnoreRow,True,#ignore,statewide aggregate
+REGION: Capital Region,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Central NY,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Finger Lakes,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Long Island,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Mid-Hudson,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Mohawk Valley,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: New York City,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: North Country,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Southern Tier,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Tug Hill Seaway,#IgnoreRow,True,#ignore,non-county regional aggregate
+REGION: Western NY,#IgnoreRow,True,#ignore,non-county regional aggregate
+sample_size_n,#ignore,survey sample size not a target health indicator,value,{@Data}
+est_count,#ignore,weighted population estimate count,value,{@Data}
+est_denominator,#ignore,weighted denominator population,value,{@Data}
+cl_95_lower_unadjusted,#ignore,95% confidence interval lower bound,value,{@Data}
+cl_95_upper_unadjusted,#ignore,95% confidence interval upper bound,value,{@Data}
+adjusted_rate,#ignore,age-adjusted rate omitted in favor of unadjusted rate,value,{@Data}
+cl_95_lower_adjusted,#ignore,95% confidence interval lower bound for adjusted rate,value,{@Data}
+cl_95_upper_adjusted,#ignore,95% confidence interval upper bound for adjusted rate,value,{@Data}
+geography,#ignore,redundant geography level label,value,{@Data}
+health_domain,#ignore,category label redundant with StatVar,value,{@Data}
+health_indicator,#ignore,verbose description redundant with short name,value,{@Data}
+prevention_agenda_pa,#ignore,NYSDOH program tracking flag,value,{@Data}
+ship,#ignore,NYSDOH program tracking flag,value,{@Data}
+dsrip,#ignore,NYSDOH program tracking flag,value,{@Data}
+chirs,#ignore,NYSDOH program tracking flag,value,{@Data}
+fips,#ignore,redundant with region_county mapping,value,{@Data}
+health_indicator_sort_key,#ignore,internal display sort key,value,{@Data}
+dsrip_region_sort_key,#ignore,internal display sort key,value,{@Data}
+county_sort_key,#ignore,internal display sort key,value,{@Data}
+location,#ignore,WKT centroid coordinate redundant with place DCID,value,{@Data}
+notes,#ignore,data suppression note,value,{@Data}
+pa_rate_type,#ignore,rate type metadata,value,{@Data}
+ship_rate_type,#ignore,rate type metadata,value,{@Data}
+dsrip_rate_type,#ignore,rate type metadata,value,{@Data}
+chirs_rate_type,#ignore,rate type metadata,value,{@Data}
+upstate_downstate_sort_key,#ignore,internal display sort key,value,{@Data}
 Diabetes,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthOutcome,Diabetes,unit,Percent
 Prediabetes,populationType,Person,measuredProperty,percent,healthOutcome,Prediabetes,unit,Percent
 Asthma,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthOutcome,Asthma,unit,Percent
