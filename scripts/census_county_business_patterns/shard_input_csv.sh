@@ -109,13 +109,14 @@ for file in "$SHARD_DIR"/*_shard_*.csv; do
         # Execute the Python processing script with retry on failure
         success=0
         for attempt in 1 2 3; do
+            rm -f "$OUTPUT_FINAL_DIR/output_${prefix}"*
             if python3 "$STATVAR_PROCESSOR_SCRIPT" \
                 --input_data="$file" \
                 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
                 --pv_map="censuscountybusinesspatterns_pvmap.csv" \
                 --config_file="censuscountybusinesspatterns_metadata.csv" \
                 --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" \
-                --counters_print_interval=-1; then
+                --counters_print_interval=-1 && [ -s "$OUTPUT_FINAL_DIR/output_${prefix}.csv" ]; then
                 success=1
                 break
             fi
@@ -123,6 +124,7 @@ for file in "$SHARD_DIR"/*_shard_*.csv; do
             sleep 15
         done
         if [ $success -ne 1 ]; then
+            rm -f "$OUTPUT_FINAL_DIR/output_${prefix}"*
             echo "ERROR: Processor failed on shard $file after 3 attempts. Aborting." >&2
             exit 1
         fi
