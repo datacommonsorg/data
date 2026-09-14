@@ -31,6 +31,10 @@ from absl import flags
 flags.DEFINE_string('api_url',
                     'https://www.fema.gov/api/open/v2/FimaNfipClaims',
                     'The base URL of the API endpoint to download data from.')
+flags.DEFINE_string(
+    'bulk_url',
+    'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
+    'The direct bulk download URL for the full dataset.')
 flags.DEFINE_string('temp_dir', 'temp_fema_data',
                     'The temporary directory to store downloaded chunks.')
 _FLAGS = flags.FLAGS
@@ -66,8 +70,7 @@ def get_total_records(api_url):
         return total_count
     except requests.exceptions.RequestException as e:
         logging.error("Failed to get total record count: %s", e)
-        raise RuntimeError(
-            'Failed to get total record count.')
+        raise RuntimeError('Failed to get total record count.')
     except (ValueError, KeyError, TypeError) as e:
         logging.error(
             "Failed to parse the total record count from the response: %s", e)
@@ -75,13 +78,14 @@ def get_total_records(api_url):
             'Failed to parse the total record count from the response.')
 
 
-def download_data(api_url: str, temp_dir: str):
+def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
     """
     Downloads data from the FEMA API, handling pagination and file merging.
 
     Args:
         api_url (str): The base URL of the API endpoint.
         temp_dir (str): The path to the temporary directory for downloaded chunks.
+        bulk_url (str): The direct bulk CSV download URL.
     """
     filename = "fema_nfip_claims.csv"
 
@@ -92,10 +96,41 @@ def download_data(api_url: str, temp_dir: str):
 
     logging.set_verbosity(logging.INFO)
 
+    final_filepath = filename
+
+    # 1. Try direct bulk download first (~8 seconds vs ~2.5 hours for pagination)
+    if bulk_url:
+        logging.info("Attempting direct bulk download from: %s", bulk_url)
+        try:
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+            os.makedirs(temp_dir, exist_ok=True)
+
+            if download_file(url=bulk_url, output_folder=temp_dir,
+                             unzip=False):
+                downloaded = [
+                    os.path.join(temp_dir, f) for f in os.listdir(temp_dir)
+                    if os.path.isfile(os.path.join(temp_dir, f))
+                ]
+                if downloaded and os.path.getsize(downloaded[0]) > 0:
+                    if os.path.exists(final_filepath):
+                        os.remove(final_filepath)
+                    shutil.move(downloaded[0], final_filepath)
+                    logging.info("Direct bulk download complete. Saved to: %s",
+                                 final_filepath)
+                    return
+        except Exception as e:
+            logging.warning(
+                "Direct bulk download failed: %s. Falling back to API pagination.",
+                e)
+        finally:
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+
+    # 2. Fallback to API pagination
     # Define the page size for each API request.
     skip_count = 0
     records_downloaded = 0
-    final_filepath = filename
 
     # Get the total number of records from the API for a reliable failsafe.
     total_records = get_total_records(api_url)
@@ -108,7 +143,7 @@ def download_data(api_url: str, temp_dir: str):
         # Create a temporary directory for downloaded chunks.
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
-        os.makedirs(temp_dir)
+        os.makedirs(temp_dir, exist_ok=True)
 
         logging.info("Starting download to file: %s", final_filepath)
 
@@ -185,7 +220,7 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-    download_data(_FLAGS.api_url, _FLAGS.temp_dir)
+    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url)
 
 
 if __name__ == "__main__":
