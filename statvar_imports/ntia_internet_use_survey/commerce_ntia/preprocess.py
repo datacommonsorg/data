@@ -59,7 +59,7 @@ def move_column_left(df, column_to_move, target_column):
 def preprocess_data():
     try:
         os.makedirs(INPUT_DIR, exist_ok=True)
-        org_df = pd.read_csv(INPUT_FILE)
+        org_df = pd.read_csv(INPUT_FILE, encoding='utf-8-sig')
 
         # 1. Process Age-only data
         df1 = org_df[COMMON_COLUMNS + AGE_COLUMNS].copy()
@@ -74,7 +74,7 @@ def preprocess_data():
 
         # 2. Process General survey data
         df2_cols_to_keep = [
-            col for col in org_df.columns if not col.startswith('age')
+            col for col in org_df.columns if col not in set(AGE_COLUMNS)
         ]
         df2 = org_df[df2_cols_to_keep].copy()
         df2['universeAgeResol'] = df2['universe'].apply(

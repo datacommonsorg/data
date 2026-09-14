@@ -62,10 +62,13 @@ class PreprocessTest(unittest.TestCase):
                 'age2544Count': [12, 22, 32],
                 'age4564Count': [13, 23, 33],
                 'age65pCount': [14, 24, 34],
+                'agencyAccess': [5, 10, 15],
                 'totalCount': [100, 200, 300],
                 'otherMetric': [1.5, 2.5, 3.5]
             }
-            pd.DataFrame(raw_data).to_csv(input_file, index=False)
+            pd.DataFrame(raw_data).to_csv(input_file,
+                                          index=False,
+                                          encoding='utf-8-sig')
 
             with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
                  mock.patch.object(preprocess, 'INPUT_FILE', input_file), \
@@ -82,6 +85,7 @@ class PreprocessTest(unittest.TestCase):
                 cols_age.index('universe') + 1, cols_age.index('variable'))
             for age_col in preprocess.AGE_COLUMNS:
                 self.assertIn(age_col, cols_age)
+            self.assertNotIn('agencyAccess', cols_age)
             self.assertNotIn('totalCount', cols_age)
             self.assertNotIn('otherMetric', cols_age)
             self.assertIn('universeAgeResol', cols_age)
@@ -94,6 +98,7 @@ class PreprocessTest(unittest.TestCase):
             cols_data = list(df_data.columns)
             self.assertEqual(
                 cols_data.index('universe') + 1, cols_data.index('variable'))
+            self.assertIn('agencyAccess', cols_data)
             self.assertIn('totalCount', cols_data)
             self.assertIn('otherMetric', cols_data)
             self.assertIn('universeAgeResol', cols_data)
