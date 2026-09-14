@@ -21,6 +21,8 @@ import fnmatch
 import glob
 import json
 import logging
+import math
+import numbers
 import os
 import shutil
 import shlex
@@ -80,6 +82,7 @@ AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
 STAGING_VERSION_FILE = "staging_version.txt"
 MAX_LOG_CHUNK_SIZE = 50000
+MAX_VALIDATION_RESULTS_LOG_SIZE_BYTES = 150 * 1024
 
 
 class ImportStatus(Enum):
@@ -98,6 +101,39 @@ class ImportStage(Enum):
     VALIDATION = 4
     DIFFER = 5
     FINISH = 6
+
+
+def _format_validation_log_result(input_prefix: str,
+                                  result: ValidationResult) -> dict:
+    details = []
+    if isinstance(result.details, dict):
+        for field, value in result.details.items():
+            if not isinstance(field, str):
+                continue
+
+            detail = {'field': field}
+            if isinstance(value, bool):
+                detail['bool_value'] = value
+            elif isinstance(value, numbers.Real):
+                try:
+                    number_value = float(value)
+                except (OverflowError, TypeError, ValueError):
+                    continue
+                if not math.isfinite(number_value):
+                    continue
+                detail['number_value'] = number_value
+            elif isinstance(value, str) and len(value) <= 256:
+                detail['string_value'] = value
+            else:
+                continue
+            details.append(detail)
+
+    return {
+        'input_prefix': input_prefix,
+        'rule_id': str(result.name),
+        'status': result.status.name,
+        'details': details,
+    }
 
 
 @dataclasses.dataclass
@@ -618,6 +654,7 @@ class ImportExecutor:
         validation_status = True
         differ_status = False
         validation_results = []
+        validation_log_results = []
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
         latest_version = self._get_latest_version(import_dir)
@@ -684,6 +721,10 @@ class ImportExecutor:
                 validation_results.extend(current_results)
                 if validation_status:
                     validation_status = overall_status
+
+                validation_log_results.extend(
+                    _format_validation_log_result(import_prefix, result)
+                    for result in current_results)
             except ValueError as e:
                 logging.error('ValidationRunner failed: %s', e)
                 validation_status = False
@@ -716,11 +757,13 @@ class ImportExecutor:
         import_summary.import_stats['validation_data_size'] = data_size
         validation_message = self._get_validation_message(validation_results)
         log_import_status(
-            import_name, import_stage,
+            import_name,
+            import_stage,
             ImportStatus.SUCCESS if validation_status else ImportStatus.FAILURE,
             import_summary.import_stats.get('validation_execution_time', 0),
-            import_summary.import_stats.get('validation_data_size',
-                                            0), validation_message)
+            import_summary.import_stats.get('validation_data_size', 0),
+            validation_message,
+            validation_results=validation_log_results)
         if not self.config.ignore_validation_status and not validation_status:
             logging.error(
                 "Marking import as VALIDATION due to validation failure.")
@@ -1537,7 +1580,8 @@ def log_import_status(import_name: str,
                       latency_secs: int = 0,
                       data_size: int = 0,
                       message: str = '',
-                      level: str = "INFO") -> None:
+                      level: str = "INFO",
+                      validation_results: list[dict] = None) -> None:
     """Logs the status of import.
   """
     import_metrics = {
@@ -1547,6 +1591,15 @@ def log_import_status(import_name: str,
         "latency_secs": int(latency_secs),
         "data_bytes": data_size
     }
+    if validation_results is not None:
+        import_metrics['validation_results'] = validation_results
+        # Preserve the final status log if validation details would exceed the
+        # Cloud Logging entry limit, leaving headroom for the log envelope.
+        if len(json.dumps(import_metrics).encode(
+                'utf-8')) > MAX_VALIDATION_RESULTS_LOG_SIZE_BYTES:
+            import_metrics['validation_results'] = []
+            import_metrics['validation_results_omitted_count'] = len(
+                validation_results)
     if not message:
         message = f'Import: {import_name} stage: {import_stage.name} status: {status.name}'
     log_metric(AUTO_IMPORT_JOB_STATUS, level, message, import_metrics)
