@@ -22,25 +22,25 @@ Run the Python script from `statvar_imports/commerce_eda_usaspending/` to downlo
 python3 process.py
 ```
 Outputs produced:
-- `output/raw_usaspending_eda_awards.json`: Raw award JSON payloads from the API.
-- `output/Investment_cleaned.csv`: Aggregated tall format with columns `Place,State or Territory / EDA Program,Year,Value`.
+- `input_files/raw_usaspending_eda_awards.json`: Raw award JSON payloads from the API.
+- `input_files/investment_cleaned.csv`: Aggregated tall format with columns `Place,State or Territory / EDA Program,Year,Value`.
 
 ### 3. Statistical Variable Processing
 Run Data Commons `stat_var_processor.py` to generate the final MCF and CSV files for import:
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=output/Investment_cleaned.csv \
-  --pv_map=Investmentpvmap.csv \
-  --config_file=Investmentmetadata.csv \
-  --output_path=output/Investment_output \
+  --input_data=input_files/investment_cleaned.csv \
+  --pv_map=investment_pvmap.csv \
+  --config_file=investment_metadata.csv \
+  --output_path=output/investment_output \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --output_counters=counters/Investment_counters.csv
+  --output_counters=counters/investment_counters.csv
 ```
 Outputs produced:
-- `output/Investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
-- `output/Investment_output.tmcf`: Template MCF mapping observation properties.
-- `output/Investment_output.mcf`: Node MCF for new StatisticalVariable entities.
-- `counters/Investment_counters.csv`: Processing counters and diff statistics.
+- `output/investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
+- `output/investment_output.tmcf`: Template MCF mapping observation properties.
+- `output/investment_output.mcf`: Node MCF for new StatisticalVariable entities.
+- `counters/investment_counters.csv`: Processing counters and diff statistics.
 
 ## Data Processing & Methodology
 - **Year Partitioning**: API queries are partitioned fiscal-year by fiscal-year to prevent USAspending's 10,000-record pagination ceiling.

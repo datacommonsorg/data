@@ -32,7 +32,7 @@ class TestProcessUSASpending(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
         self.output_csv = os.path.join(self.temp_dir.name,
-                                       "Investment_cleaned.csv")
+                                       "investment_cleaned.csv")
 
     def tearDown(self):
         self.temp_dir.cleanup()
@@ -159,15 +159,15 @@ class TestProcessUSASpending(unittest.TestCase):
         # Compare DataFrames
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
-            "Place": ["Alabama", "Alabama", "Alaska", "Alaska"],
+            "Place": ["AK", "AK", "AL", "AL"],
             "State or Territory / EDA Program": [
                 "Total",
-                "Public Works",
-                "Total",
                 "Planning",
+                "Total",
+                "Public Works",
             ],
-            "Year": [2013, 2013, 2014, 2014],
-            "Value": [150000, 150000, 25000, 25000],
+            "Year": [2014, 2014, 2013, 2013],
+            "Value": [25000, 25000, 150000, 150000],
         })
 
         pd.testing.assert_frame_equal(df_actual, df_expected)
@@ -215,8 +215,8 @@ class TestProcessUSASpending(unittest.TestCase):
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
             "Place": [
-                "California", "California", "California", "California",
-                "California"
+                "CA", "CA", "CA", "CA",
+                "CA"
             ],
             "State or Territory / EDA Program": [
                 "Total",
@@ -259,10 +259,10 @@ class TestProcessUSASpending(unittest.TestCase):
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
             "Place": [
-                "Marshall Islands",
-                "Marshall Islands",
-                "Palau",
-                "Palau",
+                "MH",
+                "MH",
+                "PW",
+                "PW",
             ],
             "State or Territory / EDA Program": [
                 "Total",
@@ -304,7 +304,7 @@ class TestProcessUSASpending(unittest.TestCase):
         df_actual = pd.read_csv(self.output_csv)
         # Total is 1234.6 + 5678.4 = 6913.0 -> 6913
         df_expected = pd.DataFrame({
-            "Place": ["Texas", "Texas", "Texas"],
+            "Place": ["TX", "TX", "TX"],
             "State or Territory / EDA Program":
             ["Total", "Planning", "Public Works"],
             "Year": [2022, 2022, 2022],
@@ -375,7 +375,7 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertTrue(os.path.exists(self.output_csv))
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
-            "Place": ["New York", "New York"],
+            "Place": ["NY", "NY"],
             "State or Territory / EDA Program": ["Total", "Public Works"],
             "Year": [2022, 2022],
             "Value": [120000, 120000],
@@ -411,7 +411,7 @@ class TestProcessUSASpending(unittest.TestCase):
         df_actual = pd.read_csv(self.output_csv)
         # Public Works should be dropped, and Total must equal 98992 (not 83674)
         df_expected = pd.DataFrame({
-            "Place": ["Northern Mariana Islands", "Northern Mariana Islands"],
+            "Place": ["MP", "MP"],
             "State or Territory / EDA Program": [
                 "Total", "Economic Adjustment Assistance"
             ],

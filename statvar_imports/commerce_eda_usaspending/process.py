@@ -25,66 +25,13 @@ from absl import logging
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-STATE_ABBREV = {
-    "AL": "Alabama",
-    "AK": "Alaska",
-    "AS": "American Samoa",
-    "AZ": "Arizona",
-    "AR": "Arkansas",
-    "CA": "California",
-    "CO": "Colorado",
-    "CT": "Connecticut",
-    "DE": "Delaware",
-    "DC": "District of Columbia",
-    "FM": "Federated States of Micronesia",
-    "FL": "Florida",
-    "GA": "Georgia",
-    "GU": "Guam",
-    "HI": "Hawaii",
-    "ID": "Idaho",
-    "IL": "Illinois",
-    "IN": "Indiana",
-    "IA": "Iowa",
-    "KS": "Kansas",
-    "KY": "Kentucky",
-    "LA": "Louisiana",
-    "ME": "Maine",
-    "MD": "Maryland",
-    "MA": "Massachusetts",
-    "MI": "Michigan",
-    "MN": "Minnesota",
-    "MS": "Mississippi",
-    "MO": "Missouri",
-    "MT": "Montana",
-    "NE": "Nebraska",
-    "NV": "Nevada",
-    "NH": "New Hampshire",
-    "NJ": "New Jersey",
-    "NM": "New Mexico",
-    "NY": "New York",
-    "NC": "North Carolina",
-    "ND": "North Dakota",
-    "MP": "Northern Mariana Islands",
-    "OH": "Ohio",
-    "OK": "Oklahoma",
-    "OR": "Oregon",
-    "PA": "Pennsylvania",
-    "PR": "Puerto Rico",
-    "RI": "Rhode Island",
-    "SC": "South Carolina",
-    "SD": "South Dakota",
-    "TN": "Tennessee",
-    "TX": "Texas",
-    "UT": "Utah",
-    "VT": "Vermont",
-    "VA": "Virginia",
-    "WA": "Washington",
-    "WV": "West Virginia",
-    "WI": "Wisconsin",
-    "WY": "Wyoming",
-    "VI": "U.S. Virgin Islands",
-    "PW": "Palau",
-    "MH": "Marshall Islands"
+VALID_STATE_CODES = {
+    "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC",
+    "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS",
+    "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT",
+    "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH",
+    "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT",
+    "VT", "VA", "WA", "WV", "WI", "WY", "VI", "PW", "MH"
 }
 
 CFDA_PROGRAMS = {
@@ -206,8 +153,7 @@ def process_data(awards, start_year, end_year, output_path):
     for a in awards:
         state_code = str(a.get("Place of Performance State Code")
                          or "").strip().upper()
-        state_name = STATE_ABBREV.get(state_code)
-        if not state_name:
+        if not state_code or state_code not in VALID_STATE_CODES:
             continue
 
         cfda = str(a.get("CFDA Number") or "").strip()
@@ -224,7 +170,7 @@ def process_data(awards, start_year, end_year, output_path):
 
         amount = float(a.get("Award Amount") or 0.0)
         data_rows.append({
-            "Place": state_name,
+            "Place": state_code,
             "Category": category,
             "Year": str(fy),
             "Amount": amount
@@ -309,9 +255,10 @@ def main(argv):
     del argv
     start_year = 2012
     end_year = datetime.datetime.now().year + 1
-    raw_output_path = os.path.join(_MODULE_DIR, "output",
+    raw_output_path = os.path.join(_MODULE_DIR, "input_files",
                                    "raw_usaspending_eda_awards.json")
-    output_path = os.path.join(_MODULE_DIR, "output", "Investment_cleaned.csv")
+    output_path = os.path.join(_MODULE_DIR, "input_files",
+                               "investment_cleaned.csv")
 
     awards = fetch_usaspending_data(start_year,
                                    end_year,
