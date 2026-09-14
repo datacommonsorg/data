@@ -30,8 +30,7 @@ INPUT_DIR = os.path.join(script_dir, "input_files")
 
 COMMON_COLUMNS = ["dataset", "variable", "description", "universe"]
 AGE_COLUMNS = [
-    "age314Count", "age1524Count", "age2544Count", "age4564Count",
-    "age65pCount"
+    "age314Count", "age1524Count", "age2544Count", "age4564Count", "age65pCount"
 ]
 INPUT_FILE = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
 INPUT_FILE_1 = os.path.join(INPUT_DIR, "ntia-data-age-only.csv")
@@ -40,13 +39,14 @@ INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
 HEADERS = {
     'User-Agent': ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
                    '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'),
-    'Accept':
-    'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 }
 
 
 def move_column_left(df, column_to_move, target_column):
     """Moves the universe column to the left of variable column."""
+    if column_to_move == target_column:
+        return df
     cols = df.columns.tolist()
     if column_to_move in cols and target_column in cols:
         cols.remove(column_to_move)
@@ -93,6 +93,7 @@ def preprocess_data():
 
 
 def main(argv):
+    del argv
     try:
         success = download_file(
             url=Commerce_NTIA_URL,
@@ -103,12 +104,14 @@ def main(argv):
             delay=5,
             backoff=2,
         )
-        if not success or not os.path.exists(INPUT_FILE):
-            logging.fatal("Failed to download Commerce_NTIA file.")
-            return
+        if not success or not os.path.exists(INPUT_FILE) or os.path.getsize(
+                INPUT_FILE) == 0:
+            logging.fatal(
+                "Failed to download Commerce_NTIA file or file is empty.")
+            sys.exit(1)
     except Exception as e:
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
-        return
+        sys.exit(1)
 
     preprocess_data()
 

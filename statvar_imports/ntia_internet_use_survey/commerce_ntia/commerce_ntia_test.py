@@ -39,6 +39,12 @@ class PreprocessTest(unittest.TestCase):
         result = preprocess.move_column_left(df, 'missing', 'b')
         self.assertEqual(list(result.columns), ['a', 'b'])
 
+    def test_move_column_left_same_column(self):
+        """Tests that move_column_left safely handles column_to_move equal to target_column."""
+        df = pd.DataFrame({'a': [1], 'b': [2], 'c': [3]})
+        result = preprocess.move_column_left(df, 'b', 'b')
+        self.assertEqual(list(result.columns), ['a', 'b', 'c'])
+
     def test_preprocess_data(self):
         """Tests data preprocessing and splitting into age-only and general survey CSVs."""
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -98,12 +104,38 @@ class PreprocessTest(unittest.TestCase):
             for age_col in preprocess.AGE_COLUMNS:
                 self.assertNotIn(age_col, cols_data)
 
+    @mock.patch('preprocess.logging.fatal')
+    def test_preprocess_data_file_not_found(self, mock_fatal):
+        """Tests that preprocess_data exits with code 1 if input file is missing."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            missing_input = os.path.join(tmp_dir, 'nonexistent.csv')
+            with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
+                 mock.patch.object(preprocess, 'INPUT_FILE', missing_input):
+                with self.assertRaises(SystemExit) as cm:
+                    preprocess.preprocess_data()
+                self.assertEqual(cm.exception.code, 1)
+                self.assertTrue(mock_fatal.called)
+
+    @mock.patch('preprocess.logging.fatal')
+    def test_preprocess_data_missing_columns(self, mock_fatal):
+        """Tests that preprocess_data exits with code 1 if input CSV lacks required columns."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            bad_input = os.path.join(tmp_dir, 'bad.csv')
+            pd.DataFrame({'incomplete': [1, 2]}).to_csv(bad_input, index=False)
+            with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
+                 mock.patch.object(preprocess, 'INPUT_FILE', bad_input):
+                with self.assertRaises(SystemExit) as cm:
+                    preprocess.preprocess_data()
+                self.assertEqual(cm.exception.code, 1)
+                self.assertTrue(mock_fatal.called)
+
     @mock.patch('preprocess.preprocess_data')
     @mock.patch('preprocess.download_file')
     def test_main_download_success(self, mock_download, mock_preprocess):
         """Tests that main downloads file and executes preprocess_data on success."""
         mock_download.return_value = True
-        with mock.patch('os.path.exists', return_value=True):
+        with mock.patch('os.path.exists', return_value=True), \
+             mock.patch('os.path.getsize', return_value=1024):
             preprocess.main([])
             mock_download.assert_called_once_with(
                 url=preprocess.Commerce_NTIA_URL,
@@ -121,21 +153,56 @@ class PreprocessTest(unittest.TestCase):
     @mock.patch('preprocess.logging.fatal')
     def test_main_download_failure(self, mock_fatal, mock_download,
                                    mock_preprocess):
-        """Tests that main logs fatal error and halts when download returns False."""
+        """Tests that main logs fatal error and exits with code 1 when download returns False."""
         mock_download.return_value = False
-        preprocess.main([])
+        with self.assertRaises(SystemExit) as cm:
+            preprocess.main([])
+        self.assertEqual(cm.exception.code, 1)
         mock_fatal.assert_called_once_with(
-            "Failed to download Commerce_NTIA file.")
+            "Failed to download Commerce_NTIA file or file is empty.")
         mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_download_success_file_missing(self, mock_fatal, mock_download,
+                                                mock_preprocess):
+        """Tests that main exits with code 1 if download reports success but file is missing."""
+        mock_download.return_value = True
+        with mock.patch('os.path.exists', return_value=False):
+            with self.assertRaises(SystemExit) as cm:
+                preprocess.main([])
+            self.assertEqual(cm.exception.code, 1)
+            mock_fatal.assert_called_once_with(
+                "Failed to download Commerce_NTIA file or file is empty.")
+            mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_download_success_empty_file(self, mock_fatal, mock_download,
+                                              mock_preprocess):
+        """Tests that main exits with code 1 if downloaded file is 0 bytes."""
+        mock_download.return_value = True
+        with mock.patch('os.path.exists', return_value=True), \
+             mock.patch('os.path.getsize', return_value=0):
+            with self.assertRaises(SystemExit) as cm:
+                preprocess.main([])
+            self.assertEqual(cm.exception.code, 1)
+            mock_fatal.assert_called_once_with(
+                "Failed to download Commerce_NTIA file or file is empty.")
+            mock_preprocess.assert_not_called()
 
     @mock.patch('preprocess.preprocess_data')
     @mock.patch('preprocess.download_file')
     @mock.patch('preprocess.logging.fatal')
     def test_main_download_exception(self, mock_fatal, mock_download,
                                      mock_preprocess):
-        """Tests that main logs fatal error when download raises an exception."""
+        """Tests that main logs fatal error and exits with code 1 when download raises an exception."""
         mock_download.side_effect = Exception("Connection timeout")
-        preprocess.main([])
+        with self.assertRaises(SystemExit) as cm:
+            preprocess.main([])
+        self.assertEqual(cm.exception.code, 1)
         self.assertTrue(mock_fatal.called)
         self.assertIn("Connection timeout", str(mock_fatal.call_args))
         mock_preprocess.assert_not_called()
