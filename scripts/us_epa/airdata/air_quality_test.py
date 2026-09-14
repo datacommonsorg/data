@@ -30,8 +30,8 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def test_write_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
-                    os.path.join(module_dir_,
-                                 'test_data/test_import_data.csv'), 'r') as f:
+                    os.path.join(module_dir_, 'test_data/test_import_data.csv'),
+                    'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
                 create_csv(test_csv)
 
@@ -145,8 +145,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
             with open(test_csv, 'r') as f:
                 rows = list(csv.DictReader(f))
                 self.assertEqual(len(rows), 2)
-                self.assertEqual(rows[0]['Units'],
-                                 'MicrogramsPerCubicMeter_lc')
+                self.assertEqual(rows[0]['Units'], 'MicrogramsPerCubicMeter_lc')
                 self.assertEqual(rows[1]['Units'],
                                  'MicrogramsPerCubicMeter_25C')
 

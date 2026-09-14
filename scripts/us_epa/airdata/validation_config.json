@@ -13,18 +13,16 @@
         },
         {
             "rule_id": "check_missing_refs_count",
-            "description": "Allow expected latLong coordinates warnings from site location property in local resolution mode.",
             "validator": "MISSING_REFS_COUNT",
             "params": {
-                "threshold": 4500000
+                "threshold": 0
             }
         },
         {
             "rule_id": "check_lint_error_count",
-            "description": "Allow expected missing observationAbout reference lint errors for newly added upstream EPA monitoring sites awaiting Knowledge Graph ingestion.",
             "validator": "LINT_ERROR_COUNT",
             "params": {
-                "threshold": 100000
+                "threshold": 0
             }
         },
         {
