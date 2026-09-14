@@ -153,8 +153,7 @@ flags.DEFINE_enum('mode', 'all', ['download', 'process', 'all'],
 flags.DEFINE_string(
     'years', DEFAULT_YEARS,
     'Gazetteer release years to download and process. Defaults to "auto" '
-    '(dynamically discovers all available years >= 2018 from census.gov).'
-)
+    '(dynamically discovers all available years >= 2018 from census.gov).')
 flags.DEFINE_string('year', '', 'Alias for --years.')
 flags.DEFINE_string(
     'input_dir', '',
@@ -192,20 +191,23 @@ def resolve_all_available_years(start_year: int = 2018,
     logging.info('Discovering available gazetteer release years from %s...',
                  CENSUS_BASE_URL)
     try:
-        index_html = fetch_url(CENSUS_BASE_URL, session).decode('utf-8',
-                                                                errors='replace')
-        years = sorted(set(re.findall(r'href="([0-9]{4})_Gazetteer/"', index_html)))
+        index_html = fetch_url(CENSUS_BASE_URL,
+                               session).decode('utf-8', errors='replace')
+        years = sorted(
+            set(re.findall(r'href="([0-9]{4})_Gazetteer/"', index_html)))
         available = [y for y in years if int(y) >= start_year]
         if available:
-            logging.info('Found available gazetteer years: %s', ', '.join(available))
+            logging.info('Found available gazetteer years: %s',
+                         ', '.join(available))
             return available
     except (requests.RequestException, ValueError, re.error) as e:
-        logging.warning('Could not discover years dynamically (%s); falling back to 2018', e)
+        logging.warning(
+            'Could not discover years dynamically (%s); falling back to 2018',
+            e)
     return [str(start_year)]
 
 
-def parse_years(year_spec: str,
-                session: requests.Session = None) -> List[str]:
+def parse_years(year_spec: str, session: requests.Session = None) -> List[str]:
     """Parses year specification (e.g. 'auto', '2018', '2018-2025', '2018-latest')."""
     spec = str(year_spec).strip()
     if spec.lower() in ('auto', 'all'):
@@ -214,7 +216,8 @@ def parse_years(year_spec: str,
         s = session or get_requests_session()
         return [resolve_latest_gazetteer_year(s)]
     if 'latest' in spec.lower():
-        start = int(spec.lower().split('-', 1)[0].strip()) if '-' in spec else 2018
+        start = int(spec.lower().split('-',
+                                       1)[0].strip()) if '-' in spec else 2018
         return resolve_all_available_years(start_year=start, session=session)
     if '-' in spec:
         start, end = spec.split('-', 1)
@@ -363,12 +366,15 @@ def download_file_atomic(url: str,
                     if chunk:
                         tmp_file.write(chunk)
             tmp_file.flush()
+            tmp_file.close()
             size = os.path.getsize(tmp_path)
             if size == 0:
                 raise RuntimeError(f'Downloaded file {url} is empty (0 bytes)')
             shutil.move(tmp_path, dest_path)
-            logging.info('Successfully downloaded %s (%d bytes)', dest_path, size)
+            logging.info('Successfully downloaded %s (%d bytes)', dest_path,
+                         size)
         except Exception:
+            tmp_file.close()
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
             raise
@@ -438,16 +444,18 @@ def download_files(input_dir: str, year_spec: str = DEFAULT_YEARS) -> List[str]:
                     break
 
             if not matched_filename:
-                logging.warning('No gazetteer file found for %s %s (pattern: %s)',
-                                year, desc, pattern)
+                logging.warning(
+                    'No gazetteer file found for %s %s (pattern: %s)', year,
+                    desc, pattern)
                 continue
 
             target_url = f'{year_url}{matched_filename}'
             dest_path = os.path.join(input_dir, matched_filename)
 
-            if not (os.path.exists(dest_path) and os.path.getsize(dest_path) > 0):
-                logging.info('Downloading %s (%s) from %s...', matched_filename, desc,
-                             target_url)
+            if not (os.path.exists(dest_path) and
+                    os.path.getsize(dest_path) > 0):
+                logging.info('Downloading %s (%s) from %s...', matched_filename,
+                             desc, target_url)
                 download_file_atomic(target_url, dest_path, session)
             downloaded_paths.append(dest_path)
 
@@ -460,10 +468,11 @@ def download_files(input_dir: str, year_spec: str = DEFAULT_YEARS) -> List[str]:
 
         if state_gaz_file:
             dest_path = os.path.join(input_dir, state_gaz_file)
-            if not (os.path.exists(dest_path) and os.path.getsize(dest_path) > 0):
+            if not (os.path.exists(dest_path) and
+                    os.path.getsize(dest_path) > 0):
                 target_url = f'{year_url}{state_gaz_file}'
-                logging.info('Downloading state gazetteer %s from %s...', state_gaz_file,
-                             target_url)
+                logging.info('Downloading state gazetteer %s from %s...',
+                             state_gaz_file, target_url)
                 download_file_atomic(target_url, dest_path, session)
             downloaded_paths.append(dest_path)
 
@@ -483,7 +492,9 @@ def _open_input_stream(filepath: str):
     """Context manager to stream-read a plain text file or the first file in a zip archive."""
     if filepath.endswith('.zip'):
         with zipfile.ZipFile(filepath) as zf:
-            inner_names = [n for n in zf.namelist() if not n.startswith('__MACOSX')]
+            inner_names = [
+                n for n in zf.namelist() if not n.startswith('__MACOSX')
+            ]
             with zf.open(inner_names[0]) as f:
                 yield f
     else:
@@ -543,7 +554,8 @@ def process(input_dir: str,
             if os.path.exists(html_path):
                 logging.info('Processing state area reference table for %s: %s',
                              year, html_path)
-                with open(html_path, 'r', encoding='utf-8', errors='replace') as f:
+                with open(html_path, 'r', encoding='utf-8',
+                          errors='replace') as f:
                     year_records.update(parse_state_area_html(f.read()))
             else:
                 logging.warning('No state data file found in %s', input_dir)
@@ -554,29 +566,33 @@ def process(input_dir: str,
         for pattern, prefix, geoid_col, desc in GAZETTEER_FILE_SPECS:
             matched_file = None
             for filename in files_in_input:
-                if filename.startswith(f'{year}_') and re.match(pattern, filename):
+                if filename.startswith(f'{year}_') and re.match(
+                        pattern, filename):
                     matched_file = filename
                     break
             # Fallback for test datasets without year prefix
             if not matched_file and len(years) == 1:
                 for filename in files_in_input:
-                    if re.match(pattern, filename):
+                    if re.match(pattern, filename) and not re.match(
+                            r'^[0-9]{4}_', filename):
                         matched_file = filename
                         break
 
             if not matched_file:
-                logging.warning('No file found for %s %s (pattern: %s)',
-                                year, desc, pattern)
+                logging.warning('No file found for %s %s (pattern: %s)', year,
+                                desc, pattern)
                 continue
 
             filepath = os.path.join(input_dir, matched_file)
             logging.info('Processing %s (%s)...', matched_file, desc)
             with _open_input_stream(filepath) as f:
                 records = parse_gazetteer_data(f, prefix, geoid_col)
-                logging.info('  Loaded %d records for %s %s', len(records), year, desc)
+                logging.info('  Loaded %d records for %s %s', len(records),
+                             year, desc)
                 year_records.update(records)
 
-        logging.info('Year %s total unique entities: %d', year, len(year_records))
+        logging.info('Year %s total unique entities: %d', year,
+                     len(year_records))
         for dcid, area in year_records.items():
             all_rows.append((dcid, str(year), area))
 
@@ -584,8 +600,8 @@ def process(input_dir: str,
 
     # 3. Create sorted DataFrame
     all_rows.sort(key=lambda r: (r[0], r[1]))
-    output_df = pd.DataFrame(
-        all_rows, columns=['dcid', 'observationDate', 'SurfaceArea'])
+    output_df = pd.DataFrame(all_rows,
+                             columns=['dcid', 'observationDate', 'SurfaceArea'])
 
     # 4. Write CSV
     csv_path = os.path.join(output_dir, OUTPUT_CSV)

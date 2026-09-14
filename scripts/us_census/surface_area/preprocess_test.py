@@ -18,6 +18,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 import pandas as pd
 
@@ -25,10 +26,9 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _MODULE_DIR)
 
 # pylint: disable=wrong-import-position
-from preprocess import (OUTPUT_CSV, OUTPUT_TMCF,
-                        calc_surface_area, parse_gazetteer_data,
-                        parse_state_area_html, parse_state_gazetteer,
-                        process)
+from preprocess import (OUTPUT_CSV, OUTPUT_TMCF, calc_surface_area,
+                        download_file_atomic, parse_gazetteer_data,
+                        parse_state_area_html, parse_state_gazetteer, process)
 # pylint: enable=wrong-import-position
 
 _TEST_DATA_DIR = 'test_data'
@@ -62,8 +62,7 @@ class TestSurfaceAreaPreprocess(unittest.TestCase):
             'USPS|GEOID|GEOIDFQ|ANSICODE|NAME|ALAND|AWATER|ALAND_SQMI|AWATER_SQMI|'
             'INTPTLAT|INTPTLONG\n'
             'AL|01001|0500000US01001|00161526|Autauga County|1539602123|25706961|'
-            '594.455|9.914|32.532237|-86.64644\n'
-        )
+            '594.455|9.914|32.532237|-86.64644\n')
         records_pipe = parse_gazetteer_data(io.StringIO(sample_psv),
                                             dcid_prefix='geoId/')
         self.assertEqual(len(records_pipe), 1)
@@ -89,8 +88,7 @@ class TestSurfaceAreaPreprocess(unittest.TestCase):
             'USPS|GEOID|GEOIDFQ|NAME|ALAND|AWATER|ALAND_SQMI|AWATER_SQMI|'
             'INTPTLAT|INTPTLONG\n'
             'AL|01|0400000US01|Alabama|131186429591|4580729056|50651.366|1768.629|'
-            '32.739579|-86.843447\n'
-        )
+            '32.739579|-86.843447\n')
         records = parse_state_gazetteer(io.StringIO(sample_state_txt))
         self.assertEqual(len(records), 1)
         self.assertIn('geoId/01', records)
@@ -98,7 +96,8 @@ class TestSurfaceAreaPreprocess(unittest.TestCase):
 
     def test_process_pipeline_against_expected(self):
         """Tests the end-to-end process() pipeline using test data."""
-        test_input_dir = os.path.join(_MODULE_DIR, _TEST_DATA_DIR, 'input_files')
+        test_input_dir = os.path.join(_MODULE_DIR, _TEST_DATA_DIR,
+                                      'input_files')
         expected_dir = os.path.join(_MODULE_DIR, _TEST_DATA_DIR,
                                     'expected_files')
 
@@ -121,6 +120,55 @@ class TestSurfaceAreaPreprocess(unittest.TestCase):
             with open(expected_tmcf_path, 'r', encoding='utf-8') as f:
                 expected_tmcf = f.read()
             self.assertEqual(actual_tmcf.strip(), expected_tmcf.strip())
+
+    def test_download_file_atomic_success(self):
+        """Tests atomic download when response is valid."""
+        mock_session = mock.MagicMock()
+        mock_response = mock.MagicMock()
+        mock_response.iter_content.return_value = [b'test-data']
+        mock_response.__enter__.return_value = mock_response
+        mock_session.get.return_value = mock_response
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            dest_file = os.path.join(temp_dir, 'dest.txt')
+            download_file_atomic('http://example.com/test.txt', dest_file,
+                                 mock_session)
+            self.assertTrue(os.path.exists(dest_file))
+            with open(dest_file, 'rb') as f:
+                self.assertEqual(f.read(), b'test-data')
+
+    def test_download_file_atomic_empty_error(self):
+        """Tests atomic download raises RuntimeError on 0-byte file."""
+        mock_session = mock.MagicMock()
+        mock_response = mock.MagicMock()
+        mock_response.iter_content.return_value = []
+        mock_response.__enter__.return_value = mock_response
+        mock_session.get.return_value = mock_response
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            dest_file = os.path.join(temp_dir, 'empty.txt')
+            with self.assertRaises(RuntimeError):
+                download_file_atomic('http://example.com/empty.txt', dest_file,
+                                     mock_session)
+            self.assertFalse(os.path.exists(dest_file))
+
+    def test_fallback_matching_excludes_other_year_files(self):
+        """Tests that fallback gazetteer matching ignores files with other year prefixes."""
+        with tempfile.TemporaryDirectory() as temp_in_dir, \
+             tempfile.TemporaryDirectory() as temp_out_dir:
+            # Create a file for 2018 in the input directory
+            other_year_file = os.path.join(temp_in_dir,
+                                           '2018_Gaz_counties_national.txt')
+            with open(other_year_file, 'w', encoding='utf-8') as f:
+                f.write(
+                    'USPS\tGEOID\tANSICODE\tNAME\tALAND\tAWATER\n'
+                    'AL\t01001\t00161526\tAutauga County\t1539602123\t25706961\n'
+                )
+
+            # Process for year 2020: 2018 file should not be matched
+            csv_path, _ = process(temp_in_dir, temp_out_dir, '2020')
+            df = pd.read_csv(csv_path)
+            self.assertEqual(len(df), 0)
 
 
 if __name__ == '__main__':

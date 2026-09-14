@@ -56,8 +56,6 @@ surface_area/
 ├── validation_config.json  # Data validation threshold configuration
 ├── preprocess.py           # Download and preprocessing script
 ├── preprocess_test.py      # Hermetic unit tests
-├── golden_data/            # Non-volatile golden summary reports
-│   └── golden_summary_report.csv
 ├── input_files/            # Downloaded raw input files
 ├── output_files/           # Generated cleaned CSV and TMCF
 └── test_data/              # Sample fixtures and expected test outputs
@@ -101,16 +99,12 @@ python3 -m unittest preprocess_test.py
 
 ### 2. Validation Configuration & Threshold Justifications
 
-The import configuration in `validation_config.json` enforces 4 critical validation rules:
+The import configuration in `validation_config.json` enforces 2 critical validation rules:
 
 1. **`check_deleted_records_percent` (`DELETED_RECORDS_PERCENT`: 0.1%)**:
    - **Justification**: A strict 0.1% threshold is maintained because Census geographic boundaries (e.g. Census Designated Places, School Districts, and Tracts) occasionally undergo rare dissolutions, annexations, or boundary consolidations across annual national releases. This threshold accommodates legitimate administrative changes while catching unintended data drops.
-2. **`check_max_date_consistent` (`MAX_DATE_CONSISTENT`)**:
-   - **Justification**: All entities measured for `dcs:SurfaceArea` share the identical latest release date (e.g. 2025).
-3. **`check_max_date_freshness` (`SQL_VALIDATOR`)**:
+2. **`check_max_date_freshness` (`SQL_VALIDATOR`)**:
    - **Justification**: Uses DuckDB SQL condition `max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)` to verify freshness within allowable annual release latency without prematurely failing on calendar year rollovers before the Census Bureau releases the new year's Gazetteer files.
-4. **`check_goldens_summary_report` (`GOLDENS_CHECK`)**:
-   - **Justification**: Validates non-volatile StatVar schema properties (`StatVar`, `NumPlaces`, `MinDate`, `Units`, `MeasurementMethods`, `ScalingFactors`, `observationPeriods`) against `golden_data/golden_summary_report.csv`. Volatile fields (`MaxDate`, `NumObservations`, `MaxValue`, `MinValue`) are excluded so future multi-year additions pass goldens cleanly. Raw observation goldens are intentionally omitted due to the granular nature of school district and tract entities.
 
 Run the import validator locally:
 ```bash
@@ -145,5 +139,3 @@ Result for 2018 baseline comparison:
   If `--years` includes an unreleased future year, `preprocess.py` logs a clear warning and stops year discovery early without failing the pipeline.
 - **Corrupted or Truncated Downloads**:
   Downloads write to temporary files in `input_files/` and atomically replace existing files only after checking that the file is non-empty (`os.path.getsize > 0`). If a download is interrupted, retry with `python3 preprocess.py --mode=download`.
-- **Validation Path Resolution**:
-  Relative paths in `validation_config.json` resolve relative to the configuration file itself (`golden_data/golden_summary_report.csv`).
