@@ -1,0 +1,18 @@
+Node: dcid:Municipality
+typeOf: dcid:Thing
+name: "Municipality"
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Municipality
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Municipality
+
+Node: dcid:FoodandNutritionalSecurity
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Foodand Nutritional Security"
+
