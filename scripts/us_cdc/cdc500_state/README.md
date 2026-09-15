@@ -25,7 +25,7 @@ The aggregation script queries Google Cloud BigQuery graph tables in dataset `da
    - **Census ACS 5-Year Series**: Filters and joins population counts from Census ACS 5-Year Survey (`provenance = 'dc/base/CensusACS5YearSurvey'`).
 
 2. **`Observation`**:
-   - **Health Indicator Percentages**: Fetches city-level percentage values (`value AS percent`), observation dates (`date`), and city geoIds (`entity1 LIKE 'geoId/%' AND (LENGTH(entity1) = 13 OR entity1 = 'geoId/15003')`) for CDC 500 StatVars. To prevent double-counting Oahu/Honolulu County population in years where 13-character Census Designated Places (`geoId/15XXXXX`) are published (2017–2022), `geoId/15003` is dynamically included via a SQL window check only when zero 13-character CDPs exist for Hawaii (`geoId/15`) in that `(StatVar, date, measurement_method)` partition (preserving coverage for 2013–2016 and county-only 2017 indicators).
+   - **Health Indicator Percentages**: Fetches city-level percentage values (`value AS percent`), observation dates (`date`), and city geoIds (`entity1 LIKE 'geoId/%'`) for CDC 500 StatVars. To prevent double-counting Oahu/Honolulu County population in years where 13-character Census Designated Places (`geoId/15XXXXX`) are published (2017–2022), `geoId/15003` is explicitly filtered in the `WHERE` clause to include only years `<= '2016'` and `'2017'` county-only indicators (excluding the four 2017 blood pressure and cholesterol indicators that also have 13-character CDP data).
    - **City Cohort Populations**: Fetches city-level population counts (`value AS population`) for the corresponding demographic cohort StatVars.
 
 ### Aggregation Methodology

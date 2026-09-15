@@ -49,7 +49,10 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
         self.assertIn(
             "AND (LENGTH(O.entity1) = 13 OR O.entity1 = 'geoId/15003')", query)
-        self.assertIn("COUNTIF(LENGTH(observation_about) = 13) OVER", query)
+        self.assertIn("O.entity1 = 'geoId/15003'", query)
+        self.assertIn("O.date <= '2016'", query)
+        self.assertIn("O.date = '2017'", query)
+        self.assertNotIn("svo_percent_dedup", query)
         self.assertIn("REGEXP_CONTAINS", query)
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
         self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)

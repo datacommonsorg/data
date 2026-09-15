@@ -58,7 +58,7 @@ WITH cdc_sv AS (
   GROUP BY cdc500, pop_statvar
 ),
 
-svo_percent_dedup AS (
+svo_percent AS (
   SELECT
     O.variable_measured AS statvar,
     O.entity1 AS observation_about,
@@ -76,34 +76,29 @@ svo_percent_dedup AS (
   INNER JOIN cdc_sv
     ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
-    AND (LENGTH(O.entity1) = 13 OR O.entity1 = 'geoId/15003')
+    AND (
+      LENGTH(O.entity1) = 13
+      OR (
+        O.entity1 = 'geoId/15003'
+        AND (
+          O.date <= '2016'
+          OR (
+            O.date = '2017'
+            AND O.variable_measured NOT IN (
+        'Percent_Person_WithHighBloodPressure',
+        'Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication',
+        'Percent_Person_WithHighCholesterol',
+        'Percent_Person_ReceivedCholesterolScreening'
+            )
+          )
+        )
+      )
+    )
     AND O.variable_measured LIKE 'Percent_%'
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
   ) = 1
-),
-
-svo_percent AS (
-  SELECT
-    statvar,
-    observation_about,
-    observation_date,
-    percent,
-    measurement_method,
-    pop_statvar
-  FROM svo_percent_dedup
-  QUALIFY LENGTH(observation_about) = 13
-    OR (
-      observation_about = 'geoId/15003'
-      AND COUNTIF(LENGTH(observation_about) = 13) OVER (
-        PARTITION BY
-          statvar,
-          SUBSTR(observation_about, 1, 8),
-          observation_date,
-          measurement_method
-      ) = 0
-    )
 ),
 
 svo_count AS (
