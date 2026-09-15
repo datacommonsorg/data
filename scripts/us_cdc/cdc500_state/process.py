@@ -76,7 +76,6 @@ svo_percent AS (
   INNER JOIN cdc_sv
     ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
-    AND LENGTH(O.entity1) = 13
     AND O.variable_measured LIKE 'Percent_%'
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
@@ -102,7 +101,6 @@ svo_count AS (
   ) AS pop
     ON O.variable_measured = pop.pop_statvar
   WHERE O.entity1 LIKE 'geoId/%'
-    AND LENGTH(O.entity1) = 13
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC

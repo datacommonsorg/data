@@ -47,7 +47,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("SAFE_DIVIDE", query)
         self.assertIn("SAFE_CAST", query)
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
-        self.assertIn("LENGTH(O.entity1) = 13", query)
+        self.assertNotIn("LENGTH(O.entity1)", query)
         self.assertIn("REGEXP_CONTAINS", query)
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
         self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)
