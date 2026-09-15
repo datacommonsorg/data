@@ -1,0 +1,11 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},populationType,Faculty,facultyType,Teacher,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+TeacherCount_District,measuredProperty,count,value,{Number},unit,Years,,,,,,,,
+TeacherCount_State,measuredProperty,count,value,{Number},unit,Years,observationAbout,geoId/34,,,,,,
+TeacherAvgYearsExp_District,meanValue,workExperience,value,{Number},unit,Years,,,,,,,,
+TeacherAvgYearsExp_State,meanValue,workExperience,value,{Number},unit,Years,observationAbout,geoId/34,,,,,,
+TeacherAvgYearsExpInDistrict_District,meanValue,workExperience,value,{Number},unit,Years,workExperiencePlace,District,,,,,,
+TeacherAvgYearsExpInDistrict_State,meanValue,workExperience,value,{Number},unit,Years,workExperiencePlace,District,observationAbout,geoId/34,,,,
+TeacherInDistrict4YearsOrMore_District,workExperience,[4  - Years],value,{Number},unit,Years,workExperiencePlace,District,,,,,,
+TeacherInDistrict4YearsOrMore_State,workExperience,[4  - Years],value,{Number},unit,Years,workExperiencePlace,District,observationAbout,geoId/34,,,,

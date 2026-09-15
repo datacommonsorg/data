@@ -1,0 +1,6 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+ObservationAbout,observationAbout,{Data},,,,,,,,
+FULL,populationType,Student,measuredProperty,count,enrollmentType,FullTime,schoolEnrollment,EnrolledInSchool,value,{Number}
+SHARED,populationType,Student,measuredProperty,count,enrollmentType,SharedTime,schoolEnrollment,EnrolledInSchool,value,{Number}
+FTE,populationType,Student,measuredProperty,count,enrollmentType,FullTimeEquivalent,schoolEnrollment,EnrolledInSchool,value,{Number}
+Year,observationDate,{Number},,,,,,,,
