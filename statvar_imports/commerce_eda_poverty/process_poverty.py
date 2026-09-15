@@ -48,10 +48,10 @@ def download_from_gcs(dst_path=ORIGINAL_CSV):
     try:
         file_util.file_copy(GCS_SOURCE_URI, dst_path)
     except Exception as e:
-        logging.fatal("GCS download failed for %s: %s", GCS_SOURCE_URI, e)
+        logging.error("GCS download failed for %s: %s", GCS_SOURCE_URI, e)
         raise RuntimeError(f"GCS download failed for {GCS_SOURCE_URI}: {e}") from e
     if not os.path.exists(dst_path) or os.path.getsize(dst_path) == 0:
-        logging.fatal("GCS download failed: destination %s does not exist or is empty.", dst_path)
+        logging.error("GCS download failed: destination %s does not exist or is empty.", dst_path)
         raise RuntimeError(f"GCS download failed: destination {dst_path} does not exist or is empty.")
     logging.info("GCS Download completed successfully. File size: %d bytes.", os.path.getsize(dst_path))
 
@@ -76,13 +76,13 @@ def preprocess_poverty(src_path=ORIGINAL_CSV, dst_path=CLEANED_CSV, min_county_c
     """Preprocesses the raw Poverty dataset into cleaned format with normalized columns."""
     logging.info("Preprocessing original Poverty dataset from %s...", src_path)
     if not os.path.exists(src_path) or os.path.getsize(src_path) == 0:
-        logging.fatal("Source file does not exist or is empty: %s", src_path)
+        logging.error("Source file does not exist or is empty: %s", src_path)
         raise ValueError(f"Source file does not exist or is empty: {src_path}")
 
     # Load original Poverty.csv, skipping first 2 rows of headers/explanations
     df = pd.read_csv(src_path, skiprows=2, dtype=str)
     if df.empty:
-        logging.fatal("Source CSV is empty: %s", src_path)
+        logging.error("Source CSV is empty: %s", src_path)
         raise ValueError(f"Source CSV is empty: {src_path}")
 
     # Strip column headers to avoid fragile whitespace issues
@@ -91,7 +91,7 @@ def preprocess_poverty(src_path=ORIGINAL_CSV, dst_path=CLEANED_CSV, min_county_c
     # Verify expected columns exist
     missing_cols = [col for col in COLUMN_RENAME_MAP if col not in df.columns]
     if missing_cols:
-        logging.fatal("Missing required columns in source CSV: %s", missing_cols)
+        logging.error("Missing required columns in source CSV: %s", missing_cols)
         raise ValueError(f"Missing required columns in source CSV: {missing_cols}")
 
     df = df.rename(columns=COLUMN_RENAME_MAP)
@@ -124,7 +124,7 @@ def preprocess_poverty(src_path=ORIGINAL_CSV, dst_path=CLEANED_CSV, min_county_c
 
     # Verify sanity threshold
     if len(df) < min_county_count:
-        logging.fatal(
+        logging.error(
             "Sanity check failed: Expected at least %d counties, but found %d.",
             min_county_count,
             len(df),
