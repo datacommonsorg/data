@@ -1,0 +1,23 @@
+Node: E:ncbi_gene_gene->E1
+typeOf: dcs:Taxon
+dcid: C:ncbi_gene_gene->dcid_taxon
+ncbiTaxId: C:ncbi_gene_gene->taxID
+
+Node: E:ncbi_gene_gene->E2
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_gene->dcid
+name: C:ncbi_gene_gene->Symbol
+chrom: C:ncbi_gene_gene->chromosome
+cytogeneticMapLocation: C:ncbi_gene_gene->map_location
+dateModified: C:ncbi_gene_gene->Modification_date
+description: C:ncbi_gene_gene->description
+geneSymbol: C:ncbi_gene_gene->Symbol
+fullName: C:ncbi_gene_gene->Full_name_from_nomenclature_authority
+ncbiGeneID: C:ncbi_gene_gene->GeneID
+nomenclatureStatus: C:ncbi_gene_gene->Nomenclature_status
+refSeqFunctionElementFeatureAnnotation: C:ncbi_gene_gene->regulatory
+refSeqFunctionElementFeatureAnnotation: C:ncbi_gene_gene->misc_feature
+refSeqFunctionElementFeatureAnnotation: C:ncbi_gene_gene->misc_recomb
+synonym: C:ncbi_gene_gene->Other_designations
+synonym: C:ncbi_gene_gene->synonym
+typeOfGene: C:ncbi_gene_gene->type_of_gene

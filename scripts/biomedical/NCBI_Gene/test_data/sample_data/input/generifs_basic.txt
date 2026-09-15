@@ -1,0 +1,35 @@
+#Tax ID	Gene ID	PubMed ID (PMID) list	last update timestamp	GeneRIF text
+9606	1362	11306718	2004-10-01 17:41	CPD releases C-terminal Arg from peptides to provide the precursor substrate for inducible nitric oxide synthase, which enhances nitric oxide synthesis in macrophages.
+9606	1525	11479928	2010-01-21 00:00	Review: Receptor for the group B coxsackieviruses and adenoviruses, CAR
+9606	3188	16171461	2010-01-21 00:00	the relative levels of hnRNP F and H2 in cells, as well as the target sequences in the downstream GRS on pre-mRNA, influence gene expression
+9606	4599	10971132	2006-04-24 16:50	The MxA promoter nt -88 G/T SNP may be useful to predict the response of chronic hepatitis C patients to interferon therapy.
+9606	5104	11161981	2010-12-05 22:08	Observational study of gene-disease association. (HuGE Navigator)
+9606	5267	12384424	2010-01-21 00:00	Delivery of human kallistatin cDNA to ischemic rat hindlimb and breast tumor xenografts showed that Kallistatin is a new inhibitor of angiogenesis and tumor growth.
+9606	6173	14752831	2010-01-21 00:00	RPL36A plays a role in tumor cell proliferation and may be a potential target for anticancer therapy of hepatocellular carcinoma
+9606	8945	11994270	2010-01-21 00:00	Genetic evidence for the essential role of beta-transducin repeat-containing protein in the inducible processing of NF-kappa B2/p100
+9606	8987	21893048	2011-12-10 10:51	Atg8 interacting motif (AIM) in Stbd1 is necessary for GABARAPL1 binding.
+9606	10172	18060868	2010-01-21 00:00	These findings suggest that BMZF3 is a transcriptional repressor induced by GDNF that plays a role in cell proliferation.
+9606	10346	15064739	2010-01-21 00:00	May be involved in proliferation and/or differentiation of leukemic cells.
+9606	11152	23176820	2013-02-16 10:26	we have identified mutations in WDR45 as a cause of a distinctive X-linked dominant form of neurodegeneration with brain iron accumulation (NBIA)
+9606	11230	15757671	2010-01-21 00:00	PRAF2 (JM4) is CCR5-interacting protein, which is suggested to function in trafficking and membrane localisation of the receptor.
+9606	23098	15893701	2010-01-21 00:00	Candidate gene in the onset of hereditary infectious/inflammatory diseases.
+9606	23536	19844255	2009-12-02 21:41	Observational study of gene-disease association. (HuGE Navigator)
+9606	23563	17690104	2010-01-21 00:00	sulfated keratan sulfate is produced by beta3GNT7, beta4GalT4, CGn6ST, and KSG6ST
+9606	23648	12381786	2010-01-21 00:00	Ssdp proteins interact with the LIM-domain-binding protein Ldb1 to regulate development
+9606	25909	17098863	2010-01-21 00:00	Results suggets that ELYS is an unexpected member of the nuclear pore and kinetochore that functions in both pore assembly at the nucleus and faithful cell division.
+9606	51659	21082043	2011-03-12 11:33	Data suggest that GINS2 to be associated with the aggressive characteristics of a subgroup of breast cancers in vivo.
+9606	54919	23040496	2013-03-23 11:53	Identification of HEATR2 contributes to the growing number of genes associated with PCD identified in both individuals and model organisms and shows that exome sequencing in family studies facilitates the discovery of novel disease-causing gene mutations.
+9606	55625	22031296	2012-04-21 10:58	the DHHC-7 and -21 proteins are novel targets to selectively inhibit membrane sex steroid receptor localization and function
+9606	55811	17591988	2010-01-21 00:00	Soluble adenylyl cyclase is localized to motile airway cilia and it contributes to the regulation of human airway ciliary beat frequency.
+9606	55969	20877624	2010-12-05 22:08	Observational study of gene-disease association. (HuGE Navigator)
+9606	60436	20040491	2010-12-07 15:58	Shows that the homologous mouse Tgif2 gene is necessary for gastrulation.
+9606	79035	18449195	2010-01-21 00:00	Cells deficient in hSSB1 exhibit increased radiosensitivity, defective checkpoint activation and enhanced genomic instability coupled with a diminished capacity for DNA repair.
+9606	79583	23012439	2013-03-16 12:25	mutations in TMEM231 cause JBTS, reinforcing the relationship between this condition and the disruption of the barrier at the ciliary transition zone.
+9606	79602	12802337	2010-01-21 00:00	cloning of cDNAs encoding adiponectin receptors 1 and 2 (AdipoR1 and AdipoR2) by expression cloning [AdipoR1 & AdipoR2]
+9606	91975	17541838	2010-01-21 00:00	ZNF-300 and novel splice variant ZNF300-B are both expressed highly in human testis.
+9606	134466	30485833	2019-12-28 12:28	These findings establish a novel regulatory axis, LOC134466/hsa-miR-196a-5p/TAC1. Downregulation of the axis promoted EC development through TACR3, which further activated neuroactive ligand-receptor interaction.
+9606	147007	26833330	2016-06-28 11:17	We have identified TMEM199 as a protein involved in Golgi homeostasis and show that TMEM199 deficiency results in a hepatic phenotype with abnormal glycosylation.
+9606	388007	19240061	2009-04-01 21:32	Observational study of gene-disease association. (HuGE Navigator)
+9606	653108	27767087	2018-01-13 13:59	These findings indicate that despite human erythrocytes are able to bind to Ad5, this binding is reversible and does not prevent extravasation and organ transduction after systemic delivery.
+9606	100129583	20379614	2010-06-30 22:05	Clinical trial of gene-disease association and gene-environment interaction. (HuGE Navigator)
+9606	100420631	37801987	2023-11-01 20:38	betaTrCP1 promotes SLC35F2 protein ubiquitination and inhibits cancer progression in HeLa cells.
