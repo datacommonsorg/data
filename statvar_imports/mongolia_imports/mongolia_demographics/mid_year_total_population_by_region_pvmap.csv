@@ -1,5 +1,5 @@
 key,p1,v1,p2,v2,p3,v3
-Aimag,observationAbout,{Data},populationType,Person,measuredProperty,count
+Region,observationAbout,{Data},populationType,Person,measuredProperty,count
 ,,,,,,
 Total,#ignore,skip,,,,
 1990,observationDate,1990,value,{Number},,

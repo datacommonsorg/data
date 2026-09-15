@@ -44,6 +44,11 @@ flags.DEFINE_string("directory",
                     os.getcwd(),
                     "Directory to scan (default: current working directory)",
                     allow_override=True)
+flags.DEFINE_string(
+    "output_dir",
+    "",
+    "Directory to write output files (default: same as directory)",
+    allow_override=True)
 flags.DEFINE_bool("no_spanner", False, "Skip Spanner check")
 flags.DEFINE_string("spanner_project", "datcom-store", "Spanner project ID")
 flags.DEFINE_string("spanner_instance", "dc-graph-staging",
@@ -102,7 +107,8 @@ def strip_quotes(s):
 
 def check_spanner_nodes(node_ids, project, instance_id, database_id):
     """
-    Checks which of the given node_ids exist in the Spanner Node table.
+    Checks which of the given node_ids exist in the Spanner Node table and
+    have a typeOf predicate in the Edge table.
     
     Args:
         node_ids: A collection of node IDs (strings) to check against Spanner.
@@ -141,7 +147,7 @@ def check_spanner_nodes(node_ids, project, instance_id, database_id):
 
                 try:
                     result = snapshot.execute_sql(
-                        "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@ids)",
+                        "SELECT DISTINCT subject_id FROM Edge WHERE subject_id IN UNNEST(@ids) AND predicate = 'typeOf'",
                         params={"ids": batch},
                         param_types={
                             "ids":
@@ -158,11 +164,13 @@ def check_spanner_nodes(node_ids, project, instance_id, database_id):
 
     except Exception as e:
         logging.error(f"Failed to connect to Spanner or create snapshot: {e}")
+        raise
 
     return existing_nodes
 
 
 def generate_provisional_nodes(scan_dir,
+                               output_dir=None,
                                no_spanner=False,
                                spanner_project="datcom-store",
                                spanner_instance="dc-graph-staging",
@@ -172,6 +180,7 @@ def generate_provisional_nodes(scan_dir,
     
     Args:
         scan_dir: The local directory containing .mcf files to scan.
+        output_dir: The directory where output files should be written (default: scan_dir).
         no_spanner: If True, skips checking Cloud Spanner for existing nodes.
         spanner_project: Spanner project ID.
         spanner_instance: Spanner instance ID.
@@ -182,7 +191,11 @@ def generate_provisional_nodes(scan_dir,
     """
     start_time = time.time()
     root_dir = os.path.abspath(scan_dir)
-    output_dir = root_dir
+    if output_dir is None or not output_dir:
+        output_dir = root_dir
+    else:
+        output_dir = os.path.abspath(output_dir)
+        os.makedirs(output_dir, exist_ok=True)
 
     defined_nodes = set()
     referenced_properties = set()
@@ -329,10 +342,13 @@ def generate_provisional_nodes(scan_dir,
 
 
 def main(_):
-    output_path = generate_provisional_nodes(FLAGS.directory, FLAGS.no_spanner,
-                                             FLAGS.spanner_project,
-                                             FLAGS.spanner_instance,
-                                             FLAGS.spanner_database)
+    output_path = generate_provisional_nodes(
+        scan_dir=FLAGS.directory,
+        output_dir=FLAGS.output_dir if FLAGS.output_dir else None,
+        no_spanner=FLAGS.no_spanner,
+        spanner_project=FLAGS.spanner_project,
+        spanner_instance=FLAGS.spanner_instance,
+        spanner_database=FLAGS.spanner_database)
     logging.info(f"Generated provisional nodes at: {output_path}")
 
 

@@ -38,6 +38,9 @@ Acceptance is automatic ET behavior, not human approval. A `STAGING` summary
 shows that a candidate is eligible; the current-output pointer proves which
 eligible version is current at read time.
 
+Successful Batch completion proves only the technical compute outcome. It does
+not by itself prove that a version was accepted as the current ET output.
+
 ## Definition-to-run flow
 
 ```text
@@ -96,8 +99,7 @@ Therefore, GCS history covers finalized versions, not all attempts. In
 particular, a Batch failure before `import_summary.json` is written has no GCS
 history entry. It may be visible only while represented by the current
 `ImportStatus` snapshot and retained Batch resource. Do not interpret a missing
-summary as proof that no attempt occurred. Read the
-[import evidence flow](import-evidence-flow.md) for evidence-selection rules.
+summary as proof that no attempt occurred.
 
 ## Resource cardinality
 
@@ -124,9 +126,9 @@ per import:                one mutable ImportStatus snapshot when present
 | Current-output pointer | Which finalized candidate is the current ET output at read time |
 
 Join systems only through exact identifiers returned by the selected evidence;
-linked recipes define the valid fields. Do not correlate by similar names or
-timestamps, and do not list Workflow executions or Batch jobs to discover a
-missing run.
+linked operational references define the valid fields. Do not correlate by
+similar names or timestamps, and do not list Workflow executions or Batch jobs
+to discover a missing run.
 
 ## Sources of truth
 
@@ -136,7 +138,7 @@ missing run.
   coordinates.
 - Use live Scheduler, current Cloud Spanner `ImportStatus`, exact Batch
   resources, GCS, and structured logs for deployed or runtime facts.
-- A supplied sibling `import` checkout can explain Workflow or helper behavior
+- A resolved `<IMPORT_REPO>` checkout can explain Workflow or helper behavior
   when that implementation detail is specifically needed. The deployed
   Workflow revision and live metadata remain runtime truth.
 - Batch records the requested image URI. Historical source resolution is a
@@ -144,8 +146,6 @@ missing run.
 
 ## Read details only when needed
 
-- For current-status, finalized-version, and missing-evidence semantics, read
-  the [import evidence flow](import-evidence-flow.md).
 - For version directories, summaries, and pointer names, read
   [artifact layout](artifact-layout.md).
 - For exact import-definition fields, read the
@@ -155,13 +155,13 @@ missing run.
 |---|---|
 | How is a manifest schedule turned into a Scheduler request? | `import-automation/executor/app/executor/scheduler_job_manager.py` and `cloud_scheduler.py` |
 | How are ET Workflow arguments constructed? | `import-automation/executor/app/executor/cloud_batch.py` |
-| How does the shared Workflow create Batch or invoke accepted-output handling? | Optional sibling `../import/pipeline/workflow/import-automation-workflow.yaml` |
+| How does the shared Workflow create Batch or invoke accepted-output handling? | `<IMPORT_REPO>/pipeline/workflow/import-automation-workflow.yaml` |
 | What happens inside the ET container? | `import-automation/executor/main.py` and `import-automation/executor/app/executor/import_executor.py` |
 | How are versions, summaries, and pointers produced? | `import_executor.py` plus `artifact-layout.md` |
 
-Read the sibling Workflow only for an internal orchestration question. It is not
-required for repository lookup, Scheduler verification, current status, GCS
-versions, or exact Batch inspection.
+Read the Workflow from `<IMPORT_REPO>` only for an internal orchestration
+question. It is not required for repository lookup, Scheduler verification,
+current status, GCS versions, or exact Batch inspection.
 
 This flow describes the `CLOUD_BATCH` path. GKE, GAE, and Cloud Run have
 different execution paths and must not be interpreted as Batch without

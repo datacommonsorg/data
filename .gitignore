@@ -30,3 +30,7 @@ import-automation/executor/config_override.json
 .agents/*
 !.agents/skills.json
 
+# Ignore generated troubleshooting post-mortem documents
+agents/troubleshooting/
+
+

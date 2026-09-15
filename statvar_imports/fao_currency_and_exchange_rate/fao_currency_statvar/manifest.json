@@ -10,18 +10,22 @@
             "scripts": [
                 "download.sh",
                 "preprocess.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_data/final_input_data.csv --pv_map=CurrencyFAO_pv_map.csv --config_file=CurrencyFAO_metadata.csv --places_resolved_csv=CurrencyFAO_place_map.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/CurrencyFAO_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_data/final_input_data.csv --pv_map=CurrencyFAO_pv_map.csv --config_file=CurrencyFAO_metadata.csv --places_resolved_csv=CurrencyFAO_place_map.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/CurrencyFAO_output --output_counters=counters/CurrencyFAO_output.csv"
             ],
             "source_files": [
-                "input_data/Exchange_rate_E_All_Data.csv"
+                "input_data/Exchange_rate_E_All_Data.csv",
+                "counters/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/CurrencyFAO_output.tmcf",
-                    "cleaned_csv": "output_files/CurrencyFAO_output.csv"
+                    "cleaned_csv": "output_files/CurrencyFAO_output.csv",
+                    "node_mcf": "output_files/*stat_vars*.mcf"
                 }
             ],
-            "cron_schedule": "0 07 * * 4"
+            "cron_schedule": "0 07 * * 4",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

@@ -156,7 +156,7 @@ class ExecutorConfig:
     # Override cron schedule in import spec.
     cron_schedule_override: str = ''
     # Relative path to version folder for graph files.
-    graph_data_path: str = '/*/*/*.mcf'
+    graph_data_path: str = '/*/genmcf/*.mcf*'
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
@@ -175,6 +175,8 @@ class ExecutorConfig:
     skip_gcs_upload: bool = False
     # Skip uploading input files to GCS.
     skip_input_upload: bool = False
+    # Ingest historic data from GCS.
+    ingest_historic_data: bool = True
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60

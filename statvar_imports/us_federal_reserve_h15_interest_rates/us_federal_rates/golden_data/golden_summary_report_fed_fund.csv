@@ -1,0 +1,4 @@
+"observationPeriods","MinDate","MeasurementMethods","NumPlaces","StatVar","Units","ScalingFactors"
+"[]","2003-01-15","[]","1","InterestRate_FinancialInstrument_1Year_PrimaryCredit","[PercentPerAnnum]","[]"
+"[]","1970-01-07","[]","1","InterestRate_FinancialInstrument_1Year_FederalFund","[PercentPerAnnum]","[]"
+"[]","1970-01-07","[]","1","Mean_PrimeRate_FinancialInstrument_1Year_BankLoan","[PercentPerAnnum]","[]"
