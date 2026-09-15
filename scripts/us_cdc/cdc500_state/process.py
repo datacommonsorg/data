@@ -84,17 +84,15 @@ svo_percent AS (
           O.date <= '2016'
           OR (
             O.date = '2017'
-            AND O.variable_measured NOT IN (
-        'Percent_Person_WithHighBloodPressure',
-        'Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication',
-        'Percent_Person_WithHighCholesterol',
-        'Percent_Person_ReceivedCholesterolScreening'
+            AND NOT REGEXP_CONTAINS(
+              O.variable_measured, r'HighBloodPressure|Cholesterol'
             )
           )
         )
       )
     )
     AND O.variable_measured LIKE 'Percent_%'
+    AND SAFE_CAST(O.value AS FLOAT64) IS NOT NULL
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
@@ -120,16 +118,17 @@ svo_count AS (
     ON O.variable_measured = pop.pop_statvar
   WHERE O.entity1 LIKE 'geoId/%'
     AND (LENGTH(O.entity1) = 13 OR O.entity1 = 'geoId/15003')
+    AND SAFE_CAST(O.value AS FLOAT64) IS NOT NULL
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
   ) = 1
 )
 
-SELECT 
-  p.statvar, 
+SELECT
+  p.statvar,
   SUBSTR(p.observation_about, 1, 8) AS observation_about,
-  p.observation_date, 
+  p.observation_date,
   COALESCE(
     CONCAT('dcAggregate/', p.measurement_method), 'dcAggregate'
   ) AS measurement_method,
@@ -143,6 +142,7 @@ INNER JOIN svo_count AS c
   AND p.observation_date = c.observation_date
   AND p.pop_statvar = c.population_statvar
 GROUP BY 1, 2, 3, 4
+HAVING percent IS NOT NULL
 """
 
 
@@ -187,4 +187,3 @@ def main(argv):
 
 if __name__ == '__main__':
     app.run(main)
-

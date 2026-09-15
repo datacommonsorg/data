@@ -21,11 +21,25 @@ from unittest import mock
 
 from absl import flags
 from absl.testing import flagsaver
+import duckdb
 import pandas as pd
 
 from scripts.us_cdc.cdc500_state import process
 
 FLAGS = flags.FLAGS
+
+
+def _prepare_duckdb_query(sql: str) -> str:
+    """Adapts BigQuery SQL syntax in process.QUERY for in-memory DuckDB execution."""
+    adapted = sql.replace(
+        '`datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries`', 'TimeSeries')
+    adapted = adapted.replace(
+        '`datcom-store.spanner_dc_graph_prod_DEFAULT.Observation`',
+        'Observation')
+    adapted = adapted.replace('SAFE_CAST(', 'TRY_CAST(')
+    adapted = adapted.replace('AS FLOAT64)', 'AS DOUBLE)')
+    adapted = adapted.replace("r'", "'")
+    return adapted
 
 
 class CDC500StateProcessTest(unittest.TestCase):
@@ -46,20 +60,26 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("dc/base/CensusACS5YearSurvey", query)
         self.assertIn("SAFE_DIVIDE", query)
         self.assertIn("SAFE_CAST", query)
+        self.assertIn("SAFE_CAST(O.value AS FLOAT64) IS NOT NULL", query)
+        self.assertIn("HAVING percent IS NOT NULL", query)
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
         self.assertIn(
             "AND (LENGTH(O.entity1) = 13 OR O.entity1 = 'geoId/15003')", query)
         self.assertIn("O.entity1 = 'geoId/15003'", query)
         self.assertIn("O.date <= '2016'", query)
         self.assertIn("O.date = '2017'", query)
+        self.assertIn("HighBloodPressure|Cholesterol", query)
         self.assertNotIn("svo_percent_dedup", query)
         self.assertIn("REGEXP_CONTAINS", query)
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
         self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)
-        self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography", query)
-        self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest", query)
+        self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography",
+                      query)
+        self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest",
+                      query)
         self.assertIn(
-            "Percent_Person_50To75Years_ReceivedColorectalCancerScreening", query)
+            "Percent_Person_50To75Years_ReceivedColorectalCancerScreening",
+            query)
         self.assertIn("'Count_Person_65OrMoreYears_Female'", query)
         self.assertIn("'Count_Person_65OrMoreYears_Male'", query)
         self.assertIn("'Count_Person_65OrMoreYears'", query)
@@ -72,27 +92,11 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertNotIn("p.pop_statvar AS population_statvar", query)
 
     def test_demographic_cohort_regex_mapping(self):
-        """Verifies that representative StatVars match the intended demographic regex rules."""
-        female_pattern = r'65OrMoreYears.*Female|Female.*65OrMoreYears'
-        male_pattern = r'65OrMoreYears.*Male|Male.*65OrMoreYears'
-
-        self.assertIn(female_pattern, process.QUERY)
-        self.assertIn(male_pattern, process.QUERY)
-
-        # Helper mapping that mirrors the SQL CASE WHEN logic
-        def map_statvar(sv: str) -> str:
-            if re.search(female_pattern, sv):
-                return 'Count_Person_65OrMoreYears_Female'
-            elif re.search(male_pattern, sv):
-                return 'Count_Person_65OrMoreYears_Male'
-            elif '65OrMoreYears' in sv:
-                return 'Count_Person_65OrMoreYears'
-            elif '18To64Years' in sv:
-                return 'Count_Person_18To64Years'
-            elif '18OrMoreYears' in sv:
-                return 'Count_Person_18OrMoreYears'
-            else:
-                return 'Count_Person'
+        """Executes cdc_sv CTE from process.QUERY in DuckDB to verify cohort mapping."""
+        con = duckdb.connect(':memory:')
+        con.create_function(
+            'REGEXP_CONTAINS', lambda s, p: bool(re.search(p, s))
+            if s and p else False, [str, str], bool)
 
         test_cases = [
             ('Percent_Person_65OrMoreYears_Female_CorePreventiveServices',
@@ -105,38 +109,168 @@ class CDC500StateProcessTest(unittest.TestCase):
              'Count_Person_65OrMoreYears_Male'),
             ('Percent_Person_65OrMoreYears_CorePreventiveServices',
              'Count_Person_65OrMoreYears'),
-            ('Percent_Person_18To64Years_HealthInsurance', 'Count_Person_18To64Years'),
-            ('Percent_Person_18OrMoreYears_WithAnyDisability', 'Count_Person_18OrMoreYears'),
+            ('Percent_Person_18To64Years_HealthInsurance',
+             'Count_Person_18To64Years'),
+            ('Percent_Person_18OrMoreYears_WithAnyDisability',
+             'Count_Person_18OrMoreYears'),
             ('Percent_Person_18OrMoreYears_WithHighBloodPressure',
              'Count_Person_18OrMoreYears'),
             ('Percent_Person_WithArthritis', 'Count_Person'),
             ('Percent_Person_WithHighCholesterol', 'Count_Person'),
         ]
+        excluded_statvars = [
+            'Percent_Person_50To74Years_Female_ReceivedMammography',
+            'Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening',
+            'Percent_Person_21To65Years_Female_ReceivedPapSmearTest',
+            'Percent_Person_50To75Years_ReceivedColorectalCancerScreening',
+        ]
 
-        for sv, expected in test_cases:
+        rows = [{
+            'variable_measured': sv,
+            'provenance': 'dc/base/CDC500'
+        } for sv, _ in test_cases]
+        rows.extend([{
+            'variable_measured': sv,
+            'provenance': 'dc/base/CDC500'
+        } for sv in excluded_statvars])
+        ts_df = pd.DataFrame(rows)
+        con.register('TimeSeries', ts_df)
+
+        # Extract cdc_sv CTE from process.QUERY and execute against TimeSeries
+        adapted_sql = _prepare_duckdb_query(process.QUERY)
+        cdc_sv_sql = adapted_sql.split('svo_percent AS (')[0].rstrip().rstrip(
+            ',')
+        result_df = con.execute(
+            f"{cdc_sv_sql} SELECT cdc500, pop_statvar FROM cdc_sv").df()
+
+        result_map = dict(zip(result_df['cdc500'], result_df['pop_statvar']))
+        self.assertEqual(len(result_map), len(test_cases))
+        for sv, expected_cohort in test_cases:
             with self.subTest(statvar=sv):
-                self.assertEqual(map_statvar(sv), expected)
+                self.assertEqual(result_map.get(sv), expected_cohort)
+        for excluded_sv in excluded_statvars:
+            with self.subTest(excluded=excluded_sv):
+                self.assertNotIn(excluded_sv, result_map)
 
     def test_population_weighted_average_calculation(self):
-        """Verifies the population-weighted average calculation and city-to-state
-        FIPS aggregation."""
-        # Simulated city-level records for California (geoId/06)
-        city_records = pd.DataFrame({
-            'city_geoid': ['geoId/0644000', 'geoId/0666000', 'geoId/0667000'],
-            'city_percent': [20.0, 30.0, 40.0],
-            'city_pop': [10000, 20000, 70000]
-        })
-        city_records['state_geoid'] = city_records['city_geoid'].str.slice(0, 8)
-        self.assertTrue((city_records['state_geoid'] == 'geoId/06').all())
+        """Executes full process.QUERY in DuckDB to verify state weighted average."""
+        con = duckdb.connect(':memory:')
+        con.create_function(
+            'REGEXP_CONTAINS', lambda s, p: bool(re.search(p, s))
+            if s and p else False, [str, str], bool)
+        con.create_function(
+            'SAFE_DIVIDE', lambda a, b: float(a) / float(b)
+            if (a is not None and b) else None, [float, float], float)
 
-        # Formula: SUM(pop * percent) / SUM(pop)
-        total_weighted = (city_records['city_pop'] * city_records['city_percent']).sum()
-        total_pop = city_records['city_pop'].sum()
-        weighted_avg = total_weighted / total_pop
+        ts_df = pd.DataFrame([
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0644000',
+                'facet_id': 'f1',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': 'CrudePrevalence'
+            },
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0666000',
+                'facet_id': 'f1',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': 'CrudePrevalence'
+            },
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0667000',
+                'facet_id': 'f1',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': 'CrudePrevalence'
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0644000',
+                'facet_id': 'f2',
+                'provenance': 'dc/base/CensusACS5YearSurvey',
+                'measurement_method': ''
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0666000',
+                'facet_id': 'f2',
+                'provenance': 'dc/base/CensusACS5YearSurvey',
+                'measurement_method': ''
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0667000',
+                'facet_id': 'f2',
+                'provenance': 'dc/base/CensusACS5YearSurvey',
+                'measurement_method': ''
+            },
+        ])
+        obs_df = pd.DataFrame([
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0644000',
+                'date': '2022',
+                'value': '20.0',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0666000',
+                'date': '2022',
+                'value': '30.0',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0667000',
+                'date': '2022',
+                'value': '40.0',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0644000',
+                'date': '2022',
+                'value': '10000',
+                'facet_id': 'f2',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0666000',
+                'date': '2022',
+                'value': '20000',
+                'facet_id': 'f2',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0667000',
+                'date': '2022',
+                'value': '70000',
+                'facet_id': 'f2',
+                'last_update_timestamp': 100
+            },
+        ])
+        con.register('TimeSeries', ts_df)
+        con.register('Observation', obs_df)
+
+        sql = _prepare_duckdb_query(process.QUERY)
+        result_df = con.execute(sql).df()
 
         # Expected: (10000*20 + 20000*30 + 70000*40) / 100000 = 36.0
-        self.assertEqual(total_pop, 100000)
-        self.assertAlmostEqual(weighted_avg, 36.0, places=4)
+        self.assertEqual(len(result_df), 1)
+        self.assertEqual(result_df['statvar'].iloc[0],
+                         'Percent_Person_WithArthritis')
+        self.assertEqual(result_df['observation_about'].iloc[0], 'geoId/06')
+        self.assertEqual(result_df['observation_date'].iloc[0], '2022')
+        self.assertEqual(result_df['measurement_method'].iloc[0],
+                         'dcAggregate/CrudePrevalence')
+        self.assertAlmostEqual(result_df['percent'].iloc[0], 36.0, places=4)
 
     def test_run_process_success(self):
         """Tests successful query execution and atomic output writing."""
@@ -164,7 +298,8 @@ class CDC500StateProcessTest(unittest.TestCase):
     def test_run_process_empty_dataframe_raises_runtime_error(self):
         """Tests that empty query results raise RuntimeError."""
         mock_client = mock.MagicMock()
-        mock_client.query.return_value.to_dataframe.return_value = pd.DataFrame()
+        mock_client.query.return_value.to_dataframe.return_value = pd.DataFrame(
+        )
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
             with self.assertRaisesRegex(RuntimeError,
@@ -209,9 +344,8 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client.query.return_value.to_dataframe.return_value = mock_df
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaisesRegex(
-                    RuntimeError,
-                    "was created empty or missing"):
+            with self.assertRaisesRegex(RuntimeError,
+                                        "was created empty or missing"):
                 process.run_process(mock_client, output_file)
             self.assertFalse(os.path.exists(output_file))
             self.assertFalse(os.path.exists(output_file + '.tmp'))
@@ -223,12 +357,15 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client_instance = mock.MagicMock()
         mock_bq_client_cls.return_value = mock_client_instance
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with flagsaver.flagsaver(output_dir=tmp_dir, project='test-project'):
+            with flagsaver.flagsaver(output_dir=tmp_dir,
+                                     project='test-project'):
                 process.main([])
-                expected_output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-                mock_bq_client_cls.assert_called_once_with(project='test-project')
-                mock_run_process.assert_called_once_with(mock_client_instance,
-                                                         expected_output_file)
+                expected_output_file = os.path.join(tmp_dir,
+                                                    'CDC500State_Output.csv')
+                mock_bq_client_cls.assert_called_once_with(
+                    project='test-project')
+                mock_run_process.assert_called_once_with(
+                    mock_client_instance, expected_output_file)
 
 
 if __name__ == '__main__':
