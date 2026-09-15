@@ -266,6 +266,8 @@ class DownloadFilesTest(absltest.TestCase):
         headers = session.headers
         self.assertIn('User-Agent', headers)
         self.assertIn('Mozilla', headers['User-Agent'])
+        self.assertIn('Referer', headers)
+        self.assertIn('rbi.org.in', headers['Referer'])
 
     def test_rejects_html_error_response(self):
         with tempfile.TemporaryDirectory() as temp_dir:

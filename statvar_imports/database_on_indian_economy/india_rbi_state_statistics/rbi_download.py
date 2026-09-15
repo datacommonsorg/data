@@ -41,8 +41,14 @@ DEFAULT_HEADERS = {
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'Accept-Language':
     'en-US,en;q=0.9',
+    'Referer':
+    'https://www.rbi.org.in/',
 }
 
+RBI_PORTAL_URL = (
+    'https://www.rbi.org.in/Scripts/AnnualPublications.aspx?'
+    'head=Handbook%20of%20Statistics%20on%20Indian%20States'
+)
 XLSX_ZIP_SIGNATURE = b'PK\x03\x04'
 
 
@@ -145,6 +151,14 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
 
     if session is None:
         session = create_retry_session()
+        try:
+            logging.info(
+                f"Warming up session with RBI portal cookies from {RBI_PORTAL_URL}"
+            )
+            session.get(RBI_PORTAL_URL, timeout=30)
+        except Exception as e:
+            logging.warning(
+                f"Could not warm up session from {RBI_PORTAL_URL}: {e}")
 
     failed_downloads = []
 
