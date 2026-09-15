@@ -1,7 +1,0 @@
-output/
-counters/
-dc_generated/
-http_cache.sqlite
-__pycache__/
-*.pyc
-*.tmp

@@ -117,22 +117,75 @@ class TestProcessPoverty(unittest.TestCase):
 
     def test_preprocess_poverty_min_county_count_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            fixture_path = os.path.join(MODULE_DIR, "test_data", "Poverty_original_fixture.csv")
+            fixture_path = os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv")
             dst_path = os.path.join(tmpdir, "output.csv")
             with self.assertRaises(ValueError):
-                preprocess_poverty(src_path=fixture_path, dst_path=dst_path, min_county_count=100)
+                preprocess_poverty(src_path=fixture_path, dst_path=dst_path, min_county_count=3000)
 
-    def test_preprocess_poverty_with_static_fixtures(self):
+    def test_preprocess_poverty_with_test_data(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            fixture_path = os.path.join(MODULE_DIR, "test_data", "Poverty_original_fixture.csv")
+            fixture_path = os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv")
             actual_csv = os.path.join(tmpdir, "Poverty_cleaned.csv")
-            expected_csv = os.path.join(MODULE_DIR, "test_data", "Poverty_cleaned_expected.csv")
 
-            preprocess_poverty(src_path=fixture_path, dst_path=actual_csv, min_county_count=1)
+            preprocess_poverty(src_path=fixture_path, dst_path=actual_csv, min_county_count=100)
 
             self.assertTrue(os.path.exists(actual_csv))
             df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str})
-            df_expected = pd.read_csv(expected_csv, dtype={"GEOID": str})
+
+            # 200 lines total: 3 header lines + 191 county/territory rows + 6 footnote lines = 191 cleaned rows
+            self.assertEqual(len(df_actual), 191)
+            self.assertEqual(
+                list(df_actual.columns),
+                ["GEOID", "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_2020", "poverty_rate_2021"],
+            )
+
+            # Verify 11 island territories (AS, GU, MP, VI) map to poverty_rate_2020
+            territory_rows = df_actual[df_actual["GEOID"].str[:2].isin({"60", "66", "69", "78"})]
+            self.assertEqual(len(territory_rows), 11)
+            self.assertTrue(territory_rows["poverty_rate_2020"].notna().all())
+            self.assertTrue(territory_rows["poverty_rate_2021"].isna().all())
+
+            # Verify states and PR (180 rows) map to poverty_rate_2021
+            state_rows = df_actual[~df_actual["GEOID"].str[:2].isin({"60", "66", "69", "78"})]
+            self.assertEqual(len(state_rows), 180)
+            self.assertTrue(state_rows["poverty_rate_2021"].notna().all())
+            self.assertTrue(state_rows["poverty_rate_2020"].isna().all())
+
+    def test_preprocess_poverty_edge_cases(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_csv = os.path.join(tmpdir, "raw.csv")
+            actual_csv = os.path.join(tmpdir, "cleaned.csv")
+
+            raw_content = (
+                "Header 1\n"
+                "Header 2\n"
+                'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty* "\n'
+                '"Autauga County, AL",01001,15.7,10.9,13.3\n'
+                '"Yukon-Koyukuk, AK",2090,7.6,7.8,9.6\n'
+                '"Eastern District, AS",60010,25.0,28.0,30.0\n'
+                '"Barbour County, AL",01005.0,25.2,26.8,29.0\n'
+                '"Bibb County, AL",1007.0,21.2,20.6,24.9\n'
+                '"Blount County, AL",01009,-5.0,150.0,14.5\n'
+                '"Bullock County, AL",01011,-10.0,120.0,999.0\n'
+                '"Invalid 1",99001,15.0,15.0,15.0\n'
+                '"Invalid 2",abc,10.0,10.0,10.0\n'
+                '"Invalid 3",0100,5.0,4.2,3.1\n'
+                '"Source footnote",,,,\n'
+            )
+            with open(raw_csv, "w") as f:
+                f.write(raw_content)
+
+            preprocess_poverty(src_path=raw_csv, dst_path=actual_csv, min_county_count=1)
+            df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str})
+
+            expected_data = {
+                "GEOID": ["01001", "02090", "60010", "01005", "01007", "01009"],
+                "poverty_rate_1990": [15.7, 7.6, 25.0, 25.2, 21.2, None],
+                "poverty_rate_2000": [10.9, 7.8, 28.0, 26.8, 20.6, None],
+                "poverty_rate_2020": [None, None, 30.0, None, None, None],
+                "poverty_rate_2021": [13.3, 9.6, None, 29.0, 24.9, 14.5],
+            }
+            df_expected = pd.DataFrame(expected_data)
             pd.testing.assert_frame_equal(df_actual, df_expected)
 
 
