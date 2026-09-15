@@ -117,7 +117,7 @@ def download_and_segregate_by_gas():
             f"Error: Could not fetch country list from API ({countries_url}). "
             f"Status: {status_code}, Response: {response_text}, Error: {e}"
         )
-        # Not raising here, we might still have check_country.csv
+        raise
 
     local_country_codes = set()
     try:
@@ -178,8 +178,8 @@ def download_and_segregate_by_gas():
             )
 
         if not gas_dataframes:
-            logging.info(f"No data was downloaded for {gas}. The output file will not be created.")
-            continue
+            logging.error(f"No data was downloaded for {gas}. The output file will not be created.")
+            raise RuntimeError(f"No data was downloaded for gas: {gas}")
 
         output_filename = os.path.join(output_dir, f"all_countries_{gas}.csv")
         temp_filename = f"{output_filename}.tmp"
