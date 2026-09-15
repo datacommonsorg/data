@@ -1,0 +1,16 @@
+key,p1,v1,p2,v2,p3,v3,,,,,,,,,,,,,,
+codigo_ibge_wiki_id,observationAbout,{Data},,,,,,,,,,,,,,,,,,
+anomes_s,observationDate,{YEAR}-{MONTH},#Regex,(?P<YEAR>[0-9]{4})(?P<MONTH>[0-9]{2}),observationPeriod,P1M,,,,,,,,,,,,,,
+pab_qtd_beneficios_primeira_infancia_i,measuredProperty,count,populationType,Person,value,{Number},,,name,"""Quantity of early childhood benefits in program""",benefitsStatus,EarlyChildhood,,,,,age,[0 6 Years],,
+pab_qtd_beneficios_comp_familiar_crianca_i,measuredProperty,count,populationType,Household,value,{Number},,,name,"""Quantity of child benefits for families in program""",benefitsStatus,FamilyVariableBenefits,,,,,householderAge,[7 12 Years],,
+pab_qtd_beneficios_comp_familiar_adolescente_i,measuredProperty,count,populationType,Household,value,{Number},,,name,"""Quantity of benefits for teenagers in families enrolled in program""",benefitsStatus,FamilyVariableBenefits,,,,,householderAge,[12 18 Years],,
+pab_qtd_beneficios_comp_familiar_jovem_i,measuredProperty,count,populationType,Household,value,{Number},,,name,"""Quantity of youth benefits for families in program""",benefitsStatus,CitizenshipIncomeBenefits,householderAge,[15 29 Years],,,,,,
+pab_qtd_beneficios_comp_familiar_gestante_i,measuredProperty,count,populationType,Household,value,{Number},,,name,"""Quantity of maternity benefits for families in program""",benefitsStatus,FamilyVariableBenefits,,,,,,,,
+pab_qtd_beneficios_superacao_extr_pobreza_i,measuredProperty,count,populationType,Person,value,{Number},,,name,"""Quantity of extreme poverty overcoming benefits in program""",benefitsStatus,ComplementaryBenefits,,,,,,,,
+pab_qtd_beneficios_compensatorio_transitorio_i,measuredProperty,count,populationType,Person,value,{Number},,,name,"""Quantity of temporary compensatory benefits in program""",benefitsStatus,TemporaryCompensatoryBenefits,,,,,,,,
+pab_qtd_fam_benef_i,measuredProperty,count,populationType,Household,value,{Number},,,name,"""Number of Families Beneficiaries of Auxílio Brasil""",benefitsStatus,AuxilioBrasil,,,,,,,,
+pab_valor_pago_d,measuredProperty,amount,populationType,Person,value,{Number},,,name,"""Total amount transferred from Auxílio Brasil""",benefitsStatus,AuxilioBrasil,,,,,unit,BRL,measurementQualifier,Monthly
+pab_valor_medio_d,measuredProperty,amount,populationType,Person,value,{Number},,,name,"""Average value of Brazil Aid""",benefitsStatus,BrazilAid,statType,meanValue,,,unit,BRL,measurementQualifier,Monthly
+pab_extraordinario_qtd_fam_i,measuredProperty,count,populationType,Household,value,{Number},,,name,"""Families benefiting from the Extraordinary Benefit""",benefitsStatus,ExtraordinaryBenefits,,,,,,,,
+pab_extraordinario_valor_pago_d,measuredProperty,amount,populationType,Person,value,{Number},,,name,"""Amounts transferred from the Extraordinary Benefit""",benefitsStatus,ExtraordinaryBenefits,,,,,unit,BRL,measurementQualifier,Monthly
+pab_extraordinario_valor_medio_d,measuredProperty,amount,populationType,Person,value,{Number},,,name,"""Average value of the Extraordinary Benefit""",benefitsStatus,ExtraordinaryBenefits,statType,meanValue,,,unit,BRL,measurementQualifier,Monthly
