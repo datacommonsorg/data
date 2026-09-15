@@ -1,0 +1,19 @@
+Node: E:variants->E1
+typeOf: dcs:Gene
+dcid: C:variants->dcid_gene
+name: C:variants->geneSymbols
+pharmGKBID: C:variants->geneID
+
+Node: E:variants->E2
+typeOf: dcs:GeneticVariant
+dcid: C:variants->dcid
+name: C:variants->rsID
+clinicalAnnotationCount: C:variants->clinicalAnnotationCount
+clinicalAnnotationCountLevel1_2: C:variants->clinicalAnnotationCountLevel1_2
+clinicalGuidelineAnnotationCount: C:variants->guidelineAnnotationCount
+drugLabelAnnotationCount: C:variants->labelAnnotationCount
+geneSymbol: E:variants->E1
+geneticVariantAnnotationCount: C:variants->variantAnnotationCount
+pharmGKBID: C:variants->pharmGKBID
+rsID: C:variants->rsID
+synonym: C:variants->Synonyms
