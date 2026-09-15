@@ -1,0 +1,3 @@
+"ScalingFactors","MeasurementMethods","NumPlaces","Units","StatVar","observationPeriods","MinDate"
+"[]","[]","48","[PercentPerAnnum]","Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate","[P1M]","1945-01"
+"[]","[]","48","[PercentPerAnnum]","Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate","[P1D]","1945-01-01"

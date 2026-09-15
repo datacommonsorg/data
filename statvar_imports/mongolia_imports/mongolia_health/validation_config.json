@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input0",
+      "description": "Validates summary_report.csv for input0 (deaths_by_month_and_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input0_golden_summary_report.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_input0",
+      "description": "Verifies that observationAbout in output CSV matches golden observation places for input0 (deaths_by_month_and_region)",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input0_golden_observations.csv",
+        "input_files": "../../../../output_files/deaths_by_month_and_region_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input1",
+      "description": "Validates summary_report.csv for input1 (infant_mortality_per_1000_live_births_by_month_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input1_golden_summary_report.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_input1",
+      "description": "Verifies that observationAbout in output CSV matches golden observation places for input1 (infant_mortality_per_1000_live_births_by_month_region)",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input1_golden_observations.csv",
+        "input_files": "../../../../output_files/infant_mortality_per_1000_live_births_by_month_region_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input2",
+      "description": "Validates summary_report.csv for input2 (live_births_by_month_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input2_golden_summary_report.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_input2",
+      "description": "Verifies that observationAbout in output CSV matches golden observation places for input2 (live_births_by_month_region)",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input2_golden_observations.csv",
+        "input_files": "../../../../output_files/live_births_by_month_region_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input3",
+      "description": "Validates summary_report.csv for input3 (number_of_abortions_by_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input3_golden_summary_report.csv",
+        "input_files": "../../input3/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_input3",
+      "description": "Verifies that observationAbout in output CSV matches golden observation places for input3 (number_of_abortions_by_region)",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input3_golden_observations.csv",
+        "input_files": "../../../../output_files/number_of_abortions_by_region_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input4",
+      "description": "Validates summary_report.csv for input4 (number_of_hospital_beds_by_type) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input4_golden_summary_report.csv",
+        "input_files": "../../input4/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_input4",
+      "description": "Verifies that observationAbout in output CSV matches golden observation places for input4 (number_of_hospital_beds_by_type)",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input4_golden_observations.csv",
+        "input_files": "../../../../output_files/number_of_hospital_beds_by_type_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input5",
+      "description": "Validates summary_report.csv for input5 (number_of_mothers_delivered_child_by_month_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input5_golden_summary_report.csv",
+        "input_files": "../../input5/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_input5",
+      "description": "Verifies that observationAbout in output CSV matches golden observation places for input5 (number_of_mothers_delivered_child_by_month_region)",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input5_golden_observations.csv",
+        "input_files": "../../../../output_files/number_of_mothers_delivered_child_by_month_region_output.csv"
+      }
+    }
+  ]
+}

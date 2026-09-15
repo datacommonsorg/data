@@ -34,11 +34,12 @@ flags.DEFINE_string(
 # --- ROBUST PATH RESOLUTION START ---
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+
 def _add_util_to_path():
     """Adds the repo 'util' directory to sys.path dynamically."""
     path_3_up = os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../util/'))
     path_2_up = os.path.abspath(os.path.join(_SCRIPT_PATH, '../../util/'))
-    
+
     if os.path.exists(os.path.join(path_3_up, 'file_util.py')):
         sys.path.append(path_3_up)
     elif os.path.exists(os.path.join(path_2_up, 'file_util.py')):
@@ -52,6 +53,7 @@ def _add_util_to_path():
                 return
             curr = os.path.dirname(curr)
         logging.error("Could not find 'util' directory containing file_util.py")
+
 
 _add_util_to_path()
 
@@ -78,6 +80,7 @@ _OUTPUT_COLUMNS = [
     'Year',
 ]
 
+
 def load_config(path: str) -> dict:
     """Loads configuration from GCS or local disk."""
     if path.startswith('gs://'):
@@ -88,15 +91,14 @@ def load_config(path: str) -> dict:
         return json.loads(blob.download_as_string())
     return file_util.file_load_py_dict(path)
 
-def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
+
+def download_data(config_file_path: str) -> List[Tuple]:
     """Downloads data using configuration."""
     file_config = load_config(config_file_path)
     url = file_config.get('url')
-    # We ignore the 'input_files' from config to save in the current directory
-    output_dir = '' 
-    
+
     if not url:
-        return [], ''
+        return []
 
     all_data = []
     page_num = 1
@@ -104,13 +106,14 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
         api_url = f'{url}&pageno={page_num}'
         response = _retry_method(api_url, None, 3, 5, 2)
         if not response:
-            logging.fatal('Failed to retrieve data from page %d', page_num)
+            logging.fatal('Failed to retrieve data from %s (page %d)', api_url,
+                          page_num)
 
         try:
             response_data = response.json()
-        except json.JSONDecodeError:
-            logging.error('Failed to parse JSON from page %d', page_num)
-            break
+        except json.JSONDecodeError as e:
+            logging.fatal('Failed to parse JSON from %s (page %d): %s', api_url,
+                          page_num, e)
 
         if response_data and 'Data' in response_data and response_data['Data']:
             for item in response_data['Data']:
@@ -135,42 +138,28 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
             logging.info('No more data found on page %d.', page_num)
             break
 
-    return all_data, output_dir
+    return all_data
 
-def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
+
+def preprocess_and_save(data: List[Tuple]) -> None:
     """Saves data to CSV directly in the script directory."""
     if not data:
         logging.info('No data was retrieved from the API.')
         return
 
     df = pd.DataFrame(data, columns=_OUTPUT_COLUMNS)
-    
+
     # Save directly in _SCRIPT_PATH (statvar_imports/india_ndap/india_nss_health_ailments)
-    output_path = os.path.join(_SCRIPT_PATH, 'india_nss_health_ailments.csv')  
+    output_path = os.path.join(_SCRIPT_PATH, 'india_nss_health_ailments.csv')
     df.to_csv(output_path, index=False)
     logging.info('Data saved to %s', output_path)
-  """Converts data to a DataFrame and saves it as a CSV file.
-
-  Args:
-    data: The data to be processed, as a list of tuples.
-    output_dir: The directory where the output CSV will be saved.
-  """
-  if not data:
-    logging.info('No data was retrieved from the API.')
-    return
-
-  df = pd.DataFrame(data, columns=_OUTPUT_COLUMNS)
-
-  os.makedirs(output_dir, exist_ok=True)
-  output_path = os.path.join(output_dir, 'india_nss_health_ailments.csv')  
-  df.to_csv(output_path, index=False)
-  logging.info('Data saved to %s', output_path)
 
 
 def main(_) -> None:
-    raw_data, output_dir = download_data(_FLAGS.config_file_path)
+    raw_data = download_data(_FLAGS.config_file_path)
     if raw_data:
-        preprocess_and_save(raw_data, output_dir)
+        preprocess_and_save(raw_data)
+
 
 if __name__ == '__main__':
     app.run(main)

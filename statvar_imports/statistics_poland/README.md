@@ -17,7 +17,7 @@ type of place: State.
 
 statvars: Demographics
 
-years: 2003 to 2024.
+years: 2003 to 2025.
 
 ## Processing Instructions
 To process the Poland Census data and generate statistical variables, use the following command from the "data" directory:
@@ -33,6 +33,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv \
   --output_path=statvar_imports/statistics_poland/test/StatisticsPoland_output \
   --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
+  --output_counters=statvar_imports/statistics_poland/test/StatisticsPoland_output_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 **For Main data run**
@@ -42,5 +43,6 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv \
   --output_path=statvar_imports/statistics_poland/StatisticsPoland_output \
   --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
+  --output_counters=statvar_imports/statistics_poland/counters/StatisticsPoland_output_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```

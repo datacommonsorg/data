@@ -54,10 +54,11 @@ def generate_statvar(statvars, path):
     by_age_gender_template = by_age_template[:-1] + 'gender: schema:{gender}\n\n'
 
     with open(path, 'w') as f_out:
-        for stat_var in statvars:
+        for full_stat_var in statvars:
+            stat_var = full_stat_var.replace('dcid:', '')
             keys = stat_var.split('_')
             if len(keys) < 3:
-                raise Exception("Invalid StatVar")
+                continue
             age = convert_range(keys[2])
             if len(keys) == 3:  # measuredPropery_populationType_age
                 f_out.write(
@@ -75,40 +76,34 @@ def generate_statvar(statvars, path):
                     }))
 
 
-def generate_tmcf(statvars, path):
+def generate_tmcf(path):
     """Generate the template mcf."""
-    statvar_template = ('Node: E:lifexp->E{sv_index}\n'
+    statvar_template = ('Node: E:lifexp->E0\n'
                         'typeOf: dcs:StatVarObservation\n'
-                        'variableMeasured: dcs:{stat_var}\n'
-                        'observationAbout: C:lifexp->{geo_col}\n'
-                        'observationDate: C:lifexp->{year_col}\n'
+                        'variableMeasured: C:lifexp->SV\n'
+                        'observationAbout: C:lifexp->place\n'
+                        'observationDate: C:lifexp->year\n'
                         'measurementMethod: dcs:EurostatRegionalStatistics\n'
-                        'value: C:lifexp->{stat_var}\n\n')
+                        'value: C:lifexp->value\n'
+                        'unit: "Year"\n')
 
     with open(path, 'w') as f_out:
-        i = 1
-        for stat_var in statvars:
-            f_out.write(
-                statvar_template.format_map({
-                    'sv_index': i,
-                    'stat_var': stat_var,
-                    'year_col': stat_var + '_year',
-                    'geo_col': stat_var + '_geo'
-                }))
-            i += 1
+        f_out.write(statvar_template)
 
 
 def main():
     CLEANED_CSV = "demo_r_mlifexp_cleaned.csv"
-    statvars = []
-    # Get all the statvar names from the columns of csv files.
-    # Each statvar has three columns: sv, sv_geo, sv_year.
-    for col in pd.read_csv(CLEANED_CSV, nrows=0).columns:
-        if col[-4:] != '_geo' and col[-5:] != '_year':
-            statvars.append(col)
+    # Get all the unique statvar names from the 'SV' column.
+    try:
+        df = pd.read_csv(CLEANED_CSV)
+        statvars = sorted(list(df['SV'].unique()))
+    except Exception:
+        print(f"Error reading {CLEANED_CSV}. Please run preprocess.py first.")
+        return
+
     generate_statvar(statvars,
                      CLEANED_CSV.replace('_cleaned.csv', '_statvar.mcf'))
-    generate_tmcf(statvars, CLEANED_CSV.replace('_cleaned.csv', '.tmcf'))
+    generate_tmcf(CLEANED_CSV.replace('_cleaned.csv', '.tmcf'))
     return
 
 

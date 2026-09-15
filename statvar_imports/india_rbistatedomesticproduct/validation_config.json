@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that the latest date is the same for all StatVars.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Checks that the latest date does not regress below 2025-03.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "MaxDate >= '2025-03'"
+      }
+    }
+  ]
+}

@@ -28,8 +28,10 @@ class ImportValidationTest(unittest.TestCase):
         self.test_dir = tempfile.TemporaryDirectory()
         self.config_path = os.path.join(self.test_dir.name, 'config.json')
         self.stats_path = os.path.join(self.test_dir.name, 'stats.csv')
-        self.differ_path = os.path.join(self.test_dir.name, 'differ.csv')
+        self.differ_path = os.path.join(self.test_dir.name, 'differ_output')
         self.output_path = os.path.join(self.test_dir.name, 'output.csv')
+
+        os.makedirs(self.differ_path, exist_ok=True)
 
         # Find the project root using the canonical git command
         result = subprocess.run(['git', 'rev-parse', '--show-toplevel'],
@@ -38,8 +40,14 @@ class ImportValidationTest(unittest.TestCase):
                                 check=True)
         self.project_root = result.stdout.strip()
 
-        # Create an empty differ output file, as it is required
-        pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
+        # Create an empty differ summary, as it is required
+        with open(os.path.join(self.differ_path, 'differ_summary.json'),
+                  'w') as f:
+            json.dump({}, f)
+        # Create an empty mcf file
+        with open(os.path.join(self.differ_path, 'nodes-modified.mcf'),
+                  'w') as f:
+            f.write("")
         # Create a dummy stats file, as it is often required
         pd.DataFrame({
             'StatVar': ['sv1'],
@@ -69,7 +77,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -106,7 +114,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -138,7 +146,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script without the required --stats_summary flag
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--differ_output={self.differ_path}',
             f'--validation_output={self.output_path}'
@@ -179,7 +187,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 3. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -217,9 +225,14 @@ class ImportValidationTest(unittest.TestCase):
             'MaxValue': [99, 101]
         }).to_csv(self.stats_path, index=False)
 
+        # Write to the differ_output directory to ensure differ_df is populated
+        with open(os.path.join(self.differ_path, 'nodes-modified.mcf'),
+                  'w') as f:
+            f.write("Node: dcid:sv1\nvariableMeasured: sv1\n\n")
+
         # 3. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -256,12 +269,14 @@ class ImportValidationTest(unittest.TestCase):
                     }]
                 },
                 f)
-        # 2. Create a differ file with only headers
-        pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
+        # 2. Re-create an empty differ summary in the directory
+        with open(os.path.join(self.differ_path, 'differ_summary.json'),
+                  'w') as f:
+            json.dump({}, f)
 
         # 3. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -301,7 +316,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script without the --differ_output flag
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--validation_output={self.output_path}'

@@ -30,7 +30,6 @@ from absl import flags
 
 import sdmx
 from sdmx.model.internationalstring import InternationalString, DEFAULT_LOCALE
-from sdmx.model.common import FacetType, FacetValueType
 
 
 def _get_localized_string(obj: Optional[InternationalString]) -> str:
@@ -69,25 +68,14 @@ class CodelistDetails:
 
 
 @dataclass
-class FacetDetails:
-    """Represents a single Facet for non-enumerated representations."""
-    type: str  # Corresponds to sdmx.model.common.FacetType, e.g., 'string', 'integer'
-    value: Optional[str] = None
-    value_type: Optional[
-        str] = None  # Corresponds to sdmx.model.common.FacetValueType
-
-
-@dataclass
 class RepresentationDetails:
     """
     Describes the permissible values for a Dimension, Attribute, or Measure.
-    It can be either enumerated (using a Codelist) or non-enumerated (using Facets).
+    It can be either enumerated (using a Codelist) or non-enumerated.
     """
     type: Literal["enumerated", "non-enumerated"]
     codelist: Optional[
         CodelistDetails] = None  # Present if type is "enumerated"
-    facets: List[FacetDetails] = field(
-        default_factory=list)  # Present if type is "non-enumerated"
 
 
 @dataclass
@@ -221,7 +209,7 @@ def _get_concept_details(concept: Any) -> Optional[ConceptDetails]:
 
 def _get_representation_details(
         representation: Any) -> Optional[RepresentationDetails]:
-    """Extract details for a Representation object (enumerated or non-enumerated)."""
+    """Extract details for a Representation object."""
     if not representation:
         return None
 
@@ -251,26 +239,7 @@ def _get_representation_details(
             ),
         )
     elif representation.non_enumerated:
-        facets = []
-        try:
-            for facet in representation.non_enumerated:  # Representation.non_enumerated is a list of Facet objects
-                facets.append(
-                    FacetDetails(
-                        type=str(facet.type.name) if isinstance(
-                            facet.type, FacetType) else str(facet.type),
-                        value=str(facet.value)
-                        if facet.value is not None else None,
-                        value_type=str(facet.value_type.name) if isinstance(
-                            facet.value_type, FacetValueType) else str(
-                                facet.value_type),
-                    ))
-        except Exception as e:
-            logging.warning(f"Error processing facets: {e}")
-
-        return RepresentationDetails(
-            type="non-enumerated",
-            facets=facets,
-        )
+        return RepresentationDetails(type="non-enumerated")
 
     return None
 

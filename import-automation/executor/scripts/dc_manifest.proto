@@ -1,0 +1,362 @@
+syntax = "proto3";
+
+// protoc --proto_path=. --python_out=. dc_manifest.proto
+
+package datacommons.proto;
+
+message ExternalTable {
+  // Name of the table.
+  string table_name = 1 ;
+
+  // Path to the template MCF (previously called the "schema mapping file").
+  // TODO(shanth): Rename to template_mcf_path.
+  string mapping_path = 2;
+
+  // Path to one or more data CSV file patterns.
+  // NOTE: All files must be present in the same directory if DownloadConfig is
+  // specified.
+  // TODO(shanth): Change to csv_paths after textprotos in CNS have been updated
+  repeated string csv_path = 3;
+
+  // Ordered list of column names that the schema mapping file will refer to.
+  //
+  // NOTE: This need not match the raw CSV column names.
+  repeated string column_names = 4;
+
+  // Delimiter for CSV.
+  // NOTE: expected to be a single character.
+  string field_delim = 5 ;
+
+  // Download info for TMCF/CSV files.
+  DownloadConfig download_config = 6;
+}
+
+// Arguments relevant for the resolution of an import.
+message ResolutionInfo {
+  // Set if we need any DCID generation or resolution.
+  bool uses_id_resolver = 1;
+
+  // List of ID properties this dataset depends on for resolution.
+  repeated string requires_ids = 2;
+
+  // List of ID properties this dataset provides for downstream resolution.
+  repeated string provides_ids = 3;
+
+  // Info about new geos introduced by this dataset.
+  message GeoInfo {
+    // List the ID properties that DCIDs are based on.
+    repeated string dcid_sources = 1;
+  }
+
+  // REQUIRED: Must be set if new geos are introduced.
+  GeoInfo new_geo = 4;
+
+  // When "uses_id_resolver" is true, this indicates whether the resolution was
+  // done against the KG, and if so which type.
+  enum KGType {
+    KG_NONE = 0;
+    KG_BQ = 1;
+    KG_MCF = 2;
+  }
+
+  KGType kg_for_resolution = 5 ;
+
+  // There are scenarios where additional MCF nodes are necessary purely for
+  // resolution. Examples include StatVar MCFs for table flow and geo nodes
+  // used to resolve by other IDs (like wikidataId).
+  repeated string resolution_helper_mcf_paths = 6;
+
+  // This must be present if |automated_mcf_generation_by| is set and |table| is
+  // empty in DataCommonsManifest::Import. One exception is for the "resolved
+  // MCF --> cache" mode in the controller, in that case, this field is not
+  // needed.
+  repeated string unresolved_mcf_urls = 7;
+}
+
+// Configuration used to download files into CNS as the first step.
+message DownloadConfig {
+  // The src directory is expected to contain CSV/TMCF/MCF files with the exact
+  // names as those in DataCommonsManifest::Import.
+  //
+  // If DownloadConfig is specified for a CSV/TMCF import (i.e., in
+  // ExternalTable.download_config), then the CSV file is required and the TMCF
+  // file is optional.  If DownloadConfig is specified for a node MCF import
+  // (i.e., Import.mcf_download_config), then the source directory must contain
+  // all the files equivalent to "mcf_url".
+  //
+  // For example, suppose that the import specifies a TMCF path of
+  // /cns/path/to/file/data.tmcf, CSV path of /cns/path/to/file/data.csv and the
+  // "src_prefix_dir" is /bigstore/bucket/foo.  Then /bigstore/bucket/foo/
+  // should have files named data.csv (required) and data.tmcf (optional).
+  //
+  // As an MCF example, suppose the mcf_url is /cns/path/to/files/*.mcf and
+  // there are three resolved MCF files (1.mcf, 2.mcf, 3.mcf) that match the
+  // pattern. If "src_prefix_dir" is /bigstore/bucket/foo, then it must contain
+  // unresolved MCF files with those same names.
+  oneof prefix {
+    // Source prefix directory.
+    string src_prefix_dir = 1;
+
+    // Path to a file containing the latest version directory name.  If it is an
+    // absolute path, then it is used as the "src_prefix_dir".  If not, then
+    // "src_prefix_dir" is constructed as:
+    //        join(dirname(src_latest_version_file), <VERSION>)
+    string src_latest_version_file = 2;
+  }
+
+  message PathPair {
+    string src_file = 1;
+    string dst_file = 2;
+  }
+
+  message FileOp {
+    oneof op {
+      // Copy from src_file to dst_file.
+      PathPair cp = 1;
+
+      // Delete the given file.
+      string del = 2;
+    }
+  }
+
+  reserved 3, 4;
+}
+
+// Configuration used in selecting nodes for golden triples generation.
+message GoldenTripleSelection {
+  // For specified number of svObs nodes, pick one into golden triples.
+  int32 svobs_nodes_pick_one_in = 3 ;
+
+  reserved 1, 2;
+}
+
+// A manifest is a collection of imports each having a name, provenance URL,
+// provenance description, and list of CNS path patterns or external table info.
+message DataCommonsManifest {
+  // Categories of imports.
+  // LINT.IfChange
+  enum ImportCategory {
+    IMPORT_CATEGORY_UNKNOWN = 0;
+
+    // Import with Graph Schema nodes.
+    SCHEMA = 1;
+
+    // Import with place nodes.
+    PLACE = 2;
+
+    // Import with StatVar nodes having curated DCIDs.
+    CURATED_STATVAR = 3;
+
+    // Import with StatVar nodes having auto-generated DCIDs.
+    GENERATED_STATVAR = 4;
+
+    // Aggregated stats.
+    AGGREGATED_STATS = 7;
+
+    // Stats, which contain observations.
+    STATS = 8;
+
+    // Import with entity nodes that are not Schema/StatVars, observations or
+    // places.
+    ENTITY = 9;
+
+    // Imputed stats.
+    IMPUTED_STATS = 10;
+
+    // Intermediate stats that are used as inputs to derived graph computations,
+    // but are not built into cache.
+    // This could be either a direct import from source, or some kind of
+    // aggregation that doesn't get built into cache.
+    INTERMEDIATE_STATS = 11;
+
+    // Schema import from custom DC.
+    CUSTOM_SCHEMA = 12;
+
+    reserved 5, 6;
+  }
+  // LINT.ThenChange(//depot/google3/datacommons/import/mcf_vocab.h)
+
+  // Next ID: 32.
+  message Import {
+    string import_name = 1;
+    string provenance_url = 2;
+    string provenance_description = 6;
+    ImportCategory category = 20;
+
+    // The list of Import Groups that this import is part of. Must refer to a
+    // valid ImportGroup.name. If empty, then this import is part of all groups.
+    repeated string import_groups = 23;
+
+    // When input is node MCF, "mcf_url" is set.
+    repeated string mcf_url = 3;
+
+    // The URL of the optimized MCF in proto (TFRecord) format.
+    repeated string mcf_proto_url = 25;
+
+    // GCS path prefix for resolved MCFs.
+    string mcf_gcs_path_prefix = 31;
+
+    // In cases like Core Geo MCFs, the MCFs are versioned in piper but that
+    // version is not directly accessed by the binary (owing to memory
+    // limitations). Instead, we keep a copy of these files in CNS and provide
+    // that path in "mcf_url". Set this bool to true to mark that situation.
+    //
+    // If set, there exist tests (manifest_checker_test.cc) to ensure the MCFs
+    // are in sync and tooling (sync_replicated_mcfs.cc) to update the CNS copy.
+    bool is_mcf_replicated_from_piper = 18;
+
+    // When input comes from TMCF/CSV, this is set.
+    repeated ExternalTable table = 4;
+    string curator_email = 5 ;
+
+    // Information about resolution.
+    ResolutionInfo resolution_info = 9;
+
+    // Dates associated with stats.  All dates are in ISO8601 format.
+    //
+    // NOTE: For datasets that are released more frequently than a month, please
+    // skip |end_date_in_kg|, |end_date_in_source| and |next_release_date|.
+    //
+    // Earliest value of observationDate in the KG.
+    string start_date_in_kg = 10;
+
+    // Latest value of observationDate in the KG.
+    string end_date_in_kg = 11;
+
+    // Latest value of observationDate that is available at the source.
+    // If end_date_in_kg < end_date_in_source, the dataset needs refresh.
+    string end_date_in_source = 21;
+
+    // Data Release Schedule
+    //
+    // Release frequency of the import source.
+    string release_frequency = 12;
+
+    // Next date when the data source will be released. If this date is in the
+    // past, the dataset needs refresh.
+    string next_release_date = 13;
+
+    // The URLs from where the data can be accessed/downloaded.
+    repeated string data_download_url = 15;
+
+    // As part of which import-group do we regenerate the MCFs?
+    //
+    // The branch controllers can convert table to MCF or resolve MCF if this
+    // field is set to the appropriate import group. Not setting this field
+    // disables any such work, instead the resolved MCF (in "mcf_url") is used
+    // as is.
+    string automated_mcf_generation_by = 24;
+
+    // Configuration for generating golden triples.
+    GoldenTripleSelection golden_triple_selection = 14;
+
+    // Whether unresolved MCFs are missing.
+    // These are all cases that the resolved MCFs are PopObs instead of SVObs.
+    // For SVObs, the Flume pipeline will generate unresolved MCFs from CSV+TMCF
+    // automatically.
+    bool is_unresolved_mcf_missing = 22 ;
+
+    // Indicates which MCF files to copy from GCS or other source before
+    // resolving.
+    // REQUIRES: this is an MCF-only import with table being empty.
+    DownloadConfig mcf_download_config = 17;
+
+    // DatasetInfo that this import corresponds to. Must refer to a valid
+    // DatasetInfo.name.
+    string dataset_name = 26;
+
+    // Metadata files that contain curated resolved MCF for the import. These
+    // MCFs provide a way for extending Provenance, Dataset and Source nodes
+    // with new properties, without requiring any manifest proto and pipeline
+    // changes.
+    repeated string metadata_mcf_url = 30;
+
+    reserved 7, 8, 16, 19, 27, 28, 29;
+  }
+
+  repeated Import import = 1;
+
+  // Import Group is a collection of imports that are built together into a
+  // single cache for serving.
+  message ImportGroup {
+    // Name of the import group.
+    string name = 1;
+
+    // Description.
+    string description = 2;
+    bool is_custom_dc = 5 ;
+
+    reserved 3, 4;
+  }
+
+  repeated ImportGroup import_groups = 2;
+
+  // Represents a dataset from which one or more imports come from. This is used
+  // to display on the Data Sources page
+  // (https://docs.datacommons.org/datasets/).
+  message DatasetInfo {
+    // Name of dataset
+    string name = 1;
+
+    // Url of dataset to link to
+    string url = 2;
+
+    // Markdown description of data source
+    oneof description {
+      // Inline markdown string containing description
+      string description_md = 3;
+
+      // Name of markdown file containing description, if used instead of [3]
+      string description_file = 4;
+    }
+
+    // Verticals that should include this data source
+    repeated string verticals = 5;
+  }
+
+  // Represents a source which contains zero or more datasets. For sources with
+  // zero distinct child datasets (i.e. the source directly corresponds to a
+  // dataset), the dataset details will be contained in the source. This is used
+  // to display on the Data Sources page
+  // (https://docs.datacommons.org/datasets/).
+  message DatasetSource {
+    // Name of source
+    string name = 1;
+
+    // Url of source to link to
+    string url = 2;
+
+    // Markdown description of source
+    string header_md = 3;
+
+    // Markdown description of any terms of service
+    string footer_md = 4;
+
+    // Datasets associated with this source
+    repeated DatasetInfo datasets = 5;
+  }
+
+  repeated DatasetSource dataset_source = 4;
+
+  // Paths to curated import MCF. These MCFs provide a way for extending
+  // Provenance, Dataset and Source nodes with new properties, without requiring
+  // any manifest proto and pipeline changes, as well as source-specific
+  // metadata about StatisticalVariables.
+  repeated string import_metadata_mcf = 5;
+
+  reserved 3;
+}
+
+// A snapshot of files in a single import. Each file has length and mtime, that
+// act as cheap alternatives to a full content checksum. This snapshot gets
+// programmatically generated and validated.
+message ImportSnapshot {
+  message FileStat {
+    string path = 1;
+    int64 length = 2;
+    double mtime_secs = 3;
+  }
+
+  string import_name = 1;
+  repeated FileStat stat = 2;
+}
