@@ -9,7 +9,7 @@
       "provenance_description": "Treasury CDFI Fund - Persistent Poverty Counties.",
       "scripts": [
         "python3 process_poverty.py",
-        "../../tools/statvar_importer/stat_var_processor.py --input_data=output/Poverty_cleaned.csv --pv_map=Povertypvmap.csv --config_file=Povertymetadata.csv --output_path=output/Poverty_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/Poverty_counters.csv"
+        "python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=output/Poverty_cleaned.csv --pv_map=poverty_pvmap.csv --config_file=poverty_metadata.csv --output_path=output/Poverty_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/Poverty_counters.csv"
       ],
       "import_inputs": [
         {
@@ -24,8 +24,8 @@
         "output/Poverty_original.csv",
         "counters/Poverty_counters.csv",
         "validation_config.json",
-        "Povertymetadata.csv",
-        "Povertypvmap.csv",
+        "poverty_metadata.csv",
+        "poverty_pvmap.csv",
         "manifest.json"
       ]
     }

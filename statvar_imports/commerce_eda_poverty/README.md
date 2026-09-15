@@ -5,11 +5,10 @@ Date: *September 2026*
 
 | Parameter | Details |
 | :--- | :--- |
-| Import Type | **Semi-Automated** |
 | Link to dataset preview or raw data | [Treasury CDFI Geographic Reports](https://www.cdfifund.gov/documents/geographic-reports) / [EDA PPCs](https://www.eda.gov/performance/disclaimers) |
 | Place types covered | U.S. Counties and County Equivalents (`County`) |
 | Place ID resolution | `country/USA` county FIPS (`geoId/XXXXX`) |
-| Date range covered | 1990, 2000, 2021 (1990 Decennial Census, 2000 Decennial Census, 2021 Census SAIPE / ACS) |
+| Date range covered | 1990, 2000, 2020, 2021 (1990 Decennial Census SF3, 2000 Decennial Census SF3, 2020 Decennial Census for Island Areas, 2021 SAIPE / ACS) |
 | Statistical Variables | `Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person` |
 | Unit / Scaling | `Percent` / `100` |
 | Refresh Cycle | Periodic / Decadal (aligned with EDA/Census benchmark releases) |
@@ -19,16 +18,13 @@ Date: *September 2026*
 
 ## Overview
 
-This dataset import contains historical and recent county-level poverty percentage rates compiled
-by the U.S. Economic Development Administration (EDA) and Treasury CDFI Fund for evaluating
-Persistent Poverty County (PPC) status. The dataset benchmarks county poverty rates across three
-official periods:
-- **1990**: 1990 Decennial Census
-- **2000**: 2000 Decennial Census
-- **2021**: 2021 Small Area Income and Poverty Estimates (SAIPE) / American Community Survey (ACS 5-Year)
+This dataset import contains historical and recent county-level poverty percentage rates compiled by the U.S. Economic Development Administration (EDA) and Treasury CDFI Fund for evaluating Persistent Poverty County (PPC) status. The dataset benchmarks county poverty rates across official periods:
+- **1990**: 1990 Decennial Census SF3
+- **2000**: 2000 Decennial Census SF3
+- **2020**: 2020 Decennial Census for Island Areas (American Samoa, Guam, Northern Mariana Islands, US Virgin Islands)
+- **2021**: 2021 SAIPE (50 US States + DC) / 2017–2021 ACS 5-Year (Puerto Rico)
 
-The dataset covers all 3,232 U.S. counties and island territories with valid 5-digit FIPS codes
-(`01` through `56`, `60`, `66`, `69`, `72`, `78`).
+The dataset covers all ~3,143 U.S. counties and island territories with valid 5-digit FIPS codes (`01` through `56`, `60`, `66`, `69`, `72`, `78`).
 
 ---
 
@@ -47,72 +43,74 @@ povertyStatus: dcid:BelowPovertyLevelInThePast12Months
 
 ---
 
+## Working Directory Context
+
+Commands in this workflow depend on the working directory:
+- **Module directory (`statvar_imports/commerce_eda_poverty/`)**: Execute preprocessing and pipeline scripts (`process_poverty.py`, `stat_var_processor.py`).
+- **Repository root (`data/`)**: Execute validation runner, test scripts (`./run_tests.sh`), and unittest module invocations.
+
+---
+
 ## Pipeline Execution
 
 ### Prerequisites
-
-1. **Python Dependencies:**
-   ```bash
-   pip install pandas absl-py duckdb
-   ```
-
-2. **Google Cloud Authentication:**
-   Access to `gs://unresolved_mcf/` requires application-default credentials:
-   ```bash
-   gcloud auth application-default login
-   ```
+Ensure python dependencies are available:
+```bash
+pip install pandas absl-py duckdb
+```
 
 ### 1. Preprocess Raw Dataset (`process_poverty.py`)
-
-Downloads `Poverty.csv` from GCS (`gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`) with
-retry/backoff, dynamically parses the recent estimate year, standardizes FIPS codes with state
-prefix validation, enforces value bounds $[0.0, 100.0]$, reshapes observations to long format
-(`GEOID`, `observationDate`, `poverty_rate`), and atomically outputs `output/Poverty_cleaned.csv`:
+Run from `statvar_imports/commerce_eda_poverty/`. Downloads `Poverty.csv` from GCS (`gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`), cleans and normalizes headers, standardizes FIPS codes with state prefix validation, enforces value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
 ```bash
+cd statvar_imports/commerce_eda_poverty
 python3 process_poverty.py
 ```
 
 ### 2. Generate Data Commons Observations (`stat_var_processor.py`)
-
-Runs the Data Commons StatVar processor to generate cleaned observations and template MCF:
+Run from `statvar_imports/commerce_eda_poverty/`. Matches the scripts configured in `manifest.json`:
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=output/Poverty_cleaned.csv \
-  --pv_map=Povertypvmap.csv \
-  --config_file=Povertymetadata.csv \
+  --pv_map=poverty_pvmap.csv \
+  --config_file=poverty_metadata.csv \
   --output_path=output/Poverty_output \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_counters=counters/Poverty_counters.csv
 ```
 
-### 3. Unit Tests
+---
 
-Run the hermetic test suite:
+## Validation
+
+Validate generated outputs using the Import Validation Framework and `validation_config.json`. Run from the repository root `data/`:
 ```bash
-python3 -m unittest statvar_imports.commerce_eda_poverty.process_poverty_test
+python3 -m tools.import_validation.runner \
+  --validation_config=statvar_imports/commerce_eda_poverty/validation_config.json \
+  --stats_summary=statvar_imports/commerce_eda_poverty/dc_generated/summary_report.csv \
+  --differ_output=statvar_imports/commerce_eda_poverty/dc_generated/summary_report.csv \
+  --lint_report=statvar_imports/commerce_eda_poverty/dc_generated/report.json \
+  --validation_output=statvar_imports/commerce_eda_poverty/dc_generated/validation_report.json
 ```
 
 ---
 
-## Validation Configuration
+## Testing
 
-Validation rules in `validation_config.json`:
-- `check_percent_min_value`: Asserts poverty rate $\ge 0\%$.
-- `check_percent_max_value`: Asserts poverty rate $\le 100\%$.
-- `check_num_places_county_count`: Verifies county coverage (3,100 to 3,250 counties; 3,232 observed).
-- `check_date_span_sql`: Asserts time series spans from 1990 through at least 2021.
-- `check_missing_refs_count`: Ensures 0 unresolvable node/property references.
-- `check_lint_error_count`: Ensures 0 syntax/lint errors in outputs.
-- `check_deleted_records_percent`: Threshold set to `0.1` (0.1%), allowing for rare FIPS boundary
-  re-organizations (such as Connecticut planning regions or Alaska census areas) while flagging
-  unexpected historical data drops.
+Run unit tests verifying GEOID standardization, out-of-bounds sanitation, and pipeline processing from the repository root `data/`:
+```bash
+python3 -m unittest statvar_imports.commerce_eda_poverty.process_poverty_test
+```
+Or via the test runner script:
+```bash
+./run_tests.sh -p statvar_imports/commerce_eda_poverty
+```
 
 ---
 
-## Future Updates & Maintenance
+## Maintenance & Upstream Refresh Workflow
 
-1. When Treasury CDFI / EDA publishes an updated PPC dataset, download the latest Excel/CSV from
-   [Treasury CDFI Geographic Reports](https://www.cdfifund.gov/documents/geographic-reports).
-2. Upload the new source file to `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`.
-3. `process_poverty.py` dynamically extracts the latest observation year from the source header
-   and column metadata, so no code changes are required for new release years.
+The preprocessing script downloads from `gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`. When a new PPC benchmark or update is released by EDA or Treasury CDFI:
+1. **Upload source file**: Upload the updated upstream file to GCS (`gs://unresolved_mcf/us_eda/latest/input_files/Poverty.csv`).
+2. **Preprocess data**: In `statvar_imports/commerce_eda_poverty/`, run `python3 process_poverty.py` to verify schema and row count sanity thresholds ($\ge 3,000$ counties).
+3. **Generate observations**: Run `stat_var_processor.py` and verify zero errors in `counters/Poverty_counters.csv`.
+4. **Validate & Test**: From the repository root `data/`, run the import validation runner and unit tests to ensure all thresholds and validation rules pass.
