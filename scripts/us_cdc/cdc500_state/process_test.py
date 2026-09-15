@@ -49,6 +49,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
         self.assertIn(
             "AND (LENGTH(O.entity1) = 13 OR O.entity1 = 'geoId/15003')", query)
+        self.assertIn("COUNTIF(LENGTH(observation_about) = 13) OVER", query)
         self.assertIn("REGEXP_CONTAINS", query)
         self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
         self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)
@@ -65,6 +66,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn(
             "SUM(SAFE_CAST(c.population AS FLOAT64) * "
             "SAFE_CAST(p.percent AS FLOAT64))", query)
+        self.assertNotIn("p.pop_statvar AS population_statvar", query)
 
     def test_demographic_cohort_regex_mapping(self):
         """Verifies that representative StatVars match the intended demographic regex rules."""
@@ -141,7 +143,6 @@ class CDC500StateProcessTest(unittest.TestCase):
             'observation_about': ['geoId/06'],
             'observation_date': ['2022'],
             'measurement_method': ['dcAggregate/CrudePrevalence'],
-            'population_statvar': ['Count_Person_18OrMoreYears'],
             'percent': [29.6479]
         })
         mock_client.query.return_value.to_dataframe.return_value = sample_data
@@ -163,7 +164,8 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client.query.return_value.to_dataframe.return_value = pd.DataFrame()
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaises(RuntimeError):
+            with self.assertRaisesRegex(RuntimeError,
+                                        "BigQuery query returned 0 rows"):
                 process.run_process(mock_client, output_file)
 
     def test_run_process_query_error(self):
@@ -172,7 +174,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client.query.side_effect = RuntimeError("BigQuery Access Denied")
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaises(RuntimeError):
+            with self.assertRaisesRegex(RuntimeError, "BigQuery Access Denied"):
                 process.run_process(mock_client, output_file)
 
     def test_run_process_dataframe_error(self):
@@ -184,13 +186,15 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client.query.return_value = mock_query_job
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaises(RuntimeError):
+            with self.assertRaisesRegex(RuntimeError,
+                                        "Failed to fetch dataframe"):
                 process.run_process(mock_client, output_file)
 
     def test_run_process_empty_output_file_raises_runtime_error(self):
         """Tests that creating an empty (0-byte) output file raises RuntimeError."""
         mock_client = mock.MagicMock()
         mock_df = mock.MagicMock()
+        mock_df.empty = False
         mock_df.__len__.return_value = 1
 
         def fake_to_csv(filepath, index=False):
@@ -202,7 +206,9 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client.query.return_value.to_dataframe.return_value = mock_df
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaises(RuntimeError):
+            with self.assertRaisesRegex(
+                    RuntimeError,
+                    "was created empty or missing"):
                 process.run_process(mock_client, output_file)
             self.assertFalse(os.path.exists(output_file))
             self.assertFalse(os.path.exists(output_file + '.tmp'))

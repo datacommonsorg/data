@@ -17,9 +17,9 @@
                 }
             ],
             "resource_limits": {
-                "cpu": 8,
-                "memory": 64,
-                "disk": 100
+                "cpu": 2,
+                "memory": 8,
+                "disk": 20
             },
             "source_files": [
                 "CDC500State_Output/CDC500State_Output.csv",

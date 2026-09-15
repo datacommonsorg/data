@@ -58,7 +58,7 @@ WITH cdc_sv AS (
   GROUP BY cdc500, pop_statvar
 ),
 
-svo_percent AS (
+svo_percent_dedup AS (
   SELECT
     O.variable_measured AS statvar,
     O.entity1 AS observation_about,
@@ -82,6 +82,28 @@ svo_percent AS (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
   ) = 1
+),
+
+svo_percent AS (
+  SELECT
+    statvar,
+    observation_about,
+    observation_date,
+    percent,
+    measurement_method,
+    pop_statvar
+  FROM svo_percent_dedup
+  QUALIFY LENGTH(observation_about) = 13
+    OR (
+      observation_about = 'geoId/15003'
+      AND COUNTIF(LENGTH(observation_about) = 13) OVER (
+        PARTITION BY
+          statvar,
+          SUBSTR(observation_about, 1, 8),
+          observation_date,
+          measurement_method
+      ) = 0
+    )
 ),
 
 svo_count AS (
@@ -116,7 +138,6 @@ SELECT
   COALESCE(
     CONCAT('dcAggregate/', p.measurement_method), 'dcAggregate'
   ) AS measurement_method,
-  p.pop_statvar AS population_statvar,
   SAFE_DIVIDE(
     SUM(SAFE_CAST(c.population AS FLOAT64) * SAFE_CAST(p.percent AS FLOAT64)),
     SUM(SAFE_CAST(c.population AS FLOAT64))
@@ -126,7 +147,7 @@ INNER JOIN svo_count AS c
   ON p.observation_about = c.observation_about
   AND p.observation_date = c.observation_date
   AND p.pop_statvar = c.population_statvar
-GROUP BY 1, 2, 3, 4, 5
+GROUP BY 1, 2, 3, 4
 """
 
 
@@ -140,6 +161,7 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
     df = query_job.to_dataframe()
 
     if df.empty:
+        logging.error("BigQuery query returned 0 rows.")
         raise RuntimeError("BigQuery query returned 0 rows.")
 
     output_dir = os.path.dirname(output_file)
@@ -150,7 +172,10 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
     try:
         df.to_csv(temp_file, index=False)
         if not os.path.exists(temp_file) or os.path.getsize(temp_file) == 0:
-            raise RuntimeError(f"Output file {temp_file} was created empty or missing.")
+            logging.error("Output file %s was created empty or missing.",
+                          temp_file)
+            raise RuntimeError(
+                f"Output file {temp_file} was created empty or missing.")
         os.replace(temp_file, output_file)
     finally:
         if os.path.exists(temp_file):
