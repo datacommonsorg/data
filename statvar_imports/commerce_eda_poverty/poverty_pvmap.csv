@@ -1,6 +1,6 @@
-key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
-GEOID,observationAbout,geoId/{Data},measuredProperty,count,statType,measuredValue,populationType,Person,,,,,,
-poverty_rate_1990,observationDate,1990,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus
-poverty_rate_2000,observationDate,2000,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus
-poverty_rate_2020,observationDate,2020,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus
-poverty_rate_2021,observationDate,2021,unit,Percent,scalingFactor,100,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4
+GEOID,observationAbout,geoId/{Data},,,,,,,,
+poverty_rate_1990,observationDate,1990,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+poverty_rate_2000,observationDate,2000,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+poverty_rate_2020,observationDate,2020,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+poverty_rate_2021,observationDate,2021,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person

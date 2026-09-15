@@ -39,6 +39,11 @@ class TestProcessPoverty(unittest.TestCase):
         self.assertEqual(clean_geoid(1001.0), "01001")
         self.assertEqual(clean_geoid(2090), "02090")
 
+        # State summary FIPS ending in 000 must return None
+        self.assertIsNone(clean_geoid("01000"))
+        self.assertIsNone(clean_geoid("1000"))
+        self.assertIsNone(clean_geoid("72000"))
+
         # Invalid cases returning None
         self.assertIsNone(clean_geoid("1001.5"))
         self.assertIsNone(clean_geoid("-1001.0"))
@@ -61,25 +66,45 @@ class TestProcessPoverty(unittest.TestCase):
                     f.write("content\n")
 
             mock_file_copy.side_effect = fake_copy
-            download_from_gcs(dst_path=dst)
+            download_from_gcs(dst_path=dst, backoff_factor=0)
             mock_file_copy.assert_called_once_with(GCS_SOURCE_URI, dst)
             self.assertTrue(os.path.exists(dst))
             self.assertGreater(os.path.getsize(dst), 0)
+
+    @mock.patch("util.file_util.file_copy")
+    def test_download_from_gcs_retry_then_succeed(self, mock_file_copy):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst = os.path.join(tmpdir, "output.csv")
+            attempts = [0]
+
+            def flaky_copy(src, dst_path):
+                attempts[0] += 1
+                if attempts[0] < 3:
+                    raise IOError("Transient network blip")
+                with open(dst_path, "w") as f:
+                    f.write("content\n")
+
+            mock_file_copy.side_effect = flaky_copy
+            download_from_gcs(dst_path=dst, max_retries=3, backoff_factor=0)
+            self.assertEqual(mock_file_copy.call_count, 3)
+            self.assertTrue(os.path.exists(dst))
 
     @mock.patch("util.file_util.file_copy")
     def test_download_from_gcs_failure(self, mock_file_copy):
         with tempfile.TemporaryDirectory() as tmpdir:
             dst = os.path.join(tmpdir, "output.csv")
 
-            # Failure case 1: file_copy raises exception
+            # Failure case 1: file_copy raises exception on all retries
             mock_file_copy.side_effect = IOError("Download failed")
             with self.assertRaises(RuntimeError):
-                download_from_gcs(dst_path=dst)
+                download_from_gcs(dst_path=dst, max_retries=3, backoff_factor=0)
+            self.assertEqual(mock_file_copy.call_count, 3)
 
             # Failure case 2: file_copy succeeds but destination file not created
+            mock_file_copy.reset_mock()
             mock_file_copy.side_effect = None
             with self.assertRaises(RuntimeError):
-                download_from_gcs(dst_path=dst)
+                download_from_gcs(dst_path=dst, max_retries=2, backoff_factor=0)
 
             # Failure case 3: destination file is empty (0 bytes)
             def fake_empty_copy(src, dst_path):
@@ -88,7 +113,7 @@ class TestProcessPoverty(unittest.TestCase):
 
             mock_file_copy.side_effect = fake_empty_copy
             with self.assertRaises(RuntimeError):
-                download_from_gcs(dst_path=dst)
+                download_from_gcs(dst_path=dst, max_retries=2, backoff_factor=0)
 
     def test_preprocess_poverty_missing_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -106,6 +131,18 @@ class TestProcessPoverty(unittest.TestCase):
             with self.assertRaises(ValueError):
                 preprocess_poverty(src_path=empty_path, dst_path=dst_path)
 
+    def test_preprocess_poverty_header_only_empty(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            header_only = os.path.join(tmpdir, "header_only.csv")
+            with open(header_only, "w") as f:
+                f.write(
+                    "Header 1\nHeader 2\n"
+                    'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty*"\n'
+                )
+            dst_path = os.path.join(tmpdir, "output.csv")
+            with self.assertRaises(ValueError):
+                preprocess_poverty(src_path=header_only, dst_path=dst_path)
+
     def test_preprocess_poverty_missing_columns(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             bad_csv = os.path.join(tmpdir, "bad.csv")
@@ -114,6 +151,19 @@ class TestProcessPoverty(unittest.TestCase):
             dst_path = os.path.join(tmpdir, "output.csv")
             with self.assertRaises(ValueError):
                 preprocess_poverty(src_path=bad_csv, dst_path=dst_path)
+
+    def test_preprocess_poverty_unexpected_survey_year(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            future_csv = os.path.join(tmpdir, "future.csv")
+            with open(future_csv, "w") as f:
+                f.write(
+                    "Header 1\nHeader 2\n"
+                    'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty*","Data Source―Most Recent Estimate"\n'
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2023"\n'
+                )
+            dst_path = os.path.join(tmpdir, "output.csv")
+            with self.assertRaises(ValueError):
+                preprocess_poverty(src_path=future_csv, dst_path=dst_path, min_county_count=1)
 
     def test_preprocess_poverty_min_county_count_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -161,6 +211,7 @@ class TestProcessPoverty(unittest.TestCase):
                 "Header 2\n"
                 'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty* "\n'
                 '"Autauga County, AL",01001,15.7,10.9,13.3\n'
+                '"Alabama State Summary",01000,18.0,16.0,15.0\n'
                 '"Yukon-Koyukuk, AK",2090,7.6,7.8,9.6\n'
                 '"Eastern District, AS",60010,25.0,28.0,30.0\n'
                 '"Barbour County, AL",01005.0,25.2,26.8,29.0\n'

@@ -87,7 +87,7 @@ Validate generated outputs using the Import Validation Framework and `validation
 python3 -m tools.import_validation.runner \
   --validation_config=statvar_imports/commerce_eda_poverty/validation_config.json \
   --stats_summary=statvar_imports/commerce_eda_poverty/dc_generated/summary_report.csv \
-  --differ_output=statvar_imports/commerce_eda_poverty/dc_generated/summary_report.csv \
+  --differ_output=statvar_imports/commerce_eda_poverty/dc_generated \
   --lint_report=statvar_imports/commerce_eda_poverty/dc_generated/report.json \
   --validation_output=statvar_imports/commerce_eda_poverty/dc_generated/validation_report.json
 ```

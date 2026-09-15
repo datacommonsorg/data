@@ -7,9 +7,10 @@
       ],
       "provenance_url": "https://www.cdfifund.gov/documents/geographic-reports",
       "provenance_description": "Treasury CDFI Fund - Persistent Poverty Counties.",
+      "cron_schedule": "30 05 * * 1",
       "scripts": [
-        "python3 process_poverty.py",
-        "python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=output/Poverty_cleaned.csv --pv_map=poverty_pvmap.csv --config_file=poverty_metadata.csv --output_path=output/Poverty_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/Poverty_counters.csv"
+        "process_poverty.py",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=output/Poverty_cleaned.csv --pv_map=poverty_pvmap.csv --config_file=poverty_metadata.csv --output_path=output/Poverty_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/Poverty_counters.csv"
       ],
       "import_inputs": [
         {
@@ -20,6 +21,7 @@
       ],
       "validation_config_file": "validation_config.json",
       "source_files": [
+        "process_poverty.py",
         "output/Poverty_cleaned.csv",
         "output/Poverty_original.csv",
         "counters/Poverty_counters.csv",
