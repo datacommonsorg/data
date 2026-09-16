@@ -1,0 +1,578 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/kuru/DC_July092024/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/OECD_MaterialsAndEnergyResources_data.csv --pv_map=/usr/local/google/home/kuru/DC_July092024/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/OECD_MaterialsAndEnergyResources_pvmap.csv --config=/usr/local/google/home/kuru/DC_July092024/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/OECD_MaterialsAndEnergyResources_metadata.csv --output_path=/usr/local/google/home/kuru/DC_July092024/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_output/OECD_MaterialsAndEnergyResources" on 2024-07-10 06:59:12.819136
+
+Node: dcid:ClosingStocks_Stocks_Fuel_BrownCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+fuelType: dcid:BrownCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Fuel_HardCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+fuelType: dcid:HardCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:ClosingStocks_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:ClosingStocks
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Fuel_BrownCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+fuelType: dcid:BrownCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Fuel_HardCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+fuelType: dcid:HardCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Discrepancies_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Discrepancies
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:DownwardReappraisals_Stocks_Fuel_BrownCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:DownwardReappraisals
+statType: dcid:measuredValue
+fuelType: dcid:BrownCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:DownwardReappraisals_Stocks_Fuel_HardCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:DownwardReappraisals
+statType: dcid:measuredValue
+fuelType: dcid:HardCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:DownwardReappraisals_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:DownwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:DownwardReappraisals_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:DownwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:DownwardReappraisals_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:DownwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:DownwardReappraisals_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:DownwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Fuel_BrownCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+fuelType: dcid:BrownCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Fuel_HardCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+fuelType: dcid:HardCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:Extractions_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:Extractions
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Fuel_BrownCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+fuelType: dcid:BrownCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Fuel_HardCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+fuelType: dcid:HardCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:OpeningStocks_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:OpeningStocks
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalAdditionsToStock_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalAdditionsToStock
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Fuel_BrownCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+fuelType: dcid:BrownCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Fuel_HardCoal_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+fuelType: dcid:HardCoal
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:TotalReductionsInStock_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:TotalReductionsInStock
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Fuel_CrudeOil_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+fuelType: dcid:CrudeOil
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Fuel_NaturalGas_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Fuel
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+fuelType: dcid:NaturalGas
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Metal_Copper_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Copper
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Metal_Iron_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Iron
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Metal_Lead_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Lead
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Metal_Nickel_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:Nickel
+resourceType: dcid:CommerciallyRecoverableResources
+
+Node: dcid:UpwardReappraisals_Stocks_Metal_ZincElement_CommerciallyRecoverableResources
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Metal
+measuredProperty: dcid:stocks
+measurementQualifier: dcid:UpwardReappraisals
+statType: dcid:measuredValue
+metalType: dcid:ZincElement
+resourceType: dcid:CommerciallyRecoverableResources
+
