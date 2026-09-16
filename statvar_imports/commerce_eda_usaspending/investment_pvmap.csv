@@ -127,8 +127,8 @@ Regional Innovation Strategies,investmentProgram,RegionalInnovationStrategies
 Technical Assistance,investmentProgram,TechnicalAssistance
 Research and National Technical Assistance,investmentProgram,ResearchNationalTechnicalAssistance
 Trade Adjustment Assistance for Firms,investmentProgram,TradeAdjustmentAssistance
-Regional Technology and Innovation Hubs,investmentProgram,RegionalTechnologyAndInnovationHubs
-Distressed Area Recompete Pilot Program,investmentProgram,DistressedAreaRecompetePilotProgram
-Good Jobs Challenge,investmentProgram,GoodJobsChallenge
-STEM Talent Challenge,investmentProgram,STEMTalentChallenge
+Regional Technology and Innovation Hubs,investmentProgram,RegionalTechnologyAndInnovationHubs,name,"""Amount of Investment: Regional Technology and Innovation Hubs"""
+Distressed Area Recompete Pilot Program,investmentProgram,DistressedAreaRecompetePilotProgram,name,"""Amount of Investment: Distressed Area Recompete Pilot Program"""
+Good Jobs Challenge,investmentProgram,GoodJobsChallenge,name,"""Amount of Investment: Good Jobs Challenge"""
+STEM Talent Challenge,investmentProgram,STEMTalentChallenge,name,"""Amount of Investment: STEM Talent Challenge"""
 Total,investmentProgram,
