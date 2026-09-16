@@ -1,0 +1,164 @@
+Node: E:test_enrolment->E0
+typeOf: dcs:Country
+isoCode: C:test_enrolment->Country Code
+
+Node: E:test_enrolment->E1
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2000
+observationDate: "2000"
+variableMeasured: dcid:Count_Student_EnrolledInSchool_PrimaryEducation
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E2
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2001
+observationDate: "2001"
+variableMeasured: dcid:Count_Student_Female_PrimaryEducation
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E3
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2002
+observationDate: "2002"
+variableMeasured: dcid:Count_Student_Male_PrimaryEducation
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E4
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2003
+observationDate: "2003"
+variableMeasured: dcid:Count_Student_EnrolledInSchool_SecondaryEducation
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E5
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2004
+observationDate: "2004"
+variableMeasured: dcid:Count_Student_Female_PrimaryEducation
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E6
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2005
+observationDate: "2005"
+variableMeasured: dcid:Count_Student_Male_SecondaryEducation
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E7
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2006
+observationDate: "2006"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E8
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2007
+observationDate: "2007"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E9
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2008
+observationDate: "2008"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E10
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2009
+observationDate: "2009"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E11
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2010
+observationDate: "2010"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E12
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2011
+observationDate: "2011"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E13
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2012
+observationDate: "2012"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E14
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2013
+observationDate: "2013"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E15
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2014
+observationDate: "2014"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E16
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2015
+observationDate: "2015"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E17
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2016
+observationDate: "2016"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E18
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2017
+observationDate: "2017"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E19
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2018
+observationDate: "2018"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E20
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2019
+observationDate: "2019"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E21
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2020
+observationDate: "2020"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E22
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2021
+observationDate: "2021"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
+
+Node: E:test_enrolment->E23
+typeOf: dcs:StatVarObservation
+value: C:test_enrolment->2022
+observationDate: "2022"
+variableMeasured: C:test_enrolment->Series Name
+observationAbout: E:test_enrolment->E0
