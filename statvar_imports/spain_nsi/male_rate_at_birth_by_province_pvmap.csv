@@ -1,0 +1,5 @@
+key,prop,value,,,,,,,,,,,,,,,,
+Provinces,observationAbout,{Data},measuredProperty,count,populationType,BirthEvent,statType,measuredValue,gender,Male,measurementDenominator,Count_BirthEvent_Female,observationPeriod,P1Y,scalingFactor,100,unit,Percent
+value,value,{Number},,,,,,,,,,,,,,,,
+Periodo,observationDate,{Data},,,,,,,,,,,,,,,,
+National Total,observationAbout,country/ESP,,,,,,,,,,,,,,,,
