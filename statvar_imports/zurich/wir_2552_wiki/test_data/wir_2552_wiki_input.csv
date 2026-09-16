@@ -1,6 +1,6 @@
 Jahr,RaumSort,RaumLang,RechtsformSort,RechtsformLang,BetriebsgrSort,BetriebsgrLang,Arbeitsstaetten,AnzBesch,AnzBeschW,AnzBeschM,AnzVZA,AnzVZAW,AnzVZAM
-2011,1,Ganze Stadt,0,Alle Rechtsformen,0,Alle Betriebsgrössen,39747,443621,202970,240651,339750,136406,203349
-2011,10,Kreis 1,0,Alle Rechtsformen,0,Alle Betriebsgrössen,5249,68627,34662,33965,53138,24338,28799
-2011,11,Rathaus,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1522,10180,5492,4688,7205,3493,3710
-2011,12,Hochschulen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,700,13203,7025,6178,9090,4376,4714
-2011,13,Lindenhof,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1193,15160,7649,7511,12213,5602,6608
+2011,1,Ganze Stadt,0,Alle Rechtsformen,0,Alle Betriebsgrössen,39747,443621.0,202970,240651,339750,136406,203349
+2011,10,Kreis 1,0,Alle Rechtsformen,0,Alle Betriebsgrössen,5249,68627.0,34662,33965,53138,24338,28799
+2011,11,Rathaus,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1522,10180.0,5492,4688,7205,3493,3710
+2011,12,Hochschulen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,700,13203.0,7025,6178,9090,4376,4714
+2011,13,Lindenhof,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1193,,7649,7511,12213,5602,6608

@@ -192,6 +192,20 @@ class GenerateRollupsTest(unittest.TestCase):
                           mock_fatal.call_args[0][0])
             self.assertTrue(mock_fatal.call_args[1].get('exc_info'))
 
+    def test_generate_rollups_on_test_data_fixture(self):
+        """Verifies generate_rollups on test_data/wir_2552_wiki_raw_input.csv matches wir_2552_wiki_input.csv."""
+        raw_input_csv = os.path.join(_MODULE_DIR, 'test_data',
+                                     'wir_2552_wiki_raw_input.csv')
+        expected_input_csv = os.path.join(_MODULE_DIR, 'test_data',
+                                          'wir_2552_wiki_input.csv')
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_csv = os.path.join(tmp_dir, 'output_rollups.csv')
+            result_df = generate_rollups(raw_input_csv, output_csv)
+            expected_df = pd.read_csv(expected_input_csv)
+            pd.testing.assert_frame_equal(result_df.reset_index(drop=True),
+                                          expected_df)
+            pd.testing.assert_frame_equal(pd.read_csv(output_csv), expected_df)
+
 
 if __name__ == '__main__':
     unittest.main()
