@@ -8,16 +8,19 @@ rm -rf ./output_files/
 mkdir -p ./input_files/1990_1999/county/
 mkdir -p ./input_files/2000_2009/county/
 mkdir -p ./input_files/2010_2020/county/
+mkdir -p ./input_files/2020_2022/county/
 
 mkdir -p ./input_files/1980_1989/state/
 mkdir -p ./input_files/1990_1999/state/
 mkdir -p ./input_files/2000_2009/state/
 mkdir -p ./input_files/2010_2020/state/
+mkdir -p ./input_files/2020_2022/state/
 
 mkdir -p ./input_files/1980_1989/national/
 mkdir -p ./input_files/1990_1999/national/
 mkdir -p ./input_files/2000_2009/national/
 mkdir -p ./input_files/2010_2020/national/
+mkdir -p ./input_files/2020_2022/national/
 
 mkdir -p ./output_files/
 
@@ -37,6 +40,12 @@ for file in $(cat download_county_files_2010_2020.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/counties/asrh/${file} \
           -o ./input_files/2010_2020/county/${file})
+done
+
+for file in $(cat download_county_files_2020_2022.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/counties/asrh/${file} \
+    -o ./input_files/2020_2022/county/${file})
 done
 
 for file in $(cat download_state_files_1980_1989.txt)
@@ -61,6 +70,12 @@ for file in $(cat download_state_files_2010_2020.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/state/asrh/${file} \
           -o ./input_files/2010_2020/state/${file})
+done
+
+for file in $(cat download_state_files_2020_2022.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/state/asrh/${file} \
+    -o ./input_files/2020_2022/state/${file})
 done
 
 for file in $(cat download_national_files_1980_1989.txt)
