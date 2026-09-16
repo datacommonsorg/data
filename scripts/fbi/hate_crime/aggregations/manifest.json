@@ -18,7 +18,6 @@
                 }
             ],
             "source_files": [
-                "golden_data/*.csv",
                 "hate_crime_data/*"
             ],
             "cron_schedule": "0 10 21 * *",

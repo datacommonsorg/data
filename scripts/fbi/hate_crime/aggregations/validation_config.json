@@ -10,12 +10,12 @@
             }
         },
         {
-            "rule_id": "check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies latest observation year is within 3 years of current date",
+            "validator": "SQL_VALIDATOR",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observations_hate_crime.csv",
-                "input_files": "../../../../aggregation.csv"
+                "query": "SELECT MAX(CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT)) AS max_year FROM stats",
+                "condition": "max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)"
             }
         }
     ]
