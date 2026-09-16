@@ -19,6 +19,7 @@ python3 stat_var_processor.py
 --input_data='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/input_files/<input_file.csv>' 
 --pv_map='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<filename of pv_map.csv>' --config_file='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<filename of metadata.csv>' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 --output_path='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<output_folder_name>/<filename>'
+--output_counters='../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/<counters_folder_name>/<filename_counters.csv>'
 ```
 
 #### Download the data: 
@@ -40,6 +41,7 @@ python3 stat_var_processor.py
 --pv_map=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_pvmap.csv 
 --config_file=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 --output_path=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/output_files/ntia_output
+--output_counters=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/counters/ntia_output_counters.csv
 ```
 
 ```
@@ -48,5 +50,6 @@ python3 stat_var_processor.py
 --pv_map=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_age_pvmap.csv 
 --config_file=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 --output_path=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/output_files/ntia_age_output
+--output_counters=../../statvar_imports/ntia_internet_use_survey/Commerce_NTIA/counters/ntia_age_output_counters.csv
 ```
 
