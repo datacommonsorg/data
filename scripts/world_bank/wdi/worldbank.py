@@ -15,20 +15,18 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-import logging
-import itertools
-import requests
-import zipfile
 import io
-import time
-import re
+import itertools
 import os
-import sys
+import re
+import time
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
+import requests
 from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -509,43 +507,51 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         if saveOutput:
             logging.info("Writing output csv")
             output_file_path = 'output/WorldBank.csv'
-            df.drop('IndicatorCode', axis=1).to_csv(output_file_path,
-                                                    float_format='%.10f',
-                                                    index=False)
-
-            # Read and append historical deleted data from GCS.
-            try:
-                logging.info(
-                    f"Reading historical deleted data from GCS: {_FLAGS.historical_gcs_path}"
-                )
-                final_df = pd.read_csv(output_file_path)
-                deleted_df = pd.read_csv(_FLAGS.historical_gcs_path)
-
-                # Combine dataframes. final_df is placed first so its versions are preferred.
-                final_df = pd.concat([final_df, deleted_df], ignore_index=True)
-
-                # Deduplicate based on composite keys, keeping the first occurrence (from final_df)
-                composite_keys = [
-                    'StatisticalVariable', 'ISO3166Alpha3', 'Year',
-                    'observationPeriod', 'unit', 'measurementMethod',
-                    'scalingFactor'
-                ]
-                final_df = final_df.drop_duplicates(subset=composite_keys,
-                                                    keep='first')
-                final_df.to_csv(output_file_path,
-                                float_format='%.10f',
-                                index=False)
-                logging.info(
-                    "Successfully merged and de-duplicated deleted historical data."
-                )
-            except Exception as e:
-                logging.warning(
-                    f"Could not read historical deleted data from GCS: {e}. Proceeding with fresh data only."
-                )
+            os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
+            final_df = df.drop('IndicatorCode', axis=1)
+            final_df = merge_historical_data(final_df,
+                                             _FLAGS.historical_gcs_path)
+            final_df.to_csv(output_file_path,
+                            float_format='%.10f',
+                            index=False)
         else:
             return df
     except Exception as e:
         logging.fatal(f"Error generating output {e}")
+
+
+def merge_historical_data(df, historical_gcs_path):
+    """Merges and deduplicates historical deleted data from GCS into df."""
+    if not historical_gcs_path:
+        return df
+    try:
+        logging.info(
+            f"Reading historical deleted data from GCS: {historical_gcs_path}")
+        composite_keys = [
+            'StatisticalVariable', 'ISO3166Alpha3', 'Year',
+            'observationPeriod', 'unit', 'measurementMethod', 'scalingFactor'
+        ]
+        deleted_df = retry_call(
+            pd.read_csv,
+            fargs=[historical_gcs_path],
+            fkwargs={'dtype': {k: str for k in composite_keys}},
+            tries=3,
+            delay=5,
+            backoff=2)
+        for col in composite_keys:
+            if col in df.columns:
+                df[col] = df[col].fillna('').astype(str)
+            if col in deleted_df.columns:
+                deleted_df[col] = deleted_df[col].fillna('').astype(str)
+        df = pd.concat([df, deleted_df], ignore_index=True)
+        df = df.drop_duplicates(subset=composite_keys, keep='first')
+        logging.info(
+            "Successfully merged and de-duplicated deleted historical data "
+            f"(read {len(deleted_df)} historical rows; total output {len(df)} rows)."
+        )
+        return df
+    except Exception as e:
+        logging.fatal(f"Could not read historical deleted data from GCS: {e}")
 
 
 def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):

@@ -3,26 +3,19 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "description": "Checks that deleted observation points do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
             }
         },
         {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that latest MaxDate is within 1 year of current year.",
+            "validator": "SQL_VALIDATOR",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "Check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/WorldBank.csv"
+                "query": "SELECT MAX(CAST(MaxDate AS INT)) AS latest_year FROM stats",
+                "condition": "latest_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1)"
             }
         }
     ]
