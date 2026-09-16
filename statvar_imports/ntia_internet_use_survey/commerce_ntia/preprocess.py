@@ -32,6 +32,7 @@ COMMON_COLUMNS = ["dataset", "variable", "description", "universe"]
 AGE_COLUMNS = [
     "age314Count", "age1524Count", "age2544Count", "age4564Count", "age65pCount"
 ]
+_AGE_RESOL_MAP = {'isPerson': 'CivilPerson', 'isAdult': 'Adult'}
 INPUT_FILE = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
 INPUT_FILE_1 = os.path.join(INPUT_DIR, "ntia-data-age-only.csv")
 INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
@@ -63,33 +64,26 @@ def preprocess_data():
 
         # 1. Process Age-only data
         df1 = org_df[COMMON_COLUMNS + AGE_COLUMNS].copy()
-        df1['universeAgeResol'] = df1['universe'].apply(
-            lambda x: 'CivilPerson'
-            if x == 'isPerson' else ('Adult' if x == 'isAdult' else None))
-        df1['variableAgeResol'] = df1['variable'].apply(
-            lambda x: 'CivilPerson'
-            if x == 'isPerson' else ('Adult' if x == 'isAdult' else None))
+        df1['universeAgeResol'] = df1['universe'].map(_AGE_RESOL_MAP)
+        df1['variableAgeResol'] = df1['variable'].map(_AGE_RESOL_MAP)
         df1_moved = move_column_left(df1, 'universe', 'variable')
         df1_moved.to_csv(INPUT_FILE_1, index=False)
 
         # 2. Process General survey data
         df2_cols_to_keep = [
-            col for col in org_df.columns if col not in set(AGE_COLUMNS)
+            col for col in org_df.columns
+            if not col.startswith(
+                ('age314', 'age1524', 'age2544', 'age4564', 'age65p'))
         ]
         df2 = org_df[df2_cols_to_keep].copy()
-        df2['universeAgeResol'] = df2['universe'].apply(
-            lambda x: 'CivilPerson'
-            if x == 'isPerson' else ('Adult' if x == 'isAdult' else None))
-        df2['variableAgeResol'] = df2['variable'].apply(
-            lambda x: 'CivilPerson'
-            if x == 'isPerson' else ('Adult' if x == 'isAdult' else None))
+        df2['universeAgeResol'] = df2['universe'].map(_AGE_RESOL_MAP)
+        df2['variableAgeResol'] = df2['variable'].map(_AGE_RESOL_MAP)
         df2_moved = move_column_left(df2, 'universe', 'variable')
         df2_moved.to_csv(INPUT_FILE_2, index=False)
 
     except Exception as e:
         logging.fatal(
             f"An error occurred while preprocessing the input data: {e}")
-        sys.exit(1)
 
 
 def main(argv):
@@ -108,10 +102,8 @@ def main(argv):
                 INPUT_FILE) == 0:
             logging.fatal(
                 "Failed to download Commerce_NTIA file or file is empty.")
-            sys.exit(1)
     except Exception as e:
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
-        sys.exit(1)
 
     preprocess_data()
 

@@ -10,12 +10,21 @@
       }
     },
     {
-      "rule_id": "check_max_date_freshness",
-      "description": "Checks that the latest observation date is at least 2023.",
+      "rule_id": "check_active_survey_wave_count",
+      "description": "Checks that all active StatVars (1935 in input0, 227 in input1) have MaxDate >= 2023-11.",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT MAX(MaxDate) AS max_date FROM stats",
-        "condition": "max_date >= '2023'"
+        "query": "SELECT COUNT(*) AS total_svs, SUM(CASE WHEN MaxDate >= '2023-11' THEN 1 ELSE 0 END) AS active_svs FROM stats",
+        "condition": "active_svs >= CASE WHEN total_svs > 500 THEN 1935 ELSE 227 END"
+      }
+    },
+    {
+      "rule_id": "check_statvar_min_max_date",
+      "description": "Checks that no StatVar regresses below the oldest historical wave (2013-07).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "MaxDate >= '2013-07'"
       }
     }
   ]

@@ -58,10 +58,12 @@ class PreprocessTest(unittest.TestCase):
                 'description': ['Desc 1', 'Desc 2', 'Desc 3'],
                 'universe': ['isPerson', 'isAdult', 'isHousehold'],
                 'age314Count': [10, 20, 30],
+                'age314Prop': [0.1, 0.2, 0.3],
                 'age1524Count': [11, 21, 31],
                 'age2544Count': [12, 22, 32],
                 'age4564Count': [13, 23, 33],
                 'age65pCount': [14, 24, 34],
+                'age65pSE': [0.01, 0.02, 0.03],
                 'agencyAccess': [5, 10, 15],
                 'totalCount': [100, 200, 300],
                 'otherMetric': [1.5, 2.5, 3.5]
@@ -85,6 +87,8 @@ class PreprocessTest(unittest.TestCase):
                 cols_age.index('universe') + 1, cols_age.index('variable'))
             for age_col in preprocess.AGE_COLUMNS:
                 self.assertIn(age_col, cols_age)
+            self.assertNotIn('age314Prop', cols_age)
+            self.assertNotIn('age65pSE', cols_age)
             self.assertNotIn('agencyAccess', cols_age)
             self.assertNotIn('totalCount', cols_age)
             self.assertNotIn('otherMetric', cols_age)
@@ -108,10 +112,13 @@ class PreprocessTest(unittest.TestCase):
             self.assertTrue(pd.isna(df_data.loc[2, 'universeAgeResol']))
             for age_col in preprocess.AGE_COLUMNS:
                 self.assertNotIn(age_col, cols_data)
+            self.assertNotIn('age314Prop', cols_data)
+            self.assertNotIn('age65pSE', cols_data)
 
     @mock.patch('preprocess.logging.fatal')
     def test_preprocess_data_file_not_found(self, mock_fatal):
         """Tests that preprocess_data exits with code 1 if input file is missing."""
+        mock_fatal.side_effect = SystemExit(1)
         with tempfile.TemporaryDirectory() as tmp_dir:
             missing_input = os.path.join(tmp_dir, 'nonexistent.csv')
             with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
@@ -124,6 +131,7 @@ class PreprocessTest(unittest.TestCase):
     @mock.patch('preprocess.logging.fatal')
     def test_preprocess_data_missing_columns(self, mock_fatal):
         """Tests that preprocess_data exits with code 1 if input CSV lacks required columns."""
+        mock_fatal.side_effect = SystemExit(1)
         with tempfile.TemporaryDirectory() as tmp_dir:
             bad_input = os.path.join(tmp_dir, 'bad.csv')
             pd.DataFrame({'incomplete': [1, 2]}).to_csv(bad_input, index=False)
@@ -159,6 +167,7 @@ class PreprocessTest(unittest.TestCase):
     def test_main_download_failure(self, mock_fatal, mock_download,
                                    mock_preprocess):
         """Tests that main logs fatal error and exits with code 1 when download returns False."""
+        mock_fatal.side_effect = SystemExit(1)
         mock_download.return_value = False
         with self.assertRaises(SystemExit) as cm:
             preprocess.main([])
@@ -173,6 +182,7 @@ class PreprocessTest(unittest.TestCase):
     def test_main_download_success_file_missing(self, mock_fatal, mock_download,
                                                 mock_preprocess):
         """Tests that main exits with code 1 if download reports success but file is missing."""
+        mock_fatal.side_effect = SystemExit(1)
         mock_download.return_value = True
         with mock.patch('os.path.exists', return_value=False):
             with self.assertRaises(SystemExit) as cm:
@@ -188,6 +198,7 @@ class PreprocessTest(unittest.TestCase):
     def test_main_download_success_empty_file(self, mock_fatal, mock_download,
                                               mock_preprocess):
         """Tests that main exits with code 1 if downloaded file is 0 bytes."""
+        mock_fatal.side_effect = SystemExit(1)
         mock_download.return_value = True
         with mock.patch('os.path.exists', return_value=True), \
              mock.patch('os.path.getsize', return_value=0):
@@ -204,6 +215,7 @@ class PreprocessTest(unittest.TestCase):
     def test_main_download_exception(self, mock_fatal, mock_download,
                                      mock_preprocess):
         """Tests that main logs fatal error and exits with code 1 when download raises an exception."""
+        mock_fatal.side_effect = SystemExit(1)
         mock_download.side_effect = Exception("Connection timeout")
         with self.assertRaises(SystemExit) as cm:
             preprocess.main([])
