@@ -1,0 +1,9 @@
+Node: E:Congo_DRC_Economy->E0
+observationAbout: C:Congo_DRC_Economy->observationAbout
+observationDate: C:Congo_DRC_Economy->observationDate
+value: C:Congo_DRC_Economy->value
+variableMeasured: C:Congo_DRC_Economy->variableMeasured
+unit: C:Congo_DRC_Economy->unit
+scalingFactor: C:Congo_DRC_Economy->scalingFactor
+measurementMethod: C:Congo_DRC_Economy->measurementMethod
+typeOf: dcs:StatVarObservation
