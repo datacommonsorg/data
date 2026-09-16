@@ -45,19 +45,49 @@ def preprocess(base_path=None):
     output_folder = os.path.join(base_path, 'output')
     os.makedirs(output_folder, exist_ok=True)
 
+    custom_schema_src = os.path.join(
+        base_path, 'oecd_regional_education_custom_schema.mcf')
+    if os.path.isfile(custom_schema_src):
+        custom_schema_dst = os.path.join(
+            output_folder, 'oecd_regional_education_custom_schema.mcf')
+        shutil.copy(custom_schema_src, custom_schema_dst)
+        logging.info(f"Copied custom schema to {custom_schema_dst}")
+
     places_resolved_file = os.path.join(
         base_path, 'oecd_regional_education_places_resolved.csv')
-    valid_places = set()
+    valid_places = {}
     if not os.path.isfile(places_resolved_file):
         raise FileNotFoundError(
             f"Places resolved file not found: {places_resolved_file}. "
             "Aborting preprocessing to prevent silent data drop.")
 
+    rows_to_rewrite = []
+    needs_rewrite = False
+    with open(places_resolved_file, 'r', encoding='utf-8', newline='') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            stripped_row = [cell.strip() for cell in row]
+            if stripped_row != row:
+                needs_rewrite = True
+            rows_to_rewrite.append(stripped_row)
+
+    if needs_rewrite and rows_to_rewrite:
+        tmp_places = places_resolved_file + '.tmp'
+        with open(tmp_places, 'w', encoding='utf-8', newline='\r\n') as f:
+            writer = csv.writer(f)
+            writer.writerows(rows_to_rewrite)
+        os.replace(tmp_places, places_resolved_file)
+        logging.info(f"Sanitized whitespace in {places_resolved_file}")
+
     with open(places_resolved_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if row.get('dcid', '').strip():
-                valid_places.add(row['place_name'].strip())
+            dcid = row.get('dcid', '').strip()
+            place_name = row.get('place_name', '').strip()
+            if dcid and place_name:
+                if not dcid.startswith('dcid:'):
+                    dcid = f'dcid:{dcid}'
+                valid_places[place_name] = dcid
 
     if not valid_places:
         raise ValueError(
@@ -98,7 +128,16 @@ def preprocess(base_path=None):
             f"No candidate raw data file found to process in '{target_folder}'.")
 
 
-def _filter_csv(src_path: str, dst_path: str, valid_places: set, unmapped_log_path: str = None):
+def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_path: str = None):
+    required_columns = [
+        'REF_AREA',
+        'TIME_PERIOD',
+        'UNIT_MULT',
+        'SEX',
+        'Education level',
+        'AGE',
+        'OBS_VALUE',
+    ]
     with open(src_path, 'r', encoding='utf-8', errors='replace') as fin, \
          open(dst_path, 'w', encoding='utf-8', newline='') as fout:
         reader = csv.reader(fin)
@@ -107,11 +146,11 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: set, unmapped_log_pa
         header = next(reader, None)
         if not header:
             raise ValueError(f"Source file '{src_path}' is empty.")
-        writer.writerow(header)
 
         ref_area_idx = header.index('REF_AREA') if 'REF_AREA' in header else None
         if ref_area_idx is None:
             logging.warning("REF_AREA column not found in header, copying all rows.")
+            writer.writerow(header)
             kept = 0
             for row in reader:
                 writer.writerow(row)
@@ -120,14 +159,49 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: set, unmapped_log_pa
                 raise ValueError(f"Source file '{src_path}' has header but no data rows.")
             return
 
+        # Determine indices of required columns if all exist in header
+        col_indices = [header.index(c) for c in required_columns if c in header]
+        use_subset = len(col_indices) == len(required_columns)
+        obs_val_idx = header.index('OBS_VALUE') if 'OBS_VALUE' in header else None
+        stat_op_idx = header.index('STATISTICAL_OPERATION') if 'STATISTICAL_OPERATION' in header else None
+
+        if use_subset:
+            writer.writerow(required_columns)
+            out_ref_area_idx = required_columns.index('REF_AREA')
+        else:
+            writer.writerow(header)
+            out_ref_area_idx = ref_area_idx
+
         kept = 0
         dropped = 0
         unmapped_places = set()
         for row in reader:
             if len(row) > ref_area_idx:
+                # Skip rows with empty OBS_VALUE or ignored STATISTICAL_OPERATION (SE)
+                if obs_val_idx is not None and len(row) > obs_val_idx:
+                    if not row[obs_val_idx].strip():
+                        dropped += 1
+                        continue
+                if stat_op_idx is not None and len(row) > stat_op_idx:
+                    if row[stat_op_idx].strip() == 'SE':
+                        dropped += 1
+                        continue
+
                 ref_area = row[ref_area_idx].strip()
-                if ref_area in valid_places:
-                    writer.writerow(row)
+                # Handle both raw ref_area codes and already-prefixed dcid values
+                clean_ref = ref_area
+                resolved_dcid = valid_places.get(clean_ref)
+                if not resolved_dcid and clean_ref.startswith('dcid:'):
+                    # Check reverse lookup if already dcid-prefixed
+                    resolved_dcid = clean_ref
+
+                if resolved_dcid:
+                    if use_subset:
+                        out_row = [row[idx] if len(row) > idx else '' for idx in col_indices]
+                    else:
+                        out_row = list(row)
+                    out_row[out_ref_area_idx] = resolved_dcid
+                    writer.writerow(out_row)
                     kept += 1
                 else:
                     dropped += 1
@@ -140,10 +214,10 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: set, unmapped_log_pa
                 f"Critical: All {dropped} rows in '{src_path}' were filtered out! "
                 "Output CSV would be completely empty. Aborting preprocessing to prevent silent data drop.")
 
-        logging.info(f"Filtered source data: {kept} rows kept, {dropped} rows with unresolved places dropped.")
+        logging.info(f"Filtered source data: {kept} rows kept, {dropped} rows dropped.")
         if unmapped_places:
             logging.warning(
-                f"Encountered {len(unmapped_places)} unmapped REF_AREA codes ({dropped} observations dropped). "
+                f"Encountered {len(unmapped_places)} unmapped REF_AREA codes. "
                 f"Sample unmapped places: {sorted(list(unmapped_places))[:25]}")
             if unmapped_log_path:
                 try:

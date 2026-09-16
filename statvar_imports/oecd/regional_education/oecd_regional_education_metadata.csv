@@ -12,3 +12,5 @@ Path to data - URL - Regions and Cities - Regional Statistics - Regional Educati
 output_columns,"observationAbout,observationDate,variableMeasured,value"
 header_rows,1
 word_delimiter,""""""
+reconcile_nodes,
+mapped_columns,"4,5,6"
