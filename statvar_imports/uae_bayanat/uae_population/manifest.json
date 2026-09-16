@@ -1,26 +1,26 @@
 {
-    "import_specifications": [
+  "import_specifications": [
+    {
+      "import_name": "UAE_Population",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender",
+      "provenance_description": "UAE_Population statical data",
+      "scripts": [
+        "../../../util/download_util_script.py --download_url=https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender --output_folder=input",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/uae_populationbyemiratesnationalityandgender.xlsx --pv_map=uae_population_pvmap.csv --config_file=uae_population_metadata.csv --places_resolved_csv=uae_population_places_resolved_csv.csv --output_path=output/uae_population_output"
+      ],
+      "source_files": [
+        "input/uae_populationbyemiratesnationalityandgender.xlsx"
+      ],
+      "import_inputs": [
         {
-            "import_name": "UAE_Population",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender",
-            "provenance_description": "UAE_Population statical data",
-            "scripts": [
-                "uae_download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/uae_populationbyemiratesnationalityandgender.xlsx --pv_map=uae_population_pvmap.csv --config_file=uae_population_metadata.csv --places_resolved_csv=uae_population_places_resolved_csv.csv --output_path=output/uae_population_output"
-            ],
-            "source_files": [
-                "input/uae_populationbyemiratesnationalityandgender.xlsx"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "output/uae_population_output.tmcf",
-                    "cleaned_csv": "output/uae_population_output.csv"
-                }
-            ],
-            "cron_schedule": "0 05 * * 1"
+          "template_mcf": "output/uae_population_output.tmcf",
+          "cleaned_csv": "output/uae_population_output.csv"
         }
-    ]
+      ],
+      "cron_schedule": "0 05 * * 1"
+    }
+  ]
 }
