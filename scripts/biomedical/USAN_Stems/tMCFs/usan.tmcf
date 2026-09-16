@@ -1,0 +1,9 @@
+Node: E:usan_output->E1
+typeOf: dcs:USAdoptedNameStem
+dcid: C:usan_output->dcid
+name: C:usan_output->Stem
+wordElementType: C:usan_output->WordStem
+description: C:usan_output->Definition
+example: C:usan_output->Examples
+specializationOf: C:usan_output->SpecializationOf
+sameAs: C:usan_output->sameAs
