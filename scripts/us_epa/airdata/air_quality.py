@@ -127,82 +127,125 @@ def create_csv(csv_file_path):
         writer.writeheader()
 
 
-def write_csv(csv_file_path, reader):
-    with open(csv_file_path, 'a', newline='') as f_out:
-        writer = csv.DictWriter(f_out,
-                                fieldnames=CSV_COLUMNS,
-                                lineterminator='\n')
-        monitors = {}
-        keys = set()
-        for observation in reader:
-            # Skip cross-border monitors outside US (80 = Mexico, CC = Canada)
-            if observation.get('State Code') in ('80', 'CC'):
-                continue
-            # For a given site and pollutant standard, select the same monitor
-            monitor_key = (
-                observation['State Code'],
-                observation['County Code'],
-                observation['Site Num'],
-                get_pollutant_standard(observation['Pollutant Standard']),
-            )
-            if monitor_key not in monitors:
-                monitors[monitor_key] = observation['POC']
-            elif monitors[monitor_key] != observation['POC']:
-                continue
-            key = (
-                observation['Date Local'],
-                observation['State Code'],
-                observation['County Code'],
-                observation['Site Num'],
-                get_pollutant_standard(observation['Pollutant Standard']),
-            )
-            if key in keys:
-                continue
-            keys.add(key)
-            suffix = POLLUTANTS[observation["Parameter Code"]]
-            county = ('dcid:geoId/' + observation['State Code'] +
-                      observation['County Code'])
-            raw_unit_str = observation.get('Units of Measure', '')
-            unit = UNIT_MAP.get(
-                raw_unit_str.strip().lower()) if raw_unit_str else ''
-            if not unit and raw_unit_str:
-                unit = get_camel_case(raw_unit_str)
-            new_row = {
-                'Date':
-                    observation['Date Local'],
-                'Site_Number':
-                    'epa/{state}{county}{site}'.format(
-                        state=observation['State Code'],
-                        county=observation['County Code'],
-                        site=observation['Site Num']),
-                'Site_Name':
-                    observation['Local Site Name'],
-                'Site_Location':
-                    '[latLong {lat} {long}]'.format(
+def create_sites_mcf(sites_mcf_file_path):
+    with open(sites_mcf_file_path, 'w') as f_out:
+        pass
+
+
+def write_csv(csv_file_path,
+              reader,
+              sites_mcf_file_path='EPA_AirQuality_sites.mcf',
+              seen_sites=None):
+    if sites_mcf_file_path == 'EPA_AirQuality_sites.mcf':
+        csv_dir = os.path.dirname(csv_file_path)
+        if csv_dir:
+            sites_mcf_file_path = os.path.join(csv_dir,
+                                               'EPA_AirQuality_sites.mcf')
+
+    if seen_sites is None:
+        seen_sites = set()
+        if sites_mcf_file_path and os.path.exists(sites_mcf_file_path):
+            with open(sites_mcf_file_path, 'r') as f_in:
+                for line in f_in:
+                    if line.startswith('Node: dcid:'):
+                        seen_sites.add(line.strip().split('Node: dcid:')[1])
+
+    f_sites = open(sites_mcf_file_path, 'a') if sites_mcf_file_path else None
+    try:
+        with open(csv_file_path, 'a', newline='') as f_out:
+            writer = csv.DictWriter(f_out,
+                                    fieldnames=CSV_COLUMNS,
+                                    lineterminator='\n')
+            monitors = {}
+            keys = set()
+            for observation in reader:
+                # Skip cross-border monitors outside US (80 = Mexico, CC = Canada)
+                if observation.get('State Code') in ('80', 'CC'):
+                    continue
+                site_number = 'epa/{state}{county}{site}'.format(
+                    state=observation['State Code'],
+                    county=observation['County Code'],
+                    site=observation['Site Num'])
+                if f_sites and site_number not in seen_sites:
+                    seen_sites.add(site_number)
+                    site_name = observation.get('Local Site Name', '').replace(
+                        '"', r'\"')
+                    site_location = '[latLong {lat} {long}]'.format(
                         lat=observation['Latitude'],
-                        long=observation['Longitude']),
-                'County':
-                    county,
-                'POC':
-                    observation['POC'],
-                'Units':
-                    unit,
-                'Method':
+                        long=observation['Longitude'])
+                    site_county = ('dcid:geoId/' + observation['State Code'] +
+                                   observation['County Code'])
+                    f_sites.write(f'Node: dcid:{site_number}\n'
+                                  f'typeOf: dcs:AirQualitySite\n'
+                                  f'name: "{site_name}"\n'
+                                  f'location: {site_location}\n'
+                                  f'containedInPlace: {site_county}\n\n')
+                # For a given site and pollutant standard, select the same monitor
+                monitor_key = (
+                    observation['State Code'],
+                    observation['County Code'],
+                    observation['Site Num'],
                     get_pollutant_standard(observation['Pollutant Standard']),
-                'Mean':
-                    observation['Arithmetic Mean'],
-                'Max':
-                    observation['1st Max Value'],
-                'AQI':
-                    observation['AQI'],
-                'Mean_SV':
-                    f'dcs:Mean_Concentration_AirPollutant_{suffix}',
-                'Max_SV':
-                    f'dcs:Max_Concentration_AirPollutant_{suffix}',
-                'AQI_SV':
-                    f'dcs:AirQualityIndex_AirPollutant_{suffix}',
-            }
-            writer.writerow(new_row)
+                )
+                if monitor_key not in monitors:
+                    monitors[monitor_key] = observation['POC']
+                elif monitors[monitor_key] != observation['POC']:
+                    continue
+                key = (
+                    observation['Date Local'],
+                    observation['State Code'],
+                    observation['County Code'],
+                    observation['Site Num'],
+                    get_pollutant_standard(observation['Pollutant Standard']),
+                )
+                if key in keys:
+                    continue
+                keys.add(key)
+                suffix = POLLUTANTS[observation["Parameter Code"]]
+                county = ('dcid:geoId/' + observation['State Code'] +
+                          observation['County Code'])
+                raw_unit_str = observation.get('Units of Measure', '')
+                unit = UNIT_MAP.get(
+                    raw_unit_str.strip().lower()) if raw_unit_str else ''
+                if not unit and raw_unit_str:
+                    unit = get_camel_case(raw_unit_str)
+                new_row = {
+                    'Date':
+                        observation['Date Local'],
+                    'Site_Number':
+                        site_number,
+                    'Site_Name':
+                        observation['Local Site Name'],
+                    'Site_Location':
+                        '[latLong {lat} {long}]'.format(
+                            lat=observation['Latitude'],
+                            long=observation['Longitude']),
+                    'County':
+                        county,
+                    'POC':
+                        observation['POC'],
+                    'Units':
+                        unit,
+                    'Method':
+                        get_pollutant_standard(
+                            observation['Pollutant Standard']),
+                    'Mean':
+                        observation['Arithmetic Mean'],
+                    'Max':
+                        observation['1st Max Value'],
+                    'AQI':
+                        observation['AQI'],
+                    'Mean_SV':
+                        f'dcs:Mean_Concentration_AirPollutant_{suffix}',
+                    'Max_SV':
+                        f'dcs:Max_Concentration_AirPollutant_{suffix}',
+                    'AQI_SV':
+                        f'dcs:AirQualityIndex_AirPollutant_{suffix}',
+                }
+                writer.writerow(new_row)
+    finally:
+        if f_sites:
+            f_sites.close()
 
 
 def write_tmcf(tmcf_file_path):
@@ -218,6 +261,8 @@ def main(_):
         end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} upto {end_year}')
     create_csv('EPA_AirQuality.csv')
+    create_sites_mcf('EPA_AirQuality_sites.mcf')
+    seen_sites = set()
     session = requests.Session()
     adapter = requests.adapters.HTTPAdapter(max_retries=Retry(
         total=10,
@@ -237,7 +282,8 @@ def main(_):
             with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
                 with zf.open(f'{filename}.csv', 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-                    write_csv('EPA_AirQuality.csv', reader)
+                    write_csv('EPA_AirQuality.csv', reader,
+                              'EPA_AirQuality_sites.mcf', seen_sites)
     write_tmcf('EPA_AirQuality.tmcf')
 
 

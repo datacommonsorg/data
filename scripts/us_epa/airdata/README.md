@@ -4,6 +4,7 @@ This directory imports [Outdoor Air Quality Data](https://aqs.epa.gov/aqsweb/air
 The scripts generate:
 - `EPA_AirQuality.csv`
 - `EPA_AirQuality.tmcf`
+- `EPA_AirQuality_sites.mcf`
 - `EPA_AQI.csv`
 - `EPA_AQI.tmcf`
 

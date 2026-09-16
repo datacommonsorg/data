@@ -33,11 +33,11 @@
         },
         {
             "rule_id": "check_date_freshness",
-            "description": "Verifies that the dataset maximum observation date meets freshness requirements (>= 2024).",
+            "description": "Verifies that the dataset maximum observation date meets freshness requirements (within 1 year of current year).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
-                "condition": "latest_date >= '2024'"
+                "condition": "CAST(SUBSTR(latest_date, 1, 4) AS INT) >= YEAR(CURRENT_DATE) - 1"
             }
         }
     ]

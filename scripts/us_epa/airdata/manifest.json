@@ -14,7 +14,7 @@
                 {
                     "template_mcf": "EPA_AirQuality.tmcf",
                     "cleaned_csv": "EPA_AirQuality.csv",
-                    "node_mcf": "EPA_AirQuality.mcf"
+                    "node_mcf": "EPA_AirQuality*.mcf"
                 }
             ],
             "source_files": [
