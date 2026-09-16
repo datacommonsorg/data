@@ -15,12 +15,15 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-import io
+import logging
 import itertools
-import os
-import re
-import time
+import requests
 import zipfile
+import io
+import time
+import re
+import os
+import sys
 
 from absl import app
 from absl import flags
