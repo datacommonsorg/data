@@ -1,0 +1,29 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "MolecularINTeractionDatabase",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://mint.bio.uniroma2.it/",
+            "provenance_description": "Curated protein-protein interactions collected from the literature.",
+            "scripts": [
+                "download.py",
+                "parse_mint.py"
+                
+                
+            ],
+            "source_files": [
+                "mint-database.txt"
+            ],
+            "import_inputs": [
+                {
+                
+	                "node_mcf": "BioMINTData.mcf"
+
+                }
+            ],
+            "cron_schedule": "30 11 1 1,4,7,10 *"
+        }
+    ]
+}
