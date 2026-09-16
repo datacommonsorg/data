@@ -1,0 +1,1202 @@
+
+Node: dcid:Count_Person_Female_SavingsAccount_Personal_AsFractionOf_Count_Household
+name: "Women having a bank or savings account that they themselves use (%)"
+description: "Count Person Female Savings Account Personal As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_SavingsAccount_Personal_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:FertilityRate_Years15To19Age_Person_Female
+name: "Adolescent fertility rate for women age 15 to 19 years (%)"
+description: "Fertility Rate Years 15  To 19  Age Person Female"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:FertilityRate_Years15To19Age_Person_Female
+statType: dcs:measuredValue
+age: dcs:Years15To19
+
+Node: dcid:Count_Person_Female_Anaemic_Years15To19Age_AsFractionOf_Count_Household
+name: "Women age group 15 to 19 years who are anaemic (%)"
+description: "Count Person Female Anaemic Years 15  To 19  Age As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Anaemic_Years15To19Age_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To19
+
+Node: dcid:Count_Person_Female_Anaemic_Years15To49Age_AsFractionOf_Count_Household
+name: "Women age group 15 to 49 years who are anaemic (%)"
+description: "Count Person Female Anaemic Years 15  To 49  Age As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Anaemic_Years15To49Age_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Female_Years15To49Age_usingFamilyPlanningMethods_AsFractionOf_Count_Household
+name: "Married women age group 15 to 49 years use any family planning methods (%)"
+description: "Count Person Female Years 15  To 49  Age using Family Planning Methods As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15To49Age_usingFamilyPlanningMethods_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Female_Years15To49Age_usingFamilyPlanningMethods_Modern_AsFractionOf_Count_Household
+name: "Married women age group 15 to 49 years any modern family planning method (%)"
+description: "Count Person Female Years 15  To 49  Age using Family Planning Methods Modern As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15To49Age_usingFamilyPlanningMethods_Modern_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Average_Expenditure_BirthEvent_InPublicHealthFacility
+name: "Average out of pocket expenditure for each delivery in public health facility"
+description: "Average Expenditure Birth Event In Public Health Facility"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Average_Expenditure_BirthEvent_InPublicHealthFacility
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthEvent_AttendedBySkilledHealthPersonnel_AsFractionOf_Count_Household
+name: "Births attended by skilled health personnel (%)"
+description: "Count Birth Event Attended By Skilled Health Personnel As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_AttendedBySkilledHealthPersonnel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_BirthEvent_Cesarean_AsFractionOf_Count_Household
+name: "Births delivered by caesarean section (%)"
+description: "Count Birth Event Cesarean As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_Cesarean_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_BirthEvent_Cesarean_PrivateHealthFacility_AsFractionOf_Count_Household
+name: "Births in private health facility delivered by caesarean section (%)"
+description: "Count Birth Event Cesarean Private Health Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_Cesarean_PrivateHealthFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_BirthEvent_Cesarean_PublicHealthFacility_AsFractionOf_Count_Household
+name: "Births in public health facility delivered by caesarean section (%)"
+description: "Count Birth Event Cesarean Public Health Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_Cesarean_PublicHealthFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Children_ReceivingAdequateDiet_Months6To23Age_AsFractionOf_Count_Household
+name: "Breastfeeding children age group 6 to 23 months receiving an adequate diet (%)"
+description: "Count Children Receiving Adequate Diet Months 6  To 23  Age As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_ReceivingAdequateDiet_Months6To23Age_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months6To23
+
+Node: dcid:Count_Children_FullyVaccinated_Months12To23Age_InformationFrom_VaccinationCard_MothersRecall_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months fully vaccinated based on information from either vaccination card or mothers recall (%)"
+description: "Count Children Fully Vaccinated Months 12  To 23  Age Information From Vaccination Card Mothers Recall As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_FullyVaccinated_Months12To23Age_InformationFrom_VaccinationCard_MothersRecall_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_FullyVaccinated_Months12To23Age_InformationFrom_VaccinationCard_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months fully vaccinated based on information from vaccination card only (%)"
+description: "Count Children Fully Vaccinated Months 12  To 23  Age Information From Vaccination Card As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_FullyVaccinated_Months12To23Age_InformationFrom_VaccinationCard_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received3Doses_Penta_DiptheriaTetanusToxoids_Pertussis_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who have received 3 doses of Penta or diphtheria tetanus toxoids and pertussis ( DTP ) vaccine (%)"
+description: "Count Children Months 12  To 23  Age Received 3  Doses Penta Diptheria Tetanus Toxoids Pertussis As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received3Doses_Penta_DiptheriaTetanusToxoids_Pertussis_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received3Doses_Penta_HepatitisB_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who have received 3 doses of Penta or Hepatitis B vaccine (%)"
+description: "Count Children Months 12  To 23  Age Received 3  Doses Penta Hepatitis B As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received3Doses_Penta_HepatitisB_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received3Doses_Polio_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who have received 3 doses of Polio vaccine (%)"
+description: "Count Children Months 12  To 23  Age Received 3  Doses Polio As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received3Doses_Polio_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received3Doses_Rotavirus_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who have received 3 doses of Rotavirus vaccine (%)"
+description: "Count Children Months 12  To 23  Age Received 3  Doses Rotavirus As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received3Doses_Rotavirus_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received_BacillusCalmetteGuerin_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who have received Bacillus Calmette Guerin ( BCG) (%)"
+description: "Count Children Months 12  To 23  Age Received Bacillus Calmette Guerin As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received_BacillusCalmetteGuerin_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received_FirstDoseOfMeasles_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who have received the first dose of measles containing vaccine ( MCV ) (%)"
+description: "Count Children Months 12  To 23  Age Received First Dose Of Measles As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received_FirstDoseOfMeasles_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received_Vaccine_InPrivate_HealthFacility_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who received most of their vaccinations in a private health facility (%)"
+description: "Count Children Months 12  To 23  Age Received Vaccine In Private Health Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received_Vaccine_InPrivate_HealthFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months12To23Age_Received_Vaccine_InPublic_HealthFacility_AsFractionOf_Count_Household
+name: "Children age group 12 to 23 months who received most of their vaccinations in a public health facility (%)"
+description: "Count Children Months 12  To 23  Age Received Vaccine In Public Health Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months12To23Age_Received_Vaccine_InPublic_HealthFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months12To23
+
+Node: dcid:Count_Children_Months24To35Age_Received_SecondDoseOfMeasles_AsFractionOf_Count_Household
+name: "Children age group 24 to 35 months who have received a second dose of measles containing vaccine ( MCV ) (%)"
+description: "Count Children Months 24  To 35  Age Received Second Dose Of Measles As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months24To35Age_Received_SecondDoseOfMeasles_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months24To35
+
+Node: dcid:Count_Children_Years5Age_Attended_PrePrimarySchool_During2019-20_AsFractionOf_Count_Household
+name: "Children age group 5 years who attended pre-primary school during the year 2019-20 (%)"
+description: "Count Children Years 5  Age Attended Pre Primary School During 2019 - 20  As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Years5Age_Attended_PrePrimarySchool_During2019-20_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years5
+
+Node: dcid:Count_Children_Months6To59Age_WhoAreAnaemic_AsFractionOf_Count_Household
+name: "Children age group 6 to 59 months who are anaemic (%)"
+description: "Count Children Months 6  To 59  Age Who Are Anaemic As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months6To59Age_WhoAreAnaemic_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months6To59
+
+Node: dcid:Count_Children_Months6To8Age_ReceivingSolidOrSemisolidFoodAndBreastmilk_AsFractionOf_Count_Household
+name: "Children age group 6 to 8 months receiving solid or semisolid food and breastmilk (%)"
+description: "Count Children Months 6  To 8  Age Receiving Solid Or Semisolid Food And Breastmilk As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months6To8Age_ReceivingSolidOrSemisolidFoodAndBreastmilk_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months6To8
+
+Node: dcid:Count_Children_Months9To35Age_WhoReceived_VitaminADose_InLast6Months_AsFractionOf_Count_Household
+name: "Children age group 9 to 35 months who received vitamin A dose in the last 6 months (%)"
+description: "Count Children Months 9  To 35  Age Who Received Vitamin ADose In Last 6  Months As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months9To35Age_WhoReceived_VitaminADose_InLast6Months_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months9To35
+
+Node: dcid:Count_Children_HomeBirthEvent_TakenToHealthFacilityForCheckUp_Within24HoursOfBirth_AsFractionOf_Count_Household
+name: "Children born at home who were taken to a health facility for a check-up within 24 hours of birth (%)"
+description: "Count Children Home Birth Event Taken To Health Facility For Check Up Within 24  Hours Of Birth As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_HomeBirthEvent_TakenToHealthFacilityForCheckUp_Within24HoursOfBirth_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Children_UnderYears5Age_Overweight_AsFractionOf_Count_Household
+name: "Children under 5 years who are overweight ( weight-for-height ) (%)"
+description: "Count Children Under Years 5  Age Overweight As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderYears5Age_Overweight_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderYears5
+
+Node: dcid:Count_Children_UnderYears5Age_SeverelyWasted_AsFractionOf_Count_Household
+name: "Children under 5 years who are severely wasted ( weight-for-height ) (%)"
+description: "Count Children Under Years 5  Age Severely Wasted As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderYears5Age_SeverelyWasted_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderYears5
+
+Node: dcid:Count_Children_UnderYears5Age_Stunted_AsFractionOf_Count_Household
+name: "Children under 5 years who are stunted ( height-for-age ) (%)"
+description: "Count Children Under Years 5  Age Stunted As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderYears5Age_Stunted_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderYears5
+
+Node: dcid:Count_Children_UnderYears5Age_Underweight_AsFractionOf_Count_Household
+name: "Children under 5 years who are underweight ( weight-for-age ) (%)"
+description: "Count Children Under Years 5  Age Underweight As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderYears5Age_Underweight_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderYears5
+
+Node: dcid:Count_Children_Under5YearsAge_Wasted_AsFractionOf_Count_Household
+name: "Children under 5 years who are wasted ( weight-for-height ) (%)"
+description: "Count Children Under 5  Years Age Wasted As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Under5YearsAge_Wasted_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Under5Years
+
+Node: dcid:Count_Children_UnderYears3Age_BreastfedWithinOneHourOfBirth_AsFractionOf_Count_Household
+name: "Children under age 3 years breastfed within one hour of birth (%)"
+description: "Count Children Under Years 3  Age Breastfed Within One Hour Of Birth As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderYears3Age_BreastfedWithinOneHourOfBirth_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderYears3
+
+Node: dcid:Count_Children_UnderYears5Age_BirthRegistered_ByCivilAuthority_AsFractionOf_Count_Household
+name: "Children under age 5 years whose birth was registered with the civil authority (%)"
+description: "Count Children Under Years 5  Age Birth Registered By Civil Authority As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderYears5Age_BirthRegistered_ByCivilAuthority_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderYears5
+
+Node: dcid:Count_Children_UnderMonths6Age_ExclusivelyBreastfed_AsFractionOf_Count_Household
+name: "Children under age 6 months exclusively breastfed (%)"
+description: "Count Children Under Months 6  Age Exclusively Breastfed As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_UnderMonths6Age_ExclusivelyBreastfed_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:UnderMonths6
+
+Node: dcid:Count_Children_Within2DaysOfBirth_WhoReceived_PostnatalCare_DoctorOrNurseOrLadyHealthVisitorOrAuxiliaryNurseMidwifery_AsFractionOf_Count_Household
+name: "Children who received postnatal care from a doctor or nurse or Lady Health Visitor ( LHV ) or Auxiliary Nurse Midwifery ( ANM ) or midwife or other health personnel within 2 days of delivery (%)"
+description: "Count Children Within 2  Days Of Birth Who Received Postnatal Care Doctor Or Nurse Or Lady Health Visitor Or Auxiliary Nurse Midwifery As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Within2DaysOfBirth_WhoReceived_PostnatalCare_DoctorOrNurseOrLadyHealthVisitorOrAuxiliaryNurseMidwifery_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Children_Diarrhoea_In2Weeks_PrecedingTheSurvey_TakenToHealthFacility_AsFractionOf_Count_Household
+name: "Children with diarrhoea in the 2 weeks preceding the survey taken to a health facility or health provider (%)"
+description: "Count Children Diarrhoea In 2  Weeks Preceding The Survey Taken To Health Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Diarrhoea_In2Weeks_PrecedingTheSurvey_TakenToHealthFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Children_Diarrhoea_In2Weeks_PrecedingTheSurvey_WhoReceived_OralRehydration_AsFractionOf_Count_Household
+name: "Children with diarrhoea in the 2 weeks preceding the survey who received oral rehydration salts (%)"
+description: "Count Children Diarrhoea In 2  Weeks Preceding The Survey Who Received Oral Rehydration As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Diarrhoea_In2Weeks_PrecedingTheSurvey_WhoReceived_OralRehydration_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Children_Diarrhoea_In2Weeks_PrecedingTheSurvey_WhoReceived_Zinc_AsFractionOf_Count_Household
+name: "Children with diarrhoea in the 2 weeks preceding the survey who received zinc (%)"
+description: "Count Children Diarrhoea In 2  Weeks Preceding The Survey Who Received Zinc As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Diarrhoea_In2Weeks_PrecedingTheSurvey_WhoReceived_Zinc_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Children_Fever_In2Weeks_PrecedingTheSurvey_TakenToHealthFacility_AsFractionOf_Count_Household
+name: "Children with fever or symptoms of acute respiratory infection in the 2 weeks preceding the survey taken to a health facility or health provider (%)"
+description: "Count Children Fever In 2  Weeks Preceding The Survey Taken To Health Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Fever_In2Weeks_PrecedingTheSurvey_TakenToHealthFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_UsingCondom_AsFractionOf_Count_Household
+name: "Married women using condom in the age group of 15 to 49 years (%)"
+description: "Count Person Female Married Years 15  To 49  Age Using Condom As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_UsingCondom_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_WhoParticipateIn3HouseholdDecisions_AsFractionOf_Count_Household
+name: "Married women age group 15 to 49 years who usually participate in three household decisions (%)"
+description: "Count Person Female Married Years 15  To 49  Age Who Participate In 3  Household Decisions As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_WhoParticipateIn3HouseholdDecisions_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_DeathEvent_InLast3Years_RegisteredWithCivilAuthority_AsFractionOf_Count_Household
+name: "Deaths in the last 3 years registered with the civil authority (%)"
+description: "Count Death Event In Last 3  Years Registered With Civil Authority As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_DeathEvent_InLast3Years_RegisteredWithCivilAuthority_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Married_Years18To49Age_WhoExperiencedSpousalViolence_AsFractionOf_Count_Household
+name: "Ever-married women age group 18 to 49 years who have ever experienced spousal violence (%)"
+description: "Count Person Female Married Years 18  To 49  Age Who Experienced Spousal Violence As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years18To49Age_WhoExperiencedSpousalViolence_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years18To49
+
+Node: dcid:Count_Person_Female_Married_Years18To49Age_WhoExperiencedPhysicalViolenceDuringPregnancy_AsFractionOf_Count_Household
+name: "Ever-married women age group 18 to 49 years who have experienced physical violence during any pregnancy (%)"
+description: "Count Person Female Married Years 18  To 49  Age Who Experienced Physical Violence During Pregnancy As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years18To49Age_WhoExperiencedPhysicalViolenceDuringPregnancy_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years18To49
+
+Node: dcid:Count_Person_Female_Years6OrAboveAge_WhoEverAttendedSchool_AsFractionOf_Count_Household
+name: "Female population age 6 years and above who ever attended school (%)"
+description: "Count Person Female Years 6  Or Above Age Who Ever Attended School As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years6OrAboveAge_WhoEverAttendedSchool_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years6OrAbove
+
+Node: dcid:Count_Person_Female_married_Years15To49Age_FemaleSterlization_AsFractionOf_Count_Household
+name: "Female sterilization married women-15 to 49 years (%)"
+description: "Count Person Female married Years 15  To 49  Age Female Sterlization As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_married_Years15To49Age_FemaleSterlization_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Female_NonUsers_FamilyPlanning_TalkedTo_HealthWorker
+name: "Health worker ever talked to female non-users about family planning (%)"
+description: "Count Person Female Non Users Family Planning Talked To Health Worker"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_NonUsers_FamilyPlanning_TalkedTo_HealthWorker
+statType: dcs:measuredValue
+
+Node: dcid:Count_HomeBirthEvent_ConductedBy_SkilledHealthPersonnel_AsFractionOf_Count_Household
+name: "Home births that were conducted by skilled health personnel (%)"
+description: "Count Home Birth Event Conducted By Skilled Health Personnel As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_HomeBirthEvent_ConductedBy_SkilledHealthPersonnel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Household_CleanFuelForCooking_AsFractionOf_Count_Household
+name: "Households using clean fuel for cooking (%)"
+description: "Count Household Clean Fuel For Cooking As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Household_CleanFuelForCooking_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Household_UsingIodizedSalt_AsFractionOf_Count_Household
+name: "Households using iodized salt (%)"
+description: "Count Household Using Iodized Salt As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Household_UsingIodizedSalt_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Household_WithAnyMember_CoveredUnderHealthInsuranceOrFinancingScheme_AsFractionOf_Count_Household
+name: "Population and household profile-households with any usual member covered under a health insurance or financing scheme (%)"
+description: "Count Household With Any Member Covered Under Health Insurance Or Financing Scheme As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Household_WithAnyMember_CoveredUnderHealthInsuranceOrFinancingScheme_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_UsingIntrauterineDeviceorPostpartumIntrauterineContraceptiveDevice_AsFractionOf_Count_Household
+name: "Married women age group 15 to 49 years using Intrauterine Device ( IUD ) or Postpartum Intrauterine Contraceptive Device ( PPIUD ) as family planning methods (%)"
+description: "Count Person Female Married Years 15  To 49  Age Using Intrauterine Deviceor Postpartum Intrauterine Contraceptive Device As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_UsingIntrauterineDeviceorPostpartumIntrauterineContraceptiveDevice_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Death_0Years_AsFractionOf_Count_BirthEvent_LiveBirth
+name: "Infant mortality rate ( IMR ) (%)"
+description: "Count Death  0  Years As Fraction Of Count Birth Event Live Birth"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Death_0Years_AsFractionOf_Count_BirthEvent_LiveBirth
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_UsingInjectables_AsFractionOf_Count_Household
+name: "Married women of age 15 to 49 years using injectables as one of the family planning methods (%)"
+description: "Count Person Female Married Years 15  To 49  Age Using Injectables As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_UsingInjectables_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Birth_Institutional__AsFractionOf_Count_Household
+name: "Institutional births (%)"
+description: "Count Birth Institutional  As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Birth_Institutional__AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Birth_Institutional_InPublicFacility_AsFractionOf_Count_Household
+name: "Institutional births in public facility (%)"
+description: "Count Birth Institutional In Public Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Birth_Institutional_InPublicFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_MaleSterlization_AsFractionOf_Count_Household
+name: "Married women of age 15 to 49 years using male sterlization as one of the family planning methods (%)"
+description: "Count Person Female Married Years 15  To 49  Age Male Sterlization As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_MaleSterlization_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Male_Years15OrAboveAge_WhoConsume_Alcohol_AsFractionOf_Count_Household
+name: "Men age group 15 years and above who consume alcohol (%)"
+description: "Count Person Male Years 15  Or Above Age Who Consume Alcohol As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Years15OrAboveAge_WhoConsume_Alcohol_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15OrAbove
+
+Node: dcid:Count_Person_Male_Years15OrAboveAge_WhoConsume_Tobacco_AsFractionOf_Count_Household
+name: "Men age group 15 years and above who use any kind of tobacco (%)"
+description: "Count Person Male Years 15  Or Above Age Who Consume Tobacco As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Years15OrAboveAge_WhoConsume_Tobacco_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15OrAbove
+
+Node: dcid:Count_Person_Male_Years15To19Age_WhoAreAnaemic_AsFractionOf_Count_Household
+name: "Men age group 15 to 19 years who are anaemic (%)"
+description: "Count Person Male Years 15  To 19  Age Who Are Anaemic As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Years15To19Age_WhoAreAnaemic_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To19
+
+Node: dcid:Count_Person_Male_Years15To49Age_WhoAreAnaemic_AsFractionOf_Count_Household
+name: "Men age group 15 to 49 years who are anaemic (%)"
+description: "Count Person Male Years 15  To 49  Age Who Are Anaemic As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Years15To49Age_WhoAreAnaemic_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Male_Years25To29Age_MarriedBefore21Years_AsFractionOf_Count_Household
+name: "Men age group 25 to 29 years married before age 21 years (%)"
+description: "Count Person Male Years 25  To 29  Age Married Before 21  Years As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Years25To29Age_MarriedBefore21Years_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years25To29
+
+Node: dcid:Count_Person_Male_Overweight_Obese_AsFractionOf_Count_Household
+name: "Men who are overweight or obese (%)"
+description: "Count Person Male Overweight Obese As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Overweight_Obese_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_WhoHave_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
+name: "Men who have comprehensive knowledge of Human immunodeficiency virus ( HIV ) or Acquired Immune Deficiency Syndrome ( AIDS ) (%)"
+description: "Count Person Male Who Have Comprehensive Knowledge Of HI VA ID S As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_WhoHave_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_WhoHave_UsedInternet_AsFractionOf_Count_Household
+name: "Men who have ever used internet (%)"
+description: "Count Person Male Who Have Used Internet As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_WhoHave_UsedInternet_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_HighRisk_WaistToHipRatio_AsFractionOf_Count_Household
+name: "Men who have high risk waist-to-hip ratio (%)"
+description: "Count Person Male High Risk Waist To Hip Ratio As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_HighRisk_WaistToHipRatio_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_WhoKnow_ConsistentCondomUseCanReduceChanceOfGettingHIVOrAIDS_AsFractionOf_Count_Household
+name: "Men who know that consistent condom use can reduce the chance of getting Human immunodeficiency virus ( HIV ) or Acquired Immune Deficiency Syndrome ( AIDS ) (%)"
+description: "Count Person Male Who Know Consistent Condom Use Can Reduce Chance Of Getting HI VOr AI DS As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_WhoKnow_ConsistentCondomUseCanReduceChanceOfGettingHIVOrAIDS_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_WithBMI_BelowNormal_AsFractionOf_Count_Household
+name: "Men whose body mass index ( BMI ) is below normal (%)"
+description: "Count Person Male With BM I Below Normal As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_WithBMI_BelowNormal_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_10YearsOrMore_Schooling_AsFractionOf_Count_Household
+name: "Men with 10 or more years of schooling (%)"
+description: "Count Person Male  10  Years Or More Schooling As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_10YearsOrMore_Schooling_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_Household
+name: "Men suffering from high blood sugar level (%)"
+description: "Count Person Male Suffering From High Blood Sugar Level As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_SufferingFrom_VeryHigh_BloodSugarLevel_AsFractionOf_Count_Household
+name: "Men suffering from very high blood sugar level (%)"
+description: "Count Person Male Suffering From Very High Blood Sugar Level As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_SufferingFrom_VeryHigh_BloodSugarLevel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_SufferingFrom_ElevatedBloodPressure_AsFractionOf_Count_Household
+name: "Elevated blood pressure or taking medicine to control blood pressure (%)"
+description: "Count Person Male Suffering From Elevated Blood Pressure As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_SufferingFrom_ElevatedBloodPressure_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_Undergone_AnOralCavityExamination_ForOralCancer_AsFractionOf_Count_Household
+name: "Men-ever undergone an oral cavity examination for oral cancer (%)"
+description: "Count Person Male Undergone An Oral Cavity Examination For Oral Cancer As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Undergone_AnOralCavityExamination_ForOralCancer_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_Mildly_ElevatedBloodPressure_AsFractionOf_Count_Household
+name: "Men-mildly elevated blood pressure (%)"
+description: "Count Person Male Mildly Elevated Blood Pressure As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Mildly_ElevatedBloodPressure_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Male_ModeratelyOrSeverely_ElevatedBloodPressure_AsFractionOf_Count_Household
+name: "Moderately or severely elevated blood pressure (%)"
+description: "Count Person Male Moderately Or Severely Elevated Blood Pressure As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_ModeratelyOrSeverely_ElevatedBloodPressure_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_PregnantWomen_WhoConsumed_IronFolicAcid_For100DaysOrMore_AsFractionOf_Count_Household
+name: "Mothers who consumed iron folic acid for 100 days or more when they were pregnant (%)"
+description: "Count Pregnant Women Who Consumed Iron Folic Acid For 100  Days Or More As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PregnantWomen_WhoConsumed_IronFolicAcid_For100DaysOrMore_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_PregnantWomen_WhoConsumed_IronFolicAcid_For180DaysOrMore_AsFractionOf_Count_Household
+name: "Mothers who consumed iron folic acid for 180 days or more when they were pregnant (%)"
+description: "Count Pregnant Women Who Consumed Iron Folic Acid For 180  Days Or More As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PregnantWomen_WhoConsumed_IronFolicAcid_For180DaysOrMore_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Mother_RegisteredForAntenatalCareWithinFirstTrimester_AsFractionOf_Count_Household
+name: "Mothers who had an antenatal check-up in the first trimester (%)"
+description: "Count Mother Registered For Antenatal Care Within First Trimester As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Mother_RegisteredForAntenatalCareWithinFirstTrimester_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Mother_WhoHadAtLeast4AntenatalCareVisits_AsFractionOf_Count_Household
+name: "Mothers who had at least 4 antenatal care visits (%)"
+description: "Count Mother Who Had At Least 4  Antenatal Care Visits As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Mother_WhoHadAtLeast4AntenatalCareVisits_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Mother_WhoReceivedPostnatalCare_FromDoctor-Nurse-LHV-ANM-Midwife-OtherHealthPersonnel_Within2daysOf_DeliveryEvent_AsFractionOf_Count_Household
+name: "Mothers who received postnatal care from a doctor or nurse or Lady Health Visitor ( LHV ) or Auxiliary Nurse Midwifery ( ANM ) or midwife or other health personnel within 2 days of delivery (%)"
+description: "Count Mother Who Received Postnatal Care From Doctor-Nurse-L HV-A NM-Midwife-Other Health Personnel Within 2 days Of Delivery Event As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Mother_WhoReceivedPostnatalCare_FromDoctor-Nurse-LHV-ANM-Midwife-OtherHealthPersonnel_Within2daysOf_DeliveryEvent_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Mothers_WhoseLastBirthWasProtectedAgainstNeonatalTetanus_AsFractionOf_Count_Household
+name: "Mothers whose last birth was protected against neonatal tetanus (%)"
+description: "Count Mothers Whose Last Birth Was Protected Against Neonatal Tetanus As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Mothers_WhoseLastBirthWasProtectedAgainstNeonatalTetanus_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Death_28Days_AsFractionOf_Count_BirthEvent_LiveBirth
+name: "Neonatal mortality rate ( NNMR ) (%)"
+description: "Count Death  28  Days As Fraction Of Count Birth Event Live Birth"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Death_28Days_AsFractionOf_Count_BirthEvent_LiveBirth
+statType: dcs:measuredValue
+
+Node: dcid:Count_Children_Months6To23Age_NonBreastfeeding_ReceivingAnAdequateDiet_AsFractionOf_Count_Household
+name: "Non-breastfeeding children age group 6 to 23 months receiving an adequate diet (%)"
+description: "Count Children Months 6  To 23  Age Non Breastfeeding Receiving An Adequate Diet As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months6To23Age_NonBreastfeeding_ReceivingAnAdequateDiet_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months6To23
+
+Node: dcid:Count_NonPregnantWomen_Years15To49Age_WhoAreAnaemic_AsFractionOf_Count_Household
+name: "Non-pregnant women age group 15 to 49 years who are anaemic (%)"
+description: "Count Non Pregnant Women Years 15  To 49  Age Who Are Anaemic As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_NonPregnantWomen_Years15To49Age_WhoAreAnaemic_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_ConsumingPills_AsFractionOf_Count_Household
+name: "Currently married women age group 15 to 49 years consuming pill (%)"
+description: "Count Person Female Married Years 15  To 49  Age Consuming Pills As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_ConsumingPills_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Population_Below_Years15Age_AsFractionOf_Count_Household
+name: "Population below age 15 years (%)"
+description: "Count Population Below Years 15  Age As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Population_Below_Years15Age_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15
+
+Node: dcid:Count_PopulationInHousehold_UsingImprovedSanitationFacility_AsFractionOf_Count_Household
+name: "Population living in households that use an improved sanitation facility (%)"
+description: "Count Population In Household Using Improved Sanitation Facility As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PopulationInHousehold_UsingImprovedSanitationFacility_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_PopulationInHousehold_WithImprovedDrinkingWater_AsFractionOf_Count_Household
+name: "Population living in households with an improved drinking water source (%)"
+description: "Count Population In Household With Improved Drinking Water As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PopulationInHousehold_WithImprovedDrinkingWater_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_PopulationInHousehold_WithElectricity_AsFractionOf_Count_Household
+name: "Population living in households with electricity (%)"
+description: "Count Population In Household With Electricity As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PopulationInHousehold_WithElectricity_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_PregnantWomen_Years15To49Age_Anaemic_AsFractionOf_Count_Household
+name: "Pregnant women age group 15 to 49 years who are anaemic (%)"
+description: "Count Pregnant Women Years 15  To 49  Age Anaemic As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PregnantWomen_Years15To49Age_Anaemic_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Diarrhoea_In2Weeks_PrecedingTheSurvey_AsFractionOf_Count_Household
+name: "Prevalence of diarrhoea in the 2 weeks preceding the survey (%)"
+description: "Count Person Diarrhoea In 2  Weeks Preceding The Survey As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Diarrhoea_In2Weeks_PrecedingTheSurvey_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_SymptomsOfAcuteRespiratoryInfection_In2Weeks_PrecedingTheSurvey_AsFractionOf_Count_Household
+name: "Prevalence of symptoms of Acute Respiratory Infection (ARI) in the 2 weeks preceding the survey (%)"
+description: "Count Person Symptoms Of Acute Respiratory Infection In 2  Weeks Preceding The Survey As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_SymptomsOfAcuteRespiratoryInfection_In2Weeks_PrecedingTheSurvey_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_PregnantWomen_Regisered_WhoReceived_MotherChildProtectionCard_AsFractionOf_Count_Household
+name: "Registered pregnancies for which the mother received a mother and child protection card ( MCP )(%)"
+description: "Count Pregnant Women Regisered Who Received Mother Child Protection Card As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_PregnantWomen_Regisered_WhoReceived_MotherChildProtectionCard_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Per1000Male
+name: "Sex ratio of the total population (%)"
+description: "Count Person Female Per 1000  Male"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Per1000Male
+statType: dcs:measuredValue
+
+Node: dcid:Count_Children_Months6To23Age_ReceivingAdeqauteDiet_AsFractionOf_Count_Household
+name: "Children age group 6 to 23 months receiving an adequate diet (%)"
+description: "Count Children Months 6  To 23  Age Receiving Adeqaute Diet As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Children_Months6To23Age_ReceivingAdeqauteDiet_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Months6To23
+
+Node: dcid:Fertility_Rate
+name: "Fertility rate (%)"
+description: "Fertility Rate"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Fertility_Rate
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_Female_Married_Years15To49Age_UnmetNeedForFamilyPlanning_AsFractionOf_Count_Household
+name: "Married women age group 15 to 49 years Unmet need for family planning (%)"
+description: "Count Person Female Married Years 15  To 49  Age Unmet Need For Family Planning As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Married_Years15To49Age_UnmetNeedForFamilyPlanning_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Death_Under5YearsAge_AsFractionOf_Count_BirthEvent_LiveBirth
+name: "Infant and child (Under five year) mortality rates (%)"
+description: "Count Death Under 5  Years Age As Fraction Of Count Birth Event Live Birth"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Death_Under5YearsAge_AsFractionOf_Count_BirthEvent_LiveBirth
+statType: dcs:measuredValue
+age: dcs:Under5Years
+
+Node: dcid:Count_Person_Female_UnmetNeedForFamilyPlanning_AsFractionOf_Count_Household
+name: "Women Unmet need for family planning (%)"
+description: "Count Person Female Unmet Need For Family Planning As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_UnmetNeedForFamilyPlanning_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Years15OrAboveAge_WhoConsume_Alcohol_AsFractionOf_Count_Household
+name: "Women age group 15 years and above who consume alcohol (%)"
+description: "Count Person Female Years 15  Or Above Age Who Consume Alcohol As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15OrAboveAge_WhoConsume_Alcohol_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15OrAbove
+
+Node: dcid:Count_Person_Female_Years15OrAboveAge_WhoUse_Tobacco_AsFractionOf_Count_Household
+name: "Women age group 15 years and above who use any kind of tobacco (%)"
+description: "Count Person Female Years 15  Or Above Age Who Use Tobacco As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15OrAboveAge_WhoUse_Tobacco_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15OrAbove
+
+Node: dcid:Count_Person_Female_Years15To19Age_AlreadyMothers_OrPregnant_AtTimeOfSurvey_AsFractionOf_Count_Household
+name: "Women age group 15 to 19 years who were already mothers or pregnant at the time of the survey (%)"
+description: "Count Person Female Years 15  To 19  Age Already Mothers Or Pregnant At Time Of Survey As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15To19Age_AlreadyMothers_OrPregnant_AtTimeOfSurvey_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To19
+
+Node: dcid:Count_Person_Female_Years15To24Age_UsingHygenicMethodsOfProtectionDuringMenstrualPeriods_AsfractionOf_Count_Household
+name: "Women age group 15 to 24 years who use hygienic methods of protection during their menstrual period (%)"
+description: "Count Person Female Years 15  To 24  Age Using Hygenic Methods Of Protection During Menstrual Periods Asfraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15To24Age_UsingHygenicMethodsOfProtectionDuringMenstrualPeriods_AsfractionOf_Count_Household
+statType: dcs:measuredValue
+age: dcs:Years15To24
+
+Node: dcid:Count_Person_Female_Years20To24Age_MarriedBefore18Years_AsFractionOf_Count_Household
+name: "Women age group 20 to 24 years married before age 18 years (%)"
+description: "Count Person Female Years 20  To 24  Age Married Before 18  Years As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years20To24Age_MarriedBefore18Years_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years20To24
+
+Node: dcid:Count_Person_Female_MobilePhone_PersonalUse_AsFractionOf_Count_Household
+name: "Women having a mobile phone that they themselves use (%)"
+description: "Count Person Female Mobile Phone Personal Use As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_MobilePhone_PersonalUse_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Owning_HouseOrLand_AloneOrwithOthers_AsFractionOf_Count_Household
+name: "Women owning a house and or land (alone or jointly with others) (%)"
+description: "Count Person Female Owning House Or Land Alone Orwith Others As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Owning_HouseOrLand_AloneOrwithOthers_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Years15To49Age_Literate_AsFractionOf_Count_Household
+name: "Women age group 15 to 49 years who are literate (%)"
+description: "Count Person Female Years 15  To 49  Age Literate As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years15To49Age_Literate_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Male_Years15To49Age_Literate_AsFractionOf_Count_Household
+name: "Men age group 15 to 49 years who are literate (%)"
+description: "Count Person Male Years 15  To 49  Age Literate As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Male_Years15To49Age_Literate_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years15To49
+
+Node: dcid:Count_Person_Female_Overweight_Obese_AsFractionOf_Count_Household
+name: "Women who are overweight or obese (%)"
+description: "Count Person Female Overweight Obese As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Overweight_Obese_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
+name: "Women who have comprehensive knowledge of Human immunodeficiency virus ( HIV ) or Acquired Immune Deficiency Syndrome(AIDS) (%)"
+description: "Count Person Female Comprehensive Knowledge Of HI VA ID S As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_WhoUsedInternet_AsFractionOf_Count_Household
+name: "Women who have ever used the internet (%)"
+description: "Count Person Female Who Used Internet As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_WhoUsedInternet_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_HighRisk_WaistToHipRatio_AsFractionOf_Count_Household
+name: "Women who have high risk waist-to-hip ratio (%)"
+description: "Count Person Female High Risk Waist To Hip Ratio As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_HighRisk_WaistToHipRatio_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_WhoKnow_ConsistentCondomUse_CanReduceChanceOfGettingHIVOrAIDS_AsFractionOf_Count_Household
+name: "Women who know that consistent condom use can reduce the chance of getting Human immunodeficiency virus ( HIV ) or Acquired Immune Deficiency Syndrome ( AIDS ) (%)"
+description: "Count Person Female Who Know Consistent Condom Use Can Reduce Chance Of Getting HI VOr AI DS As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_WhoKnow_ConsistentCondomUse_CanReduceChanceOfGettingHIVOrAIDS_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_WhoWorked_InLast12Months_PaidInCash_AsFractionOf_Count_Household
+name: "Women who worked in the last 12 months and were paid in cash (%)"
+description: "Count Person Female Who Worked In Last 12  Months Paid In Cash As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_WhoWorked_InLast12Months_PaidInCash_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_WithBMI_BelowNormal_AsFractionOf_Count_Household
+name: "Women with body mass index ( BMI ) below normal (%)"
+description: "Count Person Female With BM I Below Normal As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_WithBMI_BelowNormal_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_10YearsOrMore_Schooling_AsFractionOf_Count_Household
+name: "Women with 10 or more years of schooling (%)"
+description: "Count Person Female  10  Years Or More Schooling As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_10YearsOrMore_Schooling_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_Household
+name: "Women suffering from high blood sugar level (%)"
+description: "Count Person Female Suffering From High Blood Sugar Level As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_SufferingFrom_HighOrVeryHigh_BloodSugarLevel_AsFractionOf_Count_Household
+name: "Women suffering from high or very high blood sugar level (%)"
+description: "Count Person Female Suffering From High Or Very High Blood Sugar Level As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_SufferingFrom_HighOrVeryHigh_BloodSugarLevel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_SufferingFrom_VeryHigh_BloodSugarLevel_AsFractionOf_Count_Household
+name: "Women suffering from very high blood sugar level (%)"
+description: "Count Person Female Suffering From Very High Blood Sugar Level As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_SufferingFrom_VeryHigh_BloodSugarLevel_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_SufferingFrom_ElevatedBloodPressure_AsFractionOf_Count_Household
+name: "Women suffering from elevated blood pressure (%)"
+description: "Count Person Female Suffering From Elevated Blood Pressure As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_SufferingFrom_ElevatedBloodPressure_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_ABreastExamination_ForBreastCancer_AsFractionOf_Count_Household
+name: "Women who have ever undergone a breast examination for breast cancer (%)"
+description: "Count Person Female A Breast Examination For Breast Cancer As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_ABreastExamination_ForBreastCancer_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_AScreeningTest_ForCervicalCancer_AsFractionOf_Count_Household
+name: "Women-ever undergone a screening test for cervical cancer (%)"
+description: "Count Person Female A Screening Test For Cervical Cancer As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_AScreeningTest_ForCervicalCancer_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_AnOralCavityExamination_ForOralCancer_AsFractionOf_Count_Household
+name: "Women-ever undergone an oral cavity examination for oral cancer (%)"
+description: "Count Person Female An Oral Cavity Examination For Oral Cancer As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_AnOralCavityExamination_ForOralCancer_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Mildly_ElevatedBloodPressure_AsFractionOf_Count_Household
+name: "Women-mildly elevated blood pressure (%)"
+description: "Count Person Female Mildly Elevated Blood Pressure As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Mildly_ElevatedBloodPressure_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_ModeratelyOrSeverely_ElevatedBloodPressure_AsFractionOf_Count_Household
+name: "Women-moderately or severely elevated blood pressure (%)"
+description: "Count Person Female Moderately Or Severely Elevated Blood Pressure As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_ModeratelyOrSeverely_ElevatedBloodPressure_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+
+Node: dcid:Count_Person_Female_Years18To29Age_WhoExperienced_SexualViolenceBy18_AsFractionOf_Count_Household
+name: "Young women age group 18 to 29 years who experienced sexual violence by age18 (%)"
+description: "Count Person Female Years 18  To 29  Age Who Experienced Sexual Violence By 18  As Fraction Of Count Household"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Person_Female_Years18To29Age_WhoExperienced_SexualViolenceBy18_AsFractionOf_Count_Household
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:Years18To29
