@@ -1,0 +1,8 @@
+Node: E:NITI_EnergyConsumptionCoal->E0
+observationAbout: C:NITI_EnergyConsumptionCoal->observationAbout
+observationDate: C:NITI_EnergyConsumptionCoal->observationDate
+value: C:NITI_EnergyConsumptionCoal->value
+variableMeasured: C:NITI_EnergyConsumptionCoal->variableMeasured
+unit: C:NITI_EnergyConsumptionCoal->unit
+scalingFactor: C:NITI_EnergyConsumptionCoal->scalingFactor
+typeOf: dcs:StatVarObservation
