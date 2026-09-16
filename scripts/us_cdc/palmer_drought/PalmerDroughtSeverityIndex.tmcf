@@ -1,0 +1,7 @@
+Node: E:Data->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:Data->observationAbout
+observationDate: C:Data->observationDate
+value: C:Data->value
+variableMeasured: C:Data->variableMeasured
+observationPeriod: "P1M"
