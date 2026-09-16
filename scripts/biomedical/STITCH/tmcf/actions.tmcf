@@ -1,0 +1,18 @@
+Node: E:actions->E1
+typeOf: dcs:Protein
+dcid: C:actions->protein
+
+Node: E:actions->E2
+typeOf: dcs:Drug
+dcid: C:actions->chemical
+
+Node: E:actions->E3
+typeOf: dcs:ChemicalCompoundProteinInteraction
+name: C:actions->name_interaction
+dcid: C:actions->dcid
+chemicalInteractionMode: C:actions->mode
+score: C:actions->score
+enzymaticReactionEffect: C:actions->action
+chemicalIsActing: C:actions->chemical_is_acting
+proteinID: E:actions->E1
+compoundID: E:actions->E2
