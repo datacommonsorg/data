@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://wonder.cdc.gov/ucd-icd10-expanded.html",
+            "provenance_url": "https://wonder.cdc.gov/deaths-by-underlying-cause.html",
             "provenance_description": "County-level mortality statistics for all causes of death (ICD-10 113 Cause List) across all US states from CDC WONDER.",
             "scripts": [
                 "download.py",
