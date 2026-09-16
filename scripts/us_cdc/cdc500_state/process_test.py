@@ -138,8 +138,8 @@ class CDC500StateProcessTest(unittest.TestCase):
 
         # Extract cdc_sv CTE from process.QUERY and execute against TimeSeries
         adapted_sql = _prepare_duckdb_query(process.QUERY)
-        cdc_sv_sql = adapted_sql.split('svo_percent AS (')[0].rstrip().rstrip(
-            ',')
+        cdc_sv_sql = adapted_sql.split('svo_percent AS (',
+                                       maxsplit=1)[0].rstrip().rstrip(',')
         result_df = con.execute(
             f"{cdc_sv_sql} SELECT cdc500, pop_statvar FROM cdc_sv").df()
 
@@ -272,6 +272,126 @@ class CDC500StateProcessTest(unittest.TestCase):
                          'dcAggregate/CrudePrevalence')
         self.assertAlmostEqual(result_df['percent'].iloc[0], 36.0, places=4)
 
+    def test_hawaii_honolulu_county_edge_cases(self):
+        """Tests Honolulu County (geoId/15003) filtering and empty measurement_method."""
+        con = duckdb.connect(':memory:')
+        con.create_function(
+            'REGEXP_CONTAINS', lambda s, p: bool(re.search(p, s))
+            if s and p else False, [str, str], bool)
+        con.create_function(
+            'SAFE_DIVIDE', lambda a, b: float(a) / float(b)
+            if (a is not None and b) else None, [float, float], float)
+
+        # Test 2016 (county included), 2017 non-BP (county included),
+        # 2017 BP (county excluded, 13-char CDP used), and empty measurement_method.
+        ts_df = pd.DataFrame([
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/15003',
+                'facet_id': 'f1',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': ''
+            },
+            {
+                'variable_measured': 'Percent_Person_WithHighBloodPressure',
+                'entity1': 'geoId/15003',
+                'facet_id': 'f1',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': 'CrudePrevalence'
+            },
+            {
+                'variable_measured': 'Percent_Person_WithHighBloodPressure',
+                'entity1': 'geoId/1571550',
+                'facet_id': 'f1',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': 'CrudePrevalence'
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/15003',
+                'facet_id': 'f2',
+                'provenance': 'dc/base/CensusACS5YearSurvey',
+                'measurement_method': ''
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/1571550',
+                'facet_id': 'f2',
+                'provenance': 'dc/base/CensusACS5YearSurvey',
+                'measurement_method': ''
+            },
+        ])
+        obs_df = pd.DataFrame([
+            # 2016: geoId/15003 should be INCLUDED (value 22.5)
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/15003',
+                'date': '2016',
+                'value': '22.5',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/15003',
+                'date': '2016',
+                'value': '950000',
+                'facet_id': 'f2',
+                'last_update_timestamp': 100
+            },
+            # 2017 HighBloodPressure: geoId/15003 (99.0) must be EXCLUDED;
+            # 13-char CDP geoId/1571550 (31.2) must be INCLUDED.
+            {
+                'variable_measured': 'Percent_Person_WithHighBloodPressure',
+                'entity1': 'geoId/15003',
+                'date': '2017',
+                'value': '99.0',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Percent_Person_WithHighBloodPressure',
+                'entity1': 'geoId/1571550',
+                'date': '2017',
+                'value': '31.2',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/15003',
+                'date': '2017',
+                'value': '950000',
+                'facet_id': 'f2',
+                'last_update_timestamp': 100
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/1571550',
+                'date': '2017',
+                'value': '350000',
+                'facet_id': 'f2',
+                'last_update_timestamp': 100
+            },
+        ])
+        con.register('TimeSeries', ts_df)
+        con.register('Observation', obs_df)
+
+        sql = _prepare_duckdb_query(process.QUERY)
+        result_df = con.execute(sql).df().sort_values(
+            by=['observation_date', 'statvar']).reset_index(drop=True)
+
+        self.assertEqual(len(result_df), 2)
+        # 2016 row: geoId/15003 included, empty measurement_method -> 'dcAggregate'
+        self.assertEqual(result_df['observation_date'].iloc[0], '2016')
+        self.assertEqual(result_df['measurement_method'].iloc[0], 'dcAggregate')
+        self.assertAlmostEqual(result_df['percent'].iloc[0], 22.5, places=4)
+        # 2017 BP row: geoId/15003 excluded, only geoId/1571550 (31.2) included
+        self.assertEqual(result_df['observation_date'].iloc[1], '2017')
+        self.assertEqual(result_df['measurement_method'].iloc[1],
+                         'dcAggregate/CrudePrevalence')
+        self.assertAlmostEqual(result_df['percent'].iloc[1], 31.2, places=4)
+
     def test_run_process_success(self):
         """Tests successful query execution and atomic output writing."""
         mock_client = mock.MagicMock()
@@ -337,7 +457,7 @@ class CDC500StateProcessTest(unittest.TestCase):
 
         def fake_to_csv(filepath, index=False):
             del index  # Unused.
-            with open(filepath, 'w'):
+            with open(filepath, 'w', encoding='utf-8'):
                 pass  # Create 0-byte file
 
         mock_df.to_csv.side_effect = fake_to_csv

@@ -10,6 +10,7 @@ Author: Padma Gundapaneni @padma-g
 2. [About the Import](#about-the-import)
     1. [Artifacts](#artifacts)
     2. [Import Procedure](#import-procedure)
+    3. [Troubleshooting](#troubleshooting)
 
 ## About the Dataset
 
@@ -67,6 +68,9 @@ The following age-bracketed cancer screening indicators are omitted from state-l
 #### Validation Config
 [`validation_config.json`](validation_config.json)
 
+#### Manifest
+[`manifest.json`](manifest.json)
+
 ### Import Procedure
 
 #### Prerequisites
@@ -109,3 +113,11 @@ $ python3 -m unittest scripts.us_cdc.cdc500_state.process_test
 
 This import is automated via Data Commons Import Automation and scheduled to run weekly via Cloud Batch every Monday at 01:00 UTC (`cron_schedule: "0 1 * * 1"` in `manifest.json`).
 
+- **Import Type**: Automated (weekly Cloud Batch cron: `0 1 * * 1`)
+- **Production GCS Path**: `gs://datcom-prod-imports/scripts/us_cdc/cdc500_state/CDC500_States/`
+- **Test GCS Path**: `gs://datcom-import-test/scripts/us_cdc/cdc500_state/CDC500_States/`
+
+### Troubleshooting
+
+- **`RuntimeError: BigQuery query returned 0 rows`**: Verify ADC authentication (`gcloud auth application-default login`) and ensure read permissions on `datcom-store.spanner_dc_graph_prod_DEFAULT`. Pass `--project=<gcp_project_id>` if running outside the default project.
+- **`check_statvar_max_dates` validation failure**: When CDC PLACES publishes a new release year, update the `CASE` statement in `validation_config.json` (`check_statvar_max_dates`) to reflect the new expected vintage years per cohort.

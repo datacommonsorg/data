@@ -38,11 +38,11 @@
         },
         {
             "rule_id": "check_statvar_max_dates",
-            "description": "Verifies that MaxDate meets expected vintage freshness per StatVar cohort.",
+            "description": "Verifies that MaxDate meets expected vintage per StatVar cohort.",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, TRY_CAST(MaxDate AS INTEGER) AS max_year, CASE WHEN StatVar = 'Percent_Person_WithAllTeethLoss' THEN 2016 WHEN regexp_matches(StatVar, 'CorePreventiveServices') THEN 2020 WHEN regexp_matches(StatVar, 'HighBloodPressure|Cholesterol|ChronicKidneyDisease') THEN 2021 ELSE 2022 END AS expected_year FROM stats",
-                "condition": "max_year >= expected_year"
+                "condition": "max_year IS NOT NULL AND max_year >= expected_year"
             }
         }
     ]

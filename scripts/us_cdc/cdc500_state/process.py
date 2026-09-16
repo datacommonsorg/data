@@ -72,7 +72,6 @@ svo_percent AS (
     AND O.entity1 = T.entity1
     AND O.facet_id = T.facet_id
     AND T.provenance = 'dc/base/CDC500'
-    AND T.variable_measured LIKE 'Percent_%'
   INNER JOIN cdc_sv
     ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
@@ -91,7 +90,6 @@ svo_percent AS (
         )
       )
     )
-    AND O.variable_measured LIKE 'Percent_%'
     AND SAFE_CAST(O.value AS FLOAT64) IS NOT NULL
   QUALIFY ROW_NUMBER() OVER (
     PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
@@ -130,7 +128,7 @@ SELECT
   SUBSTR(p.observation_about, 1, 8) AS observation_about,
   p.observation_date,
   COALESCE(
-    CONCAT('dcAggregate/', p.measurement_method), 'dcAggregate'
+    'dcAggregate/' || NULLIF(TRIM(p.measurement_method), ''), 'dcAggregate'
   ) AS measurement_method,
   SAFE_DIVIDE(
     SUM(SAFE_CAST(c.population AS FLOAT64) * SAFE_CAST(p.percent AS FLOAT64)),
@@ -179,6 +177,7 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
 
 
 def main(argv):
+    """Main entry point for the CDC 500 state aggregation script."""
     del argv  # Unused.
     client = bigquery.Client(project=_FLAGS.project)
     output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
