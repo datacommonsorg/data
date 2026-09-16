@@ -1,5 +1,5 @@
 {
-    "year_range": "16-20",
+    "year_range": "16-22",
     "data_cols": [
         "Births",
         "Average Age of Mother (years)",
@@ -160,6 +160,9 @@
             "15": {
                 "mothersAge": "[15 Years]"
             },
+            "15-": {
+                "mothersAge": "[15 - Years]"
+            },
             "16": {
                 "mothersAge": "[16 Years]"
             },
@@ -187,6 +190,9 @@
             "24": {
                 "mothersAge": "[24 Years]"
             },
+            "20-24": {
+                "mothersAge": "[20 24 Years]"
+            },
             "25": {
                 "mothersAge": "[25 Years]"
             },
@@ -201,6 +207,9 @@
             },
             "29": {
                 "mothersAge": "[29 Years]"
+            },
+            "25-29": {
+                "mothersAge": "[25 29 Years]"
             },
             "30": {
                 "mothersAge": "[30 Years]"
@@ -217,6 +226,9 @@
             "34": {
                 "mothersAge": "[34 Years]"
             },
+            "30-34": {
+                "mothersAge": "[30 34 Years]"
+            },
             "35": {
                 "mothersAge": "[35 Years]"
             },
@@ -231,6 +243,9 @@
             },
             "39": {
                 "mothersAge": "[39 Years]"
+            },
+            "35-39": {
+                "mothersAge": "[35 39 Years]"
             },
             "40": {
                 "mothersAge": "[40 Years]"
@@ -247,6 +262,9 @@
             "44": {
                 "mothersAge": "[44 Years]"
             },
+            "40-44": {
+                "mothersAge": "[40 44 Years]"
+            },
             "45": {
                 "mothersAge": "[45 Years]"
             },
@@ -261,6 +279,9 @@
             },
             "49": {
                 "mothersAge": "[49 Years]"
+            },
+            "45-49": {
+                "mothersAge": "[45 49 Years]"
             },
             "All": {},
             "50+": {
@@ -284,10 +305,10 @@
                 "mothersEthnicity": "CDC_EthnicityUnknownOrNotStated"
             },
             "All": {},
-            "2135-2": {
+            "2135-...": {
                 "mothersEthnicity": "HispanicOrLatino"
             },
-            "2186-5": {
+            "2186-...": {
                 "mothersEthnicity": "NotHispanicOrLatino"
             }
         },

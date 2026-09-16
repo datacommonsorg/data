@@ -29,7 +29,7 @@ class CDCNatality(unittest.TestCase):
             mcf_path = os.path.join(tmp_dir, 'output.mcf')
             preprocess_path = os.path.join(_SCRIPT_PATH, 'preprocess.py')
             config_path = os.path.join(_SCRIPT_PATH, 'state',
-                                       '16-20_state.json')
+                                       '16-22_state.json')
             input_path = os.path.join(_SCRIPT_PATH, 'testdata', 'cleaned_data')
 
             subprocess.call([
