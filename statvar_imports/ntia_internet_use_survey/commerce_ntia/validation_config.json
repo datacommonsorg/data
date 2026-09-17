@@ -14,8 +14,8 @@
       "description": "Checks that all active StatVars (1935 in input0, 227 in input1) have MaxDate >= 2023-11.",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT COUNT(*) AS total_svs, SUM(CASE WHEN MaxDate >= '2023-11' THEN 1 ELSE 0 END) AS active_svs FROM stats",
-        "condition": "active_svs >= CASE WHEN total_svs > 500 THEN 1935 ELSE 227 END"
+        "query": "SELECT COUNT(*) AS total_svs, COALESCE(SUM(CASE WHEN MaxDate >= '2023-11' THEN 1 ELSE 0 END), 0) AS active_svs FROM stats",
+        "condition": "(total_svs >= 1935 AND active_svs >= 1935) OR (total_svs BETWEEN 227 AND 300 AND active_svs >= 227)"
       }
     },
     {
@@ -24,7 +24,7 @@
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate FROM stats",
-        "condition": "MaxDate >= '2013-07'"
+        "condition": "MaxDate IS NOT NULL AND MaxDate >= '2013-07'"
       }
     }
   ]
