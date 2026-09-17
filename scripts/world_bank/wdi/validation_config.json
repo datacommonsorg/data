@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted observation points do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that latest MaxDate is within 1 year of current year.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(CAST(MaxDate AS INT)) AS latest_year FROM stats",
+                "condition": "latest_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1)"
+            }
+        }
+    ]
+}
