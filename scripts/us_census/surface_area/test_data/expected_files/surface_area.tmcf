@@ -1,0 +1,7 @@
+Node: E:Data->E0
+typeOf: schema:StatVarObservation
+variableMeasured: dcs:SurfaceArea
+observationAbout: C:Data->dcid
+observationDate: C:Data->observationDate
+value: C:Data->SurfaceArea
+unit: dcs:SquareMile
