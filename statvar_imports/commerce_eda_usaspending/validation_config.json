@@ -1,0 +1,29 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "active_programs_freshness",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM stats WHERE (StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks') OR StatVar IN ('Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks'))",
+                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= 2024"
+            }
+        },
+        {
+            "rule_id": "non_negative_investment_amounts",
+            "description": "Checks that investment amounts are non-negative.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "minimum_observations_per_statvar",
+            "description": "Checks that each StatVar has at least one observation.",
+            "validator": "NUM_OBSERVATIONS_CHECK",
+            "params": {
+                "minimum": 1
+            }
+        }
+    ]
+}
