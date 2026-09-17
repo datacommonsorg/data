@@ -9,8 +9,8 @@
       "source_files": [
         "input_files/*.xlsx",
         "input_files/*.csv",
-        "golden_data/*.csv",
-        "counters/*.csv"
+        "counters/*.csv",
+        "validation_config.json"
       ],
       "import_inputs": [
         {
@@ -24,8 +24,8 @@
           "node_mcf": "output_files/*.mcf"
         },
         {
-          "template_mcf": "output_files/teachers_and_staff_2018_2022_output.tmcf",
-          "cleaned_csv": "output_files/teachers_and_staff_2018_2022_output.csv",
+          "template_mcf": "output_files/teachers_and_staff_2018Onwards_output.tmcf",
+          "cleaned_csv": "output_files/teachers_and_staff_2018Onwards_output.csv",
           "node_mcf": "output_files/*.mcf"
         }
       ],
