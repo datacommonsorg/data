@@ -10,7 +10,7 @@ This import focuses on data about full-time equivalent (FTE) teachers and staff 
 - **Provenance URL**: [https://civilrightsdata.ed.gov/data](https://civilrightsdata.ed.gov/data)
 - **Geographic Entities**: Public schools across the United States identified by NCES School IDs (`nces/...`).
 - **Temporal Scope**: Biennial data covering school years 2009-10 (2010), 2011-12 (2012), 2013-14 (2014), 2015-16 (2016), 2017-18 (2018), 2020-21 (2021), 2021-22 (2022), and 2023-24 (2024). Future releases are automatically supported.
-- **Statistical Variables**: Number of Full-Time Equivalent (FTE) teachers and school staff (Total FTE teachers, certified teachers, uncertified teachers, school counselors, nurses, psychologists, social workers, and security staff / law enforcement officers).
+- **Statistical Variables**: Number of Full-Time Equivalent (FTE) teachers and school staff (Total FTE teachers, certified teachers, uncertified teachers, 1st/2nd year teachers, teachers absent >10 days, school counselors, nurses, psychologists, social workers, and security staff / law enforcement officers), plus teacher headcounts by race/gender and current/previous school year totals.
 
 -----
 
@@ -129,7 +129,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --pv_map=teachers_and_staff_pvmap.csv \
   --config_file=metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --output_path=test_data/test_output
+  --output_path=test_data/teachers_and_staff_output
 ```
 
 -----
