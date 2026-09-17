@@ -11,12 +11,14 @@
                 "process.py --dataset=COAL"
             ],
             "source_files": [
-                "gcs_output/COAL/COAL.txt"
+                "gcs_output/COAL/COAL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/COAL/COAL.tmcf",
-                    "cleaned_csv": "gcs_output/COAL/COAL.csv"
+                    "cleaned_csv": "gcs_output/COAL/COAL.csv",
+                    "node_mcf": "gcs_output/COAL/*.mcf"
                 }
             ],
             "cron_schedule": "0 14 5,20 * *",
@@ -28,17 +30,19 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
-            "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and \u201csectors\u201d (like residential, commercial, etc.).",
+            "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and “sectors” (like residential, commercial, etc.).",
             "scripts": [
                 "process.py --dataset=ELEC"
             ],
             "source_files": [
-                "gcs_output/ELEC/ELEC.txt"
+                "gcs_output/ELEC/ELEC.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/ELEC/ELEC.tmcf",
-                    "cleaned_csv": "gcs_output/ELEC/ELEC.csv"
+                    "cleaned_csv": "gcs_output/ELEC/ELEC.csv",
+                    "node_mcf": "gcs_output/ELEC/*.mcf"
                 }
             ],
             "resource_limits": {
@@ -60,12 +64,14 @@
                 "process.py --dataset=NG"
             ],
             "source_files": [
-                "gcs_output/NG/NG.txt"
+                "gcs_output/NG/NG.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/NG/NG.tmcf",
-                    "cleaned_csv": "gcs_output/NG/NG.csv"
+                    "cleaned_csv": "gcs_output/NG/NG.csv",
+                    "node_mcf": "gcs_output/NG/*.mcf"
                 }
             ],
             "cron_schedule": "0 8 5,20 * *",
@@ -82,12 +88,14 @@
                 "process.py --dataset=NUC_STATUS"
             ],
             "source_files": [
-                "gcs_output/NUC_STATUS/NUC_STATUS.txt"
+                "gcs_output/NUC_STATUS/NUC_STATUS.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/NUC_STATUS/NUC_STATUS.tmcf",
-                    "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
+                    "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv",
+                    "node_mcf": "gcs_output/NUC_STATUS/*.mcf"
                 }
             ],
             "cron_schedule": "0 9 5,20 * *",
@@ -104,12 +112,14 @@
                 "process.py --dataset=PET"
             ],
             "source_files": [
-                "gcs_output/PET/PET.txt"
+                "gcs_output/PET/PET.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/PET/PET.tmcf",
-                    "cleaned_csv": "gcs_output/PET/PET.csv"
+                    "cleaned_csv": "gcs_output/PET/PET.csv",
+                    "node_mcf": "gcs_output/PET/*.mcf"
                 }
             ],
             "cron_schedule": "0 10 5,20 * *",
@@ -126,12 +136,14 @@
                 "process.py --dataset=INTL"
             ],
             "source_files": [
-                "gcs_output/INTL/INTL.txt"
+                "gcs_output/INTL/INTL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/INTL/INTL.tmcf",
-                    "cleaned_csv": "gcs_output/INTL/INTL.csv"
+                    "cleaned_csv": "gcs_output/INTL/INTL.csv",
+                    "node_mcf": "gcs_output/INTL/*.mcf"
                 }
             ],
             "cron_schedule": "0 11 5,20 * *",
@@ -148,12 +160,14 @@
                 "process.py --dataset=SEDS"
             ],
             "source_files": [
-                "gcs_output/SEDS/SEDS.txt"
+                "gcs_output/SEDS/SEDS.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/SEDS/SEDS.tmcf",
-                    "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
+                    "cleaned_csv": "gcs_output/SEDS/SEDS.csv",
+                    "node_mcf": "gcs_output/SEDS/*.mcf"
                 }
             ],
             "cron_schedule": "0 12 5,20 * *",
@@ -170,12 +184,14 @@
                 "process.py --dataset=TOTAL"
             ],
             "source_files": [
-                "gcs_output/TOTAL/TOTAL.txt"
+                "gcs_output/TOTAL/TOTAL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/TOTAL/TOTAL.tmcf",
-                    "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
+                    "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv",
+                    "node_mcf": "gcs_output/TOTAL/*.mcf"
                 }
             ],
             "cron_schedule": "0 13 5,20 * *",
