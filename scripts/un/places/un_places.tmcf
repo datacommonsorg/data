@@ -1,0 +1,10 @@
+Node: E:UN->E0
+typeOf: C:UN->typeOf
+dcid: C:UN->dcid
+name: C:UN->name
+alternateName: C:UN->alternateName
+unDataCode: C:UN->UnDataCode
+containedInPlace: C:UN->containedInPlace
+containedInPlace: C:UN->Parent_dcid
+wikidataId: C:UN->wikidataId
+
