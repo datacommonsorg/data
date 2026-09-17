@@ -169,6 +169,15 @@ class CommonDownloadScriptTest(unittest.TestCase):
         values = query[0]['selection']['values']
         self.assertIn('5', values)
         self.assertNotIn('511', values)
+        expected_values = [
+            "0",
+            "1", "181", "182", "183", "184", "185",
+            "2", "261", "262", "263", "264", "265", "267",
+            "3", "341", "342", "343", "344", "345", "346", "348",
+            "4", "421", "422", "423",
+            "5"
+        ]
+        self.assertEqual(values, expected_values)
 
     @mock.patch('common_download_script.fetch_and_save_data')
     @mock.patch('os.makedirs')

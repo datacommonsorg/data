@@ -95,15 +95,21 @@ EMPLOYMENT_TABLES = [
     {
         "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_002V5.px",
         "filename": "registered_unemployed_by_education_level_region_gender_month.csv",
+        # PxWeb API does not support negative/exclusion filters, so we explicitly list
+        # all 27 valid region codes to exclude legacy duplicate code "511" ("  Ulaanbaatar"),
+        # which collides with code "5" ("Ulaanbaatar") after whitespace stripping and has
+        # conflicting historical counts (2008-01 to 2011-09).
         "query": [{
             "code": "Бүс",
             "selection": {
                 "filter": "item",
                 "values": [
-                    "0", "1", "183", "182", "181", "185", "184", "2",
-                    "265", "264", "263", "261", "262", "267", "3", "342",
-                    "345", "344", "348", "346", "343", "341", "4", "421",
-                    "422", "423", "5"
+                    "0",
+                    "1", "181", "182", "183", "184", "185",
+                    "2", "261", "262", "263", "264", "265", "267",
+                    "3", "341", "342", "343", "344", "345", "346", "348",
+                    "4", "421", "422", "423",
+                    "5"
                 ]
             }
         }]
