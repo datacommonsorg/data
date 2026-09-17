@@ -3,7 +3,7 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records is within the 7% threshold.",
+            "description": "Checks that the percentage of deleted records is within the 7% threshold. Justification: Accommodates up to 6.94% deletions observed in sub-imports (6.94% in sub_division_wise_annual_rainfall and 5.64% in agriculture) due to: (1) place resolution fixes remapping 'Haryana, Delhi & Chandigarh' from Q1174 to dcid:HaryanaDelhiChandigarh and 'NCT of Delhi' from Q1352 (Chennai) to Q9357528, (2) unit correction for Annual_Amount_FarmInventory_Fruits from Hectare to MetricTon, and (3) official RBI retrospective revisions to provisional historical data.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 7

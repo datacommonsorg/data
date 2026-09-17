@@ -48,10 +48,10 @@ class PreprocessFilesTest(absltest.TestCase):
                 failed = rbi_download.preprocess_files(directory)
 
             self.assertEqual(workbook.read_bytes(), b'original workbook')
-            mock_error.assert_called_once_with(
+            mock_error.assert_any_call(
                 'Error processing source.xlsx: transform failed')
-            mock_fatal.assert_called_once()
-            self.assertIn('source.xlsx', mock_fatal.call_args[0][0])
+            self.assertEqual(mock_error.call_count, 2)
+            mock_fatal.assert_not_called()
             self.assertEqual(failed, ['source.xlsx'])
 
     def test_preprocess_files_converts_numeric_headers(self):
@@ -97,18 +97,21 @@ class PreprocessFilesTest(absltest.TestCase):
             self.assertTrue(pd.isna(processed.iloc[0, 2]))
             self.assertTrue(pd.isna(processed.iloc[1, 1]))
 
-    def test_preprocess_files_fatal_on_missing_dir(self):
-        with mock.patch.object(rbi_download.logging, 'fatal') as fatal:
-            rbi_download.preprocess_files('/non/existent/directory/path')
-            fatal.assert_called_once()
-            self.assertIn("Directory not found", fatal.call_args[0][0])
+    def test_preprocess_files_error_on_missing_dir(self):
+        with mock.patch.object(rbi_download.logging, 'error') as mock_error:
+            failed = rbi_download.preprocess_files(
+                '/non/existent/directory/path')
+            self.assertEqual(failed, ['/non/existent/directory/path'])
+            mock_error.assert_called_once()
+            self.assertIn("Directory not found", mock_error.call_args[0][0])
 
-    def test_preprocess_files_fatal_on_empty_dir(self):
+    def test_preprocess_files_error_on_empty_dir(self):
         with tempfile.TemporaryDirectory() as directory:
-            with mock.patch.object(rbi_download.logging, 'fatal') as fatal:
-                rbi_download.preprocess_files(directory)
-                fatal.assert_called_once()
-                self.assertIn("No XLSX files found", fatal.call_args[0][0])
+            with mock.patch.object(rbi_download.logging, 'error') as mock_error:
+                failed = rbi_download.preprocess_files(directory)
+                self.assertEqual(failed, [directory])
+                mock_error.assert_called_once()
+                self.assertIn("No XLSX files found", mock_error.call_args[0][0])
 
     def test_preprocess_files_handles_flexible_state_header(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -185,23 +188,33 @@ class ReadsConfigFileTest(absltest.TestCase):
             os.remove(temp_path)
 
     def test_falls_back_to_local_configs_json(self):
-        with flagsaver.flagsaver(config_file_path='gs://nonexistent_bucket/configs.json'), \
-             mock.patch.object(rbi_download.storage, 'Client', side_effect=Exception('GCS unavailable')):
+        with flagsaver.flagsaver(
+                config_file_path='gs://nonexistent_bucket/configs.json'), \
+             mock.patch.object(
+                rbi_download.storage,
+                'Client',
+                side_effect=Exception('GCS unavailable')):
             configs = rbi_download.reads_config_file()
             self.assertIn('URLS_CONFIG', configs)
             self.assertGreater(len(configs['URLS_CONFIG']), 0)
 
     def test_reads_gcs_python_config_logs_deprecation(self):
         mock_blob = mock.MagicMock()
-        mock_blob.download_as_text.return_value = 'URLS_CONFIG = [{"url": "http://example.com/test.xlsx", "category": "cat", "filename": "test.xlsx"}]\n'
+        mock_blob.download_as_text.return_value = (
+            'URLS_CONFIG = [{"url": "http://example.com/test.xlsx", '
+            '"category": "cat", "filename": "test.xlsx"}]\n'
+        )
         mock_bucket = mock.MagicMock()
         mock_bucket.blob.return_value = mock_blob
         mock_client = mock.MagicMock()
         mock_client.bucket.return_value = mock_bucket
 
-        with flagsaver.flagsaver(config_file_path='gs://bucket/legacy_configs.py'), \
-             mock.patch.object(rbi_download.storage, 'Client', return_value=mock_client), \
-             mock.patch.object(rbi_download.logging, 'warning') as mock_warning:
+        with flagsaver.flagsaver(
+                config_file_path='gs://bucket/legacy_configs.py'), \
+             mock.patch.object(
+                rbi_download.storage, 'Client', return_value=mock_client), \
+             mock.patch.object(
+                rbi_download.logging, 'warning') as mock_warning:
             configs = rbi_download.reads_config_file()
             self.assertIn('URLS_CONFIG', configs)
             deprecation_logged = any(

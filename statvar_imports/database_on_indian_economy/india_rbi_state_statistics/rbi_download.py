@@ -30,6 +30,8 @@ DEFAULT_CONFIG_JSON = os.path.join(SCRIPT_DIR, 'configs.json')
 
 flags.DEFINE_string('config_file_path', DEFAULT_CONFIG_JSON,
                     'Config file path (local json or gs:// path)')
+flags.DEFINE_bool('force_download', False,
+                  'If true, redownload files even if valid local copies exist.')
 
 DEFAULT_HEADERS = {
     'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
@@ -173,14 +175,20 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
         os.makedirs(target_dir, exist_ok=True)
         file_path = os.path.join(target_dir, file_name)
 
+        force_download = False
+        try:
+            force_download = flags.FLAGS.force_download
+        except (flags.UnparsedFlagAccessError, AttributeError):
+            pass
+
         if os.path.exists(file_path):
-            if os.path.getsize(file_path) > 0:
+            if not force_download and os.path.getsize(file_path) > 0:
                 with open(file_path, 'rb') as f:
                     magic = f.read(4)
                 if magic == XLSX_ZIP_SIGNATURE:
                     logging.info(f"Skipping existing valid file: {file_name}")
                     continue
-            # Remove stale, empty, or corrupt file
+            # Remove stale, empty, or corrupt file (or existing file if force_download)
             try:
                 os.remove(file_path)
             except OSError:
@@ -249,13 +257,13 @@ def _apply_map(df, func):
 
 def preprocess_files(directory_path):
     if not os.path.isdir(directory_path):
-        logging.fatal(f"Error: Directory not found at '{directory_path}'")
+        logging.error(f"Error: Directory not found at '{directory_path}'")
         return [directory_path]
 
     xlsx_files = [f for f in os.listdir(directory_path) if f.endswith('.xlsx')]
 
     if not xlsx_files:
-        logging.fatal(
+        logging.error(
             f"No XLSX files found in the directory: {directory_path}")
         return [directory_path]
 
@@ -340,7 +348,7 @@ def preprocess_files(directory_path):
             failed_files.append(file_name)
 
     if failed_files:
-        logging.fatal(
+        logging.error(
             f"Failed to process {len(failed_files)} file(s) in '{directory_path}': {failed_files}"
         )
         return failed_files

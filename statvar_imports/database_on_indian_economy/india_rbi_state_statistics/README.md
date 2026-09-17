@@ -328,7 +328,10 @@ python3 stat_var_processor.py \
 
 This import uses `validation_config.json` with:
 1. **`DELETED_RECORDS_PERCENT: 7` (`check_deleted_records_percent`)**:
-   - **Rationale & Analysis**: Up to 7% of records may be deleted or modified across historical revisions and cleanups of unmapped sub-divisions and regional reporting structures across RBI state tables.
+   - **Rationale & Analysis**: The threshold is set to `7%` to accommodate up to **6.94%** reported deletions across the 18 sub-imports (specifically **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in `agriculture_output.csv`, and **3.15%** in `state_wise_expenditure_on_relief_on_natural_calamities_output.csv`). These deletions are not data loss, but result from:
+     1. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from `dcid:wikidataId/Q1174` (Haryana) to the dedicated IMD sub-division DCID `dcid:HaryanaDelhiChandigarh` (24 records / 6.94% in rainfall), and fixing `NCT of Delhi` from `wikidataId/Q1352` (erroneously Chennai) to `wikidataId/Q9357528` (439 records in agriculture, 13 records in relief expenditure).
+     2. **Unit Schema Corrections**: Changing `Annual_Amount_FarmInventory_Fruits` in `agriculture_pvmap.csv` from `Hectare` to `MetricTon` (309 records in agriculture, where Import Differ classifies old unit nodes as deleted and new unit nodes as added).
+     3. **Official RBI Source Revisions**: Retrospective updates by RBI to provisional figures for recent fiscal years (`2022-03` through `2024-03`) and UT consolidations (`Dadra & Nagar Haveli and Daman & Diu`).
    - **Justification Document**: For detailed root cause analysis, table breakdown, and justification, see the [RBI State Statistics Deletion Threshold Justification Doc](https://docs.google.com/document/d/1BLArT3T2-2EVql0Ol8tSYw9QtjFjzCzockJBquMC4AY/edit).
 2. **`SQL_VALIDATOR` non-empty check (`check_expected_statvar_count`)**:
    - Asserts `statvar_cnt >= 1` so an empty `summary_report.csv` cannot vacuously pass grouped SQL queries.
