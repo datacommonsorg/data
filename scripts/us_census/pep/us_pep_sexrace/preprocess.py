@@ -173,25 +173,26 @@ def downloadFiles(config_files: list, test=False):
                 logging.error(f"Failed to process {config_file}: {e}")
 
         global _FILES_TO_DOWNLOAD
-        for file in _FILES_TO_DOWNLOAD:
-            file_name_to_save = None
-            url = file['download_path']
-            #Calling 2023 onwards methods
-            try:
-                process_national_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process national 2020-2029 for {url}: {e}")
-            try:
-                process_county_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process county 2020-2029 for {url}: {e}")
-            try:
-                process_state_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process state 2020-2029 for {url}: {e}")
+        if _FILES_TO_DOWNLOAD is not None:
+            for file in _FILES_TO_DOWNLOAD:
+                file_name_to_save = None
+                url = file['download_path']
+                #Calling 2023 onwards methods
+                try:
+                    process_national_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process national 2020-2029 for {url}: {e}")
+                try:
+                    process_county_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process county 2020-2029 for {url}: {e}")
+                try:
+                    process_state_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
 
