@@ -1,0 +1,113 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Cloud Build configuration to compile manifest.json files, sync Airflow DAGs to Cloud Composer,
+# and run an End-to-End (E2E) DAG verification test.
+#
+# Usage:
+#   gcloud builds submit . \
+#     --config=import-automation/cloudbuild/cloudbuild.workflow.yaml \
+#     --project=datcom-ci \
+#     --substitutions=_PROJECT_ID=datcom-import-automation-prod,_COMPOSER_ENV_NAME=import-automation-airflow,_LOCATION=us-central1
+
+substitutions:
+  _PROJECT_ID: 'datcom-import-automation-prod'
+  _LOCATION: 'us-central1'
+  _COMPOSER_ENV_NAME: 'import-automation-airflow'
+  _DAG_SUBDIR: 'datacommons_airflow'
+  _DAG_BUCKET: ''
+  _ALLOWLIST: ''
+  _RUN_E2E_TEST: 'true'
+  _E2E_DAG_ID: 'USFed_ConstantMaturityRates_Test'
+  _E2E_SKIP_IMPORT_JOB: 'false'
+
+steps:
+  # 1. Compile manifest.json files into imports_catalog.json
+  - id: 'build-catalog'
+    name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        ARGS="--data-dir=. --output=import-automation/workflow/imports_catalog.json"
+        if [ -n "${_ALLOWLIST}" ]; then
+          ARGS="$${ARGS} --allowlist ${_ALLOWLIST}"
+        fi
+        python import-automation/workflow/build_manifest_catalog.py $${ARGS}
+
+  # 2. Validate DAG, factory, and E2E test syntax
+  - id: 'validate-dags'
+    name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        python -m py_compile import-automation/workflow/import_automation_workflow.py
+        python -m py_compile import-automation/workflow/golden_verification.py
+        python -m py_compile import-automation/workflow/import_dags_factory.py
+        python -m py_compile import-automation/workflow/e2e_dag_test.py
+        echo "DAG syntax validation passed."
+
+  # 3. Deploy/Sync DAGs, factory, and catalog to Cloud Composer GCS bucket
+  - id: 'deploy-dags'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ -n "${_DAG_BUCKET}" ]; then
+          TARGET_GCS="gs://${_DAG_BUCKET}/dags/${_DAG_SUBDIR}"
+        else
+          DAG_PREFIX=$(gcloud composer environments describe ${_COMPOSER_ENV_NAME} \
+            --location=${_LOCATION} \
+            --project=${_PROJECT_ID} \
+            --format="value(config.dagGcsPrefix)")
+          TARGET_GCS="$${DAG_PREFIX}/${_DAG_SUBDIR}"
+        fi
+
+        gcloud composer environments describe ${_COMPOSER_ENV_NAME} \
+          --location=${_LOCATION} \
+          --project=${_PROJECT_ID} \
+          --format="value(config.airflowUri)" > /workspace/composer_webserver_url.txt || true
+
+        echo "Deploying Airflow DAGs to: $${TARGET_GCS}"
+        gcloud storage cp import-automation/workflow/import_automation_workflow.py "$${TARGET_GCS}/import_automation_workflow.py"
+        gcloud storage cp import-automation/workflow/golden_verification.py "$${TARGET_GCS}/golden_verification.py"
+        gcloud storage cp import-automation/workflow/import_dags_factory.py "$${TARGET_GCS}/import_dags_factory.py"
+        gcloud storage cp import-automation/workflow/imports_catalog.json "$${TARGET_GCS}/imports_catalog.json"
+        echo "Successfully deployed Airflow DAGs."
+
+  # 4. Run End-to-End DAG Verification Test in Cloud Composer
+  - id: 'e2e-test-dag'
+    name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ "${_RUN_E2E_TEST}" != "true" ]; then
+          echo "Skipping E2E DAG test (_RUN_E2E_TEST=${_RUN_E2E_TEST})."
+          exit 0
+        fi
+        pip install --quiet google-auth requests
+        E2E_ARGS="--project-id=${_PROJECT_ID} --location=${_LOCATION} --composer-env=${_COMPOSER_ENV_NAME} --dag-id=${_E2E_DAG_ID}"
+        if [ -s /workspace/composer_webserver_url.txt ]; then
+          E2E_ARGS="$${E2E_ARGS} --webserver-url=$(cat /workspace/composer_webserver_url.txt)"
+        fi
+        if [ "${_E2E_SKIP_IMPORT_JOB}" = "true" ]; then
+          E2E_ARGS="$${E2E_ARGS} --skip-import-job"
+        fi
+        python3 import-automation/workflow/e2e_dag_test.py $${E2E_ARGS}
+
+options:
+  logging: CLOUD_LOGGING_ONLY
