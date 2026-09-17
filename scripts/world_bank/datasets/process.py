@@ -2,6 +2,7 @@ import datetime
 import os
 import csv
 import sys
+import pandas as pd
 from absl import logging, flags, app
 from collections import Counter
 
@@ -29,6 +30,10 @@ flags.DEFINE_string(
     "historical file path")
 flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
                     "historical file name")
+flags.DEFINE_string(
+    'historical_gcs_path',
+    'gs://unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
+    'GCS path to the deleted historical data CSV file')
 
 DCID_MAP = {}
 IGNORE_DCIDS = set()
@@ -189,6 +194,38 @@ def main(_):
         logging.info(
             f"\nSuccessfully processed {len(input_files)} files. Combined output written to '{output_file_path}'"
         )
+
+        # Read deleted historical data from GCS if it exists
+        try:
+            logging.info(
+                f"Reading historical deleted data from GCS: {FLAGS.historical_gcs_path}"
+            )
+            final_df = pd.read_csv(output_file_path,
+                                   dtype=str,
+                                   keep_default_na=False)
+            with file_util.FileIO(FLAGS.historical_gcs_path, 'r') as f:
+                deleted_df = pd.read_csv(f, dtype=str, keep_default_na=False)
+
+            # Combine dataframes. final_df is placed first so its versions are preferred.
+            final_df = pd.concat([final_df, deleted_df], ignore_index=True)
+
+            # Deduplicate based on composite keys, keeping the first occurrence (from final_df)
+            composite_keys = [
+                'indicatorcode', 'statvar', 'measurementmethod',
+                'observationabout', 'observationdate', 'unit'
+            ]
+            final_df = final_df.drop_duplicates(subset=composite_keys,
+                                                keep='first')
+            temp_output_path = f"{output_file_path}.tmp"
+            final_df.to_csv(temp_output_path, index=False)
+            os.replace(temp_output_path, output_file_path)
+            logging.info(
+                "Successfully merged and de-duplicated deleted historical data."
+            )
+        except Exception as e:
+            logging.fatal(
+                f"Could not read historical deleted data from GCS: {e}"
+            )
 
         file_util.file_copy(f'{FLAGS.gs_path}{FLAGS.historical_file}',
                             f'{output}/{FLAGS.historical_file}')
