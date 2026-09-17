@@ -1,8 +1,8 @@
-### CDC WONDER County-Level Mortality Across All Causes (`CDC_Mortality_UnderlyingCause`)
+### CDC WONDER County-Level Mortality Across All Causes (`CDC_Mortality_UnderlyingCause_County`)
 
 This import acquires and processes county-level mortality statistics across all causes of death (ICD-10 113 Cause List) for all 50 US States and Washington D.C. from the CDC WONDER database.
 
-- **Import Name**: `CDC_Mortality_UnderlyingCause`
+- **Import Name**: `CDC_Mortality_UnderlyingCause_County`
 - **Source Database**: CDC WONDER Underlying Cause of Death (Database D158)
 - **Source URL**: `https://wonder.cdc.gov/ucd-icd10-expanded.html`
 - **Geographic Granularity**: County level (all ~3,143 US counties across all states)
@@ -28,12 +28,12 @@ The download script automatically handles CDC WONDER sessions, agreements, rate-
 #### Step 2: Process Data into Cleaned SVObs and TMCF
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --input_data=input_files/*.csv \
   --pv_map=county_mortality_pvmap.csv \
   --config_file=county_mortality_metadata.csv \
   --output_path=output/underlyingcauseofdeath_county \
-  --output_counters=counters/underlyingcauseofdeath_county_counters.csv
+  --output_counters=counters/underlyingcauseofdeath_county_counters.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 #### Output Artifacts
