@@ -48,7 +48,7 @@ class TestImportDiffer(unittest.TestCase):
         # Check for expected files
         expected_files = [
             'nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf',
-            'differ_summary.json'
+            'nodes-original.mcf', 'differ_summary.json'
         ]
 
         for f in expected_files:
@@ -58,7 +58,8 @@ class TestImportDiffer(unittest.TestCase):
 
         # Verify content of the combined MCF files
         for f_name in [
-                'nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf'
+                'nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf',
+                'nodes-original.mcf'
         ]:
             with open(os.path.join(output_location, f_name), 'r') as f:
                 content = f.read().strip()

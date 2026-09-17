@@ -1,5 +1,0 @@
-Node: dcid:occupationalCategory
-typeOf: dcs:Property
-name: "occupationalCategory"
-domainIncludes: dcid:Person
-

@@ -1,0 +1,7 @@
+"NumPlaces","MeasurementMethods","observationPeriods","Units","MinDate","ScalingFactors","StatVar"
+"1","[CensusPEPSurvey]","[P1M]","[]","1980-04","[]","Count_Person_USResident"
+"1","[CensusPEPSurvey]","[P1M]","[]","1990-04","[]","Count_Person_Civilian_NonInstitutionalized"
+"1","[dcAggregate/CensusPEPSurvey]","[P1M]","[]","1980-04","[]","Count_Person_InUSArmedForcesOverseas"
+"1","[CensusPEPSurvey]","[P1M]","[]","2010-04","[]","Count_Person_ResidesInHousehold"
+"1","[CensusPEPSurvey]","[P1M]","[]","1980-04","[]","Count_Person_Civilian"
+"1","[CensusPEPSurvey]","[P1M]","[]","1980-04","[]","Count_Person_USResidentOrInUSArmedForcesOverseas"

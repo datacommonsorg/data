@@ -65,6 +65,24 @@ flags.DEFINE_string('api_key',
                     'directory where api key exists')
 
 
+def _get_mode():
+    if _FLAGS.is_parsed():
+        return _FLAGS.mode
+    return ""
+
+
+def _get_start_year():
+    if _FLAGS.is_parsed():
+        return _FLAGS.start_year
+    return 2024
+
+
+def _get_api_key_path():
+    if _FLAGS.is_parsed():
+        return _FLAGS.api_key
+    return 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json'
+
+
 def process_survey_data(year, svs, input_dir, out_dir):
     """
     Processes survey data for the given year and saves the results.
@@ -81,31 +99,41 @@ def process_survey_data(year, svs, input_dir, out_dir):
     logging.info(f'Start, {year}, =, {start}')
     try:
         logging.info(f"start processing data for the year : {year}")
-        if _FLAGS.mode == "" or _FLAGS.mode == "download":
-            os.makedirs(get_parts_dir(input_dir, year), exist_ok=True)
-            os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
-            os.makedirs(out_dir, exist_ok=True)
+        os.makedirs(get_parts_dir(input_dir, year), exist_ok=True)
+        os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
+        os.makedirs(out_dir, exist_ok=True)
 
-            logging.info('Getting county names')
-            county_names = get_param_values('county_name')
+        mode = _get_mode()
+        if mode == "" or mode == "download" or mode == "process":
+            response_dir = get_response_dir(input_dir, year)
+            if mode == "process" and os.path.exists(response_dir):
+                county_names = [
+                    os.path.splitext(f)[0]
+                    for f in os.listdir(response_dir)
+                    if f.endswith('.json')
+                ]
+            else:
+                logging.info('Getting county names')
+                county_names = get_param_values('county_name')
+
             logging.info(f'# counties =, {len(county_names)}')
 
-            pool_size = 2
+            if county_names:
+                pool_size = 2
+                with multiprocessing.Pool(pool_size) as pool:
+                    pool.starmap(
+                        fetch_and_write,
+                        zip(county_names, repeat(year), repeat(svs),
+                            repeat(input_dir)))
 
-            with multiprocessing.Pool(pool_size) as pool:
-                pool.starmap(
-                    fetch_and_write,
-                    zip(county_names, repeat(year), repeat(svs),
-                        repeat(input_dir)))
-
-        if _FLAGS.mode == "" or _FLAGS.mode == "process":
+        if mode == "" or mode == "process":
             write_aggregate_csv(year, input_dir, out_dir)
 
         end = datetime.datetime.now()
         logging.info(f'End, {year}, =, {end}')
         logging.info(f'Duration, {year}, =, {str(end - start)}')
     except Exception as e:
-        logging.fatal(f"Error while processing the data for year: {e}")
+        logging.error(f"Error while processing the data for year: {e}")
         raise RuntimeError(
             f"Failed to process data for year due to: {e}") from e
 
@@ -141,7 +169,13 @@ def write_aggregate_csv(year, input_dir, out_dir):
     logging.info(f"Aggregation starts for the year: {year}")
     try:
         parts_dir = get_parts_dir(input_dir, year)
+        if not os.path.exists(parts_dir):
+            logging.warning(
+                f"Parts directory {parts_dir} does not exist. Skipping aggregation."
+            )
+            return
         part_files = os.listdir(parts_dir)
+        os.makedirs(out_dir, exist_ok=True)
         out_file = f"{out_dir}/ag-{year}.csv"
 
         logging.info(f'Writing aggregate CSV, {out_file}')
@@ -156,7 +190,8 @@ def write_aggregate_csv(year, input_dir, out_dir):
                     with open(f"{parts_dir}/{part_file}", 'r') as part:
                         csv_writer.writerows(csv.DictReader(part))
     except Exception as e:
-        logging.fatal(f"Error in write_aggregate_csv for year {year}: {e}")
+        logging.error(f"Error in write_aggregate_csv for year {year}: {e}")
+        raise
 
 
 def fetch_and_write(county_name, year, svs, input_dir):
@@ -187,8 +222,9 @@ def fetch_and_write(county_name, year, svs, input_dir):
                 f"No data to write for county {county_name}. Skipping file creation."
             )
     except Exception as e:
-        logging.fatal(
+        logging.error(
             f"Error processing data for county: {county_name}. Error: {e}")
+        raise
 
 
 def get_survey_county_data(year, county, input_dir):
@@ -207,7 +243,7 @@ def get_survey_county_data(year, county, input_dir):
     logging.info(f"Fetching survey data for county: {county} and year: {year}")
 
     response_file = get_response_file_path(input_dir, year, county)
-    if _FLAGS.mode == "process":
+    if _get_mode() == "process":
         try:
             if os.path.exists(response_file):
                 logging.info(f"Reading response from file: {response_file}")
@@ -222,7 +258,7 @@ def get_survey_county_data(year, county, input_dir):
             )
             return {'data': []}
 
-    if _FLAGS.mode == "" or _FLAGS.mode == "download":
+    if _get_mode() == "" or _get_mode() == "download":
 
         params = {
             'key': get_usda_api_key(),
@@ -234,10 +270,12 @@ def get_survey_county_data(year, county, input_dir):
             response = get_data(params)
             if response is None:
                 logging.error(
-                    f"get_data() returned None. Check logs for details.")
-                logging.warning(f"No data found for: {county}")
-                return {'data': []}
+                    f"get_data() returned None for county: {county}. Raising error to prevent silent data loss."
+                )
+                raise RuntimeError(
+                    f"get_data() returned None for county: {county}")
 
+            os.makedirs(os.path.dirname(response_file), exist_ok=True)
             with open(response_file, 'w') as f:
                 logging.info(f"Writing response to file: {response_file}")
                 json.dump(response, f, indent=2)
@@ -250,10 +288,9 @@ def get_survey_county_data(year, county, input_dir):
             return response
 
         except Exception as e:
-            logging.fatal(
+            logging.error(
                 f"Error while fetching data for county: {county} - {e}")
-            # Return a default value in case of any exception
-            return {'data': []}
+            raise
 
 
 MAX_REQUESTS_PER_WINDOW = 2  # Maximum requests per window (1 request)
@@ -290,6 +327,20 @@ def get_data(params):
 
     try:
         response = requests.get(f'{API_BASE}/api_GET', params=params)
+        if response.status_code == 400:
+            try:
+                err_json = response.json()
+                err_text = str(err_json.get("error", "")).lower()
+                if "bad request" in err_text or "no data found" in err_text or "invalid query" in err_text:
+                    logging.info(f"No records found for query: {params}")
+                    return {'data': []}
+            except Exception:
+                pass
+            logging.warning(
+                f"API returned 400 status code with error: {response.text}")
+            raise requests.exceptions.RequestException(
+                f"Status 400 error: {response.text}")
+
         response.raise_for_status()
 
         if response.status_code != 200:
@@ -304,6 +355,7 @@ def get_data(params):
 
     except requests.exceptions.RequestException as e:
         logging.error(f"Error fetching data: {e}")
+        raise
 
 
 def get_param_values(param):
@@ -406,7 +458,8 @@ def to_csv_rows(api_data, svs):
 
 def load_svs():
     svs = {}
-    with open("sv.csv", newline='') as csvfile:
+    sv_path = os.path.join(_SCRIPT_PATH, "sv.csv")
+    with open(sv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             svs[row['name']] = row
@@ -427,7 +480,7 @@ def get_multiple_years():
     start = datetime.datetime.now()
     logging.info(f'Start, {start}')
     svs = load_svs()
-    start_year = _FLAGS.start_year
+    start_year = _get_start_year()
     for year in range(start_year, datetime.datetime.now().year + 1):
         process_survey_data(year, svs, "input", "output")
     end = datetime.datetime.now()
@@ -441,6 +494,8 @@ def load_usda_api_key():
     Since we are reading from a config file, this function simply
     ensures the key is available.
     """
+    if _get_mode() == "process":
+        return "mock-key-for-process-mode"
     api_key = get_usda_api_key()
     if not api_key:
         raise ValueError("USDA API key not found in bucket path.")
@@ -450,7 +505,7 @@ def load_usda_api_key():
 def get_usda_api_key():
     """Reads the USDA API key from the bucket path."""
     # This function now correctly returns the key from the config module.
-    file_config = file_util.file_load_py_dict(_FLAGS.api_key)
+    file_config = file_util.file_load_py_dict(_get_api_key_path())
     api_key = file_config.get('api_key')
     return api_key
 

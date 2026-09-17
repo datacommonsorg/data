@@ -185,7 +185,7 @@ directories:
 
 
 ### Setting Up Cloud Build
-Cloud Build [configuration](cloudbuild/cloudbuild.yaml) creates asynchronous tasks using Cloud Tasks on pull requests and pushes to master to trigger the executor. The tasks pass information about the commits to the executor and can optionally pass any configurations for the executor.
+Cloud Build [configuration](../cloudbuild/cloudbuild.yaml) creates asynchronous tasks using Cloud Tasks on pull requests and pushes to master to trigger the executor. The tasks pass information about the commits to the executor and can optionally pass any configurations for the executor.
 
 1. [Connect](https://cloud.google.com/cloud-build/docs/automating-builds/create-manage-triggers#connect_repo) the repository to Cloud Build
 2. Create the trigger that runs on pull requests for importing to dev

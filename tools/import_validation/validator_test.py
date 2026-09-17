@@ -808,6 +808,15 @@ class TestSQLValidator(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(len(result.details['failing_rows']), 2)
 
+    def test_sql_validator_registers_empty_differ_with_expected_columns(self):
+        params = {
+            'query': 'SELECT StatVar, ADDED, DELETED, MODIFIED FROM differ',
+            'condition': 'ADDED >= 0'
+        }
+        result = self.validator.validate_sql(self.stats_df, pd.DataFrame(),
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
     def test_sql_validator_invalid_sql(self):
         params = {'query': 'SELEC * FROM stats', 'condition': 'MaxValue <= 100'}
         result = self.validator.validate_sql(self.stats_df, self.differ_df,

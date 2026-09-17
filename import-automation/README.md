@@ -9,6 +9,16 @@ Import jobs own the task of fetching data from external data sources and making 
 
 The scheduler job triggers a GCP Workflow which then creates a GCP Batch job for each data import. An import job performs multiple tasks such as downloading data, processing it, and generating resolved mcf and copying it to GCS. It relies on the DataCommons [Import tool](https://github.com/datacommonsorg/import/blob/master/docs/usage.md) to perform mcf generation. Additionally, several validations are performed as part of the import job to ensure data quality. More details about the validation framework and supported validations can be found in the [README](https://github.com/datacommonsorg/data/tree/master/tools/import_validation).
 
+### Differ and validation
+
+When differ invocation is enabled and a previous accepted MCF exists, the
+executor compares it with each candidate import input using Import Differ's
+native Python path. It writes the differ artifacts below the input's
+`validation` directory and makes that directory available to the validation
+framework. The executor owns runner selection; see the
+[differ invocation](executor/app/executor/import_executor.py). Import Differ
+owns the [comparison and artifact contracts](../tools/import_differ/README.md).
+
 Status of various import jobs can be monitored in the ImportStatus spanner table via the [Data Studio dashboard](https://datastudio.google.com/c/reporting/e88fda74-50c9-46c6-88aa-c84342ceba48).
 
 ## Ingestion Pipeline
@@ -17,4 +27,3 @@ DataCommons runs various import jobs on cloud batch that generate the output MCF
 A GCP [cloud workflow](https://github.com/datacommonsorg/import/blob/master/pipeline/workflow/spanner-ingestion-workflow.yaml) is used to coordinate control between auto-refresh import jobs and the ingestion dataflow pipeline.  To maintain data consistency, a global lock is used to ensure that only a single execution of the workflow is active at any time. The workflow relies on various [Spanner tables](https://github.com/datacommonsorg/import/blob/master/pipeline/workflow/ingestion-helper/schema.sql) for metadata management and [helper cloud functions](https://github.com/datacommonsorg/import/blob/master/pipeline/workflow/ingestion-helper/README.md) to control the execution.
 
 Infrastructure deployment for the various components in the import automation stack is automated using a [Terraform script](https://github.com/datacommonsorg/import/blob/master/pipeline/terraform/main.tf).
-

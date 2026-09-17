@@ -19,6 +19,7 @@ import unittest
 from unittest import mock
 import subprocess
 import tempfile
+import threading
 
 from app.executor import import_executor
 from app.executor.import_executor import ImportStatus
@@ -43,6 +44,27 @@ class ImportExecutorTest(unittest.TestCase):
         self.assertRaises(subprocess.TimeoutExpired,
                           import_executor._run_with_timeout, ['sleep', '5'],
                           0.1)
+
+    def test_run_with_timeout_async_drains_streams_concurrently(self):
+        barrier = threading.Barrier(2)
+
+        def stream(line):
+            barrier.wait(timeout=5)
+            yield line
+
+        process = mock.Mock(returncode=0)
+        process.stdout = stream(b'stdout\n')
+        process.stderr = stream(b'stderr\n')
+
+        with mock.patch.object(import_executor.subprocess,
+                               'Popen',
+                               return_value=process):
+            result = import_executor._run_with_timeout_async(['command'], 1)
+
+        self.assertEqual(0, result.returncode)
+        self.assertEqual(b'stdout\n', result.stdout)
+        self.assertEqual(b'stderr\n', result.stderr)
+        process.wait.assert_called_once_with()
 
     def test_create_venv(self):
         with tempfile.NamedTemporaryFile(mode='w+') as requirements:

@@ -22,11 +22,11 @@ To process data files, run the following command:
       --output_path=<output-prefix>
 
 This will generate the following outputs:
-  <output-prefix>.mcf: MCF file with StatVar definitions.
+  <output-prefix>_stat_vars.mcf: MCF file with StatVar definitions.
   <output-prefix>.csv: CSV file with StatVarObservations.
   <output-prefix>.tmcf: MCF file mapping CSV columns to StatVar PVs.
 
-For more details on configs and usage, please refer to the README.
+For configs, outputs, and counters, see tools/statvar_importer/README.md.
 """
 
 from collections import OrderedDict
@@ -1045,8 +1045,13 @@ class StatVarsMap:
                             'member',
                             'provenance',
                             'relevantVariable',
+                            'name',
+                            'nameWithLanguage',
+                            'description',
+                            'descriptionUrl',
+                            'definition',
                         ],
-                        # Retain SVs with new PVs like name
+                        # Retain SVs with new PVs like alternateName
                         'output_nodes_with_additions': True,
                     },
                 ),
