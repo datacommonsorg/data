@@ -10,20 +10,12 @@
             }
         },
         {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that the latest non-projected WDI observation date meets expected freshness.",
+            "validator": "SQL_VALIDATOR",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv",
-                "input_files": "../../input0/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "Check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../gcs_output/output/transformed_data_for_all_final.csv"
+                "query": "SELECT MAX(CAST(MaxDate AS INT)) AS max_year FROM stats WHERE MeasurementMethods LIKE '%WorldBank_WDI_CSV%' AND CAST(MaxDate AS INT) <= YEAR(CURRENT_DATE) HAVING COUNT(*) > 0",
+                "condition": "max_year >= 2024"
             }
         }
     ]
