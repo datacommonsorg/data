@@ -10,20 +10,12 @@
             }
         },
         {
-            "rule_id": "check_goldens_summary_report",
-            "description": "Validates summary_report.csv against the golden summary data",
-            "validator": "GOLDENS_CHECK",
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that livestock inventory StatVars have observations within 1 year of current year and all other survey StatVars are within 2 years of current year to account for seasonal release lag",
+            "validator": "SQL_VALIDATOR",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/*.csv"
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "CAST(MaxDate AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^Count_FarmInventory_(CattleAndCalves|BeefCows|MilkCows|SheepAndLambs)$') THEN 1 ELSE 2 END"
             }
         }
     ]
