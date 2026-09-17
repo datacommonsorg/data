@@ -1,0 +1,44 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Disabled because differ tool is bypassed (invoke_differ_tool: false) due to large dataset volume.",
+            "enabled": false
+        },
+        {
+            "rule_id": "check_empty_import",
+            "validator": "EMPTY_IMPORT_CHECK",
+            "params": {}
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verifies that MaxDate is uniform across all air quality StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_date_freshness",
+            "description": "Verifies that the dataset maximum observation date meets freshness requirements (within 1 year of current year).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "condition": "CAST(SUBSTR(latest_date, 1, 4) AS INT) >= YEAR(CURRENT_DATE) - 1"
+            }
+        }
+    ]
+}
