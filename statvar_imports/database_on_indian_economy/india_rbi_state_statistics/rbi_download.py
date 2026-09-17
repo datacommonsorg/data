@@ -14,9 +14,7 @@
 
 import json
 import os
-import pathlib
 import re
-import sys
 import tempfile
 import time
 from absl import app, flags, logging
@@ -72,6 +70,7 @@ def create_retry_session(
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.headers.update(DEFAULT_HEADERS)
+    session.verify = True
     return session
 
 
@@ -332,6 +331,9 @@ def preprocess_files(directory_path):
                                     index=False,
                                     header=False)
                 os.replace(output_path, file_path)
+            logging.info(
+                f"Successfully processed {file_name} ({len(all_sheets_data)} sheet(s))."
+            )
 
         except Exception as e:
             logging.error(f"Error processing {file_name}: {e}")

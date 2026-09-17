@@ -29,14 +29,16 @@ This makes the import process **Semi-Automated**: if download URLs change in fut
 
 ## Data Acquisition and Initial Preprocessing
 
-The `rbi_download.py` script is responsible for both downloading the raw Excel data and performing an initial preprocessing step. This preprocessing involves reading all sheets from the downloaded `.xlsx` files and replacing any `*` symbols with empty values.
+The `rbi_download.py` script is responsible for both downloading the raw Excel data and performing an initial preprocessing step:
+- **Cell Cleaning (`clean_cell`)**: Strips footnote markers (`*` and `@`), trims leading/trailing whitespace, and converts empty or literal `'nan'` strings to true `NaN` values so `stat_var_processor.py` does not emit malformed string observations.
+- **Header Normalization (`safe_to_numeric`)**: Converts numeric or float-coerced year headers (e.g., `2015.0`, `'2016@'`) in `State/Union Territory` header rows to integers (`2015`, `2016`) so they match integer string keys in the PVMaps.
 
 ### How to Run:
 
 Execute the `rbi_download.py` script. This script will:
 1.  Automatically create an `input_files` directory if it doesn't exist.
-2.  Download the necessary Excel files into subfolders within `input_files` (e.g., `input_files/agriculture/`).
-3.  Process each downloaded Excel file by reading all its sheets and replacing `*` characters with empty strings in all cells.
+2.  Download the necessary Excel files into subfolders within `input_files` (e.g., `input_files/agriculture/`), verifying `PK\x03\x04` ZIP signatures and writing files atomically.
+3.  Process each downloaded Excel file across all sheets using `clean_cell` and `safe_to_numeric`.
 
 ### Download Command:
 
@@ -44,20 +46,32 @@ Execute the `rbi_download.py` script. This script will:
 python3 rbi_download.py
 ```
 
+Optional flag:
+- `--config_file_path`: Path to the JSON config file (defaults to local `configs.json`; also supports a GCS URI such as `gs://<bucket>/configs.json`).
+
+### Running Unit Tests:
+
+To run the hermetic unit test suite for `rbi_download.py`:
+
+```bash
+python3 rbi_download_test.py
+```
+
 ## Processing Section
 
-The downloaded data is processed using the `stat_var_processor.py` script, which is part of the `/data/tools/statvar_importer/` toolkit. This script converts the raw Excel data into a structured format suitable for further analysis and ingestion. Each processing command specifies the input data file(s), the Property-Value (PV) map, the configuration file (metadata), a places resolver CSV, and the desired output path.
+The downloaded data is processed using the `stat_var_processor.py` script, which is part of the `/data/tools/statvar_importer/` toolkit. This script converts the raw Excel data into a structured format suitable for further analysis and ingestion. Each processing command specifies the input data file(s), the Property-Value (PV) map, the configuration file (metadata), a places resolver CSV, counter output CSV, and the desired output path.
 
 ### General Processing Command Structure:
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data='<path_to_input_files>.xlsx' \
-    --pv_map='<path_to_pv_map.csv>' \
-    --config_file='<path_to_metadata.csv>' \
-    --places_resolved_csv='<path_to_places_resolver.csv>' \
-    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-    --output_path='<path_to_output_folder_and_filename_prefix>'
+    --input_data="<path_to_input_files>.xlsx" \
+    --pv_map="<path_to_pv_map.csv>" \
+    --config_file="<path_to_metadata.csv>" \
+    --places_resolved_csv="<path_to_places_resolver.csv>" \
+    --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" \
+    --output_counters="<path_to_counters.csv>" \
+    --output_path="<path_to_output_folder_and_filename_prefix>"
 ```
 
 ### How to Run Processing:
@@ -72,7 +86,7 @@ sh run.sh
 
 #### Option 2: Executing Individual Processing Commands
 
-Navigate to the `/data/tools/statvar_importer/` directory before running the following commands, or adjust the relative paths accordingly.
+Navigate to the `/data/tools/statvar_importer/` directory before running the following commands, or adjust the relative paths accordingly. Note that wildcard `--input_data` paths must be enclosed in double quotes so `stat_var_processor.py` expands them internally.
 
 ### Processing Commands:
 
@@ -80,11 +94,12 @@ Navigate to the `/data/tools/statvar_importer/` directory before running the fol
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/agriculture/*.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/agriculture/*.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/agriculture_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/agriculture_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/agriculture/agriculture_output
 ```
 
@@ -92,11 +107,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_forest_cover.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_forest_cover.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/environment_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_forest_cover_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/environment/state_wise_forest_cover_output
 ```
 
@@ -104,11 +120,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_tree_cover.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_tree_cover.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/environment_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_tree_cover_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/environment/state_wise_tree_cover_output
 ```
 
@@ -116,11 +133,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/sub_division_wise_annual_rainfall.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/sub_division_wise_annual_rainfall.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/environment_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/sub_division_wise_annual_rainfall_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/environment/sub_division_wise_annual_rainfall_output
 ```
 
@@ -128,11 +146,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_expenditure_on_relief_on_natural_calamities.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_expenditure_on_relief_on_natural_calamities.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/environment_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_expenditure_on_relief_on_natural_calamities_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/environment/state_wise_expenditure_on_relief_on_natural_calamities_output
 ```
 
@@ -140,11 +159,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_sustainable_development_goals_score_SDGs.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/environment/state_wise_sustainable_development_goals_score_SDGs.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/environment_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/environment_sdg_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_sdg_score_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/environment/state_wise_sdg_score_output
 ```
 
@@ -152,11 +172,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/price_and_wages/*.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/price_and_wages/*.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/price_wages_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/price_and_wages_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/price_and_wages/price_and_wages_output
 ```
 
@@ -164,11 +185,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_per_capita_availability_of_power.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_per_capita_availability_of_power.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_per_capita_availability_of_power_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_per_capita_availability_of_power_output
 ```
 
@@ -176,11 +198,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_availability_of_power.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_availability_of_power.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_availability_of_power_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_availability_of_power_output
 ```
 
@@ -188,11 +211,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_installed_capacity_of_power.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_installed_capacity_of_power.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_installed_capacity_of_power_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_installed_capacity_of_power_output
 ```
 
@@ -200,11 +224,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_power_requirement.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_power_requirement.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_power_requirement_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_power_requirement_output
 ```
 
@@ -212,11 +237,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_length_of_national_highways.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_length_of_national_highways.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_length_of_national_highways_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_length_of_national_highways_output
 ```
 
@@ -224,11 +250,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_railway_route.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_railway_route.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_railway_route_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_railway_route_output
 ```
 
@@ -236,11 +263,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_length_of_roads.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_length_of_roads.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_length_of_roads_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_length_of_roads_output
 ```
 
@@ -248,11 +276,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_length_of_state_highways.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_length_of_state_highways.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_length_of_state_highways_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_length_of_state_highways_output
 ```
 
@@ -260,11 +289,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_electricity_transmission_distribution_losses.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_electricity_transmission_distribution_losses.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_electricity_transmission_distribution_losses_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_electricity_transmission_distribution_losses_output
 ```
 
@@ -272,11 +302,12 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_telephones_per_100_population.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_telephones_per_100_population.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_telephones_per_100_population_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_telephones_per_100_population_output
 ```
 
@@ -284,17 +315,24 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_road_constructed_under_PMGSY.xlsx \
+    --input_data="../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/input_files/infrastructure/state_wise_road_constructed_under_PMGSY.xlsx" \
     --pv_map=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/infrastructure_pvmap.csv \
     --config_file=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv \
     --places_resolved_csv=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_counters=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/counters/state_wise_road_constructed_under_pmgsy_counters.csv \
     --output_path=../../statvar_imports/database_on_indian_economy/india_rbi_state_statistics/output_files/infrastructure/state_wise_road_constructed_under_pmgsy_output
 ```
 
 ## Validation Configuration and Thresholds
 
-This import uses `validation_config.json` with a 7% record deletion threshold (`DELETED_RECORDS_PERCENT: 7`).
-- **Rationale & Analysis**: Up to 7% of records may be deleted or modified across historical revisions and cleanups of unmapped sub-divisions and regional reporting structures across RBI state tables.
-- **Justification Document**: For detailed root cause analysis, table breakdown, and justification, see the [RBI State Statistics Deletion Threshold Justification Doc](https://docs.google.com/document/d/1BLArT3T2-2EVql0Ol8tSYw9QtjFjzCzockJBquMC4AY/edit).
+This import uses `validation_config.json` with:
+1. **`DELETED_RECORDS_PERCENT: 7` (`check_deleted_records_percent`)**:
+   - **Rationale & Analysis**: Up to 7% of records may be deleted or modified across historical revisions and cleanups of unmapped sub-divisions and regional reporting structures across RBI state tables.
+   - **Justification Document**: For detailed root cause analysis, table breakdown, and justification, see the [RBI State Statistics Deletion Threshold Justification Doc](https://docs.google.com/document/d/1BLArT3T2-2EVql0Ol8tSYw9QtjFjzCzockJBquMC4AY/edit).
+2. **`SQL_VALIDATOR` non-empty check (`check_expected_statvar_count`)**:
+   - Asserts `statvar_cnt >= 1` so an empty `summary_report.csv` cannot vacuously pass grouped SQL queries.
+3. **`SQL_VALIDATOR` cadence freshness check (`check_max_date_freshness`)**:
+   - Asserts that each StatVar meets its expected RBI publication cadence (`2020`, `2022`, `2023`, or `2024`) with `WHERE MaxDate IS NOT NULL`.
+
 

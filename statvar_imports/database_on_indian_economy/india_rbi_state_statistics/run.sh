@@ -49,5 +49,6 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --inp
 
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data="$SCRIPT_PATH/input_files/infrastructure/state_wise_road_constructed_under_PMGSY.xlsx" --pv_map=$SCRIPT_PATH/infrastructure_pvmap.csv --config_file=$SCRIPT_PATH/rbi_metadata.csv --places_resolved_csv=$SCRIPT_PATH/rbi_places_resolver.csv --existing_statvar_mcf="$EXISTING_MCF" --output_counters=$COUNTERS_PATH/state_wise_road_constructed_under_pmgsy_counters.csv --output_path=$SCRIPT_PATH/output_files/infrastructure/state_wise_road_constructed_under_pmgsy_output || { echo "Error: Processing State-wise Road Constructed under PMGSY failed!"; exit 1; }
 
+EXIT_STATUS=$?
 echo "All processing steps completed successfully."
-exit 0
+exit $EXIT_STATUS
