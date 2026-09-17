@@ -5,7 +5,7 @@ This script downloads and processes the FARS_CrashData dataset, covering years f
 - **Source**: [National Highway Traffic Safety Administration](https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/)
 - **Place Types**: Country, State, County
 - **Statvars**: Demographics
-- **Years**: 2021 to 2023 (Note: Data from 1975-2020 is preserved as historical data).
+- **Years**: 2021 to 2024 (Note: Data from 1975-2020 is preserved as historical data).
 
 ---
 
