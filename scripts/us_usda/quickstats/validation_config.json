@@ -11,11 +11,11 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Verifies that livestock inventory StatVars have current-year observations (>= 2026) and all other survey StatVars are within allowable lag (>= 2025)",
+            "description": "Verifies that livestock inventory StatVars have observations within 1 year of current year and all other survey StatVars are within 2 years of current year to account for seasonal release lag",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate FROM stats",
-                "condition": "CASE WHEN StatVar IN ('Count_FarmInventory_CattleAndCalves', 'Count_FarmInventory_BeefCows', 'Count_FarmInventory_MilkCows', 'Count_FarmInventory_SheepAndLambs') THEN CAST(MaxDate AS INTEGER) >= 2026 ELSE CAST(MaxDate AS INTEGER) >= 2025 END"
+                "condition": "CAST(MaxDate AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^Count_FarmInventory_(CattleAndCalves|BeefCows|MilkCows|SheepAndLambs)$') THEN 1 ELSE 2 END"
             }
         }
     ]
