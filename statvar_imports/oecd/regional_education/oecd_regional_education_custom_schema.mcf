@@ -1,0 +1,5 @@
+Node: dcid:PostSecondaryNonTertiaryEducation__UpperSecondaryEducation
+typeOf: dcs:ProvisionalNode
+isProvisional: dcs:True
+name: "PostSecondaryNonTertiaryEducation__UpperSecondaryEducation"
+description: "Upper secondary and post-secondary non-tertiary education (ISCED 2011 levels 3 and 4)."
