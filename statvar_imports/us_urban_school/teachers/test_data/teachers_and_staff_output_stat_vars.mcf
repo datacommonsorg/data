@@ -27,6 +27,14 @@ gender: dcid:Female
 race: dcid:Black
 timePeriod: dcid:CurrentSchoolYear
 
+Node: dcid:Count_Teacher_Female_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+timePeriod: dcid:CurrentSchoolYear
+
 Node: dcid:Count_Teacher_Female_HispanicOrLatino_CurrentSchoolYear
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Teacher
@@ -88,6 +96,14 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 gender: dcid:Male
 race: dcid:Black
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
 timePeriod: dcid:CurrentSchoolYear
 
 Node: dcid:Count_Teacher_Male_HispanicOrLatino_CurrentSchoolYear

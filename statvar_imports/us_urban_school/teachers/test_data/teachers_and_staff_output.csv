@@ -2,6 +2,7 @@ observationDate,observationAbout,variableMeasured,value
 2022,nces/010000299995,dcid:Count_Teacher_FullTimeEmployee,27
 2022,nces/010000299995,dcid:Count_Teacher_Certified_FullTimeEmployee,27
 2022,nces/010000299995,dcid:Count_Teacher_NotCertified_FullTimeEmployee,0
+2022,nces/010000299995,dcid:Count_Teacher_Male_CurrentSchoolYear,27
 2022,nces/010000299995,dcid:Count_Faculty_FullTimeEmployee_SchoolCounselor,2
 2022,nces/010000299995,dcid:Count_Faculty_FullTimeEmployee_Nurse,0
 2022,nces/010000299995,dcid:Count_Faculty_FullTimeEmployee_SchoolPsychologist,0
@@ -20,6 +21,8 @@ observationDate,observationAbout,variableMeasured,value
 2024,nces/010000500871,dcid:Count_Teacher_FullTimeEmployee,81
 2024,nces/010000500871,dcid:Count_Teacher_Certified_FullTimeEmployee,81
 2024,nces/010000500871,dcid:Count_Teacher_NotCertified_FullTimeEmployee,0
+2024,nces/010000500871,dcid:Count_Teacher_Male_CurrentSchoolYear,31
+2024,nces/010000500871,dcid:Count_Teacher_Female_CurrentSchoolYear,51
 2024,nces/010000500871,dcid:Count_Faculty_FullTimeEmployee_SchoolCounselor,4
 2024,nces/010000500871,dcid:Count_Faculty_FullTimeEmployee_Nurse,1
 2024,nces/010000500871,dcid:Count_Faculty_FullTimeEmployee_SchoolPsychologist,0
