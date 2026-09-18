@@ -347,6 +347,15 @@ class CDC500StateProcessTest(unittest.TestCase):
                 'facet_id': 'f2',
                 'last_update_timestamp': 100
             },
+            # 2017 non-BP Arthritis: geoId/15003 (24.0) must be INCLUDED
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/15003',
+                'date': '2017',
+                'value': '24.0',
+                'facet_id': 'f1',
+                'last_update_timestamp': 100
+            },
             # 2017 HighBloodPressure: geoId/15003 (99.0) must be EXCLUDED;
             # 13-char CDP geoId/1571550 (31.2) must be INCLUDED.
             {
@@ -423,21 +432,33 @@ class CDC500StateProcessTest(unittest.TestCase):
         result_df = con.execute(sql).df().sort_values(
             by=['observation_date', 'statvar']).reset_index(drop=True)
 
-        self.assertEqual(len(result_df), 3)
+        self.assertEqual(len(result_df), 4)
         # 2016 row: geoId/15003 included, empty measurement_method -> 'dcAggregate'
         self.assertEqual(result_df['observation_date'].iloc[0], '2016')
+        self.assertEqual(result_df['statvar'].iloc[0],
+                         'Percent_Person_WithArthritis')
         self.assertEqual(result_df['measurement_method'].iloc[0], 'dcAggregate')
         self.assertAlmostEqual(result_df['percent'].iloc[0], 22.5, places=4)
-        # 2017 BP row: geoId/15003 excluded, only geoId/1571550 (31.2) included
+        # 2017 non-BP row: geoId/15003 included
         self.assertEqual(result_df['observation_date'].iloc[1], '2017')
-        self.assertEqual(result_df['measurement_method'].iloc[1],
-                         'dcAggregate/CrudePrevalence')
-        self.assertAlmostEqual(result_df['percent'].iloc[1], 31.2, places=4)
-        # 2018 Arthritis row: geoId/15003 excluded, only geoId/1571550 (20.4) included
-        self.assertEqual(result_df['observation_date'].iloc[2], '2018')
+        self.assertEqual(result_df['statvar'].iloc[1],
+                         'Percent_Person_WithArthritis')
+        self.assertEqual(result_df['measurement_method'].iloc[1], 'dcAggregate')
+        self.assertAlmostEqual(result_df['percent'].iloc[1], 24.0, places=4)
+        # 2017 BP row: geoId/15003 excluded, only geoId/1571550 (31.2) included
+        self.assertEqual(result_df['observation_date'].iloc[2], '2017')
+        self.assertEqual(result_df['statvar'].iloc[2],
+                         'Percent_Person_WithHighBloodPressure')
         self.assertEqual(result_df['measurement_method'].iloc[2],
                          'dcAggregate/CrudePrevalence')
-        self.assertAlmostEqual(result_df['percent'].iloc[2], 20.4, places=4)
+        self.assertAlmostEqual(result_df['percent'].iloc[2], 31.2, places=4)
+        # 2018 Arthritis row: geoId/15003 excluded, only geoId/1571550 (20.4) included
+        self.assertEqual(result_df['observation_date'].iloc[3], '2018')
+        self.assertEqual(result_df['statvar'].iloc[3],
+                         'Percent_Person_WithArthritis')
+        self.assertEqual(result_df['measurement_method'].iloc[3],
+                         'dcAggregate/CrudePrevalence')
+        self.assertAlmostEqual(result_df['percent'].iloc[3], 20.4, places=4)
 
     def test_qualify_row_number_deduplication(self):
         """Tests QUALIFY ROW_NUMBER() deduplication by timestamp and facet_id."""
@@ -465,6 +486,13 @@ class CDC500StateProcessTest(unittest.TestCase):
                 'measurement_method': 'CrudePrevalence'
             },
             {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0666000',
+                'facet_id': 'f_city2',
+                'provenance': 'dc/base/CDC500',
+                'measurement_method': 'CrudePrevalence'
+            },
+            {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f_low',
@@ -478,9 +506,17 @@ class CDC500StateProcessTest(unittest.TestCase):
                 'provenance': 'dc/base/CensusACS5YearSurvey',
                 'measurement_method': ''
             },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0666000',
+                'facet_id': 'f_city2_pop',
+                'provenance': 'dc/base/CensusACS5YearSurvey',
+                'measurement_method': ''
+            },
         ])
         obs_df = pd.DataFrame([
-            # Competing percent observations: newer timestamp (200) must win over (100)
+            # Competing percent observations for geoId/0644000:
+            # newer timestamp (200) must win over (100)
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0644000',
@@ -497,8 +533,25 @@ class CDC500StateProcessTest(unittest.TestCase):
                 'facet_id': 'f_new',
                 'last_update_timestamp': 200
             },
-            # Competing count observations with identical timestamp (200):
-            # higher facet_id ('f_low' > 'f_high' alphabetically: 'f_low' wins)
+            # Second city in CA (geoId/0666000) with percent 10.0 and pop 10,000
+            {
+                'variable_measured': 'Percent_Person_WithArthritis',
+                'entity1': 'geoId/0666000',
+                'date': '2022',
+                'value': '10.0',
+                'facet_id': 'f_city2',
+                'last_update_timestamp': 200
+            },
+            {
+                'variable_measured': 'Count_Person',
+                'entity1': 'geoId/0666000',
+                'date': '2022',
+                'value': '10000',
+                'facet_id': 'f_city2_pop',
+                'last_update_timestamp': 200
+            },
+            # Competing count observations for geoId/0644000 with identical timestamp (200):
+            # higher facet_id ('f_low' > 'f_high' alphabetically: 'f_low' (50,000) wins)
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0644000',
@@ -523,7 +576,10 @@ class CDC500StateProcessTest(unittest.TestCase):
         result_df = con.execute(sql).df()
 
         self.assertEqual(len(result_df), 1)
-        self.assertAlmostEqual(result_df['percent'].iloc[0], 25.0, places=4)
+        # Choosing 'f_low' (50,000) over 'f_high' (10,000) yields weighted average:
+        # (25.0 * 50,000 + 10.0 * 10,000) / (50,000 + 10,000) = 1,350,000 / 60,000 = 22.5.
+        # If 'f_high' (10,000) had been chosen, average would be 17.5.
+        self.assertAlmostEqual(result_df['percent'].iloc[0], 22.5, places=4)
 
     def test_run_process_success(self):
         """Tests successful query execution and atomic output writing."""

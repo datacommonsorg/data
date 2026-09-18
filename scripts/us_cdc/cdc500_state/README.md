@@ -17,6 +17,8 @@ Author: Padma Gundapaneni @padma-g
 ### Overview
 The state-level dataset calculates aggregated health indicator prevalence estimates for US states from the city-level CDC 500 Cities (`CDC500`) project data, weighted by corresponding Census ACS 5-Year population counts.
 
+CDC PLACES (Population Level Analysis and Community Estimates) is the official successor program to the original CDC 500 Cities project, expanding health estimates across all US counties, places, and census tracts. In Data Commons, city-level data from both the historical CDC 500 Cities project (2016–2019) and ongoing CDC PLACES releases (2020–present) are ingested under provenance `dc/base/CDC500`.
+
 ### Data Sources and Tables
 
 The aggregation script queries Google Cloud BigQuery graph tables in dataset `datcom-store.spanner_dc_graph_prod_DEFAULT`:
