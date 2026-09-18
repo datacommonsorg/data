@@ -31,8 +31,7 @@ From the `statvar_imports/fema/flood_insurance_claims` directory, run the follow
 ```bash
 python3 process.py \
     --input_data='input_file/fema_nfip_claims.csv' \
-    --config_file='us_flood_nfip_config.py' \
-    --pv_map='us_flood_nfip_pv_map_floodzone.py,ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py' \
-    --output_path='output/nfip_output'
+    --output_path='output/nfip_output' \
+    --output_counters='counters/counters.txt'
 ```
-This will generate the cleaned CSV and template MCF files in the `output` directory.
+This will generate the cleaned CSV, template MCF, and node MCF files in the `output` directory.
