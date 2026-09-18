@@ -175,12 +175,15 @@ class TestProcessPoverty(unittest.TestCase):
     def test_preprocess_poverty_with_test_data(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             fixture_path = os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv")
+            expected_path = os.path.join(MODULE_DIR, "test_data", "Poverty_expected_output.csv")
             actual_csv = os.path.join(tmpdir, "Poverty_cleaned.csv")
 
             preprocess_poverty(src_path=fixture_path, dst_path=actual_csv, min_county_count=100)
 
             self.assertTrue(os.path.exists(actual_csv))
             df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str})
+            df_expected = pd.read_csv(expected_path, dtype={"GEOID": str})
+            pd.testing.assert_frame_equal(df_actual, df_expected)
 
             # 200 lines total: 3 header lines + 191 county/territory rows + 6 footnote lines = 191 cleaned rows
             self.assertEqual(len(df_actual), 191)
