@@ -95,10 +95,10 @@ To specify a custom output directory:
 $ python3 scripts/us_cdc/cdc500_state/process.py --output_dir=/path/to/output
 ```
 
-To specify a GCP project for BigQuery jobs (if not set in ambient environment):
+To specify a GCP project and timeout (in seconds) for BigQuery jobs (if not set in ambient environment):
 
 ```bash
-$ python3 scripts/us_cdc/cdc500_state/process.py --project=my-gcp-project
+$ python3 scripts/us_cdc/cdc500_state/process.py --project=my-gcp-project --timeout=600
 ```
 
 #### Running Unit Tests

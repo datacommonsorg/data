@@ -23,12 +23,15 @@ from google.cloud import bigquery
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'CDC500State_Output')
+DEFAULT_BQ_TIMEOUT_SECONDS = 600
 
 flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
                     'Directory to write output CSV.')
 flags.DEFINE_string(
     'project', None,
     'GCP project ID for BigQuery. Defaults to ambient environment if omitted.')
+flags.DEFINE_integer('timeout', DEFAULT_BQ_TIMEOUT_SECONDS,
+                     'Timeout in seconds for BigQuery query and download.')
 
 QUERY = """
 WITH cdc_sv AS (
@@ -144,14 +147,17 @@ HAVING percent IS NOT NULL
 """
 
 
-def run_process(client: bigquery.Client, output_file: str) -> bool:
+def run_process(client: bigquery.Client,
+                output_file: str,
+                timeout: int = DEFAULT_BQ_TIMEOUT_SECONDS) -> bool:
     """Executes the BigQuery query and writes the resulting DataFrame to output_file."""
-    logging.info("Running BigQuery aggregation query...")
-    query_job = client.query(QUERY)
+    logging.info("Running BigQuery aggregation query on project %s...",
+                 client.project)
+    query_job = client.query(QUERY, timeout=timeout)
     logging.info("BigQuery job started with ID: %s", query_job.job_id)
 
     logging.info("Fetching query results into dataframe...")
-    df = query_job.to_dataframe()
+    df = query_job.to_dataframe(timeout=timeout)
 
     if df.empty:
         logging.error("BigQuery query returned 0 rows.")
@@ -181,7 +187,7 @@ def main(argv):
     del argv  # Unused.
     client = bigquery.Client(project=_FLAGS.project)
     output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
-    run_process(client, output_file)
+    run_process(client, output_file, timeout=_FLAGS.timeout)
 
 
 if __name__ == '__main__':
