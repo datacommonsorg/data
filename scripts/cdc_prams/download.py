@@ -12,43 +12,81 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script downloads the datasets in a txt, zip format,
-Unzips it and makes it available for further processing
+This Python script downloads the CDC PRAMS datasets from provided URLs,
+verifies their contents, and saves them to the input files directory.
 """
 import io
-import tabula as tb
-import zipfile
+import logging
 import os
+import zipfile
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
-def download_file(input_url: list, download_directory: str) -> None:
+def _get_session() -> requests.Session:
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent': 'curl/8.21.0-rc3',
+        'Accept': 'application/pdf,*/*'
+    })
+    retries = Retry(total=5,
+                    backoff_factor=1.0,
+                    status_forcelist=[429, 500, 502, 503, 504],
+                    raise_on_status=False)
+    adapter = HTTPAdapter(max_retries=retries)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
+
+
+def download_file(input_url: list,
+                  download_directory: str,
+                  overwrite: bool = False) -> None:
     """
-    Function to Download and Unzip the file provided in url
+    Function to download and extract files provided in input_url list.
 
-    Args: download_file_url: url of the file to be downloaded as a string
+    Args:
+        input_url (list): List of URLs of the files to be downloaded.
+        download_directory (str): Target directory where 'input_files' will be saved.
+        overwrite (bool): If True, re-download existing files.
 
-    Returns: None
+    Returns:
+        None
     """
-    # This extracts the filename from the complete URL,
-    # also removes the .gz extension.
-    # Example - ....national_household_travel_survey//hlth_ehis_bm1i.tsv.gz
-    # is made hlth_ehis_bm1i.tsv.gz
-    path = download_directory + os.sep + 'input_files'
-    if not os.path.exists(path):
-        os.mkdir(path)
+    path = os.path.join(download_directory, 'input_files')
+    os.makedirs(path, exist_ok=True)
+    session = _get_session()
+
     for download_file_url in input_url:
-        # Example, file_name_with_compression_ext: NHTS_2009_transfer_AL.zip
-        file_name_with_compression_ext = os.path.basename(download_file_url)
-        # Example, file_name_without_compression_ext: NHTS_2009_transfer_AL.txt
-        file_name_without_compression_ext = os.path.splitext(
-            file_name_with_compression_ext)[0]
-        out_file = path + os.sep + file_name_with_compression_ext
-        print(download_file_url)
-        req = requests.get(download_file_url)
-        if not download_file_url.endswith(".zip"):
-            with open(out_file, 'wb') as file:
-                file.write(req.content)
-        else:
-            with zipfile.ZipFile(io.BytesIO(req.content)) as zipfileout:
-                zipfileout.extractall(path)
+        file_name = os.path.basename(download_file_url)
+        out_file = os.path.join(path, file_name)
+
+        if not overwrite and os.path.exists(out_file) and os.path.getsize(
+                out_file) > 1000:
+            logger.info("File already exists, skipping: %s", file_name)
+            continue
+
+        logger.info("Downloading: %s", download_file_url)
+        try:
+            req = session.get(download_file_url, timeout=60)
+            req.raise_for_status()
+            if len(req.content) < 1000:
+                raise ValueError(
+                    f"Downloaded content too small ({len(req.content)} bytes) for {download_file_url}"
+                )
+
+            if download_file_url.endswith(".zip"):
+                with zipfile.ZipFile(io.BytesIO(req.content)) as zipfileout:
+                    zipfileout.extractall(path)
+            else:
+                with open(out_file, 'wb') as file:
+                    file.write(req.content)
+            logger.info("Successfully downloaded: %s (%d bytes)", file_name,
+                        len(req.content))
+        except Exception as exc:
+            logger.error("Failed downloading %s: %s", download_file_url, exc)
+            raise
