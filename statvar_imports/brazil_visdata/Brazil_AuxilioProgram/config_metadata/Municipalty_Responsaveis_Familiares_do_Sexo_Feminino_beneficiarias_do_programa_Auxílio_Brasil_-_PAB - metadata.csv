@@ -1,0 +1,16 @@
+parameter,value
+url,https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php
+description,Female Family Guardians benefiting from the Auxílio Brasil - PAB program
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,Responsáveis Familiares do Sexo Feminino beneficiárias do programa Auxílio Brasil - PAB
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1YC2It6ZbmNl1x5ylmQ2SGVNW-pUXHIEtdJuWNQcv544/edit?gid=0#gid=0
+output_columns,"observationAbout,observationDate,value,variableMeasured,scalingFactor,observationPeriod,measurementQualifier,unit"
+#header_rows,1
+schemaless,1
+number_decimal,","
+number_separator,""" """
