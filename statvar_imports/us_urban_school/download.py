@@ -56,7 +56,6 @@ DATA_CONFIGS = {
 }
 
 HARDCODED_CONFIGS = {
-    "2023-24": {"final_year": 2024},
     "2021-22": {"final_year": 2022},
     "2020-21": {"final_year": 2021},
     "2017-18": {"final_year": 2018},
