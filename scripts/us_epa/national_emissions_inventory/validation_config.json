@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Verifies that the percentage of deleted records does not exceed the 0.1% threshold, ensuring unintended observation drops (such as missing nonpoint sources which drop >20% of records) are caught while accommodating minor upstream EPA revisions.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_date_freshness",
+            "description": "Verifies that the dataset's observation dates meet freshness and temporal coverage requirements (MAX(MaxDate) >= 2020 and MIN(MaxDate) >= 2008)",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS max_date, MIN(MaxDate) AS min_date FROM stats",
+                "condition": "max_date >= '2020' AND min_date >= '2008'"
+            }
+        }
+    ]
+}
