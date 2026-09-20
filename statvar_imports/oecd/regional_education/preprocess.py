@@ -1,7 +1,6 @@
 import csv
 import os
 import re
-import shutil
 
 try:
     from absl import logging
@@ -45,14 +44,6 @@ def preprocess(base_path=None):
     output_folder = os.path.join(base_path, 'output')
     os.makedirs(output_folder, exist_ok=True)
 
-    custom_schema_src = os.path.join(
-        base_path, 'oecd_regional_education_custom_schema.mcf')
-    if os.path.isfile(custom_schema_src):
-        custom_schema_dst = os.path.join(
-            output_folder, 'oecd_regional_education_custom_schema.mcf')
-        shutil.copy(custom_schema_src, custom_schema_dst)
-        logging.info(f"Copied custom schema to {custom_schema_dst}")
-
     places_resolved_file = os.path.join(
         base_path, 'oecd_regional_education_places_resolved.csv')
     valid_places = {}
@@ -60,24 +51,6 @@ def preprocess(base_path=None):
         raise FileNotFoundError(
             f"Places resolved file not found: {places_resolved_file}. "
             "Aborting preprocessing to prevent silent data drop.")
-
-    rows_to_rewrite = []
-    needs_rewrite = False
-    with open(places_resolved_file, 'r', encoding='utf-8', newline='') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            stripped_row = [cell.strip() for cell in row]
-            if stripped_row != row:
-                needs_rewrite = True
-            rows_to_rewrite.append(stripped_row)
-
-    if needs_rewrite and rows_to_rewrite:
-        tmp_places = places_resolved_file + '.tmp'
-        with open(tmp_places, 'w', encoding='utf-8', newline='\r\n') as f:
-            writer = csv.writer(f)
-            writer.writerows(rows_to_rewrite)
-        os.replace(tmp_places, places_resolved_file)
-        logging.info(f"Sanitized whitespace in {places_resolved_file}")
 
     with open(places_resolved_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -100,8 +73,11 @@ def preprocess(base_path=None):
         logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
         raise FileNotFoundError(f"Folder '{folder_name}' not found in '{base_path}'")
 
-    pattern = re.compile(r'^A\.{9}$', re.IGNORECASE)
-    candidate_files = sorted([f for f in os.listdir(target_folder) if pattern.match(f)])
+    pattern = re.compile(r'^A\.+.*', re.IGNORECASE)
+    candidate_files = sorted([
+        f for f in os.listdir(target_folder)
+        if pattern.match(f) and f not in ('oecd_regional_education_data.csv', 'filtered_tmp.csv')
+    ])
     raw_file = candidate_files[0] if candidate_files else None
 
     target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
