@@ -15,7 +15,7 @@
                 {
                     "template_mcf": "output_files/opportunity_insights_outcomes.tmcf",
                     "cleaned_csv": "output_files/opportunity_insights_outcomes.csv",
-                    "node_mcf": "output_files/opportunity_insights_outcomes_stat_vars.mcf"
+                    "node_mcf": "output_files/*.mcf"
                 }
             ],
             "source_files": [

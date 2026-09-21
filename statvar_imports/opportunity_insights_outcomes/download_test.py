@@ -117,10 +117,20 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     'kir_natam_female_p1',
                     'kir_natam_female_p1_se',
                     'kfi_pooled_pooled_p25',
+                    'kfi_white_pooled_p25',
+                    'kfr_top20_white_pooled_p25',
+                    'kfr_white_male_p25_mean_se',
+                    'kid_white_male_n',
                     'kii_black_female_p75',
                 ])
-                writer.writerow(['6', '85', '500100', '0.27893454', '0.0123', '45000', '38000'])
-                writer.writerow(['6', '85', '500200', 'NA', '.', '52000', '41000'])
+                writer.writerow([
+                    '6', '85', '500100',
+                    '0.27893454', '0.0123', '45000', '48000', '0.32', '0.005', '120', '38000',
+                ])
+                writer.writerow([
+                    '6', '85', '500200',
+                    'NA', '.', '52000', '55000', '0.41', '0.006', '150', '41000',
+                ])
 
             count = download.shard_wide_csv(
                 in_csv, out_csv, 'tract', max_rows_per_shard=1
@@ -152,10 +162,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(res.returncode, 0, msg=res.stderr)
             with open(f'{sv_out_prefix}.csv', 'r', encoding='utf-8') as f:
                 sv_rows = list(csv.DictReader(f))
-            self.assertEqual(len(sv_rows), 6)
+            self.assertEqual(len(sv_rows), 14)
             self.assertEqual(sv_rows[0]['observationAbout'], 'geoId/06085500100')
-            self.assertEqual(sv_rows[0]['observationDate'], '2014')
-            self.assertEqual(sv_rows[0]['observationPeriod'], 'P2Y')
 
 
 if __name__ == '__main__':

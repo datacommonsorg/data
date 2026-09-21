@@ -59,34 +59,34 @@ USER_AGENT = (
 
 DEFAULT_SOURCE_FILES = {
     'commuting_zone_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/cz_outcomes.zip',
-        'is_zip': True,
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'\s>]+/cz_outcomes\.zip',
+        'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/cz_outcomes.csv',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/cz_outcomes\.csv',
+        'is_zip': False,
     },
     'county_outcomes.csv': {
         'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/county_outcomes.zip',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/county_outcomes\.zip',
         'is_zip': True,
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'\s>]+/county_outcomes\.zip',
     },
     'tract_outcomes.csv': {
         'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/tract_outcomes.zip',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes\.zip',
         'is_zip': True,
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'\s>]+/tract_outcomes\.zip',
     },
     'tract_outcomes_late_simple.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/tract_outcomes_late_simple.csv',
+        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple.csv',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes_late_simple\.csv',
         'is_zip': False,
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'\s>]+/tract_outcomes_late_simple\.csv',
     },
     'county_by_cohort_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/county_outcomes_by_cohort.zip',
-        'is_zip': True,
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'\s>]+/county_outcomes_by_cohort\.zip',
+        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/Table_3_County_by_Cohort_Estimates\.csv',
+        'is_zip': False,
     },
     'cz_by_cohort_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/cz_outcomes_by_cohort.zip',
-        'is_zip': True,
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'\s>]+/cz_outcomes_by_cohort\.zip',
+        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_4_cz_by_cohort_estimates.csv',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/Table_4_cz_by_cohort_estimates\.csv',
+        'is_zip': False,
     },
 }
 
@@ -187,10 +187,52 @@ def format_geo_id(row: dict, geo_level: str) -> str:
     raise ValueError(f'Unsupported geo_level: {geo_level}')
 
 
+_MULTI_WORD_TOKEN_REWRITES = (
+    ('frac_below_median', 'fracbelowmedian'),
+    ('frac_years_xw', 'fracyearsxw'),
+    ('kid_blw_p50', 'kidblwp50'),
+    ('kfr_native', 'kfrnative'),
+    ('kir_native', 'kirnative'),
+    ('kfr_stycz', 'kfrstycz'),
+    ('kir_stycz', 'kirstycz'),
+    ('kfr_top01', 'kfrtop01'),
+    ('kir_top01', 'kirtop01'),
+    ('kfr_top20', 'kfrtop20'),
+    ('kir_top20', 'kirtop20'),
+    ('pos_hours', 'poshours'),
+    ('spouse_rk', 'spouserk'),
+    ('hours_wk', 'hourswk'),
+    ('lpov_nbh', 'lpovnbh'),
+    ('wgflx_rk', 'wgflxrk'),
+    ('par_rank', 'parrank'),
+    ('has_dad', 'hasdad'),
+    ('has_mom', 'hasmom'),
+    ('kfr_imm', 'kfrimm'),
+    ('kir_imm', 'kirimm'),
+    ('marr_24', 'marr24'),
+    ('marr_26', 'marr26'),
+    ('marr_29', 'marr29'),
+    ('marr_32', 'marr32'),
+    ('work_24', 'work24'),
+    ('work_26', 'work26'),
+    ('work_29', 'work29'),
+    ('work_32', 'work32'),
+    ('two_par', 'twopar'),
+    ('kfr_24', 'kfr24'),
+    ('kfr_26', 'kfr26'),
+    ('kfr_29', 'kfr29'),
+    ('kir_24', 'kir24'),
+    ('kir_26', 'kir26'),
+    ('kir_29', 'kir29'),
+    ('mean_se', 'meanse'),
+    ('kid_n', 'kidn'),
+)
+
+
 def normalize_column_header(
     col: str, dataset_mode: str = 'baseline_1978_1983', cohort_token: str = ''
 ) -> str:
-    """Normalizes non-outcome count column prefixes and appends cohort token for PVMAP word_delimiter."""
+    """Normalizes column tokens into single-word PVMAP tokens, strips 'pooled', and appends cohort token."""
     race_pat = 'pooled|aian|asian|black|hisp|natam|white|other'
     gender_pat = 'pooled|male|female'
 
@@ -198,26 +240,36 @@ def normalize_column_header(
         f'(?:kid_)?(({race_pat})_({gender_pat}))_(?:n|count)', col
     )
     if kid_n_match:
-        base_col = f'kid_n_{kid_n_match.group(1)}'
+        base_col = f'kidn_{kid_n_match.group(1)}'
         if dataset_mode == 'late_cohort_1984_1989':
-            return f'{base_col}_latekidn'
-        return f'{base_col}_{cohort_token}' if cohort_token else base_col
+            normalized = f'{base_col}_latekidn'
+        else:
+            normalized = f'{base_col}_{cohort_token}' if cohort_token else base_col
+        return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
     blw_p50_match = re.fullmatch(
         f'(?:kid_)?(({race_pat})_({gender_pat}))_blw_p50_(?:n|count)', col
     )
     if blw_p50_match:
-        base_col = f'kid_blw_p50_{blw_p50_match.group(1)}'
-        return f'{base_col}_{cohort_token}' if cohort_token else base_col
+        base_col = f'kidblwp50_{blw_p50_match.group(1)}'
+        normalized = f'{base_col}_{cohort_token}' if cohort_token else base_col
+        return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
     if dataset_mode == 'late_cohort_1984_1989':
         if col.startswith('jail_'):
-            return f'{col}_latejail'
-        return f'{col}_late'
+            normalized = f'{col}_latejail'
+        else:
+            normalized = f'{col}_late'
+    elif cohort_token:
+        normalized = f'{col}_{cohort_token}'
+    else:
+        normalized = col
 
-    if cohort_token:
-        return f'{col}_{cohort_token}'
-    return col
+    for old_tok, new_tok in _MULTI_WORD_TOKEN_REWRITES:
+        normalized = re.sub(
+            r'(^|_)' + old_tok + r'(?=_|$)', r'\1' + new_tok, normalized
+        )
+    return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
 
 def _get_shard_path(output_csv: str, shard_idx: int, suffix_tag: str = '') -> str:
@@ -234,6 +286,24 @@ def _get_shard_path(output_csv: str, shard_idx: int, suffix_tag: str = '') -> st
     return f'{stem}_{suffix_tag}_part_{shard_idx:03d}{ext}'
 
 
+def _clean_existing_shards(output_csv: str) -> None:
+    """Removes any pre-existing shard files for the given output_csv stem."""
+    out_dir = os.path.dirname(output_csv)
+    if not out_dir or not os.path.exists(out_dir):
+        return
+    base_name = os.path.basename(output_csv)
+    stem = (
+        base_name[: -len('_cleaned.csv')]
+        if base_name.endswith('_cleaned.csv')
+        else os.path.splitext(base_name)[0]
+    )
+    for fname in os.listdir(out_dir):
+        if fname == base_name or (
+            fname.startswith(f'{stem}_') and fname.endswith('_cleaned.csv')
+        ):
+            os.remove(os.path.join(out_dir, fname))
+
+
 def shard_wide_csv(
     input_csv: str,
     output_csv: str,
@@ -243,6 +313,7 @@ def shard_wide_csv(
 ) -> int:
     """Prepends geo_id, strips missing placeholders, and shards a wide CSV for stat_var_processor.py."""
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+    _clean_existing_shards(output_csv)
     with open(input_csv, mode='r', encoding='utf-8') as infile:
         reader = csv.DictReader(infile)
         data_cols = [
@@ -300,7 +371,7 @@ def shard_wide_csv(
         )
         try:
             writer = csv.writer(outfile)
-            writer.writeheader() if hasattr(writer, 'writeheader') else writer.writerow(header)
+            writer.writerow(header)
             for row in reader:
                 cleaned_vals = [
                     ''
