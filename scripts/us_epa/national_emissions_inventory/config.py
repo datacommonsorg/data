@@ -90,8 +90,8 @@ replacement_20 = {
     'fips state/county code': 'fips code',
     'scc': 'scc',
     'pollutant code': 'pollutant code',
-    'total emissions': 'observation',
-    'uom': 'unit'
+    'total emissions': 'total emissions',
+    'uom': 'emissions uom'
 }
 
 drop_tribes = [
@@ -1500,7 +1500,6 @@ replace_source_metadata = {
     "1": "External Combustion",
     "2": "Internal Combustion Engines",
     "3": "Industrial Processes",
-    "4": "Chemical Evaporation",
     "4": "Petroleum And Solvent Evaporation",
     "5": "Waste Disposal",
     "6": "MACT Source Categories",

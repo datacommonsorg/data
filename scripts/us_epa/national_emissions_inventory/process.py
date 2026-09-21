@@ -17,9 +17,11 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 
 import os
+import shutil
 import sys
 import time
 import traceback
+import uuid
 import concurrent.futures
 from absl import app, flags, logging
 import pandas as pd
@@ -70,7 +72,7 @@ _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "value: C:national_emissions->observation\n")
 
 TRIBAL_GEOCODE_START_RANGE = 80000
-MAX_WORKERS = os.cpu_count()
+MAX_WORKERS = min(8, os.cpu_count() or 1)
 
 
 class USAirEmissionTrends:
@@ -137,8 +139,7 @@ class USAirEmissionTrends:
                 df['pollutant type(s)'] = 'nan'
             elif 'point_' in os.path.basename(
                     file_path) or 'facility_process' in file_path:
-                if 'unknown' in file_path or '678910' in file_path:
-                    df.rename(columns=replacement_point_17, inplace=True)
+                df.rename(columns=replacement_point_17, inplace=True)
                 df['emissions type code'] = ''
             elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
@@ -148,8 +149,7 @@ class USAirEmissionTrends:
                 df['pollutant type(s)'] = 'nan'
             elif 'point_' in os.path.basename(
                     file_path) or 'facility_process' in file_path:
-                if 'unknown' in file_path:
-                    df.rename(columns=replacement_20, inplace=True)
+                df.rename(columns=replacement_20, inplace=True)
                 df['emissions type code'] = ''
             elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
@@ -164,12 +164,16 @@ class USAirEmissionTrends:
                     df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
-        else:
+        elif '2014' in file_path:
             df.rename(columns=replacement_14, inplace=True)
             if 'event' in file_path or 'process' in file_path:
                 df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
+        else:
+            raise ValueError(
+                f"Unhandled file path or unexpected survey year in: {file_path}"
+            )
 
         # Ensure all expected columns exist before subsetting
         for col in df_columns:
@@ -194,30 +198,26 @@ class USAirEmissionTrends:
         pd.set_option('display.max_columns', 14)
         df = self._regularize_columns(df, file_path)
         df['pollutant code'] = df['pollutant code'].astype(str)
-        df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
 
-        # Convert geo_Id to numeric and filter based on range
-        df['geo_Id'] = pd.to_numeric(
-            df['geo_Id'], errors='coerce'
-        )  # Convert to numeric, invalid parsing will be set as NaN
-        df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
+        # Convert fips code to numeric, filter out invalid/tribal codes, and format as 5-digit string
+        df['fips_num'] = pd.to_numeric(df['fips code'], errors='coerce')
+        df = df.dropna(subset=['fips_num'])
+        df = df[(df['fips_num'] > 0) &
+                (df['fips_num'] <= TRIBAL_GEOCODE_START_RANGE)]
+        df['geo_Id'] = 'geoId/' + df['fips_num'].astype(int).astype(
+            str).str.zfill(5)
+        df = df.drop(columns=['fips_num'])
 
-        # Remove if Tribal Details are needed
-        df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
-        df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
-        df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
-        df['geo_Id'] = df['geo_Id'].astype(str)
-
-        # Remove if Tribal Details are needed
-        df['scc'] = df['scc'].astype(str)
+        # Strip trailing .0 from float-parsed SCC codes before extracting level 1
+        df['scc'] = df['scc'].astype(str).str.replace(
+            r'\.0$', '', regex=True).str.strip()
         df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
                              df['scc'].str[0])
-        df['geo_Id'] = 'geoId/' + df['geo_Id']
         df.rename(columns=replacement_17, inplace=True)
         df_pollutants = df[df['pollutant code'].isin(pollutants)]
         df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
         df['pollutant code'] = ''
-        df = pd.concat([df, df_pollutants])
+        df = pd.concat([df, df_pollutants], ignore_index=True)
         df = self._data_standardize(df, 'unit')
         df['scc_name'] = df['scc'].astype(str)
         df = df.replace({'scc_name': replace_source_metadata})
@@ -229,9 +229,9 @@ class USAirEmissionTrends:
         df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
         df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
         df = df.drop(columns=drop_df)
-        df = df.drop(df[df['observation'] == '.'].index)
-        # safely turn any non-numeric values into NaN
+        # safely turn any non-numeric values into NaN and drop them
         df['observation'] = pd.to_numeric(df['observation'], errors='coerce')
+        df = df.dropna(subset=['observation'])
         return df
 
     def _process_file(self, file_path: str) -> None:
@@ -243,7 +243,7 @@ class USAirEmissionTrends:
             if df is not None and not df.empty:
                 intermediate_file_path = os.path.join(
                     self.temp_dir,
-                    f"{str(datetime.now().timestamp()).replace('.', '_')}_{os.path.basename(file_path)}"
+                    f"{uuid.uuid4().hex}_{os.path.basename(file_path)}"
                 )
                 df.to_csv(intermediate_file_path, index=False)
                 logging.info(
@@ -306,6 +306,10 @@ class USAirEmissionTrends:
             None
         """
         logging.info("Starting data processing across all input files.")
+        if self.temp_dir and os.path.exists(self.temp_dir):
+            shutil.rmtree(self.temp_dir)
+        if self.temp_dir:
+            os.makedirs(self.temp_dir, exist_ok=True)
         with concurrent.futures.ThreadPoolExecutor(
                 max_workers=MAX_WORKERS) as executor:
             list(executor.map(self._process_file, self._input_files))
@@ -423,8 +427,9 @@ def process_files(input_path: str, output_file_path: str,
     mcf_name = "national_emissions.mcf"
     tmcf_name = "national_emissions.tmcf"
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
-    if not os.path.exists(intermediate_path):
-        os.makedirs(intermediate_path, exist_ok=True)
+    if os.path.exists(intermediate_path):
+        shutil.rmtree(intermediate_path)
+    os.makedirs(intermediate_path, exist_ok=True)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
 
