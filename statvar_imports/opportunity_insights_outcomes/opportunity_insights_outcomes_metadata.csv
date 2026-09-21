@@ -1,4 +1,5 @@
 parameter,value
 header_rows,1
-mapped_columns,8
+mapped_columns,1
+word_delimiter,"_"
 output_columns,"observationAbout,observationDate,observationPeriod,variableMeasured,value"

@@ -13,10 +13,9 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
   * `cz_by_cohort_outcomes.csv` (1978–1992 annual birth cohorts)
 
 ## Pipeline Steps
-1. **Download and preprocess wide CSV files into sharded normalized observation rows:**
+1. **Download and shard wide CSV files:**
    ```bash
-   python3 download.py --output_dir=raw_data
-   python3 preprocess.py --input_dir=raw_data --output_dir=input_files --nodownload --max_rows_per_shard=5000000
+   python3 download.py --output_dir=raw_data --shard_dir=input_files
    ```
 2. **Run `stat_var_processor.py`:**
    ```bash
