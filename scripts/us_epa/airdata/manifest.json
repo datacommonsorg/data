@@ -18,7 +18,7 @@
                 }
             ],
             "source_files": [
-                "EPA_AirQuality.csv"
+                "validation_config.json"
             ],
             "cron_schedule": "15 22 10 1,7 *",
             "validation_config_file": "validation_config.json",

@@ -147,8 +147,10 @@ def write_csv(csv_file_path,
         if sites_mcf_file_path and os.path.exists(sites_mcf_file_path):
             with open(sites_mcf_file_path, 'r') as f_in:
                 for line in f_in:
-                    if line.startswith('Node: dcid:'):
-                        seen_sites.add(line.strip().split('Node: dcid:')[1])
+                    stripped = line.strip()
+                    if stripped.startswith('Node: dcid:'):
+                        seen_sites.add(
+                            stripped.split('Node: dcid:', 1)[1].strip())
 
     f_sites = open(sites_mcf_file_path, 'a') if sites_mcf_file_path else None
     try:
@@ -159,26 +161,30 @@ def write_csv(csv_file_path,
             monitors = {}
             keys = set()
             for observation in reader:
+                state_code = str(
+                    observation.get('State Code', '')).strip().upper()
                 # Skip cross-border monitors outside US (80 = Mexico, CC = Canada)
-                if observation.get('State Code') in ('80', 'CC'):
+                if state_code in ('80', 'CC'):
                     continue
                 site_number = 'epa/{state}{county}{site}'.format(
                     state=observation['State Code'],
                     county=observation['County Code'],
                     site=observation['Site Num'])
+                lat = str(observation.get('Latitude', '') or '').strip()
+                lon = str(observation.get('Longitude', '') or '').strip()
+                location_prop = (f'location: [latLong {lat} {lon}]\n'
+                                 if lat and lon else '')
+                site_county = ('dcid:geoId/' + observation['State Code'] +
+                               observation['County Code'])
                 if f_sites and site_number not in seen_sites:
                     seen_sites.add(site_number)
-                    site_name = observation.get('Local Site Name', '').replace(
-                        '"', r'\"')
-                    site_location = '[latLong {lat} {long}]'.format(
-                        lat=observation['Latitude'],
-                        long=observation['Longitude'])
-                    site_county = ('dcid:geoId/' + observation['State Code'] +
-                                   observation['County Code'])
+                    site_name = (observation.get('Local Site Name') or
+                                 '').replace('\r', ' ').replace(
+                                     '\n', ' ').strip().replace('"', r'\"')
                     f_sites.write(f'Node: dcid:{site_number}\n'
                                   f'typeOf: dcs:AirQualitySite\n'
                                   f'name: "{site_name}"\n'
-                                  f'location: {site_location}\n'
+                                  f'{location_prop}'
                                   f'containedInPlace: {site_county}\n\n')
                 # For a given site and pollutant standard, select the same monitor
                 monitor_key = (
@@ -217,9 +223,7 @@ def write_csv(csv_file_path,
                     'Site_Name':
                         observation['Local Site Name'],
                     'Site_Location':
-                        '[latLong {lat} {long}]'.format(
-                            lat=observation['Latitude'],
-                            long=observation['Longitude']),
+                        f'[latLong {lat} {lon}]' if lat and lon else '',
                     'County':
                         county,
                     'POC':
@@ -260,8 +264,16 @@ def main(_):
     if end_year >= datetime.now().year:
         end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} upto {end_year}')
-    create_csv('EPA_AirQuality.csv')
-    create_sites_mcf('EPA_AirQuality_sites.mcf')
+
+    csv_file = 'EPA_AirQuality.csv'
+    sites_mcf_file = 'EPA_AirQuality_sites.mcf'
+    tmcf_file = 'EPA_AirQuality.tmcf'
+
+    csv_tmp_file = f'{csv_file}.tmp'
+    sites_mcf_tmp_file = f'{sites_mcf_file}.tmp'
+
+    create_csv(csv_tmp_file)
+    create_sites_mcf(sites_mcf_tmp_file)
     seen_sites = set()
     session = requests.Session()
     adapter = requests.adapters.HTTPAdapter(max_retries=Retry(
@@ -275,16 +287,18 @@ def main(_):
     for pollutant in POLLUTANTS:
         for year in range(start_year, int(end_year) + 1):
             filename = f'daily_{pollutant}_{year}'
-            print(filename)
             url = f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip'
+            logging.info(f'Processing {filename} from {url}')
             response = session.get(url, timeout=120)
             response.raise_for_status()
             with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
                 with zf.open(f'{filename}.csv', 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-                    write_csv('EPA_AirQuality.csv', reader,
-                              'EPA_AirQuality_sites.mcf', seen_sites)
-    write_tmcf('EPA_AirQuality.tmcf')
+                    write_csv(csv_tmp_file, reader,
+                              sites_mcf_tmp_file, seen_sites)
+    os.replace(csv_tmp_file, csv_file)
+    os.replace(sites_mcf_tmp_file, sites_mcf_file)
+    write_tmcf(tmcf_file)
 
 
 if __name__ == '__main__':

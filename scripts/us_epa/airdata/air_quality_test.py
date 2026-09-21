@@ -192,6 +192,162 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 self.assertEqual(
                     test_sites_str.count('Node: dcid:epa/010730023'), 1)
 
+    def test_filter_cross_border_monitors_defensive(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': ' 80 ',
+                    'County Code': '001',
+                    'Site Num': '0001',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '32.5',
+                    'Longitude': '-117.0',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Mexico Monitor Padded',
+                },
+                {
+                    'State Code': 'cc',
+                    'County Code': '004',
+                    'Site Num': '0002',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '44.8',
+                    'Longitude': '-66.9',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Canada Monitor Lowercase',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_csv, 'r') as f:
+                reader = list(csv.DictReader(f))
+                self.assertEqual(len(reader), 0)
+            with open(test_sites_mcf, 'r') as f_sites:
+                self.assertEqual(f_sites.read().strip(), '')
+
+    def test_missing_coordinates(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '9999',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '   ',
+                    'Longitude': '',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.02',
+                    '1st Max Value': '0.03',
+                    'AQI': '20',
+                    'Local Site Name': 'No Coords Site',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_csv, 'r') as f:
+                rows = list(csv.DictReader(f))
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0]['Site_Location'], '')
+            with open(test_sites_mcf, 'r') as f_sites:
+                mcf_content = f_sites.read()
+                self.assertIn('Node: dcid:epa/010739999\n', mcf_content)
+                self.assertIn('typeOf: dcs:AirQualitySite\n', mcf_content)
+                self.assertIn('name: "No Coords Site"\n', mcf_content)
+                self.assertIn('containedInPlace: dcid:geoId/01073\n', mcf_content)
+                self.assertNotIn('location:', mcf_content)
+
+    def test_site_name_newline_sanitization(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '8888',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.5',
+                    'Longitude': '-86.8',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.02',
+                    '1st Max Value': '0.03',
+                    'AQI': '20',
+                    'Local Site Name': 'Multi-line\nSite "Name" \n ',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_sites_mcf, 'r') as f_sites:
+                mcf_content = f_sites.read()
+                self.assertIn('name: "Multi-line Site \\"Name\\""\n',
+                              mcf_content)
+
+    def test_seen_sites_whitespace_reloading(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            with open(test_sites_mcf, 'w') as f:
+                f.write('   Node: dcid: epa/010730023  \n'
+                        'typeOf: dcs:AirQualitySite\n\n')
+
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '0023',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.55',
+                    'Longitude': '-86.81',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'North Birmingham',
+                },
+            ]
+            # When seen_sites is not passed, it should reload from test_sites_mcf
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_sites_mcf, 'r') as f_sites:
+                mcf_content = f_sites.read()
+                # Should not have appended another node
+                self.assertEqual(mcf_content.count('epa/010730023'), 1)
+
 
 if __name__ == '__main__':
     unittest.main()

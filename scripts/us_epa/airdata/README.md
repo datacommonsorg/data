@@ -35,27 +35,31 @@ Pollutant-specific metrics are provided on the site monitor level. For simplicit
 County/CBSA level AQI metrics include the defining site and pollutant, which are included in the StatVarObservation.
 
 ## Generating Artifacts
-To generate `EPA_AirQuality.csv` and `EPA_AirQuality.tmcf`, run:
-```
-### python3 air_quality.py <end_year>
 
-OPENSSL_CONF=openssl.cnf python3 air_quality.py <end_year>
+### OpenSSL Configuration
+The EPA AQS web server (`aqs.epa.gov`) uses legacy TLS renegotiation that modern OpenSSL (v3+) disallows by default, causing connection errors (`SSL_ERROR_SSL: unsafe legacy renegotiation disabled`). The included `openssl.cnf` sets `Options = UnsafeLegacyRenegotiation` to enable compatibility. Run the scripts with `OPENSSL_CONF=openssl.cnf`.
 
+### Monitor-Level Air Quality (`air_quality.py`)
+To generate `EPA_AirQuality.csv`, `EPA_AirQuality.tmcf`, and `EPA_AirQuality_sites.mcf`, run:
+```bash
+OPENSSL_CONF=openssl.cnf python3 air_quality.py
 ```
+This script generates:
+- `EPA_AirQuality.csv`: Cleaned daily monitor observations.
+- `EPA_AirQuality.tmcf`: Template MCF mapping observation rows to Data Commons StatVars.
+- `EPA_AirQuality_sites.mcf`: Dynamically extracted `AirQualitySite` schema nodes for all unique monitor stations encountered during processing.
+
+By default, the script processes data from 1980 up to the previous calendar year (`datetime.now().year - 1`). You can optionally specify `--data_start_year` and `--data_end_year` flags (or set `START_YEAR` and `END_YEAR` environment variables).
+
+### County / CBSA Aggregates (`air_quality_aggregate.py`)
 To generate `EPA_AQI.csv` and `EPA_AQI.tmcf`, run:
+```bash
+OPENSSL_CONF=openssl.cnf python3 air_quality_aggregate.py
 ```
-##python3 air_quality_aggregate.py <end_year>
-
-OPENSSL_CONF=openssl.cnf python3 air_quality_aggregate.py <end_year>
-
-```
-As of June 2021, this currently includes data up to 2021.
+By default, this processes aggregate AQI data from 1980 up to the previous calendar year (`datetime.now().year - 1`). You can optionally specify `--aggregate_start_year` and `--aggregate_end_year` flags (or set `START_YEAR` and `END_YEAR` environment variables).
 
 ### Running Tests
 To run unit tests:
-```
-## python3 -m unittest discover -v -s ../ -p "*_test.py"
-
-OPENSSL_CONF=openssl.cnf python3 -m unittest discover -v -s ../ -p "*_test.py"
-
+```bash
+python3 -m unittest discover -v -s . -p "*_test.py"
 ```
