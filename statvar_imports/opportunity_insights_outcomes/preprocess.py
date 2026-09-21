@@ -53,6 +53,11 @@ flags.DEFINE_bool(
     True,
     'Whether to download/refresh the raw CSV files from opportunityinsights.org/data/ before processing.',
 )
+flags.DEFINE_integer(
+    'max_rows_per_shard',
+    5_000_000,
+    'Maximum normalized observation rows per output CSV shard before rotating to a new shard file.',
+)
 
 # Source datasets to process: (filename, geo_level, dataset_mode)
 # dataset_mode:
@@ -70,6 +75,7 @@ DATASET_CONFIGS = [
 
 RACES = collections.OrderedDict([
     ('pooled', ''),
+    ('aian', 'USC_AmericanIndianAndAlaskaNativeAlone'),
     ('asian', 'USC_AsianAlone'),
     ('black', 'USC_BlackOrAfricanAmericanAlone'),
     ('hisp', 'USC_HispanicOrLatinoRace'),
@@ -97,12 +103,15 @@ PERCENTILES = collections.OrderedDict([
 OUTCOME_NEW_NAMES = {
     'coll': 'collegeGraduate',
     'comcoll': 'communityCollegeGraduate',
+    'emp': 'fractionOfChildrenWithPositiveW2Earnings',
+    'fpw': 'fractionChildhoodYearsSpentInGeography',
     'grad': 'hasGraduateDegree',
     'has_dad': 'fatherPresence',
     'has_mom': 'motherPresence',
     'hours_wk': 'weeklyHoursWorked',
     'hs': 'highSchoolGraduate',
     'jail': 'incarcerationRate',
+    'kfi': 'householdIncome',
     'kfr': 'householdIncomeRank',
     'kfr_24': 'householdIncomeRankAge24',
     'kfr_26': 'householdIncomeRankAge26',
@@ -112,6 +121,7 @@ OUTCOME_NEW_NAMES = {
     'kfr_stycz': 'householdIncomeRankLiveChildhoodCZ',
     'kfr_top01': 'householdIncomeTop1pct',
     'kfr_top20': 'householdIncomeRankTop20pct',
+    'kii': 'individualIncome',
     'kir': 'meanPercentileIncomeRank',
     'kir_24': 'individualIncomeRankAge24',
     'kir_26': 'individualIncomeRankAge26',
@@ -149,12 +159,15 @@ OUTCOME_NEW_NAMES = {
 OUTCOMES = collections.OrderedDict([
     ('coll', ['collegeGraduate', '2003-01-01', '2015-01-01', 'P13Y']),
     ('comcoll', ['communityCollegeGraduate', '2003-01-01', '2015-01-01', 'P13Y']),
+    ('emp', ['fractionOfChildrenWithPositiveW2Earnings', '2015-01-01', '2015-01-01', 'P1Y']),
+    ('fpw', ['fractionChildhoodYearsSpentInGeography', '1994-01-01', '2006-01-01', 'P13Y']),
     ('grad', ['hasGraduateDegree', '2008-01-01', '2015-01-01', 'P8Y']),
     ('has_dad', ['fatherPresence', '1994-01-01', '2015-01-01', 'P22Y']),
     ('has_mom', ['motherPresence', '1994-01-01', '2015-01-01', 'P22Y']),
     ('hours_wk', ['weeklyHoursWorked', '2008-01-01', '2015-01-01', 'P8Y']),
     ('hs', ['highSchoolGraduate', '2000-01-01', '2015-01-01', 'P16Y']),
     ('jail', ['incarcerationRate', '2010-04-01', '2010-04-01', 'P1D']),
+    ('kfi', ['householdIncome', '2014-01-01', '2015-01-01', 'P2Y']),
     ('kfr_imm', ['householdIncomeRankImmigantMother', '2014-01-01', '2015-01-01', 'P2Y']),
     ('kfr_native', ['householdIncomeRankNativeMother', '2014-01-01', '2015-01-01', 'P2Y']),
     ('kfr_stycz', ['householdIncomeRankLiveChildhoodCZ', '2014-01-01', '2015-01-01', 'P2Y']),
@@ -164,6 +177,7 @@ OUTCOMES = collections.OrderedDict([
     ('kfr_26', ['householdIncomeRankAge26', '2004-01-01', '2009-01-01', 'P6Y']),
     ('kfr_29', ['householdIncomeRankAge29', '2007-01-01', '2012-01-01', 'P6Y']),
     ('kfr', ['householdIncomeRank', '2014-01-01', '2015-01-01', 'P2Y']),
+    ('kii', ['individualIncome', '2014-01-01', '2015-01-01', 'P2Y']),
     ('kir_imm', ['individualIncomeRankImmigrantMother', '2014-01-01', '2015-01-01', 'P2Y']),
     ('kir_native', ['individualIncomeRankNativeMother', '2014-01-01', '2015-01-01', 'P2Y']),
     ('kir_stycz', ['individualIncomeRankLiveChildhoodCZ', '2014-01-01', '2015-01-01', 'P2Y']),
@@ -335,8 +349,10 @@ def classify_column(col: str):
 
     non_outcome_patterns = [
         ('kid_n', f'kid_(({race_pattern})_({gender_pattern}))_n'),
+        ('kid_n', f'(({race_pattern})_({gender_pattern}))_count'),
         ('frac_below_median', f'frac_below_median_(({race_pattern})_({gender_pattern}))'),
         ('kid_blw_p50', f'kid_(({race_pattern})_({gender_pattern}))_blw_p50_n'),
+        ('kid_blw_p50', f'(({race_pattern})_({gender_pattern}))_blw_p50_count'),
         ('frac_years_xw', f'frac_years_xw_(({race_pattern})_({gender_pattern}))'),
     ]
     for code, pat in non_outcome_patterns:
@@ -377,8 +393,11 @@ def resolve_date_and_period(
     if dataset_mode == 'annual_cohort_1978_1992':
         # Birth cohorts 1978-1992 measured at age 27 -> observation years 2005-2019 (P1Y)
         row_cohort = (row.get('cohort') or '').strip()
-        if row_cohort.isdigit():
-            return str(int(row_cohort) + 27), 'P1Y'
+        if row_cohort:
+            try:
+                return str(int(float(row_cohort)) + 27), 'P1Y'
+            except ValueError:
+                pass
 
     return default_obs_date, default_obs_period
 
@@ -386,54 +405,104 @@ def resolve_date_and_period(
 _MISSING_VALUE_PLACEHOLDERS = frozenset({'', 'NA', 'N/A', '.', 'NAN', 'NULL'})
 
 
+def _get_shard_path(output_csv: str, shard_idx: int) -> str:
+    """Returns the output path for a given 0-based shard index."""
+    if shard_idx == 0:
+        return output_csv
+    if output_csv.endswith('_cleaned.csv'):
+        base = output_csv[: -len('_cleaned.csv')]
+        return f'{base}_part_{shard_idx:03d}_cleaned.csv'
+    stem, ext = os.path.splitext(output_csv)
+    return f'{stem}_part_{shard_idx:03d}{ext}'
+
+
 def process_csv_file(
     input_csv: str,
     output_csv: str,
     geo_level: str,
     dataset_mode: str = 'baseline_1978_1983',
+    max_rows_per_shard: int = 5_000_000,
 ) -> int:
-    """Converts a wide Opportunity Atlas CSV into a normalized CSV for stat_var_processor.py."""
+    """Converts a wide Opportunity Atlas CSV into sharded normalized CSV(s) for stat_var_processor.py."""
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
     rows_written = 0
+    shard_idx = 0
+    shard_rows = 0
 
-    with open(input_csv, mode='r', encoding='utf-8') as infile, open(
-        output_csv, mode='w', encoding='utf-8', newline=''
-    ) as outfile:
-        reader = csv.DictReader(infile)
+    outfile = open(
+        _get_shard_path(output_csv, shard_idx),
+        mode='w',
+        encoding='utf-8',
+        newline='',
+    )
+    try:
         writer = csv.DictWriter(outfile, fieldnames=OUTPUT_FIELDNAMES)
         writer.writeheader()
 
-        col_specs = {}
-        for col in reader.fieldnames or []:
-            spec = classify_column(col)
-            if spec:
-                col_specs[col] = spec
+        with open(input_csv, mode='r', encoding='utf-8') as infile:
+            reader = csv.DictReader(infile)
+            col_specs = {}
+            for col in reader.fieldnames or []:
+                spec = classify_column(col)
+                if spec:
+                    col_specs[col] = spec
 
-        for row in reader:
-            geo_id = format_geo_id(row, geo_level)
+            for row in reader:
+                geo_id = format_geo_id(row, geo_level)
 
-            for col, (metric_code, formatted_name, stat_type, obs_date, obs_period) in col_specs.items():
-                raw_val = (row.get(col) or '').strip()
-                if raw_val.upper() in _MISSING_VALUE_PLACEHOLDERS:
-                    continue
-                resolved_date, resolved_period = resolve_date_and_period(
-                    row, dataset_mode, metric_code, obs_date, obs_period
-                )
-                race, gender, parent_income = parse_population_slices(formatted_name)
-                writer.writerow({
-                    'geo_id': geo_id,
-                    'measured_property': get_measured_property(metric_code),
-                    'stat_type': stat_type,
-                    'race': race,
-                    'gender': gender,
-                    'parent_income': parent_income,
-                    'observation_date': resolved_date,
-                    'observation_period': resolved_period,
-                    'value': raw_val,
-                })
-                rows_written += 1
+                for col, (
+                    metric_code,
+                    formatted_name,
+                    stat_type,
+                    obs_date,
+                    obs_period,
+                ) in col_specs.items():
+                    raw_val = (row.get(col) or '').strip()
+                    if raw_val.upper() in _MISSING_VALUE_PLACEHOLDERS:
+                        continue
+                    if max_rows_per_shard > 0 and shard_rows >= max_rows_per_shard:
+                        outfile.close()
+                        shard_idx += 1
+                        shard_rows = 0
+                        outfile = open(
+                            _get_shard_path(output_csv, shard_idx),
+                            mode='w',
+                            encoding='utf-8',
+                            newline='',
+                        )
+                        writer = csv.DictWriter(
+                            outfile, fieldnames=OUTPUT_FIELDNAMES
+                        )
+                        writer.writeheader()
 
-    logging.info('Wrote %d normalized observation rows to %s', rows_written, output_csv)
+                    resolved_date, resolved_period = resolve_date_and_period(
+                        row, dataset_mode, metric_code, obs_date, obs_period
+                    )
+                    race, gender, parent_income = parse_population_slices(
+                        formatted_name
+                    )
+                    writer.writerow({
+                        'geo_id': geo_id,
+                        'measured_property': get_measured_property(metric_code),
+                        'stat_type': stat_type,
+                        'race': race,
+                        'gender': gender,
+                        'parent_income': parent_income,
+                        'observation_date': resolved_date,
+                        'observation_period': resolved_period,
+                        'value': raw_val,
+                    })
+                    rows_written += 1
+                    shard_rows += 1
+    finally:
+        outfile.close()
+
+    logging.info(
+        'Wrote %d normalized observation rows across %d shard(s) for %s',
+        rows_written,
+        shard_idx + 1,
+        output_csv,
+    )
     return rows_written
 
 
@@ -452,7 +521,13 @@ def main(_):
             )
         stem = os.path.splitext(filename)[0]
         output_path = os.path.join(FLAGS.output_dir, f'{stem}_cleaned.csv')
-        process_csv_file(input_path, output_path, geo_level, dataset_mode)
+        process_csv_file(
+            input_path,
+            output_path,
+            geo_level,
+            dataset_mode,
+            max_rows_per_shard=FLAGS.max_rows_per_shard,
+        )
 
 
 if __name__ == '__main__':

@@ -4,22 +4,27 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
 
 ## Source Data
 * **Provider:** Opportunity Insights (https://opportunityinsights.org/data/)
-* **CNS Raw Files:** `/cns/jv-d/home/datcom/opportunity_insights/opportunity_atlas/`
+* **Source Files (`raw_data/`):**
   * `commuting_zone_outcomes.csv` (`geoId/cz{cz:05d}`)
   * `county_outcomes.csv` (`geoId/{state:02d}{county:03d}`)
-  * `tract_outcomes.csv` (`geoId/{state:02d}{county:03d}{tract:06d}`)
+  * `tract_outcomes.csv` (`geoId/{state:02d}{county:03d}{tract:06d}`, including the 72 `kfi_*` and `kii_*` dollar-level income columns)
+  * `tract_outcomes_late_simple.csv` (1984–1989 cohort refresh)
+  * `county_by_cohort_outcomes.csv` (1978–1992 annual birth cohorts)
+  * `cz_by_cohort_outcomes.csv` (1978–1992 annual birth cohorts)
 
 ## Pipeline Steps
-1. **Preprocess wide CSV files into normalized observation rows:**
+1. **Download and preprocess wide CSV files into sharded normalized observation rows:**
    ```bash
-   python3 preprocess.py --input_dir=raw_data --output_dir=input_files
+   python3 download.py --output_dir=raw_data
+   python3 preprocess.py --input_dir=raw_data --output_dir=input_files --nodownload --max_rows_per_shard=5000000
    ```
 2. **Run `stat_var_processor.py`:**
    ```bash
    python3 ../../tools/statvar_importer/stat_var_processor.py \
-     --input_data="input_files/*_outcomes_cleaned.csv" \
-     --pv_map=pv_map/opportunity_insights_outcomes_pvmap.csv \
-     --config_file=pv_map/opportunity_insights_outcomes_metadata.csv \
+     --input_data="input_files/*_cleaned.csv" \
+     --pv_map=opportunity_insights_outcomes_pvmap.csv \
+     --config_file=opportunity_insights_outcomes_metadata.csv \
      --output_path=output_files/opportunity_insights_outcomes \
+     --output_counters=output_files/opportunity_insights_outcomes_counters.txt \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
    ```

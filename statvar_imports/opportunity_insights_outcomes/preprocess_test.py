@@ -135,6 +135,76 @@ class PreprocessTest(unittest.TestCase):
             with open(target_csv, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
+    def test_new_tract_and_cohort_columns(self):
+        self.assertEqual(
+            preprocess.classify_column('kfi_pooled_pooled_p25'),
+            ('kfi', 'pooled_pooled_p25', 'measuredValue', '2014', 'P2Y'),
+        )
+        self.assertEqual(
+            preprocess.classify_column('kii_black_female_p75'),
+            ('kii', 'black_female_p75', 'measuredValue', '2014', 'P2Y'),
+        )
+        self.assertEqual(
+            preprocess.classify_column('emp_aian_female_p25'),
+            ('emp', 'aian_female_p25', 'measuredValue', '2015', 'P1Y'),
+        )
+        self.assertEqual(
+            preprocess.classify_column('fpw_aian_male_p50'),
+            ('fpw', 'aian_male_p50', 'measuredValue', '1994', 'P13Y'),
+        )
+        self.assertEqual(
+            preprocess.classify_column('pooled_pooled_count'),
+            ('kid_n', 'pooled_pooled', 'measuredValue', '2000-04-01', 'P1D'),
+        )
+        self.assertEqual(
+            preprocess.classify_column('aian_female_blw_p50_count'),
+            ('kid_blw_p50', 'aian_female', 'measuredValue', '1994', 'P7Y'),
+        )
+        self.assertEqual(
+            preprocess.resolve_date_and_period(
+                {'cohort': '1978.0'},
+                'annual_cohort_1978_1992',
+                'emp',
+                '2015',
+                'P1Y',
+            ),
+            ('2005', 'P1Y'),
+        )
+
+    def test_process_csv_file_sharding(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            in_csv = os.path.join(tmpdir, 'tract_outcomes.csv')
+            out_csv = os.path.join(tmpdir, 'tract_outcomes_cleaned.csv')
+            with open(in_csv, 'w', encoding='utf-8', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    'state',
+                    'county',
+                    'tract',
+                    'kfi_pooled_pooled_p25',
+                    'kii_pooled_pooled_p75',
+                ])
+                writer.writerow(['6', '85', '500100', '45000', '38000'])
+                writer.writerow(['6', '85', '500200', '52000', '41000'])
+
+            count = preprocess.process_csv_file(
+                in_csv, out_csv, 'tract', max_rows_per_shard=2
+            )
+            self.assertEqual(count, 4)
+            shard0 = out_csv
+            shard1 = os.path.join(tmpdir, 'tract_outcomes_part_001_cleaned.csv')
+            self.assertTrue(os.path.exists(shard0))
+            self.assertTrue(os.path.exists(shard1))
+            with open(shard0, 'r', encoding='utf-8') as f0, open(
+                shard1, 'r', encoding='utf-8'
+            ) as f1:
+                rows0 = list(csv.DictReader(f0))
+                rows1 = list(csv.DictReader(f1))
+            self.assertEqual(len(rows0), 2)
+            self.assertEqual(len(rows1), 2)
+            self.assertEqual(rows0[0]['measured_property'], 'householdIncome')
+            self.assertEqual(rows0[1]['measured_property'], 'individualIncome')
+
 
 if __name__ == '__main__':
     unittest.main()
