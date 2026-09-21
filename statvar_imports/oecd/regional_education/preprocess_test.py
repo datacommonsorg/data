@@ -16,8 +16,15 @@
 import csv
 import os
 import shutil
+import sys
 import tempfile
 import unittest
+
+# Ensure the directory containing preprocess.py is in sys.path when tests
+# are executed from the repository root or CI harnesses.
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
 
 from preprocess import _filter_csv, preprocess
 

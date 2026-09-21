@@ -36,6 +36,11 @@ This project processes and imports regional educational attainment statistics fr
 
 ### 4. Script Execution Details
 
+All pipeline commands below should be executed from the dataset directory:
+```bash
+cd statvar_imports/oecd/regional_education
+```
+
 **Step 1: Download raw data**
 ```bash
 python3 ../../../util/download_util_script.py \
@@ -59,3 +64,16 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_path=output/oecd_regional_education \
   --output_counters=counters/oecd_regional_education_counters.csv
 ```
+
+### 5. Running Unit Tests
+
+Run the unit test suite from this directory:
+```bash
+python3 -m unittest preprocess_test.py
+```
+
+Or from the root of the repository:
+```bash
+python3 -m unittest statvar_imports/oecd/regional_education/preprocess_test.py
+```
+
