@@ -165,6 +165,78 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(len(sv_rows), 14)
             self.assertEqual(sv_rows[0]['observationAbout'], 'geoId/06085500100')
 
+    def test_seed_and_parallel_expand_end_to_end(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_dir = os.path.join(tmpdir, 'raw_data')
+            shard_dir = os.path.join(tmpdir, 'input_files')
+            out_dir = os.path.join(tmpdir, 'output_files')
+            os.makedirs(raw_dir, exist_ok=True)
+            os.makedirs(shard_dir, exist_ok=True)
+            os.makedirs(out_dir, exist_ok=True)
+
+            sample_schemas = {
+                'commuting_zone_outcomes.csv': (
+                    ['cz', 'kfr_pooled_pooled_p25', 'kfr_white_pooled_p25'],
+                    [['100', '0.42', '0.45']],
+                ),
+                'county_outcomes.csv': (
+                    ['state', 'county', 'kfr_top20_white_male_p25'],
+                    [['6', '85', '0.31']],
+                ),
+                'tract_outcomes.csv': (
+                    ['state', 'county', 'tract', 'kfi_pooled_pooled_p25', 'kid_white_male_n'],
+                    [['6', '85', '500100', '45000', '120']],
+                ),
+                'tract_outcomes_late_simple.csv': (
+                    ['state', 'county', 'tract', 'kfr_white_male_p25', 'jail_white_male_p25'],
+                    [['6', '85', '500100', '0.48', '0.01']],
+                ),
+                'county_by_cohort_outcomes.csv': (
+                    ['state', 'county', 'cohort', 'kfr_white_male_p25'],
+                    [['6', '85', '1978', '0.39']],
+                ),
+                'cz_by_cohort_outcomes.csv': (
+                    ['cz', 'cohort', 'kfr_white_male_p25'],
+                    [['100', '1980', '0.41']],
+                ),
+            }
+            for fname, (headers, rows) in sample_schemas.items():
+                with open(os.path.join(raw_dir, fname), 'w', encoding='utf-8', newline='') as f:
+                    w = csv.writer(f)
+                    w.writerow(headers)
+                    w.writerows(rows)
+
+            num_unique = download.write_svp_schema_seeds(raw_dir, shard_dir)
+            self.assertGreater(num_unique, 0)
+
+            import_dir = os.path.dirname(os.path.abspath(download.__file__))
+            repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
+            sv_out_prefix = os.path.join(out_dir, 'opportunity_insights_outcomes')
+            seed_files = [
+                os.path.join(shard_dir, f)
+                for f in sorted(os.listdir(shard_dir))
+                if f.endswith('_cleaned.csv')
+            ]
+            res = subprocess.run(
+                [
+                    'python3',
+                    os.path.join(repo_root, 'tools/statvar_importer/stat_var_processor.py'),
+                    f'--input_data={",".join(seed_files)}',
+                    f'--pv_map={os.path.join(import_dir, "opportunity_insights_outcomes_pvmap.csv")}',
+                    f'--config_file={os.path.join(import_dir, "opportunity_insights_outcomes_metadata.csv")}',
+                    f'--output_path={sv_out_prefix}',
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(res.returncode, 0, msg=res.stderr)
+
+            total_obs = download.expand_observations_parallel(
+                raw_dir, shard_dir, sv_out_prefix, rows_per_chunk=10, workers=2
+            )
+            self.assertEqual(total_obs, 9)
+
 
 if __name__ == '__main__':
     unittest.main()
