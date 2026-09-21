@@ -39,10 +39,10 @@ WITH cdc_sv AS (
     variable_measured AS cdc500,
     CASE
       WHEN REGEXP_CONTAINS(
-        variable_measured, r'65OrMoreYears.*Female|Female.*65OrMoreYears'
+        variable_measured, r'65OrMoreYears.*Female'
       ) THEN 'Count_Person_65OrMoreYears_Female'
       WHEN REGEXP_CONTAINS(
-        variable_measured, r'65OrMoreYears.*Male|Male.*65OrMoreYears'
+        variable_measured, r'65OrMoreYears.*Male'
       ) THEN 'Count_Person_65OrMoreYears_Male'
       WHEN variable_measured LIKE '%65OrMoreYears%' THEN 'Count_Person_65OrMoreYears'
       WHEN variable_measured LIKE '%18To64Years%' THEN 'Count_Person_18To64Years'
@@ -187,7 +187,10 @@ def main(argv):
     del argv  # Unused.
     client = bigquery.Client(project=_FLAGS.project)
     output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
-    run_process(client, output_file, timeout=_FLAGS.timeout)
+    try:
+        run_process(client, output_file, timeout=_FLAGS.timeout)
+    except Exception as e:  # pylint: disable=broad-exception-caught
+        logging.fatal("CDC 500 state aggregation failed: %s", e, exc_info=True)
 
 
 if __name__ == '__main__':

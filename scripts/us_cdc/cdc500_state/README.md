@@ -10,7 +10,8 @@ Author: Padma Gundapaneni @padma-g
 2. [About the Import](#about-the-import)
     1. [Artifacts](#artifacts)
     2. [Import Procedure](#import-procedure)
-    3. [Troubleshooting](#troubleshooting)
+    3. [Production Rollout / Deployment SOP](#production-rollout--deployment-sop)
+    4. [Troubleshooting](#troubleshooting)
 
 ## About the Dataset
 
@@ -118,6 +119,20 @@ This import is automated via Data Commons Import Automation and scheduled to run
 - **Import Type**: Automated (weekly Cloud Batch cron: `0 1 * * 1`)
 - **Production GCS Path**: `gs://datcom-prod-imports/scripts/us_cdc/cdc500_state/CDC500_States/`
 - **Test GCS Path**: `gs://datcom-import-test/scripts/us_cdc/cdc500_state/CDC500_States/`
+
+### Production Rollout / Deployment SOP
+
+Adding `unit: Percent` and `scalingFactor: 100` to `cdc500_state.tmcf` alters the observation series identity key (`_GROUPBY_KEYS` in `import_differ.py`). Because historical production baselines (`latest_version.txt`) lack these fields, comparing new runs against the old baseline reports 100% deletions. To maintain strict 0% deletion safety (`threshold: 0`) in steady-state automated weekly crons without triggering false deletion alarms, follow this 2-run deployment workflow upon merging:
+
+1. **Step 1: Trigger Manual Production Run 1**:
+   Immediately upon merge to `master`, manually trigger a production Cloud Batch import run to generate Run 1 incorporating `unit: Percent` and `scalingFactor: 100`.
+2. **Step 2: Update Production Baseline**:
+   Manually point `latest_version.txt` in GCS to Run 1's version directory:
+   ```bash
+   echo "<RUN_1_TIMESTAMP_VERSION>" | gcloud storage cp - gs://datcom-prod-imports/scripts/us_cdc/cdc500_state/CDC500_States/latest_version.txt
+   ```
+3. **Step 3: Verify Steady-State Differ**:
+   Trigger Run 2 (or await the scheduled Monday cron at `01:00 UTC`). Verify that `import_differ` compares Run 2 against Run 1, passing `check_deleted_records_percent` with 0% deletions (`0.0%`) under the strict default threshold (`threshold: 0`).
 
 ### Troubleshooting
 

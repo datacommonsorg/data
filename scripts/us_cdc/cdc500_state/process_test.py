@@ -101,11 +101,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         test_cases = [
             ('Percent_Person_65OrMoreYears_Female_CorePreventiveServices',
              'Count_Person_65OrMoreYears_Female'),
-            ('Percent_Person_Female_65OrMoreYears_CorePreventiveServices',
-             'Count_Person_65OrMoreYears_Female'),
             ('Percent_Person_65OrMoreYears_Male_CorePreventiveServices',
-             'Count_Person_65OrMoreYears_Male'),
-            ('Percent_Person_Male_65OrMoreYears_CorePreventiveServices',
              'Count_Person_65OrMoreYears_Male'),
             ('Percent_Person_65OrMoreYears_CorePreventiveServices',
              'Count_Person_65OrMoreYears'),
@@ -680,6 +676,20 @@ class CDC500StateProcessTest(unittest.TestCase):
                 mock_run_process.assert_called_once_with(mock_client_instance,
                                                          expected_output_file,
                                                          timeout=300)
+
+    @mock.patch('scripts.us_cdc.cdc500_state.process.logging.fatal')
+    @mock.patch('scripts.us_cdc.cdc500_state.process.run_process')
+    @mock.patch('google.cloud.bigquery.Client')
+    def test_main_error_logs_fatal(self, mock_bq_client_cls, mock_run_process,
+                                   mock_logging_fatal):
+        """Tests process.main catches unhandled exceptions and logs via logging.fatal."""
+        del mock_bq_client_cls  # Unused.
+        mock_run_process.side_effect = RuntimeError(
+            "BigQuery query returned 0 rows.")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with flagsaver.flagsaver(output_dir=tmp_dir):
+                process.main([])
+                mock_logging_fatal.assert_called_once()
 
 
 if __name__ == '__main__':

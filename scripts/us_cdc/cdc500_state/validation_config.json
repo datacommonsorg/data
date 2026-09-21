@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Allows 100% deletion for one-time TMCF series key migration (adding unit & scalingFactor).",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 100
-            }
-        },
-        {
             "rule_id": "check_max_value_percentage",
             "description": "Checks that all percentage StatVars do not exceed 100%.",
             "validator": "MAX_VALUE_CHECK",
