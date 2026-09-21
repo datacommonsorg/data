@@ -15,15 +15,15 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
 ## Pipeline Steps
 1. **Download raw CSVs and shard wide CSVs for `stat_var_processor.py`:**
    ```bash
-   python3 download.py --output_dir=raw_data --shard_dir=input_files
+   python3 download.py
    ```
-2. **Run `stat_var_processor.py` to generate final MCF, TMCF, and CSVs:**
+2. **Run `stat_var_processor.py` to generate final MCF, TMCF, CSVs, and counters:**
    ```bash
    python3 ../../tools/statvar_importer/stat_var_processor.py \
      --input_data="input_files/*_cleaned.csv" \
-      --pv_map=pvmap.csv \
-      --config_file=metadata.csv \
-     --output_path=output_files/opportunity_insights_outcomes \
-     --output_counters=output_files/opportunity_insights_outcomes_counters.txt \
+     --pv_map=pvmap.csv \
+     --config_file=metadata.csv \
+     --output_path=output/output \
+     --output_counters=counters/output_counters.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
    ```

@@ -14,10 +14,12 @@
 """Unit and PVMAP integration tests for OpportunityInsightsOutcomes download.py."""
 
 import csv
+import io
 import os
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 from statvar_imports.opportunity_insights_outcomes import download
@@ -55,6 +57,33 @@ class DownloadAndPvmapTest(unittest.TestCase):
             'geoId/06085500100',
         )
 
+    def test_download_file_atomic_and_retry(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dest_path = os.path.join(tmpdir, 'sample.csv')
+            call_count = 0
+
+            def fake_urlopen(req, timeout=300):
+                del req, timeout
+                nonlocal call_count
+                call_count += 1
+                if call_count == 1:
+                    raise OSError('transient connection reset')
+                return io.BytesIO(b'cz,val\n100,0.5\n')
+
+            with mock.patch('urllib.request.urlopen', side_effect=fake_urlopen):
+                download.download_file(
+                    'https://example.com/sample.csv',
+                    dest_path,
+                    max_retries=2,
+                    retry_backoff_sec=0.01,
+                )
+
+            self.assertEqual(call_count, 2)
+            self.assertTrue(os.path.exists(dest_path))
+            self.assertFalse(os.path.exists(f'{dest_path}.tmp'))
+            with open(dest_path, 'r', encoding='utf-8') as f:
+                self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
+
     def test_skips_missing_value_placeholders(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, 'commuting_zone_outcomes.csv')
@@ -84,13 +113,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
     def test_main_raises_on_missing_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            download.FLAGS.mark_as_parsed()
-            download.FLAGS.output_dir = os.path.join(tmpdir, 'raw')
-            download.FLAGS.shard_dir = os.path.join(tmpdir, 'out')
-            download.FLAGS.download = False
-
             with self.assertRaises(FileNotFoundError):
-                download.main([])
+                download.run_pipeline(
+                    output_dir=os.path.join(tmpdir, 'raw'),
+                    shard_dir=os.path.join(tmpdir, 'out'),
+                    download=False,
+                )
 
     def test_extract_csv_from_zip_skips_nested_macosx(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -133,13 +161,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 ])
 
             count = download.shard_wide_csv(
-                in_csv, out_csv, 'tract', max_rows_per_shard=1
+                in_csv, out_csv, 'tract', max_rows_per_shard=10
             )
             self.assertEqual(count, 2)
-            shard0 = out_csv
-            shard1 = os.path.join(tmpdir, 'tract_outcomes_part_001_cleaned.csv')
-            self.assertTrue(os.path.exists(shard0))
-            self.assertTrue(os.path.exists(shard1))
+            self.assertTrue(os.path.exists(out_csv))
 
             import_dir = os.path.dirname(os.path.abspath(download.__file__))
             repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
@@ -150,7 +175,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     os.path.join(
                         repo_root, 'tools/statvar_importer/stat_var_processor.py'
                     ),
-                    f'--input_data={shard0},{shard1}',
+                    f'--input_data={out_csv}',
                     f'--pv_map={os.path.join(import_dir, "pvmap.csv")}',
                     f'--config_file={os.path.join(import_dir, "metadata.csv")}',
                     f'--output_path={sv_out_prefix}',
@@ -164,15 +189,26 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 sv_rows = list(csv.DictReader(f))
             self.assertEqual(len(sv_rows), 14)
             self.assertEqual(sv_rows[0]['observationAbout'], 'geoId/06085500100')
+            dollar_rows = [
+                r
+                for r in sv_rows
+                if 'HouseholdIncome_' in r['variableMeasured']
+                or 'IndividualIncome_' in r['variableMeasured']
+            ]
+            self.assertEqual(len(dollar_rows), 6)
+            for r in dollar_rows:
+                self.assertEqual(r['unit'], 'USDollar')
 
     def test_sharding_all_datasets_and_stat_var_processor(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             raw_dir = os.path.join(tmpdir, 'raw_data')
             shard_dir = os.path.join(tmpdir, 'input_files')
-            out_dir = os.path.join(tmpdir, 'output_files')
+            out_dir = os.path.join(tmpdir, 'output')
+            counters_dir = os.path.join(tmpdir, 'counters')
             os.makedirs(raw_dir, exist_ok=True)
             os.makedirs(shard_dir, exist_ok=True)
             os.makedirs(out_dir, exist_ok=True)
+            os.makedirs(counters_dir, exist_ok=True)
 
             sample_schemas = {
                 'commuting_zone_outcomes.csv': (
@@ -216,7 +252,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     max_rows_per_shard=10,
                 )
 
-            sv_out_prefix = os.path.join(out_dir, 'opportunity_insights_outcomes')
+            sv_out_prefix = os.path.join(out_dir, 'output')
+            counters_file = os.path.join(counters_dir, 'output_counters.csv')
             import_dir = os.path.dirname(os.path.abspath(download.__file__))
             repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
             shard_files = [
@@ -232,6 +269,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     f'--pv_map={os.path.join(import_dir, "pvmap.csv")}',
                     f'--config_file={os.path.join(import_dir, "metadata.csv")}',
                     f'--output_path={sv_out_prefix}',
+                    f'--output_counters={counters_file}',
                 ],
                 capture_output=True,
                 text=True,
@@ -240,9 +278,13 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(res.returncode, 0, msg=res.stderr)
             self.assertNotIn('Duplicate SVObs', res.stderr)
             self.assertNotIn('Dropping invalid SVObs', res.stderr)
+            self.assertTrue(os.path.exists(counters_file))
 
-            with open(f'{sv_out_prefix}.csv', 'r', encoding='utf-8') as f:
-                sv_rows = list(csv.DictReader(f))
+            sv_rows = []
+            for fname in sorted(os.listdir(out_dir)):
+                if fname.endswith('.csv'):
+                    with open(os.path.join(out_dir, fname), 'r', encoding='utf-8') as f:
+                        sv_rows.extend(list(csv.DictReader(f)))
             self.assertEqual(len(sv_rows), 22)
 
 

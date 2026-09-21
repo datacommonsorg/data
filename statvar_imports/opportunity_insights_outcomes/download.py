@@ -18,6 +18,8 @@ import csv
 import os
 import re
 import shutil
+import time
+import urllib.error
 import urllib.request
 import zipfile
 from absl import app
@@ -26,14 +28,16 @@ from absl import logging
 
 FLAGS = flags.FLAGS
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 flags.DEFINE_string(
     'output_dir',
-    'raw_data',
+    os.path.join(_MODULE_DIR, 'raw_data'),
     'Directory where raw Opportunity Insights CSV files will be stored.',
 )
 flags.DEFINE_string(
     'shard_dir',
-    'input_files',
+    os.path.join(_MODULE_DIR, 'input_files'),
     'Directory where sharded wide CSV files for stat_var_processor.py will be written.',
 )
 flags.DEFINE_bool(
@@ -133,57 +137,99 @@ def discover_latest_urls(page_url: str) -> dict[str, str]:
     return discovered
 
 
-def download_file(url: str, dest_path: str) -> None:
-    """Downloads a URL to dest_path with a browser User-Agent."""
-    logging.info('Downloading %s -> %s', url, dest_path)
-    req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
-    with urllib.request.urlopen(req, timeout=300) as response, open(
-        dest_path, 'wb'
-    ) as out_file:
-        shutil.copyfileobj(response, out_file)
+def download_file(
+    url: str,
+    dest_path: str,
+    max_retries: int = 3,
+    retry_backoff_sec: float = 1.0,
+) -> None:
+    """Downloads a URL to dest_path atomically with bounded retries and a browser User-Agent."""
+    os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
+    tmp_path = f'{dest_path}.tmp'
+    for attempt in range(1, max_retries + 1):
+        logging.info(
+            'Downloading %s -> %s (attempt %d/%d)',
+            url,
+            dest_path,
+            attempt,
+            max_retries,
+        )
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
+            with urllib.request.urlopen(req, timeout=300) as response, open(
+                tmp_path, 'wb'
+            ) as out_file:
+                shutil.copyfileobj(response, out_file)
+            os.replace(tmp_path, dest_path)
+            return
+        except Exception as exc:  # pylint: disable=broad-except
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            if attempt >= max_retries:
+                raise
+            sleep_sec = retry_backoff_sec * (2 ** (attempt - 1))
+            logging.warning(
+                'Download failed for %s (%s); retrying in %.1fs...',
+                url,
+                exc,
+                sleep_sec,
+            )
+            time.sleep(sleep_sec)
 
 
 def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
-    """Extracts the primary CSV file from a ZIP archive, or moves it if already uncompressed CSV."""
+    """Extracts the primary CSV file from a ZIP archive atomically, or moves it if already uncompressed CSV."""
+    tmp_csv_path = f'{target_csv_path}.tmp'
     if zipfile.is_zipfile(zip_path):
-        with zipfile.ZipFile(zip_path, 'r') as zf:
-            csv_members = [
-                m
-                for m in zf.namelist()
-                if m.lower().endswith('.csv') and '__MACOSX' not in m
-            ]
-            if not csv_members:
-                raise ValueError(f'No CSV file found inside archive: {zip_path}')
-            member = csv_members[0]
-            logging.info(
-                'Extracting %s from %s -> %s', member, zip_path, target_csv_path
-            )
-            with zf.open(member) as src, open(target_csv_path, 'wb') as dst:
-                shutil.copyfileobj(src, dst)
-        os.remove(zip_path)
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as zf:
+                csv_members = [
+                    m
+                    for m in zf.namelist()
+                    if m.lower().endswith('.csv') and '__MACOSX' not in m
+                ]
+                if not csv_members:
+                    raise ValueError(f'No CSV file found inside archive: {zip_path}')
+                member = csv_members[0]
+                logging.info(
+                    'Extracting %s from %s -> %s', member, zip_path, target_csv_path
+                )
+                with zf.open(member) as src, open(tmp_csv_path, 'wb') as dst:
+                    shutil.copyfileobj(src, dst)
+            os.replace(tmp_csv_path, target_csv_path)
+            os.remove(zip_path)
+        except Exception:
+            if os.path.exists(tmp_csv_path):
+                os.remove(tmp_csv_path)
+            raise
     else:
         logging.info(
             '%s is already an uncompressed CSV file; moving -> %s',
             zip_path,
             target_csv_path,
         )
-        shutil.move(zip_path, target_csv_path)
+        os.replace(zip_path, target_csv_path)
 
 
 def format_geo_id(row: dict, geo_level: str) -> str:
     """Returns the Data Commons geoId dcid for a CSV row."""
+
+    def to_int_str(val, width: int) -> str:
+        try:
+            return f'{int(float(str(val).strip())):0{width}d}'
+        except (ValueError, TypeError):
+            return str(val).strip().zfill(width)
+
     if geo_level == 'county':
-        state = str(int(float(str(row['state']).strip()))).zfill(2)
-        county = str(int(float(str(row['county']).strip()))).zfill(3)
-        return f'geoId/{state}{county}'
+        return f'geoId/{to_int_str(row["state"], 2)}{to_int_str(row["county"], 3)}'
     if geo_level == 'tract':
-        state = str(int(float(str(row['state']).strip()))).zfill(2)
-        county = str(int(float(str(row['county']).strip()))).zfill(3)
-        tract = str(int(float(str(row['tract']).strip()))).zfill(6)
-        return f'geoId/{state}{county}{tract}'
+        return (
+            f'geoId/{to_int_str(row["state"], 2)}'
+            f'{to_int_str(row["county"], 3)}'
+            f'{to_int_str(row["tract"], 6)}'
+        )
     if geo_level == 'commuting_zone':
-        cz = str(int(float(str(row['cz']).strip()))).zfill(5)
-        return f'geoId/cz{cz}'
+        return f'geoId/cz{to_int_str(row["cz"], 5)}'
     raise ValueError(f'Unsupported geo_level: {geo_level}')
 
 
@@ -429,28 +475,47 @@ def download_all_sources(
     return downloaded_csvs
 
 
-def main(_):
-    os.makedirs(FLAGS.output_dir, exist_ok=True)
-    os.makedirs(FLAGS.shard_dir, exist_ok=True)
+def run_pipeline(
+    output_dir: str = os.path.join(_MODULE_DIR, 'raw_data'),
+    shard_dir: str = os.path.join(_MODULE_DIR, 'input_files'),
+    download: bool = True,
+    max_rows_per_shard: int = 5_000,
+    source_page_url: str = 'https://opportunityinsights.org/data/',
+) -> None:
+    """Runs the download and CSV sharding pipeline."""
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(shard_dir, exist_ok=True)
+    os.makedirs(os.path.join(_MODULE_DIR, 'output'), exist_ok=True)
+    os.makedirs(os.path.join(_MODULE_DIR, 'counters'), exist_ok=True)
 
-    if FLAGS.download:
-        download_all_sources(FLAGS.output_dir, FLAGS.source_page_url)
+    if download:
+        download_all_sources(output_dir, source_page_url)
 
     for filename, geo_level, dataset_mode in DATASET_CONFIGS:
-        input_path = os.path.join(FLAGS.output_dir, filename)
+        input_path = os.path.join(output_dir, filename)
         if not os.path.exists(input_path):
             raise FileNotFoundError(
                 f'Required input file not found for {filename}: {input_path}'
             )
         stem = os.path.splitext(filename)[0]
-        output_path = os.path.join(FLAGS.shard_dir, f'{stem}_cleaned.csv')
+        output_path = os.path.join(shard_dir, f'{stem}_cleaned.csv')
         shard_wide_csv(
             input_path,
             output_path,
             geo_level,
             dataset_mode,
-            max_rows_per_shard=FLAGS.max_rows_per_shard,
+            max_rows_per_shard=max_rows_per_shard,
         )
+
+
+def main(_):
+    run_pipeline(
+        output_dir=FLAGS.output_dir,
+        shard_dir=FLAGS.shard_dir,
+        download=FLAGS.download,
+        max_rows_per_shard=FLAGS.max_rows_per_shard,
+        source_page_url=FLAGS.source_page_url,
+    )
 
 
 if __name__ == '__main__':

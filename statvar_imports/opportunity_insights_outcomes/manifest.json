@@ -8,20 +8,19 @@
             "provenance_url": "https://opportunityinsights.org/data/",
             "provenance_description": "The Opportunity Atlas (Opportunity Insights) social and economic mobility outcomes by childhood commuting zone, county, and census tract across birth cohorts.",
             "scripts": [
-                "download.py --output_dir=raw_data --shard_dir=input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/*_cleaned.csv' --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output_files/opportunity_insights_outcomes --output_counters=output_files/opportunity_insights_outcomes_counters.txt --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/*_cleaned.csv' --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/output --output_counters=counters/output_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/opportunity_insights_outcomes.tmcf",
-                    "cleaned_csv": "output_files/opportunity_insights_outcomes*.csv",
-                    "node_mcf": "output_files/*.mcf"
+                    "template_mcf": "output/output.tmcf",
+                    "cleaned_csv": "output/output*.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [
                 "raw_data/*.csv",
-                "input_files/*_cleaned.csv",
-                "output_files/opportunity_insights_outcomes_counters.txt"
+                "counters/output_counters.csv"
             ],
             "cron_schedule": "0 8 1 * *",
             "resource_limits": {
