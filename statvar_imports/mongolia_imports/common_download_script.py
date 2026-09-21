@@ -94,7 +94,25 @@ EMPLOYMENT_TABLES = [
     },
     {
         "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_002V5.px",
-        "filename": "registered_unemployed_by_education_level_region_gender_month.csv"
+        "filename": "registered_unemployed_by_education_level_region_gender_month.csv",
+        # PxWeb API does not support negative/exclusion filters, so we explicitly list
+        # all 27 valid region codes to exclude legacy duplicate code "511" ("  Ulaanbaatar"),
+        # which collides with code "5" ("Ulaanbaatar") after whitespace stripping and has
+        # conflicting historical counts (2008-01 to 2011-09).
+        "query": [{
+            "code": "Бүс",
+            "selection": {
+                "filter": "item",
+                "values": [
+                    "0",
+                    "1", "181", "182", "183", "184", "185",
+                    "2", "261", "262", "263", "264", "265", "267",
+                    "3", "341", "342", "343", "344", "345", "346", "348",
+                    "4", "421", "422", "423",
+                    "5"
+                ]
+            }
+        }]
     }
 ]
 
@@ -159,14 +177,14 @@ def main(_):
     os.makedirs(demographics_dir, exist_ok=True)
     for table in DEMOGRAPHICS_TABLES:
         filepath = os.path.join(demographics_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Education Data
     education_dir = os.path.join(_SCRIPT_DIR, "mongolia_education", "input_files")
     os.makedirs(education_dir, exist_ok=True)
     for table in EDUCATION_TABLES:
         filepath = os.path.join(education_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Health Data
     health_dir = os.path.join(_SCRIPT_DIR, "mongolia_health", "input_files")
@@ -180,7 +198,7 @@ def main(_):
     os.makedirs(employment_dir, exist_ok=True)
     for table in EMPLOYMENT_TABLES:
         filepath = os.path.join(employment_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     logging.info("All tasks completed")
 
