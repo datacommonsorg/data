@@ -109,6 +109,8 @@ $ python3 scripts/us_cdc/cdc500_state/process.py --project=my-gcp-project --time
 Run the test suite using Python's `unittest` runner from the repository root:
 
 ```bash
+$ python3 -m unittest scripts/us_cdc/cdc500_state/process_test.py
+# or via module path:
 $ python3 -m unittest scripts.us_cdc.cdc500_state.process_test
 ```
 
