@@ -1,0 +1,10 @@
+key,property1,value1,property2,value2
+geo_id,observationAbout,{Data},,
+measured_property,populationType,OpportunityInsightsCohort,measuredProperty,{Data}
+stat_type,statType,{Data},,
+race,race,{Data},,
+gender,gender,{Data},,
+parent_income,parentIncome,{Data},,
+observation_date,observationDate,{Data},,
+observation_period,observationPeriod,{Data},,
+value,value,{Number},,
