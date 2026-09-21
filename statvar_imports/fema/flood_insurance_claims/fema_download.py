@@ -35,8 +35,10 @@ flags.DEFINE_string(
     'bulk_url',
     'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
     'The direct bulk download URL for the full dataset.')
-flags.DEFINE_string('temp_dir', 'temp_fema_data',
+flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
                     'The temporary directory to store downloaded chunks.')
+flags.DEFINE_string('output_dir', os.path.join(script_dir, 'input_file'),
+                    'The output directory to store the downloaded claims data.')
 _FLAGS = flags.FLAGS
 
 # Define the page size for each API request.
@@ -78,7 +80,10 @@ def get_total_records(api_url):
             'Failed to parse the total record count from the response.')
 
 
-def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
+def download_data(api_url: str,
+                  temp_dir: str,
+                  bulk_url: str = None,
+                  output_dir: str = None):
     """
     Downloads data from the FEMA API, handling pagination and file merging.
 
@@ -86,17 +91,19 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
         api_url (str): The base URL of the API endpoint.
         temp_dir (str): The path to the temporary directory for downloaded chunks.
         bulk_url (str): The direct bulk CSV download URL.
+        output_dir (str): The output directory for the final dataset.
     """
-    filename = "fema_nfip_claims.csv"
+    if output_dir is None:
+        output_dir = os.path.join(script_dir, "input_file")
+    if not os.path.isabs(output_dir):
+        output_dir = os.path.join(script_dir, output_dir)
+    if not os.path.isabs(temp_dir):
+        temp_dir = os.path.join(script_dir, temp_dir)
 
-    output_dir = "input_file"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    filename = os.path.join(output_dir, filename)
+    os.makedirs(output_dir, exist_ok=True)
+    final_filepath = os.path.join(output_dir, "fema_nfip_claims.csv")
 
     logging.set_verbosity(logging.INFO)
-
-    final_filepath = filename
 
     # 1. Try direct bulk download first (~8 seconds vs ~2.5 hours for pagination)
     if bulk_url:
@@ -145,7 +152,9 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
             shutil.rmtree(temp_dir)
         os.makedirs(temp_dir, exist_ok=True)
 
-        logging.info("Starting download to file: %s", final_filepath)
+        staging_filepath = os.path.join(temp_dir, "staging_fema_nfip_claims.csv")
+        logging.info("Starting download to file: %s (staging: %s)",
+                     final_filepath, staging_filepath)
 
         # The main download loop for pagination
         while total_records == 0 or records_downloaded < total_records:
@@ -169,7 +178,8 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
             if not download_success or not os.path.exists(util_output_path):
                 logging.fatal(
                     "Failed to download chunk or file not found. Exiting.")
-                break
+                raise RuntimeError(
+                    f"Failed to download chunk at skip={skip_count}.")
 
             os.rename(util_output_path, chunk_filepath)
 
@@ -179,14 +189,14 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
 
-            with open(final_filepath, 'ab') as f_final:
+            with open(staging_filepath, 'ab') as f_staging:
                 if skip_count == 0:
-                    f_final.write(content)
+                    f_staging.write(content)
                 else:
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1:
                         content_without_header = split_content[1]
-                        f_final.write(b'\n' + content_without_header)
+                        f_staging.write(b'\n' + content_without_header)
 
             num_records_in_chunk = len(content.split(b'\n')) - 1
             records_downloaded += num_records_in_chunk
@@ -202,12 +212,25 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
 
             skip_count += PAGE_SIZE
 
+        if total_records > 0 and records_downloaded < total_records:
+            logging.fatal(
+                "Expected %s records, but only downloaded %s. Download incomplete.",
+                total_records, records_downloaded)
+            raise RuntimeError(
+                f"Expected {total_records} records, but only downloaded {records_downloaded}"
+            )
+
+        if os.path.exists(final_filepath):
+            os.remove(final_filepath)
+        shutil.move(staging_filepath, final_filepath)
+
         logging.info(
             "Total download complete. All available records saved to: %s",
             final_filepath)
 
     except IOError as e:
-        logging.error("An error occurred while writing the file: %s", e)
+        logging.fatal("An error occurred while writing the file: %s", e)
+        raise
     finally:
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
@@ -220,7 +243,8 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url)
+    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url,
+                  _FLAGS.output_dir)
 
 
 if __name__ == "__main__":

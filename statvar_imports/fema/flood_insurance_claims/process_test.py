@@ -189,6 +189,17 @@ class ProcessTest(unittest.TestCase):
                 'dcid:CountOfClaims_NaturalHazardInsurance_FEMAFloodZoneUNKNOWN_ZONE_BuildingStructureAndContents_FloodEvent'
             ), 1.0)
 
+        # Verify CountOfClaims is serialized without decimal points
+        df_str = pd.read_csv(f"{self.output_prefix}.csv", dtype=str)
+        match_str = df_str[
+            (df_str['observationAbout'] == 'dcid:geoId/06')
+            & (df_str['observationDate'] == '2020-05') &
+            (df_str['observationPeriod'] == 'P1M') &
+            (df_str['variableMeasured'] ==
+             'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            )]
+        self.assertEqual(match_str['value'].iloc[0], '2')
+
 
 if __name__ == '__main__':
     unittest.main()

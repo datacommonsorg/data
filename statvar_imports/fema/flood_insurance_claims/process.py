@@ -42,11 +42,9 @@ _define_flag_if_not_exists(flags.DEFINE_string, 'input_data',
 _define_flag_if_not_exists(flags.DEFINE_string, 'output_path',
                            'output/nfip_output',
                            'Prefix path for output CSV and TMCF files.')
-_define_flag_if_not_exists(flags.DEFINE_string, 'config_file',
-                           'us_flood_nfip_config.py', 'Config file.')
 _define_flag_if_not_exists(
     flags.DEFINE_string, 'pv_map',
-    'us_flood_nfip_pv_map_floodzone.py,ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py',
+    'ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py',
     'PV map files configuration.')
 _define_flag_if_not_exists(flags.DEFINE_string, 'output_counters',
                            'counters/counters.txt',
@@ -301,7 +299,7 @@ def process_data_vectorized(
     max_cpus = os.cpu_count() or 1
     workers = num_workers if num_workers is not None else max(1, max_cpus)
     if chunk_size == 250000 and workers > 8:
-        chunk_size = max(50000, 2750000 // (workers * 2))
+        chunk_size = max(25000, 2750000 // (workers * 2))
 
     logging.info(
         "Starting parallel processing for: %s (chunk_size=%s, workers=%s)",
@@ -371,8 +369,10 @@ def process_data_vectorized(
             sub['variableMeasured'] = [
                 _make_statvar_name(z, metric, thing) for z in sub['zone']
             ]
-            sub['value'] = sub[col].round(
-                round_digits) if round_digits else sub[col]
+            if round_digits == 0:
+                sub['value'] = sub[col].round(0).astype('int64').astype(str)
+            else:
+                sub['value'] = sub[col].round(round_digits)
             sub['unit'] = unit
             dfs_to_concat.append(sub[[
                 'date', 'place', 'value', 'period', 'unit', 'variableMeasured'

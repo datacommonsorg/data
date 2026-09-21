@@ -19,7 +19,7 @@ This import automates the ingestion of National Flood Insurance Program (NFIP) r
 - Python 3.9+
 - Required packages:
   ```bash
-  pip install pandas numpy requests absl-py retry
+  pip install pandas numpy requests absl-py
   ```
 
 ---
