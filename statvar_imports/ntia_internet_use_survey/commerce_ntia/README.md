@@ -14,12 +14,14 @@
 
 ### How to run:
 
-```
-python3 stat_var_processor.py 
---input_data='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/<input_file.csv>' 
---pv_map='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<filename of pv_map.csv>' --config_file='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<filename of metadata.csv>' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<output_folder_name>/<filename>'
---output_counters='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<counters_folder_name>/<filename_counters.csv>'
+```bash
+python3 stat_var_processor.py \
+  --input_data='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/<input_file.csv>' \
+  --pv_map='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<filename of pv_map.csv>' \
+  --config_file='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<filename of metadata.csv>' \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_path='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<output_folder_name>/<filename>' \
+  --output_counters='../../statvar_imports/ntia_internet_use_survey/commerce_ntia/<counters_folder_name>/<filename_counters.csv>'
 ```
 
 #### Download the data: 
@@ -35,21 +37,23 @@ This preprocess script will split the downloaded input file into two files based
 
 Execute the script inside the folder `/data/tools/statvar_importer/`
 
-```
-python3 stat_var_processor.py 
---input_data=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/ntia-data.csv 
---pv_map=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_pvmap.csv 
---config_file=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/output_files/ntia_output
---output_counters=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/counters/ntia_output_counters.csv
+```bash
+python3 stat_var_processor.py \
+  --input_data=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/ntia-data.csv \
+  --pv_map=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_pvmap.csv \
+  --config_file=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_path=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/output_files/ntia_output \
+  --output_counters=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/counters/ntia_output_counters.csv
 ```
 
-```
-python3 stat_var_processor.py 
---input_data=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/ntia-data-age-only.csv 
---pv_map=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_age_pvmap.csv 
---config_file=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/output_files/ntia_age_output
---output_counters=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/counters/ntia_age_output_counters.csv
+```bash
+python3 stat_var_processor.py \
+  --input_data=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/input_files/ntia-data-age-only.csv \
+  --pv_map=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_age_pvmap.csv \
+  --config_file=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/ntia_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_path=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/output_files/ntia_age_output \
+  --output_counters=../../statvar_imports/ntia_internet_use_survey/commerce_ntia/counters/ntia_age_output_counters.csv
 ```
 

@@ -20,8 +20,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output_files/ntia_output.tmcf",
-                    "cleaned_csv": "output_files/ntia_output.csv",
-                    "node_mcf": "output_files/ntia_output*.mcf"
+                    "cleaned_csv": "output_files/ntia_output.csv"
                 },
                 {
                     "template_mcf": "output_files/ntia_age_output.tmcf",

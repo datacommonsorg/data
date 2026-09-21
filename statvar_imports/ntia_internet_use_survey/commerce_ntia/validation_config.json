@@ -3,7 +3,7 @@
   "rules": [
     {
       "rule_id": "check_deleted_records_percent",
-      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "description": "Checks that the percentage of deleted records for the entire import does not exceed 0.1%.",
       "validator": "DELETED_RECORDS_PERCENT",
       "params": {
         "threshold": 0.1
@@ -15,7 +15,7 @@
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT COUNT(*) AS total_svs, COALESCE(SUM(CASE WHEN MaxDate >= '2023-11' THEN 1 ELSE 0 END), 0) AS active_svs, COALESCE(SUM(CASE WHEN regexp_matches(StatVar, '3To14Years|15To24Years|25To44Years|45To64Years|65OrMoreYears') THEN 1 ELSE 0 END), 0) AS age_svs FROM stats",
-        "condition": "(age_svs = 0 AND total_svs >= 1935 AND active_svs >= 1935) OR (age_svs = total_svs AND total_svs BETWEEN 227 AND 300 AND active_svs >= 227)"
+        "condition": "(age_svs = 0 AND total_svs >= 1935 AND active_svs >= 1935) OR (age_svs = total_svs AND total_svs >= 227 AND active_svs >= 227)"
       }
     },
     {

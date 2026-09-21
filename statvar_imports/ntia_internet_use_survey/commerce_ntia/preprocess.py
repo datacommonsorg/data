@@ -14,8 +14,10 @@
 
 import os
 import sys
-import pandas as pd
+
 from absl import app, logging
+import pandas as pd
+
 import config
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -24,7 +26,8 @@ sys.path.append(os.path.join(script_dir, '../../../util'))
 
 from download_util_script import download_file
 
-Commerce_NTIA_URL = config.Commerce_NTIA_URL
+COMMERCE_NTIA_URL = config.COMMERCE_NTIA_URL
+Commerce_NTIA_URL = COMMERCE_NTIA_URL
 
 INPUT_DIR = os.path.join(script_dir, "input_files")
 
@@ -90,7 +93,7 @@ def main(argv):
     del argv
     try:
         success = download_file(
-            url=Commerce_NTIA_URL,
+            url=COMMERCE_NTIA_URL,
             output_folder=INPUT_DIR,
             unzip=False,
             headers=HEADERS,

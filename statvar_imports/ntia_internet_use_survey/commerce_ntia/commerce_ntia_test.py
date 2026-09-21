@@ -53,20 +53,22 @@ class PreprocessTest(unittest.TestCase):
             output_data = os.path.join(tmp_dir, 'ntia-data.csv')
 
             raw_data = {
-                'dataset': ['Nov 2023', 'Nov 2023', 'Nov 2023'],
-                'variable': ['Streaming', 'Email', 'Broadband'],
-                'description': ['Desc 1', 'Desc 2', 'Desc 3'],
-                'universe': ['isPerson', 'isAdult', 'isHousehold'],
-                'age314Count': [10, 20, 30],
-                'age314Prop': [0.1, 0.2, 0.3],
-                'age1524Count': [11, 21, 31],
-                'age2544Count': [12, 22, 32],
-                'age4564Count': [13, 23, 33],
-                'age65pCount': [14, 24, 34],
-                'age65pSE': [0.01, 0.02, 0.03],
-                'agencyAccess': [5, 10, 15],
-                'totalCount': [100, 200, 300],
-                'otherMetric': [1.5, 2.5, 3.5]
+                'dataset': ['Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023'],
+                'variable': ['Streaming', 'Email', 'Broadband', 'isPerson', 'isAdult'],
+                'description': ['Desc 1', 'Desc 2', 'Desc 3', 'Desc 4', 'Desc 5'],
+                'universe': [
+                    'isPerson', 'isAdult', 'isHousehold', 'isHousehold', 'isHousehold'
+                ],
+                'age314Count': [10, 20, 30, 40, 50],
+                'age314Prop': [0.1, 0.2, 0.3, 0.4, 0.5],
+                'age1524Count': [11, 21, 31, 41, 51],
+                'age2544Count': [12, 22, 32, 42, 52],
+                'age4564Count': [13, 23, 33, 43, 53],
+                'age65pCount': [14, 24, 34, 44, 54],
+                'age65pSE': [0.01, 0.02, 0.03, 0.04, 0.05],
+                'agencyAccess': [5, 10, 15, 20, 25],
+                'totalCount': [100, 200, 300, 400, 500],
+                'otherMetric': [1.5, 2.5, 3.5, 4.5, 5.5]
             }
             pd.DataFrame(raw_data).to_csv(input_file,
                                           index=False,
@@ -97,6 +99,9 @@ class PreprocessTest(unittest.TestCase):
             self.assertEqual(df_age.loc[0, 'universeAgeResol'], 'CivilPerson')
             self.assertEqual(df_age.loc[1, 'universeAgeResol'], 'Adult')
             self.assertTrue(pd.isna(df_age.loc[2, 'universeAgeResol']))
+            self.assertTrue(pd.isna(df_age.loc[0, 'variableAgeResol']))
+            self.assertEqual(df_age.loc[3, 'variableAgeResol'], 'CivilPerson')
+            self.assertEqual(df_age.loc[4, 'variableAgeResol'], 'Adult')
 
             df_data = pd.read_csv(output_data)
             cols_data = list(df_data.columns)
@@ -110,6 +115,9 @@ class PreprocessTest(unittest.TestCase):
             self.assertEqual(df_data.loc[0, 'universeAgeResol'], 'CivilPerson')
             self.assertEqual(df_data.loc[1, 'universeAgeResol'], 'Adult')
             self.assertTrue(pd.isna(df_data.loc[2, 'universeAgeResol']))
+            self.assertTrue(pd.isna(df_data.loc[0, 'variableAgeResol']))
+            self.assertEqual(df_data.loc[3, 'variableAgeResol'], 'CivilPerson')
+            self.assertEqual(df_data.loc[4, 'variableAgeResol'], 'Adult')
             for age_col in preprocess.AGE_COLUMNS:
                 self.assertNotIn(age_col, cols_data)
             self.assertNotIn('age314Prop', cols_data)
@@ -151,7 +159,7 @@ class PreprocessTest(unittest.TestCase):
              mock.patch('os.path.getsize', return_value=1024):
             preprocess.main([])
             mock_download.assert_called_once_with(
-                url=preprocess.Commerce_NTIA_URL,
+                url=preprocess.COMMERCE_NTIA_URL,
                 output_folder=preprocess.INPUT_DIR,
                 unzip=False,
                 headers=preprocess.HEADERS,
