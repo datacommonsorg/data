@@ -232,6 +232,26 @@ class PreprocessTest(unittest.TestCase):
             _filter_csv(src_csv, dst_csv, valid_places)
         self.assertIn("Critical: All 1 rows in", str(ctx.exception))
 
+    def test_filter_csv_raises_on_missing_required_columns(self):
+        """Test ValueError is raised when source CSV lacks any required columns."""
+        src_csv = os.path.join(self.temp_dir, 'input.csv')
+        dst_csv = os.path.join(self.temp_dir, 'output.csv')
+        valid_places = {'US56': 'dcid:geoId/56'}
+
+        # Omit 'Education level' and 'SEX'
+        header = ['REF_AREA', 'TIME_PERIOD', 'UNIT_MULT', 'AGE', 'OBS_VALUE']
+        rows = [['US56', '2020', '0', 'Y25T64', '35.5']]
+        with open(src_csv, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            writer.writerows(rows)
+
+        with self.assertRaises(ValueError) as ctx:
+            _filter_csv(src_csv, dst_csv, valid_places)
+        self.assertIn("missing required columns", str(ctx.exception))
+        self.assertIn("Education level", str(ctx.exception))
+        self.assertIn("SEX", str(ctx.exception))
+
     def test_preprocess_e2e_with_raw_file(self):
         """Test full preprocess execution when raw SDMX file is present in source_files."""
         self._write_places_resolved([
@@ -269,6 +289,47 @@ class PreprocessTest(unittest.TestCase):
         self.assertEqual(len(out_rows), 3)  # Header + 2 valid rows
         self.assertEqual(out_rows[1][0], 'dcid:geoId/56')
         self.assertEqual(out_rows[2][0], 'dcid:nuts/PT19')
+
+    def test_preprocess_selects_newest_candidate_file(self):
+        """Test newest candidate file by mtime is selected when multiple candidates exist."""
+        import time
+
+        self._write_places_resolved([
+            ['US56', 'geoId/56', 'Wyoming', 'United States'],
+        ])
+
+        header = [
+            'REF_AREA', 'TIME_PERIOD', 'UNIT_MULT', 'SEX', 'Education level',
+            'AGE', 'OBS_VALUE'
+        ]
+        # Create older file
+        older_file = os.path.join(self.gcs_source_dir, 'A.........')
+        with open(older_file, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            writer.writerow(['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '10.0'])
+
+        # Set older mtime
+        old_time = time.time() - 100
+        os.utime(older_file, (old_time, old_time))
+
+        # Create newer file with different pattern (e.g. OECD_REG_EDU.csv)
+        newer_file = os.path.join(self.gcs_source_dir, 'OECD_REG_EDU.csv')
+        with open(newer_file, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            writer.writerow(['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '99.0'])
+
+        new_time = time.time()
+        os.utime(newer_file, (new_time, new_time))
+
+        preprocess(base_path=self.temp_dir)
+
+        target_csv = os.path.join(self.gcs_source_dir, 'oecd_regional_education_data.csv')
+        with open(target_csv, 'r', encoding='utf-8') as f:
+            out_rows = list(csv.reader(f))
+        # Value 99.0 from newer_file should have been selected
+        self.assertEqual(out_rows[1][6], '99.0')
 
     def test_preprocess_missing_places_resolved_raises(self):
         """Test preprocess raises FileNotFoundError if places_resolved file does not exist."""

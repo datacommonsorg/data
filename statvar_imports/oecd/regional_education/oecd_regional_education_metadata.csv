@@ -7,8 +7,7 @@ start_date,2000
 end_date,2025
 release_frequency,Yearly
 process,
-comments,"The source for education data is from 2000 to 2025, unable to select all the required years to process. 
-Path to data - URL - Regions and Cities - Regional Statistics - Regional Education - Educational Attainment"
+comments,"The source for education data is from 2000 to 2025. Path to data - URL - Regions and Cities - Regional Statistics - Regional Education - Educational Attainment"
 output_columns,"observationAbout,observationDate,variableMeasured,value"
 header_rows,1
 word_delimiter,""""""

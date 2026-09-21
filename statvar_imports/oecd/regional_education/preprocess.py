@@ -73,12 +73,26 @@ def preprocess(base_path=None):
         logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
         raise FileNotFoundError(f"Folder '{folder_name}' not found in '{base_path}'")
 
-    pattern = re.compile(r'^A\.+.*', re.IGNORECASE)
-    candidate_files = sorted([
+    pattern = re.compile(r'^(?:A.*|OECD.*|.*REG_EDU.*)$', re.IGNORECASE)
+    candidate_files = [
         f for f in os.listdir(target_folder)
-        if pattern.match(f) and f not in ('oecd_regional_education_data.csv', 'filtered_tmp.csv')
-    ])
-    raw_file = candidate_files[0] if candidate_files else None
+        if os.path.isfile(os.path.join(target_folder, f))
+        and not f.startswith('.')
+        and f not in ('oecd_regional_education_data.csv', 'filtered_tmp.csv')
+        and pattern.match(f)
+    ]
+    if candidate_files:
+        candidate_files.sort(
+            key=lambda f: os.path.getmtime(os.path.join(target_folder, f)),
+            reverse=True
+        )
+        raw_file = candidate_files[0]
+        if len(candidate_files) > 1:
+            logging.info(
+                f"Found multiple candidate source files: {candidate_files}. "
+                f"Selecting newest file '{raw_file}'.")
+    else:
+        raw_file = None
 
     target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
     unmapped_log_path = os.path.join(counters_folder, 'unresolved_places.csv')
@@ -123,31 +137,20 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
         if not header:
             raise ValueError(f"Source file '{src_path}' is empty.")
 
-        ref_area_idx = header.index('REF_AREA') if 'REF_AREA' in header else None
-        if ref_area_idx is None:
-            logging.warning("REF_AREA column not found in header, copying all rows.")
-            writer.writerow(header)
-            kept = 0
-            for row in reader:
-                writer.writerow(row)
-                kept += 1
-            if kept == 0:
-                raise ValueError(f"Source file '{src_path}' has header but no data rows.")
-            return
+        missing_columns = [c for c in required_columns if c not in header]
+        if missing_columns:
+            raise ValueError(
+                f"Source file '{src_path}' is missing required columns: "
+                f"{missing_columns}. Available columns: {header}")
 
-        # Determine indices of required columns if all exist in header
-        col_indices = [header.index(c) for c in required_columns if c in header]
-        use_subset = len(col_indices) == len(required_columns)
-        obs_val_idx = header.index('OBS_VALUE') if 'OBS_VALUE' in header else None
+        col_indices = [header.index(c) for c in required_columns]
+        ref_area_idx = header.index('REF_AREA')
+        out_ref_area_idx = required_columns.index('REF_AREA')
+        obs_val_idx = header.index('OBS_VALUE')
         stat_op_idx = (header.index('STATISTICAL_OPERATION')
                        if 'STATISTICAL_OPERATION' in header else None)
 
-        if use_subset:
-            writer.writerow(required_columns)
-            out_ref_area_idx = required_columns.index('REF_AREA')
-        else:
-            writer.writerow(header)
-            out_ref_area_idx = ref_area_idx
+        writer.writerow(required_columns)
 
         kept = 0
         dropped = 0
@@ -155,7 +158,7 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
         for row in reader:
             if len(row) > ref_area_idx:
                 # Skip rows with empty OBS_VALUE or ignored STATISTICAL_OPERATION (SE)
-                if obs_val_idx is not None and len(row) > obs_val_idx:
+                if len(row) > obs_val_idx:
                     if not row[obs_val_idx].strip():
                         dropped += 1
                         continue
@@ -173,10 +176,7 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
                     resolved_dcid = clean_ref
 
                 if resolved_dcid:
-                    if use_subset:
-                        out_row = [row[idx] if len(row) > idx else '' for idx in col_indices]
-                    else:
-                        out_row = list(row)
+                    out_row = [row[idx] if len(row) > idx else '' for idx in col_indices]
                     out_row[out_ref_area_idx] = resolved_dcid
                     writer.writerow(out_row)
                     kept += 1
