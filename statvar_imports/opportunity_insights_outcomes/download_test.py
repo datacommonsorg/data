@@ -165,7 +165,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(len(sv_rows), 14)
             self.assertEqual(sv_rows[0]['observationAbout'], 'geoId/06085500100')
 
-    def test_seed_and_parallel_expand_end_to_end(self):
+    def test_two_command_pipeline_with_stat_var_processor_at_end(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             raw_dir = os.path.join(tmpdir, 'raw_data')
             shard_dir = os.path.join(tmpdir, 'input_files')
@@ -177,27 +177,27 @@ class DownloadAndPvmapTest(unittest.TestCase):
             sample_schemas = {
                 'commuting_zone_outcomes.csv': (
                     ['cz', 'kfr_pooled_pooled_p25', 'kfr_white_pooled_p25'],
-                    [['100', '0.42', '0.45']],
+                    [['100', '0.42', '0.45'], ['101', '0.43', '0.46']],
                 ),
                 'county_outcomes.csv': (
-                    ['state', 'county', 'kfr_top20_white_male_p25'],
-                    [['6', '85', '0.31']],
+                    ['state', 'county', 'kfr_top20_white_male_p25', 'working_black_pooled_p75_se'],
+                    [['6', '85', '0.31', '0.031'], ['6', '87', '0.35', '0.035']],
                 ),
                 'tract_outcomes.csv': (
                     ['state', 'county', 'tract', 'kfi_pooled_pooled_p25', 'kid_white_male_n'],
-                    [['6', '85', '500100', '45000', '120']],
+                    [['6', '85', '500100', '45000', '120'], ['6', '85', '500200', '52000', '150']],
                 ),
                 'tract_outcomes_late_simple.csv': (
                     ['state', 'county', 'tract', 'kfr_white_male_p25', 'jail_white_male_p25'],
-                    [['6', '85', '500100', '0.48', '0.01']],
+                    [['6', '85', '500100', '0.48', '0.01'], ['6', '85', '500200', '0.50', '0.02']],
                 ),
                 'county_by_cohort_outcomes.csv': (
-                    ['state', 'county', 'cohort', 'kfr_white_male_p25'],
-                    [['6', '85', '1978', '0.39']],
+                    ['state', 'county', 'cohort', 'kfr_white_male_p25', 'emp_black_pooled_p75_se'],
+                    [['6', '85', '1988', '0.39', '0.050'], ['6', '87', '1988', '0.40', '0.052']],
                 ),
                 'cz_by_cohort_outcomes.csv': (
                     ['cz', 'cohort', 'kfr_white_male_p25'],
-                    [['100', '1980', '0.41']],
+                    [['100', '1980', '0.41'], ['101', '1980', '0.44']],
                 ),
             }
             for fname, (headers, rows) in sample_schemas.items():
@@ -206,12 +206,17 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     w.writerow(headers)
                     w.writerows(rows)
 
-            num_unique = download.write_svp_schema_seeds(raw_dir, shard_dir)
-            self.assertGreater(num_unique, 0)
+            sv_out_prefix = os.path.join(out_dir, 'opportunity_insights_outcomes')
 
+            # Command 1: download.py prepares parallel shards (rows >= 1) and row-0 inputs for stat_var_processor.py
+            part_obs = download.prepare_parallel_shards_and_svp_inputs(
+                raw_dir, shard_dir, sv_out_prefix, rows_per_chunk=10, workers=2
+            )
+            self.assertEqual(part_obs, 11)
+
+            # Command 2 (at the end): stat_var_processor.py runs on input_files/*_cleaned.csv
             import_dir = os.path.dirname(os.path.abspath(download.__file__))
             repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
-            sv_out_prefix = os.path.join(out_dir, 'opportunity_insights_outcomes')
             seed_files = [
                 os.path.join(shard_dir, f)
                 for f in sorted(os.listdir(shard_dir))
@@ -231,11 +236,16 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 check=False,
             )
             self.assertEqual(res.returncode, 0, msg=res.stderr)
+            self.assertNotIn('Duplicate SVObs', res.stderr)
+            self.assertNotIn('Dropping invalid SVObs', res.stderr)
 
-            total_obs = download.expand_observations_parallel(
-                raw_dir, shard_dir, sv_out_prefix, rows_per_chunk=10, workers=2
-            )
-            self.assertEqual(total_obs, 9)
+            # Verify combined output across opportunity_insights_outcomes*.csv has all 22 observations (11 from row 0 + 11 from row 1)
+            total_combined = 0
+            for fname in os.listdir(out_dir):
+                if fname.startswith('opportunity_insights_outcomes') and fname.endswith('.csv'):
+                    with open(os.path.join(out_dir, fname), 'r', encoding='utf-8') as f:
+                        total_combined += len(list(csv.DictReader(f)))
+            self.assertEqual(total_combined, 22)
 
 
 if __name__ == '__main__':

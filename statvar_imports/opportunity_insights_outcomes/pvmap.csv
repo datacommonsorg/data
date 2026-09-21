@@ -2,7 +2,7 @@ key,property1,value1,property2,value2,property3,value3,property4,value4,property
 geo_id,observationAbout,{Data},,,,,,,,
 coll,populationType,OpportunityInsightsCohort,measuredProperty,collegeGraduate,observationDate,2003,observationPeriod,P13Y,value,{Number}
 comcoll,populationType,OpportunityInsightsCohort,measuredProperty,communityCollegeGraduate,observationDate,2003,observationPeriod,P13Y,value,{Number}
-emp,populationType,OpportunityInsightsCohort,measuredProperty,fractionOfChildrenWithPositiveW2Earnings,observationDate,2015,observationPeriod,P1Y,value,{Number}
+emp,populationType,OpportunityInsightsCohort,measuredProperty,fractionOfChildrenWithPositiveW2EarningsAge27,observationDate,2015,observationPeriod,P1Y,value,{Number}
 fpw,populationType,OpportunityInsightsCohort,measuredProperty,fractionChildhoodYearsSpentInGeography,observationDate,1994,observationPeriod,P13Y,value,{Number}
 grad,populationType,OpportunityInsightsCohort,measuredProperty,hasGraduateDegree,observationDate,2008,observationPeriod,P8Y,value,{Number}
 hasdad,populationType,OpportunityInsightsCohort,measuredProperty,fatherPresence,observationDate,1994,observationPeriod,P22Y,value,{Number}

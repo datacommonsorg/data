@@ -13,11 +13,11 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
   * `cz_by_cohort_outcomes.csv` (1978–1992 annual birth cohorts)
 
 ## Pipeline Steps
-1. **Download raw CSVs and generate compact header seed CSVs (`~1s`):**
+1. **Download raw CSVs, shard observations in parallel, and prepare compact headers for `stat_var_processor.py`:**
    ```bash
-   python3 download.py --output_dir=raw_data --shard_dir=input_files --seed_only_for_svp
+   python3 download.py --output_dir=raw_data --shard_dir=input_files
    ```
-2. **Run `stat_var_processor.py` on the unique column headers (`~45s`):**
+2. **Run `stat_var_processor.py` at the end to generate final MCF, TMCF, and seed CSV:**
    ```bash
    python3 ../../tools/statvar_importer/stat_var_processor.py \
      --input_data="input_files/*_cleaned.csv" \
@@ -26,11 +26,4 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
      --output_path=output_files/opportunity_insights_outcomes \
      --output_counters=output_files/opportunity_insights_outcomes_counters.txt \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
-   ```
-3. **Expand observations in parallel across all CPU cores (`~60-90s`):**
-   ```bash
-   python3 download.py --expand_observations \
-     --output_dir=raw_data \
-     --shard_dir=input_files \
-     --sv_output_prefix=output_files/opportunity_insights_outcomes
    ```
