@@ -15,7 +15,8 @@
             "source_files": [
                 "wir_2552_wiki/input_files/WIR255OD2552.csv",
                 "wir_2552_wiki/input_files/WIR255OD2552_rollups.csv",
-                "wir_2552_wiki/counters/*.csv"
+                "wir_2552_wiki/counters/*.csv",
+                "wir_2552_wiki/validation_config.json"
             ],
             "import_inputs": [
                 {
@@ -67,7 +68,8 @@
             ],
             "source_files": [
                 "bev_3240_wiki/input_files/BEV324OD3240.csv",
-                "bev_3240_wiki/counters/*.csv"
+                "bev_3240_wiki/counters/*.csv",
+                "bev_3240_wiki/validation_config.json"
             ],
             "import_inputs": [
                 {

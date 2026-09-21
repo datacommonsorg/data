@@ -61,7 +61,9 @@ class GenerateRollupsTest(unittest.TestCase):
         })
 
     def test_process_rollups_filters_total_rows(self):
-        """Verifies that only total rollup rows (RechtsformSort == 0 & BetriebsgrSort == 0) are retained."""
+        """Verifies that only total rollup rows (RechtsformSort == 0 &
+        BetriebsgrSort == 0) are retained.
+        """
         result_df = process_rollups(self.sample_raw_data)
         self.assertEqual(len(result_df), 1)
         self.assertEqual(result_df.iloc[0]['RechtsformSort'], 0)
@@ -193,7 +195,9 @@ class GenerateRollupsTest(unittest.TestCase):
             self.assertTrue(mock_fatal.call_args[1].get('exc_info'))
 
     def test_generate_rollups_on_test_data_fixture(self):
-        """Verifies generate_rollups on test_data/wir_2552_wiki_raw_input.csv matches wir_2552_wiki_input.csv."""
+        """Verifies generate_rollups on test_data/wir_2552_wiki_raw_input.csv
+        matches wir_2552_wiki_input.csv.
+        """
         raw_input_csv = os.path.join(_MODULE_DIR, 'test_data',
                                      'wir_2552_wiki_raw_input.csv')
         expected_input_csv = os.path.join(_MODULE_DIR, 'test_data',
