@@ -29,7 +29,7 @@
         },
         {
             "rule_id": "check_num_places_state_count",
-            "description": "Checks state observations cover all 50 US states plus DC (50-52 entities).",
+            "description": "Checks observations cover 50 US states plus DC (50-52 entities).",
             "validator": "NUM_PLACES_COUNT",
             "params": {
                 "minimum": 50,

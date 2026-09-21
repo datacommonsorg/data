@@ -185,9 +185,9 @@ def run_process(client: bigquery.Client,
 def main(argv):
     """Main entry point for the CDC 500 state aggregation script."""
     del argv  # Unused.
-    client = bigquery.Client(project=_FLAGS.project)
     output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
     try:
+        client = bigquery.Client(project=_FLAGS.project)
         run_process(client, output_file, timeout=_FLAGS.timeout)
     except Exception as e:  # pylint: disable=broad-exception-caught
         logging.fatal("CDC 500 state aggregation failed: %s", e, exc_info=True)

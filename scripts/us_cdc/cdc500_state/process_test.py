@@ -75,6 +75,9 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("O.last_update_timestamp DESC, O.facet_id DESC", query)
         self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography",
                       query)
+        self.assertIn(
+            "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening",
+            query)
         self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest",
                       query)
         self.assertIn(
@@ -686,6 +689,18 @@ class CDC500StateProcessTest(unittest.TestCase):
         del mock_bq_client_cls  # Unused.
         mock_run_process.side_effect = RuntimeError(
             "BigQuery query returned 0 rows.")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with flagsaver.flagsaver(output_dir=tmp_dir):
+                process.main([])
+                mock_logging_fatal.assert_called_once()
+
+    @mock.patch('scripts.us_cdc.cdc500_state.process.logging.fatal')
+    @mock.patch('google.cloud.bigquery.Client')
+    def test_main_client_init_error_logs_fatal(self, mock_bq_client_cls,
+                                               mock_logging_fatal):
+        """Tests process.main catches client init errors and logs via logging.fatal."""
+        mock_bq_client_cls.side_effect = RuntimeError(
+            "DefaultCredentialsError: Could not automatically determine credentials.")
         with tempfile.TemporaryDirectory() as tmp_dir:
             with flagsaver.flagsaver(output_dir=tmp_dir):
                 process.main([])
