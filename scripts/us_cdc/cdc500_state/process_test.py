@@ -433,18 +433,21 @@ class CDC500StateProcessTest(unittest.TestCase):
 
         self.assertEqual(len(result_df), 4)
         # 2016 row: geoId/15003 included, empty measurement_method -> 'dcAggregate'
+        self.assertEqual(result_df['observation_about'].iloc[0], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[0], '2016')
         self.assertEqual(result_df['statvar'].iloc[0],
                          'Percent_Person_WithArthritis')
         self.assertEqual(result_df['measurement_method'].iloc[0], 'dcAggregate')
         self.assertAlmostEqual(result_df['percent'].iloc[0], 22.5, places=4)
         # 2017 non-BP row: geoId/15003 included
+        self.assertEqual(result_df['observation_about'].iloc[1], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[1], '2017')
         self.assertEqual(result_df['statvar'].iloc[1],
                          'Percent_Person_WithArthritis')
         self.assertEqual(result_df['measurement_method'].iloc[1], 'dcAggregate')
         self.assertAlmostEqual(result_df['percent'].iloc[1], 24.0, places=4)
         # 2017 BP row: geoId/15003 excluded, only geoId/1571550 (31.2) included
+        self.assertEqual(result_df['observation_about'].iloc[2], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[2], '2017')
         self.assertEqual(result_df['statvar'].iloc[2],
                          'Percent_Person_WithHighBloodPressure')
@@ -452,6 +455,7 @@ class CDC500StateProcessTest(unittest.TestCase):
                          'dcAggregate/CrudePrevalence')
         self.assertAlmostEqual(result_df['percent'].iloc[2], 31.2, places=4)
         # 2018 Arthritis row: geoId/15003 excluded, only geoId/1571550 (20.4) included
+        self.assertEqual(result_df['observation_about'].iloc[3], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[3], '2018')
         self.assertEqual(result_df['statvar'].iloc[3],
                          'Percent_Person_WithArthritis')
@@ -700,7 +704,8 @@ class CDC500StateProcessTest(unittest.TestCase):
                                                mock_logging_fatal):
         """Tests process.main catches client init errors and logs via logging.fatal."""
         mock_bq_client_cls.side_effect = RuntimeError(
-            "DefaultCredentialsError: Could not automatically determine credentials.")
+            "DefaultCredentialsError: Could not automatically determine credentials."
+        )
         with tempfile.TemporaryDirectory() as tmp_dir:
             with flagsaver.flagsaver(output_dir=tmp_dir):
                 process.main([])

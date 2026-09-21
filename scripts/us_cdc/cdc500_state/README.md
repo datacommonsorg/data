@@ -126,6 +126,7 @@ Adding `unit: Percent` and `scalingFactor: 100` to `cdc500_state.tmcf` alters th
 
 1. **Step 1: Trigger Manual Production Run 1**:
    Immediately upon merge to `master`, manually trigger a production Cloud Batch import run to generate Run 1 incorporating `unit: Percent` and `scalingFactor: 100`.
+   *(Note: Run 1 is expected to fail validation at the differ step because `check_deleted_records_percent` reports 100% deletions against the pre-migration baseline lacking `unit`/`scalingFactor`. The output dataset is successfully generated; proceed to Step 2 to promote Run 1 as the new baseline.)*
 2. **Step 2: Update Production Baseline**:
    Manually point `latest_version.txt` in GCS to Run 1's version directory:
    ```bash
