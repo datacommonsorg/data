@@ -1,5 +1,5 @@
 parameter,value
-url,https://stats.oecd.org/Index.aspx?DataSetCode=REGION_DEMOGR#
+url,https://stats.oecd.org/Index.aspx?DataSetCode=REGION_EDUCAT
 description,Educational Attainment for regions and cities
 #place_type,
 #places_within,"country, AA1,AA2"

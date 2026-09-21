@@ -139,7 +139,8 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
         col_indices = [header.index(c) for c in required_columns if c in header]
         use_subset = len(col_indices) == len(required_columns)
         obs_val_idx = header.index('OBS_VALUE') if 'OBS_VALUE' in header else None
-        stat_op_idx = header.index('STATISTICAL_OPERATION') if 'STATISTICAL_OPERATION' in header else None
+        stat_op_idx = (header.index('STATISTICAL_OPERATION')
+                       if 'STATISTICAL_OPERATION' in header else None)
 
         if use_subset:
             writer.writerow(required_columns)
@@ -188,7 +189,8 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
         if kept == 0:
             raise ValueError(
                 f"Critical: All {dropped} rows in '{src_path}' were filtered out! "
-                "Output CSV would be completely empty. Aborting preprocessing to prevent silent data drop.")
+                "Output CSV would be completely empty. "
+                "Aborting preprocessing to prevent silent data drop.")
 
         logging.info(f"Filtered source data: {kept} rows kept, {dropped} rows dropped.")
         if unmapped_places:
@@ -203,7 +205,8 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
                         u_writer.writerow(['unmapped_ref_area'])
                         for p in sorted(unmapped_places):
                             u_writer.writerow([p])
-                    logging.info(f"Wrote {len(unmapped_places)} unmapped places to {unmapped_log_path}")
+                    logging.info(
+                        f"Wrote {len(unmapped_places)} unmapped places to {unmapped_log_path}")
                 except Exception as e:
                     logging.warning(f"Failed to write unmapped places log: {e}")
 
