@@ -1,7 +1,7 @@
 parameter,value
 url,https://wonder.cdc.gov/controller/datarequest/D158
 description,"Mortality statistics, categorized by demographic factors and specific causes of death, location, race at county level"
-#place_type,state level
+#place_type,county level
 #places_within,
 start_date,2018
 #end_date,2024

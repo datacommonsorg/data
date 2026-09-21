@@ -22,7 +22,17 @@ To obtain the raw input files, data must be manually downloaded from the source.
 	*Single Race (6 categories)
 	*ICD-10-113 Cause List
 
-For each download, a specific state must be selected. After making the selections, click the "Send" button at the bottom to initiate the download.
+For each download, a specific state must be selected. Critical form options:
+	* **Show Totals**: Disabled (must be unchecked to avoid subtotal pollution)
+	* **Show Zero Values**: Disabled
+	* **Show Suppressed Values**: False
+
+After making the selections, click the "Send" button at the bottom to initiate the download.
+
+Once all state files are downloaded, stage them to GCS:
+```bash
+gsutil -m cp *.csv gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/
+```
 
 
 ### Data Processing
