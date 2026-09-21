@@ -238,15 +238,17 @@ def format_obs_date(date_string: str, duration: str) -> str:
 def format_geo_id(row: dict, geo_level: str) -> str:
     """Returns the Data Commons geoId dcid for a CSV row."""
     if geo_level == 'county':
-        return f"geoId/{str(row['state']).strip().zfill(2)}{str(row['county']).strip().zfill(3)}"
+        state = str(int(float(str(row['state']).strip()))).zfill(2)
+        county = str(int(float(str(row['county']).strip()))).zfill(3)
+        return f'geoId/{state}{county}'
     if geo_level == 'tract':
-        return (
-            f"geoId/{str(row['state']).strip().zfill(2)}"
-            f"{str(row['county']).strip().zfill(3)}"
-            f"{str(row['tract']).strip().zfill(6)}"
-        )
+        state = str(int(float(str(row['state']).strip()))).zfill(2)
+        county = str(int(float(str(row['county']).strip()))).zfill(3)
+        tract = str(int(float(str(row['tract']).strip()))).zfill(6)
+        return f'geoId/{state}{county}{tract}'
     if geo_level == 'commuting_zone':
-        return f"geoId/cz{str(row['cz']).strip().zfill(5)}"
+        cz = str(int(float(str(row['cz']).strip()))).zfill(5)
+        return f'geoId/cz{cz}'
     raise ValueError(f'Unsupported geo_level: {geo_level}')
 
 
@@ -381,6 +383,9 @@ def resolve_date_and_period(
     return default_obs_date, default_obs_period
 
 
+_MISSING_VALUE_PLACEHOLDERS = frozenset({'', 'NA', 'N/A', '.', 'NAN', 'NULL'})
+
+
 def process_csv_file(
     input_csv: str,
     output_csv: str,
@@ -409,7 +414,7 @@ def process_csv_file(
 
             for col, (metric_code, formatted_name, stat_type, obs_date, obs_period) in col_specs.items():
                 raw_val = (row.get(col) or '').strip()
-                if not raw_val:
+                if raw_val.upper() in _MISSING_VALUE_PLACEHOLDERS:
                     continue
                 resolved_date, resolved_period = resolve_date_and_period(
                     row, dataset_mode, metric_code, obs_date, obs_period
@@ -441,12 +446,13 @@ def main(_):
 
     for filename, geo_level, dataset_mode in DATASET_CONFIGS:
         input_path = os.path.join(FLAGS.input_dir, filename)
-        if os.path.exists(input_path):
-            stem = os.path.splitext(filename)[0]
-            output_path = os.path.join(FLAGS.output_dir, f'{stem}_cleaned.csv')
-            process_csv_file(input_path, output_path, geo_level, dataset_mode)
-        else:
-            logging.warning('Skipping %s (input file not found: %s)', filename, input_path)
+        if not os.path.exists(input_path):
+            raise FileNotFoundError(
+                f'Required input file not found for {filename}: {input_path}'
+            )
+        stem = os.path.splitext(filename)[0]
+        output_path = os.path.join(FLAGS.output_dir, f'{stem}_cleaned.csv')
+        process_csv_file(input_path, output_path, geo_level, dataset_mode)
 
 
 if __name__ == '__main__':
