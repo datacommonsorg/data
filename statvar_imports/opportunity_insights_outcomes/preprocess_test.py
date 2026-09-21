@@ -11,10 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for OpportunityInsightsOutcomes preprocess.py."""
+"""Unit tests for OpportunityInsightsOutcomes preprocess.py and PVMAP."""
 
 import csv
 import os
+import subprocess
 import tempfile
 import unittest
 import zipfile
@@ -77,13 +78,12 @@ class PreprocessTest(unittest.TestCase):
                 rows = list(csv.DictReader(f))
 
             self.assertEqual(rows[0]['geo_id'], 'geoId/cz00100')
-            self.assertEqual(rows[0]['measured_property'], 'meanPercentileIncomeRank')
-            self.assertEqual(rows[0]['stat_type'], 'measuredValue')
-            self.assertEqual(rows[0]['race'], 'USC_AmericanIndianAndAlaskaNativeAlone')
-            self.assertEqual(rows[0]['gender'], 'Female')
-            self.assertEqual(rows[0]['parent_income'], 'Percentile1')
-            self.assertEqual(rows[0]['observation_date'], '2014')
-            self.assertEqual(rows[0]['observation_period'], 'P2Y')
+            self.assertEqual(rows[0]['metric'], 'kir')
+            self.assertEqual(rows[0]['stat_type'], 'measured')
+            self.assertEqual(rows[0]['race'], 'natam')
+            self.assertEqual(rows[0]['gender'], 'female')
+            self.assertEqual(rows[0]['parent_income'], 'p1')
+            self.assertEqual(rows[0]['cohort'], '')
             self.assertEqual(rows[0]['value'], '0.27893454')
 
     def test_skips_missing_value_placeholders(self):
@@ -110,7 +110,7 @@ class PreprocessTest(unittest.TestCase):
 
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0]['geo_id'], 'geoId/cz00100')
-            self.assertEqual(rows[0]['stat_type'], 'meanValue')
+            self.assertEqual(rows[0]['stat_type'], 'mean')
             self.assertEqual(rows[0]['value'], '0.35973939')
 
     def test_main_raises_on_missing_file(self):
@@ -138,40 +138,38 @@ class PreprocessTest(unittest.TestCase):
     def test_new_tract_and_cohort_columns(self):
         self.assertEqual(
             preprocess.classify_column('kfi_pooled_pooled_p25'),
-            ('kfi', 'pooled_pooled_p25', 'measuredValue', '2014', 'P2Y'),
+            ('kfi', 'measured', 'pooled', 'pooled', 'p25'),
         )
         self.assertEqual(
             preprocess.classify_column('kii_black_female_p75'),
-            ('kii', 'black_female_p75', 'measuredValue', '2014', 'P2Y'),
+            ('kii', 'measured', 'black', 'female', 'p75'),
         )
         self.assertEqual(
             preprocess.classify_column('emp_aian_female_p25'),
-            ('emp', 'aian_female_p25', 'measuredValue', '2015', 'P1Y'),
+            ('emp', 'measured', 'aian', 'female', 'p25'),
         )
         self.assertEqual(
             preprocess.classify_column('fpw_aian_male_p50'),
-            ('fpw', 'aian_male_p50', 'measuredValue', '1994', 'P13Y'),
+            ('fpw', 'measured', 'aian', 'male', 'p50'),
         )
         self.assertEqual(
             preprocess.classify_column('pooled_pooled_count'),
-            ('kid_n', 'pooled_pooled', 'measuredValue', '2000-04-01', 'P1D'),
+            ('kid_n', 'measured', 'pooled', 'pooled', ''),
         )
         self.assertEqual(
             preprocess.classify_column('aian_female_blw_p50_count'),
-            ('kid_blw_p50', 'aian_female', 'measuredValue', '1994', 'P7Y'),
+            ('kid_blw_p50', 'measured', 'aian', 'female', ''),
         )
         self.assertEqual(
-            preprocess.resolve_date_and_period(
+            preprocess.resolve_cohort_key(
                 {'cohort': '1978.0'},
                 'annual_cohort_1978_1992',
                 'emp',
-                '2015',
-                'P1Y',
             ),
-            ('2005', 'P1Y'),
+            '1978',
         )
 
-    def test_process_csv_file_sharding(self):
+    def test_process_csv_file_sharding_and_pvmap(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, 'tract_outcomes.csv')
             out_csv = os.path.join(tmpdir, 'tract_outcomes_cleaned.csv')
@@ -202,8 +200,35 @@ class PreprocessTest(unittest.TestCase):
                 rows1 = list(csv.DictReader(f1))
             self.assertEqual(len(rows0), 2)
             self.assertEqual(len(rows1), 2)
-            self.assertEqual(rows0[0]['measured_property'], 'householdIncome')
-            self.assertEqual(rows0[1]['measured_property'], 'individualIncome')
+            self.assertEqual(rows0[0]['metric'], 'kfi')
+            self.assertEqual(rows0[1]['metric'], 'kii')
+
+            # Verify stat_var_processor.py maps the raw tokens via opportunity_insights_outcomes_pvmap.csv
+            import_dir = os.path.dirname(os.path.abspath(preprocess.__file__))
+            repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
+            sv_out_prefix = os.path.join(tmpdir, 'sv_out')
+            res = subprocess.run(
+                [
+                    'python3',
+                    os.path.join(
+                        repo_root, 'tools/statvar_importer/stat_var_processor.py'
+                    ),
+                    f'--input_data={shard0}',
+                    f'--pv_map={os.path.join(import_dir, "opportunity_insights_outcomes_pvmap.csv")}',
+                    f'--config_file={os.path.join(import_dir, "opportunity_insights_outcomes_metadata.csv")}',
+                    f'--output_path={sv_out_prefix}',
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(res.returncode, 0, msg=res.stderr)
+            with open(f'{sv_out_prefix}.csv', 'r', encoding='utf-8') as f:
+                sv_rows = list(csv.DictReader(f))
+            self.assertEqual(len(sv_rows), 2)
+            self.assertEqual(sv_rows[0]['observationAbout'], 'geoId/06085500100')
+            self.assertEqual(sv_rows[0]['observationDate'], '2014')
+            self.assertEqual(sv_rows[0]['observationPeriod'], 'P2Y')
 
 
 if __name__ == '__main__':

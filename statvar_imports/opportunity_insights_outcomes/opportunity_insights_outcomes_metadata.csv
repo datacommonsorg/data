@@ -1,4 +1,4 @@
 parameter,value
 header_rows,1
-mapped_columns,9
+mapped_columns,8
 output_columns,"observationAbout,observationDate,observationPeriod,variableMeasured,value"
