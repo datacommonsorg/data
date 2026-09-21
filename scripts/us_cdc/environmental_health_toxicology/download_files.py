@@ -58,10 +58,11 @@ def download_files(importname, configs):
                 raise IOError(
                     f"Downloaded file {tmp_filename} is empty or missing.")
             shutil.move(tmp_filename, filename)
-            logging.info(
-                f"Successfully saved {filename} ({os.path.getsize(filename)} bytes)"
-            )
+            logging.info(f"Successfully saved {filename} from URL {url} "
+                         f"({os.path.getsize(filename)} bytes)")
         except Exception as e:
+            logging.error(
+                f"Failed to download {input_file_name} from URL {url}: {e}")
             if os.path.exists(tmp_filename):
                 try:
                     os.remove(tmp_filename)
@@ -90,14 +91,24 @@ def download_files(importname, configs):
                     logging.info(f"Input File Name {input_file_name}")
 
                     count_url = url_new.replace('.csv', record_count_query)
-                    record_count = get_record_count_with_retry(count_url)
+                    record_count = int(get_record_count_with_retry(count_url))
+                    if record_count <= 0:
+                        raise ValueError(
+                            f"Invalid record count ({record_count}) returned "
+                            f"for URL: {url_new}")
                     logging.info(
-                        f"Numbers of records found for the URL {url_new} is {record_count}"
-                    )
+                        f"Numbers of records found for the URL {url_new} is "
+                        f"{record_count}")
+                    # Socrata API endpoints apply a default row limit (1,000)
+                    # when $limit is omitted. Passing explicit $limit ensures
+                    # the full dataset is downloaded.
+                    # TODO: Evaluate incremental refresh by filtering latest
+                    # years via Socrata $where queries once baseline is split.
                     url_new = f"{url_new}?$limit={record_count}&$offset=0"
                     download_with_retry(url_new, input_file_name)
                     logging.info(
-                        "Successfully downloaded the source data...!!!!")
+                        f"Successfully downloaded the source data from URL: "
+                        f"{url_new}")
         if not import_found:
             raise ValueError(
                 f"Import name '{importname}' not found in configuration")

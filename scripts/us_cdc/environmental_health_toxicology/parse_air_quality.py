@@ -67,6 +67,160 @@ def format_county_dcid(df: pd.DataFrame,
             df[county_col].astype(str).str.zfill(3))
 
 
+def _clean_county_pm_file(input_file_path: str, output_file_name: str,
+                          outputpath: str) -> None:
+    """Cleans and shards County-level PM2.5 CSV data into 4 output shards."""
+    num_shards = 4
+    base_name, ext = os.path.splitext(output_file_name)
+    shard_paths = []
+    for idx in range(num_shards):
+        shard_file_name = f"{base_name}_{idx}{ext}"
+        if not os.path.isabs(shard_file_name):
+            shard_output_path = os.path.join(outputpath, shard_file_name)
+        else:
+            shard_output_path = shard_file_name
+        shard_paths.append(shard_output_path)
+
+    # TODO: Transition from equal row-count sharding to deterministic 5-year
+    # date-range sharding (`shard_idx = min((year - 2001) // 5, num_shards - 1)`)
+    # once the baseline `latest_version` in GCS is re-baselined.
+    with open(input_file_path, 'r') as f:
+        total_rows = sum(1 for _ in f) - 1
+    if total_rows <= 0:
+        raise ValueError(f"Input file {input_file_path} contains "
+                         f"no data rows (total_rows={total_rows}).")
+    base_size = total_rows // num_shards
+    rem_size = total_rows % num_shards
+    shard_sizes = [
+        base_size + 1 if i < rem_size else base_size for i in range(num_shards)
+    ]
+
+    chunk_size = 500_000
+    shard_idx = 0
+    shard_written = 0
+    first_chunk = True
+
+    for chunk in pd.read_csv(input_file_path, chunksize=chunk_size):
+        chunk["date"] = format_date_column(chunk)
+        chunk["statefips"] = chunk["statefips"].astype(str).str.zfill(2)
+        chunk["countyfips"] = chunk["countyfips"].astype(str).str.zfill(3)
+        chunk["dcid"] = format_county_dcid(chunk)
+
+        if first_chunk:
+            for p in shard_paths:
+                pd.DataFrame(columns=chunk.columns).to_csv(p, index=False)
+            first_chunk = False
+
+        start_idx = 0
+        while start_idx < len(chunk):
+            if shard_idx < num_shards - 1:
+                remaining_in_shard = shard_sizes[shard_idx] - shard_written
+                end_idx = min(start_idx + remaining_in_shard, len(chunk))
+            else:
+                end_idx = len(chunk)
+
+            sub_chunk = chunk.iloc[start_idx:end_idx]
+
+            sub_chunk.to_csv(shard_paths[shard_idx],
+                             mode='a',
+                             header=False,
+                             float_format='%.6f',
+                             index=False)
+            shard_written += len(sub_chunk)
+            start_idx = end_idx
+
+            if (shard_idx < num_shards - 1 and
+                    shard_written >= shard_sizes[shard_idx]):
+                shard_idx += 1
+                shard_written = 0
+
+    for p in shard_paths:
+        logging.info(f"Finished cleaning file {os.path.basename(p)}!")
+
+
+def _clean_county_ozone_file(input_file_path: str, output_file_path: str,
+                             output_file_name: str) -> None:
+    """Cleans County-level Ozone CSV data in streaming chunks."""
+    chunk_size = 500_000
+    first_chunk = True
+    for chunk in pd.read_csv(input_file_path, chunksize=chunk_size):
+        chunk["date"] = format_date_column(chunk)
+        chunk["statefips"] = chunk["statefips"].astype(str).str.zfill(2)
+        chunk["countyfips"] = chunk["countyfips"].astype(str).str.zfill(3)
+        chunk["dcid"] = format_county_dcid(chunk)
+        if first_chunk:
+            chunk.to_csv(output_file_path, float_format='%.6f', index=False)
+            first_chunk = False
+        else:
+            chunk.to_csv(output_file_path,
+                         mode='a',
+                         header=False,
+                         float_format='%.6f',
+                         index=False)
+    if first_chunk:
+        raise ValueError(f"Input file {input_file_path} contains no data rows.")
+    logging.info(f"Finished cleaning file {output_file_name}!")
+
+
+def _clean_census_tract_file(input_file_name: str, input_file_path: str,
+                             output_file_path: str,
+                             output_file_name: str) -> None:
+    """Cleans and melts Census Tract-level PM2.5 or Ozone CSV data."""
+    chunk_size = 500_000
+    first_chunk = True
+    if "PM2.5" in input_file_name:
+        census_tract = "ds_pm"
+    elif "Ozone" in input_file_name:
+        census_tract = "ds_o3"
+    else:
+        census_tract = None
+
+    for chunk in pd.read_csv(input_file_path, chunksize=chunk_size):
+        chunk["date"] = format_date_column(chunk)
+
+        if "Census" in input_file_name:
+            if "PM2.5" in input_file_name:
+                chunk = pd.melt(chunk,
+                                id_vars=[
+                                    'year', 'date', 'statefips', 'countyfips',
+                                    'ctfips', 'latitude', 'longitude'
+                                ],
+                                value_vars=[
+                                    str(census_tract + '_pred'),
+                                    str(census_tract + '_stdd')
+                                ],
+                                var_name='StatisticalVariable',
+                                value_name='Value')
+            elif "Ozone" in input_file_name:
+                chunk = pd.melt(chunk,
+                                id_vars=[
+                                    'year', 'date', 'statefips', 'countyfips',
+                                    'ctfips', 'latitude', 'longitude',
+                                    census_tract + '_stdd'
+                                ],
+                                value_vars=[str(census_tract + '_pred')],
+                                var_name='StatisticalVariable',
+                                value_name='Value')
+            chunk.rename(columns={census_tract + '_stdd': 'Error'},
+                         inplace=True)
+            chunk['ctfips'] = chunk['ctfips'].astype(str).str.zfill(11)
+            chunk["dcid"] = "geoId/" + chunk["ctfips"].astype(str)
+            chunk['StatisticalVariable'] = chunk['StatisticalVariable'].map(
+                STATVARS)
+        if first_chunk:
+            chunk.to_csv(output_file_path, float_format='%.6f', index=False)
+            first_chunk = False
+        else:
+            chunk.to_csv(output_file_path,
+                         mode='a',
+                         header=False,
+                         float_format='%.6f',
+                         index=False)
+    if first_chunk:
+        raise ValueError(f"Input file {input_file_path} contains no data rows.")
+    logging.info(f"Finished cleaning file {output_file_name}!")
+
+
 def clean_air_quality_data(configs, importname, inputpath, outputpath):
     """
     Args:
@@ -98,187 +252,20 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                         logging.info(f"Cleaning {input_file_name} ....")
                         logging.info(f"Cleaning {input_file_path} ....")
                         try:
-                            if "County" in input_file_name and "PM" in input_file_name:
-                                num_shards = 4
-                                base_name, ext = os.path.splitext(
+                            if ("County" in input_file_name and
+                                    "PM" in input_file_name):
+                                _clean_county_pm_file(input_file_path,
+                                                      output_file_name,
+                                                      outputpath)
+                            elif ("County" in input_file_name and
+                                  "Ozone" in input_file_name):
+                                _clean_county_ozone_file(
+                                    input_file_path, output_file_path,
                                     output_file_name)
-                                shard_paths = []
-                                for idx in range(num_shards):
-                                    shard_file_name = f"{base_name}_{idx}{ext}"
-                                    if not os.path.isabs(shard_file_name):
-                                        shard_output_path = os.path.join(
-                                            outputpath, shard_file_name)
-                                    else:
-                                        shard_output_path = shard_file_name
-                                    shard_paths.append(shard_output_path)
-
-                                with open(input_file_path, 'r') as f:
-                                    total_rows = sum(1 for _ in f) - 1
-                                if total_rows <= 0:
-                                    raise ValueError(
-                                        f"Input file {input_file_path} contains "
-                                        f"no data rows (total_rows={total_rows})."
-                                    )
-                                base_size = total_rows // num_shards
-                                rem_size = total_rows % num_shards
-                                shard_sizes = [
-                                    base_size + 1 if i < rem_size else base_size
-                                    for i in range(num_shards)
-                                ]
-
-                                chunk_size = 500_000
-                                shard_idx = 0
-                                shard_written = 0
-                                first_chunk = True
-
-                                for chunk in pd.read_csv(input_file_path,
-                                                         chunksize=chunk_size):
-                                    chunk["date"] = format_date_column(chunk)
-                                    chunk["statefips"] = chunk[
-                                        "statefips"].astype(str).str.zfill(2)
-                                    chunk["countyfips"] = chunk[
-                                        "countyfips"].astype(str).str.zfill(3)
-                                    chunk["dcid"] = format_county_dcid(chunk)
-
-                                    if first_chunk:
-                                        for p in shard_paths:
-                                            pd.DataFrame(
-                                                columns=chunk.columns).to_csv(
-                                                    p, index=False)
-                                        first_chunk = False
-
-                                    start_idx = 0
-                                    while start_idx < len(chunk):
-                                        if shard_idx < num_shards - 1:
-                                            remaining_in_shard = shard_sizes[
-                                                shard_idx] - shard_written
-                                            end_idx = min(
-                                                start_idx + remaining_in_shard,
-                                                len(chunk))
-                                        else:
-                                            end_idx = len(chunk)
-
-                                        sub_chunk = chunk.iloc[
-                                            start_idx:end_idx]
-
-                                        sub_chunk.to_csv(shard_paths[shard_idx],
-                                                         mode='a',
-                                                         header=False,
-                                                         float_format='%.6f',
-                                                         index=False)
-                                        shard_written += len(sub_chunk)
-                                        start_idx = end_idx
-
-                                        if (shard_idx < num_shards - 1 and
-                                                shard_written
-                                                >= shard_sizes[shard_idx]):
-                                            shard_idx += 1
-                                            shard_written = 0
-
-                                for p in shard_paths:
-                                    logging.info(
-                                        f"Finished cleaning file {os.path.basename(p)}!"
-                                    )
-                            elif "County" in input_file_name and "Ozone" in input_file_name:
-                                chunk_size = 500_000
-                                first_chunk = True
-                                for chunk in pd.read_csv(input_file_path,
-                                                         chunksize=chunk_size):
-                                    chunk["date"] = format_date_column(chunk)
-                                    chunk["statefips"] = chunk[
-                                        "statefips"].astype(str).str.zfill(2)
-                                    chunk["countyfips"] = chunk[
-                                        "countyfips"].astype(str).str.zfill(3)
-                                    chunk["dcid"] = format_county_dcid(chunk)
-                                    if first_chunk:
-                                        chunk.to_csv(output_file_path,
-                                                     float_format='%.6f',
-                                                     index=False)
-                                        first_chunk = False
-                                    else:
-                                        chunk.to_csv(output_file_path,
-                                                     mode='a',
-                                                     header=False,
-                                                     float_format='%.6f',
-                                                     index=False)
-                                if first_chunk:
-                                    raise ValueError(
-                                        f"Input file {input_file_path} contains no data rows."
-                                    )
-                                logging.info(
-                                    f"Finished cleaning file {output_file_name}!"
-                                )
                             else:
-                                chunk_size = 500_000
-                                first_chunk = True
-                                if "PM2.5" in input_file_name:
-                                    census_tract = "ds_pm"
-                                elif "Ozone" in input_file_name:
-                                    census_tract = "ds_o3"
-                                else:
-                                    census_tract = None
-
-                                for chunk in pd.read_csv(input_file_path,
-                                                         chunksize=chunk_size):
-                                    chunk["date"] = format_date_column(chunk)
-
-                                    if "Census" in input_file_name:
-                                        if "PM2.5" in input_file_name:
-                                            chunk = pd.melt(
-                                                chunk,
-                                                id_vars=[
-                                                    'year', 'date', 'statefips',
-                                                    'countyfips', 'ctfips',
-                                                    'latitude', 'longitude'
-                                                ],
-                                                value_vars=[
-                                                    str(census_tract + '_pred'),
-                                                    str(census_tract + '_stdd')
-                                                ],
-                                                var_name='StatisticalVariable',
-                                                value_name='Value')
-                                        elif "Ozone" in input_file_name:
-                                            chunk = pd.melt(
-                                                chunk,
-                                                id_vars=[
-                                                    'year', 'date', 'statefips',
-                                                    'countyfips', 'ctfips',
-                                                    'latitude', 'longitude',
-                                                    census_tract + '_stdd'
-                                                ],
-                                                value_vars=[
-                                                    str(census_tract + '_pred')
-                                                ],
-                                                var_name='StatisticalVariable',
-                                                value_name='Value')
-                                        chunk.rename(columns={
-                                            census_tract + '_stdd': 'Error'
-                                        },
-                                                     inplace=True)
-                                        chunk['ctfips'] = chunk[
-                                            'ctfips'].astype(str).str.zfill(11)
-                                        chunk["dcid"] = "geoId/" + chunk[
-                                            "ctfips"].astype(str)
-                                        chunk['StatisticalVariable'] = chunk[
-                                            'StatisticalVariable'].map(STATVARS)
-                                    if first_chunk:
-                                        chunk.to_csv(output_file_path,
-                                                     float_format='%.6f',
-                                                     index=False)
-                                        first_chunk = False
-                                    else:
-                                        chunk.to_csv(output_file_path,
-                                                     mode='a',
-                                                     header=False,
-                                                     float_format='%.6f',
-                                                     index=False)
-                                if first_chunk:
-                                    raise ValueError(
-                                        f"Input file {input_file_path} contains no data rows."
-                                    )
-                                logging.info(
-                                    f"Finished cleaning file {output_file_name}!"
-                                )
+                                _clean_census_tract_file(
+                                    input_file_name, input_file_path,
+                                    output_file_path, output_file_name)
                         except Exception as e:
                             logging.error(
                                 f"Error cleaning {input_file_name}: {e}")
