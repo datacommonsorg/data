@@ -2,10 +2,19 @@
     "schema_version": "1.0",
     "rules": [
         {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
             "rule_id": "active_programs_freshness",
+            "description": "Checks that active programs have recent data from 2024 onwards.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT * FROM stats WHERE (StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks') OR StatVar IN ('Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks'))",
+                "query": "SELECT * FROM stats WHERE StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks', 'Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks')",
                 "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= 2024"
             }
         },
@@ -27,3 +36,4 @@
         }
     ]
 }
+
