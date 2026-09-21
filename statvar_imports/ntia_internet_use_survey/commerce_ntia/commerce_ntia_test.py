@@ -214,7 +214,8 @@ class PreprocessTest(unittest.TestCase):
     @mock.patch('preprocess.logging.fatal')
     def test_main_download_exception(self, mock_fatal, mock_download,
                                      mock_preprocess):
-        """Tests that main logs fatal error and exits with code 1 when download raises an exception."""
+        """Tests that main logs fatal error and exits with code 1 when
+        download raises an exception."""
         mock_fatal.side_effect = SystemExit(1)
         mock_download.side_effect = Exception("Connection timeout")
         with self.assertRaises(SystemExit) as cm:

@@ -14,7 +14,8 @@
             ],
             "source_files": [
                 "input_files/ntia-analyze-table.csv",
-                "counters/*.csv"
+                "counters/*.csv",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
