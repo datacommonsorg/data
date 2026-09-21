@@ -315,8 +315,9 @@ def preprocess_files(directory_path):
                 if pd.isna(val):
                     return False
                 return bool(
-                    re.search(r'state\s*/\s*union\s*territory', str(val),
-                              re.IGNORECASE))
+                    re.search(
+                        r'state\s*/\s*(?:union(?:\s*territory)?|u\.?t\.?\b)',
+                        str(val), re.IGNORECASE))
 
             for sheet_name, df in all_sheets_data.items():
                 df = _apply_map(df, clean_cell)
