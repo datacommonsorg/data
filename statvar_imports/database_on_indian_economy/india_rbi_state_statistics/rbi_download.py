@@ -169,6 +169,7 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
         file_name = config.get("filename")
         if not config_url or not category_name or not file_name:
             logging.warning(f"Skipping incomplete config: {config}")
+            failed_downloads.append(file_name or str(config))
             continue
 
         target_dir = os.path.join(INPUT_DIR, category_name)
@@ -188,11 +189,11 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
                 if magic == XLSX_ZIP_SIGNATURE:
                     logging.info(f"Skipping existing valid file: {file_name}")
                     continue
-            # Remove stale, empty, or corrupt file (or existing file if force_download)
-            try:
-                os.remove(file_path)
-            except OSError:
-                pass
+            if not force_download and os.path.getsize(file_path) == 0:
+                try:
+                    os.remove(file_path)
+                except OSError:
+                    pass
 
         try:
             logging.info(f"Attempting GET request to: {config_url}")
@@ -223,14 +224,12 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
                 failed_downloads.append(file_name)
                 continue
 
-            # Write atomically to a temporary file, then move into place
-            with tempfile.NamedTemporaryFile('wb',
-                                             dir=target_dir,
-                                             delete=False) as tmp_file:
-                tmp_file.write(content)
-                temp_path = tmp_file.name
-
-            os.replace(temp_path, file_path)
+            # Write atomically to a temporary directory, then move into place
+            with tempfile.TemporaryDirectory(dir=target_dir) as tmp_dir:
+                temp_path = os.path.join(tmp_dir, file_name)
+                with open(temp_path, 'wb') as tmp_file:
+                    tmp_file.write(content)
+                os.replace(temp_path, file_path)
             logging.info(
                 f"Downloaded the file {file_name} successfully ({len(content)} bytes)."
             )
@@ -295,8 +294,10 @@ def preprocess_files(directory_path):
             def safe_to_numeric(val):
                 if pd.isna(val):
                     return val
-                if isinstance(val, (int, float)):
+                if isinstance(val, int) and not isinstance(val, bool):
                     return val
+                if isinstance(val, float):
+                    return int(val) if val.is_integer() else val
                 val_str = str(val).strip()
                 if not val_str or val_str.lower() == 'nan':
                     return float('nan')

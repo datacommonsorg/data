@@ -40,8 +40,8 @@ class PreprocessFilesTest(absltest.TestCase):
             with mock.patch.object(
                     rbi_download.pd, 'read_excel', return_value=sheets), \
                  mock.patch.object(
-                     pd.DataFrame,
-                     'map',
+                     rbi_download,
+                     '_apply_map',
                      side_effect=ValueError('transform failed')), \
                  mock.patch.object(rbi_download.logging, 'error') as mock_error, \
                  mock.patch.object(rbi_download.logging, 'fatal') as mock_fatal:
@@ -58,8 +58,8 @@ class PreprocessFilesTest(absltest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             file_path = pathlib.Path(directory) / 'source.xlsx'
             initial_df = pd.DataFrame(
-                [['State/Union Territory', '2015*', '2016@', '2017-18'],
-                 ['Andhra Pradesh', '10.5', '20.0', '30.5']])
+                [['State/Union Territory', '2015*', '2016@', '2017-18', 2018.0],
+                 ['Andhra Pradesh', '10.5', '20.0', '30.5', '40.0']])
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 initial_df.to_excel(writer,
                                     sheet_name='Sheet1',
@@ -75,6 +75,7 @@ class PreprocessFilesTest(absltest.TestCase):
             self.assertEqual(processed.iloc[0, 1], 2015)
             self.assertEqual(processed.iloc[0, 2], 2016)
             self.assertEqual(processed.iloc[0, 3], '2017-18')
+            self.assertEqual(processed.iloc[0, 4], 2018)
             self.assertEqual(processed.iloc[1, 0], 'Andhra Pradesh')
 
     def test_preprocess_files_preserves_nan(self):

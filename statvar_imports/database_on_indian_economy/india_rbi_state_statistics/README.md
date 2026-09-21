@@ -1,4 +1,3 @@
-
 # India_RBI_State_Statistics
 
 ## Import Overview
@@ -55,6 +54,20 @@ To run the hermetic unit test suite for `rbi_download.py`:
 
 ```bash
 python3 rbi_download_test.py
+```
+
+## Prerequisites
+
+The following Python packages are required to run the download, preprocessing, and test suites:
+- `pandas`
+- `openpyxl`
+- `requests`
+- `google-cloud-storage`
+- `absl-py`
+
+Install dependencies via:
+```bash
+pip install pandas openpyxl requests google-cloud-storage absl-py
 ```
 
 ## Processing Section
@@ -337,5 +350,18 @@ This import uses `validation_config.json` with:
    - Asserts `statvar_cnt >= 1` so an empty `summary_report.csv` cannot vacuously pass grouped SQL queries.
 3. **`SQL_VALIDATOR` cadence freshness check (`check_max_date_freshness`)**:
    - Asserts that each StatVar meets its expected RBI publication cadence (`2020`, `2022`, `2023`, or `2024`) with `WHERE MaxDate IS NOT NULL`.
+
+## Refresh & Operational Maintenance
+
+The import is configured with an automated cron schedule in `manifest.json`:
+- **Schedule:** `0 10 * * 1` (Every Monday at 10:00 AM UTC).
+- **Import Type:** Semi-Automated.
+
+### Annual Refresh Procedure:
+1. When the Reserve Bank of India publishes a new edition of the *Handbook of Statistics on Indian States*, check the [RBI Annual Publications Portal](https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States).
+2. If table download URLs have changed, update the `url` fields in `configs.json`.
+3. If new tables, columns, or indicators are introduced, update the corresponding PVMap (`agriculture_pvmap.csv`, `environment_pvmap.csv`, `infrastructure_pvmap.csv`, or `price_wages_pvmap.csv`).
+4. Re-run `python3 rbi_download.py` followed by `sh run.sh` to download and process the updated datasets.
+5. Verify test outputs and pre-submit validation before raising a pull request.
 
 
