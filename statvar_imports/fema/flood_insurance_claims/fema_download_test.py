@@ -82,10 +82,10 @@ class FemaDownloadTest(unittest.TestCase):
         try:
             mock_get_total_records.return_value = 3  # Total records to download
 
-            # Chunk 1 is a "full page" with 2 records.
-            chunk1_content = b"headerA,headerB\n1,A\n2,B"
-            # Chunk 2 has the remaining 1 record.
-            chunk2_content = b"headerA,headerB\n3,C"
+            # Chunk 1 is a "full page" with 2 records, ending in trailing newline.
+            chunk1_content = b"headerA,headerB\n1,A\n2,B\n"
+            # Chunk 2 has the remaining 1 record, ending in trailing newline.
+            chunk2_content = b"headerA,headerB\n3,C\n"
 
             # This side effect simulates the download_file utility's behavior
             def download_side_effect(url, output_folder, **kwargs):
@@ -122,9 +122,10 @@ class FemaDownloadTest(unittest.TestCase):
                 with open(final_filepath, 'rb') as f:
                     content = f.read()
 
-                # Should contain the header from the first chunk and data from both
-                expected_content = b"headerA,headerB\n1,A\n2,B\n3,C"
-                self.assertEqual(content.strip(), expected_content)
+                # Should contain clean concatenated records without double newlines
+                expected_content = b"headerA,headerB\n1,A\n2,B\n3,C\n"
+                self.assertEqual(content, expected_content)
+                self.assertNotIn(b"\n\n", content)
 
                 # Verify that download_file was called twice
                 self.assertEqual(mock_download_file.call_count, 2)

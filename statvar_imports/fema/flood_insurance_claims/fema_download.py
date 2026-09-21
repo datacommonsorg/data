@@ -191,14 +191,21 @@ def download_data(api_url: str,
 
             with open(staging_filepath, 'ab') as f_staging:
                 if skip_count == 0:
-                    f_staging.write(content)
+                    f_staging.write(
+                        content if content.endswith(b'\n') else content + b'\n')
                 else:
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1:
                         content_without_header = split_content[1]
-                        f_staging.write(b'\n' + content_without_header)
+                        f_staging.write(
+                            content_without_header if content_without_header
+                            .endswith(b'\n') else content_without_header + b'\n'
+                        )
 
-            num_records_in_chunk = len(content.split(b'\n')) - 1
+            cleaned_content = content.rstrip(b'\r\n')
+            num_records_in_chunk = max(
+                0, len(cleaned_content.split(b'\n')) -
+                1) if cleaned_content else 0
             records_downloaded += num_records_in_chunk
 
             logging.info("Downloaded %s of %s records.", records_downloaded,
