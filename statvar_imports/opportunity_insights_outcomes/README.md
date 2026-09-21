@@ -13,16 +13,16 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
   * `cz_by_cohort_outcomes.csv` (1978–1992 annual birth cohorts)
 
 ## Pipeline Steps
-1. **Download raw CSVs, shard observations in parallel, and prepare compact headers for `stat_var_processor.py`:**
+1. **Download raw CSVs and shard wide CSVs for `stat_var_processor.py`:**
    ```bash
    python3 download.py --output_dir=raw_data --shard_dir=input_files
    ```
-2. **Run `stat_var_processor.py` at the end to generate final MCF, TMCF, and seed CSV:**
+2. **Run `stat_var_processor.py` to generate final MCF, TMCF, and CSVs:**
    ```bash
    python3 ../../tools/statvar_importer/stat_var_processor.py \
      --input_data="input_files/*_cleaned.csv" \
-     --pv_map=opportunity_insights_outcomes_pvmap.csv \
-     --config_file=opportunity_insights_outcomes_metadata.csv \
+      --pv_map=pvmap.csv \
+      --config_file=metadata.csv \
      --output_path=output_files/opportunity_insights_outcomes \
      --output_counters=output_files/opportunity_insights_outcomes_counters.txt \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf

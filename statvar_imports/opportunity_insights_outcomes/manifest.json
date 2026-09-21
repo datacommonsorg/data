@@ -9,7 +9,7 @@
             "provenance_description": "The Opportunity Atlas (Opportunity Insights) social and economic mobility outcomes by childhood commuting zone, county, and census tract across birth cohorts.",
             "scripts": [
                 "download.py --output_dir=raw_data --shard_dir=input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/*_cleaned.csv' --pv_map=opportunity_insights_outcomes_pvmap.csv --config_file=opportunity_insights_outcomes_metadata.csv --output_path=output_files/opportunity_insights_outcomes --output_counters=output_files/opportunity_insights_outcomes_counters.txt --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/*_cleaned.csv' --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output_files/opportunity_insights_outcomes --output_counters=output_files/opportunity_insights_outcomes_counters.txt --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {
