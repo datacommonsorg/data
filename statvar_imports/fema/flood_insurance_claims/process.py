@@ -288,6 +288,15 @@ def process_data_vectorized(
         output_counters: Optional[str] = 'counters/counters.txt'):
     """Executes the high-performance multi-process vectorized aggregation pipeline."""
     start_time = time.time()
+    if not os.path.isabs(input_data) and not os.path.exists(input_data):
+        alt_input = os.path.join(_SCRIPT_DIR, input_data)
+        if os.path.exists(alt_input):
+            input_data = alt_input
+    if not os.path.isabs(output_path):
+        output_path = os.path.join(_SCRIPT_DIR, output_path)
+    if output_counters and not os.path.isabs(output_counters):
+        output_counters = os.path.join(_SCRIPT_DIR, output_counters)
+
     state_map, risk_zone_map = _load_mappings(pv_map_arg)
 
     usecols = [

@@ -136,6 +136,21 @@ class ProcessTest(unittest.TestCase):
                                             num_workers=1,
                                             output_counters=self.counters_path)
 
+    def test_relative_path_resolution_from_external_cwd(self):
+        original_cwd = os.getcwd()
+        os.chdir(self.test_dir)
+        try:
+            process.process_data_vectorized(
+                input_data='test_data/flood_insurance_claims_input.csv',
+                output_path=self.output_prefix,
+                pv_map_arg=None,
+                chunk_size=50,
+                num_workers=1,
+                output_counters=self.counters_path)
+            self.assertTrue(os.path.exists(f"{self.output_prefix}.csv"))
+        finally:
+            os.chdir(original_cwd)
+
     def test_aggregation_numerical_values(self):
         fixture_csv = os.path.join(self.test_dir, 'fixture.csv')
         with open(fixture_csv, 'w', encoding='utf-8') as f:

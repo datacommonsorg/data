@@ -195,7 +195,7 @@ def download_data(api_url: str,
                         content if content.endswith(b'\n') else content + b'\n')
                 else:
                     split_content = content.split(b'\n', 1)
-                    if len(split_content) > 1:
+                    if len(split_content) > 1 and split_content[1].strip():
                         content_without_header = split_content[1]
                         f_staging.write(
                             content_without_header if content_without_header
