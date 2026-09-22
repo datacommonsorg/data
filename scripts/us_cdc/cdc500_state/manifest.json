@@ -19,7 +19,7 @@
             "resource_limits": {
                 "cpu": 2,
                 "memory": 8,
-                "disk": 20
+                "disk": 30
             },
             "source_files": [
                 "validation_config.json"

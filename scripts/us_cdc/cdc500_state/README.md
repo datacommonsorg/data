@@ -53,7 +53,7 @@ The following age-bracketed cancer screening indicators are omitted from state-l
 - `Percent_Person_21To65Years_Female_ReceivedPapSmearTest`
 - `Percent_Person_50To75Years_ReceivedColorectalCancerScreening`
 
-**Rationale**: The Census ACS 5-Year Survey does not publish single composite population StatVars for these non-standard multi-year age brackets (`50To74Years`, `21To65Years`, `50To75Years`). Rather than applying arbitrary proxy weights or risking silent row omission, these indicators are explicitly excluded from state aggregation.
+**Rationale**: The Census ACS 5-Year Survey does not publish single composite population StatVars for these non-standard multi-year age brackets (`50To74Years`, `21To65Years`, `50To75Years`). In the legacy query, these indicators were already silently dropped during the inner join with ACS population series. Rather than applying arbitrary proxy weights, these indicators are explicitly excluded in the query CTE, preserving full parity with the legacy pipeline while preventing unnecessary processing.
 
 ## About the Import
 
