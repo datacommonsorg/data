@@ -20,12 +20,14 @@ import unittest
 from unittest.mock import patch
 import pandas as pd
 
-# Add module directory to sys.path
+# Add repository root to sys.path
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-if _MODULE_DIR not in sys.path:
-    sys.path.insert(0, _MODULE_DIR)
+_REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
-from generate_rollups import FLAGS, OUTPUT_COLS, generate_rollups, main, process_rollups
+from statvar_imports.zurich.bev_3903_all import generate_rollups as rollup_mod
+from statvar_imports.zurich.bev_3903_all.generate_rollups import FLAGS, OUTPUT_COLS, generate_rollups, main, process_rollups
 
 
 class GenerateRollupsTest(unittest.TestCase):
@@ -150,6 +152,7 @@ class GenerateRollupsTest(unittest.TestCase):
             result_df = generate_rollups(input_csv, output_csv)
 
             self.assertTrue(os.path.exists(output_csv))
+            self.assertFalse(os.path.exists(f'{output_csv}.tmp'))
             read_back = pd.read_csv(output_csv, keep_default_na=False)
             self.assertEqual(len(read_back), len(result_df))
 
@@ -181,7 +184,7 @@ class GenerateRollupsTest(unittest.TestCase):
         """Verifies that main logs a fatal error with exc_info on exception."""
         FLAGS.input_csv = '/non/existent/path/file.csv'
         FLAGS.output_csv = '/tmp/dummy_output.csv'
-        with patch('generate_rollups.logging.fatal') as mock_fatal:
+        with patch.object(rollup_mod.logging, 'fatal') as mock_fatal:
             main([])
             mock_fatal.assert_called_once()
             self.assertIn('Failed to generate rollups',

@@ -26,10 +26,14 @@ DEFAULT_OUTPUT_ROLLUPS = os.path.join(CURRENT_DIR, 'input_files',
                                       'BEV390OD3903_rollups.csv')
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_csv', DEFAULT_INPUT_RAW,
-                    'Path to raw input CSV file.')
-flags.DEFINE_string('output_csv', DEFAULT_OUTPUT_ROLLUPS,
-                    'Path to output rollups CSV file.')
+flags.DEFINE_string('input_csv',
+                    DEFAULT_INPUT_RAW,
+                    'Path to raw input CSV file.',
+                    allow_override=True)
+flags.DEFINE_string('output_csv',
+                    DEFAULT_OUTPUT_ROLLUPS,
+                    'Path to output rollups CSV file.',
+                    allow_override=True)
 
 REQUIRED_COLS = [
     'StichtagDatJahr', 'QuarLang', 'KreisLang', 'AlterV10Kurz', 'SexKurz',
@@ -183,7 +187,9 @@ def generate_rollups(input_csv: str, output_csv: str) -> pd.DataFrame:
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
 
-    df_rollups.to_csv(output_csv, index=False, encoding='utf-8')
+    tmp_output_csv = f'{output_csv}.tmp'
+    df_rollups.to_csv(tmp_output_csv, index=False, encoding='utf-8')
+    os.replace(tmp_output_csv, output_csv)
     logging.info("Successfully generated %s with %d rows across %d places.",
                  output_csv, len(df_rollups), df_rollups['QuarLang'].nunique())
     return df_rollups

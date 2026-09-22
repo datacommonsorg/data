@@ -20,8 +20,8 @@
             "description": "Verifies that MaxDate meets the expected freshness threshold for the dataset.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT MAX(MaxDate) >= '2025' AS is_fresh, COUNT(*) AS row_cnt FROM stats",
-                "condition": "is_fresh = TRUE AND row_cnt > 0"
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2025' AND total_svs > 0"
             }
         }
     ]
