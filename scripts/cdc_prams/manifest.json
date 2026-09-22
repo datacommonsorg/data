@@ -17,8 +17,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/PRAMS.tmcf",
-                    "cleaned_csv": "output/PRAMS.csv",
-                    "node_mcf": "output/PRAMS.mcf"
+                    "cleaned_csv": "output/PRAMS.csv"
                 }
             ],
             "cron_schedule": "0 0 1 6 *",
