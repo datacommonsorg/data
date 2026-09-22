@@ -33,10 +33,10 @@
         },
         {
             "rule_id": "check_date_freshness",
-            "description": "Verifies that the dataset maximum observation date meets freshness requirements (within 1 year of current year).",
+            "description": "Verifies that all air quality StatVars meet freshness requirements (within 1 year of current year).",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "query": "SELECT MIN(MaxDate) AS latest_date FROM stats",
                 "condition": "CAST(SUBSTR(latest_date, 1, 4) AS INT) >= YEAR(CURRENT_DATE) - 1"
             }
         }

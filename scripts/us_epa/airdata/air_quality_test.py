@@ -22,7 +22,8 @@ module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality import create_csv, create_sites_mcf, write_csv, write_tmcf
+from air_quality import (create_csv, create_sites_mcf, get_camel_case,
+                        write_csv, write_sites_mcf, write_tmcf)
 
 
 class TestCriteriaGasesTest(unittest.TestCase):
@@ -347,6 +348,128 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 mcf_content = f_sites.read()
                 # Should not have appended another node
                 self.assertEqual(mcf_content.count('epa/010730023'), 1)
+
+    def test_site_coordinate_enrichment_from_later_record(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '7777',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '',
+                    'Longitude': '',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.02',
+                    '1st Max Value': '0.03',
+                    'AQI': '20',
+                    'Local Site Name': '',
+                },
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '7777',
+                    'Parameter Code': '42401',
+                    'POC': '1',
+                    'Latitude': '33.55',
+                    'Longitude': '-86.81',
+                    'Pollutant Standard': 'SO2 1-hour 2010',
+                    'Date Local': '2021-01-02',
+                    'Units of Measure': 'Parts per billion',
+                    'Arithmetic Mean': '0.5',
+                    '1st Max Value': '1.0',
+                    'AQI': '5',
+                    'Local Site Name': 'Enriched Site Name',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_sites_mcf, 'r') as f_sites:
+                mcf_content = f_sites.read()
+                self.assertIn('Node: dcid:epa/010737777\n', mcf_content)
+                self.assertIn('name: "Enriched Site Name"\n', mcf_content)
+                self.assertIn('location: [latLong 33.55 -86.81]\n', mcf_content)
+                self.assertEqual(mcf_content.count('epa/010737777'), 1)
+
+    def test_defensive_county_and_site_padding(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': ' 1 ',
+                    'County Code': ' 73 ',
+                    'Site Num': ' 23 ',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.5',
+                    'Longitude': '-86.8',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Padded IDs Site',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_csv, 'r') as f:
+                rows = list(csv.DictReader(f))
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0]['Site_Number'], 'epa/010730023')
+                self.assertEqual(rows[0]['County'], 'dcid:geoId/01073')
+            with open(test_sites_mcf, 'r') as f_sites:
+                mcf_content = f_sites.read()
+                self.assertIn('Node: dcid:epa/010730023\n', mcf_content)
+                self.assertIn('containedInPlace: dcid:geoId/01073\n',
+                              mcf_content)
+
+    def test_get_camel_case_punctuation_stripping(self):
+        self.assertEqual(
+            get_camel_case('Micrograms/cubic meter (25 C)'),
+            'MicrogramsCubicMeter25C')
+        self.assertEqual(
+            get_camel_case('parts-per-million'),
+            'PartsPerMillion')
+        self.assertEqual(get_camel_case(' - '), '')
+
+    def test_write_sites_mcf(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_mcf = os.path.join(tmp_dir, 'sites.mcf')
+            sites_dict = {
+                'epa/020200018': {
+                    'name': 'Anchorage Monitor',
+                    'lat': '61.21',
+                    'lon': '-149.88',
+                    'county': 'dcid:geoId/02020',
+                },
+                'epa/010730023': {
+                    'name': 'North Birmingham',
+                    'lat': '33.55',
+                    'lon': '-86.81',
+                    'county': 'dcid:geoId/01073',
+                },
+            }
+            write_sites_mcf(test_mcf, sites_dict)
+            with open(test_mcf, 'r') as f:
+                content = f.read()
+                # Sorted order: 010730023 must appear before 020200018
+                idx_bham = content.find('Node: dcid:epa/010730023')
+                idx_anch = content.find('Node: dcid:epa/020200018')
+                self.assertTrue(idx_bham < idx_anch)
 
 
 if __name__ == '__main__':
