@@ -17,7 +17,8 @@
         ],
         "source_files": [
           "input_file/fema_nfip_claims.csv",
-          "counters/*"
+          "counters/*",
+          "golden_data/*.csv"
         ],
         "resource_limits": {
                 "cpu": 64,
