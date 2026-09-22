@@ -200,7 +200,8 @@ class USAirEmissionTrends:
         df = self._regularize_columns(df, file_path)
         df['pollutant code'] = df['pollutant code'].astype(str)
 
-        # Convert fips code to numeric, filter out invalid/tribal codes, and format as 5-digit string
+        # Convert fips code to numeric, filter out invalid/tribal codes,
+        # and format as 5-digit string
         df['fips_num'] = pd.to_numeric(df['fips code'], errors='coerce')
         df = df.dropna(subset=['fips_num'])
         df = df[(df['fips_num'] > 0) &
@@ -320,9 +321,7 @@ class USAirEmissionTrends:
             None
         """
         logging.info("Starting data processing across all input files.")
-        if self.temp_dir and os.path.exists(self.temp_dir):
-            shutil.rmtree(self.temp_dir)
-        if self.temp_dir:
+        if self.temp_dir and not os.path.exists(self.temp_dir):
             os.makedirs(self.temp_dir, exist_ok=True)
         with concurrent.futures.ThreadPoolExecutor(
                 max_workers=MAX_WORKERS) as executor:
@@ -334,7 +333,6 @@ class USAirEmissionTrends:
             if not f.startswith('.')
         ]
         if not intermediate_files:
-            logging.fatal("No intermediate files found to concatenate. Exiting.")
             raise FileNotFoundError(
                 "No intermediate files found to concatenate.")
 
@@ -345,11 +343,14 @@ class USAirEmissionTrends:
             batch_dfs = []
             for f in batch:
                 try:
-                    df = pd.read_pickle(f) if f.endswith('.pkl') else pd.read_csv(f, low_memory=False)
+                    if f.endswith('.pkl'):
+                        df = pd.read_pickle(f)
+                    else:
+                        df = pd.read_csv(f, low_memory=False)
                     batch_dfs.append(df)
                     logging.info(f"Appending {f}")
                 except Exception as e:
-                    logging.fatal(
+                    logging.error(
                         f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
                     )
                     raise
@@ -374,7 +375,6 @@ class USAirEmissionTrends:
                 gc.collect()
 
         if not chunk_dfs:
-            logging.fatal("No dataframes to concatenate. Exiting.")
             raise RuntimeError(
                 "No dataframes to concatenate after processing intermediate files."
             )
@@ -467,9 +467,9 @@ def process_files(input_path: str, output_file_path: str,
             if file.lower().endswith('.csv')
         ]
     except Exception as e:
-        logging.fatal(
-            f"Error finding input files: {e}. Run the download script first.\n{traceback.format_exc()}"
-        )
+        logging.error(
+            f"Error finding input files: {e}. Run the download script first.\n"
+            f"{traceback.format_exc()}")
         raise
 
     # Defining Output Files
@@ -493,19 +493,24 @@ def process_files(input_path: str, output_file_path: str,
         loader.generate_mcf()
         loader.generate_tmcf()
     except Exception as e:
-        logging.fatal(
+        logging.error(
             f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
         raise
 
 
-def main(_):
+def main(argv):
     """
     The main function for the script.
     """
+    if len(argv) > 1:
+        raise app.UsageError("Too many command-line arguments.")
     logging.set_verbosity(1)
     logging.info("Started process script")
     start_time = time.time()
-    process_files(FLAGS.input_path, FLAGS.output_path, FLAGS.intermediate_path)
+    try:
+        process_files(FLAGS.input_path, FLAGS.output_path, FLAGS.intermediate_path)
+    except Exception as e:
+        logging.fatal(f"Process script failed: {e}", exc_info=True)
     elapsed_time = time.time() - start_time
     logging.info(f"Total execution time: {elapsed_time:.2f} seconds")
 

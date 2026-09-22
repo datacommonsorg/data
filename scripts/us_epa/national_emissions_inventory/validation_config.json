@@ -15,7 +15,7 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT MAX(MaxDate) AS max_date, MIN(MinDate) AS min_date FROM stats",
-                "condition": "max_date >= 2020 AND min_date <= 2008"
+                "condition": "max_date >= '2020' AND min_date <= '2008'"
             }
         }
     ]

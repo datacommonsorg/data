@@ -12,7 +12,9 @@
                 "process.py"
             ],
             "source_files": [
-                "gcs_output/input_files/*/*.csv"
+                "gcs_output/input_files/*/*.csv",
+                "manifest.json",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
@@ -25,7 +27,7 @@
             "resource_limits": {
                 "cpu": 8,
                 "memory": 128,
-                "disk": 100
+                "disk": 300
             }
         }
     ]
