@@ -34,28 +34,6 @@
             "validation_config_file": "wir_2552_wiki/validation_config.json"
         },
         {
-            "import_name": "Zurich_Population_By_Age",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv",
-            "provenance_description": "Population by 10 years age categories of Zurich city contains structure and organization of the city administration",
-            "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv --output_folder=bev_3903_age10_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki"
-            ],
-            "source_files": [
-                "bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.tmcf",
-                    "cleaned_csv": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
-                }
-            ],
-            "cron_schedule": "0 6 29 * *"
-        },
-        {
             "import_name": "Zurich_Population",
             "curator_emails": [
                 "support@datacommons.org"
@@ -87,115 +65,70 @@
             "validation_config_file": "bev_3240_wiki/validation_config.json"
         },
         {
-            "import_name": "Zurich_Population_Number_Of_Birth_By_Origin",
+            "import_name": "Zurich_Population_By_Age_Sex_Origin_Combined",
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv",
-            "provenance_description": "Population of births by origin in Zurich city contains structure and organization of the city administration",
+            "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903",
+            "provenance_description": "Population by age, sex and origin of Zurich city contains structure and organization of the city administration",
             "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv --output_folder=bev_4031_hel_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_hel_wiki/input_files/bev_4031_hel_wiki.csv --pv_map=bev_4031_hel_wiki/bev_4031_hel_wiki_pvmap.csv --config_file=bev_4031_hel_wiki/bev_4031_hel_wiki_metadata.csv --output_path=bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki"
+                "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903/download/BEV390OD3903.csv --output_folder=bev_3903_all/input_files",
+                "bev_3903_all/generate_rollups.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_all/input_files/BEV390OD3903_rollups.csv --pv_map=bev_3903_all/bev_3903_wiki_pvmap.csv --config_file=bev_3903_all/bev_3903_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=bev_3903_all/output/zurich_population_bev_3903_wiki --output_counters=bev_3903_all/counters/zurich_population_bev_3903_wiki_counters.csv"
             ],
             "source_files": [
-                "bev_4031_hel_wiki/input_files/bev_4031_hel_wiki.csv"
+                "bev_3903_all/input_files/BEV390OD3903.csv",
+                "bev_3903_all/input_files/BEV390OD3903_rollups.csv",
+                "bev_3903_all/counters/*.csv",
+                "bev_3903_all/validation_config.json"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki.tmcf",
-                    "cleaned_csv": "bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki.csv"
+                    "template_mcf": "bev_3903_all/output/zurich_population_bev_3903_wiki.tmcf",
+                    "cleaned_csv": "bev_3903_all/output/zurich_population_bev_3903_wiki.csv",
+                    "node_mcf": "bev_3903_all/output/*.mcf"
                 }
             ],
-            "cron_schedule": "45 15 29 * *"
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 4,
+                "disk": 30
+            },
+            "cron_schedule": "0 6 1,15 * *",
+            "validation_config_file": "bev_3903_all/validation_config.json"
         },
         {
-            "import_name": "Zurich_Population_Number_Of_Birth",
+            "import_name": "Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined",
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv",
-            "provenance_description": "Population of births in Zurich city contains structure and organization of the city administration",
+            "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031",
+            "provenance_description": "Population of births by sex and origin in Zurich city contains structure and organization of the city administration",
             "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv --output_folder=bev_4031_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_wiki/input_files/bev_4031_wiki.csv --pv_map=bev_4031_wiki/bev_4031_wiki_pvmap.csv --config_file=bev_4031_wiki/bev_4031_wiki_metadata.csv --output_path=bev_4031_wiki/output/zurich_bev_4031_wiki"
+                "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031/download/BEV403OD4031.csv --output_folder=bev_4031_all/input_files",
+                "bev_4031_all/generate_rollups.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_all/input_files/BEV403OD4031_rollups.csv --pv_map=bev_4031_all/bev_4031_wiki_pvmap.csv --config_file=bev_4031_all/bev_4031_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=bev_4031_all/output/zurich_bev_4031_wiki --output_counters=bev_4031_all/counters/zurich_bev_4031_wiki_counters.csv"
             ],
             "source_files": [
-                "bev_4031_wiki/input_files/bev_4031_wiki.csv"
+                "bev_4031_all/input_files/BEV403OD4031.csv",
+                "bev_4031_all/input_files/BEV403OD4031_rollups.csv",
+                "bev_4031_all/counters/*.csv",
+                "bev_4031_all/validation_config.json"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "bev_4031_wiki/output/zurich_bev_4031_wiki.tmcf",
-                    "cleaned_csv": "bev_4031_wiki/output/zurich_bev_4031_wiki.csv"
+                    "template_mcf": "bev_4031_all/output/zurich_bev_4031_wiki.tmcf",
+                    "cleaned_csv": "bev_4031_all/output/zurich_bev_4031_wiki.csv",
+                    "node_mcf": "bev_4031_all/output/*.mcf"
                 }
             ],
-            "cron_schedule": "0 20 29 * *"
-        },
-        {
-            "import_name": "Zurich_Population_By_Origin",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv",
-            "provenance_description": "Population by origin of Zurich city contains structure and organization of the city administration",
-            "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv --output_folder=bev_3903_hel_wiki/input_files",
-                "bev_3903_hel_wiki/convert_to_utf8.py --input_csv_path=bev_3903_hel_wiki/input_files/bev_3903_hel_wiki.csv",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_hel_wiki/input_files/bev_3903_hel_wiki_utf8.csv --pv_map=bev_3903_hel_wiki/bev_3903_hel_wiki_pvmap.csv --config_file=bev_3903_hel_wiki/bev_3903_hel_wiki_metadata.csv --output_path=bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki"
-            ],
-            "source_files": [
-                "bev_3903_hel_wiki/input_files/bev_3903_hel_wiki.csv"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.tmcf",
-                    "cleaned_csv": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.csv"
-                }
-            ],
-            "cron_schedule": "15 1 29 * *"
-        },
-        {
-            "import_name": "Zurich_Population_Number_Of_Birth_By_Sex",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv",
-            "provenance_description": "Population birth by sex in Zurich city contains structure and organization of the city administration",
-            "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv --output_folder=bev_4031_sex_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_sex_wiki/input_files/bev_4031_sex_wiki.csv --pv_map=bev_4031_sex_wiki/bev_4031_sex_wiki_pvmap.csv --config_file=bev_4031_sex_wiki/bev_4031_sex_wiki_metadata.csv --output_path=bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki"
-            ],
-            "source_files": [
-                "bev_4031_sex_wiki/input_files/bev_4031_sex_wiki.csv"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki.tmcf",
-                    "cleaned_csv": "bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki.csv"
-                }
-            ],
-            "cron_schedule": "07 19 29 * *"
-        },
-        {
-            "import_name": "Zurich_Population_By_Sex",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv",
-            "provenance_description": "Population by sex of Zurich city contains structure and organization of the city administration",
-            "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv --output_folder=bev_3903_sex_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_sex_wiki/input_files/bev_3903_sex_wiki.csv --pv_map=bev_3903_sex_wiki/bev_3903_sex_wiki_pvmap.csv --config_file=bev_3903_sex_wiki/bev_3903_sex_wiki_metadata.csv --output_path=bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki"
-            ],
-            "source_files": [
-                "bev_3903_sex_wiki/input_files/bev_3903_sex_wiki.csv"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.tmcf",
-                    "cleaned_csv": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.csv"
-                }
-            ],
-            "cron_schedule": "55 10 29 * *"
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 4,
+                "disk": 30
+            },
+            "cron_schedule": "0 20 1,15 * *",
+            "validation_config_file": "bev_4031_all/validation_config.json"
         }
     ]
 }

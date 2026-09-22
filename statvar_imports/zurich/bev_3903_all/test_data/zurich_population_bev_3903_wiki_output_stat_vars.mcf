@@ -1,0 +1,115 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/zurich/bev_3903_all/test_data/bev_3903_wiki_input.csv --pv_map=statvar_imports/zurich/bev_3903_all/bev_3903_wiki_pvmap.csv --config_file=statvar_imports/zurich/bev_3903_all/bev_3903_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=statvar_imports/zurich/bev_3903_all/test_data/zurich_population_bev_3903_wiki_output" on 2026-09-16 13:26:40.754627
+
+Node: dcid:Count_Person_0To9Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 9 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_0To9Years_Female_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 9 Years]
+gender: dcid:Female
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_Person_0To9Years_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 9 Years]
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_Person_0To9Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 9 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_0To9Years_Male_Native
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 9 Years]
+gender: dcid:Male
+nativity: dcid:Native
+
+Node: dcid:Count_Person_0To9Years_Native
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 9 Years]
+nativity: dcid:Native
+
+Node: dcid:Count_Person_20To29Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 29 Years]
+
+Node: dcid:Count_Person_20To29Years_Female_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 29 Years]
+gender: dcid:Female
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_Person_20To29Years_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 29 Years]
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_Person_20To29Years_Male_Native
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 29 Years]
+gender: dcid:Male
+nativity: dcid:Native
+
+Node: dcid:Count_Person_20To29Years_Native
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 29 Years]
+nativity: dcid:Native
+
+Node: dcid:Count_Person_Female_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_Person_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_Person_Native
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+nativity: dcid:Native
+

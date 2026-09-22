@@ -1,0 +1,18 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/zurich/bev_4031_all/test_data/bev_4031_wiki_input.csv --pv_map=statvar_imports/zurich/bev_4031_all/bev_4031_wiki_pvmap.csv --config_file=statvar_imports/zurich/bev_4031_all/bev_4031_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=statvar_imports/zurich/bev_4031_all/test_data/zurich_bev_4031_wiki_output" on 2026-09-16 13:27:24.565235
+
+Node: dcid:Count_BirthEvent_Female_ForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+nativity: dcid:ForeignBorn
+
+Node: dcid:Count_BirthEvent_Male_Native
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+nativity: dcid:Native
+
