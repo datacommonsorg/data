@@ -54,7 +54,6 @@ Run all commands below from `data/statvar_imports/opportunity_insights_outcomes/
      --pv_map=pvmap.csv \
      --config_file=metadata.csv \
      --output_path=test_data/output/output \
-     --output_counters=test_data/counters/output_counters.csv \
      --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
    ```
 
