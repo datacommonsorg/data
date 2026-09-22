@@ -160,7 +160,7 @@ class RegularizeColumnsTest(unittest.TestCase):
         self.assertEqual(res_pt20_unk['total emissions'].iloc[0], 30.0)
         self.assertEqual(res_pt20_unk['emissions uom'].iloc[0], 'TON')
 
-        # 2017 point_ file for regions 1-5 (point_12345.csv)
+        # 2017 point_ file for regions 1-5 (point_12345.csv) with underscore columns
         df_pt17_reg15 = pd.DataFrame({
             'fips': [1005],
             'pollutant_code': ['CO'],
@@ -176,6 +176,23 @@ class RegularizeColumnsTest(unittest.TestCase):
         self.assertEqual(res_pt17_reg15['fips code'].iloc[0], 1005)
         self.assertEqual(res_pt17_reg15['total emissions'].iloc[0], 18.0)
         self.assertEqual(res_pt17_reg15['emissions uom'].iloc[0], 'TON')
+
+        # 2017 point_ file for regions 1-5 (point_12345.csv) with standard spaced columns
+        df_pt17_reg15_spaces = pd.DataFrame({
+            'fips code': [1001],
+            'pollutant code': ['75070'],
+            'pollutant type(s)': ['HAP'],
+            'total emissions': [0.265867],
+            'emissions uom': ['TON'],
+            'scc': [10100101],
+        })
+        res_pt17_reg15_spaces = self.loader._regularize_columns(
+            df_pt17_reg15_spaces, '/path/to/2017neiJan_facility_process_byregions/point_12345.csv')
+        self.assertEqual(list(res_pt17_reg15_spaces.columns), df_columns)
+        self.assertEqual(res_pt17_reg15_spaces['year'].iloc[0], '2017')
+        self.assertEqual(res_pt17_reg15_spaces['fips code'].iloc[0], 1001)
+        self.assertEqual(res_pt17_reg15_spaces['total emissions'].iloc[0], 0.265867)
+        self.assertEqual(res_pt17_reg15_spaces['emissions uom'].iloc[0], 'TON')
 
         # 2020 point_ file for regions 1-10 (point_1.csv ... point_10.csv)
         df_pt20_reg1 = pd.DataFrame({

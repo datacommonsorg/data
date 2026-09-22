@@ -68,7 +68,6 @@ replacement_point_17 = {
     'pollutant_code': 'pollutant code',
     'total_emissions': 'total emissions',
     'emissions_uom': 'emissions uom',
-    'total emissions': 'observation',
     'pollutant_type': 'pollutant type(s)'
 }
 
