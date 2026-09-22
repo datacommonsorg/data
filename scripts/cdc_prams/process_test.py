@@ -21,7 +21,6 @@ import unittest
 import sys
 import tempfile
 import pandas as pd
-import numpy as np
 
 # MODULE_DIR is the absolute path to where this test is running from.
 MODULE_DIR = os.path.abspath(os.path.dirname(__file__))

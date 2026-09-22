@@ -203,8 +203,9 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
     df['sub_header_delete_flag'] = df['sub_header']
     df['sub_header_delete_flag'] = df['sub_header_delete_flag'].fillna("")
     df['sub_header'] = df['sub_header'].ffill(limit=2)
-    index = df[df['statVar'] == 'Postpartum'].index.values[0]
-    df.loc[index, 'sub_header'] = "Any cigarette smoking"
+    postpartum_mask = df['statVar'].str.strip() == 'Postpartum'
+    if postpartum_mask.any():
+        df.loc[postpartum_mask, 'sub_header'] = "Any cigarette smoking"
     df['sub_header'] = df['sub_header'].fillna("")
 
     df['newStatVar'] = df['main_header'] + "_" + df['sub_header'] + "_" + df[
@@ -247,7 +248,7 @@ def _splitting_ci_columns(df, geo):
     if geo == "State":
         split_col = ['2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI']
         ci_pattern = re.compile(
-            r'^\s*(?:(?P<percent>-?\d+(?:\.\d+)?))?\s*(?:\(\s*(?:(?P<lower>-?\d+(?:\.\d+)?)\s*-\s*(?P<upper>-?\d+(?:\.\d+)?)|[^\)]*)\s*\))?\s*$'
+            r'^\s*(?:(?P<percent>-?\d+(?:\.\d+)?))?\s*(?:\(\s*(?:(?P<lower>-?\d+(?:\.\d+)?)\s*[-\u2013\u2014]\s*(?P<upper>-?\d+(?:\.\d+)?)|[^\)]*)\s*\))?\s*$'
         )
         for i in split_col:
             df[i] = df[i].fillna('').astype(str).replace({
@@ -296,13 +297,25 @@ def _stat_var(df, geo):
                 temp_df = temp_df.drop(columns=drop_columns)
             elif geo == "State":
                 for year in range(2016, 2021):
-                    for col in ['_CI_PERCENT', '_CI_LOWER', '_CI_UPPER']:
-                        drop_columns.append(str(year) + col)
+                    for suffix in ['_CI_PERCENT', '_CI_LOWER', '_CI_UPPER']:
+                        drop_columns.append(str(year) + suffix)
                 temp_df = temp_df.drop(columns=drop_columns)
 
             temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
                                    var_name='Year',
                                    value_name='Observation')
+            temp_df['Observation'] = temp_df['Observation'].astype(
+                str).str.replace(r'\.0$', '', regex=True)
+            temp_df['Observation'] = temp_df['Observation'].replace({
+                'nan':
+                pd.NA,
+                'None':
+                pd.NA,
+                '<NA>':
+                pd.NA,
+                '':
+                pd.NA
+            })
 
         elif col == "percent_sv":
             temp_df['SV'] = 'Percent' + temp_df['SV']
@@ -314,8 +327,8 @@ def _stat_var(df, geo):
                 temp_df = temp_df.drop(columns=drop_columns)
             elif geo == "State":
                 for year in range(2016, 2021):
-                    for col in ['_sampleSize', '_CI_LOWER', '_CI_UPPER']:
-                        drop_columns.append(str(year) + col)
+                    for suffix in ['_sampleSize', '_CI_LOWER', '_CI_UPPER']:
+                        drop_columns.append(str(year) + suffix)
                 temp_df = temp_df.drop(columns=drop_columns)
 
             temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
@@ -330,8 +343,8 @@ def _stat_var(df, geo):
                     'SV']
                 temp_df['ScalingFactor'] = 100
                 for year in range(2016, 2021):
-                    for col in ['_sampleSize', '_CI_UPPER', '_CI_PERCENT']:
-                        drop_columns.append(str(year) + col)
+                    for suffix in ['_sampleSize', '_CI_UPPER', '_CI_PERCENT']:
+                        drop_columns.append(str(year) + suffix)
                 temp_df = temp_df.drop(columns=drop_columns)
 
                 temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
@@ -346,8 +359,8 @@ def _stat_var(df, geo):
                     'SV']
                 temp_df['ScalingFactor'] = 100
                 for year in range(2016, 2021):
-                    for col in ['_sampleSize', '_CI_LOWER', '_CI_PERCENT']:
-                        drop_columns.append(str(year) + col)
+                    for suffix in ['_sampleSize', '_CI_LOWER', '_CI_PERCENT']:
+                        drop_columns.append(str(year) + suffix)
                 temp_df = temp_df.drop(columns=drop_columns)
                 temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
                                        var_name='Year',
@@ -394,12 +407,22 @@ def prams(input_url: list, years: list = None) -> pd.DataFrame:
             ]
             df = df.drop([col for col in drop_cols if col in df.columns],
                          axis=1)
+            expected_cols = 12
+            if len(df.columns) != expected_cols:
+                raise ValueError(
+                    f"Expected {expected_cols} columns for {geo} file {file_name}, got {len(df.columns)}: {list(df.columns)}"
+                )
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_CI',
                 '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI',
                 '2020_sampleSize', '2020_CI', 'Overall_2020_CI', 'Geo'
             ]
         elif geo == "National":
+            expected_cols = 15
+            if len(df.columns) != expected_cols:
+                raise ValueError(
+                    f"Expected {expected_cols} columns for {geo} file {file_name}, got {len(df.columns)}: {list(df.columns)}"
+                )
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_Nan', '2017_CI',
                 '2018_sampleSize', '2018_Nan', '2018_CI', '2019_sampleSize',
@@ -697,9 +720,14 @@ class USPrams:
         # Replacing dummy statvars with the Statistical variables generated from
         # dcid_generator
         df["SV"] = df["SV"].map(updated_sv)
+        if df["SV"].isna().any():
+            unmapped = df[df["SV"].isna()]["SV"].unique().tolist()
+            logging.fatal("Unmapped Statistical Variables detected: %s",
+                          unmapped)
         self._generate_tmcf()
         df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])
+        df = df.drop_duplicates(subset=['Geo', 'SV', 'Year'], keep='last')
         tmp_csv_file = self.cleaned_csv_file_path + ".tmp"
         df.to_csv(tmp_csv_file, index=False)
         os.replace(tmp_csv_file, self.cleaned_csv_file_path)

@@ -104,3 +104,36 @@ or via unittest:
 ```bash
 python3 -m unittest scripts/cdc_prams/process_test.py
 ```
+
+---
+
+## Refresh Procedure
+
+CDC publishes PRAMS MCH Indicator reports annually. When a new release is published:
+
+1. **Verify Source Availability**:
+   - Check the active CDC landing page at [https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html](https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html).
+   - Verify whether new reports are available as multi-year summary PDFs or Excel (`.xlsx`) workbooks. (Note: 2016–2020 indicators are available as state summary PDFs, while 2021+ releases are published as Excel workbooks).
+
+2. **Download Updated Data**:
+   - If updating PDF inputs:
+     ```bash
+     python3 scripts/cdc_prams/download_input_files.py --overwrite
+     ```
+
+3. **Process and Generate Outputs**:
+   - Run the processing pipeline:
+     ```bash
+     python3 scripts/cdc_prams/process.py
+     ```
+
+4. **Verify and Run Tests**:
+   - Run unit tests to ensure parser integrity:
+     ```bash
+     python3 scripts/cdc_prams/process_test.py
+     ```
+   - Inspect `output/PRAMS.csv`, `output/PRAMS.mcf`, and `output/PRAMS.tmcf`.
+
+5. **Update Manifest & Provenance (if new observation years added)**:
+   - Update `end_date_in_kg` in `US_CDC_PRAMS.textproto` and `latestObservationDate` in `US_CDC_PRAMS.mcf`.
+   - Run `import_groups_test` and `manifest_checker_test` in google3.

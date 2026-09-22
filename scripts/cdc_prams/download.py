@@ -16,7 +16,6 @@ This Python script downloads the CDC PRAMS datasets from provided URLs,
 verifies their contents, and saves them to the input files directory.
 """
 import os
-import zipfile
 from absl import logging
 import requests
 from requests.adapters import HTTPAdapter
@@ -43,7 +42,7 @@ def download_file(input_url: list,
                   download_directory: str,
                   overwrite: bool = False) -> None:
     """
-    Function to download and extract files provided in input_url list.
+    Function to download files provided in input_url list.
 
     Args:
         input_url (list): List of URLs of the files to be downloaded.
@@ -75,24 +74,28 @@ def download_file(input_url: list,
                 raise ValueError(
                     f"Downloaded content too small ({len(req.content)} bytes) for {download_file_url}"
                 )
+            if not req.content.startswith(b'%PDF-'):
+                raise ValueError(
+                    f"Downloaded content from {download_file_url} is not a valid PDF"
+                )
 
             with open(tmp_file, 'wb') as file:
                 file.write(req.content)
 
-            if download_file_url.endswith(".zip"):
-                with zipfile.ZipFile(tmp_file) as zipfileout:
-                    zipfileout.extractall(path)
-
             os.replace(tmp_file, out_file)
             logging.info("Successfully downloaded: %s (%d bytes)", file_name,
                          len(req.content))
-        except (requests.exceptions.RequestException, zipfile.BadZipFile,
-                ValueError) as exc:
+        except (requests.exceptions.RequestException, ValueError) as exc:
             if os.path.exists(tmp_file):
                 os.remove(tmp_file)
-            logging.fatal("Failed downloading or extracting %s: %s",
-                          download_file_url, exc)
+            logging.fatal("Failed downloading %s: %s",
+                          download_file_url,
+                          exc,
+                          exc_info=True)
         except Exception as exc:
             if os.path.exists(tmp_file):
                 os.remove(tmp_file)
-            logging.fatal("Failed downloading %s: %s", download_file_url, exc)
+            logging.fatal("Failed downloading %s: %s",
+                          download_file_url,
+                          exc,
+                          exc_info=True)
