@@ -1,0 +1,10 @@
+key,property,value,property2,value2,property3,value3,,,,,,,,
+VALUE,value,{Number},populationType,MedicalConditionIncident,measuredProperty,count,statType,measuredValue,measurementDenominator,Count_MedicalConditionIncident_ConditionPulmonaryTuberculosis_NewCase,scalingFactor,100,unit,Percent
+YEAR,observationDate,{Number},,,,,,,,,,,,
+iso3,observationAbout,country/{Data},,,,,,,,,,,,
+bacteriologically confirmed,medicalTestingMethod,BacteriologicalTest,,,,,,,,,,,,
+pulmonary TB,medicalCondition,PulmonaryTuberculosis,,,,,,,,,,,,
+new episode,medicalStatus,NewCase,,,,,,,,,,,,
+								
+										
+										

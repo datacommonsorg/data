@@ -7,40 +7,49 @@
       "provenance_description": "Data related to the Mongolia's population and households at country level",
       "scripts": ["../common_download_script.py", "run.sh"],
       "source_files": [
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv",
+        "golden_data/*.csv"
       ],
       "import_inputs": [
         {
           "template_mcf": "output_files/mid_year_total_population_by_region_output.tmcf",
-          "cleaned_csv": "output_files/mid_year_total_population_by_region_output.csv"
+          "cleaned_csv": "output_files/mid_year_total_population_by_region_output.csv",
+          "node_mcf": "output_files/mid_year_total_population_by_region_output*.mcf"
         },
         {
           "template_mcf": "output_files/number_of_households_by_region_and_urban_rural_output.tmcf",
-          "cleaned_csv": "output_files/number_of_households_by_region_and_urban_rural_output.csv"
+          "cleaned_csv": "output_files/number_of_households_by_region_and_urban_rural_output.csv",
+          "node_mcf": "output_files/number_of_households_by_region_and_urban_rural_output*.mcf"
         },
         {
           "template_mcf": "output_files/number_of_households_by_region_output.tmcf",
-          "cleaned_csv": "output_files/number_of_households_by_region_output.csv"
+          "cleaned_csv": "output_files/number_of_households_by_region_output.csv",
+          "node_mcf": "output_files/number_of_households_by_region_output*.mcf"
         },
         {
           "template_mcf": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.tmcf",
-          "cleaned_csv": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.csv"
+          "cleaned_csv": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.csv",
+          "node_mcf": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output*.mcf"
         },
         {
           "template_mcf": "output_files/total_population_by_age_group_and_sex_output.tmcf",
-          "cleaned_csv": "output_files/total_population_by_age_group_and_sex_output.csv"
+          "cleaned_csv": "output_files/total_population_by_age_group_and_sex_output.csv",
+          "node_mcf": "output_files/total_population_by_age_group_and_sex_output*.mcf"
         },
         {
           "template_mcf": "output_files/total_population_by_region_and_urban_rural_output.tmcf",
-          "cleaned_csv": "output_files/total_population_by_region_and_urban_rural_output.csv"
+          "cleaned_csv": "output_files/total_population_by_region_and_urban_rural_output.csv",
+          "node_mcf": "output_files/total_population_by_region_and_urban_rural_output*.mcf"
         },
         {
           "template_mcf": "output_files/total_population_by_sex_and_urban_rural_output.tmcf",
-          "cleaned_csv": "output_files/total_population_by_sex_and_urban_rural_output.csv"
+          "cleaned_csv": "output_files/total_population_by_sex_and_urban_rural_output.csv",
+          "node_mcf": "output_files/total_population_by_sex_and_urban_rural_output*.mcf"
         }
       ],
+      "validation_config_file": "validation_config.json",
       "cron_schedule": "0 04 * * 6"
     }
   ]
 }
-

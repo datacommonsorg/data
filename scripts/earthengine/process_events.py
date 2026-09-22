@@ -1594,9 +1594,13 @@ class GeoEventsProcessor:
             output_ended_events = True
         if self._config.get('output_events', True):
             _set_counter_stage(self._counters, 'emit_events_csv_')
+            if self._config.get('omit_events_subdir', False):
+                events_output_path = output_path
+            else:
+                events_output_path = _get_output_subdir_path(
+                    output_path, 'events')
             output_files.append(
-                self.write_events_csv(output_path=_get_output_subdir_path(
-                    output_path, 'events'),
+                self.write_events_csv(output_path=events_output_path,
                                       output_ended_events=output_ended_events))
         if self._config.get('output_svobs', False):
             _set_counter_stage(self._counters, 'emit_events_svobs_')

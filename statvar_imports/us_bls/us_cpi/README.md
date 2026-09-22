@@ -26,7 +26,9 @@ python3 ../cpi_category/cpi_category_download.py --output_folder=../us_cpi/input
 After downloading the data, use the `stat_var_processor.py` script to process the files and generate the final statistical variables.
 
 #### Note : 
-Currently we are taking the consumerGoodsCategory directly from the input data using a #Eval in the pvmap, so if there is a new entry for goods category or any change in the existing goods category it will cause the addition of a new schema.
+- Currently we are taking the consumerGoodsCategory directly from the input data using a #Eval in the pvmap, so if there is a new entry for goods category or any change in the existing goods category it will cause the addition of a new schema.
+
+- Anytime a new place comes up in the input file and has a place mapping in DataCommons, make sure the whole string of the place is added in the pv_map as is from source.
 
 #### Example
 

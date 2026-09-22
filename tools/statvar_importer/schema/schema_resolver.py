@@ -36,7 +36,7 @@ sys.path.append(
 
 import process_http_server
 
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
+from mcf_file_util import load_mcf_nodes, write_mcf_nodes, get_node_dcid
 from mcf_file_util import add_namespace, strip_namespace, normalize_mcf_node
 from mcf_diff import fingerprint_node
 
@@ -240,17 +240,6 @@ class SchemaResolver:
                     keys.append(f'{prop}:{value}')
         keys.append(dcid)
         return keys
-
-
-def get_node_dcid(node: dict) -> str:
-    """Returns the dcid without the namespace prefix for the node."""
-    if not node:
-        return ''
-    dcid = node.get('dcid', node.get('Node', '')).strip()
-    if dcid and dcid[0] == '"':
-        # Strip quotes around dcid
-        dcid = dcid.strip('"')
-    return strip_namespace(dcid)
 
 
 def resolve_nodes(

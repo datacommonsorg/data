@@ -4,6 +4,8 @@ key,property,value,property2,value2,property3,value3
 # Dimensions,,,,,,
 FREQ:Q,observationPeriod,P3M,,,,
 REF_AREA,observationAbout,country/{Data},,,,
+REF_AREA:EU,#ignore,reason: not a country,,,,
+REF_AREA:EA,#ignore,reason: not a country,,,,
 REF_AREA:EU27_2020,#ignore,reason: not a country,,,,
 REF_AREA:EA20,#ignore,reason: not a country,,,,
 REF_AREA:OECD,#ignore,reason: not a country,,,,

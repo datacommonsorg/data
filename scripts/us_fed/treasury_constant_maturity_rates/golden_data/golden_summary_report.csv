@@ -1,0 +1,6 @@
+StatVar,NumPlaces,MinDate,MeasurementMethods,Units
+InterestRate_TreasuryNote_3Year,1,1962-01-02,[ConstantMaturityRate],[Percent]
+InterestRate_TreasuryBond_20Year,1,1962-01-02,[ConstantMaturityRate],[Percent]
+InterestRate_TreasuryNote_5Year,1,1962-01-02,[ConstantMaturityRate],[Percent]
+InterestRate_TreasuryNote_10Year,1,1962-01-02,[ConstantMaturityRate],[Percent]
+InterestRate_TreasuryBill_1Year,1,1962-01-02,[ConstantMaturityRate],[Percent]
