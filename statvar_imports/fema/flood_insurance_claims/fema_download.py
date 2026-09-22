@@ -179,10 +179,10 @@ def download_data(api_url: str,
                 shutil.rmtree(temp_dir)
             os.makedirs(temp_dir, exist_ok=True)
 
-            if download_file(url=bulk_url, output_folder=temp_dir, unzip=False):
+            if download_file(url=bulk_url, output_folder=temp_dir,
+                             unzip=False):
                 downloaded = [
-                    os.path.join(temp_dir, f)
-                    for f in os.listdir(temp_dir)
+                    os.path.join(temp_dir, f) for f in os.listdir(temp_dir)
                     if os.path.isfile(os.path.join(temp_dir, f))
                 ]
                 if downloaded:
@@ -190,11 +190,16 @@ def download_data(api_url: str,
                         total_records = get_total_records(api_url)
                     except Exception as e:
                         logging.warning(
-                            "Could not retrieve total records for bulk validation: %s",
+                            "Could not retrieve total records for bulk validation: %s. "
+                            "Cannot verify bulk file integrity; falling back to pagination.",
                             e)
-                    if _is_valid_bulk_file(downloaded[0],
-                                           min_bulk_size,
-                                           expected_records=total_records):
+                        total_records = None
+
+                    if (total_records is not None and total_records > 0
+                            and _is_valid_bulk_file(
+                                downloaded[0],
+                                min_bulk_size,
+                                expected_records=total_records)):
                         _publish_file_atomically(downloaded[0], final_filepath)
                         logging.info(
                             "Direct bulk download complete. Saved to: %s",
@@ -202,8 +207,8 @@ def download_data(api_url: str,
                         return
                     else:
                         logging.warning(
-                            "Bulk file failed integrity or header verification. Falling back to API pagination."
-                        )
+                            "Bulk file failed integrity or record count verification. "
+                            "Falling back to API pagination.")
         except Exception as e:
             logging.warning(
                 "Direct bulk download failed: %s. Falling back to API pagination.",
@@ -280,14 +285,19 @@ def download_data(api_url: str,
             with open(staging_filepath, 'ab') as f_staging:
                 if skip_count == 0:
                     f_staging.write(
-                        content if content.endswith(b'\n') else content + b'\n')
+                        content if content.endswith(b'\n') else content +
+                        b'\n')
                 else:
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1 and split_content[1].strip():
                         content_without_header = split_content[1]
                         f_staging.write(
                             content_without_header if content_without_header.
-                            endswith(b'\n') else content_without_header + b'\n')
+                            endswith(b'\n') else content_without_header +
+                            b'\n')
+
+            if os.path.exists(chunk_filepath):
+                os.remove(chunk_filepath)
 
             cleaned_content = content.rstrip(b'\r\n')
             num_records_in_chunk = max(0,

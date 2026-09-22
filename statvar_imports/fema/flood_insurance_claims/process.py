@@ -194,8 +194,8 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
     unique_zones = df['ratedFloodZone'].dropna().unique()
     zone_dict = {
         z:
-            f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
-            not in ('nan', 'none', '') else "FEMAFloodZone"
+        f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
+        not in ('nan', 'none', '') else "FEMAFloodZone"
         for z in unique_zones
     }
     df['specific_zone'] = df['ratedFloodZone'].map(zone_dict).fillna(
@@ -204,7 +204,9 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
         risk_zone_map)
     df['all_zone'] = ""
 
-    place_cols = ['tract_place', 'county_place', 'state_place', 'country_place']
+    place_cols = [
+        'tract_place', 'county_place', 'state_place', 'country_place'
+    ]
     date_configs = [('month_date', 'P1M'), ('year_date', 'P1Y')]
     zone_cols = ['specific_zone', 'risk_zone', 'all_zone']
 
@@ -251,15 +253,16 @@ def _write_tmcf(output_path: str):
     output_dir = os.path.dirname(output_path)
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
+    table_id = os.path.splitext(os.path.basename(output_path))[0]
     tmcf_path = f"{output_path}.tmcf"
     temp_tmcf = f"{tmcf_path}.tmp.{os.getpid()}"
-    content = ("Node: E:nfip_output->E0\n"
-               "observationDate: C:nfip_output->observationDate\n"
-               "observationAbout: C:nfip_output->observationAbout\n"
-               "value: C:nfip_output->value\n"
-               "observationPeriod: C:nfip_output->observationPeriod\n"
-               "unit: C:nfip_output->unit\n"
-               "variableMeasured: C:nfip_output->variableMeasured\n"
+    content = (f"Node: E:{table_id}->E0\n"
+               f"observationDate: C:{table_id}->observationDate\n"
+               f"observationAbout: C:{table_id}->observationAbout\n"
+               f"value: C:{table_id}->value\n"
+               f"observationPeriod: C:{table_id}->observationPeriod\n"
+               f"unit: C:{table_id}->unit\n"
+               f"variableMeasured: C:{table_id}->variableMeasured\n"
                "typeOf: dcs:StatVarObservation\n"
                "measurementMethod: dcs:dcAggregate/NFIPInsuranceClaims\n"
                "#Aggregate: sum\n")
@@ -388,7 +391,8 @@ def process_data_vectorized(
                  len(final_agg))
 
     statvar_specs = [
-        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '', 0),
+        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '',
+         0),
         ('b_val', 'SettlementAmount', 'BuildingStructure', 'dcs:USDollar', 2),
         ('c_val', 'SettlementAmount', 'BuildingContents', 'dcs:USDollar', 2),
         ('bc_val', 'SettlementAmount', 'BuildingStructureAndContents',
@@ -401,7 +405,8 @@ def process_data_vectorized(
         if len(sub) > 0:
             unique_zones = sub['zone'].unique()
             sv_map = {
-                z: _make_statvar_name(z, metric, thing) for z in unique_zones
+                z: _make_statvar_name(z, metric, thing)
+                for z in unique_zones
             }
             sub['variableMeasured'] = sub['zone'].map(sv_map)
             if round_digits == 0:
@@ -417,8 +422,8 @@ def process_data_vectorized(
         out_df = pd.concat(dfs_to_concat, ignore_index=True)
     else:
         out_df = pd.DataFrame(columns=[
-            'observationDate', 'observationAbout', 'value', 'observationPeriod',
-            'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value',
+            'observationPeriod', 'unit', 'variableMeasured'
         ])
 
     out_df = out_df.rename(

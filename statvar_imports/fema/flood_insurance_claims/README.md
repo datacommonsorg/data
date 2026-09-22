@@ -43,6 +43,12 @@ This import automates the ingestion of National Flood Insurance Program (NFIP) r
 
 ## 3. Usage & CLI Documentation
 
+Navigate to the import directory before executing commands:
+
+```bash
+cd statvar_imports/fema/flood_insurance_claims
+```
+
 ### A. Download Data (`fema_download.py`)
 
 Downloads the latest full NFIP claims dataset. By default, it uses high-speed direct bulk streaming (`~60s`), falling back to paginated API calls with retry logic if the bulk endpoint is unavailable.

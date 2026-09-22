@@ -107,8 +107,8 @@ class ProcessTest(unittest.TestCase):
         df = pd.read_csv(csv_file)
         self.assertEqual(len(df), 346)
         self.assertEqual(list(df.columns), [
-            'observationDate', 'observationAbout', 'value', 'observationPeriod',
-            'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value',
+            'observationPeriod', 'unit', 'variableMeasured'
         ])
 
         with open(self.counters_path, 'r', encoding='utf-8') as f:
@@ -196,8 +196,8 @@ class ProcessTest(unittest.TestCase):
         df = pd.read_csv(f"{self.output_prefix}.csv")
 
         def _get_val(place, date, period, sv):
-            match = df[(df['observationAbout'] == place) &
-                       (df['observationDate'] == str(date)) &
+            match = df[(df['observationAbout'] == place)
+                       & (df['observationDate'] == str(date)) &
                        (df['observationPeriod'] == period) &
                        (df['variableMeasured'] == sv)]
             return match['value'].iloc[0] if len(match) > 0 else None
@@ -320,6 +320,20 @@ class ProcessTest(unittest.TestCase):
             'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
         )]
         self.assertEqual(match_str['value'].iloc[0], '2')
+
+    def test_custom_output_path_tmcf_table_id(self):
+        """Test that _write_tmcf dynamically uses the output file basename as table ID."""
+        custom_prefix = os.path.join(self.test_dir, 'custom_claims')
+        process._write_tmcf(custom_prefix)
+        tmcf_path = f"{custom_prefix}.tmcf"
+        self.assertTrue(os.path.exists(tmcf_path))
+        with open(tmcf_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        self.assertIn('Node: E:custom_claims->E0', content)
+        self.assertIn('observationDate: C:custom_claims->observationDate',
+                      content)
+        self.assertIn('observationAbout: C:custom_claims->observationAbout',
+                      content)
 
 
 if __name__ == '__main__':
