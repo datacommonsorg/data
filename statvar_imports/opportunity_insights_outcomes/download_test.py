@@ -17,41 +17,48 @@ import csv
 import io
 import os
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest import mock
 import zipfile
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
 from statvar_imports.opportunity_insights_outcomes import download
+from statvar_imports.opportunity_insights_outcomes import preprocess
 
 
 class DownloadAndPvmapTest(unittest.TestCase):
 
     def test_format_geo_id(self):
         self.assertEqual(
-            download.format_geo_id({'cz': '100'}, 'commuting_zone'),
+            preprocess.format_geo_id({'cz': '100'}, 'commuting_zone'),
             'geoId/cz00100',
         )
         self.assertEqual(
-            download.format_geo_id({'cz': '100.0'}, 'commuting_zone'),
+            preprocess.format_geo_id({'cz': '100.0'}, 'commuting_zone'),
             'geoId/cz00100',
         )
         self.assertEqual(
-            download.format_geo_id({'state': '6', 'county': '85'}, 'county'),
+            preprocess.format_geo_id({'state': '6', 'county': '85'}, 'county'),
             'geoId/06085',
         )
         self.assertEqual(
-            download.format_geo_id({'state': '6.0', 'county': '85.0'}, 'county'),
+            preprocess.format_geo_id({'state': '6.0', 'county': '85.0'}, 'county'),
             'geoId/06085',
         )
         self.assertEqual(
-            download.format_geo_id(
+            preprocess.format_geo_id(
                 {'state': '6', 'county': '85', 'tract': '500100'}, 'tract'
             ),
             'geoId/06085500100',
         )
         self.assertEqual(
-            download.format_geo_id(
+            preprocess.format_geo_id(
                 {'state': '6.0', 'county': '85.0', 'tract': '500100.0'}, 'tract'
             ),
             'geoId/06085500100',
@@ -100,7 +107,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 writer.writerow(['100', 'NA', 'N/A', '.', '0.35973939'])
                 writer.writerow(['101', '', 'na', ' . ', 'n/a'])
 
-            count = download.shard_wide_csv(in_csv, out_csv, 'commuting_zone')
+            count = preprocess.shard_wide_csv(in_csv, out_csv, 'commuting_zone')
             self.assertEqual(count, 1)
 
             with open(out_csv, 'r', encoding='utf-8') as f:
@@ -114,10 +121,11 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_main_raises_on_missing_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             with self.assertRaises(FileNotFoundError):
-                download.run_pipeline(
-                    output_dir=os.path.join(tmpdir, 'raw'),
+                preprocess.prepare_parallel_shards_and_svp_inputs(
+                    raw_dir=os.path.join(tmpdir, 'raw'),
                     shard_dir=os.path.join(tmpdir, 'out'),
-                    download=False,
+                    sv_output_prefix=os.path.join(tmpdir, 'output', 'output'),
+                    existing_statvar_mcf='',
                 )
 
     def test_extract_csv_from_zip_skips_nested_macosx(self):
@@ -160,7 +168,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     'NA', '.', '52000', '55000', '0.41', '0.006', '150', '41000',
                 ])
 
-            count = download.shard_wide_csv(
+            count = preprocess.shard_wide_csv(
                 in_csv, out_csv, 'tract', max_rows_per_shard=10
             )
             self.assertEqual(count, 2)
@@ -244,7 +252,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
             sv_out_prefix = os.path.join(out_dir, 'output')
             counters_file = os.path.join(counters_dir, 'output_counters.csv')
-            download.prepare_parallel_shards_and_svp_inputs(
+            preprocess.prepare_parallel_shards_and_svp_inputs(
                 raw_dir,
                 shard_dir,
                 sv_out_prefix,

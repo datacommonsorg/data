@@ -24,8 +24,6 @@ from absl import app
 from absl import flags
 from absl import logging
 
-from statvar_imports.opportunity_insights_outcomes import preprocess
-
 FLAGS = flags.FLAGS
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -78,15 +76,6 @@ DEFAULT_SOURCE_FILES = {
         'is_zip': False,
     },
 }
-
-# Re-export preprocess helpers for backwards-compatible imports in tests.
-DATASET_CONFIGS = preprocess.DATASET_CONFIGS
-format_geo_id = preprocess.format_geo_id
-normalize_column_header = preprocess.normalize_column_header
-shard_wide_csv = preprocess.shard_wide_csv
-prepare_parallel_shards_and_svp_inputs = (
-    preprocess.prepare_parallel_shards_and_svp_inputs
-)
 
 
 def discover_latest_urls(page_url: str) -> dict[str, str]:
@@ -207,25 +196,6 @@ def download_all_sources(
         downloaded_csvs.append(target_csv_path)
 
     return downloaded_csvs
-
-
-def run_pipeline(
-    output_dir: str = os.path.join(_MODULE_DIR, 'raw_data'),
-    shard_dir: str = os.path.join(_MODULE_DIR, 'input_files'),
-    sv_output_prefix: str = os.path.join(_MODULE_DIR, 'output', 'output'),
-    download: bool = True,
-    max_rows_per_shard: int = 5_000,
-    source_page_url: str = 'https://opportunityinsights.org/data/',
-) -> None:
-    """Runs download (if enabled) followed by preprocess.prepare_parallel_shards_and_svp_inputs."""
-    if download:
-        download_all_sources(output_dir, source_page_url)
-    preprocess.prepare_parallel_shards_and_svp_inputs(
-        output_dir,
-        shard_dir,
-        sv_output_prefix,
-        rows_per_chunk=max_rows_per_shard,
-    )
 
 
 def main(_):
