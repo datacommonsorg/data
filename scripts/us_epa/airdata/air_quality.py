@@ -16,7 +16,7 @@ Generates cleaned CSV and template MCF files for the EPA AirData.
 
 Usage: python3 air_quality.py [--data_start_year=YYYY] [--data_end_year=YYYY]
 '''
-import csv, os, sys, re, requests, io, zipfile
+import csv, os, re, requests, io, zipfile
 from urllib3.util import Retry
 
 from absl import app
@@ -107,7 +107,7 @@ containedInPlace: C:EPA_AirQuality->County
 # Convert to CamelCase (splitting on non-alphanumeric characters)
 # Example: Parts per million -> PartsPerMillion
 def get_camel_case(s):
-    if not s or s.strip() in ('', '-', '-'):
+    if not s or s.strip() in ('', '-'):
         return ''
     parts = re.split(r'[^a-zA-Z0-9]+', s)
     return ''.join(p.capitalize() for p in parts if p)
@@ -157,18 +157,19 @@ def _make_site_dcid(state_code: str, county_code: str, site_num: str) -> str:
 def _format_site_node(site_number: str, site_info: dict) -> str:
     """Formats an AirQualitySite MCF node."""
     raw_name = site_info.get('name', '')
-    site_name = raw_name.replace('"', r'\"')
+    site_name = raw_name.replace('\\', r'\\').replace('"', r'\"')
     lat = site_info.get('lat', '')
     lon = site_info.get('lon', '')
     site_county = site_info.get('county', '')
     name_prop = f'name: "{site_name}"\n' if site_name else ''
     location_prop = (f'location: [latLong {lat} {lon}]\n'
                      if lat and lon else '')
+    county_prop = f'containedInPlace: {site_county}\n' if site_county else ''
     return (f'Node: dcid:{site_number}\n'
             f'typeOf: dcs:AirQualitySite\n'
             f'{name_prop}'
             f'{location_prop}'
-            f'containedInPlace: {site_county}\n\n')
+            f'{county_prop}\n')
 
 
 def write_sites_mcf(sites_mcf_file_path, sites_dict):
@@ -373,6 +374,7 @@ def main(argv):
         write_tmcf(tmcf_file)
         success = True
     finally:
+        session.close()
         if not success:
             if os.path.exists(csv_tmp_file):
                 os.remove(csv_tmp_file)

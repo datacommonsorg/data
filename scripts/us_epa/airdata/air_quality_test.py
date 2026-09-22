@@ -628,6 +628,46 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 self.assertIn('Node: dcid:epa/010730023\n', content)
                 self.assertNotIn('name:', content)
 
+    def test_site_name_backslash_escaping(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_mcf = os.path.join(tmp_dir, 'sites.mcf')
+            sites_dict = {
+                'epa/010730023': {
+                    'name': r'Station \ Test "Alpha"',
+                    'lat': '33.55',
+                    'lon': '-86.81',
+                    'county': 'dcid:geoId/01073',
+                },
+                'epa/010730024': {
+                    'name': 'Trailing Backslash\\',
+                    'lat': '33.55',
+                    'lon': '-86.81',
+                    'county': 'dcid:geoId/01073',
+                },
+            }
+            write_sites_mcf(test_mcf, sites_dict)
+            with open(test_mcf, 'r') as f:
+                content = f.read()
+                self.assertIn(r'name: "Station \\ Test \"Alpha\""', content)
+                self.assertIn(r'name: "Trailing Backslash\\"', content)
+
+    def test_missing_county_omits_contained_in_place(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_mcf = os.path.join(tmp_dir, 'sites.mcf')
+            sites_dict = {
+                'epa/010730023': {
+                    'name': 'Test Monitor',
+                    'lat': '33.55',
+                    'lon': '-86.81',
+                    'county': '',
+                },
+            }
+            write_sites_mcf(test_mcf, sites_dict)
+            with open(test_mcf, 'r') as f:
+                content = f.read()
+                self.assertIn('Node: dcid:epa/010730023\n', content)
+                self.assertNotIn('containedInPlace:', content)
+
     def test_csv_location_enrichment_from_earlier_record(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_csv = os.path.join(tmp_dir, 'test_csv.csv')
