@@ -109,17 +109,13 @@ def write_csv(filename, reader, output, features, stat_vars):
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         observation_date = filename.split('ACSST5Y')[1][:4]
         valid_columns = {}
-        geo_id_col = 'GEO_ID'
         if reader.fieldnames:
-            for col in reader.fieldnames:
-                if 'GEO_ID' in col:
-                    geo_id_col = col
-                    break
+            reader.fieldnames = [col.strip('\ufeff"') for col in reader.fieldnames]
 
         for row in reader:
 
             # Check if GEO_ID ends with '99999' and ignore it
-            geo_id_val = row.get(geo_id_col, '')
+            geo_id_val = row.get('GEO_ID', '')
             if geo_id_val.endswith('99999'):
                 continue
             if geo_id_val == 'Geography':
@@ -132,9 +128,9 @@ def write_csv(filename, reader, output, features, stat_vars):
                         valid_columns[c] = sv
                 continue
             else:
-                for c in row:
-                    if row[c] is not None and ',' in str(row[c]):
-                        row[c] = str(row[c]).replace(',', '')
+                for c in valid_columns:
+                    if c in row and isinstance(row[c], str) and ',' in row[c]:
+                        row[c] = row[c].replace(',', '')
 
             geo = geo_id_val.split('US')
             if len(geo) < 2 or geo[1] == "":
