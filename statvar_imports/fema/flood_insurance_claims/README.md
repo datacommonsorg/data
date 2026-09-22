@@ -32,7 +32,6 @@ This import automates the ingestion of National Flood Insurance Program (NFIP) r
 | `fema_download.py` | Data downloader supporting direct bulk CSV streaming with automatic API pagination fallback. |
 | `process.py` | High-performance multi-process vectorized processing script transforming raw claims into Data Commons observations. |
 | `validation_config.json` | Operational validation rules and thresholds for ingestion checks. |
-| `golden_data/` | Golden regression verification files (`golden_summary_report.csv`, `golden_observations.csv`). |
 | `test_data/flood_insurance_claims_input.csv` | Sample input claims data for local testing and continuous integration. |
 | `fema_download_test.py` | Mock-isolated unit tests for the download module. |
 | `process_test.py` | Unit tests for aggregation formulas, FIPS zero-padding, and error handling. |
