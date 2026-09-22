@@ -42,9 +42,6 @@ Example file:
 scripts/cdc_prams/
 ├── manifest.json              # Import automation specification (Cloud Batch/Scheduler)
 ├── validation_config.json     # Import validation framework configuration
-├── golden_data/
-│   ├── golden_observations.csv   # Golden place DCIDs for validation
-│   └── golden_summary_report.csv # Golden schema and property summaries
 ├── download.py                # Download utility with retries, timeouts, and headers
 ├── download_input_files.py    # Downloads all 49 state/territory/national PDFs
 ├── process.py                 # Extracts PDF tables with tabula-py and produces CSV/MCF/TMCF
@@ -88,12 +85,4 @@ python3 scripts/cdc_prams/process_test.py
 or via unittest:
 ```bash
 python3 -m unittest scripts/cdc_prams/process_test.py
-```
-
-### Validating Against Goldens
-```bash
-python3 tools/import_validation/validator_goldens.py \
-    --validate_goldens_input=scripts/cdc_prams/output/PRAMS.csv \
-    --validate_goldens=scripts/cdc_prams/golden_data/golden_observations.csv \
-    --goldens_key_property=Geo
 ```
