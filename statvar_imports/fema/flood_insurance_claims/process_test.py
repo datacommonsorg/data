@@ -67,6 +67,25 @@ class ProcessTest(unittest.TestCase):
                          dummy)
         self.assertIsNone(process._resolve_map_path(None, 'observationAbout'))
 
+    def test_load_mappings_missing_file_raises(self):
+        pv_arg = "observationAbout:non_existent_state_file.py"
+        with self.assertRaises(FileNotFoundError):
+            process._load_mappings(pv_arg)
+
+    def test_load_mappings_corrupted_file_raises(self):
+        corrupted = os.path.join(self.test_dir, 'corrupted.py')
+        with open(corrupted, 'w', encoding='utf-8') as f:
+            f.write("invalid python syntax {{{{")
+        pv_arg = f"observationAbout:{corrupted}"
+        with self.assertRaises(RuntimeError):
+            process._load_mappings(pv_arg)
+
+    def test_nonexistent_input_raises_filenotfound(self):
+        with self.assertRaises(FileNotFoundError):
+            process.process_data_vectorized(
+                input_data='non_existent_input_file.csv',
+                output_path=self.output_prefix)
+
     def test_process_data_vectorized_execution(self):
         process.process_data_vectorized(input_data=self.input_file,
                                         output_path=self.output_prefix,
@@ -77,15 +96,13 @@ class ProcessTest(unittest.TestCase):
 
         csv_file = f"{self.output_prefix}.csv"
         tmcf_file = f"{self.output_prefix}.tmcf"
-        mcf_file = f"{self.output_prefix}.mcf"
 
         self.assertTrue(os.path.exists(csv_file))
         self.assertTrue(os.path.exists(tmcf_file))
-        self.assertTrue(os.path.exists(mcf_file))
         self.assertTrue(os.path.exists(self.counters_path))
 
         df = pd.read_csv(csv_file)
-        self.assertGreater(len(df), 0)
+        self.assertEqual(len(df), 346)
         self.assertEqual(list(df.columns), [
             'observationDate', 'observationAbout', 'value',
             'observationPeriod', 'unit', 'variableMeasured'
@@ -93,11 +110,17 @@ class ProcessTest(unittest.TestCase):
 
         with open(self.counters_path, 'r', encoding='utf-8') as f:
             counters_content = f.read()
-        self.assertIn('num_input_rows=99', counters_content)
+        self.assertIn('num_input_rows=5', counters_content)
         self.assertIn(f'num_cleaned_observations={len(df)}', counters_content)
 
         with open(tmcf_file, 'r', encoding='utf-8') as f:
             self.assertIn('Node: E:nfip_output->E0', f.read())
+
+        # Assert regression output against expected test fixture
+        expected_csv = os.path.join(_SCRIPT_DIR, 'test_data',
+                                    'flood_insurance_claims_output.csv')
+        expected_df = pd.read_csv(expected_csv)
+        pd.testing.assert_frame_equal(df, expected_df)
 
     def test_unpadded_fips_and_null_values(self):
         fixture_csv = os.path.join(self.test_dir, 'nulls_fixture.csv')
@@ -158,6 +181,8 @@ class ProcessTest(unittest.TestCase):
                 'censusTract,countyCode,state,dateOfLoss,yearOfLoss,ratedFloodZone,amountPaidOnBuildingClaim,amountPaidOnContentsClaim,policyCount\n'
                 '06079012705,06079,CA,2020-05-10,2020,A,1000.0,500.0,1\n'
                 '06079012705,06079,CA,2020-05-20,2020,UNKNOWN_ZONE,200.0,100.0,1\n'
+                '06079012705,06079,CA,2020-06-15,2020,A,0.0,0.0,1\n'
+                '06079012705,06079,CA,2020-07-01,2020,A,,,1\n'
             )
 
         process.process_data_vectorized(input_data=fixture_csv,
@@ -170,12 +195,12 @@ class ProcessTest(unittest.TestCase):
 
         def _get_val(place, date, period, sv):
             match = df[(df['observationAbout'] == place)
-                       & (df['observationDate'] == date) &
+                       & (df['observationDate'] == str(date)) &
                        (df['observationPeriod'] == period) &
                        (df['variableMeasured'] == sv)]
             return match['value'].iloc[0] if len(match) > 0 else None
 
-        # State-level monthly totals
+        # State-level monthly totals (2020-05)
         self.assertEqual(
             _get_val(
                 'dcid:geoId/06', '2020-05', 'P1M',
@@ -196,6 +221,86 @@ class ProcessTest(unittest.TestCase):
                 'dcid:geoId/06', '2020-05', 'P1M',
                 'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
             ), 1800.0)
+
+        # County-level monthly totals (2020-05)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06079', '2020-05', 'P1M',
+                'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 2.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06079', '2020-05', 'P1M',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent'
+            ), 1200.0)
+
+        # Census tract-level monthly totals (2020-05)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06079012705', '2020-05', 'P1M',
+                'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 2.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06079012705', '2020-05', 'P1M',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent'
+            ), 1200.0)
+
+        # Annual (P1Y) aggregations for 2020 at State, County, and Tract levels
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06', '2020', 'P1Y',
+                'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 4.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06', '2020', 'P1Y',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent'
+            ), 1200.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06079', '2020', 'P1Y',
+                'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 4.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06079012705', '2020', 'P1Y',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent'
+            ), 1200.0)
+
+        # $0.00 claim verification (2020-06: closed without payment)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06', '2020-06', 'P1M',
+                'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 1.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06', '2020-06', 'P1M',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent'
+            ), 0.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06', '2020-06', 'P1M',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 0.0)
+
+        # All-NaN claim amount suppression (2020-07: min_count=1 prevents spurious 0.0)
+        self.assertEqual(
+            _get_val(
+                'dcid:geoId/06', '2020-07', 'P1M',
+                'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ), 1.0)
+        self.assertIsNone(
+            _get_val(
+                'dcid:geoId/06', '2020-07', 'P1M',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent'
+            ))
+        self.assertIsNone(
+            _get_val(
+                'dcid:geoId/06', '2020-07', 'P1M',
+                'dcid:SettlementAmount_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+            ))
 
         # Unknown flood zone preserves zone suffix
         self.assertEqual(

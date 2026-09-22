@@ -66,6 +66,17 @@ class FemaDownloadTest(unittest.TestCase):
                 'Failed to parse the total record count from the response.'):
             fema_download.get_total_records('http://fake-api.com')
 
+    @patch('fema_download.requests.get')
+    def test_get_total_records_zero_raises(self, mock_get):
+        """Test failure when API returns zero total records."""
+        mock_response = MagicMock()
+        mock_response.json.return_value = {'metadata': {'count': 0}}
+        mock_response.raise_for_status.return_value = None
+        mock_get.return_value = mock_response
+        with self.assertRaisesRegex(RuntimeError,
+                                    'Invalid total record count from API: 0'):
+            fema_download.get_total_records('http://fake-api.com')
+
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
@@ -148,7 +159,7 @@ class FemaDownloadTest(unittest.TestCase):
         def mock_download(url, output_folder, **kwargs):
             out_file = os.path.join(output_folder, "FimaNfipClaims.csv")
             with open(out_file, "w", encoding="utf-8") as f:
-                f.write("header1,header2\nval1,val2\n")
+                f.write("dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n")
             return True
 
         mock_download_file.side_effect = mock_download
@@ -158,12 +169,13 @@ class FemaDownloadTest(unittest.TestCase):
             api_url='http://fake-api.com',
             temp_dir=temp_dir,
             bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
-            output_dir=output_dir)
+            output_dir=output_dir,
+            min_bulk_size=10)
         final_filepath = os.path.join(output_dir, 'fema_nfip_claims.csv')
         self.assertTrue(os.path.exists(final_filepath))
         with open(final_filepath, 'r', encoding='utf-8') as f:
             content = f.read()
-        self.assertEqual(content.strip(), "header1,header2\nval1,val2")
+        self.assertEqual(content.strip(), "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA")
         mock_download_file.assert_called_once()
 
     @patch('fema_download.shutil.rmtree')
@@ -178,12 +190,17 @@ class FemaDownloadTest(unittest.TestCase):
             mock_get_total_records.return_value = 2
 
             def side_effect(url, output_folder, **kwargs):
-                if "fake-bulk.com" in url:
+                if url.startswith("http://fake-bulk.com"):
                     return False
                 if "$skip=0" in url:
                     util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
                     with open(util_out, 'wb') as f:
                         f.write(b"headerA,headerB\n1,A\n2,B")
+                    return True
+                elif "$skip=" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n")
                     return True
                 return False
 
@@ -217,7 +234,7 @@ class FemaDownloadTest(unittest.TestCase):
             mock_get_total_records.return_value = 2
 
             def side_effect(url, output_folder, **kwargs):
-                if "fake-bulk.com" in url:
+                if url.startswith("http://fake-bulk.com"):
                     with open(os.path.join(output_folder, "empty.csv"), 'wb') as f:
                         pass
                     return True
@@ -225,6 +242,11 @@ class FemaDownloadTest(unittest.TestCase):
                     util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
                     with open(util_out, 'wb') as f:
                         f.write(b"headerA,headerB\n1,A\n2,B")
+                    return True
+                elif "$skip=" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n")
                     return True
                 return False
 
@@ -237,6 +259,147 @@ class FemaDownloadTest(unittest.TestCase):
                 temp_dir=temp_dir,
                 bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
                 output_dir=output_dir)
+
+            final_filepath = os.path.join(output_dir, 'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_missing_header_fallback(
+            self, mock_get_total_records, mock_download_file, mock_rmtree):
+        """Test that bulk download missing expected header falls back to pagination."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def side_effect(url, output_folder, **kwargs):
+                if url.startswith("http://fake-bulk.com"):
+                    with open(os.path.join(output_folder, "html_error.csv"), 'w') as f:
+                        f.write("<html><body>500 Internal Error</body></html>\n" * 100)
+                    return True
+                if "$skip=0" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n1,A\n2,B")
+                    return True
+                elif "$skip=" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n")
+                    return True
+                return False
+
+            mock_download_file.side_effect = side_effect
+            output_dir = os.path.join(self.test_dir, 'input_file')
+            temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
+
+            fema_download.download_data(
+                api_url='http://fake-api.com',
+                temp_dir=temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=output_dir,
+                min_bulk_size=10)
+
+            final_filepath = os.path.join(output_dir, 'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_too_small_fallback(
+            self, mock_get_total_records, mock_download_file, mock_rmtree):
+        """Test that bulk download below min_size threshold falls back to pagination."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def side_effect(url, output_folder, **kwargs):
+                if url.startswith("http://fake-bulk.com"):
+                    with open(os.path.join(output_folder, "small.csv"), 'w') as f:
+                        f.write("dateOfLoss\n2020\n")  # Only ~16 bytes
+                    return True
+                if "$skip=0" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n1,A\n2,B")
+                    return True
+                elif "$skip=" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n")
+                    return True
+                return False
+
+            mock_download_file.side_effect = side_effect
+            output_dir = os.path.join(self.test_dir, 'input_file')
+            temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
+
+            fema_download.download_data(
+                api_url='http://fake-api.com',
+                temp_dir=temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=output_dir,
+                min_bulk_size=1024)  # requires >= 1 KB
+
+            final_filepath = os.path.join(output_dir, 'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_bulk_truncated_falls_back_to_pagination(
+            self, mock_get_total_records, mock_download_file, mock_rmtree):
+        """Test that bulk download with fewer rows than expected falls back to pagination."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 2
+
+            def side_effect(url, output_folder, **kwargs):
+                if url.startswith("http://fake-bulk.com"):
+                    with open(os.path.join(output_folder, "truncated.csv"), 'w') as f:
+                        f.write("dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n")
+                    return True
+                if "$skip=0" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n1,A\n2,B")
+                    return True
+                elif "$skip=" in url:
+                    util_out = os.path.join(output_folder, "FimaNfipClaims.xlsx")
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n")
+                    return True
+                return False
+
+            mock_download_file.side_effect = side_effect
+            output_dir = os.path.join(self.test_dir, 'input_file')
+            temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
+
+            fema_download.download_data(
+                api_url='http://fake-api.com',
+                temp_dir=temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=output_dir,
+                min_bulk_size=10)
 
             final_filepath = os.path.join(output_dir, 'fema_nfip_claims.csv')
             self.assertTrue(os.path.exists(final_filepath))
@@ -306,6 +469,20 @@ class FemaDownloadTest(unittest.TestCase):
                     api_url='http://fake-api.com',
                     temp_dir=temp_dir,
                     output_dir=output_dir)
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.get_total_records')
+    def test_download_data_zero_total_records_raises_error(
+            self, mock_get_total_records, mock_rmtree):
+        """Test that get_total_records returning 0 causes download_data to fail fast."""
+        mock_get_total_records.return_value = 0
+        output_dir = os.path.join(self.test_dir, 'input_file')
+        temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
+        with self.assertRaises(RuntimeError):
+            fema_download.download_data(
+                api_url='http://fake-api.com',
+                temp_dir=temp_dir,
+                output_dir=output_dir)
 
 
 if __name__ == '__main__':

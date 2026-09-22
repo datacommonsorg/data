@@ -41,8 +41,12 @@ flags.DEFINE_integer(
     'Backoff factor for retry delay (e.g., 2 means delay doubles each time).')
 
 
-def _retry_method(url: str, headers: dict, tries: int, delay: int,
-                  backoff: int) -> requests.Response:
+def _retry_method(url: str,
+                  headers: dict,
+                  tries: int,
+                  delay: int,
+                  backoff: int,
+                  session: requests.Session = None) -> requests.Response:
     """
     Attempts to make a GET request to a URL with retries.
 
@@ -52,6 +56,7 @@ def _retry_method(url: str, headers: dict, tries: int, delay: int,
         tries: Number of times to retry.
         delay: Initial delay between retries.
         backoff: Backoff factor for retry delay.
+        session: Optional persistent requests.Session to reuse connections.
 
     Returns:
         A requests.Response object if the request is successful.
@@ -70,16 +75,17 @@ def _retry_method(url: str, headers: dict, tries: int, delay: int,
                          headers: dict,
                          method: str = 'GET') -> requests.Response:
         logging.info(f"Attempting {method} request to: {url}")
+        req_lib = session if session is not None else requests
         if method == 'HEAD':
-            response = requests.head(url,
-                                     headers=headers,
-                                     allow_redirects=True,
-                                     timeout=10)
-        else:  # Default to GET
-            response = requests.get(url,
+            response = req_lib.head(url,
                                     headers=headers,
-                                    stream=True,
-                                    timeout=30)
+                                    allow_redirects=True,
+                                    timeout=10)
+        else:  # Default to GET
+            response = req_lib.get(url,
+                                   headers=headers,
+                                   stream=True,
+                                   timeout=30)
         response.raise_for_status(
         )  # Raise HTTPError for bad responses (4xx or 5xx)
         return response
@@ -123,7 +129,8 @@ def download_file(url: str,
                   headers: dict = None,
                   tries: int = 3,
                   delay: int = 5,
-                  backoff: int = 2) -> bool:
+                  backoff: int = 2,
+                  session: requests.Session = None) -> bool:
     """
     Downloads file from the URL and saves it to a specified folder.
     The function returns True on success, False on failure.
@@ -138,6 +145,7 @@ def download_file(url: str,
         tries: Number of retry attempts.
         delay: Initial delay for retries.
         backoff: Backoff factor for retries.
+        session: Optional persistent requests.Session to reuse connections.
 
     Returns:
         bool: True if the download (and optional unzip) was successful, False otherwise.
@@ -167,8 +175,9 @@ def download_file(url: str,
         server_last_modified_timestamp = None
 
         # Perform a HEAD request to get headers (Content-Type, Last-Modified)
+        req_lib = session if session is not None else requests
         try:
-            temp_head_response = requests.head(url,
+            temp_head_response = req_lib.head(url,
                                                headers=headers,
                                                allow_redirects=True,
                                                timeout=10)
@@ -250,7 +259,12 @@ def download_file(url: str,
                 return True  # Treat as up-to-date if no server timestamp for comparison
 
         # --- Proceed with download if file doesn't exist or is stale ---
-        response = _retry_method(url, headers, tries, delay, backoff)
+        response = _retry_method(url,
+                                 headers,
+                                 tries,
+                                 delay,
+                                 backoff,
+                                 session=session)
 
         with open(file_path, "wb") as f:
             for chunk in response.iter_content(chunk_size=8192):

@@ -71,11 +71,12 @@ def _resolve_map_path(pv_map_arg: Optional[str],
         for item in items:
             if item.startswith(f"{prefix}:"):
                 path = item.split(':', 1)[1].strip()
-                if os.path.exists(path):
+                if os.path.isabs(path):
                     return path
                 script_dir_path = os.path.join(_SCRIPT_DIR, path)
                 if os.path.exists(script_dir_path):
                     return script_dir_path
+                return path
     return os.path.join(_SCRIPT_DIR, default_name) if default_name else None
 
 
@@ -86,21 +87,37 @@ def _load_mappings(pv_map_arg: Optional[str] = None) -> Tuple[dict, dict]:
     zone_file = _resolve_map_path(pv_map_arg, 'ratedFloodZone',
                                   'us_flood_nfip_floodzone_pv_map.py')
 
-    state_map = {}
-    if state_file and os.path.exists(state_file):
-        logging.info("Loading state codes from: %s", state_file)
+    if not state_file or not os.path.exists(state_file):
+        logging.fatal("State mapping file not found: %s", state_file)
+        raise FileNotFoundError(f"State mapping file not found: {state_file}")
+
+    logging.info("Loading state codes from: %s", state_file)
+    try:
         with open(state_file, 'r', encoding='utf-8') as f:
             state_map = ast.literal_eval(f.read())
+    except Exception as e:
+        logging.fatal("Failed to parse state mapping file %s: %s", state_file, e)
+        raise RuntimeError(
+            f"Failed to parse state mapping file {state_file}: {e}")
 
-    risk_zone_map = {}
-    if zone_file and os.path.exists(zone_file):
-        logging.info("Loading flood zone mappings from: %s", zone_file)
+    if not zone_file or not os.path.exists(zone_file):
+        logging.fatal("Flood zone mapping file not found: %s", zone_file)
+        raise FileNotFoundError(
+            f"Flood zone mapping file not found: {zone_file}")
+
+    logging.info("Loading flood zone mappings from: %s", zone_file)
+    try:
         with open(zone_file, 'r', encoding='utf-8') as f:
             raw_map = ast.literal_eval(f.read())
         risk_zone_map = {
             k: v.get('floodZoneType', '').replace('dcid:', '')
             for k, v in raw_map.items()
         }
+    except Exception as e:
+        logging.fatal("Failed to parse flood zone mapping file %s: %s",
+                      zone_file, e)
+        raise RuntimeError(
+            f"Failed to parse flood zone mapping file {zone_file}: {e}")
 
     return state_map, risk_zone_map
 
@@ -161,7 +178,7 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
     df['county_place'] = county_clean.apply(lambda x: f"dcid:geoId/{x}"
                                             if pd.notna(x) else None)
 
-    df['state_place'] = df['state'].astype(str).str.strip().map(state_map)
+    df['state_place'] = df['state'].astype(str).str.strip().str.upper().map(state_map)
     df['country_place'] = 'dcid:country/USA'
 
     # Temporal entities
@@ -252,17 +269,6 @@ def _write_tmcf(output_path: str):
     logging.info("Wrote template MCF to: %s", tmcf_path)
 
 
-def _write_node_mcf(output_path: str):
-    """Writes the node MCF file atomically."""
-    output_dir = os.path.dirname(output_path)
-    if output_dir:
-        os.makedirs(output_dir, exist_ok=True)
-    mcf_path = f"{output_path}.mcf"
-    temp_mcf = f"{mcf_path}.tmp.{os.getpid()}"
-    with open(temp_mcf, 'w', encoding='utf-8') as f:
-        f.write("# Generated node MCF for USFEMA_FloodInsuranceClaims\n")
-    os.replace(temp_mcf, mcf_path)
-    logging.info("Wrote node MCF to: %s", mcf_path)
 
 
 def _write_counters(counters_path: str, num_input_rows: int,
@@ -288,10 +294,11 @@ def process_data_vectorized(
         output_counters: Optional[str] = 'counters/counters.txt'):
     """Executes the high-performance multi-process vectorized aggregation pipeline."""
     start_time = time.time()
-    if not os.path.isabs(input_data) and not os.path.exists(input_data):
-        alt_input = os.path.join(_SCRIPT_DIR, input_data)
-        if os.path.exists(alt_input):
-            input_data = alt_input
+    if not os.path.isabs(input_data):
+        input_data = os.path.join(_SCRIPT_DIR, input_data)
+    if not os.path.exists(input_data):
+        logging.fatal("Input data file not found: %s", input_data)
+        raise FileNotFoundError(f"Input data file not found: {input_data}")
     if not os.path.isabs(output_path):
         output_path = os.path.join(_SCRIPT_DIR, output_path)
     if output_counters and not os.path.isabs(output_counters):
@@ -307,8 +314,12 @@ def process_data_vectorized(
 
     max_cpus = os.cpu_count() or 1
     workers = num_workers if num_workers is not None else max(1, max_cpus)
-    if chunk_size == 250000 and workers > 8:
-        chunk_size = max(25000, 2750000 // (workers * 2))
+    if chunk_size == 250000 and workers > 1:
+        # Dynamically scale chunk size based on file size to balance worker load
+        # (~200 bytes per record in raw FEMA CSV)
+        file_bytes = os.path.getsize(input_data)
+        est_rows = max(1000, file_bytes // 200)
+        chunk_size = max(5000, min(250000, est_rows // (workers * 2)))
 
     logging.info(
         "Starting parallel processing for: %s (chunk_size=%s, workers=%s)",
@@ -330,8 +341,24 @@ def process_data_vectorized(
                 mp_context=mp_ctx,
                 initializer=_init_worker,
                 initargs=(state_map, risk_zone_map)) as executor:
-            for chunk_idx, (c_len, agg) in enumerate(
-                    executor.map(_process_chunk_worker, reader), 1):
+            max_pending = workers * 2
+            futures = []
+            chunk_idx = 0
+            for chunk in reader:
+                futures.append(executor.submit(_process_chunk_worker, chunk))
+                if len(futures) >= max_pending:
+                    f = futures.pop(0)
+                    chunk_idx += 1
+                    c_len, agg = f.result()
+                    total_rows += c_len
+                    if len(agg) > 0:
+                        chunk_results.append(agg)
+                    logging.info(
+                        "Processed chunk %s in parallel pool (rows read: %s)",
+                        chunk_idx, total_rows)
+            for f in futures:
+                chunk_idx += 1
+                c_len, agg = f.result()
                 total_rows += c_len
                 if len(agg) > 0:
                     chunk_results.append(agg)
@@ -375,9 +402,11 @@ def process_data_vectorized(
     for col, metric, thing, unit, round_digits in statvar_specs:
         sub = final_agg[final_agg[col].notna()].copy()
         if len(sub) > 0:
-            sub['variableMeasured'] = [
-                _make_statvar_name(z, metric, thing) for z in sub['zone']
-            ]
+            unique_zones = sub['zone'].unique()
+            sv_map = {
+                z: _make_statvar_name(z, metric, thing) for z in unique_zones
+            }
+            sub['variableMeasured'] = sub['zone'].map(sv_map)
             if round_digits == 0:
                 sub['value'] = sub[col].round(0).astype('int64').astype(str)
             else:
@@ -418,7 +447,6 @@ def process_data_vectorized(
     logging.info("Wrote cleaned observations to: %s", csv_path)
 
     _write_tmcf(output_path)
-    _write_node_mcf(output_path)
 
     if output_counters:
         _write_counters(output_counters, total_rows, len(out_df))
