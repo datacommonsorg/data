@@ -156,7 +156,8 @@ def _make_site_dcid(state_code: str, county_code: str, site_num: str) -> str:
 
 def _format_site_node(site_number: str, site_info: dict) -> str:
     """Formats an AirQualitySite MCF node."""
-    site_name = site_info.get('name', '')
+    raw_name = site_info.get('name', '')
+    site_name = raw_name.replace('"', r'\"')
     lat = site_info.get('lat', '')
     lon = site_info.get('lon', '')
     site_county = site_info.get('county', '')
@@ -218,7 +219,7 @@ def write_csv(csv_file_path,
             lon = str(observation.get('Longitude', '') or '').strip()
             site_county = f'dcid:geoId/{state_code}{county_code}'
             site_name = (observation.get('Local Site Name') or '').replace(
-                '\r', ' ').replace('\n', ' ').strip().replace('"', r'\"')
+                '\r', ' ').replace('\n', ' ').strip()
 
             if site_number not in local_sites:
                 local_sites[site_number] = {

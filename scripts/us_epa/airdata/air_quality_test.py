@@ -314,6 +314,14 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 mcf_content = f_sites.read()
                 self.assertIn('name: "Multi-line Site \\"Name\\""\n',
                               mcf_content)
+            with open(test_csv, 'r') as f_csv:
+                raw_csv = f_csv.read()
+                self.assertIn('"Multi-line Site ""Name"""', raw_csv)
+                self.assertNotIn('\\"', raw_csv)
+                f_csv.seek(0)
+                rows = list(csv.DictReader(f_csv))
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0]['Site_Name'], 'Multi-line Site "Name"')
 
     def test_seen_sites_whitespace_reloading(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
