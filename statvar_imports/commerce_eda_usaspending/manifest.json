@@ -9,21 +9,25 @@
             "provenance_description": "EDA Investments by Applicant State and Program, dynamically sourced from USASpending.gov.",
             "scripts": [
                 "process.py",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/investment_cleaned.csv --pv_map=investment_pvmap.csv --config_file=investment_metadata.csv --output_path=output/investment_output --output_counters=counters/investment_counters.csv"
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/investment_cleaned.csv --pv_map=investment_pvmap.csv --config_file=investment_metadata.csv --existing_schema_mcf=investment_schema.mcf --output_path=output/investment_output --output_counters=counters/investment_counters.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output/investment_output.tmcf",
                     "cleaned_csv": "output/investment_output.csv",
-                    "node_mcf": "output/*.mcf"
+                    "node_mcf": [
+                        "output/*.mcf",
+                        "investment_schema.mcf"
+                    ]
                 }
             ],
             "source_files": [
                 "counters/*",
                 "golden_data/*.csv",
-                "input_files/investment_cleaned.csv",
+                "input_files/*",
                 "investment_metadata.csv",
                 "investment_pvmap.csv",
+                "investment_schema.mcf",
                 "manifest.json",
                 "validation_config.json"
             ],

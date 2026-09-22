@@ -26,12 +26,11 @@ from absl import logging
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 VALID_STATE_CODES = {
-    "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC",
-    "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS",
-    "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT",
-    "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH",
-    "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT",
-    "VT", "VA", "WA", "WV", "WI", "WY", "VI", "PW", "MH"
+    "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL",
+    "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
+    "NC", "ND", "MP", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN",
+    "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "VI", "PW", "MH"
 }
 
 CFDA_PROGRAMS = {
@@ -85,7 +84,7 @@ def fetch_usaspending_data(start_year,
     if session is None:
         session = get_session()
     url = "https://api.usaspending.gov/api/v2/search/spending_by_award/"
-    all_awards = []
+    unique_awards = {}
 
     for fy in range(start_year, end_year + 1):
         start_date = f"{fy - 1}-10-01"
@@ -106,7 +105,9 @@ def fetch_usaspending_data(start_year,
                         "start_date": start_date,
                         "end_date": end_date
                     }],
-                    "award_type_codes": ["02", "03", "04", "05", "F001", "F002"]
+                    "award_type_codes": [
+                        "02", "03", "04", "05", "F001", "F002"
+                    ]
                 },
                 "fields": [
                     "Award ID", "Start Date", "Award Amount",
@@ -136,7 +137,15 @@ def fetch_usaspending_data(start_year,
             time.sleep(0.2)
 
         logging.info(f"Retrieved {len(fy_awards)} awards for FY {fy}")
-        all_awards.extend(fy_awards)
+        for award in fy_awards:
+            award_id = award.get("generated_internal_id") or award.get(
+                "Award ID")
+            if award_id:
+                unique_awards[award_id] = award
+            else:
+                unique_awards[len(unique_awards)] = award
+
+    all_awards = list(unique_awards.values())
 
     if raw_output_path:
         os.makedirs(os.path.dirname(raw_output_path), exist_ok=True)
@@ -145,17 +154,26 @@ def fetch_usaspending_data(start_year,
             json.dump(all_awards, f, indent=2)
         if os.path.exists(tmp_raw_path) and os.path.getsize(tmp_raw_path) > 0:
             os.replace(tmp_raw_path, raw_output_path)
-            logging.info(f"Saved {len(all_awards)} raw awards to {raw_output_path}")
+            logging.info(
+                f"Saved {len(all_awards)} raw awards to {raw_output_path}")
 
     return all_awards
 
 
 def process_data(awards, start_year, end_year, output_path):
+    unique_awards = {}
+    for a in awards:
+        award_id = a.get("generated_internal_id") or a.get("Award ID")
+        if award_id:
+            unique_awards[award_id] = a
+        else:
+            unique_awards[len(unique_awards)] = a
+
     data_rows = []
     unmapped_cfdas = set()
-    for a in awards:
-        state_code = str(a.get("Place of Performance State Code")
-                         or "").strip().upper()
+    for a in unique_awards.values():
+        state_code = str(a.get("Place of Performance State Code") or
+                         "").strip().upper()
         if not state_code or state_code not in VALID_STATE_CODES:
             continue
 
@@ -195,7 +213,8 @@ def process_data(awards, start_year, end_year, output_path):
     # Filter out non-positive program amounts (e.g. net de-obligations)
     # so that reported Totals are mathematically equal to the sum of published components.
     positive_agg = agg_df[agg_df["Amount"] > 0].copy()
-    positive_agg["Amount"] = positive_agg["Amount"].apply(lambda v: int(round(v)))
+    positive_agg["Amount"] = positive_agg["Amount"].apply(
+        lambda v: int(round(v)))
     positive_agg = positive_agg[positive_agg["Amount"] > 0].copy()
 
     # Calculate Totals from positive components
@@ -237,7 +256,6 @@ def process_data(awards, start_year, end_year, output_path):
     # Format amount as integer string
     final_df["Amount"] = final_df["Amount"].astype(str)
 
-
     final_df = final_df.rename(columns={
         "Category": "State or Territory / EDA Program",
         "Amount": "Value"
@@ -265,8 +283,8 @@ def main(argv):
                                "investment_cleaned.csv")
 
     awards = fetch_usaspending_data(start_year,
-                                   end_year,
-                                   raw_output_path=raw_output_path)
+                                    end_year,
+                                    raw_output_path=raw_output_path)
     logging.info(f"Total awards retrieved: {len(awards)}")
 
     process_data(awards, start_year, end_year, output_path)
@@ -274,4 +292,3 @@ def main(argv):
 
 if __name__ == "__main__":
     app.run(main)
-

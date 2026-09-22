@@ -75,8 +75,8 @@ class TestProcessUSASpending(unittest.TestCase):
         raw_json_path = os.path.join(self.temp_dir.name, "raw_awards.json")
 
         awards = fetch_usaspending_data(start_year=2013,
-                                       end_year=2013,
-                                       raw_output_path=raw_json_path)
+                                        end_year=2013,
+                                        raw_output_path=raw_json_path)
 
         self.assertEqual(len(awards), 2)
         self.assertEqual(awards[0]["Award ID"], "123")
@@ -97,7 +97,6 @@ class TestProcessUSASpending(unittest.TestCase):
 
         with self.assertRaises(requests.exceptions.HTTPError):
             fetch_usaspending_data(start_year=2012, end_year=2014)
-
 
     def test_process_data(self):
         # Mock API award records
@@ -214,10 +213,7 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertTrue(os.path.exists(self.output_csv))
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
-            "Place": [
-                "CA", "CA", "CA", "CA",
-                "CA"
-            ],
+            "Place": ["CA", "CA", "CA", "CA", "CA"],
             "State or Territory / EDA Program": [
                 "Total",
                 "Public Works",
@@ -305,8 +301,9 @@ class TestProcessUSASpending(unittest.TestCase):
         # Total is 1234.6 + 5678.4 = 6913.0 -> 6913
         df_expected = pd.DataFrame({
             "Place": ["TX", "TX", "TX"],
-            "State or Territory / EDA Program":
-            ["Total", "Planning", "Public Works"],
+            "State or Territory / EDA Program": [
+                "Total", "Planning", "Public Works"
+            ],
             "Year": [2022, 2022, 2022],
             "Value": [6913, 5678, 1235],
         })
@@ -462,10 +459,87 @@ class TestProcessUSASpending(unittest.TestCase):
         df_actual = pd.read_csv(self.output_csv)
         self.assertEqual(len(df_actual[df_actual["Year"] == 2024]), 5)
         # Total for 2024 should be 500000 + 250000 + 100000 + 50000 = 900000
-        total_row = df_actual[(df_actual["Year"] == 2024) &
-                              (df_actual["State or Territory / EDA Program"] == "Total")]
+        total_row = df_actual[(df_actual["Year"] == 2024) & (
+            df_actual["State or Territory / EDA Program"] == "Total")]
         self.assertEqual(int(total_row["Value"].iloc[0]), 900000)
 
+    @patch("time.sleep", return_value=None)
+    @patch("requests.Session.post")
+    def test_fetch_usaspending_data_deduplication(self, mock_post, mock_sleep):
+        # Mock FY 2013 returning award "A1" with 100k
+        mock_resp1 = MagicMock()
+        mock_resp1.status_code = 200
+        mock_resp1.json.return_value = {
+            "results": [{
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Start Date": "2012-10-15",
+                "Award Amount": 100000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": False
+            },
+        }
+
+        # Mock FY 2014 returning amendment of award "A1" with updated 120k
+        mock_resp2 = MagicMock()
+        mock_resp2.status_code = 200
+        mock_resp2.json.return_value = {
+            "results": [{
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Start Date": "2012-10-15",
+                "Award Amount": 120000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": False
+            },
+        }
+
+        mock_post.side_effect = [mock_resp1, mock_resp2]
+        awards = fetch_usaspending_data(start_year=2013, end_year=2014)
+
+        # Should be deduplicated to 1 award with the latest amount (120,000)
+        self.assertEqual(len(awards), 1)
+        self.assertEqual(awards[0]["Award ID"], "A1")
+        self.assertEqual(awards[0]["Award Amount"], 120000.0)
+
+    def test_process_data_deduplication(self):
+        # Multiple instances of the same award ID should not double-count
+        mock_awards = [
+            {
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2012-10-15",
+                "Award Amount": 100000.0,
+            },
+            {
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2012-10-15",
+                "Award Amount": 120000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2012,
+            end_year=2015,
+            output_path=self.output_csv,
+        )
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        # Total should be 120000, NOT 220000
+        total_row = df_actual[df_actual["State or Territory / EDA Program"] ==
+                              "Total"]
+        self.assertEqual(int(total_row["Value"].iloc[0]), 120000)
 
 
 if __name__ == "__main__":

@@ -1,17 +1,17 @@
 Place,State or Territory / EDA Program,Year,Value
-AK,Total,2012,13075925
-AK,Total,2013,328155
+AK,Total,2012,7300925
+AK,Total,2013,188155
 AK,Total,2014,2799384
-AK,Total,2015,5207526
-AK,Total,2016,947554
-AK,Total,2017,15131945
-AK,Total,2018,1239418
-AK,Total,2019,2410977
-AK,Total,2020,9009503
-AK,Total,2021,6664966
-AK,Total,2022,72988422
-AK,Total,2023,3552734
-AK,Total,2024,15451254
+AK,Total,2015,1637588
+AK,Total,2016,782377
+AK,Total,2017,4947906
+AK,Total,2018,699418
+AK,Total,2019,2281777
+AK,Total,2020,3601348
+AK,Total,2021,4875443
+AK,Total,2022,39760024
+AK,Total,2023,2982734
+AK,Total,2024,13388066
 AK,Total,2025,1204252
 AK,Total,2026,499874
 AK,Distressed Area Recompete Pilot Program,2024,303408
@@ -19,26 +19,26 @@ AK,Economic Adjustment Assistance,2012,2133425
 AK,Economic Adjustment Assistance,2014,324000
 AK,Economic Adjustment Assistance,2016,326576
 AK,Economic Adjustment Assistance,2017,1109263
-AK,Economic Adjustment Assistance,2020,5249717
+AK,Economic Adjustment Assistance,2020,2799717
 AK,Economic Adjustment Assistance,2021,1000000
-AK,Economic Adjustment Assistance,2022,71178422
-AK,Economic Adjustment Assistance,2023,2982734
-AK,Economic Adjustment Assistance,2024,9872788
+AK,Economic Adjustment Assistance,2022,39057524
+AK,Economic Adjustment Assistance,2023,2682734
+AK,Economic Adjustment Assistance,2024,8384059
 AK,Economic Adjustment Assistance,2025,1059252
 AK,Economic Adjustment Assistance,2026,499874
-AK,Planning,2012,5017500
-AK,Planning,2013,280000
+AK,Planning,2012,1742500
+AK,Planning,2013,140000
 AK,Planning,2014,159800
-AK,Planning,2015,2213600
+AK,Planning,2015,1138600
 AK,Planning,2016,250000
-AK,Planning,2017,9914682
-AK,Planning,2018,720000
+AK,Planning,2017,2942643
+AK,Planning,2018,180000
 AK,Planning,2019,60000
 AK,Planning,2020,210000
-AK,Planning,2021,2261604
-AK,Planning,2022,595000
+AK,Planning,2021,989151
+AK,Planning,2022,297500
 AK,Planning,2023,210000
-AK,Planning,2024,1215000
+AK,Planning,2024,1140000
 AK,Planning,2025,145000
 AK,Public Works,2012,2800000
 AK,Public Works,2014,2315584
@@ -46,29 +46,29 @@ AK,Public Works,2018,519418
 AK,Public Works,2019,2144677
 AK,Public Works,2021,2028704
 AK,Public Works,2024,3061140
-AK,Regional Innovation Strategies,2020,3549786
-AK,Regional Technology and Innovation Hubs,2024,998918
-AK,STEM Talent Challenge,2021,775605
-AK,Technical Assistance,2012,3125000
+AK,Regional Innovation Strategies,2020,591631
+AK,Regional Technology and Innovation Hubs,2024,499459
+AK,STEM Talent Challenge,2021,258535
+AK,Technical Assistance,2012,625000
 AK,Technical Assistance,2013,48155
-AK,Technical Assistance,2015,2993926
-AK,Technical Assistance,2016,370978
-AK,Technical Assistance,2017,4108000
-AK,Technical Assistance,2019,206300
+AK,Technical Assistance,2015,498988
+AK,Technical Assistance,2016,205801
+AK,Technical Assistance,2017,896000
+AK,Technical Assistance,2019,77100
 AK,Technical Assistance,2021,599053
-AK,Technical Assistance,2022,1215000
-AK,Technical Assistance,2023,360000
-AL,Total,2012,4159800
+AK,Technical Assistance,2022,405000
+AK,Technical Assistance,2023,90000
+AL,Total,2012,1587960
 AL,Total,2013,7018395
 AL,Total,2014,2471320
 AL,Total,2015,4095340
-AL,Total,2016,10999910
-AL,Total,2017,7612648
-AL,Total,2018,5894592
+AL,Total,2016,9226910
+AL,Total,2017,2130378
+AL,Total,2018,1974305
 AL,Total,2019,284500
-AL,Total,2020,7596739
-AL,Total,2021,1969944
-AL,Total,2022,29190461
+AL,Total,2020,5996739
+AL,Total,2021,1347486
+AL,Total,2022,24463901
 AL,Total,2023,4927240
 AL,Total,2024,4122744
 AL,Total,2025,20239066
@@ -77,17 +77,17 @@ AL,Economic Adjustment Assistance,2013,6076100
 AL,Economic Adjustment Assistance,2014,1376320
 AL,Economic Adjustment Assistance,2015,3087340
 AL,Economic Adjustment Assistance,2016,5786817
-AL,Economic Adjustment Assistance,2020,6299739
-AL,Economic Adjustment Assistance,2022,22577743
+AL,Economic Adjustment Assistance,2020,4699739
+AL,Economic Adjustment Assistance,2022,21577743
 AL,Economic Adjustment Assistance,2023,1229560
 AL,Planning,2012,945000
 AL,Planning,2014,1045000
 AL,Planning,2015,1008000
-AL,Planning,2016,606000
+AL,Planning,2016,333000
 AL,Planning,2017,1050000
 AL,Planning,2018,1050000
 AL,Planning,2020,1297000
-AL,Planning,2021,1669944
+AL,Planning,2021,1047486
 AL,Planning,2023,1260000
 AL,Planning,2024,980000
 AL,Public Works,2013,942295
@@ -95,38 +95,38 @@ AL,Public Works,2016,2607093
 AL,Public Works,2022,1680500
 AL,Public Works,2023,2437680
 AL,Public Works,2024,2642744
-AL,Regional Innovation Strategies,2022,3288110
+AL,Regional Innovation Strategies,2022,657622
 AL,Regional Technology and Innovation Hubs,2024,500000
-AL,STEM Talent Challenge,2022,657546
-AL,Technical Assistance,2012,3214800
+AL,STEM Talent Challenge,2022,219182
+AL,Technical Assistance,2012,642960
 AL,Technical Assistance,2014,50000
-AL,Technical Assistance,2016,2000000
-AL,Technical Assistance,2017,6562648
-AL,Technical Assistance,2018,4844592
+AL,Technical Assistance,2016,500000
+AL,Technical Assistance,2017,1080378
+AL,Technical Assistance,2018,924305
 AL,Technical Assistance,2019,284500
 AL,Technical Assistance,2021,300000
-AL,Technical Assistance,2022,986562
+AL,Technical Assistance,2022,328854
 AR,Total,2012,5460000
-AR,Total,2013,4034333
+AR,Total,2013,1572065
 AR,Total,2014,13331646
 AR,Total,2015,3900000
-AR,Total,2016,9645268
-AR,Total,2017,4487063
-AR,Total,2018,7931243
-AR,Total,2019,2305208
-AR,Total,2020,6080000
-AR,Total,2022,9781756
-AR,Total,2023,2149600
-AR,Total,2024,18693923
+AR,Total,2016,7484400
+AR,Total,2017,2487063
+AR,Total,2018,1419460
+AR,Total,2019,576302
+AR,Total,2020,5480000
+AR,Total,2022,6863985
+AR,Total,2023,1914800
+AR,Total,2024,18173923
 AR,Total,2026,390000
 AR,Distressed Area Recompete Pilot Program,2024,495000
 AR,Economic Adjustment Assistance,2012,4500000
 AR,Economic Adjustment Assistance,2013,310000
 AR,Economic Adjustment Assistance,2014,8298116
 AR,Economic Adjustment Assistance,2015,2500000
-AR,Economic Adjustment Assistance,2016,6827542
-AR,Economic Adjustment Assistance,2020,4400000
-AR,Economic Adjustment Assistance,2022,8481756
+AR,Economic Adjustment Assistance,2016,6166674
+AR,Economic Adjustment Assistance,2020,3800000
+AR,Economic Adjustment Assistance,2022,5563985
 AR,Economic Adjustment Assistance,2024,13165402
 AR,Economic Adjustment Assistance,2026,390000
 AR,Planning,2013,306309
@@ -134,7 +134,7 @@ AR,Planning,2014,1260000
 AR,Planning,2015,150000
 AR,Planning,2017,1680000
 AR,Planning,2020,1680000
-AR,Planning,2023,2149600
+AR,Planning,2023,1914800
 AR,Public Works,2012,960000
 AR,Public Works,2013,135000
 AR,Public Works,2014,3773530
@@ -143,59 +143,2502 @@ AR,Public Works,2016,817726
 AR,Public Works,2022,1300000
 AR,Public Works,2024,3500000
 AR,STEM Talent Challenge,2024,493521
-AR,Technical Assistance,2013,3283024
-AR,Technical Assistance,2016,2000000
-AR,Technical Assistance,2017,2807063
-AR,Technical Assistance,2018,7931243
-AR,Technical Assistance,2019,2305208
-AR,Technical Assistance,2024,1040000
-AS,Total,2017,156000
-AS,Total,2019,300000
+AR,Technical Assistance,2013,820756
+AR,Technical Assistance,2016,500000
+AR,Technical Assistance,2017,807063
+AR,Technical Assistance,2018,1419460
+AR,Technical Assistance,2019,576302
+AR,Technical Assistance,2024,520000
+AS,Total,2017,78000
+AS,Total,2019,100000
 AS,Total,2022,1000000
 AS,Total,2024,728134
 AS,Economic Adjustment Assistance,2022,1000000
 AS,Economic Adjustment Assistance,2024,728134
-AS,Planning,2017,156000
-AS,Technical Assistance,2019,300000
-AZ,Total,2012,6520048
-AZ,Total,2013,2321864
+AS,Planning,2017,78000
+AS,Technical Assistance,2019,100000
+AZ,Total,2012,5150048
+AZ,Total,2013,1121864
 AZ,Total,2014,3041300
-AZ,Total,2015,4760206
+AZ,Total,2015,2980718
 AZ,Total,2016,3706716
-AZ,Total,2017,7483654
-AZ,Total,2018,1270000
-AZ,Total,2019,3968846
-AZ,Total,2020,4387100
-AZ,Total,2021,2898434
+AZ,Total,2017,2073991
+AZ,Total,2018,310000
+AZ,Total,2019,1119649
+AZ,Total,2020,2487100
+AZ,Total,2021,1545742
+AZ,Total,2022,21711463
+AZ,Total,2023,1225000
+AZ,Total,2024,6230271
+AZ,Total,2025,5638731
+AZ,Total,2026,5483656
+AZ,Distressed Area Recompete Pilot Program,2024,499950
+AZ,Economic Adjustment Assistance,2012,4135648
+AZ,Economic Adjustment Assistance,2013,371864
+AZ,Economic Adjustment Assistance,2014,75000
+AZ,Economic Adjustment Assistance,2016,300000
+AZ,Economic Adjustment Assistance,2020,1800000
+AZ,Economic Adjustment Assistance,2021,1066346
+AZ,Economic Adjustment Assistance,2022,19708812
+AZ,Economic Adjustment Assistance,2023,705000
+AZ,Economic Adjustment Assistance,2024,943437
+AZ,Economic Adjustment Assistance,2025,5638731
+AZ,Planning,2012,922000
+AZ,Planning,2013,350000
+AZ,Planning,2014,60000
+AZ,Planning,2015,770900
+AZ,Planning,2016,94216
+AZ,Planning,2017,1090289
+AZ,Planning,2018,310000
+AZ,Planning,2019,70000
+AZ,Planning,2020,660000
+AZ,Planning,2021,180000
+AZ,Planning,2022,210000
+AZ,Planning,2023,450000
+AZ,Planning,2024,225000
+AZ,Public Works,2014,2906300
+AZ,Public Works,2015,1600074
+AZ,Public Works,2016,3000000
+AZ,Public Works,2024,3992613
 AZ,Public Works,2026,5483656
+AZ,Regional Innovation Strategies,2022,1047990
+AZ,Regional Technology and Innovation Hubs,2024,499271
+AZ,STEM Talent Challenge,2022,247517
+AZ,Technical Assistance,2012,92400
+AZ,Technical Assistance,2013,400000
+AZ,Technical Assistance,2015,609744
+AZ,Technical Assistance,2016,312500
+AZ,Technical Assistance,2017,983702
+AZ,Technical Assistance,2019,1049649
+AZ,Technical Assistance,2020,27100
+AZ,Technical Assistance,2021,299396
+AZ,Technical Assistance,2022,497144
+AZ,Technical Assistance,2023,70000
+AZ,Technical Assistance,2024,70000
+CA,Total,2012,18160327
+CA,Total,2013,15459831
+CA,Total,2014,8182003
+CA,Total,2015,19473240
+CA,Total,2016,19249881
+CA,Total,2017,6301668
+CA,Total,2018,3609093
+CA,Total,2019,3585979
+CA,Total,2020,10939824
+CA,Total,2021,7650679
+CA,Total,2022,94081757
+CA,Total,2023,39905971
+CA,Total,2024,6958808
+CA,Total,2025,3896000
+CA,Total,2026,9511123
+CA,Distressed Area Recompete Pilot Program,2024,499400
+CA,Economic Adjustment Assistance,2012,9260337
+CA,Economic Adjustment Assistance,2013,4379490
+CA,Economic Adjustment Assistance,2014,1985432
+CA,Economic Adjustment Assistance,2015,3948097
+CA,Economic Adjustment Assistance,2016,1949194
+CA,Economic Adjustment Assistance,2019,580000
+CA,Economic Adjustment Assistance,2020,8138595
+CA,Economic Adjustment Assistance,2021,988712
+CA,Economic Adjustment Assistance,2022,86207517
+CA,Economic Adjustment Assistance,2023,16324817
+CA,Economic Adjustment Assistance,2024,4841547
+CA,Economic Adjustment Assistance,2025,600000
 CA,Economic Adjustment Assistance,2026,2267800
-CA,Science and Research Park Development Grants,2015,3489631
+CA,Planning,2012,856001
+CA,Planning,2013,166550
+CA,Planning,2014,180000
+CA,Planning,2015,890000
+CA,Planning,2016,58736
+CA,Planning,2017,1983300
+CA,Planning,2018,184215
+CA,Planning,2020,360000
+CA,Planning,2021,222451
+CA,Planning,2022,1025818
+CA,Planning,2023,360000
+CA,Planning,2024,195000
+CA,Planning,2025,621000
+CA,Public Works,2012,6748731
+CA,Public Works,2013,10516954
+CA,Public Works,2014,5620500
+CA,Public Works,2015,12952826
+CA,Public Works,2016,15026526
+CA,Public Works,2021,2664550
+CA,Public Works,2022,2429910
+CA,Public Works,2023,16097607
+CA,Public Works,2025,2400000
 CA,Public Works,2026,7243323
+CA,Regional Innovation Strategies,2017,497706
+CA,Regional Innovation Strategies,2019,655929
+CA,Regional Innovation Strategies,2021,264502
+CA,Regional Innovation Strategies,2022,1329492
+CA,Regional Innovation Strategies,2023,4349999
+CA,Regional Technology and Innovation Hubs,2024,926168
+CA,Research and National Technical Assistance,2016,437015
+CA,Research and National Technical Assistance,2017,594802
+CA,Research and National Technical Assistance,2021,500000
+CA,STEM Talent Challenge,2024,496693
+CA,Science and Research Park Development Grants,2015,998272
+CA,Technical Assistance,2012,1295258
+CA,Technical Assistance,2013,396837
+CA,Technical Assistance,2014,396071
+CA,Technical Assistance,2015,684045
+CA,Technical Assistance,2016,75000
+CA,Technical Assistance,2017,2044855
+CA,Technical Assistance,2018,2050967
+CA,Technical Assistance,2019,1048930
+CA,Technical Assistance,2020,1050000
+CA,Technical Assistance,2021,1592297
+CA,Technical Assistance,2022,1669000
+CA,Technical Assistance,2023,140000
 CA,Technical Assistance,2025,275000
-CA,Trade Adjustment Assistance for Firms,2023,7900644
+CA,Trade Adjustment Assistance for Firms,2016,1703410
+CA,Trade Adjustment Assistance for Firms,2017,1181005
+CA,Trade Adjustment Assistance for Firms,2018,1373911
+CA,Trade Adjustment Assistance for Firms,2019,1301120
+CA,Trade Adjustment Assistance for Firms,2020,1391229
+CA,Trade Adjustment Assistance for Firms,2021,1418167
+CA,Trade Adjustment Assistance for Firms,2022,1420020
+CA,Trade Adjustment Assistance for Firms,2023,2633548
+CO,Total,2012,315534
+CO,Total,2013,1248115
+CO,Total,2014,1164626
+CO,Total,2015,2966215
+CO,Total,2016,5471352
+CO,Total,2017,1526818
+CO,Total,2018,1536059
+CO,Total,2019,3695371
+CO,Total,2020,4694695
+CO,Total,2021,2552399
+CO,Total,2022,13746036
+CO,Total,2023,5646127
+CO,Total,2024,1455680
+CO,Total,2025,15783772
+CO,Economic Adjustment Assistance,2014,722643
+CO,Economic Adjustment Assistance,2015,1257800
+CO,Economic Adjustment Assistance,2016,734080
+CO,Economic Adjustment Assistance,2019,136156
+CO,Economic Adjustment Assistance,2020,2675651
+CO,Economic Adjustment Assistance,2021,500000
+CO,Economic Adjustment Assistance,2022,10745047
+CO,Economic Adjustment Assistance,2024,593240
+CO,Economic Adjustment Assistance,2025,4298386
+CO,Planning,2012,112576
+CO,Planning,2013,900350
+CO,Planning,2014,315300
+CO,Planning,2015,50000
+CO,Planning,2016,1463500
+CO,Planning,2017,214433
+CO,Planning,2018,53000
+CO,Planning,2019,783000
+CO,Planning,2020,735000
+CO,Planning,2021,335426
+CO,Planning,2022,730500
+CO,Planning,2023,630000
+CO,Planning,2024,363000
+CO,Planning,2025,363000
+CO,Public Works,2015,1630915
+CO,Public Works,2016,1031960
+CO,Regional Innovation Strategies,2022,748624
 CO,Regional Innovation Strategies,2023,2294247
 CO,Regional Technology and Innovation Hubs,2025,11122386
-CO,Trade Adjustment Assistance for Firms,2023,8089744
-DC,Research and National Technical Assistance,2022,3732508
-FL,Science and Research Park Development Grants,2015,581200
+CO,Research and National Technical Assistance,2012,132958
+CO,Technical Assistance,2012,70000
+CO,Technical Assistance,2013,347765
+CO,Technical Assistance,2014,126683
+CO,Technical Assistance,2015,27500
+CO,Technical Assistance,2016,499720
+CO,Technical Assistance,2017,150000
+CO,Technical Assistance,2019,1557684
+CO,Technical Assistance,2020,20000
+CO,Technical Assistance,2021,355000
+CO,Technical Assistance,2023,25298
+CO,Technical Assistance,2024,499440
+CO,Trade Adjustment Assistance for Firms,2016,1742092
+CO,Trade Adjustment Assistance for Firms,2017,1162385
+CO,Trade Adjustment Assistance for Firms,2018,1483059
+CO,Trade Adjustment Assistance for Firms,2019,1218531
+CO,Trade Adjustment Assistance for Firms,2020,1264044
+CO,Trade Adjustment Assistance for Firms,2021,1361973
+CO,Trade Adjustment Assistance for Firms,2022,1521865
+CO,Trade Adjustment Assistance for Firms,2023,2696582
+CT,Total,2012,1391850
+CT,Total,2013,330909
+CT,Total,2014,3432273
+CT,Total,2015,1073594
+CT,Total,2016,1327551
+CT,Total,2017,445176
+CT,Total,2019,633100
+CT,Total,2020,1500000
+CT,Total,2021,697910
+CT,Total,2022,25900442
+CT,Total,2023,210000
+CT,Total,2024,372864
+CT,Total,2025,210000
+CT,Economic Adjustment Assistance,2012,367600
+CT,Economic Adjustment Assistance,2014,170742
+CT,Economic Adjustment Assistance,2020,1500000
+CT,Economic Adjustment Assistance,2022,25430442
+CT,Economic Adjustment Assistance,2024,162864
+CT,Planning,2012,60000
+CT,Planning,2013,330909
+CT,Planning,2014,420000
+CT,Planning,2016,330000
+CT,Planning,2017,445176
+CT,Planning,2019,530000
+CT,Planning,2021,210000
+CT,Planning,2022,470000
+CT,Planning,2023,210000
+CT,Planning,2024,210000
+CT,Planning,2025,210000
+CT,Public Works,2012,964250
+CT,Public Works,2014,2841531
+CT,Public Works,2015,1073594
+CT,Technical Assistance,2016,997551
+CT,Technical Assistance,2019,103100
+CT,Technical Assistance,2021,487910
+DC,Total,2012,1000000
+DC,Total,2013,2400613
+DC,Total,2014,690700
+DC,Total,2015,300000
+DC,Total,2016,1273263
+DC,Total,2017,2295022
+DC,Total,2018,75000
+DC,Total,2019,2508418
+DC,Total,2020,495479
+DC,Total,2021,2020663
+DC,Total,2022,8243259
+DC,Total,2024,495630
+DC,Economic Adjustment Assistance,2012,1000000
+DC,Economic Adjustment Assistance,2015,300000
+DC,Economic Adjustment Assistance,2016,388530
+DC,Economic Adjustment Assistance,2022,6244578
+DC,Planning,2013,400613
+DC,Public Works,2013,2000000
+DC,Research and National Technical Assistance,2014,360000
+DC,Research and National Technical Assistance,2016,599715
+DC,Research and National Technical Assistance,2017,1360260
+DC,Research and National Technical Assistance,2019,898897
+DC,Research and National Technical Assistance,2022,1866254
+DC,Technical Assistance,2014,330700
+DC,Technical Assistance,2016,285018
+DC,Technical Assistance,2017,934762
+DC,Technical Assistance,2018,75000
+DC,Technical Assistance,2019,1609521
+DC,Technical Assistance,2020,495479
+DC,Technical Assistance,2021,2020663
+DC,Technical Assistance,2022,132427
+DC,Technical Assistance,2024,495630
+DE,Total,2016,1100234
+DE,Total,2020,300000
+DE,Total,2021,2718909
+DE,Total,2022,760812
+DE,Economic Adjustment Assistance,2016,516899
+DE,Economic Adjustment Assistance,2020,300000
+DE,Economic Adjustment Assistance,2021,742916
+DE,Economic Adjustment Assistance,2022,760812
+DE,Technical Assistance,2016,583335
+DE,Technical Assistance,2021,1975993
+FL,Total,2012,5230217
+FL,Total,2013,1334000
+FL,Total,2014,3420257
+FL,Total,2015,13002456
+FL,Total,2016,5305649
+FL,Total,2017,2819114
+FL,Total,2018,1615237
+FL,Total,2019,1050000
+FL,Total,2020,6069987
+FL,Total,2021,630000
+FL,Total,2022,97060917
+FL,Total,2023,12361217
+FL,Total,2024,34222502
+FL,Total,2025,19778161
+FL,Total,2026,13920000
+FL,Distressed Area Recompete Pilot Program,2024,499923
+FL,Economic Adjustment Assistance,2012,2520257
+FL,Economic Adjustment Assistance,2013,900000
+FL,Economic Adjustment Assistance,2015,9500000
+FL,Economic Adjustment Assistance,2016,344508
+FL,Economic Adjustment Assistance,2020,4599987
+FL,Economic Adjustment Assistance,2022,94079056
+FL,Economic Adjustment Assistance,2023,6336099
+FL,Economic Adjustment Assistance,2024,29496747
+FL,Economic Adjustment Assistance,2025,3500000
+FL,Economic Adjustment Assistance,2026,13920000
+FL,Planning,2012,567000
+FL,Planning,2014,1512000
+FL,Planning,2015,567000
+FL,Planning,2017,1470000
+FL,Planning,2018,632000
+FL,Planning,2020,1470000
+FL,Planning,2021,630000
+FL,Planning,2023,1470000
+FL,Planning,2024,630000
+FL,Public Works,2012,1500000
+FL,Public Works,2013,364000
+FL,Public Works,2014,1850000
+FL,Public Works,2015,895000
+FL,Public Works,2016,3611512
+FL,Public Works,2022,399870
+FL,Public Works,2023,1830207
+FL,Regional Innovation Strategies,2022,1924283
+FL,Regional Innovation Strategies,2023,2724911
+FL,Regional Technology and Innovation Hubs,2024,3200000
 FL,Regional Technology and Innovation Hubs,2025,16278161
+FL,Research and National Technical Assistance,2016,749630
 FL,STEM Talent Challenge,2024,323832
-GA,Science and Research Park Development Grants,2015,1114542
+FL,Science and Research Park Development Grants,2015,290600
+FL,Technical Assistance,2012,642960
+FL,Technical Assistance,2013,70000
+FL,Technical Assistance,2014,58257
+FL,Technical Assistance,2015,1749856
+FL,Technical Assistance,2016,599999
+FL,Technical Assistance,2017,1349114
+FL,Technical Assistance,2018,983237
+FL,Technical Assistance,2019,1050000
+FL,Technical Assistance,2022,657708
+FL,Technical Assistance,2024,72000
+FM,Total,2016,25000
+FM,Technical Assistance,2016,25000
+GA,Total,2012,6126061
+GA,Total,2013,3114121
+GA,Total,2014,6312850
+GA,Total,2015,2846802
+GA,Total,2016,6997720
+GA,Total,2017,5059066
+GA,Total,2018,1453456
+GA,Total,2019,1945474
+GA,Total,2020,7585692
+GA,Total,2021,2050393
+GA,Total,2022,30906784
+GA,Total,2023,9795477
+GA,Total,2024,22219422
+GA,Total,2025,2130000
+GA,Total,2026,400000
+GA,Distressed Area Recompete Pilot Program,2024,500000
+GA,Economic Adjustment Assistance,2013,3061621
+GA,Economic Adjustment Assistance,2014,1207723
+GA,Economic Adjustment Assistance,2015,750000
+GA,Economic Adjustment Assistance,2016,2922513
+GA,Economic Adjustment Assistance,2020,4669132
+GA,Economic Adjustment Assistance,2021,300000
+GA,Economic Adjustment Assistance,2022,24879935
+GA,Economic Adjustment Assistance,2023,3294472
+GA,Economic Adjustment Assistance,2024,17987491
+GA,Economic Adjustment Assistance,2025,1500000
+GA,Economic Adjustment Assistance,2026,400000
+GA,Planning,2012,189000
+GA,Planning,2013,52500
+GA,Planning,2014,1653500
+GA,Planning,2015,50000
+GA,Planning,2016,679000
+GA,Planning,2017,1695000
+GA,Planning,2018,210000
+GA,Planning,2019,630000
+GA,Planning,2020,1695000
+GA,Planning,2021,210000
+GA,Planning,2022,840000
+GA,Planning,2023,1695000
+GA,Planning,2024,210000
+GA,Planning,2025,630000
+GA,Public Works,2012,5246501
+GA,Public Works,2014,3282257
+GA,Public Works,2015,1575288
+GA,Public Works,2016,1250000
+GA,Public Works,2022,1927012
+GA,Public Works,2023,1150980
+GA,Public Works,2024,2942483
+GA,Regional Innovation Strategies,2022,1271991
 GA,Regional Innovation Strategies,2023,1141700
+GA,Research and National Technical Assistance,2012,47600
 GA,STEM Talent Challenge,2024,500000
-GA,Trade Adjustment Assistance for Firms,2023,7539974
+GA,Science and Research Park Development Grants,2015,371514
+GA,Technical Assistance,2012,642960
+GA,Technical Assistance,2014,169370
+GA,Technical Assistance,2015,100000
+GA,Technical Assistance,2016,249981
+GA,Technical Assistance,2017,2040714
+GA,Technical Assistance,2019,21900
+GA,Technical Assistance,2021,292023
+GA,Technical Assistance,2022,657708
+GA,Technical Assistance,2024,79448
+GA,Trade Adjustment Assistance for Firms,2016,1896226
+GA,Trade Adjustment Assistance for Firms,2017,1323352
+GA,Trade Adjustment Assistance for Firms,2018,1243456
+GA,Trade Adjustment Assistance for Firms,2019,1293574
+GA,Trade Adjustment Assistance for Firms,2020,1221560
+GA,Trade Adjustment Assistance for Firms,2021,1248370
+GA,Trade Adjustment Assistance for Firms,2022,1330138
+GA,Trade Adjustment Assistance for Firms,2023,2513325
+GU,Total,2016,2000000
+GU,Total,2021,4289738
+GU,Total,2022,2220410
+GU,Total,2026,233323
+GU,Economic Adjustment Assistance,2016,2000000
+GU,Economic Adjustment Assistance,2021,4289738
+GU,Economic Adjustment Assistance,2022,2220410
+GU,Economic Adjustment Assistance,2026,233323
+HI,Total,2012,8955600
+HI,Total,2013,189745
+HI,Total,2014,5940250
+HI,Total,2015,98800
+HI,Total,2016,668000
+HI,Total,2017,711906
+HI,Total,2018,360000
+HI,Total,2019,520000
+HI,Total,2020,385000
+HI,Total,2021,1435000
+HI,Total,2022,25539776
+HI,Total,2025,1069999
+HI,Economic Adjustment Assistance,2012,2537000
+HI,Economic Adjustment Assistance,2014,252000
+HI,Economic Adjustment Assistance,2016,75000
+HI,Economic Adjustment Assistance,2020,300000
+HI,Economic Adjustment Assistance,2021,750000
+HI,Economic Adjustment Assistance,2022,25004776
+HI,Economic Adjustment Assistance,2025,999999
+HI,Planning,2012,88365
+HI,Planning,2013,189745
+HI,Planning,2015,98800
+HI,Planning,2016,93000
+HI,Planning,2017,93000
+HI,Planning,2018,85000
+HI,Planning,2019,85000
+HI,Planning,2020,85000
+HI,Planning,2021,85000
+HI,Planning,2022,85000
+HI,Planning,2025,70000
+HI,Public Works,2012,5416000
+HI,Public Works,2014,5688250
+HI,STEM Talent Challenge,2021,300000
+HI,Technical Assistance,2012,914235
+HI,Technical Assistance,2016,500000
+HI,Technical Assistance,2017,618906
+HI,Technical Assistance,2018,275000
+HI,Technical Assistance,2019,435000
+HI,Technical Assistance,2021,300000
+HI,Technical Assistance,2022,450000
+IA,Total,2012,2150000
+IA,Total,2013,6242051
+IA,Total,2014,1069975
+IA,Total,2015,1239808
+IA,Total,2016,4276493
+IA,Total,2018,1021569
+IA,Total,2019,2395000
+IA,Total,2020,7378602
+IA,Total,2021,986199
+IA,Total,2022,9665004
+IA,Total,2023,1985000
+IA,Total,2024,6174150
+IA,Total,2025,1532120
+IA,Economic Adjustment Assistance,2013,3409699
+IA,Economic Adjustment Assistance,2014,179475
+IA,Economic Adjustment Assistance,2016,800000
+IA,Economic Adjustment Assistance,2020,6188602
+IA,Economic Adjustment Assistance,2022,8392504
+IA,Economic Adjustment Assistance,2023,725000
+IA,Economic Adjustment Assistance,2024,3013183
+IA,Planning,2012,30000
+IA,Planning,2013,1178300
+IA,Planning,2014,890500
+IA,Planning,2015,192000
+IA,Planning,2016,3400199
+IA,Planning,2018,315000
+IA,Planning,2019,1050000
+IA,Planning,2020,1190000
+IA,Planning,2021,558825
+IA,Planning,2022,1272500
+IA,Planning,2023,1260000
+IA,Planning,2024,630000
+IA,Public Works,2012,2095000
+IA,Public Works,2015,1000308
+IA,Public Works,2024,1983492
+IA,Public Works,2025,1532120
+IA,Research and National Technical Assistance,2012,25000
+IA,Technical Assistance,2013,1654052
+IA,Technical Assistance,2015,47500
+IA,Technical Assistance,2016,76294
+IA,Technical Assistance,2018,706569
+IA,Technical Assistance,2019,1345000
+IA,Technical Assistance,2021,427374
+IA,Technical Assistance,2024,547475
+ID,Total,2012,2773496
+ID,Total,2013,1521000
+ID,Total,2014,210000
+ID,Total,2015,1066050
+ID,Total,2016,1376091
+ID,Total,2017,2978940
+ID,Total,2018,180000
+ID,Total,2019,675607
+ID,Total,2020,2557918
+ID,Total,2021,2819791
+ID,Total,2022,16799538
+ID,Total,2024,7265440
+ID,Total,2025,5405242
+ID,Economic Adjustment Assistance,2012,403806
+ID,Economic Adjustment Assistance,2014,210000
+ID,Economic Adjustment Assistance,2020,2557918
+ID,Economic Adjustment Assistance,2021,850000
+ID,Economic Adjustment Assistance,2022,15314538
+ID,Economic Adjustment Assistance,2024,2548000
+ID,Economic Adjustment Assistance,2025,1731832
+ID,Planning,2012,1744690
+ID,Planning,2015,1047300
+ID,Planning,2017,2332100
+ID,Planning,2018,180000
+ID,Planning,2021,469791
+ID,Planning,2022,1110000
+ID,Planning,2024,195000
+ID,Planning,2025,675000
+ID,Public Works,2013,1521000
+ID,Public Works,2016,1376091
+ID,Public Works,2024,4057560
+ID,Public Works,2025,2998410
+ID,Regional Technology and Innovation Hubs,2024,464880
+ID,Technical Assistance,2012,625000
+ID,Technical Assistance,2015,18750
+ID,Technical Assistance,2017,646840
+ID,Technical Assistance,2019,675607
+ID,Technical Assistance,2021,1500000
+ID,Technical Assistance,2022,375000
+IL,Total,2012,4339061
+IL,Total,2013,5673924
+IL,Total,2014,5497825
+IL,Total,2015,11037585
+IL,Total,2016,8624937
+IL,Total,2017,2792471
+IL,Total,2018,2775998
+IL,Total,2019,2292044
+IL,Total,2020,8069935
+IL,Total,2021,4290472
+IL,Total,2022,70093438
+IL,Total,2023,8344980
+IL,Total,2024,7502666
+IL,Total,2025,37764249
+IL,Distressed Area Recompete Pilot Program,2024,453320
+IL,Economic Adjustment Assistance,2012,119203
+IL,Economic Adjustment Assistance,2013,650201
+IL,Economic Adjustment Assistance,2015,3725694
+IL,Economic Adjustment Assistance,2016,516130
+IL,Economic Adjustment Assistance,2020,5009180
+IL,Economic Adjustment Assistance,2021,916168
+IL,Economic Adjustment Assistance,2022,61289882
+IL,Economic Adjustment Assistance,2023,778105
+IL,Economic Adjustment Assistance,2025,5924249
+IL,Planning,2012,1227450
+IL,Planning,2013,401225
+IL,Planning,2014,512778
+IL,Planning,2015,1156319
+IL,Planning,2016,242515
+IL,Planning,2017,543000
+IL,Planning,2018,1185000
+IL,Planning,2019,708274
+IL,Planning,2020,693735
+IL,Planning,2021,1115000
+IL,Planning,2022,695000
+IL,Planning,2023,348767
+IL,Planning,2024,1050000
+IL,Planning,2025,560000
+IL,Public Works,2012,2992408
+IL,Public Works,2013,2000000
+IL,Public Works,2014,4735047
+IL,Public Works,2015,5905572
+IL,Public Works,2016,5655122
+IL,Public Works,2022,4162645
+IL,Public Works,2023,1688625
+IL,Public Works,2024,2000000
+IL,Regional Innovation Strategies,2021,315840
+IL,Regional Innovation Strategies,2022,2823772
+IL,Regional Innovation Strategies,2023,516639
+IL,Regional Technology and Innovation Hubs,2024,3999346
 IL,Regional Technology and Innovation Hubs,2025,31200000
-IL,Research and National Technical Assistance,2023,11432310
+IL,Research and National Technical Assistance,2023,3810770
+IL,Technical Assistance,2013,315082
+IL,Technical Assistance,2014,250000
+IL,Technical Assistance,2015,250000
+IL,Technical Assistance,2016,244893
+IL,Technical Assistance,2017,1050053
+IL,Technical Assistance,2018,500000
+IL,Technical Assistance,2019,620000
+IL,Technical Assistance,2020,1347896
+IL,Technical Assistance,2021,903736
+IL,Technical Assistance,2022,50000
+IL,Technical Assistance,2023,33204
+IL,Technical Assistance,2025,80000
+IL,Trade Adjustment Assistance for Firms,2013,2307416
+IL,Trade Adjustment Assistance for Firms,2016,1966277
+IL,Trade Adjustment Assistance for Firms,2017,1199418
+IL,Trade Adjustment Assistance for Firms,2018,1090998
+IL,Trade Adjustment Assistance for Firms,2019,963770
+IL,Trade Adjustment Assistance for Firms,2020,1019124
+IL,Trade Adjustment Assistance for Firms,2021,1039728
+IL,Trade Adjustment Assistance for Firms,2022,1072139
+IL,Trade Adjustment Assistance for Firms,2023,1168870
+IN,Total,2012,6488784
+IN,Total,2013,961648
+IN,Total,2014,2230747
+IN,Total,2015,3000000
+IN,Total,2016,2930949
+IN,Total,2017,5058326
+IN,Total,2018,179500
+IN,Total,2019,3946740
+IN,Total,2020,4790972
+IN,Total,2021,1470951
+IN,Total,2022,13062689
+IN,Total,2023,3985158
+IN,Total,2024,4902597
+IN,Total,2025,54973105
+IN,Economic Adjustment Assistance,2012,1000000
+IN,Economic Adjustment Assistance,2013,150000
+IN,Economic Adjustment Assistance,2014,1642467
+IN,Economic Adjustment Assistance,2016,729809
+IN,Economic Adjustment Assistance,2020,3874224
+IN,Economic Adjustment Assistance,2021,614827
+IN,Economic Adjustment Assistance,2022,11065861
+IN,Economic Adjustment Assistance,2023,1751658
+IN,Economic Adjustment Assistance,2025,5795500
+IN,Planning,2012,157392
+IN,Planning,2013,811648
+IN,Planning,2014,588280
+IN,Planning,2016,821140
+IN,Planning,2017,749284
+IN,Planning,2018,70000
+IN,Planning,2019,910000
+IN,Planning,2020,764721
+IN,Planning,2021,140000
+IN,Planning,2022,980000
+IN,Planning,2023,987500
+IN,Planning,2024,70000
+IN,Planning,2025,280000
+IN,Public Works,2012,5331392
+IN,Public Works,2015,3000000
+IN,Public Works,2016,1380000
+IN,Public Works,2023,1186000
+IN,Public Works,2025,2073500
+IN,Regional Innovation Strategies,2022,768477
+IN,Regional Technology and Innovation Hubs,2024,4306695
+IN,Regional Technology and Innovation Hubs,2025,46824105
+IN,Research and National Technical Assistance,2017,3619265
+IN,Research and National Technical Assistance,2019,652347
+IN,STEM Talent Challenge,2022,248351
+IN,Technical Assistance,2017,689777
+IN,Technical Assistance,2018,109500
+IN,Technical Assistance,2019,2384393
+IN,Technical Assistance,2020,152027
+IN,Technical Assistance,2021,716124
+IN,Technical Assistance,2023,60000
+IN,Technical Assistance,2024,525902
+KS,Total,2012,2896750
+KS,Total,2013,2955575
+KS,Total,2014,3969377
+KS,Total,2015,8402968
+KS,Total,2016,1625000
+KS,Total,2017,233547
+KS,Total,2018,179153
+KS,Total,2019,2539678
+KS,Total,2020,2549883
+KS,Total,2021,985935
+KS,Total,2022,60618756
+KS,Total,2024,2549897
+KS,Total,2025,12807877
+KS,Economic Adjustment Assistance,2012,500000
+KS,Economic Adjustment Assistance,2013,1283675
+KS,Economic Adjustment Assistance,2014,3468377
+KS,Economic Adjustment Assistance,2015,8108187
+KS,Economic Adjustment Assistance,2020,2549883
+KS,Economic Adjustment Assistance,2022,57655756
+KS,Economic Adjustment Assistance,2025,12807877
+KS,Planning,2013,176900
+KS,Planning,2014,501000
+KS,Planning,2016,1625000
+KS,Planning,2017,233547
+KS,Planning,2018,25000
+KS,Planning,2019,210000
+KS,Planning,2021,985935
+KS,Planning,2022,363000
+KS,Planning,2024,1050000
+KS,Public Works,2012,2396750
+KS,Public Works,2024,1000125
+KS,Regional Innovation Strategies,2022,2600000
+KS,Science and Research Park Development Grants,2015,294781
+KS,Technical Assistance,2013,1495000
+KS,Technical Assistance,2018,154153
+KS,Technical Assistance,2019,2329678
+KS,Technical Assistance,2024,499772
+KY,Total,2012,12627960
+KY,Total,2013,5035180
+KY,Total,2014,7624625
+KY,Total,2015,8233003
+KY,Total,2016,6019100
+KY,Total,2017,1608515
+KY,Total,2018,1050000
+KY,Total,2019,2812500
+KY,Total,2020,7350000
+KY,Total,2021,3440453
+KY,Total,2022,29075270
+KY,Total,2023,13830339
+KY,Total,2024,31843342
+KY,Total,2025,47334283
+KY,Distressed Area Recompete Pilot Program,2024,403194
 KY,Distressed Area Recompete Pilot Program,2025,40772614
+KY,Economic Adjustment Assistance,2012,11930000
+KY,Economic Adjustment Assistance,2013,4125680
+KY,Economic Adjustment Assistance,2014,4214625
+KY,Economic Adjustment Assistance,2015,5183536
+KY,Economic Adjustment Assistance,2016,5074100
+KY,Economic Adjustment Assistance,2020,6300000
+KY,Economic Adjustment Assistance,2021,1500000
+KY,Economic Adjustment Assistance,2022,26099798
+KY,Economic Adjustment Assistance,2023,8099898
+KY,Economic Adjustment Assistance,2024,27319448
+KY,Economic Adjustment Assistance,2025,5511669
+KY,Planning,2012,25000
+KY,Planning,2013,909500
+KY,Planning,2014,1008000
+KY,Planning,2015,1549467
+KY,Planning,2016,945000
+KY,Planning,2017,1050000
+KY,Planning,2018,1050000
+KY,Planning,2019,1050000
+KY,Planning,2020,1050000
+KY,Planning,2021,1050000
+KY,Planning,2022,1050000
+KY,Planning,2023,1442700
+KY,Planning,2024,1442700
+KY,Planning,2025,1050000
+KY,Public Works,2014,2402000
+KY,Public Works,2015,1500000
+KY,Public Works,2023,3958638
+KY,Public Works,2024,2178000
+KY,Regional Innovation Strategies,2022,719674
+KY,Regional Innovation Strategies,2023,299970
+KY,Regional Technology and Innovation Hubs,2024,500000
+KY,Research and National Technical Assistance,2012,30000
+KY,Technical Assistance,2012,642960
+KY,Technical Assistance,2017,558515
+KY,Technical Assistance,2019,1762500
+KY,Technical Assistance,2021,890453
+KY,Technical Assistance,2022,1205798
+KY,Technical Assistance,2023,29133
+LA,Total,2012,6352186
+LA,Total,2013,4850720
+LA,Total,2014,4101400
+LA,Total,2015,4442369
+LA,Total,2016,8688290
+LA,Total,2017,1238624
+LA,Total,2018,1511496
+LA,Total,2019,1979864
+LA,Total,2020,3800000
+LA,Total,2021,4742601
+LA,Total,2022,7384932
+LA,Total,2023,1950000
+LA,Total,2024,31552454
+LA,Total,2026,1002000
+LA,Economic Adjustment Assistance,2012,4662186
+LA,Economic Adjustment Assistance,2013,2000000
+LA,Economic Adjustment Assistance,2014,2774301
+LA,Economic Adjustment Assistance,2015,1700000
+LA,Economic Adjustment Assistance,2016,5681461
+LA,Economic Adjustment Assistance,2020,3800000
+LA,Economic Adjustment Assistance,2021,1152924
+LA,Economic Adjustment Assistance,2022,5514932
+LA,Economic Adjustment Assistance,2024,29885000
+LA,Economic Adjustment Assistance,2026,1002000
+LA,Planning,2013,180000
+LA,Planning,2015,180000
+LA,Planning,2016,1226829
+LA,Planning,2017,240000
+LA,Planning,2018,87500
+LA,Planning,2019,1680000
+LA,Planning,2022,1470000
+LA,Planning,2024,250000
+LA,Public Works,2012,1690000
+LA,Public Works,2013,1700000
+LA,Public Works,2014,1200000
+LA,Public Works,2015,1500000
+LA,Public Works,2016,1780000
+LA,Regional Innovation Strategies,2021,2098906
+LA,Regional Innovation Strategies,2022,400000
+LA,Regional Innovation Strategies,2023,1950000
+LA,Regional Technology and Innovation Hubs,2024,897454
+LA,Technical Assistance,2013,970720
+LA,Technical Assistance,2014,127099
+LA,Technical Assistance,2015,1062369
+LA,Technical Assistance,2017,998624
+LA,Technical Assistance,2018,1423996
+LA,Technical Assistance,2019,299864
+LA,Technical Assistance,2021,1490771
+LA,Technical Assistance,2024,520000
+MA,Total,2012,1803192
+MA,Total,2013,4686613
+MA,Total,2014,6462254
+MA,Total,2015,1392450
+MA,Total,2016,9571336
+MA,Total,2017,1517742
+MA,Total,2018,1278232
+MA,Total,2019,2916616
+MA,Total,2020,5734423
+MA,Total,2021,6069989
+MA,Total,2022,29525508
+MA,Total,2023,6506496
+MA,Total,2024,5699952
+MA,Total,2025,420000
+MA,Distressed Area Recompete Pilot Program,2024,499940
+MA,Economic Adjustment Assistance,2013,590673
+MA,Economic Adjustment Assistance,2014,200000
+MA,Economic Adjustment Assistance,2015,289337
+MA,Economic Adjustment Assistance,2020,3500000
+MA,Economic Adjustment Assistance,2021,2048681
+MA,Economic Adjustment Assistance,2022,26882768
+MA,Economic Adjustment Assistance,2023,1067430
+MA,Economic Adjustment Assistance,2024,3519066
+MA,Planning,2012,40000
+MA,Planning,2013,860000
+MA,Planning,2014,452000
+MA,Planning,2015,160100
+MA,Planning,2016,1609998
+MA,Planning,2017,40000
+MA,Planning,2018,210000
+MA,Planning,2019,1452500
+MA,Planning,2021,210000
+MA,Planning,2022,1295000
+MA,Planning,2023,480000
+MA,Planning,2024,210000
+MA,Planning,2025,420000
+MA,Public Works,2012,1574680
+MA,Public Works,2013,3235940
+MA,Public Works,2014,5770254
+MA,Public Works,2015,943013
+MA,Public Works,2016,5430849
+MA,Public Works,2023,3000000
+MA,Public Works,2024,522300
+MA,Regional Innovation Strategies,2019,113768
+MA,Regional Innovation Strategies,2021,1792275
+MA,Regional Innovation Strategies,2023,750000
+MA,STEM Talent Challenge,2022,249624
+MA,STEM Talent Challenge,2024,409410
+MA,Technical Assistance,2012,188512
+MA,Technical Assistance,2014,40000
+MA,Technical Assistance,2016,583335
+MA,Technical Assistance,2017,500000
+MA,Technical Assistance,2018,40765
+MA,Technical Assistance,2019,321240
+MA,Technical Assistance,2020,1169338
+MA,Technical Assistance,2021,510410
+MA,Technical Assistance,2022,34448
+MA,Technical Assistance,2024,539236
+MA,Trade Adjustment Assistance for Firms,2016,1947154
+MA,Trade Adjustment Assistance for Firms,2017,977742
+MA,Trade Adjustment Assistance for Firms,2018,1027467
+MA,Trade Adjustment Assistance for Firms,2019,1029108
+MA,Trade Adjustment Assistance for Firms,2020,1065085
+MA,Trade Adjustment Assistance for Firms,2021,1508623
+MA,Trade Adjustment Assistance for Firms,2022,1063668
+MA,Trade Adjustment Assistance for Firms,2023,1209066
+MD,Total,2013,3729000
+MD,Total,2015,1684297
+MD,Total,2016,1876185
+MD,Total,2018,500000
+MD,Total,2019,2464546
+MD,Total,2020,1207937
+MD,Total,2021,2128160
+MD,Total,2022,26025269
+MD,Total,2023,2249050
+MD,Total,2024,1661725
+MD,Total,2025,420000
+MD,Economic Adjustment Assistance,2013,1430000
+MD,Economic Adjustment Assistance,2015,170783
+MD,Economic Adjustment Assistance,2020,1207937
+MD,Economic Adjustment Assistance,2021,746060
+MD,Economic Adjustment Assistance,2022,24452185
+MD,Planning,2013,649000
+MD,Planning,2016,630000
+MD,Planning,2019,612500
+MD,Planning,2022,490000
+MD,Planning,2023,210000
+MD,Planning,2025,420000
+MD,Public Works,2013,1650000
+MD,Public Works,2015,1275000
+MD,Public Works,2024,500000
+MD,Regional Innovation Strategies,2022,1083084
+MD,Regional Innovation Strategies,2023,1814050
 MD,Regional Innovation Strategies,2024,661725
+MD,Regional Technology and Innovation Hubs,2024,500000
+MD,STEM Talent Challenge,2021,300000
+MD,Technical Assistance,2015,238514
+MD,Technical Assistance,2016,1246185
+MD,Technical Assistance,2018,500000
+MD,Technical Assistance,2019,1852046
+MD,Technical Assistance,2021,1082100
+MD,Technical Assistance,2023,225000
+ME,Total,2012,5633007
+ME,Total,2013,3593000
+ME,Total,2014,3950035
+ME,Total,2015,4465055
+ME,Total,2016,8923586
+ME,Total,2018,540532
+ME,Total,2019,1523000
+ME,Total,2020,3250000
+ME,Total,2021,2297803
+ME,Total,2022,3579331
+ME,Total,2023,210000
+ME,Total,2024,2215299
+ME,Total,2025,1260000
+ME,Distressed Area Recompete Pilot Program,2024,425111
+ME,Economic Adjustment Assistance,2012,895000
+ME,Economic Adjustment Assistance,2013,1525000
+ME,Economic Adjustment Assistance,2014,1727651
+ME,Economic Adjustment Assistance,2016,1627538
+ME,Economic Adjustment Assistance,2020,3250000
+ME,Economic Adjustment Assistance,2022,1499516
+ME,Economic Adjustment Assistance,2024,460860
+ME,Planning,2013,1424000
+ME,Planning,2014,322384
+ME,Planning,2015,103168
+ME,Planning,2016,1603500
+ME,Planning,2018,25000
+ME,Planning,2019,1523000
+ME,Planning,2021,203500
+ME,Planning,2022,1330000
+ME,Planning,2023,210000
+ME,Planning,2024,133500
+ME,Planning,2025,1260000
+ME,Public Works,2012,4738007
+ME,Public Works,2013,579000
+ME,Public Works,2014,1900000
+ME,Public Works,2015,4361887
+ME,Public Works,2016,4469213
+ME,Regional Innovation Strategies,2021,1306393
+ME,Regional Innovation Strategies,2022,749815
+ME,Regional Technology and Innovation Hubs,2024,994255
+ME,Technical Assistance,2013,65000
+ME,Technical Assistance,2016,1223335
+ME,Technical Assistance,2018,515532
+ME,Technical Assistance,2021,787910
+ME,Technical Assistance,2024,201573
+MH,Total,2022,1000000
+MH,Economic Adjustment Assistance,2022,1000000
+MI,Total,2012,1170015
+MI,Total,2013,4579010
+MI,Total,2014,7859683
+MI,Total,2015,3351772
+MI,Total,2016,14957005
+MI,Total,2017,3652040
+MI,Total,2018,2249183
+MI,Total,2019,4305060
+MI,Total,2020,7060666
+MI,Total,2021,6807587
+MI,Total,2022,22773167
+MI,Total,2023,8099384
+MI,Total,2024,1521587
+MI,Total,2025,7975000
 MI,Total,2026,2500000
+MI,Economic Adjustment Assistance,2013,3880860
+MI,Economic Adjustment Assistance,2014,2161910
+MI,Economic Adjustment Assistance,2015,25000
+MI,Economic Adjustment Assistance,2016,4332292
+MI,Economic Adjustment Assistance,2020,4951183
+MI,Economic Adjustment Assistance,2021,1108903
+MI,Economic Adjustment Assistance,2022,16486804
+MI,Economic Adjustment Assistance,2023,320000
+MI,Economic Adjustment Assistance,2024,437741
+MI,Economic Adjustment Assistance,2025,3625000
+MI,Planning,2012,420015
+MI,Planning,2013,658150
+MI,Planning,2014,621908
+MI,Planning,2015,391396
+MI,Planning,2016,1140280
+MI,Planning,2017,794256
+MI,Planning,2018,598000
+MI,Planning,2019,1288000
+MI,Planning,2020,1003461
+MI,Planning,2021,674552
+MI,Planning,2022,1273000
+MI,Planning,2023,1107816
+MI,Planning,2024,698467
+MI,Planning,2025,210000
+MI,Public Works,2012,750000
+MI,Public Works,2014,4729664
+MI,Public Works,2015,2514000
+MI,Public Works,2016,7830878
+MI,Public Works,2021,2500000
+MI,Public Works,2022,1531400
+MI,Public Works,2023,2500000
+MI,Public Works,2025,3975000
 MI,Public Works,2026,2500000
+MI,Regional Innovation Strategies,2022,1958843
+MI,Regional Innovation Strategies,2023,1336080
+MI,Regional Technology and Innovation Hubs,2024,385379
+MI,STEM Talent Challenge,2021,300000
+MI,Science and Research Park Development Grants,2015,247170
+MI,Technical Assistance,2013,40000
+MI,Technical Assistance,2014,346201
+MI,Technical Assistance,2015,174206
+MI,Technical Assistance,2017,1147824
+MI,Technical Assistance,2018,575551
+MI,Technical Assistance,2019,1149907
+MI,Technical Assistance,2021,1136000
+MI,Technical Assistance,2022,119738
+MI,Technical Assistance,2023,24994
+MI,Technical Assistance,2025,165000
+MI,Trade Adjustment Assistance for Firms,2016,1653555
+MI,Trade Adjustment Assistance for Firms,2017,1709960
+MI,Trade Adjustment Assistance for Firms,2018,1075632
+MI,Trade Adjustment Assistance for Firms,2019,1867153
+MI,Trade Adjustment Assistance for Firms,2020,1106022
+MI,Trade Adjustment Assistance for Firms,2021,1088132
+MI,Trade Adjustment Assistance for Firms,2022,1403382
+MI,Trade Adjustment Assistance for Firms,2023,2810494
+MN,Total,2012,1883755
+MN,Total,2013,1290175
+MN,Total,2014,1273594
+MN,Total,2015,1158500
+MN,Total,2016,921140
+MN,Total,2017,1343946
+MN,Total,2018,970404
+MN,Total,2019,1889997
+MN,Total,2020,5028229
+MN,Total,2021,1637194
+MN,Total,2022,24097108
+MN,Total,2023,6079547
+MN,Total,2024,9504308
+MN,Total,2025,11197078
 MN,Total,2026,7775343
+MN,Economic Adjustment Assistance,2013,993050
+MN,Economic Adjustment Assistance,2014,585699
+MN,Economic Adjustment Assistance,2016,125000
+MN,Economic Adjustment Assistance,2020,4300000
+MN,Economic Adjustment Assistance,2021,27192
+MN,Economic Adjustment Assistance,2022,23184050
+MN,Economic Adjustment Assistance,2023,1485000
+MN,Economic Adjustment Assistance,2024,7839352
+MN,Economic Adjustment Assistance,2025,8937628
+MN,Economic Adjustment Assistance,2026,2363110
+MN,Planning,2012,544255
+MN,Planning,2013,297125
+MN,Planning,2014,687895
+MN,Planning,2015,748500
+MN,Planning,2016,796140
+MN,Planning,2017,540000
+MN,Planning,2018,910000
+MN,Planning,2019,840000
+MN,Planning,2020,420000
+MN,Planning,2021,948802
+MN,Planning,2022,840000
+MN,Planning,2023,420000
+MN,Planning,2024,840000
+MN,Planning,2025,630000
+MN,Public Works,2012,1189500
+MN,Public Works,2015,300000
+MN,Public Works,2020,308229
+MN,Public Works,2023,1897337
+MN,Public Works,2025,1629450
+MN,Public Works,2026,5412233
+MN,Regional Innovation Strategies,2023,2260592
+MN,Technical Assistance,2012,150000
+MN,Technical Assistance,2015,110000
+MN,Technical Assistance,2017,803946
+MN,Technical Assistance,2018,60404
+MN,Technical Assistance,2019,1049997
+MN,Technical Assistance,2021,661200
+MN,Technical Assistance,2022,73058
+MN,Technical Assistance,2023,16618
+MN,Technical Assistance,2024,824956
+MO,Total,2012,2307320
+MO,Total,2013,8039261
+MO,Total,2014,5456618
+MO,Total,2015,8075475
+MO,Total,2016,9603281
+MO,Total,2017,1218103
+MO,Total,2018,2112038
+MO,Total,2019,6012560
+MO,Total,2020,9738072
+MO,Total,2021,5825323
+MO,Total,2022,47863700
+MO,Total,2023,6570872
+MO,Total,2024,8968920
+MO,Total,2025,1640000
+MO,Total,2026,1501373
+MO,Economic Adjustment Assistance,2012,1434615
+MO,Economic Adjustment Assistance,2013,1756479
+MO,Economic Adjustment Assistance,2014,1494480
+MO,Economic Adjustment Assistance,2015,1165265
+MO,Economic Adjustment Assistance,2016,146336
+MO,Economic Adjustment Assistance,2020,7332410
+MO,Economic Adjustment Assistance,2021,1223866
+MO,Economic Adjustment Assistance,2022,42305831
+MO,Economic Adjustment Assistance,2023,296714
+MO,Economic Adjustment Assistance,2024,4320000
+MO,Economic Adjustment Assistance,2026,1501373
+MO,Planning,2013,1229400
+MO,Planning,2014,1194900
+MO,Planning,2015,576000
+MO,Planning,2016,3805700
+MO,Planning,2017,45000
+MO,Planning,2018,630000
+MO,Planning,2019,1050000
+MO,Planning,2020,1260000
+MO,Planning,2021,1401099
+MO,Planning,2022,1102500
+MO,Planning,2023,1260000
+MO,Planning,2024,1435920
+MO,Public Works,2012,756894
+MO,Public Works,2013,3457434
+MO,Public Works,2014,2600787
+MO,Public Works,2015,4557877
+MO,Public Works,2016,3847759
+MO,Public Works,2022,1500000
+MO,Public Works,2023,1712580
+MO,Public Works,2024,1500000
+MO,Public Works,2025,1640000
+MO,Regional Innovation Strategies,2022,1478269
+MO,Regional Innovation Strategies,2023,1997157
+MO,Regional Technology and Innovation Hubs,2024,950000
+MO,Research and National Technical Assistance,2012,60811
+MO,STEM Talent Challenge,2022,233162
+MO,Science and Research Park Development Grants,2015,500000
+MO,Technical Assistance,2012,55000
+MO,Technical Assistance,2013,1595948
+MO,Technical Assistance,2014,166451
+MO,Technical Assistance,2015,1276333
+MO,Technical Assistance,2016,26275
+MO,Technical Assistance,2017,131444
+MO,Technical Assistance,2018,353125
+MO,Technical Assistance,2019,3886697
+MO,Technical Assistance,2020,7861
+MO,Technical Assistance,2021,2089579
+MO,Technical Assistance,2022,140000
+MO,Technical Assistance,2023,125583
+MO,Technical Assistance,2024,763000
+MO,Trade Adjustment Assistance for Firms,2016,1777211
+MO,Trade Adjustment Assistance for Firms,2017,1041659
+MO,Trade Adjustment Assistance for Firms,2018,1128913
+MO,Trade Adjustment Assistance for Firms,2019,1075863
+MO,Trade Adjustment Assistance for Firms,2020,1137801
+MO,Trade Adjustment Assistance for Firms,2021,1110779
+MO,Trade Adjustment Assistance for Firms,2022,1103938
+MO,Trade Adjustment Assistance for Firms,2023,1178838
+MP,Total,2013,1227962
+MP,Total,2014,98992
+MP,Total,2021,5480000
+MP,Total,2022,3064819
+MP,Economic Adjustment Assistance,2013,1227962
+MP,Economic Adjustment Assistance,2014,98992
+MP,Economic Adjustment Assistance,2021,5480000
+MP,Economic Adjustment Assistance,2022,1439755
+MP,Public Works,2022,1625064
+MS,Total,2012,3695225
+MS,Total,2013,1357000
+MS,Total,2014,3790232
+MS,Total,2015,3263171
+MS,Total,2016,4964498
+MS,Total,2017,989945
+MS,Total,2018,840000
+MS,Total,2019,1315500
+MS,Total,2020,4869712
+MS,Total,2021,840000
+MS,Total,2022,22671072
+MS,Total,2023,4558617
+MS,Total,2024,3989469
+MS,Total,2025,1015000
+MS,Distressed Area Recompete Pilot Program,2024,499470
+MS,Economic Adjustment Assistance,2012,500000
+MS,Economic Adjustment Assistance,2013,400000
+MS,Economic Adjustment Assistance,2014,1468000
+MS,Economic Adjustment Assistance,2015,352171
+MS,Economic Adjustment Assistance,2016,1490718
+MS,Economic Adjustment Assistance,2020,4449712
+MS,Economic Adjustment Assistance,2022,7925844
+MS,Economic Adjustment Assistance,2023,500000
+MS,Economic Adjustment Assistance,2024,2000000
+MS,Planning,2012,756000
+MS,Planning,2013,100000
+MS,Planning,2014,445500
+MS,Planning,2015,756000
+MS,Planning,2016,998400
+MS,Planning,2017,420000
+MS,Planning,2018,840000
+MS,Planning,2019,1015500
+MS,Planning,2020,420000
+MS,Planning,2021,840000
+MS,Planning,2022,1013958
+MS,Planning,2023,420000
+MS,Planning,2024,840000
+MS,Planning,2025,1015000
+MS,Public Works,2012,1750000
+MS,Public Works,2013,857000
+MS,Public Works,2014,1876732
+MS,Public Works,2015,2155000
+MS,Public Works,2016,2425380
+MS,Public Works,2022,13402416
+MS,Public Works,2023,3000000
+MS,Public Works,2024,150000
+MS,Regional Innovation Strategies,2023,638617
+MS,Regional Technology and Innovation Hubs,2024,499999
+MS,Research and National Technical Assistance,2012,46265
+MS,Technical Assistance,2012,642960
+MS,Technical Assistance,2016,50000
+MS,Technical Assistance,2017,569945
+MS,Technical Assistance,2019,300000
+MS,Technical Assistance,2022,328854
+MT,Total,2012,2106238
+MT,Total,2013,4222901
+MT,Total,2014,1278000
+MT,Total,2015,248600
+MT,Total,2016,5488452
+MT,Total,2017,836000
+MT,Total,2018,50000
+MT,Total,2019,2529487
+MT,Total,2020,6704612
+MT,Total,2021,661877
+MT,Total,2022,20967446
+MT,Total,2023,1509000
+MT,Total,2024,10737166
+MT,Total,2025,50523875
+MT,Total,2026,459000
+MT,Distressed Area Recompete Pilot Program,2024,549996
+MT,Economic Adjustment Assistance,2012,927738
+MT,Economic Adjustment Assistance,2013,1200000
+MT,Economic Adjustment Assistance,2014,200000
+MT,Economic Adjustment Assistance,2016,50000
+MT,Economic Adjustment Assistance,2020,5171112
+MT,Economic Adjustment Assistance,2022,19625549
+MT,Economic Adjustment Assistance,2024,4651280
+MT,Economic Adjustment Assistance,2025,13115400
+MT,Planning,2012,138500
+MT,Planning,2013,1394146
+MT,Planning,2014,1048000
+MT,Planning,2016,2985750
+MT,Planning,2017,714000
+MT,Planning,2018,50000
+MT,Planning,2019,1050000
+MT,Planning,2020,1456500
+MT,Planning,2021,661877
+MT,Planning,2022,1341897
+MT,Planning,2023,1509000
+MT,Planning,2024,669000
+MT,Planning,2025,140250
 MT,Planning,2026,459000
+MT,Public Works,2012,1000000
+MT,Public Works,2013,1489255
+MT,Public Works,2016,2256471
+MT,Regional Technology and Innovation Hubs,2024,4449290
+MT,Regional Technology and Innovation Hubs,2025,37268225
+MT,Research and National Technical Assistance,2012,40000
+MT,Technical Assistance,2013,139500
+MT,Technical Assistance,2014,30000
+MT,Technical Assistance,2015,248600
+MT,Technical Assistance,2016,196231
+MT,Technical Assistance,2017,122000
+MT,Technical Assistance,2019,1479487
+MT,Technical Assistance,2020,77000
+MT,Technical Assistance,2024,417600
+NC,Total,2012,8891947
+NC,Total,2013,7968928
+NC,Total,2014,9650233
+NC,Total,2015,9873273
+NC,Total,2016,6525070
+NC,Total,2017,4344664
+NC,Total,2018,1858036
+NC,Total,2019,2338244
+NC,Total,2020,6706204
+NC,Total,2021,3504843
+NC,Total,2022,68224165
+NC,Total,2023,9109348
+NC,Total,2024,6792756
+NC,Total,2025,9571000
+NC,Total,2026,2198928
+NC,Economic Adjustment Assistance,2012,2000000
+NC,Economic Adjustment Assistance,2013,1805849
+NC,Economic Adjustment Assistance,2014,2956855
+NC,Economic Adjustment Assistance,2015,2017501
+NC,Economic Adjustment Assistance,2016,3012620
+NC,Economic Adjustment Assistance,2017,596518
+NC,Economic Adjustment Assistance,2020,5931204
+NC,Economic Adjustment Assistance,2021,750000
+NC,Economic Adjustment Assistance,2022,66425995
+NC,Economic Adjustment Assistance,2023,5800361
+NC,Economic Adjustment Assistance,2024,5322756
+NC,Economic Adjustment Assistance,2025,9151000
+NC,Economic Adjustment Assistance,2026,2198928
+NC,Planning,2012,1299703
+NC,Planning,2013,135000
+NC,Planning,2014,871511
+NC,Planning,2015,1306355
+NC,Planning,2016,609000
+NC,Planning,2017,777500
+NC,Planning,2018,1358036
+NC,Planning,2019,840000
+NC,Planning,2020,775000
+NC,Planning,2021,1456862
+NC,Planning,2022,840000
+NC,Planning,2023,775000
+NC,Planning,2024,1470000
+NC,Planning,2025,420000
+NC,Public Works,2012,3663364
+NC,Public Works,2013,5628079
+NC,Public Works,2014,5747395
+NC,Public Works,2015,6018100
+NC,Public Works,2016,2653450
+NC,Public Works,2023,2234000
+NC,Regional Innovation Strategies,2023,299987
+NC,Research and National Technical Assistance,2017,51000
+NC,Technical Assistance,2012,1928880
+NC,Technical Assistance,2013,400000
+NC,Technical Assistance,2014,74472
+NC,Technical Assistance,2015,531317
+NC,Technical Assistance,2016,250000
+NC,Technical Assistance,2017,2919646
+NC,Technical Assistance,2018,500000
+NC,Technical Assistance,2019,1498244
+NC,Technical Assistance,2021,1297981
+NC,Technical Assistance,2022,958170
+ND,Total,2012,387500
+ND,Total,2013,18998850
+ND,Total,2014,837000
+ND,Total,2015,311428
+ND,Total,2016,2205754
+ND,Total,2017,612000
+ND,Total,2019,1493000
+ND,Total,2020,3841000
+ND,Total,2021,183000
+ND,Total,2022,3113628
+ND,Total,2023,730000
+ND,Total,2024,1338000
+ND,Total,2025,8539107
+ND,Economic Adjustment Assistance,2012,387500
+ND,Economic Adjustment Assistance,2013,18000000
+ND,Economic Adjustment Assistance,2016,170754
+ND,Economic Adjustment Assistance,2020,3228500
+ND,Economic Adjustment Assistance,2022,1520000
+ND,Economic Adjustment Assistance,2024,775000
+ND,Economic Adjustment Assistance,2025,8386107
+ND,Planning,2013,598850
+ND,Planning,2014,837000
+ND,Planning,2015,62000
+ND,Planning,2016,2035000
+ND,Planning,2017,612000
+ND,Planning,2019,993000
+ND,Planning,2020,612500
+ND,Planning,2021,153000
+ND,Planning,2022,1369000
+ND,Planning,2023,730000
+ND,Planning,2024,363000
+ND,Planning,2025,153000
+ND,Regional Innovation Strategies,2022,224628
+ND,Technical Assistance,2013,400000
+ND,Technical Assistance,2015,249428
+ND,Technical Assistance,2019,500000
+ND,Technical Assistance,2021,30000
+ND,Technical Assistance,2024,200000
+NE,Total,2013,508700
+NE,Total,2014,2653180
+NE,Total,2015,1140000
+NE,Total,2016,1573025
+NE,Total,2018,720000
+NE,Total,2019,1940000
+NE,Total,2020,2865887
+NE,Total,2021,1195000
+NE,Total,2022,28140307
+NE,Total,2023,1432266
+NE,Total,2024,630000
+NE,Total,2025,2614781
+NE,Total,2026,153000
+NE,Economic Adjustment Assistance,2013,39000
+NE,Economic Adjustment Assistance,2016,315525
+NE,Economic Adjustment Assistance,2020,2655887
+NE,Economic Adjustment Assistance,2022,26499999
+NE,Economic Adjustment Assistance,2023,769266
+NE,Economic Adjustment Assistance,2025,2614781
+NE,Planning,2013,469700
+NE,Planning,2014,424000
+NE,Planning,2015,390000
+NE,Planning,2016,1257500
+NE,Planning,2018,420000
+NE,Planning,2019,630000
+NE,Planning,2020,210000
+NE,Planning,2021,595000
+NE,Planning,2022,667500
+NE,Planning,2023,363000
+NE,Planning,2024,630000
 NE,Planning,2026,153000
+NE,Public Works,2014,2229180
+NE,Public Works,2015,750000
+NE,Public Works,2022,723935
+NE,Regional Innovation Strategies,2023,300000
+NE,STEM Talent Challenge,2022,248873
+NE,Technical Assistance,2018,300000
+NE,Technical Assistance,2019,1310000
+NE,Technical Assistance,2021,600000
+NH,Total,2012,2444435
+NH,Total,2013,2146100
+NH,Total,2014,140000
+NH,Total,2015,40000
+NH,Total,2016,2038800
+NH,Total,2017,164835
+NH,Total,2018,140000
+NH,Total,2019,532181
+NH,Total,2020,870000
+NH,Total,2021,1406304
+NH,Total,2022,1850000
+NH,Total,2024,3210000
+NH,Total,2025,41058193
+NH,Economic Adjustment Assistance,2020,800000
+NH,Economic Adjustment Assistance,2022,1500000
+NH,Planning,2013,200000
+NH,Planning,2014,140000
+NH,Planning,2016,420000
+NH,Planning,2017,30000
+NH,Planning,2018,140000
+NH,Planning,2019,420000
+NH,Planning,2020,70000
+NH,Planning,2021,210000
+NH,Planning,2022,350000
+NH,Planning,2024,210000
+NH,Planning,2025,420000
+NH,Public Works,2012,2444435
+NH,Public Works,2013,1946100
+NH,Public Works,2016,1618800
+NH,Regional Innovation Strategies,2021,1196304
+NH,Regional Technology and Innovation Hubs,2024,3000000
+NH,Regional Technology and Innovation Hubs,2025,40638193
+NH,Technical Assistance,2015,40000
+NH,Technical Assistance,2017,134835
+NH,Technical Assistance,2019,112181
+NJ,Total,2012,2095000
+NJ,Total,2013,657762
+NJ,Total,2014,500000
+NJ,Total,2015,628673
+NJ,Total,2016,2262625
+NJ,Total,2017,439190
+NJ,Total,2019,1709839
+NJ,Total,2020,700000
+NJ,Total,2021,1087910
+NJ,Total,2022,4960000
+NJ,Total,2023,124999
+NJ,Total,2024,4500000
+NJ,Total,2025,210000
+NJ,Total,2026,4000000
+NJ,Economic Adjustment Assistance,2013,177762
+NJ,Economic Adjustment Assistance,2014,500000
+NJ,Economic Adjustment Assistance,2016,1469347
+NJ,Economic Adjustment Assistance,2020,700000
+NJ,Economic Adjustment Assistance,2022,4750000
+NJ,Economic Adjustment Assistance,2024,4000000
+NJ,Economic Adjustment Assistance,2026,4000000
+NJ,Planning,2013,320000
+NJ,Planning,2015,70000
+NJ,Planning,2016,210000
+NJ,Planning,2019,210000
+NJ,Planning,2022,210000
+NJ,Planning,2023,124999
+NJ,Planning,2025,210000
+NJ,Public Works,2012,2095000
+NJ,Regional Innovation Strategies,2021,600000
+NJ,STEM Talent Challenge,2024,500000
+NJ,Science and Research Park Development Grants,2015,498539
+NJ,Technical Assistance,2013,160000
+NJ,Technical Assistance,2015,60134
+NJ,Technical Assistance,2016,583278
+NJ,Technical Assistance,2017,439190
+NJ,Technical Assistance,2019,1499839
+NJ,Technical Assistance,2021,487910
+NM,Total,2012,2088999
+NM,Total,2013,840360
+NM,Total,2014,2474076
+NM,Total,2015,4494435
+NM,Total,2016,3628760
+NM,Total,2017,172900
+NM,Total,2018,1437844
+NM,Total,2019,2627133
+NM,Total,2020,3695375
+NM,Total,2021,1747536
+NM,Total,2022,15668071
+NM,Total,2023,5246809
+NM,Total,2024,24773630
+NM,Total,2025,2960000
+NM,Total,2026,900000
+NM,Economic Adjustment Assistance,2012,1000000
+NM,Economic Adjustment Assistance,2014,270000
+NM,Economic Adjustment Assistance,2015,2046971
+NM,Economic Adjustment Assistance,2016,1000000
+NM,Economic Adjustment Assistance,2020,3400000
+NM,Economic Adjustment Assistance,2021,1147536
+NM,Economic Adjustment Assistance,2022,13103527
+NM,Economic Adjustment Assistance,2023,3360000
+NM,Economic Adjustment Assistance,2024,22458000
 NM,Economic Adjustment Assistance,2026,400000
+NM,Planning,2012,88999
+NM,Planning,2013,360000
+NM,Planning,2014,120000
+NM,Planning,2016,1260000
+NM,Planning,2017,172900
+NM,Planning,2018,70000
+NM,Planning,2019,1470000
+NM,Planning,2022,2064544
+NM,Planning,2025,210000
+NM,Public Works,2012,1000000
+NM,Public Works,2014,2009166
+NM,Public Works,2015,1400000
+NM,Public Works,2016,1000000
+NM,Public Works,2024,1300000
+NM,Public Works,2025,2750000
+NM,Public Works,2026,500000
+NM,Regional Innovation Strategies,2019,857133
+NM,Regional Innovation Strategies,2023,1886809
+NM,Science and Research Park Development Grants,2015,471218
+NM,Technical Assistance,2013,480360
+NM,Technical Assistance,2014,74910
+NM,Technical Assistance,2015,576246
+NM,Technical Assistance,2016,368760
+NM,Technical Assistance,2018,1367844
+NM,Technical Assistance,2019,300000
+NM,Technical Assistance,2020,295375
+NM,Technical Assistance,2021,600000
+NM,Technical Assistance,2022,500000
+NM,Technical Assistance,2024,1015630
+NV,Total,2012,5918650
+NV,Total,2013,278000
+NV,Total,2014,45000
+NV,Total,2015,1830512
+NV,Total,2017,861859
+NV,Total,2018,300000
+NV,Total,2019,3949131
+NV,Total,2020,940000
+NV,Total,2022,28134993
+NV,Total,2023,4956429
+NV,Total,2024,18673267
+NV,Total,2025,2751130
+NV,Total,2026,5000000
+NV,Economic Adjustment Assistance,2012,1240650
+NV,Economic Adjustment Assistance,2013,278000
+NV,Economic Adjustment Assistance,2015,350000
+NV,Economic Adjustment Assistance,2020,700000
+NV,Economic Adjustment Assistance,2022,27064993
+NV,Economic Adjustment Assistance,2023,2068998
+NV,Economic Adjustment Assistance,2024,379300
+NV,Planning,2012,253000
+NV,Planning,2014,45000
+NV,Planning,2015,160000
+NV,Planning,2017,240000
+NV,Planning,2020,240000
+NV,Planning,2022,80000
+NV,Planning,2023,540000
+NV,Public Works,2012,3800000
+NV,Public Works,2015,1250600
+NV,Public Works,2019,3649131
+NV,Public Works,2026,5000000
+NV,Regional Innovation Strategies,2023,2315946
+NV,Regional Technology and Innovation Hubs,2024,18293967
+NV,Regional Technology and Innovation Hubs,2025,2601130
+NV,Technical Assistance,2012,625000
+NV,Technical Assistance,2015,69912
+NV,Technical Assistance,2017,621859
+NV,Technical Assistance,2018,300000
+NV,Technical Assistance,2019,300000
+NV,Technical Assistance,2022,990000
+NV,Technical Assistance,2023,31485
+NV,Technical Assistance,2025,150000
+NY,Total,2012,3564719
+NY,Total,2013,3677000
+NY,Total,2014,10244076
+NY,Total,2015,4169842
+NY,Total,2016,9893836
+NY,Total,2017,3117740
+NY,Total,2018,2075017
+NY,Total,2019,5008518
+NY,Total,2020,5416290
+NY,Total,2021,3753833
+NY,Total,2022,9668400
+NY,Total,2023,29248950
+NY,Total,2024,20522725
+NY,Total,2025,53501208
+NY,Distressed Area Recompete Pilot Program,2024,452975
+NY,Economic Adjustment Assistance,2012,1864719
+NY,Economic Adjustment Assistance,2013,300000
+NY,Economic Adjustment Assistance,2014,1497783
+NY,Economic Adjustment Assistance,2015,1111000
+NY,Economic Adjustment Assistance,2016,660000
+NY,Economic Adjustment Assistance,2020,4465000
+NY,Economic Adjustment Assistance,2021,2238922
+NY,Economic Adjustment Assistance,2022,4031822
+NY,Economic Adjustment Assistance,2023,19281749
+NY,Economic Adjustment Assistance,2024,400000
+NY,Planning,2013,674000
+NY,Planning,2014,830000
+NY,Planning,2015,70000
+NY,Planning,2016,2171325
+NY,Planning,2019,2240340
+NY,Planning,2022,2025205
+NY,Planning,2023,349560
+NY,Planning,2025,1470000
+NY,Public Works,2012,1700000
+NY,Public Works,2013,2703000
+NY,Public Works,2014,7916293
+NY,Public Works,2015,2000000
+NY,Public Works,2016,4142000
+NY,Public Works,2023,4000000
+NY,Public Works,2024,7100000
+NY,Regional Innovation Strategies,2019,528358
+NY,Regional Innovation Strategies,2022,2653423
+NY,Regional Innovation Strategies,2023,3488464
+NY,Regional Technology and Innovation Hubs,2024,12500000
+NY,Regional Technology and Innovation Hubs,2025,52031208
+NY,Research and National Technical Assistance,2016,270244
+NY,Technical Assistance,2015,988842
+NY,Technical Assistance,2016,1009010
+NY,Technical Assistance,2017,1967892
+NY,Technical Assistance,2018,1085529
+NY,Technical Assistance,2019,1350000
+NY,Technical Assistance,2021,487913
+NY,Technical Assistance,2023,55000
+NY,Technical Assistance,2024,69750
+NY,Trade Adjustment Assistance for Firms,2016,1641257
+NY,Trade Adjustment Assistance for Firms,2017,1149848
+NY,Trade Adjustment Assistance for Firms,2018,989488
+NY,Trade Adjustment Assistance for Firms,2019,889820
+NY,Trade Adjustment Assistance for Firms,2020,951290
+NY,Trade Adjustment Assistance for Firms,2021,1026998
+NY,Trade Adjustment Assistance for Firms,2022,957950
+NY,Trade Adjustment Assistance for Firms,2023,2074177
+OH,Total,2012,5561627
+OH,Total,2013,5316342
+OH,Total,2014,7883231
+OH,Total,2015,7493348
+OH,Total,2016,6072144
+OH,Total,2017,2145255
+OH,Total,2018,578468
+OH,Total,2019,2604967
+OH,Total,2020,3153085
+OH,Total,2021,3755720
+OH,Total,2022,55157119
+OH,Total,2023,6569733
+OH,Total,2024,7534990
+OH,Total,2025,36702104
+OH,Total,2026,80400
+OH,Distressed Area Recompete Pilot Program,2024,976772
+OH,Economic Adjustment Assistance,2012,2625788
+OH,Economic Adjustment Assistance,2013,1020446
+OH,Economic Adjustment Assistance,2015,6893848
+OH,Economic Adjustment Assistance,2016,69831
+OH,Economic Adjustment Assistance,2020,2598247
+OH,Economic Adjustment Assistance,2021,1453142
+OH,Economic Adjustment Assistance,2022,42524437
+OH,Economic Adjustment Assistance,2023,2899000
+OH,Economic Adjustment Assistance,2024,2910718
+OH,Economic Adjustment Assistance,2025,3084371
+OH,Planning,2013,666396
+OH,Planning,2016,1175181
+OH,Planning,2017,51628
+OH,Planning,2019,1260000
+OH,Planning,2020,35000
+OH,Planning,2021,172544
+OH,Planning,2022,1076500
+OH,Planning,2023,194250
+OH,Planning,2024,190000
+OH,Planning,2025,660000
+OH,Public Works,2012,2935839
+OH,Public Works,2013,3629500
+OH,Public Works,2014,7714861
+OH,Public Works,2016,4078850
+OH,Public Works,2022,10019200
+OH,Public Works,2023,2427825
+OH,Public Works,2025,1524511
+OH,Regional Innovation Strategies,2020,519838
+OH,Regional Innovation Strategies,2022,1536982
+OH,Regional Innovation Strategies,2023,1048658
+OH,Regional Technology and Innovation Hubs,2024,3049672
+OH,Regional Technology and Innovation Hubs,2025,31258222
+OH,STEM Talent Challenge,2021,295642
+OH,STEM Talent Challenge,2024,332828
+OH,Technical Assistance,2014,168370
+OH,Technical Assistance,2015,599500
+OH,Technical Assistance,2016,748282
+OH,Technical Assistance,2017,2093627
+OH,Technical Assistance,2018,578468
+OH,Technical Assistance,2019,1344967
+OH,Technical Assistance,2021,1834392
+OH,Technical Assistance,2024,75000
+OH,Technical Assistance,2025,175000
 OH,Technical Assistance,2026,80400
+OK,Total,2012,2930293
+OK,Total,2013,2475540
+OK,Total,2014,4612023
+OK,Total,2015,3220000
+OK,Total,2016,4229540
+OK,Total,2017,3506820
+OK,Total,2018,1167939
+OK,Total,2019,250000
+OK,Total,2020,6933428
+OK,Total,2022,7605141
+OK,Total,2023,3023201
+OK,Total,2024,19904350
+OK,Total,2025,49026908
+OK,Total,2026,4580000
+OK,Economic Adjustment Assistance,2013,600000
+OK,Economic Adjustment Assistance,2014,2300000
+OK,Economic Adjustment Assistance,2016,1575000
+OK,Economic Adjustment Assistance,2020,4623428
+OK,Economic Adjustment Assistance,2022,4420575
+OK,Economic Adjustment Assistance,2024,11504400
+OK,Economic Adjustment Assistance,2026,4580000
+OK,Planning,2012,112573
+OK,Planning,2013,150000
+OK,Planning,2014,1080000
+OK,Planning,2015,120000
+OK,Planning,2016,363140
+OK,Planning,2017,1960000
+OK,Planning,2018,140000
+OK,Planning,2019,250000
+OK,Planning,2020,2310000
+OK,Planning,2022,360000
+OK,Planning,2023,2310000
+OK,Planning,2025,180000
+OK,Public Works,2012,2817720
+OK,Public Works,2013,950000
+OK,Public Works,2014,1232023
+OK,Public Works,2015,3000000
+OK,Public Works,2016,1940000
+OK,Public Works,2022,1600000
+OK,Public Works,2024,5566600
+OK,Regional Innovation Strategies,2022,1224566
+OK,Regional Innovation Strategies,2023,713201
+OK,Regional Technology and Innovation Hubs,2024,2109750
+OK,Regional Technology and Innovation Hubs,2025,48846908
+OK,Technical Assistance,2013,775540
+OK,Technical Assistance,2015,100000
+OK,Technical Assistance,2016,351400
+OK,Technical Assistance,2017,1546820
+OK,Technical Assistance,2018,1027939
+OK,Technical Assistance,2024,723600
+OR,Total,2012,5127110
+OR,Total,2013,3019440
+OR,Total,2014,2188436
+OR,Total,2015,5310885
+OR,Total,2016,2580231
+OR,Total,2017,5374484
+OR,Total,2018,874972
+OR,Total,2019,370000
+OR,Total,2020,8401528
+OR,Total,2021,3144798
+OR,Total,2022,50751709
+OR,Total,2023,3856419
+OR,Total,2024,6736431
+OR,Total,2025,2166193
+OR,Total,2026,3110627
+OR,Economic Adjustment Assistance,2012,1762110
+OR,Economic Adjustment Assistance,2013,1349440
+OR,Economic Adjustment Assistance,2014,401036
+OR,Economic Adjustment Assistance,2015,120885
+OR,Economic Adjustment Assistance,2020,5281528
+OR,Economic Adjustment Assistance,2021,1492610
+OR,Economic Adjustment Assistance,2022,48797959
+OR,Economic Adjustment Assistance,2023,1981419
+OR,Economic Adjustment Assistance,2024,4801920
+OR,Economic Adjustment Assistance,2025,1941193
+OR,Economic Adjustment Assistance,2026,910627
+OR,Planning,2012,2615000
+OR,Planning,2013,50000
+OR,Planning,2014,206600
+OR,Planning,2015,2190000
+OR,Planning,2016,50000
+OR,Planning,2017,4624986
+OR,Planning,2019,70000
+OR,Planning,2020,1125000
+OR,Planning,2021,583104
+OR,Planning,2022,1383750
+OR,Planning,2023,1125000
+OR,Planning,2024,864511
+OR,Planning,2025,225000
+OR,Public Works,2013,1500000
+OR,Public Works,2014,1580800
+OR,Public Works,2015,3000000
+OR,Public Works,2016,2083000
+OR,Public Works,2020,900000
+OR,Public Works,2026,2200000
+OR,Regional Innovation Strategies,2020,1000000
+OR,Regional Innovation Strategies,2023,750000
+OR,Regional Technology and Innovation Hubs,2024,1000000
+OR,Technical Assistance,2012,750000
+OR,Technical Assistance,2013,120000
+OR,Technical Assistance,2016,447231
+OR,Technical Assistance,2017,749498
+OR,Technical Assistance,2018,874972
+OR,Technical Assistance,2019,300000
+OR,Technical Assistance,2020,95000
+OR,Technical Assistance,2021,1069084
+OR,Technical Assistance,2022,570000
+OR,Technical Assistance,2024,70000
+PA,Total,2012,5139500
+PA,Total,2013,5671014
+PA,Total,2014,12880090
+PA,Total,2015,8811473
+PA,Total,2016,8241774
+PA,Total,2017,2195452
+PA,Total,2018,2553498
+PA,Total,2019,5089518
+PA,Total,2020,4445118
+PA,Total,2021,3098191
+PA,Total,2022,28117975
+PA,Total,2023,6975304
+PA,Total,2024,5638524
+PA,Total,2025,20210000
+PA,Total,2026,400000
+PA,Distressed Area Recompete Pilot Program,2024,500000
+PA,Distressed Area Recompete Pilot Program,2025,20000000
 PA,Distressed Area Recompete Pilot Program,2026,400000
-VA,Research and National Technical Assistance,2021,5139268
+PA,Economic Adjustment Assistance,2012,775000
+PA,Economic Adjustment Assistance,2013,1463098
+PA,Economic Adjustment Assistance,2014,4708000
+PA,Economic Adjustment Assistance,2015,1320000
+PA,Economic Adjustment Assistance,2016,1440142
+PA,Economic Adjustment Assistance,2020,3100000
+PA,Economic Adjustment Assistance,2021,744230
+PA,Economic Adjustment Assistance,2022,24776361
+PA,Economic Adjustment Assistance,2024,1868524
+PA,Planning,2013,570000
+PA,Planning,2014,560000
+PA,Planning,2015,40000
+PA,Planning,2016,1439311
+PA,Planning,2019,1545000
+PA,Planning,2022,1330000
+PA,Planning,2023,764922
+PA,Planning,2025,210000
+PA,Public Works,2012,4284500
+PA,Public Works,2013,3297925
+PA,Public Works,2014,7462090
+PA,Public Works,2015,6990487
+PA,Public Works,2016,2100000
+PA,Public Works,2024,2800000
+PA,Regional Innovation Strategies,2021,297939
+PA,Regional Innovation Strategies,2022,575321
+PA,Regional Innovation Strategies,2023,3848061
+PA,Regional Technology and Innovation Hubs,2024,400000
+PA,Research and National Technical Assistance,2012,80000
+PA,STEM Talent Challenge,2021,246179
+PA,STEM Talent Challenge,2022,249397
+PA,Technical Assistance,2013,339991
+PA,Technical Assistance,2014,150000
+PA,Technical Assistance,2015,460986
+PA,Technical Assistance,2016,1333335
+PA,Technical Assistance,2017,1000000
+PA,Technical Assistance,2018,1398124
+PA,Technical Assistance,2019,2499998
+PA,Technical Assistance,2021,562910
+PA,Technical Assistance,2024,70000
+PA,Trade Adjustment Assistance for Firms,2016,1928986
+PA,Trade Adjustment Assistance for Firms,2017,1195452
+PA,Trade Adjustment Assistance for Firms,2018,1155374
+PA,Trade Adjustment Assistance for Firms,2019,1044520
+PA,Trade Adjustment Assistance for Firms,2020,1345118
+PA,Trade Adjustment Assistance for Firms,2021,1246933
+PA,Trade Adjustment Assistance for Firms,2022,1186896
+PA,Trade Adjustment Assistance for Firms,2023,2362321
+PR,Total,2013,1545519
+PR,Total,2014,162099
+PR,Total,2016,1121657
+PR,Total,2018,10786166
+PR,Total,2019,4689581
+PR,Total,2020,300000
+PR,Total,2021,700738
+PR,Total,2022,17859149
+PR,Total,2024,3480063
+PR,Total,2025,30858803
+PR,Distressed Area Recompete Pilot Program,2024,499084
+PR,Distressed Area Recompete Pilot Program,2025,30258803
+PR,Economic Adjustment Assistance,2016,320000
+PR,Economic Adjustment Assistance,2018,10786166
+PR,Economic Adjustment Assistance,2019,4072422
+PR,Economic Adjustment Assistance,2020,300000
+PR,Economic Adjustment Assistance,2021,212828
+PR,Economic Adjustment Assistance,2022,17859149
+PR,Economic Adjustment Assistance,2024,2225081
+PR,Economic Adjustment Assistance,2025,600000
+PR,Planning,2024,256500
+PR,Public Works,2013,1545519
+PR,Regional Innovation Strategies,2019,220927
+PR,Regional Technology and Innovation Hubs,2024,499398
+PR,Technical Assistance,2014,162099
+PR,Technical Assistance,2016,801657
+PR,Technical Assistance,2019,396232
+PR,Technical Assistance,2021,487910
+RI,Total,2012,465000
+RI,Total,2013,100000
+RI,Total,2014,800000
+RI,Total,2016,625000
+RI,Total,2017,125000
+RI,Total,2019,257321
+RI,Total,2021,1810084
+RI,Total,2022,6092783
+RI,Total,2023,260000
+RI,Total,2024,5039327
+RI,Total,2025,3118500
+RI,Economic Adjustment Assistance,2013,100000
+RI,Economic Adjustment Assistance,2021,724674
+RI,Economic Adjustment Assistance,2022,6092783
+RI,Economic Adjustment Assistance,2024,4643978
+RI,Economic Adjustment Assistance,2025,3118500
+RI,Planning,2017,125000
+RI,Planning,2023,200000
+RI,Public Works,2012,440000
+RI,Public Works,2014,800000
+RI,Public Works,2016,625000
+RI,Regional Technology and Innovation Hubs,2024,395349
+RI,Research and National Technical Assistance,2012,25000
+RI,Technical Assistance,2019,257321
+RI,Technical Assistance,2021,1085410
+RI,Technical Assistance,2023,60000
+SC,Total,2012,15156460
+SC,Total,2013,6833770
+SC,Total,2014,11640390
+SC,Total,2015,8404412
+SC,Total,2016,13250122
+SC,Total,2017,2010264
+SC,Total,2018,499853
+SC,Total,2019,3704988
+SC,Total,2020,4187500
+SC,Total,2021,1342000
+SC,Total,2022,45350361
+SC,Total,2023,14174309
+SC,Total,2024,32997795
+SC,Total,2025,50237146
+SC,Economic Adjustment Assistance,2012,1500000
+SC,Economic Adjustment Assistance,2013,2450000
+SC,Economic Adjustment Assistance,2014,2521820
+SC,Economic Adjustment Assistance,2015,780000
+SC,Economic Adjustment Assistance,2016,4446447
+SC,Economic Adjustment Assistance,2020,4150000
+SC,Economic Adjustment Assistance,2021,1342000
+SC,Economic Adjustment Assistance,2022,36102749
+SC,Economic Adjustment Assistance,2023,13649309
+SC,Economic Adjustment Assistance,2024,26173000
+SC,Economic Adjustment Assistance,2025,3000000
+SC,Planning,2014,135000
+SC,Planning,2015,56345
+SC,Planning,2016,1969637
+SC,Planning,2017,70000
+SC,Planning,2019,2205000
+SC,Planning,2020,37500
+SC,Planning,2022,2205000
+SC,Planning,2025,1890000
+SC,Public Works,2012,13013500
+SC,Public Works,2013,4288779
+SC,Public Works,2014,8983570
+SC,Public Works,2015,6888487
+SC,Public Works,2016,6602165
+SC,Public Works,2017,1298000
+SC,Public Works,2022,5984904
+SC,Public Works,2024,6824795
+SC,Regional Innovation Strategies,2019,1499988
+SC,Regional Innovation Strategies,2022,400000
+SC,Regional Innovation Strategies,2023,525000
+SC,Regional Technology and Innovation Hubs,2025,45347146
+SC,Science and Research Park Development Grants,2015,395000
+SC,Technical Assistance,2012,642960
+SC,Technical Assistance,2013,94991
+SC,Technical Assistance,2015,284580
+SC,Technical Assistance,2016,231873
+SC,Technical Assistance,2017,642264
+SC,Technical Assistance,2018,499853
+SC,Technical Assistance,2022,657708
+SD,Total,2012,1000000
+SD,Total,2013,1808654
+SD,Total,2014,766000
+SD,Total,2015,1910000
+SD,Total,2016,5621254
+SD,Total,2017,1322000
+SD,Total,2018,498000
+SD,Total,2019,851527
+SD,Total,2020,3291062
+SD,Total,2021,1956000
+SD,Total,2022,35346410
+SD,Total,2023,1151090
+SD,Total,2024,24281274
+SD,Total,2025,3782989
+SD,Economic Adjustment Assistance,2015,1100000
+SD,Economic Adjustment Assistance,2016,2570504
+SD,Economic Adjustment Assistance,2020,3138062
+SD,Economic Adjustment Assistance,2022,34677410
+SD,Economic Adjustment Assistance,2023,250054
+SD,Economic Adjustment Assistance,2024,16486600
+SD,Economic Adjustment Assistance,2025,3476989
+SD,Planning,2013,562600
+SD,Planning,2014,766000
+SD,Planning,2015,60000
+SD,Planning,2016,2265750
+SD,Planning,2017,1322000
+SD,Planning,2019,210000
+SD,Planning,2020,153000
+SD,Planning,2021,1356000
+SD,Planning,2022,669000
+SD,Planning,2023,153000
+SD,Planning,2024,1356000
+SD,Planning,2025,306000
+SD,Public Works,2012,1000000
+SD,Public Works,2013,1246054
+SD,Public Works,2015,750000
+SD,Public Works,2016,755000
+SD,Public Works,2024,5648668
+SD,Regional Innovation Strategies,2023,748036
+SD,Regional Technology and Innovation Hubs,2024,500000
+SD,Technical Assistance,2016,30000
+SD,Technical Assistance,2018,498000
+SD,Technical Assistance,2019,641527
+SD,Technical Assistance,2021,600000
+SD,Technical Assistance,2024,290006
+TN,Total,2012,17191249
+TN,Total,2013,11525834
+TN,Total,2014,3076326
+TN,Total,2015,6925752
+TN,Total,2016,3081400
+TN,Total,2017,1650272
+TN,Total,2018,1470000
+TN,Total,2019,1959500
+TN,Total,2020,4200000
+TN,Total,2021,3418407
+TN,Total,2022,46186819
+TN,Total,2023,9285785
+TN,Total,2024,14312106
+TN,Total,2025,5082000
+TN,Distressed Area Recompete Pilot Program,2024,496100
+TN,Economic Adjustment Assistance,2012,12546839
+TN,Economic Adjustment Assistance,2013,8505834
+TN,Economic Adjustment Assistance,2014,1300000
+TN,Economic Adjustment Assistance,2015,3014950
+TN,Economic Adjustment Assistance,2020,4200000
+TN,Economic Adjustment Assistance,2021,1395156
+TN,Economic Adjustment Assistance,2022,44999493
+TN,Economic Adjustment Assistance,2023,6596250
+TN,Economic Adjustment Assistance,2024,5592000
+TN,Economic Adjustment Assistance,2025,4872000
+TN,Planning,2012,1001450
+TN,Planning,2014,276326
+TN,Planning,2015,1573000
+TN,Planning,2016,581000
+TN,Planning,2018,1470000
+TN,Planning,2019,420000
+TN,Planning,2021,1723600
+TN,Planning,2022,420000
+TN,Planning,2024,1330000
+TN,Planning,2025,210000
+TN,Public Works,2012,3000000
+TN,Public Works,2013,3020000
+TN,Public Works,2014,1500000
+TN,Public Works,2015,1340225
+TN,Public Works,2016,2500400
+TN,Public Works,2024,6669006
+TN,Regional Innovation Strategies,2023,2689535
+TN,Science and Research Park Development Grants,2015,498577
+TN,Technical Assistance,2012,642960
+TN,Technical Assistance,2015,499000
+TN,Technical Assistance,2017,1650272
+TN,Technical Assistance,2019,1539500
+TN,Technical Assistance,2021,299651
+TN,Technical Assistance,2022,767326
+TN,Technical Assistance,2024,225000
+TX,Total,2012,16622918
+TX,Total,2013,10826080
+TX,Total,2014,12383398
+TX,Total,2015,11415191
+TX,Total,2016,14447579
+TX,Total,2017,3179256
+TX,Total,2018,7598216
+TX,Total,2019,4238647
+TX,Total,2020,16038476
+TX,Total,2021,12432705
+TX,Total,2022,40249982
+TX,Total,2023,5863312
+TX,Total,2024,49333207
+TX,Total,2025,7030000
+TX,Total,2026,4700000
+TX,Economic Adjustment Assistance,2012,3012917
+TX,Economic Adjustment Assistance,2013,775000
+TX,Economic Adjustment Assistance,2014,3802145
+TX,Economic Adjustment Assistance,2015,3200000
+TX,Economic Adjustment Assistance,2016,3200000
+TX,Economic Adjustment Assistance,2020,10273070
+TX,Economic Adjustment Assistance,2021,2927325
+TX,Economic Adjustment Assistance,2022,31392500
+TX,Economic Adjustment Assistance,2023,3459000
+TX,Economic Adjustment Assistance,2024,40134400
+TX,Economic Adjustment Assistance,2025,580000
+TX,Planning,2012,3520000
+TX,Planning,2013,125000
+TX,Planning,2014,426074
+TX,Planning,2015,3074303
+TX,Planning,2016,721000
+TX,Planning,2017,140000
+TX,Planning,2018,4310000
+TX,Planning,2019,840000
+TX,Planning,2021,3987448
+TX,Planning,2022,969120
+TX,Planning,2024,4101000
+TX,Public Works,2012,9940001
+TX,Public Works,2013,8695000
+TX,Public Works,2014,7649999
+TX,Public Works,2015,4786200
+TX,Public Works,2016,8629274
+TX,Public Works,2022,3252800
+TX,Public Works,2024,2610000
+TX,Public Works,2025,6450000
+TX,Public Works,2026,4700000
+TX,Regional Innovation Strategies,2019,659763
+TX,Regional Innovation Strategies,2020,2984430
+TX,Regional Innovation Strategies,2021,4026126
+TX,Regional Innovation Strategies,2022,3053814
+TX,Regional Technology and Innovation Hubs,2024,799997
+TX,Research and National Technical Assistance,2012,150000
+TX,STEM Talent Challenge,2021,299643
+TX,STEM Talent Challenge,2024,647810
+TX,Technical Assistance,2013,1231080
+TX,Technical Assistance,2014,505180
+TX,Technical Assistance,2015,354688
+TX,Technical Assistance,2017,1841435
+TX,Technical Assistance,2018,2143138
+TX,Technical Assistance,2019,1527100
+TX,Technical Assistance,2020,1500000
+TX,Technical Assistance,2022,500470
+TX,Technical Assistance,2024,1040000
+TX,Trade Adjustment Assistance for Firms,2016,1897305
+TX,Trade Adjustment Assistance for Firms,2017,1197821
+TX,Trade Adjustment Assistance for Firms,2018,1145078
+TX,Trade Adjustment Assistance for Firms,2019,1211784
+TX,Trade Adjustment Assistance for Firms,2020,1280976
+TX,Trade Adjustment Assistance for Firms,2021,1192163
+TX,Trade Adjustment Assistance for Firms,2022,1081278
+TX,Trade Adjustment Assistance for Firms,2023,2404312
+UT,Total,2012,50000
+UT,Total,2013,3573235
+UT,Total,2014,4623900
+UT,Total,2015,2468300
+UT,Total,2016,3689618
+UT,Total,2018,80000
+UT,Total,2019,925000
+UT,Total,2020,3706230
+UT,Total,2021,1120000
+UT,Total,2022,11853533
+UT,Total,2023,871964
+UT,Total,2024,1394588
+UT,Total,2025,243000
+UT,Economic Adjustment Assistance,2013,1135900
+UT,Economic Adjustment Assistance,2016,1190118
+UT,Economic Adjustment Assistance,2020,2901230
+UT,Economic Adjustment Assistance,2022,9910473
+UT,Economic Adjustment Assistance,2024,574588
+UT,Planning,2012,50000
+UT,Planning,2013,540700
+UT,Planning,2014,488000
+UT,Planning,2015,40300
+UT,Planning,2016,1984500
+UT,Planning,2019,210000
+UT,Planning,2020,805000
+UT,Planning,2021,520000
+UT,Planning,2022,210000
+UT,Planning,2023,840000
+UT,Planning,2024,420000
+UT,Planning,2025,243000
+UT,Public Works,2013,1896635
+UT,Public Works,2014,4065900
+UT,Public Works,2015,2181000
+UT,Regional Innovation Strategies,2022,1498509
+UT,STEM Talent Challenge,2022,234551
+UT,Technical Assistance,2014,70000
+UT,Technical Assistance,2015,247000
+UT,Technical Assistance,2016,515000
+UT,Technical Assistance,2018,80000
+UT,Technical Assistance,2019,715000
+UT,Technical Assistance,2021,600000
+UT,Technical Assistance,2023,31964
+UT,Technical Assistance,2024,400000
+VA,Total,2012,2300000
+VA,Total,2013,2520226
+VA,Total,2014,700000
+VA,Total,2015,2364257
+VA,Total,2016,5763221
+VA,Total,2017,59900
+VA,Total,2018,553979
+VA,Total,2019,3762242
+VA,Total,2020,4397590
+VA,Total,2021,5433556
+VA,Total,2022,20179154
+VA,Total,2023,719871
+VA,Total,2024,16631504
+VA,Total,2025,13248193
+VA,Total,2026,752000
+VA,Economic Adjustment Assistance,2012,1500000
+VA,Economic Adjustment Assistance,2013,280600
+VA,Economic Adjustment Assistance,2015,275000
+VA,Economic Adjustment Assistance,2020,4265000
+VA,Economic Adjustment Assistance,2021,1574504
+VA,Economic Adjustment Assistance,2022,17399154
+VA,Economic Adjustment Assistance,2024,15307806
+VA,Economic Adjustment Assistance,2025,6608665
+VA,Economic Adjustment Assistance,2026,752000
+VA,Planning,2013,1058000
+VA,Planning,2014,700000
+VA,Planning,2015,150000
+VA,Planning,2016,2100000
+VA,Planning,2017,59900
+VA,Planning,2018,70000
+VA,Planning,2019,2099993
+VA,Planning,2021,199172
+VA,Planning,2022,1960000
+VA,Planning,2023,210000
+VA,Planning,2024,210000
+VA,Planning,2025,2520000
+VA,Public Works,2012,800000
+VA,Public Works,2013,1181626
+VA,Public Works,2015,1939257
+VA,Public Works,2016,2600000
+VA,Public Works,2025,4069528
+VA,Regional Innovation Strategies,2019,547249
+VA,Regional Innovation Strategies,2020,62590
+VA,Regional Innovation Strategies,2022,750000
+VA,Regional Innovation Strategies,2023,299871
+VA,Regional Technology and Innovation Hubs,2024,993698
+VA,Research and National Technical Assistance,2021,1284817
+VA,Technical Assistance,2016,1063221
+VA,Technical Assistance,2018,483979
+VA,Technical Assistance,2019,1115000
+VA,Technical Assistance,2020,70000
+VA,Technical Assistance,2021,2375063
+VA,Technical Assistance,2022,70000
+VA,Technical Assistance,2023,210000
+VA,Technical Assistance,2024,120000
+VA,Technical Assistance,2025,50000
+VI,Total,2014,296876
+VI,Total,2015,2271891
+VI,Total,2022,1000000
+VI,Economic Adjustment Assistance,2014,296876
+VI,Economic Adjustment Assistance,2015,286673
+VI,Economic Adjustment Assistance,2022,1000000
+VI,Public Works,2015,1985218
+VT,Total,2012,515000
+VT,Total,2013,3275000
+VT,Total,2014,124531
+VT,Total,2015,335650
+VT,Total,2016,2127073
+VT,Total,2018,70000
+VT,Total,2019,1923618
+VT,Total,2020,800000
+VT,Total,2021,280000
+VT,Total,2022,3016525
+VT,Total,2023,2404319
+VT,Total,2024,988895
+VT,Total,2025,210000
+VT,Economic Adjustment Assistance,2012,440000
+VT,Economic Adjustment Assistance,2013,3275000
+VT,Economic Adjustment Assistance,2015,265650
+VT,Economic Adjustment Assistance,2016,1563073
+VT,Economic Adjustment Assistance,2020,800000
+VT,Economic Adjustment Assistance,2022,966025
+VT,Economic Adjustment Assistance,2024,414897
+VT,Planning,2012,75000
+VT,Planning,2014,124531
+VT,Planning,2015,70000
+VT,Planning,2016,420000
+VT,Planning,2018,70000
+VT,Planning,2019,420000
+VT,Planning,2021,280000
+VT,Planning,2022,262500
+VT,Planning,2023,210000
+VT,Planning,2024,74000
+VT,Planning,2025,210000
+VT,Public Works,2022,1538000
+VT,Regional Innovation Strategies,2022,250000
+VT,Regional Innovation Strategies,2023,2194319
+VT,Regional Technology and Innovation Hubs,2024,499998
+VT,Technical Assistance,2016,144000
+VT,Technical Assistance,2019,1503618
+WA,Total,2012,12838048
+WA,Total,2013,2257080
+WA,Total,2014,6417522
+WA,Total,2015,4458902
+WA,Total,2016,6955271
+WA,Total,2017,5157461
+WA,Total,2018,2156622
+WA,Total,2019,1314755
+WA,Total,2020,8007282
+WA,Total,2021,4861962
+WA,Total,2022,76544146
+WA,Total,2023,6622313
+WA,Total,2024,6415011
+WA,Total,2025,45145836
+WA,Distressed Area Recompete Pilot Program,2024,991614
+WA,Distressed Area Recompete Pilot Program,2025,35622317
+WA,Economic Adjustment Assistance,2012,4865300
+WA,Economic Adjustment Assistance,2013,1970831
+WA,Economic Adjustment Assistance,2014,995000
+WA,Economic Adjustment Assistance,2015,384038
+WA,Economic Adjustment Assistance,2016,411916
+WA,Economic Adjustment Assistance,2020,5368895
+WA,Economic Adjustment Assistance,2021,2087831
+WA,Economic Adjustment Assistance,2022,71260417
+WA,Economic Adjustment Assistance,2024,3904113
+WA,Economic Adjustment Assistance,2025,9263519
+WA,Planning,2012,2854500
+WA,Planning,2013,286249
+WA,Planning,2014,22522
+WA,Planning,2015,1803000
+WA,Planning,2016,212500
+WA,Planning,2017,2488518
+WA,Planning,2018,70000
+WA,Planning,2019,210000
+WA,Planning,2020,1365636
+WA,Planning,2021,616000
+WA,Planning,2022,435000
+WA,Planning,2023,1485000
+WA,Planning,2024,791576
+WA,Planning,2025,260000
+WA,Public Works,2012,4405300
+WA,Public Works,2014,5400000
+WA,Public Works,2015,2000000
+WA,Public Works,2016,3714784
+WA,Public Works,2022,2800000
+WA,Public Works,2023,3141029
+WA,Regional Innovation Strategies,2022,315005
+WA,Regional Innovation Strategies,2023,674874
+WA,STEM Talent Challenge,2024,252933
+WA,Science and Research Park Development Grants,2015,158467
+WA,Technical Assistance,2012,712948
+WA,Technical Assistance,2015,113397
+WA,Technical Assistance,2016,550000
+WA,Technical Assistance,2017,1498525
+WA,Technical Assistance,2018,800000
+WA,Technical Assistance,2020,55000
+WA,Technical Assistance,2021,900000
+WA,Technical Assistance,2022,375000
+WA,Technical Assistance,2023,163130
+WA,Technical Assistance,2024,474775
+WA,Trade Adjustment Assistance for Firms,2016,2066071
+WA,Trade Adjustment Assistance for Firms,2017,1170418
+WA,Trade Adjustment Assistance for Firms,2018,1286622
+WA,Trade Adjustment Assistance for Firms,2019,1104755
+WA,Trade Adjustment Assistance for Firms,2020,1217751
+WA,Trade Adjustment Assistance for Firms,2021,1258131
+WA,Trade Adjustment Assistance for Firms,2022,1358724
+WA,Trade Adjustment Assistance for Firms,2023,1158280
+WI,Total,2012,1948368
+WI,Total,2013,3458232
+WI,Total,2014,1875492
+WI,Total,2015,2007036
+WI,Total,2016,1388682
+WI,Total,2017,2673263
+WI,Total,2018,808333
+WI,Total,2019,444032
+WI,Total,2020,4570122
+WI,Total,2021,2597809
+WI,Total,2022,18111793
+WI,Total,2023,4610858
+WI,Total,2024,5633887
+WI,Total,2025,39203993
+WI,Total,2026,3840797
+WI,Distressed Area Recompete Pilot Program,2024,500000
+WI,Economic Adjustment Assistance,2012,1368356
+WI,Economic Adjustment Assistance,2013,1190157
+WI,Economic Adjustment Assistance,2014,81700
+WI,Economic Adjustment Assistance,2016,477205
+WI,Economic Adjustment Assistance,2020,3504622
+WI,Economic Adjustment Assistance,2021,466383
+WI,Economic Adjustment Assistance,2022,17577593
+WI,Economic Adjustment Assistance,2023,510430
+WI,Economic Adjustment Assistance,2025,2272951
+WI,Economic Adjustment Assistance,2026,331956
+WI,Planning,2012,300012
+WI,Planning,2013,58165
+WI,Planning,2014,793792
+WI,Planning,2015,315734
+WI,Planning,2016,411512
+WI,Planning,2017,950628
+WI,Planning,2018,668000
+WI,Planning,2019,419032
+WI,Planning,2020,993000
+WI,Planning,2021,603000
+WI,Planning,2022,463000
+WI,Planning,2023,994853
+WI,Planning,2024,573000
 WI,Planning,2026,150000
+WI,Public Works,2013,2000000
+WI,Public Works,2014,800000
+WI,Public Works,2015,1421700
+WI,Public Works,2023,2638075
+WI,Public Works,2026,3188000
+WI,Regional Innovation Strategies,2023,467500
+WI,Regional Technology and Innovation Hubs,2024,4560887
+WI,Regional Technology and Innovation Hubs,2025,36856042
+WI,Technical Assistance,2012,280000
+WI,Technical Assistance,2013,209910
+WI,Technical Assistance,2014,200000
+WI,Technical Assistance,2015,269602
+WI,Technical Assistance,2016,499965
+WI,Technical Assistance,2017,1722635
+WI,Technical Assistance,2018,140333
+WI,Technical Assistance,2019,25000
+WI,Technical Assistance,2020,72500
+WI,Technical Assistance,2021,1528426
+WI,Technical Assistance,2022,71200
+WI,Technical Assistance,2025,75000
 WI,Technical Assistance,2026,170841
+WV,Total,2013,1844000
+WV,Total,2015,2906150
+WV,Total,2016,12956140
+WV,Total,2018,598030
+WV,Total,2019,2040525
+WV,Total,2020,4753586
+WV,Total,2021,487910
+WV,Total,2022,3525489
+WV,Total,2023,6347136
+WV,Total,2024,31474562
+WV,Total,2025,1680000
+WV,Economic Adjustment Assistance,2015,2700150
+WV,Economic Adjustment Assistance,2016,8249304
+WV,Economic Adjustment Assistance,2020,4613586
+WV,Economic Adjustment Assistance,2022,1998989
+WV,Economic Adjustment Assistance,2023,5717136
+WV,Economic Adjustment Assistance,2024,30454786
+WV,Planning,2013,1844000
+WV,Planning,2015,206000
+WV,Planning,2016,2170000
+WV,Planning,2018,100000
+WV,Planning,2019,1845853
+WV,Planning,2020,140000
+WV,Planning,2022,1526500
+WV,Planning,2023,630000
+WV,Planning,2024,70000
+WV,Planning,2025,1680000
+WV,Public Works,2016,2040000
+WV,Regional Technology and Innovation Hubs,2024,949776
+WV,Technical Assistance,2016,496836
+WV,Technical Assistance,2018,498030
+WV,Technical Assistance,2019,194672
+WV,Technical Assistance,2021,487910
+WY,Total,2012,97455
+WY,Total,2013,575000
+WY,Total,2014,1809600
+WY,Total,2015,50000
+WY,Total,2016,1566000
+WY,Total,2017,199717
+WY,Total,2018,40000
+WY,Total,2021,213850
+WY,Total,2022,2255000
+WY,Total,2023,5147088
+WY,Total,2024,803724
+WY,Total,2025,36318360
+WY,Distressed Area Recompete Pilot Program,2024,403724
+WY,Distressed Area Recompete Pilot Program,2025,36145440
+WY,Economic Adjustment Assistance,2017,125965
+WY,Economic Adjustment Assistance,2022,2255000
+WY,Economic Adjustment Assistance,2023,5000000
+WY,Economic Adjustment Assistance,2025,172920
+WY,Planning,2013,135000
+WY,Planning,2014,120000
+WY,Planning,2016,66000
+WY,Planning,2017,73752
+WY,Planning,2018,40000
+WY,Public Works,2014,1689600
+WY,Public Works,2016,1500000
+WY,Research and National Technical Assistance,2012,97455
+WY,Technical Assistance,2013,440000
+WY,Technical Assistance,2015,50000
+WY,Technical Assistance,2021,213850
+WY,Technical Assistance,2023,147088
+WY,Technical Assistance,2024,400000
