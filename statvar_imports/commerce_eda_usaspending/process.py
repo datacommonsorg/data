@@ -49,6 +49,8 @@ CFDA_PROGRAMS = {
     "11.023": "STEM Talent Challenge"
 }
 
+MAX_PAGES_PER_FY = 500
+
 
 def get_session():
     session = requests.Session()
@@ -94,6 +96,10 @@ def fetch_usaspending_data(start_year,
         logging.info(f"Fetching FY {fy} awards ({start_date} to {end_date})...")
 
         while True:
+            if page > MAX_PAGES_PER_FY:
+                raise RuntimeError(
+                    f"Exceeded maximum page threshold ({MAX_PAGES_PER_FY}) for FY {fy}"
+                )
             payload = {
                 "filters": {
                     "agencies": [{
@@ -203,8 +209,9 @@ def process_data(awards, start_year, end_year, output_path):
             f"Encountered unmapped EDA CFDAs: {sorted(list(unmapped_cfdas))}")
 
     if not data_rows:
-        logging.fatal("No records processed. Output will not be generated.")
-        return
+        logging.error("No records processed. Output will not be generated.")
+        raise RuntimeError(
+            "No records processed. Output will not be generated.")
 
     df = pd.DataFrame(data_rows)
     # Aggregate net amounts per Place, Category, Year

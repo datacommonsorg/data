@@ -313,10 +313,11 @@ class TestProcessUSASpending(unittest.TestCase):
 
     def test_empty_awards_guard(self):
         # Empty list of awards
-        process_data([],
-                     start_year=2012,
-                     end_year=2024,
-                     output_path=self.output_csv)
+        with self.assertRaises(RuntimeError):
+            process_data([],
+                         start_year=2012,
+                         end_year=2024,
+                         output_path=self.output_csv)
         self.assertFalse(os.path.exists(self.output_csv))
 
         # Awards with no matching/valid records
@@ -326,12 +327,13 @@ class TestProcessUSASpending(unittest.TestCase):
             "Start Date": "1990-01-01",
             "Award Amount": 1000.0,
         }]
-        process_data(
-            invalid_awards,
-            start_year=2012,
-            end_year=2024,
-            output_path=self.output_csv,
-        )
+        with self.assertRaises(RuntimeError):
+            process_data(
+                invalid_awards,
+                start_year=2012,
+                end_year=2024,
+                output_path=self.output_csv,
+            )
         self.assertFalse(os.path.exists(self.output_csv))
 
     def test_date_parsing_and_amount_guards(self):
@@ -542,6 +544,35 @@ class TestProcessUSASpending(unittest.TestCase):
         total_row = df_actual[df_actual["State or Territory / EDA Program"] ==
                               "Total"]
         self.assertEqual(int(total_row["Value"].iloc[0]), 120000)
+
+    @patch("time.sleep", return_value=None)
+    @patch("requests.Session.post")
+    def test_fetch_usaspending_data_max_pages_ceiling(self, mock_post,
+                                                      mock_sleep):
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "results": [{
+                "Award ID": "123",
+                "Start Date": "2013-05-10",
+                "Award Amount": 50000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": True
+            },
+        }
+        mock_post.return_value = mock_resp
+
+        with patch(
+            "statvar_imports.commerce_eda_usaspending.process.MAX_PAGES_PER_FY",
+            2):
+            with self.assertRaises(RuntimeError) as ctx:
+                fetch_usaspending_data(start_year=2013, end_year=2013)
+            self.assertIn("Exceeded maximum page threshold (2) for FY 2013",
+                          str(ctx.exception))
+
 
 
 if __name__ == "__main__":

@@ -24,7 +24,7 @@ The import covers **11 distinct EDA grant programs** plus **Total**, mapped to c
 | `Amount_Investment_RegionalInnovationStrategies` | **Regional Innovation Strategies** (CFDA 11.024) | Build to Scale (Venture & Capital Challenges) | Retained & Expanded |
 | `Amount_Investment_RegionalTechnologyAndInnovationHubs` | **Regional Technology & Innovation Hubs** (CFDA 11.039) | CHIPS and Science Act Tech Hubs Program | **NEW** |
 | `Amount_Investment_DistressedAreaRecompetePilotProgram` | **Distressed Area Recompete Pilot Program** (CFDA 11.040) | Persistent economic distress grant initiatives | **NEW** |
-| `Amount_Investment_GoodJobsChallenge` | **Science & Research Park Development Grants** (CFDA 11.030) | Science & Research Park development infrastructure | **NEW** |
+| `Amount_Investment_ScienceAndResearchParkDevelopmentGrants` | **Science & Research Park Development Grants** (CFDA 11.030) | Science & Research Park development infrastructure | **NEW** |
 | `Amount_Investment_STEMTalentChallenge` | **STEM Talent Challenge** (CFDA 11.023) | Regional STEM work-and-learn models | **NEW** |
 
 ---

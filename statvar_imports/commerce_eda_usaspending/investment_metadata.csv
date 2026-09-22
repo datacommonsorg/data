@@ -7,4 +7,5 @@ comments,
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
 header_rows,1
 reconcile_nodes,False
+spell_allow_words,recompete
 
