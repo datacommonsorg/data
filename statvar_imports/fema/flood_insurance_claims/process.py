@@ -88,7 +88,7 @@ def _load_mappings(pv_map_arg: Optional[str] = None) -> Tuple[dict, dict]:
                                   'us_flood_nfip_floodzone_pv_map.py')
 
     if not state_file or not os.path.exists(state_file):
-        logging.fatal("State mapping file not found: %s", state_file)
+        logging.error("State mapping file not found: %s", state_file)
         raise FileNotFoundError(f"State mapping file not found: {state_file}")
 
     logging.info("Loading state codes from: %s", state_file)
@@ -96,12 +96,13 @@ def _load_mappings(pv_map_arg: Optional[str] = None) -> Tuple[dict, dict]:
         with open(state_file, 'r', encoding='utf-8') as f:
             state_map = ast.literal_eval(f.read())
     except Exception as e:
-        logging.fatal("Failed to parse state mapping file %s: %s", state_file, e)
+        logging.error("Failed to parse state mapping file %s: %s", state_file,
+                      e)
         raise RuntimeError(
             f"Failed to parse state mapping file {state_file}: {e}")
 
     if not zone_file or not os.path.exists(zone_file):
-        logging.fatal("Flood zone mapping file not found: %s", zone_file)
+        logging.error("Flood zone mapping file not found: %s", zone_file)
         raise FileNotFoundError(
             f"Flood zone mapping file not found: {zone_file}")
 
@@ -114,7 +115,7 @@ def _load_mappings(pv_map_arg: Optional[str] = None) -> Tuple[dict, dict]:
             for k, v in raw_map.items()
         }
     except Exception as e:
-        logging.fatal("Failed to parse flood zone mapping file %s: %s",
+        logging.error("Failed to parse flood zone mapping file %s: %s",
                       zone_file, e)
         raise RuntimeError(
             f"Failed to parse flood zone mapping file {zone_file}: {e}")
@@ -178,7 +179,8 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
     df['county_place'] = county_clean.apply(lambda x: f"dcid:geoId/{x}"
                                             if pd.notna(x) else None)
 
-    df['state_place'] = df['state'].astype(str).str.strip().str.upper().map(state_map)
+    df['state_place'] = df['state'].astype(str).str.strip().str.upper().map(
+        state_map)
     df['country_place'] = 'dcid:country/USA'
 
     # Temporal entities
@@ -192,8 +194,8 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
     unique_zones = df['ratedFloodZone'].dropna().unique()
     zone_dict = {
         z:
-        f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
-        not in ('nan', 'none', '') else "FEMAFloodZone"
+            f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
+            not in ('nan', 'none', '') else "FEMAFloodZone"
         for z in unique_zones
     }
     df['specific_zone'] = df['ratedFloodZone'].map(zone_dict).fillna(
@@ -202,9 +204,7 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
         risk_zone_map)
     df['all_zone'] = ""
 
-    place_cols = [
-        'tract_place', 'county_place', 'state_place', 'country_place'
-    ]
+    place_cols = ['tract_place', 'county_place', 'state_place', 'country_place']
     date_configs = [('month_date', 'P1M'), ('year_date', 'P1Y')]
     zone_cols = ['specific_zone', 'risk_zone', 'all_zone']
 
@@ -269,8 +269,6 @@ def _write_tmcf(output_path: str):
     logging.info("Wrote template MCF to: %s", tmcf_path)
 
 
-
-
 def _write_counters(counters_path: str, num_input_rows: int,
                     num_cleaned_obs: int):
     """Writes job counters to a text file atomically."""
@@ -297,7 +295,7 @@ def process_data_vectorized(
     if not os.path.isabs(input_data):
         input_data = os.path.join(_SCRIPT_DIR, input_data)
     if not os.path.exists(input_data):
-        logging.fatal("Input data file not found: %s", input_data)
+        logging.error("Input data file not found: %s", input_data)
         raise FileNotFoundError(f"Input data file not found: {input_data}")
     if not os.path.isabs(output_path):
         output_path = os.path.join(_SCRIPT_DIR, output_path)
@@ -390,8 +388,7 @@ def process_data_vectorized(
                  len(final_agg))
 
     statvar_specs = [
-        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '',
-         0),
+        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '', 0),
         ('b_val', 'SettlementAmount', 'BuildingStructure', 'dcs:USDollar', 2),
         ('c_val', 'SettlementAmount', 'BuildingContents', 'dcs:USDollar', 2),
         ('bc_val', 'SettlementAmount', 'BuildingStructureAndContents',
@@ -420,8 +417,8 @@ def process_data_vectorized(
         out_df = pd.concat(dfs_to_concat, ignore_index=True)
     else:
         out_df = pd.DataFrame(columns=[
-            'observationDate', 'observationAbout', 'value',
-            'observationPeriod', 'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value', 'observationPeriod',
+            'unit', 'variableMeasured'
         ])
 
     out_df = out_df.rename(
@@ -472,7 +469,10 @@ def process_data():
 
 
 def main(_):
-    process_data()
+    try:
+        process_data()
+    except Exception as e:
+        logging.fatal("Processing failed: %s", e)
 
 
 if __name__ == '__main__':

@@ -15,14 +15,17 @@
 
 import os
 import shutil
+import sys
 import tempfile
 import unittest
 
 import pandas as pd
 
-import process
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+
+import process
 
 
 class ProcessTest(unittest.TestCase):
@@ -104,8 +107,8 @@ class ProcessTest(unittest.TestCase):
         df = pd.read_csv(csv_file)
         self.assertEqual(len(df), 346)
         self.assertEqual(list(df.columns), [
-            'observationDate', 'observationAbout', 'value',
-            'observationPeriod', 'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value', 'observationPeriod',
+            'unit', 'variableMeasured'
         ])
 
         with open(self.counters_path, 'r', encoding='utf-8') as f:
@@ -182,8 +185,7 @@ class ProcessTest(unittest.TestCase):
                 '06079012705,06079,CA,2020-05-10,2020,A,1000.0,500.0,1\n'
                 '06079012705,06079,CA,2020-05-20,2020,UNKNOWN_ZONE,200.0,100.0,1\n'
                 '06079012705,06079,CA,2020-06-15,2020,A,0.0,0.0,1\n'
-                '06079012705,06079,CA,2020-07-01,2020,A,,,1\n'
-            )
+                '06079012705,06079,CA,2020-07-01,2020,A,,,1\n')
 
         process.process_data_vectorized(input_data=fixture_csv,
                                         output_path=self.output_prefix,
@@ -194,8 +196,8 @@ class ProcessTest(unittest.TestCase):
         df = pd.read_csv(f"{self.output_prefix}.csv")
 
         def _get_val(place, date, period, sv):
-            match = df[(df['observationAbout'] == place)
-                       & (df['observationDate'] == str(date)) &
+            match = df[(df['observationAbout'] == place) &
+                       (df['observationDate'] == str(date)) &
                        (df['observationPeriod'] == period) &
                        (df['variableMeasured'] == sv)]
             return match['value'].iloc[0] if len(match) > 0 else None
@@ -311,13 +313,12 @@ class ProcessTest(unittest.TestCase):
 
         # Verify CountOfClaims is serialized without decimal points
         df_str = pd.read_csv(f"{self.output_prefix}.csv", dtype=str)
-        match_str = df_str[
-            (df_str['observationAbout'] == 'dcid:geoId/06')
-            & (df_str['observationDate'] == '2020-05') &
-            (df_str['observationPeriod'] == 'P1M') &
-            (df_str['variableMeasured'] ==
-             'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
-            )]
+        match_str = df_str[(df_str['observationAbout'] == 'dcid:geoId/06') & (
+            df_str['observationDate'] == '2020-05'
+        ) & (df_str['observationPeriod'] == 'P1M') & (
+            df_str['variableMeasured'] ==
+            'dcid:CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent'
+        )]
         self.assertEqual(match_str['value'].iloc[0], '2')
 
 

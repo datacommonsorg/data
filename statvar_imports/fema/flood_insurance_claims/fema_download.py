@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import errno
 import os
 import sys
 import shutil
@@ -38,8 +39,9 @@ flags.DEFINE_string(
     'The direct bulk download URL for the full dataset.')
 flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
                     'The temporary directory to store downloaded chunks.')
-flags.DEFINE_string('output_dir', os.path.join(script_dir, 'input_file'),
-                    'The output directory to store the downloaded claims data.')
+flags.DEFINE_string(
+    'output_dir', os.path.join(script_dir, 'input_file'),
+    'The output directory to store the downloaded claims data.')
 _FLAGS = flags.FLAGS
 
 # Define the page size for each API request.
@@ -49,7 +51,8 @@ PAGE_SIZE = 1000
 def _is_valid_bulk_file(filepath: str,
                         min_size: int = 10 * 1024 * 1024,
                         required_header: str = 'dateOfLoss',
-                        expected_records: Optional[int] = None) -> bool:
+                        expected_records: Optional[int] = None,
+                        tolerance_ratio: float = 0.98) -> bool:
     """Validates that a bulk downloaded file meets size, header, and record count requirements."""
     if not os.path.exists(filepath):
         return False
@@ -69,15 +72,34 @@ def _is_valid_bulk_file(filepath: str,
                 return False
             if expected_records is not None and expected_records > 0:
                 row_count = sum(1 for line in f if line.strip())
-                if row_count < expected_records:
+                # OpenFEMA bulk export CSV is updated periodically while the live API
+                # counter increments in real time. Allow a small tolerance (default 2%)
+                # to prevent minor lag from triggering an expensive pagination fallback.
+                min_expected = expected_records * tolerance_ratio
+                if row_count < min_expected:
                     logging.warning(
-                        "Bulk file record count (%s) is less than expected total (%s). Truncated download.",
-                        row_count, expected_records)
+                        "Bulk file record count (%s) is below tolerance threshold (%s, expected: ~%s). Truncated download.",
+                        row_count, int(min_expected), expected_records)
                     return False
     except Exception as e:
         logging.warning("Error inspecting bulk file header: %s", e)
         return False
     return True
+
+
+def _publish_file_atomically(source_path: str, destination_path: str) -> None:
+    """Atomically replaces destination_path with source_path, handling cross-device links."""
+    try:
+        os.replace(source_path, destination_path)
+    except OSError as e:
+        if e.errno == errno.EXDEV:
+            temp_dest = f"{destination_path}.tmp.{os.getpid()}"
+            shutil.copy2(source_path, temp_dest)
+            os.replace(temp_dest, destination_path)
+            if os.path.exists(source_path):
+                os.remove(source_path)
+        else:
+            raise
 
 
 def get_total_records(api_url):
@@ -104,7 +126,7 @@ def get_total_records(api_url):
         data = response.json()
         total_count = int(data.get('metadata', {}).get('count'))
         if total_count <= 0:
-            logging.fatal("API returned non-positive total record count: %s",
+            logging.error("API returned non-positive total record count: %s",
                           total_count)
             raise RuntimeError(
                 f"Invalid total record count from API: {total_count}")
@@ -147,6 +169,8 @@ def download_data(api_url: str,
 
     logging.set_verbosity(logging.INFO)
 
+    total_records = None
+
     # 1. Try direct bulk download first (~8 seconds vs ~2.5 hours for pagination)
     if bulk_url:
         logging.info("Attempting direct bulk download from: %s", bulk_url)
@@ -155,26 +179,26 @@ def download_data(api_url: str,
                 shutil.rmtree(temp_dir)
             os.makedirs(temp_dir, exist_ok=True)
 
-            if download_file(url=bulk_url, output_folder=temp_dir,
-                             unzip=False):
+            if download_file(url=bulk_url, output_folder=temp_dir, unzip=False):
                 downloaded = [
-                    os.path.join(temp_dir, f) for f in os.listdir(temp_dir)
+                    os.path.join(temp_dir, f)
+                    for f in os.listdir(temp_dir)
                     if os.path.isfile(os.path.join(temp_dir, f))
                 ]
                 if downloaded:
-                    expected_count = None
                     try:
-                        expected_count = get_total_records(api_url)
+                        total_records = get_total_records(api_url)
                     except Exception as e:
                         logging.warning(
-                            "Could not retrieve total records for bulk validation: %s", e)
-                    if _is_valid_bulk_file(downloaded[0], min_bulk_size,
-                                           expected_records=expected_count):
-                        if os.path.exists(final_filepath):
-                            os.remove(final_filepath)
-                        shutil.move(downloaded[0], final_filepath)
-                        logging.info("Direct bulk download complete. Saved to: %s",
-                                     final_filepath)
+                            "Could not retrieve total records for bulk validation: %s",
+                            e)
+                    if _is_valid_bulk_file(downloaded[0],
+                                           min_bulk_size,
+                                           expected_records=total_records):
+                        _publish_file_atomically(downloaded[0], final_filepath)
+                        logging.info(
+                            "Direct bulk download complete. Saved to: %s",
+                            final_filepath)
                         return
                     else:
                         logging.warning(
@@ -193,10 +217,12 @@ def download_data(api_url: str,
     skip_count = 0
     records_downloaded = 0
 
-    # Get the total number of records from the API for a reliable failsafe.
-    total_records = get_total_records(api_url)
+    # Get the total number of records from the API for a reliable failsafe if not already retrieved.
+    if total_records is None:
+        total_records = get_total_records(api_url)
     if total_records is None or total_records <= 0:
-        logging.fatal("Could not get valid total record count (> 0). Cannot proceed.")
+        logging.error(
+            "Could not get valid total record count (> 0). Cannot proceed.")
         raise RuntimeError(
             'Download failed due to could not get the total record count.')
 
@@ -212,7 +238,8 @@ def download_data(api_url: str,
             shutil.rmtree(temp_dir)
         os.makedirs(temp_dir, exist_ok=True)
 
-        staging_filepath = os.path.join(temp_dir, "staging_fema_nfip_claims.csv")
+        staging_filepath = os.path.join(temp_dir,
+                                        "staging_fema_nfip_claims.csv")
         logging.info("Starting download to file: %s (staging: %s)",
                      final_filepath, staging_filepath)
 
@@ -237,7 +264,7 @@ def download_data(api_url: str,
                                              session=session)
 
             if not download_success or not os.path.exists(util_output_path):
-                logging.fatal(
+                logging.error(
                     "Failed to download chunk or file not found. Exiting.")
                 raise RuntimeError(
                     f"Failed to download chunk at skip={skip_count}.")
@@ -259,14 +286,13 @@ def download_data(api_url: str,
                     if len(split_content) > 1 and split_content[1].strip():
                         content_without_header = split_content[1]
                         f_staging.write(
-                            content_without_header if content_without_header
-                            .endswith(b'\n') else content_without_header + b'\n'
-                        )
+                            content_without_header if content_without_header.
+                            endswith(b'\n') else content_without_header + b'\n')
 
             cleaned_content = content.rstrip(b'\r\n')
-            num_records_in_chunk = max(
-                0, len(cleaned_content.split(b'\n')) -
-                1) if cleaned_content else 0
+            num_records_in_chunk = max(0,
+                                       len(cleaned_content.split(b'\n')) -
+                                       1) if cleaned_content else 0
             records_downloaded += num_records_in_chunk
 
             logging.info("Downloaded %s of %s records.", records_downloaded,
@@ -281,7 +307,7 @@ def download_data(api_url: str,
             skip_count += PAGE_SIZE
 
         if total_records > 0 and records_downloaded < total_records:
-            logging.fatal(
+            logging.error(
                 "Expected %s records, but only downloaded %s. Download incomplete.",
                 total_records, records_downloaded)
             raise RuntimeError(
@@ -289,19 +315,17 @@ def download_data(api_url: str,
             )
 
         if records_downloaded <= 0:
-            logging.fatal("No records were downloaded. Cannot proceed.")
+            logging.error("No records were downloaded. Cannot proceed.")
             raise RuntimeError("Download failed: 0 records downloaded.")
 
-        if os.path.exists(final_filepath):
-            os.remove(final_filepath)
-        shutil.move(staging_filepath, final_filepath)
+        _publish_file_atomically(staging_filepath, final_filepath)
 
         logging.info(
             "Total download complete. All available records saved to: %s",
             final_filepath)
 
     except IOError as e:
-        logging.fatal("An error occurred while writing the file: %s", e)
+        logging.error("An error occurred while writing the file: %s", e)
         raise
     finally:
         session.close()
@@ -316,8 +340,11 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url,
-                  _FLAGS.output_dir)
+    try:
+        download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url,
+                      _FLAGS.output_dir)
+    except Exception as e:
+        logging.fatal("Download process failed: %s", e)
 
 
 if __name__ == "__main__":

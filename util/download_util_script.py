@@ -178,9 +178,9 @@ def download_file(url: str,
         req_lib = session if session is not None else requests
         try:
             temp_head_response = req_lib.head(url,
-                                               headers=headers,
-                                               allow_redirects=True,
-                                               timeout=10)
+                                              headers=headers,
+                                              allow_redirects=True,
+                                              timeout=10)
             temp_head_response.raise_for_status()
             last_modified_header = temp_head_response.headers.get(
                 'Last-Modified')
