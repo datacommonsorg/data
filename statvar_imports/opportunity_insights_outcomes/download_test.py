@@ -242,18 +242,16 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     w.writerow(headers)
                     w.writerows(rows)
 
-            for filename, geo_level, dataset_mode in download.DATASET_CONFIGS:
-                stem = os.path.splitext(filename)[0]
-                download.shard_wide_csv(
-                    os.path.join(raw_dir, filename),
-                    os.path.join(shard_dir, f'{stem}_cleaned.csv'),
-                    geo_level,
-                    dataset_mode,
-                    max_rows_per_shard=10,
-                )
-
             sv_out_prefix = os.path.join(out_dir, 'output')
             counters_file = os.path.join(counters_dir, 'output_counters.csv')
+            download.prepare_parallel_shards_and_svp_inputs(
+                raw_dir,
+                shard_dir,
+                sv_out_prefix,
+                rows_per_chunk=1,
+                workers=2,
+                existing_statvar_mcf='',
+            )
             import_dir = os.path.dirname(os.path.abspath(download.__file__))
             repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
             shard_files = [

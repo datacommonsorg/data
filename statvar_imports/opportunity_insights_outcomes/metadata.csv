@@ -2,5 +2,4 @@ parameter,value
 header_rows,1
 mapped_columns,1
 word_delimiter,"_"
-parallelism,32
 output_columns,"observationAbout,observationDate,observationPeriod,variableMeasured,value,unit"

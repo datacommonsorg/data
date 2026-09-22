@@ -11,10 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Downloads and shards Opportunity Insights (Opportunity Atlas) CSVs for stat_var_processor.py."""
+"""Downloads Opportunity Insights (Opportunity Atlas) raw CSV files into raw_data/."""
 
-import collections
-import csv
 import os
 import re
 import shutil
@@ -26,6 +24,8 @@ from absl import app
 from absl import flags
 from absl import logging
 
+from statvar_imports.opportunity_insights_outcomes import preprocess
+
 FLAGS = flags.FLAGS
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -34,21 +34,6 @@ flags.DEFINE_string(
     'output_dir',
     os.path.join(_MODULE_DIR, 'raw_data'),
     'Directory where raw Opportunity Insights CSV files will be stored.',
-)
-flags.DEFINE_string(
-    'shard_dir',
-    os.path.join(_MODULE_DIR, 'input_files'),
-    'Directory where sharded wide CSV files for stat_var_processor.py will be written.',
-)
-flags.DEFINE_bool(
-    'download',
-    True,
-    'Whether to download missing raw CSV files from opportunityinsights.org/data/.',
-)
-flags.DEFINE_integer(
-    'max_rows_per_shard',
-    5_000,
-    'Maximum wide rows per output CSV shard for stat_var_processor.py.',
 )
 flags.DEFINE_string(
     'source_page_url',
@@ -94,28 +79,14 @@ DEFAULT_SOURCE_FILES = {
     },
 }
 
-DATASET_CONFIGS = [
-    ('commuting_zone_outcomes.csv', 'commuting_zone', 'baseline_1978_1983'),
-    ('county_outcomes.csv', 'county', 'baseline_1978_1983'),
-    ('tract_outcomes.csv', 'tract', 'baseline_1978_1983'),
-    ('tract_outcomes_late_simple.csv', 'tract', 'late_cohort_1984_1989'),
-    ('county_by_cohort_outcomes.csv', 'county', 'annual_cohort_1978_1992'),
-    ('cz_by_cohort_outcomes.csv', 'commuting_zone', 'annual_cohort_1978_1992'),
-]
-
-_NON_DATA_COLUMNS = frozenset({
-    'state',
-    'county',
-    'tract',
-    'cz',
-    'czname',
-    'cohort',
-    'state_name',
-    'county_name',
-    'cz_name',
-})
-
-_MISSING_VALUE_PLACEHOLDERS = frozenset({'', 'NA', 'N/A', '.', 'NAN', 'NULL'})
+# Re-export preprocess helpers for backwards-compatible imports in tests.
+DATASET_CONFIGS = preprocess.DATASET_CONFIGS
+format_geo_id = preprocess.format_geo_id
+normalize_column_header = preprocess.normalize_column_header
+shard_wide_csv = preprocess.shard_wide_csv
+prepare_parallel_shards_and_svp_inputs = (
+    preprocess.prepare_parallel_shards_and_svp_inputs
+)
 
 
 def discover_latest_urls(page_url: str) -> dict[str, str]:
@@ -211,243 +182,6 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
         os.replace(zip_path, target_csv_path)
 
 
-def format_geo_id(row: dict, geo_level: str) -> str:
-    """Returns the Data Commons geoId dcid for a CSV row."""
-
-    def to_int_str(val, width: int) -> str:
-        try:
-            return f'{int(float(str(val).strip())):0{width}d}'
-        except (ValueError, TypeError):
-            return str(val).strip().zfill(width)
-
-    if geo_level == 'county':
-        return f'geoId/{to_int_str(row["state"], 2)}{to_int_str(row["county"], 3)}'
-    if geo_level == 'tract':
-        return (
-            f'geoId/{to_int_str(row["state"], 2)}'
-            f'{to_int_str(row["county"], 3)}'
-            f'{to_int_str(row["tract"], 6)}'
-        )
-    if geo_level == 'commuting_zone':
-        return f'geoId/cz{to_int_str(row["cz"], 5)}'
-    raise ValueError(f'Unsupported geo_level: {geo_level}')
-
-
-_MULTI_WORD_TOKEN_REWRITES = (
-    ('frac_below_median', 'fracbelowmedian'),
-    ('frac_years_xw', 'fracyearsxw'),
-    ('kid_blw_p50', 'kidblwp50'),
-    ('kfr_native', 'kfrnative'),
-    ('kir_native', 'kirnative'),
-    ('kfr_stycz', 'kfrstycz'),
-    ('kir_stycz', 'kirstycz'),
-    ('kfr_top01', 'kfrtop01'),
-    ('kir_top01', 'kirtop01'),
-    ('kfr_top20', 'kfrtop20'),
-    ('kir_top20', 'kirtop20'),
-    ('pos_hours', 'poshours'),
-    ('spouse_rk', 'spouserk'),
-    ('hours_wk', 'hourswk'),
-    ('lpov_nbh', 'lpovnbh'),
-    ('wgflx_rk', 'wgflxrk'),
-    ('par_rank', 'parrank'),
-    ('has_dad', 'hasdad'),
-    ('has_mom', 'hasmom'),
-    ('kfr_imm', 'kfrimm'),
-    ('kir_imm', 'kirimm'),
-    ('marr_24', 'marr24'),
-    ('marr_26', 'marr26'),
-    ('marr_29', 'marr29'),
-    ('marr_32', 'marr32'),
-    ('work_24', 'work24'),
-    ('work_26', 'work26'),
-    ('work_29', 'work29'),
-    ('work_32', 'work32'),
-    ('two_par', 'twopar'),
-    ('kfr_24', 'kfr24'),
-    ('kfr_26', 'kfr26'),
-    ('kfr_29', 'kfr29'),
-    ('kir_24', 'kir24'),
-    ('kir_26', 'kir26'),
-    ('kir_29', 'kir29'),
-    ('mean_se', 'meanse'),
-    ('kid_n', 'kidn'),
-)
-
-
-def normalize_column_header(
-    col: str, dataset_mode: str = 'baseline_1978_1983', cohort_token: str = ''
-) -> str:
-    """Normalizes column tokens into single-word PVMAP tokens, strips 'pooled', and appends cohort token."""
-    race_pat = 'pooled|aian|asian|black|hisp|natam|white|other'
-    gender_pat = 'pooled|male|female'
-
-    kid_n_match = re.fullmatch(
-        f'(?:kid_)?(({race_pat})_({gender_pat}))_(?:n|count)', col
-    )
-    if kid_n_match:
-        base_col = f'kidn_{kid_n_match.group(1)}'
-        if dataset_mode == 'late_cohort_1984_1989':
-            normalized = f'{base_col}_latekidn'
-        else:
-            normalized = f'{base_col}_{cohort_token}' if cohort_token else base_col
-        return '_'.join(t for t in normalized.split('_') if t != 'pooled')
-
-    blw_p50_match = re.fullmatch(
-        f'(?:kid_)?(({race_pat})_({gender_pat}))_blw_p50_(?:n|count)', col
-    )
-    if blw_p50_match:
-        base_col = f'kidblwp50_{blw_p50_match.group(1)}'
-        normalized = f'{base_col}_{cohort_token}' if cohort_token else base_col
-        return '_'.join(t for t in normalized.split('_') if t != 'pooled')
-
-    if dataset_mode == 'late_cohort_1984_1989':
-        if col.startswith('jail_'):
-            normalized = f'{col}_latejail'
-        else:
-            normalized = f'{col}_late'
-    elif cohort_token:
-        normalized = f'{col}_{cohort_token}'
-    else:
-        normalized = col
-
-    for old_tok, new_tok in _MULTI_WORD_TOKEN_REWRITES:
-        normalized = re.sub(
-            r'(^|_)' + old_tok + r'(?=_|$)', r'\1' + new_tok, normalized
-        )
-    return '_'.join(t for t in normalized.split('_') if t != 'pooled')
-
-
-def _get_shard_path(output_csv: str, shard_idx: int, suffix_tag: str = '') -> str:
-    """Returns the output path for a given 0-based shard index."""
-    if output_csv.endswith('_cleaned.csv'):
-        base = output_csv[: -len('_cleaned.csv')]
-        tag = f'_{suffix_tag}' if suffix_tag else ''
-        if shard_idx == 0 and not tag:
-            return output_csv
-        return f'{base}{tag}_part_{shard_idx:03d}_cleaned.csv'
-    stem, ext = os.path.splitext(output_csv)
-    if shard_idx == 0 and not suffix_tag:
-        return output_csv
-    return f'{stem}_{suffix_tag}_part_{shard_idx:03d}{ext}'
-
-
-def _clean_existing_shards(output_csv: str) -> None:
-    """Removes any pre-existing shard files for the given output_csv stem."""
-    out_dir = os.path.dirname(output_csv)
-    if not out_dir or not os.path.exists(out_dir):
-        return
-    base_name = os.path.basename(output_csv)
-    stem = (
-        base_name[: -len('_cleaned.csv')]
-        if base_name.endswith('_cleaned.csv')
-        else os.path.splitext(base_name)[0]
-    )
-    for fname in os.listdir(out_dir):
-        if fname == base_name or (
-            fname.startswith(f'{stem}_') and fname.endswith('_cleaned.csv')
-        ):
-            os.remove(os.path.join(out_dir, fname))
-
-
-def shard_wide_csv(
-    input_csv: str,
-    output_csv: str,
-    geo_level: str,
-    dataset_mode: str = 'baseline_1978_1983',
-    max_rows_per_shard: int = 5_000,
-) -> int:
-    """Prepends geo_id, strips missing placeholders, and shards a wide CSV for stat_var_processor.py."""
-    os.makedirs(os.path.dirname(output_csv), exist_ok=True)
-    _clean_existing_shards(output_csv)
-    with open(input_csv, mode='r', encoding='utf-8') as infile:
-        reader = csv.DictReader(infile)
-        data_cols = [
-            c for c in (reader.fieldnames or []) if c not in _NON_DATA_COLUMNS
-        ]
-
-        if dataset_mode == 'annual_cohort_1978_1992':
-            cohort_rows = collections.defaultdict(list)
-            for row in reader:
-                raw_cohort = (row.get('cohort') or '').strip()
-                if not raw_cohort:
-                    continue
-                cohort_str = str(int(float(raw_cohort)))
-                cohort_rows[cohort_str].append(row)
-
-            total_rows = 0
-            for cohort_str, rows in sorted(cohort_rows.items()):
-                cohort_token = f'c{cohort_str}'
-                header = ['geo_id'] + [
-                    normalize_column_header(c, dataset_mode, cohort_token)
-                    for c in data_cols
-                ]
-                for shard_idx in range(0, max(1, len(rows)), max(1, max_rows_per_shard)):
-                    chunk = rows[shard_idx : shard_idx + max_rows_per_shard]
-                    shard_path = _get_shard_path(
-                        output_csv, shard_idx // max(1, max_rows_per_shard), cohort_token
-                    )
-                    with open(shard_path, mode='w', encoding='utf-8', newline='') as out:
-                        writer = csv.writer(out)
-                        writer.writerow(header)
-                        for row in chunk:
-                            cleaned_vals = [
-                                ''
-                                if (row.get(c) or '').strip().upper()
-                                in _MISSING_VALUE_PLACEHOLDERS
-                                else (row.get(c) or '').strip()
-                                for c in data_cols
-                            ]
-                            if any(cleaned_vals):
-                                writer.writerow([format_geo_id(row, geo_level)] + cleaned_vals)
-                                total_rows += 1
-            return total_rows
-
-        header = ['geo_id'] + [
-            normalize_column_header(c, dataset_mode) for c in data_cols
-        ]
-        rows_written = 0
-        shard_idx = 0
-        shard_rows = 0
-        outfile = open(
-            _get_shard_path(output_csv, shard_idx),
-            mode='w',
-            encoding='utf-8',
-            newline='',
-        )
-        try:
-            writer = csv.writer(outfile)
-            writer.writerow(header)
-            for row in reader:
-                cleaned_vals = [
-                    ''
-                    if (row.get(c) or '').strip().upper()
-                    in _MISSING_VALUE_PLACEHOLDERS
-                    else (row.get(c) or '').strip()
-                    for c in data_cols
-                ]
-                if not any(cleaned_vals):
-                    continue
-                if max_rows_per_shard > 0 and shard_rows >= max_rows_per_shard:
-                    outfile.close()
-                    shard_idx += 1
-                    shard_rows = 0
-                    outfile = open(
-                        _get_shard_path(output_csv, shard_idx),
-                        mode='w',
-                        encoding='utf-8',
-                        newline='',
-                    )
-                    writer = csv.writer(outfile)
-                    writer.writerow(header)
-                writer.writerow([format_geo_id(row, geo_level)] + cleaned_vals)
-                rows_written += 1
-                shard_rows += 1
-        finally:
-            outfile.close()
-        return rows_written
-
-
 def download_all_sources(
     output_dir: str, page_url: str = 'https://opportunityinsights.org/data/'
 ) -> list[str]:
@@ -478,44 +212,24 @@ def download_all_sources(
 def run_pipeline(
     output_dir: str = os.path.join(_MODULE_DIR, 'raw_data'),
     shard_dir: str = os.path.join(_MODULE_DIR, 'input_files'),
+    sv_output_prefix: str = os.path.join(_MODULE_DIR, 'output', 'output'),
     download: bool = True,
     max_rows_per_shard: int = 5_000,
     source_page_url: str = 'https://opportunityinsights.org/data/',
 ) -> None:
-    """Runs the download and CSV sharding pipeline."""
-    os.makedirs(output_dir, exist_ok=True)
-    os.makedirs(shard_dir, exist_ok=True)
-    os.makedirs(os.path.join(_MODULE_DIR, 'output'), exist_ok=True)
-    os.makedirs(os.path.join(_MODULE_DIR, 'counters'), exist_ok=True)
-
+    """Runs download (if enabled) followed by preprocess.prepare_parallel_shards_and_svp_inputs."""
     if download:
         download_all_sources(output_dir, source_page_url)
-
-    for filename, geo_level, dataset_mode in DATASET_CONFIGS:
-        input_path = os.path.join(output_dir, filename)
-        if not os.path.exists(input_path):
-            raise FileNotFoundError(
-                f'Required input file not found for {filename}: {input_path}'
-            )
-        stem = os.path.splitext(filename)[0]
-        output_path = os.path.join(shard_dir, f'{stem}_cleaned.csv')
-        shard_wide_csv(
-            input_path,
-            output_path,
-            geo_level,
-            dataset_mode,
-            max_rows_per_shard=max_rows_per_shard,
-        )
+    preprocess.prepare_parallel_shards_and_svp_inputs(
+        output_dir,
+        shard_dir,
+        sv_output_prefix,
+        rows_per_chunk=max_rows_per_shard,
+    )
 
 
 def main(_):
-    run_pipeline(
-        output_dir=FLAGS.output_dir,
-        shard_dir=FLAGS.shard_dir,
-        download=FLAGS.download,
-        max_rows_per_shard=FLAGS.max_rows_per_shard,
-        source_page_url=FLAGS.source_page_url,
-    )
+    download_all_sources(FLAGS.output_dir, FLAGS.source_page_url)
 
 
 if __name__ == '__main__':
