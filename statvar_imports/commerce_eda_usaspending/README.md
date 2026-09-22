@@ -34,6 +34,7 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --config_file=investment_metadata.csv \
   --output_path=output/investment_output \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --existing_schema_mcf=investment_schema.mcf \
   --output_counters=counters/investment_counters.csv
 ```
 Outputs produced:
