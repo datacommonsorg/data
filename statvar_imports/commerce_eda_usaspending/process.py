@@ -46,7 +46,7 @@ CFDA_PROGRAMS = {
     "11.020": "Technical Assistance",
     "11.039": "Regional Technology and Innovation Hubs",
     "11.040": "Distressed Area Recompete Pilot Program",
-    "11.030": "Good Jobs Challenge",
+    "11.030": "Science and Research Park Development Grants",
     "11.023": "STEM Talent Challenge"
 }
 
@@ -126,6 +126,8 @@ def fetch_usaspending_data(start_year,
                 raise
 
             results = data.get("results", [])
+            if not results:
+                break
             fy_awards.extend(results)
 
             if not data.get("page_metadata", {}).get("hasNext"):
@@ -141,8 +143,9 @@ def fetch_usaspending_data(start_year,
         tmp_raw_path = raw_output_path + ".tmp"
         with open(tmp_raw_path, "w", encoding="utf-8") as f:
             json.dump(all_awards, f, indent=2)
-        os.replace(tmp_raw_path, raw_output_path)
-        logging.info(f"Saved {len(all_awards)} raw awards to {raw_output_path}")
+        if os.path.exists(tmp_raw_path) and os.path.getsize(tmp_raw_path) > 0:
+            os.replace(tmp_raw_path, raw_output_path)
+            logging.info(f"Saved {len(all_awards)} raw awards to {raw_output_path}")
 
     return all_awards
 
@@ -210,13 +213,13 @@ def process_data(awards, start_year, end_year, output_path):
         "Total",
         "Distressed Area Recompete Pilot Program",
         "Economic Adjustment Assistance",
-        "Good Jobs Challenge",
         "Planning",
         "Public Works",
         "Regional Innovation Strategies",
         "Regional Technology and Innovation Hubs",
         "Research and National Technical Assistance",
         "STEM Talent Challenge",
+        "Science and Research Park Development Grants",
         "Technical Assistance",
         "Trade Adjustment Assistance for Firms",
     ]
@@ -247,8 +250,9 @@ def process_data(awards, start_year, end_year, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     tmp_output_path = output_path + ".tmp"
     final_df.to_csv(tmp_output_path, index=False, header=True)
-    os.replace(tmp_output_path, output_path)
-    logging.info(f"✅ Processed data saved successfully to {output_path}")
+    if os.path.exists(tmp_output_path) and os.path.getsize(tmp_output_path) > 0:
+        os.replace(tmp_output_path, output_path)
+        logging.info(f"✅ Processed data saved successfully to {output_path}")
 
 
 def main(argv):

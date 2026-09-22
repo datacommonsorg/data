@@ -437,7 +437,7 @@ class TestProcessUSASpending(unittest.TestCase):
                 "Start Date": "2024-01-15",
                 "Award Amount": 250000.0,
             },
-            # 11.030 -> Good Jobs Challenge
+            # 11.030 -> Science and Research Park Development Grants
             {
                 "Place of Performance State Code": "CO",
                 "CFDA Number": "11.030",

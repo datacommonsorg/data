@@ -39,10 +39,11 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
 Outputs produced:
 - `output/investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
 - `output/investment_output.tmcf`: Template MCF mapping observation properties.
-- `output/investment_output.mcf`: Node MCF for new StatisticalVariable entities.
+- `output/investment_output_stat_vars.mcf`: Node MCF for new StatisticalVariable entities.
+- `output/investment_output_stat_vars_schema.mcf`: Schema MCF for new enum values.
 - `counters/investment_counters.csv`: Processing counters and diff statistics.
 
 ## Data Processing & Methodology
 - **Year Partitioning**: API queries are partitioned fiscal-year by fiscal-year to prevent USAspending's 10,000-record pagination ceiling.
 - **De-obligations**: Award adjustments resulting in net non-positive annual funding for a program in a state are excluded, ensuring State Totals are mathematically consistent with the sum of reported components.
-- **Coverage**: Covers all historical and modern EDA programs including CHIPS Act Tech Hubs (11.039), Recompete Pilot (11.040), Good Jobs Challenge (11.030), and STEM Talent Challenge (11.023).
+- **Coverage**: Covers all historical and modern EDA programs including CHIPS Act Tech Hubs (11.039), Recompete Pilot (11.040), Science and Research Park Development Grants (11.030), and STEM Talent Challenge (11.023).

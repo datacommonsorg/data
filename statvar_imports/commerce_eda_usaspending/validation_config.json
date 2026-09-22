@@ -3,19 +3,36 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+            "description": "Checks that the percentage of deleted records for the entire import is within 0.1% threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
             }
         },
         {
+            "rule_id": "check_goldens_summary_report",
+            "description": "Verifies that summary statistics for all StatisticalVariables match established golden report.",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_observations",
+            "description": "Verifies that all expected geographic entities and places are present in the output observations.",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output/investment_output.csv"
+            }
+        },
+        {
             "rule_id": "active_programs_freshness",
-            "description": "Checks that active programs have recent data from 2024 onwards.",
+            "description": "Checks that active programs have recent data within 1 year of current year.",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT * FROM stats WHERE StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks', 'Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks')",
-                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= 2024"
+                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1)"
             }
         },
         {
@@ -36,4 +53,3 @@
         }
     ]
 }
-

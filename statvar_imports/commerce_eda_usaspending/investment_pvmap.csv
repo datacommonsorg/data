@@ -95,7 +95,6 @@ New Mexico,observationAbout,geoId/35
 New York,observationAbout,geoId/36
 North Carolina,observationAbout,geoId/37
 North Dakota,observationAbout,geoId/38
-OH,observationAbout,geoId/39
 Ohio,observationAbout,geoId/39
 Oklahoma,observationAbout,geoId/40
 Oregon,observationAbout,geoId/41
@@ -129,6 +128,6 @@ Research and National Technical Assistance,investmentProgram,ResearchNationalTec
 Trade Adjustment Assistance for Firms,investmentProgram,TradeAdjustmentAssistance
 Regional Technology and Innovation Hubs,investmentProgram,RegionalTechnologyAndInnovationHubs,name,"""Amount of Investment: Regional Technology and Innovation Hubs"""
 Distressed Area Recompete Pilot Program,investmentProgram,DistressedAreaRecompetePilotProgram,name,"""Amount of Investment: Distressed Area Recompete Pilot Program"""
-Good Jobs Challenge,investmentProgram,GoodJobsChallenge,name,"""Amount of Investment: Good Jobs Challenge"""
+Science and Research Park Development Grants,investmentProgram,ScienceAndResearchParkDevelopmentGrants,name,"""Amount of Investment: Science and Research Park Development Grants"""
 STEM Talent Challenge,investmentProgram,STEMTalentChallenge,name,"""Amount of Investment: STEM Talent Challenge"""
 Total,investmentProgram,
