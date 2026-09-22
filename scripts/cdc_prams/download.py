@@ -15,7 +15,6 @@
 This Python script downloads the CDC PRAMS datasets from provided URLs,
 verifies their contents, and saves them to the input files directory.
 """
-import io
 import os
 import zipfile
 from absl import logging

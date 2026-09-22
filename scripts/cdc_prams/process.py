@@ -29,8 +29,6 @@ sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 from statvar_dcid_generator import get_statvar_dcid
 from state_division_to_dcid import _PLACE_MAP
-
-sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from statvar import statvar_col
 from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
                        _TIME, _INSURANCE, _CIGARETTES, PV_PROP, _YEAR)
@@ -272,9 +270,6 @@ def _splitting_ci_columns(df, geo):
         df = df[national_columns]
     elif geo == "State":
         df = df[state_columns]
-        # Suppressed/unavailable data indicated by '.' or '(.-.)' should be NA, not 0.0
-        df['2018_CI_UPPER'] = df['2018_CI_UPPER'].replace('.', np.nan)
-        df['2018_CI_LOWER'] = df['2018_CI_LOWER'].replace('.', np.nan)
     return df
 
 

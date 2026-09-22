@@ -15,6 +15,7 @@
 Script to automate the testing for CDC PRAMS process script.
 """
 
+import io
 import os
 import unittest
 import sys
@@ -108,8 +109,7 @@ class TestProcess(unittest.TestCase):
         """
         Verifies that confidence interval lower and upper limits have ScalingFactor=100.
         """
-        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.csv")
-        df = pd.read_csv(expected_csv_file_path)
+        df = pd.read_csv(io.StringIO(self.actual_csv_data))
         ci_lower = df[df['SV'].str.contains('ConfidenceIntervalLowerLimit')]
         ci_upper = df[df['SV'].str.contains('ConfidenceIntervalUpperLimit')]
         self.assertFalse(ci_lower.empty)
