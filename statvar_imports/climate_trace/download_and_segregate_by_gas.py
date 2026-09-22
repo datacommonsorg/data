@@ -1,6 +1,7 @@
 import requests
 import zipfile
 import pandas as pd
+import numpy as np
 import io
 import json
 import os
@@ -84,6 +85,18 @@ def download_and_process_zip(url, country_iso, gas, session=None):
         logging.error(f"    -> Unexpected error for {country_iso} ({gas}) at {url}: {e}")
         raise
 
+
+def _format_emission(x):
+    """Formats numeric emission values without scientific notation or precision artifacts."""
+    try:
+        if pd.notna(x) and str(x).strip():
+            f = float(x)
+            return '0' if f == 0.0 else np.format_float_positional(f, trim='-')
+        return x
+    except (ValueError, TypeError):
+        return x
+
+
 def download_and_segregate_by_gas():
     """
     Generates a fresh list of country download URLs and then downloads all
@@ -117,6 +130,7 @@ def download_and_segregate_by_gas():
             f"Error: Could not fetch country list from API ({countries_url}). "
             f"Status: {status_code}, Response: {response_text}, Error: {e}"
         )
+        session.close()
         raise
 
     local_country_codes = set()
@@ -130,6 +144,7 @@ def download_and_segregate_by_gas():
     combined_codes = sorted(list(api_country_codes.union(local_country_codes)))
     if not combined_codes:
         logging.error("No countries to process. Exiting.")
+        session.close()
         raise RuntimeError("No country codes found from API or check_country.csv.")
 
     logging.info(f"Total unique countries to process: {len(combined_codes)}")
@@ -173,12 +188,14 @@ def download_and_segregate_by_gas():
                     critical_errors.append(f"{iso} ({gas}) - Error: {e}")
 
         if critical_errors:
+            session.close()
             raise RuntimeError(
                 f"Critical download failures for {gas}:\n" + "\n".join(critical_errors)
             )
 
         if not gas_dataframes:
             logging.error(f"No data was downloaded for {gas}. The output file will not be created.")
+            session.close()
             raise RuntimeError(f"No data was downloaded for gas: {gas}")
 
         output_filename = os.path.join(output_dir, f"all_countries_{gas}.csv")
@@ -191,9 +208,7 @@ def download_and_segregate_by_gas():
             # Format emissions_quantity to avoid scientific notation
             if 'emissions_quantity' in final_df.columns:
                 logging.info(f"  -> Formatting 'emissions_quantity' column...")
-                final_df['emissions_quantity'] = final_df['emissions_quantity'].apply(
-                    lambda x: format(x, '.16f').rstrip('0').rstrip('.') if pd.notna(x) else x
-                )
+                final_df['emissions_quantity'] = final_df['emissions_quantity'].apply(_format_emission)
 
             logging.info(f"  -> Saving combined data to {output_filename}...")
             final_df.to_csv(temp_filename, index=False)
@@ -208,6 +223,7 @@ def download_and_segregate_by_gas():
                 except OSError:
                     pass
             logging.error(f"  -> An error occurred during the final processing for {gas}: {e}\n")
+            session.close()
             raise
 
     session.close()
