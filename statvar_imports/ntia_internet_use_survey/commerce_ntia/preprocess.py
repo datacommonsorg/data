@@ -27,7 +27,6 @@ sys.path.append(os.path.join(script_dir, '../../../util'))
 from download_util_script import download_file
 
 COMMERCE_NTIA_URL = config.COMMERCE_NTIA_URL
-Commerce_NTIA_URL = COMMERCE_NTIA_URL
 
 INPUT_DIR = os.path.join(script_dir, "input_files")
 
@@ -45,6 +44,16 @@ HEADERS = {
                    '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'),
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 }
+
+
+def _write_csv_atomically(df: pd.DataFrame, target_path: str) -> None:
+    """Writes a DataFrame to a CSV atomically using a temporary file."""
+    tmp_path = f"{target_path}.tmp"
+    df.to_csv(tmp_path, index=False)
+    if not os.path.exists(tmp_path) or os.path.getsize(tmp_path) == 0:
+        raise RuntimeError(
+            f"Failed to write CSV or output file is empty: {tmp_path}")
+    os.replace(tmp_path, target_path)
 
 
 def move_column_left(df, column_to_move, target_column):
@@ -70,26 +79,29 @@ def preprocess_data():
         df1['universeAgeResol'] = df1['universe'].map(_AGE_RESOL_MAP)
         df1['variableAgeResol'] = df1['variable'].map(_AGE_RESOL_MAP)
         df1_moved = move_column_left(df1, 'universe', 'variable')
-        df1_moved.to_csv(INPUT_FILE_1, index=False)
+        _write_csv_atomically(df1_moved, INPUT_FILE_1)
 
         # 2. Process General survey data
         df2_cols_to_keep = [
             col for col in org_df.columns
-            if not col.startswith(
-                ('age314', 'age1524', 'age2544', 'age4564', 'age65p'))
+            if not col.startswith(('age314', 'age1524', 'age2544', 'age4564',
+                                   'age65p'))
         ]
         df2 = org_df[df2_cols_to_keep].copy()
         df2['universeAgeResol'] = df2['universe'].map(_AGE_RESOL_MAP)
         df2['variableAgeResol'] = df2['variable'].map(_AGE_RESOL_MAP)
         df2_moved = move_column_left(df2, 'universe', 'variable')
-        df2_moved.to_csv(INPUT_FILE_2, index=False)
+        _write_csv_atomically(df2_moved, INPUT_FILE_2)
         logging.info(
-            f"Successfully preprocessed {len(df1_moved)} age-only rows and {len(df2_moved)} general survey rows."
-        )
+            f"Successfully preprocessed {len(df1_moved)} age-only rows "
+            f"and {len(df2_moved)} general survey rows.")
 
     except Exception as e:
-        logging.fatal(
-            f"An error occurred while preprocessing the input data: {e}")
+        logging.error(
+            f"An error occurred while preprocessing the input data: {e}",
+            exc_info=True)
+        raise RuntimeError(
+            f"An error occurred while preprocessing the input data: {e}") from e
 
 
 def main(argv):
@@ -108,14 +120,20 @@ def main(argv):
         if not success or not os.path.exists(INPUT_FILE) or os.path.getsize(
                 INPUT_FILE) == 0:
             logging.fatal(
-                "Failed to download Commerce_NTIA file or file is empty.")
+                "Failed to download Commerce_NTIA file or file is empty.",
+                exc_info=True)
         logging.info(
             f"Successfully downloaded {INPUT_FILE} ({os.path.getsize(INPUT_FILE)} bytes)."
         )
     except Exception as e:
-        logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
+        logging.fatal(f"Failed to download Commerce_NTIA file: {e}",
+                      exc_info=True)
 
-    preprocess_data()
+    try:
+        preprocess_data()
+    except Exception as e:
+        logging.fatal(f"Failed to preprocess Commerce_NTIA data: {e}",
+                      exc_info=True)
 
 
 if __name__ == "__main__":

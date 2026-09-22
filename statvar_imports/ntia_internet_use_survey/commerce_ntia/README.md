@@ -1,16 +1,31 @@
 # commerce_ntia
 
-- source:  `https://www.ntia.gov/sites/default/files/data_central_downloads/datasets/ntia-analyze-table.csv`
+## Import Metadata
+
+| Field | Value |
+|---|---|
+| **Import Type** | Automated |
+| **Cron schedule** | `0 06 * * 5` (weekly on Friday at 06:00 UTC) |
+| **Date coverage notes** | Waves 1994–2023 |
+| **Test runner instructions** | `./run_tests.sh -p statvar_imports/ntia_internet_use_survey/commerce_ntia` |
+| **Source URL** | `https://www.ntia.gov/sites/default/files/data_central_downloads/datasets/ntia-analyze-table.csv` |
+| **Type of place** | Demographics |
+| **Statistical Variables** | Demographics |
 
 - NTIA programs and policymaking focus largely on expanding broadband Internet access and adoption in America, expanding the use of spectrum by all users.
+
+### Date Coverage Notes
+The dataset encompasses NTIA Internet Use Survey data spanning survey waves from 1994 to 2023.
+
+### Testing Instructions
+To run hermetic unit tests for this import:
+```bash
+./run_tests.sh -p statvar_imports/ntia_internet_use_survey/commerce_ntia
+```
 
 - how to download data: 
     To download and process the data, you'll need to run the provided preprocess script, `preprocess.py`. This script will automatically create an "input_files" folder and download the file to be processed.
     This script organizes the data and splits it into general survey data and age-breakdown data.
-
-- type of place: Demographics.
-
-- statvars: Demographics
 
 ### How to run:
 

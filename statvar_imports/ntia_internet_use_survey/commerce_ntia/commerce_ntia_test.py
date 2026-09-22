@@ -53,11 +53,18 @@ class PreprocessTest(unittest.TestCase):
             output_data = os.path.join(tmp_dir, 'ntia-data.csv')
 
             raw_data = {
-                'dataset': ['Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023'],
-                'variable': ['Streaming', 'Email', 'Broadband', 'isPerson', 'isAdult'],
-                'description': ['Desc 1', 'Desc 2', 'Desc 3', 'Desc 4', 'Desc 5'],
+                'dataset': [
+                    'Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023'
+                ],
+                'variable': [
+                    'Streaming', 'Email', 'Broadband', 'isPerson', 'isAdult'
+                ],
+                'description': [
+                    'Desc 1', 'Desc 2', 'Desc 3', 'Desc 4', 'Desc 5'
+                ],
                 'universe': [
-                    'isPerson', 'isAdult', 'isHousehold', 'isHousehold', 'isHousehold'
+                    'isPerson', 'isAdult', 'isHousehold', 'isHousehold',
+                    'isHousehold'
                 ],
                 'age314Count': [10, 20, 30, 40, 50],
                 'age314Prop': [0.1, 0.2, 0.3, 0.4, 0.5],
@@ -123,32 +130,59 @@ class PreprocessTest(unittest.TestCase):
             self.assertNotIn('age314Prop', cols_data)
             self.assertNotIn('age65pSE', cols_data)
 
-    @mock.patch('preprocess.logging.fatal')
-    def test_preprocess_data_file_not_found(self, mock_fatal):
-        """Tests that preprocess_data exits with code 1 if input file is missing."""
-        mock_fatal.side_effect = SystemExit(1)
+    def test_write_csv_atomically_success(self):
+        """Tests that _write_csv_atomically writes CSV and removes .tmp file."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            target_path = os.path.join(tmp_dir, 'output.csv')
+            df = pd.DataFrame({'col': [1, 2, 3]})
+            preprocess._write_csv_atomically(df, target_path)
+            self.assertTrue(os.path.exists(target_path))
+            self.assertFalse(os.path.exists(f"{target_path}.tmp"))
+            self.assertGreater(os.path.getsize(target_path), 0)
+
+    def test_write_csv_atomically_empty_raises(self):
+        """Tests that _write_csv_atomically raises RuntimeError if output file is empty."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            target_path = os.path.join(tmp_dir, 'output.csv')
+            df = pd.DataFrame()
+            with mock.patch.object(pd.DataFrame, 'to_csv') as mock_to_csv:
+
+                def create_empty(path, **kwargs):
+                    open(path, 'w').close()
+
+                mock_to_csv.side_effect = create_empty
+                with self.assertRaises(RuntimeError) as cm:
+                    preprocess._write_csv_atomically(df, target_path)
+                self.assertIn("empty", str(cm.exception))
+                self.assertFalse(os.path.exists(target_path))
+
+    @mock.patch('preprocess.logging.error')
+    def test_preprocess_data_file_not_found(self, mock_error):
+        """Tests that preprocess_data raises RuntimeError and logs error if input
+        file is missing."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             missing_input = os.path.join(tmp_dir, 'nonexistent.csv')
             with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
                  mock.patch.object(preprocess, 'INPUT_FILE', missing_input):
-                with self.assertRaises(SystemExit) as cm:
+                with self.assertRaises(RuntimeError) as cm:
                     preprocess.preprocess_data()
-                self.assertEqual(cm.exception.code, 1)
-                self.assertTrue(mock_fatal.called)
+                self.assertIn("nonexistent.csv", str(cm.exception))
+                self.assertTrue(mock_error.called)
+                self.assertTrue(mock_error.call_args.kwargs.get('exc_info'))
 
-    @mock.patch('preprocess.logging.fatal')
-    def test_preprocess_data_missing_columns(self, mock_fatal):
-        """Tests that preprocess_data exits with code 1 if input CSV lacks required columns."""
-        mock_fatal.side_effect = SystemExit(1)
+    @mock.patch('preprocess.logging.error')
+    def test_preprocess_data_missing_columns(self, mock_error):
+        """Tests that preprocess_data raises RuntimeError and logs error if
+        input CSV lacks required columns."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             bad_input = os.path.join(tmp_dir, 'bad.csv')
             pd.DataFrame({'incomplete': [1, 2]}).to_csv(bad_input, index=False)
             with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
                  mock.patch.object(preprocess, 'INPUT_FILE', bad_input):
-                with self.assertRaises(SystemExit) as cm:
+                with self.assertRaises(RuntimeError):
                     preprocess.preprocess_data()
-                self.assertEqual(cm.exception.code, 1)
-                self.assertTrue(mock_fatal.called)
+                self.assertTrue(mock_error.called)
+                self.assertTrue(mock_error.call_args.kwargs.get('exc_info'))
 
     @mock.patch('preprocess.preprocess_data')
     @mock.patch('preprocess.download_file')
@@ -181,7 +215,8 @@ class PreprocessTest(unittest.TestCase):
             preprocess.main([])
         self.assertEqual(cm.exception.code, 1)
         mock_fatal.assert_called_once_with(
-            "Failed to download Commerce_NTIA file or file is empty.")
+            "Failed to download Commerce_NTIA file or file is empty.",
+            exc_info=True)
         mock_preprocess.assert_not_called()
 
     @mock.patch('preprocess.preprocess_data')
@@ -197,7 +232,8 @@ class PreprocessTest(unittest.TestCase):
                 preprocess.main([])
             self.assertEqual(cm.exception.code, 1)
             mock_fatal.assert_called_once_with(
-                "Failed to download Commerce_NTIA file or file is empty.")
+                "Failed to download Commerce_NTIA file or file is empty.",
+                exc_info=True)
             mock_preprocess.assert_not_called()
 
     @mock.patch('preprocess.preprocess_data')
@@ -214,7 +250,8 @@ class PreprocessTest(unittest.TestCase):
                 preprocess.main([])
             self.assertEqual(cm.exception.code, 1)
             mock_fatal.assert_called_once_with(
-                "Failed to download Commerce_NTIA file or file is empty.")
+                "Failed to download Commerce_NTIA file or file is empty.",
+                exc_info=True)
             mock_preprocess.assert_not_called()
 
     @mock.patch('preprocess.preprocess_data')
@@ -231,7 +268,26 @@ class PreprocessTest(unittest.TestCase):
         self.assertEqual(cm.exception.code, 1)
         self.assertTrue(mock_fatal.called)
         self.assertIn("Connection timeout", str(mock_fatal.call_args))
+        self.assertTrue(mock_fatal.call_args.kwargs.get('exc_info'))
         mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_preprocess_exception(self, mock_fatal, mock_download,
+                                       mock_preprocess):
+        """Tests that main logs fatal error and exits when preprocess_data raises RuntimeError."""
+        mock_fatal.side_effect = SystemExit(1)
+        mock_download.return_value = True
+        mock_preprocess.side_effect = RuntimeError("Preprocessing failure")
+        with mock.patch('os.path.exists', return_value=True), \
+             mock.patch('os.path.getsize', return_value=1024):
+            with self.assertRaises(SystemExit) as cm:
+                preprocess.main([])
+            self.assertEqual(cm.exception.code, 1)
+            self.assertTrue(mock_fatal.called)
+            self.assertIn("Preprocessing failure", str(mock_fatal.call_args))
+            self.assertTrue(mock_fatal.call_args.kwargs.get('exc_info'))
 
 
 if __name__ == '__main__':
