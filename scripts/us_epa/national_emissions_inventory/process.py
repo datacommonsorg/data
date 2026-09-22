@@ -16,6 +16,7 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+import gc
 import os
 import shutil
 import sys
@@ -241,11 +242,23 @@ class USAirEmissionTrends:
         try:
             df = self._national_emissions(file_path)
             if df is not None and not df.empty:
+                df = df.sort_values(
+                    by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
+                df.dropna(subset=['observation'], inplace=True)
+                df['observation'] = np.where(
+                    df['unit'] == 'Pound',
+                    df['observation'] / 2000, df['observation'])
+                df['unit'] = "Ton"
+                if 'scc_name' in df.columns:
+                    df = df.drop(columns=['scc_name'])
+                df = df.groupby(
+                    ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
+                df['unit'] = "Ton"
                 intermediate_file_path = os.path.join(
                     self.temp_dir,
-                    f"{uuid.uuid4().hex}_{os.path.basename(file_path)}"
+                    f"{uuid.uuid4().hex}_{os.path.basename(file_path)}.pkl"
                 )
-                df.to_csv(intermediate_file_path, index=False)
+                df.to_pickle(intermediate_file_path)
                 logging.info(
                     f"Saved intermediate file at : {intermediate_file_path}")
         except Exception as e:
@@ -296,7 +309,7 @@ class USAirEmissionTrends:
                 emission_type=code) + "\n"
         logging.info("MCF properties generation complete.")
 
-    def _process(self):
+    def _process(self) -> None:
         """
         This Method processes the input files to generate
         the final df.
@@ -317,21 +330,52 @@ class USAirEmissionTrends:
         logging.info("Consolidating intermediate files.")
         intermediate_files = [
             os.path.join(self.temp_dir, f) for f in os.listdir(self.temp_dir)
+            if not f.startswith('.')
         ]
-        dfs = []
-        for f in intermediate_files:
-            try:
-                dfs.append(pd.read_csv(f, low_memory=False))
-                logging.info(f"Appending {f}")
-            except Exception as e:
-                logging.fatal(
-                    f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
-                )
+        if not intermediate_files:
+            logging.fatal("No intermediate files found to concatenate. Exiting.")
+            return
 
-        if not dfs:
+        chunk_size = 10
+        chunk_dfs = []
+        for i in range(0, len(intermediate_files), chunk_size):
+            batch = intermediate_files[i:i + chunk_size]
+            batch_dfs = []
+            for f in batch:
+                try:
+                    df = pd.read_pickle(f) if f.endswith('.pkl') else pd.read_csv(f, low_memory=False)
+                    batch_dfs.append(df)
+                    logging.info(f"Appending {f}")
+                except Exception as e:
+                    logging.fatal(
+                        f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
+                    )
+            if batch_dfs:
+                batch_concat = pd.concat(batch_dfs, ignore_index=True)
+                del batch_dfs
+                batch_concat = batch_concat.sort_values(
+                    by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
+                batch_concat.dropna(subset=['observation'], inplace=True)
+                batch_concat['observation'] = np.where(
+                    batch_concat['unit'] == 'Pound',
+                    batch_concat['observation'] / 2000,
+                    batch_concat['observation'])
+                batch_concat = batch_concat.groupby(
+                    ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
+                batch_concat['unit'] = "Ton"
+                if 'scc_name' in batch_concat.columns:
+                    batch_concat = batch_concat.drop(columns=['scc_name'])
+                chunk_dfs.append(batch_concat)
+                del batch_concat
+                gc.collect()
+
+        if not chunk_dfs:
             logging.fatal("No dataframes to concatenate. Exiting.")
+            return
 
-        self.final_df = pd.concat(dfs, ignore_index=True)
+        self.final_df = pd.concat(chunk_dfs, ignore_index=True)
+        del chunk_dfs
+        gc.collect()
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
