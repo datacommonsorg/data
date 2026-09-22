@@ -141,51 +141,28 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
     def test_end_to_end_sharding_and_stat_var_processor(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            in_csv = os.path.join(tmpdir, 'tract_outcomes.csv')
-            out_csv = os.path.join(tmpdir, 'tract_outcomes_cleaned.csv')
-            with open(in_csv, 'w', encoding='utf-8', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow([
-                    'state',
-                    'county',
-                    'tract',
-                    'kir_natam_female_p1',
-                    'kir_natam_female_p1_se',
-                    'kfi_pooled_pooled_p25',
-                    'kfi_white_pooled_p25',
-                    'kfr_top20_white_pooled_p25',
-                    'kfr_white_male_p25_mean_se',
-                    'kid_white_male_n',
-                    'kii_black_female_p75',
-                ])
-                writer.writerow([
-                    '6', '85', '500100',
-                    '0.27893454', '0.0123', '45000', '48000', '0.32', '0.005', '120', '38000',
-                ])
-                writer.writerow([
-                    '6', '85', '500200',
-                    'NA', '.', '52000', '55000', '0.41', '0.006', '150', '41000',
-                ])
+        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
+        in_csv = os.path.join(test_data_dir, 'raw_data', 'tract_outcomes.csv')
 
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_csv = os.path.join(tmpdir, 'tract_outcomes_cleaned.csv')
             count = preprocess.shard_wide_csv(
-                in_csv, out_csv, 'tract', max_rows_per_shard=10
+                in_csv, out_csv, 'tract', max_rows_per_shard=5000
             )
-            self.assertEqual(count, 2)
+            self.assertEqual(count, 100)
             self.assertTrue(os.path.exists(out_csv))
 
-            import_dir = os.path.dirname(os.path.abspath(download.__file__))
-            repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
-            sv_out_prefix = os.path.join(tmpdir, 'sv_out')
+            sv_out_prefix = os.path.join(tmpdir, 'output')
             res = subprocess.run(
                 [
                     'python3',
                     os.path.join(
-                        repo_root, 'tools/statvar_importer/stat_var_processor.py'
+                        _REPO_ROOT,
+                        'tools/statvar_importer/stat_var_processor.py',
                     ),
                     f'--input_data={out_csv}',
-                    f'--pv_map={os.path.join(import_dir, "pvmap.csv")}',
-                    f'--config_file={os.path.join(import_dir, "metadata.csv")}',
+                    f'--pv_map={os.path.join(_MODULE_DIR, "pvmap.csv")}',
+                    f'--config_file={os.path.join(_MODULE_DIR, "metadata.csv")}',
                     f'--output_path={sv_out_prefix}',
                 ],
                 capture_output=True,
@@ -195,60 +172,29 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(res.returncode, 0, msg=res.stderr)
             with open(f'{sv_out_prefix}.csv', 'r', encoding='utf-8') as f:
                 sv_rows = list(csv.DictReader(f))
-            self.assertEqual(len(sv_rows), 14)
-            self.assertEqual(sv_rows[0]['observationAbout'], 'geoId/06085500100')
+            self.assertEqual(len(sv_rows), 560)
             dollar_rows = [
                 r
                 for r in sv_rows
                 if 'HouseholdIncome_' in r['variableMeasured']
                 or 'IndividualIncome_' in r['variableMeasured']
             ]
-            self.assertEqual(len(dollar_rows), 6)
             for r in dollar_rows:
                 self.assertEqual(r['unit'], 'USDollar')
 
     def test_sharding_all_datasets_and_stat_var_processor(self):
+        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
+        raw_dir = os.path.join(test_data_dir, 'raw_data')
+        expected_input_dir = os.path.join(test_data_dir, 'input_files')
+        expected_output_dir = os.path.join(test_data_dir, 'output')
+
         with tempfile.TemporaryDirectory() as tmpdir:
-            raw_dir = os.path.join(tmpdir, 'raw_data')
             shard_dir = os.path.join(tmpdir, 'input_files')
             out_dir = os.path.join(tmpdir, 'output')
             counters_dir = os.path.join(tmpdir, 'counters')
-            os.makedirs(raw_dir, exist_ok=True)
             os.makedirs(shard_dir, exist_ok=True)
             os.makedirs(out_dir, exist_ok=True)
             os.makedirs(counters_dir, exist_ok=True)
-
-            sample_schemas = {
-                'commuting_zone_outcomes.csv': (
-                    ['cz', 'kfr_pooled_pooled_p25', 'kfr_white_pooled_p25'],
-                    [['100', '0.42', '0.45'], ['101', '0.43', '0.46']],
-                ),
-                'county_outcomes.csv': (
-                    ['state', 'county', 'kfr_top20_white_male_p25', 'working_black_pooled_p75_se'],
-                    [['6', '85', '0.31', '0.031'], ['6', '87', '0.35', '0.035']],
-                ),
-                'tract_outcomes.csv': (
-                    ['state', 'county', 'tract', 'kfi_pooled_pooled_p25', 'kid_white_male_n'],
-                    [['6', '85', '500100', '45000', '120'], ['6', '85', '500200', '52000', '150']],
-                ),
-                'tract_outcomes_late_simple.csv': (
-                    ['state', 'county', 'tract', 'kfr_white_male_p25', 'jail_white_male_p25'],
-                    [['6', '85', '500100', '0.48', '0.01'], ['6', '85', '500200', '0.50', '0.02']],
-                ),
-                'county_by_cohort_outcomes.csv': (
-                    ['state', 'county', 'cohort', 'kfr_white_male_p25', 'emp_black_pooled_p75_se'],
-                    [['6', '85', '1988', '0.39', '0.050'], ['6', '87', '1988', '0.40', '0.052']],
-                ),
-                'cz_by_cohort_outcomes.csv': (
-                    ['cz', 'cohort', 'kfr_white_male_p25'],
-                    [['100', '1980', '0.41'], ['101', '1980', '0.44']],
-                ),
-            }
-            for fname, (headers, rows) in sample_schemas.items():
-                with open(os.path.join(raw_dir, fname), 'w', encoding='utf-8', newline='') as f:
-                    w = csv.writer(f)
-                    w.writerow(headers)
-                    w.writerows(rows)
 
             sv_out_prefix = os.path.join(out_dir, 'output')
             counters_file = os.path.join(counters_dir, 'output_counters.csv')
@@ -256,12 +202,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 raw_dir,
                 shard_dir,
                 sv_out_prefix,
-                rows_per_chunk=1,
+                rows_per_chunk=5000,
                 workers=2,
                 existing_statvar_mcf='',
             )
-            import_dir = os.path.dirname(os.path.abspath(download.__file__))
-            repo_root = os.path.abspath(os.path.join(import_dir, '..', '..'))
             shard_files = [
                 os.path.join(shard_dir, f)
                 for f in sorted(os.listdir(shard_dir))
@@ -270,10 +214,13 @@ class DownloadAndPvmapTest(unittest.TestCase):
             res = subprocess.run(
                 [
                     'python3',
-                    os.path.join(repo_root, 'tools/statvar_importer/stat_var_processor.py'),
+                    os.path.join(
+                        _REPO_ROOT,
+                        'tools/statvar_importer/stat_var_processor.py',
+                    ),
                     f'--input_data={",".join(shard_files)}',
-                    f'--pv_map={os.path.join(import_dir, "pvmap.csv")}',
-                    f'--config_file={os.path.join(import_dir, "metadata.csv")}',
+                    f'--pv_map={os.path.join(_MODULE_DIR, "pvmap.csv")}',
+                    f'--config_file={os.path.join(_MODULE_DIR, "metadata.csv")}',
                     f'--output_path={sv_out_prefix}',
                     f'--output_counters={counters_file}',
                 ],
@@ -286,12 +233,36 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertNotIn('Dropping invalid SVObs', res.stderr)
             self.assertTrue(os.path.exists(counters_file))
 
+            for fname in sorted(os.listdir(shard_dir)):
+                if fname.endswith('_cleaned.csv'):
+                    with open(
+                        os.path.join(shard_dir, fname), 'r', encoding='utf-8'
+                    ) as f_actual, open(
+                        os.path.join(expected_input_dir, fname),
+                        'r',
+                        encoding='utf-8',
+                    ) as f_expected:
+                        self.assertEqual(f_actual.read(), f_expected.read())
+
+            for fname in sorted(os.listdir(out_dir)):
+                if fname.endswith('.csv') or fname.endswith('.tmcf'):
+                    with open(
+                        os.path.join(out_dir, fname), 'r', encoding='utf-8'
+                    ) as f_actual, open(
+                        os.path.join(expected_output_dir, fname),
+                        'r',
+                        encoding='utf-8',
+                    ) as f_expected:
+                        self.assertEqual(f_actual.read(), f_expected.read())
+
             sv_rows = []
             for fname in sorted(os.listdir(out_dir)):
                 if fname.endswith('.csv'):
-                    with open(os.path.join(out_dir, fname), 'r', encoding='utf-8') as f:
+                    with open(
+                        os.path.join(out_dir, fname), 'r', encoding='utf-8'
+                    ) as f:
                         sv_rows.extend(list(csv.DictReader(f)))
-            self.assertEqual(len(sv_rows), 22)
+            self.assertEqual(len(sv_rows), 1408)
 
 
 if __name__ == '__main__':

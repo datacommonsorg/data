@@ -53,6 +53,12 @@ DEFAULT_EXISTING_STATVAR_MCF = (
     'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf'
 )
 
+flags.DEFINE_string(
+    'existing_statvar_mcf',
+    DEFAULT_EXISTING_STATVAR_MCF,
+    'Existing StatVar MCF path passed to stat_var_processor.py during header resolution.',
+)
+
 DATASET_CONFIGS = [
     ('commuting_zone_outcomes.csv', 'commuting_zone', 'baseline_1978_1983'),
     ('county_outcomes.csv', 'county', 'baseline_1978_1983'),
@@ -731,6 +737,7 @@ def main(_):
         FLAGS.shard_dir,
         FLAGS.sv_output_prefix,
         rows_per_chunk=FLAGS.max_rows_per_shard,
+        existing_statvar_mcf=FLAGS.existing_statvar_mcf,
     )
 
 
