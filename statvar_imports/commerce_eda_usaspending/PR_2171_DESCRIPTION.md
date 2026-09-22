@@ -59,7 +59,7 @@ The validation configuration is tuned specifically for federal grant obligation 
 
 ## 4. Verification & Testing
 
-- **Hermetic Unit Tests:** 12 unit tests pass in 0.08s (`python3 -m unittest statvar_imports/commerce_eda_usaspending/process_test.py`) covering pagination, retries, deduplication by `generated_internal_id`, de-obligations, and CFDA mapping.
+- **Hermetic Unit Tests:** 13 unit tests pass in 0.09s (`python3 -m unittest statvar_imports/commerce_eda_usaspending/process_test.py`) covering pagination threshold ceiling, retries, deduplication by `generated_internal_id`, de-obligations, empty award guards, and CFDA mapping.
 - **Syntax & Lint:** `python3 -m py_compile` clean; zero lines > 100 characters in code.
 - **Cloud Batch Test Execution (`datcom-import-test`):**
   - **Project:** `datcom-infosys-dev`
