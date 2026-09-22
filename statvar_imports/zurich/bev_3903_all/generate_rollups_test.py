@@ -156,6 +156,19 @@ class GenerateRollupsTest(unittest.TestCase):
             read_back = pd.read_csv(output_csv, keep_default_na=False)
             self.assertEqual(len(read_back), len(result_df))
 
+    def test_generate_rollups_utf8_bom_input(self):
+        """Verifies that input CSV with UTF-8 BOM (utf-8-sig) is parsed cleanly."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_csv = os.path.join(tmp_dir, 'input_bom.csv')
+            output_csv = os.path.join(tmp_dir, 'output_rollups.csv')
+
+            self.sample_raw_data.to_csv(input_csv,
+                                        index=False,
+                                        encoding='utf-8-sig')
+            result_df = generate_rollups(input_csv, output_csv)
+            self.assertIn('StichtagDatJahr', result_df.columns)
+            self.assertTrue(os.path.exists(output_csv))
+
     def test_generate_rollups_file_not_found(self):
         """Verifies that non-existent input file raises FileNotFoundError."""
         with self.assertRaises(FileNotFoundError):

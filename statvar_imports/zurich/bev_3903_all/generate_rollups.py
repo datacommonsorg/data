@@ -59,13 +59,16 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
     KeyError: If required columns are missing.
   """
     if df.empty:
+        logging.error("Input DataFrame is empty.")
         raise ValueError("Input DataFrame is empty.")
 
     missing_cols = [col for col in REQUIRED_COLS if col not in df.columns]
     if missing_cols:
-        raise KeyError(
+        err_msg = (
             f"Input DataFrame is missing required columns: {missing_cols}. "
             f"Available columns: {list(df.columns)}")
+        logging.error("%s", err_msg)
+        raise KeyError(err_msg)
 
     df = df.copy()
 
@@ -80,6 +83,8 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
         ~df['KreisLang'].astype(str).str.strip().isin(unknown_labels)].copy()
 
     if df.empty:
+        logging.error(
+            "No valid rows remaining after filtering unknown regions.")
         raise ValueError(
             "No valid rows remaining after filtering unknown regions.")
 
@@ -150,6 +155,8 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
     df_all = pd.concat(all_dfs, ignore_index=True)
     df_all = df_all.dropna(subset=[val_col]).reset_index(drop=True)
     if df_all.empty:
+        logging.error(
+            "No valid numeric rows remaining after rollup aggregation.")
         raise ValueError(
             "No valid numeric rows remaining after rollup aggregation.")
     if (df_all[val_col] % 1 == 0).all():
@@ -172,12 +179,14 @@ def generate_rollups(input_csv: str, output_csv: str) -> pd.DataFrame:
     ValueError: If input_csv is empty.
   """
     if not os.path.exists(input_csv):
+        logging.error("Input file not found: %s", input_csv)
         raise FileNotFoundError(f"Input file not found: {input_csv}")
     if os.path.getsize(input_csv) == 0:
+        logging.error("Input file is empty: %s", input_csv)
         raise ValueError(f"Input file is empty: {input_csv}")
 
     try:
-        df = pd.read_csv(input_csv, encoding='utf-8')
+        df = pd.read_csv(input_csv, encoding='utf-8-sig')
     except UnicodeDecodeError:
         df = pd.read_csv(input_csv, encoding='iso-8859-1')
 
@@ -189,6 +198,12 @@ def generate_rollups(input_csv: str, output_csv: str) -> pd.DataFrame:
 
     tmp_output_csv = f'{output_csv}.tmp'
     df_rollups.to_csv(tmp_output_csv, index=False, encoding='utf-8')
+    if not os.path.exists(tmp_output_csv) or os.path.getsize(
+            tmp_output_csv) == 0:
+        logging.error("Temporary output file is missing or empty: %s",
+                      tmp_output_csv)
+        raise ValueError(
+            f"Temporary output file is missing or empty: {tmp_output_csv}")
     os.replace(tmp_output_csv, output_csv)
     logging.info("Successfully generated %s with %d rows across %d places.",
                  output_csv, len(df_rollups), df_rollups['QuarLang'].nunique())
