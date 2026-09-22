@@ -18,6 +18,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 import numpy as np
 import pandas as pd
@@ -378,10 +379,21 @@ class RegularizeColumnsTest(unittest.TestCase):
         temp_out = tempfile.mkdtemp()
         inter_dir = tempfile.mkdtemp()
         try:
+            dir_14 = os.path.join(temp_in, '2014')
             dir_17 = os.path.join(temp_in, '2017neiJan_facility_process')
             dir_20 = os.path.join(temp_in, '2020nei_facility_process')
+            os.makedirs(dir_14)
             os.makedirs(dir_17)
             os.makedirs(dir_20)
+
+            df_14 = pd.DataFrame({
+                'state_and_county_fips_code': [1001],
+                'pollutant_cd': ['CO'],
+                'total_emissions': [5.0],
+                'uom': ['TON'],
+                'SCC': [10100101],
+            })
+            df_14.to_csv(os.path.join(dir_14, 'process_14.csv'), index=False)
 
             df_17 = pd.DataFrame({
                 'fips': [1001],
@@ -406,6 +418,7 @@ class RegularizeColumnsTest(unittest.TestCase):
             tmcf_out = os.path.join(temp_out, 'national_emissions.tmcf')
 
             ip_files = [
+                os.path.join(dir_14, 'process_14.csv'),
                 os.path.join(dir_17, 'point_12345.csv'),
                 os.path.join(dir_20, 'point_1.csv')
             ]
@@ -417,14 +430,64 @@ class RegularizeColumnsTest(unittest.TestCase):
 
             self.assertTrue(os.path.exists(csv_out))
             res_df = pd.read_csv(csv_out)
-            # Each year generates aggregate and CO-specific StatVars (2 * 2 = 4 rows)
-            self.assertEqual(len(res_df), 4)
+            # Each year generates aggregate and CO-specific StatVars (3 * 2 = 6 rows)
+            self.assertEqual(len(res_df), 6)
             self.assertCountEqual(
                 res_df['year'].astype(str).tolist(),
-                ['2017', '2017', '2020', '2020'])
+                ['2014', '2014', '2017', '2017', '2020', '2020'])
             self.assertCountEqual(
-                res_df['observation'].tolist(), [10.0, 10.0, 20.0, 20.0])
+                res_df['observation'].tolist(),
+                [5.0, 5.0, 10.0, 10.0, 20.0, 20.0])
             self.assertTrue((res_df['geo_Id'] == 'geoId/01001').all())
+        finally:
+            shutil.rmtree(temp_in)
+            shutil.rmtree(temp_out)
+            if os.path.exists(inter_dir):
+                shutil.rmtree(inter_dir)
+
+    def test_process_raises_on_corrupted_intermediate_file(self):
+        temp_in = tempfile.mkdtemp()
+        temp_out = tempfile.mkdtemp()
+        inter_dir = tempfile.mkdtemp()
+        try:
+            dir_17 = os.path.join(temp_in, '2017')
+            os.makedirs(dir_17)
+            df_17 = pd.DataFrame({
+                'fips': [1001],
+                'pollutant_code': ['CO'],
+                'total_emissions': [10.0],
+                'emissions_uom': ['TON'],
+                'scc': [10100101],
+            })
+            dummy_file = os.path.join(dir_17, 'point_1.csv')
+            df_17.to_csv(dummy_file, index=False)
+
+            loader = USAirEmissionTrends([dummy_file],
+                                         os.path.join(temp_out, 'out.csv'),
+                                         os.path.join(temp_out, 'out.mcf'),
+                                         os.path.join(temp_out, 'out.tmcf'),
+                                         inter_dir)
+            with mock.patch(
+                'pandas.read_pickle', side_effect=IOError('Corrupt pickle')):
+                with self.assertRaises(IOError):
+                    loader.generate_csv()
+        finally:
+            shutil.rmtree(temp_in)
+            shutil.rmtree(temp_out)
+            if os.path.exists(inter_dir):
+                shutil.rmtree(inter_dir)
+
+    def test_process_files_raises_on_unhandled_year(self):
+        temp_in = tempfile.mkdtemp()
+        temp_out = tempfile.mkdtemp()
+        inter_dir = tempfile.mkdtemp()
+        try:
+            # Input file with unhandled year
+            bad_file = os.path.join(temp_in, '1999_emissions.csv')
+            with open(bad_file, 'w') as f:
+                f.write("col1,col2\n1,2\n")
+            with self.assertRaises(Exception):
+                process_files(temp_in, temp_out, inter_dir)
         finally:
             shutil.rmtree(temp_in)
             shutil.rmtree(temp_out)

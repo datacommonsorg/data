@@ -93,10 +93,6 @@ replacement_20 = {
     'uom': 'emissions uom'
 }
 
-drop_tribes = [
-    'state', 'fips state code', 'data category', 'reporting period',
-    'emissions operating type', 'pollutant desc', 'data set'
-]
 drop_df = [
     'scc', 'pollutant code', 'emissions type code', 'pollutant type(s)',
     'fips code'

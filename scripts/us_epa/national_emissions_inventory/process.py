@@ -252,7 +252,8 @@ class USAirEmissionTrends:
                 if 'scc_name' in df.columns:
                     df = df.drop(columns=['scc_name'])
                 df = df.groupby(
-                    ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
+                    ['geo_Id', 'year', 'Measurement_Method', 'SV'],
+                    as_index=False)['observation'].sum()
                 df['unit'] = "Ton"
                 intermediate_file_path = os.path.join(
                     self.temp_dir,
@@ -334,7 +335,8 @@ class USAirEmissionTrends:
         ]
         if not intermediate_files:
             logging.fatal("No intermediate files found to concatenate. Exiting.")
-            return
+            raise FileNotFoundError(
+                "No intermediate files found to concatenate.")
 
         chunk_size = 10
         chunk_dfs = []
@@ -350,6 +352,7 @@ class USAirEmissionTrends:
                     logging.fatal(
                         f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
                     )
+                    raise
             if batch_dfs:
                 batch_concat = pd.concat(batch_dfs, ignore_index=True)
                 del batch_dfs
@@ -360,18 +363,21 @@ class USAirEmissionTrends:
                     batch_concat['unit'] == 'Pound',
                     batch_concat['observation'] / 2000,
                     batch_concat['observation'])
-                batch_concat = batch_concat.groupby(
-                    ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
-                batch_concat['unit'] = "Ton"
                 if 'scc_name' in batch_concat.columns:
                     batch_concat = batch_concat.drop(columns=['scc_name'])
+                batch_concat = batch_concat.groupby(
+                    ['geo_Id', 'year', 'Measurement_Method', 'SV'],
+                    as_index=False)['observation'].sum()
+                batch_concat['unit'] = "Ton"
                 chunk_dfs.append(batch_concat)
                 del batch_concat
                 gc.collect()
 
         if not chunk_dfs:
             logging.fatal("No dataframes to concatenate. Exiting.")
-            return
+            raise RuntimeError(
+                "No dataframes to concatenate after processing intermediate files."
+            )
 
         self.final_df = pd.concat(chunk_dfs, ignore_index=True)
         del chunk_dfs
@@ -383,11 +389,12 @@ class USAirEmissionTrends:
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
             self.final_df['observation'] / 2000, self.final_df['observation'])
-        self.final_df = self.final_df.groupby(
-            ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
-        self.final_df['unit'] = "Ton"
         if 'scc_name' in self.final_df.columns:
             self.final_df = self.final_df.drop(columns=['scc_name'])
+        self.final_df = self.final_df.groupby(
+            ['geo_Id', 'year', 'Measurement_Method', 'SV'],
+            as_index=False)['observation'].sum()
+        self.final_df['unit'] = "Ton"
         logging.info("Data processing complete.")
 
     def generate_tmcf(self) -> None:
@@ -463,6 +470,7 @@ def process_files(input_path: str, output_file_path: str,
         logging.fatal(
             f"Error finding input files: {e}. Run the download script first.\n{traceback.format_exc()}"
         )
+        raise
 
     # Defining Output Files
     logging.info(
@@ -487,6 +495,7 @@ def process_files(input_path: str, output_file_path: str,
     except Exception as e:
         logging.fatal(
             f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
+        raise
 
 
 def main(_):
