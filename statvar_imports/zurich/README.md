@@ -89,10 +89,10 @@ Fully Autorefresh:" 0 6 1,15 * * " (Runs at 6:00 AM on the 1st and 15th of every
 #####
 
 
-1. import_name": "Zurich_Births_By_Sex_Origin_Combined"
+1. import_name": "Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined"
 
 2. Import Overview
-Births in Zurich city by sex and origin at City, District (Kreise), and Quarter (Quartiere) Level.
+Consolidated live births in Zurich city by sex and origin at City (`wikidataId/Q72`), District (`Kreise` 1–12), and Quarter (`Quartiere` 34 quarters) Level, replacing the 3 legacy split imports (`Zurich_Population_Number_Of_Birth`, `Zurich_Population_Number_Of_Birth_By_Origin`, `Zurich_Population_Number_Of_Birth_By_Sex`).
 Source URL: [BEV403OD4031 Dataset](https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031)
 Import Type: Fully Autorefresh
 Source Data Availability: 1998 to 2026
@@ -103,9 +103,9 @@ Generate demographic and geographic rollups from the downloaded dataset:
 python3 bev_4031_all/generate_rollups.py
 
 Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
-- **Why Rollup Aggregation is Required**:
-  - The upstream dataset (`BEV403OD4031.csv`) publishes daily birth records (`GueltigAbDatMM`, `GueltigAbDatDD`) crossed with gender (`SexLang`) and nativity (`HerkunftLang`) at the Quarter (`QuarLang`) level, with District (`KreisLang`) provided as an attribute column. It does not publish annual sums (`GueltigAbDatJahr`), District or City totals (`Ganze Stadt`), or marginal 1-way and total birth counts.
-  - Consolidating these breakdowns into a single script replaces the 3 separate legacy imports (`Zurich_Population_Number_Of_Birth`, `Zurich_Population_Number_Of_Birth_By_Origin`, `Zurich_Population_Number_Of_Birth_By_Sex`) into one unified import.
+- **Why Source Migration & Consolidation into 2 Combined Imports Was Performed**:
+  - Previously, `BEV390OD3903.csv` and `BEV403OD4031.csv` from Statistics Zurich (`data.stadt-zuerich.ch`) were ingested via 6 separate legacy split imports (`Zurich_Population_By_Age`, `Zurich_Population_By_Origin`, `Zurich_Population_By_Sex`, and `Zurich_Population_Number_Of_Birth`, `Zurich_Population_Number_Of_Birth_By_Origin`, `Zurich_Population_Number_Of_Birth_By_Sex`). Each legacy import downloaded the same source CSV independently and only emitted 1-dimensional Quarter-level slices (`15,790` + `2,914` + `2,914` = `21,618` population observations; `1,220` + `2,424` + `2,426` = `6,070` birth observations), omitting multi-dimensional cross-tabulations and District/City geographic rollups.
+  - Consolidating into `Zurich_Population_By_Age_Sex_Origin_Combined` (`159,505` observations across `108` StatVars) and `Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined` (`12,086` observations across `9` StatVars) preserves 100% of the observations from all 6 legacy split imports (`0` deleted observations verified via `ImportDiffer`) while adding District (`Kreis 1`–`12`), City (`Ganze Stadt`), and 2-way/3-way demographic cross-tabulations in a single unified pipeline per dataset.
 - **Temporal & Spatial Aggregation**: Aggregates daily births into annual totals (`GueltigAbDatJahr`) across all 3 geographic levels: Quarter (`QuarLang`), District (`KreisLang` mapped to `QuarLang`), and City (`Ganze Stadt`).
 - **Demographic Slices Generated**: For each spatial level and year, computes all 4 combinations:
   1. Full 2-way: `SexLang` x `HerkunftLang`

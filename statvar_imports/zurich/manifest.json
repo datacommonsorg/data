@@ -70,7 +70,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903",
-            "provenance_description": "Population by age, sex and origin of Zurich city contains structure and organization of the city administration",
+            "provenance_description": "Consolidated economic population by age, sex, and origin of Zurich city and statistical quarters (BEV390OD3903), replacing legacy split imports Zurich_Population_By_Age, Zurich_Population_By_Origin, and Zurich_Population_By_Sex.",
             "scripts": [
                 "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903/download/BEV390OD3903.csv --output_folder=bev_3903_all/input_files",
                 "bev_3903_all/generate_rollups.py",
@@ -103,7 +103,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031",
-            "provenance_description": "Population of births by sex and origin in Zurich city contains structure and organization of the city administration",
+            "provenance_description": "Consolidated live births by sex and origin of Zurich city and statistical quarters (BEV403OD4031), replacing legacy split imports Zurich_Population_Number_Of_Birth, Zurich_Population_Number_Of_Birth_By_Origin, and Zurich_Population_Number_Of_Birth_By_Sex.",
             "scripts": [
                 "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031/download/BEV403OD4031.csv --output_folder=bev_4031_all/input_files",
                 "bev_4031_all/generate_rollups.py",
