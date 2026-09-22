@@ -19,6 +19,7 @@ import sys
 import tempfile
 from unittest import mock
 
+from absl import app
 from absl.testing import absltest, flagsaver
 import pandas as pd
 import requests
@@ -365,8 +366,9 @@ class MainExecutionTest(absltest.TestCase):
                 rbi_download, 'reads_config_file', return_value={'URLS_CONFIG': []}), \
              mock.patch.object(
                 rbi_download, 'download_files', return_value=['failed_table.xlsx']), \
-             mock.patch.object(rbi_download.logging, 'fatal') as mock_fatal:
-            rbi_download.main([])
+             mock.patch.object(rbi_download.logging, 'fatal', side_effect=SystemExit) as mock_fatal:
+            with self.assertRaises(SystemExit):
+                rbi_download.main(['rbi_download'])
             mock_fatal.assert_called_once()
             self.assertIn('failed_table.xlsx', mock_fatal.call_args[0][0])
 
@@ -377,10 +379,15 @@ class MainExecutionTest(absltest.TestCase):
                 rbi_download, 'download_files', return_value=[]), \
              mock.patch.object(
                 rbi_download, 'preprocess_files', side_effect=[['broken.xlsx'], [], [], []]), \
-             mock.patch.object(rbi_download.logging, 'fatal') as mock_fatal:
-            rbi_download.main([])
+             mock.patch.object(rbi_download.logging, 'fatal', side_effect=SystemExit) as mock_fatal:
+            with self.assertRaises(SystemExit):
+                rbi_download.main(['rbi_download'])
             mock_fatal.assert_called_once()
             self.assertIn('broken.xlsx', mock_fatal.call_args[0][0])
+
+    def test_main_usage_error_too_many_args(self):
+        with self.assertRaises(app.UsageError):
+            rbi_download.main(['rbi_download', 'unexpected_argument'])
 
 
 if __name__ == '__main__':

@@ -359,7 +359,9 @@ def preprocess_files(directory_path):
     return []
 
 
-def main(_):
+def main(argv):
+    if len(argv) > 1:
+        raise app.UsageError('Too many command-line arguments.')
     configs = reads_config_file()
     RBI_URL = configs['URLS_CONFIG']
     failed_downloads = download_files(RBI_URL)
@@ -367,7 +369,6 @@ def main(_):
         logging.fatal(
             f"Download failed for {len(failed_downloads)} table(s): {failed_downloads}"
         )
-        return
     logging.info("Download process Completed successfully")
     directories = [
         'agriculture', 'environment', 'infrastructure', 'price_and_wages'
@@ -381,7 +382,6 @@ def main(_):
         logging.fatal(
             f"Preprocessing failed for {len(failed_preprocesses)} file(s): {failed_preprocesses}"
         )
-        return
     logging.info("Pre-process Completed successfully")
 
 
