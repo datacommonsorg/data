@@ -2,8 +2,8 @@ key,p1,v1,p2,v2
 County Code,#Format,CountyCode1={Number:0>5},observationAbout,geoId/{CountyCode1}
 Year Code,observationDate,{Number},observationPeriod,P1Y
 Deaths,populationType,MortalityEvent,value,{Number}
-Population,#ignore,redundant value for 113 causes of death,value,{Number}
-Crude Rate,#ignore,unreliable values,value,{Number}
+Population,#ignore,redundant value for 113 causes of death,,
+Crude Rate,#ignore,unreliable values,,
 GR113-001,causeOfDeath,SalmonellaInfections,,
 GR113-003,causeOfDeath,CertainOtherIntestinalInfections,,
 GR113-004,causeOfDeath,Tuberculosis,,
