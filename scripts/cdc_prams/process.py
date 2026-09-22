@@ -137,11 +137,13 @@ def _cleaning_national_file(df, geo):
                 'statVar'] == 'Experienced IPV during the 12 months'+\
                     ' before pregnancy by a':
             if geo == "National":
-                df.loc[i, 'statVar'] = df.loc[i,
-                                              'statVar'].replace('a2.5 ', 'a')
+                df.loc[i + 1,
+                       'statVar'] = df.loc[i + 1,
+                                           'statVar'].replace('2.5 ', '')
                 df.loc[i + 1, '2020_CI'] = 2.5
-            df.loc[i + 1,
-                   'statVar'] = df.loc[i, 'statVar'] + df.loc[i + 1, 'statVar']
+            part1 = df.loc[i, 'statVar'].strip()
+            part2 = df.loc[i + 1, 'statVar'].strip()
+            df.loc[i + 1, 'statVar'] = f"{part1} {part2}"
             df.drop([i], inplace=True)
             df.reset_index(drop=True, inplace=True)
             break
@@ -157,9 +159,9 @@ def _cleaning_national_file(df, geo):
                        'statVar'] = df.loc[i + 1,
                                            'statVar'].replace('40.0 ', '')
                 df.loc[i + 1, '2020_CI'] = 40.0
-                df.loc[i + 1,
-                       'statVar'] = df.loc[i, 'statVar'] + df.loc[i + 1,
-                                                                  'statVar']
+                part1 = df.loc[i, 'statVar'].strip()
+                part2 = df.loc[i + 1, 'statVar'].strip()
+                df.loc[i + 1, 'statVar'] = f"{part1} {part2}"
                 df.drop([i], inplace=True)
                 df.reset_index(drop=True, inplace=True)
                 break

@@ -61,6 +61,16 @@ statvar_col = {
         ' or ex-partner':
         'IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12'+\
             'MonthsBeforePregnancy',
+    'Intimate Partner Violence (IPV)¥__Experienced IPV during the 12 months'+\
+    ' before pregnancy by ahusband or partner and/or by an ex-husband'+\
+        ' or ex-partner':
+        'IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12'+\
+            'MonthsBeforePregnancy',
+    'Intimate Partner Violence (IPV)¥__Experienced IPV during the 12 months'+\
+    ' before pregnancy by a 2.5 husband or partner and/or by an ex-husband'+\
+        ' or ex-partner':
+        'IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12'+\
+            'MonthsBeforePregnancy',
     'Intimate Partner Violence (IPV)¥__Experienced IPV during pregnancy by a'+\
         ' husband or partner and/or by an ex-husband or ex-partner':
     'IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband'+\
