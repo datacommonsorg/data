@@ -30,7 +30,6 @@ observationDate,observationAbout,variableMeasured,value
 2024,nces/010000500871,dcid:Count_Teacher_FullTimeEmployee_FirstYear,5
 2024,nces/010000500871,dcid:Count_Teacher_FullTimeEmployee_SecondYear,6
 2024,nces/010000500871,dcid:Count_Teacher_AbsentMoreThan10Days_FullTimeEmployee,12
-2024,nces/010000500871,dcid:Count_Teacher_CurrentSchoolYear,82
 2024,nces/010000500871,dcid:Count_Teacher_PreviousSchoolYear,80
 2024,nces/010000500871,dcid:Count_Teacher_Male_HispanicOrLatino_CurrentSchoolYear,1
 2024,nces/010000500871,dcid:Count_Teacher_Female_HispanicOrLatino_CurrentSchoolYear,2

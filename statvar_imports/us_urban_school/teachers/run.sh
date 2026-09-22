@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # This Bash script automates the full data processing pipeline for the Teachers and Staff dataset by strategically grouping input files. 
@@ -65,5 +65,3 @@ python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
 
 echo "All processing steps completed successfully."
 exit 0
-
-
