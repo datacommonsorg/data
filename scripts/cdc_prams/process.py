@@ -21,7 +21,7 @@ import re
 from copy import deepcopy
 import pandas as pd
 import numpy as np
-from absl import app, flags
+from absl import app, flags, logging
 import tabula as tb
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,7 +39,8 @@ _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+flags.DEFINE_string("input_path", default_input_path,
+                    "Import Data File's List")
 flags.DEFINE_string("output_path", None,
                     "Directory path where output files need to be written")
 input_years = ["2016", "2017", "2018", "2019", "2020"]
@@ -110,10 +111,12 @@ def _split_statvar_value(df, geo):
             l1 = len(df.loc[i, 'statVar'])
             l2 = len(df.loc[i, '2016_sampleSize'])
             df.loc[i, 'statVar'] = df.loc[i, 'statVar'][:l1 - l2].strip()
-        if re.match(r'^\d{1}\.\d{1} \(\d{1}.\d{1}-\d{1}\.\d{1}\)',
-                    df.loc[i, 'statVar']):
-            df.loc[i, 'Overall_2020_CI'] = df.loc[i, 'statVar'][:12]
-            df.loc[i, 'statVar'] = df.loc[i, 'statVar'][13:]
+        m = re.match(
+            r'^(\d+(?:\.\d+)?\s*\(\s*\d+(?:\.\d+)?\s*-\s*\d+(?:\.\d+)?\s*\))\s*(.*)$',
+            df.loc[i, 'statVar'])
+        if m:
+            df.loc[i, 'Overall_2020_CI'] = m.group(1).strip()
+            df.loc[i, 'statVar'] = m.group(2).strip()
     return df
 
 
@@ -189,8 +192,8 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
         'Highly effective contraceptive methods'
     ]
 
-    df['main_header'] = np.where(df['statVar'].isin(main_header), df['statVar'],
-                                 pd.NA)
+    df['main_header'] = np.where(df['statVar'].isin(main_header),
+                                 df['statVar'], pd.NA)
     df['main_header_delete_flag'] = df['main_header']
     df['main_header_delete_flag'] = df['main_header_delete_flag'].fillna("")
     df['main_header'] = df['main_header'].ffill()
@@ -243,52 +246,35 @@ def _splitting_ci_columns(df, geo):
     '''
     if geo == "State":
         split_col = ['2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI']
+        ci_pattern = re.compile(
+            r'^\s*(?:(?P<percent>-?\d+(?:\.\d+)?))?\s*(?:\(\s*(?:(?P<lower>-?\d+(?:\.\d+)?)\s*-\s*(?P<upper>-?\d+(?:\.\d+)?)|[^\)]*)\s*\))?\s*$'
+        )
         for i in split_col:
             df[i] = df[i].fillna('').astype(str).replace({
                 '<NA>': '',
                 'nan': '',
                 'None': ''
             })
-            # Normalize separators by removing parentheses and replacing hyphens with spaces
-            normalized = df[i].str.replace(
-                r'[\(\)]', '', regex=True).str.replace(
-                    '-', ' ', regex=False).str.strip()
-            df_split = normalized.str.split(r'\s+', expand=True)
-            # determining the size of the column after splitting it.
-            siz = df_split.shape[1]
-            if siz == 1:
-                df_split = df_split.rename(
-                    columns={df_split.columns[0]: i + '_PERCENT'})
-                df_split[i + '_LOWER'] = ""
-                df_split[i + '_UPPER'] = ""
-            elif siz == 2:
-                df_split = df_split.rename(
-                    columns={
-                        df_split.columns[0]: i + '_PERCENT',
-                        df_split.columns[1]: i + '_LOWER'
-                    })
-                df_split[i + '_UPPER'] = ""
-            elif siz >= 3:
-                df_split = df_split.iloc[:, :3]
-                df_split.columns = [i + '_PERCENT', i + '_LOWER', i + '_UPPER']
-                # Removing unwanted characters.
-                df_split[i + '_LOWER'] = df_split[i + '_LOWER'].str.replace(
-                    '(', '', regex=False)
-                df_split[i + '_UPPER'] = df_split[i + '_UPPER'].str.replace(
-                    ')', '', regex=False)
+            df_split = df[i].str.extract(ci_pattern).fillna('')
+            df_split = df_split.rename(
+                columns={
+                    'percent': i + '_PERCENT',
+                    'lower': i + '_LOWER',
+                    'upper': i + '_UPPER'
+                })
             df = pd.concat([df, df_split], axis=1)
         df = df.drop(columns=[
-            'newStatVar', '2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI',
-            'Overall_2020_CI'
+            'newStatVar', '2016_CI', '2017_CI', '2018_CI', '2019_CI',
+            '2020_CI', 'Overall_2020_CI'
         ])
         # Redifining columns
     if geo == "National":
         df = df[national_columns]
     elif geo == "State":
         df = df[state_columns]
-        # The Distric of Columbia has characters : (.-.)
-        df['2018_CI_UPPER'] = df['2018_CI_UPPER'].replace('.', '0.0')
-        df['2018_CI_LOWER'] = df['2018_CI_LOWER'].replace('.', '0.0')
+        # Suppressed/unavailable data indicated by '.' or '(.-.)' should be NA, not 0.0
+        df['2018_CI_UPPER'] = df['2018_CI_UPPER'].replace('.', np.nan)
+        df['2018_CI_LOWER'] = df['2018_CI_LOWER'].replace('.', np.nan)
     return df
 
 
@@ -343,8 +329,9 @@ def _stat_var(df, geo):
             if geo == "National":
                 continue
             elif geo == "State":
-                temp_df[
-                    'SV'] = 'ConfidenceIntervalLowerLimit_Count' + temp_df['SV']
+                temp_df['SV'] = 'ConfidenceIntervalLowerLimit_Count' + temp_df[
+                    'SV']
+                temp_df['ScalingFactor'] = 100
                 for year in range(2016, 2021):
                     for col in ['_sampleSize', '_CI_UPPER', '_CI_PERCENT']:
                         drop_columns.append(str(year) + col)
@@ -358,8 +345,9 @@ def _stat_var(df, geo):
             if geo == "National":
                 continue
             elif geo == "State":
-                temp_df[
-                    'SV'] = 'ConfidenceIntervalUpperLimit_Count' + temp_df['SV']
+                temp_df['SV'] = 'ConfidenceIntervalUpperLimit_Count' + temp_df[
+                    'SV']
+                temp_df['ScalingFactor'] = 100
                 for year in range(2016, 2021):
                     for col in ['_sampleSize', '_CI_LOWER', '_CI_PERCENT']:
                         drop_columns.append(str(year) + col)
@@ -403,10 +391,11 @@ def prams(input_url: list, years: list = None) -> pd.DataFrame:
         df.reset_index(drop=True, inplace=True)
         if geo == "State":
             # dropping unwanted columns
-            df = df.drop([
+            drop_cols = [
                 'Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3',
                 'Unnamed: 4'
-            ],
+            ]
+            df = df.drop([col for col in drop_cols if col in df.columns],
                          axis=1)
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_CI',
@@ -417,8 +406,8 @@ def prams(input_url: list, years: list = None) -> pd.DataFrame:
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_Nan', '2017_CI',
                 '2018_sampleSize', '2018_Nan', '2018_CI', '2019_sampleSize',
-                '2019_Nan', '2019_CI', '2020_sampleSize', '2020_Nan', '2020_CI',
-                'Geo'
+                '2019_Nan', '2019_CI', '2020_sampleSize', '2020_Nan',
+                '2020_CI', 'Geo'
             ]
             # dropping unwanted columns
             df = df.drop(['2017_Nan', '2018_Nan', '2019_Nan', '2020_Nan'],
@@ -470,9 +459,11 @@ class USPrams:
         Returns:
             None
         """
-        # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding="UTF-8") as f_out:
+        # Writing Generated TMCF atomically to local path.
+        tmp_tmcf_file = self.tmcf_file_path + ".tmp"
+        with open(tmp_tmcf_file, 'w+', encoding="UTF-8") as f_out:
             f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
+        os.replace(tmp_tmcf_file, self.tmcf_file_path)
 
     def _generate_mcf(self, sv_names: list, mcf_file_path: str) -> None:
         """
@@ -679,9 +670,11 @@ class USPrams:
                 _MCF_TEMPLATE.format(dcid=resolved_dcid,
                                      xtra_pvs='\n'.join(pvs)))
         mcf = '\n'.join(mcf_nodes)
-        # Writing Genereated MCF to local path.
-        with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        # Writing Generated MCF atomically to local path.
+        tmp_mcf_file = mcf_file_path + ".tmp"
+        with open(tmp_mcf_file, 'w+', encoding='utf-8') as f_out:
             f_out.write(mcf.rstrip('\n'))
+        os.replace(tmp_mcf_file, mcf_file_path)
         return dcid_nodes
         # pylint: enable=W1309
         # pylint: enable=R0912
@@ -710,20 +703,21 @@ class USPrams:
         self._generate_tmcf()
         df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])
-        df.to_csv(self.cleaned_csv_file_path, index=False)
+        tmp_csv_file = self.cleaned_csv_file_path + ".tmp"
+        df.to_csv(tmp_csv_file, index=False)
+        os.replace(tmp_csv_file, self.cleaned_csv_file_path)
 
 
 def main(_):
     input_path = _FLAGS.input_path
     if not os.path.exists(input_path):
-        raise FileNotFoundError(f"Input path not found: {input_path}")
+        logging.fatal("Input path not found: %s", input_path)
     ip_files = [
-        os.path.join(input_path, file)
-        for file in os.listdir(input_path)
+        os.path.join(input_path, file) for file in os.listdir(input_path)
         if file.endswith('.pdf')
     ]
     if not ip_files:
-        raise FileNotFoundError(f"No PDF files found in {input_path}")
+        logging.fatal("No PDF files found in %s", input_path)
     ip_files.sort()
 
     # Defining Output Files

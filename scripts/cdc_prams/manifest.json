@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://www.cdc.gov/prams/prams-data/mch-indicators/index.html",
+            "provenance_url": "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html",
             "provenance_description": "US CDC Pregnancy Risk Assessment Monitoring System (PRAMS) MCH indicators",
             "scripts": [
                 "download_input_files.py",

@@ -16,15 +16,12 @@ This Python script downloads the CDC PRAMS datasets from provided URLs,
 verifies their contents, and saves them to the input files directory.
 """
 import io
-import logging
 import os
 import zipfile
+from absl import logging
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 
 def _get_session() -> requests.Session:
@@ -67,10 +64,11 @@ def download_file(input_url: list,
 
         if not overwrite and os.path.exists(out_file) and os.path.getsize(
                 out_file) > 1000:
-            logger.info("File already exists, skipping: %s", file_name)
+            logging.info("File already exists, skipping: %s", file_name)
             continue
 
-        logger.info("Downloading: %s", download_file_url)
+        logging.info("Downloading: %s", download_file_url)
+        tmp_file = out_file + ".tmp"
         try:
             req = session.get(download_file_url, timeout=60)
             req.raise_for_status()
@@ -79,20 +77,23 @@ def download_file(input_url: list,
                     f"Downloaded content too small ({len(req.content)} bytes) for {download_file_url}"
                 )
 
-            with open(out_file, 'wb') as file:
+            with open(tmp_file, 'wb') as file:
                 file.write(req.content)
 
             if download_file_url.endswith(".zip"):
-                with zipfile.ZipFile(out_file) as zipfileout:
+                with zipfile.ZipFile(tmp_file) as zipfileout:
                     zipfileout.extractall(path)
 
-            logger.info("Successfully downloaded: %s (%d bytes)", file_name,
-                        len(req.content))
+            os.replace(tmp_file, out_file)
+            logging.info("Successfully downloaded: %s (%d bytes)", file_name,
+                         len(req.content))
         except (requests.exceptions.RequestException, zipfile.BadZipFile,
                 ValueError) as exc:
-            logger.error("Failed downloading or extracting %s: %s",
-                         download_file_url, exc)
-            raise
+            if os.path.exists(tmp_file):
+                os.remove(tmp_file)
+            logging.fatal("Failed downloading or extracting %s: %s",
+                          download_file_url, exc)
         except Exception as exc:
-            logger.error("Failed downloading %s: %s", download_file_url, exc)
-            raise
+            if os.path.exists(tmp_file):
+                os.remove(tmp_file)
+            logging.fatal("Failed downloading %s: %s", download_file_url, exc)

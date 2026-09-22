@@ -28,10 +28,10 @@ Each indicator is measured across 4 statistical properties:
 Total Statistical Variables: 168
 
 ### Source Download URL
-The data is downloaded from the CDC PRAMS repository:
-`https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/`
+The data is published at the CDC PRAMS repository:
+`https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html`
 
-Example file:
+Example PDF file:
 `https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/Alabama-PRAMS-MCH-Indicators-508.pdf`
 
 ---
@@ -48,12 +48,30 @@ scripts/cdc_prams/
 ├── process_test.py            # Unit test comparing output against expected fixtures
 ├── constants.py               # MCF templates and property mappings
 ├── statvar.py                 # Statistical variable name mappings
-├── test_data/                 # Test sample fixtures (9 PDFs and expected outputs)
-└── output/                    # Generated output directory (.gitignored)
+├── test_data/                 # Test sample fixtures (State & National PDFs and expected outputs)
+└── output/                    # Generated output directory
     ├── PRAMS.csv
     ├── PRAMS.mcf
     └── PRAMS.tmcf
 ```
+
+### Automation Cadence
+- **Dataset Release Frequency**: Annual (`P1Y`).
+- **Cloud Batch Cron Schedule**: Annual on June 1 (`0 0 1 6 *`) in `manifest.json`.
+- **Google3 Ingestion**: Polled weekly (`auto1w`) to detect new versions published to GCS.
+
+---
+
+## Prerequisites
+
+- **Java Runtime**: Java 8 or higher (required by `tabula-py` for PDF table parsing).
+  ```bash
+  java -version
+  ```
+- **Python Dependencies**:
+  ```bash
+  pip install tabula-py pandas absl-py numpy requests urllib3
+  ```
 
 ---
 
