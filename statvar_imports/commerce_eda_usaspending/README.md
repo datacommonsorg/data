@@ -41,7 +41,6 @@ Outputs produced:
 - `output/investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
 - `output/investment_output.tmcf`: Template MCF mapping observation properties.
 - `output/investment_output_stat_vars.mcf`: Node MCF for new StatisticalVariable entities.
-- `output/investment_output_stat_vars_schema.mcf`: Schema MCF for new enum values.
 - `counters/investment_counters.csv`: Processing counters and diff statistics.
 
 ## Data Processing & Methodology

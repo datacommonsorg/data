@@ -83,6 +83,8 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertEqual(awards[1]["Award ID"], "456")
         self.assertEqual(mock_post.call_count, 2)
         self.assertTrue(os.path.exists(raw_json_path))
+        first_call_fields = mock_post.call_args_list[0][1]["json"]["fields"]
+        self.assertIn("generated_internal_id", first_call_fields)
 
     @patch("time.sleep", return_value=None)
     @patch("requests.Session.post")

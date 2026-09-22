@@ -111,7 +111,8 @@ def fetch_usaspending_data(start_year,
                 },
                 "fields": [
                     "Award ID", "Start Date", "Award Amount",
-                    "Place of Performance State Code", "CFDA Number"
+                    "Place of Performance State Code", "CFDA Number",
+                    "generated_internal_id"
                 ],
                 "limit": 100,
                 "page": page
@@ -270,7 +271,8 @@ def process_data(awards, start_year, end_year, output_path):
     final_df.to_csv(tmp_output_path, index=False, header=True)
     if os.path.exists(tmp_output_path) and os.path.getsize(tmp_output_path) > 0:
         os.replace(tmp_output_path, output_path)
-        logging.info(f"✅ Processed data saved successfully to {output_path}")
+        logging.info(
+            f"[SUCCESS] Processed data saved successfully to {output_path}")
 
 
 def main(argv):
