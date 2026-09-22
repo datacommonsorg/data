@@ -27,7 +27,7 @@ and relies on the following StatisticalVariables:
 - Mean_Concentration_AirPollutant_PM10
 - Max_Concentration_AirPollutant_PM10
 - AirQualityIndex_AirPollutant_PM10
-- AirQualityIndex_AirPollutant (only for county/CSBA)
+- AirQualityIndex_AirPollutant (only for county/CBSA)
 
 ## Notes on the Data
 Pollutant-specific metrics are provided on the site monitor level. For simplicity in the place mapping, we select a single monitor per site and pollutant and provide the monitor id (POC) as airQualitySiteMonitor in the observation. So, a given observation is distinguished by observationDate, observationAbout (AirQualitySite), and measurementMethod (pollutant standard).

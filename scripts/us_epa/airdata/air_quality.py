@@ -14,7 +14,7 @@
 '''
 Generates cleaned CSV and template MCF files for the EPA AirData.
 
-Usage: python3 air_quality.py <end_year>
+Usage: python3 air_quality.py [--data_start_year=YYYY] [--data_end_year=YYYY]
 '''
 import csv, os, sys, re, requests, io, zipfile
 from urllib3.util import Retry
@@ -131,38 +131,57 @@ def create_sites_mcf(sites_mcf_file_path):
         pass
 
 
+def _sanitize_dcid_component(val, width: int) -> str:
+    """Sanitizes and zero-pads a DCID component (state, county, site number)."""
+    if val is None:
+        return ''
+    s = str(val).strip()
+    if not s or s.upper() in ('NONE', 'NULL', 'NAN', 'NA'):
+        return ''
+    s = s.split('.')[0].strip()
+    if not s or not s.isalnum():
+        return ''
+    return s.upper().zfill(width)
+
+
+def _is_cross_border_site(state_code: str) -> bool:
+    """Returns True if the state code corresponds to a non-US cross-border monitor."""
+    return state_code in ('80', 'CC')
+
+
+def _make_site_dcid(state_code: str, county_code: str, site_num: str) -> str:
+    """Constructs the AirQualitySite DCID."""
+    return f'epa/{state_code}{county_code}{site_num}'
+
+
+def _format_site_node(site_number: str, site_info: dict) -> str:
+    """Formats an AirQualitySite MCF node."""
+    site_name = site_info.get('name', '')
+    lat = site_info.get('lat', '')
+    lon = site_info.get('lon', '')
+    site_county = site_info.get('county', '')
+    name_prop = f'name: "{site_name}"\n' if site_name else ''
+    location_prop = (f'location: [latLong {lat} {lon}]\n'
+                     if lat and lon else '')
+    return (f'Node: dcid:{site_number}\n'
+            f'typeOf: dcs:AirQualitySite\n'
+            f'{name_prop}'
+            f'{location_prop}'
+            f'containedInPlace: {site_county}\n\n')
+
+
 def write_sites_mcf(sites_mcf_file_path, sites_dict):
     """Writes AirQualitySite MCF nodes to file, sorted by site DCID."""
     with open(sites_mcf_file_path, 'w', encoding='utf-8') as f_out:
         for site_number in sorted(sites_dict.keys()):
-            site_info = sites_dict[site_number]
-            site_name = site_info.get('name', '')
-            lat = site_info.get('lat', '')
-            lon = site_info.get('lon', '')
-            site_county = site_info.get('county', '')
-            location_prop = (f'location: [latLong {lat} {lon}]\n'
-                             if lat and lon else '')
-            f_out.write(f'Node: dcid:{site_number}\n'
-                        f'typeOf: dcs:AirQualitySite\n'
-                        f'name: "{site_name}"\n'
-                        f'{location_prop}'
-                        f'containedInPlace: {site_county}\n\n')
+            f_out.write(_format_site_node(site_number, sites_dict[site_number]))
 
 
 def write_csv(csv_file_path,
               reader,
-              sites_mcf_file_path='EPA_AirQuality_sites.mcf',
+              sites_mcf_file_path=None,
               seen_sites=None,
               sites_dict=None):
-    if sites_mcf_file_path == 'EPA_AirQuality_sites.mcf':
-        csv_dir = os.path.dirname(csv_file_path)
-        if csv_dir:
-            sites_mcf_file_path = os.path.join(csv_dir,
-                                               'EPA_AirQuality_sites.mcf')
-        else:
-            sites_mcf_file_path = os.path.join(_SCRIPT_DIR,
-                                               'EPA_AirQuality_sites.mcf')
-
     existing_file_sites = set()
     if sites_mcf_file_path and os.path.exists(sites_mcf_file_path):
         with open(sites_mcf_file_path, 'r', encoding='utf-8') as f_in:
@@ -183,16 +202,18 @@ def write_csv(csv_file_path,
         monitors = {}
         keys = set()
         for observation in reader:
-            state_code = str(
-                observation.get('State Code', '')).strip().upper().zfill(2)
-            # Skip cross-border monitors outside US (80 = Mexico, CC = Canada)
-            if state_code in ('80', 'CC'):
+            state_code = _sanitize_dcid_component(
+                observation.get('State Code'), 2)
+            # Skip invalid or cross-border monitors outside US (80 = Mexico, CC = Canada)
+            if not state_code or _is_cross_border_site(state_code):
                 continue
-            county_code = str(
-                observation.get('County Code', '')).strip().zfill(3)
-            site_num = str(
-                observation.get('Site Num', '')).strip().zfill(4)
-            site_number = f'epa/{state_code}{county_code}{site_num}'
+            county_code = _sanitize_dcid_component(
+                observation.get('County Code'), 3)
+            site_num = _sanitize_dcid_component(
+                observation.get('Site Num'), 4)
+            if not county_code or not site_num:
+                continue
+            site_number = _make_site_dcid(state_code, county_code, site_num)
             lat = str(observation.get('Latitude', '') or '').strip()
             lon = str(observation.get('Longitude', '') or '').strip()
             site_county = f'dcid:geoId/{state_code}{county_code}'
@@ -243,15 +264,20 @@ def write_csv(csv_file_path,
                 raw_unit_str.strip().lower()) if raw_unit_str else ''
             if not unit and raw_unit_str:
                 unit = get_camel_case(raw_unit_str)
+
+            resolved_site_name = local_sites[site_number]['name']
+            resolved_lat = local_sites[site_number]['lat']
+            resolved_lon = local_sites[site_number]['lon']
             new_row = {
                 'Date':
                     observation['Date Local'],
                 'Site_Number':
                     site_number,
                 'Site_Name':
-                    observation['Local Site Name'],
+                    resolved_site_name,
                 'Site_Location':
-                    f'[latLong {lat} {lon}]' if lat and lon else '',
+                    f'[latLong {resolved_lat} {resolved_lon}]'
+                    if resolved_lat and resolved_lon else '',
                 'County':
                     county,
                 'POC':
@@ -276,21 +302,11 @@ def write_csv(csv_file_path,
             }
             writer.writerow(new_row)
 
-    if sites_mcf_file_path:
+    if sites_mcf_file_path and sites_dict is None:
         with open(sites_mcf_file_path, 'a', encoding='utf-8') as f_sites:
             for site_number, site_info in local_sites.items():
                 if site_number not in existing_file_sites:
-                    s_name = site_info.get('name', '')
-                    s_lat = site_info.get('lat', '')
-                    s_lon = site_info.get('lon', '')
-                    s_county = site_info.get('county', '')
-                    location_prop = (f'location: [latLong {s_lat} {s_lon}]\n'
-                                     if s_lat and s_lon else '')
-                    f_sites.write(f'Node: dcid:{site_number}\n'
-                                  f'typeOf: dcs:AirQualitySite\n'
-                                  f'name: "{s_name}"\n'
-                                  f'{location_prop}'
-                                  f'containedInPlace: {s_county}\n\n')
+                    f_sites.write(_format_site_node(site_number, site_info))
                     existing_file_sites.add(site_number)
 
 

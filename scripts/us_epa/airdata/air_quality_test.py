@@ -14,7 +14,7 @@
 '''
 Unit tests for air_quality.py
 
-Usage: python3 -m unittest discover -v -s ../ -p "air_quality_test.py"
+Usage: python3 -m unittest discover -v -s . -p "*_test.py"
 '''
 import unittest, csv, os, sys, tempfile
 
@@ -23,7 +23,9 @@ module_dir_ = os.path.dirname(__file__)
 sys.path.append(module_dir_)
 
 from air_quality import (create_csv, create_sites_mcf, get_camel_case,
-                        write_csv, write_sites_mcf, write_tmcf)
+                         write_csv, write_sites_mcf, write_tmcf,
+                         _sanitize_dcid_component, _is_cross_border_site,
+                         _make_site_dcid, _format_site_node)
 
 
 class TestCriteriaGasesTest(unittest.TestCase):
@@ -470,6 +472,237 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 idx_bham = content.find('Node: dcid:epa/010730023')
                 idx_anch = content.find('Node: dcid:epa/020200018')
                 self.assertTrue(idx_bham < idx_anch)
+
+    def test_sanitize_dcid_component(self):
+        self.assertEqual(_sanitize_dcid_component(None, 2), '')
+        self.assertEqual(_sanitize_dcid_component('', 2), '')
+        self.assertEqual(_sanitize_dcid_component('   ', 2), '')
+        self.assertEqual(_sanitize_dcid_component('None', 2), '')
+        self.assertEqual(_sanitize_dcid_component('null', 2), '')
+        self.assertEqual(_sanitize_dcid_component('nan', 2), '')
+        self.assertEqual(_sanitize_dcid_component('1.0', 2), '01')
+        self.assertEqual(_sanitize_dcid_component('80.0', 2), '80')
+        self.assertEqual(_sanitize_dcid_component(' 73 ', 3), '073')
+        self.assertEqual(_sanitize_dcid_component(' 23 ', 4), '0023')
+        self.assertEqual(_sanitize_dcid_component('cc', 2), 'CC')
+        self.assertEqual(_sanitize_dcid_component('bad!code', 2), '')
+
+    def test_filter_cross_border_float_codes(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': '80.0',
+                    'County Code': '001',
+                    'Site Num': '0001',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '32.5',
+                    'Longitude': '-117.0',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Mexico Float Monitor',
+                },
+                {
+                    'State Code': 'CC.0',
+                    'County Code': '004',
+                    'Site Num': '0002',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '44.8',
+                    'Longitude': '-66.9',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Canada Float Monitor',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_csv, 'r') as f:
+                reader = list(csv.DictReader(f))
+                self.assertEqual(len(reader), 0)
+            with open(test_sites_mcf, 'r') as f_sites:
+                self.assertEqual(f_sites.read().strip(), '')
+
+    def test_skip_missing_dcid_components(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            test_sites_mcf = os.path.join(tmp_dir, 'test_sites.mcf')
+            create_csv(test_csv)
+            create_sites_mcf(test_sites_mcf)
+            observations = [
+                {
+                    'State Code': None,
+                    'County Code': '073',
+                    'Site Num': '0023',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.5',
+                    'Longitude': '-86.8',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Missing State Code',
+                },
+                {
+                    'State Code': '01',
+                    'County Code': '',
+                    'Site Num': '0023',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.5',
+                    'Longitude': '-86.8',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Empty County Code',
+                },
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': None,
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.5',
+                    'Longitude': '-86.8',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Missing Site Num',
+                },
+            ]
+            write_csv(test_csv,
+                      iter(observations),
+                      sites_mcf_file_path=test_sites_mcf)
+            with open(test_csv, 'r') as f:
+                rows = list(csv.DictReader(f))
+                self.assertEqual(len(rows), 0)
+            with open(test_sites_mcf, 'r') as f_sites:
+                mcf_content = f_sites.read()
+                self.assertNotIn('None', mcf_content)
+                self.assertNotIn('epa/000000000', mcf_content)
+
+    def test_empty_site_name_omits_mcf_property(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_mcf = os.path.join(tmp_dir, 'sites.mcf')
+            sites_dict = {
+                'epa/010730023': {
+                    'name': '',
+                    'lat': '33.55',
+                    'lon': '-86.81',
+                    'county': 'dcid:geoId/01073',
+                },
+            }
+            write_sites_mcf(test_mcf, sites_dict)
+            with open(test_mcf, 'r') as f:
+                content = f.read()
+                self.assertIn('Node: dcid:epa/010730023\n', content)
+                self.assertNotIn('name:', content)
+
+    def test_csv_location_enrichment_from_earlier_record(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            create_csv(test_csv)
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '5555',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.55',
+                    'Longitude': '-86.81',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Initial Site Name',
+                },
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '5555',
+                    'Parameter Code': '42401',
+                    'POC': '1',
+                    'Latitude': '',
+                    'Longitude': '',
+                    'Pollutant Standard': 'SO2 1-hour 2010',
+                    'Date Local': '2021-01-02',
+                    'Units of Measure': 'Parts per billion',
+                    'Arithmetic Mean': '0.5',
+                    '1st Max Value': '1.0',
+                    'AQI': '5',
+                    'Local Site Name': '',
+                },
+            ]
+            sites_dict = {}
+            write_csv(test_csv, iter(observations), sites_dict=sites_dict)
+            with open(test_csv, 'r') as f:
+                rows = list(csv.DictReader(f))
+                self.assertEqual(len(rows), 2)
+                # Second row should inherit enriched coordinates and site name from first row
+                self.assertEqual(rows[1]['Site_Location'],
+                                 '[latLong 33.55 -86.81]')
+                self.assertEqual(rows[1]['Site_Name'], 'Initial Site Name')
+
+    def test_atomic_write_does_not_append_during_chunk(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_csv.csv')
+            prod_sites_mcf = os.path.join(tmp_dir, 'EPA_AirQuality_sites.mcf')
+            create_csv(test_csv)
+            # Create an existing production sites MCF
+            with open(prod_sites_mcf, 'w') as f:
+                f.write('EXISTING_PRODUCTION_CONTENT\n')
+
+            observations = [
+                {
+                    'State Code': '01',
+                    'County Code': '073',
+                    'Site Num': '1234',
+                    'Parameter Code': '44201',
+                    'POC': '1',
+                    'Latitude': '33.55',
+                    'Longitude': '-86.81',
+                    'Pollutant Standard': 'Ozone 8-hour 2015',
+                    'Date Local': '2021-01-01',
+                    'Units of Measure': 'Parts per million',
+                    'Arithmetic Mean': '0.03',
+                    '1st Max Value': '0.04',
+                    'AQI': '30',
+                    'Local Site Name': 'Test Monitor',
+                },
+            ]
+            sites_dict = {}
+            # Call write_csv as main() does: without passing sites_mcf_file_path
+            write_csv(test_csv, iter(observations), sites_dict=sites_dict)
+            # Verify sites_dict was populated
+            self.assertIn('epa/010731234', sites_dict)
+            # Verify production file was NOT touched or appended to
+            with open(prod_sites_mcf, 'r') as f:
+                self.assertEqual(f.read(), 'EXISTING_PRODUCTION_CONTENT\n')
 
 
 if __name__ == '__main__':
