@@ -650,8 +650,8 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_df.empty = False
         mock_df.__len__.return_value = 1
 
-        def fake_to_csv(filepath, index=False):
-            del index  # Unused.
+        def fake_to_csv(filepath, *args, **kwargs):
+            del args, kwargs  # Unused.
             with open(filepath, 'w', encoding='utf-8'):
                 pass  # Create 0-byte file
 
