@@ -83,6 +83,9 @@ def preprocess_data():
         df2['variableAgeResol'] = df2['variable'].map(_AGE_RESOL_MAP)
         df2_moved = move_column_left(df2, 'universe', 'variable')
         df2_moved.to_csv(INPUT_FILE_2, index=False)
+        logging.info(
+            f"Successfully preprocessed {len(df1_moved)} age-only rows and {len(df2_moved)} general survey rows."
+        )
 
     except Exception as e:
         logging.fatal(
@@ -92,6 +95,7 @@ def preprocess_data():
 def main(argv):
     del argv
     try:
+        logging.info(f"Downloading source data from {COMMERCE_NTIA_URL}")
         success = download_file(
             url=COMMERCE_NTIA_URL,
             output_folder=INPUT_DIR,
@@ -105,6 +109,9 @@ def main(argv):
                 INPUT_FILE) == 0:
             logging.fatal(
                 "Failed to download Commerce_NTIA file or file is empty.")
+        logging.info(
+            f"Successfully downloaded {INPUT_FILE} ({os.path.getsize(INPUT_FILE)} bytes)."
+        )
     except Exception as e:
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
 
