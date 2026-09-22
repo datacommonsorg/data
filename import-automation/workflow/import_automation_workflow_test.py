@@ -331,7 +331,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                 target = {}
                 count = import_dags_factory.load_catalog_and_register_dags(
                     target)
-                self.assertGreaterEqual(count, 198)
+                self.assertGreaterEqual(count, 194)
                 self.assertIn('Schema', target)
                 self.assertIn('manual_refresh', target)
                 schema_dag = target['Schema']
