@@ -249,8 +249,11 @@ def _splitting_ci_columns(df, geo):
                 'nan': '',
                 'None': ''
             })
-            # Splitting the column based on space and "-"
-            df_split = df[i].str.split(r"\s+|-", expand=True)
+            # Normalize separators by removing parentheses and replacing hyphens with spaces
+            normalized = df[i].str.replace(
+                r'[\(\)]', '', regex=True).str.replace(
+                    '-', ' ', regex=False).str.strip()
+            df_split = normalized.str.split(r'\s+', expand=True)
             # determining the size of the column after splitting it.
             siz = df_split.shape[1]
             if siz == 1:

@@ -79,14 +79,20 @@ def download_file(input_url: list,
                     f"Downloaded content too small ({len(req.content)} bytes) for {download_file_url}"
                 )
 
+            with open(out_file, 'wb') as file:
+                file.write(req.content)
+
             if download_file_url.endswith(".zip"):
-                with zipfile.ZipFile(io.BytesIO(req.content)) as zipfileout:
+                with zipfile.ZipFile(out_file) as zipfileout:
                     zipfileout.extractall(path)
-            else:
-                with open(out_file, 'wb') as file:
-                    file.write(req.content)
+
             logger.info("Successfully downloaded: %s (%d bytes)", file_name,
                         len(req.content))
+        except (requests.exceptions.RequestException, zipfile.BadZipFile,
+                ValueError) as exc:
+            logger.error("Failed downloading or extracting %s: %s",
+                         download_file_url, exc)
+            raise
         except Exception as exc:
             logger.error("Failed downloading %s: %s", download_file_url, exc)
             raise
