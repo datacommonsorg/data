@@ -101,7 +101,8 @@ class MockAirflowFailException(Exception):
 sys.modules[
     'airflow.exceptions'].AirflowFailException = MockAirflowFailException
 sys.modules['airflow.models'] = MagicMock()
-sys.modules['airflow.models.param'] = MagicMock()
+sys.modules['airflow.models.param'] = MagicMock(
+    Param=lambda default=None, **kwargs: default)
 sys.modules['airflow.providers'] = MagicMock()
 sys.modules['airflow.providers.google'] = MagicMock()
 sys.modules['airflow.providers.google.cloud'] = MagicMock()
@@ -341,9 +342,12 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                         dag.is_paused_upon_creation,
                         f'DAG {dag_id} is not paused upon creation',
                     )
-                    self.assertTrue(
+                    expected_skip_prod = import_automation_workflow.is_prod_denylisted(
+                        dag_id)
+                    self.assertEqual(
                         dag.params.get('skipProdIngestion'),
-                        f'DAG {dag_id} does not default skipProdIngestion to True',
+                        expected_skip_prod,
+                        f'DAG {dag_id} does not default skipProdIngestion to {expected_skip_prod}',
                     )
 
     def test_build_dag_pipeline_wiring(self):
