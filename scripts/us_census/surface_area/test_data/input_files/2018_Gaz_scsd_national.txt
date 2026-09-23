@@ -1,0 +1,3 @@
+USPS	GEOID	NAME	LOGRADE	HIGRADE	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                        
+AZ	0400082	Colorado River Union High School District	09	12	2711174269	74638171	1046.79	28.818	35.105214	-114.467834                                                                                     
+AZ	0400450	Agua Fria Union High School District	09	12	244645640	735546	94.458	0.284	33.481427	-112.407871                                                                                               

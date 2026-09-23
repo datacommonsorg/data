@@ -1,0 +1,3 @@
+USPS	GEOID	NAME	LOGRADE	HIGRADE	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                        
+AL	0100195	Pike Road City School District	KG	12	85146878	778561	32.875	0.301	32.283188	-85.96568                                                                                                        
+AZ	0400004	Clarkdale-Jerome Elementary District	PK	08	211351942	380983	81.603	0.147	34.748857	-112.112028                                                                                               

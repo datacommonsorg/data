@@ -1,0 +1,3 @@
+USPS	GEOID	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                                             
+AL	0101	15713197908	2275675091	6066.9	878.643	31.002052	-87.787972                                                                                                                                      
+AL	0102	26269902298	303582941	10142.866	117.214	31.702085	-86.076842                                                                                                                                    
