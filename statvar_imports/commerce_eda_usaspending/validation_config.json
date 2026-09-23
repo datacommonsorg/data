@@ -10,23 +10,6 @@
             }
         },
         {
-            "rule_id": "check_goldens_summary_report",
-            "description": "Verifies that summary statistics for all StatisticalVariables match established golden report.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_observations",
-            "description": "Verifies that all expected geographic entities and places are present in the output observations.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/investment_output.csv"
-            }
-        },
-        {
             "rule_id": "active_programs_freshness",
             "description": "Checks that active programs have recent data within 1 year of current year.",
             "validator": "SQL_VALIDATOR",

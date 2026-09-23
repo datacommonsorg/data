@@ -52,8 +52,8 @@ The validation configuration is tuned specifically for federal grant obligation 
    - **Rationale:** Series legitimately terminate in different fiscal years. Newer statutory programs (Tech Hubs, Recompete Pilot) begin in 2024–2025, while legacy grant series terminate earlier. A blanket consistency check across all StatVars would incorrectly fail.
 3. **`check_deleted_records_percent` (0.1% Deletion Tolerance):**
    - **Rationale:** Accommodates legitimate post-award de-obligations and multi-year reconciliations while catching unintended widespread data drop-offs.
-4. **Golden Summary & Observations Checks:**
-   - **Rationale:** `golden_summary_report.csv` verifies Place and StatVar counts while intentionally omitting volatile metrics (`MaxDate`, `NumObservations`, `MinValue`, `MaxValue`) to ensure reliable CI/CD without brittle test breaks.
+4. **Omission of Golden Files:**
+   - **Rationale:** In accordance with Data Commons guidelines for automated weekly API pipelines (`cron_schedule: 30 05 * * 1`), golden files and `GOLDENS_CHECK` rules are omitted to prevent brittle CI diff breaks on actively evolving datasets where new awards and post-award de-obligations are ingested weekly.
 
 ---
 

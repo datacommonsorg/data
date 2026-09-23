@@ -23,7 +23,6 @@
             ],
             "source_files": [
                 "counters/*",
-                "golden_data/*.csv",
                 "input_files/*",
                 "investment_metadata.csv",
                 "investment_pvmap.csv",
