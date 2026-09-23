@@ -20,6 +20,7 @@ import os
 import tempfile
 import unittest
 from unittest import mock
+from urllib import parse
 import openpyxl
 import pandas as pd
 import requests
@@ -239,7 +240,7 @@ class TestDownloadPoverty(unittest.TestCase):
 
             def mock_get(url, **kwargs):
                 resp = mock.MagicMock()
-                if url.startswith("https://www.eda.gov"):
+                if parse.urlparse(url).netloc == "www.eda.gov":
                     resp.status_code = 403
                     resp.raise_for_status.side_effect = requests.HTTPError("403 Forbidden")
                     return resp
