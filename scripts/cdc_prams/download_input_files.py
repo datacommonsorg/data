@@ -12,12 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python script downloads CDC PRAMS MCH Indicators PDF reports for
-all states and national/territory sites.
+Downloads the CDC PRAMS consolidated multi-year MCH Indicators Excel workbook
+from the official CDC website.
 """
 import os
+import re
 import sys
-from absl import app, flags
+from urllib.parse import urljoin
+from absl import app, flags, logging
+import requests
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _CODEDIR)
@@ -28,80 +31,59 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     "download_directory", _CODEDIR,
     "Directory path where input_files/ folder will be populated")
-flags.DEFINE_string("year", "2020", "Data release year to download")
 flags.DEFINE_boolean("overwrite", False,
                      "Whether to force re-download existing files")
 
-FILES = [
-    'All-Sites-PRAMS-MCH-Indicators-508.pdf',
-    'Alabama-PRAMS-MCH-Indicators-508.pdf',
-    'Alaska-PRAMS-MCH-Indicators-508.pdf',
-    'Arizona-PRAMS-MCH-Indicators-508.pdf',
-    'Arkansas-PRAMS-MCH-Indicators-508.pdf',
-    'Colorado-PRAMS-MCH-Indicators-508.pdf',
-    'Connecticut-PRAMS-MCH-Indicators-508.pdf',
-    'Delaware-PRAMS-MCH-Indicators-508.pdf',
-    'District-Columbia-PRAMS-MCH-Indicators-508.pdf',
-    'Florida-PRAMS-MCH-Indicators-508.pdf',
-    'Georgia-PRAMS-MCH-Indicators-508.pdf',
-    'Hawaii-PRAMS-MCH-Indicators-508.pdf',
-    'Illinois-PRAMS-MCH-Indicators-508.pdf',
-    'Indiana-PRAMS-MCH-Indicators-508.pdf', 'Iowa-PRAMS-MCH-Indicators-508.pdf',
-    'Kansas-PRAMS-MCH-Indicators-508.pdf',
-    'Kentucky-PRAMS-MCH-Indicators-508.pdf',
-    'Louisiana-PRAMS-MCH-Indicators-508.pdf',
-    'Maine-PRAMS-MCH-Indicators-508.pdf',
-    'Maryland-PRAMS-MCH-Indicators-508.pdf',
-    'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
-    'Michigan-PRAMS-MCH-Indicators-508.pdf',
-    'Minnesota-PRAMS-MCH-Indicators-508.pdf',
-    'Mississippi-PRAMS-MCH-Indicators-508.pdf',
-    'Missouri-PRAMS-MCH-Indicators-508.pdf',
-    'Montana-PRAMS-MCH-Indicators-508.pdf',
-    'Nebraska-PRAMS-MCH-Indicators-508.pdf',
-    'New-Hampshire-PRAMS-MCH-Indicators-508.pdf',
-    'New-Jersey-PRAMS-MCH-Indicators-508.pdf',
-    'New-Mexico-PRAMS-MCH-Indicators-508.pdf',
-    'New-York-City-PRAMS-MCH-Indicators-508.pdf',
-    'New-York-PRAMS-MCH-Indicators-508.pdf',
-    'North-Carolina-PRAMS-MCH-Indicators-508.pdf',
-    'North-Dakota-PRAMS-MCH-Indicators-508.pdf',
-    'Oklahoma-PRAMS-MCH-Indicators-508.pdf',
-    'Oregon-PRAMS-MCH-Indicators-508.pdf',
-    'Pennsylvania-PRAMS-MCH-Indicators-508.pdf',
-    'Puerto-Rico-PRAMS-MCH-Indicators-508.pdf',
-    'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
-    'South-Dakota-PRAMS-MCH-Indicators-508.pdf',
-    'Tennessee-PRAMS-MCH-Indicators-508.pdf',
-    'Texas-PRAMS-MCH-Indicators-508.pdf', 'Utah-PRAMS-MCH-Indicators-508.pdf',
-    'Vermont-PRAMS-MCH-Indicators-508.pdf',
-    'Virginia-PRAMS-MCH-Indicators-508.pdf',
-    'Washington-PRAMS-MCH-Indicators-508.pdf',
-    'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
-    'Wisconsin-PRAMS-MCH-Indicators-508.pdf',
-    'Wyoming-PRAMS-MCH-Indicators-508.pdf'
-]
+_CDC_LANDING_PAGE = (
+    "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html"
+)
+_FALLBACK_URL = (
+    "https://www.cdc.gov/prams/media/files/2024/08/"
+    "PRAMS-MCH-Indicators-2016-2022-508.xlsx"
+)
+
+
+def discover_excel_url() -> str:
+    """
+    Dynamically discovers the latest consolidated multi-year PRAMS Excel workbook
+    URL from the CDC landing page.
+    """
+    logging.info("Checking CDC landing page for latest Excel release: %s",
+                 _CDC_LANDING_PAGE)
+    try:
+        session = requests.Session()
+        session.headers.update({'User-Agent': 'curl/8.21.0-rc3'})
+        resp = session.get(_CDC_LANDING_PAGE, timeout=30)
+        resp.raise_for_status()
+        match = re.search(
+            r'href=["\']([^"\']*PRAMS-MCH-Indicators-\d{4}-\d{4}[^"\']*\.xlsx)["\']',
+            resp.text,
+            re.IGNORECASE)
+        if match:
+            found_url = urljoin(_CDC_LANDING_PAGE, match.group(1))
+            logging.info("Discovered latest PRAMS workbook URL: %s", found_url)
+            return found_url
+    except Exception as exc:
+        logging.warning("Dynamic discovery failed (%s), using fallback: %s",
+                        exc, _FALLBACK_URL)
+    return _FALLBACK_URL
 
 
 def download_files(download_directory: str,
-                   year: str = "2020",
                    overwrite: bool = False) -> None:
     """
-    Downloads all PRAMS indicator PDFs for the given year.
+    Downloads the consolidated PRAMS MCH Indicators Excel file.
 
     Args:
         download_directory (str): Base directory where input_files will be saved.
-        year (str): Data release year.
         overwrite (bool): If True, re-downloads existing files.
     """
-    base_url = f"https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/{year}/"
-    input_urls = [base_url + f for f in FILES]
-    download_file(input_urls, download_directory, overwrite=overwrite)
+    url = discover_excel_url()
+    download_file([url], download_directory, overwrite=overwrite)
 
 
 def main(_):
     download_files(_FLAGS.download_directory,
-                   year=_FLAGS.year,
                    overwrite=_FLAGS.overwrite)
 
 

@@ -12,7 +12,7 @@
                 "process.py"
             ],
             "source_files": [
-                "input_files/*.pdf",
+                "input_files/*.xlsx",
                 "validation_config.json"
             ],
             "import_inputs": [

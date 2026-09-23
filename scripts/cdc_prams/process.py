@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-The Python script loads the datasets,
-cleans them and generates the cleaned CSV, MCF and TMCF file.
+This Python script processes the CDC PRAMS consolidated MCH Indicators dataset
+(Excel workbook), cleans it, and generates cleaned CSV, MCF, and TMCF files.
 """
+import glob
 import os
 import sys
-import re
 from copy import deepcopy
-import pandas as pd
-import numpy as np
 from absl import app, flags, logging
-import tabula as tb
+import numpy as np
+import openpyxl
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
@@ -34,483 +34,188 @@ from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
                        _TIME, _INSURANCE, _CIGARETTES, PV_PROP, _YEAR)
 
 _FLAGS = flags.FLAGS
-default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_files")
+default_input_path = os.path.join(_CODEDIR, "input_files")
 
 flags.DEFINE_string("input_path", default_input_path,
-                    "Import Data File's List")
+                    "Path to input Excel file or directory containing files")
 flags.DEFINE_string("output_path", None,
                     "Directory path where output files need to be written")
-input_years = ["2016", "2017", "2018", "2019", "2020"]
-flags.DEFINE_list("input_years", input_years, "Import Data File's List")
+input_years = ["2016", "2017", "2018", "2019", "2020", "2021", "2022"]
+flags.DEFINE_list("input_years", input_years, "Years to process")
+
+# Canonical 42 base Statistical Variable names in workbook column order
+UNIQUE_STATVARS = list(dict.fromkeys(statvar_col.values()))
 
 
-def _merging_multiline_sv(df, geo, years=None):
-    '''
-    StatVar column which are present in multiline format are converted into
-    one single statvar
-    Args: DataFrame, Flag, Optional[List[str]]
-    Returns: df1: DataFrame
-    '''
-    if years is None:
-        years = _FLAGS.input_years if _FLAGS.is_parsed() else input_years
-    multiline = [
-        'Multivitamin use ≥4 times a week during the month before',
-        'Heavy drinking (≥8 drinks a week) during the 3 months before',
-        'Experienced IPV during pregnancy by a husband or partner'
-    ]
-    for year in years:
-        sample_col = year + '_sampleSize'
-        if sample_col in df.columns:
-            df[sample_col] = df[sample_col].astype(object)
-        ci_col = year + '_CI'
-        if ci_col in df.columns:
-            df[ci_col] = df[ci_col].astype(object)
-
-    # Converting the multiline statistical variable into single line
-    # statistical variable
-    for line in multiline:
-        for i in range(len(df)):
-            if df.loc[i, 'statVar'] == line:
-                df.loc[i,'statVar'] = \
-                    f"{df.loc[i,'statVar']}{' '}{df.loc[i + 2,'statVar']}"
-                for year in years:
-                    if year == "2016":
-                        df.loc[i, year + '_sampleSize'] = df.loc[i + 1,
-                                                                 'statVar']
-                        df.loc[i, year + '_CI'] = df.loc[i + 1, year + '_CI']
-                    else:
-                        df.loc[i, year + '_sampleSize'] = df.loc[i + 1, year +
-                                                                 '_sampleSize']
-                        df.loc[i, year + '_CI'] = df.loc[i + 1, year + '_CI']
-                if geo == "State":
-                    df.loc[i, 'Overall_2020_CI'] = df.loc[i + 1,
-                                                          'Overall_2020_CI']
-                df.drop([i + 1, i + 2], inplace=True)
-                df.reset_index(drop=True, inplace=True)
-                break
-    return df
+def _get_geo_map() -> dict:
+    """Builds geographic mapping dictionary from site name to DCID."""
+    geo_map = dict(_PLACE_MAP)
+    geo_map.update({
+        'Sites aggregated*': 'country/USA',
+        'All Sites': 'country/USA',
+        'New York City': 'geoId/3651000',
+        'New York State': 'geoId/36',
+        'Puerto Rico': 'geoId/72',
+        'Northern Mariana Islands': 'geoId/69'
+    })
+    return geo_map
 
 
-def _split_statvar_value(df, geo):
-    '''
-    The values are seperated from the statvar and given into the next column
-    Args: DataFrame, Flag
-    Returns: df: DataFrame
-    '''
-    for i in range(len(df)):
-        if df.loc[i, 'statVar'][-4:].strip().strip('§').isnumeric():
-            if geo == "State":
-                df.loc[i, '2016_sampleSize'] = df.loc[
-                    i, 'statVar'][-4:].strip().strip('§')
-            elif geo == "National":
-                df.loc[i, '2016_sampleSize'] = df.loc[
-                    i, 'statVar'][-5:].strip().strip('§')
-            l1 = len(df.loc[i, 'statVar'])
-            l2 = len(df.loc[i, '2016_sampleSize'])
-            df.loc[i, 'statVar'] = df.loc[i, 'statVar'][:l1 - l2].strip()
-        m = re.match(
-            r'^(\d+(?:\.\d+)?\s*\(\s*\d+(?:\.\d+)?\s*-\s*\d+(?:\.\d+)?\s*\))\s*(.*)$',
-            df.loc[i, 'statVar'])
-        if m:
-            df.loc[i, 'Overall_2020_CI'] = m.group(1).strip()
-            df.loc[i, 'statVar'] = m.group(2).strip()
-    return df
+def prams(input_files: list, years: list = None) -> pd.DataFrame:
+    """
+    Parses CDC PRAMS Excel workbook(s) and produces observations DataFrame.
 
+    Args:
+        input_files (list): Paths to input files.
+        years (list): Observation years to include.
 
-national_columns = [
-    'Geo', 'SV', '2016_sampleSize', '2016_CI', '2017_sampleSize', '2017_CI',
-    '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI',
-    '2020_sampleSize', '2020_CI', 'ScalingFactor'
-]
+    Returns:
+        pd.DataFrame: Cleaned observations DataFrame.
+    """
+    geo_map = _get_geo_map()
+    records = []
 
+    excel_files = [f for f in input_files if f.endswith(('.xlsx', '.xls'))]
+    if not excel_files:
+        raise ValueError(f"No Excel files found in input files: {input_files}")
 
-def _cleaning_national_file(df, geo):
-    '''
-    There are certain rows in which specific values are not split as required
-    Args: DataFrame, Flag
-    Returns: df: DataFrame
-    '''
-    for i in range(len(df)):
-        if df.loc[
-                i,
-                'statVar'] == 'Experienced IPV during the 12 months'+\
-                    ' before pregnancy by a':
-            if geo == "National":
-                df.loc[i + 1,
-                       'statVar'] = df.loc[i + 1,
-                                           'statVar'].replace('2.5 ', '')
-                df.loc[i + 1, '2020_CI'] = 2.5
-            part1 = df.loc[i, 'statVar'].strip()
-            part2 = df.loc[i + 1, 'statVar'].strip()
-            df.loc[i + 1, 'statVar'] = f"{part1} {part2}"
-            df.drop([i], inplace=True)
-            df.reset_index(drop=True, inplace=True)
-            break
-    # The values are seperated from the statvar and given into the next
-    # column in the national file.
-    if geo == "National":
-        for i in range(len(df)):
-            if df.loc[
-                    i,
-                    'statVar'] == 'Teeth cleaned during pregnancy by'+\
-                        ' a dentist or dental':
-                df.loc[i + 1,
-                       'statVar'] = df.loc[i + 1,
-                                           'statVar'].replace('40.0 ', '')
-                df.loc[i + 1, '2020_CI'] = 40.0
-                part1 = df.loc[i, 'statVar'].strip()
-                part2 = df.loc[i + 1, 'statVar'].strip()
-                df.loc[i + 1, 'statVar'] = f"{part1} {part2}"
-                df.drop([i], inplace=True)
-                df.reset_index(drop=True, inplace=True)
-                break
-    return df
+    for file_path in excel_files:
+        logging.info("Reading Excel workbook: %s", file_path)
+        wb = openpyxl.load_workbook(file_path, data_only=True)
+        available_sheets = [s for s in wb.sheetnames if s.isdigit()]
 
-
-def _flatten_header_and_sub_header(df) -> pd.DataFrame:
-    '''
-    The source file has main headers, sub headers and statvar.
-    All the headers and statvars are combined into one
-    Args: DataFrame, Flag
-    Returns: df: DataFrame
-    '''
-    main_header = [
-        'Nutrition', 'Pre-pregnancy Weight', 'Substance Use',
-        'Intimate Partner Violence (IPV)¥', 'Depression',
-        'Health Care Services', 'Pregnancy Intention',
-        'Postpartum†† Family Planning', 'Oral Health',
-        'Health Insurance Status One Month Before Pregnancy¶',
-        'Health Insurance Status One Month Before Pregnancy¶¶',
-        'Health Insurance Status for Prenatal Care¶¶',
-        'Health Insurance Status Postpartum††¶¶', 'Infant Sleep Practices',
-        'Breastfeeding Practices'
-    ]
-
-    sub_header = [
-        'Any cigarette smoking', 'Any e-cigarette use',
-        'Highly effective contraceptive methods'
-    ]
-
-    df['main_header'] = np.where(df['statVar'].isin(main_header),
-                                 df['statVar'], pd.NA)
-    df['main_header_delete_flag'] = df['main_header']
-    df['main_header_delete_flag'] = df['main_header_delete_flag'].fillna("")
-    df['main_header'] = df['main_header'].ffill()
-
-    df['sub_header'] = np.where(df['statVar'].isin(sub_header), df['statVar'],
-                                pd.NA)
-    df['sub_header_delete_flag'] = df['sub_header']
-    df['sub_header_delete_flag'] = df['sub_header_delete_flag'].fillna("")
-    df['sub_header'] = df['sub_header'].ffill(limit=2)
-    postpartum_mask = df['statVar'].str.strip() == 'Postpartum'
-    if postpartum_mask.any():
-        df.loc[postpartum_mask, 'sub_header'] = "Any cigarette smoking"
-    df['sub_header'] = df['sub_header'].fillna("")
-
-    df['newStatVar'] = df['main_header'] + "_" + df['sub_header'] + "_" + df[
-        'statVar']
-    df = df.loc[(df['main_header_delete_flag'] == '')]
-    df = df.loc[(df['sub_header_delete_flag'] == '')]
-    df = df.drop(columns=[
-        'statVar', 'main_header_delete_flag', 'sub_header', 'main_header',
-        'sub_header_delete_flag'
-    ])
-    df['SV'] = df['newStatVar']
-    # Replacing statvar with proper statvar from the dictionary
-    df = df.replace({'SV': statvar_col})
-    # Resolving geoId using util folder.
-    df = df.replace({'Geo': _PLACE_MAP})
-    df = df.reset_index(drop=True)
-    # Creating a new column named as 'ScalingFactor'
-    df.insert(1, 'ScalingFactor', np.nan)
-    return df
-
-
-state_columns = [
-    'Geo', 'SV', '2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
-    '2019_sampleSize', '2020_sampleSize', '2016_CI_PERCENT', '2016_CI_LOWER',
-    '2016_CI_UPPER', '2017_CI_PERCENT', '2017_CI_LOWER', '2017_CI_UPPER',
-    '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER', '2019_CI_PERCENT',
-    '2019_CI_LOWER', '2019_CI_UPPER', '2020_CI_PERCENT', '2020_CI_LOWER',
-    '2020_CI_UPPER', 'ScalingFactor'
-]
-
-
-def _splitting_ci_columns(df, geo):
-    '''
-    The CI has percent, lower confidence and upper confidence values
-    within one column. This method is used to separated into three
-    different columns for State. Ex: 39.3 (36.4-42.2)
-    Args: DataFrame, Flag
-    Returns: df: DataFrame
-    '''
-    if geo == "State":
-        split_col = ['2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI']
-        ci_pattern = re.compile(
-            r'^\s*(?:(?P<percent>-?\d+(?:\.\d+)?))?\s*'
-            r'(?:\(\s*(?:(?P<lower>-?\d+(?:\.\d+)?)\s*[-\u2013\u2014]\s*'
-            r'(?P<upper>-?\d+(?:\.\d+)?)|[^\)]*)\s*\))?\s*$'
-        )
-        for i in split_col:
-            df[i] = df[i].fillna('').astype(str).replace({
-                '<NA>': '',
-                'nan': '',
-                'None': ''
-            })
-            df_split = df[i].str.extract(ci_pattern).fillna('')
-            df_split = df_split.rename(
-                columns={
-                    'percent': i + '_PERCENT',
-                    'lower': i + '_LOWER',
-                    'upper': i + '_UPPER'
-                })
-            df = pd.concat([df, df_split], axis=1)
-        df = df.drop(columns=[
-            'newStatVar', '2016_CI', '2017_CI', '2018_CI', '2019_CI',
-            '2020_CI', 'Overall_2020_CI'
-        ])
-        # Redifining columns
-    if geo == "National":
-        df = df[national_columns]
-    elif geo == "State":
-        df = df[state_columns]
-    return df
-
-
-def _stat_var(df, geo):
-    '''
-        Creating dummy statvars to generate properties
-        Args: DataFrame, Flag
-        Returns: df_all: DataFrame
-    '''
-    df_all = pd.DataFrame([])
-    sv_columns = ['sample_size', 'percent_sv', 'lower_level', 'upper_level']
-
-    for col in sv_columns:
-        temp_df = df.copy()
-
-        drop_columns = []
-        if col == "sample_size":
-            temp_df['SV'] = 'SampleSize_Count' + temp_df['SV']
-            if geo == "National":
-                for year in range(2016, 2021):
-                    drop_columns.append(str(year) + '_CI')
-                temp_df = temp_df.drop(columns=drop_columns)
-            elif geo == "State":
-                for year in range(2016, 2021):
-                    for suffix in ['_CI_PERCENT', '_CI_LOWER', '_CI_UPPER']:
-                        drop_columns.append(str(year) + suffix)
-                temp_df = temp_df.drop(columns=drop_columns)
-
-            temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
-                                   var_name='Year',
-                                   value_name='Observation')
-            temp_df['Observation'] = temp_df['Observation'].astype(
-                str).str.replace(r'\.0$', '', regex=True)
-            temp_df['Observation'] = temp_df['Observation'].replace({
-                'nan':
-                pd.NA,
-                'None':
-                pd.NA,
-                '<NA>':
-                pd.NA,
-                '':
-                pd.NA
-            })
-
-        elif col == "percent_sv":
-            temp_df['SV'] = 'Percent' + temp_df['SV']
-            temp_df['ScalingFactor'] = 100
-
-            if geo == "National":
-                for year in range(2016, 2021):
-                    drop_columns.append(str(year) + '_sampleSize')
-                temp_df = temp_df.drop(columns=drop_columns)
-            elif geo == "State":
-                for year in range(2016, 2021):
-                    for suffix in ['_sampleSize', '_CI_LOWER', '_CI_UPPER']:
-                        drop_columns.append(str(year) + suffix)
-                temp_df = temp_df.drop(columns=drop_columns)
-
-            temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
-                                   var_name='Year',
-                                   value_name='Observation')
-
-        elif col == "lower_level":
-            if geo == "National":
-                continue
-            elif geo == "State":
-                temp_df['SV'] = 'ConfidenceIntervalLowerLimit_Count' + temp_df[
-                    'SV']
-                temp_df['ScalingFactor'] = 100
-                for year in range(2016, 2021):
-                    for suffix in ['_sampleSize', '_CI_UPPER', '_CI_PERCENT']:
-                        drop_columns.append(str(year) + suffix)
-                temp_df = temp_df.drop(columns=drop_columns)
-
-                temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
-                                       var_name='Year',
-                                       value_name='Observation')
-
-        elif col == "upper_level":
-            if geo == "National":
-                continue
-            elif geo == "State":
-                temp_df['SV'] = 'ConfidenceIntervalUpperLimit_Count' + temp_df[
-                    'SV']
-                temp_df['ScalingFactor'] = 100
-                for year in range(2016, 2021):
-                    for suffix in ['_sampleSize', '_CI_LOWER', '_CI_PERCENT']:
-                        drop_columns.append(str(year) + suffix)
-                temp_df = temp_df.drop(columns=drop_columns)
-                temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
-                                       var_name='Year',
-                                       value_name='Observation')
-
-        df_all = pd.concat([df_all, temp_df], axis=0)
-        df_all = df_all[['Geo', 'SV', 'Year', 'Observation', 'ScalingFactor']]
-    return df_all
-
-
-def prams(input_url: list, years: list = None) -> pd.DataFrame:
-    '''
-        Cleans the files for concatenation in Final CSV
-         Args:
-            input_url (list) : List of input urls
-            years (list, optional): List of years to process
-        Returns:
-            df_all : DataFrame
-    '''
-    if years is None:
-        years = _FLAGS.input_years if _FLAGS.is_parsed() else input_years
-    final_df = pd.DataFrame()
-    # Creatd flag as the format for state and national file are different and
-    # requires different modifications.
-    for file in input_url:
-        geo = "State"
-        if "All-Sites" in file:
-            geo = "National"
-        data = tb.read_pdf(file, pages='all')
-        df = pd.concat(data)
-        file_name = os.path.basename(file)
-        # creating geoId column in the dataframe and resolving geoId value for
-        # District of Columbia, New York City and National file.
-        df['Geo'] = file_name.replace('-PRAMS-MCH-Indicators-508.pdf','').\
-        replace('-',' ').replace('District Columbia','District of Columbia')\
-        .replace('New York City','geoId/3651000')\
-            .replace('All Sites','country/USA')
-        df.reset_index(drop=True, inplace=True)
-        if geo == "State":
-            # dropping unwanted columns
-            drop_cols = [
-                'Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3',
-                'Unnamed: 4'
+        if years:
+            target_sheets = [
+                s for s in available_sheets if s in [str(y) for y in years]
             ]
-            df = df.drop([col for col in drop_cols if col in df.columns],
-                         axis=1)
-            expected_cols = 12
-            if len(df.columns) != expected_cols:
-                raise ValueError(
-                    f"Expected {expected_cols} columns for {geo} file "
-                    f"{file_name}, got {len(df.columns)}: {list(df.columns)}"
-                )
-            df.columns = [
-                'statVar', '2016_CI', '2017_sampleSize', '2017_CI',
-                '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI',
-                '2020_sampleSize', '2020_CI', 'Overall_2020_CI', 'Geo'
-            ]
-        elif geo == "National":
-            expected_cols = 15
-            if len(df.columns) != expected_cols:
-                raise ValueError(
-                    f"Expected {expected_cols} columns for {geo} file "
-                    f"{file_name}, got {len(df.columns)}: {list(df.columns)}"
-                )
-            df.columns = [
-                'statVar', '2016_CI', '2017_sampleSize', '2017_Nan', '2017_CI',
-                '2018_sampleSize', '2018_Nan', '2018_CI', '2019_sampleSize',
-                '2019_Nan', '2019_CI', '2020_sampleSize', '2020_Nan',
-                '2020_CI', 'Geo'
-            ]
-            # dropping unwanted columns
-            df = df.drop(['2017_Nan', '2018_Nan', '2019_Nan', '2020_Nan'],
-                         axis=1)
-        # inserting an extra column so that the first column
-        df.insert(1, '2016_sampleSize', np.nan)
-        # Removing unwanted charaters
-        df['statVar'] = df['statVar'].str.replace('• ', '')
-        df = _merging_multiline_sv(df, geo, years=years)
-        df = _split_statvar_value(df, geo)
-        df = _cleaning_national_file(df, geo)
-        df = _flatten_header_and_sub_header(df)
-        df = _splitting_ci_columns(df, geo)
-        df = _stat_var(df, geo)
-        final_df = pd.concat([final_df, df], axis=0)
-        # Replacing Year column with the correct Values.
-        for old, new in _YEAR.items():
-            final_df['Year'] = final_df['Year'].replace(old, new)
-        final_df.reset_index(drop=True, inplace=True)
-        final_df = final_df.sort_values(by=['Geo'], kind="stable")
-    return final_df
+        else:
+            target_sheets = available_sheets
+
+        for year in target_sheets:
+            ws = wb[year]
+            logging.info("Processing sheet year %s (%d rows)", year, ws.max_row)
+
+            for r in range(6, ws.max_row + 1):
+                site_raw = ws.cell(r, 1).value
+                if not site_raw:
+                    continue
+                site = str(site_raw).strip()
+                geo = geo_map.get(site)
+                if not geo:
+                    continue
+
+                for ind_idx in range(len(UNIQUE_STATVARS)):
+                    base_sv = UNIQUE_STATVARS[ind_idx]
+                    base_col = 2 + ind_idx * 5
+
+                    # 1. Sample Size (col + 0)
+                    val_ss = ws.cell(r, base_col).value
+                    if val_ss is not None and str(val_ss).strip() != '':
+                        try:
+                            val_ss_str = str(int(round(float(val_ss))))
+                            records.append({
+                                'Geo': geo,
+                                'SV': f'SampleSize_Count{base_sv}',
+                                'Year': str(year),
+                                'Observation': val_ss_str,
+                                'ScalingFactor': np.nan
+                            })
+                        except (ValueError, TypeError):
+                            pass
+
+                    # 2. Weighted Percent (col + 2)
+                    val_pct = ws.cell(r, base_col + 2).value
+                    if val_pct is not None and str(val_pct).strip() != '':
+                        try:
+                            val_pct_str = str(float(val_pct))
+                            records.append({
+                                'Geo': geo,
+                                'SV': f'Percent{base_sv}',
+                                'Year': str(year),
+                                'Observation': val_pct_str,
+                                'ScalingFactor': 100.0
+                            })
+                        except (ValueError, TypeError):
+                            pass
+
+                    # 3. Lower 95% Confidence Interval (col + 3)
+                    val_lower = ws.cell(r, base_col + 3).value
+                    if val_lower is not None and str(val_lower).strip() != '':
+                        try:
+                            val_lower_str = str(float(val_lower))
+                            records.append({
+                                'Geo': geo,
+                                'SV': f'ConfidenceIntervalLowerLimit_Count{base_sv}',
+                                'Year': str(year),
+                                'Observation': val_lower_str,
+                                'ScalingFactor': 100.0
+                            })
+                        except (ValueError, TypeError):
+                            pass
+
+                    # 4. Upper 95% Confidence Interval (col + 4)
+                    val_upper = ws.cell(r, base_col + 4).value
+                    if val_upper is not None and str(val_upper).strip() != '':
+                        try:
+                            val_upper_str = str(float(val_upper))
+                            records.append({
+                                'Geo': geo,
+                                'SV': f'ConfidenceIntervalUpperLimit_Count{base_sv}',
+                                'Year': str(year),
+                                'Observation': val_upper_str,
+                                'ScalingFactor': 100.0
+                            })
+                        except (ValueError, TypeError):
+                            pass
+
+    df = pd.DataFrame(records)
+    if df.empty:
+        raise ValueError(
+            "No observation records were extracted from Excel workbook(s)")
+
+    return df
 
 
 class USPrams:
     """
-    This Class has requried methods to generate Cleaned CSV,
-    MCF and TMCF Files.
+    Class to process CDC PRAMS data, generate schema MCF, template MCF,
+    and cleaned CSV output files.
     """
 
     def __init__(self,
                  input_files: list,
-                 csv_file_path: str,
-                 mcf_file_path: str,
-                 tmcf_file_path: str,
-                 years: list = None) -> None:
+                 output_location: str = 'output',
+                 output_file_name: str = 'PRAMS',
+                 years: list = None):
         self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
-        self.years = years or (_FLAGS.input_years
-                               if _FLAGS.is_parsed() else input_years)
+        self.output_location = output_location
+        self.years = years
+        self.cleaned_csv_file_path = os.path.join(self.output_location,
+                                                  f"{output_file_name}.csv")
+        self.mcf_file_path = os.path.join(self.output_location,
+                                          f"{output_file_name}.mcf")
+        self.tmcf_file_path = os.path.join(self.output_location,
+                                           f"{output_file_name}.tmcf")
 
     def _generate_tmcf(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template.
-        Arguments:
-            None
-        Returns:
-            None
-        """
-        # Writing Generated TMCF atomically to local path.
+        """Generates Template MCF file atomically."""
         tmp_tmcf_file = self.tmcf_file_path + ".tmp"
-        with open(tmp_tmcf_file, 'w+', encoding="UTF-8") as f_out:
-            f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
+        with open(tmp_tmcf_file, 'w', encoding='utf-8') as f_out:
+            f_out.write(_TMCF_TEMPLATE.rstrip('\n') + '\n')
         os.replace(tmp_tmcf_file, self.tmcf_file_path)
 
-    def _generate_mcf(self, sv_names: list, mcf_file_path: str) -> None:
+    def _generate_mcf(self, sv_names: list, mcf_file_path: str) -> dict:
         """
-        This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
-
-        Args:
-            sv_names (list): List of Statistical Variables
-            mcf_file_path (str): Output MCF File Path
+        Generates schema MCF file and returns mapping from dummy SV to DCID.
         """
-        # pylint: disable=W1309
-        # pylint: disable=R0912
-        # pylint: disable=R0915
         mcf_nodes = []
         dcid_nodes = {}
         for sv in sv_names:
             pvs = []
             dcid = sv
             sv_prop = [prop.strip() for prop in sv.split(" ")]
-            # Using statistical variable template
-            # deepcopy follows the template and keeps adding the properties.
             sv_pvs = deepcopy(DEFAULT_SV_PROP)
-            # Created dictionaries to replace with correct values
+
             for prop in sv_prop:
                 statVar = insurance = time = cigarettes = prop_val = prop
                 for old, new in _PROP.items():
@@ -525,48 +230,45 @@ class USPrams:
                     prop_val = prop_val.replace(old, new)
 
                 if "SampleSize" in prop:
-                    sv_pvs["measuredProperty"] = f"dcs:count"
-                    sv_pvs["statType"] = f"dcs:sampleSize"
-                    pvs.append(f"measuredProperty: dcs:count")
-                    pvs.append(f"statType: dcs:sampleSize")
+                    sv_pvs["measuredProperty"] = "dcs:count"
+                    sv_pvs["statType"] = "dcs:sampleSize"
+                    pvs.append("measuredProperty: dcs:count")
+                    pvs.append("statType: dcs:sampleSize")
 
                 if "Percent" in prop:
-                    sv_pvs["measuredProperty"] = f"dcs:percent"
-                    sv_pvs["statType"] = f"dcs:measuredValue"
-                    sv_pvs[
-                        "measurementDenominator"] = f"dcs:Count_BirthEvent"+\
-                            "_LiveBirth"
-                    pvs.append(f"measuredProperty: dcs:count")
-                    pvs.append(f"statType: dcs:measuredValue")
+                    sv_pvs["measuredProperty"] = "dcs:percent"
+                    sv_pvs["statType"] = "dcs:measuredValue"
+                    sv_pvs["measurementDenominator"] = (
+                        "dcs:Count_BirthEvent_LiveBirth"
+                    )
+                    pvs.append("measuredProperty: dcs:count")
+                    pvs.append("statType: dcs:measuredValue")
                     pvs.append(
-                        f"measurementDenominator: dcs:Count_BirthEvent"+\
-                            "_LiveBirth"
+                        "measurementDenominator: dcs:Count_BirthEvent_LiveBirth"
                     )
 
                 if "ConfidenceIntervalLowerLimit" in prop:
-                    sv_pvs["measuredProperty"] = f"dcs:percent"
-                    sv_pvs["statType"] = f"dcs:confidenceIntervalLowerLimit"
-                    sv_pvs[
-                        "measurementDenominator"] = f"dcs:Count_BirthEvent"+\
-                            "_LiveBirth"
-                    pvs.append(f"measuredProperty: dcs:count")
-                    pvs.append(f"statType: dcs:confidenceIntervalLowerLimit")
+                    sv_pvs["measuredProperty"] = "dcs:percent"
+                    sv_pvs["statType"] = "dcs:confidenceIntervalLowerLimit"
+                    sv_pvs["measurementDenominator"] = (
+                        "dcs:Count_BirthEvent_LiveBirth"
+                    )
+                    pvs.append("measuredProperty: dcs:count")
+                    pvs.append("statType: dcs:confidenceIntervalLowerLimit")
                     pvs.append(
-                        f"measurementDenominator: dcs:Count_BirthEvent"+\
-                            "_LiveBirth"
+                        "measurementDenominator: dcs:Count_BirthEvent_LiveBirth"
                     )
 
                 if "ConfidenceIntervalUpperLimit" in prop:
-                    sv_pvs["measuredProperty"] = f"dcs:percent"
-                    sv_pvs["statType"] = f"dcs:confidenceIntervalUpperLimit"
-                    sv_pvs[
-                        "measurementDenominator"] = f"dcs:Count_BirthEvent"+\
-                            "_LiveBirth"
-                    pvs.append(f"measuredProperty: dcs:count")
-                    pvs.append(f"statType: dcs:confidenceIntervalUpperLimit")
+                    sv_pvs["measuredProperty"] = "dcs:percent"
+                    sv_pvs["statType"] = "dcs:confidenceIntervalUpperLimit"
+                    sv_pvs["measurementDenominator"] = (
+                        "dcs:Count_BirthEvent_LiveBirth"
+                    )
+                    pvs.append("measuredProperty: dcs:count")
+                    pvs.append("statType: dcs:confidenceIntervalUpperLimit")
                     pvs.append(
-                        f"measurementDenominator: dcs:Count_BirthEvent"+\
-                            "_LiveBirth"
+                        "measurementDenominator: dcs:Count_BirthEvent_LiveBirth"
                     )
 
                 if "MultivitaminUseMoreThan4TimesAWeek" in prop:
@@ -581,9 +283,9 @@ class USPrams:
                     sv_pvs["mothersHealthBehavior"] = f"dcs:{statVar}"
                     pvs.append(f"mothersHealthBehavior: dcs:{statVar}")
 
-                if "HealthCareVisit12MonthsBeforePregnancy"in prop or\
+                if "HealthCareVisit12MonthsBeforePregnancy" in prop or\
                         "PrenatalCareInFirstTrimester" in prop or\
-                        "FluShot12MonthsBeforeDelivery"in prop or\
+                        "FluShot12MonthsBeforeDelivery" in prop or\
                         "MaternalCheckupPostpartum" in prop or\
                         "TeethCleanedByDentistOrHygienist" in prop:
                     prop = prop[0].lower() + prop[1:]
@@ -593,7 +295,7 @@ class USPrams:
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "CigaretteSmoking3MonthsBeforePregnancy" in prop or\
-                    "CigaretteSmokingLast3MonthsOfPregnancy"in prop or \
+                    "CigaretteSmokingLast3MonthsOfPregnancy" in prop or \
                     "CigaretteSmokingPostpartum" in prop or\
                     "ECigaretteSmoking3MonthsBeforePregnancy" in prop or\
                     "ECigaretteSmokingLast3MonthsOfPregnancy" in prop:
@@ -621,15 +323,15 @@ class USPrams:
                 elif "MistimedPregnancy" in prop or\
                     "UnwantedPregnancy" in prop or\
                     "UnsureIfWantedPregnancy" in prop or\
-                     "IntendedPregnancy" in prop :
+                     "IntendedPregnancy" in prop:
                     sv_pvs["pregnancyIntention"] = f"dcs:{cigarettes}"
                     pvs.append(f"pregnancyIntention: dcs:{cigarettes}")
 
-                elif "AnyPostpartumFamilyPlanning"in prop or\
-                    "MaleOrFemaleSterilization"in prop or\
+                elif "AnyPostpartumFamilyPlanning" in prop or\
+                    "MaleOrFemaleSterilization" in prop or\
                     "LongActingReversibleContraceptiveMethods" in prop or\
-                    "ModeratelyEffectiveContraceptiveMethods"in prop or\
-                    "LeastEffectiveContraceptiveMethods"in prop:
+                    "ModeratelyEffectiveContraceptiveMethods" in prop or\
+                    "LeastEffectiveContraceptiveMethods" in prop:
                     sv_pvs["postpartumFamilyPlanning"] = f"dcs:{cigarettes}"
                     pvs.append(f"postpartumFamilyPlanning: dcs:{cigarettes}")
 
@@ -642,13 +344,13 @@ class USPrams:
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "healthInsuranceStatusOneMonthBeforePregnancy"+\
-                    "PrivateInsurance"in prop or\
+                    "PrivateInsurance" in prop or\
                     "healthInsuranceStatusOneMonthBeforePregnancy"+\
                         "Medicaid" in prop or\
                     "healthInsuranceStatusOneMonthBeforePregnancy"+\
-                        "NoInsurance" in prop :
-                    sv_pvs["healthInsuranceStatusOneMonthBeforePregnancy"]\
-                    = f"dcs:{statVar}"
+                        "NoInsurance" in prop:
+                    sv_pvs["healthInsuranceStatusOneMonthBeforePregnancy"] = (
+                        f"dcs:{statVar}")
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
                     pvs.append(
                         f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{statVar}"
@@ -656,19 +358,18 @@ class USPrams:
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "healthInsuranceStatusForPrenatalCare"+\
-                    "PrivateInsurance"in prop or\
+                    "PrivateInsurance" in prop or\
                     "healthInsuranceStatusForPrenatalCareMedicaid" in prop or\
                     "healthInsuranceStatusForPrenatalCareNoInsurance" in prop:
-                    sv_pvs[
-                        "healthInsuranceStatusForPrenatalCare"] = f"dcs:{statVar}"
+                    sv_pvs["healthInsuranceStatusForPrenatalCare"] = (
+                        f"dcs:{statVar}")
                     pvs.append(
                         f"healthInsuranceStatusForPrenatalCare: dcs:{statVar}")
 
                 elif "healthInsuranceStatusPostpartumPrivateInsurance" in prop\
                     or "healthInsuranceStatusPostpartumMedicaid" in prop or\
                     "healthInsuranceStatusPostpartumNoInsurance" in prop:
-                    sv_pvs[
-                        "healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
+                    sv_pvs["healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
                     pvs.append(
                         f"healthInsuranceStatusPostpartum: dcs:{insurance}")
@@ -694,35 +395,26 @@ class USPrams:
                 _MCF_TEMPLATE.format(dcid=resolved_dcid,
                                      xtra_pvs='\n'.join(pvs)))
         mcf = '\n'.join(mcf_nodes)
-        # Writing Generated MCF atomically to local path.
+
         tmp_mcf_file = mcf_file_path + ".tmp"
         with open(tmp_mcf_file, 'w+', encoding='utf-8') as f_out:
-            f_out.write(mcf.rstrip('\n'))
+            f_out.write(mcf.rstrip('\n') + '\n')
         os.replace(tmp_mcf_file, mcf_file_path)
         return dcid_nodes
-        # pylint: enable=W1309
-        # pylint: enable=R0912
-        # pylint: enable=R0915
 
-    def process(self):
+    def process(self) -> None:
         """
-        This Method calls the required methods to generate
-        cleaned CSV, MCF, and TMCF file.
-        Arguments: None
-        Returns: None
+        Executes pipeline: extracts Excel data, resolves StatVars,
+        and atomically outputs CSV, MCF, and TMCF files.
         """
         df = prams(self.input_files, self.years)
-        sv_names = df.SV.unique().tolist()
-        sv_names.sort()
+        sv_names = sorted(df["SV"].unique().tolist())
 
-        # Creating Output Directory
         output_path = os.path.dirname(self.cleaned_csv_file_path)
         if output_path and not os.path.exists(output_path):
             os.makedirs(output_path, exist_ok=True)
 
         updated_sv = self._generate_mcf(sv_names, self.mcf_file_path)
-        # Replacing dummy statvars with the Statistical variables generated from
-        # dcid_generator
         df["SV"] = df["SV"].map(updated_sv)
         if df["SV"].isna().any():
             unmapped = df[df["SV"].isna()]["SV"].unique().tolist()
@@ -730,40 +422,43 @@ class USPrams:
                           unmapped)
             raise ValueError(
                 f"Unmapped Statistical Variables detected: {unmapped}")
+
         self._generate_tmcf()
         df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])
         df = df.drop_duplicates(subset=['Geo', 'SV', 'Year'], keep='last')
+        df = df.sort_values(by=['Geo', 'SV', 'Year'])
+
         tmp_csv_file = self.cleaned_csv_file_path + ".tmp"
         df.to_csv(tmp_csv_file, index=False)
         os.replace(tmp_csv_file, self.cleaned_csv_file_path)
+        logging.info("Successfully produced: %s (%d records)",
+                     self.cleaned_csv_file_path, len(df))
 
 
 def main(_):
     input_path = _FLAGS.input_path
     if not os.path.exists(input_path):
         logging.fatal("Input path not found: %s", input_path)
-    ip_files = [
-        os.path.join(input_path, file) for file in os.listdir(input_path)
-        if file.endswith('.pdf')
-    ]
-    if not ip_files:
-        logging.fatal("No PDF files found in %s", input_path)
-    ip_files.sort()
 
-    # Defining Output Files
-    data_file_path = _FLAGS.output_path or os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "output")
-    os.makedirs(data_file_path, exist_ok=True)
-    csv_name = "PRAMS.csv"
-    mcf_name = "PRAMS.mcf"
-    tmcf_name = "PRAMS.tmcf"
-    tmcf_path = os.path.join(data_file_path, tmcf_name)
-    mcf_path = os.path.join(data_file_path, mcf_name)
-    cleaned_csv_path = os.path.join(data_file_path, csv_name)
-    loader = USPrams(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    if os.path.isfile(input_path):
+        ip_files = [input_path]
+    else:
+        ip_files = sorted(glob.glob(os.path.join(input_path, "*.xlsx")))
+        if not ip_files:
+            ip_files = sorted(glob.glob(os.path.join(input_path, "*.xls")))
+
+    if not ip_files:
+        logging.fatal("No Excel input files found in: %s", input_path)
+
+    output_dir = _FLAGS.output_path or os.path.join(_CODEDIR, "output")
+    os.makedirs(output_dir, exist_ok=True)
+
+    loader = USPrams(ip_files,
+                     output_location=output_dir,
+                     years=_FLAGS.input_years)
     loader.process()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(main)

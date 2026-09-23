@@ -12,21 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for CDC PRAMS process script.
+Script to automate testing for CDC PRAMS Excel processing pipeline.
 """
-
 import io
 import os
-import unittest
 import sys
 import tempfile
+import unittest
 import pandas as pd
 
-# MODULE_DIR is the absolute path to where this test is running from.
 MODULE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, MODULE_DIR)
 
-from process import USPrams, _split_statvar_value, _splitting_ci_columns
+from process import USPrams
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
@@ -34,36 +32,35 @@ EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
 
 class TestProcess(unittest.TestCase):
     """
-    TestProcess is inheriting unittest class properties for unit testing.
-    Generates CSV, MCF and TMCF files based on sample input and compares
-    them with the expected golden files.
+    Unit test class verifying that the Excel processing pipeline produces
+    exact CSV, MCF, and TMCF files matching the expected test fixtures.
     """
 
     @classmethod
     def setUpClass(cls):
         test_data_files = [
-            'Alabama-PRAMS-MCH-Indicators-508.pdf',
-            'All-Sites-PRAMS-MCH-Indicators-508.pdf'
+            'PRAMS-MCH-Indicators-Test.xlsx'
         ]
         ip_data = [
             os.path.join(TEST_DATASET_DIR, file_name)
             for file_name in test_data_files
         ]
         cls.tmp_dir = tempfile.TemporaryDirectory()
-        cleaned_csv_path = os.path.join(cls.tmp_dir.name, "data.csv")
-        mcf_path = os.path.join(cls.tmp_dir.name, "test_census.mcf")
-        tmcf_path = os.path.join(cls.tmp_dir.name, "test_census.tmcf")
 
-        base = USPrams(ip_data, cleaned_csv_path, mcf_path, tmcf_path)
+        base = USPrams(ip_data, output_location=cls.tmp_dir.name)
         base.process()
 
-        with open(mcf_path, encoding="UTF-8") as mcf_file:
+        csv_path = os.path.join(cls.tmp_dir.name, "PRAMS.csv")
+        mcf_path = os.path.join(cls.tmp_dir.name, "PRAMS.mcf")
+        tmcf_path = os.path.join(cls.tmp_dir.name, "PRAMS.tmcf")
+
+        with open(mcf_path, encoding="utf-8") as mcf_file:
             cls.actual_mcf_data = mcf_file.read()
 
-        with open(tmcf_path, encoding="UTF-8") as tmcf_file:
+        with open(tmcf_path, encoding="utf-8") as tmcf_file:
             cls.actual_tmcf_data = tmcf_file.read()
 
-        with open(cleaned_csv_path, encoding="utf-8-sig") as csv_file:
+        with open(csv_path, encoding="utf-8-sig") as csv_file:
             cls.actual_csv_data = csv_file.read()
 
     @classmethod
@@ -79,11 +76,11 @@ class TestProcess(unittest.TestCase):
                                                "PRAMS.tmcf")
 
         with open(expected_mcf_file_path,
-                  encoding="UTF-8") as expected_mcf_file:
+                  encoding="utf-8") as expected_mcf_file:
             expected_mcf_data = expected_mcf_file.read()
 
         with open(expected_tmcf_file_path,
-                  encoding="UTF-8") as expected_tmcf_file:
+                  encoding="utf-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
         self.assertEqual(expected_mcf_data.strip(),
@@ -116,42 +113,24 @@ class TestProcess(unittest.TestCase):
         self.assertTrue((ci_lower['ScalingFactor'] == 100.0).all())
         self.assertTrue((ci_upper['ScalingFactor'] == 100.0).all())
 
-    def test_split_statvar_value_multi_digit_regex(self):
+    def test_year_range_extended_to_2022(self):
         """
-        Tests that _split_statvar_value correctly matches multi-digit percentages (>=10.0%)
-        and does not truncate parenthesis.
+        Verifies that observation years extend through 2022 without regression.
         """
-        df = pd.DataFrame([{
-            'statVar': '12.5 (10.2-14.8) Indicator description',
-            'Overall_2020_CI': '',
-            '2016_sampleSize': ''
-        }])
-        res = _split_statvar_value(df, 'National')
-        self.assertEqual(res.loc[0, 'Overall_2020_CI'], '12.5 (10.2-14.8)')
-        self.assertEqual(res.loc[0, 'statVar'], 'Indicator description')
+        df = pd.read_csv(io.StringIO(self.actual_csv_data))
+        years = set(df['Year'].unique())
+        expected_years = {2016, 2017, 2018, 2019, 2020, 2021, 2022}
+        self.assertEqual(years, expected_years)
 
-    def test_suppressed_data_not_converted_to_zero(self):
+    def test_discrete_sample_sizes_no_decimals(self):
         """
-        Tests that suppressed data indicated by '.' or '(.-.)' does not become '0.0'.
+        Verifies that sample count values are integers and do not contain decimal parts.
         """
-        state_cols = [
-            'Geo', 'newStatVar', '2016_CI', '2017_CI', '2018_CI', '2019_CI',
-            '2020_CI', 'Overall_2020_CI', '2016_sampleSize', '2017_sampleSize',
-            '2018_sampleSize', '2019_sampleSize', '2020_sampleSize', 'SV',
-            'ScalingFactor'
-        ]
-        df = pd.DataFrame([{col: '' for col in state_cols}])
-        df.loc[0, '2018_CI'] = '0.0 (.-.)'
-        res = _splitting_ci_columns(df, 'State')
-        self.assertEqual(res.loc[0, '2018_CI_PERCENT'], '0.0')
-        self.assertTrue(
-            pd.isna(res.loc[0, '2018_CI_LOWER'])
-            or res.loc[0, '2018_CI_LOWER'] == '')
-        self.assertTrue(
-            pd.isna(res.loc[0, '2018_CI_UPPER'])
-            or res.loc[0, '2018_CI_UPPER'] == '')
-        self.assertNotEqual(res.loc[0, '2018_CI_LOWER'], '0.0')
-        self.assertNotEqual(res.loc[0, '2018_CI_UPPER'], '0.0')
+        df = pd.read_csv(io.StringIO(self.actual_csv_data), dtype=str)
+        ss_df = df[df['SV'].str.startswith('SampleSize_Count')]
+        self.assertFalse(ss_df.empty)
+        for val in ss_df['Observation']:
+            self.assertTrue(val.isdigit(), f"Sample size '{val}' contains non-digit chars")
 
 
 if __name__ == '__main__':

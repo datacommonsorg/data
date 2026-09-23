@@ -24,9 +24,13 @@ from urllib3.util.retry import Retry
 
 def _get_session() -> requests.Session:
     session = requests.Session()
+    accept_header = (
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,'
+        'application/pdf,*/*'
+    )
     session.headers.update({
         'User-Agent': 'curl/8.21.0-rc3',
-        'Accept': 'application/pdf,*/*'
+        'Accept': accept_header
     })
     retries = Retry(total=5,
                     backoff_factor=1.0,
@@ -75,9 +79,15 @@ def download_file(input_url: list,
                     f"Downloaded content too small ({len(req.content)} bytes) "
                     f"for {download_file_url}"
                 )
-            if not req.content.startswith(b'%PDF-'):
+            if download_file_url.endswith('.pdf') and not req.content.startswith(
+                    b'%PDF-'):
                 raise ValueError(
                     f"Downloaded content from {download_file_url} is not a valid PDF"
+                )
+            if download_file_url.endswith('.xlsx') and not req.content.startswith(
+                    b'PK'):
+                raise ValueError(
+                    f"Downloaded content from {download_file_url} is not a valid XLSX"
                 )
 
             with open(tmp_file, 'wb') as file:
