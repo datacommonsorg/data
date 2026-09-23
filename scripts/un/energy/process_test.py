@@ -67,5 +67,4 @@ class TestUNEnergyProcess(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    app.run()
     unittest.main()

@@ -7,34 +7,43 @@
       "provenance_description": "Data related to the Mongolia's education at country level",
       "scripts": ["../common_download_script.py", "run.sh"],
       "source_files": [
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv",
+        "golden_data/*.csv"
       ],
       "import_inputs": [
         {
           "template_mcf": "output_files/students_of_universities_and_colleges_by_professional_field_output.tmcf",
-          "cleaned_csv": "output_files/students_of_universities_and_colleges_by_professional_field_output.csv"
+          "cleaned_csv": "output_files/students_of_universities_and_colleges_by_professional_field_output.csv",
+          "node_mcf": "output_files/students_of_universities_and_colleges_by_professional_field_output*.mcf"
         },
         {
           "template_mcf": "output_files/students_in_teritary_educational_institutions_by_sex_and_educational_degree_output.tmcf",
-          "cleaned_csv": "output_files/students_in_teritary_educational_institutions_by_sex_and_educational_degree_output.csv"
+          "cleaned_csv": "output_files/students_in_teritary_educational_institutions_by_sex_and_educational_degree_output.csv",
+          "node_mcf": "output_files/students_in_teritary_educational_institutions_by_sex_and_educational_degree_output*.mcf"
         },
         {
           "template_mcf": "output_files/number_of_students_in_universities_and_colleges_by_region_output.tmcf",
-          "cleaned_csv": "output_files/number_of_students_in_universities_and_colleges_by_region_output.csv"
+          "cleaned_csv": "output_files/number_of_students_in_universities_and_colleges_by_region_output.csv",
+          "node_mcf": "output_files/number_of_students_in_universities_and_colleges_by_region_output*.mcf"
         },
         {
           "template_mcf": "output_files/number_of_kindergartens_by_region_output.tmcf",
-          "cleaned_csv": "output_files/number_of_kindergartens_by_region_output.csv"
+          "cleaned_csv": "output_files/number_of_kindergartens_by_region_output.csv",
+          "node_mcf": "output_files/number_of_kindergartens_by_region_output*.mcf"
         },
         {
           "template_mcf": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output.tmcf",
-          "cleaned_csv": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output.csv"
+          "cleaned_csv": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output.csv",
+          "node_mcf": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output*.mcf"
         },
         {
           "template_mcf": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.tmcf",
-          "cleaned_csv": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.csv"
+          "cleaned_csv": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.csv",
+          "node_mcf": "output_files/graduates_of_universities_and_colleges_by_professional_field_output*.mcf"
         }
       ],
+      "validation_config_file": "validation_config.json",
       "cron_schedule": "0 04 * * 6"
     }
   ]

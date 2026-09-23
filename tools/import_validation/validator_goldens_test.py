@@ -190,6 +190,81 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(missing, [])
         mock_compare.assert_called_once()
 
+    @patch('validator_goldens.file_util')
+    def test_load_nodes_from_file_csv_namespaces(self, mock_file_util):
+        # 1. Setup mocks
+        mock_file_util.file_get_matching.return_value = ['dummy.csv']
+        mock_file_util.file_is_csv.return_value = True
+        mock_file_util.file_load_csv_dict.return_value = {
+            0: {
+                'dcid': 'dcid:geo1',
+                'variableMeasured': 'dcs:sv1',
+                'unit': 'schema:unit1',
+                'value': '10'
+            }
+        }
+
+        # 2. Call load_nodes_from_file
+        nodes = validator_goldens.load_nodes_from_file('dummy.csv')
+
+        # 3. Assert namespaces are stripped correctly
+        self.assertEqual(len(nodes), 1)
+        self.assertEqual(nodes[0]['dcid'], 'geo1')
+        self.assertEqual(nodes[0]['variableMeasured'], 'sv1')
+        self.assertEqual(nodes[0]['unit'], 'unit1')
+        self.assertEqual(nodes[0]['value'], '10')
+
+    @patch('validator_goldens.load_nodes_from_file')
+    @patch('validator_goldens.file_util.file_get_matching')
+    @patch('validator_goldens.validator_compare_nodes')
+    def test_validate_goldens_resolves_relative_paths(self, mock_compare,
+                                                      mock_get_matching,
+                                                      mock_load):
+        # 1. Setup mocks
+        mock_load.return_value = {}
+        mock_get_matching.return_value = ['/abs/path/gold.csv']
+        mock_compare.return_value = []
+
+        config = {'config_dir': '/abs/path/config_dir'}
+
+        # 2. Call validate_goldens with relative paths
+        validator_goldens.validate_goldens(inputs='relative_input.csv',
+                                           golden_files='relative_golden.csv',
+                                           output_file='relative_output.csv',
+                                           config=config)
+
+        # 3. Assert relative paths are resolved before loading
+        # First load: inputs
+        mock_load.assert_any_call('/abs/path/config_dir/relative_input.csv')
+        # Second load: golden files list
+        mock_get_matching.assert_called_with(
+            '/abs/path/config_dir/relative_golden.csv')
+        mock_load.assert_any_call(['/abs/path/gold.csv'])
+
+    @patch('validator_goldens.load_nodes_from_file')
+    @patch('validator_goldens.file_util.file_get_matching')
+    @patch('validator_goldens.validator_compare_nodes')
+    def test_validate_goldens_does_not_resolve_gcs_paths(
+            self, mock_compare, mock_get_matching, mock_load):
+        # 1. Setup mocks
+        mock_load.return_value = {}
+        mock_get_matching.return_value = ['gs://bucket/gold.csv']
+        mock_compare.return_value = []
+
+        config = {'config_dir': '/abs/path/config_dir'}
+
+        # 2. Call validate_goldens with GCS paths
+        validator_goldens.validate_goldens(
+            inputs='gs://bucket/relative_input.csv',
+            golden_files='gs://bucket/relative_golden.csv',
+            output_file='relative_output.csv',
+            config=config)
+
+        # 3. Assert GCS paths are NOT resolved
+        mock_load.assert_any_call('gs://bucket/relative_input.csv')
+        mock_get_matching.assert_called_with('gs://bucket/relative_golden.csv')
+        mock_load.assert_any_call(['gs://bucket/gold.csv'])
+
 
 if __name__ == '__main__':
     unittest.main()

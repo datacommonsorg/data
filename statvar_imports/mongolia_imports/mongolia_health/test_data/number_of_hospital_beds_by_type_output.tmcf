@@ -1,0 +1,7 @@
+Node: E:number_of_hospital_beds_by_type_output->E0
+observationAbout: C:number_of_hospital_beds_by_type_output->observationAbout
+observationDate: C:number_of_hospital_beds_by_type_output->observationDate
+value: C:number_of_hospital_beds_by_type_output->value
+variableMeasured: C:number_of_hospital_beds_by_type_output->variableMeasured
+unit: C:number_of_hospital_beds_by_type_output->unit
+typeOf: dcs:StatVarObservation

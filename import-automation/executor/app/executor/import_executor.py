@@ -17,6 +17,7 @@ based on manifests.
 """
 
 import dataclasses
+import fnmatch
 import glob
 import json
 import logging
@@ -26,6 +27,7 @@ import shlex
 import sys
 import subprocess
 import tempfile
+import threading
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
@@ -77,6 +79,7 @@ AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
 STAGING_VERSION_FILE = "staging_version.txt"
+MAX_LOG_CHUNK_SIZE = 50000
 
 
 class ImportStatus(Enum):
@@ -480,7 +483,8 @@ class ImportExecutor:
                              "latency": timer.time(),
                              "input_index": input_index,
                              "import_input": import_prefix,
-                         })
+                         },
+                         skip_stream_logging=True)
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
@@ -548,16 +552,15 @@ class ImportExecutor:
         return base_config_path
 
     @log_function_call
-    def _invoke_import_differ(self, genmcf_output_path: str,
-                              validation_output_path: str, import_name: str,
-                              import_prefix: str, version: str,
-                              latest_version: str, import_input: dict,
-                              absolute_import_dir: str) -> Tuple[str, str]:
+    def _invoke_differ_summary(self, genmcf_output_path: str,
+                               validation_output_path: str, import_name: str,
+                               import_prefix: str, version: str,
+                               latest_version: str, import_input: dict,
+                               absolute_import_dir: str) -> Optional[Dict]:
         """Invokes the differ tool to compare current data with previous data."""
         current_data_path = os.path.join(genmcf_output_path, '*.mcf')
         previous_data_path = os.path.join(latest_version, import_prefix,
                                           'genmcf', '*.mcf')
-        diff_found = True
         # TODO: remove fallback logic once all imports move to new path.
         if not file_util.file_get_matching(previous_data_path):
             input_files = self._get_import_input_files(import_input,
@@ -569,7 +572,6 @@ class ImportExecutor:
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
         # END
 
-        differ_output = ''
         differ_job_name = 'differ'
         if latest_version and len(
                 file_util.file_get_matching(previous_data_path)) > 0:
@@ -595,13 +597,11 @@ class ImportExecutor:
                     "previous_version": latest_version,
                     "current_version": version
                 })
-            differ_output = validation_output_path
-            diff_found = differ_summary['obs_diff_size'] != 0 or differ_summary[
-                'schema_diff_size'] == 0
+            return differ_summary
         else:
             logging.error('Skipping differ tool due to missing latest mcf file')
 
-        return differ_output, diff_found
+        return None
 
     @log_function_call
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
@@ -647,7 +647,7 @@ class ImportExecutor:
             differ_output = ''
             # Invoke differ and validation scripts.
             if self.config.invoke_differ_tool:
-                differ_output, diff_found = self._invoke_import_differ(
+                differ_summary = self._invoke_differ_summary(
                     genmcf_output_path=genmcf_output_path,
                     validation_output_path=validation_output_path,
                     import_name=import_name,
@@ -656,6 +656,11 @@ class ImportExecutor:
                     latest_version=latest_version,
                     import_input=import_input,
                     absolute_import_dir=absolute_import_dir)
+                if differ_summary is not None:
+                    diff_found = (
+                        differ_summary.get('obs_diff_count', 1) != 0 or
+                        differ_summary.get('schema_diff_count', 1) != 0)
+                    differ_output = validation_output_path
             else:
                 logging.error('Skipping differ tool as per import config')
 
@@ -667,7 +672,7 @@ class ImportExecutor:
                     repo_dir, absolute_import_dir, import_spec,
                     validation_output_path)
                 logging.info(
-                    f'Invoking validation script with config: {config_file_path}, differ:{differ_output}, summary:{summary_stats}...'
+                    f'Invoking validation script with config: {config_file_path}, differ:{differ_output}, summary:{summary_stats}'
                 )
                 validation = ValidationRunner(
                     validation_config_path=config_file_path,
@@ -716,7 +721,16 @@ class ImportExecutor:
             import_summary.import_stats.get('validation_execution_time', 0),
             import_summary.import_stats.get('validation_data_size',
                                             0), validation_message)
-        return validation_status, differ_status
+        if not self.config.ignore_validation_status and not validation_status:
+            logging.error(
+                "Marking import as VALIDATION due to validation failure.")
+            import_summary.status = ImportStatus.VALIDATION
+        elif self.config.enable_skip_status and not differ_status:
+            logging.info("Marking import as SKIP due to no data diff.")
+            import_summary.status = ImportStatus.SKIP
+        else:
+            import_summary.status = ImportStatus.STAGING
+        return validation_status
 
     def _get_validation_message(
             self, validation_results: List[ValidationResult]) -> str:
@@ -799,7 +813,8 @@ class ImportExecutor:
                                  "latency_secs": timer.time(),
                                  "script_index": script_index,
                                  "script_path": path,
-                             })
+                             },
+                             skip_stream_logging=True)
                 process.check_returncode()
 
         import_summary.import_stats['script_execution_time'] = start_timer.time(
@@ -818,9 +833,6 @@ class ImportExecutor:
 
     def _update_latest_version(self, version, output_dir, import_spec,
                                import_summary):
-        if self.config.skip_gcs_upload:
-            logging.warning("Skipping version update as per import config.")
-            return
         logging.info(f'Updating import staging version {version}')
         self._upload_string_helper(
             version, os.path.join(output_dir, STAGING_VERSION_FILE))
@@ -832,6 +844,68 @@ class ImportExecutor:
             json.dumps(dataclasses.asdict(import_summary), default=str),
             os.path.join(output_dir, version, IMPORT_SUMMARY_FILE))
         logging.info(f'Updated import staging version {version}')
+
+    @log_function_call
+    def _ingest_historic_data(
+        self,
+        output_dir: str,
+        version: str,
+        historic_folder: str = 'historic',
+        import_summary: Optional[ImportStatusSummary] = None,
+    ) -> None:
+        """Copies historic data files from GCS to the version genmcf folder.
+
+        Copies all files from gs://<bucket>/<output_dir>/<historic_folder> to
+        gs://<bucket>/<output_dir>/<version>/historic/genmcf.
+
+        Args:
+            output_dir: Path to the output directory, as a string.
+            version: Current version string.
+            historic_folder: Folder name containing historic data, defaults to 'historic'.
+            import_summary: ImportStatusSummary object to update with stats.
+        """
+        logging.info(
+            f'Ingesting historic data for {output_dir}, version {version}')
+        copied_files_count = 0
+        historic_data_size = 0
+        if self.config.skip_gcs_upload:
+            logging.info(
+                'Skipping GCS historic data ingestion due to skip_gcs_upload=True'
+            )
+            return
+
+        try:
+            storage_client = storage.Client(self.config.gcs_project_id)
+            bucket = storage_client.bucket(self.config.storage_prod_bucket_name)
+            source_prefix = f'{output_dir}/{historic_folder}/'
+            blobs = list(bucket.list_blobs(prefix=source_prefix))
+            for blob in blobs:
+                rel_path = blob.name[len(source_prefix):]
+                if not rel_path or rel_path.endswith('/'):
+                    continue
+                if not fnmatch.fnmatch(os.path.basename(rel_path), '*.mcf*'):
+                    continue
+                if rel_path.startswith('genmcf/'):
+                    rel_path = rel_path[len('genmcf/'):]
+                dest_blob_name = f'{output_dir}/{version}/historic/genmcf/{rel_path}'
+                logging.info(
+                    f'Copying historic GCS blob {blob.name} to {dest_blob_name}'
+                )
+                bucket.copy_blob(blob, bucket, dest_blob_name)
+                copied_files_count += 1
+                if blob.size:
+                    historic_data_size += blob.size
+        except Exception as e:
+            logging.error(f'Failed to copy historic data from GCS: {e}')
+            raise
+
+        if import_summary:
+            import_summary.import_stats[
+                'historic_data_size'] = historic_data_size
+            import_summary.data_volume += historic_data_size
+        logging.info(
+            f'Completed historic data ingestion: {copied_files_count} files copied, '
+            f'{historic_data_size} bytes.')
 
     @log_function_call
     def _import_one_helper(
@@ -866,7 +940,9 @@ class ImportExecutor:
             self.config.storage_prod_bucket_name, output_dir, version)
         import_summary.graph_path = self.config.graph_data_path
         import_summary.next_refresh = utils.next_utc_timestamp(
-            import_spec.get('cron_schedule'))
+            import_spec.get('cron_schedule',
+                            self.config.cron_schedule_override))
+        import_summary.status = ImportStatus.STAGING
 
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
@@ -907,10 +983,9 @@ class ImportExecutor:
                     import_summary=import_summary)
 
             validation_status = True
-            differ_status = True
             if self.config.invoke_import_validation:
                 logging.info("Invoking import validations")
-                validation_status, differ_status = self._invoke_import_validation(
+                validation_status = self._invoke_import_validation(
                     repo_dir=repo_dir,
                     relative_import_dir=relative_import_dir,
                     absolute_import_dir=absolute_import_dir,
@@ -924,22 +999,17 @@ class ImportExecutor:
                 logging.info(
                     'Skipping import validations as per import config.')
 
-            if not self.config.ignore_validation_status and not validation_status:
-                logging.error(
-                    "Marking import as VALIDATION due to validation failure.")
-                import_summary.status = ImportStatus.VALIDATION
-            elif not differ_status:
-                logging.info("Marking import as SKIP due to no data diff.")
-                import_summary.status = ImportStatus.SKIP
-            else:
-                import_summary.status = ImportStatus.STAGING
-
             import_summary.execution_time = int(time.time() - start_time)
             import_summary.data_volume = int(
                 import_summary.import_stats.get('source_data_size', 0) +
                 import_summary.import_stats.get('mcf_data_size', 0) +
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
+
+            if self.config.ingest_historic_data:
+                self._ingest_historic_data(output_dir=output_dir,
+                                           version=version,
+                                           import_summary=import_summary)
 
             self._update_latest_version(version, output_dir, import_spec,
                                         import_summary)
@@ -996,6 +1066,16 @@ class ImportExecutor:
             src=manifest_file,
             dest=dest,
         )
+        # Copy import-specific validation config file if specified
+        validation_config_file = import_spec.get('validation_config_file')
+        if validation_config_file:
+            val_cfg_src = os.path.join(import_dir, validation_config_file)
+            if os.path.exists(val_cfg_src):
+                self._upload_file_helper(
+                    src=val_cfg_src,
+                    dest=
+                    f'{output_dir}/{version}/{os.path.basename(validation_config_file)}',
+                )
         import_inputs = import_spec.get('import_inputs', [])
         errors = []
         data_size = 0
@@ -1071,7 +1151,8 @@ class ImportExecutor:
             "last_data_refresh_date": _clean_date(utils.utctime())
         })
         next_data_refresh_date = utils.next_utc_date(
-            import_spec.get('cron_schedule'))
+            import_spec.get('cron_schedule',
+                            self.config.cron_schedule_override))
         if next_data_refresh_date:
             node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
         return node
@@ -1119,6 +1200,33 @@ def run_and_handle_exception(
         return ExecutionResult(ImportStatus.FAILURE, [], message)
 
 
+def _stream_payload_in_chunks(label: str, payload) -> None:
+    """Helper function to split text and log in safe chunks to avoid
+
+    "Log entry too large" (InvalidArgument) errors.
+    """
+    if not payload:
+        return
+
+    if isinstance(payload, bytes):
+        payload_str = payload.decode('utf-8', errors='replace')
+    else:
+        payload_str = str(payload)
+
+    chunk_size = MAX_LOG_CHUNK_SIZE
+    total_len = len(payload_str)
+
+    if total_len <= chunk_size:
+        logging.info(f'{label}:\n{payload_str}')
+        return
+
+    logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
+    for i in range(0, total_len, chunk_size):
+        chunk = payload_str[i:i + chunk_size]
+        logging.info(f'[{label} Part {i//chunk_size + 1}]:\n{chunk}')
+    logging.info(f'--- End of {label} ---')
+
+
 @log_function_call
 def _run_with_timeout_async(args: List[str],
                             timeout: float,
@@ -1153,15 +1261,27 @@ def _run_with_timeout_async(args: List[str],
         )
 
         # Log output continuously until the command completes.
-        for line in process.stderr:
-            stderr.append(line)
-            logging.info(f'Process stderr:{name}: {line}')
-        for line in process.stdout:
-            stdout.append(line)
-            logging.info(f'Process stdout:{name}: {line}')
+        def drain_stream(stream, output, stream_name):
+            for line in stream:
+                output.append(line)
+                logging.info(f'Process {stream_name}:{name}: {line}')
+
+        stdout_thread = threading.Thread(
+            target=drain_stream,
+            args=(process.stdout, stdout, 'stdout'),
+        )
+        stderr_thread = threading.Thread(
+            target=drain_stream,
+            args=(process.stderr, stderr, 'stderr'),
+        )
+
+        stdout_thread.start()
+        stderr_thread.start()
 
         # Wait in case script has closed stderr/stdout early.
         process.wait()
+        stdout_thread.join()
+        stderr_thread.join()
         end_time = time.time()
 
         return_code = process.returncode
@@ -1218,8 +1338,8 @@ def _run_with_timeout(args: List[str],
                                  cwd=cwd,
                                  env=env)
         logging.info(
-            f'Completed command: {args}, retcode: {process.returncode}, stdout:'
-            f' {process.stdout}, stderr: {process.stderr}')
+            f'Completed command: {args}, retcode: {process.returncode}')
+
         return process
     except Exception as e:
         message = traceback.format_exc()
@@ -1379,27 +1499,36 @@ def _construct_process_message(message: str,
     message = (f'{message}\n'
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
-    if process.stdout:
-        message += f'\n[Subprocess stdout]:\n{process.stdout}'
-    if process.stderr:
-        message += f'\n[Subprocess stderr]:\n{process.stderr}'
     return message
 
 
 def _log_process(process: subprocess.CompletedProcess,
                  import_name: str = '',
-                 metrics: dict = {}) -> None:
+                 metrics: dict = None,
+                 skip_stream_logging: bool = False) -> None:
     """Logs the result of a subprocess.
 
   Args:
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
+      import_name: Name of the import for labeling logs.
+      metrics: Dictionary to store execution metrics.
+      skip_stream_logging: Whether to skip chunked logging of stdout and stderr.
   """
+    if metrics is None:
+        metrics = {}
     process_message = 'Subprocess succeeded'
     if process.returncode:
         process_message = 'Subprocess failed'
+
     message = _construct_process_message(process_message, process)
     logging.info(message)
+
+    if not skip_stream_logging:
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout',
+                                  process.stdout)
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr',
+                                  process.stderr)
 
     status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:

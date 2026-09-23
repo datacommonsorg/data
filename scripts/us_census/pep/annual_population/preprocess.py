@@ -54,10 +54,13 @@ from retry import retry
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_bool(
-    'is_summary_levels', False,
-    'Options: True for all summary_levels and False for only 162')
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_bool(
+        'is_summary_levels', False,
+        'Options: True for all summary_levels and False for only 162')
+
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -129,7 +132,7 @@ def _load_data_df(path: str,
     elif file_format.lower() == "txt":
         data_df = pd.read_table(path,
                                 index_col=False,
-                                delim_whitespace=True,
+                                sep=r'\s+',
                                 engine='python',
                                 header=header,
                                 skiprows=skip_rows)
@@ -148,7 +151,7 @@ def _geo_id(val: pd.Series) -> str:
         str: State/County GeoId
     """
     res = "geoId/"
-    state, county = val[0], val[1]
+    state, county = val.iloc[0], val.iloc[1]
     if county == "000":
         return res + state
     return res + state + county
@@ -1055,7 +1058,11 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
 
     logging.info(f"No of files to be processed {total_files_to_process}")
     logging.info(f"No of files processed {processed_count}")
-    if processed_count >= total_files_to_process & total_files_to_process > 0:
+    if processed_count > 0:
+        if processed_count < total_files_to_process:
+            logging.warning(
+                f"Mismatch between files expected ({total_files_to_process}) and processed ({processed_count})"
+            )
         final_df["Year"] = final_df["Year"].astype("int")
         final_df = final_df.sort_values(by=["Location", "Year"])
         final_df = final_df.drop_duplicates(["Year", "Location"])
@@ -1065,9 +1072,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         _generate_mcf(mcf_file_path)
         _generate_tmcf(tmcf_file_path)
     else:
-        logging.fatal(
-            "The script has been terminated due to a mismatch between the number of files expected to be processed and the actual number processed"
-        )
+        logging.fatal("No files were successfully processed.")
 
 
 def add_future_year_urls():
@@ -1182,4 +1187,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

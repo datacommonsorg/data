@@ -1907,6 +1907,121 @@ measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
 gender: schema:Male
 
+Node: dcid:LifeExpectancy_Person_85Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 85]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_85Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 85]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_85Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 85]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_86Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 86]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_86Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 86]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_86Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 86]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_87Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 87]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_87Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 87]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_87Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 87]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_88Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 88]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_88Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 88]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_88Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 88]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_89Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 89]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_89Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 89]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_89Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 89]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
 Node: dcid:LifeExpectancy_Person_8Years
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -1926,6 +2041,144 @@ Node: dcid:LifeExpectancy_Person_8Years_Male
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 age: [Years 8]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_90Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 90]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_90Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 90]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_90Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 90]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_91Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 91]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_91Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 91]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_91Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 91]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_92Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 92]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_92Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 92]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_92Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 92]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_93Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 93]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_93Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 93]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_93Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 93]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_94Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 94]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_94Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 94]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_94Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 94]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male
+
+Node: dcid:LifeExpectancy_Person_95OrMoreYears
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 95 -]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_95OrMoreYears_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 95 -]
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_95OrMoreYears_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 95 -]
 measuredProperty: dcs:lifeExpectancy
 statType: dcs:measuredValue
 gender: schema:Male
