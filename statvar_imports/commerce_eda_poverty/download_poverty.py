@@ -29,7 +29,6 @@ import os
 import shutil
 import tempfile
 import time
-from urllib import parse
 from absl import app, flags, logging
 import openpyxl
 import requests
@@ -40,7 +39,8 @@ EDA_PPC_XLSX_URL = (
     "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
 )
 EDA_PPC_MIRROR_URL = (
-    "https://web.archive.org/web/20250308204521if_/https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
+    "https://web.archive.org/web/20250308204521if_/"
+    "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
 )
 
 DEFAULT_OUTPUT_DIR = os.path.join(MODULE_DIR, "input_files")
@@ -285,7 +285,12 @@ def download_poverty_dataset(
 
     # Fallback to existing input files if available
     if not content:
-        for fallback in [output_xlsx_path, output_csv_path, os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv")]:
+        fallback_candidates = [
+            output_xlsx_path,
+            output_csv_path,
+            os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv"),
+        ]
+        for fallback in fallback_candidates:
             if os.path.exists(fallback) and os.path.getsize(fallback) > 0:
                 logging.info("Falling back to existing local file: %s", fallback)
                 if fallback.lower().endswith((".xlsx", ".xls")):
@@ -309,6 +314,7 @@ def download_poverty_dataset(
 
 
 def main(argv):
+    """Main entrypoint for downloading the poverty dataset."""
     del argv  # Unused
     download_poverty_dataset(
         source_url=FLAGS.source_url,

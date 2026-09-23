@@ -22,8 +22,6 @@ poverty percentage rates across 1990, 2000, 2020, and 2021, and generates the
 normalized cleaned CSV for stat_var_processor.py.
 """
 
-import csv
-import io
 import os
 import re
 import tempfile
@@ -43,7 +41,8 @@ flags.DEFINE_string(
     "source_path",
     None,
     "Path to source file (.csv or .xlsx). If not specified, automatically "
-    "resolves from input_files/Poverty.csv, input_files/EDA_FY23_PPCs.xlsx, or output/Poverty_original.csv.",
+    "resolves from input_files/Poverty.csv, input_files/EDA_FY23_PPCs.xlsx, "
+    "or output/Poverty_original.csv.",
 )
 flags.DEFINE_string("cleaned_csv_path", CLEANED_CSV, "Path to save cleaned output CSV.")
 flags.DEFINE_integer("min_county_count", 3000, "Minimum number of valid counties expected.")
@@ -73,7 +72,10 @@ COLUMN_RENAME_MAP = {
 
 
 def clean_geoid(val):
-    """Standardizes GEOIDs to 5 digits and validates against US state FIPS (rejecting state summary XX000)."""
+    """Standardizes GEOIDs to 5 digits and validates against US state FIPS.
+
+    Rejects state summary entries of the form XX000.
+    """
     if pd.isna(val):
         return None
     s = str(val).strip()
@@ -170,8 +172,6 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
     # Strip column headers to avoid fragile whitespace issues
     df.columns = df.columns.str.strip()
 
-    # Verify expected columns exist
-    missing_cols = [col for col in COLUMN_RENAME_MAP if col not in df.columns and col.rstrip("*") not in df.columns]
     # Check if at least GEOID and the poverty columns are found
     if "GEOID" not in df.columns:
         logging.error("Missing required column 'GEOID' in source dataset")
@@ -190,7 +190,9 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
     data_source_cols = [c for c in df.columns if "Data Source" in c]
     df = df.rename(columns=rename_dict)
 
-    required_cols = ["GEOID", "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_recent"]
+    required_cols = [
+        "GEOID", "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_recent"
+    ]
     missing = [c for c in required_cols if c not in df.columns]
     if missing:
         logging.error("Missing required columns in source dataset: %s", missing)
@@ -219,11 +221,14 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
                             expected_yr,
                         )
                         raise ValueError(
-                            f"Unexpected survey year {yr} in {ds_col} for GEOID {row['GEOID']} (expected {expected_yr})"
+                            f"Unexpected survey year {yr} in {ds_col} for "
+                            f"GEOID {row['GEOID']} (expected {expected_yr})"
                         )
 
     # Coerce and validate poverty values within [0.0, 100.0]
-    raw_poverty_cols = ["poverty_rate_1990", "poverty_rate_2000", "poverty_rate_recent"]
+    raw_poverty_cols = [
+        "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_recent"
+    ]
     for col in raw_poverty_cols:
         df[col] = pd.to_numeric(df[col].astype(str).str.strip(), errors="coerce")
         invalid_mask = df[col].notna() & ((df[col] < 0.0) | (df[col] > 100.0))
@@ -242,7 +247,10 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
     df["poverty_rate_2021"] = df["poverty_rate_recent"].where(~is_territory, None)
 
     # Keep rows that have at least one valid poverty rate observation
-    poverty_cols = ["poverty_rate_1990", "poverty_rate_2000", "poverty_rate_2020", "poverty_rate_2021"]
+    poverty_cols = [
+        "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_2020",
+        "poverty_rate_2021"
+    ]
     df = df.dropna(subset=poverty_cols, how="all")
 
     # Keep target columns only
@@ -257,7 +265,8 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
             len(df),
         )
         raise ValueError(
-            f"Sanity check failed: Expected at least {min_county_count} counties, but found {len(df)}."
+            f"Sanity check failed: Expected at least {min_county_count} "
+            f"counties, but found {len(df)}."
         )
 
     # Atomic write to destination file
@@ -276,6 +285,7 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
 
 
 def main(argv):
+    """Main entrypoint for preprocessing the poverty dataset."""
     del argv  # Unused
     source_path = resolve_source_file_path(FLAGS.source_path)
     preprocess_poverty(
