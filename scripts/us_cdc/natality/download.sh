@@ -25,11 +25,14 @@ mkdir -p "$INPUT_DIR/county"
 GCS_BASE="gs://unresolved_mcf/cdc/wonder/natality"
 
 echo "Attempting to download latest preprocessed CDC Natality artifacts from GCS..."
-if command -v gcloud &> /dev/null; then
-    gcloud storage cp "$GCS_BASE/country/*/*.csv" "$INPUT_DIR/country/" || true
-    gcloud storage cp "$GCS_BASE/states/*/*.csv" "$INPUT_DIR/states/" || true
-    gcloud storage cp "$GCS_BASE/county/*/*.csv" "$INPUT_DIR/county/" || true
+if ! command -v gcloud &> /dev/null; then
+    echo "ERROR: gcloud CLI is required to download CDC Natality artifacts but was not found in PATH." >&2
+    exit 1
 fi
+
+gcloud storage cp "$GCS_BASE/country/*/*.csv" "$INPUT_DIR/country/"
+gcloud storage cp "$GCS_BASE/states/*/*.csv" "$INPUT_DIR/states/"
+gcloud storage cp "$GCS_BASE/county/*/*.csv" "$INPUT_DIR/county/"
 
 # Flatten and rename files to prevent directory collisions during executor GCS upload
 for f in "$INPUT_DIR"/country/*.csv; do
@@ -45,19 +48,15 @@ done
 # Remove temporary subdirectories so input_files only contains regular files
 rm -rf "$INPUT_DIR/country" "$INPUT_DIR/states" "$INPUT_DIR/county"
 
-# If raw zip exists and is an actual archive, extract it
-if [ -f "$SCRIPT_DIR/source_data/county.zip" ]; then
-    if file "$SCRIPT_DIR/source_data/county.zip" | grep -q "Zip archive"; then
-        echo "Extracting raw county source data..."
-        unzip -q -o "$SCRIPT_DIR/source_data/county.zip" -d "$INPUT_DIR/" || true
-    fi
-fi
+# Verify that files for all three geographic levels were obtained
+COUNTRY_COUNT=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "country_*.csv" | wc -l)
+STATE_COUNT=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "state_*.csv" | wc -l)
+COUNTY_COUNT=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "county_*.csv" | wc -l)
 
-# Verify that at least some input data files were obtained
-FILE_COUNT=$(find "$INPUT_DIR" -maxdepth 1 -type f \( -name "*.csv" -o -name "*.txt" \) | wc -l)
-if [ "$FILE_COUNT" -eq 0 ]; then
-    echo "ERROR: Download step failed to obtain any data files in $INPUT_DIR" >&2
+if [ "$COUNTRY_COUNT" -eq 0 ] || [ "$STATE_COUNT" -eq 0 ] || [ "$COUNTY_COUNT" -eq 0 ]; then
+    echo "ERROR: Download step failed to obtain required files across all levels (Country: $COUNTRY_COUNT, State: $STATE_COUNT, County: $COUNTY_COUNT)" >&2
     exit 1
 fi
 
-echo "Download completed successfully with $FILE_COUNT input data files."
+TOTAL_COUNT=$((COUNTRY_COUNT + STATE_COUNT + COUNTY_COUNT))
+echo "Download completed successfully with $TOTAL_COUNT input data files (Country: $COUNTRY_COUNT, State: $STATE_COUNT, County: $COUNTY_COUNT)."

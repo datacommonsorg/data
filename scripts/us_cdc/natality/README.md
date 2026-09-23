@@ -28,7 +28,6 @@ Data is categorized into four year brackets according to CDC reporting revisions
 ```
 scripts/us_cdc/natality/
 ├── manifest.json              # Import automation specification (Cloud Batch/Scheduler)
-├── validation_config.json     # Import validation framework configuration
 ├── download.sh                # Automated data download script from GCS repository
 ├── process.py                 # End-to-end data consolidation and processing pipeline
 ├── process_test.py            # Unit test for process.py pipeline
