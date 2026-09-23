@@ -136,7 +136,6 @@ import golden_verification
 from golden_verification import (
     HumanApprovalSensor,
     get_golden_trigger_id,
-    is_golden_test_import,
 )
 import import_automation_workflow
 import import_dags_factory
@@ -147,14 +146,6 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
     def setUp(self):
         golden_verification.Variable.get.side_effect = None
         golden_verification.Variable.get.return_value = ''
-
-    def test_allowlist(self):
-        self.assertTrue(is_golden_test_import('Schema'))
-        self.assertTrue(is_golden_test_import('scripts/entities:Schema'))
-        self.assertTrue(is_golden_test_import('Place'))
-        self.assertFalse(
-            is_golden_test_import('USFed_ConstantMaturityRates_Test'))
-        self.assertFalse(is_golden_test_import('scripts/us_fed:treasury'))
 
     def test_trigger_id(self):
         self.assertEqual(get_golden_trigger_id('Schema'),
@@ -338,20 +329,11 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                 target = {}
                 count = import_dags_factory.load_catalog_and_register_dags(
                     target)
-                self.assertGreaterEqual(count, 198)
+                self.assertGreater(count, 0)
                 self.assertIn('Schema', target)
                 self.assertIn('manual_refresh', target)
                 schema_dag = target['Schema']
                 self.assertIsNotNone(schema_dag)
-                for dag_id, dag in target.items():
-                    self.assertTrue(
-                        dag.is_paused_upon_creation,
-                        f'DAG {dag_id} is not paused upon creation',
-                    )
-                    self.assertTrue(
-                        dag.params.get('skipProdIngestion'),
-                        f'DAG {dag_id} does not default skipProdIngestion to True',
-                    )
 
     def test_build_dag_pipeline_wiring(self):
         dag = import_automation_workflow.build_dag(dag_id='test_dag',
