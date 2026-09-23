@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 SCRIPT_PATH=$(realpath "$(dirname "$0")")
 COUNTERS_PATH="$SCRIPT_PATH/counters"
