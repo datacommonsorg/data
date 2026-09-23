@@ -45,7 +45,7 @@ main:
               "WorldBankDatasets": true
           - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}
           - isProdDenylisted: ${default(map.get(prodDenylist, importName), false) or default(map.get(prodDenylist, shortImportName), false)}
-          - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), true)) == "true"}
+          - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), false)) == "true"}
           - defaultResult:
               status: "SKIPPED"
           - startTime: ${sys.now()}

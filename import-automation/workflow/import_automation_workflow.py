@@ -627,7 +627,7 @@ def resolve_workflow_context(context: dict[str, Any],
         "spannerWorkflowName": spanner_workflow,
         "skipImportJob": to_bool("skipImportJob"),
         "skipStagingIngestion": to_bool("skipStagingIngestion"),
-        "skipProdIngestion": is_prod_denylisted(import_name) or to_bool("skipProdIngestion", True),
+        "skipProdIngestion": is_prod_denylisted(import_name) or to_bool("skipProdIngestion"),
         "dryRunIngestion": to_bool("dryRunIngestion"),
         "forceIngestion": to_bool("forceIngestion"),
         "resources": {**DEFAULT_RESOURCES, **(get_val("resources") if isinstance(get_val("resources"), dict) else {})},
@@ -804,7 +804,7 @@ base_dag_params = {
               type="boolean",
               description="Skip staging ingestion"),
     "skipProdIngestion":
-        Param(default=True, type="boolean", description="Skip prod ingestion"),
+        Param(default=False, type="boolean", description="Skip prod ingestion"),
     "dryRunIngestion":
         Param(default=False, type="boolean", description="Dry run ingestion"),
     "forceIngestion":
@@ -878,6 +878,10 @@ def build_dag(
     params = {
         **base_dag_params,
         **(golden_dag_params if has_golden_check else {}),
+        "skipProdIngestion":
+            Param(default=is_prod_denylisted(import_name or dag_id),
+                  type="boolean",
+                  description="Skip prod ingestion"),
         **({
             "importName":
                 Param(import_name,
