@@ -1,5 +1,5 @@
-key,prop,value,p1,v1,p2,v2,p3,v3,,
-Year,observationDate,{Number},,,,,,,,
+key,prop,value,p1,v1,p2,v2,p3,v3
+Year,observationDate,{Number},,,,,,
 Value,value,{Number},populationType,Investment,measuredProperty,amount,unit,USDollar
 AL,observationAbout,geoId/01
 AK,observationAbout,geoId/02

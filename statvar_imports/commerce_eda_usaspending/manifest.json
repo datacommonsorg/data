@@ -16,9 +16,6 @@
                     "template_mcf": "output/investment_output.tmcf",
                     "cleaned_csv": "output/investment_output.csv",
                     "node_mcf": "output/*.mcf"
-                },
-                {
-                    "node_mcf": "investment_schema.mcf"
                 }
             ],
             "source_files": [

@@ -15,6 +15,7 @@
 import datetime
 import json
 import os
+import shutil
 import time
 import pandas as pd
 import requests
@@ -282,6 +283,19 @@ def process_data(awards, start_year, end_year, output_path):
             f"[SUCCESS] Processed data saved successfully to {output_path}")
 
 
+
+def copy_schema_to_output(output_dir=None):
+    """Copies investment_schema.mcf to output directory for GenMCF."""
+    if output_dir is None:
+        output_dir = os.path.join(_MODULE_DIR, "output")
+    os.makedirs(output_dir, exist_ok=True)
+    schema_src = os.path.join(_MODULE_DIR, "investment_schema.mcf")
+    schema_dst = os.path.join(output_dir, "investment_schema.mcf")
+    if os.path.exists(schema_src):
+        shutil.copyfile(schema_src, schema_dst)
+        logging.info(f"[SUCCESS] Copied schema MCF to {schema_dst}")
+
+
 def main(argv):
     del argv
     start_year = 2012
@@ -290,6 +304,7 @@ def main(argv):
                                    "raw_usaspending_eda_awards.json")
     output_path = os.path.join(_MODULE_DIR, "input_files",
                                "investment_cleaned.csv")
+    output_dir = os.path.join(_MODULE_DIR, "output")
 
     awards = fetch_usaspending_data(start_year,
                                     end_year,
@@ -297,6 +312,7 @@ def main(argv):
     logging.info(f"Total awards retrieved: {len(awards)}")
 
     process_data(awards, start_year, end_year, output_path)
+    copy_schema_to_output(output_dir)
 
 
 if __name__ == "__main__":

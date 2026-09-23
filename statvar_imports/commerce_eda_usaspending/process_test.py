@@ -24,7 +24,11 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
 sys.path.insert(0, PROJECT_ROOT)
 
-from statvar_imports.commerce_eda_usaspending.process import fetch_usaspending_data, process_data
+from statvar_imports.commerce_eda_usaspending.process import (
+    copy_schema_to_output,
+    fetch_usaspending_data,
+    process_data,
+)
 
 
 class TestProcessUSASpending(unittest.TestCase):
@@ -573,6 +577,14 @@ class TestProcessUSASpending(unittest.TestCase):
             self.assertIn("Exceeded maximum page threshold (2) for FY 2013",
                           str(ctx.exception))
 
+    def test_copy_schema_to_output(self):
+        output_dir = os.path.join(self.temp_dir.name, "output")
+        copy_schema_to_output(output_dir=output_dir)
+        copied_schema = os.path.join(output_dir, "investment_schema.mcf")
+        self.assertTrue(os.path.exists(copied_schema))
+        with open(copied_schema, "r", encoding="utf-8") as f:
+            content = f.read()
+        self.assertIn("Node: dcid:DistressedAreaRecompetePilotProgram", content)
 
 
 if __name__ == "__main__":
