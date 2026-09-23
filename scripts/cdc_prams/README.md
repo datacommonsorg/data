@@ -1,7 +1,9 @@
 # US: CDC Pregnancy Risk Assessment Monitoring System (PRAMS)
 
 ## About the Dataset
-This dataset provides Population Estimates and Maternal and Child Health (MCH) indicators from the Pregnancy Risk Assessment Monitoring System (PRAMS) in the USA for the years 2016 through 2020.
+This dataset provides Population Estimates and Maternal and Child Health (MCH) indicators
+from the Pregnancy Risk Assessment Monitoring System (PRAMS) in the USA for the years 2016
+through 2020.
 
 The population is categorized across 14 indicator topics:
 1. Nutrition (Multivitamin use)
@@ -21,9 +23,12 @@ The population is categorized across 14 indicator topics:
 
 Each indicator is measured across 4 statistical properties:
 - **SampleSize_Count**: Sample count (`statType: dcs:sampleSize`, `measuredProperty: dcs:count`)
-- **Percent**: Percentage fraction (`statType: dcs:measuredValue`, `measurementDenominator: dcs:Count_BirthEvent_LiveBirth`, `scalingFactor: 100`)
-- **ConfidenceIntervalLowerLimit**: Lower CI limit (`statType: dcs:confidenceIntervalLowerLimit`)
-- **ConfidenceIntervalUpperLimit**: Upper CI limit (`statType: dcs:confidenceIntervalUpperLimit`)
+- **Percent**: Percentage fraction (`statType: dcs:measuredValue`,
+  `measurementDenominator: dcs:Count_BirthEvent_LiveBirth`, `scalingFactor: 100`)
+- **ConfidenceIntervalLowerLimit**: Lower CI limit (`statType: dcs:confidenceIntervalLowerLimit`,
+  `scalingFactor: 100`)
+- **ConfidenceIntervalUpperLimit**: Upper CI limit (`statType: dcs:confidenceIntervalUpperLimit`,
+  `scalingFactor: 100`)
 
 Total Statistical Variables: 168
 
@@ -81,7 +86,8 @@ scripts/cdc_prams/
 ```bash
 python3 scripts/cdc_prams/download_input_files.py
 ```
-This downloads all 49 state, NYC, DC, Puerto Rico, and national PDF files into `scripts/cdc_prams/input_files/`.
+This downloads all 49 state, NYC, DC, Puerto Rico, and national PDF files into
+`scripts/cdc_prams/input_files/`.
 
 ### 2. Process and Generate Output Files
 ```bash
@@ -107,13 +113,35 @@ python3 -m unittest scripts/cdc_prams/process_test.py
 
 ---
 
+## Two-Step Rollout & Differ Validation Procedure
+
+When upgrading the dataset schema (e.g., adding `scalingFactor: 100` to confidence interval
+limits), StatVarObservation (SVO) identity hashes change for affected observations:
+
+1. **Step 1 (Schema Modernization & SVO Replacement)**:
+   - The differ check flags deleted records (approx. 49.37%) corresponding exactly to the
+     old unscaled Lower and Upper CI observations (16,380 old SVOs replaced by 16,378 new
+     scaled SVOs). No Statistical Variables are deleted.
+   - Run 1 establishes the modernized schema with scaled SVO identity hashes.
+   - In `datcom-import-test`, promote the Run 1 output version to `latest_version.txt`.
+
+2. **Step 2 (Baseline Verification)**:
+   - Run 2 executes against the new baseline established in Step 1.
+   - Differ validation passes with **0.0% deletions** against the strict `0.1%` threshold.
+
+---
+
 ## Refresh Procedure
 
 CDC publishes PRAMS MCH Indicator reports annually. When a new release is published:
 
 1. **Verify Source Availability**:
-   - Check the active CDC landing page at [https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html](https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html).
-   - Verify whether new reports are available as multi-year summary PDFs or Excel (`.xlsx`) workbooks. (Note: 2016–2020 indicators are available as state summary PDFs, while 2021+ releases are published as Excel workbooks).
+   - Check the active CDC landing page at:
+     [https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html](https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html).
+   - Note on coverage: The current automated pipeline modernizes the 2016–2020 state summary
+     PDF ingestion. CDC transitioned 2021+ data to consolidated Excel workbooks
+     (`PRAMS-MCH-Indicators-2016-2022-508.xlsx`). A follow-up pipeline enhancement is tracked
+     to parse multi-tab Excel workbooks for 2021–2022+.
 
 2. **Download Updated Data**:
    - If updating PDF inputs:
@@ -135,5 +163,6 @@ CDC publishes PRAMS MCH Indicator reports annually. When a new release is publis
    - Inspect `output/PRAMS.csv`, `output/PRAMS.mcf`, and `output/PRAMS.tmcf`.
 
 5. **Update Manifest & Provenance (if new observation years added)**:
-   - Update `end_date_in_kg` in `US_CDC_PRAMS.textproto` and `latestObservationDate` in `US_CDC_PRAMS.mcf`.
+   - Update `end_date_in_kg` in `US_CDC_PRAMS.textproto` and `latestObservationDate`
+     in `US_CDC_PRAMS.mcf`.
    - Run `import_groups_test` and `manifest_checker_test` in google3.

@@ -248,7 +248,9 @@ def _splitting_ci_columns(df, geo):
     if geo == "State":
         split_col = ['2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI']
         ci_pattern = re.compile(
-            r'^\s*(?:(?P<percent>-?\d+(?:\.\d+)?))?\s*(?:\(\s*(?:(?P<lower>-?\d+(?:\.\d+)?)\s*[-\u2013\u2014]\s*(?P<upper>-?\d+(?:\.\d+)?)|[^\)]*)\s*\))?\s*$'
+            r'^\s*(?:(?P<percent>-?\d+(?:\.\d+)?))?\s*'
+            r'(?:\(\s*(?:(?P<lower>-?\d+(?:\.\d+)?)\s*[-\u2013\u2014]\s*'
+            r'(?P<upper>-?\d+(?:\.\d+)?)|[^\)]*)\s*\))?\s*$'
         )
         for i in split_col:
             df[i] = df[i].fillna('').astype(str).replace({
@@ -410,7 +412,8 @@ def prams(input_url: list, years: list = None) -> pd.DataFrame:
             expected_cols = 12
             if len(df.columns) != expected_cols:
                 raise ValueError(
-                    f"Expected {expected_cols} columns for {geo} file {file_name}, got {len(df.columns)}: {list(df.columns)}"
+                    f"Expected {expected_cols} columns for {geo} file "
+                    f"{file_name}, got {len(df.columns)}: {list(df.columns)}"
                 )
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_CI',
@@ -421,7 +424,8 @@ def prams(input_url: list, years: list = None) -> pd.DataFrame:
             expected_cols = 15
             if len(df.columns) != expected_cols:
                 raise ValueError(
-                    f"Expected {expected_cols} columns for {geo} file {file_name}, got {len(df.columns)}: {list(df.columns)}"
+                    f"Expected {expected_cols} columns for {geo} file "
+                    f"{file_name}, got {len(df.columns)}: {list(df.columns)}"
                 )
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_Nan', '2017_CI',
@@ -722,8 +726,10 @@ class USPrams:
         df["SV"] = df["SV"].map(updated_sv)
         if df["SV"].isna().any():
             unmapped = df[df["SV"].isna()]["SV"].unique().tolist()
-            logging.fatal("Unmapped Statistical Variables detected: %s",
+            logging.error("Unmapped Statistical Variables detected: %s",
                           unmapped)
+            raise ValueError(
+                f"Unmapped Statistical Variables detected: {unmapped}")
         self._generate_tmcf()
         df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])

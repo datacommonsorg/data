@@ -3,11 +3,31 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "description": "Checks that deleted records do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_all_statvars_freshness",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "description": "Verify every active StatVar meets the expected freshness boundary (>= 2020).",
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2020' AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "description": "Ensure all StatVars share a uniform MaxDate across the dataset."
         },
         {
             "rule_id": "check_empty_import",

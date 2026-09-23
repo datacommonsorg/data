@@ -12,7 +12,8 @@
                 "process.py"
             ],
             "source_files": [
-                "input_files/*.pdf"
+                "input_files/*.pdf",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
@@ -21,6 +22,11 @@
                 }
             ],
             "cron_schedule": "0 0 1 6 *",
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 4,
+                "disk": 30
+            },
             "validation_config_file": "validation_config.json"
         }
     ]

@@ -72,7 +72,8 @@ def download_file(input_url: list,
             req.raise_for_status()
             if len(req.content) < 1000:
                 raise ValueError(
-                    f"Downloaded content too small ({len(req.content)} bytes) for {download_file_url}"
+                    f"Downloaded content too small ({len(req.content)} bytes) "
+                    f"for {download_file_url}"
                 )
             if not req.content.startswith(b'%PDF-'):
                 raise ValueError(
@@ -85,17 +86,10 @@ def download_file(input_url: list,
             os.replace(tmp_file, out_file)
             logging.info("Successfully downloaded: %s (%d bytes)", file_name,
                          len(req.content))
-        except (requests.exceptions.RequestException, ValueError) as exc:
-            if os.path.exists(tmp_file):
-                os.remove(tmp_file)
-            logging.fatal("Failed downloading %s: %s",
-                          download_file_url,
-                          exc,
-                          exc_info=True)
         except Exception as exc:
             if os.path.exists(tmp_file):
                 os.remove(tmp_file)
-            logging.fatal("Failed downloading %s: %s",
-                          download_file_url,
-                          exc,
-                          exc_info=True)
+            logging.error("Failed downloading %s: %s", download_file_url, exc)
+            raise RuntimeError(
+                f"Failed downloading {download_file_url}: {exc}") from exc
+
