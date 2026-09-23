@@ -16,10 +16,10 @@ import logging
 import os
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request
-from clients.spanner import SpannerClient
+from clients.bigquery import BigQueryClient
 from clients.storage import StorageClient
 import config
-from dependencies import get_spanner_client, get_storage_client
+from dependencies import get_bigquery_client, get_storage_client
 from routes.models import (
     BaseResponse,
     ImportState,
@@ -36,9 +36,9 @@ router = APIRouter(prefix="/imports", tags=["imports"])
 
 @router.post("/status", response_model=BaseResponse)
 def update_import_status(req: UpdateImportStatusRequest,
-                         spanner: SpannerClient = Depends(get_spanner_client),
+                         bigquery: BigQueryClient = Depends(get_bigquery_client),
                          storage: StorageClient = Depends(get_storage_client)):
-    """Updates status and metadata of import jobs in ImportSummary and ImportHistory."""
+    """Updates status and metadata of import jobs in BigQuery (ImportHistory & ImportSummary view)."""
     for item in req.imports:
         logging.info(
             f"Updating import {item.importName} to status {item.status}")
@@ -66,9 +66,7 @@ def update_import_status(req: UpdateImportStatusRequest,
             params['next_refresh'] = next_refresh
 
         wf_id = req.workflowId or req.jobId
-        status_val = item.status.value if hasattr(item.status, 'value') else item.status
-        version_path = params.get('latest_version') or item.latestVersion or ""
-
+        comment = None
         if item.status == ImportState.STAGING:
             version = os.path.basename(item.latestVersion or '')
             if not version:
@@ -84,35 +82,19 @@ def update_import_status(req: UpdateImportStatusRequest,
                                         version,
                                         is_staging=False)
             comment = f"import-workflow:{wf_id or ''}"
-            spanner.update_import_history(item.importName,
-                                          version_path,
-                                          comment,
-                                          workflow_id=wf_id,
-                                          job_id=req.jobId,
-                                          status=status_val,
-                                          execution_time=req.executionTime,
-                                          data_volume=req.dataVolume)
         elif item.status == ImportState.FAILURE:
             comment = f"import-failure:{wf_id or ''}"
-            spanner.update_import_history(item.importName,
-                                          version_path,
-                                          comment,
-                                          workflow_id=wf_id,
-                                          job_id=req.jobId,
-                                          status=status_val,
-                                          execution_time=req.executionTime,
-                                          data_volume=req.dataVolume)
 
-        spanner.update_import_summary(params)
+        bigquery.update_import_summary(params, comment=comment)
     return BaseResponse(status=ResponseStatus.OK)
 
 
 @router.post("/version", response_model=UpdateImportVersionResponse)
 def update_import_version(req: UpdateImportVersionRequest,
                           request: Request,
-                          spanner: SpannerClient = Depends(get_spanner_client),
+                          bigquery: BigQueryClient = Depends(get_bigquery_client),
                           storage: StorageClient = Depends(get_storage_client)):
-    """Updates version and status of multiple imports in ImportSummary and ImportHistory."""
+    """Updates version and status of multiple imports in BigQuery (ImportHistory & ImportSummary view)."""
     updated_imports = []
     import_items = []
     caller = import_utils.get_caller_identity(request) if req.override else None
@@ -143,23 +125,14 @@ def update_import_version(req: UpdateImportVersionRequest,
 
         return_status = params.get('status') or 'FAILURE'
 
-        wf_id = req.workflowId or req.jobId
-        version_path = params.get('latest_version') or version
-
         if params['status'] == 'STAGING':
             storage.update_provenance_file(import_name, version)
             storage.update_version_file(import_name, version, is_staging=False)
-            spanner.update_import_history(import_name,
-                                          version_path,
-                                          comment,
-                                          workflow_id=wf_id,
-                                          job_id=req.jobId,
-                                          status="STAGING")
             logging.info(f"Updated import {import_name} to version {version}")
         else:
             logging.info(f"Skipping {import_name} version update")
 
-        spanner.update_import_summary(params)
+        bigquery.update_import_summary(params, comment=comment)
 
         import_items.append(
             ImportVersionItem(

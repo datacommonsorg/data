@@ -19,6 +19,11 @@ LOCATION = os.environ.get('LOCATION') or os.environ.get('REGION')
 PROJECT_NUMBER = os.environ.get('PROJECT_NUMBER')
 GCS_BUCKET_ID = os.environ.get('GCS_BUCKET_ID')
 
+BQ_PROJECT_ID = os.environ.get('BQ_PROJECT_ID') or PROJECT_ID
+BQ_DATASET_ID = os.environ.get('BQ_DATASET_ID', 'import_automation')
+BQ_IMPORT_HISTORY_TABLE = os.environ.get('BQ_IMPORT_HISTORY_TABLE', 'ImportHistory')
+BQ_IMPORT_SUMMARY_VIEW = os.environ.get('BQ_IMPORT_SUMMARY_VIEW', 'ImportSummary')
+
 SPANNER_DATABASE_PATH = os.environ.get('SPANNER_DATABASE_PATH')
 if SPANNER_DATABASE_PATH and len(SPANNER_DATABASE_PATH.split('/')) >= 6:
     _parts = SPANNER_DATABASE_PATH.split('/')

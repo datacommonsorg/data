@@ -72,9 +72,9 @@ variable "spanner_database_path" {
 }
 
 variable "bq_dataset_id" {
-  description = "BigQuery Dataset ID for aggregation"
+  description = "BigQuery Dataset ID for import automation and aggregation"
   type        = string
-  default     = "datacommons"
+  default     = "import_automation"
 }
 
 variable "bq_connection_id" {

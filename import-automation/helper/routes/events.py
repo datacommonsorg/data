@@ -16,10 +16,10 @@ from datetime import datetime, timezone
 import logging
 import croniter
 from fastapi import APIRouter, Depends, HTTPException, Request
-from clients.spanner import SpannerClient
+from clients.bigquery import BigQueryClient
 from clients.storage import StorageClient
 import config
-from dependencies import get_spanner_client, get_storage_client
+from dependencies import get_bigquery_client, get_storage_client
 from routes.imports import update_import_status
 from routes.models import (
     BaseResponse,
@@ -36,7 +36,7 @@ router = APIRouter(prefix="/imports", tags=["events"])
 @router.post("/feed", response_model=BaseResponse)
 async def handle_feed_event(
     request: Request,
-    spanner: SpannerClient = Depends(get_spanner_client),
+    bigquery: BigQueryClient = Depends(get_bigquery_client),
     storage: StorageClient = Depends(get_storage_client),
 ):
     """Processes Pub/Sub push notification for CDA transfer completion."""
@@ -108,7 +108,7 @@ async def handle_feed_event(
             jobId=feed_name,
             nextRefresh=next_refresh
         )
-        update_import_status(status_req, spanner=spanner, storage=storage)
+        update_import_status(status_req, bigquery=bigquery, storage=storage)
 
         # Invoke Import Automation workflow to trigger staging and prod ingestion
         if config.PROJECT_ID and config.LOCATION:

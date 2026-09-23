@@ -14,8 +14,8 @@
 
 import logging
 from fastapi import APIRouter, Depends, HTTPException
-from clients.spanner import SpannerClient
-from dependencies import get_spanner_client
+from clients.bigquery import BigQueryClient
+from dependencies import get_bigquery_client
 from routes.models import BaseResponse, ResponseStatus
 from utils.logging import log_start
 
@@ -24,13 +24,13 @@ router = APIRouter(prefix="/database", tags=["database"])
 
 @router.post("/initialize", response_model=BaseResponse)
 @log_start
-def initialize_database(spanner: SpannerClient = Depends(get_spanner_client)):
-    """Initializes the database by creating ImportSummary and ImportHistory tables."""
+def initialize_database(bigquery: BigQueryClient = Depends(get_bigquery_client)):
+    """Initializes BigQuery by creating the ImportHistory table and ImportSummary view."""
     try:
-        spanner.initialize_database()
+        bigquery.initialize_database()
         return BaseResponse(status=ResponseStatus.OK)
     except Exception as e:
-        logging.error(f"Failed to initialize database in import-helper: {e}")
+        logging.error(f"Failed to initialize BigQuery database in import-helper: {e}")
         raise HTTPException(
             status_code=500,
             detail=f"Database initialization failed: {str(e)}"
