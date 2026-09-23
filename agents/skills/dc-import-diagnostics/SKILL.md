@@ -107,7 +107,7 @@ of a diagnostic step does not waive them.
 - Report missing permission or evidence. Base diagnoses on cited evidence,
   state unknowns, and do not investigate loader or serving-system behavior.
 
-## Important: Python execution
+## Important Python execution
 
 - Use a user-provided Python environment when supplied. Otherwise, use the
   repository-local Python virtual environment at `.env/`. For additional
