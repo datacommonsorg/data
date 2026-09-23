@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | **Import Type** | Automated |
-| **Cron schedule** | `0 06 * * 5` (weekly on Friday at 06:00 UTC) |
+| **Cron schedule** | `0 6 * * 5` (weekly on Friday at 06:00 UTC) |
 | **Date coverage notes** | Waves 1994–2023 |
 | **Test runner instructions** | `./run_tests.sh -p statvar_imports/ntia_internet_use_survey/commerce_ntia` |
 | **Source URL** | `https://www.ntia.gov/sites/default/files/data_central_downloads/datasets/ntia-analyze-table.csv` |
