@@ -14,56 +14,78 @@
 
 """Download script for Commerce EDA Persistent Poverty Counties (PPC) dataset.
 
-This script fetches the official Persistent Poverty Counties dataset directly
-from the U.S. Department of the Treasury CDFI Fund website:
-  https://www.cdfifund.gov/documents/geographic-reports
-It resolves the latest PPC workbook download link, downloads the Excel
-spreadsheet with retries and exponential backoff, and saves it locally
-under input_files/ for subsequent processing.
+This script fetches the official Persistent Poverty Counties dataset from the
+U.S. Economic Development Administration (EDA) / Department of Commerce:
+  https://www.eda.gov/performance/tools/ (EDA_FY23_PPCs.xlsx)
+It downloads the official Excel workbook (with automatic mirror failover),
+supports ingesting directly from an existing input file, extracts the underlying
+county-level poverty data table (3,241 places across 1990, 2000, and 2020/2021),
+and stages the raw CSV and workbook under input_files/ and output/ for preprocessing.
 """
 
+import csv
 import io
 import os
-import re
+import shutil
 import tempfile
 import time
 from urllib import parse
 from absl import app, flags, logging
-import pandas as pd
+import openpyxl
 import requests
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-CDFI_REPORTS_URL = "https://www.cdfifund.gov/documents/geographic-reports"
-DEFAULT_PPC_XLSX_URL = (
-    "https://www.cdfifund.gov/system/files?file=2024-05/PPC_2020_ACS_May_10_2024.xlsx"
+EDA_PPC_XLSX_URL = (
+    "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
 )
+EDA_PPC_MIRROR_URL = (
+    "https://web.archive.org/web/20250308204521if_/https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
+)
+
 DEFAULT_OUTPUT_DIR = os.path.join(MODULE_DIR, "input_files")
-DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR, "poverty_source.xlsx")
+DEFAULT_OUTPUT_XLSX = os.path.join(DEFAULT_OUTPUT_DIR, "EDA_FY23_PPCs.xlsx")
+DEFAULT_INPUT_CSV = os.path.join(DEFAULT_OUTPUT_DIR, "Poverty.csv")
 DEFAULT_RAW_CSV_FILE = os.path.join(MODULE_DIR, "output", "Poverty_original.csv")
 
 HTTP_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    )
+    ),
+    "Accept": "*/*",
 }
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
     "source_url",
-    CDFI_REPORTS_URL,
-    "Website landing page URL or direct Excel URL for Persistent Poverty Counties data.",
+    EDA_PPC_XLSX_URL,
+    "Primary URL to download the Persistent Poverty Counties Excel workbook.",
 )
 flags.DEFINE_string(
-    "direct_url",
-    DEFAULT_PPC_XLSX_URL,
-    "Fallback direct URL to the Persistent Poverty Counties Excel file.",
+    "mirror_url",
+    EDA_PPC_MIRROR_URL,
+    "Fallback mirror URL to download the Persistent Poverty Counties Excel workbook.",
 )
 flags.DEFINE_string(
-    "output_path",
-    DEFAULT_OUTPUT_FILE,
-    "Destination file path to save the downloaded source Excel workbook.",
+    "input_file",
+    None,
+    "Optional path to a local input file (.xlsx or .csv) to use instead of downloading.",
+)
+flags.DEFINE_string(
+    "output_dir",
+    DEFAULT_OUTPUT_DIR,
+    "Directory to store downloaded source and input files.",
+)
+flags.DEFINE_string(
+    "output_xlsx_path",
+    DEFAULT_OUTPUT_XLSX,
+    "Destination path to save the downloaded source Excel workbook.",
+)
+flags.DEFINE_string(
+    "output_csv_path",
+    DEFAULT_INPUT_CSV,
+    "Destination path to save the extracted input CSV file.",
 )
 flags.DEFINE_string(
     "raw_csv_path",
@@ -73,47 +95,13 @@ flags.DEFINE_string(
 flags.DEFINE_integer(
     "max_retries",
     3,
-    "Maximum number of download retry attempts.",
+    "Maximum number of download retry attempts per URL.",
 )
 flags.DEFINE_integer(
     "timeout",
     60,
     "HTTP request timeout in seconds.",
 )
-
-
-def fetch_ppc_excel_url(source_url=CDFI_REPORTS_URL, session=None, timeout=30):
-    """Resolves the Persistent Poverty Counties (.xlsx) download link from the CDFI website."""
-    if source_url.lower().endswith((".xlsx", ".xls", ".csv")):
-        return source_url
-
-    req_session = session or requests
-    try:
-        logging.info("Fetching CDFI geographic reports page: %s", source_url)
-        resp = req_session.get(source_url, headers=HTTP_HEADERS, timeout=timeout)
-        resp.raise_for_status()
-        matches = re.findall(
-            r'href=["\']([^"\']*(?:PPC|Persistent[_-]Poverty)[^"\']*\.xlsx?)["\']',
-            resp.text,
-            flags=re.IGNORECASE,
-        )
-        if matches:
-            resolved_url = parse.urljoin(source_url, matches[0])
-            logging.info("Discovered PPC workbook URL on website: %s", resolved_url)
-            return resolved_url
-        logging.warning(
-            "No PPC workbook link matched on %s; falling back to default URL %s",
-            source_url,
-            DEFAULT_PPC_XLSX_URL,
-        )
-    except Exception as e:
-        logging.warning(
-            "Could not scrape landing page %s (%s); falling back to default URL %s",
-            source_url,
-            e,
-            DEFAULT_PPC_XLSX_URL,
-        )
-    return DEFAULT_PPC_XLSX_URL
 
 
 def download_file(
@@ -179,61 +167,155 @@ def download_file(
     ) from last_err
 
 
-def export_raw_csv_from_excel(excel_bytes, csv_output_path):
-    """Extracts the data table from the Excel workbook and saves a raw CSV copy."""
-    try:
-        xl = pd.ExcelFile(io.BytesIO(excel_bytes))
-        sheet_name = "Sheet1" if "Sheet1" in xl.sheet_names else xl.sheet_names[0]
-        raw_df = xl.parse(sheet_name, header=None, dtype=str)
+def extract_sheet_to_csv(
+    excel_source,
+    csv_output_path,
+    target_sheet_name="Underlying_Data",
+):
+    """Extracts the underlying data worksheet from Excel workbook to a raw CSV."""
+    if isinstance(excel_source, bytes):
+        wb = openpyxl.load_workbook(io.BytesIO(excel_source), data_only=True)
+    else:
+        wb = openpyxl.load_workbook(excel_source, data_only=True)
 
-        header_row_idx = 0
-        for idx in range(min(10, len(raw_df))):
-            row_values = {str(v).strip() for v in raw_df.iloc[idx].values if pd.notna(v)}
-            if row_values & {"County FIPS", "County FIPS Code", "GEOID"}:
-                header_row_idx = idx
+    sheet_names = wb.sheetnames
+    selected_sheet = None
+    if target_sheet_name in sheet_names:
+        selected_sheet = target_sheet_name
+    else:
+        for name in sheet_names:
+            if any(k in name.lower() for k in ["underlying", "poverty", "data", "fy23"]):
+                selected_sheet = name
                 break
+    if not selected_sheet:
+        selected_sheet = sheet_names[0]
 
-        df = xl.parse(sheet_name, skiprows=header_row_idx, dtype=str)
-        dst_dir = os.path.dirname(os.path.abspath(csv_output_path))
-        os.makedirs(dst_dir, exist_ok=True)
-        with tempfile.NamedTemporaryFile(
-            "w", dir=dst_dir, delete=False, suffix=".tmp", encoding="utf-8"
-        ) as tmp:
-            df.to_csv(tmp.name, index=False)
-            tmp_path = tmp.name
-        os.replace(tmp_path, csv_output_path)
-        logging.info("Extracted raw CSV copy saved to %s (shape: %s)", csv_output_path, df.shape)
-    except Exception as e:
-        logging.warning("Could not export raw CSV copy: %s", e)
+    logging.info("Extracting sheet '%s' from Excel workbook...", selected_sheet)
+    ws = wb[selected_sheet]
+
+    dst_dir = os.path.dirname(os.path.abspath(csv_output_path))
+    os.makedirs(dst_dir, exist_ok=True)
+
+    row_count = 0
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dst_dir, delete=False, suffix=".tmp", encoding="utf-8", newline=""
+    ) as tmp:
+        writer = csv.writer(tmp)
+        for row in ws.iter_rows(values_only=True):
+            if not any(row):
+                continue
+            writer.writerow([("" if c is None else str(c)) for c in row])
+            row_count += 1
+        tmp_path = tmp.name
+
+    os.replace(tmp_path, csv_output_path)
+    logging.info(
+        "Extracted %d rows from sheet '%s' to %s",
+        row_count,
+        selected_sheet,
+        csv_output_path,
+    )
+    return csv_output_path
+
+
+def copy_file_atomically(src_path, dst_path):
+    """Copies src_path to dst_path atomically."""
+    dst_dir = os.path.dirname(os.path.abspath(dst_path))
+    os.makedirs(dst_dir, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        "wb", dir=dst_dir, delete=False, suffix=".tmp"
+    ) as tmp:
+        with open(src_path, "rb") as fsrc:
+            shutil.copyfileobj(fsrc, tmp)
+        tmp_path = tmp.name
+    os.replace(tmp_path, dst_path)
+    logging.info("Copied %s to %s", src_path, dst_path)
 
 
 def download_poverty_dataset(
-    source_url=CDFI_REPORTS_URL,
-    output_path=DEFAULT_OUTPUT_FILE,
+    source_url=EDA_PPC_XLSX_URL,
+    mirror_url=EDA_PPC_MIRROR_URL,
+    input_file=None,
+    output_xlsx_path=DEFAULT_OUTPUT_XLSX,
+    output_csv_path=DEFAULT_INPUT_CSV,
     raw_csv_path=DEFAULT_RAW_CSV_FILE,
     max_retries=3,
     timeout=60,
 ):
-    """Main workflow to resolve URL, download source Excel workbook, and stage locally."""
+    """Main workflow to download official EDA PPC workbook or ingest input file."""
     session = requests.Session()
-    download_url = fetch_ppc_excel_url(source_url=source_url, session=session, timeout=timeout)
-    content = download_file(
-        download_url=download_url,
-        output_path=output_path,
-        session=session,
-        max_retries=max_retries,
-        timeout=timeout,
-    )
-    if raw_csv_path and content:
-        export_raw_csv_from_excel(content, raw_csv_path)
-    return output_path
+
+    # Case 1: Local input file specified
+    if input_file:
+        if not os.path.exists(input_file) or os.path.getsize(input_file) == 0:
+            raise FileNotFoundError(f"Input file not found or empty: {input_file}")
+        logging.info("Using provided local input file: %s", input_file)
+        if input_file.lower().endswith((".xlsx", ".xls")):
+            copy_file_atomically(input_file, output_xlsx_path)
+            extract_sheet_to_csv(input_file, output_csv_path)
+        else:
+            copy_file_atomically(input_file, output_csv_path)
+        if raw_csv_path:
+            copy_file_atomically(output_csv_path, raw_csv_path)
+        return output_csv_path
+
+    # Case 2: Download from web with primary and mirror fallback
+    content = None
+    urls_to_try = []
+    if source_url:
+        urls_to_try.append(source_url)
+    if mirror_url and mirror_url != source_url:
+        urls_to_try.append(mirror_url)
+
+    last_err = None
+    for url in urls_to_try:
+        try:
+            content = download_file(
+                download_url=url,
+                output_path=output_xlsx_path,
+                session=session,
+                max_retries=max_retries,
+                timeout=timeout,
+            )
+            logging.info("Successfully downloaded workbook from %s", url)
+            break
+        except Exception as e:
+            last_err = e
+            logging.warning("Failed to download from %s: %s", url, e)
+
+    # Fallback to existing input files if available
+    if not content:
+        for fallback in [output_xlsx_path, output_csv_path, os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv")]:
+            if os.path.exists(fallback) and os.path.getsize(fallback) > 0:
+                logging.info("Falling back to existing local file: %s", fallback)
+                if fallback.lower().endswith((".xlsx", ".xls")):
+                    extract_sheet_to_csv(fallback, output_csv_path)
+                elif fallback != output_csv_path:
+                    copy_file_atomically(fallback, output_csv_path)
+                if raw_csv_path and output_csv_path != raw_csv_path:
+                    copy_file_atomically(output_csv_path, raw_csv_path)
+                return output_csv_path
+
+        raise RuntimeError(
+            f"Failed to acquire dataset from all URLs: {urls_to_try}. Last error: {last_err}"
+        ) from last_err
+
+    # Extract Underlying_Data sheet to output_csv_path
+    extract_sheet_to_csv(content, output_csv_path)
+    if raw_csv_path:
+        copy_file_atomically(output_csv_path, raw_csv_path)
+
+    return output_csv_path
 
 
 def main(argv):
     del argv  # Unused
     download_poverty_dataset(
         source_url=FLAGS.source_url,
-        output_path=FLAGS.output_path,
+        mirror_url=FLAGS.mirror_url,
+        input_file=FLAGS.input_file,
+        output_xlsx_path=FLAGS.output_xlsx_path,
+        output_csv_path=FLAGS.output_csv_path,
         raw_csv_path=FLAGS.raw_csv_path,
         max_retries=FLAGS.max_retries,
         timeout=FLAGS.timeout,

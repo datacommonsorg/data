@@ -3,4 +3,4 @@ GEOID,observationAbout,geoId/{Data},,,,,,,,
 poverty_rate_1990,observationDate,1990,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
 poverty_rate_2000,observationDate,2000,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
 poverty_rate_2020,observationDate,2020,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
-
+poverty_rate_2021,observationDate,2021,unit,Percent,scalingFactor,100,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person

@@ -5,32 +5,34 @@ Date: *September 2026*
 
 | Parameter | Details |
 | :--- | :--- |
-| Import Type | **Automated Import** (raw dataset downloaded directly from source website and processed locally) |
-| Link to dataset preview or raw data | [Treasury CDFI Geographic Reports](https://www.cdfifund.gov/documents/geographic-reports) |
-| Direct Workbook URL | [`PPC_2020_ACS_May_10_2024.xlsx`](https://www.cdfifund.gov/system/files?file=2024-05/PPC_2020_ACS_May_10_2024.xlsx) |
+| Import Type | **Automated Import** (raw dataset downloaded directly from source website or local input file, and processed locally) |
+| Link to dataset preview or raw data | [EDA Persistent Poverty Counties](https://www.eda.gov/performance/resources/persistent-poverty-counties) |
+| Direct Workbook URL | [`EDA_FY23_PPCs.xlsx`](https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx) |
+| Archive Mirror URL | [`EDA_FY23_PPCs.xlsx` (Wayback Machine)](https://web.archive.org/web/20250308204521if_/https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx) |
 | Place types covered | U.S. Counties, County Equivalents, and Island Territories (`County` / `AdministrativeArea1`) |
 | Place ID resolution | `country/USA` FIPS (`geoId/XXXXX` for counties, `geoId/XX` for island territories) |
-| Date range covered | 1990, 2000, 2020 (1990 Decennial Census, 2000 Decennial Census, 2016–2020 ACS 5-Year / Island Area Decennial Census) |
+| Date range covered | 1990, 2000, 2020, 2021 (1990 Decennial Census, 2000 Decennial Census, 2020 Island Area Decennial Census, 2017–2021 ACS 5-Year) |
 | Statistical Variables | `Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person` |
 | Unit / Scaling | `Percent` / `100` |
-| Refresh Cycle | Weekly automated check (`30 05 * * 1`) aligned with CDFI/Census releases |
+| Refresh Cycle | Weekly automated check (`30 05 * * 1`) aligned with EDA/Census releases |
 
 ---
 
 ## Overview
 
-This automated dataset import fetches and processes historical and recent county-level poverty percentage rates published by the U.S. Department of the Treasury Community Development Financial Institutions (CDFI) Fund (`https://www.cdfifund.gov/documents/geographic-reports`) for Persistent Poverty Counties (PPCs).
+This automated dataset import fetches and processes historical and recent county-level poverty percentage rates published by the U.S. Economic Development Administration (EDA) (`https://www.eda.gov/performance/resources/persistent-poverty-counties`) for Persistent Poverty Counties (PPCs) and all benchmarked U.S. counties.
 
-The download script (`download_poverty.py` / `download.py`) dynamically discovers and downloads the latest Persistent Poverty Counties Excel workbook directly from the Treasury CDFI Fund website into `input_files/poverty_source.xlsx` (with an extracted raw CSV copy at `output/Poverty_original.csv`).
+The download script (`download_poverty.py` / `download.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 county rows) into `input_files/Poverty.csv` and `output/Poverty_original.csv`.
 
 The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes FIPS codes and poverty percentages into `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
 
-The dataset benchmarks poverty rates across three statutory periods:
+The dataset benchmarks poverty rates across statutory periods:
 - **1990**: 1990 Decennial Census (`poverty_rate_1990`)
 - **2000**: 2000 Decennial Census (`poverty_rate_2000`)
-- **2020**: 2016–2020 ACS 5-Year / Island Areas Decennial Census (`poverty_rate_2020`)
+- **2020**: 2020 Island Areas Decennial Census (`poverty_rate_2020` for territories `60`, `66`, `69`, `78`)
+- **2021**: 2017–2021 ACS 5-Year Estimates (`poverty_rate_2021` for all 50 states, DC, and Puerto Rico)
 
-It covers all 410 designated Persistent Poverty Counties and U.S. Island Territories (`407` 5-digit county/municipio FIPS codes across U.S. states and Puerto Rico, plus `3` 2-digit island territory FIPS codes: `60` American Samoa, `69` Northern Mariana Islands, and `78` U.S. Virgin Islands).
+It covers 3,232 U.S. counties, county equivalents, and island territories.
 
 ---
 
@@ -66,15 +68,20 @@ pip install pandas openpyxl requests absl-py duckdb
 ```
 
 ### 1. Download Source Dataset (`download_poverty.py`)
-Run from `statvar_imports/commerce_eda_poverty/`. Dynamically discovers and downloads the latest Persistent Poverty Counties `.xlsx` workbook from `https://www.cdfifund.gov/documents/geographic-reports` and saves it to `input_files/poverty_source.xlsx` (also exporting `output/Poverty_original.csv`):
+Run from `statvar_imports/commerce_eda_poverty/`. Downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (or archive mirror / local input file) and extracts the `Underlying_Data` sheet to `input_files/Poverty.csv` (also staging `output/Poverty_original.csv`):
 ```bash
 cd statvar_imports/commerce_eda_poverty
 python3 download_poverty.py
 ```
 *(An alias `python3 download.py` is also provided).*
 
+To ingest a local copy directly without downloading:
+```bash
+python3 download_poverty.py --input_file=input_files/EDA_FY23_PPCs.xlsx
+```
+
 ### 2. Preprocess Dataset (`process_poverty.py`)
-Run from `statvar_imports/commerce_eda_poverty/`. Ingests the downloaded source file locally, standardizes 5-digit county and 2-digit island territory FIPS codes, enforces percentage value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
+Run from `statvar_imports/commerce_eda_poverty/`. Ingests the downloaded source file locally, standardizes 5-digit county and 2-digit island territory FIPS codes, partitions the recent rates into 2020 (island territories) and 2021 (states, DC, PR), enforces percentage value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
 ```bash
 python3 process_poverty.py
 ```
@@ -109,7 +116,7 @@ python3 -m tools.import_validation.runner \
 
 ## Testing
 
-Run unit tests verifying website link discovery, Excel workbook download, local file processing, GEOID standardization, and value sanitation from the repository root `data/`:
+Run unit tests verifying website link discovery, workbook download and mirror failover, local file ingestion, GEOID standardization, and value sanitation from the repository root `data/`:
 ```bash
 python3 -m unittest discover -s statvar_imports/commerce_eda_poverty -p "*test*.py"
 ```

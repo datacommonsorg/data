@@ -5,8 +5,8 @@
       "curator_emails": [
         "support@datacommons.org"
       ],
-      "provenance_url": "https://www.cdfifund.gov/documents/geographic-reports",
-      "provenance_description": "Treasury CDFI Fund - Persistent Poverty Counties.",
+      "provenance_url": "https://www.eda.gov/performance/tools/",
+      "provenance_description": "U.S. Economic Development Administration (EDA) - Persistent Poverty Counties.",
       "cron_schedule": "30 05 * * 1",
       "scripts": [
         "download_poverty.py",
