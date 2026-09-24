@@ -275,13 +275,28 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
     # Atomic write to destination file
     dst_dir = os.path.dirname(os.path.abspath(dst_path))
     os.makedirs(dst_dir, exist_ok=True)
-    with tempfile.NamedTemporaryFile(
-        "w", dir=dst_dir, delete=False, suffix=".tmp", encoding="utf-8"
-    ) as tmp_file:
-        df.to_csv(tmp_file.name, index=False)
-        temp_path = tmp_file.name
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            "w",
+            dir=dst_dir,
+            delete=False,
+            suffix=".tmp",
+            encoding="utf-8",
+            newline="",
+        ) as tmp_file:
+            temp_path = tmp_file.name
+            df.to_csv(tmp_file, index=False)
 
-    os.replace(temp_path, dst_path)
+        os.replace(temp_path, dst_path)
+        temp_path = None
+    finally:
+        if temp_path and os.path.exists(temp_path):
+            try:
+                os.unlink(temp_path)
+            except OSError:
+                pass
+
     logging.info("Poverty dataset cleaned and saved successfully to %s!", dst_path)
     logging.info("Shape: %s", df.shape)
     return dst_path

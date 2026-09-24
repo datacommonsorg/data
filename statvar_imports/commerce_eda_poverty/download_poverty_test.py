@@ -14,9 +14,9 @@
 
 """Unit tests for Commerce EDA Persistent Poverty Counties download script."""
 
-import csv
 import io
 import os
+import sys
 import tempfile
 import unittest
 from unittest import mock
@@ -25,11 +25,15 @@ from urllib import parse
 import openpyxl
 import pandas as pd
 import requests
+from requests.adapters import HTTPAdapter
+
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
+sys.path.insert(0, PROJECT_ROOT)
 
 from statvar_imports.commerce_eda_poverty.download_poverty import (
     EDA_PPC_MIRROR_URL,
     EDA_PPC_XLSX_URL,
-    copy_file_atomically,
     download_file,
     download_poverty_dataset,
     extract_sheet_to_csv,
@@ -93,13 +97,15 @@ class TestDownloadPoverty(unittest.TestCase):
             mock_session = mock.MagicMock()
             mock_session.get.return_value = mock_resp
 
-            download_file(
+            content = download_file(
                 "https://example.gov/EDA_FY23_PPCs.xlsx",
                 out_file,
                 session=mock_session,
                 max_retries=1,
             )
 
+            self.assertEqual(content, test_content)
+            self.assertEqual(mock_session.get.call_count, 1)
             self.assertTrue(os.path.exists(out_file))
             with open(out_file, "rb") as f:
                 self.assertEqual(f.read(), test_content)
@@ -107,44 +113,65 @@ class TestDownloadPoverty(unittest.TestCase):
     def test_download_file_retry_and_succeed(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "retry.xlsx")
-            test_content = b"PK\x03\x04retry_content"
+            test_content = b"ExcelData"
 
-            mock_success = mock.MagicMock()
-            mock_success.content = test_content
-            mock_success.status_code = 200
-
-            mock_session = mock.MagicMock()
-            mock_session.get.side_effect = [
-                requests.ConnectionError("Temporary network glitch"),
-                mock_success,
-            ]
-
-            download_file(
-                "https://example.gov/EDA_FY23_PPCs.xlsx",
-                out_file,
-                session=mock_session,
-                max_retries=3,
-                backoff_factor=0.01,
+            resp_503 = mock.MagicMock(
+                status=503, reason="Service Unavailable", msg=None, headers={}
             )
+            resp_503.getheaders.return_value = []
+            resp_503.get_redirect_location.return_value = None
+            resp_503.isclosed.return_value = True
 
+            resp_200 = mock.MagicMock(status=200, reason="OK", msg=None, headers={})
+            resp_200.getheaders.return_value = []
+            resp_200.get_redirect_location.return_value = None
+            resp_200.isclosed.return_value = True
+            resp_200.data = test_content
+            resp_200.read.return_value = test_content
+            resp_200.stream.return_value = [test_content]
+
+            with mock.patch(
+                "urllib3.connectionpool.HTTPConnectionPool._make_request",
+                side_effect=[resp_503, resp_200],
+            ) as mock_make_request:
+                content = download_file(
+                    "https://example.gov/EDA_FY23_PPCs.xlsx",
+                    out_file,
+                    max_retries=3,
+                    backoff_factor=0.01,
+                )
+
+            self.assertEqual(mock_make_request.call_count, 2)
+            self.assertEqual(content, test_content)
             self.assertTrue(os.path.exists(out_file))
-            self.assertEqual(mock_session.get.call_count, 2)
+            with open(out_file, "rb") as f:
+                self.assertEqual(f.read(), test_content)
 
     def test_download_file_fails_after_retries(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "fail.xlsx")
 
-            mock_session = mock.MagicMock()
-            mock_session.get.side_effect = requests.ConnectionError("Persistent error")
+            resp_503 = mock.MagicMock(
+                status=503, reason="Service Unavailable", msg=None, headers={}
+            )
+            resp_503.getheaders.return_value = []
+            resp_503.get_redirect_location.return_value = None
+            resp_503.isclosed.return_value = True
 
-            with self.assertRaises(RuntimeError):
-                download_file(
-                    "https://example.gov/EDA_FY23_PPCs.xlsx",
-                    out_file,
-                    session=mock_session,
-                    max_retries=2,
-                    backoff_factor=0.01,
-                )
+            with mock.patch(
+                "urllib3.connectionpool.HTTPConnectionPool._make_request",
+                side_effect=[resp_503, resp_503, resp_503],
+            ) as mock_make_request:
+                with self.assertRaises(RuntimeError):
+                    download_file(
+                        "https://example.gov/EDA_FY23_PPCs.xlsx",
+                        out_file,
+                        max_retries=2,
+                        backoff_factor=0.01,
+                    )
+
+            self.assertEqual(mock_make_request.call_count, 3)
+            self.assertFalse(os.path.exists(out_file))
 
     def test_download_file_empty_body_raises(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -164,6 +191,81 @@ class TestDownloadPoverty(unittest.TestCase):
                     session=mock_session,
                     max_retries=1,
                 )
+
+            self.assertFalse(os.path.exists(out_file))
+
+    def test_download_file_mounts_adapter_on_session(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "mount.xlsx")
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock(status_code=200, content=b"data")
+            mock_session.get.return_value = mock_resp
+
+            download_file(
+                "https://example.gov/mount.xlsx",
+                out_file,
+                session=mock_session,
+                max_retries=2,
+            )
+
+            self.assertEqual(mock_session.mount.call_count, 2)
+            mounted = {
+                call[0][0]: call[0][1]
+                for call in mock_session.mount.call_args_list
+            }
+            self.assertIn("https://", mounted)
+            self.assertIn("http://", mounted)
+            self.assertIsInstance(mounted["https://"], HTTPAdapter)
+            self.assertIsInstance(mounted["http://"], HTTPAdapter)
+            self.assertEqual(mounted["https://"].max_retries.total, 2)
+            self.assertEqual(mounted["http://"].max_retries.total, 2)
+
+    def test_download_file_fast_fails_on_404(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "404.xlsx")
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock(status_code=404)
+            mock_session.get.return_value = mock_resp
+
+            with self.assertRaises(RuntimeError) as ctx:
+                download_file(
+                    "https://example.gov/404.xlsx",
+                    out_file,
+                    session=mock_session,
+                    max_retries=3,
+                )
+
+            self.assertIn("404", str(ctx.exception))
+            self.assertEqual(mock_session.get.call_count, 1)
+            self.assertFalse(os.path.exists(out_file))
+
+    def test_download_file_session_without_mount_supported(self):
+        class DuckSession:
+
+            def __init__(self):
+                self.call_count = 0
+
+            def get(self, url, headers=None, timeout=None):
+                self.call_count += 1
+                resp = mock.MagicMock()
+                resp.status_code = 200
+                resp.content = b"duck_data"
+                return resp
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "duck.xlsx")
+            duck_session = DuckSession()
+            content = download_file(
+                "https://example.gov/duck.xlsx",
+                out_file,
+                session=duck_session,
+            )
+
+            self.assertEqual(content, b"duck_data")
+            self.assertEqual(duck_session.call_count, 1)
+            self.assertTrue(os.path.exists(out_file))
+            with open(out_file, "rb") as f:
+                self.assertEqual(f.read(), b"duck_data")
 
     def test_extract_sheet_to_csv_from_bytes(self):
         with tempfile.TemporaryDirectory() as tmpdir:

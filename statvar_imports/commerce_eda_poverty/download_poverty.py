@@ -28,7 +28,6 @@ import io
 import os
 import shutil
 import tempfile
-import time
 
 from absl import app, flags, logging
 import openpyxl
@@ -116,91 +115,68 @@ def download_file(
     os.makedirs(dst_dir, exist_ok=True)
 
     close_session = False
+    temp_path = None
     if session is None:
         session = requests.Session()
         close_session = True
 
-    retries = Retry(
-        total=max_retries,
-        backoff_factor=backoff_factor,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["GET"],
-    )
-    adapter = HTTPAdapter(max_retries=retries)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-
-    last_err = None
     try:
-        for attempt in range(1, max_retries + 1):
-            try:
-                logging.info(
-                    "Downloading %s (attempt %d/%d)...", download_url, attempt, max_retries
-                )
-                response = session.get(download_url, headers=HTTP_HEADERS, timeout=timeout)
-                if response.status_code == 404:
-                    raise requests.HTTPError(
-                        f"404 Client Error: Not Found for url: {download_url}",
-                        response=response,
-                    )
-                response.raise_for_status()
-                content = response.content
-                if not content:
-                    raise RuntimeError(f"Empty response body received from {download_url}")
+        adapter = HTTPAdapter(
+            max_retries=Retry(
+                total=max_retries,
+                backoff_factor=backoff_factor,
+                status_forcelist=[429, 500, 502, 503, 504],
+                allowed_methods=["GET"],
+                raise_on_status=True,
+            )
+        )
+        if hasattr(session, "mount") and callable(session.mount):
+            session.mount("https://", adapter)
+            session.mount("http://", adapter)
 
-                with tempfile.NamedTemporaryFile(
-                    "wb", dir=dst_dir, delete=False, suffix=".tmp"
-                ) as tmp_file:
-                    tmp_file.write(content)
-                    temp_path = tmp_file.name
+        try:
+            response = session.get(download_url, headers=HTTP_HEADERS, timeout=timeout)
+            if response.status_code == 404:
+                logging.warning(
+                    "HTTP 404 received for %s; failing fast without retry.",
+                    download_url,
+                )
+                raise requests.HTTPError(
+                    f"404 Client Error: Not Found for url: {download_url}",
+                    response=response,
+                )
+            response.raise_for_status()
+            content = response.content
+            if not content:
+                raise RuntimeError(
+                    f"Empty response body received from {download_url}"
+                )
+        except requests.RequestException as e:
+            logging.error("Failed to download %s: %s", download_url, e)
+            raise RuntimeError(f"Failed to download {download_url}: {e}") from e
 
-                os.replace(temp_path, output_path)
-                logging.info(
-                    "Download completed successfully. Saved %d bytes to %s",
-                    len(content),
-                    output_path,
-                )
-                return content
-            except requests.HTTPError as e:
-                last_err = e
-                if e.response is not None and e.response.status_code == 404:
-                    logging.warning(
-                        "HTTP 404 received for %s; failing fast without retry.", download_url
-                    )
-                    break
-                logging.warning(
-                    "Attempt %d/%d failed to download %s: %s",
-                    attempt,
-                    max_retries,
-                    download_url,
-                    e,
-                )
-                if attempt < max_retries:
-                    time.sleep(backoff_factor ** (attempt - 1))
-            except Exception as e:
-                last_err = e
-                logging.warning(
-                    "Attempt %d/%d failed to download %s: %s",
-                    attempt,
-                    max_retries,
-                    download_url,
-                    e,
-                )
-                if attempt < max_retries:
-                    time.sleep(backoff_factor ** (attempt - 1))
+        with tempfile.NamedTemporaryFile(
+            "wb", dir=dst_dir, delete=False, suffix=".tmp"
+        ) as tmp_file:
+            temp_path = tmp_file.name
+            tmp_file.write(content)
+
+        os.replace(temp_path, output_path)
+        temp_path = None
+        logging.info(
+            "Download completed successfully. Saved %d bytes to %s",
+            len(content),
+            output_path,
+        )
+        return content
     finally:
+        if temp_path and os.path.exists(temp_path):
+            try:
+                os.unlink(temp_path)
+            except OSError:
+                pass
         if close_session:
             session.close()
-
-    logging.error(
-        "Download failed after %d attempts for %s: %s",
-        max_retries,
-        download_url,
-        last_err,
-    )
-    raise RuntimeError(
-        f"Download failed after {max_retries} attempts for {download_url}: {last_err}"
-    ) from last_err
 
 
 def extract_sheet_to_csv(
