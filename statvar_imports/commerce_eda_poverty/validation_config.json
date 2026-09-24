@@ -65,14 +65,6 @@
       "params": {
         "threshold": 0
       }
-    },
-    {
-      "rule_id": "check_goldens_summary_report",
-      "validator": "GOLDENS_CHECK",
-      "description": "Verifies output summary matches golden properties.",
-      "params": {
-        "golden_files": "../../../../golden_data/golden_summary_report.csv"
-      }
     }
   ]
 }

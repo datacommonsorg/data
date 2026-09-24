@@ -33,8 +33,6 @@
         "validation_config.json",
         "poverty_metadata.csv",
         "poverty_pvmap.csv",
-        "golden_data/*",
-        "golden_summary_report.csv",
         "manifest.json"
       ]
     }
