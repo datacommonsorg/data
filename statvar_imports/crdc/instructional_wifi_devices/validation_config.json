@@ -3,10 +3,25 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+            "description": "Checks that the percentage of deleted records does not exceed the 0.1% threshold across survey refreshes.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks that the latest date is consistent across all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_latest_date_freshness",
+            "description": "Asserts the latest observation date reaches at least 2024 for CRDC instructional wifi devices.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year FROM stats",
+                "condition": "latest_year >= 2024"
             }
         }
     ]
