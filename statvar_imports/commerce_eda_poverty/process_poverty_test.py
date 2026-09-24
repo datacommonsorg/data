@@ -14,7 +14,6 @@
 
 """Unit tests for process_poverty.py."""
 
-import io
 import os
 import sys
 import tempfile
