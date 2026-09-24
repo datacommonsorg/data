@@ -19,6 +19,7 @@ import os
 import sys
 import tempfile
 import unittest
+
 import openpyxl
 import pandas as pd
 
@@ -39,7 +40,10 @@ def _create_mock_excel_file(filepath, rows, description_row=True):
     ws = wb.active
     ws.title = "Underlying_Data"
     if description_row:
-        ws.append(["Table. FY2023 Persistent Poverty County Status - as of Data Year 2021", "", "", "", "", ""])
+        ws.append([
+            "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
+            "", "", "", "", ""
+        ])
         ws.append(["Identifing Information", "", "Census Bureau Data", "", "", ""])
     ws.append([
         "Name",
@@ -125,7 +129,9 @@ class TestProcessPoverty(unittest.TestCase):
             with open(header_only, "w") as f:
                 f.write(
                     "Header 1\nHeader 2\n"
-                    'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty*"\n'
+                    "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
+                    "\"2000 Decennial Census, % in Poverty\","
+                    "\"Most Recent Estimate, % in Poverty*\"\n"
                 )
             dst_path = os.path.join(tmpdir, "output.csv")
             with self.assertRaises(ValueError):
@@ -146,7 +152,10 @@ class TestProcessPoverty(unittest.TestCase):
             with open(future_csv, "w") as f:
                 f.write(
                     "Header 1\nHeader 2\n"
-                    'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty*","Data Source―Most Recent Estimate"\n'
+                    "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
+                    "\"2000 Decennial Census, % in Poverty\","
+                    "\"Most Recent Estimate, % in Poverty*\","
+                    "\"Data Source―Most Recent Estimate\"\n"
                     '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2025"\n'
                 )
             dst_path = os.path.join(tmpdir, "output.csv")
@@ -173,11 +182,18 @@ class TestProcessPoverty(unittest.TestCase):
             df_expected = pd.read_csv(expected_path, dtype={"GEOID": str})
             pd.testing.assert_frame_equal(df_actual, df_expected)
 
-            # 200 lines total: 3 header lines + 191 county/territory rows + 6 footnote lines = 191 cleaned rows
+            # 200 lines total: 3 header lines + 191 county/territory rows
+            # + 6 footnote lines = 191 cleaned rows
             self.assertEqual(len(df_actual), 191)
             self.assertEqual(
                 list(df_actual.columns),
-                ["GEOID", "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_2020", "poverty_rate_2021"],
+                [
+                    "GEOID",
+                    "poverty_rate_1990",
+                    "poverty_rate_2000",
+                    "poverty_rate_2020",
+                    "poverty_rate_2021",
+                ],
             )
 
             # Verify 11 island territories (AS, GU, MP, VI) map to poverty_rate_2020
@@ -200,7 +216,9 @@ class TestProcessPoverty(unittest.TestCase):
             raw_content = (
                 "Header 1\n"
                 "Header 2\n"
-                'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty* "\n'
+                "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
+                "\"2000 Decennial Census, % in Poverty\","
+                "\"Most Recent Estimate, % in Poverty* \"\n"
                 '"Autauga County, AL",01001,15.7,10.9,13.3\n'
                 '"Alabama State Summary",01000,18.0,16.0,15.0\n'
                 '"Yukon-Koyukuk, AK",2090,7.6,7.8,9.6\n'

@@ -21,6 +21,7 @@ import tempfile
 import unittest
 from unittest import mock
 from urllib import parse
+
 import openpyxl
 import pandas as pd
 import requests
@@ -45,8 +46,14 @@ def _create_mock_eda_workbook(filepath=None):
 
     # Sheet 2: Underlying_Data
     ws_data = wb.create_sheet(title="Underlying_Data")
-    ws_data.append(["Table. FY2023 Persistent Poverty County Status - as of Data Year 2021", "", "", "", "", "", "", ""])
-    ws_data.append(["Identifing Information", "", "Census Bureau Data", "", "", "", "FY23 Persistent Poverty", "Census GEO PPC Code"])
+    ws_data.append([
+        "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
+        "", "", "", "", "", "", ""
+    ])
+    ws_data.append([
+        "Identifing Information", "", "Census Bureau Data", "", "", "",
+        "FY23 Persistent Poverty", "Census GEO PPC Code"
+    ])
     ws_data.append([
         "Name",
         "GEOID",
@@ -59,7 +66,9 @@ def _create_mock_eda_workbook(filepath=None):
     ])
     ws_data.append(["Autauga County, AL", "01001", 15.7, 10.9, 13.3, "SAIPE, 2021", "No", 1])
     ws_data.append(["Barbour County, AL", "01005", 25.2, 26.8, 29.0, "SAIPE, 2021", "Yes", 2])
-    ws_data.append(["Eastern District, AS", "60010", 56.0, 58.6, 52.2, "Decennial Census, 2020", "Yes", 2])
+    ws_data.append([
+        "Eastern District, AS", "60010", 56.0, 58.6, 52.2, "Decennial Census, 2020", "Yes", 2
+    ])
 
     if filepath:
         wb.save(filepath)
@@ -250,8 +259,8 @@ class TestDownloadPoverty(unittest.TestCase):
 
             with mock.patch("requests.Session.get", side_effect=mock_get):
                 res = download_poverty_dataset(
-                    source_url="https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx",
-                    mirror_url="https://web.archive.org/web/20250308204521if_/https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx",
+                    source_url=EDA_PPC_XLSX_URL,
+                    mirror_url=EDA_PPC_MIRROR_URL,
                     output_xlsx_path=dst_xlsx,
                     output_csv_path=dst_csv,
                     raw_csv_path=raw_csv,

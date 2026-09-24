@@ -26,12 +26,15 @@
         "download.py",
         "process_poverty.py",
         "input_files/*",
+        "output/*.mcf",
         "output/Poverty_cleaned.csv",
         "output/Poverty_original.csv",
-        "counters/Poverty_counters.csv",
+        "counters/*",
         "validation_config.json",
         "poverty_metadata.csv",
         "poverty_pvmap.csv",
+        "golden_data/*",
+        "golden_summary_report.csv",
         "manifest.json"
       ]
     }

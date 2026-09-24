@@ -67,6 +67,13 @@ Ensure Python dependencies are available:
 pip install pandas openpyxl requests absl-py duckdb
 ```
 
+For running `stat_var_processor.py` locally, authenticate Google Cloud Application Default
+Credentials to allow reading the central schema definitions from Google Cloud Storage:
+```bash
+gcloud auth application-default login
+```
+*(Required to read `--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`).*
+
 ### 1. Download Source Dataset (`download_poverty.py`)
 Run from `statvar_imports/commerce_eda_poverty/`. Downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (or archive mirror / local input file) and extracts the `Underlying_Data` sheet to `input_files/Poverty.csv` (also staging `output/Poverty_original.csv`):
 ```bash
@@ -111,6 +118,38 @@ python3 -m tools.import_validation.runner \
   --lint_report=statvar_imports/commerce_eda_poverty/dc_generated/report.json \
   --validation_output=statvar_imports/commerce_eda_poverty/dc_generated/validation_report.json
 ```
+
+---
+
+## Troubleshooting & Operational Runbook
+
+### 1. Cloudflare Bot Detection / HTTP 403 Forbidden
+- **Symptom:** `download_poverty.py` receives HTTP 403 when requesting EDA URLs.
+- **Automatic Mitigation:** The script automatically catches non-200 responses and falls back to
+  the Wayback Machine archive mirror (`EDA_PPC_MIRROR_URL`).
+- **Manual Workaround:** Download the workbook manually via a browser from the official
+  [EDA PPC page](https://www.eda.gov/performance/resources/persistent-poverty-counties) and
+  pass it via `--input_file`:
+  ```bash
+  python3 download_poverty.py --input_file=input_files/EDA_FY23_PPCs.xlsx
+  ```
+
+### 2. Survey Year Mismatch / Upstream Schema Changes
+- **Symptom:** `process_poverty.py` raises `ValueError: Unexpected survey year...`.
+- **Cause:** EDA periodically releases updated PPC workbooks baselining newer Census/SAIPE
+  estimates (e.g. transitioning from SAIPE 2021 to 2022 or 2023).
+- **Remediation:**
+  1. Inspect the new column headers and update the date mapping logic in `process_poverty.py`.
+  2. Update `poverty_metadata.csv` and `poverty_pvmap.csv` if new column names are introduced.
+  3. Update `validation_config.json` date span rules to accommodate the new maximum date.
+
+### 3. County Count Threshold Failures
+- **Symptom:** Validation fails on `NUM_PLACES_COUNT` outside `[3100, 3250]` or `process_poverty.py`
+  raises `Cleaned county count below minimum threshold`.
+- **Cause:** Upstream sheet layout changes (e.g., altered sheet name, modified header row
+  offset, or unexpected GEOID formatting).
+- **Remediation:** Check whether EDA modified the sheet structure or header rows. Re-run
+  preprocessing and inspect `output/Poverty_cleaned.csv`.
 
 ---
 

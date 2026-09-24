@@ -25,6 +25,7 @@ normalized cleaned CSV for stat_var_processor.py.
 import os
 import re
 import tempfile
+
 from absl import app, flags, logging
 import openpyxl
 import pandas as pd
@@ -93,31 +94,34 @@ def clean_geoid(val):
 def _extract_dataframe_from_excel(excel_path):
     """Extracts Underlying_Data sheet from an Excel workbook into a pandas DataFrame."""
     wb = openpyxl.load_workbook(excel_path, data_only=True)
-    target_sheet = "Underlying_Data" if "Underlying_Data" in wb.sheetnames else wb.sheetnames[0]
-    ws = wb[target_sheet]
-    rows = list(ws.iter_rows(values_only=True))
-    if not rows:
-        raise ValueError(f"Excel sheet '{target_sheet}' is empty.")
+    try:
+        target_sheet = "Underlying_Data" if "Underlying_Data" in wb.sheetnames else wb.sheetnames[0]
+        ws = wb[target_sheet]
+        rows = list(ws.iter_rows(values_only=True))
+        if not rows:
+            raise ValueError(f"Excel sheet '{target_sheet}' is empty.")
 
-    # Find row with GEOID header
-    header_idx = None
-    for idx, r in enumerate(rows[:10]):
-        row_str = [str(c).strip() for c in r if c is not None]
-        if "GEOID" in row_str or any("1990" in c for c in row_str):
-            header_idx = idx
-            break
+        # Find row with GEOID header
+        header_idx = None
+        for idx, r in enumerate(rows[:10]):
+            row_str = [str(c).strip() for c in r if c is not None]
+            if "GEOID" in row_str or any("1990" in c for c in row_str):
+                header_idx = idx
+                break
 
-    if header_idx is None:
-        header_idx = 2 if len(rows) > 2 else 0
+        if header_idx is None:
+            header_idx = 2 if len(rows) > 2 else 0
 
-    headers = [("" if c is None else str(c).strip()) for c in rows[header_idx]]
-    data_rows = []
-    for r in rows[header_idx + 1:]:
-        if not any(r):
-            continue
-        data_rows.append([("" if c is None else str(c).strip()) for c in r[:len(headers)]])
+        headers = [("" if c is None else str(c).strip()) for c in rows[header_idx]]
+        data_rows = []
+        for r in rows[header_idx + 1:]:
+            if not any(r):
+                continue
+            data_rows.append([("" if c is None else str(c).strip()) for c in r[:len(headers)]])
 
-    return pd.DataFrame(data_rows, columns=headers)
+        return pd.DataFrame(data_rows, columns=headers)
+    finally:
+        wb.close()
 
 
 def resolve_source_file_path(requested_path=None):
@@ -131,7 +135,6 @@ def resolve_source_file_path(requested_path=None):
         DEFAULT_SOURCE_CSV,
         DEFAULT_SOURCE_XLSX,
         DEFAULT_RAW_CSV,
-        os.path.join(MODULE_DIR, "test_data", "Poverty_input.csv"),
     ]
     for candidate in candidates:
         if os.path.exists(candidate) and os.path.getsize(candidate) > 0:
