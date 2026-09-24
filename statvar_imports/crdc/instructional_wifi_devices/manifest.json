@@ -14,15 +14,11 @@
                   {
                       "template_mcf": "output/instructional_wifi_devices.tmcf",
                       "cleaned_csv": "output/instructional_wifi_devices.csv",
-                      "node_mcf": [
-                          "output/*.mcf",
-                          "provisional_schools_69_rich.mcf"
-                      ]
+                      "node_mcf": "output/*.mcf"
                   }
                 ],
             "source_files": [
                 "input_files/*.csv",
-                "provisional_schools_69_rich.mcf",
                 "counters/*.csv"
             ],
             "cron_schedule": "0 0 1 */2 *", 
