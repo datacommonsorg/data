@@ -6,7 +6,7 @@
 
 - statvars: Education
 
-- years: 2021 to 2022
+- years: 2021 onwards
 
 - place_resolution: manually.
 
@@ -20,7 +20,7 @@
 
 - StatVar Script
 
-`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=common_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --config_file=common_metadata.csv  --output_path=output/instructional_wifi_devices`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=common_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --config_file=common_metadata.csv  --output_path=output/instructional_wifi_devices --output_counters=counters/instructional_wifi_devices_counters.csv`
 
 #### Refresh type: Fully Autorefresh
 

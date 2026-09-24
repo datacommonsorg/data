@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,,,,
+key,,,,,,,,
 COMBOKEY,#Format,observationAbout=nces/{Data:0>12},statType,measuredValue,,,,
 YEAR,observationDate,{Data},,,,,,
 SCH_INTERNET_FIBER,#ignore,ignore,value,{Number},,,,
@@ -9,3 +9,5 @@ SCH_INTERNET_WIFIENDEV,populationType,School,measuredProperty,count,internetSubs
 ,,,,,,,,
 JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,
 JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,
+SCH_JUST:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,
+SCH_JUST:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,
