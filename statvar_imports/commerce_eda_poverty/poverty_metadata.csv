@@ -1,0 +1,13 @@
+parameter,value
+url,https://www.eda.gov/performance/tools/
+description,Persistent Poverty County Status (sourced from U.S. Economic Development Administration)
+#place_type,County
+#places_within,country/USA
+#start_date,1990
+#end_date,2021
+release_frequency,Decadal
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor"
+header_rows,1
+output_only_new_statvars,True
