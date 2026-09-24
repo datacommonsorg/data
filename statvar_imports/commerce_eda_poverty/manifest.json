@@ -23,7 +23,6 @@
       "validation_config_file": "validation_config.json",
       "source_files": [
         "download_poverty.py",
-        "download.py",
         "process_poverty.py",
         "input_files/*",
         "output/*.mcf",

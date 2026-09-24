@@ -22,7 +22,7 @@ Date: *September 2026*
 
 This automated dataset import fetches and processes historical and recent county-level poverty percentage rates published by the U.S. Economic Development Administration (EDA) (`https://www.eda.gov/performance/resources/persistent-poverty-counties`) for Persistent Poverty Counties (PPCs) and all benchmarked U.S. counties.
 
-The download script (`download_poverty.py` / `download.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 county rows) into `input_files/Poverty.csv` and `output/Poverty_original.csv`.
+The download script (`download_poverty.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 county rows) into `input_files/Poverty.csv` and `output/Poverty_original.csv`.
 
 The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes FIPS codes and poverty percentages into `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
 
@@ -80,7 +80,6 @@ Run from `statvar_imports/commerce_eda_poverty/`. Downloads the official `EDA_FY
 cd statvar_imports/commerce_eda_poverty
 python3 download_poverty.py
 ```
-*(An alias `python3 download.py` is also provided).*
 
 To ingest a local copy directly without downloading:
 ```bash
