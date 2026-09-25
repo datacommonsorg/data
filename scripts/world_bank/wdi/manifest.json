@@ -18,7 +18,8 @@
             ],
             "source_files": [
                 "WorldBankCountries.csv",
-                "schema_csvs/WorldBankIndicators_prod.csv"
+                "schema_csvs/WorldBankIndicators_prod.csv",
+                "source_data/*"
             ],
             "cron_schedule": "0 11 * * 2"
         }
