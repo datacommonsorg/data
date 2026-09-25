@@ -24,12 +24,27 @@ from arcgis2geojson import arcgis2geojson
 _FIRE_DCID_FORMAT = "fire/irwinId/{id}"
 _PERIMETER_DCID_FORMAT = "firePerimeter/irwinId/{id}/date/{perimeter_date}"
 _DP1_TOLERANCE = 0.01
-_PERIMETER_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Perimeters_Public/FeatureServer/0/query?where=1%3D1&outFields=irwin_IrwinID,irwin_IncidentTypeCategory,poly_DateCurrent,poly_CreateDate&outSR=4326&f=json"
-
+#_PERIMETER_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Perimeters_Public/FeatureServer/0/query?where=1%3D1&outFields=irwin_IrwinID,irwin_IncidentTypeCategory,poly_DateCurrent,poly_CreateDate&outSR=4326&f=json"
+_PERIMETER_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
 _FIRE_INCIDENT_MAP = {
     'CX': 'FireIncidentComplexEvent',
     'WF': 'WildlandFireEvent',
-    'RX': 'PrescribedFireEvent'
+    'RX': 'PrescribedFireEvent',
+    'FA': 'FalseAlarmFireEvent',
+    'MG': 'ManagementFireEvent',
+    'OR': 'OutofAreaResponseFireEvent',
+    'SU': 'IncidentEventSupportEvent',
+    'VF': 'VehicleFireEvent',
+    'SF': 'StructureFireEvent',
+    'DF': 'DebrisProductFireEvent',
+    'PP': 'PreparednessPrepositionFireEvent',
+    'CT': 'ClassroomTrainingFireEvent',
+    'MV': 'MotorVehicleAccidentEvent',
+    'NS': 'NIFC_NSFireEvent'
+    #https://data-nifc.opendata.arcgis.com/datasets/nifc::wfigs-interagency-fire-perimeters/about
+    #"attr_IncidentTypeCategory":"PP"
+    #"poly_FeatureCategory":"Wildfire Daily Fire Perimeter"
+    #Above abbreviation we can get it from "https://www.nwcg.gov/sites/default/files/publications/910-event-kind-category-ncsc-evaluation-rationale.pdf"
 }
 
 pd.set_option("display.max_columns", None)
@@ -100,9 +115,16 @@ def create_fire_id(irwin_id):
 
 def extract_geojsons(df):
     df["geojson_dp1"] = df["geojson"].apply(lambda x: get_gj_dp(x))
-    df["fire_id"] = df["irwin_IrwinID"].apply(create_fire_id)
-    df["typeOf"] = df["irwin_IncidentTypeCategory"].apply(
-        lambda x: _FIRE_INCIDENT_MAP[x])
+    #df["fire_id"] = df["irwin_IrwinID"].apply(create_fire_id)
+
+    df["fire_id"] = df["poly_IRWINID"].apply(create_fire_id)
+
+    # df["typeOf"] = df["irwin_IncidentTypeCategory"].apply(
+    #     lambda x: _FIRE_INCIDENT_MAP[x])
+
+    df["typeOf"] = df[df["attr_IncidentTypeCategory"].notnull(
+    )]["attr_IncidentTypeCategory"].apply(lambda x: _FIRE_INCIDENT_MAP[x])
+
     df = df[["typeOf", "fire_id", "geojson_dp1"]]
     return df
 
@@ -110,10 +132,10 @@ def extract_geojsons(df):
 def main(_) -> None:
     df = get_data(_PERIMETER_URL)
     df = extract_geojsons(df)
-    df.to_csv("perimeter_data.csv",
-              index=False,
-              doublequote=False,
-              escapechar='\\')
+    df = df.to_csv("perimeter_data.csv",
+                   index=False,
+                   doublequote=False,
+                   escapechar='\\')
 
 
 if __name__ == "__main__":
