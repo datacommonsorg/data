@@ -68,7 +68,6 @@ replacement_point_17 = {
     'pollutant_code': 'pollutant code',
     'total_emissions': 'total emissions',
     'emissions_uom': 'emissions uom',
-    'total emissions': 'observation',
     'pollutant_type': 'pollutant type(s)'
 }
 
@@ -90,14 +89,10 @@ replacement_20 = {
     'fips state/county code': 'fips code',
     'scc': 'scc',
     'pollutant code': 'pollutant code',
-    'total emissions': 'observation',
-    'uom': 'unit'
+    'total emissions': 'total emissions',
+    'uom': 'emissions uom'
 }
 
-drop_tribes = [
-    'state', 'fips state code', 'data category', 'reporting period',
-    'emissions operating type', 'pollutant desc', 'data set'
-]
 drop_df = [
     'scc', 'pollutant code', 'emissions type code', 'pollutant type(s)',
     'fips code'
@@ -1500,7 +1495,6 @@ replace_source_metadata = {
     "1": "External Combustion",
     "2": "Internal Combustion Engines",
     "3": "Industrial Processes",
-    "4": "Chemical Evaporation",
     "4": "Petroleum And Solvent Evaporation",
     "5": "Waste Disposal",
     "6": "MACT Source Categories",

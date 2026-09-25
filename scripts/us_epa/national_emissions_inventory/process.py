@@ -16,11 +16,13 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+import gc
 import os
+import shutil
 import sys
 import time
-# import shutil
-# import tempfile
+import traceback
+import uuid
 import concurrent.futures
 from absl import app, flags, logging
 import pandas as pd
@@ -71,7 +73,7 @@ _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "value: C:national_emissions->observation\n")
 
 TRIBAL_GEOCODE_START_RANGE = 80000
-MAX_WORKERS = os.cpu_count()
+MAX_WORKERS = min(8, os.cpu_count() or 1)
 
 
 class USAirEmissionTrends:
@@ -125,41 +127,54 @@ class USAirEmissionTrends:
             df.rename(columns=replacement_08_11, inplace=True)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             elif 'process' in file_path:
                 df = df.dropna(subset=['fips code'])
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             if '2008' in file_path:
-                df.loc[:, 'year'] = '2008'
+                df['year'] = '2008'
             else:
-                df.loc[:, 'year'] = '2011'
+                df['year'] = '2011'
         elif '2017' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point' in file_path:
-                if 'unknown' in file_path or '678910' in file_path:
-                    df.rename(columns=replacement_point_17, inplace=True)
-                df.loc[:, 'emissions type code'] = ''
+            elif 'point_' in os.path.basename(
+                    file_path) or 'facility_process' in file_path:
+                df.rename(columns=replacement_point_17, inplace=True)
+                df['emissions type code'] = ''
+            elif 'nonpoint' in file_path:
+                df['emissions type code'] = ''
             df['year'] = '2017'
         elif '2020' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point' in file_path:
-                if 'unknown' in file_path:
-                    df.rename(columns=replacement_20, inplace=True)
-                df.loc[:, 'emissions type code'] = ''
+            elif 'point_' in os.path.basename(
+                    file_path) or 'facility_process' in file_path:
+                df.rename(columns=replacement_20, inplace=True)
+                df['emissions type code'] = ''
+            elif 'nonpoint' in file_path:
+                df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
-            df.rename(columns=replacement_tribes, inplace=True)
-            df = self._data_standardize(df, 'fips code')
+            if 'fips code' not in df.columns and 'tribal name' in df.columns:
+                df.rename(columns=replacement_tribes, inplace=True)
+                df = self._data_standardize(df, 'fips code')
+            else:
+                df.rename(columns=replacement_14, inplace=True)
+                if 'event' in file_path or 'process' in file_path:
+                    df['emissions type code'] = ''
+            df['pollutant type(s)'] = 'nan'
+            df['year'] = '2014'
+        elif '2014' in file_path:
+            df.rename(columns=replacement_14, inplace=True)
+            if 'event' in file_path or 'process' in file_path:
+                df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         else:
-            df.rename(columns=replacement_14, inplace=True)
-            if 'event' in file_path or 'process' in file_path:
-                df.loc[:, 'emissions type code'] = ''
-            df['pollutant type(s)'] = 'nan'
-            df['year'] = '2014'
+            raise ValueError(
+                f"Unhandled file path or unexpected survey year in: {file_path}"
+            )
 
         # Ensure all expected columns exist before subsetting
         for col in df_columns:
@@ -178,57 +193,48 @@ class USAirEmissionTrends:
         Returns:
             df (pd.DataFrame): provides the cleaned df as output
         """
-        try:
-            logging.info(f"Processing file: {file_path}")
-            df = pd.read_csv(file_path, header=0, low_memory=False)
+        logging.info(f"Processing file: {file_path}")
+        df = pd.read_csv(file_path, header=0, low_memory=False)
 
-            pd.set_option('display.max_columns', 14)
-            df = self._regularize_columns(df, file_path)
-            df['pollutant code'] = df['pollutant code'].astype(str)
-            df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
+        pd.set_option('display.max_columns', 14)
+        df = self._regularize_columns(df, file_path)
+        df['pollutant code'] = df['pollutant code'].astype(str)
 
-            # Convert geo_Id to numeric and filter based on range
-            df['geo_Id'] = pd.to_numeric(
-                df['geo_Id'], errors='coerce'
-            )  # Convert to numeric, invalid parsing will be set as NaN
-            df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
+        # Convert fips code to numeric, filter out invalid/tribal codes,
+        # and format as 5-digit string
+        df['fips_num'] = pd.to_numeric(df['fips code'], errors='coerce')
+        df = df.dropna(subset=['fips_num'])
+        df = df[(df['fips_num'] > 0) &
+                (df['fips_num'] <= TRIBAL_GEOCODE_START_RANGE)]
+        df['geo_Id'] = 'geoId/' + df['fips_num'].astype(int).astype(
+            str).str.zfill(5)
+        df = df.drop(columns=['fips_num'])
 
-            # Remove if Tribal Details are needed
-            df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
-            df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
-            df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
-            df['geo_Id'] = df['geo_Id'].astype(str)
+        # Strip trailing .0 from float-parsed SCC codes before extracting level 1
+        df['scc'] = df['scc'].astype(str).str.replace(
+            r'\.0$', '', regex=True).str.strip()
+        df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
+                             df['scc'].str[0])
+        df.rename(columns=replacement_17, inplace=True)
+        df_pollutants = df[df['pollutant code'].isin(pollutants)]
+        df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
+        df['pollutant code'] = ''
+        df = pd.concat([df, df_pollutants], ignore_index=True)
+        df = self._data_standardize(df, 'unit')
+        df['scc_name'] = df['scc'].astype(str)
+        df = df.replace({'scc_name': replace_source_metadata})
+        df['scc_name'] = df['scc_name'].str.replace(' ', '')
+        df['SV'] = ('Annual_Amount_Emissions_' +
+                    df['pollutant code'].astype(str) + '_SCC_' +
+                    df['scc'].astype(str)) + '_' + df['scc_name']
 
-            # Remove if Tribal Details are needed
-            df['scc'] = df['scc'].astype(str)
-            df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
-                                 df['scc'].str[0])
-            df['geo_Id'] = 'geoId/' + df['geo_Id']
-            df.rename(columns=replacement_17, inplace=True)
-            df_pollutants = df[df['pollutant code'].isin(pollutants)]
-            df_pollutants = self._data_standardize(df_pollutants,
-                                                   'pollutant code')
-            df['pollutant code'] = ''
-            df = pd.concat([df, df_pollutants])
-            df = self._data_standardize(df, 'unit')
-            df['scc_name'] = df['scc'].astype(str)
-            df = df.replace({'scc_name': replace_source_metadata})
-            df['scc_name'] = df['scc_name'].str.replace(' ', '')
-            df['SV'] = ('Annual_Amount_Emissions_' +
-                        df['pollutant code'].astype(str) + '_SCC_' +
-                        df['scc'].astype(str)) + '_' + df['scc_name']
-
-            df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
-            df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
-            df = df.drop(columns=drop_df)
-            df = df.drop(df[df['observation'] == '.'].index)
-            # safely turn any non-numeric values into NaN
-            df['observation'] = pd.to_numeric(df['observation'],
-                                              errors='coerce')
-            return df
-        except Exception as e:
-            logging.error(f"Error processing file {file_path}: {e}")
-            return pd.DataFrame()
+        df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
+        df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
+        df = df.drop(columns=drop_df)
+        # safely turn any non-numeric values into NaN and drop them
+        df['observation'] = pd.to_numeric(df['observation'], errors='coerce')
+        df = df.dropna(subset=['observation'])
+        return df
 
     def _process_file(self, file_path: str) -> None:
         """
@@ -236,16 +242,30 @@ class USAirEmissionTrends:
         """
         try:
             df = self._national_emissions(file_path)
-            if not df.empty:
+            if df is not None and not df.empty:
+                df = df.sort_values(
+                    by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
+                df.dropna(subset=['observation'], inplace=True)
+                df['observation'] = np.where(
+                    df['unit'] == 'Pound',
+                    df['observation'] / 2000, df['observation'])
+                df['unit'] = "Ton"
+                if 'scc_name' in df.columns:
+                    df = df.drop(columns=['scc_name'])
+                df = df.groupby(
+                    ['geo_Id', 'year', 'Measurement_Method', 'SV'],
+                    as_index=False)['observation'].sum()
+                df['unit'] = "Ton"
                 intermediate_file_path = os.path.join(
                     self.temp_dir,
-                    f"{str(datetime.now().timestamp()).replace('.', '_')}_{os.path.basename(file_path)}"
+                    f"{uuid.uuid4().hex}_{os.path.basename(file_path)}.pkl"
                 )
-                df.to_csv(intermediate_file_path, index=False)
+                df.to_pickle(intermediate_file_path)
                 logging.info(
                     f"Saved intermediate file at : {intermediate_file_path}")
         except Exception as e:
-            logging.error(f"Error processing file {file_path}: {e}")
+            logging.exception(f"Error processing file {file_path}: {e}")
+            raise
 
     def _mcf_property_generator(self) -> None:
         """
@@ -291,7 +311,7 @@ class USAirEmissionTrends:
                 emission_type=code) + "\n"
         logging.info("MCF properties generation complete.")
 
-    def _process(self):
+    def _process(self) -> None:
         """
         This Method processes the input files to generate
         the final df.
@@ -301,40 +321,80 @@ class USAirEmissionTrends:
             None
         """
         logging.info("Starting data processing across all input files.")
+        if self.temp_dir and not os.path.exists(self.temp_dir):
+            os.makedirs(self.temp_dir, exist_ok=True)
         with concurrent.futures.ThreadPoolExecutor(
                 max_workers=MAX_WORKERS) as executor:
-            executor.map(self._process_file, self._input_files)
+            list(executor.map(self._process_file, self._input_files))
 
         logging.info("Consolidating intermediate files.")
         intermediate_files = [
             os.path.join(self.temp_dir, f) for f in os.listdir(self.temp_dir)
+            if not f.startswith('.')
         ]
-        dfs = []
-        for f in intermediate_files:
-            try:
-                dfs.append(pd.read_csv(f, low_memory=False))
-                logging.info(f"Appending {f}")
-            except Exception as e:
-                logging.error(f"Error reading intermediate file {f}: {e}")
+        if not intermediate_files:
+            raise FileNotFoundError(
+                "No intermediate files found to concatenate.")
 
-        if not dfs:
-            logging.error("No dataframes to concatenate. Exiting.")
-            return
+        chunk_size = 10
+        chunk_dfs = []
+        for i in range(0, len(intermediate_files), chunk_size):
+            batch = intermediate_files[i:i + chunk_size]
+            batch_dfs = []
+            for f in batch:
+                try:
+                    if f.endswith('.pkl'):
+                        df = pd.read_pickle(f)
+                    else:
+                        df = pd.read_csv(f, low_memory=False)
+                    batch_dfs.append(df)
+                    logging.info(f"Appending {f}")
+                except Exception as e:
+                    logging.error(
+                        f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
+                    )
+                    raise
+            if batch_dfs:
+                batch_concat = pd.concat(batch_dfs, ignore_index=True)
+                del batch_dfs
+                batch_concat = batch_concat.sort_values(
+                    by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
+                batch_concat.dropna(subset=['observation'], inplace=True)
+                batch_concat['observation'] = np.where(
+                    batch_concat['unit'] == 'Pound',
+                    batch_concat['observation'] / 2000,
+                    batch_concat['observation'])
+                if 'scc_name' in batch_concat.columns:
+                    batch_concat = batch_concat.drop(columns=['scc_name'])
+                batch_concat = batch_concat.groupby(
+                    ['geo_Id', 'year', 'Measurement_Method', 'SV'],
+                    as_index=False)['observation'].sum()
+                batch_concat['unit'] = "Ton"
+                chunk_dfs.append(batch_concat)
+                del batch_concat
+                gc.collect()
 
-        self.final_df = pd.concat(dfs, ignore_index=True)
+        if not chunk_dfs:
+            raise RuntimeError(
+                "No dataframes to concatenate after processing intermediate files."
+            )
+
+        self.final_df = pd.concat(chunk_dfs, ignore_index=True)
+        del chunk_dfs
+        gc.collect()
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
-        self.final_df['observation'].replace('', np.nan, inplace=True)
         self.final_df.dropna(subset=['observation'], inplace=True)
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
             self.final_df['observation'] / 2000, self.final_df['observation'])
-        self.final_df = self.final_df.groupby(
-            ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
-        self.final_df['unit'] = "Ton"
         if 'scc_name' in self.final_df.columns:
             self.final_df = self.final_df.drop(columns=['scc_name'])
+        self.final_df = self.final_df.groupby(
+            ['geo_Id', 'year', 'Measurement_Method', 'SV'],
+            as_index=False)['observation'].sum()
+        self.final_df['unit'] = "Ton"
         logging.info("Data processing complete.")
 
     def generate_tmcf(self) -> None:
@@ -407,9 +467,10 @@ def process_files(input_path: str, output_file_path: str,
             if file.lower().endswith('.csv')
         ]
     except Exception as e:
-        logging.fatal(
-            f"Error finding input files: {e}. Run the download script first.\n")
-        sys.exit(1)
+        logging.error(
+            f"Error finding input files: {e}. Run the download script first.\n"
+            f"{traceback.format_exc()}")
+        raise
 
     # Defining Output Files
     logging.info(
@@ -418,8 +479,9 @@ def process_files(input_path: str, output_file_path: str,
     mcf_name = "national_emissions.mcf"
     tmcf_name = "national_emissions.tmcf"
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
-    if not os.path.exists(intermediate_path):
-        os.makedirs(intermediate_path, exist_ok=True)
+    if os.path.exists(intermediate_path):
+        shutil.rmtree(intermediate_path)
+    os.makedirs(intermediate_path, exist_ok=True)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
 
@@ -431,17 +493,24 @@ def process_files(input_path: str, output_file_path: str,
         loader.generate_mcf()
         loader.generate_tmcf()
     except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")
+        logging.error(
+            f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
+        raise
 
 
-def main(_):
+def main(argv):
     """
     The main function for the script.
     """
+    if len(argv) > 1:
+        raise app.UsageError("Too many command-line arguments.")
     logging.set_verbosity(1)
     logging.info("Started process script")
     start_time = time.time()
-    process_files(FLAGS.input_path, FLAGS.output_path, FLAGS.intermediate_path)
+    try:
+        process_files(FLAGS.input_path, FLAGS.output_path, FLAGS.intermediate_path)
+    except Exception as e:
+        logging.fatal(f"Process script failed: {e}", exc_info=True)
     elapsed_time = time.time() - start_time
     logging.info(f"Total execution time: {elapsed_time:.2f} seconds")
 
