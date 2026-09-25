@@ -1,0 +1,26 @@
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_Tuberculosis_EligibleForPreventiveTreatment
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Tuberculosis_ Eligible For Preventive Treatment"
+isProvisional: dcs:True
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:Disease,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:medicalStatus
+typeOf: dcs:Property
+name: "medicalStatus"
+domainIncludes: dcid:Person
+
+Node: dcid:StartedOnTBPreventiveTreatment
+typeOf: dcid:MedicalEventEnum
+name: "Started On TBPreventive Treatment"
+isProvisional: dcs:True
+
