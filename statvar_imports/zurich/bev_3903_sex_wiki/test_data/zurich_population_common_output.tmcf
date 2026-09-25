@@ -1,0 +1,9 @@
+Node: E:bev_3903_sex_wiki_output->E0
+observationAbout: C:bev_3903_sex_wiki_output->observationAbout
+observationDate: C:bev_3903_sex_wiki_output->observationDate
+value: C:bev_3903_sex_wiki_output->value
+variableMeasured: C:bev_3903_sex_wiki_output->variableMeasured
+unit: C:bev_3903_sex_wiki_output->unit
+scalingFactor: C:bev_3903_sex_wiki_output->scalingFactor
+measurementMethod: C:bev_3903_sex_wiki_output->measurementMethod
+typeOf: dcs:StatVarObservation

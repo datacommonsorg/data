@@ -1,0 +1,15 @@
+key,prop,val,p1,v1
+Zeit,observationDate,{Number},,
+pop,value,{Number},populationType,Person
+wikiID,observationAbout,wikidataId/{Data},,
+0-9,age,[0 9 Years],,
+10-19,age,[10 19 Years],,
+20-29,age,[20 29 Years],,
+30-39,age,[30 39 Years],,
+40-49,age,[40 49 Years],,
+50-59,age,[50 59 Years],,
+60-69,age,[60 69 Years],,
+70-79,age,[70 79 Years],,
+80-89,age,[80 89 Years],,
+90-99,age,[90 99 Years],,
+100 and above,age,[100 - Years],,
