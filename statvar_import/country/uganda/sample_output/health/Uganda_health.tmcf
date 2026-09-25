@@ -1,0 +1,8 @@
+Node: E:Uganda_health->E0
+observationAbout: C:Uganda_health->observationAbout
+observationDate: C:Uganda_health->observationDate
+value: C:Uganda_health->value
+variableMeasured: C:Uganda_health->variableMeasured
+unit: C:Uganda_health->unit
+scalingFactor: C:Uganda_health->scalingFactor
+typeOf: dcs:StatVarObservation
