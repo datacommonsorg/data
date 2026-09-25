@@ -509,10 +509,11 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         if saveOutput:
             logging.info("Writing output csv")
             output_file_path = 'output/WorldBank.csv'
-            os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
             final_df = merge_historical_data(df.drop('IndicatorCode', axis=1),
                                              _FLAGS.historical_gcs_path)
-            final_df.to_csv(output_file_path, float_format='%.10f', index=False)
+            final_df.to_csv(output_file_path,
+                            float_format='%.10f',
+                            index=False)
         else:
             return df
     except Exception as e:
@@ -575,6 +576,8 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
 def process(indicator_codes, worldbank_dataframe, saveOutput=True):
     logging.info("Processing the input files")
     try:
+        os.makedirs('output', exist_ok=True)
+
         # Add source description to note.
         def add_source_to_description(row):
             if not pd.isna(row['Source']):
