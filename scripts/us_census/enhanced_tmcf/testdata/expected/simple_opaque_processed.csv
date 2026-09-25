@@ -1,4 +1,4 @@
-GEO_ID,NAICS2012,TAXSTAT,TYPOP,YEAR,ESTAB,new_col_0
-country/USA,21,0,0,2012,25417,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--21++taxstat--0++typop--0
-country/USA,22,0,0,2012,17595,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--22++taxstat--0++typop--0
-country/USA,23,0,0,2012,598065,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--23++taxstat--0++typop--0
+GEO_ID,NAME,NAICS2012,TAXSTAT,TYPOP,YEAR,ESTAB,NAICS2012_LABEL,TAXSTAT_LABEL,TYPOP_LABEL,new_col_0,new_col_1
+country/USA,\"United States\",21,0,0,2012,25417,Naics Label 1,Taxstat Label 1,Typop Label 1,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--21%%taxstat--0%%typop--0,\"Number of establishments: Naics Label 1 (2012 NAICS code); Taxstat Label 1 (Tax status code); Typop Label 1 (Type of operation code)\"
+country/USA,\"United States\",22,0,0,2012,17595,Naics Label 2,Taxstat Label 2,Typop Label 2,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--22%%taxstat--0%%typop--0,\"Number of establishments: Naics Label 2 (2012 NAICS code); Taxstat Label 2 (Tax status code); Typop Label 2 (Type of operation code)\"
+country/USA,\"United States\",23,0,0,2012,598065,Naics Label 3,Taxstat Label 3,Typop Label 3,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--23%%taxstat--0%%typop--0,\"Number of establishments: Naics Label 3 (2012 NAICS code); Taxstat Label 3 (Tax status code); Typop Label 3 (Type of operation code)\"
