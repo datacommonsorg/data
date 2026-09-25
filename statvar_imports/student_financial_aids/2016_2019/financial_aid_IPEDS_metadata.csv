@@ -1,0 +1,6 @@
+config,value
+provenance_url,https://nces.ed.gov/ipeds/Search?query=&query2=&resultType=all&page=1&sortBy=date_desc&overlayTableId=36417
+output_columns,"observationDate,observationAbout,value,variableMeasured"
+header_rows,11
+header_columns,2
+skip_rows,7
