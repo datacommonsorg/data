@@ -1,0 +1,11 @@
+{
+  "comment": "Ingestion history table config to update stale read timestamp after an import""DefaultVariables": {
+    "importName": "",
+    "user": ""
+  },
+  "SpannerTables": {
+    "IngestionHistory": {
+      "WorkflowExecutionID": "import-{importName}-{user}"
+    }
+  }
+}
