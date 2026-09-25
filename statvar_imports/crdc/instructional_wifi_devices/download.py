@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Downloads and extracts CRDC Instructional WiFi Devices data."""
 
 import datetime
@@ -36,18 +35,17 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = SCRIPT_DIR / "input_files"
 REQUEST_TIMEOUT = 60  # seconds
 
-
 # --- 2. Helper Functions ---
+
 
 def create_session() -> requests.Session:
     """Creates a requests.Session configured with exponential backoff retries."""
     session = requests.Session()
     session.headers.update({
-        "User-Agent": (
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        ),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"),
+        "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     })
     retries = Retry(
         total=3,
@@ -111,8 +109,23 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
                 "Dataset for year %s not found (HTTP 404). Skipping.",
                 year_string,
             )
+            response.close()
             return False
         response.raise_for_status()
+
+        content_type = ""
+        if hasattr(response, "headers") and response.headers:
+            raw_ct = response.headers.get("Content-Type", "")
+            if isinstance(raw_ct, str):
+                content_type = raw_ct.lower()
+
+        if "text/html" in content_type:
+            logging.info(
+                "Dataset for year %s not found (HTTP 200 with HTML soft-404). Skipping.",
+                year_string,
+            )
+            response.close()
+            return False
     except requests.exceptions.RequestException as e:
         logging.error("Failed to download %s: %s", full_url, e)
         raise
@@ -122,8 +135,18 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
         temp_zip_file = temp_path / zip_filename
 
         with open(temp_zip_file, "wb") as f:
+            first_chunk = True
             for chunk in response.iter_content(chunk_size=1024 * 1024):
                 if chunk:
+                    if first_chunk:
+                        first_chunk = False
+                        if not chunk.startswith(b"PK"):
+                            logging.info(
+                                "Dataset for year %s not found (server returned non-ZIP payload/soft-404). Skipping.",
+                                year_string,
+                            )
+                            response.close()
+                            return False
                     f.write(chunk)
 
         try:
@@ -133,34 +156,27 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
                     if member.is_dir():
                         continue
                     member_name = Path(member.filename).name
-                    if (
-                        TARGET_CSV_NAME.lower() in member_name.lower()
-                        and member_name.lower().endswith(".csv")
-                    ):
+                    if (TARGET_CSV_NAME.lower() in member_name.lower() and
+                            member_name.lower().endswith(".csv")):
                         target_member = member
                         break
 
                 if not target_member:
-                    logging.warning(
-                        "Could not find CSV matching '%s' in %s",
-                        TARGET_CSV_NAME,
-                        zip_filename,
+                    raise FileNotFoundError(
+                        f"Could not find CSV matching '{TARGET_CSV_NAME}' in {zip_filename}"
                     )
-                    return False
 
                 # Extract single target CSV safely (prevent path traversal / Zip Slip)
                 safe_filename = Path(target_member.filename).name
                 extracted_csv_path = temp_path / safe_filename
                 with zf.open(target_member) as src, open(
-                    extracted_csv_path, "wb"
-                ) as dst:
+                        extracted_csv_path, "wb") as dst:
                     shutil.copyfileobj(src, dst)
 
-        except zipfile.BadZipFile:
-            logging.error(
-                "Downloaded file for %s is not a valid ZIP file.", year_string
-            )
-            return False
+        except zipfile.BadZipFile as e:
+            logging.error("Downloaded file for %s is not a valid ZIP file: %s",
+                          year_string, e)
+            raise
 
         try:
             # Preserve leading zeros in school codes (COMBOKEY, LEAID, SCHID)
@@ -172,10 +188,15 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
             )
             df["YEAR"] = str(target_year)
 
+            # Nullify negative CRDC reserve codes (-11 suppressed, -9 not reported, -5 N/A, -3 missing)
+            if "SCH_INTERNET_WIFIENDEV" in df.columns:
+                df["SCH_INTERNET_WIFIENDEV"] = df[
+                    "SCH_INTERNET_WIFIENDEV"].apply(lambda x: "" if pd.notna(
+                        x) and str(x).strip().startswith("-") else x)
+
             output_filename = (
-                OUTPUT_DIR
-                / f"{TARGET_CSV_NAME.replace(' ', '_')}_{target_year}.csv"
-            )
+                OUTPUT_DIR /
+                f"{TARGET_CSV_NAME.replace(' ', '_')}_{target_year}.csv")
             temp_output = output_filename.with_suffix(".csv.tmp")
 
             # Write atomically
@@ -192,13 +213,13 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
             return True
 
         except Exception as e:
-            logging.error(
-                "Error processing CSV for year %s: %s", year_string, e
-            )
+            logging.error("Error processing CSV for year %s: %s", year_string,
+                          e)
             raise
 
 
 # --- 3. Main Execution Block ---
+
 
 def main() -> None:
     logging.basicConfig(
@@ -229,7 +250,8 @@ def main() -> None:
             if downloaded:
                 success_count += 1
         except Exception as e:
-            logging.error("Failed processing year %s: %s", year, e)
+            logging.fatal("FATAL: Failed processing year %s: %s", year, e)
+            sys.exit(1)
 
         time.sleep(1)
 

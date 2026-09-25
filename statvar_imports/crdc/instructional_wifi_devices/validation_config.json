@@ -17,11 +17,11 @@
         },
         {
             "rule_id": "check_latest_date_freshness",
-            "description": "Asserts the latest observation date reaches at least 2024 for CRDC instructional wifi devices.",
+            "description": "Asserts the latest observation date reaches at least 2024 for each CRDC instructional wifi devices StatVar.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year FROM stats",
-                "condition": "latest_year >= 2024"
+                "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "max_year >= 2024 AND total_svs > 0"
             }
         }
     ]

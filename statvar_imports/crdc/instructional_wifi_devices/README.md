@@ -15,7 +15,7 @@ This import generates observations for two canonical statistical variables:
 1. `Count_School_JuvenileJusticeFacility_WifiEnabledDevice`: Total number of Wi-Fi enabled devices used for student instruction in juvenile justice school facilities.
 2. `Count_School_NotJuvenileJusticeFacility_WifiEnabledDevice`: Total number of Wi-Fi enabled devices used for student instruction in regular (non-juvenile justice) school facilities.
 
-Canonical schema definition: `//depot/google3/third_party/datacommons/schema/stat_vars/crdc_instructional_wifi_devices.mcf`.
+Schema definitions are generated automatically to `output/instructional_wifi_devices_*.mcf`.
 
 ## How to Run
 
@@ -43,4 +43,5 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 Validation checks are configured in [validation_config.json](validation_config.json):
 - `check_deleted_records_percent`: Ensures deleted records remain under the standard 0.1% threshold across refreshes.
 - `check_max_date_consistent`: Verifies that latest observation dates match across all generated StatVars.
-- `check_latest_date_freshness`: Asserts that observation dates reach at least 2024.
+- `check_latest_date_freshness`: Asserts that observation dates reach at least 2024 for each StatVar via per-StatVar SQL validation.
+
