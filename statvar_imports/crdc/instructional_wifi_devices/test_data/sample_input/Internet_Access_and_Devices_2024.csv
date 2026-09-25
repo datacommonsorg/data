@@ -1,0 +1,7 @@
+LEA_STATE,LEA_STATE_NAME,LEAID,LEA_NAME,SCHID,SCH_NAME,COMBOKEY,SCH_STATUS_APPROVED,SCH_SPECIAL_ED,SCH_MAGNET,SCH_CHARTER,SCH_JUST,SCH_INTERNET_FIBER,SCH_INTERNET_WIFI,SCH_INTERNET_SCHDEV,SCH_INTERNET_STUDDEV,SCH_INTERNET_WIFIENDEV,YEAR
+AL,Alabama,0100002,Alabama Youth Services,01705,Wallace Sch - Mt Meigs Campus,010000201705,Yes,No,No,No,Yes,Yes,Yes,No,No,25,2024
+AL,Alabama,0100002,Alabama Youth Services,01706,Mcneel Sch - Vacca Campus,010000201706,Yes,No,No,No,Yes,Yes,Yes,No,No,35,2024
+AL,Alabama,0100005,Albertville City,00870,Albertville Middle School,010000500870,Yes,No,No,No,No,Yes,Yes,Yes,No,950,2024
+AL,Alabama,0100005,Albertville City,00871,Albertville High School,010000500871,Yes,No,No,No,No,Yes,Yes,Yes,Yes,1650,2024
+AL,Alabama,0100005,Albertville City,00879,Albertville Intermediate School,010000500879,Yes,No,No,No,No,Yes,Yes,Yes,No,,2024
+AL,Alabama,0100005,Albertville City,00889,Albertville Elementary School,010000500889,Yes,No,No,No,No,Yes,Yes,Yes,No,920,2024
