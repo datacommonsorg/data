@@ -1,0 +1,1646 @@
+model,forecast_date,target,target_week_end_date,location_name,point,quantile_0.025,quantile_0.975
+University of Geneva,2020-04-20,1 wk ahead cum death,2020-04-25,US,49766,NA,NA
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,184,157,226
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,15,15,18
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,265,222,325
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,50,42,62
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,California,2012,1792,2520
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,585,525,650
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,2153,1748,2483
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,232,175,306
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1419,1162,1715
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,927,843,1026
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,14,10,24
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,54,47,71
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,2426,1836,2808
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,815,703,894
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,103,88,131
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,113,98,130
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,165,154,183
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1832,1604,1983
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,37,33,51
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,1036,892,1227
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,3305,2683,3899
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,3191,2809,3644
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,148,131,170
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,163,155,181
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,347,267,430
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,12,11,20
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,12,6,19
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,214,182,265
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,76,61,111
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,7469,6195,8672
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,81,65,103
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New York,19217,16444,21285
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,219,195,259
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,9,9,9
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,664,593,733
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,154,140,172
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,98,84,115
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,2137,1747,2531
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,83,41,157
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,200,170,235
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,77,35,126
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,255,212,311
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,855,752,1008
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,74,43,108
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,45,41,55
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,396,338,472
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,807,764,931
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,19,19,25
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,284,245,353
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,1,1,5
+CU 40% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,US,55212,49789,59874
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,229,192,303
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,15,15,18
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,336,256,458
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,12,11,29
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,14,6,24
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,240,195,342
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,124,90,182
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,9629,7717,11493
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,98,80,129
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New York,25411,21338,29995
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,130,105,159
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,180,163,219
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,2103,1789,2337
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,64,46,87
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,California,2886,2497,4100
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,720,606,808
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,2994,2253,3495
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,425,318,604
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,40,34,68
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,1647,1330,2031
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,5115,3935,6534
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3665,3079,4473
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,212,174,284
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,174,155,205
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,470,328,607
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,259,220,335
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,9,9,10
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,915,799,1071
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,165,145,191
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1987,1604,2584
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,1098,985,1265
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,17,11,33
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,58,47,84
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,3649,2558,4501
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,1030,834,1193
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,138,113,182
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,121,96,162
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,3231,2575,4031
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,132,67,289
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,270,225,340
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,200,100,311
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,345,256,461
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,1101,956,1416
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,124,67,182
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,48,42,66
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,642,506,814
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,1023,944,1335
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,19,19,30
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,347,276,436
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,1,1,8
+CU 40% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,US,74498,64945,83621
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,138,106,179
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,186,168,248
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,2233,1839,2532
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,41,35,78
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,2095,1657,2643
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,6689,5130,8772
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,3889,3211,4856
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,281,210,396
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,179,155,217
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,551,360,735
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,13,11,33
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,15,6,27
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,255,203,408
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,162,115,240
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,258,208,332
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,15,15,20
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,391,274,548
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,71,49,96
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,California,3692,3104,5576
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,802,654,922
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,3516,2606,4266
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,595,437,900
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,2487,2018,3376
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,1188,1049,1398
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,17,12,37
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,59,48,95
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,4670,3089,5789
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,1169,919,1378
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,160,122,219
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,137,100,192
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,4080,3195,5431
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,163,78,382
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,322,251,417
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,327,147,507
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,400,286,570
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,1259,1077,1669
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,161,82,256
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,49,43,68
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,852,665,1104
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,1215,1065,1699
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,19,19,30
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,380,300,493
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,1,1,8
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,US,88548,77114,101285
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,10945,8870,13729
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,107,85,148
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New York,30033,24406,36879
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,280,233,383
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,1140,969,1390
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,9,9,13
+CU 40% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,171,145,203
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,142,107,186
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,2286,1855,2649
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,189,170,266
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,42,35,80
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,2426,1851,3094
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,7774,5929,10426
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,3991,3288,5074
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,270,212,360
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,15,15,20
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,423,291,615
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,73,49,99
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,California,4250,3493,6693
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,852,674,990
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,3873,2818,4857
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,752,510,1185
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,2864,2299,4025
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,1229,1067,1481
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,17,12,37
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,59,48,96
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,5431,3417,6800
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,1253,959,1538
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,167,125,233
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,146,103,216
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,4745,3690,6435
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,173,84,446
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,363,261,487
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,431,184,623
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,438,300,637
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1354,1162,1857
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,189,92,306
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,49,43,69
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,1008,749,1301
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,1358,1144,1933
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,19,19,30
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,403,312,534
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,1,1,8
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,US,97982,85285,113198
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,343,244,503
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,180,156,225
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,588,385,817
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,13,11,34
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,15,6,30
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,261,206,452
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,187,136,289
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,11790,9453,15243
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,109,87,167
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New York,32930,26378,41259
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,291,237,398
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,9,9,13
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,1352,1107,1700
+CU 40% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,171,145,209
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,184,157,226
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,15,15,18
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,265,222,325
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,50,42,62
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,California,2012,1792,2520
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,585,525,650
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,2153,1748,2483
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,232,175,306
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1419,1162,1715
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,927,843,1026
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,14,10,24
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,54,47,71
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,2426,1836,2808
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,815,703,894
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,103,88,131
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,113,98,130
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,165,154,183
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1832,1604,1983
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,37,33,51
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,1036,892,1227
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,3305,2683,3899
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,3191,2809,3644
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,148,131,170
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,163,155,181
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,347,267,430
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,12,11,20
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,12,6,19
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,214,182,265
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,76,61,111
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,7469,6195,8672
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,81,65,103
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New York,19217,16444,21285
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,219,195,259
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,9,9,9
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,664,593,733
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,154,140,172
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,98,84,115
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,2137,1747,2531
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,83,41,157
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,200,170,235
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,77,35,126
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,255,212,311
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,855,752,1008
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,74,43,108
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,45,41,55
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,396,338,472
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,807,764,931
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,19,19,25
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,284,245,353
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,1,1,5
+CU 30% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,US,55212,49789,59874
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,229,192,301
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,15,15,18
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,336,254,454
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,12,11,29
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,14,6,24
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,241,194,338
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,125,90,180
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,9638,7732,11493
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,97,78,130
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New York,25447,21349,30008
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,130,105,160
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,179,163,222
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,2102,1788,2348
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,64,46,86
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,California,2890,2511,4131
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,720,605,810
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,3001,2254,3514
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,427,312,620
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,40,34,69
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,1649,1342,2024
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,5113,3958,6521
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3666,3079,4471
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,213,174,287
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,174,155,205
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,471,328,604
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,258,222,336
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,9,9,10
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,918,792,1068
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,165,145,190
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1988,1612,2587
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,1098,987,1270
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,17,11,33
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,58,47,85
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,3657,2557,4487
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,1030,832,1188
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,139,113,188
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,121,95,164
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,3245,2567,4044
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,132,66,287
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,269,221,342
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,203,97,306
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,347,257,460
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,1100,960,1424
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,124,68,183
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,48,42,66
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,642,518,820
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,1026,952,1345
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,19,19,30
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,347,279,438
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,1,1,8
+CU 30% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,US,74580,65047,83716
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,139,106,177
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,186,167,249
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,2229,1837,2552
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,41,35,79
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,2128,1669,2700
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,6820,5185,8936
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,3899,3225,4862
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,290,219,425
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,179,156,218
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,555,367,751
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,13,11,33
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,15,6,27
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,253,202,414
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,165,117,247
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,261,208,336
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,15,15,18
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,392,274,549
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,70,48,98
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,California,3748,3143,5693
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,805,654,948
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,3550,2649,4346
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,619,452,939
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,2544,2059,3429
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,1188,1048,1404
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,17,12,37
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,59,48,95
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,4737,3127,5965
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,1173,925,1395
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,159,121,220
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,137,100,200
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,4188,3264,5530
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,163,73,390
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,325,251,419
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,344,147,517
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,407,292,579
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,1266,1088,1667
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,164,89,259
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,49,43,69
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,867,669,1127
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,1231,1072,1723
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,19,19,30
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,384,304,499
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,1,1,8
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,US,89492,78337,102639
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,11042,8968,13906
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,107,84,154
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New York,30269,24540,37332
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,279,233,381
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,1164,994,1432
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,9,9,15
+CU 30% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,170,145,205
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,143,106,189
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,2302,1863,2688
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,190,173,274
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,43,35,82
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,2539,1934,3268
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,8189,6211,11105
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,4000,3306,5108
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,275,216,364
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,15,15,20
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,431,293,632
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,73,50,100
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,California,4499,3652,7170
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,862,679,1035
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,3970,2872,5075
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,829,546,1299
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,3036,2392,4307
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,1229,1066,1513
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,17,12,37
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,59,48,98
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,5693,3493,7161
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,1278,972,1595
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,167,125,230
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,149,103,221
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,5003,3857,6810
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,179,79,472
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,375,273,509
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,478,194,706
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,452,305,663
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1395,1182,1927
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,196,97,325
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,49,43,69
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,1060,780,1379
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,1415,1170,2007
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,19,19,30
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,406,320,544
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,1,1,8
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,US,101874,88132,117415
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,366,256,550
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,180,157,226
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,596,386,855
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,13,11,34
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,15,6,30
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,263,209,465
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,193,135,299
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,12071,9613,15809
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,111,86,173
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New York,33800,26914,42435
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,291,238,397
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,9,9,15
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,1442,1185,1831
+CU 30% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,171,145,210
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,184,157,226
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,15,15,18
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,265,222,325
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,50,42,62
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,California,2012,1792,2520
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,585,525,650
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,2153,1748,2483
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,232,175,306
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1419,1162,1715
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,927,843,1026
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,14,10,24
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,54,47,71
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,2426,1836,2808
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,815,703,894
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,103,88,131
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,113,98,130
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,165,154,183
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1832,1604,1983
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,37,33,51
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,1036,892,1227
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,3305,2683,3899
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,3191,2809,3644
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,148,131,170
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,163,155,181
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,347,267,430
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,12,11,20
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,12,6,19
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,214,182,265
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,76,61,111
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,7469,6195,8672
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,81,65,103
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,New York,19217,16444,21285
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,219,195,259
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,9,9,9
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,664,593,733
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,154,140,172
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,98,84,115
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,2137,1747,2531
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,83,41,157
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,200,170,235
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,77,35,126
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,255,212,311
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,855,752,1008
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,74,43,108
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,45,41,55
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,396,338,472
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,807,764,931
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,19,19,25
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,284,245,353
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,1,1,5
+CU 20% contact reduction,2020-04-20,1 wk ahead cum death,2020-04-25,US,55212,49789,59874
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,230,192,301
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,15,15,18
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,337,257,458
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,12,11,29
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,14,6,24
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,240,194,345
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,125,91,182
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,9650,7748,11514
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,98,79,131
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,New York,25530,21450,30103
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,129,105,160
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,179,163,220
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,2101,1790,2353
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,63,46,87
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,California,2921,2520,4161
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,722,605,813
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,3000,2266,3533
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,429,313,642
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,40,34,69
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,1654,1340,2040
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,5144,3962,6584
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3666,3089,4469
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,215,173,283
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,174,155,206
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,476,328,611
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,259,222,338
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,9,9,10
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,919,790,1076
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,165,145,190
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1996,1623,2602
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,1100,986,1268
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,17,11,33
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,58,47,85
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,3666,2578,4522
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,1035,834,1186
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,138,111,183
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,121,96,166
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,3260,2559,4083
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,133,66,288
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,271,220,341
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,202,96,317
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,347,256,461
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,1103,963,1435
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,124,66,179
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,48,42,66
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,644,521,827
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,1030,953,1340
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,19,19,30
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,345,280,438
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,1,1,8
+CU 20% contact reduction,2020-04-20,2 wk ahead cum death,2020-05-02,US,74865,65299,84065
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,139,107,182
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,188,170,252
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,2248,1842,2593
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,41,35,79
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,2208,1723,2800
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,7002,5377,9196
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,3914,3242,4902
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,301,223,438
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,179,155,219
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,577,372,790
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,13,11,33
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,15,6,27
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,257,205,416
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,168,120,245
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,262,210,343
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,15,15,20
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,403,279,565
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,71,49,97
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,California,3961,3306,6193
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,815,656,963
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,3618,2666,4463
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,654,467,1015
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,2703,2158,3710
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,1193,1048,1404
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,17,12,37
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,59,49,95
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,4843,3144,6044
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,1198,939,1445
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,159,121,217
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,139,99,201
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,4383,3423,5857
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,164,79,404
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,332,252,437
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,357,146,530
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,410,289,590
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,1297,1115,1761
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,169,85,283
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,49,43,68
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,900,692,1164
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,1282,1102,1804
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,19,19,30
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,391,307,512
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,1,1,8
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,US,91988,80387,105894
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,11258,9111,14449
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,109,84,153
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,New York,31307,25258,38652
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,279,233,382
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,1205,1009,1508
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,9,9,14
+CU 20% contact reduction,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,171,145,208
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,146,107,195
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,2361,1877,2888
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,195,177,302
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,42,35,82
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,2837,2157,3714
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,8911,6681,12225
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,4070,3377,5339
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,284,224,422
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,15,15,20
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,452,305,708
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,73,49,99
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,California,5239,4068,8999
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,891,696,1094
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,4239,3072,5630
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,974,645,1546
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,3679,2831,5146
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,1250,1067,1553
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,17,12,37
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,60,50,115
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,6051,3658,7714
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,1365,1000,1753
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,167,125,231
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,152,103,232
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,5882,4521,8103
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,184,85,518
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,396,269,565
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,524,222,803
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,481,314,731
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1543,1308,2297
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,215,98,371
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,49,43,69
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,1167,859,1495
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,1596,1247,2408
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,19,19,30
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,426,342,636
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,1,1,9
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,US,112223,95946,130027
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,402,267,628
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,181,156,226
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,678,395,1052
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,13,11,34
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,15,6,30
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,265,211,494
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,203,147,315
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,13208,10314,17787
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,111,87,177
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,New York,37092,28984,46650
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,296,240,398
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,9,9,14
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,1595,1256,2077
+CU 20% contact reduction,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,171,145,220
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,226,168,425
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,276,174,635
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,289,174,686
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,290,174,693
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,103,76,200
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,128,76,305
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,135,76,334
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,136,76,338
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,District of Columbia,146,112,258
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,District of Columbia,188,119,408
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,District of Columbia,207,121,475
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,District of Columbia,213,121,495
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1032,877,1386
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1263,930,2048
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,1410,953,2522
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,1487,962,2778
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,1011,815,1545
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,1343,872,2605
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,1623,911,3577
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,1814,929,4358
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,23,11,65
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,26,11,82
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,26,11,82
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,26,11,82
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,53,45,81
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,59,45,110
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,61,45,119
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,61,45,121
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,1748,1429,2534
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,2026,1485,3358
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,2087,1495,3559
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,2093,1495,3581
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,746,602,1226
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,886,627,1708
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,926,635,1843
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,930,635,1862
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,119,84,235
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,187,91,505
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,263,98,790
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,333,105,1075
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,15,9,33
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,17,9,43
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,17,9,43
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,17,9,43
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,134,107,227
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,178,114,387
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,215,118,507
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,241,118,596
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,230,174,416
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,325,194,737
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,398,204,991
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,440,208,1155
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1526,1390,1857
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,1661,1425,2254
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,1698,1432,2374
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,1704,1432,2397
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,45,35,76
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,52,35,111
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,53,35,120
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,53,35,120
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,826,617,1548
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,1039,653,2308
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,1103,663,2553
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,1111,663,2588
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,2456,1814,4279
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,3271,1956,7016
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,3693,2016,8501
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,3847,2036,9154
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,2954,2572,4056
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3285,2643,5120
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,3355,2657,5366
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,3361,2657,5390
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,193,148,350
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,250,155,581
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,284,160,703
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,297,160,760
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,234,174,466
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,320,181,844
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,374,188,1050
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,394,188,1131
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,255,210,387
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,314,223,575
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,352,230,701
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,373,231,781
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,14,11,26
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,14,11,28
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,14,11,28
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,14,11,28
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,50,33,108
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,83,35,247
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,122,42,416
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,163,49,590
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,197,164,308
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,229,170,424
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,239,170,458
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,240,170,463
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,55,42,95
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,67,42,145
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,70,42,162
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,70,42,165
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,5735,4832,7784
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,6742,5066,10646
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,7058,5119,11702
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,7112,5126,11913
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,79,58,152
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,96,58,224
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,103,58,258
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,105,58,267
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,New York,21014,18392,27072
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,New York,23035,18807,33098
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,New York,23631,18899,35092
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,New York,23732,18911,35466
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,280,223,467
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,308,225,587
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,310,225,597
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,310,225,597
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,28,9,84
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,62,9,226
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,104,9,408
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,148,9,596
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,666,525,1115
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,758,536,1453
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,770,537,1500
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,771,537,1502
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,251,196,464
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,327,206,765
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,387,214,990
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,430,220,1177
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,181,148,291
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,229,155,456
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,265,161,571
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,287,161,659
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,91,80,126
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,108,84,180
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,117,84,213
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,120,84,228
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,1776,1404,3025
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,2150,1462,4405
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,2290,1482,4919
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,2320,1484,5033
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,262,165,651
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,418,179,1366
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,523,189,1828
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,566,192,1998
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,160,128,253
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,205,135,399
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,235,142,506
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,252,143,577
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,10,7,18
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,19,7,54
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,36,7,126
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,57,7,217
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,184,152,286
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,218,152,424
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,232,152,477
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,235,152,491
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,692,522,1311
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,916,550,2199
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,1061,569,2771
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1132,576,3086
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,64,38,154
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,110,44,343
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,153,45,537
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,185,45,674
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,55,41,99
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,75,41,183
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,94,41,258
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,109,41,325
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,41,38,53
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,43,38,62
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,43,38,64
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,43,38,64
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,434,320,807
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,597,347,1374
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,702,365,1730
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,751,371,1920
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,713,674,800
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,755,682,930
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,773,683,999
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,778,683,1022
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,31,24,58
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,34,24,75
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,35,24,76
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,35,24,76
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,279,240,374
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,322,248,499
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,337,250,550
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,340,250,561
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,25,2,69
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,139,34,504
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,231,44,907
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,243,44,945
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,California,1508,1290,2002
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,California,1698,1333,2556
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,California,1740,1340,2687
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,California,1743,1340,2701
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,513,441,683
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,600,460,929
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,638,467,1049
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,648,467,1086
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,1850,1430,2796
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,2428,1539,4308
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,2735,1587,5245
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,2848,1602,5694
+IHME,2020-04-20,1 wk ahead cum death,2020-04-25,US,51312,43099,73193
+IHME,2020-04-20,2 wk ahead cum death,2020-05-02,US,59879,44708,100438
+IHME,2020-04-20,3 wk ahead cum death,2020-05-09,US,63615,45231,113904
+IHME,2020-04-20,4 wk ahead cum death,2020-05-16,US,65009,45352,119689
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,198,165,322
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,10,9,21
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,248,200,404
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,44,39,105
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,California,1659,1408,1983
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,547,462,753
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,1384,1156,2900
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,81,67,212
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,District of Columbia,132,104,228
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1008,856,1378
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,884,756,1186
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,11,10,20
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,48,44,98
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,1763,1433,2594
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,765,618,1208
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,120,87,216
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,110,94,279
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,197,157,339
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1404,1298,3394
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,38,34,95
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,649,515,1018
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,2608,2120,3322
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,2768,2435,5173
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,187,144,372
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,193,161,541
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,229,200,607
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,10,10,18
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,42,30,97
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,194,166,300
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,52,40,103
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,5992,4951,8361
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,73,57,149
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,New York,23916,20924,27773
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,286,225,465
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,11,9,41
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,777,530,1769
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,163,143,290
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,92,79,122
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,1923,1513,2837
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Puerto Rico,77,64,141
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,219,160,504
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,150,127,221
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,11,8,25
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,184,156,278
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,655,546,914
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,32,27,62
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,40,38,64
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,408,315,662
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,U.S. Virgin Islands,3,3,6
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,730,678,813
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,20,18,52
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,277,231,452
+LANL,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,2,2,5
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,240,173,533
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,11,9,31
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,325,217,724
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,49,39,183
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,California,2209,1591,3241
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,690,502,1221
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,1653,1181,5154
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,96,68,399
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,District of Columbia,171,111,411
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1241,912,2100
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,1086,805,1872
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,12,10,30
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,52,44,153
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,2265,1548,4433
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,990,667,2077
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,185,100,473
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,128,95,511
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,255,169,610
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,1502,1301,5654
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,43,34,169
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,863,563,1831
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,3605,2409,6039
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3141,2471,8368
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,256,156,730
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,236,163,1096
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,259,202,1109
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,11,10,25
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,62,33,235
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,231,172,470
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,69,43,194
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,7806,5453,13910
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,95,60,273
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,New York,29529,22706,40688
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,389,250,867
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,14,9,87
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,1249,604,4316
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,187,145,449
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,110,84,182
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,2631,1705,5113
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Puerto Rico,94,66,247
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,305,172,1080
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,182,134,348
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,18,9,55
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,224,165,438
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,824,595,1496
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,38,28,105
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,42,38,91
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,567,350,1271
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,U.S. Virgin Islands,3,3,9
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,817,708,1034
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,23,18,100
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,336,240,762
+LANL,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,2,2,8
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,276,178,771
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,11,9,41
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,397,229,1104
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,54,39,251
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,California,2706,1725,4816
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,824,529,1807
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,1880,1198,7312
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,110,69,614
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,District of Columbia,206,116,630
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,1427,947,2904
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,1256,837,2756
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,13,10,39
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,55,44,204
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,2677,1625,6538
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,1199,703,3167
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,255,110,946
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,144,95,750
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,305,176,942
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,1581,1303,7605
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,48,34,245
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,1042,597,2946
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,4426,2586,9708
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,3438,2494,11060
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,327,166,1185
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,280,165,1738
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,283,203,1556
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,11,10,31
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,88,35,456
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,260,176,642
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,85,45,321
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,9370,5793,20582
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,113,62,418
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,New York,33971,23834,55419
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,487,267,1392
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,17,9,142
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,1803,665,9020
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,206,147,621
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,124,86,244
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,3221,1809,7878
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Puerto Rico,109,68,345
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,392,180,1852
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,208,138,492
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,24,10,105
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,260,171,609
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,966,627,2136
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,43,29,153
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,44,38,115
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,719,376,2141
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,U.S. Virgin Islands,3,3,11
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,882,724,1269
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,26,18,153
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,386,246,1083
+LANL,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,2,2,10
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,301,183,1022
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,12,9,49
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,465,238,1578
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,57,40,308
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,California,3139,1808,6880
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,937,544,2424
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,2048,1209,9445
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,122,69,868
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,District of Columbia,234,119,899
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,1573,975,3762
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,1394,860,3640
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,14,10,50
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,58,44,246
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,3001,1683,8959
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,1379,731,4486
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,325,119,1680
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,157,96,986
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,347,181,1370
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,1638,1304,9297
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,52,35,317
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,1187,616,4104
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,5047,2710,13827
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,3663,2514,13528
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,394,173,1803
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,319,167,2482
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,302,203,1956
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,12,10,37
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,115,37,877
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,282,179,804
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,100,47,463
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,10671,6004,28158
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,129,63,580
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,New York,37148,24538,71034
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,577,279,2097
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,21,9,211
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,2377,724,17156
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,222,148,794
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,135,88,312
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,3680,1890,11147
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Puerto Rico,121,69,464
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,467,186,2878
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,229,141,647
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,30,10,173
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,290,175,812
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1076,648,2889
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,48,29,204
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,45,38,133
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,851,392,3357
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,U.S. Virgin Islands,3,3,13
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,928,734,1502
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,29,18,210
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,427,252,1404
+LANL,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,2,2,12
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,362,232,506
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,90,52,152
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,311,213,601
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,California,1500,933,2612
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,625,426,1101
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,1318,700,1879
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,77,51,112
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1693,1010,3097
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,95,62,183
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,66,48,134
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,1956,852,2766
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,595,407,1041
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,135,95,288
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,1533,905,2358
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,430,282,716
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,55,30,91
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,3926,2108,4647
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,170,99,286
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,503,291,836
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,21,12,37
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,272,173,503
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,19,12,34
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,58,36,98
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,59,39,115
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,3954,3100,4628
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,46,34,94
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,264,161,492
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,New York,20383,19080,26436
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,642,387,1099
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,307,211,562
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,125,84,223
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,1275,895,1886
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,137,93,267
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,260,163,474
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,49,29,91
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,387,230,632
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,913,594,1674
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,53,33,95
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,388,237,725
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,83,45,119
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,1381,853,2090
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,396,216,570
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,17,10,32
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,3,0,101
+MOBS,2020-04-20,1 wk ahead cum death,2020-04-25,US,49779,32586,93240
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,435,285,614
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,110,63,185
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,373,252,726
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,California,1673,1059,2920
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,724,482,1237
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,1500,782,2127
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,91,58,126
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,2086,1232,3869
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,116,73,223
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,77,55,156
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,2245,935,3289
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,694,451,1226
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,162,113,350
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,1722,1024,2727
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,506,329,846
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,65,34,108
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,4275,2472,5258
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,200,115,337
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,617,364,1070
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,25,14,45
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,327,205,613
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,23,14,41
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,70,42,116
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,68,44,132
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,4361,3440,5262
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,56,39,115
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,307,186,585
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,New York,21979,21045,28542
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,767,428,1252
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,379,252,684
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,146,96,253
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,1529,1062,2212
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,162,109,317
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,322,190,586
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,67,38,124
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,475,274,759
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,1118,712,2045
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,65,40,116
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,457,280,885
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,97,52,136
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,1584,960,2316
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,461,246,671
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,20,12,40
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,3,0,121
+MOBS,2020-04-20,2 wk ahead cum death,2020-05-02,US,57595,36764,106987
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,495,330,704
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,127,71,212
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,424,284,829
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,California,1803,1157,3162
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,808,524,1343
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,1641,843,2320
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,103,64,138
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,2417,1406,4511
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,132,82,256
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,87,61,174
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,2475,996,3725
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,776,483,1383
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,183,126,402
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,1852,1117,3036
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,578,366,950
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,73,36,122
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,4508,2775,5724
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,223,126,379
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,711,421,1261
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,28,16,51
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,371,231,707
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,26,16,46
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,79,47,131
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,76,49,147
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,4659,3688,5749
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,63,43,132
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,339,206,661
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,New York,23027,22443,29941
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,874,459,1377
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,441,282,780
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,162,106,278
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,1707,1198,2472
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,183,122,359
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,378,209,685
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,83,46,150
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,549,309,868
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,1285,804,2348
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,74,46,134
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,516,314,1027
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,107,58,149
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,1747,1029,2478
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,511,268,755
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,22,13,47
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,4,0,136
+MOBS,2020-04-20,3 wk ahead cum death,2020-05-09,US,63832,39916,117547
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,542,366,778
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,142,78,233
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,463,306,915
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,California,1910,1231,3346
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,869,555,1429
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,1747,889,2468
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,112,68,147
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,2676,1531,5034
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,146,88,283
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,94,66,188
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,2665,1039,4083
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,842,508,1515
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,200,137,445
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,1950,1185,3280
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,646,396,1035
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,80,39,134
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,4666,3016,6061
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,241,136,413
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,783,465,1416
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,31,17,56
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,406,250,786
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,29,17,51
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,87,51,142
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,81,52,159
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,4870,3866,6109
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,69,46,148
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,367,222,723
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,New York,23708,23411,30854
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,960,481,1474
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,492,305,856
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,175,113,298
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,1847,1309,2681
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,199,132,393
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,424,223,767
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,96,51,169
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,607,336,951
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1423,875,2590
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,82,51,150
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,567,341,1147
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,115,62,158
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,1863,1078,2595
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,548,285,821
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,24,14,53
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,4,0,149
+MOBS,2020-04-20,4 wk ahead cum death,2020-05-16,US,68799,42229,125499
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,229,199,281
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,298,230,454
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,338,239,674
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,352,240,928
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,11,9,16
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,15,10,25
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,18,11,41
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,22,12,76
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,275,236,336
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,381,286,553
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,461,310,829
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,509,318,1190
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,52,45,64
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,63,49,97
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,71,50,149
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,75,51,246
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,California,1601,1416,1932
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,California,2009,1593,2927
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,California,2220,1640,3993
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,California,2305,1648,5025
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,522,471,616
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,589,494,803
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,610,497,932
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,615,497,1011
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,1543,1370,1880
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,1834,1501,2672
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,1925,1525,3164
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,1942,1527,3395
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,99,84,127
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,137,102,205
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,161,110,299
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,173,112,400
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,District of Columbia,149,117,226
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,District of Columbia,207,131,488
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,District of Columbia,238,135,880
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,District of Columbia,252,135,1519
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1006,900,1186
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1192,972,1652
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,1266,984,2055
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,1287,986,2358
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,826,756,957
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,930,792,1289
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,966,798,1645
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,976,798,1982
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,12,10,17
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,15,11,25
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,18,11,34
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,20,12,52
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,62,53,79
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,85,63,129
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,106,70,204
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,122,73,327
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,1757,1570,2087
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,2104,1722,2930
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,2227,1749,3574
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,2254,1751,3958
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,758,673,895
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,926,744,1281
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,997,758,1616
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,1016,760,1838
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,110,92,141
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,144,107,226
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,163,111,321
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,170,112,431
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,122,106,162
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,146,112,271
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,157,114,438
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,161,114,680
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,191,168,229
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,225,179,334
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,240,182,438
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,244,182,541
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1511,1409,1701
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,1623,1447,2070
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,1650,1451,2329
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,1654,1452,2466
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,48,40,64
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,67,48,105
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,81,54,155
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,91,55,228
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,720,620,908
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,915,705,1414
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,990,723,1823
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,1007,724,2062
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,2565,2235,3185
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,3285,2597,5015
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,3580,2686,6515
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,3657,2700,7639
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,3071,2751,3567
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3504,2904,4584
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,3632,2925,5170
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,3654,2927,5436
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,210,178,263
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,305,229,453
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,375,254,673
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,410,261,904
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,203,180,252
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,239,192,386
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,254,193,554
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,258,194,766
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,260,229,309
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,318,250,452
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,346,255,598
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,355,256,743
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,13,10,18
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,16,11,29
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,22,13,56
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,29,14,143
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,38,32,50
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,50,37,78
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,60,40,116
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,66,41,166
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,203,179,240
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,238,192,330
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,254,194,410
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,259,194,480
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,59,49,76
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,77,57,117
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,89,61,163
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,94,61,211
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,5143,4721,5999
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,5596,4901,7387
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,5688,4919,8077
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,5699,4920,8298
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,83,69,108
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,120,87,195
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,155,99,333
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,182,105,568
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,New York,16211,15176,18216
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,New York,17095,15535,20668
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,New York,17233,15559,21470
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,New York,17247,15560,21645
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,280,238,348
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,402,302,583
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,493,332,863
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,540,340,1166
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,12,10,17
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,16,11,27
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,19,12,42
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,21,12,70
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,667,586,800
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,867,681,1246
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,979,711,1724
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,1021,717,2173
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,175,156,208
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,206,167,294
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,220,169,406
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,225,169,529
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,99,84,124
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,126,95,199
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,145,98,299
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,157,99,447
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,2000,1730,2492
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,2720,2118,4261
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,3096,2246,6041
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,3222,2266,7526
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,263,215,344
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,393,281,615
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,470,309,894
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,499,314,1117
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,150,134,179
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,179,143,259
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,193,146,361
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,199,146,499
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,21,17,35
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,27,17,79
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,30,18,173
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,32,18,456
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,209,186,247
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,254,203,352
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,280,207,475
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,290,208,608
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,685,605,816
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,877,686,1261
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,988,709,1838
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1032,712,2518
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,46,37,62
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,67,45,111
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,84,49,180
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,97,51,285
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,45,39,59
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,53,41,99
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,59,42,181
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,63,42,399
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,423,365,526
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,560,427,858
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,633,444,1206
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,658,447,1495
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,716,674,803
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,768,694,963
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,785,697,1072
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,790,698,1144
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,30,24,43
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,44,30,75
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,57,34,115
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,66,36,169
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,296,260,351
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,365,287,504
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,401,294,653
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,415,296,792
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,3,2,7
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,4,2,12
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,6,2,19
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,8,3,27
+UT Austin,2020-04-20,1 wk ahead cum death,2020-04-25,United States,46184,43687,49962
+UT Austin,2020-04-20,2 wk ahead cum death,2020-05-02,United States,53532,48067,63404
+UT Austin,2020-04-20,3 wk ahead cum death,2020-05-09,United States,56974,49366,74289
+UT Austin,2020-04-20,4 wk ahead cum death,2020-05-16,United States,58434,49716,84964
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,US,50937,48361,53467
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,US,61599,54609,68725
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,US,70526,58609,82990
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,US,78057,61121,96469
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Alaska,11,11,13
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Alaska,15,13,18
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Alaska,18,16,23
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Alaska,20,18,28
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Alabama,208,195,225
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Alabama,266,234,312
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Alabama,320,264,400
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Alabama,369,288,490
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Arkansas,52,48,58
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Arkansas,66,57,81
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Arkansas,80,65,104
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Arkansas,92,72,127
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Arizona,239,226,254
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Arizona,305,268,345
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Arizona,369,302,439
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Arizona,430,331,535
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,California,1565,1430,1712
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,California,1983,1643,2379
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,California,2329,1788,2999
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,California,2616,1884,3569
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Colorado,502,474,536
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Colorado,602,530,693
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Colorado,687,569,846
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Colorado,762,599,995
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Connecticut,1750,1592,2012
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Connecticut,2241,1849,2926
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Connecticut,2620,2010,3703
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Connecticut,2910,2115,4344
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,District of Columbia,137,124,155
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,District of Columbia,177,145,224
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,District of Columbia,212,161,288
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,District of Columbia,241,174,347
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Delaware,97,88,112
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Delaware,130,107,168
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Delaware,160,121,221
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Delaware,186,133,272
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Florida,1020,942,1128
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Florida,1244,1057,1510
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Florida,1416,1130,1840
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Florida,1549,1175,2117
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Georgia,934,880,1004
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Georgia,1127,989,1302
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Georgia,1290,1061,1579
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Georgia,1428,1112,1838
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Guam,7,6,8
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Guam,9,8,12
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Guam,11,9,16
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Guam,13,10,19
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Hawaii,13,13,15
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Hawaii,18,16,21
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Hawaii,22,19,28
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Hawaii,26,23,34
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Iowa,104,99,112
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Iowa,139,122,160
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Iowa,173,140,210
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Iowa,205,154,262
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Idaho,57,53,61
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Idaho,71,62,83
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Idaho,84,70,103
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Idaho,95,76,122
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Illinois,1700,1601,1813
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Illinois,2123,1855,2435
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Illinois,2476,2026,3019
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Illinois,2773,2143,3570
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Indiana,723,674,791
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Indiana,896,771,1074
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Indiana,1039,838,1334
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Indiana,1157,883,1579
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Kansas,126,116,135
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Kansas,154,131,179
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Kansas,179,142,222
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Kansas,200,151,263
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Kentucky,185,174,198
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Kentucky,222,194,256
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Kentucky,253,208,310
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Kentucky,279,218,362
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Louisiana,1585,1511,1667
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Louisiana,1893,1699,2113
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Louisiana,2151,1829,2532
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Louisiana,2369,1920,2924
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Massachusetts,2162,2036,2313
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Massachusetts,2698,2363,3111
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Massachusetts,3129,2572,3843
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Massachusetts,3480,2715,4517
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Maryland,737,687,790
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Maryland,930,797,1078
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Maryland,1098,874,1349
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Maryland,1243,927,1604
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Maine,45,43,48
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Maine,58,53,68
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Maine,72,63,88
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Maine,84,72,109
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Michigan,3021,2863,3206
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Michigan,3673,3257,4183
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Michigan,4213,3521,5096
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Michigan,4665,3702,5947
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Minnesota,195,174,221
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Minnesota,261,209,331
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Minnesota,319,234,433
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Minnesota,368,252,527
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Missouri,250,234,271
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Missouri,310,269,367
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Missouri,361,294,457
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Missouri,405,311,545
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Northern Mariana Islands,5,4,6
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Northern Mariana Islands,9,8,11
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Northern Mariana Islands,13,10,17
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Northern Mariana Islands,16,13,22
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Mississippi,209,197,225
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Mississippi,259,226,301
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Mississippi,303,247,375
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Mississippi,342,262,448
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Montana,13,13,14
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Montana,18,16,21
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Montana,23,19,28
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Montana,27,22,35
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,North Carolina,310,283,349
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,North Carolina,433,358,549
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,North Carolina,540,413,741
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,North Carolina,634,451,920
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,North Dakota,12,11,13
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,North Dakota,16,14,18
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,North Dakota,20,17,24
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,North Dakota,23,20,29
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Nebraska,40,39,42
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Nebraska,50,46,55
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Nebraska,60,52,68
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Nebraska,68,57,80
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,New Hampshire,54,50,63
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,New Hampshire,70,58,91
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,New Hampshire,84,65,117
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,New Hampshire,97,71,142
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,New Jersey,5685,5338,6072
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,New Jersey,7096,6208,8115
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,New Jersey,8235,6793,9938
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,New Jersey,9151,7180,11548
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,New Mexico,80,73,91
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,New Mexico,109,89,138
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,New Mexico,133,101,181
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,New Mexico,153,108,219
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Nevada,189,179,200
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Nevada,227,200,257
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Nevada,259,215,312
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Nevada,288,227,365
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,New York,21219,20602,22004
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,New York,24161,22560,26264
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,New York,26441,23841,29942
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,New York,28209,24686,33099
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Ohio,650,610,701
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Ohio,828,719,964
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Ohio,982,796,1218
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Ohio,1118,852,1459
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Oklahoma,172,163,185
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Oklahoma,208,184,244
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Oklahoma,239,200,302
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Oklahoma,267,212,359
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Oregon,93,84,107
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Oregon,115,94,149
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Oregon,133,101,187
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Oregon,150,107,223
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Pennsylvania,1825,1673,2050
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Pennsylvania,2420,2001,3050
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Pennsylvania,2912,2217,3983
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Pennsylvania,3314,2359,4806
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Puerto Rico,78,72,88
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Puerto Rico,95,81,120
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Puerto Rico,111,89,151
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Puerto Rico,124,95,181
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Rhode Island,233,209,266
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Rhode Island,338,273,435
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Rhode Island,430,319,594
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Rhode Island,509,352,738
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,South Carolina,149,139,161
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,South Carolina,181,156,214
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,South Carolina,208,170,265
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,South Carolina,233,181,315
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,South Dakota,12,10,15
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,South Dakota,19,14,27
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,South Dakota,26,18,38
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,South Dakota,32,21,49
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Tennessee,180,173,190
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Tennessee,215,198,239
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Tennessee,246,218,285
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Tennessee,273,234,326
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Texas,646,600,709
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Texas,816,697,983
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Texas,960,764,1241
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Texas,1084,810,1481
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Utah,36,33,40
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Utah,46,39,57
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Utah,56,44,74
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Utah,65,49,91
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Virginia,393,360,429
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Virginia,510,424,602
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Virginia,610,469,768
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Virginia,695,501,924
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Virgin Islands,4,4,5
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Virgin Islands,6,6,7
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Virgin Islands,9,7,10
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Virgin Islands,11,9,12
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Vermont,45,42,49
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Vermont,53,47,63
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Vermont,61,51,76
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Vermont,68,55,89
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Washington,711,684,746
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Washington,788,724,876
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Washington,847,749,992
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Washington,895,766,1097
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Wisconsin,276,262,295
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Wisconsin,330,295,382
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Wisconsin,375,318,466
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Wisconsin,413,335,547
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,West Virginia,34,31,39
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,West Virginia,49,40,63
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,West Virginia,63,48,87
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,West Virginia,75,54,110
+YYG,2020-04-20,1 wk ahead cum death,2020-04-25,Wyoming,4,4,4
+YYG,2020-04-20,2 wk ahead cum death,2020-05-02,Wyoming,8,7,9
+YYG,2020-04-20,3 wk ahead cum death,2020-05-09,Wyoming,11,10,14
+YYG,2020-04-20,4 wk ahead cum death,2020-05-16,Wyoming,15,13,19
