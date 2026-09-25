@@ -1,0 +1,133 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Cloud Build configuration for building, testing, and deploying the
+# import-helper Cloud Run service.
+#
+# Usage from data repository root:
+#   gcloud builds submit . \
+#     --config=import-automation/helper/cloudbuild.yaml \
+#     --project=datcom-ci
+#
+# Usage from import-automation/helper/ directory (image build only):
+#   gcloud builds submit . \
+#     --config=cloudbuild.yaml \
+#     --project=datcom-ci \
+#     --substitutions=_VERSION=dev-test,_DEPLOY_SERVICES=false
+
+substitutions:
+  _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
+  _IMAGE_NAME: 'datacommons-import-helper'
+  _TAG: 'latest'
+  _VERSION: '${SHORT_SHA:-latest}'
+  _DEPLOY_SERVICES: 'true'
+  _LOCATION: 'us-central1'
+  _AIRFLOW_WEB_SERVER_URL: 'https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com'
+  # Test environment (datcom-ci)
+  _TEST_PROJECT_ID: 'datcom-ci'
+  _TEST_PROJECT_NUMBER: '879489846695'
+  _TEST_SPANNER_DATABASE_PATH: 'projects/datcom-ci/instances/datcom-spanner-test/databases/dc-test-db'
+  _TEST_GCS_BUCKET_ID: 'datcom-ci-test'
+  # Staging environment (datcom-import-automation-prod)
+  _PROD_PROJECT_ID: 'datcom-import-automation-prod'
+  _PROD_PROJECT_NUMBER: '965988403328'
+  _STAGING_SPANNER_DATABASE_PATH: 'projects/datcom-store/instances/dc-graph-staging/databases/dc_graph'
+  _PROD_GCS_BUCKET_ID: 'datcom-prod-imports'
+
+steps:
+  # 1. Run unit tests
+  - id: 'unit-test'
+    name: 'ghcr.io/astral-sh/uv:python3.12-bookworm-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ -d "import-automation/helper" ]; then
+          cd import-automation/helper
+        fi
+        uv run pytest
+
+  # 2. Build the container image
+  - id: 'build-image'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ -d "import-automation/helper" ]; then
+          cd import-automation/helper
+        fi
+        docker build \
+          -t "${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}" \
+          -t "${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}" \
+          .
+    waitFor: ['unit-test']
+
+  # 3. Push the container image tags
+  - id: 'push-image'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker push "${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}"
+        docker push "${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}"
+    waitFor: ['build-image']
+
+  # 4. Deploy to Test environment (datcom-ci)
+  - id: 'deploy-test'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ "${_DEPLOY_SERVICES}" != "true" ]; then
+          echo "Skipping test deployment (_DEPLOY_SERVICES=${_DEPLOY_SERVICES})."
+          exit 0
+        fi
+        gcloud run deploy import-helper-service-staging \
+          --image="${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}" \
+          --region="${_LOCATION}" \
+          --project="${_TEST_PROJECT_ID}" \
+          --no-allow-unauthenticated \
+          --set-env-vars="PROJECT_ID=${_TEST_PROJECT_ID},LOCATION=${_LOCATION},PROJECT_NUMBER=${_TEST_PROJECT_NUMBER},SPANNER_DATABASE_PATH=${_TEST_SPANNER_DATABASE_PATH},GCS_BUCKET_ID=${_TEST_GCS_BUCKET_ID},INGESTION_HELPER_SERVICE=ingestion-helper-service-staging,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow-staging,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow-staging,AIRFLOW_WEB_SERVER_URL=${_AIRFLOW_WEB_SERVER_URL}"
+    waitFor: ['push-image']
+
+  # 5. Deploy to Staging environment (datcom-import-automation-prod)
+  - id: 'deploy-staging'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ "${_DEPLOY_SERVICES}" != "true" ]; then
+          echo "Skipping staging deployment (_DEPLOY_SERVICES=${_DEPLOY_SERVICES})."
+          exit 0
+        fi
+        gcloud run deploy import-helper-service-staging \
+          --image="${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}" \
+          --region="${_LOCATION}" \
+          --project="${_PROD_PROJECT_ID}" \
+          --no-allow-unauthenticated \
+          --set-env-vars="PROJECT_ID=${_PROD_PROJECT_ID},LOCATION=${_LOCATION},PROJECT_NUMBER=${_PROD_PROJECT_NUMBER},SPANNER_DATABASE_PATH=${_STAGING_SPANNER_DATABASE_PATH},GCS_BUCKET_ID=${_PROD_GCS_BUCKET_ID},INGESTION_HELPER_SERVICE=ingestion-helper-service-staging,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow-staging,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow-staging,AIRFLOW_WEB_SERVER_URL=${_AIRFLOW_WEB_SERVER_URL}"
+    waitFor: ['deploy-test']
+
+images:
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}'
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  dynamicSubstitutions: true
+  substitutionOption: 'ALLOW_LOOSE'
