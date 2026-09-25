@@ -1,0 +1,8 @@
+Node: E:Congo_health->E0
+observationAbout: C:Congo_health->observationAbout
+observationDate: C:Congo_health->observationDate
+value: C:Congo_health->value
+variableMeasured: C:Congo_health->variableMeasured
+unit: C:Congo_health->unit
+scalingFactor: C:Congo_health->scalingFactor
+typeOf: dcs:StatVarObservation

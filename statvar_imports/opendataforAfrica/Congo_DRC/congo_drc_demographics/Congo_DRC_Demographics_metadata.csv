@@ -1,0 +1,16 @@
+parameter,value
+url,https://drcongo.opendataforafrica.org/data/#topic=Demographics
+description,Congo_DRC_Demographics
+#place_type,Country
+#places_within,
+start_date,2007
+end_date,2017
+release_frequency,1Year
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit,scalingFactor,measurementMethod,#input"
+places_resolved_csv,
+mapped_rows,1
+mapped_columns,3
+header_rows,1
+#input_rows,10
