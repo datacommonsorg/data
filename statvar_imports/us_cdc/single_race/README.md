@@ -4,7 +4,7 @@
 
 - Source URL: https://wonder.cdc.gov/ucd-icd10-expanded.html
 
-- Import Type: Semi-Automated
+- Import Type: Automated
 
 - Data Availability: 2018 onwards
 
@@ -12,48 +12,40 @@
 
 ### Preprocessing and Data Acquisition
 
--Download: Manual
+- Download: Automated live downloader (`download.py`)
 
-To obtain the raw input files, data must be manually downloaded from the source. The download process involves selecting specific criteria from the dropdown menus:
+The script connects directly to the CDC WONDER platform (`https://wonder.cdc.gov/ucd-icd10-expanded.html`), automates the session agreement, and downloads county-level mortality datasets across:
+	* Year (2018 onwards)
+	* County
+	* Sex (Male, Female)
+	* Single Race (6 categories)
+	* ICD-10-113 Cause List
 
-	*Year
-	*County
-	*Sex
-	*Single Race (6 categories)
-	*ICD-10-113 Cause List
+The script automatically partitions queries state by state, dynamically splits high-population states into 2-year chunks to respect CDC's 75,000 row export limit, and batches downloads in sessions with automatic renewal and cooldown to avoid rate limits.
 
-For each download, a specific state must be selected. Critical form options:
-	* **Show Totals**: Disabled (must be unchecked to avoid subtotal pollution)
-	* **Show Zero Values**: Disabled
-	* **Show Suppressed Values**: False
-
-After making the selections, click the "Send" button at the bottom to initiate the download.
-
-Once all state files are downloaded, stage them to GCS:
+To run the live download:
 ```bash
-gsutil -m cp *.csv gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/
-```
+# Execute via shell wrapper:
+sh download.sh
 
+# Or directly with python:
+python3 download.py
+
+# Download specific states or years:
+python3 download.py --states=02,48 --years=2018-2024
+```
 
 ### Data Processing
 
-To get the input files, run the following command. The `download.sh` script will create an input_files folder and copy all the necessary files into it from the GCS :
+After downloading, input files will be placed into the `input_files/` directory. The data is processed using the `stat_var_processor.py` script:
 
 ```bash
-
-	sh download.sh
-```
-After the files are downloaded, the data is processed using the stat_var_processor.py script. The script uses various command-line arguments to specify the input data, pvmap, configuration file, and  output path.
-
-
-```bash
-
-	python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath_singlerace --output_counters=counters/underlyingcauseofdeath_singlerace.csv
+python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath_singlerace --output_counters=counters/underlyingcauseofdeath_singlerace.csv
 ```
 
 ### Automation
 
-This import pipeline is configured to run Semi-automatic on the second Saturday of every month schedule.
+This import pipeline is configured to run automatically on the second Saturday of every month schedule.
 
 - Cron Expression: 30 08 8-14 * 6
 
