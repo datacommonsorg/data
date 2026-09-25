@@ -1,0 +1,9 @@
+Node: dcid:Count_Municipality_FoodandNutritionalSecurity
+typeOf: dcid:StatisticalVariable
+name: "Municipalities that have a Food and Nutritional Security Plan"
+populationType: dcid:Municipality
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Municípios que possuem Plano de Segurança Alimentar e Nutricional@pt"
+benefitProgram: dcid:FoodandNutritionalSecurity
+
