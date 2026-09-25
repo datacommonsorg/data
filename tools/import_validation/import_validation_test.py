@@ -33,12 +33,9 @@ class ImportValidationTest(unittest.TestCase):
 
         os.makedirs(self.differ_path, exist_ok=True)
 
-        # Find the project root using the canonical git command
-        result = subprocess.run(['git', 'rev-parse', '--show-toplevel'],
-                                capture_output=True,
-                                text=True,
-                                check=True)
-        self.project_root = result.stdout.strip()
+        # Find the project root relative to this test file
+        self.project_root = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', '..'))
 
         # Create an empty differ summary, as it is required
         with open(os.path.join(self.differ_path, 'differ_summary.json'),
