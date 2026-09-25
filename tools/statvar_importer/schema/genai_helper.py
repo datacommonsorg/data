@@ -38,7 +38,8 @@ flags.DEFINE_string('genai_input_params', '',
                     'File with dictionary if input parameters')
 flags.DEFINE_string('genai_output', '',
                     'Output file with generated response text.')
-flags.DEFINE_string('genai_model', 'gemini-2.0-flash', 'Model to use with LLM.')
+# flags.DEFINE_string('genai_model', 'gemini-2.0-flash', 'Model to use with LLM.')
+flags.DEFINE_string('genai_model', 'gemini-2.5-pro', 'Model to use with LLM.')
 flags.DEFINE_boolean('genai_dry_run', False,
                      'Do not query the LLM, but only log the input query.')
 flags.DEFINE_string(
