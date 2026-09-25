@@ -1,0 +1,40 @@
+Node: dcid:Count_Household_HalfOfMinimumWageOrMore_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Number of families registered in the RFPC with an income above half a minimum wage"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias cadastradas rfpc acima meio sm i@pt"
+incomeStatus: dcid:HalfOfMinimumWageOrMore
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_InPovertyAccordingToBolsaFamilyProgram_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Number of families in poverty, according to the Bolsa Famíly Program* range, with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias cadastradas pobreza pbf i@pt"
+povertyStatus: dcid:InPovertyAccordingToBolsaFamilyProgram
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_LowIncome_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Number of families registered with low income"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias cadastradas baixa renda i@pt"
+incomeStatus: dcid:LowIncome
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Number of families registered in RFPC by mid-morning today with an income up to half the minimum wage"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias cadastradas rfpc ate meio sm i@pt"
+incomeStatus: dcid:UptoHalfOfMinimumWage
+registeredIn: dcid:Brazil_SingleRegistry
+
