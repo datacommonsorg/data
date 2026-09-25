@@ -1,0 +1,119 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Cloud Build configuration to compile manifest.json files, sync Airflow DAGs to Cloud Composer,
+# and run an End-to-End (E2E) DAG verification test.
+#
+# Usage:
+#   gcloud builds submit . \
+#     --config=import-automation/workflow/cloudbuild.yaml \
+#     --project=datcom-ci \
+#     --substitutions=_PROJECT_ID=datcom-import-automation-prod,_COMPOSER_ENV_NAME=import-automation-airflow,_LOCATION=us-central1
+
+substitutions:
+  _PROJECT_ID: 'datcom-import-automation-prod'
+  _PROJECT_NUMBER: '965988403328'
+  _GCS_BUCKET_ID: 'datcom-prod-imports'
+  _GCS_MOUNT_BUCKET: 'datcom-volume-mount'
+  _TEST_PROJECT_ID: 'datcom-ci'
+  _TEST_PROJECT_NUMBER: '879489846695'
+  _TEST_GCS_BUCKET_ID: 'datcom-ci-test'
+  _TEST_GCS_MOUNT_BUCKET: 'datcom-ci-test'
+  _LOCATION: 'us-central1'
+  _COMPOSER_ENV_NAME: 'import-automation-airflow'
+  _DAG_SUBDIR: 'datacommons_airflow'
+  _DAG_BUCKET: 'us-central1-import-automati-d5ede90d-bucket'
+  _ALLOWLIST: ''
+  _DEPLOY_CLOUD_WORKFLOWS: 'true'
+
+steps:
+  # 1. Compile manifest.json files into imports_catalog.json
+  - id: 'build-catalog'
+    name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        ARGS="--data-dir=. --output=import-automation/workflow/imports_catalog.json"
+        if [ -n "${_ALLOWLIST}" ]; then
+          ARGS="$${ARGS} --allowlist ${_ALLOWLIST}"
+        fi
+        python import-automation/workflow/build_manifest_catalog.py $${ARGS}
+
+  # 2. Validate DAG, factory, and E2E test syntax
+  - id: 'validate-dags'
+    name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        python -m py_compile import-automation/workflow/import_automation_workflow.py
+        python -m py_compile import-automation/workflow/golden_verification.py
+        python -m py_compile import-automation/workflow/import_dags_factory.py
+        python -m py_compile import-automation/workflow/import_dag_e2e_test.py
+        python -m py_compile import-automation/workflow/import_automation_e2e.py
+        echo "DAG syntax validation passed."
+
+  # 3a. Deploy import-automation-workflow-staging to Test (datcom-ci) and Staging (datcom-import-automation-prod)
+  - id: 'deploy-test-workflow'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    waitFor: ['validate-dags']
+    args:
+      - '-c'
+      - |
+        if [ "${_DEPLOY_CLOUD_WORKFLOWS}" != "true" ]; then
+          echo "Skipping staging Cloud Workflows deployment (_DEPLOY_CLOUD_WORKFLOWS=${_DEPLOY_CLOUD_WORKFLOWS})."
+          exit 0
+        fi
+        gcloud workflows deploy import-automation-workflow-staging \
+          --project="${_TEST_PROJECT_ID}" \
+          --location="${_LOCATION}" \
+          --source=import-automation/workflow/import-automation-workflow.yaml \
+          --set-env-vars="LOCATION=${_LOCATION},GCS_BUCKET_ID=${_TEST_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_TEST_GCS_MOUNT_BUCKET},PROJECT_NUMBER=${_TEST_PROJECT_NUMBER},ENV_SUFFIX=-staging,IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
+
+        gcloud workflows deploy import-automation-workflow-staging \
+          --project="${_PROJECT_ID}" \
+          --location="${_LOCATION}" \
+          --source=import-automation/workflow/import-automation-workflow.yaml \
+          --set-env-vars="LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},PROJECT_NUMBER=${_PROJECT_NUMBER},ENV_SUFFIX=-staging,IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
+
+  # 3b. Deploy/Sync DAGs, factory, and catalog to Cloud Composer GCS bucket
+  - id: 'deploy-dags'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    waitFor: ['build-catalog', 'validate-dags']
+    args:
+      - '-c'
+      - |
+        if [ -n "${_DAG_BUCKET}" ]; then
+          TARGET_GCS="gs://${_DAG_BUCKET}/dags/${_DAG_SUBDIR}"
+        else
+          DAG_PREFIX=$(gcloud composer environments describe ${_COMPOSER_ENV_NAME} \
+            --location=${_LOCATION} \
+            --project=${_PROJECT_ID} \
+            --format="value(config.dagGcsPrefix)")
+          TARGET_GCS="$${DAG_PREFIX}/${_DAG_SUBDIR}"
+        fi
+
+        echo "Deploying Airflow DAGs to: $${TARGET_GCS}"
+        gcloud storage cp import-automation/workflow/import_automation_workflow.py "$${TARGET_GCS}/import_automation_workflow.py"
+        gcloud storage cp import-automation/workflow/golden_verification.py "$${TARGET_GCS}/golden_verification.py"
+        gcloud storage cp import-automation/workflow/import_dags_factory.py "$${TARGET_GCS}/import_dags_factory.py"
+        gcloud storage cp import-automation/workflow/imports_catalog.json "$${TARGET_GCS}/imports_catalog.json"
+        echo "Successfully deployed Airflow DAGs."
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  substitutionOption: 'ALLOW_LOOSE'
