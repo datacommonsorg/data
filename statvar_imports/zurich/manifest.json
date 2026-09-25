@@ -196,6 +196,72 @@
                 }
             ],
             "cron_schedule": "55 10 29 * *"
+        },
+        {
+            "import_name": "Zurich_Population_By_Age_Sex_Origin_Combined",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903",
+            "provenance_description": "Consolidated economic population by age, sex, and origin of Zurich city and statistical quarters (BEV390OD3903), replacing legacy split imports Zurich_Population_By_Age, Zurich_Population_By_Origin, and Zurich_Population_By_Sex.",
+            "scripts": [
+                "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903/download/BEV390OD3903.csv --output_folder=bev_3903_all/input_files",
+                "bev_3903_all/generate_rollups.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_all/input_files/BEV390OD3903_rollups.csv --pv_map=bev_3903_all/bev_3903_wiki_pvmap.csv --config_file=bev_3903_all/bev_3903_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=bev_3903_all/output/zurich_population_bev_3903_wiki --output_counters=bev_3903_all/counters/zurich_population_bev_3903_wiki_counters.csv"
+            ],
+            "source_files": [
+                "bev_3903_all/input_files/BEV390OD3903.csv",
+                "bev_3903_all/input_files/BEV390OD3903_rollups.csv",
+                "bev_3903_all/counters/*.csv",
+                "bev_3903_all/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "bev_3903_all/output/zurich_population_bev_3903_wiki.tmcf",
+                    "cleaned_csv": "bev_3903_all/output/zurich_population_bev_3903_wiki.csv",
+                    "node_mcf": "bev_3903_all/output/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 4,
+                "disk": 30
+            },
+            "cron_schedule": "0 6 1,15 * *",
+            "validation_config_file": "bev_3903_all/validation_config.json"
+        },
+        {
+            "import_name": "Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031",
+            "provenance_description": "Consolidated live births by sex and origin of Zurich city and statistical quarters (BEV403OD4031), replacing legacy split imports Zurich_Population_Number_Of_Birth, Zurich_Population_Number_Of_Birth_By_Origin, and Zurich_Population_Number_Of_Birth_By_Sex.",
+            "scripts": [
+                "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031/download/BEV403OD4031.csv --output_folder=bev_4031_all/input_files",
+                "bev_4031_all/generate_rollups.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_all/input_files/BEV403OD4031_rollups.csv --pv_map=bev_4031_all/bev_4031_wiki_pvmap.csv --config_file=bev_4031_all/bev_4031_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=bev_4031_all/output/zurich_bev_4031_wiki --output_counters=bev_4031_all/counters/zurich_bev_4031_wiki_counters.csv"
+            ],
+            "source_files": [
+                "bev_4031_all/input_files/BEV403OD4031.csv",
+                "bev_4031_all/input_files/BEV403OD4031_rollups.csv",
+                "bev_4031_all/counters/*.csv",
+                "bev_4031_all/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "bev_4031_all/output/zurich_bev_4031_wiki.tmcf",
+                    "cleaned_csv": "bev_4031_all/output/zurich_bev_4031_wiki.csv",
+                    "node_mcf": "bev_4031_all/output/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 4,
+                "disk": 30
+            },
+            "cron_schedule": "0 20 1,15 * *",
+            "validation_config_file": "bev_4031_all/validation_config.json"
         }
     ]
 }

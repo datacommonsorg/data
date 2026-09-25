@@ -1,0 +1,9 @@
+StichtagDatJahr,AlterVSort,AlterVCd,AlterV05Sort,AlterV05Cd,AlterV05Kurz,AlterV10Cd,AlterV10Kurz,AlterV20Cd,AlterV20Kurz,SexCd,SexLang,SexKurz,KreisCd,KreisLang,QuarSort,QuarCd,QuarLang,HerkunftSort,HerkunftCd,HerkunftLang,AnzBestWir
+2025,0,0,1,0,0-4,0,0-9,0,0-19,1,männlich,M,1,Kreis 1,11,11,Rathaus,1,1,Schweizer*in,4
+2025,1,1,1,0,0-4,0,0-9,0,0-19,1,männlich,M,1,Kreis 1,11,11,Rathaus,1,1,Schweizer*in,6
+2025,2,2,1,0,0-4,0,0-9,0,0-19,1,männlich,M,1,Kreis 1,11,11,Rathaus,1,1,Schweizer*in,K
+2025,0,0,1,0,0-4,0,0-9,0,0-19,2,weiblich,W,1,Kreis 1,11,11,Rathaus,2,2,Ausländer*in,15
+2025,20,20,5,20,20-24,20,20-29,20,20-39,1,männlich,M,1,Kreis 1,12,12,Hochschulen,1,1,Schweizer*in,20
+2025,25,25,6,25,25-29,20,20-29,20,20-39,2,weiblich,W,1,Kreis 1,13,13,Lindenhof,2,2,Ausländer*in,25
+2025,90,90,19,90,90-94,90,90-99,80,80-99,1,männlich,M,1,Kreis 1,14,14,City,1,1,Schweizer*in,K
+2025,0,0,1,0,0-4,0,0-9,0,0-19,1,männlich,M,990,Kreis Unbekannt,999,999,Unbekannt,1,1,Schweizer*in,50

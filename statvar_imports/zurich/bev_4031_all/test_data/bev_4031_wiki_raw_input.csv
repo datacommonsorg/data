@@ -1,0 +1,9 @@
+GueltigAbDatJahr,GueltigAbDatMM,GueltigAbDatDD,GueltigAbDat,SexCd,SexLang,HerkunftCd,HerkunftLang,KreisCd,KreisLang,QuarCd,QuarLang,DatenstandCd,DatenstandLang,LebensfaehigkeitCd,LebensfaehigkeitLang,AnzGebuWir
+2025,1,15,23756,1,männlich,1,Schweizer*in,1,Kreis 1,11,Rathaus,V,Veröffentlicht,J,zutreffend,2
+2025,6,20,23912,1,männlich,1,Schweizer*in,1,Kreis 1,11,Rathaus,V,Veröffentlicht,J,zutreffend,3
+2025,9,10,23994,1,männlich,1,Schweizer*in,1,Kreis 1,11,Rathaus,V,Veröffentlicht,J,zutreffend,K
+2025,2,10,23782,2,weiblich,2,Ausländer*in,1,Kreis 1,11,Rathaus,V,Veröffentlicht,J,zutreffend,8
+2025,3,12,23812,1,männlich,1,Schweizer*in,1,Kreis 1,12,Hochschulen,V,Veröffentlicht,J,zutreffend,12
+2025,4,18,23849,2,weiblich,2,Ausländer*in,1,Kreis 1,13,Lindenhof,V,Veröffentlicht,J,zutreffend,15
+2025,5,25,23886,1,männlich,1,Schweizer*in,1,Kreis 1,14,City,V,Veröffentlicht,J,zutreffend,K
+2025,7,1,23923,1,männlich,1,Schweizer*in,990,Kreis Unbekannt,999,Unbekannt,V,Veröffentlicht,J,zutreffend,20

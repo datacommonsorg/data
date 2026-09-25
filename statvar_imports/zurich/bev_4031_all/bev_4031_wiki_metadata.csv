@@ -1,0 +1,14 @@
+parameter,value
+url,https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031
+description,
+place_type,City
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+header_rows,1
+#aggregate_duplicate_svobs,sum
+reconcile_nodes,False

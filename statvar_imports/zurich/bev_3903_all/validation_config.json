@@ -1,0 +1,60 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "scope": {
+                "data_source": "differ_summary"
+            },
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "description": "Checks that missing references count does not exceed 0.",
+            "validator": "MISSING_REFS_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Checks that MCF lint error count does not exceed 0.",
+            "validator": "LINT_ERROR_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks if the MaxDate is the same for all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that MaxDate meets the expected freshness threshold for the dataset.",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2025' AND total_svs > 0"
+            }
+        }
+    ]
+}
+
