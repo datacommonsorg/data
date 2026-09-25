@@ -208,7 +208,8 @@
         "id",
         "Geographic Area Name",
         "Percent Private Coverage",
-        "Percent Private Coverage MOE"
+        "Percent Private Coverage MOE",
+        "Subsidized market place coverage alone"
     ],
     "ignoreTokens": [
         "Estimate",
