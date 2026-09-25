@@ -38,46 +38,47 @@ class FemaDownloadTest(unittest.TestCase):
         """Remove the temporary directory after tests."""
         shutil.rmtree(self.test_dir)
 
-    @patch('fema_download.requests.get')
-    def test_get_total_records_success(self, mock_get):
-        """Test successful retrieval of total records."""
+    @patch('fema_download._retry_method')
+    def test_get_total_records_success(self, mock_retry_method):
+        """Test successful retrieval of total records with retries and top=1."""
         mock_response = MagicMock()
         mock_response.json.return_value = {'metadata': {'count': 12345}}
-        mock_response.raise_for_status.return_value = None
-        mock_get.return_value = mock_response
+        mock_retry_method.return_value = mock_response
 
         total = fema_download.get_total_records('http://fake-api.com')
         self.assertEqual(total, 12345)
-        mock_get.assert_called_once_with('http://fake-api.com?$count=true',
-                                         timeout=30)
+        mock_retry_method.assert_called_once_with(
+            'http://fake-api.com?$top=1&$count=true',
+            headers=None,
+            tries=5,
+            delay=5,
+            backoff=2)
 
-    @patch('fema_download.requests.get')
-    def test_get_total_records_request_fails(self, mock_get):
-        """Test failure due to a request exception."""
-        mock_get.side_effect = requests.exceptions.RequestException
+    @patch('fema_download._retry_method')
+    def test_get_total_records_request_fails(self, mock_retry_method):
+        """Test failure due to a request exception after retries exhausted."""
+        mock_retry_method.side_effect = requests.exceptions.RequestException
         with self.assertRaisesRegex(RuntimeError,
                                     'Failed to get total record count.'):
             fema_download.get_total_records('http://fake-api.com')
 
-    @patch('fema_download.requests.get')
-    def test_get_total_records_parsing_fails(self, mock_get):
+    @patch('fema_download._retry_method')
+    def test_get_total_records_parsing_fails(self, mock_retry_method):
         """Test failure due to parsing a malformed response."""
         mock_response = MagicMock()
         mock_response.json.return_value = {'metadata': {}}  # Missing 'count'
-        mock_response.raise_for_status.return_value = None
-        mock_get.return_value = mock_response
+        mock_retry_method.return_value = mock_response
         with self.assertRaisesRegex(
                 RuntimeError,
                 'Failed to parse the total record count from the response.'):
             fema_download.get_total_records('http://fake-api.com')
 
-    @patch('fema_download.requests.get')
-    def test_get_total_records_zero_raises(self, mock_get):
+    @patch('fema_download._retry_method')
+    def test_get_total_records_zero_raises(self, mock_retry_method):
         """Test failure when API returns zero total records."""
         mock_response = MagicMock()
         mock_response.json.return_value = {'metadata': {'count': 0}}
-        mock_response.raise_for_status.return_value = None
-        mock_get.return_value = mock_response
+        mock_retry_method.return_value = mock_response
         with self.assertRaisesRegex(RuntimeError,
                                     'Invalid total record count from API: 0'):
             fema_download.get_total_records('http://fake-api.com')

@@ -27,7 +27,7 @@ data_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
 if data_dir not in sys.path:
     sys.path.insert(0, data_dir)
 
-from util.download_util_script import download_file
+from util.download_util_script import download_file, _retry_method
 from absl import flags
 
 flags.DEFINE_string('api_url',
@@ -116,13 +116,14 @@ def get_total_records(api_url):
     Returns:
         int: The total number of records, or None if the request fails.
     """
-    count_url = f"{api_url}?$count=true"
+    count_url = f"{api_url}?$top=1&$count=true"
     logging.info("Getting total record count from: %s", count_url)
     try:
-        # Use requests for this simple JSON query, as the download_file
-        # utility is for large file downloads and may not be suitable.
-        response = requests.get(count_url, timeout=30)
-        response.raise_for_status()
+        response = _retry_method(count_url,
+                                 headers=None,
+                                 tries=5,
+                                 delay=5,
+                                 backoff=2)
         data = response.json()
         total_count = int(data.get('metadata', {}).get('count'))
         if total_count <= 0:

@@ -8,6 +8,24 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_max_date_latest_aggregates",
+            "description": "Verifies that core aggregate NFIP claim StatVars contain current-year data.",
+            "validator": "MAX_DATE_LATEST",
+            "scope": {
+                "variables": {
+                    "dcids": [
+                        "CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_BuildingContents_FloodEvent",
+                        "CountOfClaims_NaturalHazardInsurance_FEMAHighRiskFloodZone_BuildingStructureAndContents_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_FEMALowRiskFloodZone_BuildingStructureAndContents_FloodEvent"
+                    ]
+                }
+            },
+            "params": {}
         }
     ]
 }
