@@ -1,0 +1,6 @@
+Node: E:chemblBio_fasta->E1
+typeOf: dcs:Protein
+dcid: C:chemblBio_fasta->dcid
+name: C:chemblBio_fasta->name
+chemblID: C:chemblBio_fasta->chembl
+aminoAcidSequence: C:chemblBio_fasta->Sequence

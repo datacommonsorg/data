@@ -1,0 +1,7 @@
+Node: E:chembl_mapping->E1
+typeOf: dcs:Protein
+dcid: C:chembl_mapping->CID
+synonyms: C:chembl_mapping->Name
+chebiID: C:chembl_mapping->Chebi
+chemblID: C:chembl_mapping->Chembl
+schemblID: C:chembl_uniprot->SChembl
