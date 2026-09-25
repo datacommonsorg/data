@@ -1,0 +1,27 @@
+Node: E:codingGenes-manual->E1
+typeOf: dcs:Disease
+dcid: C:codingGenes-manual->DOID_dcid
+name: C:codingGenes-manual->Disease_Name
+diseaseOntologyID: C:codingGenes-manual->DOID
+
+Node: E:codingGenes-manual->E2
+typeOf: dcs:ICD10Code
+dcid: C:codingGenes-manual->ICD10_dcid
+name: C:codingGenes-manual->Disease_Name
+identifier: C:codingGenes-manual->ICD10
+
+Node: E:codingGenes-manual->E3
+typeOf: dcs:Gene
+dcid: C:codingGenes-manual->Gene_dcid
+name: C:codingGenes-manual->Gene
+ensemblID: C:codingGenes-manual->ensemblID
+
+Node: E:codingGenes-manual->E4
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:codingGenes-manual->dcid
+name: C:codingGene-manual->name
+associationType: C:codingGenes-manual->associationType
+associationSource: C:codingGenes-manual->score-db
+confidence: C:codingGenes-manual->confidence
+diseaseID: C:codingGenes-manual->Disease_dcid
+geneID: E:codingGenes-manual->E3
