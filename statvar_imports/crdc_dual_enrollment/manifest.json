@@ -1,0 +1,28 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Crdc_Dual_Enrollment",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/",
+            "provenance_description": "The Civil Rights Data Collection (CRDC) is a biennial survey of all public schools and school districts in the United States.",
+            "scripts": [
+                "download.py",
+                "preprocess.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=preprocessed/*.csv --pv_map=dual_enrollment_pvmap.csv --config_file=metadata.csv  --output_path=output/dual_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf "
+            ],
+            "source_files": [
+                "preprocessed/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/dual_output.tmcf",
+                    "cleaned_csv": "output/dual_output.csv"
+                }
+                
+            ],
+            "cron_schedule": "0 05 * * 5"
+        }
+    ]
+}

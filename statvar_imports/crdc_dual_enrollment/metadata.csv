@@ -1,0 +1,4 @@
+parameter,value
+output_columns,"observationAbout, observationDate, value, variableMeasured"
+header_rows,1
+multi_value_properties,"observationAbout, observationDate"
