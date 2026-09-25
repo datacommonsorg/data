@@ -1,0 +1,51 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NigeriaStatistics",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nigeria.opendataforafrica.org",
+            "provenance_description": "Nigeria Demographics, Health and Economic data from Open Data for Africa including population, health sector professionals, and economic indicators.",
+            "scripts": [
+                "../../../scripts/opendataafrica/download_folder/download.sh 'nigeria' 'gdcmcbg,jgngifg,ngnbsncpir2017,ufceqi,uopetnd,wdidshd'",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/gdcmcbg.csv --pv_map=gdcmcbg_pvmap.csv --config_file=gdcmcbg_metadata.csv --output_path=output/gdcmcbg",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/jgngifg.csv --pv_map=jgngifg_pv_map.csv --config_file=jgngifg_metadata.csv --output_path=output/jgngifg",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ngnbsncpir2017.csv --pv_map=ngnbsncpir2017_pvmap.csv --config_file=ngnbsncpir2017_metadata.csv --places_resolved_csv=places_resolved_csv.csv --output_path=output/ngnbsncpir2017",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ufceqi.csv --pv_map=ufceqi_pv_map.csv --config_file=ufceqi_metadata.csv --output_path=output/ufceqi",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/uopetnd.csv --pv_map=uopetnd_pv_map.csv --config_file=uopetnd_metadata.csv --output_path=output/uopetnd",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wdidshd.csv --pv_map=wdidshd_pv_map.csv --config_file=wdidshd_metadata.csv --output_path=output/wdidshd"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/gdcmcbg.tmcf",
+                    "cleaned_csv": "output/gdcmcbg.csv"
+                },
+                {
+                    "template_mcf": "output/jgngifg.tmcf",
+                    "cleaned_csv": "output/jgngifg.csv"
+                },
+                {
+                    "template_mcf": "output/ngnbsncpir2017.tmcf",
+                    "cleaned_csv": "output/ngnbsncpir2017.csv"
+                },
+                {
+                    "template_mcf": "output/ufceqi.tmcf",
+                    "cleaned_csv": "output/ufceqi.csv"
+                },
+                {
+                    "template_mcf": "output/wdidshd.tmcf",
+                    "cleaned_csv": "output/wdidshd.csv"
+                },
+                {
+                    "template_mcf": "output/uopetnd.tmcf",
+                    "cleaned_csv": "output/uopetnd.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 10 * * 1"
+        }
+    ]
+}

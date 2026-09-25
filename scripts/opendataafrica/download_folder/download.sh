@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ DATASETS=()
 SELECTED_DATASETS=()
 MAX_RETRIES=5                     # Maximum number of retries
 RETRY_DELAY=15                    # Seconds to wait between retries
+TIMEOUT_SECONDS=600               # Timeout in seconds (10 minutes)
 
 function download_key_families() {
   if [ -f "$WORKING_DIR/key_family.xml" ] && [ $(stat -c%s "$WORKING_DIR/key_family.xml") -gt 0 ]; then
@@ -30,6 +31,7 @@ function download_key_families() {
     --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9;v=b3;q=0.7' \
     --header 'Accept-Encoding: gzip, deflate, br, zstd' \
     --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
+    --max-time "$TIMEOUT_SECONDS" \
     --output "$WORKING_DIR/key_family.xml" \
     --compressed
 }
@@ -46,6 +48,7 @@ function download_and_convert_dataset() {
       --header 'Accept: text/html,application/xhtml+xml,application/xml' \
       --header 'Accept-Encoding: gzip, deflate, br, zstd' \
       --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
+      --max-time "$TIMEOUT_SECONDS" \
       --output "$WORKING_DIR/${dataset}.xml" \
       --compressed; then
       echo "Download completed for $dataset"
@@ -91,7 +94,7 @@ function download_datasets_for_country() {
     echo "  <country_name>: The full name of the country (e.g., cotedivoire, kenya, rwanda, egypt)."
     echo "  <dataset_ids> (optional): A comma-separated list of dataset IDs to download. (e.g., 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd')"
     echo "  <WORKING_DIR> (optional): The directory to store the downloaded files. relative path from data  (e.g., /data/statvar_imports/opendataforafrica/kenya_census/input_files )"
-    echo "                          If not provided, a directory 'input_files' will be created in the current working directory."
+    echo "                                  If not provided, a directory 'input_files' will be created in the current working directory."
     echo "No country specified. Exiting"
     exit 1
   fi
