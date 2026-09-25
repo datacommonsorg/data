@@ -1,0 +1,5 @@
+parameter,value
+url,https://hdpulse.nimhd.nih.gov/data-portal/mortality/table?cod=247&cod_options=cod_15&ratetype=aa&ratetype_options=ratetype_2&race=00&race_options=race_6&sex=0&sex_options=sex_3&age=001&age_options=age_11&ruralurban=0&ruralurban_options=ruralurban_3&yeargroup=5&yeargroup_options=yearmort_2&statefips=00&statefips_options=area_states&county=01000&county_options=counties_alabama&comparison=states_to_us&comparison_options=comparison_state&radio_comparison=areas&radio_comparison_options=cods_or_areas
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,unit,#input"
+header_rows,1
+mapped_columns,
