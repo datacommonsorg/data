@@ -40,8 +40,10 @@ flags.DEFINE_string("input_path", default_input_path,
                     "Path to input Excel file or directory containing files")
 flags.DEFINE_string("output_path", None,
                     "Directory path where output files need to be written")
-input_years = ["2016", "2017", "2018", "2019", "2020", "2021", "2022"]
-flags.DEFINE_list("input_years", input_years, "Years to process")
+flags.DEFINE_list(
+    "input_years", None,
+    "Optional list of years to process (e.g. 2016,2017). "
+    "Defaults to all available numeric sheets in the workbook.")
 
 # Canonical 42 base Statistical Variable names in workbook column order
 UNIQUE_STATVARS = list(dict.fromkeys(statvar_col.values()))

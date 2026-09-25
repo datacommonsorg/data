@@ -55,13 +55,15 @@ def discover_excel_url() -> str:
         session.headers.update({'User-Agent': 'curl/8.21.0-rc3'})
         resp = session.get(_CDC_LANDING_PAGE, timeout=30)
         resp.raise_for_status()
-        match = re.search(
-            r'href=["\']([^"\']*PRAMS-MCH-Indicators-\d{4}-\d{4}[^"\']*\.xlsx)["\']',
+        matches = re.findall(
+            r'href=["\']([^"\']*PRAMS-MCH-Indicators-(\d{4})-(\d{4})[^"\']*\.xlsx)["\']',
             resp.text,
             re.IGNORECASE)
-        if match:
-            found_url = urljoin(_CDC_LANDING_PAGE, match.group(1))
-            logging.info("Discovered latest PRAMS workbook URL: %s", found_url)
+        if matches:
+            latest_match = max(matches, key=lambda m: (int(m[2]), int(m[1])))
+            found_url = urljoin(_CDC_LANDING_PAGE, latest_match[0])
+            logging.info("Discovered latest PRAMS workbook URL (%s-%s): %s",
+                         latest_match[1], latest_match[2], found_url)
             return found_url
     except Exception as exc:
         logging.warning("Dynamic discovery failed (%s), using fallback: %s",
