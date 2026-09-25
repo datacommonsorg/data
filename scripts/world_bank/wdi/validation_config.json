@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted observation points do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that latest MaxDate is within 3 years of current year for active StatVars.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INT) AS latest_year FROM stats WHERE StatVar NOT IN ('Count_Person_ResidingLessThan5MetersAboveSeaLevel_AsFractionOf_Count_Person', 'Count_Person_7To14Years_Employed_AsFractionOf_Count_Person_7To14Years', 'Count_Person_7To14Years_Female_Employed_AsFractionOf_Count_Person_7To14Years_Female', 'Count_Person_7To14Years_Male_Employed_AsFractionOf_Count_Person_7To14Years_Male', 'Amount_EconomicActivity_ExpenditureActivity_TertiaryEducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government', 'Amount_Consumption_Alcohol_15OrMoreYears_AsFractionOf_Count_Person_15OrMoreYears', 'Count_Death_IntentionalSelfHarm_AsFractionOf_Count_Person', 'Count_Death_IntentionalSelfHarm_Female_AsFractionOf_Count_Person_Female', 'Count_Death_IntentionalSelfHarm_Male_AsFractionOf_Count_Person_Male', 'Amount_Consumption_RenewableEnergy_AsFractionOf_Amount_Consumption_Energy')",
+                "condition": "latest_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)"
+            }
+        }
+    ]
+}
