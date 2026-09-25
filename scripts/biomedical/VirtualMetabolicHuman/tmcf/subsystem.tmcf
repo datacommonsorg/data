@@ -1,0 +1,4 @@
+Node: E:memberOfMetabolicReactionSubsystem->E0
+typeOf: dcs:memberOfMetabolicReactionSubsystem
+dcid: C:memberOfMetabolicReactionSubsystem->Id
+MetabolicReactionSubsystem: C:memberOfMetabolicReactionSubsystem->subsystem
