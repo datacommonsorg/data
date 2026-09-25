@@ -1,0 +1,22 @@
+parameter,value
+url,https://nigeria.opendataforafrica.org/jgngifg/health-sector
+description,Nigeria national population split by age group and marital status. 
+start_date,
+end_date,
+release_frequency,Annual
+process,"Download 
+
+The online link is an interactive report with multiple variables. From the left pane do the below selections 
+Sex : Male, Female & Both sex
+Indicator --> Select all
+Time --> All Data
+
+Select the tabular view from the different reports availble. Export as MS Excel "
+comments,"License : Any books, articles, conference papers, theses, dissertations, reports, or other publications that employ data obtained from the National Bureau of Statistics will cite the source of data in accordance with the Citation Requirement provided with each dataset.
+
+Original Data Url: http://www.nigerianstat.gov.ng"
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor,input"
+mapped_rows,7
+mapped_columns,3
+header_rows,7
+drop_statvars_without_svobs,0
