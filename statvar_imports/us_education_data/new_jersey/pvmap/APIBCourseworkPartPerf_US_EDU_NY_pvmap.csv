@@ -1,0 +1,11 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},populationType,Student,measuredProperty,count,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+APIB_COURSE_DISTRICT,courseType,AdvancedPlacementCourse__InternationalBaccalaureateCourse,value,{Number},unit,Percent,measurementDenominator,-courseType,,,,,,
+APIB_COURSE_STATE,courseType,AdvancedPlacementCourse__InternationalBaccalaureateCourse,value,{Number},unit,Percent,observationAbout,geoId/34,measurementDenominator,-courseType,,,,
+APIB_EXAM_DISTRICT,assessmentType,AdvancedPlacementExam__InternationalBaccalaureateExam,value,{Number},unit,Percent,measurementDenominator,-assessmentType,,,,,,
+APIB_EXAM_STATE,assessmentType,AdvancedPlacementExam__InternationalBaccalaureateExam,value,{Number},unit,Percent,observationAbout,geoId/34,measurementDenominator,-assessmentType,,,,
+AP3_IB4_DISTRICT,courseType,AdvancedPlacementCourse__InternationalBaccalaureateCourse,assessmentLevel,APScoreQualified__IBScoreSatisfactory,value,{Number},unit,Percent,measurementDenominator,"-courseType,-assessmentLevel",,,,
+AP3_IB4_STATE,courseType,AdvancedPlacementCourse__InternationalBaccalaureateCourse,assessmentLevel,APScoreQualified__IBScoreSatisfactory,value,{Number},unit,Percent,observationAbout,geoId/34,measurementDenominator,"-courseType,-assessmentLevel",,
+DUAL_DISTRICT,courseType,DualEnrollmentCourse,value,{Number},unit,Percent,measurementDenominator,-courseType,,,,,,
+DUAL_STATE,courseType,DualEnrollmentCourse,value,{Number},unit,Percent,observationAbout,geoId/34,measurementDenominator,-courseType,,,,

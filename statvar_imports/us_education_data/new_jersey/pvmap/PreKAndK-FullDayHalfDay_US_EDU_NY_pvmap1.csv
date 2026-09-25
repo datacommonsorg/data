@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+PK_HALF,populationType,Student,measuredProperty,count,kindergartenProgram,HalfDay,schoolGradeLevel,PreKindergarten,schoolEnrollment,EnrolledInSchool,,,,
+PK_FULL,populationType,Student,measuredProperty,count,kindergartenProgram,FullDay,schoolGradeLevel,PreKindergarten,schoolEnrollment,EnrolledInSchool,,,,
+KG_HALF,populationType,Student,measuredProperty,count,kindergartenProgram,HalfDay,schoolGradeLevel,Kindergarten,schoolEnrollment,EnrolledInSchool,,,,
+KG_FULL,populationType,Student,measuredProperty,count,kindergartenProgram,FullDay,schoolGradeLevel,Kindergarten,schoolEnrollment,EnrolledInSchool,,,,
+KG - Full Day,populationType,Student,measuredProperty,count,kindergartenProgram,HalfDay,schoolGradeLevel,PreKindergarten,schoolEnrollment,EnrolledInSchool,,,,
+PK - Full Day,populationType,Student,measuredProperty,count,kindergartenProgram,FullDay,schoolGradeLevel,PreKindergarten,schoolEnrollment,EnrolledInSchool,,,,
+PK - Half Day,populationType,Student,measuredProperty,count,kindergartenProgram,HalfDay,schoolGradeLevel,Kindergarten,schoolEnrollment,EnrolledInSchool,,,,
+KG - Half Day,populationType,Student,measuredProperty,count,kindergartenProgram,FullDay,schoolGradeLevel,Kindergarten,schoolEnrollment,EnrolledInSchool,,,,
+Count,value,{Number},,,,,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
