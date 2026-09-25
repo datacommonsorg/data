@@ -1,0 +1,54 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_all_statvars_freshness",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "description": "Verify every active StatVar meets allowable freshness lag (within 4 years of current date and >= 2022).",
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2022' AND CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4) AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "description": "Ensure all StatVars share a uniform MaxDate across the dataset."
+        },
+        {
+            "rule_id": "check_empty_import",
+            "description": "Ensures the import produces non-zero records",
+            "validator": "EMPTY_IMPORT_CHECK"
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Verifies that lint errors remain within threshold",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "description": "Verifies that missing references remain within threshold",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        }
+    ]
+}

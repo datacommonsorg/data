@@ -1,0 +1,34 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "US_CDC_PRAMS",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html",
+            "provenance_description": "US CDC Pregnancy Risk Assessment Monitoring System (PRAMS) MCH indicators across states, territories, and cities.",
+            "scripts": [
+                "download_input_files.py",
+                "process.py"
+            ],
+            "source_files": [
+                "input_files/*.xlsx",
+                "manifest.json",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/PRAMS.tmcf",
+                    "cleaned_csv": "output/PRAMS.csv"
+                }
+            ],
+            "cron_schedule": "0 0 1 6 *",
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 4,
+                "disk": 30
+            },
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}
