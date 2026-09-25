@@ -41,7 +41,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 ## Validation
 Validation checks are configured in [validation_config.json](validation_config.json):
-- `check_deleted_records_percent`: Ensures deleted records remain under the standard 0.1% threshold across refreshes.
+- `check_deleted_records_percent`: Ensures deleted records remain under the 0.1% threshold across refreshes. The 0.1% record deletion threshold accommodates natural biennial entity attrition (school closures, consolidations, and NCES ID retirements) across ~100,000 U.S. public schools.
 - `check_max_date_consistent`: Verifies that latest observation dates match across all generated StatVars.
 - `check_latest_date_freshness`: Asserts that observation dates reach at least 2024 for each StatVar via per-StatVar SQL validation.
 
