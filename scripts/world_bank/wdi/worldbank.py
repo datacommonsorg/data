@@ -476,7 +476,9 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         if saveOutput:
             TMCF_PATH = 'output/WorldBank.tmcf'
         else:
-            TMCF_PATH = 'test_data/output/output_generated.tmcf'
+            TMCF_PATH = os.path.join(_MODULE_DIR,
+                                     'test_data/output/output_generated.tmcf')
+        os.makedirs(os.path.dirname(TMCF_PATH), exist_ok=True)
         with open(TMCF_PATH, 'w', newline='') as f_out:
             for index, enum in enumerate(tmcfs_for_stat_vars):
                 tmcf, stat_var_obs_cols, stat_vars_in_group = enum
@@ -511,9 +513,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
             output_file_path = 'output/WorldBank.csv'
             final_df = merge_historical_data(df.drop('IndicatorCode', axis=1),
                                              _FLAGS.historical_gcs_path)
-            final_df.to_csv(output_file_path,
-                            float_format='%.10f',
-                            index=False)
+            final_df.to_csv(output_file_path, float_format='%.10f', index=False)
         else:
             return df
     except Exception as e:
