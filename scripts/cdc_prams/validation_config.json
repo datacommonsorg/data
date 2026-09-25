@@ -15,10 +15,10 @@
             "scope": {
                 "data_source": "stats"
             },
-            "description": "Verify every active StatVar meets the expected freshness boundary (>= 2022).",
+            "description": "Verify every active StatVar meets allowable freshness lag (within 4 years of current date and >= 2022).",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2022' AND total_svs > 0"
+                "condition": "MaxDate >= '2022' AND CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4) AND total_svs > 0"
             }
         },
         {

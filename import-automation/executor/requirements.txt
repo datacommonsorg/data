@@ -68,4 +68,3 @@ xmltodict
 sodapy
 certifi==2025.1.31
 tqdm
-tabula-py

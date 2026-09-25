@@ -24,7 +24,7 @@ import pandas as pd
 MODULE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, MODULE_DIR)
 
-from process import USPrams
+from process import USPrams, _parse_float, _validate_sheet_headers
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
@@ -38,9 +38,7 @@ class TestProcess(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        test_data_files = [
-            'PRAMS-MCH-Indicators-Test.xlsx'
-        ]
+        test_data_files = ['PRAMS-MCH-Indicators-Test.xlsx']
         ip_data = [
             os.path.join(TEST_DATASET_DIR, file_name)
             for file_name in test_data_files
@@ -130,7 +128,32 @@ class TestProcess(unittest.TestCase):
         ss_df = df[df['SV'].str.startswith('SampleSize_Count')]
         self.assertFalse(ss_df.empty)
         for val in ss_df['Observation']:
-            self.assertTrue(val.isdigit(), f"Sample size '{val}' contains non-digit chars")
+            self.assertTrue(val.isdigit(),
+                            f"Sample size '{val}' contains non-digit chars")
+
+    def test_parse_float_with_commas_and_formats(self):
+        """
+        Verifies that numbers with commas, whitespace, or missing markers parse cleanly.
+        """
+        self.assertEqual(_parse_float("1,200"), 1200.0)
+        self.assertEqual(_parse_float(" 3,456.78 "), 3456.78)
+        self.assertEqual(_parse_float(1234), 1234.0)
+        self.assertIsNone(_parse_float("na"))
+        self.assertIsNone(_parse_float("-"))
+        self.assertIsNone(_parse_float(""))
+        self.assertIsNone(_parse_float(None))
+
+    def test_header_validation_detects_layout_change(self):
+        """
+        Verifies that unexpected sheet headers raise ValueError.
+        """
+        import openpyxl
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = "2020"
+        ws.cell(5, 2, value="Invalid Column")
+        with self.assertRaises(ValueError):
+            _validate_sheet_headers(ws, "2020")
 
 
 if __name__ == '__main__':

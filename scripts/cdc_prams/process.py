@@ -31,7 +31,7 @@ from statvar_dcid_generator import get_statvar_dcid
 from state_division_to_dcid import _PLACE_MAP
 from statvar import statvar_col
 from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
-                       _TIME, _INSURANCE, _CIGARETTES, PV_PROP, _YEAR)
+                       _TIME, _INSURANCE, _CIGARETTES)
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(_CODEDIR, "input_files")
@@ -41,8 +41,7 @@ flags.DEFINE_string("input_path", default_input_path,
 flags.DEFINE_string("output_path", None,
                     "Directory path where output files need to be written")
 flags.DEFINE_list(
-    "input_years", None,
-    "Optional list of years to process (e.g. 2016,2017). "
+    "input_years", None, "Optional list of years to process (e.g. 2016,2017). "
     "Defaults to all available numeric sheets in the workbook.")
 
 # Canonical 42 base Statistical Variable names in workbook column order
@@ -61,6 +60,48 @@ def _get_geo_map() -> dict:
         'Northern Mariana Islands': 'geoId/69'
     })
     return geo_map
+
+
+def _parse_float(val) -> float | None:
+    """Parses a numeric cell value, safely stripping string commas and whitespace."""
+    if val is None:
+        return None
+    s = str(val).replace(',', '').strip()
+    if not s or s.lower() in ('na', 'nan', '-', '.', '*'):
+        return None
+    try:
+        return float(s)
+    except (ValueError, TypeError):
+        logging.debug("Could not convert value '%s' to float", val)
+        return None
+
+
+def _validate_sheet_headers(ws, year: str) -> None:
+    """Validates that sheet columns match expected indicator layout on rows 4 and 5."""
+    for ind_idx in range(len(UNIQUE_STATVARS)):
+        base_col = 2 + ind_idx * 5
+        h_denom = str(ws.cell(5, base_col).value or "").lower()
+        h_pct = str(ws.cell(5, base_col + 2).value or "").lower()
+        h_lower = str(ws.cell(5, base_col + 3).value or "").lower()
+        h_upper = str(ws.cell(5, base_col + 4).value or "").lower()
+
+        if not ("denominator" in h_denom or "sample size" in h_denom
+                or "n (" in h_denom or h_denom.startswith("n")):
+            raise ValueError(
+                f"Header validation failed in sheet {year} at col {base_col}: "
+                f"expected Denominator/Sample Size, got '{h_denom}'")
+        if "%" not in h_pct:
+            raise ValueError(
+                f"Header validation failed in sheet {year} at col {base_col + 2}: "
+                f"expected Weighted %, got '{h_pct}'")
+        if "lower" not in h_lower:
+            raise ValueError(
+                f"Header validation failed in sheet {year} at col {base_col + 3}: "
+                f"expected Lower CI, got '{h_lower}'")
+        if "upper" not in h_upper:
+            raise ValueError(
+                f"Header validation failed in sheet {year} at col {base_col + 4}: "
+                f"expected Upper CI, got '{h_upper}'")
 
 
 def prams(input_files: list, years: list = None) -> pd.DataFrame:
@@ -95,7 +136,9 @@ def prams(input_files: list, years: list = None) -> pd.DataFrame:
 
         for year in target_sheets:
             ws = wb[year]
-            logging.info("Processing sheet year %s (%d rows)", year, ws.max_row)
+            logging.info("Processing sheet year %s (%d rows)", year,
+                         ws.max_row)
+            _validate_sheet_headers(ws, year)
 
             for r in range(6, ws.max_row + 1):
                 site_raw = ws.cell(r, 1).value
@@ -104,6 +147,9 @@ def prams(input_files: list, years: list = None) -> pd.DataFrame:
                 site = str(site_raw).strip()
                 geo = geo_map.get(site)
                 if not geo:
+                    logging.warning(
+                        "Unknown site '%s' at row %d in sheet %s; skipping",
+                        site, r, year)
                     continue
 
                 for ind_idx in range(len(UNIQUE_STATVARS)):
@@ -111,64 +157,51 @@ def prams(input_files: list, years: list = None) -> pd.DataFrame:
                     base_col = 2 + ind_idx * 5
 
                     # 1. Sample Size (col + 0)
-                    val_ss = ws.cell(r, base_col).value
-                    if val_ss is not None and str(val_ss).strip() != '':
-                        try:
-                            val_ss_str = str(int(round(float(val_ss))))
-                            records.append({
-                                'Geo': geo,
-                                'SV': f'SampleSize_Count{base_sv}',
-                                'Year': str(year),
-                                'Observation': val_ss_str,
-                                'ScalingFactor': np.nan
-                            })
-                        except (ValueError, TypeError):
-                            pass
+                    val_ss = _parse_float(ws.cell(r, base_col).value)
+                    if val_ss is not None:
+                        val_ss_str = str(int(round(val_ss)))
+                        records.append({
+                            'Geo': geo,
+                            'SV': f'SampleSize_Count{base_sv}',
+                            'Year': str(year),
+                            'Observation': val_ss_str,
+                            'ScalingFactor': np.nan
+                        })
 
                     # 2. Weighted Percent (col + 2)
-                    val_pct = ws.cell(r, base_col + 2).value
-                    if val_pct is not None and str(val_pct).strip() != '':
-                        try:
-                            val_pct_str = str(float(val_pct))
-                            records.append({
-                                'Geo': geo,
-                                'SV': f'Percent{base_sv}',
-                                'Year': str(year),
-                                'Observation': val_pct_str,
-                                'ScalingFactor': 100.0
-                            })
-                        except (ValueError, TypeError):
-                            pass
+                    val_pct = _parse_float(ws.cell(r, base_col + 2).value)
+                    if val_pct is not None:
+                        records.append({
+                            'Geo': geo,
+                            'SV': f'Percent{base_sv}',
+                            'Year': str(year),
+                            'Observation': str(val_pct),
+                            'ScalingFactor': 100.0
+                        })
 
                     # 3. Lower 95% Confidence Interval (col + 3)
-                    val_lower = ws.cell(r, base_col + 3).value
-                    if val_lower is not None and str(val_lower).strip() != '':
-                        try:
-                            val_lower_str = str(float(val_lower))
-                            records.append({
-                                'Geo': geo,
-                                'SV': f'ConfidenceIntervalLowerLimit_Count{base_sv}',
-                                'Year': str(year),
-                                'Observation': val_lower_str,
-                                'ScalingFactor': 100.0
-                            })
-                        except (ValueError, TypeError):
-                            pass
+                    val_lower = _parse_float(ws.cell(r, base_col + 3).value)
+                    if val_lower is not None:
+                        records.append({
+                            'Geo': geo,
+                            'SV':
+                            f'ConfidenceIntervalLowerLimit_Count{base_sv}',
+                            'Year': str(year),
+                            'Observation': str(val_lower),
+                            'ScalingFactor': 100.0
+                        })
 
                     # 4. Upper 95% Confidence Interval (col + 4)
-                    val_upper = ws.cell(r, base_col + 4).value
-                    if val_upper is not None and str(val_upper).strip() != '':
-                        try:
-                            val_upper_str = str(float(val_upper))
-                            records.append({
-                                'Geo': geo,
-                                'SV': f'ConfidenceIntervalUpperLimit_Count{base_sv}',
-                                'Year': str(year),
-                                'Observation': val_upper_str,
-                                'ScalingFactor': 100.0
-                            })
-                        except (ValueError, TypeError):
-                            pass
+                    val_upper = _parse_float(ws.cell(r, base_col + 4).value)
+                    if val_upper is not None:
+                        records.append({
+                            'Geo': geo,
+                            'SV':
+                            f'ConfidenceIntervalUpperLimit_Count{base_sv}',
+                            'Year': str(year),
+                            'Observation': str(val_upper),
+                            'ScalingFactor': 100.0
+                        })
 
     df = pd.DataFrame(records)
     if df.empty:
@@ -219,7 +252,7 @@ class USPrams:
             sv_pvs = deepcopy(DEFAULT_SV_PROP)
 
             for prop in sv_prop:
-                statVar = insurance = time = cigarettes = prop_val = prop
+                statVar = insurance = time = cigarettes = prop
                 for old, new in _PROP.items():
                     statVar = statVar.replace(old, new)
                 for old, new in _INSURANCE.items():
@@ -228,8 +261,6 @@ class USPrams:
                     time = time.replace(old, new)
                 for old, new in _CIGARETTES.items():
                     cigarettes = cigarettes.replace(old, new)
-                for old, new in PV_PROP.items():
-                    prop_val = prop_val.replace(old, new)
 
                 if "SampleSize" in prop:
                     sv_pvs["measuredProperty"] = "dcs:count"
@@ -241,8 +272,7 @@ class USPrams:
                     sv_pvs["measuredProperty"] = "dcs:percent"
                     sv_pvs["statType"] = "dcs:measuredValue"
                     sv_pvs["measurementDenominator"] = (
-                        "dcs:Count_BirthEvent_LiveBirth"
-                    )
+                        "dcs:Count_BirthEvent_LiveBirth")
                     pvs.append("measuredProperty: dcs:count")
                     pvs.append("statType: dcs:measuredValue")
                     pvs.append(
@@ -253,8 +283,7 @@ class USPrams:
                     sv_pvs["measuredProperty"] = "dcs:percent"
                     sv_pvs["statType"] = "dcs:confidenceIntervalLowerLimit"
                     sv_pvs["measurementDenominator"] = (
-                        "dcs:Count_BirthEvent_LiveBirth"
-                    )
+                        "dcs:Count_BirthEvent_LiveBirth")
                     pvs.append("measuredProperty: dcs:count")
                     pvs.append("statType: dcs:confidenceIntervalLowerLimit")
                     pvs.append(
@@ -265,8 +294,7 @@ class USPrams:
                     sv_pvs["measuredProperty"] = "dcs:percent"
                     sv_pvs["statType"] = "dcs:confidenceIntervalUpperLimit"
                     sv_pvs["measurementDenominator"] = (
-                        "dcs:Count_BirthEvent_LiveBirth"
-                    )
+                        "dcs:Count_BirthEvent_LiveBirth")
                     pvs.append("measuredProperty: dcs:count")
                     pvs.append("statType: dcs:confidenceIntervalUpperLimit")
                     pvs.append(
@@ -371,7 +399,8 @@ class USPrams:
                 elif "healthInsuranceStatusPostpartumPrivateInsurance" in prop\
                     or "healthInsuranceStatusPostpartumMedicaid" in prop or\
                     "healthInsuranceStatusPostpartumNoInsurance" in prop:
-                    sv_pvs["healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
+                    sv_pvs[
+                        "healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
                     pvs.append(
                         f"healthInsuranceStatusPostpartum: dcs:{insurance}")
@@ -417,17 +446,23 @@ class USPrams:
             os.makedirs(output_path, exist_ok=True)
 
         updated_sv = self._generate_mcf(sv_names, self.mcf_file_path)
-        df["SV"] = df["SV"].map(updated_sv)
-        if df["SV"].isna().any():
-            unmapped = df[df["SV"].isna()]["SV"].unique().tolist()
+        unmapped = set(df["SV"]) - set(updated_sv.keys())
+        if unmapped:
+            unmapped_list = sorted(list(unmapped))
             logging.error("Unmapped Statistical Variables detected: %s",
-                          unmapped)
+                          unmapped_list)
             raise ValueError(
-                f"Unmapped Statistical Variables detected: {unmapped}")
+                f"Unmapped Statistical Variables detected: {unmapped_list}")
+
+        df["SV"] = df["SV"].map(updated_sv)
 
         self._generate_tmcf()
         df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])
+        dup_count = df.duplicated(subset=['Geo', 'SV', 'Year']).sum()
+        if dup_count > 0:
+            logging.warning(
+                "Dropping %d duplicate observations (keeping last)", dup_count)
         df = df.drop_duplicates(subset=['Geo', 'SV', 'Year'], keep='last')
         df = df.sort_values(by=['Geo', 'SV', 'Year'])
 

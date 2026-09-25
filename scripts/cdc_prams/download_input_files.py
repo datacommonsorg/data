@@ -20,12 +20,11 @@ import re
 import sys
 from urllib.parse import urljoin
 from absl import app, flags, logging
-import requests
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _CODEDIR)
 
-from download import download_file
+from download import download_file, _get_session
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -35,12 +34,9 @@ flags.DEFINE_boolean("overwrite", False,
                      "Whether to force re-download existing files")
 
 _CDC_LANDING_PAGE = (
-    "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html"
-)
-_FALLBACK_URL = (
-    "https://www.cdc.gov/prams/media/files/2024/08/"
-    "PRAMS-MCH-Indicators-2016-2022-508.xlsx"
-)
+    "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html")
+_FALLBACK_URL = ("https://www.cdc.gov/prams/media/files/2024/08/"
+                 "PRAMS-MCH-Indicators-2016-2022-508.xlsx")
 
 
 def discover_excel_url() -> str:
@@ -51,28 +47,29 @@ def discover_excel_url() -> str:
     logging.info("Checking CDC landing page for latest Excel release: %s",
                  _CDC_LANDING_PAGE)
     try:
-        session = requests.Session()
-        session.headers.update({'User-Agent': 'curl/8.21.0-rc3'})
+        session = _get_session()
         resp = session.get(_CDC_LANDING_PAGE, timeout=30)
         resp.raise_for_status()
         matches = re.findall(
             r'href=["\']([^"\']*PRAMS-MCH-Indicators-(\d{4})-(\d{4})[^"\']*\.xlsx)["\']',
-            resp.text,
-            re.IGNORECASE)
+            resp.text, re.IGNORECASE)
         if matches:
             latest_match = max(matches, key=lambda m: (int(m[2]), int(m[1])))
             found_url = urljoin(_CDC_LANDING_PAGE, latest_match[0])
             logging.info("Discovered latest PRAMS workbook URL (%s-%s): %s",
                          latest_match[1], latest_match[2], found_url)
             return found_url
+        logging.error(
+            "Dynamic discovery failed to match any multi-year PRAMS Excel URLs on "
+            "%s; falling back to: %s", _CDC_LANDING_PAGE, _FALLBACK_URL)
     except Exception as exc:
-        logging.warning("Dynamic discovery failed (%s), using fallback: %s",
-                        exc, _FALLBACK_URL)
+        logging.error(
+            "Dynamic discovery failed with error (%s); falling back to: %s",
+            exc, _FALLBACK_URL)
     return _FALLBACK_URL
 
 
-def download_files(download_directory: str,
-                   overwrite: bool = False) -> None:
+def download_files(download_directory: str, overwrite: bool = False) -> None:
     """
     Downloads the consolidated PRAMS MCH Indicators Excel file.
 
@@ -85,8 +82,7 @@ def download_files(download_directory: str,
 
 
 def main(_):
-    download_files(_FLAGS.download_directory,
-                   overwrite=_FLAGS.overwrite)
+    download_files(_FLAGS.download_directory, overwrite=_FLAGS.overwrite)
 
 
 if __name__ == '__main__':
