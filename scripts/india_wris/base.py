@@ -16,6 +16,7 @@ import os
 import pandas as pd
 import json
 import re
+import csv
 from india.geo.districts import IndiaDistrictsMapper
 
 
@@ -88,24 +89,27 @@ class WaterQualityBase():
                     Nagercoil, Tamil Nadu, India
         """
 
-        self.df = pd.read_csv(
-            os.path.join(self.module_dir,
-                         'data/{}.csv'.format(self.util_names)))
+        self.df = pd.read_csv(os.path.join(
+            self.module_dir, 'data/{}.csv'.format(self.util_names)),
+                              low_memory=False)
+
+        self.df.replace(to_replace="-", value="", inplace=True)
+
         self.df = self._drop_all_empty_rows(self.df)
 
         # Mapping district names to LGD Codes
         mapper = IndiaDistrictsMapper()
-        df_map = self.df[['StateName',
-                          'DistrictName']].drop_duplicates().dropna()
+        df_map = self.df[['State Name',
+                          'District Name']].drop_duplicates().dropna()
 
         df_map['DistrictCode'] = df_map.apply(
-            lambda x: self._map_district_to_lgdcodes(mapper, x['StateName'], x[
-                'DistrictName']),
+            lambda x: self._map_district_to_lgdcodes(mapper, x['State Name'], x[
+                'District Name']),
             axis=1)
 
         # Merging LGD codes with original df and creating dcids
-        self.df = self.df.merge(df_map.drop('StateName', axis=1),
-                                on='DistrictName',
+        self.df = self.df.merge(df_map.drop('State Name', axis=1),
+                                on='District Name',
                                 how='left')
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
             'indiaWris/',
@@ -128,7 +132,12 @@ class WaterQualityBase():
         csv_save_path = os.path.join(self.module_dir,
                                      '{}'.format(self.dataset_name),
                                      "{}.csv".format(self.dataset_name))
-        self.df.to_csv(csv_save_path, index=None)
+        self.df = self.df.drop_duplicates(subset=[
+            'Station Name', 'State Name', 'District Name', 'Basin Name',
+            'Agency Name', 'Date Collection'
+        ],
+                                          keep='last')
+        self.df.to_csv(csv_save_path, index=None, quoting=csv.QUOTE_NONNUMERIC)
 
     def create_mcfs(self):
         """
