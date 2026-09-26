@@ -13,12 +13,32 @@
 # limitations under the License.
 
 from fastapi import HTTPException
+from clients.bigquery import BigQueryClient
 from clients.spanner import SpannerClient
 from clients.storage import StorageClient
 import config
 
+_bigquery_client = None
 _spanner_client = None
 _storage_client = None
+
+
+def get_bigquery_client() -> BigQueryClient:
+    global _bigquery_client
+    if _bigquery_client is None:
+        bq_project = config.BQ_PROJECT_ID or config.PROJECT_ID
+        if not bq_project or not config.BQ_DATASET_ID:
+            raise HTTPException(
+                status_code=500,
+                detail="BigQuery configuration is missing. Ensure PROJECT_ID (or BQ_PROJECT_ID) and BQ_DATASET_ID are set."
+            )
+        _bigquery_client = BigQueryClient(
+            bq_project,
+            config.BQ_DATASET_ID,
+            history_table=config.BQ_IMPORT_HISTORY_TABLE,
+            summary_view=config.BQ_IMPORT_SUMMARY_VIEW,
+        )
+    return _bigquery_client
 
 
 def get_spanner_client() -> SpannerClient:

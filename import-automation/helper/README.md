@@ -1,10 +1,10 @@
 # Data Commons Import Helper Service
 
 FastAPI Cloud Run service (`import-helper-service` / `import-helper-service-staging`) providing helper endpoints for the Data Commons Import Automation workflow:
-- `POST /imports/status`: Updates import job status and metadata in Cloud Spanner (`ImportSummary`, `ImportHistory`) and GCS (`staging_version.txt`, `latest_version.txt`, `import_summary.json`, `import_metadata_mcf.mcf`).
-- `POST /imports/version`: Promotes/overrides import versions in Cloud Spanner and GCS prior to Spanner ingestion.
+- `POST /imports/status`: Updates import job status and metadata in BigQuery (`ImportHistory` table and `ImportSummary` view) and GCS (`staging_version.txt`, `latest_version.txt`, `import_summary.json`, `import_metadata_mcf.mcf`).
+- `POST /imports/version`: Promotes/overrides import versions in BigQuery and GCS prior to Spanner ingestion.
 - `POST /imports/feed`: Processes Pub/Sub push notifications for CDA transfer completion and invokes downstream Cloud Composer (Airflow) DAGs or Cloud Workflows.
-- `POST /database/initialize`: Initializes `ImportSummary` and `ImportHistory` tables in Cloud Spanner.
+- `POST /database/initialize`: Initializes the `ImportHistory` partitioned table and `ImportSummary` view in BigQuery.
 
 ## Running Unit Tests Locally
 

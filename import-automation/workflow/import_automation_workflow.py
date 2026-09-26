@@ -267,10 +267,8 @@ def run_import_job(import_name: str = "", **context) -> dict[str, Any]:
     cfg = resolve_workflow_context(context, default_import_name=import_name)
     if cfg["skipImportJob"]:
         logging.info("skipImportJob is True; skipping Cloud Batch import job.")
-        return {
-            "status": "SKIPPED",
-            "message": "Import job skipped by configuration"
-        }
+        raise AirflowSkipException(
+            "Import job skipped by configuration (skipImportJob=True).")
 
     hook = CloudBatchHook(gcp_conn_id="google_cloud_default")
     job_spec = _build_batch_job_spec(
@@ -313,7 +311,7 @@ def run_import_job(import_name: str = "", **context) -> dict[str, Any]:
         }
     except Exception as e:
         exec_time = int(time.time() - start_time)
-        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "-staging")
+        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
         _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
                                cfg["gcsImportBucket"], exec_time)
         raise AirflowException(f"Cloud Batch import job failed: {e}") from e
@@ -397,10 +395,9 @@ def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
             cfg["skipImportJob"],
             cfg.get("skipValidationJob"),
         )
-        return {
-            "status": "SKIPPED",
-            "message": "Validation job skipped by configuration"
-        }
+        raise AirflowSkipException(
+            f"Validation job skipped by configuration (skipImportJob={cfg['skipImportJob']}, skipValidationJob={cfg.get('skipValidationJob')})."
+        )
 
     start_time = time.time()
     try:
@@ -423,7 +420,7 @@ def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
         }
     except Exception as e:
         exec_time = int(time.time() - start_time)
-        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "-staging")
+        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
         _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
                                cfg["gcsImportBucket"], exec_time)
         raise AirflowException(f"Cloud Run validation job failed: {e}") from e
@@ -434,14 +431,9 @@ def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
 # -----------------------------------------------------------------------------
 
 
-def trigger_environment_ingestion(cfg: dict[str, Any],
-                                  env_suffix: str) -> dict[str, Any]:
-    """Updates version via import-helper and triggers Spanner ingestion via ingestion-helper."""
-    import_helper_url = cfg["helperUrlFn"](cfg["importHelperService"],
-                                           env_suffix)
-    ingestion_helper_url = cfg["helperUrlFn"](cfg["ingestionHelperService"],
-                                              env_suffix)
-
+def update_import_version_helper(cfg: dict[str, Any]) -> dict[str, Any]:
+    """Updates import version once in prod import-helper-service and returns importEntry."""
+    import_helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
     version_res = _make_http_post(
         f"{import_helper_url}/imports/version", {
             "imports": [cfg["importName"]],
@@ -466,6 +458,27 @@ def trigger_environment_ingestion(cfg: dict[str, Any],
         "latestVersion":
             target.get("latestVersion", ""),
     }
+    return {
+        "status": target.get("status", "STAGING"),
+        "importEntry": import_entry,
+        "message": version_res.get("message", ""),
+    }
+
+
+def trigger_environment_ingestion(
+    cfg: dict[str, Any],
+    env_suffix: str,
+    import_entry: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Triggers Spanner ingestion via ingestion-helper for the target environment."""
+    if not import_entry:
+        version_res = update_import_version_helper(cfg)
+        if version_res.get("status") == "SKIPPED":
+            return version_res
+        import_entry = version_res["importEntry"]
+
+    ingestion_helper_url = cfg["helperUrlFn"](cfg["ingestionHelperService"],
+                                              env_suffix)
 
     ingest_res = _make_http_post(
         f"{ingestion_helper_url}/imports/ingest", {
@@ -640,16 +653,35 @@ def resolve_workflow_context(context: dict[str, Any],
 # -----------------------------------------------------------------------------
 
 
+@task(task_id="update_import_version", trigger_rule=TriggerRule.NONE_FAILED)
+def update_import_version(**context) -> dict[str, Any]:
+    """Updates import version once in prod import-helper-service."""
+    cfg = resolve_workflow_context(context)
+    return update_import_version_helper(cfg)
+
+
 @task(task_id="trigger_staging_ingestion")
 def trigger_staging_ingestion(**context) -> dict[str, Any]:
-    """Updates staging version and triggers Spanner ingestion via ingestion-helper."""
+    """Triggers staging Spanner ingestion via ingestion-helper."""
     cfg = resolve_workflow_context(context)
     if cfg["skipStagingIngestion"]:
         raise AirflowSkipException(
             "Staging ingestion skipped by configuration (skipStagingIngestion=True)."
         )
 
-    res = trigger_environment_ingestion(cfg, env_suffix="-staging")
+    ti = context.get("ti")
+    version_res = ti.xcom_pull(
+        task_ids="update_import_version") if ti else None
+    if isinstance(version_res, dict) and version_res.get("status") == "SKIPPED":
+        raise AirflowSkipException(
+            f"Staging ingestion skipped: {version_res.get('message', 'Skipped')}"
+        )
+
+    import_entry = version_res.get("importEntry") if isinstance(
+        version_res, dict) else None
+    res = trigger_environment_ingestion(cfg,
+                                        env_suffix="-staging",
+                                        import_entry=import_entry)
     if res.get("status") == "SKIPPED":
         raise AirflowSkipException(
             f"Staging ingestion skipped: {res.get('message', 'Skipped')}")
@@ -659,11 +691,19 @@ def trigger_staging_ingestion(**context) -> dict[str, Any]:
 
 @task(task_id="ingest_prod", trigger_rule=TriggerRule.NONE_FAILED)
 def ingest_prod(**context) -> dict[str, Any]:
-    """Updates prod version and triggers fire-and-forget prod Spanner ingestion."""
+    """Triggers fire-and-forget prod Spanner ingestion."""
     cfg = resolve_workflow_context(context)
     ti = context.get("ti")
+    version_res = ti.xcom_pull(
+        task_ids="update_import_version") if ti else None
     staging_res = ti.xcom_pull(
         task_ids="trigger_staging_ingestion") if ti else None
+
+    if isinstance(version_res, dict) and version_res.get("status") == "SKIPPED":
+        return {
+            "status": "SKIPPED",
+            "message": version_res.get("message", "Import version skipped"),
+        }
 
     # Check if an upstream golden test verification or pre-prod gate reported failure
     for gate_task_id in ("verify_golden_tests", "verify_schema_golden_gate",
@@ -697,7 +737,11 @@ def ingest_prod(**context) -> dict[str, Any]:
                 "Staging was not executed; skipping production ingestion."
         }
 
-    return trigger_environment_ingestion(cfg, env_suffix="")
+    import_entry = version_res.get("importEntry") if isinstance(
+        version_res, dict) else None
+    return trigger_environment_ingestion(cfg,
+                                         env_suffix="",
+                                         import_entry=import_entry)
 
 
 @task(task_id="workflow_summary", trigger_rule=TriggerRule.ALL_DONE)
@@ -713,6 +757,7 @@ def workflow_summary(**context) -> dict[str, Any]:
     stages = [
         ("import", "run_import_job"),
         ("validation", "run_validation_job"),
+        ("version", "update_import_version"),
         ("staging_trigger", "trigger_staging_ingestion"),
         ("staging_wait", "wait_staging_ingestion"),
         *([
@@ -937,12 +982,14 @@ def build_dag(
         )
         batch_task = run_import_job(import_name=import_name)
         validation_task = run_validation_job(import_name=import_name)
+        version_task = update_import_version()
         staging_task = trigger_staging_ingestion()
         prod_task = ingest_prod()
         summary_task = workflow_summary()
 
         pipeline: list[Any] = [
-            batch_task, validation_task, staging_task, staging_wait
+            batch_task, validation_task, version_task, staging_task,
+            staging_wait
         ]
         if has_golden_check:
             golden_task = verify_golden_tests()
