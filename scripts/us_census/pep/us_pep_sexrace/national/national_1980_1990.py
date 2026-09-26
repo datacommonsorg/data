@@ -48,7 +48,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     # reading the csv input file
     df = pd.read_table(url,
                        index_col=False,
-                       delim_whitespace=True,
+                       sep=r'\s+',
                        engine='python',
                        names=_cols)
     #Saving input file to local
