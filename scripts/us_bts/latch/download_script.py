@@ -120,7 +120,7 @@ def _download_paginated_socrata_file(
 def create_download_configs(gcs_urls_config_file: str) -> List[Dict]:
     """Reads the URL config JSON from GCS and generates the download configurations."""
     try:
-        result = subprocess.run(['gsutil', 'cat', gcs_urls_config_file],
+        result = subprocess.run(['gcloud', 'storage', 'cat', gcs_urls_config_file],
                                 capture_output=True,
                                 text=True,
                                 check=True,
@@ -131,7 +131,7 @@ def create_download_configs(gcs_urls_config_file: str) -> List[Dict]:
         )
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         logging.fatal(
-            f"Failed to read GCS config file '{gcs_urls_config_file}': {e}. Ensure 'gsutil' is in your PATH and the file exists."
+            f"Failed to read GCS config file '{gcs_urls_config_file}': {e}. Ensure 'gcloud' is in your PATH and the file exists."
         )
         return []
     except json.JSONDecodeError as e:

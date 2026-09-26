@@ -132,8 +132,6 @@ If the download script fails or logs HTTP `401 Unauthorized` / `403 Forbidden` e
    * Upload the updated configuration file to GCS:
      ```bash
      gcloud storage cp download_config.json gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json
-     # or
-     gsutil cp download_config.json gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json
      ```
 3. **Verify Download**:
    * Re-run `python3 download_script.py` and verify `india_nss_health_ailments.csv` downloads successfully.
