@@ -9,8 +9,8 @@ This import focuses on data about full-time equivalent (FTE) teachers and staff 
 - **Source**: U.S. Department of Education, Civil Rights Data Collection (CRDC)
 - **Provenance URL**: [https://civilrightsdata.ed.gov/data](https://civilrightsdata.ed.gov/data)
 - **Geographic Entities**: Public schools across the United States identified by NCES School IDs (`nces/...`).
-- **Temporal Scope**: Biennial data covering school years 2009-10 (2010), 2011-12 (2012), 2013-14 (2014), 2015-16 (2016), 2017-18 (2018), 2020-21 (2021), and 2021-22 (2022). Future releases are automatically supported.
-- **Statistical Variables**: Number of Full-Time Equivalent (FTE) teachers and school staff (Total FTE teachers, certified teachers, uncertified teachers, school counselors, nurses, psychologists, social workers, and security staff / law enforcement officers).
+- **Temporal Scope**: Biennial data covering school years 2009-10 (2010), 2011-12 (2012), 2013-14 (2014), 2015-16 (2016), 2017-18 (2018), 2020-21 (2021), 2021-22 (2022), and 2023-24 (2024). Future releases are automatically supported.
+- **Statistical Variables**: Number of Full-Time Equivalent (FTE) teachers and school staff (Total FTE teachers, certified teachers, uncertified teachers, 1st/2nd year teachers, teachers absent >10 days, school counselors, nurses, psychologists, social workers, and security staff / law enforcement officers), plus teacher headcounts by race/gender and current/previous school year totals.
 
 -----
 
@@ -38,7 +38,6 @@ This import focuses on data about full-time equivalent (FTE) teachers and staff 
 | `metadata.csv` | Configuration file specifying header row offsets, output columns, and provenance URL. |
 | `manifest.json` | Manifest declaring import metadata, input/output files, cron schedule, and validation rules. |
 | `validation_config.json` | Configuration file defining validation rules and thresholds. |
-| `golden_data/` | Directory containing golden summary files for validation checks. |
 | `test_data/` | Directory containing sample input data and expected outputs for testing. |
 
 -----
@@ -110,8 +109,8 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --pv_map=teachers_and_staff_pvmap.csv \
   --config_file=metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --output_path=output_files/teachers_and_staff_2018_2022_output \
-  --output_counters=counters/teachers_and_staff_2018_2022_counters.csv \
+  --output_path=output_files/teachers_and_staff_2018Onwards_output \
+  --output_counters=counters/teachers_and_staff_2018Onwards_counters.csv \
   --log_level=-2 \
   --log_every_n=1000
 ```
@@ -130,17 +129,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --pv_map=teachers_and_staff_pvmap.csv \
   --config_file=metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --output_path=test_data/test_output
-```
-
-### Run Golden Validations
-
-To validate generated outputs against checked-in golden summaries:
-
-```bash
-python3 ../../../tools/import_validation/validator_goldens.py \
-  --validate_goldens_input=output_files/teachers_and_staff_2010_2014_output/genmcf/summary_report.csv \
-  --validate_goldens=golden_data/golden_summary_2010_2014.csv
+  --output_path=test_data/teachers_and_staff_output
 ```
 
 -----

@@ -24,6 +24,8 @@ SCH_TEACHERS_CURR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,populationTy
 SCH_TEACHERS_CURR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,WhiteAlone,gender,Female,timePeriod,CurrentSchoolYear
 SCH_TEACHERS_CURR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,TwoOrMoreRaces,gender,Male,timePeriod,CurrentSchoolYear
 SCH_TEACHERS_CURR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,TwoOrMoreRaces,gender,Female,timePeriod,CurrentSchoolYear
+TOT_TEACHERS_CURR_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,gender,Male,timePeriod,CurrentSchoolYear
+TOT_TEACHERS_CURR_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,gender,Female,timePeriod,CurrentSchoolYear
 COUNSEL,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SchoolCounselor,,
 SCH_FTECOUNSELORS,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SchoolCounselor,,
 SCH_FTESERVICES_NUR,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,Nurse,,
