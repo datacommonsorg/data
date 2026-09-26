@@ -13,7 +13,7 @@ Variables listed in
 To generate TMCF and CSV files, from parent directory (`subject_tables`), run:
 
 ```
-python3 common/process.py --output=s2201 --download_id=df462630dbf2e2a5f4ec4d7768b8338d00f24adc0535e5393b2335ac196d5cd0 --features=s2201/features.json --stat_vars=s2201/stat_vars.csv
+python3 s2201/process.py --output=s2201 --download_id=df462630dbf2e2a5f4ec4d7768b8338d00f24adc0535e5393b2335ac196d5cd0 --features=s2201/features.json --stat_vars=s2201/stat_vars.csv
 ```
 
 ## Steps to obtain dowload ID:

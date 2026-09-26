@@ -109,12 +109,16 @@ def write_csv(filename, reader, output, features, stat_vars):
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         observation_date = filename.split('ACSST5Y')[1][:4]
         valid_columns = {}
+        if reader.fieldnames:
+            reader.fieldnames = [col.strip('\ufeff"') for col in reader.fieldnames]
+
         for row in reader:
 
             # Check if GEO_ID ends with '99999' and ignore it
-            if row['\ufeff"GEO_ID"'].endswith('99999'):
+            geo_id_val = row.get('GEO_ID', '')
+            if geo_id_val.endswith('99999'):
                 continue
-            if row['\ufeff"GEO_ID"'] == 'Geography':
+            if geo_id_val == 'Geography':
 
                 # Map feature names to stat vars
                 for c in row:
@@ -124,19 +128,12 @@ def write_csv(filename, reader, output, features, stat_vars):
                         valid_columns[c] = sv
                 continue
             else:
-                for c in row:
-                    if row[c].__contains__(",") == True:
-                        row[c] = str(row[c]).replace(",", "")
-                #  if str(c)[-1:] == '-' or str(c)[-1:] == '+':
-                #             c=str(c)[:-1]
+                for c in valid_columns:
+                    if c in row and isinstance(row[c], str) and ',' in row[c]:
+                        row[c] = row[c].replace(',', '')
 
-            #new_row = {
-            #'observationDate': observation_date,
-            # TODO: Expand to support other prefixes?
-            #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
-        # }
-            geo = row['\ufeff"GEO_ID"'].split('US')
-            if geo[1] == "":
+            geo = geo_id_val.split('US')
+            if len(geo) < 2 or geo[1] == "":
                 new_row = {
                     'observationDate': observation_date,
                     'observationAbout': 'dcid:country/USA'
