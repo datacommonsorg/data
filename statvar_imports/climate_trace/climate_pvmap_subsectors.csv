@@ -72,7 +72,7 @@ non-residential-onsite-fuel-usage,emissionSource,FuelCombustionForNonResidential
 forest-land-clearing,emissionSource,ForestClearing,,,,,,,,,,
 forest-land-degradation,emissionSource,ForestLandDegredation,,,,,,,,,,
 forest-land-fires,emissionSource,ForestLandFire,,,,,,,,,,
-removals,emissionSource,Removals,,,,,,,,,,
+removals,emissionSource,EmissionRemovals,,,,,,,,,,
 shrubgrass-fires,emissionSource,ShrublandFire,,,,,,,,,,
 water-reservoirs,emissionSource,WaterReservoirs,,,,,,,,,,
 wetland-fires,emissionSource,WetlandFire,,,,,,,,,,
