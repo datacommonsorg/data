@@ -1,0 +1,9 @@
+Node: E:unemployment_by_sex_and_age_annual_data_output->E0
+observationDate: C:unemployment_by_sex_and_age_annual_data_output->observationDate
+observationAbout: C:unemployment_by_sex_and_age_annual_data_output->observationAbout
+variableMeasured: C:unemployment_by_sex_and_age_annual_data_output->variableMeasured
+value: C:unemployment_by_sex_and_age_annual_data_output->value
+observationPeriod: C:unemployment_by_sex_and_age_annual_data_output->observationPeriod
+unit: C:unemployment_by_sex_and_age_annual_data_output->unit
+scalingFactor: C:unemployment_by_sex_and_age_annual_data_output->scalingFactor
+typeOf: dcs:StatVarObservation
