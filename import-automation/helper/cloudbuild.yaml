@@ -34,18 +34,11 @@ substitutions:
   _DEPLOY_SERVICES: 'true'
   _LOCATION: 'us-central1'
   _BQ_DATASET_ID: 'import_automation'
-  _STAGING_BQ_DATASET_ID: 'import_automation_staging'
   _AIRFLOW_WEB_SERVER_URL: 'https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com'
   # Test environment (datcom-ci)
   _TEST_PROJECT_ID: 'datcom-ci'
   _TEST_PROJECT_NUMBER: '879489846695'
-  _TEST_SPANNER_DATABASE_PATH: 'projects/datcom-ci/instances/datcom-spanner-test/databases/dc-test-db'
   _TEST_GCS_BUCKET_ID: 'datcom-ci-test'
-  # Staging environment (datcom-import-automation-prod)
-  _PROD_PROJECT_ID: 'datcom-import-automation-prod'
-  _PROD_PROJECT_NUMBER: '965988403328'
-  _STAGING_SPANNER_DATABASE_PATH: 'projects/datcom-store/instances/dc-graph-staging/databases/dc_graph'
-  _PROD_GCS_BUCKET_ID: 'datcom-prod-imports'
 
 steps:
   # 1. Run unit tests
@@ -98,32 +91,13 @@ steps:
           echo "Skipping test deployment (_DEPLOY_SERVICES=${_DEPLOY_SERVICES})."
           exit 0
         fi
-        gcloud run deploy import-helper-service-staging \
+        gcloud run deploy import-helper-service \
           --image="${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}" \
           --region="${_LOCATION}" \
           --project="${_TEST_PROJECT_ID}" \
           --no-allow-unauthenticated \
-          --set-env-vars="PROJECT_ID=${_TEST_PROJECT_ID},LOCATION=${_LOCATION},PROJECT_NUMBER=${_TEST_PROJECT_NUMBER},BQ_DATASET_ID=${_STAGING_BQ_DATASET_ID},SPANNER_DATABASE_PATH=${_TEST_SPANNER_DATABASE_PATH},GCS_BUCKET_ID=${_TEST_GCS_BUCKET_ID},INGESTION_HELPER_SERVICE=ingestion-helper-service-staging,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow-staging,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow-staging,AIRFLOW_WEB_SERVER_URL=${_AIRFLOW_WEB_SERVER_URL}"
+          --set-env-vars="PROJECT_ID=${_TEST_PROJECT_ID},LOCATION=${_LOCATION},PROJECT_NUMBER=${_TEST_PROJECT_NUMBER},BQ_DATASET_ID=${_BQ_DATASET_ID},GCS_BUCKET_ID=${_TEST_GCS_BUCKET_ID},INGESTION_HELPER_SERVICE=ingestion-helper-service-staging,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow-staging,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=${_AIRFLOW_WEB_SERVER_URL}"
     waitFor: ['push-image']
-
-  # 5. Deploy to Staging environment (datcom-import-automation-prod)
-  - id: 'deploy-staging'
-    name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        if [ "${_DEPLOY_SERVICES}" != "true" ]; then
-          echo "Skipping staging deployment (_DEPLOY_SERVICES=${_DEPLOY_SERVICES})."
-          exit 0
-        fi
-        gcloud run deploy import-helper-service-staging \
-          --image="${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}" \
-          --region="${_LOCATION}" \
-          --project="${_PROD_PROJECT_ID}" \
-          --no-allow-unauthenticated \
-          --set-env-vars="PROJECT_ID=${_PROD_PROJECT_ID},LOCATION=${_LOCATION},PROJECT_NUMBER=${_PROD_PROJECT_NUMBER},BQ_DATASET_ID=${_STAGING_BQ_DATASET_ID},SPANNER_DATABASE_PATH=${_STAGING_SPANNER_DATABASE_PATH},GCS_BUCKET_ID=${_PROD_GCS_BUCKET_ID},INGESTION_HELPER_SERVICE=ingestion-helper-service-staging,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow-staging,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow-staging,AIRFLOW_WEB_SERVER_URL=${_AIRFLOW_WEB_SERVER_URL}"
-    waitFor: ['deploy-test']
 
 images:
   - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_VERSION}'

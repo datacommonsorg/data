@@ -13,6 +13,7 @@
 # limitations under the License.
 """End-to-end test for import automation Cloud Workflow."""
 
+from datetime import datetime, timezone
 import json
 import os
 import sys
@@ -20,26 +21,16 @@ import time
 
 from absl import app
 from absl import logging
-from google.cloud import spanner
+from google.cloud import bigquery
 from google.cloud.workflows import executions_v1
 
 PROJECT_ID = os.environ.get('PROJECT_ID', 'datcom-ci')
 LOCATION = os.environ.get('LOCATION', 'us-central1')
-SPANNER_DATABASE_PATH = os.environ.get('SPANNER_DATABASE_PATH')
-if SPANNER_DATABASE_PATH and len(SPANNER_DATABASE_PATH.split('/')) >= 6:
-    _parts = SPANNER_DATABASE_PATH.split('/')
-    SPANNER_PROJECT_ID = _parts[1]
-    SPANNER_INSTANCE_ID = _parts[3]
-    SPANNER_DATABASE_ID = _parts[5]
-else:
-    SPANNER_PROJECT_ID = os.environ.get('SPANNER_PROJECT_ID', 'datcom-ci')
-    SPANNER_INSTANCE_ID = os.environ.get('SPANNER_INSTANCE_ID',
-                                         'datcom-spanner-test')
-    SPANNER_DATABASE_ID = os.environ.get('SPANNER_DATABASE_ID', 'dc-test-db')
+BQ_DATASET_ID = os.environ.get('BQ_DATASET_ID', 'import_automation')
 GCS_BUCKET_ID = os.environ.get('GCS_BUCKET_ID', 'datcom-ci-test')
 GCS_MOUNT_BUCKET = os.environ.get('GCS_MOUNT_BUCKET', 'datcom-ci-test')
 IMPORT_WORKFLOW_ID = os.environ.get('IMPORT_WORKFLOW_ID',
-                                    'import-automation-workflow-staging')
+                                    'import-automation-workflow')
 
 # Test Import Configuration
 TEST_IMPORT_NAME = ('scripts/us_fed/treasury_constant_maturity_rates:'
@@ -81,89 +72,68 @@ def trigger_workflow_and_wait(project_id: str, location: str, workflow_id: str,
         backoff_delay = min(backoff_delay * 2, 60)
 
 
-def verify_spanner_data(import_name):
-    """Verifies that the import data exists in ImportSummary and ImportHistory in Spanner."""
-    logging.info('Verifying Spanner data for import: %s', import_name)
-    spanner_client = spanner.Client(project=SPANNER_PROJECT_ID)
-    instance = spanner_client.instance(SPANNER_INSTANCE_ID)
-    database = instance.database(SPANNER_DATABASE_ID)
+def verify_bigquery_data(import_name: str, start_timestamp: datetime):
+    """Verifies that the import data exists in ImportSummary and ImportHistory in BigQuery."""
+    logging.info('Verifying BigQuery data for import: %s in %s.%s', import_name,
+                 PROJECT_ID, BQ_DATASET_ID)
+    bq_client = bigquery.Client(project=PROJECT_ID)
 
-    with database.snapshot(multi_use=True) as snapshot:
-        query_summary = ('SELECT State, LatestVersion FROM ImportSummary '
-                         'WHERE ImportName = @import_name')
-        params = {'import_name': import_name}
-        param_types = {'import_name': spanner.param_types.STRING}
+    summary_table = f'`{PROJECT_ID}.{BQ_DATASET_ID}.ImportSummary`'
+    history_table = f'`{PROJECT_ID}.{BQ_DATASET_ID}.ImportHistory`'
 
-        results_summary = list(
-            snapshot.execute_sql(query_summary,
-                                 params=params,
-                                 param_types=param_types))
+    job_config = bigquery.QueryJobConfig(query_parameters=[
+        bigquery.ScalarQueryParameter('import_name', 'STRING', import_name),
+        bigquery.ScalarQueryParameter('start_ts', 'TIMESTAMP', start_timestamp),
+    ])
 
-        if not results_summary:
-            raise AssertionError(
-                f'Import {import_name} not found in ImportSummary table.')
+    query_summary = f"""
+        SELECT State, LatestVersion, StatusUpdateTimestamp
+        FROM {summary_table}
+        WHERE ImportName = @import_name
+          AND StatusUpdateTimestamp >= @start_ts
+    """
+    results_summary = list(
+        bq_client.query(query_summary, job_config=job_config).result())
 
-        state, latest_version = results_summary[0]
-        logging.info(
-            'Import %s verified in ImportSummary with state: %s, latest_version: %s',
-            import_name, state, latest_version)
+    if not results_summary:
+        raise AssertionError(
+            f'Import {import_name} not found in {summary_table} with StatusUpdateTimestamp >= {start_timestamp.isoformat()}.'
+        )
 
-        query_history = """
-            SELECT Version, Status, Comment
-            FROM ImportHistory
-            WHERE ImportName = @import_name
-            ORDER BY UpdateTimestamp DESC
-            LIMIT 1
-        """
-        results_history = list(
-            snapshot.execute_sql(query_history,
-                                 params=params,
-                                 param_types=param_types))
+    row_summary = results_summary[0]
+    logging.info(
+        'Import %s verified in ImportSummary with state: %s, latest_version: %s, updated_at: %s',
+        import_name, row_summary.State, row_summary.LatestVersion,
+        row_summary.StatusUpdateTimestamp)
 
-        if not results_history:
-            raise AssertionError(
-                f'Import {import_name} not found in ImportHistory table.')
+    query_history = f"""
+        SELECT Version, Status, Comment, UpdateTimestamp
+        FROM {history_table}
+        WHERE ImportName = @import_name
+          AND UpdateTimestamp >= @start_ts
+        ORDER BY UpdateTimestamp DESC
+        LIMIT 1
+    """
+    results_history = list(
+        bq_client.query(query_history, job_config=job_config).result())
 
-        version, status, comment = results_history[0]
-        logging.info(
-            'Import %s verified in ImportHistory: version=%s, status=%s, comment=%s',
-            import_name, version, status, comment)
+    if not results_history:
+        raise AssertionError(
+            f'Import {import_name} not found in {history_table} with UpdateTimestamp >= {start_timestamp.isoformat()}.'
+        )
 
-
-def cleanup_spanner(import_name):
-    """Cleans up the import data from Spanner to ensure a clean state."""
-    logging.info('Cleaning up Spanner data for import: %s', import_name)
-    spanner_client = spanner.Client(project=SPANNER_PROJECT_ID)
-    instance = spanner_client.instance(SPANNER_INSTANCE_ID)
-    database = instance.database(SPANNER_DATABASE_ID)
-
-    def _delete_import(transaction):
-        query1 = 'DELETE FROM ImportSummary WHERE ImportName = @import_name'
-        query2 = 'DELETE FROM ImportHistory WHERE ImportName = @import_name'
-        params = {'import_name': import_name}
-        param_types = {'import_name': spanner.param_types.STRING}
-        transaction.execute_update(query1,
-                                   params=params,
-                                   param_types=param_types)
-        transaction.execute_update(query2,
-                                   params=params,
-                                   param_types=param_types)
-
-    try:
-        database.run_in_transaction(_delete_import)
-        logging.info(
-            'Successfully cleaned up %s from ImportSummary and ImportHistory tables.',
-            import_name)
-    except Exception as e:
-        logging.warning('Error during Spanner cleanup: %s', e)
+    row_history = results_history[0]
+    logging.info(
+        'Import %s verified in ImportHistory: version=%s, status=%s, comment=%s, updated_at=%s',
+        import_name, row_history.Version, row_history.Status,
+        row_history.Comment, row_history.UpdateTimestamp)
 
 
 def main(argv):
     del argv  # Unused.
     try:
-        logging.info('Step 0: Cleanup Spanner...')
         short_import_name = TEST_IMPORT_NAME.split(':')[-1]
-        cleanup_spanner(short_import_name)
+        start_timestamp = datetime.now(timezone.utc)
 
         import_config = {
             'gcp_project_id': PROJECT_ID,
@@ -189,8 +159,8 @@ def main(argv):
                                                     import_workflow_args)
         logging.info('Workflow result: %s', workflow_result)
 
-        logging.info('Step 2: Verifying Data in Spanner...')
-        verify_spanner_data(short_import_name)
+        logging.info('Step 2: Verifying Data in BigQuery...')
+        verify_bigquery_data(short_import_name, start_timestamp)
 
         logging.info('Import automation test completed successfully.')
 

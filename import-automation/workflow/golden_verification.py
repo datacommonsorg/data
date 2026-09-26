@@ -383,7 +383,7 @@ def verify_golden_tests(**context) -> dict[str, Any]:
         exec_dt = context.get("logical_date") or context.get("execution_date")
         exec_time = int(time.time() -
                         (exec_dt.timestamp() if exec_dt else start_time))
-        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "-staging")
+        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
         _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
                                cfg["gcsImportBucket"], exec_time)
 
@@ -397,7 +397,7 @@ def verify_golden_tests(**context) -> dict[str, Any]:
         exec_dt = context.get("logical_date") or context.get("execution_date")
         exec_time = int(time.time() -
                         (exec_dt.timestamp() if exec_dt else start_time))
-        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "-staging")
+        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
         _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
                                cfg["gcsImportBucket"], exec_time)
         raise AirflowFailException(f"Golden verification error: {e}") from e
