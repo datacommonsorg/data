@@ -18,28 +18,36 @@ import pandas as pd
 from absl import app
 from absl import flags
 
-flags.DEFINE_string('input_path', None,
-                    'Path to input CSV with state level data.')
-flags.DEFINE_string('output_path', None, 'Output CSV path.')
-
 _FLAGS = flags.FLAGS
 
 
-def main(argv):
-    df = pd.read_csv(_FLAGS.input_path)
-
-    # Aggregating all count stat vars
-    df_count = df.loc[df['StatVar'].str.startswith('Count')].copy()
+def aggregate_state_to_country(input_df: pd.DataFrame) -> pd.DataFrame:
+    """Aggregates state level data to country level for Count_* StatVars."""
+    df_count = input_df.loc[input_df['StatVar'].str.startswith('Count')].copy()
     if 'Unit' in df_count.columns:
         df_count.drop('Unit', axis=1, inplace=True)  # Count statvars have no unit.
     df_count.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
-                             keep='first',
+                             keep='last',
                              inplace=True)
+    df_count['Quantity'] = pd.to_numeric(df_count['Quantity'], errors='coerce')
     country_df = df_count.groupby(by=['Year', 'StatVar'],
                                   as_index=False).agg({'Quantity': 'sum'})
+    if pd.api.types.is_numeric_dtype(country_df['Quantity']):
+        country_df['Quantity'] = country_df['Quantity'].round().astype('Int64')
+    country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
+    return country_df
+
+
+def main(argv):
+    df = pd.read_csv(_FLAGS.input_path, dtype=str)
+    country_df = aggregate_state_to_country(df)
     country_df.to_csv(_FLAGS.output_path, index=False)
 
 
 if __name__ == "__main__":
+    flags.DEFINE_string('input_path', None,
+                        'Path to input CSV with state level data.')
+    flags.DEFINE_string('output_path', None, 'Output CSV path.')
     flags.mark_flags_as_required(['input_path', 'output_path'])
     app.run(main)
+

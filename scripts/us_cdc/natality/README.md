@@ -60,18 +60,18 @@ scripts/us_cdc/natality/
 - **Google Cloud SDK (`gcloud`)**: Configured with credentials to access GCS buckets.
 - **Python Dependencies**:
   ```bash
-  pip install pandas absl-py requests
+  pip install pandas absl-py
   ```
 
 ---
 
-## Running the Import
+## Running the Automated Pipeline
 
 ### 1. Download Input Data
 ```bash
 ./scripts/us_cdc/natality/download.sh
 ```
-This downloads preprocessed and raw input files into `scripts/us_cdc/natality/input_files/`.
+This downloads preprocessed input files from the latest version folder in `gs://unresolved_mcf/cdc/wonder/natality/` into `scripts/us_cdc/natality/input_files/`.
 
 ### 2. Process and Generate Output Files
 ```bash
@@ -84,10 +84,34 @@ This cleans, consolidates, and formats the output data into `output/`:
 
 ---
 
+## Manual Preprocessing & Staging Workflow (For Dataset Updates)
+
+When CDC releases a new Natality dataset bracket on [CDC WONDER](https://wonder.cdc.gov/natality.html):
+1. **Export Data**: Export TSV data from the CDC WONDER online query tool.
+2. **Clean Raw Exports**:
+   ```bash
+   python3 scripts/us_cdc/natality/clean_cdc_data.py --input_path=<raw_tsv_dir> --output_path=<cleaned_tsv_dir>
+   ```
+3. **Preprocess State/County Data**:
+   ```bash
+   python3 scripts/us_cdc/natality/preprocess.py --input_path=<cleaned_tsv_dir> --config_path=scripts/us_cdc/natality/state/<config.json> --output_path=<output_dir>
+   ```
+4. **Aggregate Country Level Data**:
+   ```bash
+   python3 scripts/us_cdc/natality/aggregate.py --input_path=<state_csv_path> --output_path=<country_csv_path>
+   ```
+5. **Stage to GCS**:
+   Upload the preprocessed CSV files to a new dated snapshot directory under `gs://unresolved_mcf/cdc/wonder/natality/{country,states,county}/<YYYYMMDD>/`. The automated pipeline will pick up the latest dated folder on its next run.
+
+---
+
 ## Running Tests
 
-Run the unit tests:
+Run the test suite via the repository test runner or unittest:
 ```bash
-python3 -m unittest scripts/us_cdc/natality/preprocess_test.py
-python3 -m unittest scripts/us_cdc/natality/process_test.py
+# Using repository test runner
+./run_tests.sh -p scripts/us_cdc/natality
+
+# Using Python unittest
+python3 -m unittest scripts/us_cdc/natality/preprocess_test.py scripts/us_cdc/natality/process_test.py
 ```

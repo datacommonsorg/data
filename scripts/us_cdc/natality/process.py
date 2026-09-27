@@ -30,6 +30,11 @@ from absl import flags
 from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.append(_SCRIPT_DIR)
+
+from aggregate import aggregate_state_to_country
+
 
 _DEFAULT_INPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'output')
@@ -149,15 +154,7 @@ def process_preprocessed_data(input_dir: str, output_dir: str) -> bool:
             logging.info('Generating country aggregations from state data...')
             country_out = os.path.join(output_dir, 'country.csv')
             state_df = pd.read_csv(state_out, dtype=str)
-            count_df = state_df[state_df['StatVar'].str.startswith(
-                'Count')].copy()
-            count_df['Quantity'] = pd.to_numeric(count_df['Quantity'],
-                                                 errors='coerce')
-            country_df = count_df.groupby(['Year', 'StatVar'],
-                                          as_index=False)['Quantity'].sum()
-            if pd.api.types.is_numeric_dtype(country_df['Quantity']):
-                country_df['Quantity'] = country_df['Quantity'].round().astype('Int64')
-            country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
+            country_df = aggregate_state_to_country(state_df)
             country_df.to_csv(country_out, index=False)
             logging.info(f'Generated country CSV with {len(country_df)} rows.')
 
@@ -167,6 +164,17 @@ def process_preprocessed_data(input_dir: str, output_dir: str) -> bool:
         _merge_csv_files(country_csvs,
                          country_out,
                          dedupe_keys=['Year', 'StatVar'])
+
+    # Ensure count StatVars are properly formatted as integers (no .0 float notation)
+    country_out = os.path.join(output_dir, 'country.csv')
+    if os.path.exists(country_out):
+        cdf = pd.read_csv(country_out, dtype=str)
+        if 'Quantity' in cdf.columns and 'StatVar' in cdf.columns:
+            count_mask = cdf['StatVar'].str.startswith('Count')
+            cdf.loc[count_mask, 'Quantity'] = pd.to_numeric(
+                cdf.loc[count_mask, 'Quantity'], errors='coerce'
+            ).round().astype('Int64').astype(str)
+            cdf.to_csv(country_out, index=False)
 
     return True
 
@@ -232,13 +240,14 @@ def main(argv):
                 mock_county_df = pd.read_csv(tmp_state_csv, dtype=str)
                 if 'Geo' in mock_county_df.columns:
                     mock_county_df['Geo'] = mock_county_df['Geo'].apply(
-                        lambda g: f'{g}001' if str(g).startswith('geoId/') and len(str(g)) == 9 else g
+                        lambda g: f'{g}001' if bool(re.match(r'^geoId/\d{2}$', str(g).strip())) else g
                     )
                 mock_county_df.to_csv(county_csv, index=False)
         else:
-            raise RuntimeError(
+            logging.fatal(
                 f'No valid input data found in {input_path}. Ensure download.sh ran successfully or input files exist.'
             )
+            sys.exit(1)
 
     copy_tmcf_files(output_path)
 
@@ -250,8 +259,9 @@ def main(argv):
                 os.path.getsize(os.path.join(output_path, f)) > 0)
     ]
     if missing:
-        raise RuntimeError(
+        logging.fatal(
             f'Pipeline completed with missing or empty required output files: {missing}')
+        sys.exit(1)
 
     logging.info('CDC Wonder Natality processing completed successfully.')
 

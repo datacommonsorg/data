@@ -18,6 +18,7 @@ set -e -o pipefail
 SCRIPT_DIR=$(dirname "$0")
 INPUT_DIR="$SCRIPT_DIR/input_files"
 
+rm -rf "$INPUT_DIR"
 mkdir -p "$INPUT_DIR/country"
 mkdir -p "$INPUT_DIR/states"
 mkdir -p "$INPUT_DIR/county"
@@ -30,9 +31,21 @@ if ! command -v gcloud &> /dev/null; then
     exit 1
 fi
 
-gcloud storage cp "$GCS_BASE/country/*/*.csv" "$INPUT_DIR/country/"
-gcloud storage cp "$GCS_BASE/states/*/*.csv" "$INPUT_DIR/states/"
-gcloud storage cp "$GCS_BASE/county/*/*.csv" "$INPUT_DIR/county/"
+# Select latest dated version folder per geographic level to prevent multi-version collisions
+LATEST_COUNTRY_DIR=$(gcloud storage ls "$GCS_BASE/country/" | grep -E '/[0-9]{8}/' | sort | tail -n 1)
+LATEST_STATE_DIR=$(gcloud storage ls "$GCS_BASE/states/" | grep -E '/[0-9]{8}/' | sort | tail -n 1)
+LATEST_COUNTY_DIR=$(gcloud storage ls "$GCS_BASE/county/" | grep -E '/[0-9]{8}/' | sort | tail -n 1)
+
+[ -z "$LATEST_COUNTRY_DIR" ] && LATEST_COUNTRY_DIR="$GCS_BASE/country/*/"
+[ -z "$LATEST_STATE_DIR" ] && LATEST_STATE_DIR="$GCS_BASE/states/*/"
+[ -z "$LATEST_COUNTY_DIR" ] && LATEST_COUNTY_DIR="$GCS_BASE/county/*/"
+
+echo "Downloading country data from $LATEST_COUNTRY_DIR..."
+gcloud storage cp "${LATEST_COUNTRY_DIR}*.csv" "$INPUT_DIR/country/"
+echo "Downloading state data from $LATEST_STATE_DIR..."
+gcloud storage cp "${LATEST_STATE_DIR}*.csv" "$INPUT_DIR/states/"
+echo "Downloading county data from $LATEST_COUNTY_DIR..."
+gcloud storage cp "${LATEST_COUNTY_DIR}*.csv" "$INPUT_DIR/county/"
 
 # Flatten and rename files to prevent directory collisions during executor GCS upload
 for f in "$INPUT_DIR"/country/*.csv; do
