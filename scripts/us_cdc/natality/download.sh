@@ -32,13 +32,14 @@ if ! command -v gcloud &> /dev/null; then
 fi
 
 # Select latest dated version folder per geographic level to prevent multi-version collisions
-LATEST_COUNTRY_DIR=$(gcloud storage ls "$GCS_BASE/country/" | grep -E '/[0-9]{8}/' | sort | tail -n 1)
-LATEST_STATE_DIR=$(gcloud storage ls "$GCS_BASE/states/" | grep -E '/[0-9]{8}/' | sort | tail -n 1)
-LATEST_COUNTY_DIR=$(gcloud storage ls "$GCS_BASE/county/" | grep -E '/[0-9]{8}/' | sort | tail -n 1)
+LATEST_COUNTRY_DIR=$(gcloud storage ls "$GCS_BASE/country/" 2>/dev/null | grep -E '/[0-9]{8}/' | sort | tail -n 1 || true)
+LATEST_STATE_DIR=$(gcloud storage ls "$GCS_BASE/states/" 2>/dev/null | grep -E '/[0-9]{8}/' | sort | tail -n 1 || true)
+LATEST_COUNTY_DIR=$(gcloud storage ls "$GCS_BASE/county/" 2>/dev/null | grep -E '/[0-9]{8}/' | sort | tail -n 1 || true)
 
-[ -z "$LATEST_COUNTRY_DIR" ] && LATEST_COUNTRY_DIR="$GCS_BASE/country/*/"
-[ -z "$LATEST_STATE_DIR" ] && LATEST_STATE_DIR="$GCS_BASE/states/*/"
-[ -z "$LATEST_COUNTY_DIR" ] && LATEST_COUNTY_DIR="$GCS_BASE/county/*/"
+if [ -z "$LATEST_COUNTRY_DIR" ] || [ -z "$LATEST_STATE_DIR" ] || [ -z "$LATEST_COUNTY_DIR" ]; then
+    echo "ERROR: Failed to resolve dated [0-9]{8}/ snapshot directories in $GCS_BASE" >&2
+    exit 1
+fi
 
 echo "Downloading country data from $LATEST_COUNTRY_DIR..."
 gcloud storage cp "${LATEST_COUNTRY_DIR}*.csv" "$INPUT_DIR/country/"

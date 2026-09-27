@@ -35,7 +35,6 @@ if _SCRIPT_DIR not in sys.path:
 
 from aggregate import aggregate_state_to_country
 
-
 _DEFAULT_INPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'output')
 
@@ -52,6 +51,7 @@ _FLAGS = flags.FLAGS
 
 def _merge_csv_files(csv_files: list, output_csv_path: str, dedupe_keys: list):
     """Merges multiple CSV files into one, deduplicating records by key columns."""
+
     def _extract_start_year(filepath):
         # Match pattern like '95-02', '03-06', '07-20', '16-20', '16-22'
         m = re.search(r'(\d{2})-(\d{2})', os.path.basename(filepath))
@@ -126,7 +126,8 @@ def process_preprocessed_data(input_dir: str, output_dir: str) -> bool:
                     elif re.match(r'^geoId/\d{5}$', sample_geo):
                         county_csvs.append(f)
                     else:
-                        logging.warning(f'Unrecognized Geo format in {f}: {sample_geo}')
+                        logging.warning(
+                            f'Unrecognized Geo format in {f}: {sample_geo}')
             except Exception as e:
                 logging.warning(f'Could not classify {f}: {e}')
 
@@ -172,8 +173,8 @@ def process_preprocessed_data(input_dir: str, output_dir: str) -> bool:
         if 'Quantity' in cdf.columns and 'StatVar' in cdf.columns:
             count_mask = cdf['StatVar'].str.startswith('Count')
             cdf.loc[count_mask, 'Quantity'] = pd.to_numeric(
-                cdf.loc[count_mask, 'Quantity'], errors='coerce'
-            ).round().astype('Int64').astype(str)
+                cdf.loc[count_mask,
+                        'Quantity'], errors='coerce').round().astype('Int64')
             cdf.to_csv(country_out, index=False)
 
     return True
@@ -240,14 +241,14 @@ def main(argv):
                 mock_county_df = pd.read_csv(tmp_state_csv, dtype=str)
                 if 'Geo' in mock_county_df.columns:
                     mock_county_df['Geo'] = mock_county_df['Geo'].apply(
-                        lambda g: f'{g}001' if bool(re.match(r'^geoId/\d{2}$', str(g).strip())) else g
-                    )
+                        lambda g: f'{g}001'
+                        if bool(re.match(r'^geoId/\d{2}$',
+                                         str(g).strip())) else g)
                 mock_county_df.to_csv(county_csv, index=False)
         else:
             logging.fatal(
                 f'No valid input data found in {input_path}. Ensure download.sh ran successfully or input files exist.'
             )
-            sys.exit(1)
 
     copy_tmcf_files(output_path)
 
@@ -260,8 +261,8 @@ def main(argv):
     ]
     if missing:
         logging.fatal(
-            f'Pipeline completed with missing or empty required output files: {missing}')
-        sys.exit(1)
+            f'Pipeline completed with missing or empty required output files: {missing}'
+        )
 
     logging.info('CDC Wonder Natality processing completed successfully.')
 

@@ -32,9 +32,12 @@ class ProcessPipelineTest(unittest.TestCase):
             output_dir = os.path.join(tmp_dir, 'output')
             os.makedirs(input_dir, exist_ok=True)
 
-            sample_country_csv = os.path.join(input_dir, 'country_cleaned_16-20.csv')
-            sample_state_csv = os.path.join(input_dir, 'state_cleaned_16-20.csv')
-            sample_county_csv = os.path.join(input_dir, 'county_cleaned_16-20.csv')
+            sample_country_csv = os.path.join(input_dir,
+                                              'country_cleaned_16-20.csv')
+            sample_state_csv = os.path.join(input_dir,
+                                            'state_cleaned_16-20.csv')
+            sample_county_csv = os.path.join(input_dir,
+                                             'county_cleaned_16-20.csv')
 
             country_df = pd.DataFrame([{
                 'Year': '2020',
@@ -89,7 +92,8 @@ class ProcessPipelineTest(unittest.TestCase):
                 self.assertGreater(os.path.getsize(out_path), 0,
                                    f'Output file is empty: {filename}')
 
-            result_country = pd.read_csv(os.path.join(output_dir, 'country.csv'))
+            result_country = pd.read_csv(os.path.join(output_dir,
+                                                      'country.csv'))
             self.assertEqual(len(result_country), 2)
             self.assertIn('StatVar', result_country.columns)
 
@@ -120,16 +124,22 @@ class ProcessPipelineTest(unittest.TestCase):
                 self.assertGreater(os.path.getsize(out_path), 0)
 
             # Assert that county Geo values are valid 5-digit DCIDs and not 2-digit state DCIDs
-            county_df = pd.read_csv(os.path.join(output_dir, 'county.csv'), dtype=str)
-            self.assertTrue(all(county_df['Geo'].str.match(r'^geoId/\d{5}$')),
-                            f"Invalid county Geo DCIDs found: {county_df['Geo'].unique()}")
+            county_df = pd.read_csv(os.path.join(output_dir, 'county.csv'),
+                                    dtype=str)
+            self.assertTrue(
+                all(county_df['Geo'].str.match(r'^geoId/\d{5}$')),
+                f"Invalid county Geo DCIDs found: {county_df['Geo'].unique()}")
 
             # Assert that country Count_* observations are clean integers without .0 decimals
-            country_df = pd.read_csv(os.path.join(output_dir, 'country.csv'), dtype=str)
-            count_rows = country_df[country_df['StatVar'].str.startswith('Count')]
+            country_df = pd.read_csv(os.path.join(output_dir, 'country.csv'),
+                                     dtype=str)
+            count_rows = country_df[country_df['StatVar'].str.startswith(
+                'Count')]
             self.assertFalse(count_rows.empty)
             for val in count_rows['Quantity']:
-                self.assertFalse('.' in str(val), f"Float notation found in count Quantity: {val}")
+                self.assertFalse(
+                    '.' in str(val),
+                    f"Float notation found in count Quantity: {val}")
 
     def test_multi_bracket_sorting_and_deduplication(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -145,16 +155,26 @@ class ProcessPipelineTest(unittest.TestCase):
                 'Quantity': '50000',
                 'Unit': ''
             }])
-            state_95_02.to_csv(os.path.join(input_dir, 'state_cleaned_95-02.csv'), index=False)
+            state_95_02.to_csv(os.path.join(input_dir,
+                                            'state_cleaned_95-02.csv'),
+                               index=False)
 
             state_03_06 = pd.DataFrame([{
+                'Year': '2002',
+                'Geo': 'geoId/01',
+                'StatVar': 'Count_BirthEvent_LiveBirth',
+                'Quantity': '52000',
+                'Unit': ''
+            }, {
                 'Year': '2006',
                 'Geo': 'geoId/01',
                 'StatVar': 'Count_BirthEvent_LiveBirth',
                 'Quantity': '55000',
                 'Unit': ''
             }])
-            state_03_06.to_csv(os.path.join(input_dir, 'state_cleaned_03-06.csv'), index=False)
+            state_03_06.to_csv(os.path.join(input_dir,
+                                            'state_cleaned_03-06.csv'),
+                               index=False)
 
             # Older bracket for 2016: Quantity = 57000
             state_07_20 = pd.DataFrame([{
@@ -164,7 +184,9 @@ class ProcessPipelineTest(unittest.TestCase):
                 'Quantity': '57000',
                 'Unit': ''
             }])
-            state_07_20.to_csv(os.path.join(input_dir, 'state_cleaned_07-20.csv'), index=False)
+            state_07_20.to_csv(os.path.join(input_dir,
+                                            'state_cleaned_07-20.csv'),
+                               index=False)
 
             # Newer expanded bracket for 2016: Quantity = 59000 (should win with keep='last')
             state_16_20 = pd.DataFrame([{
@@ -174,7 +196,9 @@ class ProcessPipelineTest(unittest.TestCase):
                 'Quantity': '59000',
                 'Unit': ''
             }])
-            state_16_20.to_csv(os.path.join(input_dir, 'state_cleaned_16-20.csv'), index=False)
+            state_16_20.to_csv(os.path.join(input_dir,
+                                            'state_cleaned_16-20.csv'),
+                               index=False)
 
             # Stage single county file
             county_df = pd.DataFrame([{
@@ -184,7 +208,9 @@ class ProcessPipelineTest(unittest.TestCase):
                 'Quantity': '1200',
                 'Unit': ''
             }])
-            county_df.to_csv(os.path.join(input_dir, 'county_cleaned_16-20.csv'), index=False)
+            county_df.to_csv(os.path.join(input_dir,
+                                          'county_cleaned_16-20.csv'),
+                             index=False)
 
             # Note: We intentionally do NOT stage country CSVs to test state-to-country aggregation fallback
             process_py = os.path.join(_SCRIPT_PATH, 'process.py')
@@ -194,21 +220,34 @@ class ProcessPipelineTest(unittest.TestCase):
             ]
             subprocess.check_call(cmd)
 
-            result_state = pd.read_csv(os.path.join(output_dir, 'state.csv'), dtype=str)
+            result_state = pd.read_csv(os.path.join(output_dir, 'state.csv'),
+                                       dtype=str)
+            row_2002 = result_state[(result_state['Year'] == '2002') &
+                                    (result_state['Geo'] == 'geoId/01') &
+                                    (result_state['StatVar']
+                                     == 'Count_BirthEvent_LiveBirth')]
+            self.assertEqual(len(row_2002), 1)
+            # Verify 95-02 bracket (1995 start year) sorted before 03-06 (2003 start year)
+            self.assertEqual(row_2002.iloc[0]['Quantity'], '52000')
+
             row_2016 = result_state[(result_state['Year'] == '2016') &
                                     (result_state['Geo'] == 'geoId/01') &
-                                    (result_state['StatVar'] == 'Count_BirthEvent_LiveBirth')]
+                                    (result_state['StatVar']
+                                     == 'Count_BirthEvent_LiveBirth')]
             self.assertEqual(len(row_2016), 1)
             # Verify keep='last' selected the newer bracket (59000, not 57000)
             self.assertEqual(row_2016.iloc[0]['Quantity'], '59000')
 
             # Verify country fallback was generated and contains integer format
-            result_country = pd.read_csv(os.path.join(output_dir, 'country.csv'), dtype=str)
+            result_country = pd.read_csv(os.path.join(output_dir,
+                                                      'country.csv'),
+                                         dtype=str)
             self.assertTrue(len(result_country) >= 3)
             for val in result_country['Quantity']:
-                self.assertFalse('.' in str(val), f"Float notation found in aggregated Quantity: {val}")
+                self.assertFalse(
+                    '.' in str(val),
+                    f"Float notation found in aggregated Quantity: {val}")
 
 
 if __name__ == '__main__':
     unittest.main()
-

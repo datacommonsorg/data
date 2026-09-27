@@ -25,7 +25,8 @@ def aggregate_state_to_country(input_df: pd.DataFrame) -> pd.DataFrame:
     """Aggregates state level data to country level for Count_* StatVars."""
     df_count = input_df.loc[input_df['StatVar'].str.startswith('Count')].copy()
     if 'Unit' in df_count.columns:
-        df_count.drop('Unit', axis=1, inplace=True)  # Count statvars have no unit.
+        df_count.drop('Unit', axis=1,
+                      inplace=True)  # Count statvars have no unit.
     df_count.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
                              keep='last',
                              inplace=True)
@@ -50,4 +51,3 @@ if __name__ == "__main__":
     flags.DEFINE_string('output_path', None, 'Output CSV path.')
     flags.mark_flags_as_required(['input_path', 'output_path'])
     app.run(main)
-
