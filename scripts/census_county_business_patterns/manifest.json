@@ -12,8 +12,7 @@
                 "shard_input_csv.sh"
             ],
             "source_files": [
-                "gcs_output/source_files/*",
-                "counters/*"
+                "gcs_output/source_files/*"
             ],
             "import_inputs": [
                 {
