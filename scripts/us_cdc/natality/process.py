@@ -172,9 +172,10 @@ def process_preprocessed_data(input_dir: str, output_dir: str) -> bool:
         cdf = pd.read_csv(country_out, dtype=str)
         if 'Quantity' in cdf.columns and 'StatVar' in cdf.columns:
             count_mask = cdf['StatVar'].str.startswith('Count')
-            cdf.loc[count_mask, 'Quantity'] = pd.to_numeric(
-                cdf.loc[count_mask,
-                        'Quantity'], errors='coerce').round().astype('Int64')
+            nums = pd.to_numeric(cdf['Quantity'], errors='coerce')
+            valid_mask = count_mask & nums.notna()
+            cdf.loc[valid_mask, 'Quantity'] = (
+                nums.loc[valid_mask].round().astype('int64').astype(str))
             cdf.to_csv(country_out, index=False)
 
     return True

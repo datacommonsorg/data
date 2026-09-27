@@ -140,6 +140,9 @@ class ProcessPipelineTest(unittest.TestCase):
                 self.assertFalse(
                     '.' in str(val),
                     f"Float notation found in count Quantity: {val}")
+                self.assertFalse(
+                    '<NA>' in str(val),
+                    f"<NA> notation found in count Quantity: {val}")
 
     def test_multi_bracket_sorting_and_deduplication(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -247,6 +250,9 @@ class ProcessPipelineTest(unittest.TestCase):
                 self.assertFalse(
                     '.' in str(val),
                     f"Float notation found in aggregated Quantity: {val}")
+                self.assertFalse(
+                    '<NA>' in str(val),
+                    f"<NA> notation found in aggregated Quantity: {val}")
 
 
 if __name__ == '__main__':
