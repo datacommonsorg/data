@@ -124,7 +124,7 @@ if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
 import build_manifest_catalog
-import e2e_dag_test
+import import_dag_e2e_test
 import golden_verification
 from golden_verification import (
     HumanApprovalSensor,
@@ -413,7 +413,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
 
 class E2EDagRunnerTest(unittest.TestCase):
 
-    @patch('e2e_dag_test.get_authorized_session')
+    @patch('import_dag_e2e_test.get_authorized_session')
     def test_e2e_runner_success_and_hitl(self, mock_get_session):
         session_mock = MagicMock()
         session_mock.approved = False
@@ -497,7 +497,7 @@ class E2EDagRunnerTest(unittest.TestCase):
         session_mock.post.side_effect = mock_post
         session_mock.patch.side_effect = mock_patch
 
-        summary = e2e_dag_test.run_e2e_test(
+        summary = import_dag_e2e_test.run_e2e_test(
             project_id='datcom-import-automation-prod',
             location='us-central1',
             composer_env='import-automation-airflow',

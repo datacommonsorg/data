@@ -1,0 +1,249 @@
+main:
+  params: [args]
+  steps:
+    - init:
+        assign:
+          - projectId: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+          - region: ${sys.get_env("LOCATION")}
+          - imageUri: ${default(map.get(args, "imageUri"), "us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:stable")}
+          - jobId: ${text.replace_all(text.to_lower(text.substring(text.split(args.importName, ":")[1], 0, 50) + "-" + string(int(sys.now()))), "_", "-")}
+          - importName: ${args.importName}
+          - importConfig: ${default(map.get(args, "importConfig"), "{}")}
+          - gcsMountBucket: ${sys.get_env("GCS_MOUNT_BUCKET")}
+          - gcsImportBucket: ${sys.get_env("GCS_BUCKET_ID")}
+          - gcsMountPath: "/tmp/gcs"
+          - stagingHelperUrl: ${"https://" + default(sys.get_env("IMPORT_HELPER_SERVICE"), "import-helper-service") + "-staging-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
+          - skipImportJob: ${string(default(map.get(args, "skipImportJob"), false)) == "true"}
+          - skipStagingIngestion: ${string(default(map.get(args, "skipStagingIngestion"), false)) == "true"}
+          - dryRunIngestion: ${string(default(map.get(args, "dryRunIngestion"), false)) == "true"}
+          - forceIngestion: ${string(default(map.get(args, "forceIngestion"), false)) == "true"}
+          - prodDenylist:
+              "CDC500": true
+              "CDC_OzoneCounty": true
+              "CDC_PM25County": true
+              "CensusCountyBusinessPatterns": true
+              "CensusSAHIE": true
+              "EIA_Electricity": true
+              "EPA_EJSCREEN": true
+              "EPA_GHGRP": true
+              "FARS_CrashData": true
+              "FBIGovCrime": true
+              "IndiaNSS_HealthAilments": true
+              "India_RBIStateDomesticProduct": true
+              "NASA_VIIRSActiveFiresEvents": true
+              "NCES_PrivateSchool": true
+              "NCES_PublicSchool": true
+              "NCES_SchoolDistrict": true
+              "NOAA_GPCC_StandardardizedPrecipitationIndex": true
+              "NOAA_GlobalForecastSystem": true
+              "OECDRegionalDemography_Population": true
+              "UNEnergy": true
+              "USCensusPEP_AgeSexRaceHispanicOrigin": true
+              "USDA_AgricultureCensus": true
+              "USFed_ConstantMaturityRates_Test": true
+              "USNationalPrisonerStatistics": true
+              "WorldBankDatasets": true
+          - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}
+          - isProdDenylisted: ${default(map.get(prodDenylist, importName), false) or default(map.get(prodDenylist, shortImportName), false)}
+          - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), true)) == "true"}
+          - defaultResult:
+              status: "SKIPPED"
+          - startTime: ${sys.now()}
+          - defaultResources:
+              machine: "n2-standard-8"
+              cpu: 8000
+              memory: 32768
+              disk: 100
+          - resources: ${default(map.get(args, "resources"), defaultResources)}
+    - checkImportJobEligible:
+        switch:
+          - condition: ${skipImportJob}
+            next: checkStagingEligible
+    - runImportJob:
+        try:
+          call: googleapis.batch.v1.projects.locations.jobs.create
+          args:
+            parent: ${"projects/" + projectId + "/locations/" + region}
+            jobId: ${jobId}
+            body:
+              allocationPolicy:
+                instances:
+                - policy:
+                    machineType: ${resources.machine}
+                    provisioningModel: "STANDARD"
+                    bootDisk:
+                      image: "projects/debian-cloud/global/images/family/debian-12"
+                      size_gb: ${resources.disk}
+                  installOpsAgent: true
+              taskGroups:
+                taskSpec:
+                  volumes:
+                    - gcs:
+                        remotePath: ${gcsMountBucket}
+                      mountPath: ${gcsMountPath}
+                  computeResource:
+                    cpuMilli: ${resources.cpu}
+                    memoryMib: ${resources.memory}
+                  runnables:
+                    - container:
+                        imageUri: ${imageUri}
+                        commands:
+                        - ${"--import_name=" + importName}
+                        - ${"--import_config=" + importConfig}
+                      environment:
+                        variables:
+                          IMPORT_NAME: ${importName}
+                          BATCH_JOB_NAME: ${jobId}
+                taskCount: 1
+                parallelism: 1
+              logsPolicy:
+                destination: CLOUD_LOGGING
+            connector_params:
+              timeout: 604800 #7 days
+              polling_policy:
+                initial_delay: 60
+                multiplier: 2
+                max_delay: 600
+          result: importJobResponse
+        except:
+          as: e
+          steps:
+            - updateImportStatus:
+                call: http.post
+                args:
+                  url: ${stagingHelperUrl + "/imports/status"}
+                  auth:
+                    type: OIDC
+                  body:
+                    jobId: ${jobId}
+                    imports:
+                      - importName: ${importName}
+                        status: 'FAILURE'
+                        latestVersion: ${"gs://" + gcsImportBucket + "/" + text.replace_all(importName, ":", "/")}
+                    executionTime: ${int(sys.now() - startTime)}
+                result: functionResponse
+            - failWorkflow:
+                raise: ${e}
+    - checkStagingEligible:
+        switch:
+          - condition: ${skipStagingIngestion}
+            next: checkProdEligible
+    - ingestStaging:
+        call: ingestEnvironment
+        args:
+          projectId: ${projectId}
+          region: ${region}
+          importName: ${importName}
+          envSuffix: "-staging"
+          waitIngestion: true
+          dryRun: ${dryRunIngestion}
+          forceIngestion: ${forceIngestion}
+        result: stagingResult
+    - checkProdEligible:
+        switch:
+          - condition: ${skipProdIngestion or (not skipStagingIngestion and (stagingResult.status != "SUCCESS" and stagingResult.status != "SKIPPED"))}
+            next: returnResult
+    - ingestProd:
+        call: ingestEnvironment
+        args:
+          projectId: ${projectId}
+          region: ${region}
+          importName: ${importName}
+          envSuffix: ""
+          waitIngestion: false
+          dryRun: ${dryRunIngestion}
+          forceIngestion: ${forceIngestion}
+        result: prodResult
+    - returnResult:
+        return:
+          jobId: ${jobId}
+          importName: ${importName}
+          staging: ${default(stagingResult, defaultResult)}
+          prod: ${default(prodResult, defaultResult)}
+
+ingestEnvironment:
+  params: [projectId, region, importName, envSuffix, waitIngestion, dryRun, forceIngestion]
+  steps:
+    - initSub:
+        assign:
+          - helperService: ${default(sys.get_env("IMPORT_HELPER_SERVICE"), "import-helper-service") + envSuffix}
+          - ingestionHelperService: ${default(sys.get_env("INGESTION_HELPER_SERVICE"), "ingestion-helper-service") + envSuffix}
+          - helperUrl: ${"https://" + helperService + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
+          - ingestionHelperUrl: ${"https://" + ingestionHelperService + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
+    - updateImportVersion:
+        call: http.post
+        args:
+          url: ${helperUrl + "/imports/version"}
+          auth:
+            type: OIDC
+          body:
+            imports:
+              - ${importName}
+            version: 'STAGING'
+            override: false
+            comment: '${"import-workflow:" + sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
+        result: versionResponse
+    - checkSkipIngestion:
+        switch:
+          - condition: ${len(versionResponse.body.imports) == 0 or (versionResponse.body.imports[0].status != "STAGING" and versionResponse.body.imports[0].status != "SKIP")}
+            return:
+              status: "SKIPPED"
+              message: '${"Import status is not STAGING or SKIP (" + versionResponse.body.message + "); skipped Spanner ingestion."}'
+    - prepareIngestionArgs:
+        assign:
+          - targetImport: ${versionResponse.body.imports[0]}
+          - importParts: ${text.split(targetImport.importName, ":")}
+          - importEntry:
+              importName: ${importParts[len(importParts) - 1]}
+              latestVersion: ${targetImport.latestVersion}
+    - triggerIngestion:
+        call: http.post
+        args:
+          url: ${ingestionHelperUrl + "/imports/ingest"}
+          auth:
+            type: OIDC
+          body:
+            importList:
+              - ${importEntry}
+            dryRun: ${dryRun}
+            forceIngestion: ${forceIngestion}
+        result: ingestResponse
+    - checkIngestResponse:
+        switch:
+          - condition: ${ingestResponse.body.status == "SKIPPED"}
+            return:
+              status: "SKIPPED"
+              message: ${ingestResponse.body.message}
+          - condition: ${ingestResponse.body.status != "SUBMITTED"}
+            raise:
+              message: '${"Ingestion helper returned unexpected status: " + string(ingestResponse.body.status)}'
+              code: 500
+              response: ${ingestResponse.body}
+          - condition: ${not waitIngestion}
+            return:
+              status: "SUCCESS"
+              executionName: ${ingestResponse.body.executionName}
+        next: waitForExecution
+    - waitForExecution:
+        call: sys.sleep
+        args:
+          seconds: 60
+        next: checkExecutionStatus
+    - checkExecutionStatus:
+        call: googleapis.workflowexecutions.v1.projects.locations.workflows.executions.get
+        args:
+          name: ${ingestResponse.body.executionName}
+        result: executionStatus
+        next: checkIfDone
+    - checkIfDone:
+        switch:
+          - condition: ${executionStatus.state == "SUCCEEDED"}
+            return:
+              status: "SUCCESS"
+              executionName: ${ingestResponse.body.executionName}
+          - condition: ${executionStatus.state == "FAILED" or executionStatus.state == "CANCELLED"}
+            raise:
+              message: '${"Ingestion workflow execution failed with state: " + executionStatus.state}'
+              code: 500
+              execution: ${executionStatus}
+        next: waitForExecution

@@ -25,8 +25,11 @@ This directory contains the Apache Airflow DAG definitions and dynamic factory f
    - **Production Ingestion**: Triggers fire-and-forget production Spanner ingestion upon staging success.
    - **Workflow Summary**: Aggregates execution status across stages and reports errors.
 
+5. **`import-automation-workflow.yaml` & `import_automation_e2e.py`**:
+   Google Cloud Workflows definition (`import-automation-workflow` / `import-automation-workflow-staging`) and integration test runner for legacy Cloud Workflows orchestration.
+
 ## Continuous Deployment
 
-Cloud Build automatically updates the catalog and syncs DAGs to Cloud Composer:
+Cloud Build automatically updates the catalog, deploys `import-automation-workflow.yaml` to Cloud Workflows, and syncs DAGs to Cloud Composer:
 - Config: `import-automation/workflow/cloudbuild.yaml`
 - Target: `gs://<dag_bucket>/dags/datacommons_airflow/`
