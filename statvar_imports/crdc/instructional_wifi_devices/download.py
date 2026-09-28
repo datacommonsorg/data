@@ -142,7 +142,8 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
                         first_chunk = False
                         if not chunk.startswith(b"PK"):
                             logging.info(
-                                "Dataset for year %s not found (server returned non-ZIP payload/soft-404). Skipping.",
+                                "Dataset for year %s not found "
+                                "(server returned non-ZIP payload/soft-404). Skipping.",
                                 year_string,
                             )
                             response.close()
@@ -188,7 +189,8 @@ def process_crdc_data(session: requests.Session, year_string: str) -> bool:
             )
             df["YEAR"] = str(target_year)
 
-            # Nullify negative CRDC reserve codes (-11 suppressed, -9 not reported, -5 N/A, -3 missing)
+            # Nullify negative CRDC reserve codes (-11 suppressed, -9 not reported,
+            # -5 N/A, -3 missing)
             if "SCH_INTERNET_WIFIENDEV" in df.columns:
                 df["SCH_INTERNET_WIFIENDEV"] = df[
                     "SCH_INTERNET_WIFIENDEV"].apply(lambda x: "" if pd.notna(

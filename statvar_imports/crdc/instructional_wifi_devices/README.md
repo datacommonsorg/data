@@ -41,7 +41,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 ## Validation
 Validation checks are configured in [validation_config.json](validation_config.json):
-- `check_deleted_records_percent`: Ensures deleted records remain under the 0.1% threshold across refreshes. The 0.1% record deletion threshold accommodates natural biennial entity attrition (school closures, consolidations, and NCES ID retirements) across ~100,000 U.S. public schools.
+- `check_deleted_records_percent`: Ensures deleted records remain under the standard 0.1% threshold across ongoing survey refreshes to accommodate natural biennial entity attrition (school closures, consolidations, and NCES ID retirements) across ~100,000 U.S. public schools. Note: The 2020–21 baseline cleanup nullified 696 legacy observations containing negative CRDC reserve codes (-11 for suppressed data, -9, -5, -3) that were erroneously ingested previously (~0.356% one-time deletion); ongoing refreshes are expected to adhere strictly to the 0.1% threshold.
 - `check_max_date_consistent`: Verifies that latest observation dates match across all generated StatVars.
 - `check_latest_date_freshness`: Asserts that observation dates reach at least 2024 for each StatVar via per-StatVar SQL validation.
 
