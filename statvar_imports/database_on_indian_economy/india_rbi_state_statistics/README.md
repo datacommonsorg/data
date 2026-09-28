@@ -58,17 +58,25 @@ python3 rbi_download_test.py
 
 ## Prerequisites
 
-The following Python packages are required to run the download, preprocessing, and test suites:
+This import relies on dependencies managed in the repository virtual environment (`.env`).
+
+To initialize and activate the repository virtual environment from the repository root (`/data/`):
+```bash
+./run_tests.sh -r
+source .env/bin/activate
+```
+
+Alternatively, invoke Python directly using the virtual environment interpreter:
+```bash
+.env/bin/python rbi_download.py
+```
+
+The required packages managed in `requirements_all.txt` include:
 - `pandas`
 - `openpyxl`
 - `requests`
 - `google-cloud-storage`
 - `absl-py`
-
-Install dependencies via:
-```bash
-pip install pandas openpyxl requests google-cloud-storage absl-py
-```
 
 ## Processing Section
 
@@ -341,16 +349,20 @@ python3 stat_var_processor.py \
 
 This import uses `validation_config.json` with:
 1. **`DELETED_RECORDS_PERCENT: 0.1` (`check_deleted_records_percent`)**:
-   - **Rationale & Ingestion Strategy**: The canonical threshold is strictly set to `0.1%` (`threshold: 0.1`), adhering to the Master CRA standard ceiling (threshold <= 0.5%). During the initial baseline rollout, one-time deletions occur across sub-imports (up to **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in `agriculture_output.csv`, and **3.15%** in `state_wise_expenditure_on_relief_on_natural_calamities_output.csv`). These one-time deletions are coordinated via a one-time baseline reset / staging ingestion override with tech leads to promote the new output to `latest_version`. All subsequent automated runs will strictly adhere to the `0.1%` threshold against the updated baseline. Root causes for the one-time deletions are:
-     1. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from `dcid:wikidataId/Q1174` (Haryana) to the dedicated IMD sub-division DCID `dcid:HaryanaDelhiChandigarh` (24 records / 6.94% in rainfall), and fixing `NCT of Delhi` from `wikidataId/Q1352` (erroneously Chennai) to `wikidataId/Q9357528` (439 records in agriculture, 13 records in relief expenditure).
+   - **Rationale & Ingestion Strategy**: The canonical threshold is strictly set to `0.1%` (`threshold: 0.1`), adhering to the Master CRA standard ceiling (threshold <= 0.5%). During the initial baseline rollout, one-time deletions occur across 7 sub-imports (up to **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in `agriculture_output.csv`, **3.15%** in `state_wise_expenditure_on_relief_on_natural_calamities_output.csv`, **1.39%** in `state_wise_installed_capacity_of_power_output.csv`, **0.28%** in `state_wise_tree_cover_output.csv`, **0.16%** in `state_wise_forest_cover_output.csv`, and **0.15%** in `state_wise_electricity_transmission_distribution_losses_output.csv`). These one-time deletions are coordinated via a one-time baseline reset / staging ingestion override with tech leads to promote the new output to `latest_version`. All subsequent automated runs will strictly adhere to the `0.1%` threshold against the updated baseline. Root causes for the one-time deletions are:
+     1. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from `dcid:wikidataId/Q1174` (Haryana) to the dedicated IMD sub-division DCID `dcid:HaryanaDelhiChandigarh` (24 records / 6.94% in rainfall), and fixing `NCT of Delhi` from `wikidataId/Q1352` (erroneously Chennai) to `wikidataId/Q1353` (resolving all Delhi records to canonical `wikidataId/Q1353`).
      2. **Unit Schema Corrections**: Changing `Annual_Amount_FarmInventory_Fruits` in `agriculture_pvmap.csv` from `Hectare` to `MetricTon` (309 records in agriculture, where Import Differ classifies old unit nodes as deleted and new unit nodes as added).
      3. **Official RBI Source Revisions**: Retrospective updates by RBI to provisional figures for recent fiscal years (`2022-03` through `2024-03`) and UT consolidations (`Dadra & Nagar Haveli and Daman & Diu`).
    - **Technical Breakdown of Deletions**:
      | Category | Output File | Deletion % / Records | Root Cause |
      |---|---|---|---|
      | Environment | `sub_division_wise_annual_rainfall_output.csv` | 6.94% (24 records) | Remapped `"Haryana, Delhi & Chandigarh"` from `dcid:wikidataId/Q1174` (Haryana state) to dedicated IMD sub-division `dcid:HaryanaDelhiChandigarh`. |
-     | Agriculture | `agriculture_output.csv` | 5.64% (1,282 records) | Corrected `NCT of Delhi` to `wikidataId/Q9357528` (439 records); updated `Annual_Amount_FarmInventory_Fruits` unit to `MetricTon` (309 records); retrospective RBI revisions for provisional years `2022-03`–`2024-03` (534 records). |
-     | Environment | `state_wise_expenditure_on_relief_on_natural_calamities_output.csv` | 3.15% (13 records) | Corrected `NCT of Delhi` place resolution from `wikidataId/Q1352` (Chennai) to `wikidataId/Q9357528`. |
+     | Agriculture | `agriculture_output.csv` | 5.64% (1,282 records) | Corrected `NCT of Delhi` to `wikidataId/Q1353` (439 records); updated `Annual_Amount_FarmInventory_Fruits` unit to `MetricTon` (309 records); retrospective RBI revisions for provisional years `2022-03`–`2024-03` (534 records). |
+     | Environment | `state_wise_expenditure_on_relief_on_natural_calamities_output.csv` | 3.15% (13 records) | Corrected `NCT of Delhi` place resolution from `wikidataId/Q1352` (Chennai) to `wikidataId/Q1353`. |
+     | Infrastructure | `state_wise_installed_capacity_of_power_output.csv` | 1.39% (10 records) | `country/IND` (2015–2024) dropped because RBI sheet T_140(ii) omits ALL INDIA totals. |
+     | Environment | `state_wise_tree_cover_output.csv` | 0.28% (1 record) | Daman & Diu (`wikidataId/Q66710`, 2013) UT merger revision. |
+     | Environment | `state_wise_forest_cover_output.csv` | 0.16% (1 record) | Daman & Diu (`wikidataId/Q66710`, 2013) UT merger revision. |
+     | Infrastructure | `state_wise_electricity_transmission_distribution_losses_output.csv` | 0.15% (1 record) | Dadra & Nagar Haveli (`wikidataId/Q46107`, 2023-03) UT merger revision. |
 2. **`SQL_VALIDATOR` non-empty check (`check_expected_statvar_count`)**:
    - Asserts `statvar_cnt >= 1` so an empty `summary_report.csv` cannot vacuously pass grouped SQL queries.
 3. **`SQL_VALIDATOR` cadence freshness check (`check_max_date_freshness`)**:
