@@ -837,7 +837,8 @@ def normalize_list(value: str, sort: bool = True) -> str:
                     is_quoted=has_quotes,
                 )
                 normalized_v = str(normalized_v)
-                values.append(normalized_v)
+                if normalized_v not in values:
+                    values.append(normalized_v)
         # Sort normalized values to ensure consistent order and avoid leading space issues.
         if sort:
             values = sorted(values)

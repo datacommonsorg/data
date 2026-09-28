@@ -477,3 +477,49 @@ age: [Years 65 -]
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
+
+Node: dcid:Count_Person_20To64Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 20 64]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_20To64Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 20 64]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_20To64Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 20 64]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_25To54Years
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 25 54]
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_25To54Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 25 54]
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_Person_25To54Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: [Years 25 54]
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue

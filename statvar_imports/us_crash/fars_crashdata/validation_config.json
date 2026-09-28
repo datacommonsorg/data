@@ -1,0 +1,30 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.2
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../gcs_output/output/*.csv"
+            }
+        },
+        {
+            "rule_id": "check_date_freshness_core_statvars",
+            "description": "Verifies that core StatVars reach the expected reporting year/lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_VehicleCrashIncident', 'Count_MortalityEvent_VehicleCrashIncident')",
+                "condition": "MaxDate >= '2024'"
+            }
+        }
+    ]
+}
