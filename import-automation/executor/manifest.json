@@ -1,0 +1,12 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "manual_refresh",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://datacommons.org",
+      "provenance_description": "Generic Import Automation Workflow for ad-hoc or manual refresh imports"
+    }
+  ]
+}
