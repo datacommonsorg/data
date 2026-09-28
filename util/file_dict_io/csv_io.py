@@ -105,6 +105,9 @@ class CsvFileDictIO(FileDictIO):
             # Read the CSV file handle using DictReader and populate headers.
             options = file_util.file_get_csv_reader_options(
                 self.filename(), {'delimiter': ','})
+            # Use RFC 4180 quoting instead of the sniffed quote settings: the
+            # sniffer sets doublequote=False if its sample has no "" in a field.
+            options.update(doublequote=True, quotechar='"')
             self._csv_reader = csv.DictReader(self.get_file_handle(), **options)
             self.set_headers(self._csv_reader.fieldnames)
             logging.level_debug() and logging.debug(
@@ -113,12 +116,14 @@ class CsvFileDictIO(FileDictIO):
         else:
             # Write to the CSV file handle using DictWriter if headers are known.
             if self.headers():
+                # RFC 4180: quote fields only when needed and double any quote
+                # inside a field. No escape character, so '\' is written as is.
                 self._csv_writer = csv.DictWriter(
                     self.get_file_handle(),
                     fieldnames=self.headers(),
-                    escapechar='\\',
                     extrasaction='ignore',
                     quotechar='"',
+                    doublequote=True,
                     quoting=csv.QUOTE_MINIMAL,
                 )
                 self.write_header()
@@ -175,9 +180,9 @@ class CsvFileDictIO(FileDictIO):
         """
         try:
             if self._csv_reader:
-                record = next(self._csv_reader)
+                row = next(self._csv_reader)
                 self._record_index += 1
-                return record
+                return row
         except StopIteration:
             # Reached end of file.
             return None

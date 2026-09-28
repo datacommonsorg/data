@@ -48,6 +48,41 @@ def is_mcf_file(filename: str) -> bool:
     return False
 
 
+# Properties that hold the id of a node, in order of precedence.
+NODE_ID_PROPS = ('dcid', 'Node')
+
+
+def get_record_dcid(record: dict) -> str:
+    """Returns the dcid of `record` from its `dcid`, or else from its `Node`.
+
+    Blank values are skipped, so a record with an empty `dcid` falls back to
+    its `Node`. Surrounding quotes and a namespace prefix such as `dcid:` are
+    removed, so `{'dcid': 'geoId/06'}`, `{'dcid': '"geoId/06"'}` and
+    `{'Node': 'dcid:geoId/06'}` all return `'geoId/06'`.
+
+    Example:
+      from file_dict_io import get_record_dcid
+
+      get_record_dcid({'dcid': '', 'Node': 'dcid:geoId/06'})  # 'geoId/06'
+
+    Args:
+      record: Dictionary of property-value pairs for a node.
+
+    Returns:
+      The dcid, or `''` if neither `dcid` nor `Node` has a value.
+    """
+    if not record:
+        return ''
+    for prop in NODE_ID_PROPS:
+        value = record.get(prop)
+        if value is None:
+            continue
+        dcid = mcf_file_util.strip_namespace(str(value).strip(' "'))
+        if dcid:
+            return dcid
+    return ''
+
+
 @FileDictIO.register(default=True)
 class McfFileDictIO(FileDictIO):
     """Reads or writes MCF nodes as dictionary records from/to a text file.
@@ -118,13 +153,25 @@ class McfFileDictIO(FileDictIO):
     def write_record(self, record: dict):
         """Writes one MCF node dictionary to the file.
 
+        If `record` has no `Node` (or a blank one) but has a `dcid`, the node
+        is written with a `Node: dcid:<dcid>` line. An existing `Node` is
+        written as is.
+
         Args:
           record: Dictionary of MCF property-value pairs for a single node.
 
         Returns:
           The number of characters written for the node text.
         """
-        record_str = mcf_file_util.node_dict_to_text(record)
+        node = record
+        node_value = record.get('Node')
+        if node_value is None or not str(node_value).strip(' "'):
+            dcid = get_record_dcid(record)
+            if dcid:
+                # Add the Node to a copy so the caller's record is unchanged.
+                node = dict(record)
+                node['Node'] = f'dcid:{dcid}'
+        record_str = mcf_file_util.node_dict_to_text(node)
         ret = self.get_file_handle().write(record_str)
         self.get_file_handle().write('\n\n')
         self._record_index += 1

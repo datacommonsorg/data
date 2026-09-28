@@ -134,7 +134,9 @@ class ShardedFileDictIOTest(unittest.TestCase):
             self.assertEqual(4, len(read_rows))
             self.assertCountEqual(data, read_rows)
 
-    def test_shard_options_skip_duplicates_limit_prefix_and_column_naming(self):
+    def test_shard_options_prefix_column_naming_and_files(self):
+        from file_sharder import shard_file
+
         data = [
             {'id': 'US_CA', 'value': 'a'},
             {'id': 'IN_MH', 'value': 'b'},
@@ -142,7 +144,11 @@ class ShardedFileDictIOTest(unittest.TestCase):
             {'id': 'US_NY', 'value': 'd'},
             {'id': 'IN_KA', 'value': 'e'},
         ]
-        # 1. Test shard_skip_duplicates + shard_key_prefix_length=2 + shard_input_records=4
+        input_csv = os.path.join(self.test_dir.name, 'raw_input.csv')
+        with open_dict_file(input_csv, 'w') as writer:
+            writer.write(data)
+
+        # 1. Test FileSharder with shard_skip_duplicates + shard_key_prefix_length=2 + shard_input_records=4
         output_path = os.path.join(self.test_dir.name, 'filtered@2.csv')
         config = {
             'shard_key': 'id',
@@ -150,12 +156,11 @@ class ShardedFileDictIOTest(unittest.TestCase):
             'shard_skip_duplicates': True,
             'shard_input_records': 4,
         }
-        with open_dict_file(output_path, 'w', config=config) as writer:
-            writer.write(data)
+        shard_file(input_csv, output_path, config)
 
         with open_dict_file(output_path, 'r') as reader:
+            self.assertEqual(2, len(reader.files()))
             read_rows = reader.readlines()
-            # 5th record skipped due to shard_input_records=4; 3rd skipped due to duplicate
             self.assertEqual(3, len(read_rows))
             self.assertCountEqual(
                 [
@@ -166,16 +171,17 @@ class ShardedFileDictIOTest(unittest.TestCase):
                 read_rows,
             )
 
-        # 2. Test dynamic column-value shard naming ('by_country-{country}.csv')
+        # 2. Test dynamic column-value shard naming ('by_country-{country}.csv' and 'by_year-{year}.csv')
         col_pattern = os.path.join(self.test_dir.name,
                                    'by_country-{country}.csv')
         country_rows = [
-            {'country': 'USA', 'v': '1'},
-            {'country': 'IND', 'v': '2'},
-            {'country': 'USA', 'v': '3'},
+            {'country': 'USA', 'year': '2024', 'v': '1'},
+            {'country': 'IND', 'year': '2025', 'v': '2'},
+            {'country': 'USA', 'year': '2024', 'v': '3'},
         ]
         with open_dict_file(col_pattern, 'w', shard_key='country') as writer:
             writer.write(country_rows)
+            self.assertEqual(2, len(writer.files()))
 
         usa_file = os.path.join(self.test_dir.name, 'by_country-USA.csv')
         ind_file = os.path.join(self.test_dir.name, 'by_country-IND.csv')
@@ -183,7 +189,10 @@ class ShardedFileDictIOTest(unittest.TestCase):
         self.assertTrue(os.path.exists(ind_file))
         with open_dict_file(usa_file, 'r') as usa_reader:
             self.assertEqual(
-                [{'country': 'USA', 'v': '1'}, {'country': 'USA', 'v': '3'}],
+                [
+                    {'country': 'USA', 'year': '2024', 'v': '1'},
+                    {'country': 'USA', 'year': '2024', 'v': '3'},
+                ],
                 usa_reader.readlines(),
             )
 
@@ -220,6 +229,117 @@ class ShardedFileDictIOTest(unittest.TestCase):
                                  f'shards.{ext}-00000-of-00003')))
             with open_dict_file(pattern, 'r') as reader:
                 self.assertCountEqual(row_data, reader.readlines())
+
+    def test_digit_only_glob_does_not_match_other_prefixes_or_counts(self):
+        # Write 'node.mcf@3' (creates node.mcf-00000-of-00003 .. 00002)
+        node_pattern = os.path.join(self.test_dir.name, 'node.mcf@3')
+        with open_dict_file(node_pattern, 'w', shard_key='Node') as writer:
+            writer.write([{'Node': 'dcid:expected', 'typeOf': 'dcs:Place'}])
+
+        # Also create decoy files: 'nodes.mcf-00000-of-00003' and 'node.mcf-00000-of-00002'
+        decoy_prefix = os.path.join(self.test_dir.name,
+                                    'nodes.mcf-00000-of-00003')
+        decoy_count = os.path.join(self.test_dir.name,
+                                   'node.mcf-00000-of-00002')
+        for decoy in (decoy_prefix, decoy_count):
+            with McfFileDictIO(decoy, 'w') as w:
+                w.write({'Node': 'dcid:decoy', 'typeOf': 'dcs:Place'})
+
+        with open_dict_file(node_pattern, 'r') as reader:
+            records = reader.readlines()
+            self.assertEqual(1, len(records))
+            self.assertEqual('dcid:expected', records[0]['Node'])
+
+    def test_mismatched_headers_error_counter(self):
+        s0 = os.path.join(self.test_dir.name, 'mismatch-00000-of-00002.csv')
+        s1 = os.path.join(self.test_dir.name, 'mismatch-00001-of-00002.csv')
+        with open_dict_file(s0, 'w', headers=['a', 'b']) as w0:
+            w0.write({'a': '1', 'b': '2'})
+        with open_dict_file(s1, 'w', headers=['a', 'c']) as w1:
+            w1.write({'a': '3', 'c': '4'})
+
+        pattern = os.path.join(self.test_dir.name, 'mismatch@2.csv')
+        with open_dict_file(pattern, 'r') as reader:
+            rows = reader.readlines()
+            self.assertEqual(2, len(rows))
+            self.assertEqual(
+                1,
+                reader.counters().get_counter('error-shard-mismatched-headers'))
+
+    def test_parallel_writes_and_per_shard_counters(self):
+        import concurrent.futures
+
+        pattern = os.path.join(self.test_dir.name, 'parallel@4.csv')
+        records = [{'id': f'key_{i}', 'val': str(i)} for i in range(40)]
+
+        with open_dict_file(pattern,
+                            'w',
+                            headers=['id', 'val'],
+                            shard_key='id') as writer:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+                list(pool.map(writer.write_record, records))
+
+            self.assertEqual(40, writer.current_record_index())
+            # Verify per-shard counters sum to 40 without locking contention
+            per_shard_total = sum(
+                writer.get_shard_counters(idx).get_counter(
+                    'shard-output-records') for idx in range(4))
+            self.assertEqual(40, per_shard_total)
+            self.assertEqual(
+                40,
+                writer.counters().get_counter('shard-output-records'))
+
+        with open_dict_file(pattern, 'r') as reader:
+            def _read_all_worker(_):
+                items = []
+                while True:
+                    rec = reader.next()
+                    if rec is None:
+                        break
+                    items.append(rec)
+                return items
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+                worker_batches = list(pool.map(_read_all_worker, range(4)))
+            parallel_read_records = [
+                rec for batch in worker_batches for rec in batch
+            ]
+            self.assertCountEqual(records, parallel_read_records)
+
+    def test_dcid_and_node_shard_keys_use_node_dcid(self):
+        records = [
+            {'dcid': 'geoId/06'},
+            {'dcid': '"geoId/06"'},
+            {'Node': 'dcid:geoId/06'},
+            # A blank dcid falls back to the Node.
+            {'dcid': '', 'Node': 'dcid:geoId/06'},
+            # The dcid takes precedence over the Node.
+            {'dcid': 'geoId/06', 'Node': 'l:obs1'},
+        ]
+        for shard_key in ('dcid', 'Node', '{dcid}', None):
+            kwargs = {'shard_key': shard_key} if shard_key else {}
+            output_path = os.path.join(self.test_dir.name, 'keys@3.mcf')
+            with open_dict_file(output_path, 'w', **kwargs) as writer:
+                keys = [writer.get_key_for_record(r) for r in records]
+            self.assertEqual(['geoId/06'] * len(records), keys,
+                             f'shard_key={shard_key}')
+
+    def test_mcf_shards_write_only_comment_headers(self):
+        output_path = os.path.join(self.test_dir.name, 'hdr@2.mcf')
+        with open_dict_file(output_path,
+                            'w',
+                            headers=['# Generated', 'dcid', 'value'],
+                            shard_key='dcid') as writer:
+            writer.write([{'dcid': 'geoId/06', 'value': '1'}])
+
+        for index in range(2):
+            shard_path = os.path.join(self.test_dir.name,
+                                      f'hdr-{index:05d}-of-00002.mcf')
+            with open(shard_path, 'r') as f:
+                text = f.read()
+            self.assertTrue(text.startswith('# Generated\n'), text)
+            self.assertNotIn('#dcid', text)
+            self.assertNotIn('#value', text)
 
 
 if __name__ == '__main__':

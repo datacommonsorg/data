@@ -94,6 +94,30 @@ class CsvFileDictIOTest(unittest.TestCase):
             self.assertEqual(rows, reader.readlines())
             self.assertEqual(2, reader.line_num)
 
+    def test_csv_round_trip_keeps_backslashes_and_quotes(self):
+        csv_file_path = os.path.join(self.test_dir.name, 'special.csv')
+        # About 6 KB of plain rows first, so the special values come after the
+        # 4 KB sample used to sniff the CSV dialect.
+        data = [{'id': f'plain{i}', 'value': f'v{i}'} for i in range(400)]
+        data += [
+            {'id': 'backslash', 'value': 'C:\\data\\file'},
+            {'id': 'quote', 'value': 'say "hi"'},
+            {'id': 'comma', 'value': 'a,b'},
+            {'id': 'newline', 'value': 'line1\nline2'},
+        ]
+        with open_dict_file(csv_file_path, 'w',
+                            headers=['id', 'value']) as writer:
+            writer.write(data)
+
+        # RFC 4180: backslashes are written as is and quotes are doubled.
+        with open(csv_file_path, 'r') as f:
+            text = f.read()
+        self.assertIn('backslash,C:\\data\\file\n', text)
+        self.assertIn('quote,"say ""hi"""\n', text)
+
+        with open_dict_file(csv_file_path, 'r') as reader:
+            self.assertEqual(data, reader.readlines())
+
 
 if __name__ == '__main__':
     unittest.main()

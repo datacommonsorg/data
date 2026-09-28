@@ -53,7 +53,7 @@ from file_dict_io.avro_io import AvroFileDictIO, is_avro_file
 from file_dict_io.base import FileDictIO
 from file_dict_io.csv_io import CsvFileDictIO, is_csv_file
 from file_dict_io.json_io import JsonFileDictIO, is_json_file, is_jsonl_file
-from file_dict_io.mcf_io import McfFileDictIO, is_mcf_file
+from file_dict_io.mcf_io import McfFileDictIO, get_record_dcid, is_mcf_file
 from file_dict_io.sharded_io import (
     ShardedFileDictIO,
     get_default_shard_config,
@@ -129,5 +129,6 @@ __all__ = [
     'is_mcf_file',
     'is_sharded_file',
     'get_default_shard_config',
+    'get_record_dcid',
     'str_to_int_hash',
 ]
