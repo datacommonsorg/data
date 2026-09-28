@@ -1,0 +1,4 @@
+"observationPeriods","StatVar","ScalingFactors","Units","NumPlaces","MinDate","MeasurementMethods"
+"[P4Y]","LifeExpectancy_Person_Male","[]","[Year]","21","1997","[]"
+"[P4Y]","LifeExpectancy_Person_Female","[]","[Year]","21","1997","[]"
+"[P4Y]","LifeExpectancy_Person","[]","[Year]","21","1997","[]"

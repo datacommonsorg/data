@@ -1,0 +1,24 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks if the MaxDate is the same for all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT"
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that dataset observation dates meet historical coverage boundary (>= 2005-01-01 across shards).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "condition": "latest_date >= '2005-01-01'"
+            }
+        },
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Disable deleted records check because differ is decoupled for high-scale Census Tracts.",
+            "enabled": false
+        }
+    ]
+}
