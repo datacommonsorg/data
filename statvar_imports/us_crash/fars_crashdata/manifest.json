@@ -12,15 +12,19 @@
                 "run.sh"
             ],
             "source_files": [
-                "gcs_output/input_files/*"
+                "counters/*.csv",
+                "gcs_output/input_files/*",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "crash_tmcf.tmcf",
-                    "cleaned_csv": "gcs_output/output/*.csv"
+                    "cleaned_csv": "gcs_output/output/*.csv",
+                    "node_mcf": "gcs_output/output/*.mcf"
                 }
             ],
-            "cron_schedule": "0 05 * * 2"
+            "cron_schedule": "0 05 * * 2",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
