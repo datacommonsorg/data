@@ -120,11 +120,12 @@ def _download_paginated_socrata_file(
 def create_download_configs(gcs_urls_config_file: str) -> List[Dict]:
     """Reads the URL config JSON from GCS and generates the download configurations."""
     try:
-        result = subprocess.run(['gcloud', 'storage', 'cat', gcs_urls_config_file],
-                                capture_output=True,
-                                text=True,
-                                check=True,
-                                encoding='UTF-8')
+        result = subprocess.run(
+            ['gcloud', 'storage', 'cat', gcs_urls_config_file],
+            capture_output=True,
+            text=True,
+            check=True,
+            encoding='UTF-8')
         urls_config = json.loads(result.stdout)
         logging.info(
             f"Successfully loaded download configurations from {gcs_urls_config_file}"
