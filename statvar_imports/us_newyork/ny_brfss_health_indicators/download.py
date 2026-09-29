@@ -101,7 +101,6 @@ def download_health_indicators(endpoint: str,
                 msg = (f'Health Data NY API returned HTTP {resp.status_code}: '
                        f'{resp.text[:200]}')
                 logging.fatal('%s', msg)
-                raise RuntimeError(msg)
 
             chunk = resp.json()
             if not chunk:
@@ -113,7 +112,6 @@ def download_health_indicators(endpoint: str,
     if not records:
         msg = 'Health Data NY API returned 0 records.'
         logging.fatal('%s', msg)
-        raise RuntimeError(msg)
 
     logging.info('Received %d total raw records from Health Data NY API.',
                  len(records))
@@ -133,10 +131,7 @@ def main(_):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_dir = (FLAGS.output_dir if os.path.isabs(FLAGS.output_dir) else
                   os.path.join(script_dir, FLAGS.output_dir))
-    try:
-        download_health_indicators(FLAGS.endpoint, output_dir)
-    except Exception as e:
-        logging.fatal('Failed to download NYS BRFSS health indicators: %s', e)
+    download_health_indicators(FLAGS.endpoint, output_dir)
 
 
 if __name__ == '__main__':

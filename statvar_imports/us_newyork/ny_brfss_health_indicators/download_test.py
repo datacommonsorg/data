@@ -53,7 +53,8 @@ class DownloadTest(unittest.TestCase):
             self.assertFalse(os.path.exists(temp_path))
 
     @mock.patch(
-        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.logging.fatal'
+        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.logging.fatal',
+        side_effect=SystemExit,
     )
     @mock.patch(
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
@@ -69,12 +70,13 @@ class DownloadTest(unittest.TestCase):
         mock_session.get.return_value = mock_resp
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(RuntimeError):
+            with self.assertRaises(SystemExit):
                 download_health_indicators('https://mock-endpoint', tmp_dir)
             mock_fatal.assert_called_once()
 
     @mock.patch(
-        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.logging.fatal'
+        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.logging.fatal',
+        side_effect=SystemExit,
     )
     @mock.patch(
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
@@ -90,7 +92,7 @@ class DownloadTest(unittest.TestCase):
         mock_session.get.return_value = mock_resp
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(RuntimeError):
+            with self.assertRaises(SystemExit):
                 download_health_indicators('https://mock-endpoint', tmp_dir)
             mock_fatal.assert_called_once()
 
