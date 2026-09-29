@@ -31,22 +31,27 @@ except ModuleNotFoundError:
 
 
 class DownloadTest(unittest.TestCase):
+    """Unit test suite for CDC WONDER Single Race Downloader."""
 
     def test_parse_year_list_range(self):
+        """Tests parsing a range of years string."""
         years = download.parse_year_list("2018-2023")
         self.assertEqual(years,
                          ["2018", "2019", "2020", "2021", "2022", "2023"])
 
     def test_parse_year_list_comma(self):
+        """Tests parsing comma-separated years string."""
         years = download.parse_year_list("2018, 2020, 2022")
         self.assertEqual(years, ["2018", "2020", "2022"])
 
     def test_parse_year_list_single(self):
+        """Tests parsing a single year string."""
         years = download.parse_year_list("2024")
         self.assertEqual(years, ["2024"])
 
     @mock.patch.object(download.requests, "Session")
     def test_init_session_success(self, mock_session_cls):
+        """Tests successful session handshake and parameter extraction."""
         mock_session = mock.MagicMock()
         mock_session_cls.return_value = mock_session
 
@@ -91,6 +96,7 @@ class DownloadTest(unittest.TestCase):
 
     @mock.patch.object(download.requests, "Session")
     def test_init_session_missing_form(self, mock_session_cls):
+        """Tests error handling when the initial landing form is missing."""
         mock_session = mock.MagicMock()
         mock_session_cls.return_value = mock_session
 
@@ -105,6 +111,7 @@ class DownloadTest(unittest.TestCase):
             downloader.init_session.__wrapped__(downloader)
 
     def test_build_post_data(self):
+        """Tests constructing query payload with proper groupings and filters."""
         downloader = download.CdcWonderSingleRaceDownloader()
         downloader.base_post_data = [
             ("B_1", "old_val"),
@@ -134,6 +141,7 @@ class DownloadTest(unittest.TestCase):
 
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "execute_query")
     def test_download_state_single_query(self, mock_query):
+        """Tests downloading state data that fits within a single query."""
         tsv_output = ("Notes\tYear\tCounty\tCounty Code\tDeaths\n"
                       "\t2018\tAnchorage Borough, AK\t02020\t20\n")
         mock_query.return_value = tsv_output
@@ -148,6 +156,7 @@ class DownloadTest(unittest.TestCase):
 
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "execute_query")
     def test_download_state_row_limit_partitioning(self, mock_query):
+        """Tests dynamic partitioning when CDC WONDER row limit is exceeded."""
         err_msg = (
             "This request produces 168,754 rows, but 75,000 is the maximum allowed. "
             "Simplify this request, or send a series of smaller ones.")
@@ -170,6 +179,7 @@ class DownloadTest(unittest.TestCase):
 
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "execute_query")
     def test_download_state_large_state_preemptive(self, mock_query):
+        """Tests preemptive chunking for high-volume states."""
         tsv_chunk1 = "Notes\tYear\tCounty Code\n\t2018\t06001\n"
         tsv_chunk2 = "Notes\tYear\tCounty Code\n\t2020\t06001\n"
         tsv_chunk3 = "Notes\tYear\tCounty Code\n\t2022\t06001\n"
@@ -184,6 +194,7 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(mock_query.call_count, 3)
 
     def test_save_tsv_as_csv(self):
+        """Tests converting CDC WONDER TSV output to CSV format."""
         raw_tsv = ("Notes\tYear\tCounty\tCounty Code\tDeaths\n"
                    "\t2018\tAnchorage Borough, AK\t02020\t20\n"
                    "\t2018\tFairbanks North Star Borough, AK\t02090\t15\n"
@@ -201,10 +212,18 @@ class DownloadTest(unittest.TestCase):
 
             self.assertEqual(len(lines), 3)
             self.assertEqual(lines[0], "Notes,Year,County,County Code,Deaths")
-            self.assertEqual(lines[1],
-                             ',2018,"Anchorage Borough, AK",02020,20')
+            self.assertEqual(lines[1], ',2018,"Anchorage Borough, AK",02020,20')
+
+    def test_save_tsv_as_csv_empty_raises(self):
+        """Tests that saving an empty or header-only TSV raises ValueError."""
+        raw_tsv = "Notes\tYear\tCounty\tCounty Code\tDeaths\n---\n"
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_csv = os.path.join(temp_dir, "empty_output.csv")
+            with self.assertRaisesRegex(ValueError, "No data rows found"):
+                download.save_tsv_as_csv(raw_tsv, output_csv)
 
     def test_is_state_downloaded(self):
+        """Tests state download detection across monolithic and chunked files."""
         with tempfile.TemporaryDirectory() as temp_dir:
             self.assertFalse(download.is_state_downloaded(temp_dir, "02"))
 
@@ -222,6 +241,15 @@ class DownloadTest(unittest.TestCase):
             self.assertFalse(
                 download.is_state_downloaded(temp_dir, "02", ["2018", "2020"]))
 
+            # Verify numeric value in another column does not trigger false positive
+            f_other_col = (Path(temp_dir) /
+                           "UnderlyingCauseofDeath_SingleRace_03.csv")
+            f_other_col.write_text("Notes,Year,Deaths\n" + ",2020,2018\n" * 10)
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir, "03", ["2018"]))
+            self.assertTrue(
+                download.is_state_downloaded(temp_dir, "03", ["2020"]))
+
             # Test chunk files
             f.unlink()
             f_chunk = (Path(temp_dir) /
@@ -236,6 +264,7 @@ class DownloadTest(unittest.TestCase):
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")
     def test_execute_query_429_backoff(self, mock_init, mock_sleep):
+        """Tests rate-limit handling and backoff on HTTP 429."""
         downloader = download.CdcWonderSingleRaceDownloader()
         downloader.action_url = "https://wonder.cdc.gov/test"
         downloader.base_post_data = [("B_1", "test")]

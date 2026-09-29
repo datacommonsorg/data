@@ -191,7 +191,7 @@ class CdcWonderSingleRaceDownloader:
         self,
         landing_url: str = SOURCE_LANDING_URL,
         timeout: int = 120,
-        delay: float = 2.0,
+        delay: float = 5.0,
     ):
         self.landing_url = landing_url
         self.timeout = timeout
@@ -199,7 +199,7 @@ class CdcWonderSingleRaceDownloader:
         self.session = requests.Session()
         self.session.headers.update({
             "User-Agent":
-            "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
+                "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
         })
         self.action_url: Optional[str] = None
         self.base_post_data: List[Tuple[str, str]] = []
@@ -218,7 +218,7 @@ class CdcWonderSingleRaceDownloader:
         self.session = requests.Session()
         self.session.headers.update({
             "User-Agent":
-            "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
+                "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
         })
         self.action_url = None
         self.base_post_data = []
@@ -236,7 +236,8 @@ class CdcWonderSingleRaceDownloader:
 
         action = urljoin(self.landing_url, form.get("action"))
         agree_inputs = [(inp.get("name"), inp.get("value", ""))
-                        for inp in form.find_all("input") if inp.get("name")]
+                        for inp in form.find_all("input")
+                        if inp.get("name")]
         agree_inputs.append(("action-I Agree", "I Agree"))
 
         logging.info("Submitting Data Use Agreement (I Agree)...")
@@ -265,8 +266,8 @@ class CdcWonderSingleRaceDownloader:
                     continue
                 if itype in ["checkbox", "radio"]:
                     if el.has_attr("checked"):
-                        self.base_post_data.append(
-                            (name, el.get("value", "on")))
+                        self.base_post_data.append((name, el.get("value",
+                                                                 "on")))
                 else:
                     self.base_post_data.append((name, el.get("value", "")))
             elif el.name == "select":
@@ -276,8 +277,7 @@ class CdcWonderSingleRaceDownloader:
                 ]
                 if selected_opts:
                     for opt in selected_opts:
-                        self.base_post_data.append((name, opt.get("value",
-                                                                  "")))
+                        self.base_post_data.append((name, opt.get("value", "")))
                 else:
                     if not el.has_attr("multiple"):
                         first_opt = el.find("option")
@@ -345,21 +345,32 @@ class CdcWonderSingleRaceDownloader:
 
         for attempt in range(1, max_retries + 1):
             try:
+                logging.info(
+                    "Dispatching POST %s for state %s, years %s (attempt %d/%d)...",
+                    self.action_url,
+                    state_fips,
+                    years or "all",
+                    attempt,
+                    max_retries,
+                )
                 res = self.session.post(self.action_url,
                                         data=payload,
                                         timeout=self.timeout)
                 if res.status_code == 429:
                     retry_after = res.headers.get("Retry-After")
                     # CDC WONDER WAF explicitly states:
-                    # "Your IP address has been temporarily blocked... Please wait 30 minutes before trying again."
+                    # "Your IP address has been temporarily blocked... Please wait 30 minutes"
+                    # " before trying again."
                     # Any probe before 30 minutes resets the firewall penalty timer.
-                    # Therefore, on 429 we must pause for the full 30 minutes (+ 1 min buffer) in complete silence.
+                    # Therefore, on 429 we must pause for the full 30 minutes (+ 1 min buffer)
+                    # in complete silence.
                     wait_time = int(
                         retry_after) if retry_after and retry_after.isdigit(
                         ) else 1860  # 31 minutes
                     logging.warning(
-                        "Encountered HTTP 429 (Too Many Requests). CDC WONDER enforces a 30-minute IP block. "
-                        "Waiting %d seconds (%d min) in complete silence for block to clear (attempt %d)...",
+                        "Encountered HTTP 429 (Too Many Requests). CDC WONDER enforces a "
+                        "30-minute IP block. Waiting %d seconds (%d min) in complete silence "
+                        "for block to clear (attempt %d)...",
                         wait_time,
                         wait_time // 60,
                         attempt,
@@ -372,18 +383,27 @@ class CdcWonderSingleRaceDownloader:
 
                 if res.status_code == 400:
                     logging.warning(
-                        "CDC WONDER returned HTTP 400 (likely query buffer overrun for large state). Returning for partitioning."
+                        "CDC WONDER returned HTTP 400 for state %s (likely query buffer "
+                        "overrun for large state). Returning for partitioning.",
+                        state_fips,
                     )
                     return "CDC WONDER 400 Bad Request (query too large)"
 
                 res.raise_for_status()
+                logging.info(
+                    "Successfully received HTTP %d for state %s (%d bytes)",
+                    res.status_code,
+                    state_fips,
+                    len(res.content),
+                )
                 return res.text
             except (requests.RequestException, ValueError) as e:
                 if attempt == max_retries:
                     raise
                 wait_time = 15 * attempt
                 logging.warning(
-                    "Request error: %s. Renewing session and retrying in %d seconds (attempt %d/%d)...",
+                    "Request error: %s. Renewing session and retrying in %d seconds "
+                    "(attempt %d/%d)...",
                     e,
                     wait_time,
                     attempt,
@@ -427,65 +447,67 @@ class CdcWonderSingleRaceDownloader:
                         "Successfully fetched %s (all requested years in 1 query).",
                         state_name)
                     return [("all", response_text)]
-                else:
-                    logging.warning(
-                        "%s response not TSV (likely exceeded 75k rows: %s). Partitioning into chunks...",
-                        state_name,
-                        response_text[:120].strip().replace("\n", " "),
-                    )
-                    need_partitioning = True
+                logging.warning(
+                    "%s response not TSV (likely exceeded 75k rows: %s). "
+                    "Partitioning into chunks...",
+                    state_name,
+                    response_text[:120].strip().replace("\n", " "),
+                )
+                need_partitioning = True
             except Exception as e:
                 logging.warning(
-                    "Querying all %d years for %s encountered %s. Partitioning into year chunks...",
+                    "Querying all %d years for %s encountered %s. "
+                    "Partitioning into year chunks...",
                     len(years),
                     state_name,
                     e,
                 )
                 need_partitioning = True
 
-        if need_partitioning:
-            # Partition years into 2-year chunks
-            chunk_results = []
-            chunk_size = 2 if len(years) > 2 else 1
-            for i in range(0, len(years), chunk_size):
-                year_chunk = years[i:i + chunk_size]
-                chunk_label = f"{year_chunk[0]}_{year_chunk[-1]}" if len(
-                    year_chunk) > 1 else year_chunk[0]
-                logging.info(
-                    "Querying %s for chunk %s (%s)...",
-                    state_name,
-                    chunk_label,
-                    year_chunk,
-                )
-                time.sleep(self.delay)
-                chunk_text = self.execute_query(state_fips, year_chunk)
-                chunk_first_line = chunk_text.split("\n", 1)[0]
+        if not need_partitioning:
+            return []
 
-                if "County Code" not in chunk_first_line:
-                    # If 2-year chunk is still too big, try 1-year chunks
-                    if len(year_chunk) > 1:
-                        logging.warning(
-                            "Chunk %s still too large for %s. Splitting into 1-year chunks...",
-                            chunk_label,
-                            state_name,
-                        )
-                        for single_year in year_chunk:
-                            time.sleep(self.delay)
-                            sy_text = self.execute_query(
-                                state_fips, [single_year])
-                            if "County Code" not in sy_text.split("\n", 1)[0]:
-                                raise ValueError(
-                                    f"Failed to query {state_name} even for single year {single_year}."
-                                )
-                            chunk_results.append((single_year, sy_text))
-                    else:
-                        raise ValueError(
-                            f"Failed to query {state_name} for chunk {chunk_label}: {chunk_text[:300]}"
-                        )
+        # Partition years into 2-year chunks
+        chunk_results = []
+        chunk_size = 2 if len(years) > 2 else 1
+        for i in range(0, len(years), chunk_size):
+            year_chunk = years[i:i + chunk_size]
+            chunk_label = f"{year_chunk[0]}_{year_chunk[-1]}" if len(
+                year_chunk) > 1 else year_chunk[0]
+            logging.info(
+                "Querying %s for chunk %s (%s)...",
+                state_name,
+                chunk_label,
+                year_chunk,
+            )
+            time.sleep(self.delay)
+            chunk_text = self.execute_query(state_fips, year_chunk)
+            chunk_first_line = chunk_text.split("\n", 1)[0]
+
+            if "County Code" not in chunk_first_line:
+                # If 2-year chunk is still too big, try 1-year chunks
+                if len(year_chunk) > 1:
+                    logging.warning(
+                        "Chunk %s still too large for %s. Splitting into 1-year chunks...",
+                        chunk_label,
+                        state_name,
+                    )
+                    for single_year in year_chunk:
+                        time.sleep(self.delay)
+                        sy_text = self.execute_query(state_fips, [single_year])
+                        if "County Code" not in sy_text.split("\n", 1)[0]:
+                            raise ValueError(
+                                f"Failed to query {state_name} even for single year "
+                                f"{single_year}.")
+                        chunk_results.append((single_year, sy_text))
                 else:
-                    chunk_results.append((chunk_label, chunk_text))
+                    raise ValueError(
+                        f"Failed to query {state_name} for chunk {chunk_label}: "
+                        f"{chunk_text[:300]}")
+            else:
+                chunk_results.append((chunk_label, chunk_text))
 
-            return chunk_results
+        return chunk_results
 
 
 def save_tsv_as_csv(raw_tsv: str, output_filepath: str) -> int:
@@ -501,11 +523,18 @@ def save_tsv_as_csv(raw_tsv: str, output_filepath: str) -> int:
             if not row:
                 continue
             # Stop at metadata notes footer
-            if row[0].startswith("---") or (len(row) > 1
-                                            and row[1].startswith("---")):
+            if row[0].startswith("---") or (len(row) > 1 and
+                                            row[1].startswith("---")):
                 break
             csv_writer.writerow(row)
             row_count += 1
+
+    if row_count <= 1:
+        if os.path.exists(temp_filepath):
+            os.remove(temp_filepath)
+        raise ValueError(
+            f"No data rows found in TSV response for {output_filepath} "
+            f"(row_count={row_count}).")
 
     os.replace(temp_filepath, output_filepath)
     logging.info("Saved %d rows to %s", row_count, output_filepath)
@@ -530,10 +559,19 @@ def is_state_downloaded(output_dir: str,
             parts = name.split("_")
             if len(parts) == 3:
                 try:
-                    content = f.read_text(encoding="utf-8", errors="replace")
-                    for y in years:
-                        if f",{y}," in content:
-                            covered_years.add(y)
+                    with open(f, mode="r", encoding="utf-8",
+                              errors="replace") as fh:
+                        reader = csv.reader(fh)
+                        header = next(reader, None)
+                        if header:
+                            year_idx = header.index(
+                                "Year") if "Year" in header else 1
+                            for row in reader:
+                                if len(row
+                                      ) > year_idx and row[year_idx] in years:
+                                    covered_years.add(row[year_idx])
+                                    if all(y in covered_years for y in years):
+                                        break
                 except Exception:
                     pass
             elif len(parts) == 4:
@@ -553,11 +591,11 @@ def download_single_race_data(
     states: List[str],
     years: List[str],
     output_dir: str,
-    delay: float = 3.0,
+    delay: float = 5.0,
     timeout: int = 120,
     skip_existing: bool = True,
-    batch_size: int = 10,
-    batch_cooldown: float = 20.0,
+    batch_size: int = 8,
+    batch_cooldown: float = 60.0,
 ):
     """Downloads CDC Single Race mortality data for specified states and years."""
     os.makedirs(output_dir, exist_ok=True)
@@ -611,10 +649,11 @@ def download_single_race_data(
 
         states_in_batch += 1
 
-        # Automatically refresh session after each batch of 10 states
+        # Automatically refresh session after each batch of states
         if states_in_batch >= batch_size and idx < len(states):
             logging.info(
-                "Completed session batch of %d states. Cooling down for %.1fs and renewing CDC session...",
+                "Completed session batch of %d states. Cooling down for %.1fs and renewing "
+                "CDC session...",
                 states_in_batch,
                 batch_cooldown,
             )
@@ -629,6 +668,7 @@ def download_single_race_data(
 
 
 def main(_):
+    """Main entry point to execute the CDC WONDER downloader."""
     years = parse_year_list(FLAGS.years)
 
     if FLAGS.states.lower() == "all":
