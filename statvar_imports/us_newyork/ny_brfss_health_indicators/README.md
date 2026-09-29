@@ -40,7 +40,7 @@ The import process involves querying the NYSDOH Socrata API and running a proces
 This import is designed to be fully automated and autorefreshed. Future survey releases are automatically queried, processed, and validated.
 
 ### Automated Steps
-1. The automated job triggers annually based on cron schedule `0 0 1 * *` configured in `manifest.json`.
+1. The automated job triggers monthly based on cron schedule `0 0 1 * *` configured in `manifest.json`.
 2. `download.py` queries the NYSDOH Socrata API endpoint with deterministic pagination (`$order: ':id'`) and updates `input_files/ny_brfss_health_indicators_raw.csv`.
 3. `stat_var_processor.py` executes to regenerate the output CSV, TMCF, and MCF artifacts.
 4. `validator.py` enforces validation rules from `validation_config.json` before publication.
