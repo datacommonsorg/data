@@ -59,7 +59,7 @@ Asthma Ever,populationType,Person,measuredProperty,percent,healthOutcome,AsthmaE
 Binge Drinking,dcid,Percent_Person_BingeDrinking,populationType,Person,measuredProperty,percent,healthBehavior,BingeDrinking,unit,Percent
 Binge or Heavy Drinking,populationType,Person,measuredProperty,percent,healthBehavior,BingeOrHeavyDrinking,unit,Percent
 Breast Cancer Screening,dcid,Percent_Person_50To74Years_Female_ReceivedMammography,populationType,Person,gender,Female,age,Years50To74,measuredProperty,percent,healthPrevention,Mammography,unit,Percent
-Breast Cancer Screening Low Income 50-74,populationType,Person,gender,Female,age,Years50To74,income,[USDollar 0 24999],measuredProperty,percent,healthPrevention,Mammography,unit,Percent
+Breast Cancer Screening Low Income 50-74,dcid,Percent_Person_50To74Years_Female_ReceivedMammography_IncomeOf0To24999USDollar,populationType,Person,gender,Female,age,Years50To74,income,[USDollar 0 24999],measuredProperty,percent,healthPrevention,Mammography,unit,Percent
 Cardiovascular Disease Disability,populationType,Person,disabilityStatus,AnyDisability,measuredProperty,percent,healthOutcome,CardiovascularDisease,unit,Percent
 Cervical Cancer Screening,dcid,Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening,populationType,Person,gender,Female,age,Years21To65,measuredProperty,percent,healthPrevention,CervicalCancerScreening,unit,Percent
 Cervical Cancer Screening (2012 guidelines),populationType,Person,gender,Female,age,Years21To65,measuredProperty,percent,healthPrevention,CervicalCancerScreening2012Guidelines,unit,Percent
