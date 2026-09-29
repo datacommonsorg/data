@@ -10,6 +10,13 @@
             }
         },
         {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
             "rule_id": "check_max_date_freshness",
             "description": "Checks that the latest observation year is at least 2024 for all StatVars.",
             "validator": "SQL_VALIDATOR",
