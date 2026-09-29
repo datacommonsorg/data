@@ -53,9 +53,13 @@ class DownloadTest(unittest.TestCase):
             self.assertFalse(os.path.exists(temp_path))
 
     @mock.patch(
+        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.logging.fatal'
+    )
+    @mock.patch(
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
     )
-    def test_download_health_indicators_http_error(self, mock_create_session):
+    def test_download_health_indicators_http_error(self, mock_create_session,
+                                                   mock_fatal):
         mock_session = mock.MagicMock()
         mock_session.__enter__.return_value = mock_session
         mock_create_session.return_value = mock_session
@@ -67,11 +71,16 @@ class DownloadTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with self.assertRaises(RuntimeError):
                 download_health_indicators('https://mock-endpoint', tmp_dir)
+            mock_fatal.assert_called_once()
 
+    @mock.patch(
+        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.logging.fatal'
+    )
     @mock.patch(
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
     )
-    def test_download_health_indicators_empty_error(self, mock_create_session):
+    def test_download_health_indicators_empty_error(self, mock_create_session,
+                                                    mock_fatal):
         mock_session = mock.MagicMock()
         mock_session.__enter__.return_value = mock_session
         mock_create_session.return_value = mock_session
@@ -83,6 +92,7 @@ class DownloadTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with self.assertRaises(RuntimeError):
                 download_health_indicators('https://mock-endpoint', tmp_dir)
+            mock_fatal.assert_called_once()
 
     @mock.patch(
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
