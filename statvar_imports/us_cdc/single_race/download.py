@@ -366,12 +366,8 @@ class CdcWonderSingleRaceDownloader:
                     )
                     time.sleep(wait_time)
                     # Re-initialize session to renew cookies and session ID
-                    try:
-                        self.init_session()
-                        payload = self._build_post_data(state_fips, years)
-                    except Exception as e:
-                        logging.warning("Session re-initialization error: %s",
-                                        e)
+                    self.init_session()
+                    payload = self._build_post_data(state_fips, years)
                     continue
 
                 if res.status_code == 400:
@@ -394,12 +390,8 @@ class CdcWonderSingleRaceDownloader:
                     max_retries,
                 )
                 time.sleep(wait_time)
-                try:
-                    self.init_session()
-                    payload = self._build_post_data(state_fips, years)
-                except Exception as session_err:
-                    logging.warning("Session re-initialization error: %s",
-                                    session_err)
+                self.init_session()
+                payload = self._build_post_data(state_fips, years)
 
         raise RuntimeError(
             f"Failed to query {state_fips} after {max_retries} attempts.")
@@ -532,18 +524,28 @@ def is_state_downloaded(output_dir: str,
     if not all(f.stat().st_size > 100 for f in matches):
         return False
     if years:
-        latest_year = years[-1]
-        has_chunk = any(
-            f.name.endswith(f"_{latest_year}.csv")
-            or f"_{latest_year}_" in f.name for f in matches)
-        if has_chunk:
-            return True
-        single_file = Path(
-            output_dir) / f"UnderlyingCauseofDeath_SingleRace_{state_fips}.csv"
-        if single_file.exists():
-            content = single_file.read_text(encoding="utf-8", errors="replace")
-            return f",{latest_year}," in content
-        return False
+        covered_years = set()
+        for f in matches:
+            name = f.stem
+            parts = name.split("_")
+            if len(parts) == 3:
+                try:
+                    content = f.read_text(encoding="utf-8", errors="replace")
+                    for y in years:
+                        if f",{y}," in content:
+                            covered_years.add(y)
+                except Exception:
+                    pass
+            elif len(parts) == 4:
+                covered_years.add(parts[3])
+            elif len(parts) == 5:
+                try:
+                    start, end = int(parts[3]), int(parts[4])
+                    for y in range(start, end + 1):
+                        covered_years.add(str(y))
+                except ValueError:
+                    pass
+        return all(y in covered_years for y in years)
     return True
 
 

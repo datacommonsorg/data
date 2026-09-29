@@ -213,10 +213,25 @@ class DownloadTest(unittest.TestCase):
             f.write_text("")
             self.assertFalse(download.is_state_downloaded(temp_dir, "02"))
 
-            # Create valid file > 100 bytes
+            # Create valid monolithic file covering 2018 and 2019
             f.write_text("Header,col1,col2,col3\n" +
-                         "val1,val2,val3,val4\n" * 10)
+                         ",2018,val\n,2019,val\n" * 10)
             self.assertTrue(download.is_state_downloaded(temp_dir, "02"))
+            self.assertTrue(
+                download.is_state_downloaded(temp_dir, "02", ["2018", "2019"]))
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir, "02", ["2018", "2020"]))
+
+            # Test chunk files
+            f.unlink()
+            f_chunk = (Path(temp_dir) /
+                       "UnderlyingCauseofDeath_SingleRace_02_2018_2019.csv")
+            f_chunk.write_text("Header,col1,col2,col3\n" +
+                               "val1,val2,val3,val4\n" * 10)
+            self.assertTrue(
+                download.is_state_downloaded(temp_dir, "02", ["2018", "2019"]))
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir, "02", ["2018", "2020"]))
 
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")

@@ -45,7 +45,9 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar
 
 ### Automation
 
-This import pipeline is configured to run automatically on the second Saturday of every month schedule.
+This import pipeline is configured in `manifest.json` on the second Saturday of every month schedule:
 
-- Cron Expression: 30 08 8-14 * 6
+- Data Commons Manifest Schedule: `30 08 8-14 * 6`
+
+*(Note: In standard POSIX crontabs where day-of-month and day-of-week evaluate as an `OR` condition, use `30 08 * * 6 [ $(date +\%d) -ge 8 ] && [ $(date +\%d) -le 14 ] && sh download.sh` to restrict execution strictly to the second Saturday).*
 
