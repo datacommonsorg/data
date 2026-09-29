@@ -180,7 +180,7 @@ steps:
     env:
       - 'PROJECT_ID=datcom-ci'
       - 'LOCATION=us-central1'
-      - 'SPANNER_DATABASE_PATH=projects/datcom-ci/instances/datcom-spanner-test/databases/dc-test-db'
+      - 'BQ_DATASET_ID=import_automation'
       - 'GCS_BUCKET_ID=datcom-ci-test'
       - 'GCS_MOUNT_BUCKET=datcom-ci-test'
     args:
@@ -195,7 +195,7 @@ steps:
         if [ "$${BUILD_EXECUTOR}" = "true" ]; then
           export IMAGE_URI="us-docker.pkg.dev/${PROJECT_ID}/gcr.io/dc-import-executor:${_VERSION}"
         fi
-        uv pip install --system --quiet absl-py google-cloud-spanner google-cloud-workflows
+        uv pip install --system --quiet absl-py google-cloud-bigquery google-cloud-workflows
         python3 import-automation/workflow/import_automation_e2e.py
 
   # 3b. Run End-to-End Airflow DAG Verification Test in Cloud Composer
@@ -263,7 +263,7 @@ steps:
             --region="us-central1" \
             --project="datcom-import-automation-prod" \
             --no-allow-unauthenticated \
-            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,PROJECT_NUMBER=965988403328,SPANNER_DATABASE_PATH=projects/datcom-store/instances/dc-graph-prod/databases/dc_graph,GCS_BUCKET_ID=datcom-prod-imports,INGESTION_HELPER_SERVICE=ingestion-helper-service,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com"
+            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,PROJECT_NUMBER=965988403328,BQ_DATASET_ID=import_automation,GCS_BUCKET_ID=datcom-prod-imports,INGESTION_HELPER_SERVICE=ingestion-helper-service,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com"
         fi
 
         if [ "$${BUILD_WORKFLOW}" = "true" ]; then
@@ -272,7 +272,7 @@ steps:
             --project="datcom-import-automation-prod" \
             --location="us-central1" \
             --source=import-automation/workflow/import-automation-workflow.yaml \
-            --set-env-vars="LOCATION=us-central1,GCS_BUCKET_ID=datcom-prod-imports,GCS_MOUNT_BUCKET=datcom-volume-mount,PROJECT_NUMBER=965988403328,ENV_SUFFIX=,IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
+            --set-env-vars="LOCATION=us-central1,GCS_BUCKET_ID=datcom-prod-imports,GCS_MOUNT_BUCKET=datcom-volume-mount,PROJECT_NUMBER=965988403328,IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
         fi
 
 options:
