@@ -114,11 +114,9 @@ def download_file(
     dst_dir = os.path.dirname(os.path.abspath(output_path))
     os.makedirs(dst_dir, exist_ok=True)
 
-    close_session = False
+    owns_session = session is None
+    active_session = requests.Session() if owns_session else session
     temp_path = None
-    if session is None:
-        session = requests.Session()
-        close_session = True
 
     try:
         adapter = HTTPAdapter(
@@ -130,12 +128,14 @@ def download_file(
                 raise_on_status=True,
             )
         )
-        if hasattr(session, "mount") and callable(session.mount):
-            session.mount("https://", adapter)
-            session.mount("http://", adapter)
+        if hasattr(active_session, "mount") and callable(active_session.mount):
+            active_session.mount("https://", adapter)
+            active_session.mount("http://", adapter)
 
         try:
-            response = session.get(download_url, headers=HTTP_HEADERS, timeout=timeout)
+            response = active_session.get(
+                download_url, headers=HTTP_HEADERS, timeout=timeout
+            )
             if response.status_code == 404:
                 logging.warning(
                     "HTTP 404 received for %s; failing fast without retry.",
@@ -151,15 +151,14 @@ def download_file(
                 raise RuntimeError(
                     f"Empty response body received from {download_url}"
                 )
+            with tempfile.NamedTemporaryFile(
+                "wb", dir=dst_dir, delete=False, suffix=".tmp"
+            ) as tmp_file:
+                temp_path = tmp_file.name
+                tmp_file.write(content)
         except requests.RequestException as e:
             logging.error("Failed to download %s: %s", download_url, e)
             raise RuntimeError(f"Failed to download {download_url}: {e}") from e
-
-        with tempfile.NamedTemporaryFile(
-            "wb", dir=dst_dir, delete=False, suffix=".tmp"
-        ) as tmp_file:
-            temp_path = tmp_file.name
-            tmp_file.write(content)
 
         os.replace(temp_path, output_path)
         temp_path = None
@@ -175,8 +174,8 @@ def download_file(
                 os.unlink(temp_path)
             except OSError:
                 pass
-        if close_session:
-            session.close()
+        if owns_session:
+            active_session.close()
 
 
 def extract_sheet_to_csv(
@@ -258,23 +257,36 @@ def download_poverty_dataset(
     timeout=60,
 ):
     """Main workflow to download official EDA PPC workbook or ingest input file."""
-    session = requests.Session()
-    try:
-        # Case 1: Local input file specified
-        if input_file:
-            if not os.path.exists(input_file) or os.path.getsize(input_file) == 0:
-                raise FileNotFoundError(f"Input file not found or empty: {input_file}")
-            logging.info("Using provided local input file: %s", input_file)
-            if input_file.lower().endswith((".xlsx", ".xls")):
-                copy_file_atomically(input_file, output_xlsx_path)
-                extract_sheet_to_csv(input_file, output_csv_path)
-            else:
-                copy_file_atomically(input_file, output_csv_path)
-            if raw_csv_path:
-                copy_file_atomically(output_csv_path, raw_csv_path)
-            return output_csv_path
+    # Case 1: Local input file specified
+    if input_file:
+        if not os.path.exists(input_file) or os.path.getsize(input_file) == 0:
+            raise FileNotFoundError(f"Input file not found or empty: {input_file}")
+        logging.info("Using provided local input file: %s", input_file)
+        if input_file.lower().endswith((".xlsx", ".xls")):
+            copy_file_atomically(input_file, output_xlsx_path)
+            extract_sheet_to_csv(input_file, output_csv_path)
+        else:
+            copy_file_atomically(input_file, output_csv_path)
+        if raw_csv_path:
+            copy_file_atomically(output_csv_path, raw_csv_path)
+        return output_csv_path
 
-        # Case 2: Download from web with primary and mirror fallback
+    # Clean up existing target files before a fresh download to avoid reusing stale files
+    for path_to_clean in [output_xlsx_path, output_csv_path]:
+        if path_to_clean and os.path.exists(path_to_clean):
+            try:
+                os.remove(path_to_clean)
+                logging.info(
+                    "Cleaned up existing target file before fresh download: %s",
+                    path_to_clean,
+                )
+            except OSError as e:
+                logging.warning(
+                    "Could not remove existing file %s: %s", path_to_clean, e
+                )
+
+    # Case 2: Download from web with primary and mirror fallback
+    with requests.Session() as session:
         content = None
         urls_to_try = []
         if source_url:
@@ -298,23 +310,7 @@ def download_poverty_dataset(
                 last_err = e
                 logging.warning("Failed to download from %s: %s", url, e)
 
-        # Fallback to existing input files if available
         if not content:
-            fallback_candidates = [
-                output_xlsx_path,
-                output_csv_path,
-            ]
-            for fallback in fallback_candidates:
-                if os.path.exists(fallback) and os.path.getsize(fallback) > 0:
-                    logging.info("Falling back to existing local file: %s", fallback)
-                    if fallback.lower().endswith((".xlsx", ".xls")):
-                        extract_sheet_to_csv(fallback, output_csv_path)
-                    elif fallback != output_csv_path:
-                        copy_file_atomically(fallback, output_csv_path)
-                    if raw_csv_path and output_csv_path != raw_csv_path:
-                        copy_file_atomically(output_csv_path, raw_csv_path)
-                    return output_csv_path
-
             raise RuntimeError(
                 f"Failed to acquire dataset from all URLs: {urls_to_try}. Last error: {last_err}"
             ) from last_err
@@ -325,8 +321,6 @@ def download_poverty_dataset(
             copy_file_atomically(output_csv_path, raw_csv_path)
 
         return output_csv_path
-    finally:
-        session.close()
 
 
 def main(argv):

@@ -43,44 +43,47 @@ from statvar_imports.commerce_eda_poverty.download_poverty import (
 def _create_mock_eda_workbook(filepath=None):
     """Creates a mock Excel workbook containing the Underlying_Data worksheet."""
     wb = openpyxl.Workbook()
-    # Sheet 1: Readme
-    ws_readme = wb.active
-    ws_readme.title = "EDA Read Me"
-    ws_readme.append(["FY2023 PERSISTENT POVERTY COUNTIES (PPCs)", ""])
+    try:
+        # Sheet 1: Readme
+        ws_readme = wb.active
+        ws_readme.title = "EDA Read Me"
+        ws_readme.append(["FY2023 PERSISTENT POVERTY COUNTIES (PPCs)", ""])
 
-    # Sheet 2: Underlying_Data
-    ws_data = wb.create_sheet(title="Underlying_Data")
-    ws_data.append([
-        "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
-        "", "", "", "", "", "", ""
-    ])
-    ws_data.append([
-        "Identifing Information", "", "Census Bureau Data", "", "", "",
-        "FY23 Persistent Poverty", "Census GEO PPC Code"
-    ])
-    ws_data.append([
-        "Name",
-        "GEOID",
-        "1990 Decennial Census, % in Poverty",
-        "2000 Decennial Census, % in Poverty",
-        "Most Recent Estimate, % in Poverty* ",
-        "Data Source―Most Recent Estimate",
-        "",
-        "",
-    ])
-    ws_data.append(["Autauga County, AL", "01001", 15.7, 10.9, 13.3, "SAIPE, 2021", "No", 1])
-    ws_data.append(["Barbour County, AL", "01005", 25.2, 26.8, 29.0, "SAIPE, 2021", "Yes", 2])
-    ws_data.append([
-        "Eastern District, AS", "60010", 56.0, 58.6, 52.2, "Decennial Census, 2020", "Yes", 2
-    ])
+        # Sheet 2: Underlying_Data
+        ws_data = wb.create_sheet(title="Underlying_Data")
+        ws_data.append([
+            "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
+            "", "", "", "", "", "", ""
+        ])
+        ws_data.append([
+            "Identifing Information", "", "Census Bureau Data", "", "", "",
+            "FY23 Persistent Poverty", "Census GEO PPC Code"
+        ])
+        ws_data.append([
+            "Name",
+            "GEOID",
+            "1990 Decennial Census, % in Poverty",
+            "2000 Decennial Census, % in Poverty",
+            "Most Recent Estimate, % in Poverty* ",
+            "Data Source―Most Recent Estimate",
+            "",
+            "",
+        ])
+        ws_data.append(["Autauga County, AL", "01001", 15.7, 10.9, 13.3, "SAIPE, 2021", "No", 1])
+        ws_data.append(["Barbour County, AL", "01005", 25.2, 26.8, 29.0, "SAIPE, 2021", "Yes", 2])
+        ws_data.append([
+            "Eastern District, AS", "60010", 56.0, 58.6, 52.2, "Decennial Census, 2020", "Yes", 2
+        ])
 
-    if filepath:
-        wb.save(filepath)
-        return filepath
+        if filepath:
+            wb.save(filepath)
+            return filepath
 
-    bio = io.BytesIO()
-    wb.save(bio)
-    return bio.getvalue()
+        bio = io.BytesIO()
+        wb.save(bio)
+        return bio.getvalue()
+    finally:
+        wb.close()
 
 
 class TestDownloadPoverty(unittest.TestCase):
@@ -91,6 +94,7 @@ class TestDownloadPoverty(unittest.TestCase):
             test_content = b"PK\x03\x04test_content"
 
             mock_resp = mock.MagicMock()
+            mock_resp.__enter__.return_value = mock_resp
             mock_resp.content = test_content
             mock_resp.status_code = 200
 
@@ -178,6 +182,7 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "empty.xlsx")
 
             mock_resp = mock.MagicMock()
+            mock_resp.__enter__.return_value = mock_resp
             mock_resp.content = b""
             mock_resp.status_code = 200
 
@@ -199,6 +204,7 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "mount.xlsx")
             mock_session = mock.MagicMock()
             mock_resp = mock.MagicMock(status_code=200, content=b"data")
+            mock_resp.__enter__.return_value = mock_resp
             mock_session.get.return_value = mock_resp
 
             download_file(
@@ -225,6 +231,7 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "404.xlsx")
             mock_session = mock.MagicMock()
             mock_resp = mock.MagicMock(status_code=404)
+            mock_resp.__enter__.return_value = mock_resp
             mock_session.get.return_value = mock_resp
 
             with self.assertRaises(RuntimeError) as ctx:
@@ -245,9 +252,10 @@ class TestDownloadPoverty(unittest.TestCase):
             def __init__(self):
                 self.call_count = 0
 
-            def get(self, url, headers=None, timeout=None):
+            def get(self, url, headers=None, timeout=None, **kwargs):
                 self.call_count += 1
                 resp = mock.MagicMock()
+                resp.__enter__.return_value = resp
                 resp.status_code = 200
                 resp.content = b"duck_data"
                 return resp
@@ -351,6 +359,7 @@ class TestDownloadPoverty(unittest.TestCase):
 
             def mock_get(url, **kwargs):
                 resp = mock.MagicMock()
+                resp.__enter__.return_value = resp
                 if parse.urlparse(url).netloc == "www.eda.gov":
                     resp.status_code = 403
                     resp.raise_for_status.side_effect = requests.HTTPError("403 Forbidden")
@@ -378,6 +387,35 @@ class TestDownloadPoverty(unittest.TestCase):
     def test_download_poverty_dataset_missing_input_file_raises(self):
         with self.assertRaises(FileNotFoundError):
             download_poverty_dataset(input_file="/nonexistent/path/Poverty.csv")
+
+    def test_download_poverty_dataset_all_urls_fail_raises_and_cleans_stale_files(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            dst_csv = os.path.join(tmpdir, "Poverty.csv")
+            with open(dst_xlsx, "w", encoding="utf-8") as f:
+                f.write("stale_xlsx")
+            with open(dst_csv, "w", encoding="utf-8") as f:
+                f.write("stale_csv")
+
+            def mock_get(url, **kwargs):
+                resp = mock.MagicMock()
+                resp.status_code = 500
+                resp.raise_for_status.side_effect = requests.HTTPError("500 Server Error")
+                return resp
+
+            with mock.patch("requests.Session.get", side_effect=mock_get):
+                with self.assertRaises(RuntimeError) as ctx:
+                    download_poverty_dataset(
+                        source_url="https://example.gov/p1.xlsx",
+                        mirror_url="https://example.gov/m1.xlsx",
+                        output_xlsx_path=dst_xlsx,
+                        output_csv_path=dst_csv,
+                        max_retries=1,
+                    )
+
+            self.assertIn("Failed to acquire dataset from all URLs", str(ctx.exception))
+            self.assertFalse(os.path.exists(dst_xlsx))
+            self.assertFalse(os.path.exists(dst_csv))
 
 
 if __name__ == "__main__":

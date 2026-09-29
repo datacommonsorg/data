@@ -155,11 +155,28 @@ class TestProcessPoverty(unittest.TestCase):
                     "\"2000 Decennial Census, % in Poverty\","
                     "\"Most Recent Estimate, % in Poverty*\","
                     "\"Data Source―Most Recent Estimate\"\n"
-                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2025"\n'
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2099"\n'
                 )
             dst_path = os.path.join(tmpdir, "output.csv")
-            with self.assertRaises(ValueError):
+            with self.assertRaises(ValueError) as ctx:
                 preprocess_poverty(src_path=future_csv, dst_path=dst_path, min_county_count=1)
+            self.assertIn("Unexpected survey year", str(ctx.exception))
+
+    def test_preprocess_poverty_valid_survey_year_range(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            sample_csv = os.path.join(tmpdir, "valid_year.csv")
+            with open(sample_csv, "w") as f:
+                f.write(
+                    "Header 1\nHeader 2\n"
+                    "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
+                    "\"2000 Decennial Census, % in Poverty\","
+                    "\"Most Recent Estimate, % in Poverty*\","
+                    "\"Data Source―Most Recent Estimate\"\n"
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2023"\n'
+                )
+            dst_path = os.path.join(tmpdir, "output.csv")
+            preprocess_poverty(src_path=sample_csv, dst_path=dst_path, min_county_count=1)
+            self.assertTrue(os.path.exists(dst_path))
 
     def test_preprocess_poverty_min_county_count_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:

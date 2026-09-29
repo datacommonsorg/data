@@ -22,6 +22,7 @@ poverty percentage rates across 1990, 2000, 2020, and 2021, and generates the
 normalized cleaned CSV for stat_var_processor.py.
 """
 
+import datetime
 import os
 import re
 import tempfile
@@ -47,6 +48,12 @@ flags.DEFINE_string(
 )
 flags.DEFINE_string("cleaned_csv_path", CLEANED_CSV, "Path to save cleaned output CSV.")
 flags.DEFINE_integer("min_county_count", 3000, "Minimum number of valid counties expected.")
+flags.DEFINE_integer(
+    "min_survey_year", 2020, "Minimum valid survey year for most recent estimate."
+)
+flags.DEFINE_integer(
+    "max_survey_year", None, "Maximum valid survey year (defaults to current year)."
+)
 
 # Valid 2-digit US State and Territory FIPS codes
 VALID_STATE_FIPS = {
@@ -146,9 +153,17 @@ def resolve_source_file_path(requested_path=None):
     )
 
 
-def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_county_count=3000):
+def preprocess_poverty(
+    src_path=DEFAULT_SOURCE_CSV,
+    dst_path=CLEANED_CSV,
+    min_county_count=3000,
+    min_survey_year=2020,
+    max_survey_year=None,
+):
     """Preprocesses the raw Poverty dataset into cleaned format with normalized columns."""
     logging.info("Preprocessing source Poverty dataset from %s...", src_path)
+    if max_survey_year is None:
+        max_survey_year = datetime.date.today().year
     if not os.path.exists(src_path) or os.path.getsize(src_path) == 0:
         logging.error("Source file does not exist or is empty: %s", src_path)
         raise ValueError(f"Source file does not exist or is empty: {src_path}")
@@ -207,26 +222,20 @@ def preprocess_poverty(src_path=DEFAULT_SOURCE_CSV, dst_path=CLEANED_CSV, min_co
 
     if data_source_cols:
         ds_col = data_source_cols[0]
-        is_terr = df["GEOID"].str[:2].isin(ISLAND_TERRITORY_FIPS)
         for idx, row in df.iterrows():
             val = str(row.get(ds_col, "")).strip()
             if val and val != "nan":
                 m = re.search(r"(\d{4})\s*$", val)
                 if m:
-                    yr = m.group(1)
-                    expected_yr = "2020" if is_terr.loc[idx] else "2021"
-                    if yr != expected_yr:
-                        logging.error(
-                            "Unexpected survey year %s in %s for GEOID %s (expected %s)",
-                            yr,
-                            ds_col,
-                            row["GEOID"],
-                            expected_yr,
+                    yr = int(m.group(1))
+                    if not (min_survey_year <= yr <= max_survey_year):
+                        error_msg = (
+                            f"Unexpected survey year {yr} in {ds_col} for GEOID"
+                            f" {row['GEOID']} (expected between {min_survey_year} and "
+                            f"{max_survey_year})"
                         )
-                        raise ValueError(
-                            f"Unexpected survey year {yr} in {ds_col} for "
-                            f"GEOID {row['GEOID']} (expected {expected_yr})"
-                        )
+                        logging.error(error_msg)
+                        raise ValueError(error_msg)
 
     # Coerce and validate poverty values within [0.0, 100.0]
     raw_poverty_cols = [
@@ -310,6 +319,8 @@ def main(argv):
         src_path=source_path,
         dst_path=FLAGS.cleaned_csv_path,
         min_county_count=FLAGS.min_county_count,
+        min_survey_year=FLAGS.min_survey_year,
+        max_survey_year=FLAGS.max_survey_year,
     )
 
 

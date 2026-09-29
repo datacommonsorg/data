@@ -5,9 +5,9 @@
       "curator_emails": [
         "support@datacommons.org"
       ],
-      "provenance_url": "https://www.eda.gov/performance/tools/",
+      "provenance_url": "https://www.eda.gov/performance/resources/persistent-poverty-counties",
       "provenance_description": "U.S. Economic Development Administration (EDA) - Persistent Poverty Counties.",
-      "cron_schedule": "30 05 * * 1",
+      "cron_schedule": "30 05 1 1 *",
       "scripts": [
         "download_poverty.py",
         "process_poverty.py",

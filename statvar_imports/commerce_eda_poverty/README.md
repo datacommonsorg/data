@@ -10,11 +10,11 @@ Date: *September 2026*
 | Direct Workbook URL | [`EDA_FY23_PPCs.xlsx`](https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx) |
 | Archive Mirror URL | [`EDA_FY23_PPCs.xlsx` (Wayback Machine)](https://web.archive.org/web/20250308204521if_/https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx) |
 | Place types covered | U.S. Counties, County Equivalents, and Island Territories (`County` / `AdministrativeArea1`) |
-| Place ID resolution | `country/USA` FIPS (`geoId/XXXXX` for counties, `geoId/XX` for island territories) |
+| Place ID resolution | `country/USA` FIPS (5-digit county and county-equivalent FIPS codes, `geoId/XXXXX`) |
 | Date range covered | 1990, 2000, 2020, 2021 (1990 Decennial Census, 2000 Decennial Census, 2020 Island Area Decennial Census, 2017–2021 ACS 5-Year) |
 | Statistical Variables | `Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person` |
 | Unit / Scaling | `Percent` / `100` |
-| Refresh Cycle | Weekly automated check (`30 05 * * 1`) aligned with EDA/Census releases |
+| Refresh Cycle | Annual automated check (`30 05 1 1 *`) aligned with EDA/Census releases |
 
 ---
 
@@ -24,15 +24,18 @@ This automated dataset import fetches and processes historical and recent county
 
 The download script (`download_poverty.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 county rows) into `input_files/Poverty.csv` and `output/Poverty_original.csv`.
 
-The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes FIPS codes and poverty percentages into `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
+The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes 5-digit FIPS codes and poverty percentages into `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
 
 The dataset benchmarks poverty rates across statutory periods:
 - **1990**: 1990 Decennial Census (`poverty_rate_1990`)
 - **2000**: 2000 Decennial Census (`poverty_rate_2000`)
-- **2020**: 2020 Island Areas Decennial Census (`poverty_rate_2020` for territories `60`, `66`, `69`, `78`)
+- **2020**: 2020 Island Areas Decennial Census (`poverty_rate_2020` for territory county equivalents `60`, `66`, `69`, `78`)
 - **2021**: 2017–2021 ACS 5-Year Estimates (`poverty_rate_2021` for all 50 states, DC, and Puerto Rico)
 
-It covers 3,232 U.S. counties, county equivalents, and island territories.
+It covers 3,232 U.S. counties, county equivalents, and island territories. Island territories in the EDA dataset use 5-digit county-equivalent FIPS codes (e.g., 60010 for Eastern District, AS; 66010 for Guam; 69085 for Northern Islands, MP; 78010 for St. Croix, VI).
+
+> [!NOTE]
+> Direct automated HTTP requests to `eda.gov` may encounter Cloudflare bot protection (HTTP 403 Forbidden). `download_poverty.py` automatically falls back to an archive mirror of the official FY23 workbook. For manual/semi-automated refresh when upstream releases a new workbook, operators can download via a browser and provide it locally via `--input_file`.
 
 ---
 
@@ -87,7 +90,7 @@ python3 download_poverty.py --input_file=input_files/EDA_FY23_PPCs.xlsx
 ```
 
 ### 2. Preprocess Dataset (`process_poverty.py`)
-Run from `statvar_imports/commerce_eda_poverty/`. Ingests the downloaded source file locally, standardizes 5-digit county and 2-digit island territory FIPS codes, partitions the recent rates into 2020 (island territories) and 2021 (states, DC, PR), enforces percentage value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
+Run from `statvar_imports/commerce_eda_poverty/`. Ingests the downloaded source file locally, standardizes 5-digit county and county-equivalent island territory FIPS codes, partitions the recent rates into 2020 (island territories) and 2021 (states, DC, PR), validates survey year bounds [2020..current year], enforces percentage value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
 ```bash
 python3 process_poverty.py
 ```
@@ -117,6 +120,17 @@ python3 -m tools.import_validation.runner \
   --lint_report=statvar_imports/commerce_eda_poverty/dc_generated/report.json \
   --validation_output=statvar_imports/commerce_eda_poverty/dc_generated/validation_report.json
 ```
+
+Validation rules configured in `validation_config.json`:
+1. `check_percent_min_value`: Asserts poverty rate values are $\ge 0.0\%$.
+2. `check_percent_max_value`: Asserts poverty rate values are $\le 100.0\%$.
+3. `check_num_places_count`: Asserts total places count is between 3,100 and 3,250.
+4. `check_num_observations_count`: Asserts total observation count is between 9,000 and 10,000.
+5. `check_max_date_consistent`: Asserts MaxDate is consistent across StatVars.
+6. `check_date_span_sql`: Asserts `TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021`.
+7. `check_missing_refs_count`: Asserts zero unresolved entity or schema references.
+8. `check_lint_error_count`: Asserts zero lint errors.
+*(Note: `check_deleted_records_percent` is inherited from the base validation configuration with threshold 0).*
 
 ---
 
@@ -154,7 +168,7 @@ python3 -m tools.import_validation.runner \
 
 ## Testing
 
-Run unit tests verifying website link discovery, workbook download and mirror failover, local file ingestion, GEOID standardization, and value sanitation from the repository root `data/`:
+Run unit tests verifying workbook download and mirror failover, local file ingestion, GEOID standardization, and value sanitation from the repository root `data/`:
 ```bash
 python3 -m unittest discover -s statvar_imports/commerce_eda_poverty -p "*test*.py"
 ```
