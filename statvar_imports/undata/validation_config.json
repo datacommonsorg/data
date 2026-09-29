@@ -10,12 +10,17 @@
       }
     },
     {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that the latest date is identical across all StatVars.",
+      "validator": "MAX_DATE_CONSISTENT"
+    },
+    {
       "rule_id": "check_max_date_freshness",
-      "description": "Checks that the latest observation year is at least 2024 for all StatVars.",
+      "description": "Checks that the latest observation year is within a 2-year lag of the current year (>= CURRENT_YEAR - 2) for all StatVars.",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate FROM stats",
-        "condition": "CAST(MaxDate AS INTEGER) >= date_part('year', CURRENT_DATE) - 2"
+        "condition": "TRY_CAST(SUBSTR(TRIM(MaxDate), 1, 4) AS INTEGER) >= date_part('year', CURRENT_DATE) - 2"
       }
     }
   ]
