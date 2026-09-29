@@ -16,7 +16,7 @@ mapped_columns,9
 debug,0
 #input_rows,5
 #log_level,2
-existing_statvar_mcf,""""""
+existing_statvar_mcf,"gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 #resolve_places,0
 word_delimiter,""""""
 filter_data_min_value,2
