@@ -28,12 +28,10 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
 
+flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR', '1980')),
+                     'Process data starting from this year.')
 flags.DEFINE_integer(
-    'data_start_year', int(os.getenv('START_YEAR', '1980')),
-    'Process data starting from this year.')
-flags.DEFINE_integer(
-    'data_end_year',
-    int(os.getenv('END_YEAR', 0)),
+    'data_end_year', int(os.getenv('END_YEAR', 0)),
     'Process data upto this year. Defaults to the previous calendar year.')
 
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
@@ -204,23 +202,22 @@ def write_csv(csv_file_path,
         monitors = {}
         keys = set()
         for observation in reader:
-            state_code = _sanitize_dcid_component(
-                observation.get('State Code'), 2)
+            state_code = _sanitize_dcid_component(observation.get('State Code'),
+                                                  2)
             # Skip invalid or cross-border monitors outside US (80 = Mexico, CC = Canada)
             if not state_code or _is_cross_border_site(state_code):
                 continue
             county_code = _sanitize_dcid_component(
                 observation.get('County Code'), 3)
-            site_num = _sanitize_dcid_component(
-                observation.get('Site Num'), 4)
+            site_num = _sanitize_dcid_component(observation.get('Site Num'), 4)
             if not county_code or not site_num:
                 continue
             site_number = _make_site_dcid(state_code, county_code, site_num)
             lat = str(observation.get('Latitude', '') or '').strip()
             lon = str(observation.get('Longitude', '') or '').strip()
             site_county = f'dcid:geoId/{state_code}{county_code}'
-            site_name = (observation.get('Local Site Name') or '').replace(
-                '\r', ' ').replace('\n', ' ').strip()
+            site_name = (observation.get('Local Site Name') or
+                         '').replace('\r', ' ').replace('\n', ' ').strip()
 
             if site_number not in local_sites:
                 local_sites[site_number] = {
@@ -287,8 +284,7 @@ def write_csv(csv_file_path,
                 'Units':
                     unit,
                 'Method':
-                    get_pollutant_standard(
-                        observation['Pollutant Standard']),
+                    get_pollutant_standard(observation['Pollutant Standard']),
                 'Mean':
                     observation['Arithmetic Mean'],
                 'Max':

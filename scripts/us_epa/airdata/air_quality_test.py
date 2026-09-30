@@ -61,15 +61,12 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     'typeOf: dcs:AirQualitySite\n'
                     'name: "Sand Mountain"\n'
                     'location: [latLong 34.289001 -85.970065]\n'
-                    'containedInPlace: dcid:geoId/01049\n'
-                )
-                expected_birmingham = (
-                    'Node: dcid:epa/010730023\n'
-                    'typeOf: dcs:AirQualitySite\n'
-                    'name: "North Birmingham"\n'
-                    'location: [latLong 33.553056 -86.815]\n'
-                    'containedInPlace: dcid:geoId/01073\n'
-                )
+                    'containedInPlace: dcid:geoId/01049\n')
+                expected_birmingham = ('Node: dcid:epa/010730023\n'
+                                       'typeOf: dcs:AirQualitySite\n'
+                                       'name: "North Birmingham"\n'
+                                       'location: [latLong 33.553056 -86.815]\n'
+                                       'containedInPlace: dcid:geoId/01073\n')
                 with open(test_sites_mcf, 'r') as test_mcf:
                     test_mcf_str = test_mcf.read()
                     self.assertIn(expected_sand_mountain, test_mcf_str)
@@ -280,7 +277,8 @@ class TestCriteriaGasesTest(unittest.TestCase):
                 self.assertIn('Node: dcid:epa/010739999\n', mcf_content)
                 self.assertIn('typeOf: dcs:AirQualitySite\n', mcf_content)
                 self.assertIn('name: "No Coords Site"\n', mcf_content)
-                self.assertIn('containedInPlace: dcid:geoId/01073\n', mcf_content)
+                self.assertIn('containedInPlace: dcid:geoId/01073\n',
+                              mcf_content)
                 self.assertNotIn('location:', mcf_content)
 
     def test_site_name_newline_sanitization(self):
@@ -448,12 +446,9 @@ class TestCriteriaGasesTest(unittest.TestCase):
                               mcf_content)
 
     def test_get_camel_case_punctuation_stripping(self):
-        self.assertEqual(
-            get_camel_case('Micrograms/cubic meter (25 C)'),
-            'MicrogramsCubicMeter25C')
-        self.assertEqual(
-            get_camel_case('parts-per-million'),
-            'PartsPerMillion')
+        self.assertEqual(get_camel_case('Micrograms/cubic meter (25 C)'),
+                         'MicrogramsCubicMeter25C')
+        self.assertEqual(get_camel_case('parts-per-million'), 'PartsPerMillion')
         self.assertEqual(get_camel_case(' - '), '')
 
     def test_write_sites_mcf(self):
