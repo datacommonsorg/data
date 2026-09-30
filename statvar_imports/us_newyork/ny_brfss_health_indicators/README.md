@@ -31,7 +31,7 @@ The import process involves querying the NYSDOH Socrata API and running a proces
 
 *   **Data Quality Checks**:
     *   The `dc_generated/` directory contains `report.json` and `summary_report.csv`, which provide validation and summary statistics for the generated data.
-    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%) and date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)`).
+    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%) and date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)`). The `check_max_date_freshness` SQL rule explicitly filters for the 38 active recurring health indicators present in the latest 2024 survey wave, excluding the 37 discontinued historical indicators from earlier waves (2014–2021).
 
 ---
 
