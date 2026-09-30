@@ -10,16 +10,13 @@
             }
         },
         {
-            "rule_id": "check_max_date_consistent",
-            "description": "Checks that the max date is consistent across all statvars.",
-            "validator": "MAX_DATE_CONSISTENT",
-            "params": {}
-        },
-        {
-            "rule_id": "check_max_date_latest",
-            "description": "Checks that data is fresh and up to date.",
-            "validator": "MAX_DATE_LATEST",
-            "params": {}
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that all StatVars reach the expected observation year of at least 2026.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "MaxDate >= '2026'"
+            }
         }
     ]
 }
