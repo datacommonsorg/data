@@ -337,19 +337,36 @@ def download_poverty_dataset(
                     max_retries=max_retries,
                     timeout=timeout,
                 )
-                logging.info("Successfully downloaded workbook from %s", url)
+                if not content.startswith(b"PK\x03\x04"):
+                    raise ValueError(
+                        f"Downloaded content from {url} is not a valid ZIP/XLSX archive."
+                    )
+                # Extract Underlying_Data sheet to output_csv_path
+                extract_sheet_to_csv(content, output_csv_path)
+                logging.info(
+                    "Successfully downloaded workbook and extracted sheet from %s", url
+                )
                 break
             except Exception as e:
                 last_err = e
-                logging.warning("Failed to download from %s: %s", url, e)
+                logging.warning("Failed to download or process from %s: %s", url, e)
+                if os.path.exists(output_xlsx_path):
+                    try:
+                        os.remove(output_xlsx_path)
+                    except OSError:
+                        pass
+                if os.path.exists(output_csv_path):
+                    try:
+                        os.remove(output_csv_path)
+                    except OSError:
+                        pass
+                content = None
 
         if not content:
             raise RuntimeError(
                 f"Failed to acquire dataset from all URLs: {urls_to_try}. Last error: {last_err}"
             ) from last_err
 
-        # Extract Underlying_Data sheet to output_csv_path
-        extract_sheet_to_csv(content, output_csv_path)
         if raw_csv_path:
             copy_file_atomically(output_csv_path, raw_csv_path)
 

@@ -419,6 +419,41 @@ class TestDownloadPoverty(unittest.TestCase):
             self.assertFalse(os.path.exists(dst_csv))
             self.assertFalse(os.path.exists(dst_raw_csv))
 
+    def test_download_poverty_dataset_primary_html_challenge_mirror_succeed(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            dst_csv = os.path.join(tmpdir, "Poverty.csv")
+            raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
+
+            excel_bytes = _create_mock_eda_workbook()
+
+            def mock_get(url, **kwargs):
+                resp = mock.MagicMock()
+                resp.__enter__.return_value = resp
+                resp.status_code = 200
+                if parse.urlparse(url).netloc == "www.eda.gov":
+                    # Cloudflare challenge served with HTTP 200 HTML body
+                    resp.content = b"<!DOCTYPE html><html><title>Just a moment...</title></html>"
+                    return resp
+                resp.content = excel_bytes
+                return resp
+
+            with mock.patch("requests.Session.get", side_effect=mock_get):
+                res = download_poverty_dataset(
+                    source_url=EDA_PPC_XLSX_URL,
+                    mirror_url=EDA_PPC_MIRROR_URL,
+                    output_xlsx_path=dst_xlsx,
+                    output_csv_path=dst_csv,
+                    raw_csv_path=raw_csv,
+                    max_retries=1,
+                )
+
+            self.assertEqual(res, dst_csv)
+            self.assertTrue(os.path.exists(dst_xlsx))
+            self.assertTrue(os.path.exists(dst_csv))
+            df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
+            self.assertEqual(len(df), 3)
+
 
 if __name__ == "__main__":
     unittest.main()

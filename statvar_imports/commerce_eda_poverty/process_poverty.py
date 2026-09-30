@@ -130,7 +130,7 @@ def _extract_dataframe_from_excel(excel_path):
         header_idx = None
         for idx, r in enumerate(rows[:10]):
             row_str = [str(c).strip() for c in r if c is not None]
-            if "GEOID" in row_str or any("1990" in c for c in row_str):
+            if any(c.upper() == "GEOID" for c in row_str):
                 header_idx = idx
                 break
 
@@ -196,7 +196,7 @@ def preprocess_poverty(
                 line = f.readline()
                 if not line:
                     break
-                if "GEOID" in line or "1990" in line:
+                if "GEOID" in line.upper():
                     skip = idx
                     break
         df = pd.read_csv(src_path, skiprows=skip, dtype=str)
@@ -231,7 +231,7 @@ def preprocess_poverty(
                 rename_dict[col] = f"poverty_rate_{hist_match.group(1)}"
 
     # Guard against silent year corruption if Data Source column is present
-    data_source_cols = [c for c in df.columns if "Data Source" in c]
+    data_source_cols = [c for c in df.columns if "data source" in c.lower()]
     df = df.rename(columns=rename_dict)
 
     required_cols = [
@@ -255,7 +255,7 @@ def preprocess_poverty(
         for idx, row in df.iterrows():
             val = str(row.get(ds_col, "")).strip()
             if val and val != "nan":
-                m = re.search(r"(\d{4})\s*$", val)
+                m = re.search(r"\b(\d{4})\b(?:\s*\[\d+\]|[*\s])*$", val)
                 if not m:
                     error_msg = (
                         f"Unrecognized survey year in {ds_col} ('{val}') for "

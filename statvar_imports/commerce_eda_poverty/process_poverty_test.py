@@ -37,24 +37,27 @@ def _create_mock_excel_file(filepath, rows, description_row=True):
     """Creates a .xlsx workbook mimicking the official EDA Persistent Poverty Counties workbook."""
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = "Underlying_Data"
-    if description_row:
+    try:
+        ws.title = "Underlying_Data"
+        if description_row:
+            ws.append([
+                "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
+                "", "", "", "", ""
+            ])
+            ws.append(["Identifing Information", "", "Census Bureau Data", "", "", ""])
         ws.append([
-            "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
-            "", "", "", "", ""
+            "Name",
+            "GEOID",
+            "1990 Decennial Census, % in Poverty",
+            "2000 Decennial Census, % in Poverty",
+            "Most Recent Estimate, % in Poverty* ",
+            "Data Source―Most Recent Estimate",
         ])
-        ws.append(["Identifing Information", "", "Census Bureau Data", "", "", ""])
-    ws.append([
-        "Name",
-        "GEOID",
-        "1990 Decennial Census, % in Poverty",
-        "2000 Decennial Census, % in Poverty",
-        "Most Recent Estimate, % in Poverty* ",
-        "Data Source―Most Recent Estimate",
-    ])
-    for r in rows:
-        ws.append(r)
-    wb.save(filepath)
+        for r in rows:
+            ws.append(r)
+        wb.save(filepath)
+    finally:
+        wb.close()
 
 
 class TestProcessPoverty(unittest.TestCase):
@@ -320,6 +323,50 @@ class TestProcessPoverty(unittest.TestCase):
                 df.loc[(df["GEOID"] == "60010") & (df["year"] == "2020"), "poverty_rate"].iloc[0],
                 30.0,
             )
+
+
+    def test_preprocess_poverty_header_detection_with_1990_title_row(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = os.path.join(tmpdir, "title_with_1990.csv")
+            cleaned_csv = os.path.join(tmpdir, "cleaned.csv")
+            headers = (
+                'Name,GEOID,"1990 Decennial Census, % in Poverty",'
+                '"2000 Decennial Census, % in Poverty",'
+                '"Most Recent Estimate, % in Poverty*",'
+                'Data Source―Most Recent Estimate\n'
+            )
+            with open(csv_path, "w", encoding="utf-8") as f:
+                f.write("Table 1. EDA PPC Report (1990-2021) Summary\n")
+                f.write(headers)
+                f.write('Autauga County, AL,01001,15.7,10.9,13.3,"SAIPE, 2021"\n')
+
+            preprocess_poverty(src_path=csv_path, dst_path=cleaned_csv, min_county_count=1)
+            self.assertTrue(os.path.exists(cleaned_csv))
+            df = pd.read_csv(cleaned_csv, dtype={"GEOID": str, "year": str})
+            self.assertEqual(len(df), 3)
+            self.assertEqual(df["GEOID"].iloc[0], "01001")
+
+    def test_preprocess_poverty_survey_year_with_footnotes_and_citations(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = os.path.join(tmpdir, "footnotes.csv")
+            cleaned_csv = os.path.join(tmpdir, "cleaned.csv")
+            headers = (
+                'Name,GEOID,"1990 Decennial Census, % in Poverty",'
+                '"2000 Decennial Census, % in Poverty",'
+                '"Most Recent Estimate, % in Poverty*",'
+                'Data Source―Most Recent Estimate\n'
+            )
+            with open(csv_path, "w", encoding="utf-8") as f:
+                f.write(headers)
+                f.write('Autauga County, AL,01001,15.7,10.9,13.3,"SAIPE, 2021*"\n')
+                f.write('Barbour County, AL,01005,25.2,26.8,29.0,"SAIPE, 2021 [1]"\n')
+
+            preprocess_poverty(src_path=csv_path, dst_path=cleaned_csv, min_county_count=1)
+            self.assertTrue(os.path.exists(cleaned_csv))
+            df = pd.read_csv(cleaned_csv, dtype={"GEOID": str, "year": str})
+            self.assertEqual(len(df), 6)
+            recent_years = set(df.loc[df["year"] != "1990"].loc[df["year"] != "2000", "year"])
+            self.assertEqual(recent_years, {"2021"})
 
 
 if __name__ == "__main__":
