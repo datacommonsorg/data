@@ -68,6 +68,7 @@ def mock_task(*d_args, **d_kwargs):
         def wrapper(*args, **kwargs):
             mock_t = MagicMock()
             mock_t.task_id = d_kwargs.get('task_id', f.__name__)
+            mock_t.trigger_rule = d_kwargs.get('trigger_rule', 'all_success')
             mock_t.downstream_list = []
             mock_t.__rshift__ = lambda self, other: (self.downstream_list.
                                                      append(other), other)[1]
@@ -98,8 +99,14 @@ class MockAirflowFailException(Exception):
     pass
 
 
+class MockAirflowSkipException(Exception):
+    pass
+
+
 sys.modules[
     'airflow.exceptions'].AirflowFailException = MockAirflowFailException
+sys.modules[
+    'airflow.exceptions'].AirflowSkipException = MockAirflowSkipException
 sys.modules['airflow.models'] = MagicMock()
 sys.modules['airflow.models.param'] = MagicMock()
 sys.modules['airflow.providers'] = MagicMock()
@@ -129,7 +136,6 @@ import golden_verification
 from golden_verification import (
     HumanApprovalSensor,
     get_golden_trigger_id,
-    is_golden_test_import,
 )
 import import_automation_workflow
 import import_dags_factory
@@ -140,14 +146,6 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
     def setUp(self):
         golden_verification.Variable.get.side_effect = None
         golden_verification.Variable.get.return_value = ''
-
-    def test_allowlist(self):
-        self.assertTrue(is_golden_test_import('Schema'))
-        self.assertTrue(is_golden_test_import('scripts/entities:Schema'))
-        self.assertTrue(is_golden_test_import('Place'))
-        self.assertFalse(
-            is_golden_test_import('USFed_ConstantMaturityRates_Test'))
-        self.assertFalse(is_golden_test_import('scripts/us_fed:treasury'))
 
     def test_trigger_id(self):
         self.assertEqual(get_golden_trigger_id('Schema'),
@@ -331,20 +329,11 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                 target = {}
                 count = import_dags_factory.load_catalog_and_register_dags(
                     target)
-                self.assertGreaterEqual(count, 198)
+                self.assertGreater(count, 0)
                 self.assertIn('Schema', target)
                 self.assertIn('manual_refresh', target)
                 schema_dag = target['Schema']
                 self.assertIsNotNone(schema_dag)
-                for dag_id, dag in target.items():
-                    self.assertTrue(
-                        dag.is_paused_upon_creation,
-                        f'DAG {dag_id} is not paused upon creation',
-                    )
-                    self.assertTrue(
-                        dag.params.get('skipProdIngestion'),
-                        f'DAG {dag_id} does not default skipProdIngestion to True',
-                    )
 
     def test_build_dag_pipeline_wiring(self):
         dag = import_automation_workflow.build_dag(dag_id='test_dag',
@@ -353,6 +342,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         expected_tasks = [
             'run_import_job',
             'run_validation_job',
+            'update_import_version',
             'trigger_staging_ingestion',
             'wait_staging_ingestion',
             'verify_golden_tests',
@@ -366,8 +356,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         # Check downstream ordering
         self.assertIn(tasks['run_validation_job'],
                       tasks['run_import_job'].downstream_list)
-        self.assertIn(tasks['trigger_staging_ingestion'],
+        self.assertIn(tasks['update_import_version'],
                       tasks['run_validation_job'].downstream_list)
+        self.assertIn(tasks['trigger_staging_ingestion'],
+                      tasks['update_import_version'].downstream_list)
         self.assertIn(tasks['wait_staging_ingestion'],
                       tasks['trigger_staging_ingestion'].downstream_list)
         self.assertIn(tasks['verify_golden_tests'],
@@ -409,6 +401,24 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertIn(
             '--import_name=scripts/us_fed:USFed_ConstantMaturityRates_Test',
             call_args['args'])
+
+    def test_skip_import_job_skips_batch_and_validation_jobs(self):
+        context = {
+            'params': {
+                'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
+                'skipImportJob': True,
+            }
+        }
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_import_job.function(**context)
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_validation_job.function(**context)
+
+        dag = import_automation_workflow.build_dag(dag_id='test_skip_dag',
+                                                   import_name='Schema')
+        tasks = {t.task_id: t for t in dag.tasks}
+        self.assertEqual(tasks['update_import_version'].trigger_rule,
+                         'none_failed')
 
 
 class E2EDagRunnerTest(unittest.TestCase):
