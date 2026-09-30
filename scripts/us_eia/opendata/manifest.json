@@ -11,7 +11,8 @@
                 "process.py --dataset=COAL"
             ],
             "source_files": [
-                "gcs_output/COAL/COAL.txt"
+                "gcs_output/COAL/COAL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -28,12 +29,13 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
-            "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and \u201csectors\u201d (like residential, commercial, etc.).",
+            "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and “sectors” (like residential, commercial, etc.).",
             "scripts": [
                 "process.py --dataset=ELEC"
             ],
             "source_files": [
-                "gcs_output/ELEC/ELEC.txt"
+                "gcs_output/ELEC/ELEC.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -60,7 +62,8 @@
                 "process.py --dataset=NG"
             ],
             "source_files": [
-                "gcs_output/NG/NG.txt"
+                "gcs_output/NG/NG.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -82,7 +85,8 @@
                 "process.py --dataset=NUC_STATUS"
             ],
             "source_files": [
-                "gcs_output/NUC_STATUS/NUC_STATUS.txt"
+                "gcs_output/NUC_STATUS/NUC_STATUS.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -104,7 +108,8 @@
                 "process.py --dataset=PET"
             ],
             "source_files": [
-                "gcs_output/PET/PET.txt"
+                "gcs_output/PET/PET.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -126,7 +131,8 @@
                 "process.py --dataset=INTL"
             ],
             "source_files": [
-                "gcs_output/INTL/INTL.txt"
+                "gcs_output/INTL/INTL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -148,7 +154,8 @@
                 "process.py --dataset=SEDS"
             ],
             "source_files": [
-                "gcs_output/SEDS/SEDS.txt"
+                "gcs_output/SEDS/SEDS.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -170,7 +177,8 @@
                 "process.py --dataset=TOTAL"
             ],
             "source_files": [
-                "gcs_output/TOTAL/TOTAL.txt"
+                "gcs_output/TOTAL/TOTAL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
