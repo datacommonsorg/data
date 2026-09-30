@@ -21,9 +21,11 @@ import download_and_segregate_by_gas
 class DownloadAndSegregateByGasTest(unittest.TestCase):
 
     @patch('download_and_segregate_by_gas.get_retry_session')
-    def test_country_list_api_failure_raises_exception(self, mock_get_retry_session):
+    def test_country_list_api_failure_raises_exception(self,
+                                                       mock_get_retry_session):
         mock_session = MagicMock()
-        mock_session.get.side_effect = requests.exceptions.RequestException("API failure")
+        mock_session.get.side_effect = requests.exceptions.RequestException(
+            "API failure")
         mock_get_retry_session.return_value = mock_session
 
         with self.assertRaises(requests.exceptions.RequestException):
@@ -31,9 +33,9 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
 
     @patch('download_and_segregate_by_gas.download_and_process_zip')
     @patch('download_and_segregate_by_gas.get_retry_session')
-    def test_empty_gas_dataframes_raises_runtime_error(
-        self, mock_get_retry_session, mock_download_zip
-    ):
+    def test_empty_gas_dataframes_raises_runtime_error(self,
+                                                       mock_get_retry_session,
+                                                       mock_download_zip):
         mock_session = MagicMock()
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -44,7 +46,8 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
         # Simulate all downloads returning None (e.g., HTTP 404 or no relevant CSVs)
         mock_download_zip.return_value = None
 
-        with self.assertRaisesRegex(RuntimeError, "No data was downloaded for gas: co2"):
+        with self.assertRaisesRegex(RuntimeError,
+                                    "No data was downloaded for gas: co2"):
             download_and_segregate_by_gas.download_and_segregate_by_gas()
 
 
