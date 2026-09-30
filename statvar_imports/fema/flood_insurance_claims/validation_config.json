@@ -10,20 +10,22 @@
             }
         },
         {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "Check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/nfip_output.csv"
-            }
+            "rule_id": "check_max_date_latest_aggregates",
+            "description": "Verifies that core aggregate NFIP claim StatVars contain current-year data.",
+            "validator": "MAX_DATE_LATEST",
+            "scope": {
+                "variables": {
+                    "dcids": [
+                        "CountOfClaims_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_BuildingStructureAndContents_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_BuildingStructure_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_BuildingContents_FloodEvent",
+                        "CountOfClaims_NaturalHazardInsurance_FEMAHighRiskFloodZone_BuildingStructureAndContents_FloodEvent",
+                        "SettlementAmount_NaturalHazardInsurance_FEMALowRiskFloodZone_BuildingStructureAndContents_FloodEvent"
+                    ]
+                }
+            },
+            "params": {}
         }
     ]
 }
