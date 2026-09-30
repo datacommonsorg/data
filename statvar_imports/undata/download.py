@@ -87,15 +87,12 @@ def download_file():
     
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download file after retries: {e}")
-        return None
     
     except zipfile.BadZipFile as e:
         logging.fatal(f"Failed to obtain a valid ZIP file after retries: {e}")
-        return None
     
     except Exception as e:
         logging.fatal(f"An unexpected error occurred during file download: {e}")
-        return None
 
 # Function to extract and process the CSV file from ZIP
 def extract_and_process(zip_path):
@@ -108,7 +105,6 @@ def extract_and_process(zip_path):
             
             if not csv_files:
                 logging.fatal("No CSV files found in the ZIP archive!")
-                return
             
             for csv_file in csv_files:
                 logging.info(f"Processing extracted file: {csv_file}")
@@ -131,8 +127,7 @@ def main(argv):
     
     # Run the download and extraction process
     zip_path = download_file()
-    if zip_path:
-        extract_and_process(zip_path)
+    extract_and_process(zip_path)
 
 if __name__ == '__main__':
     app.run(main)
