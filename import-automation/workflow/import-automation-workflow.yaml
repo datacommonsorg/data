@@ -18,6 +18,7 @@ main:
           - dryRunIngestion: ${string(default(map.get(args, "dryRunIngestion"), false)) == "true"}
           - forceIngestion: ${string(default(map.get(args, "forceIngestion"), false)) == "true"}
           - prodDenylist:
+              "Brazil_RuralDevelopmentProgram": true
               "CDC500": true
               "CDC_OzoneCounty": true
               "CDC_PM25County": true
@@ -28,6 +29,8 @@ main:
               "EPA_GHGRP": true
               "FARS_CrashData": true
               "FBIGovCrime": true
+              "FireWFIGS": true
+              "INPE_Fire_Event_Count": true
               "IndiaNSS_HealthAilments": true
               "India_RBIStateDomesticProduct": true
               "NASA_VIIRSActiveFiresEvents": true
