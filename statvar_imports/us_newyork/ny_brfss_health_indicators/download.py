@@ -100,7 +100,8 @@ def download_health_indicators(endpoint: str,
             if resp.status_code != 200:
                 msg = (f'Health Data NY API returned HTTP {resp.status_code}: '
                        f'{resp.text[:200]}')
-                logging.fatal('%s', msg)
+                logging.error('%s', msg)
+                raise RuntimeError(msg)
 
             chunk = resp.json()
             if not chunk:
@@ -111,7 +112,8 @@ def download_health_indicators(endpoint: str,
 
     if not records:
         msg = 'Health Data NY API returned 0 records.'
-        logging.fatal('%s', msg)
+        logging.error('%s', msg)
+        raise RuntimeError(msg)
 
     logging.info('Received %d total raw records from Health Data NY API.',
                  len(records))
@@ -127,11 +129,16 @@ def download_health_indicators(endpoint: str,
     return len(raw_df), saved_files
 
 
-def main(_):
+def main(argv):
+    if len(argv) > 1:
+        raise app.UsageError('Too many command-line arguments.')
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_dir = (FLAGS.output_dir if os.path.isabs(FLAGS.output_dir) else
                   os.path.join(script_dir, FLAGS.output_dir))
-    download_health_indicators(FLAGS.endpoint, output_dir)
+    try:
+        download_health_indicators(FLAGS.endpoint, output_dir)
+    except Exception as e:
+        logging.fatal('%s', e, exc_info=True)
 
 
 if __name__ == '__main__':
