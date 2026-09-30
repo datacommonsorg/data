@@ -255,15 +255,15 @@ def preprocess_poverty(
         for idx, row in df.iterrows():
             val = str(row.get(ds_col, "")).strip()
             if val and val != "nan":
-                m = re.search(r"\b(\d{4})\b(?:\s*\[\d+\]|[*\s])*$", val)
-                if not m:
+                matched_years = re.findall(r"\b(19\d\d|20\d\d)\b", val)
+                if not matched_years:
                     error_msg = (
                         f"Unrecognized survey year in {ds_col} ('{val}') for "
                         f"GEOID {row['GEOID']}"
                     )
                     logging.error(error_msg)
                     raise ValueError(error_msg)
-                yr = int(m.group(1))
+                yr = int(matched_years[-1])
                 if not (min_survey_year <= yr <= max_survey_year):
                     error_msg = (
                         f"Unexpected survey year {yr} in {ds_col} for GEOID"

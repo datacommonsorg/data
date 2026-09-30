@@ -7,7 +7,7 @@ chardet
 chromedriver_py
 croniter
 dataclasses
-datacommons
+datacommons==1.4.3
 datacommons_client
 db-dtypes
 duckdb
