@@ -120,11 +120,7 @@
             "Graduate or professional degree": "GraduateOrProfessionalDegree"
         }
     },
-    "inferredSpec": {
-        "earnings": {
-            "workStatus": "USC_FullTimeYearRoundWorker"
-        }
-    },
+    "inferredSpec": {},
     "universePVs": [
         {
             "populationType": "schema:Person",
