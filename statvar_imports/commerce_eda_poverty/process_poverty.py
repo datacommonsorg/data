@@ -102,7 +102,25 @@ def _extract_dataframe_from_excel(excel_path):
     """Extracts Underlying_Data sheet from an Excel workbook into a pandas DataFrame."""
     wb = openpyxl.load_workbook(excel_path, data_only=True)
     try:
-        target_sheet = "Underlying_Data" if "Underlying_Data" in wb.sheetnames else wb.sheetnames[0]
+        sheet_names = wb.sheetnames
+        target_sheet = None
+        if "Underlying_Data" in sheet_names:
+            target_sheet = "Underlying_Data"
+        else:
+            for name in sheet_names:
+                if any(
+                    k in name.lower()
+                    for k in ["underlying", "poverty", "data", "ppc"]
+                ):
+                    target_sheet = name
+                    break
+            if not target_sheet:
+                target_sheet = sheet_names[0]
+            logging.warning(
+                "Worksheet 'Underlying_Data' not found in %s; falling back to '%s'.",
+                sheet_names,
+                target_sheet,
+            )
         ws = wb[target_sheet]
         rows = list(ws.iter_rows(values_only=True))
         if not rows:
@@ -195,14 +213,22 @@ def preprocess_poverty(
         logging.error("Missing required column 'GEOID' in source dataset")
         raise ValueError("Missing required column 'GEOID' in source dataset")
 
-    # Rename columns to standard names
+    # Rename columns to standard names (including any future <YEAR> Decennial Census columns)
     rename_dict = {}
     for col in df.columns:
         clean_col = col.rstrip("*").strip()
+        matched = False
         for k, v in COLUMN_RENAME_MAP.items():
             if col == k or clean_col == k.rstrip("*").strip():
                 rename_dict[col] = v
+                matched = True
                 break
+        if not matched:
+            hist_match = re.match(
+                r"^(\d{4})\b.*%\s*in\s*Poverty", clean_col, flags=re.IGNORECASE
+            )
+            if hist_match:
+                rename_dict[col] = f"poverty_rate_{hist_match.group(1)}"
 
     # Guard against silent year corruption if Data Source column is present
     data_source_cols = [c for c in df.columns if "Data Source" in c]
@@ -220,27 +246,51 @@ def preprocess_poverty(
     df["GEOID"] = df["GEOID"].apply(clean_geoid)
     df = df.dropna(subset=["GEOID"])
 
+    is_territory = df["GEOID"].str[:2].isin(ISLAND_TERRITORY_FIPS)
+    default_years = pd.Series("2021", index=df.index).where(~is_territory, "2020")
+
     if data_source_cols:
         ds_col = data_source_cols[0]
+        parsed_years = []
         for idx, row in df.iterrows():
             val = str(row.get(ds_col, "")).strip()
             if val and val != "nan":
                 m = re.search(r"(\d{4})\s*$", val)
-                if m:
-                    yr = int(m.group(1))
-                    if not (min_survey_year <= yr <= max_survey_year):
-                        error_msg = (
-                            f"Unexpected survey year {yr} in {ds_col} for GEOID"
-                            f" {row['GEOID']} (expected between {min_survey_year} and "
-                            f"{max_survey_year})"
-                        )
-                        logging.error(error_msg)
-                        raise ValueError(error_msg)
+                if not m:
+                    error_msg = (
+                        f"Unrecognized survey year in {ds_col} ('{val}') for "
+                        f"GEOID {row['GEOID']}"
+                    )
+                    logging.error(error_msg)
+                    raise ValueError(error_msg)
+                yr = int(m.group(1))
+                if not (min_survey_year <= yr <= max_survey_year):
+                    error_msg = (
+                        f"Unexpected survey year {yr} in {ds_col} for GEOID"
+                        f" {row['GEOID']} (expected between {min_survey_year} and "
+                        f"{max_survey_year})"
+                    )
+                    logging.error(error_msg)
+                    raise ValueError(error_msg)
+                parsed_years.append(str(yr))
+            else:
+                parsed_years.append(default_years.loc[idx])
+        recent_years = pd.Series(parsed_years, index=df.index)
+    else:
+        recent_years = default_years
+
+    # Identify all historical year columns dynamically
+    historical_year_cols = sorted(
+        [
+            (re.match(r"^poverty_rate_(\d{4})$", c).group(1), c)
+            for c in df.columns
+            if re.match(r"^poverty_rate_(\d{4})$", c)
+        ],
+        key=lambda x: int(x[0]),
+    )
 
     # Coerce and validate poverty values within [0.0, 100.0]
-    raw_poverty_cols = [
-        "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_recent"
-    ]
+    raw_poverty_cols = [c for _, c in historical_year_cols] + ["poverty_rate_recent"]
     for col in raw_poverty_cols:
         df[col] = pd.to_numeric(df[col].astype(str).str.strip(), errors="coerce")
         invalid_mask = df[col].notna() & ((df[col] < 0.0) | (df[col] > 100.0))
@@ -252,24 +302,10 @@ def preprocess_poverty(
             )
             df.loc[invalid_mask, col] = None
 
-    # Split recent poverty rate:
-    # 2020 for Island Territories (AS, GU, MP, VI), 2021 for 50 States + DC + PR
-    is_territory = df["GEOID"].str[:2].isin(ISLAND_TERRITORY_FIPS)
-    df["poverty_rate_2020"] = df["poverty_rate_recent"].where(is_territory, None)
-    df["poverty_rate_2021"] = df["poverty_rate_recent"].where(~is_territory, None)
+    # Keep counties that have at least one valid poverty rate observation
+    df = df.dropna(subset=raw_poverty_cols, how="all")
 
-    # Keep rows that have at least one valid poverty rate observation
-    poverty_cols = [
-        "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_2020",
-        "poverty_rate_2021"
-    ]
-    df = df.dropna(subset=poverty_cols, how="all")
-
-    # Keep target columns only
-    target_cols = ["GEOID"] + poverty_cols
-    df = df[target_cols]
-
-    # Verify sanity threshold
+    # Verify sanity threshold on valid county count
     if len(df) < min_county_count:
         logging.error(
             "Sanity check failed: Expected at least %d counties, but found %d.",
@@ -280,6 +316,29 @@ def preprocess_poverty(
             f"Sanity check failed: Expected at least {min_county_count} "
             f"counties, but found {len(df)}."
         )
+
+    # Build generic long-format (GEOID, year, poverty_rate) records
+    records = []
+    for idx, row in df.iterrows():
+        geoid = row["GEOID"]
+        row_obs = {}
+        for yr_str, col_name in historical_year_cols:
+            val = row[col_name]
+            if pd.notna(val):
+                row_obs[yr_str] = float(val)
+        recent_val = row["poverty_rate_recent"]
+        if pd.notna(recent_val):
+            row_obs[str(recent_years.loc[idx])] = float(recent_val)
+        for yr_str in sorted(row_obs.keys(), key=int):
+            records.append(
+                {
+                    "GEOID": geoid,
+                    "year": yr_str,
+                    "poverty_rate": row_obs[yr_str],
+                }
+            )
+
+    df = pd.DataFrame(records, columns=["GEOID", "year", "poverty_rate"])
 
     # Atomic write to destination file
     dst_dir = os.path.dirname(os.path.abspath(dst_path))

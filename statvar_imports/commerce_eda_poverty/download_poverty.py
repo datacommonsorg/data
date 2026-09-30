@@ -196,11 +196,20 @@ def extract_sheet_to_csv(
             selected_sheet = target_sheet_name
         else:
             for name in sheet_names:
-                if any(k in name.lower() for k in ["underlying", "poverty", "data", "fy23"]):
+                if any(
+                    k in name.lower()
+                    for k in ["underlying", "poverty", "data", "ppc"]
+                ):
                     selected_sheet = name
                     break
-        if not selected_sheet:
-            selected_sheet = sheet_names[0]
+            if not selected_sheet:
+                selected_sheet = sheet_names[0]
+            logging.warning(
+                "Worksheet '%s' not found in %s; falling back to '%s'.",
+                target_sheet_name,
+                sheet_names,
+                selected_sheet,
+            )
 
         logging.info("Extracting sheet '%s' from Excel workbook...", selected_sheet)
         ws = wb[selected_sheet]
@@ -209,18 +218,33 @@ def extract_sheet_to_csv(
         os.makedirs(dst_dir, exist_ok=True)
 
         row_count = 0
-        with tempfile.NamedTemporaryFile(
-            "w", dir=dst_dir, delete=False, suffix=".tmp", encoding="utf-8", newline=""
-        ) as tmp:
-            writer = csv.writer(tmp)
-            for row in ws.iter_rows(values_only=True):
-                if not any(row):
-                    continue
-                writer.writerow([("" if c is None else str(c)) for c in row])
-                row_count += 1
-            tmp_path = tmp.name
+        tmp_path = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                "w",
+                dir=dst_dir,
+                delete=False,
+                suffix=".tmp",
+                encoding="utf-8",
+                newline="",
+            ) as tmp:
+                tmp_path = tmp.name
+                writer = csv.writer(tmp)
+                for row in ws.iter_rows(values_only=True):
+                    if not any(row):
+                        continue
+                    writer.writerow([("" if c is None else str(c)) for c in row])
+                    row_count += 1
 
-        os.replace(tmp_path, csv_output_path)
+            os.replace(tmp_path, csv_output_path)
+            tmp_path = None
+        finally:
+            if tmp_path and os.path.exists(tmp_path):
+                try:
+                    os.unlink(tmp_path)
+                except OSError:
+                    pass
+
         logging.info(
             "Extracted %d rows from sheet '%s' to %s",
             row_count,
@@ -236,13 +260,22 @@ def copy_file_atomically(src_path, dst_path):
     """Copies src_path to dst_path atomically."""
     dst_dir = os.path.dirname(os.path.abspath(dst_path))
     os.makedirs(dst_dir, exist_ok=True)
-    with tempfile.NamedTemporaryFile(
-        "wb", dir=dst_dir, delete=False, suffix=".tmp"
-    ) as tmp:
-        with open(src_path, "rb") as fsrc:
-            shutil.copyfileobj(fsrc, tmp)
-        tmp_path = tmp.name
-    os.replace(tmp_path, dst_path)
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            "wb", dir=dst_dir, delete=False, suffix=".tmp"
+        ) as tmp:
+            tmp_path = tmp.name
+            with open(src_path, "rb") as fsrc:
+                shutil.copyfileobj(fsrc, tmp)
+        os.replace(tmp_path, dst_path)
+        tmp_path = None
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
     logging.info("Copied %s to %s", src_path, dst_path)
 
 
@@ -272,7 +305,7 @@ def download_poverty_dataset(
         return output_csv_path
 
     # Clean up existing target files before a fresh download to avoid reusing stale files
-    for path_to_clean in [output_xlsx_path, output_csv_path]:
+    for path_to_clean in [output_xlsx_path, output_csv_path, raw_csv_path]:
         if path_to_clean and os.path.exists(path_to_clean):
             try:
                 os.remove(path_to_clean)

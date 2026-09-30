@@ -392,10 +392,10 @@ class TestDownloadPoverty(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
             dst_csv = os.path.join(tmpdir, "Poverty.csv")
-            with open(dst_xlsx, "w", encoding="utf-8") as f:
-                f.write("stale_xlsx")
-            with open(dst_csv, "w", encoding="utf-8") as f:
-                f.write("stale_csv")
+            dst_raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
+            for p in [dst_xlsx, dst_csv, dst_raw_csv]:
+                with open(p, "w", encoding="utf-8") as f:
+                    f.write("stale_data")
 
             def mock_get(url, **kwargs):
                 resp = mock.MagicMock()
@@ -410,12 +410,14 @@ class TestDownloadPoverty(unittest.TestCase):
                         mirror_url="https://example.gov/m1.xlsx",
                         output_xlsx_path=dst_xlsx,
                         output_csv_path=dst_csv,
+                        raw_csv_path=dst_raw_csv,
                         max_retries=1,
                     )
 
             self.assertIn("Failed to acquire dataset from all URLs", str(ctx.exception))
             self.assertFalse(os.path.exists(dst_xlsx))
             self.assertFalse(os.path.exists(dst_csv))
+            self.assertFalse(os.path.exists(dst_raw_csv))
 
 
 if __name__ == "__main__":

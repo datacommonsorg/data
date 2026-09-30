@@ -24,13 +24,13 @@ This automated dataset import fetches and processes historical and recent county
 
 The download script (`download_poverty.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 county rows) into `input_files/Poverty.csv` and `output/Poverty_original.csv`.
 
-The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes 5-digit FIPS codes and poverty percentages into `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
+The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes 5-digit FIPS codes and poverty percentages into normalized `(GEOID, year, poverty_rate)` records in `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
 
 The dataset benchmarks poverty rates across statutory periods:
-- **1990**: 1990 Decennial Census (`poverty_rate_1990`)
-- **2000**: 2000 Decennial Census (`poverty_rate_2000`)
-- **2020**: 2020 Island Areas Decennial Census (`poverty_rate_2020` for territory county equivalents `60`, `66`, `69`, `78`)
-- **2021**: 2017–2021 ACS 5-Year Estimates (`poverty_rate_2021` for all 50 states, DC, and Puerto Rico)
+- **1990**: 1990 Decennial Census (`year=1990`)
+- **2000**: 2000 Decennial Census (`year=2000`)
+- **2020**: 2020 Island Areas Decennial Census (`year=2020` for territory county equivalents `60`, `66`, `69`, `78`)
+- **2021**: 2021 SAIPE / 2017–2021 ACS 5-Year Estimates (`year=2021` for all 50 states, DC, and Puerto Rico)
 
 It covers 3,232 U.S. counties, county equivalents, and island territories. Island territories in the EDA dataset use 5-digit county-equivalent FIPS codes (e.g., 60010 for Eastern District, AS; 66010 for Guam; 69085 for Northern Islands, MP; 78010 for St. Croix, VI).
 

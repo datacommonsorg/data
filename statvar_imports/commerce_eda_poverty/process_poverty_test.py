@@ -147,20 +147,39 @@ class TestProcessPoverty(unittest.TestCase):
 
     def test_preprocess_poverty_unexpected_survey_year(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            future_csv = os.path.join(tmpdir, "future.csv")
-            with open(future_csv, "w") as f:
+            for bad_source in ["SAIPE, 1999", "SAIPE, 2099"]:
+                future_csv = os.path.join(tmpdir, "future.csv")
+                with open(future_csv, "w") as f:
+                    f.write(
+                        "Header 1\nHeader 2\n"
+                        "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
+                        "\"2000 Decennial Census, % in Poverty\","
+                        "\"Most Recent Estimate, % in Poverty*\","
+                        "\"Data Source―Most Recent Estimate\"\n"
+                        f'"Autauga County, AL",01001,15.7,10.9,13.3,"{bad_source}"\n'
+                    )
+                dst_path = os.path.join(tmpdir, "output.csv")
+                with self.assertRaises(ValueError) as ctx:
+                    preprocess_poverty(
+                        src_path=future_csv, dst_path=dst_path, min_county_count=1
+                    )
+                self.assertIn("Unexpected survey year", str(ctx.exception))
+
+            malformed_csv = os.path.join(tmpdir, "malformed.csv")
+            with open(malformed_csv, "w") as f:
                 f.write(
                     "Header 1\nHeader 2\n"
                     "Name,GEOID,\"1990 Decennial Census, % in Poverty\","
                     "\"2000 Decennial Census, % in Poverty\","
                     "\"Most Recent Estimate, % in Poverty*\","
                     "\"Data Source―Most Recent Estimate\"\n"
-                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2099"\n'
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE FY23"\n'
                 )
-            dst_path = os.path.join(tmpdir, "output.csv")
             with self.assertRaises(ValueError) as ctx:
-                preprocess_poverty(src_path=future_csv, dst_path=dst_path, min_county_count=1)
-            self.assertIn("Unexpected survey year", str(ctx.exception))
+                preprocess_poverty(
+                    src_path=malformed_csv, dst_path=dst_path, min_county_count=1
+                )
+            self.assertIn("Unrecognized survey year", str(ctx.exception))
 
     def test_preprocess_poverty_valid_survey_year_range(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -177,6 +196,11 @@ class TestProcessPoverty(unittest.TestCase):
             dst_path = os.path.join(tmpdir, "output.csv")
             preprocess_poverty(src_path=sample_csv, dst_path=dst_path, min_county_count=1)
             self.assertTrue(os.path.exists(dst_path))
+            df = pd.read_csv(dst_path, dtype={"GEOID": str, "year": str})
+            self.assertEqual(list(df.columns), ["GEOID", "year", "poverty_rate"])
+            row_2023 = df[(df["GEOID"] == "01001") & (df["year"] == "2023")]
+            self.assertEqual(len(row_2023), 1)
+            self.assertEqual(row_2023["poverty_rate"].iloc[0], 13.3)
 
     def test_preprocess_poverty_min_county_count_failure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -194,35 +218,25 @@ class TestProcessPoverty(unittest.TestCase):
             preprocess_poverty(src_path=fixture_path, dst_path=actual_csv, min_county_count=100)
 
             self.assertTrue(os.path.exists(actual_csv))
-            df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str})
-            df_expected = pd.read_csv(expected_path, dtype={"GEOID": str})
+            df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str, "year": str})
+            df_expected = pd.read_csv(expected_path, dtype={"GEOID": str, "year": str})
             pd.testing.assert_frame_equal(df_actual, df_expected)
 
-            # 200 lines total: 3 header lines + 191 county/territory rows
-            # + 6 footnote lines = 191 cleaned rows
-            self.assertEqual(len(df_actual), 191)
-            self.assertEqual(
-                list(df_actual.columns),
-                [
-                    "GEOID",
-                    "poverty_rate_1990",
-                    "poverty_rate_2000",
-                    "poverty_rate_2020",
-                    "poverty_rate_2021",
-                ],
-            )
+            # 191 valid counties/territories across 1990, 2000, and 2020/2021
+            self.assertEqual(df_actual["GEOID"].nunique(), 191)
+            self.assertEqual(list(df_actual.columns), ["GEOID", "year", "poverty_rate"])
 
-            # Verify 11 island territories (AS, GU, MP, VI) map to poverty_rate_2020
+            # Verify 11 island territories (AS, GU, MP, VI) map recent estimate to year 2020
             territory_rows = df_actual[df_actual["GEOID"].str[:2].isin({"60", "66", "69", "78"})]
-            self.assertEqual(len(territory_rows), 11)
-            self.assertTrue(territory_rows["poverty_rate_2020"].notna().all())
-            self.assertTrue(territory_rows["poverty_rate_2021"].isna().all())
+            self.assertEqual(territory_rows["GEOID"].nunique(), 11)
+            self.assertIn("2020", set(territory_rows["year"]))
+            self.assertNotIn("2021", set(territory_rows["year"]))
 
-            # Verify states and PR (180 rows) map to poverty_rate_2021
+            # Verify states and PR (180 counties) map recent estimate to year 2021
             state_rows = df_actual[~df_actual["GEOID"].str[:2].isin({"60", "66", "69", "78"})]
-            self.assertEqual(len(state_rows), 180)
-            self.assertTrue(state_rows["poverty_rate_2021"].notna().all())
-            self.assertTrue(state_rows["poverty_rate_2020"].isna().all())
+            self.assertEqual(state_rows["GEOID"].nunique(), 180)
+            self.assertIn("2021", set(state_rows["year"]))
+            self.assertNotIn("2020", set(state_rows["year"]))
 
     def test_preprocess_poverty_edge_cases(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -252,14 +266,33 @@ class TestProcessPoverty(unittest.TestCase):
                 f.write(raw_content)
 
             preprocess_poverty(src_path=raw_csv, dst_path=actual_csv, min_county_count=1)
-            df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str})
+            df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str, "year": str})
 
             expected_data = {
-                "GEOID": ["01001", "02090", "60010", "01005", "01007", "01009"],
-                "poverty_rate_1990": [15.7, 7.6, 25.0, 25.2, 21.2, None],
-                "poverty_rate_2000": [10.9, 7.8, 28.0, 26.8, 20.6, None],
-                "poverty_rate_2020": [None, None, 30.0, None, None, None],
-                "poverty_rate_2021": [13.3, 9.6, None, 29.0, 24.9, 14.5],
+                "GEOID": [
+                    "01001", "01001", "01001",
+                    "02090", "02090", "02090",
+                    "60010", "60010", "60010",
+                    "01005", "01005", "01005",
+                    "01007", "01007", "01007",
+                    "01009",
+                ],
+                "year": [
+                    "1990", "2000", "2021",
+                    "1990", "2000", "2021",
+                    "1990", "2000", "2020",
+                    "1990", "2000", "2021",
+                    "1990", "2000", "2021",
+                    "2021",
+                ],
+                "poverty_rate": [
+                    15.7, 10.9, 13.3,
+                    7.6, 7.8, 9.6,
+                    25.0, 28.0, 30.0,
+                    25.2, 26.8, 29.0,
+                    21.2, 20.6, 24.9,
+                    14.5,
+                ],
             }
             df_expected = pd.DataFrame(expected_data)
             pd.testing.assert_frame_equal(df_actual, df_expected)
@@ -277,10 +310,16 @@ class TestProcessPoverty(unittest.TestCase):
 
             preprocess_poverty(src_path=excel_path, dst_path=cleaned_csv, min_county_count=1)
             self.assertTrue(os.path.exists(cleaned_csv))
-            df = pd.read_csv(cleaned_csv, dtype={"GEOID": str})
-            self.assertEqual(len(df), 2)
-            self.assertEqual(df.loc[df["GEOID"] == "01001", "poverty_rate_2021"].iloc[0], 13.3)
-            self.assertEqual(df.loc[df["GEOID"] == "60010", "poverty_rate_2020"].iloc[0], 30.0)
+            df = pd.read_csv(cleaned_csv, dtype={"GEOID": str, "year": str})
+            self.assertEqual(len(df), 6)
+            self.assertEqual(
+                df.loc[(df["GEOID"] == "01001") & (df["year"] == "2021"), "poverty_rate"].iloc[0],
+                13.3,
+            )
+            self.assertEqual(
+                df.loc[(df["GEOID"] == "60010") & (df["year"] == "2020"), "poverty_rate"].iloc[0],
+                30.0,
+            )
 
 
 if __name__ == "__main__":
