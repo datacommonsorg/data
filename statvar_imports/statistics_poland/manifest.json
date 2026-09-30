@@ -20,7 +20,7 @@
                 {
                     "template_mcf": "StatisticsPoland_output.tmcf",
                     "cleaned_csv": "StatisticsPoland_output.csv",
-                    "stat_var_mcf": "StatisticsPoland_output_stat_vars.mcf"
+                    "node_mcf": "StatisticsPoland_output*.mcf"
                 }
             ],
             "cron_schedule": "0 0 1 1,4,7,10 *",
