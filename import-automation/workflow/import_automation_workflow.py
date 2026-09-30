@@ -58,6 +58,7 @@ from golden_verification import (
 
 DAG_ID = os.environ.get("IMPORT_AUTOMATION_DAG_ID", "manual_refresh")
 DEFAULT_IMAGE_URI = "us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:stable"
+DEFAULT_SKIP_PROD_INGESTION = False
 DEFAULT_RESOURCES = {
     "machine": "n2-standard-8",
     "cpu": 8000,
@@ -643,7 +644,7 @@ def resolve_workflow_context(context: dict[str, Any],
         "spannerWorkflowName": spanner_workflow,
         "skipImportJob": to_bool("skipImportJob"),
         "skipStagingIngestion": to_bool("skipStagingIngestion"),
-        "skipProdIngestion": is_prod_denylisted(import_name) or to_bool("skipProdIngestion", True),
+        "skipProdIngestion": is_prod_denylisted(import_name) or to_bool("skipProdIngestion", DEFAULT_SKIP_PROD_INGESTION),
         "dryRunIngestion": to_bool("dryRunIngestion"),
         "forceIngestion": to_bool("forceIngestion"),
         "resources": {**DEFAULT_RESOURCES, **(get_val("resources") if isinstance(get_val("resources"), dict) else {})},
@@ -850,7 +851,9 @@ base_dag_params = {
               type="boolean",
               description="Skip staging ingestion"),
     "skipProdIngestion":
-        Param(default=True, type="boolean", description="Skip prod ingestion"),
+        Param(default=DEFAULT_SKIP_PROD_INGESTION,
+              type="boolean",
+              description="Skip prod ingestion"),
     "dryRunIngestion":
         Param(default=False, type="boolean", description="Dry run ingestion"),
     "forceIngestion":
