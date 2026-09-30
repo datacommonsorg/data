@@ -170,7 +170,8 @@ class RegularizeColumnsTest(unittest.TestCase):
             'scc': [10100105],
         })
         res_pt17_reg15 = self.loader._regularize_columns(
-            df_pt17_reg15, '/path/to/2017neiJan_facility_process_byregions/point_12345.csv')
+            df_pt17_reg15,
+            '/path/to/2017neiJan_facility_process_byregions/point_12345.csv')
         self.assertEqual(list(res_pt17_reg15.columns), df_columns)
         self.assertEqual(res_pt17_reg15['year'].iloc[0], '2017')
         self.assertEqual(res_pt17_reg15['emissions type code'].iloc[0], '')
@@ -188,11 +189,13 @@ class RegularizeColumnsTest(unittest.TestCase):
             'scc': [10100101],
         })
         res_pt17_reg15_spaces = self.loader._regularize_columns(
-            df_pt17_reg15_spaces, '/path/to/2017neiJan_facility_process_byregions/point_12345.csv')
+            df_pt17_reg15_spaces,
+            '/path/to/2017neiJan_facility_process_byregions/point_12345.csv')
         self.assertEqual(list(res_pt17_reg15_spaces.columns), df_columns)
         self.assertEqual(res_pt17_reg15_spaces['year'].iloc[0], '2017')
         self.assertEqual(res_pt17_reg15_spaces['fips code'].iloc[0], 1001)
-        self.assertEqual(res_pt17_reg15_spaces['total emissions'].iloc[0], 0.265867)
+        self.assertEqual(res_pt17_reg15_spaces['total emissions'].iloc[0],
+                         0.265867)
         self.assertEqual(res_pt17_reg15_spaces['emissions uom'].iloc[0], 'TON')
 
         # 2020 point_ file for regions 1-10 (point_1.csv ... point_10.csv)
@@ -204,7 +207,8 @@ class RegularizeColumnsTest(unittest.TestCase):
             'scc': [10100106],
         })
         res_pt20_reg1 = self.loader._regularize_columns(
-            df_pt20_reg1, '/path/to/2020nei_facility_process_byregions/point_1.csv')
+            df_pt20_reg1,
+            '/path/to/2020nei_facility_process_byregions/point_1.csv')
         self.assertEqual(list(res_pt20_reg1.columns), df_columns)
         self.assertEqual(res_pt20_reg1['year'].iloc[0], '2020')
         self.assertEqual(res_pt20_reg1['emissions type code'].iloc[0], '')
@@ -309,8 +313,7 @@ class RegularizeColumnsTest(unittest.TestCase):
                                   [12.5, 15.0, 12.5, 15.0])
             # SCC was correctly extracted as '1' (External Combustion), not '10'
             self.assertTrue(
-                all('SCC_1_ExternalCombustion' in sv for sv in result['SV'])
-            )
+                all('SCC_1_ExternalCombustion' in sv for sv in result['SV']))
         finally:
             shutil.rmtree(temp_dir)
 
@@ -435,9 +438,8 @@ class RegularizeColumnsTest(unittest.TestCase):
             self.assertCountEqual(
                 res_df['year'].astype(str).tolist(),
                 ['2014', '2014', '2017', '2017', '2020', '2020'])
-            self.assertCountEqual(
-                res_df['observation'].tolist(),
-                [5.0, 5.0, 10.0, 10.0, 20.0, 20.0])
+            self.assertCountEqual(res_df['observation'].tolist(),
+                                  [5.0, 5.0, 10.0, 10.0, 20.0, 20.0])
             self.assertTrue((res_df['geo_Id'] == 'geoId/01001').all())
         finally:
             shutil.rmtree(temp_in)
@@ -467,8 +469,8 @@ class RegularizeColumnsTest(unittest.TestCase):
                                          os.path.join(temp_out, 'out.mcf'),
                                          os.path.join(temp_out, 'out.tmcf'),
                                          inter_dir)
-            with mock.patch(
-                'pandas.read_pickle', side_effect=IOError('Corrupt pickle')):
+            with mock.patch('pandas.read_pickle',
+                            side_effect=IOError('Corrupt pickle')):
                 with self.assertRaises(IOError):
                     loader.generate_csv()
         finally:

@@ -211,8 +211,8 @@ class USAirEmissionTrends:
         df = df.drop(columns=['fips_num'])
 
         # Strip trailing .0 from float-parsed SCC codes before extracting level 1
-        df['scc'] = df['scc'].astype(str).str.replace(
-            r'\.0$', '', regex=True).str.strip()
+        df['scc'] = df['scc'].astype(str).str.replace(r'\.0$', '',
+                                                      regex=True).str.strip()
         df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
                              df['scc'].str[0])
         df.rename(columns=replacement_17, inplace=True)
@@ -243,23 +243,22 @@ class USAirEmissionTrends:
         try:
             df = self._national_emissions(file_path)
             if df is not None and not df.empty:
-                df = df.sort_values(
-                    by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
+                df = df.sort_values(by=[
+                    'geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'
+                ])
                 df.dropna(subset=['observation'], inplace=True)
-                df['observation'] = np.where(
-                    df['unit'] == 'Pound',
-                    df['observation'] / 2000, df['observation'])
+                df['observation'] = np.where(df['unit'] == 'Pound',
+                                             df['observation'] / 2000,
+                                             df['observation'])
                 df['unit'] = "Ton"
                 if 'scc_name' in df.columns:
                     df = df.drop(columns=['scc_name'])
-                df = df.groupby(
-                    ['geo_Id', 'year', 'Measurement_Method', 'SV'],
-                    as_index=False)['observation'].sum()
+                df = df.groupby(['geo_Id', 'year', 'Measurement_Method', 'SV'],
+                                as_index=False)['observation'].sum()
                 df['unit'] = "Ton"
                 intermediate_file_path = os.path.join(
                     self.temp_dir,
-                    f"{uuid.uuid4().hex}_{os.path.basename(file_path)}.pkl"
-                )
+                    f"{uuid.uuid4().hex}_{os.path.basename(file_path)}.pkl")
                 df.to_pickle(intermediate_file_path)
                 logging.info(
                     f"Saved intermediate file at : {intermediate_file_path}")
@@ -329,7 +328,8 @@ class USAirEmissionTrends:
 
         logging.info("Consolidating intermediate files.")
         intermediate_files = [
-            os.path.join(self.temp_dir, f) for f in os.listdir(self.temp_dir)
+            os.path.join(self.temp_dir, f)
+            for f in os.listdir(self.temp_dir)
             if not f.startswith('.')
         ]
         if not intermediate_files:
@@ -357,8 +357,9 @@ class USAirEmissionTrends:
             if batch_dfs:
                 batch_concat = pd.concat(batch_dfs, ignore_index=True)
                 del batch_dfs
-                batch_concat = batch_concat.sort_values(
-                    by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
+                batch_concat = batch_concat.sort_values(by=[
+                    'geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'
+                ])
                 batch_concat.dropna(subset=['observation'], inplace=True)
                 batch_concat['observation'] = np.where(
                     batch_concat['unit'] == 'Pound',
@@ -508,7 +509,8 @@ def main(argv):
     logging.info("Started process script")
     start_time = time.time()
     try:
-        process_files(FLAGS.input_path, FLAGS.output_path, FLAGS.intermediate_path)
+        process_files(FLAGS.input_path, FLAGS.output_path,
+                      FLAGS.intermediate_path)
     except Exception as e:
         logging.fatal(f"Process script failed: {e}", exc_info=True)
     elapsed_time = time.time() - start_time
