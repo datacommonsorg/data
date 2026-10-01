@@ -15,7 +15,7 @@
                 {
                     "template_mcf": "output/underlyingcauseofdeath_county.tmcf",
                     "cleaned_csv": "output/underlyingcauseofdeath_county.csv",
-                    "node_mcf": "output/underlyingcauseofdeath_county_stat_vars.mcf"
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [

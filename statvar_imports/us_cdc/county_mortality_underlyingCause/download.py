@@ -754,6 +754,13 @@ def download_county_mortality_data(
                 e,
             )
             failed_states.append(state_name)
+            try:
+                downloader.init_session()
+            except Exception as init_err:
+                logging.warning(
+                    "Session renewal after state failure also failed: %s",
+                    init_err,
+                )
 
     logging.info(
         "Download complete: Saved %d files with %d total rows in %s.",
