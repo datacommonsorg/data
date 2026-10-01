@@ -183,7 +183,7 @@ def _process_household_transportation(input_file: str,
     data_df = pd.read_csv(filepath_or_buffer=input_file,
                           sep=file_conf["input_file_delimiter"])
 
-    basic_cols = file_conf.get("basic_cols", [])
+    basic_cols = list(file_conf.get("basic_cols", []))
     # Creating Population Columns
     pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
 
