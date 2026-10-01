@@ -201,7 +201,7 @@ def main(argv):
         f_writer.writeheader()
 
         statvar_list = []
-        for file_name in os.listdir(_FLAGS.input_path):
+        for file_name in sorted(os.listdir(_FLAGS.input_path)):
             if file_name.endswith('.txt'):  # Raw data is .txt files
                 file_path = os.path.join(_FLAGS.input_path, file_name)
                 with open(file_path, 'r', encoding='utf-8') as csv_f:

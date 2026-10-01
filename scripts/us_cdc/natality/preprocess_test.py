@@ -14,6 +14,7 @@
 """Tests for preprocess.py of the CDC Natality import."""
 
 import os
+import sys
 import unittest
 import tempfile
 import subprocess
@@ -32,8 +33,8 @@ class CDCNatality(unittest.TestCase):
                                        '16-20_state.json')
             input_path = os.path.join(_SCRIPT_PATH, 'testdata', 'cleaned_data')
 
-            subprocess.call([
-                'python', preprocess_path, f'--input_path={input_path}',
+            subprocess.check_call([
+                sys.executable, preprocess_path, f'--input_path={input_path}',
                 f'--config_path={config_path}', f'--output_path={tmp_dir}'
             ])
 
@@ -54,3 +55,7 @@ class CDCNatality(unittest.TestCase):
                           encoding='utf-8') as f_expected:
                     expected_result = f_expected.read()
                 self.assertEqual(test_result, expected_result)
+
+
+if __name__ == '__main__':
+    unittest.main()
