@@ -9,14 +9,14 @@
       "provenance_description": "Climate Trace data provides comprehensive, granular, and up-to-date greenhouse gas emissions data using satellite imagery and other public data sources.",
       "scripts": [
         "download_and_segregate_by_gas.py",
-        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/all*.csv --pv_map=climate_pvmap_sectors.csv --config_file=common_metadata.csv --output_path=output/output_sectors --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/sectors_counters.csv",
-        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/all*.csv --pv_map=climate_pvmap_subsectors.csv --config_file=common_metadata.csv --output_path=output/output_subsectors --statvar_dcid_remap_csv=statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/subsectors_counters.csv"
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/all*.csv --pv_map=climate_pvmap_sectors.csv --config_file=common_metadata.csv --output_path=output_sectors --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/sectors_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/all*.csv --pv_map=climate_pvmap_subsectors.csv --config_file=common_metadata.csv --output_path=output_subsectors --statvar_dcid_remap_csv=statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/subsectors_counters.csv"
       ],
       "import_inputs": [
         {
           "template_mcf": "common_output.tmcf",
-          "cleaned_csv": "output/*.csv",
-          "node_mcf": "output/*.mcf"
+          "cleaned_csv": "output_*.csv",
+          "node_mcf": "*.mcf"
         }
       ],
       "source_files": [

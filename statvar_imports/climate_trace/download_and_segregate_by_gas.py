@@ -1,17 +1,14 @@
-import requests
-import zipfile
-import pandas as pd
-import numpy as np
 import io
 import json
 import os
-import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import zipfile
+from concurrent.futures import as_completed, ThreadPoolExecutor
+from absl import logging
+import numpy as np
+import pandas as pd
+import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def get_retry_session(retries=3, backoff_factor=1):
@@ -19,6 +16,8 @@ def get_retry_session(retries=3, backoff_factor=1):
     session = requests.Session()
     retry = Retry(
         total=retries,
+        connect=retries,
+        read=retries,
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504],
         allowed_methods=["GET"],
