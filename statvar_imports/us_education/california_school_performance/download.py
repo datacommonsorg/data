@@ -328,7 +328,15 @@ def download_and_process_year(
     os.makedirs(raw_dir, exist_ok=True)
     raw_zip_path = os.path.join(raw_dir, filename)
 
-    if not os.path.exists(raw_zip_path) or os.path.getsize(raw_zip_path) == 0:
+    if not (os.path.exists(raw_zip_path) and zipfile.is_zipfile(raw_zip_path)):
+        if os.path.exists(raw_zip_path):
+            logging.warning(
+                'Corrupt or incomplete archive detected; re-downloading: %s',
+                raw_zip_path)
+            try:
+                os.unlink(raw_zip_path)
+            except OSError:
+                pass
         logging.info('Fetching Year %d raw zip: %s', year, url)
         download_url_with_retries(url, raw_zip_path)
     else:
@@ -440,9 +448,9 @@ def main(argv):
         raise RuntimeError(
             'No files were successfully downloaded and processed.')
 
-    # Only combine into master multi-year file if all years were requested.
-    # Single-year or subset downloads must NOT overwrite the consolidated master dataset.
-    if FLAGS.years.strip().lower() in ('all', '*'):
+    # Combine into master multi-year file if all years or multiple years were processed.
+    # Single-year downloads do not overwrite the consolidated master dataset unless requested.
+    if FLAGS.years.strip().lower() in ('all', '*') or len(all_normalized_files) > 1:
         master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
         temp_master = tempfile.NamedTemporaryFile('w',
                                                   dir=output_dir,

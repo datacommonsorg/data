@@ -10,6 +10,21 @@
             }
         },
         {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks if the MaxDate is the same for all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that MaxDate meets the expected freshness threshold (at least 2025).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) >= '2025' AS is_fresh, COUNT(*) AS row_cnt FROM stats",
+                "condition": "is_fresh = TRUE AND row_cnt > 0"
+            }
+        },
+        {
             "rule_id": "check_goldens_summary_report",
             "description": "Validates summary_report.csv against the golden summary data",
             "validator": "GOLDENS_CHECK",

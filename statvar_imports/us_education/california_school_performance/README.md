@@ -39,8 +39,14 @@ california_school_performance/
 
 ## Statistical Variables (StatVars)
 
-The pipeline maps raw test records into **5,966 distinct Statistical Variables** conforming to the Data Commons education schema:
+The pipeline supports two modes conforming to the Data Commons education schema:
 
+- **Automated Import Mode (`--subgroups=all_students`, default)**:
+  Focuses on the overall student population (subgroup ID `1`) across California statewide and all 58 counties. This produces **110 distinct Statistical Variables** covering all grade levels, subjects, and metrics.
+- **Full Demographic Breakdown (`--subgroups=all_groups`)**:
+  Expands across all 55 demographic subgroups (detailed below), generating **5,966 distinct Statistical Variables**.
+
+### Schema Dimensions:
 - **Population Type**: `Student`
 - **School Subjects**:
   - `EnglishLanguageArts` (Test ID: 1)
@@ -70,10 +76,12 @@ The pipeline maps raw test records into **5,966 distinct Statistical Variables**
 
 ## How to Run
 
+> **Note**: Commands below should be run from this directory: `statvar_imports/us_education/california_school_performance/`.
+
 ### 1. Download and Process the Entire Dataset (All Available Years: 2015–2025)
 To download and process all years present at source (skipping 2020 when CAASPP was cancelled statewide due to COVID-19):
 ```bash
-# Step 1: Download and normalize data
+# Step 1: Download and normalize data (default: all_students, generates 110 StatVars)
 python3 download.py --years=all
 
 # Step 2: Generate TMCF and CSV observations using stat_var_processor
@@ -105,9 +113,23 @@ python3 download.py --test_mode
 
 ---
 
+## Testing
+
+Run unit tests from repository root:
+```bash
+python3 -m unittest statvar_imports/us_education/california_school_performance/california_school_performance_test.py
+```
+Or directly from this directory:
+```bash
+python3 -m unittest california_school_performance_test.py
+```
+
+---
+
 ## Output Files
 The pipeline produces standard Data Commons import artifacts in `output_files/`:
 - `california_school_performance_all_years_output.csv`: Complete multi-year observations table (~64,000 rows across 2015–2025)
 - `california_school_performance_all_years_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
 - `california_school_performance_{YEAR}_output.csv`: Per-year individual observation tables
+
 

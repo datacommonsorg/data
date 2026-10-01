@@ -16,6 +16,7 @@
 import io
 import os
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -113,6 +114,36 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
             download.normalize_and_filter_stream(stream,
                                                  keep_all_entities=True))
         self.assertEqual(len(rows), 2)
+
+    @patch.object(download, 'download_url_with_retries')
+    def test_corrupt_zip_redownload(self, mock_download):
+        """Verify that a corrupted or truncated raw zip is detected and re-downloaded."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            raw_dir = os.path.join(tmp_dir, 'raw_files')
+            os.makedirs(raw_dir, exist_ok=True)
+            corrupt_zip = os.path.join(raw_dir, 'sb_ca2024_1_csv_v1.zip')
+            with open(corrupt_zip, 'w') as f:
+                f.write('corrupted non-zip content')
+            self.assertTrue(os.path.exists(corrupt_zip))
+
+            def side_effect(url, dest_path):
+                import zipfile
+                with zipfile.ZipFile(dest_path, 'w') as z:
+                    z.writestr(
+                        'sb_ca2024_1_csv_v1.txt',
+                        'County Code^District Code^School Code^Type ID^Test Year^Test ID^Student Group ID^Grade^'
+                        'Total Students Tested with Scores^Mean Scale Score^Percentage Standard Exceeded^'
+                        'Percentage Standard Met^Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
+                        '00^00000^0000000^4^2024^1^1^3^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
+                    )
+
+            mock_download.side_effect = side_effect
+
+            with patch.object(download, 'discover_year_urls', return_value=('sb_ca2024_all_csv_v1.zip', 'sb_ca2024_1_csv_v1.zip')):
+                out = download.download_and_process_year(2024, tmp_dir, raw_dir, 'all_students', False)
+                mock_download.assert_called_once()
+                self.assertTrue(os.path.exists(out))
+
 
 
 if __name__ == '__main__':
