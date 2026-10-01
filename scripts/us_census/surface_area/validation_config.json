@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion threshold of 0.1% for boundary adjustments",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verifies that the dataset's maximum observation date meets freshness requirements (within 2 years of current year)",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(CAST(LEFT(CAST(MaxDate AS VARCHAR), 4) AS INT)) AS max_year FROM stats",
+        "condition": "max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)"
+      }
+    }
+  ]
+}

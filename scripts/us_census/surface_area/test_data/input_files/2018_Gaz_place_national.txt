@@ -1,0 +1,3 @@
+USPS	GEOID	ANSICODE	NAME	LSAD	FUNCSTAT	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                 
+AL	0100100	02582661	Abanda CDP	57	S	7764034	34284	2.998	0.013	33.091627	-85.527029                                                                                                                      
+AL	0100124	02403054	Abbeville city	25	A	40255362	107642	15.543	0.042	31.564689	-85.259124                                                                                                               
