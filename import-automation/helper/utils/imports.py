@@ -239,17 +239,19 @@ def invoke_import_automation_airflow(import_name: str,
     if skip_prod_ingestion is not None:
         conf["skipProdIngestion"] = skip_prod_ingestion
 
-    dag_run_id = f"cda_feed__{short_import_name}__{latest_version}__{int(datetime.now(timezone.utc).timestamp())}"
+    now_utc = datetime.now(timezone.utc)
+    dag_run_id = f"cda_feed__{short_import_name}__{latest_version}__{int(now_utc.timestamp())}"
     payload = {
         "dag_run_id": dag_run_id,
-        "conf": conf
+        "logical_date": now_utc.isoformat(),
+        "conf": conf,
     }
 
     if not config.AIRFLOW_WEB_SERVER_URL:
         raise ValueError("AIRFLOW_WEB_SERVER_URL is not configured.")
 
     base_url = config.AIRFLOW_WEB_SERVER_URL.rstrip('/')
-    url = f"{base_url}/api/v1/dags/{target_dag_id}/dagRuns"
+    url = f"{base_url}/api/v2/dags/{target_dag_id}/dagRuns"
     logging.info(f"Invoking Airflow DAG {target_dag_id} for {import_name} at {url}")
 
     if config.AIRFLOW_IAP_CLIENT_ID:
@@ -271,7 +273,7 @@ def invoke_import_automation_airflow(import_name: str,
             f"Falling back to generic DAG '{config.AIRFLOW_DEFAULT_DAG_ID}'."
         )
         target_dag_id = config.AIRFLOW_DEFAULT_DAG_ID
-        url = f"{base_url}/api/v1/dags/{target_dag_id}/dagRuns"
+        url = f"{base_url}/api/v2/dags/{target_dag_id}/dagRuns"
         response = requests.post(url, json=payload, headers=headers, timeout=60)
 
     response.raise_for_status()

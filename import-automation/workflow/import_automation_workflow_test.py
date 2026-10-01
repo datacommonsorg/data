@@ -84,14 +84,12 @@ def mock_task(*d_args, **d_kwargs):
     return decorator
 
 
-mock_sensors.base.BaseSensorOperator = MockBaseSensorOperator
+mock_sdk = MagicMock()
+mock_sdk.DAG = MockDAG
+mock_sdk.task = mock_task
+mock_sdk.BaseSensorOperator = MockBaseSensorOperator
 sys.modules['airflow'] = mock_airflow
-mock_airflow.DAG = MockDAG
-sys.modules['airflow.sensors'] = mock_sensors
-sys.modules['airflow.sensors.base'] = mock_sensors.base
-mock_decorators = MagicMock()
-mock_decorators.task = mock_task
-sys.modules['airflow.decorators'] = mock_decorators
+sys.modules['airflow.sdk'] = mock_sdk
 sys.modules['airflow.exceptions'] = MagicMock()
 
 
@@ -107,8 +105,6 @@ sys.modules[
     'airflow.exceptions'].AirflowFailException = MockAirflowFailException
 sys.modules[
     'airflow.exceptions'].AirflowSkipException = MockAirflowSkipException
-sys.modules['airflow.models'] = MagicMock()
-sys.modules['airflow.models.param'] = MagicMock()
 sys.modules['airflow.providers'] = MagicMock()
 sys.modules['airflow.providers.google'] = MagicMock()
 sys.modules['airflow.providers.google.cloud'] = MagicMock()
@@ -220,10 +216,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         }
         context = {'ti': ti_mock, 'params': {}}
 
-        def var_get_mock(key, default_var=''):
+        def var_get_mock(key, default=''):
             if key == 'PROD_APPROVE_test-job-123':
                 return 'true'
-            return default_var
+            return default
 
         golden_verification.Variable.get.side_effect = var_get_mock
         self.assertTrue(sensor.poke(context))
@@ -239,10 +235,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         }
         context = {'ti': ti_mock, 'params': {}}
 
-        def var_get_mock(key, default_var=''):
+        def var_get_mock(key, default=''):
             if key == 'PROD_REJECT_test-job-123':
                 return 'true'
-            return default_var
+            return default
 
         golden_verification.Variable.get.side_effect = var_get_mock
         with self.assertRaises(MockAirflowFailException):
