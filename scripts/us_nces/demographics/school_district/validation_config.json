@@ -1,0 +1,27 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Strictly enforce historical deletion average threshold of 0.1%",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verify all NCES StatVars share a consistent maximum observation date",
+            "validator": "MAX_DATE_CONSISTENT"
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verify latest NCES observation year is within allowable 2-year reporting lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INT) AS max_year FROM stats",
+                "condition": "max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)"
+            }
+        }
+    ]
+}

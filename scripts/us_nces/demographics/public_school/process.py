@@ -23,7 +23,6 @@ output_files - output files (mcf, tmcf and csv are written here)
 
 import os
 import sys
-from absl import flags
 from absl import app
 from absl import logging
 
@@ -51,7 +50,8 @@ class NCESPublicSchool(USEducation):
     _renaming_columns = RENAMING_PUBLIC_COLUMNS
 
 
-if __name__ == '__main__':
+def main(argv):
+    del argv  # Unused
     try:
         logging.set_verbosity(logging.INFO)
         logging.info("Main Method Starts For Public School")
@@ -95,9 +95,13 @@ if __name__ == '__main__':
         loader.generate_csv()
         loader.generate_mcf()
         loader.generate_tmcf()
-        logging.info("Main Method Completed For Public School District ")
+        logging.info("Main Method Completed For Public School")
 
     except Exception as e:
         # Only log the first 1000 characters of the error message
         error_msg = str(e)[:1000]
         logging.fatal(f"Error While Running Public School Process: {error_msg}")
+
+
+if __name__ == '__main__':
+    app.run(main)

@@ -14,6 +14,7 @@
 
 import os
 import unittest
+from unittest.mock import patch
 import sys
 import tempfile
 # module_dir is the path to where this test is running from.
@@ -29,11 +30,10 @@ EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
 
 class TestProcess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat Physical Activity Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
+    TestProcess inherits from unittest.TestCase.
+    The test is conducted for NCES Public School Demographic Sample Datasets.
+    It generates CSV, MCF, and TMCF files based on sample inputs and compares
+    the output with expected files.
     """
     test_data_files = os.listdir(TEST_DATASET_DIR)
 
@@ -42,44 +42,51 @@ class TestProcess(unittest.TestCase):
         for file_name in test_data_files
     ]
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._tmp_dir = tempfile.TemporaryDirectory()
+        tmp_dir = cls._tmp_dir.name
+        cleaned_csv_file_path = os.path.join(tmp_dir, "test_public_school.csv")
+        mcf_file_path = os.path.join(tmp_dir, "test_public_school.mcf")
+        tmcf_file_path = os.path.join(tmp_dir, "test_public_school.tmcf")
+        csv_path_place = os.path.join(tmp_dir, "test_public_school_place.csv")
+        tmcf_path_place = os.path.join(tmp_dir, "test_public_school_place.tmcf")
+        dup_csv_path_place = os.path.join(tmp_dir,
+                                          "test_public_school_place_dup.csv")
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir,
-                                                 "test_public_school.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_public_school.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_public_school.tmcf")
-            csv_path_place = os.path.join(tmp_dir,
-                                          "test_public_school_place.csv")
-            tmcf_path_place = os.path.join(tmp_dir,
-                                           "test_public_school_place.tmcf")
-            dup_csv_path_place = os.path.join(
-                tmp_dir, "test_public_school_place_dup.csv")
+        loader = NCESPublicSchool(cls.ip_data, cleaned_csv_file_path,
+                                  mcf_file_path, tmcf_file_path, csv_path_place,
+                                  dup_csv_path_place, tmcf_path_place)
 
-            loader = NCESPublicSchool(self.ip_data, cleaned_csv_file_path,
-                                      mcf_file_path, tmcf_file_path,
-                                      csv_path_place, dup_csv_path_place,
-                                      tmcf_path_place)
-
+        with patch(
+                "common.us_education.dc_api_is_defined_dcid",
+                side_effect=lambda nodes, *args, **kwargs:
+            {n: True for n in nodes},
+        ):
             loader.generate_csv()
             loader.generate_mcf()
             loader.generate_tmcf()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+        with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            cls.actual_csv_data = csv_file.read()
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+        with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+            cls.actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+        with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            cls.actual_tmcf_data = tmcf_file.read()
 
-            with open(csv_path_place, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_place = csv_file.read()
+        with open(csv_path_place, encoding="utf-8-sig") as csv_file:
+            cls.actual_csv_place = csv_file.read()
 
-            with open(tmcf_path_place, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_place = tmcf_file.read()
+        with open(tmcf_path_place, encoding="UTF-8") as tmcf_file:
+            cls.actual_tmcf_place = tmcf_file.read()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._tmp_dir.cleanup()
+        super().tearDownClass()
 
     def test_mcf_tmcf_files(self):
         """

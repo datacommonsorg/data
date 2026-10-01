@@ -372,7 +372,7 @@ COLUMNS = {
     "Phone Number": "PhoneNumber"
 }
 
-_GENDER = {"female": "Female", "male": "Male"}
+_GENDER = {r"\bfemale\b": "Female", r"\bmale\b": "Male"}
 
 _LOCALE = {
     '13-City: Small': "NCES_CitySmall",
@@ -501,6 +501,7 @@ def replace_values(data_df: pd.DataFrame,
         "Agency_Name": _NAN,
         "School_Level_17": _SCHOOL_LEVEL,
         "School_Level_16": _SCHOOL_LEVEL,
+        "School_Level": _SCHOOL_LEVEL,
         "State_Agency_ID": _NAN,
         "State_School_ID": _NAN,
         "State_Name": _STATE_NAME

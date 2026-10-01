@@ -12,12 +12,14 @@
                 "process.py"
             ],
             "source_files": [
-                "gcs_folder/input_files/*/*.csv"
+                "gcs_folder/input_files/*/*.csv",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "gcs_folder/output_files/us_nces_demographics_district_school.tmcf",
-                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv"
+                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv",
+                    "node_mcf": "gcs_folder/output_files/*.mcf"
                 },
                 {
                     "template_mcf": "gcs_folder/output_place/us_nces_demographics_district_place.tmcf",
@@ -25,6 +27,7 @@
                 }
             ],
             "cron_schedule": "30 3 3 3,6,9,12 *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
