@@ -83,7 +83,6 @@ Validation is configured in `validation_config.json`:
    StatVars.
 3. `check_deleted_records_percent` (`DELETED_RECORDS_PERCENT`): Enforces that deleted observations
    do not exceed `0.1%`.
-4. `check_lint_error_count` (`LINT_ERROR_COUNT`): Enforces 0 lint errors (`threshold: 0`).
 
 ## Troubleshooting & Operations
 - **HTTP 429 / Rate Limiting:** The script uses `requests.Session` with `urllib3.util.Retry`

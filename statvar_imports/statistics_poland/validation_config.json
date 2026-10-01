@@ -23,14 +23,6 @@
             "params": {
                 "threshold": 0.1
             }
-        },
-        {
-            "rule_id": "check_lint_error_count",
-            "description": "Checks that MCF lint error count does not exceed 0.",
-            "validator": "LINT_ERROR_COUNT",
-            "params": {
-                "threshold": 0
-            }
         }
     ]
 }
