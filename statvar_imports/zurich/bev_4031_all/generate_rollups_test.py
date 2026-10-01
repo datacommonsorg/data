@@ -26,8 +26,14 @@ _REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..'))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from statvar_imports.zurich.bev_4031_all import generate_rollups as rollup_mod
-from statvar_imports.zurich.bev_4031_all.generate_rollups import FLAGS, OUTPUT_COLS, generate_rollups, main, process_rollups
+from absl import logging
+from statvar_imports.zurich.bev_4031_all.generate_rollups import (
+    FLAGS,
+    OUTPUT_COLS,
+    generate_rollups,
+    main,
+    process_rollups,
+)
 
 
 class GenerateRollupsTest(unittest.TestCase):
@@ -46,7 +52,7 @@ class GenerateRollupsTest(unittest.TestCase):
         })
 
     def test_process_rollups_generates_all_demographic_and_spatial_slices(self):
-        """Verifies that all demographic slices and spatial levels (Quar, Kreis, Ganze Stadt) are generated."""
+        """Verifies all demographic slices and spatial levels are generated."""
         result_df = process_rollups(self.sample_raw_data)
         self.assertListEqual(list(result_df.columns), OUTPUT_COLS)
 
@@ -70,7 +76,7 @@ class GenerateRollupsTest(unittest.TestCase):
         self.assertEqual(kreis_total.iloc[0]['AnzGebuWir'], 20)
 
     def test_process_rollups_numeric_coercion(self):
-        """Verifies that string/non-numeric values in AnzGebuWir are coerced properly."""
+        """Verifies string/non-numeric values in AnzGebuWir are coerced."""
         data = pd.DataFrame({
             'GueltigAbDatJahr': [2025, 2025],
             'QuarLang': ['Rathaus', 'Rathaus'],
@@ -86,7 +92,7 @@ class GenerateRollupsTest(unittest.TestCase):
         self.assertEqual(city_total.iloc[0]['AnzGebuWir'], 12)
 
     def test_process_rollups_all_nan_slice_dropped(self):
-        """Verifies that slices with only non-numeric values ('K') are dropped rather than emitted as 0."""
+        """Verifies slices with only non-numeric values ('K') are dropped."""
         data = pd.DataFrame({
             'GueltigAbDatJahr': [2025, 2025],
             'QuarLang': ['Rathaus', 'City'],
@@ -99,7 +105,7 @@ class GenerateRollupsTest(unittest.TestCase):
         self.assertNotIn('City', set(result_df['QuarLang'].unique()))
 
     def test_process_rollups_filters_unknown_regions(self):
-        """Verifies that unknown regions (QuarCd/KreisCd 990 or 999, or Unbekannt) are excluded."""
+        """Verifies unknown regions (990, 999, or Unbekannt) are excluded."""
         data = pd.DataFrame({
             'GueltigAbDatJahr': [2025, 2025, 2025],
             'QuarCd': [11, 999, 12],
@@ -119,7 +125,7 @@ class GenerateRollupsTest(unittest.TestCase):
         self.assertEqual(city_total.iloc[0]['AnzGebuWir'], 5)
 
     def test_process_rollups_filters_nan_and_whitespace_labels(self):
-        """Verifies that rows with NaN or whitespace-only geographic/demographic labels are filtered out."""
+        """Verifies rows with NaN or whitespace-only labels are filtered out."""
         data = pd.DataFrame({
             'GueltigAbDatJahr': [2025, 2025, 2025, 2025],
             'QuarLang': ['  Rathaus  ', None, '   ', 'Hochschulen'],
@@ -150,7 +156,7 @@ class GenerateRollupsTest(unittest.TestCase):
             process_rollups(df_missing)
 
     def test_generate_rollups_file_io_success(self):
-        """Verifies end-to-end file reading, processing, and output generation."""
+        """Verifies end-to-end file reading, processing, and output write."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             input_csv = os.path.join(tmp_dir, 'input.csv')
             output_csv = os.path.join(tmp_dir, 'output_dir',
@@ -167,7 +173,7 @@ class GenerateRollupsTest(unittest.TestCase):
             self.assertEqual(len(read_back), len(result_df))
 
     def test_generate_rollups_utf8_bom_input(self):
-        """Verifies that input CSV with UTF-8 BOM (utf-8-sig) is parsed cleanly."""
+        """Verifies input CSV with UTF-8 BOM (utf-8-sig) is parsed cleanly."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             input_csv = os.path.join(tmp_dir, 'input_bom.csv')
             output_csv = os.path.join(tmp_dir, 'output_rollups.csv')
@@ -191,7 +197,7 @@ class GenerateRollupsTest(unittest.TestCase):
                 generate_rollups(tmp_file.name, '/tmp/out.csv')
 
     def test_main_success(self):
-        """Verifies that main executes successfully with valid flag parameters."""
+        """Verifies main executes successfully with valid flag parameters."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             input_csv = os.path.join(tmp_dir, 'input.csv')
             output_csv = os.path.join(tmp_dir, 'output.csv')
@@ -207,7 +213,7 @@ class GenerateRollupsTest(unittest.TestCase):
         """Verifies that main logs a fatal error with exc_info on exception."""
         FLAGS.input_csv = '/non/existent/path/file.csv'
         FLAGS.output_csv = '/tmp/dummy_output.csv'
-        with patch.object(rollup_mod.logging, 'fatal') as mock_fatal:
+        with patch.object(logging, 'fatal') as mock_fatal:
             main([])
             mock_fatal.assert_called_once()
             self.assertIn('Failed to generate rollups',
@@ -215,7 +221,7 @@ class GenerateRollupsTest(unittest.TestCase):
             self.assertTrue(mock_fatal.call_args[1].get('exc_info'))
 
     def test_generate_rollups_on_test_data_fixture(self):
-        """Verifies generate_rollups on test_data/bev_4031_wiki_raw_input.csv matches bev_4031_wiki_input.csv."""
+        """Verifies generate_rollups on raw fixture matches input fixture."""
         raw_input_csv = os.path.join(_MODULE_DIR, 'test_data',
                                      'bev_4031_wiki_raw_input.csv')
         expected_input_csv = os.path.join(_MODULE_DIR, 'test_data',
