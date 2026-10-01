@@ -28,11 +28,8 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Callable
 
-from airflow import DAG
-from airflow.decorators import task
+from airflow.sdk import DAG, Param, Variable, task
 from airflow.exceptions import AirflowException, AirflowFailException, AirflowSkipException
-from airflow.models import Variable
-from airflow.models.param import Param
 from airflow.providers.google.cloud.hooks.cloud_batch import CloudBatchHook
 from airflow.providers.google.cloud.sensors.workflows import WorkflowExecutionSensor
 from airflow.utils.trigger_rule import TriggerRule
@@ -104,12 +101,14 @@ def is_prod_denylisted(import_name: str) -> bool:
 
 
 def get_config_var(key: str, default: str = "") -> str:
-    """Reads configuration from Airflow Variable or OS environment."""
-    fallback = os.environ.get(key, default)
+    """Reads configuration from OS environment or Airflow Variable."""
+    env_val = os.environ.get(key)
+    if env_val:
+        return env_val
     try:
-        return Variable.get(key, default_var=fallback)
+        return Variable.get(key, default=default)
     except Exception:
-        return fallback
+        return default
 
 
 def generate_job_id(import_name: str, timestamp: int | None = None) -> str:
@@ -590,9 +589,7 @@ def resolve_workflow_context(context: dict[str, Any],
                                "spanner-ingestion-workflow",
                                "SPANNER_INGESTION_WORKFLOW_NAME")
 
-    env_suffix = cfg_val("envSuffix", "", "ENV_SUFFIX")
-    validation_job_name = cfg_val("validationJobName",
-                                  f"import-validator-job{env_suffix}",
+    validation_job_name = cfg_val("validationJobName", "import-validator-job",
                                   "VALIDATION_JOB_NAME")
 
     import_config = get_val("importConfig")
@@ -620,7 +617,10 @@ def resolve_workflow_context(context: dict[str, Any],
     import_config_str = json.dumps(import_config_dict)
     batch_import_config_str = json.dumps(batch_config_dict)
 
-    exec_dt = context.get("logical_date") or context.get("execution_date")
+    exec_dt = (context.get("logical_date") or
+               getattr(dag_run, "logical_date", None) or
+               getattr(dag_run, "run_after", None) or
+               getattr(dag_run, "start_date", None))
     run_ts = int(exec_dt.timestamp()) if exec_dt else int(time.time())
     run_id = dag_run.run_id if dag_run else f"manual__{datetime.now(timezone.utc).isoformat()}"
 
@@ -634,7 +634,6 @@ def resolve_workflow_context(context: dict[str, Any],
         "imageUri": get_val("imageUri", DEFAULT_IMAGE_URI),
         "importConfig": import_config_str,
         "batchImportConfig": batch_import_config_str,
-        "envSuffix": env_suffix,
         "validationJobName": validation_job_name,
         "skipValidationJob": to_bool("skipValidationJob", False),
         "gcsMountBucket": gcs_mount_bucket, "gcsImportBucket": gcs_import_bucket,
@@ -686,6 +685,8 @@ def trigger_staging_ingestion(**context) -> dict[str, Any]:
                                         env_suffix="-staging",
                                         import_entry=import_entry)
     if res.get("status") == "SKIPPED":
+        if ti:
+            ti.xcom_push(key="return_value", value=res)
         raise AirflowSkipException(
             f"Staging ingestion skipped: {res.get('message', 'Skipped')}")
 
@@ -728,7 +729,9 @@ def ingest_prod(**context) -> dict[str, Any]:
             "skipProdIngestion is True; skipping production ingestion.")
         return {"status": "SKIPPED", "message": "Production ingestion skipped"}
 
-    if not cfg["skipStagingIngestion"] and not staging_res:
+    if not cfg["skipStagingIngestion"] and (
+            not isinstance(staging_res, dict) or staging_res.get("status")
+            not in ("SUBMITTED", "SUCCESS", "SKIPPED")):
         logging.info(
             "Staging ingestion was not triggered or was skipped; skipping production ingestion."
         )
@@ -792,17 +795,14 @@ def workflow_summary(**context) -> dict[str, Any]:
     }
     logging.info("Workflow summary: %s", json.dumps(summary, indent=2))
 
-    dag_run = context.get("dag_run")
     failed = [
-        t.task_id
-        for t in (dag_run.get_task_instances() if dag_run else [])
-        if t.task_id != "workflow_summary" and t.state in ("failed",
-                                                           "upstream_failed")
-    ]
-    failed += [
         f"{k} ({v.get('status')})" for k, v in results.items()
         if isinstance(v, dict) and v.get("status") in ("FAILURE", "FAILED")
     ]
+    if not failed and ti is not None and (dag_task_ids is None or
+                                          "ingest_prod" in dag_task_ids):
+        if ti.xcom_pull(task_ids="ingest_prod") is None:
+            failed.append("prod (upstream_failed or failed)")
     if failed:
         error_msg = f"Workflow failed in upstream stage(s): {', '.join(dict.fromkeys(failed))}"
         logging.error(error_msg)
@@ -831,8 +831,8 @@ base_dag_params = {
               type="string",
               description="Executor container image"),
     "importConfig":
-        Param(default="{}",
-              type=["string", "object"],
+        Param(default={},
+              type=["null", "string", "object"],
               description="Import configuration JSON"),
     "skipImportJob":
         Param(default=False,
@@ -842,10 +842,6 @@ base_dag_params = {
         Param(default=False,
               type="boolean",
               description="Skip Cloud Run validation job"),
-    "validationJobName":
-        Param(default="",
-              type="string",
-              description="Cloud Run validation job name override"),
     "skipStagingIngestion":
         Param(default=False,
               type="boolean",
@@ -877,7 +873,7 @@ golden_dag_params = {
               description="Skip staging golden verification gate"),
     "goldenTestTriggerId":
         Param(default="",
-              type="string",
+              type=["null", "string"],
               description="Cloud Build trigger ID override"),
     "goldenTestBranch":
         Param(default="master",
@@ -936,7 +932,7 @@ def build_dag(
         **({
             "importConfig":
                 Param(config_override,
-                      type=["string", "object"],
+                      type=["null", "string", "object"],
                       description="Import configuration JSON")
         } if config_override else {}),
         **({

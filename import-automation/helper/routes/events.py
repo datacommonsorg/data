@@ -66,12 +66,15 @@ async def handle_feed_event(
     latest_version = attributes.get(
         'import_version',
         datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-    post_process = attributes.get('post_process', 'spanner_ingestion_workflow')
     graph_path = attributes.get('graph_path', "/**/*.mcf*")
     import_size = attributes.get('import_size', 'small')
     cron_schedule = attributes.get('cron_schedule', '')
     dag_id = attributes.get('dag_id')
 
+    skip_import_job = (
+        attributes.get('skip_import_job').lower() == 'true'
+        if attributes.get('skip_import_job') else True
+    )
     skip_staging_ingestion = (
         attributes.get('skip_staging_ingestion').lower() == 'true'
         if attributes.get('skip_staging_ingestion') else None
@@ -81,7 +84,7 @@ async def handle_feed_event(
         if attributes.get('skip_prod_ingestion') else None
     )
 
-    if post_process == 'spanner_ingestion_workflow':
+    if skip_import_job:
         feed_name = attributes.get('feed_name', 'cda_feed')
         base_version_path = f"gs://{config.GCS_BUCKET_ID}/{import_name.replace(':', '/')}/{latest_version}"
 
@@ -110,50 +113,18 @@ async def handle_feed_event(
         )
         update_import_status(status_req, bigquery=bigquery, storage=storage)
 
-        # Invoke Import Automation workflow to trigger staging and prod ingestion
-        if config.PROJECT_ID and config.LOCATION:
-            import_utils.invoke_import_automation_workflow(
-                project_id=config.PROJECT_ID,
-                location=config.LOCATION,
-                workflow_id=config.IMPORT_AUTOMATION_WORKFLOW_ID,
-                import_name=import_name,
-                latest_version=latest_version,
-                import_size=import_size,
-                graph_path=graph_path,
-                cron_schedule=cron_schedule,
-                skip_import_job=True,
-                skip_staging_ingestion=skip_staging_ingestion,
-                skip_prod_ingestion=skip_prod_ingestion,
-            )
-    elif post_process == 'import_automation_workflow':
-        if config.PROJECT_ID and config.LOCATION:
-            import_utils.invoke_import_automation_workflow(
-                project_id=config.PROJECT_ID,
-                location=config.LOCATION,
-                workflow_id=config.IMPORT_AUTOMATION_WORKFLOW_ID,
-                import_name=import_name,
-                latest_version=latest_version,
-                import_size=import_size,
-                graph_path=graph_path,
-                cron_schedule=cron_schedule,
-                skip_import_job=False,
-                skip_staging_ingestion=skip_staging_ingestion,
-                skip_prod_ingestion=skip_prod_ingestion,
-            )
-    elif post_process == 'import_automation_airflow':
-        # Invoke Cloud Composer Airflow DAG for import automation
-        import_utils.invoke_import_automation_airflow(
-            import_name=import_name,
-            latest_version=latest_version,
-            import_size=import_size,
-            graph_path=graph_path,
-            cron_schedule=cron_schedule,
-            dag_id=dag_id,
-            skip_import_job=False,
-            skip_staging_ingestion=skip_staging_ingestion,
-            skip_prod_ingestion=skip_prod_ingestion,
-        )
-    else:
-        logging.info(f"Skipping import post processing for post_process={post_process}.")
+    # Invoke Cloud Composer Airflow DAG for import automation
+    import_utils.invoke_import_automation_airflow(
+        import_name=import_name,
+        latest_version=latest_version,
+        import_size=import_size,
+        graph_path=graph_path,
+        cron_schedule=cron_schedule,
+        dag_id=dag_id,
+        skip_import_job=skip_import_job,
+        skip_staging_ingestion=skip_staging_ingestion,
+        skip_prod_ingestion=skip_prod_ingestion,
+    )
 
     return BaseResponse(status=ResponseStatus.OK, message="Event processed successfully.")
+
