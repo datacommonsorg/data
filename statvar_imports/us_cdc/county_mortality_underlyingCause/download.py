@@ -767,7 +767,10 @@ def download_county_mortality_data(
         )
 
 
-def main(_):
+def main(argv):
+    if len(argv) > 1:
+        raise app.UsageError("Too many command-line arguments.")
+
     years = parse_year_list(FLAGS.years)
 
     if FLAGS.states.lower() == "all":

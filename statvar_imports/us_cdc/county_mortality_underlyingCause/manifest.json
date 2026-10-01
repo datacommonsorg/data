@@ -15,7 +15,7 @@
                 {
                     "template_mcf": "output/underlyingcauseofdeath_county.tmcf",
                     "cleaned_csv": "output/underlyingcauseofdeath_county.csv",
-                    "node_mcf": "output/*.mcf"
+                    "node_mcf": "output/underlyingcauseofdeath_county_stat_vars.mcf"
                 }
             ],
             "source_files": [
@@ -24,7 +24,13 @@
                 "validation_config.json"
             ],
             "cron_schedule": "0 5 1 * *",
-            "validation_config_file": "validation_config.json"
+            "validation_config_file": "validation_config.json",
+            "user_script_timeout": 14400,
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            }
         }
     ]
 }
