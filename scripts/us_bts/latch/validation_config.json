@@ -8,6 +8,15 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_statvar_max_dates",
+            "description": "Verifies that MaxDate is a valid BTS LATCH survey year (2009 or 2017).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MaxDate FROM stats",
+                "condition": "MaxDate IN ('2009', '2017')"
+            }
         }
     ]
 }
