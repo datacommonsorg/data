@@ -90,26 +90,3 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 age: [20 29 Years]
 nativity: dcid:Native
-
-Node: dcid:Count_Person_Female_ForeignBorn
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-gender: dcid:Female
-nativity: dcid:ForeignBorn
-
-Node: dcid:Count_Person_ForeignBorn
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-nativity: dcid:ForeignBorn
-
-Node: dcid:Count_Person_Native
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-nativity: dcid:Native
-

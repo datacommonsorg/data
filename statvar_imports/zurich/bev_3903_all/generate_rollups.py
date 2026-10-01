@@ -72,15 +72,24 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.copy()
 
+    # Filter out rows with null or whitespace-only geographic/demographic labels
+    # and normalize whitespace before aggregation.
+    label_cols = [
+        'QuarLang', 'KreisLang', 'AlterV10Kurz', 'SexKurz', 'HerkunftLang'
+    ]
+    df = df.dropna(subset=label_cols).copy()
+    for label_col in label_cols:
+        df[label_col] = df[label_col].astype(str).str.strip()
+        df = df[df[label_col] != ''].copy()
+
     # Filter out unknown regions (e.g., code 990/999 or Unbekannt)
     for code_col in ['QuarSort', 'QuarCd', 'KreisCd']:
         if code_col in df.columns:
             df = df[~pd.to_numeric(df[code_col], errors='coerce').
                     isin([990, 999])].copy()
     unknown_labels = {'Unbekannt', 'Kreis Unbekannt', 'Quartier Unbekannt'}
-    df = df[
-        ~df['QuarLang'].astype(str).str.strip().isin(unknown_labels) &
-        ~df['KreisLang'].astype(str).str.strip().isin(unknown_labels)].copy()
+    df = df[~df['QuarLang'].isin(unknown_labels) &
+            ~df['KreisLang'].isin(unknown_labels)].copy()
 
     if df.empty:
         logging.error(
@@ -188,6 +197,9 @@ def generate_rollups(input_csv: str, output_csv: str) -> pd.DataFrame:
     try:
         df = pd.read_csv(input_csv, encoding='utf-8-sig')
     except UnicodeDecodeError:
+        logging.warning(
+            "UTF-8 decoding failed for %s; falling back to iso-8859-1.",
+            input_csv)
         df = pd.read_csv(input_csv, encoding='iso-8859-1')
 
     df_rollups = process_rollups(df)

@@ -128,6 +128,28 @@ class GenerateRollupsTest(unittest.TestCase):
                                (result_df['HerkunftLang'] == '')]
         self.assertEqual(city_total.iloc[0]['AnzBestWir'], 10)
 
+    def test_process_rollups_filters_nan_and_whitespace_labels(self):
+        """Verifies that rows with NaN or whitespace-only geographic/demographic labels are filtered out."""
+        data = pd.DataFrame({
+            'StichtagDatJahr': [2025, 2025, 2025, 2025],
+            'QuarLang': ['  Rathaus  ', None, '   ', 'Hochschulen'],
+            'KreisLang': [' Kreis 1 ', 'Kreis 1', 'Kreis 1', 'Kreis 1'],
+            'AlterV10Kurz': [' 0-9 ', '0-9', '0-9', None],
+            'SexKurz': [' M ', 'M', 'M', 'W'],
+            'HerkunftLang': [
+                ' Schweizer*in ', 'Schweizer*in', 'Schweizer*in', 'Ausländer*in'
+            ],
+            'AnzBestWir': [10, 50, 30, 20]
+        })
+        result_df = process_rollups(data)
+        places = set(result_df['QuarLang'].unique())
+        self.assertSetEqual(places, {'Rathaus', 'Kreis 1', 'Ganze Stadt'})
+        city_total = result_df[(result_df['QuarLang'] == 'Ganze Stadt') &
+                               (result_df['AlterV10Kurz'] == '') &
+                               (result_df['SexKurz'] == '') &
+                               (result_df['HerkunftLang'] == '')]
+        self.assertEqual(city_total.iloc[0]['AnzBestWir'], 10)
+
     def test_process_rollups_empty_dataframe_raises(self):
         """Verifies that an empty DataFrame raises ValueError."""
         with self.assertRaises(ValueError):

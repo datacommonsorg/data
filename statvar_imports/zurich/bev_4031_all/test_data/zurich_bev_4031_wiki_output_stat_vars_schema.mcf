@@ -1,6 +1,0 @@
-Node: dcid:nativity
-typeOf: dcs:Property
-name: "nativity"
-domainIncludes: dcid:BirthEvent
-rangeIncludes: dcid:NativityEnum,dcid:USC_PlaceOfBirthEnum
-

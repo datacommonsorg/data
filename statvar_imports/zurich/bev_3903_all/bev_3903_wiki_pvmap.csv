@@ -1,7 +1,7 @@
-key,prop,val,p1,v1
-StichtagDatJahr,observationDate,{Number},,
-AnzBestWir,value,{Number},populationType,Person
-AlterV10Kurz:0-9,age,[0 9 Years],,
+key,prop,val,p1,v1,p2,v2
+StichtagDatJahr,observationDate,{Number},,,,
+AnzBestWir,value,{Number},populationType,Person,#Eval,"variableMeasured = ('dcid:Count_Person' + ('_' + locals().pop('gender') if 'gender' in locals() else '') + '_' + locals().pop('nativity') if (locals().pop('populationType', None) and True) else '') if ('age' not in locals() and 'nativity' in locals() and (locals().get('nativity') == 'ForeignBorn' or 'gender' not in locals())) else None"
+AlterV10Kurz:0-9,age,[0 9 Years],,,,
 AlterV10Kurz:10-19,age,[10 19 Years],,
 AlterV10Kurz:20-29,age,[20 29 Years],,
 AlterV10Kurz:30-39,age,[30 39 Years],,

@@ -30,7 +30,7 @@
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2025' AND total_svs > 0"
+                "condition": "MaxDate >= '2026' AND total_svs > 0"
             }
         }
     ]

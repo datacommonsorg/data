@@ -12,3 +12,4 @@ output_columns,"observationAbout,observationDate,value,variableMeasured"
 header_rows,1
 #aggregate_duplicate_svobs,sum
 reconcile_nodes,False
+generate_schema_mcf,False
