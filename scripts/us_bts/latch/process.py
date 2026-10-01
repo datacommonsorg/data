@@ -184,7 +184,8 @@ def _process_household_transportation(input_file: str,
                           sep=file_conf["input_file_delimiter"])
 
     basic_cols = file_conf.get("basic_cols", [])
-    raw_pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
+    raw_pop_cols = file_conf.get("pop_cols", []) + file_conf.get(
+        "extra_cols", [])
 
     data_df = data_df[basic_cols + raw_pop_cols]
     data_df = data_df.rename(columns=RENAME_COLUMNS)
