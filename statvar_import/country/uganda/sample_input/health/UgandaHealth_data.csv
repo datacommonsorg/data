@@ -1,0 +1,494 @@
+Region,Variable,Units,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+Uganda,"Number of Health Units, Hospitals",Number,,114,,,,,,,,,,
+Uganda,"Number of Health Units, Health Center",Number,,3123,3123,,3123,4450,,,,,,
+Uganda,Total,Number,,,,,13285,13285,,,5205,,,
+Uganda,Government,Number,,,,,5983,5983,,,2843,,,
+Uganda,PNFP (Private Not Profit),Number,,,,,6822,6822,,,,,,
+Uganda,PHP,Number,,,,,480,,,,,,,
+Uganda,NGO,Number,,,,,,,,,874,,,
+Uganda,Private,Number,,,,,,,,,1488,,,
+Uganda,Out Patient Department Utilisation in Government and PNFP,Number,,,0.9,0.8,0.8,0.9,1,,,,,
+Uganda,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.1,1,1,
+Uganda,Pit Latrine Coverage,Number,,,59,63,68,69,71,,,,,
+Uganda,"Pit Latrine Coverage in households, Percent",%,,,,,,,,68,68,72,74,
+Uganda,Deliveries in Health Facilities,Number,,,32,33,34,33,39,,,,,
+Uganda,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,38,39,44,53,55
+Uganda,Countrywide routine immunization rates for measles,%,87,89,87,77,80,76,,,,,,
+Uganda,Countrywide routine immunization rates for OPV3,%,85,81,84,79,84,82,,,,,,
+Uganda,Countrywide routine immunization rates for DPT3,%,85,80,86,79,84,76,90,,,,,
+Uganda,Countrywide routine immunization rates for BCG,%,94,85,90,86,90,86,,,,,,
+Uganda,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,45,98,98,117
+Uganda,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,46,48,49,49,55
+Uganda,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,30,32,32,38
+Central Uganda,Total,Number,,,,,,,,,2234,,,
+Central Uganda,Government,Number,,,,,,,,,584,,,
+Central Uganda,NGO,Number,,,,,,,,,277,,,
+Central Uganda,Private,Number,,,,,,,,,1373,,,
+Central Uganda,Pit Latrine Coverage,Number,,,,,,,54,,,,,
+Butambala,Total,Number,,,,,,,,,24,,,
+Butambala,Government,Number,,,,,,,,,14,,,
+Butambala,NGO,Number,,,,,,,,,6,,,
+Butambala,Private,Number,,,,,,,,,4,,,
+Butambala,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,1.4,,,,,
+Butambala,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.7,1.6,1.6,1.5
+Butambala,Pit Latrine Coverage,Number,,,,,,,85,,,,,
+Butambala,"Pit Latrine Coverage in households, Percent",%,,,,,,,,61,61,65,67,
+Butambala,Deliveries in Health Facilities,Number,,,,,,,77,,,,,
+Butambala,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,99,77,78,281,75
+Butambala,Countrywide routine immunization rates for measles,%,,,,,,,,,,96,,80
+Butambala,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,105,,96
+Butambala,Countrywide routine immunization rates for DPT3,%,,,,,,,94,,,105,,101
+Butambala,Countrywide routine immunization rates for BCG,%,,,,,,,,,,133,,115
+Butambala,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,61,62,62,100
+Butambala,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,40,48,49,58,67
+Butambala,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,28,29,34,38
+Buikwe,Total,Number,,,,,,,,,33,,,
+Buikwe,Government,Number,,,,,,,,,20,,,
+Buikwe,NGO,Number,,,,,,,,,13,,,
+Buikwe,Private,Number,,,,,,,,,0,,,
+Buikwe,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.1,1,1.1,1
+Buikwe,Pit Latrine Coverage,Number,,,,,,,90,,,,,
+Buikwe,"Pit Latrine Coverage in households, Percent",%,,,,,,,,63,63,63,75,
+Buikwe,Deliveries in Health Facilities,Number,,,,,,,76,,,,,
+Buikwe,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,37,38,39,44,44
+Buikwe,Countrywide routine immunization rates for measles,%,,,,,,,,,,98,,84
+Buikwe,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,100,,93
+Buikwe,Countrywide routine immunization rates for DPT3,%,,,,,,,76,,,98,,95
+Buikwe,Countrywide routine immunization rates for BCG,%,,,,,,,,,,92,,95
+Buikwe,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,69,100,100,127
+Buikwe,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,35,50,51,57,57
+Buikwe,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,30,29,34,32
+Mityana,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Mityana,"Number of Health Units, Health Center",Number,,44,44,,52,55,,,,,,
+Mityana,Total,Number,,,,,200,100,,,53,,,
+Mityana,Government,Number,,,,,100,100,,,32,,,
+Mityana,PHP,Number,,,,,100,,,,,,,
+Mityana,NGO,Number,,,,,,,,,21,,,
+Mityana,Private,Number,,,,,,,,,0,,,
+Mityana,Out Patient Department Utilisation in Government and PNFP,Number,,,1.3,1.2,1.3,1.3,1.4,,,,,
+Mityana,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.3,1.1,1.2,1.1
+Mityana,Pit Latrine Coverage,Number,,,72,85,76,85,58,,,,,
+Mityana,"Pit Latrine Coverage in households, Percent",%,,,,,,,,9,88,88,89,
+Mityana,Deliveries in Health Facilities,Number,,,34,39,40,46,52,,,,,
+Mityana,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,53,57,58,64,68
+Mityana,Countrywide routine immunization rates for measles,%,,56,68,86,87,85,,,,107,,229
+Mityana,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,121,,95
+Mityana,Countrywide routine immunization rates for OPV3,%,,54,84,100,94,90,,,,,,
+Mityana,Countrywide routine immunization rates for DPT3,%,,58,77,97,88,92,102,,,119,,105
+Mityana,Countrywide routine immunization rates for BCG,%,,51,91,100,102,98,,,,129,,107
+Mityana,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,56,57,57,96
+Mityana,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,43,53,54,57,62
+Mityana,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,35,36,40,43
+Sembabule,"Number of Health Units, Hospitals",Number,,0,,,,,,,,,,
+Sembabule,"Number of Health Units, Health Center",Number,,24,21,,23,23,,,,,,
+Sembabule,Total,Number,,,,,,,,,24,,,
+Sembabule,Government,Number,,,,,,,,,20,,,
+Sembabule,NGO,Number,,,,,,,,,3,,,
+Sembabule,Private,Number,,,,,,,,,1,,,
+Sembabule,Out Patient Department Utilisation in Government and PNFP,Number,,,1.2,0.7,0.7,0.9,0.8,,,,,
+Sembabule,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.8,0.5,0.7,0.7
+Sembabule,Pit Latrine Coverage,Number,,,52,55,57,60,87,,,,,
+Sembabule,"Pit Latrine Coverage in households, Percent",%,,,,,,,,65,65,70,71,
+Sembabule,Deliveries in Health Facilities,Number,,,16,16,15,15,14,,,,,
+Sembabule,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,55,18,19,16,19
+Sembabule,Countrywide routine immunization rates for measles,%,77,71,84,67,54,56,,,,80,,103
+Sembabule,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,85,,112
+Sembabule,Countrywide routine immunization rates for OPV3,%,77,73,84,67,51,50,,,,,,
+Sembabule,Countrywide routine immunization rates for DPT3,%,74,76,84,67,58,80,107,,,85,,111
+Sembabule,Countrywide routine immunization rates for BCG,%,97,97,91,74,60,62,,,,85,,88
+Sembabule,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,24,25,40,229
+Sembabule,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,79,41,42,40,36
+Sembabule,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,26,27,22,18
+Luweero,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Luweero,"Number of Health Units, Health Center",Number,,54,57,,67,77,,,,,,
+Luweero,Total,Number,,,,,500,250,,,39,,,
+Luweero,Government,Number,,,,,250,250,,,14,,,
+Luweero,PNFP (Private Not Profit),Number,,,,,250,,,,,,,
+Luweero,NGO,Number,,,,,,,,,22,,,
+Luweero,Private,Number,,,,,,,,,3,,,
+Luweero,Out Patient Department Utilisation in Government and PNFP,Number,,,0.8,0.8,0.7,0.7,0.6,,,,,
+Luweero,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.4,1.2,1.3,1.1
+Luweero,Pit Latrine Coverage,Number,,,55,73,78,78,84,,,,,
+Luweero,"Pit Latrine Coverage in households, Percent",%,,,,,,,,78,90,76,78,
+Luweero,Deliveries in Health Facilities,Number,,,31,31,25,21,39,,,,,
+Luweero,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,31,47,62,55,60
+Luweero,Countrywide routine immunization rates for measles,%,66,56,72,49,40,41,,,,122,,97
+Luweero,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,144,,104
+Luweero,Countrywide routine immunization rates for OPV3,%,66,55,66,48,36,36,,,,,,
+Luweero,Countrywide routine immunization rates for DPT3,%,66,54,68,45,44,53,74,,,131,,111
+Luweero,Countrywide routine immunization rates for BCG,%,68,61,65,50,39,45,,,,118,,97
+Luweero,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,50,51,51,86
+Luweero,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,38,54,55,62,64
+Luweero,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,78,79,41,46
+Gomba,Total,Number,,,,,,,,,19,,,
+Gomba,Government,Number,,,,,,,,,17,,,
+Gomba,NGO,Number,,,,,,,,,2,,,
+Gomba,Private,Number,,,,,,,,,0,,,
+Gomba,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,0.8,,,,,
+Gomba,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.1,0.9,0.9,0.9
+Gomba,Pit Latrine Coverage,Number,,,,,,,57,,,,,
+Gomba,"Pit Latrine Coverage in households, Percent",%,,,,,,,,53,53,63,55,
+Gomba,Deliveries in Health Facilities,Number,,,,,,,14,,,,,
+Gomba,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,14,22,23,26,34
+Gomba,Countrywide routine immunization rates for measles,%,,,,,,,,,,86,,94
+Gomba,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,100,,113
+Gomba,Countrywide routine immunization rates for DPT3,%,,,,,,,89,,,100,,118
+Gomba,Countrywide routine immunization rates for BCG,%,,,,,,,,,,90,,84
+Gomba,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,23,24,24,162
+Gomba,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,25,42,43,47,52
+Gomba,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,19,20,22,34
+Rakai,"Number of Health Units, Hospitals",Number,,2,,,,,,,,,,
+Rakai,"Number of Health Units, Health Center",Number,,85,65,,92,105,,,,,,
+Rakai,Total,Number,,,,,608,304,,,99,,,
+Rakai,Government,Number,,,,,304,304,,,69,,,
+Rakai,PHP,Number,,,,,304,,,,,,,
+Rakai,NGO,Number,,,,,,,,,24,,,
+Rakai,Private,Number,,,,,,,,,6,,,
+Rakai,Out Patient Department Utilisation in Government and PNFP,Number,,,1.2,0.8,1,1,1.1,,,,,
+Rakai,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.7,1.6,1.5,1.5
+Rakai,Pit Latrine Coverage,Number,,,76,83,84,84,62,,,,,
+Rakai,"Pit Latrine Coverage in households, Percent",%,,,,,,,,76,84,86,86,
+Rakai,Deliveries in Health Facilities,Number,,,25,27,28,29,31,,,,,
+Rakai,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,15,47,48,47,54
+Rakai,Countrywide routine immunization rates for measles,%,75,97,81,62,72,71,,,,80,,91
+Rakai,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,96,,98
+Rakai,Countrywide routine immunization rates for OPV3,%,83,56,76,67,76,75,,,,,,
+Rakai,Countrywide routine immunization rates for DPT3,%,85,56,77,69,79,65,102,,,108,,96
+Rakai,Countrywide routine immunization rates for BCG,%,94,68,84,75,82,83,,,,98,,91
+Rakai,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,47,48,48,147
+Rakai,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,20,64,65,58,59
+Rakai,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,43,44,43,44
+Bukomansimbi,Total,Number,,,,,,,,,13,,,
+Bukomansimbi,Government,Number,,,,,,,,,7,,,
+Bukomansimbi,NGO,Number,,,,,,,,,6,,,
+Bukomansimbi,Private,Number,,,,,,,,,0,,,
+Bukomansimbi,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,0.6,,,,,
+Bukomansimbi,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.7,0.7,0.8,0.8
+Bukomansimbi,"Pit Latrine Coverage in households, Percent",%,,,,,,,,89,89,80,92,
+Bukomansimbi,Deliveries in Health Facilities,Number,,,,,,,17,,,,,
+Bukomansimbi,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,18,15,19,22,28
+Bukomansimbi,Countrywide routine immunization rates for measles,%,,,,,,,,,,131,,63
+Bukomansimbi,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,113,,67
+Bukomansimbi,Countrywide routine immunization rates for DPT3,%,,,,,,,115,,,129,,68
+Bukomansimbi,Countrywide routine immunization rates for BCG,%,,,,,,,,,,101,,67
+Bukomansimbi,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,28,100,100,205
+Bukomansimbi,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,28,30,34,38,37
+Bukomansimbi,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,19,23,21,23
+Nakaseke,"Number of Health Units, Hospitals",Number,,2,,,,,,,,,,
+Nakaseke,"Number of Health Units, Health Center",Number,,18,19,,9,22,,,,,,
+Nakaseke,Total,Number,,,,,,,,,24,,,
+Nakaseke,Government,Number,,,,,,,,,18,,,
+Nakaseke,NGO,Number,,,,,,,,,6,,,
+Nakaseke,Private,Number,,,,,,,,,0,,,
+Nakaseke,Out Patient Department Utilisation in Government and PNFP,Number,,,1.2,1.1,1,1.1,1,,,,,
+Nakaseke,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.4,1.2,1.3,1.3
+Nakaseke,Pit Latrine Coverage,Number,,,67,74,80,83,73,,,,,
+Nakaseke,"Pit Latrine Coverage in households, Percent",%,,,,,,,,76,80,83,84,
+Nakaseke,Deliveries in Health Facilities,Number,,,51,51,48,49,65,,,,,
+Nakaseke,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,47,58,59,63,79
+Nakaseke,Countrywide routine immunization rates for measles,%,,75,64,50,59,56,,,,78,,266
+Nakaseke,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,83,,91
+Nakaseke,Countrywide routine immunization rates for OPV3,%,,66,63,47,53,56,,,,,,
+Nakaseke,Countrywide routine immunization rates for DPT3,%,,70,62,48,69,57,71,,,81,,93
+Nakaseke,Countrywide routine immunization rates for BCG,%,,90,87,75,73,72,,,,109,,118
+Nakaseke,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,38,67,67,72
+Nakaseke,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,39,52,54,57,69
+Nakaseke,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,28,33,32,35
+Lyantonde,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Lyantonde,"Number of Health Units, Health Center",Number,,9,9,,19,28,,,,,,
+Lyantonde,Total,Number,,,,,200,100,,,28,,,
+Lyantonde,Government,Number,,,,,100,100,,,19,,,
+Lyantonde,PNFP (Private Not Profit),Number,,,,,100,,,,,,,
+Lyantonde,NGO,Number,,,,,,,,,2,,,
+Lyantonde,Private,Number,,,,,,,,,7,,,
+Lyantonde,Out Patient Department Utilisation in Government and PNFP,Number,,,1.6,2.1,2.2,2.4,2.8,,,,,
+Lyantonde,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,2.4,2.7,2.3,2.2
+Lyantonde,Pit Latrine Coverage,Number,,,71,80,80,85,74,,,,,
+Lyantonde,"Pit Latrine Coverage in households, Percent",%,,,,,,,,74,85,86,80,
+Lyantonde,Deliveries in Health Facilities,Number,,,39,53,71,65,71,,,,,
+Lyantonde,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,74,60,61,75,80
+Lyantonde,Countrywide routine immunization rates for measles,%,,,108,100,94,95,,,,96,,85
+Lyantonde,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,108,,120
+Lyantonde,Countrywide routine immunization rates for OPV3,%,,,96,94,93,90,,,,,,
+Lyantonde,Countrywide routine immunization rates for DPT3,%,,,96,97,401,78,93,,,107,,98
+Lyantonde,Countrywide routine immunization rates for BCG,%,,,121,124,127,121,,,,126,,118
+Lyantonde,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,47,48,48,122
+Lyantonde,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,124,64,65,78,69
+Lyantonde,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,47,48,61,49
+Mubende,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Mubende,"Number of Health Units, Health Center",Number,,45,51,,56,56,,,,,,
+Mubende,Total,Number,,,,,200,100,,,71,,,
+Mubende,Government,Number,,,,,100,100,,,59,,,
+Mubende,PHP,Number,,,,,100,,,,,,,
+Mubende,NGO,Number,,,,,,,,,12,,,
+Mubende,Private,Number,,,,,,,,,0,,,
+Mubende,Out Patient Department Utilisation in Government and PNFP,Number,,,0.5,0.4,0.5,0.5,0.8,,,,,
+Mubende,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1,0.8,0.8,0.7
+Mubende,Pit Latrine Coverage,Number,,,67,74,76,76,89,,,,,
+Mubende,"Pit Latrine Coverage in households, Percent",%,,,,,,,,82,81,82,82,
+Mubende,Deliveries in Health Facilities,Number,,,15,21,16,13,25,,,,,
+Mubende,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,30,31,37,40,39
+Mubende,Countrywide routine immunization rates for measles,%,61,62,75,63,70,65,,,,82,,101
+Mubende,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,89,,110
+Mubende,Countrywide routine immunization rates for OPV3,%,72,63,86,69,82,85,,,,,,
+Mubende,Countrywide routine immunization rates for DPT3,%,72,68,79,63,71,50,76,,,96,,114
+Mubende,Countrywide routine immunization rates for BCG,%,70,68,86,75,81,83,,,,89,,124
+Mubende,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,43,100,100,113
+Mubende,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,53,57,59,61,56
+Mubende,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,29,31,30,31
+Kiboga,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Kiboga,"Number of Health Units, Health Center",Number,,38,37,,40,40,,,,,,
+Kiboga,Total,Number,,,,,244,122,,,40,,,
+Kiboga,Government,Number,,,,,122,122,,,19,,,
+Kiboga,PNFP (Private Not Profit),Number,,,,,122,,,,,,,
+Kiboga,NGO,Number,,,,,,,,,3,,,
+Kiboga,Private,Number,,,,,,,,,18,,,
+Kiboga,Out Patient Department Utilisation in Government and PNFP,Number,,,0.1,0.6,0.7,0.8,0.1,,,,,
+Kiboga,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.1,1,1.2,1.4
+Kiboga,Pit Latrine Coverage,Number,,,58,58,61,64,64,,,,,
+Kiboga,"Pit Latrine Coverage in households, Percent",%,,,,,,,,76,70,70,51,
+Kiboga,Deliveries in Health Facilities,Number,,,28,24,30,32,60,,,,,
+Kiboga,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,72,56,57,76,82
+Kiboga,Countrywide routine immunization rates for measles,%,55,68,81,67,75,74,,,,114,,81
+Kiboga,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,139,,101
+Kiboga,Countrywide routine immunization rates for OPV3,%,63,79,94,76,88,80,,,,,,
+Kiboga,Countrywide routine immunization rates for DPT3,%,63,80,95,78,85,77,104,,,140,,102
+Kiboga,Countrywide routine immunization rates for BCG,%,75,91,97,86,101,95,,,,148,,109
+Kiboga,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,46,47,47,107
+Kiboga,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,83,66,67,74,84
+Kiboga,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,43,44,41,48
+Lwengo,Total,Number,,,,,,,,,38,,,
+Lwengo,Government,Number,,,,,,,,,16,,,
+Lwengo,NGO,Number,,,,,,,,,22,,,
+Lwengo,Private,Number,,,,,,,,,0,,,
+Lwengo,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,0.6,,,,,
+Lwengo,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.7,0.8,0.9,0.9
+Lwengo,Pit Latrine Coverage,Number,,,,,,,93,,,,,
+Lwengo,"Pit Latrine Coverage in households, Percent",%,,,,,,,,85,78,96,76,
+Lwengo,Deliveries in Health Facilities,Number,,,,,,,14,,,,,
+Lwengo,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,15,16,22,25,31
+Lwengo,Countrywide routine immunization rates for measles,%,,,,,,,,,,161,,344
+Lwengo,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,157,,90
+Lwengo,Countrywide routine immunization rates for DPT3,%,,,,,,,58,,,172,,99
+Lwengo,Countrywide routine immunization rates for BCG,%,,,,,,,,,,132,,92
+Lwengo,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,34,100,100,133
+Lwengo,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,,40,46,45,48
+Lwengo,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,23,30,31,31
+Buvuma,Total,Number,,,,,,,,,11,,,
+Buvuma,Government,Number,,,,,,,,,9,,,
+Buvuma,NGO,Number,,,,,,,,,2,,,
+Buvuma,Private,Number,,,,,,,,,0,,,
+Buvuma,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,0.8,,,,,
+Buvuma,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.2,1,0.6,0.6
+Buvuma,Pit Latrine Coverage,Number,,,,,,,85,,,,,
+Buvuma,"Pit Latrine Coverage in households, Percent",%,,,,,,,,22,22,29,36,
+Buvuma,Deliveries in Health Facilities,Number,,,,,,,14,,,,,
+Buvuma,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,16,22,23,15,18
+Buvuma,Countrywide routine immunization rates for measles,%,,,,,,,,,,51,,83
+Buvuma,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,63,,91
+Buvuma,Countrywide routine immunization rates for DPT3,%,,,,,,,139,,,57,,93
+Buvuma,Countrywide routine immunization rates for BCG,%,,,,,,,,,,55,,75
+Buvuma,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,107,108,8,257
+Buvuma,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,28,47,48,33,22
+Buvuma,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,16,17,8,9
+Wakiso,"Number of Health Units, Hospitals",Number,,4,,,,,,,,,,
+Wakiso,"Number of Health Units, Health Center",Number,,94,95,,99,104,,,,,,
+Wakiso,Total,Number,,,,,1014,507,,,103,,,
+Wakiso,Government,Number,,,,,146,146,,,63,,,
+Wakiso,PNFP (Private Not Profit),Number,,,,,361,361,,,,,,
+Wakiso,PHP,Number,,,,,507,,,,,,,
+Wakiso,NGO,Number,,,,,,,,,40,,,
+Wakiso,Private,Number,,,,,,,,,0,,,
+Wakiso,Out Patient Department Utilisation in Government and PNFP,Number,,,1,0.9,0.8,0.7,0.7,,,,,
+Wakiso,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.7,0.8,0.6,0.5
+Wakiso,Pit Latrine Coverage,Number,,,72,73,81,84,54,,,,,
+Wakiso,"Pit Latrine Coverage in households, Percent",%,,,,,,,,89,89,89,90,
+Wakiso,Deliveries in Health Facilities,Number,,,34,35,28,26,31,,,,,
+Wakiso,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,31,30,31,27,30
+Wakiso,Countrywide routine immunization rates for measles,%,103,103,114,95,85,82,,,,100,,88
+Wakiso,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,93,,84
+Wakiso,Countrywide routine immunization rates for OPV3,%,91,93,102,88,81,80,,,,,,
+Wakiso,Countrywide routine immunization rates for DPT3,%,93,93,104,86,75,85,93,,,94,,87
+Wakiso,Countrywide routine immunization rates for BCG,%,81,80,88,80,71,74,,,,85,,68
+Wakiso,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,42,100,100,133
+Wakiso,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,31,33,39,29,33
+Wakiso,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,20,23,16,21
+Mpigi,"Number of Health Units, Hospitals",Number,,2,,,,,,,,,,
+Mpigi,"Number of Health Units, Health Center",Number,,59,59,,64,64,,,,,,
+Mpigi,Total,Number,,,,,800,400,,,33,,,
+Mpigi,Government,Number,,,,,100,100,,,20,,,
+Mpigi,PNFP (Private Not Profit),Number,,,,,300,300,,,,,,
+Mpigi,PHP,Number,,,,,400,,,,,,,
+Mpigi,NGO,Number,,,,,,,,,13,,,
+Mpigi,Private,Number,,,,,,,,,0,,,
+Mpigi,Out Patient Department Utilisation in Government and PNFP,Number,,,0.7,0.9,0.9,1,1.2,,,,,
+Mpigi,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.2,1.3,1.1,0.9
+Mpigi,Pit Latrine Coverage,Number,,,52,55,58,59,77,,,,,
+Mpigi,"Pit Latrine Coverage in households, Percent",%,,,,,,,,81,59,65,65,
+Mpigi,Deliveries in Health Facilities,Number,,,30,40,42,41,53,,,,,
+Mpigi,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,63,68,69,64,72
+Mpigi,Countrywide routine immunization rates for measles,%,88,81,50,90,105,98,,,,114,,159
+Mpigi,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,119,,116
+Mpigi,Countrywide routine immunization rates for OPV3,%,94,93,56,103,117,110,,,,,,
+Mpigi,Countrywide routine immunization rates for DPT3,%,95,96,56,104,112,95,113,,,119,,119
+Mpigi,Countrywide routine immunization rates for BCG,%,95,85,44,90,103,96,,,,122,,107
+Mpigi,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,66,67,67,74
+Mpigi,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,68,74,75,64,71
+Mpigi,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,53,54,44,45
+Kampala,"Number of Health Units, Hospitals",Number,,12,,,,,,,,,,
+Kampala,"Number of Health Units, Health Center",Number,,264,200,,200,250,,,,,,
+Kampala,Total,Number,,,,,2153,2153,,,1392,,,
+Kampala,Government,Number,,,,,810,810,,,20,,,
+Kampala,PNFP (Private Not Profit),Number,,,,,1063,1348,,,,,,
+Kampala,PHP,Number,,,,,280,,,,,,,
+Kampala,NGO,Number,,,,,,,,,40,,,
+Kampala,Private,Number,,,,,,,,,1332,,,
+Kampala,Out Patient Department Utilisation in Government and PNFP,Number,,,0.7,1.1,1,1.2,1.1,,,,,
+Kampala,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,,1.1,2.5,1.6
+Kampala,Pit Latrine Coverage,Number,,,94,94,94,94,61,,,,,
+Kampala,"Pit Latrine Coverage in households, Percent",%,,,,,,,,86,,,99,
+Kampala,Deliveries in Health Facilities,Number,,,73,94,101,111,94,,,,,
+Kampala,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,68,,89,119,119
+Kampala,Countrywide routine immunization rates for measles,%,100,109,135,134,149,135,,,,201,,130
+Kampala,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,175,,131
+Kampala,Countrywide routine immunization rates for OPV3,%,96,85,110,125,130,112,,,,,,
+Kampala,Countrywide routine immunization rates for DPT3,%,95,84,110,123,122,100,136,,,174,,135
+Kampala,Countrywide routine immunization rates for BCG,%,128,103,127,145,155,151,,,,235,,162
+Kampala,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,,100,100,104
+Kampala,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,28,,39,50,50
+Kampala,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,,47,66,65
+Nakasongola,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Nakasongola,"Number of Health Units, Health Center",Number,,30,28,,30,33,,,,,,
+Nakasongola,Total,Number,,,,,,,,,33,,,
+Nakasongola,Government,Number,,,,,,,,,29,,,
+Nakasongola,NGO,Number,,,,,,,,,4,,,
+Nakasongola,Private,Number,,,,,,,,,0,,,
+Nakasongola,Out Patient Department Utilisation in Government and PNFP,Number,,,1.2,1.1,1.2,1.3,1.4,,,,,
+Nakasongola,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,2,1.7,1.6,1.4
+Nakasongola,Pit Latrine Coverage,Number,,,70,71,73,73,97,,,,,
+Nakasongola,"Pit Latrine Coverage in households, Percent",%,,,,,,,,65,76,89,87,
+Nakasongola,Deliveries in Health Facilities,Number,,,33,30,31,31,38,,,,,
+Nakasongola,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,33,40,41,43,44
+Nakasongola,Countrywide routine immunization rates for measles,%,93,140,76,73,62,63,,,,69,,67
+Nakasongola,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,72,,81
+Nakasongola,Countrywide routine immunization rates for OPV3,%,99,77,84,80,70,70,,,,,,
+Nakasongola,Countrywide routine immunization rates for DPT3,%,103,82,88,84,115,71,86,,,77,,88
+Nakasongola,Countrywide routine immunization rates for BCG,%,101,84,79,85,78,76,,,,82,,74
+Nakasongola,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,41,42,42,143
+Nakasongola,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,45,62,63,59,52
+Nakasongola,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,44,45,44,39
+Kyankwanzi,Total,Number,,,,,,,,,21,,,
+Kyankwanzi,Government,Number,,,,,,,,,14,,,
+Kyankwanzi,NGO,Number,,,,,,,,,5,,,
+Kyankwanzi,Private,Number,,,,,,,,,2,,,
+Kyankwanzi,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,0.7,,,,,
+Kyankwanzi,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.8,0.7,0.6,0.6
+Kyankwanzi,"Pit Latrine Coverage in households, Percent",%,,,,,,,,90,64,63,55,
+Kyankwanzi,Deliveries in Health Facilities,Number,,,,,,,17,,,,,
+Kyankwanzi,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,19,17,18,23,22
+Kyankwanzi,Countrywide routine immunization rates for measles,%,,,,,,,,,,70,,85
+Kyankwanzi,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,88,,101
+Kyankwanzi,Countrywide routine immunization rates for DPT3,%,,,,,,,132,,,87,,103
+Kyankwanzi,Countrywide routine immunization rates for BCG,%,,,,,,,,,,86,,89
+Kyankwanzi,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,33,34,34,152
+Kyankwanzi,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,39,54,55,53,52
+Kyankwanzi,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,21,22,23,25
+Kayunga,"Number of Health Units, Hospitals",Number,,1,,,,,,,,,,
+Kayunga,"Number of Health Units, Health Center",Number,,22,21,,23,54,,,,,,
+Kayunga,Total,Number,,,,,100,100,,,24,,,
+Kayunga,Government,Number,,,,,100,100,,,20,,,
+Kayunga,NGO,Number,,,,,,,,,4,,,
+Kayunga,Private,Number,,,,,,,,,0,,,
+Kayunga,Out Patient Department Utilisation in Government and PNFP,Number,,,0.8,0.7,0.7,0.9,0.8,,,,,
+Kayunga,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.9,0.8,1,0.8
+Kayunga,Pit Latrine Coverage,Number,,,59,59,75,75,70,,,,,
+Kayunga,"Pit Latrine Coverage in households, Percent",%,,,,,,,,68,62,70,71,
+Kayunga,Deliveries in Health Facilities,Number,,,26,31,29,36,37,,,,,
+Kayunga,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,36,36,37,46,54
+Kayunga,Countrywide routine immunization rates for measles,%,81,80,79,72,77,71,,,,117,,219
+Kayunga,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,108,,103
+Kayunga,Countrywide routine immunization rates for OPV3,%,81,82,83,82,84,75,,,,,,
+Kayunga,Countrywide routine immunization rates for DPT3,%,82,83,85,84,82,78,94,,,108,,120
+Kayunga,Countrywide routine immunization rates for BCG,%,112,101,96,76,80,78,,,,132,,127
+Kayunga,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,38,39,39,109
+Kayunga,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,7,54,55,60,51
+Kayunga,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,31,32,42,32
+Masaka,"Number of Health Units, Hospitals",Number,,3,,,,,,,,,,
+Masaka,"Number of Health Units, Health Center",Number,,77,80,,80,77,,,,,,
+Masaka,Total,Number,,,,,340,340,,,32,,,
+Masaka,Government,Number,,,,,,,,,26,,,
+Masaka,PNFP (Private Not Profit),Number,,,,,340,340,,,,,,
+Masaka,NGO,Number,,,,,,,,,6,,,
+Masaka,Private,Number,,,,,,,,,0,,,
+Masaka,Out Patient Department Utilisation in Government and PNFP,Number,,,0.9,0.7,0.8,0.8,0.3,,,,,
+Masaka,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.5,1.4,2,1.5
+Masaka,Pit Latrine Coverage,Number,,,86,95,95,95,87,,,,,
+Masaka,"Pit Latrine Coverage in households, Percent",%,,,,,,,,66,85,77,84,
+Masaka,Deliveries in Health Facilities,Number,,,27,17,31,27,57,,,,,
+Masaka,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,76,90,91,88,88
+Masaka,Countrywide routine immunization rates for measles,%,76,126,85,66,89,87,,,,100,,119
+Masaka,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,107,,99
+Masaka,Countrywide routine immunization rates for OPV3,%,79,123,82,66,91,90,,,,,,
+Masaka,Countrywide routine immunization rates for DPT3,%,74,122,83,67,80,89,97,,,111,,104
+Masaka,Countrywide routine immunization rates for BCG,%,90,141,89,73,103,95,,,,138,,113
+Masaka,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,83,84,84,226
+Masaka,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,33,44,45,46,44
+Masaka,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,37,38,34,35
+Kalungu,Total,Number,,,,,,,,,24,,,
+Kalungu,Government,Number,,,,,,,,,13,,,
+Kalungu,NGO,Number,,,,,,,,,11,,,
+Kalungu,Private,Number,,,,,,,,,0,,,
+Kalungu,Out Patient Department Utilisation in Government and PNFP,Number,,,,,,,0.9,,,,,
+Kalungu,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.1,1,1.1,1
+Kalungu,Pit Latrine Coverage,Number,,,,,,,86,,,,,
+Kalungu,"Pit Latrine Coverage in households, Percent",%,,,,,,,,86,86,88,91,
+Kalungu,Deliveries in Health Facilities,Number,,,,,,,18,,,,,
+Kalungu,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,14,49,50,50,53
+Kalungu,Countrywide routine immunization rates for measles,%,,,,,,,,,,73,,63
+Kalungu,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,79,,70
+Kalungu,Countrywide routine immunization rates for DPT3,%,,,,,,,102,,,81,,71
+Kalungu,Countrywide routine immunization rates for BCG,%,,,,,,,,,,97,,77
+Kalungu,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,72,73,73,102
+Kalungu,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,20,50,51,50,55
+Kalungu,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,37,38,45,37
+Mukono,"Number of Health Units, Hospitals",Number,,5,,,,,,,,,,
+Mukono,"Number of Health Units, Health Center",Number,,69,69,,77,77,,,,,,
+Mukono,Total,Number,,,,,682,682,,,45,,,
+Mukono,Government,Number,,,,,100,100,,,36,,,
+Mukono,PNFP (Private Not Profit),Number,,,,,582,582,,,,,,
+Mukono,NGO,Number,,,,,,,,,9,,,
+Mukono,Private,Number,,,,,,,,,0,,,
+Mukono,Out Patient Department Utilisation in Government and PNFP,Number,,,0.7,0.6,0.7,0.9,0.8,,,,,
+Mukono,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,0.9,0.7,0.9,0.7
+Mukono,Pit Latrine Coverage,Number,,,86,81,73,85,80,,,,,
+Mukono,"Pit Latrine Coverage in households, Percent",%,,,,,,,,9,82,83,81,
+Mukono,Deliveries in Health Facilities,Number,,,40,41,37,38,45,,,,,
+Mukono,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,0,40,41,47,48
+Mukono,Countrywide routine immunization rates for measles,%,103,95,102,74,66,63,,,,116,,135
+Mukono,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,109,,90
+Mukono,Countrywide routine immunization rates for OPV3,%,104,88,89,75,71,74,,,,,,
+Mukono,Countrywide routine immunization rates for DPT3,%,105,89,89,75,64,65,94,,,108,,92
+Mukono,Countrywide routine immunization rates for BCG,%,116,98,101,85,78,76,,,,122,,90
+Mukono,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,43,44,44,124
+Mukono,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,,51,52,56,42
+Mukono,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,24,25,30,31
+Kalangala,"Number of Health Units, Hospitals",Number,,0,,,,,,,,,,
+Kalangala,"Number of Health Units, Health Center",Number,,11,11,,11,13,,,,,,
+Kalangala,Total,Number,,,,,,,,,11,,,
+Kalangala,Government,Number,,,,,,,,,10,,,
+Kalangala,NGO,Number,,,,,,,,,1,,,
+Kalangala,Private,Number,,,,,,,,,0,,,
+Kalangala,Out Patient Department Utilisation in Government and PNFP,Number,,,1,0.9,1,0.9,1.2,,,,,
+Kalangala,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",%,,,,,,,,,1.9,1.3,1.9,1.9
+Kalangala,Pit Latrine Coverage,Number,,,54,51,52,56,87,,,,,
+Kalangala,"Pit Latrine Coverage in households, Percent",%,,,,,,,,59,59,65,69,
+Kalangala,Deliveries in Health Facilities,Number,,,10,10,10,12,18,,,,,
+Kalangala,"Deliveries in Government and PNFP health facilities, percent",%,,,,,,,,15,18,19,26,34
+Kalangala,Countrywide routine immunization rates for measles,%,78,71,86,74,72,70,,,,92,,118
+Kalangala,Countrywide routine immunization rates for Polio3,%,,,,,,,,,,104,,125
+Kalangala,Countrywide routine immunization rates for OPV3,%,85,85,97,79,75,78,,,,,,
+Kalangala,Countrywide routine immunization rates for DPT3,%,85,86,105,79,67,175,134,,,97,,127
+Kalangala,Countrywide routine immunization rates for BCG,%,76,125,82,70,63,62,,,,74,,89
+Kalangala,HIV Testing in Children born to HIV Positive Women,%,,,,,,,,,136,137,137,176
+Kalangala,Pregnant women receiving 2nd dose of Fansidar for IPT,%,,,,,,,,28,40,41,36,55
+Kalangala,Pregnant who receive 4 antenatal care visits,%,,,,,,,,,40,41,28,34
