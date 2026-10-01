@@ -184,16 +184,13 @@ def _process_household_transportation(input_file: str,
                           sep=file_conf["input_file_delimiter"])
 
     basic_cols = file_conf.get("basic_cols", [])
-    # Creating Population Columns
-    pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
+    raw_pop_cols = file_conf.get("pop_cols", []) + file_conf.get(
+        "extra_cols", [])
 
-    data_df = data_df[basic_cols + pop_cols]
+    data_df = data_df[basic_cols + raw_pop_cols]
     data_df = data_df.rename(columns=RENAME_COLUMNS)
 
-    columns_info = [basic_cols, pop_cols]
-    for column_var in columns_info:
-        for idx, column in enumerate(column_var):
-            column_var[idx] = RENAME_COLUMNS.get(column, column)
+    pop_cols = [RENAME_COLUMNS.get(col, col) for col in raw_pop_cols]
 
     data_df = _apply_filters(data_df, file_conf)
 
