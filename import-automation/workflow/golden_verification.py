@@ -30,10 +30,8 @@ import sys
 import time
 from typing import Any
 
-from airflow.decorators import task
+from airflow.sdk import BaseSensorOperator, Variable, task
 from airflow.exceptions import AirflowFailException
-from airflow.models import Variable
-from airflow.sensors.base import BaseSensorOperator
 from airflow.utils.trigger_rule import TriggerRule
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -59,7 +57,7 @@ def get_golden_test_imports() -> set[str]:
     """Retrieves allowlist from Airflow Variable, OS env, or defaults."""
     fallback = os.environ.get("GOLDEN_TEST_IMPORTS", "")
     try:
-        raw = Variable.get("GOLDEN_TEST_IMPORTS", default_var=fallback)
+        raw = Variable.get("GOLDEN_TEST_IMPORTS", default=fallback)
     except Exception:
         raw = fallback
 
@@ -106,7 +104,7 @@ def get_diff_bucket(custom_bucket: str = "") -> str:
         return custom_bucket
     fallback = os.environ.get("GOLDEN_DIFF_BUCKET", DEFAULT_DIFF_BUCKET)
     try:
-        return Variable.get("GOLDEN_DIFF_BUCKET", default_var=fallback)
+        return Variable.get("GOLDEN_DIFF_BUCKET", default=fallback)
     except Exception:
         return fallback
 
@@ -370,6 +368,8 @@ def verify_golden_tests(**context) -> dict[str, Any]:
                 duration, build_id, has_diff, pr_url, log_url)
             return {
                 "status": "SUCCESS",
+                "jobId": cfg["jobId"],
+                "importName": import_name,
                 "buildId": build_id,
                 "logUrl": log_url,
                 "executionTime": duration,
@@ -380,7 +380,10 @@ def verify_golden_tests(**context) -> dict[str, Any]:
             }
 
         # Failure: Report failure to import-helper and raise exception to block prod
-        exec_dt = context.get("logical_date") or context.get("execution_date")
+        exec_dt = (context.get("logical_date") or
+                   getattr(dag_run, "logical_date", None) or
+                   getattr(dag_run, "run_after", None) or
+                   getattr(dag_run, "start_date", None))
         exec_time = int(time.time() -
                         (exec_dt.timestamp() if exec_dt else start_time))
         helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
@@ -394,7 +397,10 @@ def verify_golden_tests(**context) -> dict[str, Any]:
     except AirflowFailException:
         raise
     except Exception as e:
-        exec_dt = context.get("logical_date") or context.get("execution_date")
+        exec_dt = (context.get("logical_date") or
+                   getattr(dag_run, "logical_date", None) or
+                   getattr(dag_run, "run_after", None) or
+                   getattr(dag_run, "start_date", None))
         exec_time = int(time.time() -
                         (exec_dt.timestamp() if exec_dt else start_time))
         helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
@@ -415,15 +421,15 @@ class HumanApprovalSensor(BaseSensorOperator):
     - Golden test verification detected diffs (hasDiff is True).
 
     Approval options:
+    - Click 'Mark as -> Success' on this task in the Airflow UI.
     - Set Airflow Variable `PROD_APPROVE_<job_id>` = 'true'
     - Set Airflow Variable `PROD_APPROVE_<import_name>` = 'true'
     - Set Airflow Variable `PROD_APPROVE_ALL` = 'true'
-    - Click 'Mark Success' on this task in the Airflow UI.
 
     Rejection options:
+    - Click 'Mark as -> Failed' on this task in the Airflow UI.
     - Set Airflow Variable `PROD_REJECT_<job_id>` = 'true'
     - Set Airflow Variable `PROD_REJECT_<import_name>` = 'true'
-    - Click 'Mark Failed' on this task in the Airflow UI.
     """
 
     template_fields = ("job_id", "import_name")
@@ -449,59 +455,54 @@ class HumanApprovalSensor(BaseSensorOperator):
         )
         self.job_id = job_id
         self.import_name = import_name
+        self._golden_res: dict[str, Any] = {}
 
     def poke(self, context: dict[str, Any]) -> bool:
         dag_run = context.get("dag_run")
         conf = dag_run.conf if dag_run and dag_run.conf else {}
         params = context.get("params") or {}
 
-        def _p(key: str, default: Any = None) -> Any:
-            if key in conf and conf[key] is not None:
-                return conf[key]
-            return params.get(key, default)
+        ti = context.get("ti")
+        golden_res = (ti.xcom_pull(
+            task_ids="verify_golden_tests") if ti else None) or {}
+        self._golden_res = golden_res if isinstance(golden_res, dict) else {}
 
-        if bool(_p("autoApproveGoldenDiff", False)):
+        auto_approve = conf.get(
+            "autoApproveGoldenDiff",
+            params.get("autoApproveGoldenDiff", False),
+        )
+        if bool(auto_approve):
             logging.info(
                 "autoApproveGoldenDiff parameter is True; auto-approving prod promotion."
             )
             return True
 
-        ti = context.get("ti")
-        golden_res = ti.xcom_pull(
-            task_ids="verify_golden_tests") if ti else None
-
         # Auto-approve if golden check was skipped, not run, or had no diffs
-        if not golden_res or golden_res.get(
-                "status") != "SUCCESS" or not golden_res.get("hasDiff"):
+        if (self._golden_res.get("status") != "SUCCESS" or
+                not self._golden_res.get("hasDiff")):
             logging.info(
                 "HumanApprovalSensor: No golden diffs detected (or gate skipped). Auto-approving prod promotion."
             )
             return True
 
-        from import_automation_workflow import resolve_workflow_context
-        try:
-            cfg = resolve_workflow_context(context)
-        except Exception:
-            cfg = {}
-        job_id = self.job_id or cfg.get("jobId", "")
-        import_name = self.import_name or cfg.get("importName", "")
+        job_id = self.job_id or self._golden_res.get("jobId", "")
+        import_name = (self.import_name or
+                       self._golden_res.get("importName", "") or
+                       conf.get("importName") or params.get("importName", ""))
         short_import = import_name.split(":")[-1] if import_name else ""
 
-        pr_url = golden_res.get("prUrl", "")
-        log_url = golden_res.get("logUrl", "")
-        build_id = golden_res.get("buildId", "")
+        pr_url = self._golden_res.get("prUrl", "")
+        log_url = self._golden_res.get("logUrl", "")
+        build_id = self._golden_res.get("buildId", "")
 
-        # Check for rejection signals first
-        reject_keys = [
-            f"PROD_REJECT_{job_id}",
-            f"PROD_REJECT_{import_name}",
-            f"PROD_REJECT_{short_import}",
-        ]
-        for rk in reject_keys:
-            if not rk.strip():
-                continue
+        targets = list(
+            dict.fromkeys(t for t in (job_id, import_name, short_import) if t))
+
+        # Check for rejection signals first (deduplicated keys)
+        for target in targets:
+            rk = f"PROD_REJECT_{target}"
             try:
-                r_val = Variable.get(rk, default_var="")
+                r_val = Variable.get(rk, default="")
                 if isinstance(
                         r_val,
                         str) and r_val.strip().lower() in ("true", "1", "yes"):
@@ -513,18 +514,13 @@ class HumanApprovalSensor(BaseSensorOperator):
             except Exception:
                 pass
 
-        # Check for approval signals
+        # Check for approval signals (deduplicated keys)
         approve_keys = [
-            f"PROD_APPROVE_{job_id}",
-            f"PROD_APPROVE_{import_name}",
-            f"PROD_APPROVE_{short_import}",
-            "PROD_APPROVE_ALL",
+            *(f"PROD_APPROVE_{t}" for t in targets), "PROD_APPROVE_ALL"
         ]
         for ak in approve_keys:
-            if not ak.strip():
-                continue
             try:
-                a_val = Variable.get(ak, default_var="")
+                a_val = Variable.get(ak, default="")
                 if isinstance(
                         a_val,
                         str) and a_val.strip().lower() in ("true", "1", "yes"):
@@ -548,20 +544,24 @@ class HumanApprovalSensor(BaseSensorOperator):
             "  Build Log: %s\n"
             "--------------------------------------------------------------------------------\n"
             "  To APPROVE prod promotion:\n"
-            "    1. In Airflow UI, select task 'await_human_approval' and click 'Mark Success', OR\n"
+            "    1. In Airflow UI, select task 'await_human_approval' and click 'Mark as -> Success', OR\n"
             "    2. Set Airflow Variable 'PROD_APPROVE_%s' = 'true'\n"
             "\n"
             "  To REJECT prod promotion:\n"
-            "    1. In Airflow UI, select task 'await_human_approval' and click 'Mark Failed', OR\n"
+            "    1. In Airflow UI, select task 'await_human_approval' and click 'Mark as -> Failed', OR\n"
             "    2. Set Airflow Variable 'PROD_REJECT_%s' = 'true'\n"
             "================================================================================\n",
-            import_name, job_id, build_id, pr_url, log_url, job_id, job_id)
+            import_name, job_id, build_id, pr_url, log_url, job_id or
+            short_import, job_id or short_import)
         return False
 
     def execute(self, context: dict[str, Any]) -> dict[str, Any]:
         super().execute(context)
-        ti = context.get("ti")
-        golden_res = ti.xcom_pull(task_ids="verify_golden_tests") if ti else {}
+        golden_res = self._golden_res
+        if not golden_res:
+            ti = context.get("ti")
+            golden_res = (ti.xcom_pull(
+                task_ids="verify_golden_tests") if ti else None) or {}
         return {
             "status": "APPROVED",
             "hasDiff": bool(golden_res.get("hasDiff", False)),
