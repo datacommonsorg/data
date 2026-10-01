@@ -1,0 +1,19 @@
+Node: dcid:DistressedAreaRecompetePilotProgram
+typeOf: dcid:InvestmentProgramEnum
+name: "Distressed Area Recompete Pilot Program"
+isProvisional: dcs:True
+
+Node: dcid:RegionalTechnologyAndInnovationHubs
+typeOf: dcid:InvestmentProgramEnum
+name: "Regional Technology And Innovation Hubs"
+isProvisional: dcs:True
+
+Node: dcid:STEMTalentChallenge
+typeOf: dcid:InvestmentProgramEnum
+name: "STEM Talent Challenge"
+isProvisional: dcs:True
+
+Node: dcid:ScienceAndResearchParkDevelopmentGrants
+typeOf: dcid:InvestmentProgramEnum
+name: "Science And Research Park Development Grants"
+isProvisional: dcs:True

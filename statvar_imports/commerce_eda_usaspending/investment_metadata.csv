@@ -1,0 +1,11 @@
+parameter,value
+url,https://www.usaspending.gov/
+description,EDA Investments by Applicant State and Program (sourced from USASpending.gov)
+release_frequency,Weekly
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
+header_rows,1
+reconcile_nodes,False
+spell_allow_words,recompete
+
