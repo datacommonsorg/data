@@ -2,11 +2,34 @@
     "schema_version": "1.0",
     "rules": [
         {
+            "rule_id": "check_all_statvars_freshness",
+            "description": "Verify all active StatVars meet the freshness boundary (>= 2024).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2024' AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Ensure all StatVars share a uniform MaxDate across the dataset.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+            "description": "Checks that deleted records do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Checks that MCF lint error count does not exceed 0.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
             }
         }
     ]
