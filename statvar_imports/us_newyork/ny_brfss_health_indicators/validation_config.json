@@ -10,6 +10,14 @@
       }
     },
     {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensure zero lint errors in genmcf output",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
       "rule_id": "check_max_date_freshness",
       "description": "Verify MaxDate is within allowable publication lag for recurring health indicators",
       "validator": "SQL_VALIDATOR",

@@ -60,6 +60,9 @@ def create_session() -> requests.Session:
         'Accept':
             'application/json, text/csv, */*',
     })
+    app_token = os.environ.get('SOCRATA_APP_TOKEN')
+    if app_token:
+        session.headers['X-App-Token'] = app_token
     return session
 
 
