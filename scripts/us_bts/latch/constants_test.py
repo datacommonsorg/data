@@ -109,8 +109,7 @@ class TestConstants(unittest.TestCase):
         self.assertEqual(constants._MEASURED_PROP("vmiles"),
                          "vehicleMilesTraveled")
         self.assertEqual(constants._MEASURED_PROP("vtrp"), "vehicleTrips")
-        self.assertEqual(constants._MEASURED_PROP("custom_prop"),
-                         "custom_prop")
+        self.assertEqual(constants._MEASURED_PROP("custom_prop"), "custom_prop")
 
         null_inputs = [None, float("nan"), np.nan, pd.NA, "nan", ""]
         for val in null_inputs:
@@ -145,8 +144,7 @@ class TestConstants(unittest.TestCase):
         for val in null_inputs:
             with self.subTest(val=val):
                 self.assertEqual(
-                    constants._PV_FORMAT_NUMBERS(("numberOfVehicles", val)),
-                    "")
+                    constants._PV_FORMAT_NUMBERS(("numberOfVehicles", val)), "")
 
     def test_sv_node_format(self):
         """Verifies SV_NODE_FORMAT prefixes with Node: dcid:."""
