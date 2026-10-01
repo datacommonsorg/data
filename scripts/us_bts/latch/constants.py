@@ -54,11 +54,9 @@ def _is_null_or_none(val):
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long
 _PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' if not _is_null_or_none(
-    prop_val[1]) and 'none' not in str(prop_val[1]).lower() and 'nan' not in str(
-        prop_val[1]).lower() else ""
+    prop_val[1]) else ""
 _PV_FORMAT_NUMBERS = lambda prop_val: f'"{prop_val[0]}": "{prop_val[1]}"' if not _is_null_or_none(
-    prop_val[1]) and 'none' not in str(prop_val[1]).lower() and 'nan' not in str(
-        prop_val[1]).lower() else ""
+    prop_val[1]) else ""
 SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
 
 _MEASURED_PROP = lambda prop: MEASUREDPROP_MAPPER.get(
