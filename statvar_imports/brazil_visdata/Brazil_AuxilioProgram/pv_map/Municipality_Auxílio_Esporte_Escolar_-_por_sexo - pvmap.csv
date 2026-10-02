@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+Referência,observationDate,{Data},,,benefitProgram,Brazil_AuxilioSchoolSportsAidProgram,populationType,Student,observationPeriod,P1M
+Código,observationAbout,{Data},,,,,,,,
+Atletas - Masculino,value,{Number},gender,Male,name,"""Number of male students who are beneficiaries of the Brazil School Sports Aid Program""",alternateName,"""Número de alunos do sexo masculino beneficiários do Programa Brasil de Auxílio Esporte Escolar@pt""",,
+Atletas - Feminino,value,{Number},gender,Female,name,"""Number of female students supported by the Brazil Auxilio School Sports Aid Program""",alternateName,"""Número de alunas apoiadas pelo Programa de Auxílio Esportivo Escolar Brasil Auxilio@pt""",,
+Total de Atletas - Masculino e Feminino,value,{Number},,,name,"""Number of Students beneficiaries of the Auxílio Brasil School Sports Aid Program""",alternateName,"""Número de Alunos Beneficiários do Programa Auxílio Esporte Escolar Auxílio Brasil@pt""",,
