@@ -214,6 +214,7 @@
       "Civilian veteran": "Civilian"
     },
     "abilityToSpeakEnglish": {
+      "Speak English less than \"very well\"": "SpeakEnglishLessThanVeryWell",
       "Speak English less than very well\"\"": "SpeakEnglishLessThanVeryWell"
     },
     "benefitsStatus": {
@@ -261,7 +262,9 @@
   "universePVs": [
     {
       "populationType": "Person",
-      "obs_props": { "mprop": "earnings"},
+      "obs_props": {
+        "mprop": "earnings"
+      },
       "dependentPVs": {
         "incomeStatus": "WithEarnings"
       }
@@ -459,7 +462,87 @@
     "Institutionalized group quarters population!!Margin of Error!!With earnings!!Median earnings (dollars)!!Female",
     "Noninstitutionalized group quarters population!!Margin of Error!!Median age (years)",
     "Noninstitutionalized group quarters population!!Margin of Error!!With earnings!!Median earnings (dollars)!!Female",
-    "Margin of Error!!Total group quarters population MOE!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars)!!Male"
+    "Margin of Error!!Total group quarters population MOE!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars)!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female"
   ],
   "denominators": {
     "Estimate!!Total population!!Total population": [
@@ -675,10 +758,13 @@
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over": [
@@ -716,6 +802,56 @@
       "Margin of Error!!Total population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
     ],
     "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
       "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Margin of Error!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Estimate!!Total population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
@@ -938,10 +1074,13 @@
       "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over": [
@@ -979,6 +1118,56 @@
       "Margin of Error!!Total group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
     ],
     "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
       "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Margin of Error!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Estimate!!Total group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
@@ -1201,10 +1390,13 @@
       "Margin of Error!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Estimate!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Institutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Institutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Institutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Institutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Institutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Institutionalized group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over": [
@@ -1242,6 +1434,56 @@
       "Margin of Error!!Institutionalized group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
     ],
     "Estimate!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Institutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
       "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Margin of Error!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Estimate!!Institutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
@@ -1464,10 +1706,13 @@
       "Margin of Error!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Estimate!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Estimate!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Noninstitutionalized group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Noninstitutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Noninstitutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Margin of Error!!Noninstitutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Noninstitutionalized group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Noninstitutionalized group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over": [
@@ -1505,6 +1750,56 @@
       "Margin of Error!!Noninstitutionalized group quarters population MOE!!OCCUPATION!!Civilian employed population 16 years and over!!Production, transportation, and material moving occupations"
     ],
     "Estimate!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 to 64 years",
+      "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over",
+      "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!65 years and over"
+    ],
+    "Estimate!!Noninstitutionalized group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals": [
       "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Margin of Error!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people",
       "Estimate!!Noninstitutionalized group quarters population!!POVERTY RATES FOR PEOPLE FOR WHOM POVERTY STATUS IS DETERMINED!!All people!!18 years and over",
@@ -1785,7 +2080,9 @@
       "Total population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Total population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Total population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Total population!!Estimate!!Speak English less than \"very well\"",
       "Total population!!Estimate!!Speak English less than very well\"\"",
+      "Total population!!Margin of Error!!Speak English less than \"very well\"",
       "Total population!!Margin of Error!!Speak English less than very well\"\"",
       "Total population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
       "Total population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
@@ -2037,7 +2334,9 @@
       "Total group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Total group quarters population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Total group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Total group quarters population!!Estimate!!Speak English less than \"very well\"",
       "Total group quarters population!!Estimate!!Speak English less than very well\"\"",
+      "Total group quarters population!!Margin of Error!!Speak English less than \"very well\"",
       "Total group quarters population!!Margin of Error!!Speak English less than very well\"\"",
       "Total group quarters population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
       "Total group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
@@ -2288,7 +2587,9 @@
       "Institutionalized group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Institutionalized group quarters population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Institutionalized group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Institutionalized group quarters population!!Estimate!!Speak English less than \"very well\"",
       "Institutionalized group quarters population!!Estimate!!Speak English less than very well\"\"",
+      "Institutionalized group quarters population!!Margin of Error!!Speak English less than \"very well\"",
       "Institutionalized group quarters population!!Margin of Error!!Speak English less than very well\"\"",
       "Institutionalized group quarters population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
       "Institutionalized group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
@@ -2540,7 +2841,9 @@
       "Noninstitutionalized group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Noninstitutionalized group quarters population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Noninstitutionalized group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
+      "Noninstitutionalized group quarters population!!Estimate!!Speak English less than \"very well\"",
       "Noninstitutionalized group quarters population!!Estimate!!Speak English less than very well\"\"",
+      "Noninstitutionalized group quarters population!!Margin of Error!!Speak English less than \"very well\"",
       "Noninstitutionalized group quarters population!!Margin of Error!!Speak English less than very well\"\"",
       "Noninstitutionalized group quarters population!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
       "Noninstitutionalized group quarters population!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!English only",
@@ -3146,6 +3449,11 @@
     "PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY",
     "SEX AND AGE",
     "RACE AND HISPANIC ORIGIN OR LATINO ORIGIN",
-    "VETERAN STATUS"
+    "VETERAN STATUS",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)"
   ]
 }
