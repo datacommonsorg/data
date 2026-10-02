@@ -42,44 +42,56 @@ from config_map import ConfigMap
 from counters import Counters
 from mcf_file_util import get_numeric_value
 
-flags.DEFINE_string('filter_data_input', '',
-                    'input CSV file with statvar observations')
-flags.DEFINE_string('filter_data_output', '', 'output CSV file')
-flags.DEFINE_float('filter_data_max_change_ratio', None,
-                   'Maximum change alowed between successive values.')
-flags.DEFINE_float('filter_data_max_yearly_change_ratio', None,
-                   'Maximum change alowed between successive years.')
-flags.DEFINE_float('filter_data_min_value', None, 'Minumum value allowed')
-flags.DEFINE_float('filter_data_max_value', None, 'Maximum value allowed')
-flags.DEFINE_list('data_series_value_properties', ['value'],
-                  'Properties with the value to be checked')
-flags.DEFINE_list(
-    'data_series_date_properties', ['observationDate'],
-    'Properties that can be used to sort values within a series such as date')
-flags.DEFINE_bool('filter_data_keep_recent', True,
-                  'Keep the most recent value for a time series.')
+_DEFAULT_FILTER_CONFIG = {
+    'filter_data_keep_recent': True,
+    'filter_data_max_change_ratio': None,
+    'filter_data_max_yearly_change_ratio': None,
+    'filter_data_min_value': None,
+    'filter_data_max_value': None,
+    'data_series_value_properties': ['value'],
+    'data_series_date_properties': ['observationDate'],
+}
 
-_FLAGS = flags.FLAGS
+
+def _define_flags():
+    flags.DEFINE_string('filter_data_input', '',
+                        'input CSV file with statvar observations')
+    flags.DEFINE_string('filter_data_output', '', 'output CSV file')
+    flags.DEFINE_float('filter_data_max_change_ratio',
+                       _DEFAULT_FILTER_CONFIG['filter_data_max_change_ratio'],
+                       'Maximum change allowed between successive values.')
+    flags.DEFINE_float(
+        'filter_data_max_yearly_change_ratio',
+        _DEFAULT_FILTER_CONFIG['filter_data_max_yearly_change_ratio'],
+        'Maximum change allowed between successive years.')
+    flags.DEFINE_float('filter_data_min_value',
+                       _DEFAULT_FILTER_CONFIG['filter_data_min_value'],
+                       'Minimum value allowed')
+    flags.DEFINE_float('filter_data_max_value',
+                       _DEFAULT_FILTER_CONFIG['filter_data_max_value'],
+                       'Maximum value allowed')
+    flags.DEFINE_list('data_series_value_properties',
+                      _DEFAULT_FILTER_CONFIG['data_series_value_properties'],
+                      'Properties with the value to be checked')
+    flags.DEFINE_list(
+        'data_series_date_properties',
+        _DEFAULT_FILTER_CONFIG['data_series_date_properties'],
+        'Properties that can be used to sort values within a series such as date'
+    )
+    flags.DEFINE_bool('filter_data_keep_recent',
+                      _DEFAULT_FILTER_CONFIG['filter_data_keep_recent'],
+                      'Keep the most recent value for a time series.')
 
 
 def get_default_filter_data_config() -> dict:
     '''Returns the default filter config settings form flags as dict.'''
-    return {
-        'filter_data_keep_recent':
-            _FLAGS.filter_data_keep_recent,
-        'filter_data_max_change_ratio':
-            _FLAGS.filter_data_max_change_ratio,
-        'filter_data_max_yearly_change_ratio':
-            _FLAGS.filter_data_max_yearly_change_ratio,
-        'filter_data_min_value':
-            _FLAGS.filter_data_min_value,
-        'filter_data_max_value':
-            _FLAGS.filter_data_max_value,
-        'data_series_value_properties':
-            _FLAGS.data_series_value_properties,
-        'data_series_date_properties':
-            _FLAGS.data_series_date_properties,
-    }
+    configs = _DEFAULT_FILTER_CONFIG.copy()
+    # Use default values of flags if defined and parsed
+    if flags.FLAGS.is_parsed():
+        for flag_name in configs:
+            if hasattr(flags.FLAGS, flag_name):
+                configs[flag_name] = getattr(flags.FLAGS, flag_name)
+    return configs
 
 
 def filter_data_get_series_key(pvs: dict,
@@ -326,8 +338,10 @@ def _get_years_difference(dt1: datetime, dt2: datetime) -> float:
 
 def main(_):
     logging.set_verbosity(1)
-    filter_data_files(_FLAGS.filter_data_input, _FLAGS.filter_data_output)
+    filter_data_files(flags.FLAGS.filter_data_input,
+                      flags.FLAGS.filter_data_output)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
