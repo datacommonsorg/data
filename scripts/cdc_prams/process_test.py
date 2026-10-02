@@ -12,87 +12,73 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat BMI process script.
+Script to automate testing for CDC PRAMS Excel processing pipeline.
 """
-
+import io
 import os
-import unittest
 import sys
 import tempfile
-# module_dir is the path to where this test is running from.
-MODULE_DIR = os.path.dirname(__file__)
+import unittest
+import pandas as pd
+
+MODULE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, MODULE_DIR)
-# pylint: disable=wrong-import-position
-from process import USPrams
-# pylint: enable=wrong-import-position
+
+from process import USPrams, _parse_float, _validate_sheet_headers
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
-
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
 
 
 class TestProcess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
+    Unit test class verifying that the Excel processing pipeline produces
+    exact CSV, MCF, and TMCF files matching the expected test fixtures.
     """
-    test_data_files = [
-        'Alabama-PRAMS-MCH-Indicators-508.pdf',
-        'Connecticut-PRAMS-MCH-Indicators-508.pdf',
-        'Hawaii-PRAMS-MCH-Indicators-508.pdf'
-        'Maine-PRAMS-MCH-Indicators-508.pdf',
-        'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
-        'Montana-PRAMS-MCH-Indicators-508.pdf',
-        'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
-        'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
-        'Wyoming-PRAMS-MCH-Indicators-508.pdf'
-    ]
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
-    ip_data = os.listdir(TEST_DATASET_DIR)
-    ip_data = [os.path.join(TEST_DATASET_DIR, file) for file in ip_data]
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
+    @classmethod
+    def setUpClass(cls):
+        test_data_files = ['PRAMS-MCH-Indicators-Test.xlsx']
+        ip_data = [
+            os.path.join(TEST_DATASET_DIR, file_name)
+            for file_name in test_data_files
+        ]
+        cls.tmp_dir = tempfile.TemporaryDirectory()
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
-            MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
-            TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
+        base = USPrams(ip_data, output_location=cls.tmp_dir.name)
+        base.process()
 
-            base = USPrams(self.ip_data, CLEANED_CSV_FILE_PATH, MCF_FILE_PATH,
-                           TMCF_FILE_PATH)
-            base.process()
+        csv_path = os.path.join(cls.tmp_dir.name, "PRAMS.csv")
+        mcf_path = os.path.join(cls.tmp_dir.name, "PRAMS.mcf")
+        tmcf_path = os.path.join(cls.tmp_dir.name, "PRAMS.tmcf")
 
-            with open(MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+        with open(mcf_path, encoding="utf-8") as mcf_file:
+            cls.actual_mcf_data = mcf_file.read()
 
-            with open(TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+        with open(tmcf_path, encoding="utf-8") as tmcf_file:
+            cls.actual_tmcf_data = tmcf_file.read()
 
-            with open(CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+        with open(csv_path, encoding="utf-8-sig") as csv_file:
+            cls.actual_csv_data = csv_file.read()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp_dir.cleanup()
 
     def test_mcf_tmcf_files(self):
         """
-        This method is required to test between output generated
-        preprocess script and excepted output files like MCF File
+        Tests whether generated MCF and TMCF match expected files.
         """
         expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.mcf")
-
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.tmcf")
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                               "PRAMS.tmcf")
 
         with open(expected_mcf_file_path,
-                  encoding="UTF-8") as expected_mcf_file:
+                  encoding="utf-8") as expected_mcf_file:
             expected_mcf_data = expected_mcf_file.read()
 
         with open(expected_tmcf_file_path,
-                  encoding="UTF-8") as expected_tmcf_file:
+                  encoding="utf-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
         self.assertEqual(expected_mcf_data.strip(),
@@ -102,15 +88,73 @@ class TestProcess(unittest.TestCase):
 
     def test_create_csv(self):
         """
-        This method is required to test between output generated
-        preprocess script and excepted output files like CSV
+        Tests whether generated CSV matches expected file.
         """
         expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.csv")
 
-        expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
                          self.actual_csv_data.strip())
+
+    def test_scaling_factor_on_ci_bounds(self):
+        """
+        Verifies that confidence interval lower and upper limits have ScalingFactor=100.
+        """
+        df = pd.read_csv(io.StringIO(self.actual_csv_data))
+        ci_lower = df[df['SV'].str.contains('ConfidenceIntervalLowerLimit')]
+        ci_upper = df[df['SV'].str.contains('ConfidenceIntervalUpperLimit')]
+        self.assertFalse(ci_lower.empty)
+        self.assertFalse(ci_upper.empty)
+        self.assertTrue((ci_lower['ScalingFactor'] == 100.0).all())
+        self.assertTrue((ci_upper['ScalingFactor'] == 100.0).all())
+
+    def test_year_range_extended_to_2022(self):
+        """
+        Verifies that observation years extend through 2022 without regression.
+        """
+        df = pd.read_csv(io.StringIO(self.actual_csv_data))
+        years = set(df['Year'].unique())
+        expected_years = {2016, 2017, 2018, 2019, 2020, 2021, 2022}
+        self.assertEqual(years, expected_years)
+
+    def test_discrete_sample_sizes_no_decimals(self):
+        """
+        Verifies that sample count values are integers and do not contain decimal parts.
+        """
+        df = pd.read_csv(io.StringIO(self.actual_csv_data), dtype=str)
+        ss_df = df[df['SV'].str.startswith('SampleSize_Count')]
+        self.assertFalse(ss_df.empty)
+        for val in ss_df['Observation']:
+            self.assertTrue(val.isdigit(),
+                            f"Sample size '{val}' contains non-digit chars")
+
+    def test_parse_float_with_commas_and_formats(self):
+        """
+        Verifies that numbers with commas, whitespace, or missing markers parse cleanly.
+        """
+        self.assertEqual(_parse_float("1,200"), 1200.0)
+        self.assertEqual(_parse_float(" 3,456.78 "), 3456.78)
+        self.assertEqual(_parse_float(1234), 1234.0)
+        self.assertIsNone(_parse_float("na"))
+        self.assertIsNone(_parse_float("-"))
+        self.assertIsNone(_parse_float(""))
+        self.assertIsNone(_parse_float(None))
+
+    def test_header_validation_detects_layout_change(self):
+        """
+        Verifies that unexpected sheet headers raise ValueError.
+        """
+        import openpyxl
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = "2020"
+        ws.cell(5, 2, value="Invalid Column")
+        with self.assertRaises(ValueError):
+            _validate_sheet_headers(ws, "2020")
+
+
+if __name__ == '__main__':
+    unittest.main()
