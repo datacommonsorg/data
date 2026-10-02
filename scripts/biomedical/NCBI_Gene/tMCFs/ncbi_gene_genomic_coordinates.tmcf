@@ -1,0 +1,16 @@
+Node: E:ncbi_gene_genomic_coordinates->E1
+typeOf: dcs:GenomicCoordinates
+dcid: C:ncbi_gene_genomic_coordintes->dcid
+name: C:ncbi_gene_genomic_coordintes->name
+chrom: C:ncbi_gene_genomic_coordintes->chromosome
+chromEnd: C:ncbi_gene_genomic_coordintes->end_position
+chromStart: C:ncbi_gene_genomic_coordintes->start_position
+inGenomeAssembly: C:ncbi_gene_genomic_coordintes->assembly
+strandOrientation: C:ncbi_gene_genomic_coordintes->orientation
+
+Node: E:ncbi_gene_genomic_coordinates->E2
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_genomic_coordintes->GeneID
+hasGenomicCoordinates: E:ncbi_gene_genomic_coordinates->E1
+ncbiSequenceGiNumber: C:ncbi_gene_genomic_coordintes->genomic_gi
+refSeqGenomicAccession: C:ncbi_gene_genomic_coordintes->genomic_accession.version
