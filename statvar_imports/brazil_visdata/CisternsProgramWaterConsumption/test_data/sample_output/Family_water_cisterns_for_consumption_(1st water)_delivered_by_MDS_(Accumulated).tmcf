@@ -1,0 +1,8 @@
+Node: E:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->E0
+observationAbout: C:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->observationAbout
+observationDate: C:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->observationDate
+value: C:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->value
+variableMeasured: C:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->variableMeasured
+unit: C:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->unit
+scalingFactor: C:Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)->scalingFactor
+typeOf: dcs:StatVarObservation
