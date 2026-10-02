@@ -1,0 +1,1031 @@
+{
+    "2021": {
+        "Estimate!!Median gross rent --!!Total:": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2020": {
+        "Estimate!!Median gross rent --!!Total:": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2019": {
+        "Estimate!!Median gross rent --!!Total:": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total:!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total:!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2018": {
+        "Estimate!!Median gross rent --!!Total": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2017": {
+        "Estimate!!Median gross rent --!!Total": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent --!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent --!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2016": {
+        "Estimate!!Median gross rent!!Total": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2015": {
+        "Estimate!!Median gross rent!!Total": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!No Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[0 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!1 Bedrooms": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[1 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!2 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[2 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!3 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[3 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!4 Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[4 Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median gross rent!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Median gross rent!!Total!!5 or more Bedroomss": {
+            "Node": "dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:HousingUnit",
+            "unit": "USDollar",
+            "measurementQualifier": "dcs:Monthly",
+            "numberOfBedrooms": "[5 - Bedrooms]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Median_GrossRent_HousingUnit",
+            "measuredProperty": "dcs:grossRent",
+            "statType": "dcs:medianValue",
+            "populationType": "schema:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}
