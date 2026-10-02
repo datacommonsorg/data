@@ -1,0 +1,26 @@
+
+
+Node: dcid:Count_Person_Other_EducationalAttainmentDoctorateDegree
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+doctorateDegreeMajor: dcid:Other
+educationalAttainment: dcid:DoctorateDegree
+
+Node: dcid:Count_Person_Professional_EducationalAttainmentDoctorateDegree
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+doctorateDegreeMajor: dcid:Professional
+educationalAttainment: dcid:DoctorateDegree
+
+Node: dcid:Count_Person_Research_EducationalAttainmentDoctorateDegree
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+doctorateDegreeMajor: dcid:Research
+educationalAttainment: dcid:DoctorateDegree
+
