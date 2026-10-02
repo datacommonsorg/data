@@ -1,0 +1,42 @@
+[
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=36421",
+        "filename": "college_admissions_2023"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=36028",
+        "filename": "college_admissions_2022"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=32477",
+        "filename": "college_admissions_2021"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=30453",
+        "filename": "college_admissions_2020"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=36153",
+        "filename": "college_admissions_2019"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=25420",
+        "filename": "college_admissions_2018"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=25042",
+        "filename": "college_admissions_2017"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=25063",
+        "filename": "college_admissions_2016"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=25117",
+        "filename": "college_admissions_2015"
+    },
+    {
+        "url": "https://nces.ed.gov/ipeds/search/downloadtablelibrarytable?tableId=12533",
+        "filename": "college_admissions_2014"
+    }
+]
