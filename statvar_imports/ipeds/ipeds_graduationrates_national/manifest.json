@@ -1,0 +1,30 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "IPEDS_GraduationRates_National",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://nces.ed.gov/ipeds/search",
+      "provenance_description": "IPEDS Graduation Rates for the USA",
+      "scripts": [
+        "run.sh"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/graduation_rates_ipeds_output.tmcf",
+          "cleaned_csv": "output_files/graduation_rates_ipeds_output.csv"
+        }
+      ],
+      "source_files": ["input_files/*.csv"],
+      "cron_schedule": "0 0 15 8 *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100},
+      "config_override": {
+         "invoke_import_validation": true,
+         "invoke_import_tool": true,
+         "invoke_differ_tool": true,
+         "skip_input_upload": false,
+         "skip_gcs_upload": false,
+         "cleanup_gcs_volume_mount": false
+        }
+      }
+    ]
+}
