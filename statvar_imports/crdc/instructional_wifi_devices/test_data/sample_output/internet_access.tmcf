@@ -1,6 +1,0 @@
-Node: E:internet_access->E0
-observationAbout: C:internet_access->observationAbout
-observationDate: C:internet_access->observationDate
-variableMeasured: C:internet_access->variableMeasured
-value: C:internet_access->value
-typeOf: dcs:StatVarObservation
