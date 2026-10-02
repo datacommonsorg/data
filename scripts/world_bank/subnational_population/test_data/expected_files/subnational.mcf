@@ -1,0 +1,8 @@
+# Auto generated using command: "/usr/local/google/home/chharish/subnational_import/data/scripts/world_bank/subnational_population/process.py" on 2023-02-16 11:04:03.870809
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
