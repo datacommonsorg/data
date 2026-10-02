@@ -1,0 +1,294 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Hermetic unit tests for commerce_ntia preprocess module."""
+
+import os
+import sys
+import tempfile
+import unittest
+from unittest import mock
+import pandas as pd
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_DIR)
+import preprocess
+
+
+class PreprocessTest(unittest.TestCase):
+
+    def test_move_column_left_success(self):
+        """Tests that move_column_left places column immediately left of target."""
+        df = pd.DataFrame({'a': [1], 'b': [2], 'c': [3], 'd': [4]})
+        result = preprocess.move_column_left(df, 'd', 'b')
+        self.assertEqual(list(result.columns), ['a', 'd', 'b', 'c'])
+
+    def test_move_column_left_missing_cols(self):
+        """Tests that move_column_left returns original df if columns are not present."""
+        df = pd.DataFrame({'a': [1], 'b': [2]})
+        result = preprocess.move_column_left(df, 'missing', 'b')
+        self.assertEqual(list(result.columns), ['a', 'b'])
+
+    def test_move_column_left_same_column(self):
+        """Tests that move_column_left safely handles column_to_move equal to target_column."""
+        df = pd.DataFrame({'a': [1], 'b': [2], 'c': [3]})
+        result = preprocess.move_column_left(df, 'b', 'b')
+        self.assertEqual(list(result.columns), ['a', 'b', 'c'])
+
+    def test_preprocess_data(self):
+        """Tests data preprocessing and splitting into age-only and general survey CSVs."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_file = os.path.join(tmp_dir, 'ntia-analyze-table.csv')
+            output_age = os.path.join(tmp_dir, 'ntia-data-age-only.csv')
+            output_data = os.path.join(tmp_dir, 'ntia-data.csv')
+
+            raw_data = {
+                'dataset': [
+                    'Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023', 'Nov 2023'
+                ],
+                'variable': [
+                    'Streaming', 'Email', 'Broadband', 'isPerson', 'isAdult'
+                ],
+                'description': [
+                    'Desc 1', 'Desc 2', 'Desc 3', 'Desc 4', 'Desc 5'
+                ],
+                'universe': [
+                    'isPerson', 'isAdult', 'isHousehold', 'isHousehold',
+                    'isHousehold'
+                ],
+                'age314Count': [10, 20, 30, 40, 50],
+                'age314Prop': [0.1, 0.2, 0.3, 0.4, 0.5],
+                'age1524Count': [11, 21, 31, 41, 51],
+                'age2544Count': [12, 22, 32, 42, 52],
+                'age4564Count': [13, 23, 33, 43, 53],
+                'age65pCount': [14, 24, 34, 44, 54],
+                'age65pSE': [0.01, 0.02, 0.03, 0.04, 0.05],
+                'agencyAccess': [5, 10, 15, 20, 25],
+                'totalCount': [100, 200, 300, 400, 500],
+                'otherMetric': [1.5, 2.5, 3.5, 4.5, 5.5]
+            }
+            pd.DataFrame(raw_data).to_csv(input_file,
+                                          index=False,
+                                          encoding='utf-8-sig')
+
+            with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
+                 mock.patch.object(preprocess, 'INPUT_FILE', input_file), \
+                 mock.patch.object(preprocess, 'INPUT_FILE_1', output_age), \
+                 mock.patch.object(preprocess, 'INPUT_FILE_2', output_data):
+                preprocess.preprocess_data()
+
+            self.assertTrue(os.path.exists(output_age))
+            self.assertTrue(os.path.exists(output_data))
+
+            df_age = pd.read_csv(output_age)
+            cols_age = list(df_age.columns)
+            self.assertEqual(
+                cols_age.index('universe') + 1, cols_age.index('variable'))
+            for age_col in preprocess.AGE_COLUMNS:
+                self.assertIn(age_col, cols_age)
+            self.assertNotIn('age314Prop', cols_age)
+            self.assertNotIn('age65pSE', cols_age)
+            self.assertNotIn('agencyAccess', cols_age)
+            self.assertNotIn('totalCount', cols_age)
+            self.assertNotIn('otherMetric', cols_age)
+            self.assertIn('universeAgeResol', cols_age)
+            self.assertIn('variableAgeResol', cols_age)
+            self.assertEqual(df_age.loc[0, 'universeAgeResol'], 'CivilPerson')
+            self.assertEqual(df_age.loc[1, 'universeAgeResol'], 'Adult')
+            self.assertTrue(pd.isna(df_age.loc[2, 'universeAgeResol']))
+            self.assertTrue(pd.isna(df_age.loc[0, 'variableAgeResol']))
+            self.assertEqual(df_age.loc[3, 'variableAgeResol'], 'CivilPerson')
+            self.assertEqual(df_age.loc[4, 'variableAgeResol'], 'Adult')
+
+            df_data = pd.read_csv(output_data)
+            cols_data = list(df_data.columns)
+            self.assertEqual(
+                cols_data.index('universe') + 1, cols_data.index('variable'))
+            self.assertIn('agencyAccess', cols_data)
+            self.assertIn('totalCount', cols_data)
+            self.assertIn('otherMetric', cols_data)
+            self.assertIn('universeAgeResol', cols_data)
+            self.assertIn('variableAgeResol', cols_data)
+            self.assertEqual(df_data.loc[0, 'universeAgeResol'], 'CivilPerson')
+            self.assertEqual(df_data.loc[1, 'universeAgeResol'], 'Adult')
+            self.assertTrue(pd.isna(df_data.loc[2, 'universeAgeResol']))
+            self.assertTrue(pd.isna(df_data.loc[0, 'variableAgeResol']))
+            self.assertEqual(df_data.loc[3, 'variableAgeResol'], 'CivilPerson')
+            self.assertEqual(df_data.loc[4, 'variableAgeResol'], 'Adult')
+            for age_col in preprocess.AGE_COLUMNS:
+                self.assertNotIn(age_col, cols_data)
+            self.assertNotIn('age314Prop', cols_data)
+            self.assertNotIn('age65pSE', cols_data)
+
+    def test_write_csv_atomically_success(self):
+        """Tests that _write_csv_atomically writes CSV and removes .tmp file."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            target_path = os.path.join(tmp_dir, 'output.csv')
+            df = pd.DataFrame({'col': [1, 2, 3]})
+            preprocess._write_csv_atomically(df, target_path)
+            self.assertTrue(os.path.exists(target_path))
+            self.assertFalse(os.path.exists(f"{target_path}.tmp"))
+            self.assertGreater(os.path.getsize(target_path), 0)
+
+    def test_write_csv_atomically_empty_raises(self):
+        """Tests that _write_csv_atomically raises RuntimeError if output file is empty."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            target_path = os.path.join(tmp_dir, 'output.csv')
+            df = pd.DataFrame()
+            with mock.patch.object(pd.DataFrame, 'to_csv') as mock_to_csv:
+
+                def create_empty(path, **kwargs):
+                    open(path, 'w').close()
+
+                mock_to_csv.side_effect = create_empty
+                with self.assertRaises(RuntimeError) as cm:
+                    preprocess._write_csv_atomically(df, target_path)
+                self.assertIn("empty", str(cm.exception))
+                self.assertFalse(os.path.exists(target_path))
+
+    @mock.patch('preprocess.logging.error')
+    def test_preprocess_data_file_not_found(self, mock_error):
+        """Tests that preprocess_data raises RuntimeError and logs error if input
+        file is missing."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            missing_input = os.path.join(tmp_dir, 'nonexistent.csv')
+            with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
+                 mock.patch.object(preprocess, 'INPUT_FILE', missing_input):
+                with self.assertRaises(RuntimeError) as cm:
+                    preprocess.preprocess_data()
+                self.assertIn("nonexistent.csv", str(cm.exception))
+                self.assertTrue(mock_error.called)
+                self.assertTrue(mock_error.call_args.kwargs.get('exc_info'))
+
+    @mock.patch('preprocess.logging.error')
+    def test_preprocess_data_missing_columns(self, mock_error):
+        """Tests that preprocess_data raises RuntimeError and logs error if
+        input CSV lacks required columns."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            bad_input = os.path.join(tmp_dir, 'bad.csv')
+            pd.DataFrame({'incomplete': [1, 2]}).to_csv(bad_input, index=False)
+            with mock.patch.object(preprocess, 'INPUT_DIR', tmp_dir), \
+                 mock.patch.object(preprocess, 'INPUT_FILE', bad_input):
+                with self.assertRaises(RuntimeError):
+                    preprocess.preprocess_data()
+                self.assertTrue(mock_error.called)
+                self.assertTrue(mock_error.call_args.kwargs.get('exc_info'))
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    def test_main_download_success(self, mock_download, mock_preprocess):
+        """Tests that main downloads file and executes preprocess_data on success."""
+        mock_download.return_value = True
+        with mock.patch('os.path.exists', return_value=True), \
+             mock.patch('os.path.getsize', return_value=1024):
+            preprocess.main([])
+            mock_download.assert_called_once_with(
+                url=preprocess.COMMERCE_NTIA_URL,
+                output_folder=preprocess.INPUT_DIR,
+                unzip=False,
+                headers=preprocess.HEADERS,
+                tries=3,
+                delay=5,
+                backoff=2,
+            )
+            mock_preprocess.assert_called_once()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_download_failure(self, mock_fatal, mock_download,
+                                   mock_preprocess):
+        """Tests that main logs fatal error and exits with code 1 when download returns False."""
+        mock_fatal.side_effect = SystemExit(1)
+        mock_download.return_value = False
+        with self.assertRaises(SystemExit) as cm:
+            preprocess.main([])
+        self.assertEqual(cm.exception.code, 1)
+        mock_fatal.assert_called_once_with(
+            "Failed to download Commerce_NTIA file or file is empty.",
+            exc_info=True)
+        mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_download_success_file_missing(self, mock_fatal, mock_download,
+                                                mock_preprocess):
+        """Tests that main exits with code 1 if download reports success but file is missing."""
+        mock_fatal.side_effect = SystemExit(1)
+        mock_download.return_value = True
+        with mock.patch('os.path.exists', return_value=False):
+            with self.assertRaises(SystemExit) as cm:
+                preprocess.main([])
+            self.assertEqual(cm.exception.code, 1)
+            mock_fatal.assert_called_once_with(
+                "Failed to download Commerce_NTIA file or file is empty.",
+                exc_info=True)
+            mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_download_success_empty_file(self, mock_fatal, mock_download,
+                                              mock_preprocess):
+        """Tests that main exits with code 1 if downloaded file is 0 bytes."""
+        mock_fatal.side_effect = SystemExit(1)
+        mock_download.return_value = True
+        with mock.patch('os.path.exists', return_value=True), \
+             mock.patch('os.path.getsize', return_value=0):
+            with self.assertRaises(SystemExit) as cm:
+                preprocess.main([])
+            self.assertEqual(cm.exception.code, 1)
+            mock_fatal.assert_called_once_with(
+                "Failed to download Commerce_NTIA file or file is empty.",
+                exc_info=True)
+            mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_download_exception(self, mock_fatal, mock_download,
+                                     mock_preprocess):
+        """Tests that main logs fatal error and exits with code 1 when
+        download raises an exception."""
+        mock_fatal.side_effect = SystemExit(1)
+        mock_download.side_effect = Exception("Connection timeout")
+        with self.assertRaises(SystemExit) as cm:
+            preprocess.main([])
+        self.assertEqual(cm.exception.code, 1)
+        self.assertTrue(mock_fatal.called)
+        self.assertIn("Connection timeout", str(mock_fatal.call_args))
+        self.assertTrue(mock_fatal.call_args.kwargs.get('exc_info'))
+        mock_preprocess.assert_not_called()
+
+    @mock.patch('preprocess.preprocess_data')
+    @mock.patch('preprocess.download_file')
+    @mock.patch('preprocess.logging.fatal')
+    def test_main_preprocess_exception(self, mock_fatal, mock_download,
+                                       mock_preprocess):
+        """Tests that main logs fatal error and exits when preprocess_data raises RuntimeError."""
+        mock_fatal.side_effect = SystemExit(1)
+        mock_download.return_value = True
+        mock_preprocess.side_effect = RuntimeError("Preprocessing failure")
+        with mock.patch('os.path.exists', return_value=True), \
+             mock.patch('os.path.getsize', return_value=1024):
+            with self.assertRaises(SystemExit) as cm:
+                preprocess.main([])
+            self.assertEqual(cm.exception.code, 1)
+            self.assertTrue(mock_fatal.called)
+            self.assertIn("Preprocessing failure", str(mock_fatal.call_args))
+            self.assertTrue(mock_fatal.call_args.kwargs.get('exc_info'))
+
+
+if __name__ == '__main__':
+    unittest.main()
