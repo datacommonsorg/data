@@ -57,3 +57,9 @@ Descriptions for keys in JSON file:
 ### Raw data download
 
 Source link: [https://indiawris.gov.in/wris/#/DataDownload](https://indiawris.gov.in/wris/#/DataDownload)
+
+
+Note: 
+1. Download Each year wise data from the source link and merge into a single CSV, as consolidated csv download has column header and value mismatch.
+2. Retained the historical data from production which was missing fro source now. (Prod_data_retained_query)
+3. Some of the data(place name) modified manually in CSV downloaded from source. (manual work) 
