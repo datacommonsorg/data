@@ -1,0 +1,25 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "CDC_PalmerDroughtSeverityIndex",
+        "curator_emails": ["support@datacommons.org"],
+        "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+        "provenance_description": "Environmental Health Toxicology",
+        "scripts": [
+          "python3 download_script.py --import_name=CDC_PalmerDroughtSeverityIndex --config_file=import_configs.json",
+          "python3 parse_precipitation_index.py input/CDC_PalmerDroughtSeverityIndex_data.csv gcs_output/output.csv"
+        ],
+        "source_files": ["input/*.csv"],
+        "user_script_timeout": 259200,
+        "resource_limits": {"cpu": "8", "memory": "32G"},
+        "import_inputs": [
+          {
+            "template_mcf": "CDC_PalmerDroughtSeverityIndex.tmcf",
+            "cleaned_csv": "output/CDC_PalmerDroughtSeverityIndex.csv"
+          }
+
+        ],
+        "cron_schedule": "0 1  2 * *"
+      }
+    ]
+  }
