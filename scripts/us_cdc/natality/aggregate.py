@@ -30,7 +30,7 @@ def main(argv):
 
     # Aggregating all count stat vars
     df_count = df.loc[df['StatVar'].str.startswith('Count')]
-    df_count.drop('Unit', axis=1, inplace=True)  # Count statvars have no unit.
+    # df_count.drop('Unit', axis=1, inplace=True)  # Count statvars have no unit.
     df_count.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
                              keep='first',
                              inplace=True)
