@@ -1,0 +1,8 @@
+Node: E:congo_education->E0
+observationAbout: C:congo_education->observationAbout
+observationDate: C:congo_education->observationDate
+value: C:congo_education->value
+variableMeasured: C:congo_education->variableMeasured
+unit: C:congo_education->unit
+scalingFactor: C:congo_education->scalingFactor
+typeOf: dcs:StatVarObservation
