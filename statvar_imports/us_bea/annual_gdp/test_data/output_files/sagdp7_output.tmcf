@@ -1,0 +1,7 @@
+Node: E:sagdp7_output->E0
+observationAbout: C:sagdp7_output->observationAbout
+observationDate: C:sagdp7_output->observationDate
+variableMeasured: C:sagdp7_output->variableMeasured
+value: C:sagdp7_output->value
+unit: C:sagdp7_output->unit
+typeOf: dcs:StatVarObservation
