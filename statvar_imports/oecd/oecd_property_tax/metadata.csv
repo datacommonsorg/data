@@ -1,0 +1,17 @@
+parameter,value
+url,https://data.oecd.org/tax/tax-on-property.htm
+description,Tax on property
+#place_type,Country
+#places_within,
+start_date,1965
+end_date,2021
+release_frequency,1Year
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,
+mapped_rows,1
+mapped_columns,6
+header_rows,1
+drop_statvars_without_svobs,0
+debug,1
