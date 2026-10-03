@@ -1,0 +1,9 @@
+Node: E:State_Wise_Area_NonFood_RawJute_Mesta->E0
+observationAbout: C:State_Wise_Area_NonFood_RawJute_Mesta->observationAbout
+observationDate: C:State_Wise_Area_NonFood_RawJute_Mesta->observationDate
+variableMeasured: C:State_Wise_Area_NonFood_RawJute_Mesta->variableMeasured
+value: C:State_Wise_Area_NonFood_RawJute_Mesta->value
+unit: C:State_Wise_Area_NonFood_RawJute_Mesta->unit
+measurementMethod: C:State_Wise_Area_NonFood_RawJute_Mesta->measurementMethod
+observationPeriod: C:State_Wise_Area_NonFood_RawJute_Mesta->observationPeriod
+typeOf: dcs:StatVarObservation
