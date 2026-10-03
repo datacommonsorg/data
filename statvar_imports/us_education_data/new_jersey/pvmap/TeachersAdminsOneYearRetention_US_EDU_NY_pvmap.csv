@@ -1,0 +1,7 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,,
+ObservationAbout,observationAbout,{Data},populationType,Faculty,measuredProperty,count,,,,
+Year,observationDate,{Number},,,,,,,,
+Administrators,facultyType,SchoolAdministrator,,,,,,,,
+Teachers,facultyType,Teacher,,,,,,,,
+RetentionPct_District,value,{Number},unit,Percent,retentionStatus,Retented,measurementDenominator,-retentionStatus,,
+RetentionPct_State,value,{Number},unit,Percent,retentionStatus,Retented,measurementDenominator,-retentionStatus,observationAbout,geoId/34
