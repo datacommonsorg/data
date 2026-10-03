@@ -1,7 +1,7 @@
-Node: E:Texas_Diabetes->E0
-observationAbout: C:Texas_Diabetes->observationAbout
-observationDate: C:Texas_Diabetes->observationDate
-variableMeasured: C:Texas_Diabetes->variableMeasured
-value: C:Texas_Diabetes->value
-unit: C:Texas_Diabetes->unit
+Node: E:Death_Data_Cross_Tabulation_output->E0
+observationAbout: C:Death_Data_Cross_Tabulation_output->observationAbout
+observationDate: C:Death_Data_Cross_Tabulation_output->observationDate
+variableMeasured: C:Death_Data_Cross_Tabulation_output->variableMeasured
+value: C:Death_Data_Cross_Tabulation_output->value
+unit: C:Death_Data_Cross_Tabulation_output->unit
 typeOf: dcs:StatVarObservation
