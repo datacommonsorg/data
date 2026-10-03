@@ -48,7 +48,8 @@ flags.DEFINE_boolean('save_location_cache', False,
 
 # FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
 # Only download data from Oct 10, 2022 to make auto refresh manageable.
-POST_OCT_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=FireDiscoveryDateTime>'2022-10-10'&outFields=*&outSR=4326&f=json"
+#POST_OCT_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=FireDiscoveryDateTime>'2022-10-10'&outFields=*&outSR=4326&f=json"
+POST_OCT_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Incident_Locations/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
 _LAT_LNG_CACHE = {}
 _START_YEAR = 2014
 _GCS_PROJECT_ID = "datcom-204919"
@@ -255,9 +256,11 @@ def process_df(df):
     # Convert costs to currency labelled string
     df["Costs"] = df["EstimatedCostToDate"].apply(get_cost)
     # Convert burned area to Unit labelled string
-    df['BurnedArea'] = df['DailyAcres'].apply(get_area,
-                                              args=('daily_acres',
-                                                    _DAILY_ACRES_MAP))
+
+    df['BurnedArea'] = df['DiscoveryAcres'].apply(get_area,
+                                                  args=('daily_acres',
+                                                        _DAILY_ACRES_MAP))
+
     # Causes to Cause Enum IDs
     df["FireCause"] = df["FireCause"].apply(get_cause)
     df["FireCauseGeneral"] = df["FireCauseGeneral"].apply(get_cause)
@@ -296,10 +299,12 @@ def process_df(df):
         "IrwinID", "wfigsFireID", "ParentFire", "InitialResponseDateTime",
         "InitialResponseAcres"
     ]
+
     return df[col_list]
 
 
 def main(_) -> None:
+
     df = get_data(POST_OCT_2022_FIRE_LOCATIONS_URL)
 
     storage_client = storage.Client(_GCS_PROJECT_ID)
