@@ -97,6 +97,7 @@ class USEducation:
     _include_col_place = None
     _exclude_col_place = None
     _generate_statvars = True
+    _generate_places = True
     _observation_period = None
     _key_col_place = None
     _exclude_list = None
@@ -948,7 +949,7 @@ class USEducation:
         df_cleaned = df_cleaned.drop_duplicates(subset=self._school_id,
                                                 keep="first")
 
-        if self._import_name in [
+        if self._generate_places and self._import_name in [
                 "private_school", "district_school", "public_school"
         ]:
             df_place.loc[:, 'year'] = self._year[0:4].strip()
@@ -956,7 +957,7 @@ class USEducation:
             self._place_dfs.append(df_place)
 
         if not self._generate_statvars:
-            return df_cleaned[data_cols]
+            return pd.DataFrame()
         # Melting all the columns to its respective observation.
         df_cleaned = df_cleaned.melt(id_vars=['school_state_code', 'year'],
                                      value_vars=data_cols,
@@ -1023,74 +1024,75 @@ class USEducation:
 
             raw_df = self.input_file_to_df(input_file)
             df_parsed = self._parse_file(raw_df)
-            if df_parsed.shape[0] > 0:
-                if self._generate_statvars:
-                    df_parsed = df_parsed.sort_values(
-                        by=["year", "sv_name", "school_state_code"])
-                    df_parsed = self._generate_prop(df_parsed,
-                                                    DF_DEFAULT_MCF_PROP,
-                                                    SV_PROP_ORDER, FORM_STATVAR)
-                    df_parsed = self._generate_stat_var_and_mcf(
-                        df_parsed, SV_PROP_ORDER)
-                    # Adding new columns scaling_factor:100 and unit:dcs:Percent
-                    # wherever the SV is Percent.
-                    df_parsed["scaling_factor"] = np.where(
-                        df_parsed["sv_name"].str.contains("Percent"), '100', '')
-                    df_parsed["unit"] = np.where(
-                        df_parsed["sv_name"].str.contains("Percent"),
-                        "dcs:Percent", '')
-                    df_clean = self.dropping_scalingFactor_unit(df_parsed)
-                    df_final = df_clean[[
-                        "school_state_code", "year", "sv_name", "observation",
-                        "scaling_factor", "unit"
-                    ]]
-                    df_final["year"] = pd.to_numeric(df_final["year"])
-                    df_final["year"] = df_final["year"] + 1
-                    # Dropping Duplicates and writing to a file
-                    df_final.drop_duplicates(inplace=True)
-                    df_final.to_csv(self._cleaned_csv_file_path,
-                                    header=False,
-                                    index=False,
-                                    mode='a')
-                    # The column unique SVs are extracted for MCF properties.
-                    df_parsed = df_parsed.drop_duplicates(
-                        subset=["sv_name"]).reset_index(drop=True)
-                    curr_sv_names = df_parsed["sv_name"].values.tolist()
-                    new_sv_names = list(
-                        set(curr_sv_names) - set(unique_sv_names))
-                    unique_sv_names = unique_sv_names + new_sv_names
+            if self._generate_statvars and df_parsed.shape[0] > 0:
+                df_parsed = df_parsed.sort_values(
+                    by=["year", "sv_name", "school_state_code"])
+                df_parsed = self._generate_prop(df_parsed, DF_DEFAULT_MCF_PROP,
+                                                SV_PROP_ORDER, FORM_STATVAR)
+                df_parsed = self._generate_stat_var_and_mcf(
+                    df_parsed, SV_PROP_ORDER)
+                # Adding new columns scaling_factor:100 and unit:dcs:Percent
+                # wherever the SV is Percent.
+                df_parsed["scaling_factor"] = np.where(
+                    df_parsed["sv_name"].str.contains("Percent"), '100', '')
+                df_parsed["unit"] = np.where(
+                    df_parsed["sv_name"].str.contains("Percent"), "dcs:Percent",
+                    '')
+                df_clean = self.dropping_scalingFactor_unit(df_parsed)
+                df_final = df_clean[[
+                    "school_state_code", "year", "sv_name", "observation",
+                    "scaling_factor", "unit"
+                ]]
+                df_final["year"] = pd.to_numeric(df_final["year"])
+                df_final["year"] = df_final["year"] + 1
+                # Dropping Duplicates and writing to a file
+                df_final.drop_duplicates(inplace=True)
+                df_final.to_csv(self._cleaned_csv_file_path,
+                                header=False,
+                                index=False,
+                                mode='a')
+                # The column unique SVs are extracted for MCF properties.
+                df_parsed = df_parsed.drop_duplicates(
+                    subset=["sv_name"]).reset_index(drop=True)
+                curr_sv_names = df_parsed["sv_name"].values.tolist()
+                new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
+                unique_sv_names = unique_sv_names + new_sv_names
 
-                    df_parsed = df_parsed[df_parsed["sv_name"].isin(
-                        new_sv_names)].reset_index(drop=False)
+                df_parsed = df_parsed[df_parsed["sv_name"].isin(
+                    new_sv_names)].reset_index(drop=False)
                 dfs.append(df_parsed)
         # Based on the import_name, the place data is executed and written to a
         # file.
-        if self._import_name == "private_school":
-            self._transform_private_place()
+        if self._generate_places:
+            if self._import_name == "private_school":
+                self._transform_private_place()
 
-            self._final_df_place.to_csv(self._csv_file_place,
-                                        index=False,
-                                        quoting=csv.QUOTE_NONNUMERIC)
-            for Physical_Address, group in self._final_df_place.groupby(
-                    'Physical_Address'):
-                if len(group) > 1:
-                    city_dict[Physical_Address] = group[
-                        'school_state_code'].tolist()
+                self._final_df_place.to_csv(self._csv_file_place,
+                                            index=False,
+                                            quoting=csv.QUOTE_NONNUMERIC)
+                for Physical_Address, group in self._final_df_place.groupby(
+                        'Physical_Address'):
+                    if len(group) > 1:
+                        city_dict[Physical_Address] = group[
+                            'school_state_code'].tolist()
 
-        if self._import_name == "district_school":
-            self._transform_district_place()
-            self._final_df_place.to_csv(self._csv_file_place,
-                                        index=False,
-                                        quoting=csv.QUOTE_NONNUMERIC)
+            if self._import_name == "district_school":
+                self._transform_district_place()
+                self._final_df_place.to_csv(self._csv_file_place,
+                                            index=False,
+                                            quoting=csv.QUOTE_NONNUMERIC)
 
-        if self._import_name == "public_school":
-            self._transform_public_place()
-            self._final_df_place.to_csv(self._csv_file_place,
-                                        index=False,
-                                        quoting=csv.QUOTE_NONNUMERIC)
+            if self._import_name == "public_school":
+                self._transform_public_place()
+                self._final_df_place.to_csv(self._csv_file_place,
+                                            index=False,
+                                            quoting=csv.QUOTE_NONNUMERIC)
 
         df_merged = pd.DataFrame()
-        self._df = pd.concat(dfs)
+        if dfs:
+            self._df = pd.concat(dfs)
+        else:
+            self._df = pd.DataFrame()
 
     @log_method_execution
     def generate_mcf(self) -> None:
@@ -1103,6 +1105,9 @@ class USEducation:
         Returns:
             None    
         """
+        if not self._generate_statvars:
+            return
+
         if self._generate_statvars:
             unique_nodes_df = self._df.drop_duplicates(
                 subset=["prop_node"]).reset_index(drop=True)
@@ -1141,21 +1146,27 @@ class USEducation:
             None
         """
 
-        tmcf = TMCF_TEMPLATE.format(import_name=self._import_name,
-                                    observation_period=self._observation_period)
-        # Writing Genereated TMCF to local path.
-        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(tmcf.rstrip('\n'))
+        if self._generate_statvars:
+            tmcf = TMCF_TEMPLATE.format(
+                import_name=self._import_name,
+                observation_period=self._observation_period)
+            # Writing Genereated TMCF to local path.
+            with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+                f_out.write(tmcf.rstrip('\n'))
 
         # Generating tmcf file for NCES place entities based on the import name.
-        if self._import_name == "private_school":
-            with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-                f_out.write(TMCF_TEMPLATE_PLACE_PRIVATE.rstrip('\n'))
+        if self._generate_places:
+            if self._import_name == "private_school":
+                with open(self._tmcf_file_place, 'w+',
+                          encoding='utf-8') as f_out:
+                    f_out.write(TMCF_TEMPLATE_PLACE_PRIVATE.rstrip('\n'))
 
-        if self._import_name == "district_school":
-            with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-                f_out.write(TMCF_TEMPLATE_PLACE_DISTRICT.rstrip('\n'))
+            if self._import_name == "district_school":
+                with open(self._tmcf_file_place, 'w+',
+                          encoding='utf-8') as f_out:
+                    f_out.write(TMCF_TEMPLATE_PLACE_DISTRICT.rstrip('\n'))
 
-        if self._import_name == "public_school":
-            with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-                f_out.write(TMCF_TEMPLATE_PLACE_PUBLIC.rstrip('\n'))
+            if self._import_name == "public_school":
+                with open(self._tmcf_file_place, 'w+',
+                          encoding='utf-8') as f_out:
+                    f_out.write(TMCF_TEMPLATE_PLACE_PUBLIC.rstrip('\n'))

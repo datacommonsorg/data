@@ -24,7 +24,17 @@ output_files - output files (mcf, tmcf and csv are written here)
 import os
 import sys
 from absl import app
+from absl import flags
 from absl import logging
+
+FLAGS = flags.FLAGS
+flags.DEFINE_enum(
+    'mode',
+    'all',
+    ['all', 'place', 'stats'],
+    'Execution mode: "place" for place entities only, "stats" for demographic'
+    ' observations only, "all" for both.',
+)
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
@@ -54,7 +64,8 @@ def main(argv):
     del argv  # Unused
     try:
         logging.set_verbosity(logging.INFO)
-        logging.info("Main Method Starts For School District ")
+        logging.info(
+            f"Main Method Starts For School District (mode={FLAGS.mode})")
         gcs_output_dir_local = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
@@ -92,6 +103,14 @@ def main(argv):
         loader = NCESDistrictSchool(input_files_to_process, cleaned_csv_path,
                                     mcf_path, tmcf_path, csv_path_place,
                                     duplicate_csv_place, tmcf_path_place)
+
+        if FLAGS.mode == 'place':
+            loader._generate_statvars = False
+            loader._generate_places = True
+        elif FLAGS.mode == 'stats':
+            loader._generate_statvars = True
+            loader._generate_places = False
+
         loader.generate_csv()
         loader.generate_mcf()
         loader.generate_tmcf()
