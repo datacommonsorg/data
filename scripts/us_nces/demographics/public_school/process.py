@@ -82,8 +82,9 @@ def main(argv):
                         input_files_to_process.append(full_file_path)
 
         if not input_files_to_process:
-            logging.warning(
-                f"No CSV files found in {input_path_base} or its year subfolders. Please ensure download_input_files.py has been run and placed files correctly."
+            raise FileNotFoundError(
+                f"No CSV files found in {input_path_base} or its year subfolders. "
+                "Please ensure download_input_files.py has been run and placed files correctly."
             )
         output_file_path = os.path.join(gcs_output_dir_local, "output_files")
         os.makedirs(output_file_path, exist_ok=True)

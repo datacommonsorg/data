@@ -12,8 +12,7 @@
                 "process.py --mode=place"
             ],
             "source_files": [
-                "gcs_folder/input_files/*/*.csv",
-                "validation_config.json"
+                "gcs_folder/input_files/*/*.csv"
             ],
             "import_inputs": [
                 {
@@ -22,7 +21,6 @@
                 }
             ],
             "cron_schedule": "30 3 3 3,6,9,12 *",
-            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
