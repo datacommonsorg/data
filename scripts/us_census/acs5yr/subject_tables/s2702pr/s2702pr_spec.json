@@ -7,17 +7,16 @@
       "$15,000 to $24,999": "Civilian noninstitutionalized population 16 years and older with earnings!!$15,000 to $24,999",
       "$25,000 to $34,999": "Civilian noninstitutionalized population 16 years and older with earnings!!$25,000 to $34,999",
       "$35,000 to $49,999": "Civilian noninstitutionalized population 16 years and older with earnings!!$35,000 to $49,999",
-      "$50,000 to $74,999": "Civilian noninstitutionalized population 16 years and older with earnings!!$50,000 to $74,999",
+      "Uninsured Population!!Estimate!!$50,000 to $74,999": "Uninsured Population!!Estimate!!Civilian noninstitutionalized population 16 years and older with earnings!!$50,000 to $74,999",
+      "Uninsured Population!!Margin of Error!!$50,000 to $74,999": "Uninsured Population!!Margin of Error!!Civilian noninstitutionalized population 16 years and older with earnings!!$50,000 to $74,999",
+      "Estimate!!Total Uninsured!!$50,000 to $74,999": "Estimate!!Total Uninsured!!Civilian noninstitutionalized population 16 years and older with earnings!!$50,000 to $74,999",
+      "Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999": "Margin of Error!!Total Uninsured MOE!!Civilian noninstitutionalized population 16 years and older with earnings!!$50,000 to $74,999",
       "$75,000 or more": "Civilian noninstitutionalized population 16 years and older with earnings!!$75,000 or more",
       "Median earnings (dollars)": "Civilian noninstitutionalized population 16 years and older with earnings!!Median earnings (dollars)",
       "Under $25,000": "Total household population!!Under $25,000",
       "$25,000 to $49,999": "Total household population!!$25,000 to $49,999",
       "$75,000 to $99,999": "Total household population!!$75,000 to $99,999",
       "$100,000 and over": "Total household population!!$100,000 and over",
-      "Uninsured Population!!Estimate!!$50,000 to $74,999.1": "Uninsured Population!!Estimate!!Total household population!!$50,000 to $74,999",
-      "Estimate!!Total Uninsured!!$50,000 to $74,999.1": "Estimate!!Total Uninsured!!Total household population!!$50,000 to $74,999",
-      "Uninsured Population!!Margin of Error!!$50,000 to $74,999.1": "Uninsured Population!!Margin of Error!!Total household population!!$50,000 to $74,999",
-      "Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999.1": "Margin of Error!!Total Uninsured MOE!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!Did not work!!Civilian noninstitutionalized workers 16 years and over": "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over",
       "Margin of Error!!Total Uninsured MOE!!Did not work!!Civilian noninstitutionalized workers 16 years and over": "Margin of Error!!Total Uninsured MOE!!Civilian noninstitutionalized workers 16 years and over"
     }
@@ -553,48 +552,40 @@
     "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2013 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Uninsured Population!!Estimate!!Under $25,000",
       "Uninsured Population!!Estimate!!$25,000 to $49,999",
-      "Uninsured Population!!Estimate!!$50,000 to $74,999.1",
       "Uninsured Population!!Estimate!!$75,000 to $99,999",
       "Uninsured Population!!Estimate!!$100,000 and over",
       "Uninsured Population!!Margin of Error!!Under $25,000",
       "Uninsured Population!!Margin of Error!!$25,000 to $49,999",
-      "Uninsured Population!!Margin of Error!!$50,000 to $74,999.1",
       "Uninsured Population!!Margin of Error!!$75,000 to $99,999",
       "Uninsured Population!!Margin of Error!!$100,000 and over"
     ],
     "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2014 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Uninsured Population!!Estimate!!Under $25,000",
       "Uninsured Population!!Estimate!!$25,000 to $49,999",
-      "Uninsured Population!!Estimate!!$50,000 to $74,999.1",
       "Uninsured Population!!Estimate!!$75,000 to $99,999",
       "Uninsured Population!!Estimate!!$100,000 and over",
       "Uninsured Population!!Margin of Error!!Under $25,000",
       "Uninsured Population!!Margin of Error!!$25,000 to $49,999",
-      "Uninsured Population!!Margin of Error!!$50,000 to $74,999.1",
       "Uninsured Population!!Margin of Error!!$75,000 to $99,999",
       "Uninsured Population!!Margin of Error!!$100,000 and over"
     ],
     "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2015 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Uninsured Population!!Estimate!!Under $25,000",
       "Uninsured Population!!Estimate!!$25,000 to $49,999",
-      "Uninsured Population!!Estimate!!$50,000 to $74,999.1",
       "Uninsured Population!!Estimate!!$75,000 to $99,999",
       "Uninsured Population!!Estimate!!$100,000 and over",
       "Uninsured Population!!Margin of Error!!Under $25,000",
       "Uninsured Population!!Margin of Error!!$25,000 to $49,999",
-      "Uninsured Population!!Margin of Error!!$50,000 to $74,999.1",
       "Uninsured Population!!Margin of Error!!$75,000 to $99,999",
       "Uninsured Population!!Margin of Error!!$100,000 and over"
     ],
     "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2016 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Uninsured Population!!Estimate!!Under $25,000",
       "Uninsured Population!!Estimate!!$25,000 to $49,999",
-      "Uninsured Population!!Estimate!!$50,000 to $74,999.1",
       "Uninsured Population!!Estimate!!$75,000 to $99,999",
       "Uninsured Population!!Estimate!!$100,000 and over",
       "Uninsured Population!!Margin of Error!!Under $25,000",
       "Uninsured Population!!Margin of Error!!$25,000 to $49,999",
-      "Uninsured Population!!Margin of Error!!$50,000 to $74,999.1",
       "Uninsured Population!!Margin of Error!!$75,000 to $99,999",
       "Uninsured Population!!Margin of Error!!$100,000 and over"
     ],
@@ -765,24 +756,20 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2017 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!Under $25,000",
       "Estimate!!Total Uninsured!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!$50,000 to $74,999.1",
       "Estimate!!Total Uninsured!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!$100,000 and over",
       "Margin of Error!!Total Uninsured MOE!!Under $25,000",
       "Margin of Error!!Total Uninsured MOE!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999.1",
       "Margin of Error!!Total Uninsured MOE!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured MOE!!$100,000 and over"
     ],
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2018 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!Under $25,000",
       "Estimate!!Total Uninsured!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!$50,000 to $74,999.1",
       "Estimate!!Total Uninsured!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!$100,000 and over",
       "Margin of Error!!Total Uninsured MOE!!Under $25,000",
       "Margin of Error!!Total Uninsured MOE!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999.1",
       "Margin of Error!!Total Uninsured MOE!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured MOE!!$100,000 and over"
     ],
@@ -1003,12 +990,10 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over"
     ],
@@ -1031,12 +1016,10 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2020 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over"
     ],
@@ -1059,12 +1042,10 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over"
     ],
@@ -1087,12 +1068,10 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over"
     ],
@@ -1115,12 +1094,10 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over"
     ],
@@ -1143,12 +1120,10 @@
     "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population": [
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!Under $25,000",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$25,000 to $49,999",
-      "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$75,000 to $99,999",
       "Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$100,000 and over"
     ],
