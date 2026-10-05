@@ -22,7 +22,7 @@
 | `download_test.py` | Hermetic unit tests for `download.py` XML parsing, atomic writes, and GCS pull routines |
 | `*_pvmap.csv` | Property-Value schema mappings for `stat_var_processor.py` |
 | `*_metadata.csv` | Processor configuration files declaring header rows and column mappings |
-| `*_places_resolved.csv` | Place resolver mappings for County / AdministrativeUnit place identifiers |
+| `places_resolved.csv` | Unified place resolver mapping for County / AdministrativeUnit place identifiers |
 | `*_indicator.csv` | Indicator reference definitions |
 | `input_files/` | Raw input data CSVs (synced to GCS `source_files`) |
 | `counters/` | Runtime counters output directory (`.gitignore` excluded from Git) |
@@ -35,13 +35,13 @@ The import processes 12 tables from KNBS Open Data:
 1. `dlrrjxg`: Mortality events by age group and sex (`country/KEN`)
 2. `egdxgkd`: KCSE secondary examination candidates and grades (`country/KEN`)
 3. `emxkej`: Population census demographics by gender and age group (`country/KEN`)
-4. `fwjfdnc`: Household characteristics and census demographics (counties via `fwjfdnc_places_resolved.csv`)
-5. `gxbucsd`: School enrollment by administrative unit (counties via `gxbucsd_places_resolved.csv`)
+4. `fwjfdnc`: Household characteristics and census demographics (counties via `places_resolved.csv`)
+5. `gxbucsd`: School enrollment by administrative unit (counties via `places_resolved.csv`)
 6. `ixdvqrf`: Birth events by sex (`country/KEN`)
-7. `rsfzlbg`: County population indicators (counties via `rsfzlbg_places_resolved.csv`)
+7. `rsfzlbg`: County population indicators (counties via `places_resolved.csv`)
 8. `srricmg`: National household expenditure categories (`country/KEN`)
 9. `tdxdksf`: KCPE primary examination mean assessment scores (`country/KEN`)
-10. `vdbvyfd`: Health and hospital deliveries by county (counties via `vdbvyfd_places_resolved.csv`)
+10. `vdbvyfd`: Health and hospital deliveries by county (counties via `places_resolved.csv`)
 11. `welrttb`: Employment and labor force status (`country/KEN`)
 12. `xszlbb`: National economic production and industry indicators (`country/KEN`)
 
@@ -66,8 +66,7 @@ When updated census data is published on Kenya Open Data for Africa:
 During automated weekly runs (`30 05 * * 1`), Cloud Batch executes the following pipeline:
 1. **Download Step (`download.sh`)**: Pulls the verified CSVs from `gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/` into `input_files/`.
 2. **Transform (`stat_var_processor.py`)**: Runs each of the 12 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
-3. **Post-Process (`post_process.sh`)**: Appends provisional enum nodes required for schema resolution.
-4. **Resolution, Differ & Validation (`genmcf`, differ, import_validation)**: Generates resolved MCFs, compares against baseline version, and verifies validation rules.
+3. **Resolution, Differ & Validation (`genmcf`, differ, import_validation)**: Generates resolved MCFs, compares against baseline version, and verifies validation rules.
 
 ## 5. Running the Data Processor
 
@@ -88,7 +87,7 @@ Run `stat_var_processor.py` using repo-relative paths from the repository root:
   --input_data=statvar_imports/opendataforafrica/kenya_census/input_files/vdbvyfd.csv \
   --pv_map=statvar_imports/opendataforafrica/kenya_census/vdbvyfd_pvmap.csv \
   --config_file=statvar_imports/opendataforafrica/kenya_census/vdbvyfd_metadata.csv \
-  --places_resolved_csv=statvar_imports/opendataforafrica/kenya_census/vdbvyfd_places_resolved.csv \
+  --places_resolved_csv=statvar_imports/opendataforafrica/kenya_census/places_resolved.csv \
   --output_path=statvar_imports/opendataforafrica/kenya_census/output/vdbvyfd \
   --output_counters=statvar_imports/opendataforafrica/kenya_census/counters/vdbvyfd_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
