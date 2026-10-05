@@ -15,8 +15,6 @@ function split_csv {
         return 1
     fi
 
-    local header
-    header=$(head -n 1 "$file")
     local fname
     fname=$(basename "$file" | sed 's/\.csv$//')
     

@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-import io
 import re
 import concurrent.futures
 from absl import app
@@ -128,8 +127,8 @@ def download_single_file(task):
         with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
             for member in zip_ref.namelist():
                 if not member.endswith('/') and member.lower().endswith('.txt'):
-                    extract_path = os.path.join(
-                        _LOCAL_OUTPUT_PATH, os.path.basename(member))
+                    extract_path = os.path.join(_LOCAL_OUTPUT_PATH,
+                                                os.path.basename(member))
                     abs_extract_path = os.path.abspath(extract_path)
                     abs_target_dir = os.path.abspath(_LOCAL_OUTPUT_PATH)
 
@@ -140,12 +139,12 @@ def download_single_file(task):
                         continue
 
                     # Read the file content from the zip and write it to disk
+                    content = zip_ref.read(member)
                     with open(extract_path, 'wb') as outfile:
-                        outfile.write(zip_ref.read(member))
+                        outfile.write(content)
                 else:
                     logging.info(
-                        f" Skipping non-txt file/folder in zip: '{member}'"
-                    )
+                        f" Skipping non-txt file/folder in zip: '{member}'")
     except (requests.exceptions.RequestException, zipfile.BadZipFile,
             NonRetryableHTTPError) as e:
         status_code = None
@@ -190,8 +189,11 @@ def download_files():
     logging.info(
         f"Starting parallel download of {len(tasks)} files with {max_workers} threads..."
     )
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(download_single_file, task) for task in tasks]
+    with concurrent.futures.ThreadPoolExecutor(
+            max_workers=max_workers) as executor:
+        futures = [
+            executor.submit(download_single_file, task) for task in tasks
+        ]
         for future in concurrent.futures.as_completed(futures):
             future.result()
 
@@ -201,16 +203,14 @@ def process_single_txt_file(task):
     filename = os.path.basename(full_local_path)
     logging.info('Found local .txt file: %s. Attempting to process.', filename)
 
-    year_match = re.search(
-        r'(\d{2})(?:co|msa|totals|detail)\.txt$',
-        filename.lower())
+    year_match = re.search(r'(\d{2})(?:co|msa|totals|detail)\.txt$',
+                           filename.lower())
     if year_match:
         two_digit_year = year_match.group(1)
         processing_year = '20' + two_digit_year
     else:
         logging.warning(
-            f"Could not extract 2-digit year from filename '{filename}'"
-        )
+            f"Could not extract 2-digit year from filename '{filename}'")
         return
 
     # Stream-read directly into processor without reading entire multi-GB file into RAM as string
@@ -219,46 +219,43 @@ def process_single_txt_file(task):
             logging.info(
                 'Detected CBPMSA .txt file: %s. Initiating CBP MSA processing.',
                 filename)
-            processor = CBPMSAProcessor(
-                input_file_obj=input_file_obj,
-                output_dir=output_dir,
-                year=processing_year,
-                is_test_run=is_test_run)
+            processor = CBPMSAProcessor(input_file_obj=input_file_obj,
+                                        output_dir=output_dir,
+                                        year=processing_year,
+                                        is_test_run=is_test_run)
             processor.process_cbp_data()
             logging.info("process completed for cbp msa import: %s", filename)
         elif 'co' in filename.lower():
             logging.info(
                 'Detected CBP CO .txt file: %s. Initiating CBP CO processing.',
                 filename)
-            processor = CBPCOProcessor(
-                input_file_obj=input_file_obj,
-                output_dir=output_dir,
-                year=processing_year,
-                is_test_run=is_test_run)
+            processor = CBPCOProcessor(input_file_obj=input_file_obj,
+                                       output_dir=output_dir,
+                                       year=processing_year,
+                                       is_test_run=is_test_run)
             processor.process_co_data()
             logging.info("process completed for co import: %s", filename)
         elif 'totals' in filename.lower():
             logging.info(
                 'Detected ZPB TOTALS .txt file: %s. Initiating ZPB TOTALS processing.',
                 filename)
-            processor = ZBPTotalsProcessor(
-                input_file_obj=input_file_obj,
-                output_dir=output_dir,
-                year=processing_year,
-                is_test_run=is_test_run)
+            processor = ZBPTotalsProcessor(input_file_obj=input_file_obj,
+                                           output_dir=output_dir,
+                                           year=processing_year,
+                                           is_test_run=is_test_run)
             processor.process_zbp_data()
             logging.info("process completed for zbp import: %s", filename)
         elif 'detail' in filename.lower():
             logging.info(
                 'Detected ZBP DETAILS .txt file: %s. Initiating ZBP DETAILS processing.',
                 filename)
-            processor = ZBPDetailProcessor(
-                input_file_obj=input_file_obj,
-                output_dir=output_dir,
-                year=processing_year,
-                is_test_run=is_test_run)
+            processor = ZBPDetailProcessor(input_file_obj=input_file_obj,
+                                           output_dir=output_dir,
+                                           year=processing_year,
+                                           is_test_run=is_test_run)
             processor.process_zbp_detail_data()
-            logging.info("process completed for zbp detail import: %s", filename)
+            logging.info("process completed for zbp detail import: %s",
+                         filename)
 
 
 def main(argv):
@@ -278,9 +275,8 @@ def main(argv):
         num_workers = min(16, os.cpu_count() or 4, len(txt_files))
         tasks = [(f, FLAGS.output_dir, FLAGS.test) for f in txt_files]
 
-        logging.info(
-            "Processing files in parallel with %d worker processes...",
-            num_workers)
+        logging.info("Processing files in parallel with %d worker processes...",
+                     num_workers)
         with concurrent.futures.ProcessPoolExecutor(
                 max_workers=num_workers) as executor:
             futures = [
@@ -294,7 +290,6 @@ def main(argv):
     except Exception as e:
         logging.fatal('An unexpected error occurred during file processing: %s',
                       e)
-        raise e
 
 
 if __name__ == '__main__':
