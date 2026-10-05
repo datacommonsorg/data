@@ -43,6 +43,9 @@ import warnings
 import requests
 import time
 import re
+import random
+import shutil
+import tempfile
 from datetime import datetime as dt
 
 warnings.filterwarnings('ignore')
@@ -64,7 +67,10 @@ def _define_flags():
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_GCS_FOLDER_PERSISTENT_PATH = os.path.join(
+    _MODULE_DIR, 'gcs_folder/usa_annual_population_source_files')
 os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
+os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
 excel_file_name_pattern = r"NST-EST(\d{4})-POP\.xlsx"
 sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
@@ -1075,6 +1081,31 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         logging.fatal("No files were successfully processed.")
 
 
+def probe_url_with_retry(session, url, timeout=10, max_retries=3):
+    """Probes a URL with HEAD request, handling 429/503 with backoff."""
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = session.head(url, allow_redirects=True, timeout=timeout)
+            if response.status_code in (429, 503):
+                retry_after = response.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    sleep_time = min(float(retry_after), 30.0)
+                else:
+                    sleep_time = 2.0 * attempt + random.uniform(0.5, 1.5)
+                logging.warning(
+                    f"HTTP {response.status_code} probing {url}. Backing off for {sleep_time:.1f}s (attempt {attempt}/{max_retries})."
+                )
+                time.sleep(sleep_time)
+                continue
+            return response.status_code == 200
+        except requests.exceptions.RequestException as e:
+            logging.warning(
+                f"Error probing URL {url}: {e} (attempt {attempt}/{max_retries})"
+            )
+            time.sleep(1.0 * attempt)
+    return False
+
+
 def add_future_year_urls():
     """ This method will generate future URLs specified in the urls_to_scan object.
         If valid URL, it will append to the _FILES_TO_DOWNLOAD global variable.
@@ -1091,37 +1122,94 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/totals/NST-EST{YEAR}-POP.xlsx",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/totals/NST-EST{YEAR}-POPCHG2020_{YEAR}.csv"
     ]
-    # This method will get the latest year URLs available for the years 2023 to 2030
+    # Scan from next year down to 2023 (bounded to prevent unnecessary scanning of far future years)
+    max_scan_year = min(2030, dt.now().year + 1)
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    })
     for url in urls_to_scan:
-        for future_year in range(2030, 2022, -1):
+        for future_year in range(max_scan_year, 2022, -1):
             url_to_check = url.format(YEAR=future_year)
-            try:
-                logging.info(f"checking furute url if available {url_to_check}")
-                check_url = requests.head(url_to_check, allow_redirects=True)
-                if check_url.status_code == 200:
-                    logging.info(f"Furute url found {url_to_check}")
-                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-                    break
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+            logging.info(f"checking future url if available {url_to_check}")
+            if probe_url_with_retry(session, url_to_check):
+                logging.info(f"Future url found {url_to_check}")
+                _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                break
+            time.sleep(0.5)
 
 
-@retry(tries=5, delay=5, backoff=5)
-def download_with_retry(url, file_name_to_save):
-    logging.info(f"Downloaded file : {file_name_to_save} - URL {url}")
-    return requests.get(url=url, stream=True)
+def download_single_file_with_retry(session,
+                                    url,
+                                    dest_input_path,
+                                    dest_cache_path,
+                                    max_retries=5,
+                                    initial_delay=2.0,
+                                    backoff_factor=2.0):
+    """Downloads a single file with exponential backoff and HTTP 429/5xx retry handling."""
+    for attempt in range(1, max_retries + 1):
+        try:
+            with session.get(url, stream=True, timeout=(15, 120)) as response:
+                if response.status_code == 200:
+                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                        for chunk in response.iter_content(chunk_size=65536):
+                            if chunk:
+                                tmp_file.write(chunk)
+                        tmp_file_path = tmp_file.name
+
+                    # Save to local input destination
+                    shutil.copy(tmp_file_path, dest_input_path)
+                    # Move to persistent cache destination
+                    shutil.move(tmp_file_path, dest_cache_path)
+                    logging.info(f"Successfully downloaded and cached: {url}")
+                    return True
+                elif response.status_code in (429, 500, 502, 503, 504):
+                    retry_after = response.headers.get("Retry-After")
+                    if retry_after and retry_after.isdigit():
+                        sleep_time = min(float(retry_after), 60.0)
+                    else:
+                        sleep_time = initial_delay * (backoff_factor**(
+                            attempt - 1)) + random.uniform(0.5, 1.5)
+                    logging.warning(
+                        f"HTTP {response.status_code} downloading {url}. Attempt {attempt}/{max_retries}. Backing off for {sleep_time:.1f}s."
+                    )
+                    time.sleep(sleep_time)
+                else:
+                    logging.error(
+                        f"Failed to download {url} with status code {response.status_code}"
+                    )
+                    return False
+        except requests.exceptions.RequestException as e:
+            sleep_time = initial_delay * (backoff_factor**
+                                          (attempt - 1)) + random.uniform(
+                                              0.5, 1.5)
+            logging.warning(
+                f"RequestException downloading {url}: {e}. Attempt {attempt}/{max_retries}. Backing off for {sleep_time:.1f}s."
+            )
+            time.sleep(sleep_time)
+    logging.error(f"Exhausted {max_retries} retries for URL {url}")
+    return False
 
 
 def download_files():
     """ This method will download data from the URLs specified in the input_url.json file.
-        If any download attempt fails, the script will terminate.
+        Utilizes persistent caching in gcs_folder to avoid re-downloading unchanged historical files,
+        and uses polite rate limiting and exponential backoff to avoid HTTP 429 rate limit errors.
 
         Args: None
         Returns: None
     """
     global _FILES_TO_DOWNLOAD
-    if not os.path.exists(_INPUT_FILE_PATH):
-        os.makedirs(_INPUT_FILE_PATH)
+    os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
+    os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
+
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    })
+
     try:
         for file_to_download in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
@@ -1131,27 +1219,35 @@ def download_files():
                 file_name_to_save = file_to_download['file_name']
             else:
                 file_name_to_save = url.split('/')[-1]
-            if 'file_path' in file_to_download:
-                if not os.path.exists(
-                        os.path.join(_INPUT_FILE_PATH,
-                                     file_to_download['file_path'])):
-                    os.makedirs(
-                        os.path.join(_INPUT_FILE_PATH,
-                                     file_to_download['file_path']))
-                file_name_to_save = file_to_download[
-                    'file_path'] + file_name_to_save
 
-            response = download_with_retry(url, file_name_to_save)
-            if response.status_code == 200:
-                with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
-                          'wb') as f:
-                    f.write(response.content)
-                file_to_download['is_downloaded'] = True
-            else:
-                logging.error(
-                    f"Failed to download {url} with status code {response.status_code}"
+            sub_dir = file_to_download.get('file_path', '')
+            input_dir = os.path.join(_INPUT_FILE_PATH, sub_dir)
+            cache_dir = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, sub_dir)
+            os.makedirs(input_dir, exist_ok=True)
+            os.makedirs(cache_dir, exist_ok=True)
+
+            dest_input_path = os.path.join(input_dir, file_name_to_save)
+            dest_cache_path = os.path.join(cache_dir, file_name_to_save)
+
+            # Check persistent cache first
+            if os.path.exists(dest_cache_path) and os.path.getsize(
+                    dest_cache_path) > 0:
+                logging.info(
+                    f"Skipping download, using cached file: {file_name_to_save}"
                 )
-                file_to_download['is_downloaded'] = False
+                shutil.copy(dest_cache_path, dest_input_path)
+                file_to_download['is_downloaded'] = True
+                continue
+
+            # File not cached, download with retry and rate limiting
+            logging.info(f"Downloading file: {file_name_to_save} - URL {url}")
+            success = download_single_file_with_retry(session, url,
+                                                      dest_input_path,
+                                                      dest_cache_path)
+            file_to_download['is_downloaded'] = success
+            # Polite rate limiting between download requests
+            time.sleep(1.0)
+
         failed_downloads = [
             file_to_download['download_path']
             for file_to_download in _FILES_TO_DOWNLOAD

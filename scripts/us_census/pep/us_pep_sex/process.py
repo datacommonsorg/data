@@ -18,6 +18,8 @@ and generates cleaned CSV, MCF, TMCF file.
 
 import os
 import sys
+import re
+import random
 import pandas as pd
 import numpy as np
 from absl import app, flags
@@ -1147,6 +1149,28 @@ def is_valid_url(url):
         return False
 
 
+def probe_head_url_with_retry(session, url, timeout=5, max_retries=3):
+    """Probes a URL with HEAD request, handling 429/503 with backoff."""
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = session.head(url, allow_redirects=True, timeout=timeout)
+            if response.status_code in (429, 503):
+                retry_after = response.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    sleep_time = min(float(retry_after), 30.0)
+                else:
+                    sleep_time = 2.0 * attempt + random.uniform(0.5, 1.5)
+                logging.warning(
+                    f"HTTP {response.status_code} probing {url}. Backing off for {sleep_time:.1f}s (attempt {attempt}/{max_retries})."
+                )
+                time.sleep(sleep_time)
+                continue
+            return response.status_code == 200
+        except requests.exceptions.RequestException as e:
+            time.sleep(1.0 * attempt)
+    return False
+
+
 def add_future_year_urls():
     """
     This method adds the future year urls that has to be downloaded
@@ -1161,6 +1185,10 @@ def add_future_year_urls():
     # Use a requests session for connection pooling to improve efficiency
     # when making hundreds of HEAD requests.
     session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    })
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
@@ -1196,20 +1224,18 @@ def add_future_year_urls():
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
 
-    # Loop through years in reverse order from 2030 to 2023
-    for future_year in range(2030, 2022, -1):  # From 2030 to 2023
+    max_scan_year = min(2030, dt.now().year + 1)
+    # Loop through years in reverse order from max_scan_year down to 2023
+    for future_year in range(max_scan_year, 2022, -1):
 
-        # We check the National CSV first. If it's 404, the whole year is skipped.
+        # We check the National CSV first. If it's not found, the whole year is skipped.
         gatekeeper_url = urls_to_scan[0].format(YEAR=future_year)
         try:
-            # Use a short 5-second timeout for the check
-            response = session.head(gatekeeper_url,
-                                    allow_redirects=True,
-                                    timeout=5)
-            if response.status_code != 200:
+            # Use probe with retry for the check
+            if not probe_head_url_with_retry(session, gatekeeper_url,
+                                             timeout=5):
                 logging.info(
-                    f"Skipping year {future_year}: National file not found (status code: {response.status_code})."
-                )
+                    f"Skipping year {future_year}: National file not found.")
                 continue
         except requests.exceptions.RequestException as e:
             logging.warning(
@@ -1226,18 +1252,12 @@ def add_future_year_urls():
                     url_to_check = url.format(YEAR=YEAR, i=formatted_i)
                     logging.info(f"checking url: {url_to_check}")
 
-                    try:
-                        # HEAD calls only fetch headers and should complete quickly.
-                        check_url = session.head(url_to_check,
-                                                 allow_redirects=True,
-                                                 timeout=5)
-                        if check_url.status_code == 200:
-                            _FILES_TO_DOWNLOAD.append(
-                                {"download_path": url_to_check})
-
-                    except requests.exceptions.RequestException as e:
-                        logging.error(
-                            f"URL is not accessible {url_to_check} due to {e}")
+                    if probe_head_url_with_retry(session,
+                                                 url_to_check,
+                                                 timeout=5):
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+                    time.sleep(0.2)
 
             else:  # This URL does not contain {i}, so we only need to process it once per year
                 url_to_check = url.format(YEAR=YEAR)
@@ -1246,55 +1266,112 @@ def add_future_year_urls():
                 if url_to_check in downloaded_year_urls:
                     continue  # Skip this URL if it's already processed
 
-                try:
-                    # HEAD calls only fetch headers and should complete quickly.
-                    check_url = session.head(url_to_check,
-                                             allow_redirects=True,
-                                             timeout=5)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                        downloaded_year_urls.add(
-                            url_to_check)  # Mark this URL as processed
-
-                    else:
-                        logging.error(
-                            f"URL returned status code {check_url.status_code}: {url_to_check}"
-                        )
-
-                except requests.exceptions.RequestException as e:
-                    logging.error(
-                        f"URL is not accessible {url_to_check} due to {e}")
+                if probe_head_url_with_retry(session, url_to_check, timeout=5):
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    downloaded_year_urls.add(url_to_check)
+                time.sleep(0.2)
 
 
 def cleanup():
-    """Delete all old files in the gcs_folder to prevent cache bloat."""
+    """Delete all old files in the gcs_folder to prevent cache bloat,
+    while preserving immutable historical data files.
+    """
     if os.path.exists(_GCS_FOLDER_PERSISTENT_PATH):
         for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
             file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
             if os.path.isfile(file_path):
+                # Historical files (pre-2021) should NEVER be evicted from cache
+                year_matches = re.findall(r'(?:19\d{2}|20[01]\d|2020)',
+                                          file_name)
+                if year_matches:
+                    continue
                 file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
                                                                           3600)
-                # Delete ANY file older than the TTL
+                # Delete recent release files only if older than TTL
                 if file_age > _TTL_DAYS:
                     logging.info(f"Cleaning up old file: {file_name}")
                     os.remove(file_path)
 
 
-@retry(tries=3,
-       delay=2,
-       backoff=2,
-       exceptions=(requests.RequestException, Exception))
+def download_single_file_with_retry(session,
+                                    url,
+                                    dest_input_path,
+                                    dest_cache_path,
+                                    headers,
+                                    max_retries=5,
+                                    initial_delay=2.0,
+                                    backoff_factor=2.0):
+    """Downloads a single file with exponential backoff and HTTP 429/5xx retry handling."""
+    for attempt in range(1, max_retries + 1):
+        try:
+            with session.get(url, stream=True, timeout=120,
+                             headers=headers) as response:
+                content_type = response.headers.get('Content-Type', '')
+
+                # Skip HTML error pages
+                if 'html' in content_type.lower():
+                    logging.error(
+                        f"Server returned HTML error page for URL: {url}. Skipping."
+                    )
+                    return True
+
+                if response.status_code == 200:
+                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                        for chunk in response.iter_content(chunk_size=65536):
+                            if chunk:
+                                tmp_file.write(chunk)
+                        tmp_file_path = tmp_file.name
+
+                    # Copy to local destination
+                    shutil.copy(tmp_file_path, dest_input_path)
+                    # Move to persistent cache destination
+                    shutil.move(tmp_file_path, dest_cache_path)
+                    logging.info(f"Downloaded file: {url}")
+                    return True
+                elif response.status_code in (429, 500, 502, 503, 504):
+                    retry_after = response.headers.get("Retry-After")
+                    if retry_after and retry_after.isdigit():
+                        sleep_time = min(float(retry_after), 60.0)
+                    else:
+                        sleep_time = initial_delay * (backoff_factor**(
+                            attempt - 1)) + random.uniform(0.5, 1.5)
+                    logging.warning(
+                        f"HTTP {response.status_code} downloading {url}. Attempt {attempt}/{max_retries}. Backing off for {sleep_time:.1f}s."
+                    )
+                    time.sleep(sleep_time)
+                else:
+                    logging.error(
+                        f"Failed to download {url} with status code {response.status_code}"
+                    )
+                    return False
+        except requests.exceptions.RequestException as e:
+            sleep_time = initial_delay * (backoff_factor**
+                                          (attempt - 1)) + random.uniform(
+                                              0.5, 1.5)
+            logging.warning(
+                f"RequestException downloading {url}: {e}. Attempt {attempt}/{max_retries}. Backing off for {sleep_time:.1f}s."
+            )
+            time.sleep(sleep_time)
+    logging.error(f"Exhausted {max_retries} retries for URL {url}")
+    return False
+
+
 def download_files():
     """
     Download files from URLs listed in _FILES_TO_DOWNLOAD.
     Skips URLs listed in skip_url.json from GCS.
+    Uses persistent cache in gcs_folder and polite rate limiting with backoff.
     """
     global _FILES_TO_DOWNLOAD
     session = requests.session()
+    headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    }
 
-    # Ensure the directory exists (it shouldn't "expect" it to be there)
+    # Ensure the directory exists
     os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
+    os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
 
     # Get set of already downloaded files
     downloaded_files = set(os.listdir(_GCS_FOLDER_PERSISTENT_PATH))
@@ -1309,59 +1386,38 @@ def download_files():
         else:
             file_name_to_save = url.split('/')[-1]
 
-        # Skip if file already exists in cache (cleanup() already removed stale files)
+        # Skip if file already exists in cache
         if file_name_to_save in downloaded_files:
             file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
                                      file_name_to_save)
-            logging.info(
-                f"Skipping download, using cached file: {file_name_to_save}")
+            if os.path.isfile(file_path) and os.path.getsize(file_path) > 0:
+                logging.info(
+                    f"Skipping download, using cached file: {file_name_to_save}"
+                )
+                shutil.copy(file_path,
+                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+                file_to_download['is_downloaded'] = True
+                continue
 
-            # Make sure to copy the cached file to the input directory!
-            shutil.copy(file_path,
-                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
-            continue
+        dest_input_path = os.path.join(_INPUT_FILE_PATH, file_name_to_save)
+        dest_cache_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
+                                       file_name_to_save)
 
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        try:
-            with session.get(url, stream=True, timeout=120,
-                             headers=headers) as response:
-                response.raise_for_status()
+        logging.info(f"Downloading file: {file_name_to_save} - URL {url}")
+        success = download_single_file_with_retry(session, url, dest_input_path,
+                                                  dest_cache_path, headers)
+        file_to_download['is_downloaded'] = success
+        time.sleep(1.0)
 
-                content_type = response.headers.get('Content-Type', '')
-
-                # Minimal fix: Log error and continue to skip HTML pages
-                if 'html' in content_type.lower():
-                    logging.error(
-                        f"Server returned HTML error page for URL: {url}. Skipping."
-                    )
-                    continue
-
-                if response.status_code == 200:
-                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                        for chunk in response.iter_content(chunk_size=8192):
-                            if chunk:
-                                tmp_file.write(chunk)
-                        tmp_file_path = tmp_file.name
-
-                    # Copy to local destination
-                    shutil.copy(
-                        tmp_file_path,
-                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
-
-                    # Move to gcs destination (optimized from shutil.copy + os.remove)
-                    shutil.move(
-                        tmp_file_path,
-                        os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
-                                     file_name_to_save))
-
-                    file_to_download['is_downloaded'] = True
-                    logging.info(f"Downloaded file: {url}")
-
-        except Exception as e:
-            file_to_download['is_downloaded'] = False
-            logging.error(f"Error downloading {url}: {e}")
-            raise
-        time.sleep(1)
+    failed_downloads = [
+        file_to_download['download_path']
+        for file_to_download in _FILES_TO_DOWNLOAD
+        if not file_to_download.get('is_downloaded', False)
+    ]
+    if failed_downloads:
+        raise Exception(
+            f"Failed to download {len(failed_downloads)} files: {failed_downloads}"
+        )
 
     return True
 
