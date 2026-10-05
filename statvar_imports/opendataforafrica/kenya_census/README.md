@@ -1,45 +1,113 @@
-# Kenya Census
+# Kenya Census Data Commons Import
 
-- source: https://kenya.opendataforafrica.org/
+## 1. Overview & Dataset Information
 
-File descriptions:
+- **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
+- **Publisher**: Kenya National Bureau of Statistics (KNBS)
+- **Import Type**: `Semi-Automated`
+- **Schedule**: Weekly (`30 05 * * 1` via Cloud Batch)
+- **Coverage**: Demographics, Health, Education, Economy (2002 – present)
+- **Entity Resolution**:
+  - National level: `country/KEN`
+  - County / Sub-national level: `AdministrativeArea1` resolved via mapping CSVs (`*_places_resolved.csv`) to Wikidata / Data Commons DCIDs.
 
-*_pvmap.csv: StatVar processor schema mappings for a specific source table
+## 2. Directory Layout & Artifacts
 
-*_metadata.csv: StatVar processor configs for a specific source table
+| File / Directory | Purpose |
+| :--- | :--- |
+| `manifest.json` | Cloud Batch import manifest declaring scripts, inputs, GCS source files, and resource limits |
+| `validation_config.json` | Import validation rules (freshness SQL, deletion threshold <= 0.1%, 0 lint errors) |
+| `download.sh` | Shell script to fetch raw census CSVs from GCS storage into `input_files/` |
+| `download.py` | Python utility for parsing Open Data for Africa StructureSpecificData SDMX XML files to CSVs |
+| `download_test.py` | Hermetic unit tests for `download.py` XML parsing, atomic writes, and GCS pull routines |
+| `*_pvmap.csv` | Property-Value schema mappings for `stat_var_processor.py` |
+| `*_metadata.csv` | Processor configuration files declaring header rows and column mappings |
+| `*_places_resolved.csv` | Place resolver mappings for County / AdministrativeUnit place identifiers |
+| `*_indicator.csv` | Indicator reference definitions |
+| `input_files/` | Raw input data CSVs (synced to GCS `source_files`) |
+| `counters/` | Runtime counters output directory (`.gitignore` excluded from Git) |
+| `test_data/` | Small hermetic unit test input fixtures (<= 5 rows) |
 
-*_places_resolved.csv: Mapping from place names in a source table to dcid for StatVar processor
+## 3. Dataset Mapping Index
 
-*_indicator.csv: Useful for understanding the columns in the source file when creating PV mappings
+The import processes 12 tables from KNBS Open Data:
 
+1. `dlrrjxg`: Mortality events by age group and sex (`country/KEN`)
+2. `egdxgkd`: KCSE secondary examination candidates and grades (`country/KEN`)
+3. `emxkej`: Population census demographics by gender and age group (`country/KEN`)
+4. `fwjfdnc`: Household characteristics and census demographics (counties via `fwjfdnc_places_resolved.csv`)
+5. `gxbucsd`: School enrollment by administrative unit (counties via `gxbucsd_places_resolved.csv`)
+6. `ixdvqrf`: Birth events by sex (`country/KEN`)
+7. `rsfzlbg`: County population indicators (counties via `rsfzlbg_places_resolved.csv`)
+8. `srricmg`: National household expenditure categories (`country/KEN`)
+9. `tdxdksf`: KCPE primary examination mean assessment scores (`country/KEN`)
+10. `vdbvyfd`: Health and hospital deliveries by county (counties via `vdbvyfd_places_resolved.csv`)
+11. `welrttb`: Employment and labor force status (`country/KEN`)
+12. `xszlbb`: National economic production and industry indicators (`country/KEN`)
 
-- how to download data: 
+## 4. Semi-Automated Ingestion Workflow
 
-You can download the input files using the script located at:
-data/scripts/opendataafrica/download_folder/download.sh
+Due to Cloudflare bot protection on `kenya.opendataforafrica.org`, programmatic scraping and automated HTTP requests directly against the portal fail with HTTP 403. Consequently, upstream source data updates follow a semi-automated workflow with GCS backing.
 
-Run the following command from that directory:
+### 4.1 Manual Workflow (Updating Upstream Source Files)
+When updated census data is published:
+1. **Download SDMX XML**: Open the source URLs in a local browser and download the SDMX XML files to a local `xml/` directory.
+2. **Convert XML to CSV**: Execute `download.py` to convert the raw SDMX XML files into normalized CSV files in `input_files/`:
+   ```bash
+   python3 download.py --xml_dir xml/
+   ```
+3. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
+   ```bash
+   gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/
+   ```
 
-sh download.sh 'kenya' 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd,ixdvqrf,rsfzlbg,srricmg,tdxdksf,vdbvyfd,welrttb,xszlbb' 
+### 4.2 Automated Ingestion Workflow (Cloud Batch Execution)
+During automated weekly runs (`30 05 * * 1`), Cloud Batch executes the following pipeline:
+1. **Download Step (`download.sh`)**: Pulls the verified CSVs from `gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/` into `input_files/`.
+2. **Transform (`stat_var_processor.py`)**: Runs each of the 12 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
+3. **Post-Process (`post_process.sh`)**: Appends provisional enum nodes required for schema resolution.
+4. **Resolution, Differ & Validation (`genmcf`, differ, import_validation)**: Generates resolved MCFs, compares against baseline version, and verifies validation rules.
 
-- Make sure to run this command from the data/scripts/opendataafrica/download_folder/ directory.
+## 5. Running the Data Processor
 
-- The output path is optional. If not provided, it defaults to {PWD}/input_files (i.e., an input_files folder in the current working directory).
+Run `stat_var_processor.py` using repo-relative paths from the repository root:
 
-- If you need to specify a custom path, add it as the third argument to the command.
+```bash
+# Example 1: National table (dlrrjxg)
+.env/bin/python tools/statvar_importer/stat_var_processor.py \
+  --input_data=statvar_imports/opendataforafrica/kenya_census/input_files/dlrrjxg.csv \
+  --pv_map=statvar_imports/opendataforafrica/kenya_census/dlrrjxg_pvmap.csv \
+  --config_file=statvar_imports/opendataforafrica/kenya_census/dlrrjxg_metadata.csv \
+  --output_path=statvar_imports/opendataforafrica/kenya_census/output/dlrrjxg \
+  --output_counters=statvar_imports/opendataforafrica/kenya_census/counters/dlrrjxg_counters.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 
+# Example 2: County-resolved table (vdbvyfd)
+.env/bin/python tools/statvar_importer/stat_var_processor.py \
+  --input_data=statvar_imports/opendataforafrica/kenya_census/input_files/vdbvyfd.csv \
+  --pv_map=statvar_imports/opendataforafrica/kenya_census/vdbvyfd_pvmap.csv \
+  --config_file=statvar_imports/opendataforafrica/kenya_census/vdbvyfd_metadata.csv \
+  --places_resolved_csv=statvar_imports/opendataforafrica/kenya_census/vdbvyfd_places_resolved.csv \
+  --output_path=statvar_imports/opendataforafrica/kenya_census/output/vdbvyfd \
+  --output_counters=statvar_imports/opendataforafrica/kenya_census/counters/vdbvyfd_counters.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+```
 
-- type of place: Country and AdministrativeArea1.
+## 6. Testing & Validation
 
-- statvars: Demographics, Economy, Education
+### 6.1 Unit Tests
 
-- years: 2002 to 2023
+Run the hermetic unit tests for the Python download routine:
 
-- place_resolution: Place resolution is performed by the StatVar processor using the places_resolved_csv flag.
+```bash
+.env/bin/python -m unittest statvar_imports/opendataforafrica/kenya_census/download_test.py
+```
 
-### How to run:
+### 6.2 Pre-Submission Validation Rules
 
-`python3 stat_var_processor.py --input_data=/data/statvar_imports/opendataforafrica/kenya_census/test_data/dlrrjxg_input.csv --pv_map=/data/statvar_imports/opendataforafrica/kenya_census/dlrrjxg_pvmap.csv --config=/data/statvar_imports/opendataforafrica/kenya_census/dlrrjxg_metadata.csv --output_path=/data/statvar_imports/opendataforafrica/kenya_census/test_data/dlrrjxg`
-
-## If place resolution is involved,use:
-` --places_resolved_csv=data/statvar_imports/opendataforafrica/kenya_census/places_resolved_csv.csv` along with the remaining command.
+`validation_config.json` enforces:
+- `check_all_statvars_freshness`: SQL validator ensuring `MaxDate >= '2009' AND total_svs > 0` across all active StatVars.
+- `check_max_date_consistent`: Omitted per Runbook CHK-7.2 because `egdxgkd` contains legitimate discontinued series (`Count_Student_KenyaCertificateSecondaryEducation` ending in 2022 while grade breakdowns continue to 2024).
+- `check_deleted_records_percent`: Strict cap with `threshold: 0.1` (0.1%), matching rule description.
+- Default `check_lint_error_count`: Enforces `0` lint errors (`threshold: 0`).
+- Default `check_missing_refs_count`: Enforces `0` missing references (`threshold: 0`).

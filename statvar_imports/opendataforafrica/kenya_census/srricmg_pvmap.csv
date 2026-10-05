@@ -14,4 +14,4 @@
 "EX7","expenditureType","ExportsGoodsAndServices","ET","""exports of goods and services""",,,,,,
 "EX8","expenditureType","ImportsGoodsAndServices","ET","""Imports of goods and services""",,,,,,
 "EX9","expenditureType","DiscrepancyExpenditure","ET","""discrepancy expenditure""",,,,,,
-"EX10","measurementQualifier","Nominal",,,,,,,,
+"EX10","#ignore","ignore",,,,,,,,

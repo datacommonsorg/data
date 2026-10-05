@@ -1,0 +1,30 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_all_statvars_freshness",
+            "description": "Verify all active StatVars meet the freshness boundary (>= 2009).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2009' AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Enforce zero lint errors.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        }
+    ]
+}

@@ -6,72 +6,111 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://kenya.opendataforafrica.org/",
-            "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs.",
+            "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs (Semi-Automated: GCS-backed upstream source data with automated Cloud Batch extraction, transformation, and validation).",
+            "import_type": "Semi-Automated",
+            "workflow_steps": {
+                "manual_steps": [
+                    "1. Manual Source Download: Open Data for Africa (https://kenya.opendataforafrica.org/) enforces Cloudflare bot protection, blocking programmatic scraping. Raw SDMX XML files for updated census tables are manually downloaded via browser into xml/.",
+                    "2. Format Conversion: Execute `python3 download.py --xml_dir xml/` to convert raw SDMX XML files into normalized CSV files under input_files/.",
+                    "3. GCS Staging: Upload converted CSVs to GCS bucket: `gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/`."
+                ],
+                "automated_steps": [
+                    "1. Download Step (download.sh): Cloud Batch executor runs download.sh to fetch the latest staged CSVs from gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/ to input_files/.",
+                    "2. Extract & Transform (stat_var_processor.py): Automatically maps and transforms raw CSVs into Data Commons StatVarObservation CSVs, TMCFs, and StatVar MCFs with sub-national place resolution.",
+                    "3. Post-Processing (post_process.sh): Automatically applies node resolution adjustments (provisional enums) before MCF generation.",
+                    "4. Resolution & Validation (genmcf, differ, import_validation): Cloud Batch executor runs genmcf to resolve nodes, computes diffs against baseline version, and validates data freshness, deletion thresholds (<= 0.1%), and lint errors."
+                ]
+            },
             "scripts": [
-                "../../../scripts/opendataafrica/download_folder/download.sh 'kenya' 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd,ixdvqrf,rsfzlbg,srricmg,tdxdksf,vdbvyfd,welrttb,xszlbb'",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dlrrjxg.csv --pv_map=dlrrjxg_pvmap.csv --config_file=dlrrjxg_metadata.csv --output_path=output/dlrrjxg",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/egdxgkd.csv --pv_map=egdxgkd_pvmap.csv --config_file=egdxgkd_metadata.csv --output_path=output/egdxgkd",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/emxkej.csv --pv_map=emxkej_pvmap.csv --config_file=emxkej_metadata.csv --output_path=output/emxkej",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/fwjfdnc.csv --pv_map=fwjfdnc_pvmap.csv --config_file=fwjfdnc_metadata.csv --output_path=output/fwjfdnc --places_resolved_csv=fwjfdnc_places_resolved.csv",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/gxbucsd.csv --pv_map=gxbucsd_pvmap.csv --config_file=gxbucsd_metadata.csv --output_path=output/gxbucsd --places_resolved_csv=gxbucsd_places_resolved.csv",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ixdvqrf.csv --pv_map=ixdvqrf_pvmap.csv --config_file=ixdvqrf_metadata.csv --output_path=output/ixdvqrf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/rsfzlbg.csv --pv_map=rsfzlbg_pvmap.csv --config_file=rsfzlbg_metadata.csv --output_path=output/rsfzlbg --places_resolved_csv=rsfzlbg_places_resolved.csv",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/srricmg.csv --pv_map=srricmg_pvmap.csv --config_file=srricmg_metadata.csv --output_path=output/srricmg",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/tdxdksf.csv --pv_map=tdxdksf_pvmap.csv --config_file=tdxdksf_metadata.csv --output_path=output/tdxdksf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/vdbvyfd.csv --pv_map=vdbvyfd_pvmap.csv --config_file=vdbvyfd_metadata.csv --output_path=output/vdbvyfd --places_resolved_csv=rsfzlbg_places_resolved.csv",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/welrttb.csv --pv_map=welrttb_pvmap.csv --config_file=welrttb_metadata.csv --output_path=output/welrttb",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/xszlbb.csv --pv_map=xszlbb_pvmap.csv --config_file=xszlbb_metadata.csv --output_path=output/xszlbb"
+                "download.sh",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dlrrjxg.csv --pv_map=dlrrjxg_pvmap.csv --config_file=dlrrjxg_metadata.csv --output_path=output/dlrrjxg --output_counters=counters/dlrrjxg_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/egdxgkd.csv --pv_map=egdxgkd_pvmap.csv --config_file=egdxgkd_metadata.csv --output_path=output/egdxgkd --output_counters=counters/egdxgkd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/emxkej.csv --pv_map=emxkej_pvmap.csv --config_file=emxkej_metadata.csv --output_path=output/emxkej --output_counters=counters/emxkej_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/fwjfdnc.csv --pv_map=fwjfdnc_pvmap.csv --config_file=fwjfdnc_metadata.csv --output_path=output/fwjfdnc --places_resolved_csv=fwjfdnc_places_resolved.csv --output_counters=counters/fwjfdnc_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/gxbucsd.csv --pv_map=gxbucsd_pvmap.csv --config_file=gxbucsd_metadata.csv --output_path=output/gxbucsd --places_resolved_csv=gxbucsd_places_resolved.csv --output_counters=counters/gxbucsd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ixdvqrf.csv --pv_map=ixdvqrf_pvmap.csv --config_file=ixdvqrf_metadata.csv --output_path=output/ixdvqrf --output_counters=counters/ixdvqrf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/rsfzlbg.csv --pv_map=rsfzlbg_pvmap.csv --config_file=rsfzlbg_metadata.csv --output_path=output/rsfzlbg --places_resolved_csv=rsfzlbg_places_resolved.csv --output_counters=counters/rsfzlbg_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/srricmg.csv --pv_map=srricmg_pvmap.csv --config_file=srricmg_metadata.csv --output_path=output/srricmg --output_counters=counters/srricmg_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/tdxdksf.csv --pv_map=tdxdksf_pvmap.csv --config_file=tdxdksf_metadata.csv --output_path=output/tdxdksf --output_counters=counters/tdxdksf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/vdbvyfd.csv --pv_map=vdbvyfd_pvmap.csv --config_file=vdbvyfd_metadata.csv --output_path=output/vdbvyfd --places_resolved_csv=vdbvyfd_places_resolved.csv --output_counters=counters/vdbvyfd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/welrttb.csv --pv_map=welrttb_pvmap.csv --config_file=welrttb_metadata.csv --output_path=output/welrttb --output_counters=counters/welrttb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/xszlbb.csv --pv_map=xszlbb_pvmap.csv --config_file=xszlbb_metadata.csv --output_path=output/xszlbb --output_counters=counters/xszlbb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "post_process.sh"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output/dlrrjxg.tmcf",
-                    "cleaned_csv": "output/dlrrjxg.csv"
+                    "cleaned_csv": "output/dlrrjxg.csv",
+                    "node_mcf": "output/dlrrjxg_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/egdxgkd.tmcf",
-                    "cleaned_csv": "output/egdxgkd.csv"
+                    "cleaned_csv": "output/egdxgkd.csv",
+                    "node_mcf": "output/egdxgkd_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/emxkej.tmcf",
-                    "cleaned_csv": "output/emxkej.csv"
+                    "cleaned_csv": "output/emxkej.csv",
+                    "node_mcf": "output/emxkej_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/fwjfdnc.tmcf",
-                    "cleaned_csv": "output/fwjfdnc.csv"
+                    "cleaned_csv": "output/fwjfdnc.csv",
+                    "node_mcf": "output/fwjfdnc_stat_vars.mcf"
+                },
+                {
+                    "template_mcf": "output/gxbucsd.tmcf",
+                    "cleaned_csv": "output/gxbucsd.csv",
+                    "node_mcf": "output/gxbucsd_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/ixdvqrf.tmcf",
-                    "cleaned_csv": "output/ixdvqrf.csv"
+                    "cleaned_csv": "output/ixdvqrf.csv",
+                    "node_mcf": "output/ixdvqrf_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/rsfzlbg.tmcf",
-                    "cleaned_csv": "output/rsfzlbg.csv"
+                    "cleaned_csv": "output/rsfzlbg.csv",
+                    "node_mcf": "output/rsfzlbg_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/srricmg.tmcf",
-                    "cleaned_csv": "output/srricmg.csv"
+                    "cleaned_csv": "output/srricmg.csv",
+                    "node_mcf": "output/srricmg_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/tdxdksf.tmcf",
-                    "cleaned_csv": "output/tdxdksf.csv"
+                    "cleaned_csv": "output/tdxdksf.csv",
+                    "node_mcf": "output/tdxdksf_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/vdbvyfd.tmcf",
-                    "cleaned_csv": "output/vdbvyfd.csv"
+                    "cleaned_csv": "output/vdbvyfd.csv",
+                    "node_mcf": "output/vdbvyfd_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/welrttb.tmcf",
-                    "cleaned_csv": "output/welrttb.csv"
+                    "cleaned_csv": "output/welrttb.csv",
+                    "node_mcf": "output/welrttb_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "output/xszlbb.tmcf",
-                    "cleaned_csv": "output/xszlbb.csv"
+                    "cleaned_csv": "output/xszlbb.csv",
+                    "node_mcf": "output/xszlbb_stat_vars.mcf"
                 }
             ],
             "source_files": [
-                "input_files/*.csv"
+                "input_files/*",
+                "counters/*",
+                "validation_config.json"
             ],
-            "cron_schedule": "30 05 * * 1"
+            "cron_schedule": "30 05 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            }
         }
     ]
 }
