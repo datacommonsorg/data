@@ -173,6 +173,7 @@ _SCHOOL_GRADE = {
     "Grade 13": "SchoolGrade13",
     np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
+    "†": "NCES_GradeDataMissing",
     "All Ungraded": "NCESUngradedClasses",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1",
@@ -231,11 +232,12 @@ _SCHOOL_GRADE_PLACE = {
     "Grade 13": "SchoolGrade13",
     np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
+    "†": "NCES_GradeDataMissing",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1"
 }
 
-_PHYSICAL_ADD = {np.nan: "", "–": "", "Po Box": "PO BOX"}
+_PHYSICAL_ADD = {np.nan: "", "–": "", "†": "", "Po Box": "PO BOX"}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -278,6 +280,8 @@ _SCHOOL_LEVEL = {
     np.nan:
         "",
     "–":
+        "",
+    "†":
         ""
 }
 # pylint:enable=line-too-long
@@ -390,33 +394,38 @@ _LOCALE = {
     '31-Town: Fringe': "NCES_TownFringe",
     '43-Rural: Remote': "NCES_RuralRemote",
     np.nan: "NCES_LocaleDataMissing",
-    "–": "NCES_LocaleDataMissing"
+    "–": "NCES_LocaleDataMissing",
+    "†": "NCES_LocaleDataMissing"
 }
 
 _UNREADABLE_TEXT = {"–": np.nan, "†": np.nan}
 
-_NAN = {np.nan: "", "nan": ""}
+_NAN = {np.nan: "", "nan": "", "–": "", "†": ""}
 
-_CITY = {np.nan: "", "–": "", " ": ""}
+_CITY = {np.nan: "", "–": "", "†": "", " ": ""}
 
 _MAGNET = {
     "1-Yes": "NCES_MagnetYes",
     "2-No": "NCES_MagnetNo",
     np.nan: "NCES_MagnetDataMissing",
-    "–": "NCES_MagnetDataMissing"
+    "–": "NCES_MagnetDataMissing",
+    "†": "NCES_MagnetDataMissing"
 }
 
 _CHARTER = {
     np.nan: "NCES_CharterDataMissing",
     "1-Yes": "NCES_CharterYes",
     "2-No": "NCES_CharterNo",
-    "–": "NCES_CharterDataMissing"
+    "–": "NCES_CharterDataMissing",
+    "†": "NCES_CharterDataMissing"
 }
 
 _TITLE = {
     np.nan:
         "NCES_TitleISchoolStatusDataMissing",
     "–":
+        "NCES_TitleISchoolStatusDataMissing",
+    "†":
         "NCES_TitleISchoolStatusDataMissing",
     "6-Not a Title I school":
         "NCES_TitleISchoolStatusNotEligible",

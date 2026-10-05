@@ -147,6 +147,9 @@ class USEducation:
         """Convert a file path to a dataframe."""
         with open(f_path, "r", encoding="UTF-8") as file:
             lines = file.readlines()
+            if self.__class__.__name__ == "NCESPrivateSchool":
+                f_content = io.StringIO('\n'.join(lines[6:-5]))
+                return pd.read_csv(f_content)
             start_idx = 6 if len(lines) > 6 else 0
             # Identify footer start if present (NCES ELSI tables append a legend/source footer)
             footer_start = None
@@ -496,9 +499,6 @@ class USEducation:
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO Box")
-        self._final_df_place["Physical_Address"] = (
-            self._final_df_place["Physical_Address"].str.replace(
-                r"\s+", " ", regex=True).str.strip())
         self._final_df_place["Private_School_Name"] = np.where(
             self._final_df_place["Private_School_Name"].str.len() <= 4,
             self._final_df_place["Private_School_Name"],
@@ -547,15 +547,23 @@ class USEducation:
 
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
-        # across disjoint files/years without empty-string shadowing.
-        self._final_df_place.replace([r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
-                                     np.nan,
-                                     regex=True,
-                                     inplace=True)
+        # within the same school year without empty-string shadowing.
+        self._final_df_place.replace(
+            [r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+            np.nan,
+            regex=True,
+            inplace=True)
+        orig_cols = self._final_df_place.columns.tolist()
+        # Stage 1: Coalesce complementary chunks within the same school year.
+        self._final_df_place = (self._final_df_place.groupby(
+            ["school_state_code", "year"], as_index=False, sort=False).first())
+        # Stage 2: Deduplicate across school years, retaining the latest year's record
+        # without bleeding stale historical attributes into recent years.
         self._final_df_place = (self._final_df_place.sort_values(
-            by=["year"], ascending=False).groupby("school_state_code",
-                                                  as_index=False,
-                                                  sort=False).first())
+            by=["year"], ascending=False).drop_duplicates(
+                subset=["school_state_code"],
+                keep="first").reset_index(drop=True))
+        self._final_df_place = self._final_df_place[orig_cols]
 
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
@@ -738,15 +746,23 @@ class USEducation:
 
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
-        # across disjoint files/years without empty-string shadowing.
-        self._final_df_place.replace([r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
-                                     np.nan,
-                                     regex=True,
-                                     inplace=True)
+        # within the same school year without empty-string shadowing.
+        self._final_df_place.replace(
+            [r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+            np.nan,
+            regex=True,
+            inplace=True)
+        orig_cols = self._final_df_place.columns.tolist()
+        # Stage 1: Coalesce complementary chunks within the same school year.
+        self._final_df_place = (self._final_df_place.groupby(
+            ["school_state_code", "year"], as_index=False, sort=False).first())
+        # Stage 2: Deduplicate across school years, retaining the latest year's record
+        # without bleeding stale historical attributes into recent years.
         self._final_df_place = (self._final_df_place.sort_values(
-            by=["year"], ascending=False).groupby("school_state_code",
-                                                  as_index=False,
-                                                  sort=False).first())
+            by=["year"], ascending=False).drop_duplicates(
+                subset=["school_state_code"],
+                keep="first").reset_index(drop=True))
+        self._final_df_place = self._final_df_place[orig_cols]
 
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
@@ -958,6 +974,7 @@ class USEducation:
         drop_list = [
             item for item in col_list if item not in self._exclude_list
         ]
+        df_place_raw = df_cleaned[data_place].copy()
         # Replacing '–','†' with nan values.
         df_cleaned = df_cleaned.replace(_UNREADABLE_TEXT)
         # Writing duplicate school IDs to a file.
@@ -972,7 +989,12 @@ class USEducation:
         # Dropping school IDs whose entities are null based on the drop_list
         df_cleaned = df_cleaned.dropna(how='all', subset=drop_list)
         # Passing data_place list that contain columns required for place entities.
-        df_place = df_cleaned[data_place]
+        if self._import_name in ["district_school", "public_school"]:
+            # Place data preserves '–' and '†' sentinel strings so that replace_values()
+            # maps them directly to dcs:NCES_*DataMissing instead of converting to np.nan.
+            df_place = df_place_raw.loc[df_cleaned.index]
+        else:
+            df_place = df_cleaned[data_place]
         df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
         # Dropping Duplicate Schools based on School ID which is sort_value.
         df_cleaned = df_cleaned.drop_duplicates(subset=self._school_id,
