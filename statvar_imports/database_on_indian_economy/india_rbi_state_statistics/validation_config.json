@@ -6,7 +6,7 @@
             "description": "Checks that the percentage of deleted records is within the 0.1% threshold. Initial baseline rollout accounts for one-time historical revisions and remappings and official RBI retrospective revisions. Future automated runs strictly enforce <= 0.1% against the promoted baseline.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 100
+                "threshold": 0.1
             }
         },
         {
