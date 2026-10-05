@@ -19,6 +19,12 @@ The dataset includes:
 - **State**: All 50 US States and the District of Columbia.
 - **County**: US counties with populations of 100,000 or higher.
 
+## Prerequisites
+Before running the pipeline locally or in automation, ensure the following dependencies are installed:
+- **Python**: Python 3.10+ with repository dependencies (`pandas`, `absl-py`, `selenium`, `duckdb`).
+- **Google Chrome**: Google Chrome or Chromium installed on the host system for headless browser operations.
+- **Google Cloud SDK (`gcloud`)**: Configured with read access to `gs://unresolved_mcf/cdc/wonder/natality/` for baseline snapshots.
+
 ---
 
 ## Directory Structure
@@ -45,8 +51,8 @@ scripts/us_cdc/natality/
 
 2. **Data Processing & TMCF Generation (`process.py`)**:
    - Cleans the raw TSVs by removing metadata, footers, and subtotal rows.
-   - Maps raw measure columns to standardized Data Commons StatisticalVariables and schema-compliant Units (`Week`, `Gram`, `Month`, `Years`).
-   - Resolves FIPS codes into Data Commons DCIDs (`geoId/XX` for State, `geoId/XXXXX` for County).
+   - Maps raw measure columns to standardized Data Commons StatisticalVariables and schema-compliant Units (`Week`, `Gram`, `Month`, `Year`).
+   - Resolves FIPS codes into Data Commons DCIDs (`geoId/XX` for State, `geoId/XXXXX` for County) and filters invalid/unidentified placeholder codes (`geoId/99`, `geoId/99999`).
    - Merges live scraped records on top of the historical baseline (updating overlapping records and appending new years like 2023–2024).
    - Aggregates State-level counts into national Country totals (`output/country.csv`).
    - Automatically writes Template MCF files (`country.tmcf`, `state.tmcf`, `county.tmcf`) to `output/`.

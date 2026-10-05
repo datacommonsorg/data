@@ -116,6 +116,57 @@ class DownloadTest(unittest.TestCase):
             download.download_historical_baseline(tmp_out)
             self.assertEqual(mock_run.call_count, 6)
 
+    @patch('download.shutil.which', return_value='/usr/bin/gcloud')
+    def test_download_historical_baseline_idempotent_prefix(self, mock_which):
+        """Verifies idempotent prefixing in download_historical_baseline."""
+        mock_res_ls = MagicMock()
+        mock_res_ls.stdout = 'gs://unresolved_mcf/cdc/wonder/natality/country/20231215/\n'
+
+        def fake_run(cmd, **kwargs):
+            if 'ls' in cmd:
+                return mock_res_ls
+            if 'cp' in cmd:
+                dest_dir = cmd[-1]
+                with open(os.path.join(dest_dir, 'country_baseline.csv'),
+                          'w') as f:
+                    f.write('Year,StatVar,Quantity\n')
+                return MagicMock()
+            return MagicMock()
+
+        with tempfile.TemporaryDirectory() as tmp_out:
+            with patch('download.subprocess.run', side_effect=fake_run):
+                download.download_historical_baseline(tmp_out)
+            self.assertTrue(
+                os.path.exists(os.path.join(tmp_out, 'country_baseline.csv')))
+            self.assertFalse(
+                os.path.exists(
+                    os.path.join(tmp_out, 'country_country_baseline.csv')))
+
+    @patch('download.shutil.which', return_value=None)
+    @patch('download.logging.fatal')
+    def test_download_historical_baseline_missing_gcloud(
+            self, mock_fatal, mock_which):
+        """Verifies fatal error when gcloud CLI is missing."""
+        with tempfile.TemporaryDirectory() as tmp_out:
+            download.download_historical_baseline(tmp_out)
+            mock_fatal.assert_called_once()
+            self.assertIn('gcloud CLI not found', mock_fatal.call_args[0][0])
+
+    @patch('download.download_historical_baseline')
+    @patch('download.create_chrome_driver')
+    @patch('download.download_natality_dataset')
+    @patch('download.logging.fatal')
+    @patch('download.time.sleep', return_value=None)
+    def test_download_all_retries_and_fatal_failure(self, mock_sleep,
+                                                    mock_fatal, mock_download,
+                                                    mock_driver, mock_baseline):
+        """Verifies download_all retries up to max_retries before logging fatal."""
+        mock_download.side_effect = RuntimeError('Download connection error')
+        with tempfile.TemporaryDirectory() as tmp_out:
+            download.download_all(tmp_out, max_retries=3, timeout=1)
+            self.assertEqual(mock_download.call_count, 3)
+            mock_fatal.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

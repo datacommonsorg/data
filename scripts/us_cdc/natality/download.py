@@ -34,7 +34,7 @@ _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
                     'Directory where downloaded raw data files will be saved.')
 flags.DEFINE_boolean('headless', True, 'Run Chrome in headless mode.')
-flags.DEFINE_integer('timeout_seconds', 60,
+flags.DEFINE_integer('timeout_seconds', 180,
                      'Maximum time to wait for a download to complete.')
 
 _FLAGS = flags.FLAGS
@@ -88,7 +88,7 @@ def download_natality_dataset(driver,
                               geo_level: str,
                               download_tmp_dir: str,
                               dest_path: str,
-                              timeout: int = 60):
+                              timeout: int = 180):
     """Navigates to CDC WONDER, selects options, and downloads the raw export file."""
     logging.info(
         f'Navigating to {_CDC_WONDER_NATALITY_URL} for {geo_level} data...')
@@ -118,8 +118,9 @@ def download_natality_dataset(driver,
         try:
             year_select.deselect_all()
             year_select.select_by_value('*All*')
-        except Exception:
-            pass
+        except Exception as e:
+            logging.error(f'Failed to select all years in year filter: {e}')
+            raise
 
     # Check all optional health and demographic measures
     for measure_id in _OPTIONAL_MEASURES:
@@ -150,10 +151,16 @@ def download_natality_dataset(driver,
     downloaded_file = None
     while time.time() - start_time < timeout:
         time.sleep(1)
-        files = os.listdir(download_tmp_dir)
-        if files and not any(f.endswith('.crdownload') for f in files):
-            downloaded_file = os.path.join(download_tmp_dir, files[0])
-            break
+        valid_candidates = [
+            f for f in os.listdir(download_tmp_dir) if not f.startswith('.') and
+            not f.endswith('.crdownload') and not f.endswith('.tmp')
+        ]
+        if valid_candidates:
+            candidate_path = os.path.join(download_tmp_dir, valid_candidates[0])
+            if os.path.exists(candidate_path) and os.path.getsize(
+                    candidate_path) > 0:
+                downloaded_file = candidate_path
+                break
 
     if not downloaded_file or not os.path.exists(downloaded_file):
         raise TimeoutError(
@@ -173,8 +180,8 @@ def download_historical_baseline(output_dir: str):
               ('county', 'county_')]
 
     if not shutil.which('gcloud'):
-        logging.warning(
-            'gcloud CLI not found; skipping historical baseline download from GCS.'
+        logging.fatal(
+            'gcloud CLI not found; cannot download required historical baseline from GCS.'
         )
         return
 
@@ -191,7 +198,7 @@ def download_historical_baseline(output_dir: str):
                 if re.search(r'/[0-9]{8}/', line.strip())
             ]
             if not snapshot_dirs:
-                logging.warning(
+                logging.fatal(
                     f'No dated snapshots found in {gcs_base}/{level}/')
                 continue
             latest_dir = sorted(snapshot_dirs)[-1]
@@ -209,18 +216,20 @@ def download_historical_baseline(output_dir: str):
                 for fname in os.listdir(tmp_download):
                     if fname.endswith('.csv'):
                         src = os.path.join(tmp_download, fname)
-                        dst = os.path.join(output_dir, f'{prefix}{fname}')
+                        target_fname = fname if fname.startswith(
+                            prefix) else f'{prefix}{fname}'
+                        dst = os.path.join(output_dir, target_fname)
                         shutil.copyfile(src, dst)
             logging.info(
                 f'Successfully downloaded historical {level} baseline.')
         except Exception as e:
-            logging.warning(
+            logging.fatal(
                 f'Could not download historical {level} baseline: {e}')
 
 
 def download_all(output_dir: str,
                  headless: bool = True,
-                 timeout: int = 60,
+                 timeout: int = 180,
                  max_retries: int = 3):
     """Downloads both live data from CDC WONDER and historical baseline."""
     os.makedirs(output_dir, exist_ok=True)
@@ -264,8 +273,7 @@ def download_all(output_dir: str,
             logging.fatal(
                 f'Could not download {geo_level} dataset after {max_retries} attempts: {last_error}'
             )
-            raise RuntimeError(
-                f'Failed to download {geo_level} dataset: {last_error}')
+            return
 
 
 def main(argv):

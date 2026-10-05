@@ -13,6 +13,7 @@
             ],
             "source_files": [
                 "input_files/*",
+                "manifest.json",
                 "validation_config.json"
             ],
             "import_inputs": [

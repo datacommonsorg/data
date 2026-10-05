@@ -46,7 +46,7 @@ _FLAGS = flags.FLAGS
 _MEASURE_MAP = {
     'Births': ('Count_BirthEvent_LiveBirth', ''),
     'Average Age of Mother (years)':
-        ('Mean_MothersAge_BirthEvent_LiveBirth', 'Years'),
+        ('Mean_MothersAge_BirthEvent_LiveBirth', 'Year'),
     'Average OE Gestational Age (weeks)':
         ('Mean_OeGestationalAge_BirthEvent_LiveBirth', 'Week'),
     'Average LMP Gestational Age (weeks)':
@@ -63,6 +63,26 @@ _MEASURE_MAP = {
         'Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth',
         'Month'),
 }
+
+_UNIT_NORMALIZATION = {
+    'Weeks': 'Week',
+    'Grams': 'Gram',
+    'Months': 'Month',
+    'Years': 'Year',
+}
+
+
+def _normalize_quantities(df: pd.DataFrame) -> pd.DataFrame:
+    """Normalizes Count_* StatVar quantities to integer strings without decimals."""
+    if df.empty or 'StatVar' not in df.columns or 'Quantity' not in df.columns:
+        return df
+    count_mask = df['StatVar'].str.startswith('Count')
+    nums = pd.to_numeric(df['Quantity'], errors='coerce')
+    valid_mask = count_mask & nums.notna()
+    df.loc[valid_mask, 'Quantity'] = (
+        nums.loc[valid_mask].round().astype('int64').astype(str))
+    return df
+
 
 _COUNTRY_TMCF_TEMPLATE = """Node: E:CDCWonderNatality->E0
 typeOf: dcs:StatVarObservation
@@ -94,14 +114,16 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
     valid_lines = []
     with open(tsv_path, 'r', encoding='utf-8', errors='replace') as f:
         for line in f:
-            if (line.startswith('"---"') or line.startswith('Caveats:') or
-                    line.startswith('"Query Date:')):
-                break
-            if line.startswith('"Total"'):
+            stripped = line.strip()
+            if not stripped:
                 continue
-            cleaned = line.lstrip('\t').strip()
-            if cleaned:
-                valid_lines.append(cleaned)
+            if (stripped.startswith('"---"') or stripped.startswith('---') or
+                    stripped.startswith('Caveats:') or
+                    stripped.startswith('"Query Date:')):
+                break
+            if stripped.startswith('"Total"') or stripped.startswith('Total'):
+                continue
+            valid_lines.append(line.rstrip('\r\n'))
 
     if not valid_lines:
         return pd.DataFrame(
@@ -114,9 +136,6 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
         return pd.DataFrame(
             columns=['Year', 'Geo', 'StatVar', 'Quantity', 'Unit'])
 
-    if header and header[0] == 'Notes':
-        header = header[1:]
-
     code_col_idx = None
     year_col_idx = None
     for idx, col in enumerate(header):
@@ -128,8 +147,6 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
     rows = []
     for line_parts in reader:
         parts = [p.strip().strip('"') for p in line_parts]
-        if parts and parts[0] == 'Notes':
-            parts = parts[1:]
         if len(parts) != len(header):
             continue
 
@@ -139,11 +156,12 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
             continue
 
         if geo_type == 'state':
-            if not re.match(r'^\d{2}$', fips):
+            if not re.match(r'^\d{2}$', fips) or fips in ('99', '00'):
                 continue
             geo_dcid = f'geoId/{fips}'
         else:
-            if not re.match(r'^\d{5}$', fips):
+            if not re.match(r'^\d{5}$', fips) or fips in (
+                    '99999', '00000') or fips.endswith('999'):
                 continue
             geo_dcid = f'geoId/{fips}'
 
@@ -194,34 +212,22 @@ def aggregate_state_to_country(state_df: pd.DataFrame) -> pd.DataFrame:
 
 def _extract_year_bracket(filepath: str) -> tuple:
     """Extracts (start_year, end_year) tuple from bracket filename."""
-    m = re.search(r'(\d{2})-(\d{2})', os.path.basename(filepath))
-    if m:
-        s_yr = int(m.group(1))
-        e_yr = int(m.group(2))
+    basename = os.path.basename(filepath)
+    m4 = re.search(r'(\d{4})-(\d{4})', basename)
+    if m4:
+        return (int(m4.group(1)), int(m4.group(2)))
+    m2 = re.search(r'(\d{2})-(\d{2})', basename)
+    if m2:
+        s_yr = int(m2.group(1))
+        e_yr = int(m2.group(2))
         start_year = 1900 + s_yr if s_yr >= 50 else 2000 + s_yr
         end_year = 1900 + e_yr if e_yr >= 50 else 2000 + e_yr
         return (start_year, end_year)
+    m_single = re.search(r'(\d{4})', basename)
+    if m_single:
+        yr = int(m_single.group(1))
+        return (yr, yr)
     return (9999, 9999)
-
-
-def _merge_csv_files(csv_files: list, output_csv_path: str, dedupe_keys: list):
-    """Merges multiple CSV files, sorting brackets and deduplicating records."""
-    dfs = []
-    for f in sorted(csv_files, key=_extract_year_bracket):
-        if os.path.exists(f) and os.path.getsize(f) > 0:
-            logging.info(f'Reading {f}...')
-            df = pd.read_csv(f, dtype=str)
-            dfs.append(df)
-
-    if not dfs:
-        return
-
-    merged_df = pd.concat(dfs, ignore_index=True)
-    merged_df.drop_duplicates(subset=dedupe_keys, keep='last', inplace=True)
-    merged_df.sort_values(by=dedupe_keys, inplace=True)
-    os.makedirs(os.path.dirname(output_csv_path), exist_ok=True)
-    merged_df.to_csv(output_csv_path, index=False)
-    logging.info(f'Wrote {len(merged_df)} rows to {output_csv_path}')
 
 
 def write_tmcf_files(output_dir: str):
@@ -281,6 +287,9 @@ def process_data(input_dir: str, output_dir: str) -> bool:
         f for f in _find_csvs(input_dir, 'country')
         if not f.startswith(output_dir) and not f.endswith('raw.tsv')
     ]
+    pre_state_csvs.sort(key=_extract_year_bracket)
+    pre_county_csvs.sort(key=_extract_year_bracket)
+    pre_country_csvs.sort(key=_extract_year_bracket)
 
     state_dfs = []
     for f in pre_state_csvs:
@@ -320,22 +329,21 @@ def process_data(input_dir: str, output_dir: str) -> bool:
     if state_dfs:
         final_state_df = pd.concat(state_dfs, ignore_index=True)
         if 'Unit' in final_state_df.columns:
-            final_state_df['Unit'] = final_state_df['Unit'].fillna('').replace({
-                'Weeks': 'Week',
-                'Grams': 'Gram',
-                'Months': 'Month'
-            })
+            final_state_df['Unit'] = final_state_df['Unit'].fillna('').replace(
+                _UNIT_NORMALIZATION)
+        final_state_df = final_state_df[~final_state_df['Geo'].
+                                        isin(['geoId/99', 'geoId/00'])]
         final_state_df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
                                        keep='last',
                                        inplace=True)
+        final_state_df = _normalize_quantities(final_state_df)
         final_state_df.sort_values(by=['Year', 'Geo', 'StatVar'], inplace=True)
         state_out = os.path.join(output_dir, 'state.csv')
         final_state_df.to_csv(state_out, index=False)
         logging.info(f'Generated state.csv with {len(final_state_df)} rows.')
 
-        # Aggregate country totals from state data (using new state_df or final_state_df)
-        agg_source = state_df if not state_df.empty else final_state_df
-        country_agg = aggregate_state_to_country(agg_source)
+        # Aggregate country totals from state data (using final_state_df)
+        country_agg = aggregate_state_to_country(final_state_df)
         if not country_agg.empty:
             country_dfs.append(country_agg)
 
@@ -344,14 +352,14 @@ def process_data(input_dir: str, output_dir: str) -> bool:
         final_county_df = pd.concat(county_dfs, ignore_index=True)
         if 'Unit' in final_county_df.columns:
             final_county_df['Unit'] = final_county_df['Unit'].fillna(
-                '').replace({
-                    'Weeks': 'Week',
-                    'Grams': 'Gram',
-                    'Months': 'Month'
-                })
+                '').replace(_UNIT_NORMALIZATION)
+        final_county_df = final_county_df[
+            ~final_county_df['Geo'].isin(['geoId/99999', 'geoId/00000']) &
+            ~final_county_df['Geo'].str.endswith('999')]
         final_county_df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
                                         keep='last',
                                         inplace=True)
+        final_county_df = _normalize_quantities(final_county_df)
         final_county_df.sort_values(by=['Year', 'Geo', 'StatVar'], inplace=True)
         county_out = os.path.join(output_dir, 'county.csv')
         final_county_df.to_csv(county_out, index=False)
@@ -360,26 +368,18 @@ def process_data(input_dir: str, output_dir: str) -> bool:
     # 3. Country data consolidation
     if country_dfs:
         final_country_df = pd.concat(country_dfs, ignore_index=True)
+        if 'Unit' in final_country_df.columns:
+            final_country_df['Unit'] = final_country_df['Unit'].fillna(
+                '').replace(_UNIT_NORMALIZATION)
         final_country_df.drop_duplicates(subset=['Year', 'StatVar'],
                                          keep='last',
                                          inplace=True)
+        final_country_df = _normalize_quantities(final_country_df)
         final_country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
         country_out = os.path.join(output_dir, 'country.csv')
         final_country_df.to_csv(country_out, index=False)
         logging.info(
             f'Generated country.csv with {len(final_country_df)} rows.')
-
-    # Clean Count_* integer format in country.csv
-    country_out = os.path.join(output_dir, 'country.csv')
-    if os.path.exists(country_out):
-        cdf = pd.read_csv(country_out, dtype=str)
-        if 'Quantity' in cdf.columns and 'StatVar' in cdf.columns:
-            count_mask = cdf['StatVar'].str.startswith('Count')
-            nums = pd.to_numeric(cdf['Quantity'], errors='coerce')
-            valid_mask = count_mask & nums.notna()
-            cdf.loc[valid_mask, 'Quantity'] = (
-                nums.loc[valid_mask].round().astype('int64').astype(str))
-            cdf.to_csv(country_out, index=False)
 
     write_tmcf_files(output_dir)
     return True
@@ -426,13 +426,11 @@ def main(argv):
                                index=False)
             mock_country.to_csv(os.path.join(output_path, 'country.csv'),
                                 index=False)
+            write_tmcf_files(output_path)
         else:
             logging.fatal(
                 f'No valid input data found in {input_path}. Ensure download.py ran successfully.'
             )
-            raise RuntimeError(f'No input data found in {input_path}')
-
-    write_tmcf_files(output_path)
 
     required_outputs = [
         'country.csv',
@@ -449,7 +447,6 @@ def main(argv):
     ]
     if missing:
         logging.fatal(f'Missing or empty required output files: {missing}')
-        raise RuntimeError(f'Missing required outputs: {missing}')
 
     logging.info('CDC Wonder Natality processing completed successfully.')
 
