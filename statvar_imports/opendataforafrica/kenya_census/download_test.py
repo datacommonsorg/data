@@ -144,6 +144,13 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaises(subprocess.CalledProcessError):
             pull_from_gcs(out_dir)
 
+    def test_main_no_args_exits_with_error(self):
+        with patch.object(sys, "argv", ["download.py"]):
+            from download import main
+            with self.assertRaises(SystemExit) as ctx:
+                main()
+            self.assertEqual(ctx.exception.code, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

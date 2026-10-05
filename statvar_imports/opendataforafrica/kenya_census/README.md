@@ -5,11 +5,11 @@
 - **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
 - **Publisher**: Kenya National Bureau of Statistics (KNBS)
 - **Import Type**: `Semi-Automated`
-- **Schedule**: Weekly (`30 05 * * 1` via Cloud Batch)
+- **Schedule**: Quarterly (`0 5 1 1,4,7,10 *` via Cloud Batch)
 - **Coverage**: Demographics, Health, Education, Economy (2002 – present)
 - **Entity Resolution**:
   - National level: `country/KEN`
-  - County / Sub-national level: `AdministrativeArea1` resolved via mapping CSVs (`*_places_resolved.csv`) to Wikidata / Data Commons DCIDs.
+  - County / Sub-national level: `AdministrativeArea1` resolved via mapping CSV (`places_resolved.csv`) to Wikidata / Data Commons DCIDs.
 
 ## 2. Directory Layout & Artifacts
 
@@ -108,4 +108,5 @@ Run the hermetic unit tests for the Python download routine:
 `validation_config.json` configures import-specific rules:
 - `check_all_statvars_freshness`: SQL validator ensuring `MaxDate >= '2009' AND total_svs > 0` across all active StatVars.
 - `check_deleted_records_percent`: Strict cap with `threshold: 0.1` (0.1%), matching rule description.
-- Default lint checks (`check_lint_error_count` and `check_missing_refs_count` at threshold 0) are inherited from the base validation framework.
+- `check_lint_error_count`: Strict lint gate enforcing `threshold: 0` lint errors.
+- Missing references (`check_missing_refs_count` at threshold 0) are enforced by base validation.

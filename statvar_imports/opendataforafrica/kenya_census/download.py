@@ -113,7 +113,7 @@ def process_xml_file(xml_path: str, output_csv_path: str) -> pd.DataFrame:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
         logging.error("Failed writing output CSV %s: %s", output_csv_path, e)
-        raise e
+        raise
 
     logging.info("  -> Generated: %s (%d rows, columns: %s)",
                  output_csv_path, len(df), list(df.columns))
@@ -129,7 +129,7 @@ def pull_from_gcs(output_dir: str):
         subprocess.check_call(cmd)
     except subprocess.CalledProcessError as e:
         logging.error("Failed to pull files from GCS: %s", e)
-        raise e
+        raise
     logging.info("Successfully pulled files from GCS to %s", output_dir)
 
 
@@ -188,7 +188,7 @@ def main():
             process_xml_file(xf, out_csv)
         return
 
-    parser.print_help()
+    parser.error("Must specify one of --input_file, --xml_dir, or --from_gcs")
 
 
 if __name__ == '__main__':

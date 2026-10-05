@@ -17,6 +17,14 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Enforce zero lint errors.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
         }
     ]
 }

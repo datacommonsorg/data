@@ -2,9 +2,9 @@
 "TIME_PERIOD","observationDate","{Number}",,,,,,,,
 "OBS_VALUE","value","{Number}","populationType","EconomicActivity","activitySource","GrossDomesticProduction","measuredProperty","amount","observationAbout","country/KEN"
 "INDICATOR:I1","activitySource","GrossDomesticProduction","measurementQualifier","RealValue","name","""Gross Domestic Product by {ACT} on current prices""","unit","KES","#Multiply",1000000
-"INDICATOR:I2","activitySource","GrossDomesticProduction","measurementDenominator","-economicSector","name","""Percentage Distribution on Gross Domestic Product by {ACT} to the GDP""","unit ","Percent","scalingFactor",100
+"INDICATOR:I2","activitySource","GrossDomesticProduction","measurementDenominator","-economicSector","name","""Percentage Distribution on Gross Domestic Product by {ACT} to the GDP""","unit","Percent","scalingFactor",100
 "INDICATOR:I3","activitySource","GrossDomesticProduction","measurementQualifier","Nominal","name","""Gross Domestic Product by {ACT} on constant prices""","unit","KES","#Multiply",1000000
-"INDICATOR:I4","activitySource","GrossDomesticProduction","statType","growthRate","name","""Growth Rate on Gross Domestic Product by {ACT}""","unit ","Percent","scalingFactor",100
+"INDICATOR:I4","activitySource","GrossDomesticProduction","statType","growthRate","name","""Growth Rate on Gross Domestic Product by {ACT}""","unit","Percent","scalingFactor",100
 "INDICATOR:I5","#ignore","ignore",,,,,,,,
 "INDUSTRY:A1","economicSector","AgricultureForestryFishingSector","ACT","Agriculture forestry and fishing",,,,,,
 "INDUSTRY:A2","economicSector","Agriculture","ACT","Growing of crops",,,,,,
