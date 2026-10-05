@@ -19,7 +19,7 @@ monitors task execution states, simulates human-in-the-loop approval if applicab
 verifies the final workflow_summary XCom output, and dumps task logs upon failure.
 
 Usage:
-  python3 e2e_dag_test.py \
+  python3 import_dag_e2e_test.py \
     --project-id=datcom-import-automation-prod \
     --location=us-central1 \
     --composer-env=import-automation-airflow \
@@ -32,6 +32,7 @@ import argparse
 import json
 import logging
 import os
+import subprocess
 import sys
 import time
 import uuid
@@ -39,7 +40,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 import google.auth
-from google.auth.transport.requests import AuthorizedSession
+from google.auth.transport.requests import AuthorizedSession, Request
 
 logging.basicConfig(
     level=logging.INFO,
@@ -61,8 +62,6 @@ class GcloudCliCredentials(google.auth.credentials.Credentials):
         self.refresh(None)
 
     def refresh(self, request: Any) -> None:
-        import subprocess
-
         self.token = subprocess.check_output(
             ["gcloud", "auth", "print-access-token"],
             text=True,
@@ -77,7 +76,6 @@ def get_authorized_session(
     try:
         credentials, _ = google.auth.default(
             scopes=["https://www.googleapis.com/auth/cloud-platform"])
-        from google.auth.transport.requests import Request
         credentials.refresh(Request())
         session = AuthorizedSession(credentials)
     except Exception as adc_err:
@@ -112,7 +110,6 @@ def resolve_composer_webserver_url(
         logging.warning(
             "Composer REST API lookup failed (%s); falling back to gcloud CLI...",
             rest_err)
-        import subprocess
         cmd = [
             "gcloud",
             "composer",
@@ -139,7 +136,7 @@ def resolve_composer_webserver_url(
 def check_dag_import_errors(session: AuthorizedSession,
                             webserver_url: str) -> None:
     """Verifies that there are no DAG import/syntax errors in Airflow."""
-    err_url = f"{webserver_url}/api/v1/importErrors"
+    err_url = f"{webserver_url}/api/v2/importErrors"
     resp = session.get(err_url, timeout=30)
     resp.raise_for_status()
     data = resp.json()
@@ -168,7 +165,7 @@ def ensure_dag_available_and_unpaused(
     max_wait_sec: int = 120,
 ) -> dict[str, Any]:
     """Waits for DAG to appear in Airflow and ensures it is unpaused."""
-    dag_url = f"{webserver_url}/api/v1/dags/{dag_id}"
+    dag_url = f"{webserver_url}/api/v2/dags/{dag_id}"
     start_time = time.time()
 
     while time.time() - start_time < max_wait_sec:
@@ -204,9 +201,10 @@ def trigger_dag_run(
     conf: dict[str, Any],
 ) -> dict[str, Any]:
     """Triggers a new DAG run via the Airflow REST API."""
-    runs_url = f"{webserver_url}/api/v1/dags/{dag_id}/dagRuns"
-    payload = {
+    runs_url = f"{webserver_url}/api/v2/dags/{dag_id}/dagRuns"
+    payload: dict[str, Any] = {
         "dag_run_id": run_id,
+        "logical_date": datetime.now(timezone.utc).isoformat(),
         "conf": conf,
     }
     logging.info("Triggering DAG '%s' with run_id='%s' and conf=%s", dag_id,
@@ -229,7 +227,7 @@ def dump_failed_task_logs(
         state = ti.get("state")
         try_num = ti.get("try_number", 1)
         if state in ("failed", "upstream_failed") and t_id:
-            log_url = f"{webserver_url}/api/v1/dags/{dag_id}/dagRuns/{run_id}/taskInstances/{t_id}/logs/{max(1, try_num)}"
+            log_url = f"{webserver_url}/api/v2/dags/{dag_id}/dagRuns/{run_id}/taskInstances/{t_id}/logs/{max(1, try_num)}"
             try:
                 resp = session.get(log_url,
                                    headers={"Accept": "text/plain"},
@@ -255,8 +253,10 @@ def run_e2e_test(
     composer_env: str,
     dag_id: str,
     webserver_url: str = "",
+    image_uri: str = "",
     skip_import_job: bool = False,
     skip_staging_ingestion: bool = False,
+    dry_run_ingestion: bool = True,
     run_golden_tests: bool = False,
     simulate_hitl_approval: bool = False,
     sync_wait_sec: int = 20,
@@ -292,20 +292,23 @@ def run_e2e_test(
     timestamp_str = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     run_id = f"e2e-test-{build_tag}-{timestamp_str}"
 
-    conf = {
+    conf: dict[str, Any] = {
         "skipImportJob": skip_import_job,
         "skipStagingIngestion": skip_staging_ingestion,
         "skipProdIngestion": True,
+        "dryRunIngestion": dry_run_ingestion,
         "runGoldenTests": run_golden_tests,
         "autoApproveGoldenDiff": not simulate_hitl_approval,
     }
+    if image_uri:
+        conf["imageUri"] = image_uri
 
     trigger_dag_run(session, webserver_url, dag_id, run_id, conf)
 
     # 4. Monitor DAG run progress
-    run_url = f"{webserver_url}/api/v1/dags/{dag_id}/dagRuns/{run_id}"
+    run_url = f"{webserver_url}/api/v2/dags/{dag_id}/dagRuns/{run_id}"
     ti_url = f"{run_url}/taskInstances"
-    var_url = f"{webserver_url}/api/v1/variables"
+    var_url = f"{webserver_url}/api/v2/variables"
 
     start_time = time.time()
     approval_variable_set = False
@@ -421,6 +424,7 @@ def main() -> None:
                         default=os.environ.get("E2E_DAG_ID", DEFAULT_DAG_ID))
     parser.add_argument("--webserver-url",
                         default=os.environ.get("COMPOSER_WEBSERVER_URL", ""))
+    parser.add_argument("--image-uri", default=os.environ.get("IMAGE_URI", ""))
     parser.add_argument(
         "--skip-import-job",
         action="store_true",
@@ -435,6 +439,14 @@ def main() -> None:
         default=os.environ.get("E2E_SKIP_STAGING_INGESTION", "").lower()
         in ("true", "1", "yes"),
         help="Skip the Staging Spanner ingestion step.",
+    )
+    parser.add_argument(
+        "--dry-run-ingestion",
+        action=argparse.BooleanOptionalAction,
+        default=os.environ.get("E2E_DRY_RUN_INGESTION",
+                               "true").lower() in ("true", "1", "yes"),
+        help=
+        "Run staging/prod Spanner ingestion in dry-run mode (default: True).",
     )
     parser.add_argument(
         "--run-golden-tests",
@@ -475,8 +487,10 @@ def main() -> None:
         composer_env=args.composer_env,
         dag_id=args.dag_id,
         webserver_url=args.webserver_url,
+        image_uri=args.image_uri,
         skip_import_job=args.skip_import_job,
         skip_staging_ingestion=args.skip_staging_ingestion,
+        dry_run_ingestion=args.dry_run_ingestion,
         run_golden_tests=args.run_golden_tests,
         simulate_hitl_approval=args.simulate_hitl_approval,
         sync_wait_sec=args.sync_wait,

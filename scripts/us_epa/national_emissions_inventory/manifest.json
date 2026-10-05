@@ -12,7 +12,9 @@
                 "process.py"
             ],
             "source_files": [
-                "gcs_output/input_files/*/*.csv"
+                "gcs_output/input_files/*/*.csv",
+                "manifest.json",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
@@ -21,13 +23,12 @@
                 }
             ],
             "cron_schedule": "0 0 1 1-12/3 *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 8,
                 "memory": 128,
-                "disk": 100
+                "disk": 300
             }
         }
     ]
 }
-
-
