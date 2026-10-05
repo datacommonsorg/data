@@ -1,4 +1,3 @@
-import io
 import os
 import sys
 import tempfile
@@ -107,15 +106,15 @@ class DownloadInputDataTest(unittest.TestCase):
         self.assertIsNone(failed_resp)
 
     def test_response_status_code_logging_not_none_on_http_error(self):
-        # Verify that non-200 responses log their integer status code rather than "None"
+        # Verify that non-200 responses log their integer status code and raise RuntimeError
         session = MagicMock()
         mock_resp = requests.Response()
         mock_resp.status_code = 403
         session.get.return_value = mock_resp
 
-        with self.assertLogs(level='WARNING') as cm:
-            v_map = fetch_variables(session)
-            self.assertEqual(len(v_map), 0)
+        with self.assertLogs(level='ERROR') as cm:
+            with self.assertRaises(RuntimeError):
+                fetch_variables(session)
             self.assertTrue(
                 any("status 403" in log for log in cm.output),
                 f"Expected 'status 403' in logs, got: {cm.output}")
@@ -207,6 +206,47 @@ class DownloadInputDataTest(unittest.TestCase):
                 self.assertEqual(result_df.columns.nlevels, 4)
                 self.assertIn(('0000000', 'POLAND'), result_df.index)
                 self.assertIn(('0200000', 'DOLNOŚLĄSKIE'), result_df.index)
+
+    @patch('download_input_data.fetch_variables')
+    @patch('download_input_data.load_template_from_gcs')
+    def test_download_and_process_raises_on_unmapped_slice(
+            self, mock_load_template, mock_fetch):
+        template_index = pd.MultiIndex.from_tuples([('0000000', 'POLAND')],
+                                                   names=['Code', 'Name'])
+        template_columns = pd.MultiIndex.from_tuples(
+            [('0-2', 'total', 'total', '2024')],
+            names=['Age', 'Sex', 'Location', 'Year'])
+        mock_load_template.return_value = pd.DataFrame(
+            10, index=template_index, columns=template_columns)
+        # Slices present in template but unmatched in metadata
+        mock_fetch.return_value = {'999': 'unrelated_variable'}
+
+        with self.assertRaises(RuntimeError) as ctx:
+            download_and_process()
+        self.assertIn("Failed to match variable for slice", str(ctx.exception))
+
+    @patch('download_input_data.fetch_variables')
+    @patch('download_input_data.load_template_from_gcs')
+    @patch('download_input_data.make_request')
+    def test_download_and_process_raises_on_download_failure(
+            self, mock_make_request, mock_load_template, mock_fetch):
+        template_index = pd.MultiIndex.from_tuples([('0000000', 'POLAND')],
+                                                   names=['Code', 'Name'])
+        template_columns = pd.MultiIndex.from_tuples(
+            [('0-2', 'total', 'total', '2024')],
+            names=['Age', 'Sex', 'Location', 'Year'])
+        mock_load_template.return_value = pd.DataFrame(
+            10, index=template_index, columns=template_columns)
+        mock_fetch.return_value = {'102': 'ludność 0-2'}
+
+        # Mock download returning 500 error
+        mock_resp = requests.Response()
+        mock_resp.status_code = 500
+        mock_make_request.return_value = mock_resp
+
+        with self.assertRaises(RuntimeError) as ctx:
+            download_and_process()
+        self.assertIn("Download failed with status 500", str(ctx.exception))
 
 
 if __name__ == '__main__':

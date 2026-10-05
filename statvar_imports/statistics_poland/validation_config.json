@@ -3,11 +3,11 @@
     "rules": [
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary (>= 2024).",
+            "description": "Verify all active StatVars meet the freshness boundary (>= 2025).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2024' AND total_svs > 0"
+                "condition": "MaxDate >= '2025' AND total_svs > 0"
             }
         },
         {

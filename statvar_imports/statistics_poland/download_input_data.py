@@ -3,7 +3,6 @@ import logging
 import os
 import sys
 import time
-import traceback
 from datetime import datetime
 from google.cloud import storage
 import pandas as pd
@@ -132,35 +131,34 @@ def fetch_variables(session):
     """Fetches all variables for Subject P3447 with retries."""
     logging.info(f"Downloading variable list for Subject {SUBJECT_ID}...")
     v_map = {}
+    page = 0
 
-    for page in range(10):
+    while True:
         url = (
             f"{API_BASE_URL}/variables?subject-id={SUBJECT_ID}&page-size=100&lang=pl&page={page}"
         )
-        try:
-            resp = make_request(session, url, headers=HEADERS, timeout=60)
-            if resp is None or resp.status_code != 200:
-                status = resp.status_code if resp is not None else "None"
-                logging.warning(
-                    f"Metadata page {page} returned status {status}")
-                break
-            data = resp.json()
-            results = data.get('results', [])
-            if not results:
-                break
+        resp = make_request(session, url, headers=HEADERS, timeout=60)
+        if resp is None or resp.status_code != 200:
+            status = resp.status_code if resp is not None else "None"
+            error_msg = f"Metadata page {page} failed with status {status}"
+            logging.error(error_msg)
+            raise RuntimeError(error_msg)
 
-            for item in results:
-                full_name_parts = [
-                    str(v) for k, v in item.items() if k.startswith('n') and v
-                ]
-                full_name = " ".join(full_name_parts).lower()
-                v_map[str(item['id'])] = full_name
-
-            if len(results) < 100:
-                break
-        except Exception as e:
-            logging.error(f"Metadata error page {page} after retries: {e}")
+        data = resp.json()
+        results = data.get('results', [])
+        if not results:
             break
+
+        for item in results:
+            full_name_parts = [
+                str(v) for k, v in item.items() if k.startswith('n') and v
+            ]
+            full_name = " ".join(full_name_parts).lower()
+            v_map[str(item['id'])] = full_name
+
+        if len(results) < 100:
+            break
+        page += 1
 
     logging.info(f"Indexed {len(v_map)} variables.")
     return v_map
@@ -223,8 +221,10 @@ def download_and_process():
             break
 
         if not var_id:
-            logging.warning(f"SKIPPING: {age}|{sex}|{loc}")
-            continue
+            error_msg = (f"Failed to match variable for slice: age='{age}', "
+                         f"sex='{sex}', loc='{loc}'")
+            logging.error(error_msg)
+            raise RuntimeError(error_msg)
 
         logging.info(f"MATCH: {age}|{sex}|{loc} -> ID {var_id}")
 
@@ -235,56 +235,57 @@ def download_and_process():
             for y in range(2003, current_year + 2):
                 params.append(('year', str(y)))
 
-            try:
-                resp = make_request(session,
-                                    api_url,
-                                    headers=HEADERS,
-                                    params=params,
-                                    timeout=60)
-                if resp is None or resp.status_code != 200:
-                    status = resp.status_code if resp is not None else "None"
-                    logging.error(
-                        f"Download returned status {status} for var {var_id} level {lv}"
-                    )
-                    continue
-                results = resp.json().get('results', [])
-                if not results:
-                    continue
+            resp = make_request(session,
+                                api_url,
+                                headers=HEADERS,
+                                params=params,
+                                timeout=60)
+            if resp is None or resp.status_code != 200:
+                status = resp.status_code if resp is not None else "None"
+                error_msg = (
+                    f"Download failed with status {status} for var {var_id} level {lv}"
+                )
+                logging.error(error_msg)
+                raise RuntimeError(error_msg)
 
-                sample_res = results[0]
-                api_name_key = next(
-                    (k for k in ['name', 'n', 'unitName'] if k in sample_res),
-                    None)
-                if not api_name_key:
-                    continue
+            results = resp.json().get('results', [])
+            if not results:
+                continue
 
-                for res in results:
-                    api_name = res[api_name_key].upper().strip()
-                    if api_name == "POLSKA":
-                        api_name = "POLAND"
+            sample_res = results[0]
+            api_name_key = next(
+                (k for k in ['name', 'n', 'unitName'] if k in sample_res),
+                None)
+            if not api_name_key:
+                error_msg = f"Could not determine region name key for var {var_id} level {lv}"
+                logging.error(error_msg)
+                raise RuntimeError(error_msg)
 
-                    matched_code = region_map.get(api_name)
-                    matched_name = api_name
-                    if not matched_code:
-                        for t_name, t_code in region_map.items():
-                            if t_name in api_name:
-                                matched_code = t_code
-                                matched_name = t_name
-                                break
+            for res in results:
+                api_name = res[api_name_key].upper().strip()
+                if api_name == "POLSKA":
+                    api_name = "POLAND"
 
-                    if matched_code is not None:
-                        for val in res['values']:
-                            master_data.append({
-                                'Code': str(matched_code),
-                                'Name': matched_name,
-                                'Year': str(val['year']),
-                                'Value': val['val'],
-                                'Age': age,
-                                'Sex': sex,
-                                'Location': loc
-                            })
-            except Exception as e:
-                logging.error(f"Download Error on {var_id}: {e}")
+                matched_code = region_map.get(api_name)
+                matched_name = api_name
+                if not matched_code:
+                    for t_name, t_code in region_map.items():
+                        if t_name in api_name:
+                            matched_code = t_code
+                            matched_name = t_name
+                            break
+
+                if matched_code is not None:
+                    for val in res['values']:
+                        master_data.append({
+                            'Code': str(matched_code),
+                            'Name': matched_name,
+                            'Year': str(val['year']),
+                            'Value': val['val'],
+                            'Age': age,
+                            'Sex': sex,
+                            'Location': loc
+                        })
             time.sleep(0.1)
         time.sleep(0.1)
 

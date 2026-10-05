@@ -77,7 +77,7 @@ Run the hermetic unit tests via pytest:
 
 ## Validation & Quality Rules
 Validation is configured in `validation_config.json`:
-1. `check_all_statvars_freshness` (`SQL_VALIDATOR`): Asserts `MaxDate >= '2024'` across all active
+1. `check_all_statvars_freshness` (`SQL_VALIDATOR`): Asserts `MaxDate >= '2025'` across all active
    statistical variables in `stats`.
 2. `check_max_date_consistent` (`MAX_DATE_CONSISTENT`): Enforces uniform MaxDate across all
    StatVars.
