@@ -1280,10 +1280,10 @@ def cleanup():
         for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
             file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
             if os.path.isfile(file_path):
-                # Historical files (pre-2021) should NEVER be evicted from cache
-                year_matches = re.findall(r'(?:19\d{2}|20[01]\d|2020)',
-                                          file_name)
-                if year_matches:
+                # Historical files (pre-2021) should NEVER be evicted from cache.
+                # We identify recent release files by checking if they contain any 4-digit year >= 2021.
+                years = [int(yr) for yr in re.findall(r'\d{4}', file_name)]
+                if not (years and any(yr >= 2021 for yr in years)):
                     continue
                 file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
                                                                           3600)
@@ -1316,16 +1316,25 @@ def download_single_file_with_retry(session,
                     return True
 
                 if response.status_code == 200:
-                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                        for chunk in response.iter_content(chunk_size=65536):
-                            if chunk:
-                                tmp_file.write(chunk)
-                        tmp_file_path = tmp_file.name
-
-                    # Copy to local destination
-                    shutil.copy(tmp_file_path, dest_input_path)
-                    # Move to persistent cache destination
-                    shutil.move(tmp_file_path, dest_cache_path)
+                    tmp_file_path = None
+                    try:
+                        with tempfile.NamedTemporaryFile(
+                                delete=False) as tmp_file:
+                            tmp_file_path = tmp_file.name
+                            for chunk in response.iter_content(
+                                    chunk_size=65536):
+                                if chunk:
+                                    tmp_file.write(chunk)
+                        # Copy to local destination
+                        shutil.copy(tmp_file_path, dest_input_path)
+                        # Move to persistent cache destination
+                        shutil.move(tmp_file_path, dest_cache_path)
+                    finally:
+                        if tmp_file_path and os.path.exists(tmp_file_path):
+                            try:
+                                os.remove(tmp_file_path)
+                            except OSError:
+                                pass
                     logging.info(f"Downloaded file: {url}")
                     return True
                 elif response.status_code in (429, 500, 502, 503, 504):

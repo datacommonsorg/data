@@ -1152,16 +1152,25 @@ def download_single_file_with_retry(session,
         try:
             with session.get(url, stream=True, timeout=(15, 120)) as response:
                 if response.status_code == 200:
-                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                        for chunk in response.iter_content(chunk_size=65536):
-                            if chunk:
-                                tmp_file.write(chunk)
-                        tmp_file_path = tmp_file.name
-
-                    # Save to local input destination
-                    shutil.copy(tmp_file_path, dest_input_path)
-                    # Move to persistent cache destination
-                    shutil.move(tmp_file_path, dest_cache_path)
+                    tmp_file_path = None
+                    try:
+                        with tempfile.NamedTemporaryFile(
+                                delete=False) as tmp_file:
+                            tmp_file_path = tmp_file.name
+                            for chunk in response.iter_content(
+                                    chunk_size=65536):
+                                if chunk:
+                                    tmp_file.write(chunk)
+                        # Save to local input destination
+                        shutil.copy(tmp_file_path, dest_input_path)
+                        # Move to persistent cache destination
+                        shutil.move(tmp_file_path, dest_cache_path)
+                    finally:
+                        if tmp_file_path and os.path.exists(tmp_file_path):
+                            try:
+                                os.remove(tmp_file_path)
+                            except OSError:
+                                pass
                     logging.info(f"Successfully downloaded and cached: {url}")
                     return True
                 elif response.status_code in (429, 500, 502, 503, 504):
