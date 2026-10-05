@@ -38,8 +38,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/dlrrjxg.tmcf",
-                    "cleaned_csv": "output/dlrrjxg.csv",
-                    "node_mcf": "output/dlrrjxg_stat_vars.mcf"
+                    "cleaned_csv": "output/dlrrjxg.csv"
                 },
                 {
                     "template_mcf": "output/egdxgkd.tmcf",
@@ -48,53 +47,43 @@
                 },
                 {
                     "template_mcf": "output/emxkej.tmcf",
-                    "cleaned_csv": "output/emxkej.csv",
-                    "node_mcf": "output/emxkej_stat_vars.mcf"
+                    "cleaned_csv": "output/emxkej.csv"
                 },
                 {
                     "template_mcf": "output/fwjfdnc.tmcf",
-                    "cleaned_csv": "output/fwjfdnc.csv",
-                    "node_mcf": "output/fwjfdnc_stat_vars.mcf"
+                    "cleaned_csv": "output/fwjfdnc.csv"
                 },
                 {
                     "template_mcf": "output/gxbucsd.tmcf",
-                    "cleaned_csv": "output/gxbucsd.csv",
-                    "node_mcf": "output/gxbucsd_stat_vars.mcf"
+                    "cleaned_csv": "output/gxbucsd.csv"
                 },
                 {
                     "template_mcf": "output/ixdvqrf.tmcf",
-                    "cleaned_csv": "output/ixdvqrf.csv",
-                    "node_mcf": "output/ixdvqrf_stat_vars.mcf"
+                    "cleaned_csv": "output/ixdvqrf.csv"
                 },
                 {
                     "template_mcf": "output/rsfzlbg.tmcf",
-                    "cleaned_csv": "output/rsfzlbg.csv",
-                    "node_mcf": "output/rsfzlbg_stat_vars.mcf"
+                    "cleaned_csv": "output/rsfzlbg.csv"
                 },
                 {
                     "template_mcf": "output/srricmg.tmcf",
-                    "cleaned_csv": "output/srricmg.csv",
-                    "node_mcf": "output/srricmg_stat_vars.mcf"
+                    "cleaned_csv": "output/srricmg.csv"
                 },
                 {
                     "template_mcf": "output/tdxdksf.tmcf",
-                    "cleaned_csv": "output/tdxdksf.csv",
-                    "node_mcf": "output/tdxdksf_stat_vars.mcf"
+                    "cleaned_csv": "output/tdxdksf.csv"
                 },
                 {
                     "template_mcf": "output/vdbvyfd.tmcf",
-                    "cleaned_csv": "output/vdbvyfd.csv",
-                    "node_mcf": "output/vdbvyfd_stat_vars.mcf"
+                    "cleaned_csv": "output/vdbvyfd.csv"
                 },
                 {
                     "template_mcf": "output/welrttb.tmcf",
-                    "cleaned_csv": "output/welrttb.csv",
-                    "node_mcf": "output/welrttb_stat_vars.mcf"
+                    "cleaned_csv": "output/welrttb.csv"
                 },
                 {
                     "template_mcf": "output/xszlbb.tmcf",
-                    "cleaned_csv": "output/xszlbb.csv",
-                    "node_mcf": "output/xszlbb_stat_vars.mcf"
+                    "cleaned_csv": "output/xszlbb.csv"
                 }
             ],
             "source_files": [
@@ -102,7 +91,7 @@
                 "counters/*",
                 "validation_config.json"
             ],
-            "cron_schedule": "30 05 * * 1",
+            "cron_schedule": "0 5 1 1,4,7,10 *",
             "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 1,

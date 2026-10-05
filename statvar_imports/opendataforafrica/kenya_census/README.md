@@ -63,7 +63,7 @@ When updated census data is published on Kenya Open Data for Africa:
    ```
 
 ### 4.2 Automated Ingestion Workflow (Cloud Batch Execution)
-During automated weekly runs (`30 05 * * 1`), Cloud Batch executes the following pipeline:
+During automated quarterly runs (`0 5 1 1,4,7,10 *`), Cloud Batch executes the following pipeline:
 1. **Download Step (`download.sh`)**: Pulls the verified CSVs from `gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/` into `input_files/`.
 2. **Transform (`stat_var_processor.py`)**: Runs each of the 12 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
 3. **Resolution, Differ & Validation (`genmcf`, differ, import_validation)**: Generates resolved MCFs, compares against baseline version, and verifies validation rules.
