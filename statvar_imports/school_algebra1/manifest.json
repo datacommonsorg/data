@@ -9,24 +9,29 @@
       "provenance_description": "This dataset from the Civil Rights Data Collection (CRDC) contains information about student enrollment and passing rates in Algebra 1 courses in US schools, disaggregated by grade level, race, gender, and other demographics.",
       "scripts": [
         "download_script.py",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx,input_files/*algebra_i.csv,input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_ --log_level=-2 --log_every_n=1000"
+        "preprocess_data.py",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=processed_files/*.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output --output_counters=counters/algebra1_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
       ],
       "source_files": [
-        "input_files/*.xlsx","input_files/*.csv"
+        "input_files/*.xlsx",
+        "input_files/*.csv",
+        "counters/*.csv",
+        "validation_config.json"
       ],
       "import_inputs": [
         {
-          "template_mcf": "output/algebra1_output_.tmcf",
-          "cleaned_csv": "output/algebra1_output_.csv"
+          "template_mcf": "output/algebra1_output.tmcf",
+          "cleaned_csv": "output/algebra1_output.csv",
+          "node_mcf": "output/*.mcf"
         }
       ],
       "cron_schedule": "30 08 25 * *",
+      "validation_config_file": "validation_config.json",
       "resource_limits": {
-            "cpu": 8,
-            "memory": 256,
-            "disk": 200
-        },
-      "validation_config_file": "validation_config.json"
+        "cpu": 8,
+        "memory": 32,
+        "disk": 100
+      }
     }
   ]
 }

@@ -25,25 +25,33 @@ This import focuses on urban school Algebra1. This dataset contains information 
 
 - statvars: Education
 
-- years: 2009 and 2022
+- years: 2009 to 2024
 
 ### ⚙️ Workflow
 
-The workflow for this data import involves two main steps: downloading the necessary files and then processing them.
+The workflow for this data import involves three main steps: downloading the raw data, preprocessing and filtering, and generating the final StatVars.
 
 #### Step 1: Download the Source Data
 
-To acquire the necessary data files, execute the download script `download_script.py`.
-
-All downloaded files will be stored in the directory `input_files`.
-
-#### Step 2: Process the Data
-
-Once the data is downloaded run the `stat_var_processor.py` script to process the files and generate the final output artifacts (CSV, TMCF, MCF).
-
-The script is located in the `data/tools/statvar_importer/` directory. Run the following command
+To acquire the raw CRDC data files, execute the download script `download_script.py`:
 ```bash
-    python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx,input_files/*algebra_i.csv,input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_ --log_level=-2 --log_every_n=1000
+    python3 download_script.py
+```
+All downloaded raw files will be stored in `input_files/`.
+
+#### Step 2: Preprocess and Filter the Data
+
+Run `preprocess_data.py` to convert `.xlsx` workbooks to `.csv`, compute standard `ncesid` and `YEAR` identifiers, and dynamically filter columns against `Algebra1_pvmap.csv`:
+```bash
+    python3 preprocess_data.py
+```
+All preprocessed files will be stored in `processed_files/`.
+
+#### Step 3: Process the Data with StatVar Processor
+
+Once the data is preprocessed, run `stat_var_processor.py` to generate the final artifacts (CSV, TMCF, MCF):
+```bash
+    python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=processed_files/*.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output --log_level=-2 --log_every_n=1000
 ```
 
 ### Autorefresh type
