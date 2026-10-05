@@ -314,9 +314,11 @@ _LUNCH = {
     "Yes under Provision 3":
         "NCES_NationalSchoolLunchProgramYesUnderProvision3",
     np.nan:
-        "NCES_MagnetDataMissing",
+        "NCES_NationalSchoolLunchProgramDataMissing",
     "–":
-        "NCES_MagnetDataMissing"
+        "NCES_NationalSchoolLunchProgramDataMissing",
+    "†":
+        "NCES_NationalSchoolLunchProgramDataMissing"
 }
 
 _SCHOOL_STAFF = {

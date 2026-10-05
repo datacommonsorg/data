@@ -2,8 +2,8 @@
 ## Import Overview:
 This dataset has Population Estimates for the National Center for Education Statistics in US for 
 - Private School - 1997-98 to 2019-20
-- School District -2010-11 to 2023-24
-- Public Schools - 2010-11 to 2023-24
+- School District - 2010-11 to 2024-25
+- Public Schools - 2010-11 to 2024-25
 
 ## Source URL:
   https://nces.ed.gov/ccd/elsi/tableGenerator.aspx 
@@ -34,9 +34,35 @@ This dataset has Population Estimates for the National Center for Education Stat
     The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_folder/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_folder/output_files
 
 ### Script Execution Details
-    private    :  python3 private_school/process.py
-    public   :  python3 public_school/process.py
-    district  :  python3 school_district/process.py
+Each domain's `process.py` supports the `--mode` flag (`place`, `stats`, or `both`, default: `both`):
+
+```bash
+# Public School
+python3 public_school/process.py --mode=place  # Place data only
+python3 public_school/process.py --mode=stats  # Statistical observations only
+python3 public_school/process.py --mode=both   # Both place and stats
+
+# School District
+python3 school_district/process.py --mode=place
+python3 school_district/process.py --mode=stats
+python3 school_district/process.py --mode=both
+
+# Private School
+python3 private_school/process.py --mode=place
+python3 private_school/process.py --mode=stats
+python3 private_school/process.py --mode=both
+```
+
+### Import Architecture & Scheduling
+Each domain is split into two independent Cloud Batch imports in `manifest.json`:
+- **Place Import**: Ingests new entities, names, locations, and place attributes (runs first).
+- **Stats Import**: Ingests statistical variables and time-series observations (scheduled 7 days after the Place import to ensure referential integrity).
+
+| Domain | Place Import Name | Stats Import Name |
+|---|---|---|
+| Private School | `NCES_PrivateSchool` | `NCES_PrivateSchoolStats` |
+| Public School | `NCES_PublicSchool` | `NCES_PublicSchoolStats` |
+| School District | `NCES_SchoolDistrict` | `NCES_SchoolDistrictStats` |
 
 
 #### Cleaned Data
@@ -183,7 +209,7 @@ step 1 :
 
 step 2 : Use the command-line tool to do genmcf using the CSV and TMCF files.
 
-`java -jar '/usr/local/google/home/spateriya/Downloads/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar' genmcf -r FULL <place csv path> <place tmcf path>`
+`java -jar <path_to_datacommons_import_tool>/datacommons-import-tool-jar-with-dependencies.jar genmcf -r FULL <place csv path> <place tmcf path>`
 
 step 3 : Update the file path in the textproto files for NCES_PrivateSchool, NCES_PublicSchool, and NCES_SchoolDistrict.
 

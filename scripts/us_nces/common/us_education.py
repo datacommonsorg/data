@@ -147,11 +147,31 @@ class USEducation:
         """Convert a file path to a dataframe."""
         with open(f_path, "r", encoding="UTF-8") as file:
             lines = file.readlines()
-            # first six lines is data description and source we skip those
-            #assert all(lines[i] == '\n' for i in [1, 3, 5])
-            # last seven lines is data legend and totals we skip those
-            #assert lines[-5].startswith('Data Source')
-            f_content = io.StringIO('\n'.join(lines[6:-5]))
+            start_idx = 6 if len(lines) > 6 else 0
+            # Identify footer start if present (NCES ELSI tables append a legend/source footer)
+            footer_start = None
+            for i in range(len(lines) - 1, start_idx, -1):
+                line = lines[i].strip()
+                if not line:
+                    continue
+                if (line.startswith("Data Source") or
+                        line.startswith('"Data Source') or
+                        line.startswith("'Data Source") or
+                        any(line.startswith(sym) for sym in ['†', '–', '‡']) or
+                        'indicates that the data' in line):
+                    footer_start = i
+                else:
+                    break
+
+            if footer_start is not None:
+                while footer_start > start_idx and not lines[footer_start -
+                                                             1].strip():
+                    footer_start -= 1
+                end_idx = footer_start
+            else:
+                end_idx = len(lines)
+
+            f_content = io.StringIO(''.join(lines[start_idx:end_idx]))
             return pd.read_csv(f_content)
 
     @log_method_execution
@@ -476,6 +496,9 @@ class USEducation:
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO Box")
+        self._final_df_place["Physical_Address"] = (
+            self._final_df_place["Physical_Address"].str.replace(
+                r"\s+", " ", regex=True).str.strip())
         self._final_df_place["Private_School_Name"] = np.where(
             self._final_df_place["Private_School_Name"].str.len() <= 4,
             self._final_df_place["Private_School_Name"],
@@ -686,6 +709,9 @@ class USEducation:
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO BOX")
+        self._final_df_place["Physical_Address"] = (
+            self._final_df_place["Physical_Address"].str.replace(
+                r"\s+", " ", regex=True).str.strip())
 
         # Camel casing Public School Name
         self._final_df_place["Public_School_Name"] = np.where(
@@ -820,6 +846,9 @@ class USEducation:
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO Box")
+        self._final_df_place["Physical_Address"] = (
+            self._final_df_place["Physical_Address"].str.replace(
+                r"\s+", " ", regex=True).str.strip())
 
         self._final_df_place["District_School_name"] = np.where(
             self._final_df_place["District_School_name"].str.len() <= 4,
