@@ -21,7 +21,7 @@ This import focuses on urban school Algebra1. This dataset contains information 
 -----
 - source: https://ocrdata.ed.gov/data
 
-- type of place: Country
+- type of place: School (NCES School ID)
 
 - statvars: Education
 
@@ -52,6 +52,13 @@ All preprocessed files will be stored in `processed_files/`.
 Once the data is preprocessed, run `stat_var_processor.py` to generate the final artifacts (CSV, TMCF, MCF):
 ```bash
     python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=processed_files/*.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output --log_level=-2 --log_every_n=1000
+```
+
+### Validation & Testing
+
+Run the unit tests for preprocessing:
+```bash
+    python3 -m unittest preprocess_data_test.py
 ```
 
 ### Autorefresh type

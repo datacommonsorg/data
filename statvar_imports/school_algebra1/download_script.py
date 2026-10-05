@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Downloads raw CRDC Algebra 1 data archives across survey years."""
 
 import datetime
 import glob
@@ -43,7 +44,8 @@ def get_survey_years():
     return odd_years + recent_years
 
 
-def main(_):
+def download_crdc_files():
+    """Downloads and extracts CRDC Algebra 1 raw files into input_files/."""
     os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
     logging.info(
         f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
@@ -58,9 +60,8 @@ def main(_):
         existing_files = glob.glob(
             os.path.join(_OUTPUT_DIRECTORY, f"crdc_{year_range}_*"))
         if existing_files:
-            logging.info(
-                f"Data files for {year_range} already exist in '{_OUTPUT_DIRECTORY}'. Skipping download."
-            )
+            logging.info(f"Data files for {year_range} already exist in "
+                         f"'{_OUTPUT_DIRECTORY}'. Skipping download.")
             continue
 
         url = _BASE_URL.format(year_range=year_range)
@@ -113,7 +114,24 @@ def main(_):
 
         shutil.rmtree(temp_output_dir, ignore_errors=True)
 
+    downloaded_files = (glob.glob(os.path.join(_OUTPUT_DIRECTORY, '*.csv')) +
+                        glob.glob(os.path.join(_OUTPUT_DIRECTORY, '*.xlsx')))
+    if not downloaded_files:
+        raise RuntimeError(
+            f"No CRDC Algebra 1 files found or downloaded in {_OUTPUT_DIRECTORY}"
+        )
+
     logging.info("Download script finished.")
+
+
+def main(argv):
+    """Main entry point for downloading CRDC Algebra 1 files."""
+    if len(argv) > 1:
+        raise app.UsageError("Too many command-line arguments.")
+    try:
+        download_crdc_files()
+    except Exception as e:
+        logging.fatal(f"Download script failed: {e}", exc_info=True)
 
 
 if __name__ == '__main__':

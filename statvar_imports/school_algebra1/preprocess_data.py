@@ -21,7 +21,6 @@ columns, and writes clean CSVs into processed_files/ for stat_var_processor.
 import glob
 import os
 import re
-import sys
 from absl import app
 from absl import logging
 import pandas as pd
@@ -98,9 +97,8 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
     ]
     dropped_count = len(df.columns) - len(keep_cols)
     if dropped_count > 0:
-        logging.info(
-            f"Filtered {filename}: retained {len(keep_cols)} cols, dropped {dropped_count} unmapped cols."
-        )
+        logging.info(f"Filtered {filename}: retained {len(keep_cols)} cols, "
+                     f"dropped {dropped_count} unmapped cols.")
 
     return df[keep_cols]
 
@@ -117,6 +115,7 @@ def process_file(filepath: str, mapped_cols: set):
     output_csv_filename = f"{base}.csv"
     os.makedirs(_PROCESSED_DIR, exist_ok=True)
     output_csv_path = os.path.join(_PROCESSED_DIR, output_csv_filename)
+    temp_csv_path = f"{output_csv_path}.tmp"
 
     logging.info(f"Processing raw file: {filename}")
 
@@ -127,21 +126,25 @@ def process_file(filepath: str, mapped_cols: set):
                              low_memory=False,
                              dtype=str)
             df = preprocess_dataframe(df, filename, mapped_cols)
-            df.to_csv(output_csv_path, index=False)
+            df.to_csv(temp_csv_path, index=False)
         elif ext == '.xlsx':
             # Excel files have 'Sheet1'
             df = pd.read_excel(filepath, sheet_name=0, dtype=str)
             df = preprocess_dataframe(df, filename, mapped_cols)
-            df.to_csv(output_csv_path, index=False)
+            df.to_csv(temp_csv_path, index=False)
 
+        os.replace(temp_csv_path, output_csv_path)
         logging.info(f"Wrote processed file: {output_csv_path}")
 
     except Exception as e:
+        if os.path.exists(temp_csv_path):
+            os.remove(temp_csv_path)
         logging.error(f"Error processing {filepath}: {e}")
         raise
 
 
-def main(_):
+def preprocess_all_files():
+    """Preprocesses all raw CSV and XLSX files in input_files/."""
     os.makedirs(_PROCESSED_DIR, exist_ok=True)
     mapped_cols = load_pv_mapped_columns(_PVMAP_PATH)
 
@@ -150,8 +153,7 @@ def main(_):
         glob.glob(os.path.join(_INPUT_DIR, '*.xlsx')))
 
     if not raw_files:
-        logging.warning(f"No raw files found in {_INPUT_DIR}")
-        return
+        raise FileNotFoundError(f"No raw files found in {_INPUT_DIR}")
 
     logging.info(f"Found {len(raw_files)} files in {_INPUT_DIR} to preprocess.")
 
@@ -159,6 +161,16 @@ def main(_):
         process_file(filepath, mapped_cols)
 
     logging.info(f"All files successfully preprocessed into {_PROCESSED_DIR}")
+
+
+def main(argv):
+    """Main entry point for preprocessing CRDC Algebra 1 files."""
+    if len(argv) > 1:
+        raise app.UsageError("Too many command-line arguments.")
+    try:
+        preprocess_all_files()
+    except Exception as e:
+        logging.fatal(f"Preprocessing failed: {e}", exc_info=True)
 
 
 if __name__ == '__main__':

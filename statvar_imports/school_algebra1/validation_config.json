@@ -2,10 +2,36 @@
     "schema_version": "1.0",
     "rules": [
         {
+            "rule_id": "check_max_date_latest",
+            "description": "Ensures active CRDC Algebra 1 StatVars have data up to at least 2024.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT LIKE '%_SchoolGrade7_%' AND StatVar NOT LIKE '%_SchoolGrade8_%' AND StatVar NOT IN ('Count_Student_Pass_Female_SchoolGrade11To12_Algebra1', 'Count_Student_Pass_Male_SchoolGrade11To12_Algebra1', 'Count_Student_Pass_Female_SchoolGrade9To10_Algebra1', 'Count_Student_Pass_Male_SchoolGrade9To10_Algebra1', 'Count_Student_Pass_Male_SchoolGrade7To8_Algebra1', 'Count_Student_Pass_Female_SchoolGrade7To8_Algebra1', 'Count_Student_EnrolledInEducationOrTraining_Female_SchoolGrade7To8_Algebra1', 'Count_Student_EnrolledInEducationOrTraining_Male_SchoolGrade7To8_Algebra1')",
+                "condition": "MaxDate >= '2024' AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
             "rule_id": "check_missing_refs_count",
+            "description": "Checks that missing references count does not exceed the threshold.",
             "validator": "MISSING_REFS_COUNT",
             "params": {
                 "threshold": 457000
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Checks that lint error count is 0.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
             }
         }
     ]
