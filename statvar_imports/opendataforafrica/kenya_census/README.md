@@ -50,13 +50,14 @@ The import processes 12 tables from KNBS Open Data:
 Due to Cloudflare bot protection on `kenya.opendataforafrica.org`, programmatic scraping and automated HTTP requests directly against the portal fail with HTTP 403. Consequently, upstream source data updates follow a semi-automated workflow with GCS backing.
 
 ### 4.1 Manual Workflow (Updating Upstream Source Files)
-When updated census data is published:
-1. **Download SDMX XML**: Open the source URLs in a local browser and download the SDMX XML files to a local `xml/` directory.
-2. **Convert XML to CSV**: Execute `download.py` to convert the raw SDMX XML files into normalized CSV files in `input_files/`:
+When updated census data is published on Kenya Open Data for Africa:
+1. **Navigate to Dataset**: Open the source URL for each dataset in a local browser (e.g. `https://kenya.opendataforafrica.org/<dataset_id>`).
+2. **Download SDMX XML**: Copy the SDMX data link (or click **Export** $\rightarrow$ **SDMX**), right-click and select **"Save Link As..." / "Save As..."** to save the `.xml` file locally into an `xml/` directory (e.g., `xml/dlrrjxg.xml`, `xml/egdxgkd.xml`).
+3. **Convert XML to CSV**: Execute `download.py` to convert the raw SDMX XML files into normalized CSV files in `input_files/`:
    ```bash
    python3 download.py --xml_dir xml/
    ```
-3. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
+4. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
    ```bash
    gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/
    ```

@@ -10,7 +10,7 @@
             "import_type": "Semi-Automated",
             "workflow_steps": {
                 "manual_steps": [
-                    "1. Manual Source Download: Open Data for Africa (https://kenya.opendataforafrica.org/) enforces Cloudflare bot protection, blocking programmatic scraping. Raw SDMX XML files for updated census tables are manually downloaded via browser into xml/.",
+                    "1. Manual Source Download: Kenya Open Data portal (https://kenya.opendataforafrica.org/) enforces Cloudflare bot protection, blocking automated scraping. In a local browser, navigate to each dataset's source link, copy the SDMX endpoint / click Export -> SDMX, and right-click 'Save As' to save the raw SDMX XML file locally into an xml/ directory (e.g., xml/dlrrjxg.xml, xml/egdxgkd.xml).",
                     "2. Format Conversion: Execute `python3 download.py --xml_dir xml/` to convert raw SDMX XML files into normalized CSV files under input_files/.",
                     "3. GCS Staging: Upload converted CSVs to GCS bucket: `gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/`."
                 ],
@@ -46,7 +46,7 @@
                 {
                     "template_mcf": "output/egdxgkd.tmcf",
                     "cleaned_csv": "output/egdxgkd.csv",
-                    "node_mcf": "output/egdxgkd_stat_vars.mcf"
+                    "node_mcf": "output/egdxgkd*.mcf"
                 },
                 {
                     "template_mcf": "output/emxkej.tmcf",

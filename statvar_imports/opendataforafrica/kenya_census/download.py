@@ -87,7 +87,7 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     df = pd.DataFrame(rows)
 
     # Standardize column names (strip '@' if present, uppercase)
-    cleaned_cols = [c.lstrip('@').strip() for c in df.columns]
+    cleaned_cols = [c.lstrip('@').strip().upper() for c in df.columns]
     df.columns = cleaned_cols
 
     return df
