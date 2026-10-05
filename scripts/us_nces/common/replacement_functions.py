@@ -435,10 +435,12 @@ _TITLE = {
 _SCHOOL_PUBLIC_TYPE = {
     "1-Regular school": "NCES_PublicSchoolTypeRegular",
     "4-Alternative/other school": "NCES_PublicSchoolTypeOther",
+    "4-Alternative Education School": "NCES_PublicSchoolTypeOther",
     "2-Special education school": "NCES_PublicSchoolTypeSpecialEducation",
     "3-Vocational school": "NCES_PublicSchoolTypeVocational",
     np.nan: "NCES_PublicSchoolTypeDataMissing",
-    "–": "NCES_PublicSchoolTypeDataMissing"
+    "–": "NCES_PublicSchoolTypeDataMissing",
+    "†": "NCES_PublicSchoolTypeDataMissing",
 }
 
 _STATE_NAME = {

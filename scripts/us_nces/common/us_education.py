@@ -572,8 +572,8 @@ class USEducation:
         col_to_dcs = [
             'Lowest_Grade_Public', 'Highest_Grade_Public', 'Locale',
             'National_School_Lunch_Program', 'Magnet_School', 'Charter_School',
-            'School_Type', 'Title_I_School_Status', 'State_District_ID',
-            'School_Level'
+            'School_Type', 'School_Type_Public', 'Title_I_School_Status',
+            'State_District_ID', 'School_Level'
         ]
         for col in col_to_dcs:
             if col in self._final_df_place.columns.to_list():

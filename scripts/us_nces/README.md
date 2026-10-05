@@ -34,23 +34,23 @@ This dataset has Population Estimates for the National Center for Education Stat
     The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_folder/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_folder/output_files
 
 ### Script Execution Details
-Each domain's `process.py` supports the `--mode` flag (`place`, `stats`, or `both`, default: `both`):
+Each domain's `process.py` supports the `--mode` flag (`place`, `stats`, or `all`, default: `all`):
 
 ```bash
 # Public School
 python3 public_school/process.py --mode=place  # Place data only
 python3 public_school/process.py --mode=stats  # Statistical observations only
-python3 public_school/process.py --mode=both   # Both place and stats
+python3 public_school/process.py --mode=all    # Both place and stats (default)
 
 # School District
 python3 school_district/process.py --mode=place
 python3 school_district/process.py --mode=stats
-python3 school_district/process.py --mode=both
+python3 school_district/process.py --mode=all
 
 # Private School
 python3 private_school/process.py --mode=place
 python3 private_school/process.py --mode=stats
-python3 private_school/process.py --mode=both
+python3 private_school/process.py --mode=all
 ```
 
 ### Import Architecture & Scheduling
