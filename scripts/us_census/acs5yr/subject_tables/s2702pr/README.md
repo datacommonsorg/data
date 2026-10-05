@@ -27,7 +27,7 @@ Copy only the generated `.zip` file into `input_data/`:
 
 ```bash
 mkdir -p scripts/us_census/acs5yr/subject_tables/s2702pr/input_data
-cp /tmp/census_download/S2702PR.zip scripts/us_census/acs5yr/subject_tables/s2702pr/input_data/S2702PR.zip
+cp /tmp/census_download/acs/acs5/subject/S2702PR/S2702PR.zip scripts/us_census/acs5yr/subject_tables/s2702pr/input_data/S2702PR.zip
 ```
 
 ## Process Step
@@ -39,7 +39,7 @@ cd scripts/us_census/acs5yr/subject_tables
 
 python3 process.py \
   --option=all \
-  --table_prefix=S2702PR \
+  --table_prefix=s2702pr \
   --has_percent=True \
   --debug=False \
   --spec_path=s2702pr/s2702pr_spec.json \
@@ -47,7 +47,7 @@ python3 process.py \
   --output_dir=s2702pr
 ```
 
-- `--option=all`: Runs both column map generation (`column_map.json`) and observation processing (`S2702PR_cleaned.csv`, `S2702PR_output.mcf`, `S2702PR_output.tmcf`, `S2702PR_summary.json`).
+- `--option=all`: Runs both column map generation (`column_map.json`) and observation processing (`s2702pr_cleaned.csv`, `s2702pr_output.mcf`, `s2702pr_output.tmcf`, `s2702pr_summary.json`).
 - `--has_percent=True`: Converts percentage values in the dataset to counts using the `denominators` mapping in `s2702pr_spec.json`.
 
 ## Notes

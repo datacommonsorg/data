@@ -1,5 +1,5 @@
 {
-  "#TODO": "In the current import, we do not generate the statvars for both estimate and margin of error for the data on Household income between $50,000 and $74,999, since we could generated these statvars only for 2019 and not for the remaining years (2013-2018).",
+  "#TODO": "In the current import, we do not generate the statvars for both estimate and margin of error for the data on Household income between $50,000 and $74,999, since we could generate these statvars for 2019-2024 and not for the remaining years (2013-2018).",
   "preprocess": {
     "find_and_replace": {
       "$1 to $4,999 or loss": "Civilian noninstitutionalized population 16 years and older with earnings!!$1 to $4,999 or loss",
@@ -290,8 +290,6 @@
     "Margin of Error!!Total Uninsured MOE!!Median age (years)",
     "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Median age (years)",
     "Uninsured Population!!Margin of Error!!Civilian noninstitutionalized population 16 years and older with earnings!!Median earnings (dollars)",
-    "Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and older with earnings!!Civilian noninstitutionalized population 16 years and older with earnings!!Median earnings (dollars)",
-    "Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and older with earnings!!Median earnings (dollars)",
     "Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and older with earnings!!Median earnings (dollars)",
     "Margin of Error!!Total Uninsured MOE!!Civilian noninstitutionalized population 16 years and older with earnings!!Median earnings (dollars)",
     "Margin of Error!!Total Uninsured MOE!!Median earnings (dollars)",
