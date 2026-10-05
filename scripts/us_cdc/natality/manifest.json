@@ -8,11 +8,11 @@
             "provenance_url": "https://wonder.cdc.gov/natality.html",
             "provenance_description": "CDC Wonder Natality data including births, mother demographics, and pregnancy outcomes across country, state, and county levels.",
             "scripts": [
-                "download.sh",
+                "download.py",
                 "process.py"
             ],
             "source_files": [
-                "input_files/*.csv",
+                "input_files/*",
                 "validation_config.json"
             ],
             "import_inputs": [

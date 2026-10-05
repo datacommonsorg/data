@@ -3,11 +3,11 @@
     "rules": [
         {
             "rule_id": "check_latest_date_freshness",
-            "description": "Asserts the latest observation date reaches at least 2022 for CDC WONDER Natality data.",
+            "description": "Asserts the latest observation date reaches at least 2022 and freshness lag is <= 4 years for Count_BirthEvent_LiveBirth.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year FROM stats",
-                "condition": "latest_year >= 2022"
+                "query": "SELECT CAST(MaxDate AS INTEGER) AS latest_year, date_part('year', current_date) - CAST(MaxDate AS INTEGER) AS lag_years FROM stats WHERE StatVar = 'Count_BirthEvent_LiveBirth'",
+                "condition": "latest_year >= 2022 AND lag_years <= 4"
             }
         }
     ]
