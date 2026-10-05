@@ -5,6 +5,6 @@ value: C:nfip_output->value
 observationPeriod: C:nfip_output->observationPeriod
 unit: C:nfip_output->unit
 variableMeasured: C:nfip_output->variableMeasured
-#Aggregate: sum
-measurementMethod: dcs:dcAggregate/NFIPInsuranceClaims
 typeOf: dcs:StatVarObservation
+measurementMethod: dcs:dcAggregate/NFIPInsuranceClaims
+#Aggregate: sum
