@@ -84,8 +84,17 @@ def mock_task(*d_args, **d_kwargs):
     return decorator
 
 
+class MockParam:
+
+    def __init__(self, default=None, **kwargs):
+        self.value = default
+        self.default = default
+        self.kwargs = kwargs
+
+
 mock_sdk = MagicMock()
 mock_sdk.DAG = MockDAG
+mock_sdk.Param = MockParam
 mock_sdk.task = mock_task
 mock_sdk.BaseSensorOperator = MockBaseSensorOperator
 sys.modules['airflow'] = mock_airflow
@@ -278,7 +287,8 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         context = {
             'ti': ti_mock,
             'params': {
-                'importName': 'Schema'
+                'importName': 'Schema',
+                'runGoldenTests': True,
             },
         }
         res = golden_verification.verify_golden_tests.function(**context)
@@ -303,7 +313,8 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         context = {
             'ti': ti_mock,
             'params': {
-                'importName': 'Schema'
+                'importName': 'Schema',
+                'runGoldenTests': True,
             },
         }
         res = golden_verification.verify_golden_tests.function(**context)
@@ -327,7 +338,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                     target)
                 self.assertGreater(count, 0)
                 self.assertIn('Schema', target)
-                self.assertIn('manual_refresh', target)
+                self.assertIn('ManualRefresh', target)
                 schema_dag = target['Schema']
                 self.assertIsNotNone(schema_dag)
 
@@ -337,33 +348,28 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         tasks = {t.task_id: t for t in dag.tasks}
         expected_tasks = [
             'run_import_job',
-            'run_validation_job',
             'update_import_version',
             'trigger_staging_ingestion',
             'wait_staging_ingestion',
-            'verify_golden_tests',
-            'await_human_approval',
             'ingest_prod',
             'workflow_summary',
         ]
         for task_id in expected_tasks:
             self.assertIn(task_id, tasks)
+        self.assertNotIn('run_validation_job', tasks)
+        self.assertNotIn('verify_golden_tests', tasks)
+        self.assertNotIn('await_human_approval', tasks)
+        self.assertNotIn('skipValidationJob', dag.params)
 
         # Check downstream ordering
-        self.assertIn(tasks['run_validation_job'],
-                      tasks['run_import_job'].downstream_list)
         self.assertIn(tasks['update_import_version'],
-                      tasks['run_validation_job'].downstream_list)
+                      tasks['run_import_job'].downstream_list)
         self.assertIn(tasks['trigger_staging_ingestion'],
                       tasks['update_import_version'].downstream_list)
         self.assertIn(tasks['wait_staging_ingestion'],
                       tasks['trigger_staging_ingestion'].downstream_list)
-        self.assertIn(tasks['verify_golden_tests'],
-                      tasks['wait_staging_ingestion'].downstream_list)
-        self.assertIn(tasks['await_human_approval'],
-                      tasks['verify_golden_tests'].downstream_list)
         self.assertIn(tasks['ingest_prod'],
-                      tasks['await_human_approval'].downstream_list)
+                      tasks['wait_staging_ingestion'].downstream_list)
         self.assertIn(tasks['workflow_summary'],
                       tasks['ingest_prod'].downstream_list)
 
@@ -374,7 +380,6 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                 'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
                 'importConfig': {
                     'custom_flag': True,
-                    'invoke_import_validation': True
                 },
             }
         }
@@ -382,10 +387,11 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         batch_cfg = json.loads(cfg['batchImportConfig'])
         orig_cfg = json.loads(cfg['importConfig'])
 
-        self.assertFalse(batch_cfg['invoke_import_validation'])
-        self.assertFalse(batch_cfg['invoke_differ_tool'])
+        self.assertNotIn('skipValidationJob', cfg)
+        self.assertNotIn('invoke_import_validation', batch_cfg)
+        self.assertNotIn('invoke_differ_tool', batch_cfg)
         self.assertTrue(batch_cfg['custom_flag'])
-        self.assertTrue(orig_cfg['invoke_import_validation'])
+        self.assertEqual(batch_cfg, orig_cfg)
         self.assertEqual(cfg['validationJobName'], 'import-validator-job')
 
         mock_run_cr_job.return_value = {'status': 'SUCCEEDED'}
@@ -415,6 +421,41 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         tasks = {t.task_id: t for t in dag.tasks}
         self.assertEqual(tasks['update_import_version'].trigger_rule,
                          'none_failed')
+
+    def test_normalize_manifest_resource_limits(self):
+        dag = import_automation_workflow.build_dag(
+            dag_id='EIA_Electricity',
+            import_name='scripts/us_eia/opendata:EIA_Electricity',
+            resource_limits={
+                'cpu': 8,
+                'memory': 64,
+                'disk': 100
+            },
+        )
+        cfg = import_automation_workflow.resolve_workflow_context({'dag': dag})
+        self.assertEqual(
+            cfg['resources'],
+            {
+                'machine': 'n2-highmem-8',
+                'cpu': 8000,
+                'memory': 65536,
+                'disk': 100,
+            },
+        )
+        spec = import_automation_workflow._build_batch_job_spec(
+            image_uri=cfg['imageUri'],
+            import_name=cfg['importName'],
+            import_config=cfg['batchImportConfig'],
+            job_id=cfg['jobId'],
+            resources=cfg['resources'],
+            gcs_mount_bucket=cfg['gcsMountBucket'],
+        )
+        compute = spec['taskGroups'][0]['taskSpec']['computeResource']
+        instance = spec['allocationPolicy']['instances'][0]['policy']
+        self.assertEqual(compute['cpuMilli'], 8000)
+        self.assertEqual(compute['memoryMib'], 65536)
+        self.assertEqual(instance['machineType'], 'n2-highmem-8')
+        self.assertEqual(instance['bootDisk']['sizeGb'], 100)
 
 
 class E2EDagRunnerTest(unittest.TestCase):

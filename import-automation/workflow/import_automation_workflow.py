@@ -53,7 +53,7 @@ from golden_verification import (
 # Configuration & Helpers
 # -----------------------------------------------------------------------------
 
-DAG_ID = os.environ.get("IMPORT_AUTOMATION_DAG_ID", "manual_refresh")
+DAG_ID = os.environ.get("IMPORT_AUTOMATION_DAG_ID", "ManualRefresh")
 DEFAULT_IMAGE_URI = "us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:stable"
 DEFAULT_SKIP_PROD_INGESTION = False
 DEFAULT_RESOURCES = {
@@ -62,6 +62,142 @@ DEFAULT_RESOURCES = {
     "memory": 32768,
     "disk": 100
 }
+
+_GCE_MACHINE_TYPES = [
+    {
+        "name": "n2-standard-2",
+        "cpus": 2,
+        "memory_gib": 8
+    },
+    {
+        "name": "n2-standard-4",
+        "cpus": 4,
+        "memory_gib": 16
+    },
+    {
+        "name": "n2-standard-8",
+        "cpus": 8,
+        "memory_gib": 32
+    },
+    {
+        "name": "n2-standard-16",
+        "cpus": 16,
+        "memory_gib": 64
+    },
+    {
+        "name": "n2-standard-32",
+        "cpus": 32,
+        "memory_gib": 128
+    },
+    {
+        "name": "n2-standard-48",
+        "cpus": 48,
+        "memory_gib": 192
+    },
+    {
+        "name": "n2-standard-64",
+        "cpus": 64,
+        "memory_gib": 256
+    },
+    {
+        "name": "n2-highmem-2",
+        "cpus": 2,
+        "memory_gib": 16
+    },
+    {
+        "name": "n2-highmem-4",
+        "cpus": 4,
+        "memory_gib": 32
+    },
+    {
+        "name": "n2-highmem-8",
+        "cpus": 8,
+        "memory_gib": 64
+    },
+    {
+        "name": "n2-highmem-16",
+        "cpus": 16,
+        "memory_gib": 128
+    },
+    {
+        "name": "n2-highmem-32",
+        "cpus": 32,
+        "memory_gib": 256
+    },
+    {
+        "name": "n2-highmem-48",
+        "cpus": 48,
+        "memory_gib": 384
+    },
+    {
+        "name": "n2-highmem-64",
+        "cpus": 64,
+        "memory_gib": 512
+    },
+    {
+        "name": "n2-highcpu-2",
+        "cpus": 2,
+        "memory_gib": 2
+    },
+    {
+        "name": "n2-highcpu-4",
+        "cpus": 4,
+        "memory_gib": 4
+    },
+    {
+        "name": "n2-highcpu-8",
+        "cpus": 8,
+        "memory_gib": 8
+    },
+    {
+        "name": "n2-highcpu-16",
+        "cpus": 16,
+        "memory_gib": 16
+    },
+    {
+        "name": "n2-highcpu-32",
+        "cpus": 32,
+        "memory_gib": 32
+    },
+]
+
+
+def get_gce_instance(required_cpu: float,
+                     required_memory_gib: float) -> str | None:
+    """Finds the smallest GCE machine type meeting the CPU and memory (GiB) requirements."""
+    suitable = [
+        m for m in _GCE_MACHINE_TYPES
+        if m["cpus"] >= required_cpu and m["memory_gib"] >= required_memory_gib
+    ]
+    if not suitable:
+        return None
+    suitable.sort(key=lambda x: (x["cpus"], x["memory_gib"]))
+    return suitable[0]["name"]
+
+
+def normalize_batch_resources(
+        resource_limits: dict[str, Any] | None) -> dict[str, Any]:
+    """Converts manifest resource_limits (cpu in vCPUs, memory in GiB, disk in GB) into Cloud Batch resources."""
+    if not isinstance(resource_limits, dict) or not resource_limits:
+        return dict(DEFAULT_RESOURCES)
+
+    cpu_vcpu = (float(resource_limits["cpu"]) if "cpu" in resource_limits else
+                DEFAULT_RESOURCES["cpu"] / 1000.0)
+    mem_gib = (float(resource_limits["memory"]) if "memory" in resource_limits
+               else DEFAULT_RESOURCES["memory"] / 1024.0)
+    disk = int(resource_limits.get("disk", DEFAULT_RESOURCES["disk"]))
+
+    explicit_machine = resource_limits.get("machine")
+    machine = str(explicit_machine) if explicit_machine else (
+        get_gce_instance(cpu_vcpu, mem_gib) or DEFAULT_RESOURCES["machine"])
+
+    return {
+        "machine": machine,
+        "cpu": int(cpu_vcpu * 1000),
+        "memory": int(mem_gib * 1024),
+        "disk": disk,
+    }
+
 
 PROD_DENYLIST = frozenset({
     "Brazil_RuralDevelopmentProgram",
@@ -392,15 +528,11 @@ def _run_cloud_run_job(
 def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
     """Executes the Cloud Run validation job after the Batch import job."""
     cfg = resolve_workflow_context(context, default_import_name=import_name)
-    if cfg["skipImportJob"] or cfg.get("skipValidationJob"):
+    if cfg["skipImportJob"]:
         logging.info(
-            "Skipping Cloud Run validation job (skipImportJob=%s, skipValidationJob=%s).",
-            cfg["skipImportJob"],
-            cfg.get("skipValidationJob"),
-        )
+            "skipImportJob is True; skipping Cloud Run validation job.")
         raise AirflowSkipException(
-            f"Validation job skipped by configuration (skipImportJob={cfg['skipImportJob']}, skipValidationJob={cfg.get('skipValidationJob')})."
-        )
+            "Validation job skipped by configuration (skipImportJob=True).")
 
     start_time = time.time()
     try:
@@ -546,6 +678,8 @@ def resolve_workflow_context(context: dict[str, Any],
             if hasattr(src, "get"):
                 v = src.get(key)
                 if v is not None and v != "":
+                    if hasattr(v, "value"):
+                        return v.value
                     return getattr(v, "default", v)
         return default
 
@@ -610,12 +744,8 @@ def resolve_workflow_context(context: dict[str, Any],
     else:
         import_config_dict = {}
 
-    batch_config_dict = dict(import_config_dict)
-    batch_config_dict["invoke_import_validation"] = False
-    batch_config_dict["invoke_differ_tool"] = False
-
     import_config_str = json.dumps(import_config_dict)
-    batch_import_config_str = json.dumps(batch_config_dict)
+    batch_import_config_str = import_config_str
 
     exec_dt = (context.get("logical_date") or
                getattr(dag_run, "logical_date", None) or
@@ -629,25 +759,56 @@ def resolve_workflow_context(context: dict[str, Any],
         return f"https://{svc}-{project_number}.{region}.run.app" if project_number else f"https://{svc}.{region}.run.app"
 
     return {
-        "projectId": project_id, "region": region, "projectNumber": project_number,
-        "importName": import_name, "jobId": get_val("jobId") or generate_job_id(import_name, run_ts),
-        "imageUri": get_val("imageUri", DEFAULT_IMAGE_URI),
-        "importConfig": import_config_str,
-        "batchImportConfig": batch_import_config_str,
-        "validationJobName": validation_job_name,
-        "skipValidationJob": to_bool("skipValidationJob", False),
-        "gcsMountBucket": gcs_mount_bucket, "gcsImportBucket": gcs_import_bucket,
-        "gcsMountPath": get_val("gcsMountPath", "/tmp/gcs"),
-        "helperUrlFn": helper_url,
-        "importHelperService": import_helper, "ingestionHelperService": ingestion_helper,
-        "spannerWorkflowName": spanner_workflow,
-        "skipImportJob": to_bool("skipImportJob"),
-        "skipStagingIngestion": to_bool("skipStagingIngestion"),
-        "skipProdIngestion": is_prod_denylisted(import_name) or to_bool("skipProdIngestion", DEFAULT_SKIP_PROD_INGESTION),
-        "dryRunIngestion": to_bool("dryRunIngestion"),
-        "forceIngestion": to_bool("forceIngestion"),
-        "resources": {**DEFAULT_RESOURCES, **(get_val("resources") if isinstance(get_val("resources"), dict) else {})},
-        "runId": run_id,
+        "projectId":
+            project_id,
+        "region":
+            region,
+        "projectNumber":
+            project_number,
+        "importName":
+            import_name,
+        "jobId":
+            get_val("jobId") or generate_job_id(import_name, run_ts),
+        "imageUri":
+            get_val("imageUri", DEFAULT_IMAGE_URI),
+        "importConfig":
+            import_config_str,
+        "batchImportConfig":
+            batch_import_config_str,
+        "validationJobName":
+            validation_job_name,
+        "gcsMountBucket":
+            gcs_mount_bucket,
+        "gcsImportBucket":
+            gcs_import_bucket,
+        "gcsMountPath":
+            get_val("gcsMountPath", "/tmp/gcs"),
+        "helperUrlFn":
+            helper_url,
+        "importHelperService":
+            import_helper,
+        "ingestionHelperService":
+            ingestion_helper,
+        "spannerWorkflowName":
+            spanner_workflow,
+        "skipImportJob":
+            to_bool("skipImportJob"),
+        "skipStagingIngestion":
+            to_bool("skipStagingIngestion"),
+        "skipProdIngestion":
+            is_prod_denylisted(import_name)
+            or to_bool("skipProdIngestion", DEFAULT_SKIP_PROD_INGESTION),
+        "dryRunIngestion":
+            to_bool("dryRunIngestion"),
+        "forceIngestion":
+            to_bool("forceIngestion"),
+        "resources": {
+            **DEFAULT_RESOURCES,
+            **(get_val("resources")
+               if isinstance(get_val("resources"), dict) else {}),
+        },
+        "runId":
+            run_id,
     }
 
 
@@ -759,9 +920,10 @@ def workflow_summary(**context) -> dict[str, Any]:
         dag.task_ids) if dag and hasattr(dag, "task_ids") else None
     has_golden = (("verify_golden_tests" in dag_task_ids) if dag_task_ids
                   is not None else is_golden_test_import(cfg["importName"]))
+    has_validation = bool(dag_task_ids and "run_validation_job" in dag_task_ids)
     stages = [
         ("import", "run_import_job"),
-        ("validation", "run_validation_job"),
+        *([("validation", "run_validation_job")] if has_validation else []),
         ("version", "update_import_version"),
         ("staging_trigger", "trigger_staging_ingestion"),
         ("staging_wait", "wait_staging_ingestion"),
@@ -838,10 +1000,6 @@ base_dag_params = {
         Param(default=False,
               type="boolean",
               description="Skip Batch import job"),
-    "skipValidationJob":
-        Param(default=False,
-              type="boolean",
-              description="Skip Cloud Run validation job"),
     "skipStagingIngestion":
         Param(default=False,
               type="boolean",
@@ -937,10 +1095,7 @@ def build_dag(
         } if config_override else {}),
         **({
             "resources":
-                Param({
-                    **DEFAULT_RESOURCES,
-                    **resource_limits
-                },
+                Param(normalize_batch_resources(resource_limits),
                       type="object",
                       description="Batch job resources")
         } if resource_limits else {}),
@@ -981,15 +1136,13 @@ def build_dag(
             timeout=21600,
         )
         batch_task = run_import_job(import_name=import_name)
-        validation_task = run_validation_job(import_name=import_name)
         version_task = update_import_version()
         staging_task = trigger_staging_ingestion()
         prod_task = ingest_prod()
         summary_task = workflow_summary()
 
         pipeline: list[Any] = [
-            batch_task, validation_task, version_task, staging_task,
-            staging_wait
+            batch_task, version_task, staging_task, staging_wait
         ]
         if has_golden_check:
             golden_task = verify_golden_tests()

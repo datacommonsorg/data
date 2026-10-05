@@ -38,10 +38,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-DEFAULT_GOLDEN_TEST_IMPORTS = frozenset({
-    "Schema",
-    "Place",
-})
+DEFAULT_GOLDEN_TEST_IMPORTS: frozenset[str] = frozenset()
 
 DEFAULT_IMPORT_TRIGGERS: dict[str, str] = {
     "schema": "ingestion-golden-verification",

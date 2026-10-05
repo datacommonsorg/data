@@ -180,13 +180,13 @@ def invoke_import_automation_airflow(import_name: str,
         import_size: The size of the import ('small', 'medium', 'large').
         graph_path: The graph path for the import.
         cron_schedule: The cron schedule for the import.
-        dag_id: Optional Airflow DAG ID to invoke; defaults to generic manual_refresh DAG.
+        dag_id: Optional Airflow DAG ID to invoke; defaults to generic ManualRefresh DAG.
         skip_import_job: Whether to skip the import batch job.
         skip_staging_ingestion: Whether to skip staging Spanner ingestion.
         skip_prod_ingestion: Whether to skip production Spanner ingestion.
     """
     short_import_name = import_name.split(':')[-1]
-    target_dag_id = dag_id if dag_id else config.AIRFLOW_DEFAULT_DAG_ID
+    target_dag_id = dag_id or config.AIRFLOW_DEFAULT_DAG_ID
     full_import_name = (
         import_name if ':' in import_name else f"scripts/entities:{import_name}"
     )
@@ -267,15 +267,6 @@ def invoke_import_automation_airflow(import_name: str,
         'Content-Type': 'application/json'
     }
     response = requests.post(url, json=payload, headers=headers, timeout=60)
-    if response.status_code == 404 and target_dag_id != config.AIRFLOW_DEFAULT_DAG_ID:
-        logging.warning(
-            f"Airflow DAG '{target_dag_id}' not found (404). "
-            f"Falling back to generic DAG '{config.AIRFLOW_DEFAULT_DAG_ID}'."
-        )
-        target_dag_id = config.AIRFLOW_DEFAULT_DAG_ID
-        url = f"{base_url}/api/v2/dags/{target_dag_id}/dagRuns"
-        response = requests.post(url, json=payload, headers=headers, timeout=60)
-
     response.raise_for_status()
     logging.info(
         f"Triggered Airflow DAG {target_dag_id} for {import_name}. Run ID: {dag_run_id}"

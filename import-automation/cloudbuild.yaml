@@ -255,8 +255,8 @@ steps:
             --region="us-central1" \
             --project="datcom-import-automation-prod" \
             --service-account="965988403328-compute@developer.gserviceaccount.com" \
-            --cpu="2" \
-            --memory="4Gi" \
+            --cpu="8" \
+            --memory="32Gi" \
             --max-retries=0 \
             --task-timeout="7200s" \
             --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,GCS_BUCKET_ID=datcom-prod-imports"

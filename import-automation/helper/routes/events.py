@@ -71,6 +71,10 @@ async def handle_feed_event(
     cron_schedule = attributes.get('cron_schedule', '')
     dag_id = attributes.get('dag_id')
 
+    invoke_airflow_dag = (
+        attributes.get('invoke_airflow_dag').lower() == 'true'
+        if attributes.get('invoke_airflow_dag') else True
+    )
     skip_import_job = (
         attributes.get('skip_import_job').lower() == 'true'
         if attributes.get('skip_import_job') else True
@@ -113,18 +117,33 @@ async def handle_feed_event(
         )
         update_import_status(status_req, bigquery=bigquery, storage=storage)
 
-    # Invoke Cloud Composer Airflow DAG for import automation
-    import_utils.invoke_import_automation_airflow(
-        import_name=import_name,
-        latest_version=latest_version,
-        import_size=import_size,
-        graph_path=graph_path,
-        cron_schedule=cron_schedule,
-        dag_id=dag_id,
-        skip_import_job=skip_import_job,
-        skip_staging_ingestion=skip_staging_ingestion,
-        skip_prod_ingestion=skip_prod_ingestion,
-    )
+    if invoke_airflow_dag:
+        # Invoke Cloud Composer Airflow DAG for import automation
+        import_utils.invoke_import_automation_airflow(
+            import_name=import_name,
+            latest_version=latest_version,
+            import_size=import_size,
+            graph_path=graph_path,
+            cron_schedule=cron_schedule,
+            dag_id=dag_id,
+            skip_import_job=skip_import_job,
+            skip_staging_ingestion=skip_staging_ingestion,
+            skip_prod_ingestion=skip_prod_ingestion,
+        )
+    elif config.PROJECT_ID and config.LOCATION:
+        import_utils.invoke_import_automation_workflow(
+            project_id=config.PROJECT_ID,
+            location=config.LOCATION,
+            workflow_id=config.IMPORT_AUTOMATION_WORKFLOW_ID,
+            import_name=import_name,
+            latest_version=latest_version,
+            import_size=import_size,
+            graph_path=graph_path,
+            cron_schedule=cron_schedule,
+            skip_import_job=skip_import_job,
+            skip_staging_ingestion=skip_staging_ingestion,
+            skip_prod_ingestion=skip_prod_ingestion,
+        )
 
     return BaseResponse(status=ResponseStatus.OK, message="Event processed successfully.")
 
