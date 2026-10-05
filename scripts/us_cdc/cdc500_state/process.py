@@ -49,7 +49,7 @@ WITH cdc_sv AS (
       WHEN variable_measured LIKE '%18OrMoreYears%' THEN 'Count_Person_18OrMoreYears'
       ELSE 'Count_Person'
     END AS pop_statvar
-  FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries`
+  FROM `datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries`
   WHERE provenance = 'dc/base/CDC500'
     AND variable_measured LIKE 'Percent_%'
     AND variable_measured NOT IN (
@@ -69,8 +69,8 @@ svo_percent AS (
     O.value AS percent,
     T.measurement_method AS measurement_method,
     cdc_sv.pop_statvar
-  FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.Observation` AS O
-  INNER JOIN `datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries` AS T
+  FROM `datcom-store.spanner_dc_graph_prod_snap_latest.Observation` AS O
+  INNER JOIN `datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries` AS T
     ON O.variable_measured = T.variable_measured
     AND O.entity1 = T.entity1
     AND O.facet_id = T.facet_id
@@ -106,8 +106,8 @@ svo_count AS (
     O.entity1 AS observation_about,
     O.date AS observation_date,
     O.value AS population
-  FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.Observation` AS O
-  INNER JOIN `datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries` AS T
+  FROM `datcom-store.spanner_dc_graph_prod_snap_latest.Observation` AS O
+  INNER JOIN `datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries` AS T
     ON O.variable_measured = T.variable_measured
     AND O.entity1 = T.entity1
     AND O.facet_id = T.facet_id

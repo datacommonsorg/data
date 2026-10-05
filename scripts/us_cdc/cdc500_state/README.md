@@ -22,7 +22,7 @@ CDC PLACES (Population Level Analysis and Community Estimates) is the official s
 
 ### Data Sources and Tables
 
-The aggregation script queries Google Cloud BigQuery graph tables in dataset `datcom-store.spanner_dc_graph_prod_DEFAULT`:
+The aggregation script queries Google Cloud BigQuery graph tables in dataset `datcom-store.spanner_dc_graph_prod_snap_latest`:
 
 1. **`TimeSeries`**:
    - **CDC 500 Series**: Identifies CDC 500 Statistical Variables (`provenance = 'dc/base/CDC500'` and `variable_measured LIKE 'Percent_%'`) and extracts their measurement methods (`measurement_method`). It maps each percentage health metric to its appropriate denominator demographic cohort StatVar (e.g., `Count_Person_18OrMoreYears`, `Count_Person_18To64Years`, `Count_Person_65OrMoreYears`, `Count_Person`, etc.).
@@ -78,7 +78,7 @@ The following age-bracketed cancer screening indicators are omitted from state-l
 
 #### Prerequisites
 
-Ensure Google Cloud authentication is configured with access to BigQuery dataset `datcom-store.spanner_dc_graph_prod_DEFAULT`:
+Ensure Google Cloud authentication is configured with access to BigQuery dataset `datcom-store.spanner_dc_graph_prod_snap_latest`:
 
 ```bash
 $ gcloud auth application-default login
@@ -139,5 +139,5 @@ Adding `unit: Percent` and `scalingFactor: 100` to `cdc500_state.tmcf` alters th
 
 ### Troubleshooting
 
-- **`RuntimeError: BigQuery query returned 0 rows`**: Verify ADC authentication (`gcloud auth application-default login`) and ensure read permissions on `datcom-store.spanner_dc_graph_prod_DEFAULT`. Pass `--project=<gcp_project_id>` if running outside the default project.
+- **`RuntimeError: BigQuery query returned 0 rows`**: Verify ADC authentication (`gcloud auth application-default login`) and ensure read permissions on `datcom-store.spanner_dc_graph_prod_snap_latest`. Pass `--project=<gcp_project_id>` if running outside the default project.
 - **`check_statvar_max_dates` validation failure**: When CDC PLACES (the official successor program to CDC 500 Cities) publishes a new release year, update the `CASE` statement in `validation_config.json` (`check_statvar_max_dates`) to reflect the new expected vintage years per cohort.

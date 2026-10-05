@@ -32,9 +32,10 @@ FLAGS = flags.FLAGS
 def _prepare_duckdb_query(sql: str) -> str:
     """Adapts BigQuery SQL syntax in process.QUERY for in-memory DuckDB execution."""
     adapted = sql.replace(
-        '`datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries`', 'TimeSeries')
+        '`datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries`',
+        'TimeSeries')
     adapted = adapted.replace(
-        '`datcom-store.spanner_dc_graph_prod_DEFAULT.Observation`',
+        '`datcom-store.spanner_dc_graph_prod_snap_latest.Observation`',
         'Observation')
     adapted = adapted.replace('SAFE_CAST(', 'TRY_CAST(')
     adapted = adapted.replace('AS FLOAT64)', 'AS DOUBLE)')
@@ -54,8 +55,8 @@ class CDC500StateProcessTest(unittest.TestCase):
     def test_query_constants(self):
         """Verifies key SQL clauses and excluded variables in process.QUERY."""
         query = process.QUERY
-        self.assertIn("spanner_dc_graph_prod_DEFAULT.TimeSeries", query)
-        self.assertIn("spanner_dc_graph_prod_DEFAULT.Observation", query)
+        self.assertIn("spanner_dc_graph_prod_snap_latest.TimeSeries", query)
+        self.assertIn("spanner_dc_graph_prod_snap_latest.Observation", query)
         self.assertIn("dc/base/CDC500", query)
         self.assertIn("dc/base/CensusACS5YearSurvey", query)
         self.assertIn("SAFE_DIVIDE", query)
