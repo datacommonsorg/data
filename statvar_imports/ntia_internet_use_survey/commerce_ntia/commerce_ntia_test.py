@@ -130,31 +130,17 @@ class PreprocessTest(unittest.TestCase):
             self.assertNotIn('age314Prop', cols_data)
             self.assertNotIn('age65pSE', cols_data)
 
-    def test_write_csv_atomically_success(self):
-        """Tests that _write_csv_atomically writes CSV and removes .tmp file."""
+    def test_file_io_write_csv(self):
+        """Tests that FileIO writes CSV correctly."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             target_path = os.path.join(tmp_dir, 'output.csv')
             df = pd.DataFrame({'col': [1, 2, 3]})
-            preprocess._write_csv_atomically(df, target_path)
+            with preprocess.FileIO(target_path, mode='w') as f:
+                df.to_csv(f, index=False)
             self.assertTrue(os.path.exists(target_path))
-            self.assertFalse(os.path.exists(f"{target_path}.tmp"))
             self.assertGreater(os.path.getsize(target_path), 0)
-
-    def test_write_csv_atomically_empty_raises(self):
-        """Tests that _write_csv_atomically raises RuntimeError if output file is empty."""
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            target_path = os.path.join(tmp_dir, 'output.csv')
-            df = pd.DataFrame()
-            with mock.patch.object(pd.DataFrame, 'to_csv') as mock_to_csv:
-
-                def create_empty(path, **kwargs):
-                    open(path, 'w').close()
-
-                mock_to_csv.side_effect = create_empty
-                with self.assertRaises(RuntimeError) as cm:
-                    preprocess._write_csv_atomically(df, target_path)
-                self.assertIn("empty", str(cm.exception))
-                self.assertFalse(os.path.exists(target_path))
+            read_df = pd.read_csv(target_path)
+            self.assertEqual(list(read_df['col']), [1, 2, 3])
 
     @mock.patch('preprocess.logging.error')
     def test_preprocess_data_file_not_found(self, mock_error):
@@ -215,7 +201,7 @@ class PreprocessTest(unittest.TestCase):
             preprocess.main([])
         self.assertEqual(cm.exception.code, 1)
         mock_fatal.assert_called_once_with(
-            "Failed to download Commerce_NTIA file or file is empty.",
+            f"Failed to download Commerce_NTIA file from {preprocess.COMMERCE_NTIA_URL} or file is empty.",
             exc_info=True)
         mock_preprocess.assert_not_called()
 
@@ -232,7 +218,7 @@ class PreprocessTest(unittest.TestCase):
                 preprocess.main([])
             self.assertEqual(cm.exception.code, 1)
             mock_fatal.assert_called_once_with(
-                "Failed to download Commerce_NTIA file or file is empty.",
+                f"Failed to download Commerce_NTIA file from {preprocess.COMMERCE_NTIA_URL} or file is empty.",
                 exc_info=True)
             mock_preprocess.assert_not_called()
 
@@ -250,7 +236,7 @@ class PreprocessTest(unittest.TestCase):
                 preprocess.main([])
             self.assertEqual(cm.exception.code, 1)
             mock_fatal.assert_called_once_with(
-                "Failed to download Commerce_NTIA file or file is empty.",
+                f"Failed to download Commerce_NTIA file from {preprocess.COMMERCE_NTIA_URL} or file is empty.",
                 exc_info=True)
             mock_preprocess.assert_not_called()
 
@@ -268,6 +254,7 @@ class PreprocessTest(unittest.TestCase):
         self.assertEqual(cm.exception.code, 1)
         self.assertTrue(mock_fatal.called)
         self.assertIn("Connection timeout", str(mock_fatal.call_args))
+        self.assertIn(preprocess.COMMERCE_NTIA_URL, str(mock_fatal.call_args))
         self.assertTrue(mock_fatal.call_args.kwargs.get('exc_info'))
         mock_preprocess.assert_not_called()
 

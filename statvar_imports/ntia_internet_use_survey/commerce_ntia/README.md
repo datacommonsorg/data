@@ -17,6 +17,16 @@
 ### Date Coverage Notes
 The dataset encompasses NTIA Internet Use Survey data spanning survey waves from 1994 to 2023.
 
+### Active vs. Historical / Deprecated StatVars
+The NTIA Internet Use Survey spans survey waves from 1994 to 2023. Over time, survey questions are updated:
+- **Historical / Deprecated StatVars**: Questions discontinued by NTIA in earlier waves (e.g., dial-up internet access, legacy device categories, or questions fielded only in 2013–2019). These variables remain in Data Commons for historical longitudinal continuity, with `MaxDate` reflecting their final survey wave (e.g., `2013-07` or `2019-11`), but no longer receive new data in newer waves.
+- **Active StatVars**: Variables actively surveyed in the most recent survey wave (November 2023, `2023-11`). There are currently:
+  - **1,935** active general survey StatVars (`input_files/ntia-data.csv`)
+  - **227** active age-stratified StatVars (`input_files/ntia-data-age-only.csv`)
+  - **2,162** total active StatVars
+
+The validation rule `check_active_survey_wave_count` in `validation_config.json` asserts that all 2,162 active StatVars are present and contain data from `2023-11` or later.
+
 ### Testing Instructions
 To run hermetic unit tests for this import:
 ```bash

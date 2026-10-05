@@ -25,6 +25,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(script_dir, '../../../util'))
 
 from download_util_script import download_file
+from file_util import FileIO
 
 COMMERCE_NTIA_URL = config.COMMERCE_NTIA_URL
 
@@ -46,16 +47,6 @@ HEADERS = {
 }
 
 
-def _write_csv_atomically(df: pd.DataFrame, target_path: str) -> None:
-    """Writes a DataFrame to a CSV atomically using a temporary file."""
-    tmp_path = f"{target_path}.tmp"
-    df.to_csv(tmp_path, index=False)
-    if not os.path.exists(tmp_path) or os.path.getsize(tmp_path) == 0:
-        raise RuntimeError(
-            f"Failed to write CSV or output file is empty: {tmp_path}")
-    os.replace(tmp_path, target_path)
-
-
 def move_column_left(df, column_to_move, target_column):
     """Moves the universe column to the left of variable column."""
     if column_to_move == target_column:
@@ -70,6 +61,27 @@ def move_column_left(df, column_to_move, target_column):
 
 
 def preprocess_data():
+    """Preprocesses and splits the raw NTIA Internet Use Survey dataset.
+
+    The raw source dataset (ntia-analyze-table.csv) combines both general survey
+    demographic metrics and age-bracket distributions in a single tabular file.
+    These require two different PV-mapping strategies and cannot be processed in
+    a single pass by stat_var_processor.py because:
+      1. stat_var_processor.py expects a uniform column schema per run mapped to
+         a single PV-map and metadata config.
+      2. Age-bracket counts (age314Count to age65pCount) map column names
+         directly to DC Age properties via ntia_age_pvmap.csv, whereas general
+         survey rows map variable codes to statistical properties via
+         ntia_pvmap.csv.
+      3. The processor cannot dynamically split columns, reorder columns to place
+         'universe' ahead of 'variable' for hierarchical resolution, or inject
+         helper resolution columns (universeAgeResol / variableAgeResol) needed
+         to distinguish Civilian Person vs. Adult populations.
+
+    This function performs the necessary bifurcation and generates:
+      - input_files/ntia-data-age-only.csv: Age-bracket counts with age PV mappings.
+      - input_files/ntia-data.csv: General survey metrics with standard PV mappings.
+    """
     try:
         os.makedirs(INPUT_DIR, exist_ok=True)
         org_df = pd.read_csv(INPUT_FILE, encoding='utf-8-sig')
@@ -79,7 +91,8 @@ def preprocess_data():
         df1['universeAgeResol'] = df1['universe'].map(_AGE_RESOL_MAP)
         df1['variableAgeResol'] = df1['variable'].map(_AGE_RESOL_MAP)
         df1_moved = move_column_left(df1, 'universe', 'variable')
-        _write_csv_atomically(df1_moved, INPUT_FILE_1)
+        with FileIO(INPUT_FILE_1, mode='w') as f:
+            df1_moved.to_csv(f, index=False)
 
         # 2. Process General survey data
         df2_cols_to_keep = [
@@ -91,7 +104,8 @@ def preprocess_data():
         df2['universeAgeResol'] = df2['universe'].map(_AGE_RESOL_MAP)
         df2['variableAgeResol'] = df2['variable'].map(_AGE_RESOL_MAP)
         df2_moved = move_column_left(df2, 'universe', 'variable')
-        _write_csv_atomically(df2_moved, INPUT_FILE_2)
+        with FileIO(INPUT_FILE_2, mode='w') as f:
+            df2_moved.to_csv(f, index=False)
         logging.info(
             f"Successfully preprocessed {len(df1_moved)} age-only rows "
             f"and {len(df2_moved)} general survey rows.")
@@ -120,14 +134,15 @@ def main(argv):
         if not success or not os.path.exists(INPUT_FILE) or os.path.getsize(
                 INPUT_FILE) == 0:
             logging.fatal(
-                "Failed to download Commerce_NTIA file or file is empty.",
+                f"Failed to download Commerce_NTIA file from {COMMERCE_NTIA_URL} or file is empty.",
                 exc_info=True)
         logging.info(
             f"Successfully downloaded {INPUT_FILE} ({os.path.getsize(INPUT_FILE)} bytes)."
         )
     except Exception as e:
-        logging.fatal(f"Failed to download Commerce_NTIA file: {e}",
-                      exc_info=True)
+        logging.fatal(
+            f"Failed to download Commerce_NTIA file from {COMMERCE_NTIA_URL}: {e}",
+            exc_info=True)
 
     try:
         preprocess_data()
