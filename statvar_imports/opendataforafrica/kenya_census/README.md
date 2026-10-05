@@ -16,7 +16,7 @@
 | File / Directory | Purpose |
 | :--- | :--- |
 | `manifest.json` | Cloud Batch import manifest declaring scripts, inputs, GCS source files, and resource limits |
-| `validation_config.json` | Import validation rules (freshness SQL, deletion threshold <= 0.1%, 0 lint errors) |
+| `validation_config.json` | Import validation rules (freshness SQL, deletion threshold <= 0.1%) |
 | `download.sh` | Shell script to fetch raw census CSVs from GCS storage into `input_files/` |
 | `download.py` | Python utility for parsing Open Data for Africa StructureSpecificData SDMX XML files to CSVs |
 | `download_test.py` | Hermetic unit tests for `download.py` XML parsing, atomic writes, and GCS pull routines |
@@ -108,5 +108,4 @@ Run the hermetic unit tests for the Python download routine:
 `validation_config.json` configures import-specific rules:
 - `check_all_statvars_freshness`: SQL validator ensuring `MaxDate >= '2009' AND total_svs > 0` across all active StatVars.
 - `check_deleted_records_percent`: Strict cap with `threshold: 0.1` (0.1%), matching rule description.
-- `check_lint_error_count`: Strict lint gate enforcing `threshold: 0` lint errors.
-- Missing references (`check_missing_refs_count` at threshold 0) are enforced by base validation.
+- Default lint checks (`check_lint_error_count` and `check_missing_refs_count` at threshold 0) are inherited from the base validation framework.
