@@ -136,7 +136,7 @@ def resolve_composer_webserver_url(
 def check_dag_import_errors(session: AuthorizedSession,
                             webserver_url: str) -> None:
     """Verifies that there are no DAG import/syntax errors in Airflow."""
-    err_url = f"{webserver_url}/api/v1/importErrors"
+    err_url = f"{webserver_url}/api/v2/importErrors"
     resp = session.get(err_url, timeout=30)
     resp.raise_for_status()
     data = resp.json()
@@ -165,7 +165,7 @@ def ensure_dag_available_and_unpaused(
     max_wait_sec: int = 120,
 ) -> dict[str, Any]:
     """Waits for DAG to appear in Airflow and ensures it is unpaused."""
-    dag_url = f"{webserver_url}/api/v1/dags/{dag_id}"
+    dag_url = f"{webserver_url}/api/v2/dags/{dag_id}"
     start_time = time.time()
 
     while time.time() - start_time < max_wait_sec:
@@ -201,9 +201,10 @@ def trigger_dag_run(
     conf: dict[str, Any],
 ) -> dict[str, Any]:
     """Triggers a new DAG run via the Airflow REST API."""
-    runs_url = f"{webserver_url}/api/v1/dags/{dag_id}/dagRuns"
-    payload = {
+    runs_url = f"{webserver_url}/api/v2/dags/{dag_id}/dagRuns"
+    payload: dict[str, Any] = {
         "dag_run_id": run_id,
+        "logical_date": datetime.now(timezone.utc).isoformat(),
         "conf": conf,
     }
     logging.info("Triggering DAG '%s' with run_id='%s' and conf=%s", dag_id,
@@ -226,7 +227,7 @@ def dump_failed_task_logs(
         state = ti.get("state")
         try_num = ti.get("try_number", 1)
         if state in ("failed", "upstream_failed") and t_id:
-            log_url = f"{webserver_url}/api/v1/dags/{dag_id}/dagRuns/{run_id}/taskInstances/{t_id}/logs/{max(1, try_num)}"
+            log_url = f"{webserver_url}/api/v2/dags/{dag_id}/dagRuns/{run_id}/taskInstances/{t_id}/logs/{max(1, try_num)}"
             try:
                 resp = session.get(log_url,
                                    headers={"Accept": "text/plain"},
@@ -305,9 +306,9 @@ def run_e2e_test(
     trigger_dag_run(session, webserver_url, dag_id, run_id, conf)
 
     # 4. Monitor DAG run progress
-    run_url = f"{webserver_url}/api/v1/dags/{dag_id}/dagRuns/{run_id}"
+    run_url = f"{webserver_url}/api/v2/dags/{dag_id}/dagRuns/{run_id}"
     ti_url = f"{run_url}/taskInstances"
-    var_url = f"{webserver_url}/api/v1/variables"
+    var_url = f"{webserver_url}/api/v2/variables"
 
     start_time = time.time()
     approval_variable_set = False
