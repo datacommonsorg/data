@@ -105,9 +105,7 @@ Run the hermetic unit tests for the Python download routine:
 
 ### 6.2 Pre-Submission Validation Rules
 
-`validation_config.json` enforces:
+`validation_config.json` configures import-specific rules:
 - `check_all_statvars_freshness`: SQL validator ensuring `MaxDate >= '2009' AND total_svs > 0` across all active StatVars.
-- `check_max_date_consistent`: Omitted per Runbook CHK-7.2 because `egdxgkd` contains legitimate discontinued series (`Count_Student_KenyaCertificateSecondaryEducation` ending in 2022 while grade breakdowns continue to 2024).
 - `check_deleted_records_percent`: Strict cap with `threshold: 0.1` (0.1%), matching rule description.
-- Default `check_lint_error_count`: Enforces `0` lint errors (`threshold: 0`).
-- Default `check_missing_refs_count`: Enforces `0` missing references (`threshold: 0`).
+- Default lint checks (`check_lint_error_count` and `check_missing_refs_count` at threshold 0) are inherited from the base validation framework.
