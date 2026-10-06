@@ -22,7 +22,7 @@
       ],
       "validation_config_file": "validation_config.json",
       "source_files": [
-        "input_files/EDA_FY23_PPCs.xlsx"
+        "input_files/*"
       ]
     }
   ]
