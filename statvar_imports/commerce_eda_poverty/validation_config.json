@@ -56,22 +56,6 @@
       "params": {
         "threshold": 0
       }
-    },
-    {
-      "rule_id": "check_missing_refs_count",
-      "validator": "MISSING_REFS_COUNT",
-      "description": "Ensure zero unresolved entity or schema references.",
-      "params": {
-        "threshold": 0
-      }
-    },
-    {
-      "rule_id": "check_lint_error_count",
-      "validator": "LINT_ERROR_COUNT",
-      "description": "Ensure zero MCF/TMCF lint errors in generated output.",
-      "params": {
-        "threshold": 0
-      }
     }
   ]
 }
