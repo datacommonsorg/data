@@ -123,7 +123,9 @@ _POPULATION_PROP = {
     "LEA Administrative Support Staff": "Faculty",
     "School Administrators": "Faculty",
     "School Administrative Support Staff": "Faculty",
-    "Student Support Services Staff": "Faculty",
+    # Note: "Student Support Services Staff" is intentionally matched by
+    # r"Student" to preserve backward compatibility with the existing StatVar
+    # Count_Student_StudentSupportServicesStaff in us_nces_stat_vars.mcf:573.
     "School Psychologist": "Faculty",
     "Other Support Services Staff": "Faculty",
     "Total Staff": "Faculty"
@@ -236,8 +238,6 @@ _POPULATION_TYPE_PATTERN = (r"("
                             r"LEA Administrators"
                             r"|"
                             r"LEA Administrative Support Staff"
-                            r"|"
-                            r"Student Support Services Staff"
                             r"|"
                             r"School Administrative Support Staff"
                             r"|"

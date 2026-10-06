@@ -123,12 +123,12 @@ class USEducation:
         self._year = None
         self._df = pd.DataFrame()
         self._final_df_place = pd.DataFrame()
-        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
-            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
-        if not os.path.exists(os.path.dirname(self._csv_file_place)):
-            os.mkdir(os.path.dirname(self._csv_file_place))
-        if not os.path.exists(os.path.dirname(self._duplicate_csv_place)):
-            os.mkdir(os.path.dirname(self._duplicate_csv_place))
+        for path in [
+                self._cleaned_csv_file_path, self._csv_file_place,
+                self._duplicate_csv_place
+        ]:
+            if path and os.path.dirname(path):
+                os.makedirs(os.path.dirname(path), exist_ok=True)
 
     def set_cleansed_csv_file_path(self, cleansed_csv_file_path: str) -> None:
         self._cleaned_csv_file_path = cleansed_csv_file_path
@@ -557,13 +557,12 @@ class USEducation:
         # Stage 1: Coalesce complementary chunks within the same school year.
         self._final_df_place = (self._final_df_place.groupby(
             ["school_state_code", "year"], as_index=False, sort=False).first())
-        # Stage 2: Deduplicate across school years, retaining the latest year's record
-        # without bleeding stale historical attributes into recent years.
+        # Stage 2: Deduplicate across school years, preferring latest year per column,
+        # falling back to earlier years only if NaN.
         self._final_df_place = (self._final_df_place.sort_values(
-            by=["year"], ascending=False).drop_duplicates(
-                subset=["school_state_code"],
-                keep="first").reset_index(drop=True))
-        self._final_df_place = self._final_df_place[orig_cols]
+            by=["year"], ascending=False).groupby("school_state_code",
+                                                  as_index=False,
+                                                  sort=False).first()[orig_cols])
 
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
@@ -756,13 +755,12 @@ class USEducation:
         # Stage 1: Coalesce complementary chunks within the same school year.
         self._final_df_place = (self._final_df_place.groupby(
             ["school_state_code", "year"], as_index=False, sort=False).first())
-        # Stage 2: Deduplicate across school years, retaining the latest year's record
-        # without bleeding stale historical attributes into recent years.
+        # Stage 2: Deduplicate across school years, preferring latest year per column,
+        # falling back to earlier years only if NaN.
         self._final_df_place = (self._final_df_place.sort_values(
-            by=["year"], ascending=False).drop_duplicates(
-                subset=["school_state_code"],
-                keep="first").reset_index(drop=True))
-        self._final_df_place = self._final_df_place[orig_cols]
+            by=["year"], ascending=False).groupby("school_state_code",
+                                                  as_index=False,
+                                                  sort=False).first()[orig_cols])
 
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
@@ -990,9 +988,12 @@ class USEducation:
         df_cleaned = df_cleaned.dropna(how='all', subset=drop_list)
         # Passing data_place list that contain columns required for place entities.
         if self._import_name in ["district_school", "public_school"]:
-            # Place data preserves '–' and '†' sentinel strings so that replace_values()
-            # maps them directly to dcs:NCES_*DataMissing instead of converting to np.nan.
-            df_place = df_place_raw.loc[df_cleaned.index]
+            # Replace missing markers ('–' and '‡') with np.nan so they never shadow
+            # valid values across chunks or years, while preserving '†' (Not Applicable).
+            df_place = df_place_raw.loc[df_cleaned.index].replace({
+                "–": np.nan,
+                "‡": np.nan
+            })
         else:
             df_place = df_cleaned[data_place]
         df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
@@ -1059,6 +1060,9 @@ class USEducation:
 
         dfs = []
         df_parsed = None
+        if self._generate_places and self._duplicate_csv_place:
+            if os.path.exists(self._duplicate_csv_place):
+                os.remove(self._duplicate_csv_place)
         if self._generate_statvars:
             df_merged = pd.DataFrame(columns=[
                 "school_state_code", "year", "sv_name", "observation",

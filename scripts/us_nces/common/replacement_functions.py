@@ -121,6 +121,8 @@ _SCHOOL_TYPE = {
         "NCES_DataMissing",
     "–":
         "NCES_DataMissing",
+    "†":
+        "NCES_DataNotApplicable",
 }
 
 _SCHOOL_GRADE = {
@@ -173,7 +175,7 @@ _SCHOOL_GRADE = {
     "Grade 13": "SchoolGrade13",
     np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
-    "†": "NCES_GradeDataMissing",
+    "†": "NCES_GradeDataNotApplicable",
     "All Ungraded": "NCESUngradedClasses",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1",
@@ -232,7 +234,7 @@ _SCHOOL_GRADE_PLACE = {
     "Grade 13": "SchoolGrade13",
     np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
-    "†": "NCES_GradeDataMissing",
+    "†": "NCES_GradeDataNotApplicable",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1"
 }
@@ -278,11 +280,11 @@ _SCHOOL_LEVEL = {
     "Secondary":
         "SecondarySchool",
     np.nan:
-        "",
+        "NCES_SchoolLevelDataMissing",
     "–":
-        "",
+        "NCES_SchoolLevelDataMissing",
     "†":
-        ""
+        "NCES_SchoolLevelDataNotApplicable"
 }
 # pylint:enable=line-too-long
 
@@ -322,7 +324,7 @@ _LUNCH = {
     "–":
         "NCES_NationalSchoolLunchProgramDataMissing",
     "†":
-        "NCES_NationalSchoolLunchProgramDataMissing"
+        "NCES_NationalSchoolLunchProgramDataNotApplicable"
 }
 
 _SCHOOL_STAFF = {
@@ -395,7 +397,7 @@ _LOCALE = {
     '43-Rural: Remote': "NCES_RuralRemote",
     np.nan: "NCES_LocaleDataMissing",
     "–": "NCES_LocaleDataMissing",
-    "†": "NCES_LocaleDataMissing"
+    "†": "NCES_LocaleDataNotApplicable"
 }
 
 _UNREADABLE_TEXT = {"–": np.nan, "†": np.nan}
@@ -409,7 +411,7 @@ _MAGNET = {
     "2-No": "NCES_MagnetNo",
     np.nan: "NCES_MagnetDataMissing",
     "–": "NCES_MagnetDataMissing",
-    "†": "NCES_MagnetDataMissing"
+    "†": "NCES_MagnetDataNotApplicable"
 }
 
 _CHARTER = {
@@ -417,7 +419,7 @@ _CHARTER = {
     "1-Yes": "NCES_CharterYes",
     "2-No": "NCES_CharterNo",
     "–": "NCES_CharterDataMissing",
-    "†": "NCES_CharterDataMissing"
+    "†": "NCES_CharterDataNotApplicable"
 }
 
 _TITLE = {
@@ -426,7 +428,7 @@ _TITLE = {
     "–":
         "NCES_TitleISchoolStatusDataMissing",
     "†":
-        "NCES_TitleISchoolStatusDataMissing",
+        "NCES_TitleISchoolStatusDataNotApplicable",
     "6-Not a Title I school":
         "NCES_TitleISchoolStatusNotEligible",
     "5-Title I schoolwide school":
@@ -443,13 +445,17 @@ _TITLE = {
 
 _SCHOOL_PUBLIC_TYPE = {
     "1-Regular school": "NCES_PublicSchoolTypeRegular",
+    "1-Regular School": "NCES_PublicSchoolTypeRegular",
+    "2-Special education school": "NCES_PublicSchoolTypeSpecialEducation",
+    "2-Special Education School": "NCES_PublicSchoolTypeSpecialEducation",
+    "3-Vocational school": "NCES_PublicSchoolTypeVocational",
+    "3-Career and Technical school": "NCES_PublicSchoolTypeVocational",
+    "3-Career and Technical School": "NCES_PublicSchoolTypeVocational",
     "4-Alternative/other school": "NCES_PublicSchoolTypeOther",
     "4-Alternative Education School": "NCES_PublicSchoolTypeOther",
-    "2-Special education school": "NCES_PublicSchoolTypeSpecialEducation",
-    "3-Vocational school": "NCES_PublicSchoolTypeVocational",
     np.nan: "NCES_PublicSchoolTypeDataMissing",
     "–": "NCES_PublicSchoolTypeDataMissing",
-    "†": "NCES_PublicSchoolTypeDataMissing",
+    "†": "NCES_PublicSchoolTypeDataNotApplicable",
 }
 
 _STATE_NAME = {

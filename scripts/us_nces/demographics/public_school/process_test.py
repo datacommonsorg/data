@@ -35,7 +35,7 @@ class TestProcess(unittest.TestCase):
     It generates CSV, MCF, and TMCF files based on sample inputs and compares
     the output with expected files.
     """
-    test_data_files = os.listdir(TEST_DATASET_DIR)
+    test_data_files = sorted(os.listdir(TEST_DATASET_DIR))
 
     ip_data = [
         os.path.join(TEST_DATASET_DIR, file_name)
