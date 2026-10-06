@@ -12,12 +12,13 @@ main:
           - gcsMountBucket: ${sys.get_env("GCS_MOUNT_BUCKET")}
           - gcsImportBucket: ${sys.get_env("GCS_BUCKET_ID")}
           - gcsMountPath: "/tmp/gcs"
-          - stagingHelperUrl: ${"https://" + default(sys.get_env("IMPORT_HELPER_SERVICE"), "import-helper-service") + "-staging-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
+          - helperUrl: ${"https://" + default(sys.get_env("IMPORT_HELPER_SERVICE"), "import-helper-service") + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
           - skipImportJob: ${string(default(map.get(args, "skipImportJob"), false)) == "true"}
           - skipStagingIngestion: ${string(default(map.get(args, "skipStagingIngestion"), false)) == "true"}
           - dryRunIngestion: ${string(default(map.get(args, "dryRunIngestion"), false)) == "true"}
           - forceIngestion: ${string(default(map.get(args, "forceIngestion"), false)) == "true"}
           - prodDenylist:
+              "Brazil_RuralDevelopmentProgram": true
               "CDC500": true
               "CDC_OzoneCounty": true
               "CDC_PM25County": true
@@ -28,6 +29,8 @@ main:
               "EPA_GHGRP": true
               "FARS_CrashData": true
               "FBIGovCrime": true
+              "FireWFIGS": true
+              "INPE_Fire_Event_Count": true
               "IndiaNSS_HealthAilments": true
               "India_RBIStateDomesticProduct": true
               "NASA_VIIRSActiveFiresEvents": true
@@ -45,7 +48,7 @@ main:
               "WorldBankDatasets": true
           - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}
           - isProdDenylisted: ${default(map.get(prodDenylist, importName), false) or default(map.get(prodDenylist, shortImportName), false)}
-          - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), true)) == "true"}
+          - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), false)) == "true"}
           - defaultResult:
               status: "SKIPPED"
           - startTime: ${sys.now()}
@@ -58,7 +61,7 @@ main:
     - checkImportJobEligible:
         switch:
           - condition: ${skipImportJob}
-            next: checkStagingEligible
+            next: updateImportVersion
     - runImportJob:
         try:
           call: googleapis.batch.v1.projects.locations.jobs.create
@@ -103,7 +106,7 @@ main:
               polling_policy:
                 initial_delay: 60
                 multiplier: 2
-                max_delay: 600
+                max_delay: 300
           result: importJobResponse
         except:
           as: e
@@ -111,7 +114,7 @@ main:
             - updateImportStatus:
                 call: http.post
                 args:
-                  url: ${stagingHelperUrl + "/imports/status"}
+                  url: ${helperUrl + "/imports/status"}
                   auth:
                     type: OIDC
                   body:
@@ -124,52 +127,6 @@ main:
                 result: functionResponse
             - failWorkflow:
                 raise: ${e}
-    - checkStagingEligible:
-        switch:
-          - condition: ${skipStagingIngestion}
-            next: checkProdEligible
-    - ingestStaging:
-        call: ingestEnvironment
-        args:
-          projectId: ${projectId}
-          region: ${region}
-          importName: ${importName}
-          envSuffix: "-staging"
-          waitIngestion: true
-          dryRun: ${dryRunIngestion}
-          forceIngestion: ${forceIngestion}
-        result: stagingResult
-    - checkProdEligible:
-        switch:
-          - condition: ${skipProdIngestion or (not skipStagingIngestion and (stagingResult.status != "SUCCESS" and stagingResult.status != "SKIPPED"))}
-            next: returnResult
-    - ingestProd:
-        call: ingestEnvironment
-        args:
-          projectId: ${projectId}
-          region: ${region}
-          importName: ${importName}
-          envSuffix: ""
-          waitIngestion: false
-          dryRun: ${dryRunIngestion}
-          forceIngestion: ${forceIngestion}
-        result: prodResult
-    - returnResult:
-        return:
-          jobId: ${jobId}
-          importName: ${importName}
-          staging: ${default(stagingResult, defaultResult)}
-          prod: ${default(prodResult, defaultResult)}
-
-ingestEnvironment:
-  params: [projectId, region, importName, envSuffix, waitIngestion, dryRun, forceIngestion]
-  steps:
-    - initSub:
-        assign:
-          - helperService: ${default(sys.get_env("IMPORT_HELPER_SERVICE"), "import-helper-service") + envSuffix}
-          - ingestionHelperService: ${default(sys.get_env("INGESTION_HELPER_SERVICE"), "ingestion-helper-service") + envSuffix}
-          - helperUrl: ${"https://" + helperService + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
-          - ingestionHelperUrl: ${"https://" + ingestionHelperService + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
     - updateImportVersion:
         call: http.post
         args:
@@ -187,8 +144,12 @@ ingestEnvironment:
         switch:
           - condition: ${len(versionResponse.body.imports) == 0 or (versionResponse.body.imports[0].status != "STAGING" and versionResponse.body.imports[0].status != "SKIP")}
             return:
-              status: "SKIPPED"
-              message: '${"Import status is not STAGING or SKIP (" + versionResponse.body.message + "); skipped Spanner ingestion."}'
+              jobId: ${jobId}
+              importName: ${importName}
+              staging:
+                status: "SKIPPED"
+                message: '${"Import status is not STAGING or SKIP (" + versionResponse.body.message + "); skipped Spanner ingestion."}'
+              prod: ${defaultResult}
     - prepareIngestionArgs:
         assign:
           - targetImport: ${versionResponse.body.imports[0]}
@@ -196,6 +157,50 @@ ingestEnvironment:
           - importEntry:
               importName: ${importParts[len(importParts) - 1]}
               latestVersion: ${targetImport.latestVersion}
+    - checkStagingEligible:
+        switch:
+          - condition: ${skipStagingIngestion}
+            next: checkProdEligible
+    - ingestStaging:
+        call: ingestEnvironment
+        args:
+          projectId: ${projectId}
+          region: ${region}
+          importEntry: ${importEntry}
+          envSuffix: "-staging"
+          waitIngestion: true
+          dryRun: ${dryRunIngestion}
+          forceIngestion: ${forceIngestion}
+        result: stagingResult
+    - checkProdEligible:
+        switch:
+          - condition: ${skipProdIngestion or (not skipStagingIngestion and (stagingResult.status != "SUCCESS" and stagingResult.status != "SKIPPED"))}
+            next: returnResult
+    - ingestProd:
+        call: ingestEnvironment
+        args:
+          projectId: ${projectId}
+          region: ${region}
+          importEntry: ${importEntry}
+          envSuffix: ""
+          waitIngestion: false
+          dryRun: ${dryRunIngestion}
+          forceIngestion: ${forceIngestion}
+        result: prodResult
+    - returnResult:
+        return:
+          jobId: ${jobId}
+          importName: ${importName}
+          staging: ${default(stagingResult, defaultResult)}
+          prod: ${default(prodResult, defaultResult)}
+
+ingestEnvironment:
+  params: [projectId, region, importEntry, envSuffix, waitIngestion, dryRun, forceIngestion]
+  steps:
+    - initSub:
+        assign:
+          - ingestionHelperService: ${default(sys.get_env("INGESTION_HELPER_SERVICE"), "ingestion-helper-service") + envSuffix}
+          - ingestionHelperUrl: ${"https://" + ingestionHelperService + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
     - triggerIngestion:
         call: http.post
         args:
