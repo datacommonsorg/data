@@ -209,8 +209,8 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
             'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
         ]
         # total age is required as we are bring age in a seperate import
-        df = df[(df["Age"] == "All Age") &
-                (df["Year"].str.startswith("July"))].reset_index(drop=True)
+        df = df[(df["Age"] == "All Age")
+                & (df["Year"].str.startswith("July"))].reset_index(drop=True)
         df["Year"] = df["Year"].str.replace("July 1, ", "")
         # dropping unwanted columns
         df = df.drop(columns=df.columns.difference(
@@ -560,8 +560,8 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2010Census') &
-                (df['Year'] != 'April2010Estimate') &
+        df = df[(df['Year'] != 'April2010Census')
+                & (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020') & (df['Year'] != '2020')]
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
@@ -882,8 +882,8 @@ def _county_2010_2020(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2010Census') &
-                (df['Year'] != 'April2010Estimate') &
+        df = df[(df['Year'] != 'April2010Census')
+                & (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
@@ -930,8 +930,8 @@ def _county_latest(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2020Estimate') &
-                (df['Year'] != 'July2020')]
+        df = df[(df['Year'] != 'April2020Estimate')
+                & (df['Year'] != 'July2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
 
         return df
@@ -1054,33 +1054,32 @@ class PopulationEstimateBySex:
             # Iterate from 2023 to 2029 and add mappings for years dynamically
             for file_year in range(2023, 2030):
                 # For the 'national', 'state', and 'county' entries, use the same method for years 2023 to 2029
-                if file_year < dt.now().year:
-                    file_to_function_mapping[
-                        f"nc-est{file_year}-agesex-"] = _national_latest
-                    file_to_function_mapping[
-                        f"nc-est{file_year}-agesex-r"] = _national_latest
+                file_to_function_mapping[
+                    f"nc-est{file_year}-agesex-"] = _national_latest
+                file_to_function_mapping[
+                    f"nc-est{file_year}-agesex-r"] = _national_latest
 
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-2"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-3"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-4"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-5"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-0"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-1"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-syasex-"] = _state_latest
-                    file_to_function_mapping[
-                        f"sc-est{file_year}-agesex-"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-2"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-3"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-4"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-5"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-0"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-1"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-syasex-"] = _state_latest
+                file_to_function_mapping[
+                    f"sc-est{file_year}-agesex-"] = _state_latest
 
-                    file_to_function_mapping[
-                        f"cc-est{file_year}-agesex-"] = _county_latest
-                    file_to_function_mapping[
-                        f"cc-est{file_year}-agesex-a"] = _county_latest
+                file_to_function_mapping[
+                    f"cc-est{file_year}-agesex-"] = _county_latest
+                file_to_function_mapping[
+                    f"cc-est{file_year}-agesex-a"] = _county_latest
 
             df = file_to_function_mapping[file_name](file_path)
 
@@ -1094,7 +1093,7 @@ class PopulationEstimateBySex:
         logging.info(f"No of files processed {processed_count}")
         # Log the resulting dictionary
         logging.info(f"File-to-Function mappings: {file_to_function_mapping}")
-        if processed_count == total_files_to_process & total_files_to_process > 0:
+        if processed_count == total_files_to_process and total_files_to_process > 0:
             final_df = _states_full_to_short_form(final_df, 'geo_ID', "geo_ID")
             final_df = _add_geo_id(final_df, "geo_ID", "geo_ID")
             final_df = pd.melt(
@@ -1197,7 +1196,7 @@ def add_future_year_urls():
         if (url["download_path"] not in skip_urls  # not suspicious, keep it
             or (url["download_path"] in skip_urls and is_valid_url(
                 session, url["download_path"]))  # suspicious, but passes check
-           )
+            )
     ]
 
     logging.info(
@@ -1286,6 +1285,9 @@ def add_future_year_urls():
                     logging.error(
                         f"URL is not accessible {url_to_check} due to {e}")
 
+        # Terminate year scan once latest confirmed vintage is processed
+        break
+
 
 def _get_target_file_name(file_to_download: dict) -> str:
     """Returns the local filename to save for a download entry."""
@@ -1302,12 +1304,14 @@ def cleanup():
     active_files = set()
     if _FILES_TO_DOWNLOAD:
         active_files = {
-            _get_target_file_name(item) for item in _FILES_TO_DOWNLOAD
+            _get_target_file_name(item)
+            for item in _FILES_TO_DOWNLOAD
         }
     for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
         file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
         if os.path.isfile(file_path):
-            file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
+            file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
+                                                                      3600)
             if file_age > _TTL_DAYS and file_name not in active_files:
                 logging.info(f"Cleaning up old file: {file_name}")
                 os.remove(file_path)
@@ -1462,8 +1466,9 @@ def main(_):
         cleanup()
     if download_status and (mode == "" or mode == "process"):
         try:
-            loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
-                                             mcf_path, tmcf_path)
+            loader = PopulationEstimateBySex(_INPUT_FILE_PATH,
+                                             cleaned_csv_path, mcf_path,
+                                             tmcf_path)
             loader.process()
 
             # The persistent folder is intentionally kept to allow for TTL caching.

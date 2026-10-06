@@ -366,8 +366,8 @@ def _process_nationals_1990_1999(ip_file: str) -> pd.DataFrame:
         "Count_Person_Female"
     ]
     data_df.columns = df_cols
-    data_df = data_df[(data_df["Age"] == "All Age") &
-                      (data_df["Year"].str.startswith("July"))].reset_index(
+    data_df = data_df[(data_df["Age"] == "All Age")
+                      & (data_df["Year"].str.startswith("July"))].reset_index(
                           drop=True)
     data_df["Year"] = data_df["Year"].str.replace("July 1, ", "")
     data_df = data_df.drop(
@@ -495,9 +495,8 @@ def _process_nationals_2029(file_path: str) -> pd.DataFrame:
     unpivot_cols = ["2022", "2023"]
     # extend df_cols & unpivot_cols with all years > 2023
     newly_added_years = [
-        str(x)
-        for x in data_df.columns.to_list()
-        if isinstance(x, int) and x > 2023
+        str(int(x)) for x in data_df.columns
+        if isinstance(x, (int, float)) and not pd.isna(x) and int(x) > 2023
     ]
     df_cols.extend(newly_added_years)
     unpivot_cols.extend(newly_added_years)
@@ -550,15 +549,15 @@ def _process_states_2029(file_path: str) -> pd.DataFrame:
             header=0).iloc[2:3].values.flatten().tolist()
         if year_column_row:
             newly_added_years = [
-                str(int(x))
-                for x in year_column_row
-                if isinstance(x, float) and x > 2023
+                str(int(x)) for x in year_column_row
+                if isinstance(x, (int,
+                                  float)) and not pd.isna(x) and int(x) > 2023
             ]
             df_cols.extend(newly_added_years)
             unpivot_cols.extend(newly_added_years)
-    except:
-        # this error can be ignored
-        pass
+    except (ValueError, IndexError, KeyError, TypeError) as e:
+        logging.warning(
+            f"Could not extract dynamic year columns from {file_path}: {e}")
     data_df = _load_data_df(path=file_path, file_format="xlsx", header=8)
     data_df.columns = df_cols
 
@@ -852,7 +851,8 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
                         data[1] = "06000"
                     loc = "geoId/" + f"{int(data[0]):02d}" \
                                    + f"{int(data[1]):05d}"
-                    for year, val in dict(zip(cols, data[-len(cols):])).items():
+                    for year, val in dict(zip(cols,
+                                              data[-len(cols):])).items():
                         outfile.write(f"{year},{loc},{val}\n")
         data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
@@ -1001,7 +1001,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                 _process_nationals_2010_2020(file, op_file)
                 data_df = _load_data_df(op_file, "csv", 0)
                 os.remove(op_file)
-            elif "NST-EST2023-POPCHG2020_2023.csv" in file:
+            elif re.search(r"NST-EST\d{4}-POPCHG2020_\d{4}\.csv", file_name):
                 _process_nationals_2020_2029(file, op_file)
                 data_df = _load_data_df(op_file, "csv", 0)
                 os.remove(op_file)
@@ -1038,7 +1038,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                 county_df = _process_counties(file)
                 data_df = pd.concat([nat_df, county_df])
             elif file_name in ["e7079co.txt", "99c8_00.txt"
-                              ] or "co-est" in file_name:
+                               ] or "co-est" in file_name:
                 data_df = _process_counties(file)
             elif file_name in [
                     'su-99-7_us.txt', "sub-est2010-alt.csv",
@@ -1121,7 +1121,8 @@ def add_future_year_urls():
         for future_year in range(2030, 2022, -1):
             url_to_check = url.format(YEAR=future_year)
             try:
-                logging.info(f"checking future url if available {url_to_check}")
+                logging.info(
+                    f"checking future url if available {url_to_check}")
                 check_url = session.head(url_to_check,
                                          allow_redirects=True,
                                          timeout=30)
@@ -1223,7 +1224,8 @@ def main(_):
     # Defining Output file names
     data_file_path = os.path.join(_MODULE_DIR, OUTPUT_DIR)
     os.makedirs(data_file_path, exist_ok=True)
-    cleaned_csv_path = os.path.join(data_file_path, "usa_annual_population.csv")
+    cleaned_csv_path = os.path.join(data_file_path,
+                                    "usa_annual_population.csv")
     mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
