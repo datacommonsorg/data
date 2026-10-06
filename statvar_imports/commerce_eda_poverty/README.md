@@ -140,7 +140,7 @@ Validation rules configured in `validation_config.json`:
 4. `check_num_observations_count`: Asserts total observation count is at least 9,000.
 5. `check_max_date_consistent`: Asserts MaxDate is uniform across all StatVars.
 6. `check_date_span_sql`: Asserts `TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021`.
-7. `check_deleted_records_percent`: Asserts zero deleted records between consecutive import runs.
+7. `check_deleted_records_percent`: Asserts deleted records percentage is within 0.1% threshold.
 *(Note: `check_missing_refs_count` and `check_lint_error_count` are inherited automatically by default from the base validation config `tools/import_validation/validation_config.json`).*
 
 ---

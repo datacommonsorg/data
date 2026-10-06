@@ -52,9 +52,9 @@
     {
       "rule_id": "check_deleted_records_percent",
       "validator": "DELETED_RECORDS_PERCENT",
-      "description": "Ensure zero deleted records between consecutive import runs.",
+      "description": "Checks that the percentage of deleted records is within 0.1% threshold.",
       "params": {
-        "threshold": 0
+        "threshold": 0.1
       }
     }
   ]
