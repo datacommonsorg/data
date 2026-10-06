@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "manual_refresh",
+      "import_name": "ManualRefresh",
       "curator_emails": [
         "support@datacommons.org"
       ],
