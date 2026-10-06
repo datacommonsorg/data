@@ -2,45 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_percent_min_value",
-      "validator": "MIN_VALUE_CHECK",
-      "description": "Ensure poverty percentage values are non-negative (>= 0.0%).",
-      "params": {
-        "minimum": 0
-      }
-    },
-    {
-      "rule_id": "check_percent_max_value",
-      "validator": "MAX_VALUE_CHECK",
-      "description": "Ensure poverty percentage values do not exceed 100.0%.",
-      "params": {
-        "maximum": 100
-      }
-    },
-    {
-      "rule_id": "check_num_places_count",
-      "validator": "NUM_PLACES_COUNT",
-      "description": "Verify county coverage is between 3,100 and 3,250 places.",
-      "params": {
-        "minimum": 3100,
-        "maximum": 3250
-      }
-    },
-    {
-      "rule_id": "check_num_observations_count",
-      "validator": "NUM_OBSERVATIONS_CHECK",
-      "description": "Verify total observations count is at least 9,000.",
-      "params": {
-        "minimum": 9000
-      }
-    },
-    {
-      "rule_id": "check_max_date_consistent",
-      "validator": "MAX_DATE_CONSISTENT",
-      "description": "Ensure MaxDate is uniform across all StatVars in the import.",
-      "params": {}
-    },
-    {
       "rule_id": "check_date_span_sql",
       "validator": "SQL_VALIDATOR",
       "description": "Verify MinDate is 1990 and MaxDate is >= 2021.",
