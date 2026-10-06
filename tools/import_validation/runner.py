@@ -154,7 +154,12 @@ class ValidationRunner:
                             lint_report)
 
     def _load_differ_df_from_mcf(self, input_dir: str) -> pd.DataFrame:
-        """Parses MCF diff files and returns a summary DataFrame."""
+        """Parses differ summary CSV or MCF diff files and returns a summary DataFrame."""
+        summary_csv_path = os.path.join(input_dir, 'differ_summary.csv')
+        if os.path.exists(summary_csv_path) and os.path.getsize(
+                summary_csv_path) > 0:
+            return pd.read_csv(summary_csv_path)
+
         import glob
         from collections import defaultdict
         stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})

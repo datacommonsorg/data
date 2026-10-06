@@ -28,7 +28,10 @@ from enum import Enum
 from absl import app
 from absl import flags
 from absl import logging
-from googleapiclient.discovery import build
+try:
+    from googleapiclient.discovery import build
+except ImportError:
+    build = None
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
@@ -75,9 +78,15 @@ flags.DEFINE_string('output_location', 'results', \
 flags.DEFINE_string('file_format', 'mcf',
                     'Format of the input data (mcf,tfrecord)')
 flags.DEFINE_string('runner_mode', 'native',
-                    'Runner mode (native/direct/cloud)')
+                    'Runner mode (native/direct/cloud/bigquery)')
 flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
-flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow job.')
+flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow/bq job.')
+if 'bq_dataset' not in _FLAGS:
+    flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
+                        'BigQuery dataset ID for temporary differ tables.')
+if 'bq_table_ttl_hours' not in _FLAGS:
+    flags.DEFINE_integer('bq_table_ttl_hours', 12,
+                         'TTL in hours for temporary BigQuery differ tables.')
 
 
 def val_str(value) -> str:
@@ -127,7 +136,9 @@ class ImportDiffer:
                  project_id='',
                  job_name='differ',
                  file_format='mcf',
-                 runner_mode='native'):
+                 runner_mode='native',
+                 bq_dataset='datcom_import_differ',
+                 bq_table_ttl_hours=12):
         self.current_data = current_data
         self.previous_data = previous_data
         self.output_path = output_location
@@ -135,6 +146,8 @@ class ImportDiffer:
         self.job_name = job_name
         self.file_format = file_format
         self.runner_mode = runner_mode
+        self.bq_dataset = bq_dataset
+        self.bq_table_ttl_hours = bq_table_ttl_hours
 
     def _cleanup_data(self, df: pd.DataFrame):
         for column in [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]:
@@ -419,6 +432,18 @@ class ImportDiffer:
                 raise RuntimeError(f'Direct job {self.job_name} failed.')
 
             return
+        elif self.runner_mode == 'bigquery':
+            import bigquery_differ
+            logging.info("Invoking BigQuery mode for differ")
+            return bigquery_differ.run_bigquery_differ(
+                current_data=self.current_data,
+                previous_data=self.previous_data,
+                output_location=self.output_path,
+                project_id=self.project_id,
+                job_name=self.job_name,
+                dataset_id=self.bq_dataset,
+                expiration_hours=self.bq_table_ttl_hours,
+            )
         else:
             # Runs native Python differ.
             current_dir = os.path.join(tmp_path, 'current')
@@ -507,7 +532,8 @@ def main(_):
     differ = ImportDiffer(_FLAGS.current_data, _FLAGS.previous_data,
                           _FLAGS.output_location, _FLAGS.project_id,
                           _FLAGS.job_name, _FLAGS.file_format,
-                          _FLAGS.runner_mode)
+                          _FLAGS.runner_mode, _FLAGS.bq_dataset,
+                          _FLAGS.bq_table_ttl_hours)
     differ.run_differ()
 
 
