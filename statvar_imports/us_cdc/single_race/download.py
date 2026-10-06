@@ -469,13 +469,10 @@ class CdcWonderSingleRaceDownloader:
         logging.info("Querying data for %s (FIPS %s) for years %s...",
                      state_name, state_fips, years)
 
-        need_partitioning = False
-
         if state_fips in LARGE_STATES and len(years) > 2:
             logging.info(
                 "%s is a high-volume state (>75k rows). Querying directly in 2-year chunks...",
                 state_name)
-            need_partitioning = True
         else:
             # Try querying all years first
             response_text = self.execute_query(state_fips, years)
@@ -491,7 +488,6 @@ class CdcWonderSingleRaceDownloader:
                 state_name,
                 response_text[:120].strip().replace("\n", " "),
             )
-            need_partitioning = True
 
         # Partition years into 2-year chunks
         chunk_results = []

@@ -377,6 +377,7 @@ class DownloadTest(unittest.TestCase):
                 "UnderlyingCauseofDeath_SingleRace_02_2018_2019.csv")
             self.assertTrue(new_chunk.exists())
             self.assertTrue(other_state.exists())
+            mock_init.assert_called_once()
 
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "download_state")
@@ -398,6 +399,7 @@ class DownloadTest(unittest.TestCase):
             )
 
             mock_download_state.assert_not_called()
+            mock_init.assert_called_once()
 
     @mock.patch.object(download, "CdcWonderSingleRaceDownloader")
     def test_download_single_race_data_filters_unavailable_years(
