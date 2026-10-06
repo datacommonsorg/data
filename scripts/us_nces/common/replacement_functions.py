@@ -303,6 +303,7 @@ _RACE_ = {
 _LUNCH = {
     "Reduced-price Lunch":
         "ReducedLunch",
+    # Legacy mapping preserved for historical time-series continuity with NCES_PublicSchoolStats.
     "Free and Reduced Lunch":
         "DirectCertificationLunch",
     "Free Lunch":

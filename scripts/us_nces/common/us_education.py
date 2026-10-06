@@ -76,10 +76,12 @@ def _format_fips_code(val, length: int) -> str:
     if pd.isna(val):
         return ''
     s = str(val).strip()
-    if not s or s.lower() in ('nan', 'none', '<na>'):
+    if not s or s.lower() in ('nan', 'none', '<na>', '†', '–', '‡'):
         return ''
     if s.endswith('.0'):
         s = s[:-2]
+    if not s.isdigit():
+        return ''
     return s.zfill(length)
 
 
@@ -524,6 +526,28 @@ class USEducation:
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
 
+        # In non-enum place columns, '†' (Not Applicable) represents missing data rather than
+        # a categorical enum (NCES_*DataNotApplicable). Treating it as np.nan before Stage 1 / Stage 2
+        # deduplication prevents '†' in a newer chunk or year from shadowing valid attributes.
+        enum_cols = {
+            'Lowest_Grade_Public', 'Highest_Grade_Public', 'Locale',
+            'Magnet_School', 'Charter_School', 'School_Type_Public',
+            'Title_I_School_Status', 'National_School_Lunch_Program',
+            'School_Level', 'School_Level_16', 'School_Level_17'
+        }
+        non_enum_cols = [
+            c for c in self._final_df_place.columns if c not in enum_cols
+        ]
+        self._final_df_place[non_enum_cols] = self._final_df_place[
+            non_enum_cols].replace({'†': np.nan})
+
+        # Ensure empty strings or whitespace entries are treated as NaN so that
+        # fillna() and groupby().first() accurately skip nulls without string shadowing.
+        self._final_df_place.replace([r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+                                     np.nan,
+                                     regex=True,
+                                     inplace=True)
+
         # Files before the year 2017 and files 2017 onwards have different
         # column name for the same entity'School_Level'. Hence, combining both
         # columns under one common column.
@@ -544,14 +568,6 @@ class USEducation:
         # Clean up the old columns
         self._final_df_place.drop(columns=[col_pre_2017, col_post_2017],
                                   inplace=True)
-
-        # Ensure empty strings or whitespace entries are treated as NaN so that
-        # groupby().first() accurately skips nulls and coalesces attributes
-        # within the same school year without empty-string shadowing.
-        self._final_df_place.replace([r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
-                                     np.nan,
-                                     regex=True,
-                                     inplace=True)
         orig_cols = self._final_df_place.columns.tolist()
         # Stage 1: Coalesce complementary chunks within the same school year.
         self._final_df_place = (self._final_df_place.groupby(
@@ -575,12 +591,18 @@ class USEducation:
                 lambda x: (lambda c: f"geoId/sch{c}"
                            if c else "")(_format_fips_code(x, 7))))
 
+        # School Management logic
+        self._final_df_place["School_Management"] = np.where(
+            self._final_df_place["State_Name"].str.contains(
+                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity",
+                na=False), self._final_df_place["State_Name"], '')
+
         # List of columns to be considered under 'dcs'
         col_to_dcs = [
             'Lowest_Grade_Public', 'Highest_Grade_Public', 'Locale',
             'National_School_Lunch_Program', 'Magnet_School', 'Charter_School',
             'School_Type', 'School_Type_Public', 'Title_I_School_Status',
-            'State_District_ID', 'School_Level'
+            'State_District_ID', 'School_Level', 'School_Management'
         ]
         for col in col_to_dcs:
             if col in self._final_df_place.columns.to_list():
@@ -690,12 +712,6 @@ class USEducation:
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.title()
 
-        # School Management logic
-        self._final_df_place["School_Management"] = np.where(
-            self._final_df_place["State_Name"].str.contains(
-                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity"
-            ), self._final_df_place["State_Name"], '')
-
         # --- FIX 6: Address Generation Safety ---
         # Ensure Validated_State_Abbr is string and not nan
         self._final_df_place["Physical_Address"] = np.where(
@@ -742,6 +758,19 @@ class USEducation:
             'geoID'] = "sch" + self._final_df_place['Agency ID - NCES Assigned']
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
+
+        # In non-enum place columns, '†' (Not Applicable) represents missing data rather than
+        # a categorical enum (NCES_*DataNotApplicable). Treating it as np.nan before Stage 1 / Stage 2
+        # deduplication prevents '†' in a newer chunk or year from shadowing valid attributes.
+        enum_cols = {
+            'Lowest_Grade_Dist', 'Highest_Grade_Dist', 'Locale', 'School_Type',
+            'Agency_level'
+        }
+        non_enum_cols = [
+            c for c in self._final_df_place.columns if c not in enum_cols
+        ]
+        self._final_df_place[non_enum_cols] = self._final_df_place[
+            non_enum_cols].replace({'†': np.nan})
 
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
@@ -873,12 +902,12 @@ class USEducation:
         # and NCES_DepartmentOfDefenseEducationActivity as they are outlying areas of United States.
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
-                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity"
-            ), self._final_df_place["State_Name"], '')
+                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity",
+                na=False), self._final_df_place["State_Name"], '')
 
         col_to_dcs = [
             'Lowest_Grade_Dist', 'Highest_Grade_Dist', 'Locale',
-            'ContainedInPlace'
+            'ContainedInPlace', 'School_Management'
         ]
         for col in col_to_dcs:
             self._final_df_place[col] = self._final_df_place[col].replace(
@@ -979,7 +1008,8 @@ class USEducation:
         df_duplicate = df_cleaned.copy()
         df_duplicate = df_duplicate[df_duplicate.duplicated(
             subset=self._school_id)]
-        if df_duplicate.shape[0] >= 1:
+        if self._generate_places and self._duplicate_csv_place and df_duplicate.shape[
+                0] >= 1:
             df_duplicate.to_csv(self._duplicate_csv_place,
                                 index=False,
                                 mode='a',
