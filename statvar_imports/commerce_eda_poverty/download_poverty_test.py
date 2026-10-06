@@ -39,7 +39,6 @@ from statvar_imports.commerce_eda_poverty.download_poverty import (
     extract_sheet_to_csv,
 )
 
-
 def _create_mock_eda_workbook(filepath=None):
     """Creates a mock Excel workbook containing the Underlying_Data worksheet."""
     wb = openpyxl.Workbook()
@@ -85,7 +84,6 @@ def _create_mock_eda_workbook(filepath=None):
     finally:
         wb.close()
 
-
 class TestDownloadPoverty(unittest.TestCase):
 
     def test_download_file_success(self):
@@ -93,158 +91,96 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "test.xlsx")
             test_content = b"PK\x03\x04test_content"
 
-            mock_resp = mock.MagicMock()
-            mock_resp.__enter__.return_value = mock_resp
-            mock_resp.content = test_content
-            mock_resp.status_code = 200
-
-            mock_session = mock.MagicMock()
-            mock_session.get.return_value = mock_resp
-
-            content = download_file(
-                "https://example.gov/EDA_FY23_PPCs.xlsx",
-                out_file,
-                session=mock_session,
-                max_retries=1,
-            )
-
-            self.assertEqual(content, test_content)
-            self.assertEqual(mock_session.get.call_count, 1)
-            self.assertTrue(os.path.exists(out_file))
-            with open(out_file, "rb") as f:
-                self.assertEqual(f.read(), test_content)
-
-    def test_download_file_retry_and_succeed(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            out_file = os.path.join(tmpdir, "retry.xlsx")
-            test_content = b"ExcelData"
-
-            resp_503 = mock.MagicMock(
-                status=503, reason="Service Unavailable", msg=None, headers={}
-            )
-            resp_503.getheaders.return_value = []
-            resp_503.get_redirect_location.return_value = None
-            resp_503.isclosed.return_value = True
-
-            resp_200 = mock.MagicMock(status=200, reason="OK", msg=None, headers={})
-            resp_200.getheaders.return_value = []
-            resp_200.get_redirect_location.return_value = None
-            resp_200.isclosed.return_value = True
-            resp_200.data = test_content
-            resp_200.read.return_value = test_content
-            resp_200.stream.return_value = [test_content]
+            def mock_download(url, output_file=None, **kwargs):
+                with open(output_file, "wb") as f:
+                    f.write(test_content)
+                return output_file
 
             with mock.patch(
-                "urllib3.connectionpool.HTTPConnectionPool._make_request",
-                side_effect=[resp_503, resp_200],
-            ) as mock_make_request:
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                side_effect=mock_download,
+            ) as mock_dl:
                 content = download_file(
                     "https://example.gov/EDA_FY23_PPCs.xlsx",
                     out_file,
-                    max_retries=3,
-                    backoff_factor=0.01,
+                    max_retries=1,
                 )
 
-            self.assertEqual(mock_make_request.call_count, 2)
             self.assertEqual(content, test_content)
+            self.assertEqual(mock_dl.call_count, 1)
             self.assertTrue(os.path.exists(out_file))
             with open(out_file, "rb") as f:
                 self.assertEqual(f.read(), test_content)
 
-    def test_download_file_fails_after_retries(self):
+    def test_download_file_calls_download_util_with_parameters(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "params.xlsx")
+            test_content = b"PK\x03\x04param_test"
+
+            def mock_download(url, output_file=None, **kwargs):
+                with open(output_file, "wb") as f:
+                    f.write(test_content)
+                return output_file
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                side_effect=mock_download,
+            ) as mock_dl:
+                content = download_file(
+                    "https://example.gov/EDA_FY23_PPCs.xlsx",
+                    out_file,
+                    max_retries=5,
+                    timeout=45,
+                )
+
+            self.assertEqual(content, test_content)
+            mock_dl.assert_called_once_with(
+                url="https://example.gov/EDA_FY23_PPCs.xlsx",
+                output_file=out_file,
+                timeout=45,
+                retries=5,
+                overwrite=True,
+            )
+
+    def test_download_file_fails(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "fail.xlsx")
 
-            resp_503 = mock.MagicMock(
-                status=503, reason="Service Unavailable", msg=None, headers={}
-            )
-            resp_503.getheaders.return_value = []
-            resp_503.get_redirect_location.return_value = None
-            resp_503.isclosed.return_value = True
-
             with mock.patch(
-                "urllib3.connectionpool.HTTPConnectionPool._make_request",
-                side_effect=[resp_503, resp_503, resp_503],
-            ) as mock_make_request:
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                return_value=None,
+            ) as mock_dl:
                 with self.assertRaises(RuntimeError):
                     download_file(
                         "https://example.gov/EDA_FY23_PPCs.xlsx",
                         out_file,
                         max_retries=2,
-                        backoff_factor=0.01,
                     )
 
-            self.assertEqual(mock_make_request.call_count, 3)
+            self.assertEqual(mock_dl.call_count, 1)
             self.assertFalse(os.path.exists(out_file))
 
     def test_download_file_empty_body_raises(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "empty.xlsx")
 
-            mock_resp = mock.MagicMock()
-            mock_resp.__enter__.return_value = mock_resp
-            mock_resp.content = b""
-            mock_resp.status_code = 200
+            def mock_download_empty(url, output_file=None, **kwargs):
+                with open(output_file, "wb") as f:
+                    pass
+                return output_file
 
-            mock_session = mock.MagicMock()
-            mock_session.get.return_value = mock_resp
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                side_effect=mock_download_empty,
+            ) as mock_dl:
+                with self.assertRaises(RuntimeError):
+                    download_file(
+                        "https://example.gov/EDA_FY23_PPCs.xlsx",
+                        out_file,
+                        max_retries=1,
+                    )
 
-            with self.assertRaises(RuntimeError):
-                download_file(
-                    "https://example.gov/EDA_FY23_PPCs.xlsx",
-                    out_file,
-                    session=mock_session,
-                    max_retries=1,
-                )
-
-            self.assertFalse(os.path.exists(out_file))
-
-    def test_download_file_mounts_adapter_on_session(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            out_file = os.path.join(tmpdir, "mount.xlsx")
-            mock_session = mock.MagicMock()
-            mock_resp = mock.MagicMock(status_code=200, content=b"data")
-            mock_resp.__enter__.return_value = mock_resp
-            mock_session.get.return_value = mock_resp
-
-            download_file(
-                "https://example.gov/mount.xlsx",
-                out_file,
-                session=mock_session,
-                max_retries=2,
-            )
-
-            self.assertEqual(mock_session.mount.call_count, 2)
-            mounted = {
-                call[0][0]: call[0][1]
-                for call in mock_session.mount.call_args_list
-            }
-            self.assertIn("https://", mounted)
-            self.assertIn("http://", mounted)
-            self.assertIsInstance(mounted["https://"], HTTPAdapter)
-            self.assertIsInstance(mounted["http://"], HTTPAdapter)
-            self.assertEqual(mounted["https://"].max_retries.total, 2)
-            self.assertEqual(mounted["http://"].max_retries.total, 2)
-
-    def test_download_file_fast_fails_on_404(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            out_file = os.path.join(tmpdir, "404.xlsx")
-            mock_session = mock.MagicMock()
-            mock_resp = mock.MagicMock(status_code=404)
-            mock_resp.__enter__.return_value = mock_resp
-            mock_session.get.return_value = mock_resp
-
-            with self.assertRaises(RuntimeError) as ctx:
-                download_file(
-                    "https://example.gov/404.xlsx",
-                    out_file,
-                    session=mock_session,
-                    max_retries=3,
-                )
-
-            self.assertIn("404", str(ctx.exception))
-            self.assertEqual(mock_session.get.call_count, 1)
-            self.assertFalse(os.path.exists(out_file))
+            self.assertEqual(mock_dl.call_count, 1)
 
     def test_download_file_session_without_mount_supported(self):
         class DuckSession:
@@ -357,18 +293,17 @@ class TestDownloadPoverty(unittest.TestCase):
 
             excel_bytes = _create_mock_eda_workbook()
 
-            def mock_get(url, **kwargs):
-                resp = mock.MagicMock()
-                resp.__enter__.return_value = resp
+            def mock_download(url, output_file=None, **kwargs):
                 if parse.urlparse(url).netloc == "www.eda.gov":
-                    resp.status_code = 403
-                    resp.raise_for_status.side_effect = requests.HTTPError("403 Forbidden")
-                    return resp
-                resp.status_code = 200
-                resp.content = excel_bytes
-                return resp
+                    return None
+                with open(output_file, "wb") as f:
+                    f.write(excel_bytes)
+                return output_file
 
-            with mock.patch("requests.Session.get", side_effect=mock_get):
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                side_effect=mock_download,
+            ):
                 res = download_poverty_dataset(
                     source_url=EDA_PPC_XLSX_URL,
                     mirror_url=EDA_PPC_MIRROR_URL,
@@ -397,13 +332,10 @@ class TestDownloadPoverty(unittest.TestCase):
                 with open(p, "w", encoding="utf-8") as f:
                     f.write("stale_data")
 
-            def mock_get(url, **kwargs):
-                resp = mock.MagicMock()
-                resp.status_code = 500
-                resp.raise_for_status.side_effect = requests.HTTPError("500 Server Error")
-                return resp
-
-            with mock.patch("requests.Session.get", side_effect=mock_get):
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                return_value=None,
+            ):
                 with self.assertRaises(RuntimeError) as ctx:
                     download_poverty_dataset(
                         source_url="https://example.gov/p1.xlsx",
@@ -427,18 +359,19 @@ class TestDownloadPoverty(unittest.TestCase):
 
             excel_bytes = _create_mock_eda_workbook()
 
-            def mock_get(url, **kwargs):
-                resp = mock.MagicMock()
-                resp.__enter__.return_value = resp
-                resp.status_code = 200
+            def mock_download(url, output_file=None, **kwargs):
                 if parse.urlparse(url).netloc == "www.eda.gov":
-                    # Cloudflare challenge served with HTTP 200 HTML body
-                    resp.content = b"<!DOCTYPE html><html><title>Just a moment...</title></html>"
-                    return resp
-                resp.content = excel_bytes
-                return resp
+                    with open(output_file, "wb") as f:
+                        f.write(b"<!DOCTYPE html><html><title>Just a moment...</title></html>")
+                    return output_file
+                with open(output_file, "wb") as f:
+                    f.write(excel_bytes)
+                return output_file
 
-            with mock.patch("requests.Session.get", side_effect=mock_get):
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                side_effect=mock_download,
+            ):
                 res = download_poverty_dataset(
                     source_url=EDA_PPC_XLSX_URL,
                     mirror_url=EDA_PPC_MIRROR_URL,
@@ -453,7 +386,6 @@ class TestDownloadPoverty(unittest.TestCase):
             self.assertTrue(os.path.exists(dst_csv))
             df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
             self.assertEqual(len(df), 3)
-
 
 if __name__ == "__main__":
     unittest.main()

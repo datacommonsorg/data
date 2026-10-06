@@ -22,17 +22,7 @@
       ],
       "validation_config_file": "validation_config.json",
       "source_files": [
-        "download_poverty.py",
-        "process_poverty.py",
-        "input_files/*",
-        "output/*.mcf",
-        "output/Poverty_cleaned.csv",
-        "output/Poverty_original.csv",
-        "counters/*",
-        "validation_config.json",
-        "poverty_metadata.csv",
-        "poverty_pvmap.csv",
-        "manifest.json"
+        "input_files/EDA_FY23_PPCs.xlsx"
       ]
     }
   ]

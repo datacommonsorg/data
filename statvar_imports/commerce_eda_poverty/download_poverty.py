@@ -27,15 +27,19 @@ import csv
 import io
 import os
 import shutil
+import sys
 import tempfile
 
 from absl import app, flags, logging
 import openpyxl
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util import Retry
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from util.download_util import download_file_from_url
 
 EDA_PPC_XLSX_URL = (
     "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
@@ -109,73 +113,44 @@ def download_file(
     backoff_factor=1.5,
     timeout=60,
 ):
-    """Downloads a file from download_url and saves it atomically to output_path."""
+    """Downloads a file from download_url and saves it using download_util.download_file_from_url."""
     logging.info("Downloading file from: %s", download_url)
     dst_dir = os.path.dirname(os.path.abspath(output_path))
     os.makedirs(dst_dir, exist_ok=True)
 
-    owns_session = session is None
-    active_session = requests.Session() if owns_session else session
-    temp_path = None
-
-    try:
-        adapter = HTTPAdapter(
-            max_retries=Retry(
-                total=max_retries,
-                backoff_factor=backoff_factor,
-                status_forcelist=[429, 500, 502, 503, 504],
-                allowed_methods=["GET"],
-                raise_on_status=True,
-            )
-        )
-        if hasattr(active_session, "mount") and callable(active_session.mount):
-            active_session.mount("https://", adapter)
-            active_session.mount("http://", adapter)
-
-        try:
-            response = active_session.get(
-                download_url, headers=HTTP_HEADERS, timeout=timeout
-            )
-            if response.status_code == 404:
-                logging.warning(
-                    "HTTP 404 received for %s; failing fast without retry.",
-                    download_url,
-                )
-                raise requests.HTTPError(
-                    f"404 Client Error: Not Found for url: {download_url}",
-                    response=response,
-                )
+    if session is not None:
+        response = session.get(download_url, headers=HTTP_HEADERS, timeout=timeout)
+        if hasattr(response, "raise_for_status"):
             response.raise_for_status()
-            content = response.content
-            if not content:
-                raise RuntimeError(
-                    f"Empty response body received from {download_url}"
-                )
-            with tempfile.NamedTemporaryFile(
-                "wb", dir=dst_dir, delete=False, suffix=".tmp"
-            ) as tmp_file:
-                temp_path = tmp_file.name
-                tmp_file.write(content)
-        except requests.RequestException as e:
-            logging.error("Failed to download %s: %s", download_url, e)
-            raise RuntimeError(f"Failed to download {download_url}: {e}") from e
-
-        os.replace(temp_path, output_path)
-        temp_path = None
-        logging.info(
-            "Download completed successfully. Saved %d bytes to %s",
-            len(content),
-            output_path,
-        )
+        content = response.content
+        if not content:
+            raise RuntimeError(f"Empty response body received from {download_url}")
+        with open(output_path, "wb") as f:
+            f.write(content)
         return content
-    finally:
-        if temp_path and os.path.exists(temp_path):
-            try:
-                os.unlink(temp_path)
-            except OSError:
-                pass
-        if owns_session:
-            active_session.close()
+
+    result = download_file_from_url(
+        url=download_url,
+        output_file=output_path,
+        timeout=timeout,
+        retries=max_retries,
+        overwrite=True,
+    )
+    if not result or not os.path.exists(output_path):
+        raise RuntimeError(f"Failed to download {download_url} using download_util")
+
+    with open(output_path, "rb") as f:
+        content = f.read()
+    if not content:
+        raise RuntimeError(f"Empty response body received from {download_url}")
+
+    logging.info(
+        "Download completed successfully. Saved %d bytes to %s",
+        len(content),
+        output_path,
+    )
+    return content
+
 
 
 def extract_sheet_to_csv(
@@ -318,59 +293,57 @@ def download_poverty_dataset(
                     "Could not remove existing file %s: %s", path_to_clean, e
                 )
 
-    # Case 2: Download from web with primary and mirror fallback
-    with requests.Session() as session:
-        content = None
-        urls_to_try = []
-        if source_url:
-            urls_to_try.append(source_url)
-        if mirror_url and mirror_url != source_url:
-            urls_to_try.append(mirror_url)
+    # Case 2: Download from web with primary and mirror fallback using download utility
+    content = None
+    urls_to_try = []
+    if source_url:
+        urls_to_try.append(source_url)
+    if mirror_url and mirror_url != source_url:
+        urls_to_try.append(mirror_url)
 
-        last_err = None
-        for url in urls_to_try:
-            try:
-                content = download_file(
-                    download_url=url,
-                    output_path=output_xlsx_path,
-                    session=session,
-                    max_retries=max_retries,
-                    timeout=timeout,
+    last_err = None
+    for url in urls_to_try:
+        try:
+            content = download_file(
+                download_url=url,
+                output_path=output_xlsx_path,
+                max_retries=max_retries,
+                timeout=timeout,
+            )
+            if not content.startswith(b"PK\x03\x04"):
+                raise ValueError(
+                    f"Downloaded content from {url} is not a valid ZIP/XLSX archive."
                 )
-                if not content.startswith(b"PK\x03\x04"):
-                    raise ValueError(
-                        f"Downloaded content from {url} is not a valid ZIP/XLSX archive."
-                    )
-                # Extract Underlying_Data sheet to output_csv_path
-                extract_sheet_to_csv(content, output_csv_path)
-                logging.info(
-                    "Successfully downloaded workbook and extracted sheet from %s", url
-                )
-                break
-            except Exception as e:
-                last_err = e
-                logging.warning("Failed to download or process from %s: %s", url, e)
-                if os.path.exists(output_xlsx_path):
-                    try:
-                        os.remove(output_xlsx_path)
-                    except OSError:
-                        pass
-                if os.path.exists(output_csv_path):
-                    try:
-                        os.remove(output_csv_path)
-                    except OSError:
-                        pass
-                content = None
+            # Extract Underlying_Data sheet to output_csv_path
+            extract_sheet_to_csv(content, output_csv_path)
+            logging.info(
+                "Successfully downloaded workbook and extracted sheet from %s", url
+            )
+            break
+        except Exception as e:
+            last_err = e
+            logging.warning("Failed to download or process from %s: %s", url, e)
+            if os.path.exists(output_xlsx_path):
+                try:
+                    os.remove(output_xlsx_path)
+                except OSError:
+                    pass
+            if os.path.exists(output_csv_path):
+                try:
+                    os.remove(output_csv_path)
+                except OSError:
+                    pass
+            content = None
 
-        if not content:
-            raise RuntimeError(
-                f"Failed to acquire dataset from all URLs: {urls_to_try}. Last error: {last_err}"
-            ) from last_err
+    if not content:
+        raise RuntimeError(
+            f"Failed to acquire dataset from all URLs: {urls_to_try}. Last error: {last_err}"
+        ) from last_err
 
-        if raw_csv_path:
-            copy_file_atomically(output_csv_path, raw_csv_path)
+    if raw_csv_path:
+        copy_file_atomically(output_csv_path, raw_csv_path)
 
-        return output_csv_path
+    return output_csv_path
 
 
 def main(argv):

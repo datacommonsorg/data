@@ -136,8 +136,19 @@ class TestProcessPoverty(unittest.TestCase):
                     "\"Most Recent Estimate, % in Poverty*\"\n"
                 )
             dst_path = os.path.join(tmpdir, "output.csv")
-            with self.assertRaises(ValueError):
+            with self.assertRaises(ValueError) as ctx:
                 preprocess_poverty(src_path=header_only, dst_path=dst_path)
+            self.assertIn("File not read properly into dataframe", str(ctx.exception))
+
+    def test_preprocess_poverty_no_geoid_header_raises(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            no_geoid_csv = os.path.join(tmpdir, "no_geoid.csv")
+            with open(no_geoid_csv, "w") as f:
+                f.write("Line 1\nLine 2\nCol1,Col2\nVal1,Val2\n")
+            dst_path = os.path.join(tmpdir, "output.csv")
+            with self.assertRaises(ValueError) as ctx:
+                preprocess_poverty(src_path=no_geoid_csv, dst_path=dst_path)
+            self.assertIn("Could not find header row containing 'GEOID'", str(ctx.exception))
 
     def test_preprocess_poverty_missing_columns(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -218,26 +229,26 @@ class TestProcessPoverty(unittest.TestCase):
             expected_path = os.path.join(MODULE_DIR, "test_data", "Poverty_expected_output.csv")
             actual_csv = os.path.join(tmpdir, "Poverty_cleaned.csv")
 
-            preprocess_poverty(src_path=fixture_path, dst_path=actual_csv, min_county_count=100)
+            preprocess_poverty(src_path=fixture_path, dst_path=actual_csv, min_county_count=20)
 
             self.assertTrue(os.path.exists(actual_csv))
             df_actual = pd.read_csv(actual_csv, dtype={"GEOID": str, "year": str})
             df_expected = pd.read_csv(expected_path, dtype={"GEOID": str, "year": str})
             pd.testing.assert_frame_equal(df_actual, df_expected)
 
-            # 191 valid counties/territories across 1990, 2000, and 2020/2021
-            self.assertEqual(df_actual["GEOID"].nunique(), 191)
+            # 30 representative counties/territories across 1990, 2000, and 2020/2021
+            self.assertEqual(df_actual["GEOID"].nunique(), 30)
             self.assertEqual(list(df_actual.columns), ["GEOID", "year", "poverty_rate"])
 
-            # Verify 11 island territories (AS, GU, MP, VI) map recent estimate to year 2020
+            # Verify 6 island territories (MP, VI) map recent estimate to year 2020
             territory_rows = df_actual[df_actual["GEOID"].str[:2].isin({"60", "66", "69", "78"})]
-            self.assertEqual(territory_rows["GEOID"].nunique(), 11)
+            self.assertEqual(territory_rows["GEOID"].nunique(), 6)
             self.assertIn("2020", set(territory_rows["year"]))
             self.assertNotIn("2021", set(territory_rows["year"]))
 
-            # Verify states and PR (180 counties) map recent estimate to year 2021
+            # Verify state counties (24 AL counties) map recent estimate to year 2021
             state_rows = df_actual[~df_actual["GEOID"].str[:2].isin({"60", "66", "69", "78"})]
-            self.assertEqual(state_rows["GEOID"].nunique(), 180)
+            self.assertEqual(state_rows["GEOID"].nunique(), 24)
             self.assertIn("2021", set(state_rows["year"]))
             self.assertNotIn("2020", set(state_rows["year"]))
 

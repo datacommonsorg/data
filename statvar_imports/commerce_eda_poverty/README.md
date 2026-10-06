@@ -37,6 +37,18 @@ It covers 3,232 U.S. counties, county equivalents, and island territories. Islan
 > [!NOTE]
 > Direct automated HTTP requests to `eda.gov` may encounter Cloudflare bot protection (HTTP 403 Forbidden). `download_poverty.py` automatically falls back to an archive mirror of the official FY23 workbook. For manual/semi-automated refresh when upstream releases a new workbook, operators can download via a browser and provide it locally via `--input_file`.
 
+### Why Preprocessing is Required (Why PV Map Alone is Insufficient)
+
+The raw EDA dataset cannot be mapped directly into Data Commons observations using `stat_var_processor.py` / `poverty_pvmap.csv` alone because:
+1. **Format Reshaping (Wide to Long)**: The raw sheet contains one row per county with multiple poverty percentage columns corresponding to different time periods (`1990 Decennial Census, % in Poverty`, `2000 Decennial Census, % in Poverty`, and `Most Recent Estimate, % in Poverty*`). PV mapping requires normalized long-format records with explicit observation dates.
+2. **Dynamic & Heterogeneous Observation Dates**: The "Most Recent Estimate" is not uniform across places:
+   - For all 50 U.S. states, DC, and Puerto Rico, the benchmark is SAIPE 2021 (`year=2021`).
+   - For Island Territories (American Samoa, Guam, Northern Mariana Islands, U.S. Virgin Islands: FIPS prefixes `60`, `66`, `69`, `78`), SAIPE does not produce estimates; the benchmark is the 2020 Island Areas Decennial Census (`year=2020`).
+   - The survey year is either conditionally determined by territory FIPS or parsed dynamically from the `Data Source―Most Recent Estimate` column (`"SAIPE, 2021"` vs `"Decennial Census, 2020"`). PV map CSV configurations cannot conditionally branch date assignment based on state FIPS code or evaluate regex over free-text notes.
+3. **Data Cleaning & Filtering**:
+   - Upstream Excel/CSV files contain non-tabular preamble headers, subtitles, and footnote rows that must be stripped.
+   - Raw county FIPS codes in Excel often drop leading zeros (e.g. `1001` instead of `01001`) and include state-level summary rollups (e.g. `01000` for Alabama statewide) that must be filtered out so they are not ingested as county entities.
+
 ---
 
 ## Statistical Variable
@@ -125,12 +137,12 @@ Validation rules configured in `validation_config.json`:
 1. `check_percent_min_value`: Asserts poverty rate values are $\ge 0.0\%$.
 2. `check_percent_max_value`: Asserts poverty rate values are $\le 100.0\%$.
 3. `check_num_places_count`: Asserts total places count is between 3,100 and 3,250.
-4. `check_num_observations_count`: Asserts total observation count is between 9,000 and 10,000.
-5. `check_max_date_consistent`: Asserts MaxDate is consistent across StatVars.
+4. `check_num_observations_count`: Asserts total observation count is at least 9,000.
+5. `check_max_date_consistent`: Asserts MaxDate is uniform across all StatVars.
 6. `check_date_span_sql`: Asserts `TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021`.
-7. `check_missing_refs_count`: Asserts zero unresolved entity or schema references.
-8. `check_lint_error_count`: Asserts zero lint errors.
-*(Note: `check_deleted_records_percent` is inherited from the base validation configuration with threshold 0).*
+7. `check_deleted_records_percent`: Asserts zero deleted records between consecutive import runs.
+8. `check_missing_refs_count`: Asserts zero unresolved entity or schema references.
+9. `check_lint_error_count`: Asserts zero lint errors.
 
 ---
 

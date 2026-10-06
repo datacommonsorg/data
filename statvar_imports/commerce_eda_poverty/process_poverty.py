@@ -20,6 +20,25 @@ standardizes geographic identifiers (5-digit county FIPS codes across 50 US
 states, DC, and Puerto Rico, and 5-digit island territory codes), validates
 poverty percentage rates across 1990, 2000, 2020, and 2021, and generates the
 normalized cleaned CSV for stat_var_processor.py.
+
+Why Preprocessing is Required (Why PV Map Alone is Insufficient):
+1. Format Reshaping (Wide-to-Long): The raw EDA dataset is wide (one row per county
+   with separate columns for 1990, 2000, and recent estimate). PV mapping requires
+   a normalized long format where each row represents a single observation (GEOID,
+   date, poverty_rate).
+2. Dynamic & Heterogeneous Observation Dates: The "Most Recent Estimate" is not
+   from a single survey year. For the 50 US states, DC, and Puerto Rico, the
+   benchmark is SAIPE 2021. However, SAIPE does not cover island territories
+   (American Samoa, Guam, Northern Mariana Islands, US Virgin Islands); their
+   estimates come from the 2020 Island Areas Decennial Census. Preprocessing parses
+   the survey year dynamically from the 'Data Source' note (or territory FIPS prefix)
+   to assign 2020 vs 2021 per record. PV Map CSV configurations cannot conditionally
+   extract and branch dates based on FIPS prefixes or free-text regex matching.
+3. Metadata and Footnote Cleaning: Upstream Excel/CSV files contain non-tabular
+   header titles, subtitle rows, and footnote rows at the bottom that must be skipped.
+4. FIPS Code Standardization & Filtering: GEOIDs in raw files may lack leading zeros
+   (e.g., 1001 -> 01001) or represent state-level rollups (e.g. 01000) that must be
+   filtered out from county-level statistical variables.
 """
 
 import datetime
@@ -126,16 +145,23 @@ def _extract_dataframe_from_excel(excel_path):
         if not rows:
             raise ValueError(f"Excel sheet '{target_sheet}' is empty.")
 
-        # Find row with GEOID header
+        # Find row with GEOID header dynamically across all rows
         header_idx = None
-        for idx, r in enumerate(rows[:10]):
+        for idx, r in enumerate(rows):
             row_str = [str(c).strip() for c in r if c is not None]
             if any(c.upper() == "GEOID" for c in row_str):
                 header_idx = idx
                 break
 
         if header_idx is None:
-            header_idx = 2 if len(rows) > 2 else 0
+            logging.error(
+                "Could not find header row containing 'GEOID' in sheet '%s' of %s",
+                target_sheet,
+                excel_path,
+            )
+            raise ValueError(
+                f"Could not find header row containing 'GEOID' in sheet '{target_sheet}' of {excel_path}"
+            )
 
         headers = [("" if c is None else str(c).strip()) for c in rows[header_idx]]
         data_rows = []
@@ -189,21 +215,26 @@ def preprocess_poverty(
     if src_path.lower().endswith((".xlsx", ".xls")):
         df = _extract_dataframe_from_excel(src_path)
     else:
-        # Detect header row index by scanning first lines for 'GEOID'
-        skip = 0
+        # Detect header row index by scanning lines dynamically until 'GEOID' is found
+        skip = None
         with open(src_path, "r", encoding="utf-8", errors="ignore") as f:
-            for idx in range(10):
-                line = f.readline()
-                if not line:
-                    break
+            for idx, line in enumerate(f):
                 if "GEOID" in line.upper():
                     skip = idx
                     break
+        if skip is None:
+            logging.error(
+                "Could not find header row containing 'GEOID' in CSV file: %s",
+                src_path,
+            )
+            raise ValueError(
+                f"Could not find header row containing 'GEOID' in CSV file: {src_path}"
+            )
         df = pd.read_csv(src_path, skiprows=skip, dtype=str)
 
     if df.empty:
-        logging.error("Source dataset is empty: %s", src_path)
-        raise ValueError(f"Source dataset is empty: {src_path}")
+        logging.error("File not read properly into dataframe: %s", src_path)
+        raise ValueError(f"File not read properly into dataframe: {src_path}")
 
     # Strip column headers to avoid fragile whitespace issues
     df.columns = df.columns.str.strip()
