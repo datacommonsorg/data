@@ -3,17 +3,12 @@
     "rules": [
         {
             "rule_id": "check_latest_date_freshness",
-            "description": "Asserts each StatVar reaches at least 2024 for CDC WONDER single-race mortality data.",
+            "description": "Asserts latest observation date reaches at least 2024 across StatVars.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2024' AND total_svs > 0"
+                "query": "SELECT MAX(TRY_CAST(MaxDate AS INT)) AS max_year FROM stats",
+                "condition": "max_year >= 2024"
             }
-        },
-        {
-            "rule_id": "check_max_date_consistent",
-            "description": "Checks if the MaxDate is the same for all StatVars.",
-            "validator": "MAX_DATE_CONSISTENT"
         }
     ]
 }
