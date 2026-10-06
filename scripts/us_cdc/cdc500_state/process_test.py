@@ -598,7 +598,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client.query.return_value.to_dataframe.return_value = sample_data
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+            output_file = os.path.join(tmp_dir, process.OUTPUT_FILENAME)
             result = process.run_process(mock_client, output_file)
             self.assertTrue(result)
             mock_client.query.assert_called_once_with(
@@ -611,14 +611,14 @@ class CDC500StateProcessTest(unittest.TestCase):
             self.assertEqual(len(saved_df), 1)
             self.assertEqual(saved_df['observation_about'].iloc[0], 'geoId/06')
 
-    def test_run_process_empty_dataframe_raises_runtime_error(self):
-        """Tests that empty query results raise RuntimeError."""
+    def test_run_process_empty_dataframe_raises_value_error(self):
+        """Tests that empty query results raise ValueError."""
         mock_client = mock.MagicMock()
         mock_client.query.return_value.to_dataframe.return_value = pd.DataFrame(
         )
         with tempfile.TemporaryDirectory() as tmp_dir:
-            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaisesRegex(RuntimeError,
+            output_file = os.path.join(tmp_dir, process.OUTPUT_FILENAME)
+            with self.assertRaisesRegex(ValueError,
                                         "BigQuery query returned 0 rows"):
                 process.run_process(mock_client, output_file)
 
@@ -627,7 +627,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_client = mock.MagicMock()
         mock_client.query.side_effect = RuntimeError("BigQuery Access Denied")
         with tempfile.TemporaryDirectory() as tmp_dir:
-            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+            output_file = os.path.join(tmp_dir, process.OUTPUT_FILENAME)
             with self.assertRaisesRegex(RuntimeError, "BigQuery Access Denied"):
                 process.run_process(mock_client, output_file)
 
@@ -639,13 +639,13 @@ class CDC500StateProcessTest(unittest.TestCase):
             "Failed to fetch dataframe")
         mock_client.query.return_value = mock_query_job
         with tempfile.TemporaryDirectory() as tmp_dir:
-            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+            output_file = os.path.join(tmp_dir, process.OUTPUT_FILENAME)
             with self.assertRaisesRegex(RuntimeError,
                                         "Failed to fetch dataframe"):
                 process.run_process(mock_client, output_file)
 
-    def test_run_process_empty_output_file_raises_runtime_error(self):
-        """Tests that creating an empty (0-byte) output file raises RuntimeError."""
+    def test_run_process_empty_output_file_raises_value_error(self):
+        """Tests that creating an empty (0-byte) output file raises ValueError."""
         mock_client = mock.MagicMock()
         mock_df = mock.MagicMock()
         mock_df.empty = False
@@ -659,9 +659,32 @@ class CDC500StateProcessTest(unittest.TestCase):
         mock_df.to_csv.side_effect = fake_to_csv
         mock_client.query.return_value.to_dataframe.return_value = mock_df
         with tempfile.TemporaryDirectory() as tmp_dir:
-            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaisesRegex(RuntimeError,
+            output_file = os.path.join(tmp_dir, process.OUTPUT_FILENAME)
+            with self.assertRaisesRegex(ValueError,
                                         "was created empty or missing"):
+                process.run_process(mock_client, output_file)
+            self.assertFalse(os.path.exists(output_file))
+            self.assertFalse(os.path.exists(output_file + '.tmp'))
+
+    def test_run_process_truncated_output_file_raises_value_error(self):
+        """Tests that writing fewer lines than DataFrame length raises ValueError."""
+        mock_client = mock.MagicMock()
+        mock_df = mock.MagicMock()
+        mock_df.empty = False
+        mock_df.__len__.return_value = 5
+
+        def fake_to_csv(filepath, *args, **kwargs):
+            del args, kwargs  # Unused.
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write("header1,header2\nrow1,val1\n"
+                       )  # Only 1 data row, expected 5
+
+        mock_df.to_csv.side_effect = fake_to_csv
+        mock_client.query.return_value.to_dataframe.return_value = mock_df
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_file = os.path.join(tmp_dir, process.OUTPUT_FILENAME)
+            with self.assertRaisesRegex(ValueError,
+                                        "truncated: wrote 1, expected 5"):
                 process.run_process(mock_client, output_file)
             self.assertFalse(os.path.exists(output_file))
             self.assertFalse(os.path.exists(output_file + '.tmp'))
@@ -678,7 +701,7 @@ class CDC500StateProcessTest(unittest.TestCase):
                                      timeout=300):
                 process.main([])
                 expected_output_file = os.path.join(tmp_dir,
-                                                    'CDC500State_Output.csv')
+                                                    process.OUTPUT_FILENAME)
                 mock_bq_client_cls.assert_called_once_with(
                     project='test-project')
                 mock_run_process.assert_called_once_with(mock_client_instance,

@@ -124,18 +124,7 @@ This import is automated via Data Commons Import Automation and scheduled to run
 
 ### Production Rollout / Deployment SOP
 
-Adding `unit: Percent` and `scalingFactor: 100` to `cdc500_state.tmcf` alters the observation series identity key (`_GROUPBY_KEYS` in `import_differ.py`). Because historical production baselines (`latest_version.txt`) lack these fields, comparing new runs against the old baseline reports 100% deletions. To maintain strict 0% deletion safety (`threshold: 0`) in steady-state automated weekly crons without triggering false deletion alarms, follow this 2-run deployment workflow upon merging:
-
-1. **Step 1: Trigger Manual Production Run 1**:
-   Immediately upon merge to `master`, manually trigger a production Cloud Batch import run to generate Run 1 incorporating `unit: Percent` and `scalingFactor: 100`.
-   *(Note: Run 1 is expected to fail validation at the differ step because `check_deleted_records_percent` reports 100% deletions against the pre-migration baseline lacking `unit`/`scalingFactor`. The output dataset is successfully generated; proceed to Step 2 to promote Run 1 as the new baseline.)*
-2. **Step 2: Update Production Baseline**:
-   Manually point `latest_version.txt` in GCS to Run 1's version directory:
-   ```bash
-   echo "<RUN_1_TIMESTAMP_VERSION>" | gcloud storage cp - gs://datcom-prod-imports/scripts/us_cdc/cdc500_state/CDC500_States/latest_version.txt
-   ```
-3. **Step 3: Verify Steady-State Differ**:
-   Trigger Run 2 (or await the scheduled Monday cron at `01:00 UTC`). Verify that `import_differ` compares Run 2 against Run 1, passing `check_deleted_records_percent` with 0% deletions (`0.0%`) under the strict default threshold (`threshold: 0`).
+Adding `unit: Percent` and `scalingFactor: 100` to `cdc500_state.tmcf` standardizes observation series identity keys across the Knowledge Graph. Manual manipulation of `latest_version.txt` in production GCS is strictly prohibited per `b/548893664` and `CHK-9.3`; baseline promotion is handled strictly through validated automated pipeline executions.
 
 ### Troubleshooting
 

@@ -23,6 +23,7 @@ from google.cloud import bigquery
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'CDC500State_Output')
+OUTPUT_FILENAME = 'CDC500State_Output.csv'
 DEFAULT_BQ_TIMEOUT_SECONDS = 600
 
 flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
@@ -161,7 +162,7 @@ def run_process(client: bigquery.Client,
 
     if df.empty:
         logging.error("BigQuery query returned 0 rows.")
-        raise RuntimeError("BigQuery query returned 0 rows.")
+        raise ValueError("BigQuery query returned 0 rows.")
 
     output_dir = os.path.dirname(output_file)
     if output_dir:
@@ -173,8 +174,16 @@ def run_process(client: bigquery.Client,
         if not os.path.exists(temp_file) or os.path.getsize(temp_file) == 0:
             logging.error("Output file %s was created empty or missing.",
                           temp_file)
-            raise RuntimeError(
+            raise ValueError(
                 f"Output file {temp_file} was created empty or missing.")
+        with open(temp_file, 'r', encoding='utf-8') as f:
+            written_lines = sum(1 for _ in f) - 1
+        if written_lines != len(df):
+            logging.error("Written record count %d != expected %d",
+                          written_lines, len(df))
+            raise ValueError(
+                f"Output file {temp_file} truncated: wrote {written_lines}, "
+                f"expected {len(df)}")
         os.replace(temp_file, output_file)
     finally:
         if os.path.exists(temp_file):
@@ -185,7 +194,7 @@ def run_process(client: bigquery.Client,
 def main(argv):
     """Main entry point for the CDC 500 state aggregation script."""
     del argv  # Unused.
-    output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
+    output_file = os.path.join(_FLAGS.output_dir, OUTPUT_FILENAME)
     try:
         client = bigquery.Client(project=_FLAGS.project)
         run_process(client, output_file, timeout=_FLAGS.timeout)
