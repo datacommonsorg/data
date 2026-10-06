@@ -548,11 +548,10 @@ class USEducation:
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
         # within the same school year without empty-string shadowing.
-        self._final_df_place.replace(
-            [r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
-            np.nan,
-            regex=True,
-            inplace=True)
+        self._final_df_place.replace([r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+                                     np.nan,
+                                     regex=True,
+                                     inplace=True)
         orig_cols = self._final_df_place.columns.tolist()
         # Stage 1: Coalesce complementary chunks within the same school year.
         self._final_df_place = (self._final_df_place.groupby(
@@ -560,9 +559,10 @@ class USEducation:
         # Stage 2: Deduplicate across school years, preferring latest year per column,
         # falling back to earlier years only if NaN.
         self._final_df_place = (self._final_df_place.sort_values(
-            by=["year"], ascending=False).groupby("school_state_code",
-                                                  as_index=False,
-                                                  sort=False).first()[orig_cols])
+            by=["year"],
+            ascending=False).groupby("school_state_code",
+                                     as_index=False,
+                                     sort=False).first()[orig_cols])
 
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
@@ -746,11 +746,10 @@ class USEducation:
         # Ensure empty strings or whitespace entries are treated as NaN so that
         # groupby().first() accurately skips nulls and coalesces attributes
         # within the same school year without empty-string shadowing.
-        self._final_df_place.replace(
-            [r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
-            np.nan,
-            regex=True,
-            inplace=True)
+        self._final_df_place.replace([r'^\s*$', r'^nan$', r'^None$', r'^<NA>$'],
+                                     np.nan,
+                                     regex=True,
+                                     inplace=True)
         orig_cols = self._final_df_place.columns.tolist()
         # Stage 1: Coalesce complementary chunks within the same school year.
         self._final_df_place = (self._final_df_place.groupby(
@@ -758,9 +757,10 @@ class USEducation:
         # Stage 2: Deduplicate across school years, preferring latest year per column,
         # falling back to earlier years only if NaN.
         self._final_df_place = (self._final_df_place.sort_values(
-            by=["year"], ascending=False).groupby("school_state_code",
-                                                  as_index=False,
-                                                  sort=False).first()[orig_cols])
+            by=["year"],
+            ascending=False).groupby("school_state_code",
+                                     as_index=False,
+                                     sort=False).first()[orig_cols])
 
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
