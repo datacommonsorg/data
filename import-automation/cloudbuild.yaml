@@ -135,7 +135,7 @@ steps:
           echo "Skipping validator build (no relevant changes)."
         fi
 
-  # 2c. Build, unit-test & deploy datacommons-import-helper to test/staging (parallel)
+  # 2c. Build, unit-test & deploy datacommons-import-helper to test (parallel)
   - id: 'build-helper'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -154,7 +154,7 @@ steps:
           echo "Skipping import-helper build (no relevant changes)."
         fi
 
-  # 2d. Compile manifest catalog, deploy staging Cloud Workflows & sync Airflow DAGs (parallel)
+  # 2d. Compile manifest catalog, deploy test Cloud Workflows & sync Airflow DAGs (parallel)
   - id: 'build-workflow'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -221,7 +221,7 @@ steps:
           --location=us-central1 \
           --composer-env=import-automation-airflow \
           --dag-id=USFed_ConstantMaturityRates_Test \
-          --webserver-url=https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com \
+          --webserver-url=https://030069cf9df9415bbd743bf7e18a6a65-dot-us-central1.composer.googleusercontent.com \
           --image-uri="$${EXECUTOR_IMAGE_URI}" \
           --dry-run-ingestion
 
@@ -245,11 +245,21 @@ steps:
         fi
 
         if [ "$${BUILD_VALIDATOR}" = "true" ]; then
-          echo "Promoting dc-import-validator:${_VERSION} -> :stable"
+          echo "Promoting dc-import-validator:${_VERSION} -> :stable and deploying prod job"
           gcloud container images add-tag \
             "$${AR_REPO}/dc-import-validator:${_VERSION}" \
             "$${AR_REPO}/dc-import-validator:stable" \
             --quiet
+          gcloud run jobs deploy import-validator-job \
+            --image="$${AR_REPO}/dc-import-validator:stable" \
+            --region="us-central1" \
+            --project="datcom-import-automation-prod" \
+            --service-account="965988403328-compute@developer.gserviceaccount.com" \
+            --cpu="8" \
+            --memory="32Gi" \
+            --max-retries=0 \
+            --task-timeout="7200s" \
+            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,GCS_BUCKET_ID=datcom-prod-imports"
         fi
 
         if [ "$${BUILD_HELPER}" = "true" ]; then
@@ -263,7 +273,7 @@ steps:
             --region="us-central1" \
             --project="datcom-import-automation-prod" \
             --no-allow-unauthenticated \
-            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,PROJECT_NUMBER=965988403328,BQ_DATASET_ID=import_automation,GCS_BUCKET_ID=datcom-prod-imports,INGESTION_HELPER_SERVICE=ingestion-helper-service,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com"
+            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,PROJECT_NUMBER=965988403328,BQ_DATASET_ID=import_automation,GCS_BUCKET_ID=datcom-prod-imports,INGESTION_HELPER_SERVICE=ingestion-helper-service,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=https://030069cf9df9415bbd743bf7e18a6a65-dot-us-central1.composer.googleusercontent.com"
         fi
 
         if [ "$${BUILD_WORKFLOW}" = "true" ]; then
