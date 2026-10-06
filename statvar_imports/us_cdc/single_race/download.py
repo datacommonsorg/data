@@ -227,6 +227,7 @@ class CdcWonderSingleRaceDownloader:
         self.session = self._create_session()
         self.action_url: Optional[str] = None
         self.base_post_data: List[Tuple[str, str]] = []
+        self.available_years: List[str] = []
 
     @retry(tries=3,
            delay=5,
@@ -242,6 +243,7 @@ class CdcWonderSingleRaceDownloader:
         self.session = self._create_session()
         self.action_url = None
         self.base_post_data = []
+        self.available_years = []
 
         logging.info("Connecting to CDC WONDER landing page: %s",
                      self.landing_url)
@@ -273,6 +275,19 @@ class CdcWonderSingleRaceDownloader:
                 "Could not find request form after agreeing to terms.")
 
         self.action_url = urljoin(self.landing_url, form_req.get("action"))
+
+        # Extract available years published in the CDC WONDER form
+        year_select = form_req.find("select", {"name": "F_D158.V1"})
+        if year_select:
+            self.available_years = [
+                opt.get("value")
+                for opt in year_select.find_all("option")
+                if opt.get("value") and opt.get("value") != "*All*"
+            ]
+            logging.info("Detected available years on CDC WONDER: %s",
+                         self.available_years)
+        else:
+            self.available_years = []
 
         # Extract pre-populated query parameters
         self.base_post_data = []
@@ -346,7 +361,8 @@ class CdcWonderSingleRaceDownloader:
 
         if years:
             for y in years:
-                query_data.append(("F_D158.V1", y))
+                if not self.available_years or y in self.available_years:
+                    query_data.append(("F_D158.V1", y))
 
         query_data.append(("action-Export Results", "Export Results"))
         return query_data
@@ -611,6 +627,23 @@ def download_single_race_data(
     os.makedirs(output_dir, exist_ok=True)
     downloader = CdcWonderSingleRaceDownloader(timeout=timeout, delay=delay)
     downloader.init_session()
+
+    # Intersect requested years with published years on CDC WONDER to prevent HTTP 500
+    if downloader.available_years:
+        valid_years = [y for y in years if y in downloader.available_years]
+        if valid_years:
+            if len(valid_years) < len(years):
+                skipped = [y for y in years if y not in downloader.available_years]
+                logging.info(
+                    "Skipping years not yet published in CDC WONDER: %s (querying: %s)",
+                    skipped, valid_years)
+            years = valid_years
+        else:
+            logging.warning(
+                "None of requested years %s found in CDC WONDER available years %s. "
+                "Defaulting to available years: %s",
+                years, downloader.available_years, downloader.available_years)
+            years = downloader.available_years
 
     total_files = 0
     total_rows = 0

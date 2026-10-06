@@ -399,6 +399,29 @@ class DownloadTest(unittest.TestCase):
 
             mock_download_state.assert_not_called()
 
+    @mock.patch.object(download, "CdcWonderSingleRaceDownloader")
+    def test_download_single_race_data_filters_unavailable_years(
+        self, mock_downloader_cls
+    ):
+        """Tests that unpublished future years are filtered out from requested years."""
+        mock_instance = mock.MagicMock()
+        mock_instance.available_years = ["2018", "2019", "2020", "2024"]
+        mock_instance.download_state.return_value = []
+        mock_downloader_cls.return_value = mock_instance
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            download.download_single_race_data(
+                states=["02"],
+                years=["2018", "2024", "2025", "2026"],
+                output_dir=temp_dir,
+                delay=0.0,
+                skip_existing=False,
+            )
+
+            # download_state should only be called with published years (2018 and 2024)
+            mock_instance.download_state.assert_called_once_with(
+                "02", ["2018", "2024"])
+
 
 if __name__ == "__main__":
     unittest.main()
