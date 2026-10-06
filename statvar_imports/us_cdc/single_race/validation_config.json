@@ -9,6 +9,14 @@
                 "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year, COUNT(DISTINCT StatVar) AS total_svs, SUM(CASE WHEN MaxDate >= '2024' THEN 1 ELSE 0 END) AS fresh_svs FROM stats",
                 "condition": "latest_year >= 2024 AND total_svs >= 805 AND fresh_svs >= 690"
             }
+        },
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted records is within 0.1% threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
         }
     ]
 }
