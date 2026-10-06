@@ -27,8 +27,9 @@ python3 census_api_data_downloader.py \
 Copy only the generated `.zip` file into `input_data/`:
 
 ```bash
+cd ../../..
 mkdir -p scripts/us_census/acs5yr/subject_tables/S2703/input_data
-cp /tmp/census_download/S2703.zip scripts/us_census/acs5yr/subject_tables/S2703/input_data/S2703.zip
+cp /tmp/census_download/acs/acs5/subject/S2703/S2703.zip scripts/us_census/acs5yr/subject_tables/S2703/input_data/S2703.zip
 ```
 
 ## Process Step
