@@ -133,45 +133,6 @@ python3 -m tools.import_validation.runner \
   --validation_output=statvar_imports/commerce_eda_poverty/dc_generated/validation_report.json
 ```
 
-Validation rules configured in `validation_config.json`:
-1. `check_date_span_sql`: Asserts `TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021`.
-2. `check_deleted_records_percent`: Asserts deleted records percentage is within 0.1% threshold.
-*(Note: `check_empty_import`, `check_missing_refs_count`, and `check_lint_error_count` are inherited automatically by default from the base validation config `tools/import_validation/validation_config.json`).*
-
----
-
-## Troubleshooting & Operational Runbook
-
-### 1. Cloudflare Bot Detection / HTTP 403 Forbidden
-- **Symptom:** `download_poverty.py` receives HTTP 403 when requesting EDA URLs.
-- **Automatic Mitigation:** The script automatically catches non-200 responses and falls back to
-  the Wayback Machine archive mirror (`EDA_PPC_MIRROR_URL`).
-- **Manual Workaround:** Download the workbook manually via a browser from the official
-  [EDA PPC page](https://www.eda.gov/performance/resources/persistent-poverty-counties) and
-  pass it via `--input_file`:
-  ```bash
-  python3 download_poverty.py --input_file=input_files/EDA_FY23_PPCs.xlsx
-  ```
-
-### 2. Survey Year Mismatch / Upstream Schema Changes
-- **Symptom:** `process_poverty.py` raises `ValueError: Unexpected survey year...`.
-- **Cause:** EDA periodically releases updated PPC workbooks baselining newer Census/SAIPE
-  estimates (e.g. transitioning from SAIPE 2021 to 2022 or 2023).
-- **Remediation:**
-  1. Inspect the new column headers and update the date mapping logic in `process_poverty.py`.
-  2. Update `poverty_metadata.csv` and `poverty_pvmap.csv` if new column names are introduced.
-  3. Update `validation_config.json` date span rules to accommodate the new maximum date.
-
-### 3. County Count Threshold Failures
-- **Symptom:** Validation fails on `NUM_PLACES_COUNT` outside `[3100, 3250]` or `process_poverty.py`
-  raises `Cleaned county count below minimum threshold`.
-- **Cause:** Upstream sheet layout changes (e.g., altered sheet name, modified header row
-  offset, or unexpected GEOID formatting).
-- **Remediation:** Check whether EDA modified the sheet structure or header rows. Re-run
-  preprocessing and inspect `output/Poverty_cleaned.csv`.
-
----
-
 ## Testing
 
 Run unit tests verifying workbook download and mirror failover, local file ingestion, GEOID standardization, and value sanitation from the repository root `data/`:
