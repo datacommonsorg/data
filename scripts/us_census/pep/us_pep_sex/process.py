@@ -209,8 +209,8 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
             'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
         ]
         # total age is required as we are bring age in a seperate import
-        df = df[(df["Age"] == "All Age")
-                & (df["Year"].str.startswith("July"))].reset_index(drop=True)
+        df = df[(df["Age"] == "All Age") &
+                (df["Year"].str.startswith("July"))].reset_index(drop=True)
         df["Year"] = df["Year"].str.replace("July 1, ", "")
         # dropping unwanted columns
         df = df.drop(columns=df.columns.difference(
@@ -560,8 +560,8 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2010Census')
-                & (df['Year'] != 'April2010Estimate') &
+        df = df[(df['Year'] != 'April2010Census') &
+                (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020') & (df['Year'] != '2020')]
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
@@ -882,8 +882,8 @@ def _county_2010_2020(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2010Census')
-                & (df['Year'] != 'April2010Estimate') &
+        df = df[(df['Year'] != 'April2010Census') &
+                (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
@@ -930,8 +930,8 @@ def _county_latest(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2020Estimate')
-                & (df['Year'] != 'July2020')]
+        df = df[(df['Year'] != 'April2020Estimate') &
+                (df['Year'] != 'July2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
 
         return df
@@ -1197,7 +1197,7 @@ def add_future_year_urls():
         if (url["download_path"] not in skip_urls  # not suspicious, keep it
             or (url["download_path"] in skip_urls and is_valid_url(
                 session, url["download_path"]))  # suspicious, but passes check
-            )
+           )
     ]
 
     logging.info(
@@ -1302,14 +1302,12 @@ def cleanup():
     active_files = set()
     if _FILES_TO_DOWNLOAD:
         active_files = {
-            _get_target_file_name(item)
-            for item in _FILES_TO_DOWNLOAD
+            _get_target_file_name(item) for item in _FILES_TO_DOWNLOAD
         }
     for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
         file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
         if os.path.isfile(file_path):
-            file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
-                                                                      3600)
+            file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
             if file_age > _TTL_DAYS and file_name not in active_files:
                 logging.info(f"Cleaning up old file: {file_name}")
                 os.remove(file_path)
@@ -1464,9 +1462,8 @@ def main(_):
         cleanup()
     if download_status and (mode == "" or mode == "process"):
         try:
-            loader = PopulationEstimateBySex(_INPUT_FILE_PATH,
-                                             cleaned_csv_path, mcf_path,
-                                             tmcf_path)
+            loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
+                                             mcf_path, tmcf_path)
             loader.process()
 
             # The persistent folder is intentionally kept to allow for TTL caching.
