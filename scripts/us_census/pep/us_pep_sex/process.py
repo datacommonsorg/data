@@ -209,8 +209,8 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
             'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
         ]
         # total age is required as we are bring age in a seperate import
-        df = df[(df["Age"] == "All Age") &
-                (df["Year"].str.startswith("July"))].reset_index(drop=True)
+        df = df[(df["Age"] == "All Age")
+                & (df["Year"].str.startswith("July"))].reset_index(drop=True)
         df["Year"] = df["Year"].str.replace("July 1, ", "")
         # dropping unwanted columns
         df = df.drop(columns=df.columns.difference(
@@ -560,8 +560,8 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2010Census') &
-                (df['Year'] != 'April2010Estimate') &
+        df = df[(df['Year'] != 'April2010Census')
+                & (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020') & (df['Year'] != '2020')]
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
@@ -882,8 +882,8 @@ def _county_2010_2020(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2010Census') &
-                (df['Year'] != 'April2010Estimate') &
+        df = df[(df['Year'] != 'April2010Census')
+                & (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
@@ -930,8 +930,8 @@ def _county_latest(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=df.columns.difference(
             ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
-        df = df[(df['Year'] != 'April2020Estimate') &
-                (df['Year'] != 'July2020')]
+        df = df[(df['Year'] != 'April2020Estimate')
+                & (df['Year'] != 'July2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
 
         return df
@@ -1149,19 +1149,18 @@ def _create_retry_session() -> requests.Session:
     return session
 
 
-def is_valid_url(url):
+def is_valid_url(session: requests.Session, url: str) -> bool:
     try:
-        session = _create_retry_session()
-        response = session.get(url, timeout=20)
-        if response.status_code != 200:
-            return False
-        content_type = response.headers.get("Content-Type", "")
-        if "text/html" in content_type.lower():
-            # Might be an error page disguised as 200
-            if b"error" in response.content.lower() or len(
-                    response.content) < 500:
+        with session.get(url, stream=True, timeout=20) as response:
+            if response.status_code != 200:
                 return False
-        return True
+            content_type = response.headers.get("Content-Type", "")
+            if "text/html" in content_type.lower():
+                # Might be an error page disguised as 200
+                chunk = next(response.iter_content(chunk_size=1024), b"")
+                if b"error" in chunk.lower() or len(chunk) < 500:
+                    return False
+            return True
     except Exception as e:
         logging.warning(f"Error checking URL: {url} - {e}")
         return False
@@ -1180,8 +1179,8 @@ def add_future_year_urls():
 
     # Use a retry-enabled requests session for connection pooling and 429/5xx backoff
     session = _create_retry_session()
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
-        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
+        _FILES_TO_DOWNLOAD = json.load(input_file)
 
     GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
     # Read URLs from the GCS-hosted config file
@@ -1190,19 +1189,19 @@ def add_future_year_urls():
     skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
 
     logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
-    logging.info(f"Urls fetched from the json to skip:{skip_urls}")
+    logging.info(f"Urls fetched from the json to skip: {skip_urls}")
 
     #Filter based on skip list + live URL check
     _FILES_TO_DOWNLOAD = [
         url for url in _FILES_TO_DOWNLOAD
         if (url["download_path"] not in skip_urls  # not suspicious, keep it
             or (url["download_path"] in skip_urls and is_valid_url(
-                url["download_path"]))  # suspicious, but passes check
-           )
+                session, url["download_path"]))  # suspicious, but passes check
+            )
     ]
 
     logging.info(
-        f"Historical urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
+        f"Historical urls fetched from input_json: {_FILES_TO_DOWNLOAD}")
 
     # List of URLs with placeholders for {YEAR} and {i}
     urls_to_scan = [
@@ -1303,12 +1302,14 @@ def cleanup():
     active_files = set()
     if _FILES_TO_DOWNLOAD:
         active_files = {
-            _get_target_file_name(item) for item in _FILES_TO_DOWNLOAD
+            _get_target_file_name(item)
+            for item in _FILES_TO_DOWNLOAD
         }
     for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
         file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
         if os.path.isfile(file_path):
-            file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
+            file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
+                                                                      3600)
             if file_age > _TTL_DAYS and file_name not in active_files:
                 logging.info(f"Cleaning up old file: {file_name}")
                 os.remove(file_path)
@@ -1326,11 +1327,21 @@ def _download_single_file(session: requests.Session, url: str) -> str:
         if 'html' in content_type.lower():
             raise ValueError(f"Server returned HTML error page for URL: {url}")
 
-        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    tmp_file.write(chunk)
-            return tmp_file.name
+        tmp_file_path = None
+        try:
+            with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                tmp_file_path = tmp_file.name
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        tmp_file.write(chunk)
+            return tmp_file_path
+        except Exception:
+            if tmp_file_path and os.path.exists(tmp_file_path):
+                try:
+                    os.remove(tmp_file_path)
+                except OSError:
+                    pass
+            raise
 
 
 @retry(tries=3,
@@ -1361,8 +1372,8 @@ def download_files():
         # Reuse cached file if it exists and is within TTL
         if file_name_to_save in downloaded_files and os.path.isfile(
                 cached_file_path):
-            file_age = (time.time() - os.path.getmtime(cached_file_path)) / (
-                24 * 3600)
+            file_age = (time.time() -
+                        os.path.getmtime(cached_file_path)) / (24 * 3600)
             if file_age <= _TTL_DAYS:
                 logging.info(
                     f"Skipping download, using cached file: {file_name_to_save}"
@@ -1375,6 +1386,7 @@ def download_files():
                 f"Cached file {file_name_to_save} expired (age: {file_age:.1f} days); refreshing."
             )
 
+        tmp_file_path = None
         try:
             tmp_file_path = _download_single_file(session, url)
 
@@ -1384,12 +1396,18 @@ def download_files():
 
             # Move to gcs destination (optimized from shutil.copy + os.remove)
             shutil.move(tmp_file_path, cached_file_path)
+            tmp_file_path = None
             downloaded_files.add(file_name_to_save)
 
             file_to_download['is_downloaded'] = True
             logging.info(f"Downloaded file: {url}")
 
         except Exception as e:
+            if tmp_file_path and os.path.exists(tmp_file_path):
+                try:
+                    os.remove(tmp_file_path)
+                except OSError:
+                    pass
             if os.path.isfile(cached_file_path):
                 logging.warning(
                     f"Failed to refresh {url} after retries ({e}); falling back to cached file: {file_name_to_save}"
@@ -1446,8 +1464,9 @@ def main(_):
         cleanup()
     if download_status and (mode == "" or mode == "process"):
         try:
-            loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
-                                             mcf_path, tmcf_path)
+            loader = PopulationEstimateBySex(_INPUT_FILE_PATH,
+                                             cleaned_csv_path, mcf_path,
+                                             tmcf_path)
             loader.process()
 
             # The persistent folder is intentionally kept to allow for TTL caching.
