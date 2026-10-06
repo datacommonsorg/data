@@ -221,6 +221,19 @@ class ProcessPipelineTest(unittest.TestCase):
             failing_df.empty,
             f'Expected 9 active stats to pass rule 2: {failing_df}')
 
+        country_stats = pd.DataFrame([{
+            'StatVar': 'Count_BirthEvent_LiveBirth',
+            'MaxDate': '2024'
+        }])
+        con.register('stats', country_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
+        ).fetchdf()
+        self.assertTrue(
+            failing_df.empty,
+            f'Expected 1 active stat (country level) to pass rule 2: {failing_df}'
+        )
+
         missing_active = pd.DataFrame([{
             'StatVar': sv,
             'MaxDate': '2024'
