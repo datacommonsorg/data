@@ -27,13 +27,13 @@ OBSERVATION_PERIOD = "P1Y"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[District]"
 # Considering the required columns for Demographics Data.
 POSSIBLE_DATA_COLUMNS = [
-    ".*Students.*", ".*Teacher.*", ".*American.*", ".*Asian.*",
-    ".*Hispanic.*", ".*Black.*", ".*White.*", ".*Adult Education.*",
-    ".*Staff.*", ".*Admin.*", ".*Counselor.*", ".*Psychologist.*",
-    "Ungraded.*", "Two or More Races.*",
+    ".*Students.*", ".*Teacher.*", ".*American.*", ".*Asian.*", ".*Hispanic.*",
+    ".*Black.*", ".*White.*", ".*Adult Education.*", ".*Staff.*", ".*Admin.*",
+    ".*Counselor.*", ".*Psychologist.*", "Ungraded.*", "Two or More Races.*",
     "Nat. Hawaiian or Other Pacific Isl.*", "Grades.*",
     "Prekindergarten and Kindergarten.*", ".*Paraprofessionals.*",
-    ".*Pupil/Teacher Ratio.*"
+    ".*Pupil/Teacher Ratio.*", ".*Instructional Coordinators.*",
+    ".*Librarians.*"
 ]
 # Excluding the unwanted columns.
 EXCLUDE_DATA_COLUMNS = [
