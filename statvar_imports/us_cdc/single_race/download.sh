@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -o pipefail
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "${SCRIPT_DIR}/input_files"

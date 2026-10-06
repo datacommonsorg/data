@@ -29,6 +29,7 @@ queries state by state, automatically detects when a state query exceeds the
 """
 
 import csv
+import datetime
 import io
 import os
 from pathlib import Path
@@ -41,7 +42,9 @@ from absl import flags
 from absl import logging
 from bs4 import BeautifulSoup
 import requests
+from requests.adapters import HTTPAdapter
 from retry import retry
+from urllib3.util import Retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_INPUT_DIR = os.path.join(_SCRIPT_DIR, "input_files")
@@ -137,10 +140,13 @@ flags.DEFINE_string(
     "all",
     "Comma-separated 2-digit FIPS codes of states to download (e.g. '02,48'), or 'all'.",
 )
+_CURRENT_YEAR = datetime.date.today().year
+_DEFAULT_YEARS = f"2018-{_CURRENT_YEAR}"
+
 flags.DEFINE_string(
     "years",
-    "2018-2024",
-    "Year range ('2018-2024') or comma-separated years ('2018,2019,2020').",
+    _DEFAULT_YEARS,
+    f"Year range (e.g. '2018-{_CURRENT_YEAR}') or comma-separated years.",
 )
 flags.DEFINE_string(
     "output_dir",
@@ -187,6 +193,28 @@ def parse_year_list(year_str: str) -> List[str]:
 class CdcWonderSingleRaceDownloader:
     """Automates CDC WONDER sessions and queries for Single Race mortality data."""
 
+    def _create_session(self) -> requests.Session:
+        """Creates a requests.Session with connection pooling and unified SSL."""
+        session = requests.Session()
+        session.verify = True
+        session.headers.update({
+            "User-Agent":
+                "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
+        })
+        adapter = HTTPAdapter(
+            pool_connections=10,
+            pool_maxsize=10,
+            max_retries=Retry(
+                total=3,
+                backoff_factor=1,
+                status_forcelist=[500, 502, 503, 504],
+                raise_on_status=False,
+            ),
+        )
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+        return session
+
     def __init__(
         self,
         landing_url: str = SOURCE_LANDING_URL,
@@ -196,11 +224,7 @@ class CdcWonderSingleRaceDownloader:
         self.landing_url = landing_url
         self.timeout = timeout
         self.delay = delay
-        self.session = requests.Session()
-        self.session.headers.update({
-            "User-Agent":
-                "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
-        })
+        self.session = self._create_session()
         self.action_url: Optional[str] = None
         self.base_post_data: List[Tuple[str, str]] = []
 
@@ -215,11 +239,7 @@ class CdcWonderSingleRaceDownloader:
                 self.session.close()
             except Exception:
                 pass
-        self.session = requests.Session()
-        self.session.headers.update({
-            "User-Agent":
-                "Mozilla/5.0 (DataCommons CDC Importer; contact: support@datacommons.org)"
-        })
+        self.session = self._create_session()
         self.action_url = None
         self.base_post_data = []
 
@@ -357,6 +377,8 @@ class CdcWonderSingleRaceDownloader:
                                         data=payload,
                                         timeout=self.timeout)
                 if res.status_code == 429:
+                    if attempt == max_retries:
+                        res.raise_for_status()
                     retry_after = res.headers.get("Retry-After")
                     # CDC WONDER WAF explicitly states:
                     # "Your IP address has been temporarily blocked... Please wait 30 minutes"
@@ -370,10 +392,11 @@ class CdcWonderSingleRaceDownloader:
                     logging.warning(
                         "Encountered HTTP 429 (Too Many Requests). CDC WONDER enforces a "
                         "30-minute IP block. Waiting %d seconds (%d min) in complete silence "
-                        "for block to clear (attempt %d)...",
+                        "for block to clear (attempt %d/%d)...",
                         wait_time,
                         wait_time // 60,
                         attempt,
+                        max_retries,
                     )
                     time.sleep(wait_time)
                     # Re-initialize session to renew cookies and session ID
@@ -439,33 +462,20 @@ class CdcWonderSingleRaceDownloader:
             need_partitioning = True
         else:
             # Try querying all years first
-            try:
-                response_text = self.execute_query(state_fips, years)
-                first_line = response_text.split("\n", 1)[0]
-                if "County Code" in first_line:
-                    logging.info(
-                        "Successfully fetched %s (all requested years in 1 query).",
-                        state_name)
-                    return [("all", response_text)]
-                logging.warning(
-                    "%s response not TSV (likely exceeded 75k rows: %s). "
-                    "Partitioning into chunks...",
-                    state_name,
-                    response_text[:120].strip().replace("\n", " "),
-                )
-                need_partitioning = True
-            except Exception as e:
-                logging.warning(
-                    "Querying all %d years for %s encountered %s. "
-                    "Partitioning into year chunks...",
-                    len(years),
-                    state_name,
-                    e,
-                )
-                need_partitioning = True
-
-        if not need_partitioning:
-            return []
+            response_text = self.execute_query(state_fips, years)
+            first_line = response_text.split("\n", 1)[0]
+            if "County Code" in first_line:
+                logging.info(
+                    "Successfully fetched %s (all requested years in 1 query).",
+                    state_name)
+                return [("all", response_text)]
+            logging.warning(
+                "%s response not TSV (likely exceeded 75k rows: %s). "
+                "Partitioning into chunks...",
+                state_name,
+                response_text[:120].strip().replace("\n", " "),
+            )
+            need_partitioning = True
 
         # Partition years into 2-year chunks
         chunk_results = []
@@ -633,6 +643,14 @@ def download_single_race_data(
             states_in_batch + 1,
             batch_size,
         )
+
+        # Purge preexisting files for this state to prevent duplicate data ingestion
+        # if earlier runs created monolithic vs chunked files (CHK-5.2).
+        for old_file in Path(output_dir).glob(
+                f"UnderlyingCauseofDeath_SingleRace_{state_fips}*.csv"):
+            if old_file.is_file():
+                logging.info("Purging preexisting state file: %s", old_file)
+                old_file.unlink()
 
         chunks = downloader.download_state(state_fips, years)
 

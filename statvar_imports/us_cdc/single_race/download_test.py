@@ -287,6 +287,118 @@ class DownloadTest(unittest.TestCase):
         mock_sleep.assert_called_with(1)
         mock_init.assert_called_once()
 
+    @mock.patch.object(download.time, "sleep")
+    def test_execute_query_429_final_attempt_fails_fast(self, mock_sleep):
+        """Tests that HTTP 429 on the final attempt fails immediately without sleeping."""
+        downloader = download.CdcWonderSingleRaceDownloader()
+        downloader.action_url = "https://wonder.cdc.gov/test"
+        downloader.base_post_data = [("B_1", "test")]
+
+        mock_res_429 = mock.MagicMock()
+        mock_res_429.status_code = 429
+        mock_res_429.raise_for_status.side_effect = (
+            download.requests.HTTPError("429 Client Error"))
+
+        downloader.session.post = mock.MagicMock(return_value=mock_res_429)
+
+        with self.assertRaises(download.requests.HTTPError):
+            downloader.execute_query("02", ["2018"], max_retries=1)
+
+        mock_sleep.assert_not_called()
+
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "execute_query")
+    def test_download_state_network_exception_bubbles(self, mock_query):
+        """Tests that network or runtime exceptions bubble up without entering chunking."""
+        mock_query.side_effect = download.requests.ConnectionError("Connection aborted")
+
+        downloader = download.CdcWonderSingleRaceDownloader()
+        with self.assertRaises(download.requests.ConnectionError):
+            downloader.download_state("02", ["2018", "2019"])
+
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "download_state")
+    def test_download_single_race_data_success(self, mock_download_state,
+                                               mock_init):
+        """Tests orchestration and file writing in download_single_race_data."""
+        tsv_content = ("Notes\tYear\tCounty\tCounty Code\tDeaths\n"
+                       "\t2018\tAnchorage Borough, AK\t02020\t20\n"
+                       "---\n")
+        mock_download_state.return_value = [("all", tsv_content)]
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            download.download_single_race_data(
+                states=["02"],
+                years=["2018"],
+                output_dir=temp_dir,
+                delay=0.0,
+                skip_existing=False,
+            )
+            expected_file = (
+                Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_02.csv")
+            self.assertTrue(expected_file.exists())
+            lines = expected_file.read_text(encoding="utf-8").splitlines()
+            self.assertEqual(len(lines), 2)
+            mock_init.assert_called_once()
+            mock_download_state.assert_called_once_with("02", ["2018"])
+
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "download_state")
+    def test_download_single_race_data_purges_preexisting_files(
+        self, mock_download_state, mock_init
+    ):
+        """Tests that stale monolithic or chunked files are purged before new downloads."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Create old monolithic file and unrelated state file
+            old_monolith = (
+                Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_02.csv")
+            old_monolith.write_text("old data")
+            other_state = (
+                Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_04.csv")
+            other_state.write_text("other state data")
+
+            # Mock new download returning a 2-year chunk
+            tsv_chunk = ("Notes\tYear\tCounty\tCounty Code\tDeaths\n"
+                         "\t2018\tAnchorage Borough, AK\t02020\t20\n"
+                         "---\n")
+            mock_download_state.return_value = [("2018_2019", tsv_chunk)]
+
+            download.download_single_race_data(
+                states=["02"],
+                years=["2018", "2019"],
+                output_dir=temp_dir,
+                delay=0.0,
+                skip_existing=False,
+            )
+
+            # Monolith for 02 should be purged, new chunk should exist, and other state intact
+            self.assertFalse(old_monolith.exists())
+            new_chunk = (
+                Path(temp_dir) /
+                "UnderlyingCauseofDeath_SingleRace_02_2018_2019.csv")
+            self.assertTrue(new_chunk.exists())
+            self.assertTrue(other_state.exists())
+
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderSingleRaceDownloader, "download_state")
+    def test_download_single_race_data_skip_existing(self, mock_download_state,
+                                                     mock_init):
+        """Tests skipping states that are already downloaded."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Create valid file covering 2018
+            f = Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_02.csv"
+            f.write_text("Notes,Year,County,County Code,Deaths\n" +
+                         ",2018,Anchorage,02020,20\n" * 5)
+
+            download.download_single_race_data(
+                states=["02"],
+                years=["2018"],
+                output_dir=temp_dir,
+                delay=0.0,
+                skip_existing=True,
+            )
+
+            mock_download_state.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()
