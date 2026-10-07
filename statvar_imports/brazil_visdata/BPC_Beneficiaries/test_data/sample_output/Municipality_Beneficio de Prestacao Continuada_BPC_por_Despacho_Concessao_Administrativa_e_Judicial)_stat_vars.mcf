@@ -1,0 +1,72 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_input/Municipality_Beneficio de Prestacao Continuada_BPC_por_Despacho_Concessao_Administrativa_e_Judicial) - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/pv_map/Municipality_Beneficio de Prestacao Continuada_BPC_por_Despacho_Concessao_Administrativa_e_Judicial) - pvmap.csv --config_file=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/config_metadata/Municipality_Beneficio de Prestacao Continuada_BPC_por_Despacho_Concessao_Administrativa_e_Judicial) - metadata.csv --places_resolved_csv=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/Municipality_Beneficiarios_do BPC_no_Cadastro_Unico - resolved_places.csv --output_path=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_output/Municipality_Beneficio de Prestacao Continuada_BPC_por_Despacho_Concessao_Administrativa_e_Judicial) --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-06-17 08:52:21.589414
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_AdministrativeConcession_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) from Administrative Concession"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único de Idosos de Concessão Administrativa@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:AdministrativeConcession
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_JudicialConcession_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) from Judicial Concession"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único de Idosos de Concessão Judicial@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:JudicialConcession
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_AdministrativeConcession_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry from Administrative Concession"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único de Concessão Administrativa@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:AdministrativeConcession
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_AdministrativeConcession_PermanentDisablity_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability  from Administrative Concession"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob Incapacidade Permanente de Concessão Administrativa@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:AdministrativeConcession
+disabilityStatus: dcid:PermanentDisablity
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_JudicialConcession_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry from JudicialConcession"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único da Concessão Judicial@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:JudicialConcession
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_JudicialConcession_PermanentDisablity_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability from Judicial Concession"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob Incapacidade Permanente de Concessão Judicial@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:JudicialConcession
+disabilityStatus: dcid:PermanentDisablity
+registrationStatus: dcid:Brazil_SingleRegistry
+

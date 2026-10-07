@@ -1,0 +1,30 @@
+Node: dcid:PermanentDisablity
+typeOf: dcid:SDG_DisabilityStatusEnum
+name: "Permanent Disablity"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Person
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Person
+
+Node: dcid:Brazil_ContinuousCashBenefitProgram
+typeOf: dcid:BenefitProgramEnum
+name: "Brazil_ Continuous Cash Benefit Program"
+isProvisional: dcs:True
+
+Node: dcid:Brazil_SingleRegistry
+typeOf: dcid:RegistrationStatusEnum
+name: "Brazil_ Single Registry"
+isProvisional: dcs:True
+
+Node: dcid:Brazil_Preto
+typeOf: dcid:RaceCodeEnum
+name: "Brazil_ Preto"
+isProvisional: dcs:True
+
