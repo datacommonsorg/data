@@ -248,6 +248,41 @@ class DownloadInputDataTest(unittest.TestCase):
             download_and_process()
         self.assertIn("Download failed with status 500", str(ctx.exception))
 
+    @patch('download_input_data.fetch_variables')
+    @patch('download_input_data.load_template_from_gcs')
+    @patch('download_input_data.make_request')
+    def test_download_and_process_logs_warning_on_unmapped_region(
+            self, mock_make_request, mock_load_template, mock_fetch):
+        template_index = pd.MultiIndex.from_tuples([('0000000', 'POLAND')],
+                                                   names=['Code', 'Name'])
+        template_columns = pd.MultiIndex.from_tuples(
+            [('0-2', 'total', 'total', '2024')],
+            names=['Age', 'Sex', 'Location', 'Year'])
+        mock_load_template.return_value = pd.DataFrame(
+            10, index=template_index, columns=template_columns)
+        mock_fetch.return_value = {'102': 'ludność 0-2'}
+
+        # Mock download returning an unmapped region alongside POLAND
+        mock_resp = requests.Response()
+        mock_resp.status_code = 200
+        mock_resp._content = b'''{
+            "results": [
+                {"name": "POLSKA", "values": [{"year": 2024, "val": 100}]},
+                {"name": "NIEZNANY_REGION", "values": [{"year": 2024, "val": 10}]}
+            ]
+        }'''
+        mock_make_request.return_value = mock_resp
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch('download_input_data.OUTPUT_DIR', temp_dir):
+                with self.assertLogs(level='WARNING') as cm:
+                    download_and_process()
+                self.assertTrue(
+                    any("Region 'NIEZNANY_REGION' from API could not be mapped"
+                        in log for log in cm.output),
+                    f"Expected unmapped region warning in logs, got: {cm.output}"
+                )
+
 
 if __name__ == '__main__':
     unittest.main()

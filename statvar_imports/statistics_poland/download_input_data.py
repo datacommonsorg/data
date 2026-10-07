@@ -286,6 +286,10 @@ def download_and_process():
                             'Sex': sex,
                             'Location': loc
                         })
+                else:
+                    logging.warning(
+                        f"Region '{api_name}' from API could not be mapped to any "
+                        f"template code; skipping.")
             time.sleep(0.1)
         time.sleep(0.1)
 
