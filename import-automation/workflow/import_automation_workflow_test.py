@@ -351,7 +351,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
             'update_import_version',
             'trigger_staging_ingestion',
             'wait_staging_ingestion',
-            'ingest_prod',
+            'trigger_prod_ingestion',
             'workflow_summary',
         ]
         for task_id in expected_tasks:
@@ -368,10 +368,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                       tasks['update_import_version'].downstream_list)
         self.assertIn(tasks['wait_staging_ingestion'],
                       tasks['trigger_staging_ingestion'].downstream_list)
-        self.assertIn(tasks['ingest_prod'],
+        self.assertIn(tasks['trigger_prod_ingestion'],
                       tasks['wait_staging_ingestion'].downstream_list)
         self.assertIn(tasks['workflow_summary'],
-                      tasks['ingest_prod'].downstream_list)
+                      tasks['trigger_prod_ingestion'].downstream_list)
 
     @patch('import_automation_workflow._run_cloud_run_job')
     def test_validation_job_and_batch_config(self, mock_run_cr_job):
@@ -456,6 +456,50 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertEqual(compute['memoryMib'], 65536)
         self.assertEqual(instance['machineType'], 'n2-highmem-8')
         self.assertEqual(instance['bootDisk']['sizeGb'], 100)
+
+    @patch('import_automation_workflow.trigger_environment_ingestion')
+    def test_trigger_prod_ingestion_skips_and_pushes_xcom(self, mock_trigger):
+        ti_mock = MagicMock()
+
+        def xcom_pull(task_ids=None):
+            if task_ids == 'update_import_version':
+                return {
+                    'status': 'SKIP',
+                    'importEntry': {
+                        'importName': 'TestImport',
+                        'latestVersion': 'gs://bucket/TestImport/v1/*.mcf*',
+                    },
+                }
+            if task_ids == 'trigger_staging_ingestion':
+                return {
+                    'status': 'SKIPPED',
+                    'message': 'No imports need ingestion'
+                }
+            return None
+
+        ti_mock.xcom_pull.side_effect = xcom_pull
+        mock_trigger.return_value = {
+            'status': 'SKIPPED',
+            'message': 'No imports need ingestion',
+        }
+        context = {
+            'ti': ti_mock,
+            'params': {
+                'importName': 'scripts/test:TestImport',
+                'skipStagingIngestion': False,
+                'skipProdIngestion': False,
+            },
+        }
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.trigger_prod_ingestion.function(
+                **context)
+        ti_mock.xcom_push.assert_called_once_with(
+            key='return_value',
+            value={
+                'status': 'SKIPPED',
+                'message': 'No imports need ingestion',
+            },
+        )
 
 
 class E2EDagRunnerTest(unittest.TestCase):
