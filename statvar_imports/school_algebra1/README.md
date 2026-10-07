@@ -19,7 +19,7 @@
 This import focuses on urban school Algebra1. This dataset contains information about enrollment and passed data of students in Algebra1 and also at different grade level.
 
 -----
-- source: https://ocrdata.ed.gov/data
+- source: https://civilrightsdata.ed.gov/data
 
 - type of place: School (NCES School ID)
 

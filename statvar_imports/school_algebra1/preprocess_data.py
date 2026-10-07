@@ -45,7 +45,7 @@ def load_pv_mapped_columns(pvmap_path: str) -> set:
     if not os.path.exists(pvmap_path):
         raise FileNotFoundError(f"PV map file not found at: {pvmap_path}")
 
-    with open(pvmap_path, 'r', encoding='utf-8') as f:
+    with open(pvmap_path, 'r', encoding='utf-8-sig') as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith('#'):
@@ -70,22 +70,29 @@ def extract_survey_end_year(filename: str) -> int:
     return 0
 
 
+def _pad_id_series(series: pd.Series, width: int) -> pd.Series:
+    """Safely zero-pads non-empty, non-NaN string identifiers."""
+    cleaned = series.fillna('').astype(str).str.strip()
+    return cleaned.apply(
+        lambda x: x.zfill(width) if x and x.lower() != 'nan' else '')
+
+
 def preprocess_dataframe(df: pd.DataFrame, filename: str,
                          mapped_cols: set) -> pd.DataFrame:
     """Adds standardized ncesid, YEAR, and filters to mapped columns."""
     # Ensure ncesid exists and is properly zero-padded
     if 'ncesid' not in df.columns:
         if 'LEAID' in df.columns and 'SCHID' in df.columns:
-            leaid = df['LEAID'].astype(str).str.strip().str.zfill(7)
-            schid = df['SCHID'].astype(str).str.strip().str.zfill(5)
+            leaid = _pad_id_series(df['LEAID'], 7)
+            schid = _pad_id_series(df['SCHID'], 5)
             df.insert(0, 'ncesid', leaid + schid)
         elif 'COMBOKEY' in df.columns:
-            combokey = df['COMBOKEY'].astype(str).str.strip().str.zfill(12)
+            combokey = _pad_id_series(df['COMBOKEY'], 12)
             df.insert(0, 'ncesid', combokey)
         else:
             raise ValueError(f"Cannot resolve 'ncesid' in {filename}")
     else:
-        df['ncesid'] = df['ncesid'].astype(str).str.strip().str.zfill(12)
+        df['ncesid'] = _pad_id_series(df['ncesid'], 12)
 
     # Ensure YEAR exists
     if 'YEAR' not in df.columns:

@@ -55,8 +55,12 @@ class PreprocessDataTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             orig_processed = preprocess_data._PROCESSED_DIR
             try:
-                preprocess_data._PROCESSED_DIR = tmp_dir
-                input_csv = os.path.join(tmp_dir, 'crdc_2021-22_algebra_i.csv')
+                input_dir = os.path.join(tmp_dir, 'input')
+                output_dir = os.path.join(tmp_dir, 'output')
+                os.makedirs(input_dir)
+                os.makedirs(output_dir)
+                preprocess_data._PROCESSED_DIR = output_dir
+                input_csv = os.path.join(input_dir, 'crdc_2021-22_algebra_i.csv')
                 pd.DataFrame({
                     'COMBOKEY': ['10000500870'],
                     'SCH_ALGENR_G08_HI_M': ['5'],
@@ -64,7 +68,8 @@ class PreprocessDataTest(unittest.TestCase):
 
                 preprocess_data.process_file(
                     input_csv, {'YEAR', 'ncesid', 'SCH_ALGENR_G08_HI_M'})
-                output_csv = os.path.join(tmp_dir, 'crdc_2021-22_algebra_i.csv')
+                output_csv = os.path.join(output_dir,
+                                          'crdc_2021-22_algebra_i.csv')
                 out_df = pd.read_csv(output_csv, dtype=str)
                 self.assertEqual(out_df['ncesid'].iloc[0], '010000500870')
                 self.assertEqual(out_df['YEAR'].iloc[0], '2022')
