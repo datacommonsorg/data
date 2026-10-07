@@ -1,0 +1,36 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
+# Global Dataflow properties (Standard Data Commons Unemployment Modeling)
+"DATAFLOW:ESTAT:UNE_RT_A(1.0)",populationType,dcs:Person,,,,,,,,
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+LAST UPDATE,#ignore,"",,,,,,,,
+CONF_STATUS,#ignore,"",,,,,,,,
+ConfStatus,#ignore,"",,,,,,,,
+# Frequency dimension
+freq:A,observationPeriod,P1Y,,,,,,,,
+# --- CORRECTED AGE ENUMS ---
+age:Y15-24,age,dcs:Years15To24,,,,,,,,
+age:Y15-29,age,dcs:Years15To29,,,,,,,,
+age:Y15-74,age,dcs:Years15To74,,,,,,,,
+age:Y20-64,age,dcs:Years20To64,,,,,,,,
+age:Y25-54,age,dcs:Years25To54,,,,,,,,
+age:Y25-74,age,dcs:Years25To74,,,,,,,,
+age:Y55-74,age,dcs:Years55To74,,,,,,,,
+# --- Unit Mappings (Strict comma spacing and quoted scaling factors) ---
+unit:PC_ACT,measuredProperty,dcs:unemploymentRate,unit,dcs:Percent,,,,,,
+unit:PC_POP,statType,dcs:measuredValue,measuredProperty,dcs:count,employment,dcs:Unemployed,unit,dcs:Percent,measurementDenominator,dcs:Count_Person
+unit:THS_PER,measuredProperty,dcs:count,employment,dcs:Unemployed,unit,dcs:Person,scalingFactor,"1000",,
+# --- Sex dimension ---
+sex:F,gender,dcs:Female,,,,,,,,
+sex:M,gender,dcs:Male,,,,,,,,
+sex:T,gender,"",,,,,,,,
+# --- Geopolitical Entity Default ---
+geo,observationAbout,{Data},,,,,,,,
+# --- Time and Value ---
+TIME_PERIOD,observationDate,{Data},,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,
+# --- Safely ignoring transient and ungrounded metadata flags ---
+OBS_FLAG,#ignore,"",,,,,,,,
+OBS_FLAG:b,#ignore,"",,,,,,,,
+OBS_FLAG:bu,#ignore,"",,,,,,,,
+OBS_FLAG:u,#ignore,"",,,,,,,,
+OBS_FLAG:d,#ignore,"",,,,,,,,
