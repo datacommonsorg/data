@@ -43,8 +43,7 @@ def load_pv_mapped_columns(pvmap_path: str) -> set:
     """Reads column names mapped in the PV map file."""
     mapped_cols = set()
     if not os.path.exists(pvmap_path):
-        logging.warning(f"PV map file not found at: {pvmap_path}")
-        return mapped_cols
+        raise FileNotFoundError(f"PV map file not found at: {pvmap_path}")
 
     with open(pvmap_path, 'r', encoding='utf-8') as f:
         for line in f:

@@ -6,7 +6,7 @@
             "description": "Ensures active CRDC Algebra 1 StatVars have data up to at least 2024.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT LIKE '%_SchoolGrade7_%' AND StatVar NOT LIKE '%_SchoolGrade8_%' AND StatVar NOT IN ('Count_Student_Pass_Female_SchoolGrade11To12_Algebra1', 'Count_Student_Pass_Male_SchoolGrade11To12_Algebra1', 'Count_Student_Pass_Female_SchoolGrade9To10_Algebra1', 'Count_Student_Pass_Male_SchoolGrade9To10_Algebra1', 'Count_Student_Pass_Male_SchoolGrade7To8_Algebra1', 'Count_Student_Pass_Female_SchoolGrade7To8_Algebra1', 'Count_Student_EnrolledInEducationOrTraining_Female_SchoolGrade7To8_Algebra1', 'Count_Student_EnrolledInEducationOrTraining_Male_SchoolGrade7To8_Algebra1')",
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE NOT regexp_matches(StatVar, '_SchoolGrade[78]_|^Count_Student_(Pass_(Female|Male)_SchoolGrade(7To8|9To10|11To12)|EnrolledInEducationOrTraining_(Female|Male)_SchoolGrade7To8)_Algebra1$')",
                 "condition": "MaxDate >= '2024' AND total_svs > 0"
             }
         },
