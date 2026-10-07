@@ -38,8 +38,7 @@ POSSIBLE_DATA_COLUMNS = [
 # Excluding the unwanted columns.
 EXCLUDE_DATA_COLUMNS = [
     "Individualized Education Program Students", r'\(Includes AE\)',
-    "Phone Number", "State Agency ID", "State Name",
-    r"Student Support Services Staff \(w/o Psychology\)"
+    "Phone Number", "State Agency ID", "State Name"
 ]
 # Considering the required columns for Place Data.
 POSSIBLE_PLACE_COLUMNS = [
