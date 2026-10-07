@@ -854,8 +854,8 @@ def trigger_staging_ingestion(**context) -> dict[str, Any]:
     return res
 
 
-@task(task_id="ingest_prod", trigger_rule=TriggerRule.NONE_FAILED)
-def ingest_prod(**context) -> dict[str, Any]:
+@task(task_id="trigger_prod_ingestion", trigger_rule=TriggerRule.NONE_FAILED)
+def trigger_prod_ingestion(**context) -> dict[str, Any]:
     """Triggers fire-and-forget prod Spanner ingestion."""
     cfg = resolve_workflow_context(context)
     ti = context.get("ti")
@@ -863,11 +863,14 @@ def ingest_prod(**context) -> dict[str, Any]:
     staging_res = ti.xcom_pull(
         task_ids="trigger_staging_ingestion") if ti else None
 
+    def _skip_prod(message: str) -> None:
+        res = {"status": "SKIPPED", "message": message}
+        if ti:
+            ti.xcom_push(key="return_value", value=res)
+        raise AirflowSkipException(f"Production ingestion skipped: {message}")
+
     if isinstance(version_res, dict) and version_res.get("status") == "SKIPPED":
-        return {
-            "status": "SKIPPED",
-            "message": version_res.get("message", "Import version skipped"),
-        }
+        _skip_prod(version_res.get("message", "Import version skipped"))
 
     # Check if an upstream golden test verification or pre-prod gate reported failure
     for gate_task_id in ("verify_golden_tests", "verify_schema_golden_gate",
@@ -888,7 +891,7 @@ def ingest_prod(**context) -> dict[str, Any]:
     if cfg["skipProdIngestion"]:
         logging.info(
             "skipProdIngestion is True; skipping production ingestion.")
-        return {"status": "SKIPPED", "message": "Production ingestion skipped"}
+        _skip_prod("Production ingestion skipped")
 
     if not cfg["skipStagingIngestion"] and (
             not isinstance(staging_res, dict) or staging_res.get("status")
@@ -896,18 +899,17 @@ def ingest_prod(**context) -> dict[str, Any]:
         logging.info(
             "Staging ingestion was not triggered or was skipped; skipping production ingestion."
         )
-        return {
-            "status":
-                "SKIPPED",
-            "message":
-                "Staging was not executed; skipping production ingestion."
-        }
+        _skip_prod("Staging was not executed; skipping production ingestion.")
 
     import_entry = version_res.get("importEntry") if isinstance(
         version_res, dict) else None
-    return trigger_environment_ingestion(cfg,
-                                         env_suffix="",
-                                         import_entry=import_entry)
+    res = trigger_environment_ingestion(cfg,
+                                        env_suffix="",
+                                        import_entry=import_entry)
+    if res.get("status") == "SKIPPED":
+        _skip_prod(res.get("message", "Skipped"))
+
+    return res
 
 
 @task(task_id="workflow_summary", trigger_rule=TriggerRule.ALL_DONE)
@@ -931,7 +933,7 @@ def workflow_summary(**context) -> dict[str, Any]:
             ("golden_check", "verify_golden_tests"),
             ("human_approval", "await_human_approval"),
         ] if has_golden else []),
-        ("prod", "ingest_prod"),
+        ("prod", "trigger_prod_ingestion"),
     ]
     results = {
         name:
@@ -961,9 +963,9 @@ def workflow_summary(**context) -> dict[str, Any]:
         f"{k} ({v.get('status')})" for k, v in results.items()
         if isinstance(v, dict) and v.get("status") in ("FAILURE", "FAILED")
     ]
-    if not failed and ti is not None and (dag_task_ids is None or
-                                          "ingest_prod" in dag_task_ids):
-        if ti.xcom_pull(task_ids="ingest_prod") is None:
+    if not failed and ti is not None and (
+            dag_task_ids is None or "trigger_prod_ingestion" in dag_task_ids):
+        if ti.xcom_pull(task_ids="trigger_prod_ingestion") is None:
             failed.append("prod (upstream_failed or failed)")
     if failed:
         error_msg = f"Workflow failed in upstream stage(s): {', '.join(dict.fromkeys(failed))}"
@@ -1138,7 +1140,7 @@ def build_dag(
         batch_task = run_import_job(import_name=import_name)
         version_task = update_import_version()
         staging_task = trigger_staging_ingestion()
-        prod_task = ingest_prod()
+        prod_task = trigger_prod_ingestion()
         summary_task = workflow_summary()
 
         pipeline: list[Any] = [
