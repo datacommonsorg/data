@@ -1,0 +1,14 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_latest_date_freshness",
+            "description": "Asserts the latest observation date reaches at least 2024 for CDC WONDER single-race mortality data.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year FROM stats",
+                "condition": "latest_year >= 2024"
+            }
+        }
+    ]
+}
