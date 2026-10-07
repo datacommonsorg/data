@@ -46,6 +46,6 @@ IMPORT_AUTOMATION_WORKFLOW_ID = os.environ.get('IMPORT_AUTOMATION_WORKFLOW_NAME'
 AIRFLOW_WEB_SERVER_URL = os.environ.get('AIRFLOW_WEB_SERVER_URL', '')
 AIRFLOW_DEFAULT_DAG_ID = os.environ.get(
     'AIRFLOW_DEFAULT_DAG_ID',
-    'manual_refresh'
+    'ManualRefresh'
 )
 AIRFLOW_IAP_CLIENT_ID = os.environ.get('AIRFLOW_IAP_CLIENT_ID', '')
