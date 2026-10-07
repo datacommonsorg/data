@@ -39,9 +39,7 @@ from download_config import YEAR_PAYLOAD, YEAR_URL
 from download_files_details import DEFAULT_COLUMNS_SELECTED
 from download_files_details import DISTRICT_COLUMNS
 from download_files_details import KEY_COLUMNS_DISTRICT
-from download_files_details import KEY_COLUMNS_PRIVATE
 from download_files_details import KEY_COLUMNS_PUBLIC
-from download_files_details import PRIVATE_COLUMNS
 from download_files_details import PUBLIC_COLUMNS
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -52,7 +50,7 @@ import file_util
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_enum("import_name", None,
-                  ["PublicSchool", "PrivateSchool", "District"],
+                  ["PublicSchool", "District"],
                   "Import name for which input files to be downloaded")
 flags.DEFINE_list("years_to_download", None,
                   "Years for which file has to be downloaded")
@@ -203,9 +201,7 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
         logging.info(f"API success for downloading file for year {year}")
 
         base_extract_parent_dir = ""
-        if _FLAGS.import_name == "PrivateSchool":
-            base_extract_parent_dir = "private_school/input_files"
-        elif _FLAGS.import_name == "District":
+        if _FLAGS.import_name == "District":
             base_extract_parent_dir = "school_district/input_files"
         elif _FLAGS.import_name == "PublicSchool":
             base_extract_parent_dir = "public_school/input_files"
@@ -268,14 +264,11 @@ def main(_):
     if school == "PublicSchool":
         primary_key = KEY_COLUMNS_PUBLIC
         column_names = PUBLIC_COLUMNS
-    elif school == "PrivateSchool":
-        primary_key = KEY_COLUMNS_PRIVATE
-        column_names = PRIVATE_COLUMNS
     elif school == "District":
         primary_key = KEY_COLUMNS_DISTRICT
         column_names = DISTRICT_COLUMNS
 
-        data = {}
+    data = {}
     try:
         with file_util.FileIO(_FLAGS.config_file, 'r') as f:
             data = json.load(f)

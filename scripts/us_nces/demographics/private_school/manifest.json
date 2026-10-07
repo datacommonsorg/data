@@ -5,31 +5,57 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+            "provenance_url": "https://nces.ed.gov/surveys/pss/pssdata.asp",
             "provenance_description": "US nces school data for private",
             "scripts": [
-                "run.sh",
-                "process.py"
+                "download.py",
+                "process.py --mode=place"
             ],
             "source_files": [
                 "gcs_folder/input_files/*/*.csv"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "gcs_folder/output_files/us_nces_demographics_private_school.tmcf",
-                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_private_school.csv"
-                },
-                {
                     "template_mcf": "gcs_folder/output_place/us_nces_demographics_private_place.tmcf",
                     "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_private_place.csv"
                 }
             ],
-            "cron_schedule": "30 3 1 3,6,9,12 *",
+            "cron_schedule": "30 4 3 3,6,9,12 *",
             "resource_limits": {
                 "cpu": 32,
-                "memory": 512,
+                "memory": 128,
+                "disk": 300
+            }
+        },
+        {
+            "import_name": "NCES_PrivateSchoolStats",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nces.ed.gov/surveys/pss/pssdata.asp",
+            "provenance_description": "US nces school data for private stats",
+            "scripts": [
+                "download.py",
+                "process.py --mode=stats"
+            ],
+            "source_files": [
+                "gcs_folder/input_files/*/*.csv",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gcs_folder/output_files/us_nces_demographics_private_school.tmcf",
+                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_private_school.csv",
+                    "node_mcf": "gcs_folder/output_files/*.mcf"
+                }
+            ],
+            "cron_schedule": "30 7 10 3,6,9,12 *",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 32,
+                "memory": 128,
                 "disk": 300
             }
         }
     ]
-} 
+}
