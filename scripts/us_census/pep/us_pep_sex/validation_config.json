@@ -24,6 +24,15 @@
                 "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output/population_estimate_sex.csv"
             }
+        },
+        {
+            "rule_id": "check_date_freshness",
+            "description": "Verifies that all StatVars meet freshness requirements (within 2 years of current year).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT CAST(MIN(MaxDate) AS VARCHAR) AS latest_date FROM stats",
+                "condition": "latest_date IS NOT NULL AND CAST(SUBSTR(CAST(latest_date AS VARCHAR), 1, 4) AS INT) >= YEAR(CURRENT_DATE) - 2"
+            }
         }
     ]
 }

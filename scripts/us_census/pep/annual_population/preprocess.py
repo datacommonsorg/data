@@ -51,6 +51,8 @@ from absl import app
 from absl import logging
 from absl import flags
 from retry import retry
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 _FLAGS = flags.FLAGS
 
@@ -364,8 +366,8 @@ def _process_nationals_1990_1999(ip_file: str) -> pd.DataFrame:
         "Count_Person_Female"
     ]
     data_df.columns = df_cols
-    data_df = data_df[(data_df["Age"] == "All Age") &
-                      (data_df["Year"].str.startswith("July"))].reset_index(
+    data_df = data_df[(data_df["Age"] == "All Age")
+                      & (data_df["Year"].str.startswith("July"))].reset_index(
                           drop=True)
     data_df["Year"] = data_df["Year"].str.replace("July 1, ", "")
     data_df = data_df.drop(
@@ -493,9 +495,8 @@ def _process_nationals_2029(file_path: str) -> pd.DataFrame:
     unpivot_cols = ["2022", "2023"]
     # extend df_cols & unpivot_cols with all years > 2023
     newly_added_years = [
-        str(x)
-        for x in data_df.columns.to_list()
-        if isinstance(x, int) and x > 2023
+        str(int(x)) for x in data_df.columns
+        if isinstance(x, (int, float)) and not pd.isna(x) and int(x) > 2023
     ]
     df_cols.extend(newly_added_years)
     unpivot_cols.extend(newly_added_years)
@@ -548,15 +549,15 @@ def _process_states_2029(file_path: str) -> pd.DataFrame:
             header=0).iloc[2:3].values.flatten().tolist()
         if year_column_row:
             newly_added_years = [
-                str(int(x))
-                for x in year_column_row
-                if isinstance(x, float) and x > 2023
+                str(int(x)) for x in year_column_row
+                if isinstance(x, (int,
+                                  float)) and not pd.isna(x) and int(x) > 2023
             ]
             df_cols.extend(newly_added_years)
             unpivot_cols.extend(newly_added_years)
-    except:
-        # this error can be ignored
-        pass
+    except (ValueError, IndexError, KeyError, TypeError) as e:
+        logging.warning(
+            f"Could not extract dynamic year columns from {file_path}: {e}")
     data_df = _load_data_df(path=file_path, file_format="xlsx", header=8)
     data_df.columns = df_cols
 
@@ -850,7 +851,8 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
                         data[1] = "06000"
                     loc = "geoId/" + f"{int(data[0]):02d}" \
                                    + f"{int(data[1]):05d}"
-                    for year, val in dict(zip(cols, data[-len(cols):])).items():
+                    for year, val in dict(zip(cols,
+                                              data[-len(cols):])).items():
                         outfile.write(f"{year},{loc},{val}\n")
         data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
@@ -999,7 +1001,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                 _process_nationals_2010_2020(file, op_file)
                 data_df = _load_data_df(op_file, "csv", 0)
                 os.remove(op_file)
-            elif "NST-EST2023-POPCHG2020_2023.csv" in file:
+            elif re.search(r"NST-EST\d{4}-POPCHG2020_\d{4}\.csv", file_name):
                 _process_nationals_2020_2029(file, op_file)
                 data_df = _load_data_df(op_file, "csv", 0)
                 os.remove(op_file)
@@ -1036,7 +1038,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                 county_df = _process_counties(file)
                 data_df = pd.concat([nat_df, county_df])
             elif file_name in ["e7079co.txt", "99c8_00.txt"
-                              ] or "co-est" in file_name:
+                               ] or "co-est" in file_name:
                 data_df = _process_counties(file)
             elif file_name in [
                     'su-99-7_us.txt', "sub-est2010-alt.csv",
@@ -1075,6 +1077,23 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         logging.fatal("No files were successfully processed.")
 
 
+def _create_retry_session() -> requests.Session:
+    """Creates a requests Session configured with retry and backoff for transient errors."""
+    session = requests.Session()
+    session.headers.update({'User-Agent': 'Mozilla/5.0'})
+    retries = Retry(
+        total=5,
+        backoff_factor=2,
+        status_forcelist=[429, 500, 502, 503, 504, 520],
+        allowed_methods=["HEAD", "GET"],
+        respect_retry_after_header=True,
+    )
+    adapter = HTTPAdapter(max_retries=retries)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
 def add_future_year_urls():
     """ This method will generate future URLs specified in the urls_to_scan object.
         If valid URL, it will append to the _FILES_TO_DOWNLOAD global variable.
@@ -1083,33 +1102,64 @@ def add_future_year_urls():
         Returns: None
     """
     global _FILES_TO_DOWNLOAD
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
-        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
+        _FILES_TO_DOWNLOAD = json.load(input_file)
     urls_to_scan = [
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/cities/totals/sub-est{YEAR}.csv",
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/totals/co-est{YEAR}-alldata.csv",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/totals/NST-EST{YEAR}-POP.xlsx",
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/totals/NST-EST{YEAR}-POPCHG2020_{YEAR}.csv"
+        ("https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/cities/totals/sub-est{YEAR}.csv",
+         2025),
+        ("https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/totals/co-est{YEAR}-alldata.csv",
+         2025),
+        ("https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/totals/NST-EST{YEAR}-POP.xlsx",
+         2025),
+        ("https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/totals/NST-EST{YEAR}-POPCHG2020_{YEAR}.csv",
+         2023),
     ]
+    session = _create_retry_session()
     # This method will get the latest year URLs available for the years 2023 to 2030
-    for url in urls_to_scan:
+    for url, baseline_year in urls_to_scan:
+        found = False
         for future_year in range(2030, 2022, -1):
             url_to_check = url.format(YEAR=future_year)
             try:
-                logging.info(f"checking furute url if available {url_to_check}")
-                check_url = requests.head(url_to_check, allow_redirects=True)
-                if check_url.status_code == 200:
-                    logging.info(f"Furute url found {url_to_check}")
+                logging.info(
+                    f"checking future url if available {url_to_check}")
+                check_url = session.head(url_to_check,
+                                         allow_redirects=True,
+                                         timeout=30)
+                time.sleep(0.2)
+                content_type = check_url.headers.get('Content-Type', '')
+                if check_url.status_code == 200 and 'html' not in content_type.lower(
+                ):
+                    logging.info(f"Future url found {url_to_check}")
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    found = True
                     break
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+            except requests.RequestException as e:
+                logging.error(f"URL is not accessible {url_to_check}: {e}")
+        if not found:
+            fallback_url = url.format(YEAR=baseline_year)
+            logging.warning(
+                f"No future URL confirmed via HEAD probe for {url}; falling back to known baseline URL: {fallback_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
 
 
-@retry(tries=5, delay=5, backoff=5)
-def download_with_retry(url, file_name_to_save):
-    logging.info(f"Downloaded file : {file_name_to_save} - URL {url}")
-    return requests.get(url=url, stream=True)
+@retry(tries=5,
+       delay=5,
+       backoff=2,
+       exceptions=(requests.RequestException, ValueError))
+def download_with_retry(session: requests.Session, url: str, dest_path: str):
+    logging.info(f"Downloading file from URL: {url} -> {dest_path}")
+    with session.get(url, stream=True, timeout=120) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        if 'html' in content_type.lower():
+            raise ValueError(f"Server returned HTML error page for URL: {url}")
+        with open(dest_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=65536):
+                if chunk:
+                    f.write(chunk)
+    logging.info(f"Downloaded file: {dest_path}")
 
 
 def download_files():
@@ -1122,6 +1172,7 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     if not os.path.exists(_INPUT_FILE_PATH):
         os.makedirs(_INPUT_FILE_PATH)
+    session = _create_retry_session()
     try:
         for file_to_download in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
@@ -1132,26 +1183,26 @@ def download_files():
             else:
                 file_name_to_save = url.split('/')[-1]
             if 'file_path' in file_to_download:
-                if not os.path.exists(
-                        os.path.join(_INPUT_FILE_PATH,
-                                     file_to_download['file_path'])):
-                    os.makedirs(
-                        os.path.join(_INPUT_FILE_PATH,
-                                     file_to_download['file_path']))
-                file_name_to_save = file_to_download[
-                    'file_path'] + file_name_to_save
+                target_dir = os.path.join(_INPUT_FILE_PATH,
+                                          file_to_download['file_path'])
+                if not os.path.exists(target_dir):
+                    os.makedirs(target_dir, exist_ok=True)
+                file_name_to_save = os.path.join(file_to_download['file_path'],
+                                                 file_name_to_save)
 
-            response = download_with_retry(url, file_name_to_save)
-            if response.status_code == 200:
-                with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
-                          'wb') as f:
-                    f.write(response.content)
+            dest_path = os.path.join(_INPUT_FILE_PATH, file_name_to_save)
+            try:
+                download_with_retry(session, url, dest_path)
                 file_to_download['is_downloaded'] = True
-            else:
-                logging.error(
-                    f"Failed to download {url} with status code {response.status_code}"
-                )
+            except Exception as e:
+                logging.error(f"Failed to download {url}: {e}")
                 file_to_download['is_downloaded'] = False
+                if os.path.exists(dest_path):
+                    try:
+                        os.remove(dest_path)
+                    except OSError:
+                        pass
+            time.sleep(0.2)
         failed_downloads = [
             file_to_download['download_path']
             for file_to_download in _FILES_TO_DOWNLOAD
@@ -1173,7 +1224,8 @@ def main(_):
     # Defining Output file names
     data_file_path = os.path.join(_MODULE_DIR, OUTPUT_DIR)
     os.makedirs(data_file_path, exist_ok=True)
-    cleaned_csv_path = os.path.join(data_file_path, "usa_annual_population.csv")
+    cleaned_csv_path = os.path.join(data_file_path,
+                                    "usa_annual_population.csv")
     mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
