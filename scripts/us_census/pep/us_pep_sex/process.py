@@ -600,7 +600,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     current_year = int(max_year) + 1
     for year in range(2021, current_year):
-        if current_year < 2030:
+        if current_year <= 2030:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
