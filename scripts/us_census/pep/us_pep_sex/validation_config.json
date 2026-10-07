@@ -31,7 +31,7 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT MIN(MaxDate) AS latest_date FROM stats",
-                "condition": "CAST(SUBSTR(latest_date, 1, 4) AS INT) >= YEAR(CURRENT_DATE) - 2"
+                "condition": "latest_date IS NOT NULL AND CAST(SUBSTR(latest_date, 1, 4) AS INT) >= YEAR(CURRENT_DATE) - 2"
             }
         }
     ]

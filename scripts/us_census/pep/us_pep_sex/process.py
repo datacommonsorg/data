@@ -1223,9 +1223,10 @@ def add_future_year_urls():
                                     allow_redirects=True,
                                     timeout=15)
             time.sleep(0.2)
-            if response.status_code != 200:
+            content_type = response.headers.get('Content-Type', '')
+            if response.status_code != 200 or 'html' in content_type.lower():
                 logging.info(
-                    f"Skipping year {future_year}: National file not found (status code: {response.status_code})."
+                    f"Skipping year {future_year}: National file not found or is HTML (status code: {response.status_code})."
                 )
                 continue
         except requests.exceptions.RequestException as e:
@@ -1249,7 +1250,10 @@ def add_future_year_urls():
                                                  allow_redirects=True,
                                                  timeout=15)
                         time.sleep(0.1)
-                        if check_url.status_code == 200:
+                        content_type = check_url.headers.get(
+                            'Content-Type', '')
+                        if check_url.status_code == 200 and 'html' not in content_type.lower(
+                        ):
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
 
@@ -1270,7 +1274,9 @@ def add_future_year_urls():
                                              allow_redirects=True,
                                              timeout=15)
                     time.sleep(0.1)
-                    if check_url.status_code == 200:
+                    content_type = check_url.headers.get('Content-Type', '')
+                    if check_url.status_code == 200 and 'html' not in content_type.lower(
+                    ):
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
                         downloaded_year_urls.add(
