@@ -20,7 +20,7 @@
                     "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_public_place.csv"
                 }
             ],
-            "cron_schedule": "30 3 2 3,6,9,12 *",
+            "cron_schedule": "30 5 10 3,6,9,12 *",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 256,
@@ -49,7 +49,7 @@
                     "node_mcf": "gcs_folder/output_files/*.mcf"
                 }
             ],
-            "cron_schedule": "30 3 9 3,6,9,12 *",
+            "cron_schedule": "30 3 17 3,6,9,12 *",
             "validation_config_file": "validation_config.json",
             "config_override": {
                 "invoke_differ_tool": false

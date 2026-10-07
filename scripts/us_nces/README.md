@@ -53,16 +53,38 @@ python3 private_school/process.py --mode=stats
 python3 private_school/process.py --mode=all
 ```
 
-### Import Architecture & Scheduling
-Each domain is split into two independent Cloud Batch imports in `manifest.json`:
-- **Place Import**: Ingests new entities, names, locations, and place attributes (runs first).
-- **Stats Import**: Ingests statistical variables and time-series observations (scheduled 7 days after the Place import to ensure referential integrity).
+### Import Architecture & Staggered Cron Scheduling
+Each domain is split into independent Cloud Batch imports in `manifest.json`. Because newer NCES data introduces newly defined places (such as brand-new school districts and public schools) that are referenced across imports (e.g., `NCES_PublicSchool` places reference parent school districts via `schoolDistrict: dcs:geoId/sch...`, and Stats imports reference places via `observationAbout`), jobs are organized into **three staggered tiers spaced 1 week (7 days) apart**.
 
-| Domain | Place Import Name | Stats Import Name |
-|---|---|---|
-| Private School | `NCES_PrivateSchool` | `NCES_PrivateSchoolStats` |
-| Public School | `NCES_PublicSchool` | `NCES_PublicSchoolStats` |
-| School District | `NCES_SchoolDistrict` | `NCES_SchoolDistrictStats` |
+This 1-week buffer ensures that Data Commons Production ingests and indexes the newly defined Place nodes from Tier $N$ before Tier $N+1$ jobs execute, guaranteeing zero missing reference warnings (`check_missing_refs_count: PASSED`).
+
+#### Execution Tiers & Dependencies
+
+```text
+[TIER 1: Week 1 (Day 3)]               [TIER 2: Week 2 (Day 10, +7d)]             [TIER 3: Week 3 (Day 17, +14d)]
+========================               ==============================             ===============================
+
+NCES_SchoolDistrict (Place) ─────────► NCES_SchoolDistrictStats (Stats)
+(Defines: dcid:geoId/sch...)     │     (Refs: observationAbout: dcs:geoId/sch...)
+                                 │
+                                 └───► NCES_PublicSchool (Place) ───────────────► NCES_PublicSchoolStats (Stats)
+                                       (Defines: dcid:nces/... [Public])          (Refs: observationAbout: dcs:nces/...)
+                                       (Refs: schoolDistrict: dcs:geoId/sch...)
+
+NCES_PrivateSchool (Place) ──────────► NCES_PrivateSchoolStats (Stats)
+(Defines: dcid:nces/... [Private])     (Refs: observationAbout: dcs:nces/...)
+```
+
+#### Staggered Quarterly Cron Schedule (`manifest.json`)
+
+| Execution Tier | Import Name | Domain | Manifest Path | Staggered `cron_schedule` |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tier 1 (Week 1, Day 3)** | `NCES_SchoolDistrict` | School District (Place) | `school_district/manifest.json` | `"30 3 3 3,6,9,12 *"` |
+| **Tier 1 (Week 1, Day 3)** | `NCES_PrivateSchool` | Private School (Place) | `private_school/manifest.json` | `"30 4 3 3,6,9,12 *"` |
+| **Tier 2 (Week 2, Day 10)** | `NCES_SchoolDistrictStats` | School District (Stats) | `school_district/manifest.json` | `"30 3 10 3,6,9,12 *"` |
+| **Tier 2 (Week 2, Day 10)** | `NCES_PublicSchool` | Public School (Place) | `public_school/manifest.json` | `"30 5 10 3,6,9,12 *"` |
+| **Tier 2 (Week 2, Day 10)** | `NCES_PrivateSchoolStats` | Private School (Stats)* | `private_school/manifest.json` | `"30 7 10 3,6,9,12 *"` |
+| **Tier 3 (Week 3, Day 17)** | `NCES_PublicSchoolStats` | Public School (Stats) | `public_school/manifest.json` | `"30 3 17 3,6,9,12 *"` |
 
 
 #### Cleaned Data
