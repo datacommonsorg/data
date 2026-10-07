@@ -10,12 +10,12 @@
             }
         },
         {
-            "rule_id": "check_date_freshness_canonical_statvars",
-            "description": "Verifies that canonical StatVars meet the expected Census CBP release freshness (>= 2023)",
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that the latest non-projected WDI observation date meets expected freshness.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_Establishment_NAICSTransportationWarehousing', 'Count_Worker_NAICSRetailTrade')",
-                "condition": "MaxDate >= '2023'"
+                "query": "SELECT MAX(CAST(MaxDate AS INT)) AS max_year FROM stats WHERE MeasurementMethods LIKE '%WorldBank_WDI_CSV%' AND CAST(MaxDate AS INT) <= YEAR(CURRENT_DATE) HAVING COUNT(*) > 0",
+                "condition": "max_year >= 2024"
             }
         }
     ]
