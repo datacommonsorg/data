@@ -98,7 +98,7 @@ def download_crdc_files():
                 (category_name.lower() in base.lower() or
                  (year == 2015 and "CRDC 2015-16 School Data" in base and
                   "layout" not in base.lower()))):
-                if 'lea' in base.lower() and extension == '.xlsx':
+                if re.search(r'(^|[_\W])lea([_\W]|$)', base, re.IGNORECASE):
                     continue
 
                 clean_base = re.sub(r'[^a-zA-Z0-9]+', '_', base).lower()

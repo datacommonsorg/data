@@ -82,12 +82,18 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
         elif 'COMBOKEY' in df.columns:
             combokey = df['COMBOKEY'].astype(str).str.strip().str.zfill(12)
             df.insert(0, 'ncesid', combokey)
+        else:
+            raise ValueError(f"Cannot resolve 'ncesid' in {filename}")
+    else:
+        df['ncesid'] = df['ncesid'].astype(str).str.strip().str.zfill(12)
 
     # Ensure YEAR exists
     if 'YEAR' not in df.columns:
         survey_year = extract_survey_end_year(filename)
-        if survey_year > 0:
-            df.insert(1, 'YEAR', survey_year)
+        if survey_year <= 0:
+            raise ValueError(
+                f"Cannot resolve survey completion year for {filename}")
+        df.insert(1, 'YEAR', survey_year)
 
     # Filter columns dynamically: keep identifier columns + any column in pv_map
     keep_cols = [
