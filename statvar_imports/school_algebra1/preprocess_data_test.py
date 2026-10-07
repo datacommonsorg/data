@@ -76,6 +76,18 @@ class PreprocessDataTest(unittest.TestCase):
             finally:
                 preprocess_data._PROCESSED_DIR = orig_processed
 
+    def test_preprocess_dataframe_edge_case_ids(self):
+        df = pd.DataFrame({
+            'LEAID': ['100005.0', None, 'bad_id'],
+            'SCHID': ['870.0', '870', '870'],
+            'SCH_ALGENR_G0708_HI_M': ['12', '5', '3'],
+        })
+        mapped_cols = {'YEAR', 'ncesid', 'SCH_ALGENR_G0708_HI_M'}
+        result = preprocess_data.preprocess_dataframe(
+            df, 'crdc_2023-24_algebra_i.csv', mapped_cols)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result['ncesid'].iloc[0], '010000500870')
+
 
 if __name__ == '__main__':
     unittest.main()

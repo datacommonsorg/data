@@ -5,7 +5,7 @@
       "curator_emails": [
         "support@datacommons.org"
       ],
-      "provenance_url": "https://ocrdata.ed.gov/data",
+      "provenance_url": "https://civilrightsdata.ed.gov/data",
       "provenance_description": "This dataset from the Civil Rights Data Collection (CRDC) contains information about student enrollment and passing rates in Algebra 1 courses in US schools, disaggregated by grade level, race, gender, and other demographics.",
       "scripts": [
         "download_script.py",

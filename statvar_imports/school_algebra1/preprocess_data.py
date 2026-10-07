@@ -71,10 +71,12 @@ def extract_survey_end_year(filename: str) -> int:
 
 
 def _pad_id_series(series: pd.Series, width: int) -> pd.Series:
-    """Safely zero-pads non-empty, non-NaN string identifiers."""
-    cleaned = series.fillna('').astype(str).str.strip()
+    """Safely zero-pads non-empty, non-NaN numeric string identifiers."""
+    cleaned = (
+        series.fillna('').astype(str).str.strip().str.replace(
+            r'\.0$', '', regex=True))
     return cleaned.apply(
-        lambda x: x.zfill(width) if x and x.lower() != 'nan' else '')
+        lambda x: x.zfill(width) if x and x.isdigit() else '')
 
 
 def preprocess_dataframe(df: pd.DataFrame, filename: str,
@@ -93,6 +95,8 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
             raise ValueError(f"Cannot resolve 'ncesid' in {filename}")
     else:
         df['ncesid'] = _pad_id_series(df['ncesid'], 12)
+
+    df = df[df['ncesid'].str.len() == 12].copy()
 
     # Ensure YEAR exists
     if 'YEAR' not in df.columns:
