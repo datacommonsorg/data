@@ -569,12 +569,15 @@ def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
 def update_import_version_helper(cfg: dict[str, Any]) -> dict[str, Any]:
     """Updates import version once in prod import-helper-service and returns importEntry."""
     import_helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
+    comment = f"import-workflow:{cfg['runId']}"
+    if cfg.get("comment"):
+        comment = f"{comment} {cfg['comment']}"
     version_res = _make_http_post(
         f"{import_helper_url}/imports/version", {
             "imports": [cfg["importName"]],
-            "version": "STAGING",
-            "override": False,
-            "comment": f"import-workflow:{cfg['runId']}",
+            "version": cfg.get("version") or "STAGING",
+            "override": bool(cfg.get("overrideVersion", False)),
+            "comment": comment,
         })
 
     imports_res = version_res.get("imports", [])
@@ -802,6 +805,12 @@ def resolve_workflow_context(context: dict[str, Any],
             to_bool("dryRunIngestion"),
         "forceIngestion":
             to_bool("forceIngestion"),
+        "version":
+            get_val("version", "STAGING"),
+        "overrideVersion":
+            to_bool("overrideVersion") or to_bool("override"),
+        "comment":
+            get_val("comment", ""),
         "resources": {
             **DEFAULT_RESOURCES,
             **(get_val("resources")

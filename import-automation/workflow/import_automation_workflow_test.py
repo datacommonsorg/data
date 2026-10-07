@@ -501,6 +501,52 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
             },
         )
 
+    @patch('import_automation_workflow._make_http_post')
+    def test_update_import_version_with_conf_override(self, mock_post):
+        mock_post.return_value = {
+            'status':
+                'OK',
+            'message':
+                'Import: TestImport Version: 2026_10_06 Status: STAGING',
+            'imports': [{
+                'importName': 'scripts/test:TestImport',
+                'status': 'STAGING',
+                'latestVersion': 'gs://bucket/TestImport/2026_10_06/*.mcf*',
+            }],
+        }
+        dag_run = MagicMock()
+        dag_run.conf = {
+            'importName': 'scripts/test:TestImport',
+            'version': '2026_10_06',
+            'overrideVersion': True,
+            'comment': 'Manual validation',
+        }
+        dag_run.run_id = 'version_update__TestImport__2026_10_06'
+        context = {'dag_run': dag_run}
+
+        res = import_automation_workflow.update_import_version.function(
+            **context)
+        self.assertEqual(res['status'], 'STAGING')
+        self.assertEqual(
+            res['importEntry'],
+            {
+                'importName': 'TestImport',
+                'latestVersion': 'gs://bucket/TestImport/2026_10_06/*.mcf*',
+            },
+        )
+        mock_post.assert_called_once_with(
+            'https://import-helper-service-879489846695.us-central1.run.app/imports/version',
+            {
+                'imports': ['scripts/test:TestImport'],
+                'version':
+                    '2026_10_06',
+                'override':
+                    True,
+                'comment':
+                    'import-workflow:version_update__TestImport__2026_10_06 Manual validation',
+            },
+        )
+
 
 class E2EDagRunnerTest(unittest.TestCase):
 
