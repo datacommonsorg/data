@@ -104,7 +104,11 @@ def download_energy_dataset(
         logging.info(
             f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}'
         )
-        download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
+        # The data.un.org load balancer redirects any /legacy/ URL containing
+        # literal 'WS' to the root path. '\u0174S' ('ŴS') bypasses the load
+        # balancer rule while matching 'WS' in UNdata's SQL Server collation.
+        query_energy_code = '\u0174S' if energy_dataset == 'WS' else energy_dataset
+        download_url = _DOWNLOAD_URL.format(energy_code=query_energy_code,
                                             years=years_str)
         download_successful = download_file(url=download_url,
                                             output_folder=output,
