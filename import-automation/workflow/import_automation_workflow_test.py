@@ -33,6 +33,9 @@ class MockBaseSensorOperator:
         self.kwargs = kwargs
         self.downstream_list = []
         self.task_id = kwargs.get('task_id', 'sensor')
+        self.mode = kwargs.get('mode', 'poke')
+        self.poke_interval = kwargs.get('poke_interval', 60)
+        self.timeout = kwargs.get('timeout', 604800)
         if MockDAG.current_dag:
             MockDAG.current_dag.tasks.append(self)
 
@@ -102,6 +105,10 @@ sys.modules['airflow.sdk'] = mock_sdk
 sys.modules['airflow.exceptions'] = MagicMock()
 
 
+class MockAirflowException(Exception):
+    pass
+
+
 class MockAirflowFailException(Exception):
     pass
 
@@ -110,6 +117,7 @@ class MockAirflowSkipException(Exception):
     pass
 
 
+sys.modules['airflow.exceptions'].AirflowException = MockAirflowException
 sys.modules[
     'airflow.exceptions'].AirflowFailException = MockAirflowFailException
 sys.modules[
@@ -352,6 +360,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
             'trigger_staging_ingestion',
             'wait_staging_ingestion',
             'trigger_prod_ingestion',
+            'wait_prod_ingestion',
             'workflow_summary',
         ]
         for task_id in expected_tasks:
@@ -360,6 +369,11 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertNotIn('verify_golden_tests', tasks)
         self.assertNotIn('await_human_approval', tasks)
         self.assertNotIn('skipValidationJob', dag.params)
+
+        # Ensure wait/sensor tasks run in reschedule mode so they do not hold worker slots
+        self.assertEqual(tasks['run_import_job'].mode, 'reschedule')
+        self.assertEqual(tasks['wait_staging_ingestion'].mode, 'reschedule')
+        self.assertEqual(tasks['wait_prod_ingestion'].mode, 'reschedule')
 
         # Check downstream ordering
         self.assertIn(tasks['update_import_version'],
@@ -370,8 +384,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                       tasks['trigger_staging_ingestion'].downstream_list)
         self.assertIn(tasks['trigger_prod_ingestion'],
                       tasks['wait_staging_ingestion'].downstream_list)
-        self.assertIn(tasks['workflow_summary'],
+        self.assertIn(tasks['wait_prod_ingestion'],
                       tasks['trigger_prod_ingestion'].downstream_list)
+        self.assertIn(tasks['workflow_summary'],
+                      tasks['wait_prod_ingestion'].downstream_list)
 
     @patch('import_automation_workflow._run_cloud_run_job')
     def test_validation_job_and_batch_config(self, mock_run_cr_job):
@@ -546,6 +562,102 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                     'import-workflow:version_update__TestImport__2026_10_06 Manual validation',
             },
         )
+
+    @patch('import_automation_workflow.CloudBatchHook')
+    def test_cloud_batch_import_sensor_submit_reschedule_and_succeed(
+            self, mock_batch_hook_cls):
+        hook_mock = MagicMock()
+        conn_mock = MagicMock()
+        hook_mock.get_conn.return_value = conn_mock
+        mock_batch_hook_cls.return_value = hook_mock
+
+        not_found_err = Exception('404 Job not found')
+        running_job = MagicMock()
+        running_job.name = 'projects/p/locations/r/jobs/test-job-1'
+        running_job.status.state = 3  # RUNNING
+        running_job.create_time = None
+
+        succeeded_job = MagicMock()
+        succeeded_job.name = 'projects/p/locations/r/jobs/test-job-1'
+        succeeded_job.status.state = 4  # SUCCEEDED
+        succeeded_job.create_time = None
+
+        conn_mock.get_job.side_effect = [
+            not_found_err,
+            running_job,
+            succeeded_job,
+        ]
+        hook_mock.submit_batch_job.return_value = running_job
+
+        sensor = import_automation_workflow.CloudBatchImportSensor(
+            task_id='run_import_job',
+            import_name='scripts/test:TestImport',
+            mode='reschedule',
+            poke_interval=60,
+            timeout=604800,
+        )
+        context = {
+            'params': {
+                'importName': 'scripts/test:TestImport',
+                'jobId': 'test-job-1',
+                'projectId': 'p',
+                'region': 'r',
+            }
+        }
+
+        # Poke 1: Job does not exist -> submits job -> state RUNNING -> returns False
+        self.assertFalse(sensor.poke(context))
+        hook_mock.submit_batch_job.assert_called_once()
+        self.assertEqual(hook_mock.submit_batch_job.call_args[1]['job_name'],
+                         'test-job-1')
+
+        # Poke 2: Job exists and is RUNNING -> does not re-submit -> returns False
+        self.assertFalse(sensor.poke(context))
+        hook_mock.submit_batch_job.assert_called_once()
+
+        # Poke 3 via execute(): Job SUCCEEDED -> returns XCom result dict
+        res = sensor.execute(context)
+        self.assertEqual(res['status'], 'SUCCESS')
+        self.assertEqual(res['jobId'], 'test-job-1')
+        self.assertEqual(res['name'], 'projects/p/locations/r/jobs/test-job-1')
+        self.assertIn('executionTime', res)
+
+    @patch('import_automation_workflow._report_import_failure')
+    @patch('import_automation_workflow.CloudBatchHook')
+    def test_cloud_batch_import_sensor_failure_reports_and_raises(
+            self, mock_batch_hook_cls, mock_report_failure):
+        hook_mock = MagicMock()
+        conn_mock = MagicMock()
+        hook_mock.get_conn.return_value = conn_mock
+        mock_batch_hook_cls.return_value = hook_mock
+
+        failed_job = MagicMock()
+        failed_job.name = 'projects/p/locations/r/jobs/test-job-fail'
+        failed_job.status.state = 5  # FAILED
+        ev = MagicMock()
+        ev.description = 'Task exited with non-zero code 1'
+        failed_job.status.status_events = [ev]
+        failed_job.create_time = None
+        conn_mock.get_job.return_value = failed_job
+
+        sensor = import_automation_workflow.CloudBatchImportSensor(
+            task_id='run_import_job',
+            import_name='scripts/test:TestImport',
+        )
+        context = {
+            'params': {
+                'importName': 'scripts/test:TestImport',
+                'jobId': 'test-job-fail',
+                'projectId': 'p',
+                'region': 'r',
+            }
+        }
+
+        with self.assertRaises(MockAirflowException) as ctx:
+            sensor.poke(context)
+        self.assertIn('FAILED', str(ctx.exception))
+        mock_report_failure.assert_called_once()
+        hook_mock.submit_batch_job.assert_not_called()
 
 
 class E2EDagRunnerTest(unittest.TestCase):
