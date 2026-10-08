@@ -34,13 +34,15 @@ python3 census_api_data_downloader.py \
   --all_summaries \
   --output_path=/tmp/census_download \
   --api_key=<YOUR_API_KEY>
+
+cd ../../..
 ```
 
 Copy the generated `.zip` file into `S2704/` (or `S2704/input_data/`):
 
 ```bash
 mkdir -p scripts/us_census/acs5yr/subject_tables/S2704/input_data
-cp /tmp/census_download/S2704.zip scripts/us_census/acs5yr/subject_tables/S2704/input_data/S2704.zip
+cp /tmp/census_download/acs/acs5/subject/S2704/S2704.zip scripts/us_census/acs5yr/subject_tables/S2704/input_data/S2704.zip
 ```
 
 ## Process Step
@@ -58,6 +60,8 @@ python3 process.py \
   --spec_path=S2704/S2704_spec.json \
   --input_path=S2704/input_data/S2704.zip \
   --output_dir=S2704
+
+cd ../../..
 ```
 
 - `--option=all`: Runs both column map generation (`column_map.json`) and observation processing (`S2704_cleaned.csv`, `S2704_output.mcf`, `S2704_output.tmcf`, `S2704_summary.json`). You can also run `--option=colmap` followed by `--option=process` sequentially.
@@ -72,6 +76,7 @@ Verify `S2704_spec.json` and the generated test artifacts in `S2704/testdata/`:
 ```bash
 cd scripts/us_census/acs5yr
 python3 -m unittest subject_tables/subject_table_test.py
+cd ../../..
 ```
 
 ### 2. Run Data Commons Import Tool Linter
