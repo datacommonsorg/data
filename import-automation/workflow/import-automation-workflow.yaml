@@ -19,16 +19,10 @@ main:
           - forceIngestion: ${string(default(map.get(args, "forceIngestion"), false)) == "true"}
           - prodDenylist:
               "Brazil_RuralDevelopmentProgram": true
-              "CDC500": true
-              "CDC_OzoneCounty": true
-              "CDC_PM25County": true
-              "CensusCountyBusinessPatterns": true
               "CensusSAHIE": true
               "EIA_Electricity": true
               "EPA_EJSCREEN": true
               "EPA_GHGRP": true
-              "FARS_CrashData": true
-              "FBIGovCrime": true
               "FireWFIGS": true
               "INPE_Fire_Event_Count": true
               "IndiaNSS_HealthAilments": true
@@ -37,15 +31,12 @@ main:
               "NCES_PrivateSchool": true
               "NCES_PublicSchool": true
               "NCES_SchoolDistrict": true
-              "NOAA_GPCC_StandardardizedPrecipitationIndex": true
               "NOAA_GlobalForecastSystem": true
               "OECDRegionalDemography_Population": true
               "UNEnergy": true
-              "USCensusPEP_AgeSexRaceHispanicOrigin": true
               "USDA_AgricultureCensus": true
               "USFed_ConstantMaturityRates_Test": true
               "USNationalPrisonerStatistics": true
-              "WorldBankDatasets": true
           - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}
           - isProdDenylisted: ${default(map.get(prodDenylist, importName), false) or default(map.get(prodDenylist, shortImportName), false)}
           - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), false)) == "true"}

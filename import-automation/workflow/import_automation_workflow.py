@@ -201,16 +201,10 @@ def normalize_batch_resources(
 
 PROD_DENYLIST = frozenset({
     "Brazil_RuralDevelopmentProgram",
-    "CDC500",
-    "CDC_OzoneCounty",
-    "CDC_PM25County",
-    "CensusCountyBusinessPatterns",
     "CensusSAHIE",
     "EIA_Electricity",
     "EPA_EJSCREEN",
     "EPA_GHGRP",
-    "FARS_CrashData",
-    "FBIGovCrime",
     "FireWFIGS",
     "INPE_Fire_Event_Count",
     "IndiaNSS_HealthAilments",
@@ -219,15 +213,12 @@ PROD_DENYLIST = frozenset({
     "NCES_PrivateSchool",
     "NCES_PublicSchool",
     "NCES_SchoolDistrict",
-    "NOAA_GPCC_StandardardizedPrecipitationIndex",
     "NOAA_GlobalForecastSystem",
     "OECDRegionalDemography_Population",
     "UNEnergy",
-    "USCensusPEP_AgeSexRaceHispanicOrigin",
     "USDA_AgricultureCensus",
     "USFed_ConstantMaturityRates_Test",
     "USNationalPrisonerStatistics",
-    "WorldBankDatasets",
 })
 
 
