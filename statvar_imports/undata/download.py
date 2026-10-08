@@ -64,17 +64,17 @@ def retry_method(url, headers=HEADERS):
     if not zipfile.is_zipfile(io.BytesIO(response.content)):
         snippet = response.content[:300]
         logging.warning(
-            f"Downloaded content is not a valid ZIP file! HTTP {response.status_code}, "
+            f"Downloaded content from {url} is not a valid ZIP file! HTTP {response.status_code}, "
             f"Content-Type: {response.headers.get('content-type')}, "
             f"Length: {len(response.content)} bytes. Snippet: {snippet}")
-        raise zipfile.BadZipFile("Downloaded content is not a valid ZIP file.")
+        raise zipfile.BadZipFile(f"Downloaded content from {url} is not a valid ZIP file.")
     return response
 
 # Function to download and save the ZIP file
 def download_file():
-    logging.info("Starting download...")
     config = read_config_file()
     UN_ZIP_URL = config["DEFAULT"]["UN_ZIP_URL"]
+    logging.info(f"Starting download from {UN_ZIP_URL}...")
     zip_path = os.path.join(OUTPUT_DIR, "UNdata_Export.zip")
     
     try:
@@ -82,17 +82,17 @@ def download_file():
         with open(zip_path, "wb") as f:
             f.write(response.content)
         
-        logging.info(f"Downloaded file saved to {zip_path}")
+        logging.info(f"Downloaded file from {UN_ZIP_URL} saved to {zip_path}")
         return zip_path
     
     except requests.exceptions.RequestException as e:
-        logging.fatal(f"Failed to download file after retries: {e}")
+        logging.fatal(f"Failed to download file from {UN_ZIP_URL} after retries: {e}")
     
     except zipfile.BadZipFile as e:
-        logging.fatal(f"Failed to obtain a valid ZIP file after retries: {e}")
+        logging.fatal(f"Failed to obtain a valid ZIP file from {UN_ZIP_URL} after retries: {e}")
     
     except Exception as e:
-        logging.fatal(f"An unexpected error occurred during file download: {e}")
+        logging.fatal(f"An unexpected error occurred during file download from {UN_ZIP_URL}: {e}")
 
 # Function to extract and process the CSV file from ZIP
 def extract_and_process(zip_path):
