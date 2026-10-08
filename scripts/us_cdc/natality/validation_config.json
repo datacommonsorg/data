@@ -1,0 +1,23 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_latest_date_freshness",
+            "description": "Asserts the latest observation date reaches at least 2022 and freshness lag is <= 2 years for Count_BirthEvent_LiveBirth.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT CAST(MaxDate AS INTEGER) AS latest_year, date_part('year', current_date) - CAST(MaxDate AS INTEGER) AS lag_years FROM stats WHERE StatVar = 'Count_BirthEvent_LiveBirth'",
+                "condition": "latest_year >= 2022 AND lag_years <= 2"
+            }
+        },
+        {
+            "rule_id": "check_scoped_date_consistency_active_statvars",
+            "description": "Asserts active maternal and infant health StatVars share a uniform latest observation date (1 for country, 9 for state and county).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT MaxDate) AS distinct_dates, COUNT(DISTINCT StatVar) AS active_statvar_count FROM stats WHERE StatVar IN ('Count_BirthEvent_LiveBirth', 'Mean_MothersAge_BirthEvent_LiveBirth', 'Mean_OeGestationalAge_BirthEvent_LiveBirth', 'Mean_LmpGestationalAge_BirthEvent_LiveBirth', 'Mean_BirthWeight_BirthEvent_LiveBirth', 'Mean_PrePregnancyBMI_BirthEvent_LiveBirth', 'Mean_PrenatalVisitCount_BirthEvent_LiveBirth', 'Mean_IntervalSinceLastBirth_BirthEvent_LiveBirth', 'Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth')",
+                "condition": "distinct_dates = 1 AND active_statvar_count IN (1, 9)"
+            }
+        }
+    ]
+}

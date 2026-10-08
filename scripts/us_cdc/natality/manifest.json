@@ -1,0 +1,37 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDCWonderNatality",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://wonder.cdc.gov/natality.html",
+            "provenance_description": "CDC Wonder Natality data including births, mother demographics, and pregnancy outcomes across country, state, and county levels.",
+            "scripts": [
+                "download.py",
+                "process.py"
+            ],
+            "source_files": [
+                "input_files/*",
+                "manifest.json",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/country.tmcf",
+                    "cleaned_csv": "output/country.csv"
+                },
+                {
+                    "template_mcf": "output/state.tmcf",
+                    "cleaned_csv": "output/state.csv"
+                },
+                {
+                    "template_mcf": "output/county.tmcf",
+                    "cleaned_csv": "output/county.csv"
+                }
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 0 1 6 *"
+        }
+    ]
+}
