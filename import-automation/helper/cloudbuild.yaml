@@ -34,7 +34,7 @@ substitutions:
   _DEPLOY_SERVICES: 'true'
   _LOCATION: 'us-central1'
   _BQ_DATASET_ID: 'import_automation'
-  _AIRFLOW_WEB_SERVER_URL: 'https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com'
+  _AIRFLOW_WEB_SERVER_URL: 'https://030069cf9df9415bbd743bf7e18a6a65-dot-us-central1.composer.googleusercontent.com'
   # Test environment (datcom-ci)
   _TEST_PROJECT_ID: 'datcom-ci'
   _TEST_PROJECT_NUMBER: '879489846695'
