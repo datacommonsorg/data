@@ -287,6 +287,9 @@ class CdcWonderSingleRaceDownloader:
             logging.info("Detected available years on CDC WONDER: %s",
                          self.available_years)
         else:
+            logging.warning(
+                "Year select element 'F_D158.V1' not found in CDC WONDER form. "
+                "Dynamic year filtering disabled.")
             self.available_years = []
 
         # Extract pre-populated query parameters

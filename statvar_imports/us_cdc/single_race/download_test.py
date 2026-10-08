@@ -49,8 +49,9 @@ class DownloadTest(unittest.TestCase):
         years = download.parse_year_list("2024")
         self.assertEqual(years, ["2024"])
 
+    @mock.patch.object(download.logging, "warning")
     @mock.patch.object(download.requests, "Session")
-    def test_init_session_success(self, mock_session_cls):
+    def test_init_session_success(self, mock_session_cls, mock_warning):
         """Tests successful session handshake and parameter extraction."""
         mock_session = mock.MagicMock()
         mock_session_cls.return_value = mock_session
@@ -92,6 +93,10 @@ class DownloadTest(unittest.TestCase):
         self.assertIn("controller/datarequest/D158;jsessionid=TEST1234",
                       downloader.action_url)
         self.assertTrue(len(downloader.base_post_data) > 0)
+        self.assertEqual(downloader.available_years, [])
+        mock_warning.assert_called_once_with(
+            "Year select element 'F_D158.V1' not found in CDC WONDER form. "
+            "Dynamic year filtering disabled.")
         self.assertEqual(mock_session.post.call_count, 1)
 
     @mock.patch.object(download.requests, "Session")
