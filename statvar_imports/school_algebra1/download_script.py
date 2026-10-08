@@ -40,7 +40,7 @@ def get_survey_years():
     """Returns the list of CRDC survey start years to check dynamically."""
     # CRDC followed odd-year reporting up to 2017, then 2020 onward annually/biennially
     odd_years = list(range(_START_YEAR, 2018, 2))
-    recent_years = list(range(2020, _CURRENT_YEAR + 2, 1))
+    recent_years = list(range(2020, _CURRENT_YEAR + 1, 1))
     return odd_years + recent_years
 
 

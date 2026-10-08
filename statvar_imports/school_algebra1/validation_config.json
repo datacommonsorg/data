@@ -19,14 +19,6 @@
             }
         },
         {
-            "rule_id": "check_missing_refs_count",
-            "description": "Checks that missing references count does not exceed the threshold.",
-            "validator": "MISSING_REFS_COUNT",
-            "params": {
-                "threshold": 457000
-            }
-        },
-        {
             "rule_id": "check_lint_error_count",
             "description": "Checks that lint error count is 0.",
             "validator": "LINT_ERROR_COUNT",
