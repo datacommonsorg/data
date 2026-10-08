@@ -27,9 +27,9 @@
             "validation_config_file": "validation_config.json",
             "user_script_timeout": 14400,
             "resource_limits": {
-                "cpu": 1,
-                "memory": 2,
-                "disk": 30
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
             }
         }
     ]
