@@ -51,7 +51,7 @@ WITH cdc_sv AS (
       ELSE 'Count_Person'
     END AS pop_statvar
   FROM `datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries`
-  WHERE provenance = 'dc/base/CDC500'
+  WHERE JSON_VALUE(facet.provenance) = 'dc/base/CDC500'
     AND variable_measured LIKE 'Percent_%'
     AND variable_measured NOT IN (
       'Percent_Person_50To74Years_Female_ReceivedMammography',
@@ -68,14 +68,14 @@ svo_percent AS (
     O.entity1 AS observation_about,
     O.date AS observation_date,
     O.value AS percent,
-    T.measurement_method AS measurement_method,
+    JSON_VALUE(T.facet.measurementMethod) AS measurement_method,
     cdc_sv.pop_statvar
   FROM `datcom-store.spanner_dc_graph_prod_snap_latest.Observation` AS O
   INNER JOIN `datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries` AS T
     ON O.variable_measured = T.variable_measured
     AND O.entity1 = T.entity1
     AND O.facet_id = T.facet_id
-    AND T.provenance = 'dc/base/CDC500'
+    AND JSON_VALUE(T.facet.provenance) = 'dc/base/CDC500'
   INNER JOIN cdc_sv
     ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
@@ -96,7 +96,9 @@ svo_percent AS (
     )
     AND SAFE_CAST(O.value AS FLOAT64) IS NOT NULL
   QUALIFY ROW_NUMBER() OVER (
-    PARTITION BY O.variable_measured, O.entity1, O.date, T.measurement_method
+    PARTITION BY
+      O.variable_measured, O.entity1, O.date,
+      JSON_VALUE(T.facet.measurementMethod)
     ORDER BY O.last_update_timestamp DESC, O.facet_id DESC
   ) = 1
 ),
@@ -112,7 +114,7 @@ svo_count AS (
     ON O.variable_measured = T.variable_measured
     AND O.entity1 = T.entity1
     AND O.facet_id = T.facet_id
-    AND T.provenance = 'dc/base/CensusACS5YearSurvey'
+    AND JSON_VALUE(T.facet.provenance) = 'dc/base/CensusACS5YearSurvey'
   INNER JOIN (
     SELECT DISTINCT pop_statvar
     FROM cdc_sv

@@ -40,6 +40,7 @@ def _prepare_duckdb_query(sql: str) -> str:
     adapted = adapted.replace('SAFE_CAST(', 'TRY_CAST(')
     adapted = adapted.replace('AS FLOAT64)', 'AS DOUBLE)')
     adapted = adapted.replace("r'", "'")
+    adapted = re.sub(r'JSON_VALUE\(([^)]+)\)', r'\1', adapted)
     return adapted
 
 
@@ -57,8 +58,16 @@ class CDC500StateProcessTest(unittest.TestCase):
         query = process.QUERY
         self.assertIn("spanner_dc_graph_prod_snap_latest.TimeSeries", query)
         self.assertIn("spanner_dc_graph_prod_snap_latest.Observation", query)
-        self.assertIn("dc/base/CDC500", query)
-        self.assertIn("dc/base/CensusACS5YearSurvey", query)
+        self.assertIn("JSON_VALUE(facet.provenance) = 'dc/base/CDC500'", query)
+        self.assertIn("JSON_VALUE(T.facet.provenance) = 'dc/base/CDC500'",
+                      query)
+        self.assertIn(
+            "JSON_VALUE(T.facet.provenance) = 'dc/base/CensusACS5YearSurvey'",
+            query)
+        self.assertIn("JSON_VALUE(T.facet.measurementMethod)", query)
+        self.assertNotIn("WHERE provenance =", query)
+        self.assertNotIn("T.provenance", query)
+        self.assertNotIn("T.measurement_method", query)
         self.assertIn("SAFE_DIVIDE", query)
         self.assertIn("SAFE_CAST", query)
         self.assertIn("SAFE_CAST(O.value AS FLOAT64) IS NOT NULL", query)
@@ -127,11 +136,15 @@ class CDC500StateProcessTest(unittest.TestCase):
 
         rows = [{
             'variable_measured': sv,
-            'provenance': 'dc/base/CDC500'
+            'facet': {
+                'provenance': 'dc/base/CDC500'
+            }
         } for sv, _ in test_cases]
         rows.extend([{
             'variable_measured': sv,
-            'provenance': 'dc/base/CDC500'
+            'facet': {
+                'provenance': 'dc/base/CDC500'
+            }
         } for sv in excluded_statvars])
         ts_df = pd.DataFrame(rows)
         con.register('TimeSeries', ts_df)
@@ -167,43 +180,55 @@ class CDC500StateProcessTest(unittest.TestCase):
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0666000',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0667000',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f2',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0666000',
                 'facet_id': 'f2',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0667000',
                 'facet_id': 'f2',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
         ])
         obs_df = pd.DataFrame([
@@ -284,49 +309,61 @@ class CDC500StateProcessTest(unittest.TestCase):
 
         # Test 2016 (county included), 2017 non-BP (county included),
         # 2017 BP (county excluded, 13-char CDP used),
-        # 2018 non-BP (county excluded, 13-char CDP used), and empty measurement_method.
+        # 2018 non-BP (county excluded, 13-char CDP used), and empty measurementMethod.
         ts_df = pd.DataFrame([
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/15003',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': ''
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/1571550',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithHighBloodPressure',
                 'entity1': 'geoId/15003',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithHighBloodPressure',
                 'entity1': 'geoId/1571550',
                 'facet_id': 'f1',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/15003',
                 'facet_id': 'f2',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/1571550',
                 'facet_id': 'f2',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
         ])
         obs_df = pd.DataFrame([
@@ -433,7 +470,7 @@ class CDC500StateProcessTest(unittest.TestCase):
             by=['observation_date', 'statvar']).reset_index(drop=True)
 
         self.assertEqual(len(result_df), 4)
-        # 2016 row: geoId/15003 included, empty measurement_method -> 'dcAggregate'
+        # 2016 row: geoId/15003 included, empty measurementMethod -> 'dcAggregate'
         self.assertEqual(result_df['observation_about'].iloc[0], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[0], '2016')
         self.assertEqual(result_df['statvar'].iloc[0],
@@ -479,43 +516,55 @@ class CDC500StateProcessTest(unittest.TestCase):
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f_old',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f_new',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Percent_Person_WithArthritis',
                 'entity1': 'geoId/0666000',
                 'facet_id': 'f_city2',
-                'provenance': 'dc/base/CDC500',
-                'measurement_method': 'CrudePrevalence'
+                'facet': {
+                    'provenance': 'dc/base/CDC500',
+                    'measurementMethod': 'CrudePrevalence'
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f_low',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0644000',
                 'facet_id': 'f_high',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
             {
                 'variable_measured': 'Count_Person',
                 'entity1': 'geoId/0666000',
                 'facet_id': 'f_city2_pop',
-                'provenance': 'dc/base/CensusACS5YearSurvey',
-                'measurement_method': ''
+                'facet': {
+                    'provenance': 'dc/base/CensusACS5YearSurvey',
+                    'measurementMethod': ''
+                }
             },
         ])
         obs_df = pd.DataFrame([
