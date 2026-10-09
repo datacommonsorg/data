@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://api.usaspending.gov/",
+            "provenance_url": "https://www.usaspending.gov/",
             "provenance_description": "EDA Investments by Applicant State and Program, dynamically sourced from USASpending.gov.",
             "scripts": [
                 "process.py",

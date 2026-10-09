@@ -11,11 +11,11 @@
         },
         {
             "rule_id": "active_programs_freshness",
-            "description": "Checks that active programs have recent data within 1 year of current year.",
+            "description": "Checks that all 12 EDA StatVars are present and meet expected cohort freshness.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT *, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks', 'dcid:Amount_Investment_ProgramPlanning', 'dcid:Amount_Investment_TechnicalAssistance', 'Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks', 'Amount_Investment_ProgramPlanning', 'Amount_Investment_TechnicalAssistance')",
-                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1) AND total_svs > 0"
+                "query": "SELECT *, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks', 'Amount_Investment_ProgramPlanning', 'Amount_Investment_TechnicalAssistance', 'Amount_Investment_DistressedAreaRecompetePilotProgram', 'Amount_Investment_RegionalTechnologyAndInnovationHubs', 'Amount_Investment_RegionalInnovationStrategies', 'Amount_Investment_STEMTalentChallenge', 'Amount_Investment_TradeAdjustmentAssistance', 'Amount_Investment_ResearchNationalTechnicalAssistance', 'Amount_Investment_ScienceAndResearchParkDevelopmentGrants')",
+                "condition": "total_svs = 12 AND CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= CASE WHEN StatVar IN ('Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks', 'Amount_Investment_ProgramPlanning', 'Amount_Investment_TechnicalAssistance', 'Amount_Investment_DistressedAreaRecompetePilotProgram', 'Amount_Investment_RegionalTechnologyAndInnovationHubs') THEN (EXTRACT(YEAR FROM CURRENT_DATE) - 1) WHEN StatVar IN ('Amount_Investment_RegionalInnovationStrategies', 'Amount_Investment_STEMTalentChallenge') THEN 2024 WHEN StatVar IN ('Amount_Investment_TradeAdjustmentAssistance', 'Amount_Investment_ResearchNationalTechnicalAssistance') THEN 2023 WHEN StatVar = 'Amount_Investment_ScienceAndResearchParkDevelopmentGrants' THEN 2015 ELSE 9999 END"
             }
         },
         {

@@ -576,6 +576,42 @@ class TestProcessUSASpending(unittest.TestCase):
             self.assertIn("Exceeded maximum page threshold (2) for FY 2013",
                           str(ctx.exception))
 
+    def test_all_non_positive_awards_guard(self):
+        mock_awards = [
+            {
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2020-05-01",
+                "Award Amount": -5000.0,
+            },
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.302",
+                "Start Date": "2020-06-01",
+                "Award Amount": 0.0,
+            },
+        ]
+        with self.assertRaises(RuntimeError) as ctx:
+            process_data(
+                mock_awards,
+                start_year=2019,
+                end_year=2021,
+                output_path=self.output_csv,
+            )
+        self.assertIn("No positive investment records after aggregation",
+                      str(ctx.exception))
+        self.assertFalse(os.path.exists(self.output_csv))
+
+    def test_get_current_fiscal_year(self):
+        import datetime
+        from statvar_imports.commerce_eda_usaspending.process import (
+            get_current_fiscal_year,)
+        self.assertEqual(
+            get_current_fiscal_year(datetime.datetime(2026, 9, 30)), 2026)
+        self.assertEqual(
+            get_current_fiscal_year(datetime.datetime(2026, 10, 1)), 2027)
+
 
 if __name__ == "__main__":
     unittest.main()
+

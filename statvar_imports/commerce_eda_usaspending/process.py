@@ -79,78 +79,104 @@ def get_fiscal_year(date_str):
     return year
 
 
+def get_current_fiscal_year(now=None):
+    if now is None:
+        now = datetime.datetime.now()
+    return now.year + 1 if now.month >= 10 else now.year
+
+
+def _deduplicate_awards(awards, unique_awards=None):
+    if unique_awards is None:
+        unique_awards = {}
+    for idx, award in enumerate(awards):
+        award_id = award.get("generated_internal_id") or award.get("Award ID")
+        if award_id:
+            unique_awards[award_id] = award
+        else:
+            fallback_key = (
+                award.get("Place of Performance State Code"),
+                award.get("CFDA Number"),
+                award.get("Start Date"),
+                award.get("Award Amount"),
+                idx,
+            )
+            unique_awards[fallback_key] = award
+    return unique_awards
+
+
 def fetch_usaspending_data(start_year,
                            end_year,
                            session=None,
                            raw_output_path=None):
-    if session is None:
+    owns_session = session is None
+    if owns_session:
         session = get_session()
     url = "https://api.usaspending.gov/api/v2/search/spending_by_award/"
     unique_awards = {}
 
-    for fy in range(start_year, end_year + 1):
-        start_date = f"{fy - 1}-10-01"
-        end_date = f"{fy}-09-30"
-        page = 1
-        fy_awards = []
-        logging.info(f"Fetching FY {fy} awards ({start_date} to {end_date})...")
+    try:
+        for fy in range(start_year, end_year + 1):
+            start_date = f"{fy - 1}-10-01"
+            end_date = f"{fy}-09-30"
+            page = 1
+            fy_awards = []
+            logging.info(
+                f"Fetching FY {fy} awards ({start_date} to {end_date})...")
 
-        while True:
-            if page > MAX_PAGES_PER_FY:
-                raise RuntimeError(
-                    f"Exceeded maximum page threshold ({MAX_PAGES_PER_FY}) for FY {fy}"
-                )
-            payload = {
-                "filters": {
-                    "agencies": [{
-                        "type": "awarding",
-                        "tier": "subtier",
-                        "name": "Economic Development Administration"
-                    }],
-                    "time_period": [{
-                        "start_date": start_date,
-                        "end_date": end_date
-                    }],
-                    "award_type_codes": [
-                        "02", "03", "04", "05", "F001", "F002"
-                    ]
-                },
-                "fields": [
-                    "Award ID", "Start Date", "Award Amount",
-                    "Place of Performance State Code", "CFDA Number",
-                    "generated_internal_id"
-                ],
-                "limit": 100,
-                "page": page
-            }
-            logging.info(f"POST {url} [FY {fy} Page {page}]")
+            while True:
+                if page > MAX_PAGES_PER_FY:
+                    msg = (f"Exceeded maximum page threshold "
+                           f"({MAX_PAGES_PER_FY}) for FY {fy}")
+                    logging.error(msg)
+                    raise RuntimeError(msg)
+                payload = {
+                    "filters": {
+                        "agencies": [{
+                            "type": "awarding",
+                            "tier": "subtier",
+                            "name": "Economic Development Administration"
+                        }],
+                        "time_period": [{
+                            "start_date": start_date,
+                            "end_date": end_date
+                        }],
+                        "award_type_codes": [
+                            "02", "03", "04", "05", "F001", "F002"
+                        ]
+                    },
+                    "fields": [
+                        "Award ID", "Start Date", "Award Amount",
+                        "Place of Performance State Code", "CFDA Number",
+                        "generated_internal_id"
+                    ],
+                    "limit": 100,
+                    "page": page
+                }
+                logging.info(f"POST {url} [FY {fy} Page {page}]")
 
-            try:
-                response = session.post(url, json=payload, timeout=45)
-                response.raise_for_status()
-                data = response.json()
-            except Exception as err:
-                logging.error(f"Failed to fetch FY {fy} page {page}: {err}")
-                raise
+                try:
+                    response = session.post(url, json=payload, timeout=45)
+                    response.raise_for_status()
+                    data = response.json()
+                except Exception as err:
+                    logging.error(f"Failed to fetch FY {fy} page {page}: {err}")
+                    raise
 
-            results = data.get("results", [])
-            if not results:
-                break
-            fy_awards.extend(results)
+                results = data.get("results", [])
+                if not results:
+                    break
+                fy_awards.extend(results)
 
-            if not data.get("page_metadata", {}).get("hasNext"):
-                break
-            page += 1
-            time.sleep(0.2)
+                if not data.get("page_metadata", {}).get("hasNext"):
+                    break
+                page += 1
+                time.sleep(0.2)
 
-        logging.info(f"Retrieved {len(fy_awards)} awards for FY {fy}")
-        for award in fy_awards:
-            award_id = award.get("generated_internal_id") or award.get(
-                "Award ID")
-            if award_id:
-                unique_awards[award_id] = award
-            else:
-                unique_awards[len(unique_awards)] = award
+            logging.info(f"Retrieved {len(fy_awards)} awards for FY {fy}")
+            _deduplicate_awards(fy_awards, unique_awards)
+    finally:
+        if owns_session:
+            session.close()
 
     all_awards = list(unique_awards.values())
 
@@ -163,18 +189,18 @@ def fetch_usaspending_data(start_year,
             os.replace(tmp_raw_path, raw_output_path)
             logging.info(
                 f"Saved {len(all_awards)} raw awards to {raw_output_path}")
+        else:
+            if os.path.exists(tmp_raw_path):
+                os.remove(tmp_raw_path)
+            msg = f"Failed to write non-empty raw output to {raw_output_path}"
+            logging.error(msg)
+            raise RuntimeError(msg)
 
     return all_awards
 
 
 def process_data(awards, start_year, end_year, output_path):
-    unique_awards = {}
-    for a in awards:
-        award_id = a.get("generated_internal_id") or a.get("Award ID")
-        if award_id:
-            unique_awards[award_id] = a
-        else:
-            unique_awards[len(unique_awards)] = a
+    unique_awards = _deduplicate_awards(awards)
 
     data_rows = []
     unmapped_cfdas = set()
@@ -225,6 +251,11 @@ def process_data(awards, start_year, end_year, output_path):
         lambda v: int(round(v)))
     positive_agg = positive_agg[positive_agg["Amount"] > 0].copy()
 
+    if positive_agg.empty:
+        msg = "No positive investment records after aggregation."
+        logging.error(msg)
+        raise RuntimeError(msg)
+
     # Calculate Totals from positive components
     totals = positive_agg.groupby(["Place",
                                    "Year"])["Amount"].sum().reset_index()
@@ -232,10 +263,6 @@ def process_data(awards, start_year, end_year, output_path):
 
     final_df = pd.concat([positive_agg, totals], ignore_index=True)
 
-    # Sort
-    places_sorted = sorted(list(final_df["Place"].unique()))
-    final_df["place_idx"] = final_df["Place"].apply(
-        lambda x: places_sorted.index(x))
     category_order = [
         "Total",
         "Distressed Area Recompete Pilot Program",
@@ -258,8 +285,8 @@ def process_data(awards, start_year, end_year, output_path):
 
     final_df["cat_idx"] = final_df["Category"].apply(get_cat_idx)
     final_df = final_df.sort_values(
-        by=["place_idx", "cat_idx", "Year"]).reset_index(drop=True)
-    final_df = final_df.drop(columns=["place_idx", "cat_idx"])
+        by=["Place", "cat_idx", "Year"]).reset_index(drop=True)
+    final_df = final_df.drop(columns=["cat_idx"])
 
     # Format amount as integer string
     final_df["Amount"] = final_df["Amount"].astype(str)
@@ -276,29 +303,39 @@ def process_data(awards, start_year, end_year, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     tmp_output_path = output_path + ".tmp"
     final_df.to_csv(tmp_output_path, index=False, header=True)
-    if os.path.exists(tmp_output_path) and os.path.getsize(tmp_output_path) > 0:
+    if (not final_df.empty and os.path.exists(tmp_output_path) and
+            os.path.getsize(tmp_output_path) > 0):
         os.replace(tmp_output_path, output_path)
         logging.info(
             f"[SUCCESS] Processed data saved successfully to {output_path}")
-
+    else:
+        if os.path.exists(tmp_output_path):
+            os.remove(tmp_output_path)
+        msg = f"Failed to write non-empty output to {output_path}"
+        logging.error(msg)
+        raise RuntimeError(msg)
 
 
 def main(argv):
     del argv
-    start_year = 2012
-    end_year = datetime.datetime.now().year + 1
-    raw_output_path = os.path.join(_MODULE_DIR, "input_files",
-                                   "raw_usaspending_eda_awards.json")
-    output_path = os.path.join(_MODULE_DIR, "input_files",
-                               "investment_cleaned.csv")
+    try:
+        start_year = 2012
+        end_year = get_current_fiscal_year()
+        raw_output_path = os.path.join(_MODULE_DIR, "input_files",
+                                       "raw_usaspending_eda_awards.json")
+        output_path = os.path.join(_MODULE_DIR, "input_files",
+                                   "investment_cleaned.csv")
 
-    awards = fetch_usaspending_data(start_year,
-                                    end_year,
-                                    raw_output_path=raw_output_path)
-    logging.info(f"Total awards retrieved: {len(awards)}")
+        awards = fetch_usaspending_data(start_year,
+                                        end_year,
+                                        raw_output_path=raw_output_path)
+        logging.info(f"Total awards retrieved: {len(awards)}")
 
-    process_data(awards, start_year, end_year, output_path)
+        process_data(awards, start_year, end_year, output_path)
+    except Exception as err:
+        logging.fatal(f"Import pipeline failed: {err}")
 
 
 if __name__ == "__main__":
     app.run(main)
+
