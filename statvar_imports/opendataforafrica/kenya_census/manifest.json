@@ -6,20 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://kenya.opendataforafrica.org/",
-            "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs (Semi-Automated: GCS-backed upstream source data with automated Cloud Batch extraction, transformation, and validation).",
-            "import_type": "Semi-Automated",
-            "workflow_steps": {
-                "manual_steps": [
-                    "1. Manual Source Download: Kenya Open Data portal (https://kenya.opendataforafrica.org/) enforces Cloudflare bot protection, blocking automated scraping. In a local browser, navigate to each dataset's source link, copy the SDMX endpoint / click Export -> SDMX, and right-click 'Save As' to save the raw SDMX XML file locally into an xml/ directory (e.g., xml/dlrrjxg.xml, xml/egdxgkd.xml).",
-                    "2. Format Conversion: Execute `python3 download.py --xml_dir xml/` to convert raw SDMX XML files into normalized CSV files under input_files/.",
-                    "3. GCS Staging: Upload converted CSVs to GCS bucket: `gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/`."
-                ],
-                "automated_steps": [
-                    "1. Download Step (download.sh): Cloud Batch executor runs download.sh to fetch the latest staged CSVs from gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/ to input_files/.",
-                    "2. Extract & Transform (stat_var_processor.py): Automatically maps and transforms raw CSVs into Data Commons StatVarObservation CSVs, TMCFs, and StatVar MCFs with sub-national place resolution.",
-                    "3. Resolution & Validation (genmcf, differ, import_validation): Cloud Batch executor runs genmcf to resolve nodes, computes diffs against baseline version, and validates data freshness, deletion thresholds (<= 0.1%), and lint errors."
-                ]
-            },
+            "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs.",
             "scripts": [
                 "download.sh",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dlrrjxg.csv --pv_map=dlrrjxg_pvmap.csv --config_file=dlrrjxg_metadata.csv --output_path=output/dlrrjxg --output_counters=counters/dlrrjxg_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",

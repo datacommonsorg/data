@@ -5,7 +5,7 @@
 - **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
 - **Publisher**: Kenya National Bureau of Statistics (KNBS)
 - **Import Type**: `Semi-Automated`
-- **Schedule**: Quarterly (`0 5 1 1,4,7,10 *` via Cloud Batch)
+- **Schedule**: Quarterly
 - **Coverage**: Demographics, Health, Education, Economy (2002 – present)
 - **Entity Resolution**:
   - National level: `country/KEN`
@@ -15,11 +15,11 @@
 
 | File / Directory | Purpose |
 | :--- | :--- |
-| `manifest.json` | Cloud Batch import manifest declaring scripts, inputs, GCS source files, and resource limits |
-| `validation_config.json` | Import validation rules (freshness SQL, deletion threshold <= 0.1%) |
+| `manifest.json` | Import manifest declaring scripts, inputs, and validation configuration |
+| `validation_config.json` | Import validation rules for data freshness and record retention |
 | `download.sh` | Shell script to fetch raw census CSVs from GCS storage into `input_files/` |
-| `download.py` | Python utility for parsing Open Data for Africa StructureSpecificData SDMX XML files to CSVs |
-| `download_test.py` | Hermetic unit tests for `download.py` XML parsing, atomic writes, and GCS pull routines |
+| `convert_sdmx_xml_to_csv.py` | Python utility for converting Open Data for Africa SDMX XML files to CSVs using `sdmx1` |
+| `convert_sdmx_xml_to_csv_test.py` | Hermetic unit tests for `convert_sdmx_xml_to_csv.py` |
 | `*_pvmap.csv` | Property-Value schema mappings for `stat_var_processor.py` |
 | `*_metadata.csv` | Processor configuration files declaring header rows and column mappings |
 | `places_resolved.csv` | Unified place resolver mapping for County / AdministrativeUnit place identifiers |
@@ -45,28 +45,25 @@ The import processes 12 tables from KNBS Open Data:
 11. `welrttb`: Employment and labor force status (`country/KEN`)
 12. `xszlbb`: National economic production and industry indicators (`country/KEN`)
 
-## 4. Semi-Automated Ingestion Workflow
+## 4. Ingestion Workflow
 
-Due to Cloudflare bot protection on `kenya.opendataforafrica.org`, programmatic scraping and automated HTTP requests directly against the portal fail with HTTP 403. Consequently, upstream source data updates follow a semi-automated workflow with GCS backing.
-
-### 4.1 Manual Workflow (Updating Upstream Source Files)
+### 4.1 Upstream Source Data Updates
 When updated census data is published on Kenya Open Data for Africa:
-1. **Navigate to Dataset**: Open the source URL for each dataset in a local browser (e.g. `https://kenya.opendataforafrica.org/<dataset_id>`).
-2. **Download SDMX XML**: Copy the SDMX data link (or click **Export** $\rightarrow$ **SDMX**), right-click and select **"Save Link As..." / "Save As..."** to save the `.xml` file locally into an `xml/` directory (e.g., `xml/dlrrjxg.xml`, `xml/egdxgkd.xml`).
-3. **Convert XML to CSV**: Execute `download.py` to convert the raw SDMX XML files into normalized CSV files in `input_files/`:
+1. **Download SDMX XML**: Save the SDMX `.xml` file locally for each dataset into an `xml/` directory (e.g., `xml/dlrrjxg.xml`, `xml/egdxgkd.xml`).
+2. **Convert XML to CSV**: Execute `convert_sdmx_xml_to_csv.py` to convert the raw SDMX XML files into normalized CSV files in `input_files/`:
    ```bash
-   python3 download.py --xml_dir xml/
+   python3 convert_sdmx_xml_to_csv.py --xml_dir xml/
    ```
-4. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
+3. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
    ```bash
    gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/
    ```
 
-### 4.2 Automated Ingestion Workflow (Cloud Batch Execution)
-During automated quarterly runs (`0 5 1 1,4,7,10 *`), Cloud Batch executes the following pipeline:
-1. **Download Step (`download.sh`)**: Pulls the verified CSVs from `gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/` into `input_files/`.
+### 4.2 Automated Ingestion Pipeline
+During scheduled import runs, the automated pipeline executes:
+1. **Download (`download.sh`)**: Fetches the staged CSV files into `input_files/`.
 2. **Transform (`stat_var_processor.py`)**: Runs each of the 12 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
-3. **Resolution, Differ & Validation (`genmcf`, differ, import_validation)**: Generates resolved MCFs, compares against baseline version, and verifies validation rules.
+3. **Validation**: Validates data freshness, record deletion thresholds, and schema lint rules.
 
 ## 5. Running the Data Processor
 
@@ -97,15 +94,16 @@ Run `stat_var_processor.py` using repo-relative paths from the repository root:
 
 ### 6.1 Unit Tests
 
-Run the hermetic unit tests for the Python download routine:
+Run the hermetic unit tests for the XML conversion routine:
 
 ```bash
-.env/bin/python -m unittest statvar_imports/opendataforafrica/kenya_census/download_test.py
+.env/bin/python -m unittest statvar_imports/opendataforafrica/kenya_census/convert_sdmx_xml_to_csv_test.py
 ```
 
 ### 6.2 Pre-Submission Validation Rules
 
-`validation_config.json` configures import-specific rules:
-- `check_all_statvars_freshness`: SQL validator ensuring `MaxDate >= '2009' AND total_svs > 0` across all active StatVars.
-- `check_deleted_records_percent`: Strict cap with `threshold: 0.1` (0.1%), matching rule description.
-- Default lint checks (`check_lint_error_count` and `check_missing_refs_count` at threshold 0) are inherited from the base validation framework.
+The import configuration in `validation_config.json` enforces:
+- Freshness checks ensuring active observations across StatVars.
+- Record retention limits between import versions.
+- Base validation checks for lint errors and reference resolution.
+
