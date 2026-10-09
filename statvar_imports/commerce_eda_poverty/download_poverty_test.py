@@ -32,10 +32,13 @@ sys.path.insert(0, PROJECT_ROOT)
 from statvar_imports.commerce_eda_poverty.download_poverty import (
     EDA_PPC_MIRROR_URL,
     EDA_PPC_XLSX_URL,
+    HTTP_HEADERS,
+    create_http_session,
     download_file,
     download_poverty_dataset,
     extract_sheet_to_csv,
 )
+
 
 def _create_mock_eda_workbook(filepath=None):
     """Creates a mock Excel workbook containing the Underlying_Data worksheet."""
@@ -111,6 +114,7 @@ def _create_mock_eda_workbook(filepath=None):
     finally:
         wb.close()
 
+
 class TestDownloadPoverty(unittest.TestCase):
 
     def test_download_file_success(self):
@@ -118,16 +122,17 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "test.xlsx")
             test_content = b"PK\x03\x04test_content"
 
-            def mock_download(url, output_file=None, **kwargs):
-                with open(output_file, "wb") as f:
-                    f.write(test_content)
-                return output_file
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.content = test_content
+            mock_session.get.return_value = mock_resp
 
             with mock.patch(
                 "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                side_effect=mock_download,
-            ) as mock_dl:
+                ".create_http_session",
+                return_value=mock_session,
+            ) as mock_create_session:
                 content = download_file(
                     "https://example.gov/EDA_FY23_PPCs.xlsx",
                     out_file,
@@ -135,51 +140,67 @@ class TestDownloadPoverty(unittest.TestCase):
                 )
 
             self.assertEqual(content, test_content)
-            self.assertEqual(mock_dl.call_count, 1)
+            mock_create_session.assert_called_once_with(max_retries=1)
+            mock_session.get.assert_called_once_with(
+                "https://example.gov/EDA_FY23_PPCs.xlsx",
+                headers=HTTP_HEADERS,
+                timeout=60,
+            )
+            mock_session.close.assert_called_once()
             self.assertTrue(os.path.exists(out_file))
             with open(out_file, "rb") as f:
                 self.assertEqual(f.read(), test_content)
 
-    def test_download_file_calls_download_util_with_parameters(self):
+    def test_download_file_passes_headers_and_timeout(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "params.xlsx")
             test_content = b"PK\x03\x04param_test"
 
-            def mock_download(url, output_file=None, **kwargs):
-                with open(output_file, "wb") as f:
-                    f.write(test_content)
-                return output_file
+            session = create_http_session(max_retries=5)
+            try:
+                self.assertEqual(
+                    session.headers.get("User-Agent"),
+                    HTTP_HEADERS["User-Agent"],
+                )
+                self.assertTrue(session.verify)
+                mock_resp = mock.MagicMock()
+                mock_resp.status_code = 200
+                mock_resp.content = test_content
+                with mock.patch.object(
+                    session, "get", return_value=mock_resp
+                ) as mock_get:
+                    content = download_file(
+                        "https://example.gov/EDA_FY23_PPCs.xlsx",
+                        out_file,
+                        session=session,
+                        max_retries=5,
+                        timeout=45,
+                        require_zip_signature=True,
+                    )
 
-            with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                side_effect=mock_download,
-            ) as mock_dl:
-                content = download_file(
+                self.assertEqual(content, test_content)
+                mock_get.assert_called_once_with(
                     "https://example.gov/EDA_FY23_PPCs.xlsx",
-                    out_file,
-                    max_retries=5,
+                    headers=HTTP_HEADERS,
                     timeout=45,
                 )
-
-            self.assertEqual(content, test_content)
-            mock_dl.assert_called_once_with(
-                url="https://example.gov/EDA_FY23_PPCs.xlsx",
-                output_file=out_file,
-                timeout=45,
-                retries=5,
-                overwrite=True,
-            )
+            finally:
+                session.close()
 
     def test_download_file_fails(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "fail.xlsx")
 
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.raise_for_status.side_effect = RuntimeError("HTTP 403")
+            mock_session.get.return_value = mock_resp
+
             with mock.patch(
                 "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                return_value=None,
-            ) as mock_dl:
+                ".create_http_session",
+                return_value=mock_session,
+            ):
                 with self.assertRaises(RuntimeError):
                     download_file(
                         "https://example.gov/EDA_FY23_PPCs.xlsx",
@@ -187,23 +208,25 @@ class TestDownloadPoverty(unittest.TestCase):
                         max_retries=2,
                     )
 
-            self.assertEqual(mock_dl.call_count, 1)
+            self.assertEqual(mock_session.get.call_count, 1)
+            mock_session.close.assert_called_once()
             self.assertFalse(os.path.exists(out_file))
 
     def test_download_file_empty_body_raises(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             out_file = os.path.join(tmpdir, "empty.xlsx")
 
-            def mock_download_empty(url, output_file=None, **kwargs):
-                with open(output_file, "wb") as f:
-                    pass
-                return output_file
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.content = b""
+            mock_session.get.return_value = mock_resp
 
             with mock.patch(
                 "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                side_effect=mock_download_empty,
-            ) as mock_dl:
+                ".create_http_session",
+                return_value=mock_session,
+            ):
                 with self.assertRaises(RuntimeError):
                     download_file(
                         "https://example.gov/EDA_FY23_PPCs.xlsx",
@@ -211,7 +234,8 @@ class TestDownloadPoverty(unittest.TestCase):
                         max_retries=1,
                     )
 
-            self.assertEqual(mock_dl.call_count, 1)
+            self.assertEqual(mock_session.get.call_count, 1)
+            self.assertFalse(os.path.exists(out_file))
 
     def test_download_file_session_without_mount_supported(self):
         class DuckSession:
@@ -326,17 +350,23 @@ class TestDownloadPoverty(unittest.TestCase):
 
             excel_bytes = _create_mock_eda_workbook()
 
-            def mock_download(url, output_file=None, **kwargs):
+            mock_session = mock.MagicMock()
+
+            def mock_get(url, headers=None, timeout=None, **kwargs):
+                resp = mock.MagicMock()
                 if parse.urlparse(url).netloc == "www.eda.gov":
-                    return None
-                with open(output_file, "wb") as f:
-                    f.write(excel_bytes)
-                return output_file
+                    resp.raise_for_status.side_effect = RuntimeError("HTTP 403")
+                    return resp
+                resp.status_code = 200
+                resp.content = excel_bytes
+                return resp
+
+            mock_session.get.side_effect = mock_get
 
             with mock.patch(
                 "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                side_effect=mock_download,
+                ".create_http_session",
+                return_value=mock_session,
             ):
                 res = download_poverty_dataset(
                     source_url=EDA_PPC_XLSX_URL,
@@ -368,10 +398,15 @@ class TestDownloadPoverty(unittest.TestCase):
                 with open(p, "w", encoding="utf-8") as f:
                     f.write("stale_data")
 
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.raise_for_status.side_effect = RuntimeError("HTTP 503")
+            mock_session.get.return_value = mock_resp
+
             with mock.patch(
                 "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                return_value=None,
+                ".create_http_session",
+                return_value=mock_session,
             ):
                 with self.assertRaises(RuntimeError) as ctx:
                     download_poverty_dataset(
@@ -399,23 +434,26 @@ class TestDownloadPoverty(unittest.TestCase):
             raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
 
             excel_bytes = _create_mock_eda_workbook()
+            mock_session = mock.MagicMock()
 
-            def mock_download(url, output_file=None, **kwargs):
+            def mock_get(url, headers=None, timeout=None, **kwargs):
+                resp = mock.MagicMock()
+                resp.status_code = 200
                 if parse.urlparse(url).netloc == "www.eda.gov":
-                    with open(output_file, "wb") as f:
-                        f.write(
-                            b"<!DOCTYPE html><html><title>Just a moment..."
-                            b"</title></html>"
-                        )
-                    return output_file
-                with open(output_file, "wb") as f:
-                    f.write(excel_bytes)
-                return output_file
+                    resp.content = (
+                        b"<!DOCTYPE html><html><title>Just a moment..."
+                        b"</title></html>"
+                    )
+                    return resp
+                resp.content = excel_bytes
+                return resp
+
+            mock_session.get.side_effect = mock_get
 
             with mock.patch(
                 "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".download_file_from_url",
-                side_effect=mock_download,
+                ".create_http_session",
+                return_value=mock_session,
             ):
                 res = download_poverty_dataset(
                     source_url=EDA_PPC_XLSX_URL,
@@ -432,5 +470,7 @@ class TestDownloadPoverty(unittest.TestCase):
             df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
             self.assertEqual(len(df), 3)
 
+
 if __name__ == "__main__":
     unittest.main()
+

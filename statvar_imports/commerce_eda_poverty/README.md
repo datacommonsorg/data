@@ -123,7 +123,7 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
 
 ## Validation
 
-Validate generated outputs using the Import Validation Framework and `validation_config.json`. Run from the repository root `data/`:
+After running the Data Commons `import_tool` (`genmcf` and differ steps, which produce `summary_report.csv`, `report.json`, and `differ_summary.json`), validate the generated outputs using the Import Validation Framework and `validation_config.json`. Run from the repository root `data/`:
 ```bash
 python3 -m tools.import_validation.runner \
   --validation_config=statvar_imports/commerce_eda_poverty/validation_config.json \
