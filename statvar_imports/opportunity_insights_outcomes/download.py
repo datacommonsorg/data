@@ -16,17 +16,20 @@
 import os
 import re
 import shutil
-import time
-import urllib.error
-import urllib.request
+import sys
 import zipfile
 from absl import app
 from absl import flags
 from absl import logging
 
-FLAGS = flags.FLAGS
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+from util import download_util
+
+FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
     'output_dir',
@@ -37,6 +40,11 @@ flags.DEFINE_string(
     'source_page_url',
     'https://opportunityinsights.org/data/',
     'Opportunity Insights data catalog page URL to scrape for latest download links.',
+)
+flags.DEFINE_bool(
+    'force_download',
+    False,
+    'If True, re-download and overwrite existing files.',
 )
 
 USER_AGENT = (
@@ -82,14 +90,20 @@ def discover_latest_urls(page_url: str) -> dict[str, str]:
     """Scrapes the Opportunity Insights data page for the latest URLs, falling back to canonical links."""
     discovered = {k: v['url'] for k, v in DEFAULT_SOURCE_FILES.items()}
     try:
-        req = urllib.request.Request(page_url, headers={'User-Agent': USER_AGENT})
-        with urllib.request.urlopen(req, timeout=30) as response:
-            html = response.read().decode('utf-8', errors='ignore')
-        for filename, spec in DEFAULT_SOURCE_FILES.items():
-            matches = re.findall(spec['pattern'], html)
-            if matches:
-                discovered[filename] = matches[0]
-                logging.info('Discovered URL for %s: %s', filename, matches[0])
+        html = download_util.request_url(
+            url=page_url,
+            headers={'User-Agent': USER_AGENT},
+            output='text',
+            timeout=30,
+            retries=3,
+            retry_secs=2,
+        )
+        if html:
+            for filename, spec in DEFAULT_SOURCE_FILES.items():
+                matches = re.findall(spec['pattern'], str(html))
+                if matches:
+                    discovered[filename] = matches[0]
+                    logging.info('Discovered URL for %s: %s', filename, matches[0])
     except Exception as exc:  # pylint: disable=broad-except
         logging.warning(
             'Could not scrape %s (%s); using canonical fallback URLs.', page_url, exc
@@ -103,38 +117,31 @@ def download_file(
     max_retries: int = 3,
     retry_backoff_sec: float = 1.0,
 ) -> None:
-    """Downloads a URL to dest_path atomically with bounded retries and a browser User-Agent."""
+    """Downloads a URL to dest_path atomically via download_util with bounded retries."""
     os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
     tmp_path = f'{dest_path}.tmp'
-    for attempt in range(1, max_retries + 1):
-        logging.info(
-            'Downloading %s -> %s (attempt %d/%d)',
-            url,
-            dest_path,
-            attempt,
-            max_retries,
+    try:
+        content = download_util.request_url(
+            url=url,
+            headers={'User-Agent': USER_AGENT},
+            output='bytes',
+            timeout=300,
+            retries=max_retries,
+            retry_secs=retry_backoff_sec,
         )
-        try:
-            req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
-            with urllib.request.urlopen(req, timeout=300) as response, open(
-                tmp_path, 'wb'
-            ) as out_file:
-                shutil.copyfileobj(response, out_file)
-            os.replace(tmp_path, dest_path)
-            return
-        except Exception as exc:  # pylint: disable=broad-except
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-            if attempt >= max_retries:
-                raise
-            sleep_sec = retry_backoff_sec * (2 ** (attempt - 1))
-            logging.warning(
-                'Download failed for %s (%s); retrying in %.1fs...',
-                url,
-                exc,
-                sleep_sec,
+        if not content:
+            logging.fatal('Failed to download %s', url)
+            raise RuntimeError(f'Failed to download {url}')
+        with open(tmp_path, 'wb') as out_file:
+            out_file.write(
+                content.encode('utf-8') if isinstance(content, str) else content
             )
-            time.sleep(sleep_sec)
+        os.replace(tmp_path, dest_path)
+    except Exception as exc:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        logging.fatal('Failed to download %s: %s', url, exc)
+        raise
 
 
 def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
@@ -149,8 +156,22 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
                     if m.lower().endswith('.csv') and '__MACOSX' not in m
                 ]
                 if not csv_members:
+                    logging.fatal('No CSV file found inside archive: %s', zip_path)
                     raise ValueError(f'No CSV file found inside archive: {zip_path}')
-                member = csv_members[0]
+                target_name = os.path.basename(target_csv_path).lower()
+                matching = [
+                    m
+                    for m in csv_members
+                    if os.path.basename(m).lower() == target_name
+                ]
+                member = matching[0] if matching else csv_members[0]
+                if len(csv_members) > 1:
+                    logging.warning(
+                        'Multiple CSV files found in %s (%s); selected %s',
+                        zip_path,
+                        csv_members,
+                        member,
+                    )
                 logging.info(
                     'Extracting %s from %s -> %s', member, zip_path, target_csv_path
                 )
@@ -172,7 +193,9 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
 
 
 def download_all_sources(
-    output_dir: str, page_url: str = 'https://opportunityinsights.org/data/'
+    output_dir: str,
+    page_url: str = 'https://opportunityinsights.org/data/',
+    force_download: bool = False,
 ) -> list[str]:
     """Downloads and extracts all Opportunity Insights outcome CSVs into output_dir."""
     os.makedirs(output_dir, exist_ok=True)
@@ -183,15 +206,17 @@ def download_all_sources(
         url = urls[target_csv_name]
         target_csv_path = os.path.join(output_dir, target_csv_name)
 
+        if os.path.exists(target_csv_path) and not force_download:
+            downloaded_csvs.append(target_csv_path)
+            continue
+
         if spec['is_zip'] or url.lower().endswith('.zip'):
             zip_path = os.path.join(output_dir, f'{target_csv_name}.zip')
-            if not os.path.exists(zip_path) and not os.path.exists(target_csv_path):
+            if force_download or not os.path.exists(zip_path):
                 download_file(url, zip_path)
-            if os.path.exists(zip_path):
-                extract_csv_from_zip(zip_path, target_csv_path)
+            extract_csv_from_zip(zip_path, target_csv_path)
         else:
-            if not os.path.exists(target_csv_path):
-                download_file(url, target_csv_path)
+            download_file(url, target_csv_path)
 
         downloaded_csvs.append(target_csv_path)
 
@@ -199,7 +224,11 @@ def download_all_sources(
 
 
 def main(_):
-    download_all_sources(FLAGS.output_dir, FLAGS.source_page_url)
+    download_all_sources(
+        FLAGS.output_dir,
+        FLAGS.source_page_url,
+        force_download=FLAGS.force_download,
+    )
 
 
 if __name__ == '__main__':

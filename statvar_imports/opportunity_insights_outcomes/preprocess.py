@@ -13,7 +13,6 @@
 # limitations under the License.
 """Resolves headers, formats geoIds, and shards Opportunity Insights CSVs for stat_var_processor.py."""
 
-import collections
 import concurrent.futures
 import csv
 import math
@@ -206,144 +205,6 @@ def normalize_column_header(
     return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
 
-def _get_shard_path(output_csv: str, shard_idx: int, suffix_tag: str = '') -> str:
-    """Returns the output path for a given 0-based shard index."""
-    if output_csv.endswith('_cleaned.csv'):
-        base = output_csv[: -len('_cleaned.csv')]
-        tag = f'_{suffix_tag}' if suffix_tag else ''
-        if shard_idx == 0 and not tag:
-            return output_csv
-        return f'{base}{tag}_part_{shard_idx:03d}_cleaned.csv'
-    stem, ext = os.path.splitext(output_csv)
-    if shard_idx == 0 and not suffix_tag:
-        return output_csv
-    return f'{stem}_{suffix_tag}_part_{shard_idx:03d}{ext}'
-
-
-def _clean_existing_shards(output_csv: str) -> None:
-    """Removes any pre-existing shard files for the given output_csv stem."""
-    out_dir = os.path.dirname(output_csv)
-    if not out_dir or not os.path.exists(out_dir):
-        return
-    base_name = os.path.basename(output_csv)
-    stem = (
-        base_name[: -len('_cleaned.csv')]
-        if base_name.endswith('_cleaned.csv')
-        else os.path.splitext(base_name)[0]
-    )
-    for fname in os.listdir(out_dir):
-        if fname == base_name or (
-            fname.startswith(f'{stem}_') and fname.endswith('_cleaned.csv')
-        ):
-            os.remove(os.path.join(out_dir, fname))
-
-
-def shard_wide_csv(
-    input_csv: str,
-    output_csv: str,
-    geo_level: str,
-    dataset_mode: str = 'baseline_1978_1983',
-    max_rows_per_shard: int = 5_000,
-) -> int:
-    """Prepends geo_id, strips missing placeholders, and shards a wide CSV for stat_var_processor.py."""
-    os.makedirs(os.path.dirname(output_csv), exist_ok=True)
-    _clean_existing_shards(output_csv)
-    with open(input_csv, mode='r', encoding='utf-8') as infile:
-        reader = csv.DictReader(infile)
-        data_cols = [
-            c for c in (reader.fieldnames or []) if c not in _NON_DATA_COLUMNS
-        ]
-
-        if dataset_mode == 'annual_cohort_1978_1992':
-            cohort_rows = collections.defaultdict(list)
-            for row in reader:
-                raw_cohort = (row.get('cohort') or '').strip()
-                if not raw_cohort:
-                    continue
-                cohort_str = str(int(float(raw_cohort)))
-                cohort_rows[cohort_str].append(row)
-
-            total_rows = 0
-            for cohort_str, rows in sorted(cohort_rows.items()):
-                cohort_token = f'c{cohort_str}'
-                header = ['geo_id'] + [
-                    normalize_column_header(c, dataset_mode, cohort_token)
-                    for c in data_cols
-                ]
-                for shard_idx in range(
-                    0, max(1, len(rows)), max(1, max_rows_per_shard)
-                ):
-                    chunk = rows[shard_idx : shard_idx + max_rows_per_shard]
-                    shard_path = _get_shard_path(
-                        output_csv,
-                        shard_idx // max(1, max_rows_per_shard),
-                        cohort_token,
-                    )
-                    with open(
-                        shard_path, mode='w', encoding='utf-8', newline=''
-                    ) as out:
-                        writer = csv.writer(out)
-                        writer.writerow(header)
-                        for row in chunk:
-                            cleaned_vals = [
-                                ''
-                                if (row.get(c) or '').strip().upper()
-                                in _MISSING_VALUE_PLACEHOLDERS
-                                else (row.get(c) or '').strip()
-                                for c in data_cols
-                            ]
-                            if any(cleaned_vals):
-                                writer.writerow(
-                                    [format_geo_id(row, geo_level)] + cleaned_vals
-                                )
-                                total_rows += 1
-            return total_rows
-
-        header = ['geo_id'] + [
-            normalize_column_header(c, dataset_mode) for c in data_cols
-        ]
-        rows_written = 0
-        shard_idx = 0
-        shard_rows = 0
-        outfile = open(
-            _get_shard_path(output_csv, shard_idx),
-            mode='w',
-            encoding='utf-8',
-            newline='',
-        )
-        try:
-            writer = csv.writer(outfile)
-            writer.writerow(header)
-            for row in reader:
-                cleaned_vals = [
-                    ''
-                    if (row.get(c) or '').strip().upper()
-                    in _MISSING_VALUE_PLACEHOLDERS
-                    else (row.get(c) or '').strip()
-                    for c in data_cols
-                ]
-                if not any(cleaned_vals):
-                    continue
-                if max_rows_per_shard > 0 and shard_rows >= max_rows_per_shard:
-                    outfile.close()
-                    shard_idx += 1
-                    shard_rows = 0
-                    outfile = open(
-                        _get_shard_path(output_csv, shard_idx),
-                        mode='w',
-                        encoding='utf-8',
-                        newline='',
-                    )
-                    writer = csv.writer(outfile)
-                    writer.writerow(header)
-                writer.writerow([format_geo_id(row, geo_level)] + cleaned_vals)
-                rows_written += 1
-                shard_rows += 1
-        finally:
-            outfile.close()
-        return rows_written
-
-
 def _resolve_headers_via_svp(
     raw_dir: str,
     max_cols_per_seed: int = 4_000,
@@ -401,6 +262,7 @@ def _resolve_headers_via_svp(
             seed_files.append(seed_path)
 
         out_prefix = os.path.join(tmpdir, 'sv_seed')
+        counters_seed = os.path.join(tmpdir, 'counters_seed.csv')
         cmd = [
             'python3',
             svp_script,
@@ -408,6 +270,7 @@ def _resolve_headers_via_svp(
             f'--pv_map={pvmap_path}',
             f'--config_file={config_path}',
             f'--output_path={out_prefix}',
+            f'--output_counters={counters_seed}',
         ]
         if existing_statvar_mcf:
             cmd.append(f'--existing_statvar_mcf={existing_statvar_mcf}')
@@ -421,6 +284,14 @@ def _resolve_headers_via_svp(
             raise RuntimeError(
                 f'Header resolution via stat_var_processor.py failed: {res.stderr}'
             )
+
+        bad_counters = {}
+        if os.path.exists(counters_seed):
+            with open(counters_seed, mode='r', encoding='utf-8') as f:
+                for row in csv.DictReader(f):
+                    k = row.get('key', '')
+                    if k.startswith(('dropped_', 'error_', 'unmapped_')):
+                        bad_counters[k] = row.get('value', '')
 
         header_to_sv = {}
         with open(f'{out_prefix}.csv', mode='r', encoding='utf-8') as f:
@@ -439,9 +310,15 @@ def _resolve_headers_via_svp(
                         row.get('unit', ''),
                     )
 
-    if len(header_to_sv) != len(unique_headers):
+    missing = sorted(set(unique_headers) - set(header_to_sv))
+    if missing or bad_counters:
+        logging.error(
+            'Unmapped column headers: %s; seed error counters: %s',
+            missing,
+            bad_counters,
+        )
         raise RuntimeError(
-            f'Unmapped column headers: {len(unique_headers) - len(header_to_sv)}'
+            f'Unmapped column headers ({len(missing)}): {missing}; counters: {bad_counters}'
         )
     logging.info(
         'Resolved %d unique column headers via stat_var_processor.py',

@@ -110,17 +110,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_download_file_atomic_and_retry(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             dest_path = os.path.join(tmpdir, 'sample.csv')
-            call_count = 0
-
-            def fake_urlopen(req, timeout=300):
-                del req, timeout
-                nonlocal call_count
-                call_count += 1
-                if call_count == 1:
-                    raise OSError('transient connection reset')
-                return io.BytesIO(b'cz,val\n100,0.5\n')
-
-            with mock.patch('urllib.request.urlopen', side_effect=fake_urlopen):
+            with mock.patch(
+                'util.download_util.request_url',
+                return_value=b'cz,val\n100,0.5\n',
+            ) as mock_req:
                 download.download_file(
                     'https://example.com/sample.csv',
                     dest_path,
@@ -128,31 +121,64 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     retry_backoff_sec=0.01,
                 )
 
-            self.assertEqual(call_count, 2)
+            mock_req.assert_called_once()
             self.assertTrue(os.path.exists(dest_path))
             self.assertFalse(os.path.exists(f'{dest_path}.tmp'))
             with open(dest_path, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
+            with mock.patch(
+                'util.download_util.request_url', return_value=None
+            ), mock.patch.object(download.logging, 'fatal') as mock_fatal:
+                with self.assertRaises(RuntimeError):
+                    download.download_file(
+                        'https://example.com/fail.csv',
+                        os.path.join(tmpdir, 'fail.csv'),
+                    )
+                self.assertTrue(mock_fatal.called)
+
     def test_skips_missing_value_placeholders(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            in_csv = os.path.join(tmpdir, 'commuting_zone_outcomes.csv')
-            out_csv = os.path.join(tmpdir, 'commuting_zone_outcomes_cleaned.csv')
-            with open(in_csv, 'w', encoding='utf-8', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow([
-                    'cz',
-                    'kir_natam_female_p1',
-                    'kir_natam_female_p1_se',
-                    'kir_natam_female_n',
-                    'kir_natam_female_mean',
-                ])
-                writer.writerow(['100', 'NA', 'N/A', '.', '0.35973939'])
-                writer.writerow(['101', '', 'na', ' . ', 'n/a'])
+            raw_dir = os.path.join(tmpdir, 'raw')
+            shard_dir = os.path.join(tmpdir, 'input_files')
+            out_dir = os.path.join(tmpdir, 'output')
+            os.makedirs(raw_dir, exist_ok=True)
+            for filename, _, mode in preprocess.DATASET_CONFIGS:
+                with open(
+                    os.path.join(raw_dir, filename), 'w', encoding='utf-8', newline=''
+                ) as f:
+                    w = csv.writer(f)
+                    if filename == 'commuting_zone_outcomes.csv':
+                        w.writerow([
+                            'cz',
+                            'kir_natam_female_p1',
+                            'kir_natam_female_mean',
+                        ])
+                        w.writerow(['0', '0.99', '0.88'])
+                        w.writerow(['100', 'NA', '0.35973939'])
+                        w.writerow(['101', '', 'n/a'])
+                    elif mode == 'annual_cohort_1978_1992':
+                        w.writerow(['state', 'county', 'cz', 'cohort', 'kir_natam_female_mean'])
+                    else:
+                        w.writerow(['state', 'county', 'tract', 'cz', 'kir_natam_female_mean'])
 
-            count = preprocess.shard_wide_csv(in_csv, out_csv, 'commuting_zone')
-            self.assertEqual(count, 1)
+            with mock.patch.object(
+                preprocess,
+                '_resolve_headers_via_svp',
+                return_value={
+                    'kir_natam_female_p1': ('2014', 'P2Y', 'dc/p1', ''),
+                    'kir_natam_female_mean': ('2014', 'P2Y', 'dc/mean', ''),
+                },
+            ):
+                preprocess.prepare_parallel_shards_and_svp_inputs(
+                    raw_dir,
+                    shard_dir,
+                    os.path.join(out_dir, 'output'),
+                    workers=1,
+                    existing_statvar_mcf='',
+                )
 
+            out_csv = os.path.join(shard_dir, 'commuting_zone_outcomes_cleaned.csv')
             with open(out_csv, 'r', encoding='utf-8') as f:
                 rows = list(csv.DictReader(f))
 
@@ -177,7 +203,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
             target_csv = os.path.join(tmpdir, 'extracted.csv')
             with zipfile.ZipFile(zip_path, 'w') as zf:
                 zf.writestr('folder/__MACOSX/._data.csv', 'corrupted,metadata\n')
-                zf.writestr('folder/data.csv', 'cz,val\n100,0.5\n')
+                zf.writestr('folder/readme.csv', 'wrong,file\n')
+                zf.writestr('folder/extracted.csv', 'cz,val\n100,0.5\n')
 
             download.extract_csv_from_zip(zip_path, target_csv)
             with open(target_csv, 'r', encoding='utf-8') as f:
@@ -254,10 +281,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
         sample_html = (
             '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/county_cohort.zip">County</a>'
             '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/cz_cohort.zip">CZ</a>'
-        ).encode('utf-8')
+        )
         with mock.patch(
-            'urllib.request.urlopen',
-            return_value=io.BytesIO(sample_html),
+            'util.download_util.request_url',
+            return_value=sample_html,
         ):
             urls = download.discover_latest_urls('https://example.com/data/')
         self.assertEqual(
@@ -268,6 +295,103 @@ class DownloadAndPvmapTest(unittest.TestCase):
             urls['cz_by_cohort_outcomes.csv'],
             'https://opportunityinsights.org/wp-content/uploads/2024/07/cz_cohort.zip',
         )
+
+    def test_download_all_sources(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            zip_buf = io.BytesIO()
+            with zipfile.ZipFile(zip_buf, 'w') as zf:
+                zf.writestr('data.csv', 'state,county,val\n6,85,1.0\n')
+            zip_bytes = zip_buf.getvalue()
+
+            def fake_download(url, dest_path):
+                with open(dest_path, 'wb') as f:
+                    if url.endswith('.zip') or dest_path.endswith('.zip'):
+                        f.write(zip_bytes)
+                    else:
+                        f.write(b'cz,val\n100,0.5\n')
+
+            with mock.patch.object(
+                download,
+                'discover_latest_urls',
+                return_value={k: v['url'] for k, v in download.DEFAULT_SOURCE_FILES.items()},
+            ), mock.patch.object(
+                download, 'download_file', side_effect=fake_download
+            ) as mock_dl:
+                files = download.download_all_sources(tmpdir, force_download=False)
+                self.assertEqual(len(files), 6)
+                self.assertEqual(mock_dl.call_count, 6)
+
+                download.download_all_sources(tmpdir, force_download=False)
+                self.assertEqual(mock_dl.call_count, 6)
+
+                download.download_all_sources(tmpdir, force_download=True)
+                self.assertEqual(mock_dl.call_count, 12)
+
+    def test_resolve_headers_via_svp_logs_missing_headers_and_counters(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            for filename, _, mode in preprocess.DATASET_CONFIGS:
+                with open(
+                    os.path.join(tmpdir, filename), 'w', encoding='utf-8', newline=''
+                ) as f:
+                    w = csv.writer(f)
+                    if mode == 'annual_cohort_1978_1992':
+                        w.writerow(['state', 'county', 'cz', 'cohort', 'kfr_pooled_pooled_p25'])
+                    else:
+                        w.writerow(['state', 'county', 'tract', 'cz', 'kfr_pooled_pooled_p25'])
+
+            def fake_run_success(cmd, **kwargs):
+                del kwargs
+                out_prefix = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_path=')][0]
+                counters_path = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_counters=')][0]
+                with open(f'{out_prefix}.csv', 'w', encoding='utf-8', newline='') as f:
+                    w = csv.writer(f)
+                    w.writerow([
+                        'observationAbout',
+                        'observationDate',
+                        'observationPeriod',
+                        'variableMeasured',
+                        'value',
+                        'unit',
+                    ])
+                    for idx in range(1, 18):
+                        w.writerow(['geoId/seed000', '2014', 'P2Y', f'dc/sv{idx}', str(idx), ''])
+                with open(counters_path, 'w', encoding='utf-8', newline='') as f:
+                    csv.writer(f).writerow(['key', 'value'])
+                return mock.Mock(returncode=0, stderr='')
+
+            with mock.patch('subprocess.run', side_effect=fake_run_success):
+                resolved = preprocess._resolve_headers_via_svp(
+                    tmpdir, existing_statvar_mcf=''
+                )
+            self.assertEqual(len(resolved), 17)
+            self.assertEqual(resolved['kfr_p25'], ('2014', 'P2Y', 'dc/sv1', ''))
+
+            def fake_run_fail(cmd, **kwargs):
+                del kwargs
+                out_prefix = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_path=')][0]
+                counters_path = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_counters=')][0]
+                with open(f'{out_prefix}.csv', 'w', encoding='utf-8', newline='') as f:
+                    csv.writer(f).writerow([
+                        'observationAbout',
+                        'observationDate',
+                        'observationPeriod',
+                        'variableMeasured',
+                        'value',
+                        'unit',
+                    ])
+                with open(counters_path, 'w', encoding='utf-8', newline='') as f:
+                    w = csv.writer(f)
+                    w.writerow(['key', 'value'])
+                    w.writerow(['unmapped_pvs', '1'])
+                return mock.Mock(returncode=0, stderr='')
+
+            with mock.patch('subprocess.run', side_effect=fake_run_fail):
+                with self.assertRaisesRegex(
+                    RuntimeError, r'kfr_p25.*unmapped_pvs'
+                ):
+                    preprocess._resolve_headers_via_svp(
+                        tmpdir, existing_statvar_mcf=''
+                    )
 
 
 if __name__ == '__main__':

@@ -34,7 +34,7 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
 
 ## Testing & Generating Expected Test Outputs
 
-Sample raw inputs (100 rows per file) are located under `test_data/raw_data/`, mirroring the regular directory layout (`test_data/raw_data/`, `test_data/input_files/`, `test_data/output/`, `test_data/counters/`).
+Sample raw inputs (2 data rows per file) are located under `test_data/raw_data/`, mirroring the regular directory layout (`test_data/raw_data/`, `test_data/input_files/`, `test_data/output/`).
 
 Run all commands below from `data/statvar_imports/opportunity_insights_outcomes/`:
 
@@ -54,6 +54,7 @@ Run all commands below from `data/statvar_imports/opportunity_insights_outcomes/
      --pv_map=pvmap.csv \
      --config_file=metadata.csv \
      --output_path=test_data/output/output \
+     --output_counters=test_data/counters/output_counters.csv \
      --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
    ```
 
@@ -92,7 +93,6 @@ Run all commands below from `data/statvar_imports/opportunity_insights_outcomes/
 * `metadata.csv`: Configuration for `stat_var_processor.py` (`word_delimiter: "_"`, `output_columns: "observationAbout,observationDate,observationPeriod,variableMeasured,value,unit"`).
 * `manifest.json`: Automated import specification, script execution sequence, GCS input/source file globs, monthly cron schedule (`0 8 1 * *`), and resource limits.
 * `download_test.py`: Unit and end-to-end integration test suite covering URL discovery, archive extraction, header normalization, wide-CSV sharding, and `stat_var_processor.py` output equivalence.
-* `schema_from_ws/`: Local copies of Data Commons schema MCF files (`opportunity_insights_outcomes_schema.mcf`, `opportunity_insights_outcomes_stat_vars.mcf`, `ProvisionalNodePlaces.mcf`, etc.) used for local `import-tool.jar genmcf` validation.
 
 ---
 
