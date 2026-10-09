@@ -16,6 +16,7 @@
 import collections
 import concurrent.futures
 import csv
+import math
 import os
 import re
 import subprocess
@@ -124,25 +125,41 @@ _MULTI_WORD_TOKEN_REWRITES = (
 )
 
 
+def _is_valid_number(val: str) -> bool:
+    """Returns True if val is a non-placeholder finite numeric string."""
+    if not val or val.upper() in _MISSING_VALUE_PLACEHOLDERS:
+        return False
+    try:
+        return math.isfinite(float(val))
+    except ValueError:
+        return False
+
+
 def format_geo_id(row: dict, geo_level: str) -> str:
     """Returns the Data Commons geoId dcid for a CSV row."""
 
     def to_int_str(val, width: int) -> str:
         try:
-            return f'{int(float(str(val).strip())):0{width}d}'
+            num = float(str(val).strip())
+            if math.isfinite(num) and num > 0 and num.is_integer():
+                return f'{int(num):0{width}d}'
         except (ValueError, TypeError):
-            return str(val).strip().zfill(width)
+            pass
+        return ''
 
     if geo_level == 'county':
-        return f'geoId/{to_int_str(row["state"], 2)}{to_int_str(row["county"], 3)}'
+        s, c = to_int_str(row.get('state'), 2), to_int_str(row.get('county'), 3)
+        return f'geoId/{s}{c}' if s and c else ''
     if geo_level == 'tract':
-        return (
-            f'geoId/{to_int_str(row["state"], 2)}'
-            f'{to_int_str(row["county"], 3)}'
-            f'{to_int_str(row["tract"], 6)}'
+        s, c, t = (
+            to_int_str(row.get('state'), 2),
+            to_int_str(row.get('county'), 3),
+            to_int_str(row.get('tract'), 6),
         )
+        return f'geoId/{s}{c}{t}' if s and c and t else ''
     if geo_level == 'commuting_zone':
-        return f'geoId/cz{to_int_str(row["cz"], 5)}'
+        cz = to_int_str(row.get('cz'), 5)
+        return f'geoId/cz{cz}' if cz else ''
     raise ValueError(f'Unsupported geo_level: {geo_level}')
 
 
@@ -422,6 +439,10 @@ def _resolve_headers_via_svp(
                         row.get('unit', ''),
                     )
 
+    if len(header_to_sv) != len(unique_headers):
+        raise RuntimeError(
+            f'Unmapped column headers: {len(unique_headers) - len(header_to_sv)}'
+        )
     logging.info(
         'Resolved %d unique column headers via stat_var_processor.py',
         len(header_to_sv),
@@ -527,13 +548,15 @@ def _expand_chunk_worker(args: tuple) -> int:
 
             skip_positions = emitted_by_row.get(row_idx)
             geo_id = _format_geo_from_row_list(row, col_indices, geo_level)
+            if not geo_id:
+                continue
 
             out_batch = []
             for pos, obs_date, obs_period, var_measured, unit in active_specs:
                 if skip_positions and pos in skip_positions:
                     continue
                 val = row[pos].strip()
-                if not val or val.upper() in _MISSING_VALUE_PLACEHOLDERS:
+                if not _is_valid_number(val):
                     continue
                 out_batch.append(
                     (geo_id, obs_date, obs_period, var_measured, val, unit)
@@ -602,6 +625,11 @@ def prepare_parallel_shards_and_svp_inputs(
                     total_rows = row_idx + 1
                     if not row:
                         continue
+                    geo_id = _format_geo_from_row_list(
+                        row, col_indices, geo_level
+                    )
+                    if not geo_id:
+                        continue
                     raw_cohort = row[col_indices['cohort']].strip()
                     if not raw_cohort:
                         continue
@@ -613,12 +641,9 @@ def prepare_parallel_shards_and_svp_inputs(
                     for d_idx in unseen:
                         pos = data_col_positions[d_idx][0]
                         val = row[pos].strip()
-                        if val and val.upper() not in _MISSING_VALUE_PLACEHOLDERS:
+                        if _is_valid_number(val):
                             matched_d_indices.append(d_idx)
                     if matched_d_indices:
-                        geo_id = _format_geo_from_row_list(
-                            row, col_indices, geo_level
-                        )
                         cleaned_vals = [''] * num_data_cols
                         row_emitted = emitted_by_row.setdefault(row_idx, set())
                         for d_idx in matched_d_indices:
@@ -654,16 +679,18 @@ def prepare_parallel_shards_and_svp_inputs(
                     total_rows = row_idx + 1
                     if not row or not unseen:
                         continue
+                    geo_id = _format_geo_from_row_list(
+                        row, col_indices, geo_level
+                    )
+                    if not geo_id:
+                        continue
                     matched_d_indices = []
                     for d_idx in unseen:
                         pos = data_col_positions[d_idx][0]
                         val = row[pos].strip()
-                        if val and val.upper() not in _MISSING_VALUE_PLACEHOLDERS:
+                        if _is_valid_number(val):
                             matched_d_indices.append(d_idx)
                     if matched_d_indices:
-                        geo_id = _format_geo_from_row_list(
-                            row, col_indices, geo_level
-                        )
                         cleaned_vals = [''] * num_data_cols
                         row_emitted = emitted_by_row.setdefault(row_idx, set())
                         for d_idx in matched_d_indices:

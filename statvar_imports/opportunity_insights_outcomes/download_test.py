@@ -92,6 +92,20 @@ class DownloadAndPvmapTest(unittest.TestCase):
             ),
             'geoId/06085500100',
         )
+        for bad_cz in ('', '0', '-1', 'NA'):
+            self.assertEqual(
+                preprocess.format_geo_id({'cz': bad_cz}, 'commuting_zone'), ''
+            )
+        self.assertEqual(
+            preprocess.format_geo_id({'state': '0', 'county': '85'}, 'county'),
+            '',
+        )
+        self.assertEqual(
+            preprocess.format_geo_id(
+                {'state': '6', 'county': '85', 'tract': ''}, 'tract'
+            ),
+            '',
+        )
 
     def test_download_file_atomic_and_retry(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -229,6 +243,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     ) as f:
                         sv_rows.extend(list(csv.DictReader(f)))
             self.assertEqual(len(sv_rows), 18687)
+
+    def test_is_valid_number(self):
+        self.assertTrue(preprocess._is_valid_number('0.35973939'))
+        self.assertTrue(preprocess._is_valid_number('-12.5'))
+        for invalid in ('', 'NA', 'N/A', '.', 'nan', 'null', '-', 's', 'Inf', '-Inf'):
+            self.assertFalse(preprocess._is_valid_number(invalid))
 
 
 if __name__ == '__main__':
