@@ -17,12 +17,15 @@
         {
           "template_mcf": "output/Poverty_output.tmcf",
           "cleaned_csv": "output/Poverty_output.csv",
-          "node_mcf": "output/*.mcf"
+          "node_mcf": "output/Poverty_output_stat_vars.mcf"
         }
       ],
       "validation_config_file": "validation_config.json",
       "source_files": [
-        "input_files/*"
+        "input_files/*",
+        "counters/*",
+        "validation_config.json",
+        "output/Poverty_output_stat_vars.mcf"
       ]
     }
   ]

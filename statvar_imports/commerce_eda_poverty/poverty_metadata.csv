@@ -8,6 +8,6 @@ description,Persistent Poverty County Status (sourced from U.S. Economic Develop
 release_frequency,P1Y
 process,
 comments,
-output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor"
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
 header_rows,1
 output_only_new_statvars,True

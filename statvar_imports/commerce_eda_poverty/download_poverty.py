@@ -19,8 +19,9 @@ U.S. Economic Development Administration (EDA) / Department of Commerce:
   https://www.eda.gov/performance/tools/ (EDA_FY23_PPCs.xlsx)
 It downloads the official Excel workbook (with automatic mirror failover),
 supports ingesting directly from an existing input file, extracts the underlying
-county-level poverty data table (3,241 places across 1990, 2000, and 2020/2021),
-and stages the raw CSV and workbook under input_files/ and output/ for preprocessing.
+county-level poverty data table (3,232 places across 1990, 2000, and 2020/2021),
+and stages the raw CSV and workbook under input_files/ and output/ for
+preprocessing.
 """
 
 import csv
@@ -32,7 +33,6 @@ import tempfile
 
 from absl import app, flags, logging
 import openpyxl
-import requests
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
@@ -71,12 +71,14 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     "mirror_url",
     EDA_PPC_MIRROR_URL,
-    "Fallback mirror URL to download the Persistent Poverty Counties Excel workbook.",
+    "Fallback mirror URL to download the Persistent Poverty Counties Excel "
+    "workbook.",
 )
 flags.DEFINE_string(
     "input_file",
     None,
-    "Optional path to a local input file (.xlsx or .csv) to use instead of downloading.",
+    "Optional path to a local input file (.xlsx or .csv) to use instead of "
+    "downloading.",
 )
 flags.DEFINE_string(
     "output_xlsx_path",
@@ -110,21 +112,24 @@ def download_file(
     output_path,
     session=None,
     max_retries=3,
-    backoff_factor=1.5,
     timeout=60,
 ):
-    """Downloads a file from download_url and saves it using download_util.download_file_from_url."""
+    """Downloads a file from download_url and saves it to output_path."""
     logging.info("Downloading file from: %s", download_url)
     dst_dir = os.path.dirname(os.path.abspath(output_path))
     os.makedirs(dst_dir, exist_ok=True)
 
     if session is not None:
-        response = session.get(download_url, headers=HTTP_HEADERS, timeout=timeout)
+        response = session.get(
+            download_url, headers=HTTP_HEADERS, timeout=timeout
+        )
         if hasattr(response, "raise_for_status"):
             response.raise_for_status()
         content = response.content
         if not content:
-            raise RuntimeError(f"Empty response body received from {download_url}")
+            raise RuntimeError(
+                f"Empty response body received from {download_url}"
+            )
         with open(output_path, "wb") as f:
             f.write(content)
         return content
@@ -137,12 +142,16 @@ def download_file(
         overwrite=True,
     )
     if not result or not os.path.exists(output_path):
-        raise RuntimeError(f"Failed to download {download_url} using download_util")
+        raise RuntimeError(
+            f"Failed to download {download_url} using download_util"
+        )
 
     with open(output_path, "rb") as f:
         content = f.read()
     if not content:
-        raise RuntimeError(f"Empty response body received from {download_url}")
+        raise RuntimeError(
+            f"Empty response body received from {download_url}"
+        )
 
     logging.info(
         "Download completed successfully. Saved %d bytes to %s",
@@ -186,7 +195,9 @@ def extract_sheet_to_csv(
                 selected_sheet,
             )
 
-        logging.info("Extracting sheet '%s' from Excel workbook...", selected_sheet)
+        logging.info(
+            "Extracting sheet '%s' from Excel workbook...", selected_sheet
+        )
         ws = wb[selected_sheet]
 
         dst_dir = os.path.dirname(os.path.abspath(csv_output_path))
@@ -208,7 +219,9 @@ def extract_sheet_to_csv(
                 for row in ws.iter_rows(values_only=True):
                     if not any(row):
                         continue
-                    writer.writerow([("" if c is None else str(c)) for c in row])
+                    writer.writerow(
+                        [("" if c is None else str(c)) for c in row]
+                    )
                     row_count += 1
 
             os.replace(tmp_path, csv_output_path)
@@ -268,7 +281,9 @@ def download_poverty_dataset(
     # Case 1: Local input file specified
     if input_file:
         if not os.path.exists(input_file) or os.path.getsize(input_file) == 0:
-            raise FileNotFoundError(f"Input file not found or empty: {input_file}")
+            raise FileNotFoundError(
+                f"Input file not found or empty: {input_file}"
+            )
         logging.info("Using provided local input file: %s", input_file)
         if input_file.lower().endswith((".xlsx", ".xls")):
             copy_file_atomically(input_file, output_xlsx_path)
@@ -279,7 +294,7 @@ def download_poverty_dataset(
             copy_file_atomically(output_csv_path, raw_csv_path)
         return output_csv_path
 
-    # Clean up existing target files before a fresh download to avoid reusing stale files
+    # Clean up existing target files before a fresh download to avoid stale files
     for path_to_clean in [output_xlsx_path, output_csv_path, raw_csv_path]:
         if path_to_clean and os.path.exists(path_to_clean):
             try:
@@ -293,7 +308,7 @@ def download_poverty_dataset(
                     "Could not remove existing file %s: %s", path_to_clean, e
                 )
 
-    # Case 2: Download from web with primary and mirror fallback using download utility
+    # Case 2: Download from web with primary and mirror fallback
     content = None
     urls_to_try = []
     if source_url:
@@ -312,12 +327,14 @@ def download_poverty_dataset(
             )
             if not content.startswith(b"PK\x03\x04"):
                 raise ValueError(
-                    f"Downloaded content from {url} is not a valid ZIP/XLSX archive."
+                    f"Downloaded content from {url} is not a valid ZIP/XLSX "
+                    "archive."
                 )
             # Extract Underlying_Data sheet to output_csv_path
             extract_sheet_to_csv(content, output_csv_path)
             logging.info(
-                "Successfully downloaded workbook and extracted sheet from %s", url
+                "Successfully downloaded workbook and extracted sheet from %s",
+                url,
             )
             break
         except Exception as e:
@@ -337,7 +354,8 @@ def download_poverty_dataset(
 
     if not content:
         raise RuntimeError(
-            f"Failed to acquire dataset from all URLs: {urls_to_try}. Last error: {last_err}"
+            f"Failed to acquire dataset from all URLs: {urls_to_try}. "
+            f"Last error: {last_err}"
         ) from last_err
 
     if raw_csv_path:
@@ -349,16 +367,23 @@ def download_poverty_dataset(
 def main(argv):
     """Main entrypoint for downloading the poverty dataset."""
     del argv  # Unused
-    download_poverty_dataset(
-        source_url=FLAGS.source_url,
-        mirror_url=FLAGS.mirror_url,
-        input_file=FLAGS.input_file,
-        output_xlsx_path=FLAGS.output_xlsx_path,
-        output_csv_path=FLAGS.output_csv_path,
-        raw_csv_path=FLAGS.raw_csv_path,
-        max_retries=FLAGS.max_retries,
-        timeout=FLAGS.timeout,
-    )
+    try:
+        download_poverty_dataset(
+            source_url=FLAGS.source_url,
+            mirror_url=FLAGS.mirror_url,
+            input_file=FLAGS.input_file,
+            output_xlsx_path=FLAGS.output_xlsx_path,
+            output_csv_path=FLAGS.output_csv_path,
+            raw_csv_path=FLAGS.raw_csv_path,
+            max_retries=FLAGS.max_retries,
+            timeout=FLAGS.timeout,
+        )
+    except Exception as e:
+        logging.fatal(
+            "Failed to download Commerce EDA Poverty dataset: %s",
+            e,
+            exc_info=True,
+        )
 
 
 if __name__ == "__main__":

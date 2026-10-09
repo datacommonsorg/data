@@ -65,13 +65,19 @@ flags.DEFINE_string(
     "resolves from input_files/Poverty.csv, input_files/EDA_FY23_PPCs.xlsx, "
     "or output/Poverty_original.csv.",
 )
-flags.DEFINE_string("cleaned_csv_path", CLEANED_CSV, "Path to save cleaned output CSV.")
-flags.DEFINE_integer("min_county_count", 3000, "Minimum number of valid counties expected.")
+flags.DEFINE_string(
+    "cleaned_csv_path", CLEANED_CSV, "Path to save cleaned output CSV."
+)
+flags.DEFINE_integer(
+    "min_county_count", 3000, "Minimum number of valid counties expected."
+)
 flags.DEFINE_integer(
     "min_survey_year", 2020, "Minimum valid survey year for most recent estimate."
 )
 flags.DEFINE_integer(
-    "max_survey_year", None, "Maximum valid survey year (defaults to current year)."
+    "max_survey_year",
+    None,
+    "Maximum valid survey year (defaults to current year).",
 )
 
 # Valid 2-digit US State and Territory FIPS codes
@@ -82,7 +88,7 @@ VALID_STATE_FIPS = {
     "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
     "40", "41", "42", "44", "45", "46", "47", "48", "49", "50", "51", "53",
     "54", "55", "56",
-    # Territories: American Samoa, Guam, Northern Mariana Islands, Puerto Rico, Virgin Islands
+    # Territories: AS, GU, MP, PR, VI
     "60", "66", "69", "72", "78",
 }
 
@@ -118,7 +124,7 @@ def clean_geoid(val):
 
 
 def _extract_dataframe_from_excel(excel_path):
-    """Extracts Underlying_Data sheet from an Excel workbook into a pandas DataFrame."""
+    """Extracts Underlying_Data sheet from an Excel workbook into a DataFrame."""
     wb = openpyxl.load_workbook(excel_path, data_only=True)
     try:
         sheet_names = wb.sheetnames
@@ -136,7 +142,8 @@ def _extract_dataframe_from_excel(excel_path):
             if not target_sheet:
                 target_sheet = sheet_names[0]
             logging.warning(
-                "Worksheet 'Underlying_Data' not found in %s; falling back to '%s'.",
+                "Worksheet 'Underlying_Data' not found in %s; falling back "
+                "to '%s'.",
                 sheet_names,
                 target_sheet,
             )
@@ -154,21 +161,24 @@ def _extract_dataframe_from_excel(excel_path):
                 break
 
         if header_idx is None:
-            logging.error(
-                "Could not find header row containing 'GEOID' in sheet '%s' of %s",
-                target_sheet,
-                excel_path,
-            )
             raise ValueError(
-                f"Could not find header row containing 'GEOID' in sheet '{target_sheet}' of {excel_path}"
+                f"Could not find header row containing 'GEOID' in sheet "
+                f"'{target_sheet}' of {excel_path}"
             )
 
-        headers = [("" if c is None else str(c).strip()) for c in rows[header_idx]]
+        headers = [
+            ("" if c is None else str(c).strip()) for c in rows[header_idx]
+        ]
         data_rows = []
         for r in rows[header_idx + 1:]:
             if not any(r):
                 continue
-            data_rows.append([("" if c is None else str(c).strip()) for c in r[:len(headers)]])
+            data_rows.append(
+                [
+                    ("" if c is None else str(c).strip())
+                    for c in r[: len(headers)]
+                ]
+            )
 
         return pd.DataFrame(data_rows, columns=headers)
     finally:
@@ -180,7 +190,9 @@ def resolve_source_file_path(requested_path=None):
     if requested_path:
         if os.path.exists(requested_path) and os.path.getsize(requested_path) > 0:
             return requested_path
-        raise FileNotFoundError(f"Specified source file not found or empty: {requested_path}")
+        raise FileNotFoundError(
+            f"Specified source file not found or empty: {requested_path}"
+        )
 
     candidates = [
         DEFAULT_SOURCE_CSV,
@@ -192,8 +204,8 @@ def resolve_source_file_path(requested_path=None):
             return candidate
 
     raise FileNotFoundError(
-        "No downloaded source file found. Please run download_poverty.py first to "
-        f"fetch the dataset, or specify --source_path. Checked: {candidates}"
+        "No downloaded source file found. Please run download_poverty.py first "
+        f"to fetch the dataset, or specify --source_path. Checked: {candidates}"
     )
 
 
@@ -204,18 +216,17 @@ def preprocess_poverty(
     min_survey_year=2020,
     max_survey_year=None,
 ):
-    """Preprocesses the raw Poverty dataset into cleaned format with normalized columns."""
+    """Preprocesses the raw Poverty dataset into normalized cleaned CSV."""
     logging.info("Preprocessing source Poverty dataset from %s...", src_path)
     if max_survey_year is None:
         max_survey_year = datetime.date.today().year
     if not os.path.exists(src_path) or os.path.getsize(src_path) == 0:
-        logging.error("Source file does not exist or is empty: %s", src_path)
         raise ValueError(f"Source file does not exist or is empty: {src_path}")
 
     if src_path.lower().endswith((".xlsx", ".xls")):
         df = _extract_dataframe_from_excel(src_path)
     else:
-        # Detect header row index by scanning lines dynamically until 'GEOID' is found
+        # Detect header row index by scanning lines until 'GEOID' is found
         skip = None
         with open(src_path, "r", encoding="utf-8", errors="ignore") as f:
             for idx, line in enumerate(f):
@@ -223,17 +234,13 @@ def preprocess_poverty(
                     skip = idx
                     break
         if skip is None:
-            logging.error(
-                "Could not find header row containing 'GEOID' in CSV file: %s",
-                src_path,
-            )
             raise ValueError(
-                f"Could not find header row containing 'GEOID' in CSV file: {src_path}"
+                "Could not find header row containing 'GEOID' in CSV file: "
+                f"{src_path}"
             )
         df = pd.read_csv(src_path, skiprows=skip, dtype=str)
 
     if df.empty:
-        logging.error("File not read properly into dataframe: %s", src_path)
         raise ValueError(f"File not read properly into dataframe: {src_path}")
 
     # Strip column headers to avoid fragile whitespace issues
@@ -241,10 +248,9 @@ def preprocess_poverty(
 
     # Check if at least GEOID and the poverty columns are found
     if "GEOID" not in df.columns:
-        logging.error("Missing required column 'GEOID' in source dataset")
         raise ValueError("Missing required column 'GEOID' in source dataset")
 
-    # Rename columns to standard names (including any future <YEAR> Decennial Census columns)
+    # Rename columns to standard names (including future <YEAR> Decennial cols)
     rename_dict = {}
     for col in df.columns:
         clean_col = col.rstrip("*").strip()
@@ -266,47 +272,52 @@ def preprocess_poverty(
     df = df.rename(columns=rename_dict)
 
     required_cols = [
-        "GEOID", "poverty_rate_1990", "poverty_rate_2000", "poverty_rate_recent"
+        "GEOID",
+        "poverty_rate_1990",
+        "poverty_rate_2000",
+        "poverty_rate_recent",
     ]
     missing = [c for c in required_cols if c not in df.columns]
     if missing:
-        logging.error("Missing required columns in source dataset: %s", missing)
-        raise ValueError(f"Missing required columns in source dataset: {missing}")
+        raise ValueError(
+            f"Missing required columns in source dataset: {missing}"
+        )
 
     # Standardize and validate GEOIDs
     df["GEOID"] = df["GEOID"].apply(clean_geoid)
     df = df.dropna(subset=["GEOID"])
 
     is_territory = df["GEOID"].str[:2].isin(ISLAND_TERRITORY_FIPS)
-    default_years = pd.Series("2021", index=df.index).where(~is_territory, "2020")
+    default_years = pd.Series("2021", index=df.index).where(
+        ~is_territory, "2020"
+    )
 
     if data_source_cols:
         ds_col = data_source_cols[0]
-        parsed_years = []
-        for idx, row in df.iterrows():
-            val = str(row.get(ds_col, "")).strip()
-            if val and val != "nan":
-                matched_years = re.findall(r"\b(19\d\d|20\d\d)\b", val)
-                if not matched_years:
-                    error_msg = (
-                        f"Unrecognized survey year in {ds_col} ('{val}') for "
-                        f"GEOID {row['GEOID']}"
-                    )
-                    logging.error(error_msg)
-                    raise ValueError(error_msg)
-                yr = int(matched_years[-1])
-                if not (min_survey_year <= yr <= max_survey_year):
-                    error_msg = (
-                        f"Unexpected survey year {yr} in {ds_col} for GEOID"
-                        f" {row['GEOID']} (expected between {min_survey_year} and "
-                        f"{max_survey_year})"
-                    )
-                    logging.error(error_msg)
-                    raise ValueError(error_msg)
-                parsed_years.append(str(yr))
-            else:
-                parsed_years.append(default_years.loc[idx])
-        recent_years = pd.Series(parsed_years, index=df.index)
+        ds_vals = df[ds_col].fillna("").astype(str).str.strip()
+        has_ds = (ds_vals != "") & (ds_vals.str.lower() != "nan")
+        extracted_years = ds_vals.str.findall(r"\b(?:19|20)\d{2}\b").str[-1]
+        unrecognized_mask = has_ds & extracted_years.isna()
+        if unrecognized_mask.any():
+            bad_idx = unrecognized_mask.idxmax()
+            raise ValueError(
+                f"Unrecognized survey year in {ds_col} "
+                f"('{ds_vals.loc[bad_idx]}') for GEOID "
+                f"{df.loc[bad_idx, 'GEOID']}"
+            )
+        yr_numeric = pd.to_numeric(extracted_years, errors="coerce")
+        out_of_range_mask = has_ds & (
+            (yr_numeric < min_survey_year) | (yr_numeric > max_survey_year)
+        )
+        if out_of_range_mask.any():
+            bad_idx = out_of_range_mask.idxmax()
+            bad_yr = int(yr_numeric.loc[bad_idx])
+            raise ValueError(
+                f"Unexpected survey year {bad_yr} in {ds_col} for GEOID "
+                f"{df.loc[bad_idx, 'GEOID']} (expected between "
+                f"{min_survey_year} and {max_survey_year})"
+            )
+        recent_years = default_years.where(~has_ds, extracted_years)
     else:
         recent_years = default_years
 
@@ -321,7 +332,9 @@ def preprocess_poverty(
     )
 
     # Coerce and validate poverty values within [0.0, 100.0]
-    raw_poverty_cols = [c for _, c in historical_year_cols] + ["poverty_rate_recent"]
+    raw_poverty_cols = [c for _, c in historical_year_cols] + [
+        "poverty_rate_recent"
+    ]
     for col in raw_poverty_cols:
         df[col] = pd.to_numeric(df[col].astype(str).str.strip(), errors="coerce")
         invalid_mask = df[col].notna() & ((df[col] < 0.0) | (df[col] > 100.0))
@@ -338,38 +351,44 @@ def preprocess_poverty(
 
     # Verify sanity threshold on valid county count
     if len(df) < min_county_count:
-        logging.error(
-            "Sanity check failed: Expected at least %d counties, but found %d.",
-            min_county_count,
-            len(df),
-        )
         raise ValueError(
             f"Sanity check failed: Expected at least {min_county_count} "
             f"counties, but found {len(df)}."
         )
 
-    # Build generic long-format (GEOID, year, poverty_rate) records
-    records = []
-    for idx, row in df.iterrows():
-        geoid = row["GEOID"]
-        row_obs = {}
-        for yr_str, col_name in historical_year_cols:
-            val = row[col_name]
-            if pd.notna(val):
-                row_obs[yr_str] = float(val)
-        recent_val = row["poverty_rate_recent"]
-        if pd.notna(recent_val):
-            row_obs[str(recent_years.loc[idx])] = float(recent_val)
-        for yr_str in sorted(row_obs.keys(), key=int):
-            records.append(
-                {
-                    "GEOID": geoid,
-                    "year": yr_str,
-                    "poverty_rate": row_obs[yr_str],
-                }
-            )
-
-    df = pd.DataFrame(records, columns=["GEOID", "year", "poverty_rate"])
+    # Reshape wide-to-long using vectorized pd.melt() and pd.concat()
+    df = df.copy()
+    df["_row_order"] = range(len(df))
+    hist_rename = {col: yr for yr, col in historical_year_cols}
+    hist_df = df[["_row_order", "GEOID"] + list(hist_rename.keys())].rename(
+        columns=hist_rename
+    )
+    melted_hist = pd.melt(
+        hist_df,
+        id_vars=["_row_order", "GEOID"],
+        value_vars=list(hist_rename.values()),
+        var_name="year",
+        value_name="poverty_rate",
+    )
+    recent_df = pd.DataFrame(
+        {
+            "_row_order": df["_row_order"],
+            "GEOID": df["GEOID"],
+            "year": recent_years.loc[df.index].astype(str),
+            "poverty_rate": df["poverty_rate_recent"],
+        }
+    )
+    combined = pd.concat([melted_hist, recent_df], ignore_index=True)
+    combined = combined.dropna(subset=["poverty_rate"])
+    combined["poverty_rate"] = combined["poverty_rate"].astype(float)
+    combined = combined.drop_duplicates(
+        subset=["_row_order", "year"], keep="last"
+    )
+    combined["_year_num"] = combined["year"].astype(int)
+    combined = combined.sort_values(
+        by=["_row_order", "_year_num"], kind="mergesort"
+    )
+    df = combined[["GEOID", "year", "poverty_rate"]].reset_index(drop=True)
 
     # Atomic write to destination file
     dst_dir = os.path.dirname(os.path.abspath(dst_path))
@@ -404,14 +423,21 @@ def preprocess_poverty(
 def main(argv):
     """Main entrypoint for preprocessing the poverty dataset."""
     del argv  # Unused
-    source_path = resolve_source_file_path(FLAGS.source_path)
-    preprocess_poverty(
-        src_path=source_path,
-        dst_path=FLAGS.cleaned_csv_path,
-        min_county_count=FLAGS.min_county_count,
-        min_survey_year=FLAGS.min_survey_year,
-        max_survey_year=FLAGS.max_survey_year,
-    )
+    try:
+        source_path = resolve_source_file_path(FLAGS.source_path)
+        preprocess_poverty(
+            src_path=source_path,
+            dst_path=FLAGS.cleaned_csv_path,
+            min_county_count=FLAGS.min_county_count,
+            min_survey_year=FLAGS.min_survey_year,
+            max_survey_year=FLAGS.max_survey_year,
+        )
+    except Exception as e:
+        logging.fatal(
+            "Failed to preprocess Commerce EDA Poverty dataset: %s",
+            e,
+            exc_info=True,
+        )
 
 
 if __name__ == "__main__":

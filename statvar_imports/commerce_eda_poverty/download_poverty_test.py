@@ -24,8 +24,6 @@ from urllib import parse
 
 import openpyxl
 import pandas as pd
-import requests
-from requests.adapters import HTTPAdapter
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
@@ -68,10 +66,39 @@ def _create_mock_eda_workbook(filepath=None):
             "",
             "",
         ])
-        ws_data.append(["Autauga County, AL", "01001", 15.7, 10.9, 13.3, "SAIPE, 2021", "No", 1])
-        ws_data.append(["Barbour County, AL", "01005", 25.2, 26.8, 29.0, "SAIPE, 2021", "Yes", 2])
+        ws_data.append(
+            [
+                "Autauga County, AL",
+                "01001",
+                15.7,
+                10.9,
+                13.3,
+                "SAIPE, 2021",
+                "No",
+                1,
+            ]
+        )
+        ws_data.append(
+            [
+                "Barbour County, AL",
+                "01005",
+                25.2,
+                26.8,
+                29.0,
+                "SAIPE, 2021",
+                "Yes",
+                2,
+            ]
+        )
         ws_data.append([
-            "Eastern District, AS", "60010", 56.0, 58.6, 52.2, "Decennial Census, 2020", "Yes", 2
+            "Eastern District, AS",
+            "60010",
+            56.0,
+            58.6,
+            52.2,
+            "Decennial Census, 2020",
+            "Yes",
+            2,
         ])
 
         if filepath:
@@ -97,7 +124,8 @@ class TestDownloadPoverty(unittest.TestCase):
                 return output_file
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 side_effect=mock_download,
             ) as mock_dl:
                 content = download_file(
@@ -123,7 +151,8 @@ class TestDownloadPoverty(unittest.TestCase):
                 return output_file
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 side_effect=mock_download,
             ) as mock_dl:
                 content = download_file(
@@ -147,7 +176,8 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "fail.xlsx")
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 return_value=None,
             ) as mock_dl:
                 with self.assertRaises(RuntimeError):
@@ -170,7 +200,8 @@ class TestDownloadPoverty(unittest.TestCase):
                 return output_file
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 side_effect=mock_download_empty,
             ) as mock_dl:
                 with self.assertRaises(RuntimeError):
@@ -216,7 +247,9 @@ class TestDownloadPoverty(unittest.TestCase):
             csv_path = os.path.join(tmpdir, "extracted.csv")
             excel_bytes = _create_mock_eda_workbook()
 
-            extract_sheet_to_csv(excel_bytes, csv_path, target_sheet_name="Underlying_Data")
+            extract_sheet_to_csv(
+                excel_bytes, csv_path, target_sheet_name="Underlying_Data"
+            )
             self.assertTrue(os.path.exists(csv_path))
 
             df = pd.read_csv(csv_path, skiprows=2, dtype=str)
@@ -301,7 +334,8 @@ class TestDownloadPoverty(unittest.TestCase):
                 return output_file
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 side_effect=mock_download,
             ):
                 res = download_poverty_dataset(
@@ -323,7 +357,9 @@ class TestDownloadPoverty(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             download_poverty_dataset(input_file="/nonexistent/path/Poverty.csv")
 
-    def test_download_poverty_dataset_all_urls_fail_raises_and_cleans_stale_files(self):
+    def test_download_poverty_dataset_all_urls_fail_raises_and_cleans_stale_files(
+        self,
+    ):
         with tempfile.TemporaryDirectory() as tmpdir:
             dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
             dst_csv = os.path.join(tmpdir, "Poverty.csv")
@@ -333,7 +369,8 @@ class TestDownloadPoverty(unittest.TestCase):
                     f.write("stale_data")
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 return_value=None,
             ):
                 with self.assertRaises(RuntimeError) as ctx:
@@ -346,12 +383,16 @@ class TestDownloadPoverty(unittest.TestCase):
                         max_retries=1,
                     )
 
-            self.assertIn("Failed to acquire dataset from all URLs", str(ctx.exception))
+            self.assertIn(
+                "Failed to acquire dataset from all URLs", str(ctx.exception)
+            )
             self.assertFalse(os.path.exists(dst_xlsx))
             self.assertFalse(os.path.exists(dst_csv))
             self.assertFalse(os.path.exists(dst_raw_csv))
 
-    def test_download_poverty_dataset_primary_html_challenge_mirror_succeed(self):
+    def test_download_poverty_dataset_primary_html_challenge_mirror_succeed(
+        self,
+    ):
         with tempfile.TemporaryDirectory() as tmpdir:
             dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
             dst_csv = os.path.join(tmpdir, "Poverty.csv")
@@ -362,14 +403,18 @@ class TestDownloadPoverty(unittest.TestCase):
             def mock_download(url, output_file=None, **kwargs):
                 if parse.urlparse(url).netloc == "www.eda.gov":
                     with open(output_file, "wb") as f:
-                        f.write(b"<!DOCTYPE html><html><title>Just a moment...</title></html>")
+                        f.write(
+                            b"<!DOCTYPE html><html><title>Just a moment..."
+                            b"</title></html>"
+                        )
                     return output_file
                 with open(output_file, "wb") as f:
                     f.write(excel_bytes)
                 return output_file
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty.download_file_from_url",
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".download_file_from_url",
                 side_effect=mock_download,
             ):
                 res = download_poverty_dataset(

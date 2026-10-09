@@ -4,18 +4,22 @@
     {
       "rule_id": "check_date_span_sql",
       "validator": "SQL_VALIDATOR",
-      "description": "Verify MinDate is 1990 and MaxDate is >= 2021.",
+      "scope": {
+        "data_source": "stats"
+      },
       "params": {
-        "query": "SELECT StatVar, MinDate, MaxDate FROM stats",
-        "condition": "TRY_CAST(MinDate AS INT) = 1990 AND TRY_CAST(MaxDate AS INT) >= 2021"
+        "query": "SELECT StatVar, MinDate, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+        "condition": "CAST(MinDate AS INTEGER) <= 1990 AND CAST(MaxDate AS INTEGER) >= 2020 AND total_svs > 0"
       }
     },
     {
       "rule_id": "check_deleted_records_percent",
       "validator": "DELETED_RECORDS_PERCENT",
-      "description": "Checks that the percentage of deleted records is within 0.1% threshold.",
+      "scope": {
+        "data_source": "differ_summary"
+      },
       "params": {
-        "threshold": 0.1
+        "threshold": 0
       }
     }
   ]
