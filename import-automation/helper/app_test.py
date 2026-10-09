@@ -106,9 +106,7 @@ class AppTest(unittest.TestCase):
         self.assertEqual(mock_storage.update_version_file.call_count, 2)
         self.assertEqual(mock_bigquery.update_import_summary.call_count, 2)
 
-    @patch('routes.imports.import_utils.get_caller_identity')
-    def test_update_import_version_override(self, mock_get_caller):
-        mock_get_caller.return_value = "tester@google.com"
+    def test_update_import_version_override(self):
         mock_bigquery = MagicMock()
         mock_storage = MagicMock()
         app.dependency_overrides[get_bigquery_client] = lambda: mock_bigquery
@@ -137,7 +135,7 @@ class AppTest(unittest.TestCase):
         self.assertEqual(called_params[0]["import_name"], "import1")
         self.assertEqual(called_params[0]["status"], "STAGING")
         self.assertEqual(called_params[0]["latest_version"], "gs://bucket/import1/ver_import1.csv")
-        self.assertEqual(called_kwargs.get("comment"), "version-override:tester@google.com release-comment")
+        self.assertEqual(called_kwargs.get("comment"), "release-comment")
 
     @patch('routes.events.import_utils.invoke_import_automation_workflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
