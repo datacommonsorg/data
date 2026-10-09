@@ -27,15 +27,17 @@ OBSERVATION_PERIOD = "P1Y"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[District]"
 # Considering the required columns for Demographics Data.
 POSSIBLE_DATA_COLUMNS = [
-    "[Public School]", ".*Students.*", ".*Teacher.*", ".*American.*",
-    ".*Asian.*", ".*Hispanic.*", ".*Black.*", ".*White.*", ".*Adult Education.*"
-    ".*Staff.*", ".*Admin.*", ".*Counselor.*", ".*Psychologist.*", "Ungraded.*",
-    "Two or More Races.*", "Nat. Hawaiian or Other Pacific Isl.*", "Grades.*",
-    "Prekindergarten and Kindergarten.*"
+    ".*Students.*", ".*Teacher.*", ".*American.*", ".*Asian.*", ".*Hispanic.*",
+    ".*Black.*", ".*White.*", ".*Adult Education.*", ".*Staff.*", ".*Admin.*",
+    ".*Counselor.*", ".*Psychologist.*", "Ungraded.*", "Two or More Races.*",
+    "Nat. Hawaiian or Other Pacific Isl.*", "Grades.*",
+    "Prekindergarten and Kindergarten.*", ".*Paraprofessionals.*",
+    ".*Pupil/Teacher Ratio.*", ".*Instructional Coordinators.*",
+    ".*Librarians.*"
 ]
 # Excluding the unwanted columns.
 EXCLUDE_DATA_COLUMNS = [
-    "Individualized Education Program Students", '(Includes AE)',
+    "Individualized Education Program Students", r'\(Includes AE\)',
     "Phone Number", "State Agency ID", "State Name"
 ]
 # Considering the required columns for Place Data.

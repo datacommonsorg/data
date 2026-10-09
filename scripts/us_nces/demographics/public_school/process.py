@@ -23,9 +23,18 @@ output_files - output files (mcf, tmcf and csv are written here)
 
 import os
 import sys
-from absl import flags
 from absl import app
+from absl import flags
 from absl import logging
+
+FLAGS = flags.FLAGS
+flags.DEFINE_enum(
+    'mode',
+    'all',
+    ['all', 'place', 'stats'],
+    'Execution mode: "place" for place entities only, "stats" for demographic'
+    ' observations only, "all" for both.',
+)
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
@@ -51,10 +60,12 @@ class NCESPublicSchool(USEducation):
     _renaming_columns = RENAMING_PUBLIC_COLUMNS
 
 
-if __name__ == '__main__':
+def main(argv):
+    del argv  # Unused
     try:
         logging.set_verbosity(logging.INFO)
-        logging.info("Main Method Starts For Public School")
+        logging.info(
+            f"Main Method Starts For Public School (mode={FLAGS.mode})")
         gcs_output_dir_local = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
@@ -71,8 +82,9 @@ if __name__ == '__main__':
                         input_files_to_process.append(full_file_path)
 
         if not input_files_to_process:
-            logging.warning(
-                f"No CSV files found in {input_path_base} or its year subfolders. Please ensure download_input_files.py has been run and placed files correctly."
+            raise FileNotFoundError(
+                f"No CSV files found in {input_path_base} or its year subfolders. "
+                "Please ensure download_input_files.py has been run and placed files correctly."
             )
         output_file_path = os.path.join(gcs_output_dir_local, "output_files")
         os.makedirs(output_file_path, exist_ok=True)
@@ -92,12 +104,24 @@ if __name__ == '__main__':
         loader = NCESPublicSchool(input_files_to_process, cleaned_csv_path,
                                   mcf_path, tmcf_path, csv_path_place,
                                   duplicate_csv_place, tmcf_path_place)
+
+        if FLAGS.mode == 'place':
+            loader._generate_statvars = False
+            loader._generate_places = True
+        elif FLAGS.mode == 'stats':
+            loader._generate_statvars = True
+            loader._generate_places = False
+
         loader.generate_csv()
         loader.generate_mcf()
         loader.generate_tmcf()
-        logging.info("Main Method Completed For Public School District ")
+        logging.info("Main Method Completed For Public School")
 
     except Exception as e:
         # Only log the first 1000 characters of the error message
         error_msg = str(e)[:1000]
         logging.fatal(f"Error While Running Public School Process: {error_msg}")
+
+
+if __name__ == '__main__':
+    app.run(main)

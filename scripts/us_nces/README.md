@@ -2,8 +2,8 @@
 ## Import Overview:
 This dataset has Population Estimates for the National Center for Education Statistics in US for 
 - Private School - 1997-98 to 2019-20
-- School District -2010-11 to 2023-24
-- Public Schools - 2010-11 to 2023-24
+- School District - 2010-11 to 2024-25
+- Public Schools - 2010-11 to 2024-25
 
 ## Source URL:
   https://nces.ed.gov/ccd/elsi/tableGenerator.aspx 
@@ -34,9 +34,57 @@ This dataset has Population Estimates for the National Center for Education Stat
     The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_folder/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_folder/output_files
 
 ### Script Execution Details
-    private    :  python3 private_school/process.py
-    public   :  python3 public_school/process.py
-    district  :  python3 school_district/process.py
+Each domain's `process.py` supports the `--mode` flag (`place`, `stats`, or `all`, default: `all`):
+
+```bash
+# Public School
+python3 public_school/process.py --mode=place  # Place data only
+python3 public_school/process.py --mode=stats  # Statistical observations only
+python3 public_school/process.py --mode=all    # Both place and stats (default)
+
+# School District
+python3 school_district/process.py --mode=place
+python3 school_district/process.py --mode=stats
+python3 school_district/process.py --mode=all
+
+# Private School
+python3 private_school/process.py --mode=place
+python3 private_school/process.py --mode=stats
+python3 private_school/process.py --mode=all
+```
+
+### Import Architecture & Staggered Cron Scheduling
+Each domain is split into independent Cloud Batch imports in `manifest.json`. Because newer NCES data introduces newly defined places (such as brand-new school districts and public schools) that are referenced across imports (e.g., `NCES_PublicSchool` places reference parent school districts via `schoolDistrict: dcs:geoId/sch...`, and Stats imports reference places via `observationAbout`), jobs are organized into **three staggered tiers spaced 1 week (7 days) apart**.
+
+This 1-week buffer ensures that Data Commons Production ingests and indexes the newly defined Place nodes from Tier $N$ before Tier $N+1$ jobs execute, guaranteeing zero missing reference warnings (`check_missing_refs_count: PASSED`).
+
+#### Execution Tiers & Dependencies
+
+```text
+[TIER 1: Week 1 (Day 3)]               [TIER 2: Week 2 (Day 10, +7d)]             [TIER 3: Week 3 (Day 17, +14d)]
+========================               ==============================             ===============================
+
+NCES_SchoolDistrict (Place) ─────────► NCES_SchoolDistrictStats (Stats)
+(Defines: dcid:geoId/sch...)     │     (Refs: observationAbout: dcs:geoId/sch...)
+                                 │
+                                 └───► NCES_PublicSchool (Place) ───────────────► NCES_PublicSchoolStats (Stats)
+                                       (Defines: dcid:nces/... [Public])          (Refs: observationAbout: dcs:nces/...)
+                                       (Refs: schoolDistrict: dcs:geoId/sch...)
+
+NCES_PrivateSchool (Place) ──────────► NCES_PrivateSchoolStats (Stats)
+(Defines: dcid:nces/... [Private])     (Refs: observationAbout: dcs:nces/...)
+```
+
+#### Staggered Quarterly Cron Schedule (`manifest.json`)
+
+| Execution Tier | Import Name | Domain | Manifest Path | Staggered `cron_schedule` |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tier 1 (Week 1, Day 3)** | `NCES_SchoolDistrict` | School District (Place) | `school_district/manifest.json` | `"30 3 3 3,6,9,12 *"` |
+| **Tier 1 (Week 1, Day 3)** | `NCES_PrivateSchool` | Private School (Place) | `private_school/manifest.json` | `"30 4 3 3,6,9,12 *"` |
+| **Tier 2 (Week 2, Day 10)** | `NCES_SchoolDistrictStats` | School District (Stats) | `school_district/manifest.json` | `"30 3 10 3,6,9,12 *"` |
+| **Tier 2 (Week 2, Day 10)** | `NCES_PublicSchool` | Public School (Place) | `public_school/manifest.json` | `"30 5 10 3,6,9,12 *"` |
+| **Tier 2 (Week 2, Day 10)** | `NCES_PrivateSchoolStats` | Private School (Stats)* | `private_school/manifest.json` | `"30 7 10 3,6,9,12 *"` |
+| **Tier 3 (Week 3, Day 17)** | `NCES_PublicSchoolStats` | Public School (Stats) | `public_school/manifest.json` | `"30 3 17 3,6,9,12 *"` |
 
 
 #### Cleaned Data
@@ -183,7 +231,7 @@ step 1 :
 
 step 2 : Use the command-line tool to do genmcf using the CSV and TMCF files.
 
-`java -jar '/usr/local/google/home/spateriya/Downloads/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar' genmcf -r FULL <place csv path> <place tmcf path>`
+`java -jar <path_to_datacommons_import_tool>/datacommons-import-tool-jar-with-dependencies.jar genmcf -r FULL <place csv path> <place tmcf path>`
 
 step 3 : Update the file path in the textproto files for NCES_PrivateSchool, NCES_PublicSchool, and NCES_SchoolDistrict.
 
