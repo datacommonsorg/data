@@ -1,0 +1,3 @@
+USPS	GEOID	ALAND	AWATER	ALAND_SQMI	AWATER_SQMI	INTPTLAT	INTPTLONG                                                                                                                             
+AL	01001020100	9817813	28435	3.791	0.011	32.4819591	-86.4913377                                                                                                                                         
+AL	01001020200	3325679	5669	1.284	0.002	32.475758	-86.4724678                                                                                                                                           
