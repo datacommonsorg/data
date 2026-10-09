@@ -15,7 +15,10 @@
                 {
                     "template_mcf": "output/investment_output.tmcf",
                     "cleaned_csv": "output/investment_output.csv",
-                    "node_mcf": "output/investment_output_stat_vars.mcf"
+                    "node_mcf": [
+                        "investment_schema.mcf",
+                        "output/investment_output_stat_vars.mcf"
+                    ]
                 }
             ],
             "source_files": [
