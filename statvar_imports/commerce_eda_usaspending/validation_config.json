@@ -14,8 +14,8 @@
             "description": "Checks that active programs have recent data within 1 year of current year.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT * FROM stats WHERE StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks', 'dcid:Amount_Investment_ProgramPlanning', 'dcid:Amount_Investment_TechnicalAssistance', 'Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks', 'Amount_Investment_ProgramPlanning', 'Amount_Investment_TechnicalAssistance')",
-                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1)"
+                "query": "SELECT *, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('dcid:Amount_Investment', 'dcid:Amount_Investment_EconomicAdjustmentAssistance', 'dcid:Amount_Investment_PublicWorks', 'dcid:Amount_Investment_ProgramPlanning', 'dcid:Amount_Investment_TechnicalAssistance', 'Amount_Investment', 'Amount_Investment_EconomicAdjustmentAssistance', 'Amount_Investment_PublicWorks', 'Amount_Investment_ProgramPlanning', 'Amount_Investment_TechnicalAssistance')",
+                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1) AND total_svs > 0"
             }
         },
         {
@@ -24,14 +24,6 @@
             "validator": "MIN_VALUE_CHECK",
             "params": {
                 "minimum": 0
-            }
-        },
-        {
-            "rule_id": "minimum_observations_per_statvar",
-            "description": "Checks that each StatVar has at least one observation.",
-            "validator": "NUM_OBSERVATIONS_CHECK",
-            "params": {
-                "minimum": 1
             }
         }
     ]

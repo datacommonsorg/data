@@ -41,10 +41,10 @@ Outputs produced:
 - `output/investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
 - `output/investment_output.tmcf`: Template MCF mapping observation properties.
 - `output/investment_output_stat_vars.mcf`: Node MCF for new StatisticalVariable entities.
-- `output/investment_schema.mcf`: Node MCF for provisional EDA program schema enums.
 - `counters/investment_counters.csv`: Processing counters and diff statistics.
 
 ## Data Processing & Methodology
+- **Cumulative Award Inception Semantics**: `process.py` queries the USAspending `/api/v2/search/spending_by_award/` endpoint and groups awards by the fiscal year of each award's `Start Date` (where October–December maps to `year + 1`), summing the total `Award Amount`. Consequently, multi-year grants and subsequent obligation modifications/amendments are attributed as cumulative lifetime award obligations to the fiscal year of award inception rather than individual annual outlay transactions.
 - **Year Partitioning**: API queries are partitioned fiscal-year by fiscal-year to prevent USAspending's 10,000-record pagination ceiling.
 - **De-obligations**: Award adjustments resulting in net non-positive annual funding for a program in a state are excluded, ensuring State Totals are mathematically consistent with the sum of reported components.
 - **Coverage**: Covers all historical and modern EDA programs including CHIPS Act Tech Hubs (11.039), Recompete Pilot (11.040), Science and Research Park Development Grants (11.030), and STEM Talent Challenge (11.023).

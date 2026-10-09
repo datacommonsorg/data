@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "Commerce_EDA_USASpending",
+            "import_name": "Commerce_EDA_USAspending",
             "curator_emails": [
                 "support@datacommons.org"
             ],
@@ -15,7 +15,7 @@
                 {
                     "template_mcf": "output/investment_output.tmcf",
                     "cleaned_csv": "output/investment_output.csv",
-                    "node_mcf": "output/*.mcf"
+                    "node_mcf": "output/investment_output_stat_vars.mcf"
                 }
             ],
             "source_files": [
@@ -25,6 +25,7 @@
                 "investment_pvmap.csv",
                 "investment_schema.mcf",
                 "manifest.json",
+                "output/investment_output_stat_vars.mcf",
                 "validation_config.json"
             ],
             "cron_schedule": "30 05 * * 1",
