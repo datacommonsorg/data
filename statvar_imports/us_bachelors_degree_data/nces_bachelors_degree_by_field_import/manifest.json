@@ -22,7 +22,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "output_files/nces_female_output.tmcf",
-                    "cleaned_csv": "output_files/nces_female_output.csv"
+                    "cleaned_csv": "output_files/nces_female_output.csv",
+                    "node_mcf": "output/*.mcf"
                 },
                 {
                     "template_mcf": "output_files/nces_male_output.tmcf",
@@ -37,7 +38,8 @@
                     "cleaned_csv": "output_files/nces_male_output_latest.csv"
                 }
             ],
-            "cron_schedule": "0 05 * * 4"
+            "cron_schedule": "0 05 * * 4",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

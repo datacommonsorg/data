@@ -11,6 +11,8 @@ __pycache__/
 dc_generated/
 # Ignore the data folder under the un_census/enhanced_tmcf/ directory.
 */*/*/data/*
+!import-automation/executor/test/data/**
+!scripts/**/data/**
 lib/
 bin/
 pyvenv.cfg
@@ -23,5 +25,14 @@ import-automation/executor/config_override.json
 .datacommons/
 
 .venv/
+
+# Track only the Antigravity skill registry under .agents. The directory can
+# otherwise be ignored by a developer's global Git configuration.
+!.agents/
+.agents/*
+!.agents/skills.json
+
+# Ignore generated troubleshooting post-mortem documents
+agents/troubleshooting/
 
 

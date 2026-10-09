@@ -11,7 +11,8 @@
                 "process.py --dataset=COAL"
             ],
             "source_files": [
-                "gcs_output/COAL/COAL.txt"
+                "gcs_output/COAL/COAL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -19,7 +20,8 @@
                     "cleaned_csv": "gcs_output/COAL/COAL.csv"
                 }
             ],
-            "cron_schedule": "0 14 5,20 * *"
+            "cron_schedule": "0 14 5,20 * *",
+            "validation_config_file": "validation_config_EIA_Coal.json"
         },
         {
             "import_name": "EIA_Electricity",
@@ -27,12 +29,13 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
-            "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and \u201csectors\u201d (like residential, commercial, etc.).",
+            "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and “sectors” (like residential, commercial, etc.).",
             "scripts": [
                 "process.py --dataset=ELEC"
             ],
             "source_files": [
-                "gcs_output/ELEC/ELEC.txt"
+                "gcs_output/ELEC/ELEC.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -45,7 +48,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 5,20 * *"
+            "cron_schedule": "0 7 5,20 * *",
+            "validation_config_file": "validation_config_EIA_Electricity.json"
         },
         {
             "import_name": "EIA_NaturalGas",
@@ -58,7 +62,8 @@
                 "process.py --dataset=NG"
             ],
             "source_files": [
-                "gcs_output/NG/NG.txt"
+                "gcs_output/NG/NG.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -66,7 +71,8 @@
                     "cleaned_csv": "gcs_output/NG/NG.csv"
                 }
             ],
-            "cron_schedule": "0 8 5,20 * *"
+            "cron_schedule": "0 8 5,20 * *",
+            "validation_config_file": "validation_config_EIA_NaturalGas.json"
         },
         {
             "import_name": "EIA_NuclearOutages",
@@ -79,7 +85,8 @@
                 "process.py --dataset=NUC_STATUS"
             ],
             "source_files": [
-                "gcs_output/NUC_STATUS/NUC_STATUS.txt"
+                "gcs_output/NUC_STATUS/NUC_STATUS.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -87,7 +94,8 @@
                     "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
                 }
             ],
-            "cron_schedule": "0 9 5,20 * *"
+            "cron_schedule": "0 9 5,20 * *",
+            "validation_config_file": "validation_config_EIA_NuclearOutages.json"
         },
         {
             "import_name": "EIA_Petroleum",
@@ -100,7 +108,8 @@
                 "process.py --dataset=PET"
             ],
             "source_files": [
-                "gcs_output/PET/PET.txt"
+                "gcs_output/PET/PET.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -108,7 +117,8 @@
                     "cleaned_csv": "gcs_output/PET/PET.csv"
                 }
             ],
-            "cron_schedule": "0 10 5,20 * *"
+            "cron_schedule": "0 10 5,20 * *",
+            "validation_config_file": "validation_config_EIA_Petroleum.json"
         },
         {
             "import_name": "EIA_International",
@@ -121,7 +131,8 @@
                 "process.py --dataset=INTL"
             ],
             "source_files": [
-                "gcs_output/INTL/INTL.txt"
+                "gcs_output/INTL/INTL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -129,7 +140,8 @@
                     "cleaned_csv": "gcs_output/INTL/INTL.csv"
                 }
             ],
-            "cron_schedule": "0 11 5,20 * * *"
+            "cron_schedule": "0 11 5,20 * *",
+            "validation_config_file": "validation_config_EIA_International.json"
         },
         {
             "import_name": "EIA_SEDS",
@@ -142,7 +154,8 @@
                 "process.py --dataset=SEDS"
             ],
             "source_files": [
-                "gcs_output/SEDS/SEDS.txt"
+                "gcs_output/SEDS/SEDS.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -150,7 +163,8 @@
                     "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
                 }
             ],
-            "cron_schedule": "0 12 5,20 * *"
+            "cron_schedule": "0 12 5,20 * *",
+            "validation_config_file": "validation_config_EIA_SEDS.json"
         },
         {
             "import_name": "EIA_TotalEnergy",
@@ -163,7 +177,8 @@
                 "process.py --dataset=TOTAL"
             ],
             "source_files": [
-                "gcs_output/TOTAL/TOTAL.txt"
+                "gcs_output/TOTAL/TOTAL.txt",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -171,7 +186,8 @@
                     "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
                 }
             ],
-            "cron_schedule": "0 13 5,20 * *"
+            "cron_schedule": "0 13 5,20 * *",
+            "validation_config_file": "validation_config_EIA_TotalEnergy.json"
         }
     ]
 }

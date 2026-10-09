@@ -91,7 +91,7 @@ def national1980(url_file: str, output_folder: str):
         # Delimitng the columns by whitespace.
         df = pd.read_table(file,
                            index_col=False,
-                           delim_whitespace=True,
+                           sep=r'\s+',
                            engine='python',
                            names=cols)
         df = df.loc[df['0'].isin(['2I', '9P'])]

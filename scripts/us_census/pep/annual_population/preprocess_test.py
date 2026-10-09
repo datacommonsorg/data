@@ -20,12 +20,16 @@ import sys
 import unittest
 import tempfile
 # _MODULE_DIR is the path to where this test is running from.
-_MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(1, _MODULE_DIR)
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
+for path in (_SCRIPTS_DIR, _MODULE_DIR):
+    if path not in sys.path:
+        sys.path.append(path)
+
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from preprocess import process
-from constants import TEST_DATA_DIR
+from us_census.pep.annual_population.preprocess import process
+from us_census.pep.annual_population.constants import TEST_DATA_DIR
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
@@ -37,29 +41,30 @@ class TestPreprocess(unittest.TestCase):
     and compare it with expected results.
     """
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
-
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp_dir_obj = tempfile.TemporaryDirectory()
+        tmp_dir = cls.tmp_dir_obj.name
         files_dir = os.path.join(_MODULE_DIR, TEST_DATA_DIR, "datasets")
 
-        data_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR,
-                                      "output_files")
-
-        cleaned_csv_path = os.path.join(data_file_path,
-                                        "usa_annual_population.csv")
-        mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
-        tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
+        cleaned_csv_path = os.path.join(tmp_dir, "usa_annual_population.csv")
+        mcf_path = os.path.join(tmp_dir, "usa_annual_population.mcf")
+        tmcf_path = os.path.join(tmp_dir, "usa_annual_population.tmcf")
 
         process(files_dir, cleaned_csv_path, mcf_path, tmcf_path, False)
 
         with open(mcf_path, encoding="UTF-8") as mcf_file:
-            self._actual_mcf_data = mcf_file.read()
+            cls._actual_mcf_data = mcf_file.read()
 
         with open(tmcf_path, encoding="UTF-8") as tmcf_file:
-            self._actual_tmcf_data = tmcf_file.read()
+            cls._actual_tmcf_data = tmcf_file.read()
 
         with open(cleaned_csv_path, encoding="utf-8") as csv_file:
-            self._actual_csv_data = csv_file.read()
+            cls._actual_csv_data = csv_file.read()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp_dir_obj.cleanup()
 
     def test_mcf_tmcf_files(self):
         """

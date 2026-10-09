@@ -1,0 +1,6 @@
+Node: E:number_of_households_by_region_and_urban_rural_output->E0
+observationAbout: C:number_of_households_by_region_and_urban_rural_output->observationAbout
+observationDate: C:number_of_households_by_region_and_urban_rural_output->observationDate
+value: C:number_of_households_by_region_and_urban_rural_output->value
+variableMeasured: C:number_of_households_by_region_and_urban_rural_output->variableMeasured
+typeOf: dcs:StatVarObservation

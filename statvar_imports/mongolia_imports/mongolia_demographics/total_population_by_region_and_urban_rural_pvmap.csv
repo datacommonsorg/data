@@ -1,9 +1,9 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4
-Aimag,observationAbout,{Data},,,,,,
+Region,observationAbout,{Data},,,,,,
 Urban,placeOfResidenceClassification,Urban,,,,,,
 Rural,placeOfResidenceClassification,Rural,,,,,,
 Total:Total,#ignore,skip,,,,,,
-Aimag:Total,#ignore,skip,,,,,,
+Region:Total,#ignore,skip,,,,,,
 1935,observationDate,1935,value,{Number},populationType,Person,measuredProperty,count
 1944,observationDate,1944,value,{Number},populationType,Person,measuredProperty,count
 1956,observationDate,1956,value,{Number},populationType,Person,measuredProperty,count

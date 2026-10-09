@@ -1,0 +1,10 @@
+Node: E:nces_steam_degree->E0
+observationAbout: C:nces_steam_degree->observationAbout
+observationDate: C:nces_steam_degree->observationDate
+value: C:nces_steam_degree->value
+variableMeasured: C:nces_steam_degree->variableMeasured
+unit: C:nces_steam_degree->unit
+scalingFactor: C:nces_steam_degree->scalingFactor
+measurementMethod: C:nces_steam_degree->measurementMethod
+observationPeriod: C:nces_steam_degree->observationPeriod
+typeOf: dcs:StatVarObservation

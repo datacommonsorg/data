@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Strictly enforce historical deletion average threshold of 0.1%",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that livestock inventory StatVars have observations within 1 year of current year and all other survey StatVars are within 2 years of current year to account for seasonal release lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "CAST(MaxDate AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^Count_FarmInventory_(CattleAndCalves|BeefCows|MilkCows|SheepAndLambs)$') THEN 1 ELSE 2 END"
+            }
+        }
+    ]
+}

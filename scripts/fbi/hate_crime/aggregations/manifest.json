@@ -21,6 +21,7 @@
                 "hate_crime_data/*"
             ],
             "cron_schedule": "0 10 21 * *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 16,
                 "memory": 256,

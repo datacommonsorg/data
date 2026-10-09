@@ -82,12 +82,8 @@ class GCSFileUploader(FileUploader):
         """
         _strings_not_empty(src, dest)
         dest = self._fix_path(dest)
-        logging.info('GCSFileUploader.upload_file: Uploading %s to %s', src,
-                     dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_filename(src)
-        logging.info('GCSFileUploader.upload_file: Uploaded %s to %s', src,
-                     dest)
 
     def upload_string(self, string: str, dest: str) -> None:
         """Uploads a string to a file in the bucket, overwriting it.
@@ -102,10 +98,8 @@ class GCSFileUploader(FileUploader):
         """
         _strings_not_empty(dest)
         dest = self._fix_path(dest)
-        logging.info('GCSFileUploader.upload_string: Uploading to %s', dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_string(string)
-        logging.info('GCSFileUploader.upload_string: Uploaded to %s', dest)
 
     def _fix_path(self, path):
         """Returns {self.path_prefix}/{path}."""

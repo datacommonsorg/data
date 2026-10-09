@@ -32,11 +32,11 @@ from dataclasses_json import dataclass_json
 @dataclass_json
 @dataclass
 class StepState:
-    version: str
-    status: str
-    started_at: str
-    ended_at: str
-    duration_s: float
+    version: str = ""
+    status: str = ""
+    started_at: str = ""
+    ended_at: str = ""
+    duration_s: float = 0.0
     started_at_ts: int | None = None
     ended_at_ts: int | None = None
     message: str | None = None
@@ -45,10 +45,10 @@ class StepState:
 @dataclass_json
 @dataclass
 class PipelineState:
-    dataset_prefix: str
-    critical_input_hash: str
-    command: str
-    updated_at: str
+    dataset_prefix: str = ""
+    critical_input_hash: str = ""
+    command: str = ""
+    updated_at: str = ""
     updated_at_ts: int | None = None
     steps: dict[str, StepState] = field(default_factory=dict)
 

@@ -146,5 +146,18 @@ If you want to perform "only download", run the below command:
 python3 worldbank.py --mode=download
 ```
 
+### Historical Data Merge and Import Validation
+
+During processing (`--mode=process`), `worldbank.py` merges deleted historical
+observations from GCS (`--historical_gcs_path`, defaulting to
+`gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv`) with fresh World
+Bank API data. Records are deduplicated across composite keys
+(`StatisticalVariable`, `ISO3166Alpha3`, `Year`, `observationPeriod`, `unit`,
+`measurementMethod`, `scalingFactor`), prioritizing fresh observations
+(`keep='first'`).
+
+Automated import validation rules (deleted records threshold and `MaxDate`
+freshness check) are configured in `validation_config.json`.
+
 We highly recommend the use of the import validation tool for this import which
 you can find in https://github.com/datacommonsorg/tools/tree/master/import-validation-helper.

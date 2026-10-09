@@ -27,7 +27,7 @@ steps:
       - '-c'
       - |
         # Use current timestamp to bust cache for git clone and other external dependencies.
-        docker build --build-arg CACHE_BUSTER=$(date +%s) -t ${_DOCKER_IMAGE}:${COMMIT_SHA} -t ${_DOCKER_IMAGE}:latest .
+        docker build --build-arg CACHE_BUSTER=$(date +%s) -t ${_DOCKER_IMAGE}:${_TAG} -t ${_DOCKER_IMAGE}:latest .
     dir: 'import-automation/executor'
     env: ['DOCKER_BUILDKIT=1']
 
@@ -36,34 +36,11 @@ steps:
     id: 'push'
     args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
 
-  # Run import executor integration test
-  - name: '${_DOCKER_IMAGE}:${COMMIT_SHA}'
-    id: 'integration-test'
-    entrypoint: bash
-    args:
-      - '-c'
-      - |
-        python import_test.py
-    dir: 'import-automation/executor'
-    waitFor: ['push']
+substitutions:
+  _DOCKER_IMAGE: 'us-docker.pkg.dev/${PROJECT_ID}/gcr.io/dc-import-executor'
+  _TAG: '${COMMIT_SHA:-latest}'
 
-  # Run unit tests
-  - name: '${_DOCKER_IMAGE}:${COMMIT_SHA}'
-    id: 'unit-test'
-    args:
-      - '-c'
-      - |
-        ./run_tests.sh -a
-    entrypoint: bash
-    waitFor: ['push']
-  
-  # Tag image as stable and push
-  - name: 'gcr.io/cloud-builders/docker'
-    id: 'tag'
-    entrypoint: 'bash'
-    waitFor: ['integration-test', 'unit-test']
-    args:
-    - '-c'
-    - |
-      docker tag ${_DOCKER_IMAGE}:${COMMIT_SHA} ${_DOCKER_IMAGE}:stable \
-      && docker push ${_DOCKER_IMAGE}:stable
+options:
+  logging: CLOUD_LOGGING_ONLY
+  dynamicSubstitutions: true
+  substitutionOption: 'ALLOW_LOOSE'

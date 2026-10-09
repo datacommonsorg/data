@@ -24,7 +24,7 @@ See parent README.
 
 ### Raw Data
 
-- [demo_r_mlifexp.tsv](demo_r_mlifexp.tsv)
+- [demo_r_mlifexp.tsv.gz](demo_r_mlifexp.tsv.gz)
 
 ### Cleaned Data
 
@@ -36,24 +36,29 @@ See parent README.
 
 ### StatisticalVariable Instance MCF
 
-- [demo_r_mlifexp_statvar.tmcf](demo_r_mlifexp_statvar.tmcf)
+- [demo_r_mlifexp_statvar.mcf](demo_r_mlifexp_statvar.mcf)
 
 ### Scripts
 
 - [preprocess.py](preprocess.py)
 - [generate_mcf.py](generate_mcf.py)
-- [test_preprocess.py](test_preprocess.py)
+- [preprocess_test.py](preprocess_test.py)
 
 ## Generating Artifacts
 
-To generate the cleaned csv `demo_r_mlifexp_cleaned.csv`, run
+To generate the cleaned csv `demo_r_mlifexp_cleaned.csv`, run `preprocess.py`.
 
 This script offers three modes of operation: download, process, or both download and process.
 
 ```bash
-1. Download and Process (python3 preprocess.py or no mode flag):
-2. Download Only (python3 preprocess.py --mode=download):
-3. Process Only (python3 preprocess.py --mode=process):
+# 1. Download and Process (default):
+python3 preprocess.py
+
+# 2. Download Only:
+python3 preprocess.py --mode=download
+
+# 3. Process Only:
+python3 preprocess.py --mode=process
 ```
 
 To generate `demo_r_mlifexp.tmcf` and `demo_r_mlifexp_statvar.mcf`, run:

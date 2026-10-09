@@ -1,0 +1,7 @@
+Node: E:infant_mortality_per_1000_live_births_by_month_region_output->E0
+observationAbout: C:infant_mortality_per_1000_live_births_by_month_region_output->observationAbout
+observationDate: C:infant_mortality_per_1000_live_births_by_month_region_output->observationDate
+value: C:infant_mortality_per_1000_live_births_by_month_region_output->value
+variableMeasured: C:infant_mortality_per_1000_live_births_by_month_region_output->variableMeasured
+unit: C:infant_mortality_per_1000_live_births_by_month_region_output->unit
+typeOf: dcs:StatVarObservation

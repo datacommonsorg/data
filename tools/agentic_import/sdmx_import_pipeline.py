@@ -70,11 +70,11 @@ def _define_flags() -> None:
                         "Target SDMX dataflow identifier.")
     flags.mark_flag_as_required(FLAG_SDMX_DATAFLOW_ID)
 
-    flags.DEFINE_string(FLAG_SDMX_DATAFLOW_KEY, None,
-                        "Optional SDMX key or filter.")
+    flags.DEFINE_multi_string(FLAG_SDMX_DATAFLOW_KEY, [],
+                              "Optional SDMX key or filter.")
 
-    flags.DEFINE_string(
-        FLAG_SDMX_DATAFLOW_PARAM, None,
+    flags.DEFINE_multi_string(
+        FLAG_SDMX_DATAFLOW_PARAM, [],
         "Optional SDMX parameter appended to the dataflow query.")
 
     flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
@@ -86,6 +86,10 @@ def _define_flags() -> None:
 
     flags.DEFINE_string("run_only", None,
                         "Execute only a specific pipeline step by name.")
+    flags.DEFINE_string("run_from", None,
+                        "Execute pipeline steps starting at the named step.")
+    flags.DEFINE_string("run_until", None,
+                        "Execute pipeline steps through the named step.")
 
     flags.DEFINE_boolean("force", False, "Force all steps to run.")
 
@@ -303,8 +307,8 @@ def prepare_config() -> PipelineConfig:
             agency=FLAGS[FLAG_SDMX_AGENCY].value,
             dataflow=SdmxDataflowConfig(
                 id=FLAGS[FLAG_SDMX_DATAFLOW_ID].value,
-                key=FLAGS[FLAG_SDMX_DATAFLOW_KEY].value,
-                param=FLAGS[FLAG_SDMX_DATAFLOW_PARAM].value,
+                key=tuple(FLAGS[FLAG_SDMX_DATAFLOW_KEY].value),
+                param=tuple(FLAGS[FLAG_SDMX_DATAFLOW_PARAM].value),
             ),
         ),
         sample=SampleConfig(rows=FLAGS[_FLAG_SAMPLE_ROWS].value,),
@@ -313,6 +317,8 @@ def prepare_config() -> PipelineConfig:
             dataset_prefix=FLAGS.dataset_prefix,
             working_dir=FLAGS.working_dir,
             run_only=FLAGS.run_only,
+            run_from=FLAGS.run_from,
+            run_until=FLAGS.run_until,
             force=FLAGS.force,
             verbose=FLAGS.verbose,
             skip_confirmation=FLAGS.skip_confirmation,

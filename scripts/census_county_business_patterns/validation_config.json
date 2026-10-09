@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_date_freshness_canonical_statvars",
+            "description": "Verifies that canonical StatVars meet the expected Census CBP release freshness (>= 2023)",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_Establishment_NAICSTransportationWarehousing', 'Count_Worker_NAICSRetailTrade')",
+                "condition": "MaxDate >= '2023'"
+            }
+        }
+    ]
+}

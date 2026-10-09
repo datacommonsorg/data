@@ -1,0 +1,999 @@
+Region,Sex,Age,Marital_Status,Quarter,Value
+All Denmark,Gender_Total,"Age, total",Marital_Total,2025Q4,6019866
+All Denmark,Gender_Total,"Age, total",Marital_Total,2026Q1,6025603
+All Denmark,Gender_Total,"Age, total",Never married,2025Q4,2992359
+All Denmark,Gender_Total,"Age, total",Never married,2026Q1,2999169
+All Denmark,Gender_Total,"Age, total",Married/separated,2025Q4,2169022
+All Denmark,Gender_Total,"Age, total",Married/separated,2026Q1,2166240
+All Denmark,Gender_Total,"Age, total",Widowed,2025Q4,285543
+All Denmark,Gender_Total,"Age, total",Widowed,2026Q1,285498
+All Denmark,Gender_Total,"Age, total",Divorced,2025Q4,572942
+All Denmark,Gender_Total,"Age, total",Divorced,2026Q1,574696
+All Denmark,Gender_Total,0 years,Marital_Total,2025Q4,59356
+All Denmark,Gender_Total,0 years,Marital_Total,2026Q1,59649
+All Denmark,Gender_Total,0 years,Never married,2025Q4,59356
+All Denmark,Gender_Total,0 years,Never married,2026Q1,59649
+All Denmark,Gender_Total,0 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,0 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,0 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,0 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,0 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,0 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,1 year,Marital_Total,2025Q4,57525
+All Denmark,Gender_Total,1 year,Marital_Total,2026Q1,57711
+All Denmark,Gender_Total,1 year,Never married,2025Q4,57525
+All Denmark,Gender_Total,1 year,Never married,2026Q1,57711
+All Denmark,Gender_Total,1 year,Married/separated,2025Q4,0
+All Denmark,Gender_Total,1 year,Married/separated,2026Q1,0
+All Denmark,Gender_Total,1 year,Widowed,2025Q4,0
+All Denmark,Gender_Total,1 year,Widowed,2026Q1,0
+All Denmark,Gender_Total,1 year,Divorced,2025Q4,0
+All Denmark,Gender_Total,1 year,Divorced,2026Q1,0
+All Denmark,Gender_Total,2 years,Marital_Total,2025Q4,58512
+All Denmark,Gender_Total,2 years,Marital_Total,2026Q1,58350
+All Denmark,Gender_Total,2 years,Never married,2025Q4,58512
+All Denmark,Gender_Total,2 years,Never married,2026Q1,58350
+All Denmark,Gender_Total,2 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,2 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,2 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,2 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,2 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,2 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,3 years,Marital_Total,2025Q4,61417
+All Denmark,Gender_Total,3 years,Marital_Total,2026Q1,59630
+All Denmark,Gender_Total,3 years,Never married,2025Q4,61417
+All Denmark,Gender_Total,3 years,Never married,2026Q1,59630
+All Denmark,Gender_Total,3 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,3 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,3 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,3 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,3 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,3 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,4 years,Marital_Total,2025Q4,64050
+All Denmark,Gender_Total,4 years,Marital_Total,2026Q1,65064
+All Denmark,Gender_Total,4 years,Never married,2025Q4,64050
+All Denmark,Gender_Total,4 years,Never married,2026Q1,65064
+All Denmark,Gender_Total,4 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,4 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,4 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,4 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,4 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,4 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,5 years,Marital_Total,2025Q4,63043
+All Denmark,Gender_Total,5 years,Marital_Total,2026Q1,62909
+All Denmark,Gender_Total,5 years,Never married,2025Q4,63043
+All Denmark,Gender_Total,5 years,Never married,2026Q1,62909
+All Denmark,Gender_Total,5 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,5 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,5 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,5 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,5 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,5 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,6 years,Marital_Total,2025Q4,63072
+All Denmark,Gender_Total,6 years,Marital_Total,2026Q1,63143
+All Denmark,Gender_Total,6 years,Never married,2025Q4,63072
+All Denmark,Gender_Total,6 years,Never married,2026Q1,63143
+All Denmark,Gender_Total,6 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,6 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,6 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,6 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,6 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,6 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,7 years,Marital_Total,2025Q4,63866
+All Denmark,Gender_Total,7 years,Marital_Total,2026Q1,63296
+All Denmark,Gender_Total,7 years,Never married,2025Q4,63866
+All Denmark,Gender_Total,7 years,Never married,2026Q1,63296
+All Denmark,Gender_Total,7 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,7 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,7 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,7 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,7 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,7 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,8 years,Marital_Total,2025Q4,63388
+All Denmark,Gender_Total,8 years,Marital_Total,2026Q1,63682
+All Denmark,Gender_Total,8 years,Never married,2025Q4,63388
+All Denmark,Gender_Total,8 years,Never married,2026Q1,63682
+All Denmark,Gender_Total,8 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,8 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,8 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,8 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,8 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,8 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,9 years,Marital_Total,2025Q4,64108
+All Denmark,Gender_Total,9 years,Marital_Total,2026Q1,64317
+All Denmark,Gender_Total,9 years,Never married,2025Q4,64108
+All Denmark,Gender_Total,9 years,Never married,2026Q1,64317
+All Denmark,Gender_Total,9 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,9 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,9 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,9 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,9 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,9 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,10 years,Marital_Total,2025Q4,60786
+All Denmark,Gender_Total,10 years,Marital_Total,2026Q1,61519
+All Denmark,Gender_Total,10 years,Never married,2025Q4,60786
+All Denmark,Gender_Total,10 years,Never married,2026Q1,61519
+All Denmark,Gender_Total,10 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,10 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,10 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,10 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,10 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,10 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,11 years,Marital_Total,2025Q4,60226
+All Denmark,Gender_Total,11 years,Marital_Total,2026Q1,60759
+All Denmark,Gender_Total,11 years,Never married,2025Q4,60226
+All Denmark,Gender_Total,11 years,Never married,2026Q1,60759
+All Denmark,Gender_Total,11 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,11 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,11 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,11 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,11 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,11 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,12 years,Marital_Total,2025Q4,61031
+All Denmark,Gender_Total,12 years,Marital_Total,2026Q1,60212
+All Denmark,Gender_Total,12 years,Never married,2025Q4,61031
+All Denmark,Gender_Total,12 years,Never married,2026Q1,60212
+All Denmark,Gender_Total,12 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,12 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,12 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,12 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,12 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,12 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,13 years,Marital_Total,2025Q4,62303
+All Denmark,Gender_Total,13 years,Marital_Total,2026Q1,62667
+All Denmark,Gender_Total,13 years,Never married,2025Q4,62303
+All Denmark,Gender_Total,13 years,Never married,2026Q1,62667
+All Denmark,Gender_Total,13 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,13 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,13 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,13 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,13 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,13 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,14 years,Marital_Total,2025Q4,65206
+All Denmark,Gender_Total,14 years,Marital_Total,2026Q1,63886
+All Denmark,Gender_Total,14 years,Never married,2025Q4,65206
+All Denmark,Gender_Total,14 years,Never married,2026Q1,63886
+All Denmark,Gender_Total,14 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,14 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,14 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,14 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,14 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,14 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,15 years,Marital_Total,2025Q4,68618
+All Denmark,Gender_Total,15 years,Marital_Total,2026Q1,68577
+All Denmark,Gender_Total,15 years,Never married,2025Q4,68617
+All Denmark,Gender_Total,15 years,Never married,2026Q1,68576
+All Denmark,Gender_Total,15 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,15 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,15 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,15 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,15 years,Divorced,2025Q4,1
+All Denmark,Gender_Total,15 years,Divorced,2026Q1,1
+All Denmark,Gender_Total,16 years,Marital_Total,2025Q4,69559
+All Denmark,Gender_Total,16 years,Marital_Total,2026Q1,68983
+All Denmark,Gender_Total,16 years,Never married,2025Q4,69559
+All Denmark,Gender_Total,16 years,Never married,2026Q1,68983
+All Denmark,Gender_Total,16 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,16 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,16 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,16 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,16 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,16 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,17 years,Marital_Total,2025Q4,71733
+All Denmark,Gender_Total,17 years,Marital_Total,2026Q1,71558
+All Denmark,Gender_Total,17 years,Never married,2025Q4,71733
+All Denmark,Gender_Total,17 years,Never married,2026Q1,71558
+All Denmark,Gender_Total,17 years,Married/separated,2025Q4,0
+All Denmark,Gender_Total,17 years,Married/separated,2026Q1,0
+All Denmark,Gender_Total,17 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,17 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,17 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,17 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,18 years,Marital_Total,2025Q4,70734
+All Denmark,Gender_Total,18 years,Marital_Total,2026Q1,71176
+All Denmark,Gender_Total,18 years,Never married,2025Q4,70719
+All Denmark,Gender_Total,18 years,Never married,2026Q1,71150
+All Denmark,Gender_Total,18 years,Married/separated,2025Q4,15
+All Denmark,Gender_Total,18 years,Married/separated,2026Q1,26
+All Denmark,Gender_Total,18 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,18 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,18 years,Divorced,2025Q4,0
+All Denmark,Gender_Total,18 years,Divorced,2026Q1,0
+All Denmark,Gender_Total,19 years,Marital_Total,2025Q4,72361
+All Denmark,Gender_Total,19 years,Marital_Total,2026Q1,72659
+All Denmark,Gender_Total,19 years,Never married,2025Q4,72266
+All Denmark,Gender_Total,19 years,Never married,2026Q1,72566
+All Denmark,Gender_Total,19 years,Married/separated,2025Q4,92
+All Denmark,Gender_Total,19 years,Married/separated,2026Q1,90
+All Denmark,Gender_Total,19 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,19 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,19 years,Divorced,2025Q4,3
+All Denmark,Gender_Total,19 years,Divorced,2026Q1,3
+All Denmark,Gender_Total,20 years,Marital_Total,2025Q4,74176
+All Denmark,Gender_Total,20 years,Marital_Total,2026Q1,72838
+All Denmark,Gender_Total,20 years,Never married,2025Q4,73793
+All Denmark,Gender_Total,20 years,Never married,2026Q1,72487
+All Denmark,Gender_Total,20 years,Married/separated,2025Q4,371
+All Denmark,Gender_Total,20 years,Married/separated,2026Q1,343
+All Denmark,Gender_Total,20 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,20 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,20 years,Divorced,2025Q4,12
+All Denmark,Gender_Total,20 years,Divorced,2026Q1,8
+All Denmark,Gender_Total,21 years,Marital_Total,2025Q4,74599
+All Denmark,Gender_Total,21 years,Marital_Total,2026Q1,74748
+All Denmark,Gender_Total,21 years,Never married,2025Q4,73540
+All Denmark,Gender_Total,21 years,Never married,2026Q1,73760
+All Denmark,Gender_Total,21 years,Married/separated,2025Q4,1033
+All Denmark,Gender_Total,21 years,Married/separated,2026Q1,955
+All Denmark,Gender_Total,21 years,Widowed,2025Q4,0
+All Denmark,Gender_Total,21 years,Widowed,2026Q1,0
+All Denmark,Gender_Total,21 years,Divorced,2025Q4,26
+All Denmark,Gender_Total,21 years,Divorced,2026Q1,33
+All Denmark,Gender_Total,22 years,Marital_Total,2025Q4,75595
+All Denmark,Gender_Total,22 years,Marital_Total,2026Q1,76243
+All Denmark,Gender_Total,22 years,Never married,2025Q4,73678
+All Denmark,Gender_Total,22 years,Never married,2026Q1,74323
+All Denmark,Gender_Total,22 years,Married/separated,2025Q4,1855
+All Denmark,Gender_Total,22 years,Married/separated,2026Q1,1858
+All Denmark,Gender_Total,22 years,Widowed,2025Q4,1
+All Denmark,Gender_Total,22 years,Widowed,2026Q1,1
+All Denmark,Gender_Total,22 years,Divorced,2025Q4,61
+All Denmark,Gender_Total,22 years,Divorced,2026Q1,61
+All Denmark,Gender_Total,23 years,Marital_Total,2025Q4,76535
+All Denmark,Gender_Total,23 years,Marital_Total,2026Q1,76851
+All Denmark,Gender_Total,23 years,Never married,2025Q4,73797
+All Denmark,Gender_Total,23 years,Never married,2026Q1,74116
+All Denmark,Gender_Total,23 years,Married/separated,2025Q4,2613
+All Denmark,Gender_Total,23 years,Married/separated,2026Q1,2622
+All Denmark,Gender_Total,23 years,Widowed,2025Q4,4
+All Denmark,Gender_Total,23 years,Widowed,2026Q1,3
+All Denmark,Gender_Total,23 years,Divorced,2025Q4,121
+All Denmark,Gender_Total,23 years,Divorced,2026Q1,110
+All Denmark,Gender_Total,24 years,Marital_Total,2025Q4,78801
+All Denmark,Gender_Total,24 years,Marital_Total,2026Q1,78225
+All Denmark,Gender_Total,24 years,Never married,2025Q4,74951
+All Denmark,Gender_Total,24 years,Never married,2026Q1,74404
+All Denmark,Gender_Total,24 years,Married/separated,2025Q4,3675
+All Denmark,Gender_Total,24 years,Married/separated,2026Q1,3633
+All Denmark,Gender_Total,24 years,Widowed,2025Q4,4
+All Denmark,Gender_Total,24 years,Widowed,2026Q1,4
+All Denmark,Gender_Total,24 years,Divorced,2025Q4,171
+All Denmark,Gender_Total,24 years,Divorced,2026Q1,184
+All Denmark,Gender_Total,25 years,Marital_Total,2025Q4,79882
+All Denmark,Gender_Total,25 years,Marital_Total,2026Q1,80748
+All Denmark,Gender_Total,25 years,Never married,2025Q4,74566
+All Denmark,Gender_Total,25 years,Never married,2026Q1,75396
+All Denmark,Gender_Total,25 years,Married/separated,2025Q4,5029
+All Denmark,Gender_Total,25 years,Married/separated,2026Q1,5055
+All Denmark,Gender_Total,25 years,Widowed,2025Q4,3
+All Denmark,Gender_Total,25 years,Widowed,2026Q1,5
+All Denmark,Gender_Total,25 years,Divorced,2025Q4,284
+All Denmark,Gender_Total,25 years,Divorced,2026Q1,292
+All Denmark,Gender_Total,26 years,Marital_Total,2025Q4,80283
+All Denmark,Gender_Total,26 years,Marital_Total,2026Q1,79922
+All Denmark,Gender_Total,26 years,Never married,2025Q4,72701
+All Denmark,Gender_Total,26 years,Never married,2026Q1,72566
+All Denmark,Gender_Total,26 years,Married/separated,2025Q4,7158
+All Denmark,Gender_Total,26 years,Married/separated,2026Q1,6952
+All Denmark,Gender_Total,26 years,Widowed,2025Q4,10
+All Denmark,Gender_Total,26 years,Widowed,2026Q1,9
+All Denmark,Gender_Total,26 years,Divorced,2025Q4,414
+All Denmark,Gender_Total,26 years,Divorced,2026Q1,395
+All Denmark,Gender_Total,27 years,Marital_Total,2025Q4,80364
+All Denmark,Gender_Total,27 years,Marital_Total,2026Q1,80697
+All Denmark,Gender_Total,27 years,Never married,2025Q4,69857
+All Denmark,Gender_Total,27 years,Never married,2026Q1,70277
+All Denmark,Gender_Total,27 years,Married/separated,2025Q4,9861
+All Denmark,Gender_Total,27 years,Married/separated,2026Q1,9768
+All Denmark,Gender_Total,27 years,Widowed,2025Q4,9
+All Denmark,Gender_Total,27 years,Widowed,2026Q1,7
+All Denmark,Gender_Total,27 years,Divorced,2025Q4,637
+All Denmark,Gender_Total,27 years,Divorced,2026Q1,645
+All Denmark,Gender_Total,28 years,Marital_Total,2025Q4,83381
+All Denmark,Gender_Total,28 years,Marital_Total,2026Q1,82461
+All Denmark,Gender_Total,28 years,Never married,2025Q4,68832
+All Denmark,Gender_Total,28 years,Never married,2026Q1,68197
+All Denmark,Gender_Total,28 years,Married/separated,2025Q4,13610
+All Denmark,Gender_Total,28 years,Married/separated,2026Q1,13337
+All Denmark,Gender_Total,28 years,Widowed,2025Q4,15
+All Denmark,Gender_Total,28 years,Widowed,2026Q1,16
+All Denmark,Gender_Total,28 years,Divorced,2025Q4,924
+All Denmark,Gender_Total,28 years,Divorced,2026Q1,911
+All Denmark,Gender_Total,29 years,Marital_Total,2025Q4,82382
+All Denmark,Gender_Total,29 years,Marital_Total,2026Q1,82630
+All Denmark,Gender_Total,29 years,Never married,2025Q4,63773
+All Denmark,Gender_Total,29 years,Never married,2026Q1,64295
+All Denmark,Gender_Total,29 years,Married/separated,2025Q4,17280
+All Denmark,Gender_Total,29 years,Married/separated,2026Q1,17037
+All Denmark,Gender_Total,29 years,Widowed,2025Q4,18
+All Denmark,Gender_Total,29 years,Widowed,2026Q1,14
+All Denmark,Gender_Total,29 years,Divorced,2025Q4,1311
+All Denmark,Gender_Total,29 years,Divorced,2026Q1,1284
+All Denmark,Gender_Total,30 years,Marital_Total,2025Q4,86137
+All Denmark,Gender_Total,30 years,Marital_Total,2026Q1,85138
+All Denmark,Gender_Total,30 years,Never married,2025Q4,61907
+All Denmark,Gender_Total,30 years,Never married,2026Q1,61451
+All Denmark,Gender_Total,30 years,Married/separated,2025Q4,22475
+All Denmark,Gender_Total,30 years,Married/separated,2026Q1,21948
+All Denmark,Gender_Total,30 years,Widowed,2025Q4,21
+All Denmark,Gender_Total,30 years,Widowed,2026Q1,25
+All Denmark,Gender_Total,30 years,Divorced,2025Q4,1734
+All Denmark,Gender_Total,30 years,Divorced,2026Q1,1714
+All Denmark,Gender_Total,31 years,Marital_Total,2025Q4,83762
+All Denmark,Gender_Total,31 years,Marital_Total,2026Q1,85646
+All Denmark,Gender_Total,31 years,Never married,2025Q4,56227
+All Denmark,Gender_Total,31 years,Never married,2026Q1,57864
+All Denmark,Gender_Total,31 years,Married/separated,2025Q4,25414
+All Denmark,Gender_Total,31 years,Married/separated,2026Q1,25670
+All Denmark,Gender_Total,31 years,Widowed,2025Q4,40
+All Denmark,Gender_Total,31 years,Widowed,2026Q1,33
+All Denmark,Gender_Total,31 years,Divorced,2025Q4,2081
+All Denmark,Gender_Total,31 years,Divorced,2026Q1,2079
+All Denmark,Gender_Total,32 years,Marital_Total,2025Q4,83595
+All Denmark,Gender_Total,32 years,Marital_Total,2026Q1,83036
+All Denmark,Gender_Total,32 years,Never married,2025Q4,52027
+All Denmark,Gender_Total,32 years,Never married,2026Q1,51835
+All Denmark,Gender_Total,32 years,Married/separated,2025Q4,28893
+All Denmark,Gender_Total,32 years,Married/separated,2026Q1,28517
+All Denmark,Gender_Total,32 years,Widowed,2025Q4,30
+All Denmark,Gender_Total,32 years,Widowed,2026Q1,35
+All Denmark,Gender_Total,32 years,Divorced,2025Q4,2645
+All Denmark,Gender_Total,32 years,Divorced,2026Q1,2649
+All Denmark,Gender_Total,33 years,Marital_Total,2025Q4,83309
+All Denmark,Gender_Total,33 years,Marital_Total,2026Q1,84151
+All Denmark,Gender_Total,33 years,Never married,2025Q4,47968
+All Denmark,Gender_Total,33 years,Never married,2026Q1,48736
+All Denmark,Gender_Total,33 years,Married/separated,2025Q4,32184
+All Denmark,Gender_Total,33 years,Married/separated,2026Q1,32258
+All Denmark,Gender_Total,33 years,Widowed,2025Q4,40
+All Denmark,Gender_Total,33 years,Widowed,2026Q1,41
+All Denmark,Gender_Total,33 years,Divorced,2025Q4,3117
+All Denmark,Gender_Total,33 years,Divorced,2026Q1,3116
+All Denmark,Gender_Total,34 years,Marital_Total,2025Q4,81212
+All Denmark,Gender_Total,34 years,Marital_Total,2026Q1,81318
+All Denmark,Gender_Total,34 years,Never married,2025Q4,43651
+All Denmark,Gender_Total,34 years,Never married,2026Q1,43931
+All Denmark,Gender_Total,34 years,Married/separated,2025Q4,33792
+All Denmark,Gender_Total,34 years,Married/separated,2026Q1,33609
+All Denmark,Gender_Total,34 years,Widowed,2025Q4,52
+All Denmark,Gender_Total,34 years,Widowed,2026Q1,51
+All Denmark,Gender_Total,34 years,Divorced,2025Q4,3717
+All Denmark,Gender_Total,34 years,Divorced,2026Q1,3727
+All Denmark,Gender_Total,35 years,Marital_Total,2025Q4,80681
+All Denmark,Gender_Total,35 years,Marital_Total,2026Q1,81290
+All Denmark,Gender_Total,35 years,Never married,2025Q4,40502
+All Denmark,Gender_Total,35 years,Never married,2026Q1,40925
+All Denmark,Gender_Total,35 years,Married/separated,2025Q4,35869
+All Denmark,Gender_Total,35 years,Married/separated,2026Q1,35998
+All Denmark,Gender_Total,35 years,Widowed,2025Q4,62
+All Denmark,Gender_Total,35 years,Widowed,2026Q1,57
+All Denmark,Gender_Total,35 years,Divorced,2025Q4,4248
+All Denmark,Gender_Total,35 years,Divorced,2026Q1,4310
+All Denmark,Gender_Total,36 years,Marital_Total,2025Q4,78325
+All Denmark,Gender_Total,36 years,Marital_Total,2026Q1,79025
+All Denmark,Gender_Total,36 years,Never married,2025Q4,37003
+All Denmark,Gender_Total,36 years,Never married,2026Q1,37575
+All Denmark,Gender_Total,36 years,Married/separated,2025Q4,36543
+All Denmark,Gender_Total,36 years,Married/separated,2026Q1,36726
+All Denmark,Gender_Total,36 years,Widowed,2025Q4,76
+All Denmark,Gender_Total,36 years,Widowed,2026Q1,76
+All Denmark,Gender_Total,36 years,Divorced,2025Q4,4703
+All Denmark,Gender_Total,36 years,Divorced,2026Q1,4648
+All Denmark,Gender_Total,37 years,Marital_Total,2025Q4,75621
+All Denmark,Gender_Total,37 years,Marital_Total,2026Q1,76630
+All Denmark,Gender_Total,37 years,Never married,2025Q4,33250
+All Denmark,Gender_Total,37 years,Never married,2026Q1,33753
+All Denmark,Gender_Total,37 years,Married/separated,2025Q4,37110
+All Denmark,Gender_Total,37 years,Married/separated,2026Q1,37481
+All Denmark,Gender_Total,37 years,Widowed,2025Q4,100
+All Denmark,Gender_Total,37 years,Widowed,2026Q1,101
+All Denmark,Gender_Total,37 years,Divorced,2025Q4,5161
+All Denmark,Gender_Total,37 years,Divorced,2026Q1,5295
+All Denmark,Gender_Total,38 years,Marital_Total,2025Q4,73301
+All Denmark,Gender_Total,38 years,Marital_Total,2026Q1,73618
+All Denmark,Gender_Total,38 years,Never married,2025Q4,30158
+All Denmark,Gender_Total,38 years,Never married,2026Q1,30375
+All Denmark,Gender_Total,38 years,Married/separated,2025Q4,37413
+All Denmark,Gender_Total,38 years,Married/separated,2026Q1,37511
+All Denmark,Gender_Total,38 years,Widowed,2025Q4,96
+All Denmark,Gender_Total,38 years,Widowed,2026Q1,99
+All Denmark,Gender_Total,38 years,Divorced,2025Q4,5634
+All Denmark,Gender_Total,38 years,Divorced,2026Q1,5633
+All Denmark,Gender_Total,39 years,Marital_Total,2025Q4,71982
+All Denmark,Gender_Total,39 years,Marital_Total,2026Q1,72533
+All Denmark,Gender_Total,39 years,Never married,2025Q4,28276
+All Denmark,Gender_Total,39 years,Never married,2026Q1,28690
+All Denmark,Gender_Total,39 years,Married/separated,2025Q4,37532
+All Denmark,Gender_Total,39 years,Married/separated,2026Q1,37539
+All Denmark,Gender_Total,39 years,Widowed,2025Q4,139
+All Denmark,Gender_Total,39 years,Widowed,2026Q1,124
+All Denmark,Gender_Total,39 years,Divorced,2025Q4,6035
+All Denmark,Gender_Total,39 years,Divorced,2026Q1,6180
+All Denmark,Gender_Total,40 years,Marital_Total,2025Q4,69881
+All Denmark,Gender_Total,40 years,Marital_Total,2026Q1,70617
+All Denmark,Gender_Total,40 years,Never married,2025Q4,26074
+All Denmark,Gender_Total,40 years,Never married,2026Q1,26523
+All Denmark,Gender_Total,40 years,Married/separated,2025Q4,37094
+All Denmark,Gender_Total,40 years,Married/separated,2026Q1,37337
+All Denmark,Gender_Total,40 years,Widowed,2025Q4,142
+All Denmark,Gender_Total,40 years,Widowed,2026Q1,142
+All Denmark,Gender_Total,40 years,Divorced,2025Q4,6571
+All Denmark,Gender_Total,40 years,Divorced,2026Q1,6615
+All Denmark,Gender_Total,41 years,Marital_Total,2025Q4,67770
+All Denmark,Gender_Total,41 years,Marital_Total,2026Q1,68118
+All Denmark,Gender_Total,41 years,Never married,2025Q4,24017
+All Denmark,Gender_Total,41 years,Never married,2026Q1,24177
+All Denmark,Gender_Total,41 years,Married/separated,2025Q4,36646
+All Denmark,Gender_Total,41 years,Married/separated,2026Q1,36830
+All Denmark,Gender_Total,41 years,Widowed,2025Q4,145
+All Denmark,Gender_Total,41 years,Widowed,2026Q1,149
+All Denmark,Gender_Total,41 years,Divorced,2025Q4,6962
+All Denmark,Gender_Total,41 years,Divorced,2026Q1,6962
+All Denmark,Gender_Total,42 years,Marital_Total,2025Q4,66606
+All Denmark,Gender_Total,42 years,Marital_Total,2026Q1,66468
+All Denmark,Gender_Total,42 years,Never married,2025Q4,22508
+All Denmark,Gender_Total,42 years,Never married,2026Q1,22594
+All Denmark,Gender_Total,42 years,Married/separated,2025Q4,36493
+All Denmark,Gender_Total,42 years,Married/separated,2026Q1,36201
+All Denmark,Gender_Total,42 years,Widowed,2025Q4,173
+All Denmark,Gender_Total,42 years,Widowed,2026Q1,184
+All Denmark,Gender_Total,42 years,Divorced,2025Q4,7432
+All Denmark,Gender_Total,42 years,Divorced,2026Q1,7489
+All Denmark,Gender_Total,43 years,Marital_Total,2025Q4,67055
+All Denmark,Gender_Total,43 years,Marital_Total,2026Q1,67550
+All Denmark,Gender_Total,43 years,Never married,2025Q4,21668
+All Denmark,Gender_Total,43 years,Never married,2026Q1,22050
+All Denmark,Gender_Total,43 years,Married/separated,2025Q4,36972
+All Denmark,Gender_Total,43 years,Married/separated,2026Q1,37158
+All Denmark,Gender_Total,43 years,Widowed,2025Q4,238
+All Denmark,Gender_Total,43 years,Widowed,2026Q1,224
+All Denmark,Gender_Total,43 years,Divorced,2025Q4,8177
+All Denmark,Gender_Total,43 years,Divorced,2026Q1,8118
+All Denmark,Gender_Total,44 years,Marital_Total,2025Q4,67339
+All Denmark,Gender_Total,44 years,Marital_Total,2026Q1,66823
+All Denmark,Gender_Total,44 years,Never married,2025Q4,20941
+All Denmark,Gender_Total,44 years,Never married,2026Q1,20800
+All Denmark,Gender_Total,44 years,Married/separated,2025Q4,37438
+All Denmark,Gender_Total,44 years,Married/separated,2026Q1,37098
+All Denmark,Gender_Total,44 years,Widowed,2025Q4,244
+All Denmark,Gender_Total,44 years,Widowed,2026Q1,240
+All Denmark,Gender_Total,44 years,Divorced,2025Q4,8716
+All Denmark,Gender_Total,44 years,Divorced,2026Q1,8685
+All Denmark,Gender_Total,45 years,Marital_Total,2025Q4,70783
+All Denmark,Gender_Total,45 years,Marital_Total,2026Q1,70362
+All Denmark,Gender_Total,45 years,Never married,2025Q4,21064
+All Denmark,Gender_Total,45 years,Never married,2026Q1,21023
+All Denmark,Gender_Total,45 years,Married/separated,2025Q4,39561
+All Denmark,Gender_Total,45 years,Married/separated,2026Q1,39297
+All Denmark,Gender_Total,45 years,Widowed,2025Q4,291
+All Denmark,Gender_Total,45 years,Widowed,2026Q1,288
+All Denmark,Gender_Total,45 years,Divorced,2025Q4,9867
+All Denmark,Gender_Total,45 years,Divorced,2026Q1,9754
+All Denmark,Gender_Total,46 years,Marital_Total,2025Q4,71134
+All Denmark,Gender_Total,46 years,Marital_Total,2026Q1,71092
+All Denmark,Gender_Total,46 years,Never married,2025Q4,20121
+All Denmark,Gender_Total,46 years,Never married,2026Q1,20299
+All Denmark,Gender_Total,46 years,Married/separated,2025Q4,40005
+All Denmark,Gender_Total,46 years,Married/separated,2026Q1,39841
+All Denmark,Gender_Total,46 years,Widowed,2025Q4,291
+All Denmark,Gender_Total,46 years,Widowed,2026Q1,307
+All Denmark,Gender_Total,46 years,Divorced,2025Q4,10717
+All Denmark,Gender_Total,46 years,Divorced,2026Q1,10645
+All Denmark,Gender_Total,47 years,Marital_Total,2025Q4,73041
+All Denmark,Gender_Total,47 years,Marital_Total,2026Q1,72668
+All Denmark,Gender_Total,47 years,Never married,2025Q4,19829
+All Denmark,Gender_Total,47 years,Never married,2026Q1,19788
+All Denmark,Gender_Total,47 years,Married/separated,2025Q4,40830
+All Denmark,Gender_Total,47 years,Married/separated,2026Q1,40597
+All Denmark,Gender_Total,47 years,Widowed,2025Q4,383
+All Denmark,Gender_Total,47 years,Widowed,2026Q1,365
+All Denmark,Gender_Total,47 years,Divorced,2025Q4,11999
+All Denmark,Gender_Total,47 years,Divorced,2026Q1,11918
+All Denmark,Gender_Total,48 years,Marital_Total,2025Q4,71746
+All Denmark,Gender_Total,48 years,Marital_Total,2026Q1,72077
+All Denmark,Gender_Total,48 years,Never married,2025Q4,18801
+All Denmark,Gender_Total,48 years,Never married,2026Q1,18922
+All Denmark,Gender_Total,48 years,Married/separated,2025Q4,40226
+All Denmark,Gender_Total,48 years,Married/separated,2026Q1,40356
+All Denmark,Gender_Total,48 years,Widowed,2025Q4,419
+All Denmark,Gender_Total,48 years,Widowed,2026Q1,411
+All Denmark,Gender_Total,48 years,Divorced,2025Q4,12300
+All Denmark,Gender_Total,48 years,Divorced,2026Q1,12388
+All Denmark,Gender_Total,49 years,Marital_Total,2025Q4,76213
+All Denmark,Gender_Total,49 years,Marital_Total,2026Q1,74386
+All Denmark,Gender_Total,49 years,Never married,2025Q4,19421
+All Denmark,Gender_Total,49 years,Never married,2026Q1,19072
+All Denmark,Gender_Total,49 years,Married/separated,2025Q4,42479
+All Denmark,Gender_Total,49 years,Married/separated,2026Q1,41339
+All Denmark,Gender_Total,49 years,Widowed,2025Q4,501
+All Denmark,Gender_Total,49 years,Widowed,2026Q1,498
+All Denmark,Gender_Total,49 years,Divorced,2025Q4,13812
+All Denmark,Gender_Total,49 years,Divorced,2026Q1,13477
+All Denmark,Gender_Total,50 years,Marital_Total,2025Q4,79826
+All Denmark,Gender_Total,50 years,Marital_Total,2026Q1,79927
+All Denmark,Gender_Total,50 years,Never married,2025Q4,19535
+All Denmark,Gender_Total,50 years,Never married,2026Q1,19746
+All Denmark,Gender_Total,50 years,Married/separated,2025Q4,44960
+All Denmark,Gender_Total,50 years,Married/separated,2026Q1,44830
+All Denmark,Gender_Total,50 years,Widowed,2025Q4,626
+All Denmark,Gender_Total,50 years,Widowed,2026Q1,625
+All Denmark,Gender_Total,50 years,Divorced,2025Q4,14705
+All Denmark,Gender_Total,50 years,Divorced,2026Q1,14726
+All Denmark,Gender_Total,51 years,Marital_Total,2025Q4,78228
+All Denmark,Gender_Total,51 years,Marital_Total,2026Q1,78578
+All Denmark,Gender_Total,51 years,Never married,2025Q4,18508
+All Denmark,Gender_Total,51 years,Never married,2026Q1,18540
+All Denmark,Gender_Total,51 years,Married/separated,2025Q4,44273
+All Denmark,Gender_Total,51 years,Married/separated,2026Q1,44466
+All Denmark,Gender_Total,51 years,Widowed,2025Q4,590
+All Denmark,Gender_Total,51 years,Widowed,2026Q1,611
+All Denmark,Gender_Total,51 years,Divorced,2025Q4,14857
+All Denmark,Gender_Total,51 years,Divorced,2026Q1,14961
+All Denmark,Gender_Total,52 years,Marital_Total,2025Q4,78183
+All Denmark,Gender_Total,52 years,Marital_Total,2026Q1,77835
+All Denmark,Gender_Total,52 years,Never married,2025Q4,17840
+All Denmark,Gender_Total,52 years,Never married,2026Q1,17953
+All Denmark,Gender_Total,52 years,Married/separated,2025Q4,44202
+All Denmark,Gender_Total,52 years,Married/separated,2026Q1,43862
+All Denmark,Gender_Total,52 years,Widowed,2025Q4,752
+All Denmark,Gender_Total,52 years,Widowed,2026Q1,727
+All Denmark,Gender_Total,52 years,Divorced,2025Q4,15389
+All Denmark,Gender_Total,52 years,Divorced,2026Q1,15293
+All Denmark,Gender_Total,53 years,Marital_Total,2025Q4,81764
+All Denmark,Gender_Total,53 years,Marital_Total,2026Q1,81029
+All Denmark,Gender_Total,53 years,Never married,2025Q4,17961
+All Denmark,Gender_Total,53 years,Never married,2026Q1,17921
+All Denmark,Gender_Total,53 years,Married/separated,2025Q4,46333
+All Denmark,Gender_Total,53 years,Married/separated,2026Q1,45854
+All Denmark,Gender_Total,53 years,Widowed,2025Q4,830
+All Denmark,Gender_Total,53 years,Widowed,2026Q1,819
+All Denmark,Gender_Total,53 years,Divorced,2025Q4,16640
+All Denmark,Gender_Total,53 years,Divorced,2026Q1,16435
+All Denmark,Gender_Total,54 years,Marital_Total,2025Q4,78596
+All Denmark,Gender_Total,54 years,Marital_Total,2026Q1,79525
+All Denmark,Gender_Total,54 years,Never married,2025Q4,16756
+All Denmark,Gender_Total,54 years,Never married,2026Q1,17040
+All Denmark,Gender_Total,54 years,Married/separated,2025Q4,44898
+All Denmark,Gender_Total,54 years,Married/separated,2026Q1,45325
+All Denmark,Gender_Total,54 years,Widowed,2025Q4,948
+All Denmark,Gender_Total,54 years,Widowed,2026Q1,946
+All Denmark,Gender_Total,54 years,Divorced,2025Q4,15994
+All Denmark,Gender_Total,54 years,Divorced,2026Q1,16214
+All Denmark,Gender_Total,55 years,Marital_Total,2025Q4,75576
+All Denmark,Gender_Total,55 years,Marital_Total,2026Q1,76007
+All Denmark,Gender_Total,55 years,Never married,2025Q4,15467
+All Denmark,Gender_Total,55 years,Never married,2026Q1,15688
+All Denmark,Gender_Total,55 years,Married/separated,2025Q4,43472
+All Denmark,Gender_Total,55 years,Married/separated,2026Q1,43547
+All Denmark,Gender_Total,55 years,Widowed,2025Q4,1004
+All Denmark,Gender_Total,55 years,Widowed,2026Q1,1010
+All Denmark,Gender_Total,55 years,Divorced,2025Q4,15633
+All Denmark,Gender_Total,55 years,Divorced,2026Q1,15762
+All Denmark,Gender_Total,56 years,Marital_Total,2025Q4,75623
+All Denmark,Gender_Total,56 years,Marital_Total,2026Q1,75186
+All Denmark,Gender_Total,56 years,Never married,2025Q4,15273
+All Denmark,Gender_Total,56 years,Never married,2026Q1,15178
+All Denmark,Gender_Total,56 years,Married/separated,2025Q4,43438
+All Denmark,Gender_Total,56 years,Married/separated,2026Q1,43231
+All Denmark,Gender_Total,56 years,Widowed,2025Q4,1140
+All Denmark,Gender_Total,56 years,Widowed,2026Q1,1123
+All Denmark,Gender_Total,56 years,Divorced,2025Q4,15772
+All Denmark,Gender_Total,56 years,Divorced,2026Q1,15654
+All Denmark,Gender_Total,57 years,Marital_Total,2025Q4,78666
+All Denmark,Gender_Total,57 years,Marital_Total,2026Q1,77616
+All Denmark,Gender_Total,57 years,Never married,2025Q4,15394
+All Denmark,Gender_Total,57 years,Never married,2026Q1,15237
+All Denmark,Gender_Total,57 years,Married/separated,2025Q4,45381
+All Denmark,Gender_Total,57 years,Married/separated,2026Q1,44652
+All Denmark,Gender_Total,57 years,Widowed,2025Q4,1297
+All Denmark,Gender_Total,57 years,Widowed,2026Q1,1267
+All Denmark,Gender_Total,57 years,Divorced,2025Q4,16594
+All Denmark,Gender_Total,57 years,Divorced,2026Q1,16460
+All Denmark,Gender_Total,58 years,Marital_Total,2025Q4,84620
+All Denmark,Gender_Total,58 years,Marital_Total,2026Q1,82421
+All Denmark,Gender_Total,58 years,Never married,2025Q4,16241
+All Denmark,Gender_Total,58 years,Never married,2026Q1,15911
+All Denmark,Gender_Total,58 years,Married/separated,2025Q4,48788
+All Denmark,Gender_Total,58 years,Married/separated,2026Q1,47453
+All Denmark,Gender_Total,58 years,Widowed,2025Q4,1634
+All Denmark,Gender_Total,58 years,Widowed,2026Q1,1594
+All Denmark,Gender_Total,58 years,Divorced,2025Q4,17957
+All Denmark,Gender_Total,58 years,Divorced,2026Q1,17463
+All Denmark,Gender_Total,59 years,Marital_Total,2025Q4,86791
+All Denmark,Gender_Total,59 years,Marital_Total,2026Q1,87563
+All Denmark,Gender_Total,59 years,Never married,2025Q4,16060
+All Denmark,Gender_Total,59 years,Never married,2026Q1,16186
+All Denmark,Gender_Total,59 years,Married/separated,2025Q4,50473
+All Denmark,Gender_Total,59 years,Married/separated,2026Q1,50909
+All Denmark,Gender_Total,59 years,Widowed,2025Q4,1934
+All Denmark,Gender_Total,59 years,Widowed,2026Q1,1932
+All Denmark,Gender_Total,59 years,Divorced,2025Q4,18324
+All Denmark,Gender_Total,59 years,Divorced,2026Q1,18536
+All Denmark,Gender_Total,60 years,Marital_Total,2025Q4,83887
+All Denmark,Gender_Total,60 years,Marital_Total,2026Q1,84315
+All Denmark,Gender_Total,60 years,Never married,2025Q4,14991
+All Denmark,Gender_Total,60 years,Never married,2026Q1,15087
+All Denmark,Gender_Total,60 years,Married/separated,2025Q4,49294
+All Denmark,Gender_Total,60 years,Married/separated,2026Q1,49447
+All Denmark,Gender_Total,60 years,Widowed,2025Q4,2068
+All Denmark,Gender_Total,60 years,Widowed,2026Q1,2107
+All Denmark,Gender_Total,60 years,Divorced,2025Q4,17534
+All Denmark,Gender_Total,60 years,Divorced,2026Q1,17674
+All Denmark,Gender_Total,61 years,Marital_Total,2025Q4,81198
+All Denmark,Gender_Total,61 years,Marital_Total,2026Q1,81688
+All Denmark,Gender_Total,61 years,Never married,2025Q4,14333
+All Denmark,Gender_Total,61 years,Never married,2026Q1,14472
+All Denmark,Gender_Total,61 years,Married/separated,2025Q4,47924
+All Denmark,Gender_Total,61 years,Married/separated,2026Q1,48010
+All Denmark,Gender_Total,61 years,Widowed,2025Q4,2344
+All Denmark,Gender_Total,61 years,Widowed,2026Q1,2338
+All Denmark,Gender_Total,61 years,Divorced,2025Q4,16597
+All Denmark,Gender_Total,61 years,Divorced,2026Q1,16868
+All Denmark,Gender_Total,62 years,Marital_Total,2025Q4,77837
+All Denmark,Gender_Total,62 years,Marital_Total,2026Q1,79285
+All Denmark,Gender_Total,62 years,Never married,2025Q4,13332
+All Denmark,Gender_Total,62 years,Never married,2026Q1,13669
+All Denmark,Gender_Total,62 years,Married/separated,2025Q4,46300
+All Denmark,Gender_Total,62 years,Married/separated,2026Q1,47108
+All Denmark,Gender_Total,62 years,Widowed,2025Q4,2547
+All Denmark,Gender_Total,62 years,Widowed,2026Q1,2504
+All Denmark,Gender_Total,62 years,Divorced,2025Q4,15658
+All Denmark,Gender_Total,62 years,Divorced,2026Q1,16004
+All Denmark,Gender_Total,63 years,Marital_Total,2025Q4,74496
+All Denmark,Gender_Total,63 years,Marital_Total,2026Q1,74450
+All Denmark,Gender_Total,63 years,Never married,2025Q4,12230
+All Denmark,Gender_Total,63 years,Never married,2026Q1,12264
+All Denmark,Gender_Total,63 years,Married/separated,2025Q4,44540
+All Denmark,Gender_Total,63 years,Married/separated,2026Q1,44442
+All Denmark,Gender_Total,63 years,Widowed,2025Q4,2924
+All Denmark,Gender_Total,63 years,Widowed,2026Q1,2914
+All Denmark,Gender_Total,63 years,Divorced,2025Q4,14802
+All Denmark,Gender_Total,63 years,Divorced,2026Q1,14830
+All Denmark,Gender_Total,64 years,Marital_Total,2025Q4,71255
+All Denmark,Gender_Total,64 years,Marital_Total,2026Q1,71648
+All Denmark,Gender_Total,64 years,Never married,2025Q4,11438
+All Denmark,Gender_Total,64 years,Never married,2026Q1,11582
+All Denmark,Gender_Total,64 years,Married/separated,2025Q4,42829
+All Denmark,Gender_Total,64 years,Married/separated,2026Q1,42968
+All Denmark,Gender_Total,64 years,Widowed,2025Q4,3109
+All Denmark,Gender_Total,64 years,Widowed,2026Q1,3074
+All Denmark,Gender_Total,64 years,Divorced,2025Q4,13879
+All Denmark,Gender_Total,64 years,Divorced,2026Q1,14024
+All Denmark,Gender_Total,65 years,Marital_Total,2025Q4,69919
+All Denmark,Gender_Total,65 years,Marital_Total,2026Q1,70665
+All Denmark,Gender_Total,65 years,Never married,2025Q4,10687
+All Denmark,Gender_Total,65 years,Never married,2026Q1,10907
+All Denmark,Gender_Total,65 years,Married/separated,2025Q4,42286
+All Denmark,Gender_Total,65 years,Married/separated,2026Q1,42573
+All Denmark,Gender_Total,65 years,Widowed,2025Q4,3540
+All Denmark,Gender_Total,65 years,Widowed,2026Q1,3560
+All Denmark,Gender_Total,65 years,Divorced,2025Q4,13406
+All Denmark,Gender_Total,65 years,Divorced,2026Q1,13625
+All Denmark,Gender_Total,66 years,Marital_Total,2025Q4,67430
+All Denmark,Gender_Total,66 years,Marital_Total,2026Q1,67056
+All Denmark,Gender_Total,66 years,Never married,2025Q4,10010
+All Denmark,Gender_Total,66 years,Never married,2026Q1,10027
+All Denmark,Gender_Total,66 years,Married/separated,2025Q4,41182
+All Denmark,Gender_Total,66 years,Married/separated,2026Q1,40757
+All Denmark,Gender_Total,66 years,Widowed,2025Q4,3792
+All Denmark,Gender_Total,66 years,Widowed,2026Q1,3738
+All Denmark,Gender_Total,66 years,Divorced,2025Q4,12446
+All Denmark,Gender_Total,66 years,Divorced,2026Q1,12534
+All Denmark,Gender_Total,67 years,Marital_Total,2025Q4,66202
+All Denmark,Gender_Total,67 years,Marital_Total,2026Q1,66619
+All Denmark,Gender_Total,67 years,Never married,2025Q4,9452
+All Denmark,Gender_Total,67 years,Never married,2026Q1,9550
+All Denmark,Gender_Total,67 years,Married/separated,2025Q4,40512
+All Denmark,Gender_Total,67 years,Married/separated,2026Q1,40644
+All Denmark,Gender_Total,67 years,Widowed,2025Q4,4258
+All Denmark,Gender_Total,67 years,Widowed,2026Q1,4309
+All Denmark,Gender_Total,67 years,Divorced,2025Q4,11980
+All Denmark,Gender_Total,67 years,Divorced,2026Q1,12116
+All Denmark,Gender_Total,68 years,Marital_Total,2025Q4,64923
+All Denmark,Gender_Total,68 years,Marital_Total,2026Q1,65093
+All Denmark,Gender_Total,68 years,Never married,2025Q4,8804
+All Denmark,Gender_Total,68 years,Never married,2026Q1,8931
+All Denmark,Gender_Total,68 years,Married/separated,2025Q4,39824
+All Denmark,Gender_Total,68 years,Married/separated,2026Q1,39916
+All Denmark,Gender_Total,68 years,Widowed,2025Q4,4832
+All Denmark,Gender_Total,68 years,Widowed,2026Q1,4750
+All Denmark,Gender_Total,68 years,Divorced,2025Q4,11463
+All Denmark,Gender_Total,68 years,Divorced,2026Q1,11496
+All Denmark,Gender_Total,69 years,Marital_Total,2025Q4,64234
+All Denmark,Gender_Total,69 years,Marital_Total,2026Q1,64481
+All Denmark,Gender_Total,69 years,Never married,2025Q4,8330
+All Denmark,Gender_Total,69 years,Never married,2026Q1,8349
+All Denmark,Gender_Total,69 years,Married/separated,2025Q4,39574
+All Denmark,Gender_Total,69 years,Married/separated,2026Q1,39586
+All Denmark,Gender_Total,69 years,Widowed,2025Q4,5282
+All Denmark,Gender_Total,69 years,Widowed,2026Q1,5348
+All Denmark,Gender_Total,69 years,Divorced,2025Q4,11048
+All Denmark,Gender_Total,69 years,Divorced,2026Q1,11198
+All Denmark,Gender_Total,70 years,Marital_Total,2025Q4,62159
+All Denmark,Gender_Total,70 years,Marital_Total,2026Q1,62417
+All Denmark,Gender_Total,70 years,Never married,2025Q4,7487
+All Denmark,Gender_Total,70 years,Never married,2026Q1,7709
+All Denmark,Gender_Total,70 years,Married/separated,2025Q4,38299
+All Denmark,Gender_Total,70 years,Married/separated,2026Q1,38357
+All Denmark,Gender_Total,70 years,Widowed,2025Q4,5769
+All Denmark,Gender_Total,70 years,Widowed,2026Q1,5728
+All Denmark,Gender_Total,70 years,Divorced,2025Q4,10604
+All Denmark,Gender_Total,70 years,Divorced,2026Q1,10623
+All Denmark,Gender_Total,71 years,Marital_Total,2025Q4,60131
+All Denmark,Gender_Total,71 years,Marital_Total,2026Q1,60183
+All Denmark,Gender_Total,71 years,Never married,2025Q4,6991
+All Denmark,Gender_Total,71 years,Never married,2026Q1,7005
+All Denmark,Gender_Total,71 years,Married/separated,2025Q4,36935
+All Denmark,Gender_Total,71 years,Married/separated,2026Q1,36848
+All Denmark,Gender_Total,71 years,Widowed,2025Q4,6152
+All Denmark,Gender_Total,71 years,Widowed,2026Q1,6188
+All Denmark,Gender_Total,71 years,Divorced,2025Q4,10053
+All Denmark,Gender_Total,71 years,Divorced,2026Q1,10142
+All Denmark,Gender_Total,72 years,Marital_Total,2025Q4,60740
+All Denmark,Gender_Total,72 years,Marital_Total,2026Q1,60126
+All Denmark,Gender_Total,72 years,Never married,2025Q4,6421
+All Denmark,Gender_Total,72 years,Never married,2026Q1,6493
+All Denmark,Gender_Total,72 years,Married/separated,2025Q4,37497
+All Denmark,Gender_Total,72 years,Married/separated,2026Q1,36923
+All Denmark,Gender_Total,72 years,Widowed,2025Q4,6866
+All Denmark,Gender_Total,72 years,Widowed,2026Q1,6770
+All Denmark,Gender_Total,72 years,Divorced,2025Q4,9956
+All Denmark,Gender_Total,72 years,Divorced,2026Q1,9940
+All Denmark,Gender_Total,73 years,Marital_Total,2025Q4,56960
+All Denmark,Gender_Total,73 years,Marital_Total,2026Q1,57772
+All Denmark,Gender_Total,73 years,Never married,2025Q4,5591
+All Denmark,Gender_Total,73 years,Never married,2026Q1,5733
+All Denmark,Gender_Total,73 years,Married/separated,2025Q4,34982
+All Denmark,Gender_Total,73 years,Married/separated,2026Q1,35446
+All Denmark,Gender_Total,73 years,Widowed,2025Q4,7289
+All Denmark,Gender_Total,73 years,Widowed,2026Q1,7334
+All Denmark,Gender_Total,73 years,Divorced,2025Q4,9098
+All Denmark,Gender_Total,73 years,Divorced,2026Q1,9259
+All Denmark,Gender_Total,74 years,Marital_Total,2025Q4,55571
+All Denmark,Gender_Total,74 years,Marital_Total,2026Q1,55501
+All Denmark,Gender_Total,74 years,Never married,2025Q4,4940
+All Denmark,Gender_Total,74 years,Never married,2026Q1,5051
+All Denmark,Gender_Total,74 years,Married/separated,2025Q4,33908
+All Denmark,Gender_Total,74 years,Married/separated,2026Q1,33902
+All Denmark,Gender_Total,74 years,Widowed,2025Q4,7862
+All Denmark,Gender_Total,74 years,Widowed,2026Q1,7856
+All Denmark,Gender_Total,74 years,Divorced,2025Q4,8861
+All Denmark,Gender_Total,74 years,Divorced,2026Q1,8692
+All Denmark,Gender_Total,75 years,Marital_Total,2025Q4,56276
+All Denmark,Gender_Total,75 years,Marital_Total,2026Q1,56099
+All Denmark,Gender_Total,75 years,Never married,2025Q4,4574
+All Denmark,Gender_Total,75 years,Never married,2026Q1,4652
+All Denmark,Gender_Total,75 years,Married/separated,2025Q4,34124
+All Denmark,Gender_Total,75 years,Married/separated,2026Q1,33851
+All Denmark,Gender_Total,75 years,Widowed,2025Q4,8875
+All Denmark,Gender_Total,75 years,Widowed,2026Q1,8710
+All Denmark,Gender_Total,75 years,Divorced,2025Q4,8703
+All Denmark,Gender_Total,75 years,Divorced,2026Q1,8886
+All Denmark,Gender_Total,76 years,Marital_Total,2025Q4,54988
+All Denmark,Gender_Total,76 years,Marital_Total,2026Q1,54382
+All Denmark,Gender_Total,76 years,Never married,2025Q4,3990
+All Denmark,Gender_Total,76 years,Never married,2026Q1,4023
+All Denmark,Gender_Total,76 years,Married/separated,2025Q4,32965
+All Denmark,Gender_Total,76 years,Married/separated,2026Q1,32623
+All Denmark,Gender_Total,76 years,Widowed,2025Q4,9650
+All Denmark,Gender_Total,76 years,Widowed,2026Q1,9403
+All Denmark,Gender_Total,76 years,Divorced,2025Q4,8383
+All Denmark,Gender_Total,76 years,Divorced,2026Q1,8333
+All Denmark,Gender_Total,77 years,Marital_Total,2025Q4,55979
+All Denmark,Gender_Total,77 years,Marital_Total,2026Q1,55843
+All Denmark,Gender_Total,77 years,Never married,2025Q4,3617
+All Denmark,Gender_Total,77 years,Never married,2026Q1,3716
+All Denmark,Gender_Total,77 years,Married/separated,2025Q4,33330
+All Denmark,Gender_Total,77 years,Married/separated,2026Q1,33077
+All Denmark,Gender_Total,77 years,Widowed,2025Q4,10760
+All Denmark,Gender_Total,77 years,Widowed,2026Q1,10845
+All Denmark,Gender_Total,77 years,Divorced,2025Q4,8272
+All Denmark,Gender_Total,77 years,Divorced,2026Q1,8205
+All Denmark,Gender_Total,78 years,Marital_Total,2025Q4,58085
+All Denmark,Gender_Total,78 years,Marital_Total,2026Q1,57238
+All Denmark,Gender_Total,78 years,Never married,2025Q4,3343
+All Denmark,Gender_Total,78 years,Never married,2026Q1,3369
+All Denmark,Gender_Total,78 years,Married/separated,2025Q4,33958
+All Denmark,Gender_Total,78 years,Married/separated,2026Q1,33386
+All Denmark,Gender_Total,78 years,Widowed,2025Q4,12342
+All Denmark,Gender_Total,78 years,Widowed,2026Q1,12111
+All Denmark,Gender_Total,78 years,Divorced,2025Q4,8442
+All Denmark,Gender_Total,78 years,Divorced,2026Q1,8372
+All Denmark,Gender_Total,79 years,Marital_Total,2025Q4,56916
+All Denmark,Gender_Total,79 years,Marital_Total,2026Q1,56763
+All Denmark,Gender_Total,79 years,Never married,2025Q4,3019
+All Denmark,Gender_Total,79 years,Never married,2026Q1,3026
+All Denmark,Gender_Total,79 years,Married/separated,2025Q4,32586
+All Denmark,Gender_Total,79 years,Married/separated,2026Q1,32559
+All Denmark,Gender_Total,79 years,Widowed,2025Q4,13338
+All Denmark,Gender_Total,79 years,Widowed,2026Q1,13161
+All Denmark,Gender_Total,79 years,Divorced,2025Q4,7973
+All Denmark,Gender_Total,79 years,Divorced,2026Q1,8017
+All Denmark,Gender_Total,80 years,Marital_Total,2025Q4,51765
+All Denmark,Gender_Total,80 years,Marital_Total,2026Q1,52333
+All Denmark,Gender_Total,80 years,Never married,2025Q4,2453
+All Denmark,Gender_Total,80 years,Never married,2026Q1,2522
+All Denmark,Gender_Total,80 years,Married/separated,2025Q4,28693
+All Denmark,Gender_Total,80 years,Married/separated,2026Q1,29042
+All Denmark,Gender_Total,80 years,Widowed,2025Q4,13422
+All Denmark,Gender_Total,80 years,Widowed,2026Q1,13562
+All Denmark,Gender_Total,80 years,Divorced,2025Q4,7197
+All Denmark,Gender_Total,80 years,Divorced,2026Q1,7207
+All Denmark,Gender_Total,81 years,Marital_Total,2025Q4,46398
+All Denmark,Gender_Total,81 years,Marital_Total,2026Q1,47058
+All Denmark,Gender_Total,81 years,Never married,2025Q4,2113
+All Denmark,Gender_Total,81 years,Never married,2026Q1,2148
+All Denmark,Gender_Total,81 years,Married/separated,2025Q4,24562
+All Denmark,Gender_Total,81 years,Married/separated,2026Q1,25028
+All Denmark,Gender_Total,81 years,Widowed,2025Q4,13571
+All Denmark,Gender_Total,81 years,Widowed,2026Q1,13544
+All Denmark,Gender_Total,81 years,Divorced,2025Q4,6152
+All Denmark,Gender_Total,81 years,Divorced,2026Q1,6338
+All Denmark,Gender_Total,82 years,Marital_Total,2025Q4,40336
+All Denmark,Gender_Total,82 years,Marital_Total,2026Q1,41172
+All Denmark,Gender_Total,82 years,Never married,2025Q4,1640
+All Denmark,Gender_Total,82 years,Never married,2026Q1,1717
+All Denmark,Gender_Total,82 years,Married/separated,2025Q4,20508
+All Denmark,Gender_Total,82 years,Married/separated,2026Q1,20761
+All Denmark,Gender_Total,82 years,Widowed,2025Q4,12846
+All Denmark,Gender_Total,82 years,Widowed,2026Q1,13229
+All Denmark,Gender_Total,82 years,Divorced,2025Q4,5342
+All Denmark,Gender_Total,82 years,Divorced,2026Q1,5465
+All Denmark,Gender_Total,83 years,Marital_Total,2025Q4,35755
+All Denmark,Gender_Total,83 years,Marital_Total,2026Q1,36447
+All Denmark,Gender_Total,83 years,Never married,2025Q4,1392
+All Denmark,Gender_Total,83 years,Never married,2026Q1,1425
+All Denmark,Gender_Total,83 years,Married/separated,2025Q4,17182
+All Denmark,Gender_Total,83 years,Married/separated,2026Q1,17610
+All Denmark,Gender_Total,83 years,Widowed,2025Q4,12574
+All Denmark,Gender_Total,83 years,Widowed,2026Q1,12676
+All Denmark,Gender_Total,83 years,Divorced,2025Q4,4607
+All Denmark,Gender_Total,83 years,Divorced,2026Q1,4736
+All Denmark,Gender_Total,84 years,Marital_Total,2025Q4,29748
+All Denmark,Gender_Total,84 years,Marital_Total,2026Q1,30341
+All Denmark,Gender_Total,84 years,Never married,2025Q4,1126
+All Denmark,Gender_Total,84 years,Never married,2026Q1,1156
+All Denmark,Gender_Total,84 years,Married/separated,2025Q4,13607
+All Denmark,Gender_Total,84 years,Married/separated,2026Q1,13947
+All Denmark,Gender_Total,84 years,Widowed,2025Q4,11340
+All Denmark,Gender_Total,84 years,Widowed,2026Q1,11549
+All Denmark,Gender_Total,84 years,Divorced,2025Q4,3675
+All Denmark,Gender_Total,84 years,Divorced,2026Q1,3689
+All Denmark,Gender_Total,85 years,Marital_Total,2025Q4,27115
+All Denmark,Gender_Total,85 years,Marital_Total,2026Q1,27108
+All Denmark,Gender_Total,85 years,Never married,2025Q4,1011
+All Denmark,Gender_Total,85 years,Never married,2026Q1,995
+All Denmark,Gender_Total,85 years,Married/separated,2025Q4,11547
+All Denmark,Gender_Total,85 years,Married/separated,2026Q1,11617
+All Denmark,Gender_Total,85 years,Widowed,2025Q4,11346
+All Denmark,Gender_Total,85 years,Widowed,2026Q1,11239
+All Denmark,Gender_Total,85 years,Divorced,2025Q4,3211
+All Denmark,Gender_Total,85 years,Divorced,2026Q1,3257
+All Denmark,Gender_Total,86 years,Marital_Total,2025Q4,23620
+All Denmark,Gender_Total,86 years,Marital_Total,2026Q1,23740
+All Denmark,Gender_Total,86 years,Never married,2025Q4,866
+All Denmark,Gender_Total,86 years,Never married,2026Q1,862
+All Denmark,Gender_Total,86 years,Married/separated,2025Q4,9369
+All Denmark,Gender_Total,86 years,Married/separated,2026Q1,9360
+All Denmark,Gender_Total,86 years,Widowed,2025Q4,10669
+All Denmark,Gender_Total,86 years,Widowed,2026Q1,10773
+All Denmark,Gender_Total,86 years,Divorced,2025Q4,2716
+All Denmark,Gender_Total,86 years,Divorced,2026Q1,2745
+All Denmark,Gender_Total,87 years,Marital_Total,2025Q4,20846
+All Denmark,Gender_Total,87 years,Marital_Total,2026Q1,20993
+All Denmark,Gender_Total,87 years,Never married,2025Q4,728
+All Denmark,Gender_Total,87 years,Never married,2026Q1,739
+All Denmark,Gender_Total,87 years,Married/separated,2025Q4,7607
+All Denmark,Gender_Total,87 years,Married/separated,2026Q1,7710
+All Denmark,Gender_Total,87 years,Widowed,2025Q4,10268
+All Denmark,Gender_Total,87 years,Widowed,2026Q1,10225
+All Denmark,Gender_Total,87 years,Divorced,2025Q4,2243
+All Denmark,Gender_Total,87 years,Divorced,2026Q1,2319
+All Denmark,Gender_Total,88 years,Marital_Total,2025Q4,17495
+All Denmark,Gender_Total,88 years,Marital_Total,2026Q1,17770
+All Denmark,Gender_Total,88 years,Never married,2025Q4,613
+All Denmark,Gender_Total,88 years,Never married,2026Q1,635
+All Denmark,Gender_Total,88 years,Married/separated,2025Q4,5787
+All Denmark,Gender_Total,88 years,Married/separated,2026Q1,5851
+All Denmark,Gender_Total,88 years,Widowed,2025Q4,9308
+All Denmark,Gender_Total,88 years,Widowed,2026Q1,9473
+All Denmark,Gender_Total,88 years,Divorced,2025Q4,1787
+All Denmark,Gender_Total,88 years,Divorced,2026Q1,1811
+All Denmark,Gender_Total,89 years,Marital_Total,2025Q4,14410
+All Denmark,Gender_Total,89 years,Marital_Total,2026Q1,14619
+All Denmark,Gender_Total,89 years,Never married,2025Q4,480
+All Denmark,Gender_Total,89 years,Never married,2026Q1,473
+All Denmark,Gender_Total,89 years,Married/separated,2025Q4,4322
+All Denmark,Gender_Total,89 years,Married/separated,2026Q1,4421
+All Denmark,Gender_Total,89 years,Widowed,2025Q4,8238
+All Denmark,Gender_Total,89 years,Widowed,2026Q1,8315
+All Denmark,Gender_Total,89 years,Divorced,2025Q4,1370
+All Denmark,Gender_Total,89 years,Divorced,2026Q1,1410
+All Denmark,Gender_Total,90 years,Marital_Total,2025Q4,11820
+All Denmark,Gender_Total,90 years,Marital_Total,2026Q1,11718
+All Denmark,Gender_Total,90 years,Never married,2025Q4,372
+All Denmark,Gender_Total,90 years,Never married,2026Q1,380
+All Denmark,Gender_Total,90 years,Married/separated,2025Q4,3109
+All Denmark,Gender_Total,90 years,Married/separated,2026Q1,3151
+All Denmark,Gender_Total,90 years,Widowed,2025Q4,7215
+All Denmark,Gender_Total,90 years,Widowed,2026Q1,7098
+All Denmark,Gender_Total,90 years,Divorced,2025Q4,1124
+All Denmark,Gender_Total,90 years,Divorced,2026Q1,1089
+All Denmark,Gender_Total,91 years,Marital_Total,2025Q4,9280
+All Denmark,Gender_Total,91 years,Marital_Total,2026Q1,9383
+All Denmark,Gender_Total,91 years,Never married,2025Q4,266
+All Denmark,Gender_Total,91 years,Never married,2026Q1,280
+All Denmark,Gender_Total,91 years,Married/separated,2025Q4,2100
+All Denmark,Gender_Total,91 years,Married/separated,2026Q1,2116
+All Denmark,Gender_Total,91 years,Widowed,2025Q4,6077
+All Denmark,Gender_Total,91 years,Widowed,2026Q1,6129
+All Denmark,Gender_Total,91 years,Divorced,2025Q4,837
+All Denmark,Gender_Total,91 years,Divorced,2026Q1,858
+All Denmark,Gender_Total,92 years,Marital_Total,2025Q4,7315
+All Denmark,Gender_Total,92 years,Marital_Total,2026Q1,7436
+All Denmark,Gender_Total,92 years,Never married,2025Q4,258
+All Denmark,Gender_Total,92 years,Never married,2026Q1,241
+All Denmark,Gender_Total,92 years,Married/separated,2025Q4,1476
+All Denmark,Gender_Total,92 years,Married/separated,2026Q1,1540
+All Denmark,Gender_Total,92 years,Widowed,2025Q4,4996
+All Denmark,Gender_Total,92 years,Widowed,2026Q1,5039
+All Denmark,Gender_Total,92 years,Divorced,2025Q4,585
+All Denmark,Gender_Total,92 years,Divorced,2026Q1,616
+All Denmark,Gender_Total,93 years,Marital_Total,2025Q4,5665
+All Denmark,Gender_Total,93 years,Marital_Total,2026Q1,5721
+All Denmark,Gender_Total,93 years,Never married,2025Q4,204
+All Denmark,Gender_Total,93 years,Never married,2026Q1,193
+All Denmark,Gender_Total,93 years,Married/separated,2025Q4,1017
+All Denmark,Gender_Total,93 years,Married/separated,2026Q1,1003
+All Denmark,Gender_Total,93 years,Widowed,2025Q4,4006
+All Denmark,Gender_Total,93 years,Widowed,2026Q1,4074
+All Denmark,Gender_Total,93 years,Divorced,2025Q4,438
+All Denmark,Gender_Total,93 years,Divorced,2026Q1,451
+All Denmark,Gender_Total,94 years,Marital_Total,2025Q4,4338
+All Denmark,Gender_Total,94 years,Marital_Total,2026Q1,4287
+All Denmark,Gender_Total,94 years,Never married,2025Q4,150
+All Denmark,Gender_Total,94 years,Never married,2026Q1,175
+All Denmark,Gender_Total,94 years,Married/separated,2025Q4,603
+All Denmark,Gender_Total,94 years,Married/separated,2026Q1,624
+All Denmark,Gender_Total,94 years,Widowed,2025Q4,3252
+All Denmark,Gender_Total,94 years,Widowed,2026Q1,3159
+All Denmark,Gender_Total,94 years,Divorced,2025Q4,333
+All Denmark,Gender_Total,94 years,Divorced,2026Q1,329
+All Denmark,Gender_Total,95 years,Marital_Total,2025Q4,3220
+All Denmark,Gender_Total,95 years,Marital_Total,2026Q1,3265
+All Denmark,Gender_Total,95 years,Never married,2025Q4,116
+All Denmark,Gender_Total,95 years,Never married,2026Q1,113
+All Denmark,Gender_Total,95 years,Married/separated,2025Q4,378
+All Denmark,Gender_Total,95 years,Married/separated,2026Q1,389
+All Denmark,Gender_Total,95 years,Widowed,2025Q4,2485
+All Denmark,Gender_Total,95 years,Widowed,2026Q1,2527
+All Denmark,Gender_Total,95 years,Divorced,2025Q4,241
+All Denmark,Gender_Total,95 years,Divorced,2026Q1,236
+All Denmark,Gender_Total,96 years,Marital_Total,2025Q4,2380
+All Denmark,Gender_Total,96 years,Marital_Total,2026Q1,2359
+All Denmark,Gender_Total,96 years,Never married,2025Q4,88
+All Denmark,Gender_Total,96 years,Never married,2026Q1,91
+All Denmark,Gender_Total,96 years,Married/separated,2025Q4,227
+All Denmark,Gender_Total,96 years,Married/separated,2026Q1,236
+All Denmark,Gender_Total,96 years,Widowed,2025Q4,1878
+All Denmark,Gender_Total,96 years,Widowed,2026Q1,1855
+All Denmark,Gender_Total,96 years,Divorced,2025Q4,187
+All Denmark,Gender_Total,96 years,Divorced,2026Q1,177
+All Denmark,Gender_Total,97 years,Marital_Total,2025Q4,1712
+All Denmark,Gender_Total,97 years,Marital_Total,2026Q1,1754
+All Denmark,Gender_Total,97 years,Never married,2025Q4,64
+All Denmark,Gender_Total,97 years,Never married,2026Q1,65
+All Denmark,Gender_Total,97 years,Married/separated,2025Q4,137
+All Denmark,Gender_Total,97 years,Married/separated,2026Q1,138
+All Denmark,Gender_Total,97 years,Widowed,2025Q4,1411
+All Denmark,Gender_Total,97 years,Widowed,2026Q1,1433
+All Denmark,Gender_Total,97 years,Divorced,2025Q4,100
+All Denmark,Gender_Total,97 years,Divorced,2026Q1,118
+All Denmark,Gender_Total,98 years,Marital_Total,2025Q4,1174
+All Denmark,Gender_Total,98 years,Marital_Total,2026Q1,1136
+All Denmark,Gender_Total,98 years,Never married,2025Q4,53
+All Denmark,Gender_Total,98 years,Never married,2026Q1,47
+All Denmark,Gender_Total,98 years,Married/separated,2025Q4,68
+All Denmark,Gender_Total,98 years,Married/separated,2026Q1,66
+All Denmark,Gender_Total,98 years,Widowed,2025Q4,989
+All Denmark,Gender_Total,98 years,Widowed,2026Q1,960

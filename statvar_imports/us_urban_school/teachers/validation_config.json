@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records across the import does not exceed 0.1% (accounts for school closures/mergers across biennial CRDC releases).",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness_all_inputs",
+      "description": "Verifies that each input contains non-empty data meeting its expected freshness threshold (up to 2024 for the latest biennial CRDC release).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT CASE WHEN MIN(MinDate) <= '2014' AND MAX(MinDate) <= '2014' THEN MAX(MaxDate) >= '2014' WHEN MIN(MinDate) = '2016' THEN MAX(MaxDate) >= '2016' WHEN MAX(MinDate) >= '2018' THEN MAX(MaxDate) >= '2024' ELSE FALSE END AS is_fresh, COUNT(*) AS row_cnt FROM stats",
+        "condition": "is_fresh = TRUE AND row_cnt > 0"
+      }
+    }
+  ]
+}

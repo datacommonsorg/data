@@ -13,25 +13,55 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # 
-# This script updates the latest version of an import.
+# This script updates the latest version of an import and invokes the
+# import automation workflow with skipImportJob=true.
 # 
-# Usage: ./update_import_version.sh <import_name> <version> <comment>
-# Example: ./update_import_version.sh scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test 2025_12_17T02_30_27_233484_08_00 'Manual validation'
+# Usage: ./update_import_version.sh <import_name> <version> <comment> [staging|prod]
+# Example: ./update_import_version.sh scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test 2025_12_17T02_30_27_233484_08_00 'Manual validation' staging
 
 set -e
 
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <import_name> <version> <comment>"
+if [ "$#" -lt 3 ] || [ "$#" -gt 4 ]; then
+    echo "Usage: $0 <import_name> <version> <comment> [staging|prod]"
     exit 1
 fi
 
-# Deployed using import-automation/workflow/cloudbuild.yaml
-FUNCTION_URL="https://us-central1-datcom-import-automation-prod.cloudfunctions.net/spanner-ingestion-helper"
+PROJECT="${PROJECT_ID:-datcom-import-automation-prod}"
+LOCATION="${LOCATION:-us-central1}"
+WORKFLOW="${WORKFLOW_ID:-import-automation-workflow}"
+FUNCTION_URL="https://import-helper-service-965988403328.us-central1.run.app"
 IMPORT_NAME=$1
 VERSION=$2
 COMMENT=$3
+ENVIRONMENT=${4:-}
 
-curl -X POST "${FUNCTION_URL}" \
+INGESTION_FLAGS=""
+if [ -n "${ENVIRONMENT}" ]; then
+    case "${ENVIRONMENT}" in
+        staging)
+            INGESTION_FLAGS=",\"skipProdIngestion\":true"
+            ;;
+        prod)
+            INGESTION_FLAGS=",\"skipStagingIngestion\":true"
+            ;;
+        *)
+            echo "Invalid environment '${ENVIRONMENT}'. Expected 'staging' or 'prod'."
+            exit 1
+            ;;
+    esac
+fi
+
+echo "Updating import version for ${IMPORT_NAME} to ${VERSION}..."
+curl -X POST "${FUNCTION_URL}/imports/version" \
   -H "Authorization: bearer $(gcloud auth print-identity-token)" \
   -H "Content-Type: application/json" \
-  -d "{\"actionType\": \"update_import_version\", \"importName\": \"${IMPORT_NAME}\", \"version\": \"${VERSION}\", \"override\": true, \"comment\": \"${COMMENT}\"}"
+  -d "{\"imports\": [\"${IMPORT_NAME}\"], \"version\": \"${VERSION}\", \"override\": true, \"comment\": \"${COMMENT}\"}"
+
+echo ""
+echo "Triggering ${WORKFLOW} with skipImportJob=true${ENVIRONMENT:+ (environment=${ENVIRONMENT})}..."
+DATA="{\"importName\":\"${IMPORT_NAME}\",\"skipImportJob\":true${INGESTION_FLAGS}}"
+
+gcloud workflows execute "${WORKFLOW}" \
+  --project="${PROJECT}" \
+  --location="${LOCATION}" \
+  --data="${DATA}"
