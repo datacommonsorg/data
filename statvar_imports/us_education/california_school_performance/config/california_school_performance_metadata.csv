@@ -1,0 +1,5 @@
+key,value
+header_rows,1
+word_delimiter,""""""
+input_delimiter,^
+output_columns,"observationDate,observationAbout,variableMeasured,value,unit,scalingFactor"

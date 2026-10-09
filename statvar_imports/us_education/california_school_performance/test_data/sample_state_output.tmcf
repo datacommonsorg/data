@@ -1,0 +1,8 @@
+Node: E:sample_state_output->E0
+observationDate: C:sample_state_output->observationDate
+observationAbout: C:sample_state_output->observationAbout
+variableMeasured: C:sample_state_output->variableMeasured
+value: C:sample_state_output->value
+unit: C:sample_state_output->unit
+scalingFactor: C:sample_state_output->scalingFactor
+typeOf: dcs:StatVarObservation
