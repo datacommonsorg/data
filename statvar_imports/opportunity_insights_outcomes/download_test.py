@@ -250,6 +250,25 @@ class DownloadAndPvmapTest(unittest.TestCase):
         for invalid in ('', 'NA', 'N/A', '.', 'nan', 'null', '-', 's', 'Inf', '-Inf'):
             self.assertFalse(preprocess._is_valid_number(invalid))
 
+    def test_discover_latest_urls_matches_cohort_zips(self):
+        sample_html = (
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/county_cohort.zip">County</a>'
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/cz_cohort.zip">CZ</a>'
+        ).encode('utf-8')
+        with mock.patch(
+            'urllib.request.urlopen',
+            return_value=io.BytesIO(sample_html),
+        ):
+            urls = download.discover_latest_urls('https://example.com/data/')
+        self.assertEqual(
+            urls['county_by_cohort_outcomes.csv'],
+            'https://opportunityinsights.org/wp-content/uploads/2024/07/county_cohort.zip',
+        )
+        self.assertEqual(
+            urls['cz_by_cohort_outcomes.csv'],
+            'https://opportunityinsights.org/wp-content/uploads/2024/07/cz_cohort.zip',
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

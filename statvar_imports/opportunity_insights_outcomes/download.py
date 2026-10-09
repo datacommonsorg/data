@@ -67,12 +67,12 @@ DEFAULT_SOURCE_FILES = {
     },
     'county_by_cohort_outcomes.csv': {
         'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/Table_3_County_by_Cohort_Estimates\.csv',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_3_County_by_Cohort_Estimates\.csv|county_cohort\.zip)',
         'is_zip': False,
     },
     'cz_by_cohort_outcomes.csv': {
         'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_4_cz_by_cohort_estimates.csv',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/Table_4_cz_by_cohort_estimates\.csv',
+        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_4_cz_by_cohort_estimates\.csv|cz_cohort\.zip)',
         'is_zip': False,
     },
 }
@@ -183,7 +183,7 @@ def download_all_sources(
         url = urls[target_csv_name]
         target_csv_path = os.path.join(output_dir, target_csv_name)
 
-        if spec['is_zip']:
+        if spec['is_zip'] or url.lower().endswith('.zip'):
             zip_path = os.path.join(output_dir, f'{target_csv_name}.zip')
             if not os.path.exists(zip_path) and not os.path.exists(target_csv_path):
                 download_file(url, zip_path)
