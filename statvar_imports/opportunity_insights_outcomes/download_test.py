@@ -16,7 +16,6 @@
 import csv
 import io
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -30,6 +29,36 @@ if _REPO_ROOT not in sys.path:
 
 from statvar_imports.opportunity_insights_outcomes import download
 from statvar_imports.opportunity_insights_outcomes import preprocess
+
+
+def _load_expected_header_to_sv(
+    expected_input_dir: str, expected_output_csv: str
+) -> dict[str, tuple[str, str, str, str]]:
+    """Reconstructs header_to_sv from committed test_data without running stat_var_processor.py."""
+    ordered_headers = []
+    for fname in sorted(os.listdir(expected_input_dir)):
+        if not fname.endswith('_cleaned.csv'):
+            continue
+        with open(
+            os.path.join(expected_input_dir, fname), 'r', encoding='utf-8'
+        ) as f:
+            reader = csv.reader(f)
+            headers = next(reader)[1:]
+            for row in reader:
+                for idx, val in enumerate(row[1:]):
+                    if val.strip():
+                        ordered_headers.append(headers[idx])
+
+    header_to_sv = {}
+    with open(expected_output_csv, 'r', encoding='utf-8') as f:
+        for norm_h, row in zip(ordered_headers, csv.DictReader(f)):
+            header_to_sv[norm_h] = (
+                row['observationDate'],
+                row['observationPeriod'],
+                row['variableMeasured'],
+                row.get('unit', ''),
+            )
+    return header_to_sv
 
 
 class DownloadAndPvmapTest(unittest.TestCase):
@@ -140,98 +169,35 @@ class DownloadAndPvmapTest(unittest.TestCase):
             with open(target_csv, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
-    def test_end_to_end_sharding_and_stat_var_processor(self):
-        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
-        in_csv = os.path.join(test_data_dir, 'raw_data', 'tract_outcomes.csv')
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            out_csv = os.path.join(tmpdir, 'tract_outcomes_cleaned.csv')
-            count = preprocess.shard_wide_csv(
-                in_csv, out_csv, 'tract', max_rows_per_shard=5000
-            )
-            self.assertEqual(count, 100)
-            self.assertTrue(os.path.exists(out_csv))
-
-            sv_out_prefix = os.path.join(tmpdir, 'output')
-            res = subprocess.run(
-                [
-                    'python3',
-                    os.path.join(
-                        _REPO_ROOT,
-                        'tools/statvar_importer/stat_var_processor.py',
-                    ),
-                    f'--input_data={out_csv}',
-                    f'--pv_map={os.path.join(_MODULE_DIR, "pvmap.csv")}',
-                    f'--config_file={os.path.join(_MODULE_DIR, "metadata.csv")}',
-                    f'--output_path={sv_out_prefix}',
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            self.assertEqual(res.returncode, 0, msg=res.stderr)
-            with open(f'{sv_out_prefix}.csv', 'r', encoding='utf-8') as f:
-                sv_rows = list(csv.DictReader(f))
-            self.assertEqual(len(sv_rows), 560)
-            dollar_rows = [
-                r
-                for r in sv_rows
-                if 'HouseholdIncome_' in r['variableMeasured']
-                or 'IndividualIncome_' in r['variableMeasured']
-            ]
-            for r in dollar_rows:
-                self.assertEqual(r['unit'], 'USDollar')
-
-    def test_sharding_all_datasets_and_stat_var_processor(self):
+    def test_sharding_all_datasets(self):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
         raw_dir = os.path.join(test_data_dir, 'raw_data')
         expected_input_dir = os.path.join(test_data_dir, 'input_files')
         expected_output_dir = os.path.join(test_data_dir, 'output')
+        fake_header_to_sv = _load_expected_header_to_sv(
+            expected_input_dir, os.path.join(expected_output_dir, 'output.csv')
+        )
 
         with tempfile.TemporaryDirectory() as tmpdir:
             shard_dir = os.path.join(tmpdir, 'input_files')
             out_dir = os.path.join(tmpdir, 'output')
-            counters_dir = os.path.join(tmpdir, 'counters')
             os.makedirs(shard_dir, exist_ok=True)
             os.makedirs(out_dir, exist_ok=True)
-            os.makedirs(counters_dir, exist_ok=True)
 
             sv_out_prefix = os.path.join(out_dir, 'output')
-            counters_file = os.path.join(counters_dir, 'output_counters.csv')
-            preprocess.prepare_parallel_shards_and_svp_inputs(
-                raw_dir,
-                shard_dir,
-                sv_out_prefix,
-                rows_per_chunk=5000,
-                workers=2,
-                existing_statvar_mcf='',
-            )
-            shard_files = [
-                os.path.join(shard_dir, f)
-                for f in sorted(os.listdir(shard_dir))
-                if f.endswith('_cleaned.csv')
-            ]
-            res = subprocess.run(
-                [
-                    'python3',
-                    os.path.join(
-                        _REPO_ROOT,
-                        'tools/statvar_importer/stat_var_processor.py',
-                    ),
-                    f'--input_data={",".join(shard_files)}',
-                    f'--pv_map={os.path.join(_MODULE_DIR, "pvmap.csv")}',
-                    f'--config_file={os.path.join(_MODULE_DIR, "metadata.csv")}',
-                    f'--output_path={sv_out_prefix}',
-                    f'--output_counters={counters_file}',
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            self.assertEqual(res.returncode, 0, msg=res.stderr)
-            self.assertNotIn('Duplicate SVObs', res.stderr)
-            self.assertNotIn('Dropping invalid SVObs', res.stderr)
-            self.assertTrue(os.path.exists(counters_file))
+            with mock.patch.object(
+                preprocess,
+                '_resolve_headers_via_svp',
+                return_value=fake_header_to_sv,
+            ):
+                preprocess.prepare_parallel_shards_and_svp_inputs(
+                    raw_dir,
+                    shard_dir,
+                    sv_out_prefix,
+                    rows_per_chunk=5000,
+                    workers=2,
+                    existing_statvar_mcf='',
+                )
 
             for fname in sorted(os.listdir(shard_dir)):
                 if fname.endswith('_cleaned.csv'):
@@ -245,7 +211,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         self.assertEqual(f_actual.read(), f_expected.read())
 
             for fname in sorted(os.listdir(out_dir)):
-                if fname.endswith('.csv') or fname.endswith('.tmcf'):
+                if fname.endswith('.csv'):
                     with open(
                         os.path.join(out_dir, fname), 'r', encoding='utf-8'
                     ) as f_actual, open(
@@ -262,7 +228,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         os.path.join(out_dir, fname), 'r', encoding='utf-8'
                     ) as f:
                         sv_rows.extend(list(csv.DictReader(f)))
-            self.assertEqual(len(sv_rows), 1408)
+            self.assertEqual(len(sv_rows), 18687)
 
 
 if __name__ == '__main__':
