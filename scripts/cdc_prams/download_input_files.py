@@ -12,90 +12,77 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script calls the download script in the common folder of eurostat,
-the download script takes INPUT_URLs and current directory as input
-and downloads the files.
+Downloads the CDC PRAMS consolidated multi-year MCH Indicators Excel workbook
+from the official CDC website.
 """
 import os
-from absl import app, flags
-from download import download_file
+import re
+import sys
+from urllib.parse import urljoin
+from absl import app, flags, logging
+
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _CODEDIR)
+
+from download import download_file, _get_session
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
-                    "Directory path where input files need to be downloaded")
+flags.DEFINE_string(
+    "download_directory", _CODEDIR,
+    "Directory path where input_files/ folder will be populated")
+flags.DEFINE_boolean("overwrite", False,
+                     "Whether to force re-download existing files")
+
+_CDC_LANDING_PAGE = (
+    "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html")
+_FALLBACK_URL = ("https://www.cdc.gov/prams/media/files/2024/08/"
+                 "PRAMS-MCH-Indicators-2016-2022-508.xlsx")
 
 
-def download_files(download_directory: str) -> None:
-    '''
-     This Method calls the download function from the commons directory
-    to download all the input files.
+def discover_excel_url() -> str:
+    """
+    Dynamically discovers the latest consolidated multi-year PRAMS Excel workbook
+    URL from the CDC landing page.
+    """
+    logging.info("Checking CDC landing page for latest Excel release: %s",
+                 _CDC_LANDING_PAGE)
+    try:
+        session = _get_session()
+        resp = session.get(_CDC_LANDING_PAGE, timeout=30)
+        resp.raise_for_status()
+        matches = re.findall(
+            r'href=["\']([^"\']*PRAMS-MCH-Indicators-(\d{4})-(\d{4})[^"\']*\.xlsx)["\']',
+            resp.text, re.IGNORECASE)
+        if matches:
+            latest_match = max(matches, key=lambda m: (int(m[2]), int(m[1])))
+            found_url = urljoin(_CDC_LANDING_PAGE, latest_match[0])
+            logging.info("Discovered latest PRAMS workbook URL (%s-%s): %s",
+                         latest_match[1], latest_match[2], found_url)
+            return found_url
+        logging.error(
+            "Dynamic discovery failed to match any multi-year PRAMS Excel URLs on "
+            "%s; falling back to: %s", _CDC_LANDING_PAGE, _FALLBACK_URL)
+    except Exception as exc:
+        logging.error(
+            "Dynamic discovery failed with error (%s); falling back to: %s",
+            exc, _FALLBACK_URL)
+    return _FALLBACK_URL
+
+
+def download_files(download_directory: str, overwrite: bool = False) -> None:
+    """
+    Downloads the consolidated PRAMS MCH Indicators Excel file.
 
     Args:
-        download_directory (str):Location where the files need to be downloaded.
-
-    Returns:
-        None
-    '''
-    files = [
-        'All-Sites-PRAMS-MCH-Indicators-508.pdf',
-        'Alabama-PRAMS-MCH-Indicators-508.pdf',
-        'Alaska-PRAMS-MCH-Indicators-508.pdf',
-        'Arizona-PRAMS-MCH-Indicators-508.pdf',
-        'Arkansas-PRAMS-MCH-Indicators-508.pdf',
-        'Colorado-PRAMS-MCH-Indicators-508.pdf',
-        'Connecticut-PRAMS-MCH-Indicators-508.pdf',
-        'Delaware-PRAMS-MCH-Indicators-508.pdf',
-        'District-Columbia-PRAMS-MCH-Indicators-508.pdf',
-        'Florida-PRAMS-MCH-Indicators-508.pdf',
-        'Georgia-PRAMS-MCH-Indicators-508.pdf',
-        'Hawaii-PRAMS-MCH-Indicators-508.pdf',
-        'Illinois-PRAMS-MCH-Indicators-508.pdf',
-        'Indiana-PRAMS-MCH-Indicators-508.pdf',
-        'Iowa-PRAMS-MCH-Indicators-508.pdf',
-        'Kansas-PRAMS-MCH-Indicators-508.pdf',
-        'Kentucky-PRAMS-MCH-Indicators-508.pdf',
-        'Louisiana-PRAMS-MCH-Indicators-508.pdf',
-        'Maine-PRAMS-MCH-Indicators-508.pdf',
-        'Maryland-PRAMS-MCH-Indicators-508.pdf',
-        'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
-        'Michigan-PRAMS-MCH-Indicators-508.pdf',
-        'Minnesota-PRAMS-MCH-Indicators-508.pdf',
-        'Mississippi-PRAMS-MCH-Indicators-508.pdf',
-        'Missouri-PRAMS-MCH-Indicators-508.pdf',
-        'Montana-PRAMS-MCH-Indicators-508.pdf',
-        'Nebraska-PRAMS-MCH-Indicators-508.pdf',
-        'New-Hampshire-PRAMS-MCH-Indicators-508.pdf',
-        'New-Jersey-PRAMS-MCH-Indicators-508.pdf',
-        'New-Mexico-PRAMS-MCH-Indicators-508.pdf',
-        'New-York-City-PRAMS-MCH-Indicators-508.pdf',
-        'New-York-PRAMS-MCH-Indicators-508.pdf',
-        'North-Carolina-PRAMS-MCH-Indicators-508.pdf',
-        'North-Dakota-PRAMS-MCH-Indicators-508.pdf',
-        'Oklahoma-PRAMS-MCH-Indicators-508.pdf',
-        'Oregon-PRAMS-MCH-Indicators-508.pdf',
-        'Pennsylvania-PRAMS-MCH-Indicators-508.pdf',
-        'Puerto-Rico-PRAMS-MCH-Indicators-508.pdf',
-        'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
-        'South-Dakota-PRAMS-MCH-Indicators-508.pdf',
-        'Tennessee-PRAMS-MCH-Indicators-508.pdf',
-        'Texas-PRAMS-MCH-Indicators-508.pdf',
-        'Utah-PRAMS-MCH-Indicators-508.pdf',
-        'Vermont-PRAMS-MCH-Indicators-508.pdf',
-        'Virginia-PRAMS-MCH-Indicators-508.pdf',
-        'Washington-PRAMS-MCH-Indicators-508.pdf',
-        'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
-        'Wisconsin-PRAMS-MCH-Indicators-508.pdf',
-        'Wyoming-PRAMS-MCH-Indicators-508.pdf'
-    ]
-    INPUT_URL = [
-        'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/' +
-        file for file in files
-    ]
-    download_file(INPUT_URL, download_directory)
+        download_directory (str): Base directory where input_files will be saved.
+        overwrite (bool): If True, re-downloads existing files.
+    """
+    url = discover_excel_url()
+    download_file([url], download_directory, overwrite=overwrite)
 
 
 def main(_):
-    download_files(_FLAGS.download_directory)
+    download_files(_FLAGS.download_directory, overwrite=_FLAGS.overwrite)
 
 
 if __name__ == '__main__':

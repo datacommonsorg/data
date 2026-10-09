@@ -162,22 +162,15 @@ _TIME = {
 }
 
 _INSURANCE = {
-    "OneMonth":
-        "1Month",
+    "OneMonth": "1Month",
     "healthInsuranceStatusPostpartumPrivateInsurance":
-        "WithPrivateHealthInsurance",
-    "healthInsuranceStatusPostpartumMedicaid":
-        "WithMedicaid",
-    "healthInsuranceStatusPostpartumNoInsurance":
-        "NoHealthInsurance",
-    "SampleSize_Count":
-        "",
-    "Percent":
-        "",
-    "ConfidenceIntervalLowerLimit_Count":
-        "",
-    "ConfidenceIntervalUpperLimit_Count":
-        ""
+    "WithPrivateHealthInsurance",
+    "healthInsuranceStatusPostpartumMedicaid": "WithMedicaid",
+    "healthInsuranceStatusPostpartumNoInsurance": "NoHealthInsurance",
+    "SampleSize_Count": "",
+    "Percent": "",
+    "ConfidenceIntervalLowerLimit_Count": "",
+    "ConfidenceIntervalUpperLimit_Count": ""
 }
 
 _CIGARETTES = {
@@ -190,32 +183,4 @@ _CIGARETTES = {
     "Percent": "",
     "ConfidenceIntervalLowerLimit_Count": "",
     "ConfidenceIntervalUpperLimit_Count": ""
-}
-
-_YEAR = {
-    '2016_sampleSize': '2016',
-    '2017_sampleSize': '2017',
-    '2018_sampleSize': '2018',
-    '2019_sampleSize': '2019',
-    '2020_sampleSize': '2020',
-    '2016_CI_PERCENT': '2016',
-    '2016_CI': '2016',
-    '2017_CI': '2017',
-    '2018_CI': '2018',
-    '2019_CI': '2019',
-    '2020_CI': '2020',
-    '2016_CI_LOWER': '2016',
-    '2016_CI_UPPER': '2016',
-    '2017_CI_PERCENT': '2017',
-    '2017_CI_LOWER': '2017',
-    '2017_CI_UPPER': '2017',
-    '2018_CI_PERCENT': '2018',
-    '2018_CI_LOWER': '2018',
-    '2018_CI_UPPER': '2018',
-    '2019_CI_PERCENT': '2019',
-    '2019_CI_LOWER': '2019',
-    '2019_CI_UPPER': '2019',
-    '2020_CI_PERCENT': '2020',
-    '2020_CI_LOWER': '2020',
-    '2020_CI_UPPER': '2020'
 }
