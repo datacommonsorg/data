@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import sys
 import tempfile
@@ -610,6 +611,25 @@ class TestProcessUSASpending(unittest.TestCase):
             get_current_fiscal_year(datetime.datetime(2026, 9, 30)), 2026)
         self.assertEqual(
             get_current_fiscal_year(datetime.datetime(2026, 10, 1)), 2027)
+
+    def test_process_data_with_sample_fixtures(self):
+        sample_input_path = os.path.join(MODULE_DIR, "test_data",
+                                         "sample_awards.json")
+        sample_expected_path = os.path.join(MODULE_DIR, "test_data",
+                                            "sample_output.csv")
+        with open(sample_input_path, "r", encoding="utf-8") as f:
+            sample_awards = json.load(f)
+
+        process_data(
+            sample_awards,
+            start_year=2023,
+            end_year=2024,
+            output_path=self.output_csv,
+        )
+
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.read_csv(sample_expected_path)
+        pd.testing.assert_frame_equal(df_actual, df_expected)
 
 
 if __name__ == "__main__":

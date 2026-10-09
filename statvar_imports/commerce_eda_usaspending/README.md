@@ -15,9 +15,10 @@ This importer fetches and processes U.S. Economic Development Administration (ED
 
 ## Important Files
 
-- `manifest.json`: Import automation specification, script sequence, input/output artifact paths, and cron schedule.
+- `manifest.json`: Import automation specification, script sequence, input/output artifact paths (`node_mcf` configured with `investment_schema.mcf` and `output/*.mcf`), and weekly cron schedule (`30 05 * * 1`).
 - `process.py`: Fetches EDA award obligations from the USAspending REST API partitioned by fiscal year, deduplicates cross-FY award amendments, excludes net negative de-obligations, and outputs `input_files/investment_cleaned.csv`.
-- `process_test.py`: Hermetic unit test suite covering pagination, deduplication, de-obligations, fiscal year calculation, and error handling.
+- `process_test.py`: Hermetic unit test suite covering pagination, deduplication, de-obligations, fiscal year calculation, sample fixtures, and error handling.
+- `test_data/`: Hermetic sample input (`sample_awards.json`) and expected output (`sample_output.csv`) fixtures for unit testing.
 - `investment_pvmap.csv`: Property-value mappings converting state/territory codes, years, and EDA program names into Data Commons schema observations.
 - `investment_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
 - `investment_schema.mcf`: Schema definitions for new `InvestmentProgramEnum` instances.

@@ -17,7 +17,7 @@
                     "cleaned_csv": "output/investment_output.csv",
                     "node_mcf": [
                         "investment_schema.mcf",
-                        "output/investment_output_stat_vars.mcf"
+                        "output/*.mcf"
                     ]
                 }
             ],
@@ -28,7 +28,7 @@
                 "investment_pvmap.csv",
                 "investment_schema.mcf",
                 "manifest.json",
-                "output/investment_output_stat_vars.mcf",
+                "output/*.mcf",
                 "validation_config.json"
             ],
             "cron_schedule": "30 05 * * 1",

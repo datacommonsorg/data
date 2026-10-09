@@ -333,7 +333,7 @@ def main(argv):
 
         process_data(awards, start_year, end_year, output_path)
     except Exception as err:
-        logging.fatal(f"Import pipeline failed: {err}")
+        logging.fatal(f"Import pipeline failed: {err}", exc_info=True)
 
 
 if __name__ == "__main__":
