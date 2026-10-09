@@ -18,6 +18,7 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+import math
 
 INPUT_URLS_CONFIG = "input_urls_config.json"
 
@@ -40,19 +41,32 @@ _HOUSEHOLD_PV = "With{person}Person"
 
 _NUM_OF_VEHICLES_PV = "With{vehicle}AvailableVehicles"
 
+
+def _is_null_or_none(val):
+    """Checks if a value is null, NaN, None, or empty."""
+    if val is None:
+        return True
+    if isinstance(val, float) and math.isnan(val):
+        return True
+    return str(val).strip().lower() in ('none', 'nan', '<na>', '')
+
+
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long
-_PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' if 'None' not in prop_val[
-    1] else ""
-_PV_FORMAT_NUMBERS = lambda prop_val: f'"{prop_val[0]}": "{prop_val[1]}"' if 'None' not in prop_val[
-    1] else ""
+_PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' if not _is_null_or_none(
+    prop_val[1]) else ""
+_PV_FORMAT_NUMBERS = lambda prop_val: f'"{prop_val[0]}": "{prop_val[1]}"' if not _is_null_or_none(
+    prop_val[1]) else ""
 SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
 
-_MEASURED_PROP = lambda prop: MEASUREDPROP_MAPPER[prop]
+_MEASURED_PROP = lambda prop: MEASUREDPROP_MAPPER.get(
+    prop, prop) if not _is_null_or_none(prop) else None
 
-_HOUSEHOLD_PROP = lambda prop: _HOUSEHOLD_PV.format(person=prop)
+_HOUSEHOLD_PROP = lambda prop: _HOUSEHOLD_PV.format(
+    person=prop) if not _is_null_or_none(prop) else None
 
-_NOOFVEHICLES_PROP = lambda prop: _NUM_OF_VEHICLES_PV.format(vehicle=prop)
+_NOOFVEHICLES_PROP = lambda prop: _NUM_OF_VEHICLES_PV.format(
+    vehicle=prop) if not _is_null_or_none(prop) else None
 
 _DEFAULT_PROP = lambda prop: prop
 # pylint: enable=unnecessary-lambda-assignment
