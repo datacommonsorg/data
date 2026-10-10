@@ -1,0 +1,8 @@
+Node: E:.tmcf->E0
+observationAbout: C:.tmcf->observationAbout
+observationDate: C:.tmcf->observationDate
+value: C:.tmcf->value
+variableMeasured: C:.tmcf->variableMeasured
+unit: C:.tmcf->unit
+scalingFactor: C:.tmcf->scalingFactor
+typeOf: dcs:StatVarObservation
