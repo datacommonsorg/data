@@ -1,0 +1,10 @@
+Node: dcid:educationalAttainment
+typeOf: dcs:Property
+name: "educationalAttainment"
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:USC_EducationalAttainmentEnum
+
+Node: dcid:doctorateDegreeMajor
+typeOf: dcs:Property
+name: "doctorateDegreeMajor"
+rangeIncludes: dcid:InvestmentProgramEnum,dcid:OccupationCategoryEnum,dcid:USC_SpouseAbsentReasonEnum
+
