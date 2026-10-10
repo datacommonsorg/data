@@ -1,0 +1,8 @@
+Node: E:Nigeria_crime_data->E0
+observationAbout: C:Nigeria_crime_data->observationAbout
+observationDate: C:Nigeria_crime_data->observationDate
+value: C:Nigeria_crime_data->value
+variableMeasured: C:Nigeria_crime_data->variableMeasured
+unit: C:Nigeria_crime_data->unit
+scalingFactor: C:Nigeria_crime_data->scalingFactor
+typeOf: dcs:StatVarObservation
