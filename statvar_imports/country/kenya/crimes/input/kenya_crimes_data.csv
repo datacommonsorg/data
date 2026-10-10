@@ -1,0 +1,19 @@
+place,Crime,Units,2016,2017,2018,2019,2020
+country/KEN,Total,,76986,77992,88268,93411,69645
+country/KEN,Homicide,,2751,2774,2856,2971,3111
+country/KEN,Offences against morality,,6228,5492,7233,8051,9153
+country/KEN,Other offences against persons,,22295,22515,25049,27196,19288
+country/KEN,Robbery,,2697,2713,2935,2858,2384
+country/KEN,Breakings,,5621,6131,5970,5976,4252
+country/KEN,Theft of stock,,1918,2136,2077,1962,1556
+country/KEN,Stealing,,10361,11656,12845,13954,8709
+country/KEN,Theft by servant,,2440,2632,2477,2226,1467
+country/KEN,Theft of Vehicles and other thefts,,1355,1404,1370,1298,1031
+country/KEN,Dangerous drugs,,6160,5565,8021,8011,4477
+country/KEN,Traffic offences,,139,69,213,341,186
+country/KEN,Criminal damage,,4307,4262,4783,4852,3530
+country/KEN,Economic crimes,,3503,3695,4100,4786,3488
+country/KEN,Corruption,,92,75,119,130,133
+country/KEN,Offences involving police officers,,57,86,174,77,64
+country/KEN,Offences involving tourists,,15,15,93,48,26
+country/KEN,Other penal code offences,,7047,6772,7953,8674,6790
