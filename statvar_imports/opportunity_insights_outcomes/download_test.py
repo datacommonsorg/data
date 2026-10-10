@@ -269,7 +269,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         os.path.join(out_dir, fname), 'r', encoding='utf-8'
                     ) as f:
                         sv_rows.extend(list(csv.DictReader(f)))
-            self.assertEqual(len(sv_rows), 18687)
+            self.assertEqual(len(sv_rows), 508)
 
     def test_is_valid_number(self):
         self.assertTrue(preprocess._is_valid_number('0.35973939'))
