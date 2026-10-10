@@ -50,7 +50,10 @@ class PVMapGeneratorTest(unittest.TestCase):
                         is_sdmx: bool,
                         extra_instruction_files=None,
                         extra_instruction_max_bytes: int = 65536,
-                        working_dir=None) -> PVMapGenerator:
+                        working_dir=None,
+                        llm_provider='gemini',
+                        antigravity_cli=None,
+                        enable_sandboxing=False) -> PVMapGenerator:
         data_config = DataConfig(
             input_data=[str(self._data_file)],
             input_metadata=[str(self._metadata_file)],
@@ -64,6 +67,9 @@ class PVMapGeneratorTest(unittest.TestCase):
             extra_instruction_files=extra_instruction_files or [],
             extra_instruction_max_bytes=extra_instruction_max_bytes,
             working_dir=working_dir,
+            llm_provider=llm_provider,
+            antigravity_cli=antigravity_cli,
+            enable_sandboxing=enable_sandboxing,
         )
         return PVMapGenerator(config)
 
@@ -150,9 +156,9 @@ class PVMapGeneratorTest(unittest.TestCase):
         result = generator.generate()
         self._assert_generation_result(result)
         self.assertTrue(result.run_dir.is_absolute())
-        self.assertEqual(
-            result.run_dir,
-            Path(self._temp_dir.name) / '.datacommons' / 'runs' / result.run_id)
+        self.assertEqual(result.run_dir,
+                         (Path(self._temp_dir.name) / '.datacommons' / 'runs' /
+                          result.run_id).resolve())
         self.assertTrue(result.run_id.startswith('output_file_gemini_'))
 
         prompt_path = self._read_prompt_path(result)
@@ -170,6 +176,33 @@ class PVMapGeneratorTest(unittest.TestCase):
         self._assert_prompt_content(prompt_path,
                                     expect_sdmx=True,
                                     config=generator._config)
+
+    def test_generate_prompt_antigravity_command(self):
+        generator = self._make_generator(is_sdmx=False,
+                                         llm_provider='antigravity',
+                                         antigravity_cli='custom-agy',
+                                         enable_sandboxing=True)
+
+        result = generator.generate()
+
+        self.assertEqual(result.gemini_log_path.name, 'agy_cli.log')
+        self.assertEqual(result.gemini_log_path.parent, result.run_dir)
+        command = result.gemini_command
+        self.assertIn(f"cat '{result.prompt_path}' | custom-agy", command)
+        self.assertIn('--sandbox', command)
+        self.assertIn('--dangerously-skip-permissions', command)
+        self.assertIn(f"--add-dir '{Path(self._temp_dir.name).resolve()}'",
+                      command)
+        self.assertIn(
+            f"--log-file '{(result.run_dir / 'agy_internal.log').resolve()}'",
+            command)
+        self.assertIn(f"tee '{result.gemini_log_path.resolve()}'", command)
+        self.assertNotIn('--print', command)
+        self.assertNotIn(' -y ', command)
+
+    def test_rejects_invalid_llm_provider(self):
+        with self.assertRaisesRegex(ValueError, 'llm_provider'):
+            self._make_generator(is_sdmx=False, llm_provider='unsupported')
 
     def test_generate_requires_input_data(self):
         generator = PVMapGenerator(
