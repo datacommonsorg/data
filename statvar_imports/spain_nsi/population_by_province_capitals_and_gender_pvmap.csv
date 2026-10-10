@@ -1,0 +1,7 @@
+key,prop,value,,,,,,
+Provincial Capitals,observationAbout,{Data},measuredProperty,count,populationType,Person,observationPeriod,P1Y
+value,value,{Number},,,,,,
+Sex:Total,populationType,Person,,,,,,
+Males,gender,Male,,,,,,
+Females,gender,Female,,,,,,
+Periodo,observationDate,{Data},,,,,,
