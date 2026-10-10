@@ -1,0 +1,164 @@
+{
+    "year_range": "20-22",
+    "data_cols": [
+        "Births",
+        "Average Birth Weight",
+        "Average Age of Mother",
+        "Average LMP Gestational Age",
+        "Average OE Gestational Age"
+    ],
+    "cprop_cols": [],
+    "geo": {
+        "col": "State",
+        "type": "State"
+    },
+    "populationType": {
+        "Births": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "count",
+            "statType": "measuredValue",
+            "medicalStatus": "LiveBirth",
+            "typeOf": "StatisticalVariable"
+        },
+        "Average Birth Weight": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "birthWeight",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Gram"
+        },
+        "Average Age of Mother": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "mothersAge",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Years"
+        },
+        "Average OE Gestational Age": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "oeGestationalAge",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Week"
+        },
+        "Average LMP Gestational Age": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "lmpGestationalAge",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Week"
+        }
+    },
+    "filename": {
+        "edu": {
+            "1": {
+                "mothersEducation": "LessThan9ThGrade"
+            },
+            "2": {
+                "mothersEducation": "9ThTo12ThGradeNoDiploma"
+            },
+            "3": {
+                "mothersEducation": "HighSchoolGraduateGedOrAlternative"
+            },
+            "4": {
+                "mothersEducation": "SomeCollegeNoDegree"
+            },
+            "5": {
+                "mothersEducation": "AssociatesDegree"
+            },
+            "6": {
+                "mothersEducation": "BachelorsDegree"
+            },
+            "7": {
+                "mothersEducation": "MastersDegree"
+            },
+            "8": {
+                "mothersEducation": "DoctorateDegree&ProfessionalSchoolDegree"
+            },
+            "All": {},
+            "Unk": {
+                "mothersEducation": "CDC_EducationalAttainmentUnknownOrNotStated"
+            }
+        },
+        "age": {
+            "15-19": {
+                "mothersAge": "[15 19 Years]"
+            },
+            "20-24": {
+                "mothersAge": "[20 24 Years]"
+            },
+            "25-29": {
+                "mothersAge": "[25 29 Years]"
+            },
+            "30-34": {
+                "mothersAge": "[30 34 Years]"
+            },
+            "35-39": {
+                "mothersAge": "[35 39 Years]"
+            },
+            "40-44": {
+                "mothersAge": "[40 44 Years]"
+            },
+            "45-49": {
+                "mothersAge": "[45 49 Years]"
+            },
+            "All": {},
+            "50+": {
+                "mothersAge": "[50 - Years]"
+            }
+        },
+        "hispanic": {
+            "9": {
+                "mothersEthnicity": "CDC_EthnicityUnknownOrNotStated"
+            },
+            "All": {},
+            "2135-...": {
+                "mothersEthnicity": "HispanicOrLatino"
+            },
+            "2186-...": {
+                "mothersEthnicity": "NotHispanicOrLatino"
+            }
+        },
+        "marital": {
+            "1": {
+                "mothersMaritalStatus": "NowMarried"
+            },
+            "2": {
+                "mothersMaritalStatus": "Unmarried"
+            },
+            "9": {
+                "mothersMaritalStatus": "CDC_MaritalStatusUnknownOrNotStated"
+            },
+            "All": {}
+        },
+        "race": {
+            "All": {},
+            "1002-...": {
+                "mothersRace": "AmericanIndianOrAlaskaNativeAlone"
+            },
+            "A-PI": {
+                "mothersRace": "AsianOrPacificIslander"
+            },
+            "2054-...": {
+                "mothersRace": "BlackOrAfricanAmericanAlone"
+            },
+            "NHOPI": {
+                "mothersRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+            },
+            "2106-...": {
+                "mothersRace": "WhiteAlone"
+            },
+            "M": {
+                "mothersRace": "TwoOrMoreRaces"
+            },
+            "UNK": {
+                "mothersRace": "CDC_RaceUnknownOrNotStated"
+            }
+        }
+    },
+    "pvs": {}
+}
