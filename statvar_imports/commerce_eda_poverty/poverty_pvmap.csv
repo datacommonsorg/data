@@ -1,0 +1,8 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4
+GEOID,observationAbout,geoId/{Data},,,,,,,,
+year,observationDate,{Data},measurementMethod,dcs:EDA_Estimate,,,,,,
+year:1990,observationDate,1990,measurementMethod,dcs:USDecennialCensus,,,,,,
+year:2000,observationDate,2000,measurementMethod,dcs:USDecennialCensus,,,,,,
+year:2020,observationDate,2020,measurementMethod,dcs:USDecennialCensus,,,,,,
+year:2021,observationDate,2021,measurementMethod,dcs:EDA_Estimate,,,,,,
+poverty_rate,unit,Percent,scalingFactor,100,observationPeriod,P1Y,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_date_span_sql",
+      "description": "Verify that every active StatVar covers historical 1990 benchmarks through at least 2021.",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+        "condition": "CAST(MinDate AS INTEGER) <= 1990 AND CAST(MaxDate AS INTEGER) >= 2021 AND total_svs > 0"
+      }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Ensure all StatVars share a uniform MaxDate across the dataset.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "data_source": "stats"
+      }
+    },
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that deleted records do not exceed 0%.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "scope": {
+        "data_source": "differ_summary"
+      },
+      "params": {
+        "threshold": 0
+      }
+    }
+  ]
+}
+

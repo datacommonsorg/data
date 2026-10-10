@@ -1,0 +1,476 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Unit tests for Commerce EDA Persistent Poverty Counties download script."""
+
+import io
+import os
+import sys
+import tempfile
+import unittest
+from unittest import mock
+from urllib import parse
+
+import openpyxl
+import pandas as pd
+
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
+sys.path.insert(0, PROJECT_ROOT)
+
+from statvar_imports.commerce_eda_poverty.download_poverty import (
+    EDA_PPC_MIRROR_URL,
+    EDA_PPC_XLSX_URL,
+    HTTP_HEADERS,
+    create_http_session,
+    download_file,
+    download_poverty_dataset,
+    extract_sheet_to_csv,
+)
+
+
+def _create_mock_eda_workbook(filepath=None):
+    """Creates a mock Excel workbook containing the Underlying_Data worksheet."""
+    wb = openpyxl.Workbook()
+    try:
+        # Sheet 1: Readme
+        ws_readme = wb.active
+        ws_readme.title = "EDA Read Me"
+        ws_readme.append(["FY2023 PERSISTENT POVERTY COUNTIES (PPCs)", ""])
+
+        # Sheet 2: Underlying_Data
+        ws_data = wb.create_sheet(title="Underlying_Data")
+        ws_data.append([
+            "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021",
+            "", "", "", "", "", "", ""
+        ])
+        ws_data.append([
+            "Identifing Information", "", "Census Bureau Data", "", "", "",
+            "FY23 Persistent Poverty", "Census GEO PPC Code"
+        ])
+        ws_data.append([
+            "Name",
+            "GEOID",
+            "1990 Decennial Census, % in Poverty",
+            "2000 Decennial Census, % in Poverty",
+            "Most Recent Estimate, % in Poverty* ",
+            "Data Source―Most Recent Estimate",
+            "",
+            "",
+        ])
+        ws_data.append(
+            [
+                "Autauga County, AL",
+                "01001",
+                15.7,
+                10.9,
+                13.3,
+                "SAIPE, 2021",
+                "No",
+                1,
+            ]
+        )
+        ws_data.append(
+            [
+                "Barbour County, AL",
+                "01005",
+                25.2,
+                26.8,
+                29.0,
+                "SAIPE, 2021",
+                "Yes",
+                2,
+            ]
+        )
+        ws_data.append([
+            "Eastern District, AS",
+            "60010",
+            56.0,
+            58.6,
+            52.2,
+            "Decennial Census, 2020",
+            "Yes",
+            2,
+        ])
+
+        if filepath:
+            wb.save(filepath)
+            return filepath
+
+        bio = io.BytesIO()
+        wb.save(bio)
+        return bio.getvalue()
+    finally:
+        wb.close()
+
+
+class TestDownloadPoverty(unittest.TestCase):
+
+    def test_download_file_success(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "test.xlsx")
+            test_content = b"PK\x03\x04test_content"
+
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.content = test_content
+            mock_session.get.return_value = mock_resp
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".create_http_session",
+                return_value=mock_session,
+            ) as mock_create_session:
+                content = download_file(
+                    "https://example.gov/EDA_FY23_PPCs.xlsx",
+                    out_file,
+                    max_retries=1,
+                )
+
+            self.assertEqual(content, test_content)
+            mock_create_session.assert_called_once_with(max_retries=1)
+            mock_session.get.assert_called_once_with(
+                "https://example.gov/EDA_FY23_PPCs.xlsx",
+                headers=HTTP_HEADERS,
+                timeout=60,
+            )
+            mock_session.close.assert_called_once()
+            self.assertTrue(os.path.exists(out_file))
+            with open(out_file, "rb") as f:
+                self.assertEqual(f.read(), test_content)
+
+    def test_download_file_passes_headers_and_timeout(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "params.xlsx")
+            test_content = b"PK\x03\x04param_test"
+
+            session = create_http_session(max_retries=5)
+            try:
+                self.assertEqual(
+                    session.headers.get("User-Agent"),
+                    HTTP_HEADERS["User-Agent"],
+                )
+                self.assertTrue(session.verify)
+                mock_resp = mock.MagicMock()
+                mock_resp.status_code = 200
+                mock_resp.content = test_content
+                with mock.patch.object(
+                    session, "get", return_value=mock_resp
+                ) as mock_get:
+                    content = download_file(
+                        "https://example.gov/EDA_FY23_PPCs.xlsx",
+                        out_file,
+                        session=session,
+                        max_retries=5,
+                        timeout=45,
+                        require_zip_signature=True,
+                    )
+
+                self.assertEqual(content, test_content)
+                mock_get.assert_called_once_with(
+                    "https://example.gov/EDA_FY23_PPCs.xlsx",
+                    headers=HTTP_HEADERS,
+                    timeout=45,
+                )
+            finally:
+                session.close()
+
+    def test_download_file_fails(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "fail.xlsx")
+
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.raise_for_status.side_effect = RuntimeError("HTTP 403")
+            mock_session.get.return_value = mock_resp
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".create_http_session",
+                return_value=mock_session,
+            ):
+                with self.assertRaises(RuntimeError):
+                    download_file(
+                        "https://example.gov/EDA_FY23_PPCs.xlsx",
+                        out_file,
+                        max_retries=2,
+                    )
+
+            self.assertEqual(mock_session.get.call_count, 1)
+            mock_session.close.assert_called_once()
+            self.assertFalse(os.path.exists(out_file))
+
+    def test_download_file_empty_body_raises(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "empty.xlsx")
+
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.content = b""
+            mock_session.get.return_value = mock_resp
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".create_http_session",
+                return_value=mock_session,
+            ):
+                with self.assertRaises(RuntimeError):
+                    download_file(
+                        "https://example.gov/EDA_FY23_PPCs.xlsx",
+                        out_file,
+                        max_retries=1,
+                    )
+
+            self.assertEqual(mock_session.get.call_count, 1)
+            self.assertFalse(os.path.exists(out_file))
+
+    def test_download_file_session_without_mount_supported(self):
+        class DuckSession:
+
+            def __init__(self):
+                self.call_count = 0
+
+            def get(self, url, headers=None, timeout=None, **kwargs):
+                self.call_count += 1
+                resp = mock.MagicMock()
+                resp.__enter__.return_value = resp
+                resp.status_code = 200
+                resp.content = b"duck_data"
+                return resp
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, "duck.xlsx")
+            duck_session = DuckSession()
+            content = download_file(
+                "https://example.gov/duck.xlsx",
+                out_file,
+                session=duck_session,
+            )
+
+            self.assertEqual(content, b"duck_data")
+            self.assertEqual(duck_session.call_count, 1)
+            self.assertTrue(os.path.exists(out_file))
+            with open(out_file, "rb") as f:
+                self.assertEqual(f.read(), b"duck_data")
+
+    def test_extract_sheet_to_csv_from_bytes(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = os.path.join(tmpdir, "extracted.csv")
+            excel_bytes = _create_mock_eda_workbook()
+
+            extract_sheet_to_csv(
+                excel_bytes, csv_path, target_sheet_name="Underlying_Data"
+            )
+            self.assertTrue(os.path.exists(csv_path))
+
+            df = pd.read_csv(csv_path, skiprows=2, dtype=str)
+            self.assertEqual(len(df), 3)
+            self.assertIn("GEOID", df.columns)
+            self.assertEqual(list(df["GEOID"]), ["01001", "01005", "60010"])
+
+    def test_extract_sheet_to_csv_from_file_path(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            xlsx_path = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            csv_path = os.path.join(tmpdir, "Poverty.csv")
+            _create_mock_eda_workbook(xlsx_path)
+
+            extract_sheet_to_csv(xlsx_path, csv_path)
+            self.assertTrue(os.path.exists(csv_path))
+
+            df = pd.read_csv(csv_path, skiprows=2, dtype=str)
+            self.assertEqual(len(df), 3)
+            self.assertIn("GEOID", df.columns)
+
+    def test_download_poverty_dataset_with_input_file_csv(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            src_csv = os.path.join(tmpdir, "source_input.csv")
+            dst_xlsx = os.path.join(tmpdir, "out.xlsx")
+            dst_csv = os.path.join(tmpdir, "out.csv")
+            raw_csv = os.path.join(tmpdir, "raw.csv")
+
+            with open(src_csv, "w", encoding="utf-8") as f:
+                f.write("Line 1\nLine 2\nName,GEOID\nCounty A,01001\n")
+
+            res = download_poverty_dataset(
+                input_file=src_csv,
+                output_xlsx_path=dst_xlsx,
+                output_csv_path=dst_csv,
+                raw_csv_path=raw_csv,
+            )
+
+            self.assertEqual(res, dst_csv)
+            self.assertTrue(os.path.exists(dst_csv))
+            self.assertTrue(os.path.exists(raw_csv))
+            with open(dst_csv, "r", encoding="utf-8") as f:
+                content = f.read()
+            self.assertIn("County A,01001", content)
+
+    def test_download_poverty_dataset_with_input_file_xlsx(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            src_xlsx = os.path.join(tmpdir, "source_input.xlsx")
+            dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            dst_csv = os.path.join(tmpdir, "Poverty.csv")
+            raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
+
+            _create_mock_eda_workbook(src_xlsx)
+
+            res = download_poverty_dataset(
+                input_file=src_xlsx,
+                output_xlsx_path=dst_xlsx,
+                output_csv_path=dst_csv,
+                raw_csv_path=raw_csv,
+            )
+
+            self.assertEqual(res, dst_csv)
+            self.assertTrue(os.path.exists(dst_xlsx))
+            self.assertTrue(os.path.exists(dst_csv))
+            self.assertTrue(os.path.exists(raw_csv))
+
+            df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
+            self.assertEqual(len(df), 3)
+
+    def test_download_poverty_dataset_primary_fail_mirror_succeed(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            dst_csv = os.path.join(tmpdir, "Poverty.csv")
+            raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
+
+            excel_bytes = _create_mock_eda_workbook()
+
+            mock_session = mock.MagicMock()
+
+            def mock_get(url, headers=None, timeout=None, **kwargs):
+                resp = mock.MagicMock()
+                if parse.urlparse(url).netloc == "www.eda.gov":
+                    resp.raise_for_status.side_effect = RuntimeError("HTTP 403")
+                    return resp
+                resp.status_code = 200
+                resp.content = excel_bytes
+                return resp
+
+            mock_session.get.side_effect = mock_get
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".create_http_session",
+                return_value=mock_session,
+            ):
+                res = download_poverty_dataset(
+                    source_url=EDA_PPC_XLSX_URL,
+                    mirror_url=EDA_PPC_MIRROR_URL,
+                    output_xlsx_path=dst_xlsx,
+                    output_csv_path=dst_csv,
+                    raw_csv_path=raw_csv,
+                    max_retries=1,
+                )
+
+            self.assertEqual(res, dst_csv)
+            self.assertTrue(os.path.exists(dst_xlsx))
+            self.assertTrue(os.path.exists(dst_csv))
+            df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
+            self.assertEqual(len(df), 3)
+
+    def test_download_poverty_dataset_missing_input_file_raises(self):
+        with self.assertRaises(FileNotFoundError):
+            download_poverty_dataset(input_file="/nonexistent/path/Poverty.csv")
+
+    def test_download_poverty_dataset_all_urls_fail_raises_and_cleans_stale_files(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            dst_csv = os.path.join(tmpdir, "Poverty.csv")
+            dst_raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
+            for p in [dst_xlsx, dst_csv, dst_raw_csv]:
+                with open(p, "w", encoding="utf-8") as f:
+                    f.write("stale_data")
+
+            mock_session = mock.MagicMock()
+            mock_resp = mock.MagicMock()
+            mock_resp.raise_for_status.side_effect = RuntimeError("HTTP 503")
+            mock_session.get.return_value = mock_resp
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".create_http_session",
+                return_value=mock_session,
+            ):
+                with self.assertRaises(RuntimeError) as ctx:
+                    download_poverty_dataset(
+                        source_url="https://example.gov/p1.xlsx",
+                        mirror_url="https://example.gov/m1.xlsx",
+                        output_xlsx_path=dst_xlsx,
+                        output_csv_path=dst_csv,
+                        raw_csv_path=dst_raw_csv,
+                        max_retries=1,
+                    )
+
+            self.assertIn(
+                "Failed to acquire dataset from all URLs", str(ctx.exception)
+            )
+            self.assertFalse(os.path.exists(dst_xlsx))
+            self.assertFalse(os.path.exists(dst_csv))
+            self.assertFalse(os.path.exists(dst_raw_csv))
+
+    def test_download_poverty_dataset_primary_html_challenge_mirror_succeed(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
+            dst_csv = os.path.join(tmpdir, "Poverty.csv")
+            raw_csv = os.path.join(tmpdir, "Poverty_original.csv")
+
+            excel_bytes = _create_mock_eda_workbook()
+            mock_session = mock.MagicMock()
+
+            def mock_get(url, headers=None, timeout=None, **kwargs):
+                resp = mock.MagicMock()
+                resp.status_code = 200
+                if parse.urlparse(url).netloc == "www.eda.gov":
+                    resp.content = (
+                        b"<!DOCTYPE html><html><title>Just a moment..."
+                        b"</title></html>"
+                    )
+                    return resp
+                resp.content = excel_bytes
+                return resp
+
+            mock_session.get.side_effect = mock_get
+
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".create_http_session",
+                return_value=mock_session,
+            ):
+                res = download_poverty_dataset(
+                    source_url=EDA_PPC_XLSX_URL,
+                    mirror_url=EDA_PPC_MIRROR_URL,
+                    output_xlsx_path=dst_xlsx,
+                    output_csv_path=dst_csv,
+                    raw_csv_path=raw_csv,
+                    max_retries=1,
+                )
+
+            self.assertEqual(res, dst_csv)
+            self.assertTrue(os.path.exists(dst_xlsx))
+            self.assertTrue(os.path.exists(dst_csv))
+            df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
+            self.assertEqual(len(df), 3)
+
+
+if __name__ == "__main__":
+    unittest.main()
+
