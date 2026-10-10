@@ -1,0 +1,13 @@
+Node: E:clinvar_obs->E1
+typeOf: dcs:GeneticVariant
+dcid: C:clinvar_obs->dcid
+
+Node: E:clinvar_obs->E2
+typeOf: dcs:GeneticVariantPopulationFrequency
+dcid: C:clinvar_obs->dcid_freq
+name: C:clinvar_obs->name_freq
+alleleFrequency: C:clinvar_obs->alleleFrequency
+geneticVaraintID: E:clinvar_obs->E1
+measuredProperty: schema:frequency
+measuredPopulation: C:clinvar_obs->measuredPopulation
+rsID:  C:clinvar_obs->rsID
