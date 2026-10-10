@@ -1,0 +1,37 @@
+Node: dcid:depth
+typeOf: dcs:Property
+name: "depth"
+domainIncludes: dcid:Coal
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:energySource
+typeOf: dcs:Property
+name: "energySource"
+domainIncludes: dcid:Coal
+
+Node: dcid:reserves
+typeOf: dcs:Property
+name: "reserves"
+domainIncludes: dcid:Coal
+rangeIncludes: dcid:EnergySourceEnum
+
+Node: dcid:reserveType
+typeOf: dcs:Property
+name: "reserveType"
+domainIncludes: dcid:Coal
+
+Node: dcid:Proved
+typeOf: dcid:EnergyReservesEnum
+name: "Proved"
+isProvisional: dcs:True
+
+Node: dcid:Inferred
+typeOf: dcid:EnergyReservesEnum
+name: "Inferred"
+isProvisional: dcs:True
+
+Node: dcid:Indicated
+typeOf: dcid:EnergyReservesEnum
+name: "Indicated"
+isProvisional: dcs:True
+
