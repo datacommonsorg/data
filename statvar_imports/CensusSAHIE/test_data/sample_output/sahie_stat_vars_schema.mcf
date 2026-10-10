@@ -1,0 +1,6 @@
+Node: dcid:USCensusPovertyThreshold
+typeOf: dcid:MeasurementMethodEnum
+name: "USCensusPovertyThreshold"
+description: "Measurement method for US Census Poverty Threshold"
+
+
