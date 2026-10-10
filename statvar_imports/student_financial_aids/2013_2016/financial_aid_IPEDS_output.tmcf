@@ -1,0 +1,6 @@
+Node: E:output1->E0
+value: C:output1->value
+variableMeasured: C:output1->variableMeasured
+typeOf: dcs:StatVarObservation
+observationAbout: country/USA
+observationDate: 2016
