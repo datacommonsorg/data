@@ -1,0 +1,11 @@
+Node: E:dbsnp_hg38_alleles->E1
+typeOf: dcs:GeneticVariant
+dcid: C:dbsnp_hg38_alleles->dcid
+
+Node: E:dbsnp_hg38_alleles->E2
+typeOf: dcs:Allele
+dcid: C:dbsnp_hg38_alleles->dcid_allele
+name: C:dbsnp_hg38_alleles->name_allele
+geneticVariantID: E:dbsnp_hg38_alleles->E1
+hgvsNomenclature: C:dbsnp_hg38_alleles->CLNHGVS
+variant: C:dbsnp_hg38_alleles->variant
