@@ -199,6 +199,7 @@ def normalize_batch_resources(
     }
 
 
+# TODO: Move staging and prod ingestion denylist configuration to each import's manifest.json.
 PROD_DENYLIST = frozenset({
     "Brazil_RuralDevelopmentProgram",
     "CDC500",
@@ -229,6 +230,15 @@ PROD_DENYLIST = frozenset({
     "USNationalPrisonerStatistics",
     "WorldBankDatasets",
 })
+
+STAGING_DENYLIST = frozenset({
+    "NOAA_GlobalForecastSystem",
+})
+
+
+def is_staging_denylisted(import_name: str) -> bool:
+    short_name = import_name.split(":")[-1]
+    return import_name in STAGING_DENYLIST or short_name in STAGING_DENYLIST
 
 
 def is_prod_denylisted(import_name: str) -> bool:
@@ -1008,7 +1018,8 @@ def resolve_workflow_context(context: dict[str, Any],
         "skipImportJob":
             to_bool("skipImportJob"),
         "skipStagingIngestion":
-            to_bool("skipStagingIngestion"),
+            is_staging_denylisted(import_name)
+            or to_bool("skipStagingIngestion"),
         "skipProdIngestion":
             is_prod_denylisted(import_name)
             or to_bool("skipProdIngestion", DEFAULT_SKIP_PROD_INGESTION),
@@ -1048,14 +1059,30 @@ def update_import_version(**context) -> dict[str, Any]:
 def trigger_staging_ingestion(**context) -> dict[str, Any]:
     """Triggers staging Spanner ingestion via ingestion-helper."""
     cfg = resolve_workflow_context(context)
+    ti = context.get("ti")
     if cfg["skipStagingIngestion"]:
+        if ti:
+            ti.xcom_push(
+                key="return_value",
+                value={
+                    "status": "SKIPPED",
+                    "message": "Staging ingestion skipped",
+                },
+            )
         raise AirflowSkipException(
             "Staging ingestion skipped by configuration (skipStagingIngestion=True)."
         )
 
-    ti = context.get("ti")
     version_res = ti.xcom_pull(task_ids="update_import_version") if ti else None
     if isinstance(version_res, dict) and version_res.get("status") == "SKIPPED":
+        if ti:
+            ti.xcom_push(
+                key="return_value",
+                value={
+                    "status": "SKIPPED",
+                    "message": version_res.get("message", "Skipped"),
+                },
+            )
         raise AirflowSkipException(
             f"Staging ingestion skipped: {version_res.get('message', 'Skipped')}"
         )
@@ -1136,7 +1163,7 @@ def trigger_prod_ingestion(**context) -> dict[str, Any]:
     return res
 
 
-@task(task_id="workflow_summary", trigger_rule=TriggerRule.ALL_DONE)
+@task(task_id="workflow_summary", trigger_rule=TriggerRule.NONE_FAILED)
 def workflow_summary(**context) -> dict[str, Any]:
     """Aggregates workflow outputs and fails the DAG run if any upstream task failed."""
     cfg, ti = resolve_workflow_context(context), context.get("ti")
@@ -1190,15 +1217,8 @@ def workflow_summary(**context) -> dict[str, Any]:
     ]
     if not failed and ti is not None and (
             dag_task_ids is None or "trigger_prod_ingestion" in dag_task_ids):
-        prod_trigger_val = ti.xcom_pull(task_ids="trigger_prod_ingestion")
-        if prod_trigger_val is None:
+        if ti.xcom_pull(task_ids="trigger_prod_ingestion") is None:
             failed.append("prod (upstream_failed or failed)")
-        elif (
-                isinstance(prod_trigger_val, dict) and
-                prod_trigger_val.get("status") == "SUBMITTED" and
-            (dag_task_ids is None or "wait_prod_ingestion" in dag_task_ids) and
-                ti.xcom_pull(task_ids="wait_prod_ingestion") is None):
-            failed.append("prod_wait (upstream_failed or failed)")
     if failed:
         error_msg = f"Workflow failed in upstream stage(s): {', '.join(dict.fromkeys(failed))}"
         logging.error(error_msg)
@@ -1242,12 +1262,6 @@ base_dag_params = {
         Param(default=DEFAULT_SKIP_PROD_INGESTION,
               type="boolean",
               description="Skip prod ingestion"),
-    "dryRunIngestion":
-        Param(default=False, type="boolean", description="Dry run ingestion"),
-    "forceIngestion":
-        Param(default=False,
-              type="boolean",
-              description="Force ingestion even if already SUCCESS"),
     "resources":
         Param(default=DEFAULT_RESOURCES,
               type="object",
@@ -1312,9 +1326,22 @@ def build_dag(
     has_golden_check = (is_golden_test_import(import_name, allowlist=allowlist)
                         or is_golden_test_import(dag_id, allowlist=allowlist))
 
+    target_import = import_name or dag_id
+    skip_staging_default = is_staging_denylisted(target_import)
+    skip_prod_default = (is_prod_denylisted(target_import) or
+                         DEFAULT_SKIP_PROD_INGESTION)
+
     params = {
         **base_dag_params,
         **(golden_dag_params if has_golden_check else {}),
+        "skipStagingIngestion":
+            Param(default=skip_staging_default,
+                  type="boolean",
+                  description="Skip staging ingestion"),
+        "skipProdIngestion":
+            Param(default=skip_prod_default,
+                  type="boolean",
+                  description="Skip prod ingestion"),
         **({
             "importName":
                 Param(import_name,
