@@ -239,6 +239,10 @@ class FileIO:
         else:
             return self._filename
 
+    def get_file_handle(self):
+        """Returns the file handle."""
+        return self._fd
+
 
 # Utilities for files.
 
