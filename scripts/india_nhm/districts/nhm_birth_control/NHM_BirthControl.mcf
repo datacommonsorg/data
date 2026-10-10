@@ -1,0 +1,17 @@
+Node: dcid:NHM_HealthInformationManagementSystem
+name: "NHM Health Information Management System"
+typeOf: dcs:MeasurementMethodEnum
+
+Node: dcid:Count_BirthControlEvent_Sterilisation
+description: "Total Sterilisation Conducted"
+typeOf: dcid:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcid:Count_BirthControlEvent_Sterilisation
+statType: dcid:measuredValue
+
+Node: dcid:Count_Death_BirthControlSterilisation
+description: "Total cases of deaths following Sterilisation (Male and Female)"
+typeOf: dcid:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcid:Count_Death_BirthControlSterilisation
+statType: dcid:measuredValue
