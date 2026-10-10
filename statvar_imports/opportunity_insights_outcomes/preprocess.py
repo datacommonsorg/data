@@ -134,30 +134,35 @@ def _is_valid_number(val: str) -> bool:
         return False
 
 
+def _to_positive_int_str(val, width: int = 0) -> str:
+    """Returns a zero-padded positive integer string if val is a valid positive integer, else ''."""
+    if val is None:
+        return ''
+    text = str(val).strip()
+    if not text or text.upper() in _MISSING_VALUE_PLACEHOLDERS:
+        return ''
+    try:
+        num = float(text)
+        if math.isfinite(num) and num > 0 and num.is_integer():
+            return f'{int(num):0{width}d}' if width > 0 else str(int(num))
+    except (ValueError, TypeError, OverflowError):
+        pass
+    return ''
+
+
 def format_geo_id(row: dict, geo_level: str) -> str:
     """Returns the Data Commons geoId dcid for a CSV row."""
-
-    def to_int_str(val, width: int) -> str:
-        try:
-            num = float(str(val).strip())
-            if math.isfinite(num) and num > 0 and num.is_integer():
-                return f'{int(num):0{width}d}'
-        except (ValueError, TypeError):
-            pass
-        return ''
-
     if geo_level == 'county':
-        s, c = to_int_str(row.get('state'), 2), to_int_str(row.get('county'), 3)
+        s = _to_positive_int_str(row.get('state'), 2)
+        c = _to_positive_int_str(row.get('county'), 3)
         return f'geoId/{s}{c}' if s and c else ''
     if geo_level == 'tract':
-        s, c, t = (
-            to_int_str(row.get('state'), 2),
-            to_int_str(row.get('county'), 3),
-            to_int_str(row.get('tract'), 6),
-        )
+        s = _to_positive_int_str(row.get('state'), 2)
+        c = _to_positive_int_str(row.get('county'), 3)
+        t = _to_positive_int_str(row.get('tract'), 6)
         return f'geoId/{s}{c}{t}' if s and c and t else ''
     if geo_level == 'commuting_zone':
-        cz = to_int_str(row.get('cz'), 5)
+        cz = _to_positive_int_str(row.get('cz'), 5)
         return f'geoId/cz{cz}' if cz else ''
     raise ValueError(f'Unsupported geo_level: {geo_level}')
 
@@ -327,46 +332,101 @@ def _resolve_headers_via_svp(
     return header_to_sv
 
 
+_REQUIRED_GEO_COLS = {
+    'county': ('state', 'county'),
+    'tract': ('state', 'county', 'tract'),
+    'commuting_zone': ('cz',),
+}
+
+
+def _extract_row_cell(row: list[str], pos: int | None) -> str:
+    """Safely returns stripped cell value at pos if within row bounds, else ''."""
+    if pos is None or pos < 0 or pos >= len(row):
+        return ''
+    return row[pos].strip()
+
+
+def _parse_cohort(row: list[str], col_indices: dict[str, int]) -> str:
+    """Safely extracts and validates the annual cohort year string from a CSV row."""
+    return _to_positive_int_str(_extract_row_cell(row, col_indices.get('cohort')))
+
+
+def _validate_required_columns(
+    col_indices: dict[str, int],
+    geo_level: str,
+    dataset_mode: str,
+    input_path: str,
+) -> None:
+    """Validates that required geographic and cohort columns exist in the CSV header."""
+    required = list(_REQUIRED_GEO_COLS.get(geo_level, ()))
+    if dataset_mode == 'annual_cohort_1978_1992':
+        required.append('cohort')
+    missing = [c for c in required if c not in col_indices]
+    if missing:
+        raise ValueError(f'Missing required columns {missing} in {input_path}')
+
+
 def _format_geo_from_row_list(
     row: list[str], col_indices: dict[str, int], geo_level: str
 ) -> str:
     """Formats geoId/<FIPS> or geoId/cz<ID> directly from a csv.reader row list."""
     if geo_level == 'county':
         return format_geo_id(
-            {'state': row[col_indices['state']], 'county': row[col_indices['county']]},
+            {
+                'state': _extract_row_cell(row, col_indices.get('state')),
+                'county': _extract_row_cell(row, col_indices.get('county')),
+            },
             'county',
         )
     if geo_level == 'tract':
         return format_geo_id(
             {
-                'state': row[col_indices['state']],
-                'county': row[col_indices['county']],
-                'tract': row[col_indices['tract']],
+                'state': _extract_row_cell(row, col_indices.get('state')),
+                'county': _extract_row_cell(row, col_indices.get('county')),
+                'tract': _extract_row_cell(row, col_indices.get('tract')),
             },
             'tract',
         )
-    return format_geo_id({'cz': row[col_indices['cz']]}, 'commuting_zone')
+    return format_geo_id(
+        {'cz': _extract_row_cell(row, col_indices.get('cz'))},
+        'commuting_zone',
+    )
 
 
 def _expand_chunk_worker(args: tuple) -> int:
     """Worker function to expand a slice of wide CSV rows into StatVarObservations, skipping cells already routed to input_files/*_cleaned.csv."""
-    (
-        input_path,
-        geo_level,
-        dataset_mode,
-        start_row,
-        end_row,
-        out_csv_path,
-        header_to_sv,
-        emitted_by_row,
-    ) = args
+    if len(args) == 9:
+        (
+            input_path,
+            geo_level,
+            dataset_mode,
+            start_row,
+            end_row,
+            out_csv_path,
+            header_to_sv,
+            emitted_by_row,
+            start_offset,
+        ) = args
+    else:
+        (
+            input_path,
+            geo_level,
+            dataset_mode,
+            start_row,
+            end_row,
+            out_csv_path,
+            header_to_sv,
+            emitted_by_row,
+        ) = args
+        start_offset = 0
+
     obs_written = 0
     with open(input_path, mode='r', encoding='utf-8') as infile, open(
         out_csv_path, mode='w', encoding='utf-8', newline=''
     ) as outfile:
-        reader = csv.reader(infile)
-        raw_headers = next(reader)
+        raw_headers = next(csv.reader([infile.readline()]), [])
         col_indices = {h: i for i, h in enumerate(raw_headers)}
+        _validate_required_columns(col_indices, geo_level, dataset_mode, input_path)
         data_col_positions = [
             (i, h)
             for i, h in enumerate(raw_headers)
@@ -406,7 +466,15 @@ def _expand_chunk_worker(args: tuple) -> int:
                         )
                 cohort_col_specs[str(y)] = specs
 
-        for row_idx, row in enumerate(reader):
+        if start_offset > 0:
+            infile.seek(start_offset)
+            base_row_idx = start_row
+        else:
+            base_row_idx = 0
+
+        reader = csv.reader(infile)
+        for offset_idx, row in enumerate(reader):
+            row_idx = base_row_idx + offset_idx
             if row_idx < start_row:
                 continue
             if end_row > 0 and row_idx >= end_row:
@@ -415,10 +483,9 @@ def _expand_chunk_worker(args: tuple) -> int:
                 continue
 
             if dataset_mode == 'annual_cohort_1978_1992':
-                raw_cohort = row[col_indices['cohort']].strip()
-                if not raw_cohort:
+                cohort_str = _parse_cohort(row, col_indices)
+                if not cohort_str:
                     continue
-                cohort_str = str(int(float(raw_cohort)))
                 active_specs = cohort_col_specs.get(cohort_str, ())
             else:
                 active_specs = col_specs
@@ -432,7 +499,7 @@ def _expand_chunk_worker(args: tuple) -> int:
             for pos, obs_date, obs_period, var_measured, unit in active_specs:
                 if skip_positions and pos in skip_positions:
                     continue
-                val = row[pos].strip()
+                val = _extract_row_cell(row, pos)
                 if not _is_valid_number(val):
                     continue
                 out_batch.append(
@@ -472,18 +539,22 @@ def prepare_parallel_shards_and_svp_inputs(
         raw_dir, existing_statvar_mcf=existing_statvar_mcf
     )
 
+    chunk_size = max(1, rows_per_chunk)
     tasks = []
     part_idx = 1
     for filename, geo_level, dataset_mode in DATASET_CONFIGS:
         input_path = os.path.join(raw_dir, filename)
         stem = os.path.splitext(filename)[0]
         emitted_by_row: dict[int, set[int]] = {}
+        chunk_offsets: dict[int, int] = {}
         total_rows = 0
 
         with open(input_path, mode='r', encoding='utf-8') as infile:
-            reader = csv.reader(infile)
-            raw_headers = next(reader)
+            raw_headers = next(csv.reader([infile.readline()]), [])
             col_indices = {h: i for i, h in enumerate(raw_headers)}
+            _validate_required_columns(
+                col_indices, geo_level, dataset_mode, input_path
+            )
             data_col_positions = [
                 (i, h)
                 for i, h in enumerate(raw_headers)
@@ -498,8 +569,19 @@ def prepare_parallel_shards_and_svp_inputs(
                 svp_rows_by_cohort: dict[str, list[list[str]]] = {
                     str(y): [] for y in range(1978, 1993)
                 }
-                for row_idx, row in enumerate(reader):
-                    total_rows = row_idx + 1
+                row_idx = 0
+                while True:
+                    if row_idx % chunk_size == 0:
+                        chunk_offsets[row_idx] = infile.tell()
+                    raw_line = infile.readline()
+                    if not raw_line:
+                        break
+                    current_row_idx = row_idx
+                    row_idx += 1
+                    total_rows = row_idx
+                    if not any(unseen_by_cohort.values()):
+                        continue
+                    row = next(csv.reader([raw_line]), [])
                     if not row:
                         continue
                     geo_id = _format_geo_from_row_list(
@@ -507,25 +589,26 @@ def prepare_parallel_shards_and_svp_inputs(
                     )
                     if not geo_id:
                         continue
-                    raw_cohort = row[col_indices['cohort']].strip()
-                    if not raw_cohort:
+                    cohort_str = _parse_cohort(row, col_indices)
+                    if not cohort_str:
                         continue
-                    cohort_str = str(int(float(raw_cohort)))
                     unseen = unseen_by_cohort.get(cohort_str)
                     if not unseen:
                         continue
                     matched_d_indices = []
                     for d_idx in unseen:
                         pos = data_col_positions[d_idx][0]
-                        val = row[pos].strip()
+                        val = _extract_row_cell(row, pos)
                         if _is_valid_number(val):
                             matched_d_indices.append(d_idx)
                     if matched_d_indices:
                         cleaned_vals = [''] * num_data_cols
-                        row_emitted = emitted_by_row.setdefault(row_idx, set())
+                        row_emitted = emitted_by_row.setdefault(
+                            current_row_idx, set()
+                        )
                         for d_idx in matched_d_indices:
                             pos = data_col_positions[d_idx][0]
-                            cleaned_vals[d_idx] = row[pos].strip()
+                            cleaned_vals[d_idx] = _extract_row_cell(row, pos)
                             unseen.remove(d_idx)
                             row_emitted.add(pos)
                         svp_rows_by_cohort[cohort_str].append(
@@ -552,9 +635,20 @@ def prepare_parallel_shards_and_svp_inputs(
             else:
                 unseen = set(range(num_data_cols))
                 svp_rows = []
-                for row_idx, row in enumerate(reader):
-                    total_rows = row_idx + 1
-                    if not row or not unseen:
+                row_idx = 0
+                while True:
+                    if row_idx % chunk_size == 0:
+                        chunk_offsets[row_idx] = infile.tell()
+                    raw_line = infile.readline()
+                    if not raw_line:
+                        break
+                    current_row_idx = row_idx
+                    row_idx += 1
+                    total_rows = row_idx
+                    if not unseen:
+                        continue
+                    row = next(csv.reader([raw_line]), [])
+                    if not row:
                         continue
                     geo_id = _format_geo_from_row_list(
                         row, col_indices, geo_level
@@ -564,15 +658,17 @@ def prepare_parallel_shards_and_svp_inputs(
                     matched_d_indices = []
                     for d_idx in unseen:
                         pos = data_col_positions[d_idx][0]
-                        val = row[pos].strip()
+                        val = _extract_row_cell(row, pos)
                         if _is_valid_number(val):
                             matched_d_indices.append(d_idx)
                     if matched_d_indices:
                         cleaned_vals = [''] * num_data_cols
-                        row_emitted = emitted_by_row.setdefault(row_idx, set())
+                        row_emitted = emitted_by_row.setdefault(
+                            current_row_idx, set()
+                        )
                         for d_idx in matched_d_indices:
                             pos = data_col_positions[d_idx][0]
-                            cleaned_vals[d_idx] = row[pos].strip()
+                            cleaned_vals[d_idx] = _extract_row_cell(row, pos)
                             unseen.remove(d_idx)
                             row_emitted.add(pos)
                         svp_rows.append([geo_id] + cleaned_vals)
@@ -591,8 +687,8 @@ def prepare_parallel_shards_and_svp_inputs(
                         w.writerows(svp_rows)
 
         if total_rows > 0:
-            for start_row in range(0, total_rows, max(1, rows_per_chunk)):
-                end_row = start_row + rows_per_chunk
+            for start_row in range(0, total_rows, chunk_size):
+                end_row = start_row + chunk_size
                 chunk_emitted = {
                     r: positions
                     for r, positions in emitted_by_row.items()
@@ -608,6 +704,7 @@ def prepare_parallel_shards_and_svp_inputs(
                     part_path,
                     header_to_sv,
                     chunk_emitted,
+                    chunk_offsets.get(start_row, 0),
                 ))
                 part_idx += 1
 

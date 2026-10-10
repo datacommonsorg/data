@@ -110,9 +110,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_download_file_atomic_and_retry(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             dest_path = os.path.join(tmpdir, 'sample.csv')
+            fake_response = mock.MagicMock()
+            fake_response.__enter__.return_value = fake_response
+            fake_response.iter_content.return_value = [b'cz,val\n', b'100,0.5\n']
             with mock.patch(
-                'util.download_util.request_url',
-                return_value=b'cz,val\n100,0.5\n',
+                'util.download_util_script._retry_method',
+                return_value=fake_response,
             ) as mock_req:
                 download.download_file(
                     'https://example.com/sample.csv',
@@ -128,14 +131,13 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
             with mock.patch(
-                'util.download_util.request_url', return_value=None
+                'util.download_util_script._retry_method', return_value=None
             ), mock.patch.object(download.logging, 'fatal') as mock_fatal:
-                with self.assertRaises(RuntimeError):
-                    download.download_file(
-                        'https://example.com/fail.csv',
-                        os.path.join(tmpdir, 'fail.csv'),
-                    )
-                self.assertTrue(mock_fatal.called)
+                download.download_file(
+                    'https://example.com/fail.csv',
+                    os.path.join(tmpdir, 'fail.csv'),
+                )
+                mock_fatal.assert_called_once()
 
     def test_skips_missing_value_placeholders(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -155,10 +157,17 @@ class DownloadAndPvmapTest(unittest.TestCase):
                             'kir_natam_female_mean',
                         ])
                         w.writerow(['0', '0.99', '0.88'])
+                        w.writerow(['100'])  # truncated row
                         w.writerow(['100', 'NA', '0.35973939'])
                         w.writerow(['101', '', 'n/a'])
+                        w.writerow(['102', '0.25', '0.50'])
                     elif mode == 'annual_cohort_1978_1992':
                         w.writerow(['state', 'county', 'cz', 'cohort', 'kir_natam_female_mean'])
+                        w.writerow(['6', '85', '100', 'NA', '0.5'])
+                        w.writerow(['6', '85', '100', '.', '0.5'])
+                        w.writerow(['6', '85', '100', 'Inf', '0.5'])
+                        w.writerow(['6', '85', '100', '1978.5', '0.5'])
+                        w.writerow(['6', '85', '100'])  # truncated row
                     else:
                         w.writerow(['state', 'county', 'tract', 'cz', 'kir_natam_female_mean'])
 
@@ -170,22 +179,30 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     'kir_natam_female_mean': ('2014', 'P2Y', 'dc/mean', ''),
                 },
             ):
-                preprocess.prepare_parallel_shards_and_svp_inputs(
+                obs_count = preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
                     shard_dir,
                     os.path.join(out_dir, 'output'),
+                    rows_per_chunk=1,
                     workers=1,
                     existing_statvar_mcf='',
                 )
+            self.assertEqual(obs_count, 1)
 
             out_csv = os.path.join(shard_dir, 'commuting_zone_outcomes_cleaned.csv')
             with open(out_csv, 'r', encoding='utf-8') as f:
                 rows = list(csv.DictReader(f))
 
-            self.assertEqual(len(rows), 1)
+            self.assertEqual(len(rows), 2)
             self.assertEqual(rows[0]['geo_id'], 'geoId/cz00100')
             self.assertEqual(rows[0]['kir_natam_female_p1'], '')
             self.assertEqual(rows[0]['kir_natam_female_mean'], '0.35973939')
+            self.assertEqual(rows[1]['geo_id'], 'geoId/cz00102')
+            self.assertEqual(rows[1]['kir_natam_female_p1'], '0.25')
+            with self.assertRaises(ValueError):
+                preprocess._validate_required_columns(
+                    {'state': 0}, 'county', 'annual_cohort_1978_1992', 'bad.csv'
+                )
 
     def test_main_raises_on_missing_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -209,6 +226,15 @@ class DownloadAndPvmapTest(unittest.TestCase):
             download.extract_csv_from_zip(zip_path, target_csv)
             with open(target_csv, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
+
+            bad_zip = os.path.join(tmpdir, 'bad.zip')
+            bad_target = os.path.join(tmpdir, 'bad.csv')
+            with open(bad_zip, 'w', encoding='utf-8') as f:
+                f.write('<html>Error</html>')
+            with mock.patch.object(download.logging, 'fatal') as mock_fatal:
+                download.extract_csv_from_zip(bad_zip, bad_target)
+                mock_fatal.assert_called_once()
+            self.assertFalse(os.path.exists(bad_target))
 
     def test_sharding_all_datasets(self):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
@@ -240,36 +266,53 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     existing_statvar_mcf='',
                 )
 
-            for fname in sorted(os.listdir(shard_dir)):
-                if fname.endswith('_cleaned.csv'):
-                    with open(
-                        os.path.join(shard_dir, fname), 'r', encoding='utf-8'
-                    ) as f_actual, open(
-                        os.path.join(expected_input_dir, fname),
-                        'r',
-                        encoding='utf-8',
-                    ) as f_expected:
-                        self.assertEqual(f_actual.read(), f_expected.read())
+            actual_cleaned = sorted(
+                f for f in os.listdir(shard_dir) if f.endswith('_cleaned.csv')
+            )
+            expected_cleaned = sorted(
+                f
+                for f in os.listdir(expected_input_dir)
+                if f.endswith('_cleaned.csv')
+            )
+            self.assertEqual(actual_cleaned, expected_cleaned)
+            for fname in expected_cleaned:
+                with open(
+                    os.path.join(shard_dir, fname), 'r', encoding='utf-8'
+                ) as f_actual, open(
+                    os.path.join(expected_input_dir, fname),
+                    'r',
+                    encoding='utf-8',
+                ) as f_expected:
+                    self.assertEqual(f_actual.read(), f_expected.read())
 
-            for fname in sorted(os.listdir(out_dir)):
-                if fname.endswith('.csv'):
-                    with open(
-                        os.path.join(out_dir, fname), 'r', encoding='utf-8'
-                    ) as f_actual, open(
-                        os.path.join(expected_output_dir, fname),
-                        'r',
-                        encoding='utf-8',
-                    ) as f_expected:
-                        self.assertEqual(f_actual.read(), f_expected.read())
+            actual_parts = sorted(
+                f
+                for f in os.listdir(out_dir)
+                if f.startswith('output_part_') and f.endswith('.csv')
+            )
+            expected_parts = sorted(
+                f
+                for f in os.listdir(expected_output_dir)
+                if f.startswith('output_part_') and f.endswith('.csv')
+            )
+            self.assertEqual(actual_parts, expected_parts)
+            for fname in expected_parts:
+                with open(
+                    os.path.join(out_dir, fname), 'r', encoding='utf-8'
+                ) as f_actual, open(
+                    os.path.join(expected_output_dir, fname),
+                    'r',
+                    encoding='utf-8',
+                ) as f_expected:
+                    self.assertEqual(f_actual.read(), f_expected.read())
 
             sv_rows = []
-            for fname in sorted(os.listdir(out_dir)):
-                if fname.endswith('.csv'):
-                    with open(
-                        os.path.join(out_dir, fname), 'r', encoding='utf-8'
-                    ) as f:
-                        sv_rows.extend(list(csv.DictReader(f)))
-            self.assertEqual(len(sv_rows), 508)
+            for fname in actual_parts:
+                with open(
+                    os.path.join(out_dir, fname), 'r', encoding='utf-8'
+                ) as f:
+                    sv_rows.extend(list(csv.DictReader(f)))
+            self.assertEqual(len(sv_rows), 120)
 
     def test_is_valid_number(self):
         self.assertTrue(preprocess._is_valid_number('0.35973939'))

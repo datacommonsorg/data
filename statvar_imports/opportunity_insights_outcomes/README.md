@@ -47,14 +47,13 @@ Run all commands below from `data/statvar_imports/opportunity_insights_outcomes/
      --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
    ```
 
-2. **Run `stat_var_processor.py` to generate `test_data/output/output.csv`, `test_data/output/output.tmcf`, `test_data/output/output_stat_vars.mcf`, and `test_data/counters/output_counters.csv`:**
+2. **Run `stat_var_processor.py` to generate `test_data/output/output.csv` (only CSV fixtures under `test_data/output/` are tracked in git):**
    ```bash
    python3 ../../tools/statvar_importer/stat_var_processor.py \
      --input_data="test_data/input_files/*_cleaned.csv" \
      --pv_map=pvmap.csv \
      --config_file=metadata.csv \
      --output_path=test_data/output/output \
-     --output_counters=test_data/counters/output_counters.csv \
      --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
    ```
 

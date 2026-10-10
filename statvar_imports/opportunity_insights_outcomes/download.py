@@ -28,6 +28,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from util import download_util
+from util import download_util_script
 
 FLAGS = flags.FLAGS
 
@@ -117,79 +118,75 @@ def download_file(
     max_retries: int = 3,
     retry_backoff_sec: float = 1.0,
 ) -> None:
-    """Downloads a URL to dest_path atomically via download_util with bounded retries."""
+    """Streams a URL to dest_path atomically via download_util_script with bounded retries."""
     os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
     tmp_path = f'{dest_path}.tmp'
     try:
-        content = download_util.request_url(
+        response = download_util_script._retry_method(
             url=url,
             headers={'User-Agent': USER_AGENT},
-            output='bytes',
-            timeout=300,
-            retries=max_retries,
-            retry_secs=retry_backoff_sec,
+            tries=max_retries,
+            delay=retry_backoff_sec,
+            backoff=2,
         )
-        if not content:
+        if not response:
             logging.fatal('Failed to download %s', url)
-            raise RuntimeError(f'Failed to download {url}')
-        with open(tmp_path, 'wb') as out_file:
-            out_file.write(
-                content.encode('utf-8') if isinstance(content, str) else content
-            )
+            return
+        with response, open(tmp_path, 'wb') as out_file:
+            for chunk in response.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    out_file.write(chunk)
         os.replace(tmp_path, dest_path)
-    except Exception as exc:
+    except Exception as exc:  # pylint: disable=broad-except
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
         logging.fatal('Failed to download %s: %s', url, exc)
-        raise
 
 
 def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
-    """Extracts the primary CSV file from a ZIP archive atomically, or moves it if already uncompressed CSV."""
+    """Extracts the primary CSV file from a ZIP archive atomically."""
     tmp_csv_path = f'{target_csv_path}.tmp'
-    if zipfile.is_zipfile(zip_path):
-        try:
-            with zipfile.ZipFile(zip_path, 'r') as zf:
-                csv_members = [
-                    m
-                    for m in zf.namelist()
-                    if m.lower().endswith('.csv') and '__MACOSX' not in m
-                ]
-                if not csv_members:
-                    logging.fatal('No CSV file found inside archive: %s', zip_path)
-                    raise ValueError(f'No CSV file found inside archive: {zip_path}')
-                target_name = os.path.basename(target_csv_path).lower()
-                matching = [
-                    m
-                    for m in csv_members
-                    if os.path.basename(m).lower() == target_name
-                ]
-                member = matching[0] if matching else csv_members[0]
-                if len(csv_members) > 1:
-                    logging.warning(
-                        'Multiple CSV files found in %s (%s); selected %s',
-                        zip_path,
-                        csv_members,
-                        member,
-                    )
-                logging.info(
-                    'Extracting %s from %s -> %s', member, zip_path, target_csv_path
-                )
-                with zf.open(member) as src, open(tmp_csv_path, 'wb') as dst:
-                    shutil.copyfileobj(src, dst)
-            os.replace(tmp_csv_path, target_csv_path)
+    if not zipfile.is_zipfile(zip_path):
+        if os.path.exists(zip_path):
             os.remove(zip_path)
-        except Exception:
-            if os.path.exists(tmp_csv_path):
-                os.remove(tmp_csv_path)
-            raise
-    else:
-        logging.info(
-            '%s is already an uncompressed CSV file; moving -> %s',
-            zip_path,
-            target_csv_path,
-        )
-        os.replace(zip_path, target_csv_path)
+        logging.fatal('Downloaded file is not a valid ZIP archive: %s', zip_path)
+        return
+
+    try:
+        with zipfile.ZipFile(zip_path, 'r') as zf:
+            csv_members = [
+                m
+                for m in zf.namelist()
+                if m.lower().endswith('.csv') and '__MACOSX' not in m
+            ]
+            if not csv_members:
+                logging.fatal('No CSV file found inside archive: %s', zip_path)
+                return
+            target_name = os.path.basename(target_csv_path).lower()
+            matching = [
+                m
+                for m in csv_members
+                if os.path.basename(m).lower() == target_name
+            ]
+            member = matching[0] if matching else csv_members[0]
+            if len(csv_members) > 1:
+                logging.warning(
+                    'Multiple CSV files found in %s (%s); selected %s',
+                    zip_path,
+                    csv_members,
+                    member,
+                )
+            logging.info(
+                'Extracting %s from %s -> %s', member, zip_path, target_csv_path
+            )
+            with zf.open(member) as src, open(tmp_csv_path, 'wb') as dst:
+                shutil.copyfileobj(src, dst)
+        os.replace(tmp_csv_path, target_csv_path)
+        os.remove(zip_path)
+    except Exception as exc:  # pylint: disable=broad-except
+        if os.path.exists(tmp_csv_path):
+            os.remove(tmp_csv_path)
+        logging.fatal('Failed to extract %s: %s', zip_path, exc)
 
 
 def download_all_sources(
