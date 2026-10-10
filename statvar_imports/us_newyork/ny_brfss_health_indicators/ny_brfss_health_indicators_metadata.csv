@@ -1,0 +1,5 @@
+parameter,value
+url,https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+header_rows,1
+mapped_columns,4

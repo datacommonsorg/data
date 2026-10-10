@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensure zero lint errors in genmcf output",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verify MaxDate is within allowable publication lag for recurring health indicators",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('Percent_Person_18OrMoreYears_WithAnyDisability', 'Percent_Person_18OrMoreYears_WithDepression', 'Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication', 'Percent_Person_18OrMoreYears_WithPoorGeneralHealth', 'Percent_Person_18To64Years_WithHealthInsurance', 'Percent_Person_50To74Years_Female_ReceivedMammography', 'Percent_Person_BingeDrinking', 'Percent_Person_BingeOrHeavyDrinking', 'Percent_Person_CannabisUse', 'Percent_Person_ChronicDiseaseSelfManagement', 'Percent_Person_ConsumesNoFruitsOrVegetables', 'Percent_Person_DailySugarSweetenedBeverages', 'Percent_Person_DidNotReceiveCareDueToCost', 'Percent_Person_ElectronicCigaretteUse', 'Percent_Person_FoodInsecurityPast12Months', 'Percent_Person_FoodSecurityPast12Months', 'Percent_Person_HasPersonalHealthCareProvider', 'Percent_Person_HepatitisCTestingEver', 'Percent_Person_HousingOrUtilityInsecurityPast12Months', 'Percent_Person_LeisureTimePhysicalActivity', 'Percent_Person_Obesity', 'Percent_Person_ReceivedDentalVisit', 'Percent_Person_Smoking', 'Percent_Person_WithArthritis', 'Percent_Person_WithAsthma', 'Percent_Person_WithAsthmaEver', 'Percent_Person_WithCardiovascularDisease', 'Percent_Person_WithChronicObstructivePulmonaryDisease', 'Percent_Person_WithDiabetes', 'Percent_Person_WithHighBloodPressure', 'Percent_Person_WithMentalHealthNotGood', 'Percent_Person_WithOverweightOrObese', 'Percent_Person_WithPhysicalHealthNotGood', 'Percent_Person_WithPrediabetes', 'Percent_Person_Years18Onwards_InfluenzaVaccinePastYear', 'Percent_Person_Years18To44_Female_ProviderDiscussedHealthyPregnancy', 'Percent_Person_Years18To64_RoutineCheckupWithinPastYear', 'Percent_Person_Years65Onwards_PneumococcalVaccineEver')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs = 38"
+      }
+    }
+  ]
+}
