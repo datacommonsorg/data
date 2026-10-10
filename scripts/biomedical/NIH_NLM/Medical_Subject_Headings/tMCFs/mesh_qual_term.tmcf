@@ -1,0 +1,16 @@
+Node: E:mesh_qual_term->E1
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_qual_term->Concept_dcid
+identifier: C:mesh_qual_term->ConceptUI
+
+Node: E:mesh_qual_term->E2
+typeOf: dcs:MeSHTerm
+dcid: C:mesh_qual_term->Term_dcid
+name: C:mesh_qual_term->TermName
+abbreviation: C:mesh_qual_term->Abbreviation
+abbreviation: C:mesh_qual_term->Display
+dateCreated: C:mesh_qual_term->DateCreated
+identifier: C:mesh_qual_term->TermUI
+isConceptPreferredTerm: C:mesh_qual_term->is_concept_preferred_term
+isRecordPreferredTerm: C:mesh_qual_term->is_record_preferred_term
+parent: E:mesh_qual_term->E1
