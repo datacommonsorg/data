@@ -3,3 +3,4 @@ header_rows,1
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit,measurementMethod,observationPeriod"
 mapped_rows,1
 mapped_columns,6
+required_statvar_properties,"populationType,measuredProperty,emissionSource,emittedThing"
