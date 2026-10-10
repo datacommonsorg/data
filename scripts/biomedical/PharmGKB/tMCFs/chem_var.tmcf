@@ -1,0 +1,23 @@
+Node: E:chem_var->E1
+typeOf: dcs:ChemicalCompound
+dcid: C:chem_var->Entity1_dcid
+name: C:chem_var->Entity1_name
+pharmGKBID: C:chem_var->Entity1_id
+
+Node: E:chem_var->E2
+typeOf: dcs:GeneticVariant
+dcid: C:chem_var->Entity2_dcid
+name: C:chem_var->Entity2_name
+pharmGKBID: C:chem_var->Entity2_id
+
+Node: E:chem_var->E3
+typeOf: dcs:ChemicalCompoundGeneticVariantAssociation
+dcid: C:chem_var->dcid
+name: C:chem_var->name
+isPharmacodynamicRelationship: C:chem_var->PD
+isPharmacokineticRelationship: C:chem_var->PK
+relationshipAssociationType: C:chem_var->Association
+relationshipEvidenceType: C:chem_var->Evidence	
+pubMedID: C:chem_var->PMIDs	
+compoundID: E:chem_var->E1
+geneticVariantID: E:chem_var->E2
