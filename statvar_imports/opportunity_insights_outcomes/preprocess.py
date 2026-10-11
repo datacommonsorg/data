@@ -308,8 +308,17 @@ def _resolve_headers_via_svp(
             with open(counters_seed, mode='r', encoding='utf-8') as f:
                 for row in csv.DictReader(f):
                     k = row.get('key', '')
-                    if k.startswith(('dropped_', 'error_', 'unmapped_')):
-                        bad_counters[k] = row.get('value', '')
+                    v = (row.get('value') or '').strip()
+                    if v in ('', '0', '0.0'):
+                        continue
+                    if k.startswith((
+                        '1:process_input_error-',
+                        '1:process_input_dropped-',
+                        'dropped_',
+                        'error_',
+                        'unmapped_',
+                    )) or 'unmapped' in k:
+                        bad_counters[k] = v
 
         header_to_sv = {}
         with open(f'{out_prefix}.csv', mode='r', encoding='utf-8') as f:
@@ -751,13 +760,16 @@ def main(_):
     os.makedirs(FLAGS.shard_dir, exist_ok=True)
     os.makedirs(os.path.dirname(FLAGS.sv_output_prefix), exist_ok=True)
     os.makedirs(os.path.join(_MODULE_DIR, 'counters'), exist_ok=True)
-    prepare_parallel_shards_and_svp_inputs(
-        FLAGS.input_dir,
-        FLAGS.shard_dir,
-        FLAGS.sv_output_prefix,
-        rows_per_chunk=FLAGS.max_rows_per_shard,
-        existing_statvar_mcf=FLAGS.existing_statvar_mcf,
-    )
+    try:
+        prepare_parallel_shards_and_svp_inputs(
+            FLAGS.input_dir,
+            FLAGS.shard_dir,
+            FLAGS.sv_output_prefix,
+            rows_per_chunk=FLAGS.max_rows_per_shard,
+            existing_statvar_mcf=FLAGS.existing_statvar_mcf,
+        )
+    except (FileNotFoundError, ValueError, RuntimeError) as e:
+        logging.fatal('Preprocessing failed: %s', e)
 
 
 if __name__ == '__main__':

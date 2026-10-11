@@ -213,6 +213,15 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     sv_output_prefix=os.path.join(tmpdir, 'output', 'output'),
                     existing_statvar_mcf='',
                 )
+            preprocess.FLAGS([
+                sys.argv[0],
+                f'--input_dir={os.path.join(tmpdir, "raw")}',
+                f'--shard_dir={os.path.join(tmpdir, "out")}',
+                f'--sv_output_prefix={os.path.join(tmpdir, "output", "output")}',
+            ])
+            with mock.patch.object(preprocess.logging, 'fatal') as mock_fatal:
+                preprocess.main([])
+                mock_fatal.assert_called_once()
 
     def test_extract_csv_from_zip_skips_nested_macosx(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -411,7 +420,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     for idx in range(1, 18):
                         w.writerow(['geoId/seed000', '2014', 'P2Y', f'dc/sv{idx}', str(idx), ''])
                 with open(counters_path, 'w', encoding='utf-8', newline='') as f:
-                    csv.writer(f).writerow(['key', 'value'])
+                    w = csv.writer(f)
+                    w.writerow(['key', 'value'])
+                    w.writerow(['dropped-output-statvars-mcf', '5400'])
+                    w.writerow(['1:process_input_error-svobs-missing-property', '0'])
                 return mock.Mock(returncode=0, stderr='')
 
             with mock.patch('subprocess.run', side_effect=fake_run_success):
@@ -437,12 +449,14 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 with open(counters_path, 'w', encoding='utf-8', newline='') as f:
                     w = csv.writer(f)
                     w.writerow(['key', 'value'])
+                    w.writerow(['1:process_input_error-svobs-missing-property', '1'])
                     w.writerow(['unmapped_pvs', '1'])
                 return mock.Mock(returncode=0, stderr='')
 
             with mock.patch('subprocess.run', side_effect=fake_run_fail):
                 with self.assertRaisesRegex(
-                    RuntimeError, r'kfr_p25.*unmapped_pvs'
+                    RuntimeError,
+                    r'kfr_p25.*1:process_input_error-svobs-missing-property.*unmapped_pvs',
                 ):
                     preprocess._resolve_headers_via_svp(
                         tmpdir, existing_statvar_mcf=''
