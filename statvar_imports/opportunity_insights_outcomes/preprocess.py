@@ -223,14 +223,45 @@ def normalize_column_header(
     return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
 
+_DEFAULT_COHORT_YEARS = tuple(str(y) for y in range(1978, 1993))
+_COHORT_TOKEN_RE = re.compile(r'(?:^|_)c(\d+)$')
+
+
+def _mapped_cohort_years(
+    header_to_sv: dict[str, tuple[str, str, str, str]],
+) -> list[str]:
+    """Returns sorted birth cohort year strings present in resolved header_to_sv keys."""
+    years = set()
+    for h in header_to_sv:
+        m = _COHORT_TOKEN_RE.search(h)
+        if m:
+            years.add(m.group(1))
+    return sorted(years, key=int) if years else list(_DEFAULT_COHORT_YEARS)
+
+
 def _resolve_headers_via_svp(
     raw_dir: str,
     max_cols_per_seed: int = 4_000,
     existing_statvar_mcf: str = DEFAULT_EXISTING_STATVAR_MCF,
 ) -> dict[str, tuple[str, str, str, str]]:
     """Resolves all unique column headers via stat_var_processor.py in a temp directory."""
+    repo_root = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
+    svp_script = os.path.join(
+        repo_root, 'tools/statvar_importer/stat_var_processor.py'
+    )
+    pvmap_path = os.path.join(_MODULE_DIR, 'pvmap.csv')
+    config_path = os.path.join(_MODULE_DIR, 'metadata.csv')
+
+    pvmap_keys = set()
+    if os.path.exists(pvmap_path):
+        with open(pvmap_path, mode='r', encoding='utf-8') as f:
+            for row in csv.reader(f):
+                if row and row[0].strip():
+                    pvmap_keys.add(row[0].strip())
+
     unique_headers = []
     seen = set()
+    discovered_cohort_tokens = set()
     for filename, _, dataset_mode in DATASET_CONFIGS:
         input_path = os.path.join(raw_dir, filename)
         if not os.path.exists(input_path):
@@ -238,26 +269,26 @@ def _resolve_headers_via_svp(
                 f'Required input file not found for {filename}: {input_path}'
             )
         with open(input_path, mode='r', encoding='utf-8') as f:
-            raw_headers = next(csv.reader(f))
-        data_cols = [c for c in raw_headers if c not in _NON_DATA_COLUMNS]
-        cohorts = (
-            [f'c{y}' for y in range(1978, 1993)]
-            if dataset_mode == 'annual_cohort_1978_1992'
-            else ['']
-        )
+            reader = csv.reader(f)
+            raw_headers = next(reader)
+            col_indices = {h: i for i, h in enumerate(raw_headers)}
+            data_cols = [c for c in raw_headers if c not in _NON_DATA_COLUMNS]
+            if dataset_mode == 'annual_cohort_1978_1992':
+                cohort_years = set(_DEFAULT_COHORT_YEARS)
+                for row in reader:
+                    c_str = _parse_cohort(row, col_indices)
+                    if c_str:
+                        cohort_years.add(c_str)
+                cohorts = [f'c{y}' for y in sorted(cohort_years, key=int)]
+                discovered_cohort_tokens.update(cohorts)
+            else:
+                cohorts = ['']
         for cohort_tok in cohorts:
             for c in data_cols:
                 norm_h = normalize_column_header(c, dataset_mode, cohort_tok)
                 if norm_h not in seen:
                     seen.add(norm_h)
                     unique_headers.append(norm_h)
-
-    repo_root = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
-    svp_script = os.path.join(
-        repo_root, 'tools/statvar_importer/stat_var_processor.py'
-    )
-    pvmap_path = os.path.join(_MODULE_DIR, 'pvmap.csv')
-    config_path = os.path.join(_MODULE_DIR, 'metadata.csv')
 
     with tempfile.TemporaryDirectory() as tmpdir:
         seed_files = []
@@ -336,6 +367,18 @@ def _resolve_headers_via_svp(
                         row['variableMeasured'],
                         row.get('unit', ''),
                     )
+
+        unmapped_cohorts = (
+            sorted(discovered_cohort_tokens - pvmap_keys)
+            if pvmap_keys
+            else []
+        )
+        if unmapped_cohorts:
+            bad_counters['unmapped_cohort_tokens'] = ','.join(unmapped_cohorts)
+            unmapped_suffixes = tuple(f'_{c}' for c in unmapped_cohorts)
+            for h in list(header_to_sv):
+                if h.endswith(unmapped_suffixes):
+                    del header_to_sv[h]
 
     missing = sorted(set(unique_headers) - set(header_to_sv))
     if missing or bad_counters:
@@ -417,30 +460,17 @@ def _format_geo_from_row_list(
 
 def _expand_chunk_worker(args: tuple) -> int:
     """Worker function to expand a slice of wide CSV rows into StatVarObservations, skipping cells already routed to input_files/*_cleaned.csv."""
-    if len(args) == 9:
-        (
-            input_path,
-            geo_level,
-            dataset_mode,
-            start_row,
-            end_row,
-            out_csv_path,
-            header_to_sv,
-            emitted_by_row,
-            start_offset,
-        ) = args
-    else:
-        (
-            input_path,
-            geo_level,
-            dataset_mode,
-            start_row,
-            end_row,
-            out_csv_path,
-            header_to_sv,
-            emitted_by_row,
-        ) = args
-        start_offset = 0
+    (
+        input_path,
+        geo_level,
+        dataset_mode,
+        start_row,
+        end_row,
+        out_csv_path,
+        header_to_sv,
+        emitted_by_row,
+        start_offset,
+    ) = args
 
     obs_written = 0
     with open(input_path, mode='r', encoding='utf-8') as infile, open(
@@ -476,7 +506,7 @@ def _expand_chunk_worker(args: tuple) -> int:
                     )
         else:
             cohort_col_specs = {}
-            for y in range(1978, 1993):
+            for y in _mapped_cohort_years(header_to_sv):
                 ctok = f'c{y}'
                 specs = []
                 for pos, h in data_col_positions:
@@ -486,7 +516,7 @@ def _expand_chunk_worker(args: tuple) -> int:
                         specs.append(
                             (pos, sv_meta[0], sv_meta[1], sv_meta[2], sv_meta[3])
                         )
-                cohort_col_specs[str(y)] = specs
+                cohort_col_specs[y] = specs
 
         if start_offset > 0:
             infile.seek(start_offset)
@@ -508,7 +538,11 @@ def _expand_chunk_worker(args: tuple) -> int:
                 cohort_str = _parse_cohort(row, col_indices)
                 if not cohort_str:
                     continue
-                active_specs = cohort_col_specs.get(cohort_str, ())
+                if cohort_str not in cohort_col_specs:
+                    raise ValueError(
+                        f'Unmapped birth cohort {cohort_str} in {input_path}'
+                    )
+                active_specs = cohort_col_specs[cohort_str]
             else:
                 active_specs = col_specs
 
@@ -590,11 +624,12 @@ def prepare_parallel_shards_and_svp_inputs(
             num_data_cols = len(data_col_positions)
 
             if dataset_mode == 'annual_cohort_1978_1992':
+                mapped_years = _mapped_cohort_years(header_to_sv)
                 unseen_by_cohort = {
-                    str(y): set(range(num_data_cols)) for y in range(1978, 1993)
+                    y: set(range(num_data_cols)) for y in mapped_years
                 }
                 svp_rows_by_cohort: dict[str, list[list[str]]] = {
-                    str(y): [] for y in range(1978, 1993)
+                    y: [] for y in mapped_years
                 }
                 row_idx = 0
                 while True:
@@ -619,7 +654,11 @@ def prepare_parallel_shards_and_svp_inputs(
                     cohort_str = _parse_cohort(row, col_indices)
                     if not cohort_str:
                         continue
-                    unseen = unseen_by_cohort.get(cohort_str)
+                    if cohort_str not in unseen_by_cohort:
+                        raise ValueError(
+                            f'Unmapped birth cohort {cohort_str} in {input_path}'
+                        )
+                    unseen = unseen_by_cohort[cohort_str]
                     if not unseen:
                         continue
                     matched_d_indices = []

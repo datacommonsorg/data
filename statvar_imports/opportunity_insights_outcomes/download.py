@@ -17,6 +17,7 @@ import os
 import re
 import shutil
 import sys
+import time
 import zipfile
 from absl import app
 from absl import flags
@@ -121,26 +122,42 @@ def download_file(
     """Streams a URL to dest_path atomically via download_util_script with bounded retries."""
     os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
     tmp_path = f'{dest_path}.tmp'
-    try:
-        response = download_util_script._retry_method(
-            url=url,
-            headers={'User-Agent': USER_AGENT},
-            tries=max_retries,
-            delay=retry_backoff_sec,
-            backoff=2,
-        )
-        if not response:
-            logging.fatal('Failed to download %s', url)
+    attempts = max(1, max_retries)
+    delay = retry_backoff_sec
+    last_err = None
+    for attempt in range(1, attempts + 1):
+        try:
+            response = download_util_script._retry_method(
+                url=url,
+                headers={'User-Agent': USER_AGENT},
+                tries=max_retries,
+                delay=retry_backoff_sec,
+                backoff=2,
+            )
+            if not response:
+                raise RuntimeError(f'Empty response from {url}')
+            with response, open(tmp_path, 'wb') as out_file:
+                for chunk in response.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        out_file.write(chunk)
+            os.replace(tmp_path, dest_path)
             return
-        with response, open(tmp_path, 'wb') as out_file:
-            for chunk in response.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    out_file.write(chunk)
-        os.replace(tmp_path, dest_path)
-    except Exception as exc:  # pylint: disable=broad-except
-        if os.path.exists(tmp_path):
-            os.remove(tmp_path)
-        logging.fatal('Failed to download %s: %s', url, exc)
+        except Exception as exc:  # pylint: disable=broad-except
+            last_err = exc
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            if attempt < attempts:
+                logging.warning(
+                    'Download attempt %d/%d failed for %s (%s); retrying in %ss...',
+                    attempt,
+                    attempts,
+                    url,
+                    exc,
+                    delay,
+                )
+                time.sleep(delay)
+                delay *= 2
+    logging.fatal('Failed to download %s: %s', url, last_err)
 
 
 def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:

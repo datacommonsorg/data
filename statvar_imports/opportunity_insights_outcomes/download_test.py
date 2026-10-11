@@ -130,12 +130,38 @@ class DownloadAndPvmapTest(unittest.TestCase):
             with open(dest_path, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
+            broken_response = mock.MagicMock()
+            broken_response.__enter__.return_value = broken_response
+
+            def broken_stream(**kwargs):
+                del kwargs
+                yield b'partial,'
+                raise ConnectionResetError('mid-stream disconnect')
+
+            broken_response.iter_content.side_effect = broken_stream
+            retry_dest = os.path.join(tmpdir, 'retry.csv')
+            with mock.patch(
+                'util.download_util_script._retry_method',
+                side_effect=[broken_response, fake_response],
+            ) as mock_retry_req:
+                download.download_file(
+                    'https://example.com/retry.csv',
+                    retry_dest,
+                    max_retries=2,
+                    retry_backoff_sec=0.001,
+                )
+            self.assertEqual(mock_retry_req.call_count, 2)
+            with open(retry_dest, 'r', encoding='utf-8') as f:
+                self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
+
             with mock.patch(
                 'util.download_util_script._retry_method', return_value=None
             ), mock.patch.object(download.logging, 'fatal') as mock_fatal:
                 download.download_file(
                     'https://example.com/fail.csv',
                     os.path.join(tmpdir, 'fail.csv'),
+                    max_retries=2,
+                    retry_backoff_sec=0.001,
                 )
                 mock_fatal.assert_called_once()
 
@@ -460,6 +486,38 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 ):
                     preprocess._resolve_headers_via_svp(
                         tmpdir, existing_statvar_mcf=''
+                    )
+
+            with open(
+                os.path.join(tmpdir, 'county_by_cohort_outcomes.csv'),
+                'a',
+                encoding='utf-8',
+                newline='',
+            ) as f:
+                csv.writer(f).writerow(['6', '85', '100', '1993', '0.5'])
+
+            with mock.patch('subprocess.run', side_effect=fake_run_success):
+                with self.assertRaisesRegex(
+                    RuntimeError, r'kfr_p25_c1993.*unmapped_cohort_tokens'
+                ):
+                    preprocess._resolve_headers_via_svp(
+                        tmpdir, existing_statvar_mcf=''
+                    )
+
+            with mock.patch.object(
+                preprocess,
+                '_resolve_headers_via_svp',
+                return_value={'kfr_p25_c1978': ('2005', 'P1Y', 'dc/sv1', '')},
+            ):
+                with self.assertRaisesRegex(
+                    ValueError, r'Unmapped birth cohort 1993'
+                ):
+                    preprocess.prepare_parallel_shards_and_svp_inputs(
+                        tmpdir,
+                        os.path.join(tmpdir, 'shards'),
+                        os.path.join(tmpdir, 'out', 'output'),
+                        workers=1,
+                        existing_statvar_mcf='',
                     )
 
 
