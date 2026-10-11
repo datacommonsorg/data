@@ -124,7 +124,13 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     retry_backoff_sec=0.01,
                 )
 
-            mock_req.assert_called_once()
+            mock_req.assert_called_once_with(
+                url='https://example.com/sample.csv',
+                headers={'User-Agent': download.USER_AGENT},
+                tries=1,
+                delay=0.01,
+                backoff=2,
+            )
             self.assertTrue(os.path.exists(dest_path))
             self.assertFalse(os.path.exists(f'{dest_path}.tmp'))
             with open(dest_path, 'r', encoding='utf-8') as f:
@@ -262,6 +268,18 @@ class DownloadAndPvmapTest(unittest.TestCase):
             with open(target_csv, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
+            raw_csv_zip = os.path.join(tmpdir, 'tract_outcomes.csv.zip')
+            raw_csv_target = os.path.join(tmpdir, 'tract_outcomes.csv')
+            with open(raw_csv_zip, 'w', encoding='utf-8') as f:
+                f.write('state,county,tract,cz,czname,val\n6,85,500100,100,San Jose,0.5\n')
+            download.extract_csv_from_zip(raw_csv_zip, raw_csv_target)
+            self.assertFalse(os.path.exists(raw_csv_zip))
+            with open(raw_csv_target, 'r', encoding='utf-8') as f:
+                self.assertEqual(
+                    f.read(),
+                    'state,county,tract,cz,czname,val\n6,85,500100,100,San Jose,0.5\n',
+                )
+
             bad_zip = os.path.join(tmpdir, 'bad.zip')
             bad_target = os.path.join(tmpdir, 'bad.csv')
             with open(bad_zip, 'w', encoding='utf-8') as f:
@@ -371,11 +389,20 @@ class DownloadAndPvmapTest(unittest.TestCase):
             '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/county_cohort.zip">County</a>'
             '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/cz_cohort.zip">CZ</a>'
         )
+        fake_response = mock.MagicMock()
+        fake_response.__enter__.return_value = fake_response
+        fake_response.text = sample_html
         with mock.patch(
-            'util.download_util.request_url',
-            return_value=sample_html,
-        ):
+            'util.download_util_script._retry_method',
+            return_value=fake_response,
+        ), mock.patch.object(
+            download.requests_cache,
+            'disabled',
+            wraps=download.requests_cache.disabled,
+        ) as mock_disabled:
             urls = download.discover_latest_urls('https://example.com/data/')
+            mock_disabled.assert_called_once()
+        self.assertFalse(download.requests_cache.is_installed())
         self.assertEqual(
             urls['county_by_cohort_outcomes.csv'],
             'https://opportunityinsights.org/wp-content/uploads/2024/07/county_cohort.zip',

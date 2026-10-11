@@ -68,8 +68,8 @@ Run all commands below from `data/statvar_imports/opportunity_insights_outcomes/
 ## Dataset Coverage & Schema Details
 * **Geographic Coverage:**
   * **Commuting Zones (`commuting_zone`):** `geoId/cz{cz:05d}` (741 US commuting zones)
-  * **Counties (`county`):** `geoId/{state:02d}{county:03d}` (~3,221 US counties)
-  * **Census Tracts (`tract`):** `geoId/{state:02d}{county:03d}{tract:06d}` (~73,438 US census tracts)
+  * **Counties (`county`):** `geoId/{state:02d}{county:03d}` (3,219 US counties)
+  * **Census Tracts (`tract`):** `geoId/{state:02d}{county:03d}{tract:06d}` (73,461 US census tracts)
 * **Temporal Coverage & Cohorts:**
   * **Baseline Cohort (`1978–1983` birth cohorts):** Multi-year pooled estimates (`observationDate` ranging from `1991` to `2015`, `observationPeriod` from `P1D` to `P22Y` depending on outcome age window).
   * **Late Cohort Refresh (`1984–1989` birth cohorts):** `tract_outcomes_late_simple.csv` (`observationDate: 2016` with `P6Y`, `2020-04-01` with `P1D` for incarceration, and `2010-04-01` with `P1D` for child counts).
@@ -124,7 +124,7 @@ java -Xmx90g -jar ~/Downloads/import-tool.jar genmcf \
 * **Total MCF Nodes Generated (`NumNodeSuccesses`):** `283,658,483`
 * **Total Property-Value Successes (`NumPVSuccesses`):** `2,276,128,676`
 * **Existence Checks (`Existence_NumChecks`):** `2,284,368,662` (`Existence_NumDcCalls`: `2,338`)
-* **Unique StatisticalVariables:** `10,596`
+* **Unique StatisticalVariables:** `10,596` active StatVars emitted with observations in `report.json` (out of `11,247` total mapped StatVars across `10,815` existing `dc/` StatVars and `432` new schema StatVars)
 
 ### Explanation of Warnings & Data Holes (`report.json`)
 All warnings in `dc_generated/report.json` are expected characteristics of the source dataset:

@@ -22,13 +22,13 @@ import zipfile
 from absl import app
 from absl import flags
 from absl import logging
+import requests_cache
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from util import download_util
 from util import download_util_script
 
 FLAGS = flags.FLAGS
@@ -92,14 +92,16 @@ def discover_latest_urls(page_url: str) -> dict[str, str]:
     """Scrapes the Opportunity Insights data page for the latest URLs, falling back to canonical links."""
     discovered = {k: v['url'] for k, v in DEFAULT_SOURCE_FILES.items()}
     try:
-        html = download_util.request_url(
-            url=page_url,
-            headers={'User-Agent': USER_AGENT},
-            output='text',
-            timeout=30,
-            retries=3,
-            retry_secs=2,
-        )
+        with requests_cache.disabled():
+            response = download_util_script._retry_method(
+                url=page_url,
+                headers={'User-Agent': USER_AGENT},
+                tries=3,
+                delay=2,
+                backoff=2,
+            )
+            with response:
+                html = response.text if response else ''
         if html:
             for filename, spec in DEFAULT_SOURCE_FILES.items():
                 matches = re.findall(spec['pattern'], str(html))
@@ -127,19 +129,20 @@ def download_file(
     last_err = None
     for attempt in range(1, attempts + 1):
         try:
-            response = download_util_script._retry_method(
-                url=url,
-                headers={'User-Agent': USER_AGENT},
-                tries=max_retries,
-                delay=retry_backoff_sec,
-                backoff=2,
-            )
-            if not response:
-                raise RuntimeError(f'Empty response from {url}')
-            with response, open(tmp_path, 'wb') as out_file:
-                for chunk in response.iter_content(chunk_size=1024 * 1024):
-                    if chunk:
-                        out_file.write(chunk)
+            with requests_cache.disabled():
+                response = download_util_script._retry_method(
+                    url=url,
+                    headers={'User-Agent': USER_AGENT},
+                    tries=1,
+                    delay=retry_backoff_sec,
+                    backoff=2,
+                )
+                if not response:
+                    raise RuntimeError(f'Empty response from {url}')
+                with response, open(tmp_path, 'wb') as out_file:
+                    for chunk in response.iter_content(chunk_size=1024 * 1024):
+                        if chunk:
+                            out_file.write(chunk)
             os.replace(tmp_path, dest_path)
             return
         except Exception as exc:  # pylint: disable=broad-except
@@ -160,10 +163,33 @@ def download_file(
     logging.fatal('Failed to download %s: %s', url, last_err)
 
 
+def _is_valid_uncompressed_csv(file_path: str) -> bool:
+    """Checks whether a non-ZIP file starts with a valid Opportunity Insights CSV header."""
+    if not os.path.exists(file_path):
+        return False
+    try:
+        with open(file_path, 'r', encoding='utf-8-sig') as f:
+            first_line = f.readline(65536).strip()
+        if not first_line or first_line.startswith('<'):
+            return False
+        cols = {c.strip().lower() for c in first_line.split(',')}
+        return 'cz' in cols or ('state' in cols and 'county' in cols)
+    except (OSError, UnicodeDecodeError):
+        return False
+
+
 def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
-    """Extracts the primary CSV file from a ZIP archive atomically."""
+    """Extracts the primary CSV file from a ZIP archive (or moves a redirected uncompressed CSV) atomically."""
     tmp_csv_path = f'{target_csv_path}.tmp'
     if not zipfile.is_zipfile(zip_path):
+        if _is_valid_uncompressed_csv(zip_path):
+            logging.info(
+                '%s is already an uncompressed CSV; moving to %s',
+                zip_path,
+                target_csv_path,
+            )
+            os.replace(zip_path, target_csv_path)
+            return
         if os.path.exists(zip_path):
             os.remove(zip_path)
         logging.fatal('Downloaded file is not a valid ZIP archive: %s', zip_path)
