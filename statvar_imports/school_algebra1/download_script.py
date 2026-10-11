@@ -85,6 +85,7 @@ def download_crdc_files():
 
         search_pattern = os.path.join(temp_output_dir, '**', '*')
         category_name = "Algebra"
+        staged_moves = []
 
         for item_path in glob.glob(search_pattern, recursive=True):
             if not os.path.isfile(item_path):
@@ -102,15 +103,18 @@ def download_crdc_files():
                     continue
 
                 clean_base = re.sub(r'[^a-zA-Z0-9]+', '_', base).lower()
-                if "enrollment" in clean_base or "algebra_ii" in clean_base:
+                if "algebra_ii" in clean_base or (
+                        "enrollment" in clean_base and
+                        "algebra" not in clean_base):
                     continue
 
                 new_filename = f"crdc_{year_range}_{clean_base}{extension}"
                 new_filepath = os.path.join(_OUTPUT_DIRECTORY, new_filename)
+                staged_moves.append((item_path, new_filepath))
 
-                logging.info(
-                    f"Moving raw file '{item_path}' to '{new_filepath}'")
-                shutil.move(item_path, new_filepath)
+        for item_path, new_filepath in staged_moves:
+            logging.info(f"Moving raw file '{item_path}' to '{new_filepath}'")
+            shutil.move(item_path, new_filepath)
 
         shutil.rmtree(temp_output_dir, ignore_errors=True)
 
