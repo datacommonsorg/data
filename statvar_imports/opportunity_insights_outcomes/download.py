@@ -200,7 +200,10 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
             csv_members = [
                 m
                 for m in zf.namelist()
-                if m.lower().endswith('.csv') and '__MACOSX' not in m
+                if m.lower().endswith('.csv')
+                and '__MACOSX' not in m
+                and not os.path.basename(m).startswith('._')
+                and not m.endswith('/')
             ]
             if not csv_members:
                 logging.fatal('No CSV file found inside archive: %s', zip_path)

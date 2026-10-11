@@ -260,6 +260,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
             zip_path = os.path.join(tmpdir, 'archive.zip')
             target_csv = os.path.join(tmpdir, 'extracted.csv')
             with zipfile.ZipFile(zip_path, 'w') as zf:
+                zf.writestr('._extracted.csv', 'appledouble,metadata\n')
                 zf.writestr('folder/__MACOSX/._data.csv', 'corrupted,metadata\n')
                 zf.writestr('folder/readme.csv', 'wrong,file\n')
                 zf.writestr('folder/extracted.csv', 'cz,val\n100,0.5\n')
