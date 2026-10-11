@@ -313,12 +313,23 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 ) as f:
                     sv_rows.extend(list(csv.DictReader(f)))
             self.assertEqual(len(sv_rows), 120)
+            for row in sv_rows:
+                val = row['value']
+                self.assertFalse(val.startswith(('.', '-.')))
+                if '.' in val:
+                    self.assertLessEqual(len(val.split('.')[1]), 5)
 
     def test_is_valid_number(self):
         self.assertTrue(preprocess._is_valid_number('0.35973939'))
         self.assertTrue(preprocess._is_valid_number('-12.5'))
         for invalid in ('', 'NA', 'N/A', '.', 'nan', 'null', '-', 's', 'Inf', '-Inf'):
             self.assertFalse(preprocess._is_valid_number(invalid))
+
+    def test_str_from_number(self):
+        self.assertEqual(preprocess.str_from_number('.14216326', precision_digits=5), '0.14216')
+        self.assertEqual(preprocess.str_from_number('-.021205151', precision_digits=5), '-0.02121')
+        self.assertEqual(preprocess.str_from_number('1644.0', precision_digits=5), '1644')
+        self.assertEqual(preprocess.str_from_number(29301.76, precision_digits=5), '29301.76')
 
     def test_discover_latest_urls_matches_cohort_zips(self):
         sample_html = (
@@ -384,6 +395,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
             def fake_run_success(cmd, **kwargs):
                 del kwargs
+                self.assertEqual(cmd[0], sys.executable)
                 out_prefix = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_path=')][0]
                 counters_path = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_counters=')][0]
                 with open(f'{out_prefix}.csv', 'w', encoding='utf-8', newline='') as f:

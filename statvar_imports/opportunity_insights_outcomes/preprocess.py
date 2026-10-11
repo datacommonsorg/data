@@ -19,6 +19,7 @@ import math
 import os
 import re
 import subprocess
+import sys
 import tempfile
 from absl import app
 from absl import flags
@@ -132,6 +133,18 @@ def _is_valid_number(val: str) -> bool:
         return math.isfinite(float(val))
     except ValueError:
         return False
+
+
+def str_from_number(
+    number: int | float | str, precision_digits: int | None = 5
+) -> str:
+    """Converts a number or numeric string to its formatted string representation matching stat_var_processor.py."""
+    num = float(number) if isinstance(number, str) else number
+    if int(num) == num:
+        return f'{int(num)}'
+    if precision_digits is not None:
+        num = round(num, precision_digits)
+    return f'{num}'
 
 
 def _to_positive_int_str(val, width: int = 0) -> str:
@@ -269,7 +282,7 @@ def _resolve_headers_via_svp(
         out_prefix = os.path.join(tmpdir, 'sv_seed')
         counters_seed = os.path.join(tmpdir, 'counters_seed.csv')
         cmd = [
-            'python3',
+            sys.executable,
             svp_script,
             f'--input_data={",".join(seed_files)}',
             f'--pv_map={pvmap_path}',
@@ -502,9 +515,14 @@ def _expand_chunk_worker(args: tuple) -> int:
                 val = _extract_row_cell(row, pos)
                 if not _is_valid_number(val):
                     continue
-                out_batch.append(
-                    (geo_id, obs_date, obs_period, var_measured, val, unit)
-                )
+                out_batch.append((
+                    geo_id,
+                    obs_date,
+                    obs_period,
+                    var_measured,
+                    str_from_number(val, precision_digits=5),
+                    unit,
+                ))
             if out_batch:
                 writer.writerows(out_batch)
                 obs_written += len(out_batch)
