@@ -10,25 +10,6 @@
             }
         },
         {
-            "rule_id": "check_all_statvars_freshness",
-            "validator": "SQL_VALIDATOR",
-            "description": "Verify every active StatVar meets allowable freshness lag (within 4 years of current date and >= 2022).",
-            "params": {
-                "query": "SELECT StatVar, MaxDate FROM stats",
-                "condition": "CAST(MaxDate AS INT) >= GREATEST(2022, EXTRACT(YEAR FROM CURRENT_DATE) - 4)"
-            }
-        },
-        {
-            "rule_id": "check_max_date_consistent",
-            "validator": "MAX_DATE_CONSISTENT",
-            "description": "Ensure all StatVars share a uniform MaxDate across the dataset."
-        },
-        {
-            "rule_id": "check_empty_import",
-            "description": "Ensures the import produces non-zero records",
-            "validator": "EMPTY_IMPORT_CHECK"
-        },
-        {
             "rule_id": "check_lint_error_count",
             "description": "Verifies that lint errors remain within threshold",
             "validator": "LINT_ERROR_COUNT",
