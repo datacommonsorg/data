@@ -354,8 +354,9 @@ def process_data(input_dir: str, output_dir: str) -> bool:
             final_county_df['Unit'] = final_county_df['Unit'].fillna(
                 '').replace(_UNIT_NORMALIZATION)
         final_county_df = final_county_df[
+            final_county_df['Geo'].notna() &
             ~final_county_df['Geo'].isin(['geoId/99999', 'geoId/00000']) &
-            ~final_county_df['Geo'].str.endswith('999')]
+            ~final_county_df['Geo'].str.endswith('999', na=False)]
         final_county_df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
                                         keep='last',
                                         inplace=True)

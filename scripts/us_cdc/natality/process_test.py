@@ -166,7 +166,7 @@ class ProcessPipelineTest(unittest.TestCase):
 
         con = duckdb.connect()
 
-        # Rule 1: check_latest_date_freshness (lag_years <= 2)
+        # Rule 1: check_latest_date_freshness (lag_years BETWEEN 0 AND 3)
         rule1 = cfg['rules'][0]
         q1 = rule1['params']['query']
         c1 = rule1['params']['condition']
@@ -192,6 +192,29 @@ class ProcessPipelineTest(unittest.TestCase):
         ).fetchdf()
         self.assertFalse(failing_df.empty,
                          'Expected stale stats to fail rule 1')
+
+        future_stats = pd.DataFrame([{
+            'StatVar': 'Count_BirthEvent_LiveBirth',
+            'MaxDate': '2030'
+        }])
+        con.register('stats', future_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
+        ).fetchdf()
+        self.assertFalse(failing_df.empty,
+                         'Expected future stats to fail rule 1')
+
+        empty_stats = pd.DataFrame([{
+            'StatVar': 'Other_StatVar',
+            'MaxDate': '2024'
+        }])
+        con.register('stats', empty_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
+        ).fetchdf()
+        self.assertFalse(
+            failing_df.empty,
+            'Expected missing Count_BirthEvent_LiveBirth to fail rule 1')
 
         # Rule 2: check_scoped_date_consistency_active_statvars
         rule2 = cfg['rules'][1]

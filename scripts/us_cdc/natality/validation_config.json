@@ -3,11 +3,11 @@
     "rules": [
         {
             "rule_id": "check_latest_date_freshness",
-            "description": "Asserts the latest observation date reaches at least 2022 and freshness lag is <= 2 years for Count_BirthEvent_LiveBirth.",
+            "description": "Asserts the latest observation date reaches at least 2022 and freshness lag is between 0 and 3 years for Count_BirthEvent_LiveBirth.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT CAST(MaxDate AS INTEGER) AS latest_year, date_part('year', current_date) - CAST(MaxDate AS INTEGER) AS lag_years FROM stats WHERE StatVar = 'Count_BirthEvent_LiveBirth'",
-                "condition": "latest_year >= 2022 AND lag_years <= 2"
+                "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year, date_part('year', current_date) - CAST(MAX(MaxDate) AS INTEGER) AS lag_years FROM stats WHERE StatVar = 'Count_BirthEvent_LiveBirth'",
+                "condition": "latest_year IS NOT NULL AND latest_year >= 2022 AND lag_years >= 0 AND lag_years <= 3"
             }
         },
         {

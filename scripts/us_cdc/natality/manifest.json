@@ -11,6 +11,10 @@
                 "download.py",
                 "process.py"
             ],
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 8
+            },
             "source_files": [
                 "input_files/*",
                 "manifest.json",

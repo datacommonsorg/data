@@ -113,14 +113,17 @@ def download_natality_dataset(driver,
 
     # Select all years in Year listbox
     year_filter = driver.find_elements(By.NAME, 'V_D149.V20')
-    if year_filter:
-        year_select = Select(year_filter[0])
-        try:
-            year_select.deselect_all()
-            year_select.select_by_value('*All*')
-        except Exception as e:
-            logging.error(f'Failed to select all years in year filter: {e}')
-            raise
+    if not year_filter:
+        raise RuntimeError(
+            'Year selection listbox (V_D149.V20) not found on CDC WONDER form.'
+        )
+    year_select = Select(year_filter[0])
+    try:
+        year_select.deselect_all()
+        year_select.select_by_value('*All*')
+    except Exception as e:
+        logging.error(f'Failed to select all years in year filter: {e}')
+        raise
 
     # Check all optional health and demographic measures
     for measure_id in _OPTIONAL_MEASURES:
@@ -264,7 +267,11 @@ def download_all(output_dir: str,
                     logging.warning(
                         f'Attempt {attempt} failed for {geo_level}: {e}')
                     last_error = e
-                    time.sleep(5)
+                    backoff_delay = 5 * (2**(attempt - 1))
+                    logging.info(
+                        f'Retrying in {backoff_delay} seconds after backoff...'
+                    )
+                    time.sleep(backoff_delay)
                 finally:
                     if driver:
                         driver.quit()
