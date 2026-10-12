@@ -47,8 +47,7 @@ Example workbook:
 scripts/cdc_prams/
 ├── manifest.json              # Import automation specification (Cloud Batch/Scheduler)
 ├── validation_config.json     # Import validation framework configuration
-├── download.py                # Download utility with retries, timeouts, and headers
-├── download_input_files.py    # Dynamically discovers and downloads CDC Excel workbook
+├── download.py                # Dynamically discovers and downloads CDC Excel workbook
 ├── process.py                 # Ingests Excel sheets via openpyxl/pandas and produces CSV/MCF/TMCF
 ├── process_test.py            # Hermetic unit tests comparing output against fixtures
 ├── constants.py               # MCF templates and property mappings
@@ -80,7 +79,7 @@ scripts/cdc_prams/
 
 ### 1. Download Input Workbook
 ```bash
-python3 scripts/cdc_prams/download_input_files.py
+python3 scripts/cdc_prams/download.py
 ```
 This dynamically discovers the latest multi-year workbook from the CDC website and saves
 it into `scripts/cdc_prams/input_files/`.
@@ -133,13 +132,13 @@ CDC publishes PRAMS MCH Indicator reports annually as consolidated multi-year Ex
 When a new release is published:
 
 1. **Automatic Discovery & Ingestion**:
-   - `download_input_files.py` scrapes the CDC landing page and detects the new release
+   - `download.py` scrapes the CDC landing page and detects the new release
      workbook (e.g. `PRAMS-MCH-Indicators-2016-2023-508.xlsx`).
    - The processing pipeline extracts all available year sheets automatically.
 
 2. **Manual Trigger (if needed)**:
    ```bash
-   python3 scripts/cdc_prams/download_input_files.py --overwrite
+   python3 scripts/cdc_prams/download.py --overwrite
    python3 scripts/cdc_prams/process.py
    python3 scripts/cdc_prams/process_test.py
    ```

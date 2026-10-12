@@ -8,7 +8,7 @@
             "provenance_url": "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html",
             "provenance_description": "US CDC Pregnancy Risk Assessment Monitoring System (PRAMS) MCH indicators across states, territories, and cities.",
             "scripts": [
-                "download_input_files.py",
+                "download.py",
                 "process.py"
             ],
             "source_files": [

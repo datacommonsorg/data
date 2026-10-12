@@ -197,9 +197,9 @@ class TestProcess(unittest.TestCase):
         unless allow_fallback is True.
         """
         from unittest.mock import patch
-        from download_input_files import discover_excel_url, _FALLBACK_URL
+        from download import discover_excel_url, _FALLBACK_URL
 
-        with patch("download_input_files._get_session") as mock_session:
+        with patch("download._get_session") as mock_session:
             mock_resp = mock_session.return_value.get.return_value
             mock_resp.text = "<html>No links here</html>"
             mock_resp.raise_for_status.return_value = None
