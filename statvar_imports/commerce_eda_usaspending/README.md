@@ -66,7 +66,7 @@ python3 -m tools.import_validation.runner \
   --validation_config=statvar_imports/commerce_eda_usaspending/validation_config.json \
   --stats_summary=statvar_imports/commerce_eda_usaspending/output/summary_report.csv \
   --lint_report=statvar_imports/commerce_eda_usaspending/output/report.json \
-  --differ_output=statvar_imports/commerce_eda_usaspending/output/differ_summary.json \
+  --differ_output=statvar_imports/commerce_eda_usaspending/output \
   --validation_output=statvar_imports/commerce_eda_usaspending/output/validation_output.csv
 ```
 

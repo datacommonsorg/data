@@ -631,6 +631,26 @@ class TestProcessUSASpending(unittest.TestCase):
         df_expected = pd.read_csv(sample_expected_path)
         pd.testing.assert_frame_equal(df_actual, df_expected)
 
+    def test_deduplicate_awards_fallback_across_batches(self):
+        from statvar_imports.commerce_eda_usaspending.process import (
+            _deduplicate_awards,)
+        batch1 = [{
+            "Place of Performance State Code": "AL",
+            "CFDA Number": "11.300",
+            "Start Date": "2020-05-01",
+            "Award Amount": 50000.0,
+        }]
+        batch2 = [{
+            "Place of Performance State Code": "AL",
+            "CFDA Number": "11.300",
+            "Start Date": "2020-05-01",
+            "Award Amount": 50000.0,
+        }]
+        unique_awards = {}
+        _deduplicate_awards(batch1, unique_awards)
+        _deduplicate_awards(batch2, unique_awards)
+        self.assertEqual(len(unique_awards), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

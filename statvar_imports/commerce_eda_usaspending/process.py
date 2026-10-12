@@ -88,7 +88,7 @@ def get_current_fiscal_year(now=None):
 def _deduplicate_awards(awards, unique_awards=None):
     if unique_awards is None:
         unique_awards = {}
-    for idx, award in enumerate(awards):
+    for award in awards:
         award_id = award.get("generated_internal_id") or award.get("Award ID")
         if award_id:
             unique_awards[award_id] = award
@@ -98,7 +98,7 @@ def _deduplicate_awards(awards, unique_awards=None):
                 award.get("CFDA Number"),
                 award.get("Start Date"),
                 award.get("Award Amount"),
-                idx,
+                len(unique_awards),
             )
             unique_awards[fallback_key] = award
     return unique_awards
