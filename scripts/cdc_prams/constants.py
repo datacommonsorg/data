@@ -36,16 +36,6 @@ DEFAULT_SV_PROP = {
     "populationType": "dcs:LiveBirthPregnancyEvent",
 }
 
-# The dictionaries are used to replace the present value according
-# to the schema.
-PV_PROP = {
-    "OneMonth": "1Month",
-    "SampleSize_Count": "sampleSize",
-    "Percent": "measuredValue",
-    "ConfidenceIntervalLowerLimit_Count": "confidenceIntervalLowerLimit",
-    "ConfidenceIntervalUpperLimit_Count": "confidenceIntervalUpperLimit"
-}
-
 # The change is based on the property values according to the schema by
 #  removing the unwanted keywords from the property value.
 _PROP = {
@@ -96,13 +86,7 @@ _PROP = {
     "ConfidenceIntervalLowerLimit_Count":
         "",
     "ConfidenceIntervalUpperLimit_Count":
-        "",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
-        "12MonthsBeforePregnancy":
-        "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
-        "DuringPregnancy":
-        "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"
+        ""
 }
 
 _TIME = {
@@ -144,8 +128,6 @@ _TIME = {
         "Postpartum",
     "SampleSize_Count":
         "",
-    "SampleSize_Count_LivePregnancyvent_MoreThan4TimesAWeek":
-        "",
     "Percent":
         "",
     "ConfidenceIntervalLowerLimit_Count":
@@ -162,15 +144,22 @@ _TIME = {
 }
 
 _INSURANCE = {
-    "OneMonth": "1Month",
+    "OneMonth":
+        "1Month",
     "healthInsuranceStatusPostpartumPrivateInsurance":
-    "WithPrivateHealthInsurance",
-    "healthInsuranceStatusPostpartumMedicaid": "WithMedicaid",
-    "healthInsuranceStatusPostpartumNoInsurance": "NoHealthInsurance",
-    "SampleSize_Count": "",
-    "Percent": "",
-    "ConfidenceIntervalLowerLimit_Count": "",
-    "ConfidenceIntervalUpperLimit_Count": ""
+        "WithPrivateHealthInsurance",
+    "healthInsuranceStatusPostpartumMedicaid":
+        "WithMedicaid",
+    "healthInsuranceStatusPostpartumNoInsurance":
+        "NoHealthInsurance",
+    "SampleSize_Count":
+        "",
+    "Percent":
+        "",
+    "ConfidenceIntervalLowerLimit_Count":
+        "",
+    "ConfidenceIntervalUpperLimit_Count":
+        ""
 }
 
 _CIGARETTES = {

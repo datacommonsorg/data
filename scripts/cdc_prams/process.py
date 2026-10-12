@@ -17,6 +17,7 @@ This Python script processes the CDC PRAMS consolidated MCH Indicators dataset
 """
 import glob
 import os
+import re
 import sys
 from copy import deepcopy
 from absl import app, flags, logging
@@ -46,6 +47,52 @@ flags.DEFINE_list(
 
 # Canonical 42 base Statistical Variable names in workbook column order
 UNIQUE_STATVARS = list(dict.fromkeys(statvar_col.values()))
+
+# Expected indicator keywords to validate Row 4 headers for each of the 42 blocks
+_EXPECTED_INDICATOR_KEYWORDS = (
+    'multivitamin',
+    'underweight',
+    'overweight',
+    'obese',
+    'cigarette smoking during the 3 months before',
+    'cigarette smoking during the last 3 months',
+    'cigarette smoking postpartum',
+    'e-cigarette use during the 3 months before',
+    'e-cigarette use during the last 3 months',
+    'hookah',
+    'heavy drinking',
+    'ipv during the 12 months before',
+    'ipv during pregnancy',
+    'depression in the 3 months before',
+    'depression during pregnancy',
+    'postpartum depressive symptoms',
+    'health care visit',
+    'prenatal care in 1st trimester',
+    'flu shot',
+    'maternal postpartum checkup',
+    'mistimed',
+    'unwanted pregnancy',
+    'unsure whether wanted pregnancy',
+    'intended pregnancy',
+    'postpartum contraception',
+    'sterilization',
+    'long-acting reversible',
+    'moderately effective',
+    'least effective',
+    'teeth cleaned',
+    'private insurance',
+    'medicaid',
+    'no insurance',
+    'private insurance',
+    'medicaid',
+    'no insurance',
+    'private insurance',
+    'medicaid',
+    'no insurance',
+    'laid on back to sleep',
+    'ever breastfed',
+    'breastfeeding at 8 weeks',
+)
 
 
 def _get_geo_map() -> dict:
@@ -77,16 +124,30 @@ def _parse_float(val) -> float | None:
 
 
 def _validate_sheet_headers(ws, year: str) -> None:
-    """Validates that sheet columns match expected indicator layout on rows 4 and 5."""
+    """Validates that sheet columns match expected indicator layout on rows 3, 4, and 5."""
+    if ws.max_column != 211:
+        raise ValueError(
+            f"Header validation failed in sheet {year}: expected 211 columns, "
+            f"got {ws.max_column}")
+
     for ind_idx in range(len(UNIQUE_STATVARS)):
         base_col = 2 + ind_idx * 5
+        h_ind = str(ws.cell(4, base_col).value or "").lower()
+        kw = _EXPECTED_INDICATOR_KEYWORDS[ind_idx]
+        h_clean_words = set(re.sub(r'[^\w\s]', ' ', h_ind).split())
+        kw_words = set(re.sub(r'[^\w\s]', ' ', kw).split())
+        if not kw_words.issubset(h_clean_words):
+            raise ValueError(
+                f"Header validation failed in sheet {year} at col {base_col}: "
+                f"expected indicator matching '{kw}', got '{h_ind}'")
+
         h_denom = str(ws.cell(5, base_col).value or "").lower()
         h_pct = str(ws.cell(5, base_col + 2).value or "").lower()
         h_lower = str(ws.cell(5, base_col + 3).value or "").lower()
         h_upper = str(ws.cell(5, base_col + 4).value or "").lower()
 
-        if not ("denominator" in h_denom or "sample size" in h_denom
-                or "n (" in h_denom or h_denom.startswith("n")):
+        if not ("denominator" in h_denom or "sample size" in h_denom or
+                "n (" in h_denom or h_denom.startswith("n")):
             raise ValueError(
                 f"Header validation failed in sheet {year} at col {base_col}: "
                 f"expected Denominator/Sample Size, got '{h_denom}'")
@@ -102,6 +163,23 @@ def _validate_sheet_headers(ws, year: str) -> None:
             raise ValueError(
                 f"Header validation failed in sheet {year} at col {base_col + 4}: "
                 f"expected Upper CI, got '{h_upper}'")
+
+    # Validate Row 3 topic categories for the three health insurance blocks
+    topic_1m = str(ws.cell(3, 152).value or "").lower()
+    topic_prenatal = str(ws.cell(3, 167).value or "").lower()
+    topic_postpartum = str(ws.cell(3, 182).value or "").lower()
+    if "one month before" not in topic_1m:
+        raise ValueError(
+            f"Sheet {year} col 152 topic mismatch: expected 'One Month Before', got '{topic_1m}'"
+        )
+    if "prenatal" not in topic_prenatal:
+        raise ValueError(
+            f"Sheet {year} col 167 topic mismatch: expected 'Prenatal', got '{topic_prenatal}'"
+        )
+    if "postpartum" not in topic_postpartum:
+        raise ValueError(
+            f"Sheet {year} col 182 topic mismatch: expected 'Postpartum', got '{topic_postpartum}'"
+        )
 
 
 def prams(input_files: list, years: list = None) -> pd.DataFrame:
@@ -136,8 +214,7 @@ def prams(input_files: list, years: list = None) -> pd.DataFrame:
 
         for year in target_sheets:
             ws = wb[year]
-            logging.info("Processing sheet year %s (%d rows)", year,
-                         ws.max_row)
+            logging.info("Processing sheet year %s (%d rows)", year, ws.max_row)
             _validate_sheet_headers(ws, year)
 
             for r in range(6, ws.max_row + 1):
@@ -183,24 +260,32 @@ def prams(input_files: list, years: list = None) -> pd.DataFrame:
                     val_lower = _parse_float(ws.cell(r, base_col + 3).value)
                     if val_lower is not None:
                         records.append({
-                            'Geo': geo,
+                            'Geo':
+                                geo,
                             'SV':
-                            f'ConfidenceIntervalLowerLimit_Count{base_sv}',
-                            'Year': str(year),
-                            'Observation': str(val_lower),
-                            'ScalingFactor': 100.0
+                                f'ConfidenceIntervalLowerLimit_Count{base_sv}',
+                            'Year':
+                                str(year),
+                            'Observation':
+                                str(val_lower),
+                            'ScalingFactor':
+                                100.0
                         })
 
                     # 4. Upper 95% Confidence Interval (col + 4)
                     val_upper = _parse_float(ws.cell(r, base_col + 4).value)
                     if val_upper is not None:
                         records.append({
-                            'Geo': geo,
+                            'Geo':
+                                geo,
                             'SV':
-                            f'ConfidenceIntervalUpperLimit_Count{base_sv}',
-                            'Year': str(year),
-                            'Observation': str(val_upper),
-                            'ScalingFactor': 100.0
+                                f'ConfidenceIntervalUpperLimit_Count{base_sv}',
+                            'Year':
+                                str(year),
+                            'Observation':
+                                str(val_upper),
+                            'ScalingFactor':
+                                100.0
                         })
 
     df = pd.DataFrame(records)
@@ -255,6 +340,11 @@ class USPrams:
                 statVar = insurance = time = cigarettes = prop
                 for old, new in _PROP.items():
                     statVar = statVar.replace(old, new)
+                clean_prop = prop
+                for prefix in ("SampleSize_Count", "Percent",
+                               "ConfidenceIntervalLowerLimit_Count",
+                               "ConfidenceIntervalUpperLimit_Count"):
+                    clean_prop = clean_prop.replace(prefix, "")
                 for old, new in _INSURANCE.items():
                     insurance = insurance.replace(old, new)
                 for old, new in _TIME.items():
@@ -308,12 +398,12 @@ class USPrams:
                     pvs.append(f"mothersHealthPrevention: dcs:{statVar}")
                     pvs.append(f"healthPreventionActionFrequency: dcs:{time}")
 
-                if "Underweight" in prop or "Overweight" in prop or\
+                elif "Underweight" in prop or "Overweight" in prop or\
                     "Obese" in prop:
                     sv_pvs["mothersHealthBehavior"] = f"dcs:{statVar}"
                     pvs.append(f"mothersHealthBehavior: dcs:{statVar}")
 
-                if "HealthCareVisit12MonthsBeforePregnancy" in prop or\
+                elif "HealthCareVisit12MonthsBeforePregnancy" in prop or\
                         "PrenatalCareInFirstTrimester" in prop or\
                         "FluShot12MonthsBeforeDelivery" in prop or\
                         "MaternalCheckupPostpartum" in prop or\
@@ -354,16 +444,16 @@ class USPrams:
                     "UnwantedPregnancy" in prop or\
                     "UnsureIfWantedPregnancy" in prop or\
                      "IntendedPregnancy" in prop:
-                    sv_pvs["pregnancyIntention"] = f"dcs:{cigarettes}"
-                    pvs.append(f"pregnancyIntention: dcs:{cigarettes}")
+                    sv_pvs["pregnancyIntention"] = f"dcs:{clean_prop}"
+                    pvs.append(f"pregnancyIntention: dcs:{clean_prop}")
 
                 elif "AnyPostpartumFamilyPlanning" in prop or\
                     "MaleOrFemaleSterilization" in prop or\
                     "LongActingReversibleContraceptiveMethods" in prop or\
                     "ModeratelyEffectiveContraceptiveMethods" in prop or\
                     "LeastEffectiveContraceptiveMethods" in prop:
-                    sv_pvs["postpartumFamilyPlanning"] = f"dcs:{cigarettes}"
-                    pvs.append(f"postpartumFamilyPlanning: dcs:{cigarettes}")
+                    sv_pvs["postpartumFamilyPlanning"] = f"dcs:{clean_prop}"
+                    pvs.append(f"postpartumFamilyPlanning: dcs:{clean_prop}")
 
                 elif "CDC_SelfReportedDepression3MonthsBeforePregnancy" in prop\
                      or "CDC_SelfReportedDepressionDuringPregnancy" in prop or\
@@ -407,18 +497,23 @@ class USPrams:
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "BabyMostOftenLaidOnBackToSleep" in prop:
-                    sv_pvs["infantSleepPractice"] = f"dcs:{cigarettes}"
-                    pvs.append(f"infantSleepPractice: dcs:{cigarettes}")
+                    sv_pvs["infantSleepPractice"] = f"dcs:{clean_prop}"
+                    pvs.append(f"infantSleepPractice: dcs:{clean_prop}")
 
                 elif "EverBreastfed" in prop:
-                    sv_pvs["breastFeedingPractice"] = f"dcs:{cigarettes}"
-                    pvs.append(f"breastFeedingPractice: dcs:{cigarettes}")
+                    sv_pvs["breastFeedingPractice"] = f"dcs:{clean_prop}"
+                    pvs.append(f"breastFeedingPractice: dcs:{clean_prop}")
 
                 elif "AnyBreastfeedingAt8Weeks" in prop:
-                    sv_pvs["breastFeedingPractice"] = f"dcs:{cigarettes}"
+                    sv_pvs["breastFeedingPractice"] = f"dcs:{clean_prop}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
-                    pvs.append(f"breastFeedingPractice: dcs:{cigarettes}")
+                    pvs.append(f"breastFeedingPractice: dcs:{clean_prop}")
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
+
+                else:
+                    raise ValueError(
+                        f"Unrecognized StatVar indicator property: '{prop}' (from '{sv}')"
+                    )
 
             resolved_dcid = get_statvar_dcid(sv_pvs)
             dcid_nodes[dcid] = resolved_dcid
@@ -446,23 +541,21 @@ class USPrams:
             os.makedirs(output_path, exist_ok=True)
 
         updated_sv = self._generate_mcf(sv_names, self.mcf_file_path)
-        unmapped = set(df["SV"]) - set(updated_sv.keys())
-        if unmapped:
-            unmapped_list = sorted(list(unmapped))
-            logging.error("Unmapped Statistical Variables detected: %s",
-                          unmapped_list)
-            raise ValueError(
-                f"Unmapped Statistical Variables detected: {unmapped_list}")
-
         df["SV"] = df["SV"].map(updated_sv)
+        if df["SV"].isna().any():
+            unmapped = sorted(df[df["SV"].isna()]["SV"].unique().tolist())
+            logging.error("Unmapped Statistical Variables detected: %s",
+                          unmapped)
+            raise ValueError(
+                f"Unmapped Statistical Variables detected: {unmapped}")
 
         self._generate_tmcf()
         df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])
         dup_count = df.duplicated(subset=['Geo', 'SV', 'Year']).sum()
         if dup_count > 0:
-            logging.warning(
-                "Dropping %d duplicate observations (keeping last)", dup_count)
+            logging.warning("Dropping %d duplicate observations (keeping last)",
+                            dup_count)
         df = df.drop_duplicates(subset=['Geo', 'SV', 'Year'], keep='last')
         df = df.sort_values(by=['Geo', 'SV', 'Year'])
 

@@ -70,8 +70,7 @@ class TestProcess(unittest.TestCase):
         Tests whether generated MCF and TMCF match expected files.
         """
         expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.mcf")
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "PRAMS.tmcf")
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="utf-8") as expected_mcf_file:
@@ -145,15 +144,71 @@ class TestProcess(unittest.TestCase):
 
     def test_header_validation_detects_layout_change(self):
         """
-        Verifies that unexpected sheet headers raise ValueError.
+        Verifies that unexpected sheet headers (row 3, 4, 5, or column count) raise ValueError.
         """
         import openpyxl
+        # 1. Invalid column count
         wb = openpyxl.Workbook()
         ws = wb.active
         ws.title = "2020"
-        ws.cell(5, 2, value="Invalid Column")
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, "expected 211 columns"):
             _validate_sheet_headers(ws, "2020")
+
+        # 2. Valid sheet passes validation
+        test_file = os.path.join(TEST_DATASET_DIR,
+                                 'PRAMS-MCH-Indicators-Test.xlsx')
+        real_wb = openpyxl.load_workbook(test_file, data_only=True)
+        valid_ws = real_wb['2016']
+        _validate_sheet_headers(valid_ws, "2016")
+
+        # 3. Row 4 indicator header change raises ValueError
+        orig_val = valid_ws.cell(4, 2).value
+        valid_ws.cell(4, 2, value="Unexpected Indicator Name")
+        with self.assertRaisesRegex(ValueError, "expected indicator matching"):
+            _validate_sheet_headers(valid_ws, "2016")
+        valid_ws.cell(4, 2, value=orig_val)
+
+        # 4. Row 5 subheader change raises ValueError
+        orig_sub = valid_ws.cell(5, 2).value
+        valid_ws.cell(5, 2, value="Invalid Subheader")
+        with self.assertRaisesRegex(ValueError, "expected Denominator"):
+            _validate_sheet_headers(valid_ws, "2016")
+        valid_ws.cell(5, 2, value=orig_sub)
+
+        # 5. Row 3 topic header change raises ValueError
+        orig_topic = valid_ws.cell(3, 152).value
+        valid_ws.cell(3, 152, value="Wrong Topic")
+        with self.assertRaisesRegex(ValueError, "topic mismatch"):
+            _validate_sheet_headers(valid_ws, "2016")
+        valid_ws.cell(3, 152, value=orig_topic)
+
+    def test_unrecognized_statvar_raises_value_error(self):
+        """
+        Verifies that unmapped or unrecognized StatVar names raise ValueError.
+        """
+        base = USPrams([])
+        with self.assertRaises(ValueError):
+            base._generate_mcf(["SampleSize_CountUnknownIndicatorXYZ"],
+                               os.path.join(self.tmp_dir.name, "test.mcf"))
+
+    def test_discover_excel_url_fails_fast_on_error(self):
+        """
+        Verifies that discover_excel_url raises RuntimeError when discovery fails
+        unless allow_fallback is True.
+        """
+        from unittest.mock import patch
+        from download_input_files import discover_excel_url, _FALLBACK_URL
+
+        with patch("download_input_files._get_session") as mock_session:
+            mock_resp = mock_session.return_value.get.return_value
+            mock_resp.text = "<html>No links here</html>"
+            mock_resp.raise_for_status.return_value = None
+
+            with self.assertRaises(RuntimeError):
+                discover_excel_url(allow_fallback=False)
+
+            fallback = discover_excel_url(allow_fallback=True)
+            self.assertEqual(fallback, _FALLBACK_URL)
 
 
 if __name__ == '__main__':

@@ -71,7 +71,7 @@ scripts/cdc_prams/
 
 - **Python Dependencies**:
   ```bash
-  pip install openpyxl pandas absl-py requests urllib3
+  pip install openpyxl pandas numpy absl-py requests urllib3
   ```
 
 ---

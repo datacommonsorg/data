@@ -32,6 +32,9 @@ flags.DEFINE_string(
     "Directory path where input_files/ folder will be populated")
 flags.DEFINE_boolean("overwrite", False,
                      "Whether to force re-download existing files")
+flags.DEFINE_boolean(
+    "use_fallback_url", False,
+    "Whether to allow falling back to hardcoded URL if dynamic discovery fails")
 
 _CDC_LANDING_PAGE = (
     "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html")
@@ -39,10 +42,10 @@ _FALLBACK_URL = ("https://www.cdc.gov/prams/media/files/2024/08/"
                  "PRAMS-MCH-Indicators-2016-2022-508.xlsx")
 
 
-def discover_excel_url() -> str:
+def discover_excel_url(allow_fallback: bool = False) -> str:
     """
     Dynamically discovers the latest consolidated multi-year PRAMS Excel workbook
-    URL from the CDC landing page.
+    URL from the CDC landing page. Fails fast if discovery fails unless fallback is allowed.
     """
     logging.info("Checking CDC landing page for latest Excel release: %s",
                  _CDC_LANDING_PAGE)
@@ -59,30 +62,44 @@ def discover_excel_url() -> str:
             logging.info("Discovered latest PRAMS workbook URL (%s-%s): %s",
                          latest_match[1], latest_match[2], found_url)
             return found_url
-        logging.error(
-            "Dynamic discovery failed to match any multi-year PRAMS Excel URLs on "
-            "%s; falling back to: %s", _CDC_LANDING_PAGE, _FALLBACK_URL)
+        if allow_fallback:
+            logging.warning(
+                "Dynamic discovery failed to match any multi-year PRAMS Excel URLs on "
+                "%s; falling back to: %s", _CDC_LANDING_PAGE, _FALLBACK_URL)
+            return _FALLBACK_URL
+        raise RuntimeError(
+            f"Dynamic discovery failed to match any multi-year PRAMS Excel URLs on {_CDC_LANDING_PAGE}"
+        )
     except Exception as exc:
-        logging.error(
-            "Dynamic discovery failed with error (%s); falling back to: %s",
-            exc, _FALLBACK_URL)
-    return _FALLBACK_URL
+        if allow_fallback:
+            logging.warning(
+                "Dynamic discovery failed with error (%s); falling back to: %s",
+                exc, _FALLBACK_URL)
+            return _FALLBACK_URL
+        raise RuntimeError(
+            f"Dynamic discovery failed to find latest PRAMS Excel workbook on {_CDC_LANDING_PAGE}: {exc}"
+        ) from exc
 
 
-def download_files(download_directory: str, overwrite: bool = False) -> None:
+def download_files(download_directory: str,
+                   overwrite: bool = False,
+                   use_fallback_url: bool = False) -> None:
     """
     Downloads the consolidated PRAMS MCH Indicators Excel file.
 
     Args:
         download_directory (str): Base directory where input_files will be saved.
         overwrite (bool): If True, re-downloads existing files.
+        use_fallback_url (bool): If True, allows falling back to hardcoded URL.
     """
-    url = discover_excel_url()
+    url = discover_excel_url(allow_fallback=use_fallback_url)
     download_file([url], download_directory, overwrite=overwrite)
 
 
 def main(_):
-    download_files(_FLAGS.download_directory, overwrite=_FLAGS.overwrite)
+    download_files(_FLAGS.download_directory,
+                   overwrite=_FLAGS.overwrite,
+                   use_fallback_url=_FLAGS.use_fallback_url)
 
 
 if __name__ == '__main__':
