@@ -1,0 +1,10 @@
+Node: dcid:SustainableDevelopmentGoal
+typeOf: dcs:Class
+subClassOf: schema:Intangible
+
+Node: dcid:IndexScore_SustainableDevelopmentGoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:SustainableDevelopmentGoal
+measuredProperty: dcs:indexScore
+statType: dcs:measuredValue
+name: "Sustainable Development Goal Index Score"

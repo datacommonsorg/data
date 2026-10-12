@@ -349,10 +349,31 @@ python3 stat_var_processor.py \
 
 This import uses `validation_config.json` with:
 1. **`DELETED_RECORDS_PERCENT: 0.1` (`check_deleted_records_percent`)**:
-   - **Rationale & Ingestion Strategy**: The canonical threshold is strictly set to `0.1%` (`threshold: 0.1`), adhering to the Master CRA standard ceiling (threshold <= 0.5%). During the initial baseline rollout, one-time deletions occur across 7 sub-imports (up to **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in `agriculture_output.csv`, **3.15%** in `state_wise_expenditure_on_relief_on_natural_calamities_output.csv`, **1.39%** in `state_wise_installed_capacity_of_power_output.csv`, **0.28%** in `state_wise_tree_cover_output.csv`, **0.16%** in `state_wise_forest_cover_output.csv`, and **0.15%** in `state_wise_electricity_transmission_distribution_losses_output.csv`). These one-time deletions are coordinated via a one-time baseline reset / staging ingestion override with tech leads to promote the new output to `latest_version`. All subsequent automated runs will strictly adhere to the `0.1%` threshold against the updated baseline. Root causes for the one-time deletions are:
-     1. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from `dcid:wikidataId/Q1174` (Haryana) to the dedicated IMD sub-division DCID `dcid:HaryanaDelhiChandigarh` (24 records / 6.94% in rainfall), and fixing `NCT of Delhi` from `wikidataId/Q1352` (erroneously Chennai) to `wikidataId/Q1353` (resolving all Delhi records to canonical `wikidataId/Q1353`).
-     2. **Unit Schema Corrections**: Changing `Annual_Amount_FarmInventory_Fruits` in `agriculture_pvmap.csv` from `Hectare` to `MetricTon` (309 records in agriculture, where Import Differ classifies old unit nodes as deleted and new unit nodes as added).
-     3. **Official RBI Source Revisions**: Retrospective updates by RBI to provisional figures for recent fiscal years (`2022-03` through `2024-03`) and UT consolidations (`Dadra & Nagar Haveli and Daman & Diu`).
+   - **Rationale & Ingestion Strategy**: The canonical threshold is strictly set to `0.1%`
+     (`threshold: 0.1`), adhering to the Master CRA standard ceiling (threshold <= 0.5%).
+     During the initial baseline rollout, one-time deletions occur across 7 sub-imports
+     (up to **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in
+     `agriculture_output.csv`, **3.15%** in
+     `state_wise_expenditure_on_relief_on_natural_calamities_output.csv`, **1.39%** in
+     `state_wise_installed_capacity_of_power_output.csv`, **0.28%** in
+     `state_wise_tree_cover_output.csv`, **0.16%** in `state_wise_forest_cover_output.csv`,
+     and **0.15%** in `state_wise_electricity_transmission_distribution_losses_output.csv`).
+     These one-time deletions are coordinated via a one-time baseline reset / staging
+     ingestion override with tech leads to promote the new output to `latest_version`.
+     All subsequent automated runs will strictly adhere to the `0.1%` threshold against
+     the updated baseline. Root causes for the one-time deletions are:
+     1. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from
+        `dcid:wikidataId/Q1174` (Haryana) to the dedicated IMD sub-division DCID
+        `dcid:HaryanaDelhiChandigarh` (24 records / 6.94% in rainfall), and fixing
+        `NCT of Delhi` from `wikidataId/Q1352` (erroneously Chennai) to `wikidataId/Q1353`
+        (resolving all Delhi records to canonical `wikidataId/Q1353`).
+     2. **Unit Schema Corrections**: Changing `Annual_Amount_FarmInventory_Fruits` in
+        `agriculture_pvmap.csv` from `Hectare` to `MetricTon` (309 records in agriculture,
+        where Import Differ classifies old unit nodes as deleted and new unit nodes as
+        added).
+     3. **Official RBI Source Revisions**: Retrospective updates by RBI to provisional
+        figures for recent fiscal years (`2022-03` through `2024-03`) and UT consolidations
+        (`Dadra & Nagar Haveli and Daman & Diu`).
    - **Technical Breakdown of Deletions**:
      | Category | Output File | Deletion % / Records | Root Cause |
      |---|---|---|---|
