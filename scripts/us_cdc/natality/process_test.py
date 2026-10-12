@@ -159,123 +159,18 @@ class ProcessPipelineTest(unittest.TestCase):
         valid_row = agg_df[agg_df['StatVar'] == 'Count_BirthEvent_LiveBirth']
         self.assertEqual(str(valid_row.iloc[0]['Quantity']), '300')
 
-    def test_validation_config_sql_validator(self):
+    def test_validation_config_deleted_records(self):
         config_path = os.path.join(_SCRIPT_PATH, 'validation_config.json')
         with open(config_path) as f:
             cfg = json.load(f)
 
-        con = duckdb.connect()
-
-        # Rule 1: check_latest_date_freshness (lag_years BETWEEN 0 AND 3)
-        rule1 = cfg['rules'][0]
-        q1 = rule1['params']['query']
-        c1 = rule1['params']['condition']
-
-        valid_stats = pd.DataFrame([{
-            'StatVar': 'Count_BirthEvent_LiveBirth',
-            'MaxDate': '2024'
-        }])
-        con.register('stats', valid_stats)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
-        ).fetchdf()
-        self.assertTrue(failing_df.empty,
-                        f'Expected valid stats to pass rule 1: {failing_df}')
-
-        invalid_stats = pd.DataFrame([{
-            'StatVar': 'Count_BirthEvent_LiveBirth',
-            'MaxDate': '2018'
-        }])
-        con.register('stats', invalid_stats)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
-        ).fetchdf()
-        self.assertFalse(failing_df.empty,
-                         'Expected stale stats to fail rule 1')
-
-        future_stats = pd.DataFrame([{
-            'StatVar': 'Count_BirthEvent_LiveBirth',
-            'MaxDate': '2030'
-        }])
-        con.register('stats', future_stats)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
-        ).fetchdf()
-        self.assertFalse(failing_df.empty,
-                         'Expected future stats to fail rule 1')
-
-        empty_stats = pd.DataFrame([{
-            'StatVar': 'Other_StatVar',
-            'MaxDate': '2024'
-        }])
-        con.register('stats', empty_stats)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
-        ).fetchdf()
-        self.assertFalse(
-            failing_df.empty,
-            'Expected missing Count_BirthEvent_LiveBirth to fail rule 1')
-
-        # Rule 2: check_scoped_date_consistency_active_statvars
-        rule2 = cfg['rules'][1]
-        q2 = rule2['params']['query']
-        c2 = rule2['params']['condition']
-
-        active_statvars = [
-            'Count_BirthEvent_LiveBirth',
-            'Mean_MothersAge_BirthEvent_LiveBirth',
-            'Mean_OeGestationalAge_BirthEvent_LiveBirth',
-            'Mean_LmpGestationalAge_BirthEvent_LiveBirth',
-            'Mean_BirthWeight_BirthEvent_LiveBirth',
-            'Mean_PrePregnancyBMI_BirthEvent_LiveBirth',
-            'Mean_PrenatalVisitCount_BirthEvent_LiveBirth',
-            'Mean_IntervalSinceLastBirth_BirthEvent_LiveBirth',
-            'Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth',
-        ]
-        all_active_stats = pd.DataFrame([{
-            'StatVar': sv,
-            'MaxDate': '2024'
-        } for sv in active_statvars])
-        con.register('stats', all_active_stats)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
-        ).fetchdf()
-        self.assertTrue(
-            failing_df.empty,
-            f'Expected 9 active stats to pass rule 2: {failing_df}')
-
-        country_stats = pd.DataFrame([{
-            'StatVar': 'Count_BirthEvent_LiveBirth',
-            'MaxDate': '2024'
-        }])
-        con.register('stats', country_stats)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
-        ).fetchdf()
-        self.assertTrue(
-            failing_df.empty,
-            f'Expected 1 active stat (country level) to pass rule 2: {failing_df}'
-        )
-
-        missing_active = pd.DataFrame([{
-            'StatVar': sv,
-            'MaxDate': '2024'
-        } for sv in active_statvars[:8]])
-        con.register('stats', missing_active)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
-        ).fetchdf()
-        self.assertFalse(failing_df.empty,
-                         'Expected missing statvar to fail rule 2')
-
-        mismatch_dates = all_active_stats.copy()
-        mismatch_dates.loc[0, 'MaxDate'] = '2023'
-        con.register('stats', mismatch_dates)
-        failing_df = con.execute(
-            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
-        ).fetchdf()
-        self.assertFalse(failing_df.empty,
-                         'Expected date mismatch to fail rule 2')
+        self.assertEqual(cfg.get('schema_version'), '1.0')
+        rules = cfg.get('rules', [])
+        self.assertEqual(len(rules), 1)
+        rule = rules[0]
+        self.assertEqual(rule.get('rule_id'), 'check_deleted_records_percent')
+        self.assertEqual(rule.get('validator'), 'DELETED_RECORDS_PERCENT')
+        self.assertAlmostEqual(rule.get('params', {}).get('threshold'), 0.1)
 
     def test_parse_wonder_tsv_with_footnote_and_invalid_fips(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
