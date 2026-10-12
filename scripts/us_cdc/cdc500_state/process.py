@@ -53,6 +53,9 @@ WITH cdc_sv AS (
   FROM `datcom-store.spanner_dc_graph_prod_snap_latest.TimeSeries`
   WHERE JSON_VALUE(facet.provenance) = 'dc/base/CDC500'
     AND variable_measured LIKE 'Percent_%'
+      -- Exclude 4 cancer screening StatVars with custom age brackets (50To74Years,
+      -- 21To65Years, 50-75Years) that lack matching single-variable population
+      -- denominators in CensusACS5YearSurvey (see b/530863116).
     AND variable_measured NOT IN (
       'Percent_Person_50To74Years_Female_ReceivedMammography',
       'Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening',
@@ -181,8 +184,8 @@ def run_process(client: bigquery.Client,
         with open(temp_file, 'r', encoding='utf-8') as f:
             written_lines = sum(1 for _ in f) - 1
         if written_lines != len(df):
-            logging.error("Written record count %d != expected %d",
-                          written_lines, len(df))
+            logging.error("Written record count %d != expected %d for file %s",
+                          written_lines, len(df), temp_file)
             raise ValueError(
                 f"Output file {temp_file} truncated: wrote {written_lines}, "
                 f"expected {len(df)}")
