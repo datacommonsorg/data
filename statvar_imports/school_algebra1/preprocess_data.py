@@ -116,7 +116,14 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
         logging.info(f"Filtered {filename}: retained {len(keep_cols)} cols, "
                      f"dropped {dropped_count} unmapped cols.")
 
-    return df[keep_cols]
+    df = df[keep_cols]
+    data_cols = [c for c in keep_cols if c.upper() not in _IDENTIFIER_COLS]
+    if data_cols:
+        has_valid = (df[data_cols].apply(pd.to_numeric, errors='coerce') >=
+                     0).any(axis=1)
+        df = df[has_valid].copy()
+
+    return df
 
 
 def process_file(filepath: str, mapped_cols: set):
