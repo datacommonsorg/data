@@ -38,12 +38,18 @@ import shutil
 import sys
 import tempfile
 import time
-import urllib.error
-import urllib.request
 import zipfile
 from absl import app
 from absl import flags
 from absl import logging
+import requests
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+from util.download_util_script import download_file
 
 FLAGS = flags.FLAGS
 
@@ -87,7 +93,9 @@ flags.DEFINE_boolean(
 BASE_URL = 'https://caaspp-elpac.ets.org/caaspp/researchfiles/'
 USER_AGENT = 'Mozilla/5.0 (DataCommons Ingestion Bot)'
 
-# Known historical official zip filename per year: (all_subgroups_zip, all_students_zip)
+# Known historical official zip filename per year: (all_subgroups_zip, all_students_zip).
+# Future years (>2025) are discovered dynamically by get_all_available_years() and
+# discover_year_urls(), which probe the CAASPP portal from v4 down to v1.
 KNOWN_YEAR_URL_MAP = {
     2015: ('sb_ca2015_all_csv_v3.zip', 'sb_ca2015_1_csv_v3.zip'),
     2016: ('sb_ca2016_all_csv_v3.zip', 'sb_ca2016_1_csv_v3.zip'),
@@ -121,22 +129,22 @@ def probe_url_exists(url: str, timeout: int = 10, max_retries: int = 3) -> bool:
     """Checks if a remote URL exists using an HTTP HEAD probe with retries for transient errors."""
     for attempt in range(max_retries):
         try:
-            req = urllib.request.Request(url,
-                                         headers={'User-Agent': USER_AGENT},
-                                         method='HEAD')
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return resp.status == 200
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
+            resp = requests.head(url,
+                                 headers={'User-Agent': USER_AGENT},
+                                 allow_redirects=True,
+                                 timeout=timeout)
+            if resp.status_code == 200:
+                return True
+            if resp.status_code == 404:
                 return False
-            logging.warning('HTTP error %d probing %s (attempt %d/%d)', e.code,
-                            url, attempt + 1, max_retries)
-            if attempt < max_retries - 1 and e.code in (429, 500, 502, 503,
-                                                        504):
+            logging.warning('HTTP error %d probing %s (attempt %d/%d)',
+                            resp.status_code, url, attempt + 1, max_retries)
+            if attempt < max_retries - 1 and resp.status_code in (429, 500, 502,
+                                                                  503, 504):
                 time.sleep(2**attempt)
                 continue
             return False
-        except urllib.error.URLError as e:
+        except requests.exceptions.RequestException as e:
             logging.warning('Network error probing %s (attempt %d/%d): %s', url,
                             attempt + 1, max_retries, e)
             if attempt < max_retries - 1:
@@ -149,47 +157,14 @@ def probe_url_exists(url: str, timeout: int = 10, max_retries: int = 3) -> bool:
     return False
 
 
-def download_url_with_retries(url: str,
-                              target_file: str,
-                              timeout: int = 180,
-                              max_retries: int = 3) -> None:
-    """Downloads a remote URL to target_file atomically with retry and exponential backoff."""
-    target_dir = os.path.dirname(os.path.abspath(target_file))
-    os.makedirs(target_dir, exist_ok=True)
-
-    for attempt in range(max_retries):
-        temp_file = tempfile.NamedTemporaryFile(dir=target_dir,
-                                                suffix='.zip.tmp',
-                                                delete=False)
-        try:
-            req = urllib.request.Request(url,
-                                         headers={'User-Agent': USER_AGENT})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                shutil.copyfileobj(resp, temp_file)
-            temp_file.flush()
-            os.fsync(temp_file.fileno())
-            temp_file.close()
-            os.replace(temp_file.name, target_file)
-            return
-        except Exception as e:
-            temp_file.close()
-            if os.path.exists(temp_file.name):
-                os.unlink(temp_file.name)
-            logging.warning('Download attempt %d/%d failed for %s: %s',
-                            attempt + 1, max_retries, url, e)
-            if attempt < max_retries - 1:
-                time.sleep(2**attempt)
-            else:
-                raise
-
-
 def discover_year_urls(year: int) -> tuple[str, str] | None:
     """Discovers or resolves zip filenames for a given year."""
     if year in KNOWN_YEAR_URL_MAP:
         return KNOWN_YEAR_URL_MAP[year]
 
-    # For subsequent calendar years, probe standard version naming (v1 through v4)
-    for v in range(1, 5):
+    # For subsequent calendar years, probe standard version naming in descending
+    # order (v4 down to v1) so the highest available revision is selected.
+    for v in range(4, 0, -1):
         all_groups = f'sb_ca{year}_all_csv_v{v}.zip'
         all_students = f'sb_ca{year}_1_csv_v{v}.zip'
         if probe_url_exists(BASE_URL + all_students):
@@ -338,7 +313,11 @@ def download_and_process_year(
             except OSError:
                 pass
         logging.info('Fetching Year %d raw zip: %s', year, url)
-        download_url_with_retries(url, raw_zip_path)
+        if not download_file(url=url,
+                             output_folder=raw_dir,
+                             unzip=False,
+                             headers={'User-Agent': USER_AGENT}):
+            raise RuntimeError(f'Failed to download {url}')
     else:
         logging.info('Year %d: Using preserved raw archive: %s', year,
                      raw_zip_path)
@@ -450,7 +429,8 @@ def main(argv):
 
     # Combine into master multi-year file if all years or multiple years were processed.
     # Single-year downloads do not overwrite the consolidated master dataset unless requested.
-    if FLAGS.years.strip().lower() in ('all', '*') or len(all_normalized_files) > 1:
+    if FLAGS.years.strip().lower() in ('all',
+                                       '*') or len(all_normalized_files) > 1:
         master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
         temp_master = tempfile.NamedTemporaryFile('w',
                                                   dir=output_dir,

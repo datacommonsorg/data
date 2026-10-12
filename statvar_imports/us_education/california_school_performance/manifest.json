@@ -21,12 +21,10 @@
             "source_files": [
                 "raw_files/*.zip",
                 "input_files/*.txt",
-                "golden_data/*.csv",
                 "counters/*.csv",
                 "config/*.csv"
             ],
-            "cron_schedule": "0 0 1 10 *",
-            "validation_config_file": "validation_config.json"
+            "cron_schedule": "0 0 1 12 *"
         }
     ]
 }

@@ -42,6 +42,29 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
         self.assertEqual(urls_2024,
                          ('sb_ca2024_all_csv_v1.zip', 'sb_ca2024_1_csv_v1.zip'))
 
+    def test_discover_year_urls_probes_descending(self):
+        """Verify future years probe versions in descending order (v4 down to v1)."""
+        probed_urls = []
+
+        def fake_probe(url):
+            probed_urls.append(url)
+            # Simulate both v2 and v1 existing on the server; v2 should be picked first.
+            return url.endswith('_v2.zip') or url.endswith('_v1.zip')
+
+        with patch.object(download, 'probe_url_exists', side_effect=fake_probe):
+            urls_2027 = download.discover_year_urls(2027)
+
+        self.assertEqual(urls_2027,
+                         ('sb_ca2027_all_csv_v2.zip', 'sb_ca2027_1_csv_v2.zip'))
+        self.assertEqual(
+            probed_urls,
+            [
+                f'{download.BASE_URL}sb_ca2027_1_csv_v4.zip',
+                f'{download.BASE_URL}sb_ca2027_1_csv_v3.zip',
+                f'{download.BASE_URL}sb_ca2027_1_csv_v2.zip',
+            ],
+        )
+
     @patch.object(download, 'probe_url_exists', return_value=False)
     def test_download_parse_years(self, _):
         """Verify year string parsing logic for single, list, range, and 'all'."""
@@ -115,7 +138,7 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
                                                  keep_all_entities=True))
         self.assertEqual(len(rows), 2)
 
-    @patch.object(download, 'download_url_with_retries')
+    @patch.object(download, 'download_file')
     def test_corrupt_zip_redownload(self, mock_download):
         """Verify that a corrupted or truncated raw zip is detected and re-downloaded."""
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -126,8 +149,9 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
                 f.write('corrupted non-zip content')
             self.assertTrue(os.path.exists(corrupt_zip))
 
-            def side_effect(url, dest_path):
+            def side_effect(url, output_folder, unzip=False, headers=None):
                 import zipfile
+                dest_path = os.path.join(output_folder, os.path.basename(url))
                 with zipfile.ZipFile(dest_path, 'w') as z:
                     z.writestr(
                         'sb_ca2024_1_csv_v1.txt',
@@ -136,14 +160,21 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
                         'Percentage Standard Met^Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
                         '00^00000^0000000^4^2024^1^1^3^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
                     )
+                return True
 
             mock_download.side_effect = side_effect
 
-            with patch.object(download, 'discover_year_urls', return_value=('sb_ca2024_all_csv_v1.zip', 'sb_ca2024_1_csv_v1.zip')):
-                out = download.download_and_process_year(2024, tmp_dir, raw_dir, 'all_students', False)
+            with patch.object(download,
+                              'discover_year_urls',
+                              return_value=('sb_ca2024_all_csv_v1.zip',
+                                            'sb_ca2024_1_csv_v1.zip')):
+                out = download.download_and_process_year(2024,
+                                                         'all_students',
+                                                         tmp_dir,
+                                                         False,
+                                                         raw_dir=raw_dir)
                 mock_download.assert_called_once()
                 self.assertTrue(os.path.exists(out))
-
 
 
 if __name__ == '__main__':

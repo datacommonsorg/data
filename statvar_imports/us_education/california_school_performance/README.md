@@ -20,9 +20,6 @@ california_school_performance/
 │   └── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
 ├── counters/
 │   └── california_school_performance_counters.csv     # Transformation counter summary
-├── golden_data/
-│   ├── golden_observations.csv                        # Critical golden entity/place observations
-│   └── golden_summary_report.csv                      # Golden summary report for statvar validation
 ├── test_data/                                         # Test fixtures for E2E validation
 │   ├── sample_input.txt                               # Sample raw CAASPP input records
 │   ├── sample_state_output.csv                        # Expected sample CSV observations
