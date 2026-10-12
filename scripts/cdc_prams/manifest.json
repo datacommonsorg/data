@@ -27,8 +27,7 @@
                 "cpu": 1,
                 "memory": 4,
                 "disk": 30
-            },
-            "validation_config_file": "validation_config.json"
+            }
         }
     ]
 }
