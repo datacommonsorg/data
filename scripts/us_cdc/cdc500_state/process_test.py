@@ -470,19 +470,21 @@ class CDC500StateProcessTest(unittest.TestCase):
             by=['observation_date', 'statvar']).reset_index(drop=True)
 
         self.assertEqual(len(result_df), 4)
-        # 2016 row: geoId/15003 included, empty measurementMethod -> 'dcAggregate'
+        # 2016 row: geoId/15003 included, empty measurementMethod -> 'DataCommonsAggregate'
         self.assertEqual(result_df['observation_about'].iloc[0], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[0], '2016')
         self.assertEqual(result_df['statvar'].iloc[0],
                          'Percent_Person_WithArthritis')
-        self.assertEqual(result_df['measurement_method'].iloc[0], 'dcAggregate')
+        self.assertEqual(result_df['measurement_method'].iloc[0],
+                         'DataCommonsAggregate')
         self.assertAlmostEqual(result_df['percent'].iloc[0], 22.5, places=4)
         # 2017 non-BP row: geoId/15003 included
         self.assertEqual(result_df['observation_about'].iloc[1], 'geoId/15')
         self.assertEqual(result_df['observation_date'].iloc[1], '2017')
         self.assertEqual(result_df['statvar'].iloc[1],
                          'Percent_Person_WithArthritis')
-        self.assertEqual(result_df['measurement_method'].iloc[1], 'dcAggregate')
+        self.assertEqual(result_df['measurement_method'].iloc[1],
+                         'DataCommonsAggregate')
         self.assertAlmostEqual(result_df['percent'].iloc[1], 24.0, places=4)
         # 2017 BP row: geoId/15003 excluded, only geoId/1571550 (31.2) included
         self.assertEqual(result_df['observation_about'].iloc[2], 'geoId/15')

@@ -83,13 +83,22 @@ svo_percent AS (
     ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
     AND (
+      -- Filter input entities to 13-char city/CDP DCIDs (geoId/XXXXXXX) before
+      -- rolling up to 8-char state DCIDs (geoId/NN) via SUBSTR(..., 1, 8),
+      -- preventing county (11-char) and tract (17-char) double-counting.
       LENGTH(O.entity1) = 13
       OR (
+        -- Hawaii has no incorporated 13-char municipal cities; Honolulu is a
+        -- consolidated city-county (geoId/15003, 11 chars) in earlier releases.
         O.entity1 = 'geoId/15003'
         AND (
+          -- Scope geoId/15003 to <= 2017: from 2018+, Hawaii is reported under
+          -- 13-char CDPs (e.g. geoId/1571550) captured by LENGTH(O.entity1) = 13.
           O.date <= '2016'
           OR (
             O.date = '2017'
+            -- 2017 odd-year BRFSS BP/Cholesterol modules were backfilled under
+            -- 13-char geoId/1571550; exclude here to avoid double-counting.
             AND NOT REGEXP_CONTAINS(
               O.variable_measured, r'HighBloodPressure|Cholesterol'
             )
@@ -137,7 +146,8 @@ SELECT
   SUBSTR(p.observation_about, 1, 8) AS observation_about,
   p.observation_date,
   COALESCE(
-    'dcAggregate/' || NULLIF(TRIM(p.measurement_method), ''), 'dcAggregate'
+    'dcAggregate/' || NULLIF(TRIM(p.measurement_method), ''),
+    'DataCommonsAggregate'
   ) AS measurement_method,
   SAFE_DIVIDE(
     SUM(SAFE_CAST(c.population AS FLOAT64) * SAFE_CAST(p.percent AS FLOAT64)),
