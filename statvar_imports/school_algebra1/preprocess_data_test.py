@@ -88,6 +88,20 @@ class PreprocessDataTest(unittest.TestCase):
         self.assertEqual(len(result), 1)
         self.assertEqual(result['ncesid'].iloc[0], '010000500870')
 
+    def test_preprocess_dataframe_filters_all_negative_rows(self):
+        df = pd.DataFrame({
+            'COMBOKEY': ['010000500870', '010000500871', '010000500872'],
+            'SCH_ALGENR_G0708_HI_M': ['-9', '0', '-9'],
+            'SCH_ALGPASS_G0708_HI_M': ['-9', '-9', '5'],
+        })
+        mapped_cols = {
+            'YEAR', 'ncesid', 'SCH_ALGENR_G0708_HI_M', 'SCH_ALGPASS_G0708_HI_M'
+        }
+        result = preprocess_data.preprocess_dataframe(
+            df, 'crdc_2023-24_algebra_i.csv', mapped_cols)
+        self.assertEqual(list(result['ncesid']),
+                         ['010000500871', '010000500872'])
+
 
 if __name__ == '__main__':
     unittest.main()
