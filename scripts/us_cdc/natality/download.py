@@ -115,8 +115,7 @@ def download_natality_dataset(driver,
     year_filter = driver.find_elements(By.NAME, 'V_D149.V20')
     if not year_filter:
         raise RuntimeError(
-            'Year selection listbox (V_D149.V20) not found on CDC WONDER form.'
-        )
+            'Year selection listbox (V_D149.V20) not found on CDC WONDER form.')
     year_select = Select(year_filter[0])
     try:
         year_select.deselect_all()
@@ -269,8 +268,7 @@ def download_all(output_dir: str,
                     last_error = e
                     backoff_delay = 5 * (2**(attempt - 1))
                     logging.info(
-                        f'Retrying in {backoff_delay} seconds after backoff...'
-                    )
+                        f'Retrying in {backoff_delay} seconds after backoff...')
                     time.sleep(backoff_delay)
                 finally:
                     if driver:
