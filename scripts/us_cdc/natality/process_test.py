@@ -19,7 +19,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import duckdb
 import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

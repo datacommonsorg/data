@@ -21,7 +21,7 @@ The dataset includes:
 
 ## Prerequisites
 Before running the pipeline locally or in automation, ensure the following dependencies are installed:
-- **Python**: Python 3.10+ with repository dependencies (`pandas`, `absl-py`, `selenium`, `duckdb`).
+- **Python**: Python 3.10+ with repository dependencies (`pandas`, `absl-py`, `selenium`).
 - **Google Chrome**: Google Chrome or Chromium installed on the host system for headless browser operations.
 - **Google Cloud SDK (`gcloud`)**: Configured with read access to `gs://unresolved_mcf/cdc/wonder/natality/` for baseline snapshots.
 
@@ -36,7 +36,7 @@ scripts/us_cdc/natality/
 ├── process.py              # End-to-end data parsing, melting, aggregation, and TMCF generator
 ├── process_test.py         # Unit tests for process.py
 ├── manifest.json           # Import automation specification (Cloud Batch/Scheduler)
-├── validation_config.json  # DuckDB freshness and validation rules
+├── validation_config.json  # Import validation configuration (deleted records threshold)
 └── README.md               # Pipeline documentation
 ```
 

@@ -34,7 +34,6 @@
                     "cleaned_csv": "output/county.csv"
                 }
             ],
-            "validation_config_file": "validation_config.json",
             "cron_schedule": "0 0 1 6 *"
         }
     ]
