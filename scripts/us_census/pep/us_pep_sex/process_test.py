@@ -266,8 +266,7 @@ class TestDownloadAndCacheLifecycle(unittest.TestCase):
             os.utime(cached_file, (0, 0))
 
             files_to_download = [{
-                'download_path':
-                'https://census.gov/nc-est2024-agesex-res.csv'
+                'download_path': 'https://census.gov/nc-est2024-agesex-res.csv'
             }]
 
             with patch.object(sex_proc, '_GCS_FOLDER_PERSISTENT_PATH', gcs_persistent), \

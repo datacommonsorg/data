@@ -148,11 +148,9 @@ class TestProcessExcel2029(unittest.TestCase):
         self.assertIn('2024', years)
         self.assertIn('2025', years)
         self.assertEqual(
-            result[result['Year'] == '2024']['Count_Person'].iloc[0],
-            336000000)
+            result[result['Year'] == '2024']['Count_Person'].iloc[0], 336000000)
         self.assertEqual(
-            result[result['Year'] == '2025']['Count_Person'].iloc[0],
-            337000000)
+            result[result['Year'] == '2025']['Count_Person'].iloc[0], 337000000)
 
     def test_popchg_regex_matches_various_years(self):
         """Tests that regex pattern matches NST-EST<year>-POPCHG2020_<year>.csv for various years."""
@@ -192,8 +190,9 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             dest_file = os.path.join(tmp_dir, 'test.xlsx')
             with self.assertRaises(ValueError) as ctx:
-                download_with_retry.__wrapped__(
-                    session, 'https://census.gov/test.xlsx', dest_file)
+                download_with_retry.__wrapped__(session,
+                                                'https://census.gov/test.xlsx',
+                                                dest_file)
             self.assertIn('HTML error page', str(ctx.exception))
 
     def test_download_with_retry_writes_binary_file(self):
@@ -203,7 +202,7 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
         mock_resp.status_code = 200
         mock_resp.headers = {
             'Content-Type':
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         }
         mock_resp.iter_content.return_value = [b'chunk1', b'chunk2']
         mock_resp.__enter__.return_value = mock_resp
