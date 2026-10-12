@@ -87,6 +87,7 @@
             "source_files": [
                 "input_files/*",
                 "counters/*",
+                "places_resolved.csv",
                 "validation_config.json"
             ],
             "cron_schedule": "0 5 1 1,4,7,10 *",
