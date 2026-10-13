@@ -58,7 +58,8 @@ ENV GOOGLE_CLOUD_LOGGING_MAX_LATENCY=5.0
 ENV GOOGLE_CLOUD_LOGGING_GRACE_PERIOD=30.0
 ENV GRPC_VERBOSITY=ERROR
 
-ADD https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar /import-tool.jar
+ARG CACHE_BUSTER=1
+ADD https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar?cb=${CACHE_BUSTER} /import-tool.jar
 COPY requirements.txt .
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 RUN uv pip install --system -r requirements.txt
