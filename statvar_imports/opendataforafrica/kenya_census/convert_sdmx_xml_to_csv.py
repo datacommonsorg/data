@@ -76,7 +76,11 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
                      xml_path, e)
 
     # 2. Fallback path for headerless / structure-less XML files
-    root = ET.parse(xml_path).getroot()
+    try:
+        root = ET.parse(xml_path).getroot()
+    except ET.ParseError as e:
+        logging.error('Failed to parse XML file %s: %s', xml_path, e)
+        raise ValueError(f'Failed to parse XML file {xml_path}: {e}') from e
     rows = []
     for elem in root.iter():
         if elem.tag.endswith('Series'):

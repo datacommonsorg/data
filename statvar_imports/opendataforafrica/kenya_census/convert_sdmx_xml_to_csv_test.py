@@ -128,6 +128,36 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
             convert_sdmx_xml_to_dataframe(
                 os.path.join(self.test_dir.name, "nonexistent.xml"))
 
+    def test_convert_sdmx_xml_to_dataframe_invalid_xml(self):
+        """Tests that malformed XML raises ValueError wrapping the file path."""
+        xml_file = os.path.join(self.test_dir.name, "invalid.xml")
+        with open(xml_file, "w") as f:
+            f.write("This is not valid XML <tag>")
+
+        with self.assertRaises(ValueError) as ctx:
+            convert_sdmx_xml_to_dataframe(xml_file)
+        self.assertIn("Failed to parse XML file", str(ctx.exception))
+        self.assertIn(xml_file, str(ctx.exception))
+
+    def test_convert_sdmx_xml_to_dataframe_empty_xml(self):
+        """Tests that valid XML with no Series/Obs records raises ValueError."""
+        empty_xml = """<?xml version="1.0" encoding="utf-8"?>
+<message:StructureSpecificData
+  xmlns:message="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message">
+  <message:Header>
+    <message:ID>Empty</message:ID>
+  </message:Header>
+</message:StructureSpecificData>
+"""
+        xml_file = os.path.join(self.test_dir.name, "empty.xml")
+        with open(xml_file, "w") as f:
+            f.write(empty_xml)
+
+        with self.assertRaises(ValueError) as ctx:
+            convert_sdmx_xml_to_dataframe(xml_file)
+        self.assertIn("No <Series> or <Obs> records found", str(ctx.exception))
+        self.assertIn(xml_file, str(ctx.exception))
+
     def test_convert_sdmx_xml_to_csv(self):
         sample_xml = """<?xml version="1.0" encoding="utf-8"?>
 <StructureSpecificData>
