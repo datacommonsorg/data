@@ -10,11 +10,10 @@ Variables listed in
 
 ## Download data Files
 
-To download the data as a zip file, get the api key and run:
-
+To download the data as a zip file, get the api key and run in directory-/data/scripts/us_census/api_utils:
 
 ```
-python census_api_data_downloader.py --dataset=acs/acs5/subject --table_id=S2407 --start_year=2010 --end_year=2024 --summary_levels=010,030,040,050,060,140,160,310,500,860,950,960,970 --output_path=~/us_census --api_key=1f00ed8656743e52b1f02e54bcfe5718c333fec7
+python census_api_data_downloader.py --dataset=acs/acs5/subject --table_id=S2407 --start_year=2010 --end_year=2024 --summary_levels=010,030,040,050,060,140,160,310,500,860,950,960,970 --output_path=~/us_census --api_key=<your_api_key>
 ```
 
 ## Generate Import Files
