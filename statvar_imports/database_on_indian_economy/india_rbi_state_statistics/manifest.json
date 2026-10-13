@@ -41,7 +41,7 @@
                 {
                     "template_mcf": "output_files/environment/state_wise_sdg_score_output.tmcf",
                     "cleaned_csv": "output_files/environment/state_wise_sdg_score_output.csv",
-                    "node_mcf": "sdg_schema.mcf"
+                    "node_mcf": "output_files/environment/state_wise_sdg_score_output*.mcf"
                 },
                 {
                     "template_mcf": "output_files/environment/state_wise_tree_cover_output.tmcf",
@@ -51,7 +51,7 @@
                 {
                     "template_mcf": "output_files/environment/sub_division_wise_annual_rainfall_output.tmcf",
                     "cleaned_csv": "output_files/environment/sub_division_wise_annual_rainfall_output.csv",
-                    "node_mcf": "places.mcf"
+                    "node_mcf": "output_files/environment/sub_division_wise_annual_rainfall_output*.mcf"
                 },
                 {
                     "template_mcf": "output_files/price_and_wages/price_and_wages_output.tmcf",
