@@ -24,4 +24,4 @@ To generate TMCF and CSV files, from parent directory (`subject_tables`), run:
 python3 process.py   --input_zip=input_data/S2201.zip   --output=output   --features=features.json   --stat_vars=stat_vars.csv
 ```
 
-The outputs will be `s2201/ouput.tmcf` and `s2201/output.csv`.
+The outputs will be `s2201/output.tmcf` and `s2201/output.csv`.
