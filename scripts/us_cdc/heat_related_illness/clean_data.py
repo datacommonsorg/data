@@ -27,6 +27,7 @@ import sys
 from google.cloud import storage
 import shutil
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -71,7 +72,10 @@ MIN_PUBLISHED_YEAR_BY_CATEGORY = {
 DEFAULT_MIN_PUBLISHED_YEAR = 2023
 
 
-@retry(tries=6, delay=10, backoff=2)
+@retry(exceptions=(WebDriverException, RuntimeError, ValueError, OSError),
+       tries=6,
+       delay=10,
+       backoff=2)
 def download_dynamic_page(url, filename, require_data=False):
     """
   Downloads HTML pages.
@@ -124,18 +128,22 @@ def download_dynamic_page(url, filename, require_data=False):
         html_content = driver.page_source
         soup = BeautifulSoup(html_content, 'html.parser')
         table = soup.select_one("table")
-        if table is None or not table.select("tr + tr"):
+        data_rows = table.select("tr + tr") if table is not None else []
+        if not data_rows:
             raise ValueError(
                 f"Populated data table rows not found for url: {safe_url}")
 
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
+        logging.info(
+            f"Successfully downloaded {len(data_rows)} data rows from {safe_url} to {filename}"
+        )
         return True
 
     except Exception as e:
         logging.error(
-            f"Error found while downloading the data for the url {safe_url}: {_sanitize_url(e)}"
+            f"Error found while downloading the data for the url {safe_url}: {_sanitize_url(str(e))}"
         )
         raise
 
@@ -249,7 +257,7 @@ def download_all_data(url, filename, category_string=None):
                                   require_data=(year <= min_published_year))
     except Exception as e:
         logging.error(
-            f"Download Error for the url {_sanitize_url(url)}: {_sanitize_url(e)}"
+            f"Download Error for the url {_sanitize_url(url)}: {_sanitize_url(str(e))}"
         )
         raise
 
@@ -313,7 +321,7 @@ def main(_):
             combine_csv_files(_CONFIG.get('INPUT_CSV_FILES'), string_to_match)
         except Exception as e:
             logging.fatal(
-                f"Fatal error: Context: Url: {_sanitize_url(url)}; Filename: {file_name}; Exception: {_sanitize_url(e)}"
+                f"Fatal error: Context: Url: {_sanitize_url(url)}; Filename: {file_name}; Exception: {_sanitize_url(str(e))}"
             )
 
 

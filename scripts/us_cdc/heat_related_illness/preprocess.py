@@ -205,12 +205,13 @@ def main(_):
                                         'cleaned.csv')
         output_mcf_path = os.path.join(_CONFIG.get('OUTPUT_PATH'), 'output.mcf')
         try:
-            os.listdir(_CONFIG.get('COMBINED_INPUT_CSV_FILE'))
-        except Exception as e:
+            if not os.listdir(_CONFIG.get('COMBINED_INPUT_CSV_FILE')):
+                raise FileNotFoundError("Directory is empty")
+        except Exception:
             logging.error(
                 "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
             )
-            raise e
+            raise
         process(cleaned_csv_path, output_mcf_path,
                 _CONFIG.get('COMBINED_INPUT_CSV_FILE'))
         generate_tmcf()
