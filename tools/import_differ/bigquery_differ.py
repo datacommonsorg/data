@@ -40,8 +40,10 @@ Usage via import_differ.py:
       --project_id="datcom-import-automation-prod"
 """
 
+import contextlib
 import csv
 from datetime import datetime, timedelta, timezone
+import io
 import os
 import re
 import sys
@@ -53,6 +55,7 @@ from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import bigquery
+from google.cloud import storage
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
@@ -61,7 +64,7 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
-from file_util import FileIO, file_get_matching
+from file_util import file_get_gcs_blob, file_get_matching, file_is_gcs
 from mcf_file_util import normalize_value
 
 OBSERVATION_KEY_PROPERTIES = [
@@ -141,6 +144,57 @@ def _flush_node_to_csv(node: Dict[str, Any], obs_writer: csv.writer,
         return 0, 1
 
 
+@contextlib.contextmanager
+def _open_text_stream(path: str, mode: str = 'r'):
+    """Opens a local file or gs:// URI as a streaming UTF-8 text file without /tmp buffering."""
+    newline = '' if mode.startswith('w') else None
+    if file_is_gcs(path):
+        if mode.startswith('r'):
+            blob = file_get_gcs_blob(path, exists=True)
+            if not blob:
+                raise FileNotFoundError(f'GCS blob not found: {path}')
+            raw_stream = storage.fileio.BlobReader(blob)
+            with io.TextIOWrapper(raw_stream,
+                                  encoding='utf-8',
+                                  errors='replace') as stream:
+                yield stream
+        elif mode.startswith('w'):
+            blob = file_get_gcs_blob(path, exists=False)
+            if not blob:
+                raise RuntimeError(
+                    f'Failed to create GCS blob for write: {path}')
+            raw_stream = storage.fileio.BlobWriter(blob)
+            with io.TextIOWrapper(raw_stream, encoding='utf-8',
+                                  newline=newline) as stream:
+                yield stream
+        else:
+            raise ValueError(f'Unsupported mode for GCS stream: {mode}')
+    else:
+        if mode.startswith('w'):
+            parent_dir = os.path.dirname(path)
+            if parent_dir:
+                os.makedirs(parent_dir, exist_ok=True)
+        with open(path,
+                  mode=mode,
+                  encoding='utf-8',
+                  newline=newline,
+                  errors='replace' if mode.startswith('r') else None) as stream:
+            yield stream
+
+
+def _remove_temp_file(path: str) -> None:
+    """Deletes a temporary local file or gs:// blob if it exists."""
+    try:
+        if file_is_gcs(path):
+            blob = file_get_gcs_blob(path, exists=True)
+            if blob:
+                blob.delete()
+        elif os.path.exists(path):
+            os.remove(path)
+    except Exception as exc:
+        logging.warning('Failed to remove temporary file %s: %s', path, exc)
+
+
 def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
                       schema_csv_path: str) -> Tuple[int, int]:
     """Streams MCF files node-by-node into observation and schema CSVs in O(1) memory."""
@@ -148,8 +202,8 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
     total_obs = 0
     total_schema = 0
 
-    with FileIO(obs_csv_path, mode='w', encoding='utf-8') as obs_file, \
-         FileIO(schema_csv_path, mode='w', encoding='utf-8') as schema_file:
+    with _open_text_stream(obs_csv_path, mode='w') as obs_file, \
+         _open_text_stream(schema_csv_path, mode='w') as schema_file:
         obs_writer = csv.writer(obs_file)
         schema_writer = csv.writer(schema_file)
         obs_writer.writerow(['key_combined', 'variableMeasured', 'value'])
@@ -157,7 +211,7 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
 
         for mcf_file in mcf_files:
             logging.info('Streaming MCF file to CSV: %s', mcf_file)
-            with FileIO(mcf_file, mode='r', encoding='utf-8') as in_f:
+            with _open_text_stream(mcf_file, mode='r') as in_f:
                 current_node: Dict[str, Any] = {}
                 for raw_line in in_f:
                     line = raw_line.strip()
@@ -235,18 +289,31 @@ def load_mcf_to_bq_tables(bq_client: bigquery.Client,
                           suffix: str = '',
                           expiration_hours: int = 12) -> Tuple[int, int]:
     """Streams MCF files to CSVs and loads them into BigQuery observation and schema tables."""
-    with tempfile.TemporaryDirectory() as local_tmpdir:
-        base_dir = temp_dir if temp_dir else local_tmpdir
+    with contextlib.ExitStack() as stack:
+        base_dir = (temp_dir.rstrip('/') if temp_dir else stack.enter_context(
+            tempfile.TemporaryDirectory()))
         tag = f'_{suffix}' if suffix else ''
-        obs_csv = os.path.join(base_dir, f'obs{tag}.csv')
-        schema_csv = os.path.join(base_dir, f'schema{tag}.csv')
+        obs_csv = (f'{base_dir}/obs{tag}.csv' if file_is_gcs(base_dir) else
+                   os.path.join(base_dir, f'obs{tag}.csv'))
+        schema_csv = (f'{base_dir}/schema{tag}.csv' if file_is_gcs(base_dir)
+                      else os.path.join(base_dir, f'schema{tag}.csv'))
 
-        obs_count, schema_count = stream_mcf_to_csv(mcf_pattern, obs_csv,
-                                                    schema_csv)
-        load_csv_to_bq_table(bq_client, obs_csv, obs_table_ref, OBS_BQ_SCHEMA,
-                             expiration_hours)
-        load_csv_to_bq_table(bq_client, schema_csv, schema_table_ref,
-                             SCHEMA_NODE_BQ_SCHEMA, expiration_hours)
+        try:
+            obs_count, schema_count = stream_mcf_to_csv(mcf_pattern, obs_csv,
+                                                        schema_csv)
+            try:
+                load_csv_to_bq_table(bq_client, obs_csv, obs_table_ref,
+                                     OBS_BQ_SCHEMA, expiration_hours)
+            finally:
+                _remove_temp_file(obs_csv)
+            try:
+                load_csv_to_bq_table(bq_client, schema_csv, schema_table_ref,
+                                     SCHEMA_NODE_BQ_SCHEMA, expiration_hours)
+            finally:
+                _remove_temp_file(schema_csv)
+        finally:
+            _remove_temp_file(obs_csv)
+            _remove_temp_file(schema_csv)
         return obs_count, schema_count
 
 
