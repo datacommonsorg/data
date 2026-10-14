@@ -1,0 +1,13 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_input/Municipality_Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated) - 1000data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_input/Municipality_Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated) - pvmap.csv --config=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_input/Municipality_Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated) - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_output/Municipality_Family_water_cisterns_for_consumption_(1st water)_delivered_by_MDS_(Accumulated)" on 2024-06-12 07:23:23.179406
+
+Node: dcid:CumulativeCount_Household_FirstWater_Cisterns_BrazilMinistrySocialDevelopmentAndFightAgainstHunger
+typeOf: dcid:StatisticalVariable
+name: "Family water cisterns for consumption (1st water) delivered by Ministry of Social Development and Fight Against Hunger (MDS) (Accumulated)"
+populationType: dcid:Household
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cisternas familiares de água para consumo (1ª água) entregues pelo O Ministério do Desenvolvimento Social e Combate à Fome (MDS)  (Acumulado)@pt"
+consumptionType: dcid:FirstWater
+containerType: dcid:Cisterns
+distributionPartner: dcid:Brazil_MinistrySocialDevelopmentAndFightAgainstHunger
+
