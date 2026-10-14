@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Unit tests for CDC WONDER County Mortality Downloader."""
 
 import os
@@ -32,7 +31,8 @@ class DownloadTest(unittest.TestCase):
 
     def test_parse_year_list_range(self):
         years = download.parse_year_list("2018-2024")
-        self.assertEqual(years, ["2018", "2019", "2020", "2021", "2022", "2023", "2024"])
+        self.assertEqual(
+            years, ["2018", "2019", "2020", "2021", "2022", "2023", "2024"])
 
     def test_parse_year_list_comma(self):
         years = download.parse_year_list("2018, 2020, 2022")
@@ -79,7 +79,8 @@ class DownloadTest(unittest.TestCase):
         downloader = download.CdcWonderCountyMortalityDownloader()
         downloader.init_session()
 
-        self.assertIn("controller/datarequest/D158;jsessionid=TEST1234", downloader.action_url)
+        self.assertIn("controller/datarequest/D158;jsessionid=TEST1234",
+                      downloader.action_url)
         self.assertTrue(len(downloader.base_post_data) > 0)
         self.assertEqual(mock_session.post.call_count, 1)
 
@@ -106,17 +107,18 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(payload_dict["B_4"], "*None*")
         self.assertEqual(payload_dict["B_5"], "*None*")
         self.assertEqual(payload_dict["F_D158.V9"], "10")
-        self.assertEqual(payload_dict["action-Export Results"], "Export Results")
+        self.assertEqual(payload_dict["action-Export Results"],
+                         "Export Results")
 
         year_params = [v for k, v in payload if k == "F_D158.V1"]
         self.assertEqual(year_params, ["2018", "2019"])
 
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "execute_query")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "execute_query")
     def test_download_state_single_query(self, mock_query):
         tsv_output = (
             "Notes\tYear\tCounty\tCounty Code\tICD-10 113 Cause List\tDeaths\n"
-            "\t2018\tKent County, DE\t10001\tSepticemia\t20\n"
-        )
+            "\t2018\tKent County, DE\t10001\tSepticemia\t20\n")
         mock_query.return_value = tsv_output
 
         downloader = download.CdcWonderCountyMortalityDownloader()
@@ -128,13 +130,11 @@ class DownloadTest(unittest.TestCase):
         mock_query.assert_called_once_with("10", ["2018", "2019"])
 
     def test_save_tsv_as_csv(self):
-        raw_tsv = (
-            "Notes\tYear\tCounty\tCounty Code\tDeaths\n"
-            "\t2018\tKent County, DE\t10001\t20\n"
-            "---\n"
-            "Query Parameters:\n"
-            "Caveats:\n"
-        )
+        raw_tsv = ("Notes\tYear\tCounty\tCounty Code\tDeaths\n"
+                   "\t2018\tKent County, DE\t10001\t20\n"
+                   "---\n"
+                   "Query Parameters:\n"
+                   "Caveats:\n")
 
         with tempfile.TemporaryDirectory() as temp_dir:
             output_csv = os.path.join(temp_dir, "test_output.csv")
@@ -168,70 +168,87 @@ class DownloadTest(unittest.TestCase):
 
             # Create file with only 2024 (missing 2018 initial year) -> should be False
             f.write_text("Header,col1,col2,col3\n" + ",2024,val2,val3\n" * 10)
-            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2024"]))
 
             # Create file with both initial (2018) and latest (2024) -> should be True
-            f.write_text(
-                "Header,col1,col2,col3\n"
-                + ",2018,val2,val3\n" * 5
-                + ",2024,val2,val3\n" * 5
-            )
-            self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
-            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2025"]))
+            f.write_text("Header,col1,col2,col3\n" + ",2018,val2,val3\n" * 5 +
+                         ",2024,val2,val3\n" * 5)
+            self.assertTrue(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2024"]))
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2025"]))
 
             # Create file with only 2018 data, Deaths column equals 2024 (should not match)
-            f.write_text("Notes,Year,County,Deaths\n" + ",2018,Kent County,2024\n" * 5)
-            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
+            f.write_text("Notes,Year,County,Deaths\n" +
+                         ",2018,Kent County,2024\n" * 5)
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2024"]))
 
             # Test partitioned chunk files
             f.unlink()
-            chunk_2024 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2024.csv"
+            chunk_2024 = Path(
+                temp_dir) / "UnderlyingCauseofDeath_County_10_2024.csv"
             chunk_2024.write_text("Header,col1\n" + "val1,val2\n" * 10)
             # Only latest chunk present -> should be False
-            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2024"]))
 
             # Both initial chunk and latest chunk present -> should be True for 2018, 2024
-            chunk_2018 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2018_2019.csv"
+            chunk_2018 = Path(
+                temp_dir) / "UnderlyingCauseofDeath_County_10_2018_2019.csv"
             chunk_2018.write_text("Header,col1\n" + "val1,val2\n" * 10)
-            self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
+            self.assertTrue(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2024"]))
 
             # If intermediate year (e.g. 2021) is requested but missing chunk -> should be False
             self.assertFalse(
-                download.is_state_downloaded(
-                    temp_dir, "10", years=["2018", "2021", "2024"]
-                )
-            )
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2021", "2024"]))
 
             # Add intermediate chunk covering 2021 -> should now be True
-            chunk_2020 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2020_2021.csv"
+            chunk_2020 = Path(
+                temp_dir) / "UnderlyingCauseofDeath_County_10_2020_2021.csv"
             chunk_2020.write_text("Header,col1\n" + "val1,val2\n" * 10)
             self.assertTrue(
-                download.is_state_downloaded(
-                    temp_dir, "10", years=["2018", "2021", "2024"]
-                )
-            )
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2021", "2024"]))
 
-            # If an incomplete single combined file also exists (e.g. from an aborted run),
-            # but chunk files cover all requested years, it should still return True
+            # If an incomplete single combined file also exists alongside chunk files,
+            # it should return False so stale/duplicate files are purged and re-downloaded
             f = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
             f.write_text("Header,col1\n,2018,val1\n" * 5)  # only contains 2018
-            self.assertTrue(
-                download.is_state_downloaded(
-                    temp_dir, "10", years=["2018", "2021", "2024"]
-                )
-            )
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2021", "2024"]))
             f.unlink()
 
             # Chunk file that is header-only (e.g. CDC header without data rows) -> should be False
-            chunk_2020.write_text("Notes,Year,Year Code,County,County Code,Deaths\n")
+            chunk_2020.write_text(
+                "Notes,Year,Year Code,County,County Code,Deaths\n")
             self.assertFalse(
-                download.is_state_downloaded(
-                    temp_dir, "10", years=["2018", "2021", "2024"]
-                )
-            )
+                download.is_state_downloaded(temp_dir,
+                                             "10",
+                                             years=["2018", "2021", "2024"]))
 
     @mock.patch.object(download.time, "sleep")
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "init_session")
     def test_execute_query_429_backoff(self, mock_init, mock_sleep):
         downloader = download.CdcWonderCountyMortalityDownloader()
         downloader.action_url = "https://wonder.cdc.gov/test"
@@ -246,7 +263,8 @@ class DownloadTest(unittest.TestCase):
         mock_res_200.text = "Notes\tCounty Code\n"
         mock_res_200.raise_for_status.return_value = None
 
-        downloader.session.post = mock.MagicMock(side_effect=[mock_res_429, mock_res_200])
+        downloader.session.post = mock.MagicMock(
+            side_effect=[mock_res_429, mock_res_200])
 
         result = downloader.execute_query("10", ["2018"], max_retries=2)
         self.assertEqual(result, "Notes\tCounty Code\n")
@@ -255,11 +273,15 @@ class DownloadTest(unittest.TestCase):
         mock_init.assert_called_once()
 
     @mock.patch.object(download.time, "sleep")
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "execute_query")
-    def test_download_state_timeout_fallback_to_single_years(self, mock_query, mock_sleep):
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "execute_query")
+    def test_download_state_timeout_fallback_to_single_years(
+            self, mock_query, mock_sleep):
+
         def query_side_effect(state_fips, years, **kwargs):
             if len(years) > 1:
-                raise requests.exceptions.HTTPError("504 Server Error: Gateway Time-out")
+                raise requests.exceptions.HTTPError(
+                    "504 Server Error: Gateway Time-out")
             return f"Notes\tYear\tCounty Code\n\t{years[0]}\t01001\n"
 
         mock_query.side_effect = query_side_effect
@@ -269,15 +291,18 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(len(results), 3)
         self.assertEqual([r[0] for r in results], ["2018", "2019", "2020"])
 
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "download_state")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "download_state")
     def test_download_county_mortality_data_continues_and_raises_on_failure(
-        self, mock_download, mock_init
-    ):
+            self, mock_download, mock_init):
         with tempfile.TemporaryDirectory() as temp_dir:
+
             def side_effect(state_fips, years):
                 if state_fips == "10":
-                    raise requests.exceptions.ConnectionError("Connection dropped")
+                    raise requests.exceptions.ConnectionError(
+                        "Connection dropped")
                 return [("all", "Notes\tCounty Code\tDeaths\n\t11001\t50\n")]
 
             mock_download.side_effect = side_effect
@@ -293,18 +318,21 @@ class DownloadTest(unittest.TestCase):
             # Assert error message contains the failed state name
             self.assertIn("Delaware", str(ctx.exception))
             # Assert state 11 was still attempted and saved despite state 10 failure
-            state_11_csv = Path(temp_dir) / "UnderlyingCauseofDeath_County_11.csv"
+            state_11_csv = Path(
+                temp_dir) / "UnderlyingCauseofDeath_County_11.csv"
             self.assertTrue(state_11_csv.exists())
 
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "download_state")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "download_state")
     def test_download_county_mortality_data_lazy_session_skipped(
-        self, mock_download, mock_init
-    ):
+            self, mock_download, mock_init):
         with tempfile.TemporaryDirectory() as temp_dir:
             # Pre-populate state 10 so it is skipped
             f = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
-            f.write_text("Notes,Year,County,Deaths\n" + ",2024,Kent County,10\n" * 5)
+            f.write_text("Notes,Year,County,Deaths\n" +
+                         ",2024,Kent County,10\n" * 5)
 
             download.download_county_mortality_data(
                 states=["10"],
@@ -317,18 +345,23 @@ class DownloadTest(unittest.TestCase):
             mock_init.assert_not_called()
             mock_download.assert_not_called()
 
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
-    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "download_state")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
+                       "download_state")
     def test_download_county_mortality_data_purges_stale_files(
-        self, mock_download, mock_init
-    ):
+            self, mock_download, mock_init):
         with tempfile.TemporaryDirectory() as temp_dir:
             # Pre-create an old chunk file that should be purged when re-downloading
-            old_chunk = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2018_2019.csv"
-            old_chunk.write_text("Notes,Year,County,Deaths\n" + ",2018,Kent County,10\n" * 5)
+            old_chunk = Path(
+                temp_dir) / "UnderlyingCauseofDeath_County_10_2018_2019.csv"
+            old_chunk.write_text("Notes,Year,County,Deaths\n" +
+                                 ",2018,Kent County,10\n" * 5)
             self.assertTrue(old_chunk.exists())
 
-            mock_download.return_value = [("all", "Notes\tCounty Code\tDeaths\n\t10001\t25\n")]
+            mock_download.return_value = [
+                ("all", "Notes\tCounty Code\tDeaths\n\t10001\t25\n")
+            ]
 
             download.download_county_mortality_data(
                 states=["10"],
@@ -339,15 +372,21 @@ class DownloadTest(unittest.TestCase):
 
             # Assert the old chunk file was deleted and new combined file was written
             self.assertFalse(old_chunk.exists())
-            combined_file = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
+            combined_file = Path(
+                temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
             self.assertTrue(combined_file.exists())
 
     def test_filter_available_years(self):
         downloader = download.CdcWonderCountyMortalityDownloader()
-        downloader.available_years = ["2018", "2019", "2020", "2021", "2022", "2023", "2024"]
+        downloader.available_years = [
+            "2018", "2019", "2020", "2021", "2022", "2023", "2024"
+        ]
 
         # Filters out unreleased future years
-        requested = ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"]
+        requested = [
+            "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025",
+            "2026"
+        ]
         filtered = downloader.filter_available_years(requested)
         self.assertEqual(
             filtered,
@@ -356,11 +395,13 @@ class DownloadTest(unittest.TestCase):
 
         # Subset passes through untouched
         subset = ["2020", "2021"]
-        self.assertEqual(downloader.filter_available_years(subset), ["2020", "2021"])
+        self.assertEqual(downloader.filter_available_years(subset),
+                         ["2020", "2021"])
 
         # No available_years means no filtering
         downloader.available_years = []
-        self.assertEqual(downloader.filter_available_years(requested), requested)
+        self.assertEqual(downloader.filter_available_years(requested),
+                         requested)
 
     @mock.patch.object(download.requests, "Session")
     def test_init_session_discovers_available_years(self, mock_session_cls):
@@ -394,5 +435,3 @@ class DownloadTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-

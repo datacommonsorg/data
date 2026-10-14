@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Automated live downloader for CDC WONDER County-Level Mortality Data (D158).
 
 This script automates downloading county-level mortality statistics across all
@@ -105,8 +104,31 @@ US_STATES = {
 # High-population states that exceed CDC WONDER's row and memory limits when queried across 7 years.
 # Querying directly in 2-year chunks prevents query buffer overruns and HTTP 400 errors.
 LARGE_STATES: set[str] = {
-    "01", "05", "06", "12", "13", "17", "18", "21", "22", "26", "27", "28", "29",
-    "34", "36", "37", "39", "40", "42", "45", "47", "48", "51", "53", "55",
+    "01",
+    "05",
+    "06",
+    "12",
+    "13",
+    "17",
+    "18",
+    "21",
+    "22",
+    "26",
+    "27",
+    "28",
+    "29",
+    "34",
+    "36",
+    "37",
+    "39",
+    "40",
+    "42",
+    "45",
+    "47",
+    "48",
+    "51",
+    "53",
+    "55",
 }
 
 # States with exceptionally large county counts (e.g. Texas with 254 counties) that frequently
@@ -189,10 +211,8 @@ class CdcWonderCountyMortalityDownloader:
         """Creates a requests.Session with connection pooling and HTTP retries."""
         session = requests.Session()
         session.headers.update({
-            "User-Agent": (
-                "Mozilla/5.0 (DataCommons CDC Importer; contact:"
-                " support@datacommons.org)"
-            )
+            "User-Agent": ("Mozilla/5.0 (DataCommons CDC Importer; contact:"
+                           " support@datacommons.org)")
         })
         retries = Retry(
             total=3,
@@ -222,31 +242,34 @@ class CdcWonderCountyMortalityDownloader:
         self.action_url = None
         self.base_post_data = []
 
-        logging.info("Connecting to CDC WONDER landing page: %s", self.landing_url)
+        logging.info("Connecting to CDC WONDER landing page: %s",
+                     self.landing_url)
         res = self.session.get(self.landing_url, timeout=self.timeout)
         res.raise_for_status()
 
         soup = BeautifulSoup(res.text, "lxml")
         form = soup.find("form", id="wonderform")
         if not form:
-            raise ValueError("Could not find initial wonderform on CDC WONDER page.")
+            raise ValueError(
+                "Could not find initial wonderform on CDC WONDER page.")
 
         action = urljoin(self.landing_url, form.get("action"))
-        agree_inputs = [
-            (inp.get("name"), inp.get("value", ""))
-            for inp in form.find_all("input")
-            if inp.get("name")
-        ]
+        agree_inputs = [(inp.get("name"), inp.get("value", ""))
+                        for inp in form.find_all("input")
+                        if inp.get("name")]
         agree_inputs.append(("action-I Agree", "I Agree"))
 
         logging.info("Submitting Data Use Agreement (I Agree)...")
-        res_agree = self.session.post(action, data=agree_inputs, timeout=self.timeout)
+        res_agree = self.session.post(action,
+                                      data=agree_inputs,
+                                      timeout=self.timeout)
         res_agree.raise_for_status()
 
         soup_req = BeautifulSoup(res_agree.text, "lxml")
         form_req = soup_req.find("form", id="wonderform")
         if not form_req:
-            raise ValueError("Could not find request form after agreeing to terms.")
+            raise ValueError(
+                "Could not find request form after agreeing to terms.")
 
         self.action_url = urljoin(self.landing_url, form_req.get("action"))
 
@@ -262,11 +285,15 @@ class CdcWonderCountyMortalityDownloader:
                     continue
                 if itype in ["checkbox", "radio"]:
                     if el.has_attr("checked"):
-                        self.base_post_data.append((name, el.get("value", "on")))
+                        self.base_post_data.append((name, el.get("value",
+                                                                 "on")))
                 else:
                     self.base_post_data.append((name, el.get("value", "")))
             elif el.name == "select":
-                selected_opts = [opt for opt in el.find_all("option") if opt.has_attr("selected")]
+                selected_opts = [
+                    opt for opt in el.find_all("option")
+                    if opt.has_attr("selected")
+                ]
                 if selected_opts:
                     for opt in selected_opts:
                         self.base_post_data.append((name, opt.get("value", "")))
@@ -274,7 +301,8 @@ class CdcWonderCountyMortalityDownloader:
                     if not el.has_attr("multiple"):
                         first_opt = el.find("option")
                         if first_opt:
-                            self.base_post_data.append((name, first_opt.get("value", "")))
+                            self.base_post_data.append(
+                                (name, first_opt.get("value", "")))
             elif el.name == "textarea":
                 self.base_post_data.append((name, el.text or ""))
 
@@ -287,11 +315,12 @@ class CdcWonderCountyMortalityDownloader:
                 if val.isdigit():
                     self.available_years.append(val)
             if self.available_years:
-                logging.info(
-                    "Discovered available years on CDC WONDER: %s", self.available_years
-                )
+                logging.info("Discovered available years on CDC WONDER: %s",
+                             self.available_years)
 
-        logging.info("Successfully established CDC WONDER session with action: %s", self.action_url)
+        logging.info(
+            "Successfully established CDC WONDER session with action: %s",
+            self.action_url)
 
     def filter_available_years(self, years: List[str]) -> List[str]:
         """Filters requested years against available years discovered on CDC WONDER."""
@@ -317,8 +346,9 @@ class CdcWonderCountyMortalityDownloader:
         return valid_years
 
     def _build_post_data(
-        self, state_fips: str, years: Optional[List[str]] = None
-    ) -> List[Tuple[str, str]]:
+            self,
+            state_fips: str,
+            years: Optional[List[str]] = None) -> List[Tuple[str, str]]:
         """Constructs query payload for county-level mortality across all causes."""
         query_data: List[Tuple[str, str]] = []
         for k, v in self.base_post_data:
@@ -377,17 +407,14 @@ class CdcWonderCountyMortalityDownloader:
                     attempt,
                     max_retries,
                 )
-                res = self.session.post(
-                    self.action_url, data=payload, timeout=self.timeout
-                )
+                res = self.session.post(self.action_url,
+                                        data=payload,
+                                        timeout=self.timeout)
 
                 if res.status_code == 429:
                     retry_after = res.headers.get("Retry-After")
-                    wait_seconds = (
-                        int(retry_after)
-                        if retry_after and retry_after.isdigit()
-                        else 1860
-                    )
+                    wait_seconds = (int(retry_after) if retry_after and
+                                    retry_after.isdigit() else 1860)
                     logging.warning(
                         "Encountered HTTP 429 (Too Many Requests). CDC WONDER enforces a 30-minute "
                         "IP block. Waiting %d seconds (%d min) in complete silence for block to "
@@ -397,18 +424,17 @@ class CdcWonderCountyMortalityDownloader:
                         attempt,
                     )
                     time.sleep(wait_seconds)
-                    logging.info("Block elapsed. Re-initializing new CDC WONDER session...")
+                    logging.info(
+                        "Block elapsed. Re-initializing new CDC WONDER session..."
+                    )
                     self.init_session()
                     payload = self._build_post_data(state_fips, years)
                     continue
 
                 if res.status_code in (401, 403) or (
-                    res.text
-                    and (
-                        "session has expired" in res.text.lower()
-                        or "session timeout" in res.text.lower()
-                    )
-                ):
+                        res.text and
+                    ("session has expired" in res.text.lower() or
+                     "session timeout" in res.text.lower())):
                     logging.warning(
                         "Session expired or rejected for FIPS %s. Re-initializing session...",
                         state_fips,
@@ -417,9 +443,9 @@ class CdcWonderCountyMortalityDownloader:
                     payload = self._build_post_data(state_fips, years)
                     continue
 
-                if res.status_code == 400 and (
-                    "too much data" in res.text or "simplify your filters" in res.text
-                ):
+                if res.status_code == 400 and ("too much data" in res.text or
+                                               "simplify your filters"
+                                               in res.text):
                     logging.warning(
                         "FIPS %s query returned 'too much data' (HTTP 400). "
                         "Returning response for partitioning.",
@@ -446,9 +472,8 @@ class CdcWonderCountyMortalityDownloader:
             f"Failed to fetch data for state FIPS {state_fips} after {max_retries} retries."
         )
 
-    def download_state(
-        self, state_fips: str, years: List[str]
-    ) -> List[Tuple[str, str]]:
+    def download_state(self, state_fips: str,
+                       years: List[str]) -> List[Tuple[str, str]]:
         """Downloads county mortality data for a state, automatically partitioning if needed."""
         state_name = US_STATES.get(state_fips, f"FIPS-{state_fips}")
         if self.available_years:
@@ -485,21 +510,27 @@ class CdcWonderCountyMortalityDownloader:
                 need_partitioning = True
 
         if need_partitioning:
-            logging.info("Partitioning %s (%s) into chunks...", state_name, state_fips)
-            use_single_years = (len(years) <= 2) or (state_fips in SINGLE_YEAR_STATES)
+            logging.info("Partitioning %s (%s) into chunks...", state_name,
+                         state_fips)
+            use_single_years = (len(years) <= 2) or (state_fips
+                                                     in SINGLE_YEAR_STATES)
             i = 0
             while i < len(years):
                 if not use_single_years and (i + 1 < len(years)):
-                    year_chunk = years[i : i + 2]
+                    year_chunk = years[i:i + 2]
                     chunk_label = f"{year_chunk[0]}_{year_chunk[-1]}"
-                    logging.info("Querying chunk %s for %s...", chunk_label, state_name)
+                    logging.info("Querying chunk %s for %s...", chunk_label,
+                                 state_name)
                     time.sleep(self.delay)
 
                     chunk_tsv = ""
                     success = False
                     try:
-                        chunk_tsv = self.execute_query(state_fips, year_chunk, max_retries=2)
-                        chunk_first_line = chunk_tsv.splitlines()[0] if chunk_tsv else ""
+                        chunk_tsv = self.execute_query(state_fips,
+                                                       year_chunk,
+                                                       max_retries=2)
+                        chunk_first_line = chunk_tsv.splitlines(
+                        )[0] if chunk_tsv else ""
                         if "County Code" in chunk_first_line:
                             success = True
                         else:
@@ -526,7 +557,8 @@ class CdcWonderCountyMortalityDownloader:
                         use_single_years = True
 
                 single_year = years[i]
-                logging.info("Querying single year %s for %s...", single_year, state_name)
+                logging.info("Querying single year %s for %s...", single_year,
+                             state_name)
                 time.sleep(self.delay)
                 sy_text = self.execute_query(state_fips, [single_year])
                 first_line = sy_text.splitlines()[0] if sy_text else ""
@@ -552,7 +584,8 @@ def save_tsv_as_csv(raw_tsv: str, output_csv_path: str) -> int:
         for row in tsv_reader:
             if not row:
                 continue
-            if row[0].startswith("---") or (len(row) > 1 and row[1].startswith("---")):
+            if row[0].startswith("---") or (len(row) > 1 and
+                                            row[1].startswith("---")):
                 break
             csv_writer.writerow(row)
             row_count += 1
@@ -562,8 +595,7 @@ def save_tsv_as_csv(raw_tsv: str, output_csv_path: str) -> int:
             os.unlink(temp_csv_path)
         raise ValueError(
             f"Extracted TSV for {output_csv_path} contains no observation data "
-            f"(row_count={row_count})."
-        )
+            f"(row_count={row_count}).")
 
     os.replace(temp_csv_path, output_csv_path)
     return row_count
@@ -580,16 +612,17 @@ def _has_data_rows(file_path: Path) -> bool:
             if not header:
                 return False
             for row in reader:
-                if row and not row[0].startswith("---") and not row[0].startswith("Total"):
+                if row and not row[0].startswith(
+                        "---") and not row[0].startswith("Total"):
                     return True
         return False
     except Exception:
         return False
 
 
-def is_state_downloaded(
-    output_dir: str, state_fips: str, years: Optional[List[str]] = None
-) -> bool:
+def is_state_downloaded(output_dir: str,
+                        state_fips: str,
+                        years: Optional[List[str]] = None) -> bool:
     """Checks if valid non-empty CSV files for this state already exist covering requested years."""
     pattern = f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
     matches = list(Path(output_dir).glob(pattern))
@@ -597,11 +630,15 @@ def is_state_downloaded(
         return False
 
     # Check if a single combined file exists and contains data rows for all requested years
-    single_file = Path(output_dir) / f"UnderlyingCauseofDeath_County_{state_fips}.csv"
+    single_file = Path(
+        output_dir) / f"UnderlyingCauseofDeath_County_{state_fips}.csv"
     if single_file.exists():
+        if len(matches) > 1:
+            return False
         found_years = set()
         try:
-            with open(single_file, "r", encoding="utf-8", errors="replace") as f:
+            with open(single_file, "r", encoding="utf-8",
+                      errors="replace") as f:
                 reader = csv.reader(f)
                 header = next(reader, None)
                 if header:
@@ -619,6 +656,7 @@ def is_state_downloaded(
                         return True
         except Exception:
             pass
+        return False
 
     # If no specific years requested, check if any matching file has valid data rows
     if not years:
@@ -630,7 +668,8 @@ def is_state_downloaded(
         for f in matches:
             if f.name == single_file.name:
                 continue
-            if (f"_{y}.csv" in f.name or f"_{y}_" in f.name) and _has_data_rows(f):
+            if (f"_{y}.csv" in f.name or
+                    f"_{y}_" in f.name) and _has_data_rows(f):
                 year_covered = True
                 break
         if not year_covered:
@@ -651,9 +690,7 @@ def _should_skip_state(
         return False
     existing_files = list(
         Path(output_dir).glob(
-            f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
-        )
-    )
+            f"UnderlyingCauseofDeath_County_{state_fips}*.csv"))
     logging.info(
         "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
         idx,
@@ -677,7 +714,8 @@ def download_county_mortality_data(
 ):
     """Downloads CDC County Mortality data for specified states and years."""
     os.makedirs(output_dir, exist_ok=True)
-    downloader = CdcWonderCountyMortalityDownloader(timeout=timeout, delay=delay)
+    downloader = CdcWonderCountyMortalityDownloader(timeout=timeout,
+                                                    delay=delay)
 
     total_files = 0
     total_rows = 0
@@ -687,17 +725,16 @@ def download_county_mortality_data(
     for idx, state_fips in enumerate(states, start=1):
         state_name = US_STATES.get(state_fips, f"FIPS-{state_fips}")
 
-        if skip_existing and _should_skip_state(
-            output_dir, state_fips, years, state_name, idx, len(states)
-        ):
+        if skip_existing and _should_skip_state(output_dir, state_fips, years,
+                                                state_name, idx, len(states)):
             continue
 
         if downloader.action_url is None:
             downloader.init_session()
             years = downloader.filter_available_years(years)
-            if skip_existing and _should_skip_state(
-                output_dir, state_fips, years, state_name, idx, len(states)
-            ):
+            if skip_existing and _should_skip_state(output_dir, state_fips,
+                                                    years, state_name, idx,
+                                                    len(states)):
                 continue
 
         logging.info(
@@ -712,11 +749,13 @@ def download_county_mortality_data(
 
         # Remove any existing/stale chunk or combined files for this state before re-downloading
         # to prevent duplicate ingestion by stat_var_processor (which globs input_files/*.csv).
-        for stale_file in Path(output_dir).glob(f"UnderlyingCauseofDeath_County_{state_fips}*.csv"):
+        for stale_file in Path(output_dir).glob(
+                f"UnderlyingCauseofDeath_County_{state_fips}*.csv"):
             try:
                 stale_file.unlink()
             except OSError as e:
-                logging.warning("Could not remove stale file %s: %s", stale_file, e)
+                logging.warning("Could not remove stale file %s: %s",
+                                stale_file, e)
 
         try:
             results = downloader.download_state(state_fips, years)
@@ -770,8 +809,7 @@ def download_county_mortality_data(
     )
     if failed_states:
         raise RuntimeError(
-            f"Failed to download data for states: {', '.join(failed_states)}"
-        )
+            f"Failed to download data for states: {', '.join(failed_states)}")
 
 
 def main(argv):
@@ -783,7 +821,9 @@ def main(argv):
     if FLAGS.states.lower() == "all":
         states = sorted(list(US_STATES.keys()))
     else:
-        states = [s.strip().zfill(2) for s in FLAGS.states.split(",") if s.strip()]
+        states = [
+            s.strip().zfill(2) for s in FLAGS.states.split(",") if s.strip()
+        ]
 
     logging.info(
         "Starting CDC County Mortality live download for %d states, years: %s",
