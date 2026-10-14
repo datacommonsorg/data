@@ -351,8 +351,8 @@ This import uses `validation_config.json` with:
 1. **`DELETED_RECORDS_PERCENT: 0.1` (`check_deleted_records_percent`)**:
    - **Rationale & Ingestion Strategy**: The canonical threshold is strictly set to `0.1%`
      (`threshold: 0.1`), adhering to the Master CRA standard ceiling (threshold <= 0.5%).
-     During the initial baseline rollout, one-time deletions occur across 7 sub-imports
-     (up to **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in
+     During the initial baseline rollout, one-time deletions occur across 8 sub-imports
+     (**100%** in `state_wise_sdg_score_output.csv`, **6.94%** in `sub_division_wise_annual_rainfall_output.csv`, **5.64%** in
      `agriculture_output.csv`, **3.15%** in
      `state_wise_expenditure_on_relief_on_natural_calamities_output.csv`, **1.39%** in
      `state_wise_installed_capacity_of_power_output.csv`, **0.28%** in
@@ -362,21 +362,26 @@ This import uses `validation_config.json` with:
      ingestion override with tech leads to promote the new output to `latest_version`.
      All subsequent automated runs will strictly adhere to the `0.1%` threshold against
      the updated baseline. Root causes for the one-time deletions are:
-     1. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from
+     1. **StatVar Schema Alignment (Table 106)**: Renaming `Score_SustainableDevelopmentGoals`
+        to `IndexScore_SustainableDevelopmentGoal` (`measuredProperty: indexScore`,
+        `populationType: SustainableDevelopmentGoal`) in `environment_pvmap.csv` (149 records /
+        100% in `state_wise_sdg_score_output.csv`, replaced by 184 records under the canonical StatVar).
+     2. **Place Resolution Corrections**: Remapping `"Haryana, Delhi & Chandigarh"` from
         `dcid:wikidataId/Q1174` (Haryana) to the dedicated IMD sub-division DCID
         `dcid:HaryanaDelhiChandigarh` (24 records / 6.94% in rainfall), and fixing
         `NCT of Delhi` from `wikidataId/Q1352` (erroneously Chennai) to `wikidataId/Q1353`
         (resolving all Delhi records to canonical `wikidataId/Q1353`).
-     2. **Unit Schema Corrections**: Changing `Annual_Amount_FarmInventory_Fruits` in
+     3. **Unit Schema Corrections**: Changing `Annual_Amount_FarmInventory_Fruits` in
         `agriculture_pvmap.csv` from `Hectare` to `MetricTon` (309 records in agriculture,
         where Import Differ classifies old unit nodes as deleted and new unit nodes as
         added).
-     3. **Official RBI Source Revisions**: Retrospective updates by RBI to provisional
+     4. **Official RBI Source Revisions**: Retrospective updates by RBI to provisional
         figures for recent fiscal years (`2022-03` through `2024-03`) and UT consolidations
         (`Dadra & Nagar Haveli and Daman & Diu`).
    - **Technical Breakdown of Deletions**:
      | Category | Output File | Deletion % / Records | Root Cause |
      |---|---|---|---|
+     | Environment | `state_wise_sdg_score_output.csv` | 100.0% (149 records) | Renamed `Score_SustainableDevelopmentGoals` to canonical `IndexScore_SustainableDevelopmentGoal` (184 new observations emitted). |
      | Environment | `sub_division_wise_annual_rainfall_output.csv` | 6.94% (24 records) | Remapped `"Haryana, Delhi & Chandigarh"` from `dcid:wikidataId/Q1174` (Haryana state) to dedicated IMD sub-division `dcid:HaryanaDelhiChandigarh`. |
      | Agriculture | `agriculture_output.csv` | 5.64% (1,282 records) | Corrected `NCT of Delhi` to `wikidataId/Q1353` (439 records); updated `Annual_Amount_FarmInventory_Fruits` unit to `MetricTon` (309 records); retrospective RBI revisions for provisional years `2022-03`–`2024-03` (534 records). |
      | Environment | `state_wise_expenditure_on_relief_on_natural_calamities_output.csv` | 3.15% (13 records) | Corrected `NCT of Delhi` place resolution from `wikidataId/Q1352` (Chennai) to `wikidataId/Q1353`. |
