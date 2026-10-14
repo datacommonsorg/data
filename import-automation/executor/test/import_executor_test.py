@@ -23,6 +23,7 @@ import threading
 
 from app.executor import import_executor
 from app.executor.import_executor import ImportStatus
+from tools.import_validation.result import ValidationResult, ValidationStatus
 
 
 class ImportExecutorTest(unittest.TestCase):
@@ -120,3 +121,27 @@ class ImportExecutorTest(unittest.TestCase):
                     '[Subprocess command]: exit 0\n'
                     '[Subprocess return code]: 0')
         self.assertEqual(expected, message)
+
+    def test_get_validation_message(self):
+        executor = import_executor.ImportExecutor(
+            uploader=mock.MagicMock(),
+            github=mock.MagicMock(),
+            config=mock.MagicMock(),
+        )
+        results = [
+            ValidationResult(ValidationStatus.PASSED, 'check_empty_import'),
+            ValidationResult(ValidationStatus.FAILED, 'check_lint_error_count'),
+            ValidationResult(ValidationStatus.DATA_ERROR,
+                             'check_deleted_records_percent'),
+            ValidationResult(ValidationStatus.CONFIG_ERROR, 'check_min_value'),
+        ]
+        self.assertEqual(
+            'FAILED: check_lint_error_count, check_deleted_records_percent, check_min_value',
+            executor._get_validation_message(results),
+        )
+        self.assertEqual(
+            'FAILED: None',
+            executor._get_validation_message([
+                ValidationResult(ValidationStatus.PASSED, 'check_empty_import')
+            ]),
+        )
