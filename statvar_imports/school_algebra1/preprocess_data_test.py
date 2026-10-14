@@ -79,15 +79,15 @@ class PreprocessDataTest(unittest.TestCase):
 
     def test_preprocess_dataframe_edge_case_ids(self):
         df = pd.DataFrame({
-            'LEAID': ['100005.0', None, 'bad_id'],
-            'SCHID': ['870.0', '870', '870'],
-            'SCH_ALGENR_G0708_HI_M': ['12', '5', '3'],
+            'LEAID': ['100005.0', '100005', None, 'bad_id'],
+            'SCHID': ['870.0', '870A', '870', '870'],
+            'SCH_ALGENR_G0708_HI_M': ['12', '8', '5', '3'],
         })
         mapped_cols = {'YEAR', 'ncesid', 'SCH_ALGENR_G0708_HI_M'}
         result = preprocess_data.preprocess_dataframe(
             df, 'crdc_2023-24_algebra_i.csv', mapped_cols)
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result['ncesid'].iloc[0], '010000500870')
+        self.assertEqual(list(result['ncesid']),
+                         ['010000500870', '01000050870A'])
 
     def test_preprocess_dataframe_filters_all_negative_rows(self):
         df = pd.DataFrame({
@@ -102,6 +102,30 @@ class PreprocessDataTest(unittest.TestCase):
             df, 'crdc_2023-24_algebra_i.csv', mapped_cols)
         self.assertEqual(list(result['ncesid']),
                          ['010000500871', '010000500872'])
+
+    def test_process_file_skips_empty_dataframe(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            orig_processed = preprocess_data._PROCESSED_DIR
+            try:
+                input_dir = os.path.join(tmp_dir, 'input')
+                output_dir = os.path.join(tmp_dir, 'output')
+                os.makedirs(input_dir)
+                os.makedirs(output_dir)
+                preprocess_data._PROCESSED_DIR = output_dir
+                input_csv = os.path.join(input_dir,
+                                         'crdc_2021-22_algebra_i.csv')
+                pd.DataFrame({
+                    'COMBOKEY': ['010000500870'],
+                    'SCH_ALGENR_G08_HI_M': ['-9'],
+                }).to_csv(input_csv, index=False)
+
+                preprocess_data.process_file(
+                    input_csv, {'YEAR', 'ncesid', 'SCH_ALGENR_G08_HI_M'})
+                output_csv = os.path.join(output_dir,
+                                          'crdc_2021-22_algebra_i.csv')
+                self.assertFalse(os.path.exists(output_csv))
+            finally:
+                preprocess_data._PROCESSED_DIR = orig_processed
 
 
 if __name__ == '__main__':

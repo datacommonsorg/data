@@ -70,11 +70,15 @@ def extract_survey_end_year(filename: str) -> int:
     return 0
 
 
+_INVALID_ID_STRINGS = {'', 'nan', 'none', 'null', 'na'}
+
+
 def _pad_id_series(series: pd.Series, width: int) -> pd.Series:
-    """Safely zero-pads non-empty, non-NaN numeric string identifiers."""
+    """Safely zero-pads non-empty, valid alphanumeric string identifiers."""
     cleaned = (series.fillna('').astype(str).str.strip().str.replace(
         r'\.0$', '', regex=True))
-    return cleaned.apply(lambda x: x.zfill(width) if x and x.isdigit() else '')
+    return cleaned.apply(lambda x: x.zfill(width) if (x and x.lower(
+    ) not in _INVALID_ID_STRINGS and x.isalnum() and len(x) <= width) else '')
 
 
 def preprocess_dataframe(df: pd.DataFrame, filename: str,
@@ -94,7 +98,13 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
     else:
         df['ncesid'] = _pad_id_series(df['ncesid'], 12)
 
+    initial_rows = len(df)
     df = df[df['ncesid'].str.len() == 12].copy()
+    dropped_nces_rows = initial_rows - len(df)
+    if dropped_nces_rows > 0:
+        logging.warning(
+            f"Dropped {dropped_nces_rows} rows with invalid 'ncesid' in {filename}."
+        )
 
     # Ensure YEAR exists
     if 'YEAR' not in df.columns:
@@ -146,14 +156,18 @@ def process_file(filepath: str, mapped_cols: set):
                              encoding='latin-1',
                              low_memory=False,
                              dtype=str)
-            df = preprocess_dataframe(df, filename, mapped_cols)
-            df.to_csv(temp_csv_path, index=False)
-        elif ext == '.xlsx':
+        else:
             # Excel files have 'Sheet1'
             df = pd.read_excel(filepath, sheet_name=0, dtype=str)
-            df = preprocess_dataframe(df, filename, mapped_cols)
-            df.to_csv(temp_csv_path, index=False)
 
+        df = preprocess_dataframe(df, filename, mapped_cols)
+        if df.empty:
+            logging.warning(
+                f"No valid rows after preprocessing {filename}; skipping write."
+            )
+            return
+
+        df.to_csv(temp_csv_path, index=False)
         os.replace(temp_csv_path, output_csv_path)
         logging.info(f"Wrote processed file: {output_csv_path}")
 
@@ -167,6 +181,9 @@ def process_file(filepath: str, mapped_cols: set):
 def preprocess_all_files():
     """Preprocesses all raw CSV and XLSX files in input_files/."""
     os.makedirs(_PROCESSED_DIR, exist_ok=True)
+    for stale_csv in glob.glob(os.path.join(_PROCESSED_DIR, '*.csv')):
+        os.remove(stale_csv)
+
     mapped_cols = load_pv_mapped_columns(_PVMAP_PATH)
 
     raw_files = sorted(
