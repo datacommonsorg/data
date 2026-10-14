@@ -19,8 +19,6 @@ import os
 import unittest
 import sys
 import tempfile
-import json
-import shutil
 from unittest.mock import MagicMock, patch
 import numpy as np
 import pandas as pd
@@ -38,9 +36,7 @@ from us_census.pep.us_pep_sex.process import (
     PopulationEstimateBySex,
     _state_latest,
     _download_single_file,
-    _create_retry_session,
-    add_future_year_urls,
-    download_files,
+    is_valid_url,
 )
 import us_census.pep.us_pep_sex.process as sex_proc
 # pylint: enable=wrong-import-position
@@ -148,12 +144,12 @@ class TestStateLatestVintageBoundary(unittest.TestCase):
 
 
 class TestDynamicFunctionMapping(unittest.TestCase):
-    """Tests dynamic registration of file-to-function mappings up to year 2029."""
+    """Tests dynamic registration of file-to-function mappings up to year 2030."""
 
-    def test_file_to_function_mapping_years_2023_to_2029(self):
-        """Tests that national, state, and county future year files (e.g. 2024, 2029) are dispatched correctly."""
+    def test_file_to_function_mapping_years_2023_to_2030(self):
+        """Tests that national, state, and county future year files (e.g. 2024, 2029, 2030) are dispatched correctly."""
         with tempfile.TemporaryDirectory() as tmp_dir:
-            for yr in [2024, 2029]:
+            for yr in [2024, 2029, 2030]:
                 open(os.path.join(tmp_dir, f"nc-est{yr}-agesex-res.csv"),
                      'w').close()
                 open(os.path.join(tmp_dir, f"sc-est{yr}-syasex-01.xlsx"),
@@ -180,13 +176,25 @@ class TestDynamicFunctionMapping(unittest.TestCase):
                     os.path.join(tmp_dir, 'out.mcf'),
                     os.path.join(tmp_dir, 'out.tmcf'))
                 loader.process()
-                self.assertEqual(mock_nat.call_count, 2)
-                self.assertEqual(mock_st.call_count, 2)
-                self.assertEqual(mock_co.call_count, 2)
+                self.assertEqual(mock_nat.call_count, 3)
+                self.assertEqual(mock_st.call_count, 3)
+                self.assertEqual(mock_co.call_count, 3)
 
 
 class TestDownloadAndCacheLifecycle(unittest.TestCase):
     """Tests for streaming downloads, temp file cleanup, and cache fallback."""
+
+    def test_is_valid_url_rejects_html_regardless_of_size(self):
+        """Tests that is_valid_url returns False immediately for any HTML content-type."""
+        session = MagicMock()
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.headers = {'Content-Type': 'text/html; charset=UTF-8'}
+        mock_resp.iter_content.return_value = [b'<html>' + b'a' * 1000]
+        mock_resp.__enter__.return_value = mock_resp
+        session.get.return_value = mock_resp
+
+        self.assertFalse(is_valid_url(session, 'https://census.gov/test.csv'))
 
     def test_download_single_file_success(self):
         """Tests that _download_single_file streams chunks to temp file."""
@@ -249,48 +257,66 @@ class TestDownloadAndCacheLifecycle(unittest.TestCase):
         self.assertEqual(len(created_files), 1)
         self.assertFalse(os.path.exists(created_files[0]))
 
-    def test_download_files_cache_fallback(self):
-        """Tests that download_files falls back to cached persistent file if network download fails."""
+    def test_download_files_cache_fallback_and_historical_ttl_exemption(self):
+        """Tests that historical files bypass TTL and expired dynamic files update mtime on fallback."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             gcs_persistent = os.path.join(tmp_dir, 'gcs_persistent')
             input_dir = os.path.join(tmp_dir, 'input_files')
             os.makedirs(gcs_persistent)
             os.makedirs(input_dir)
 
-            cached_file = os.path.join(gcs_persistent,
-                                       'nc-est2024-agesex-res.csv')
-            with open(cached_file, 'w') as f:
+            hist_cached = os.path.join(gcs_persistent, 'pe-19.csv')
+            with open(hist_cached, 'w') as f:
+                f.write('historical_content')
+            os.utime(hist_cached, (0, 0))
+
+            dyn_cached = os.path.join(gcs_persistent,
+                                      'nc-est2025-agesex-res.csv')
+            with open(dyn_cached, 'w') as f:
                 f.write('cached_content')
+            os.utime(dyn_cached, (0, 0))
 
-            # Force file to appear expired to trigger download attempt
-            os.utime(cached_file, (0, 0))
-
-            files_to_download = [{
-                'download_path': 'https://census.gov/nc-est2024-agesex-res.csv'
-            }]
+            files_to_download = [
+                {
+                    'download_path': 'https://census.gov/pe-19.csv',
+                    'is_historical': True,
+                },
+                {
+                    'download_path':
+                        'https://census.gov/nc-est2025-agesex-res.csv',
+                    'is_historical': False,
+                },
+            ]
 
             with patch.object(sex_proc, '_GCS_FOLDER_PERSISTENT_PATH', gcs_persistent), \
                  patch.object(sex_proc, '_INPUT_FILE_PATH', input_dir), \
                  patch.object(sex_proc, '_FILES_TO_DOWNLOAD', files_to_download), \
-                 patch.object(sex_proc, '_download_single_file', side_effect=IOError('Network error')), \
+                 patch.object(sex_proc, '_download_single_file', side_effect=IOError('Network error')) as mock_dl, \
                  patch('time.sleep'):
-                sex_proc.download_files.__wrapped__()
+                sex_proc.download_files()
+                # Only the expired non-historical file should have attempted a network download
+                self.assertEqual(mock_dl.call_count, 1)
 
-            dest_file = os.path.join(input_dir, 'nc-est2024-agesex-res.csv')
+            dest_hist = os.path.join(input_dir, 'pe-19.csv')
+            self.assertTrue(os.path.exists(dest_hist))
+            dest_file = os.path.join(input_dir, 'nc-est2025-agesex-res.csv')
             self.assertTrue(os.path.exists(dest_file))
             with open(dest_file) as f:
                 self.assertEqual(f.read(), 'cached_content')
             self.assertTrue(files_to_download[0]['is_downloaded'])
+            self.assertTrue(files_to_download[1]['is_downloaded'])
+            # Verify mtime of fallback cached file was refreshed
+            self.assertGreater(os.path.getmtime(dyn_cached), 0)
 
-    def test_add_future_year_urls_gatekeeper_break(self):
-        """Tests that add_future_year_urls gatekeeper loop breaks immediately upon finding the first valid year."""
+    def test_add_future_year_urls_gatekeeper_break_and_cache_retention(self):
+        """Tests that add_future_year_urls breaks at first valid year, bounds at baseline, and retains cached files on HEAD failure."""
         session = MagicMock()
         head_calls = []
 
         def mock_head(url, *args, **kwargs):
             head_calls.append(url)
             resp = MagicMock()
-            if '2024' in url:
+            if '2026' in url and 'syasex-01' not in url:
                 resp.status_code = 200
                 resp.headers = {'Content-Type': 'text/csv'}
             else:
@@ -300,14 +326,28 @@ class TestDownloadAndCacheLifecycle(unittest.TestCase):
 
         session.head = mock_head
 
-        with patch.object(sex_proc, 'extract_gcs_info', return_value=('bucket', 'path')), \
-             patch.object(sex_proc, 'fetch_skip_urls_from_gcs', return_value=set()), \
-             patch.object(sex_proc, '_create_retry_session', return_value=session), \
-             patch('time.sleep'):
-            sex_proc.add_future_year_urls()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            # Create a cached file for sc-est2026-syasex-01.xlsx whose HEAD probe will fail
+            cached_state = os.path.join(tmp_dir, 'sc-est2026-syasex-01.xlsx')
+            with open(cached_state, 'w') as f:
+                f.write('cached')
 
-        self.assertTrue(any('2024' in url for url in head_calls))
-        self.assertFalse(any('2023' in url for url in head_calls))
+            with patch.object(sex_proc, '_FILES_TO_DOWNLOAD', []), \
+                 patch.object(sex_proc, '_GCS_FOLDER_PERSISTENT_PATH', tmp_dir), \
+                 patch.object(sex_proc, 'extract_gcs_info', return_value=('bucket', 'path')), \
+                 patch.object(sex_proc, 'fetch_skip_urls_from_gcs', return_value=set()), \
+                 patch.object(sex_proc, '_create_retry_session', return_value=session), \
+                 patch('time.sleep'):
+                sex_proc.add_future_year_urls()
+                downloaded_paths = [
+                    item['download_path']
+                    for item in sex_proc._FILES_TO_DOWNLOAD
+                ]
+
+        self.assertTrue(any('2026' in url for url in head_calls))
+        self.assertFalse(any('2025' in url for url in head_calls))
+        self.assertTrue(
+            any('sc-est2026-syasex-01.xlsx' in url for url in downloaded_paths))
 
 
 if __name__ == "__main__":

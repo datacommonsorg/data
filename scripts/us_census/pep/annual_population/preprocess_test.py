@@ -26,7 +26,6 @@ for path in (_SCRIPTS_DIR, _MODULE_DIR):
     if path not in sys.path:
         sys.path.append(path)
 
-import json
 import re
 from unittest.mock import MagicMock, patch
 import pandas as pd
@@ -36,11 +35,14 @@ import pandas as pd
 from us_census.pep.annual_population.preprocess import (
     process,
     _process_nationals_2029,
+    _process_states_2029,
     download_with_retry,
     _create_retry_session,
     add_future_year_urls,
+    popchg_file_name_pattern,
     USA,
 )
+import us_census.pep.annual_population.preprocess as prep
 from us_census.pep.annual_population.constants import TEST_DATA_DIR
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
@@ -122,10 +124,10 @@ class TestPreprocess(unittest.TestCase):
 
 
 class TestProcessExcel2029(unittest.TestCase):
-    """Tests for dynamic future year processing in Excel files and POPCHG regex."""
+    """Tests for dynamic future year processing in Excel files, POPCHG regex, and vintage precedence."""
 
-    def test_process_nationals_2029_float_and_int_headers(self):
-        """Tests that _process_nationals_2029 correctly parses float and int headers for future years."""
+    def test_process_nationals_2029_float_int_and_str_headers(self):
+        """Tests that _process_nationals_2029 correctly parses float, int, and str headers for future years."""
         mock_df = pd.DataFrame({
             'Geographic Area': [USA, 'Northeast'],
             'April 1, 2020': [331449281, 57000000],
@@ -135,7 +137,7 @@ class TestProcessExcel2029(unittest.TestCase):
             '2023': [334914895, 57400000],
             2024.0: [336000000,
                      57500000],  # parsed as float by pandas read_excel
-            2025: [337000000, 57600000],  # parsed as int
+            '2025': [337000000, 57600000],  # parsed as str
         })
         with patch('us_census.pep.annual_population.preprocess._load_data_df',
                    return_value=mock_df):
@@ -152,16 +154,68 @@ class TestProcessExcel2029(unittest.TestCase):
         self.assertEqual(
             result[result['Year'] == '2025']['Count_Person'].iloc[0], 337000000)
 
-    def test_popchg_regex_matches_various_years(self):
-        """Tests that regex pattern matches NST-EST<year>-POPCHG2020_<year>.csv for various years."""
-        pattern = r"NST-EST\d{4}-POPCHG2020_\d{4}\.csv"
+    def test_process_states_2029_column_length_mismatch_raises(self):
+        """Tests that _process_states_2029 fails fast with ValueError when extracted headers do not match data columns."""
+        header_df = pd.DataFrame([['a'] * 8, ['b'] * 8, [None] * 8])
+        data_df = pd.DataFrame([['.Alabama', 1, 2, 3, 4, 5, 6, 7]])
+        with patch('us_census.pep.annual_population.preprocess._load_data_df',
+                   side_effect=[header_df, data_df]):
+            with self.assertRaises(ValueError):
+                _process_states_2029('dummy_path.xlsx')
+
+    def test_popchg_regex_and_vintage_precedence_in_process(self):
+        """Tests popchg_file_name_pattern and verifies newer vintage NST-EST2025-POP.xlsx takes precedence over NST-EST2023-POPCHG2020_2023.csv."""
         for year in [2023, 2024, 2025, 2026, 2029]:
             filename = f"NST-EST{year}-POPCHG2020_{year}.csv"
-            self.assertIsNotNone(re.search(pattern, filename),
+            self.assertIsNotNone(re.search(popchg_file_name_pattern, filename),
                                  f"Failed to match {filename}")
 
-        self.assertIsNone(re.search(pattern, "NST-EST2024-POP.csv"))
-        self.assertIsNone(re.search(pattern, "NST-EST-POPCHG2020.csv"))
+        self.assertIsNone(
+            re.search(popchg_file_name_pattern, "NST-EST2024-POP.csv"))
+        self.assertIsNone(
+            re.search(popchg_file_name_pattern, "NST-EST-POPCHG2020.csv"))
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            in_dir = os.path.join(tmp_dir, 'input')
+            out_dir = os.path.join(tmp_dir, 'output')
+            os.makedirs(in_dir)
+            os.makedirs(out_dir)
+
+            popchg_path = os.path.join(in_dir,
+                                       'NST-EST2023-POPCHG2020_2023.csv')
+            with open(popchg_path, 'w') as f:
+                f.write(
+                    'NAME,POPESTIMATE2020,POPESTIMATE2021,POPESTIMATE2022,POPESTIMATE2023\n'
+                    'United States,331500000,332000000,333271411,334914895\n')
+
+            excel_path = os.path.join(in_dir, 'NST-EST2025-POP.xlsx')
+            open(excel_path, 'w').close()
+
+            nat_2025_df = pd.DataFrame({
+                'Year': ['2022', '2023', '2024', '2025'],
+                'Location': ['country/USA'] * 4,
+                'Count_Person': [334017321, 336806231, 340003797, 341784857],
+            })
+            state_2025_df = pd.DataFrame({
+                'Year': ['2025'],
+                'Location': ['geoId/01'],
+                'Count_Person': [5157699],
+            })
+
+            csv_out = os.path.join(out_dir, 'usa_annual_population.csv')
+            mcf_out = os.path.join(out_dir, 'usa_annual_population.mcf')
+            tmcf_out = os.path.join(out_dir, 'usa_annual_population.tmcf')
+
+            with patch.object(prep, '_process_nationals_2029', return_value=nat_2025_df), \
+                 patch.object(prep, '_process_states_2029', return_value=state_2025_df):
+                process(in_dir, csv_out, mcf_out, tmcf_out, False)
+
+            out_df = pd.read_csv(csv_out)
+            usa_df = out_df[out_df['Location'] == 'country/USA'].set_index(
+                'Year')
+            self.assertEqual(usa_df.loc[2022, 'Count_Person'], 334017321)
+            self.assertEqual(usa_df.loc[2023, 'Count_Person'], 336806231)
+            self.assertEqual(usa_df.loc[2025, 'Count_Person'], 341784857)
 
 
 class TestDownloadAndUrlProbing(unittest.TestCase):
@@ -194,9 +248,10 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
                                                 'https://census.gov/test.xlsx',
                                                 dest_file)
             self.assertIn('HTML error page', str(ctx.exception))
+            self.assertFalse(os.path.exists(dest_file))
 
     def test_download_with_retry_writes_binary_file(self):
-        """Tests that download_with_retry writes binary data chunks successfully."""
+        """Tests that download_with_retry writes binary data chunks atomically."""
         session = MagicMock()
         mock_resp = MagicMock()
         mock_resp.status_code = 200
@@ -218,14 +273,14 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
                 self.assertEqual(f.read(), b'chunk1chunk2')
 
     def test_add_future_year_urls_gatekeeper_break(self):
-        """Tests that add_future_year_urls stops scanning when gatekeeper year is found."""
+        """Tests that add_future_year_urls stops scanning when a valid future year is found."""
         session = MagicMock()
         head_calls = []
 
         def mock_head(url, *args, **kwargs):
             head_calls.append(url)
             resp = MagicMock()
-            if '2024' in url:
+            if '2026' in url:
                 resp.status_code = 200
                 resp.headers = {'Content-Type': 'application/vnd.ms-excel'}
             else:
@@ -235,35 +290,51 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
 
         session.head = mock_head
 
-        with patch(
-                'us_census.pep.annual_population.preprocess._create_retry_session',
-                return_value=session), patch('time.sleep'):
+        with patch.object(prep, '_FILES_TO_DOWNLOAD', []), \
+             patch('us_census.pep.annual_population.preprocess._create_retry_session',
+                   return_value=session), \
+             patch('time.sleep'):
             add_future_year_urls()
+            download_urls = [
+                entry['download_path'] for entry in prep._FILES_TO_DOWNLOAD
+            ]
 
-        years_probed = [url for url in head_calls if '2024' in url]
+        years_probed = [url for url in head_calls if '2026' in url]
         self.assertTrue(len(years_probed) > 0)
-        years_2023 = [url for url in head_calls if '2023' in url]
-        self.assertEqual(len(years_2023), 0)
+        years_2025 = [url for url in head_calls if '2025' in url]
+        self.assertEqual(len(years_2025), 0)
+        self.assertTrue(any('2020-2026' in url for url in download_urls))
 
     def test_add_future_year_urls_fallback_to_baseline(self):
-        """Tests that add_future_year_urls falls back to baseline year when all future years 404."""
+        """Tests that add_future_year_urls stops at baseline_year and falls back without downgrading to older years."""
         session = MagicMock()
-        mock_resp = MagicMock()
-        mock_resp.status_code = 404
-        mock_resp.headers = {'Content-Type': 'text/html'}
-        session.head.return_value = mock_resp
+        head_calls = []
 
-        import us_census.pep.annual_population.preprocess as prep
-        with patch(
-                'us_census.pep.annual_population.preprocess._create_retry_session',
-                return_value=session), patch('time.sleep'):
+        def mock_head(url, *args, **kwargs):
+            head_calls.append(url)
+            resp = MagicMock()
+            resp.status_code = 404
+            resp.headers = {'Content-Type': 'text/html'}
+            return resp
+
+        session.head = mock_head
+
+        with patch.object(prep, '_FILES_TO_DOWNLOAD', []), \
+             patch('us_census.pep.annual_population.preprocess._create_retry_session',
+                   return_value=session), \
+             patch('time.sleep'):
             prep.add_future_year_urls()
+            download_urls = [
+                entry['download_path'] for entry in prep._FILES_TO_DOWNLOAD
+            ]
 
-        download_urls = [
-            entry['download_path'] for entry in prep._FILES_TO_DOWNLOAD
-        ]
+        # Ensure 2025-baseline templates never probed 2024
+        self.assertFalse(
+            any('NST-EST2024-POP.xlsx' in url for url in head_calls))
+        self.assertTrue(any('NST-EST2025-POP.xlsx' in url
+                            for url in download_urls))
         self.assertTrue(
-            any('2020-2025' in url or '2020-2023' in url
+            any('NST-EST2023-POPCHG2020_2023.csv' in url
                 for url in download_urls))
 
 

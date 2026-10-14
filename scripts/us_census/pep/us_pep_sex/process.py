@@ -353,7 +353,7 @@ def _national_latest(file_path: str) -> pd.DataFrame:
                 2: 'Count_Person_Female'
             }})
         column_list = []
-        for year in range(2021, 2030):
+        for year in range(2021, 2031):
             column_name = f'POPESTIMATE{year}'
             if column_name in df.columns:
                 df.rename(columns={column_name: str(year)}, inplace=True)
@@ -600,7 +600,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     current_year = int(max_year) + 1
     for year in range(2021, current_year):
-        if current_year <= 2030:
+        if current_year <= 2031:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
@@ -616,7 +616,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df.insert(1, 'geo_ID', 'geoId/' + geoid)
     processed_dfs = []  # List to hold yearly DataFrames
 
-    for year in range(2020, 2030):
+    for year in range(2020, 2031):
         # Generate column names dynamically
         male_col = f'July{year}Male'
         female_col = f'July{year}Female'
@@ -917,7 +917,8 @@ def _county_latest(file_path: str) -> pd.DataFrame:
                 8: '2026',
                 9: '2027',
                 10: '2028',
-                11: '2029'
+                11: '2029',
+                12: '2030'
             }
         })
 
@@ -1018,6 +1019,60 @@ class PopulationEstimateBySex:
         processed_count = 0
         total_files_to_process = len(ip_files)
         logging.info(f"No of files to be processed {len(ip_files)}")
+        # Define the base mappings for fixed years (e.g., 2023)
+        file_to_function_mapping = {
+            "pe-11-1": _national_1900_1979,
+            "us-est90int": _national_1990_2000,
+            "us-est90int-": _national_1990_2000,
+            "us-est00int": _national_2000_2010,
+            "us-est00int-": _national_2000_2010,
+            "nc-est2020-agesex-": _national_2010_2020,
+            "nc-est2020-agesex-r": _national_2010_2020,
+            "pe": _state_1970_1980,
+            "stiag": _state_1980_1990,
+            "st-est00int-02-": _state_2000_2010,
+            "st-est00int-02": _state_2000_2010,
+            "SC-EST2020-AGESEX": _state_2010_2020,
+            "SC-EST2020-AGESEX-": _state_2010_2020,
+            "co-asr-1": _county_1970_1980,
+            "pe-02-1": _county_1980_1990,
+            "stch-icen1": _county_1990_2000,
+            "co-est00int-agesex-": _county_2000_2010,
+            "co-est00int-agesex-5": _county_2000_2010,
+            "CC-EST2020-AGESEX-": _county_2010_2020,
+            "CC-EST2020-AGESEX-A": _county_2010_2020
+        }
+
+        # Iterate from 2023 to 2030 and add mappings for years dynamically
+        for file_year in range(2023, 2031):
+            # For the 'national', 'state', and 'county' entries, use the same method for years 2023 to 2030
+            file_to_function_mapping[
+                f"nc-est{file_year}-agesex-"] = _national_latest
+            file_to_function_mapping[
+                f"nc-est{file_year}-agesex-r"] = _national_latest
+
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-2"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-3"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-4"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-5"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-0"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-1"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-syasex-"] = _state_latest
+            file_to_function_mapping[
+                f"sc-est{file_year}-agesex-"] = _state_latest
+
+            file_to_function_mapping[
+                f"cc-est{file_year}-agesex-"] = _county_latest
+            file_to_function_mapping[
+                f"cc-est{file_year}-agesex-a"] = _county_latest
+
         for file_path in ip_files:
             logging.info(f"Processing the file:{file_path}")
             processed_count += 1
@@ -1026,60 +1081,6 @@ class PopulationEstimateBySex:
             # Read till -4 inorder to remove the .tsv extension
 
             file_name = file_path.split("/")[-1][:-7]
-
-            # Define the base mappings for fixed years (e.g., 2023)
-            file_to_function_mapping = {
-                "pe-11-1": _national_1900_1979,
-                "us-est90int": _national_1990_2000,
-                "us-est90int-": _national_1990_2000,
-                "us-est00int": _national_2000_2010,
-                "us-est00int-": _national_2000_2010,
-                "nc-est2020-agesex-": _national_2010_2020,
-                "nc-est2020-agesex-r": _national_2010_2020,
-                "pe": _state_1970_1980,
-                "stiag": _state_1980_1990,
-                "st-est00int-02-": _state_2000_2010,
-                "st-est00int-02": _state_2000_2010,
-                "SC-EST2020-AGESEX": _state_2010_2020,
-                "SC-EST2020-AGESEX-": _state_2010_2020,
-                "co-asr-1": _county_1970_1980,
-                "pe-02-1": _county_1980_1990,
-                "stch-icen1": _county_1990_2000,
-                "co-est00int-agesex-": _county_2000_2010,
-                "co-est00int-agesex-5": _county_2000_2010,
-                "CC-EST2020-AGESEX-": _county_2010_2020,
-                "CC-EST2020-AGESEX-A": _county_2010_2020
-            }
-
-            # Iterate from 2023 to 2029 and add mappings for years dynamically
-            for file_year in range(2023, 2030):
-                # For the 'national', 'state', and 'county' entries, use the same method for years 2023 to 2029
-                file_to_function_mapping[
-                    f"nc-est{file_year}-agesex-"] = _national_latest
-                file_to_function_mapping[
-                    f"nc-est{file_year}-agesex-r"] = _national_latest
-
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-2"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-3"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-4"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-5"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-0"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-1"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-syasex-"] = _state_latest
-                file_to_function_mapping[
-                    f"sc-est{file_year}-agesex-"] = _state_latest
-
-                file_to_function_mapping[
-                    f"cc-est{file_year}-agesex-"] = _county_latest
-                file_to_function_mapping[
-                    f"cc-est{file_year}-agesex-a"] = _county_latest
 
             df = file_to_function_mapping[file_name](file_path)
 
@@ -1138,7 +1139,7 @@ def _create_retry_session() -> requests.Session:
     retries = Retry(
         total=5,
         backoff_factor=2,
-        status_forcelist=[429, 500, 502, 503, 504, 520],
+        status_forcelist=[408, 429, 500, 502, 503, 504, 520],
         allowed_methods=["HEAD", "GET"],
         respect_retry_after_header=True,
     )
@@ -1148,21 +1149,47 @@ def _create_retry_session() -> requests.Session:
     return session
 
 
+@retry(tries=3, delay=2, backoff=2, exceptions=(ValueError,))
+def _head_with_html_retry(session: requests.Session,
+                          url: str,
+                          timeout: int = 15) -> requests.Response:
+    """Performs a HEAD request and retries if HTTP 200 returns an HTML error page."""
+    response = session.head(url, allow_redirects=True, timeout=timeout)
+    content_type = response.headers.get('Content-Type', '')
+    if response.status_code == 200 and 'html' in content_type.lower():
+        raise ValueError(f"Server returned HTTP 200 HTML response for {url}")
+    return response
+
+
 def is_valid_url(session: requests.Session, url: str) -> bool:
     try:
         with session.get(url, stream=True, timeout=20) as response:
             if response.status_code != 200:
                 return False
             content_type = response.headers.get("Content-Type", "")
-            if "text/html" in content_type.lower():
-                # Might be an error page disguised as 200
-                chunk = next(response.iter_content(chunk_size=1024), b"")
-                if b"error" in chunk.lower() or len(chunk) < 500:
-                    return False
+            if "html" in content_type.lower():
+                return False
             return True
     except Exception as e:
         logging.warning(f"Error checking URL: {url} - {e}")
         return False
+
+
+_BASELINE_YEAR = 2025
+
+
+def _retain_cached_if_exists(url_to_check: str):
+    """If a cached file exists in persistent storage for url_to_check, retain it in _FILES_TO_DOWNLOAD."""
+    file_name = url_to_check.split('/')[-1]
+    cached_file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
+    if os.path.isfile(cached_file_path):
+        logging.warning(
+            f"HEAD probe failed for {url_to_check}, but cached copy exists at {cached_file_path}; retaining in download list."
+        )
+        _FILES_TO_DOWNLOAD.append({
+            "download_path": url_to_check,
+            "is_historical": False
+        })
 
 
 def add_future_year_urls():
@@ -1198,6 +1225,8 @@ def add_future_year_urls():
                 session, url["download_path"]))  # suspicious, but passes check
            )
     ]
+    for item in _FILES_TO_DOWNLOAD:
+        item["is_historical"] = True
 
     logging.info(
         f"Historical urls fetched from input_json: {_FILES_TO_DOWNLOAD}")
@@ -1212,16 +1241,16 @@ def add_future_year_urls():
 
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
+    selected_year = None
 
-    # Loop through years in reverse order from 2030 to 2023
-    for future_year in range(2030, 2022, -1):  # From 2030 to 2023
-
+    # Loop through years in reverse order from 2030 down to _BASELINE_YEAR
+    for future_year in range(2030, _BASELINE_YEAR - 1, -1):
         # We check the National CSV first. If it's 404, the whole year is skipped.
         gatekeeper_url = urls_to_scan[0].format(YEAR=future_year)
         try:
-            response = session.head(gatekeeper_url,
-                                    allow_redirects=True,
-                                    timeout=15)
+            response = _head_with_html_retry(session,
+                                             gatekeeper_url,
+                                             timeout=15)
             time.sleep(0.2)
             content_type = response.headers.get('Content-Type', '')
             if response.status_code != 200 or 'html' in content_type.lower():
@@ -1229,69 +1258,83 @@ def add_future_year_urls():
                     f"Skipping year {future_year}: National file not found or is HTML (status code: {response.status_code})."
                 )
                 continue
-        except requests.exceptions.RequestException as e:
+            selected_year = future_year
+            break
+        except (requests.exceptions.RequestException, ValueError) as e:
             logging.warning(
                 f"Skipping year {future_year} due to an error checking the gatekeeper URL: {e}"
             )
             continue
 
-        YEAR = future_year
-        # Loop through URLs
-        for url in urls_to_scan:
-            if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
-                for i in range(1, 57):  # Loop i from 01 to 56
-                    formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 56)
-                    url_to_check = url.format(YEAR=YEAR, i=formatted_i)
-                    logging.info(f"checking url: {url_to_check}")
+    if selected_year is None:
+        logging.warning(
+            f"No gatekeeper URL confirmed via HEAD probe; falling back to baseline year {_BASELINE_YEAR}."
+        )
+        selected_year = _BASELINE_YEAR
 
-                    try:
-                        # HEAD calls only fetch headers and should complete quickly.
-                        check_url = session.head(url_to_check,
-                                                 allow_redirects=True,
-                                                 timeout=15)
-                        time.sleep(0.1)
-                        content_type = check_url.headers.get('Content-Type', '')
-                        if check_url.status_code == 200 and 'html' not in content_type.lower(
-                        ):
-                            _FILES_TO_DOWNLOAD.append(
-                                {"download_path": url_to_check})
-
-                    except requests.exceptions.RequestException as e:
-                        logging.error(
-                            f"URL is not accessible {url_to_check} due to {e}")
-
-            else:  # This URL does not contain {i}, so we only need to process it once per year
-                url_to_check = url.format(YEAR=YEAR)
+    YEAR = selected_year
+    # Loop through URLs for the selected vintage year
+    for url in urls_to_scan:
+        if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
+            for i in range(1, 57):  # Loop i from 01 to 56
+                formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 56)
+                url_to_check = url.format(YEAR=YEAR, i=formatted_i)
                 logging.info(f"checking url: {url_to_check}")
-                # If the URL has already been processed for this year, skip it
-                if url_to_check in downloaded_year_urls:
-                    continue  # Skip this URL if it's already processed
 
                 try:
                     # HEAD calls only fetch headers and should complete quickly.
-                    check_url = session.head(url_to_check,
-                                             allow_redirects=True,
-                                             timeout=15)
+                    check_url = _head_with_html_retry(session,
+                                                      url_to_check,
+                                                      timeout=15)
                     time.sleep(0.1)
                     content_type = check_url.headers.get('Content-Type', '')
                     if check_url.status_code == 200 and 'html' not in content_type.lower(
                     ):
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                        downloaded_year_urls.add(
-                            url_to_check)  # Mark this URL as processed
-
+                        _FILES_TO_DOWNLOAD.append({
+                            "download_path": url_to_check,
+                            "is_historical": False
+                        })
                     else:
-                        logging.error(
-                            f"URL returned status code {check_url.status_code}: {url_to_check}"
-                        )
+                        _retain_cached_if_exists(url_to_check)
 
-                except requests.exceptions.RequestException as e:
+                except (requests.exceptions.RequestException, ValueError) as e:
                     logging.error(
                         f"URL is not accessible {url_to_check} due to {e}")
+                    _retain_cached_if_exists(url_to_check)
 
-        # Terminate year scan once latest confirmed vintage is processed
-        break
+        else:  # This URL does not contain {i}, so we only need to process it once per year
+            url_to_check = url.format(YEAR=YEAR)
+            logging.info(f"checking url: {url_to_check}")
+            # If the URL has already been processed for this year, skip it
+            if url_to_check in downloaded_year_urls:
+                continue  # Skip this URL if it's already processed
+
+            try:
+                # HEAD calls only fetch headers and should complete quickly.
+                check_url = _head_with_html_retry(session,
+                                                  url_to_check,
+                                                  timeout=15)
+                time.sleep(0.1)
+                content_type = check_url.headers.get('Content-Type', '')
+                if check_url.status_code == 200 and 'html' not in content_type.lower(
+                ):
+                    _FILES_TO_DOWNLOAD.append({
+                        "download_path": url_to_check,
+                        "is_historical": False
+                    })
+                    downloaded_year_urls.add(
+                        url_to_check)  # Mark this URL as processed
+
+                else:
+                    logging.error(
+                        f"URL returned status code {check_url.status_code}: {url_to_check}"
+                    )
+                    _retain_cached_if_exists(url_to_check)
+
+            except (requests.exceptions.RequestException, ValueError) as e:
+                logging.error(
+                    f"URL is not accessible {url_to_check} due to {e}")
+                _retain_cached_if_exists(url_to_check)
 
 
 def _get_target_file_name(file_to_download: dict) -> str:
@@ -1320,12 +1363,9 @@ def cleanup():
                 os.remove(file_path)
 
 
-@retry(tries=5,
-       delay=3,
-       backoff=2,
-       exceptions=(requests.RequestException, ValueError))
+@retry(tries=3, delay=3, backoff=2, exceptions=(ValueError,))
 def _download_single_file(session: requests.Session, url: str) -> str:
-    """Downloads a single URL to a temporary file, retrying on HTTP or HTML error responses."""
+    """Downloads a single URL to a temporary file, retrying on HTML error responses."""
     with session.get(url, stream=True, timeout=120) as response:
         response.raise_for_status()
         content_type = response.headers.get('Content-Type', '')
@@ -1349,10 +1389,6 @@ def _download_single_file(session: requests.Session, url: str) -> str:
             raise
 
 
-@retry(tries=3,
-       delay=2,
-       backoff=2,
-       exceptions=(requests.RequestException, Exception))
 def download_files():
     """
     Download files from URLs listed in _FILES_TO_DOWNLOAD.
@@ -1373,10 +1409,19 @@ def download_files():
         file_name_to_save = _get_target_file_name(file_to_download)
         cached_file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
                                         file_name_to_save)
+        is_historical = file_to_download.get('is_historical', False)
 
-        # Reuse cached file if it exists and is within TTL
+        # Reuse cached file if it exists (historical files never expire; dynamic files use _TTL_DAYS)
         if file_name_to_save in downloaded_files and os.path.isfile(
                 cached_file_path):
+            if is_historical:
+                logging.info(
+                    f"Skipping download, using immutable historical cached file: {file_name_to_save}"
+                )
+                shutil.copy(cached_file_path,
+                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+                file_to_download['is_downloaded'] = True
+                continue
             file_age = (time.time() -
                         os.path.getmtime(cached_file_path)) / (24 * 3600)
             if file_age <= _TTL_DAYS:
@@ -1417,6 +1462,7 @@ def download_files():
                 logging.warning(
                     f"Failed to refresh {url} after retries ({e}); falling back to cached file: {file_name_to_save}"
                 )
+                os.utime(cached_file_path, None)
                 shutil.copy(cached_file_path,
                             os.path.join(_INPUT_FILE_PATH, file_name_to_save))
                 file_to_download['is_downloaded'] = True
