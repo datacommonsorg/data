@@ -106,9 +106,7 @@ class AppTest(unittest.TestCase):
         self.assertEqual(mock_storage.update_version_file.call_count, 2)
         self.assertEqual(mock_bigquery.update_import_summary.call_count, 2)
 
-    @patch('routes.imports.import_utils.get_caller_identity')
-    def test_update_import_version_override(self, mock_get_caller):
-        mock_get_caller.return_value = "tester@google.com"
+    def test_update_import_version_override(self):
         mock_bigquery = MagicMock()
         mock_storage = MagicMock()
         app.dependency_overrides[get_bigquery_client] = lambda: mock_bigquery
@@ -137,7 +135,7 @@ class AppTest(unittest.TestCase):
         self.assertEqual(called_params[0]["import_name"], "import1")
         self.assertEqual(called_params[0]["status"], "STAGING")
         self.assertEqual(called_params[0]["latest_version"], "gs://bucket/import1/ver_import1.csv")
-        self.assertEqual(called_kwargs.get("comment"), "version-override:tester@google.com release-comment")
+        self.assertEqual(called_kwargs.get("comment"), "release-comment")
 
     @patch('routes.events.import_utils.invoke_import_automation_workflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
@@ -154,7 +152,7 @@ class AppTest(unittest.TestCase):
                 "transfer_status": "TRANSFER_COMPLETED",
                 "import_name": "scripts/us_fed:Rates",
                 "import_version": "2026-09-01",
-                "post_process": "spanner_ingestion_workflow",
+                "invoke_airflow_dag": "false",
                 "graph_path": "/**/*.mcf*"
             },
             "messageId": "msg-123",
@@ -180,47 +178,6 @@ class AppTest(unittest.TestCase):
         )
         self.assertEqual(mock_bigquery.update_import_summary.call_count, 1)
 
-    @patch('routes.events.import_utils.invoke_import_automation_workflow')
-    @patch('routes.events.import_utils.check_duplicate', return_value=False)
-    @patch('routes.events.config.PROJECT_ID', 'test-project')
-    @patch('routes.events.config.LOCATION', 'us-central1')
-    def test_handle_feed_event_import_automation(self, mock_check_dup, mock_invoke):
-        mock_bigquery = MagicMock()
-        mock_storage = MagicMock()
-        app.dependency_overrides[get_bigquery_client] = lambda: mock_bigquery
-        app.dependency_overrides[get_storage_client] = lambda: mock_storage
-
-        notification = {
-            "attributes": {
-                "transfer_status": "TRANSFER_COMPLETED",
-                "import_name": "scripts/us_fed:Rates",
-                "import_version": "2026-09-01",
-                "post_process": "import_automation_workflow",
-                "graph_path": "/**/*.mcf*",
-                "import_size": "medium"
-            },
-            "messageId": "msg-456",
-            "data": base64.b64encode(b'{"test": "data"}').decode('utf-8')
-        }
-
-        response = client.post("/imports/feed", json={"message": notification})
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["status"], "OK")
-
-        mock_invoke.assert_called_once_with(
-            project_id='test-project',
-            location='us-central1',
-            workflow_id=config.IMPORT_AUTOMATION_WORKFLOW_ID,
-            import_name="scripts/us_fed:Rates",
-            latest_version="2026-09-01",
-            import_size="medium",
-            graph_path="/**/*.mcf*",
-            cron_schedule="",
-            skip_import_job=False,
-            skip_staging_ingestion=None,
-            skip_prod_ingestion=None,
-        )
-
     @patch('routes.events.import_utils.invoke_import_automation_airflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
     def test_handle_feed_event_import_automation_airflow(self, mock_check_dup, mock_invoke):
@@ -234,7 +191,8 @@ class AppTest(unittest.TestCase):
                 "transfer_status": "TRANSFER_COMPLETED",
                 "import_name": "scripts/us_fed:Rates",
                 "import_version": "2026-09-01",
-                "post_process": "import_automation_airflow",
+                "invoke_airflow_dag": "true",
+                "skip_import_job": "false",
                 "graph_path": "/**/*.mcf*",
                 "import_size": "large"
             },
@@ -257,6 +215,7 @@ class AppTest(unittest.TestCase):
             skip_staging_ingestion=None,
             skip_prod_ingestion=None,
         )
+        self.assertEqual(mock_bigquery.update_import_summary.call_count, 0)
 
     @patch('routes.events.import_utils.invoke_import_automation_airflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
@@ -271,7 +230,8 @@ class AppTest(unittest.TestCase):
                 "transfer_status": "TRANSFER_COMPLETED",
                 "import_name": "scripts/us_fed:Rates",
                 "import_version": "2026-09-01",
-                "post_process": "import_automation_airflow",
+                "invoke_airflow_dag": "true",
+                "skip_import_job": "false",
                 "dag_id": "USFed_Rates_Custom_DAG",
                 "graph_path": "/**/*.mcf*",
                 "import_size": "small"
@@ -312,7 +272,7 @@ class AppTest(unittest.TestCase):
         mock_creds.token = "fake-token"
         mock_auth.return_value = (mock_creds, "test-project")
 
-        # 1. When dag_id is None and AIRFLOW_IAP_CLIENT_ID is unset -> uses default credentials and calls generic DAG
+        # 1. When dag_id is None and AIRFLOW_IAP_CLIENT_ID is unset -> uses default credentials and calls ManualRefresh DAG
         mock_resp_ok = MagicMock()
         mock_resp_ok.status_code = 200
         mock_post.return_value = mock_resp_ok
@@ -325,7 +285,7 @@ class AppTest(unittest.TestCase):
                 dag_id=None,
             )
         called_url = mock_post.call_args[0][0]
-        self.assertEqual(called_url, "https://airflow.example.com/api/v1/dags/manual_refresh/dagRuns")
+        self.assertEqual(called_url, "https://airflow.example.com/api/v2/dags/ManualRefresh/dagRuns")
         self.assertEqual(mock_post.call_args[1]["headers"]["Authorization"], "Bearer fake-token")
 
         # 2. When AIRFLOW_IAP_CLIENT_ID is configured -> uses id_token.fetch_id_token
@@ -340,23 +300,17 @@ class AppTest(unittest.TestCase):
         self.assertEqual(mock_fetch_id_token.call_args[0][1], 'test-iap-client-id.apps.googleusercontent.com')
         self.assertEqual(mock_post.call_args[1]["headers"]["Authorization"], "Bearer iap-id-token")
 
-        # 3. When dag_id is specified but returns 404 -> falls back to generic DAG
-        mock_resp_404 = MagicMock()
-        mock_resp_404.status_code = 404
-        mock_post.side_effect = [mock_resp_404, mock_resp_ok]
-
+        # 3. When dag_id is specified -> invokes that specific DAG
         with patch('utils.imports.config.AIRFLOW_WEB_SERVER_URL', 'https://airflow.example.com'), \
              patch('utils.imports.config.AIRFLOW_IAP_CLIENT_ID', ''):
             import_utils.invoke_import_automation_airflow(
-                import_name="scripts/new:MissingImport",
+                import_name="scripts/new:CustomImport",
                 latest_version="2026-09-17",
-                dag_id="MissingImport",
+                dag_id="CustomImport_DAG",
             )
-        self.assertEqual(mock_post.call_count, 4)
-        first_try_url = mock_post.call_args_list[2][0][0]
-        fallback_url = mock_post.call_args_list[3][0][0]
-        self.assertEqual(first_try_url, "https://airflow.example.com/api/v1/dags/MissingImport/dagRuns")
-        self.assertEqual(fallback_url, "https://airflow.example.com/api/v1/dags/manual_refresh/dagRuns")
+        self.assertEqual(mock_post.call_count, 3)
+        custom_url = mock_post.call_args_list[2][0][0]
+        self.assertEqual(custom_url, "https://airflow.example.com/api/v2/dags/CustomImport_DAG/dagRuns")
 
     def test_database_initialize_endpoint(self):
         mock_bigquery = MagicMock()
