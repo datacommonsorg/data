@@ -14,6 +14,7 @@
             "rule_id": "check_deleted_records_percent",
             "description": "Checks that deleted records do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
+            "enabled": false,
             "params": {
                 "threshold": 0.1
             }

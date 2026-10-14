@@ -103,9 +103,8 @@ def download_crdc_files():
                     continue
 
                 clean_base = re.sub(r'[^a-zA-Z0-9]+', '_', base).lower()
-                if "algebra_ii" in clean_base or (
-                        "enrollment" in clean_base and
-                        "algebra" not in clean_base):
+                if "algebra_ii" in clean_base or ("enrollment" in clean_base and
+                                                  "algebra" not in clean_base):
                     continue
 
                 new_filename = f"crdc_{year_range}_{clean_base}{extension}"

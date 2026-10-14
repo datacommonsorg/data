@@ -60,7 +60,8 @@ class PreprocessDataTest(unittest.TestCase):
                 os.makedirs(input_dir)
                 os.makedirs(output_dir)
                 preprocess_data._PROCESSED_DIR = output_dir
-                input_csv = os.path.join(input_dir, 'crdc_2021-22_algebra_i.csv')
+                input_csv = os.path.join(input_dir,
+                                         'crdc_2021-22_algebra_i.csv')
                 pd.DataFrame({
                     'COMBOKEY': ['10000500870'],
                     'SCH_ALGENR_G08_HI_M': ['5'],

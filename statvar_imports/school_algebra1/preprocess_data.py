@@ -72,11 +72,9 @@ def extract_survey_end_year(filename: str) -> int:
 
 def _pad_id_series(series: pd.Series, width: int) -> pd.Series:
     """Safely zero-pads non-empty, non-NaN numeric string identifiers."""
-    cleaned = (
-        series.fillna('').astype(str).str.strip().str.replace(
-            r'\.0$', '', regex=True))
-    return cleaned.apply(
-        lambda x: x.zfill(width) if x and x.isdigit() else '')
+    cleaned = (series.fillna('').astype(str).str.strip().str.replace(
+        r'\.0$', '', regex=True))
+    return cleaned.apply(lambda x: x.zfill(width) if x and x.isdigit() else '')
 
 
 def preprocess_dataframe(df: pd.DataFrame, filename: str,
@@ -119,8 +117,8 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
     df = df[keep_cols]
     data_cols = [c for c in keep_cols if c.upper() not in _IDENTIFIER_COLS]
     if data_cols:
-        has_valid = (df[data_cols].apply(pd.to_numeric, errors='coerce') >=
-                     0).any(axis=1)
+        has_valid = (df[data_cols].apply(pd.to_numeric, errors='coerce')
+                     >= 0).any(axis=1)
         df = df[has_valid].copy()
 
     return df
