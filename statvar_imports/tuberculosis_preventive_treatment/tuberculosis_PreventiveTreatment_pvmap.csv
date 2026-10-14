@@ -1,0 +1,5 @@
+csvkey,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8
+iso3,observationAbout,dcid:country/{Data},,,,,,,,,,,,,,
+YEAR,observationDate,@Data,,,,,,,,,,,,,,
+DISAGGR_1:0-4 years,age,dcid:Years0To4,,,,,,,,,,,,,,
+VALUE,value,@Data,populationType,dcid:Person,measuredProperty,dcid:count,measurementDenominator,dcid:Count_Person_Tuberculosis_EligibleForPreventiveTreatment,medicalCondition,dcid:Tuberculosis,medicalStatus,dcid:StartedOnTBPreventiveTreatment,unit,dcid:Percent,scalingFactor,100
