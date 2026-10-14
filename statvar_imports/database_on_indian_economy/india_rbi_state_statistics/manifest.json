@@ -18,9 +18,7 @@
                 "input_files/price_and_wages/*.xlsx",
                 "counters/*.csv",
                 "configs.json",
-                "validation_config.json",
-                "places.mcf",
-                "sdg_schema.mcf"
+                "validation_config.json"
             ],
             "import_inputs": [
                 {

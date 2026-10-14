@@ -189,7 +189,11 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
                 if magic == XLSX_ZIP_SIGNATURE:
                     logging.info(f"Skipping existing valid file: {file_name}")
                     continue
-            if not force_download and os.path.getsize(file_path) == 0:
+                try:
+                    os.remove(file_path)
+                except OSError:
+                    pass
+            elif not force_download and os.path.getsize(file_path) == 0:
                 try:
                     os.remove(file_path)
                 except OSError:
