@@ -95,6 +95,7 @@ Year,Place,StatVar,Quantity,Unit
 2024,geoId/01,dcid:Median_Income_Person_16OrMoreYears_NoHealthInsurance_WithEarnings,25025.0,USDollar
 2024,geoId/01,dcid:Count_Household_NoHealthInsurance,453321.0,
 2024,geoId/01,dcid:Count_Household_NoHealthInsurance_IncomeOf25000OrLessUSDollar,105623.793,
+2024,geoId/01,dcid:Count_Household_NoHealthInsurance_IncomeOf50000To74999USDollar,85677.669,
 2024,geoId/01,dcid:Median_Income_Household_NoHealthInsurance,37355.0,USDollar
 2024,geoId/01,dcid:Count_Person_NoHealthInsurance_PovertyStatusDetermined,454773.0,
 2024,geoId/01,dcid:Count_Person_NoHealthInsurance_0.5OrLessRatioToPovertyLine,74127.999,

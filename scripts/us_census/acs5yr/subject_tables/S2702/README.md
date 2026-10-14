@@ -54,5 +54,5 @@ python3 process.py \
 
 1. Percentage values for uninsured population breakdowns are converted into corresponding counts using the `denominators` configuration in `S2702_spec.json`.
 2. There has been a change in the age brackets from [2017](https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2017/5-year.html) onwards (`Under 18 years` / `18 to 64 years` in 2013–2016 vs. `Under 19 years` / `19 to 64 years` from 2017 onwards).
-3. Estimate and Margin of Error columns for household income between `$50,000 to $74,999` (2019–2024) are ignored in `ignoreColumns` to maintain consistency with historical years (2013–2018) and avoid collisions with the `$50,000 to $74,999` earnings bracket.
+3. In 2013–2018, the `$50,000 to $74,999` bracket columns for earnings and household income are disambiguated using explicit column prefix rules in `preprocess.find_and_replace`, allowing the 2019–2024 household income `$50,000 to $74,999` columns to map cleanly without collision.
 4. Margin of Error columns for median measurements (`Median age (years)`, `Median earnings (dollars)`, and `Median household income of householders`) are ignored across all years.

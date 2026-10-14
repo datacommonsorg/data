@@ -1119,6 +1119,15 @@
             "income": "[- 25000 USDollar]",
             "typeOf": "dcs:StatisticalVariable"
         },
+        "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999": {
+            "Node": "dcid:Count_Household_NoHealthInsurance_IncomeOf50000To74999USDollar",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "healthInsurance": "dcs:NoHealthInsurance",
+            "income": "[50000 74999 USDollar]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
         "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders": {
             "Node": "dcid:Median_Income_Household_NoHealthInsurance",
             "measuredProperty": "dcs:income",

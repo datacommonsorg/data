@@ -354,3 +354,11 @@ armedForcesStatus: dcs:Civilian
 institutionalization: dcs:USC_NonInstitutionalized
 typeOf: dcs:StatisticalVariable
 
+Node: dcid:Count_Household_NoHealthInsurance_IncomeOf50000To74999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+healthInsurance: dcs:NoHealthInsurance
+income: [50000 74999 USDollar]
+typeOf: dcs:StatisticalVariable
+
