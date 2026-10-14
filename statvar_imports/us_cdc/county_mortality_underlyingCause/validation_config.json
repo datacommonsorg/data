@@ -19,11 +19,20 @@
     },
     {
       "rule_id": "check_max_date_freshness",
-      "description": "Verify MaxDate is within allowable 3-year publication lag for all StatVars except rare historical exceptions",
+      "description": "Verify MaxDate is within allowable 3-year publication lag for common causes of death",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms')",
-        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 114"
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms', 'Count_MortalityEvent_DischargeOfFirearmsUndeterminedIntent', 'Count_MortalityEvent_PneumoconiosesAndChemicalEffects', 'Count_MortalityEvent_DiseasesOfAppendix', 'Count_MortalityEvent_BronchitisChronicAndUnspecified', 'Count_MortalityEvent_AcuteAndRapidlyProgressiveNephriticAndNephroticSyndrome', 'Count_MortalityEvent_Meningitis', 'Count_MortalityEvent_OtherNutritionalDeficiencies', 'Count_MortalityEvent_RespiratoryTuberculosis', 'Count_MortalityEvent_HyperplasiaOfProstate')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 107"
+      }
+    },
+    {
+      "rule_id": "check_max_date_rare_causes",
+      "description": "Verify MaxDate is at least the last known year (2023 or 2024) for rare causes of death that may not appear in every future year due to CDC suppression",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms', 'Count_MortalityEvent_DischargeOfFirearmsUndeterminedIntent', 'Count_MortalityEvent_PneumoconiosesAndChemicalEffects', 'Count_MortalityEvent_DiseasesOfAppendix', 'Count_MortalityEvent_BronchitisChronicAndUnspecified', 'Count_MortalityEvent_AcuteAndRapidlyProgressiveNephriticAndNephroticSyndrome', 'Count_MortalityEvent_Meningitis', 'Count_MortalityEvent_OtherNutritionalDeficiencies', 'Count_MortalityEvent_RespiratoryTuberculosis', 'Count_MortalityEvent_HyperplasiaOfProstate')",
+        "condition": "CASE WHEN StatVar IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms') THEN CAST(MaxDate AS INTEGER) >= 2023 ELSE CAST(MaxDate AS INTEGER) >= 2024 END"
       }
     }
   ]
