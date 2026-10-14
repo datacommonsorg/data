@@ -340,7 +340,7 @@ def process(input_tables_path, output_path):
                     if fips:
                         all_counties.add('geoId/' + fips)
                     z = 'zip/' + _v(table, r, 'ZIP')[:5]
-                    for clist in fh._COUNTY_CANDIDATES_CACHE.get(z, []):
+                    for clist in fh.get_county_candidates(z):
                         all_counties.update(clist)
                 print(
                     f'Pre-fetching GeoJSON coordinates for {len(all_counties)} unique counties...'

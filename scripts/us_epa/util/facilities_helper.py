@@ -206,6 +206,8 @@ def get_county_candidates(zcta):
 
        Returns: two candidate county lists corresponding to zip and geoOverlaps respectively.
     """
+    if not zcta or zcta in ('zip/', 'zip/00000'):
+        return [[], []]
     if zcta in _COUNTY_CANDIDATES_CACHE:
         return _COUNTY_CANDIDATES_CACHE[zcta]
     candidate_lists = []

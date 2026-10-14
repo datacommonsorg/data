@@ -276,7 +276,9 @@ class Downloader:
             pd.DataFrame: Crosswalk mapping GHGRP ID to ORIS codes.
         """
         ssl._create_default_https_context = ssl._create_unverified_context
-        if getattr(self, '_oris_df', None) is None:
+        if getattr(self, '_oris_df_cache', None) is None:
+            self._oris_df_cache = {}
+        if self.current_year not in self._oris_df_cache:
             try:
                 oris_df = pd.read_excel(self._generate_and_validate(
                     crosswalk_url, yr=self.current_year),
@@ -294,9 +296,9 @@ class Downloader:
                                         dtype=str,
                                         usecols=CROSSWALK_COLS_TO_KEEP,
                                         engine='openpyxl')
-            self._oris_df = oris_df.rename(
+            self._oris_df_cache[self.current_year] = oris_df.rename(
                 columns={'GHGRP Facility ID': GHGRP_ID_COL})
-        oris_df = self._oris_df
+        oris_df = self._oris_df_cache[self.current_year]
         all_facilities_df = pd.DataFrame()
         csv_filenames = list(
             SHEET_NAMES_TO_CSV_FILENAMES.values()) + ['direct_emitters.csv']
@@ -347,7 +349,7 @@ if __name__ == '__main__':
                     logging.info(
                         f"Data for year {year - 1} already exists in tmp_data, skipping download."
                     )
-                    break
+                    continue
                 logging.info(f"Downloading data for year: {year}")
                 try:
                     success = downloader.download_data(year, year - 1)
