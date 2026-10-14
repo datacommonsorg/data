@@ -41,9 +41,15 @@ The workflow for this data import involves two main steps: downloading the sourc
 
 All downloaded files are staged into the GCS path `gs://unresolved_mcf/country/southkorea/employment/source_files/`.
 
+> **Note:** The KOSIS links open in the default **Monthly** view (`YYYY.MM`). Before exporting/downloading each CSV, switch the **Time** filter in the KOSIS UI from **Monthly** to **Annual** (covering `2015` to the latest available year) to ensure the downloaded headers match the annual (`YYYY`) format expected by the PV maps.
+
 #### Autorefresh Type:
 
 This import is refreshed in a semi-automated manner on an annual cadence (`P1Y`).
+
+During each annual refresh when a new year of data is staged, update the following configuration files:
+1. Update `end_date` to the latest year in all 4 `*_metadata.csv` files (`employmentstatus_metadata.csv`, `sexandeducationalattainment_unemploymentstatus_metadata.csv`, `unemploymentrate_by_gender_age_metadata.csv`, and `unemploymentstatus_metadata.csv`).
+2. Update the `check_max_date_freshness` rule condition `MaxDate >= '<YEAR>'` in `validation_config.json` to the latest year.
 
 -----
 ### Step 1: Download the files:
