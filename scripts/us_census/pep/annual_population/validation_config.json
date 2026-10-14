@@ -26,18 +26,6 @@
             }
         },
         {
-            "rule_id": "max_date_consistent",
-            "validator": "MAX_DATE_CONSISTENT",
-            "scope": {
-                "variables": {
-                    "dcids": [
-                        "*"
-                    ]
-                }
-            },
-            "params": {}
-        },
-        {
             "rule_id": "check_date_freshness",
             "description": "Verifies that all StatVars meet freshness requirements (within 2 years of current year).",
             "validator": "SQL_VALIDATOR",
