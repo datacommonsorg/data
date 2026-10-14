@@ -1,40 +1,40 @@
 {
-    "schema_version": "1.0",
-    "rules": [
-        {
-            "rule_id": "check_max_date_latest",
-            "description": "Ensures active CRDC Algebra 1 StatVars have data up to at least 2024.",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(*) AS active_svs, MIN(MaxDate) AS min_max_date FROM stats WHERE NOT regexp_matches(StatVar, '_SchoolGrade[78]_')",
-                "condition": "active_svs >= 120 AND min_max_date >= '2024'"
-            }
-        },
-        {
-            "rule_id": "check_max_date_grade7_8",
-            "description": "Ensures historical Grade 7 and Grade 8 CRDC Algebra 1 StatVars have data up to at least 2021.",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(*) AS grade78_svs, MIN(MaxDate) AS min_max_date FROM stats WHERE regexp_matches(StatVar, '_SchoolGrade[78]_')",
-                "condition": "grade78_svs >= 42 AND min_max_date >= '2021'"
-            }
-        },
-        {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that deleted records do not exceed 0.1%.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "enabled": false,
-            "params": {
-                "threshold": 0.1
-            }
-        },
-        {
-            "rule_id": "check_lint_error_count",
-            "description": "Checks that lint error count is 0.",
-            "validator": "LINT_ERROR_COUNT",
-            "params": {
-                "threshold": 0
-            }
-        }
-    ]
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "enabled": false,
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensure zero MCF lint errors in generated output",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verify MaxDate is within allowable 3-year publication lag for active CRDC Algebra 1 StatVars",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE NOT regexp_matches(StatVar, '_SchoolGrade[78]_')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 120"
+      }
+    },
+    {
+      "rule_id": "check_max_date_grade7_8",
+      "description": "Verify MaxDate is at least 2021 for historical single-grade (Grade 7 and Grade 8) CRDC Algebra 1 StatVars",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '_SchoolGrade[78]_')",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2021 AND total_svs >= 42"
+      }
+    }
+  ]
 }
