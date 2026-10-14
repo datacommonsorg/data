@@ -36,9 +36,9 @@ def _normalize_region_columns(df: pd.DataFrame) -> pd.DataFrame:
         empty_mask = (df['REGIONID_REGION'].isna()) | (
             df['REGIONID_REGION'].astype(str).str.strip().isin(['', 'nan', 'None']))
         df.loc[(df['REGION'] == 'KN.A58') & empty_mask, 'REGIONID_REGION'] = 'Nyadri'
-        df['REGIONID_REGION'] = df['REGIONID_REGION'].fillna(df['REGION'])
-        df.loc[df['REGIONID_REGION'].astype(str).str.strip().isin(
-            ['', 'nan', 'None']), 'REGIONID_REGION'] = df['REGION']
+        empty_mask = (df['REGIONID_REGION'].isna()) | (
+            df['REGIONID_REGION'].astype(str).str.strip().isin(['', 'nan', 'None']))
+        df.loc[empty_mask, 'REGIONID_REGION'] = df['REGION']
     return df
 
 
@@ -62,10 +62,8 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
                 for v in parsed.values()
             ]
             df = pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
-        elif hasattr(parsed, 'reset_index'):
+        elif isinstance(parsed, (pd.Series, pd.DataFrame)):
             df = parsed.reset_index()
-        elif isinstance(parsed, pd.DataFrame):
-            df = parsed
         else:
             df = None
 
@@ -76,12 +74,8 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
             if 'OBS_VALUE' not in df.columns:
                 if 'VALUE' in df.columns:
                     df.rename(columns={'VALUE': 'OBS_VALUE'}, inplace=True)
-                elif 0 in df.columns or '0' in df.columns:
-                    df.rename(columns={
-                        0: 'OBS_VALUE',
-                        '0': 'OBS_VALUE'
-                    },
-                              inplace=True)
+                elif '0' in df.columns:
+                    df.rename(columns={'0': 'OBS_VALUE'}, inplace=True)
             return _normalize_region_columns(df)
     except Exception as e:
         logging.info('sdmx parser skipped for %s (%s); attempting fallback',
@@ -120,8 +114,8 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     if 'OBS_VALUE' not in df.columns:
         if 'VALUE' in df.columns:
             df.rename(columns={'VALUE': 'OBS_VALUE'}, inplace=True)
-        elif 0 in df.columns or '0' in df.columns:
-            df.rename(columns={0: 'OBS_VALUE', '0': 'OBS_VALUE'}, inplace=True)
+        elif '0' in df.columns:
+            df.rename(columns={'0': 'OBS_VALUE'}, inplace=True)
 
     return _normalize_region_columns(df)
 
