@@ -15,7 +15,7 @@
 import logging
 import os
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException
 from clients.bigquery import BigQueryClient
 from clients.storage import StorageClient
 import config
@@ -91,13 +91,11 @@ def update_import_status(req: UpdateImportStatusRequest,
 
 @router.post("/version", response_model=UpdateImportVersionResponse)
 def update_import_version(req: UpdateImportVersionRequest,
-                          request: Request,
                           bigquery: BigQueryClient = Depends(get_bigquery_client),
                           storage: StorageClient = Depends(get_storage_client)):
     """Updates version and status of multiple imports in BigQuery (ImportHistory & ImportSummary view)."""
     updated_imports = []
     import_items = []
-    caller = import_utils.get_caller_identity(request) if req.override else None
 
     for import_name in req.imports:
         logging.info(
@@ -114,7 +112,6 @@ def update_import_version(req: UpdateImportVersionRequest,
         comment = req.comment
         if req.override:
             params['status'] = 'STAGING'
-            comment = f'version-override:{caller} {comment}'
         elif params.get('status') == 'SKIP':
             version = storage.get_import_version(import_name, is_staging=False)
             summary = storage.get_import_summary(import_name, version)
