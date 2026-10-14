@@ -1,0 +1,17 @@
+"key","value"
+"url","https://uganda.opendataforafrica.org/qiubrhc/uganda-census-populations-from-1980-1991-and-2002-by-district-february-2009"
+"description","Uganda Census Populations 1980, 1991, 2002 by District"
+"#place_type","Country, AdministrativeArea1"
+"#places_within","country/UGA"
+"start_date",1980
+"end_date",2014
+"release_frequency","P1Y"
+"process",""
+"comments",""
+"output_columns","observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+"header_rows",1
+"drop_statvars_without_svobs",0
+"mapped_rows",1
+"mapped_columns",5
+"places_resolved_csv","places_resolved.csv"
+"generate_schema_mcf",0

@@ -1,0 +1,44 @@
+REGION,ID_REGION,REGIONID_REGION,INDICATOR,ID_INDICATOR,NOTES_INDICATOR,SEX,ID_SEX,FREQ,TIME_PERIOD,OBS_VALUE
+UG,UG,UG,KN.A73,KN.A73,"Total enrolment in a specific level of education (Pre-primary, Primary, Secondary and Tertiary), regardless of age, expressed as a percentage of the eligible official school-age population corresponding to the same level of education in a given school-year",KN.S1,KN.S1,A,2012,115.0
+UG,UG,UG,KN.A73,KN.A73,"Total enrolment in a specific level of education (Pre-primary, Primary, Secondary and Tertiary), regardless of age, expressed as a percentage of the eligible official school-age population corresponding to the same level of education in a given school-year",KN.S1,KN.S1,A,2013,113.0
+UG,UG,UG,KN.A73,KN.A73,"Total enrolment in a specific level of education (Pre-primary, Primary, Secondary and Tertiary), regardless of age, expressed as a percentage of the eligible official school-age population corresponding to the same level of education in a given school-year",KN.S1,KN.S1,A,2014,117.0
+UG,UG,UG,KN.A73,KN.A73,"Total enrolment in a specific level of education (Pre-primary, Primary, Secondary and Tertiary), regardless of age, expressed as a percentage of the eligible official school-age population corresponding to the same level of education in a given school-year",KN.S1,KN.S1,A,2015,109.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S1,KN.S1,A,2012,8329.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S1,KN.S1,A,2013,8459.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S1,KN.S1,A,2014,8773.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S1,KN.S1,A,2015,8264.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S1,KN.S1,A,2016,8656.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S2,KN.S2,A,2012,4158.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S2,KN.S2,A,2013,4219.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S2,KN.S2,A,2014,4377.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S2,KN.S2,A,2015,4122.0
+UG,UG,UG,KN.A80,KN.A80,,KN.S2,KN.S2,A,2016,4294.0
+UG,UG,UG,KN.A84,KN.A84,,KN.S1,KN.S1,A,2012,17682.0
+UG,UG,UG,KN.A84,KN.A84,,KN.S1,KN.S1,A,2013,18079.0
+UG,UG,UG,KN.A84,KN.A84,,KN.S1,KN.S1,A,2014,18408.0
+UG,UG,UG,KN.A84,KN.A84,,KN.S1,KN.S1,A,2015,18889.0
+UG,UG,UG,KN.A84,KN.A84,,KN.S1,KN.S1,A,2016,19718.0
+UG,UG,UG,KN.A85,KN.A85,,KN.S1,KN.S1,A,2012,171.0
+UG,UG,UG,KN.A85,KN.A85,,KN.S1,KN.S1,A,2013,185.0
+UG,UG,UG,KN.A85,KN.A85,,KN.S1,KN.S1,A,2014,191.0
+UG,UG,UG,KN.A85,KN.A85,,KN.S1,KN.S1,A,2015,193.0
+UG,UG,UG,KN.A85,KN.A85,,KN.S1,KN.S1,A,2016,203.0
+UG,UG,UG,KN.A86,KN.A86,,KN.S1,KN.S1,A,2012,145390.0
+UG,UG,UG,KN.A86,KN.A86,,KN.S1,KN.S1,A,2013,148711.0
+UG,UG,UG,KN.A86,KN.A86,,KN.S1,KN.S1,A,2014,149591.0
+UG,UG,UG,KN.A86,KN.A86,,KN.S1,KN.S1,A,2015,131325.0
+UG,UG,UG,KN.A86,KN.A86,,KN.S1,KN.S1,A,2016,160381.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S1,KN.S1,A,2014,7297.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S1,KN.S1,A,2015,7463.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S1,KN.S1,A,2016,7618.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S2,KN.S2,A,2014,3691.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S2,KN.S2,A,2015,3790.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S2,KN.S2,A,2016,3887.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S3,KN.S3,A,2014,3606.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S3,KN.S3,A,2015,3673.0
+UG,UG,UG,KN.A88,KN.A88,,KN.S3,KN.S3,A,2016,3731.0
+UG,UG,UG,KN.A32,KN.A32,The ratio of pupils in primary school (regardless of age) to the country total population aged 6-12 years,KN.S1,KN.S1,A,2011,118.0
+UG,UG,UG,KN.A32,KN.A32,The ratio of pupils in primary school (regardless of age) to the country total population aged 6-12 years,KN.S1,KN.S1,A,2012,115.0
+UG,UG,UG,KN.A32,KN.A32,The ratio of pupils in primary school (regardless of age) to the country total population aged 6-12 years,KN.S1,KN.S1,A,2013,113.0
+UG,UG,UG,KN.A32,KN.A32,The ratio of pupils in primary school (regardless of age) to the country total population aged 6-12 years,KN.S1,KN.S1,A,2014,117.0
+UG,UG,UG,KN.A32,KN.A32,The ratio of pupils in primary school (regardless of age) to the country total population aged 6-12 years,KN.S1,KN.S1,A,2015,109.0
