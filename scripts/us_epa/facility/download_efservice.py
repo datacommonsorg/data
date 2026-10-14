@@ -17,7 +17,8 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('epa_table_name', '', 'Name of table to download')
+flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
+                    'Name of table to download')
 flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'

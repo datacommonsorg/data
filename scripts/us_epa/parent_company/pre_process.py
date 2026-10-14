@@ -211,8 +211,10 @@ def preprocess(input_table_path, existing_facilities_file):
             company_name = company_name.replace("\"", "").replace("'", "")
             if not company_name:
                 continue
-            unique_company_names.add(company_name)
             company_id = fh.name_to_id(company_name)
+            if not company_id:
+                continue
+            unique_company_names.add(company_name)
 
             address = _str(
                 fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX))

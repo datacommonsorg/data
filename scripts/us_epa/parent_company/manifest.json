@@ -1,0 +1,38 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EPA_GHGRP_ParentCompanies_Ownership",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.epa.gov/ghgreporting",
+            "provenance_description": "EPA Greenhouse Gas Reporting Program (GHGRP) parent companies, facility ownership percentages, and aggregated parent company emissions.",
+            "scripts": [
+                "download_existing_facilities.py",
+                "download_parent_companies.py --companies_table_name=V_PARENT_COMPANY_INFO",
+                "pre_process.py",
+                "process_parent_company.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/table/EpaParentCompanyTable.tmcf",
+                    "cleaned_csv": "output/table/EpaParentCompanyTable.csv",
+                    "node_mcf": "output/table/EpaParentCompanyTable.mcf"
+                },
+                {
+                    "template_mcf": "output/ownership/EpaParentCompanyOwnership.tmcf",
+                    "cleaned_csv": "output/ownership/EpaParentCompanyOwnership.csv",
+                    "node_mcf": "output/ownership/EpaParentCompanyOwnership.mcf"
+                },
+                {
+                    "template_mcf": "output/svobs/SVObs.tmcf",
+                    "cleaned_csv": "output/svobs/SVObs.csv"
+                }
+            ],
+            "cron_schedule": "0 10 3,17 * *",
+            "source_files": [
+                "tmp_data/*"
+            ]
+        }
+    ]
+}
