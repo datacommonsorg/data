@@ -61,7 +61,7 @@ scripts/cdc_prams/
 
 ### Automation Cadence
 - **Dataset Release Frequency**: Annual (`P1Y`).
-- **Cloud Batch Cron Schedule**: Annual on June 1 (`0 0 1 6 *`) in `manifest.json`.
+- **Cloud Batch Cron Schedule**: Monthly on the 1st (`0 0 1 * *`) in `manifest.json`.
 - **Google3 Ingestion**: Polled weekly (`auto1w`) to detect new versions published to GCS.
 
 ---
