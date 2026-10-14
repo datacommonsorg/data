@@ -4,3 +4,4 @@ mapped_rows,1
 mapped_columns,"7,7"
 header_rows,1
 generate_schema_mcf,False
+spell_check,False
