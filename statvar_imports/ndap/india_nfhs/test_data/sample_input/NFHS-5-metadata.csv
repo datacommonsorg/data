@@ -1,0 +1,10 @@
+config,value
+mapped_rows,1
+#mapped_columns,15
+#input_rows,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+drop_statvars_without_svobs,0
+debug,0
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1btGqVcKXSSqnFTKVemkNhEMRqD5sXaN4y7f5mjIOajw/edit#gid=440701498
+pv_map,https://docs.google.com/spreadsheets/d/1btGqVcKXSSqnFTKVemkNhEMRqD5sXaN4y7f5mjIOajw/edit#gid=462614698
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1btGqVcKXSSqnFTKVemkNhEMRqD5sXaN4y7f5mjIOajw/edit#gid=707736944
