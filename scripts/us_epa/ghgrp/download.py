@@ -276,29 +276,24 @@ class Downloader:
             pd.DataFrame: Crosswalk mapping GHGRP ID to ORIS codes.
         """
         ssl._create_default_https_context = ssl._create_unverified_context
-        if getattr(self, '_oris_df_cache', None) is None:
-            self._oris_df_cache = {}
-        if self.current_year not in self._oris_df_cache:
-            try:
-                oris_df = pd.read_excel(self._generate_and_validate(
-                    crosswalk_url, yr=self.current_year),
-                                        'ORIS Crosswalk',
-                                        header=0,
-                                        dtype=str,
-                                        usecols=CROSSWALK_COLS_TO_KEEP,
-                                        engine='openpyxl')
-            except Exception:
-                logging.warning(f"Using fallback CROSSWALK_URI for 2022")
-                oris_df = pd.read_excel(self._generate_and_validate(
-                    crosswalk_url, yr=2022),
-                                        'ORIS Crosswalk',
-                                        header=0,
-                                        dtype=str,
-                                        usecols=CROSSWALK_COLS_TO_KEEP,
-                                        engine='openpyxl')
-            self._oris_df_cache[self.current_year] = oris_df.rename(
-                columns={'GHGRP Facility ID': GHGRP_ID_COL})
-        oris_df = self._oris_df_cache[self.current_year]
+        try:
+            oris_df = pd.read_excel(self._generate_and_validate(
+                crosswalk_url, yr=self.current_year),
+                                    'ORIS Crosswalk',
+                                    header=0,
+                                    dtype=str,
+                                    usecols=CROSSWALK_COLS_TO_KEEP,
+                                    engine='openpyxl')
+        except Exception:
+            logging.warning(f"Using fallback CROSSWALK_URI for 2022")
+            oris_df = pd.read_excel(self._generate_and_validate(crosswalk_url,
+                                                                yr=2022),
+                                    'ORIS Crosswalk',
+                                    header=0,
+                                    dtype=str,
+                                    usecols=CROSSWALK_COLS_TO_KEEP,
+                                    engine='openpyxl')
+        oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
         csv_filenames = list(
             SHEET_NAMES_TO_CSV_FILENAMES.values()) + ['direct_emitters.csv']
@@ -345,11 +340,6 @@ if __name__ == '__main__':
 
         for year in range(url_year, 2020, -1):
             if year <= datetime.now().year:
-                if os.path.exists(downloader._get_summary_filename(year - 1)):
-                    logging.info(
-                        f"Data for year {year - 1} already exists in tmp_data, skipping download."
-                    )
-                    continue
                 logging.info(f"Downloading data for year: {year}")
                 try:
                     success = downloader.download_data(year, year - 1)
@@ -358,10 +348,6 @@ if __name__ == '__main__':
                 except Exception as e:
                     logging.fatal(
                         f"Failed to download data for year {year}. Error: {e}")
-
-        downloader.extract_all_years()
-        downloader.save_all_crosswalks(
-            os.path.join('tmp_data', 'crosswalks.csv'))
 
     except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
