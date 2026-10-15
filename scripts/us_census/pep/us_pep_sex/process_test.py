@@ -284,7 +284,8 @@ class TestDownloadAndCacheLifecycle(unittest.TestCase):
                 {
                     'download_path':
                         'https://census.gov/nc-est2025-agesex-res.csv',
-                    'is_historical': False,
+                    'is_historical':
+                        False,
                 },
             ]
 

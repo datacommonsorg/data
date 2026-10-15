@@ -331,8 +331,8 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
         # Ensure 2025-baseline templates never probed 2024
         self.assertFalse(
             any('NST-EST2024-POP.xlsx' in url for url in head_calls))
-        self.assertTrue(any('NST-EST2025-POP.xlsx' in url
-                            for url in download_urls))
+        self.assertTrue(
+            any('NST-EST2025-POP.xlsx' in url for url in download_urls))
         self.assertTrue(
             any('NST-EST2023-POPCHG2020_2023.csv' in url
                 for url in download_urls))
