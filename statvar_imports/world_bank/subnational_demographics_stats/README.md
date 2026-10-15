@@ -10,36 +10,47 @@ The data presented on this page originates from The World Bank Group. It is made
 
 ### How to run:
 
+```bash
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/<input_file_name>.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --pv_map=wb_subnational_pvmap.csv \
+  --config_file=wb_subnational_metadata.csv \
+  --places_resolved_csv=wb_subnational_place_resolution.csv \
+  --output_path=output_files/<output_file_name> \
+  --output_counters=counters/<counter_file_name>.csv
 ```
-python3 ../../../tools/statvar_importer/stat_var_processor.py 
---input_data=input_files/<input_file_name>.csv 
---existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---pv_map=wb_subnational_pvmap.csv 
---config_file=wb_subnational_metadata.csv 
---places_resolved_csv=wb_subnational_place_resolution.csv 
---output_path=output_files/<output_file_name>
+
+#### Download the data:
+
+To download and preprocess the source data, run from `statvar_imports/world_bank/subnational_demographics_stats/`:
+```bash
+python3 download_data.py
 ```
 
-#### Download the data: 
-
-For download the source data, run:
-`python3 download_data.py`
-
-Notes: 
-Files will be downloaded inside "input_files" folder (`input_files/P_Data_Extract_From_Subnational_Population.zip`).
-After preprocessing the data, final input file will be `input_files/wb_subnational_input.csv`.
+Notes:
+- Files are downloaded inside the `input_files` folder (`input_files/P_Data_Extract_From_Subnational_Population.zip`).
+- After extracting and preprocessing the data, the final input file is `input_files/wb_subnational_input.csv`.
 
 #### Process the data:
 
-Execute the script inside the folder `/data/tools/statvar_importer/`
+Execute from `statvar_imports/world_bank/subnational_demographics_stats/`:
 
-```
-python3 ../../../tools/statvar_importer/stat_var_processor.py 
---input_data=input_files/wb_subnational_input.csv 
---existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---pv_map=wb_subnational_pvmap.csv 
---config_file=wb_subnational_metadata.csv 
---places_resolved_csv=wb_subnational_place_resolution.csv 
---output_path=output_files/wb_subnational_output
+```bash
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/wb_subnational_input.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --pv_map=wb_subnational_pvmap.csv \
+  --config_file=wb_subnational_metadata.csv \
+  --places_resolved_csv=wb_subnational_place_resolution.csv \
+  --output_path=output_files/wb_subnational_output \
+  --output_counters=counters/wb_subnational_counters.csv \
+  --log_level=-2 \
+  --log_every_n=1000
 ```
 
+#### Run tests:
+
+```bash
+python3 download_data_test.py
+```
