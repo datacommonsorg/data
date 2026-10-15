@@ -1,0 +1,35 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted records does not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks that MaxDate is consistent across all emergency department visit and hospitalization StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "variables": {
+                    "regex": [
+                        ".*(VisitedEmergencyDepartment|PatientHospitalized).*"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that all StatVars meet expected freshness requirements (>= 2022-09 for mortality and >= 2023-09 for emergency department visits and hospitalizations).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "(StatVar = 'Count_MedicalConditionIncident_SummerSeason_ConditionHeatStress_PatientDeceased' AND MaxDate >= '2022-09') OR (StatVar != 'Count_MedicalConditionIncident_SummerSeason_ConditionHeatStress_PatientDeceased' AND MaxDate >= '2023-09')"
+            }
+        }
+    ]
+}
