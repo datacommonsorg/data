@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,25 +22,27 @@ output_files - output files (mcf, tmcf and csv are written here)
 """
 
 import os
-import shutil
 import sys
-from absl import flags
-from absl import app
-from absl import logging
 import warnings
+from absl import app, flags, logging
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 warnings.simplefilter(action='ignore', category=DeprecationWarning)
-warnings.simplefilter(action='ignore', category=FutureWarning)
+
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
 from config import *
 
+# Define Flags
+FLAGS = flags.FLAGS
+flags.DEFINE_bool('stats', False, 'Generate Stats data (CSV, MCF, TMCF).')
+flags.DEFINE_bool('place', False, 'Generate Place data (CSV, TMCF).')
+
 
 class NCESPrivateSchool(USEducation):
     """
-    This Class has requried methods to generate Cleaned CSV,
+    This Class has required methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
     _import_name = SCHOOL_TYPE
@@ -65,14 +67,23 @@ class NCESPrivateSchool(USEducation):
         self._generate_statvars = flag
 
 
-if __name__ == '__main__':
+def main(argv):
+    # Flag Validation: Throw error if no flags are used
+    if not FLAGS.stats and not FLAGS.place:
+        raise app.UsageError(
+            "No execution flag provided. You must specify either --stats or --place."
+        )
+
     try:
         logging.set_verbosity(logging.INFO)
-        logging.info("Main Method Starts For Private School District ")
+        logging.info("Main Method Starts For Private School District")
+
+        # Path Setup
         gcs_output_dir_local = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
         os.makedirs(input_path_base, exist_ok=True)
+
         input_files_to_process = []
         if os.path.exists(input_path_base):
             for year_folder_name in sorted(os.listdir(input_path_base)):
@@ -86,8 +97,10 @@ if __name__ == '__main__':
 
         if not input_files_to_process:
             logging.warning(
-                f"No CSV files found in {input_path_base} or its year subfolders. Please ensure download_input_files.py has been run and placed files correctly."
+                f"No CSV files found in {input_path_base}. Ensure download_input_files.py was run."
             )
+
+        # Output Directories
         output_file_path = os.path.join(gcs_output_dir_local, "output_files")
         os.makedirs(output_file_path, exist_ok=True)
 
@@ -95,6 +108,7 @@ if __name__ == '__main__':
                                               "output_place")
         os.makedirs(output_file_path_place, exist_ok=True)
 
+        # File Paths
         cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
         mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
         tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
@@ -103,13 +117,31 @@ if __name__ == '__main__':
                                            CSV_DUPLICATE_NAME)
         tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
+        # Initialize Loader
         loader = NCESPrivateSchool(input_files_to_process, cleaned_csv_path,
                                    mcf_path, tmcf_path, cleaned_csv_place,
                                    duplicate_csv_place, tmcf_path_place)
 
-        loader.generate_csv()
-        loader.generate_mcf()
-        loader.generate_tmcf()
-        logging.info("Main Method Completed For Private School District ")
+        # Conditional Execution based on flags
+        if FLAGS.stats:
+            logging.info("Triggering Stats Import...")
+            loader.set_generate_statvars_flag(True)
+            loader.generate_csv()
+            loader.generate_mcf()
+            loader.generate_tmcf()
+
+        if FLAGS.place:
+            logging.info("Triggering Place Import...")
+            # Disable statvars so processing focuses on entity/place data
+            loader.set_generate_statvars_flag(False)
+            loader.generate_csv()
+            loader.generate_tmcf()
+
+        logging.info("Main Method Completed For Private School District")
+
     except Exception as e:
-        logging.fatal(f"Error While Running Private School Process: {e} ")
+        logging.fatal(f"Error While Running Private School Process: {e}", exc_info=True)
+
+
+if __name__ == '__main__':
+    app.run(main)
