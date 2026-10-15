@@ -33,6 +33,9 @@ from jinja2 import Environment, FileSystemLoader
 
 _FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_LLM_PROVIDER_GEMINI = 'gemini'
+_LLM_PROVIDER_ANTIGRAVITY = 'antigravity'
+_LLM_PROVIDERS = [_LLM_PROVIDER_GEMINI, _LLM_PROVIDER_ANTIGRAVITY]
 
 
 def _define_flags():
@@ -46,7 +49,7 @@ def _define_flags():
 
         flags.DEFINE_list(
             'extra_instruction_files', [],
-            'List of extra instruction file paths to make available to Gemini '
+            'List of extra instruction file paths to make available to the LLM '
             '(optional)')
 
         flags.DEFINE_boolean(
@@ -54,7 +57,7 @@ def _define_flags():
             'Whether the dataset is in SDMX format (default: False)')
 
         flags.DEFINE_boolean('dry_run', False,
-                             'Generate prompt only without calling Gemini CLI')
+                             'Generate prompt only without calling LLM CLI')
 
         flags.DEFINE_string('maps_api_key', None,
                             'Google Maps API key (optional)')
@@ -73,7 +76,7 @@ def _define_flags():
         flags.DEFINE_boolean(
             'enable_sandboxing',
             platform.system() == 'Darwin',
-            'Enable sandboxing for Gemini CLI (default: True on macOS, False elsewhere)'
+            'Enable sandboxing for the LLM CLI (default: True on macOS, False elsewhere)'
         )
 
         flags.DEFINE_string(
@@ -85,6 +88,16 @@ def _define_flags():
             'gemini_cli', 'gemini',
             'Custom path or command to invoke Gemini CLI. '
             'Example: "/usr/local/bin/gemini". '
+            'WARNING: This value is executed in a shell - use only with trusted input.'
+        )
+
+        flags.DEFINE_enum('llm_provider', _LLM_PROVIDER_GEMINI, _LLM_PROVIDERS,
+                          'LLM provider to use for PV map generation.')
+
+        flags.DEFINE_string(
+            'antigravity_cli', 'agy',
+            'Custom path or command to invoke Antigravity CLI. '
+            'Example: "/usr/local/bin/agy". '
             'WARNING: This value is executed in a shell - use only with trusted input.'
         )
 
@@ -119,6 +132,8 @@ class Config:
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
     gemini_cli: Optional[str] = None
+    llm_provider: str = _LLM_PROVIDER_GEMINI
+    antigravity_cli: Optional[str] = None
     working_dir: Optional[str] = None
     extra_instruction_files: List[str] = field(default_factory=list)
     extra_instruction_max_bytes: int = 65536
@@ -149,6 +164,7 @@ class PVMapGenerator:
         # Copy config to avoid modifying the original
         self._config = copy.deepcopy(config)
 
+        self._validate_llm_provider()
         self._validate_extra_instruction_max_bytes()
 
         # Convert input_data paths to absolute
@@ -204,6 +220,12 @@ class PVMapGenerator:
         # Create run directory structure
         self._run_dir = self._datacommons_dir / 'runs' / self._gemini_run_id
         self._run_dir.mkdir(parents=True, exist_ok=True)
+
+    def _validate_llm_provider(self) -> None:
+        """Validate the configured LLM provider."""
+        if self._config.llm_provider not in _LLM_PROVIDERS:
+            raise ValueError(f"llm_provider must be one of {_LLM_PROVIDERS}: "
+                             f"{self._config.llm_provider}")
 
     def _validate_and_convert_path(self, path: str) -> Path:
         """Convert path to absolute and validate it's within working directory."""
@@ -285,7 +307,7 @@ class PVMapGenerator:
         )
         if not self._config.enable_sandboxing:
             print(
-                "WARNING: Sandboxing is disabled. Gemini will run without safety restrictions."
+                f"WARNING: Sandboxing is disabled. {self._config.llm_provider} will run without safety restrictions."
             )
         print("=" * 60)
 
@@ -325,16 +347,21 @@ class PVMapGenerator:
 
         # Generate the prompt as the first step
         prompt_file = self._generate_prompt()
-        gemini_log_file = self._run_dir / 'gemini_cli.log'
-        gemini_command = self._build_gemini_command(prompt_file,
-                                                    gemini_log_file)
+        if self._config.llm_provider == _LLM_PROVIDER_ANTIGRAVITY:
+            log_file = self._run_dir / 'agy_cli.log'
+            llm_command = self._build_antigravity_command(prompt_file, log_file)
+            cli_available = self._check_antigravity_cli_available()
+        else:
+            log_file = self._run_dir / 'gemini_cli.log'
+            llm_command = self._build_gemini_command(prompt_file, log_file)
+            cli_available = self._check_gemini_cli_available()
 
         result = GenerationResult(
             run_id=self._gemini_run_id,
             run_dir=self._run_dir,
             prompt_path=prompt_file,
-            gemini_log_path=gemini_log_file,
-            gemini_command=gemini_command,
+            gemini_log_path=log_file,
+            gemini_command=llm_command,
             sandbox_enabled=self._config.enable_sandboxing)
 
         # Check if we're in dry run mode
@@ -350,24 +377,46 @@ class PVMapGenerator:
                 logging.info("PV map generation cancelled by user.")
                 return result
 
-        # Check if Gemini CLI is available (warning only for aliases)
-        if not self._check_gemini_cli_available():
+        if not cli_available:
             logging.warning(
-                "Gemini CLI not found in PATH. Will attempt to run anyway (may work if aliased)."
-            )
+                "%s CLI not found in PATH. Will attempt to run anyway (may work if aliased).",
+                self._config.llm_provider)
 
-        logging.info(
-            f"Launching gemini (cwd: {self._working_dir}): {gemini_command} ")
-        logging.info(f"Gemini output will be saved to: {gemini_log_file}")
+        logging.info("Launching %s (cwd: %s): %s", self._config.llm_provider,
+                     self._working_dir, llm_command)
+        logging.info("%s output will be saved to: %s",
+                     self._config.llm_provider, log_file)
 
-        exit_code = self._run_subprocess(gemini_command)
+        exit_code = self._run_subprocess(llm_command)
         if exit_code == 0:
-            logging.info("Gemini CLI completed successfully")
+            logging.info("%s CLI completed successfully",
+                         self._config.llm_provider)
             return result
 
-        logging.error("Gemini CLI failed with exit code: %d", exit_code)
+        logging.error("%s CLI failed with exit code: %d",
+                      self._config.llm_provider, exit_code)
         raise RuntimeError(
-            f"Gemini CLI execution failed with exit code {exit_code}")
+            f"{self._config.llm_provider} CLI execution failed with exit code {exit_code}"
+        )
+
+    def _check_antigravity_cli_available(self) -> bool:
+        """Check if Antigravity CLI is available in PATH or custom command is provided."""
+        if self._config.antigravity_cli:
+            return True
+        return shutil.which('agy') is not None
+
+    def _build_antigravity_command(self, prompt_file: Path,
+                                   log_file: Path) -> str:
+        """Build the Antigravity CLI command with appropriate flags."""
+        prompt_path = prompt_file.resolve()
+        log_path = log_file.resolve()
+        internal_log_path = (self._run_dir / 'agy_internal.log').resolve()
+        antigravity_cmd = self._config.antigravity_cli or 'agy'
+        sandbox_flag = "--sandbox" if self._config.enable_sandboxing else ""
+        return (
+            f"cat '{prompt_path}' | {antigravity_cmd} {sandbox_flag} "
+            f"--dangerously-skip-permissions --add-dir '{self._working_dir}' "
+            f"--log-file '{internal_log_path}' 2>&1 | tee '{log_path}'")
 
     def _check_gemini_cli_available(self) -> bool:
         """Check if Gemini CLI is available in PATH or a custom command is provided."""
@@ -508,6 +557,8 @@ def prepare_config() -> Config:
         enable_sandboxing=_FLAGS.enable_sandboxing,
         output_path=_FLAGS.output_path,
         gemini_cli=_FLAGS.gemini_cli,
+        llm_provider=_FLAGS.llm_provider,
+        antigravity_cli=_FLAGS.antigravity_cli,
         working_dir=_FLAGS.working_dir,
         extra_instruction_files=_FLAGS.extra_instruction_files or [],
         extra_instruction_max_bytes=_FLAGS.extra_instruction_max_bytes)
