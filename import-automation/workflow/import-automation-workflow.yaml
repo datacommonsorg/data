@@ -14,9 +14,11 @@ main:
           - gcsMountPath: "/tmp/gcs"
           - helperUrl: ${"https://" + default(sys.get_env("IMPORT_HELPER_SERVICE"), "import-helper-service") + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
           - skipImportJob: ${string(default(map.get(args, "skipImportJob"), false)) == "true"}
-          - skipStagingIngestion: ${string(default(map.get(args, "skipStagingIngestion"), false)) == "true"}
           - dryRunIngestion: ${string(default(map.get(args, "dryRunIngestion"), false)) == "true"}
           - forceIngestion: ${string(default(map.get(args, "forceIngestion"), false)) == "true"}
+          # TODO: Move staging and prod ingestion denylist configuration to each import's manifest.json.
+          - stagingDenylist:
+              "NOAA_GlobalForecastSystem": true
           - prodDenylist:
               "Brazil_RuralDevelopmentProgram": true
               "CDC500": true
@@ -47,6 +49,8 @@ main:
               "USNationalPrisonerStatistics": true
               "WorldBankDatasets": true
           - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}
+          - isStagingDenylisted: ${default(map.get(stagingDenylist, importName), false) or default(map.get(stagingDenylist, shortImportName), false)}
+          - skipStagingIngestion: ${isStagingDenylisted or string(default(map.get(args, "skipStagingIngestion"), false)) == "true"}
           - isProdDenylisted: ${default(map.get(prodDenylist, importName), false) or default(map.get(prodDenylist, shortImportName), false)}
           - skipProdIngestion: ${isProdDenylisted or string(default(map.get(args, "skipProdIngestion"), false)) == "true"}
           - defaultResult:
