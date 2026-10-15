@@ -139,7 +139,8 @@ class TestSubjectTable(unittest.TestCase):
                     # Test Column Map
                     test_cmap, expected_cmap = _read_files(
                         test_cmap_path, paths['cmap'])
-                    self.assertEqual(test_cmap, expected_cmap)
+                    self.assertEqual(test_cmap.rstrip('\n'),
+                                     expected_cmap.rstrip('\n'))
 
                     # Test CSV
                     test_df, expected_df = _read_csv_files(

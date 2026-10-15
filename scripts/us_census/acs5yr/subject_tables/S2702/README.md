@@ -18,7 +18,6 @@ python3 census_api_data_downloader.py \
   --table_id=S2702 \
   --start_year=2013 \
   --end_year=2024 \
-  --all_summaries \
   --output_path=/tmp/census_download \
   --api_key=<YOUR_API_KEY>
 ```
