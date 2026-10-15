@@ -5,21 +5,10 @@ The data presented on this page originates from The World Bank Group. It is made
 
 - source:  `https://databank.worldbank.org/source/subnational-population`
 
-- how to download data: 
-    To download the data, you'll need to run the download script, `download_data.py`. This script will automatically create an "input_files" folder where you should place the file to be processed.
+- how to download data:
+    Run the download script, `download_data.py`. It automatically creates the `input_files` folder and downloads, extracts, and preprocesses `input_files/wb_subnational_input.csv`.
 
 ### How to run:
-
-```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input_files/<input_file_name>.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --pv_map=wb_subnational_pvmap.csv \
-  --config_file=wb_subnational_metadata.csv \
-  --places_resolved_csv=wb_subnational_place_resolution.csv \
-  --output_path=output_files/<output_file_name> \
-  --output_counters=counters/<counter_file_name>.csv
-```
 
 #### Download the data:
 
