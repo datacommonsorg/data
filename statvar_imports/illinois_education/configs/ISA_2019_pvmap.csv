@@ -1,0 +1,78 @@
+key,prop,val,,,,,,,,
+RCDTS,observationAbout,{Data},observationDate,2019,measuredProperty,count,populationType,Student,,
+# ISA Proficiency Total Student,value,{Number},assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,,,
+# ISA Proficiency - Male,value,{Number},gender,Male,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Female,value,{Number},gender,Female,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - White,value,{Number},race,White,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Black or African American,value,{Number},race,BlackOrAfricanAmerican,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Hispanic or Latino,value,{Number},race,HispanicOrLatino,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Asian,value,{Number},race,Asian,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Native Hawaiian or Other Pacific Islander,value,{Number},race,NativeHawaiianOrPacificIslander,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - American Indian or Alaska Native,value,{Number},race,AmericanIndianOrAlaskaNative,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Two or More Races,value,{Number},race,TwoOrMoreRaces,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Children with Disabilities,value,{Number},disabilityStatus,WithDisability,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - IEP,value,{Number},courseSpecialization,IndividualEducationProgram,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - EL,value,{Number},languageLearned,EnglishLearner,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Low Income,value,{Number},incomeStatus,LowIncome,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Homeless,value,{Number},socialVulnerabilityStatus,Homeless,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Migrant,value,{Number},socialVulnerabilityStatus,Migrant,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+# ISA Proficiency - Military,value,{Number},armedForcesStatus,Military,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,,
+% ISA Proficiency,value,{Number},assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,-schoolSubject,,
+% ISA Proficiency - Male %,value,{Number},gender,Male,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-gender,-schoolSubject"
+% ISA Proficiency - Female,value,{Number},gender,Female,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-gender,-schoolSubject"
+% ISA Proficiency - White,value,{Number},race,White,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - Black or African American,value,{Number},race,BlackOrAfricanAmerican,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - Hispanic or Latino,value,{Number},race,HispanicOrLatino,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - Asian,value,{Number},race,Asian,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - Native Hawaiian or Other Pacific Islander,value,{Number},race,NativeHawaiianOrOtherPacificIslander,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - American Indian or Alaska Native,value,{Number},race,AmericanIndianOrAlaskaNative,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - Two or More Races,value,{Number},race,TwoOrMoreRaces,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-race,-schoolSubject"
+% ISA Proficiency - Children with Disabilities,value,{Number},disabilityStatus,WithDisability,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-disabilityStatus,-schoolSubject"
+% ISA Proficiency - IEP,value,{Number},courseSpecialization,IndividualEducationProgram,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-courseSpecialization,-schoolSubject"
+% ISA Proficiency - EL,value,{Number},languageLearned,EnglishLearner,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-languageLearned,-schoolSubject"
+% ISA Proficiency - Low Income,value,{Number},incomeStatus,LowIncome,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-incomeStatus,-schoolSubject"
+% ISA Proficiency - Homeless,value,{Number},socialVulnerabilityStatus,Homeless,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-socialVulnerabilityStatus,-schoolSubject"
+% ISA Proficiency - Migrant,value,{Number},socialVulnerabilityStatus,Migrant,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-socialVulnerabilityStatus,-schoolSubject"
+% ISA Proficiency - Military,value,{Number},armedForcesStatus,Military,assessmentType,IllinoisScienceAssessment,educationalAchievementLevel,Proficient,measurementDenominator,"-armedForcesStatus,-schoolSubject"
+# ISA Participation,value,{Number},assessmentType,IllinoisScienceAssessment,,,,,,
+# ISA Participation - Male,value,{Number},gender,Male,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Female,value,{Number},gender,Female,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - White Count,value,{Number},race,White,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Black or African American,value,{Number},race,BlackOrAfricanAmerican,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Hispanic or Latino,value,{Number},race,HispanicOrLatino,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Asian,value,{Number},race,Asian,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Native Hawaiian or Other Pacific Islander,value,{Number},race,NativeHawaiianOrOtherPacificIslander,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - American Indian or Alaska Native,value,{Number},race,AmericanIndianOrAlaskaNative,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Two or More Races,value,{Number},race,TwoOrMoreRaces,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Children with Disabilities,value,{Number},disabilityStatus,WithDisability,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - IEP,value,{Number},courseSpecialization,IndividualEducationProgram,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - EL,value,{Number},languageLearned,EnglishLearner,assessmentType,IllinoisScienceAssessment,,,,
+# ISA Participation - Low Income,value,{Number},incomeStatus,LowIncome,assessmentType,IllinoisScienceAssessment,,,,
+% ISA Participation,value,{Number},assessmentType,IllinoisScienceAssessment,measurementDenominator,-schoolSubject,,,,
+% ISA Participation - Male,value,{Number},gender,Male,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-gender,-schoolSubject",,
+% ISA Participation - Female,value,{Number},gender,Female,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-gender,-schoolSubject",,
+% ISA Participation - White,value,{Number},race,White,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - Black or African American,value,{Number},race,BlackOrAfricanAmerican,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - Hispanic or Latino,value,{Number},race,HispanicOrLatino,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - Asian,value,{Number},race,Asian,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - Native Hawaiian or Other Pacific Islander,value,{Number},race,NativeHawaiianOrOtherPacificIslander,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - American Indian or Alaska Native,value,{Number},race,AmericanIndianOrAlaskaNative,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - Two or More Races,value,{Number},race,TwoOrMoreRaces,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-race,-schoolSubject",,
+% ISA Participation - Children with Disabilities,value,{Number},disabilityStatus,WithDisability,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-disabilityStatus,-schoolSubject",,
+% ISA Participation - IEP,value,{Number},courseSpecialization,IndividualEducationProgram,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-courseSpecialization,-schoolSubject",,
+% ISA Participation - EL,value,{Number},languageLearned,EnglishLearner,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-languageLearned,-schoolSubject",,
+% ISA Participation - Low Income,value,{Number},incomeStatus,LowIncome,assessmentType,IllinoisScienceAssessment,measurementDenominator,"-incomeStatus,-schoolSubject",,
+ISA No Participation Rate - Total,,,,,,,,,,
+ISA  No Participation Rate - White,,,,,,,,,,
+ISA  No Participation Rate - Black or African American,,,,,,,,,,
+ISA  No Participation Rate - Hispanic or Latino,,,,,,,,,,
+ISA  No Participation Rate - Asian,,,,,,,,,,
+ISA  No Participation Rate - Native Hawaiian or Other Pacific Islander,,,,,,,,,,
+ISA  No Participation Rate - American Indian or Alaska Native,,,,,,,,,,
+ISA  No Participation Rate - Two or More Races,,,,,,,,,,
+ISA  No Participation Rate - Male,,,,,,,,,,
+ISA  No Participation Rate - Female,,,,,,,,,,
+ISA  No Participation Rate - CWD,,,,,,,,,,
+ISA  No Participation Rate - IEP,,,,,,,,,,
+ISA  No Participation Rate - EL,,,,,,,,,,
+ISA  No Participation Rate - Low Income,,,,,,,,,,
