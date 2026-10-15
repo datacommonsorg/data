@@ -130,6 +130,11 @@ def write_csv(filename, reader, output, features, stat_vars):
 
                 # Map feature names to stat vars
                 for c in row:
+                    if 'Percent' in row[c] or 'PERCENT' in row[c]:
+                        continue
+                    if int(observation_date) < 2015 and not c.endswith(
+                        ('_001E', '_001M', '_016E', '_016M', '_017E', '_017M')):
+                        continue
 
                     sv = convert_column_to_stat_var(row[c], features)
                     if sv in stat_var_set:
@@ -160,6 +165,10 @@ def write_csv(filename, reader, output, features, stat_vars):
                 # Exclude missing values
                 if row[c] in _IGNORED_VALUES:
                     continue
+
+                # Strip trailing '.0' added by pandas float64 coercion on integer columns
+                if row[c].endswith('.0'):
+                    row[c] = row[c][:-2]
 
                 # Exclude percentages
                 if '.' in row[c]:
