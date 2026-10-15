@@ -1,0 +1,9 @@
+Node: E:population_by_municipality_and_gender_output->E0
+observationAbout: C:population_by_municipality_and_gender_output->observationAbout
+observationPeriod: C:population_by_municipality_and_gender_output->observationPeriod
+observationDate: C:population_by_municipality_and_gender_output->observationDate
+value: C:population_by_municipality_and_gender_output->value
+variableMeasured: C:population_by_municipality_and_gender_output->variableMeasured
+unit: C:population_by_municipality_and_gender_output->unit
+scalingFactor: C:population_by_municipality_and_gender_output->scalingFactor
+typeOf: dcs:StatVarObservation
