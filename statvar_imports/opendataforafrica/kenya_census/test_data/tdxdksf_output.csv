@@ -1,0 +1,6 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+country/KEN,2018,dcid:Mean_AssessmentScore_Student_English_EnglishLanguage,54.69,,,P1Y
+country/KEN,2019,dcid:Mean_AssessmentScore_Student_English_EnglishLanguage,53.47,,,P1Y
+country/KEN,2020,dcid:Mean_AssessmentScore_Student_English_EnglishLanguage,53.51,,,P1Y
+country/KEN,2021,dcid:Mean_AssessmentScore_Student_English_EnglishLanguage,49.06,,,P1Y
+country/KEN,2022,dcid:Mean_AssessmentScore_Student_English_EnglishLanguage,49.72,,,P1Y

@@ -41,7 +41,7 @@ The import processes 12 tables from KNBS Open Data:
 7. `rsfzlbg`: County population indicators (counties via `places_resolved.csv`)
 8. `srricmg`: National household expenditure categories (`country/KEN`)
 9. `tdxdksf`: KCPE primary examination mean assessment scores (`country/KEN`)
-10. `vdbvyfd`: Health and hospital deliveries by county (counties via `places_resolved.csv`)
+10. `vdbvyfd`: Adult education enrollment by county and sex (counties via `places_resolved.csv`)
 11. `welrttb`: Employment and labor force status (`country/KEN`)
 12. `xszlbb`: National economic production and industry indicators (`country/KEN`)
 
