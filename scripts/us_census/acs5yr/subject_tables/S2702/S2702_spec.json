@@ -6,6 +6,7 @@
 			"$15,000 to $24,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$15,000 to $24,999",
 			"$25,000 to $34,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$25,000 to $34,999",
 			"$35,000 to $49,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$35,000 to $49,999",
+			"$50,000 to $74,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
 			"$75,000 or more": "Civilian noninstitutionalized population 16 years and over with earnings!!$75,000 or more",
 			"Median earnings (dollars)": "Civilian noninstitutionalized population 16 years and over with earnings!!Median earnings (dollars)",
 			"Under $25,000": "Total household population!!Under $25,000",
@@ -17,10 +18,6 @@
 			"Estimate!!Total Uninsured!!$50,000 to $74,999.1": "Estimate!!Total Uninsured!!Total household population!!$50,000 to $74,999",
 			"Uninsured Population!!Margin of Error!!$50,000 to $74,999.1": "Uninsured Population!!Margin of Error!!Total household population!!$50,000 to $74,999",
 			"Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999.1": "Margin of Error!!Total Uninsured MOE!!Total household population!!$50,000 to $74,999",
-			"Uninsured Population!!Estimate!!$50,000 to $74,999": "Uninsured Population!!Estimate!!Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
-			"Estimate!!Total Uninsured!!$50,000 to $74,999": "Estimate!!Total Uninsured!!Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
-			"Uninsured Population!!Margin of Error!!$50,000 to $74,999": "Uninsured Population!!Margin of Error!!Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
-			"Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999": "Margin of Error!!Total Uninsured MOE!!Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
 			"Estimate!!Total Uninsured!!Did not work!!Civilian noninstitutionalized workers 16 years and over": "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over",
 			"Margin of Error!!Total Uninsured MOE!!Did not work!!Civilian noninstitutionalized workers 16 years and over": "Margin of Error!!Total Uninsured MOE!!Civilian noninstitutionalized workers 16 years and over"
 		}
@@ -308,7 +305,9 @@
 		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2021 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders",
 		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2022 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders",
 		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2023 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders",
-		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders"
+		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2024 INFLATION ADJUSTED DOLLARS)!!Total household population!!Median household income of householders",
+		"Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
+		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999"
 	],
 	"denominators": {
 		"Uninsured Population!!Estimate!!Total population": [
