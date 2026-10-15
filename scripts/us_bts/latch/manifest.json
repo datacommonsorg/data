@@ -8,6 +8,7 @@
             ],
             "provenance_url": "https://data.bts.gov/resource/va72-z8hz",
             "provenance_description": "US BTS Tract Household Transportation",
+            "validation_config_file": "validation_config.json",
             "scripts": [
                 "download_script.py",
                 "process.py"
@@ -32,7 +33,8 @@
             ],
             "source_files": [
                 "input_files/usbts_tract_household_transportation_2017_input.csv",
-                "input_files/usbts_tract_household_transportation_2009_input.csv"
+                "input_files/usbts_tract_household_transportation_2009_input.csv",
+                "import_configs.json"
             ],
             "cron_schedule": "0 1 6 * *",
             "resource_limits": {
