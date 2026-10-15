@@ -3,7 +3,7 @@
 "description","Uganda Regional Health Statistics Database"
 "#place_type","Country, AdministrativeArea1"
 "#places_within","country/UGA"
-"start_date",2006
+"start_date",2005
 "end_date",2016
 "release_frequency","P1Y"
 "process",""
@@ -13,5 +13,4 @@
 "drop_statvars_without_svobs",0
 "mapped_rows",1
 "mapped_columns",5
-"places_resolved_csv","places_resolved.csv"
 "generate_schema_mcf",0

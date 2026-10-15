@@ -36,7 +36,7 @@
 The import processes 4 tables from UBOS Open Data:
 
 1. `fidjrwf`: Uganda Regional Population Statistics (1969 – 2016)
-2. `ewvclpb`: Uganda Regional Education Statistics (2011 – 2016)
+2. `ewvclpb`: Uganda Regional Education Statistics (2007 – 2016)
 3. `yvitjl`: Uganda Regional Health Statistics Database (2005 – 2016)
 4. `qiubrhc`: Uganda Census Populations by District (1980, 1991, 2002, 2014)
 
