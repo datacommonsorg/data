@@ -1,0 +1,27 @@
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:GenderType
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household
+
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:FamilyTypeEnum
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household
+
+Node: dcid:Brazil_FoodAcquisitionProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Food Acquisition Program"
+isProvisional: dcs:True
+
