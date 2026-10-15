@@ -336,8 +336,8 @@ resource "google_cloud_run_v2_job" "import_validator" {
         image = "${var.artifact_registry_url}/dc-import-validator:${var.image_version}"
         resources {
           limits = {
-            cpu    = "4"
-            memory = "16Gi"
+            cpu    = "8"
+            memory = "32Gi"
           }
         }
       }
