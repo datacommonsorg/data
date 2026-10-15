@@ -33,7 +33,7 @@ function setup_python {
       pip3 install uv -q
     fi
     echo "Using uv for package installation"
-    uv pip install -r requirements_all.txt -q
+    uv pip install --torch-backend cpu -r requirements_all.txt -q
     PYTHON_REQUIREMENTS_INSTALLED=true
   fi
 }
