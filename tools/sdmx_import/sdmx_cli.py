@@ -19,8 +19,18 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 """
 
 import os
+import sys
+
+# Add project directories to the Python path
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+
 import urllib.parse
 from typing import Dict, Any, List
+import pandas as pd
+from dataclasses import asdict
 
 from absl import app
 from absl import flags
@@ -36,13 +46,17 @@ _COMMAND_HANDLERS = {
     'download-data': {
         'handler': lambda: handle_download_data(),
         'description': 'Download SDMX data with optional filters (CSV format)'
-    }
+    },
+    'discover-dataflows': {
+        'handler': lambda: handle_discover_dataflows(),
+        'description': 'Discover available dataflows with optional search'
+    },
 }
 
 # Flag definitions
 FLAGS = flags.FLAGS
 
-# Common flags for both commands
+# Common flags for commands
 flags.DEFINE_string('endpoint', None, 'SDMX REST API endpoint URL')
 flags.DEFINE_string('agency', None, 'Agency ID (e.g., OECD.SDD.NAD)')
 flags.DEFINE_string('dataflow', None, 'Dataflow ID')
@@ -186,6 +200,32 @@ def handle_download_data() -> None:
     logging.info(f"Successfully downloaded data to: {FLAGS.output_path}")
 
 
+def handle_discover_dataflows() -> None:
+    """
+    Handle the discover-dataflows subcommand.
+    """
+    logging.info("Starting dataflow discovery...")
+    logging.info(f"Endpoint: {FLAGS.endpoint}")
+    logging.info(f"Agency: {FLAGS.agency}")
+
+    # Validate inputs
+    if not validate_url(FLAGS.endpoint):
+        raise ValueError(f"Invalid endpoint URL: {FLAGS.endpoint}")
+
+    client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
+
+    logging.info("Listing all available dataflows")
+    dataflows_msg = client.list_dataflows()
+
+    if not dataflows_msg.dataflows:
+        logging.info("No dataflows found.")
+        return
+
+    # Convert to list of dicts for DataFrame creation and print
+    df = pd.DataFrame([asdict(df) for df in dataflows_msg.dataflows])
+    print(df)
+
+
 def validate_required_flags_for_command(command: str) -> None:
     """
     Validate that required flags are provided for the given command.
@@ -196,10 +236,17 @@ def validate_required_flags_for_command(command: str) -> None:
     Raises:
         ValueError: If required flags are missing
     """
-    required_common = ['endpoint', 'agency', 'dataflow', 'output_path']
-    missing_flags = []
+    required = {
+        'download-metadata': ['endpoint', 'agency', 'dataflow', 'output_path'],
+        'download-data': ['endpoint', 'agency', 'dataflow', 'output_path'],
+        'discover-dataflows': ['endpoint', 'agency'],
+    }
 
-    for flag_name in required_common:
+    if command not in required:
+        return  # No validation for this command
+
+    missing_flags = []
+    for flag_name in required[command]:
         flag_value = getattr(FLAGS, flag_name)
         if not flag_value:
             missing_flags.append(f"--{flag_name}")
