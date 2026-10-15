@@ -142,9 +142,65 @@ class DownloadTest(unittest.TestCase):
             self.assertTrue(os.path.exists(raw_file))
             raw_df = pd.read_csv(raw_file)
             self.assertEqual(len(raw_df), 4)
-            self.assertIn('health_indicator_short_name', raw_df.columns)
-            self.assertIn('region_county', raw_df.columns)
+            self.assertEqual(
+                list(raw_df.columns[:4]),
+                [
+                    'years',
+                    'health_indicator_short_name',
+                    'geography',
+                    'region_county',
+                ],
+            )
             self.assertIn('unadjusted_rate', raw_df.columns)
+            # Verify pagination stopped on first page since len(chunk) < 50000
+            self.assertEqual(mock_session.get.call_count, 1)
+
+    @mock.patch(
+        'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
+    )
+    def test_download_column_order_with_missing_first_row_keys(
+        self, mock_create_session
+    ):
+        mock_session = mock.MagicMock()
+        mock_session.__enter__.return_value = mock_session
+        mock_create_session.return_value = mock_session
+
+        mock_records = [
+            {
+                'unadjusted_rate': '9.2',
+                'region_county': 'Albany',
+                'years': '2021',
+            },
+            {
+                'geography': 'County',
+                'health_indicator_short_name': 'Flu-shot',
+                'region_county': 'Albany',
+                'years': '2021',
+                'unadjusted_rate': '50.1',
+            },
+        ]
+
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = mock_records
+        mock_session.get.return_value = mock_resp
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            download_health_indicators('https://mock-endpoint', tmp_dir)
+            raw_file = os.path.join(tmp_dir,
+                                    'ny_brfss_health_indicators_raw.csv')
+            raw_df = pd.read_csv(raw_file)
+            self.assertEqual(
+                list(raw_df.columns[:4]),
+                [
+                    'years',
+                    'health_indicator_short_name',
+                    'geography',
+                    'region_county',
+                ],
+            )
+            self.assertIn('Flu-Shot',
+                          raw_df['health_indicator_short_name'].dropna().values)
 
 
 if __name__ == '__main__':

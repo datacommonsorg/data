@@ -2,7 +2,7 @@
 
 ## 1. Import Overview
 
-This project processes and imports health indicator prevalence rates across all 62 counties in New York State and New York City, provided by the New York State Department of Health. The dataset provides annual county-level estimates across 5 survey releases (2014, 2016, 2018, 2021, and 2024).
+This project processes and imports health indicator prevalence rates across all 62 counties in New York State and New York City, provided by the New York State Department of Health. The dataset provides periodic survey wave county-level estimates across 5 survey releases (2014, 2016, 2018, 2021, and 2024).
 
 *   **Source URL**: [https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data](https://health.data.ny.gov/Health/Behavioral-Risk-Factor-Surveillance-System-BRFSS-H/jsy7-eb4n/about_data)
 *   **Import Type**: Automated
@@ -31,7 +31,7 @@ The import process involves querying the NYSDOH Socrata API and running a proces
 
 *   **Data Quality Checks**:
     *   The `dc_generated/` directory contains `report.json` and `summary_report.csv`, which provide validation and summary statistics for the generated data.
-    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%) and date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)`). The `check_max_date_freshness` SQL rule explicitly filters for the 38 active recurring health indicators present in the latest 2024 survey wave, excluding the 37 discontinued historical indicators from earlier waves (2014–2021).
+    *   Automated validation via `validator.py` evaluates the output against `validation_config.json` enforcing the historical deletion threshold (<= 0.1%), percentage bounds (`0 <= value <= 100`), and date freshness across all 75 indicators (both the 38 active recurring health indicators present in the latest 2024 survey wave and the 37 historical survey wave indicators from 2014–2021).
 
 ---
 

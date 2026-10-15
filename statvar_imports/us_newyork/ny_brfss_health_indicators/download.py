@@ -82,6 +82,125 @@ def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
         raise
 
 
+REQUIRED_LEADING_COLUMNS = [
+    'years',
+    'health_indicator_short_name',
+    'geography',
+    'region_county',
+]
+
+EXPECTED_COLUMNS = [
+    'years',
+    'health_indicator_short_name',
+    'geography',
+    'region_county',
+    'sample_size_n',
+    'est_count',
+    'est_denominator',
+    'unadjusted_rate',
+    'cl_95_lower_unadjusted',
+    'cl_95_upper_unadjusted',
+    'health_domain',
+    'health_indicator',
+    'prevention_agenda_pa',
+    'ship',
+    'dsrip',
+    'chirs',
+    'fips',
+    'health_indicator_sort_key',
+    'dsrip_region_sort_key',
+    'county_sort_key',
+    'location',
+    'adjusted_rate',
+    'cl_95_lower_adjusted',
+    'cl_95_upper_adjusted',
+    'notes',
+    'pa_rate_type',
+    'ship_rate_type',
+    'dsrip_rate_type',
+    'chirs_rate_type',
+    'upstate_downstate_sort_key',
+]
+
+EXPECTED_INDICATORS = frozenset([
+    'Diabetes',
+    'Prediabetes',
+    'Asthma',
+    'Arthritis',
+    'Cardiovascular Disease',
+    'COPD',
+    'High Blood Pressure',
+    'Elevated Cholesterol',
+    'Obesity',
+    'Overweight or Obese',
+    'Depressive Disorder',
+    '2+ Adverse Childhood Experiences',
+    'Active Transportation',
+    'Asthma Ever',
+    'Binge Drinking',
+    'Binge or Heavy Drinking',
+    'Breast Cancer Screening',
+    'Breast Cancer Screening Low Income 50-74',
+    'Cardiovascular Disease Disability',
+    'Cervical Cancer Screening',
+    'Cervical Cancer Screening (2012 guidelines)',
+    'Cervical Cancer Screening (2012 guidelines) 21-29',
+    'Cervical Cancer Screening (pre-2012 guidelines)',
+    'Cervical Cancer Screening (pre-2012 guidelines) Low Income',
+    'Cholesterol Checked',
+    'Chronic Disease Self-Management',
+    'Colorectal Cancer Screening',
+    'Colorectal Cancer Screening 50-64',
+    'Colorectal Cancer Screening Low Income',
+    'Current Cannabis Use',
+    'Current Medical Cannabis Use',
+    'Current Smoking',
+    'Current Smoking 18-24',
+    'Current Smoking Disability',
+    'Current Smoking Low Income',
+    'Current Smoking Poor Mental Health',
+    'DWI',
+    'Diabetes and Prediabetes Testing',
+    'Disability',
+    'Fall within Past Year 65+',
+    'Falls Resulting in Injury 65+',
+    'Fast Food Consumption',
+    'Flu-Shot',
+    'Flu-Shot 65+',
+    'Food Insecurity',
+    'Food Security',
+    'HCV Ever Tested',
+    'HCV Ever Tested 47-68',
+    'Health Care Coverage',
+    'Health Care Coverage Female 18-64',
+    'Health Care Provider',
+    'High Blood Pressure Taking Medication',
+    'Housing Insecurity',
+    'Housing or Utility Insecurity',
+    'Leisure-Time Physical Activity',
+    'Limitation Status',
+    'No Fruits or Vegetables',
+    'No Medical Care Due to Cost',
+    'Obesity Disability',
+    'Obesity Limitation Status',
+    'Obesity Low Income',
+    'PSA Screening',
+    'Pneumonia Shot 65+',
+    'Poor General Health',
+    'Poor Mental Health',
+    'Poor Physical Health',
+    'Provider Discussed Healthy Pregnancy',
+    'Recent Checkup',
+    'Recent Checkup Female 18-44',
+    'Recent Checkup Female 18-64',
+    'Recent Dental Visit',
+    'Recent Dental Visit Female 18-44',
+    'Sugar-Sweetened Beverages',
+    'Walkable Neighborhood',
+    'e-Cigarettes',
+])
+
+
 def download_health_indicators(endpoint: str,
                                output_dir: str) -> tuple[int, list[str]]:
     """Downloads all health indicators for all NY counties and regions."""
@@ -111,6 +230,8 @@ def download_health_indicators(endpoint: str,
                 break
             records.extend(chunk)
             logging.info('Fetched %d records (offset %d).', len(chunk), offset)
+            if len(chunk) < limit:
+                break
             offset += len(chunk)
 
     if not records:
@@ -121,6 +242,27 @@ def download_health_indicators(endpoint: str,
     logging.info('Received %d total raw records from Health Data NY API.',
                  len(records))
     raw_df = pd.DataFrame(records)
+
+    # Ensure deterministic column order so the 4 mapped_columns are always first
+    ordered_cols = list(REQUIRED_LEADING_COLUMNS)
+    for col in EXPECTED_COLUMNS:
+        if col not in ordered_cols and col in raw_df.columns:
+            ordered_cols.append(col)
+    for col in raw_df.columns:
+        if col not in ordered_cols:
+            ordered_cols.append(col)
+    raw_df = raw_df.reindex(columns=ordered_cols)
+
+    if 'health_indicator_short_name' in raw_df.columns:
+        raw_df['health_indicator_short_name'] = (
+            raw_df['health_indicator_short_name'].replace(
+                {'Flu-shot': 'Flu-Shot'}))
+        observed = set(raw_df['health_indicator_short_name'].dropna().unique())
+        unmapped = sorted(observed - EXPECTED_INDICATORS)
+        if unmapped:
+            logging.warning(
+                'Found %d unmapped health_indicator_short_name values: %s',
+                len(unmapped), unmapped)
 
     # Save complete raw unpivoted dataset (all 17,000+ API records)
     raw_file = os.path.join(output_dir, 'ny_brfss_health_indicators_raw.csv')

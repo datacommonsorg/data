@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.health.ny.gov/statistics/brfss/expanded/",
-            "provenance_description": "The Behavioral Risk Factor Surveillance System (BRFSS) Health Indicators dataset from the New York State Department of Health provides annual estimates of chronic disease prevalence across all counties in New York.",
+            "provenance_description": "The Behavioral Risk Factor Surveillance System (BRFSS) Health Indicators dataset from the New York State Department of Health provides periodic survey wave estimates of chronic disease prevalence across all counties in New York.",
             "scripts": [
                 "download.py",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ny_brfss_health_indicators_raw.csv --pv_map=ny_brfss_health_indicators_pv_map.csv --config_file=ny_brfss_health_indicators_metadata.csv --output_path=output_files/ny_brfss_health_indicators_output --output_counters=counters/ny_brfss_health_indicators_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
