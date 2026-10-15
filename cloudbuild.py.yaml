@@ -52,3 +52,6 @@ availableSecrets:
   secretManager:
     - versionName: projects/datcom-ci/secrets/dc-api-key/versions/latest
       env: DC_API_KEY
+
+options:
+  machineType: 'E2_HIGHCPU_8'
