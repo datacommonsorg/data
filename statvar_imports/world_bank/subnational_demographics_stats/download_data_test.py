@@ -87,8 +87,8 @@ class DownloadDataTest(unittest.TestCase):
         csv_path = os.path.join(self.input_dir, "wb_subnational_input.csv")
         with open(csv_path, "w", encoding="latin1") as f:
             f.write(
-                'Series Name,Country Name,2016 [YR2016]\n'
-                '"Population, total","Afghanistan, Badakhshan",1216000.0\n'
+                'Series Name, Country Name ,2016 [YR2016]\n'
+                '"Population, total"," Afghanistan, Badakhshan ",1216000.0\n'
             )
 
         download_data.preprocess(self.input_dir)

@@ -219,7 +219,10 @@ def preprocess(inputdir):
     try:
         csv_path = os.path.join(inputdir, "wb_subnational_input.csv")
         df = pd.read_csv(csv_path, encoding="latin1")
-        df["Country Name"] = df["Country Name"].str.replace(",", "-")
+        df.columns = df.columns.str.strip()
+        df["Country Name"] = (
+            df["Country Name"].str.replace(",", "-").str.strip()
+        )
         df.to_csv(csv_path, index=False, encoding="utf-8")
         logging.info(
             f"Preprocessed {len(df)} rows into '{csv_path}'."
