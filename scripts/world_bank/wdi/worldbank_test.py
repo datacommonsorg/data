@@ -20,7 +20,7 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_PATH = "test_data/output"
 if not os.path.exists(
         os.path.join(_MODULE_DIR, OUTPUT_PATH, "output_generated.csv")):
-    os.mkdir(os.path.join(_MODULE_DIR, OUTPUT_PATH))
+    os.makedirs(os.path.join(_MODULE_DIR, OUTPUT_PATH), exist_ok=True)
 GENERATED_CSV_PATH = os.path.join(_MODULE_DIR, OUTPUT_PATH,
                                   "output_generated.csv")
 GENERATED_TMCF_PATH = os.path.join(_MODULE_DIR, OUTPUT_PATH,
@@ -76,6 +76,33 @@ class WDITest(unittest.TestCase):
             generated_tmcf_data = generated_tmcf_file.read()
         self.assertEqual(expected_tmcf_data.strip(),
                          generated_tmcf_data.strip())
+
+    def test_merge_historical_data(self):
+        fresh_df = pd.DataFrame({
+            'StatisticalVariable': ['dcid:SV1', 'dcid:SV2'],
+            'ISO3166Alpha3': ['dcid:country/USA', 'dcid:country/IRQ'],
+            'Year': ['2020', '1991'],
+            'observationPeriod': ['P1Y', 'P1Y'],
+            'Value0': [10.5, 200.0],
+            'unit': ['USD', 'USD'],
+            'measurementMethod': ['', ''],
+            'scalingFactor': ['100', '']
+        })
+        historical_csv = io.StringIO(
+            "StatisticalVariable,ISO3166Alpha3,Year,observationPeriod,Value0,"
+            "unit,measurementMethod,scalingFactor\n"
+            "dcid:SV2,dcid:country/IRQ,1991,P1Y,150.0,USD,,\n"
+            "dcid:SV2,dcid:country/IRQ,1992,P1Y,175.0,USD,,100\n")
+        merged = merge_historical_data(fresh_df, historical_csv)
+        self.assertEqual(len(merged), 3)
+        # Verify fresh observation (200.0) takes precedence over historical (150.0)
+        irq_1991 = merged[(merged['ISO3166Alpha3'] == 'dcid:country/IRQ') &
+                          (merged['Year'] == '1991')]
+        self.assertEqual(float(irq_1991['Value0'].iloc[0]), 200.0)
+        # Verify scalingFactor remains string '100' without float decimal formatting
+        csv_out = merged.to_csv(float_format='%.10f', index=False)
+        self.assertIn(',100\n', csv_out)
+        self.assertNotIn('100.0000000000', csv_out)
 
 
 if __name__ == '__main__':

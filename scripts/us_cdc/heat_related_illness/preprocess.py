@@ -26,6 +26,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_PATH)
 _DATA_DIR = _SCRIPT_PATH.split('/data/')[0]
 sys.path.append(os.path.join(_DATA_DIR, '/data/util'))
+sys.path.append(os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../util')))
 
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
@@ -36,8 +37,15 @@ from clean_data import reads_config_file
 _CONFIG = None
 _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 
-with open("./config.json", 'r', encoding='utf-8') as config_f:
+with open(os.path.join(_SCRIPT_PATH, "config.json"), 'r',
+          encoding='utf-8') as config_f:
     _CONFIG = json.load(config_f)
+
+for _path_key in ('INPUT_HTML_FILES', 'INPUT_CSV_FILES',
+                  'COMBINED_INPUT_CSV_FILE', 'OUTPUT_PATH'):
+    if _path_key in _CONFIG and not os.path.isabs(_CONFIG[_path_key]):
+        _CONFIG[_path_key] = os.path.normpath(
+            os.path.join(_SCRIPT_PATH, _CONFIG[_path_key]))
 
 
 def generate_tmcf():
@@ -167,8 +175,10 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
         f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
         f_writer.writeheader()
         statvar_list = []
-        for file_name in os.listdir(input_path):
+        processed_files = set()
+        for file_name in sorted(os.listdir(input_path)):
             if file_name.endswith('.csv'):
+                processed_files.add(file_name)
                 file_path = os.path.join(input_path, file_name)
                 with open(file_path, 'r', encoding='utf-8') as csv_f:
                     f_reader = csv.DictReader(csv_f,
@@ -178,6 +188,12 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
 
                     if statvars:
                         statvar_list.extend(statvars)
+
+        missing_files = set(_CONFIG["filename"].keys()) - processed_files
+        if missing_files:
+            raise RuntimeError(
+                f"Missing expected input CSV files in '{input_path}': {sorted(missing_files)}"
+            )
 
         write_to_mcf(statvar_list, output_mcf_path)
 
@@ -189,11 +205,13 @@ def main(_):
                                         'cleaned.csv')
         output_mcf_path = os.path.join(_CONFIG.get('OUTPUT_PATH'), 'output.mcf')
         try:
-            os.listdir(_CONFIG.get('COMBINED_INPUT_CSV_FILE'))
-        except:
+            if not os.listdir(_CONFIG.get('COMBINED_INPUT_CSV_FILE')):
+                raise FileNotFoundError("Directory is empty")
+        except Exception:
             logging.error(
                 "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
             )
+            raise
         process(cleaned_csv_path, output_mcf_path,
                 _CONFIG.get('COMBINED_INPUT_CSV_FILE'))
         generate_tmcf()
