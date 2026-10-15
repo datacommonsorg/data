@@ -17,8 +17,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/COAL/COAL.tmcf",
-                    "cleaned_csv": "gcs_output/COAL/COAL.csv",
-                    "node_mcf": "gcs_output/COAL/*.mcf"
+                    "cleaned_csv": "gcs_output/COAL/COAL.csv"
                 }
             ],
             "cron_schedule": "0 14 5,20 * *",
@@ -41,8 +40,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/ELEC/ELEC.tmcf",
-                    "cleaned_csv": "gcs_output/ELEC/ELEC.csv",
-                    "node_mcf": "gcs_output/ELEC/*.mcf"
+                    "cleaned_csv": "gcs_output/ELEC/ELEC.csv"
                 }
             ],
             "resource_limits": {
@@ -185,8 +183,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/TOTAL/TOTAL.tmcf",
-                    "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv",
-                    "node_mcf": "gcs_output/TOTAL/*.mcf"
+                    "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
                 }
             ],
             "cron_schedule": "0 13 5,20 * *",

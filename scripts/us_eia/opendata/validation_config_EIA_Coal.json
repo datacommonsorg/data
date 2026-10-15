@@ -10,6 +10,15 @@
             }
         },
         {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that active Quarterly and Annual Coal StatVars have observations within 1 to 2 years of the current year and rank price/distribution series are within 3 years.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^Quarterly_') THEN 1 WHEN regexp_matches(StatVar, '^Annual_') THEN 2 ELSE 3 END"
+            }
+        },
+        {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
