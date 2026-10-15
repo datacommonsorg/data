@@ -97,6 +97,10 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
     # Add key values based on filename
     for file_kv in file_name.split('$$'):
         key, val = file_kv.split('=')
+        # To bring year as header and not a pv
+        if key == "year":
+            continue
+        print(key, val)
         if val in _CONFIG['filename'][key]:
             update_d.update(_CONFIG['filename'][key][val])
         else:
@@ -104,7 +108,7 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
 
         # Average age does not make sense when mothersAge is a cprop
         if key == 'MAge' and val != 'All':
-            if _CONFIG['year_range'] == '16-20':
+            if _CONFIG['year_range'] == '16-22':
                 data_cols.remove('Average Age of Mother (years)')
             elif _CONFIG['year_range'] in ['07-20', '03-06']:
                 data_cols.remove('Average Age of Mother')
