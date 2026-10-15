@@ -36,7 +36,9 @@ function setup_python {
     uv pip install --torch-backend cpu -r requirements_all.txt -q
     PYTHON_REQUIREMENTS_INSTALLED=true
   else
-    source .env/bin/activate
+    if [ -f ".env/bin/activate" ]; then
+      source .env/bin/activate
+    fi
   fi
 }
 
