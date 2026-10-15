@@ -199,7 +199,7 @@ class DownloadTest(unittest.TestCase):
                     'region_county',
                 ],
             )
-            self.assertIn('Flu-Shot',
+            self.assertIn('Flu-shot',
                           raw_df['health_indicator_short_name'].dropna().values)
 
 

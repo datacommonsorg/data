@@ -166,6 +166,7 @@ EXPECTED_INDICATORS = frozenset([
     'Falls Resulting in Injury 65+',
     'Fast Food Consumption',
     'Flu-Shot',
+    'Flu-shot',
     'Flu-Shot 65+',
     'Food Insecurity',
     'Food Security',
@@ -254,9 +255,6 @@ def download_health_indicators(endpoint: str,
     raw_df = raw_df.reindex(columns=ordered_cols)
 
     if 'health_indicator_short_name' in raw_df.columns:
-        raw_df['health_indicator_short_name'] = (
-            raw_df['health_indicator_short_name'].replace(
-                {'Flu-shot': 'Flu-Shot'}))
         observed = set(raw_df['health_indicator_short_name'].dropna().unique())
         unmapped = sorted(observed - EXPECTED_INDICATORS)
         if unmapped:

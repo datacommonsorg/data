@@ -85,6 +85,7 @@ Fall within Past Year 65+,populationType,Person,age,Years65Onwards,measuredPrope
 Falls Resulting in Injury 65+,populationType,Person,age,Years65Onwards,measuredProperty,percent,healthOutcome,FallWithInjuryPastYear,unit,Percent
 Fast Food Consumption,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthBehavior,FastFoodConsumption3OrMoreTimesPerWeek,unit,Percent
 Flu-Shot,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthPrevention,InfluenzaVaccineReceived,unit,Percent
+Flu-shot,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthPrevention,InfluenzaVaccineReceived,unit,Percent
 Flu-Shot 65+,populationType,Person,age,Years65Onwards,measuredProperty,percent,healthPrevention,InfluenzaVaccineReceived,unit,Percent
 Food Insecurity,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthRelatedSocialNeed,FoodInsecurity,unit,Percent
 Food Security,populationType,Person,age,Years18Onwards,measuredProperty,percent,healthRelatedSocialNeed,FoodSecurityPast12Months,unit,Percent
