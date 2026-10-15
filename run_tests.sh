@@ -23,10 +23,10 @@ PYTHON_FOLDERS="util/ tools/ import-automation/executor import-automation/workfl
 PYTHON_REQUIREMENTS_INSTALLED="${PYTHON_REQUIREMENTS_INSTALLED:-false}"
 
 function setup_python {
-  python3 -m venv .env
-  source .env/bin/activate
   if [[ "$PYTHON_REQUIREMENTS_INSTALLED" = false ]]
   then
+    python3 -m venv .env
+    source .env/bin/activate
     echo "Installing Python requirements"
     if ! command -v uv &> /dev/null; then
       echo "Installing uv"
@@ -35,6 +35,8 @@ function setup_python {
     echo "Using uv for package installation"
     uv pip install --torch-backend cpu -r requirements_all.txt -q
     PYTHON_REQUIREMENTS_INSTALLED=true
+  else
+    source .env/bin/activate
   fi
 }
 
@@ -67,12 +69,20 @@ function run_py_test {
   python3 -m unittest discover -v -s $1 -p *_test.py >/dev/null
 }
 
+function run_all_py_tests {
+  for FOLDER in $PYTHON_FOLDERS
+  do
+    run_py_test $FOLDER
+  done
+}
+
 function help {
-  echo "Usage: $0 -rplaf"
+  echo "Usage: $0 -rpluaf"
   echo "-r       Install Python requirements"
   echo "-l       Test lint on Python code"
   echo "-p       Run Python tests in specified folder, e.g. ./run_tests.sh -p util"
-  echo "-a       Run all tests"
+  echo "-u       Run all Python unit tests"
+  echo "-a       Run all checks (unit tests and lint)"
   echo "-f       Fix lint"
   exit 1
 }
@@ -91,16 +101,17 @@ while getopts rp:lusiaf OPTION; do
         echo "### Running Python tests in ${OPTARG}"
         run_py_test ${OPTARG}
         ;;
+    u)
+        echo "### Running all Python unit tests"
+        run_all_py_tests
+        ;;
     f)
         echo "### Fixing lint errors"
         run_py_lint_fix
         ;;
     a)
-        echo "### Running all tests"
-        for FOLDER in $PYTHON_FOLDERS
-        do
-          run_py_test $FOLDER
-        done
+        echo "### Running all checks (unit tests and lint)"
+        run_all_py_tests
         run_py_lint_test
         ;;
     *)
