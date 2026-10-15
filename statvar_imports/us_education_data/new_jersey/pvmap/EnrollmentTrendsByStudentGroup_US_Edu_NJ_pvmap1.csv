@@ -1,0 +1,14 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+Female,populationType,Student,measuredProperty,count,gender,Female,schoolEnrollment,EnrolledInSchool,measurementDenominator,-gender,,,,
+Male,populationType,Student,measuredProperty,count,gender,Male,schoolEnrollment,EnrolledInSchool,measurementDenominator,-gender,,,,
+Non-Binary/Undesignated Gender,populationType,Student,measuredProperty,count,gender,GenderNonConforming,value,{Variable1},#Regex,[^0-9\.]*(?P<RateUP>[0-9\.]+),#Eval,Variable1=RateUP if float(RateUP) < 1 else float(RateUP)/100,measurementDenominator,-gender
+Economically Disadvantaged Students,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,EconomicallyDisadvantaged,schoolEnrollment,EnrolledInSchool,measurementDenominator,-socialVulnerabilityStatus,,,,
+Students with Disabilities,populationType,Student,measuredProperty,count,disabilityStatus,AnyDisability,schoolEnrollment,EnrolledInSchool,measurementDenominator,-disabilityStatus,,,,
+English Learners,populationType,Student,measuredProperty,count,languageLearned,EnglishLearner,schoolEnrollment,EnrolledInSchool,measurementDenominator,-languageLearned,,,,
+Homeless Students,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,Homeless,schoolEnrollment,EnrolledInSchool,measurementDenominator,-socialVulnerabilityStatus,,,,
+Students in Foster Care,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,Foster,schoolEnrollment,EnrolledInSchool,measurementDenominator,-socialVulnerabilityStatus,,,,
+Military-Connected Students,populationType,Student,measuredProperty,count,armedForcesStatus,FamilyOfArmedForces,schoolEnrollment,EnrolledInSchool,measurementDenominator,-armedForcesStatus,,,,
+Migrant Students,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,Migrant,schoolEnrollment,EnrolledInSchool,measurementDenominator,-socialVulnerabilityStatus,,,,
+Percent,value,{Number},unit,Percent,,,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
