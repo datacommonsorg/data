@@ -108,9 +108,9 @@ def download_dynamic_page(url, filename, require_data=False):
             EC.presence_of_element_located(
                 (By.XPATH, _CONFIG.get('PAGE_START'))))
 
-        WebDriverWait(driver, 60).until(lambda d: d.find_elements(
-            By.XPATH, _CONFIG.get('NO_DATA_ELEMENT')) or d.find_elements(
-                By.CSS_SELECTOR, "table tr td"))
+        WebDriverWait(driver, 60).until(
+            lambda d: d.find_elements(By.XPATH, _CONFIG.get('NO_DATA_ELEMENT'))
+            or d.find_elements(By.CSS_SELECTOR, "table tr td"))
 
         time.sleep(5)
 
@@ -263,9 +263,9 @@ def download_all_data(url, filename, category_string=None):
 
 
 def convert_html_to_csv(category_string=None):
-    html_pattern = (re.compile(
-        rf"^{re.escape(category_string)}(_\d{{4}})?\.html$")
-                    if category_string else None)
+    html_pattern = (
+        re.compile(rf"^{re.escape(category_string)}(_\d{{4}})?\.html$")
+        if category_string else None)
     for file_name in sorted(os.listdir(_CONFIG.get('INPUT_HTML_FILES'))):
         if file_name.endswith('.html') and (html_pattern is None or
                                             html_pattern.match(file_name)):
