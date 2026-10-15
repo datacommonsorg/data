@@ -23,9 +23,8 @@ flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
-_ORIS_CROSSWALK_URL = (
-    'https://www.epa.gov/system/files/documents/2022-04/'
-    'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
+_ORIS_CROSSWALK_URL = ('https://www.epa.gov/system/files/documents/2022-04/'
+                       'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
 _CROSSWALK_COLS = [
     'GHGRP Facility ID',
     'ORIS CODE',
@@ -38,13 +37,13 @@ _CROSSWALK_COLS = [
 
 def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
     ssl._create_default_https_context = ssl._create_unverified_context
-    oris_df = pd.read_excel(_ORIS_CROSSWALK_URL,
-                            'ORIS Crosswalk',
-                            header=0,
-                            dtype=str,
-                            usecols=_CROSSWALK_COLS,
-                            engine='openpyxl').rename(
-                                columns={'GHGRP Facility ID': 'Facility Id'})
+    oris_df = pd.read_excel(
+        _ORIS_CROSSWALK_URL,
+        'ORIS Crosswalk',
+        header=0,
+        dtype=str,
+        usecols=_CROSSWALK_COLS,
+        engine='openpyxl').rename(columns={'GHGRP Facility ID': 'Facility Id'})
     df = pd.read_csv(table_csv_path, dtype=str)
     fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'
     frs_col = 'frs_id' if 'frs_id' in df.columns else 'FRS_ID'

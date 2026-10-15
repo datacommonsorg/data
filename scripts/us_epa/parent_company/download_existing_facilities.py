@@ -56,9 +56,8 @@ def download_existing_facilities(output_path: str) -> str:
         facility_ids_set.add(value)
         facility_ids.append(value)
 
-    logging.info(
-        f'Found {len(facility_ids)} unique EpaReportingFacility DCIDs '
-        f'(from {len(facility_nodes)} raw node entries).')
+    logging.info(f'Found {len(facility_ids)} unique EpaReportingFacility DCIDs '
+                 f'(from {len(facility_nodes)} raw node entries).')
     df = pd.DataFrame.from_dict({"epaGhgrpFacilityId": facility_ids})
     df.to_csv(out_file, mode="w", header=True, index=False)
     logging.info(f'Wrote existing facilities to {out_file}.')

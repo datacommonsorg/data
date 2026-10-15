@@ -115,9 +115,9 @@ def _get_address(table, row):
 
 
 def _get_naics(table, row):
-    naics = (_v(table, row, 'NAICS_CODE')
-             if table in ('V_GHG_INJECTION_FACILITIES', _CONSOLIDATED_TABLE)
-             else _v(table, row, 'PRIMARY_NAICS_CODE'))
+    naics = (_v(table, row, 'NAICS_CODE') if table
+             in ('V_GHG_INJECTION_FACILITIES',
+                 _CONSOLIDATED_TABLE) else _v(table, row, 'PRIMARY_NAICS_CODE'))
     if not naics:
         naics = _v(table, row, 'PRIMARY_NAICS_CODE') or _v(
             table, row, 'NAICS_CODE')
@@ -269,9 +269,8 @@ def _get_input_tables(input_tables_path):
                                      _CONSOLIDATED_TABLE + '.csv')
     if os.path.exists(consolidated_path):
         return (_CONSOLIDATED_TABLE,)
-    return tuple(
-        t for t in _LEGACY_TABLES
-        if os.path.exists(os.path.join(input_tables_path, t + '.csv')))
+    return tuple(t for t in _LEGACY_TABLES
+                 if os.path.exists(os.path.join(input_tables_path, t + '.csv')))
 
 
 def _deduplicate_facility_rows(table, rows):
@@ -330,10 +329,10 @@ def process(input_tables_path, output_path):
                 print(
                     f'Pre-fetching county candidates for {len(set(all_zips))} unique ZCTAs...'
                 )
-                fh.prefetch_county_candidates(
-                    all_zips,
-                    cache_file=os.path.join(input_tables_path,
-                                            'zcta_county_cache.json'))
+                fh.prefetch_county_candidates(all_zips,
+                                              cache_file=os.path.join(
+                                                  input_tables_path,
+                                                  'zcta_county_cache.json'))
                 all_counties = set()
                 for r in deduped_rows:
                     fips = _v(table, r, 'COUNTY_FIPS')

@@ -316,7 +316,8 @@ def process_companies(input_table_path, existing_facilities_file,
                              table_prefix=_TABLE_PREFIX)[:5]
                     if z:
                         all_zctas.add("zip/" + z)
-            cache_file = os.path.join(input_table_path, "zcta_county_cache.json")
+            cache_file = os.path.join(input_table_path,
+                                      "zcta_county_cache.json")
             fh.prefetch_county_candidates(all_zctas, cache_file=cache_file)
 
         rows_written = 0
