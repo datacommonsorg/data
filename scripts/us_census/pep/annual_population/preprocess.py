@@ -43,6 +43,7 @@ import warnings
 import requests
 import time
 import re
+import tempfile
 from datetime import datetime as dt
 
 warnings.filterwarnings('ignore')
@@ -51,6 +52,8 @@ from absl import app
 from absl import logging
 from absl import flags
 from retry import retry
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 _FLAGS = flags.FLAGS
 
@@ -66,6 +69,7 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
 excel_file_name_pattern = r"NST-EST(\d{4})-POP\.xlsx"
+popchg_file_name_pattern = r"NST-EST\d{4}-POPCHG2020_\d{4}\.csv"
 sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
@@ -486,19 +490,40 @@ def _process_nationals_2021(file_path: str) -> pd.DataFrame:
     return data_df
 
 
+def _extract_future_years(values, min_year: int = 2023) -> list:
+    """Extracts year strings > min_year from header values (handling int, float, and str)."""
+    years = []
+    for x in values:
+        if pd.isna(x):
+            continue
+        if isinstance(x, (int, float)):
+            yr = int(x)
+        elif isinstance(x, str):
+            s = x.strip()
+            if re.fullmatch(r"\d{4}(?:\.0)?", s):
+                yr = int(float(s))
+            else:
+                continue
+        else:
+            continue
+        if yr > min_year:
+            years.append(str(yr))
+    return years
+
+
 def _process_nationals_2029(file_path: str) -> pd.DataFrame:
     data_df = pd.DataFrame()
     data_df = _load_data_df(path=file_path, file_format="xlsx", header=3)
     df_cols = ["Location", "042020", "072020", "072021", "2022", "2023"]
     unpivot_cols = ["2022", "2023"]
     # extend df_cols & unpivot_cols with all years > 2023
-    newly_added_years = [
-        str(x)
-        for x in data_df.columns.to_list()
-        if isinstance(x, int) and x > 2023
-    ]
+    newly_added_years = _extract_future_years(data_df.columns, min_year=2023)
     df_cols.extend(newly_added_years)
     unpivot_cols.extend(newly_added_years)
+    if len(df_cols) != len(data_df.columns):
+        raise ValueError(
+            f"Column count mismatch in {file_path}: expected {len(df_cols)} columns ({df_cols}), "
+            f"found {len(data_df.columns)} columns ({list(data_df.columns)})")
     data_df.columns = df_cols
     data_df = data_df[data_df["Location"] == USA]
     data_df = _unpivot_data_df(data_df, ["Location"], unpivot_cols)
@@ -541,23 +566,21 @@ def _process_states_2029(file_path: str) -> pd.DataFrame:
         "Region", "ignore_col1", "ignore_col2", "ignore_col3", "2022", "2023"
     ]
     unpivot_cols = ["2022", "2023"]
-    try:
-        # extend df_cols & unpivot_cols with all years > 2023
-        year_column_row = _load_data_df(
-            path=file_path, file_format="xlsx",
-            header=0).iloc[2:3].values.flatten().tolist()
-        if year_column_row:
-            newly_added_years = [
-                str(int(x))
-                for x in year_column_row
-                if isinstance(x, float) and x > 2023
-            ]
-            df_cols.extend(newly_added_years)
-            unpivot_cols.extend(newly_added_years)
-    except:
-        # this error can be ignored
-        pass
+    # extend df_cols & unpivot_cols with all years > 2023
+    header_df = _load_data_df(path=file_path, file_format="xlsx", header=0)
+    if len(header_df) <= 2:
+        raise ValueError(
+            f"Unable to extract dynamic year columns from {file_path}: header row 2 missing"
+        )
+    year_column_row = header_df.iloc[2:3].values.flatten().tolist()
+    newly_added_years = _extract_future_years(year_column_row, min_year=2023)
+    df_cols.extend(newly_added_years)
+    unpivot_cols.extend(newly_added_years)
     data_df = _load_data_df(path=file_path, file_format="xlsx", header=8)
+    if len(df_cols) != len(data_df.columns):
+        raise ValueError(
+            f"Column count mismatch in {file_path}: expected {len(df_cols)} columns ({df_cols}), "
+            f"found {len(data_df.columns)} columns")
     data_df.columns = df_cols
 
     data_df["Region"] = data_df["Region"].str.replace(".", "", regex=False)
@@ -999,7 +1022,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                 _process_nationals_2010_2020(file, op_file)
                 data_df = _load_data_df(op_file, "csv", 0)
                 os.remove(op_file)
-            elif "NST-EST2023-POPCHG2020_2023.csv" in file:
+            elif re.search(popchg_file_name_pattern, file_name):
                 _process_nationals_2020_2029(file, op_file)
                 data_df = _load_data_df(op_file, "csv", 0)
                 os.remove(op_file)
@@ -1046,10 +1069,9 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
 
             if not data_df.empty:
                 processed_count += 1
-                # data_df['len'] = data_df['Location'].astype(str).map(len)
-                # geo_code_len = data_df['len'].unique()
-                # if 13 in geo_code_len:
-                #     pass
+                vintage_matches = re.findall(r"(?:19|20)\d{2}", file_name)
+                data_df["_vintage"] = max([int(y) for y in vintage_matches],
+                                          default=0)
                 final_df = pd.concat([final_df, data_df], axis=0)
             else:
                 logging.error(f"Failed to process {file}")
@@ -1064,8 +1086,9 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                 f"Mismatch between files expected ({total_files_to_process}) and processed ({processed_count})"
             )
         final_df["Year"] = final_df["Year"].astype("int")
-        final_df = final_df.sort_values(by=["Location", "Year"])
-        final_df = final_df.drop_duplicates(["Year", "Location"])
+        final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
+                                        kind="mergesort")
+        final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
         final_df["Count_Person"] = final_df["Count_Person"].astype("int")
         final_df[["Year", "Location",
                   "Count_Person"]].to_csv(cleaned_csv_file_path, index=False)
@@ -1073,6 +1096,35 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         _generate_tmcf(tmcf_file_path)
     else:
         logging.fatal("No files were successfully processed.")
+
+
+def _create_retry_session() -> requests.Session:
+    """Creates a requests Session configured with retry and backoff for transient errors."""
+    session = requests.Session()
+    session.headers.update({'User-Agent': 'Mozilla/5.0'})
+    retries = Retry(
+        total=5,
+        backoff_factor=2,
+        status_forcelist=[408, 429, 500, 502, 503, 504, 520],
+        allowed_methods=["HEAD", "GET"],
+        respect_retry_after_header=True,
+    )
+    adapter = HTTPAdapter(max_retries=retries)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
+@retry(tries=3, delay=2, backoff=2, exceptions=(ValueError,))
+def _head_with_html_retry(session: requests.Session,
+                          url: str,
+                          timeout: int = 30) -> requests.Response:
+    """Performs a HEAD request and retries if HTTP 200 returns an HTML error page."""
+    response = session.head(url, allow_redirects=True, timeout=timeout)
+    content_type = response.headers.get('Content-Type', '')
+    if response.status_code == 200 and 'html' in content_type.lower():
+        raise ValueError(f"Server returned HTTP 200 HTML response for {url}")
+    return response
 
 
 def add_future_year_urls():
@@ -1083,33 +1135,74 @@ def add_future_year_urls():
         Returns: None
     """
     global _FILES_TO_DOWNLOAD
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
-        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
+        _FILES_TO_DOWNLOAD = json.load(input_file)
     urls_to_scan = [
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/cities/totals/sub-est{YEAR}.csv",
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/totals/co-est{YEAR}-alldata.csv",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/totals/NST-EST{YEAR}-POP.xlsx",
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/totals/NST-EST{YEAR}-POPCHG2020_{YEAR}.csv"
+        ("https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/cities/totals/sub-est{YEAR}.csv",
+         2025),
+        ("https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/totals/co-est{YEAR}-alldata.csv",
+         2025),
+        ("https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/totals/NST-EST{YEAR}-POP.xlsx",
+         2025),
+        ("https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/totals/NST-EST{YEAR}-POPCHG2020_{YEAR}.csv",
+         2023),
     ]
-    # This method will get the latest year URLs available for the years 2023 to 2030
-    for url in urls_to_scan:
-        for future_year in range(2030, 2022, -1):
+    session = _create_retry_session()
+    # This method will get the latest year URLs available for the years baseline_year to 2030
+    for url, baseline_year in urls_to_scan:
+        found = False
+        for future_year in range(2030, baseline_year - 1, -1):
             url_to_check = url.format(YEAR=future_year)
             try:
-                logging.info(f"checking furute url if available {url_to_check}")
-                check_url = requests.head(url_to_check, allow_redirects=True)
-                if check_url.status_code == 200:
-                    logging.info(f"Furute url found {url_to_check}")
+                logging.info(f"checking future url if available {url_to_check}")
+                check_url = _head_with_html_retry(session,
+                                                  url_to_check,
+                                                  timeout=30)
+                time.sleep(0.2)
+                content_type = check_url.headers.get('Content-Type', '')
+                if check_url.status_code == 200 and 'html' not in content_type.lower(
+                ):
+                    logging.info(f"Future url found {url_to_check}")
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    found = True
                     break
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+            except (requests.RequestException, ValueError) as e:
+                logging.error(f"URL is not accessible {url_to_check}: {e}")
+        if not found:
+            fallback_url = url.format(YEAR=baseline_year)
+            logging.warning(
+                f"No future URL confirmed via HEAD probe for {url}; falling back to known baseline URL: {fallback_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
 
 
-@retry(tries=5, delay=5, backoff=5)
-def download_with_retry(url, file_name_to_save):
-    logging.info(f"Downloaded file : {file_name_to_save} - URL {url}")
-    return requests.get(url=url, stream=True)
+@retry(tries=3, delay=5, backoff=2, exceptions=(ValueError,))
+def download_with_retry(session: requests.Session, url: str, dest_path: str):
+    logging.info(f"Downloading file from URL: {url} -> {dest_path}")
+    with session.get(url, stream=True, timeout=120) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        if 'html' in content_type.lower():
+            raise ValueError(f"Server returned HTML error page for URL: {url}")
+        tmp_file_path = None
+        try:
+            dest_dir = os.path.dirname(dest_path) or '.'
+            os.makedirs(dest_dir, exist_ok=True)
+            with tempfile.NamedTemporaryFile(dir=dest_dir,
+                                             delete=False) as tmp_file:
+                tmp_file_path = tmp_file.name
+                for chunk in response.iter_content(chunk_size=65536):
+                    if chunk:
+                        tmp_file.write(chunk)
+            os.replace(tmp_file_path, dest_path)
+            tmp_file_path = None
+        finally:
+            if tmp_file_path and os.path.exists(tmp_file_path):
+                try:
+                    os.remove(tmp_file_path)
+                except OSError:
+                    pass
+    logging.info(f"Downloaded file: {dest_path}")
 
 
 def download_files():
@@ -1122,6 +1215,7 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     if not os.path.exists(_INPUT_FILE_PATH):
         os.makedirs(_INPUT_FILE_PATH)
+    session = _create_retry_session()
     try:
         for file_to_download in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
@@ -1132,26 +1226,26 @@ def download_files():
             else:
                 file_name_to_save = url.split('/')[-1]
             if 'file_path' in file_to_download:
-                if not os.path.exists(
-                        os.path.join(_INPUT_FILE_PATH,
-                                     file_to_download['file_path'])):
-                    os.makedirs(
-                        os.path.join(_INPUT_FILE_PATH,
-                                     file_to_download['file_path']))
-                file_name_to_save = file_to_download[
-                    'file_path'] + file_name_to_save
+                target_dir = os.path.join(_INPUT_FILE_PATH,
+                                          file_to_download['file_path'])
+                if not os.path.exists(target_dir):
+                    os.makedirs(target_dir, exist_ok=True)
+                file_name_to_save = os.path.join(file_to_download['file_path'],
+                                                 file_name_to_save)
 
-            response = download_with_retry(url, file_name_to_save)
-            if response.status_code == 200:
-                with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
-                          'wb') as f:
-                    f.write(response.content)
+            dest_path = os.path.join(_INPUT_FILE_PATH, file_name_to_save)
+            try:
+                download_with_retry(session, url, dest_path)
                 file_to_download['is_downloaded'] = True
-            else:
-                logging.error(
-                    f"Failed to download {url} with status code {response.status_code}"
-                )
+            except Exception as e:
+                logging.error(f"Failed to download {url}: {e}")
                 file_to_download['is_downloaded'] = False
+                if os.path.exists(dest_path):
+                    try:
+                        os.remove(dest_path)
+                    except OSError:
+                        pass
+            time.sleep(0.2)
         failed_downloads = [
             file_to_download['download_path']
             for file_to_download in _FILES_TO_DOWNLOAD
