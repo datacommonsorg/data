@@ -1,0 +1,67 @@
+Node: dcid:fuelType
+typeOf: dcid:Property
+name: "fuelType"
+domainIncludes: dcid:Fuel
+rangeIncludes: dcid:EnergySourceEnum
+
+Node: dcid:resourceType
+typeOf: dcid:Property
+name: "resourceType"
+domainIncludes: dcid:Fuel,Metal
+rangeIncludes: dcid:ResourceTypeEnum
+ 
+
+Node: dcid:ResourceTypeEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "ResourceTypeEnum"
+ 
+
+Node: dcid:CommerciallyRecoverableResources
+typeOf: dcid:ResourceTypeEnum
+name: "Commercially Recoverable Resources"
+ 
+
+Node: dcid:MeasurementQualifierEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "MeasurementQualifierEnum"
+ 
+
+Node: dcid:UpwardReappraisals
+typeOf: dcid:MeasurementQualifierEnum
+name: "Upward Reappraisals"
+ 
+
+Node: dcid:TotalAdditionsToStock
+typeOf: dcid:MeasurementQualifierEnum
+name: "Total Additions To Stock"
+ 
+
+Node: dcid:Extractions
+typeOf: dcid:MeasurementQualifierEnum
+name: "Extractions"
+ 
+
+Node: dcid:TotalReductionsInStock
+typeOf: dcid:MeasurementQualifierEnum
+name: "Total Reductions In Stock"
+ 
+
+Node: dcid:Discrepancies
+typeOf: dcid:MeasurementQualifierEnum
+name: "Discrepancies"
+ 
+
+Node: dcid:DownwardReappraisals
+typeOf: dcid:MeasurementQualifierEnum
+name: "Downward Reappraisals"
+ 
+
+Node: dcid:metalType
+typeOf: dcid:Property
+name: "metalType"
+domainIncludes: dcid:Metal
+rangeIncludes: dcid:ChemicalElement,EPA_CriteriaAirPollutant,EPA_HazardousAirPollutant
+ 
+
