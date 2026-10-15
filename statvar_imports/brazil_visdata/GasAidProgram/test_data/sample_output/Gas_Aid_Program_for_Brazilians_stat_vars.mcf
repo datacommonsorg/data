@@ -1,0 +1,56 @@
+Node: dcid:Amount_Household_GasAidProgram
+typeOf: dcid:StatisticalVariable
+name: "The total amount passed on to families benefiting from gas aid programs"
+populationType: dcid:Household
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "O valor total repassado às famílias beneficiárias dos programas de auxílio ao gás @pt"
+benefitProgram: dcid:GasAidProgram
+
+Node: dcid:Count_Household_GasAidProgram
+typeOf: dcid:StatisticalVariable
+name: "The total number of families benefiting from gas aid programs."
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O número total de famílias beneficiadas pelos programas de auxílio ao gás. @pt"
+benefitProgram: dcid:GasAidProgram
+
+Node: dcid:Count_Household_GasAidProgram_Female
+typeOf: dcid:StatisticalVariable
+name: "The percentage of female family responsible beneficiaries of gas aid programs"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "A percentagem de mulheres responsáveis ​​familiares beneficiárias de programas de auxílio ao gás @pt"
+benefitProgram: dcid:GasAidProgram
+gender: dcid:Female
+
+Node: dcid:Count_Person_GasAidProgram
+typeOf: dcid:StatisticalVariable
+name: "The total people benefiting from the gas aid programs"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O total de pessoas beneficiadas pelos programas de ajuda ao gás @pt"
+benefitProgram: dcid:GasAidProgram
+
+Node: dcid:Count_Person_GasAidProgram_Female
+typeOf: dcid:StatisticalVariable
+name: "The total female family responsible persons beneficiaries of gas aid program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de responsáveis ​​familiares femininos beneficiários do programa de auxílio gás @pt"
+benefitProgram: dcid:GasAidProgram
+gender: dcid:Female
+
+Node: dcid:Mean_Amount_Person_GasAidProgram
+typeOf: dcid:StatisticalVariable
+name: "The average amount of gas aid received by beneficiaries."
+populationType: dcid:Person
+measuredProperty: dcid:amount
+statType: dcid:meanValue
+alternateName: "O valor médio do auxílio ao gás recebido pelos beneficiários. @pt"
+benefitProgram: dcid:GasAidProgram
+
