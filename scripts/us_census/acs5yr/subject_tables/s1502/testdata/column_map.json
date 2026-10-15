@@ -1,6 +1,6 @@
 {
-    "2023": {
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher": {
+    "2015": {
+        "Total!!Estimate!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -9,7 +9,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher": {
+        "Total!!Margin of Error!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -18,7 +18,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering": {
+        "Total!!Estimate!!Science and Engineering": {
             "Node": "dcid:Count_Person_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -28,7 +28,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering": {
+        "Total!!Margin of Error!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -38,7 +38,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering Related Fields": {
+        "Total!!Estimate!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -48,7 +48,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering Related Fields": {
+        "Total!!Margin of Error!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -58,7 +58,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Business": {
+        "Total!!Estimate!!Business": {
             "Node": "dcid:Count_Person_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -68,7 +68,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Business": {
+        "Total!!Margin of Error!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -78,7 +78,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Education": {
+        "Total!!Estimate!!Education": {
             "Node": "dcid:Count_Person_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -88,7 +88,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Education": {
+        "Total!!Margin of Error!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -98,7 +98,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
+        "Total!!Estimate!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -108,7 +108,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
+        "Total!!Margin of Error!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -118,7 +118,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years": {
+        "Total!!Estimate!!DETAILED AGE!!25 to 39 years": {
             "Node": "dcid:Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -127,7 +127,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years": {
+        "Total!!Margin of Error!!DETAILED AGE!!25 to 39 years": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -136,7 +136,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
+        "Total!!Estimate!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -146,7 +146,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
+        "Total!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -156,7 +156,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
+        "Total!!Estimate!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -166,7 +166,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
+        "Total!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -176,7 +176,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Business": {
+        "Total!!Estimate!!DETAILED AGE!!25 to 39 years!!Business": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -186,7 +186,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Business": {
+        "Total!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -196,7 +196,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Education": {
+        "Total!!Estimate!!DETAILED AGE!!25 to 39 years!!Education": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -206,7 +206,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Education": {
+        "Total!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -216,7 +216,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
+        "Total!!Estimate!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -226,7 +226,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
+        "Total!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -236,7 +236,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years": {
+        "Total!!Estimate!!DETAILED AGE!!40 to 64 years": {
             "Node": "dcid:Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -245,7 +245,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years": {
+        "Total!!Margin of Error!!DETAILED AGE!!40 to 64 years": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -254,7 +254,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
+        "Total!!Estimate!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -264,7 +264,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
+        "Total!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -274,7 +274,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
+        "Total!!Estimate!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -284,7 +284,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
+        "Total!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -294,7 +294,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Business": {
+        "Total!!Estimate!!DETAILED AGE!!40 to 64 years!!Business": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -304,7 +304,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Business": {
+        "Total!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -314,7 +314,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Education": {
+        "Total!!Estimate!!DETAILED AGE!!40 to 64 years!!Education": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -324,7 +324,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Education": {
+        "Total!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -334,7 +334,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
+        "Total!!Estimate!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -344,7 +344,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
+        "Total!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -354,7 +354,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over": {
+        "Total!!Estimate!!DETAILED AGE!!65 years and over": {
             "Node": "dcid:Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -363,7 +363,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over": {
+        "Total!!Margin of Error!!DETAILED AGE!!65 years and over": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -372,7 +372,7 @@
             "populationType": "schema:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering": {
+        "Total!!Estimate!!DETAILED AGE!!65 years and over!!Science and Engineering": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -382,7 +382,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering": {
+        "Total!!Margin of Error!!DETAILED AGE!!65 years and over!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -392,7 +392,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
+        "Total!!Estimate!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -402,7 +402,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
+        "Total!!Margin of Error!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -412,7 +412,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Business": {
+        "Total!!Estimate!!DETAILED AGE!!65 years and over!!Business": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -422,7 +422,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Business": {
+        "Total!!Margin of Error!!DETAILED AGE!!65 years and over!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfBusinessMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -432,7 +432,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Education": {
+        "Total!!Estimate!!DETAILED AGE!!65 years and over!!Education": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -442,7 +442,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Education": {
+        "Total!!Margin of Error!!DETAILED AGE!!65 years and over!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfEducationMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -452,7 +452,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
+        "Total!!Estimate!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -462,7 +462,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
+        "Total!!Margin of Error!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -472,7 +472,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher": {
+        "Males!!Estimate!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -482,7 +482,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher": {
+        "Males!!Margin of Error!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -492,7 +492,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering": {
+        "Males!!Estimate!!Science and Engineering": {
             "Node": "dcid:Count_Person_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -503,7 +503,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering": {
+        "Males!!Margin of Error!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -514,7 +514,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering Related Fields": {
+        "Males!!Estimate!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -525,7 +525,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering Related Fields": {
+        "Males!!Margin of Error!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -536,7 +536,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Business": {
+        "Males!!Estimate!!Business": {
             "Node": "dcid:Count_Person_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -547,7 +547,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Business": {
+        "Males!!Margin of Error!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -558,7 +558,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Education": {
+        "Males!!Estimate!!Education": {
             "Node": "dcid:Count_Person_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -569,7 +569,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Education": {
+        "Males!!Margin of Error!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -580,7 +580,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
+        "Males!!Estimate!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -591,7 +591,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
+        "Males!!Margin of Error!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -602,7 +602,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years": {
+        "Males!!Estimate!!DETAILED AGE!!25 to 39 years": {
             "Node": "dcid:Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -612,7 +612,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years": {
+        "Males!!Margin of Error!!DETAILED AGE!!25 to 39 years": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -622,7 +622,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
+        "Males!!Estimate!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -633,7 +633,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
+        "Males!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -644,7 +644,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
+        "Males!!Estimate!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -655,7 +655,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
+        "Males!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -666,7 +666,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Business": {
+        "Males!!Estimate!!DETAILED AGE!!25 to 39 years!!Business": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -677,7 +677,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Business": {
+        "Males!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -688,7 +688,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Education": {
+        "Males!!Estimate!!DETAILED AGE!!25 to 39 years!!Education": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -699,7 +699,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Education": {
+        "Males!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -710,7 +710,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
+        "Males!!Estimate!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -721,7 +721,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
+        "Males!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -732,7 +732,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years": {
+        "Males!!Estimate!!DETAILED AGE!!40 to 64 years": {
             "Node": "dcid:Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -742,7 +742,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years": {
+        "Males!!Margin of Error!!DETAILED AGE!!40 to 64 years": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -752,7 +752,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
+        "Males!!Estimate!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -763,7 +763,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
+        "Males!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -774,7 +774,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
+        "Males!!Estimate!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -785,7 +785,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
+        "Males!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -796,7 +796,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Business": {
+        "Males!!Estimate!!DETAILED AGE!!40 to 64 years!!Business": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -807,7 +807,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Business": {
+        "Males!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -818,7 +818,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Education": {
+        "Males!!Estimate!!DETAILED AGE!!40 to 64 years!!Education": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -829,7 +829,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Education": {
+        "Males!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -840,7 +840,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
+        "Males!!Estimate!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -851,7 +851,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
+        "Males!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -862,7 +862,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over": {
+        "Males!!Estimate!!DETAILED AGE!!65 years and over": {
             "Node": "dcid:Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -872,7 +872,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over": {
+        "Males!!Margin of Error!!DETAILED AGE!!65 years and over": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -882,7 +882,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering": {
+        "Males!!Estimate!!DETAILED AGE!!65 years and over!!Science and Engineering": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -893,7 +893,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering": {
+        "Males!!Margin of Error!!DETAILED AGE!!65 years and over!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -904,7 +904,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
+        "Males!!Estimate!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -915,7 +915,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
+        "Males!!Margin of Error!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -926,7 +926,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Business": {
+        "Males!!Estimate!!DETAILED AGE!!65 years and over!!Business": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -937,7 +937,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Business": {
+        "Males!!Margin of Error!!DETAILED AGE!!65 years and over!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -948,7 +948,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Education": {
+        "Males!!Estimate!!DETAILED AGE!!65 years and over!!Education": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -959,7 +959,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Education": {
+        "Males!!Margin of Error!!DETAILED AGE!!65 years and over!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfEducationMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -970,7 +970,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
+        "Males!!Estimate!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -981,7 +981,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
+        "Males!!Margin of Error!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -992,7 +992,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher": {
+        "Females!!Estimate!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1002,7 +1002,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher": {
+        "Females!!Margin of Error!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1012,7 +1012,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering": {
+        "Females!!Estimate!!Science and Engineering": {
             "Node": "dcid:Count_Person_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1023,7 +1023,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering": {
+        "Females!!Margin of Error!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1034,7 +1034,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering Related Fields": {
+        "Females!!Estimate!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1045,7 +1045,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Science and Engineering Related Fields": {
+        "Females!!Margin of Error!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1056,7 +1056,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Business": {
+        "Females!!Estimate!!Business": {
             "Node": "dcid:Count_Person_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1067,7 +1067,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Business": {
+        "Females!!Margin of Error!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1078,7 +1078,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Education": {
+        "Females!!Estimate!!Education": {
             "Node": "dcid:Count_Person_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1089,7 +1089,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Education": {
+        "Females!!Margin of Error!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1100,7 +1100,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
+        "Females!!Estimate!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1111,7 +1111,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
+        "Females!!Margin of Error!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1122,7 +1122,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years": {
+        "Females!!Estimate!!DETAILED AGE!!25 to 39 years": {
             "Node": "dcid:Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1132,7 +1132,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years": {
+        "Females!!Margin of Error!!DETAILED AGE!!25 to 39 years": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1142,7 +1142,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
+        "Females!!Estimate!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1153,7 +1153,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
+        "Females!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1164,7 +1164,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
+        "Females!!Estimate!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1175,7 +1175,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
+        "Females!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1186,7 +1186,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Business": {
+        "Females!!Estimate!!DETAILED AGE!!25 to 39 years!!Business": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1197,7 +1197,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Business": {
+        "Females!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1208,7 +1208,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Education": {
+        "Females!!Estimate!!DETAILED AGE!!25 to 39 years!!Education": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1219,7 +1219,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Education": {
+        "Females!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1230,7 +1230,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
+        "Females!!Estimate!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1241,7 +1241,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
+        "Females!!Margin of Error!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1252,7 +1252,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years": {
+        "Females!!Estimate!!DETAILED AGE!!40 to 64 years": {
             "Node": "dcid:Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1262,7 +1262,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years": {
+        "Females!!Margin of Error!!DETAILED AGE!!40 to 64 years": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1272,7 +1272,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
+        "Females!!Estimate!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1283,7 +1283,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
+        "Females!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1294,7 +1294,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
+        "Females!!Estimate!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1305,7 +1305,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
+        "Females!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1316,7 +1316,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Business": {
+        "Females!!Estimate!!DETAILED AGE!!40 to 64 years!!Business": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1327,7 +1327,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Business": {
+        "Females!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1338,7 +1338,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Education": {
+        "Females!!Estimate!!DETAILED AGE!!40 to 64 years!!Education": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1349,7 +1349,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Education": {
+        "Females!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1360,7 +1360,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
+        "Females!!Estimate!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1371,7 +1371,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
+        "Females!!Margin of Error!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1382,7 +1382,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over": {
+        "Females!!Estimate!!DETAILED AGE!!65 years and over": {
             "Node": "dcid:Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1392,7 +1392,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over": {
+        "Females!!Margin of Error!!DETAILED AGE!!65 years and over": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1402,7 +1402,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering": {
+        "Females!!Estimate!!DETAILED AGE!!65 years and over!!Science and Engineering": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1413,7 +1413,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering": {
+        "Females!!Margin of Error!!DETAILED AGE!!65 years and over!!Science and Engineering": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1424,7 +1424,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
+        "Females!!Estimate!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1435,7 +1435,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
+        "Females!!Margin of Error!!DETAILED AGE!!65 years and over!!Science and Engineering Related Fields": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1446,7 +1446,7 @@
             "bachelorsDegreeMajor": "dcs:ScienceAndEngineeringRelatedMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Business": {
+        "Females!!Estimate!!DETAILED AGE!!65 years and over!!Business": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1457,7 +1457,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Business": {
+        "Females!!Margin of Error!!DETAILED AGE!!65 years and over!!Business": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfBusinessMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1468,7 +1468,7 @@
             "bachelorsDegreeMajor": "dcs:BusinessMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Education": {
+        "Females!!Estimate!!DETAILED AGE!!65 years and over!!Education": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1479,7 +1479,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Education": {
+        "Females!!Margin of Error!!DETAILED AGE!!65 years and over!!Education": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfEducationMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1490,7 +1490,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
+        "Females!!Estimate!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1501,7 +1501,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
+        "Females!!Margin of Error!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
