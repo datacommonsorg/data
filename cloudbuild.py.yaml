@@ -15,18 +15,22 @@ steps:
   entrypoint: /bin/sh
   waitFor:
   - python_install
+  env:
+    - PYTHON_REQUIREMENTS_INSTALLED=true
   secretEnv:
     - DC_API_KEY
   args:
     - -c
     - |
-      ./run_tests.sh -a
+      ./run_tests.sh -u
 
 - id: python_format_check
   name: python:3.12.8
   entrypoint: /bin/sh
   waitFor:
   - python_install
+  env:
+    - PYTHON_REQUIREMENTS_INSTALLED=true
   args:
     - -c
     - |
@@ -48,3 +52,6 @@ availableSecrets:
   secretManager:
     - versionName: projects/datcom-ci/secrets/dc-api-key/versions/latest
       env: DC_API_KEY
+
+options:
+  machineType: 'E2_HIGHCPU_8'
