@@ -159,14 +159,37 @@ class TestDeletedRecordsPercentValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['percent'], 0.0)
 
-    def test_deleted_records_percent_fails_on_missing_summary(self):
+    def test_deleted_records_percent_passes_on_missing_summary(self):
         params = {'threshold': 10}
 
         result = self.validator.validate_deleted_records_percent(None, params)
-        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_records_count'], 0)
+        self.assertEqual(result.details['previous_obs_count'], 0)
+        self.assertEqual(result.details['percent'], 0.0)
+
+    def test_deleted_records_percent_passes_on_empty_summary(self):
+        summary = {}
+        params = {'threshold': 0}
+
+        result = self.validator.validate_deleted_records_percent(
+            summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_records_count'], 0)
+        self.assertEqual(result.details['previous_obs_count'], 0)
+        self.assertEqual(result.details['percent'], 0.0)
 
     def test_deleted_records_percent_fails_on_missing_size_in_summary(self):
-        summary = {}  # Missing previous_obs_count
+        summary = {'deleted_obs_count': 2}  # Missing previous_obs_count
+        params = {'threshold': 10}
+
+        result = self.validator.validate_deleted_records_percent(
+            summary, params)
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+
+    def test_deleted_records_percent_fails_on_missing_deleted_count_in_summary(
+            self):
+        summary = {'previous_obs_count': 10}  # Missing deleted_obs_count
         params = {'threshold': 10}
 
         result = self.validator.validate_deleted_records_percent(

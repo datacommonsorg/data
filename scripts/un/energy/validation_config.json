@@ -24,6 +24,15 @@
                 "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output_data/un_energy_output.csv"
             }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that the latest observation year in the dataset is within 2 years of the current year.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COALESCE(MAX(CAST(MaxDate AS INT)), 0) AS max_year FROM stats",
+                "condition": "max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)"
+            }
         }
     ]
 }
