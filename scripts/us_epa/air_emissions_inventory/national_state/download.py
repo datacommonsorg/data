@@ -77,17 +77,22 @@ def check_url_status(url: str, session: requests.Session = None) -> bool:
     if own_session:
         session = _create_http_session()
     try:
-        logging.info(f"Checking URL status via GET: {url}")
-        with session.get(url, stream=True,
-                         timeout=_HTTP_TIMEOUT_SECONDS) as response:
-            status_code = response.status_code
-            if status_code == 200:
-                logging.info(
-                    f"URL {url} is reachable. Status code: {status_code}")
-                return True
-            logging.warning(
-                f"URL {url} returned non-200 status code: {status_code}")
-            return False
+        logging.info(f"Checking URL status: {url}")
+        response = session.head(url,
+                                allow_redirects=True,
+                                timeout=_HTTP_TIMEOUT_SECONDS)
+        status_code = response.status_code
+        response.close()
+        if status_code in (403, 405):
+            with session.get(url, stream=True,
+                             timeout=_HTTP_TIMEOUT_SECONDS) as get_response:
+                status_code = get_response.status_code
+        if status_code == 200:
+            logging.info(f"URL {url} is reachable. Status code: {status_code}")
+            return True
+        logging.warning(
+            f"URL {url} returned non-200 status code: {status_code}")
+        return False
     except Exception as e:
         logging.warning(f"Failed to reach URL {url}. Details: {e}")
         return False
@@ -118,13 +123,14 @@ def scrape_epa_trends_urls(session: requests.Session = None) -> list:
         response.raise_for_status()
         html = response.text
 
-        hrefs = re.findall(r'href=["\']([^"\']+\.xlsx)["\']', html,
-                           re.IGNORECASE)
+        hrefs = re.findall(r'href=["\']([^"\']+\.xlsx(?:\?[^"\']*)?)["\']',
+                           html, re.IGNORECASE)
         national_url = None
         state_url = None
         for href in hrefs:
             full_url = urllib.parse.urljoin(EPA_TRENDS_PAGE_URL, href)
-            filename = full_url.split("/")[-1].lower()
+            filename = os.path.basename(
+                urllib.parse.urlsplit(full_url).path).lower()
             if not national_url and re.match(r"^national_tier1_caps.*\.xlsx$",
                                              filename):
                 national_url = full_url
@@ -257,7 +263,7 @@ def download_files(urls: list) -> None:
         _clean_download_directory(_DOWNLOAD_PATH)
 
         for file_url in resolved_urls:
-            file_name = file_url.split("/")[-1]
+            file_name = os.path.basename(urllib.parse.urlsplit(file_url).path)
             file_path = os.path.join(_DOWNLOAD_PATH, file_name)
             tmp_path = f"{file_path}.tmp"
 

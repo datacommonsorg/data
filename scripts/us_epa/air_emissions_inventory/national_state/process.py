@@ -198,7 +198,12 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                          value_name='observation')
             years = pd.to_numeric(df['year'].astype(str).str.replace(
                 'emissions', '', case=False).str.strip(),
-                                  errors='coerce').fillna(0).astype(int)
+                                  errors='coerce')
+            if years.isna().any():
+                invalid_cols = df.loc[years.isna(), 'year'].unique().tolist()
+                raise ValueError(
+                    f"Unparseable year columns in state file: {invalid_cols}")
+            years = years.astype(int)
             # As 2001 is available as 01 and 1999 is available as 99,
             # Putting a logic to change it to proper year
             df['year'] = np.where((years >= 90) & (years < 100), years + 1900,
