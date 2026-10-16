@@ -128,5 +128,4 @@ Adding `unit: Percent` and `scalingFactor: 100` to `cdc500_state.tmcf` standardi
 
 ### Troubleshooting
 
-- **`RuntimeError: BigQuery query returned 0 rows`**: Verify ADC authentication (`gcloud auth application-default login`) and ensure read permissions on `datcom-store.spanner_dc_graph_prod_snap_latest`. Pass `--project=<gcp_project_id>` if running outside the default project.
-- **`check_statvar_max_dates` validation failure**: When CDC PLACES (the official successor program to CDC 500 Cities) publishes a new release year, update the `CASE` statement in `validation_config.json` (`check_statvar_max_dates`) to reflect the new expected vintage years per cohort.
+- **`ValueError: BigQuery query returned 0 rows`**: Verify ADC authentication (`gcloud auth application-default login`) and ensure read permissions on `datcom-store.spanner_dc_graph_prod_snap_latest`. Pass `--project=<gcp_project_id>` if running outside the default project.
