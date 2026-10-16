@@ -30,7 +30,6 @@ main:
               "EPA_EJSCREEN": true
               "EPA_GHGRP": true
               "FARS_CrashData": true
-              "FBIGovCrime": true
               "FireWFIGS": true
               "INPE_Fire_Event_Count": true
               "IndiaNSS_HealthAilments": true
