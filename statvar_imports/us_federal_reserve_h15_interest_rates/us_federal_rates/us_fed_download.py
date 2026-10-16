@@ -18,16 +18,22 @@ from pathlib import Path
 from retry import retry
 import config
 
-INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
-Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
+INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "input_files")
 
 date = datetime.date.today().strftime('%Y-%m-%d')
 
-@retry(exceptions=requests.exceptions.RequestException, tries=5, delay=10, backoff=2)
+
+@retry(exceptions=requests.exceptions.RequestException,
+       tries=5,
+       delay=10,
+       backoff=2)
 def retry_method(url, headers=None):
     response = requests.get(url, headers=headers, timeout=30)
     response.raise_for_status()
-    if not response.content or b"Series Description" not in response.content:
+    if (not response.content or
+            not response.content.lstrip(b'"').startswith(b"Series Description")
+            or response.content.count(b"\n") <= 6):
         logging.warning(
             f"Empty or invalid CSV response ({len(response.content)} bytes) from {url}; retrying..."
         )
@@ -36,8 +42,10 @@ def retry_method(url, headers=None):
         )
     return response
 
+
 def download_files(us_fed_urls):
     logging.info("Starting download...")
+    Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
     count = 1
     try:
         for url in us_fed_urls:
@@ -45,11 +53,11 @@ def download_files(us_fed_urls):
             input_path = os.path.join(INPUT_DIR, f"us_fed_input_{count}.csv")
             with open(input_path, "wb") as f:
                 f.write(response.content)
-            count+=1    
+            count += 1
         logging.info(f"Downloaded file saved to {INPUT_DIR}")
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download file: {e}")
-        return None
+
 
 def main(argv):
     us_fed_urls = config.us_fed_urls
