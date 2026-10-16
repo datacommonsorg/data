@@ -32,7 +32,8 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags() -> None:
-    flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
+    if 'output_path' not in FLAGS:
+        flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 
 
 def download_existing_facilities(output_path: str) -> str:
@@ -59,6 +60,7 @@ def download_existing_facilities(output_path: str) -> str:
 
 
 def main(_: list[str]) -> int:
+    _define_flags()
     output_path = FLAGS.output_path
     if not output_path:
         raise ValueError("output_path is required.")

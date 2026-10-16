@@ -31,15 +31,28 @@ import time
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('aggregate_start_year', os.getenv('START_YEAR', '1980'),
-                     'Process data starting from this year.')
-flags.DEFINE_integer('aggregate_end_year',
-                     os.getenv('END_YEAR',
-                               datetime.now().year),
-                     'Process data upto this year.')
-flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
-flags.DEFINE_string('output_file_path', 'output', 'Output files path')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+def define_flags():
+    if 'aggregate_start_year' not in _FLAGS:
+        flags.DEFINE_integer('aggregate_start_year',
+                             os.getenv('START_YEAR', '1980'),
+                             'Process data starting from this year.')
+    if 'aggregate_end_year' not in _FLAGS:
+        flags.DEFINE_integer('aggregate_end_year',
+                             os.getenv('END_YEAR',
+                                       datetime.now().year),
+                             'Process data upto this year.')
+    if 'input_file_path' not in _FLAGS:
+        flags.DEFINE_string('input_file_path', 'input_files',
+                            'Input files path')
+    if 'output_file_path' not in _FLAGS:
+        flags.DEFINE_string('output_file_path', 'output', 'Output files path')
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+_define_flags = define_flags
+
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -227,6 +240,7 @@ def process(_INPUT_FILE_PATH, start_year, end_year):
 
 
 def main(_):
+    define_flags()
     mode = _FLAGS.mode
     input_file_path = os.path.join(MODULE_DIR, _FLAGS.input_file_path)
     output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
@@ -249,4 +263,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

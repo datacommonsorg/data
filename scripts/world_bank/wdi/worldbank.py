@@ -33,16 +33,25 @@ from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
-flags.DEFINE_boolean("fetchFromSource", True,
-                     "Whether to bypass cached CSVs and fetch from source.")
-flags.DEFINE_string(
-    "indicatorSchemaFile",
-    os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string(
-    'historical_gcs_path',
-    'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
-    'GCS path to the deleted historical data CSV file')
+
+
+def _define_flags():
+    if "fetchFromSource" not in _FLAGS:
+        flags.DEFINE_boolean(
+            "fetchFromSource", True,
+            "Whether to bypass cached CSVs and fetch from source.")
+    if "indicatorSchemaFile" not in _FLAGS:
+        flags.DEFINE_string(
+            "indicatorSchemaFile",
+            os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"),
+            "")
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'historical_gcs_path' not in _FLAGS:
+        flags.DEFINE_string(
+            'historical_gcs_path',
+            'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
+            'GCS path to the deleted historical data CSV file')
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -511,6 +520,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         if saveOutput:
             logging.info("Writing output csv")
             output_file_path = 'output/WorldBank.csv'
+            _define_flags()
             final_df = merge_historical_data(df.drop('IndicatorCode', axis=1),
                                              _FLAGS.historical_gcs_path)
             final_df.to_csv(output_file_path, float_format='%.10f', index=False)
@@ -647,6 +657,7 @@ def process(indicator_codes, worldbank_dataframe, saveOutput=True):
 
 
 def main(_):
+    _define_flags()
     mode = _FLAGS.mode
     # Load statistical variable configuration file.
     indicator_codes = pd.read_csv(_FLAGS.indicatorSchemaFile, dtype=str)
@@ -658,4 +669,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

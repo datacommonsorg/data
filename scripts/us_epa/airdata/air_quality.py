@@ -28,11 +28,17 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR', '1980')),
-                     'Process data starting from this year.')
-flags.DEFINE_integer(
-    'data_end_year', int(os.getenv('END_YEAR', 0)),
-    'Process data upto this year. Defaults to the previous calendar year.')
+
+def _define_flags():
+    if 'data_start_year' not in _FLAGS:
+        flags.DEFINE_integer('data_start_year',
+                             int(os.getenv('START_YEAR', '1980')),
+                             'Process data starting from this year.')
+    if 'data_end_year' not in _FLAGS:
+        flags.DEFINE_integer(
+            'data_end_year', int(os.getenv('END_YEAR', 0)),
+            'Process data upto this year. Defaults to the previous calendar year.'
+        )
 
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
 POLLUTANTS = {
@@ -315,6 +321,7 @@ def write_tmcf(tmcf_file_path):
 
 
 def main(argv):
+    _define_flags()
     if len(argv) > 1:
         raise app.UsageError(f'Too many command-line arguments: {argv[1:]}')
 
@@ -379,4 +386,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

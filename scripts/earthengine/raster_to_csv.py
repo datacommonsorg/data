@@ -80,86 +80,175 @@ import utils
 from config_map import ConfigMap
 from counters import Counters, CounterOptions
 
-flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
-flags.DEFINE_string('ignore_geotiff', '',
-                    'GeoTIFF with points to be ignored set as data.')
-flags.DEFINE_string('allow_geotiff', '',
-                    'GeoTIFF with points to be used set as data.')
-flags.DEFINE_string('ignore_csv', '',
-                    'CSV with points to be ignored set as data.')
-flags.DEFINE_string('allow_csv', '', 'CSV with points to be used set as data.')
-flags.DEFINE_integer(
-    'limit_points',
-    sys.maxsize,
-    'Number of rows/points to process per input file.',
-)
-flags.DEFINE_string('output_csv', '', 'Output CSV file to generate')
-flags.DEFINE_string('output_mode', 'w',
-                    'Write(w) or append(a) to existing output file.')
-flags.DEFINE_string('output_date', None,
-                    'Date column to be added to output rows.')
-flags.DEFINE_list('output_columns', [], 'Output columns in the CSV')
-flags.DEFINE_integer(
-    'output_precision',
-    6,
-    'number of precision digits for float data in putput.',
-)
-flags.DEFINE_integer('s2_level', 13, 'S2 Level for S2 cell Id.')
-flags.DEFINE_integer('grid_degree', None, 'Grid degree for lat/lng place.')
-flags.DEFINE_string('grid_prefix', 'grid_', 'Grid dcid prefix for place id.')
-flags.DEFINE_string('output_s2_place', '',
-                    'Output prefix for S2 place csv and tmcf.')
-flags.DEFINE_list(
-    'output_contained_s2_level',
-    [10],
-    'Levels to be added as contained in place nodes into s2 place output.',
-)
-flags.DEFINE_string('aggregate', 'max',
-                    'Aggregate function for data values with same key.')
-flags.DEFINE_integer('log_every_n', 10000, 'Print logs every N records.')
-flags.DEFINE_float(
-    'default_cell_area',
-    0,
-    'Area of the cell if the raster input is not provided.',
-)
+def define_flags():
+    common_flags.define_flags()
+    if 'input_geotiff' not in flags.FLAGS:
+        flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
+    if 'ignore_geotiff' not in flags.FLAGS:
+        flags.DEFINE_string('ignore_geotiff', '',
+                            'GeoTIFF with points to be ignored set as data.')
+    if 'allow_geotiff' not in flags.FLAGS:
+        flags.DEFINE_string('allow_geotiff', '',
+                            'GeoTIFF with points to be used set as data.')
+    if 'ignore_csv' not in flags.FLAGS:
+        flags.DEFINE_string('ignore_csv', '',
+                            'CSV with points to be ignored set as data.')
+    if 'allow_csv' not in flags.FLAGS:
+        flags.DEFINE_string('allow_csv', '',
+                            'CSV with points to be used set as data.')
+    if 'limit_points' not in flags.FLAGS:
+        flags.DEFINE_integer(
+            'limit_points',
+            sys.maxsize,
+            'Number of rows/points to process per input file.',
+        )
+    if 'output_csv' not in flags.FLAGS:
+        flags.DEFINE_string('output_csv', '', 'Output CSV file to generate')
+    if 'output_mode' not in flags.FLAGS:
+        flags.DEFINE_string('output_mode', 'w',
+                            'Write(w) or append(a) to existing output file.')
+    if 'output_date' not in flags.FLAGS:
+        flags.DEFINE_string('output_date', None,
+                            'Date column to be added to output rows.')
+    if 'output_columns' not in flags.FLAGS:
+        flags.DEFINE_list('output_columns', [], 'Output columns in the CSV')
+    if 'output_precision' not in flags.FLAGS:
+        flags.DEFINE_integer(
+            'output_precision',
+            6,
+            'number of precision digits for float data in putput.',
+        )
+    if 's2_level' not in flags.FLAGS:
+        flags.DEFINE_integer('s2_level', 13, 'S2 Level for S2 cell Id.')
+    if 'grid_degree' not in flags.FLAGS:
+        flags.DEFINE_integer('grid_degree', None,
+                             'Grid degree for lat/lng place.')
+    if 'grid_prefix' not in flags.FLAGS:
+        flags.DEFINE_string('grid_prefix', 'grid_',
+                            'Grid dcid prefix for place id.')
+    if 'output_s2_place' not in flags.FLAGS:
+        flags.DEFINE_string('output_s2_place', '',
+                            'Output prefix for S2 place csv and tmcf.')
+    if 'output_contained_s2_level' not in flags.FLAGS:
+        flags.DEFINE_list(
+            'output_contained_s2_level',
+            [10],
+            'Levels to be added as contained in place nodes into s2 place output.',
+        )
+    if 'aggregate' not in flags.FLAGS:
+        flags.DEFINE_string('aggregate', 'max',
+                            'Aggregate function for data values with same key.')
+    if 'log_every_n' not in flags.FLAGS:
+        flags.DEFINE_integer('log_every_n', 10000,
+                             'Print logs every N records.')
+    if 'default_cell_area' not in flags.FLAGS:
+        flags.DEFINE_float(
+            'default_cell_area',
+            0,
+            'Area of the cell if the raster input is not provided.',
+        )
+
 
 _FLAGS = flags.FLAGS
-_FLAGS(sys.argv)  # Allow invocation without app.run()
+
+_DEFAULT_CONFIG = {
+    'input_geotiff': '',
+    'ignore_geotiff': '',
+    'allow_geotiff': '',
+    'input_csv': '',
+    'ignore_csv': '',
+    'allow_csv': '',
+    'limit_points': sys.maxsize,
+    'output_csv': '',
+    'output_mode': 'w',
+    'output_columns': [],
+    'output_date': None,
+    'output_precision': 6,
+    'output_s2_place': '',
+    'output_contained_s2_level': [10],
+    's2_level': 13,
+    'grid_degree': None,
+    'grid_prefix': 'grid_',
+    'aggregate': 'max',
+    'default_cell_area': 0,
+    'default_cell_width': 0.009,
+    'default_cell_height': 0.009,
+    'rename_columns': {
+        'acq_date': 'date',
+        'band:0': 'water',
+    },
+    'input_data_filter': {
+        'area': {
+            'aggregate': 'sum',
+        },
+    },
+    'output_data_filter': {},
+    'debug': False,
+    'log_every_n': 10000,
+    'log_every': 'processed_points',
+}
+
+
+def _flag_or_default(name: str, default):
+    if _FLAGS.is_parsed() and name in _FLAGS:
+        return getattr(_FLAGS, name)
+    return default
 
 
 def get_default_config():
-    # Create config from command line flags.
+    # Create config from command line flags or defaults.
     return {
         # Inputs
-        'input_geotiff': _FLAGS.input_geotiff,
-        'ignore_geotiff': _FLAGS.ignore_geotiff,
-        'allow_geotiff': _FLAGS.allow_geotiff,
-        'input_csv': _FLAGS.input_csv,
-        'ignore_csv': _FLAGS.ignore_csv,
-        'allow_csv': _FLAGS.allow_csv,
-        'limit_points': _FLAGS.limit_points,
+        'input_geotiff':
+            _flag_or_default('input_geotiff', ''),
+        'ignore_geotiff':
+            _flag_or_default('ignore_geotiff', ''),
+        'allow_geotiff':
+            _flag_or_default('allow_geotiff', ''),
+        'input_csv':
+            _flag_or_default('input_csv', ''),
+        'ignore_csv':
+            _flag_or_default('ignore_csv', ''),
+        'allow_csv':
+            _flag_or_default('allow_csv', ''),
+        'limit_points':
+            _flag_or_default('limit_points', sys.maxsize),
         # Output settings
-        'output_csv': _FLAGS.output_csv,
-        'output_mode': _FLAGS.output_mode,
-        'output_columns': _FLAGS.output_columns,
-        'output_date': _FLAGS.output_date,
-        'output_precision': _FLAGS.output_precision,
-        'output_s2_place': _FLAGS.output_s2_place,
-        'output_contained_s2_level': _FLAGS.output_contained_s2_level,
+        'output_csv':
+            _flag_or_default('output_csv', ''),
+        'output_mode':
+            _flag_or_default('output_mode', 'w'),
+        'output_columns':
+            _flag_or_default('output_columns', []),
+        'output_date':
+            _flag_or_default('output_date', None),
+        'output_precision':
+            _flag_or_default('output_precision', 6),
+        'output_s2_place':
+            _flag_or_default('output_s2_place', ''),
+        'output_contained_s2_level':
+            _flag_or_default('output_contained_s2_level', [10]),
         # Processing parameters
-        's2_level': _FLAGS.s2_level,
-        'grid_degree': _FLAGS.grid_degree,
-        'grid_prefix': _FLAGS.grid_prefix,
+        's2_level':
+            _flag_or_default('s2_level', 13),
+        'grid_degree':
+            _flag_or_default('grid_degree', None),
+        'grid_prefix':
+            _flag_or_default('grid_prefix', 'grid_'),
         # default aggregation for data values mapped to the same s2-cell+date
         # that can be one of: min, max, mean, sum.
         # For columns specific aggregation methods, use config:'input_data_filter'.
-        'aggregate': _FLAGS.aggregate,
+        'aggregate':
+            _flag_or_default('aggregate', 'max'),
         # generate data for all s2 cells from --s2_level upto this level.
         # Default cell area if constant for the whole data set.
-        'default_cell_area': _FLAGS.default_cell_area,
+        'default_cell_area':
+            _flag_or_default('default_cell_area', 0),
         # Default point/cell width/height for ~1sqkm at equator, lower near poles.
-        'default_cell_width': 0.009,
-        'default_cell_height': 0.009,
+        'default_cell_width':
+            0.009,
+        'default_cell_height':
+            0.009,
         # rename columns <input-name>: <output-name>
         'rename_columns': {
             'acq_date': 'date',
@@ -193,10 +282,14 @@ def get_default_config():
             #   },
         },
         # Debug settings
-        'debug': _FLAGS.debug,  # Enable debug logs
+        'debug':
+            _flag_or_default('debug', False),  # Enable debug logs
         'log_every_n':
-            (_FLAGS.log_every_n),  # Show counters when counter increments by N
-        'log_every': 'processed_points',  # Counter to check for log_every_n
+            _flag_or_default(
+                'log_every_n',
+                10000),  # Show counters when counter increments by N
+        'log_every':
+            'processed_points',  # Counter to check for log_every_n
     }
 
 
@@ -1108,6 +1201,7 @@ def _log_raster_info(raster: rasterio.io.DatasetReader):
 
 
 def main(_):
+    define_flags()
     config = ConfigMap(filename=_FLAGS.config, config_dict=get_default_config())
     if config.get('debug', False):
         logging.set_verbosity(2)
@@ -1115,4 +1209,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

@@ -30,19 +30,33 @@ from scripts.us_census.api_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('start_year', 2010,
-                     'Start year of the data to be downloaded')
-flags.DEFINE_integer('end_year', 2019, 'End year of the data to be downloaded')
-flags.DEFINE_list('summary_levels', None,
-                  'List of summary levels to be downloaded e.g. 040, 060')
-flags.DEFINE_string(
-    'output_path', None,
-    'The folder where downloaded data is to be stored. Each dataset and table will have a sub directory created within this folder'
-)
-flags.DEFINE_boolean('all_summaries', None,
-                     'Download data for all available summary levels')
-flags.DEFINE_boolean('force_fetch_data', False,
-                     'Force download of all data from API')
+
+def define_url_list_compiler_flags():
+    define_api_helpers_flags()
+    if 'start_year' not in flags.FLAGS:
+        flags.DEFINE_integer('start_year', 2010,
+                             'Start year of the data to be downloaded')
+    if 'end_year' not in flags.FLAGS:
+        flags.DEFINE_integer('end_year', 2019,
+                             'End year of the data to be downloaded')
+    if 'summary_levels' not in flags.FLAGS:
+        flags.DEFINE_list(
+            'summary_levels', None,
+            'List of summary levels to be downloaded e.g. 040, 060')
+    if 'output_path' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'output_path', None,
+            'The folder where downloaded data is to be stored. Each dataset and table will have a sub directory created within this folder'
+        )
+    if 'all_summaries' not in flags.FLAGS:
+        flags.DEFINE_boolean('all_summaries', None,
+                             'Download data for all available summary levels')
+    if 'force_fetch_data' not in flags.FLAGS:
+        flags.DEFINE_boolean('force_fetch_data', False,
+                             'Force download of all data from API')
+
+
+define_flags = define_url_list_compiler_flags
 """TODO
     - Add support for specific geos. e.g. a particular state.
     - Accept a config to create data sample download. (A set of specific geos from each summary level)
@@ -250,6 +264,7 @@ def get_variables_url_list(dataset: str,
 
 
 def main(argv):
+    define_flags()
     # geo_url_map = json.load(open(FLAGS.geo_map))
     year_list_int = list(range(FLAGS.start_year, FLAGS.end_year + 1))
     year_list = [str(y) for y in year_list_int]
@@ -275,6 +290,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     flags.mark_flags_as_required(['table_id', 'output_path', 'api_key'])
     flags.mark_flags_as_mutual_exclusive(['summary_levels', 'all_summaries'],
                                          required=True)

@@ -33,17 +33,26 @@ from name_to_alpha2 import USSTATE_MAP_SPACE
 import utils
 import file_util
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
 _FLAGS = flags.FLAGS
+
+
+def _define_flags():
+    if 'config_file' not in _FLAGS:
+        flags.DEFINE_string('config_file',
+                            os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                            'Input config file')
+    if 'output_dir' not in _FLAGS:
+        flags.DEFINE_string(
+            'output_dir', _SCRIPT_PATH,
+            'Directory path to write the cleaned CSV and'
+            'MCF. Default behaviour is to write the artifacts in the current working'
+            'directory.')
+    if 'gen_statvar_mcf' not in _FLAGS:
+        flags.DEFINE_bool(
+            'gen_statvar_mcf', False,
+            'Generate MCF of StatVars. Default behaviour is'
+            'to not generate the MCF file.')
+
 
 USSTATE_MAP_SPACE['U.S. Virgin Islands'] = 'VI'
 USSTATE_MAP_SPACE['Virgin Islands'] = 'VI'
@@ -125,6 +134,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
 
 def main(argv):
     global _YEARWISE_CONFIG
+    _define_flags()
     csv_files = []
     table_num = '12'
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
@@ -163,4 +173,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

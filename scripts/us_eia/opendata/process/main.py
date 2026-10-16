@@ -28,8 +28,13 @@ sys.path.append(
 from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
-flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
+
+
+def _define_flags():
+    if 'data_dir' not in FLAGS:
+        flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
+    if 'dataset' not in FLAGS:
+        flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 
 # Value: (name, extract_fn, schema_fn)
 _DATASETS = {
@@ -48,6 +53,7 @@ _DATASETS = {
 
 
 def main(_):
+    _define_flags()
     assert FLAGS.data_dir
     assert FLAGS.dataset
     file_prefix = os.path.join(FLAGS.data_dir, FLAGS.dataset)
@@ -63,4 +69,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

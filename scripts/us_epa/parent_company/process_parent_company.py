@@ -30,17 +30,26 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
-flags.DEFINE_string("existing_facilities_file", "existing_facilities",
-                    "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
-                    "Output directory for processed data.")
-flags.DEFINE_string("parent_co_output_path", "table",
-                    "Output directory for company info.")
-flags.DEFINE_string("ownership_output_path", "ownership",
-                    "Output directory for ownership.")
-flags.DEFINE_string("svobs_output_path", "svobs",
-                    "Output directory for StatVarObs.")
+
+def _define_flags():
+    if "input_download_path" not in FLAGS:
+        flags.DEFINE_string("input_download_path", "tmp_data",
+                            "Input directory")
+    if "existing_facilities_file" not in FLAGS:
+        flags.DEFINE_string("existing_facilities_file", "existing_facilities",
+                            "Filename for existing facilities ids")
+    if "output_base_path" not in FLAGS:
+        flags.DEFINE_string("output_base_path", "output",
+                            "Output directory for processed data.")
+    if "parent_co_output_path" not in FLAGS:
+        flags.DEFINE_string("parent_co_output_path", "table",
+                            "Output directory for company info.")
+    if "ownership_output_path" not in FLAGS:
+        flags.DEFINE_string("ownership_output_path", "ownership",
+                            "Output directory for ownership.")
+    if "svobs_output_path" not in FLAGS:
+        flags.DEFINE_string("svobs_output_path", "svobs",
+                            "Output directory for StatVarObs.")
 
 # V_PARENT_COMPANY_INFO table
 _TABLE_PREFIX = "D_GHG_B"
@@ -495,6 +504,7 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
 
 
 def main(_):
+    _define_flags()
     # Validate inputs.
     assert FLAGS.output_base_path
     assert FLAGS.parent_co_output_path
@@ -535,4 +545,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -39,10 +39,21 @@ from urllib.parse import urlparse
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'tax_id_dcid_mapping',
-    'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
-    'Input directory where .txt files downloaded.')
+
+def _define_flags() -> None:
+    if 'tax_id_dcid_mapping' not in FLAGS:
+        flags.DEFINE_string(
+            'tax_id_dcid_mapping',
+            'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
+            'Input directory where .txt files downloaded.')
+    if 'output_dir' not in FLAGS:
+        flags.DEFINE_string('output_dir', 'output',
+                            'Output directory for generated files.')
+    if 'input_dir' not in FLAGS:
+        flags.DEFINE_string('input_dir', 'input',
+                            'Input directory where .dmp files downloaded.')
+
+
 SOURCE_FILE_PATH = 'input/'
 OUTPUT_FILE_PATH = 'output/'
 OUTPUT_MCF_FILE = 'ncbi_taxonomy_schema_enum.mcf'
@@ -200,12 +211,6 @@ CATEGORIES_DICT = {
 }
 
 _FLAGS = flags.FLAGS
-
-flags.DEFINE_string('output_dir', 'output',
-                    'Output directory for generated files.')
-
-flags.DEFINE_string('input_dir', 'input',
-                    'Input directory where .dmp files downloaded.')
 
 MODULE_DIR = dirname(dirname(abspath(__file__)))
 
@@ -628,6 +633,7 @@ def char_replace(s: str) -> str:
 
 def set_flages() -> None:
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH
+    _define_flags()
     _FLAGS(sys.argv)
     OUTPUT_FILE_PATH = path_join(MODULE_DIR, _FLAGS.output_dir)
     if not os.path.exists(join(MODULE_DIR, _FLAGS.output_dir)):
@@ -652,6 +658,7 @@ def main(_):
     """Main method
     """
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH
+    _define_flags()
     logging.info("Start format NCBI Taxonomy")
     set_flages()
     logging.info("Processing Division dataframe")
@@ -705,4 +712,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

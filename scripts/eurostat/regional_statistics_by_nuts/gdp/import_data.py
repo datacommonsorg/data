@@ -34,7 +34,12 @@ import os
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _HISTORICAL_DATA_PATH = os.path.join(_MODULE_DIR, 'historical_deleted.csv')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags():
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 # Imports country mapping alpha2 country codes to country DCIDs.
 sys.path.insert(1, '../../../../util')
@@ -278,6 +283,7 @@ class EurostatGDPImporter:
 
 
 def main(_):
+    _define_flags()
     mode = _FLAGS.mode
     input_source = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true"
 
@@ -298,4 +304,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -20,11 +20,16 @@ from absl import app, flags
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mmsite_input_file', './data/measurement_sites.csv',
-                    'Location of the measurement_sites.csv file')
-flags.DEFINE_string(
-    'mmsite_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags():
+    if 'mmsite_input_file' not in FLAGS:
+        flags.DEFINE_string('mmsite_input_file', './data/measurement_sites.csv',
+                            'Location of the measurement_sites.csv file')
+    if 'mmsite_output_path' not in FLAGS:
+        flags.DEFINE_string(
+            'mmsite_output_path', './data/output',
+            'Path to the directory where generated files are to be stored.')
 
 MCF_STR = """
 Node: {dcid}
@@ -69,8 +74,10 @@ def generate_mcf(input_file: str, output_path: str) -> None:
 
 
 def main(_) -> None:
+    _define_flags()
     generate_mcf(FLAGS.mmsite_input_file, FLAGS.mmsite_output_path)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

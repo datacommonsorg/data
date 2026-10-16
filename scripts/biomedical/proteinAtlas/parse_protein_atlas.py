@@ -22,29 +22,34 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('database', 'normal_tissue.tsv',
-                    'input tissue atlas file path.')
 
-flags.DEFINE_string('gene_to_uniprot_list',
-                    'gene_to_uniprot_list.txt',
-                    'gene_to_uniprot_list file path.',
-                    short_name='g')
+def _define_flags():
+    if 'database' not in FLAGS:
+        flags.DEFINE_string('database', 'normal_tissue.tsv',
+                            'input tissue atlas file path.')
+    if 'gene_to_uniprot_list' not in FLAGS:
+        flags.DEFINE_string('gene_to_uniprot_list',
+                            'gene_to_uniprot_list.txt',
+                            'gene_to_uniprot_list file path.',
+                            short_name='g' if 'g' not in FLAGS else None)
+    if 'uniprot_to_dcid' not in FLAGS:
+        flags.DEFINE_string('uniprot_to_dcid',
+                            'uniprot_to_dcid.tsv',
+                            'uniprot_to_dcid.tsv file path.',
+                            short_name='u' if 'u' not in FLAGS else None)
+    if 'data_mcf' not in FLAGS:
+        flags.DEFINE_string('data_mcf',
+                            'ProteinAtlasData.mcf',
+                            'The output data mcf file path.',
+                            short_name='m' if 'm' not in FLAGS else None)
+    if 'tissue_mcf' not in FLAGS:
+        flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
+                            'The output HumanTissueEnum.mcf file path.')
+    if 'cell_mcf' not in FLAGS:
+        flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
+                            'The output HumanCellTypeEnum.mcf file path.')
 
-flags.DEFINE_string('uniprot_to_dcid',
-                    'uniprot_to_dcid.tsv',
-                    'uniprot_to_dcid.tsv file path.',
-                    short_name='u')
 
-flags.DEFINE_string('data_mcf',
-                    'ProteinAtlasData.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
-
-flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
-                    'The output HumanTissueEnum.mcf file path.')
-
-flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
-                    'The output HumanCellTypeEnum.mcf file path.')
 EXPRESSION_MAP = {
     'Not detected': 'ProteinExpressionNotDetected',
     'Low': 'ProteinExpressionLow',
@@ -202,6 +207,7 @@ def get_cell_enum(cell):
 
 def main(argv):
     "Main function to read the database file and generate data mcf"
+    _define_flags()
     database_file = FLAGS.database
     gene_to_uniprot_list_path = FLAGS.gene_to_uniprot_list
     uniprot_to_dcid_path = FLAGS.uniprot_to_dcid
@@ -235,4 +241,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

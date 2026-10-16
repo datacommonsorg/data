@@ -33,11 +33,16 @@ default_input_path = os.path.join(
     _SCRIPT_PATH, "./data/Extracted_State-maps-for-asthma-prevalence.tsv")
 default_output_path = os.path.join(_SCRIPT_PATH, "./data/output")
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'inputfile_path', default_input_path,
-    'Path to the extracted tabular data file in csv/tsv file format')
-flags.DEFINE_string('outputdir_path', default_output_path,
-                    'Path to the output directory')
+
+
+def _define_flags():
+    if 'inputfile_path' not in FLAGS:
+        flags.DEFINE_string(
+            'inputfile_path', default_input_path,
+            'Path to the extracted tabular data file in csv/tsv file format')
+    if 'outputdir_path' not in FLAGS:
+        flags.DEFINE_string('outputdir_path', default_output_path,
+                            'Path to the output directory')
 
 # Predefined strings for the statvar mcf and template mcf
 _TEMPLATE_MCF = """
@@ -208,10 +213,12 @@ def process_brfss_asthma(input_dataset: str,
 
 
 def main(_) -> None:
+    _define_flags()
     process_brfss_asthma(input_dataset=FLAGS.inputfile_path,
                          sep="\t",
                          output_path=FLAGS.outputdir_path)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

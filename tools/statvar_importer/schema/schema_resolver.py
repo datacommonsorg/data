@@ -48,14 +48,20 @@ from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_list('input_schema_mcf', [],
-                  'List of schema MCF files to load for resolution.')
-flags.DEFINE_list('resolve_mcf', [], 'MCF file with nodes to be resolved.')
-flags.DEFINE_string(
-    'resolve_output_path',
-    '',
-    'Output folder for resolved and unresolved files.',
-)
+
+def define_flags():
+    if 'input_schema_mcf' not in _FLAGS:
+        flags.DEFINE_list('input_schema_mcf', [],
+                          'List of schema MCF files to load for resolution.')
+    if 'resolve_mcf' not in _FLAGS:
+        flags.DEFINE_list('resolve_mcf', [],
+                          'MCF file with nodes to be resolved.')
+    if 'resolve_output_path' not in _FLAGS:
+        flags.DEFINE_string(
+            'resolve_output_path',
+            '',
+            'Output folder for resolved and unresolved files.',
+        )
 
 _DEFAULT_CONFIG = {
     # List of properties to ignore when resolving a node.
@@ -310,6 +316,7 @@ def resolve_nodes(
 
 
 def main(_):
+    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return
@@ -325,4 +332,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    define_flags()
     app.run(main)

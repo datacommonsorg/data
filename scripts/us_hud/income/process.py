@@ -32,11 +32,18 @@ import requests
 from retry import retry
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('income_output_dir', 'output',
-                    'Path to write cleaned CSVs.')
-flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
-flags.DEFINE_string('mode', '',
-                    'Mode: "download", "process", or both (default: both).')
+
+
+def _define_flags():
+    if 'income_output_dir' not in FLAGS:
+        flags.DEFINE_string('income_output_dir', 'output',
+                            'Path to write cleaned CSVs.')
+    if 'input_files' not in FLAGS:
+        flags.DEFINE_string('input_files', 'input',
+                            'Path to download input CSVs.')
+    if 'mode' not in FLAGS:
+        flags.DEFINE_string('mode', '',
+                            'Mode: "download", "process", or both (default: both).')
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 
@@ -136,6 +143,7 @@ def process(year, matches, input_folder):
 
 def process_all():
     '''Processes all years based on mode flag.'''
+    _define_flags()
     with open('match_bq.csv') as f:
         reader = csv.DictReader(f)
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
@@ -197,8 +205,10 @@ def process_all():
 
 
 def main(argv):
+    _define_flags()
     process_all()
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

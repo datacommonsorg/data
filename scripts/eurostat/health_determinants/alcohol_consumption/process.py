@@ -28,7 +28,12 @@ from common import import_download_details, download
 # pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def define_flags():
+    if 'mode' not in flags.FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 
 class EuroStatAlcoholConsumption(EuroStat):
@@ -148,6 +153,7 @@ class EuroStatAlcoholConsumption(EuroStat):
 
 
 def main(_):
+    define_flags()
     mode = _FLAGS.mode
     global import_name
     import_name = "alcohol_consumption"
@@ -184,4 +190,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    define_flags()
     app.run(main)

@@ -39,11 +39,6 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 import gspread
 
-flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
-flags.DEFINE_string('output_prefix', '',
-                    'Path prefix for output csv and mcf files.')
-flags.DEFINE_string('credentials', '', 'File with credentials.')
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -57,6 +52,18 @@ import config_flags
 import process_http_server
 
 _FLAGS = flags.FLAGS
+
+
+def define_flags():
+    stat_var_processor.define_flags()
+    if 'input_sheet' not in _FLAGS:
+        flags.DEFINE_string('input_sheet', '',
+                            'URL of spreadsheet to process')
+    if 'output_prefix' not in _FLAGS:
+        flags.DEFINE_string('output_prefix', '',
+                            'Path prefix for output csv and mcf files.')
+    if 'credentials' not in _FLAGS:
+        flags.DEFINE_string('credentials', '', 'File with credentials.')
 
 _HOME_DIR = os.path.expanduser('~')
 
@@ -335,6 +342,7 @@ def _add_worksheet(
 
 
 def main(_):
+    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return
@@ -353,4 +361,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

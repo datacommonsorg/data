@@ -76,23 +76,34 @@ from counters import Counters
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_list('recon_schema_mcf', [],
-                  'List of schema MCF files to load for reconciliation.')
-flags.DEFINE_list('recon_input', [],
-                  'List of MCF files to load for reconciliation.')
-flags.DEFINE_string(
-    'recon_output',
-    '',
-    'Output MCF for reconciled nodes.',
-)
-flags.DEFINE_list('recon_property', [],
-                  'List of properties to be looked up for reconciliation.')
-flags.DEFINE_bool('recon_keep_legacy_svobs', True,
-                  'Keep the legacy value when reconciling nodes.')
+
+def define_flags():
+    process_http_server.define_flags()
+    if 'recon_schema_mcf' not in _FLAGS:
+        flags.DEFINE_list(
+            'recon_schema_mcf', [],
+            'List of schema MCF files to load for reconciliation.')
+    if 'recon_input' not in _FLAGS:
+        flags.DEFINE_list('recon_input', [],
+                          'List of MCF files to load for reconciliation.')
+    if 'recon_output' not in _FLAGS:
+        flags.DEFINE_string(
+            'recon_output',
+            '',
+            'Output MCF for reconciled nodes.',
+        )
+    if 'recon_property' not in _FLAGS:
+        flags.DEFINE_list(
+            'recon_property', [],
+            'List of properties to be looked up for reconciliation.')
+    if 'recon_keep_legacy_svobs' not in _FLAGS:
+        flags.DEFINE_bool('recon_keep_legacy_svobs', True,
+                          'Keep the legacy value when reconciling nodes.')
 
 
 def get_default_recon_config() -> dict:
     """Returns dictionary of default config for reconciliation."""
+    define_flags()
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
 
@@ -408,6 +419,7 @@ def schema_reconcile_nodes(nodes: dict,
 
 def main(_):
     """Main entry point for reconciling MCF files from the command line."""
+    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return
@@ -425,4 +437,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

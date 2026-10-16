@@ -26,7 +26,11 @@ import os
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags():
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 def download_data(download_link, download_path):
@@ -231,6 +235,7 @@ def clean_data(preprocessed_df, output_path):
 
 
 def main(_):
+    _define_flags()
     mode = _FLAGS.mode
     download_link = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_gind3/?format=TSV&compressed=true"
     output_path = 'EurostatNUTS3_BirthDeathMigration.csv'
@@ -247,4 +252,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

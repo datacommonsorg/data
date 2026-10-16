@@ -76,64 +76,100 @@ import utils
 
 from counters import Counters
 
-flags.DEFINE_bool(
-    'ee_remote', False,
-    'Set to True to use service account auth when running remotely')
-flags.DEFINE_string('ee_gcloud_project', 'datcom-import-automation-prod',
-                    'Gcloud project with Earth Engine API enabled.')
-flags.DEFINE_string('ee_dataset', '',
-                    'Load earth engine data set define in config datasets.')
-flags.DEFINE_string('gcs_output', '', 'Prefix for output file names on GCS.')
-flags.DEFINE_string('gcs_project', '', 'GCS project for exporting images.')
-flags.DEFINE_string('gcs_bucket', 'earth_engine_exports',
-                    'GCS bucket for exporting images.')
-flags.DEFINE_string('gcs_folder', '', 'GCS folder for exporting images.')
-flags.DEFINE_string(
-    'start_date', '',
-    'Date from which image is to be loaded in YYYY-MM-DD format.')
-flags.DEFINE_string(
-    'end_date', '',
-    'Date upto which image is to be loaded in YYYY-MM-DD format.')
-flags.DEFINE_string(
-    'time_period', 'P1M',
-    'Time range of images to be aggregated into a single image in P<N><T> format, '
-    'for example "P1Y" for images merged over a year')
-flags.DEFINE_string('ee_image_collection', '',
-                    'Name of the EarthEngine image collection asset.')
-flags.DEFINE_string(
-    'ee_reducer', 'mean',
-    'EarthEngine Reducer to be applied when merging images in the collection.')
-flags.DEFINE_string('band', '', 'Band to be extracted from the ee image.')
-flags.DEFINE_integer('scale', 1000, 'Scale in meters for the output image.')
-flags.DEFINE_string(
-    'ee_mask', '', 'Dataset to be applied as a mask when extracting the image.')
-flags.DEFINE_float('band_min', None,
-                   'Minimum value for the pixels in the band.')
-flags.DEFINE_float('band_max', None,
-                   'Maximum value for the pixels in the band.')
-flags.DEFINE_float('band_eq', None, 'Value for the pixels in the band.')
-flags.DEFINE_bool(
-    'ee_band_bool', True,
-    'Filter band by thresholds into a bool image with 1 where values are met.'
-    'If False, the originals values meeting thresholds are preserved, '
-    'and image set to 0 everywhere else.')
-flags.DEFINE_string(
-    'ee_image_eval', None,
-    'Get image by evaluating the python statements with ee commands.')
-flags.DEFINE_string(
-    'ee_bounds', None,
-    'Rectangular bounds as "lat,lng:lat,lng" for filtering images.')
-flags.DEFINE_string(
-    'ee_output_data_type', None,
-    'Convert output band values to the given type, such as float, int.')
-flags.DEFINE_integer(
-    'ee_image_count', 1,
-    'Number of images to generate, each advanced by --time_period.')
-flags.DEFINE_bool('ee_export_image', True,
-                  'If true, submit a task to export image.')
+def define_flags():
+    common_flags.define_flags()
+    if 'ee_remote' not in flags.FLAGS:
+        flags.DEFINE_bool(
+            'ee_remote', False,
+            'Set to True to use service account auth when running remotely')
+    if 'ee_gcloud_project' not in flags.FLAGS:
+        flags.DEFINE_string('ee_gcloud_project',
+                            'datcom-import-automation-prod',
+                            'Gcloud project with Earth Engine API enabled.')
+    if 'ee_dataset' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'ee_dataset', '',
+            'Load earth engine data set define in config datasets.')
+    if 'gcs_output' not in flags.FLAGS:
+        flags.DEFINE_string('gcs_output', '',
+                            'Prefix for output file names on GCS.')
+    if 'gcs_project' not in flags.FLAGS:
+        flags.DEFINE_string('gcs_project', '',
+                            'GCS project for exporting images.')
+    if 'gcs_bucket' not in flags.FLAGS:
+        flags.DEFINE_string('gcs_bucket', 'earth_engine_exports',
+                            'GCS bucket for exporting images.')
+    if 'gcs_folder' not in flags.FLAGS:
+        flags.DEFINE_string('gcs_folder', '',
+                            'GCS folder for exporting images.')
+    if 'start_date' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'start_date', '',
+            'Date from which image is to be loaded in YYYY-MM-DD format.')
+    if 'end_date' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'end_date', '',
+            'Date upto which image is to be loaded in YYYY-MM-DD format.')
+    if 'time_period' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'time_period', 'P1M',
+            'Time range of images to be aggregated into a single image in P<N><T> format, '
+            'for example "P1Y" for images merged over a year')
+    if 'ee_image_collection' not in flags.FLAGS:
+        flags.DEFINE_string('ee_image_collection', '',
+                            'Name of the EarthEngine image collection asset.')
+    if 'ee_reducer' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'ee_reducer', 'mean',
+            'EarthEngine Reducer to be applied when merging images in the collection.'
+        )
+    if 'band' not in flags.FLAGS:
+        flags.DEFINE_string('band', '',
+                            'Band to be extracted from the ee image.')
+    if 'scale' not in flags.FLAGS:
+        flags.DEFINE_integer('scale', 1000,
+                             'Scale in meters for the output image.')
+    if 'ee_mask' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'ee_mask', '',
+            'Dataset to be applied as a mask when extracting the image.')
+    if 'band_min' not in flags.FLAGS:
+        flags.DEFINE_float('band_min', None,
+                           'Minimum value for the pixels in the band.')
+    if 'band_max' not in flags.FLAGS:
+        flags.DEFINE_float('band_max', None,
+                           'Maximum value for the pixels in the band.')
+    if 'band_eq' not in flags.FLAGS:
+        flags.DEFINE_float('band_eq', None,
+                           'Value for the pixels in the band.')
+    if 'ee_band_bool' not in flags.FLAGS:
+        flags.DEFINE_bool(
+            'ee_band_bool', True,
+            'Filter band by thresholds into a bool image with 1 where values are met.'
+            'If False, the originals values meeting thresholds are preserved, '
+            'and image set to 0 everywhere else.')
+    if 'ee_image_eval' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'ee_image_eval', None,
+            'Get image by evaluating the python statements with ee commands.')
+    if 'ee_bounds' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'ee_bounds', None,
+            'Rectangular bounds as "lat,lng:lat,lng" for filtering images.')
+    if 'ee_output_data_type' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'ee_output_data_type', None,
+            'Convert output band values to the given type, such as float, int.')
+    if 'ee_image_count' not in flags.FLAGS:
+        flags.DEFINE_integer(
+            'ee_image_count', 1,
+            'Number of images to generate, each advanced by --time_period.')
+    if 'ee_export_image' not in flags.FLAGS:
+        flags.DEFINE_bool('ee_export_image', True,
+                          'If true, submit a task to export image.')
+
 
 _FLAGS = flags.FLAGS
-_FLAGS(sys.argv)  # Allow invocation without app.run()
 
 # Default Earth Engine datasets with asset name and bands.
 _DEFAULT_DATASETS = {
@@ -182,48 +218,56 @@ _DEFAULT_DATASETS = {
 
 EE_DEFAULT_CONFIG = {
     # Auth mode
-    'ee_remote': _FLAGS.ee_remote,
+    'ee_remote': False,
     # GCloud project
-    'ee_gcloud_project': _FLAGS.ee_gcloud_project,
+    'ee_gcloud_project': 'datcom-import-automation-prod',
     # Image loading settings.
     'datasets': _DEFAULT_DATASETS,  # Predefined assets
-    'ee_dataset': _FLAGS.ee_dataset,  # Reference to an asset in 'datasets'
+    'ee_dataset': '',  # Reference to an asset in 'datasets'
     # asset id for an image collection
-    'ee_image_collection': _FLAGS.ee_image_collection,
+    'ee_image_collection': '',
     # Image processing settings.
-    'ee_reducer':
-        _FLAGS.ee_reducer,  # Reducer to convert image collection to an image
-    'band': _FLAGS.band,
+    'ee_reducer': 'mean',  # Reducer to convert image collection to an image
+    'band': '',
 
     # Filter settings
     # Filter by bounding box
-    'ee_bounds': _FLAGS.ee_bounds,
+    'ee_bounds': None,
     # Filter by time range
-    'start_date': _FLAGS.start_date,
-    'end_date': _FLAGS.end_date,
-    'time_period': _FLAGS.time_period,
+    'start_date': '',
+    'end_date': '',
+    'time_period': 'P1M',
     # Filter by band value
-    'band_min': _FLAGS.band_min,
-    'band_max': _FLAGS.band_max,
-    'band_eq': _FLAGS.band_eq,
-    'ee_band_bool': _FLAGS.ee_band_bool,
+    'band_min': None,
+    'band_max': None,
+    'band_eq': None,
+    'ee_band_bool': True,
     # Mask of points to be allowed.
-    'ee_mask': _FLAGS.ee_mask,
+    'ee_mask': '',
 
     # Output image settings
-    'scale': _FLAGS.scale,
-    'ee_output_data_type': _FLAGS.ee_output_data_type,
+    'scale': 1000,
+    'ee_output_data_type': None,
     # GCS setting to export images
-    'gcs_project': _FLAGS.gcs_project,
-    'gcs_folder': _FLAGS.gcs_folder,
-    'gcs_bucket': _FLAGS.gcs_bucket,
-    'gcs_output': _FLAGS.gcs_output,
-    'ee_export_image': _FLAGS.ee_export_image,
-    'ee_image_count': _FLAGS.ee_image_count,
+    'gcs_project': '',
+    'gcs_folder': '',
+    'gcs_bucket': 'earth_engine_exports',
+    'gcs_output': '',
+    'ee_export_image': True,
+    'ee_image_count': 1,
 
     # Debug options
-    'debug': _FLAGS.debug,
+    'debug': False,
 }
+
+
+def get_default_config() -> dict:
+    config = dict(EE_DEFAULT_CONFIG)
+    if _FLAGS.is_parsed():
+        for k in list(config.keys()):
+            if k != 'datasets' and k in _FLAGS:
+                config[k] = getattr(_FLAGS, k)
+    return config
 
 # Interval in secs to cehck for EE task status
 _EE_TASK_WAIT_INTERVAL = 10
@@ -762,7 +806,8 @@ def get_date_from_filename(filename: str, time_period: str = '') -> str:
 
 
 def main(_):
-    config = _load_config(_FLAGS.config)
+    define_flags()
+    config = _load_config(_FLAGS.config, default_config=get_default_config())
     if config.get('debug', False):
         logging.set_verbosity(2)
     # Authenticate using `earthengine authenticate`
@@ -771,4 +816,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

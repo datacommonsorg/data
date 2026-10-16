@@ -58,27 +58,33 @@ SKIPPED_COUNTY_CODES = set([
 ])
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_integer('start_year', 2024, 'start_year')
-flags.DEFINE_string('api_key',
-                    'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
-                    'directory where api key exists')
+
+
+def _define_flags():
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'start_year' not in _FLAGS:
+        flags.DEFINE_integer('start_year', 2024, 'start_year')
+    if 'api_key' not in _FLAGS:
+        flags.DEFINE_string('api_key',
+                            'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
+                            'directory where api key exists')
 
 
 def _get_mode():
-    if _FLAGS.is_parsed():
+    if _FLAGS.is_parsed() and 'mode' in _FLAGS:
         return _FLAGS.mode
     return ""
 
 
 def _get_start_year():
-    if _FLAGS.is_parsed():
+    if _FLAGS.is_parsed() and 'start_year' in _FLAGS:
         return _FLAGS.start_year
     return 2024
 
 
 def _get_api_key_path():
-    if _FLAGS.is_parsed():
+    if _FLAGS.is_parsed() and 'api_key' in _FLAGS:
         return _FLAGS.api_key
     return 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json'
 
@@ -511,10 +517,12 @@ def get_usda_api_key():
 
 
 def main(_):
+    _define_flags()
     load_usda_api_key()
     logging.info('USDA API key successfully loaded.')
     get_multiple_years()
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

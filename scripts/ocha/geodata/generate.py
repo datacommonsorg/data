@@ -23,12 +23,20 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('ocha_input_geojson_pattern', '', 'GeoJSON file pattern')
-flags.DEFINE_string('ocha_resolved_id_map', '', 'Resolved ID map')
-flags.DEFINE_string('ocha_output_dir', '/tmp', 'Output directory path.')
-flags.DEFINE_boolean(
-    'ocha_generate_id_map', False, 'If true, then this just generates '
-    'the ID maps for resolution')
+
+def _define_flags():
+    if 'ocha_input_geojson_pattern' not in FLAGS:
+        flags.DEFINE_string('ocha_input_geojson_pattern', '',
+                            'GeoJSON file pattern')
+    if 'ocha_resolved_id_map' not in FLAGS:
+        flags.DEFINE_string('ocha_resolved_id_map', '', 'Resolved ID map')
+    if 'ocha_output_dir' not in FLAGS:
+        flags.DEFINE_string('ocha_output_dir', '/tmp', 'Output directory path.')
+    if 'ocha_generate_id_map' not in FLAGS:
+        flags.DEFINE_boolean(
+            'ocha_generate_id_map', False, 'If true, then this just generates '
+            'the ID maps for resolution')
+
 
 # Note1: When we emit geojson string, we use two json.dumps() so it
 # automatically escapes all inner quotes, and encloses the entire string in
@@ -187,6 +195,7 @@ def generate_id_map(in_pattern, out_dir):
 
 
 def main(_):
+    _define_flags()
     if FLAGS.ocha_generate_id_map:
         generate_id_map(FLAGS.ocha_input_geojson_pattern, FLAGS.ocha_output_dir)
     else:
@@ -195,4 +204,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

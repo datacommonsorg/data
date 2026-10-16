@@ -3,10 +3,15 @@ from absl import flags
 from absl import app
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('preprocess_file',
-                    'NPS_1978-2018_Data.tsv',
-                    'file path to tsv file with data to proess',
-                    short_name='p')
+
+
+def define_flags():
+    if 'preprocess_file' not in flags.FLAGS:
+        flags.DEFINE_string('preprocess_file',
+                            'NPS_1978-2018_Data.tsv',
+                            'file path to tsv file with data to proess',
+                            short_name='p')
+
 
 
 def convert_nan_for_calculation(value):
@@ -598,6 +603,7 @@ def preprocess_df(raw_df):
 
 
 def main(args):
+    define_flags()
     filename = FLAGS.preprocess_file
     print('Processing {0}'.format(filename))
     df = pd.read_csv(filename, delimiter='\t')
@@ -607,4 +613,5 @@ def main(args):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

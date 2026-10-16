@@ -59,10 +59,12 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    flags.DEFINE_string('mode', '', 'Options: download or process')
-    flags.DEFINE_bool(
-        'is_summary_levels', False,
-        'Options: True for all summary_levels and False for only 162')
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'is_summary_levels' not in _FLAGS:
+        flags.DEFINE_bool(
+            'is_summary_levels', False,
+            'Options: True for all summary_levels and False for only 162')
 
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1261,6 +1263,7 @@ def download_files():
 
 
 def main(_):
+    _define_flags()
     mode = _FLAGS.mode
     is_summary_levels = _FLAGS.is_summary_levels
 

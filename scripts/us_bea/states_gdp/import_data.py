@@ -37,8 +37,14 @@ logging.set_verbosity(logging.INFO)
 pd.options.mode.chained_assignment = None
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer('latest_year', None,
-                     'The latest year to look for in the filename (optional).')
+
+
+def define_flags():
+    if 'latest_year' not in flags.FLAGS:
+        flags.DEFINE_integer(
+            'latest_year', None,
+            'The latest year to look for in the filename (optional).')
+
 
 
 class StateGDPDataLoader:
@@ -149,9 +155,11 @@ class StateGDPDataLoader:
         else:
             try:
                 _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
+                latest_year = (getattr(FLAGS, 'latest_year', None)
+                               if FLAGS.is_parsed() else None)
                 self._input_file = self._find_gdp_file_in_folder(
                     input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN,
-                    FLAGS.latest_year)
+                    latest_year)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -275,10 +283,12 @@ class StateGDPDataLoader:
 
 def main(argv):
     """Runs the program."""
+    define_flags()
     loader = StateGDPDataLoader()
     loader.process_data()
     loader.save_csv()
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

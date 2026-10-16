@@ -58,24 +58,30 @@ sys.path.append(os.path.join(os.path.dirname(_SCRIPTS_DIR), 'earthengine'))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-flags.DEFINE_string(
-    'flood_pipeline_config',
-    os.path.join(_SCRIPTS_DIR, 'flood_events_pipeline_config.py'),
-    'Config for the pipeline as a py dictionary of json')
-
-flags.DEFINE_list(
-    'flood_pipeline_stages', [],
-    'List of stages in the flood events pipeline config to be run.')
-
 _FLAGS = flags.FLAGS
 
+import events_pipeline
 import file_util
 
 from config_map import ConfigMap
 from events_pipeline import EventPipeline
 
 
+def define_flags():
+    events_pipeline.define_flags()
+    if 'flood_pipeline_config' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'flood_pipeline_config',
+            os.path.join(_SCRIPTS_DIR, 'flood_events_pipeline_config.py'),
+            'Config for the pipeline as a py dictionary of json')
+    if 'flood_pipeline_stages' not in flags.FLAGS:
+        flags.DEFINE_list(
+            'flood_pipeline_stages', [],
+            'List of stages in the flood events pipeline config to be run.')
+
+
 def main(_):
+    define_flags()
     config = ConfigMap(filename=_FLAGS.flood_pipeline_config)
     if _FLAGS.start_date:
         config.get('defaults', {})['start_date'] = _FLAGS.start_date
@@ -84,4 +90,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

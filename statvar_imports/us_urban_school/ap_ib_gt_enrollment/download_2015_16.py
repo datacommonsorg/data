@@ -23,7 +23,7 @@ from retry import retry
 import sys
 
 # reusing configs from the main script
-from download_ap_ib_gt import DATA_CONFIGS, SCRIPT_DIR, add_year_column, get_file_keywords, get_req_cols_from_config, download_url_with_retry, BASE_URL_TEMPLATE
+from download_ap_ib_gt import DATA_CONFIGS, SCRIPT_DIR, add_year_column, get_file_keywords, get_req_cols_from_config, download_url_with_retry, BASE_URL_TEMPLATE, define_flags
 
 FLAGS = flags.FLAGS
 
@@ -104,6 +104,7 @@ def main(_):
     """
     Main function to run the download process for 2015-16 AP, IB, and GT data.
     """
+    define_flags()
     BASE_OUTPUT_DIR = SCRIPT_DIR
 
     data_types_to_download = []
@@ -128,4 +129,5 @@ def main(_):
     logging.info(f"\n--- All 2015-16 downloads complete ---")
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

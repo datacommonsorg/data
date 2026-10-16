@@ -58,10 +58,13 @@ def _sanitize_url(url: str) -> str:
     return re.sub(r'(?i)(apiToken=)[^&\s]+', r'\1REDACTED', str(url))
 
 
-flags.DEFINE_string(
-    'config_file_path',
-    'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py',
-    'Config file path')
+def define_flags():
+    if 'config_file_path' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'config_file_path',
+            'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py',
+            'Config file path')
+
 
 current_year = datetime.now().year
 
@@ -285,7 +288,11 @@ def convert_html_to_csv(category_string=None):
 
 def reads_config_file():
     _FLAGS = flags.FLAGS
-    config_file_path = _FLAGS.config_file_path
+    config_file_path = (
+        _FLAGS.config_file_path if _FLAGS.is_parsed() and
+        'config_file_path' in _FLAGS else
+        'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py'
+    )
     storage_client = storage.Client()
     bucket_name = config_file_path.split('/')[2]
     bucket = storage_client.bucket(bucket_name)
@@ -298,6 +305,7 @@ def reads_config_file():
 
 
 def main(_):
+    define_flags()
     paths = [
         _CONFIG.get('COMBINED_INPUT_CSV_FILE'),
         _CONFIG.get('INPUT_HTML_FILES'),
@@ -326,4 +334,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    define_flags()
     app.run(main)

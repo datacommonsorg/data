@@ -31,8 +31,13 @@ from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('rgi_input_csv_pattern', '', 'Glacier CSV file pattern')
-flags.DEFINE_string('rgi_output_dir', '/tmp/', 'Output directory')
+
+def _define_flags():
+    if 'rgi_input_csv_pattern' not in FLAGS:
+        flags.DEFINE_string('rgi_input_csv_pattern', '',
+                            'Glacier CSV file pattern')
+    if 'rgi_output_dir' not in FLAGS:
+        flags.DEFINE_string('rgi_output_dir', '/tmp/', 'Output directory')
 
 
 def _extract_node_dcid(node):
@@ -166,6 +171,7 @@ def _process(in_pattern, out_dir, country_gj, continent_map):
 
 
 def main(_):
+    _define_flags()
     assert FLAGS.rgi_input_csv_pattern and FLAGS.rgi_output_dir
     country_gj, continent_map = _load_geojsons()
     _process(FLAGS.rgi_input_csv_pattern, FLAGS.rgi_output_dir, country_gj,
@@ -173,4 +179,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

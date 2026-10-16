@@ -35,9 +35,12 @@ from util.dc_api_wrapper import dc_api_wrapper, get_datacommons_client
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'output_file', 'provenances_full.json',
-    'Path to the output JSON file where the hierarchy will be saved.')
+
+def _define_flags():
+    if 'output_file' not in FLAGS:
+        flags.DEFINE_string(
+            'output_file', 'provenances_full.json',
+            'Path to the output JSON file where the hierarchy will be saved.')
 
 
 def get_node_property(node_data, prop_name, default=None):
@@ -212,6 +215,7 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
 
 
 def main(_):
+    _define_flags()
     api_key = os.environ.get('DC_API_KEY')
     if not api_key:
         logging.fatal("DC_API_KEY environment variable not set.")
@@ -221,4 +225,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

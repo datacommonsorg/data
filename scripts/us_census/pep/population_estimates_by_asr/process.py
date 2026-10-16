@@ -48,8 +48,16 @@ from county_2020_2029 import county2029
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
+
+
+def _define_flags():
+    if 'mode' not in FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'input_path' not in FLAGS:
+        flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH,
+                            "Import Data File's List")
+
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = []
@@ -343,6 +351,7 @@ def download_files():
 
 
 def main(_):
+    _define_flags()
     mode = FLAGS.mode
     input_path = FLAGS.input_path
     if not os.path.exists(input_path):
@@ -372,4 +381,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

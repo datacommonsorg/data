@@ -30,17 +30,26 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 import utils
 import file_util
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
 _FLAGS = flags.FLAGS
+_DEFAULT_CONFIG_FILE = os.path.join(_SCRIPT_PATH, '../table_config.json')
+
+
+def _define_flags():
+    if 'config_file' not in _FLAGS:
+        flags.DEFINE_string('config_file', _DEFAULT_CONFIG_FILE,
+                            'Input config file')
+    if 'output_dir' not in _FLAGS:
+        flags.DEFINE_string(
+            'output_dir', _SCRIPT_PATH,
+            'Directory path to write the cleaned CSV and'
+            'MCF. Default behaviour is to write the artifacts in the current working'
+            'directory.')
+    if 'gen_statvar_mcf' not in _FLAGS:
+        flags.DEFINE_bool(
+            'gen_statvar_mcf', False,
+            'Generate MCF of StatVars. Default behaviour is'
+            'to not generate the MCF file.')
+
 
 _YEAR_INDEX = 0
 
@@ -104,9 +113,11 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str, table_num):
+def _clean_dataframe(df: pd.DataFrame, year: str, table_num='10'):
     """Clean the column names and offense type values in a dataframe."""
-    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+    config_file = (_FLAGS.config_file if _FLAGS.is_parsed() and
+                   'config_file' in _FLAGS else _DEFAULT_CONFIG_FILE)
+    with file_util.FileIO(config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     year_config = _YEARWISE_CONFIG['table_config'][table_num]
 
@@ -126,6 +137,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num):
 
 def main(argv):
     global _YEARWISE_CONFIG
+    _define_flags()
     csv_files = []
     table_num = '10'
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
@@ -161,4 +173,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

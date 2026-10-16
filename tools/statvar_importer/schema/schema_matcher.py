@@ -47,42 +47,62 @@ sys.path.append(
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_file', '', 'Input file with queries to lookup.')
-flags.DEFINE_list('input_query', [], 'Input queries to lookup.')
-flags.DEFINE_string('schema_output_csv', '',
-                    'Output CSV with matching property, values.')
-flags.DEFINE_string(
-    'schema_matcher_mcf',
-    'sample_schema.mcf',
-    'Comma separated list of MCF files.',
-)
-flags.DEFINE_list('mcf_include_pv', [],
-                  'List of property:values to include in the MCF.')
-flags.DEFINE_string('schema_matcher_config', '', 'Config dictionary.')
-flags.DEFINE_float(
-    'min_match_fraction',
-    0.7,
-    'Minimum fraction of input string to match in results.',
-)
-flags.DEFINE_bool('schema_embeddings_lookup', False,
-                  'Enable schema lookup using embeddings.')
-flags.DEFINE_string('schema_macher_embeddings', '',
-                    'File with embeddings for schema matcher.')
-flags.DEFINE_bool('schema_matcher_debug', False, 'Enable debug messages.')
-
 import file_util
 import download_util
 import process_http_server
 
 from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, strip_namespace, add_pv_to_node
 from ngram_matcher import NgramMatcher
+import semantic_matcher
 from semantic_matcher import SemanticMatcher
 from config_map import ConfigMap
 from counters import Counters
 
 
+def define_flags():
+    process_http_server.define_flags()
+    semantic_matcher.define_flags()
+    if 'input_file' not in _FLAGS:
+        flags.DEFINE_string('input_file', '',
+                            'Input file with queries to lookup.')
+    if 'input_query' not in _FLAGS:
+        flags.DEFINE_list('input_query', [], 'Input queries to lookup.')
+    if 'schema_output_csv' not in _FLAGS:
+        flags.DEFINE_string('schema_output_csv', '',
+                            'Output CSV with matching property, values.')
+    if 'schema_matcher_mcf' not in _FLAGS:
+        flags.DEFINE_string(
+            'schema_matcher_mcf',
+            'sample_schema.mcf',
+            'Comma separated list of MCF files.',
+        )
+    if 'mcf_include_pv' not in _FLAGS:
+        flags.DEFINE_list('mcf_include_pv', [],
+                          'List of property:values to include in the MCF.')
+    if 'schema_matcher_config' not in _FLAGS:
+        flags.DEFINE_string('schema_matcher_config', '', 'Config dictionary.')
+    if 'min_match_fraction' not in _FLAGS:
+        flags.DEFINE_float(
+            'min_match_fraction',
+            0.7,
+            'Minimum fraction of input string to match in results.',
+        )
+    if 'schema_embeddings_lookup' not in _FLAGS:
+        flags.DEFINE_bool('schema_embeddings_lookup', False,
+                          'Enable schema lookup using embeddings.')
+    if 'schema_macher_embeddings' not in _FLAGS:
+        flags.DEFINE_string('schema_macher_embeddings', '',
+                            'File with embeddings for schema matcher.')
+    if 'schema_matcher_debug' not in _FLAGS:
+        flags.DEFINE_bool('schema_matcher_debug', False,
+                          'Enable debug messages.')
+
+
 def get_schema_matcher_config() -> dict:
     """Returns the schema matcher config from command line flags."""
+    define_flags()
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         'match_props': ['dcid', 'name', 'description'],
         'max_results': 10,
@@ -431,6 +451,7 @@ def search_pvs(
 
 
 def main(_):
+    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return
@@ -449,4 +470,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

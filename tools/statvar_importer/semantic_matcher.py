@@ -31,24 +31,33 @@ sys.path.append(os.path.join(_DATA_DIR, 'data', 'util'))
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('semantic_matcher_corpus', '',
-                    'Corpus file with key, value')
-flags.DEFINE_string('semantic_matcher_cache',
-                    'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
-                    'Cache pickle file with corpus text and embeddings')
-flags.DEFINE_string('semantic_matcher_input', '',
-                    'Input file with lookup queries.')
-flags.DEFINE_string('semantic_matcher_output', '',
-                    'Output file with results per query.')
-flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
-                    'Output file with results per query.')
-flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
-
 import file_util
 import process_http_server
 
 from config_map import ConfigMap
 from counters import Counters
+
+
+def define_flags():
+    process_http_server.define_flags()
+    if 'semantic_matcher_corpus' not in _FLAGS:
+        flags.DEFINE_string('semantic_matcher_corpus', '',
+                            'Corpus file with key, value')
+    if 'semantic_matcher_cache' not in _FLAGS:
+        flags.DEFINE_string('semantic_matcher_cache',
+                            'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+                            'Cache pickle file with corpus text and embeddings')
+    if 'semantic_matcher_input' not in _FLAGS:
+        flags.DEFINE_string('semantic_matcher_input', '',
+                            'Input file with lookup queries.')
+    if 'semantic_matcher_output' not in _FLAGS:
+        flags.DEFINE_string('semantic_matcher_output', '',
+                            'Output file with results per query.')
+    if 'semantic_matcher_model' not in _FLAGS:
+        flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
+                            'Output file with results per query.')
+    if 'semantic_matcher_debug' not in _FLAGS:
+        flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
 
 
 # Class to perform semantic search for text strings using embeddings.
@@ -257,6 +266,7 @@ class SemanticMatcher:
 
 def get_semantic_matcher_default_config() -> dict:
     """Get default config for semantic_matcher."""
+    define_flags()
     # Use default values of flags for tests
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
@@ -318,6 +328,7 @@ def semantic_matcher_lookup(corpus_file: str,
 
 
 def main(_):
+    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return
@@ -333,4 +344,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

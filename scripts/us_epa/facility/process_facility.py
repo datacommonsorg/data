@@ -23,11 +23,15 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'epa_input_tables_path', 'tmp_data',
-    'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
-)
-flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+
+def _define_flags():
+    if 'epa_input_tables_path' not in FLAGS:
+        flags.DEFINE_string(
+            'epa_input_tables_path', 'tmp_data',
+            'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
+        )
+    if 'epa_output_path' not in FLAGS:
+        flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
 
 # Input tables we process
 # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=<table>
@@ -258,6 +262,7 @@ def process(input_tables_path, output_path):
 
 
 def main(_):
+    _define_flags()
     # Validate inputs.
     assert FLAGS.epa_output_path
     assert FLAGS.epa_input_tables_path
@@ -272,4 +277,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

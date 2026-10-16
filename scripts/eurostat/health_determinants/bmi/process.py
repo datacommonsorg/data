@@ -27,7 +27,12 @@ from common.euro_stat import EuroStat
 from common import import_download_details, download
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def define_flags():
+    if 'mode' not in flags.FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 
 class EuroStatBMI(EuroStat):
@@ -212,6 +217,7 @@ class EuroStatBMI(EuroStat):
 
 
 def main(_):
+    define_flags()
     mode = _FLAGS.mode
     global import_name
     import_name = "bmi"
@@ -247,4 +253,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    define_flags()
     app.run(main)

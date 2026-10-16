@@ -26,8 +26,15 @@ from retry import retry
 
 # Define flags
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
-flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
+
+
+def _define_flags():
+    if 'output' not in _FLAGS:
+        flags.DEFINE_string('output', 'output/agriculture.csv',
+                            'Output CSV file')
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '',
+                            'Mode to run: "download", "process", or both')
 
 # Constants
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -190,6 +197,7 @@ def download_and_process_data(year, d):
 
 
 def main(_):
+    _define_flags()
     # Ensure the output folder exists
     output_dir = os.path.dirname(_FLAGS.output)
     if output_dir and not os.path.exists(output_dir):
@@ -233,4 +241,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -54,15 +54,23 @@ from absl import logging
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_mcf', '', 'List of MCF files to load.')
-flags.DEFINE_string('output_mcf', '', 'output MCF nodes loaded into file.')
-flags.DEFINE_bool(
-    'append_values',
-    True,
-    'Append new values to existing properties. If False, new values overwrite'
-    ' existing value.',
-)
-flags.DEFINE_bool('normalize', True, 'If True, values are normalized.')
+
+def define_flags():
+    if 'input_mcf' not in _FLAGS:
+        flags.DEFINE_string('input_mcf', '', 'List of MCF files to load.')
+    if 'output_mcf' not in _FLAGS:
+        flags.DEFINE_string('output_mcf', '',
+                            'output MCF nodes loaded into file.')
+    if 'append_values' not in _FLAGS:
+        flags.DEFINE_bool(
+            'append_values',
+            True,
+            'Append new values to existing properties. If False, new values overwrite'
+            ' existing value.',
+        )
+    if 'normalize' not in _FLAGS:
+        flags.DEFINE_bool('normalize', True,
+                          'If True, values are normalized.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -1172,6 +1180,7 @@ def _get_new_node(normalize: bool = True) -> dict:
 
 
 def main(_):
+    define_flags()
     if not _FLAGS.input_mcf or not _FLAGS.output_mcf:
         print(f'Please provide input and output MCF files with --input_mcf and'
               f' --output_mcf.')
@@ -1185,4 +1194,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

@@ -35,13 +35,19 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('site_contamination_input_path', './data',
-                    'Path to the directory with input files')
-flags.DEFINE_string('contaminant_csv', './data',
-                    'Path to the contaminant.csv file')
-flags.DEFINE_string(
-    'site_contamination_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags():
+    if 'site_contamination_input_path' not in FLAGS:
+        flags.DEFINE_string('site_contamination_input_path', './data',
+                            'Path to the directory with input files')
+    if 'contaminant_csv' not in FLAGS:
+        flags.DEFINE_string('contaminant_csv', './data',
+                            'Path to the contaminant.csv file')
+    if 'site_contamination_output_path' not in FLAGS:
+        flags.DEFINE_string(
+            'site_contamination_output_path', './data/output',
+            'Path to the directory where generated files are to be stored.')
 
 _TEMPLATE_MCF = """
 Node: E:SuperfundSite->E0
@@ -227,6 +233,7 @@ def process_site_contamination(input_path: str, contaminant_csv_path: str,
 
 
 def main(_) -> None:
+    _define_flags()
     site_count = process_site_contamination(
         FLAGS.site_contamination_input_path, FLAGS.contaminant_csv,
         FLAGS.site_contamination_output_path)
@@ -234,4 +241,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

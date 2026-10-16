@@ -26,7 +26,7 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 if _MODULE_DIR not in sys.path:
     sys.path.insert(0, _MODULE_DIR)
 
-from generate_rollups import FLAGS, generate_rollups, main, process_rollups
+from generate_rollups import FLAGS, define_flags, generate_rollups, main, process_rollups
 
 
 class GenerateRollupsTest(unittest.TestCase):
@@ -34,6 +34,7 @@ class GenerateRollupsTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
+        define_flags()
         FLAGS.mark_as_parsed()
         self.sample_raw_data = pd.DataFrame({
             'Jahr': [2020, 2020, 2020, 2020],

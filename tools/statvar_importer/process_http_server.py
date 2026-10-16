@@ -74,19 +74,25 @@ from absl import logging
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('http_port', 0, 'HTTP port to listen for URLs.')
-flags.DEFINE_integer(
-    'http_server_threads',
-    10,
-    'Number of http listener threads for simultaneous requests.',
-)
-flags.DEFINE_string('http_config', '',
-                    'File with configurations for the HTTP server.')
-flags.DEFINE_integer(
-    'http_server_timeout',
-    86400 * 365,
-    'Maximum duration in seconds to run the web server.',
-)
+
+def define_flags():
+    if 'http_port' not in _FLAGS:
+        flags.DEFINE_integer('http_port', 0, 'HTTP port to listen for URLs.')
+    if 'http_server_threads' not in _FLAGS:
+        flags.DEFINE_integer(
+            'http_server_threads',
+            10,
+            'Number of http listener threads for simultaneous requests.',
+        )
+    if 'http_config' not in _FLAGS:
+        flags.DEFINE_string('http_config', '',
+                            'File with configurations for the HTTP server.')
+    if 'http_server_timeout' not in _FLAGS:
+        flags.DEFINE_integer(
+            'http_server_timeout',
+            86400 * 365,
+            'Maximum duration in seconds to run the web server.',
+        )
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -333,6 +339,9 @@ def run_http_server(
 
   This is a blocking call that doesn't return to the caller.
   """
+    define_flags()
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     if http_port <= 0:
         http_port = _FLAGS.http_port
         if http_port <= 0:
@@ -374,8 +383,10 @@ def run_http_server(
 
 
 def main(_):
+    define_flags()
     run_http_server()
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

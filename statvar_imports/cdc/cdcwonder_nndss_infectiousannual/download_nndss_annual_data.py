@@ -40,24 +40,30 @@ MIN_REQUEST_INTERVAL_SECONDS = 16.0  # CDC WONDER requires >= 15s between reques
 # Flags configuration
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'verticals',
-    'all',
-    'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
-)
-flags.DEFINE_string(
-    'years',
-    'all',
-    'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
-)
 _DEFAULT_OUTPUT_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'input_files'
 )
-flags.DEFINE_string(
-    'output_dir',
-    _DEFAULT_OUTPUT_DIR,
-    'Output directory to save downloaded CSV files'
-)
+
+
+def define_flags():
+    if 'verticals' not in FLAGS:
+        flags.DEFINE_string(
+            'verticals',
+            'all',
+            'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
+        )
+    if 'years' not in FLAGS:
+        flags.DEFINE_string(
+            'years',
+            'all',
+            'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
+        )
+    if 'output_dir' not in FLAGS:
+        flags.DEFINE_string(
+            'output_dir',
+            _DEFAULT_OUTPUT_DIR,
+            'Output directory to save downloaded CSV files'
+        )
 
 # Vertical breakdown configurations
 VERTICAL_CONFIGS = {
@@ -400,6 +406,7 @@ def download_all(verticals: list, years: list, output_dir: str, session: request
 
 def main(argv):
     del argv  # Unused.
+    define_flags()
 
     if FLAGS.verticals.lower() == 'all':
         selected_verticals = list(VERTICAL_CONFIGS.keys())
@@ -418,4 +425,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

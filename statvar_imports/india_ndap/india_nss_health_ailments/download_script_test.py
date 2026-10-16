@@ -28,6 +28,7 @@ class DownloadScriptTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        download_script.define_flags()
         download_script._FLAGS.mark_as_parsed()
 
     @patch('download_script.storage.Client')

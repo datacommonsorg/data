@@ -25,26 +25,45 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('zip_path', None,
-                    'Path to zip file downloaded from US Census')
-flags.DEFINE_string('csv_path', None,
-                    'Path to csv file downloaded from US Census')
-flags.DEFINE_list('csv_list', None,
-                  'List of paths to csv files downloaded from US Census')
-flags.DEFINE_string('spec', None, 'Path to config spec JSON file')
-flags.DEFINE_boolean('get_tokens', False,
-                     'Produce a list of tokens from the input file/s')
-flags.DEFINE_boolean('get_columns', False,
-                     'Produce a list of columns from the input file/s')
-flags.DEFINE_boolean(
-    'get_ignored_columns', False,
-    'Produce a list of columns ignored from the input file/s according to spec')
-flags.DEFINE_boolean('ignore_columns', False,
-                     'Account for columns to be ignored according to the spec')
-flags.DEFINE_boolean('is_metadata', False,
-                     'Parses the file assuming it is _metadata_ type file')
-flags.DEFINE_string('delimiter', '!!',
-                    'The delimiter to extract tokens from column name')
+
+def define_common_util_flags():
+    if 'zip_path' not in flags.FLAGS:
+        flags.DEFINE_string('zip_path', None,
+                            'Path to zip file downloaded from US Census')
+    if 'csv_path' not in flags.FLAGS:
+        flags.DEFINE_string('csv_path', None,
+                            'Path to csv file downloaded from US Census')
+    if 'csv_list' not in flags.FLAGS:
+        flags.DEFINE_list(
+            'csv_list', None,
+            'List of paths to csv files downloaded from US Census')
+    if 'spec' not in flags.FLAGS:
+        flags.DEFINE_string('spec', None, 'Path to config spec JSON file')
+    if 'get_tokens' not in flags.FLAGS:
+        flags.DEFINE_boolean('get_tokens', False,
+                             'Produce a list of tokens from the input file/s')
+    if 'get_columns' not in flags.FLAGS:
+        flags.DEFINE_boolean('get_columns', False,
+                             'Produce a list of columns from the input file/s')
+    if 'get_ignored_columns' not in flags.FLAGS:
+        flags.DEFINE_boolean(
+            'get_ignored_columns', False,
+            'Produce a list of columns ignored from the input file/s according to spec'
+        )
+    if 'ignore_columns' not in flags.FLAGS:
+        flags.DEFINE_boolean(
+            'ignore_columns', False,
+            'Account for columns to be ignored according to the spec')
+    if 'is_metadata' not in flags.FLAGS:
+        flags.DEFINE_boolean(
+            'is_metadata', False,
+            'Parses the file assuming it is _metadata_ type file')
+    if 'delimiter' not in flags.FLAGS:
+        flags.DEFINE_string('delimiter', '!!',
+                            'The delimiter to extract tokens from column name')
+
+
+define_flags = define_common_util_flags
 
 
 def get_tokens_list_from_zip(zip_file_path: str,
@@ -450,6 +469,7 @@ def get_spec_dict_from_path(spec_path: str) -> dict:
 
 
 def main(argv):
+    define_flags()
     if not FLAGS.spec:
         if FLAGS.ignore_columns:
             print('ERROR: Path to spec JSON required to ignore columns')
@@ -499,6 +519,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     flags.mark_flags_as_mutual_exclusive(['zip_path', 'csv_path', 'csv_list'],
                                          required=True)
     app.run(main)

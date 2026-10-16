@@ -32,7 +32,7 @@ from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
 from alpha2_to_dcid import USSTATE_MAP
 from statvar_remap import STATVAR_REMAP_DICT
-from clean_data import reads_config_file
+from clean_data import define_flags as define_clean_data_flags, reads_config_file
 
 _CONFIG = None
 _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
@@ -199,6 +199,7 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
 
 
 def main(_):
+    define_clean_data_flags()
     try:
         os.makedirs(_CONFIG.get('OUTPUT_PATH'), exist_ok=True)
         cleaned_csv_path = os.path.join(_CONFIG.get('OUTPUT_PATH'),
@@ -222,4 +223,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    define_clean_data_flags()
     app.run(main)

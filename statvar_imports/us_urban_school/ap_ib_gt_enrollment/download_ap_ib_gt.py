@@ -26,9 +26,14 @@ import sys
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
-flags.DEFINE_boolean('ib', False, 'Download International Baccalaureate data only.')
-flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
+
+def define_flags():
+    if 'ap' not in FLAGS:
+        flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
+    if 'ib' not in FLAGS:
+        flags.DEFINE_boolean('ib', False, 'Download International Baccalaureate data only.')
+    if 'gt' not in FLAGS:
+        flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
 
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 
@@ -345,6 +350,7 @@ def main(_):
     This script is designed to be run once to download and prepare all files.
     Processing is triggered within download_and_extract for each file.
     """
+    define_flags()
     BASE_OUTPUT_DIR = SCRIPT_DIR
 
     data_types_to_download = []
@@ -376,4 +382,5 @@ def main(_):
     logging.info(f"\n--- All downloads complete ---")
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

@@ -41,16 +41,26 @@ sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 from download_util_script import download_file
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
-                    'Data dir to download into')
-flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
-flags.DEFINE_integer('start_year', 2020,
-                     'Data set downloaded from the start year.')
-flags.DEFINE_integer('end_year',
-                     datetime.datetime.now().year,
-                     'Data set downloaded until the end_year.')
-flags.DEFINE_integer('years_per_batch', 10,
-                     'Data set downloaded in batches of years.')
+
+
+def define_flags():
+    if 'download_data_dir' not in flags.FLAGS:
+        flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
+                            'Data dir to download into')
+    if 'datasets' not in flags.FLAGS:
+        flags.DEFINE_list('datasets', [],
+                          'Datasets to download. Everything, if empty.')
+    if 'start_year' not in flags.FLAGS:
+        flags.DEFINE_integer('start_year', 2020,
+                             'Data set downloaded from the start year.')
+    if 'end_year' not in flags.FLAGS:
+        flags.DEFINE_integer('end_year',
+                             datetime.datetime.now().year,
+                             'Data set downloaded until the end_year.')
+    if 'years_per_batch' not in flags.FLAGS:
+        flags.DEFINE_integer('years_per_batch', 10,
+                             'Data set downloaded in batches of years.')
+
 
 # Template for the UN Energy data set download.
 # Parameters:
@@ -131,6 +141,7 @@ def download_un_energy_dataset() -> list:
     """Download the required energy data set files.
     If no energy codes are specified, downloads data for all known energy codes.
     """
+    define_flags()
     assert FLAGS.download_data_dir
     supported_datasets = get_all_energy_source_codes()
     energy_datasets = FLAGS.datasets if FLAGS.datasets else supported_datasets
@@ -147,8 +158,10 @@ def download_un_energy_dataset() -> list:
 
 
 def main(_):
+    define_flags()
     download_un_energy_dataset()
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

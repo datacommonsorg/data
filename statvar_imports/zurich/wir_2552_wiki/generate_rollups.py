@@ -31,10 +31,15 @@ DEFAULT_OUTPUT_ROLLUPS = os.path.join(CURRENT_DIR, 'input_files',
                                       'WIR255OD2552_rollups.csv')
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_csv', DEFAULT_INPUT_RAW,
-                    'Path to raw input CSV file.')
-flags.DEFINE_string('output_csv', DEFAULT_OUTPUT_ROLLUPS,
-                    'Path to output rollups CSV file.')
+
+
+def define_flags():
+    if 'input_csv' not in FLAGS:
+        flags.DEFINE_string('input_csv', DEFAULT_INPUT_RAW,
+                            'Path to raw input CSV file.')
+    if 'output_csv' not in FLAGS:
+        flags.DEFINE_string('output_csv', DEFAULT_OUTPUT_ROLLUPS,
+                            'Path to output rollups CSV file.')
 
 REQUIRED_FILTER_COLS = ['RechtsformSort', 'BetriebsgrSort']
 NUMERIC_VAL_COLS = [
@@ -129,6 +134,7 @@ def generate_rollups(input_csv: str, output_csv: str) -> pd.DataFrame:
 
 def main(argv):
     del argv  # Unused.
+    define_flags()
     try:
         generate_rollups(FLAGS.input_csv, FLAGS.output_csv)
     except Exception as e:
@@ -136,4 +142,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

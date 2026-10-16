@@ -29,7 +29,12 @@ from absl import flags
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags():
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -170,6 +175,7 @@ def get_template_mcf(output_columns, _TMCF):
 
 
 def main(_):
+    _define_flags()
     mode = _FLAGS.mode
     _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_d3dens/?format=TSV&compressed=true"
     _CLEANED_CSV = "./PopulationDensity_Eurostat_NUTS3.csv"
@@ -188,4 +194,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

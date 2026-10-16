@@ -48,13 +48,21 @@ from states_to_shortform import get_states
 #pd.options.mode.copy_on_write = True
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags():
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'input_path' not in _FLAGS:
+        flags.DEFINE_string("input_path", default_input_path,
+                            "Import Data File's List")
+
+
 _FILES_TO_DOWNLOAD = None
 
 
@@ -1407,6 +1415,7 @@ def download_files():
 
 
 def main(_):
+    _define_flags()
     mode = _FLAGS.mode
     # Defining Output file names
     output_path = os.path.join(_MODULE_DIR, "output")
@@ -1433,4 +1442,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

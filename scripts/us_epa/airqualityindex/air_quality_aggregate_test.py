@@ -27,7 +27,7 @@ module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality_aggregate import create_csv, write_csv, process
+from air_quality_aggregate import create_csv, write_csv, process, define_flags
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -36,9 +36,16 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        from absl import flags
-        flags.FLAGS(
-            ["air_quality_aggregate_test.py", "--output_file_path", "output"])
+        define_flags()
+        if not flags.FLAGS.is_parsed():
+            flags.FLAGS(
+                ["air_quality_aggregate_test.py", "--output_file_path", "output"])
+
+    def setUp(self):
+        define_flags()
+        if not flags.FLAGS.is_parsed():
+            flags.FLAGS(
+                ["air_quality_aggregate_test.py", "--output_file_path", "output"])
 
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -82,12 +89,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         expected_str: str = expected.read()
                         self.assertEqual(test_str, expected_str)
                 os.remove(test_csv)
-
-    @classmethod
-    def setUpClass(cls):
-        #from absl import flags
-        if not flags.FLAGS.is_parsed():
-            flags.FLAGS(["air_quality_aggregate_test.py"])
 
     def test_process_generates_correct_output(self):
         with tempfile.TemporaryDirectory(

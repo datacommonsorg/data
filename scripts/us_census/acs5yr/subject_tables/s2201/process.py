@@ -23,10 +23,19 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output', None, 'Path to folder for output files')
-flags.DEFINE_string('download_id', None, 'Download id for input data')
-flags.DEFINE_string('features', None, 'JSON of feature maps')
-flags.DEFINE_string('stat_vars', None, 'Path to list of supported stat_vars')
+
+
+def define_flags():
+    if 'output' not in flags.FLAGS:
+        flags.DEFINE_string('output', None, 'Path to folder for output files')
+    if 'download_id' not in flags.FLAGS:
+        flags.DEFINE_string('download_id', None, 'Download id for input data')
+    if 'features' not in flags.FLAGS:
+        flags.DEFINE_string('features', None, 'JSON of feature maps')
+    if 'stat_vars' not in flags.FLAGS:
+        flags.DEFINE_string('stat_vars', None,
+                            'Path to list of supported stat_vars')
+
 
 _TMCF_TEMPLATE = """
 Node: E:Subject_Table->E{index}
@@ -201,6 +210,7 @@ def create_tmcf(output, features, stat_vars):
 
 
 def main(argv):
+    define_flags()
     f = open(FLAGS.features)
     features = json.load(f)
     f.close()
@@ -227,6 +237,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     flags.mark_flags_as_required(
         ['output', 'download_id', 'features', 'stat_vars'])
     app.run(main)

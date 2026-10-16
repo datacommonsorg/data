@@ -90,15 +90,6 @@ from absl import app
 from absl import flags
 from absl import logging
 
-flags.DEFINE_string('pipeline_config', '',
-                    'Config for the pipeline as a py dictionary of json')
-flags.DEFINE_string(
-    'pipeline_state', '',
-    'File with state for the pipeline processing as a python dictionary.'
-    'Used to resume processing for new incremental data.')
-flags.DEFINE_list('run_stages', [],
-                  'List of stages to run. If empty, all stages are run.')
-
 _FLAGS = flags.FLAGS
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -109,6 +100,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+import earthengine_image
 import file_util
 import pipeline_stage_bigquery
 import pipeline_stage_download
@@ -119,6 +111,27 @@ import pipeline_stage_runner
 import process_events
 import raster_to_csv
 import utils
+
+
+def define_flags():
+    common_flags.define_flags()
+    earthengine_image.define_flags()
+    raster_to_csv.define_flags()
+    process_events.define_flags()
+    if 'pipeline_config' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'pipeline_config', '',
+            'Config for the pipeline as a py dictionary of json')
+    if 'pipeline_state' not in flags.FLAGS:
+        flags.DEFINE_string(
+            'pipeline_state', '',
+            'File with state for the pipeline processing as a python dictionary.'
+            'Used to resume processing for new incremental data.')
+    if 'run_stages' not in flags.FLAGS:
+        flags.DEFINE_list(
+            'run_stages', [],
+            'List of stages to run. If empty, all stages are run.')
+
 
 from counters import Counters
 from config_map import ConfigMap
@@ -224,6 +237,7 @@ pipeline_stage_runner.register_stage_runner('event_pipeline', EventPipeline)
 
 
 def main(_):
+    define_flags()
     config_dict = file_util.file_load_py_dict(_FLAGS.pipeline_config)
     if _FLAGS.pipeline_state:
         config_dict['pipeline_state_file'] = _FLAGS.pipeline_state
@@ -235,4 +249,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

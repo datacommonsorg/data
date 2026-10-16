@@ -24,11 +24,17 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database_file',
-                    None,
-                    'database file path.',
-                    short_name='f')
-flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
+
+
+def _define_flags():
+    if 'database_file' not in FLAGS:
+        flags.DEFINE_string('database_file',
+                            None,
+                            'database file path.',
+                            short_name='f' if 'f' not in FLAGS else None)
+    if 'new_source' not in FLAGS:
+        flags.DEFINE_string('new_source', "new_source.txt",
+                            'new source file path.')
 
 
 def get_class_name(a_string):
@@ -271,7 +277,7 @@ def get_schema_from_text(term, id_to_node, new_source_map, id_to_class_name,
     return '\n'.join(schema_piece_list), term_map['id'][0], dcid, new_source_map
 
 
-def write_new_source(new_source_map):
+def write_new_source(new_source_map, new_source_file=None):
     """Write the new source to a file"""
     write_list = []
     for source_type in new_source_map:
@@ -283,7 +289,10 @@ def write_new_source(new_source_map):
             write_list.append(line)
         write_list.append('\n')
     if write_list:
-        with open(FLAGS.new_source, 'w') as file_open:
+        if new_source_file is None:
+            new_source_file = (FLAGS.new_source if FLAGS.is_parsed() and
+                               'new_source' in FLAGS else 'new_source.txt')
+        with open(new_source_file, 'w') as file_open:
             file_open.write('\n'.join(write_list))
 
 
@@ -314,6 +323,7 @@ def build_child_parent_link(file_terms, id_to_node):
 def main(argv):
     """Main function to read the database file and generate data mcf"""
     del argv
+    _define_flags()
     database_file = FLAGS.database_file
     with open(database_file, 'r') as file_open:
         file = file_open.read()
@@ -391,4 +401,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

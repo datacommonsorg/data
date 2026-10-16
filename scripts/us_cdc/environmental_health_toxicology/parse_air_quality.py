@@ -27,11 +27,21 @@ sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
-flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json',
-    'Config file path')
-flags.DEFINE_string('output_file_path', 'output', 'Output files path')
+
+
+def _define_flags():
+    if 'input_file_path' not in _FLAGS:
+        flags.DEFINE_string('input_file_path', 'input_files',
+                            'Input files path')
+    if 'config_file' not in _FLAGS:
+        flags.DEFINE_string(
+            'config_file',
+            'gs://unresolved_mcf/cdc/environmental/import_configs.json',
+            'Config file path')
+    if 'output_file_path' not in _FLAGS:
+        flags.DEFINE_string('output_file_path', 'output', 'Output files path')
+
+
 _INPUT_FILE_PATH = None
 _OUTPUT_FILE_PATH = None
 
@@ -279,6 +289,7 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
 
 def main(argv):
     """Main function to generate the cleaned csv file."""
+    _define_flags()
     if len(argv) < 2:
         logging.fatal(
             "Missing import name argument. Usage: parse_air_quality.py <import_name>"
@@ -300,4 +311,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

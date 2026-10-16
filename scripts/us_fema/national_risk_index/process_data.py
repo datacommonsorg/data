@@ -10,8 +10,12 @@ from datetime import datetime
 from absl import logging
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('process_output_path', 'output',
-                    'The local path to save the output files')
+
+
+def _define_flags():
+    if 'process_output_path' not in FLAGS:
+        flags.DEFINE_string('process_output_path', 'output',
+                            'The local path to save the output files')
 
 INPUT_TO_OUTPUT_PATHS = {
     "source_data/NRI_Table_Counties.csv": "nri_counties_table.csv",
@@ -112,6 +116,7 @@ def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
 
 
 def main(argv):
+    _define_flags()
 
     for input_path in INPUT_TO_OUTPUT_PATHS:
         out_put_file_name = INPUT_TO_OUTPUT_PATHS[input_path]
@@ -120,4 +125,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

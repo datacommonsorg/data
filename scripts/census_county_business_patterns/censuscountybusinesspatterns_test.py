@@ -6,14 +6,10 @@ import shutil
 import io
 from cbp_co import CBPCOProcessor
 # from main import main, _LOCAL_OUTPUT_PATH, FLAGS # Import main and the path variable
-FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _OUTPUT_DIR = os.path.join(_MODULE_DIR, 'test_data')
 if not os.path.exists(_OUTPUT_DIR):
     os.makedirs(_OUTPUT_DIR, exist_ok=True)
-flags.DEFINE_bool('test', False, 'Run in test mode.')
-flags.DEFINE_string('output_dir', _OUTPUT_DIR,
-                    'Base directory to place the local output files.')
 
 
 class TestCriteriaGasesTest(unittest.TestCase):
@@ -30,9 +26,9 @@ class TestCriteriaGasesTest(unittest.TestCase):
         input_file_obj = io.StringIO(local_file_content)
         processing_year = 2016
         processor = CBPCOProcessor(input_file_obj=input_file_obj,
-                                   output_dir=FLAGS.output_dir,
+                                   output_dir=_OUTPUT_DIR,
                                    year=processing_year,
-                                   is_test_run=FLAGS.test)
+                                   is_test_run=False)
         processor.process_co_data()
         logging.info("process completed for cbp co import")
         test_csv = os.path.join(_OUTPUT_DIR, 'cbp_2016_co.csv')
@@ -46,5 +42,4 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    FLAGS(sys.argv)
     unittest.main()

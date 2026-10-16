@@ -46,17 +46,23 @@ sys.path.insert(0, str(REPO_ROOT))
 from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'download_dir', '',
-    'Dir to use source data from. Leave blank to download from source.')
-flags.DEFINE_string(
-    'export_dir', '',
-    'Dir to output geojson coordinate files too. If blank, a temp folder will be used.'
-)
-flags.DEFINE_string(
-    'mcf_dir', '',
-    'Dir to output generated MCF files too. If blank, a temp folder will be used.'
-)
+
+
+def _define_flags():
+    if 'download_dir' not in FLAGS:
+        flags.DEFINE_string(
+            'download_dir', '',
+            'Dir to use source data from. Leave blank to download from source.')
+    if 'export_dir' not in FLAGS:
+        flags.DEFINE_string(
+            'export_dir', '',
+            'Dir to output geojson coordinate files too. If blank, a temp folder will be used.'
+        )
+    if 'mcf_dir' not in FLAGS:
+        flags.DEFINE_string(
+            'mcf_dir', '',
+            'Dir to output generated MCF files too. If blank, a temp folder will be used.'
+        )
 
 DOWNLOAD_URI = 'https://development-data-hub-s3-public.s3.amazonaws.com/ddhfiles/779551/wb_boundaries_geojson_highres.zip'
 TMP_PATH = '/tmp/wb_boundaries_geojson_highres'
@@ -199,6 +205,7 @@ class CountryBoundariesMcfGenerator:
 
 
 def main(_):
+    _define_flags()
     gen = CountryBoundariesMcfGenerator(FLAGS.download_dir, FLAGS.export_dir,
                                         FLAGS.mcf_dir)
     all_countries = gen.load_data()
@@ -208,4 +215,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

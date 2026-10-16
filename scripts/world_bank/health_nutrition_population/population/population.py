@@ -22,13 +22,23 @@ from absl import flags
 from util import statvar_dcid_generator
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer("age", 2, "Age to which this program is run, max value 26")
-flags.DEFINE_list("gender", ["FE", "MA"], "Gender: FE for female, MA for male")
-flags.DEFINE_string("country", "USA", "Country codes")
-#maximum the API Can display is 32767
-flags.DEFINE_integer("per_page", 32, "rows per page")
-flags.DEFINE_string("output_csv", "WorldBankHNP_Population_Tests",
-                    "Path of final csv")
+
+
+def _define_flags():
+    if "age" not in FLAGS:
+        flags.DEFINE_integer("age", 2,
+                             "Age to which this program is run, max value 26")
+    if "gender" not in FLAGS:
+        flags.DEFINE_list("gender", ["FE", "MA"],
+                          "Gender: FE for female, MA for male")
+    if "country" not in FLAGS:
+        flags.DEFINE_string("country", "USA", "Country codes")
+    #maximum the API Can display is 32767
+    if "per_page" not in FLAGS:
+        flags.DEFINE_integer("per_page", 32, "rows per page")
+    if "output_csv" not in FLAGS:
+        flags.DEFINE_string("output_csv", "WorldBankHNP_Population_Tests",
+                            "Path of final csv")
 
 
 def get_df(serieses, per_page, country):
@@ -138,6 +148,7 @@ def get_mcf(series_lst, path="World_bank_hnp_population.mcf"):
 
 
 def main(argv):
+    _define_flags()
     series = [
         f"SP.POP.AG{age:02d}.{gender}.IN" for age in range(FLAGS.age)
         for gender in (FLAGS.gender)
@@ -159,4 +170,5 @@ def process(max_age, out_file, per_page=17, country='USA'):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

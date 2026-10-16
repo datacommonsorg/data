@@ -22,17 +22,21 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('database', 'ABCD_v8.txt', 'input tissue atlas file path.')
 
-flags.DEFINE_string('uniprot_to_dcid',
-                    'uniprot_to_dcid.tsv',
-                    'uniprot_to_dcid.tsv file path.',
-                    short_name='u')
-
-flags.DEFINE_string('data_mcf',
-                    'AntibodyABCDData.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
+def _define_flags():
+    if 'database' not in FLAGS:
+        flags.DEFINE_string('database', 'ABCD_v8.txt',
+                            'input tissue atlas file path.')
+    if 'uniprot_to_dcid' not in FLAGS:
+        flags.DEFINE_string('uniprot_to_dcid',
+                            'uniprot_to_dcid.tsv',
+                            'uniprot_to_dcid.tsv file path.',
+                            short_name='u' if 'u' not in FLAGS else None)
+    if 'data_mcf' not in FLAGS:
+        flags.DEFINE_string('data_mcf',
+                            'AntibodyABCDData.mcf',
+                            'The output data mcf file path.',
+                            short_name='m' if 'm' not in FLAGS else None)
 
 
 def get_class_name(a_string):
@@ -229,6 +233,7 @@ def get_schema_piece(content_piece, uniprot_to_dcid):
 
 def main(argv):
     "Main function to read the database file and generate data mcf"
+    _define_flags()
     database_file_path = FLAGS.database
     uniprot_to_dcid_path = FLAGS.uniprot_to_dcid
     uniprot_to_dcid = get_uniprot_to_dcid(uniprot_to_dcid_path)
@@ -247,4 +252,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

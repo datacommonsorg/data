@@ -39,7 +39,12 @@ sys.path.insert(
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags():
+    if "input_path" not in FLAGS:
+        flags.DEFINE_string("input_path", default_input_path,
+                            "Import Data File's List")
 
 
 class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
@@ -200,6 +205,7 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
 
 
 def main(_):
+    _define_flags()
     ip_files = ""
     input_path = FLAGS.input_path
     try:
@@ -226,4 +232,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
