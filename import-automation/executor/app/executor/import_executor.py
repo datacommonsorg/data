@@ -738,7 +738,7 @@ class ImportExecutor:
         failed_validations = []
 
         for res in validation_results:
-            if res.status.name == 'FAILED':
+            if res.status.name != ValidationStatus.PASSED.name:
                 failed_validations.append(res.name)
 
         return f"FAILED: {', '.join(failed_validations) if failed_validations else 'None'}"
@@ -1066,6 +1066,16 @@ class ImportExecutor:
             src=manifest_file,
             dest=dest,
         )
+        # Copy import-specific validation config file if specified
+        validation_config_file = import_spec.get('validation_config_file')
+        if validation_config_file:
+            val_cfg_src = os.path.join(import_dir, validation_config_file)
+            if os.path.exists(val_cfg_src):
+                self._upload_file_helper(
+                    src=val_cfg_src,
+                    dest=
+                    f'{output_dir}/{version}/{os.path.basename(validation_config_file)}',
+                )
         import_inputs = import_spec.get('import_inputs', [])
         errors = []
         data_size = 0

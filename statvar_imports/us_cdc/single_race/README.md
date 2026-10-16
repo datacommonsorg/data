@@ -1,12 +1,12 @@
 ### This import process handles data from wonder.cdc platform.
 
-- Description: Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level.
+- Description: Mortality statistics, categorized by demographic factors and specific causes of death, location, race at county level.
 
 - Source URL: https://wonder.cdc.gov/ucd-icd10-expanded.html
 
 - Import Type: Semi-Automated
 
-- Data Availability: 2018 to 2023
+- Data Availability: 2018 onwards
 
 - Release Frequency: P1Y, which means every Year.
 
@@ -22,7 +22,17 @@ To obtain the raw input files, data must be manually downloaded from the source.
 	*Single Race (6 categories)
 	*ICD-10-113 Cause List
 
-For each download, a specific state must be selected. The desired year range is from 2018 to 2023. After making the selections, click the "Send" button at the bottom to initiate the download.
+For each download, a specific state must be selected. Critical form options:
+	* **Show Totals**: Disabled (must be unchecked to avoid subtotal pollution)
+	* **Show Zero Values**: Disabled
+	* **Show Suppressed Values**: False
+
+After making the selections, click the "Send" button at the bottom to initiate the download.
+
+Once all state files are downloaded, stage them to GCS:
+```bash
+gsutil -m cp *.csv gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/
+```
 
 
 ### Data Processing
@@ -38,7 +48,7 @@ After the files are downloaded, the data is processed using the stat_var_process
 
 ```bash
 
-	python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath2018_2023singlerace
+	python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath_singlerace --output_counters=counters/underlyingcauseofdeath_singlerace.csv
 ```
 
 ### Automation
