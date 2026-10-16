@@ -46,23 +46,16 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    download.define_flags()
-    if 'csv_data_files' not in flags.FLAGS:
-        flags.DEFINE_list('csv_data_files', [],
-                          'csv files from UNData Energy datasets to process')
-    if 'output_path' not in flags.FLAGS:
-        flags.DEFINE_string('output_path', 'output_data/un_energy_output',
-                            'Data set name used as file name for mcf and tmcf')
-    if 'debug_level' not in flags.FLAGS:
-        flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
-    if 'debug_lines' not in flags.FLAGS:
-        flags.DEFINE_integer('debug_lines', 100000,
-                             'Print error logs every N lines')
-    if 'copy_input_columns' not in flags.FLAGS:
-        flags.DEFINE_bool('copy_input_columns', False,
-                          'Add columns from the input csv into the output')
-    if 'output_counters' not in flags.FLAGS:
-        flags.DEFINE_string('output_counters', '', 'File to write counters to')
+    flags.DEFINE_list('csv_data_files', [],
+                      'csv files from UNData Energy datasets to process')
+    flags.DEFINE_string('output_path', 'output_data/un_energy_output',
+                        'Data set name used as file name for mcf and tmcf')
+    flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
+    flags.DEFINE_integer('debug_lines', 100000,
+                         'Print error logs every N lines')
+    flags.DEFINE_bool('copy_input_columns', False,
+                      'Add columns from the input csv into the output')
+    flags.DEFINE_string('output_counters', '', 'File to write counters to')
 
 
 # Columns in the putput CSV
@@ -602,7 +595,6 @@ def process(in_paths: list,
 
 
 def main(_):
-    define_flags()
     csv_data_files = FLAGS.csv_data_files
     if len(csv_data_files) == 0:
         logging.info(f'Downloading energy data set files')
@@ -617,6 +609,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    download.define_flags()
     define_flags()
     logging.info('running main')
     app.run(main)

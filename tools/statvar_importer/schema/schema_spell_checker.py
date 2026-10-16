@@ -48,22 +48,15 @@ import process_http_server
 
 
 def define_flags():
-    process_http_server.define_flags()
-    config_flags.define_flags()
-    if 'spell_input_mcf' not in _FLAGS:
-        flags.DEFINE_string('spell_input_mcf', '',
-                            'MCF file with nodes to generate schema for.')
-    if 'spell_error_output' not in _FLAGS:
-        flags.DEFINE_string('spell_error_output', '',
-                            'File with list of spell errors')
-    if 'spell_allowlist' not in _FLAGS:
-        flags.DEFINE_string('spell_allowlist', _DEFAULT_ALLOWLIST,
-                            'File with words to be allowed')
-    if 'spell_config' not in _FLAGS:
-        flags.DEFINE_string('spell_config', '', 'File with words to be allowed')
-    if 'spell_check_text_only' not in _FLAGS:
-        flags.DEFINE_bool('spell_check_text_only', False,
-                          'if True, spell check quoted text values only.')
+    flags.DEFINE_string('spell_input_mcf', '',
+                        'MCF file with nodes to generate schema for.')
+    flags.DEFINE_string('spell_error_output', '',
+                        'File with list of spell errors')
+    flags.DEFINE_string('spell_allowlist', _DEFAULT_ALLOWLIST,
+                        'File with words to be allowed')
+    flags.DEFINE_string('spell_config', '', 'File with words to be allowed')
+    flags.DEFINE_bool('spell_check_text_only', False,
+                      'if True, spell check quoted text values only.')
 
 
 import property_value_utils as pv_utils
@@ -378,22 +371,23 @@ def get_spell_checker(config: ConfigMap = None,
 
 def get_default_spell_config() -> dict:
     """Returns the config for spell checker from flags."""
-    define_flags()
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
     configs = {}
-    if _FLAGS.spell_allowlist:
-        configs['spell_allowlist'] = _FLAGS.spell_allowlist
-    if _FLAGS.spell_error_output:
-        configs['spell_check_output'] = _FLAGS.spell_error_output
-    if _FLAGS.spell_check_text_only:
-        configs['spell_check_text_only'] = _FLAGS.spell_check_text_only
+    spell_allowlist = getattr(_FLAGS, 'spell_allowlist', _DEFAULT_ALLOWLIST)
+    if spell_allowlist:
+        configs['spell_allowlist'] = spell_allowlist
+    spell_error_output = getattr(_FLAGS, 'spell_error_output', '')
+    if spell_error_output:
+        configs['spell_check_output'] = spell_error_output
+    spell_check_text_only = getattr(_FLAGS, 'spell_check_text_only', False)
+    if spell_check_text_only:
+        configs['spell_check_text_only'] = spell_check_text_only
     configs['spell_check_ignore_props'] = _DEFAULT_IGNORE_SPELL_PROPS
     return configs
 
 
 def main(_):
-    define_flags()
     # Launch a web server with a form for commandline args
     # if the command line flag --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
@@ -407,5 +401,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    config_flags.define_flags()
     define_flags()
     app.run(main)

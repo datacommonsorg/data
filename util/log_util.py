@@ -32,9 +32,8 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'funcion_call_log_level' not in _FLAGS:
-        flags.DEFINE_integer('funcion_call_log_level', logging.INFO,
-                             'Log level for function call logs.')
+    flags.DEFINE_integer('funcion_call_log_level', logging.INFO,
+                         'Log level for function call logs.')
 
 
 def log_struct(level: str, message: str, labels: dict):

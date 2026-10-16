@@ -113,6 +113,11 @@ PROCESSING_ERROR_UNAVAILABLE_YEAR = """<?xml version="1.0"?>
 
 class DownloadNndssAnnualDataTest(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        download_nndss_annual_data.define_flags()
+
     def test_normalize_label(self):
         self.assertEqual(
             download_nndss_annual_data._normalize_label(
@@ -535,14 +540,12 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         )
         self.assertEqual(download_nndss_annual_data._DEFAULT_OUTPUT_DIR,
                          expected)
-        download_nndss_annual_data.define_flags()
         download_nndss_annual_data.FLAGS(['download_nndss_annual_data.py'])
         self.assertEqual(download_nndss_annual_data.FLAGS.output_dir, expected)
 
     @mock.patch('download_nndss_annual_data.download_all')
     def test_main_execution(self, mock_download_all):
         # Parse flags before calling main directly in test
-        download_nndss_annual_data.define_flags()
         download_nndss_annual_data.FLAGS(['download_nndss_annual_data.py'])
         download_nndss_annual_data.main(['download_nndss_annual_data.py'])
         mock_download_all.assert_called_once()

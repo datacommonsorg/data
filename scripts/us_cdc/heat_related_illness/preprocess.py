@@ -199,7 +199,6 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
 
 
 def main(_):
-    define_clean_data_flags()
     try:
         os.makedirs(_CONFIG.get('OUTPUT_PATH'), exist_ok=True)
         cleaned_csv_path = os.path.join(_CONFIG.get('OUTPUT_PATH'),

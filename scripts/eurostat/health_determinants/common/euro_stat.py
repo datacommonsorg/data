@@ -50,9 +50,8 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def define_flags():
-    if "input_path" not in flags.FLAGS:
-        flags.DEFINE_string("input_path", default_input_path,
-                            "Import Data File's List")
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 
 
 _TMCF_TEMPLATE = ("Node: E:eurostat_population_{import_name}->E0\n"

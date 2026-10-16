@@ -70,35 +70,25 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'current_data' not in _FLAGS:
-        flags.DEFINE_string(
-            'current_data', '', 'Path to the current data \
+    flags.DEFINE_string(
+        'current_data', '', 'Path to the current data \
   (wildcard on local/GCS supported).')
-    if 'previous_data' not in _FLAGS:
-        flags.DEFINE_string(
-            'previous_data', '', 'Path to the previous data \
+    flags.DEFINE_string(
+        'previous_data', '', 'Path to the previous data \
   (wildcard on local/GCS supported).')
-    if 'output_location' not in _FLAGS:
-        flags.DEFINE_string('output_location', 'results', \
-          'Path (local/GCS) to the output data folder.')
-    if 'file_format' not in _FLAGS:
-        flags.DEFINE_string('file_format', 'mcf',
-                            'Format of the input data (mcf,tfrecord)')
-    if 'runner_mode' not in _FLAGS:
-        flags.DEFINE_string('runner_mode', 'native',
-                            'Runner mode (native/direct/cloud/bigquery)')
-    if 'job_name' not in _FLAGS:
-        flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
-    if 'project_id' not in _FLAGS:
-        flags.DEFINE_string('project_id', '',
-                            'GCP project id for the dataflow/bq job.')
-    if 'bq_dataset' not in _FLAGS:
-        flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
-                            'BigQuery dataset ID for temporary differ tables.')
-    if 'bq_table_ttl_hours' not in _FLAGS:
-        flags.DEFINE_integer(
-            'bq_table_ttl_hours', 12,
-            'TTL in hours for temporary BigQuery differ tables.')
+    flags.DEFINE_string('output_location', 'results', \
+      'Path (local/GCS) to the output data folder.')
+    flags.DEFINE_string('file_format', 'mcf',
+                        'Format of the input data (mcf,tfrecord)')
+    flags.DEFINE_string('runner_mode', 'native',
+                        'Runner mode (native/direct/cloud/bigquery)')
+    flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
+    flags.DEFINE_string('project_id', '',
+                        'GCP project id for the dataflow/bq job.')
+    flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
+                        'BigQuery dataset ID for temporary differ tables.')
+    flags.DEFINE_integer('bq_table_ttl_hours', 12,
+                         'TTL in hours for temporary BigQuery differ tables.')
 
 
 def val_str(value) -> str:
@@ -541,7 +531,6 @@ class ImportDiffer:
 
 def main(_):
     '''Runs the differ.'''
-    _define_flags()
     differ = ImportDiffer(_FLAGS.current_data, _FLAGS.previous_data,
                           _FLAGS.output_location, _FLAGS.project_id,
                           _FLAGS.job_name, _FLAGS.file_format,

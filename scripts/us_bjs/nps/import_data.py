@@ -19,15 +19,13 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'input_file' not in flags.FLAGS:
-        flags.DEFINE_string('input_file',
-                            '38871-0001-Data.tsv',
-                            'file path to tsv file with import data',
-                            short_name='i')
-    if 'gs_path' not in flags.FLAGS:
-        flags.DEFINE_string(
-            "gs_path", "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
-            "input file path")
+    flags.DEFINE_string('input_file',
+                        '38871-0001-Data.tsv',
+                        'file path to tsv file with import data',
+                        short_name='i')
+    flags.DEFINE_string("gs_path",
+                        "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
+                        "input file path")
 
 
 AGGREGATE_COLUMNS = [
@@ -86,14 +84,15 @@ def save_csv(df, filename):
 
 
 def get_input_file():
-    define_flags()
+    gs_path = (FLAGS.gs_path if FLAGS.is_parsed() and 'gs_path' in FLAGS else
+               "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/")
+    input_file = (FLAGS.input_file if FLAGS.is_parsed() and
+                  'input_file' in FLAGS else '38871-0001-Data.tsv')
     os.makedirs(input_files, exist_ok=True)
-    file_util.file_copy(f'{FLAGS.gs_path}{FLAGS.input_file}',
-                        f'{input_files}/{FLAGS.input_file}')
+    file_util.file_copy(f'{gs_path}{input_file}', f'{input_files}/{input_file}')
 
 
 def main(args):
-    define_flags()
     INPUT_FILE_PATH = os.path.join(input_files, FLAGS.input_file)
     try:
         get_input_file()

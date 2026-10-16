@@ -61,25 +61,17 @@ import config_flags
 
 
 def define_flags():
-    process_http_server.define_flags()
-    config_flags.define_flags()
-    schema_spell_checker.define_flags()
-    if 'schema_input_mcf' not in _FLAGS:
-        flags.DEFINE_string('schema_input_mcf', '',
-                            'MCF file with nodes to generate schema for.')
-    if 'url_allowlist' not in _FLAGS:
-        flags.DEFINE_string('url_allowlist',
-                            os.path.join(_SCRIPT_DIR, 'urls_allowlist.csv'),
-                            'File with list of URLs allowed')
-    if 'schema_check_output' not in _FLAGS:
-        flags.DEFINE_string('schema_check_output', '',
-                            'File with list of spell errors')
-    if 'url_regex' not in _FLAGS:
-        flags.DEFINE_string('url_regex', _URL_PATTERN,
-                            'File with list of spell errors')
-    if 'schema_check_config' not in _FLAGS:
-        flags.DEFINE_string('schema_check_config', '',
-                            'File with config parameters.')
+    flags.DEFINE_string('schema_input_mcf', '',
+                        'MCF file with nodes to generate schema for.')
+    flags.DEFINE_string('url_allowlist',
+                        os.path.join(_SCRIPT_DIR, 'urls_allowlist.csv'),
+                        'File with list of URLs allowed')
+    flags.DEFINE_string('schema_check_output', '',
+                        'File with list of spell errors')
+    flags.DEFINE_string('url_regex', _URL_PATTERN,
+                        'File with list of spell errors')
+    flags.DEFINE_string('schema_check_config', '',
+                        'File with config parameters.')
 
 
 # Check the URL
@@ -442,15 +434,18 @@ def sanity_check_mcf(input_mcf: str,
 
 def get_default_schema_check_config() -> dict:
     """Returns config parameters for schema checker."""
-    define_flags()
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
     config = {}
     config.update(get_default_spell_config())
     config.update({
-        'url_allowlist': _FLAGS.url_allowlist,
-        'schema_check_output': _FLAGS.schema_check_output,
-        'url_regex': _FLAGS.url_regex,
+        'url_allowlist':
+            getattr(_FLAGS, 'url_allowlist',
+                    os.path.join(_SCRIPT_DIR, 'urls_allowlist.csv')),
+        'schema_check_output':
+            getattr(_FLAGS, 'schema_check_output', ''),
+        'url_regex':
+            getattr(_FLAGS, 'url_regex', _URL_PATTERN),
     })
     return config
 
@@ -474,7 +469,6 @@ def _add_list_to_dict(items: list[dict], context: dict, output: dict) -> dict:
 
 
 def main(_):
-    define_flags()
     # Launch a web server with a form for commandline args
     # if the command line flag --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
@@ -490,5 +484,8 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    config_flags.define_flags()
+    schema_spell_checker.define_flags()
     define_flags()
     app.run(main)

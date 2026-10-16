@@ -33,13 +33,12 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'download_source' not in FLAGS:
-        flags.DEFINE_enum(
-            'download_source',
-            'tn',
-            ['tn', 'gcs'],
-            'Source from which input files are downloaded.',
-        )
+    flags.DEFINE_enum(
+        'download_source',
+        'tn',
+        ['tn', 'gcs'],
+        'Source from which input files are downloaded.',
+    )
 
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -220,7 +219,6 @@ def process_excel_files(input_dir):
 
 
 def main(_):
-    define_flags()
     tn_url_template = "https://www.tn.gov/content/dam/tn/health/documents/vital-statistics/death/{year}/Diabetes_County_{year}.xlsx"
     gcs_url_template = "gs://unresolved_mcf/nyu_diabetes/tennessee/latest/input_files/Diabetes_County_{year}.xlsx"
     start_year = 2019

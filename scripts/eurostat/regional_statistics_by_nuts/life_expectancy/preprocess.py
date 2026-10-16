@@ -28,18 +28,14 @@ _DEFAULT_HISTORICAL_GCS_PATH = (
 
 
 def _define_flags():
-    if 'input_file' not in _FLAGS:
-        flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
-                            'Path to input TSV file')
-    if 'output_file' not in _FLAGS:
-        flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
-                            'Path to output CSV file')
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string(
-            'mode', '', 'Mode of operation: download, process, or empty (both)')
-    if 'historical_gcs_path' not in _FLAGS:
-        flags.DEFINE_string('historical_gcs_path', _DEFAULT_HISTORICAL_GCS_PATH,
-                            'GCS path to the deleted historical data CSV file')
+    flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
+                        'Path to input TSV file')
+    flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
+                        'Path to output CSV file')
+    flags.DEFINE_string(
+        'mode', '', 'Mode of operation: download, process, or empty (both)')
+    flags.DEFINE_string('historical_gcs_path', _DEFAULT_HISTORICAL_GCS_PATH,
+                        'GCS path to the deleted historical data CSV file')
 
 
 def nuts_to_iso(data):
@@ -201,7 +197,6 @@ def preprocess(input_file,
 
 
 def main(_):
-    _define_flags()
     mode = _FLAGS.mode
     _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_mlifexp/?format=TSV&compressed=true"
 

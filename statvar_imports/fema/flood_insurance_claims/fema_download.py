@@ -34,23 +34,18 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'api_url' not in _FLAGS:
-        flags.DEFINE_string(
-            'api_url', 'https://www.fema.gov/api/open/v2/FimaNfipClaims',
-            'The base URL of the API endpoint to download data from.')
-    if 'bulk_url' not in _FLAGS:
-        flags.DEFINE_string(
-            'bulk_url',
-            'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
-            'The direct bulk download URL for the full dataset.')
-    if 'temp_dir' not in _FLAGS:
-        flags.DEFINE_string(
-            'temp_dir', os.path.join(script_dir, 'temp_fema_data'),
-            'The temporary directory to store downloaded chunks.')
-    if 'output_dir' not in _FLAGS:
-        flags.DEFINE_string(
-            'output_dir', os.path.join(script_dir, 'input_file'),
-            'The output directory to store the downloaded claims data.')
+    flags.DEFINE_string(
+        'api_url', 'https://www.fema.gov/api/open/v2/FimaNfipClaims',
+        'The base URL of the API endpoint to download data from.')
+    flags.DEFINE_string(
+        'bulk_url',
+        'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
+        'The direct bulk download URL for the full dataset.')
+    flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
+                        'The temporary directory to store downloaded chunks.')
+    flags.DEFINE_string(
+        'output_dir', os.path.join(script_dir, 'input_file'),
+        'The output directory to store the downloaded claims data.')
 
 
 # Define the page size for each API request.
@@ -358,7 +353,6 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-    define_flags()
     try:
         download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url,
                       _FLAGS.output_dir)

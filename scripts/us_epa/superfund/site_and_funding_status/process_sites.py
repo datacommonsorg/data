@@ -39,13 +39,11 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'site_details_dir' not in FLAGS:
-        flags.DEFINE_string('site_details_dir', './data',
-                            'Path to the directory with input files')
-    if 'sites_output_path' not in FLAGS:
-        flags.DEFINE_string(
-            'sites_output_path', './data/output',
-            'Path to the directory where generated files are to be stored.')
+    flags.DEFINE_string('site_details_dir', './data',
+                        'Path to the directory with input files')
+    flags.DEFINE_string(
+        'sites_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
 
 
 _SITE_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
@@ -162,7 +160,6 @@ def process_sites(input_path: str, output_path: str, precision: int = 6) -> int:
 
 
 def main(_) -> None:
-    _define_flags()
     site_count = process_sites(FLAGS.site_details_dir, FLAGS.sites_output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 

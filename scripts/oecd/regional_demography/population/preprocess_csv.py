@@ -27,8 +27,7 @@ parent_dir = os.path.dirname(_MODULE_DIR)
 
 
 def _define_flags():
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -119,7 +118,6 @@ def generate_tmcf(df_cleaned, filepath):
 
 
 def main(_):
-    _define_flags()
     mode = _FLAGS.mode
     url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_POP_5Y,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
     filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_population.csv")

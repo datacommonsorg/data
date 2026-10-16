@@ -38,16 +38,13 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'config_path' not in _FLAGS:
-        flags.DEFINE_string(
-            'config_path',
-            'gs://unresolved_mcf/epa/ejscreen/download_config.json',
-            'Path to config file')
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string(
-            'mode', '',
-            'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
-        )
+    flags.DEFINE_string(
+        'config_path', 'gs://unresolved_mcf/epa/ejscreen/download_config.json',
+        'Path to config file')
+    flags.DEFINE_string(
+        'mode', '',
+        'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
+    )
 
 
 # Define the  path for output files.
@@ -253,7 +250,6 @@ def write_tmcf(outfilename, TEMPLATE_MCF):
 
 
 def main(_):
-    _define_flags()
     try:
         with file_util.FileIO(_FLAGS.config_path, 'r') as f:
             config = json.load(f)

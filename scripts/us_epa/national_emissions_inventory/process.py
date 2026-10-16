@@ -44,19 +44,15 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def _define_flags():
-    if "intermediate_path" not in FLAGS:
-        flags.DEFINE_string(
-            "intermediate_path",
-            os.path.join(default_input_path, "intermediate_output"),
-            "Path to save intermediate files.")
-    if "input_path" not in FLAGS:
-        flags.DEFINE_string("input_path",
-                            os.path.join(default_input_path, "input_files"),
-                            "Import Data File's List")
-    if "output_path" not in FLAGS:
-        flags.DEFINE_string("output_path",
-                            os.path.join(default_input_path, "output_files"),
-                            "Path to save output files.")
+    flags.DEFINE_string("intermediate_path",
+                        os.path.join(default_input_path, "intermediate_output"),
+                        "Path to save intermediate files.")
+    flags.DEFINE_string("input_path",
+                        os.path.join(default_input_path, "input_files"),
+                        "Import Data File's List")
+    flags.DEFINE_string("output_path",
+                        os.path.join(default_input_path, "output_files"),
+                        "Path to save output files.")
 
 
 _MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
@@ -510,7 +506,6 @@ def main(argv):
     """
     The main function for the script.
     """
-    _define_flags()
     if len(argv) > 1:
         raise app.UsageError("Too many command-line arguments.")
     logging.set_verbosity(1)

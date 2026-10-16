@@ -32,8 +32,7 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'mode' not in FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 _TEMPLATE_MCF = """Node: E:NNDSWeekly->E0
@@ -455,7 +454,6 @@ def process_non_infectious_data(input_file_path: str = None,
 
 
 def main(_) -> None:
-    _define_flags()
     mode = FLAGS.mode
     column_mapping = {
         "year": "Year",

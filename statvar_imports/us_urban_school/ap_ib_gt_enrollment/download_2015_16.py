@@ -129,7 +129,6 @@ def main(_):
     """
     Main function to run the download process for 2015-16 AP, IB, and GT data.
     """
-    define_flags()
     BASE_OUTPUT_DIR = SCRIPT_DIR
 
     data_types_to_download = []

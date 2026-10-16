@@ -33,9 +33,8 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'counters_print_interval' not in _FLAGS:
-        flags.DEFINE_integer('counters_print_interval', 300,
-                             'Interval in seconds to print counters.')
+    flags.DEFINE_integer('counters_print_interval', 300,
+                         'Interval in seconds to print counters.')
 
 
 # Options for counters

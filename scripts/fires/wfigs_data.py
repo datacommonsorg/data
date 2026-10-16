@@ -42,12 +42,10 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'read_location_cache' not in flags.FLAGS:
-        flags.DEFINE_boolean('read_location_cache', True,
-                             'save location cache to file.')
-    if 'save_location_cache' not in flags.FLAGS:
-        flags.DEFINE_boolean('save_location_cache', False,
-                             'save location cache to file.')
+    flags.DEFINE_boolean('read_location_cache', True,
+                         'save location cache to file.')
+    flags.DEFINE_boolean('save_location_cache', False,
+                         'save location cache to file.')
 
 
 # FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
@@ -304,7 +302,6 @@ def process_df(df):
 
 
 def main(_) -> None:
-    define_flags()
     df = get_data(POST_OCT_2022_FIRE_LOCATIONS_URL)
 
     storage_client = storage.Client(_GCS_PROJECT_ID)

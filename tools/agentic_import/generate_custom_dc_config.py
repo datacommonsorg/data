@@ -27,26 +27,19 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'input_csv' not in FLAGS:
-        flags.DEFINE_string('input_csv', None,
-                            'Path to input CSV file (required)')
-        flags.mark_flag_as_required('input_csv')
-    if 'output_config' not in FLAGS:
-        flags.DEFINE_string('output_config', None,
-                            'Path to output config.json file (required)')
-        flags.mark_flag_as_required('output_config')
-    if 'provenance_name' not in FLAGS:
-        flags.DEFINE_string('provenance_name', '<YOUR_PROVENANCE_NAME>',
-                            'Name of the provenance')
-    if 'source_name' not in FLAGS:
-        flags.DEFINE_string('source_name', '<YOUR_SOURCE_NAME>',
-                            'Name of the source')
-    if 'data_source_url' not in FLAGS:
-        flags.DEFINE_string('data_source_url', '<URL_OF_YOUR_DATA_SOURCE>',
-                            'URL of the data source')
-    if 'dataset_url' not in FLAGS:
-        flags.DEFINE_string('dataset_url', '<URL_OF_THE_SPECIFIC_DATASET>',
-                            'URL of the specific dataset')
+    flags.DEFINE_string('input_csv', None, 'Path to input CSV file (required)')
+    flags.mark_flag_as_required('input_csv')
+    flags.DEFINE_string('output_config', None,
+                        'Path to output config.json file (required)')
+    flags.mark_flag_as_required('output_config')
+    flags.DEFINE_string('provenance_name', '<YOUR_PROVENANCE_NAME>',
+                        'Name of the provenance')
+    flags.DEFINE_string('source_name', '<YOUR_SOURCE_NAME>',
+                        'Name of the source')
+    flags.DEFINE_string('data_source_url', '<URL_OF_YOUR_DATA_SOURCE>',
+                        'URL of the data source')
+    flags.DEFINE_string('dataset_url', '<URL_OF_THE_SPECIFIC_DATASET>',
+                        'URL of the specific dataset')
 
 
 class ConfigGenerator:
@@ -257,7 +250,6 @@ def main(argv):
     """Main entry point."""
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
-    _define_flags()
 
     generator = ConfigGenerator(
         input_csv_path=FLAGS.input_csv,

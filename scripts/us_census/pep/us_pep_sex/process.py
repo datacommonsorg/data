@@ -59,15 +59,11 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def _define_flags():
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
-    if 'config_path' not in _FLAGS:
-        flags.DEFINE_string(
-            'config_path', '',
-            'Path to the configuration file in the GCS bucket.')
-    if 'input_path' not in _FLAGS:
-        flags.DEFINE_string("input_path", default_input_path,
-                            "Import Data File's List")
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -1487,7 +1483,6 @@ def main(_):
     Return : None
 
     """
-    _define_flags()
     mode = _FLAGS.mode
     # Defining Output Files
     csv_name = "population_estimate_sex.csv"

@@ -42,10 +42,9 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'latest_year_industry' not in flags.FLAGS:
-        flags.DEFINE_integer(
-            'latest_year_industry', None,
-            'The latest year to look for in the filename (optional).')
+    flags.DEFINE_integer(
+        'latest_year_industry', None,
+        'The latest year to look for in the filename (optional).')
 
 
 # Suppress annoying pandas DF copy warnings.
@@ -90,9 +89,9 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         else:
             try:
                 _STATE_QUARTERLY_GDP_FILE_PATTERN1 = r'SQGDP2__ALL_AREAS_(\d{4})_(\d{4})\.csv'
-                latest_year_industry = (getattr(FLAGS, 'latest_year_industry',
-                                                None)
-                                        if FLAGS.is_parsed() else None)
+                latest_year_industry = (
+                    FLAGS.latest_year_industry if FLAGS.is_parsed() and
+                    'latest_year_industry' in FLAGS else None)
                 self._input_file = self._find_gdp_file_in_folder(
                     input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN1,
                     latest_year_industry)
@@ -229,7 +228,6 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 
 def main(_):
     """Runs the program."""
-    define_flags()
     loader = StateGDPIndustryDataLoader()
     # loader.download_data()
     loader.process_data()

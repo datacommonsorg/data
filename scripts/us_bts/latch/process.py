@@ -57,9 +57,8 @@ _DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def _define_flags():
-    if "input_path" not in _FLAGS:
-        flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
-                            "Import Data File's List")
+    flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
+                        "Import Data File's List")
 
 
 _ROWS_PER_FILE = 4000000
@@ -501,7 +500,6 @@ def _update_manifest(generated_csv_files: list):
 
 
 def main(_):
-    _define_flags()
     input_path = _FLAGS.input_path
     try:
         ip_files = [

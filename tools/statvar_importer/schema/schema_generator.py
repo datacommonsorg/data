@@ -67,17 +67,11 @@ import config_flags
 
 
 def define_flags():
-    process_http_server.define_flags()
-    config_flags.define_flags()
-    if 'input_nodes' not in _FLAGS:
-        flags.DEFINE_string('input_nodes', '',
-                            'MCF file with nodes to generate schema for.')
-    if 'schema_mcf' not in _FLAGS:
-        flags.DEFINE_string('schema_mcf', '',
-                            'MCF file with nodes for existing schema')
-    if 'generated_mcf' not in _FLAGS:
-        flags.DEFINE_string('generated_mcf', '',
-                            'MCF file for new schema nodes.')
+    flags.DEFINE_string('input_nodes', '',
+                        'MCF file with nodes to generate schema for.')
+    flags.DEFINE_string('schema_mcf', '',
+                        'MCF file with nodes for existing schema')
+    flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
 
 
 # Base schema with some basic properties
@@ -648,7 +642,6 @@ def _camel_case_to_space(name: str) -> str:
 
 
 def main(_):
-    define_flags()
     # Launch a web server with a form for commandline args
     # if the command line flag --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
@@ -664,5 +657,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    config_flags.define_flags()
     define_flags()
     app.run(main)

@@ -49,34 +49,25 @@ import common_flags
 
 
 def define_flags():
-    common_flags.define_flags()
-    if 'config_string' not in flags.FLAGS:
-        flags.DEFINE_string('config_string', '',
-                            'config settings that override config file')
-    if 'input_events' not in flags.FLAGS:
-        flags.DEFINE_string('input_events', '',
-                            'File with active events to be loaded')
-    if 'input_rows' not in flags.FLAGS:
-        flags.DEFINE_integer('input_rows', sys.maxsize,
-                             'Number of input to process per file')
-    if 'output_path' not in flags.FLAGS:
-        flags.DEFINE_string('output_path', '', 'Output path for events data')
-    if 'output_active_path' not in flags.FLAGS:
-        flags.DEFINE_string('output_active_path', '',
-                            'Output path for active events data')
-    if 'output_active_events_state' not in flags.FLAGS:
-        flags.DEFINE_string('output_active_events_state', '',
-                            'File into which active events are saved')
+    flags.DEFINE_string('config_string', '',
+                        'config settings that override config file')
+    flags.DEFINE_string('input_events', '',
+                        'File with active events to be loaded')
+    flags.DEFINE_integer('input_rows', sys.maxsize,
+                         'Number of input to process per file')
+    flags.DEFINE_string('output_path', '', 'Output path for events data')
+    flags.DEFINE_string('output_active_path', '',
+                        'Output path for active events data')
+    flags.DEFINE_string('output_active_events_state', '',
+                        'File into which active events are saved')
     # Place dcid to containedInPlace mappings generated using the SQL query:
     # SELECT id as dcid,
     #   ARRAY_TO_STRING(linked_contained_in_place, ',') as containedInPlace
     # FROM `datcom-store.dc_kg_latest.Place`
     # WHERE  type = "S2CellLevel10"
-    if 'place_cache_file' not in flags.FLAGS:
-        flags.DEFINE_string('place_cache_file', '',
-                            'CSV file with dcid to containedInPlace mapping')
-    if 'pprof_port' not in flags.FLAGS:
-        flags.DEFINE_integer('pprof_port', 8081, 'HTTP port for pprof server.')
+    flags.DEFINE_string('place_cache_file', '',
+                        'CSV file with dcid to containedInPlace mapping')
+    flags.DEFINE_integer('pprof_port', 8081, 'HTTP port for pprof server.')
 
 
 import file_util
@@ -1989,7 +1980,6 @@ def process(csv_files: list,
 
 
 def main(_):
-    define_flags()
     if _FLAGS.debug:
         logging.set_verbosity(2)
     #if _FLAGS.pprof_port > 0:
@@ -2012,5 +2002,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    common_flags.define_flags()
     define_flags()
     app.run(main)

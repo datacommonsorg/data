@@ -59,11 +59,10 @@ def _sanitize_url(url: str) -> str:
 
 
 def define_flags():
-    if 'config_file_path' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'config_file_path',
-            'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py',
-            'Config file path')
+    flags.DEFINE_string(
+        'config_file_path',
+        'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py',
+        'Config file path')
 
 
 current_year = datetime.now().year
@@ -305,7 +304,6 @@ def reads_config_file():
 
 
 def main(_):
-    define_flags()
     paths = [
         _CONFIG.get('COMBINED_INPUT_CSV_FILE'),
         _CONFIG.get('INPUT_HTML_FILES'),

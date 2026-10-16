@@ -34,8 +34,7 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'modes' not in _FLAGS:
-        flags.DEFINE_string('modes', '', 'Options: download or process')
+    flags.DEFINE_string('modes', '', 'Options: download or process')
 
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -405,7 +404,6 @@ def process(jolts_df, schema_mapping, _OUTPUT_FILES):
 
 
 def main(_):
-    _define_flags()
     mode = _FLAGS.modes
 
     # Check for the download mode

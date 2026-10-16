@@ -42,9 +42,8 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def _define_flags():
-    if "input_path" not in FLAGS:
-        flags.DEFINE_string("input_path", default_input_path,
-                            "Import Data File's List")
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 
 
 class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
@@ -205,7 +204,6 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
 
 
 def main(_):
-    _define_flags()
     ip_files = ""
     input_path = FLAGS.input_path
     try:

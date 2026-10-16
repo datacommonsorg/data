@@ -45,32 +45,23 @@ FLAGS = flags.FLAGS
 
 def define_flags() -> None:
     # Common flags for both commands
-    if 'endpoint' not in FLAGS:
-        flags.DEFINE_string('endpoint', None, 'SDMX REST API endpoint URL')
-    if 'agency' not in FLAGS:
-        flags.DEFINE_string('agency', None, 'Agency ID (e.g., OECD.SDD.NAD)')
-    if 'dataflow' not in FLAGS:
-        flags.DEFINE_string('dataflow', None, 'Dataflow ID')
-    if 'output_path' not in FLAGS:
-        flags.DEFINE_string('output_path', None, 'Output file path')
+    flags.DEFINE_string('endpoint', None, 'SDMX REST API endpoint URL')
+    flags.DEFINE_string('agency', None, 'Agency ID (e.g., OECD.SDD.NAD)')
+    flags.DEFINE_string('dataflow', None, 'Dataflow ID')
+    flags.DEFINE_string('output_path', None, 'Output file path')
 
     # Data download specific flags - using multi_string for key:value pairs
-    if 'key' not in FLAGS:
-        flags.DEFINE_multi_string(
-            'key', [],
-            'Data filters as key:value pairs (e.g., --key=FREQ:Q --key=REF_AREA:USA)'
-        )
-    if 'param' not in FLAGS:
-        flags.DEFINE_multi_string(
-            'param', [],
-            'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)'
-        )
+    flags.DEFINE_multi_string(
+        'key', [],
+        'Data filters as key:value pairs (e.g., --key=FREQ:Q --key=REF_AREA:USA)'
+    )
+    flags.DEFINE_multi_string(
+        'param', [],
+        'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)')
 
     # Logging flags
-    if 'verbose' not in FLAGS:
-        flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
-    if 'quiet' not in FLAGS:
-        flags.DEFINE_bool('quiet', False, 'Only show errors')
+    flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
+    flags.DEFINE_bool('quiet', False, 'Only show errors')
 
 
 def parse_key_value_pairs(pairs: List[str]) -> Dict[str, Any]:
@@ -253,7 +244,6 @@ def generate_usage_message() -> str:
 
 def main(argv) -> None:
     """Main entry point for the CLI tool."""
-    define_flags()
     # Check if command was provided
     if len(argv) < 2:
         print(generate_usage_message())

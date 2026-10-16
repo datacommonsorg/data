@@ -63,20 +63,14 @@ import config_flags
 
 
 def define_flags():
-    process_http_server.define_flags()
-    llm_pvmap_generator.define_flags()
-    if 'data_annotator_input' not in _FLAGS:
-        flags.DEFINE_string('data_annotator_input', '',
-                            'CSV file with columns to be annotated.')
-    if 'annotator_output_pv_map' not in _FLAGS:
-        flags.DEFINE_string('annotator_output_pv_map', '',
-                            'Output file with annotations for data strings.')
-    if 'data_annotator_config' not in _FLAGS:
-        flags.DEFINE_string('data_annotator_config', '',
-                            'Configuration dictionary for annotator.')
-    if 'llm_data_annotation' not in _FLAGS:
-        flags.DEFINE_boolean('llm_data_annotation', True,
-                             'Enable data annotations with LLM.')
+    flags.DEFINE_string('data_annotator_input', '',
+                        'CSV file with columns to be annotated.')
+    flags.DEFINE_string('annotator_output_pv_map', '',
+                        'Output file with annotations for data strings.')
+    flags.DEFINE_string('data_annotator_config', '',
+                        'Configuration dictionary for annotator.')
+    flags.DEFINE_boolean('llm_data_annotation', True,
+                         'Enable data annotations with LLM.')
 
 
 # Regex
@@ -122,12 +116,11 @@ _DEFAULT_ANNOTATION_CONFIG = [
 # dictionary of annotation types
 # For each annotation, a regx or list of words to match followed by pvs.
 def get_data_annotator_config() -> dict:
-    define_flags()
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
     config = {
         'data_annotation_config': _DEFAULT_ANNOTATION_CONFIG,
-        'llm_data_annotation': _FLAGS.llm_data_annotation,
+        'llm_data_annotation': getattr(_FLAGS, 'llm_data_annotation', True),
     }
     config.update(get_llm_config_from_flags())
     return config
@@ -660,7 +653,6 @@ def add_counts(values: list[str], counts: dict[str:int]) -> dict:
 
 
 def main(_):
-    define_flags()
     # Launch a web server with a form for commandline args
     # if the command line flag --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
@@ -675,5 +667,8 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    llm_pvmap_generator.genai_helper.define_flags()
+    llm_pvmap_generator.define_flags()
     define_flags()
     app.run(main)

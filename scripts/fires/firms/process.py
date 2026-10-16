@@ -29,11 +29,9 @@ from io import StringIO
 
 
 def define_flags():
-    if 'config_path' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'config_path',
-            'gs://datcom-import-cache/fires/firms/firms_config.py',
-            'Path to JSON file with configurations.')
+    flags.DEFINE_string('config_path',
+                        'gs://datcom-import-cache/fires/firms/firms_config.py',
+                        'Path to JSON file with configurations.')
 
 
 _FLAGS = flags.FLAGS
@@ -106,7 +104,6 @@ def process_fires_data(config_path: str):
 
 
 def main(_):
-    define_flags()
     process_fires_data(_FLAGS.config_path)
 
 

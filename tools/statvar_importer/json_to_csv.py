@@ -37,16 +37,11 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'input_json' not in _FLAGS:
-        flags.DEFINE_string('input_json', '',
-                            'JSON file to be converted into csv')
-    if 'csv_output' not in _FLAGS:
-        flags.DEFINE_string('csv_output', '', 'Output CSV file')
-    if 'csv_columns' not in _FLAGS:
-        flags.DEFINE_list('csv_columns', [], 'List of columns')
-    if 'exclude_columns' not in _FLAGS:
-        flags.DEFINE_list('exclude_columns', [],
-                          'Drop columns with the token in the list')
+    flags.DEFINE_string('input_json', '', 'JSON file to be converted into csv')
+    flags.DEFINE_string('csv_output', '', 'Output CSV file')
+    flags.DEFINE_list('csv_columns', [], 'List of columns')
+    flags.DEFINE_list('exclude_columns', [],
+                      'Drop columns with the token in the list')
 
 
 def flatten_dict(nested_dict: dict, key_prefix: str = '') -> dict:
@@ -151,7 +146,6 @@ def file_json_to_csv(
 
 
 def main(_):
-    define_flags()
     if not _FLAGS.input_json:
         logging.error(
             f'Please provide a JSON file to be converted to CSV with --input_json'

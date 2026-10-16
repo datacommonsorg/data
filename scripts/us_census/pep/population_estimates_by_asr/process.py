@@ -51,11 +51,9 @@ DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def _define_flags():
-    if 'mode' not in FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
-    if 'input_path' not in FLAGS:
-        flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH,
-                            "Import Data File's List")
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH,
+                        "Import Data File's List")
 
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -351,7 +349,6 @@ def download_files():
 
 
 def main(_):
-    _define_flags()
     mode = FLAGS.mode
     input_path = FLAGS.input_path
     if not os.path.exists(input_path):

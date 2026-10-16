@@ -36,13 +36,11 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'inputfile_path' not in FLAGS:
-        flags.DEFINE_string(
-            'inputfile_path', default_input_path,
-            'Path to the extracted tabular data file in csv/tsv file format')
-    if 'outputdir_path' not in FLAGS:
-        flags.DEFINE_string('outputdir_path', default_output_path,
-                            'Path to the output directory')
+    flags.DEFINE_string(
+        'inputfile_path', default_input_path,
+        'Path to the extracted tabular data file in csv/tsv file format')
+    flags.DEFINE_string('outputdir_path', default_output_path,
+                        'Path to the output directory')
 
 
 # Predefined strings for the statvar mcf and template mcf
@@ -214,7 +212,6 @@ def process_brfss_asthma(input_dataset: str,
 
 
 def main(_) -> None:
-    _define_flags()
     process_brfss_asthma(input_dataset=FLAGS.inputfile_path,
                          sep="\t",
                          output_path=FLAGS.outputdir_path)

@@ -30,8 +30,7 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'mode' not in flags.FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 class EuroStatSocialEnvironment(EuroStat):
@@ -185,7 +184,6 @@ class EuroStatSocialEnvironment(EuroStat):
 
 
 def main(_):
-    define_flags()
     mode = _FLAGS.mode
     global import_name
     import_name = "social_environment"

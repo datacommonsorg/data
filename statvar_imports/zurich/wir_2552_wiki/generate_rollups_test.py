@@ -32,10 +32,14 @@ from generate_rollups import FLAGS, define_flags, generate_rollups, main, proces
 class GenerateRollupsTest(unittest.TestCase):
     """Unit test suite for generate_rollups preprocessor."""
 
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         define_flags()
         FLAGS.mark_as_parsed()
+
+    def setUp(self):
+        super().setUp()
         self.sample_raw_data = pd.DataFrame({
             'Jahr': [2020, 2020, 2020, 2020],
             'RaumSort': [1, 1, 1, 1],

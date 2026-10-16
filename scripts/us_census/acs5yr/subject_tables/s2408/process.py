@@ -39,34 +39,26 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'option' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'option', 'all',
-            'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
-        )
-    if 'table_prefix' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'table_prefix', None,
-            '[for processing]Subject Table ID as a prefix for output files, eg: S2702'
-        )
-    if 'spec_path' not in flags.FLAGS:
-        flags.DEFINE_string('spec_path', None,
-                            'Path to the JSON spec [mandatory]')
-    if 'input_path' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'input_path', None,
-            'Path to input directory with (current support only for zip files)')
-    if 'output_dir' not in flags.FLAGS:
-        flags.DEFINE_string('output_dir', './', 'Path to the output directory')
-    if 'has_percent' not in flags.FLAGS:
-        flags.DEFINE_boolean(
-            'has_percent', False,
-            '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
-        )
-    if 'debug' not in flags.FLAGS:
-        flags.DEFINE_boolean(
-            'debug', False,
-            '[for processing]set the flag to add additional columns to debug')
+    flags.DEFINE_string(
+        'option', 'all',
+        'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
+    )
+    flags.DEFINE_string(
+        'table_prefix', None,
+        '[for processing]Subject Table ID as a prefix for output files, eg: S2702'
+    )
+    flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
+    flags.DEFINE_string(
+        'input_path', None,
+        'Path to input directory with (current support only for zip files)')
+    flags.DEFINE_string('output_dir', './', 'Path to the output directory')
+    flags.DEFINE_boolean(
+        'has_percent', False,
+        '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
+    )
+    flags.DEFINE_boolean(
+        'debug', False,
+        '[for processing]set the flag to add additional columns to debug')
 
 
 def process_subject_tables(table_prefix='',
@@ -228,7 +220,6 @@ def set_column_map(input_path, spec_path, output_dir):
 
 
 def main(argv):
-    define_flags()
     ## get inputs from flags
     option = FLAGS.option.lower()
     table_prefix = FLAGS.table_prefix

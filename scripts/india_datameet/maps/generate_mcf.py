@@ -24,15 +24,11 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'input_state_geojson' not in FLAGS:
-        flags.DEFINE_string('input_state_geojson', '',
-                            'Path to the India State geojson file.')
-    if 'input_district_geojson' not in FLAGS:
-        flags.DEFINE_string('input_district_geojson', '',
-                            'Path to the India District geojson file.')
-    if 'output_geojson_dir' not in FLAGS:
-        flags.DEFINE_string('output_geojson_dir', '/tmp',
-                            'Output directory path.')
+    flags.DEFINE_string('input_state_geojson', '',
+                        'Path to the India State geojson file.')
+    flags.DEFINE_string('input_district_geojson', '',
+                        'Path to the India District geojson file.')
+    flags.DEFINE_string('output_geojson_dir', '/tmp', 'Output directory path.')
 
 
 # Note1: When we emit geojson string, we use two json.dumps() so it
@@ -93,7 +89,6 @@ def _generate_districts(fin, fout):
 
 
 def main(_):
-    _define_flags()
     generate(FLAGS.input_state_geojson, FLAGS.input_district_geojson,
              FLAGS.output_geojson_dir)
 

@@ -24,15 +24,13 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'report_input_file' not in FLAGS:
-        flags.DEFINE_string(
-            'report_input_file', './data/tar_creek_2020_corrected.csv',
-            'Location of the intermediate csv file from process_report2020.py script'
-        )
-    if 'processed_output_path' not in FLAGS:
-        flags.DEFINE_string(
-            'processed_output_path', './data/output',
-            'Path to the directory where generated files are to be stored.')
+    flags.DEFINE_string(
+        'report_input_file', './data/tar_creek_2020_corrected.csv',
+        'Location of the intermediate csv file from process_report2020.py script'
+    )
+    flags.DEFINE_string(
+        'processed_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
 
 
 _UNIT_MAP = {
@@ -269,7 +267,6 @@ def process_intermediate_csv(input_file: str, output_path: str) -> None:
 
 
 def main(_) -> None:
-    _define_flags()
     process_intermediate_csv(FLAGS.report_input_file,
                              FLAGS.processed_output_path)
 

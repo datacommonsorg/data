@@ -28,15 +28,13 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'aggregate_start_year' not in _FLAGS:
-        flags.DEFINE_integer('aggregate_start_year',
-                             os.getenv('START_YEAR', '1980'),
-                             'Process data starting from this year.')
-    if 'aggregate_end_year' not in _FLAGS:
-        flags.DEFINE_integer('aggregate_end_year',
-                             os.getenv('END_YEAR',
-                                       datetime.now().year),
-                             'Process data upto this year.')
+    flags.DEFINE_integer('aggregate_start_year',
+                         os.getenv('START_YEAR', '1980'),
+                         'Process data starting from this year.')
+    flags.DEFINE_integer('aggregate_end_year',
+                         os.getenv('END_YEAR',
+                                   datetime.now().year),
+                         'Process data upto this year.')
 
 
 POLLUTANTS = {
@@ -121,7 +119,6 @@ def write_tmcf(tmcf_file_path):
 
 
 def main(_):
-    _define_flags()
     start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
     if end_year >= datetime.now().year:

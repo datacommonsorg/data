@@ -28,11 +28,10 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'config_file_path' not in _FLAGS:
-        flags.DEFINE_string(
-            'config_file_path',
-            'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
-            'Input directory where config files are downloaded.')
+    flags.DEFINE_string(
+        'config_file_path',
+        'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
+        'Input directory where config files are downloaded.')
 
 
 # --- ROBUST PATH RESOLUTION START ---
@@ -160,7 +159,6 @@ def preprocess_and_save(data: List[Tuple]) -> None:
 
 
 def main(_) -> None:
-    define_flags()
     raw_data = download_data(_FLAGS.config_file_path)
     if raw_data:
         preprocess_and_save(raw_data)

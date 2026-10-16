@@ -49,27 +49,19 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'import_name' not in FLAGS:
-        flags.DEFINE_string(
-            'import_name', '',
-            'Import name in format <relative_import_dir>:<import_name> (required).'
-        )
-    if 'import_config' not in FLAGS:
-        flags.DEFINE_string('import_config', '{}',
-                            'JSON string of import executor config overrides.')
-    if 'version' not in FLAGS:
-        flags.DEFINE_string('version', '',
-                            'Explicit candidate version override (optional).')
-    if 'gcs_bucket' not in FLAGS:
-        flags.DEFINE_string('gcs_bucket', '',
-                            'GCS bucket name (defaults to env GCS_BUCKET_ID).')
-    if 'bq_dataset' not in FLAGS:
-        flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
-                            'BigQuery dataset ID for temporary differ tables.')
-    if 'bq_table_ttl_hours' not in FLAGS:
-        flags.DEFINE_integer(
-            'bq_table_ttl_hours', 12,
-            'TTL in hours for temporary BigQuery differ tables.')
+    flags.DEFINE_string(
+        'import_name', '',
+        'Import name in format <relative_import_dir>:<import_name> (required).')
+    flags.DEFINE_string('import_config', '{}',
+                        'JSON string of import executor config overrides.')
+    flags.DEFINE_string('version', '',
+                        'Explicit candidate version override (optional).')
+    flags.DEFINE_string('gcs_bucket', '',
+                        'GCS bucket name (defaults to env GCS_BUCKET_ID).')
+    flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
+                        'BigQuery dataset ID for temporary differ tables.')
+    flags.DEFINE_integer('bq_table_ttl_hours', 12,
+                         'TTL in hours for temporary BigQuery differ tables.')
 
 
 def _read_gcs_text(client: storage.Client, bucket_name: str,
@@ -341,7 +333,6 @@ def run_validation_job(absolute_import_name: str,
 
 
 def main(_):
-    _define_flags()
     if not FLAGS.import_name:
         raise ValueError('--import_name is required.')
     code = run_validation_job(

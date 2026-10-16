@@ -29,12 +29,9 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'output' not in _FLAGS:
-        flags.DEFINE_string('output', 'output/agriculture.csv',
-                            'Output CSV file')
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '',
-                            'Mode to run: "download", "process", or both')
+    flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
+    flags.DEFINE_string('mode', '',
+                        'Mode to run: "download", "process", or both')
 
 
 # Constants
@@ -198,7 +195,6 @@ def download_and_process_data(year, d):
 
 
 def main(_):
-    _define_flags()
     # Ensure the output folder exists
     output_dir = os.path.dirname(_FLAGS.output)
     if output_dir and not os.path.exists(output_dir):

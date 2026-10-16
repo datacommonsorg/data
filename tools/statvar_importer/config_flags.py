@@ -41,200 +41,150 @@ _DEFAULT_SPELL_ALLOWLIST = os.path.join(_SCRIPT_DIR, 'words_allowlist.txt')
 
 
 def define_flags():
-    if 'config_file' not in _FLAGS:
-        flags.DEFINE_string('config_file', '',
-                            'File with configuration parameters.')
-    if 'data_url' not in _FLAGS:
-        flags.DEFINE_list('data_url', '', 'URLs to download the data from.')
-    if 'shard_input_by_column' not in _FLAGS:
-        flags.DEFINE_string('shard_input_by_column', '',
-                            'Shard input data by unique values in column.')
-    if 'shard_prefix_length' not in _FLAGS:
-        flags.DEFINE_integer(
-            'shard_prefix_length',
-            sys.maxsize,
-            'Shard input data by value prefix of given length.',
-        )
-    if 'pv_map' not in _FLAGS:
-        flags.DEFINE_list(
-            'pv_map', [],
-            'Comma separated list of namespace:file with property values.')
-    if 'input_data' not in _FLAGS:
-        flags.DEFINE_list(
-            'input_data', [],
-            'Comma separated list of data files to be processed.')
-    if 'input_encoding' not in _FLAGS:
-        flags.DEFINE_string('input_encoding', 'utf-8',
-                            'Encoding for input_data files.')
-    if 'input_xls_sheets' not in _FLAGS:
-        flags.DEFINE_list(
-            'input_xls_sheets',
-            [],
-            'Comma separated list of sheet names within input_data xls files to be processed.',
-        )
-    if 'input_rows' not in _FLAGS:
-        flags.DEFINE_integer('input_rows', sys.maxsize,
-                             'Number of rows per input file to process.')
-    if 'input_columns' not in _FLAGS:
-        flags.DEFINE_integer('input_columns', sys.maxsize,
-                             'Number of columns in input file to process.')
-    if 'skip_rows' not in _FLAGS:
-        flags.DEFINE_integer(
-            'skip_rows', 0,
-            'Number of rows to skip at the begining of the input file.')
-    if 'header_rows' not in _FLAGS:
-        flags.DEFINE_integer(
-            'header_rows',
-            -1,
-            'Number of header rows with property-value mappings for columns. If -1,'
-            ' will lookup PVs for all rows.',
-        )
-    if 'header_columns' not in _FLAGS:
-        flags.DEFINE_integer(
-            'header_columns',
-            -1,
-            'Number of header columns with property-value mappings for rows. If -1,'
-            ' will lookup PVs for all columns.',
-        )
-    if 'aggregate_duplicate_svobs' not in _FLAGS:
-        flags.DEFINE_string(
-            'aggregate_duplicate_svobs',
-            None,
-            'Aggregate SVObs with same place, date by one of the following: sum, min or'
-            ' max.',
-        )
-    if 'schemaless' not in _FLAGS:
-        flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
-    if 'output_path' not in _FLAGS:
-        flags.DEFINE_string('output_path', '',
-                            'File prefix for output mcf, csv and tmcf.')
-    if 'output_columns' not in _FLAGS:
-        flags.DEFINE_list(
-            'output_columns',
-            [],
-            'Comma separated list of columns to emit in the SVObs CSV output.',
-        )
-    if 'existing_statvar_mcf' not in _FLAGS:
-        flags.DEFINE_string(
-            'existing_statvar_mcf',
-            os.environ.get('EXISTING_STATVAR_MCF', ''),
-            'StatVar MCF files for any existing stat var nodes to be resused.',
-        )
-    if 'existing_schema_mcf' not in _FLAGS:
-        flags.DEFINE_string(
-            'existing_schema_mcf',
-            '',
-            'StatVar MCF files for any existing schema nodes to be resused.',
-        )
-    if 'parallelism' not in _FLAGS:
-        flags.DEFINE_integer('parallelism', 0,
-                             'Number of parallel processes to use.')
-    if 'pprof_port' not in _FLAGS:
-        flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
-    if 'debug' not in _FLAGS:
-        flags.DEFINE_bool('debug', False, 'Enable debug messages.')
-    if 'log_level' not in _FLAGS:
-        flags.DEFINE_integer('log_level', logging.INFO,
-                             'Log level messages to be shown.')
-    if 'log_every_n' not in _FLAGS:
-        flags.DEFINE_integer('log_every_n', 1, 'Log one in N messages.')
+    flags.DEFINE_string('config_file', '',
+                        'File with configuration parameters.')
+    flags.DEFINE_list('data_url', '', 'URLs to download the data from.')
+    flags.DEFINE_string('shard_input_by_column', '',
+                        'Shard input data by unique values in column.')
+    flags.DEFINE_integer(
+        'shard_prefix_length',
+        sys.maxsize,
+        'Shard input data by value prefix of given length.',
+    )
+    flags.DEFINE_list(
+        'pv_map', [],
+        'Comma separated list of namespace:file with property values.')
+    flags.DEFINE_list('input_data', [],
+                      'Comma separated list of data files to be processed.')
+    flags.DEFINE_string('input_encoding', 'utf-8',
+                        'Encoding for input_data files.')
+    flags.DEFINE_list(
+        'input_xls_sheets',
+        [],
+        'Comma separated list of sheet names within input_data xls files to be processed.',
+    )
+    flags.DEFINE_integer('input_rows', sys.maxsize,
+                         'Number of rows per input file to process.')
+    flags.DEFINE_integer('input_columns', sys.maxsize,
+                         'Number of columns in input file to process.')
+    flags.DEFINE_integer(
+        'skip_rows', 0,
+        'Number of rows to skip at the begining of the input file.')
+    flags.DEFINE_integer(
+        'header_rows',
+        -1,
+        'Number of header rows with property-value mappings for columns. If -1,'
+        ' will lookup PVs for all rows.',
+    )
+    flags.DEFINE_integer(
+        'header_columns',
+        -1,
+        'Number of header columns with property-value mappings for rows. If -1,'
+        ' will lookup PVs for all columns.',
+    )
+    flags.DEFINE_string(
+        'aggregate_duplicate_svobs',
+        None,
+        'Aggregate SVObs with same place, date by one of the following: sum, min or'
+        ' max.',
+    )
+    flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
+    flags.DEFINE_string('output_path', '',
+                        'File prefix for output mcf, csv and tmcf.')
+    flags.DEFINE_list(
+        'output_columns',
+        [],
+        'Comma separated list of columns to emit in the SVObs CSV output.',
+    )
+    flags.DEFINE_string(
+        'existing_statvar_mcf',
+        os.environ.get('EXISTING_STATVAR_MCF', ''),
+        'StatVar MCF files for any existing stat var nodes to be resused.',
+    )
+    flags.DEFINE_string(
+        'existing_schema_mcf',
+        '',
+        'StatVar MCF files for any existing schema nodes to be resused.',
+    )
+    flags.DEFINE_integer('parallelism', 0,
+                         'Number of parallel processes to use.')
+    flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
+    flags.DEFINE_bool('debug', False, 'Enable debug messages.')
+    flags.DEFINE_integer('log_level', logging.INFO,
+                         'Log level messages to be shown.')
+    flags.DEFINE_integer('log_every_n', 1, 'Log one in N messages.')
 
     # Flags for place name resolution
-    if 'dc_api_key' not in _FLAGS:
-        flags.DEFINE_string(
-            'dc_api_key', os.environ.get('DC_API_KEY', ''),
-            'DataCommons v2 API key used for APIs such as v2/resolve')
-    if 'maps_api_key' not in _FLAGS:
-        flags.DEFINE_string('maps_api_key', os.environ.get('MAPS_API_KEY', ''),
-                            'Maps API key for place lookup by name.')
-    if 'places_csv' not in _FLAGS:
-        flags.DEFINE_list('places_csv', [],
-                          'CSV file with place names and dcids to match.')
-    if 'places_resolved_csv' not in _FLAGS:
-        flags.DEFINE_string(
-            'places_resolved_csv',
-            '',
-            'CSV file with resolved place names and dcids to match.',
-        )
-    if 'place_type' not in _FLAGS:
-        flags.DEFINE_list('place_type', [],
-                          'List of places types for name reoslution.')
-    if 'places_within' not in _FLAGS:
-        flags.DEFINE_list('places_within', [],
-                          'List of places types for name reoslution.')
-    if 'statvar_dcid_remap_csv' not in _FLAGS:
-        flags.DEFINE_string(
-            'statvar_dcid_remap_csv',
-            '',
-            'CSV file with existing DCIDs for generated statvars.',
-        )
-    if 'output_counters' not in _FLAGS:
-        flags.DEFINE_string('output_counters', '', 'CSV file with counters.')
+    flags.DEFINE_string(
+        'dc_api_key', os.environ.get('DC_API_KEY', ''),
+        'DataCommons v2 API key used for APIs such as v2/resolve')
+    flags.DEFINE_string('maps_api_key', os.environ.get('MAPS_API_KEY', ''),
+                        'Maps API key for place lookup by name.')
+    flags.DEFINE_list('places_csv', [],
+                      'CSV file with place names and dcids to match.')
+    flags.DEFINE_string(
+        'places_resolved_csv',
+        '',
+        'CSV file with resolved place names and dcids to match.',
+    )
+    flags.DEFINE_list('place_type', [],
+                      'List of places types for name reoslution.')
+    flags.DEFINE_list('places_within', [],
+                      'List of places types for name reoslution.')
+    flags.DEFINE_string(
+        'statvar_dcid_remap_csv',
+        '',
+        'CSV file with existing DCIDs for generated statvars.',
+    )
+    flags.DEFINE_string('output_counters', '', 'CSV file with counters.')
 
-    if 'resume' not in _FLAGS:
-        flags.DEFINE_bool(
-            'resume',
-            False,
-            'Resume processing to create output files not yet generated.',
-        )
-    if 'skip_constant_csv_columns' not in _FLAGS:
-        flags.DEFINE_bool(
-            'skip_constant_csv_columns',
-            True,
-            'Whether to drop CSV columns whose values remain constant.',
-        )
+    flags.DEFINE_bool(
+        'resume',
+        False,
+        'Resume processing to create output files not yet generated.',
+    )
+    flags.DEFINE_bool(
+        'skip_constant_csv_columns',
+        True,
+        'Whether to drop CSV columns whose values remain constant.',
+    )
 
     # Flags for spell checks
-    if 'spell_check' not in _FLAGS:
-        flags.DEFINE_bool('spell_check', True, 'Run schema spell checker')
-    if 'sanity_check_output' not in _FLAGS:
-        flags.DEFINE_string('sanity_check_output', '',
-                            'File with list of spell errors')
-    if 'spell_check_allow_list' not in _FLAGS:
-        flags.DEFINE_string('spell_check_allow_list', _DEFAULT_SPELL_ALLOWLIST,
-                            'File with words to be allowed')
-    if 'spell_check_config' not in _FLAGS:
-        flags.DEFINE_string('spell_check_config', '',
-                            'File with words to be allowed')
-    if 'spell_check_text' not in _FLAGS:
-        flags.DEFINE_bool('spell_check_text', False,
-                          'if True, spell check quoted text values only.')
-    if 'spell_check_ignore_props' not in _FLAGS:
-        flags.DEFINE_list('spell_check_ignore_props', None,
-                          'List of properties to ignore for spell check.')
+    flags.DEFINE_bool('spell_check', True, 'Run schema spell checker')
+    flags.DEFINE_string('sanity_check_output', '',
+                        'File with list of spell errors')
+    flags.DEFINE_string('spell_check_allow_list', _DEFAULT_SPELL_ALLOWLIST,
+                        'File with words to be allowed')
+    flags.DEFINE_string('spell_check_config', '',
+                        'File with words to be allowed')
+    flags.DEFINE_bool('spell_check_text', False,
+                      'if True, spell check quoted text values only.')
+    flags.DEFINE_list('spell_check_ignore_props', None,
+                      'List of properties to ignore for spell check.')
 
     # Flags for pvmap generation
-    if 'generate_pvmap' not in _FLAGS:
-        flags.DEFINE_bool('generate_pvmap', True, 'Generate PVmap')
-    if 'google_genai_key' not in _FLAGS:
-        flags.DEFINE_string('google_genai_key',
-                            os.environ.get('GOOGLE_GENAI_KEY', ''),
-                            'Google API key for GenAI prompt.')
-    if 'sample_pvmap' not in _FLAGS:
-        flags.DEFINE_string('sample_pvmap',
-                            os.path.join(_SCRIPT_DIR, 'sample_pvmap.csv'),
-                            'Sample PVmap for gen AI.')
-    if 'sample_statvars' not in _FLAGS:
-        flags.DEFINE_string('sample_statvars',
-                            os.path.join(_SCRIPT_DIR, 'sample_statvars.mcf'),
-                            'Sample statvars MCF for GenAI prompt.')
-    if 'data_context' not in _FLAGS:
-        flags.DEFINE_string('data_context', '',
-                            'Text file with metadata descriptions for data.')
-    if 'generate_statvar_name' not in _FLAGS:
-        flags.DEFINE_bool('generate_statvar_name', False,
-                          'Generate names for Statvars.')
-    if 'llm_generate_statvar_name' not in _FLAGS:
-        flags.DEFINE_bool('llm_generate_statvar_name', False,
-                          'Generate names for Statvars.')
-    if 'enable_cloud_logging' not in _FLAGS:
-        flags.DEFINE_bool('enable_cloud_logging', False,
-                          'Enable cloud logging when running on cloud.')
+    flags.DEFINE_bool('generate_pvmap', True, 'Generate PVmap')
+    flags.DEFINE_string('google_genai_key',
+                        os.environ.get('GOOGLE_GENAI_KEY', ''),
+                        'Google API key for GenAI prompt.')
+    flags.DEFINE_string('sample_pvmap',
+                        os.path.join(_SCRIPT_DIR, 'sample_pvmap.csv'),
+                        'Sample PVmap for gen AI.')
+    flags.DEFINE_string('sample_statvars',
+                        os.path.join(_SCRIPT_DIR, 'sample_statvars.mcf'),
+                        'Sample statvars MCF for GenAI prompt.')
+    flags.DEFINE_string('data_context', '',
+                        'Text file with metadata descriptions for data.')
+    flags.DEFINE_bool('generate_statvar_name', False,
+                      'Generate names for Statvars.')
+    flags.DEFINE_bool('llm_generate_statvar_name', False,
+                      'Generate names for Statvars.')
+    flags.DEFINE_bool('enable_cloud_logging', False,
+                      'Enable cloud logging when running on cloud.')
 
 
 def get_default_config() -> dict:
     """Returns the default config as dictionary of config parameters and values."""
-    define_flags()
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
     return {
@@ -246,13 +196,13 @@ def get_default_config() -> dict:
         'input_min_columns_per_row':
             2,
         'input_data':
-            _FLAGS.input_data,
+            getattr(_FLAGS, 'input_data', []),
         'data_url':
-            _FLAGS.data_url,
+            getattr(_FLAGS, 'data_url', []),
         'input_encoding':
-            _FLAGS.input_encoding,
+            getattr(_FLAGS, 'input_encoding', 'utf-8'),
         'input_xls':
-            _FLAGS.input_xls_sheets,
+            getattr(_FLAGS, 'input_xls_sheets', []),
         'pv_map_drop_undefined_nodes':
             (False),  # Don't drop undefined PVs in the column PV Map.
         'duplicate_svobs_key':
@@ -271,7 +221,7 @@ def get_default_config() -> dict:
             '#Aggregate',
         # Aggregation type duplicate SVObs for all statvars.
         'aggregate_duplicate_svobs':
-            _FLAGS.aggregate_duplicate_svobs,
+            getattr(_FLAGS, 'aggregate_duplicate_svobs', None),
         'merged_pvs_property':
             '#MergedSVObs',
         'multi_value_properties': [
@@ -282,7 +232,7 @@ def get_default_config() -> dict:
         # Those properties are commented out when generating MCF but used for
         # statvar dcid.
         'schemaless':
-            _FLAGS.schemaless,
+            getattr(_FLAGS, 'schemaless', False),
         # Whether to lookup DC API and drop undefined PVs in statvars.
         'schemaless_statvar_comment_undefined_pvs':
             False,
@@ -331,9 +281,10 @@ def get_default_config() -> dict:
         ],
         # Settings to compare StatVars with existing statvars to reuse dcids.
         'existing_statvar_mcf':
-            _FLAGS.existing_statvar_mcf,
+            getattr(_FLAGS, 'existing_statvar_mcf',
+                    os.environ.get('EXISTING_STATVAR_MCF', '')),
         'existing_schema_mcf':
-            _FLAGS.existing_schema_mcf,
+            getattr(_FLAGS, 'existing_schema_mcf', ''),
         'statvar_fingerprint_ignore_props': [
             'Node',
             'dcid',
@@ -352,7 +303,7 @@ def get_default_config() -> dict:
         # This is used for schemaless statvars that can't be matched with
         # existing statvars using property:value
         'statvar_dcid_remap_csv':
-            _FLAGS.statvar_dcid_remap_csv,
+            getattr(_FLAGS, 'statvar_dcid_remap_csv', ''),
         # Use numeric data in any column as a value.
         # It may still be dropped if no SVObs can be constructed out of it.
         # If False, SVObs is only emitted for PVs that have a map for 'value',
@@ -383,19 +334,19 @@ def get_default_config() -> dict:
             30,
         # Settings for place name resolution
         'dc_api_key':
-            _FLAGS.dc_api_key,
+            getattr(_FLAGS, 'dc_api_key', os.environ.get('DC_API_KEY', '')),
         'maps_api_key':
-            _FLAGS.maps_api_key,
+            getattr(_FLAGS, 'maps_api_key', os.environ.get('MAPS_API_KEY', '')),
         'resolve_places':
             False,
         'places_csv':
-            _FLAGS.places_csv,
+            getattr(_FLAGS, 'places_csv', []),
         'places_resolved_csv':
-            _FLAGS.places_resolved_csv,
+            getattr(_FLAGS, 'places_resolved_csv', ''),
         'place_type':
-            _FLAGS.place_type,
+            getattr(_FLAGS, 'place_type', []),
         'places_within':
-            _FLAGS.places_within,
+            getattr(_FLAGS, 'places_within', []),
 
         # Filter settings
         'filter_data_min_value':
@@ -409,7 +360,7 @@ def get_default_config() -> dict:
 
         # Output options
         'output_path':
-            _FLAGS.output_path,
+            getattr(_FLAGS, 'output_path', ''),
         'generate_statvar_mcf':
             True,  # Generate MCF file with all statvars
         'generate_csv':
@@ -417,11 +368,11 @@ def get_default_config() -> dict:
         'output_csv_mode':
             'w',  # Overwrite output CSV file.
         'output_columns':
-            _FLAGS.output_columns,
+            getattr(_FLAGS, 'output_columns', []),
         'generate_tmcf':
             True,  # Generate tMCF for CSV columns
         'skip_constant_csv_columns':
-            _FLAGS.skip_constant_csv_columns,
+            getattr(_FLAGS, 'skip_constant_csv_columns', True),
         'output_only_new_statvars':
             True,  # Drop existing statvars from output
         'output_precision_digits':
@@ -439,62 +390,66 @@ def get_default_config() -> dict:
             100,
         # Settings from flags
         'pv_map':
-            _FLAGS.pv_map,
+            getattr(_FLAGS, 'pv_map', []),
         'input_rows':
-            _FLAGS.input_rows,
+            getattr(_FLAGS, 'input_rows', sys.maxsize),
         'input_columns':
-            _FLAGS.input_columns,
+            getattr(_FLAGS, 'input_columns', sys.maxsize),
         'skip_rows':
-            _FLAGS.skip_rows,
+            getattr(_FLAGS, 'skip_rows', 0),
         'ignore_rows': [0],
         'header_rows':
-            _FLAGS.header_rows,
+            getattr(_FLAGS, 'header_rows', -1),
         'header_columns':
-            _FLAGS.header_columns,
+            getattr(_FLAGS, 'header_columns', -1),
         'process_rows': [0],
         'parallelism':
-            _FLAGS.parallelism,
+            getattr(_FLAGS, 'parallelism', 0),
         'output_counters':
-            _FLAGS.output_counters,
+            getattr(_FLAGS, 'output_counters', ''),
 
         # Settings for spell checks
         'spell_check':
-            _FLAGS.spell_check,
+            getattr(_FLAGS, 'spell_check', True),
         'spell_allowlist':
-            _FLAGS.spell_check_allow_list,
+            getattr(_FLAGS, 'spell_check_allow_list', _DEFAULT_SPELL_ALLOWLIST),
         'spell_allow_words': [],
         'output_sanity_check':
-            _FLAGS.sanity_check_output,
+            getattr(_FLAGS, 'sanity_check_output', ''),
         'spell_check_text_only':
-            _FLAGS.spell_check_text,
+            getattr(_FLAGS, 'spell_check_text', False),
         'spell_check_ignore_props':
-            _FLAGS.spell_check_ignore_props,
+            getattr(_FLAGS, 'spell_check_ignore_props', None),
         'debug':
-            _FLAGS.debug,
+            getattr(_FLAGS, 'debug', False),
         'log_level':
-            _FLAGS.log_level,
+            getattr(_FLAGS, 'log_level', logging.INFO),
         'log_every_n':
-            _FLAGS.log_every_n,
+            getattr(_FLAGS, 'log_every_n', 1),
 
         # Settings for PV Map generator
         'generate_pvmap':
-            _FLAGS.generate_pvmap,
+            getattr(_FLAGS, 'generate_pvmap', True),
         'google_api_key':
-            _FLAGS.google_genai_key,
+            getattr(_FLAGS, 'google_genai_key',
+                    os.environ.get('GOOGLE_GENAI_KEY', '')),
         'sample_pvmap':
-            _FLAGS.sample_pvmap,
+            getattr(_FLAGS, 'sample_pvmap',
+                    os.path.join(_SCRIPT_DIR, 'sample_pvmap.csv')),
         'sample_statvars':
-            _FLAGS.sample_statvars,
+            getattr(_FLAGS, 'sample_statvars',
+                    os.path.join(_SCRIPT_DIR, 'sample_statvars.mcf')),
         'data_context':
-            _FLAGS.data_context,
+            getattr(_FLAGS, 'data_context', ''),
         'llm_data_annotation':
-            _FLAGS.generate_pvmap,
+            getattr(_FLAGS, 'generate_pvmap', True),
 
         # Settings for statvar name generator
         'generate_statvar_name':
-            _FLAGS.generate_statvar_name,  # Generate names for StatVars
+            getattr(_FLAGS, 'generate_statvar_name',
+                    False),  # Generate names for StatVars
         'llm_generate_statvar_name':
-            _FLAGS.llm_generate_statvar_name,
+            getattr(_FLAGS, 'llm_generate_statvar_name', False),
     }
 
 

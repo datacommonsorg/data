@@ -25,13 +25,11 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'epa_input_tables_path' not in FLAGS:
-        flags.DEFINE_string(
-            'epa_input_tables_path', 'tmp_data',
-            'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
-        )
-    if 'epa_output_path' not in FLAGS:
-        flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+    flags.DEFINE_string(
+        'epa_input_tables_path', 'tmp_data',
+        'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
+    )
+    flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
 
 
 # Input tables we process
@@ -263,7 +261,6 @@ def process(input_tables_path, output_path):
 
 
 def main(_):
-    _define_flags()
     # Validate inputs.
     assert FLAGS.epa_output_path
     assert FLAGS.epa_input_tables_path

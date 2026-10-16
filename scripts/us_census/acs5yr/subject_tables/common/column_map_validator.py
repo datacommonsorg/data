@@ -26,18 +26,13 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    define_common_util_flags()
-    if 'column_map' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'column_map', None,
-            'Path of json file containing the column StatVar map')
-    if 'yearwise_columns' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'yearwise_columns', None,
-            'Path of json file containing list of all columns by year')
-    if 'colmap_validation_output' not in flags.FLAGS:
-        flags.DEFINE_string('colmap_validation_output', '../output/',
-                            'Directory path to write output file')
+    flags.DEFINE_string('column_map', None,
+                        'Path of json file containing the column StatVar map')
+    flags.DEFINE_string(
+        'yearwise_columns', None,
+        'Path of json file containing list of all columns by year')
+    flags.DEFINE_string('colmap_validation_output', '../output/',
+                        'Directory path to write output file')
 
 
 def check_column_map(column_map_path: str,
@@ -237,12 +232,12 @@ def check_column_map(column_map_path: str,
 
 
 def main(argv):
-    define_flags()
     check_column_map(FLAGS.column_map, FLAGS.yearwise_columns, FLAGS.spec,
                      FLAGS.colmap_validation_output, FLAGS.delimiter)
 
 
 if __name__ == '__main__':
+    define_common_util_flags()
     define_flags()
     flags.mark_flags_as_required(
         ['spec_path', 'column_map', 'yearwise_columns'])

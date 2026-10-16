@@ -34,8 +34,7 @@ import_name = [
 
 
 def define_flags():
-    if "import_name" not in flags.FLAGS:
-        flags.DEFINE_list("import_name", import_name, "Import Data File's List")
+    flags.DEFINE_list("import_name", import_name, "Import Data File's List")
 
 
 _INCOME_QUINTILE_VALUES = {

@@ -30,23 +30,17 @@ FLAGS = flags.FLAGS
 
 
 def define_acs_spec_validator_flags():
-    define_common_util_flags()
-    if 'validator_output' not in flags.FLAGS:
-        flags.DEFINE_string('validator_output', '../output/',
-                            'Path to store the output files')
-    if 'tests' not in flags.FLAGS:
-        flags.DEFINE_multi_enum('tests', ['all'], [
-            'all', 'extra_tokens', 'missing_tokens', 'column_no_pv',
-            'ignore_conflicts', 'enum_specialisations', 'denominators',
-            'extra_inferred', 'multiple_measurement', 'multiple_population'
-        ], 'List of tests to run')
-    if 'zip_list' not in flags.FLAGS:
-        flags.DEFINE_list(
-            'zip_list', None,
-            'List of paths to zip files downloaded from US Census')
-    if 'column_list_path' not in flags.FLAGS:
-        flags.DEFINE_string('column_list_path', None,
-                            'Path of json file containing list of all columns')
+    flags.DEFINE_string('validator_output', '../output/',
+                        'Path to store the output files')
+    flags.DEFINE_multi_enum('tests', ['all'], [
+        'all', 'extra_tokens', 'missing_tokens', 'column_no_pv',
+        'ignore_conflicts', 'enum_specialisations', 'denominators',
+        'extra_inferred', 'multiple_measurement', 'multiple_population'
+    ], 'List of tests to run')
+    flags.DEFINE_list('zip_list', None,
+                      'List of paths to zip files downloaded from US Census')
+    flags.DEFINE_string('column_list_path', None,
+                        'Path of json file containing list of all columns')
 
 
 define_flags = define_acs_spec_validator_flags
@@ -834,7 +828,6 @@ def test_column_list(column_list_path: str,
 
 
 def main(argv):
-    define_flags()
     if FLAGS.csv_list:
         test_CSVfile_list(FLAGS.csv_list, FLAGS.spec, FLAGS.tests,
                           FLAGS.validator_output, False, False,
@@ -849,6 +842,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_common_util_flags()
     define_flags()
     flags.mark_flags_as_required(['spec_path'])
     flags.mark_flags_as_mutual_exclusive(

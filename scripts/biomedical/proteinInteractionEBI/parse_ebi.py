@@ -27,14 +27,11 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'database_file' not in FLAGS:
-        flags.DEFINE_string('database_file',
-                            None,
-                            'database file path.',
-                            short_name='f' if 'f' not in FLAGS else None)
-    if 'new_source' not in FLAGS:
-        flags.DEFINE_string('new_source', "new_source.txt",
-                            'new source file path.')
+    flags.DEFINE_string('database_file',
+                        None,
+                        'database file path.',
+                        short_name='f')
+    flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
 
 
 def get_class_name(a_string):
@@ -323,7 +320,6 @@ def build_child_parent_link(file_terms, id_to_node):
 def main(argv):
     """Main function to read the database file and generate data mcf"""
     del argv
-    _define_flags()
     database_file = FLAGS.database_file
     with open(database_file, 'r') as file_open:
         file = file_open.read()

@@ -31,30 +31,21 @@ import pandas as pd
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def _define_flag_if_not_exists(flag_type, name, default, help_str):
-    if name not in flags.FLAGS:
-        flag_type(name, default, help_str)
-
-
 def define_flags():
-    _define_flag_if_not_exists(flags.DEFINE_string, 'input_data',
-                               'input_file/fema_nfip_claims.csv',
-                               'Input CSV file containing FEMA claims data.')
-    _define_flag_if_not_exists(flags.DEFINE_string, 'output_path',
-                               'output/nfip_output',
-                               'Prefix path for output CSV and TMCF files.')
-    _define_flag_if_not_exists(
-        flags.DEFINE_string, 'pv_map',
+    flags.DEFINE_string('input_data', 'input_file/fema_nfip_claims.csv',
+                        'Input CSV file containing FEMA claims data.')
+    flags.DEFINE_string('output_path', 'output/nfip_output',
+                        'Prefix path for output CSV and TMCF files.')
+    flags.DEFINE_string(
+        'pv_map',
         'ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py',
         'PV map files configuration.')
-    _define_flag_if_not_exists(flags.DEFINE_string, 'output_counters',
-                               'counters/counters.txt',
-                               'Path to output counters summary file.')
-    _define_flag_if_not_exists(
-        flags.DEFINE_integer, 'chunk_size', 250000,
-        'Number of rows per chunk for batched processing.')
-    _define_flag_if_not_exists(
-        flags.DEFINE_integer, 'num_workers', None,
+    flags.DEFINE_string('output_counters', 'counters/counters.txt',
+                        'Path to output counters summary file.')
+    flags.DEFINE_integer('chunk_size', 250000,
+                         'Number of rows per chunk for batched processing.')
+    flags.DEFINE_integer(
+        'num_workers', None,
         'Number of parallel worker processes to use (defaults to CPU count).')
 
 
@@ -459,7 +450,6 @@ def process_data_vectorized(
 
 
 def process_data():
-    define_flags()
     input_data = _FLAGS.input_data
     if isinstance(input_data, list):
         input_data = input_data[
@@ -474,7 +464,6 @@ def process_data():
 
 
 def main(_):
-    define_flags()
     try:
         process_data()
     except Exception as e:

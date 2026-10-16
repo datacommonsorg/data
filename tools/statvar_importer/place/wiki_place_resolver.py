@@ -58,39 +58,31 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'wiki_place_input_csv' not in _FLAGS:
-        flags.DEFINE_list(
-            'wiki_place_input_csv',
-            '',
-            'Input csv with places to resolve under column "name".',
-        )
-    if 'wiki_place_output_csv' not in _FLAGS:
-        flags.DEFINE_string('wiki_place_output_csv', '',
-                            'Output csv with place dcids.')
-    if 'wiki_place_names' not in _FLAGS:
-        flags.DEFINE_list('wiki_place_names', [],
-                          'List of place names to resolve.')
-    if 'wiki_place_config' not in _FLAGS:
-        flags.DEFINE_string(
-            'wiki_place_config',
-            '',
-            'Config setting for place resolution as json or python dict.',
-        )
-    if 'wiki_place_properties' not in _FLAGS:
-        flags.DEFINE_list(
-            'wiki_place_properties',
-            '',
-            'List of wiki place property codes, such as P31',
-        )
-    if 'custom_search_key' not in _FLAGS:
-        flags.DEFINE_string(
-            'custom_search_key', os.environ.get('SEARCH_API_KEY', ''),
-            'API key for Google custom search API.'
-            'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
-        )
-    if 'wiki_place_pprof_port' not in _FLAGS:
-        flags.DEFINE_integer('wiki_place_pprof_port', 0,
-                             'HTTP port for running pprof server.')
+    flags.DEFINE_list(
+        'wiki_place_input_csv',
+        '',
+        'Input csv with places to resolve under column "name".',
+    )
+    flags.DEFINE_string('wiki_place_output_csv', '',
+                        'Output csv with place dcids.')
+    flags.DEFINE_list('wiki_place_names', [], 'List of place names to resolve.')
+    flags.DEFINE_string(
+        'wiki_place_config',
+        '',
+        'Config setting for place resolution as json or python dict.',
+    )
+    flags.DEFINE_list(
+        'wiki_place_properties',
+        '',
+        'List of wiki place property codes, such as P31',
+    )
+    flags.DEFINE_string(
+        'custom_search_key', os.environ.get('SEARCH_API_KEY', ''),
+        'API key for Google custom search API.'
+        'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
+    )
+    flags.DEFINE_integer('wiki_place_pprof_port', 0,
+                         'HTTP port for running pprof server.')
 
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -482,7 +474,6 @@ def _update_node(pvs: dict, node: dict) -> dict:
 
 
 def main(_):
-    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return

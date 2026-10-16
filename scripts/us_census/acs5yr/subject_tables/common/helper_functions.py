@@ -25,22 +25,16 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    define_common_util_flags()
-    if 'denominator_config' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'denominator_config', None,
-            'Path of json file SHORT config for generating denominator section')
-    if 'denominator_long_config' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'denominator_long_config', None,
-            'Path of json file LONG config for generating denominator section')
-    if 'column_list_path' not in flags.FLAGS:
-        flags.DEFINE_string('column_list_path', None,
-                            'Path of json file containing list of all columns')
-    if 'get_ignore_columns' not in flags.FLAGS:
-        flags.DEFINE_boolean(
-            'get_ignore_columns', False,
-            'Path of json file containing list of all columns')
+    flags.DEFINE_string(
+        'denominator_config', None,
+        'Path of json file SHORT config for generating denominator section')
+    flags.DEFINE_string(
+        'denominator_long_config', None,
+        'Path of json file LONG config for generating denominator section')
+    flags.DEFINE_string('column_list_path', None,
+                        'Path of json file containing list of all columns')
+    flags.DEFINE_boolean('get_ignore_columns', False,
+                         'Path of json file containing list of all columns')
 
 
 def find_columns_with_token(column_list: list,
@@ -761,7 +755,6 @@ def get_columns_stat_moe(column_list: list, delimiter: str = '!!') -> list:
 
 
 def main(argv):
-    define_flags()
     if FLAGS.denominator_config:
         create_long_config(FLAGS.denominator_config)
     if FLAGS.denominator_long_config:
@@ -777,5 +770,6 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_common_util_flags()
     define_flags()
     app.run(main)

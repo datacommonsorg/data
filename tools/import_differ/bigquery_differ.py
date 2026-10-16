@@ -469,40 +469,29 @@ _FLAGS = flags.FLAGS
 
 def _define_cli_flags():
     """Defines CLI flags when bigquery_differ.py is executed as a script."""
-    if 'current_data' not in _FLAGS:
-        flags.DEFINE_string(
-            'current_data', '',
-            'Path to the current MCF data (local or gs:// wildcard supported).')
-    if 'previous_data' not in _FLAGS:
-        flags.DEFINE_string(
-            'previous_data', '',
-            'Path to the previous MCF data (local or gs:// wildcard supported).'
-        )
-    if 'output_location' not in _FLAGS:
-        flags.DEFINE_string(
-            'output_location', 'results',
-            'Output directory (local or gs://) for differ_summary.json and differ_summary.csv.'
-        )
-    if 'project_id' not in _FLAGS:
-        flags.DEFINE_string(
-            'project_id', '',
-            'GCP project ID for BigQuery jobs and dataset (defaults to GOOGLE_CLOUD_PROJECT).'
-        )
-    if 'job_name' not in _FLAGS:
-        flags.DEFINE_string(
-            'job_name', 'differ',
-            'Prefix name for temporary BigQuery differ tables.')
-    if 'bq_dataset' not in _FLAGS:
-        flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
-                            'BigQuery dataset ID for temporary differ tables.')
-    if 'gcs_temp_dir' not in _FLAGS:
-        flags.DEFINE_string(
-            'gcs_temp_dir', None,
-            'Optional temporary directory path for intermediate CSV files.')
-    if 'bq_table_ttl_hours' not in _FLAGS:
-        flags.DEFINE_integer(
-            'bq_table_ttl_hours', 12,
-            'TTL in hours for temporary BigQuery differ tables.')
+    flags.DEFINE_string(
+        'current_data', '',
+        'Path to the current MCF data (local or gs:// wildcard supported).')
+    flags.DEFINE_string(
+        'previous_data', '',
+        'Path to the previous MCF data (local or gs:// wildcard supported).')
+    flags.DEFINE_string(
+        'output_location', 'results',
+        'Output directory (local or gs://) for differ_summary.json and differ_summary.csv.'
+    )
+    flags.DEFINE_string(
+        'project_id', '',
+        'GCP project ID for BigQuery jobs and dataset (defaults to GOOGLE_CLOUD_PROJECT).'
+    )
+    flags.DEFINE_string('job_name', 'differ',
+                        'Prefix name for temporary BigQuery differ tables.')
+    flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
+                        'BigQuery dataset ID for temporary differ tables.')
+    flags.DEFINE_string(
+        'gcs_temp_dir', None,
+        'Optional temporary directory path for intermediate CSV files.')
+    flags.DEFINE_integer('bq_table_ttl_hours', 12,
+                         'TTL in hours for temporary BigQuery differ tables.')
 
 
 def main(_):

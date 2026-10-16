@@ -41,11 +41,10 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'config_path' not in _FLAGS:
-        flags.DEFINE_string(
-            'config_path',
-            'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
-            'Path to config file')
+    flags.DEFINE_string(
+        'config_path',
+        'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+        'Path to config file')
 
 
 _MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -368,7 +367,6 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
 
 def main(_):
     """Main function to generate the cleaned csv file."""
-    _define_flags()
     logging.set_verbosity(2)
     #Creating output directory if not present
     if not os.path.exists(_OUTPUT_FILE_PATH):

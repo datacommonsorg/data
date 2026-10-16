@@ -27,21 +27,18 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'database' not in FLAGS:
-        flags.DEFINE_string('database',
-                            'speclist.txt',
-                            'database file path.',
-                            short_name='f' if 'f' not in FLAGS else None)
-    if 'old_mcf' not in FLAGS:
-        flags.DEFINE_string('old_mcf',
-                            'Species.mcf',
-                            'Old species file path.',
-                            short_name='p' if 'p' not in FLAGS else None)
-    if 'output_mcf' not in FLAGS:
-        flags.DEFINE_string('output_mcf',
-                            'newSpecies.mcf',
-                            'The output data mcf file path.',
-                            short_name='m' if 'm' not in FLAGS else None)
+    flags.DEFINE_string('database',
+                        'speclist.txt',
+                        'database file path.',
+                        short_name='f')
+    flags.DEFINE_string('old_mcf',
+                        'Species.mcf',
+                        'Old species file path.',
+                        short_name='p')
+    flags.DEFINE_string('output_mcf',
+                        'newSpecies.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
 
 
 def get_mcf_piece(code, info, seen_name_to_dcid):
@@ -173,7 +170,6 @@ def get_mcf(combine_lines, seen_name_to_dcid):
 
 def main(argv):
     "Main function to read the database file and generate data mcf"
-    _define_flags()
     with open(FLAGS.database, 'r') as file:
         content = file.read()
     with open(FLAGS.old_mcf, 'r') as file:

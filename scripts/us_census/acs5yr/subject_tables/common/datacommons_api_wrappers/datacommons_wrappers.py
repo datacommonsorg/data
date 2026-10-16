@@ -27,14 +27,11 @@ FLAGS = flags.FLAGS
 
 
 def define_datacommons_wrappers_flags():
-    if 'dcid' not in flags.FLAGS:
-        flags.DEFINE_string('dcid', None, 'dcid of the node to query')
-    if 'dc_output_path' not in flags.FLAGS:
-        flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
-                            'Path to store the output')
-    if 'force_fetch' not in flags.FLAGS:
-        flags.DEFINE_boolean('force_fetch', False,
-                             'forces api query and not return cached result')
+    flags.DEFINE_string('dcid', None, 'dcid of the node to query')
+    flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
+                        'Path to store the output')
+    flags.DEFINE_boolean('force_fetch', False,
+                         'forces api query and not return cached result')
 
 
 define_flags = define_datacommons_wrappers_flags
@@ -209,7 +206,6 @@ def fetch_dcid_properties_enums(dcid: str,
 
 
 def main(argv):
-    define_flags()
     print(
         json.dumps(fetch_dcid_properties_enums(FLAGS.dcid, FLAGS.dc_output_path,
                                                FLAGS.force_fetch),

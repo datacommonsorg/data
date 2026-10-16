@@ -62,11 +62,9 @@ default_input_path = os.path.dirname(
 
 
 def _define_flags():
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
-    if 'input_path' not in FLAGS:
-        flags.DEFINE_string("input_path", default_input_path,
-                            "Import Data File's List")
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 
 
 _MODULE_DIR = os.path.dirname(__file__)
@@ -270,7 +268,6 @@ def process(config_files: list, test=False):
 
 
 def main(_):
-    _define_flags()
     mode = _FLAGS.mode
     """
     Creating and processing input files

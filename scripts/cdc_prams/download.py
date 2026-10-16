@@ -31,18 +31,15 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if "download_directory" not in _FLAGS:
-        flags.DEFINE_string(
-            "download_directory", _CODEDIR,
-            "Directory path where input_files/ folder will be populated")
-    if "overwrite" not in _FLAGS:
-        flags.DEFINE_boolean("overwrite", False,
-                             "Whether to force re-download existing files")
-    if "use_fallback_url" not in _FLAGS:
-        flags.DEFINE_boolean(
-            "use_fallback_url", False,
-            "Whether to allow falling back to hardcoded URL if dynamic discovery fails"
-        )
+    flags.DEFINE_string(
+        "download_directory", _CODEDIR,
+        "Directory path where input_files/ folder will be populated")
+    flags.DEFINE_boolean("overwrite", False,
+                         "Whether to force re-download existing files")
+    flags.DEFINE_boolean(
+        "use_fallback_url", False,
+        "Whether to allow falling back to hardcoded URL if dynamic discovery fails"
+    )
 
 
 _CDC_LANDING_PAGE = (
@@ -184,7 +181,6 @@ def download_files(download_directory: str,
 
 
 def main(_):
-    _define_flags()
     download_files(_FLAGS.download_directory,
                    overwrite=_FLAGS.overwrite,
                    use_fallback_url=_FLAGS.use_fallback_url)

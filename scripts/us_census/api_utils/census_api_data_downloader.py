@@ -29,7 +29,7 @@ from absl import flags
 from sys import path
 from typing import Any, Callable, Union
 
-from census_api_helpers import get_identifier, get_yearwise_variable_column_map
+from census_api_helpers import get_identifier, get_yearwise_variable_column_map, define_api_helpers_flags, define_config_fetcher_flags
 from url_list_compiler import get_table_url_list, define_url_list_compiler_flags
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
@@ -43,7 +43,7 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    define_url_list_compiler_flags()
+    pass
 
 
 def url_add_api_key(url_dict: dict, api_key: str) -> str:
@@ -448,7 +448,6 @@ def download_table_variables(dataset, table_id, year_list, geo_url_map_path,
 
 
 def main(argv):
-    define_flags()
     os.makedirs('logs/', exist_ok=True)
     logging.basicConfig(
         filename=
@@ -468,6 +467,9 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_config_fetcher_flags()
+    define_api_helpers_flags()
+    define_url_list_compiler_flags()
     define_flags()
     flags.mark_flags_as_required(['table_id', 'output_path', 'api_key'])
     app.run(main)

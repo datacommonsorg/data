@@ -28,36 +28,24 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'database' not in FLAGS:
-        flags.DEFINE_string('database',
-                            None,
-                            'database file path.',
-                            short_name='f' if 'f' not in FLAGS else None)
-    if 'psimi_to_dcid' not in FLAGS:
-        flags.DEFINE_string('psimi_to_dcid',
-                            'psimi2dcid.txt',
-                            'psimi2dcid.txt file path.',
-                            short_name='p' if 'p' not in FLAGS else None)
-    if 'output_mcf' not in FLAGS:
-        flags.DEFINE_string('output_mcf',
-                            'BioMINTData.mcf',
-                            'The output data mcf file path.',
-                            short_name='m' if 'm' not in FLAGS else None)
-    if 'new_source' not in FLAGS:
-        flags.DEFINE_string('new_source', "new_source.txt",
-                            'new source file path.')
-    if 'output_failed' not in FLAGS:
-        flags.DEFINE_boolean(
-            'output_failed',
-            False,
-            'If output the files containing failed cases or not.',
-            short_name='o' if 'o' not in FLAGS else None)
-    if 'no_uniprot' not in FLAGS:
-        flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
-                            'The cases which don\'t have uniprot.')
-    if 'wrong_dcid' not in FLAGS:
-        flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
-                            'The cases with incorrect dcid format.')
+    flags.DEFINE_string('database', None, 'database file path.', short_name='f')
+    flags.DEFINE_string('psimi_to_dcid',
+                        'psimi2dcid.txt',
+                        'psimi2dcid.txt file path.',
+                        short_name='p')
+    flags.DEFINE_string('output_mcf',
+                        'BioMINTData.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
+    flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
+    flags.DEFINE_boolean('output_failed',
+                         False,
+                         'If output the files containing failed cases or not.',
+                         short_name='o')
+    flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
+                        'The cases which don\'t have uniprot.')
+    flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
+                        'The cases with incorrect dcid format.')
 
 
 def get_references(term):
@@ -387,7 +375,6 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
 
 def main(argv):
     "Main function to read the database file and generate data mcf"
-    _define_flags()
     database_file = FLAGS.database
     psimi_to_dcid_file = FLAGS.psimi_to_dcid
     with open(database_file, 'r') as file_object:

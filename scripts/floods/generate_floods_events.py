@@ -68,20 +68,16 @@ from events_pipeline import EventPipeline
 
 
 def define_flags():
-    events_pipeline.define_flags()
-    if 'flood_pipeline_config' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'flood_pipeline_config',
-            os.path.join(_SCRIPTS_DIR, 'flood_events_pipeline_config.py'),
-            'Config for the pipeline as a py dictionary of json')
-    if 'flood_pipeline_stages' not in flags.FLAGS:
-        flags.DEFINE_list(
-            'flood_pipeline_stages', [],
-            'List of stages in the flood events pipeline config to be run.')
+    flags.DEFINE_string(
+        'flood_pipeline_config',
+        os.path.join(_SCRIPTS_DIR, 'flood_events_pipeline_config.py'),
+        'Config for the pipeline as a py dictionary of json')
+    flags.DEFINE_list(
+        'flood_pipeline_stages', [],
+        'List of stages in the flood events pipeline config to be run.')
 
 
 def main(_):
-    define_flags()
     config = ConfigMap(filename=_FLAGS.flood_pipeline_config)
     if _FLAGS.start_date:
         config.get('defaults', {})['start_date'] = _FLAGS.start_date
@@ -90,5 +86,10 @@ def main(_):
 
 
 if __name__ == '__main__':
+    events_pipeline.common_flags.define_flags()
+    events_pipeline.earthengine_image.define_flags()
+    events_pipeline.raster_to_csv.define_flags()
+    events_pipeline.process_events.define_flags()
+    events_pipeline.define_flags()
     define_flags()
     app.run(main)

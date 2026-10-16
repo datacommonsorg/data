@@ -22,24 +22,20 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if "csv" not in FLAGS:
-        flags.DEFINE_string("csv", None,
-                            "Path to the raw csv containing the places.")
-        flags.mark_flag_as_required('csv')
-    if "set_id" not in FLAGS:
-        flags.DEFINE_string("set_id", None, "DCID and name of the CohortSet.")
-        flags.mark_flag_as_required('set_id')
-    if "place_id_property" not in FLAGS:
-        flags.DEFINE_string(
-            "place_id_property", None,
-            "The CSV column with the place identifiers. It should also be the DCID of the property."
-        )
-        flags.mark_flag_as_required('place_id_property')
-    if "set_description" not in FLAGS:
-        flags.DEFINE_string(
-            "set_description", None,
-            "Optional description of the CohortSet. Used as the value of `description`."
-        )
+    flags.DEFINE_string("csv", None,
+                        "Path to the raw csv containing the places.")
+    flags.mark_flag_as_required('csv')
+    flags.DEFINE_string("set_id", None, "DCID and name of the CohortSet.")
+    flags.mark_flag_as_required('set_id')
+    flags.DEFINE_string(
+        "place_id_property", None,
+        "The CSV column with the place identifiers. It should also be the DCID of the property."
+    )
+    flags.mark_flag_as_required('place_id_property')
+    flags.DEFINE_string(
+        "set_description", None,
+        "Optional description of the CohortSet. Used as the value of `description`."
+    )
 
 
 def write_mcf(f_in, f_out, set_id, place_id_property, set_description):
@@ -68,7 +64,6 @@ typeOf: schema:Place
 
 
 def main(argv):
-    _define_flags()
     f_in = open(FLAGS.csv, 'r')
     f_out = open(FLAGS.csv.replace('.csv', '.mcf'), 'w')
     write_mcf(f_in, f_out, FLAGS.set_id, FLAGS.place_id_property,

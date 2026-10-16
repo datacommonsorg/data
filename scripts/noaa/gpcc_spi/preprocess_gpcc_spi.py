@@ -42,21 +42,16 @@ DEFAULT_END_DATE = datetime.today().strftime('%Y-%m-%d')
 
 
 def _define_flags():
-    if 'gpcc_spi_input_pattern' not in FLAGS:
-        flags.DEFINE_string('gpcc_spi_input_pattern', "input_files/*.nc",
-                            'Input NetCDF4 file(s).')
-    if 'gpcc_spi_preprocessed_dir' not in FLAGS:
-        flags.DEFINE_string(
-            'gpcc_spi_preprocessed_dir', default_output_path,
-            'The directory where the output mcf will be generated in.')
-    if 'start_date' not in FLAGS:
-        flags.DEFINE_string(
-            'start_date', DEFAULT_START_DATE,
-            'Dash separated start date. Defaults to "1900-01-01"')
-    if 'end_date' not in FLAGS:
-        flags.DEFINE_string(
-            'end_date', DEFAULT_END_DATE,
-            'Dash separated start date. Defaults to the running date.')
+    flags.DEFINE_string('gpcc_spi_input_pattern', "input_files/*.nc",
+                        'Input NetCDF4 file(s).')
+    flags.DEFINE_string(
+        'gpcc_spi_preprocessed_dir', default_output_path,
+        'The directory where the output mcf will be generated in.')
+    flags.DEFINE_string('start_date', DEFAULT_START_DATE,
+                        'Dash separated start date. Defaults to "1900-01-01"')
+    flags.DEFINE_string(
+        'end_date', DEFAULT_END_DATE,
+        'Dash separated start date. Defaults to the running date.')
 
 
 def to_one_degree_grid_place(latlon):
@@ -143,7 +138,6 @@ def preprocess_gpcc_spi(start_date, end_date, in_pattern,
 
 def main(_):
     """Run pre-preocess spis with flags."""
-    _define_flags()
     logging.info(FLAGS.gpcc_spi_input_pattern)
     preprocess_gpcc_spi(FLAGS.start_date, FLAGS.end_date,
                         FLAGS.gpcc_spi_input_pattern,

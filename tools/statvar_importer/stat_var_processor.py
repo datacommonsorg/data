@@ -113,13 +113,14 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if hasattr(counters_mod, '_define_flags'):
-        counters_mod._define_flags()
-    if hasattr(log_util, '_define_flags'):
-        log_util._define_flags()
+    counters_mod._define_flags()
+    log_util._define_flags()
     config_flags.define_flags()
     process_http_server.define_flags()
     data_annotator.define_flags()
+    data_annotator.llm_pvmap_generator.define_flags()
+    data_annotator.llm_pvmap_generator.genai_helper.define_flags()
+    data_annotator.data_sampler.define_flags()
     filter_data_outliers.define_flags()
     mcf_file_util.define_flags()
     mcf_filter.define_flags()
@@ -129,6 +130,7 @@ def define_flags():
     json_to_csv.define_flags()
     schema_generator.define_flags()
     schema_checker.define_flags()
+    schema_checker.schema_spell_checker.define_flags()
     schema_reconciler.define_flags()
 
 
@@ -3010,7 +3012,6 @@ def process(
 
 
 def main(_):
-    define_flags()
     # Configure cloud logging if running on Cloud
     if running_on_cloud():
         logging.info("Running under Cloud detected.")

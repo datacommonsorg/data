@@ -34,17 +34,15 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'input_file' not in _FLAGS:
-        flags.DEFINE_string(
-            'input_file',
-            os.path.join(_SCRIPT_PATH,
-                         'aggregations/hate_crime_data/hate_crime.csv'),
-            'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
-        )
-    if 'config_file' not in _FLAGS:
-        flags.DEFINE_string('config_file',
-                            os.path.join(_SCRIPT_PATH, 'config.json'),
-                            'Input config file')
+    flags.DEFINE_string(
+        'input_file',
+        os.path.join(_SCRIPT_PATH,
+                     'aggregations/hate_crime_data/hate_crime.csv'),
+        'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
+    )
+    flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH,
+                                                    'config.json'),
+                        'Input config file')
 
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
@@ -1766,7 +1764,6 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
                                         'hate_crime.csv'),
                  output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
-    _define_flags()
     output_path = os.path.expanduser(output_path)
     input_file = (_FLAGS.input_file if _FLAGS.is_parsed() and
                   'input_file' in _FLAGS else input_csv)

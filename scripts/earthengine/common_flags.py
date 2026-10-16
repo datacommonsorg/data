@@ -17,10 +17,7 @@ from absl import flags
 
 
 def define_flags():
-    if 'input_csv' not in flags.FLAGS:
-        flags.DEFINE_string('input_csv', '', 'CSV file to process')
-    if 'config' not in flags.FLAGS:
-        flags.DEFINE_string('config', '',
-                            'Config dictionary with parameter settings.')
-    if 'debug' not in flags.FLAGS:
-        flags.DEFINE_bool('debug', False, 'Enable debug messages.')
+    flags.DEFINE_string('input_csv', '', 'CSV file to process')
+    flags.DEFINE_string('config', '',
+                        'Config dictionary with parameter settings.')
+    flags.DEFINE_bool('debug', False, 'Enable debug messages.')

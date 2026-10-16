@@ -39,24 +39,18 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: update or schedule.')
-    if 'gcp_project_id' not in _FLAGS:
-        flags.DEFINE_string('gcp_project_id', '',
-                            'GCP Project where import executor runs.')
-    if 'scheduler_config_secret' not in _FLAGS:
-        flags.DEFINE_string('scheduler_config_secret',
-                            'import-scheduler-config',
-                            'GCP secret for the Scheduler config.')
-    if 'absolute_import_path' not in _FLAGS:
-        flags.DEFINE_string(
-            'absolute_import_path', '',
-            'A string specifying the path of an import in the following format:'
-            '<path_to_directory_relative_to_repository_root>:<import_name>.'
-            'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
-    if 'config_override' not in _FLAGS:
-        flags.DEFINE_string('config_override', _CONFIG_OVERRIDE_FILE,
-                            'Config file with overridden parameters.')
+    flags.DEFINE_string('mode', '', 'Options: update or schedule.')
+    flags.DEFINE_string('gcp_project_id', '',
+                        'GCP Project where import executor runs.')
+    flags.DEFINE_string('scheduler_config_secret', 'import-scheduler-config',
+                        'GCP secret for the Scheduler config.')
+    flags.DEFINE_string(
+        'absolute_import_path', '',
+        'A string specifying the path of an import in the following format:'
+        '<path_to_directory_relative_to_repository_root>:<import_name>.'
+        'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
+    flags.DEFINE_string('config_override', _CONFIG_OVERRIDE_FILE,
+                        'Config file with overridden parameters.')
 
 
 logging.basicConfig(level=logging.INFO)
@@ -225,7 +219,6 @@ def update(cfg: configs.ExecutorConfig,
 
 
 def main(_):
-    _define_flags()
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
 

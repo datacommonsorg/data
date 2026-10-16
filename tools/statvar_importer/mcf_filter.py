@@ -54,19 +54,14 @@ from mcf_diff import diff_mcf_node_pvs, get_diff_config
 
 
 def define_flags():
-    mcf_file_util.define_flags()
-    mcf_diff.define_flags()
-    if 'ignore_mcf' not in _FLAGS:
-        flags.DEFINE_string(
-            'ignore_mcf',
-            '',
-            'Comma separated list of MCF files with nodes to be dropped from output',
-        )
-    if 'ignore_dcids' not in _FLAGS:
-        flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
-    if 'ignore_existing_nodes' not in _FLAGS:
-        flags.DEFINE_bool('ignore_existing_nodes', True,
-                          'Drop nodes that are defined in DC API.')
+    flags.DEFINE_string(
+        'ignore_mcf',
+        '',
+        'Comma separated list of MCF files with nodes to be dropped from output',
+    )
+    flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
+    flags.DEFINE_bool('ignore_existing_nodes', True,
+                      'Drop nodes that are defined in DC API.')
 
 
 def drop_mcf_nodes(
@@ -197,7 +192,6 @@ def filter_mcf_file(
 
 
 def main(_):
-    define_flags()
     config = get_diff_config()
     config['ignore_existing_nodes'] = _FLAGS.ignore_existing_nodes
     filter_mcf_file(_FLAGS.input_mcf, _FLAGS.ignore_mcf, config,
@@ -205,5 +199,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    mcf_file_util.define_flags()
+    mcf_diff.define_flags()
     define_flags()
     app.run(main)

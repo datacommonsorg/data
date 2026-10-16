@@ -30,8 +30,7 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'mode' not in flags.FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 class EuroStatBMI(EuroStat):
@@ -216,7 +215,6 @@ class EuroStatBMI(EuroStat):
 
 
 def main(_):
-    define_flags()
     mode = _FLAGS.mode
     global import_name
     import_name = "bmi"

@@ -31,10 +31,8 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'data_dir' not in FLAGS:
-        flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
-    if 'dataset' not in FLAGS:
-        flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
+    flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
+    flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
 
 
 # Value: (name, extract_fn, schema_fn)
@@ -54,7 +52,6 @@ _DATASETS = {
 
 
 def main(_):
-    _define_flags()
     assert FLAGS.data_dir
     assert FLAGS.dataset
     file_prefix = os.path.join(FLAGS.data_dir, FLAGS.dataset)

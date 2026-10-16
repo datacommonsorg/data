@@ -55,16 +55,12 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'start_date' not in _FLAGS:
-        flags.DEFINE_integer(
-            'start_date', 1946,
-            'Data will process from assigned date which date format is <YYYY>')
-    if 'input_path1' not in _FLAGS:
-        flags.DEFINE_string('input_path1', 'input_files', 'Input files path')
-    if 'output_path1' not in _FLAGS:
-        flags.DEFINE_string('output_path1', 'output', 'Output files path')
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_integer(
+        'start_date', 1946,
+        'Data will process from assigned date which date format is <YYYY>')
+    flags.DEFINE_string('input_path1', 'input_files', 'Input files path')
+    flags.DEFINE_string('output_path1', 'output', 'Output files path')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -157,7 +153,6 @@ def process(_INPUT_FILE_PATH, _OUTOUT_FILE_PATH, date_from_start_processing):
 
 def main(_):
     """Runs the script. See module docstring."""
-    _define_flags()
     mode = _FLAGS.mode
     _INPUT_FILE_PATH = os.path.join(MODULE_DIR, _FLAGS.input_path1)
     _OUTOUT_FILE_PATH = os.path.join(MODULE_DIR, _FLAGS.output_path1)

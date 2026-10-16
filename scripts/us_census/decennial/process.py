@@ -13,14 +13,11 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'raw_data_path' not in FLAGS:
-        flags.DEFINE_string(
-            'raw_data_path', 'scratch', 'Path to the equivalent of '
-            'https://www2.census.gov/programs-surveys/decennial/')
-    if 'usc_output_path' not in FLAGS:
-        flags.DEFINE_string('usc_output_path', 'output', 'Output directory')
-    if 'verbose' not in FLAGS:
-        flags.DEFINE_boolean('verbose', False, 'Print debug info')
+    flags.DEFINE_string(
+        'raw_data_path', 'scratch', 'Path to the equivalent of '
+        'https://www2.census.gov/programs-surveys/decennial/')
+    flags.DEFINE_string('usc_output_path', 'output', 'Output directory')
+    flags.DEFINE_boolean('verbose', False, 'Print debug info')
 
 
 _YEARS = ['2000', '2010', '2020']
@@ -360,7 +357,6 @@ def process(raw_data_path, output_path, verbose):
 
 
 def main(_):
-    _define_flags()
     process(FLAGS.raw_data_path, FLAGS.usc_output_path, FLAGS.verbose)
 
 

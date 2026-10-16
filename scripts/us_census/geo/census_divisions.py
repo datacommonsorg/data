@@ -22,14 +22,12 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'census_divisions_csv' not in FLAGS:
-        flags.DEFINE_string(
-            'census_divisions_csv', 'census_region_geocodes.csv',
-            'CSV file with the US census division and region codes.')
-    if 'output_mcf' not in FLAGS:
-        flags.DEFINE_string(
-            'output_mcf', 'geo_CensusDivision.mcf',
-            'MCF file with the nodes for census divisions and regions.')
+    flags.DEFINE_string(
+        'census_divisions_csv', 'census_region_geocodes.csv',
+        'CSV file with the US census division and region codes.')
+    flags.DEFINE_string(
+        'output_mcf', 'geo_CensusDivision.mcf',
+        'MCF file with the nodes for census divisions and regions.')
 
 
 _COLUMNS = [
@@ -154,7 +152,6 @@ def process(csv_filename: str, output_filename: str):
 
 
 def main(_):
-    _define_flags()
     process(FLAGS.census_divisions_csv, FLAGS.output_mcf)
 
 

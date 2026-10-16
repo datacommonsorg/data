@@ -31,8 +31,7 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def _define_flags():
-    if 'mode' not in _FLAGS:
-        flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 _OUTPUT_COLUMNS = [
@@ -208,7 +207,6 @@ def get_template_mcf(output_columns, _TMCF):
 
 
 def main(_):
-    _define_flags()
     mode = _FLAGS.mode
     _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_find3/?format=TSV&compressed=true"
     _CLEANED_CSV = "./Eurostats_NUTS3_FRate_Age.csv"

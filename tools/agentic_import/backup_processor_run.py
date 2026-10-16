@@ -30,25 +30,21 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'working_dir' not in FLAGS:
-        flags.DEFINE_string('working_dir', '.',
-                            'Working directory (default: current directory)')
-    if 'gemini_run_id' not in FLAGS:
-        flags.DEFINE_string('gemini_run_id', None,
-                            'Gemini run ID (e.g., gemini_20250109_143022)')
-        flags.mark_flag_as_required('gemini_run_id')
-    if 'backup_files' not in FLAGS:
-        flags.DEFINE_multi_string(
-            'backup_files',
-            [],  # Explicit list passed by caller
-            'Files/directories to backup (relative to working_dir or absolute). '
-            'Can be specified multiple times. Directories will backup all contents. '
-            'Non-existent files will be skipped with a warning.')
-    if 'max_dir_files' not in FLAGS:
-        flags.DEFINE_integer(
-            'max_dir_files', 30,
-            'Maximum number of files allowed when backing up a directory. '
-            'Directories with more files will be skipped.')
+    flags.DEFINE_string('working_dir', '.',
+                        'Working directory (default: current directory)')
+    flags.DEFINE_string('gemini_run_id', None,
+                        'Gemini run ID (e.g., gemini_20250109_143022)')
+    flags.mark_flag_as_required('gemini_run_id')
+    flags.DEFINE_multi_string(
+        'backup_files',
+        [],  # Explicit list passed by caller
+        'Files/directories to backup (relative to working_dir or absolute). '
+        'Can be specified multiple times. Directories will backup all contents. '
+        'Non-existent files will be skipped with a warning.')
+    flags.DEFINE_integer(
+        'max_dir_files', 30,
+        'Maximum number of files allowed when backing up a directory. '
+        'Directories with more files will be skipped.')
 
 
 def _get_next_attempt_number(gemini_run_dir: Path) -> int:
@@ -218,7 +214,6 @@ def execute_backup(
 def main(argv):
     """Main entry point."""
     del argv  # Unused
-    _define_flags()
     working_dir = Path(FLAGS.working_dir).resolve()
     attempt_dir = execute_backup(
         working_dir=working_dir,

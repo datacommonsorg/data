@@ -13,9 +13,8 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'process_output_path' not in FLAGS:
-        flags.DEFINE_string('process_output_path', 'output',
-                            'The local path to save the output files')
+    flags.DEFINE_string('process_output_path', 'output',
+                        'The local path to save the output files')
 
 
 INPUT_TO_OUTPUT_PATHS = {
@@ -117,7 +116,6 @@ def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
 
 
 def main(argv):
-    _define_flags()
 
     for input_path in INPUT_TO_OUTPUT_PATHS:
         out_put_file_name = INPUT_TO_OUTPUT_PATHS[input_path]

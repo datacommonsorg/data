@@ -59,88 +59,69 @@ _FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'resolve_input_csv' not in _FLAGS:
-        flags.DEFINE_list(
-            'resolve_input_csv',
-            '',
-            'Input csv with places to resolve under column "name".',
-        )
-    if 'resolve_output_csv' not in _FLAGS:
-        flags.DEFINE_string('resolve_output_csv', '',
-                            'Output csv with place dcids.')
-    if 'resolve_place_names' not in _FLAGS:
-        flags.DEFINE_list('resolve_place_names', [],
-                          'List of place names to resolve.')
-    if 'maps_key' not in _FLAGS:
-        flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
-                            'Google Maps API key')
-    if 'resolve_config' not in _FLAGS:
-        flags.DEFINE_string(
-            'resolve_config',
-            '',
-            'Config setting for place resolution as json or python dict.',
-        )
-    if 'place_names_csv' not in _FLAGS:
-        flags.DEFINE_list(
-            'place_names_csv',
-            '',
-            'CSV files with place properties including name, dcid, containedInPlace'
-            'used by the place_name_matcher',
-        )
-    if 'place_names_within' not in _FLAGS:
-        flags.DEFINE_list(
-            'place_names_within',
-            '',
-            'use place names within the list of places for name matches.',
-        )
-    if 'place_types' not in _FLAGS:
-        flags.DEFINE_list('place_types', [],
-                          'List of place types to resolve to.')
-    if 'place_name_column' not in _FLAGS:
-        flags.DEFINE_string(
-            'place_name_column',
-            'place_name',
-            'input CSV column with the name of the place to be resolved.',
-        )
-    if 'place_latitude_column' not in _FLAGS:
-        flags.DEFINE_string(
-            'place_latitude_column',
-            'latitude',
-            'input CSV column with the latitude of the place to be resolved.',
-        )
-    if 'place_longitude_column' not in _FLAGS:
-        flags.DEFINE_string(
-            'place_longitude_column',
-            'longitude',
-            'input CSV column with the longitude of the place to be resolved.',
-        )
-    if 'place_resolver_cache' not in _FLAGS:
-        flags.DEFINE_string('place_resolver_cache', '',
-                            'Cache file to save resolved places.')
-    if 'output_place_columns' not in _FLAGS:
-        flags.DEFINE_list('output_place_columns', [],
-                          'List of columns in the output.')
-    if 'maps_api_cache' not in _FLAGS:
-        flags.DEFINE_string('maps_api_cache', '',
-                            'Cache file to save responses from maps API.')
-    if 'place_pprof_port' not in _FLAGS:
-        flags.DEFINE_integer('place_pprof_port', 0,
-                             'HTTP port for running pprof server.')
-    if 'resolve_api_url' not in _FLAGS:
-        flags.DEFINE_string(
-            'resolve_api_url',
-            'https://autopush.api.datacommons.org/v2/resolve',
-            'DC API URL for resolve.',
-        )
-    if 'resolve_api_key' not in _FLAGS:
-        flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
-                            'DC API key for resolve.')
-    if 'dc_api_batch_size' not in _FLAGS:
-        flags.DEFINE_integer(
-            'dc_api_batch_size',
-            3,
-            'DC API batch size for number of places to lookup per request.',
-        )
+    flags.DEFINE_list(
+        'resolve_input_csv',
+        '',
+        'Input csv with places to resolve under column "name".',
+    )
+    flags.DEFINE_string('resolve_output_csv', '',
+                        'Output csv with place dcids.')
+    flags.DEFINE_list('resolve_place_names', [],
+                      'List of place names to resolve.')
+    flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
+                        'Google Maps API key')
+    flags.DEFINE_string(
+        'resolve_config',
+        '',
+        'Config setting for place resolution as json or python dict.',
+    )
+    flags.DEFINE_list(
+        'place_names_csv',
+        '',
+        'CSV files with place properties including name, dcid, containedInPlace'
+        'used by the place_name_matcher',
+    )
+    flags.DEFINE_list(
+        'place_names_within',
+        '',
+        'use place names within the list of places for name matches.',
+    )
+    flags.DEFINE_list('place_types', [], 'List of place types to resolve to.')
+    flags.DEFINE_string(
+        'place_name_column',
+        'place_name',
+        'input CSV column with the name of the place to be resolved.',
+    )
+    flags.DEFINE_string(
+        'place_latitude_column',
+        'latitude',
+        'input CSV column with the latitude of the place to be resolved.',
+    )
+    flags.DEFINE_string(
+        'place_longitude_column',
+        'longitude',
+        'input CSV column with the longitude of the place to be resolved.',
+    )
+    flags.DEFINE_string('place_resolver_cache', '',
+                        'Cache file to save resolved places.')
+    flags.DEFINE_list('output_place_columns', [],
+                      'List of columns in the output.')
+    flags.DEFINE_string('maps_api_cache', '',
+                        'Cache file to save responses from maps API.')
+    flags.DEFINE_integer('place_pprof_port', 0,
+                         'HTTP port for running pprof server.')
+    flags.DEFINE_string(
+        'resolve_api_url',
+        'https://autopush.api.datacommons.org/v2/resolve',
+        'DC API URL for resolve.',
+    )
+    flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
+                        'DC API key for resolve.')
+    flags.DEFINE_integer(
+        'dc_api_batch_size',
+        3,
+        'DC API batch size for number of places to lookup per request.',
+    )
 
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1363,7 +1344,6 @@ def process(
 
 
 def main(_):
-    define_flags()
     # Launch a web server if --http_port is set.
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return

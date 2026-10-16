@@ -114,23 +114,14 @@ import utils
 
 
 def define_flags():
-    common_flags.define_flags()
-    earthengine_image.define_flags()
-    raster_to_csv.define_flags()
-    process_events.define_flags()
-    if 'pipeline_config' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'pipeline_config', '',
-            'Config for the pipeline as a py dictionary of json')
-    if 'pipeline_state' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'pipeline_state', '',
-            'File with state for the pipeline processing as a python dictionary.'
-            'Used to resume processing for new incremental data.')
-    if 'run_stages' not in flags.FLAGS:
-        flags.DEFINE_list(
-            'run_stages', [],
-            'List of stages to run. If empty, all stages are run.')
+    flags.DEFINE_string('pipeline_config', '',
+                        'Config for the pipeline as a py dictionary of json')
+    flags.DEFINE_string(
+        'pipeline_state', '',
+        'File with state for the pipeline processing as a python dictionary.'
+        'Used to resume processing for new incremental data.')
+    flags.DEFINE_list('run_stages', [],
+                      'List of stages to run. If empty, all stages are run.')
 
 
 from counters import Counters
@@ -237,7 +228,6 @@ pipeline_stage_runner.register_stage_runner('event_pipeline', EventPipeline)
 
 
 def main(_):
-    define_flags()
     config_dict = file_util.file_load_py_dict(_FLAGS.pipeline_config)
     if _FLAGS.pipeline_state:
         config_dict['pipeline_state_file'] = _FLAGS.pipeline_state
@@ -249,5 +239,9 @@ def main(_):
 
 
 if __name__ == '__main__':
+    common_flags.define_flags()
+    earthengine_image.define_flags()
+    raster_to_csv.define_flags()
+    process_events.define_flags()
     define_flags()
     app.run(main)

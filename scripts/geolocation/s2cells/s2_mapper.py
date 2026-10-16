@@ -40,12 +40,9 @@ FLAGS = flags.FLAGS
 #   "containedIn": "europe"
 # }
 def _define_flags():
-    if 'in_params' not in FLAGS:
-        flags.DEFINE_string('in_params', '', 'Input param file')
-    if 'in_csv' not in FLAGS:
-        flags.DEFINE_string('in_csv', '', 'Input CSV file')
-    if 'out_dir' not in FLAGS:
-        flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+    flags.DEFINE_string('in_params', '', 'Input param file')
+    flags.DEFINE_string('in_csv', '', 'Input CSV file')
+    flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
 
 
 _MCF_FORMAT = """
@@ -179,7 +176,6 @@ class Processor:
 
 
 def main(_):
-    _define_flags()
     p = Processor(FLAGS.in_params, FLAGS.in_csv, FLAGS.out_dir)
     p.generate()
 

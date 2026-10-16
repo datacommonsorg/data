@@ -32,18 +32,16 @@ FLAGS = flags.FLAGS
 
 
 def define_flags():
-    if 'output_dir' not in FLAGS:
-        flags.DEFINE_string(
-            'output_dir',
-            'input_files',
-            'Directory where downloaded input CSV files will be saved.',
-        )
-    if 'endpoint' not in FLAGS:
-        flags.DEFINE_string(
-            'endpoint',
-            'https://health.data.ny.gov/resource/jsy7-eb4n.json',
-            'Health Data NY BRFSS Socrata API endpoint.',
-        )
+    flags.DEFINE_string(
+        'output_dir',
+        'input_files',
+        'Directory where downloaded input CSV files will be saved.',
+    )
+    flags.DEFINE_string(
+        'endpoint',
+        'https://health.data.ny.gov/resource/jsy7-eb4n.json',
+        'Health Data NY BRFSS Socrata API endpoint.',
+    )
 
 
 def create_session() -> requests.Session:
@@ -278,7 +276,6 @@ def download_health_indicators(endpoint: str,
 def main(argv):
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
-    define_flags()
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_dir = (FLAGS.output_dir if os.path.isabs(FLAGS.output_dir) else
                   os.path.join(script_dir, FLAGS.output_dir))

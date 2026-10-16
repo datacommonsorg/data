@@ -42,14 +42,12 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'input_file' not in FLAGS:
-        flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
-                            'Input geojson file')
-    if 'output_dir' not in FLAGS:
-        flags.DEFINE_string(
-            'output_dir', 'output',
-            'Dir to output generated MCF files too. If blank, a temp folder will be used.'
-        )
+    flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
+                        'Input geojson file')
+    flags.DEFINE_string(
+        'output_dir', 'output',
+        'Dir to output generated MCF files too. If blank, a temp folder will be used.'
+    )
 
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
@@ -338,7 +336,6 @@ class CountryBoundariesGenerator:
 
 
 def main(_):
-    _define_flags()
     gen = CountryBoundariesGenerator(FLAGS.input_file, FLAGS.output_dir)
     all_countries = gen.load_data()
     existing_codes = gen.existing_codes(all_countries)

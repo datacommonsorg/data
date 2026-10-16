@@ -45,15 +45,12 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if 'gpcc_spi_places_with_csv' not in FLAGS:
-        flags.DEFINE_string('gpcc_spi_places_with_csv',
-                            'geojson_data/places_with_geojson.csv',
-                            'Path to places with geojson.')
-    if 'gpcc_spi_place_grid_ratio_output_dir' not in FLAGS:
-        flags.DEFINE_string(
-            'gpcc_spi_place_grid_ratio_output_dir',
-            'geojson_data/place_to_one_degree_grid_mapping.json',
-            'Path where the result is written to.')
+    flags.DEFINE_string('gpcc_spi_places_with_csv',
+                        'geojson_data/places_with_geojson.csv',
+                        'Path to places with geojson.')
+    flags.DEFINE_string('gpcc_spi_place_grid_ratio_output_dir',
+                        'geojson_data/place_to_one_degree_grid_mapping.json',
+                        'Path where the result is written to.')
 
 
 LAT_MIN = -90
@@ -194,7 +191,6 @@ def create_place_to_grid_mapping(places_with_geojson: List[str],
 
 
 def main(_):
-    _define_flags()
     places_with_geojson = read_input(FLAGS.gpcc_spi_places_with_csv)
     create_place_to_grid_mapping(places_with_geojson,
                                  FLAGS.gpcc_spi_place_grid_ratio_output_dir)

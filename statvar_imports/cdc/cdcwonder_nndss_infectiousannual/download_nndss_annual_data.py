@@ -45,19 +45,16 @@ _DEFAULT_OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def define_flags():
-    if 'verticals' not in FLAGS:
-        flags.DEFINE_string(
-            'verticals', 'all',
-            'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
-        )
-    if 'years' not in FLAGS:
-        flags.DEFINE_string(
-            'years', 'all',
-            'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
-        )
-    if 'output_dir' not in FLAGS:
-        flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
-                            'Output directory to save downloaded CSV files')
+    flags.DEFINE_string(
+        'verticals', 'all',
+        'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
+    )
+    flags.DEFINE_string(
+        'years', 'all',
+        'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
+    )
+    flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
+                        'Output directory to save downloaded CSV files')
 
 
 # Vertical breakdown configurations
@@ -447,7 +444,6 @@ def download_all(verticals: list,
 
 def main(argv):
     del argv  # Unused.
-    define_flags()
 
     if FLAGS.verticals.lower() == 'all':
         selected_verticals = list(VERTICAL_CONFIGS.keys())

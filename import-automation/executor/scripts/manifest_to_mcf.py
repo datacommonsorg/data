@@ -34,11 +34,10 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    if "directory" not in FLAGS:
-        flags.DEFINE_string("directory",
-                            os.getcwd(),
-                            "Directory to scan for .textproto files.",
-                            allow_override=True)
+    flags.DEFINE_string("directory",
+                        os.getcwd(),
+                        "Directory to scan for .textproto files.",
+                        allow_override=True)
 
 
 DEFAULT_CURATOR_DCID = "dcid:dc/cjj7vp"
@@ -286,7 +285,6 @@ def process_directory(path):
 
 
 def main(_):
-    _define_flags()
     process_directory(FLAGS.directory)
 
 

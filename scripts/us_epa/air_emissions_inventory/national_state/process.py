@@ -47,9 +47,8 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def _define_flags():
-    if "input_path" not in FLAGS:
-        flags.DEFINE_string("input_path", default_input_path,
-                            "Import Data File's List")
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 
 
 # Data provided in 1000s of Tons.
@@ -324,7 +323,6 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
 
 
 def main(_):
-    _define_flags()
     input_path = FLAGS.input_path
     logging.info(f"Input path: {input_path}")
     try:

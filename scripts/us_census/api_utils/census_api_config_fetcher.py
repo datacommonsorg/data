@@ -37,10 +37,9 @@ FLAGS = flags.FLAGS
 
 
 def define_config_fetcher_flags():
-    if 'force_fetch_config' not in flags.FLAGS:
-        flags.DEFINE_boolean(
-            'force_fetch_config', False,
-            'Force download of config and list of required geos from API')
+    flags.DEFINE_boolean(
+        'force_fetch_config', False,
+        'Force download of config and list of required geos from API')
 
 
 define_flags = define_config_fetcher_flags
@@ -969,7 +968,6 @@ def get_variables_name(dataset: str,
 
 
 def main(argv):
-    define_flags()
     compile_dataset_based_map(force_fetch=FLAGS.force_fetch_config)
     fetch_dataset_config_cache('group_variables',
                                force_fetch=FLAGS.force_fetch_config)
