@@ -194,11 +194,11 @@ def create_tmcf(output, features, stat_vars):
                 _TMCF_TEMPLATE.format(index=i, stat_var=stat_vars[i],
                                       unit=unit))
 
+
 def main(argv):
     if not FLAGS.input_zip and not FLAGS.download_id:
-        default_zip = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), 'input_data',
-            'S2201.zip')
+        default_zip = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'input_data', 'S2201.zip')
         if os.path.exists(default_zip):
             FLAGS.input_zip = default_zip
         else:
@@ -229,10 +229,11 @@ def main(argv):
         # Sort files chronologically / deterministically
         for filename in sorted(zf.namelist()):
             # Support both -Data.csv and data_with_overlays...csv
-            if filename.endswith('.csv') and (
-                    '-Data' in filename or 'data_with_overlays' in filename or
-                    'data' in filename.lower()):
-                if 'metadata' in filename.lower() or 'title' in filename.lower():
+            if filename.endswith('.csv') and ('-Data' in filename or
+                                              'data_with_overlays' in filename
+                                              or 'data' in filename.lower()):
+                if 'metadata' in filename.lower() or 'title' in filename.lower(
+                ):
                     continue
                 print(f'Processing file: {filename}')
                 with zf.open(filename, 'r') as infile:
