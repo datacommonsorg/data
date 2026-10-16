@@ -32,9 +32,8 @@ flags.DEFINE_string('config_path', '',
                     'Path to the configuration file in the GCS bucket.')
 
 # EPA Air Pollutant Emissions Trends Data provenance page
-EPA_TRENDS_PAGE_URL = (
-    "https://www.epa.gov/air-emissions-inventories/"
-    "air-pollutant-emissions-trends-data")
+EPA_TRENDS_PAGE_URL = ("https://www.epa.gov/air-emissions-inventories/"
+                       "air-pollutant-emissions-trends-data")
 
 # Download path for files
 _DOWNLOAD_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -137,9 +136,8 @@ def scrape_epa_trends_urls(session: requests.Session = None) -> list:
         if len(discovered) == 2:
             logging.info(f"Discovered current EPA trend URLs: {discovered}")
             return discovered
-        logging.warning(
-            f"Incomplete URL discovery from {EPA_TRENDS_PAGE_URL}; "
-            f"expected 2 URLs, found: {discovered}")
+        logging.warning(f"Incomplete URL discovery from {EPA_TRENDS_PAGE_URL}; "
+                        f"expected 2 URLs, found: {discovered}")
         return []
     except Exception as e:
         logging.warning(
@@ -183,8 +181,7 @@ def read_config_from_gcs(bucket_name: str, config_path: str) -> list:
         bucket = client.get_bucket(bucket_name)
         blob = bucket.blob(config_path)
         config_data = json.loads(blob.download_as_text())
-        logging.info(
-            f"Successfully read configuration from GCS: {config_path}")
+        logging.info(f"Successfully read configuration from GCS: {config_path}")
 
         urls = [
             entry["download_path"]
@@ -209,8 +206,8 @@ def resolve_download_urls(config_urls: list,
     if own_session:
         session = _create_http_session()
     try:
-        if (config_urls and len(config_urls) >= 2 and all(
-                check_url_status(u, session=session) for u in config_urls)):
+        if (config_urls and len(config_urls) >= 2 and
+                all(check_url_status(u, session=session) for u in config_urls)):
             return config_urls
 
         logging.warning(
@@ -255,7 +252,7 @@ def download_files(urls: list) -> None:
     try:
         resolved_urls = resolve_download_urls(urls, session=session)
         if not resolved_urls:
-            logging.fatal("No reachable URLs found to download.")
+            raise ValueError("No reachable URLs found to download.")
 
         _clean_download_directory(_DOWNLOAD_PATH)
 
@@ -297,7 +294,7 @@ def main(argv):
     config_path_flag = _FLAGS.config_path
 
     if not config_path_flag:
-        logging.fatal(
+        raise ValueError(
             "Please provide the --config_path flag with a valid GCS path.")
 
     try:
@@ -312,4 +309,3 @@ def main(argv):
 
 if __name__ == '__main__':
     app.run(main)
-

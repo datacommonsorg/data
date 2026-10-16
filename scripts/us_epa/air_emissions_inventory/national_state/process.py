@@ -30,8 +30,8 @@ from common.us_air_pollution_emission_trends import USAirPollutionEmissionTrends
 # Add the path to the 'util' directory to sys.path
 sys.path.insert(
     0,
-    os.path.abspath(
-        os.path.join(os.path.dirname(__file__), '../../../../util')))
+    os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                 '../../../../util')))
 
 # importing from util
 from statvar_dcid_generator import get_statvar_dcid
@@ -168,8 +168,9 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                 sheet_name = SHEET_STATE
                 if sheet_name not in excel_file.sheet_names:
                     for candidate in excel_file.sheet_names:
-                        if (candidate.replace('_', ' ').strip().lower() ==
-                                SHEET_STATE.lower()):
+                        if (candidate.replace(
+                                '_',
+                                ' ').strip().lower() == SHEET_STATE.lower()):
                             sheet_name = candidate
                             break
                 df = pd.read_excel(excel_file, sheet_name, skiprows=0, header=0)
@@ -195,11 +196,13 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             df = df.melt(id_vars=['SV_TEMP', 'geo_Id'],
                          var_name='year',
                          value_name='observation')
-            df['year'] = (
-                df['year'].astype(str).str.strip().str[-2:]).astype(int)
+            years = pd.to_numeric(df['year'].astype(str).str.replace(
+                'emissions', '', case=False).str.strip(),
+                                  errors='coerce').fillna(0).astype(int)
             # As 2001 is available as 01 and 1999 is available as 99,
             # Putting a logic to change it to proper year
-            df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
+            df['year'] = np.where((years >= 90) & (years < 100), years + 1900,
+                                  np.where(years < 90, years + 2000, years))
             # Making copy and using group by to get Aggregated Values.
             df_agg = self.aggregate_columns(
                 df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'],
@@ -335,13 +338,17 @@ def main(_):
     input_path = FLAGS.input_path
     logging.info(f"Input path: {input_path}")
     try:
+        if not os.path.exists(input_path):
+            raise FileNotFoundError(f"Input path does not exist: {input_path}")
+        if not os.listdir(input_path):
+            raise FileNotFoundError(f"Input directory is empty: {input_path}")
         ip_files = [
             file for file in sorted(os.listdir(input_path))
             if file.lower().endswith(('.xlsx', '.xls'))
         ]
         logging.info(f"Found {len(ip_files)} files in input path.")
         if not ip_files:
-            logging.fatal(
+            raise FileNotFoundError(
                 f"No Excel files (.xlsx/.xls) found in input path: {input_path}"
             )
 
@@ -386,4 +393,3 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
-
