@@ -40,7 +40,6 @@ def define_flags():
                             'Directory path to write output file')
 
 
-
 def check_column_map(column_map_path: str,
                      column_list_path: str,
                      spec_path: str,

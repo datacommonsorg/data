@@ -31,6 +31,7 @@ def _define_flags():
             'mmsite_output_path', './data/output',
             'Path to the directory where generated files are to be stored.')
 
+
 MCF_STR = """
 Node: {dcid}
 name: "{name}"

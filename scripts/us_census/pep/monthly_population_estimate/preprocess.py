@@ -50,6 +50,8 @@ def _define_flags():
     if 'input_path' not in FLAGS:
         flags.DEFINE_string("input_path", default_input_path,
                             "Import Data File's List")
+
+
 _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
 

@@ -64,6 +64,7 @@ def _define_flags():
             'Dir to output generated MCF files too. If blank, a temp folder will be used.'
         )
 
+
 DOWNLOAD_URI = 'https://development-data-hub-s3-public.s3.amazonaws.com/ddhfiles/779551/wb_boundaries_geojson_highres.zip'
 TMP_PATH = '/tmp/wb_boundaries_geojson_highres'
 GEO_JSON_PATH = 'WB_Boundaries_GeoJSON_highres/WB_countries_Admin0.geojson'

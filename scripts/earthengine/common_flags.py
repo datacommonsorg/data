@@ -24,4 +24,3 @@ def define_flags():
                             'Config dictionary with parameter settings.')
     if 'debug' not in flags.FLAGS:
         flags.DEFINE_bool('debug', False, 'Enable debug messages.')
-

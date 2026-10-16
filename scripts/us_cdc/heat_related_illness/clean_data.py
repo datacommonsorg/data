@@ -289,8 +289,8 @@ def convert_html_to_csv(category_string=None):
 def reads_config_file():
     _FLAGS = flags.FLAGS
     config_file_path = (
-        _FLAGS.config_file_path if _FLAGS.is_parsed() and
-        'config_file_path' in _FLAGS else
+        _FLAGS.config_file_path
+        if _FLAGS.is_parsed() and 'config_file_path' in _FLAGS else
         'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py'
     )
     storage_client = storage.Client()

@@ -22,6 +22,7 @@ def _define_flags():
     if 'verbose' not in FLAGS:
         flags.DEFINE_boolean('verbose', False, 'Print debug info')
 
+
 _YEARS = ['2000', '2010', '2020']
 _DIR_PREFIX = 'data/01-Redistricting_File--PL_94-171'
 

@@ -51,6 +51,7 @@ def _define_flags():
         flags.DEFINE_string("input_path", default_input_path,
                             "Import Data File's List")
 
+
 # Data provided in 1000s of Tons.
 _SCALING_FACTOR = 1000
 

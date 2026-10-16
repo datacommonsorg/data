@@ -80,9 +80,8 @@ def define_flags():
             'llm_statvar_name_context', '',
             'Text file with the context to generate StatVar names.')
     if 'llm_name_request' not in _FLAGS:
-        flags.DEFINE_string(
-            'llm_name_request', '',
-            'Output text file with copy prompt sent to LLM.')
+        flags.DEFINE_string('llm_name_request', '',
+                            'Output text file with copy prompt sent to LLM.')
     if 'llm_name_response' not in _FLAGS:
         flags.DEFINE_string('llm_name_response', '',
                             'Output text file with LLM response.')

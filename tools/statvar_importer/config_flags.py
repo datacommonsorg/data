@@ -60,8 +60,9 @@ def define_flags():
             'pv_map', [],
             'Comma separated list of namespace:file with property values.')
     if 'input_data' not in _FLAGS:
-        flags.DEFINE_list('input_data', [],
-                          'Comma separated list of data files to be processed.')
+        flags.DEFINE_list(
+            'input_data', [],
+            'Comma separated list of data files to be processed.')
     if 'input_encoding' not in _FLAGS:
         flags.DEFINE_string('input_encoding', 'utf-8',
                             'Encoding for input_data files.')

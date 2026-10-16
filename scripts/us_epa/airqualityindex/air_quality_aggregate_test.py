@@ -38,14 +38,16 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def setUpClass(cls):
         define_flags()
         if not flags.FLAGS.is_parsed():
-            flags.FLAGS(
-                ["air_quality_aggregate_test.py", "--output_file_path", "output"])
+            flags.FLAGS([
+                "air_quality_aggregate_test.py", "--output_file_path", "output"
+            ])
 
     def setUp(self):
         define_flags()
         if not flags.FLAGS.is_parsed():
-            flags.FLAGS(
-                ["air_quality_aggregate_test.py", "--output_file_path", "output"])
+            flags.FLAGS([
+                "air_quality_aggregate_test.py", "--output_file_path", "output"
+            ])
 
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

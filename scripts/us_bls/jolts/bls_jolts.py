@@ -37,6 +37,7 @@ def _define_flags():
     if 'modes' not in _FLAGS:
         flags.DEFINE_string('modes', '', 'Options: download or process')
 
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILES = _MODULE_DIR + "/input_files"
 if not os.path.exists(_INPUT_FILES):

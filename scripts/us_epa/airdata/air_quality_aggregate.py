@@ -38,6 +38,7 @@ def _define_flags():
                                        datetime.now().year),
                              'Process data upto this year.')
 
+
 POLLUTANTS = {
     'Ozone': 'Ozone',
     'SO2': 'SulfurDioxide',

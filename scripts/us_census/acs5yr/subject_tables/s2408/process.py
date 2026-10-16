@@ -69,7 +69,6 @@ def define_flags():
             '[for processing]set the flag to add additional columns to debug')
 
 
-
 def process_subject_tables(table_prefix='',
                            input_path='./',
                            output_dir='./',

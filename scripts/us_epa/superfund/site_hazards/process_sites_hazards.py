@@ -35,6 +35,7 @@ def _define_flags():
             'site_hazard_output_path', './data/output',
             'Path to the directory where generated files are to be stored.')
 
+
 _RISK_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
 observationAbout: C:SuperfundSite->Site_EPA_ID

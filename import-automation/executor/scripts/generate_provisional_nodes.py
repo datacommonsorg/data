@@ -67,6 +67,7 @@ def _define_flags():
         flags.DEFINE_string("spanner_database", "dc_graph",
                             "Spanner database ID")
 
+
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 

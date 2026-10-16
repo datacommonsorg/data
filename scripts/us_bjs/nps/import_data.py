@@ -25,9 +25,9 @@ def define_flags():
                             'file path to tsv file with import data',
                             short_name='i')
     if 'gs_path' not in flags.FLAGS:
-        flags.DEFINE_string("gs_path",
-                            "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
-                            "input file path")
+        flags.DEFINE_string(
+            "gs_path", "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
+            "input file path")
 
 
 AGGREGATE_COLUMNS = [

@@ -133,8 +133,7 @@ def define_flags():
             'DC API URL for resolve.',
         )
     if 'resolve_api_key' not in _FLAGS:
-        flags.DEFINE_string('resolve_api_key',
-                            os.environ.get('DC_API_KEY', ''),
+        flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
                             'DC API key for resolve.')
     if 'dc_api_batch_size' not in _FLAGS:
         flags.DEFINE_integer(
@@ -142,6 +141,7 @@ def define_flags():
             3,
             'DC API batch size for number of places to lookup per request.',
         )
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

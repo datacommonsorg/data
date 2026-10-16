@@ -69,8 +69,8 @@ def define_flags():
             ' existing value.',
         )
     if 'normalize' not in _FLAGS:
-        flags.DEFINE_bool('normalize', True,
-                          'If True, values are normalized.')
+        flags.DEFINE_bool('normalize', True, 'If True, values are normalized.')
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

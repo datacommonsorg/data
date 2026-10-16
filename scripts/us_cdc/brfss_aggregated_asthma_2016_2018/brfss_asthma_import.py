@@ -44,6 +44,7 @@ def _define_flags():
         flags.DEFINE_string('outputdir_path', default_output_path,
                             'Path to the output directory')
 
+
 # Predefined strings for the statvar mcf and template mcf
 _TEMPLATE_MCF = """
 Node: E:SubjectTable->E0

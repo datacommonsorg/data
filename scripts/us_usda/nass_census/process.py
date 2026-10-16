@@ -36,6 +36,7 @@ def _define_flags():
         flags.DEFINE_string('mode', '',
                             'Mode to run: "download", "process", or both')
 
+
 # Constants
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

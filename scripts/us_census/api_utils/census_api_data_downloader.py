@@ -46,7 +46,6 @@ def define_flags():
     define_url_list_compiler_flags()
 
 
-
 def url_add_api_key(url_dict: dict, api_key: str) -> str:
     """Attaches the api key to a given url
 
@@ -446,6 +445,7 @@ def download_table_variables(dataset, table_id, year_list, geo_url_map_path,
 #     end = time.time()
 #     print("The time required to download the", table_id, "dataset :", end-start)
 #     logging.info('The time required to download the %s dataset : %f', table_id, end-start)
+
 
 def main(argv):
     define_flags()

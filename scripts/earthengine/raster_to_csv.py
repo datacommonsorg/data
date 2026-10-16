@@ -80,6 +80,7 @@ import utils
 from config_map import ConfigMap
 from counters import Counters, CounterOptions
 
+
 def define_flags():
     common_flags.define_flags()
     if 'input_geotiff' not in flags.FLAGS:
@@ -136,8 +137,9 @@ def define_flags():
             'Levels to be added as contained in place nodes into s2 place output.',
         )
     if 'aggregate' not in flags.FLAGS:
-        flags.DEFINE_string('aggregate', 'max',
-                            'Aggregate function for data values with same key.')
+        flags.DEFINE_string(
+            'aggregate', 'max',
+            'Aggregate function for data values with same key.')
     if 'log_every_n' not in flags.FLAGS:
         flags.DEFINE_integer('log_every_n', 10000,
                              'Print logs every N records.')

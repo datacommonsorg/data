@@ -42,8 +42,9 @@ def _define_flags():
         flags.DEFINE_string('input_files', 'input',
                             'Path to download input CSVs.')
     if 'mode' not in FLAGS:
-        flags.DEFINE_string('mode', '',
-                            'Mode: "download", "process", or both (default: both).')
+        flags.DEFINE_string(
+            'mode', '', 'Mode: "download", "process", or both (default: both).')
+
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 

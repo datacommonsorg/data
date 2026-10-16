@@ -49,6 +49,7 @@ def _define_flags():
             'site_contamination_output_path', './data/output',
             'Path to the directory where generated files are to be stored.')
 
+
 _TEMPLATE_MCF = """
 Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation

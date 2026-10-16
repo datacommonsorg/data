@@ -40,6 +40,7 @@ def _define_flags():
                             "Directory to scan for .textproto files.",
                             allow_override=True)
 
+
 DEFAULT_CURATOR_DCID = "dcid:dc/cjj7vp"
 DC_BASE_PREFIX = "dc/base"
 

@@ -27,11 +27,13 @@ from absl import flags
 from absl import logging
 from io import StringIO
 
+
 def define_flags():
     if 'config_path' not in flags.FLAGS:
-        flags.DEFINE_string('config_path',
-                            'gs://datcom-import-cache/fires/firms/firms_config.py',
-                            'Path to JSON file with configurations.')
+        flags.DEFINE_string(
+            'config_path',
+            'gs://datcom-import-cache/fires/firms/firms_config.py',
+            'Path to JSON file with configurations.')
 
 
 _FLAGS = flags.FLAGS

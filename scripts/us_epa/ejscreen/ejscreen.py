@@ -49,6 +49,7 @@ def _define_flags():
             'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
         )
 
+
 # Define the  path for output files.
 
 OUTPUT_DIR = "input_files"

@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from datetime import date
 import os
 from pathlib import Path
@@ -42,14 +41,16 @@ def define_flags():
             'Source from which input files are downloaded.',
         )
 
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
+
 def create_retry_session(
-    retries: int = 3,
-    backoff_factor: float = 2.0,
-    status_forcelist: tuple = (429, 500, 502, 503, 504),
+        retries: int = 3,
+        backoff_factor: float = 2.0,
+        status_forcelist: tuple = (429, 500, 502, 503, 504),
 ) -> requests.Session:
     session = requests.Session()
     retry_strategy = Retry(
@@ -59,19 +60,18 @@ def create_retry_session(
         allowed_methods=["HEAD", "GET", "OPTIONS"],
         raise_on_status=False,
     )
-    adapter = HTTPAdapter(
-        max_retries=retry_strategy, pool_connections=10, pool_maxsize=10
-    )
+    adapter = HTTPAdapter(max_retries=retry_strategy,
+                          pool_connections=10,
+                          pool_maxsize=10)
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.headers.update({
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        )
+        "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                       "AppleWebKit/537.36 (KHTML, like Gecko) "
+                       "Chrome/120.0.0.0 Safari/537.36")
     })
     return session
+
 
 def download_files(url_list, save_folder):
     os.makedirs(os.path.join(save_folder), exist_ok=True)
@@ -96,9 +96,12 @@ def download_files(url_list, save_folder):
             with response as r:
                 total_size = int(r.headers.get('content-length', 0))
                 block_size = 1024
-                with open(file_path, 'wb') as f, tqdm(
-                    total=total_size, unit='B', unit_scale=True, desc=filename, leave=False
-                ) as progress_bar:
+                with open(file_path,
+                          'wb') as f, tqdm(total=total_size,
+                                           unit='B',
+                                           unit_scale=True,
+                                           desc=filename,
+                                           leave=False) as progress_bar:
                     for chunk in r.iter_content(block_size):
                         f.write(chunk)
                         progress_bar.update(len(chunk))
@@ -153,12 +156,14 @@ def download_files_from_gcs(url_list, save_folder):
     if downloaded_count == 0:
         raise RuntimeError('No files were downloaded from GCS.')
 
+
 def generate_urls(start_year, end_year, url_template):
     url_list = []
-    for year in range(start_year,end_year+1):
+    for year in range(start_year, end_year + 1):
         formatted_url = url_template.format(year=year)
         url_list.append(formatted_url)
     return url_list
+
 
 def extract_year(filename):
     """Extracts a four-digit year from the filename using regex."""
@@ -166,6 +171,7 @@ def extract_year(filename):
     if match:
         return int(match.group(1))
     return None
+
 
 def process_excel_files(input_dir):
     """
@@ -176,32 +182,42 @@ def process_excel_files(input_dir):
 
     for root, _, files in os.walk(input_dir):
         excel_files = [f for f in files if f.endswith('.xlsx')]
-        
+
         if not excel_files:
             continue
-            
-        logging.info(f"Processing {len(excel_files)} files in {os.path.basename(root)}...")
 
-        for filename in tqdm(excel_files, desc=f"Adding Year Column to {os.path.basename(root)}"):
+        logging.info(
+            f"Processing {len(excel_files)} files in {os.path.basename(root)}..."
+        )
+
+        for filename in tqdm(
+                excel_files,
+                desc=f"Adding Year Column to {os.path.basename(root)}"):
             file_path = os.path.join(root, filename)
 
             folder = os.path.basename(root)
             relative_key = os.path.join(folder, filename)
             year = extract_year(filename)
-            
+
             if year is None:
-                logging.warning(f"Could not find year for file in map: {relative_key}. Skipping processing.")
+                logging.warning(
+                    f"Could not find year for file in map: {relative_key}. Skipping processing."
+                )
                 continue
 
             try:
                 df = pd.read_excel(file_path)
                 df['year'] = year
                 df.to_excel(file_path, index=False)
-                
-            except Exception as e:
-                raise RuntimeError(f"Failed to process and save Excel file {filename}: {e}")
 
-    logging.info("\nExcel file processing complete. 'year' column added to all processed files.")
+            except Exception as e:
+                raise RuntimeError(
+                    f"Failed to process and save Excel file {filename}: {e}")
+
+    logging.info(
+        "\nExcel file processing complete. 'year' column added to all processed files."
+    )
+
 
 def main(_):
     define_flags()
@@ -217,6 +233,7 @@ def main(_):
         final_urls = generate_urls(start_year, current_year, tn_url_template)
         download_files(final_urls, save_folder=INPUT_DIR)
     process_excel_files(INPUT_DIR)
+
 
 if __name__ == "__main__":
     define_flags()

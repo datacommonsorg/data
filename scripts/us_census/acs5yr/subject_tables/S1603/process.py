@@ -54,7 +54,6 @@ def define_flags():
             '[for processing]set the flag to add additional columns to debug')
 
 
-
 class S1603SubjectTableDataLoader(SubjectTableDataLoaderBase):
     """
     A child class for the S1603 import.

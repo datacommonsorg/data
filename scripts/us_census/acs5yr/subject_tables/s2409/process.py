@@ -64,7 +64,6 @@ def define_flags():
             '[for processing]set the flag to add additional columns to debug')
 
 
-
 def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,

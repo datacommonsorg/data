@@ -66,9 +66,9 @@ def _define_flags():
     if 'start_year' not in _FLAGS:
         flags.DEFINE_integer('start_year', 2024, 'start_year')
     if 'api_key' not in _FLAGS:
-        flags.DEFINE_string('api_key',
-                            'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
-                            'directory where api key exists')
+        flags.DEFINE_string(
+            'api_key', 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
+            'directory where api key exists')
 
 
 def _get_mode():

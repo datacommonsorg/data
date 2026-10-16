@@ -13,7 +13,6 @@ def define_flags():
                             short_name='p')
 
 
-
 def convert_nan_for_calculation(value):
     if pd.isna(value):
         return 0

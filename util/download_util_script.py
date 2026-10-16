@@ -32,8 +32,7 @@ FLAGS = flags.FLAGS
 
 def _define_flags():
     if 'download_url' not in FLAGS:
-        flags.DEFINE_string('download_url', None,
-                            'URL of the file to download')
+        flags.DEFINE_string('download_url', None, 'URL of the file to download')
     if 'output_folder' not in FLAGS:
         flags.DEFINE_string('output_folder', None,
                             'Folder to save the downloaded file')

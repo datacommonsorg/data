@@ -62,7 +62,6 @@ def define_flags():
                           'list of expected properties')
 
 
-
 def get_spec_list() -> list:
     # data/scripts/us_census/acs5yr/subject_tables
     spec_dir = os.path.join(_SCRIPT_PATH, '..')

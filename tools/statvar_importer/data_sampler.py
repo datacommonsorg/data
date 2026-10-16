@@ -108,6 +108,7 @@ def define_flags():
         flags.DEFINE_string('sampler_output_delimiter', None,
                             'The delimiter to use in the output CSV file.')
 
+
 import file_util
 import mcf_file_util
 

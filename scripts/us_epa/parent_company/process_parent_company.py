@@ -51,6 +51,7 @@ def _define_flags():
         flags.DEFINE_string("svobs_output_path", "svobs",
                             "Output directory for StatVarObs.")
 
+
 # V_PARENT_COMPANY_INFO table
 _TABLE_PREFIX = "D_GHG_B"
 _TABLE = "V_PARENT_COMPANY_INFO"

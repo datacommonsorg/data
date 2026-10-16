@@ -31,6 +31,7 @@ def _define_flags():
             'output_mcf', 'geo_CensusDivision.mcf',
             'MCF file with the nodes for census divisions and regions.')
 
+
 _COLUMNS = [
     'Region',
     'Division',

@@ -63,6 +63,7 @@ def define_flags():
             'Output folder for resolved and unresolved files.',
         )
 
+
 _DEFAULT_CONFIG = {
     # List of properties to ignore when resolving a node.
     'resolve_ignore_props': [

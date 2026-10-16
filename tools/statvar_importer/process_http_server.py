@@ -94,6 +94,7 @@ def define_flags():
             'Maximum duration in seconds to run the web server.',
         )
 
+
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))

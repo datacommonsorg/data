@@ -41,6 +41,7 @@ def define_flags():
         flags.DEFINE_string('output_csv', DEFAULT_OUTPUT_ROLLUPS,
                             'Path to output rollups CSV file.')
 
+
 REQUIRED_FILTER_COLS = ['RechtsformSort', 'BetriebsgrSort']
 NUMERIC_VAL_COLS = [
     'Arbeitsstaetten', 'AnzBesch', 'AnzBeschW', 'AnzBeschM', 'AnzVZA',

@@ -46,7 +46,6 @@ def define_flags():
             'The latest year to look for in the filename (optional).')
 
 
-
 class StateGDPDataLoader:
     """Pulls per-state GDP data from the BEA.
 

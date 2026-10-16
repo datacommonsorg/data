@@ -77,8 +77,7 @@ def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
         df.to_csv(temp_path, index=False)
         if not (os.path.exists(temp_path) and os.path.getsize(temp_path) > 0):
             raise RuntimeError(
-                f'Atomic write failed: {temp_path} is empty or missing.'
-            )
+                f'Atomic write failed: {temp_path} is empty or missing.')
         os.replace(temp_path, target_path)
     except Exception:
         if os.path.exists(temp_path):

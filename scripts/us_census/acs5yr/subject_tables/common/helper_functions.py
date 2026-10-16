@@ -35,14 +35,12 @@ def define_flags():
             'denominator_long_config', None,
             'Path of json file LONG config for generating denominator section')
     if 'column_list_path' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'column_list_path', None,
-            'Path of json file containing list of all columns')
+        flags.DEFINE_string('column_list_path', None,
+                            'Path of json file containing list of all columns')
     if 'get_ignore_columns' not in flags.FLAGS:
         flags.DEFINE_boolean(
             'get_ignore_columns', False,
             'Path of json file containing list of all columns')
-
 
 
 def find_columns_with_token(column_list: list,

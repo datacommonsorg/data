@@ -79,6 +79,7 @@ def define_flags():
         flags.DEFINE_string('generated_mcf', '',
                             'MCF file for new schema nodes.')
 
+
 # Base schema with some basic properties
 # This is excluded in generated schema.
 _BASE_SCHEMA = {

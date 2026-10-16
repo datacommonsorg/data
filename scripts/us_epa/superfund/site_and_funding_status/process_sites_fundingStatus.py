@@ -35,6 +35,7 @@ def _define_flags():
             'site_funding_output_path', './data/output',
             'Path to the directory where generated files are to be stored.')
 
+
 _DATASET_NAME = "./superfund_sites_with_status.csv"
 
 _STATUS_TEMPALTE_MCF = """Node: E:SuperfundSite->E0

@@ -43,8 +43,8 @@ def _define_flags():
     if "indicatorSchemaFile" not in _FLAGS:
         flags.DEFINE_string(
             "indicatorSchemaFile",
-            os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"),
-            "")
+            os.path.join(_MODULE_DIR,
+                         "schema_csvs/WorldBankIndicators_prod.csv"), "")
     if 'mode' not in _FLAGS:
         flags.DEFINE_string('mode', '', 'Options: download or process')
     if 'historical_gcs_path' not in _FLAGS:
@@ -52,6 +52,7 @@ def _define_flags():
             'historical_gcs_path',
             'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
             'GCS path to the deleted historical data CSV file')
+
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {

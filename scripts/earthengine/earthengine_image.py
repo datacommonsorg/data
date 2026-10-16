@@ -76,6 +76,7 @@ import utils
 
 from counters import Counters
 
+
 def define_flags():
     common_flags.define_flags()
     if 'ee_remote' not in flags.FLAGS:
@@ -140,8 +141,7 @@ def define_flags():
         flags.DEFINE_float('band_max', None,
                            'Maximum value for the pixels in the band.')
     if 'band_eq' not in flags.FLAGS:
-        flags.DEFINE_float('band_eq', None,
-                           'Value for the pixels in the band.')
+        flags.DEFINE_float('band_eq', None, 'Value for the pixels in the band.')
     if 'ee_band_bool' not in flags.FLAGS:
         flags.DEFINE_bool(
             'ee_band_bool', True,
@@ -268,6 +268,7 @@ def get_default_config() -> dict:
             if k != 'datasets' and k in _FLAGS:
                 config[k] = getattr(_FLAGS, k)
     return config
+
 
 # Interval in secs to cehck for EE task status
 _EE_TASK_WAIT_INTERVAL = 10

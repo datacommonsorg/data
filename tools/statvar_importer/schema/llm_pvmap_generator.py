@@ -94,12 +94,12 @@ def define_flags():
         flags.DEFINE_string('llm_pvmap_prompt', _DEFAULT_LLM_PROMPT,
                             'Text file with the LLM prompt to generate PVMap.')
     if 'llm_request' not in _FLAGS:
-        flags.DEFINE_string(
-            'llm_request', '',
-            'Output text file with copy prompt sent to LLM.')
+        flags.DEFINE_string('llm_request', '',
+                            'Output text file with copy prompt sent to LLM.')
     if 'llm_response' not in _FLAGS:
         flags.DEFINE_string('llm_response', '',
                             'Output text file with LLM response.')
+
 
 from config_map import ConfigMap
 from counters import Counters

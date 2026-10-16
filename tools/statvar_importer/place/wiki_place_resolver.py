@@ -92,6 +92,7 @@ def define_flags():
         flags.DEFINE_integer('wiki_place_pprof_port', 0,
                              'HTTP port for running pprof server.')
 
+
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))

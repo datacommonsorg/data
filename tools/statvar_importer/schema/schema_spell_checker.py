@@ -65,6 +65,7 @@ def define_flags():
         flags.DEFINE_bool('spell_check_text_only', False,
                           'if True, spell check quoted text values only.')
 
+
 import property_value_utils as pv_utils
 
 from config_map import ConfigMap

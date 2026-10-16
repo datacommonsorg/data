@@ -78,6 +78,7 @@ def define_flags():
         flags.DEFINE_boolean('llm_data_annotation', True,
                              'Enable data annotations with LLM.')
 
+
 # Regex
 _NUMBER_REGEX = r'^[+0-9,\.$%-]+\s*$'
 

@@ -31,8 +31,9 @@ def define_api_helpers_flags():
         flags.DEFINE_boolean('available_datasets', False,
                              'Print list of available datasets.')
     if 'available_years' not in flags.FLAGS:
-        flags.DEFINE_boolean('available_years', False,
-                             'Print list of available years for given dataset.')
+        flags.DEFINE_boolean(
+            'available_years', False,
+            'Print list of available years for given dataset.')
     if 'available_groups' not in flags.FLAGS:
         flags.DEFINE_boolean(
             'available_groups', False,

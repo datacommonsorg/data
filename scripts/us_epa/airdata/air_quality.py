@@ -40,6 +40,7 @@ def _define_flags():
             'Process data upto this year. Defaults to the previous calendar year.'
         )
 
+
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
 POLLUTANTS = {
     '44201': 'Ozone',

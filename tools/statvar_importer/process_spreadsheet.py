@@ -57,13 +57,13 @@ _FLAGS = flags.FLAGS
 def define_flags():
     stat_var_processor.define_flags()
     if 'input_sheet' not in _FLAGS:
-        flags.DEFINE_string('input_sheet', '',
-                            'URL of spreadsheet to process')
+        flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
     if 'output_prefix' not in _FLAGS:
         flags.DEFINE_string('output_prefix', '',
                             'Path prefix for output csv and mcf files.')
     if 'credentials' not in _FLAGS:
         flags.DEFINE_string('credentials', '', 'File with credentials.')
+
 
 _HOME_DIR = os.path.expanduser('~')
 

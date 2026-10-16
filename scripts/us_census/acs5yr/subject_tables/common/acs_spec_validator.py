@@ -45,9 +45,8 @@ def define_acs_spec_validator_flags():
             'zip_list', None,
             'List of paths to zip files downloaded from US Census')
     if 'column_list_path' not in flags.FLAGS:
-        flags.DEFINE_string(
-            'column_list_path', None,
-            'Path of json file containing list of all columns')
+        flags.DEFINE_string('column_list_path', None,
+                            'Path of json file containing list of all columns')
 
 
 define_flags = define_acs_spec_validator_flags

@@ -44,9 +44,10 @@ def define_flags():
         flags.DEFINE_string('semantic_matcher_corpus', '',
                             'Corpus file with key, value')
     if 'semantic_matcher_cache' not in _FLAGS:
-        flags.DEFINE_string('semantic_matcher_cache',
-                            'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
-                            'Cache pickle file with corpus text and embeddings')
+        flags.DEFINE_string(
+            'semantic_matcher_cache',
+            'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+            'Cache pickle file with corpus text and embeddings')
     if 'semantic_matcher_input' not in _FLAGS:
         flags.DEFINE_string('semantic_matcher_input', '',
                             'Input file with lookup queries.')

@@ -89,6 +89,7 @@ def _define_flags():
             "data_directory", DOWNLOAD_DIR,
             "Folder consisting of all input files required for processing")
 
+
 # Columns with single race(SR) or combination(SR CMBN) with one or more race
 # These columns are not used as part of current import
 # belwo are the Columns to be retained when SR COLUMNS is dropped

@@ -47,6 +47,7 @@ def _define_flags():
             'sites_output_path', './data/output',
             'Path to the directory where generated files are to be stored.')
 
+
 _SITE_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:SuperfundSite
 dcid: C:SuperfundSite->dcid

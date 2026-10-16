@@ -35,6 +35,7 @@ def _define_flags():
     if 'mode' not in FLAGS:
         flags.DEFINE_string('mode', '', 'Options: download or process')
 
+
 _TEMPLATE_MCF = """Node: E:NNDSWeekly->E0
 typeOf: dcs:StatVarObservation
 measurementMethod: C:NNDSWeekly->measurementMethod

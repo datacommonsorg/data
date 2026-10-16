@@ -62,8 +62,9 @@ def _define_flags():
     if 'mode' not in _FLAGS:
         flags.DEFINE_string('mode', '', 'Options: download or process')
     if 'config_path' not in _FLAGS:
-        flags.DEFINE_string('config_path', '',
-                            'Path to the configuration file in the GCS bucket.')
+        flags.DEFINE_string(
+            'config_path', '',
+            'Path to the configuration file in the GCS bucket.')
     if 'input_path' not in _FLAGS:
         flags.DEFINE_string("input_path", default_input_path,
                             "Import Data File's List")

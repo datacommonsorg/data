@@ -193,8 +193,9 @@ def convert_json_to_csv(json_path: str, csv_path: str) -> bool:
                 continue
             # Use BLAKE2s with 8-byte digest for a stable, shorter hash.
             # Increase digest_size here if future collisions are observed.
-            hash_value = hashlib.blake2s(url.encode('utf-8'),
-                                         digest_size=_URL_HASH_DIGEST_SIZE).hexdigest()
+            hash_value = hashlib.blake2s(
+                url.encode('utf-8'),
+                digest_size=_URL_HASH_DIGEST_SIZE).hexdigest()
             extraction_config['url_stable_hash'] = hash_value
 
         # Create temporary JSON file in same directory as original

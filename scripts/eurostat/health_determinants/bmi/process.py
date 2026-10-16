@@ -34,7 +34,6 @@ def define_flags():
         flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
-
 class EuroStatBMI(EuroStat):
     """
     This Class has requried methods to generate Cleaned CSV,

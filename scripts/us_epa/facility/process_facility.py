@@ -33,6 +33,7 @@ def _define_flags():
     if 'epa_output_path' not in FLAGS:
         flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
 
+
 # Input tables we process
 # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=<table>
 _TABLES = ('V_GHG_EMITTER_FACILITIES', 'V_GHG_SUPPLIER_FACILITIES',
