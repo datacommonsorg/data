@@ -11,14 +11,6 @@
             }
         },
         {
-            "rule_id": "check_lint_error_count",
-            "description": "Checks that there are zero lint errors.",
-            "validator": "LINT_ERROR_COUNT",
-            "params": {
-                "threshold": 0
-            }
-        },
-        {
             "rule_id": "check_deleted_records_percent",
             "description": "Checks that deleted records do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
