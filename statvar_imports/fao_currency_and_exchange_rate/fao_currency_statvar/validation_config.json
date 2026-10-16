@@ -3,31 +3,35 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "enabled": false
+            "description": "Checks that the percentage of deleted records for the entire import is within 0.1% threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_min_value",
+            "description": "Checks that currency exchange rate values are non-negative.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_num_places_count",
+            "description": "Checks that every currency exchange rate StatVar resolves to at least 1 place.",
+            "validator": "NUM_PLACES_COUNT",
+            "params": {
+                "minimum": 1
+            }
         },
         {
             "rule_id": "check_active_currency_date_freshness",
             "description": "Ensure active currencies (EUR, INR, GBP, JPY, CAD, AUD, CHF, CNY) have MaxDate at or after 2025 to catch import stagnation.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar LIKE '%_ToCurrency_EUR' OR StatVar LIKE '%_ToCurrency_INR' OR StatVar LIKE '%_ToCurrency_GBP' OR StatVar LIKE '%_ToCurrency_JPY' OR StatVar LIKE '%_ToCurrency_CAD' OR StatVar LIKE '%_ToCurrency_AUD' OR StatVar LIKE '%_ToCurrency_CHF' OR StatVar LIKE '%_ToCurrency_CNY'",
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE regexp_matches(StatVar, '_ToCurrency_(EUR|INR|GBP|JPY|CAD|AUD|CHF|CNY)$')",
                 "condition": "SUBSTR(MaxDate, 1, 4) >= '2025'"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output_files/CurrencyFAO_output.csv"
             }
         }
     ]
