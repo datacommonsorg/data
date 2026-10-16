@@ -12,16 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat BMI (Body Mass Index) process script.
+Script to automate the testing for US EPA Air Pollutant Emission Trends
+(National and State) process script.
 """
 import os
 import sys
 
-_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '...'))
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_COMMON_PATH = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+sys.path.insert(1, _MODULE_DIR)
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
 from process import USAirPollutionEmissionTrendsNationalAndState
-from common.unitest_common_methods import CommonTestClass
+from common.unitest_common_methods_test import CommonTestClass
 # pylint: enable=wrong-import-position
 
 
