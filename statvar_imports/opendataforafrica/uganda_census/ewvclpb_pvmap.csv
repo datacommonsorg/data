@@ -14,7 +14,7 @@
 "INDICATOR:KN.A51","measuredProperty","count","populationType","Student","schoolGradeLevel","SecondaryEducation","measurementDenominator","+populationType=ClassRoom,schoolGradeLevel=SecondaryEducation",,,,,
 "INDICATOR:KN.A80","measuredProperty","count","populationType","Student","schoolGradeLevel","PrimaryEducation","#Multiply","1000",,,,,,
 "INDICATOR:KN.A84","measuredProperty","count","populationType","School","schoolGradeLevel","PrimaryEducation",,,,,,,,,,
-"INDICATOR:KN.A85","measuredProperty","count","populationType","Teacher","enrollmentLevel","PrimaryEducation","#Multiply","1000",,,,,,
+"INDICATOR:KN.A85","measuredProperty","count","populationType","Teacher","schoolGradeLevel","PrimaryEducation","#Multiply","1000",,,,,,
 "INDICATOR:KN.A86","measuredProperty","count","populationType","ClassRoom","schoolGradeLevel","PrimaryEducation",,,,,,,,,,
 "INDICATOR:KN.A88","measuredProperty","count","populationType","Student","schoolGradeLevel","PrimaryEducation","age","[6 12 Years]","#Multiply","1000",,,,
 "INDICATOR:KN.A148","measuredProperty","count","populationType","Student","schoolGradeLevel","SecondaryEducation","#Multiply","1000",,,,,,
