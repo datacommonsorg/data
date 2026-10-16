@@ -36,7 +36,7 @@
 The import processes 4 tables from UBOS Open Data:
 
 1. `fidjrwf`: Uganda Regional Population Statistics (1969 – 2016)
-2. `ewvclpb`: Uganda Regional Education Statistics (2007 – 2016)
+2. `ewvclpb`: Uganda Regional Education Statistics (2011 – 2016)
 3. `yvitjl`: Uganda Regional Health Statistics Database (2005 – 2016)
 4. `qiubrhc`: Uganda Census Populations by District (1980, 1991, 2002, 2014)
 
@@ -59,6 +59,9 @@ During scheduled import runs, the automated pipeline executes:
 1. **Download (`download.sh`)**: Stages `qiubrhc_places.mcf` to `output/` and fetches staged CSV files into `input_files/`.
 2. **Transform (`stat_var_processor.py`)**: Runs each of the 4 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
 3. **Validation**: Validates data freshness, record deletion thresholds, and schema lint rules.
+
+### 4.3 Refresh Schedule
+The automated pipeline executes on a quarterly schedule (`0 5 1 1,4,7,10 *` - at 05:00 UTC on the 1st of January, April, July, and October) via Cloud Batch / GCP Cloud Run.
 
 ## 5. Running the Data Processor
 
@@ -110,7 +113,13 @@ Run `stat_var_processor.py` using repo-relative paths from the repository root:
 
 ### 6.1 Unit Tests
 
-Run the hermetic unit tests for the XML conversion routine:
+Run the hermetic unit tests via `run_tests.sh`:
+
+```bash
+./run_tests.sh -p statvar_imports/opendataforafrica/uganda_census
+```
+
+Or via `unittest`:
 
 ```bash
 .env/bin/python -m unittest statvar_imports/opendataforafrica/uganda_census/convert_sdmx_xml_to_csv_test.py
@@ -119,6 +128,6 @@ Run the hermetic unit tests for the XML conversion routine:
 ### 6.2 Pre-Submission Validation Rules
 
 The import configuration in `validation_config.json` enforces:
-- Freshness checks ensuring active observations across StatVars (`MaxDate >= '2002'`).
-- Record retention limits between import versions (`threshold: 0.1`).
-- Base validation checks for lint errors and reference resolution.
+- `check_all_statvars_freshness`: `SQL_VALIDATOR` freshness check ensuring all active StatVars meet the freshness boundary (`MaxDate >= '2002'`).
+- `check_lint_error_count`: `LINT_ERROR_COUNT` enforcing zero schema and data lint errors (`threshold: 0`).
+- `check_deleted_records_percent`: `DELETED_RECORDS_PERCENT` ensuring deleted records do not exceed `0.1%` (`threshold: 0.1`).
