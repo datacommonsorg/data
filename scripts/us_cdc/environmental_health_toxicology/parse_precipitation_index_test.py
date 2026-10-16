@@ -20,11 +20,17 @@ Description: This script contains unit tests for the parse_precipitation_index.p
 python3 parse_precipitation_index_test.py input_file output_file
 '''
 
-import unittest
 import os
-from .parse_precipitation_index import clean_precipitation_data
+import sys
+import unittest
 
 module_dir_ = os.path.dirname(__file__)
+sys.path.insert(0, module_dir_)
+
+try:
+    from .parse_precipitation_index import clean_precipitation_data
+except ImportError:
+    from parse_precipitation_index import clean_precipitation_data
 
 
 class TestParsePrecipitationData(unittest.TestCase):

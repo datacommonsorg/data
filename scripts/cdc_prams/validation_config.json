@@ -1,0 +1,29 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Verifies that lint errors remain within threshold",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "description": "Verifies that missing references remain within threshold",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        }
+    ]
+}
