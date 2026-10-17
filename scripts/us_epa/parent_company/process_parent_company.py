@@ -217,6 +217,10 @@ def _get_key_val_for_svobs(facility_id, stat_var, facility_comp_ownership,
             if (facility_id, dt) in facility_comp_ownership:
                 for company_id, percentage in facility_comp_ownership[(
                         facility_id, dt)].items():
+                    try:
+                        scaled_val = float(v) * float(percentage) / 100
+                    except (ValueError, TypeError):
+                        continue
                     key = (company_id, stat_var, observation_period, dt)
                     if key not in key_val:
                         key_val[key] = {}
@@ -226,7 +230,7 @@ def _get_key_val_for_svobs(facility_id, stat_var, facility_comp_ownership,
                             _SV_MEASURED: stat_var,
                             _OBSERVATION_PERIOD: observation_period,
                             _OBSERVATION_DATE: dt,
-                            _SVO_VAL: v * float(percentage) / 100
+                            _SVO_VAL: scaled_val
                         }
                     })
 
@@ -298,6 +302,24 @@ def process_companies(input_table_path, existing_facilities_file,
         facility_ids = set(
             pd.read_csv(existing_facilities_path)[_EPA_FACILITY_GHG_ID].values)
         input_table = os.path.join(input_table_path, _TABLE + ".csv")
+        if "testdata" not in input_table_path:
+            facility_cache = os.path.join(
+                _SCRIPT_PATH, "../facility/tmp_data/zcta_county_cache.json")
+            if os.path.exists(facility_cache):
+                fh.prefetch_county_candidates([], cache_file=facility_cache)
+            all_zctas = set()
+            with open(input_table, "r") as rfp:
+                for row in csv.DictReader(rfp):
+                    z = fh.v(_TABLE,
+                             row,
+                             "PARENT_CO_ZIP",
+                             table_prefix=_TABLE_PREFIX)[:5]
+                    if z:
+                        all_zctas.add("zip/" + z)
+            cache_file = os.path.join(input_table_path,
+                                      "zcta_county_cache.json")
+            fh.prefetch_county_candidates(all_zctas, cache_file=cache_file)
+
         rows_written = 0
         with open(input_table, "r") as rfp:
             cr = csv.DictReader(rfp)
@@ -320,7 +342,9 @@ def process_companies(input_table_path, existing_facilities_file,
                 company_name = company_name.replace("\"", "").replace("'", "")
 
                 company_id = fh.name_to_id(company_name)
-                assert company_id, str(in_row)
+                if not company_id:
+                    _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
+                    continue
 
                 # Replace the company_id with a duplicate mapping, if it exists.
                 if company_id in dupes:

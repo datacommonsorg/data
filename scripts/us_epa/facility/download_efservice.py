@@ -17,19 +17,64 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('epa_table_name', '', 'Name of table to download')
+flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
+                    'Name of table to download')
 flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
+_ORIS_CROSSWALK_URL = ('https://www.epa.gov/system/files/documents/2022-04/'
+                       'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
+_CROSSWALK_COLS = [
+    'GHGRP Facility ID',
+    'ORIS CODE',
+    'ORIS CODE 2',
+    'ORIS CODE 3',
+    'ORIS CODE 4',
+    'ORIS CODE 5',
+]
+
+
+def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
+    ssl._create_default_https_context = ssl._create_unverified_context
+    oris_df = pd.read_excel(
+        _ORIS_CROSSWALK_URL,
+        'ORIS Crosswalk',
+        header=0,
+        dtype=str,
+        usecols=_CROSSWALK_COLS,
+        engine='openpyxl').rename(columns={'GHGRP Facility ID': 'Facility Id'})
+    df = pd.read_csv(table_csv_path, dtype=str)
+    fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'
+    frs_col = 'frs_id' if 'frs_id' in df.columns else 'FRS_ID'
+    if fac_col in df.columns:
+        fac_df = pd.DataFrame({
+            'Facility Id': df[fac_col],
+            'FRS Id': df[frs_col] if frs_col in df.columns else '',
+        }).dropna(subset=['Facility Id']).drop_duplicates(
+            subset=['Facility Id'], keep='last')
+        merged = fac_df.merge(oris_df, how='left',
+                              on='Facility Id').drop_duplicates(
+                                  subset=['Facility Id'], keep='first')
+    else:
+        merged = oris_df.assign(**{'FRS Id': ''})[[
+            'Facility Id', 'FRS Id', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3',
+            'ORIS CODE 4', 'ORIS CODE 5'
+        ]].drop_duplicates(subset=['Facility Id'], keep='first')
+    merged.to_csv(crosswalk_csv_path, index=False)
 
 
 def main(_):
     assert FLAGS.epa_output_path
     assert FLAGS.epa_table_name
-    pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
+    pathlib.Path(FLAGS.epa_output_path).mkdir(parents=True, exist_ok=True)
     fh.download(_API_ROOT, FLAGS.epa_table_name, _MAX_ROWS,
                 FLAGS.epa_output_path)
+    table_csv_path = os.path.join(FLAGS.epa_output_path,
+                                  FLAGS.epa_table_name + '.csv')
+    crosswalk_path = os.path.join(FLAGS.epa_output_path, 'crosswalks.csv')
+    if not os.path.exists(crosswalk_path):
+        _generate_crosswalk(table_csv_path, crosswalk_path)
 
 
 if __name__ == '__main__':

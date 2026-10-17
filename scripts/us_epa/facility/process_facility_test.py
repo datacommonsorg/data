@@ -5,6 +5,8 @@ import tempfile
 import unittest
 from .process_facility import process
 from .process_facility import _COUNTERS
+from .process_facility import _extract_first_geojson
+from .process_facility import _parse_geojson_polygon
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -41,6 +43,43 @@ class ProcessTest(unittest.TestCase):
                     with open(os.path.join(_EXPECTED_DIR, fname)) as wantf:
                         want = wantf.read()
                         self.assertEqual(got, want)
+
+    def test_pub_dim_facility_dedup_and_format(self):
+        self.maxDiff = None
+        with tempfile.TemporaryDirectory(
+        ) as in_dir, tempfile.TemporaryDirectory() as out_dir:
+            with open(os.path.join(_RAW_DATA_DIR, 'crosswalks.csv')) as src, \
+                 open(os.path.join(in_dir, 'crosswalks.csv'), 'w') as dst:
+                dst.write(src.read())
+
+            pub_dim_csv = (
+                'facility_id,facility_name,address1,address2,city,state,state_name,'
+                'zip,county_fips,county,latitude,longitude,year,naics_code,frs_id\n'
+                '1000035,OLD NAME LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
+                '45331,39037,DARKE COUNTY,40.081111000000000,-84.591667000000000,2010,325193,110037615694\n'
+                '1000035,THE ANDERSONS MARATHON HOLDINGS LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
+                '45331,,DARKE COUNTY,40.081111000000000,-84.591667000000000,2016,325193,110037615694\n'
+            )
+            with open(os.path.join(in_dir, 'PUB_DIM_FACILITY.csv'), 'w') as fp:
+                fp.write(pub_dim_csv)
+
+            process(in_dir, out_dir)
+            with open(os.path.join(out_dir, 'us_epa_facility.csv')) as gotf:
+                lines = gotf.read().splitlines()
+            with open(os.path.join(_EXPECTED_DIR,
+                                   'us_epa_facility.csv')) as wantf:
+                want_lines = wantf.read().splitlines()
+            self.assertEqual(lines, want_lines[:2])
+
+    def test_multiple_geojson_values(self):
+        multi_val = (
+            '\'{"type": "Polygon", "coordinates": [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]]}\''
+            .replace("'", '"') + ',' +
+            '\'{"type": "Polygon", "coordinates": [[[2, 2], [2, 3], [3, 3], [3, 2], [2, 2]]]}\''
+            .replace("'", '"'))
+        gj = _extract_first_geojson(multi_val)
+        polygon = _parse_geojson_polygon(gj)
+        self.assertTrue(polygon.is_valid)
 
 
 if __name__ == '__main__':

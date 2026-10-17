@@ -21,6 +21,7 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
@@ -39,6 +40,8 @@ def download_existing_facilities(output_path: str) -> str:
     Path(output_path).mkdir(exist_ok=True)
     out_file = os.path.join(output_path, 'existing_facilities.csv')
 
+    logging.info(
+        'Fetching existing EpaReportingFacility nodes from Data Commons...')
     client = get_datacommons_client()
     response = client.node.fetch_property_values(
         node_dcids="EpaReportingFacility", properties="typeOf", out=False)
@@ -53,12 +56,16 @@ def download_existing_facilities(output_path: str) -> str:
         facility_ids_set.add(value)
         facility_ids.append(value)
 
+    logging.info(f'Found {len(facility_ids)} unique EpaReportingFacility DCIDs '
+                 f'(from {len(facility_nodes)} raw node entries).')
     df = pd.DataFrame.from_dict({"epaGhgrpFacilityId": facility_ids})
     df.to_csv(out_file, mode="w", header=True, index=False)
+    logging.info(f'Wrote existing facilities to {out_file}.')
     return out_file
 
 
 def main(_: list[str]) -> int:
+    logging.set_verbosity(logging.INFO)
     output_path = FLAGS.output_path
     if not output_path:
         raise ValueError("output_path is required.")

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Download the existing Facility dcids.
 python3 download_existing_facilities.py
