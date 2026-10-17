@@ -55,18 +55,14 @@ def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
-    col_map_path = os.path.join(output_dir, 'column_map.json')
-    with open(col_map_path, 'w') as f:
-        json.dump(generated_col_map, f, indent=4)
+    f = open(os.path.join(output_dir, 'column_map.json'), 'w')
+    json.dump(generated_col_map, f, indent=4)
+    f.close()
 
 
 def main(argv):
     ## get inputs from flags
     option = FLAGS.option.lower()
-    if option not in ['colmap', 'process', 'all']:
-        sys.exit(
-            f"Error: Invalid option '{option}'. Must be one of 'colmap', 'process', 'all'."
-        )
     table_prefix = FLAGS.table_prefix
     spec_path = FLAGS.spec_path
     input_path = FLAGS.input_path
@@ -106,7 +102,7 @@ def main(argv):
                                    delimiter='!!',
                                    has_percent=has_percent)
     else:
-        sys.exit("Error: At the moment, we support only zip files.")
+        print("At the moment, we support only zip files.")
 
 
 if __name__ == '__main__':
