@@ -27,6 +27,7 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for resolve_geo_id
 from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
+_COLUMN_BATCH_SIZE = 100
 
 # TODO: Consider using logs for logging warning messages for debug at a later
 # date
@@ -211,7 +212,6 @@ class SubjectTableDataLoaderBase:
         self.clean_csv_path = os.path.join(output_path_dir,
                                            f'./{table_id}_cleaned.csv')
         self.year_count = 0
-        self._dfs = []
         if os.path.exists(self.clean_csv_path):
             os.remove(self.clean_csv_path)
 
@@ -309,95 +309,96 @@ class SubjectTableDataLoaderBase:
         place_arr = place_geoIds.to_numpy()
         valid_place_mask = pd.notna(place_arr)
 
-        years_list = []
-        places_list = []
-        statvars_list = []
-        quantities_list = []
-        units_list = []
-        scaling_list = []
-        columns_list = []
-        write_header = (self.year_count == 0)
-
+        csv_file = open(self.clean_csv_path, 'a')
         # update the clean csv
-        for column in mapped_cols:
-            col_info = column_map[column]
-            # add unit to the csv
-            try:
-                unit = col_info['unit']
-                del col_info['unit']
-            except KeyError:
-                unit = np.nan
+        for batch_start in range(0, len(mapped_cols), _COLUMN_BATCH_SIZE):
+            batch_cols = mapped_cols[batch_start:batch_start +
+                                     _COLUMN_BATCH_SIZE]
+            years_list = []
+            places_list = []
+            statvars_list = []
+            quantities_list = []
+            units_list = []
+            scaling_list = []
+            columns_list = []
+            write_header = (self.year_count == 0)
 
-            # add scaling factor to the csv
-            try:
-                scalingFactor = col_info['scalingFactor']
-                del col_info['scalingFactor']
-            except KeyError:
-                scalingFactor = np.nan
+            for column in batch_cols:
+                col_info = column_map[column]
+                # add unit to the csv
+                try:
+                    unit = col_info['unit']
+                    del col_info['unit']
+                except KeyError:
+                    unit = np.nan
 
-            # if StatVar not in mcf_dict, add dcid
-            dcid = col_info['Node']
+                # add scaling factor to the csv
+                try:
+                    scalingFactor = col_info['scalingFactor']
+                    del col_info['scalingFactor']
+                except KeyError:
+                    scalingFactor = np.nan
 
-            if dcid not in self.mcf_dict:
-                ## key --> node dcid
-                self.mcf_dict[dcid] = {}
-                ## add pvs to dict
-                for key, value in col_info.items():
-                    if key != 'Node':
-                        self.mcf_dict[dcid][key] = value
+                # if StatVar not in mcf_dict, add dcid
+                dcid = col_info['Node']
 
-            col_vals = df[column].to_numpy()
-            # Drop rows with observations for empty (null) values
-            valid_mask = valid_place_mask & pd.notna(col_vals)
-            n_obs = int(valid_mask.sum())
+                if dcid not in self.mcf_dict:
+                    ## key --> node dcid
+                    self.mcf_dict[dcid] = {}
+                    ## add pvs to dict
+                    for key, value in col_info.items():
+                        if key != 'Node':
+                            self.mcf_dict[dcid][key] = value
 
-            if n_obs > 0:
-                valid_places = place_arr[valid_mask]
-                places_list.extend(valid_places.tolist())
-                statvars_list.extend([dcid] * n_obs)
-                quantities_list.extend(col_vals[valid_mask].tolist())
-                units_list.extend([unit] * n_obs)
-                scaling_list.extend([scalingFactor] * n_obs)
-                years_list.extend([year] * n_obs)
-                columns_list.extend([column] * n_obs)
-                n_unique_geos = len(pd.unique(valid_places))
-                n_unique_sv = 1
+                col_vals = df[column].to_numpy()
+                # Drop rows with observations for empty (null) values
+                valid_mask = valid_place_mask & pd.notna(col_vals)
+                n_obs = int(valid_mask.sum())
+
+                if n_obs > 0:
+                    valid_places = place_arr[valid_mask]
+                    places_list.extend(valid_places.tolist())
+                    statvars_list.extend([dcid] * n_obs)
+                    quantities_list.extend(col_vals[valid_mask].tolist())
+                    units_list.extend([unit] * n_obs)
+                    scaling_list.extend([scalingFactor] * n_obs)
+                    years_list.extend([year] * n_obs)
+                    columns_list.extend([column] * n_obs)
+                    n_unique_geos = len(pd.unique(valid_places))
+                    n_unique_sv = 1
+                else:
+                    n_unique_geos = 0
+                    n_unique_sv = 0
+
+                self.year_count += 1
+
+                # update stats for the year:
+                self.counter_dict[year]["number of unique geos"] = n_unique_geos
+                self.counter_dict[year]["number of observations"] += n_obs
+                self.counter_dict[year][
+                    "number of unique StatVars with observations"] += n_unique_sv
+                self.counter_dict[year]["number of StatVars in mcf_dict"] = len(
+                    list(self.mcf_dict.keys()))
+
+            obs_df = pd.DataFrame(
+                {
+                    'Year': years_list,
+                    'Place': places_list,
+                    'StatVar': statvars_list,
+                    'Quantity': pd.Series(quantities_list, dtype=object),
+                    'Unit': units_list,
+                    'ScalingFactor': scaling_list,
+                    'Column': columns_list,
+                },
+                columns=self.csv_columns)
+
+            # Write the processed observations to the clean_csv
+            if write_header:
+                obs_df.to_csv(csv_file, header=True, index=False, mode='w')
             else:
-                n_unique_geos = 0
-                n_unique_sv = 0
-
-            self.year_count += 1
-
-            # update stats for the year:
-            self.counter_dict[year]["number of unique geos"] = n_unique_geos
-            self.counter_dict[year]["number of observations"] += n_obs
-            self.counter_dict[year][
-                "number of unique StatVars with observations"] += n_unique_sv
-            self.counter_dict[year]["number of StatVars in mcf_dict"] = len(
-                list(self.mcf_dict.keys()))
-
-        obs_df = pd.DataFrame(
-            {
-                'Year': years_list,
-                'Place': places_list,
-                'StatVar': statvars_list,
-                'Quantity': pd.Series(quantities_list, dtype=object),
-                'Unit': units_list,
-                'ScalingFactor': scaling_list,
-                'Column': columns_list,
-            },
-            columns=self.csv_columns)
-
-        if not hasattr(self, '_dfs'):
-            self._dfs = []
-        self._dfs.append(obs_df)
-
-        # Write the processed observations to the clean_csv
-        if mapped_cols:
-            obs_df.to_csv(self.clean_csv_path,
-                          header=write_header,
-                          index=False,
-                          mode='w' if write_header else 'a')
+                obs_df.to_csv(csv_file, header=False, index=False, mode='a')
+            del obs_df, years_list, places_list, statvars_list, quantities_list, units_list, scaling_list, columns_list
+        csv_file.close()
 
         logging.info(
             f"""Completed with { self.counter_dict[year]['number of observations'] }
@@ -430,19 +431,7 @@ class SubjectTableDataLoaderBase:
 
     def _generate_tmcf_from_clean_csv(self):
         """update the base tmcf template based on the clean_csv"""
-        if getattr(self, '_dfs', None):
-            clean_csv = pd.concat(self._dfs, ignore_index=True)
-            if not clean_csv.empty:
-                for col in ['Quantity', 'ScalingFactor']:
-                    try:
-                        clean_csv[col] = pd.to_numeric(clean_csv[col])
-                    except (ValueError, TypeError):
-                        pass
-        elif os.path.exists(self.clean_csv_path):
-            clean_csv = pd.read_csv(self.clean_csv_path, low_memory=False)
-        else:
-            clean_csv = pd.DataFrame(columns=self.csv_columns)
-
+        clean_csv = pd.read_csv(self.clean_csv_path, low_memory=False)
         empty_cols = [
             col for col in clean_csv.columns if clean_csv[col].isnull().all()
         ]
@@ -460,10 +449,10 @@ class SubjectTableDataLoaderBase:
         ## write into the output tmcf
         tmcf_contents = '\n'.join(tmcf_contents)
         if not self.debug:
-            clean_csv.drop(columns=['Column'], inplace=True, errors='ignore')
+            clean_csv.drop(columns=['Column'], inplace=True)
 
         ## update the csv by dropping empty column
-        clean_csv.drop(columns=empty_cols, inplace=True, errors='ignore')
+        clean_csv.drop(columns=empty_cols, inplace=True)
         clean_csv.to_csv(self.clean_csv_path, index=False)
         return tmcf_contents
 
