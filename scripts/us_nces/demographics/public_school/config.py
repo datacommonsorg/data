@@ -33,7 +33,7 @@ POSSIBLE_DATA_COLUMNS = [
 ]
 # Excluding the unwanted columns.
 EXCLUDE_DATA_COLUMNS = [
-    'Migrant Students', '(Includes AE)',
+    'Migrant Students', r'\(Includes AE\)',
     'Total Students - Calculated Sum of Reported Grade Totals', 'Unknown',
     'unknown', 'Total Race/Ethnicity', 'Agency ID - NCES Assigned'
 ]
