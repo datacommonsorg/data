@@ -1,0 +1,26 @@
+[
+  {
+    "Award ID": "EDA-SAMPLE-001",
+    "generated_internal_id": "ASST_NON_EDA_001",
+    "Place of Performance State Code": "AL",
+    "CFDA Number": "11.300",
+    "Start Date": "2022-10-15",
+    "Award Amount": 100000.0
+  },
+  {
+    "Award ID": "EDA-SAMPLE-002",
+    "generated_internal_id": "ASST_NON_EDA_002",
+    "Place of Performance State Code": "AL",
+    "CFDA Number": "11.307",
+    "Start Date": "2023-03-10",
+    "Award Amount": 50000.0
+  },
+  {
+    "Award ID": "EDA-SAMPLE-003",
+    "generated_internal_id": "ASST_NON_EDA_003",
+    "Place of Performance State Code": "CA",
+    "CFDA Number": "11.039",
+    "Start Date": "2023-11-01",
+    "Award Amount": 250000.0
+  }
+]
