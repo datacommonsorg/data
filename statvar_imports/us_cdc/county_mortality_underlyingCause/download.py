@@ -11,14 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Automated live downloader for CDC WONDER County-Level Mortality Data (D158).
+"""Automated live downloader for CDC WONDER County-Level Mortality Data.
 
-This script automates downloading county-level mortality statistics across all
-causes of death (ICD-10 113 Cause List) from CDC WONDER (Database D158:
-Underlying Cause of Death).
+This script prepares county-level mortality statistics across all causes of
+death (ICD-10 113 Cause List) from 1999 to present:
+- 1999-2017 historical data is copied from GCS:
+  gs://unresolved_mcf/cdc/UnderlyingCause/county_mortality_underlyingCause/input_files
+- 2018-present data is downloaded live from CDC WONDER (Database D158:
+  Underlying Cause of Death).
 
 Data is broken down by:
-- Year (2018 to 2024, or specified range)
+- Year (1999 to 2024, or specified range)
 - County (all US counties across 50 states + DC)
 - ICD-10 113 Cause List (all diseases/causes)
 
@@ -32,12 +35,14 @@ import datetime
 import io
 import os
 from pathlib import Path
+import re
 import time
 from typing import List, Optional, Tuple
 from urllib.parse import urljoin
 
 from absl import app, flags, logging
 from bs4 import BeautifulSoup
+from google.cloud import storage
 import requests
 from requests.adapters import HTTPAdapter
 from retry import retry
@@ -45,6 +50,12 @@ from urllib3.util import Retry
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_INPUT_DIR = os.path.join(script_dir, "input_files")
+
+GCS_BUCKET_NAME = "unresolved_mcf"
+GCS_HISTORICAL_PREFIX = (
+    "cdc/UnderlyingCause/county_mortality_underlyingCause/input_files"
+)
+HISTORICAL_1999_2017_FILENAME = "UnderlyingCauseofDeath_County_1999_2017.csv"
 
 # Mapping of 2-digit FIPS codes to US State / Territory names
 US_STATES = {
@@ -101,33 +112,44 @@ US_STATES = {
     "56": "Wyoming",
 }
 
-# High-population states that exceed CDC WONDER's row and memory limits when queried across 7 years.
-# Querying directly in 2-year chunks prevents query buffer overruns and HTTP 400 errors.
+# High-population or large-county-count states that exceed CDC WONDER's row, memory, or gateway
+# timeout limits when queried across 7 years. Querying directly in 2-year chunks prevents query
+# buffer overruns, HTTP 400 errors, and HTTP 504 Gateway Timeouts.
 LARGE_STATES: set[str] = {
     "01",
     "05",
     "06",
+    "08",
     "12",
     "13",
+    "16",
     "17",
     "18",
+    "19",
+    "20",
     "21",
     "22",
+    "24",
     "26",
     "27",
     "28",
     "29",
+    "30",
+    "31",
     "34",
     "36",
     "37",
     "39",
     "40",
+    "41",
     "42",
     "45",
+    "46",
     "47",
     "48",
     "51",
     "53",
+    "54",
     "55",
 }
 
@@ -489,7 +511,9 @@ class CdcWonderCountyMortalityDownloader:
                 state_name,
             )
             try:
-                tsv_text = self.execute_query(state_fips, years)
+                tsv_text = self.execute_query(state_fips,
+                                              years,
+                                              max_retries=1)
                 first_line = tsv_text.splitlines()[0] if tsv_text else ""
                 if "County Code" in first_line:
                     results.append(("all", tsv_text))
@@ -620,12 +644,70 @@ def _has_data_rows(file_path: Path) -> bool:
         return False
 
 
+def _get_state_csv_files(output_dir: str, state_fips: str) -> List[Path]:
+    """Returns CSV files in output_dir belonging to a specific 2-digit state FIPS."""
+    base_dir = Path(output_dir)
+    exact_name = f"UnderlyingCauseofDeath_County_{state_fips}.csv"
+    chunk_prefix = f"UnderlyingCauseofDeath_County_{state_fips}_"
+    return sorted([
+        p
+        for p in base_dir.glob(f"UnderlyingCauseofDeath_County_{state_fips}*.csv")
+        if p.name != HISTORICAL_1999_2017_FILENAME
+        and (p.name == exact_name or p.name.startswith(chunk_prefix))
+    ])
+
+
+@retry(tries=3, delay=5, backoff=2)
+def copy_historical_data_from_gcs(
+    output_dir: str,
+    gcs_bucket: str = GCS_BUCKET_NAME,
+    gcs_prefix: str = GCS_HISTORICAL_PREFIX,
+    skip_existing: bool = True,
+) -> str:
+    """Copies the 1999-2017 historical mortality CSV file from GCS to output_dir."""
+    os.makedirs(output_dir, exist_ok=True)
+    dest_path = Path(output_dir) / HISTORICAL_1999_2017_FILENAME
+    if skip_existing and _has_data_rows(dest_path):
+        logging.info(
+            "Skipping GCS copy for 1999-2017 data: %s already exists in %s.",
+            HISTORICAL_1999_2017_FILENAME,
+            output_dir,
+        )
+        return str(dest_path)
+
+    prefix = gcs_prefix.rstrip("/")
+    blob_path = f"{prefix}/{HISTORICAL_1999_2017_FILENAME}"
+    logging.info(
+        "Copying 1999-2017 historical data from gs://%s/%s to %s...",
+        gcs_bucket,
+        blob_path,
+        dest_path,
+    )
+    temp_path = Path(f"{dest_path}.tmp")
+    try:
+        client = storage.Client()
+        bucket = client.bucket(gcs_bucket)
+        blob = bucket.blob(blob_path)
+        blob.download_to_filename(str(temp_path), timeout=300)
+        if not _has_data_rows(temp_path):
+            raise ValueError(
+                f"Downloaded GCS file gs://{gcs_bucket}/{blob_path} contains no observation data."
+            )
+        os.replace(temp_path, dest_path)
+    except Exception:
+        if temp_path.exists():
+            temp_path.unlink()
+        raise
+
+    logging.info("Copied gs://%s/%s -> %s", gcs_bucket, blob_path, dest_path)
+    return str(dest_path)
+
+
 def is_state_downloaded(output_dir: str,
                         state_fips: str,
                         years: Optional[List[str]] = None) -> bool:
     """Checks if valid non-empty CSV files for this state already exist covering requested years."""
-    pattern = f"UnderlyingCauseofDeath_County_{state_fips}*.csv"
-    matches = list(Path(output_dir).glob(pattern))
+    matches = _get_state_csv_files(output_dir, state_fips)
     if not matches:
         return False
 
@@ -668,10 +750,18 @@ def is_state_downloaded(output_dir: str,
         for f in matches:
             if f.name == single_file.name:
                 continue
-            if (f"_{y}.csv" in f.name or
-                    f"_{y}_" in f.name) and _has_data_rows(f):
+            if not _has_data_rows(f):
+                continue
+            if f"_{y}.csv" in f.name or f"_{y}_" in f.name:
                 year_covered = True
                 break
+            range_match = re.search(r"_(\d{4})_(\d{4})\.csv$", f.name)
+            if range_match and y.isdigit():
+                start_yr, end_yr = int(range_match.group(1)), int(
+                    range_match.group(2))
+                if start_yr <= int(y) <= end_yr:
+                    year_covered = True
+                    break
         if not year_covered:
             return False
     return True
@@ -688,9 +778,7 @@ def _should_skip_state(
     """Checks if state files already exist on disk and logs skip message."""
     if not is_state_downloaded(output_dir, state_fips, years=years):
         return False
-    existing_files = list(
-        Path(output_dir).glob(
-            f"UnderlyingCauseofDeath_County_{state_fips}*.csv"))
+    existing_files = _get_state_csv_files(output_dir, state_fips)
     logging.info(
         "[%d/%d] Skipping %s (FIPS %s): %d existing file(s) found.",
         idx,
@@ -711,9 +799,15 @@ def download_county_mortality_data(
     skip_existing: bool = True,
     batch_size: int = 10,
     batch_cooldown: float = 20.0,
+    copy_historical: bool = True,
 ):
     """Downloads CDC County Mortality data for specified states and years."""
     os.makedirs(output_dir, exist_ok=True)
+    if copy_historical:
+        copy_historical_data_from_gcs(
+            output_dir=output_dir, skip_existing=skip_existing
+        )
+
     downloader = CdcWonderCountyMortalityDownloader(timeout=timeout,
                                                     delay=delay)
 
@@ -749,8 +843,7 @@ def download_county_mortality_data(
 
         # Remove any existing/stale chunk or combined files for this state before re-downloading
         # to prevent duplicate ingestion by stat_var_processor (which globs input_files/*.csv).
-        for stale_file in Path(output_dir).glob(
-                f"UnderlyingCauseofDeath_County_{state_fips}*.csv"):
+        for stale_file in _get_state_csv_files(output_dir, state_fips):
             try:
                 stale_file.unlink()
             except OSError as e:

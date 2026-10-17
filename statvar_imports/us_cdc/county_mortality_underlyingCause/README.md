@@ -3,11 +3,12 @@
 This import acquires and processes county-level mortality statistics across all causes of death (ICD-10 113 Cause List) for all 50 US States and Washington D.C. from the CDC WONDER database.
 
 - **Import Name**: `CDC_Mortality_UnderlyingCause_County`
-- **Source Database**: CDC WONDER Underlying Cause of Death (Database D158)
-- **Source URL**: `https://wonder.cdc.gov/ucd-icd10-expanded.html`
-- **Geographic Granularity**: County level (all ~3,143 US counties across all states)
-- **Temporal Coverage**: 2018 to 2024 (P1Y frequency)
-- **Cause Coverage**: All diseases in the ICD-10 113 Cause List (e.g. Septicemia, Diabetes Mellitus, Major Cardiovascular Diseases, Alzheimer's, Malignant Neoplasms, Respiratory Diseases, etc.)
+- **Source Databases**:
+  - **1999–2017 (Static Historical)**: Pre-downloaded from CDC WONDER Database `D76` and stored in GCS at `gs://unresolved_mcf/cdc/UnderlyingCause/county_mortality_underlyingCause/input_files/UnderlyingCauseofDeath_County_1999_2017.csv`
+  - **2018–Present (Live)**: CDC WONDER Underlying Cause of Death (Database `D158`: `https://wonder.cdc.gov/ucd-icd10-expanded.html`)
+- **Geographic Granularity**: County level (all ~3,147 US counties across all states)
+- **Temporal Coverage**: 1999 to 2024 (P1Y frequency)
+- **Cause Coverage**: All diseases in the ICD-10 113 Cause List (123 unique StatVars across 1999–2024, e.g. Septicemia, Diabetes Mellitus, Major Cardiovascular Diseases, Alzheimer's, Malignant Neoplasms, Respiratory Diseases, etc.)
 
 ---
 
@@ -23,7 +24,7 @@ or with specific flags:
 ```bash
 python3 download.py --states=all --years=2018-2024 --output_dir=input_files
 ```
-The download script automatically handles CDC WONDER sessions, agreements, rate-limiting backoffs, and query partitioning.
+The download script copies the static `1999–2017` historical CSV from `gs://unresolved_mcf/cdc/UnderlyingCause/county_mortality_underlyingCause/input_files` into `input_files/` and then downloads `2018–present` data live from CDC WONDER (Database `D158`), automatically handling sessions, agreements, rate-limiting backoffs, and query partitioning.
 
 #### Step 2: Process Data into Cleaned SVObs and TMCF
 ```bash
@@ -44,6 +45,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 ### Operational Notes & Downloader Architecture
 
+* **Static Historical Copy (`1999–2017`)**: Because historical `1999–2017` data is frozen, `download.py` copies `UnderlyingCauseofDeath_County_1999_2017.csv` directly from `gs://unresolved_mcf/cdc/UnderlyingCause/county_mortality_underlyingCause/input_files` into `input_files/` in seconds, avoiding ~4.5 hours of live historical queries on recurring runs.
 * **Rate-Limit Handling (HTTP 429)**: CDC WONDER enforces a 30-minute IP block when query thresholds are exceeded. The downloader detects HTTP 429 responses, pauses in complete silence for 31 minutes (`1,860s`), and automatically refreshes the session before resuming. Do not terminate the process during this cooldown.
 * **Large State Partitioning**: High-population states (e.g. California `06`, Florida `12`, New York `36`, Texas `48`) exceed CDC WONDER's 75,000-row query cap when queried across all years at once. The downloader automatically queries these states in 2-year chunks (or 1-year chunks for Texas) to prevent HTTP 400 ("Too Much Data") and HTTP 504 timeouts.
 * **Stale Partition Cleanup**: When a state is re-downloaded, the downloader purges existing chunk and combined files for that state before writing new data, preventing duplicate observations when `stat_var_processor.py` processes `input_files/*.csv`.
@@ -57,8 +59,8 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 Validation is configured in `validation_config.json`:
 * `check_deleted_records_percent`: Strictly enforces a historical deletion average threshold of `0.1%`. Note that on the initial import run, this rule expectedly yields `DATA_ERROR` ("Differ summary is missing required field: 'previous_obs_count'") because there is no prior version to diff against; it is configured to safeguard future recurring refreshes. Per consensus on initial imports, golden regression files are omitted from initial submission.
 * `check_lint_error_count`: Enforces zero MCF lint errors (`threshold: 0`) in the generated output.
-* `check_max_date_freshness`: Enforces rolling date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 107`) across the 107 common cause-of-death StatVars (excluding the 11 rare causes) to ensure the latest published data is ingested relative to the annual publication lag.
-* `check_max_date_rare_causes`: Enforces a baseline floor check (`>= 2023` for the 2 rarest causes and `>= 2024` for the other 9 rare causes) for the 11 rare causes of death that may not appear in every future year due to CDC `<10` county death suppression.
+* `check_max_date_freshness`: Enforces rolling date freshness (`CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 107`) across the 107 common cause-of-death StatVars (excluding the 16 rare causes) to ensure the latest published data is ingested relative to the annual publication lag.
+* `check_max_date_rare_causes`: Enforces a baseline floor check (`>= 2000`, `>= 2001`, `>= 2004`, `>= 2023`, or `>= 2024` depending on the historical last-observed year) for the 16 rare causes of death that do not appear in every year due to CDC `<10` county death suppression.
 
 ---
 
@@ -66,8 +68,8 @@ Validation is configured in `validation_config.json`:
 
 | File | Description |
 |---|---|
-| `download.py` | Automated live CDC WONDER downloader, session manager, and query partitioner. |
-| `download_test.py` | Comprehensive unit test suite for download session management and error handling. |
+| `download.py` | Copies `1999–2017` historical CSV from GCS and downloads `2018–present` live from CDC WONDER (`D158`). |
+| `download_test.py` | Comprehensive unit test suite for GCS copy, download session management, and error handling. |
 | `county_mortality_metadata.csv` | Metadata specifying header row offsets, frequency, and output columns. |
 | `county_mortality_pvmap.csv` | Property-Value mapping resolving county FIPS and ICD-10 113 causes of death. |
 | `manifest.json` | Automation manifest declaring scripts, inputs/outputs, cron schedule, and validation config. |

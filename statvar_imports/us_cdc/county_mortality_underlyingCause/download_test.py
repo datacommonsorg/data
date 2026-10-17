@@ -127,7 +127,8 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0][0], "all")
         self.assertEqual(results[0][1], tsv_output)
-        mock_query.assert_called_once_with("10", ["2018", "2019"])
+        mock_query.assert_called_once_with("10", ["2018", "2019"],
+                                           max_retries=1)
 
     def test_save_tsv_as_csv(self):
         raw_tsv = ("Notes\tYear\tCounty\tCounty Code\tDeaths\n"
@@ -291,12 +292,13 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(len(results), 3)
         self.assertEqual([r[0] for r in results], ["2018", "2019", "2020"])
 
+    @mock.patch.object(download, "copy_historical_data_from_gcs")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
                        "init_session")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
                        "download_state")
     def test_download_county_mortality_data_continues_and_raises_on_failure(
-            self, mock_download, mock_init):
+            self, mock_download, mock_init, mock_copy_hist):
         with tempfile.TemporaryDirectory() as temp_dir:
 
             def side_effect(state_fips, years):
@@ -315,6 +317,8 @@ class DownloadTest(unittest.TestCase):
                     skip_existing=False,
                 )
 
+            mock_copy_hist.assert_called_once_with(output_dir=temp_dir,
+                                                   skip_existing=False)
             # Assert error message contains the failed state name
             self.assertIn("Delaware", str(ctx.exception))
             # Assert state 11 was still attempted and saved despite state 10 failure
@@ -322,12 +326,13 @@ class DownloadTest(unittest.TestCase):
                 temp_dir) / "UnderlyingCauseofDeath_County_11.csv"
             self.assertTrue(state_11_csv.exists())
 
+    @mock.patch.object(download, "copy_historical_data_from_gcs")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
                        "init_session")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
                        "download_state")
     def test_download_county_mortality_data_lazy_session_skipped(
-            self, mock_download, mock_init):
+            self, mock_download, mock_init, mock_copy_hist):
         with tempfile.TemporaryDirectory() as temp_dir:
             # Pre-populate state 10 so it is skipped
             f = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
@@ -341,16 +346,19 @@ class DownloadTest(unittest.TestCase):
                 skip_existing=True,
             )
 
+            mock_copy_hist.assert_called_once_with(output_dir=temp_dir,
+                                                   skip_existing=True)
             # Assert init_session was NOT called because all states were skipped
             mock_init.assert_not_called()
             mock_download.assert_not_called()
 
+    @mock.patch.object(download, "copy_historical_data_from_gcs")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
                        "init_session")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader,
                        "download_state")
     def test_download_county_mortality_data_purges_stale_files(
-            self, mock_download, mock_init):
+            self, mock_download, mock_init, mock_copy_hist):
         with tempfile.TemporaryDirectory() as temp_dir:
             # Pre-create an old chunk file that should be purged when re-downloading
             old_chunk = Path(
@@ -375,6 +383,62 @@ class DownloadTest(unittest.TestCase):
             combined_file = Path(
                 temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
             self.assertTrue(combined_file.exists())
+
+    @mock.patch.object(download.storage, "Client")
+    def test_copy_historical_data_from_gcs(self, mock_client_cls):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            mock_client = mock.MagicMock()
+            mock_client_cls.return_value = mock_client
+            mock_bucket = mock.MagicMock()
+            mock_client.bucket.return_value = mock_bucket
+
+            mock_blob = mock.MagicMock()
+            mock_bucket.blob.return_value = mock_blob
+
+            def fake_download(dest_filename, timeout=300):
+                Path(dest_filename).write_text(
+                    "Notes,Year,County Code,Deaths\n,1999,01001,15\n",
+                    encoding="utf-8",
+                )
+
+            mock_blob.download_to_filename.side_effect = fake_download
+
+            copied = download.copy_historical_data_from_gcs(
+                output_dir=temp_dir, skip_existing=True
+            )
+            hist_path = Path(temp_dir) / download.HISTORICAL_1999_2017_FILENAME
+            self.assertEqual(copied, str(hist_path))
+            self.assertTrue(hist_path.exists())
+            mock_bucket.blob.assert_called_once_with(
+                f"{download.GCS_HISTORICAL_PREFIX}/"
+                f"{download.HISTORICAL_1999_2017_FILENAME}"
+            )
+            mock_blob.download_to_filename.assert_called_once()
+
+            # Second call with skip_existing=True should skip without calling GCS
+            mock_client_cls.reset_mock()
+            copied_again = download.copy_historical_data_from_gcs(
+                output_dir=temp_dir, skip_existing=True
+            )
+            self.assertEqual(copied_again, str(hist_path))
+            mock_client_cls.assert_not_called()
+
+    def test_historical_file_does_not_collide_with_iowa_fips_19(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            hist_file = Path(temp_dir) / download.HISTORICAL_1999_2017_FILENAME
+            hist_file.write_text("Notes,Year,County,Deaths\n,1999,Polk,10\n")
+
+            # Having UnderlyingCauseofDeath_County_1999_2017.csv must not make FIPS 19 (Iowa) appear downloaded
+            self.assertFalse(
+                download.is_state_downloaded(temp_dir, "19", years=["2018"])
+            )
+
+            # Once Iowa's own file exists, both coexist without conflict
+            iowa_file = Path(temp_dir) / "UnderlyingCauseofDeath_County_19.csv"
+            iowa_file.write_text("Notes,Year,County,Deaths\n,2018,Polk,12\n")
+            self.assertTrue(
+                download.is_state_downloaded(temp_dir, "19", years=["2018"])
+            )
 
     def test_filter_available_years(self):
         downloader = download.CdcWonderCountyMortalityDownloader()
