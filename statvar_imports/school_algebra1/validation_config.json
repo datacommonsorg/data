@@ -1,12 +1,39 @@
 {
-    "schema_version": "1.0",
-    "rules": [
-        {
-            "rule_id": "check_missing_refs_count",
-            "validator": "MISSING_REFS_COUNT",
-            "params": {
-                "threshold": 457000
-            }
-        }
-    ]
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensure zero MCF lint errors in generated output",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verify MaxDate is within allowable 3-year publication lag for active CRDC Algebra 1 StatVars",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE NOT regexp_matches(StatVar, '_SchoolGrade[78]_')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 120"
+      }
+    },
+    {
+      "rule_id": "check_max_date_grade7_8",
+      "description": "Verify MaxDate is at least 2021 for historical single-grade (Grade 7 and Grade 8) CRDC Algebra 1 StatVars",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '_SchoolGrade[78]_')",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2021 AND total_svs >= 42"
+      }
+    }
+  ]
 }
