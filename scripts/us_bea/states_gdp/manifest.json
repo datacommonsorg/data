@@ -27,7 +27,8 @@
                     "template_mcf": "states_industry_gdp.tmcf"
                 }
             ],
-            "cron_schedule": "30 10 30 1,4,7,10,12 *"
+            "cron_schedule": "30 10 30 1,4,7,10,12 *",
+            "_comment": "Schedule: On day 30 of Jan, Apr, Jul, Oct, and Dec at 10:30 UTC (aligned with BEA quarterly GDP release)"
         }
     ]
 }

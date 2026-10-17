@@ -16,7 +16,8 @@
                     "cleaned_csv": "output/agriculture.csv"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "30 00 * * 5",
+            "_comment": "Schedule: Weekly on Friday at 00:30 UTC",
             "source_files": [
                 "input/*"
             ]

@@ -21,7 +21,8 @@
             "source_files": [
                 "CDC_StandardizedPrecipitationIndex_input.csv"
             ],
-            "cron_schedule": "0 11 1,15 * *"
+            "cron_schedule": "0 04 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 04:00 UTC"
         }
     ]
 }

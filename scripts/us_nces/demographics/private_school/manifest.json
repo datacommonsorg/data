@@ -25,6 +25,7 @@
                 }
             ],
             "cron_schedule": "30 3 1 3,6,9,12 *",
+            "_comment": "Schedule: Quarterly on day 1 of Mar, Jun, Sep, and Dec at 03:30 UTC (aligned with NCES quarterly release)",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,

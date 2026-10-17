@@ -20,7 +20,8 @@
                     "cleaned_csv": "output_files_school/output_*.csv"
                 }
             ],
-            "cron_schedule": "0 05 8,23 * *",
+            "cron_schedule": "30 09 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 09:30 UTC",
             "resource_limits": {
                 "cpu": 16,
                 "memory": 256,

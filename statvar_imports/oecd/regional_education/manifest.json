@@ -18,7 +18,8 @@
                     "cleaned_csv": "output/oecd_regional_education.csv"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "30 01 * * 2",
+            "_comment": "Schedule: Weekly on Tuesday at 01:30 UTC",
             "source_files": [
                 "gcs_output/source_files/*.csv"
             ]

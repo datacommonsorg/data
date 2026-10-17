@@ -19,7 +19,8 @@
             "source_files": [
                 "gs://unresolved_mcf/country/canada_statistics_age_gender/input_files/*.csv"
             ],
-            "cron_schedule": "30 5 1 *  *"
+            "cron_schedule": "30 06 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 06:30 UTC"
         }
     ]
 }

@@ -20,6 +20,7 @@
                 }
             ],
             "cron_schedule": "30 3 10 3,6,9,12 *",
+            "_comment": "Schedule: Quarterly on day 10 of Mar, Jun, Sep, and Dec at 03:30 UTC (aligned with USDA quarterly release)",
             "validation_config_file": "validation_config.json"
         }
     ]

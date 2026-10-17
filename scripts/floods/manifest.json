@@ -16,7 +16,8 @@
                     "cleaned_csv": ""
                 }
             ],
-            "cron_schedule": "0 5 1 * *"
+            "cron_schedule": "0 02 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 02:00 UTC"
         }
     ]
 }

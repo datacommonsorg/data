@@ -22,7 +22,8 @@
                     "cleaned_csv": "output/PRAMS.csv"
                 }
             ],
-            "cron_schedule": "0 0 1 * *",
+            "cron_schedule": "0 00 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 00:00 UTC",
             "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 1,
