@@ -14,9 +14,13 @@ import json
 #pylint: disable=import-error
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 from generate_col_map import process_zip_file
-from .process import S2303SubjectTableDataLoader
+try:
+    from .process import S2303SubjectTableDataLoader
+except ImportError:
+    from process import S2303SubjectTableDataLoader
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 
@@ -32,9 +36,8 @@ def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
-    f = open(os.path.join(output_dir, 'column_map.json'), 'w')
-    json.dump(generated_col_map, f, indent=4)
-    f.close()
+    with open(os.path.join(output_dir, 'column_map.json'), 'w') as f:
+        json.dump(generated_col_map, f, indent=4)
 
 
 class ProcessTest(unittest.TestCase):
