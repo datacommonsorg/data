@@ -21,7 +21,6 @@ main:
               "NOAA_GlobalForecastSystem": true
           - prodDenylist:
               "Brazil_RuralDevelopmentProgram": true
-              "CDC500": true
               "CDC_OzoneCounty": true
               "CDC_PM25County": true
               "CensusCountyBusinessPatterns": true
