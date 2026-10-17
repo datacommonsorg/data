@@ -1,0 +1,34 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "OpportunityInsightsOutcomes",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://opportunityinsights.org/data/",
+            "provenance_description": "The Opportunity Atlas (Opportunity Insights) social and economic mobility outcomes by childhood commuting zone, county, and census tract across birth cohorts.",
+            "scripts": [
+                "download.py",
+                "preprocess.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/*_cleaned.csv' --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/output --output_counters=counters/output_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/output.tmcf",
+                    "cleaned_csv": "output/output*.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "source_files": [
+                "raw_data/*.csv",
+                "counters/output_counters.csv"
+            ],
+            "cron_schedule": "0 8 1 * *",
+            "resource_limits": {
+                "cpu": 32,
+                "memory": 512,
+                "disk": 400
+            }
+        }
+    ]
+}
