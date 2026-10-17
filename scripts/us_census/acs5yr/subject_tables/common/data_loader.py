@@ -211,6 +211,7 @@ class SubjectTableDataLoaderBase:
         self.clean_csv_path = os.path.join(output_path_dir,
                                            f'./{table_id}_cleaned.csv')
         self.year_count = 0
+        self._dfs = []
         if os.path.exists(self.clean_csv_path):
             os.remove(self.clean_csv_path)
 
@@ -218,19 +219,27 @@ class SubjectTableDataLoaderBase:
         """utility to convert percent to numbers"""
         # TODO: Currently this function expects full names for function, which
         # makes the spec long, perhaps we can add support for tokens
-        df_columns = df.columns.tolist()
+        df_columns = set(df.columns)
+        cols_dict = {col: df[col].to_numpy() for col in df.columns}
+        modified = False
         for count_col, percent_col_list in self.json_spec['denominators'].items(
         ):
             # TODO: add a warning message
             if count_col in df_columns:
-                for col in percent_col_list:
-                    if col in df_columns:
-                        df[col] = df[col].astype(float)
-                        df[count_col] = df[count_col].astype(float)
-                        df[col] = (df[col] / 100) * df[count_col]
-                        df[col] = df[col].round(
-                            3
+                valid_pct_cols = [
+                    col for col in percent_col_list if col in df_columns
+                ]
+                if valid_pct_cols:
+                    count_vals = cols_dict[count_col].astype(float)
+                    cols_dict[count_col] = count_vals
+                    for col in valid_pct_cols:
+                        cols_dict[col] = np.round(
+                            (cols_dict[col].astype(float) / 100) * count_vals,
+                            self.decimal_places
                         )  # TODO: replace with parameter self.decimal_places
+                    modified = True
+        if modified:
+            df = pd.DataFrame(cols_dict, index=df.index)
         return df
 
     def _get_summary(self):
@@ -250,21 +259,15 @@ class SubjectTableDataLoaderBase:
         Replaces cells of the dataframe by column with nan if cell has values in
         _IGNORED_VALUES.
         """
-        for col in df.columns.tolist():
-            df[col] = df[col].apply(lambda row: np.nan
-                                    if row in _IGNORED_VALUES else row)
+        str_cols = df.select_dtypes(include=['object', 'string']).columns
+        if len(str_cols) > 0 and not df.empty:
+            df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
         return df
 
     def _process_dataframe(self, df, filename):
         """processes a dataframe read from a csv file"""
-        df = self._replace_ignore_values_with_nan(
-            df)  #handle the values to be ignored
         year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
         logging.info(f"Processing: {filename}")
-        # if has_percent is set, convert percentages to counts. Requires the
-        # 'denominators' key to be specified in the spec
-        if self.has_percent:
-            df = self._convert_percent_to_numbers(df)
 
         # if column map is not available generate, will rarely be False
         column_map = self.column_map[year]
@@ -285,79 +288,121 @@ class SubjectTableDataLoaderBase:
                 0,
         }
 
-        csv_file = open(self.clean_csv_path, 'a')
+        mapped_cols = [col for col in df.columns.tolist() if col in column_map]
+        if mapped_cols:
+            df = df.dropna(subset=mapped_cols, how='all').copy()
+
+        df = self._replace_ignore_values_with_nan(
+            df)  #handle the values to be ignored
+        # if has_percent is set, convert percentages to counts. Requires the
+        # 'denominators' key to be specified in the spec
+        if self.has_percent:
+            df = self._convert_percent_to_numbers(df)
+
         if 'id' in df.columns:
             place_geoIds = df['id'].apply(convert_to_place_dcid)
         else:
             place_geoIds = df['Geography'].apply(convert_to_place_dcid)
 
+        # Replace empty places (unresolved geoIds) as null values
+        place_geoIds = place_geoIds.replace('', np.nan)
+        place_arr = place_geoIds.to_numpy()
+        valid_place_mask = pd.notna(place_arr)
+
+        years_list = []
+        places_list = []
+        statvars_list = []
+        quantities_list = []
+        units_list = []
+        scaling_list = []
+        columns_list = []
+        write_header = (self.year_count == 0)
+
         # update the clean csv
-        for column in df.columns.tolist():
-            if column in column_map:
-                obs_df = pd.DataFrame(columns=self.csv_columns)
-                obs_df['Place'] = place_geoIds
-                obs_df['StatVar'] = column_map[column]['Node']
-                obs_df['Quantity'] = df[column].values.tolist()
-                # add unit to the csv
-                try:
-                    unit = column_map[column]['unit']
-                    del column_map[column]['unit']
-                except KeyError:
-                    unit = np.nan
-                obs_df['Unit'] = unit
+        for column in mapped_cols:
+            col_info = column_map[column]
+            # add unit to the csv
+            try:
+                unit = col_info['unit']
+                del col_info['unit']
+            except KeyError:
+                unit = np.nan
 
-                # add scaling factor to the csv
-                try:
-                    scalingFactor = column_map[column]['scalingFactor']
-                    del column_map[column]['scalingFactor']
-                except KeyError:
-                    scalingFactor = np.nan
-                obs_df['ScalingFactor'] = scalingFactor
+            # add scaling factor to the csv
+            try:
+                scalingFactor = col_info['scalingFactor']
+                del col_info['scalingFactor']
+            except KeyError:
+                scalingFactor = np.nan
 
-                # if StatVar not in mcf_dict, add dcid
-                dcid = column_map[column]['Node']
+            # if StatVar not in mcf_dict, add dcid
+            dcid = col_info['Node']
 
-                if dcid not in self.mcf_dict:
-                    ## key --> node dcid
-                    self.mcf_dict[dcid] = {}
-                    ## add pvs to dict
-                    for key, value in column_map[column].items():
-                        if key != 'Node':
-                            self.mcf_dict[dcid][key] = value
+            if dcid not in self.mcf_dict:
+                ## key --> node dcid
+                self.mcf_dict[dcid] = {}
+                ## add pvs to dict
+                for key, value in col_info.items():
+                    if key != 'Node':
+                        self.mcf_dict[dcid][key] = value
 
-                obs_df['Year'] = year
-                obs_df['Column'] = column
+            col_vals = df[column].to_numpy()
+            # Drop rows with observations for empty (null) values
+            valid_mask = valid_place_mask & pd.notna(col_vals)
+            n_obs = int(valid_mask.sum())
 
-                # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
+            if n_obs > 0:
+                valid_places = place_arr[valid_mask]
+                places_list.extend(valid_places.tolist())
+                statvars_list.extend([dcid] * n_obs)
+                quantities_list.extend(col_vals[valid_mask].tolist())
+                units_list.extend([unit] * n_obs)
+                scaling_list.extend([scalingFactor] * n_obs)
+                years_list.extend([year] * n_obs)
+                columns_list.extend([column] * n_obs)
+                n_unique_geos = len(pd.unique(valid_places))
+                n_unique_sv = 1
+            else:
+                n_unique_geos = 0
+                n_unique_sv = 0
 
-                # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
+            self.year_count += 1
 
-                # Write the processed observations to the clean_csv
-                if self.year_count == 0:
-                    obs_df.to_csv(csv_file, header=True, index=False, mode='w')
-                else:
-                    obs_df.to_csv(csv_file, header=False, index=False, mode='a')
-                self.year_count += 1
+            # update stats for the year:
+            self.counter_dict[year]["number of unique geos"] = n_unique_geos
+            self.counter_dict[year]["number of observations"] += n_obs
+            self.counter_dict[year][
+                "number of unique StatVars with observations"] += n_unique_sv
+            self.counter_dict[year]["number of StatVars in mcf_dict"] = len(
+                list(self.mcf_dict.keys()))
 
-                # update stats for the year:
-                self.counter_dict[year]["number of unique geos"] = len(
-                    obs_df['Place'].unique())
-                self.counter_dict[year][
-                    "number of observations"] += obs_df.shape[0]
-                self.counter_dict[year][
-                    "number of unique StatVars with observations"] += len(
-                        obs_df['StatVar'].unique())
-                self.counter_dict[year]["number of StatVars in mcf_dict"] = len(
-                    list(self.mcf_dict.keys()))
-        csv_file.close()
+        obs_df = pd.DataFrame(
+            {
+                'Year': years_list,
+                'Place': places_list,
+                'StatVar': statvars_list,
+                'Quantity': pd.Series(quantities_list, dtype=object),
+                'Unit': units_list,
+                'ScalingFactor': scaling_list,
+                'Column': columns_list,
+            },
+            columns=self.csv_columns)
+
+        if not hasattr(self, '_dfs'):
+            self._dfs = []
+        self._dfs.append(obs_df)
+
+        # Write the processed observations to the clean_csv
+        if mapped_cols:
+            obs_df.to_csv(self.clean_csv_path,
+                          header=write_header,
+                          index=False,
+                          mode='w' if write_header else 'a')
+
         logging.info(
             f"""Completed with { self.counter_dict[year]['number of observations'] }
             observation for { self.counter_dict[year]['number of unique StatVars with observations'] }
-            StatVars at { self.counter_dict[year]['number of unique geos'] } places.
+            StatVars at { self.counter_dict[year].get('number of unique geos', 0) } places.
             """)
 
     def _generate_mcf_from_column_map(self):
@@ -385,7 +430,19 @@ class SubjectTableDataLoaderBase:
 
     def _generate_tmcf_from_clean_csv(self):
         """update the base tmcf template based on the clean_csv"""
-        clean_csv = pd.read_csv(self.clean_csv_path, low_memory=False)
+        if getattr(self, '_dfs', None):
+            clean_csv = pd.concat(self._dfs, ignore_index=True)
+            if not clean_csv.empty:
+                for col in ['Quantity', 'ScalingFactor']:
+                    try:
+                        clean_csv[col] = pd.to_numeric(clean_csv[col])
+                    except (ValueError, TypeError):
+                        pass
+        elif os.path.exists(self.clean_csv_path):
+            clean_csv = pd.read_csv(self.clean_csv_path, low_memory=False)
+        else:
+            clean_csv = pd.DataFrame(columns=self.csv_columns)
+
         empty_cols = [
             col for col in clean_csv.columns if clean_csv[col].isnull().all()
         ]
@@ -403,10 +460,10 @@ class SubjectTableDataLoaderBase:
         ## write into the output tmcf
         tmcf_contents = '\n'.join(tmcf_contents)
         if not self.debug:
-            clean_csv.drop(columns=['Column'], inplace=True)
+            clean_csv.drop(columns=['Column'], inplace=True, errors='ignore')
 
         ## update the csv by dropping empty column
-        clean_csv.drop(columns=empty_cols, inplace=True)
+        clean_csv.drop(columns=empty_cols, inplace=True, errors='ignore')
         clean_csv.to_csv(self.clean_csv_path, index=False)
         return tmcf_contents
 
@@ -430,16 +487,16 @@ class SubjectTableDataLoaderBase:
 
         ## write all stat_vars from column map to file for debugging
         if self.debug:
-            debug_df = pd.DataFrame(columns=['Year', 'Column', 'StatVarID'])
+            debug_rows = []
             for year, val in self.column_map.items():
                 for column, stat_var in val.items():
-                    debug_df = debug_df.append(
-                        {
-                            'Year': year,
-                            'Column': column,
-                            'StatVarID': stat_var['Node']
-                        },
-                        ignore_index=True)
+                    debug_rows.append({
+                        'Year': year,
+                        'Column': column,
+                        'StatVarID': stat_var['Node']
+                    })
+            debug_df = pd.DataFrame(debug_rows,
+                                    columns=['Year', 'Column', 'StatVarID'])
             debug_df.to_csv(os.path.join(self.output_path_dir,
                                          './column_to_dcid.csv'),
                             index=False)

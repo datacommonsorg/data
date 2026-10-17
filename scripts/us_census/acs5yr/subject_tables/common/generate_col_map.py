@@ -17,6 +17,7 @@ Module to generate a column map to their corresponding statistical variable defi
 import os
 import io
 import sys
+import tempfile
 import logging
 import json
 import csv
@@ -33,7 +34,7 @@ from statvar_dcid_generator import get_statvar_dcid
 # intitalize the logger
 logging.basicConfig(
     level=logging.ERROR,
-    filename=os.path.join(_SCRIPT_PATH, 'make_column_map.log'),
+    filename=os.path.join(tempfile.gettempdir(), 'make_column_map.log'),
     format="{asctime} {processName:<12} {message} ({filename}:{lineno})",
     style="{",
     filemode='w')
