@@ -55,6 +55,7 @@ from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
 from app.executor import import_target
+from app.executor import stat_var_aggregator
 from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
@@ -488,6 +489,18 @@ class ImportExecutor:
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
+            if self.config.invoke_stat_var_aggregation:
+                stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
+                    import_name=import_name,
+                    genmcf_output_path=output_path,
+                    config_path=self.config.stat_var_aggregation_config_file or
+                    None,
+                    import_spec=import_spec,
+                    engine=self.config.stat_var_aggregation_engine,
+                    bigquery_project_id=self.config.gcp_project_id,
+                    bigquery_dataset_id=self.config.
+                    stat_var_aggregation_bq_dataset,
+                )
             report_json = os.path.join(output_path, 'report.json')
             try:
                 with open(report_json, 'r') as f:
