@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensure zero MCF lint errors in generated output",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verify MaxDate is within allowable 3-year publication lag for common causes of death",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms', 'Count_MortalityEvent_DischargeOfFirearmsUndeterminedIntent', 'Count_MortalityEvent_PneumoconiosesAndChemicalEffects', 'Count_MortalityEvent_DiseasesOfAppendix', 'Count_MortalityEvent_BronchitisChronicAndUnspecified', 'Count_MortalityEvent_AcuteAndRapidlyProgressiveNephriticAndNephroticSyndrome', 'Count_MortalityEvent_Meningitis', 'Count_MortalityEvent_OtherNutritionalDeficiencies', 'Count_MortalityEvent_RespiratoryTuberculosis', 'Count_MortalityEvent_HyperplasiaOfProstate', 'Count_MortalityEvent_OtherTuberculosis', 'Count_MortalityEvent_UnspecifiedAcuteLowerRespiratoryInfection', 'Count_MortalityEvent_MeningococcalInfection', 'Count_MortalityEvent_AcuteBronchitisAndBronchiolitis', 'Count_MortalityEvent_OtherAcuteLowerRespiratoryInfections')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 107"
+      }
+    },
+    {
+      "rule_id": "check_max_date_rare_causes",
+      "description": "Verify MaxDate is at least the last known year for rare causes of death that may not appear in every year due to CDC suppression",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_rare_svs FROM stats WHERE StatVar IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms', 'Count_MortalityEvent_DischargeOfFirearmsUndeterminedIntent', 'Count_MortalityEvent_PneumoconiosesAndChemicalEffects', 'Count_MortalityEvent_DiseasesOfAppendix', 'Count_MortalityEvent_BronchitisChronicAndUnspecified', 'Count_MortalityEvent_AcuteAndRapidlyProgressiveNephriticAndNephroticSyndrome', 'Count_MortalityEvent_Meningitis', 'Count_MortalityEvent_OtherNutritionalDeficiencies', 'Count_MortalityEvent_RespiratoryTuberculosis', 'Count_MortalityEvent_HyperplasiaOfProstate', 'Count_MortalityEvent_OtherTuberculosis', 'Count_MortalityEvent_UnspecifiedAcuteLowerRespiratoryInfection', 'Count_MortalityEvent_MeningococcalInfection', 'Count_MortalityEvent_AcuteBronchitisAndBronchiolitis', 'Count_MortalityEvent_OtherAcuteLowerRespiratoryInfections')",
+        "condition": "(CASE WHEN StatVar IN ('Count_MortalityEvent_OtherTuberculosis', 'Count_MortalityEvent_UnspecifiedAcuteLowerRespiratoryInfection') THEN CAST(MaxDate AS INTEGER) >= 2000 WHEN StatVar = 'Count_MortalityEvent_MeningococcalInfection' THEN CAST(MaxDate AS INTEGER) >= 2001 WHEN StatVar IN ('Count_MortalityEvent_AcuteBronchitisAndBronchiolitis', 'Count_MortalityEvent_OtherAcuteLowerRespiratoryInfections') THEN CAST(MaxDate AS INTEGER) >= 2004 WHEN StatVar IN ('Count_MortalityEvent_ChronicGlomerulonephritisNephritisAndNephritisNotSpecifiedAsAcuteOrChronicAndRenalSclerosisUnspecified', 'Count_MortalityEvent_AccidentalDischargeOfFirearms') THEN CAST(MaxDate AS INTEGER) >= 2023 ELSE CAST(MaxDate AS INTEGER) >= 2024 END) AND total_rare_svs >= 16"
+      }
+    }
+  ]
+}
+
