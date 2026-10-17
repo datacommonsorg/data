@@ -1,149 +1,111 @@
-"""Process data from Census ACS5Year Subject Table S2303."""
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Generic proces module to generate the csv/tmcf and csv"""
+# TODO: Add unit tests
 import os
 import sys
-import pandas as pd
-import numpy as np
+import json
 
-# pylint: disable=missing-module-docstring
-# pylint: disable=missing-class-docstring
-# pylint: disable=missing-function-docstring
+from absl import app, flags
+# TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
-#pylint: disable=wrong-import-position
-#pylint: disable=import-error
-_CODEDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_PATH)  # for local S2303 data_loader
+sys.path.append(os.path.join(
+    _SCRIPT_PATH, '../common'))  # for generate_col_map, resolve_geo_id
 
-from data_loader import SubjectTableDataLoaderBase  # commit hash - 4bc5102
-from resolve_geo_id import convert_to_place_dcid
-#pylint: enable=wrong-import-position
-#pylint: enable=import-error
+from generate_col_map import generate_stat_var_map, process_zip_file
+from data_loader import process_subject_tables, S2303SubjectTableDataLoader
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'option', 'all',
+    'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
+)
+flags.DEFINE_string(
+    'table_prefix', None,
+    '[for processing]Subject Table ID as a prefix for output files, eg: S2702')
+flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
+flags.DEFINE_string(
+    'input_path', None,
+    'Path to input directory with (current support only for zip files)')
+flags.DEFINE_string('output_dir', './', 'Path to the output directory')
+flags.DEFINE_boolean(
+    'has_percent', False,
+    '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
+)
+flags.DEFINE_boolean(
+    'debug', False,
+    '[for processing]set the flag to add additional columns to debug')
 
 
-class S2303SubjectTableDataLoader(SubjectTableDataLoaderBase):
-    """
-    A child class for the S2303 import.
-    """
+def set_column_map(input_path, spec_path, output_dir):
+    generated_col_map = process_zip_file(input_path,
+                                         spec_path,
+                                         write_output=False)
+    f = open(os.path.join(output_dir, 'column_map.json'), 'w')
+    json.dump(generated_col_map, f, indent=4)
+    f.close()
 
-    def _convert_percent_to_numbers(self, df):
-        df_cols = df.columns.tolist()
-        for count_col, percent_cols in self.json_spec['denominators'].items():
-            if count_col in df_cols:
-                for col in percent_cols:
-                    if col in df_cols:
-                        df[col] = df[col].astype(float)
-                        df[count_col] = df[count_col].astype(float)
-                        df[col] = (df[col] / 100) * df[count_col]
-                        df[col] = df[col].round(3)
-        return df
 
-    def _process_dataframe(self, df, filename):
-        """processes a dataframe read from a csv file"""
-        df = self._replace_ignore_values_with_nan(df)
-        year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
-        print(f"Processing: {filename}", end=" |  ", flush=True)
+def main(argv):
+    ## get inputs from flags
+    option = FLAGS.option.lower()
+    table_prefix = FLAGS.table_prefix
+    spec_path = FLAGS.spec_path
+    input_path = FLAGS.input_path
+    output_dir = FLAGS.output_dir
+    has_percent = FLAGS.has_percent
+    debug = FLAGS.debug
 
-        # Process only at a country, state, county and place level
-        df = df[~((df['id'].str.startswith('950')) |
-                  (df['id'].str.startswith('960')) |
-                  (df['id'].str.startswith('970')))]
+    # TODO: remove the constraint of inputs being only zip file
+    # context: the current implementation of the column map generator accepts
+    # only zip files as input and we will need to add new methods to handle inputs
+    # as a directory of files or a single csv file.
+    _, file_extension = os.path.splitext(input_path)
 
-        # Only calculating percentages for selected years
-        percent_years = ['2014', '2013', '2012', '2011', '2010']
-        if self.has_percent and year in percent_years:
-            print("Converting percent to numbers", end=" |  ", flush=True)
-            df = self._convert_percent_to_numbers(df)
+    if file_extension == '.zip':
+        if option == 'colmap':
+            set_column_map(input_path, spec_path, output_dir)
+        if option == 'process':
+            process_subject_tables(table_prefix=table_prefix,
+                                   input_path=input_path,
+                                   output_dir=output_dir,
+                                   column_map_path=os.path.join(
+                                       output_dir, 'column_map.json'),
+                                   spec_path=spec_path,
+                                   debug=debug,
+                                   delimiter='!!',
+                                   has_percent=has_percent)
 
-        # if column map is not available generate, will rarely be False
-        column_map = self.column_map[year]
+        if option == 'all':
+            set_column_map(input_path, spec_path, output_dir)
+            process_subject_tables(table_prefix=table_prefix,
+                                   input_path=input_path,
+                                   output_dir=output_dir,
+                                   column_map_path=os.path.join(
+                                       output_dir, 'column_map.json'),
+                                   spec_path=spec_path,
+                                   debug=debug,
+                                   delimiter='!!',
+                                   has_percent=has_percent)
+    else:
+        print("At the moment, we support only zip files.")
 
-        # add stats to dict_counter for current year
-        self.counter_dict[year] = {
-            "filename":
-                filename,
-            "number of columns in dataset":
-                df.shape[1],
-            "number of rows in dataset":
-                df.shape[0],
-            "number of statVars generated for columns":
-                len(list(column_map.keys())),
-            "number of observations":
-                0,
-            "number of unique StatVars with observations":
-                0,
-        }
 
-        csv_file = open(self.clean_csv_path, 'a')
-        place_geo_ids = df['id'].apply(convert_to_place_dcid)
-
-        # update the clean csv
-        for column in df.columns.tolist():
-            if column in column_map:
-                obs_df = pd.DataFrame(columns=self.csv_columns)
-                obs_df['Place'] = place_geo_ids
-                obs_df['StatVar'] = column_map[column]['Node']
-                obs_df['Quantity'] = df[column].values.tolist()
-                # add unit to the csv
-                try:
-                    unit = column_map[column]['unit']
-                    del column_map[column]['unit']
-                except KeyError:
-                    unit = np.nan
-                obs_df['Unit'] = unit
-
-                # add scaling factor to the csv
-                try:
-                    scaling_factor = column_map[column]['scalingFactor']
-                    del column_map[column]['scalingFactor']
-                except KeyError:
-                    unit = np.nan
-                    scaling_factor = np.nan
-
-                # if StatVar not in mcf_dict, add dcid
-                dcid = column_map[column]['Node']
-
-                if dcid not in self.mcf_dict:
-                    ## key --> node dcid
-                    self.mcf_dict[dcid] = {}
-                    ## add pvs to dict
-                    for key, value in column_map[column].items():
-                        if key != 'Node':
-                            self.mcf_dict[dcid][key] = value
-
-                obs_df['ScalingFactor'] = scaling_factor
-                obs_df['Year'] = year
-                obs_df['Column'] = column
-
-                # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'].replace('', np.nan, inplace=True)
-
-                # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
-
-                # Write the processed observations to the clean_csv
-                if self.year_count == 0:
-                    obs_df.to_csv(csv_file, header=True, index=False, mode='w')
-                else:
-                    obs_df.to_csv(csv_file, header=False, index=False, mode='a')
-                self.year_count += 1
-
-                # update stats for the year:
-                self.counter_dict[year]["number of unique geos"] = len(
-                    obs_df['Place'].unique())
-                self.counter_dict[year][
-                    "number of observations"] += obs_df.shape[0]
-                self.counter_dict[year][
-                    "number of unique StatVars with observations"] += len(
-                        obs_df['StatVar'].unique())
-                self.counter_dict[year]["number of StatVars in mcf_dict"] = len(
-                    list(self.mcf_dict.keys()))
-        csv_file.close()
-        n_obs = self.counter_dict[year]['number of observations']
-        n_sv = self.counter_dict[year][
-            'number of unique StatVars with observations']
-        n_geos = self.counter_dict[year]['number of unique geos']
-        print(
-            f" Completed with {n_obs} observation for {n_sv} StatVars at "
-            f"{n_geos} places. ",
-            flush=True)
+if __name__ == '__main__':
+    flags.mark_flags_as_required(
+        ['table_prefix', 'spec_path', 'input_path', 'output_dir'])
+    app.run(main)
