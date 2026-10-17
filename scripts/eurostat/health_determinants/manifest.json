@@ -53,7 +53,7 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 01 * * 7",
+            "cron_schedule": "0 01 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 01:00 UTC"
         },
         {
@@ -136,7 +136,7 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "30 01 * * 7",
+            "cron_schedule": "30 01 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 01:30 UTC"
         },
         {

@@ -20,7 +20,7 @@
                     "cleaned_csv": "national_prison_stats.csv"
                 }
             ],
-            "cron_schedule": "30 03 * * 7",
+            "cron_schedule": "30 03 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 03:30 UTC"
         }
     ]

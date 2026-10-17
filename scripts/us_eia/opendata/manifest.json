@@ -20,7 +20,7 @@
                     "cleaned_csv": "gcs_output/COAL/COAL.csv"
                 }
             ],
-            "cron_schedule": "0 05 * * 7",
+            "cron_schedule": "0 05 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 05:00 UTC",
             "validation_config_file": "validation_config_EIA_Coal.json"
         },
@@ -121,7 +121,7 @@
                     "cleaned_csv": "gcs_output/PET/PET.csv"
                 }
             ],
-            "cron_schedule": "30 05 * * 7",
+            "cron_schedule": "30 05 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 05:30 UTC",
             "validation_config_file": "validation_config_EIA_Petroleum.json"
         },
