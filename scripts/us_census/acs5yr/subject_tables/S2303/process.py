@@ -192,6 +192,10 @@ def set_column_map(input_path, spec_path, output_dir):
 def main(argv):
     del argv
     option = FLAGS.option.lower()
+    if option not in ('colmap', 'process', 'all'):
+        logging.fatal(
+            f"Invalid --option '{FLAGS.option}'. Must be one of: 'colmap', "
+            "'process', 'all'.")
     table_prefix = FLAGS.table_prefix
     spec_path = FLAGS.spec_path
     input_path = FLAGS.input_path
@@ -215,7 +219,7 @@ def main(argv):
                                    delimiter='!!',
                                    has_percent=has_percent)
     else:
-        print('At the moment, we support only zip files.')
+        logging.fatal('At the moment, we support only zip files.')
 
 
 if __name__ == '__main__':
