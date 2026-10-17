@@ -32,9 +32,8 @@ def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
-    f = open(os.path.join(output_dir, 'column_map.json'), 'w')
-    json.dump(generated_col_map, f, indent=4)
-    f.close()
+    with open(os.path.join(output_dir, 'column_map.json'), 'w') as f:
+        json.dump(generated_col_map, f, indent=4)
 
 
 class ProcessTest(unittest.TestCase):
@@ -55,6 +54,7 @@ class ProcessTest(unittest.TestCase):
                 estimate_period=5,
                 header_row=1)
             data_loader._process_zip_file(_TEST_DATA_ZIP)
+            data_loader._get_outputs()
 
             mcf_file_path = os.path.join(tmp_dir, 'S2303_output.mcf')
             tmcf_file_path = os.path.join(tmp_dir, 'S2303_output.tmcf')
