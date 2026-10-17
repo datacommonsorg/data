@@ -18,13 +18,21 @@ import io
 import json
 import os
 import requests
+import sys
 import zipfile
 from absl import app
 from absl import flags
 
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
+from resolve_geo_id import convert_to_place_dcid
+
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output', None, 'Path to folder for output files')
 flags.DEFINE_string('download_id', None, 'Download id for input data')
+flags.DEFINE_string(
+    'input_zip', None,
+    'Path to local zip file containing downloaded Census data (e.g. S2201.zip)')
 flags.DEFINE_string('features', None, 'JSON of feature maps')
 flags.DEFINE_string('stat_vars', None, 'Path to list of supported stat_vars')
 
@@ -105,19 +113,28 @@ def write_csv(filename, reader, output, features, stat_vars):
         return
     fieldnames = ['observationDate', 'observationAbout'] + stat_vars
     stat_var_set = set(stat_vars)
+    if reader.fieldnames:
+        reader.fieldnames = [
+            name.strip('\ufeff" ') for name in reader.fieldnames
+        ]
     with open(output, 'a') as f_out:
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         observation_date = filename.split('ACSST5Y')[1][:4]
         valid_columns = {}
         for row in reader:
-
-            # Check if GEO_ID ends with '99999' and ignore it
-            if row['\ufeff"GEO_ID"'].endswith('99999'):
+            geo_id = row.get('GEO_ID')
+            if not geo_id:
                 continue
-            if row['\ufeff"GEO_ID"'] == 'Geography':
+
+            if geo_id in ('Geography', 'id'):
 
                 # Map feature names to stat vars
                 for c in row:
+                    if 'Percent' in row[c] or 'PERCENT' in row[c]:
+                        continue
+                    if int(observation_date) < 2015 and not c.endswith(
+                        ('_001E', '_001M', '_016E', '_016M', '_017E', '_017M')):
+                        continue
 
                     sv = convert_column_to_stat_var(row[c], features)
                     if sv in stat_var_set:
@@ -125,45 +142,19 @@ def write_csv(filename, reader, output, features, stat_vars):
                 continue
             else:
                 for c in row:
-                    if row[c].__contains__(",") == True:
-                        row[c] = str(row[c]).replace(",", "")
-                #  if str(c)[-1:] == '-' or str(c)[-1:] == '+':
-                #             c=str(c)[:-1]
+                    if row[c] and ',' in row[c]:
+                        row[c] = str(row[c]).replace(',', '')
 
-            #new_row = {
-            #'observationDate': observation_date,
-            # TODO: Expand to support other prefixes?
-            #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
-        # }
-            geo = row['\ufeff"GEO_ID"'].split('US')
-            if geo[1] == "":
-                new_row = {
-                    'observationDate': observation_date,
-                    'observationAbout': 'dcid:country/USA'
-                }
-            else:
-                #if check the second variable is matching with zip..
-                if geo[0][:3] == '860':
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'dcid:zip/' + geo[1]
-                    }
-                elif geo[0][:3] == '310':
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'dcid:geoId/C' + geo[1]
-                    }
-                elif geo[0][:3] == "950" or geo[0][:3] == "960" or geo[
-                        0][:3] == "970":
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'geoId/sch' + geo[1]
-                    }
-                else:
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'dcid:geoId/' + geo[1]
-                    }
+            if 'US' not in geo_id:
+                continue
+            place_dcid = convert_to_place_dcid(geo_id)
+            if not place_dcid:
+                continue
+
+            new_row = {
+                'observationDate': observation_date,
+                'observationAbout': f'dcid:{place_dcid}'
+            }
             for c in row:
 
                 # We currently only support the stat vars in the list
@@ -175,12 +166,16 @@ def write_csv(filename, reader, output, features, stat_vars):
                 if row[c] in _IGNORED_VALUES:
                     continue
 
+                # Strip trailing '.0' added by pandas float64 coercion on integer columns
+                if row[c].endswith('.0'):
+                    row[c] = row[c][:-2]
+
                 # Exclude percentages
                 if '.' in row[c]:
                     continue
 
                 # Exclude suffix from median values
-                if (row[c][-1] == '-' or row[c][-1] == '+'):
+                if row[c] and (row[c][-1] == '-' or row[c][-1] == '+'):
                     new_row[sv] = row[c][:-1]
                 else:
                     new_row[sv] = row[c]
@@ -201,32 +196,59 @@ def create_tmcf(output, features, stat_vars):
 
 
 def main(argv):
-    f = open(FLAGS.features)
-    features = json.load(f)
-    f.close()
-    f = open(FLAGS.stat_vars)
-    stat_vars = f.read().splitlines()
-    f.close()
+    if not FLAGS.input_zip and not FLAGS.download_id:
+        default_zip = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'input_data', 'S2201.zip')
+        if os.path.exists(default_zip):
+            FLAGS.input_zip = default_zip
+        else:
+            raise ValueError(
+                'Must provide either --input_zip or --download_id.')
+
+    os.makedirs(FLAGS.output, exist_ok=True)
+
+    with open(FLAGS.features) as f:
+        features = json.load(f)
+    with open(FLAGS.stat_vars) as f:
+        stat_vars = f.read().splitlines()
+
     output_csv = os.path.join(FLAGS.output, 'output.csv')
     create_csv(output_csv, stat_vars)
-    response = requests.get(
-        f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}'
-    )
-    with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
-        for filename in zf.namelist():
-            if '-Data' in filename:
-                print(filename)
+
+    if FLAGS.input_zip:
+        print(f'Reading local archive: {FLAGS.input_zip}')
+        zf_context = zipfile.ZipFile(FLAGS.input_zip, 'r')
+    else:
+        print(f'Downloading with download_id: {FLAGS.download_id}')
+        response = requests.get(
+            f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}'
+        )
+        zf_context = zipfile.ZipFile(io.BytesIO(response.content))
+
+    with zf_context as zf:
+        # Sort files chronologically / deterministically
+        for filename in sorted(zf.namelist()):
+            # Support both -Data.csv and data_with_overlays...csv
+            if filename.endswith('.csv') and ('-Data' in filename or
+                                              'data_with_overlays' in filename
+                                              or 'data' in filename.lower()):
+                if 'metadata' in filename.lower() or 'title' in filename.lower(
+                ):
+                    continue
+                print(f'Processing file: {filename}')
                 with zf.open(filename, 'r') as infile:
-                    reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-                    if '\ufeff"GEO_ID"' in reader.fieldnames:
+                    reader = csv.DictReader(
+                        io.TextIOWrapper(infile, 'utf-8-sig'))
+                    if reader.fieldnames:
                         reader.fieldnames = [
-                            name.strip('\ufeff"') for name in reader.fieldnames
+                            name.strip('\ufeff" ') for name in reader.fieldnames
                         ]
                     write_csv(filename, reader, output_csv, features, stat_vars)
+
     create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), features, stat_vars)
+    print(f'Processing complete! Outputs written to {FLAGS.output}')
 
 
 if __name__ == '__main__':
-    flags.mark_flags_as_required(
-        ['output', 'download_id', 'features', 'stat_vars'])
+    flags.mark_flags_as_required(['output', 'features', 'stat_vars'])
     app.run(main)
