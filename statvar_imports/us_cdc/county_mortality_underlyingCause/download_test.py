@@ -403,23 +403,20 @@ class DownloadTest(unittest.TestCase):
 
             mock_blob.download_to_filename.side_effect = fake_download
 
-            copied = download.copy_historical_data_from_gcs(
-                output_dir=temp_dir, skip_existing=True
-            )
+            copied = download.copy_historical_data_from_gcs(output_dir=temp_dir,
+                                                            skip_existing=True)
             hist_path = Path(temp_dir) / download.HISTORICAL_1999_2017_FILENAME
             self.assertEqual(copied, str(hist_path))
             self.assertTrue(hist_path.exists())
             mock_bucket.blob.assert_called_once_with(
                 f"{download.GCS_HISTORICAL_PREFIX}/"
-                f"{download.HISTORICAL_1999_2017_FILENAME}"
-            )
+                f"{download.HISTORICAL_1999_2017_FILENAME}")
             mock_blob.download_to_filename.assert_called_once()
 
             # Second call with skip_existing=True should skip without calling GCS
             mock_client_cls.reset_mock()
             copied_again = download.copy_historical_data_from_gcs(
-                output_dir=temp_dir, skip_existing=True
-            )
+                output_dir=temp_dir, skip_existing=True)
             self.assertEqual(copied_again, str(hist_path))
             mock_client_cls.assert_not_called()
 
@@ -430,15 +427,13 @@ class DownloadTest(unittest.TestCase):
 
             # Having UnderlyingCauseofDeath_County_1999_2017.csv must not make FIPS 19 (Iowa) appear downloaded
             self.assertFalse(
-                download.is_state_downloaded(temp_dir, "19", years=["2018"])
-            )
+                download.is_state_downloaded(temp_dir, "19", years=["2018"]))
 
             # Once Iowa's own file exists, both coexist without conflict
             iowa_file = Path(temp_dir) / "UnderlyingCauseofDeath_County_19.csv"
             iowa_file.write_text("Notes,Year,County,Deaths\n,2018,Polk,12\n")
             self.assertTrue(
-                download.is_state_downloaded(temp_dir, "19", years=["2018"])
-            )
+                download.is_state_downloaded(temp_dir, "19", years=["2018"]))
 
     def test_filter_available_years(self):
         downloader = download.CdcWonderCountyMortalityDownloader()
@@ -495,6 +490,45 @@ class DownloadTest(unittest.TestCase):
         downloader = download.CdcWonderCountyMortalityDownloader()
         downloader.init_session()
         self.assertEqual(downloader.available_years, ["2018", "2019", "2020"])
+
+    @mock.patch.object(download, "CdcWonderCountyMortalityDownloader")
+    def test_batch_rotation_failure_does_not_fail_completed_state(
+            self, mock_downloader_cls):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            mock_downloader = mock.MagicMock()
+            mock_downloader_cls.return_value = mock_downloader
+            mock_downloader.action_url = None
+            mock_downloader.filter_available_years.side_effect = lambda y: y
+
+            call_count = {"init": 0}
+
+            def fake_init_session():
+                call_count["init"] += 1
+                if call_count["init"] == 2:
+                    raise RuntimeError("Transient rotation error")
+                mock_downloader.action_url = "https://wonder.cdc.gov/controller"
+
+            mock_downloader.init_session.side_effect = fake_init_session
+            mock_downloader.download_state.return_value = [
+                ("all", "Notes\tYear\tCounty Code\tDeaths\n\t2020\t10001\t15\n")
+            ]
+
+            download.download_county_mortality_data(
+                states=["10", "11"],
+                years=["2020"],
+                output_dir=temp_dir,
+                delay=0.0,
+                skip_existing=False,
+                batch_size=1,
+                batch_cooldown=0.0,
+                copy_historical=False,
+            )
+
+            self.assertEqual(call_count["init"], 3)
+            self.assertTrue((Path(temp_dir) /
+                             "UnderlyingCauseofDeath_County_10.csv").exists())
+            self.assertTrue((Path(temp_dir) /
+                             "UnderlyingCauseofDeath_County_11.csv").exists())
 
 
 if __name__ == "__main__":

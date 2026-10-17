@@ -53,8 +53,7 @@ DEFAULT_INPUT_DIR = os.path.join(script_dir, "input_files")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_HISTORICAL_PREFIX = (
-    "cdc/UnderlyingCause/county_mortality_underlyingCause/input_files"
-)
+    "cdc/UnderlyingCause/county_mortality_underlyingCause/input_files")
 HISTORICAL_1999_2017_FILENAME = "UnderlyingCauseofDeath_County_1999_2017.csv"
 
 # Mapping of 2-digit FIPS codes to US State / Territory names
@@ -511,9 +510,7 @@ class CdcWonderCountyMortalityDownloader:
                 state_name,
             )
             try:
-                tsv_text = self.execute_query(state_fips,
-                                              years,
-                                              max_retries=1)
+                tsv_text = self.execute_query(state_fips, years, max_retries=1)
                 first_line = tsv_text.splitlines()[0] if tsv_text else ""
                 if "County Code" in first_line:
                     results.append(("all", tsv_text))
@@ -650,10 +647,10 @@ def _get_state_csv_files(output_dir: str, state_fips: str) -> List[Path]:
     exact_name = f"UnderlyingCauseofDeath_County_{state_fips}.csv"
     chunk_prefix = f"UnderlyingCauseofDeath_County_{state_fips}_"
     return sorted([
-        p
-        for p in base_dir.glob(f"UnderlyingCauseofDeath_County_{state_fips}*.csv")
-        if p.name != HISTORICAL_1999_2017_FILENAME
-        and (p.name == exact_name or p.name.startswith(chunk_prefix))
+        p for p in base_dir.glob(
+            f"UnderlyingCauseofDeath_County_{state_fips}*.csv")
+        if p.name != HISTORICAL_1999_2017_FILENAME and
+        (p.name == exact_name or p.name.startswith(chunk_prefix))
     ])
 
 
@@ -804,9 +801,8 @@ def download_county_mortality_data(
     """Downloads CDC County Mortality data for specified states and years."""
     os.makedirs(output_dir, exist_ok=True)
     if copy_historical:
-        copy_historical_data_from_gcs(
-            output_dir=output_dir, skip_existing=skip_existing
-        )
+        copy_historical_data_from_gcs(output_dir=output_dir,
+                                      skip_existing=skip_existing)
 
     downloader = CdcWonderCountyMortalityDownloader(timeout=timeout,
                                                     delay=delay)
@@ -850,6 +846,7 @@ def download_county_mortality_data(
                 logging.warning("Could not remove stale file %s: %s",
                                 stale_file, e)
 
+        state_succeeded = False
         try:
             results = downloader.download_state(state_fips, years)
             for chunk_label, tsv_data in results:
@@ -865,18 +862,7 @@ def download_county_mortality_data(
                 logging.info("Saved %s with %d rows.", filename, rows)
 
             states_in_batch += 1
-
-            # Proactive session rotation after batch_size states
-            if states_in_batch >= batch_size and idx < len(states):
-                logging.info(
-                    "Processed batch of %d states. Taking a %.1fs cooldown and refreshing "
-                    "session...",
-                    states_in_batch,
-                    batch_cooldown,
-                )
-                time.sleep(batch_cooldown)
-                downloader.init_session()
-                states_in_batch = 0
+            state_succeeded = True
 
         except Exception as e:
             logging.error(
@@ -893,6 +879,27 @@ def download_county_mortality_data(
                     "Session renewal after state failure also failed: %s",
                     init_err,
                 )
+                downloader.action_url = None
+
+        # Proactive session rotation after batch_size states (outside state try block)
+        if state_succeeded and states_in_batch >= batch_size and idx < len(
+                states):
+            logging.info(
+                "Processed batch of %d states. Taking a %.1fs cooldown and refreshing "
+                "session...",
+                states_in_batch,
+                batch_cooldown,
+            )
+            time.sleep(batch_cooldown)
+            states_in_batch = 0
+            try:
+                downloader.init_session()
+            except Exception as init_err:
+                logging.warning(
+                    "Proactive session refresh after batch failed: %s",
+                    init_err,
+                )
+                downloader.action_url = None
 
     logging.info(
         "Download complete: Saved %d files with %d total rows in %s.",
