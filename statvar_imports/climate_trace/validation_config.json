@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Threshold set to 1.5% to allow for the intentional deletion of Annual_Emissions_*_Removals series renamed to Annual_Emissions_*_EmissionRemovals.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 1.5
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that all StatVars reach the expected observation year of at least 2026.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "MaxDate >= '2026'"
+            }
+        }
+    ]
+}
