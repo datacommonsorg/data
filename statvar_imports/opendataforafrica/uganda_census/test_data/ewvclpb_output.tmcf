@@ -1,0 +1,9 @@
+Node: E:ewvclpb_output->E0
+observationAbout: C:ewvclpb_output->observationAbout
+observationDate: C:ewvclpb_output->observationDate
+variableMeasured: C:ewvclpb_output->variableMeasured
+value: C:ewvclpb_output->value
+unit: C:ewvclpb_output->unit
+scalingFactor: C:ewvclpb_output->scalingFactor
+observationPeriod: C:ewvclpb_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,27 @@
+"key","p1","v1","p2","v2","p3","v3","p4","v4","p5","v5","p6","v6","p7","v7","p8","v8","p9","v9"
+"REGION","observationAbout","{Data}",,,,,,,,,,,,,,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,,,,,,,,,,,
+"OBS_VALUE","value","{Number}",,,,,,,,,,,,,,,,
+"FREQ","observationPeriod","P1Y",,,,,,,,,,,,,,,,
+"VARIABLE:KN.PH.HU.HOS","populationType","HealthEstablishment","healthEstablishmentType","Hospital","measuredProperty","count","statType","measuredValue",,,,,,,,,,
+"VARIABLE:KN.PH.HU.HCC","populationType","HealthEstablishment","healthEstablishmentType","HealthCenter","measuredProperty","count","statType","measuredValue",,,,,,,,,,
+"VARIABLE:KN.PH.BEDS.TOTAL","populationType","HealthEstablishment","measuredProperty","count","statType","measuredValue",,,,,,,,,,,,,,
+"VARIABLE:KN.PH.BEDS.GOV","populationType","HealthEstablishment","healthEstablishmentType","HealthFacility","establishmentOwnership","GovernmentOwned","measuredProperty","count","statType","measuredValue",,,,,,,,
+"VARIABLE:KN.PH.BEDS.PNFP","populationType","HealthEstablishment","establishmentOwnership","PrivatelyOwnedNotForProfit","measuredProperty","count","statType","measuredValue",,,,,,,,,,,,
+"VARIABLE:KN.PH.BEDS.PHP","populationType","HealthEstablishment","healthEstablishmentType","PartialHospitalizationProgram","measuredProperty","count","statType","measuredValue",,,,,,,,,,
+"VARIABLE:KN.A1","populationType","HealthEstablishment","establishmentOwnership","NonGovernmentalOrganization","measuredProperty","count","statType","measuredValue",,,,,,,,,,,,
+"VARIABLE:KN.A2","populationType","HealthEstablishment","healthEstablishmentType","HealthFacility","establishmentOwnership","PrivatelyOwned","measuredProperty","count","statType","measuredValue",,,,,,,,
+"VARIABLE:KN.PH.DHC","populationType","BirthEvent","healthEstablishmentType","HealthFacility","measuredProperty","count","statType","measuredValue",,,,,,,,,,
+"VARIABLE:KN.A6","populationType","BirthEvent","establishmentOwnership","GovernmentOwned__PrivatelyOwnedNotForProfit","healthEstablishmentType","HealthFacility","measurementDenominator","-establishmentOwnership,-healthEstablishmentType","unit","Percent","scalingFactor","100","statType","measuredValue","measuredProperty","count"
+"VARIABLE:KN.PH.IMMU.MEASLES","populationType","Person","vaccineStatus","VaccineAdministered","vaccineType","MeaslesVaccine","measurementDenominator","-vaccineStatus,-vaccineType","scalingFactor","100","unit","Percent","statType","measuredValue","measuredProperty","count"
+"VARIABLE:KN.PH.IMMU.OPV3","populationType","Person","vaccineStatus","VaccineAdministered","vaccineType","OralPolioVaccine3","measurementDenominator","-vaccineStatus,-vaccineType","scalingFactor","100","unit","Percent","statType","measuredValue","measuredProperty","count"
+"VARIABLE:KN.PH.IMMU.DPT3","populationType","Person","vaccineStatus","VaccineAdministered","vaccineType","DPT3","measurementDenominator","-vaccineStatus,-vaccineType","scalingFactor","100","unit","Percent","statType","measuredValue","measuredProperty","count"
+"VARIABLE:KN.PH.IMMU.BCG","populationType","Person","vaccineStatus","VaccineAdministered","vaccineType","BCG","measurementDenominator","-vaccineStatus,-vaccineType","scalingFactor","100","unit","Percent","statType","measuredValue","measuredProperty","count"
+"VARIABLE:KN.A3","populationType","Person","vaccineStatus","VaccineAdministered","vaccineType","Polio3Vaccine","measurementDenominator","-vaccineStatus,-vaccineType","scalingFactor","100","unit","Percent","statType","measuredValue","measuredProperty","count"
+"VARIABLE:KN.B2","#ignore","not mapped",,,,,,,,,,,,,,,,
+"VARIABLE:KN.B3","#ignore","not mapped",,,,,,,,,,,,,,,,
+"VARIABLE:KN.B4","#ignore","not mapped",,,,,,,,,,,,,,,,
+"VARIABLE:KN.PH.OP.UTIL","#ignore","not mapped",,,,,,,,,,,,,,,,
+"VARIABLE:KN.A5","#ignore","not mapped",,,,,,,,,,,,,,,,
+"VARIABLE:KN.PH.PLC","#ignore","not mapped",,,,,,,,,,,,,,,,
+"VARIABLE:KN.A4","#ignore","not mapped",,,,,,,,,,,,,,,,

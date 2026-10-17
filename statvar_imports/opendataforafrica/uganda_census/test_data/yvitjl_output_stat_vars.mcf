@@ -1,0 +1,76 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/yvitjl_input.csv --pv_map=yvitjl_pvmap.csv --config_file=yvitjl_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=test_data/yvitjl_output --existing_statvar_mcf=Uganda_common.mcf" on 2026-10-01 07:48:00.478284
+
+Node: dcid:Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_BirthEvent_GovernmentOwnedOrPrivatelyOwnedNotForProfitEstablishment_HealthFacility_AsAFractionOf_Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent
+establishmentOwnership: dcid:GovernmentOwned__PrivatelyOwnedNotForProfit
+healthEstablishmentType: dcid:HealthFacility
+
+Node: dcid:Count_BirthEvent_HealthFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+healthEstablishmentType: dcid:HealthFacility
+
+Node: dcid:Count_HealthEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:HealthEstablishment
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_HealthEstablishment_GovernmentOwnedEstablishment_HealthFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:HealthEstablishment
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+establishmentOwnership: dcid:GovernmentOwned
+healthEstablishmentType: dcid:HealthFacility
+
+Node: dcid:Count_HealthEstablishment_HealthCenter
+typeOf: dcid:StatisticalVariable
+populationType: dcid:HealthEstablishment
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+healthEstablishmentType: dcid:HealthCenter
+
+Node: dcid:Count_HealthEstablishment_Hospital
+typeOf: dcid:StatisticalVariable
+populationType: dcid:HealthEstablishment
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+healthEstablishmentType: dcid:Hospital
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_VaccineAdministered_BCG_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:BCG
+
+Node: dcid:Count_Person_VaccineAdministered_MeaslesVaccine_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:MeaslesVaccine
+

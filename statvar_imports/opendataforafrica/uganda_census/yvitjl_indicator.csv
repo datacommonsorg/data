@@ -1,0 +1,23 @@
+id,name
+KN.PH.HU.HOS,"Number of Health Units, Hospitals"
+KN.PH.HU.HCC,"Number of Health Units, Health Center"
+KN.PH.BEDS.TOTAL,Total
+KN.PH.BEDS.GOV,Government
+KN.PH.BEDS.PNFP,PNFP (Private Not Profit)
+KN.PH.BEDS.PHP,PHP
+KN.A1,NGO
+KN.A2,Private
+KN.PH.OP.UTIL,Out Patient Department Utilisation in Government and PNFP
+KN.A5,"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent"
+KN.PH.PLC,Pit Latrine Coverage
+KN.A4,"Pit Latrine Coverage in households, Percent"
+KN.PH.DHC,Deliveries in Health Facilities
+KN.A6,"Deliveries in Government and PNFP health facilities, percent"
+KN.PH.IMMU.MEASLES,Countrywide routine immunization rates for measles
+KN.PH.IMMU.OPV3,Countrywide routine immunization rates for OPV3
+KN.PH.IMMU.DPT3,Countrywide routine immunization rates for DPT3
+KN.PH.IMMU.BCG,Countrywide routine immunization rates for BCG
+KN.B2,HIV Testing in Children born to HIV Positive Women
+KN.B3,Pregnant women receiving 2nd dose of Fansidar for IPT
+KN.B4,Pregnant who receive 4 antenatal care visits
+KN.A3,Countrywide routine immunization rates for Polio3
