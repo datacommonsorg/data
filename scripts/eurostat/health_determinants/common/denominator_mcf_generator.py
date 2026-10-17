@@ -31,61 +31,11 @@ import_name = [
     "social_environment", "bmi", "alcohol_consumption", "tobacco_consumption",
     "physical_activity", "fruits_vegetables"
 ]
-flags.DEFINE_list("import_name", import_name, "Import Data File's List")
-_FLAGS(sys.argv)
-for _import in _FLAGS.import_name:
-    if _import == "social_environment":
-        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
 
-        _INPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_social_environment.mcf")
-        _OUTPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_social_environment_deno.mcf")
-    elif _import == "bmi":
-        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
 
-        _INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
-                                            "eurostat_population_bmi.mcf")
-        _OUTPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files", "eurostat_population_bmi_deno.mcf")
-    elif _import == "alcohol_consumption":
-        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+def define_flags():
+    flags.DEFINE_list("import_name", import_name, "Import Data File's List")
 
-        _INPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_alcoholconsumption.mcf")
-        _OUTPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_alcoholconsumption_deno.mcf")
-    elif _import == "tobacco_consumption":
-        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
-
-        _INPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_tobaccoconsumption.mcf")
-        _OUTPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_tobaccoconsumption_deno.mcf")
-    elif _import == "physical_activity":
-        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
-
-        _INPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_physicalactivity.mcf")
-        _OUTPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_physicalactivity_deno.mcf")
-    elif _import == "fruits_vegetables":
-        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
-
-        _INPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_fruits_vegetables.mcf")
-        _OUTPUT_MCF_FILE_PATH = os.path.join(
-            _MODULE_DIR, "output_files",
-            "eurostat_population_fruits_vegetables_deno.mcf")
 
 _INCOME_QUINTILE_VALUES = {
     "IncomeOf0To20Percentile": "[0 20 Percentile]",
@@ -261,6 +211,62 @@ def write_to_mcf_path(final_mcf_nodes: list, mcf_path: str) -> None:
 
 
 if __name__ == '__main__':
+    define_flags()
+    _FLAGS(sys.argv)
+    for _import in _FLAGS.import_name:
+        if _import == "social_environment":
+            _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+            _INPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_social_environment.mcf")
+            _OUTPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_social_environment_deno.mcf")
+        elif _import == "bmi":
+            _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+            _INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
+                                                "eurostat_population_bmi.mcf")
+            _OUTPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files", "eurostat_population_bmi_deno.mcf")
+        elif _import == "alcohol_consumption":
+            _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+            _INPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_alcoholconsumption.mcf")
+            _OUTPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_alcoholconsumption_deno.mcf")
+        elif _import == "tobacco_consumption":
+            _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+            _INPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_tobaccoconsumption.mcf")
+            _OUTPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_tobaccoconsumption_deno.mcf")
+        elif _import == "physical_activity":
+            _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+            _INPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_physicalactivity.mcf")
+            _OUTPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_physicalactivity_deno.mcf")
+        elif _import == "fruits_vegetables":
+            _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+            _INPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_fruits_vegetables.mcf")
+            _OUTPUT_MCF_FILE_PATH = os.path.join(
+                _MODULE_DIR, "output_files",
+                "eurostat_population_fruits_vegetables_deno.mcf")
+
     actual_mcf_template = ("Node: dcid:{dcid}\n"
                            "typeOf: dcs:StatisticalVariable\n"
                            "populationType: dcs:Person\n"

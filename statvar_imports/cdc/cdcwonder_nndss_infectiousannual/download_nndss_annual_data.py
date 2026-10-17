@@ -40,24 +40,22 @@ MIN_REQUEST_INTERVAL_SECONDS = 16.0  # CDC WONDER requires >= 15s between reques
 # Flags configuration
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'verticals',
-    'all',
-    'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
-)
-flags.DEFINE_string(
-    'years',
-    'all',
-    'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
-)
-_DEFAULT_OUTPUT_DIR = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 'input_files'
-)
-flags.DEFINE_string(
-    'output_dir',
-    _DEFAULT_OUTPUT_DIR,
-    'Output directory to save downloaded CSV files'
-)
+_DEFAULT_OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'input_files')
+
+
+def define_flags():
+    flags.DEFINE_string(
+        'verticals', 'all',
+        'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
+    )
+    flags.DEFINE_string(
+        'years', 'all',
+        'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
+    )
+    flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
+                        'Output directory to save downloaded CSV files')
+
 
 # Vertical breakdown configurations
 VERTICAL_CONFIGS = {
@@ -124,7 +122,8 @@ def _rate_limit_wait():
     elapsed = now - _last_request_time
     if elapsed < MIN_REQUEST_INTERVAL_SECONDS:
         wait_time = MIN_REQUEST_INTERVAL_SECONDS - elapsed
-        logging.info(f"Rate limiting: waiting {wait_time:.1f}s before next query...")
+        logging.info(
+            f"Rate limiting: waiting {wait_time:.1f}s before next query...")
         time.sleep(wait_time)
     _last_request_time = time.time()
 
@@ -185,44 +184,71 @@ def query_cdc_wonder(
     for attempt in range(1, max_retries + 1):
         _rate_limit_wait()
         try:
-            logging.debug(f"Sending HTTP POST request to {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries})...")
+            logging.debug(
+                f"Sending HTTP POST request to {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries})..."
+            )
             resp = session.post(CDC_WONDER_ENDPOINT, data=data, timeout=300)
             res = resp.text
             if '<title>Processing Error</title>' in res:
                 if 'rate exceeded' in res.lower():
-                    logging.warning(f"Rate limit hit on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}), backing off 25s...")
+                    logging.warning(
+                        f"Rate limit hit on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}), backing off 25s..."
+                    )
                     time.sleep(25)
                     continue
 
-                msg_match = re.search(r'<message>(.*?)</message>', res, re.DOTALL | re.IGNORECASE)
+                msg_match = re.search(r'<message>(.*?)</message>', res,
+                                      re.DOTALL | re.IGNORECASE)
                 err_msg = msg_match.group(1).strip() if msg_match else res
-                if 'd130.v1' in res.lower() or ('year' in err_msg.lower() and ('valid' in err_msg.lower() or 'unavailable' in err_msg.lower())):
-                    raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {err_msg}")
+                if 'd130.v1' in res.lower() or (
+                        'year' in err_msg.lower() and
+                    ('valid' in err_msg.lower() or
+                     'unavailable' in err_msg.lower())):
+                    raise YearUnavailableError(
+                        f"Year is unavailable in CDC WONDER: {err_msg}")
 
                 logging.fatal(f"CDC WONDER processing error ({context}): {res}")
-                raise RuntimeError(f"CDC WONDER processing error ({context}): {res}")
+                raise RuntimeError(
+                    f"CDC WONDER processing error ({context}): {res}")
             resp.raise_for_status()
-            logging.debug(f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}")
+            logging.debug(
+                f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}"
+            )
             if '<data-table' not in res and '<message>' in res:
-                msg_match = re.search(r'<message>(.*?)</message>', res, re.DOTALL | re.IGNORECASE)
+                msg_match = re.search(r'<message>(.*?)</message>', res,
+                                      re.DOTALL | re.IGNORECASE)
                 if msg_match:
                     err_text = msg_match.group(1).strip()
-                    if 'dataset or year is currently unavailable' in err_text.lower() or ('year' in err_text.lower() and 'unavailable' in err_text.lower()):
-                        raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {err_text}")
-                    logging.fatal(f"CDC WONDER error response ({context}): {err_text}")
-                    raise RuntimeError(f"CDC WONDER error response ({context}): {err_text}")
+                    if 'dataset or year is currently unavailable' in err_text.lower(
+                    ) or ('year' in err_text.lower() and
+                          'unavailable' in err_text.lower()):
+                        raise YearUnavailableError(
+                            f"Year is unavailable in CDC WONDER: {err_text}")
+                    logging.fatal(
+                        f"CDC WONDER error response ({context}): {err_text}")
+                    raise RuntimeError(
+                        f"CDC WONDER error response ({context}): {err_text}")
             return res
         except requests.HTTPError as e:
             if resp.status_code < 500:
                 logging.fatal(f"Fatal HTTP client error ({context}): {e}")
-                raise RuntimeError(f"Fatal HTTP client error ({context}): {e}") from e
-            logging.warning(f"Server error ({context}) (attempt {attempt}/{max_retries}): {e}")
+                raise RuntimeError(
+                    f"Fatal HTTP client error ({context}): {e}") from e
+            logging.warning(
+                f"Server error ({context}) (attempt {attempt}/{max_retries}): {e}"
+            )
             time.sleep(10 * attempt)
         except requests.RequestException as e:
-            logging.warning(f"Network error ({context}) (attempt {attempt}/{max_retries}): {e}")
+            logging.warning(
+                f"Network error ({context}) (attempt {attempt}/{max_retries}): {e}"
+            )
             time.sleep(10 * attempt)
-    logging.fatal(f"Failed to fetch data from CDC WONDER after maximum retries. ({context})")
-    raise RuntimeError(f"Failed to fetch data from CDC WONDER after maximum retries. ({context})")
+    logging.fatal(
+        f"Failed to fetch data from CDC WONDER after maximum retries. ({context})"
+    )
+    raise RuntimeError(
+        f"Failed to fetch data from CDC WONDER after maximum retries. ({context})"
+    )
 
 
 def parse_xml_to_csv_rows(xml_response: str, vertical: str) -> list:
@@ -277,13 +303,18 @@ def parse_xml_to_csv_rows(xml_response: str, vertical: str) -> list:
             colspan = int(c0.get('c', '1'))
             val = cells[1].attrib.get('dt', '0') if len(cells) > 1 else '0'
             d_code = disease_codes.get(_normalize_label(curr_disease), '')
-            y_code = year_codes.get(_normalize_label(curr_year), curr_year or '')
+            y_code = year_codes.get(_normalize_label(curr_year), curr_year or
+                                    '')
             if colspan == 1:
                 # Subtotal for year
-                rows.append(['Total', curr_disease, d_code, curr_year, y_code, '', '', val])
+                rows.append([
+                    'Total', curr_disease, d_code, curr_year, y_code, '', '',
+                    val
+                ])
             elif colspan == 2:
                 # Subtotal for disease
-                rows.append(['Total', curr_disease, d_code, '', '', '', '', val])
+                rows.append(
+                    ['Total', curr_disease, d_code, '', '', '', '', val])
             continue
 
         # Handle data rows
@@ -301,12 +332,16 @@ def parse_xml_to_csv_rows(xml_response: str, vertical: str) -> list:
         d_code = disease_codes.get(_normalize_label(curr_disease), '')
         y_code = year_codes.get(_normalize_label(curr_year), curr_year)
         b_code = breakdown_codes.get(_normalize_label(b_label), '')
-        rows.append(['', curr_disease, d_code, curr_year, y_code, b_label, b_code, val])
+        rows.append(
+            ['', curr_disease, d_code, curr_year, y_code, b_label, b_code, val])
 
     return rows
 
 
-def download_vertical_year(vertical: str, year: str, output_dir: str, session: requests.Session = None) -> bool:
+def download_vertical_year(vertical: str,
+                           year: str,
+                           output_dir: str,
+                           session: requests.Session = None) -> bool:
     """Downloads and writes CSV for a specific vertical breakdown and year.
 
     Returns:
@@ -315,9 +350,10 @@ def download_vertical_year(vertical: str, year: str, output_dir: str, session: r
     logging.info(f"Downloading vertical '{vertical}' for year {year}...")
     try:
         xml_payload = build_request_xml(vertical, year)
-        xml_response = query_cdc_wonder(
-            xml_payload, session=session, vertical=vertical, year=year
-        )
+        xml_response = query_cdc_wonder(xml_payload,
+                                        session=session,
+                                        vertical=vertical,
+                                        year=year)
     except YearUnavailableError as e:
         logging.warning(
             f"Skipping download (vertical={vertical}, year={year}, url={CDC_WONDER_ENDPOINT}): {e}"
@@ -328,11 +364,16 @@ def download_vertical_year(vertical: str, year: str, output_dir: str, session: r
 
     target_dir = os.path.join(output_dir, vertical)
     os.makedirs(target_dir, exist_ok=True)
-    target_csv = os.path.join(target_dir, f"NNDSS_Annual_Summary_Data_{year}.csv")
+    target_csv = os.path.join(target_dir,
+                              f"NNDSS_Annual_Summary_Data_{year}.csv")
 
     temp_path = None
     try:
-        with tempfile.NamedTemporaryFile('w', dir=target_dir, delete=False, newline='', encoding='utf-8') as f:
+        with tempfile.NamedTemporaryFile('w',
+                                         dir=target_dir,
+                                         delete=False,
+                                         newline='',
+                                         encoding='utf-8') as f:
             temp_path = f.name
             writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             for r in rows:
@@ -348,12 +389,16 @@ def download_vertical_year(vertical: str, year: str, output_dir: str, session: r
     return True
 
 
-def download_all(verticals: list, years: list, output_dir: str, session: requests.Session = None):
+def download_all(verticals: list,
+                 years: list,
+                 output_dir: str,
+                 session: requests.Session = None):
     """Downloads all requested verticals and years sequentially."""
     if session is None:
         session = get_session()
     # Sort years chronologically so early termination on the first unavailable year works correctly.
-    sorted_years = sorted(years, key=lambda x: int(x) if str(x).isdigit() else str(x))
+    sorted_years = sorted(years,
+                          key=lambda x: int(x) if str(x).isdigit() else str(x))
     total_tasks = len(verticals) * len(sorted_years)
     idx = 1
     successful_downloads = 0
@@ -382,18 +427,17 @@ def download_all(verticals: list, years: list, output_dir: str, session: request
                 idx += 1
                 remaining_count = len(sorted_years) - idx_y - 1
                 if remaining_count > 0:
-                    remaining_years = [str(ry) for ry in sorted_years[idx_y + 1:]]
+                    remaining_years = [
+                        str(ry) for ry in sorted_years[idx_y + 1:]
+                    ]
                     logging.info(
                         f"Year {str_y} is unavailable. Stopping further year probes for {v} "
-                        f"(skipping future years: {remaining_years})."
-                    )
+                        f"(skipping future years: {remaining_years}).")
                     unavailable_downloads += remaining_count
                     idx += remaining_count
                 break
-    logging.info(
-        f"All downloads finished: {successful_downloads} successful, "
-        f"{unavailable_downloads} unavailable."
-    )
+    logging.info(f"All downloads finished: {successful_downloads} successful, "
+                 f"{unavailable_downloads} unavailable.")
     if successful_downloads == 0:
         logging.fatal("Zero downloads succeeded from CDC WONDER API.")
 
@@ -404,18 +448,28 @@ def main(argv):
     if FLAGS.verticals.lower() == 'all':
         selected_verticals = list(VERTICAL_CONFIGS.keys())
     else:
-        selected_verticals = [v.strip() for v in FLAGS.verticals.split(',') if v.strip()]
+        selected_verticals = [
+            v.strip() for v in FLAGS.verticals.split(',') if v.strip()
+        ]
 
     if FLAGS.years.lower() == 'all':
         # Inclusive of published years up to datetime.date.today().year - 1
-        selected_years = [str(y) for y in range(2016, datetime.date.today().year)]
+        selected_years = [
+            str(y) for y in range(2016,
+                                  datetime.date.today().year)
+        ]
     else:
-        selected_years = [y.strip() for y in FLAGS.years.split(',') if y.strip()]
+        selected_years = [
+            y.strip() for y in FLAGS.years.split(',') if y.strip()
+        ]
 
-    logging.info(f"Starting download for verticals={selected_verticals}, years={selected_years}")
+    logging.info(
+        f"Starting download for verticals={selected_verticals}, years={selected_years}"
+    )
     logging.info(f"Output directory: {FLAGS.output_dir}")
     download_all(selected_verticals, selected_years, FLAGS.output_dir)
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

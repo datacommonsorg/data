@@ -76,19 +76,21 @@ from counters import Counters
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_list('recon_schema_mcf', [],
-                  'List of schema MCF files to load for reconciliation.')
-flags.DEFINE_list('recon_input', [],
-                  'List of MCF files to load for reconciliation.')
-flags.DEFINE_string(
-    'recon_output',
-    '',
-    'Output MCF for reconciled nodes.',
-)
-flags.DEFINE_list('recon_property', [],
-                  'List of properties to be looked up for reconciliation.')
-flags.DEFINE_bool('recon_keep_legacy_svobs', True,
-                  'Keep the legacy value when reconciling nodes.')
+
+def define_flags():
+    flags.DEFINE_list('recon_schema_mcf', [],
+                      'List of schema MCF files to load for reconciliation.')
+    flags.DEFINE_list('recon_input', [],
+                      'List of MCF files to load for reconciliation.')
+    flags.DEFINE_string(
+        'recon_output',
+        '',
+        'Output MCF for reconciled nodes.',
+    )
+    flags.DEFINE_list('recon_property', [],
+                      'List of properties to be looked up for reconciliation.')
+    flags.DEFINE_bool('recon_keep_legacy_svobs', True,
+                      'Keep the legacy value when reconciling nodes.')
 
 
 def get_default_recon_config() -> dict:
@@ -97,8 +99,10 @@ def get_default_recon_config() -> dict:
         _FLAGS.mark_as_parsed()
 
     return {
-        'recon_property': _FLAGS.recon_property,
-        'recon_keep_legacy_svobs': _FLAGS.recon_keep_legacy_svobs,
+        'recon_property':
+            getattr(_FLAGS, 'recon_property', []),
+        'recon_keep_legacy_svobs':
+            getattr(_FLAGS, 'recon_keep_legacy_svobs', True),
     }
 
 
@@ -425,4 +429,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    define_flags()
     app.run(main)

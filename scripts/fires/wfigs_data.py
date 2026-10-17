@@ -40,11 +40,13 @@ pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('read_location_cache', True,
-                     'save location cache to file.')
 
-flags.DEFINE_boolean('save_location_cache', False,
-                     'save location cache to file.')
+def define_flags():
+    flags.DEFINE_boolean('read_location_cache', True,
+                         'save location cache to file.')
+    flags.DEFINE_boolean('save_location_cache', False,
+                         'save location cache to file.')
+
 
 # FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
 # Only download data from Oct 10, 2022 to make auto refresh manageable.
@@ -320,4 +322,5 @@ def main(_) -> None:
 
 
 if __name__ == "__main__":
+    define_flags()
     app.run(main)

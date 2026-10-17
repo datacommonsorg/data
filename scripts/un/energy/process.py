@@ -43,15 +43,20 @@ import un_energy_codes
 import download
 
 FLAGS = flags.FLAGS
-flags.DEFINE_list('csv_data_files', [],
-                  'csv files from UNData Energy datasets to process')
-flags.DEFINE_string('output_path', 'output_data/un_energy_output',
-                    'Data set name used as file name for mcf and tmcf')
-flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
-flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
-flags.DEFINE_bool('copy_input_columns', False,
-                  'Add columns from the input csv into the output')
-flags.DEFINE_string('output_counters', '', 'File to write counters to')
+
+
+def define_flags():
+    flags.DEFINE_list('csv_data_files', [],
+                      'csv files from UNData Energy datasets to process')
+    flags.DEFINE_string('output_path', 'output_data/un_energy_output',
+                        'Data set name used as file name for mcf and tmcf')
+    flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
+    flags.DEFINE_integer('debug_lines', 100000,
+                         'Print error logs every N lines')
+    flags.DEFINE_bool('copy_input_columns', False,
+                      'Add columns from the input csv into the output')
+    flags.DEFINE_string('output_counters', '', 'File to write counters to')
+
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -604,5 +609,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    download.define_flags()
+    define_flags()
     logging.info('running main')
     app.run(main)

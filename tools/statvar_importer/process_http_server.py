@@ -74,19 +74,22 @@ from absl import logging
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('http_port', 0, 'HTTP port to listen for URLs.')
-flags.DEFINE_integer(
-    'http_server_threads',
-    10,
-    'Number of http listener threads for simultaneous requests.',
-)
-flags.DEFINE_string('http_config', '',
-                    'File with configurations for the HTTP server.')
-flags.DEFINE_integer(
-    'http_server_timeout',
-    86400 * 365,
-    'Maximum duration in seconds to run the web server.',
-)
+
+def define_flags():
+    flags.DEFINE_integer('http_port', 0, 'HTTP port to listen for URLs.')
+    flags.DEFINE_integer(
+        'http_server_threads',
+        10,
+        'Number of http listener threads for simultaneous requests.',
+    )
+    flags.DEFINE_string('http_config', '',
+                        'File with configurations for the HTTP server.')
+    flags.DEFINE_integer(
+        'http_server_timeout',
+        86400 * 365,
+        'Maximum duration in seconds to run the web server.',
+    )
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -333,13 +336,15 @@ def run_http_server(
 
   This is a blocking call that doesn't return to the caller.
   """
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     if http_port <= 0:
-        http_port = _FLAGS.http_port
+        http_port = getattr(_FLAGS, 'http_port', 0)
         if http_port <= 0:
             return False
     global _HTTP_CONFIG
     if not config:
-        config = ConfigMap(_FLAGS.http_config).get_configs()
+        config = ConfigMap(getattr(_FLAGS, 'http_config', '')).get_configs()
     if http_port:
         config['http_port'] = http_port
     if script:
@@ -365,11 +370,12 @@ def run_http_server(
     # TODO: find a way to pass config to handler.
     _HTTP_CONFIG = dict(config)
     httpd = ThreadedHTTPServer(
-        http_port=config.get('http_port', _FLAGS.http_port),
+        http_port=config.get('http_port', getattr(_FLAGS, 'http_port', 0)),
         handler=ProcessHandler,
-        num_threads=config.get('http_threads', _FLAGS.http_server_threads),
+        num_threads=config.get('http_threads',
+                               getattr(_FLAGS, 'http_server_threads', 10)),
     )
-    httpd.serve_forever(_FLAGS.http_server_timeout)
+    httpd.serve_forever(getattr(_FLAGS, 'http_server_timeout', 86400 * 365))
     return True
 
 
@@ -378,4 +384,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

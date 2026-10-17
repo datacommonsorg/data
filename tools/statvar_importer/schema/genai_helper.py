@@ -32,25 +32,28 @@ sys.path.append(
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('genai_api_key', '', 'Google API key for generative AI')
-flags.DEFINE_string('genai_input', '', 'Input file with input query.')
-flags.DEFINE_string('genai_input_params', '',
-                    'File with dictionary if input parameters')
-flags.DEFINE_string('genai_output', '',
-                    'Output file with generated response text.')
-flags.DEFINE_string('genai_model', 'gemini-2.0-flash', 'Model to use with LLM.')
-flags.DEFINE_boolean('genai_dry_run', False,
-                     'Do not query the LLM, but only log the input query.')
-flags.DEFINE_string(
-    'genai_request', '',
-    'Text file where the LLM request text used is copied into.')
-flags.DEFINE_string('genai_response', '', 'Text file with the LLM response')
-
 import file_util
 import process_http_server
 
 from config_map import ConfigMap
 from counters import Counters
+
+
+def define_flags():
+    flags.DEFINE_string('genai_api_key', '', 'Google API key for generative AI')
+    flags.DEFINE_string('genai_input', '', 'Input file with input query.')
+    flags.DEFINE_string('genai_input_params', '',
+                        'File with dictionary if input parameters')
+    flags.DEFINE_string('genai_output', '',
+                        'Output file with generated response text.')
+    flags.DEFINE_string('genai_model', 'gemini-2.0-flash',
+                        'Model to use with LLM.')
+    flags.DEFINE_boolean('genai_dry_run', False,
+                         'Do not query the LLM, but only log the input query.')
+    flags.DEFINE_string(
+        'genai_request', '',
+        'Text file where the LLM request text used is copied into.')
+    flags.DEFINE_string('genai_response', '', 'Text file with the LLM response')
 
 
 # Class to query GenAI APIs using a given prompt.
@@ -218,12 +221,14 @@ def generate_content(input_prompt: str,
 
 def get_genai_helper_config_from_flags():
     """Return config fomr commandline flags."""
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
-        'llm_model': _FLAGS.genai_model,
-        'google_api_key': _FLAGS.genai_api_key,
-        'llm_dry_run': _FLAGS.genai_dry_run,
-        'llm_request': _FLAGS.genai_request,
-        'llm_response': _FLAGS.genai_response,
+        'llm_model': getattr(_FLAGS, 'genai_model', 'gemini-2.0-flash'),
+        'google_api_key': getattr(_FLAGS, 'genai_api_key', ''),
+        'llm_dry_run': getattr(_FLAGS, 'genai_dry_run', False),
+        'llm_request': getattr(_FLAGS, 'genai_request', ''),
+        'llm_response': getattr(_FLAGS, 'genai_response', ''),
     }
 
 
@@ -242,4 +247,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    define_flags()
     app.run(main)

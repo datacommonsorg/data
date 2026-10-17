@@ -37,15 +37,6 @@ from absl import logging
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'ignore_mcf',
-    '',
-    'Comma separated list of MCF files with nodes to be dropped from output',
-)
-flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
-flags.DEFINE_bool('ignore_existing_nodes', True,
-                  'Drop nodes that are defined in DC API.')
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -54,10 +45,23 @@ sys.path.append(
 
 from counters import Counters
 from dc_api_wrapper import dc_api_get_node_property_values
+import mcf_file_util
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes
 from mcf_file_util import add_namespace, strip_namespace
 from mcf_file_util import check_nodes_can_merge
+import mcf_diff
 from mcf_diff import diff_mcf_node_pvs, get_diff_config
+
+
+def define_flags():
+    flags.DEFINE_string(
+        'ignore_mcf',
+        '',
+        'Comma separated list of MCF files with nodes to be dropped from output',
+    )
+    flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
+    flags.DEFINE_bool('ignore_existing_nodes', True,
+                      'Drop nodes that are defined in DC API.')
 
 
 def drop_mcf_nodes(
@@ -195,4 +199,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    mcf_file_util.define_flags()
+    mcf_diff.define_flags()
+    define_flags()
     app.run(main)

@@ -32,11 +32,15 @@ import requests
 from retry import retry
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('income_output_dir', 'output',
-                    'Path to write cleaned CSVs.')
-flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
-flags.DEFINE_string('mode', '',
-                    'Mode: "download", "process", or both (default: both).')
+
+
+def _define_flags():
+    flags.DEFINE_string('income_output_dir', 'output',
+                        'Path to write cleaned CSVs.')
+    flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
+    flags.DEFINE_string(
+        'mode', '', 'Mode: "download", "process", or both (default: both).')
+
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 
@@ -201,4 +205,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

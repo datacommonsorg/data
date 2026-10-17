@@ -40,20 +40,25 @@ from absl import flags
 from google.cloud import spanner
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("directory",
-                    os.getcwd(),
-                    "Directory to scan (default: current working directory)",
-                    allow_override=True)
-flags.DEFINE_string(
-    "output_dir",
-    "",
-    "Directory to write output files (default: same as directory)",
-    allow_override=True)
-flags.DEFINE_bool("no_spanner", False, "Skip Spanner check")
-flags.DEFINE_string("spanner_project", "datcom-store", "Spanner project ID")
-flags.DEFINE_string("spanner_instance", "dc-graph-staging",
-                    "Spanner instance ID")
-flags.DEFINE_string("spanner_database", "dc_graph", "Spanner database ID")
+
+
+def _define_flags():
+    flags.DEFINE_string(
+        "directory",
+        os.getcwd(),
+        "Directory to scan (default: current working directory)",
+        allow_override=True)
+    flags.DEFINE_string(
+        "output_dir",
+        "",
+        "Directory to write output files (default: same as directory)",
+        allow_override=True)
+    flags.DEFINE_bool("no_spanner", False, "Skip Spanner check")
+    flags.DEFINE_string("spanner_project", "datcom-store", "Spanner project ID")
+    flags.DEFINE_string("spanner_instance", "dc-graph-staging",
+                        "Spanner instance ID")
+    flags.DEFINE_string("spanner_database", "dc_graph", "Spanner database ID")
+
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -353,4 +358,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

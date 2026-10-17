@@ -32,8 +32,6 @@ import pandas as pd
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-
 from national.national_1900_1970 import process_national_1900_1970
 from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
@@ -61,7 +59,14 @@ from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE, __INPUTFILES
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
+
 _MODULE_DIR = os.path.dirname(__file__)
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'output_files/intermediate')
 _FILES_TO_DOWNLOAD = None
@@ -281,4 +286,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

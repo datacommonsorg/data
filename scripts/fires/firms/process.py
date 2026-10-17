@@ -27,9 +27,12 @@ from absl import flags
 from absl import logging
 from io import StringIO
 
-flags.DEFINE_string('config_path',
-                    'gs://datcom-import-cache/fires/firms/firms_config.py',
-                    'Path to JSON file with configurations.')
+
+def define_flags():
+    flags.DEFINE_string('config_path',
+                        'gs://datcom-import-cache/fires/firms/firms_config.py',
+                        'Path to JSON file with configurations.')
+
 
 _FLAGS = flags.FLAGS
 
@@ -105,4 +108,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

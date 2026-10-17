@@ -11,11 +11,14 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'raw_data_path', 'scratch', 'Path to the equivalent of '
-    'https://www2.census.gov/programs-surveys/decennial/')
-flags.DEFINE_string('usc_output_path', 'output', 'Output directory')
-flags.DEFINE_boolean('verbose', False, 'Print debug info')
+
+def _define_flags():
+    flags.DEFINE_string(
+        'raw_data_path', 'scratch', 'Path to the equivalent of '
+        'https://www2.census.gov/programs-surveys/decennial/')
+    flags.DEFINE_string('usc_output_path', 'output', 'Output directory')
+    flags.DEFINE_boolean('verbose', False, 'Print debug info')
+
 
 _YEARS = ['2000', '2010', '2020']
 _DIR_PREFIX = 'data/01-Redistricting_File--PL_94-171'
@@ -358,4 +361,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

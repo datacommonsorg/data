@@ -37,21 +37,21 @@ _CONFIG_OVERRIDE_FILE: str = 'config_override.json'
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: update or schedule.')
-flags.DEFINE_string('gcp_project_id', '',
-                    'GCP Project where import executor runs.')
-flags.DEFINE_string('scheduler_config_secret', 'import-scheduler-config',
-                    'GCP secret for the Scheduler config.')
 
-flags.DEFINE_string(
-    'absolute_import_path', '',
-    'A string specifying the path of an import in the following format:'
-    '<path_to_directory_relative_to_repository_root>:<import_name>.'
-    'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
-flags.DEFINE_string('config_override', _CONFIG_OVERRIDE_FILE,
-                    'Config file with overridden parameters.')
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: update or schedule.')
+    flags.DEFINE_string('gcp_project_id', '',
+                        'GCP Project where import executor runs.')
+    flags.DEFINE_string('scheduler_config_secret', 'import-scheduler-config',
+                        'GCP secret for the Scheduler config.')
+    flags.DEFINE_string(
+        'absolute_import_path', '',
+        'A string specifying the path of an import in the following format:'
+        '<path_to_directory_relative_to_repository_root>:<import_name>.'
+        'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
+    flags.DEFINE_string('config_override', _CONFIG_OVERRIDE_FILE,
+                        'Config file with overridden parameters.')
 
-_FLAGS(sys.argv)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -289,4 +289,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

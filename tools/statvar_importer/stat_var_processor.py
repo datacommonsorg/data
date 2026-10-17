@@ -66,6 +66,7 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
+import log_util
 from log_util import configure_cloud_logging, running_on_cloud
 from utils import (capitalize_first_char, is_place_dcid,
                    get_observation_date_format, get_observation_period_for_date,
@@ -77,27 +78,60 @@ import data_annotator
 
 import property_value_utils as pv_utils
 
+import filter_data_outliers
 from filter_data_outliers import filter_data_svobs
+import mcf_file_util
 from mcf_file_util import get_numeric_value, get_value_list, add_pv_to_node
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
+import mcf_filter
 from mcf_filter import drop_existing_mcf_nodes
+import mcf_diff
 from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
+import place_resolver
 from place_resolver import PlaceResolver
 from property_value_mapper import PropertyValueMapper
+import schema_resolver
 from schema_resolver import SchemaResolver
+import json_to_csv
 from json_to_csv import file_json_to_csv
+import schema_generator
 from schema_generator import generate_schema_nodes, generate_statvar_name
+import schema_checker
 from schema_checker import sanity_check_nodes
+import schema_reconciler
 from schema_reconciler import SchemaReconciler
 
 # imports from ../../util
 from config_map import ConfigMap, read_py_dict_from_file
+import counters as counters_mod
 from counters import Counters, CounterOptions
 from dc_api_wrapper import dc_api_is_defined_dcid
 from download_util import download_file_from_url
 from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
+
+
+def define_flags():
+    counters_mod._define_flags()
+    log_util._define_flags()
+    config_flags.define_flags()
+    process_http_server.define_flags()
+    data_annotator.define_flags()
+    data_annotator.llm_pvmap_generator.define_flags()
+    data_annotator.llm_pvmap_generator.genai_helper.define_flags()
+    data_annotator.data_sampler.define_flags()
+    filter_data_outliers.define_flags()
+    mcf_file_util.define_flags()
+    mcf_filter.define_flags()
+    mcf_diff.define_flags()
+    place_resolver.define_flags()
+    schema_resolver.define_flags()
+    json_to_csv.define_flags()
+    schema_generator.define_flags()
+    schema_checker.define_flags()
+    schema_checker.schema_spell_checker.define_flags()
+    schema_reconciler.define_flags()
 
 
 class StatVarsMap:
@@ -3010,4 +3044,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

@@ -39,10 +39,18 @@ from urllib.parse import urlparse
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'tax_id_dcid_mapping',
-    'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
-    'Input directory where .txt files downloaded.')
+
+def _define_flags() -> None:
+    flags.DEFINE_string(
+        'tax_id_dcid_mapping',
+        'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
+        'Input directory where .txt files downloaded.')
+    flags.DEFINE_string('output_dir', 'output',
+                        'Output directory for generated files.')
+    flags.DEFINE_string('input_dir', 'input',
+                        'Input directory where .dmp files downloaded.')
+
+
 SOURCE_FILE_PATH = 'input/'
 OUTPUT_FILE_PATH = 'output/'
 OUTPUT_MCF_FILE = 'ncbi_taxonomy_schema_enum.mcf'
@@ -200,12 +208,6 @@ CATEGORIES_DICT = {
 }
 
 _FLAGS = flags.FLAGS
-
-flags.DEFINE_string('output_dir', 'output',
-                    'Output directory for generated files.')
-
-flags.DEFINE_string('input_dir', 'input',
-                    'Input directory where .dmp files downloaded.')
 
 MODULE_DIR = dirname(dirname(abspath(__file__)))
 
@@ -705,4 +707,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

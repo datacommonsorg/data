@@ -28,10 +28,12 @@ sys.path.append(SCRIPT_DIR)
 
 from timer import Timer
 
-flags.DEFINE_integer('funcion_call_log_level', logging.INFO,
-                     'Log level for function call logs.')
-
 _FLAGS = flags.FLAGS
+
+
+def _define_flags():
+    flags.DEFINE_integer('funcion_call_log_level', logging.INFO,
+                         'Log level for function call logs.')
 
 
 def log_struct(level: str, message: str, labels: dict):
@@ -141,7 +143,7 @@ def log_function_call(func):
         func_name = func.__name__
         log_level = logging.INFO
         if _FLAGS.is_parsed():
-            log_level = _FLAGS.funcion_call_log_level
+            log_level = getattr(_FLAGS, 'funcion_call_log_level', logging.INFO)
         logging.log(log_level, f"Function start: {func_name}")
         timer = Timer()
         try:

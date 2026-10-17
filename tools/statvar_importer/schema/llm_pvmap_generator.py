@@ -50,27 +50,6 @@ _DEFAULT_LLM_PROMPT = os.path.join(_SCRIPT_DIR, 'llm_pvmap_prompt.txt')
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('google_api_key', '', 'Google API key for generative AI')
-flags.DEFINE_string('llm_pvmap_input', '',
-                    'Input file with srings to be mapped to property values')
-flags.DEFINE_string('llm_pvmap_output', '', 'Output file with generated pvmap')
-flags.DEFINE_string('llm_model', 'gemini-2.0-flash', 'Model to use with LLM.')
-flags.DEFINE_string('llm_sample_pvmap', 'sample_pvmap.csv',
-                    'File with example property:value mappings.')
-flags.DEFINE_string(
-    'llm_sample_data', '',
-    'File with sample CSV data with columns headers and strings to be mapped to PVs.'
-)
-flags.DEFINE_string('llm_sample_statvars', 'sample_statvars.mcf',
-                    'MCF file with example statvars.')
-flags.DEFINE_string('llm_data_context', '',
-                    'Text file with description of the data strings.')
-flags.DEFINE_string('llm_pvmap_prompt', _DEFAULT_LLM_PROMPT,
-                    'Text file with the LLM prompt to generate PVMap.')
-flags.DEFINE_string('llm_request', '',
-                    'Output text file with copy prompt sent to LLM.')
-flags.DEFINE_string('llm_response', '', 'Output text file with LLM response.')
-
 import data_sampler
 import file_util
 import process_http_server
@@ -78,6 +57,36 @@ import config_flags
 import schema_generator
 import mcf_file_util
 import property_value_mapper
+import genai_helper
+
+
+def define_flags():
+    flags.DEFINE_string('google_api_key', '',
+                        'Google API key for generative AI')
+    flags.DEFINE_string(
+        'llm_pvmap_input', '',
+        'Input file with srings to be mapped to property values')
+    flags.DEFINE_string('llm_pvmap_output', '',
+                        'Output file with generated pvmap')
+    flags.DEFINE_string('llm_model', 'gemini-2.0-flash',
+                        'Model to use with LLM.')
+    flags.DEFINE_string('llm_sample_pvmap', 'sample_pvmap.csv',
+                        'File with example property:value mappings.')
+    flags.DEFINE_string(
+        'llm_sample_data', '',
+        'File with sample CSV data with columns headers and strings to be mapped to PVs.'
+    )
+    flags.DEFINE_string('llm_sample_statvars', 'sample_statvars.mcf',
+                        'MCF file with example statvars.')
+    flags.DEFINE_string('llm_data_context', '',
+                        'Text file with description of the data strings.')
+    flags.DEFINE_string('llm_pvmap_prompt', _DEFAULT_LLM_PROMPT,
+                        'Text file with the LLM prompt to generate PVMap.')
+    flags.DEFINE_string('llm_request', '',
+                        'Output text file with copy prompt sent to LLM.')
+    flags.DEFINE_string('llm_response', '',
+                        'Output text file with LLM response.')
+
 
 from config_map import ConfigMap
 from counters import Counters
@@ -340,16 +349,26 @@ def get_nodes_from_pv_string(sv_name_pvs: str,
 
 
 def get_llm_config_from_flags() -> dict:
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     config = get_genai_helper_config_from_flags()
     config.update({
-        'google_api_key': _FLAGS.google_api_key,
-        'sample_pvmap': _FLAGS.llm_sample_pvmap,
-        'sample_statvars': _FLAGS.llm_sample_statvars,
-        'sample_data': _FLAGS.llm_sample_data,
-        'context': _FLAGS.llm_data_context,
-        'llm_pvmap_prompt': _FLAGS.llm_pvmap_prompt,
-        'llm_request': _FLAGS.llm_request,
-        'llm_response': _FLAGS.llm_response,
+        'google_api_key':
+            getattr(_FLAGS, 'google_api_key', ''),
+        'sample_pvmap':
+            getattr(_FLAGS, 'llm_sample_pvmap', 'sample_pvmap.csv'),
+        'sample_statvars':
+            getattr(_FLAGS, 'llm_sample_statvars', 'sample_statvars.mcf'),
+        'sample_data':
+            getattr(_FLAGS, 'llm_sample_data', ''),
+        'context':
+            getattr(_FLAGS, 'llm_data_context', ''),
+        'llm_pvmap_prompt':
+            getattr(_FLAGS, 'llm_pvmap_prompt', _DEFAULT_LLM_PROMPT),
+        'llm_request':
+            getattr(_FLAGS, 'llm_request', ''),
+        'llm_response':
+            getattr(_FLAGS, 'llm_response', ''),
     })
     return config
 
@@ -387,4 +406,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    genai_helper.define_flags()
+    define_flags()
     app.run(main)

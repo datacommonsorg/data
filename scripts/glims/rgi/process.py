@@ -31,8 +31,10 @@ from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('rgi_input_csv_pattern', '', 'Glacier CSV file pattern')
-flags.DEFINE_string('rgi_output_dir', '/tmp/', 'Output directory')
+
+def _define_flags():
+    flags.DEFINE_string('rgi_input_csv_pattern', '', 'Glacier CSV file pattern')
+    flags.DEFINE_string('rgi_output_dir', '/tmp/', 'Output directory')
 
 
 def _extract_node_dcid(node):
@@ -173,4 +175,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

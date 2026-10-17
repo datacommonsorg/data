@@ -21,12 +21,17 @@ import pandas as pd
 from absl import app, flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'report_input_file', './data/tar_creek_2020_corrected.csv',
-    'Location of the intermediate csv file from process_report2020.py script')
-flags.DEFINE_string(
-    'processed_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags():
+    flags.DEFINE_string(
+        'report_input_file', './data/tar_creek_2020_corrected.csv',
+        'Location of the intermediate csv file from process_report2020.py script'
+    )
+    flags.DEFINE_string(
+        'processed_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 _UNIT_MAP = {
     "Cond.": "dcs:MicroseimensPerCentimeter",
@@ -267,4 +272,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

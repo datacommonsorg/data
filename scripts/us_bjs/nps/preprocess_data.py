@@ -3,10 +3,13 @@ from absl import flags
 from absl import app
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('preprocess_file',
-                    'NPS_1978-2018_Data.tsv',
-                    'file path to tsv file with data to proess',
-                    short_name='p')
+
+
+def define_flags():
+    flags.DEFINE_string('preprocess_file',
+                        'NPS_1978-2018_Data.tsv',
+                        'file path to tsv file with data to proess',
+                        short_name='p')
 
 
 def convert_nan_for_calculation(value):
@@ -607,4 +610,5 @@ def main(args):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

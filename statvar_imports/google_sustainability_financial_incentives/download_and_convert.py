@@ -35,17 +35,19 @@ from json_to_csv import file_json_to_csv
 _URL_HASH_DIGEST_SIZE = 8
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('gcs_bucket', 'datacommons_public',
-                    'GCS bucket name containing the data')
-flags.DEFINE_string('gcs_base_path',
-                    'source_csv/sustainability_financial_incentives',
-                    'Base path in GCS bucket')
-flags.DEFINE_string('input_files', 'input_files',
-                    'Local directory to store downloaded files')
-flags.DEFINE_string('output_csv', 'financial_incentives_data.csv',
-                    'Output CSV file name')
-flags.DEFINE_string('json_filename', 'financial_incentives_prod_data.json',
-                    'JSON file name to download')
+
+def define_flags():
+    flags.DEFINE_string('gcs_bucket', 'datacommons_public',
+                        'GCS bucket name containing the data')
+    flags.DEFINE_string('gcs_base_path',
+                        'source_csv/sustainability_financial_incentives',
+                        'Base path in GCS bucket')
+    flags.DEFINE_string('input_files', 'input_files',
+                        'Local directory to store downloaded files')
+    flags.DEFINE_string('output_csv', 'financial_incentives_data.csv',
+                        'Output CSV file name')
+    flags.DEFINE_string('json_filename', 'financial_incentives_prod_data.json',
+                        'JSON file name to download')
 
 
 def find_latest_dated_folder(bucket_name: str, base_path: str) -> Optional[str]:
@@ -185,8 +187,9 @@ def convert_json_to_csv(json_path: str, csv_path: str) -> bool:
                 continue
             # Use BLAKE2s with 8-byte digest for a stable, shorter hash.
             # Increase digest_size here if future collisions are observed.
-            hash_value = hashlib.blake2s(url.encode('utf-8'),
-                                         digest_size=_URL_HASH_DIGEST_SIZE).hexdigest()
+            hash_value = hashlib.blake2s(
+                url.encode('utf-8'),
+                digest_size=_URL_HASH_DIGEST_SIZE).hexdigest()
             extraction_config['url_stable_hash'] = hash_value
 
         # Create temporary JSON file in same directory as original
@@ -257,4 +260,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

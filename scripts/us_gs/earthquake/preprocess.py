@@ -33,21 +33,26 @@ from util import gcs_file
 from place_cache import PlaceCache
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('usgs_earthquake_input', '/tmp/usgs/*.csv',
-                    'Glob pattern for a set of raw USGS earthquake CSV files.')
 
-flags.DEFINE_string(
-    'usgs_earthquake_output', 'earthquake.csv',
-    'Path to the output preprocessed csv that this script will produce.')
 
-# A place resolution cache file is a csv file where first two values
-# are lat and lng respectively, the rest of the values in the
-# same line are place ids that (lat, lng) resolves to.
-# If the whole line consists of lat,lng then it means that the coordinate
-# does not resolve to places known by Data Commons.
-flags.DEFINE_string('usgs_earthquake_location_cache_path',
-                    'gs://datcom-import-cache/earthquake/place_cache.txt',
-                    'Path to place resolution cache file.')
+def _define_flags():
+    flags.DEFINE_string(
+        'usgs_earthquake_input', '/tmp/usgs/*.csv',
+        'Glob pattern for a set of raw USGS earthquake CSV files.')
+
+    flags.DEFINE_string(
+        'usgs_earthquake_output', 'earthquake.csv',
+        'Path to the output preprocessed csv that this script will produce.')
+
+    # A place resolution cache file is a csv file where first two values
+    # are lat and lng respectively, the rest of the values in the
+    # same line are place ids that (lat, lng) resolves to.
+    # If the whole line consists of lat,lng then it means that the coordinate
+    # does not resolve to places known by Data Commons.
+    flags.DEFINE_string('usgs_earthquake_location_cache_path',
+                        'gs://datcom-import-cache/earthquake/place_cache.txt',
+                        'Path to place resolution cache file.')
+
 
 # Below are mappings used to map raw data into what is accepted in DC schema.
 #
@@ -242,4 +247,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

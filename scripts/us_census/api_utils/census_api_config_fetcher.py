@@ -35,9 +35,14 @@ from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_ur
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean(
-    'force_fetch_config', False,
-    'Force download of config and list of required geos from API')
+
+def define_config_fetcher_flags():
+    flags.DEFINE_boolean(
+        'force_fetch_config', False,
+        'Force download of config and list of required geos from API')
+
+
+define_flags = define_config_fetcher_flags
 
 
 def _generate_url_prefix(dataset: str, year: str = None) -> str:
@@ -971,4 +976,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

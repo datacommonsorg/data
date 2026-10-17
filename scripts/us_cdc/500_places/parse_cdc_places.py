@@ -38,9 +38,15 @@ sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
-    'Path to config file')
+
+
+def _define_flags():
+    flags.DEFINE_string(
+        'config_path',
+        'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+        'Path to config file')
+
+
 _MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            'gcs_output')
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -404,5 +410,5 @@ def main(_):
 
 
 if __name__ == "__main__":
-
+    _define_flags()
     app.run(main)

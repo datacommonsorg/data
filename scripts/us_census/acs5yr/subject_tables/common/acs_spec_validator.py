@@ -28,17 +28,22 @@ from .common_util import *
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('validator_output', '../output/',
-                    'Path to store the output files')
-flags.DEFINE_multi_enum('tests', ['all'], [
-    'all', 'extra_tokens', 'missing_tokens', 'column_no_pv', 'ignore_conflicts',
-    'enum_specialisations', 'denominators', 'extra_inferred',
-    'multiple_measurement', 'multiple_population'
-], 'List of tests to run')
-flags.DEFINE_list('zip_list', None,
-                  'List of paths to zip files downloaded from US Census')
-flags.DEFINE_string('column_list_path', None,
-                    'Path of json file containing list of all columns')
+
+def define_acs_spec_validator_flags():
+    flags.DEFINE_string('validator_output', '../output/',
+                        'Path to store the output files')
+    flags.DEFINE_multi_enum('tests', ['all'], [
+        'all', 'extra_tokens', 'missing_tokens', 'column_no_pv',
+        'ignore_conflicts', 'enum_specialisations', 'denominators',
+        'extra_inferred', 'multiple_measurement', 'multiple_population'
+    ], 'List of tests to run')
+    flags.DEFINE_list('zip_list', None,
+                      'List of paths to zip files downloaded from US Census')
+    flags.DEFINE_string('column_list_path', None,
+                        'Path of json file containing list of all columns')
+
+
+define_flags = define_acs_spec_validator_flags
 
 
 def find_extra_tokens(column_name_list: list,
@@ -837,6 +842,8 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_common_util_flags()
+    define_flags()
     flags.mark_flags_as_required(['spec_path'])
     flags.mark_flags_as_mutual_exclusive(
         ['csv_list', 'zip_list', 'column_list_path'], required=True)

@@ -39,11 +39,6 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 import gspread
 
-flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
-flags.DEFINE_string('output_prefix', '',
-                    'Path prefix for output csv and mcf files.')
-flags.DEFINE_string('credentials', '', 'File with credentials.')
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -57,6 +52,14 @@ import config_flags
 import process_http_server
 
 _FLAGS = flags.FLAGS
+
+
+def define_flags():
+    flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
+    flags.DEFINE_string('output_prefix', '',
+                        'Path prefix for output csv and mcf files.')
+    flags.DEFINE_string('credentials', '', 'File with credentials.')
+
 
 _HOME_DIR = os.path.expanduser('~')
 
@@ -353,4 +356,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    stat_var_processor.define_flags()
+    define_flags()
     app.run(main)

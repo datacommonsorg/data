@@ -47,48 +47,57 @@ sys.path.append(
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_file', '', 'Input file with queries to lookup.')
-flags.DEFINE_list('input_query', [], 'Input queries to lookup.')
-flags.DEFINE_string('schema_output_csv', '',
-                    'Output CSV with matching property, values.')
-flags.DEFINE_string(
-    'schema_matcher_mcf',
-    'sample_schema.mcf',
-    'Comma separated list of MCF files.',
-)
-flags.DEFINE_list('mcf_include_pv', [],
-                  'List of property:values to include in the MCF.')
-flags.DEFINE_string('schema_matcher_config', '', 'Config dictionary.')
-flags.DEFINE_float(
-    'min_match_fraction',
-    0.7,
-    'Minimum fraction of input string to match in results.',
-)
-flags.DEFINE_bool('schema_embeddings_lookup', False,
-                  'Enable schema lookup using embeddings.')
-flags.DEFINE_string('schema_macher_embeddings', '',
-                    'File with embeddings for schema matcher.')
-flags.DEFINE_bool('schema_matcher_debug', False, 'Enable debug messages.')
-
 import file_util
 import download_util
 import process_http_server
 
 from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, strip_namespace, add_pv_to_node
 from ngram_matcher import NgramMatcher
+import semantic_matcher
 from semantic_matcher import SemanticMatcher
 from config_map import ConfigMap
 from counters import Counters
 
 
+def define_flags():
+    flags.DEFINE_string('input_file', '', 'Input file with queries to lookup.')
+    flags.DEFINE_list('input_query', [], 'Input queries to lookup.')
+    flags.DEFINE_string('schema_output_csv', '',
+                        'Output CSV with matching property, values.')
+    flags.DEFINE_string(
+        'schema_matcher_mcf',
+        'sample_schema.mcf',
+        'Comma separated list of MCF files.',
+    )
+    flags.DEFINE_list('mcf_include_pv', [],
+                      'List of property:values to include in the MCF.')
+    flags.DEFINE_string('schema_matcher_config', '', 'Config dictionary.')
+    flags.DEFINE_float(
+        'min_match_fraction',
+        0.7,
+        'Minimum fraction of input string to match in results.',
+    )
+    flags.DEFINE_bool('schema_embeddings_lookup', False,
+                      'Enable schema lookup using embeddings.')
+    flags.DEFINE_string('schema_macher_embeddings', '',
+                        'File with embeddings for schema matcher.')
+    flags.DEFINE_bool('schema_matcher_debug', False, 'Enable debug messages.')
+
+
 def get_schema_matcher_config() -> dict:
     """Returns the schema matcher config from command line flags."""
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         'match_props': ['dcid', 'name', 'description'],
-        'max_results': 10,
-        'min_match_fraction': 0.7,
-        'use_semantic_matcher': _FLAGS.schema_embeddings_lookup,
-        'schema_matcher_mcf': _FLAGS.schema_matcher_mcf,
+        'max_results':
+            10,
+        'min_match_fraction':
+            0.7,
+        'use_semantic_matcher':
+            getattr(_FLAGS, 'schema_embeddings_lookup', False),
+        'schema_matcher_mcf':
+            getattr(_FLAGS, 'schema_matcher_mcf', 'sample_schema.mcf'),
     }
 
 
@@ -449,4 +458,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    semantic_matcher.define_flags()
+    define_flags()
     app.run(main)

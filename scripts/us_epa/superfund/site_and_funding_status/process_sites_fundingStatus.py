@@ -24,11 +24,15 @@ import sys
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('site_funding_input_path', './data',
-                    'Path to the directory with input files')
-flags.DEFINE_string(
-    'site_funding_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags():
+    flags.DEFINE_string('site_funding_input_path', './data',
+                        'Path to the directory with input files')
+    flags.DEFINE_string(
+        'site_funding_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 _DATASET_NAME = "./superfund_sites_with_status.csv"
 
@@ -163,4 +167,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -33,13 +33,15 @@ import file_util
 
 from counters import Counters
 
-flags.DEFINE_string('input_json', '', 'JSON file to be converted into csv')
-flags.DEFINE_string('csv_output', '', 'Output CSV file')
-flags.DEFINE_list('csv_columns', [], 'List of columns')
-flags.DEFINE_list('exclude_columns', [],
-                  'Drop columns with the token in the list')
-
 _FLAGS = flags.FLAGS
+
+
+def define_flags():
+    flags.DEFINE_string('input_json', '', 'JSON file to be converted into csv')
+    flags.DEFINE_string('csv_output', '', 'Output CSV file')
+    flags.DEFINE_list('csv_columns', [], 'List of columns')
+    flags.DEFINE_list('exclude_columns', [],
+                      'Drop columns with the token in the list')
 
 
 def flatten_dict(nested_dict: dict, key_prefix: str = '') -> dict:
@@ -158,4 +160,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

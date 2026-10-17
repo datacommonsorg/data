@@ -44,7 +44,12 @@ from metadata import (SHEETS_NATIONAL, SKIPHEAD_AMMONIA_NATIONAL,
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags():
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
 
 # Data provided in 1000s of Tons.
 _SCALING_FACTOR = 1000
@@ -366,4 +371,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

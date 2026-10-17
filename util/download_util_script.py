@@ -28,17 +28,22 @@ import datetime
 import time
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('download_url', None, 'URL of the file to download')
-flags.DEFINE_string('output_folder', None, 'Folder to save the downloaded file')
-flags.DEFINE_bool('unzip', False,
-                  'Unzip the downloaded file if it is a zip file')
 
-flags.DEFINE_integer('retry_tries', 3, 'Number of times to retry a download.')
-flags.DEFINE_integer('retry_delay', 5,
-                     'Initial delay in seconds between retries.')
-flags.DEFINE_integer(
-    'retry_backoff', 2,
-    'Backoff factor for retry delay (e.g., 2 means delay doubles each time).')
+
+def _define_flags():
+    flags.DEFINE_string('download_url', None, 'URL of the file to download')
+    flags.DEFINE_string('output_folder', None,
+                        'Folder to save the downloaded file')
+    flags.DEFINE_bool('unzip', False,
+                      'Unzip the downloaded file if it is a zip file')
+    flags.DEFINE_integer('retry_tries', 3,
+                         'Number of times to retry a download.')
+    flags.DEFINE_integer('retry_delay', 5,
+                         'Initial delay in seconds between retries.')
+    flags.DEFINE_integer(
+        'retry_backoff', 2,
+        'Backoff factor for retry delay (e.g., 2 means delay doubles each time).'
+    )
 
 
 def _retry_method(url: str,
@@ -342,6 +347,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     flags.mark_flag_as_required('download_url')
 
     flags.mark_flag_as_required('output_folder')

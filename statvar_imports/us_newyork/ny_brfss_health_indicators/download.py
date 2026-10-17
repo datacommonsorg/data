@@ -30,16 +30,18 @@ from urllib3.util.retry import Retry
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'output_dir',
-    'input_files',
-    'Directory where downloaded input CSV files will be saved.',
-)
-flags.DEFINE_string(
-    'endpoint',
-    'https://health.data.ny.gov/resource/jsy7-eb4n.json',
-    'Health Data NY BRFSS Socrata API endpoint.',
-)
+
+def define_flags():
+    flags.DEFINE_string(
+        'output_dir',
+        'input_files',
+        'Directory where downloaded input CSV files will be saved.',
+    )
+    flags.DEFINE_string(
+        'endpoint',
+        'https://health.data.ny.gov/resource/jsy7-eb4n.json',
+        'Health Data NY BRFSS Socrata API endpoint.',
+    )
 
 
 def create_session() -> requests.Session:
@@ -73,8 +75,7 @@ def atomic_to_csv(df: pd.DataFrame, target_path: str) -> None:
         df.to_csv(temp_path, index=False)
         if not (os.path.exists(temp_path) and os.path.getsize(temp_path) > 0):
             raise RuntimeError(
-                f'Atomic write failed: {temp_path} is empty or missing.'
-            )
+                f'Atomic write failed: {temp_path} is empty or missing.')
         os.replace(temp_path, target_path)
     except Exception:
         if os.path.exists(temp_path):
@@ -285,4 +286,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

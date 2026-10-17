@@ -29,7 +29,11 @@ from absl import flags
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -188,4 +192,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

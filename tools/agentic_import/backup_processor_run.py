@@ -28,21 +28,23 @@ _ATTEMPT_PREFIX = 'attempt_'
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('working_dir', '.',
-                    'Working directory (default: current directory)')
-flags.DEFINE_string('gemini_run_id', None,
-                    'Gemini run ID (e.g., gemini_20250109_143022)')
-flags.mark_flag_as_required('gemini_run_id')
-flags.DEFINE_multi_string(
-    'backup_files',
-    [],  # Explicit list passed by caller
-    'Files/directories to backup (relative to working_dir or absolute). '
-    'Can be specified multiple times. Directories will backup all contents. '
-    'Non-existent files will be skipped with a warning.')
-flags.DEFINE_integer(
-    'max_dir_files', 30,
-    'Maximum number of files allowed when backing up a directory. '
-    'Directories with more files will be skipped.')
+
+def _define_flags():
+    flags.DEFINE_string('working_dir', '.',
+                        'Working directory (default: current directory)')
+    flags.DEFINE_string('gemini_run_id', None,
+                        'Gemini run ID (e.g., gemini_20250109_143022)')
+    flags.mark_flag_as_required('gemini_run_id')
+    flags.DEFINE_multi_string(
+        'backup_files',
+        [],  # Explicit list passed by caller
+        'Files/directories to backup (relative to working_dir or absolute). '
+        'Can be specified multiple times. Directories will backup all contents. '
+        'Non-existent files will be skipped with a warning.')
+    flags.DEFINE_integer(
+        'max_dir_files', 30,
+        'Maximum number of files allowed when backing up a directory. '
+        'Directories with more files will be skipped.')
 
 
 def _get_next_attempt_number(gemini_run_dir: Path) -> int:
@@ -223,4 +225,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

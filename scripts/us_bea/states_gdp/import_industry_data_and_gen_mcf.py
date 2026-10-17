@@ -39,8 +39,13 @@ from us_bea.states_gdp import import_data
 import csv
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer('latest_year_industry', None,
-                     'The latest year to look for in the filename (optional).')
+
+
+def define_flags():
+    flags.DEFINE_integer(
+        'latest_year_industry', None,
+        'The latest year to look for in the filename (optional).')
+
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -84,9 +89,12 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         else:
             try:
                 _STATE_QUARTERLY_GDP_FILE_PATTERN1 = r'SQGDP2__ALL_AREAS_(\d{4})_(\d{4})\.csv'
+                latest_year_industry = (
+                    FLAGS.latest_year_industry if FLAGS.is_parsed() and
+                    'latest_year_industry' in FLAGS else None)
                 self._input_file = self._find_gdp_file_in_folder(
                     input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN1,
-                    FLAGS.latest_year_industry)
+                    latest_year_industry)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -228,4 +236,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

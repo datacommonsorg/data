@@ -56,30 +56,34 @@ from absl import logging
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_list(
-    'wiki_place_input_csv',
-    '',
-    'Input csv with places to resolve under column "name".',
-)
-flags.DEFINE_string('wiki_place_output_csv', '', 'Output csv with place dcids.')
-flags.DEFINE_list('wiki_place_names', [], 'List of place names to resolve.')
-flags.DEFINE_string(
-    'wiki_place_config',
-    '',
-    'Config setting for place resolution as json or python dict.',
-)
-flags.DEFINE_list(
-    'wiki_place_properties',
-    '',
-    'List of wiki place property codes, such as P31',
-)
-flags.DEFINE_string(
-    'custom_search_key', os.environ.get('SEARCH_API_KEY', ''),
-    'API key for Google custom search API.'
-    'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
-)
-flags.DEFINE_integer('wiki_place_pprof_port', 0,
-                     'HTTP port for running pprof server.')
+
+def define_flags():
+    flags.DEFINE_list(
+        'wiki_place_input_csv',
+        '',
+        'Input csv with places to resolve under column "name".',
+    )
+    flags.DEFINE_string('wiki_place_output_csv', '',
+                        'Output csv with place dcids.')
+    flags.DEFINE_list('wiki_place_names', [], 'List of place names to resolve.')
+    flags.DEFINE_string(
+        'wiki_place_config',
+        '',
+        'Config setting for place resolution as json or python dict.',
+    )
+    flags.DEFINE_list(
+        'wiki_place_properties',
+        '',
+        'List of wiki place property codes, such as P31',
+    )
+    flags.DEFINE_string(
+        'custom_search_key', os.environ.get('SEARCH_API_KEY', ''),
+        'API key for Google custom search API.'
+        'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
+    )
+    flags.DEFINE_integer('wiki_place_pprof_port', 0,
+                         'HTTP port for running pprof server.')
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -492,4 +496,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    define_flags()
     app.run(main)

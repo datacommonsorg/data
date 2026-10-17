@@ -24,32 +24,38 @@ from census_api_config_fetcher import *
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('available_datasets', False,
-                     'Print list of available datasets.')
-flags.DEFINE_boolean('available_years', False,
-                     'Print list of available years for given dataset.')
-flags.DEFINE_boolean('available_groups', False,
-                     'Print list of available groups for given dataset.')
-flags.DEFINE_boolean(
-    'available_years_group', False,
-    'Print list of available years for given group and dataset.')
-flags.DEFINE_boolean(
-    'available_summary_levels', False,
-    'Print list of available summary levels for given dataset.')
 
-flags.DEFINE_boolean('summary_level_config', False,
-                     'Create summary level config file for future use.')
-flags.DEFINE_string(
-    'dataset', 'acs/acs5/subject',
-    'The dataset from which to download data. Default: acs/acs5/subject')
-flags.DEFINE_string('table_id', None,
-                    'Table ID of the subject table to be downloaded e.g.S0101')
-flags.DEFINE_string('q_variable', 'S0101_C01_001E',
-                    'Variable to be used to compile list of all required IDs.')
-flags.DEFINE_string(
-    'api_key', None,
-    'API key sourced from census via https://api.census.gov/data/key_signup.html'
-)
+def define_api_helpers_flags():
+    flags.DEFINE_boolean('available_datasets', False,
+                         'Print list of available datasets.')
+    flags.DEFINE_boolean('available_years', False,
+                         'Print list of available years for given dataset.')
+    flags.DEFINE_boolean('available_groups', False,
+                         'Print list of available groups for given dataset.')
+    flags.DEFINE_boolean(
+        'available_years_group', False,
+        'Print list of available years for given group and dataset.')
+    flags.DEFINE_boolean(
+        'available_summary_levels', False,
+        'Print list of available summary levels for given dataset.')
+    flags.DEFINE_boolean('summary_level_config', False,
+                         'Create summary level config file for future use.')
+    flags.DEFINE_string(
+        'dataset', 'acs/acs5/subject',
+        'The dataset from which to download data. Default: acs/acs5/subject')
+    flags.DEFINE_string(
+        'table_id', None,
+        'Table ID of the subject table to be downloaded e.g.S0101')
+    flags.DEFINE_string(
+        'q_variable', 'S0101_C01_001E',
+        'Variable to be used to compile list of all required IDs.')
+    flags.DEFINE_string(
+        'api_key', None,
+        'API key sourced from census via https://api.census.gov/data/key_signup.html'
+    )
+
+
+define_flags = define_api_helpers_flags
 
 
 def get_list_datasets(force_fetch: bool = False) -> list:
@@ -526,4 +532,6 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_config_fetcher_flags()
+    define_flags()
     app.run(main)

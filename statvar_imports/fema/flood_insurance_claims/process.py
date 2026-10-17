@@ -31,29 +31,23 @@ import pandas as pd
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def _define_flag_if_not_exists(flag_type, name, default, help_str):
-    if name not in flags.FLAGS:
-        flag_type(name, default, help_str)
+def define_flags():
+    flags.DEFINE_string('input_data', 'input_file/fema_nfip_claims.csv',
+                        'Input CSV file containing FEMA claims data.')
+    flags.DEFINE_string('output_path', 'output/nfip_output',
+                        'Prefix path for output CSV and TMCF files.')
+    flags.DEFINE_string(
+        'pv_map',
+        'ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py',
+        'PV map files configuration.')
+    flags.DEFINE_string('output_counters', 'counters/counters.txt',
+                        'Path to output counters summary file.')
+    flags.DEFINE_integer('chunk_size', 250000,
+                         'Number of rows per chunk for batched processing.')
+    flags.DEFINE_integer(
+        'num_workers', None,
+        'Number of parallel worker processes to use (defaults to CPU count).')
 
-
-_define_flag_if_not_exists(flags.DEFINE_string, 'input_data',
-                           'input_file/fema_nfip_claims.csv',
-                           'Input CSV file containing FEMA claims data.')
-_define_flag_if_not_exists(flags.DEFINE_string, 'output_path',
-                           'output/nfip_output',
-                           'Prefix path for output CSV and TMCF files.')
-_define_flag_if_not_exists(
-    flags.DEFINE_string, 'pv_map',
-    'ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py',
-    'PV map files configuration.')
-_define_flag_if_not_exists(flags.DEFINE_string, 'output_counters',
-                           'counters/counters.txt',
-                           'Path to output counters summary file.')
-_define_flag_if_not_exists(flags.DEFINE_integer, 'chunk_size', 250000,
-                           'Number of rows per chunk for batched processing.')
-_define_flag_if_not_exists(
-    flags.DEFINE_integer, 'num_workers', None,
-    'Number of parallel worker processes to use (defaults to CPU count).')
 
 _FLAGS = flags.FLAGS
 
@@ -194,8 +188,8 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
     unique_zones = df['ratedFloodZone'].dropna().unique()
     zone_dict = {
         z:
-        f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
-        not in ('nan', 'none', '') else "FEMAFloodZone"
+            f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
+            not in ('nan', 'none', '') else "FEMAFloodZone"
         for z in unique_zones
     }
     df['specific_zone'] = df['ratedFloodZone'].map(zone_dict).fillna(
@@ -204,9 +198,7 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
         risk_zone_map)
     df['all_zone'] = ""
 
-    place_cols = [
-        'tract_place', 'county_place', 'state_place', 'country_place'
-    ]
+    place_cols = ['tract_place', 'county_place', 'state_place', 'country_place']
     date_configs = [('month_date', 'P1M'), ('year_date', 'P1Y')]
     zone_cols = ['specific_zone', 'risk_zone', 'all_zone']
 
@@ -391,8 +383,7 @@ def process_data_vectorized(
                  len(final_agg))
 
     statvar_specs = [
-        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '',
-         0),
+        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '', 0),
         ('b_val', 'SettlementAmount', 'BuildingStructure', 'dcs:USDollar', 2),
         ('c_val', 'SettlementAmount', 'BuildingContents', 'dcs:USDollar', 2),
         ('bc_val', 'SettlementAmount', 'BuildingStructureAndContents',
@@ -405,8 +396,7 @@ def process_data_vectorized(
         if len(sub) > 0:
             unique_zones = sub['zone'].unique()
             sv_map = {
-                z: _make_statvar_name(z, metric, thing)
-                for z in unique_zones
+                z: _make_statvar_name(z, metric, thing) for z in unique_zones
             }
             sub['variableMeasured'] = sub['zone'].map(sv_map)
             if round_digits == 0:
@@ -422,8 +412,8 @@ def process_data_vectorized(
         out_df = pd.concat(dfs_to_concat, ignore_index=True)
     else:
         out_df = pd.DataFrame(columns=[
-            'observationDate', 'observationAbout', 'value',
-            'observationPeriod', 'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value', 'observationPeriod',
+            'unit', 'variableMeasured'
         ])
 
     out_df = out_df.rename(
@@ -481,4 +471,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

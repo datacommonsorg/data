@@ -36,13 +36,16 @@ logging.set_verbosity(logging.INFO)
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('config_path',
-                    'gs://unresolved_mcf/epa/ejscreen/download_config.json',
-                    'Path to config file')
-flags.DEFINE_string(
-    'mode', '',
-    'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
-)
+
+def _define_flags():
+    flags.DEFINE_string(
+        'config_path', 'gs://unresolved_mcf/epa/ejscreen/download_config.json',
+        'Path to config file')
+    flags.DEFINE_string(
+        'mode', '',
+        'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
+    )
+
 
 # Define the  path for output files.
 
@@ -329,4 +332,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

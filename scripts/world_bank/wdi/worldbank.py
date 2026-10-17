@@ -33,16 +33,22 @@ from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
-flags.DEFINE_boolean("fetchFromSource", True,
-                     "Whether to bypass cached CSVs and fetch from source.")
-flags.DEFINE_string(
-    "indicatorSchemaFile",
-    os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string(
-    'historical_gcs_path',
-    'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
-    'GCS path to the deleted historical data CSV file')
+
+
+def _define_flags():
+    flags.DEFINE_boolean(
+        "fetchFromSource", True,
+        "Whether to bypass cached CSVs and fetch from source.")
+    flags.DEFINE_string(
+        "indicatorSchemaFile",
+        os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"),
+        "")
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string(
+        'historical_gcs_path',
+        'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
+        'GCS path to the deleted historical data CSV file')
+
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -658,4 +664,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -29,8 +29,8 @@ from absl import flags
 from sys import path
 from typing import Any, Callable, Union
 
-from census_api_helpers import get_identifier, get_yearwise_variable_column_map
-from url_list_compiler import get_table_url_list
+from census_api_helpers import get_identifier, get_yearwise_variable_column_map, define_api_helpers_flags, define_config_fetcher_flags
+from url_list_compiler import get_table_url_list, define_url_list_compiler_flags
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
@@ -40,6 +40,10 @@ from tools.download_utils.requests_wrappers import request_url_json
 from scripts.us_census.api_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
+
+
+def define_flags():
+    pass
 
 
 def url_add_api_key(url_dict: dict, api_key: str) -> str:
@@ -442,15 +446,14 @@ def download_table_variables(dataset, table_id, year_list, geo_url_map_path,
 #     print("The time required to download the", table_id, "dataset :", end-start)
 #     logging.info('The time required to download the %s dataset : %f', table_id, end-start)
 
-os.makedirs('logs/', exist_ok=True)
-logging.basicConfig(
-    filename=
-    f"logs/acs_download_{datetime.datetime.now().replace(microsecond=0).isoformat().replace(':','')}.log",
-    level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s]: %(message)s")
-
 
 def main(argv):
+    os.makedirs('logs/', exist_ok=True)
+    logging.basicConfig(
+        filename=
+        f"logs/acs_download_{datetime.datetime.now().replace(microsecond=0).isoformat().replace(':','')}.log",
+        level=logging.DEBUG,
+        format="%(asctime)s [%(levelname)s]: %(message)s")
     year_list_int = list(range(FLAGS.start_year, FLAGS.end_year + 1))
     year_list = [str(y) for y in year_list_int]
     out_path = os.path.expanduser(FLAGS.output_path)
@@ -464,5 +467,9 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_config_fetcher_flags()
+    define_api_helpers_flags()
+    define_url_list_compiler_flags()
+    define_flags()
     flags.mark_flags_as_required(['table_id', 'output_path', 'api_key'])
     app.run(main)

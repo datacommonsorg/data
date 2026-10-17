@@ -47,7 +47,12 @@ from util.alpha2_to_dcid import COUNTRY_MAP
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def define_flags():
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
 
 _TMCF_TEMPLATE = ("Node: E:eurostat_population_{import_name}->E0\n"
                   "typeOf: dcs:StatVarObservation\n"

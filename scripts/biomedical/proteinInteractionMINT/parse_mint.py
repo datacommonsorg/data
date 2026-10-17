@@ -25,30 +25,27 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database', None, 'database file path.', short_name='f')
 
-flags.DEFINE_string('psimi_to_dcid',
-                    'psimi2dcid.txt',
-                    'psimi2dcid.txt file path.',
-                    short_name='p')
 
-flags.DEFINE_string('output_mcf',
-                    'BioMINTData.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
-
-flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
-
-flags.DEFINE_boolean('output_failed',
-                     False,
-                     'If output the files containing failed cases or not.',
-                     short_name='o')
-
-flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
-                    'The cases which don\'t have uniprot.')
-
-flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
-                    'The cases with incorrect dcid format.')
+def _define_flags():
+    flags.DEFINE_string('database', None, 'database file path.', short_name='f')
+    flags.DEFINE_string('psimi_to_dcid',
+                        'psimi2dcid.txt',
+                        'psimi2dcid.txt file path.',
+                        short_name='p')
+    flags.DEFINE_string('output_mcf',
+                        'BioMINTData.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
+    flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
+    flags.DEFINE_boolean('output_failed',
+                         False,
+                         'If output the files containing failed cases or not.',
+                         short_name='o')
+    flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
+                        'The cases which don\'t have uniprot.')
+    flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
+                        'The cases with incorrect dcid format.')
 
 
 def get_references(term):
@@ -469,4 +466,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

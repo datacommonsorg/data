@@ -32,10 +32,13 @@ import latlng_recon_geojson
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('in_pattern', '', 'Input NetCDF4 file(s).')
-flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
-flags.DEFINE_string('generate_what', 'stat',
-                    'What to generate: place, sv, stat')
+
+def _define_flags():
+    flags.DEFINE_string('in_pattern', '', 'Input NetCDF4 file(s).')
+    flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+    flags.DEFINE_string('generate_what', 'stat',
+                        'What to generate: place, sv, stat')
+
 
 ###
 ### Potentially general NetCDF4 processing config/code
@@ -328,4 +331,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

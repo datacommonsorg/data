@@ -26,10 +26,13 @@ from google.cloud import storage
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'config_file_path',
-    'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
-    'Input directory where config files are downloaded.')
+
+def define_flags():
+    flags.DEFINE_string(
+        'config_file_path',
+        'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
+        'Input directory where config files are downloaded.')
+
 
 # --- ROBUST PATH RESOLUTION START ---
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -162,4 +165,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

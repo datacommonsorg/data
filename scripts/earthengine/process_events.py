@@ -36,25 +36,6 @@ from typing import Union
 #os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 #from pypprof.net_http import start_pprof_server
 
-flags.DEFINE_string('config_string', '',
-                    'config settings that override config file')
-flags.DEFINE_string('input_events', '', 'File with active events to be loaded')
-flags.DEFINE_integer('input_rows', sys.maxsize,
-                     'Number of input to process per file')
-flags.DEFINE_string('output_path', '', 'Output path for events data')
-flags.DEFINE_string('output_active_path', '',
-                    'Output path for active events data')
-flags.DEFINE_string('output_active_events_state', '',
-                    'File into which active events are saved')
-# Place dcid to containedInPlace mappings generated using the SQL query:
-# SELECT id as dcid,
-#   ARRAY_TO_STRING(linked_contained_in_place, ',') as containedInPlace
-# FROM `datcom-store.dc_kg_latest.Place`
-# WHERE  type = "S2CellLevel10"
-flags.DEFINE_string('place_cache_file', '',
-                    'CSV file with dcid to containedInPlace mapping')
-flags.DEFINE_integer('pprof_port', 8081, 'HTTP port for pprof server.')
-
 _FLAGS = flags.FLAGS
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -65,6 +46,30 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+
+
+def define_flags():
+    flags.DEFINE_string('config_string', '',
+                        'config settings that override config file')
+    flags.DEFINE_string('input_events', '',
+                        'File with active events to be loaded')
+    flags.DEFINE_integer('input_rows', sys.maxsize,
+                         'Number of input to process per file')
+    flags.DEFINE_string('output_path', '', 'Output path for events data')
+    flags.DEFINE_string('output_active_path', '',
+                        'Output path for active events data')
+    flags.DEFINE_string('output_active_events_state', '',
+                        'File into which active events are saved')
+    # Place dcid to containedInPlace mappings generated using the SQL query:
+    # SELECT id as dcid,
+    #   ARRAY_TO_STRING(linked_contained_in_place, ',') as containedInPlace
+    # FROM `datcom-store.dc_kg_latest.Place`
+    # WHERE  type = "S2CellLevel10"
+    flags.DEFINE_string('place_cache_file', '',
+                        'CSV file with dcid to containedInPlace mapping')
+    flags.DEFINE_integer('pprof_port', 8081, 'HTTP port for pprof server.')
+
+
 import file_util
 import statvar_dcid_generator
 import utils
@@ -1997,4 +2002,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    common_flags.define_flags()
+    define_flags()
     app.run(main)

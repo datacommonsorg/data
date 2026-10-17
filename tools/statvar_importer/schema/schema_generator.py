@@ -52,11 +52,6 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
-flags.DEFINE_string('input_nodes', '',
-                    'MCF file with nodes to generate schema for.')
-flags.DEFINE_string('schema_mcf', '', 'MCF file with nodes for existing schema')
-flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
-
 _FLAGS = flags.FLAGS
 
 import file_util
@@ -69,6 +64,15 @@ from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
 from mcf_file_util import get_value_list
 
 import config_flags
+
+
+def define_flags():
+    flags.DEFINE_string('input_nodes', '',
+                        'MCF file with nodes to generate schema for.')
+    flags.DEFINE_string('schema_mcf', '',
+                        'MCF file with nodes for existing schema')
+    flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
+
 
 # Base schema with some basic properties
 # This is excluded in generated schema.
@@ -653,4 +657,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    config_flags.define_flags()
+    define_flags()
     app.run(main)

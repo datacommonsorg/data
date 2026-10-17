@@ -43,23 +43,6 @@ _DEFAULT_LLM_NAME_PROMPT = os.path.join(_SCRIPT_DIR,
                                         'llm_statvar_name_prompt.txt')
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('llm_api_key', '', 'Google API key for generative AI')
-flags.DEFINE_string('llm_statvar_input', '',
-                    'Input MCF file with statvars with names to be added.')
-flags.DEFINE_string(
-    'llm_sample_statvar_names', '',
-    'MCF file with example statvars with names and descriptions.')
-flags.DEFINE_string('llm_statvar_output', '',
-                    'Output MCF file for statvars with names.')
-flags.DEFINE_string('llm_statvar_name_prompt', _DEFAULT_LLM_NAME_PROMPT,
-                    'Text file with the LLM prompt to generate StatVar names.')
-flags.DEFINE_string('llm_statvar_name_context', '',
-                    'Text file with the context to generate StatVar names.')
-flags.DEFINE_string('llm_name_request', '',
-                    'Output text file with copy prompt sent to LLM.')
-flags.DEFINE_string('llm_name_response', '',
-                    'Output text file with LLM response.')
-
 import file_util
 import process_http_server
 import config_flags
@@ -67,7 +50,29 @@ import mcf_file_util
 
 from config_map import ConfigMap
 from counters import Counters
+import genai_helper
 from genai_helper import GenAIHelper, read_text_file, write_text_to_file, get_genai_helper_config_from_flags
+
+
+def define_flags():
+    flags.DEFINE_string('llm_api_key', '', 'Google API key for generative AI')
+    flags.DEFINE_string('llm_statvar_input', '',
+                        'Input MCF file with statvars with names to be added.')
+    flags.DEFINE_string(
+        'llm_sample_statvar_names', '',
+        'MCF file with example statvars with names and descriptions.')
+    flags.DEFINE_string('llm_statvar_output', '',
+                        'Output MCF file for statvars with names.')
+    flags.DEFINE_string(
+        'llm_statvar_name_prompt', _DEFAULT_LLM_NAME_PROMPT,
+        'Text file with the LLM prompt to generate StatVar names.')
+    flags.DEFINE_string(
+        'llm_statvar_name_context', '',
+        'Text file with the context to generate StatVar names.')
+    flags.DEFINE_string('llm_name_request', '',
+                        'Output text file with copy prompt sent to LLM.')
+    flags.DEFINE_string('llm_name_response', '',
+                        'Output text file with LLM response.')
 
 
 # Class to generate PV Maps using LLMs.
@@ -197,14 +202,23 @@ def get_nodes_from_text(mcf: str) -> dict:
 
 
 def get_name_config_from_flags() -> dict:
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     config = get_genai_helper_config_from_flags()
     config.update({
-        'google_api_key': _FLAGS.llm_api_key,
-        'sample_statvars': _FLAGS.llm_sample_statvar_names,
-        'context': _FLAGS.llm_statvar_name_context,
-        'llm_name_prompt': _FLAGS.llm_statvar_name_prompt,
-        'llm_request': _FLAGS.llm_name_request,
-        'llm_response': _FLAGS.llm_name_response,
+        'google_api_key':
+            getattr(_FLAGS, 'llm_api_key', ''),
+        'sample_statvars':
+            getattr(_FLAGS, 'llm_sample_statvar_names', ''),
+        'context':
+            getattr(_FLAGS, 'llm_statvar_name_context', ''),
+        'llm_name_prompt':
+            getattr(_FLAGS, 'llm_statvar_name_prompt',
+                    _DEFAULT_LLM_NAME_PROMPT),
+        'llm_request':
+            getattr(_FLAGS, 'llm_name_request', ''),
+        'llm_response':
+            getattr(_FLAGS, 'llm_name_response', ''),
     })
     return config
 
@@ -243,4 +257,7 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    genai_helper.define_flags()
+    define_flags()
     app.run(main)

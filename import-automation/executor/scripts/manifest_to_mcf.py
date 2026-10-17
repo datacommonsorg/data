@@ -31,10 +31,14 @@ from absl import flags
 import dc_manifest_pb2
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("directory",
-                    os.getcwd(),
-                    "Directory to scan for .textproto files.",
-                    allow_override=True)
+
+
+def _define_flags():
+    flags.DEFINE_string("directory",
+                        os.getcwd(),
+                        "Directory to scan for .textproto files.",
+                        allow_override=True)
+
 
 DEFAULT_CURATOR_DCID = "dcid:dc/cjj7vp"
 DC_BASE_PREFIX = "dc/base"
@@ -285,4 +289,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

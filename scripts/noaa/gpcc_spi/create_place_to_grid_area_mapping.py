@@ -43,12 +43,15 @@ from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('gpcc_spi_places_with_csv',
-                    'geojson_data/places_with_geojson.csv',
-                    'Path to places with geojson.')
-flags.DEFINE_string('gpcc_spi_place_grid_ratio_output_dir',
-                    'geojson_data/place_to_one_degree_grid_mapping.json',
-                    'Path where the result is written to.')
+
+def _define_flags():
+    flags.DEFINE_string('gpcc_spi_places_with_csv',
+                        'geojson_data/places_with_geojson.csv',
+                        'Path to places with geojson.')
+    flags.DEFINE_string('gpcc_spi_place_grid_ratio_output_dir',
+                        'geojson_data/place_to_one_degree_grid_mapping.json',
+                        'Path where the result is written to.')
+
 
 LAT_MIN = -90
 LAT_MAX = 90
@@ -194,4 +197,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

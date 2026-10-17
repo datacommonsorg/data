@@ -20,30 +20,33 @@ import os
 from absl import app
 from absl import flags
 
-from .common_util import columns_from_zip_file, token_in_list_ignore_case, get_tokens_list_from_column_list
-from .acs_spec_validator import find_columns_with_no_properties, find_missing_tokens
-from .datacommons_api_wrappers.datacommons_wrappers import fetch_dcid_properties_enums
+from .common_util import columns_from_zip_file, token_in_list_ignore_case, get_tokens_list_from_column_list, define_common_util_flags
+from .acs_spec_validator import find_columns_with_no_properties, find_missing_tokens, define_acs_spec_validator_flags
+from .datacommons_api_wrappers.datacommons_wrappers import fetch_dcid_properties_enums, define_datacommons_wrappers_flags
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('generator_output', os.path.join(_SCRIPT_PATH, 'output'),
-                    'Path to store the output files')
-flags.DEFINE_boolean(
-    'create_union_spec', False,
-    'Produce union_spec.json which had combination of all previous specs')
-flags.DEFINE_boolean(
-    'guess_new_spec', False,
-    'Produces a guessed spec from zip file and specs from the spec_dir folder')
-flags.DEFINE_boolean('get_combined_property_list', False,
-                     'Get list of properties available in previous specs')
 
-flags.DEFINE_boolean('check_metadata', False,
-                     'Parses the metadata files in zip rather than data files')
-
-flags.DEFINE_list('expected_populations', ['Person'],
-                  'List of expected population types')
-flags.DEFINE_list('expected_properties', [], 'list of expected properties')
+def define_flags():
+    flags.DEFINE_string('generator_output',
+                        os.path.join(_SCRIPT_PATH, 'output'),
+                        'Path to store the output files')
+    flags.DEFINE_boolean(
+        'create_union_spec', False,
+        'Produce union_spec.json which had combination of all previous specs')
+    flags.DEFINE_boolean(
+        'guess_new_spec', False,
+        'Produces a guessed spec from zip file and specs from the spec_dir folder'
+    )
+    flags.DEFINE_boolean('get_combined_property_list', False,
+                         'Get list of properties available in previous specs')
+    flags.DEFINE_boolean(
+        'check_metadata', False,
+        'Parses the metadata files in zip rather than data files')
+    flags.DEFINE_list('expected_populations', ['Person'],
+                      'List of expected population types')
+    flags.DEFINE_list('expected_properties', [], 'list of expected properties')
 
 
 def get_spec_list() -> list:
@@ -515,6 +518,10 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_common_util_flags()
+    define_acs_spec_validator_flags()
+    define_datacommons_wrappers_flags()
+    define_flags()
     flags.mark_bool_flags_as_mutual_exclusive(
         ['create_union_spec', 'guess_new_spec', 'get_combined_property_list'],
         required=True)

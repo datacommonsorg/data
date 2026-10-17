@@ -46,48 +46,54 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-flags.DEFINE_string('sampler_input', '',
-                    'The path to the input CSV file to be sampled.')
-flags.DEFINE_string('sampler_output', '',
-                    'The path to the output file for the sampled CSV data.')
-flags.DEFINE_integer(
-    'sampler_output_rows', 100,
-    'The maximum number of rows to include in the sampled output.')
-flags.DEFINE_integer(
-    'sampler_header_rows', 1,
-    'The number of header rows to be copied directly to the output file.')
-flags.DEFINE_integer(
-    'sampler_rows_per_key', 5,
-    'The maximum number of rows to select for each unique value found.')
-flags.DEFINE_integer(
-    'sampler_uniques_per_column', 10,
-    'The maximum number of unique values to track per column. '
-    'If 0 or -1, all unique values are tracked.')
-flags.DEFINE_float(
-    'sampler_rate', -1,
-    'The sampling rate for random row selection (e.g., 0.1 for 10%).')
-# TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
-# See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
-flags.DEFINE_string(
-    'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
-    'A regular expression used to identify and select unique column values.')
-flags.DEFINE_string(
-    'sampler_unique_columns', '',
-    'A comma-separated list of column names to use for selecting unique rows.')
-flags.DEFINE_list(
-    'sampler_column_keys', [],
-    'A list of "column:file" pairs containing values that MUST be included '
-    'in the sample if they appear in the input data. '
-    'If empty (default), sampling is based on sampler_uniques_per_column.'
-    'Example: "variableMeasured:prominent_svs.txt"')
-flags.DEFINE_string('sampler_input_delimiter', ',',
-                    'The delimiter used in the input CSV file.')
-flags.DEFINE_string('sampler_input_encoding', 'UTF8',
-                    'The encoding of the input CSV file.')
-flags.DEFINE_string('sampler_output_delimiter', None,
-                    'The delimiter to use in the output CSV file.')
-
 _FLAGS = flags.FLAGS
+
+
+def define_flags():
+    flags.DEFINE_string('sampler_input', '',
+                        'The path to the input CSV file to be sampled.')
+    flags.DEFINE_string(
+        'sampler_output', '',
+        'The path to the output file for the sampled CSV data.')
+    flags.DEFINE_integer(
+        'sampler_output_rows', 100,
+        'The maximum number of rows to include in the sampled output.')
+    flags.DEFINE_integer(
+        'sampler_header_rows', 1,
+        'The number of header rows to be copied directly to the output file.')
+    flags.DEFINE_integer(
+        'sampler_rows_per_key', 5,
+        'The maximum number of rows to select for each unique value found.')
+    flags.DEFINE_integer(
+        'sampler_uniques_per_column', 10,
+        'The maximum number of unique values to track per column. '
+        'If 0 or -1, all unique values are tracked.')
+    flags.DEFINE_float(
+        'sampler_rate', -1,
+        'The sampling rate for random row selection (e.g., 0.1 for 10%).')
+    # TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
+    # See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
+    flags.DEFINE_string(
+        'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
+        'A regular expression used to identify and select unique column values.'
+    )
+    flags.DEFINE_string(
+        'sampler_unique_columns', '',
+        'A comma-separated list of column names to use for selecting unique rows.'
+    )
+    flags.DEFINE_list(
+        'sampler_column_keys', [],
+        'A list of "column:file" pairs containing values that MUST be included '
+        'in the sample if they appear in the input data. '
+        'If empty (default), sampling is based on sampler_uniques_per_column.'
+        'Example: "variableMeasured:prominent_svs.txt"')
+    flags.DEFINE_string('sampler_input_delimiter', ',',
+                        'The delimiter used in the input CSV file.')
+    flags.DEFINE_string('sampler_input_encoding', 'UTF8',
+                        'The encoding of the input CSV file.')
+    flags.DEFINE_string('sampler_output_delimiter', None,
+                        'The delimiter to use in the output CSV file.')
+
 
 import file_util
 import mcf_file_util
@@ -608,19 +614,32 @@ def get_default_config() -> dict:
         _FLAGS.mark_as_parsed()
 
     config = {
-        'sampler_rate': _FLAGS.sampler_rate,
-        'sampler_input': _FLAGS.sampler_input,
-        'sampler_output': _FLAGS.sampler_output,
-        'sampler_output_rows': _FLAGS.sampler_output_rows,
-        'header_rows': _FLAGS.sampler_header_rows,
-        'sampler_rows_per_key': _FLAGS.sampler_rows_per_key,
-        'sampler_uniques_per_column': _FLAGS.sampler_uniques_per_column,
-        'sampler_column_regex': _FLAGS.sampler_column_regex,
-        'sampler_unique_columns': _FLAGS.sampler_unique_columns,
-        'sampler_column_keys': _FLAGS.sampler_column_keys,
-        'input_delimiter': _FLAGS.sampler_input_delimiter,
-        'output_delimiter': _FLAGS.sampler_output_delimiter,
-        'input_encoding': _FLAGS.sampler_input_encoding,
+        'sampler_rate':
+            getattr(_FLAGS, 'sampler_rate', -1.0),
+        'sampler_input':
+            getattr(_FLAGS, 'sampler_input', ''),
+        'sampler_output':
+            getattr(_FLAGS, 'sampler_output', ''),
+        'sampler_output_rows':
+            getattr(_FLAGS, 'sampler_output_rows', 100),
+        'header_rows':
+            getattr(_FLAGS, 'sampler_header_rows', 1),
+        'sampler_rows_per_key':
+            getattr(_FLAGS, 'sampler_rows_per_key', 5),
+        'sampler_uniques_per_column':
+            getattr(_FLAGS, 'sampler_uniques_per_column', 10),
+        'sampler_column_regex':
+            getattr(_FLAGS, 'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]'),
+        'sampler_unique_columns':
+            getattr(_FLAGS, 'sampler_unique_columns', ''),
+        'sampler_column_keys':
+            getattr(_FLAGS, 'sampler_column_keys', []),
+        'input_delimiter':
+            getattr(_FLAGS, 'sampler_input_delimiter', ','),
+        'output_delimiter':
+            getattr(_FLAGS, 'sampler_output_delimiter', None),
+        'input_encoding':
+            getattr(_FLAGS, 'sampler_input_encoding', 'UTF8'),
     }
 
     return config
@@ -635,4 +654,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    define_flags()
     app.run(main)

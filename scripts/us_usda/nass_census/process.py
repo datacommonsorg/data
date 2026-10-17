@@ -26,8 +26,13 @@ from retry import retry
 
 # Define flags
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
-flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
+
+
+def _define_flags():
+    flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
+    flags.DEFINE_string('mode', '',
+                        'Mode to run: "download", "process", or both')
+
 
 # Constants
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -233,4 +238,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

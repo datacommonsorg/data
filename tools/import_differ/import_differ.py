@@ -67,24 +67,26 @@ Column = Enum('Column', [
 ])
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'current_data', '', 'Path to the current data \
+
+
+def _define_flags():
+    flags.DEFINE_string(
+        'current_data', '', 'Path to the current data \
   (wildcard on local/GCS supported).')
-flags.DEFINE_string(
-    'previous_data', '', 'Path to the previous data \
+    flags.DEFINE_string(
+        'previous_data', '', 'Path to the previous data \
   (wildcard on local/GCS supported).')
-flags.DEFINE_string('output_location', 'results', \
-  'Path (local/GCS) to the output data folder.')
-flags.DEFINE_string('file_format', 'mcf',
-                    'Format of the input data (mcf,tfrecord)')
-flags.DEFINE_string('runner_mode', 'native',
-                    'Runner mode (native/direct/cloud/bigquery)')
-flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
-flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow/bq job.')
-if 'bq_dataset' not in _FLAGS:
+    flags.DEFINE_string('output_location', 'results', \
+      'Path (local/GCS) to the output data folder.')
+    flags.DEFINE_string('file_format', 'mcf',
+                        'Format of the input data (mcf,tfrecord)')
+    flags.DEFINE_string('runner_mode', 'native',
+                        'Runner mode (native/direct/cloud/bigquery)')
+    flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
+    flags.DEFINE_string('project_id', '',
+                        'GCP project id for the dataflow/bq job.')
     flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
                         'BigQuery dataset ID for temporary differ tables.')
-if 'bq_table_ttl_hours' not in _FLAGS:
     flags.DEFINE_integer('bq_table_ttl_hours', 12,
                          'TTL in hours for temporary BigQuery differ tables.')
 
@@ -538,4 +540,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -22,29 +22,28 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('database', 'normal_tissue.tsv',
-                    'input tissue atlas file path.')
 
-flags.DEFINE_string('gene_to_uniprot_list',
-                    'gene_to_uniprot_list.txt',
-                    'gene_to_uniprot_list file path.',
-                    short_name='g')
+def _define_flags():
+    flags.DEFINE_string('database', 'normal_tissue.tsv',
+                        'input tissue atlas file path.')
+    flags.DEFINE_string('gene_to_uniprot_list',
+                        'gene_to_uniprot_list.txt',
+                        'gene_to_uniprot_list file path.',
+                        short_name='g')
+    flags.DEFINE_string('uniprot_to_dcid',
+                        'uniprot_to_dcid.tsv',
+                        'uniprot_to_dcid.tsv file path.',
+                        short_name='u')
+    flags.DEFINE_string('data_mcf',
+                        'ProteinAtlasData.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
+    flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
+                        'The output HumanTissueEnum.mcf file path.')
+    flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
+                        'The output HumanCellTypeEnum.mcf file path.')
 
-flags.DEFINE_string('uniprot_to_dcid',
-                    'uniprot_to_dcid.tsv',
-                    'uniprot_to_dcid.tsv file path.',
-                    short_name='u')
 
-flags.DEFINE_string('data_mcf',
-                    'ProteinAtlasData.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
-
-flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
-                    'The output HumanTissueEnum.mcf file path.')
-
-flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
-                    'The output HumanCellTypeEnum.mcf file path.')
 EXPRESSION_MAP = {
     'Not detected': 'ProteinExpressionNotDetected',
     'Low': 'ProteinExpressionLow',
@@ -235,4 +234,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

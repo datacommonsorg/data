@@ -25,11 +25,16 @@ from sys import path
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('dcid', None, 'dcid of the node to query')
-flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
-                    'Path to store the output')
-flags.DEFINE_boolean('force_fetch', False,
-                     'forces api query and not return cached result')
+
+def define_datacommons_wrappers_flags():
+    flags.DEFINE_string('dcid', None, 'dcid of the node to query')
+    flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
+                        'Path to store the output')
+    flags.DEFINE_boolean('force_fetch', False,
+                         'forces api query and not return cached result')
+
+
+define_flags = define_datacommons_wrappers_flags
 
 _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(_MODULE_DIR, '../../../../../../'))
@@ -208,5 +213,6 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     flags.mark_flags_as_required(['dcid'])
     app.run(main)

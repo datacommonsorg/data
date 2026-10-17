@@ -25,20 +25,21 @@ from absl import logging
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_csv', None, 'Path to input CSV file (required)')
-flags.mark_flag_as_required('input_csv')
 
-flags.DEFINE_string('output_config', None,
-                    'Path to output config.json file (required)')
-flags.mark_flag_as_required('output_config')
-
-flags.DEFINE_string('provenance_name', '<YOUR_PROVENANCE_NAME>',
-                    'Name of the provenance')
-flags.DEFINE_string('source_name', '<YOUR_SOURCE_NAME>', 'Name of the source')
-flags.DEFINE_string('data_source_url', '<URL_OF_YOUR_DATA_SOURCE>',
-                    'URL of the data source')
-flags.DEFINE_string('dataset_url', '<URL_OF_THE_SPECIFIC_DATASET>',
-                    'URL of the specific dataset')
+def _define_flags():
+    flags.DEFINE_string('input_csv', None, 'Path to input CSV file (required)')
+    flags.mark_flag_as_required('input_csv')
+    flags.DEFINE_string('output_config', None,
+                        'Path to output config.json file (required)')
+    flags.mark_flag_as_required('output_config')
+    flags.DEFINE_string('provenance_name', '<YOUR_PROVENANCE_NAME>',
+                        'Name of the provenance')
+    flags.DEFINE_string('source_name', '<YOUR_SOURCE_NAME>',
+                        'Name of the source')
+    flags.DEFINE_string('data_source_url', '<URL_OF_YOUR_DATA_SOURCE>',
+                        'URL of the data source')
+    flags.DEFINE_string('dataset_url', '<URL_OF_THE_SPECIFIC_DATASET>',
+                        'URL of the specific dataset')
 
 
 class ConfigGenerator:
@@ -262,4 +263,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

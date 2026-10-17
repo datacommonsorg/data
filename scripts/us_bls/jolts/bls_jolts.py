@@ -31,7 +31,11 @@ import requests
 from map_config import _dcid_map
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('modes', '', 'Options: download or process')
+
+
+def _define_flags():
+    flags.DEFINE_string('modes', '', 'Options: download or process')
+
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILES = _MODULE_DIR + "/input_files"
@@ -442,4 +446,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

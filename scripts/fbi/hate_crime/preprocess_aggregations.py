@@ -31,13 +31,19 @@ import file_util
 from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'input_file',
-    os.path.join(_SCRIPT_PATH, 'aggregations/hate_crime_data/hate_crime.csv'),
-    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
-)
-flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH, 'config.json'),
-                    'Input config file')
+
+
+def _define_flags():
+    flags.DEFINE_string(
+        'input_file',
+        os.path.join(_SCRIPT_PATH,
+                     'aggregations/hate_crime_data/hate_crime.csv'),
+        'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
+    )
+    flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH,
+                                                    'config.json'),
+                        'Input config file')
+
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 
@@ -1759,17 +1765,22 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
                  output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
     output_path = os.path.expanduser(output_path)
-    logging.info(f'Processing input: {_FLAGS.input_file}')
+    input_file = (_FLAGS.input_file if _FLAGS.is_parsed() and
+                  'input_file' in _FLAGS else input_csv)
+    config_file = (_FLAGS.config_file if _FLAGS.is_parsed() and
+                   'config_file' in _FLAGS else os.path.join(
+                       _SCRIPT_PATH, 'config.json'))
+    logging.info(f'Processing input: {input_file}')
     #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:
-    print(f"Loading input file into df : {_FLAGS.input_file}")
-    df = pd.read_csv(_FLAGS.input_file)
+    print(f"Loading input file into df : {input_file}")
+    df = pd.read_csv(input_file)
     df.columns = df.columns.str.upper()
     missing_cols = set(_INPUT_COLUMNS) - set(df.columns)
     if missing_cols:
         raise ValueError(f"Missing required columns: {missing_cols}")
     df = df[_INPUT_COLUMNS]
-    logging.info(f'Loading config: {_FLAGS.config_file}')
-    with open(_FLAGS.config_file, 'r', encoding='utf-8') as f:
+    logging.info(f'Loading config: {config_file}')
+    with open(config_file, 'r', encoding='utf-8') as f:
         config = json.load(f)
     config_old = copy.deepcopy(config)
     config_old['_COMMON_']['isHateCrime'] = 'True'
@@ -1809,4 +1820,5 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(process_main)

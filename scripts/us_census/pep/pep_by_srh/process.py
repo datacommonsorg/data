@@ -72,8 +72,6 @@ from tmcf_generator import generate_tmcf
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 output_path = '/output_files/'
@@ -81,9 +79,14 @@ _FILES_TO_DOWNLOAD = []
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "data_directory", DOWNLOAD_DIR,
-    "Folder consisting of all input files required for processing")
+
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string(
+        "data_directory", DOWNLOAD_DIR,
+        "Folder consisting of all input files required for processing")
+
 
 # Columns with single race(SR) or combination(SR CMBN) with one or more race
 # These columns are not used as part of current import
@@ -1769,4 +1772,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

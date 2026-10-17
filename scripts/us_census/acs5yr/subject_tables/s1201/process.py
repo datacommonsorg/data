@@ -37,25 +37,29 @@ from scripts.us_census.acs5yr.subject_tables.s1201.generate_col_map import proce
 from scripts.us_census.acs5yr.subject_tables.common.data_loader import process_subject_tables
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'option', 'all',
-    'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
-)
-flags.DEFINE_string(
-    'table_prefix', None,
-    '[for processing]Subject Table ID as a prefix for output files, eg: S2702')
-flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
-flags.DEFINE_string(
-    'input_path', None,
-    'Path to input directory with (current support only for zip files)')
-flags.DEFINE_string('output_dir', './', 'Path to the output directory')
-flags.DEFINE_boolean(
-    'has_percent', False,
-    '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
-)
-flags.DEFINE_boolean(
-    'debug', False,
-    '[for processing]set the flag to add additional columns to debug')
+
+
+def define_flags():
+    flags.DEFINE_string(
+        'option', 'all',
+        'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
+    )
+    flags.DEFINE_string(
+        'table_prefix', None,
+        '[for processing]Subject Table ID as a prefix for output files, eg: S2702'
+    )
+    flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
+    flags.DEFINE_string(
+        'input_path', None,
+        'Path to input directory with (current support only for zip files)')
+    flags.DEFINE_string('output_dir', './', 'Path to the output directory')
+    flags.DEFINE_boolean(
+        'has_percent', False,
+        '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
+    )
+    flags.DEFINE_boolean(
+        'debug', False,
+        '[for processing]set the flag to add additional columns to debug')
 
 
 def set_column_map(input_path, spec_path, output_dir):
@@ -114,6 +118,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    define_flags()
     flags.mark_flags_as_required(
         ['table_prefix', 'spec_path', 'input_path', 'output_dir'])
     app.run(main)

@@ -22,11 +22,14 @@ from india.formatters import CodeFormatter
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_state_geojson', '',
-                    'Path to the India State geojson file.')
-flags.DEFINE_string('input_district_geojson', '',
-                    'Path to the India District geojson file.')
-flags.DEFINE_string('output_geojson_dir', '/tmp', 'Output directory path.')
+
+def _define_flags():
+    flags.DEFINE_string('input_state_geojson', '',
+                        'Path to the India State geojson file.')
+    flags.DEFINE_string('input_district_geojson', '',
+                        'Path to the India District geojson file.')
+    flags.DEFINE_string('output_geojson_dir', '/tmp', 'Output directory path.')
+
 
 # Note1: When we emit geojson string, we use two json.dumps() so it
 # automatically escapes all inner quotes, and encloses the entire string in
@@ -91,4 +94,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

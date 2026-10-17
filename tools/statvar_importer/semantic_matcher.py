@@ -31,24 +31,26 @@ sys.path.append(os.path.join(_DATA_DIR, 'data', 'util'))
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('semantic_matcher_corpus', '',
-                    'Corpus file with key, value')
-flags.DEFINE_string('semantic_matcher_cache',
-                    'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
-                    'Cache pickle file with corpus text and embeddings')
-flags.DEFINE_string('semantic_matcher_input', '',
-                    'Input file with lookup queries.')
-flags.DEFINE_string('semantic_matcher_output', '',
-                    'Output file with results per query.')
-flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
-                    'Output file with results per query.')
-flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
-
 import file_util
 import process_http_server
 
 from config_map import ConfigMap
 from counters import Counters
+
+
+def define_flags():
+    flags.DEFINE_string('semantic_matcher_corpus', '',
+                        'Corpus file with key, value')
+    flags.DEFINE_string('semantic_matcher_cache',
+                        'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+                        'Cache pickle file with corpus text and embeddings')
+    flags.DEFINE_string('semantic_matcher_input', '',
+                        'Input file with lookup queries.')
+    flags.DEFINE_string('semantic_matcher_output', '',
+                        'Output file with results per query.')
+    flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
+                        'Output file with results per query.')
+    flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
 
 
 # Class to perform semantic search for text strings using embeddings.
@@ -261,8 +263,11 @@ def get_semantic_matcher_default_config() -> dict:
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
     return {
-        'embeddings_model': _FLAGS.semantic_matcher_model,
-        'semantic_matcher_cache': _FLAGS.semantic_matcher_cache,
+        'embeddings_model':
+            getattr(_FLAGS, 'semantic_matcher_model', 'all-MiniLM-L6-v2'),
+        'semantic_matcher_cache':
+            getattr(_FLAGS, 'semantic_matcher_cache',
+                    'sample_schema_embeddings-all-MiniLM-L6-v2.pkl'),
     }
 
 
@@ -333,4 +338,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    process_http_server.define_flags()
+    define_flags()
     app.run(main)

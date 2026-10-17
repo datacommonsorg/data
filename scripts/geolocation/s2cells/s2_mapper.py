@@ -26,6 +26,7 @@ from dateutil import parser
 
 FLAGS = flags.FLAGS
 
+
 # Params:
 # -------
 # {
@@ -38,9 +39,11 @@ FLAGS = flags.FLAGS
 #   "datefmt": "YYYY-mm-dd" | "YYYY-mm" | "YYYY",  #  Optional
 #   "containedIn": "europe"
 # }
-flags.DEFINE_string('in_params', '', 'Input param file')
-flags.DEFINE_string('in_csv', '', 'Input CSV file')
-flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+def _define_flags():
+    flags.DEFINE_string('in_params', '', 'Input param file')
+    flags.DEFINE_string('in_csv', '', 'Input CSV file')
+    flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+
 
 _MCF_FORMAT = """
 Node: dcid:s2CellId/{cid}
@@ -178,4 +181,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

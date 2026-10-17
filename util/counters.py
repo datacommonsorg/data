@@ -29,10 +29,12 @@ from absl import flags
 from absl import logging
 from typing import NamedTuple
 
-flags.DEFINE_integer('counters_print_interval', 300,
-                     'Interval in seconds to print counters.')
-
 _FLAGS = flags.FLAGS
+
+
+def _define_flags():
+    flags.DEFINE_integer('counters_print_interval', 300,
+                         'Interval in seconds to print counters.')
 
 
 # Options for counters
@@ -56,7 +58,7 @@ def get_default_counter_options() -> CounterOptions:
     '''Returns the default counters options.'''
     show_every_n_sec = 300
     if _FLAGS.is_parsed():
-        show_every_n_sec = _FLAGS.counters_print_interval
+        show_every_n_sec = getattr(_FLAGS, 'counters_print_interval', 300)
 
     debug = False
     if logging.get_verbosity() >= logging.DEBUG:
