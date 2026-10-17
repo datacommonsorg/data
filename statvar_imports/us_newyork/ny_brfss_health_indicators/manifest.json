@@ -23,7 +23,8 @@
                 "counters/*.csv",
                 "validation_config.json"
             ],
-            "cron_schedule": "0 0 1 * *",
+            "cron_schedule": "30 01 * * 1",
+            "_comment": "Schedule: Weekly on Monday at 01:30 UTC",
             "validation_config_file": "validation_config.json"
         }
     ]

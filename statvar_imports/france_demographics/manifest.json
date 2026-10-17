@@ -20,7 +20,8 @@
                 "./input_files/*.xlsx"
             ],
             "user_script_timeout": 3600,
-            "cron_schedule": "0 10 21 * *",
+            "cron_schedule": "30 07 * * 7",
+            "_comment": "Schedule: Weekly on Sunday at 07:30 UTC",
             "resource_limits": {
                 "cpu": 8,
                 "memory": 32,

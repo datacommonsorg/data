@@ -25,7 +25,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 2 2 * *"
+            "cron_schedule": "30 00 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 00:30 UTC"
         },
         {
             "import_name": "EuroStatHealth_BodyMassIndex",
@@ -52,7 +53,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 2 * *"
+            "cron_schedule": "0 01 * * 7",
+            "_comment": "Schedule: Weekly on Sunday at 01:00 UTC"
         },
         {
             "import_name": "EuroStatHealth_FruitsAndVegetables",
@@ -79,7 +81,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 6 2 * *"
+            "cron_schedule": "0 00 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 00:00 UTC"
         },
         {
             "import_name": "EuroStatHealth_PhysicalActivity",
@@ -105,7 +108,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 5 2 * *"
+            "cron_schedule": "0 01 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 01:00 UTC"
         },
         {
             "import_name": "EuroStatHealth_SocialEnvironment",
@@ -132,7 +136,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 4 2 * *"
+            "cron_schedule": "30 01 * * 7",
+            "_comment": "Schedule: Weekly on Sunday at 01:30 UTC"
         },
         {
             "import_name": "EurostatHealth_Tobacco_Consumption",
@@ -159,7 +164,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 3 2 * *",
+            "cron_schedule": "30 00 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 00:30 UTC",
             "validation_config_file": "validation_config_Tobacco_Consumption.json"
         }
     ]

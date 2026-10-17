@@ -21,7 +21,8 @@
                     "template_mcf": "tMCFs/ncbi_taxonomy.tmcf"
                 }
             ],
-            "cron_schedule": "0 0 1 * *"
+            "cron_schedule": "0 00 * * 7",
+            "_comment": "Schedule: Weekly on Sunday at 00:00 UTC"
         }
     ]
 }

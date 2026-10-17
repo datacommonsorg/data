@@ -17,7 +17,8 @@
                     "cleaned_csv": "output/airpollution_emission_trends_tier1.csv"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "30 03 * * 6",
+            "_comment": "Schedule: Weekly on Saturday at 03:30 UTC",
             "source_files": [
                 "input_files/*"
             ]
