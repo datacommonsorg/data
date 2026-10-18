@@ -204,12 +204,10 @@ PROD_DENYLIST = frozenset({
     "Brazil_RuralDevelopmentProgram",
     "CDC_OzoneCounty",
     "CDC_PM25County",
-    "CensusCountyBusinessPatterns",
     "CensusSAHIE",
     "EIA_Electricity",
     "EPA_EJSCREEN",
     "EPA_GHGRP",
-    "FARS_CrashData",
     "FireWFIGS",
     "INPE_Fire_Event_Count",
     "IndiaNSS_HealthAilments",
@@ -221,12 +219,8 @@ PROD_DENYLIST = frozenset({
     "NOAA_GPCC_StandardardizedPrecipitationIndex",
     "NOAA_GlobalForecastSystem",
     "OECDRegionalDemography_Population",
-    "UNEnergy",
-    "USCensusPEP_AgeSexRaceHispanicOrigin",
-    "USDA_AgricultureCensus",
     "USFed_ConstantMaturityRates_Test",
     "USNationalPrisonerStatistics",
-    "WorldBankDatasets",
 })
 
 STAGING_DENYLIST = frozenset({
