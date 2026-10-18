@@ -594,7 +594,7 @@ class USEducation:
         # School Management logic
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
-                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity",
+                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefense",
                 na=False), self._final_df_place["State_Name"], '')
 
         # List of columns to be considered under 'dcs'
@@ -602,7 +602,7 @@ class USEducation:
             'Lowest_Grade_Public', 'Highest_Grade_Public', 'Locale',
             'National_School_Lunch_Program', 'Magnet_School', 'Charter_School',
             'School_Type', 'School_Type_Public', 'Title_I_School_Status',
-            'State_District_ID', 'School_Level'
+            'State_District_ID', 'School_Level', 'School_Management'
         ]
         for col in col_to_dcs:
             if col in self._final_df_place.columns.to_list():
@@ -902,12 +902,12 @@ class USEducation:
         # and NCES_DepartmentOfDefenseEducationActivity as they are outlying areas of United States.
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
-                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity",
+                "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefense",
                 na=False), self._final_df_place["State_Name"], '')
 
         col_to_dcs = [
             'Lowest_Grade_Dist', 'Highest_Grade_Dist', 'Locale',
-            'ContainedInPlace'
+            'ContainedInPlace', 'School_Management'
         ]
         for col in col_to_dcs:
             self._final_df_place[col] = self._final_df_place[col].replace(

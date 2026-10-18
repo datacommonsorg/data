@@ -460,14 +460,10 @@ _SCHOOL_PUBLIC_TYPE = {
 }
 
 _STATE_NAME = {
-    'DODEA (Overseas and Domestic)':
-        'NCES_DepartmentOfDefenseEducationActivity',
-    "Bureau of Indian Education":
-        "NCES_BureauOfIndianEducation",
-    "DEPARTMENT OF DEFENSE EDUCATION ACTIVITY":
-        "NCES_DepartmentOfDefenseEducationActivity",
-    "DEPARTMENT OF DEFENSE":
-        "NCES_DepartmentOfDefenseEducationActivity"
+    'DODEA (Overseas and Domestic)': 'NCES_DepartmentOfDefense',
+    "Bureau of Indian Education": "NCES_BureauOfIndianEducation",
+    "DEPARTMENT OF DEFENSE EDUCATION ACTIVITY": "NCES_DepartmentOfDefense",
+    "DEPARTMENT OF DEFENSE": "NCES_DepartmentOfDefense"
 }
 
 
