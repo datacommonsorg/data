@@ -58,3 +58,4 @@ python3 process.py \
    - In 2019, the Estimate and Margin of Error columns for household income `$50,000 to $74,999` are ignored in `ignoreColumns`.
    - In 2020–2024, these columns follow the existing `$50,000 to $74,999` `preprocess.find_and_replace` mapping (`Count_Household_16OrMoreYears_Civilian_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings_NonInstitutionalized`) to maintain backward compatibility with previous S2702 releases (`20250211`) and avoid deleting existing StatVar DCIDs.
 4. Margin of Error columns for median measurements (`Median age (years)`, `Median earnings (dollars)`, and `Median household income of householders`) are ignored across all years.
+5. The `naics` property for `"Agriculture, forestry, fishing and hunting, and mining"` in `S2702_spec.json` is mapped to the canonical schema symbol `dcs:NAICS/11_21` (updating the legacy `dcs:NAICS/11&NAICS/21` value from `20250211`).
