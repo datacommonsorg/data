@@ -86,7 +86,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
             'Percentage Standard Met^Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
             '00^00000^0000000^4^2024^1^1^3^102^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
             '01^00000^0000000^5^2024^1^1^3^62^60^2410.0^22.0^28.0^50.0^20.0^30.0\n'
-            '01^12345^6789012^7^2024^1^1^3^51^50^2350.0^10.0^20.0^30.0^30.0^40.0\n'
+            '01^12345^6789012^7^2024^1^1^3^51^50^*^10.0^20.0^30.0^30.0^40.0\n'
         )
         # Default keep_all_entities=True retains all 3 entities (State, County, School)
         rows_all = list(
@@ -99,6 +99,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
         self.assertEqual(rows_all[0][7], '1')  # Test ID
         self.assertEqual(rows_all[0][8], '102')  # Total Students Tested
         self.assertEqual(rows_all[1][3], 'geoId/06001')
+        self.assertEqual(rows_all[2][9], '')  # '*' Mean Scale Score -> ''
 
         # Explicitly passing keep_all_entities=False filters out Type ID 7
         rows_filtered = list(

@@ -322,6 +322,12 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
 
     school_map = get_school_code_map()
 
+    def _clean_metric(idx: int, n_cols: int, row: list[str]) -> str:
+        if 0 <= idx < n_cols:
+            val = row[idx].strip().strip('"')
+            return '' if val == '*' else val
+        return ''
+
     for r in reader:
         n_cols = len(r)
         if n_cols == 0:
@@ -356,17 +362,13 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
             r[gid_idx].strip().strip('"') if 0 <= gid_idx < n_cols else '',
             r[gr_idx].strip().strip('"') if 0 <= gr_idx < n_cols else '',
             r[tid_idx].strip().strip('"') if 0 <= tid_idx < n_cols else '',
-            r[tested_idx].strip().strip('"')
-            if 0 <= tested_idx < n_cols else '',
-            r[mean_idx].strip().strip('"') if 0 <= mean_idx < n_cols else '',
-            r[exc_idx].strip().strip('"') if 0 <= exc_idx < n_cols else '',
-            r[met_idx].strip().strip('"') if 0 <= met_idx < n_cols else '',
-            (r[met_abv_idx].strip().strip('"')
-             if 0 <= met_abv_idx < n_cols else ''),
-            (r[nearly_idx].strip().strip('"')
-             if 0 <= nearly_idx < n_cols else ''),
-            (r[not_met_idx].strip().strip('"')
-             if 0 <= not_met_idx < n_cols else ''),
+            _clean_metric(tested_idx, n_cols, r),
+            _clean_metric(mean_idx, n_cols, r),
+            _clean_metric(exc_idx, n_cols, r),
+            _clean_metric(met_idx, n_cols, r),
+            _clean_metric(met_abv_idx, n_cols, r),
+            _clean_metric(nearly_idx, n_cols, r),
+            _clean_metric(not_met_idx, n_cols, r),
         ]
 
 

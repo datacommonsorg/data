@@ -19,6 +19,7 @@ california_school_performance/
 │   ├── california_school_performance_metadata.csv     # Processor configurations (delimiters, headers, output columns)
 │   ├── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
 │   ├── california_school_performance_statvars.mcf     # Pre-defined StatisticalVariable MCF nodes (6,050 StatVars)
+│   ├── missing_nodes.mcf                              # Place MCF definitions for unmapped CA-* school/district entities
 │   └── school_code_mapping.json                       # Mapping of California CDS school/district codes to NCES DCIDs
 ├── test_data/                                         # Test fixtures for E2E validation
 │   ├── sample_input.txt                               # Sample raw CAASPP input records
@@ -127,6 +128,7 @@ python3 -m unittest california_school_performance_test.py
 
 ## Output Files
 The pipeline produces standard Data Commons import artifacts in `output_files/`:
-- `california_school_performance_output.csv`: Complete multi-year observations table
-- `california_school_performance_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
-- `california_school_performance_output.mcf`: StatisticalVariable MCF definitions
+- `california_school_performance_all_years_output.csv`: Complete multi-year observations table
+- `california_school_performance_all_years_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
+- `california_school_performance_all_years_output.mcf`: StatisticalVariable MCF definitions
+- `california_school_performance_all_years_output_missing_nodes.mcf`: Place MCF definitions for unmapped `CA-*` school/district entities
