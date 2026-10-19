@@ -130,4 +130,3 @@ The pipeline produces standard Data Commons import artifacts in `output_files/`:
 - `california_school_performance_all_years_output.csv`: Complete multi-year observations table
 - `california_school_performance_all_years_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
 - `california_school_performance_all_years_output.mcf`: StatisticalVariable MCF definitions
-- `california_school_performance_all_years_output_missing_nodes.mcf`: Place MCF definitions for unmapped `CA-*` school/district entities

@@ -294,7 +294,6 @@ def process_files(
     csv_path = f'{output_prefix}.csv'
     tmcf_path = f'{output_prefix}.tmcf'
     mcf_out_path = f'{output_prefix}.mcf'
-    missing_nodes_out_path = f'{output_prefix}_missing_nodes.mcf'
 
     counters: Counter = Counter()
     observed_statvars: set[str] = set()
@@ -483,7 +482,7 @@ def process_files(
     with open(tmcf_path, 'w', encoding='utf-8', newline='\n') as f_tmcf:
         f_tmcf.write(generate_tmcf(table_name))
 
-    # Write StatVar MCF nodes for all observed StatVars
+    # Write MCF nodes to the single output .mcf file
     counters['generated_statvars'] = len(observed_statvars)
     with open(mcf_out_path, 'w', encoding='utf-8', newline='\n') as f_mcf:
         blocks = [
@@ -491,25 +490,19 @@ def process_files(
             for sv in sorted(observed_statvars)
             if sv in node_to_block
         ]
+        for pl, (county_code, school_code) in sorted(
+                observed_ca_places.items()):
+            dcid_key = f'dcid:{pl}'
+            c_num = int(county_code) if county_code.isdigit() else 0
+            contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
+                            if 1 <= c_num <= 58 else 'dcid:geoId/06')
+            type_of = ('dcs:SchoolDistrict'
+                       if school_code == '0000000' else 'dcs:School')
+            blocks.append(
+                f'Node: {dcid_key}\ntypeOf: {type_of}\ncontainedInPlace: {contained_in}'
+            )
         if blocks:
             f_mcf.write('\n\n'.join(blocks) + '\n')
-
-    # Write missing_nodes MCF dynamically for any observed CA-* fallback places
-    ca_blocks_to_write: list[str] = []
-    for pl, (county_code, school_code) in sorted(observed_ca_places.items()):
-        dcid_key = f'dcid:{pl}'
-        c_num = int(county_code) if county_code.isdigit() else 0
-        contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
-                        if 1 <= c_num <= 58 else 'dcid:geoId/06')
-        type_of = ('dcs:SchoolDistrict'
-                   if school_code == '0000000' else 'dcs:School')
-        ca_blocks_to_write.append(
-            f'Node: {dcid_key}\ntypeOf: {type_of}\ncontainedInPlace: {contained_in}'
-        )
-    if ca_blocks_to_write:
-        with open(missing_nodes_out_path, 'w', encoding='utf-8',
-                  newline='\n') as f_miss:
-            f_miss.write('\n\n'.join(ca_blocks_to_write) + '\n')
 
     # Write counters if requested
     if counters_path:

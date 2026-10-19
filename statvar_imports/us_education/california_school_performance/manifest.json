@@ -15,7 +15,7 @@
                 {
                     "template_mcf": "output_files/california_school_performance_all_years_output.tmcf",
                     "cleaned_csv": "output_files/california_school_performance_all_years_output.csv",
-                    "node_mcf": "output_files/california_school_performance_all_years_output*.mcf"
+                    "node_mcf": "output_files/california_school_performance_all_years_output.mcf"
                 }
             ],
             "source_files": [
