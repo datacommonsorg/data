@@ -12,7 +12,8 @@
                 "preprocess.py --mode=process"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
