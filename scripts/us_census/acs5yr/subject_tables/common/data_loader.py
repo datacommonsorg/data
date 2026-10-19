@@ -221,7 +221,6 @@ class SubjectTableDataLoaderBase:
         # makes the spec long, perhaps we can add support for tokens
         df_columns = set(df.columns)
         cols_dict = {col: df[col].to_numpy() for col in df.columns}
-        modified = False
         for count_col, percent_col_list in self.json_spec['denominators'].items(
         ):
             # TODO: add a warning message
@@ -236,10 +235,7 @@ class SubjectTableDataLoaderBase:
                         cols_dict[col] = np.round(
                             (cols_dict[col].astype(float) / 100) * count_vals,
                             self.decimal_places)
-                    modified = True
-        if modified:
-            df = pd.DataFrame(cols_dict, index=df.index)
-        return df
+        return pd.DataFrame(cols_dict, index=df.index)
 
     def _get_summary(self):
         """
@@ -381,10 +377,7 @@ class SubjectTableDataLoaderBase:
                 columns=self.csv_columns)
 
             # Write the processed observations to the clean_csv
-            if write_header:
-                obs_df.to_csv(csv_file, header=True, index=False, mode='w')
-            else:
-                obs_df.to_csv(csv_file, header=False, index=False, mode='a')
+            obs_df.to_csv(csv_file, header=write_header, index=False)
             del obs_df, years_list, places_list, statvars_list, quantities_list, units_list, scaling_list, columns_list
         csv_file.close()
 
