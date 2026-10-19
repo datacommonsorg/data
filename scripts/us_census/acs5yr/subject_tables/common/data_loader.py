@@ -308,7 +308,7 @@ class SubjectTableDataLoaderBase:
         place_arr = place_geoIds.to_numpy()
         valid_place_mask = pd.notna(place_arr)
 
-        csv_file = open(self.clean_csv_path, 'a')
+        csv_file = open(self.clean_csv_path, 'a', encoding='utf-8')
         # update the clean csv
         for batch_start in range(0, len(mapped_cols), _COLUMN_BATCH_SIZE):
             batch_cols = mapped_cols[batch_start:batch_start +
@@ -324,19 +324,8 @@ class SubjectTableDataLoaderBase:
 
             for column in batch_cols:
                 col_info = column_map[column]
-                # add unit to the csv
-                try:
-                    unit = col_info['unit']
-                    del col_info['unit']
-                except KeyError:
-                    unit = np.nan
-
-                # add scaling factor to the csv
-                try:
-                    scalingFactor = col_info['scalingFactor']
-                    del col_info['scalingFactor']
-                except KeyError:
-                    scalingFactor = np.nan
+                unit = col_info.get('unit', np.nan)
+                scalingFactor = col_info.get('scalingFactor', np.nan)
 
                 # if StatVar not in mcf_dict, add dcid
                 dcid = col_info['Node']
@@ -346,7 +335,7 @@ class SubjectTableDataLoaderBase:
                     self.mcf_dict[dcid] = {}
                     ## add pvs to dict
                     for key, value in col_info.items():
-                        if key != 'Node':
+                        if key not in ('Node', 'unit', 'scalingFactor'):
                             self.mcf_dict[dcid][key] = value
 
                 col_vals = df[column].to_numpy()
