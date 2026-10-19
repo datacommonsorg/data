@@ -23,7 +23,6 @@ Mexico_Census_URL = config.Mexico_Census_URL
 
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "input_files")
-Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 
 @retry(tries=3, delay=5, backoff=2)
@@ -33,7 +32,58 @@ def retry_method(url, headers=None):
     return response
 
 
+HEADER_RENAME = {
+    "ADM0_ES": "ADM0_EN",
+    "ADM1_ES": "ADM1_EN",
+    "ADM2_ES": "ADM2_EN",
+}
+
+LEVEL_LEADING_COLS = {
+    "adm0": ["ADM0_EN", "ADM0_PCODE", "Year"],
+    "adm1": ["ADM0_EN", "ADM0_PCODE", "ADM1_EN", "ADM1_PCODE", "Year"],
+    "adm2": [
+        "ADM0_EN",
+        "ADM0_PCODE",
+        "ADM1_EN",
+        "ADM1_PCODE",
+        "ADM2_EN",
+        "ADM2_PCODE",
+        "Year",
+    ],
+}
+
+
+def normalize_dataframe(df: pd.DataFrame, sheet_name: str) -> pd.DataFrame:
+    """Standardizes headers and column ordering between 2021 and 2024 releases."""
+    if "ISO3" in df.columns:
+        df = df.drop(columns=["ISO3"])
+    df = df.rename(columns=HEADER_RENAME)
+
+    level = None
+    for k in ["adm0", "adm1", "adm2"]:
+        if k in sheet_name.lower():
+            level = k
+            break
+    if not level:
+        return df
+
+    if level == "adm0" and "ADM0_EN" not in df.columns:
+        df = df.rename(columns={"0": "ADM0_EN", 0: "ADM0_EN"})
+
+    leading = LEVEL_LEADING_COLS[level]
+    # Remove accidental subnational columns from ADM0 if present
+    if level == "adm0":
+        for drop_col in ["ADM1_EN", "ADM1_PCODE", "ADM2_EN", "ADM2_PCODE"]:
+            if drop_col in df.columns:
+                df = df.drop(columns=[drop_col])
+
+    present_leading = [c for c in leading if c in df.columns]
+    data_cols = [c for c in df.columns if c not in present_leading]
+    return df[present_leading + data_cols]
+
+
 def download_and_convert_excel_to_csv():
+    Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
     logging.info("Starting download and conversion of Excel files...")
     KEYWORDS = ["adm0", "adm1", "adm2"]
     try:
@@ -46,8 +96,7 @@ def download_and_convert_excel_to_csv():
                     if any(keyword in sheet_name.lower()
                            for keyword in KEYWORDS):
                         df = excel_file.parse(sheet_name)
-                        if "ISO3" in df.columns:
-                            df = df.drop(columns=["ISO3"])
+                        df = normalize_dataframe(df, sheet_name)
                         csv_filename = os.path.join(OUTPUT_DIR,
                                                     f"{sheet_name}.csv")
                         df.to_csv(csv_filename, index=False, encoding='utf-8')
@@ -57,12 +106,9 @@ def download_and_convert_excel_to_csv():
                 except Exception as e:
                     logging.fatal(
                         f"Failed to process the sheet '{sheet_name}' : {e}")
-                    raise RuntimeError(e)
-                    
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
-        raise RuntimeError(e)
         
 
 

@@ -1,0 +1,42 @@
+key,prop,val,,,,
+Year,observationDate,{Number},populationType,MedicalConditionIncident,observationAbout,country/USA
+
+Sex Code:1,gender,Female
+Sex Code:2,gender,Male
+Sex Code:99,gender,CDC_GenderUnknownOrNotStated
+
+Race Code:1,race,AmericanIndianAndAlaskaNativeAlone
+Race Code:2,race,AsianOrPacificIslander
+Race Code:3,race,BlackOrAfricanAmericanAlone
+Race Code:4,race,WhiteAlone
+Race Code:5,race,CDC_OtherRace
+Race Code:99,race,CDC_RaceUnknownOrNotStated
+Race Code:98,#ignore,suppressed data
+
+Ethnicity Code:1,ethnicity,HispanicOrLatino
+Ethnicity Code:non-,ethnicity,NotHispanicOrLatino
+Ethnicity Code:99,ethnicity,CDC_EthnicityUnknownOrNotStated
+Ethnicity Code:98,#ignore,suppressed data
+
+Regions Code:U.S.,residentStatus,USResident
+Regions Code:REGION1,#ignore,unsupported place grouping
+Regions Code:REGION2,#ignore,unsupported place grouping
+Regions Code:REGION3,#ignore,unsupported place grouping
+Regions Code:REGION4,#ignore,unsupported place grouping
+Regions Code:REGION5,#ignore,unsupported place grouping
+Regions Code:REGION6,#ignore,unsupported place grouping
+Regions Code:REGION7,#ignore,unsupported place grouping
+Regions Code:REGION8,#ignore,unsupported place grouping
+Regions Code:REGION9,#ignore,unsupported place grouping
+Regions Code:REGION10,#ignore,unsupported place grouping
+Regions Code:REGION11,residentStatus,NonUSResident
+
+Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,observationPeriod,P1Y
+Disease Code:10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,SerotypeB
+Disease Code:10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,NonSerotypeB
+Disease Code:10592,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serogroup,OtherSerogroups
+Disease Code:10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,UnknownSerotype
+Disease Code:11722,medicalCondition,StreptococcusPneumonia,age,YearsUpto5,,
+Disease Code:50232,medicalCondition,StreptococcusPneumonia,medicalStatus,ConfirmedCase,age,YearsUpto5
+Disease Code:50233,medicalCondition,StreptococcusPneumonia,medicalStatus,ProbableCase,age,YearsUpto5
+

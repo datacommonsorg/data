@@ -1,0 +1,19 @@
+key,prop,val,,,,
+Year,observationDate,{Number},populationType,MedicalConditionIncident,observationAbout,country/USA
+Age Code:1,age,YearsUpto1,
+Age Code:2,age,Years1To4,
+Age Code:3,age,Years5To14,
+Age Code:4,age,Years15To24,
+Age Code:5,age,Years25To39,
+Age Code:6,age,Years40To64,
+Age Code:7,age,Years65Onwards,
+Age Code:99,age,USC_AgeNotStated,
+
+Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,observationPeriod,P1Y
+Disease Code:10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serotype,SerotypeB
+Disease Code:10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serotype,NonSerotypeB
+Disease Code:10592,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serogroup,OtherSerogroups
+Disease Code:10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serotype,UnknownSerotype
+Disease Code:11722,#ignore,unsupported medical condition
+Disease Code:50232,#ignore,unsupported medical condition
+Disease Code:50233,#ignore,unsupported medical condition
