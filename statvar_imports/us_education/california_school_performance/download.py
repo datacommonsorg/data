@@ -30,9 +30,11 @@ Usage:
   python3 download.py --test_mode
 """
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import csv
 from datetime import datetime
 import io
+import json
 import os
 import shutil
 import sys
@@ -55,14 +57,14 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
     'years',
-    'all',
-    'Years to download: "all" (2015-present, skipping 2020), range e.g. "2015-2024", or comma-separated "2023,2024".',
+    '2023-present',
+    'Years to download: "2023-present" (post-2022 active years; 2015-2022 are in GCS historic/), "all" (2015-present, skipping 2020), range e.g. "2015-2024", or comma-separated "2023,2024".',
 )
 flags.DEFINE_enum(
     'data_mode',
-    'all_students',
+    'all_groups',
     ['all_students', 'all_groups'],
-    'Data scope: "all_students" downloads group 1 only (~5MB/yr); "all_groups" downloads all 55 demographic subgroups (~100MB/yr).',
+    'Data scope: "all_groups" downloads all 55 demographic subgroups (~100MB/yr); "all_students" downloads group 1 only (~5MB/yr).',
 )
 flags.DEFINE_string(
     'output_dir',
@@ -86,12 +88,41 @@ flags.DEFINE_boolean(
 )
 flags.DEFINE_boolean(
     'keep_all_entities',
-    False,
-    'If true, keeps all entities (including schools and districts). Defaults to False (State & County only).',
+    True,
+    'If true, keeps all entities (State, Counties, School Districts, and Schools). Defaults to True.',
 )
 
 BASE_URL = 'https://caaspp-elpac.ets.org/caaspp/researchfiles/'
 USER_AGENT = 'Mozilla/5.0 (DataCommons Ingestion Bot)'
+
+_HTTP_SESSION: requests.Session | None = None
+_SCHOOL_CODE_MAP: dict[str, str] | None = None
+
+
+def _get_http_session() -> requests.Session:
+    """Returns a shared requests.Session for HTTP connection pooling."""
+    global _HTTP_SESSION
+    if _HTTP_SESSION is None:
+        _HTTP_SESSION = requests.Session()
+        _HTTP_SESSION.headers.update({'User-Agent': USER_AGENT})
+    return _HTTP_SESSION
+
+
+def get_school_code_map() -> dict[str, str]:
+    """Loads and caches the CDS-to-DCID place mapping from config/school_code_mapping.json."""
+    global _SCHOOL_CODE_MAP
+    if _SCHOOL_CODE_MAP is None:
+        map_path = os.path.join(_SCRIPT_DIR, 'config',
+                                'school_code_mapping.json')
+        if os.path.exists(map_path):
+            with open(map_path, 'r', encoding='utf-8') as f:
+                _SCHOOL_CODE_MAP = json.load(f)
+        else:
+            logging.warning('School code mapping file not found at %s',
+                            map_path)
+            _SCHOOL_CODE_MAP = {}
+    return _SCHOOL_CODE_MAP
+
 
 # Known historical official zip filename per year: (all_subgroups_zip, all_students_zip).
 # Future years (>2025) are discovered dynamically by get_all_available_years() and
@@ -111,11 +142,14 @@ KNOWN_YEAR_URL_MAP = {
 
 UNIFIED_HEADER = [
     'County Code',
+    'District Code',
+    'School Code',
+    'Place',
     'Test Year',
     'Student Group ID',
     'Grade',
     'Test ID',
-    'Total Students Tested with Scores',
+    'Total Students Tested',
     'Mean Scale Score',
     'Percentage Standard Exceeded',
     'Percentage Standard Met',
@@ -127,12 +161,13 @@ UNIFIED_HEADER = [
 
 def probe_url_exists(url: str, timeout: int = 10, max_retries: int = 3) -> bool:
     """Checks if a remote URL exists using an HTTP HEAD probe with retries for transient errors."""
+    session = _get_http_session()
     for attempt in range(max_retries):
         try:
-            resp = requests.head(url,
-                                 headers={'User-Agent': USER_AGENT},
-                                 allow_redirects=True,
-                                 timeout=timeout)
+            resp = session.head(url,
+                                headers={'User-Agent': USER_AGENT},
+                                allow_redirects=True,
+                                timeout=timeout)
             if resp.status_code == 200:
                 return True
             if resp.status_code == 404:
@@ -196,8 +231,15 @@ def parse_years(years_str: str) -> list[int]:
         part = part.strip()
         if '-' in part:
             try:
-                start, end = part.split('-', 1)
-                for y in range(int(start.strip()), int(end.strip()) + 1):
+                start_str, end_str = part.split('-', 1)
+                start_year = int(start_str.strip())
+                end_token = end_str.strip().lower()
+                if end_token in ('', 'present', 'latest', 'now'):
+                    end_year = max(all_years) if all_years else datetime.now(
+                    ).year
+                else:
+                    end_year = int(end_token)
+                for y in range(start_year, end_year + 1):
                     if y in all_years or discover_year_urls(y):
                         years.add(y)
             except ValueError:
@@ -211,7 +253,29 @@ def parse_years(years_str: str) -> list[int]:
     return sorted(years)
 
 
-def normalize_and_filter_stream(text_stream, keep_all_entities: bool = False):
+def resolve_place_dcid(county_code: str,
+                       district_code: str,
+                       school_code: str,
+                       school_map: dict[str, str] | None = None) -> str:
+    """Resolves a California CDS code triplet to its Data Commons place DCID."""
+    if school_map is None:
+        school_map = get_school_code_map()
+    c_code = county_code.strip().zfill(2) if county_code.strip() else '00'
+    d_code = district_code.strip().zfill(
+        5) if district_code.strip() else '00000'
+    s_code = school_code.strip().zfill(7) if school_code.strip() else '0000000'
+    ca_id = f'CA-{c_code}{d_code}-{s_code}'
+    if ca_id in school_map:
+        return school_map[ca_id]
+    if d_code == '00000' and s_code == '0000000':
+        if c_code == '00':
+            return 'geoId/06'
+        if c_code.isdigit() and 1 <= int(c_code) <= 58:
+            return f'geoId/06{int(c_code) * 2 - 1:03d}'
+    return ca_id
+
+
+def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
     """Yields normalized CAASPP records row-by-row from a text stream."""
     first_line = text_stream.readline()
     if not first_line:
@@ -219,59 +283,95 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = False):
 
     delim = '^' if '^' in first_line else ','
     text_stream.seek(0)
-    reader = csv.DictReader(text_stream, delimiter=delim)
+    reader = csv.reader(text_stream, delimiter=delim)
+    raw_header = next(reader, None)
+    if not raw_header:
+        return
+
+    col_map = {
+        col.strip().strip('"'): idx for idx, col in enumerate(raw_header)
+    }
+
+    def _idx(*names: str) -> int:
+        for name in names:
+            if name in col_map:
+                return col_map[name]
+        return -1
+
+    c_idx = _idx('County Code')
+    d_idx = _idx('District Code')
+    s_idx = _idx('School Code')
+    type_idx = _idx('Type ID')
+    place_idx = _idx('Place')
+    yr_idx = _idx('Test Year')
+    gid_idx = _idx('Student Group ID', 'Subgroup ID')
+    gr_idx = _idx('Grade')
+    tid_idx = _idx('Test ID', 'Test Id')
+    tested_idx = _idx(
+        'Total Students Tested',
+        'Students Tested',
+        'Total Students Tested with Scores',
+        'Students with Scores',
+    )
+    mean_idx = _idx('Mean Scale Score')
+    exc_idx = _idx('Percentage Standard Exceeded')
+    met_idx = _idx('Percentage Standard Met')
+    met_abv_idx = _idx('Percentage Standard Met and Above')
+    nearly_idx = _idx('Percentage Standard Nearly Met')
+    not_met_idx = _idx('Percentage Standard Not Met')
+
+    school_map = get_school_code_map()
 
     for r in reader:
-        # Strip quotes and whitespace from all keys/values
-        cleaned = {
-            k.strip().strip('"'): (v.strip().strip('"') if v else '')
-            for k, v in r.items()
-            if k
-        }
+        n_cols = len(r)
+        if n_cols == 0:
+            continue
 
-        # Check entity level:
-        # In CAASPP research files, Type ID 4 = State, 5 = County.
-        # State and County aggregates have District Code 00000 and School Code 0000000.
+        c_code = r[c_idx].strip().strip('"') if 0 <= c_idx < n_cols else ''
+        d_code = r[d_idx].strip().strip('"') if 0 <= d_idx < n_cols else ''
+        s_code = r[s_idx].strip().strip('"') if 0 <= s_idx < n_cols else ''
+
         if not keep_all_entities:
-            type_id = cleaned.get('Type ID', '').strip()
+            type_id = (r[type_idx].strip().strip('"')
+                       if 0 <= type_idx < n_cols else '')
             if type_id:
                 if type_id not in ('4', '5'):
                     continue
             else:
-                d_code = cleaned.get('District Code', '').strip()
-                s_code = cleaned.get('School Code', '').strip()
                 if not (d_code and s_code and set(d_code) == {'0'} and
                         set(s_code) == {'0'}):
                     continue
 
-        # Handle subgroup ID variations across eras
-        gid = cleaned.get('Student Group ID') or cleaned.get(
-            'Subgroup ID') or ''
-        # Handle test ID variations
-        tid = cleaned.get('Test ID') or cleaned.get('Test Id') or ''
-        # Handle count of tested with scores variations
-        scores = cleaned.get('Total Students Tested with Scores'
-                            ) or cleaned.get('Students with Scores') or ''
+        place = (r[place_idx].strip().strip('"')
+                 if 0 <= place_idx < n_cols else '')
+        if not place:
+            place = resolve_place_dcid(c_code, d_code, s_code, school_map)
 
-        row = [
-            cleaned.get('County Code', ''),
-            cleaned.get('Test Year', ''),
-            gid,
-            cleaned.get('Grade', ''),
-            tid,
-            scores,
-            cleaned.get('Mean Scale Score', ''),
-            cleaned.get('Percentage Standard Exceeded', ''),
-            cleaned.get('Percentage Standard Met', ''),
-            cleaned.get('Percentage Standard Met and Above', ''),
-            cleaned.get('Percentage Standard Nearly Met', ''),
-            cleaned.get('Percentage Standard Not Met', ''),
+        yield [
+            c_code.zfill(2) if c_code else '',
+            d_code.zfill(5) if d_code else '',
+            s_code.zfill(7) if s_code else '',
+            place,
+            r[yr_idx].strip().strip('"') if 0 <= yr_idx < n_cols else '',
+            r[gid_idx].strip().strip('"') if 0 <= gid_idx < n_cols else '',
+            r[gr_idx].strip().strip('"') if 0 <= gr_idx < n_cols else '',
+            r[tid_idx].strip().strip('"') if 0 <= tid_idx < n_cols else '',
+            r[tested_idx].strip().strip('"')
+            if 0 <= tested_idx < n_cols else '',
+            r[mean_idx].strip().strip('"') if 0 <= mean_idx < n_cols else '',
+            r[exc_idx].strip().strip('"') if 0 <= exc_idx < n_cols else '',
+            r[met_idx].strip().strip('"') if 0 <= met_idx < n_cols else '',
+            (r[met_abv_idx].strip().strip('"')
+             if 0 <= met_abv_idx < n_cols else ''),
+            (r[nearly_idx].strip().strip('"')
+             if 0 <= nearly_idx < n_cols else ''),
+            (r[not_met_idx].strip().strip('"')
+             if 0 <= not_met_idx < n_cols else ''),
         ]
-        yield row
 
 
 def normalize_and_filter_records(raw_bytes: bytes,
-                                 keep_all_entities: bool = False
+                                 keep_all_entities: bool = True
                                 ) -> list[list[str]]:
     """Normalizes raw CAASPP records across all eras into unified columns."""
     text_io = io.StringIO(raw_bytes.decode('latin1'))
@@ -401,36 +501,47 @@ def main(argv):
     years = parse_years(FLAGS.years)
     logging.info('Target years to download and process: %s', years)
 
-    all_normalized_files = []
+    year_to_file: dict[int, str] = {}
     failed_years = []
-    for year in years:
-        try:
-            res = download_and_process_year(
+    max_workers = min(len(years), 6) if years else 1
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_year = {
+            executor.submit(
+                download_and_process_year,
                 year,
                 FLAGS.data_mode,
                 output_dir,
                 FLAGS.keep_all_entities,
-                raw_dir=raw_dir,
-            )
-            if res:
-                all_normalized_files.append(res)
-        except Exception as e:
-            logging.error('Error processing year %d: %s', year, e)
-            failed_years.append((year, str(e)))
+                raw_dir,
+            ):
+                year for year in years
+        }
+        for future in as_completed(future_to_year):
+            year = future_to_year[future]
+            try:
+                res = future.result()
+                if res:
+                    year_to_file[year] = res
+            except Exception as e:
+                logging.error('Error processing year %d: %s', year, e)
+                failed_years.append((year, str(e)))
 
     if failed_years:
         raise RuntimeError(
-            f'Import aborted due to download failures for years: {failed_years}'
+            f'Import aborted due to download failures for years: {sorted(failed_years)}'
         )
 
+    all_normalized_files = [
+        year_to_file[y] for y in sorted(year_to_file.keys())
+    ]
     if not all_normalized_files:
         raise RuntimeError(
             'No files were successfully downloaded and processed.')
 
-    # Combine into master multi-year file if all years or multiple years were processed.
+    # Combine into master multi-year file if all years, a range, or multiple years were processed.
     # Single-year downloads do not overwrite the consolidated master dataset unless requested.
-    if FLAGS.years.strip().lower() in ('all',
-                                       '*') or len(all_normalized_files) > 1:
+    if (FLAGS.years.strip().lower() in ('all', '*') or '-' in FLAGS.years or
+            len(all_normalized_files) > 1):
         master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
         temp_master = tempfile.NamedTemporaryFile('w',
                                                   dir=output_dir,
@@ -438,30 +549,30 @@ def main(argv):
                                                   encoding='utf-8',
                                                   newline='',
                                                   suffix='.tmp')
-        total_master_rows = 0
         try:
-            writer = csv.writer(temp_master, delimiter='^')
-            writer.writerow(UNIFIED_HEADER)
+            temp_master.write('^'.join(UNIFIED_HEADER) + '\n')
             for nf in all_normalized_files:
                 with open(nf, 'r', encoding='utf-8') as f_in:
-                    reader = csv.reader(f_in, delimiter='^')
-                    next(reader)  # Skip header
-                    for row in reader:
-                        writer.writerow(row)
-                        total_master_rows += 1
+                    f_in.readline()  # Skip header line
+                    shutil.copyfileobj(f_in, temp_master, length=1024 * 1024)
             temp_master.flush()
             os.fsync(temp_master.fileno())
             temp_master.close()
             os.replace(temp_master.name, master_file)
+            for nf in all_normalized_files:
+                if nf != master_file and os.path.exists(nf):
+                    try:
+                        os.unlink(nf)
+                    except OSError:
+                        pass
         except Exception:
             temp_master.close()
             if os.path.exists(temp_master.name):
                 os.unlink(temp_master.name)
             raise
 
-        logging.info(
-            'Created master multi-year file: %s (%d records across %d years)',
-            master_file, total_master_rows, len(all_normalized_files))
+        logging.info('Created master multi-year file: %s across %d years',
+                     master_file, len(all_normalized_files))
     else:
         logging.info(
             'Individual year processing completed for: %s. Master multi-year file was not modified.',

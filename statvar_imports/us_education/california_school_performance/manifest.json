@@ -6,25 +6,31 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://caaspp-elpac.ets.org/caaspp/ResearchFileListSB",
-            "provenance_description": "Official public assessment data from the California Department of Education (CDE) and ETS, covering California Assessment of Student Performance and Progress (CAASPP) Smarter Balanced Summative Assessments for English Language Arts/Literacy (ELA) and Mathematics across California public schools, districts, counties, and statewide aggregates.",
+            "provenance_description": "The California School Performance dataset provides annual academic performance metrics from the California Assessment of Student Performance and Progress (CAASPP) System, evaluating student achievement in English Language Arts/Literacy (ELA) and Mathematics across public schools, districts, counties, and statewide in California.",
             "scripts": [
                 "download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/sb_ca_all_years_normalized.txt --pv_map=config/california_school_performance_pvmap.csv --config_file=config/california_school_performance_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/california_school_performance_all_years_output --output_counters=counters/california_school_performance_counters.csv"
+                "process.py --input_data=input_files/sb_ca_all_years_normalized.txt --pv_map=config/california_school_performance_pvmap.csv --config_file=config/california_school_performance_metadata.csv --existing_statvar_mcf=config/california_school_performance_statvars.mcf --output_path=output_files/california_school_performance_all_years_output --output_counters=counters/california_school_performance_counters.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/california_school_performance_all_years_output.tmcf",
                     "cleaned_csv": "output_files/california_school_performance_all_years_output.csv",
-                    "node_mcf": "output_files/*.mcf"
+                    "node_mcf": "output_files/california_school_performance_all_years_output*.mcf"
                 }
             ],
             "source_files": [
-                "raw_files/*.zip",
-                "input_files/*.txt",
-                "counters/*.csv",
-                "config/*.csv"
+                "raw_files/*",
+                "input_files/*",
+                "config/*",
+                "counters/*"
             ],
-            "cron_schedule": "0 0 1 12 *"
+            "cron_schedule": "0 06 15 11 *",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 64,
+                "memory": 512,
+                "disk": 1024
+            }
         }
     ]
 }

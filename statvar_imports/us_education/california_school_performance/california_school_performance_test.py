@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for California School Performance (CAASPP) download and normalization."""
+"""Unit tests for California School Performance (CAASPP) download and processing."""
 
 import io
 import os
@@ -26,9 +26,10 @@ if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
 import download
+import process
 
 
-class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
+class CaliforniaSchoolPerformanceTest(unittest.TestCase):
 
     def test_discover_year_urls_known_years(self):
         """Verify known year URL mapping retrieval."""
@@ -71,6 +72,8 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
         self.assertEqual(download.parse_years('2023'), [2023])
         self.assertEqual(download.parse_years('2023, 2024'), [2023, 2024])
         self.assertEqual(download.parse_years('2021-2023'), [2021, 2022, 2023])
+        self.assertEqual(download.parse_years('2023-present'),
+                         [2023, 2024, 2025])
         all_years = download.parse_years('all')
         self.assertIn(2015, all_years)
         self.assertIn(2024, all_years)
@@ -79,64 +82,48 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
         """Verify record normalization and entity filtering for caret-delimited format."""
         sample_caret = (
             'County Code^District Code^School Code^Type ID^Test Year^Test ID^Student Group ID^Grade^'
-            'Total Students Tested with Scores^Mean Scale Score^Percentage Standard Exceeded^'
+            'Total Students Tested^Total Students Tested with Scores^Mean Scale Score^Percentage Standard Exceeded^'
             'Percentage Standard Met^Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
-            '00^00000^0000000^4^2024^1^1^3^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
-            '01^00000^0000000^5^2024^1^1^3^60^2410.0^22.0^28.0^50.0^20.0^30.0\n'
-            '01^12345^6789012^7^2024^1^1^3^50^2350.0^10.0^20.0^30.0^30.0^40.0\n'
+            '00^00000^0000000^4^2024^1^1^3^102^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
+            '01^00000^0000000^5^2024^1^1^3^62^60^2410.0^22.0^28.0^50.0^20.0^30.0\n'
+            '01^12345^6789012^7^2024^1^1^3^51^50^2350.0^10.0^20.0^30.0^30.0^40.0\n'
         )
-        stream = io.StringIO(sample_caret)
-        rows = list(
-            download.normalize_and_filter_stream(stream,
+        # Default keep_all_entities=True retains all 3 entities (State, County, School)
+        rows_all = list(
+            download.normalize_and_filter_stream(io.StringIO(sample_caret)))
+        self.assertEqual(len(rows_all), 3)
+        self.assertEqual(rows_all[0][3], 'geoId/06')
+        self.assertEqual(rows_all[0][4], '2024')
+        self.assertEqual(rows_all[0][5], '1')  # Student Group ID
+        self.assertEqual(rows_all[0][6], '3')  # Grade
+        self.assertEqual(rows_all[0][7], '1')  # Test ID
+        self.assertEqual(rows_all[0][8], '102')  # Total Students Tested
+        self.assertEqual(rows_all[1][3], 'geoId/06001')
+
+        # Explicitly passing keep_all_entities=False filters out Type ID 7
+        rows_filtered = list(
+            download.normalize_and_filter_stream(io.StringIO(sample_caret),
                                                  keep_all_entities=False))
-        # School-level entity (Type ID 7) should be filtered out; State (4) and County (5) kept
-        self.assertEqual(len(rows), 2)
-        # State record
-        self.assertEqual(rows[0][0], '00')
-        self.assertEqual(rows[0][1], '2024')
-        self.assertEqual(rows[0][2], '1')  # Student Group ID
-        self.assertEqual(rows[0][3], '3')  # Grade
-        self.assertEqual(rows[0][4], '1')  # Test ID
-        self.assertEqual(rows[0][5], '100')  # Tested with scores
-        # County record
-        self.assertEqual(rows[1][0], '01')
-        self.assertEqual(rows[1][1], '2024')
+        self.assertEqual(len(rows_filtered), 2)
 
     def test_normalize_and_filter_stream_comma_delimited_legacy_headers(self):
         """Verify record normalization for comma-delimited data with older header aliases."""
         sample_comma = (
             '"County Code","District Code","School Code","Type ID","Test Year","Test Id","Subgroup ID","Grade",'
-            '"Students with Scores","Mean Scale Score","Percentage Standard Exceeded",'
+            '"Students Tested","Students with Scores","Mean Scale Score","Percentage Standard Exceeded",'
             '"Percentage Standard Met","Percentage Standard Met and Above","Percentage Standard Nearly Met","Percentage Standard Not Met"\n'
-            '"00","00000","0000000","4","2016","1","1","4","120","2450.0","25.0","30.0","55.0","20.0","25.0"\n'
+            '"00","00000","0000000","4","2016","1","1","4","125","120","2450.0","25.0","30.0","55.0","20.0","25.0"\n'
         )
         stream = io.StringIO(sample_comma)
-        rows = list(
-            download.normalize_and_filter_stream(stream,
-                                                 keep_all_entities=False))
+        rows = list(download.normalize_and_filter_stream(stream))
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0][0], '00')
-        self.assertEqual(rows[0][1], '2016')
-        self.assertEqual(rows[0][2], '1')  # Mapped Subgroup ID -> index 2
-        self.assertEqual(rows[0][3], '4')  # Grade
-        self.assertEqual(rows[0][4], '1')  # Mapped Test Id -> index 4
-        self.assertEqual(rows[0][5],
-                         '120')  # Mapped Students with Scores -> index 5
-
-    def test_normalize_and_filter_stream_keep_all_entities(self):
-        """Verify keep_all_entities=True retains school and district level entities."""
-        sample_caret = (
-            'County Code^District Code^School Code^Type ID^Test Year^Test ID^Student Group ID^Grade^'
-            'Total Students Tested with Scores^Mean Scale Score^Percentage Standard Exceeded^'
-            'Percentage Standard Met^Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
-            '00^00000^0000000^4^2024^1^1^3^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
-            '01^12345^6789012^7^2024^1^1^3^50^2350.0^10.0^20.0^30.0^30.0^40.0\n'
-        )
-        stream = io.StringIO(sample_caret)
-        rows = list(
-            download.normalize_and_filter_stream(stream,
-                                                 keep_all_entities=True))
-        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0][3], 'geoId/06')
+        self.assertEqual(rows[0][4], '2016')
+        self.assertEqual(rows[0][5], '1')  # Mapped Subgroup ID
+        self.assertEqual(rows[0][6], '4')  # Grade
+        self.assertEqual(rows[0][7], '1')  # Mapped Test Id
+        self.assertEqual(rows[0][8], '125')  # Mapped Students Tested
 
     @patch.object(download, 'download_file')
     def test_corrupt_zip_redownload(self, mock_download):
@@ -156,7 +143,7 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
                     z.writestr(
                         'sb_ca2024_1_csv_v1.txt',
                         'County Code^District Code^School Code^Type ID^Test Year^Test ID^Student Group ID^Grade^'
-                        'Total Students Tested with Scores^Mean Scale Score^Percentage Standard Exceeded^'
+                        'Total Students Tested^Mean Scale Score^Percentage Standard Exceeded^'
                         'Percentage Standard Met^Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
                         '00^00000^0000000^4^2024^1^1^3^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
                     )
@@ -171,10 +158,50 @@ class CaliforniaSchoolPerformanceDownloadTest(unittest.TestCase):
                 out = download.download_and_process_year(2024,
                                                          'all_students',
                                                          tmp_dir,
-                                                         False,
+                                                         True,
                                                          raw_dir=raw_dir)
                 mock_download.assert_called_once()
                 self.assertTrue(os.path.exists(out))
+
+    def test_end_to_end_process_matches_golden_output(self):
+        """Verify process.py generates exact expected CSV, TMCF, and MCF outputs on test_data."""
+        sample_input = os.path.join(_SCRIPT_DIR, 'test_data',
+                                    'sample_input.txt')
+        expected_csv = os.path.join(_SCRIPT_DIR, 'test_data',
+                                    'sample_state_output.csv')
+        expected_tmcf = os.path.join(_SCRIPT_DIR, 'test_data',
+                                     'sample_state_output.tmcf')
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_prefix = os.path.join(tmp_dir, 'sample_state_output')
+            counters_file = os.path.join(tmp_dir, 'counters.csv')
+            counters = process.process_files(
+                input_pattern=sample_input,
+                pv_map_path=os.path.join(
+                    _SCRIPT_DIR, 'config',
+                    'california_school_performance_pvmap.csv'),
+                mcf_path=os.path.join(
+                    _SCRIPT_DIR, 'config',
+                    'california_school_performance_statvars.mcf'),
+                school_map_path=os.path.join(_SCRIPT_DIR, 'config',
+                                             'school_code_mapping.json'),
+                output_prefix=out_prefix,
+                counters_path=counters_file,
+            )
+
+            self.assertEqual(counters['input_data_rows'], 19)
+            self.assertEqual(counters['output_svobs_rows'], 131)
+            self.assertTrue(os.path.exists(f'{out_prefix}.mcf'))
+            self.assertTrue(os.path.exists(f'{out_prefix}_missing_nodes.mcf'))
+            self.assertTrue(os.path.exists(counters_file))
+
+            with open(f'{out_prefix}.csv', 'r', encoding='utf-8') as f_actual, \
+                 open(expected_csv, 'r', encoding='utf-8') as f_exp:
+                self.assertEqual(f_actual.read(), f_exp.read())
+
+            with open(f'{out_prefix}.tmcf', 'r', encoding='utf-8') as f_actual, \
+                 open(expected_tmcf, 'r', encoding='utf-8') as f_exp:
+                self.assertEqual(f_actual.read(), f_exp.read())
 
 
 if __name__ == '__main__':
