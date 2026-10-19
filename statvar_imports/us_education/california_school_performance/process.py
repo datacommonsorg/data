@@ -494,28 +494,18 @@ def process_files(
         if blocks:
             f_mcf.write('\n\n'.join(blocks) + '\n')
 
-    # Write missing_nodes MCF for CA-* places
-    base_missing_mcf = os.path.join(_SCRIPT_DIR, 'config', 'missing_nodes.mcf')
-    if not os.path.exists(base_missing_mcf):
-        base_missing_mcf = os.path.join(_SCRIPT_DIR, 'missing_nodes.mcf')
-    existing_ca_blocks: dict[str, str] = {}
-    if os.path.exists(base_missing_mcf):
-        _, existing_ca_blocks = load_statvar_mcf(base_missing_mcf)
-
+    # Write missing_nodes MCF dynamically for any observed CA-* fallback places
     ca_blocks_to_write: list[str] = []
-    for dcid_key, block in sorted(existing_ca_blocks.items()):
-        ca_blocks_to_write.append(block)
     for pl, (county_code, school_code) in sorted(observed_ca_places.items()):
         dcid_key = f'dcid:{pl}'
-        if dcid_key not in existing_ca_blocks:
-            c_num = int(county_code) if county_code.isdigit() else 0
-            contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
-                            if 1 <= c_num <= 58 else 'dcid:geoId/06')
-            type_of = ('dcs:SchoolDistrict'
-                       if school_code == '0000000' else 'dcs:School')
-            ca_blocks_to_write.append(
-                f'Node: {dcid_key}\ntypeOf: {type_of}\ncontainedInPlace: {contained_in}'
-            )
+        c_num = int(county_code) if county_code.isdigit() else 0
+        contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
+                        if 1 <= c_num <= 58 else 'dcid:geoId/06')
+        type_of = ('dcs:SchoolDistrict'
+                   if school_code == '0000000' else 'dcs:School')
+        ca_blocks_to_write.append(
+            f'Node: {dcid_key}\ntypeOf: {type_of}\ncontainedInPlace: {contained_in}'
+        )
     if ca_blocks_to_write:
         with open(missing_nodes_out_path, 'w', encoding='utf-8',
                   newline='\n') as f_miss:

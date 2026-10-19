@@ -19,7 +19,6 @@ california_school_performance/
 │   ├── california_school_performance_metadata.csv     # Processor configurations (delimiters, headers, output columns)
 │   ├── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
 │   ├── california_school_performance_statvars.mcf     # Pre-defined StatisticalVariable MCF nodes (6,050 StatVars)
-│   ├── missing_nodes.mcf                              # Place MCF definitions for unmapped CA-* school/district entities
 │   └── school_code_mapping.json                       # Mapping of California CDS school/district codes to NCES DCIDs
 ├── test_data/                                         # Test fixtures for E2E validation
 │   ├── sample_input.txt                               # Sample raw CAASPP input records

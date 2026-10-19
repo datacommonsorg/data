@@ -193,7 +193,6 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
             self.assertEqual(counters['input_data_rows'], 19)
             self.assertEqual(counters['output_svobs_rows'], 131)
             self.assertTrue(os.path.exists(f'{out_prefix}.mcf'))
-            self.assertTrue(os.path.exists(f'{out_prefix}_missing_nodes.mcf'))
             self.assertTrue(os.path.exists(counters_file))
 
             with open(f'{out_prefix}.csv', 'r', encoding='utf-8') as f_actual, \
