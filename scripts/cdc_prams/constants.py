@@ -36,16 +36,6 @@ DEFAULT_SV_PROP = {
     "populationType": "dcs:LiveBirthPregnancyEvent",
 }
 
-# The dictionaries are used to replace the present value according
-# to the schema.
-PV_PROP = {
-    "OneMonth": "1Month",
-    "SampleSize_Count": "sampleSize",
-    "Percent": "measuredValue",
-    "ConfidenceIntervalLowerLimit_Count": "confidenceIntervalLowerLimit",
-    "ConfidenceIntervalUpperLimit_Count": "confidenceIntervalUpperLimit"
-}
-
 # The change is based on the property values according to the schema by
 #  removing the unwanted keywords from the property value.
 _PROP = {
@@ -96,13 +86,7 @@ _PROP = {
     "ConfidenceIntervalLowerLimit_Count":
         "",
     "ConfidenceIntervalUpperLimit_Count":
-        "",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
-        "12MonthsBeforePregnancy":
-        "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
-        "DuringPregnancy":
-        "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"
+        ""
 }
 
 _TIME = {
@@ -143,8 +127,6 @@ _TIME = {
     "healthInsuranceStatusPostpartumNoInsurance":
         "Postpartum",
     "SampleSize_Count":
-        "",
-    "SampleSize_Count_LivePregnancyvent_MoreThan4TimesAWeek":
         "",
     "Percent":
         "",
@@ -190,32 +172,4 @@ _CIGARETTES = {
     "Percent": "",
     "ConfidenceIntervalLowerLimit_Count": "",
     "ConfidenceIntervalUpperLimit_Count": ""
-}
-
-_YEAR = {
-    '2016_sampleSize': '2016',
-    '2017_sampleSize': '2017',
-    '2018_sampleSize': '2018',
-    '2019_sampleSize': '2019',
-    '2020_sampleSize': '2020',
-    '2016_CI_PERCENT': '2016',
-    '2016_CI': '2016',
-    '2017_CI': '2017',
-    '2018_CI': '2018',
-    '2019_CI': '2019',
-    '2020_CI': '2020',
-    '2016_CI_LOWER': '2016',
-    '2016_CI_UPPER': '2016',
-    '2017_CI_PERCENT': '2017',
-    '2017_CI_LOWER': '2017',
-    '2017_CI_UPPER': '2017',
-    '2018_CI_PERCENT': '2018',
-    '2018_CI_LOWER': '2018',
-    '2018_CI_UPPER': '2018',
-    '2019_CI_PERCENT': '2019',
-    '2019_CI_LOWER': '2019',
-    '2019_CI_UPPER': '2019',
-    '2020_CI_PERCENT': '2020',
-    '2020_CI_LOWER': '2020',
-    '2020_CI_UPPER': '2020'
 }
