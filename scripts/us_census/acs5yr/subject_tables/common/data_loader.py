@@ -235,8 +235,7 @@ class SubjectTableDataLoaderBase:
                     for col in valid_pct_cols:
                         cols_dict[col] = np.round(
                             (cols_dict[col].astype(float) / 100) * count_vals,
-                            self.decimal_places
-                        )  # TODO: replace with parameter self.decimal_places
+                            self.decimal_places)
                     modified = True
         if modified:
             df = pd.DataFrame(cols_dict, index=df.index)
