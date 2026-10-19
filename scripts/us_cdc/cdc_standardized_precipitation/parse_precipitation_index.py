@@ -89,7 +89,7 @@ def clean_precipitation_data(file_path, output_file):
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
     else:
-        data.rename(columns={"spi": "StandardizedPrecipitationIndex"},
+        data.rename(columns={"spi": "StandardizedPrecipitationIndex_Atmosphere"},
                     inplace=True)
         # Use zfill to pad 'countyfips' to 5 digits with leading zeros if shorter.
         # This is the most robust way to handle FIPS codes for all cases.
@@ -98,7 +98,7 @@ def clean_precipitation_data(file_path, output_file):
         data = pd.melt(
             data,
             id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],
-            value_vars=["StandardizedPrecipitationIndex"],
+            value_vars=["StandardizedPrecipitationIndex_Atmosphere"],
             var_name='StatisticalVariable',
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
