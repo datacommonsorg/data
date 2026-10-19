@@ -53,5 +53,8 @@ python3 process.py \
 
 1. Percentage values for uninsured population breakdowns are converted into corresponding counts using the `denominators` configuration in `S2702_spec.json`.
 2. There has been a change in the age brackets from [2017](https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2017/5-year.html) onwards (`Under 18 years` / `18 to 64 years` in 2013–2016 vs. `Under 19 years` / `19 to 64 years` from 2017 onwards).
-3. Estimate and Margin of Error columns for household income between `$50,000 to $74,999` for 2019 are ignored in `ignoreColumns`, while 2020–2024 follow the existing `$50,000 to $74,999` `preprocess.find_and_replace` mapping to maintain consistency with previous S2702 releases.
+3. For the `$50,000 to $74,999` household income bracket:
+   - In 2013–2018, the raw CSV headers share an identical `$50,000 to $74,999` leaf name with the earnings section; because `generate_col_map.py` reads headers via `csv.reader` (which preserves duplicate column names verbatim rather than appending `.1` like `pd.read_csv`), the `.1` household income rules in `preprocess.find_and_replace` are not emitted into `column_map.json`.
+   - In 2019, the Estimate and Margin of Error columns for household income `$50,000 to $74,999` are ignored in `ignoreColumns`.
+   - In 2020–2024, these columns follow the existing `$50,000 to $74,999` `preprocess.find_and_replace` mapping (`Count_Household_16OrMoreYears_Civilian_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings_NonInstitutionalized`) to maintain backward compatibility with previous S2702 releases (`20250211`) and avoid deleting existing StatVar DCIDs.
 4. Margin of Error columns for median measurements (`Median age (years)`, `Median earnings (dollars)`, and `Median household income of householders`) are ignored across all years.
