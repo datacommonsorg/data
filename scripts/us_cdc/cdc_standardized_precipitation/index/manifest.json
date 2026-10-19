@@ -19,7 +19,8 @@
                 }
             ],
             "source_files": [
-                "CDC_StandardizedPrecipitationIndex_input.csv"
+                "CDC_StandardizedPrecipitationIndex_input.csv",
+                "validation_config.json"
             ],
             "validation_config_file": "validation_config.json",
             "cron_schedule": "0 11 1,15 * *"
