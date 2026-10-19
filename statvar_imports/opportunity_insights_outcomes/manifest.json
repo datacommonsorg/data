@@ -24,6 +24,7 @@
                 "counters/output_counters.csv"
             ],
             "cron_schedule": "0 8 1 * *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,

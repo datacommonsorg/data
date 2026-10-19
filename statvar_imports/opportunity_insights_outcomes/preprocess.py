@@ -351,6 +351,8 @@ def _resolve_headers_via_svp(
                     )) or 'unmapped' in k:
                         bad_counters[k] = v
 
+        # Seed header resolution relies on unscaled 1..N observation values
+        # (no MultiplyFactor/scalingFactor in pvmap.csv) to recover col_id.
         header_to_sv = {}
         with open(f'{out_prefix}.csv', mode='r', encoding='utf-8') as f:
             for row in csv.DictReader(f):
@@ -359,14 +361,21 @@ def _resolve_headers_via_svp(
                 col_id = chunk_idx * max_cols_per_seed + int(
                     round(float(row['value']))
                 )
-                if 1 <= col_id <= len(unique_headers):
-                    norm_h = unique_headers[col_id - 1]
-                    header_to_sv[norm_h] = (
-                        row['observationDate'],
-                        row['observationPeriod'],
-                        row['variableMeasured'],
-                        row.get('unit', ''),
+                if not (1 <= col_id <= len(unique_headers)):
+                    raise RuntimeError(
+                        f'Out-of-bounds col_id {col_id} (expected 1..{len(unique_headers)}) from seed row: {row}'
                     )
+                norm_h = unique_headers[col_id - 1]
+                if norm_h in header_to_sv:
+                    raise RuntimeError(
+                        f'Duplicate seed resolution for col_id {col_id} ({norm_h}): {row}'
+                    )
+                header_to_sv[norm_h] = (
+                    row['observationDate'],
+                    row['observationPeriod'],
+                    row['variableMeasured'],
+                    row.get('unit', ''),
+                )
 
         unmapped_cohorts = (
             sorted(discovered_cohort_tokens - pvmap_keys)

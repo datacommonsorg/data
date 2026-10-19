@@ -487,6 +487,66 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(len(resolved), 17)
             self.assertEqual(resolved['kfr_p25'], ('2014', 'P2Y', 'dc/sv1', ''))
 
+            def make_single_row_runner(val_str):
+                def _runner(cmd, **kwargs):
+                    del kwargs
+                    out_prefix = [
+                        a.split('=', 1)[1]
+                        for a in cmd
+                        if a.startswith('--output_path=')
+                    ][0]
+                    with open(
+                        f'{out_prefix}.csv', 'w', encoding='utf-8', newline=''
+                    ) as f:
+                        w = csv.writer(f)
+                        w.writerow([
+                            'observationAbout',
+                            'observationDate',
+                            'observationPeriod',
+                            'variableMeasured',
+                            'value',
+                            'unit',
+                        ])
+                        w.writerow([
+                            'geoId/seed000',
+                            '2014',
+                            'P2Y',
+                            'dc/sv1',
+                            val_str,
+                            '',
+                        ])
+                        w.writerow([
+                            'geoId/seed000',
+                            '2014',
+                            'P2Y',
+                            'dc/sv2',
+                            val_str,
+                            '',
+                        ])
+                    return mock.Mock(returncode=0, stderr='')
+
+                return _runner
+
+            with mock.patch(
+                'subprocess.run', side_effect=make_single_row_runner('999')
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError, r'Out-of-bounds col_id 999'
+                ):
+                    preprocess._resolve_headers_via_svp(
+                        tmpdir, existing_statvar_mcf=''
+                    )
+
+            with mock.patch(
+                'subprocess.run', side_effect=make_single_row_runner('1')
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError, r'Duplicate seed resolution for col_id 1'
+                ):
+                    preprocess._resolve_headers_via_svp(
+                        tmpdir, existing_statvar_mcf=''
+                    )
+
             def fake_run_fail(cmd, **kwargs):
                 del kwargs
                 out_prefix = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_path=')][0]
