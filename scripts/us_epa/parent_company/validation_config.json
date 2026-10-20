@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted records does not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Checks that the count of lint errors does not exceed 0.",
+            "validator": "LINT_ERROR_COUNT",
+            "enabled": false,
+            "params": {
+                "threshold": 0
+            }
+        }
+    ]
+}

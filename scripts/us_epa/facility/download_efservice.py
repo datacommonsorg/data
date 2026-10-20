@@ -53,6 +53,7 @@ def _load_oris_crosswalk():
                                usecols=_CROSSWALK_COLS,
                                storage_options=_STORAGE_OPTIONS,
                                engine='openpyxl')
+            print(f'Downloaded ORIS crosswalk ({len(df)} rows) from {url}')
             return df.rename(columns={'GHGRP Facility ID': 'Facility Id'})
         except Exception as e:
             print(f'Warning: failed to download ORIS crosswalk from {url}: {e}')
@@ -83,6 +84,7 @@ def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
             'ORIS CODE 4', 'ORIS CODE 5'
         ]].drop_duplicates(subset=['Facility Id'], keep='first')
     merged.to_csv(crosswalk_csv_path, index=False)
+    print(f'Generated {crosswalk_csv_path} ({len(merged)} rows)')
 
 
 def main(_):

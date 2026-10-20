@@ -274,7 +274,7 @@ def process_companies(input_table_path, existing_facilities_file,
         for row in cr:
             dupes[row['Id']] = row['MappedTo']
 
-    processed_companies = set()
+    processed_companies = {}
     # Writing two CSVs: one for the CompanyInfo; the other for the Ownership StatVarObs.
     table_path = os.path.join(output_path_info, _OUT_FILE_PREFIX)
     ownership_path = os.path.join(output_path_ownership, _OUT_FILE_PREFIX)
@@ -302,6 +302,7 @@ def process_companies(input_table_path, existing_facilities_file,
         facility_ids = set(
             pd.read_csv(existing_facilities_path)[_EPA_FACILITY_GHG_ID].values)
         input_table = os.path.join(input_table_path, _TABLE + ".csv")
+        invalid_zctas = set()
         if "testdata" not in input_table_path:
             facility_cache = os.path.join(
                 _SCRIPT_PATH, "../facility/input_files/zcta_county_cache.json")
@@ -319,6 +320,15 @@ def process_companies(input_table_path, existing_facilities_file,
             cache_file = os.path.join(input_table_path,
                                       "zcta_county_cache.json")
             fh.prefetch_county_candidates(all_zctas, cache_file=cache_file)
+            no_county_zctas = sorted(
+                z for z in all_zctas if z != "zip/00000" and
+                not any(fh.get_county_candidates(z)))
+            if no_county_zctas:
+                defined_zctas = fh.dc_api_is_defined_dcid(
+                    no_county_zctas, {"dc_api_batch_size": 200})
+                invalid_zctas = {
+                    z for z, is_def in defined_zctas.items() if not is_def
+                }
 
         rows_written = 0
         with open(input_table, "r") as rfp:
@@ -351,6 +361,8 @@ def process_companies(input_table_path, existing_facilities_file,
                     _COUNTERS_COMPANIES["company_ids_replaced"].add(company_id)
                     company_id = dupes[company_id]
                 company_id = "EpaParentCompany/" + company_id
+                if company_id.lower() in processed_companies:
+                    company_id = processed_companies[company_id.lower()]
 
                 year = fh.v(_TABLE, in_row, "YEAR", table_prefix=_TABLE_PREFIX)
                 if not year:
@@ -399,6 +411,8 @@ def process_companies(input_table_path, existing_facilities_file,
                     if zip_code:
                         zip = "zip/" + zip_code
                     county = _get_county(company_id, zip, year)
+                    if not county and zip in invalid_zctas:
+                        zip = ""
 
                     table_out_row = {
                         _DCID:
@@ -414,7 +428,7 @@ def process_companies(input_table_path, existing_facilities_file,
                             ", ".join(fh.get_cip(zip, county)),
                     }
                     tableWriter.writerow(table_out_row)
-                    processed_companies.add(company_id.lower())
+                    processed_companies[company_id.lower()] = company_id
 
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
         print("Geo Resolution Stats: \n" + counters_string(_COUNTERS_COMPANIES))

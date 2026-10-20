@@ -181,6 +181,17 @@ def _prefetch_geojson(dcids, cache_file=None):
             json.dump(_GEOJSON_CACHE, fp)
 
 
+def _get_existing_power_plants(pp_dcids):
+    """Returns the subset of eia/pp/* DCIDs that exist in Data Commons."""
+    unique_dcids = sorted(set(d for d in pp_dcids if d))
+    if not unique_dcids:
+        return set()
+    resp = dc_api_get_node_property(unique_dcids,
+                                    'typeOf',
+                                    config=_DC_API_CONFIG)
+    return set(d for d in unique_dcids if resp.get(d, {}).get('typeOf'))
+
+
 def _validate_latlng(lat, lng, dcid):
     """Validate whether the lat/lng is located within the given entity's geo boundary"""
     if dcid not in _POLYGON_CACHE:
@@ -348,6 +359,18 @@ def process(input_tables_path, output_path):
                                   cache_file=os.path.join(
                                       input_tables_path,
                                       'county_geojson_cache.json'))
+                all_pp_dcids = [
+                    'eia/pp/' + v
+                    for r in deduped_rows
+                    for v in crosswalk.get_power_plant_ids(
+                        _v(table, r, 'FACILITY_ID'))
+                ]
+                print(
+                    f'Checking existence for {len(set(all_pp_dcids))} unique EIA power plants...'
+                )
+                existing_pp = _get_existing_power_plants(all_pp_dcids)
+            else:
+                existing_pp = None
 
             for in_row in deduped_rows:
                 ghg_id = _v(table, in_row, 'FACILITY_ID')
@@ -379,6 +402,8 @@ def process(input_tables_path, output_path):
                         ', '.join([
                             'dcid:eia/pp/' + v
                             for v in crosswalk.get_power_plant_ids(ghg_id)
+                            if existing_pp is None or
+                            ('eia/pp/' + v) in existing_pp
                         ]),
                     _NAME:
                         _str(_get_name(table, in_row)),

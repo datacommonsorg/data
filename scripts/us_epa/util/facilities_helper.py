@@ -28,6 +28,8 @@ import pandas as pd
 from re import sub
 
 from util.dc_api_wrapper import dc_api_get_node_property
+from util.dc_api_wrapper import dc_api_is_defined_dcid
+from util.dc_api_wrapper import dc_api_wrapper
 from util.dc_api_wrapper import get_datacommons_client
 
 _COUNTY_CANDIDATES_CACHE = {}
@@ -251,13 +253,18 @@ def get_all_statvars(facility_ids):
     print("****Getting existing StatVars for Facilities.")
     for i in range(0, len(facility_ids), n_facilities):
         print(f'**Processing facilities from index {i} to {i+n_facilities}')
-        response = client.observation.fetch(
-            entity_dcids=facility_ids[i:i + n_facilities],
-            variable_dcids=[],
-            select=[
-                ObservationSelect.VARIABLE,
-                ObservationSelect.ENTITY,
-            ],
+        response = dc_api_wrapper(
+            client.observation.fetch,
+            {
+                'entity_dcids': facility_ids[i:i + n_facilities],
+                'variable_dcids': [],
+                'select': [
+                    ObservationSelect.VARIABLE,
+                    ObservationSelect.ENTITY,
+                ],
+            },
+            retries=5,
+            retry_secs=5,
         ).to_dict()
         statVars.update(response.get('byVariable', {}).keys())
 
@@ -282,17 +289,22 @@ def get_all_svobs(facility_ids, svs):
     for i in range(0, len(facility_ids), n_facilities):
         if i % n_facilities == 0:
             print(f'**Processing facilities from index {i} to {i+n_facilities}')
-        response = client.observation.fetch(
-            variable_dcids=sv_list,
-            entity_dcids=facility_ids[i:i + n_facilities],
-            date=ObservationDate.ALL,
-            select=[
-                ObservationSelect.DATE,
-                ObservationSelect.VARIABLE,
-                ObservationSelect.ENTITY,
-                ObservationSelect.VALUE,
-                ObservationSelect.FACET,
-            ],
+        response = dc_api_wrapper(
+            client.observation.fetch,
+            {
+                'variable_dcids': sv_list,
+                'entity_dcids': facility_ids[i:i + n_facilities],
+                'date': ObservationDate.ALL,
+                'select': [
+                    ObservationSelect.DATE,
+                    ObservationSelect.VARIABLE,
+                    ObservationSelect.ENTITY,
+                    ObservationSelect.VALUE,
+                    ObservationSelect.FACET,
+                ],
+            },
+            retries=5,
+            retry_secs=5,
         ).to_dict()
         batch_by_variable = response.get('byVariable', {})
         batch_facets = response.get('facets', {})
