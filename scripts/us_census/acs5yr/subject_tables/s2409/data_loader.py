@@ -22,9 +22,10 @@ import pandas as pd
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+sys.path.append(os.path.join(_SCRIPT_PATH, '..'))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../common'))  # for resolve_geo_id
-from data_loader import SubjectTableDataLoaderBase
-from resolve_geo_id import convert_to_place_dcid
+from common.data_loader import SubjectTableDataLoaderBase
+from common.resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
 
