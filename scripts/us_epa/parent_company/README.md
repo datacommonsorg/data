@@ -41,82 +41,95 @@ percentage and if no percentage is provided it is assumed to be 100.
       python3 -m unittest discover -v -s ../ -p "*_test.py"
       ```
 
-3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
+3. To validate the imports, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
 
+    ```bash
+    dc-import genmcf -o=dc_generated/table \
+      output/table/EpaParentCompanyTable.mcf \
+      output/table/EpaParentCompanyTable.tmcf \
+      output/table/EpaParentCompanyTable.csv
+
+    dc-import genmcf -o=dc_generated/ownership \
+      output/table/EpaParentCompanyTable.mcf \
+      output/table/EpaParentCompanyNodes.mcf \
+      output/ownership/EpaParentCompanyOwnership.mcf \
+      output/ownership/EpaParentCompanyOwnershipNodes.mcf
     ```
-    dc-import genmcf output/table/*
-    dc-import genmcf output/ownership/* dc_generated/*.mcf
-    ```
 
-    This produced the following warning counters, where
-    `Existence_MissingReference_locatedIn` is because there are zip codes that
-    are not Census ZCTAs (e.g, https://datacommons.org/browser/zip/16873). The
-    warnings for 'Existence_MissingReference_Property' are for the parent
-    company names not yet existing in Data Commons.
+    The counters produced for the company table import (`dc_generated/table/report.json`) and ownership import (`dc_generated/ownership/report.json`):
 
-    The counters produced for the company table import followed by the
-    ownership import:
-
-    ```
+    ```json
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "102603",
-          "NumPVSuccesses": "820824",
-          "Existence_NumChecks": "771079",
-          "NumNodeSuccesses": "102603",
-          "Existence_NumDcCalls": "7"
+          "NumRowSuccesses": "7413",
+          "NumPVSuccesses": "37045",
+          "Existence_NumChecks": "58642",
+          "NumNodeSuccesses": "7415",
+          "Existence_NumDcCalls": "6"
+        }
+      },
+      "LEVEL_WARNING": {
+        "counters": {
+          "StrSplit_EmptyToken_locatedIn": "12",
+          "API_EmptyDcCallResponse": "1",
+          "StrSplit_EmptyToken_address": "8"
+        }
+      }
+    }
+    ```
+
+    ```json
+    "levelSummary": {
+      "LEVEL_INFO": {
+        "counters": {
+          "Existence_NumChecks": "954414",
+          "NumNodeSuccesses": "135382",
+          "Existence_NumDcCalls": "6"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
           "Existence_MissingTriple_domainIncludes": "1",
-          "Existence_MissingReference_locatedIn": "514"
+          "StatsCheck_Inconsistent_Values": "220"
         }
       }
-    },
+    }
     ```
 
-    Next, we can continue do the same for validation the SVObs:
+    Next, validate the aggregated parent company StatVarObservations:
 
+    ```bash
+    dc-import genmcf -o=dc_generated/svobs \
+      output/table/EpaParentCompanyTable.mcf \
+      output/table/EpaParentCompanyNodes.mcf \
+      output/svobs/SVObs.tmcf \
+      output/svobs/SVObs.csv
     ```
-    dc-import genmcf output/svobs/* dc_generated/*.mcf
-    ```
 
-    For the Stat Var Observations, there are several warnings for major jumps
-    in values in consecutive years. These happen because either the underlying
-    facility SVObs also have those jumps, e.g. https://datacommons.org/browser/epaGhgrpFacilityId/1001678
-    or because there are are some company names which could not be resolved to
-    the same unique (despite correcting for the obvious cases in pre_process.py). For exact details about the name to ID resolution algorithm
-    used, please see the pdf doc under the docs/ folder ([Data Commons Import] Mapping Company Names to Resolved IDs.pdf).
+    For the StatVarObservations, warnings for fluctuations or data holes are expected because either the underlying facility SVObs have those fluctuations (e.g. https://datacommons.org/browser/epaGhgrpFacilityId/1001678) or because observations are only produced for years where an ownership relationship exists between a parent company and a reporting facility.
 
-    The warnings produced for data holes are expected because we only produce
-    stat var observation for the companies in a year where a relationship exists
-    between the company and a facility. If no relationship exists, then we
-    will not have a stat var observation.
+    The counters produced for the stat var observations import (`dc_generated/svobs/report.json`):
 
-    The counters produced for the stat var observations import:
-
-    ```
+    ```json
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "168490",
-          "NumPVSuccesses": "1684900",
-          "Existence_NumChecks": "2882500",
-          "NumNodeSuccesses": "168490",
-          "Existence_NumDcCalls": "8"
+          "NumRowSuccesses": "225983",
+          "NumPVSuccesses": "2259830",
+          "Existence_NumChecks": "2770429",
+          "NumNodeSuccesses": "233397",
+          "Existence_NumDcCalls": "7"
         }
-    },
-    "LEVEL_WARNING": {
-      "counters": {
-        "StatsCheck_MaxPercentFluctuationGreaterThan100": "181",
-        "Existence_MissingTriple_domainIncludes": "1",
-        "Existence_MissingReference_Property": "102603",
-        "Existence_MissingReference_locatedIn": "1028",
-        "StatsCheck_MaxPercentFluctuationGreaterThan500": "156",
-        "StatsCheck_Data_Holes": "51"
-     }
-   }
- },
+      },
+      "LEVEL_WARNING": {
+        "counters": {
+          "StatsCheck_MaxPercentFluctuationGreaterThan100": "13",
+          "StatsCheck_3_Sigma": "5",
+          "StatsCheck_MaxPercentFluctuationGreaterThan500": "9",
+          "StatsCheck_Data_Holes": "14"
+        }
+      }
+    }
     ```
+
