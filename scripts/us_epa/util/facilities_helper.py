@@ -256,7 +256,8 @@ def get_all_statvars(facility_ids):
         response = dc_api_wrapper(
             client.observation.fetch,
             {
-                'entity_dcids': facility_ids[i:i + n_facilities],
+                'entity_dcids':
+                    facility_ids[i:i + n_facilities],
                 'variable_dcids': [],
                 'select': [
                     ObservationSelect.VARIABLE,
@@ -292,9 +293,12 @@ def get_all_svobs(facility_ids, svs):
         response = dc_api_wrapper(
             client.observation.fetch,
             {
-                'variable_dcids': sv_list,
-                'entity_dcids': facility_ids[i:i + n_facilities],
-                'date': ObservationDate.ALL,
+                'variable_dcids':
+                    sv_list,
+                'entity_dcids':
+                    facility_ids[i:i + n_facilities],
+                'date':
+                    ObservationDate.ALL,
                 'select': [
                     ObservationSelect.DATE,
                     ObservationSelect.VARIABLE,

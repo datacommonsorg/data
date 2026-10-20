@@ -402,8 +402,8 @@ def process(input_tables_path, output_path):
                         ', '.join([
                             'dcid:eia/pp/' + v
                             for v in crosswalk.get_power_plant_ids(ghg_id)
-                            if existing_pp is None or
-                            ('eia/pp/' + v) in existing_pp
+                            if existing_pp is None or ('eia/pp/' +
+                                                       v) in existing_pp
                         ]),
                     _NAME:
                         _str(_get_name(table, in_row)),

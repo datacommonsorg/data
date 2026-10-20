@@ -321,8 +321,8 @@ def process_companies(input_table_path, existing_facilities_file,
                                       "zcta_county_cache.json")
             fh.prefetch_county_candidates(all_zctas, cache_file=cache_file)
             no_county_zctas = sorted(
-                z for z in all_zctas if z != "zip/00000" and
-                not any(fh.get_county_candidates(z)))
+                z for z in all_zctas
+                if z != "zip/00000" and not any(fh.get_county_candidates(z)))
             if no_county_zctas:
                 defined_zctas = fh.dc_api_is_defined_dcid(
                     no_county_zctas, {"dc_api_batch_size": 200})
