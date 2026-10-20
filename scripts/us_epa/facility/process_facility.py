@@ -8,6 +8,7 @@ from pathlib import Path
 
 from absl import app
 from absl import flags
+from absl import logging
 from shapely import geometry
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -27,7 +28,10 @@ flags.DEFINE_string(
     'epa_input_tables_path', 'input_files',
     'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
 )
-flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+flags.DEFINE_string('epa_output_path',
+                    'output',
+                    'Output directory',
+                    allow_override=True)
 
 # Input tables we process
 # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=<table>
@@ -161,8 +165,9 @@ def _prefetch_geojson(dcids, cache_file=None):
         try:
             with open(cache_file, 'r') as fp:
                 _GEOJSON_CACHE.update(json.load(fp))
-        except Exception:
-            pass
+        except Exception as e:
+            logging.warning('Failed to load county GeoJSON cache from %s: %s',
+                            cache_file, e)
     missing = sorted(
         set(d for d in dcids
             if d and d != 'geoId/' and d not in _GEOJSON_CACHE))
@@ -287,9 +292,15 @@ def _get_input_tables(input_tables_path):
 def _deduplicate_facility_rows(table, rows):
     """Deduplicates facility rows by FACILITY_ID, keeping the latest YEAR row and backfilling missing fields."""
     by_id = {}
+    missing_facility_id_count = 0
     for row in rows:
         ghg_id = _v(table, row, 'FACILITY_ID')
-        assert ghg_id
+        if not ghg_id:
+            missing_facility_id_count += 1
+            logging.warning(
+                'Skipping row with missing FACILITY_ID in %s (count=%d): %s',
+                table, missing_facility_id_count, row)
+            continue
         year_str = _v(table, row, 'YEAR')
         year = int(year_str) if year_str.isdigit() else 0
         if ghg_id not in by_id:
@@ -342,7 +353,7 @@ def process(input_tables_path, output_path):
                 )
                 fh.prefetch_county_candidates(all_zips,
                                               cache_file=os.path.join(
-                                                  input_tables_path,
+                                                  output_path,
                                                   'zcta_county_cache.json'))
                 all_counties = set()
                 for r in deduped_rows:
@@ -357,7 +368,7 @@ def process(input_tables_path, output_path):
                 )
                 _prefetch_geojson(all_counties,
                                   cache_file=os.path.join(
-                                      input_tables_path,
+                                      output_path,
                                       'county_geojson_cache.json'))
                 all_pp_dcids = [
                     'eia/pp/' + v
@@ -372,9 +383,15 @@ def process(input_tables_path, output_path):
             else:
                 existing_pp = None
 
+            missing_facility_id_count = 0
             for in_row in deduped_rows:
                 ghg_id = _v(table, in_row, 'FACILITY_ID')
-                assert ghg_id
+                if not ghg_id:
+                    missing_facility_id_count += 1
+                    logging.warning(
+                        'Skipping deduplicated row with missing FACILITY_ID in %s (count=%d): %s',
+                        table, missing_facility_id_count, in_row)
+                    continue
                 if ghg_id in processed_ids:
                     continue
                 processed_ids.add(ghg_id)
@@ -431,12 +448,16 @@ def process(input_tables_path, output_path):
 
 def main(_):
     # Validate inputs.
-    assert FLAGS.epa_output_path
-    assert FLAGS.epa_input_tables_path
-    assert os.path.exists(
-        os.path.join(FLAGS.epa_input_tables_path, _CROSSWALK_FILE))
-    assert _get_input_tables(FLAGS.epa_input_tables_path), (
-        f'No input facility tables found in {FLAGS.epa_input_tables_path}')
+    if not FLAGS.epa_output_path:
+        raise ValueError('epa_output_path must be provided.')
+    if not FLAGS.epa_input_tables_path:
+        raise ValueError('epa_input_tables_path must be provided.')
+    crosswalk_path = os.path.join(FLAGS.epa_input_tables_path, _CROSSWALK_FILE)
+    if not os.path.exists(crosswalk_path):
+        raise FileNotFoundError(f'Crosswalk file not found: {crosswalk_path}')
+    if not _get_input_tables(FLAGS.epa_input_tables_path):
+        raise FileNotFoundError(
+            f'No input facility tables found in {FLAGS.epa_input_tables_path}')
     Path(FLAGS.epa_output_path).mkdir(parents=True, exist_ok=True)
 
     process(FLAGS.epa_input_tables_path, FLAGS.epa_output_path)

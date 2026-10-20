@@ -3,7 +3,7 @@
 
 This directory contains scripts to import the EPA parent company information and
 facility ownership data from the following GHG table:
-- [`V_PARENT_COMPANY_INFO`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_PARENT_COMPANY_INFO)
+- [`V_PARENT_COMPANY_INFO`](https://data.epa.gov/efservice/V_PARENT_COMPANY_INFO/)
 
 The generated parent companies are of type `EpaParentCompany` and they are
 attached to a `CensusZipCodeTabulationArea` and `County` (via

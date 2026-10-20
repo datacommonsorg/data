@@ -3,10 +3,14 @@
 import os
 import tempfile
 import unittest
+from unittest import mock
+import pandas as pd
+from . import download_efservice
 from .process_facility import process
 from .process_facility import _COUNTERS
 from .process_facility import _extract_first_geojson
 from .process_facility import _parse_geojson_polygon
+from .process_facility import fh
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -55,6 +59,8 @@ class ProcessTest(unittest.TestCase):
             pub_dim_csv = (
                 'facility_id,facility_name,address1,address2,city,state,state_name,'
                 'zip,county_fips,county,latitude,longitude,year,naics_code,frs_id\n'
+                ',MISSING ID LLC,123 MAIN ST,,GREENVILLE,OH,OHIO,'
+                '45331,39037,DARKE COUNTY,40.081111000000000,-84.591667000000000,2010,325193,110037615694\n'
                 '1000035,OLD NAME LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
                 '45331,39037,DARKE COUNTY,40.081111000000000,-84.591667000000000,2010,325193,110037615694\n'
                 '1000035,THE ANDERSONS MARATHON HOLDINGS LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
@@ -80,6 +86,61 @@ class ProcessTest(unittest.TestCase):
         gj = _extract_first_geojson(multi_val)
         polygon = _parse_geojson_polygon(gj)
         self.assertTrue(polygon.is_valid)
+
+    def test_download_retry_and_atomic_replace(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            page1 = mock.Mock(text='facility_id,frs_id\n1000035,110037615694\n')
+            page1.raise_for_status.return_value = None
+            page2 = mock.Mock(text='')
+            page2.raise_for_status.return_value = None
+            with mock.patch.object(fh.requests,
+                                   'get',
+                                   side_effect=[
+                                       RuntimeError('transient error'), page1,
+                                       page2
+                                   ]):
+                fh.download('https://example.com/',
+                            'PUB_DIM_FACILITY',
+                            1,
+                            tmp_dir,
+                            max_retries=2,
+                            retry_backoff_sec=0.001,
+                            request_timeout=5)
+            out_csv = os.path.join(tmp_dir, 'PUB_DIM_FACILITY.csv')
+            self.assertTrue(os.path.exists(out_csv))
+            self.assertFalse(os.path.exists(out_csv + '.tmp'))
+
+    def test_oris_crosswalk_failure_and_regeneration(self):
+        with mock.patch.object(download_efservice.requests,
+                               'get',
+                               side_effect=RuntimeError('network failure')):
+            with self.assertRaises(RuntimeError):
+                download_efservice._load_oris_crosswalk(max_retries=1,
+                                                        retry_backoff_sec=0.001)
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            table_csv = os.path.join(tmp_dir, 'PUB_DIM_FACILITY.csv')
+            crosswalk_csv = os.path.join(tmp_dir, 'crosswalks.csv')
+            with open(table_csv, 'w') as fp:
+                fp.write('facility_id,frs_id\n1000035,110037615694\n')
+            with open(crosswalk_csv, 'w') as fp:
+                fp.write('stale\n')
+            fake_oris = pd.DataFrame({
+                'Facility Id': ['1000035'],
+                'ORIS CODE': ['1234'],
+                'ORIS CODE 2': [''],
+                'ORIS CODE 3': [''],
+                'ORIS CODE 4': [''],
+                'ORIS CODE 5': [''],
+            })
+            with mock.patch.object(download_efservice,
+                                   '_load_oris_crosswalk',
+                                   return_value=fake_oris):
+                download_efservice._generate_crosswalk(table_csv, crosswalk_csv)
+            with open(crosswalk_csv) as fp:
+                content = fp.read()
+            self.assertIn('110037615694', content)
+            self.assertFalse(os.path.exists(crosswalk_csv + '.tmp'))
 
 
 if __name__ == '__main__':

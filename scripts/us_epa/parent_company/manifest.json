@@ -11,7 +11,7 @@
                 "download_existing_facilities.py",
                 "download_parent_companies.py --companies_table_name=V_PARENT_COMPANY_INFO",
                 "pre_process.py",
-                "process_parent_company.py"
+                "process_parent_company.py --output_mode=companies"
             ],
             "import_inputs": [
                 {
@@ -23,7 +23,7 @@
             "cron_schedule": "0 8 3,17 * *",
             "validation_config_file": "validation_config.json",
             "source_files": [
-                "input_files/*"
+                "input_files/*.csv"
             ]
         },
         {
@@ -37,19 +37,22 @@
                 "download_existing_facilities.py",
                 "download_parent_companies.py --companies_table_name=V_PARENT_COMPANY_INFO",
                 "pre_process.py",
-                "process_parent_company.py"
+                "process_parent_company.py --output_mode=companies"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/ownership/EpaParentCompanyOwnership.tmcf",
-                    "cleaned_csv": "output/ownership/EpaParentCompanyOwnership.csv",
-                    "node_mcf": "output/ownership/EpaParentCompanyOwnership.mcf"
+                    "node_mcf": [
+                        "output/table/EpaParentCompanyTable.mcf",
+                        "output/table/EpaParentCompanyNodes.mcf",
+                        "output/ownership/EpaParentCompanyOwnership.mcf",
+                        "output/ownership/EpaParentCompanyOwnershipNodes.mcf"
+                    ]
                 }
             ],
             "cron_schedule": "0 10 3,17 * *",
             "validation_config_file": "validation_config.json",
             "source_files": [
-                "input_files/*"
+                "input_files/*.csv"
             ]
         },
         {
@@ -63,18 +66,22 @@
                 "download_existing_facilities.py",
                 "download_parent_companies.py --companies_table_name=V_PARENT_COMPANY_INFO",
                 "pre_process.py",
-                "process_parent_company.py"
+                "process_parent_company.py --output_mode=svobs"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output/svobs/SVObs.tmcf",
-                    "cleaned_csv": "output/svobs/SVObs.csv"
+                    "cleaned_csv": "output/svobs/SVObs.csv",
+                    "node_mcf": [
+                        "output/table/EpaParentCompanyTable.mcf",
+                        "output/table/EpaParentCompanyNodes.mcf"
+                    ]
                 }
             ],
             "cron_schedule": "0 12 3,17 * *",
             "validation_config_file": "validation_config.json",
             "source_files": [
-                "input_files/*"
+                "input_files/*.csv"
             ]
         }
     ]

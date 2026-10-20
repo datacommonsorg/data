@@ -13,10 +13,15 @@
 # limitations under the License.
 """Helper functions used in the facilities and parent_company processing."""
 
+import io
+import json
 import os
-import ssl
 import sys
+import time
 from pathlib import Path
+
+from absl import logging
+import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
@@ -99,36 +104,80 @@ def get_address(table, row, table_prefix=""):
     return address
 
 
-def download(api_root, table_name, max_rows, output_path):
-    # Per https://stackoverflow.com/a/56230607
-    ssl._create_default_https_context = ssl._create_unverified_context
+def _fetch_page_csv(url, max_retries=5, retry_backoff_sec=2.0, timeout=60):
+    """Fetches a single CSV page from Envirofacts with retry/backoff and timeout."""
+    last_err = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = requests.get(url, timeout=timeout)
+            resp.raise_for_status()
+            raw_bytes = getattr(resp, 'content', None)
+            if isinstance(raw_bytes, bytes):
+                text = raw_bytes.decode('utf-8')
+            else:
+                text = resp.text
+            if not text.strip():
+                return None
+            return pd.read_csv(io.StringIO(text), dtype=str)
+        except pd.errors.EmptyDataError:
+            return None
+        except Exception as e:
+            last_err = e
+            if attempt < max_retries:
+                sleep_sec = retry_backoff_sec * (2**(attempt - 1))
+                logging.warning(
+                    'Download attempt %d/%d failed for %s (%s); retrying in %.1fs...',
+                    attempt, max_retries, url, e, sleep_sec)
+                time.sleep(sleep_sec)
+    raise RuntimeError(
+        f'Failed to download {url} after {max_retries} attempts: {last_err}'
+    ) from last_err
 
+
+def download(api_root,
+             table_name,
+             max_rows,
+             output_path,
+             max_retries=5,
+             retry_backoff_sec=2.0,
+             request_timeout=60):
     idx = 0
     out_file = os.path.join(output_path, table_name + '.csv')
+    tmp_file = out_file + '.tmp'
+    if os.path.exists(tmp_file):
+        os.remove(tmp_file)
     first_time = True
-    while True:
-        # Since 10K rows shouldn't consume too much memory, just use pandas.
-        url = api_root + table_name + '/ROWS/' + str(idx) + ':' + str(
-            idx + max_rows - 1) + '/csv'
-        try:
-            df = pd.read_csv(url, dtype=str)
-        except pd.errors.EmptyDataError:
-            print('Reached end of table at ' + url)
-            break
-        print('Downloaded ' + str(len(df)) + ' rows from ' + url)
-        if len(df) == 0:
-            break
+    try:
+        while True:
+            # Since 10K rows shouldn't consume too much memory, just use pandas.
+            url = api_root + table_name + '/ROWS/' + str(idx) + ':' + str(
+                idx + max_rows - 1) + '/csv'
+            df = _fetch_page_csv(url,
+                                 max_retries=max_retries,
+                                 retry_backoff_sec=retry_backoff_sec,
+                                 timeout=request_timeout)
+            if df is None:
+                print('Reached end of table at ' + url)
+                break
+            print('Downloaded ' + str(len(df)) + ' rows from ' + url)
+            if len(df) == 0:
+                break
+            if first_time:
+                mode = 'w'
+                header = True
+                first_time = False
+            else:
+                mode = 'a'
+                header = False
+            df.to_csv(tmp_file, mode=mode, header=header, index=False)
+            idx = idx + max_rows
         if first_time:
-            mode = 'w'
-            header = True
-            first_time = False
-        else:
-            mode = 'a'
-            header = False
-        df.to_csv(out_file, mode=mode, header=header, index=False)
-        idx = idx + max_rows
-    if first_time:
-        raise RuntimeError(f'No rows downloaded for table {table_name}')
+            raise RuntimeError(f'No rows downloaded for table {table_name}')
+        os.replace(tmp_file, out_file)
+    except Exception:
+        if os.path.exists(tmp_file):
+            os.remove(tmp_file)
+        raise
 
 
 def get_cip(zip, county):
@@ -143,12 +192,12 @@ def get_cip(zip, county):
 def prefetch_county_candidates(zctas, cache_file=None):
     """Pre-fetches and caches county candidates for a collection of ZCTAs in batches."""
     if cache_file and os.path.exists(cache_file):
-        import json
         try:
             with open(cache_file, 'r') as fp:
                 _COUNTY_CANDIDATES_CACHE.update(json.load(fp))
-        except Exception:
-            pass
+        except Exception as e:
+            logging.warning('Failed to load ZCTA county cache from %s: %s',
+                            cache_file, e)
     missing_zctas = sorted(
         set(z for z in zctas
             if z and z != 'zip/00000' and z not in _COUNTY_CANDIDATES_CACHE))
@@ -198,7 +247,6 @@ def prefetch_county_candidates(zctas, cache_file=None):
         _COUNTY_CANDIDATES_CACHE[zcta] = filtered_lists
 
     if cache_file:
-        import json
         with open(cache_file, 'w') as fp:
             json.dump(_COUNTY_CANDIDATES_CACHE, fp)
 

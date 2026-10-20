@@ -15,10 +15,7 @@
 
 import os
 import pathlib
-import ssl
 import sys
-
-import pandas as pd
 
 from absl import app
 from absl import flags
@@ -39,8 +36,10 @@ _MAX_ROWS = 10000
 
 
 def main(_):
-    assert FLAGS.output_path
-    assert FLAGS.companies_table_name
+    if not FLAGS.output_path:
+        raise ValueError('output_path must be provided.')
+    if not FLAGS.companies_table_name:
+        raise ValueError('companies_table_name must be provided.')
     pathlib.Path(FLAGS.output_path).mkdir(parents=True, exist_ok=True)
     fh.download(_API_ROOT, FLAGS.companies_table_name, _MAX_ROWS,
                 FLAGS.output_path)

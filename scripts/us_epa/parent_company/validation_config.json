@@ -13,7 +13,7 @@
             "rule_id": "check_lint_error_count",
             "description": "Checks that the count of lint errors does not exceed 0.",
             "validator": "LINT_ERROR_COUNT",
-            "enabled": false,
+            "enabled": true,
             "params": {
                 "threshold": 0
             }

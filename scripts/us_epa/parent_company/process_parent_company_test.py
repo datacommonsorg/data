@@ -328,6 +328,21 @@ class ProcessTest(unittest.TestCase):
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_OWNERSHIP_DIR, fname)
                 compare_files(self, output_path, expected_path)
+            with open(os.path.join(tmp_dir,
+                                   'EpaParentCompanyNodes.mcf')) as nodes_fp:
+                nodes_mcf = nodes_fp.read()
+                self.assertIn('Node: dcid:EpaParentCompany/', nodes_mcf)
+                self.assertIn('typeOf: dcs:EpaParentCompany', nodes_mcf)
+            with open(
+                    os.path.join(
+                        tmp_dir,
+                        'EpaParentCompanyOwnershipNodes.mcf')) as own_nodes_fp:
+                own_nodes_mcf = own_nodes_fp.read()
+                self.assertIn('Node: EpaParentCompanyOwnership/E0/1',
+                              own_nodes_mcf)
+                self.assertIn('variableMeasured: dcid:EpaOrganizationOwnership',
+                              own_nodes_mcf)
+                self.assertIn('value: "epaGhgrpFacilityId/', own_nodes_mcf)
 
     def test_svobs_e2e(self):
         self.maxDiff = None
@@ -342,6 +357,41 @@ class ProcessTest(unittest.TestCase):
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_SVOBS_DIR, fname)
                 compare_files(self, output_path, expected_path)
+
+    def test_main_output_modes(self):
+        from unittest import mock
+        from scripts.us_epa.parent_company import process_parent_company as ppc
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            ppc.FLAGS.mark_as_parsed()
+            ppc.FLAGS.input_download_path = _INPUT_DATA_DIR
+            ppc.FLAGS.existing_facilities_file = _EXISTING_FACILITIES_FILENAME
+            ppc.FLAGS.output_base_path = tmp_dir
+            ppc.FLAGS.parent_co_output_path = "table"
+            ppc.FLAGS.ownership_output_path = "ownership"
+            ppc.FLAGS.svobs_output_path = "svobs"
+            ppc.FLAGS.generate_svobs = None
+
+            # Mode 'companies' only runs process_companies, not generate_svobs_helper.
+            ppc.FLAGS.output_mode = "companies"
+            with mock.patch.object(
+                    ppc, "generate_svobs_helper") as mock_gen_svobs:
+                ppc.main([])
+                mock_gen_svobs.assert_not_called()
+
+            ownership_csv = os.path.join(tmp_dir, "ownership",
+                                         "EpaParentCompanyOwnership.csv")
+            self.assertTrue(os.path.exists(ownership_csv))
+
+            # Mode 'svobs' skips process_companies when ownership CSV exists
+            # and runs generate_svobs_helper.
+            ppc.FLAGS.output_mode = "svobs"
+            with mock.patch.object(ppc, "process_companies") as mock_proc_co, \
+                 mock.patch.object(ppc, "generate_svobs_helper") as mock_gen_svobs:
+                ppc.main([])
+                mock_proc_co.assert_not_called()
+                mock_gen_svobs.assert_called_once_with(
+                    ownership_csv, os.path.join(tmp_dir, "svobs"))
 
 
 if __name__ == '__main__':

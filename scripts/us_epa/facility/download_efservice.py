@@ -1,14 +1,17 @@
 """A simple script to download a full table in CSV form from https://data.epa.gov/efservice"""
 
+import io
 import os
 import pathlib
-import ssl
 import sys
+import time
 
 import pandas as pd
+import requests
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -19,7 +22,10 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
                     'Name of table to download')
-flags.DEFINE_string('epa_output_path', 'input_files', 'Output directory')
+flags.DEFINE_string('epa_output_path',
+                    'input_files',
+                    'Output directory',
+                    allow_override=True)
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
@@ -43,28 +49,38 @@ _STORAGE_OPTIONS = {
 }
 
 
-def _load_oris_crosswalk():
+def _load_oris_crosswalk(max_retries=3,
+                         retry_backoff_sec=2.0,
+                         request_timeout=60):
+    last_err = None
     for url in (_ORIS_CROSSWALK_URL, _ORIS_CROSSWALK_FALLBACK_URL):
-        try:
-            df = pd.read_excel(url,
-                               'ORIS Crosswalk',
-                               header=0,
-                               dtype=str,
-                               usecols=_CROSSWALK_COLS,
-                               storage_options=_STORAGE_OPTIONS,
-                               engine='openpyxl')
-            print(f'Downloaded ORIS crosswalk ({len(df)} rows) from {url}')
-            return df.rename(columns={'GHGRP Facility ID': 'Facility Id'})
-        except Exception as e:
-            print(f'Warning: failed to download ORIS crosswalk from {url}: {e}')
-    return pd.DataFrame(columns=[
-        'Facility Id', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3', 'ORIS CODE 4',
-        'ORIS CODE 5'
-    ])
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = requests.get(url,
+                                    headers=_STORAGE_OPTIONS,
+                                    timeout=request_timeout)
+                resp.raise_for_status()
+                df = pd.read_excel(io.BytesIO(resp.content),
+                                   'ORIS Crosswalk',
+                                   header=0,
+                                   dtype=str,
+                                   usecols=_CROSSWALK_COLS,
+                                   engine='openpyxl')
+                print(f'Downloaded ORIS crosswalk ({len(df)} rows) from {url}')
+                return df.rename(columns={'GHGRP Facility ID': 'Facility Id'})
+            except Exception as e:
+                last_err = e
+                logging.warning(
+                    'Attempt %d/%d failed to download ORIS crosswalk from %s: %s',
+                    attempt, max_retries, url, e)
+                if attempt < max_retries:
+                    time.sleep(retry_backoff_sec * (2**(attempt - 1)))
+    raise RuntimeError(
+        'Failed to download ORIS crosswalk from both primary and fallback URLs: '
+        f'{last_err}') from last_err
 
 
 def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
-    ssl._create_default_https_context = ssl._create_unverified_context
     oris_df = _load_oris_crosswalk()
     df = pd.read_csv(table_csv_path, dtype=str)
     fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'
@@ -83,21 +99,24 @@ def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
             'Facility Id', 'FRS Id', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3',
             'ORIS CODE 4', 'ORIS CODE 5'
         ]].drop_duplicates(subset=['Facility Id'], keep='first')
-    merged.to_csv(crosswalk_csv_path, index=False)
+    tmp_path = crosswalk_csv_path + '.tmp'
+    merged.to_csv(tmp_path, index=False)
+    os.replace(tmp_path, crosswalk_csv_path)
     print(f'Generated {crosswalk_csv_path} ({len(merged)} rows)')
 
 
 def main(_):
-    assert FLAGS.epa_output_path
-    assert FLAGS.epa_table_name
+    if not FLAGS.epa_output_path:
+        raise ValueError('epa_output_path must be provided.')
+    if not FLAGS.epa_table_name:
+        raise ValueError('epa_table_name must be provided.')
     pathlib.Path(FLAGS.epa_output_path).mkdir(parents=True, exist_ok=True)
     fh.download(_API_ROOT, FLAGS.epa_table_name, _MAX_ROWS,
                 FLAGS.epa_output_path)
     table_csv_path = os.path.join(FLAGS.epa_output_path,
                                   FLAGS.epa_table_name + '.csv')
     crosswalk_path = os.path.join(FLAGS.epa_output_path, 'crosswalks.csv')
-    if not os.path.exists(crosswalk_path):
-        _generate_crosswalk(table_csv_path, crosswalk_path)
+    _generate_crosswalk(table_csv_path, crosswalk_path)
 
 
 if __name__ == '__main__':
