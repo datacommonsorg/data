@@ -171,33 +171,6 @@ def _str(v):
     return '"' + v + '"'
 
 
-def _format_company_mcf_node(company_id, company_name, address, cip):
-    lines = [
-        f"Node: dcid:{company_id}",
-        "typeOf: dcs:EpaParentCompany",
-        f'dcid: "{company_id}"',
-        f"name: {company_name}",
-    ]
-    if address:
-        lines.append(f"address: {address}")
-    if cip:
-        lines.append(f"locatedIn: {cip}")
-    return "\n".join(lines) + "\n"
-
-
-def _format_ownership_mcf_node(idx, company_id, ghg_id, year, percent_own):
-    lines = [
-        f"Node: EpaParentCompanyOwnership/E0/{idx}",
-        "typeOf: dcs:StatVarObservation",
-        "variableMeasured: dcid:EpaOrganizationOwnership",
-        f"observationDate: {year}",
-        f"observationAbout: dcid:{company_id}",
-        f'value: "{ghg_id}"',
-        f"ownershipPercentage: {percent_own}",
-    ]
-    return "\n".join(lines) + "\n"
-
-
 def _get_county(company_id, zip, year):
     """Resolve the geo relations for the given Facility
 
@@ -368,8 +341,6 @@ def process_companies(input_table_path,
 
         rows_written = 0
         missing_facility_id_count = 0
-        company_mcf_nodes = []
-        ownership_mcf_nodes = []
         with open(input_table, "r") as rfp:
             cr = csv.DictReader(rfp)
             for in_row in cr:
@@ -439,11 +410,6 @@ def process_companies(input_table_path,
                 # Only insert the ownership relationships where the facility exists in data commons.
                 if ghg_id in facility_ids:
                     ownershipWriter.writerow(ownership_out_row)
-                    if year:
-                        ownership_mcf_nodes.append(
-                            _format_ownership_mcf_node(
-                                len(ownership_mcf_nodes) + 1, company_id,
-                                ghg_id, year, percent_own))
                 else:
                     _COUNTERS_COMPANIES["facility_does_not_exist"].add(ghg_id)
 
@@ -451,18 +417,21 @@ def process_companies(input_table_path,
                 # This can happen when the name of the company is formatted differently. We only
                 # need one version.
                 if company_id.lower() not in processed_companies:
-                    # zips have extension
-                    zip_code = fh.v(_TABLE,
-                                    in_row,
-                                    "PARENT_CO_ZIP",
-                                    table_prefix=_TABLE_PREFIX)[:5]
-                    zip = ""
-                    if zip_code:
-                        zip = "zip/" + zip_code
-                    county = _get_county(company_id, zip,
-                                         year) if resolve_geo else ""
-                    if not county and zip in invalid_zctas:
+                    if resolve_geo:
+                        # zips have extension
+                        zip_code = fh.v(_TABLE,
+                                        in_row,
+                                        "PARENT_CO_ZIP",
+                                        table_prefix=_TABLE_PREFIX)[:5]
                         zip = ""
+                        if zip_code:
+                            zip = "zip/" + zip_code
+                        county = _get_county(company_id, zip, year)
+                        if not county and zip in invalid_zctas:
+                            zip = ""
+                    else:
+                        zip = ""
+                        county = ""
 
                     table_out_row = {
                         _DCID:
@@ -478,11 +447,6 @@ def process_companies(input_table_path,
                             ", ".join(fh.get_cip(zip, county)),
                     }
                     tableWriter.writerow(table_out_row)
-                    company_mcf_nodes.append(
-                        _format_company_mcf_node(table_out_row[_DCID],
-                                                 table_out_row[_NAME],
-                                                 table_out_row[_ADDRESS],
-                                                 table_out_row[_CIP]))
                     processed_companies[company_id.lower()] = company_id
 
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
@@ -494,14 +458,8 @@ def process_companies(input_table_path,
     with open(table_path + "Table.mcf", "w") as fp:
         fp.write(_gen_table_mcf())
 
-    with open(table_path + "Nodes.mcf", "w") as fp:
-        fp.write("\n".join(company_mcf_nodes))
-
     with open(ownership_path + "Ownership.mcf", "w") as fp:
         fp.write(_gen_ownership_mcf())
-
-    with open(ownership_path + "OwnershipNodes.mcf", "w") as fp:
-        fp.write("\n".join(ownership_mcf_nodes))
 
     with open(table_path + "Table.tmcf", "w") as fp:
         fp.write(_gen_company_tmcf())
@@ -630,6 +588,8 @@ def main(_):
     run_companies = output_mode in ("companies", "all")
     run_svobs = output_mode in ("svobs", "all")
 
+    table_mcf_filepath = os.path.join(output_path_info,
+                                      _OUT_FILE_PREFIX + "Table.mcf")
     ownership_path = os.path.join(output_path_ownership, _OUT_FILE_PREFIX)
     ownership_relationships_filepath = ownership_path + "Ownership.csv"
 
@@ -642,6 +602,9 @@ def main(_):
                           output_path_info,
                           output_path_ownership,
                           resolve_geo=run_companies)
+    elif not os.path.exists(table_mcf_filepath):
+        with open(table_mcf_filepath, "w") as fp:
+            fp.write(_gen_table_mcf())
 
     if run_svobs:
         if not os.path.exists(ownership_relationships_filepath):

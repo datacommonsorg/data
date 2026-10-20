@@ -328,21 +328,6 @@ class ProcessTest(unittest.TestCase):
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_OWNERSHIP_DIR, fname)
                 compare_files(self, output_path, expected_path)
-            with open(os.path.join(tmp_dir,
-                                   'EpaParentCompanyNodes.mcf')) as nodes_fp:
-                nodes_mcf = nodes_fp.read()
-                self.assertIn('Node: dcid:EpaParentCompany/', nodes_mcf)
-                self.assertIn('typeOf: dcs:EpaParentCompany', nodes_mcf)
-            with open(
-                    os.path.join(
-                        tmp_dir,
-                        'EpaParentCompanyOwnershipNodes.mcf')) as own_nodes_fp:
-                own_nodes_mcf = own_nodes_fp.read()
-                self.assertIn('Node: EpaParentCompanyOwnership/E0/1',
-                              own_nodes_mcf)
-                self.assertIn('variableMeasured: dcid:EpaOrganizationOwnership',
-                              own_nodes_mcf)
-                self.assertIn('value: "epaGhgrpFacilityId/', own_nodes_mcf)
 
     def test_svobs_e2e(self):
         self.maxDiff = None
@@ -381,10 +366,13 @@ class ProcessTest(unittest.TestCase):
 
             ownership_csv = os.path.join(tmp_dir, "ownership",
                                          "EpaParentCompanyOwnership.csv")
+            table_mcf = os.path.join(tmp_dir, "table",
+                                     "EpaParentCompanyTable.mcf")
             self.assertTrue(os.path.exists(ownership_csv))
+            os.remove(table_mcf)
 
-            # Mode 'svobs' skips process_companies when ownership CSV exists
-            # and runs generate_svobs_helper.
+            # Mode 'svobs' skips process_companies when ownership CSV exists,
+            # ensures EpaParentCompanyTable.mcf exists, and runs generate_svobs_helper.
             ppc.FLAGS.output_mode = "svobs"
             with mock.patch.object(ppc, "process_companies") as mock_proc_co, \
                  mock.patch.object(ppc, "generate_svobs_helper") as mock_gen_svobs:
@@ -392,6 +380,7 @@ class ProcessTest(unittest.TestCase):
                 mock_proc_co.assert_not_called()
                 mock_gen_svobs.assert_called_once_with(
                     ownership_csv, os.path.join(tmp_dir, "svobs"))
+            self.assertTrue(os.path.exists(table_mcf))
 
 
 if __name__ == '__main__':
