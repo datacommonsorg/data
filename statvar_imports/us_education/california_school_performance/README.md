@@ -16,9 +16,7 @@ The data covers student achievement in **English Language Arts/Literacy (ELA)** 
 ```
 california_school_performance/
 ├── config/
-│   ├── california_school_performance_metadata.csv     # Processor configurations (delimiters, headers, output columns)
-│   ├── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
-│   ├── california_school_performance_statvars.mcf     # Pre-defined StatisticalVariable MCF nodes (6,050 StatVars)
+│   ├── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, and student subgroups
 │   └── school_code_mapping.json                       # Mapping of California CDS school/district codes to NCES DCIDs
 ├── test_data/                                         # Test fixtures for E2E validation
 │   ├── sample_input.txt                               # Sample raw CAASPP input records
@@ -26,7 +24,7 @@ california_school_performance/
 │   └── sample_state_output.tmcf                       # Expected sample TMCF mapping
 ├── california_school_performance_test.py              # Unit tests for download, normalization, and processing
 ├── download.py                                        # Automated data fetch and extraction script
-├── process.py                                         # High-throughput processor generating CSV, TMCF, MCF, and counters
+├── process.py                                         # High-throughput processor generating CSV, TMCF, entity MCF, and counters
 ├── manifest.json                                      # Data Commons import specification
 ├── README.md                                          # Documentation and usage guide
 └── validation_config.json                             # Production import validation rules
@@ -41,7 +39,7 @@ The pipeline processes the full California CAASPP dataset across all geographic 
 - **Geographic Coverage (`--keep_all_entities=True`, default)**:
   Includes California statewide (`geoId/06`), all 58 counties (`geoId/06001`–`geoId/06115`), ~1,000 school districts (`nces/...`), and ~10,000+ public and charter schools (`nces/...` and `CA-...` fallback identifiers), mapped via `config/school_code_mapping.json`.
 - **Full Demographic Breakdown (`--data_mode=all_groups`, default)**:
-  Expands across all 55 demographic subgroups, 8 grade levels (Grades 3–8, 11, and Grade 13 All Grades), 2 subjects, and 7 metrics, generating **6,050 Statistical Variables** (`5,966` legacy CNS StatVars + `84` Subgroup 243 Grade 3–8 StatVars).
+  Expands across all 55 demographic subgroups, 8 grade levels (Grades 3–8, 11, and Grade 13 All Grades), 2 subjects, and 7 metrics, mapping to **5,966 canonical Google3 Statistical Variables**.
 
 ### Schema Dimensions:
 - **Population Type**: `Student`
@@ -57,8 +55,8 @@ The pipeline processes the full California CAASPP dataset across all geographic 
   - Socioeconomic Status (`EconomicallyDisadvantaged`, `NotEconomicallyDisadvantaged`)
   - Intersection of Race × Socioeconomic Status (16 groups)
   - Disability Status (`WithDisability`, `NoDisability`)
-  - English Learner & Fluency Status (`InitialFluentProficient`, `ReclassifiedFluentProficient`, `OnlyEnglish`, `CurrentLearner`, `EverLearned`, `Adult`, `ToBeDetermined`, duration `< 12 months`, duration `>= 12 months`, `LTEL` 6+ years, `AR-LTEL` 4–5 years, `Never-EL`)
-  - Parent Education Level (`LessThanHighSchoolGraduate`, `HighSchoolGraduateIncludesEquivalency`, `SomeCollegeNoDegree`, `ParentCollegeGraduate`, `GraduateSchoolOrPostGraduate`, `CA_DeclinedToState`)
+  - English Learner & Fluency Status (`InitialFluentProficient`, `ReclassifiedFluentProficient`, `OnlyEnglish`, `CurrentLearner`, `EverLearned`, `Adult`, `ToBeDetermined`, duration `< 12 months`, duration `>= 12 months`)
+  - Parent Education Level (`LessThanHighSchoolGraduate`, `HighSchoolGraduateIncludesEquivalency`, `SomeCollegeNoDegree`, `CollegeGraduate`, `GraduateSchoolOrPostGraduate`, `CA_DeclinedToState`)
   - Special Student Populations (`Homeless`, `HavingHome`, `Foster`, `NotFoster`, `Migrant`, `NotMigrant`, `FamilyOfArmedForces`, `NotFamilyOfArmedForces`)
 - **Metrics**:
   - `Total Students Tested` / `Students Tested`: Count of students (`measuredProperty: count`, `measurementMethod: CaliforniaAssessmentOfStudentPerformanceAndProgress`)
@@ -81,12 +79,11 @@ Historical data for `2015–2022` (`84.7M` observations) is stored in GCS under 
 # Step 1: Download and normalize post-2022 years (default: --years=2023-present)
 python3 download.py
 
-# Step 2: Generate CSV observations, TMCF, MCF, and counters
+# Step 2: Generate CSV observations, TMCF, entity MCF, and counters
 python3 process.py \
   --input_data=input_files/sb_ca_all_years_normalized.txt \
   --pv_map=config/california_school_performance_pvmap.csv \
-  --config_file=config/california_school_performance_metadata.csv \
-  --existing_statvar_mcf=config/california_school_performance_statvars.mcf \
+  --school_code_mapping=config/school_code_mapping.json \
   --output_path=output_files/california_school_performance_all_years_output \
   --output_counters=counters/california_school_performance_counters.csv
 ```
@@ -129,4 +126,4 @@ python3 -m unittest california_school_performance_test.py
 The pipeline produces standard Data Commons import artifacts in `output_files/`:
 - `california_school_performance_all_years_output.csv`: Complete multi-year observations table
 - `california_school_performance_all_years_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
-- `california_school_performance_all_years_output.mcf`: StatisticalVariable MCF definitions
+- `california_school_performance_all_years_output.mcf`: Place MCF definitions for newly opened California schools and districts not yet in `config/school_code_mapping.json`

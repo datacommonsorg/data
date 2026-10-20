@@ -17,8 +17,8 @@
 Processes normalized or raw CAASPP research files across all years (2015-present),
 resolving California CDS school/district/county/state codes via config/school_code_mapping.json
 and mapping all 55 student demographic subgroups, 8 grade levels (Grades 3-8, 11, and 13),
-2 subjects (ELA and Mathematics), and 7 assessment metrics to their exact Data Commons
-Statistical Variables, producing cleaned CSV, TMCF, MCF, and counter outputs.
+2 subjects (ELA and Mathematics), and 7 assessment metrics to their canonical Data Commons
+Statistical Variables, producing cleaned CSV, TMCF, entity MCF, and counter outputs.
 """
 
 from collections import Counter
@@ -51,18 +51,6 @@ flags.DEFINE_string(
     os.path.join(_SCRIPT_DIR, 'config',
                  'california_school_performance_pvmap.csv'),
     'Path to the PV map CSV file.',
-)
-flags.DEFINE_string(
-    'config_file',
-    os.path.join(_SCRIPT_DIR, 'config',
-                 'california_school_performance_metadata.csv'),
-    'Path to the metadata config CSV file.',
-)
-flags.DEFINE_string(
-    'existing_statvar_mcf',
-    os.path.join(_SCRIPT_DIR, 'config',
-                 'california_school_performance_statvars.mcf'),
-    'Path to the StatVar MCF definitions file.',
 )
 flags.DEFINE_string(
     'school_code_mapping',
@@ -115,45 +103,14 @@ def _strip_namespace(val: str) -> str:
     return val
 
 
-def load_statvar_mcf(mcf_path: str) -> tuple[dict[tuple, str], dict[str, str]]:
-    """Loads StatVar MCF definitions into a PV-signature lookup and node-block map."""
-    pv_to_node: dict[tuple, str] = {}
-    node_to_block: dict[str, str] = {}
-    if not os.path.exists(mcf_path):
-        raise FileNotFoundError(f'StatVar MCF file not found: {mcf_path}')
-
-    with open(mcf_path, 'r', encoding='utf-8') as f:
-        content = f.read().strip()
-
-    for block in content.split('\n\n'):
-        lines = [line.strip() for line in block.splitlines() if line.strip()]
-        if not lines or lines[0].startswith('#'):
-            continue
-        pvs = {}
-        node_dcid = ''
-        for line in lines:
-            if ':' not in line or line.startswith('#'):
-                continue
-            k, v = line.split(':', 1)
-            k = k.strip()
-            v = v.strip()
-            if k == 'Node':
-                node_dcid = v if v.startswith('dcid:') else f'dcid:{v}'
-            else:
-                pvs[k] = _strip_namespace(v)
-        if node_dcid:
-            sig = tuple(sorted(pvs.items()))
-            pv_to_node[sig] = node_dcid
-            node_to_block[node_dcid] = '\n'.join(lines)
-
-    return pv_to_node, node_to_block
-
-
 def load_pv_map_dimensions(
     pv_map_path: str
 ) -> tuple[dict[str, dict[str, str]], dict[str, dict[str, str]], dict[str, dict[
         str, str]]]:
     """Loads subgroup, grade, and test ID PV mappings from california_school_performance_pvmap.csv."""
+    if not os.path.exists(pv_map_path):
+        raise FileNotFoundError(f'PV map file not found: {pv_map_path}')
+
     subgroups: dict[str, dict[str, str]] = {'1': {}}
     grades: dict[str, dict[str, str]] = {}
     tests: dict[str, dict[str, str]] = {}
@@ -190,57 +147,77 @@ def load_pv_map_dimensions(
     return subgroups, grades, tests
 
 
+def _derive_subgroup_affixes(sg_pvs: dict[str, str]) -> tuple[str, str]:
+    """Derives the canonical Google3 StatVar DCID prefix and suffix from subgroup PVs."""
+    prefix_parts: list[str] = []
+    suffix_parts: list[str] = []
+
+    if 'gender' in sg_pvs:
+        prefix_parts.append(sg_pvs['gender'])
+    if 'languageFluencyLevel' in sg_pvs:
+        prefix_parts.append(sg_pvs['languageFluencyLevel'].replace('__', 'Or'))
+    if 'languageLearned' in sg_pvs:
+        prefix_parts.append(sg_pvs['languageLearned'])
+    if 'languageLearningDuration' in sg_pvs:
+        dur = sg_pvs['languageLearningDuration']
+        if dur == '[- 12 Month]':
+            prefix_parts.append('12OrLessMonth')
+        elif dur == '[12 - Month]':
+            prefix_parts.append('12OrMoreMonth')
+    if 'languageLearningStatus' in sg_pvs:
+        prefix_parts.append(sg_pvs['languageLearningStatus'])
+    if 'languageLearningAgeGroup' in sg_pvs:
+        prefix_parts.append(sg_pvs['languageLearningAgeGroup'])
+    if 'armedForcesStatus' in sg_pvs:
+        prefix_parts.append(sg_pvs['armedForcesStatus'])
+    if 'race' in sg_pvs:
+        prefix_parts.append(sg_pvs['race'])
+    if 'parentEducationStatus' in sg_pvs:
+        pe = sg_pvs['parentEducationStatus'].replace('_', '')
+        prefix_parts.append(f'Parent{pe}')
+    if 'disabilityStatus' in sg_pvs:
+        prefix_parts.append(sg_pvs['disabilityStatus'])
+    if 'socialVulnerabilityStatus' in sg_pvs:
+        suffix_parts.append(sg_pvs['socialVulnerabilityStatus'])
+
+    prefix = ('_'.join(prefix_parts) + '_') if prefix_parts else ''
+    suffix = ('_' + '_'.join(suffix_parts)) if suffix_parts else ''
+    return prefix, suffix
+
+
 def build_statvar_lookup(
-    pv_map_path: str, mcf_path: str
-) -> tuple[dict[tuple[str, str, str], dict[str, str]], dict[str, str]]:
-    """Precomputes O(1) lookup from (subgroup_id, grade_id, test_id) to metric StatVar DCIDs."""
-    pv_to_node, node_to_block = load_statvar_mcf(mcf_path)
+    pv_map_path: str,) -> dict[tuple[str, str, str], dict[str, str]]:
+    """Precomputes O(1) lookup from (subgroup_id, grade_id, test_id) to canonical Google3 StatVar DCIDs."""
     subgroups, grades, tests = load_pv_map_dimensions(pv_map_path)
 
     sv_lookup: dict[tuple[str, str, str], dict[str, str]] = {}
     for sg_id, sg_pvs in subgroups.items():
+        prefix, suffix = _derive_subgroup_affixes(sg_pvs)
         for gr_id, gr_pvs in grades.items():
+            # Subgroup 243 (Adult English Learner) only exists in canonical Google3 schema
+            # for Grades 11 and 13 (5,966 total canonical CAASPP StatVars).
+            if sg_id == '243' and gr_id not in ('11', '13'):
+                continue
+            grade_tok = gr_pvs.get('schoolGradeLevel')
+            if not grade_tok:
+                continue
             for ts_id, ts_pvs in tests.items():
-                base = {
-                    'typeOf': 'StatisticalVariable',
-                    'populationType': 'Student',
-                }
-                base.update(sg_pvs)
-                base.update(gr_pvs)
-                base.update(ts_pvs)
-
-                pvs_count = dict(base,
-                                 measuredProperty='count',
-                                 statType='measuredValue')
-                count_node = pv_to_node.get(tuple(sorted(pvs_count.items())))
-                if not count_node:
+                subj_tok = ts_pvs.get('schoolSubject')
+                if not subj_tok:
                     continue
-
-                pvs_mean = dict(base,
-                                measuredProperty='assessmentScore',
-                                statType='meanValue')
-                mean_node = pv_to_node.get(tuple(sorted(pvs_mean.items())), '')
-
+                core = f'Student_{prefix}{grade_tok}_{subj_tok}{suffix}'
+                count_dcid = f'Count_{core}'
                 entry: dict[str, str] = {
-                    'count': count_node,
-                    'mean': mean_node,
+                    'count':
+                        f'dcid:{count_dcid}',
+                    'mean': ('' if gr_id == '13' else
+                             f'dcid:Mean_AssessmentScore_{core}'),
                 }
-                raw_count_dcid = _strip_namespace(count_node)
                 for _, ach_code in ACHIEVEMENT_LEVELS:
-                    pvs_ach = dict(
-                        base,
-                        measuredProperty='count',
-                        statType='measuredValue',
-                        educationalAchievementLevel=ach_code,
-                        measurementDenominator=raw_count_dcid,
-                    )
-                    ach_node = pv_to_node.get(tuple(sorted(pvs_ach.items())),
-                                              '')
-                    entry[ach_code] = ach_node
-
+                    entry[ach_code] = f'dcid:Percent_{ach_code}_In_{count_dcid}'
                 sv_lookup[(sg_id, gr_id, ts_id)] = entry
 
-    return sv_lookup, node_to_block
+    return sv_lookup
 
 
 def format_numeric_value(raw_val: str) -> str | None:
@@ -267,12 +244,11 @@ def generate_tmcf(table_name: str) -> str:
 def process_files(
     input_pattern: str,
     pv_map_path: str,
-    mcf_path: str,
     school_map_path: str,
     output_prefix: str,
     counters_path: str = '',
 ) -> dict[str, int]:
-    """Streams input file(s) and produces .csv, .tmcf, .mcf, and optional counters CSV."""
+    """Streams input file(s) and produces .csv, .tmcf, .mcf (for unmapped CA places), and optional counters CSV."""
     input_files = sorted(glob.glob(input_pattern))
     if not input_files and os.path.exists(input_pattern):
         input_files = [input_pattern]
@@ -280,7 +256,7 @@ def process_files(
         raise FileNotFoundError(
             f'No input files matched pattern: {input_pattern}')
 
-    sv_lookup, node_to_block = build_statvar_lookup(pv_map_path, mcf_path)
+    sv_lookup = build_statvar_lookup(pv_map_path)
     if os.path.exists(school_map_path):
         with open(school_map_path, 'r', encoding='utf-8') as f:
             school_map = json.load(f)
@@ -298,6 +274,8 @@ def process_files(
     counters: Counter = Counter()
     observed_statvars: set[str] = set()
     observed_ca_places: dict[str, tuple[str, str]] = {}
+    sample_invalid_dims: list[tuple[str, str, str, str]] = []
+    sample_unmapped_dims: list[tuple[str, str, str]] = []
 
     temp_csv = tempfile.NamedTemporaryFile(
         'w',
@@ -353,6 +331,27 @@ def process_files(
                 ach_col_indices = [(col_idx.get(col_name, -1), ach_code)
                                    for col_name, ach_code in ACHIEVEMENT_LEVELS]
 
+                missing_cols = []
+                if idx_place < 0 and (idx_county < 0 or idx_district < 0 or
+                                      idx_school < 0):
+                    missing_cols.append(
+                        'Place or (County Code, District Code, School Code)')
+                if idx_yr < 0:
+                    missing_cols.append('Test Year')
+                if idx_sg < 0:
+                    missing_cols.append('Student Group ID / Subgroup ID')
+                if idx_gr < 0:
+                    missing_cols.append('Grade')
+                if idx_ts < 0:
+                    missing_cols.append('Test ID / Test Id')
+                if not idx_tested_list and idx_mean < 0 and all(
+                        idx < 0 for idx, _ in ach_col_indices):
+                    missing_cols.append('assessment metric columns')
+                if missing_cols:
+                    raise ValueError(
+                        f'Missing required columns {missing_cols} in {file_path}: {raw_header}'
+                    )
+
                 for raw_row in reader:
                     row_len = len(raw_row)
                     if row_len == 0:
@@ -393,6 +392,9 @@ def process_files(
                     if not (yr and sg_raw.isdigit() and gr_raw.isdigit() and
                             ts_raw.isdigit()):
                         counters['dropped_invalid_dimension_rows'] += 1
+                        if len(sample_invalid_dims) < 5:
+                            sample_invalid_dims.append(
+                                (yr, sg_raw, gr_raw, ts_raw))
                         continue
 
                     sg = str(int(sg_raw))
@@ -402,6 +404,8 @@ def process_files(
                     svs = sv_lookup.get((sg, gr, ts))
                     if not svs:
                         counters['dropped_unmapped_dimension_rows'] += 1
+                        if len(sample_unmapped_dims) < 5:
+                            sample_unmapped_dims.append((sg, gr, ts))
                         continue
 
                     tested_raw = ''
@@ -468,6 +472,14 @@ def process_files(
                             obs_sv_add(sv_dcid)
                             counters['output_svobs_rows'] += 1
 
+        if (counters['input_data_rows'] > 0 and
+                counters['output_svobs_rows'] == 0):
+            raise RuntimeError(
+                f'Processed {counters["input_data_rows"]} input rows but generated 0 observations '
+                f'(dropped_invalid={counters["dropped_invalid_dimension_rows"]}, '
+                f'dropped_unmapped={counters["dropped_unmapped_dimension_rows"]}).'
+            )
+
         temp_csv.flush()
         os.fsync(temp_csv.fileno())
         temp_csv.close()
@@ -478,20 +490,32 @@ def process_files(
             os.unlink(temp_csv.name)
         raise
 
+    if counters['dropped_invalid_dimension_rows'] > 0:
+        logging.warning(
+            'Dropped %d rows with invalid dimensions; samples: %s',
+            counters['dropped_invalid_dimension_rows'],
+            sample_invalid_dims,
+        )
+    if counters['dropped_unmapped_dimension_rows'] > 0:
+        logging.warning(
+            'Dropped %d rows with unmapped dimensions; samples: %s',
+            counters['dropped_unmapped_dimension_rows'],
+            sample_unmapped_dims,
+        )
+
     # Write TMCF
     with open(tmcf_path, 'w', encoding='utf-8', newline='\n') as f_tmcf:
         f_tmcf.write(generate_tmcf(table_name))
 
-    # Write MCF nodes to the single output .mcf file
+    # Write only unmapped CA-... School/SchoolDistrict Place entity nodes to .mcf.
+    # All 5,966 canonical CAASPP StatisticalVariable nodes already exist in Google3 schema
+    # and must not be re-emitted in node_mcf to prevent duplicate instance-node ingestion.
     counters['generated_statvars'] = len(observed_statvars)
+    counters['generated_place_nodes'] = len(observed_ca_places)
     with open(mcf_out_path, 'w', encoding='utf-8', newline='\n') as f_mcf:
-        blocks = [
-            node_to_block[sv]
-            for sv in sorted(observed_statvars)
-            if sv in node_to_block
-        ]
-        for pl, (county_code, school_code) in sorted(
-                observed_ca_places.items()):
+        blocks = []
+        for pl, (county_code,
+                 school_code) in sorted(observed_ca_places.items()):
             dcid_key = f'dcid:{pl}'
             c_num = int(county_code) if county_code.isdigit() else 0
             contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
@@ -515,10 +539,11 @@ def process_files(
                 w_cnt.writerow([k, v])
 
     logging.info(
-        'Processed %d input rows into %d observations (%d StatVars) -> %s',
+        'Processed %d input rows into %d observations (%d StatVars, %d CA place nodes) -> %s',
         counters['input_data_rows'],
         counters['output_svobs_rows'],
         counters['generated_statvars'],
+        counters['generated_place_nodes'],
         csv_path,
     )
     return dict(counters)
@@ -529,7 +554,6 @@ def main(argv):
     process_files(
         input_pattern=FLAGS.input_data,
         pv_map_path=FLAGS.pv_map,
-        mcf_path=FLAGS.existing_statvar_mcf,
         school_map_path=FLAGS.school_code_mapping,
         output_prefix=FLAGS.output_path,
         counters_path=FLAGS.output_counters,

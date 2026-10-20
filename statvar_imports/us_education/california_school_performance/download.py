@@ -21,7 +21,7 @@ California Department of Education / Educational Testing Service (ETS) research 
 
 It automatically handles differences in delimiter (comma vs caret) and column naming across
 eras, filters State and County aggregate records, preserves raw source archives in raw_files/,
-and streams normalization into a unified format ready for processing by Data Commons stat_var_processor.py.
+and streams normalization into a unified format ready for processing by process.py.
 
 Usage:
   python3 download.py --years=all
@@ -125,8 +125,8 @@ def get_school_code_map() -> dict[str, str]:
 
 
 # Known historical official zip filename per year: (all_subgroups_zip, all_students_zip).
-# Future years (>2025) are discovered dynamically by get_all_available_years() and
-# discover_year_urls(), which probe the CAASPP portal from v4 down to v1.
+# Recent years (>=2022) and future years (>2025) also support dynamic version probing
+# from v4 down to v1 via discover_year_urls().
 KNOWN_YEAR_URL_MAP = {
     2015: ('sb_ca2015_all_csv_v3.zip', 'sb_ca2015_1_csv_v3.zip'),
     2016: ('sb_ca2016_all_csv_v3.zip', 'sb_ca2016_1_csv_v3.zip'),
@@ -192,37 +192,45 @@ def probe_url_exists(url: str, timeout: int = 10, max_retries: int = 3) -> bool:
     return False
 
 
-def discover_year_urls(year: int) -> tuple[str, str] | None:
-    """Discovers or resolves zip filenames for a given year."""
-    if year in KNOWN_YEAR_URL_MAP:
+def discover_year_urls(
+    year: int,
+    data_mode: str = 'all_students',
+    probe_latest: bool = False,
+) -> tuple[str, str] | None:
+    """Discovers or resolves zip filenames for a given year and data_mode."""
+    if year in KNOWN_YEAR_URL_MAP and not probe_latest:
         return KNOWN_YEAR_URL_MAP[year]
 
-    # For subsequent calendar years, probe standard version naming in descending
-    # order (v4 down to v1) so the highest available revision is selected.
+    # Probe standard version naming in descending order (v4 down to v1)
+    # so that the highest available revision (e.g. v2 superseding v1) is selected.
     for v in range(4, 0, -1):
         all_groups = f'sb_ca{year}_all_csv_v{v}.zip'
         all_students = f'sb_ca{year}_1_csv_v{v}.zip'
-        if probe_url_exists(BASE_URL + all_students):
+        target_file = all_groups if data_mode == 'all_groups' else all_students
+        if probe_url_exists(BASE_URL + target_file):
             logging.info('Discovered CAASPP data files for year %d: %s, %s',
                          year, all_groups, all_students)
             return (all_groups, all_students)
+
+    if year in KNOWN_YEAR_URL_MAP:
+        return KNOWN_YEAR_URL_MAP[year]
     return None
 
 
-def get_all_available_years() -> list[int]:
+def get_all_available_years(data_mode: str = 'all_groups') -> list[int]:
     """Returns all known historical years plus any dynamically discovered newer years."""
     available = set(KNOWN_YEAR_URL_MAP.keys())
     current_year = datetime.now().year
     # Probe any years beyond known historical years up to current year + 1
     for y in range(max(available) + 1, current_year + 2):
-        if discover_year_urls(y):
+        if discover_year_urls(y, data_mode=data_mode):
             available.add(y)
     return sorted(available)
 
 
-def parse_years(years_str: str) -> list[int]:
+def parse_years(years_str: str, data_mode: str = 'all_groups') -> list[int]:
     """Parses year specification into a sorted list of ints."""
-    all_years = get_all_available_years()
+    all_years = get_all_available_years(data_mode=data_mode)
     if years_str.strip().lower() in ('all', '*'):
         return all_years
 
@@ -235,18 +243,19 @@ def parse_years(years_str: str) -> list[int]:
                 start_year = int(start_str.strip())
                 end_token = end_str.strip().lower()
                 if end_token in ('', 'present', 'latest', 'now'):
-                    end_year = max(all_years) if all_years else datetime.now(
-                    ).year
+                    end_year = (max(all_years)
+                                if all_years else datetime.now().year)
                 else:
                     end_year = int(end_token)
                 for y in range(start_year, end_year + 1):
-                    if y in all_years or discover_year_urls(y):
+                    if y in all_years or discover_year_urls(
+                            y, data_mode=data_mode):
                         years.add(y)
             except ValueError:
                 logging.warning('Invalid year range format: %s', part)
         elif part.isdigit():
             y = int(part)
-            if y in all_years or discover_year_urls(y):
+            if y in all_years or discover_year_urls(y, data_mode=data_mode):
                 years.add(y)
             else:
                 logging.warning('Year %d not available from source.', y)
@@ -320,6 +329,33 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
     nearly_idx = _idx('Percentage Standard Nearly Met')
     not_met_idx = _idx('Percentage Standard Not Met')
 
+    missing_cols = []
+    if place_idx < 0 and (c_idx < 0 or d_idx < 0 or s_idx < 0):
+        missing_cols.append(
+            'Place or (County Code, District Code, School Code)')
+    if yr_idx < 0:
+        missing_cols.append('Test Year')
+    if gid_idx < 0:
+        missing_cols.append('Student Group ID / Subgroup ID')
+    if gr_idx < 0:
+        missing_cols.append('Grade')
+    if tid_idx < 0:
+        missing_cols.append('Test ID / Test Id')
+    if all(idx < 0 for idx in (
+            tested_idx,
+            mean_idx,
+            exc_idx,
+            met_idx,
+            met_abv_idx,
+            nearly_idx,
+            not_met_idx,
+    )):
+        missing_cols.append('assessment metric columns')
+    if missing_cols:
+        raise ValueError(
+            f'Missing required CAASPP columns {missing_cols} in header: {raw_header}'
+        )
+
     school_map = get_school_code_map()
 
     def _clean_metric(idx: int, n_cols: int, row: list[str]) -> str:
@@ -391,7 +427,11 @@ def download_and_process_year(
     out_filename: str = '',
 ) -> str:
     """Downloads and preserves raw zip, streams normalized records, and saves output atomically."""
-    urls = discover_year_urls(year)
+    urls = discover_year_urls(
+        year,
+        data_mode=data_mode,
+        probe_latest=(year >= 2022),
+    )
     if not urls:
         raise RuntimeError(f'Year {year} is not available from CAASPP portal.')
 
@@ -500,7 +540,7 @@ def main(argv):
         logging.info('Master all-years file was not modified in test mode.')
         return
 
-    years = parse_years(FLAGS.years)
+    years = parse_years(FLAGS.years, data_mode=FLAGS.data_mode)
     logging.info('Target years to download and process: %s', years)
 
     year_to_file: dict[int, str] = {}

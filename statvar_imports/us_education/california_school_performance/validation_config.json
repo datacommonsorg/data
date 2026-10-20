@@ -8,6 +8,21 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Ensure all StatVars share a consistent latest observation year",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Ensure latest observation year is within allowable annual release lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year FROM stats",
+                "condition": "max_year >= YEAR(CURRENT_DATE) - 2"
+            }
         }
     ]
 }
