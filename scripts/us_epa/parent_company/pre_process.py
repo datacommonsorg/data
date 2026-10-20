@@ -32,7 +32,7 @@ sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
 from us_epa.util import facilities_helper as fh
 from us_epa.parent_company import static_corrections as sc
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
+flags.DEFINE_string("input_download_path", "input_files", "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
 flags.DEFINE_string("output_base_path", "output",

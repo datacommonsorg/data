@@ -30,7 +30,7 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
+flags.DEFINE_string("input_download_path", "input_files", "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
 flags.DEFINE_string("output_base_path", "output",
@@ -304,7 +304,7 @@ def process_companies(input_table_path, existing_facilities_file,
         input_table = os.path.join(input_table_path, _TABLE + ".csv")
         if "testdata" not in input_table_path:
             facility_cache = os.path.join(
-                _SCRIPT_PATH, "../facility/tmp_data/zcta_county_cache.json")
+                _SCRIPT_PATH, "../facility/input_files/zcta_county_cache.json")
             if os.path.exists(facility_cache):
                 fh.prefetch_county_candidates([], cache_file=facility_cache)
             all_zctas = set()

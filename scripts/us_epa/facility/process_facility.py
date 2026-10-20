@@ -24,7 +24,7 @@ from us_epa.util import facilities_helper as fh
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'epa_input_tables_path', 'tmp_data',
+    'epa_input_tables_path', 'input_files',
     'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
 )
 flags.DEFINE_string('epa_output_path', 'output', 'Output directory')

@@ -33,7 +33,7 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags() -> None:
-    flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
+    flags.DEFINE_string('output_path', 'input_files', 'Output directory')
 
 
 def download_existing_facilities(output_path: str) -> str:

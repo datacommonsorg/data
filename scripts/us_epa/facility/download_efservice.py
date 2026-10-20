@@ -19,12 +19,16 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
                     'Name of table to download')
-flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
+flags.DEFINE_string('epa_output_path', 'input_files', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
 _ORIS_CROSSWALK_URL = ('https://www.epa.gov/system/files/documents/2022-04/'
                        'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
+_ORIS_CROSSWALK_FALLBACK_URL = (
+    'https://web.archive.org/web/2024id_/'
+    'https://www.epa.gov/system/files/documents/2022-04/'
+    'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
 _CROSSWALK_COLS = [
     'GHGRP Facility ID',
     'ORIS CODE',
@@ -33,17 +37,34 @@ _CROSSWALK_COLS = [
     'ORIS CODE 4',
     'ORIS CODE 5',
 ]
+_STORAGE_OPTIONS = {
+    'User-Agent': 'Mozilla/5.0',
+    'Accept-Encoding': 'gzip, deflate',
+}
+
+
+def _load_oris_crosswalk():
+    for url in (_ORIS_CROSSWALK_URL, _ORIS_CROSSWALK_FALLBACK_URL):
+        try:
+            df = pd.read_excel(url,
+                               'ORIS Crosswalk',
+                               header=0,
+                               dtype=str,
+                               usecols=_CROSSWALK_COLS,
+                               storage_options=_STORAGE_OPTIONS,
+                               engine='openpyxl')
+            return df.rename(columns={'GHGRP Facility ID': 'Facility Id'})
+        except Exception as e:
+            print(f'Warning: failed to download ORIS crosswalk from {url}: {e}')
+    return pd.DataFrame(columns=[
+        'Facility Id', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3', 'ORIS CODE 4',
+        'ORIS CODE 5'
+    ])
 
 
 def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
     ssl._create_default_https_context = ssl._create_unverified_context
-    oris_df = pd.read_excel(
-        _ORIS_CROSSWALK_URL,
-        'ORIS Crosswalk',
-        header=0,
-        dtype=str,
-        usecols=_CROSSWALK_COLS,
-        engine='openpyxl').rename(columns={'GHGRP Facility ID': 'Facility Id'})
+    oris_df = _load_oris_crosswalk()
     df = pd.read_csv(table_csv_path, dtype=str)
     fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'
     frs_col = 'frs_id' if 'frs_id' in df.columns else 'FRS_ID'
