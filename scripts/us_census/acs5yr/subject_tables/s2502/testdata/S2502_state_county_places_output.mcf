@@ -1396,3 +1396,419 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [- 1989 Date]
 typeOf: dcs:StatisticalVariable
 
+Node: dcid:Count_HousingUnit_MovedInDate2019OrLater_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2019 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2019OrLater_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2019 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2015To2018_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2018 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2018_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2018 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2019OrLater_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2019 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2019OrLater_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2019 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2015To2018_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2018 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2018_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2018 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2019OrLater_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2019 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2019OrLater_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2019 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2015To2018_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2018 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2018_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2015 2018 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2021OrLater_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2021 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2021OrLater_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2021 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2018To2020_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2018 2020 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2018To2020_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2018 2020 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2017_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2017 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2017_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2017 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2021OrLater_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2021 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2021OrLater_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2021 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2018To2020_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2018 2020 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2018To2020_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2018 2020 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2017_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2017 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2017_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2017 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2021OrLater_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2021 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2021OrLater_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2021 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2018To2020_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2018 2020 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2018To2020_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2018 2020 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2017_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2017 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2017_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2017 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2023OrLater_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2023 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2023OrLater_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2023 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2020To2022_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2020 2022 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2020To2022_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2020 2022 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2019_OccupiedHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2019 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2019_OccupiedHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2019 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2023OrLater_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2023 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2023OrLater_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2023 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2020To2022_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2020 2022 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2020To2022_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2020 2022 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2019_OwnerOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2019 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2019_OwnerOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2019 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2023OrLater_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2023 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2023OrLater_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2023 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2020To2022_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2020 2022 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2020To2022_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2020 2022 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_HousingUnit_MovedInDate2010To2019_RenterOccupied
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2019 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2019_RenterOccupied
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+occupancyStatus: dcs:OccupiedHousingUnit
+dateMovedIn: [2010 2019 Date]
+typeOf: dcs:StatisticalVariable
+
