@@ -62,10 +62,10 @@ percentage and if no percentage is provided it is assumed to be 100.
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "7413",
-          "NumPVSuccesses": "37045",
-          "Existence_NumChecks": "58642",
-          "NumNodeSuccesses": "7415",
+          "NumRowSuccesses": "7412",
+          "NumPVSuccesses": "37040",
+          "Existence_NumChecks": "58633",
+          "NumNodeSuccesses": "7414",
           "Existence_NumDcCalls": "6"
         }
       },
@@ -84,16 +84,17 @@ percentage and if no percentage is provided it is assumed to be 100.
       "LEVEL_INFO": {
         "counters": {
           "NumRowSuccesses": "127966",
-          "NumPVSuccesses": "895762",
-          "Existence_NumChecks": "954414",
-          "NumNodeSuccesses": "127968",
-          "Existence_NumDcCalls": "6"
+          "NumPVSuccesses": "1023728",
+          "Existence_NumChecks": "1082380",
+          "NumNodeSuccesses": "135382",
+          "Existence_NumDcCalls": "7"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
           "Existence_MissingTriple_domainIncludes": "1",
-          "StatsCheck_Inconsistent_Values": "220"
+          "StatsCheck_Inconsistent_Values": "122",
+          "StatsCheck_Data_Holes": "2"
         }
       }
     }
