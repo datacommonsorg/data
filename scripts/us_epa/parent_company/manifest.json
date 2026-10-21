@@ -43,7 +43,10 @@
                 {
                     "template_mcf": "output/ownership/EpaParentCompanyOwnership.tmcf",
                     "cleaned_csv": "output/ownership/EpaParentCompanyOwnership.csv",
-                    "node_mcf": "output/table/EpaParentCompanyTable.mcf"
+                    "node_mcf": [
+                        "output/table/EpaParentCompanyTable.mcf",
+                        "output/ownership/EpaParentCompanyOwnership.mcf"
+                    ]
                 }
             ],
             "cron_schedule": "0 10 3,17 * *",

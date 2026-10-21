@@ -51,9 +51,9 @@ percentage and if no percentage is provided it is assumed to be 100.
 
     dc-import genmcf -o=dc_generated/ownership \
       output/table/EpaParentCompanyTable.mcf \
-      output/table/EpaParentCompanyNodes.mcf \
       output/ownership/EpaParentCompanyOwnership.mcf \
-      output/ownership/EpaParentCompanyOwnershipNodes.mcf
+      output/ownership/EpaParentCompanyOwnership.tmcf \
+      output/ownership/EpaParentCompanyOwnership.csv
     ```
 
     The counters produced for the company table import (`dc_generated/table/report.json`) and ownership import (`dc_generated/ownership/report.json`):
@@ -83,8 +83,10 @@ percentage and if no percentage is provided it is assumed to be 100.
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
+          "NumRowSuccesses": "127966",
+          "NumPVSuccesses": "895762",
           "Existence_NumChecks": "954414",
-          "NumNodeSuccesses": "135382",
+          "NumNodeSuccesses": "127968",
           "Existence_NumDcCalls": "6"
         }
       },
@@ -102,7 +104,6 @@ percentage and if no percentage is provided it is assumed to be 100.
     ```bash
     dc-import genmcf -o=dc_generated/svobs \
       output/table/EpaParentCompanyTable.mcf \
-      output/table/EpaParentCompanyNodes.mcf \
       output/svobs/SVObs.tmcf \
       output/svobs/SVObs.csv
     ```
