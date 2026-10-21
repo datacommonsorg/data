@@ -97,8 +97,9 @@ python3 download.py --years=all
 # Specific range
 python3 download.py --years=2015-2024
 
-# Specific single year
+# Specific single year (writes input_files/sb_ca2024_normalized.txt and updates input_files/sb_ca_all_years_normalized.txt)
 python3 download.py --years=2024
+python3 process.py --input_data=input_files/sb_ca2024_normalized.txt
 ```
 
 ### 3. Quick Test Run

@@ -528,14 +528,17 @@ def main(argv):
 
     if FLAGS.test_mode:
         logging.info('Test mode: downloading 2024 sample...')
-        test_file = download_and_process_year(
-            2024,
-            'all_students',
-            output_dir,
-            FLAGS.keep_all_entities,
-            raw_dir=raw_dir,
-            out_filename='sb_ca_test_normalized.txt',
-        )
+        try:
+            test_file = download_and_process_year(
+                2024,
+                'all_students',
+                output_dir,
+                FLAGS.keep_all_entities,
+                raw_dir=raw_dir,
+                out_filename='sb_ca_test_normalized.txt',
+            )
+        except Exception as e:
+            logging.fatal('Test mode download failed: %s', e)
         logging.info('Test mode completed. Created test file: %s', test_file)
         logging.info('Master all-years file was not modified in test mode.')
         return
@@ -569,22 +572,20 @@ def main(argv):
                 failed_years.append((year, str(e)))
 
     if failed_years:
-        raise RuntimeError(
-            f'Import aborted due to download failures for years: {sorted(failed_years)}'
+        logging.fatal(
+            'Import aborted due to download failures for years: %s',
+            sorted(failed_years),
         )
 
     all_normalized_files = [
         year_to_file[y] for y in sorted(year_to_file.keys())
     ]
     if not all_normalized_files:
-        raise RuntimeError(
-            'No files were successfully downloaded and processed.')
+        logging.fatal('No files were successfully downloaded and processed.')
 
-    # Combine into master multi-year file if all years, a range, or multiple years were processed.
-    # Single-year downloads do not overwrite the consolidated master dataset unless requested.
+    master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
     if (FLAGS.years.strip().lower() in ('all', '*') or '-' in FLAGS.years or
             len(all_normalized_files) > 1):
-        master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
         temp_master = tempfile.NamedTemporaryFile('w',
                                                   dir=output_dir,
                                                   delete=False,
@@ -607,18 +608,31 @@ def main(argv):
                         os.unlink(nf)
                     except OSError:
                         pass
-        except Exception:
+        except Exception as e:
             temp_master.close()
             if os.path.exists(temp_master.name):
                 os.unlink(temp_master.name)
-            raise
+            logging.fatal('Failed to write master normalized file %s: %s',
+                          master_file, e)
 
         logging.info('Created master multi-year file: %s across %d years',
                      master_file, len(all_normalized_files))
     else:
+        single_file = all_normalized_files[0]
+        if single_file != master_file:
+            temp_link = f'{master_file}.tmp'
+            if os.path.exists(temp_link):
+                os.unlink(temp_link)
+            try:
+                os.link(single_file, temp_link)
+            except OSError:
+                shutil.copyfile(single_file, temp_link)
+            os.replace(temp_link, master_file)
         logging.info(
-            'Individual year processing completed for: %s. Master multi-year file was not modified.',
-            [os.path.basename(f) for f in all_normalized_files])
+            'Single-year processing completed: %s (also updated %s)',
+            single_file,
+            master_file,
+        )
 
 
 if __name__ == '__main__':

@@ -551,13 +551,16 @@ def process_files(
 
 def main(argv):
     del argv
-    process_files(
-        input_pattern=FLAGS.input_data,
-        pv_map_path=FLAGS.pv_map,
-        school_map_path=FLAGS.school_code_mapping,
-        output_prefix=FLAGS.output_path,
-        counters_path=FLAGS.output_counters,
-    )
+    try:
+        process_files(
+            input_pattern=FLAGS.input_data,
+            pv_map_path=FLAGS.pv_map,
+            school_map_path=FLAGS.school_code_mapping,
+            output_prefix=FLAGS.output_path,
+            counters_path=FLAGS.output_counters,
+        )
+    except (FileNotFoundError, ValueError, RuntimeError, OSError) as e:
+        logging.fatal('Processing failed: %s', e)
 
 
 if __name__ == '__main__':

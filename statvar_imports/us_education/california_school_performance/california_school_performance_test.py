@@ -265,6 +265,41 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                  open(expected_tmcf, 'r', encoding='utf-8') as f_exp:
                 self.assertEqual(f_actual.read(), f_exp.read())
 
+    def test_single_year_download_updates_master_file(self):
+        """Verify single-year download.main() writes both sb_ca<year>_normalized.txt and sb_ca_all_years_normalized.txt."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            single_path = os.path.join(tmp_dir, 'sb_ca2024_normalized.txt')
+
+            def fake_download_year(year,
+                                   data_mode,
+                                   output_dir,
+                                   keep_all_entities,
+                                   raw_dir=None):
+                with open(single_path, 'w', encoding='utf-8') as f:
+                    f.write('^'.join(download.UNIFIED_HEADER) + '\n')
+                    f.write(
+                        '00^00000^0000000^geoId/06^2024^1^3^1^100^2400.0^20.0^25.0^45.0^25.0^30.0\n'
+                    )
+                return single_path
+
+            with patch.object(download, 'FLAGS') as mock_flags, \
+                 patch.object(download, 'download_and_process_year', side_effect=fake_download_year):
+                mock_flags.output_dir = tmp_dir
+                mock_flags.raw_dir = os.path.join(tmp_dir, 'raw')
+                mock_flags.clean = False
+                mock_flags.test_mode = False
+                mock_flags.years = '2024'
+                mock_flags.data_mode = 'all_groups'
+                mock_flags.keep_all_entities = True
+                download.main([])
+
+            master_path = os.path.join(tmp_dir, 'sb_ca_all_years_normalized.txt')
+            self.assertTrue(os.path.exists(single_path))
+            self.assertTrue(os.path.exists(master_path))
+            with open(single_path, 'r', encoding='utf-8') as f1, \
+                 open(master_path, 'r', encoding='utf-8') as f2:
+                self.assertEqual(f1.read(), f2.read())
+
 
 if __name__ == '__main__':
     unittest.main()
