@@ -63,7 +63,7 @@ def retry_call(func, *args, **kwargs):
                 sleep_time,
             )
             time.sleep(sleep_time)
-        except Exception as exc:
+        except requests.exceptions.RequestException as exc:
             if attempt == MAX_RETRIES:
                 logging.error("Failed after %d attempts: %s", attempt, exc)
                 raise

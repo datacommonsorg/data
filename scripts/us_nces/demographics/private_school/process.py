@@ -223,7 +223,8 @@ class NCESPrivateSchool(USEducation):
         # Compute p_black in survey cycles (1997-2015) where p325 and numstuds
         # exist without a pre-computed p_black column. Validate p325 <= numstuds
         # to prevent invalid percentages (> 100%) when pre-K counts exceed K-12.
-        if "p_black" not in df.columns and "p325" in df.columns:
+        if ("p_black" not in df.columns and "p325" in df.columns and
+                "numstuds" in df.columns):
             p325_num = pd.to_numeric(df["p325"].str.strip(), errors="coerce")
             numstuds_num = pd.to_numeric(df["numstuds"].str.strip(),
                                          errors="coerce")
