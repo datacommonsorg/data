@@ -368,8 +368,7 @@ def process(input_tables_path, output_path):
                 )
                 _prefetch_geojson(all_counties,
                                   cache_file=os.path.join(
-                                      output_path,
-                                      'county_geojson_cache.json'))
+                                      output_path, 'county_geojson_cache.json'))
                 all_pp_dcids = [
                     'eia/pp/' + v
                     for r in deduped_rows

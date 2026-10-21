@@ -93,12 +93,11 @@ class ProcessTest(unittest.TestCase):
             page1.raise_for_status.return_value = None
             page2 = mock.Mock(text='')
             page2.raise_for_status.return_value = None
-            with mock.patch.object(fh.requests,
-                                   'get',
-                                   side_effect=[
-                                       RuntimeError('transient error'), page1,
-                                       page2
-                                   ]):
+            with mock.patch.object(
+                    fh.requests,
+                    'get',
+                    side_effect=[RuntimeError('transient error'), page1,
+                                       page2]):
                 fh.download('https://example.com/',
                             'PUB_DIM_FACILITY',
                             1,

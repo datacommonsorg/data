@@ -359,8 +359,8 @@ class ProcessTest(unittest.TestCase):
 
             # Mode 'companies' only runs process_companies, not generate_svobs_helper.
             ppc.FLAGS.output_mode = "companies"
-            with mock.patch.object(
-                    ppc, "generate_svobs_helper") as mock_gen_svobs:
+            with mock.patch.object(ppc,
+                                   "generate_svobs_helper") as mock_gen_svobs:
                 ppc.main([])
                 mock_gen_svobs.assert_not_called()
 
