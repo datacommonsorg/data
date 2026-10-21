@@ -45,8 +45,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_folder/output_files/us_nces_demographics_private_school.tmcf",
-                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_private_school.csv",
-                    "node_mcf": "gcs_folder/output_files/*.mcf"
+                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_private_school.csv"
                 }
             ],
             "cron_schedule": "30 7 10 3,6,9,12 *",
