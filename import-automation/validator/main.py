@@ -241,6 +241,9 @@ def run_validation_job(absolute_import_name: str,
 
             diff_found = True
             differ_output_dir = ''
+            shared_table_ids = bigquery_differ.get_import_bq_table_ids(
+                f'{project_id}.{bq_dataset}', import_name, version,
+                input_prefix)
 
             # 1. Run BigQuery Differ if previous version exists
             if previous_mcf_pattern and file_util.file_get_matching(
@@ -259,6 +262,7 @@ def run_validation_job(absolute_import_name: str,
                     dataset_id=bq_dataset,
                     gcs_temp_dir=gcs_temp_dir,
                     expiration_hours=bq_table_ttl_hours,
+                    shared_table_ids=shared_table_ids,
                 )
                 diff_found = (differ_summary.get('obs_diff_count', 1) != 0 or
                               differ_summary.get('schema_diff_count', 1) != 0)
@@ -267,6 +271,10 @@ def run_validation_job(absolute_import_name: str,
                 logging.info(
                     'No previous MCF files found at %s; skipping differ.',
                     previous_mcf_pattern)
+                bigquery_differ.cleanup_shared_bq_tables(
+                    project_id=project_id,
+                    shared_table_ids=shared_table_ids,
+                )
 
             if not differ_status:
                 differ_status = diff_found

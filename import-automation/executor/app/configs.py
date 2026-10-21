@@ -143,14 +143,6 @@ class ExecutorConfig:
     use_autopush_dc_api: bool = True
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
-    # Invoke ET-layer StatVar aggregation after genmcf.
-    invoke_stat_var_aggregation: bool = True
-    # Central ET-layer StatVar aggregation config path (optional override; defaults to app/configs/statvar_aggregation.yaml).
-    stat_var_aggregation_config_file: str = ''
-    # Execution engine for ET-layer StatVar aggregation ('duckdb' or 'bigquery').
-    stat_var_aggregation_engine: str = 'duckdb'
-    # BigQuery dataset ID when stat_var_aggregation_engine == 'bigquery'.
-    stat_var_aggregation_bq_dataset: str = 'datcom_temp'
     # Invoke differ tool.
     invoke_differ_tool: bool = True
     # Invoke validations before upload.

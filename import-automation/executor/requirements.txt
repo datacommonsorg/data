@@ -12,7 +12,6 @@ dataclasses
 datacommons_client
 db-dtypes
 duckdb
-fastavro
 frozendict
 fsspec
 func-timeout

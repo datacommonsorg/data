@@ -745,6 +745,43 @@ def _run_cloud_run_job(
         operation = poll_resp.json()
 
 
+@task(task_id="run_aggregation_job")
+def run_aggregation_job(import_name: str = "", **context) -> dict[str, Any]:
+    """Executes the Cloud Run ET StatVar aggregation job after the Batch import job."""
+    cfg = resolve_workflow_context(context, default_import_name=import_name)
+    if cfg["skipImportJob"]:
+        logging.info(
+            "skipImportJob is True; skipping Cloud Run aggregation job.")
+        raise AirflowSkipException(
+            "Aggregation job skipped by configuration (skipImportJob=True).")
+
+    start_time = time.time()
+    try:
+        res = _run_cloud_run_job(
+            project_id=cfg["projectId"],
+            region=cfg["region"],
+            job_name=cfg["aggregationJobName"],
+            args=[
+                f"--import_name={cfg['importName']}",
+                f"--import_config={cfg['importConfig']}",
+            ],
+            timeout_seconds=7200,
+        )
+        exec_time = int(time.time() - start_time)
+        return {
+            "status": "SUCCESS",
+            "jobName": cfg["aggregationJobName"],
+            "executionTime": exec_time,
+            "result": str(res),
+        }
+    except Exception as e:
+        exec_time = int(time.time() - start_time)
+        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
+        _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
+                               cfg["gcsImportBucket"], exec_time)
+        raise AirflowException(f"Cloud Run aggregation job failed: {e}") from e
+
+
 @task(task_id="run_validation_job")
 def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
     """Executes the Cloud Run validation job after the Batch import job."""
@@ -947,6 +984,9 @@ def resolve_workflow_context(context: dict[str, Any],
                                "spanner-ingestion-workflow",
                                "SPANNER_INGESTION_WORKFLOW_NAME")
 
+    aggregation_job_name = cfg_val("aggregationJobName",
+                                   "import-aggregation-job",
+                                   "AGGREGATION_JOB_NAME")
     validation_job_name = cfg_val("validationJobName", "import-validator-job",
                                   "VALIDATION_JOB_NAME")
 
@@ -999,6 +1039,8 @@ def resolve_workflow_context(context: dict[str, Any],
             import_config_str,
         "batchImportConfig":
             batch_import_config_str,
+        "aggregationJobName":
+            aggregation_job_name,
         "validationJobName":
             validation_job_name,
         "gcsMountBucket":
@@ -1173,9 +1215,12 @@ def workflow_summary(**context) -> dict[str, Any]:
         dag.task_ids) if dag and hasattr(dag, "task_ids") else None
     has_golden = (("verify_golden_tests" in dag_task_ids) if dag_task_ids
                   is not None else is_golden_test_import(cfg["importName"]))
+    has_aggregation = bool(
+        dag_task_ids and "run_aggregation_job" in dag_task_ids)
     has_validation = bool(dag_task_ids and "run_validation_job" in dag_task_ids)
     stages = [
         ("import", "run_import_job"),
+        *([("aggregation", "run_aggregation_job")] if has_aggregation else []),
         *([("validation", "run_validation_job")] if has_validation else []),
         ("version", "update_import_version"),
         ("staging_trigger", "trigger_staging_ingestion"),

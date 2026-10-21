@@ -413,6 +413,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertNotIn('invoke_differ_tool', batch_cfg)
         self.assertTrue(batch_cfg['custom_flag'])
         self.assertEqual(batch_cfg, orig_cfg)
+        self.assertEqual(cfg['aggregationJobName'], 'import-aggregation-job')
         self.assertEqual(cfg['validationJobName'], 'import-validator-job')
 
         mock_run_cr_job.return_value = {'status': 'SUCCEEDED'}
@@ -425,6 +426,119 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
             '--import_name=scripts/us_fed:USFed_ConstantMaturityRates_Test',
             call_args['args'])
 
+    @patch('import_automation_workflow._run_cloud_run_job')
+    def test_aggregation_job_success(self, mock_run_cr_job):
+        context = {
+            'params': {
+                'importName':
+                    'scripts/india_rbi:India_RBIStateDomesticProduct',
+                'importConfig': {
+                    'custom_flag': True,
+                },
+            }
+        }
+        mock_run_cr_job.return_value = {'status': 'SUCCEEDED'}
+        res = import_automation_workflow.run_aggregation_job.function(**context)
+        self.assertEqual(res['status'], 'SUCCESS')
+        self.assertEqual(res['jobName'], 'import-aggregation-job')
+        self.assertIn('executionTime', res)
+        mock_run_cr_job.assert_called_once()
+        call_args = mock_run_cr_job.call_args[1]
+        self.assertEqual(call_args['job_name'], 'import-aggregation-job')
+        self.assertIn(
+            '--import_name=scripts/india_rbi:India_RBIStateDomesticProduct',
+            call_args['args'])
+
+    @patch('import_automation_workflow._report_import_failure')
+    @patch('import_automation_workflow._run_cloud_run_job')
+    def test_aggregation_job_failure_reports_and_raises(self, mock_run_cr_job,
+                                                        mock_report_failure):
+        context = {
+            'params': {
+                'importName':
+                    'scripts/india_rbi:India_RBIStateDomesticProduct',
+                'jobId':
+                    'test-agg-fail',
+                'projectId':
+                    'p',
+                'region':
+                    'r',
+            }
+        }
+        mock_run_cr_job.side_effect = RuntimeError('Aggregation OOM')
+        with self.assertRaises(MockAirflowException) as ctx:
+            import_automation_workflow.run_aggregation_job.function(**context)
+        self.assertIn('Cloud Run aggregation job failed: Aggregation OOM',
+                      str(ctx.exception))
+        mock_report_failure.assert_called_once()
+
+    def test_workflow_summary_includes_aggregation_and_validation(self):
+        ti_mock = MagicMock()
+
+        def xcom_pull(task_ids=None):
+            mapping = {
+                'run_import_job': {
+                    'status': 'SUCCESS'
+                },
+                'run_aggregation_job': {
+                    'status': 'SUCCESS',
+                    'jobName': 'import-aggregation-job',
+                },
+                'run_validation_job': {
+                    'status': 'SUCCESS',
+                    'jobName': 'import-validator-job',
+                },
+                'update_import_version': {
+                    'status': 'STAGING'
+                },
+                'trigger_staging_ingestion': {
+                    'status': 'SUBMITTED'
+                },
+                'wait_staging_ingestion': {
+                    'status': 'SUCCESS'
+                },
+                'trigger_prod_ingestion': {
+                    'status': 'SUBMITTED'
+                },
+                'wait_prod_ingestion': {
+                    'status': 'SUCCESS'
+                },
+            }
+            return mapping.get(task_ids)
+
+        ti_mock.xcom_pull.side_effect = xcom_pull
+        dag_mock = MagicMock()
+        dag_mock.task_ids = [
+            'run_import_job',
+            'run_aggregation_job',
+            'run_validation_job',
+            'update_import_version',
+            'trigger_staging_ingestion',
+            'wait_staging_ingestion',
+            'trigger_prod_ingestion',
+            'wait_prod_ingestion',
+            'workflow_summary',
+        ]
+        dag_mock.params = {}
+        context = {
+            'ti': ti_mock,
+            'dag': dag_mock,
+            'params': {
+                'importName':
+                    'scripts/india_rbi:India_RBIStateDomesticProduct',
+                'jobId':
+                    'test-job-agg',
+            },
+        }
+        summary = import_automation_workflow.workflow_summary.function(
+            **context)
+        self.assertIn('aggregation', summary)
+        self.assertEqual(summary['aggregation']['jobName'],
+                         'import-aggregation-job')
+        self.assertIn('validation', summary)
+        self.assertEqual(summary['validation']['jobName'],
+                         'import-validator-job')
+
     def test_skip_import_job_skips_batch_and_validation_jobs(self):
         context = {
             'params': {
@@ -434,6 +548,8 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         }
         with self.assertRaises(MockAirflowSkipException):
             import_automation_workflow.run_import_job.function(**context)
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_aggregation_job.function(**context)
         with self.assertRaises(MockAirflowSkipException):
             import_automation_workflow.run_validation_job.function(**context)
 
