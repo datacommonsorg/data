@@ -105,31 +105,30 @@ class DownloadTest(unittest.TestCase):
     def test_download_historical_baseline(self, mock_which, mock_run):
         """Verifies download_historical_baseline queries snapshots and calls gcloud cp."""
         mock_res_ls = MagicMock()
-        mock_res_ls.stdout = 'gs://unresolved_mcf/cdc/wonder/natality/country/20231215/\n'
+        mock_res_ls.stdout = 'gs://unresolved_mcf/cdc/wonder/natality/states/20231215/\n'
         mock_res_cp = MagicMock()
         mock_run.side_effect = [
-            mock_res_ls, mock_res_cp, mock_res_ls, mock_res_cp, mock_res_ls,
-            mock_res_cp
+            mock_res_ls, mock_res_cp, mock_res_ls, mock_res_cp
         ]
 
         with tempfile.TemporaryDirectory() as tmp_out:
             download.download_historical_baseline(tmp_out)
-            self.assertEqual(mock_run.call_count, 6)
+            self.assertEqual(mock_run.call_count, 4)
 
     @patch('download.shutil.which', return_value='/usr/bin/gcloud')
     def test_download_historical_baseline_idempotent_prefix(self, mock_which):
         """Verifies idempotent prefixing in download_historical_baseline."""
         mock_res_ls = MagicMock()
-        mock_res_ls.stdout = 'gs://unresolved_mcf/cdc/wonder/natality/country/20231215/\n'
+        mock_res_ls.stdout = 'gs://unresolved_mcf/cdc/wonder/natality/states/20231215/\n'
 
         def fake_run(cmd, **kwargs):
             if 'ls' in cmd:
                 return mock_res_ls
             if 'cp' in cmd:
                 dest_dir = cmd[-1]
-                with open(os.path.join(dest_dir, 'country_baseline.csv'),
+                with open(os.path.join(dest_dir, 'state_baseline.csv'),
                           'w') as f:
-                    f.write('Year,StatVar,Quantity\n')
+                    f.write('Year,Geo,StatVar,Quantity,Unit\n')
                 return MagicMock()
             return MagicMock()
 
@@ -137,10 +136,10 @@ class DownloadTest(unittest.TestCase):
             with patch('download.subprocess.run', side_effect=fake_run):
                 download.download_historical_baseline(tmp_out)
             self.assertTrue(
-                os.path.exists(os.path.join(tmp_out, 'country_baseline.csv')))
+                os.path.exists(os.path.join(tmp_out, 'state_baseline.csv')))
             self.assertFalse(
-                os.path.exists(
-                    os.path.join(tmp_out, 'country_country_baseline.csv')))
+                os.path.exists(os.path.join(tmp_out,
+                                            'state_state_baseline.csv')))
 
     @patch('download.shutil.which', return_value=None)
     @patch('download.logging.fatal')

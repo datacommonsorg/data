@@ -227,8 +227,7 @@ def download_natality_dataset(driver,
 def download_historical_baseline(output_dir: str):
     """Downloads historical baseline CSVs from GCS to preserve historical records."""
     gcs_base = 'gs://unresolved_mcf/cdc/wonder/natality'
-    levels = [('country', 'country_'), ('states', 'state_'),
-              ('county', 'county_')]
+    levels = [('states', 'state_'), ('county', 'county_')]
 
     if not shutil.which('gcloud'):
         logging.fatal(

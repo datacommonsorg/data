@@ -293,7 +293,7 @@ class ProcessPipelineTest(unittest.TestCase):
             'Mean_PrenatalVisitCount_BirthEvent_LiveBirth',
             'Mean_IntervalSinceLastBirth_BirthEvent_LiveBirth',
             'Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth',
-        ]
+        ] + [f'Count_BirthEvent_LiveBirth_Slice{i}' for i in range(392)]
         all_active_stats = pd.DataFrame([{
             'StatVar': sv,
             'MaxDate': '2024'
@@ -304,31 +304,35 @@ class ProcessPipelineTest(unittest.TestCase):
         ).fetchdf()
         self.assertTrue(
             failing_df.empty,
-            f'Expected 9 active stats to pass rule 2: {failing_df}')
+            f'Expected 401 active stats to pass rule 2: {failing_df}')
 
         country_stats = pd.DataFrame([{
             'StatVar': 'Count_BirthEvent_LiveBirth',
             'MaxDate': '2024'
-        }])
+        }] + [{
+            'StatVar': f'Count_BirthEvent_LiveBirth_CountrySlice{i}',
+            'MaxDate': '2024'
+        } for i in range(45)])
         con.register('stats', country_stats)
         failing_df = con.execute(
             f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
         ).fetchdf()
         self.assertTrue(
             failing_df.empty,
-            f'Expected 1 active stat (country level) to pass rule 2: {failing_df}'
+            f'Expected 46 active stats (country level) to pass rule 2: {failing_df}'
         )
 
         missing_active = pd.DataFrame([{
             'StatVar': sv,
             'MaxDate': '2024'
-        } for sv in active_statvars[:8]])
+        } for sv in active_statvars[:9]])
         con.register('stats', missing_active)
         failing_df = con.execute(
             f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
         ).fetchdf()
-        self.assertFalse(failing_df.empty,
-                         'Expected missing statvar to fail rule 2')
+        self.assertFalse(
+            failing_df.empty,
+            'Expected missing demographic statvars (only 9) to fail rule 2')
 
         mismatch_dates = all_active_stats.copy()
         mismatch_dates.loc[0, 'MaxDate'] = '2023'
@@ -338,6 +342,18 @@ class ProcessPipelineTest(unittest.TestCase):
         ).fetchdf()
         self.assertFalse(failing_df.empty,
                          'Expected date mismatch to fail rule 2')
+
+    def test_invalid_historical_baseline_raises(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_dir = os.path.join(tmp_dir, 'input_files')
+            output_dir = os.path.join(tmp_dir, 'output')
+            os.makedirs(input_dir, exist_ok=True)
+            bad_state_csv = os.path.join(input_dir, 'state_cleaned_95-02.csv')
+            with open(bad_state_csv, 'w', encoding='utf-8') as f:
+                f.write('InvalidColumn1,InvalidColumn2\n1,2\n')
+
+            with self.assertRaises(ValueError):
+                process.process_data(input_dir, output_dir)
 
     def test_parse_wonder_tsv_with_footnote_and_invalid_fips(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

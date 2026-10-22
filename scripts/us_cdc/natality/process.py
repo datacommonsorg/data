@@ -400,24 +400,33 @@ def process_data(input_dir: str, output_dir: str) -> bool:
     pre_state_csvs.sort(key=_extract_year_bracket)
     pre_county_csvs.sort(key=_extract_year_bracket)
 
+    required_cols = {'Year', 'Geo', 'StatVar', 'Quantity'}
     state_dfs = []
     for f in pre_state_csvs:
         try:
             df = pd.read_csv(f, dtype=str)
-            if not df.empty and 'Year' in df.columns and 'StatVar' in df.columns:
-                state_dfs.append(df)
         except Exception as e:
-            logging.warning(f'Could not read historical state file {f}: {e}')
+            raise ValueError(
+                f'Could not read historical state file {f}: {e}') from e
+        if df.empty or not required_cols.issubset(df.columns):
+            raise ValueError(
+                f'Historical state file {f} is empty or missing required columns {required_cols}.'
+            )
+        state_dfs.append(df)
     state_dfs.extend(live_state_dfs)
 
     county_dfs = []
     for f in pre_county_csvs:
         try:
             df = pd.read_csv(f, dtype=str)
-            if not df.empty and 'Year' in df.columns and 'StatVar' in df.columns:
-                county_dfs.append(df)
         except Exception as e:
-            logging.warning(f'Could not read historical county file {f}: {e}')
+            raise ValueError(
+                f'Could not read historical county file {f}: {e}') from e
+        if df.empty or not required_cols.issubset(df.columns):
+            raise ValueError(
+                f'Historical county file {f} is empty or missing required columns {required_cols}.'
+            )
+        county_dfs.append(df)
     county_dfs.extend(live_county_dfs)
 
     if not state_dfs and not county_dfs:
