@@ -45,14 +45,15 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "bmi/input_files/*"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 2 * *"
+            "cron_schedule": "0 7 2 * *",
+            "validation_config_file": "validation_config_Body_Mass_Index.json"
         },
         {
             "import_name": "EuroStatHealth_FruitsAndVegetables",
