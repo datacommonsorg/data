@@ -92,7 +92,7 @@ python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
 # --- 3. Process 2018 onwards Files (Comma-separated CSVs, excluding 2016) ---
 # Inputs: All *.csv files in input_files except 2016_Enrollment.csv
 # This is dynamic and will include 2018, 2021, 2022, 2024, and any future files.
-CSV_FILES_2018_ONWARD=$(find "$SCRIPT_PATH/input_files" -maxdepth 1 -name "*.csv" | grep -v "2016_Enrollment.csv" | sort | paste -sd, -)
+CSV_FILES_2018_ONWARD=$(find "$SCRIPT_PATH/input_files" -maxdepth 1 -name "*.csv" ! -name "2016_Enrollment.csv" | sort | paste -sd, -)
 
 if [ -z "$CSV_FILES_2018_ONWARD" ]; then
   echo "Error: No CSV files found for 2018 onward in $SCRIPT_PATH/input_files!"

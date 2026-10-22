@@ -156,7 +156,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 # Race and Sex (2018 onwards)
 ```bash
-CSV_FILES_2018_ONWARD=$(find input_files -maxdepth 1 -name "*.csv" | grep -v "2016_Enrollment.csv" | sort | paste -sd, -)
+CSV_FILES_2018_ONWARD=$(find input_files -maxdepth 1 -name "*.csv" ! -name "2016_Enrollment.csv" | sort | paste -sd, -)
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="$CSV_FILES_2018_ONWARD" \
   --pv_map=race_and_sex_pvmap.csv \
@@ -171,7 +171,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 # Disability and Sex (2018 onwards)
 ```bash
-CSV_FILES_2018_ONWARD=$(find input_files -maxdepth 1 -name "*.csv" | grep -v "2016_Enrollment.csv" | sort | paste -sd, -)
+CSV_FILES_2018_ONWARD=$(find input_files -maxdepth 1 -name "*.csv" ! -name "2016_Enrollment.csv" | sort | paste -sd, -)
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="$CSV_FILES_2018_ONWARD" \
   --pv_map=disability_and_sex_pvmap.csv \
@@ -186,7 +186,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 # LEP and Sex (2018 onwards)
 ```bash
-CSV_FILES_2018_ONWARD=$(find input_files -maxdepth 1 -name "*.csv" | grep -v "2016_Enrollment.csv" | sort | paste -sd, -)
+CSV_FILES_2018_ONWARD=$(find input_files -maxdepth 1 -name "*.csv" ! -name "2016_Enrollment.csv" | sort | paste -sd, -)
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="$CSV_FILES_2018_ONWARD" \
   --pv_map=lep_and_sex_pvmap.csv \
