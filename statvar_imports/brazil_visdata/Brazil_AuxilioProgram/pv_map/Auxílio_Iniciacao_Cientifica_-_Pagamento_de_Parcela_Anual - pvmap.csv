@@ -1,0 +1,3 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,,,,,
+Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_AuxilioScientificInitiationAidProgram,populationType,Student,governmentPaymentStatus,PaymentTransffered,,,,,,
+RECURSOS TRANSFERIDOS (PARCELA ANUAL),value,{Number},installmentPeriod,Annual,unit,BRL,governmentPaymentStatus,PaymentTransffered,measuredProperty,amount,benefitType,FinancialBenefit,name,"""Annual amount paid to students as financial aid through Brazil Scientific Initiation Aid Program""",alternateName,"""Valor anual pago aos estudantes a título de auxílio financeiro através do Programa Brasil de Auxílio à Iniciação Científica@pt"""

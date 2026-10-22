@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,
+Referência,observationDate,{Data},,,benefitProgram,Brazil_AuxilioBrasilProgram,populationType,HouseHold,observationPeriod,P1M,,
+Código,observationAbout,{Data},,,,,,,,,,
+Quantidade de Famílias beneficiadas pelo Programa Auxílio Brasil,value,{Number},benefitsStatus,Benefited,,,,,name,"""Number of Families benefiting from Auxilio Brasil Program""",alternateName,"""Número de Famílias Beneficiadas do Programa Auxilio Brasil@pt"""
+Estimativa de Famílias Pobres - Censo IBGE 2010,value,{Number},povertyStatus,Poverty,governmentAgency,Brazil_IBGE_2010,,,name,"""Estimate of Poor Families - IBGE 2010 Census under Auxilio Brasil Program""",alternateName,"""Estimate of Poor Families - IBGE 2010 Census under Auxilio Brasil Program@pt"""
+Percentual de cobertura das Famílias beneficiárias do Programa Auxílio Brasil,value,{Number},benefitsStatus,Benefited,statType,meanValue,measurementQualifier,Monthly,name,"""Average number of families covered by the Auxílio Brasil program""",alternateName,"""Número médio de famílias atendidas pelo programa Auxílio Brasil@pt"""
