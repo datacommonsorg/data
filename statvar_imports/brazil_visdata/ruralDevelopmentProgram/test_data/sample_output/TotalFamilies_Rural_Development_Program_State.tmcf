@@ -1,0 +1,8 @@
+Node: E:TotalFamilies_Rural_Development_Program_State->E0
+observationAbout: C:TotalFamilies_Rural_Development_Program_State->observationAbout
+observationDate: C:TotalFamilies_Rural_Development_Program_State->observationDate
+value: C:TotalFamilies_Rural_Development_Program_State->value
+variableMeasured: C:TotalFamilies_Rural_Development_Program_State->variableMeasured
+observationPeriod: C:TotalFamilies_Rural_Development_Program_State->observationPeriod
+unit: C:TotalFamilies_Rural_Development_Program_State->unit
+typeOf: dcs:StatVarObservation

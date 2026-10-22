@@ -1,0 +1,8 @@
+Node: E:CRAS->E0
+observationAbout: C:CRAS->observationAbout
+observationDate: C:CRAS->observationDate
+variableMeasured: C:CRAS->variableMeasured
+value: C:CRAS->value
+unit: C:CRAS->unit
+observationPeriod: C:CRAS->observationPeriod
+typeOf: dcs:StatVarObservation
