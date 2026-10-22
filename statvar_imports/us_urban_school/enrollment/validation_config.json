@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records across the import does not exceed 0.1% (accounts for school closures/mergers across biennial CRDC releases).",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Ensures all active JuvenileJusticeFacility and NotJuvenileJusticeFacility StatVars (excluding 2022-only GenderUnknownOrNotStated) within each input split share the same latest observation date (MaxDate).",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^.*JuvenileJusticeFacility(?!.*GenderUnknownOrNotStated).*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness_all_inputs",
+      "description": "Verifies that every StatVar in each input split meets its expected latest observation date (2012 for pre-2014 non-JJ StatVars, 2014 for 2014 JJ StatVars, 2016 for the 2016 split, 2022 for GenderUnknownOrNotStated, and >= 2024 for active 2018Onwards StatVars).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate, CASE WHEN CAST(MinDate AS INTEGER) <= 2012 AND StatVar NOT LIKE '%JuvenileJusticeFacility%' THEN CAST(MaxDate AS INTEGER) >= 2012 WHEN CAST(MinDate AS INTEGER) <= 2014 AND (SELECT MAX(CAST(MinDate AS INTEGER)) FROM stats) <= 2014 THEN CAST(MaxDate AS INTEGER) >= 2014 WHEN CAST(MinDate AS INTEGER) = 2016 AND (SELECT MAX(CAST(MaxDate AS INTEGER)) FROM stats) = 2016 THEN CAST(MaxDate AS INTEGER) >= 2016 WHEN StatVar LIKE '%GenderUnknownOrNotStated%' THEN CAST(MaxDate AS INTEGER) >= 2022 WHEN CAST(MinDate AS INTEGER) >= 2018 THEN CAST(MaxDate AS INTEGER) >= 2024 ELSE FALSE END AS is_fresh FROM stats UNION ALL SELECT 'EMPTY_STATS' AS StatVar, '' AS MinDate, '' AS MaxDate, FALSE AS is_fresh WHERE NOT EXISTS (SELECT 1 FROM stats)",
+        "condition": "is_fresh = TRUE"
+      }
+    }
+  ]
+}
+

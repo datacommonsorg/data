@@ -1,3 +1,13 @@
+Node: dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationalInstitutionType: dcid:NotJuvenileJusticeFacility
+englishProficiency: dcid:LimitedEnglishProficiency
+enrollmentStatus: dcid:Enrolled
+gender: dcid:Female
+
 Node: dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Female_AmericanIndianOrAlaskaNativeAlone
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Student
@@ -74,6 +84,16 @@ englishProficiency: dcid:LimitedEnglishProficiency
 enrollmentStatus: dcid:Enrolled
 gender: dcid:Female
 race: dcid:WhiteAlone
+
+Node: dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationalInstitutionType: dcid:NotJuvenileJusticeFacility
+englishProficiency: dcid:LimitedEnglishProficiency
+enrollmentStatus: dcid:Enrolled
+gender: dcid:Male
 
 Node: dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Male_AmericanIndianOrAlaskaNativeAlone
 typeOf: dcid:StatisticalVariable
