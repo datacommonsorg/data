@@ -1,0 +1,10 @@
+Node: E:input-ufceqi->E0
+observationAbout: C:input-ufceqi->observationAbout
+observationDate: C:input-ufceqi->observationDate
+variableMeasured: C:input-ufceqi->variableMeasured
+value: C:input-ufceqi->value
+unit: C:input-ufceqi->unit
+scalingFactor: C:input-ufceqi->scalingFactor
+observationPeriod: C:input-ufceqi->observationPeriod
+measurementMethod: C:input-ufceqi->measurementMethod
+typeOf: dcs:StatVarObservation
