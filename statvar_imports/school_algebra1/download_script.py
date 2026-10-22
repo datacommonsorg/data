@@ -21,6 +21,7 @@ import shutil
 import sys
 from absl import app
 from absl import logging
+import requests
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,6 +35,7 @@ _BASE_URL = "https://civilrightsdata.ed.gov/assets/ocr/docs/{year_range}-crdc-da
 _OUTPUT_DIRECTORY = os.path.join(_SCRIPT_PATH, "input_files")
 _START_YEAR = 2009
 _CURRENT_YEAR = datetime.datetime.now().year
+_KNOWN_SURVEY_YEARS = {2009, 2011, 2013, 2015, 2017, 2020, 2021, 2023}
 
 
 def get_survey_years():
@@ -42,6 +44,18 @@ def get_survey_years():
     odd_years = list(range(_START_YEAR, 2018, 2))
     recent_years = list(range(2020, _CURRENT_YEAR + 1, 1))
     return odd_years + recent_years
+
+
+def _is_zip_archive_available(url: str) -> bool:
+    """Checks via HTTP HEAD whether a zip archive exists (avoiding HTML soft-404s)."""
+    try:
+        resp = requests.head(url, allow_redirects=True, timeout=30)
+        if resp.status_code != 200:
+            return False
+        content_type = resp.headers.get("Content-Type", "").lower()
+        return "text/html" not in content_type
+    except requests.RequestException:
+        return False
 
 
 def download_crdc_files():
@@ -66,6 +80,13 @@ def download_crdc_files():
 
         url = _BASE_URL.format(year_range=year_range)
 
+        if year not in _KNOWN_SURVEY_YEARS and not _is_zip_archive_available(
+                url):
+            logging.info(
+                f"No published ZIP archive for {year_range} at {url}. Skipping."
+            )
+            continue
+
         # Download to a temporary sub-folder
         temp_output_dir = os.path.join(_OUTPUT_DIRECTORY, f"temp_{year_range}")
         os.makedirs(temp_output_dir, exist_ok=True)
@@ -75,9 +96,13 @@ def download_crdc_files():
                                 unzip=True)
 
         if not success:
+            shutil.rmtree(temp_output_dir, ignore_errors=True)
+            if year in _KNOWN_SURVEY_YEARS:
+                raise RuntimeError(
+                    f"Failed to download required historical CRDC archive for "
+                    f"{year_range} from {url}")
             logging.info(
                 f"Data for {year_range} is not available at {url}. Skipping.")
-            shutil.rmtree(temp_output_dir, ignore_errors=True)
             continue
 
         logging.info(
@@ -110,6 +135,12 @@ def download_crdc_files():
                 new_filename = f"crdc_{year_range}_{clean_base}{extension}"
                 new_filepath = os.path.join(_OUTPUT_DIRECTORY, new_filename)
                 staged_moves.append((item_path, new_filepath))
+
+        if not staged_moves and year in _KNOWN_SURVEY_YEARS:
+            shutil.rmtree(temp_output_dir, ignore_errors=True)
+            raise RuntimeError(
+                f"No Algebra 1 files extracted for required historical year {year_range}"
+            )
 
         for item_path, new_filepath in staged_moves:
             logging.info(f"Moving raw file '{item_path}' to '{new_filepath}'")

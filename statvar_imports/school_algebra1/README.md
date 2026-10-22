@@ -47,7 +47,7 @@ Run `preprocess_data.py` to convert `.xlsx` workbooks to `.csv`, compute standar
 ```
 All preprocessed files will be stored in `processed_files/`.
 
-> **Note on excluded columns:** `filter_unmapped_columns()` retains only `ncesid`, `YEAR`, and columns mapped in `Algebra1_pvmap.csv` (student enrollment and passing counts by grade, gender, race/ethnicity, English learner `EL`/`LEP`, and `IDEA` disability, including Grade 8 totals `TOT_ALGENR_G08_M/F` and `TOT_ALGPASS_G08_M/F`). Out-of-scope CRDC columns—such as Section 504 disability breakdowns (`*_504_*`), Algebra 1 class counts (`SCH_ALGCLASSES_*`), certified teacher counts (`SCH_ALGCERT_*`), and school/LEA metadata (`LEA_STATE`, `SCH_NAME`, `JJ`, etc.)—are intentionally excluded.
+> **Note on excluded columns:** `preprocess_dataframe()` retains only `ncesid`, `YEAR`, and columns mapped in `Algebra1_pvmap.csv` (student enrollment and passing counts by grade, gender, race/ethnicity, English learner `EL`/`LEP`, and `IDEA` disability, including Grade 8 totals `TOT_ALGENR_G08_M/F` and `TOT_ALGPASS_G08_M/F`). Out-of-scope CRDC columns—such as Section 504 disability breakdowns (`*_504_*`), Algebra 1 class counts (`SCH_ALGCLASSES_*`), certified teacher counts (`SCH_ALGCERT_*`), and school/LEA metadata (`LEA_STATE`, `SCH_NAME`, `JJ`, etc.)—are intentionally excluded.
 
 #### Step 3: Process the Data with StatVar Processor
 

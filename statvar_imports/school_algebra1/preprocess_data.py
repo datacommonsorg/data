@@ -33,10 +33,7 @@ _PVMAP_PATH = os.path.join(_SCRIPT_PATH, "Algebra1_pvmap.csv")
 logging.set_verbosity(logging.INFO)
 
 # Essential identifier columns always preserved
-_IDENTIFIER_COLS = {
-    'NCESID', 'YEAR', 'LEAID', 'SCHID', 'COMBOKEY', 'LEA_STATE',
-    'LEA_STATE_NAME', 'LEA_NAME', 'SCH_NAME'
-}
+_IDENTIFIER_COLS = {'NCESID', 'YEAR'}
 
 
 def load_pv_mapped_columns(pvmap_path: str) -> set:
@@ -60,8 +57,9 @@ def load_pv_mapped_columns(pvmap_path: str) -> set:
 
 def extract_survey_end_year(filename: str) -> int:
     """Extracts the 4-digit survey completion year from CRDC file names."""
-    # Matches patterns like crdc_2015-16_... -> 2016
-    match = re.search(r'crdc_(\d{4})-(\d{2})', filename, re.IGNORECASE)
+    # Matches patterns like crdc_2015-16_... or crdc_2023-2024_... -> 2016 / 2024
+    match = re.search(r'crdc_(\d{4})[-_](?:20)?(\d{2})(?!\d)', filename,
+                      re.IGNORECASE)
     if match:
         start_year = match.group(1)
         end_yy = match.group(2)
@@ -115,9 +113,10 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
         df.insert(1, 'YEAR', survey_year)
 
     # Filter columns dynamically: keep identifier columns + any column in pv_map
+    mapped_cols_upper = {c.upper() for c in mapped_cols}
     keep_cols = [
         col for col in df.columns
-        if col in mapped_cols or col.upper() in _IDENTIFIER_COLS
+        if col.upper() in mapped_cols_upper or col.upper() in _IDENTIFIER_COLS
     ]
     dropped_count = len(df.columns) - len(keep_cols)
     if dropped_count > 0:
@@ -127,9 +126,10 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
     df = df[keep_cols]
     data_cols = [c for c in keep_cols if c.upper() not in _IDENTIFIER_COLS]
     if data_cols:
-        has_valid = (df[data_cols].apply(pd.to_numeric, errors='coerce')
-                     >= 0).any(axis=1)
+        numeric_df = df[data_cols].apply(pd.to_numeric, errors='coerce')
+        has_valid = (numeric_df >= 0).any(axis=1)
         df = df[has_valid].copy()
+        df[data_cols] = df[data_cols].where(~(numeric_df.loc[df.index] < 0), '')
 
     return df
 

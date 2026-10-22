@@ -31,12 +31,17 @@ class PreprocessDataTest(unittest.TestCase):
             preprocess_data.extract_survey_end_year(
                 'crdc_2023-24_algebra_i.csv'), 2024)
         self.assertEqual(
+            preprocess_data.extract_survey_end_year(
+                'crdc_2023-2024_algebra_i.csv'), 2024)
+        self.assertEqual(
             preprocess_data.extract_survey_end_year('unknown_file.csv'), 0)
 
     def test_preprocess_dataframe_leaid_schid(self):
         df = pd.DataFrame({
             'LEAID': ['100005'],
             'SCHID': ['870'],
+            'LEA_STATE': ['AL'],
+            'SCH_NAME': ['Sample High'],
             'SCH_ALGENR_G0708_HI_M': ['12'],
             'UNMAPPED_COL': ['99'],
         })
@@ -44,10 +49,10 @@ class PreprocessDataTest(unittest.TestCase):
         result = preprocess_data.preprocess_dataframe(
             df, 'crdc_2023-24_algebra_i.csv', mapped_cols)
 
-        self.assertIn('ncesid', result.columns)
-        self.assertIn('YEAR', result.columns)
-        self.assertIn('SCH_ALGENR_G0708_HI_M', result.columns)
+        self.assertEqual(list(result.columns),
+                         ['ncesid', 'YEAR', 'SCH_ALGENR_G0708_HI_M'])
         self.assertNotIn('UNMAPPED_COL', result.columns)
+        self.assertNotIn('LEA_STATE', result.columns)
         self.assertEqual(result['ncesid'].iloc[0], '010000500870')
         self.assertEqual(result['YEAR'].iloc[0], 2024)
 
@@ -102,6 +107,8 @@ class PreprocessDataTest(unittest.TestCase):
             df, 'crdc_2023-24_algebra_i.csv', mapped_cols)
         self.assertEqual(list(result['ncesid']),
                          ['010000500871', '010000500872'])
+        self.assertEqual(result['SCH_ALGPASS_G0708_HI_M'].iloc[0], '')
+        self.assertEqual(result['SCH_ALGENR_G0708_HI_M'].iloc[1], '')
 
     def test_process_file_skips_empty_dataframe(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
