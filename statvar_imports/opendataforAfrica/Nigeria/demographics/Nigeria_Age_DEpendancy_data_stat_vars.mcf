@@ -1,0 +1,112 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1qkojJBBnL1eSQUcEUmbe8n28OTX6Yx0lp1fBz4IQYKg/edit?resourcekey=0-OGsTeaMIp8Ur6CVIpsBiFA&gid=470260523#gid=470260523" on 2024-06-25 05:55:44.654348
+
+Node: dcid:Count_Person_15To64Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 64 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_15To64Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 64 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years65Onwards_Male_AsAFractionOf_Count_Person_15To64Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male
+age: dcid:Years65Onwards
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years65Onwards_Male_Rural_AsAFractionOf_Count_Person_15To64Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+name: "Old age dependency ratio male (65 years or more with 15 to 64 years) Rural"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male_Rural
+age: dcid:Years65Onwards
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years65Onwards_Male_Urban_AsAFractionOf_Count_Person_15To64Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+name: "Old age dependency ratio male (65 years or more with 15 to 64 years) Urban"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male_Urban
+age: dcid:Years65Onwards
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_YearsUpto14OrYears65Onwards_Male_AsAFractionOf_Count_Person_15To64Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male
+age: dcid:YearsUpto14__Years65Onwards
+gender: dcid:Male
+
+Node: dcid:Count_Person_YearsUpto14OrYears65Onwards_Male_Rural_AsAFractionOf_Count_Person_15To64Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+name: "Young and Old age dependency ratio male(14 years or less and 65 years or more with 15 to 64 years Rural"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male_Rural
+age: dcid:YearsUpto14__Years65Onwards
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_YearsUpto14OrYears65Onwards_Male_Urban_AsAFractionOf_Count_Person_15To64Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+name: "Young and Old age dependency ratio male(14 years or less and 65 years or more with 15 to 64 years Urban"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male_Urban
+age: dcid:YearsUpto14__Years65Onwards
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_YearsUpto14_Male_AsAFractionOf_Count_Person_15To64Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male
+age: dcid:YearsUpto14
+gender: dcid:Male
+
+Node: dcid:Count_Person_YearsUpto14_Male_Rural_AsAFractionOf_Count_Person_15To64Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+name: "Young age dependency ratio male (14 years or less with 15 to 64 years) Rural"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male_Rural
+age: dcid:YearsUpto14
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_YearsUpto14_Male_Urban_AsAFractionOf_Count_Person_15To64Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+name: "Young age dependency ratio male (14 years or less with 15 to 64 years) Urban"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Male_Urban
+age: dcid:YearsUpto14
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
