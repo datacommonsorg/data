@@ -26,6 +26,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 
 from absl import app
 from absl import flags
@@ -81,6 +82,9 @@ def _expand_input_files(input_data: str) -> list[str]:
         pattern = pattern.strip()
         if not pattern:
             continue
+        dir_path = os.path.dirname(pattern)
+        if dir_path and os.path.exists(dir_path) and not os.listdir(dir_path):
+            raise FileNotFoundError(f'Input directory is empty: {dir_path}')
         matched = sorted(glob.glob(pattern))
         if matched:
             files.extend(matched)
@@ -243,7 +247,7 @@ def main(_) -> None:
         shard_counters: list[str] = []
         futures = []
 
-        with concurrent.futures.ProcessPoolExecutor(
+        with concurrent.futures.ThreadPoolExecutor(
             max_workers=max_workers
         ) as executor:
             for idx, input_file in enumerate(input_files):
@@ -305,5 +309,4 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
-    import tempfile
     app.run(main)

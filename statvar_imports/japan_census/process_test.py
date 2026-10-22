@@ -45,6 +45,12 @@ class ProcessTest(unittest.TestCase):
             expanded = process._expand_input_files(pattern)
             self.assertEqual(expanded, [large_file, small_file])
 
+    def test_expand_input_files_empty_dir_raises(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            pattern = os.path.join(tmp_dir, '*.csv')
+            with self.assertRaises(FileNotFoundError):
+                process._expand_input_files(pattern)
+
     def test_merge_csv_files_keeps_single_header(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             p1 = os.path.join(tmp_dir, 'shard_00')
