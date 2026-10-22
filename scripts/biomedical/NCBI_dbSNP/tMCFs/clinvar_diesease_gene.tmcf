@@ -1,0 +1,17 @@
+Node: E:clinvar_disease_gene->E1
+typeOf: dcs:Disease
+dcid:C:clinvar_disease_gene->dcid_disease
+
+Node: E:clinvar_disease_gene->E2
+typeOf: dcs:Gene
+dcid:C:clinvar_disease_gene->dcid_gene
+
+Node: E:clinvar_disease_gene->E3
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:clinvar_disease_gene->dcid
+name: C:clinvar_disease_gene->name
+dateModified: C:clinvar_disease_gene->LastUpdated
+diseaseID: E:clinvar_disease_gene->E1
+geneID: E:clinvar_disease_gene->E2
+isCausal: C:clinvar_disease_gene->isCausal
+source: C:clinvar_disease_gene->sourceName

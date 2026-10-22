@@ -1,0 +1,20 @@
+Node: E:ncbi_GRCh38_genome_assembly_report->E1
+typeOf: schema:Quantity
+dcid: C:ncbi_GRCh38_genome_assembly_report->dcid_quantity
+name: C:ncbi_GRCh38_genome_assembly_report->name_quantity
+unitOfMeasure: dcs:BasePairs
+value:  C:ncbi_GRCh38_genome_assembly_report->Sequence-Length
+
+Node: E:ncbi_GRCh38_genome_assembly_report->E2
+typeOf: dcs:Chromosome
+dcid: C:ncbi_GRCh38_genome_assembly_report->dcid
+chromosomeSize: E:ncbi_GRCh38_genome_assembly_report->E2
+dateCreated: 2022-02-03
+dnaSequenceRole: C:ncbi_GRCh38_genome_assembly_report->Sequence-Role
+genBankAccession: C:ncbi_GRCh38_genome_assembly_report->GenBank-Accn
+genomeAssemblyUnitName: C:ncbi_GRCh38_genome_assembly_report->Assembly-Unit
+inChromosome: C:ncbi_GRCh38_genome_assembly_report->Assigned-Molecule
+inGenomeAssembly: dcs:bio/GCA_000001405.29
+ofSpecies: dcs:bio/HomoSapiens
+refSeqAccession: C:ncbi_GRCh38_genome_assembly_report->RefSeq-Accn
+synonym: C:ncbi_GRCh38_genome_assembly_report->Sequence-Name
