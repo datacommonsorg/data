@@ -51,14 +51,13 @@ for b in s2303_2010_2012 s2303_2013_2015 s2303_2016_2018 s2303_2019_2021 s2303_2
     --spec_path=./S2303_spec.json \
     --input_path=input_files/${b}.zip \
     --output_dir=./
-  mv column_map.json ${b}_column_map.json
   mv ${b}_output.tmcf s2303_output.tmcf
 done
 ```
 
-- `--option=all`: Runs both column map generation (`column_map.json`) and observation processing (`<prefix>_cleaned.csv`, `<prefix>_output.mcf`, `<prefix>_output.tmcf`, `<prefix>_summary.json`).
+- `--option=all`: Runs both column map generation (`<prefix>_column_map.json`) and observation processing (`<prefix>_cleaned.csv`, `<prefix>_output.mcf`, `<prefix>_output.tmcf`, `<prefix>_summary.json`).
 - `--has_percent=True`: Converts percentage estimates (`2010`–`2014`) into counts using the mapped denominator keys in `S2303_spec.json` (`S2303SubjectTableDataLoader` in `process.py` restricts conversion to `percent_years = ['2014', '2013', '2012', '2011', '2010']`).
-- Only a single shared `s2303_output.tmcf` and `s2303_2013_2015_output.mcf` (which spans both the `2010`–`2014` and `2015`–`2024` column layouts and contains all 210 unique StatVar nodes) need to be retained in the final import folder alongside the 5 `*_cleaned.csv` batch files.
+- Only a single shared `s2303_output.tmcf` needs to be retained in the final import folder alongside the 5 `*_output.mcf` and 5 `*_cleaned.csv` batch files.
 
 ## Batch Splitting & Runtime Optimization
 
