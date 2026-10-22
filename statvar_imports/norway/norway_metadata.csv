@@ -1,0 +1,9 @@
+parameter,value
+#mapped_rows,3
+mapped_columns,4
+header_rows,3
+skip_rows,2
+place_type,Country
+place_within,country/NOR
+#word_delimiter,""""""
+output_columns,"observationDate,observationAbout,value,variableMeasured"
