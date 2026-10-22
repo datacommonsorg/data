@@ -109,8 +109,8 @@ class ProcessTest(unittest.TestCase):
             fieldnames = list(rows[0].keys())
             csv_buffer = ['"' + '","'.join(fieldnames) + '"']
             for r in rows:
-                csv_buffer.append(
-                    '"' + '","'.join(r[k] for k in fieldnames) + '"')
+                csv_buffer.append('"' + '","'.join(r[k] for k in fieldnames) +
+                                  '"')
 
             reader = csv.DictReader(csv_buffer)
             write_csv('ACSST5Y2014.S2201-Data.csv', reader, test_csv, features,
@@ -130,8 +130,8 @@ class ProcessTest(unittest.TestCase):
             self.assertEqual(
                 result_rows[0]
                 ['Count_Household_WithOneOrMorePeople60YearsAndOver'], '')
-            self.assertEqual(result_rows[0]['Count_Household_BelowPovertyLevel'],
-                             '310000')
+            self.assertEqual(
+                result_rows[0]['Count_Household_BelowPovertyLevel'], '310000')
             self.assertEqual(
                 result_rows[0]
                 ['MarginOfError_Count_Household_BelowPovertyLevel'], '')
@@ -169,8 +169,8 @@ class ProcessTest(unittest.TestCase):
             fieldnames = list(rows[0].keys())
             csv_buffer = ['"' + '","'.join(fieldnames) + '"']
             for r in rows:
-                csv_buffer.append(
-                    '"' + '","'.join(r[k] for k in fieldnames) + '"')
+                csv_buffer.append('"' + '","'.join(r[k] for k in fieldnames) +
+                                  '"')
 
             reader = csv.DictReader(csv_buffer)
             write_csv('ACSST5Y2024.S2201_data_with_overlays.csv', reader,
@@ -187,8 +187,8 @@ class ProcessTest(unittest.TestCase):
             # whole-number percentage in S2201_C02_001E is ignored.
             self.assertEqual(result_rows[0]['Count_Household'], '757')
             self.assertEqual(
-                result_rows[0]['Count_Household_WithFoodStampsInThePast12Months'],
-                '26')
+                result_rows[0]
+                ['Count_Household_WithFoodStampsInThePast12Months'], '26')
             self.assertEqual(result_rows[0]['Median_Income_Household'],
                              '250000')
 
