@@ -90,7 +90,7 @@ gcloud auth application-default login
 *(Required to read `--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`).*
 
 ### 1. Download Source Dataset (`download_poverty.py`)
-Run from `statvar_imports/commerce_eda_poverty/`. Downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (or archive mirror / local input file) and extracts the `Underlying_Data` sheet to `input_files/Poverty.csv` (also staging `output/Poverty_original.csv`):
+Run from `statvar_imports/commerce_eda_poverty/`. Downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (or archive mirror / local input file) and extracts the `Underlying_Data` sheet to `input_files/Poverty.csv`:
 ```bash
 cd statvar_imports/commerce_eda_poverty
 python3 download_poverty.py

@@ -33,9 +33,6 @@ import tempfile
 
 from absl import app, flags, logging
 import openpyxl
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
@@ -108,24 +105,6 @@ flags.DEFINE_integer(
     60,
     "HTTP request timeout in seconds.",
 )
-
-
-def create_http_session(max_retries=3):
-    """Creates a requests.Session configured with browser headers and retries."""
-    session = requests.Session()
-    session.headers.update(HTTP_HEADERS)
-    session.verify = True
-    retry_strategy = Retry(
-        total=max_retries,
-        backoff_factor=1.0,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["HEAD", "GET", "OPTIONS"],
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry_strategy)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
 
 
 def download_file(

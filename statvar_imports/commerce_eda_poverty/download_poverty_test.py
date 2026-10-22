@@ -33,7 +33,6 @@ from statvar_imports.commerce_eda_poverty.download_poverty import (
     EDA_PPC_MIRROR_URL,
     EDA_PPC_XLSX_URL,
     HTTP_HEADERS,
-    create_http_session,
     download_file,
     download_poverty_dataset,
     extract_sheet_to_csv,
@@ -150,36 +149,27 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "params.xlsx")
             test_content = b"PK\x03\x04param_test"
 
-            session = create_http_session(max_retries=5)
-            try:
-                self.assertEqual(
-                    session.headers.get("User-Agent"),
-                    HTTP_HEADERS["User-Agent"],
-                )
-                self.assertTrue(session.verify)
-                mock_resp = mock.MagicMock()
-                mock_resp.status_code = 200
-                mock_resp.content = test_content
-                with mock.patch.object(
-                    session, "get", return_value=mock_resp
-                ) as mock_get:
-                    content = download_file(
-                        "https://example.gov/EDA_FY23_PPCs.xlsx",
-                        out_file,
-                        session=session,
-                        max_retries=5,
-                        timeout=45,
-                        require_zip_signature=True,
-                    )
-
-                self.assertEqual(content, test_content)
-                mock_get.assert_called_once_with(
+            with mock.patch(
+                "statvar_imports.commerce_eda_poverty.download_poverty"
+                ".request_url",
+                return_value=test_content,
+            ) as mock_request_url:
+                content = download_file(
                     "https://example.gov/EDA_FY23_PPCs.xlsx",
-                    headers=HTTP_HEADERS,
+                    out_file,
+                    max_retries=5,
                     timeout=45,
+                    require_zip_signature=True,
                 )
-            finally:
-                session.close()
+
+            self.assertEqual(content, test_content)
+            mock_request_url.assert_called_once_with(
+                url="https://example.gov/EDA_FY23_PPCs.xlsx",
+                headers=HTTP_HEADERS,
+                output="bytes",
+                timeout=45,
+                retries=5,
+            )
 
     def test_download_file_fails(self):
         with tempfile.TemporaryDirectory() as tmpdir:
