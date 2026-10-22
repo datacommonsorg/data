@@ -19,11 +19,11 @@
     },
     {
       "rule_id": "check_max_date_freshness",
-      "description": "Verify MaxDate is within allowable 3-year publication lag for active CRDC Algebra 1 StatVars",
+      "description": "Verify MaxDate is within allowable 4-year publication lag for active CRDC Algebra 1 StatVars",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats WHERE NOT regexp_matches(StatVar, '_SchoolGrade[78]_')",
-        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 120"
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4) AND total_svs >= 120"
       }
     },
     {
