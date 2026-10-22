@@ -1,0 +1,11 @@
+config,value
+provenance_url,https://www.nsi.bg/en/statistical-data/204/636
+output_columns,"observationDate,observationAbout,value,variableMeasured"
+#places_within,country/USA
+#place_types,"AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State"
+#debug,1
+#input_rows,100
+#word_delimiter,'
+header_rows,6
+header_columns,2
+skip_rows,2
