@@ -2,7 +2,7 @@
     "summary": {
         "column map generator commit SHA": "",
         "data processing script commit SHA": "",
-        "total StatVarObservations": 810
+        "total StatVarObservations": 324
     },
     "2018": {
         "filename": "S2502_us/ACSST5Y2018.S2502_data_with_overlays_2021-10-21T094215.csv",
@@ -23,35 +23,5 @@
         "number of unique StatVars with observations": 162,
         "number of unique geos": 1,
         "number of StatVars in mcf_dict": 162
-    },
-    "2020": {
-        "filename": "S2502_us/ACSST5Y2020.S2502_data_with_overlays_1111-11-11T111111.csv",
-        "number of columns in dataset": 326,
-        "number of rows in dataset": 1,
-        "number of statVars generated for columns": 162,
-        "number of observations": 162,
-        "number of unique StatVars with observations": 162,
-        "number of unique geos": 1,
-        "number of StatVars in mcf_dict": 174
-    },
-    "2022": {
-        "filename": "S2502_us/ACSST5Y2022.S2502_data_with_overlays_1111-11-11T111111.csv",
-        "number of columns in dataset": 326,
-        "number of rows in dataset": 1,
-        "number of statVars generated for columns": 162,
-        "number of observations": 162,
-        "number of unique StatVars with observations": 162,
-        "number of unique geos": 1,
-        "number of StatVars in mcf_dict": 192
-    },
-    "2024": {
-        "filename": "S2502_us/ACSST5Y2024.S2502_data_with_overlays_1111-11-11T111111.csv",
-        "number of columns in dataset": 326,
-        "number of rows in dataset": 1,
-        "number of statVars generated for columns": 162,
-        "number of observations": 162,
-        "number of unique StatVars with observations": 162,
-        "number of unique geos": 1,
-        "number of StatVars in mcf_dict": 210
     }
 }
