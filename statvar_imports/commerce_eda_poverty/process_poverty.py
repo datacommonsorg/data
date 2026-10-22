@@ -382,7 +382,7 @@ def preprocess_poverty(
     combined = combined.dropna(subset=["poverty_rate"])
     combined["poverty_rate"] = combined["poverty_rate"].astype(float)
     combined = combined.drop_duplicates(
-        subset=["_row_order", "year"], keep="last"
+        subset=["GEOID", "year"], keep="last"
     )
     combined["_year_num"] = combined["year"].astype(int)
     combined = combined.sort_values(

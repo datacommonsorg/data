@@ -452,6 +452,33 @@ class TestProcessPoverty(unittest.TestCase):
             )
             self.assertEqual(recent_years, {"2021"})
 
+    def test_preprocess_poverty_deduplicates_duplicate_geoids(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = os.path.join(tmpdir, "dup_geoid.csv")
+            cleaned_csv = os.path.join(tmpdir, "cleaned.csv")
+            headers = (
+                'Name,GEOID,"1990 Decennial Census, % in Poverty",'
+                '"2000 Decennial Census, % in Poverty",'
+                '"Most Recent Estimate, % in Poverty*",'
+                'Data Source―Most Recent Estimate\n'
+            )
+            with open(csv_path, "w", encoding="utf-8") as f:
+                f.write(headers)
+                f.write(
+                    '"Autauga County, AL",1001,15.0,10.0,12.0,"SAIPE, 2021"\n'
+                )
+                f.write(
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2021"\n'
+                )
+
+            preprocess_poverty(
+                src_path=csv_path, dst_path=cleaned_csv, min_county_count=1
+            )
+            df = pd.read_csv(cleaned_csv, dtype={"GEOID": str, "year": str})
+            self.assertEqual(len(df), 3)
+            self.assertEqual(list(df["year"]), ["1990", "2000", "2021"])
+            self.assertEqual(list(df["poverty_rate"]), [15.7, 10.9, 13.3])
+
 
 if __name__ == "__main__":
     unittest.main()

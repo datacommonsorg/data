@@ -42,6 +42,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from util.download_util import request_url
+
 EDA_PPC_XLSX_URL = (
     "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
 )
@@ -53,7 +55,7 @@ EDA_PPC_MIRROR_URL = (
 DEFAULT_OUTPUT_DIR = os.path.join(MODULE_DIR, "input_files")
 DEFAULT_OUTPUT_XLSX = os.path.join(DEFAULT_OUTPUT_DIR, "EDA_FY23_PPCs.xlsx")
 DEFAULT_INPUT_CSV = os.path.join(DEFAULT_OUTPUT_DIR, "Poverty.csv")
-DEFAULT_RAW_CSV_FILE = os.path.join(MODULE_DIR, "output", "Poverty_original.csv")
+DEFAULT_RAW_CSV_FILE = None
 
 HTTP_HEADERS = {
     "User-Agent": (
@@ -139,20 +141,23 @@ def download_file(
     dst_dir = os.path.dirname(os.path.abspath(output_path))
     os.makedirs(dst_dir, exist_ok=True)
 
-    owns_session = session is None
-    active_session = (
-        create_http_session(max_retries=max_retries)
-        if owns_session
-        else session
-    )
     tmp_path = None
     try:
-        response = active_session.get(
-            download_url, headers=HTTP_HEADERS, timeout=timeout
-        )
-        if hasattr(response, "raise_for_status"):
-            response.raise_for_status()
-        content = response.content
+        if session is not None:
+            response = session.get(
+                download_url, headers=HTTP_HEADERS, timeout=timeout
+            )
+            if hasattr(response, "raise_for_status"):
+                response.raise_for_status()
+            content = response.content
+        else:
+            content = request_url(
+                url=download_url,
+                headers=HTTP_HEADERS,
+                output="bytes",
+                timeout=timeout,
+                retries=max_retries,
+            )
         if not content:
             logging.error("Empty response body received from %s", download_url)
             raise RuntimeError(
@@ -196,8 +201,6 @@ def download_file(
                 os.unlink(tmp_path)
             except OSError:
                 pass
-        if owns_session and hasattr(active_session, "close"):
-            active_session.close()
 
 
 
@@ -356,44 +359,39 @@ def download_poverty_dataset(
         urls_to_try.append(mirror_url)
 
     last_err = None
-    session = create_http_session(max_retries=max_retries)
-    try:
-        for url in urls_to_try:
-            try:
-                content = download_file(
-                    download_url=url,
-                    output_path=output_xlsx_path,
-                    session=session,
-                    max_retries=max_retries,
-                    timeout=timeout,
-                    require_zip_signature=True,
-                )
-                # Extract Underlying_Data sheet to output_csv_path
-                extract_sheet_to_csv(content, output_csv_path)
-                logging.info(
-                    "Successfully downloaded workbook and extracted sheet "
-                    "from %s",
-                    url,
-                )
-                break
-            except Exception as e:
-                last_err = e
-                logging.warning(
-                    "Failed to download or process from %s: %s", url, e
-                )
-                if os.path.exists(output_xlsx_path):
-                    try:
-                        os.remove(output_xlsx_path)
-                    except OSError:
-                        pass
-                if os.path.exists(output_csv_path):
-                    try:
-                        os.remove(output_csv_path)
-                    except OSError:
-                        pass
-                content = None
-    finally:
-        session.close()
+    for url in urls_to_try:
+        try:
+            content = download_file(
+                download_url=url,
+                output_path=output_xlsx_path,
+                max_retries=max_retries,
+                timeout=timeout,
+                require_zip_signature=True,
+            )
+            # Extract Underlying_Data sheet to output_csv_path
+            extract_sheet_to_csv(content, output_csv_path)
+            logging.info(
+                "Successfully downloaded workbook and extracted sheet "
+                "from %s",
+                url,
+            )
+            break
+        except Exception as e:
+            last_err = e
+            logging.warning(
+                "Failed to download or process from %s: %s", url, e
+            )
+            if os.path.exists(output_xlsx_path):
+                try:
+                    os.remove(output_xlsx_path)
+                except OSError:
+                    pass
+            if os.path.exists(output_csv_path):
+                try:
+                    os.remove(output_csv_path)
+                except OSError:
+                    pass
+            content = None
 
     if not content:
         logging.error(
