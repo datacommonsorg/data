@@ -94,10 +94,13 @@ def _format_emission(x):
     try:
         if pd.notna(x) and str(x).strip():
             f = float(x)
+            if np.isnan(f) or np.isinf(f):
+                return ''
             return '0' if f == 0.0 else np.format_float_positional(f, trim='-')
-        return x
+        return ''
     except (ValueError, TypeError):
-        return x
+        logging.warning(f"Dropping non-numeric emission value: {x!r}")
+        return ''
 
 
 def download_and_segregate_by_gas():
@@ -169,6 +172,7 @@ def download_and_segregate_by_gas():
 
         gas_dataframes = []
         critical_errors = []
+        skipped_count = 0
         with ThreadPoolExecutor(max_workers=10) as executor:
             future_to_iso = {
                 executor.submit(
@@ -187,10 +191,16 @@ def download_and_segregate_by_gas():
                     if result_df is not None and not result_df.empty:
                         gas_dataframes.append(result_df)
                     else:
+                        skipped_count += 1
                         failed_downloads.append(f"{iso} ({gas})")
                 except Exception as e:
                     logging.error(f"Critical error for {iso} ({gas}): {e}")
                     critical_errors.append(f"{iso} ({gas}) - Error: {e}")
+
+        logging.info(
+            f"Download summary for {gas}: {len(gas_dataframes)} succeeded, "
+            f"{skipped_count} skipped (404/empty), {len(critical_errors)} failed."
+        )
 
         if critical_errors:
             session.close()
