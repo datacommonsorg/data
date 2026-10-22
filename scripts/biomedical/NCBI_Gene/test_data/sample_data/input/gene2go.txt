@@ -1,0 +1,60 @@
+#tax_id	GeneID	GO_ID	Evidence	Qualifier	GO_term	PubMed	Category
+7753	133340462	GO:0032880	IEA	involved_in	regulation of protein localization	30032202	Process
+7753	133347838	GO:0003341	IEA	involved_in	cilium movement	30032202	Process
+7753	133348917	GO:0003953	IEA	enables	NAD+ nucleosidase activity	30032202	Function
+7753	133350237	GO:0006887	IEA	involved_in	exocytosis	30032202	Process
+7757	116942448	GO:0000422	IEA	involved_in	autophagy of mitochondrion	30032202	Process
+7757	116948813	GO:0003697	IEA	enables	single-stranded DNA binding	22301074	Function
+7757	116957839	GO:0000727	IEA	involved_in	double-strand break repair via break-induced replication	30032202	Process
+7782	129699724	GO:0016020	IEA	located_in	membrane	30032202	Component
+7782	129703064	GO:0005923	IEA	located_in	bicellular tight junction	30032202	Component
+7782	129705368	GO:0005783	IEA	located_in	endoplasmic reticulum	30032202	Component
+7782	129710884	GO:0004181	IEA	enables	metallocarboxypeptidase activity	22301074	Function
+7888	122788067	GO:0004016	IEA	enables	adenylate cyclase activity	30032202	Function
+7888	122789222	GO:0046983	IEA	enables	protein dimerization activity	22301074	Function
+7888	122811710	GO:0000724	IEA	involved_in	double-strand break repair via homologous recombination	30032202	Process
+7888	122814913	GO:0005886	IEA	located_in	plasma membrane	30032202	Component
+7888	122817003	GO:0000978	IEA	enables	RNA polymerase II cis-regulatory region sequence-specific DNA binding	30032202	Function
+8345	128639861	GO:0005743	IEA	located_in	mitochondrial inner membrane	30032202	Component
+9361	101427323	GO:0003723	IEA	enables	RNA binding	22301074|30032202	Function
+9361	131274481	GO:0000978	IEA	enables	RNA polymerase II cis-regulatory region sequence-specific DNA binding	30032202	Function
+9371	101653519	GO:0004867	IEA	enables	serine-type endopeptidase inhibitor activity	30032202	Function
+9402	102884844	GO:0003924	IEA	enables	GTPase activity	22301074|30032202	Function
+9402	102892772	GO:0005515	IEA	enables	protein binding	22301074	Function
+9417	128626687	GO:0005739	IEA	located_in	mitochondrion	30032202	Component
+9447	123624550	GO:0000122	IEA	involved_in	negative regulation of transcription by RNA polymerase II	30032202	Process
+9606	1362	GO:0004181	IBA	enables	metallocarboxypeptidase activity	-	Function
+9606	1525	GO:0001618	IEA	enables	virus receptor activity	-	Function
+9606	3188	GO:0003723	HDA	enables	RNA binding	22658674|22681889	Function
+9606	4599	GO:0003924	IBA	enables	GTPase activity	-	Function
+9606	5104	GO:0001972	IDA	enables	retinoic acid binding	11722589	Function
+9606	5267	GO:0004867	IBA	enables	serine-type endopeptidase inhibitor activity	-	Function
+9606	6173	GO:0002181	IC	involved_in	cytoplasmic translation	12962325|23636399	Process
+9606	8945	GO:0000209	IDA	involved_in	protein polyubiquitination	12820959	Process
+9606	8987	GO:0005515	IPI	enables	protein binding	20562859|20810658|21893048|24837458|25416956|28514442	Function
+9606	10172	GO:0000978	IBA	enables	RNA polymerase II cis-regulatory region sequence-specific DNA binding	-	Function
+9606	10346	GO:0000209	IBA	involved_in	protein polyubiquitination	-	Process
+9606	11152	GO:0000045	IMP	involved_in	autophagosome assembly	28561066	Process
+9606	11230	GO:0005515	IPI	enables	protein binding	32296183|35156780	Function
+9606	23098	GO:0003953	IDA	enables	NAD+ nucleosidase activity	28334607|31128467|31439792|31439793|32049506|32828421|33053563	Function
+9606	23536	GO:0003723	IMP	enables	RNA binding	10430867	Function
+9606	23563	GO:0000139	NAS	located_in	Golgi membrane	12855678	Component
+9606	23648	GO:0002244	IEA	involved_in	hematopoietic progenitor cell differentiation	-	Process
+9606	25909	GO:0000776	IDA	colocalizes_with	kinetochore	17098863	Component
+9606	51019	GO:0005515	IPI	enables	protein binding	16189514|19060904|21516116|25416956|25910212|26871637|28514442|29892012|31515488|32296183	Function
+9606	51659	GO:0000727	IBA	involved_in	double-strand break repair via break-induced replication	-	Process
+9606	54919	GO:0003341	IBA	involved_in	cilium movement	-	Process
+9606	55625	GO:0000139	TAS	located_in	Golgi membrane	-	Component
+9606	55811	GO:0000287	IEA	enables	magnesium ion binding	-	Function
+9606	55969	GO:0003674	ND	enables	molecular_function	-	Function
+9606	60436	GO:0000122	IBA	involved_in	negative regulation of transcription by RNA polymerase II	-	Process
+9606	64064	GO:0005739	IBA	is_active_in	mitochondrion	-	Component
+9606	79035	GO:0000724	IBA	involved_in	double-strand break repair via homologous recombination	-	Process
+9606	79583	GO:0001701	IEA	involved_in	in utero embryonic development	-	Process
+9606	79602	GO:0005515	IPI	enables	protein binding	32296183	Function
+9606	91975	GO:0000978	IBA	enables	RNA polymerase II cis-regulatory region sequence-specific DNA binding	-	Function
+9606	147007	GO:0005515	IPI	enables	protein binding	25416956|32296183	Function
+9606	387748	GO:0004930	IEA	enables	G protein-coupled receptor activity	-	Function
+9606	414189	GO:0003924	IBA	enables	GTPase activity	-	Function
+9606	100129583	GO:0000785	IBA	part_of	chromatin	-	Component
+9606	100652748	GO:0003674	ND	enables	molecular_function	-	Function
