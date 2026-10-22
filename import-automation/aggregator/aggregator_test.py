@@ -30,11 +30,11 @@ import duckdb
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _ROOT_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 for _p in [
-    _SCRIPT_DIR,
-    _ROOT_DIR,
-    os.path.join(_ROOT_DIR, "util"),
-    os.path.join(_ROOT_DIR, "tools", "import_differ"),
-    os.path.join(_ROOT_DIR, "tools", "statvar_importer"),
+        _SCRIPT_DIR,
+        _ROOT_DIR,
+        os.path.join(_ROOT_DIR, "util"),
+        os.path.join(_ROOT_DIR, "tools", "import_differ"),
+        os.path.join(_ROOT_DIR, "tools", "statvar_importer"),
 ]:
     if _p not in sys.path:
         sys.path.insert(0, _p)
@@ -49,8 +49,7 @@ def _load_aggregator_main():
     if mod_name in sys.modules:
         return sys.modules[mod_name]
     spec = importlib.util.spec_from_file_location(
-        mod_name, os.path.join(_SCRIPT_DIR, "main.py")
-    )
+        mod_name, os.path.join(_SCRIPT_DIR, "main.py"))
     module = importlib.util.module_from_spec(spec)
     sys.modules[mod_name] = module
     spec.loader.exec_module(module)
@@ -73,9 +72,8 @@ def _get_java_genmcf_command() -> list[str]:
     if os.path.exists(fat_jar):
         return ["java", "-jar", fat_jar]
 
-    tool_classes = os.path.join(
-        workspace_root, "import", "tool", "target", "classes"
-    )
+    tool_classes = os.path.join(workspace_root, "import", "tool", "target",
+                                "classes")
     util_jar = os.path.join(
         workspace_root,
         "import",
@@ -152,21 +150,18 @@ class StatVarAggregatorTest(unittest.TestCase):
     def test_central_yaml_parity_1_preserves_exact_dcids(self):
         """Parity 1: Central YAML preserves exact dc/... hash DCIDs from stat_var_aggregation.textproto."""
         acs_rules = stat_var_aggregator.load_stat_var_aggregation_config(
-            "CensusACS5YearSurvey"
-        )
+            "CensusACS5YearSurvey")
         self.assertTrue(len(acs_rules) > 40)
         rule_by_anc = {r["ancestor_sv_id"]: r for r in acs_rules}
 
         less_hs = rule_by_anc[
-            "Count_Person_EducationalAttainment_LessThanHighSchoolDiploma"
-        ]
+            "Count_Person_EducationalAttainment_LessThanHighSchoolDiploma"]
         self.assertIn("dc/05vn39gf0bz64", less_hs["source_sv_ids"])
         self.assertIn("dc/zrtnqhw8mhdp1", less_hs["source_sv_ids"])
         self.assertEqual(18, len(less_hs["source_sv_ids"]))
 
         s1201_rules = stat_var_aggregator.load_stat_var_aggregation_config(
-            "CensusACS5YearSurvey_SubjectTables_S1201"
-        )
+            "CensusACS5YearSurvey_SubjectTables_S1201")
         s1201_map = {r["ancestor_sv_id"]: r for r in s1201_rules}
         self.assertEqual(
             [
@@ -177,8 +172,7 @@ class StatVarAggregatorTest(unittest.TestCase):
         )
 
         s2408_rules = stat_var_aggregator.load_stat_var_aggregation_config(
-            "CensusACS5YearSurvey_SubjectTables_S2408"
-        )
+            "CensusACS5YearSurvey_SubjectTables_S2408")
         s2408_map = {r["ancestor_sv_id"]: r for r in s2408_rules}
         self.assertEqual(
             [
@@ -186,18 +180,16 @@ class StatVarAggregatorTest(unittest.TestCase):
                 "Count_Person_PrivatelyOwnedNotForProfitEstablishment_Female_PaidWorker",
             ],
             s2408_map[
-                "Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker"
-            ]["source_sv_ids"],
+                "Count_Person_PrivatelyOwnedNotForProfitEstablishment_PaidWorker"]
+            ["source_sv_ids"],
         )
 
     def test_parity_2_expand_chained_rules_s1251_and_s0504(self):
         """Parity 2: Hierarchical/chained rules in S1251 and S0504 expand in memory to leaf StatVars."""
         s1251_raw = stat_var_aggregator.load_stat_var_aggregation_config(
-            "CensusACS5YearSurvey_SubjectTables_S1251"
-        )
+            "CensusACS5YearSurvey_SubjectTables_S1251")
         s1251_expanded = stat_var_aggregator.expand_stat_var_aggregation_config(
-            s1251_raw
-        )
+            s1251_raw)
         s1251_map = {r["ancestor_sv_id"]: r for r in s1251_expanded}
         top_s1251 = s1251_map["Count_Person_WithOwnChildrenUnder18"]
         self.assertTrue(top_s1251.get("has_derived_sources"))
@@ -213,11 +205,9 @@ class StatVarAggregatorTest(unittest.TestCase):
         self.assertFalse(top_s1251["skip_all_sources_present_check"])
 
         s0504_raw = stat_var_aggregator.load_stat_var_aggregation_config(
-            "CensusACS5YearSurvey_SubjectTables_S0504"
-        )
+            "CensusACS5YearSurvey_SubjectTables_S0504")
         s0504_expanded = stat_var_aggregator.expand_stat_var_aggregation_config(
-            s0504_raw
-        )
+            s0504_raw)
         s0504_map = {r["ancestor_sv_id"]: r for r in s0504_expanded}
         top_s0504 = s0504_map["Count_Person_USCitizenByNaturalization"]
         self.assertTrue(top_s0504.get("has_derived_sources"))
@@ -256,28 +246,22 @@ class StatVarAggregatorTest(unittest.TestCase):
             ]
             stat_var_aggregator.write_mcf_observations(records, mcf_path)
 
-            rules_strict = [
-                {
-                    "ancestor_sv_id": "SV_Parent",
-                    "source_sv_ids": ["SV_Child1", "SV_Child2"],
-                    "skip_all_sources_present_check": False,
-                }
-            ]
+            rules_strict = [{
+                "ancestor_sv_id": "SV_Parent",
+                "source_sv_ids": ["SV_Child1", "SV_Child2"],
+                "skip_all_sources_present_check": False,
+            }]
             out_strict = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules_strict
-            )
+                [mcf_path], rules_strict)
             self.assertEqual([], out_strict)
 
-            rules_skip = [
-                {
-                    "ancestor_sv_id": "SV_Parent",
-                    "source_sv_ids": ["SV_Child1", "SV_Child2"],
-                    "skip_all_sources_present_check": True,
-                }
-            ]
+            rules_skip = [{
+                "ancestor_sv_id": "SV_Parent",
+                "source_sv_ids": ["SV_Child1", "SV_Child2"],
+                "skip_all_sources_present_check": True,
+            }]
             out_skip = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules_skip
-            )
+                [mcf_path], rules_skip)
             self.assertEqual(2, len(out_skip))
             self.assertEqual([10.0, 20.0], sorted(r["value"] for r in out_skip))
 
@@ -324,21 +308,17 @@ class StatVarAggregatorTest(unittest.TestCase):
                 },
             ]
             stat_var_aggregator.write_mcf_observations(records, mcf_path)
-            rules = [
-                {
-                    "ancestor_sv_id": "SV_Parent",
-                    "source_sv_ids": ["SV_Child1", "SV_Child2"],
-                }
-            ]
+            rules = [{
+                "ancestor_sv_id": "SV_Parent",
+                "source_sv_ids": ["SV_Child1", "SV_Child2"],
+            }]
             out = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules
-            )
+                [mcf_path], rules)
             self.assertEqual(1, len(out))
             self.assertEqual(150.0, out[0]["value"])
             self.assertEqual("150", out[0]["valueStr"])
-            self.assertEqual(
-                "dcAggregate/CensusACS5yrSurvey", out[0]["measurementMethod"]
-            )
+            self.assertEqual("dcAggregate/CensusACS5yrSurvey",
+                             out[0]["measurementMethod"])
 
     def test_parity_4_aggregation_methods_sum_min_max_avg(self):
         """Parity 4: Supports SUM (default), MIN, MAX, and AVG aggregation methods."""
@@ -372,7 +352,10 @@ class StatVarAggregatorTest(unittest.TestCase):
             ]
             stat_var_aggregator.write_mcf_observations(records, mcf_path)
             rules = [
-                {"ancestor_sv_id": "Out_Sum", "source_sv_ids": ["SV1", "SV2"]},
+                {
+                    "ancestor_sv_id": "Out_Sum",
+                    "source_sv_ids": ["SV1", "SV2"]
+                },
                 {
                     "ancestor_sv_id": "Out_Min",
                     "source_sv_ids": ["SV1", "SV2"],
@@ -390,20 +373,17 @@ class StatVarAggregatorTest(unittest.TestCase):
                 },
             ]
             out = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules
-            )
+                [mcf_path], rules)
             by_sv = {r["variableMeasured"]: r for r in out}
             self.assertEqual(40.0, by_sv["Out_Sum"]["value"])
             self.assertEqual(10.0, by_sv["Out_Min"]["value"])
             self.assertEqual(30.0, by_sv["Out_Max"]["value"])
             self.assertEqual(20.0, by_sv["Out_Avg"]["value"])
-            self.assertEqual(
-                "DataCommonsAggregate", by_sv["Out_Sum"]["measurementMethod"]
-            )
+            self.assertEqual("DataCommonsAggregate",
+                             by_sv["Out_Sum"]["measurementMethod"])
 
     def test_agg_obs_key_combined_matches_flush_node_to_csv_on_stat_var_agg_nodes_mcf(
-        self,
-    ):
+        self,):
         """Verifies agg_obs key_combined, variableMeasured, and value match _flush_node_to_csv on stat_var_agg_nodes.mcf."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             raw_mcf = os.path.join(tmp_dir, "table_mcf_nodes_0.mcf")
@@ -435,12 +415,10 @@ class StatVarAggregatorTest(unittest.TestCase):
                 },
             ]
             stat_var_aggregator.write_mcf_observations(records, raw_mcf)
-            rules = [
-                {
-                    "ancestor_sv_id": "SV_Total",
-                    "source_sv_ids": ["SV_Child1", "SV_Child2"],
-                }
-            ]
+            rules = [{
+                "ancestor_sv_id": "SV_Total",
+                "source_sv_ids": ["SV_Child1", "SV_Child2"],
+            }]
             res = stat_var_aggregator.run_duckdb_aggregation(
                 mcf_pattern=raw_mcf,
                 aggregations=rules,
@@ -453,18 +431,17 @@ class StatVarAggregatorTest(unittest.TestCase):
             parsed_obs_csv = os.path.join(tmp_dir, "parsed_agg_obs.csv")
             parsed_schema_csv = os.path.join(tmp_dir, "parsed_agg_schema.csv")
             obs_cnt, _ = bigquery_differ.stream_mcf_to_csv(
-                agg_mcf, parsed_obs_csv, parsed_schema_csv
-            )
+                agg_mcf, parsed_obs_csv, parsed_schema_csv)
             self.assertEqual(1, obs_cnt)
             with open(parsed_obs_csv, "r", encoding="utf-8") as f:
                 csv_rows = list(csv.DictReader(f))
             self.assertEqual(1, len(csv_rows))
             csv_row = csv_rows[0]
 
-            self.assertEqual(csv_row["key_combined"], agg_obs_row["key_combined"])
-            self.assertEqual(
-                csv_row["variableMeasured"], agg_obs_row["variableMeasured"]
-            )
+            self.assertEqual(csv_row["key_combined"],
+                             agg_obs_row["key_combined"])
+            self.assertEqual(csv_row["variableMeasured"],
+                             agg_obs_row["variableMeasured"])
             self.assertEqual("dcid:SV_Total", agg_obs_row["variableMeasured"])
             self.assertEqual(csv_row["value"], agg_obs_row["value"])
             self.assertEqual("20", agg_obs_row["value"])
@@ -508,17 +485,15 @@ dcid:wikidataId/Q1185,2021,dcs:Nominal_Amount_EconomicActivity_GrossValueAdded_C
             self.assertEqual("wikidataId/Q1185", parsed[0]["observationAbout"])
             self.assertEqual("2020", parsed[0]["observationDate"])
             self.assertEqual(600.0, parsed[0]["value"])
-            self.assertEqual(
-                "dcAggregate/RBI_Methodology", parsed[0]["measurementMethod"]
-            )
+            self.assertEqual("dcAggregate/RBI_Methodology",
+                             parsed[0]["measurementMethod"])
 
             summary_csv = os.path.join(genmcf_dir, "summary_report.csv")
             with open(summary_csv, "r", encoding="utf-8") as f:
                 rows = list(csv.DictReader(f))
             sv_names = [r["StatVar"] for r in rows]
-            self.assertIn(
-                "dcs:Nominal_Amount_EconomicActivity_GrossValueAdded", sv_names
-            )
+            self.assertIn("dcs:Nominal_Amount_EconomicActivity_GrossValueAdded",
+                          sv_names)
 
     def test_e2e_pattern_2_oecd_regional_demography_population(self):
         """End-to-end test: OECDRegionalDemography_Population overlapping age aggregations with skip_check=True."""
@@ -578,9 +553,8 @@ dcid:geoId/06,2017,dcs:Count_Person_Producer_AsianAlone,4000
             self.assertIsNotNone(out_mcf)
             parsed = stat_var_aggregator.parse_mcf_observations([out_mcf])
             self.assertEqual(1, len(parsed))
-            self.assertEqual(
-                "Count_Person_Producer", parsed[0]["variableMeasured"]
-            )
+            self.assertEqual("Count_Person_Producer",
+                             parsed[0]["variableMeasured"])
             self.assertEqual(66000.0, parsed[0]["value"])
             self.assertEqual(
                 "dcAggregate/USDAAgricultureCensus",
@@ -604,9 +578,7 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
 dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_DivorcedInThePast12Months_ResidesInHousehold,30
 """
         with tempfile.TemporaryDirectory() as tmp_dir:
-            genmcf_dir = _run_genmcf_local(
-                tmcf, csv_data, tmp_dir, "s1251.csv"
-            )
+            genmcf_dir = _run_genmcf_local(tmcf, csv_data, tmp_dir, "s1251.csv")
             out_mcf = stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                 import_name="CensusACS5YearSurvey_SubjectTables_S1251",
                 genmcf_output_path=genmcf_dir,
@@ -627,12 +599,10 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
                 stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                     import_name="CensusACS5YearSurvey_SubjectTables_S1251",
                     genmcf_output_path=genmcf_dir,
-                )
-            )
+                ))
             self.assertIsNotNone(out_mcf_rerun)
             parsed_rerun = stat_var_aggregator.parse_mcf_observations(
-                [out_mcf_rerun]
-            )
+                [out_mcf_rerun])
             self.assertEqual(3, len(parsed_rerun))
             self.assertEqual(
                 by_sv,
@@ -642,8 +612,7 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
     @mock.patch("stat_var_aggregator.bigquery_differ.load_mcf_to_bq_tables")
     @mock.patch("stat_var_aggregator.bigquery_differ.ensure_bq_dataset")
     def test_run_bigquery_aggregation_paginated_streaming(
-        self, mock_ensure_ds, mock_load_mcf
-    ):
+            self, mock_ensure_ds, mock_load_mcf):
         """Tests BigQuery mode: loads raw_obs/raw_schema, creates agg_obs with TTL, and streams 10k-row pages."""
         mock_load_mcf.return_value = (12, 2)
         mock_bq_client = mock.MagicMock()
@@ -651,30 +620,26 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
         create_job = mock.MagicMock()
         create_job.result.return_value = []
 
-        page1 = [
-            (
-                "dcid:SV_Agg1",
-                "300",
-                "geoId/06",
-                "2020",
-                "P1Y",
-                "dcAggregate/Method1",
-                "Person",
-                "",
-            )
-        ]
-        page2 = [
-            (
-                "dcid:SV_Agg2",
-                "500",
-                "geoId/36",
-                "2021",
-                "P1Y",
-                "DataCommonsAggregate",
-                "Person",
-                "",
-            )
-        ]
+        page1 = [(
+            "dcid:SV_Agg1",
+            "300",
+            "geoId/06",
+            "2020",
+            "P1Y",
+            "dcAggregate/Method1",
+            "Person",
+            "",
+        )]
+        page2 = [(
+            "dcid:SV_Agg2",
+            "500",
+            "geoId/36",
+            "2021",
+            "P1Y",
+            "DataCommonsAggregate",
+            "Person",
+            "",
+        )]
         select_result = mock.MagicMock()
         select_result.pages = [page1, page2]
         select_job = mock.MagicMock()
@@ -730,21 +695,17 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             self.assertEqual(2, res["agg_obs_count"])
             self.assertEqual(out_mcf, res["output_mcf_path"])
             expected_tables = bigquery_differ.get_import_bq_table_ids(
-                "test-proj.test_ds", "TestImport", "2026_10_21", "input0"
-            )
+                "test-proj.test_ds", "TestImport", "2026_10_21", "input0")
             self.assertEqual(expected_tables, res["table_ids"])
 
             mock_load_mcf.assert_called_once()
             _, load_kwargs = mock_load_mcf.call_args
-            self.assertEqual(
-                expected_tables["raw_obs"], load_kwargs["obs_table_ref"]
-            )
-            self.assertEqual(
-                expected_tables["raw_schema"], load_kwargs["schema_table_ref"]
-            )
-            self.assertEqual(
-                {"stat_var_agg_nodes.mcf"}, load_kwargs["exclude_filenames"]
-            )
+            self.assertEqual(expected_tables["raw_obs"],
+                             load_kwargs["obs_table_ref"])
+            self.assertEqual(expected_tables["raw_schema"],
+                             load_kwargs["schema_table_ref"])
+            self.assertEqual({"stat_var_agg_nodes.mcf"},
+                             load_kwargs["exclude_filenames"])
 
             self.assertEqual(2, mock_bq_client.query.call_count)
             create_sql = mock_bq_client.query.call_args_list[0][0][0]
@@ -758,7 +719,10 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             parsed = stat_var_aggregator.parse_mcf_observations([out_mcf])
             self.assertEqual(2, len(parsed))
             self.assertEqual(
-                {"SV_Agg1": 300.0, "SV_Agg2": 500.0},
+                {
+                    "SV_Agg1": 300.0,
+                    "SV_Agg2": 500.0
+                },
                 {r["variableMeasured"]: r["value"] for r in parsed},
             )
 
@@ -774,15 +738,12 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
         con = duckdb.connect(":memory:")
         existing_tables: dict[str, str] = {}
         deleted_tables: list[str] = []
-        rules = [
-            {
-                "ancestor_sv_id": "SV_Total",
-                "source_sv_ids": ["SV_Child1", "SV_Child2"],
-            }
-        ]
+        rules = [{
+            "ancestor_sv_id": "SV_Total",
+            "source_sv_ids": ["SV_Child1", "SV_Child2"],
+        }]
         expanded_rules = stat_var_aggregator.expand_stat_var_aggregation_config(
-            rules
-        )
+            rules)
         stat_var_aggregator._register_rules_in_duckdb(con, expanded_rules)
 
         def _safe_tbl(table_ref: str) -> str:
@@ -797,8 +758,7 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             safe_name = _safe_tbl(table_ref)
             csv_path = file_obj.name.replace("'", "''")
             if job_config and len(job_config.schema) == 10:
-                con.execute(
-                    f"""
+                con.execute(f"""
                     CREATE OR REPLACE TABLE {safe_name} AS
                     SELECT * FROM read_csv(
                         '{csv_path}',
@@ -817,11 +777,9 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
                         }},
                         nullstr = ''
                     )
-                    """
-                )
+                    """)
             else:
-                con.execute(
-                    f"""
+                con.execute(f"""
                     CREATE OR REPLACE TABLE {safe_name} AS
                     SELECT * FROM read_csv(
                         '{csv_path}',
@@ -832,8 +790,7 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
                         }},
                         nullstr = ''
                     )
-                    """
-                )
+                    """)
             existing_tables[table_ref] = safe_name
             job = mock.MagicMock()
             job.result.return_value = None
@@ -860,16 +817,14 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
                 safe_agg = _safe_tbl(agg_ref)
                 safe_raw = existing_tables[raw_ref]
                 duck_create_sql = stat_var_aggregator.build_duckdb_agg_obs_sql(
-                    raw_obs_view=safe_raw, agg_obs_table=safe_agg
-                )
+                    raw_obs_view=safe_raw, agg_obs_table=safe_agg)
                 con.execute(duck_create_sql)
                 existing_tables[agg_ref] = safe_agg
                 job.result.return_value = []
                 return job
 
-            duck_sql = re.sub(
-                r"`([^`]+)`", lambda m: existing_tables[m.group(1)], sql
-            )
+            duck_sql = re.sub(r"`([^`]+)`",
+                              lambda m: existing_tables[m.group(1)], sql)
             duck_sql = re.sub(
                 r"COUNTIF\(([^)]+)\)",
                 r"COUNT(*) FILTER (WHERE \1)",
@@ -1040,8 +995,8 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             # Job 3: Run BigQuery Differ reusing raw_obs, raw_schema, and agg_obs
             shared_ids = agg_res["table_ids"]
             with mock.patch(
-                "tools.import_differ.bigquery_differ.bigquery.Client",
-                return_value=mock_bq,
+                    "tools.import_differ.bigquery_differ.bigquery.Client",
+                    return_value=mock_bq,
             ):
                 diff_summary = bigquery_differ.run_bigquery_differ(
                     current_data=os.path.join(curr_dir, "*.mcf"),
@@ -1063,25 +1018,35 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
 
             diff_csv = os.path.join(diff_out_dir, "differ_summary.csv")
             with open(diff_csv, "r", encoding="utf-8") as f:
-                diff_rows = {
-                    r["StatVar"]: r for r in csv.DictReader(f)
-                }
+                diff_rows = {r["StatVar"]: r for r in csv.DictReader(f)}
             self.assertEqual(
-                {"ADDED": "1", "DELETED": "1", "MODIFIED": "1"},
+                {
+                    "ADDED": "1",
+                    "DELETED": "1",
+                    "MODIFIED": "1"
+                },
                 {
                     k: diff_rows["SV_Child1"][k]
                     for k in ("ADDED", "DELETED", "MODIFIED")
                 },
             )
             self.assertEqual(
-                {"ADDED": "1", "DELETED": "1", "MODIFIED": "0"},
+                {
+                    "ADDED": "1",
+                    "DELETED": "1",
+                    "MODIFIED": "0"
+                },
                 {
                     k: diff_rows["SV_Child2"][k]
                     for k in ("ADDED", "DELETED", "MODIFIED")
                 },
             )
             self.assertEqual(
-                {"ADDED": "1", "DELETED": "1", "MODIFIED": "1"},
+                {
+                    "ADDED": "1",
+                    "DELETED": "1",
+                    "MODIFIED": "1"
+                },
                 {
                     k: diff_rows["SV_Total"][k]
                     for k in ("ADDED", "DELETED", "MODIFIED")
@@ -1098,8 +1063,7 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
 
     @mock.patch("aggregator_main.storage.Client")
     def test_main_run_aggregation_job_skips_when_import_not_in_config(
-        self, mock_storage_cls
-    ):
+            self, mock_storage_cls):
         """Tests that main.run_aggregation_job exits cleanly with 0 without calling GCS when import has no rules."""
         exit_code = aggregator_main.run_aggregation_job(
             absolute_import_name="scripts/us_fed:treasury_unconfigured",
@@ -1112,26 +1076,23 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
     @mock.patch("aggregator_main.stat_var_aggregator.run_bigquery_aggregation")
     @mock.patch("aggregator_main.storage.Client")
     def test_main_run_aggregation_job_executes_and_uploads_artifacts(
-        self, mock_storage_cls, mock_run_bq_agg
-    ):
+            self, mock_storage_cls, mock_run_bq_agg):
         """Tests that main.run_aggregation_job runs BigQuery aggregation, uploads MCF & summary CSV, and updates import_summary.json."""
         mock_gcs = mock_storage_cls.return_value
         mock_bucket = mock.MagicMock()
         mock_gcs.bucket.return_value = mock_bucket
 
         blob_store = {
-            "scripts/india_rbi/India_RBIStateDomesticProduct/staging_version.txt": (
-                "2026_10_21"
-            ),
-            "scripts/india_rbi/India_RBIStateDomesticProduct/2026_10_21/import_summary.json": json.dumps(
-                {
+            "scripts/india_rbi/India_RBIStateDomesticProduct/staging_version.txt":
+                ("2026_10_21"),
+            "scripts/india_rbi/India_RBIStateDomesticProduct/2026_10_21/import_summary.json":
+                json.dumps({
                     "import_name": "India_RBIStateDomesticProduct",
                     "status": "PENDING",
-                }
-            ),
-            "scripts/india_rbi/India_RBIStateDomesticProduct/2026_10_21/input0/genmcf/summary_report.csv": (
-                "StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,ObservationPeriods"
-            ),
+                }),
+            "scripts/india_rbi/India_RBIStateDomesticProduct/2026_10_21/input0/genmcf/summary_report.csv":
+                ("StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,ObservationPeriods"
+                ),
         }
         uploaded_strings = {}
         uploaded_files = {}
@@ -1161,20 +1122,28 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
         def _fake_bq_agg(**kwargs):
             out_mcf = kwargs["output_mcf_path"]
             stat_var_aggregator.write_mcf_observations(
-                [
-                    {
-                        "dcid": "dc/o/test123",
-                        "variableMeasured": "Nominal_Amount_EconomicActivity_GrossValueAdded",
-                        "observationAbout": "wikidataId/Q1185",
-                        "observationDate": "2020",
-                        "value": 600.0,
-                        "valueStr": "600",
-                        "unit": "IndianRupee",
-                        "measurementMethod": "dcAggregate/RBI_Methodology",
-                        "observationPeriod": "",
-                        "scalingFactor": "",
-                    }
-                ],
+                [{
+                    "dcid":
+                        "dc/o/test123",
+                    "variableMeasured":
+                        "Nominal_Amount_EconomicActivity_GrossValueAdded",
+                    "observationAbout":
+                        "wikidataId/Q1185",
+                    "observationDate":
+                        "2020",
+                    "value":
+                        600.0,
+                    "valueStr":
+                        "600",
+                    "unit":
+                        "IndianRupee",
+                    "measurementMethod":
+                        "dcAggregate/RBI_Methodology",
+                    "observationPeriod":
+                        "",
+                    "scalingFactor":
+                        "",
+                }],
                 out_mcf,
             )
             if kwargs.get("summary_report_path"):
@@ -1187,7 +1156,8 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
         mock_run_bq_agg.side_effect = _fake_bq_agg
 
         exit_code = aggregator_main.run_aggregation_job(
-            absolute_import_name="scripts/india_rbi:India_RBIStateDomesticProduct",
+            absolute_import_name=
+            "scripts/india_rbi:India_RBIStateDomesticProduct",
             import_config_str='{"gcp_project_id": "test-proj"}',
             bucket_name="test-bucket",
             bq_dataset="test_dataset",
@@ -1211,11 +1181,9 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
         self.assertIn(import_summary_blob, uploaded_strings)
         updated_summary = json.loads(uploaded_strings[import_summary_blob])
         self.assertEqual(
-            1, updated_summary["import_stats"]["aggregated_obs_count"]
-        )
-        self.assertIn(
-            "aggregation_execution_time", updated_summary["import_stats"]
-        )
+            1, updated_summary["import_stats"]["aggregated_obs_count"])
+        self.assertIn("aggregation_execution_time",
+                      updated_summary["import_stats"])
 
 
 if __name__ == "__main__":

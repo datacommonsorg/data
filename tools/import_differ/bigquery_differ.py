@@ -139,30 +139,24 @@ def format_key_combined_sql(
     """Returns a SQL expression computing key_combined identical to _flush_node_to_csv."""
 
     def _dcid_sql(expr: str) -> str:
-        return (
-            f"CASE WHEN COALESCE({expr}, '') = '' THEN '' "
-            f"WHEN {expr} LIKE 'dcid:%' THEN {expr} "
-            f"ELSE CONCAT('dcid:', {expr}) END"
-        )
+        return (f"CASE WHEN COALESCE({expr}, '') = '' THEN '' "
+                f"WHEN {expr} LIKE 'dcid:%' THEN {expr} "
+                f"ELSE CONCAT('dcid:', {expr}) END")
 
     def _quote_sql(expr: str) -> str:
-        return (
-            f"CASE WHEN COALESCE({expr}, '') = '' THEN '' "
-            f"WHEN {expr} LIKE '\"%\"' THEN {expr} "
-            f"ELSE CONCAT('\"', {expr}, '\"') END"
-        )
+        return (f"CASE WHEN COALESCE({expr}, '') = '' THEN '' "
+                f"WHEN {expr} LIKE '\"%\"' THEN {expr} "
+                f"ELSE CONCAT('\"', {expr}, '\"') END")
 
-    return (
-        f"CONCAT("
-        f"{_dcid_sql(var_expr)}, ';', "
-        f"{_dcid_sql(about_expr)}, ';', "
-        f"{_quote_sql(date_expr)}, ';', "
-        f"{_quote_sql(period_expr)}, ';', "
-        f"{_dcid_sql(method_expr)}, ';', "
-        f"{_dcid_sql(unit_expr)}, ';', "
-        f"{_quote_sql(scaling_expr)}"
-        f")"
-    )
+    return (f"CONCAT("
+            f"{_dcid_sql(var_expr)}, ';', "
+            f"{_dcid_sql(about_expr)}, ';', "
+            f"{_quote_sql(date_expr)}, ';', "
+            f"{_quote_sql(period_expr)}, ';', "
+            f"{_dcid_sql(method_expr)}, ';', "
+            f"{_dcid_sql(unit_expr)}, ';', "
+            f"{_quote_sql(scaling_expr)}"
+            f")")
 
 
 def cleanup_shared_bq_tables(
@@ -520,10 +514,12 @@ def run_bigquery_differ(
     curr_schema_table = f'{dataset_ref}.curr_schema_{suffix}'
     prev_schema_table = f'{dataset_ref}.prev_schema_{suffix}'
 
-    raw_obs_table = shared_table_ids.get('raw_obs') if shared_table_ids else None
+    raw_obs_table = shared_table_ids.get(
+        'raw_obs') if shared_table_ids else None
     raw_schema_table = (shared_table_ids.get('raw_schema')
                         if shared_table_ids else None)
-    agg_obs_table = shared_table_ids.get('agg_obs') if shared_table_ids else None
+    agg_obs_table = shared_table_ids.get(
+        'agg_obs') if shared_table_ids else None
 
     tables_to_delete: List[str] = []
 

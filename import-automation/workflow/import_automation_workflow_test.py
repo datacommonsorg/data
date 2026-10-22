@@ -430,8 +430,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
     def test_aggregation_job_success(self, mock_run_cr_job):
         context = {
             'params': {
-                'importName':
-                    'scripts/india_rbi:India_RBIStateDomesticProduct',
+                'importName': 'scripts/india_rbi:India_RBIStateDomesticProduct',
                 'importConfig': {
                     'custom_flag': True,
                 },
@@ -455,14 +454,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                                                         mock_report_failure):
         context = {
             'params': {
-                'importName':
-                    'scripts/india_rbi:India_RBIStateDomesticProduct',
-                'jobId':
-                    'test-agg-fail',
-                'projectId':
-                    'p',
-                'region':
-                    'r',
+                'importName': 'scripts/india_rbi:India_RBIStateDomesticProduct',
+                'jobId': 'test-agg-fail',
+                'projectId': 'p',
+                'region': 'r',
             }
         }
         mock_run_cr_job.side_effect = RuntimeError('Aggregation OOM')
@@ -524,10 +519,8 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
             'ti': ti_mock,
             'dag': dag_mock,
             'params': {
-                'importName':
-                    'scripts/india_rbi:India_RBIStateDomesticProduct',
-                'jobId':
-                    'test-job-agg',
+                'importName': 'scripts/india_rbi:India_RBIStateDomesticProduct',
+                'jobId': 'test-job-agg',
             },
         }
         summary = import_automation_workflow.workflow_summary.function(

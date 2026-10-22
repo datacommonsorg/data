@@ -42,17 +42,14 @@ from google.cloud import bigquery
 from omegaconf import OmegaConf
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_ROOT_DIR = (
-    _SCRIPT_DIR
-    if os.path.exists(os.path.join(_SCRIPT_DIR, "tools"))
-    else os.path.dirname(os.path.dirname(_SCRIPT_DIR))
-)
+_ROOT_DIR = (_SCRIPT_DIR if os.path.exists(os.path.join(_SCRIPT_DIR, "tools"))
+             else os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 
 for _p in [
-    _ROOT_DIR,
-    os.path.join(_ROOT_DIR, "util"),
-    os.path.join(_ROOT_DIR, "tools", "import_differ"),
-    os.path.join(_ROOT_DIR, "tools", "statvar_importer"),
+        _ROOT_DIR,
+        os.path.join(_ROOT_DIR, "util"),
+        os.path.join(_ROOT_DIR, "tools", "import_differ"),
+        os.path.join(_ROOT_DIR, "tools", "statvar_importer"),
 ]:
     if _p not in sys.path:
         sys.path.insert(0, _p)
@@ -133,7 +130,8 @@ def load_stat_var_aggregation_config(
 
     resolved_path = config_path or DEFAULT_CONFIG_PATH
     if not resolved_path or not os.path.exists(resolved_path):
-        logging.debug("StatVar aggregation config file not found at %s", resolved_path)
+        logging.debug("StatVar aggregation config file not found at %s",
+                      resolved_path)
         return []
 
     cfg = OmegaConf.load(resolved_path)
@@ -151,8 +149,7 @@ def load_stat_var_aggregation_config(
 
 
 def expand_stat_var_aggregation_config(
-    aggregations: Sequence[Dict[str, Any]],
-) -> List[Dict[str, Any]]:
+    aggregations: Sequence[Dict[str, Any]],) -> List[Dict[str, Any]]:
     """Expands chained/hierarchical StatVar aggregation rules in memory.
 
     When a rule's source_sv_ids contain another rule's ancestor_sv_id in the same
@@ -166,7 +163,8 @@ def expand_stat_var_aggregation_config(
         if anc:
             rule_map[str(anc)] = rule
 
-    def _expand_sources(sv_id: str, visited: set[str]) -> Tuple[List[str], bool]:
+    def _expand_sources(sv_id: str,
+                        visited: set[str]) -> Tuple[List[str], bool]:
         if sv_id not in rule_map or sv_id in visited:
             return [sv_id], False
         visited = visited | {sv_id}
@@ -206,8 +204,7 @@ def expand_stat_var_aggregation_config(
         if agg_method not in ALLOWED_AGG_METHODS:
             raise ValueError(
                 f"Unsupported aggregation_method '{agg_method}' for {anc}. "
-                f"Allowed methods: {sorted(ALLOWED_AGG_METHODS)}"
-            )
+                f"Allowed methods: {sorted(ALLOWED_AGG_METHODS)}")
 
         new_rule = copy.deepcopy(dict(rule))
         new_rule["ancestor_sv_id"] = anc
@@ -230,7 +227,7 @@ def _strip_mcf_value(raw_val: Any) -> str:
         val = val[1:-1]
     for prefix in ("dcid:", "dcs:", "schema:"):
         if val.startswith(prefix):
-            val = val[len(prefix) :]
+            val = val[len(prefix):]
             break
     return val.strip()
 
@@ -320,15 +317,13 @@ def parse_mcf_observations(mcf_paths: Iterable[str]) -> List[Dict[str, Any]]:
     return records
 
 
-def write_mcf_observations(
-    records: Sequence[Dict[str, Any]], output_mcf_path: str
-) -> None:
+def write_mcf_observations(records: Sequence[Dict[str, Any]],
+                           output_mcf_path: str) -> None:
     """Writes StatVarObservation records to a .mcf file (local or gs://)."""
     with bigquery_differ._open_text_stream(output_mcf_path, "w") as out_f:
         for idx, rec in enumerate(records):
             val_str = str(
-                rec.get("valueStr") or format_numeric_value(rec.get("value"))
-            )
+                rec.get("valueStr") or format_numeric_value(rec.get("value")))
             sv = _strip_mcf_value(rec.get("variableMeasured", ""))
             about = _strip_mcf_value(rec.get("observationAbout", ""))
             date = _strip_mcf_value(rec.get("observationDate", ""))
@@ -407,8 +402,7 @@ class _StatVarSummaryStats:
 
 
 def _format_summary_rows(
-    stats_by_sv: Mapping[str, _StatVarSummaryStats],
-) -> List[List[Any]]:
+    stats_by_sv: Mapping[str, _StatVarSummaryStats],) -> List[List[Any]]:
     """Formats per-StatVar summary accumulators into summary_report.csv rows."""
 
     def _fmt_java_set(items: Iterable[str]) -> str:
@@ -439,9 +433,8 @@ def _format_summary_rows(
 
 def update_summary_report_csv(
     summary_report_path: str,
-    aggregated_data: Union[
-        Sequence[Dict[str, Any]], Mapping[str, _StatVarSummaryStats]
-    ],
+    aggregated_data: Union[Sequence[Dict[str, Any]],
+                           Mapping[str, _StatVarSummaryStats]],
 ) -> None:
     """Appends summary statistics for aggregated StatVars to summary_report.csv (local or gs://)."""
     if not aggregated_data or not summary_report_path:
@@ -479,20 +472,25 @@ def update_summary_report_csv(
         return
 
     if is_gcs:
-        with bigquery_differ._open_text_stream(summary_report_path, "r") as in_f:
+        with bigquery_differ._open_text_stream(summary_report_path,
+                                               "r") as in_f:
             existing_rows = list(csv.reader(in_f))
         header = existing_rows[0] if existing_rows else []
         existing_body = existing_rows[1:] if len(existing_rows) > 1 else []
         new_sv_set = {r[0] for r in rows_to_append}
-        kept_body = [r for r in existing_body if not r or r[0] not in new_sv_set]
-        with bigquery_differ._open_text_stream(summary_report_path, "w") as out_f:
+        kept_body = [
+            r for r in existing_body if not r or r[0] not in new_sv_set
+        ]
+        with bigquery_differ._open_text_stream(summary_report_path,
+                                               "w") as out_f:
             writer = csv.writer(out_f)
             if header:
                 writer.writerow(header)
             writer.writerows(kept_body)
             writer.writerows(rows_to_append)
     else:
-        with open(summary_report_path, "r", encoding="utf-8", newline="") as in_f:
+        with open(summary_report_path, "r", encoding="utf-8",
+                  newline="") as in_f:
             existing_rows = list(csv.reader(in_f))
         header = existing_rows[0] if existing_rows else []
         existing_body = existing_rows[1:] if len(existing_rows) > 1 else []
@@ -501,18 +499,16 @@ def update_summary_report_csv(
             kept_body = [
                 r for r in existing_body if not r or r[0] not in new_sv_set
             ]
-            with open(
-                summary_report_path, "w", encoding="utf-8", newline=""
-            ) as out_f:
+            with open(summary_report_path, "w", encoding="utf-8",
+                      newline="") as out_f:
                 writer = csv.writer(out_f)
                 if header:
                     writer.writerow(header)
                 writer.writerows(kept_body)
                 writer.writerows(rows_to_append)
         else:
-            with open(
-                summary_report_path, "a", encoding="utf-8", newline=""
-            ) as csv_f:
+            with open(summary_report_path, "a", encoding="utf-8",
+                      newline="") as csv_f:
                 writer = csv.writer(csv_f)
                 writer.writerows(rows_to_append)
 
@@ -553,15 +549,14 @@ def build_bigquery_agg_obs_sql(
     struct_literals = []
     for idx, anc, src, expected_count, skip_check, agg_method in rule_rows:
         skip_literal = "TRUE" if skip_check else "FALSE"
-        struct_literals.append(
-            f"STRUCT({idx} AS rule_id, "
-            f"'{_sql_escape(anc)}' AS ancestor_sv_id, "
-            f"'{_sql_escape(src)}' AS source_sv_id, "
-            f"{expected_count} AS expected_source_count, "
-            f"{skip_literal} AS skip_check, "
-            f"'{_sql_escape(agg_method)}' AS agg_method)"
-        )
-    rules_cte = "SELECT * FROM UNNEST([\n            " + ",\n            ".join(struct_literals) + "\n        ])"
+        struct_literals.append(f"STRUCT({idx} AS rule_id, "
+                               f"'{_sql_escape(anc)}' AS ancestor_sv_id, "
+                               f"'{_sql_escape(src)}' AS source_sv_id, "
+                               f"{expected_count} AS expected_source_count, "
+                               f"{skip_literal} AS skip_check, "
+                               f"'{_sql_escape(agg_method)}' AS agg_method)")
+    rules_cte = "SELECT * FROM UNNEST([\n            " + ",\n            ".join(
+        struct_literals) + "\n        ])"
     key_combined_expr = bigquery_differ.format_key_combined_sql(
         var_expr="sv_id",
         about_expr="observationAbout",
@@ -854,7 +849,8 @@ def build_duckdb_agg_obs_sql(
     """
 
 
-def _extract_row_fields(row: Any) -> Tuple[str, str, str, str, str, str, str, str]:
+def _extract_row_fields(
+        row: Any) -> Tuple[str, str, str, str, str, str, str, str]:
     """Extracts (variableMeasured, value, observationAbout, observationDate, observationPeriod, measurementMethod, unit, scalingFactor) from a DB row."""
     if isinstance(row, Mapping):
         var_m = row.get("variableMeasured", "")
@@ -905,14 +901,12 @@ def _stream_chunks_to_mcf_and_summary(
         for chunk in chunks:
             for row in chunk:
                 sv, val_str, about, date, period, method, unit, scaling = (
-                    _extract_row_fields(row)
-                )
+                    _extract_row_fields(row))
                 if not (sv and about and date and val_str):
                     continue
                 if out_stream is None:
                     out_stream = stack.enter_context(
-                        bigquery_differ._open_text_stream(output_mcf_path, "w")
-                    )
+                        bigquery_differ._open_text_stream(output_mcf_path, "w"))
                 dcid = compute_observation_dcid(
                     variable_measured=sv,
                     observation_about=about,
@@ -1003,15 +997,15 @@ def run_bigquery_aggregation(
 
     if not project_id:
         project_id = os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get(
-            "PROJECT_ID", ""
-        )
+            "PROJECT_ID", "")
 
     client = bq_client or bigquery.Client(project=project_id or None)
-    effective_project = project_id or getattr(client, "project", "") or "default"
+    effective_project = project_id or getattr(client, "project",
+                                              "") or "default"
     dataset_ref = f"{effective_project}.{dataset_id}"
-    bigquery_differ.ensure_bq_dataset(
-        client, dataset_ref, expiration_hours=expiration_hours
-    )
+    bigquery_differ.ensure_bq_dataset(client,
+                                      dataset_ref,
+                                      expiration_hours=expiration_hours)
 
     table_ids = bigquery_differ.get_import_bq_table_ids(
         dataset_ref=dataset_ref,
@@ -1064,9 +1058,8 @@ def run_bigquery_aggregation(
     client.query(create_agg_sql).result()
 
     agg_table = client.get_table(agg_obs_table)
-    agg_table.expires = datetime.now(timezone.utc) + timedelta(
-        hours=expiration_hours
-    )
+    agg_table.expires = datetime.now(
+        timezone.utc) + timedelta(hours=expiration_hours)
     client.update_table(agg_table, ["expires"])
 
     logging.info(
@@ -1104,12 +1097,10 @@ def run_bigquery_aggregation(
     }
 
 
-def _register_rules_in_duckdb(
-    con: duckdb.DuckDBPyConnection, expanded_rules: Sequence[Dict[str, Any]]
-) -> None:
+def _register_rules_in_duckdb(con: duckdb.DuckDBPyConnection,
+                              expanded_rules: Sequence[Dict[str, Any]]) -> None:
     """Creates and populates rules_table in DuckDB."""
-    con.execute(
-        """
+    con.execute("""
         CREATE TEMP TABLE rules_table (
             rule_id INTEGER,
             ancestor_sv_id VARCHAR,
@@ -1118,18 +1109,15 @@ def _register_rules_in_duckdb(
             skip_check BOOLEAN,
             agg_method VARCHAR
         )
-        """
-    )
+        """)
     rule_rows = _flatten_rules_rows(expanded_rules)
     if rule_rows:
-        con.executemany(
-            "INSERT INTO rules_table VALUES (?, ?, ?, ?, ?, ?)", rule_rows
-        )
+        con.executemany("INSERT INTO rules_table VALUES (?, ?, ?, ?, ?, ?)",
+                        rule_rows)
 
 
-def _iter_duckdb_chunks(
-    cursor: duckdb.DuckDBPyConnection, chunk_size: int = 10000
-) -> Iterator[List[Any]]:
+def _iter_duckdb_chunks(cursor: duckdb.DuckDBPyConnection,
+                        chunk_size: int = 10000) -> Iterator[List[Any]]:
     """Yields chunks of rows from a DuckDB cursor using fetchmany."""
     while True:
         chunk = cursor.fetchmany(chunk_size)
@@ -1184,8 +1172,7 @@ def run_duckdb_aggregation(
             _register_rules_in_duckdb(con, expanded_rules)
 
             escaped_csv = obs_csv_path.replace("'", "''")
-            con.execute(
-                f"""
+            con.execute(f"""
                 CREATE VIEW raw_obs AS
                 SELECT * FROM read_csv(
                     '{escaped_csv}',
@@ -1204,8 +1191,7 @@ def run_duckdb_aggregation(
                     }},
                     nullstr = ''
                 )
-                """
-            )
+                """)
 
             create_agg_sql = build_duckdb_agg_obs_sql(
                 raw_obs_view="raw_obs",
@@ -1219,12 +1205,9 @@ def run_duckdb_aggregation(
                 raw_tuples = con.execute(
                     f"SELECT {', '.join(col_names)} FROM agg_obs ORDER BY row_num"
                 ).fetchall()
-                agg_obs_rows = [
-                    dict(zip(col_names, tup)) for tup in raw_tuples
-                ]
+                agg_obs_rows = [dict(zip(col_names, tup)) for tup in raw_tuples]
 
-            cursor = con.execute(
-                """
+            cursor = con.execute("""
                 SELECT
                     variableMeasured,
                     value,
@@ -1236,8 +1219,7 @@ def run_duckdb_aggregation(
                     scalingFactor
                 FROM agg_obs
                 ORDER BY row_num
-                """
-            )
+                """)
             agg_obs_count = _stream_chunks_to_mcf_and_summary(
                 chunks=_iter_duckdb_chunks(cursor, chunk_size=chunk_size),
                 output_mcf_path=output_mcf_path,
@@ -1309,17 +1291,12 @@ def run_stat_var_aggregation_for_genmcf(
 
     is_gcs = file_util.file_is_gcs(genmcf_output_path)
     base_dir = genmcf_output_path.rstrip("/")
-    mcf_pattern = f"{base_dir}/*.mcf" if is_gcs else os.path.join(base_dir, "*.mcf")
-    output_mcf_path = (
-        f"{base_dir}/{STAT_VAR_AGG_MCF_FILENAME}"
-        if is_gcs
-        else os.path.join(base_dir, STAT_VAR_AGG_MCF_FILENAME)
-    )
-    summary_csv_path = (
-        f"{base_dir}/summary_report.csv"
-        if is_gcs
-        else os.path.join(base_dir, "summary_report.csv")
-    )
+    mcf_pattern = f"{base_dir}/*.mcf" if is_gcs else os.path.join(
+        base_dir, "*.mcf")
+    output_mcf_path = (f"{base_dir}/{STAT_VAR_AGG_MCF_FILENAME}" if is_gcs else
+                       os.path.join(base_dir, STAT_VAR_AGG_MCF_FILENAME))
+    summary_csv_path = (f"{base_dir}/summary_report.csv" if is_gcs else
+                        os.path.join(base_dir, "summary_report.csv"))
 
     if not is_gcs and not os.path.exists(genmcf_output_path):
         logging.warning(

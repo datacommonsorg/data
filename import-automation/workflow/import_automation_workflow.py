@@ -1213,8 +1213,8 @@ def workflow_summary(**context) -> dict[str, Any]:
         dag.task_ids) if dag and hasattr(dag, "task_ids") else None
     has_golden = (("verify_golden_tests" in dag_task_ids) if dag_task_ids
                   is not None else is_golden_test_import(cfg["importName"]))
-    has_aggregation = bool(
-        dag_task_ids and "run_aggregation_job" in dag_task_ids)
+    has_aggregation = bool(dag_task_ids and
+                           "run_aggregation_job" in dag_task_ids)
     has_validation = bool(dag_task_ids and "run_validation_job" in dag_task_ids)
     stages = [
         ("import", "run_import_job"),
