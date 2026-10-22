@@ -10,6 +10,15 @@
             }
         },
         {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that active Monthly TotalEnergy StatVars have observations within 1 year of the current year and active Annual StatVars are within 2 years.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE NOT regexp_matches(StatVar, '^eia/TOTAL\\.(((AV|D2|DS|JK|KS|MG|PR|RB|RF|RO)(TCU|WHU)|CLRC[BEP]|D2RC[AO]|BOIMP|COQIP|ESOTU|GEC9S|HPC9S|NGWPU|OGWSP|RLUCU)\\.[AM]|GEC9P\\.M|NGVHU\\.A)$')",
+                "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '(\\.M$|^Monthly_)') THEN 1 ELSE 2 END"
+            }
+        },
+        {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
