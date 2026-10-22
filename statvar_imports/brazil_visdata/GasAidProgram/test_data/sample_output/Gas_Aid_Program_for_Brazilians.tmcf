@@ -1,0 +1,9 @@
+Node: E:Gas_Aid_Program_for_Brazilians->E0
+observationAbout: C:Gas_Aid_Program_for_Brazilians->observationAbout
+observationDate: C:Gas_Aid_Program_for_Brazilians->observationDate
+value: C:Gas_Aid_Program_for_Brazilians->value
+variableMeasured: C:Gas_Aid_Program_for_Brazilians->variableMeasured
+unit: C:Gas_Aid_Program_for_Brazilians->unit
+scalingFactor: C:Gas_Aid_Program_for_Brazilians->scalingFactor
+typeOf: dcs:StatVarObservation
+observationPeriod: P1M
