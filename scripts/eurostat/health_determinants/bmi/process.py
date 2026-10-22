@@ -128,16 +128,11 @@ class EuroStatBMI(EuroStat):
         """Correcting the property values."""
         for k, v in self._sv_properties.items():
             if k == "incomequin":
-                self._sv_properties[k] = (
-                    v.replace("To", " ")
-                    .replace("Percentile", " Percentile")
-                    .replace("IncomeOf", "")
-                )
+                self._sv_properties[k] = (v.replace("To", " ").replace(
+                    "Percentile", " Percentile").replace("IncomeOf", ""))
             elif k == "education":
-                self._sv_properties[k] = (
-                    v.replace("Or", "__")
-                    .replace("EducationalAttainment", "")
-                )
+                self._sv_properties[k] = (v.replace("Or", "__").replace(
+                    "EducationalAttainment", ""))
             elif k == "countryofbirth":
                 self._sv_properties[k] = v.replace("CountryOfBirth", "")
             elif k == "citizenship":
@@ -146,16 +141,13 @@ class EuroStatBMI(EuroStat):
     # over-ridden parent abstract method
     def _sv_name_correction(self, sv_name: str) -> str:
         """Correcting the StatVar name."""
-        return (
-            sv_name.replace("ACitizen", "A Citizen")
-            .replace("To", " To ")
-            .replace("Of", "Of ")
-            .replace("Normalweight", "Normal Weight")
-            .replace(" Among Population", "")
-            .replace(" Population", "")
-            .replace('name: "', 'name: "Population: ')
-            .replace("  ", " ")
-        )
+        return (sv_name.replace("ACitizen", "A Citizen").replace(
+            "To", " To ").replace("Of", "Of ").replace(
+                "Normalweight",
+                "Normal Weight").replace(" Among Population", "").replace(
+                    " Population",
+                    "").replace('name: "',
+                                'name: "Population: ').replace("  ", " "))
 
 
 def main(_):
