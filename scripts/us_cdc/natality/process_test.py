@@ -27,6 +27,18 @@ if _SCRIPT_PATH not in sys.path:
 
 import process
 
+_ALL_MEASURES_HEADER = ('\t'.join([
+    'Births',
+    'Average Age of Mother (years)',
+    'Average OE Gestational Age (weeks)',
+    'Average LMP Gestational Age (weeks)',
+    'Average Birth Weight (grams)',
+    'Average Pre-pregnancy BMI',
+    'Average Number of Prenatal Visits',
+    'Average Interval Since Last Live Birth (months)',
+    'Average Interval Since Last Other Pregnancy Outcome (months)',
+]))
+
 
 class ProcessPipelineTest(unittest.TestCase):
 
@@ -41,21 +53,25 @@ class ProcessPipelineTest(unittest.TestCase):
 
             with open(sample_state_tsv, 'w', encoding='utf-8') as f:
                 f.write(
-                    '"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\tBirths\tAverage Birth Weight (grams)\n'
+                    f'"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\t{_ALL_MEASURES_HEADER}\n'
                 )
-                f.write('\t"Alabama"\t"01"\t"2020"\t"2020"\t57647\t3179.09\n')
-                f.write('\t"Alaska"\t"02"\t"2020"\t"2020"\t9469\t3378.93\n')
-                f.write('"Total"\t\t\t\t\t67116\t\n')
+                f.write(
+                    '\t"Alabama"\t"01"\t"2020"\t"2020"\t57647\t28.1\t38.2\t38.4\t3179.09\t27.5\t10.5\t42.1\t35.2\n'
+                )
+                f.write(
+                    '\t"Alaska"\t"02"\t"2020"\t"2020"\t9469\t29.0\t38.6\t38.8\t3378.93\t27.1\t10.8\t40.3\t33.8\n'
+                )
+                f.write('"Total"\t\t\t\t\t67116\t\t\t\t\t\t\t\t\n')
                 f.write('"---"\n')
 
             with open(sample_county_tsv, 'w', encoding='utf-8') as f:
                 f.write(
-                    '"Notes"\t"County of Residence"\t"County of Residence Code"\t"Year"\t"Year Code"\tBirths\tAverage Birth Weight (grams)\n'
+                    f'"Notes"\t"County of Residence"\t"County of Residence Code"\t"Year"\t"Year Code"\t{_ALL_MEASURES_HEADER}\n'
                 )
                 f.write(
-                    '\t"Baldwin County, AL"\t"01003"\t"2020"\t"2020"\t2245\t3250.50\n'
+                    '\t"Baldwin County, AL"\t"01003"\t"2020"\t"2020"\t2245\t28.5\t38.3\t38.5\t3250.50\t26.9\t11.0\t43.0\t36.0\n'
                 )
-                f.write('"Total"\t\t\t\t\t2245\t\n')
+                f.write('"Total"\t\t\t\t\t2245\t\t\t\t\t\t\t\t\n')
                 f.write('"---"\n')
 
             process_py = os.path.join(_SCRIPT_PATH, 'process.py')
@@ -123,8 +139,7 @@ class ProcessPipelineTest(unittest.TestCase):
                 all(county_df['Geo'].str.match(r'^geoId/\d{5}$')),
                 f"Invalid county Geo DCIDs found: {county_df['Geo'].unique()}")
 
-    def test_aggregate_all_nan_excluded(self):
-        # StatVar with valid numbers should aggregate, but StatVar with all NaN/unreliable should be excluded
+    def test_aggregate_all_nan_and_zero_unknown_placeholders_excluded(self):
         test_df = pd.DataFrame([
             {
                 'Year': '2020',
@@ -150,39 +165,200 @@ class ProcessPipelineTest(unittest.TestCase):
                 'StatVar': 'Count_BirthEvent_UnreliableData',
                 'Quantity': ''
             },
+            {
+                'Year':
+                    '2020',
+                'Geo':
+                    'geoId/01',
+                'StatVar':
+                    'Count_BirthEvent_LiveBirth_MotherRaceUnknownOrNotStated',
+                'Quantity':
+                    '0.0'
+            },
+            {
+                'Year':
+                    '2020',
+                'Geo':
+                    'geoId/01',
+                'StatVar':
+                    'Count_BirthEvent_LiveBirth_MotherMaritalStatusUnknownOrNotStated',
+                'Quantity':
+                    '0'
+            },
         ])
         agg_df = process.aggregate_state_to_country(test_df)
         stat_vars = agg_df['StatVar'].tolist()
         self.assertIn('Count_BirthEvent_LiveBirth', stat_vars)
         self.assertNotIn('Count_BirthEvent_UnreliableData', stat_vars)
+        self.assertNotIn(
+            'Count_BirthEvent_LiveBirth_MotherRaceUnknownOrNotStated',
+            stat_vars)
+        self.assertNotIn(
+            'Count_BirthEvent_LiveBirth_MotherMaritalStatusUnknownOrNotStated',
+            stat_vars)
         valid_row = agg_df[agg_df['StatVar'] == 'Count_BirthEvent_LiveBirth']
         self.assertEqual(str(valid_row.iloc[0]['Quantity']), '300')
 
-    def test_validation_config_deleted_records(self):
+    def test_validation_config_and_manifest(self):
+        manifest_path = os.path.join(_SCRIPT_PATH, 'manifest.json')
+        with open(manifest_path, encoding='utf-8') as f:
+            manifest = json.load(f)
+        spec = manifest['import_specifications'][0]
+        self.assertEqual(spec.get('validation_config_file'),
+                         'validation_config.json')
+
         config_path = os.path.join(_SCRIPT_PATH, 'validation_config.json')
-        with open(config_path) as f:
+        with open(config_path, encoding='utf-8') as f:
             cfg = json.load(f)
 
         self.assertEqual(cfg.get('schema_version'), '1.0')
-        rules = cfg.get('rules', [])
-        self.assertEqual(len(rules), 1)
-        rule = rules[0]
-        self.assertEqual(rule.get('rule_id'), 'check_deleted_records_percent')
-        self.assertEqual(rule.get('validator'), 'DELETED_RECORDS_PERCENT')
-        self.assertAlmostEqual(rule.get('params', {}).get('threshold'), 0.1)
+        rules = {r['rule_id']: r for r in cfg.get('rules', [])}
+        self.assertIn('check_latest_date_freshness', rules)
+        self.assertIn('check_scoped_date_consistency_active_statvars', rules)
+        self.assertIn('check_deleted_records_percent', rules)
+
+        del_rule = rules['check_deleted_records_percent']
+        self.assertEqual(del_rule.get('validator'), 'DELETED_RECORDS_PERCENT')
+        self.assertGreater(del_rule.get('params', {}).get('threshold', 0), 0)
+
+        try:
+            import duckdb
+        except ImportError:
+            return
+
+        con = duckdb.connect()
+
+        # Rule 1: check_latest_date_freshness
+        rule1 = rules['check_latest_date_freshness']
+        q1 = rule1['params']['query']
+        c1 = rule1['params']['condition']
+
+        valid_stats = pd.DataFrame([{
+            'StatVar': 'Count_BirthEvent_LiveBirth',
+            'MaxDate': '2024'
+        }])
+        con.register('stats', valid_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
+        ).fetchdf()
+        self.assertTrue(failing_df.empty,
+                        f'Expected valid stats to pass rule 1: {failing_df}')
+
+        invalid_stats = pd.DataFrame([{
+            'StatVar': 'Count_BirthEvent_LiveBirth',
+            'MaxDate': '2018'
+        }])
+        con.register('stats', invalid_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
+        ).fetchdf()
+        self.assertFalse(failing_df.empty,
+                         'Expected stale stats to fail rule 1')
+
+        future_stats = pd.DataFrame([{
+            'StatVar': 'Count_BirthEvent_LiveBirth',
+            'MaxDate': '2030'
+        }])
+        con.register('stats', future_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
+        ).fetchdf()
+        self.assertFalse(failing_df.empty,
+                         'Expected future stats to fail rule 1')
+
+        empty_stats = pd.DataFrame([{
+            'StatVar': 'Other_StatVar',
+            'MaxDate': '2024'
+        }])
+        con.register('stats', empty_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q1}) SELECT * FROM data_to_validate WHERE NOT ({c1})'
+        ).fetchdf()
+        self.assertFalse(
+            failing_df.empty,
+            'Expected missing Count_BirthEvent_LiveBirth to fail rule 1')
+
+        # Rule 2: check_scoped_date_consistency_active_statvars
+        rule2 = rules['check_scoped_date_consistency_active_statvars']
+        q2 = rule2['params']['query']
+        c2 = rule2['params']['condition']
+
+        active_statvars = [
+            'Count_BirthEvent_LiveBirth',
+            'Mean_MothersAge_BirthEvent_LiveBirth',
+            'Mean_OeGestationalAge_BirthEvent_LiveBirth',
+            'Mean_LmpGestationalAge_BirthEvent_LiveBirth',
+            'Mean_BirthWeight_BirthEvent_LiveBirth',
+            'Mean_PrePregnancyBMI_BirthEvent_LiveBirth',
+            'Mean_PrenatalVisitCount_BirthEvent_LiveBirth',
+            'Mean_IntervalSinceLastBirth_BirthEvent_LiveBirth',
+            'Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth',
+        ]
+        all_active_stats = pd.DataFrame([{
+            'StatVar': sv,
+            'MaxDate': '2024'
+        } for sv in active_statvars])
+        con.register('stats', all_active_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
+        ).fetchdf()
+        self.assertTrue(
+            failing_df.empty,
+            f'Expected 9 active stats to pass rule 2: {failing_df}')
+
+        country_stats = pd.DataFrame([{
+            'StatVar': 'Count_BirthEvent_LiveBirth',
+            'MaxDate': '2024'
+        }])
+        con.register('stats', country_stats)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
+        ).fetchdf()
+        self.assertTrue(
+            failing_df.empty,
+            f'Expected 1 active stat (country level) to pass rule 2: {failing_df}'
+        )
+
+        missing_active = pd.DataFrame([{
+            'StatVar': sv,
+            'MaxDate': '2024'
+        } for sv in active_statvars[:8]])
+        con.register('stats', missing_active)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
+        ).fetchdf()
+        self.assertFalse(failing_df.empty,
+                         'Expected missing statvar to fail rule 2')
+
+        mismatch_dates = all_active_stats.copy()
+        mismatch_dates.loc[0, 'MaxDate'] = '2023'
+        con.register('stats', mismatch_dates)
+        failing_df = con.execute(
+            f'WITH data_to_validate AS ({q2}) SELECT * FROM data_to_validate WHERE NOT ({c2})'
+        ).fetchdf()
+        self.assertFalse(failing_df.empty,
+                         'Expected date mismatch to fail rule 2')
 
     def test_parse_wonder_tsv_with_footnote_and_invalid_fips(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             sample_tsv = os.path.join(tmp_dir, 'state_sample.tsv')
             with open(sample_tsv, 'w', encoding='utf-8') as f:
                 f.write(
-                    '"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\tBirths\tAverage Age of Mother (years)\n'
+                    f'"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\t{_ALL_MEASURES_HEADER}\n'
                 )
-                f.write('\t"Alabama"\t"01"\t"2022"\t"2022"\t58000\t28.5\n')
-                f.write('1\t"Alaska"\t"02"\t"2022"\t"2022"\t9500\t29.1\n')
-                f.write('*\t"Arizona"\t"04"\t"2022"\t"2022"\t78000\t29.3\n')
-                f.write('\t"Unidentified"\t"99"\t"2022"\t"2022"\t500\t27.0\n')
-                f.write('"Total"\t\t\t\t\t146000\t\n')
+                f.write(
+                    '\t"Alabama"\t"01"\t"2022"\t"2022"\t58000\t28.5\t38.2\t38.4\t3180.0\t27.5\t10.5\t42.0\t35.0\n'
+                )
+                f.write(
+                    '1\t"Alaska"\t"02"\t"2022"\t"2022"\t9500\t29.1\t38.6\t38.8\t3380.0\t27.1\t10.8\t40.0\t34.0\n'
+                )
+                f.write(
+                    '*\t"Arizona"\t"04"\t"2022"\t"2022"\t78000\t29.3\t38.4\t38.5\t3210.0\t27.3\t10.6\t41.0\t35.5\n'
+                )
+                f.write(
+                    '\t"Unidentified"\t"99"\t"2022"\t"2022"\t500\t27.0\t38.0\t38.0\t3100.0\t26.0\t10.0\t40.0\t30.0\n'
+                )
+                f.write('"Total"\t\t\t\t\t146000\t\t\t\t\t\t\t\t\n')
                 f.write('"---"\n')
 
             df = process.parse_wonder_tsv(sample_tsv, geo_type='state')
@@ -198,6 +374,39 @@ class ProcessPipelineTest(unittest.TestCase):
                           'Mean_MothersAge_BirthEvent_LiveBirth']
             self.assertEqual(len(age_rows), 3)
             self.assertTrue(all(age_rows['Unit'] == 'Year'))
+
+    def test_parse_wonder_tsv_missing_measure_columns_raises(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            sample_tsv = os.path.join(tmp_dir, 'incomplete_sample.tsv')
+            with open(sample_tsv, 'w', encoding='utf-8') as f:
+                f.write(
+                    '"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\tBirths\n'
+                )
+                f.write('\t"Alabama"\t"01"\t"2024"\t"2024"\t58000\n')
+
+            with self.assertRaises(ValueError):
+                process.parse_wonder_tsv(sample_tsv, geo_type='state')
+
+    def test_parse_wonder_tsv_demographic_slices(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            age_tsv = os.path.join(tmp_dir, 'state_age_raw.tsv')
+            with open(age_tsv, 'w', encoding='utf-8') as f:
+                f.write(
+                    f'"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\t"Age of Mother 13"\t"Age of Mother 13 Code"\t{_ALL_MEASURES_HEADER}\n'
+                )
+                f.write(
+                    '\t"Alabama"\t"01"\t"2024"\t"2024"\t"Under 15 years"\t"15-"\t45\t13.8\t38.1\t37.9\t3010.0\t24.0\t8.5\t12.0\tNot Applicable\n'
+                )
+
+            df_age = process.parse_wonder_tsv(age_tsv, geo_type='state')
+            svs = set(df_age['StatVar'].unique())
+            self.assertIn('Count_BirthEvent_LiveBirth_Mother15OrMoreYears', svs)
+            self.assertIn(
+                'Mean_BirthWeight_BirthEvent_LiveBirth_Mother15OrMoreYears',
+                svs)
+            # Average Age of Mother is excluded when grouped by Age of Mother
+            self.assertNotIn(
+                'Mean_MothersAge_BirthEvent_LiveBirth_Mother15OrMoreYears', svs)
 
     def test_chronological_bracket_deduplication(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -272,21 +481,23 @@ class ProcessPipelineTest(unittest.TestCase):
             sample_state_tsv = os.path.join(input_dir, 'state_raw.tsv')
             with open(sample_state_tsv, 'w', encoding='utf-8') as f:
                 f.write(
-                    '"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\tBirths\tAverage OE Gestational Age (weeks)\n'
+                    f'"Notes"\t"State of Residence"\t"State of Residence Code"\t"Year"\t"Year Code"\t{_ALL_MEASURES_HEADER}\n'
                 )
-                f.write('\t"Alabama"\t"01"\t"2024"\t"2024"\t55000\t38.7\n')
-                f.write('"Total"\t\t\t\t\t55000\t\n')
+                f.write(
+                    '\t"Alabama"\t"01"\t"2024"\t"2024"\t55000\t28.9\t38.7\t38.8\t3190.0\t27.8\t10.6\t42.5\t35.8\n'
+                )
+                f.write('"Total"\t\t\t\t\t55000\t\t\t\t\t\t\t\t\n')
                 f.write('"---"\n')
 
             sample_county_tsv = os.path.join(input_dir, 'county_raw.tsv')
             with open(sample_county_tsv, 'w', encoding='utf-8') as f:
                 f.write(
-                    '"Notes"\t"County of Residence"\t"County of Residence Code"\t"Year"\t"Year Code"\tBirths\tAverage OE Gestational Age (weeks)\n'
+                    f'"Notes"\t"County of Residence"\t"County of Residence Code"\t"Year"\t"Year Code"\t{_ALL_MEASURES_HEADER}\n'
                 )
                 f.write(
-                    '\t"Baldwin County, AL"\t"01003"\t"2024"\t"2024"\t2300\t38.7\n'
+                    '\t"Baldwin County, AL"\t"01003"\t"2024"\t"2024"\t2300\t28.7\t38.7\t38.8\t3260.0\t27.0\t11.1\t43.2\t36.1\n'
                 )
-                f.write('"Total"\t\t\t\t\t2300\t\n')
+                f.write('"Total"\t\t\t\t\t2300\t\t\t\t\t\t\t\t\n')
                 f.write('"---"\n')
 
             process_py = os.path.join(_SCRIPT_PATH, 'process.py')

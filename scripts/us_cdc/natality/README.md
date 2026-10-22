@@ -36,7 +36,7 @@ scripts/us_cdc/natality/
 ├── process.py              # End-to-end data parsing, melting, aggregation, and TMCF generator
 ├── process_test.py         # Unit tests for process.py
 ├── manifest.json           # Import automation specification (Cloud Batch/Scheduler)
-├── validation_config.json  # Import validation configuration (deleted records threshold)
+├── validation_config.json  # Import validation configuration (date freshness, consistency, deleted records)
 └── README.md               # Pipeline documentation
 ```
 
@@ -45,16 +45,16 @@ scripts/us_cdc/natality/
 ## Full Automation Architecture
 
 1. **Automated Download (`download.py`)**:
-   - **Historical Baseline**: Automatically retrieves the immutable historical baseline (1995–2022) with demographic breakdowns (Mother's Age, Race, Ethnicity, Education, etc.) from `gs://unresolved_mcf/cdc/wonder/natality/` to ensure zero historical data loss.
-   - **Live Updates**: Uses Selenium with headless Google Chrome (`--headless=new`, `--no-sandbox`) to access CDC WONDER directly, bypassing CDN/WAF restrictions, accepting the Data Use Agreement in the browser DOM, selecting all years, enabling all maternal/infant health measures, and downloading the latest State and County TSV exports directly into `input_files/`.
-   - **Future-Proof**: Dynamically captures newly published years without requiring code changes.
+   - **Historical Baseline**: Automatically retrieves the historical baseline (1995–2022) across all brackets (`95-02`, `03-06`, `07-20`, `16-22`) from `gs://unresolved_mcf/cdc/wonder/natality/` to preserve historical records.
+   - **Live Updates (Totals + 6 Demographic Breakdowns)**: Uses Selenium with headless Google Chrome (`--headless=new`, `--no-sandbox`) to query CDC WONDER Expanded Natality (`2016–Present`) across both un-sliced totals (`B_3 = *None*`) and all 6 active demographic Group-By (`B_3`) dimensions (`Age of Mother 13`, `Mother's Single Race 15`, `Mother's Education`, `Mother's Hispanic Origin`, `Marital Status`, and `Mother's Nativity`) for State and County levels.
+   - **Fail-Fast & Retry Resilience**: Verifies that all expected maternal/infant health measure checkboxes are selected and retries transient failures with exponential backoff.
 
 2. **Data Processing & TMCF Generation (`process.py`)**:
-   - Cleans the raw TSVs by removing metadata, footers, and subtotal rows.
-   - Maps raw measure columns to standardized Data Commons StatisticalVariables and schema-compliant Units (`Week`, `Gram`, `Month`, `Year`).
-   - Resolves FIPS codes into Data Commons DCIDs (`geoId/XX` for State, `geoId/XXXXX` for County) and filters invalid/unidentified placeholder codes (`geoId/99`, `geoId/99999`).
-   - Merges live scraped records on top of the historical baseline (updating overlapping records and appending new years like 2023–2024).
-   - Aggregates State-level counts into national Country totals (`output/country.csv`).
+   - Cleans raw TSV exports by removing metadata, footers, and subtotal rows, and validates that all expected measure columns are present.
+   - Maps raw measure columns and demographic codes (`Age of Mother 13 Code`, `Mother's Single Race 15 Code`, `Mother's Education Code`, `Mother's Hispanic Origin Code`, `Marital Status Code`, `Mother's Nativity Code`) to canonical Data Commons StatisticalVariables and schema-compliant Units (`Week`, `Gram`, `Month`, `Year`).
+   - Resolves FIPS codes into Data Commons DCIDs (`geoId/XX` for State, `geoId/XXXXX` for County) and filters invalid/unidentified placeholder codes (`geoId/99`, `geoId/99999`) as well as `0.0` placeholder rows on `"Not Available"` unknown/unstated slices.
+   - Merges live records on top of the historical baseline in chronological bracket order.
+   - Computes national Country totals (`output/country.csv`) directly by aggregating `Count_*` StatisticalVariables from the consolidated State dataset.
    - Automatically writes Template MCF files (`country.tmcf`, `state.tmcf`, `county.tmcf`) to `output/`.
 
 ---

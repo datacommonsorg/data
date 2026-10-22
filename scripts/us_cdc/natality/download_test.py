@@ -160,12 +160,50 @@ class DownloadTest(unittest.TestCase):
     def test_download_all_retries_and_fatal_failure(self, mock_sleep,
                                                     mock_fatal, mock_download,
                                                     mock_driver, mock_baseline):
-        """Verifies download_all retries up to max_retries before logging fatal."""
+        """Verifies download_all retries up to max_retries without sleeping after final attempt."""
         mock_download.side_effect = RuntimeError('Download connection error')
         with tempfile.TemporaryDirectory() as tmp_out:
             download.download_all(tmp_out, max_retries=3, timeout=1)
             self.assertEqual(mock_download.call_count, 3)
+            self.assertEqual(mock_sleep.call_count, 2)
             mock_fatal.assert_called_once()
+
+    @patch('download.time.sleep', return_value=None)
+    def test_download_natality_dataset_missing_measure_checkbox_raises(self, _):
+        """Verifies RuntimeError is raised when an optional measure checkbox is missing."""
+        mock_driver = MagicMock()
+        mock_select_el = MagicMock()
+        mock_select_el.tag_name = 'select'
+        mock_option = MagicMock()
+        mock_select_el.find_elements.return_value = [mock_option]
+
+        def fake_find_element(by, value):
+            if by == download.By.ID and value in download._OPTIONAL_MEASURES:
+                raise RuntimeError(f'Element {value} not found')
+            return mock_select_el
+
+        mock_driver.find_element.side_effect = fake_find_element
+        mock_driver.find_elements.return_value = [mock_select_el]
+
+        with tempfile.TemporaryDirectory() as tmp_dl_dir:
+            dest_file = os.path.join(tmp_dl_dir, 'out.tsv')
+            with self.assertRaises(RuntimeError):
+                download.download_natality_dataset(mock_driver,
+                                                   geo_level='state',
+                                                   download_tmp_dir=tmp_dl_dir,
+                                                   dest_path=dest_file,
+                                                   timeout=1)
+
+    @patch('download.download_historical_baseline')
+    @patch('download.create_chrome_driver')
+    @patch('download.download_natality_dataset')
+    def test_download_all_queries_all_demographic_slices(
+            self, mock_download, mock_driver, mock_baseline):
+        """Verifies download_all queries total and all 6 demographic B_3 slices for state and county."""
+        with tempfile.TemporaryDirectory() as tmp_out:
+            download.download_all(tmp_out, max_retries=1, timeout=1)
+            expected_calls = 2 * len(download._DEMOGRAPHIC_SLICES)
+            self.assertEqual(mock_download.call_count, expected_calls)
 
 
 if __name__ == '__main__':

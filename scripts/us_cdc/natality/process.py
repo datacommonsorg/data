@@ -64,12 +64,92 @@ _MEASURE_MAP = {
         'Month'),
 }
 
+_DEMOGRAPHIC_CODE_MAP = {
+    'Age of Mother 13 Code': {
+        '15-': '_Mother15OrMoreYears',
+        '15': '_Mother15Years',
+        '16': '_Mother16Years',
+        '17': '_Mother17Years',
+        '18': '_Mother18Years',
+        '19': '_Mother19Years',
+        '20-24': '_Mother20To24Years',
+        '25-29': '_Mother25To29Years',
+        '30-34': '_Mother30To34Years',
+        '35-39': '_Mother35To39Years',
+        '40-44': '_Mother40To44Years',
+        '45-49': '_Mother45To49Years',
+        '50+': '_Mother50OrMoreYears',
+    },
+    "Mother's Single Race 15 Code": {
+        '1': '_MotherWhiteAlone',
+        '2': '_MotherBlackOrAfricanAmericanAlone',
+        '3': '_MotherAmericanIndianOrAlaskaNativeAlone',
+        '4': '_MotherAsianIndian',
+        '5': '_MotherChinese',
+        '6': '_MotherFilipino',
+        '7': '_MotherJapanese',
+        '8': '_MotherKorean',
+        '9': '_MotherVietnamese',
+        '10': '_MotherOtherAsian',
+        '11': '_MotherNativeHawaiian',
+        '12': '_MotherGuamanianOrChamorro',
+        '13': '_MotherSamoan',
+        '14': '_MotherOtherPacificIslander',
+        '15': '_MotherTwoOrMoreRaces',
+        '99': '_MotherRaceUnknownOrNotStated',
+    },
+    "Mother's Education Code": {
+        '1': '_MotherLessThan9ThGrade',
+        '2': '_Mother9ThTo12ThGradeNoDiploma',
+        '3': '_MotherHighSchoolGraduateGedOrAlternative',
+        '4': '_MotherSomeCollegeNoDegree',
+        '5': '_MotherAssociatesDegree',
+        '6': '_MotherBachelorsDegree',
+        '7': '_MotherMastersDegree',
+        '8': '_MotherDoctorateDegreeOrProfessionalSchoolDegree',
+        'Unk': '_MotherEducationalAttainmentUnknownOrNotStated',
+    },
+    "Mother's Hispanic Origin Code": {
+        '2135-2': '_MotherHispanicOrLatino',
+        '2186-5': '_MotherNotHispanicOrLatino',
+        '9': '_MotherEthnicityUnknownOrNotStated',
+    },
+    'Marital Status Code': {
+        '1': '_MotherNowMarried',
+        '2': '_MotherUnmarried',
+        '9': '_MotherMaritalStatusUnknownOrNotStated',
+    },
+    "Mother's Nativity Code": {
+        '1': '_MotherNative',
+        '2': '_MotherForeignBorn',
+        '3': '_MotherNativityUnknownOrNotStated',
+    },
+}
+
+_ZERO_PLACEHOLDER_SUFFIXES = (
+    '_MotherMaritalStatusUnknownOrNotStated',
+    '_MotherRaceUnknownOrNotStated',
+)
+
 _UNIT_NORMALIZATION = {
     'Weeks': 'Week',
     'Grams': 'Gram',
     'Months': 'Month',
     'Years': 'Year',
 }
+
+
+def _filter_zero_unknown_placeholders(df: pd.DataFrame) -> pd.DataFrame:
+    """Removes 0.0 placeholder rows on Not Available unknown/unstated slices."""
+    if df.empty or 'StatVar' not in df.columns or 'Quantity' not in df.columns:
+        return df
+    nums = pd.to_numeric(df['Quantity'], errors='coerce')
+    unk_mask = df['StatVar'].str.endswith(_ZERO_PLACEHOLDER_SUFFIXES, na=False)
+    if 'Year' in df.columns:
+        yr_nums = pd.to_numeric(df['Year'], errors='coerce')
+        unk_mask = unk_mask & (yr_nums >= 2016)
+    drop_mask = unk_mask & (nums == 0)
+    return df.loc[~drop_mask].copy()
 
 
 def _normalize_quantities(df: pd.DataFrame) -> pd.DataFrame:
@@ -136,13 +216,28 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
         return pd.DataFrame(
             columns=['Year', 'Geo', 'StatVar', 'Quantity', 'Unit'])
 
+    missing_measures = [col for col in _MEASURE_MAP if col not in header]
+    if missing_measures:
+        raise ValueError(
+            f'Missing expected measure columns in {tsv_path}: {missing_measures}'
+        )
+
     code_col_idx = None
     year_col_idx = None
+    demo_col_name = None
+    demo_col_idx = None
     for idx, col in enumerate(header):
         if 'Code' in col and ('State' in col or 'County' in col):
             code_col_idx = idx
         elif col in ('Year', 'Year Code') and year_col_idx is None:
             year_col_idx = idx
+        elif col in _DEMOGRAPHIC_CODE_MAP and demo_col_idx is None:
+            demo_col_name = col
+            demo_col_idx = idx
+
+    measure_col_indices = {
+        col_name: header.index(col_name) for col_name in _MEASURE_MAP
+    }
 
     rows = []
     for line_parts in reader:
@@ -165,25 +260,36 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
                 continue
             geo_dcid = f'geoId/{fips}'
 
-        for col_name, (statvar, unit) in _MEASURE_MAP.items():
-            if col_name in header:
-                val = parts[header.index(col_name)].strip()
-                if not val or val.lower() in ('unreliable', 'suppressed',
-                                              'missing', 'not available'):
-                    continue
-                try:
-                    num = float(val)
-                    qty_str = str(int(round(num))) if statvar.startswith(
-                        'Count') else f'{num:.2f}'
-                    rows.append({
-                        'Year': year,
-                        'Geo': geo_dcid,
-                        'StatVar': statvar,
-                        'Quantity': qty_str,
-                        'Unit': unit
-                    })
-                except ValueError:
-                    continue
+        statvar_suffix = ''
+        if demo_col_idx is not None:
+            demo_code = parts[demo_col_idx]
+            code_map = _DEMOGRAPHIC_CODE_MAP[demo_col_name]
+            if demo_code not in code_map:
+                continue
+            statvar_suffix = code_map[demo_code]
+
+        for col_name, (base_statvar, unit) in _MEASURE_MAP.items():
+            if (demo_col_name == 'Age of Mother 13 Code' and
+                    col_name == 'Average Age of Mother (years)'):
+                continue
+            val = parts[measure_col_indices[col_name]].strip()
+            if not val or val.lower() in ('unreliable', 'suppressed', 'missing',
+                                          'not available', 'not applicable'):
+                continue
+            try:
+                num = float(val)
+                statvar = f'{base_statvar}{statvar_suffix}'
+                qty_str = str(int(round(num))) if statvar.startswith(
+                    'Count') else f'{num:.2f}'
+                rows.append({
+                    'Year': year,
+                    'Geo': geo_dcid,
+                    'StatVar': statvar,
+                    'Quantity': qty_str,
+                    'Unit': unit
+                })
+            except ValueError:
+                continue
 
     return pd.DataFrame(rows)
 
@@ -191,6 +297,7 @@ def parse_wonder_tsv(tsv_path: str, geo_type: str) -> pd.DataFrame:
 def aggregate_state_to_country(state_df: pd.DataFrame) -> pd.DataFrame:
     """Aggregates state-level Count_* StatVars to national country totals."""
     df_count = state_df.loc[state_df['StatVar'].str.startswith('Count')].copy()
+    df_count = _filter_zero_unknown_placeholders(df_count)
     if 'Unit' in df_count.columns:
         df_count.drop('Unit', axis=1, inplace=True)
     df_count.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
@@ -260,21 +367,28 @@ def process_data(input_dir: str, output_dir: str) -> bool:
     """Processes downloaded TSVs or existing CSVs into final output files."""
     os.makedirs(output_dir, exist_ok=True)
 
-    state_raw = os.path.join(input_dir, 'state_raw.tsv')
-    county_raw = os.path.join(input_dir, 'county_raw.tsv')
+    state_raw_files = [os.path.join(input_dir, 'state_raw.tsv')] + sorted(
+        glob.glob(os.path.join(input_dir, 'state_*_raw.tsv')))
+    county_raw_files = [os.path.join(input_dir, 'county_raw.tsv')] + sorted(
+        glob.glob(os.path.join(input_dir, 'county_*_raw.tsv')))
 
-    state_df = pd.DataFrame()
-    county_df = pd.DataFrame()
+    live_state_dfs = []
+    for raw_path in state_raw_files:
+        if os.path.exists(raw_path) and os.path.getsize(raw_path) > 0:
+            logging.info(f'Parsing raw State TSV: {raw_path}')
+            df = parse_wonder_tsv(raw_path, 'state')
+            if not df.empty:
+                live_state_dfs.append(df)
 
-    if os.path.exists(state_raw) and os.path.getsize(state_raw) > 0:
-        logging.info(f'Parsing raw State TSV: {state_raw}')
-        state_df = parse_wonder_tsv(state_raw, 'state')
+    live_county_dfs = []
+    for raw_path in county_raw_files:
+        if os.path.exists(raw_path) and os.path.getsize(raw_path) > 0:
+            logging.info(f'Parsing raw County TSV: {raw_path}')
+            df = parse_wonder_tsv(raw_path, 'county')
+            if not df.empty:
+                live_county_dfs.append(df)
 
-    if os.path.exists(county_raw) and os.path.getsize(county_raw) > 0:
-        logging.info(f'Parsing raw County TSV: {county_raw}')
-        county_df = parse_wonder_tsv(county_raw, 'county')
-
-    # Also incorporate any pre-existing CSV brackets / historical baseline in input_dir
+    # Incorporate pre-existing CSV brackets / historical baseline in input_dir
     pre_state_csvs = [
         f for f in _find_csvs(input_dir, 'state')
         if not f.startswith(output_dir) and not f.endswith('raw.tsv')
@@ -283,13 +397,8 @@ def process_data(input_dir: str, output_dir: str) -> bool:
         f for f in _find_csvs(input_dir, 'county')
         if not f.startswith(output_dir) and not f.endswith('raw.tsv')
     ]
-    pre_country_csvs = [
-        f for f in _find_csvs(input_dir, 'country')
-        if not f.startswith(output_dir) and not f.endswith('raw.tsv')
-    ]
     pre_state_csvs.sort(key=_extract_year_bracket)
     pre_county_csvs.sort(key=_extract_year_bracket)
-    pre_country_csvs.sort(key=_extract_year_bracket)
 
     state_dfs = []
     for f in pre_state_csvs:
@@ -299,8 +408,7 @@ def process_data(input_dir: str, output_dir: str) -> bool:
                 state_dfs.append(df)
         except Exception as e:
             logging.warning(f'Could not read historical state file {f}: {e}')
-    if not state_df.empty:
-        state_dfs.append(state_df)
+    state_dfs.extend(live_state_dfs)
 
     county_dfs = []
     for f in pre_county_csvs:
@@ -310,24 +418,15 @@ def process_data(input_dir: str, output_dir: str) -> bool:
                 county_dfs.append(df)
         except Exception as e:
             logging.warning(f'Could not read historical county file {f}: {e}')
-    if not county_df.empty:
-        county_dfs.append(county_df)
+    county_dfs.extend(live_county_dfs)
 
-    country_dfs = []
-    for f in pre_country_csvs:
-        try:
-            df = pd.read_csv(f, dtype=str)
-            if not df.empty and 'Year' in df.columns and 'StatVar' in df.columns:
-                country_dfs.append(df)
-        except Exception as e:
-            logging.warning(f'Could not read historical country file {f}: {e}')
-
-    if not state_dfs and not county_dfs and not country_dfs:
+    if not state_dfs and not county_dfs:
         return False
 
-    # 1. State data consolidation
+    # 1. State data consolidation and direct Country aggregation
     if state_dfs:
         final_state_df = pd.concat(state_dfs, ignore_index=True)
+        final_state_df = _filter_zero_unknown_placeholders(final_state_df)
         if 'Unit' in final_state_df.columns:
             final_state_df['Unit'] = final_state_df['Unit'].fillna('').replace(
                 _UNIT_NORMALIZATION)
@@ -342,14 +441,19 @@ def process_data(input_dir: str, output_dir: str) -> bool:
         final_state_df.to_csv(state_out, index=False)
         logging.info(f'Generated state.csv with {len(final_state_df)} rows.')
 
-        # Aggregate country totals from state data (using final_state_df)
-        country_agg = aggregate_state_to_country(final_state_df)
-        if not country_agg.empty:
-            country_dfs.append(country_agg)
+        # Compute country totals directly from consolidated state data
+        final_country_df = aggregate_state_to_country(final_state_df)
+        final_country_df = _normalize_quantities(final_country_df)
+        final_country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
+        country_out = os.path.join(output_dir, 'country.csv')
+        final_country_df.to_csv(country_out, index=False)
+        logging.info(
+            f'Generated country.csv with {len(final_country_df)} rows.')
 
     # 2. County data consolidation
     if county_dfs:
         final_county_df = pd.concat(county_dfs, ignore_index=True)
+        final_county_df = _filter_zero_unknown_placeholders(final_county_df)
         if 'Unit' in final_county_df.columns:
             final_county_df['Unit'] = final_county_df['Unit'].fillna(
                 '').replace(_UNIT_NORMALIZATION)
@@ -365,22 +469,6 @@ def process_data(input_dir: str, output_dir: str) -> bool:
         county_out = os.path.join(output_dir, 'county.csv')
         final_county_df.to_csv(county_out, index=False)
         logging.info(f'Generated county.csv with {len(final_county_df)} rows.')
-
-    # 3. Country data consolidation
-    if country_dfs:
-        final_country_df = pd.concat(country_dfs, ignore_index=True)
-        if 'Unit' in final_country_df.columns:
-            final_country_df['Unit'] = final_country_df['Unit'].fillna(
-                '').replace(_UNIT_NORMALIZATION)
-        final_country_df.drop_duplicates(subset=['Year', 'StatVar'],
-                                         keep='last',
-                                         inplace=True)
-        final_country_df = _normalize_quantities(final_country_df)
-        final_country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
-        country_out = os.path.join(output_dir, 'country.csv')
-        final_country_df.to_csv(country_out, index=False)
-        logging.info(
-            f'Generated country.csv with {len(final_country_df)} rows.')
 
     write_tmcf_files(output_dir)
     return True
