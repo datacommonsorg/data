@@ -28,7 +28,6 @@ from common import import_download_details, download
 # pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 class EuroStatBMI(EuroStat):
@@ -186,4 +185,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    flags.DEFINE_string('mode', '', 'Options: download or process')
     app.run(main)

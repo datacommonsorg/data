@@ -24,6 +24,12 @@ sys.path.insert(1, _COMMON_PATH)
 from bmi.process import EuroStatBMI
 from common.unitest_common_methods import CommonTestClass
 # pylint: enable=wrong-import-position
+while _COMMON_PATH in sys.path:
+    sys.path.remove(_COMMON_PATH)
+for _mod in [
+        m for m in sys.modules if m == 'common' or m.startswith('common.')
+]:
+    sys.modules.pop(_mod, None)
 
 
 class BMITest(CommonTestClass.CommonTestCases):
