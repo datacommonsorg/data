@@ -369,11 +369,16 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertNotIn('verify_golden_tests', tasks)
         self.assertNotIn('await_human_approval', tasks)
         self.assertNotIn('skipValidationJob', dag.params)
+        self.assertNotIn('dryRunIngestion', dag.params)
+        self.assertNotIn('forceIngestion', dag.params)
 
         # Ensure wait/sensor tasks run in reschedule mode so they do not hold worker slots
         self.assertEqual(tasks['run_import_job'].mode, 'reschedule')
         self.assertEqual(tasks['wait_staging_ingestion'].mode, 'reschedule')
         self.assertEqual(tasks['wait_prod_ingestion'].mode, 'reschedule')
+        self.assertEqual(tasks['trigger_prod_ingestion'].trigger_rule,
+                         'none_failed')
+        self.assertEqual(tasks['workflow_summary'].trigger_rule, 'none_failed')
 
         # Check downstream ordering
         self.assertIn(tasks['update_import_version'],
@@ -658,6 +663,35 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertIn('FAILED', str(ctx.exception))
         mock_report_failure.assert_called_once()
         hook_mock.submit_batch_job.assert_not_called()
+
+    def test_staging_and_prod_denylist_skips_ingestion(self):
+        with patch.object(import_automation_workflow, 'STAGING_DENYLIST',
+                          frozenset({'DenylistedImport'})), patch.object(
+                              import_automation_workflow, 'PROD_DENYLIST',
+                              frozenset({'DenylistedImport'})):
+            dag = import_automation_workflow.build_dag(
+                dag_id='DenylistedImport',
+                import_name='scripts/test:DenylistedImport',
+            )
+            self.assertTrue(dag.params['skipStagingIngestion'].default)
+            self.assertTrue(dag.params['skipProdIngestion'].default)
+
+            cfg = import_automation_workflow.resolve_workflow_context(
+                {'dag': dag})
+            self.assertTrue(cfg['skipStagingIngestion'])
+            self.assertTrue(cfg['skipProdIngestion'])
+
+            ti_mock = MagicMock()
+            with self.assertRaises(MockAirflowSkipException):
+                import_automation_workflow.trigger_staging_ingestion.function(
+                    dag=dag, ti=ti_mock)
+            ti_mock.xcom_push.assert_called_once_with(
+                key='return_value',
+                value={
+                    'status': 'SKIPPED',
+                    'message': 'Staging ingestion skipped',
+                },
+            )
 
 
 class E2EDagRunnerTest(unittest.TestCase):

@@ -5,7 +5,7 @@ process,
 #place_type,Country
 #places_within,country/KOR
 start_date,2015
-end_date,2024
+end_date,2025
 release_frequency,P1Y
 comments,
 output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor"
