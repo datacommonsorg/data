@@ -1,0 +1,15 @@
+parameter,value
+url,
+description,https://www.ine.es/jaxiT3/files/t/en/csv_bd/1470.csv?nocab=1
+process,
+#place_type,Country
+#places_within,country/ESP
+start_date,1975
+end_date,2023
+release_frequency,P1Y
+comments,
+output_columns,"observationAbout, observationPeriod, observationDate, value, variableMeasured, unit, scalingFactor"
+mapped_rows,1
+mapped_columns,2
+header_rows,1
+statvar_dcid_ignore_properties,"typeOf,description,name,nameWIthlanguage,descriptionUrl,alternateName,observationAbout"
