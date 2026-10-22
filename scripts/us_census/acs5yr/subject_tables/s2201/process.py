@@ -22,6 +22,7 @@ import sys
 import zipfile
 from absl import app
 from absl import flags
+from absl import logging
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
@@ -49,8 +50,10 @@ value: C:Subject_Table->{stat_var}{unit}
 _UNIT_TEMPLATE = """
 unit: dcs:{unit}"""
 
-_IGNORED_VALUES = set(
-    ['**', '-', '***', '*****', 'N', '(X)', 'null', '-888888888'])
+_IGNORED_VALUES = set([
+    '**', '-', '***', '*****', 'N', '(X)', 'null', '-222222222', '-333333333',
+    '-555555555', '-666666666', '-888888888', '-999999999'
+])
 
 
 def convert_column_to_stat_var(column, features):
@@ -132,6 +135,9 @@ def write_csv(filename, reader, output, features, stat_vars):
                 for c in row:
                     if 'Percent' in row[c] or 'PERCENT' in row[c]:
                         continue
+                    # In 2010-2014 S2201 tables, columns _002-_015 and _018-_021
+                    # reported percentages without "Percent" in the header; only
+                    # _001, _016, and _017 reported counts/median income.
                     if int(observation_date) < 2015 and not c.endswith(
                         ('_001E', '_001M', '_016E', '_016M', '_017E', '_017M')):
                         continue
@@ -197,8 +203,7 @@ def create_tmcf(output, features, stat_vars):
 
 def main(argv):
     if not FLAGS.input_zip and not FLAGS.download_id:
-        default_zip = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   'input_data', 'S2201.zip')
+        default_zip = os.path.join(_CODEDIR, 'input_data', 'S2201.zip')
         if os.path.exists(default_zip):
             FLAGS.input_zip = default_zip
         else:
@@ -216,37 +221,31 @@ def main(argv):
     create_csv(output_csv, stat_vars)
 
     if FLAGS.input_zip:
-        print(f'Reading local archive: {FLAGS.input_zip}')
+        logging.info('Reading local archive: %s', FLAGS.input_zip)
         zf_context = zipfile.ZipFile(FLAGS.input_zip, 'r')
     else:
-        print(f'Downloading with download_id: {FLAGS.download_id}')
+        logging.info('Downloading with download_id: %s', FLAGS.download_id)
         response = requests.get(
-            f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}'
-        )
+            f'https://data.census.gov/api/access/table/download?download_id={FLAGS.download_id}',
+            timeout=60)
+        response.raise_for_status()
         zf_context = zipfile.ZipFile(io.BytesIO(response.content))
 
     with zf_context as zf:
         # Sort files chronologically / deterministically
         for filename in sorted(zf.namelist()):
+            base = os.path.basename(filename).lower()
             # Support both -Data.csv and data_with_overlays...csv
-            if filename.endswith('.csv') and ('-Data' in filename or
-                                              'data_with_overlays' in filename
-                                              or 'data' in filename.lower()):
-                if 'metadata' in filename.lower() or 'title' in filename.lower(
-                ):
-                    continue
-                print(f'Processing file: {filename}')
+            if base.endswith('.csv') and 'acsst5y' in base and (
+                    '-data.csv' in base or 'data_with_overlays' in base):
+                logging.info('Processing file: %s', filename)
                 with zf.open(filename, 'r') as infile:
                     reader = csv.DictReader(
                         io.TextIOWrapper(infile, 'utf-8-sig'))
-                    if reader.fieldnames:
-                        reader.fieldnames = [
-                            name.strip('\ufeff" ') for name in reader.fieldnames
-                        ]
                     write_csv(filename, reader, output_csv, features, stat_vars)
 
     create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), features, stat_vars)
-    print(f'Processing complete! Outputs written to {FLAGS.output}')
+    logging.info('Processing complete! Outputs written to %s', FLAGS.output)
 
 
 if __name__ == '__main__':

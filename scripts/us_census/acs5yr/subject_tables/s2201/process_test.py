@@ -71,6 +71,127 @@ class ProcessTest(unittest.TestCase):
 
             os.remove(test_csv)
 
+    def test_write_csv_pre_2015_and_sentinel_filtering(self):
+        with open(_FEATURES) as f:
+            features = json.load(f)
+        with open(_STAT_VAR_LIST) as f:
+            stat_vars = f.read().splitlines()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_pre_2015.csv')
+            create_csv(test_csv, stat_vars)
+
+            # In pre-2015 S2201 tables, _002E reported a percentage without
+            # "Percent" in the header; only _001, _016, and _017 are kept.
+            rows = [
+                {
+                    'GEO_ID': 'Geography',
+                    'S2201_C01_001E': 'Total!!Estimate!!Households',
+                    'S2201_C01_001M': 'Total!!Margin of Error!!Households',
+                    'S2201_C01_002E':
+                        'Total!!Estimate!!Households!!With one or more people '
+                        'in the household 60 years and over',
+                    'S2201_C01_016E':
+                        'Total!!Estimate!!Households!!POVERTY STATUS IN THE '
+                        'PAST 12 MONTHS!!Below poverty level',
+                    'S2201_C01_016M':
+                        'Total!!Margin of Error!!Households!!POVERTY STATUS IN '
+                        'THE PAST 12 MONTHS!!Below poverty level',
+                },
+                {
+                    'GEO_ID': '0400000US53',
+                    'S2201_C01_001E': '2,600,000',
+                    'S2201_C01_001M': '-222222222',
+                    'S2201_C01_002E': '35',
+                    'S2201_C01_016E': '310,000',
+                    'S2201_C01_016M': '-555555555',
+                },
+            ]
+            fieldnames = list(rows[0].keys())
+            csv_buffer = ['"' + '","'.join(fieldnames) + '"']
+            for r in rows:
+                csv_buffer.append(
+                    '"' + '","'.join(r[k] for k in fieldnames) + '"')
+
+            reader = csv.DictReader(csv_buffer)
+            write_csv('ACSST5Y2014.S2201-Data.csv', reader, test_csv, features,
+                      stat_vars)
+
+            with open(test_csv) as f_result:
+                result_rows = list(csv.DictReader(f_result))
+
+            self.assertEqual(len(result_rows), 1)
+            self.assertEqual(result_rows[0]['observationDate'], '2014')
+            self.assertEqual(result_rows[0]['observationAbout'],
+                             'dcid:geoId/53')
+            self.assertEqual(result_rows[0]['Count_Household'], '2600000')
+            self.assertEqual(result_rows[0]['MarginOfError_Count_Household'],
+                             '')
+            # _002E (unlabeled pre-2015 percentage) must be filtered out
+            self.assertEqual(
+                result_rows[0]
+                ['Count_Household_WithOneOrMorePeople60YearsAndOver'], '')
+            self.assertEqual(result_rows[0]['Count_Household_BelowPovertyLevel'],
+                             '310000')
+            self.assertEqual(
+                result_rows[0]
+                ['MarginOfError_Count_Household_BelowPovertyLevel'], '')
+
+    def test_write_csv_data_with_overlays(self):
+        with open(_FEATURES) as f:
+            features = json.load(f)
+        with open(_STAT_VAR_LIST) as f:
+            stat_vars = f.read().splitlines()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv = os.path.join(tmp_dir, 'test_overlays.csv')
+            create_csv(test_csv, stat_vars)
+
+            rows = [
+                {
+                    'GEO_ID': 'id',
+                    'S2201_C01_001E': 'Estimate!!Total!!Households',
+                    'S2201_C02_001E': 'Estimate!!Percent!!Households',
+                    'S2201_C03_001E':
+                        'Estimate!!Households receiving food stamps/SNAP!!'
+                        'Households',
+                    'S2201_C01_034E':
+                        'Estimate!!Total!!Households!!HOUSEHOLD INCOME IN THE '
+                        'PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!'
+                        'Median income (dollars)',
+                },
+                {
+                    'GEO_ID': '9500000US2740860',
+                    'S2201_C01_001E': '757.0',
+                    'S2201_C02_001E': '24.0',
+                    'S2201_C03_001E': '26.0',
+                    'S2201_C01_034E': '250,000+',
+                },
+            ]
+            fieldnames = list(rows[0].keys())
+            csv_buffer = ['"' + '","'.join(fieldnames) + '"']
+            for r in rows:
+                csv_buffer.append(
+                    '"' + '","'.join(r[k] for k in fieldnames) + '"')
+
+            reader = csv.DictReader(csv_buffer)
+            write_csv('ACSST5Y2024.S2201_data_with_overlays.csv', reader,
+                      test_csv, features, stat_vars)
+
+            with open(test_csv) as f_result:
+                result_rows = list(csv.DictReader(f_result))
+
+            self.assertEqual(len(result_rows), 1)
+            self.assertEqual(result_rows[0]['observationDate'], '2024')
+            self.assertEqual(result_rows[0]['observationAbout'],
+                             'dcid:geoId/sch2740860')
+            # .0-suffixed integer counts should be stripped, while .0-suffixed
+            # whole-number percentage in S2201_C02_001E is ignored.
+            self.assertEqual(result_rows[0]['Count_Household'], '757')
+            self.assertEqual(
+                result_rows[0]['Count_Household_WithFoodStampsInThePast12Months'],
+                '26')
+            self.assertEqual(result_rows[0]['Median_Income_Household'],
+                             '250000')
+
     def test_create_tmcf(self):
         f = open(_FEATURES)
         features = json.load(f)
