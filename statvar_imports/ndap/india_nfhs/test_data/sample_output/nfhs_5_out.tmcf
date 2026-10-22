@@ -1,0 +1,8 @@
+Node: E:nfhs_5_out->E0
+observationAbout: C:nfhs_5_out->observationAbout
+observationDate: C:nfhs_5_out->observationDate
+value: C:nfhs_5_out->value
+variableMeasured: C:nfhs_5_out->variableMeasured
+unit: C:nfhs_5_out->unit
+scalingFactor: C:nfhs_5_out->scalingFactor
+typeOf: dcs:StatVarObservation
