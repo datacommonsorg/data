@@ -2,7 +2,7 @@
 
 This subject table provides data on the class of workers by sex.
 
-Years: 2010-2023  
+Years: 2010-2024  
 Geo : Country, State, County and Place
 
 Notes:
