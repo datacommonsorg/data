@@ -88,6 +88,11 @@ class BigQueryDifferTest(unittest.TestCase):
                 self.assertEqual(rows[0]['variableMeasured'],
                                  'dcid:Count_Person')
                 self.assertEqual(rows[0]['value'], '335000000')
+                self.assertEqual(rows[0]['observationAbout'], 'country/USA')
+                self.assertEqual(rows[0]['observationDate'], '2024')
+                self.assertEqual(rows[0]['row_num'], '1')
+                self.assertEqual(rows[1]['observationAbout'], 'country/CAN')
+                self.assertEqual(rows[1]['row_num'], '2')
                 self.assertIn('dcid:country/USA', rows[0]['key_combined'])
 
             with open(schema_csv, 'r', encoding='utf-8') as f:
@@ -96,6 +101,109 @@ class BigQueryDifferTest(unittest.TestCase):
                 self.assertEqual(rows[0]['dcid'], 'dcid:Count_Person')
                 self.assertIn('populationType:dcid:Person',
                               rows[0]['value_combined'])
+
+    def test_stream_mcf_to_csv_exclude_filenames(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_mcf = os.path.join(tmpdir, 'table_mcf_nodes_0.mcf')
+            agg_mcf = os.path.join(tmpdir, 'stat_var_agg_nodes.mcf')
+            obs_csv = os.path.join(tmpdir, 'obs.csv')
+            schema_csv = os.path.join(tmpdir, 'schema.csv')
+            with open(raw_mcf, 'w', encoding='utf-8') as f:
+                f.write(_SAMPLE_CURR_MCF)
+            with open(agg_mcf, 'w', encoding='utf-8') as f:
+                f.write(_SAMPLE_PREV_MCF)
+
+            obs_count, schema_count = bigquery_differ.stream_mcf_to_csv(
+                os.path.join(tmpdir, '*.mcf'),
+                obs_csv,
+                schema_csv,
+                exclude_filenames={'stat_var_agg_nodes.mcf'},
+            )
+            self.assertEqual(obs_count, 2)
+            self.assertEqual(schema_count, 1)
+
+    def test_get_import_bq_table_ids(self):
+        ids = bigquery_differ.get_import_bq_table_ids(
+            'test-proj.test_dataset',
+            'India-RBI:State',
+            '2026-09-17',
+            'input-0',
+        )
+        self.assertEqual(
+            ids,
+            {
+                'raw_obs':
+                    'test-proj.test_dataset.raw_obs_India_RBI_State_2026_09_17_input_0',
+                'raw_schema':
+                    'test-proj.test_dataset.raw_schema_India_RBI_State_2026_09_17_input_0',
+                'agg_obs':
+                    'test-proj.test_dataset.agg_obs_India_RBI_State_2026_09_17_input_0',
+            },
+        )
+
+    def test_format_key_combined_sql_matches_mcf_parser(self):
+        import duckdb
+        import io
+
+        agg_mcf = """
+Node: dcid:dc/o/test1
+typeOf: dcs:StatVarObservation
+dcid: "dc/o/test1"
+variableMeasured: dcs:Count_Person_Producer
+observationAbout: dcid:geoId/06
+observationDate: "2017"
+value: 66000
+observationPeriod: "P1Y"
+measurementMethod: dcs:dcAggregate/USDAAgricultureCensus
+unit: dcs:Person
+scalingFactor: "100"
+
+Node: dcid:dc/o/test2
+typeOf: dcs:StatVarObservation
+dcid: "dc/o/test2"
+variableMeasured: dcs:Count_Person_Total
+observationAbout: dcid:country/USA
+observationDate: "2020"
+value: 150
+measurementMethod: dcs:DataCommonsAggregate
+"""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            mcf_path = os.path.join(tmpdir, 'stat_var_agg_nodes.mcf')
+            obs_csv = os.path.join(tmpdir, 'obs.csv')
+            schema_csv = os.path.join(tmpdir, 'schema.csv')
+            with open(mcf_path, 'w', encoding='utf-8') as f:
+                f.write(agg_mcf)
+
+            bigquery_differ.stream_mcf_to_csv(mcf_path, obs_csv, schema_csv)
+            with open(obs_csv, 'r', encoding='utf-8') as f:
+                csv_rows = list(csv.DictReader(f))
+
+        con = duckdb.connect(':memory:')
+        key_expr = bigquery_differ.format_key_combined_sql(
+            'variableMeasured',
+            'observationAbout',
+            'observationDate',
+            'observationPeriod',
+            'measurementMethod',
+            'unit',
+            'scalingFactor',
+        )
+        for row in csv_rows:
+            sql = f"""
+            SELECT {key_expr} AS sql_key FROM (
+                SELECT
+                    '{row["variableMeasured"]}' AS variableMeasured,
+                    '{row["observationAbout"]}' AS observationAbout,
+                    '{row["observationDate"]}' AS observationDate,
+                    '{row["observationPeriod"]}' AS observationPeriod,
+                    '{row["measurementMethod"]}' AS measurementMethod,
+                    '{row["unit"]}' AS unit,
+                    '{row["scalingFactor"]}' AS scalingFactor
+            )
+            """
+            sql_key = con.execute(sql).fetchone()[0]
+            self.assertEqual(sql_key, row['key_combined'])
+        con.close()
 
     @mock.patch('bigquery_differ.bigquery.Client')
     def test_run_bigquery_differ_mocked(self, mock_bq_client_cls):
@@ -157,6 +265,156 @@ class BigQueryDifferTest(unittest.TestCase):
                 self.assertEqual(saved_json['obs_diff_count'], 2)
 
             self.assertEqual(mock_client.delete_table.call_count, 4)
+
+    @mock.patch('bigquery_differ.bigquery.Client')
+    def test_run_bigquery_differ_reuses_raw_obs_and_agg_obs(
+            self, mock_bq_client_cls):
+        mock_client = mock_bq_client_cls.return_value
+
+        shared_ids = bigquery_differ.get_import_bq_table_ids(
+            'test-project.test_dataset', 'test_imp', '2026_09_17', 'input0')
+
+        def _get_table(table_ref):
+            t = mock.MagicMock()
+            if table_ref == shared_ids['raw_obs']:
+                t.num_rows = 10
+            elif table_ref == shared_ids['agg_obs']:
+                t.num_rows = 5
+            elif table_ref == shared_ids['raw_schema']:
+                t.num_rows = 2
+            else:
+                t.num_rows = 0
+            return t
+
+        mock_client.get_table.side_effect = _get_table
+
+        mock_obs_query_job = mock.MagicMock()
+        mock_obs_query_job.to_dataframe.return_value = pd.DataFrame([
+            {
+                'StatVar': 'Count_Person',
+                'ADDED': 1,
+                'DELETED': 0,
+                'MODIFIED': 1
+            },
+            {
+                'StatVar': 'Count_Person_Agg',
+                'ADDED': 2,
+                'DELETED': 0,
+                'MODIFIED': 0
+            },
+        ])
+
+        mock_schema_row = mock.MagicMock()
+        mock_schema_row.added_schema_count = 0
+        mock_schema_row.deleted_schema_count = 0
+        mock_schema_row.modified_schema_count = 0
+        mock_schema_query_job = mock.MagicMock()
+        mock_schema_query_job.result.return_value = [mock_schema_row]
+
+        mock_client.query.side_effect = [
+            mock_obs_query_job, mock_schema_query_job
+        ]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            curr_mcf = os.path.join(tmpdir, 'curr.mcf')
+            prev_mcf = os.path.join(tmpdir, 'prev.mcf')
+            out_dir = os.path.join(tmpdir, 'output')
+            with open(curr_mcf, 'w', encoding='utf-8') as f:
+                f.write(_SAMPLE_CURR_MCF)
+            with open(prev_mcf, 'w', encoding='utf-8') as f:
+                f.write(_SAMPLE_PREV_MCF)
+
+            summary = bigquery_differ.run_bigquery_differ(
+                current_data=curr_mcf,
+                previous_data=prev_mcf,
+                output_location=out_dir,
+                project_id='test-project',
+                job_name='test_job',
+                dataset_id='test_dataset',
+                shared_table_ids=shared_ids,
+            )
+
+            # Step 1 (current_data) was skipped; only previous_data (obs + schema = 2 loads) loaded
+            self.assertEqual(mock_client.load_table_from_file.call_count, 2)
+            self.assertEqual(summary['current_obs_count'], 15)
+            self.assertEqual(summary['current_schema_count'], 2)
+            self.assertEqual(summary['previous_obs_count'], 1)
+            self.assertEqual(summary['added_obs_count'], 3)
+            self.assertEqual(summary['modified_obs_count'], 1)
+
+            obs_sql = mock_client.query.call_args_list[0][0][0]
+            self.assertIn('UNION ALL', obs_sql)
+            self.assertIn(shared_ids['raw_obs'], obs_sql)
+            self.assertIn(shared_ids['agg_obs'], obs_sql)
+
+            schema_sql = mock_client.query.call_args_list[1][0][0]
+            self.assertIn(shared_ids['raw_schema'], schema_sql)
+
+            deleted_tables = [
+                call[0][0] for call in mock_client.delete_table.call_args_list
+            ]
+            self.assertIn(shared_ids['raw_obs'], deleted_tables)
+            self.assertIn(shared_ids['raw_schema'], deleted_tables)
+            self.assertIn(shared_ids['agg_obs'], deleted_tables)
+            self.assertEqual(len(deleted_tables), 5)
+
+    @mock.patch('bigquery_differ.bigquery.Client')
+    def test_run_bigquery_differ_fallback_when_raw_obs_missing(
+            self, mock_bq_client_cls):
+        mock_client = mock_bq_client_cls.return_value
+
+        shared_ids = bigquery_differ.get_import_bq_table_ids(
+            'test-project.test_dataset', 'test_imp', '2026_09_17', 'input0')
+
+        def _get_table(table_ref):
+            if table_ref == shared_ids['raw_obs']:
+                raise RuntimeError('Table not found')
+            return mock.MagicMock()
+
+        mock_client.get_table.side_effect = _get_table
+
+        mock_obs_query_job = mock.MagicMock()
+        mock_obs_query_job.to_dataframe.return_value = pd.DataFrame([{
+            'StatVar': 'Count_Person',
+            'ADDED': 1,
+            'DELETED': 0,
+            'MODIFIED': 1
+        }])
+
+        mock_schema_row = mock.MagicMock()
+        mock_schema_row.added_schema_count = 0
+        mock_schema_row.deleted_schema_count = 0
+        mock_schema_row.modified_schema_count = 0
+        mock_schema_query_job = mock.MagicMock()
+        mock_schema_query_job.result.return_value = [mock_schema_row]
+
+        mock_client.query.side_effect = [
+            mock_obs_query_job, mock_schema_query_job
+        ]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            curr_mcf = os.path.join(tmpdir, 'curr.mcf')
+            prev_mcf = os.path.join(tmpdir, 'prev.mcf')
+            out_dir = os.path.join(tmpdir, 'output')
+            with open(curr_mcf, 'w', encoding='utf-8') as f:
+                f.write(_SAMPLE_CURR_MCF)
+            with open(prev_mcf, 'w', encoding='utf-8') as f:
+                f.write(_SAMPLE_PREV_MCF)
+
+            summary = bigquery_differ.run_bigquery_differ(
+                current_data=curr_mcf,
+                previous_data=prev_mcf,
+                output_location=out_dir,
+                project_id='test-project',
+                job_name='test_job',
+                dataset_id='test_dataset',
+                shared_table_ids=shared_ids,
+            )
+
+            # Both current and previous MCF files loaded (4 file load jobs)
+            self.assertEqual(mock_client.load_table_from_file.call_count, 4)
+            self.assertEqual(summary['current_obs_count'], 2)
+            self.assertEqual(summary['previous_obs_count'], 1)
 
 
 if __name__ == '__main__':
