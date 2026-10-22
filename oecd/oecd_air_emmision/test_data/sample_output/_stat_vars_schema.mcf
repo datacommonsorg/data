@@ -1,0 +1,65 @@
+Node: dcid:SulphurOxide
+typeOf: dcid:GreenhouseGas
+name: "Sulphur Oxide"
+isProvisional: dcid:True
+
+Node: dcid:ManMadeEmission
+typeOf: dcid:EpaSccCodeEnum
+name: "Man Made Emission"
+isProvisional: dcid:True
+
+Node: dcid:emissionSource
+typeOf: dcid:Property
+name: "emissionSource"
+rangeIncludes: dcid:EnergyConsumptionSectorEnum,FireCauseSpecificEnum,EmissionSourceEnum
+
+Node: dcid:MobileSourceExcludingRoadTransport
+typeOf: dcid:EpaSccCodeEnum
+name: "Mobile Source Excluding Road Transport"
+isProvisional: dcid:True
+
+Node: dcid:StationarySource
+typeOf: dcid:EpaSccCodeEnum
+name: "Stationary Source"
+isProvisional: dcid:True
+
+Node: dcid:PowerStation
+typeOf: dcid:EpaSccCodeEnum
+name: "Power Station"
+isProvisional: dcid:True
+
+Node: dcid:Combustion
+typeOf: dcid:EpaSccCodeEnum
+name: "Combustion"
+isProvisional: dcid:True
+
+Node: dcid:IndustrialCombustion
+typeOf: dcid:EpaSccCodeEnum
+name: "Industrial Combustion"
+isProvisional: dcid:True
+
+Node: dcid:CombustionExcludingIndustrial
+typeOf: dcid:EpaSccCodeEnum
+name: "Combustion Excluding Industrial"
+isProvisional: dcid:True
+
+Node: dcid:IndustrialProcesses__ProductUse
+typeOf: dcid:EpaSccCodeEnum
+name: "Industrial Processes__ Product Use"
+isProvisional: dcid:True
+
+Node: dcid:Miscellaneous
+typeOf: dcid:EpaSccCodeEnum
+name: "Miscellaneous"
+isProvisional: dcid:True
+
+Node: dcid:NitrogenOxide
+typeOf: dcid:GreenhouseGas
+name: "Nitrogen Oxide"
+isProvisional: dcid:True
+
+Node: dcid:emittedThing
+typeOf: dcid:Property
+name: "emittedThing"
+rangeIncludes: dcid:EPA_CriteriaAirPollutant
+

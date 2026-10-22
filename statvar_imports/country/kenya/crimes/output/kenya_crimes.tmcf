@@ -1,0 +1,8 @@
+Node: E:kenya_crimes->E0
+observationAbout: C:kenya_crimes->observationAbout
+observationDate: C:kenya_crimes->observationDate
+value: C:kenya_crimes->value
+variableMeasured: C:kenya_crimes->variableMeasured
+unit: C:kenya_crimes->unit
+scalingFactor: C:kenya_crimes->scalingFactor
+typeOf: dcs:StatVarObservation
