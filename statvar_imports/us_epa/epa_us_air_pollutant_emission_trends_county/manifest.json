@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EPA_USAirPollutantEmissionTrends_County",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.epa.gov/air-emissions-inventories/air-pollutant-emissions-trends-data",
+            "provenance_description": "US Environment Protection Agency (EPA) National Emissions Inventory (NEI) County Tier 1 Summary Data.",
+            "scripts": [
+                "download_preprocess.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county_input_file/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/county_tier1",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county_input_file/*.csv --pv_map=aggregate_pvmap.csv --config_file=aggregate_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/county_tier1_aggregate"
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/county_tier1.tmcf",
+                    "cleaned_csv": "output_files/*.csv"
+                }
+            ],
+            "cron_schedule": "0 07 * * 2"
+        }
+    ]
+}
