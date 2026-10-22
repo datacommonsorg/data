@@ -1,0 +1,9 @@
+Node: E:vietnam_census_output->E0
+observationAbout: C:vietnam_census_output->observationAbout
+observationDate: C:vietnam_census_output->observationDate
+value: C:vietnam_census_output->value
+variableMeasured: C:vietnam_census_output->variableMeasured
+unit: C:vietnam_census_output->unit
+scalingFactor: C:vietnam_census_output->scalingFactor
+measurementMethod: C:vietnam_census_output->measurementMethod
+typeOf: dcs:StatVarObservation
