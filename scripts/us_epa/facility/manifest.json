@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EPA_GHGRPFacilities",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.epa.gov/ghgreporting",
+            "provenance_description": "US EPA Greenhouse Gas Reporting Program (GHGRP) Facility Information.",
+            "scripts": [
+                "download_efservice.py --epa_table_name=PUB_DIM_FACILITY",
+                "process_facility.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/us_epa_facility.tmcf",
+                    "cleaned_csv": "output/us_epa_facility.csv"
+                }
+            ],
+            "cron_schedule": "0 8 1,15 * *",
+            "validation_config_file": "validation_config.json",
+            "source_files": [
+                "input_files/*.csv"
+            ]
+        }
+    ]
+}

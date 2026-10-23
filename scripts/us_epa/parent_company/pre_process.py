@@ -32,7 +32,7 @@ sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
 from us_epa.util import facilities_helper as fh
 from us_epa.parent_company import static_corrections as sc
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
+flags.DEFINE_string("input_download_path", "input_files", "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
 flags.DEFINE_string("output_base_path", "output",
@@ -125,7 +125,7 @@ def _insert_overlaps(loc_map, company_id_count):
     count_dupe_loc = 0
     loc_id_contained_count = 0
     for a, v in loc_map.items():
-        v = list(v)
+        v = sorted(v)
         if len(v) > 1:
             count_dupe_loc += 1
             id_match_found = False
@@ -211,8 +211,10 @@ def preprocess(input_table_path, existing_facilities_file):
             company_name = company_name.replace("\"", "").replace("'", "")
             if not company_name:
                 continue
-            unique_company_names.add(company_name)
             company_id = fh.name_to_id(company_name)
+            if not company_id:
+                continue
+            unique_company_names.add(company_name)
 
             address = _str(
                 fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX))
@@ -284,13 +286,18 @@ def preprocess(input_table_path, existing_facilities_file):
 
 def main(_):
     # Validate inputs.
-    assert FLAGS.input_download_path
-    assert FLAGS.existing_facilities_file
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path,
-                     FLAGS.existing_facilities_file + ".csv"))
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path, _TABLE + ".csv"))
+    if not FLAGS.input_download_path:
+        raise ValueError("input_download_path must be provided.")
+    if not FLAGS.existing_facilities_file:
+        raise ValueError("existing_facilities_file must be provided.")
+    existing_facilities_csv = os.path.join(
+        FLAGS.input_download_path, FLAGS.existing_facilities_file + ".csv")
+    if not os.path.exists(existing_facilities_csv):
+        raise FileNotFoundError(
+            f"Existing facilities file not found: {existing_facilities_csv}")
+    table_csv = os.path.join(FLAGS.input_download_path, _TABLE + ".csv")
+    if not os.path.exists(table_csv):
+        raise FileNotFoundError(f"Input table not found: {table_csv}")
 
     preprocess(FLAGS.input_download_path, FLAGS.existing_facilities_file)
 
