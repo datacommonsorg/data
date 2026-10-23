@@ -14,13 +14,13 @@
             "source_files": [
                 "source_files/*.csv",
                 "counters/*.csv",
-                "golden_data/*.csv"
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "StatisticsPoland_output.tmcf",
                     "cleaned_csv": "StatisticsPoland_output.csv",
-                    "stat_var_mcf": "StatisticsPoland_output_stat_vars.mcf"
+                    "node_mcf": "StatisticsPoland_output*.mcf"
                 }
             ],
             "cron_schedule": "0 0 1 1,4,7,10 *",
@@ -31,14 +31,5 @@
                 "disk": 100
             }
         }
-    ],
-    "config_override": {
-        "invoke_import_validation": true,
-        "invoke_import_tool": true,
-        "invoke_differ_tool": true,
-        "use_autopush_dc_api": false,
-        "skip_input_upload": false,
-        "skip_gcs_upload": false,
-        "cleanup_gcs_volume_mount": false
-    }
+    ]
 }
