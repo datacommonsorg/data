@@ -85,25 +85,31 @@ class ProcessTest(unittest.TestCase):
             rows = [
                 {
                     'GEO_ID': 'Geography',
-                    'S2201_C01_001E': 'Total!!Estimate!!Households',
-                    'S2201_C01_001M': 'Total!!Margin of Error!!Households',
-                    'S2201_C01_002E':
-                        'Total!!Estimate!!Households!!With one or more people '
-                        'in the household 60 years and over',
-                    'S2201_C01_016E':
-                        'Total!!Estimate!!Households!!POVERTY STATUS IN THE '
-                        'PAST 12 MONTHS!!Below poverty level',
-                    'S2201_C01_016M':
-                        'Total!!Margin of Error!!Households!!POVERTY STATUS IN '
-                        'THE PAST 12 MONTHS!!Below poverty level',
+                    'S2201_C02_001E':
+                        'Households receiving food stamps!!Estimate!!Households',
+                    'S2201_C02_001M':
+                        'Households receiving food stamps!!Margin of Error!!'
+                        'Households',
+                    'S2201_C02_002E':
+                        'Households receiving food stamps!!Estimate!!'
+                        'Households!!With one or more people in the household '
+                        '60 years and over',
+                    'S2201_C02_016E':
+                        'Households receiving food stamps!!Estimate!!'
+                        'Households!!POVERTY STATUS IN THE PAST 12 MONTHS!!'
+                        'Below poverty level',
+                    'S2201_C02_016M':
+                        'Households receiving food stamps!!Margin of Error!!'
+                        'Households!!POVERTY STATUS IN THE PAST 12 MONTHS!!'
+                        'Below poverty level',
                 },
                 {
                     'GEO_ID': '0400000US53',
-                    'S2201_C01_001E': '2,600,000',
-                    'S2201_C01_001M': '-222222222',
-                    'S2201_C01_002E': '35',
-                    'S2201_C01_016E': '310,000',
-                    'S2201_C01_016M': '-555555555',
+                    'S2201_C02_001E': '2,600,000',
+                    'S2201_C02_001M': '-222222222',
+                    'S2201_C02_002E': '35',
+                    'S2201_C02_016E': '310,000',
+                    'S2201_C02_016M': '-555555555',
                 },
             ]
             fieldnames = list(rows[0].keys())
@@ -123,18 +129,26 @@ class ProcessTest(unittest.TestCase):
             self.assertEqual(result_rows[0]['observationDate'], '2014')
             self.assertEqual(result_rows[0]['observationAbout'],
                              'dcid:geoId/53')
-            self.assertEqual(result_rows[0]['Count_Household'], '2600000')
-            self.assertEqual(result_rows[0]['MarginOfError_Count_Household'],
-                             '')
+            self.assertEqual(
+                result_rows[0]
+                ['Count_Household_WithFoodStampsInThePast12Months'], '2600000')
+            self.assertEqual(
+                result_rows[0][
+                    'MarginOfError_Count_Household_WithFoodStampsInThePast12Months'
+                ], '')
             # _002E (unlabeled pre-2015 percentage) must be filtered out
             self.assertEqual(
-                result_rows[0]
-                ['Count_Household_WithOneOrMorePeople60YearsAndOver'], '')
+                result_rows[0][
+                    'Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60'
+                ], '')
             self.assertEqual(
-                result_rows[0]['Count_Household_BelowPovertyLevel'], '310000')
+                result_rows[0][
+                    'Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months'
+                ], '310000')
             self.assertEqual(
-                result_rows[0]
-                ['MarginOfError_Count_Household_BelowPovertyLevel'], '')
+                result_rows[0][
+                    'MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months'
+                ], '')
 
     def test_write_csv_data_with_overlays(self):
         with open(_FEATURES) as f:
@@ -148,22 +162,27 @@ class ProcessTest(unittest.TestCase):
             rows = [
                 {
                     'GEO_ID': 'id',
-                    'S2201_C01_001E': 'Estimate!!Total!!Households',
-                    'S2201_C02_001E': 'Estimate!!Percent!!Households',
                     'S2201_C03_001E':
                         'Estimate!!Households receiving food stamps/SNAP!!'
                         'Households',
-                    'S2201_C01_034E':
-                        'Estimate!!Total!!Households!!HOUSEHOLD INCOME IN THE '
-                        'PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!'
+                    'S2201_C04_001E':
+                        'Estimate!!Percent!!Households receiving food '
+                        'stamps/SNAP!!Households',
+                    'S2201_C05_001E':
+                        'Estimate!!Households not receiving food stamps/SNAP!!'
+                        'Households',
+                    'S2201_C03_034E':
+                        'Estimate!!Households receiving food stamps/SNAP!!'
+                        'Households!!HOUSEHOLD INCOME IN THE PAST 12 MONTHS '
+                        '(IN 2024 INFLATION-ADJUSTED DOLLARS)!!'
                         'Median income (dollars)',
                 },
                 {
                     'GEO_ID': '9500000US2740860',
-                    'S2201_C01_001E': '757.0',
-                    'S2201_C02_001E': '24.0',
                     'S2201_C03_001E': '26.0',
-                    'S2201_C01_034E': '250,000+',
+                    'S2201_C04_001E': '24.0',
+                    'S2201_C05_001E': '757.0',
+                    'S2201_C03_034E': '250,000+',
                 },
             ]
             fieldnames = list(rows[0].keys())
@@ -184,13 +203,17 @@ class ProcessTest(unittest.TestCase):
             self.assertEqual(result_rows[0]['observationAbout'],
                              'dcid:geoId/sch2740860')
             # .0-suffixed integer counts should be stripped, while .0-suffixed
-            # whole-number percentage in S2201_C02_001E is ignored.
-            self.assertEqual(result_rows[0]['Count_Household'], '757')
+            # whole-number percentage in S2201_C04_001E is ignored.
             self.assertEqual(
                 result_rows[0]
                 ['Count_Household_WithFoodStampsInThePast12Months'], '26')
-            self.assertEqual(result_rows[0]['Median_Income_Household'],
-                             '250000')
+            self.assertEqual(
+                result_rows[0]
+                ['Count_Household_WithoutFoodStampsInThePast12Months'], '757')
+            self.assertEqual(
+                result_rows[0]
+                ['Median_Income_Household_WithFoodStampsInThePast12Months'],
+                '250000')
 
     def test_create_tmcf(self):
         f = open(_FEATURES)
