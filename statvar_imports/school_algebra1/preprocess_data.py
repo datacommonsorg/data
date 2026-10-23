@@ -137,7 +137,6 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
         numeric_df = df[data_cols].apply(pd.to_numeric, errors='coerce')
         has_valid = (numeric_df >= 0).any(axis=1)
         df = df[has_valid].copy()
-        df[data_cols] = df[data_cols].where(~(numeric_df.loc[df.index] < 0), '')
 
     return df
 
