@@ -84,7 +84,8 @@ class ProcessTest(unittest.TestCase):
             # "Percent" in the header; only _001, _016, and _017 are kept.
             rows = [
                 {
-                    'GEO_ID': 'Geography',
+                    'GEO_ID':
+                        'Geography',
                     'S2201_C02_001E':
                         'Households receiving food stamps!!Estimate!!Households',
                     'S2201_C02_001M':
@@ -133,22 +134,22 @@ class ProcessTest(unittest.TestCase):
                 result_rows[0]
                 ['Count_Household_WithFoodStampsInThePast12Months'], '2600000')
             self.assertEqual(
-                result_rows[0][
-                    'MarginOfError_Count_Household_WithFoodStampsInThePast12Months'
-                ], '')
+                result_rows[0]
+                ['MarginOfError_Count_Household_WithFoodStampsInThePast12Months'],
+                '')
             # _002E (unlabeled pre-2015 percentage) must be filtered out
             self.assertEqual(
-                result_rows[0][
-                    'Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60'
-                ], '')
+                result_rows[0]
+                ['Count_Household_WithFoodStampsInThePast12Months_WithPeopleOver60'],
+                '')
             self.assertEqual(
-                result_rows[0][
-                    'Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months'
-                ], '310000')
+                result_rows[0]
+                ['Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months'],
+                '310000')
             self.assertEqual(
-                result_rows[0][
-                    'MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months'
-                ], '')
+                result_rows[0]
+                ['MarginOfError_Count_Household_WithFoodStampsInThePast12Months_BelowPovertyLevelInThePast12Months'],
+                '')
 
     def test_write_csv_data_with_overlays(self):
         with open(_FEATURES) as f:
