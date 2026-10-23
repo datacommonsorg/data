@@ -71,8 +71,9 @@ python3 -m tools.import_validation.runner \
 ```
 
 ## Data Processing & Methodology
-- **Cumulative Award Inception Semantics**: `process.py` queries the USAspending `/api/v2/search/spending_by_award/` endpoint (filtering on `award_type_codes: ["02", "03", "04", "05", "F001", "F002"]`) and groups awards by the federal fiscal year of each award's `Start Date` (where October–December maps to `year + 1`), summing the total `Award Amount`. Consequently, multi-year grants and subsequent obligation modifications/amendments are attributed as cumulative lifetime award obligations to the fiscal year of award inception rather than individual annual outlay transactions.
+- **Cumulative Award Inception Semantics**: `process.py` queries the USAspending `/api/v2/search/spending_by_award/` endpoint (filtering on `award_type_codes: ["02", "03", "04", "05", "F001", "F002"]` with deterministic `sort: "Award ID"`, `order: "asc"`) and groups awards by the federal fiscal year of each award's `Start Date` (where October–December maps to `year + 1`), summing the total `Award Amount`. Consequently, multi-year grants and subsequent obligation modifications/amendments are attributed as cumulative lifetime award obligations to the fiscal year of award inception rather than individual annual outlay transactions.
 - **Year Partitioning**: API queries are partitioned fiscal-year by fiscal-year up to the current federal fiscal year to prevent USAspending's 10,000-record pagination ceiling.
 - **De-obligations**: Award adjustments resulting in net non-positive annual funding for a program in a state are excluded, ensuring State Totals are mathematically consistent with the sum of reported components.
-- **Coverage**: Covers all historical and modern EDA programs including CHIPS Act Tech Hubs (11.039), Recompete Pilot (11.040), Science and Research Park Development Grants (11.030), and STEM Talent Challenge (11.023).
+- **Coverage**: Covers 59 U.S. states, territories, and Freely Associated States (falling back to `Place of Performance Country Code` `FSM -> FM`, `MHL -> MH`, `PLW -> PW` when `Place of Performance State Code` is null) and all 11 historical and modern EDA programs including CHIPS Act Tech Hubs (11.039), Recompete Pilot (11.040), Science and Research Park Development Grants (11.030), and STEM Talent Challenge (11.023).
+
 

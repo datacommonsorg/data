@@ -87,8 +87,12 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertEqual(awards[1]["Award ID"], "456")
         self.assertEqual(mock_post.call_count, 2)
         self.assertTrue(os.path.exists(raw_json_path))
-        first_call_fields = mock_post.call_args_list[0][1]["json"]["fields"]
+        first_call_payload = mock_post.call_args_list[0][1]["json"]
+        first_call_fields = first_call_payload["fields"]
         self.assertIn("generated_internal_id", first_call_fields)
+        self.assertIn("Place of Performance Country Code", first_call_fields)
+        self.assertEqual(first_call_payload["sort"], "Award ID")
+        self.assertEqual(first_call_payload["order"], "asc")
 
     @patch("time.sleep", return_value=None)
     @patch("requests.Session.post")
@@ -234,16 +238,26 @@ class TestProcessUSASpending(unittest.TestCase):
 
     def test_new_territories(self):
         mock_awards = [
-            # Palau (PW)
+            # Federated States of Micronesia (FSM -> FM) via Country Code with State Code None
             {
-                "Place of Performance State Code": "PW",
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "FSM",
+                "CFDA Number": "11.303",
+                "Start Date": "2016-09-01",
+                "Award Amount": 25000.0,
+            },
+            # Palau (PLW -> PW) via Country Code with State Code None
+            {
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "PLW",
                 "CFDA Number": "11.302",
                 "Start Date": "2021-05-01",
                 "Award Amount": 50000.0,
             },
-            # Marshall Islands (MH)
+            # Marshall Islands (MHL -> MH) via Country Code with State Code None
             {
-                "Place of Performance State Code": "MH",
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "MHL",
                 "CFDA Number": "11.307",
                 "Start Date": "2021-06-01",
                 "Award Amount": 75000.0,
@@ -252,7 +266,7 @@ class TestProcessUSASpending(unittest.TestCase):
 
         process_data(
             mock_awards,
-            start_year=2020,
+            start_year=2015,
             end_year=2022,
             output_path=self.output_csv,
         )
@@ -261,6 +275,8 @@ class TestProcessUSASpending(unittest.TestCase):
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
             "Place": [
+                "FM",
+                "FM",
                 "MH",
                 "MH",
                 "PW",
@@ -268,12 +284,14 @@ class TestProcessUSASpending(unittest.TestCase):
             ],
             "State or Territory / EDA Program": [
                 "Total",
+                "Technical Assistance",
+                "Total",
                 "Economic Adjustment Assistance",
                 "Total",
                 "Planning",
             ],
-            "Year": [2021, 2021, 2021, 2021],
-            "Value": [75000, 75000, 50000, 50000],
+            "Year": [2016, 2016, 2021, 2021, 2021, 2021],
+            "Value": [25000, 25000, 75000, 75000, 50000, 50000],
         })
         pd.testing.assert_frame_equal(df_actual, df_expected)
 
@@ -570,8 +588,8 @@ class TestProcessUSASpending(unittest.TestCase):
         mock_post.return_value = mock_resp
 
         with patch(
-            "statvar_imports.commerce_eda_usaspending.process.MAX_PAGES_PER_FY",
-            2):
+                "statvar_imports.commerce_eda_usaspending.process.MAX_PAGES_PER_FY",
+                2):
             with self.assertRaises(RuntimeError) as ctx:
                 fetch_usaspending_data(start_year=2013, end_year=2013)
             self.assertIn("Exceeded maximum page threshold (2) for FY 2013",
@@ -654,4 +672,3 @@ class TestProcessUSASpending(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

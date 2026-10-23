@@ -33,6 +33,12 @@ VALID_STATE_CODES = {
     "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "VI", "PW", "MH"
 }
 
+COUNTRY_TO_STATE_CODE = {
+    "FSM": "FM",
+    "MHL": "MH",
+    "PLW": "PW",
+}
+
 CFDA_PROGRAMS = {
     "11.300": "Public Works",
     "11.302": "Planning",
@@ -94,7 +100,8 @@ def _deduplicate_awards(awards, unique_awards=None):
             unique_awards[award_id] = award
         else:
             fallback_key = (
-                award.get("Place of Performance State Code"),
+                award.get("Place of Performance State Code") or
+                award.get("Place of Performance Country Code"),
                 award.get("CFDA Number"),
                 award.get("Start Date"),
                 award.get("Award Amount"),
@@ -146,9 +153,12 @@ def fetch_usaspending_data(start_year,
                     },
                     "fields": [
                         "Award ID", "Start Date", "Award Amount",
-                        "Place of Performance State Code", "CFDA Number",
+                        "Place of Performance State Code",
+                        "Place of Performance Country Code", "CFDA Number",
                         "generated_internal_id"
                     ],
+                    "sort": "Award ID",
+                    "order": "asc",
                     "limit": 100,
                     "page": page
                 }
@@ -207,6 +217,11 @@ def process_data(awards, start_year, end_year, output_path):
     for a in unique_awards.values():
         state_code = str(a.get("Place of Performance State Code") or
                          "").strip().upper()
+        if not state_code:
+            country_code = str(
+                a.get("Place of Performance Country Code") or
+                "").strip().upper()
+            state_code = COUNTRY_TO_STATE_CODE.get(country_code, "")
         if not state_code or state_code not in VALID_STATE_CODES:
             continue
 
@@ -338,4 +353,3 @@ def main(argv):
 
 if __name__ == "__main__":
     app.run(main)
-
