@@ -35,7 +35,9 @@ The import pipeline queries the e-Stat Statistical Dashboard JSON API in paralle
 *   **Transformation pipeline**:
     1.  `download_script.py` fetches all 9 dataset groups from the e-Stat JSON API using concurrent workers and atomic file writes into `input_files/`.
     2.  `process.py` invokes `stat_var_processor.py` in parallel across the 18 input CSVs against `japan_census_pv_map.csv` and `japan_census_metadata.csv`, referencing canonical schema `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
-    3.  The processor filters non-target regional aggregate rows via `#IgnoreRow`, scales labor force counts reported in units of 10,000 persons to thousands via `#Multiply,10`, resolves place DCIDs, and produces `output_files/japan_census_output.csv` and `output_files/japan_census_output.tmcf`.
+    3.  The processor filters non-target regional aggregate rows via `#IgnoreRow`, resolves place DCIDs, and produces `output_files/japan_census_output.csv` and `output_files/japan_census_output.tmcf`. To preserve 1:1 historical series continuity (`0` deleted / `0` modified records) with the legacy `Japan_Census` import:
+        *   Labor force counts (`0301010000010010010`, `0301010000020010010`, `0301010000030010010`, reported by e-Stat in units of `10,000 persons`) apply `#Multiply,10` to match the historical scaling (in thousands).
+        *   Indicator `1201040500000010000` (`Number of upper secondary school teachers (full-time)`) maps to `dcid:Count_Teacher_UniversityAndCollegeTeacher` to match the legacy StatVar assignment across `1975`–`2021`.
     4.  Aggregated processor counters are written to `counters/japan_census_counters.csv`.
 
 *   **Data Quality Checks**:
@@ -43,6 +45,7 @@ The import pipeline queries the e-Stat Statistical Dashboard JSON API in paralle
         *   `check_deleted_records_percent`: Historical deletion threshold `<= 0.1%` (`0` deleted records).
         *   `check_max_date_freshness`: Verifies `MaxDate`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person`) across all 92 active recurring indicators.
         *   `check_max_date_historical_indicators`: Verifies `MaxDate >= 2020` and `MinValue >= 0` across the 9 discontinued centenarian sub-brackets (`100–104`, `105–109`, `110+`).
+        *   `check_max_date_consistent_*`: Scoped `MAX_DATE_CONSISTENT` rules verifying uniform `MaxDate` within each co-released survey group (Population Census, Labor Force & Deaths, Teachers, Students, Causes of Death, and Historical Centenarians).
 
 ---
 

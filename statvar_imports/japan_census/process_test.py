@@ -58,13 +58,11 @@ class ProcessTest(unittest.TestCase):
             with open(f'{p1}.csv', 'w', encoding='utf-8') as f:
                 f.write(
                     'observationAbout,observationDate,value,variableMeasured\n'
-                    'dcid:country/JPN,2020,100,dcid:Count_Person\n'
-                )
+                    'dcid:country/JPN,2020,100,dcid:Count_Person\n')
             with open(f'{p2}.csv', 'w', encoding='utf-8') as f:
                 f.write(
                     'observationAbout,observationDate,value,variableMeasured\n'
-                    'dcid:country/JPN,2025,95,dcid:Count_Person\n'
-                )
+                    'dcid:country/JPN,2025,95,dcid:Count_Person\n')
 
             final_csv = os.path.join(tmp_dir, 'merged.csv')
             total_rows = process._merge_csv_files([p1, p2], final_csv)
@@ -85,9 +83,23 @@ class ProcessTest(unittest.TestCase):
             c1 = os.path.join(tmp_dir, 'c1.csv')
             c2 = os.path.join(tmp_dir, 'c2.csv')
             with open(c1, 'w', encoding='utf-8') as f:
-                f.write('key,value\nsvobs-added,100\nelapsed_time,1.25\n')
+                f.write('key,value\n'
+                        'svobs-added,100\n'
+                        'elapsed_time,1.25\n'
+                        'existing-statvars-from-mcf,12896\n'
+                        'process_mem,1.50\n'
+                        'processing_rate,500.00\n'
+                        'start_time,1000\n'
+                        'end_time,1010\n')
             with open(c2, 'w', encoding='utf-8') as f:
-                f.write('key,value\nsvobs-added,250\nelapsed_time,2.50\n')
+                f.write('key,value\n'
+                        'svobs-added,250\n'
+                        'elapsed_time,2.50\n'
+                        'existing-statvars-from-mcf,12896\n'
+                        'process_mem,2.25\n'
+                        'processing_rate,700.00\n'
+                        'start_time,1005\n'
+                        'end_time,1025\n')
 
             final_counters = os.path.join(tmp_dir, 'merged_counters.csv')
             process._merge_counters([c1, c2], final_counters)
@@ -98,6 +110,11 @@ class ProcessTest(unittest.TestCase):
                 [
                     'key,value',
                     'elapsed_time,3.75',
+                    'end_time,1025',
+                    'existing-statvars-from-mcf,12896',
+                    'process_mem,2.25',
+                    'processing_rate,600.00',
+                    'start_time,1000',
                     'svobs-added,350',
                 ],
             )
@@ -113,12 +130,10 @@ class ProcessTest(unittest.TestCase):
             self.assertFalse(os.path.exists(final_mcf))
 
             # 2. Non-empty case with duplicate node across shards
-            node_block = (
-                '# Auto generated comment\n\n'
-                'Node: dcid:Count_Person\n'
-                'typeOf: dcid:StatisticalVariable\n'
-                'populationType: dcid:Person\n'
-            )
+            node_block = ('# Auto generated comment\n\n'
+                          'Node: dcid:Count_Person\n'
+                          'typeOf: dcid:StatisticalVariable\n'
+                          'populationType: dcid:Person\n')
             with open(f'{p1}_stat_vars.mcf', 'w', encoding='utf-8') as f:
                 f.write(node_block)
             with open(f'{p2}_stat_vars.mcf', 'w', encoding='utf-8') as f:
@@ -151,6 +166,7 @@ class ProcessTest(unittest.TestCase):
     @mock.patch.object(process.file_util, 'file_copy')
     def test_prepare_local_statvar_mcf_copies_gcs_path(self, mock_file_copy):
         with tempfile.TemporaryDirectory() as tmp_dir:
+
             def _fake_copy(src, dst):
                 with open(dst, 'w', encoding='utf-8') as f:
                     f.write('Node: dcid:Count_Person\n')
@@ -158,10 +174,19 @@ class ProcessTest(unittest.TestCase):
 
             mock_file_copy.side_effect = _fake_copy
             local_path = process._prepare_local_statvar_mcf(
-                'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf', tmp_dir
-            )
+                'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf', tmp_dir)
             self.assertEqual(local_path, os.path.join(tmp_dir, 'stat_vars.mcf'))
             mock_file_copy.assert_called_once()
+
+    @mock.patch.object(process.logging, 'fatal')
+    @mock.patch.object(process,
+                       '_run_pipeline',
+                       side_effect=RuntimeError('Pipeline failed'))
+    def test_main_calls_logging_fatal_on_error(self, mock_run_pipeline,
+                                               mock_fatal):
+        process.main([])
+        mock_run_pipeline.assert_called_once()
+        mock_fatal.assert_called_once()
 
 
 if __name__ == '__main__':

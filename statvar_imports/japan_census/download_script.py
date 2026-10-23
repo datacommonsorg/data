@@ -95,7 +95,7 @@ def _build_population_5yr_indicators(
 # RegionalRank: '2' = Country (Japan), '3' = Prefecture, '4' = Municipality.
 # Cycle: '3' = Calendar Year.
 DATASET_CONFIGS: dict[str, dict[str, Any]] = {
-    'jpn_employement.csv': {
+    'jpn_employment.csv': {
         'indicators': [
             '0301010000010010010',  # Employed persons (Both sexes)
             '0301010000020010010',  # Unemployed persons (Both sexes)
@@ -178,9 +178,8 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
 }
 
 
-def _extract_class_lookup(
-    class_objs: list[dict[str, Any]] | dict[str, Any], target_id: str
-) -> dict[str, str]:
+def _extract_class_lookup(class_objs: list[dict[str, Any]] | dict[str, Any],
+                          target_id: str) -> dict[str, str]:
     """Extracts a code-to-name dictionary from e-Stat CLASS_INF.CLASS_OBJ."""
     if isinstance(class_objs, dict):
         class_objs = [class_objs]
@@ -190,9 +189,8 @@ def _extract_class_lookup(
             if isinstance(classes, dict):
                 classes = [classes]
             return {
-                str(c.get('@code', '')): str(
-                    c.get('@name') if '@name' in c else c.get('$', '')
-                )
+                str(c.get('@code', '')):
+                    str(c.get('@name') if '@name' in c else c.get('$', ''))
                 for c in classes
                 if isinstance(c, dict)
             }
@@ -212,7 +210,8 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
         RuntimeError: If the API returned an error status code or invalid payload.
     """
     if not isinstance(data, dict) or 'GET_STATS' not in data:
-        raise RuntimeError('Invalid JSON response from e-Stat API: missing GET_STATS.')
+        raise RuntimeError(
+            'Invalid JSON response from e-Stat API: missing GET_STATS.')
 
     get_stats = data['GET_STATS']
     result = get_stats.get('RESULT', {})
@@ -221,8 +220,7 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
 
     if status_code != '0':
         raise RuntimeError(
-            f'e-Stat API error (status={status_code}): {error_msg}'
-        )
+            f'e-Stat API error (status={status_code}): {error_msg}')
 
     stat_data = get_stats.get('STATISTICAL_DATA', {})
     class_objs = stat_data.get('CLASS_INF', {}).get('CLASS_OBJ', [])
@@ -245,9 +243,8 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
         unit_cd = str(val_obj.get('@unit', ''))
         reg_cd = str(val_obj.get('@regionCode', ''))
         time_cd = str(val_obj.get('@time', ''))
-        year_str = time_map.get(
-            time_cd, time_cd[:4] if len(time_cd) >= 4 else time_cd
-        )
+        year_str = time_map.get(time_cd,
+                                time_cd[:4] if len(time_cd) >= 4 else time_cd)
 
         parsed_records.append({
             'year': year_str,
@@ -297,9 +294,9 @@ def _get_http_session() -> requests.Session:
     return session
 
 
-def _request_estat_json(
-    url: str, params: dict[str, str], timeout: int = 60
-) -> dict[str, Any]:
+def _request_estat_json(url: str,
+                        params: dict[str, str],
+                        timeout: int = 60) -> dict[str, Any]:
     """Performs a thread-safe GET request to the e-Stat JSON API with retries."""
     session = _get_http_session()
     resp = session.get(url, params=params, timeout=timeout)
@@ -348,9 +345,8 @@ def fetch_indicator_batch(
     return parse_estat_json_response(response_json)
 
 
-def _derive_census_population_rows(
-    records: list[dict[str, str]], mode: str
-) -> list[dict[str, str]]:
+def _derive_census_population_rows(records: list[dict[str, str]],
+                                   mode: str) -> list[dict[str, str]]:
     """Filters to 5-year census years and computes exact unrounded broad age sums.
 
     At National (RegionalRank=2) and Prefecture (RegionalRank=3) levels, direct
@@ -379,8 +375,7 @@ def _derive_census_population_rows(
     else:
         max_5yr_suffix = 230 if mode == 'national' else 170
         allowed_5yr = {
-            f'0201010{g}20000010{i:03d}'
-            for g in ('0', '1', '2')
+            f'0201010{g}20000010{i:03d}' for g in ('0', '1', '2')
             for i in range(10, max_5yr_suffix + 10, 10)
         }
     allowed_totals = {
@@ -396,14 +391,16 @@ def _derive_census_population_rows(
 
     # Derive exact Census counts for <15, 15-64, 65+, and (for National/Prefecture) 85+ from 5-year brackets.
     broad_Specs = [
-        ('10000010010', 'Population (under 15)', [f'{i:03d}' for i in (10, 20, 30)], False),
-        ('10000010020', 'Population (15-64)', [f'{i:03d}' for i in range(40, 140, 10)], False),
-        ('10000010030', 'Population (65 and over)', [f'{i:03d}' for i in range(140, 210, 10)], True),
+        ('10000010010', 'Population (under 15)',
+         [f'{i:03d}' for i in (10, 20, 30)], False),
+        ('10000010020', 'Population (15-64)',
+         [f'{i:03d}' for i in range(40, 140, 10)], False),
+        ('10000010030', 'Population (65 and over)',
+         [f'{i:03d}' for i in range(140, 210, 10)], True),
     ]
     if mode != 'municipality':
-        broad_Specs.append(
-            ('40000010070', 'Population (85 and over)', [f'{i:03d}' for i in (180, 190, 200)], True)
-        )
+        broad_Specs.append(('40000010070', 'Population (85 and over)',
+                            [f'{i:03d}' for i in (180, 190, 200)], True))
 
     for reg_cd, yr in sorted(reg_meta.keys()):
         base = reg_meta[(reg_cd, yr)]
@@ -439,15 +436,13 @@ def _load_historical_rows(historical_gcs_path: str) -> list[dict[str, str]]:
         return []
     if historical_gcs_path in _HISTORICAL_CACHE:
         return _HISTORICAL_CACHE[historical_gcs_path]
-    logging.info(
-        'Reading historical deleted data from GCS: %s', historical_gcs_path
-    )
+    logging.info('Reading historical deleted data from GCS: %s',
+                 historical_gcs_path)
     with file_util.FileIO(historical_gcs_path, 'r', encoding='utf-8') as f:
         rows = list(csv.DictReader(f))
     if not rows:
         raise RuntimeError(
-            f'Historical supplement file is empty: {historical_gcs_path}'
-        )
+            f'Historical supplement file is empty: {historical_gcs_path}')
     _HISTORICAL_CACHE[historical_gcs_path] = rows
     return rows
 
@@ -466,9 +461,13 @@ def _apply_historical_supplement(
     for r in records:
         by_key[(r['regionCd'], r['year'], r['indicatorCd'])] = r
 
+    norm_target = dataset_filename.replace('jpn_employement.csv',
+                                           'jpn_employment.csv')
     added_or_updated = 0
     for s in hist_rows:
-        if s['dataset'] != dataset_filename:
+        norm_src = s['dataset'].replace('jpn_employement.csv',
+                                        'jpn_employment.csv')
+        if norm_src != norm_target:
             continue
         key = (s['regionCd'], s['year'], s['indicatorCd'])
         if key in by_key:
@@ -501,22 +500,24 @@ def _apply_historical_supplement(
     return list(by_key.values())
 
 
-def _write_csv_atomically(output_filepath: str, rows: list[dict[str, str]]) -> None:
+def _write_csv_atomically(output_filepath: str, rows: list[dict[str,
+                                                                str]]) -> None:
     """Writes rows atomically to output_filepath and verifies non-empty output."""
     output_dir = os.path.dirname(output_filepath)
     os.makedirs(output_dir, exist_ok=True)
-    fd, tmp_path = tempfile.mkstemp(
-        prefix='.tmp_jpn_', suffix='.csv', dir=output_dir
-    )
+    fd, tmp_path = tempfile.mkstemp(prefix='.tmp_jpn_',
+                                    suffix='.csv',
+                                    dir=output_dir)
     try:
         with os.fdopen(fd, 'w', encoding='utf-8', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=CSV_HEADER, lineterminator='\n')
+            writer = csv.DictWriter(f,
+                                    fieldnames=CSV_HEADER,
+                                    lineterminator='\n')
             writer.writeheader()
             writer.writerows(rows)
         if not (os.path.exists(tmp_path) and os.path.getsize(tmp_path) > 0):
             raise RuntimeError(
-                f'Atomic write failed: {tmp_path} is empty or missing.'
-            )
+                f'Atomic write failed: {tmp_path} is empty or missing.')
         os.replace(tmp_path, output_filepath)
     except Exception:
         if os.path.exists(tmp_path):
@@ -538,11 +539,12 @@ def download_dataset(
     tasks: list[tuple[list[str], str]] = []
     for rank in regional_ranks:
         for i in range(0, len(indicators), batch_size):
-            tasks.append((indicators[i : i + batch_size], rank))
+            tasks.append((indicators[i:i + batch_size], rank))
 
     all_records: list[dict[str, str]] = []
     if max_workers > 1 and len(tasks) > 1:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        with concurrent.futures.ThreadPoolExecutor(
+                max_workers=max_workers) as executor:
             futures = [
                 executor.submit(fetch_indicator_batch, batch, rank)
                 for batch, rank in tasks
@@ -555,8 +557,7 @@ def download_dataset(
                 fetch_indicator_batch(
                     indicators=batch,
                     regional_rank=rank,
-                )
-            )
+                ))
 
     if is_census:
         all_records = _derive_census_population_rows(all_records, census_mode)
@@ -583,15 +584,14 @@ def download_dataset(
         if os.path.exists(output_filepath):
             os.remove(output_filepath)
         for yr, yr_rows in sorted(by_year.items()):
-            yr_filepath = os.path.join(output_dir, f'jpn_aa1_aa2_age_gender_{yr}.csv')
+            yr_filepath = os.path.join(output_dir,
+                                       f'jpn_aa1_aa2_age_gender_{yr}.csv')
             _write_csv_atomically(yr_filepath, yr_rows)
             logging.info('Saved %d rows to %s', len(yr_rows), yr_filepath)
         return len(all_records)
 
     _write_csv_atomically(output_filepath, all_records)
-    logging.info(
-        'Saved %d rows to %s', len(all_records), output_filepath
-    )
+    logging.info('Saved %d rows to %s', len(all_records), output_filepath)
     return len(all_records)
 
 
@@ -628,11 +628,8 @@ def download_all(
 def main(argv: list[str]) -> None:
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
-    output_dir = (
-        _FLAGS.output_dir
-        if os.path.isabs(_FLAGS.output_dir)
-        else os.path.join(_MODULE_DIR, _FLAGS.output_dir)
-    )
+    output_dir = (_FLAGS.output_dir if os.path.isabs(_FLAGS.output_dir) else
+                  os.path.join(_MODULE_DIR, _FLAGS.output_dir))
     try:
         download_all(
             output_dir,
