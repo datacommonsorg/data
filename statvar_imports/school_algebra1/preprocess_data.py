@@ -82,18 +82,23 @@ def _pad_id_series(series: pd.Series, width: int) -> pd.Series:
 def preprocess_dataframe(df: pd.DataFrame, filename: str,
                          mapped_cols: set) -> pd.DataFrame:
     """Adds standardized ncesid, YEAR, and filters to mapped columns."""
+    col_lookup = {col.upper(): col for col in df.columns}
+
     # Ensure ncesid exists and is properly zero-padded
-    if 'ncesid' not in df.columns:
-        if 'LEAID' in df.columns and 'SCHID' in df.columns:
-            leaid = _pad_id_series(df['LEAID'], 7)
-            schid = _pad_id_series(df['SCHID'], 5)
+    if 'NCESID' not in col_lookup:
+        if 'LEAID' in col_lookup and 'SCHID' in col_lookup:
+            leaid = _pad_id_series(df[col_lookup['LEAID']], 7)
+            schid = _pad_id_series(df[col_lookup['SCHID']], 5)
             df.insert(0, 'ncesid', leaid + schid)
-        elif 'COMBOKEY' in df.columns:
-            combokey = _pad_id_series(df['COMBOKEY'], 12)
+        elif 'COMBOKEY' in col_lookup:
+            combokey = _pad_id_series(df[col_lookup['COMBOKEY']], 12)
             df.insert(0, 'ncesid', combokey)
         else:
             raise ValueError(f"Cannot resolve 'ncesid' in {filename}")
     else:
+        nces_col = col_lookup['NCESID']
+        if nces_col != 'ncesid':
+            df = df.rename(columns={nces_col: 'ncesid'})
         df['ncesid'] = _pad_id_series(df['ncesid'], 12)
 
     initial_rows = len(df)
@@ -105,12 +110,15 @@ def preprocess_dataframe(df: pd.DataFrame, filename: str,
         )
 
     # Ensure YEAR exists
-    if 'YEAR' not in df.columns:
+    col_lookup = {col.upper(): col for col in df.columns}
+    if 'YEAR' not in col_lookup:
         survey_year = extract_survey_end_year(filename)
         if survey_year <= 0:
             raise ValueError(
                 f"Cannot resolve survey completion year for {filename}")
         df.insert(1, 'YEAR', survey_year)
+    elif col_lookup['YEAR'] != 'YEAR':
+        df = df.rename(columns={col_lookup['YEAR']: 'YEAR'})
 
     # Filter columns dynamically: keep identifier columns + any column in pv_map
     mapped_cols_upper = {c.upper() for c in mapped_cols}
@@ -197,6 +205,10 @@ def preprocess_all_files():
 
     for filepath in raw_files:
         process_file(filepath, mapped_cols)
+
+    if not glob.glob(os.path.join(_PROCESSED_DIR, '*.csv')):
+        raise RuntimeError(
+            f"No valid processed CSV files written to {_PROCESSED_DIR}")
 
     logging.info(f"All files successfully preprocessed into {_PROCESSED_DIR}")
 

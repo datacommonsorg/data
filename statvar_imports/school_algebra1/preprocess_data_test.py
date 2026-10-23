@@ -14,10 +14,15 @@
 """Unit tests for preprocess_data.py."""
 
 import os
+import subprocess
+import sys
 import tempfile
 import unittest
 import pandas as pd
 import preprocess_data
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../..'))
 
 
 class PreprocessDataTest(unittest.TestCase):
@@ -133,6 +138,68 @@ class PreprocessDataTest(unittest.TestCase):
                 self.assertFalse(os.path.exists(output_csv))
             finally:
                 preprocess_data._PROCESSED_DIR = orig_processed
+
+    def test_preprocess_all_files_raises_when_no_valid_csv_written(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            orig_input = preprocess_data._INPUT_DIR
+            orig_processed = preprocess_data._PROCESSED_DIR
+            try:
+                input_dir = os.path.join(tmp_dir, 'input')
+                output_dir = os.path.join(tmp_dir, 'output')
+                os.makedirs(input_dir)
+                os.makedirs(output_dir)
+                preprocess_data._INPUT_DIR = input_dir
+                preprocess_data._PROCESSED_DIR = output_dir
+                input_csv = os.path.join(input_dir,
+                                         'crdc_2021-22_algebra_i.csv')
+                pd.DataFrame({
+                    'COMBOKEY': ['010000500870'],
+                    'SCH_ALGENR_G08_HI_M': ['-9'],
+                }).to_csv(input_csv, index=False)
+
+                with self.assertRaises(RuntimeError):
+                    preprocess_data.preprocess_all_files()
+            finally:
+                preprocess_data._INPUT_DIR = orig_input
+                preprocess_data._PROCESSED_DIR = orig_processed
+
+    def test_end_to_end_sample_output(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_test_csv = os.path.join(_SCRIPT_DIR, 'test_data',
+                                          'input_test_data.csv')
+            expected_output_csv = os.path.join(_SCRIPT_DIR, 'test_data',
+                                               'sample_output.csv')
+            pvmap_path = os.path.join(_SCRIPT_DIR, 'Algebra1_pvmap.csv')
+            metadata_path = os.path.join(_SCRIPT_DIR, 'Algebra1_metadata.csv')
+            processor_script = os.path.join(_REPO_ROOT, 'tools',
+                                            'statvar_importer',
+                                            'stat_var_processor.py')
+
+            mapped_cols = preprocess_data.load_pv_mapped_columns(pvmap_path)
+            raw_df = pd.read_csv(input_test_csv, dtype=str)
+            processed_df = preprocess_data.preprocess_dataframe(
+                raw_df, 'crdc_2021-22_algebra_i.csv', mapped_cols)
+            processed_csv = os.path.join(tmp_dir, 'processed_input.csv')
+            processed_df.to_csv(processed_csv, index=False)
+
+            output_prefix = os.path.join(tmp_dir, 'actual_output')
+            result = subprocess.run([
+                sys.executable,
+                processor_script,
+                f'--input_data={processed_csv}',
+                f'--pv_map={pvmap_path}',
+                f'--config_file={metadata_path}',
+                f'--output_path={output_prefix}',
+            ],
+                                    capture_output=True,
+                                    text=True,
+                                    check=False)
+            self.assertEqual(result.returncode, 0,
+                             f'stat_var_processor failed: {result.stderr}')
+
+            actual_df = pd.read_csv(f'{output_prefix}.csv', dtype=str)
+            expected_df = pd.read_csv(expected_output_csv, dtype=str)
+            pd.testing.assert_frame_equal(actual_df, expected_df)
 
 
 if __name__ == '__main__':
