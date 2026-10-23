@@ -1,5 +1,6 @@
 counterpart_area,prop,dcid
 Afghanistan,lendingEntity,country/AFG
+Africa Finance Corporation,lendingEntity,Africa_Finance_Corporation
 African Dev. Bank,lendingEntity,African_Dev_Bank
 African Export-Import Bank,lendingEntity,African_Export_Import_Bank
 Algeria,lendingEntity,country/DZA
@@ -197,6 +198,7 @@ Trinidad & Tobago,lendingEntity,country/TTO
 Tunisia,lendingEntity,country/TUN
 Turkiye,lendingEntity,country/TUR
 Turkmenistan,lendingEntity,country/TKM
+Uganda,lendingEntity,country/UGA
 Ukraine,lendingEntity,country/UKR
 UN-Children's Fund (UNICEF),lendingEntity,UN_Children_Fund
 UN-Development Programme (UNDP),lendingEntity,UN_Development_Programme
