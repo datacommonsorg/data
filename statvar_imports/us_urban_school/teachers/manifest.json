@@ -9,24 +9,24 @@
       "source_files": [
         "input_files/*.xlsx",
         "input_files/*.csv",
-        "golden_data/*.csv",
-        "counters/*.csv"
+        "counters/*.csv",
+        "validation_config.json"
       ],
       "import_inputs": [
         {
           "template_mcf": "output_files/teachers_and_staff_2010_2014_output.tmcf",
           "cleaned_csv": "output_files/teachers_and_staff_2010_2014_output.csv",
-          "node_mcf": "output_files/*.mcf"
+          "node_mcf": "output_files/teachers_and_staff_2010_2014_output*.mcf"
         },
         {
           "template_mcf": "output_files/teachers_and_staff_2016_output.tmcf",
           "cleaned_csv": "output_files/teachers_and_staff_2016_output.csv",
-          "node_mcf": "output_files/*.mcf"
+          "node_mcf": "output_files/teachers_and_staff_2016_output*.mcf"
         },
         {
-          "template_mcf": "output_files/teachers_and_staff_2018_2022_output.tmcf",
-          "cleaned_csv": "output_files/teachers_and_staff_2018_2022_output.csv",
-          "node_mcf": "output_files/*.mcf"
+          "template_mcf": "output_files/teachers_and_staff_2018Onwards_output.tmcf",
+          "cleaned_csv": "output_files/teachers_and_staff_2018Onwards_output.csv",
+          "node_mcf": "output_files/teachers_and_staff_2018Onwards_output*.mcf"
         }
       ],
       "cron_schedule": "0 5 1,15 * *",

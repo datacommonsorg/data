@@ -21,7 +21,6 @@ import os
 import re
 import config
 import google.auth
-from google.auth import jwt
 from google.auth.transport.requests import Request
 from google.cloud import storage
 from google.cloud.workflows import executions_v1
@@ -180,13 +179,13 @@ def invoke_import_automation_airflow(import_name: str,
         import_size: The size of the import ('small', 'medium', 'large').
         graph_path: The graph path for the import.
         cron_schedule: The cron schedule for the import.
-        dag_id: Optional Airflow DAG ID to invoke; defaults to generic manual_refresh DAG.
+        dag_id: Optional Airflow DAG ID to invoke; defaults to generic ManualRefresh DAG.
         skip_import_job: Whether to skip the import batch job.
         skip_staging_ingestion: Whether to skip staging Spanner ingestion.
         skip_prod_ingestion: Whether to skip production Spanner ingestion.
     """
     short_import_name = import_name.split(':')[-1]
-    target_dag_id = dag_id if dag_id else config.AIRFLOW_DEFAULT_DAG_ID
+    target_dag_id = dag_id or config.AIRFLOW_DEFAULT_DAG_ID
     full_import_name = (
         import_name if ':' in import_name else f"scripts/entities:{import_name}"
     )
@@ -239,17 +238,19 @@ def invoke_import_automation_airflow(import_name: str,
     if skip_prod_ingestion is not None:
         conf["skipProdIngestion"] = skip_prod_ingestion
 
-    dag_run_id = f"cda_feed__{short_import_name}__{latest_version}__{int(datetime.now(timezone.utc).timestamp())}"
+    now_utc = datetime.now(timezone.utc)
+    dag_run_id = f"cda_feed__{short_import_name}__{latest_version}__{int(now_utc.timestamp())}"
     payload = {
         "dag_run_id": dag_run_id,
-        "conf": conf
+        "logical_date": now_utc.isoformat(),
+        "conf": conf,
     }
 
     if not config.AIRFLOW_WEB_SERVER_URL:
         raise ValueError("AIRFLOW_WEB_SERVER_URL is not configured.")
 
     base_url = config.AIRFLOW_WEB_SERVER_URL.rstrip('/')
-    url = f"{base_url}/api/v1/dags/{target_dag_id}/dagRuns"
+    url = f"{base_url}/api/v2/dags/{target_dag_id}/dagRuns"
     logging.info(f"Invoking Airflow DAG {target_dag_id} for {import_name} at {url}")
 
     if config.AIRFLOW_IAP_CLIENT_ID:
@@ -265,15 +266,6 @@ def invoke_import_automation_airflow(import_name: str,
         'Content-Type': 'application/json'
     }
     response = requests.post(url, json=payload, headers=headers, timeout=60)
-    if response.status_code == 404 and target_dag_id != config.AIRFLOW_DEFAULT_DAG_ID:
-        logging.warning(
-            f"Airflow DAG '{target_dag_id}' not found (404). "
-            f"Falling back to generic DAG '{config.AIRFLOW_DEFAULT_DAG_ID}'."
-        )
-        target_dag_id = config.AIRFLOW_DEFAULT_DAG_ID
-        url = f"{base_url}/api/v1/dags/{target_dag_id}/dagRuns"
-        response = requests.post(url, json=payload, headers=headers, timeout=60)
-
     response.raise_for_status()
     logging.info(
         f"Triggered Airflow DAG {target_dag_id} for {import_name}. Run ID: {dag_run_id}"
@@ -296,34 +288,6 @@ def get_next_refresh(project_id: str, location: str, import_name: str) -> str | 
     except Exception as e:
         logging.warning(f"Error connecting to Cloud Scheduler for {import_name}: {e}")
         return None
-
-
-def get_caller_identity(request):
-    """Extracts caller email from Authorization header (JWT)."""
-    auth_header = request.headers.get('Authorization')
-    if auth_header:
-        parts = auth_header.split()
-        if len(parts) == 2 and parts[0].lower() == 'bearer':
-            token = parts[1]
-            unverified_claims = {}
-            try:
-                unverified_claims = jwt.decode(token, verify=False)
-                id_info = id_token.verify_oauth2_token(token,
-                                                       Request())
-                return id_info.get('email', 'unknown_email')
-            except Exception as e:
-                if unverified_claims:
-                    logging.warning(
-                        f"Could not decode unverified token for debugging: {e}")
-                    email = unverified_claims.get('email', 'unknown_email')
-                    return f"{email}"
-                return 'decode_error'
-        else:
-            logging.warning(
-                f"Invalid Authorization header format. Parts: {len(parts)}")
-    else:
-        logging.warning("No Authorization header received.")
-    return 'no_auth_header'
 
 
 def get_import_params(request: dict) -> dict:
