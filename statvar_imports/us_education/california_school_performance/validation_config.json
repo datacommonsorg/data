@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Strictly enforce historical deletion average threshold of 0.1%",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Ensure latest observation year is within allowable annual release lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year FROM stats",
+                "condition": "max_year >= YEAR(CURRENT_DATE) - 2"
+            }
+        }
+    ]
+}
