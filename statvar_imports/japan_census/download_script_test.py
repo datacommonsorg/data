@@ -66,10 +66,17 @@ class DownloadScriptTest(unittest.TestCase):
                                 },
                             },
                             {
-                                '@id': 'time',
+                                '@id':
+                                    'time',
                                 'CLASS': [
-                                    {'@code': '1953CY00', '@name': '1953'},
-                                    {'@code': '1954CY00', '@name': '1954'},
+                                    {
+                                        '@code': '1953CY00',
+                                        '@name': '1953'
+                                    },
+                                    {
+                                        '@code': '1954CY00',
+                                        '@name': '1954'
+                                    },
                                 ],
                             },
                         ]
@@ -116,13 +123,11 @@ class DownloadScriptTest(unittest.TestCase):
 
     def test_parse_estat_json_response_success(self):
         records = download_script.parse_estat_json_response(
-            self.sample_api_response
-        )
+            self.sample_api_response)
         self.assertEqual(len(records), 2)
         self.assertEqual(records[0]['indicatorCd'], '0301010000020020010')
-        self.assertEqual(
-            records[0]['indicatorName'], 'Unemployment rate (Both sexes)'
-        )
+        self.assertEqual(records[0]['indicatorName'],
+                         'Unemployment rate (Both sexes)')
         self.assertEqual(records[0]['unitName'], '%')
         self.assertEqual(records[0]['regionCd'], '00000')
         self.assertEqual(records[0]['regionName'], 'Japan')
@@ -148,8 +153,9 @@ class DownloadScriptTest(unittest.TestCase):
             with mock.patch.object(os.path, 'getsize', return_value=0):
                 with self.assertRaises(RuntimeError):
                     download_script._write_csv_atomically(
-                        target_path, [{'year': '2020'}]
-                    )
+                        target_path, [{
+                            'year': '2020'
+                        }])
             self.assertFalse(os.path.exists(target_path))
             self.assertEqual(os.listdir(tmp_dir), [])
 
@@ -189,7 +195,8 @@ class DownloadScriptTest(unittest.TestCase):
             with open(out_file, 'r', encoding='utf-8') as f:
                 reader = csv.reader(f)
                 header = next(reader)
-                self.assertEqual(header[:4], ['year', 'indicatorCd', 'regionCd', 'value'])
+                self.assertEqual(header[:4],
+                                 ['year', 'indicatorCd', 'regionCd', 'value'])
                 rows = list(reader)
             self.assertEqual(len(rows), 2)
             self.assertEqual(rows[1][0], '1954')
@@ -200,7 +207,8 @@ class DownloadScriptTest(unittest.TestCase):
             hist_csv = os.path.join(tmp_dir, 'deleted_historical_data.csv')
             with open(hist_csv, 'w', encoding='utf-8', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow(['dataset', 'year', 'indicatorCd', 'regionCd', 'value'])
+                writer.writerow(
+                    ['dataset', 'year', 'indicatorCd', 'regionCd', 'value'])
                 writer.writerow([
                     'jpn_aa1_gender_age_total_population.csv',
                     '1920',
@@ -219,8 +227,9 @@ class DownloadScriptTest(unittest.TestCase):
             self.assertEqual(merged[0]['value'], '2359183')
 
     def test_load_historical_rows_missing_file_raises(self):
-        with self.assertRaises( Exception ):
-            download_script._load_historical_rows('/nonexistent/deleted_historical_data.csv')
+        with self.assertRaises(Exception):
+            download_script._load_historical_rows(
+                '/nonexistent/deleted_historical_data.csv')
 
 
 if __name__ == '__main__':
