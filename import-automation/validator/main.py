@@ -247,6 +247,9 @@ def run_validation_job(absolute_import_name: str,
                     previous_mcf_pattern):
                 logging.info('Running BigQuery differ for %s vs %s',
                              current_mcf_pattern, previous_mcf_pattern)
+                gcs_temp_dir = (
+                    f'gs://{bucket_name}/{output_dir}/{version}/{input_prefix}/validation/_tmp'
+                )
                 differ_summary = bigquery_differ.run_bigquery_differ(
                     current_data=current_mcf_pattern,
                     previous_data=previous_mcf_pattern,
@@ -254,6 +257,7 @@ def run_validation_job(absolute_import_name: str,
                     project_id=project_id,
                     job_name=f'differ_{import_name}_{input_prefix}',
                     dataset_id=bq_dataset,
+                    gcs_temp_dir=gcs_temp_dir,
                     expiration_hours=bq_table_ttl_hours,
                 )
                 diff_found = (differ_summary.get('obs_diff_count', 1) != 0 or

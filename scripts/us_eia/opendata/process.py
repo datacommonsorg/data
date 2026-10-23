@@ -96,7 +96,7 @@ def main(_):
             logging.info("================Calling process method")
             common.process(
                 dataset=FLAGS.dataset,
-                dataset_name=_DATASETS[FLAGS.dataset],
+                dataset_name=_DATASETS[FLAGS.dataset][0],
                 in_json=file_prefix + '.txt',
                 out_csv=file_prefix + '.csv',
                 out_sv_mcf=file_prefix + '.mcf',

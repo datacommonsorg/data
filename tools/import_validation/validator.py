@@ -193,29 +193,29 @@ class Validator:
     Returns:
       A ValidationResult object.
     """
-        if summary is None:
-            return ValidationResult(ValidationStatus.DATA_ERROR,
-                                    'DELETED_RECORDS_PERCENT',
-                                    message="Differ summary is missing.")
+        if not summary:
+            # If summary is missing or empty, assume 0 previous and deleted records.
+            previous_obs_count = 0
+            deleted_records_count = 0
+        else:
+            if 'previous_obs_count' not in summary:
+                return ValidationResult(
+                    ValidationStatus.DATA_ERROR,
+                    'DELETED_RECORDS_PERCENT',
+                    message=
+                    "Differ summary is missing required field: 'previous_obs_count'."
+                )
 
-        if 'previous_obs_count' not in summary:
-            return ValidationResult(
-                ValidationStatus.DATA_ERROR,
-                'DELETED_RECORDS_PERCENT',
-                message=
-                "Differ summary is missing required field: 'previous_obs_count'."
-            )
+            if 'deleted_obs_count' not in summary:
+                return ValidationResult(
+                    ValidationStatus.DATA_ERROR,
+                    'DELETED_RECORDS_PERCENT',
+                    message=
+                    "Differ summary is missing required field: 'deleted_obs_count'."
+                )
 
-        if 'deleted_obs_count' not in summary:
-            return ValidationResult(
-                ValidationStatus.DATA_ERROR,
-                'DELETED_RECORDS_PERCENT',
-                message=
-                "Differ summary is missing required field: 'deleted_obs_count'."
-            )
-
-        previous_obs_count = summary['previous_obs_count']
-        deleted_records_count = summary['deleted_obs_count']
+            previous_obs_count = summary['previous_obs_count']
+            deleted_records_count = summary['deleted_obs_count']
 
         if previous_obs_count == 0:
             if deleted_records_count > 0:
