@@ -374,8 +374,10 @@ def _run_pipeline() -> None:
             if os.path.exists(shard_tmcf):
                 shard_table = os.path.basename(prefix)
                 with open(shard_tmcf, 'r', encoding='utf-8') as f:
-                    tmcf_text = f.read().replace(f'C:{shard_table}->',
-                                                 f'C:{table_name}->')
+                    tmcf_text = (f.read().replace(f'E:{shard_table}->',
+                                                  f'E:{table_name}->').replace(
+                                                      f'C:{shard_table}->',
+                                                      f'C:{table_name}->'))
                 _atomic_write_text(final_tmcf, tmcf_text)
                 break
         if not os.path.exists(final_tmcf):
