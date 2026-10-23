@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""ET-layer StatVar aggregation runner (BigQuery and DuckDB).
+"""ET-layer StatVar aggregation runner (BigQuery).
 
 Implements parity with google3/datacommons/prophet/derived_graph/stat_var_aggregation/processor.cc:
 1. Chained/hierarchical rules (where a rule's source_sv_ids reference another rule's
@@ -34,10 +34,8 @@ import logging
 import math
 import os
 import sys
-import tempfile
 from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional, Sequence, Tuple, Union
 
-import duckdb
 from google.cloud import bigquery
 from omegaconf import OmegaConf
 
@@ -702,153 +700,6 @@ def build_bigquery_agg_obs_sql(
     """
 
 
-def build_duckdb_agg_obs_sql(
-    raw_obs_view: str,
-    agg_obs_table: str,
-) -> str:
-    """Builds the DuckDB CREATE OR REPLACE TABLE agg_obs SQL query matching OBS_BQ_SCHEMA."""
-    key_combined_expr = bigquery_differ.format_key_combined_sql(
-        var_expr="sv_id",
-        about_expr="observationAbout",
-        date_expr="observationDate",
-        period_expr="observationPeriod",
-        method_expr="measurementMethod",
-        unit_expr="unit",
-        scaling_expr="scalingFactor",
-    )
-
-    return f"""
-    CREATE OR REPLACE TABLE {agg_obs_table} AS
-    WITH dedup_obs AS (
-        SELECT
-            REGEXP_REPLACE(variableMeasured, '^(dcid|dcs|schema):', '') AS sv_id,
-            COALESCE(observationAbout, '') AS observationAbout,
-            COALESCE(observationDate, '') AS observationDate,
-            COALESCE(observationPeriod, '') AS observationPeriod,
-            COALESCE(unit, '') AS unit,
-            COALESCE(measurementMethod, '') AS origMeasurementMethod,
-            COALESCE(scalingFactor, '') AS scalingFactor,
-            ARG_MAX(TRY_CAST(value AS DOUBLE), row_num) AS value
-        FROM {raw_obs_view}
-        WHERE TRY_CAST(value AS DOUBLE) IS NOT NULL
-          AND REGEXP_REPLACE(variableMeasured, '^(dcid|dcs|schema):', '') IN (
-              SELECT DISTINCT source_sv_id FROM rules_table
-          )
-        GROUP BY
-            REGEXP_REPLACE(variableMeasured, '^(dcid|dcs|schema):', ''),
-            COALESCE(observationAbout, ''),
-            COALESCE(observationDate, ''),
-            COALESCE(observationPeriod, ''),
-            COALESCE(unit, ''),
-            COALESCE(measurementMethod, ''),
-            COALESCE(scalingFactor, '')
-    ),
-    grouped AS (
-        SELECT
-            r.rule_id,
-            r.ancestor_sv_id AS sv_id,
-            o.observationAbout,
-            o.observationDate,
-            o.observationPeriod,
-            o.unit,
-            o.origMeasurementMethod,
-            o.scalingFactor,
-            r.agg_method,
-            r.skip_check,
-            r.expected_source_count,
-            COUNT(DISTINCT o.sv_id) AS present_source_count,
-            SUM(o.value) AS sum_val,
-            MIN(o.value) AS min_val,
-            MAX(o.value) AS max_val,
-            AVG(o.value) AS avg_val
-        FROM dedup_obs o
-        INNER JOIN rules_table r
-            ON o.sv_id = r.source_sv_id
-        GROUP BY
-            r.rule_id,
-            r.ancestor_sv_id,
-            o.observationAbout,
-            o.observationDate,
-            o.observationPeriod,
-            o.unit,
-            o.origMeasurementMethod,
-            o.scalingFactor,
-            r.agg_method,
-            r.skip_check,
-            r.expected_source_count
-        HAVING r.skip_check OR COUNT(DISTINCT o.sv_id) = r.expected_source_count
-    ),
-    computed AS (
-        SELECT
-            rule_id,
-            sv_id,
-            observationAbout,
-            observationDate,
-            observationPeriod,
-            unit,
-            origMeasurementMethod,
-            CASE
-                WHEN origMeasurementMethod = '' THEN 'DataCommonsAggregate'
-                WHEN origMeasurementMethod = 'DataCommonsAggregate' THEN 'DataCommonsAggregate'
-                WHEN origMeasurementMethod LIKE 'dcAggregate/%' THEN origMeasurementMethod
-                ELSE CONCAT('dcAggregate/', origMeasurementMethod)
-            END AS measurementMethod,
-            scalingFactor,
-            CASE agg_method
-                WHEN 'SUM' THEN sum_val
-                WHEN 'MIN' THEN min_val
-                WHEN 'MAX' THEN max_val
-                WHEN 'AVG' THEN avg_val
-                ELSE sum_val
-            END AS raw_val
-        FROM grouped
-    ),
-    formatted AS (
-        SELECT
-            rule_id,
-            sv_id,
-            CONCAT('dcid:', sv_id) AS variableMeasured,
-            CASE
-                WHEN raw_val = ROUND(raw_val) AND ABS(raw_val) < 1e16
-                    THEN CAST(CAST(ROUND(raw_val) AS BIGINT) AS VARCHAR)
-                ELSE REGEXP_REPLACE(REGEXP_REPLACE(PRINTF('%.10f', raw_val), '0+$', ''), '\\.$', '')
-            END AS value,
-            observationAbout,
-            observationDate,
-            observationPeriod,
-            origMeasurementMethod,
-            measurementMethod,
-            unit,
-            scalingFactor,
-            ROW_NUMBER() OVER (
-                ORDER BY
-                    rule_id,
-                    sv_id,
-                    observationAbout,
-                    observationDate,
-                    origMeasurementMethod,
-                    observationPeriod,
-                    unit,
-                    scalingFactor
-            ) AS row_num
-        FROM computed
-    )
-    SELECT
-        {key_combined_expr} AS key_combined,
-        variableMeasured,
-        value,
-        observationAbout,
-        observationDate,
-        observationPeriod,
-        measurementMethod,
-        unit,
-        scalingFactor,
-        row_num
-    FROM formatted
-    ORDER BY row_num
-    """
-
-
 def _extract_row_fields(
         row: Any) -> Tuple[str, str, str, str, str, str, str, str]:
     """Extracts (variableMeasured, value, observationAbout, observationDate, observationPeriod, measurementMethod, unit, scalingFactor) from a DB row."""
@@ -1097,181 +948,11 @@ def run_bigquery_aggregation(
     }
 
 
-def _register_rules_in_duckdb(con: duckdb.DuckDBPyConnection,
-                              expanded_rules: Sequence[Dict[str, Any]]) -> None:
-    """Creates and populates rules_table in DuckDB."""
-    con.execute("""
-        CREATE TEMP TABLE rules_table (
-            rule_id INTEGER,
-            ancestor_sv_id VARCHAR,
-            source_sv_id VARCHAR,
-            expected_source_count INTEGER,
-            skip_check BOOLEAN,
-            agg_method VARCHAR
-        )
-        """)
-    rule_rows = _flatten_rules_rows(expanded_rules)
-    if rule_rows:
-        con.executemany("INSERT INTO rules_table VALUES (?, ?, ?, ?, ?, ?)",
-                        rule_rows)
-
-
-def _iter_duckdb_chunks(cursor: duckdb.DuckDBPyConnection,
-                        chunk_size: int = 10000) -> Iterator[List[Any]]:
-    """Yields chunks of rows from a DuckDB cursor using fetchmany."""
-    while True:
-        chunk = cursor.fetchmany(chunk_size)
-        if not chunk:
-            break
-        yield chunk
-
-
-def run_duckdb_aggregation(
-    mcf_pattern: str,
-    aggregations: Sequence[Dict[str, Any]],
-    output_mcf_path: str,
-    summary_report_path: Optional[str] = None,
-    duckdb_temp_dir: Optional[str] = None,
-    chunk_size: int = 10000,
-    return_agg_obs_rows: bool = False,
-) -> Dict[str, Any]:
-    """Executes StatVar aggregation in O(1) memory using streaming MCF-to-CSV and DuckDB."""
-    expanded_rules = expand_stat_var_aggregation_config(aggregations)
-    if not expanded_rules:
-        return {
-            "raw_obs_count": 0,
-            "raw_schema_count": 0,
-            "agg_obs_count": 0,
-            "output_mcf_path": None,
-        }
-
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        obs_csv_path = os.path.join(tmp_dir, "raw_obs.csv")
-        schema_csv_path = os.path.join(tmp_dir, "raw_schema.csv")
-
-        raw_obs_count, raw_schema_count = bigquery_differ.stream_mcf_to_csv(
-            mcf_pattern=mcf_pattern,
-            obs_csv_path=obs_csv_path,
-            schema_csv_path=schema_csv_path,
-            exclude_filenames=set(DEFAULT_EXCLUDE_FILENAMES),
-        )
-        if raw_obs_count == 0:
-            return {
-                "raw_obs_count": 0,
-                "raw_schema_count": raw_schema_count,
-                "agg_obs_count": 0,
-                "output_mcf_path": None,
-            }
-
-        con = duckdb.connect(database=":memory:")
-        try:
-            if duckdb_temp_dir:
-                os.makedirs(duckdb_temp_dir, exist_ok=True)
-                con.execute("SET temp_directory = ?", [duckdb_temp_dir])
-
-            _register_rules_in_duckdb(con, expanded_rules)
-
-            escaped_csv = obs_csv_path.replace("'", "''")
-            con.execute(f"""
-                CREATE VIEW raw_obs AS
-                SELECT * FROM read_csv(
-                    '{escaped_csv}',
-                    header = true,
-                    columns = {{
-                        'key_combined': 'VARCHAR',
-                        'variableMeasured': 'VARCHAR',
-                        'value': 'VARCHAR',
-                        'observationAbout': 'VARCHAR',
-                        'observationDate': 'VARCHAR',
-                        'observationPeriod': 'VARCHAR',
-                        'measurementMethod': 'VARCHAR',
-                        'unit': 'VARCHAR',
-                        'scalingFactor': 'VARCHAR',
-                        'row_num': 'BIGINT'
-                    }},
-                    nullstr = ''
-                )
-                """)
-
-            create_agg_sql = build_duckdb_agg_obs_sql(
-                raw_obs_view="raw_obs",
-                agg_obs_table="agg_obs",
-            )
-            con.execute(create_agg_sql)
-
-            agg_obs_rows: Optional[List[Dict[str, Any]]] = None
-            if return_agg_obs_rows:
-                col_names = list(bigquery_differ.OBS_CSV_COLUMNS)
-                raw_tuples = con.execute(
-                    f"SELECT {', '.join(col_names)} FROM agg_obs ORDER BY row_num"
-                ).fetchall()
-                agg_obs_rows = [dict(zip(col_names, tup)) for tup in raw_tuples]
-
-            cursor = con.execute("""
-                SELECT
-                    variableMeasured,
-                    value,
-                    observationAbout,
-                    observationDate,
-                    observationPeriod,
-                    measurementMethod,
-                    unit,
-                    scalingFactor
-                FROM agg_obs
-                ORDER BY row_num
-                """)
-            agg_obs_count = _stream_chunks_to_mcf_and_summary(
-                chunks=_iter_duckdb_chunks(cursor, chunk_size=chunk_size),
-                output_mcf_path=output_mcf_path,
-                summary_report_path=summary_report_path,
-            )
-        finally:
-            con.close()
-
-    result: Dict[str, Any] = {
-        "raw_obs_count": raw_obs_count,
-        "raw_schema_count": raw_schema_count,
-        "agg_obs_count": agg_obs_count,
-        "output_mcf_path": output_mcf_path if agg_obs_count > 0 else None,
-    }
-    if return_agg_obs_rows and agg_obs_rows is not None:
-        result["agg_obs_rows"] = agg_obs_rows
-    return result
-
-
-def run_stat_var_aggregation_duckdb(
-    mcf_paths: Union[str, Sequence[str]],
-    aggregations: Sequence[Dict[str, Any]],
-    duckdb_temp_dir: Optional[str] = None,
-) -> List[Dict[str, Any]]:
-    """Convenience helper executing DuckDB aggregation over MCF file(s) and returning parsed records."""
-    if isinstance(mcf_paths, str):
-        mcf_pattern = mcf_paths
-    else:
-        mcf_list = list(mcf_paths)
-        if not mcf_list:
-            return []
-        mcf_pattern = ",".join(mcf_list)
-
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        out_mcf = os.path.join(tmp_dir, STAT_VAR_AGG_MCF_FILENAME)
-        res = run_duckdb_aggregation(
-            mcf_pattern=mcf_pattern,
-            aggregations=aggregations,
-            output_mcf_path=out_mcf,
-            duckdb_temp_dir=duckdb_temp_dir,
-        )
-        if not res.get("output_mcf_path") or not os.path.exists(out_mcf):
-            return []
-        return parse_mcf_observations([out_mcf])
-
-
 def run_stat_var_aggregation_for_genmcf(
     import_name: str,
     genmcf_output_path: str,
     config_path: Optional[str] = None,
     import_spec: Optional[Dict[str, Any]] = None,
-    engine: str = "duckdb",
     bigquery_project_id: Optional[str] = None,
     bigquery_dataset_id: str = "datcom_import_differ",
     version: str = "v0",
@@ -1306,28 +987,19 @@ def run_stat_var_aggregation_for_genmcf(
         )
         return None
 
-    engine_norm = (engine or "duckdb").strip().lower()
-    if engine_norm == "bigquery":
-        res = run_bigquery_aggregation(
-            mcf_pattern=mcf_pattern,
-            aggregations=rules,
-            output_mcf_path=output_mcf_path,
-            project_id=bigquery_project_id or "",
-            dataset_id=bigquery_dataset_id,
-            import_name=import_name,
-            version=version,
-            input_prefix=input_prefix,
-            summary_report_path=summary_csv_path,
-            gcs_temp_dir=gcs_temp_dir,
-            expiration_hours=expiration_hours,
-            bq_client=bq_client,
-        )
-    else:
-        res = run_duckdb_aggregation(
-            mcf_pattern=mcf_pattern,
-            aggregations=rules,
-            output_mcf_path=output_mcf_path,
-            summary_report_path=summary_csv_path,
-        )
+    res = run_bigquery_aggregation(
+        mcf_pattern=mcf_pattern,
+        aggregations=rules,
+        output_mcf_path=output_mcf_path,
+        project_id=bigquery_project_id or "",
+        dataset_id=bigquery_dataset_id,
+        import_name=import_name,
+        version=version,
+        input_prefix=input_prefix,
+        summary_report_path=summary_csv_path,
+        gcs_temp_dir=gcs_temp_dir,
+        expiration_hours=expiration_hours,
+        bq_client=bq_client,
+    )
 
     return res.get("output_mcf_path")

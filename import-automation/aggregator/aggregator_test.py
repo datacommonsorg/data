@@ -18,6 +18,7 @@ import importlib.util
 import json
 import os
 import re
+import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -25,7 +26,7 @@ import types
 import unittest
 from unittest import mock
 
-import duckdb
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _ROOT_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
@@ -144,6 +145,254 @@ def _run_genmcf_local(
     return genmcf_dir
 
 
+class _ArgMaxFloat:
+    """SQLite aggregate emulating BigQuery ARRAY_AGG(SAFE_CAST(value AS FLOAT64) ORDER BY row_num DESC LIMIT 1)[OFFSET(0)]."""
+
+    def __init__(self):
+        self.max_row_num = None
+        self.val = None
+
+    def step(self, value, row_num):
+        try:
+            fval = float(value)
+        except (ValueError, TypeError):
+            return
+        r = int(row_num) if row_num is not None else -1
+        if self.max_row_num is None or r >= self.max_row_num:
+            self.max_row_num = r
+            self.val = fval
+
+    def finalize(self):
+        return self.val
+
+
+def _safe_cast_float64(val):
+    if val is None or val == "":
+        return None
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return None
+
+
+def _translate_bq_sql_for_sqlite(sql: str, existing_tables: dict[str,
+                                                                 str]) -> str:
+    """Translates BigQuery SQL dialects from build_bigquery_agg_obs_sql and bigquery_differ into SQLite."""
+
+    def _tbl_repl(m):
+        ref = m.group(1)
+        return existing_tables.get(ref, re.sub(r"[^a-zA-Z0-9_]", "_", ref))
+
+    out = re.sub(r"`([^`]+)`", _tbl_repl, sql)
+
+    def _unnest_repl(m):
+        body = m.group(1)
+        structs = re.findall(r"STRUCT\((.*?)\)(?:,\s*|\s*$)",
+                             body,
+                             flags=re.DOTALL)
+        converted = []
+        for s in structs:
+            s_clean = re.sub(r"\bTRUE\b", "1", s)
+            s_clean = re.sub(r"\bFALSE\b", "0", s_clean)
+            converted.append(f"SELECT {s_clean}")
+        return "\nUNION ALL\n".join(converted)
+
+    out = re.sub(
+        r"SELECT \* FROM UNNEST\(\[\s*(.*?)\s*\]\)",
+        _unnest_repl,
+        out,
+        flags=re.DOTALL,
+    )
+    out = out.replace(
+        "ARRAY_AGG(SAFE_CAST(value AS FLOAT64) ORDER BY row_num DESC LIMIT 1)[OFFSET(0)]",
+        "ARG_MAX_FLOAT(value, row_num)",
+    )
+    out = out.replace("SAFE_CAST(value AS FLOAT64)", "SAFE_CAST_FLOAT64(value)")
+    out = out.replace("AS INT64", "AS INTEGER").replace("AS STRING", "AS TEXT")
+    out = re.sub(r"\br'([^']*)'", r"'\1'", out)
+    out = re.sub(r"COUNTIF\(([^)]+)\)", r"COUNT(*) FILTER (WHERE \1)", out)
+    return out
+
+
+def _make_mock_bq_client():
+    """Creates an in-memory mocked bigquery.Client that executes BigQuery SQL for tests."""
+    con = sqlite3.connect(":memory:")
+    con.create_function(
+        "REGEXP_REPLACE",
+        3,
+        lambda s, pat, rep: "" if s is None else re.sub(pat, rep, str(s)),
+    )
+    con.create_function(
+        "CONCAT",
+        -1,
+        lambda *args: "".join("" if a is None else str(a) for a in args),
+    )
+    con.create_function(
+        "FORMAT",
+        2,
+        lambda fmt, val: "" if val is None else (fmt % float(val)),
+    )
+    con.create_function("SAFE_CAST_FLOAT64", 1, _safe_cast_float64)
+    con.create_aggregate("ARG_MAX_FLOAT", 2, _ArgMaxFloat)
+
+    existing_tables: dict[str, str] = {}
+    deleted_tables: list[str] = []
+
+    def _safe_tbl(table_ref: str) -> str:
+        return re.sub(r"[^a-zA-Z0-9_]", "_", table_ref)
+
+    mock_bq = mock.MagicMock()
+    mock_bq.existing_tables = existing_tables
+    mock_bq.deleted_tables = deleted_tables
+    mock_bq._sqlite_con = con
+
+    mock_ds = mock.MagicMock()
+    mock_ds.default_table_expiration_ms = 12 * 3600 * 1000
+    mock_bq.get_dataset.return_value = mock_ds
+
+    def _load_table_from_file(file_obj, table_ref, job_config=None):
+        safe_name = _safe_tbl(table_ref)
+        con.execute(f"DROP TABLE IF EXISTS {safe_name}")
+        with open(file_obj.name, "r", encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+        if job_config and len(job_config.schema) == 10:
+            con.execute(f"""
+                CREATE TABLE {safe_name} (
+                    key_combined TEXT,
+                    variableMeasured TEXT,
+                    value TEXT,
+                    observationAbout TEXT,
+                    observationDate TEXT,
+                    observationPeriod TEXT,
+                    measurementMethod TEXT,
+                    unit TEXT,
+                    scalingFactor TEXT,
+                    row_num INTEGER
+                )
+                """)
+            if rows:
+                con.executemany(
+                    f"INSERT INTO {safe_name} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [(
+                        r["key_combined"],
+                        r["variableMeasured"],
+                        r["value"],
+                        r["observationAbout"],
+                        r["observationDate"],
+                        r["observationPeriod"],
+                        r["measurementMethod"],
+                        r["unit"],
+                        r["scalingFactor"],
+                        int(r["row_num"]),
+                    ) for r in rows],
+                )
+        else:
+            con.execute(f"""
+                CREATE TABLE {safe_name} (
+                    dcid TEXT,
+                    value_combined TEXT
+                )
+                """)
+            if rows:
+                con.executemany(
+                    f"INSERT INTO {safe_name} VALUES (?, ?)",
+                    [(r["dcid"], r["value_combined"]) for r in rows],
+                )
+        existing_tables[table_ref] = safe_name
+        job = mock.MagicMock()
+        job.result.return_value = None
+        return job
+
+    def _get_table(table_ref):
+        if table_ref not in existing_tables:
+            raise RuntimeError(f"Table not found: {table_ref}")
+        safe_name = existing_tables[table_ref]
+        cnt = con.execute(f"SELECT COUNT(*) FROM {safe_name}").fetchone()[0]
+        tbl = mock.MagicMock()
+        tbl.num_rows = cnt
+        return tbl
+
+    def _query(sql):
+        job = mock.MagicMock()
+        m_create = re.search(
+            r"CREATE OR REPLACE TABLE `([^`]+)` AS",
+            sql,
+            re.DOTALL,
+        )
+        if m_create:
+            agg_ref = m_create.group(1)
+            safe_agg = _safe_tbl(agg_ref)
+            con.execute(f"DROP TABLE IF EXISTS {safe_agg}")
+            sqlite_sql = _translate_bq_sql_for_sqlite(sql, existing_tables)
+            sqlite_sql = re.sub(
+                r"CREATE OR REPLACE TABLE\s+\w+\s+AS",
+                f"CREATE TABLE {safe_agg} AS",
+                sqlite_sql,
+            )
+            con.execute(sqlite_sql)
+            existing_tables[agg_ref] = safe_agg
+            job.result.return_value = []
+            return job
+
+        sqlite_sql = _translate_bq_sql_for_sqlite(sql, existing_tables)
+        if "added_schema_count" in sqlite_sql:
+            row_tup = con.execute(sqlite_sql).fetchone()
+            row_obj = types.SimpleNamespace(
+                added_schema_count=row_tup[0],
+                deleted_schema_count=row_tup[1],
+                modified_schema_count=row_tup[2],
+            )
+            job.result.return_value = [row_obj]
+            return job
+        if "GROUP BY StatVar" in sqlite_sql:
+            cur = con.execute(sqlite_sql)
+            cols = [d[0] for d in cur.description]
+            data = cur.fetchall()
+            job.to_dataframe.return_value = pd.DataFrame(data, columns=cols)
+            return job
+
+        rows = con.execute(sqlite_sql).fetchall()
+        res_iter = mock.MagicMock()
+        res_iter.pages = [rows]
+        job.result.return_value = res_iter
+        return job
+
+    def _delete_table(table_ref, not_found_ok=True):
+        deleted_tables.append(table_ref)
+        safe_name = existing_tables.pop(table_ref, None)
+        if safe_name:
+            con.execute(f"DROP TABLE IF EXISTS {safe_name}")
+
+    mock_bq.load_table_from_file.side_effect = _load_table_from_file
+    mock_bq.get_table.side_effect = _get_table
+    mock_bq.query.side_effect = _query
+    mock_bq.delete_table.side_effect = _delete_table
+    return mock_bq
+
+
+def _run_bq_agg_and_parse(mcf_path: str, rules: list[dict]) -> list[dict]:
+    """Runs run_bigquery_aggregation with a mocked BigQuery client and returns parsed MCF records."""
+    mock_bq = _make_mock_bq_client()
+    with tempfile.TemporaryDirectory() as out_dir:
+        out_mcf = os.path.join(out_dir,
+                               stat_var_aggregator.STAT_VAR_AGG_MCF_FILENAME)
+        res = stat_var_aggregator.run_bigquery_aggregation(
+            mcf_pattern=mcf_path,
+            aggregations=rules,
+            output_mcf_path=out_mcf,
+            project_id="test-proj",
+            dataset_id="test_ds",
+            import_name="TestImport",
+            version="v1",
+            input_prefix="input0",
+            bq_client=mock_bq,
+        )
+        if not res.get("output_mcf_path") or not os.path.exists(out_mcf):
+            return []
+        return stat_var_aggregator.parse_mcf_observations([out_mcf])
+
+
 class StatVarAggregatorTest(unittest.TestCase):
     """Tests for ET-layer StatVar aggregation (stat_var_aggregator.py and main.py)."""
 
@@ -251,8 +500,7 @@ class StatVarAggregatorTest(unittest.TestCase):
                 "source_sv_ids": ["SV_Child1", "SV_Child2"],
                 "skip_all_sources_present_check": False,
             }]
-            out_strict = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules_strict)
+            out_strict = _run_bq_agg_and_parse(mcf_path, rules_strict)
             self.assertEqual([], out_strict)
 
             rules_skip = [{
@@ -260,8 +508,7 @@ class StatVarAggregatorTest(unittest.TestCase):
                 "source_sv_ids": ["SV_Child1", "SV_Child2"],
                 "skip_all_sources_present_check": True,
             }]
-            out_skip = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules_skip)
+            out_skip = _run_bq_agg_and_parse(mcf_path, rules_skip)
             self.assertEqual(2, len(out_skip))
             self.assertEqual([10.0, 20.0], sorted(r["value"] for r in out_skip))
 
@@ -312,8 +559,7 @@ class StatVarAggregatorTest(unittest.TestCase):
                 "ancestor_sv_id": "SV_Parent",
                 "source_sv_ids": ["SV_Child1", "SV_Child2"],
             }]
-            out = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules)
+            out = _run_bq_agg_and_parse(mcf_path, rules)
             self.assertEqual(1, len(out))
             self.assertEqual(150.0, out[0]["value"])
             self.assertEqual("150", out[0]["valueStr"])
@@ -372,8 +618,7 @@ class StatVarAggregatorTest(unittest.TestCase):
                     "aggregation_method": "AVG",
                 },
             ]
-            out = stat_var_aggregator.run_stat_var_aggregation_duckdb(
-                [mcf_path], rules)
+            out = _run_bq_agg_and_parse(mcf_path, rules)
             by_sv = {r["variableMeasured"]: r for r in out}
             self.assertEqual(40.0, by_sv["Out_Sum"]["value"])
             self.assertEqual(10.0, by_sv["Out_Min"]["value"])
@@ -419,14 +664,25 @@ class StatVarAggregatorTest(unittest.TestCase):
                 "ancestor_sv_id": "SV_Total",
                 "source_sv_ids": ["SV_Child1", "SV_Child2"],
             }]
-            res = stat_var_aggregator.run_duckdb_aggregation(
+            mock_bq = _make_mock_bq_client()
+            res = stat_var_aggregator.run_bigquery_aggregation(
                 mcf_pattern=raw_mcf,
                 aggregations=rules,
                 output_mcf_path=agg_mcf,
-                return_agg_obs_rows=True,
+                project_id="test-proj",
+                dataset_id="test_ds",
+                import_name="TestImp",
+                version="v1",
+                input_prefix="input0",
+                bq_client=mock_bq,
             )
             self.assertEqual(1, res["agg_obs_count"])
-            agg_obs_row = res["agg_obs_rows"][0]
+            safe_agg = mock_bq.existing_tables[res["table_ids"]["agg_obs"]]
+            col_names = list(bigquery_differ.OBS_CSV_COLUMNS)
+            raw_tup = mock_bq._sqlite_con.execute(
+                f"SELECT {', '.join(col_names)} FROM {safe_agg} ORDER BY row_num"
+            ).fetchone()
+            agg_obs_row = dict(zip(col_names, raw_tup))
 
             parsed_obs_csv = os.path.join(tmp_dir, "parsed_agg_obs.csv")
             parsed_schema_csv = os.path.join(tmp_dir, "parsed_agg_schema.csv")
@@ -447,7 +703,7 @@ class StatVarAggregatorTest(unittest.TestCase):
             self.assertEqual("20", agg_obs_row["value"])
 
     def test_e2e_pattern_1_india_rbi_state_domestic_product(self):
-        """End-to-end test: CSV + TMCF -> Java genmcf -> MCF -> DuckDB -> stat_var_agg_nodes.mcf for India_RBI."""
+        """End-to-end test: CSV + TMCF -> Java genmcf -> MCF -> BigQuery -> stat_var_agg_nodes.mcf for India_RBI."""
         tmcf = """Node: E:rbi->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:rbi->StatVar
@@ -472,6 +728,8 @@ dcid:wikidataId/Q1185,2021,dcs:Nominal_Amount_EconomicActivity_GrossValueAdded_C
             out_mcf = stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                 import_name="India_RBIStateDomesticProduct",
                 genmcf_output_path=genmcf_dir,
+                bigquery_project_id="test-proj",
+                bq_client=_make_mock_bq_client(),
             )
             self.assertIsNotNone(out_mcf)
             self.assertTrue(os.path.exists(out_mcf))
@@ -516,6 +774,8 @@ dcid:nuts/DE1,2020,dcs:Count_Person_15To19Years,1500
             out_mcf = stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                 import_name="OECDRegionalDemography_Population",
                 genmcf_output_path=genmcf_dir,
+                bigquery_project_id="test-proj",
+                bq_client=_make_mock_bq_client(),
             )
             self.assertIsNotNone(out_mcf)
             parsed = stat_var_aggregator.parse_mcf_observations([out_mcf])
@@ -549,6 +809,8 @@ dcid:geoId/06,2017,dcs:Count_Person_Producer_AsianAlone,4000
             out_mcf = stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                 import_name="USDA_AgricultureCensus",
                 genmcf_output_path=genmcf_dir,
+                bigquery_project_id="test-proj",
+                bq_client=_make_mock_bq_client(),
             )
             self.assertIsNotNone(out_mcf)
             parsed = stat_var_aggregator.parse_mcf_observations([out_mcf])
@@ -582,6 +844,8 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             out_mcf = stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                 import_name="CensusACS5YearSurvey_SubjectTables_S1251",
                 genmcf_output_path=genmcf_dir,
+                bigquery_project_id="test-proj",
+                bq_client=_make_mock_bq_client(),
             )
             self.assertIsNotNone(out_mcf)
             parsed = stat_var_aggregator.parse_mcf_observations([out_mcf])
@@ -599,6 +863,8 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
                 stat_var_aggregator.run_stat_var_aggregation_for_genmcf(
                     import_name="CensusACS5YearSurvey_SubjectTables_S1251",
                     genmcf_output_path=genmcf_dir,
+                    bigquery_project_id="test-proj",
+                    bq_client=_make_mock_bq_client(),
                 ))
             self.assertIsNotNone(out_mcf_rerun)
             parsed_rerun = stat_var_aggregator.parse_mcf_observations(
@@ -734,132 +1000,12 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             )
 
     def test_cross_job_e2e_aggregator_to_bigquery_differ(self):
-        """Verifies full Job 2 (aggregator) -> Job 3 (bigquery_differ) flow using a DuckDB-backed mock BigQuery client."""
-        con = duckdb.connect(":memory:")
-        existing_tables: dict[str, str] = {}
-        deleted_tables: list[str] = []
+        """Verifies full Job 2 (aggregator) -> Job 3 (bigquery_differ) flow using a mocked BigQuery client."""
         rules = [{
             "ancestor_sv_id": "SV_Total",
             "source_sv_ids": ["SV_Child1", "SV_Child2"],
         }]
-        expanded_rules = stat_var_aggregator.expand_stat_var_aggregation_config(
-            rules)
-        stat_var_aggregator._register_rules_in_duckdb(con, expanded_rules)
-
-        def _safe_tbl(table_ref: str) -> str:
-            return re.sub(r"[^a-zA-Z0-9_]", "_", table_ref)
-
-        mock_bq = mock.MagicMock()
-        mock_ds = mock.MagicMock()
-        mock_ds.default_table_expiration_ms = 12 * 3600 * 1000
-        mock_bq.get_dataset.return_value = mock_ds
-
-        def _load_table_from_file(file_obj, table_ref, job_config=None):
-            safe_name = _safe_tbl(table_ref)
-            csv_path = file_obj.name.replace("'", "''")
-            if job_config and len(job_config.schema) == 10:
-                con.execute(f"""
-                    CREATE OR REPLACE TABLE {safe_name} AS
-                    SELECT * FROM read_csv(
-                        '{csv_path}',
-                        header = true,
-                        columns = {{
-                            'key_combined': 'VARCHAR',
-                            'variableMeasured': 'VARCHAR',
-                            'value': 'VARCHAR',
-                            'observationAbout': 'VARCHAR',
-                            'observationDate': 'VARCHAR',
-                            'observationPeriod': 'VARCHAR',
-                            'measurementMethod': 'VARCHAR',
-                            'unit': 'VARCHAR',
-                            'scalingFactor': 'VARCHAR',
-                            'row_num': 'BIGINT'
-                        }},
-                        nullstr = ''
-                    )
-                    """)
-            else:
-                con.execute(f"""
-                    CREATE OR REPLACE TABLE {safe_name} AS
-                    SELECT * FROM read_csv(
-                        '{csv_path}',
-                        header = true,
-                        columns = {{
-                            'dcid': 'VARCHAR',
-                            'value_combined': 'VARCHAR'
-                        }},
-                        nullstr = ''
-                    )
-                    """)
-            existing_tables[table_ref] = safe_name
-            job = mock.MagicMock()
-            job.result.return_value = None
-            return job
-
-        def _get_table(table_ref):
-            if table_ref not in existing_tables:
-                raise RuntimeError(f"Table not found: {table_ref}")
-            safe_name = existing_tables[table_ref]
-            cnt = con.execute(f"SELECT COUNT(*) FROM {safe_name}").fetchone()[0]
-            tbl = mock.MagicMock()
-            tbl.num_rows = cnt
-            return tbl
-
-        def _query(sql):
-            job = mock.MagicMock()
-            m_create = re.search(
-                r"CREATE OR REPLACE TABLE `([^`]+)` AS.*FROM `([^`]+)`",
-                sql,
-                re.DOTALL,
-            )
-            if m_create:
-                agg_ref, raw_ref = m_create.group(1), m_create.group(2)
-                safe_agg = _safe_tbl(agg_ref)
-                safe_raw = existing_tables[raw_ref]
-                duck_create_sql = stat_var_aggregator.build_duckdb_agg_obs_sql(
-                    raw_obs_view=safe_raw, agg_obs_table=safe_agg)
-                con.execute(duck_create_sql)
-                existing_tables[agg_ref] = safe_agg
-                job.result.return_value = []
-                return job
-
-            duck_sql = re.sub(r"`([^`]+)`",
-                              lambda m: existing_tables[m.group(1)], sql)
-            duck_sql = re.sub(
-                r"COUNTIF\(([^)]+)\)",
-                r"COUNT(*) FILTER (WHERE \1)",
-                duck_sql,
-            )
-            if "added_schema_count" in duck_sql:
-                row_tup = con.execute(duck_sql).fetchone()
-                row_obj = types.SimpleNamespace(
-                    added_schema_count=row_tup[0],
-                    deleted_schema_count=row_tup[1],
-                    modified_schema_count=row_tup[2],
-                )
-                job.result.return_value = [row_obj]
-                return job
-            if "GROUP BY StatVar" in duck_sql:
-                df = con.execute(duck_sql).df()
-                job.to_dataframe.return_value = df
-                return job
-
-            rows = con.execute(duck_sql).fetchall()
-            res_iter = mock.MagicMock()
-            res_iter.pages = [rows]
-            job.result.return_value = res_iter
-            return job
-
-        def _delete_table(table_ref, not_found_ok=True):
-            deleted_tables.append(table_ref)
-            safe_name = existing_tables.pop(table_ref, None)
-            if safe_name:
-                con.execute(f"DROP TABLE IF EXISTS {safe_name}")
-
-        mock_bq.load_table_from_file.side_effect = _load_table_from_file
-        mock_bq.get_table.side_effect = _get_table
-        mock_bq.query.side_effect = _query
-        mock_bq.delete_table.side_effect = _delete_table
+        mock_bq = _make_mock_bq_client()
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             prev_dir = os.path.join(tmp_dir, "prev_genmcf")
@@ -908,10 +1054,16 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
                 ],
                 prev_raw_mcf,
             )
-            stat_var_aggregator.run_duckdb_aggregation(
+            stat_var_aggregator.run_bigquery_aggregation(
                 mcf_pattern=os.path.join(prev_dir, "*.mcf"),
                 aggregations=rules,
                 output_mcf_path=prev_agg_mcf,
+                project_id="test-proj",
+                dataset_id="test_ds",
+                import_name="TestImp",
+                version="2026_10_20",
+                input_prefix="input0",
+                bq_client=_make_mock_bq_client(),
             )
 
             # Current run: geoId/06 (Child1=120 [MODIFIED], Child2=50 -> Total=170 [MODIFIED]),
@@ -1054,12 +1206,11 @@ dcid:geoId/06,2022,dcs:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_
             )
 
             # All 5 temporary tables (raw_obs, raw_schema, agg_obs, prev_obs, prev_schema) were dropped
-            self.assertEqual(5, len(deleted_tables))
-            self.assertIn(shared_ids["raw_obs"], deleted_tables)
-            self.assertIn(shared_ids["raw_schema"], deleted_tables)
-            self.assertIn(shared_ids["agg_obs"], deleted_tables)
-            self.assertEqual({}, existing_tables)
-        con.close()
+            self.assertEqual(5, len(mock_bq.deleted_tables))
+            self.assertIn(shared_ids["raw_obs"], mock_bq.deleted_tables)
+            self.assertIn(shared_ids["raw_schema"], mock_bq.deleted_tables)
+            self.assertIn(shared_ids["agg_obs"], mock_bq.deleted_tables)
+            self.assertEqual({}, mock_bq.existing_tables)
 
     @mock.patch("aggregator_main.storage.Client")
     def test_main_run_aggregation_job_skips_when_import_not_in_config(

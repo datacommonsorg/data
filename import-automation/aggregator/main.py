@@ -84,12 +84,6 @@ def _define_cli_flags() -> None:
             12,
             "TTL in hours for temporary BigQuery tables.",
         )
-    if "runner_mode" not in FLAGS:
-        flags.DEFINE_string(
-            "runner_mode",
-            "bigquery",
-            "Execution mode for StatVar aggregation: 'bigquery' or 'duckdb'.",
-        )
     if "config_path" not in FLAGS:
         flags.DEFINE_string(
             "config_path",
@@ -143,7 +137,6 @@ def run_aggregation_job(
     bucket_name: str = "",
     bq_dataset: str = "datcom_import_differ",
     bq_table_ttl_hours: int = 12,
-    runner_mode: str = "bigquery",
     config_path: Optional[str] = None,
 ) -> int:
     """Executes StatVar aggregation for an import version if configured in statvar_aggregation.yaml."""
@@ -181,9 +174,6 @@ def run_aggregation_job(
         bq_table_ttl_hours = int(
             user_config.get("bq_table_ttl_hours") or env_ttl or
             bq_table_ttl_hours)
-    mode = (runner_mode or user_config.get("aggregation_runner_mode") or
-            os.environ.get("AGGREGATION_RUNNER_MODE") or
-            "bigquery").strip().lower()
 
     gcs_client = storage.Client(project=project_id or None)
 
@@ -197,8 +187,7 @@ def run_aggregation_job(
         )
 
     logging.info(
-        "Running StatVar aggregation (%s) for %s version=%s (%d rules)",
-        mode,
+        "Running StatVar aggregation for %s version=%s (%d rules)",
         output_dir,
         version,
         len(rules),
@@ -245,32 +234,23 @@ def run_aggregation_job(
                 file_util.file_copy(gcs_summary_uri, local_summary_csv)
                 summary_exists = True
 
-            if mode == "duckdb":
-                res = stat_var_aggregator.run_duckdb_aggregation(
-                    mcf_pattern=mcf_pattern,
-                    aggregations=rules,
-                    output_mcf_path=local_agg_mcf,
-                    summary_report_path=local_summary_csv
-                    if summary_exists else None,
-                )
-            else:
-                gcs_temp_dir = (
-                    f"gs://{bucket_name}/{output_dir}/{version}/{input_prefix}/aggregation/_tmp"
-                )
-                res = stat_var_aggregator.run_bigquery_aggregation(
-                    mcf_pattern=mcf_pattern,
-                    aggregations=rules,
-                    output_mcf_path=local_agg_mcf,
-                    project_id=project_id,
-                    dataset_id=bq_dataset,
-                    import_name=import_name,
-                    version=version,
-                    input_prefix=input_prefix,
-                    summary_report_path=local_summary_csv
-                    if summary_exists else None,
-                    gcs_temp_dir=gcs_temp_dir,
-                    expiration_hours=bq_table_ttl_hours,
-                )
+            gcs_temp_dir = (
+                f"gs://{bucket_name}/{output_dir}/{version}/{input_prefix}/aggregation/_tmp"
+            )
+            res = stat_var_aggregator.run_bigquery_aggregation(
+                mcf_pattern=mcf_pattern,
+                aggregations=rules,
+                output_mcf_path=local_agg_mcf,
+                project_id=project_id,
+                dataset_id=bq_dataset,
+                import_name=import_name,
+                version=version,
+                input_prefix=input_prefix,
+                summary_report_path=local_summary_csv
+                if summary_exists else None,
+                gcs_temp_dir=gcs_temp_dir,
+                expiration_hours=bq_table_ttl_hours,
+            )
 
             agg_count = int(res.get("agg_obs_count", 0))
             total_agg_obs += agg_count
@@ -312,7 +292,6 @@ def main(_):
         bucket_name=FLAGS.gcs_bucket,
         bq_dataset=FLAGS.bq_dataset,
         bq_table_ttl_hours=FLAGS.bq_table_ttl_hours,
-        runner_mode=FLAGS.runner_mode,
         config_path=FLAGS.config_path or None,
     )
     sys.exit(code)

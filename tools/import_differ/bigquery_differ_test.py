@@ -16,6 +16,7 @@
 import csv
 import json
 import os
+import sqlite3
 import sys
 import tempfile
 import unittest
@@ -142,9 +143,6 @@ class BigQueryDifferTest(unittest.TestCase):
         )
 
     def test_format_key_combined_sql_matches_mcf_parser(self):
-        import duckdb
-        import io
-
         agg_mcf = """
 Node: dcid:dc/o/test1
 typeOf: dcs:StatVarObservation
@@ -178,7 +176,12 @@ measurementMethod: dcs:DataCommonsAggregate
             with open(obs_csv, 'r', encoding='utf-8') as f:
                 csv_rows = list(csv.DictReader(f))
 
-        con = duckdb.connect(':memory:')
+        con = sqlite3.connect(':memory:')
+        con.create_function(
+            'CONCAT',
+            -1,
+            lambda *args: ''.join('' if a is None else str(a) for a in args),
+        )
         key_expr = bigquery_differ.format_key_combined_sql(
             'variableMeasured',
             'observationAbout',
