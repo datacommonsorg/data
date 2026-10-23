@@ -19,7 +19,12 @@ import csv
 import os
 import sys
 import tempfile
+import threading
 from typing import Any
+
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../util/'))
@@ -27,7 +32,6 @@ sys.path.insert(1, os.path.join(_MODULE_DIR, '../../util/'))
 from absl import app
 from absl import flags
 from absl import logging
-import download_util
 import file_util
 
 _FLAGS = flags.FLAGS
@@ -215,13 +219,10 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
     status_code = str(result.get('status', ''))
     error_msg = str(result.get('errorMsg', ''))
 
-    if status_code not in ('0', '100'):
+    if status_code != '0':
         raise RuntimeError(
             f'e-Stat API error (status={status_code}): {error_msg}'
         )
-
-    if status_code == '100':
-        return []
 
     stat_data = get_stats.get('STATISTICAL_DATA', {})
     class_objs = stat_data.get('CLASS_INF', {}).get('CLASS_OBJ', [])
@@ -265,7 +266,45 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
             'isProvisional': str(val_obj.get('@isProvisional', '')),
         })
 
+    if not parsed_records:
+        raise RuntimeError('e-Stat API returned 0 data records.')
+
     return parsed_records
+
+
+_THREAD_LOCAL = threading.local()
+
+
+def _get_http_session() -> requests.Session:
+    """Returns a thread-local requests.Session configured with automatic retries."""
+    session = getattr(_THREAD_LOCAL, 'session', None)
+    if session is None:
+        session = requests.Session()
+        retry_strategy = Retry(
+            total=3,
+            connect=3,
+            read=3,
+            status=3,
+            backoff_factor=2.0,
+            status_forcelist=(429, 500, 502, 503, 504),
+            allowed_methods=frozenset(['GET']),
+            raise_on_status=False,
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        session.mount('https://', adapter)
+        session.mount('http://', adapter)
+        _THREAD_LOCAL.session = session
+    return session
+
+
+def _request_estat_json(
+    url: str, params: dict[str, str], timeout: int = 60
+) -> dict[str, Any]:
+    """Performs a thread-safe GET request to the e-Stat JSON API with retries."""
+    session = _get_http_session()
+    resp = session.get(url, params=params, timeout=timeout)
+    resp.raise_for_status()
+    return resp.json()
 
 
 def fetch_indicator_batch(
@@ -297,14 +336,10 @@ def fetch_indicator_batch(
         len(indicators),
         indicators[0],
     )
-    response_json = download_util.request_url(
+    response_json = _request_estat_json(
         url=ESTAT_JSON_API_URL,
         params=params,
-        method='GET',
-        output='json',
         timeout=60,
-        retries=3,
-        retry_secs=5,
     )
     if not response_json or not isinstance(response_json, dict):
         raise RuntimeError(
@@ -404,22 +439,17 @@ def _load_historical_rows(historical_gcs_path: str) -> list[dict[str, str]]:
         return []
     if historical_gcs_path in _HISTORICAL_CACHE:
         return _HISTORICAL_CACHE[historical_gcs_path]
-    try:
-        logging.info(
-            'Reading historical deleted data from GCS: %s', historical_gcs_path
+    logging.info(
+        'Reading historical deleted data from GCS: %s', historical_gcs_path
+    )
+    with file_util.FileIO(historical_gcs_path, 'r', encoding='utf-8') as f:
+        rows = list(csv.DictReader(f))
+    if not rows:
+        raise RuntimeError(
+            f'Historical supplement file is empty: {historical_gcs_path}'
         )
-        with file_util.FileIO(historical_gcs_path, 'r', encoding='utf-8') as f:
-            rows = list(csv.DictReader(f))
-        _HISTORICAL_CACHE[historical_gcs_path] = rows
-        return rows
-    except Exception as e:
-        logging.warning(
-            'Could not read historical deleted data from %s: %s. Proceeding with fresh data only.',
-            historical_gcs_path,
-            e,
-        )
-        _HISTORICAL_CACHE[historical_gcs_path] = []
-        return []
+    _HISTORICAL_CACHE[historical_gcs_path] = rows
+    return rows
 
 
 def _apply_historical_supplement(
@@ -531,16 +561,16 @@ def download_dataset(
     if is_census:
         all_records = _derive_census_population_rows(all_records, census_mode)
 
+    if not all_records:
+        raise RuntimeError(
+            f'No records retrieved for dataset {os.path.basename(output_filepath)}'
+        )
+
     all_records = _apply_historical_supplement(
         os.path.basename(output_filepath),
         all_records,
         historical_gcs_path=historical_gcs_path,
     )
-
-    if not all_records:
-        raise RuntimeError(
-            f'No records retrieved for dataset {os.path.basename(output_filepath)}'
-        )
 
     if census_mode == 'municipality':
         # Split municipality census by year (matching CNS jpn_aa1_aa2_age_gender_{year}.csv)

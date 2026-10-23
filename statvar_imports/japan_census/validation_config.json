@@ -11,11 +11,11 @@
     },
     {
       "rule_id": "check_max_date_freshness",
-      "description": "Verify MaxDate is within allowable publication lag and values are non-negative (and within [0, 100] for rates) for active recurring indicators",
+      "description": "Verify MaxDate is within allowable publication lag (3 years for annual series, 5 years for quinquennial census) and values are non-negative (and within [0, 100] for rates) for active recurring indicators",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT IN ('Count_Person_100To104Years', 'Count_Person_100To104Years_Male', 'Count_Person_100To104Years_Female', 'Count_Person_105To109Years', 'Count_Person_105To109Years_Male', 'Count_Person_105To109Years_Female', 'Count_Person_110OrMoreYears', 'Count_Person_110OrMoreYears_Male', 'Count_Person_110OrMoreYears_Female')",
-        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 5) AND total_svs >= 92 AND NumPlaces >= 1 AND MinValue >= 0 AND (StatVar != 'UnemploymentRate_Person' OR MaxValue <= 100)"
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE NOT regexp_matches(StatVar, '^Count_Person_1(00To104|05To109|10OrMore)Years')",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^(Count_(Student|Teacher|Death|MortalityEvent|Person_(Employed|Unemployed|NotInLaborForce))|UnemploymentRate_Person)') THEN 3 ELSE 5 END) AND total_svs >= 92 AND NumPlaces >= 1 AND MinValue >= 0 AND (StatVar != 'UnemploymentRate_Person' OR MaxValue <= 100)"
       }
     },
     {
@@ -23,7 +23,7 @@
       "description": "Verify MaxDate is at least the last published census wave (2020) and values are non-negative for discontinued historical centenarian sub-brackets",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('Count_Person_100To104Years', 'Count_Person_100To104Years_Male', 'Count_Person_100To104Years_Female', 'Count_Person_105To109Years', 'Count_Person_105To109Years_Male', 'Count_Person_105To109Years_Female', 'Count_Person_110OrMoreYears', 'Count_Person_110OrMoreYears_Male', 'Count_Person_110OrMoreYears_Female')",
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^Count_Person_1(00To104|05To109|10OrMore)Years')",
         "condition": "CAST(MaxDate AS INTEGER) >= 2020 AND total_svs >= 9 AND MinValue >= 0"
       }
     }

@@ -13,7 +13,8 @@ This project downloads, processes, and imports demographic, employment, educatio
     *   **Employment & Unemployment Rate (National)**: Annual (`1953`–`2025`).
     *   **Student Enrollment (National)**: Annual (`1948`–`2026`).
     *   **Teachers (National & Prefecture)**: Annual (`1975`–`2024`).
-    *   **Deaths & Causes of Death (National & Prefecture)**: Annual (`1975`–`2025`).
+    *   **Deaths (National & Prefecture)**: Annual (`1975`–`2025`).
+    *   **Causes of Death (National & Prefecture)**: Annual (`1975`–`2023`).
 *   **Release Frequency**: Annual (vital, labor, and education statistics) and quinquennial (5-year Population Census).
 *   **Notes**: This dataset covers 101 StatisticalVariables across 1,965 places (`country/JPN`, 47 Prefectures, and 1,917 Municipalities).
 

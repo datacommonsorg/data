@@ -110,6 +110,10 @@ class DownloadScriptTest(unittest.TestCase):
             }
         }
 
+    def tearDown(self):
+        download_script._HISTORICAL_CACHE.clear()
+        super().tearDown()
+
     def test_parse_estat_json_response_success(self):
         records = download_script.parse_estat_json_response(
             self.sample_api_response
@@ -126,16 +130,17 @@ class DownloadScriptTest(unittest.TestCase):
         self.assertEqual(records[0]['value'], '1.9')
 
     def test_parse_estat_json_response_error_raises(self):
-        error_payload = {
-            'GET_STATS': {
-                'RESULT': {
-                    'status': '400',
-                    'errorMsg': 'Too many records.',
+        for status in ('400', '100'):
+            error_payload = {
+                'GET_STATS': {
+                    'RESULT': {
+                        'status': status,
+                        'errorMsg': 'API error or no data.',
+                    }
                 }
             }
-        }
-        with self.assertRaises(RuntimeError):
-            download_script.parse_estat_json_response(error_payload)
+            with self.assertRaises(RuntimeError):
+                download_script.parse_estat_json_response(error_payload)
 
     def test_write_csv_atomically_failure_cleanup(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -148,9 +153,9 @@ class DownloadScriptTest(unittest.TestCase):
             self.assertFalse(os.path.exists(target_path))
             self.assertEqual(os.listdir(tmp_dir), [])
 
-    @mock.patch.object(download_script.download_util, 'request_url')
-    def test_download_dataset_empty_error(self, mock_request_url):
-        mock_request_url.return_value = {
+    @mock.patch.object(download_script, '_request_estat_json')
+    def test_download_dataset_empty_error(self, mock_request_json):
+        mock_request_json.return_value = {
             'GET_STATS': {
                 'RESULT': {
                     'status': '100',
@@ -168,9 +173,9 @@ class DownloadScriptTest(unittest.TestCase):
                     batch_size=1,
                 )
 
-    @mock.patch.object(download_script.download_util, 'request_url')
-    def test_download_dataset_writes_csv_atomically(self, mock_request_url):
-        mock_request_url.return_value = self.sample_api_response
+    @mock.patch.object(download_script, '_request_estat_json')
+    def test_download_dataset_writes_csv_atomically(self, mock_request_json):
+        mock_request_json.return_value = self.sample_api_response
         with tempfile.TemporaryDirectory() as tmp_dir:
             out_file = os.path.join(tmp_dir, 'jpn_unemploymentrate.csv')
             count = download_script.download_dataset(
@@ -212,6 +217,10 @@ class DownloadScriptTest(unittest.TestCase):
             self.assertEqual(merged[0]['year'], '1920')
             self.assertEqual(merged[0]['regionCd'], '01000')
             self.assertEqual(merged[0]['value'], '2359183')
+
+    def test_load_historical_rows_missing_file_raises(self):
+        with self.assertRaises( Exception ):
+            download_script._load_historical_rows('/nonexistent/deleted_historical_data.csv')
 
 
 if __name__ == '__main__':

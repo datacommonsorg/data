@@ -148,6 +148,21 @@ class ProcessTest(unittest.TestCase):
                 existing_statvar_mcf='stat_vars.mcf',
             )
 
+    @mock.patch.object(process.file_util, 'file_copy')
+    def test_prepare_local_statvar_mcf_copies_gcs_path(self, mock_file_copy):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            def _fake_copy(src, dst):
+                with open(dst, 'w', encoding='utf-8') as f:
+                    f.write('Node: dcid:Count_Person\n')
+                return dst
+
+            mock_file_copy.side_effect = _fake_copy
+            local_path = process._prepare_local_statvar_mcf(
+                'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf', tmp_dir
+            )
+            self.assertEqual(local_path, os.path.join(tmp_dir, 'stat_vars.mcf'))
+            mock_file_copy.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

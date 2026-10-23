@@ -33,6 +33,9 @@ from absl import flags
 from absl import logging
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../../util/'))
+import file_util
+
 _PROCESSOR_SCRIPT = os.path.abspath(
     os.path.join(_MODULE_DIR, '../../tools/statvar_importer/stat_var_processor.py')
 )
@@ -210,9 +213,7 @@ def _merge_mcf_files(shard_prefixes: list[str], suffix: str, final_mcf_path: str
             if node_line not in seen_nodes:
                 seen_nodes[node_line] = '\n'.join(lines)
 
-    if os.path.isdir(final_mcf_path):
-        shutil.rmtree(final_mcf_path)
-    elif os.path.exists(final_mcf_path):
+    if os.path.exists(final_mcf_path):
         os.remove(final_mcf_path)
 
     if not seen_nodes:
@@ -221,6 +222,26 @@ def _merge_mcf_files(shard_prefixes: list[str], suffix: str, final_mcf_path: str
     with open(final_mcf_path, 'w', encoding='utf-8') as out_f:
         for node_key in sorted(seen_nodes.keys()):
             out_f.write(seen_nodes[node_key] + '\n\n')
+
+
+def _prepare_local_statvar_mcf(existing_statvar_mcf: str, tmp_dir: str) -> str:
+    """Copies a gs:// existing_statvar_mcf file once to tmp_dir for all shards."""
+    if not existing_statvar_mcf or not existing_statvar_mcf.startswith('gs://'):
+        return existing_statvar_mcf
+    local_mcf = os.path.join(
+        tmp_dir, os.path.basename(existing_statvar_mcf) or 'stat_vars.mcf'
+    )
+    logging.info(
+        'Caching %s once to %s for all shard workers...',
+        existing_statvar_mcf,
+        local_mcf,
+    )
+    file_util.file_copy(existing_statvar_mcf, local_mcf)
+    if not os.path.exists(local_mcf) or os.path.getsize(local_mcf) == 0:
+        raise RuntimeError(
+            f'Failed to copy existing_statvar_mcf from {existing_statvar_mcf}'
+        )
+    return local_mcf
 
 
 def main(_) -> None:
@@ -243,6 +264,9 @@ def main(_) -> None:
     )
 
     try:
+        local_statvar_mcf = _prepare_local_statvar_mcf(
+            _FLAGS.existing_statvar_mcf, shards_tmp_dir
+        )
         shard_prefixes: list[str] = []
         shard_counters: list[str] = []
         futures = []
@@ -265,7 +289,7 @@ def main(_) -> None:
                         s_counters,
                         os.path.abspath(_FLAGS.pv_map),
                         os.path.abspath(_FLAGS.config_file),
-                        _FLAGS.existing_statvar_mcf,
+                        local_statvar_mcf,
                     )
                 )
 
@@ -275,6 +299,10 @@ def main(_) -> None:
         # 1. Merge CSV outputs
         final_csv = f'{output_path}.csv'
         total_rows = _merge_csv_files(shard_prefixes, final_csv)
+        if total_rows == 0:
+            raise RuntimeError(
+                f'Merged output CSV has 0 rows: {final_csv}'
+            )
         logging.info('Merged %d SVObs rows into %s', total_rows, final_csv)
 
         # 2. Generate unified TMCF (normalizing table reference to japan_census_output)
