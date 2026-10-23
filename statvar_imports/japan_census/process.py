@@ -145,9 +145,10 @@ def _atomic_write_text(target_path: str, content: str) -> None:
 
 
 def _merge_csv_files(shard_prefixes: list[str], final_csv_path: str) -> int:
-    """Merges shard CSV files atomically into final_csv_path, keeping a single header."""
+    """Merges shard CSV files atomically into final_csv_path, deduplicating rows across shards."""
     total_rows = 0
     wrote_header = False
+    seen_lines: set[str] = set()
     target_dir = os.path.dirname(os.path.abspath(final_csv_path))
     os.makedirs(target_dir, exist_ok=True)
     fd, tmp_path = tempfile.mkstemp(prefix='.tmp_merge_',
@@ -167,6 +168,9 @@ def _merge_csv_files(shard_prefixes: list[str], final_csv_path: str) -> int:
                         out_f.write(header)
                         wrote_header = True
                     for line in in_f:
+                        if line in seen_lines:
+                            continue
+                        seen_lines.add(line)
                         out_f.write(line)
                         total_rows += 1
         os.replace(tmp_path, final_csv_path)
@@ -178,9 +182,16 @@ def _merge_csv_files(shard_prefixes: list[str], final_csv_path: str) -> int:
 
 
 def _counter_aggregation_mode(key: str) -> str:
-    """Returns how a stat_var_processor counter key should be aggregated across shards."""
+    """Returns how a stat_var_processor counter key should be aggregated across shards.
+
+    Note: Per-shard '*-unique-*' cardinality counters (except output-svobs-unique-typeOf,
+    which is always 1 across shards) are summed across shards because exact set union
+    cardinality cannot be reconstructed from per-shard integer counts alone.
+    """
     lower = key.lower()
-    if lower == 'existing-statvars-from-mcf' or lower.startswith('existing-'):
+    if (lower == 'existing-statvars-from-mcf' or
+            lower.startswith('existing-') or
+            lower.endswith('output-svobs-unique-typeof')):
         return 'max'
     if 'start_time' in lower:
         return 'min'
@@ -363,9 +374,13 @@ def _run_pipeline() -> None:
             if os.path.exists(shard_tmcf):
                 shard_table = os.path.basename(prefix)
                 with open(shard_tmcf, 'r', encoding='utf-8') as f:
-                    tmcf_text = f.read().replace(shard_table, table_name)
+                    tmcf_text = f.read().replace(f'C:{shard_table}->',
+                                                 f'C:{table_name}->')
                 _atomic_write_text(final_tmcf, tmcf_text)
                 break
+        if not os.path.exists(final_tmcf):
+            raise RuntimeError(
+                f'Failed to generate unified TMCF file: {final_tmcf}')
 
         # 3. Merge StatVar MCF and Schema MCF files
         _merge_mcf_files(shard_prefixes, '_stat_vars.mcf',

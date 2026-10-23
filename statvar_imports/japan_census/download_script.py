@@ -595,6 +595,26 @@ def download_dataset(
     return len(all_records)
 
 
+def _cleanup_stale_csvs(output_dir: str) -> None:
+    """Removes any stale CSV files in output_dir not produced by DATASET_CONFIGS."""
+    expected_fixed = {
+        fn for fn, cfg in DATASET_CONFIGS.items()
+        if cfg.get('census_mode') != 'municipality'
+    }
+    for entry in os.listdir(output_dir):
+        if not entry.endswith('.csv'):
+            continue
+        if entry in expected_fixed:
+            continue
+        if entry.startswith('jpn_aa1_aa2_age_gender_') and entry[
+                len('jpn_aa1_aa2_age_gender_'):-4].isdigit():
+            continue
+        stale_path = os.path.join(output_dir, entry)
+        if os.path.isfile(stale_path):
+            logging.info('Removing stale CSV file: %s', stale_path)
+            os.remove(stale_path)
+
+
 def download_all(
     output_dir: str,
     max_workers: int = 8,
@@ -602,6 +622,7 @@ def download_all(
 ) -> None:
     """Downloads all configured Japan Census datasets into output_dir."""
     os.makedirs(output_dir, exist_ok=True)
+    _cleanup_stale_csvs(output_dir)
     total_rows = 0
     for filename, cfg in DATASET_CONFIGS.items():
         output_filepath = os.path.join(output_dir, filename)
@@ -617,6 +638,7 @@ def download_all(
             historical_gcs_path=historical_gcs_path,
         )
         total_rows += count
+    _cleanup_stale_csvs(output_dir)
     logging.info(
         'Successfully downloaded all %d datasets (%d total rows) to %s',
         len(DATASET_CONFIGS),
