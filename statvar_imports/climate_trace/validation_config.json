@@ -6,7 +6,7 @@
             "description": "Threshold set to 1.6% to allow for the intentional deletion of Annual_Emissions_*_Removals series renamed to Annual_Emissions_*_EmissionRemovals.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 1.6
+                "threshold": 0.1
             }
         },
         {
