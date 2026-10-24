@@ -67,7 +67,7 @@ class DownloadScriptTest(unittest.TestCase):
                             },
                             {
                                 '@id':
-                                    'time',
+                                'time',
                                 'CLASS': [
                                     {
                                         '@code': '1953CY00',
@@ -116,10 +116,6 @@ class DownloadScriptTest(unittest.TestCase):
                 },
             }
         }
-
-    def tearDown(self):
-        download_script._HISTORICAL_CACHE.clear()
-        super().tearDown()
 
     def test_parse_estat_json_response_success(self):
         records = download_script.parse_estat_json_response(
@@ -201,35 +197,6 @@ class DownloadScriptTest(unittest.TestCase):
             self.assertEqual(len(rows), 2)
             self.assertEqual(rows[1][0], '1954')
             self.assertEqual(rows[1][3], '2.3')
-
-    def test_apply_historical_supplement_from_path(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            hist_csv = os.path.join(tmp_dir, 'deleted_historical_data.csv')
-            with open(hist_csv, 'w', encoding='utf-8', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow(
-                    ['dataset', 'year', 'indicatorCd', 'regionCd', 'value'])
-                writer.writerow([
-                    'jpn_aa1_gender_age_total_population.csv',
-                    '1920',
-                    '0201010000000010000',
-                    '01000',
-                    '2359183',
-                ])
-            merged = download_script._apply_historical_supplement(
-                'jpn_aa1_gender_age_total_population.csv',
-                [],
-                historical_gcs_path=hist_csv,
-            )
-            self.assertEqual(len(merged), 1)
-            self.assertEqual(merged[0]['year'], '1920')
-            self.assertEqual(merged[0]['regionCd'], '01000')
-            self.assertEqual(merged[0]['value'], '2359183')
-
-    def test_load_historical_rows_missing_file_raises(self):
-        with self.assertRaises(Exception):
-            download_script._load_historical_rows(
-                '/nonexistent/deleted_historical_data.csv')
 
 
 if __name__ == '__main__':

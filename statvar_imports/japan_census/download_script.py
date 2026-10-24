@@ -12,7 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Download script for Japan Census and socio-economic datasets from e-Stat Dashboard API."""
+"""Download script for Japan Census and socio-economic datasets from e-Stat Dashboard API.
+
+Downloads raw dataset files as-is from the official e-Stat Dashboard API into input_files/
+without any preprocessing or business logic derivations.
+"""
 
 import concurrent.futures
 import csv
@@ -27,12 +31,10 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, os.path.join(_MODULE_DIR, '../../util/'))
 
 from absl import app
 from absl import flags
 from absl import logging
-import file_util
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -44,11 +46,6 @@ flags.DEFINE_integer(
     'max_workers',
     8,
     'Maximum number of parallel threads for e-Stat API requests.',
-)
-flags.DEFINE_string(
-    'historical_gcs_path',
-    'gs://unresolved_mcf/country/japan/deleted_historical_data.csv',
-    'GCS path to the deleted historical data CSV file.',
 )
 
 ESTAT_JSON_API_URL = 'https://dashboard.e-stat.go.jp/api/1.0/Json/getData'
@@ -102,8 +99,8 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '0301010000030010010',  # Not in labour force (Both sexes)
         ],
         'regional_ranks': ['2'],
-        'batch_size': 3,
-        'is_census': False,
+        'batch_size':
+        3,
     },
     'jpn_unemploymentrate.csv': {
         'indicators': [
@@ -111,7 +108,6 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
         ],
         'regional_ranks': ['2'],
         'batch_size': 1,
-        'is_census': False,
     },
     'jpn_student.csv': {
         'indicators': [
@@ -121,18 +117,18 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '1201050800000010000',  # University students and graduate school students
         ],
         'regional_ranks': ['2'],
-        'batch_size': 4,
-        'is_census': False,
+        'batch_size':
+        4,
     },
     'jpn_aa1_teacher.csv': {
         'indicators': [
             '1201040100000010000',  # Teachers of kindergartens
             '1201040300000010000',  # Teachers of elementary schools
-            '1201040500000010000',  # Teachers of senior high schools (mapped to Count_Teacher_UniversityAndCollegeTeacher)
+            '1201040500000010000',  # Teachers of senior high schools
         ],
         'regional_ranks': ['2', '3'],
-        'batch_size': 3,
-        'is_census': False,
+        'batch_size':
+        3,
     },
     'jpn_aa1_health.csv': {
         'indicators': [
@@ -141,8 +137,8 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '1505130000000010070',  # Deaths by causes (suicide)
         ],
         'regional_ranks': ['2', '3'],
-        'batch_size': 3,
-        'is_census': False,
+        'batch_size':
+        3,
     },
     'jpn_aa1_death.csv': {
         'indicators': [
@@ -151,29 +147,23 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '0203020200000010000',  # Deaths (Female)
         ],
         'regional_ranks': ['2', '3'],
-        'batch_size': 3,
-        'is_census': False,
+        'batch_size':
+        3,
     },
     'jpn_gender_age_total_population.csv': {
         'indicators': _build_population_5yr_indicators(),
         'regional_ranks': ['2'],
         'batch_size': 5,
-        'is_census': True,
-        'census_mode': 'national',
     },
     'jpn_aa1_gender_age_total_population.csv': {
         'indicators': _build_population_5yr_indicators(),
         'regional_ranks': ['3'],
         'batch_size': 5,
-        'is_census': True,
-        'census_mode': 'prefecture',
     },
     'jpn_aa1_aa2_age_gender.csv': {
         'indicators': _build_population_5yr_indicators(),
         'regional_ranks': ['4'],
         'batch_size': 3,
-        'is_census': True,
-        'census_mode': 'municipality',
     },
 }
 
@@ -190,9 +180,8 @@ def _extract_class_lookup(class_objs: list[dict[str, Any]] | dict[str, Any],
                 classes = [classes]
             return {
                 str(c.get('@code', '')):
-                    str(c.get('@name') if '@name' in c else c.get('$', ''))
-                for c in classes
-                if isinstance(c, dict)
+                str(c.get('@name') if '@name' in c else c.get('$', ''))
+                for c in classes if isinstance(c, dict)
             }
     return {}
 
@@ -247,20 +236,34 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
                                 time_cd[:4] if len(time_cd) >= 4 else time_cd)
 
         parsed_records.append({
-            'year': year_str,
-            'indicatorCd': ind_cd,
-            'regionCd': reg_cd,
-            'value': str(val_obj.get('$', '')),
-            'indicatorName': indicator_map.get(ind_cd, ''),
-            'unitCd': unit_cd,
-            'unitName': unit_map.get(unit_cd, ''),
-            'statCd': str(val_obj.get('@stat', '')),
-            'regionName': region_map.get(reg_cd, ''),
-            'timeCd': time_cd,
-            'cycle': str(val_obj.get('@cycle', '')),
-            'regionRank': str(val_obj.get('@regionRank', '')),
-            'isSeasonal': str(val_obj.get('@isSeasonal', '')),
-            'isProvisional': str(val_obj.get('@isProvisional', '')),
+            'year':
+            year_str,
+            'indicatorCd':
+            ind_cd,
+            'regionCd':
+            reg_cd,
+            'value':
+            str(val_obj.get('$', '')),
+            'indicatorName':
+            indicator_map.get(ind_cd, ''),
+            'unitCd':
+            unit_cd,
+            'unitName':
+            unit_map.get(unit_cd, ''),
+            'statCd':
+            str(val_obj.get('@stat', '')),
+            'regionName':
+            region_map.get(reg_cd, ''),
+            'timeCd':
+            time_cd,
+            'cycle':
+            str(val_obj.get('@cycle', '')),
+            'regionRank':
+            str(val_obj.get('@regionRank', '')),
+            'isSeasonal':
+            str(val_obj.get('@isSeasonal', '')),
+            'isProvisional':
+            str(val_obj.get('@isProvisional', '')),
         })
 
     if not parsed_records:
@@ -345,161 +348,6 @@ def fetch_indicator_batch(
     return parse_estat_json_response(response_json)
 
 
-def _derive_census_population_rows(records: list[dict[str, str]],
-                                   mode: str) -> list[dict[str, str]]:
-    """Filters to 5-year census years and computes exact unrounded broad age sums.
-
-    At National (RegionalRank=2) and Prefecture (RegionalRank=3) levels, direct
-    broad-age indicators (0201010*100000100*) report rounded annual Population
-    Estimates (in thousands), whereas summing the 5-year Census age brackets
-    (0201010*20000010* + 0201010*30000011000) yields the exact unrounded Population
-    Census counts for <15, 15-64, 65+, and 85+.
-    """
-    census_records = [
-        r for r in records if r['year'].isdigit() and int(r['year']) % 5 == 0
-    ]
-
-    by_reg_yr_ind: dict[tuple[str, str, str], dict[str, str]] = {}
-    reg_meta: dict[tuple[str, str], dict[str, str]] = {}
-    for r in census_records:
-        key = (r['regionCd'], r['year'], r['indicatorCd'])
-        by_reg_yr_ind[key] = r
-        reg_meta[(r['regionCd'], r['year'])] = r
-
-    output_rows: list[dict[str, str]] = []
-    # Keep total population (Both sexes, Male, Female) and 5-year brackets:
-    # National keeps 010..230 (0-4 through 110+); Prefecture keeps 010..170 (0-4 through 80-84);
-    # Municipality keeps only the 3 totals + 9 broad age sums (<15, 15-64, 65+ for Both/Male/Female = 12 StatVars).
-    if mode == 'municipality':
-        allowed_5yr: set[str] = set()
-    else:
-        max_5yr_suffix = 230 if mode == 'national' else 170
-        allowed_5yr = {
-            f'0201010{g}20000010{i:03d}' for g in ('0', '1', '2')
-            for i in range(10, max_5yr_suffix + 10, 10)
-        }
-    allowed_totals = {
-        '0201010000000010000',
-        '0201010100000010000',
-        '0201010200000010000',
-    }
-
-    for r in census_records:
-        ind = r['indicatorCd']
-        if ind in allowed_totals or ind in allowed_5yr:
-            output_rows.append(r)
-
-    # Derive exact Census counts for <15, 15-64, 65+, and (for National/Prefecture) 85+ from 5-year brackets.
-    broad_Specs = [
-        ('10000010010', 'Population (under 15)',
-         [f'{i:03d}' for i in (10, 20, 30)], False),
-        ('10000010020', 'Population (15-64)',
-         [f'{i:03d}' for i in range(40, 140, 10)], False),
-        ('10000010030', 'Population (65 and over)',
-         [f'{i:03d}' for i in range(140, 210, 10)], True),
-    ]
-    if mode != 'municipality':
-        broad_Specs.append(('40000010070', 'Population (85 and over)',
-                            [f'{i:03d}' for i in (180, 190, 200)], True))
-
-    for reg_cd, yr in sorted(reg_meta.keys()):
-        base = reg_meta[(reg_cd, yr)]
-        for g in ('0', '1', '2'):
-            for target_tail, desc, suffixes, include_100plus in broad_Specs:
-                part_codes = [f'0201010{g}20000010{s}' for s in suffixes]
-                if include_100plus:
-                    part_codes.append(f'0201010{g}30000011000')
-                vals: list[int] = []
-                valid = True
-                for c in part_codes:
-                    rec = by_reg_yr_ind.get((reg_cd, yr, c))
-                    if not rec or not rec['value'].lstrip('-').isdigit():
-                        valid = False
-                        break
-                    vals.append(int(rec['value']))
-                if valid:
-                    new_row = dict(base)
-                    new_row['indicatorCd'] = f'0201010{g}{target_tail}'
-                    new_row['indicatorName'] = desc
-                    new_row['value'] = str(sum(vals))
-                    output_rows.append(new_row)
-
-    return output_rows
-
-
-_HISTORICAL_CACHE: dict[str, list[dict[str, str]]] = {}
-
-
-def _load_historical_rows(historical_gcs_path: str) -> list[dict[str, str]]:
-    """Loads and caches historical rows from GCS or local CSV."""
-    if not historical_gcs_path:
-        return []
-    if historical_gcs_path in _HISTORICAL_CACHE:
-        return _HISTORICAL_CACHE[historical_gcs_path]
-    logging.info('Reading historical deleted data from GCS: %s',
-                 historical_gcs_path)
-    with file_util.FileIO(historical_gcs_path, 'r', encoding='utf-8') as f:
-        rows = list(csv.DictReader(f))
-    if not rows:
-        raise RuntimeError(
-            f'Historical supplement file is empty: {historical_gcs_path}')
-    _HISTORICAL_CACHE[historical_gcs_path] = rows
-    return rows
-
-
-def _apply_historical_supplement(
-    dataset_filename: str,
-    records: list[dict[str, str]],
-    historical_gcs_path: str = '',
-) -> list[dict[str, str]]:
-    """Merges pre-1975 historical Census and exact archival rows from GCS CSV."""
-    hist_rows = _load_historical_rows(historical_gcs_path)
-    if not hist_rows:
-        return records
-
-    by_key: dict[tuple[str, str, str], dict[str, str]] = {}
-    for r in records:
-        by_key[(r['regionCd'], r['year'], r['indicatorCd'])] = r
-
-    norm_target = dataset_filename.replace('jpn_employement.csv',
-                                           'jpn_employment.csv')
-    added_or_updated = 0
-    for s in hist_rows:
-        norm_src = s['dataset'].replace('jpn_employement.csv',
-                                        'jpn_employment.csv')
-        if norm_src != norm_target:
-            continue
-        key = (s['regionCd'], s['year'], s['indicatorCd'])
-        if key in by_key:
-            by_key[key]['value'] = s['value']
-        else:
-            by_key[key] = {
-                'year': s['year'],
-                'indicatorCd': s['indicatorCd'],
-                'regionCd': s['regionCd'],
-                'value': s['value'],
-                'indicatorName': '',
-                'unitCd': '',
-                'unitName': '',
-                'statCd': '',
-                'regionName': '',
-                'timeCd': f"{s['year']}CY00",
-                'cycle': '3',
-                'regionRank': '2' if s['regionCd'] == '00000' else '3',
-                'isSeasonal': '1',
-                'isProvisional': '0',
-            }
-        added_or_updated += 1
-
-    if added_or_updated:
-        logging.info(
-            'Applied %d historical supplement rows to %s',
-            added_or_updated,
-            dataset_filename,
-        )
-    return list(by_key.values())
-
-
 def _write_csv_atomically(output_filepath: str, rows: list[dict[str,
                                                                 str]]) -> None:
     """Writes rows atomically to output_filepath and verifies non-empty output."""
@@ -530,12 +378,9 @@ def download_dataset(
     indicators: list[str],
     regional_ranks: list[str],
     batch_size: int,
-    is_census: bool = False,
-    census_mode: str = '',
     max_workers: int = 1,
-    historical_gcs_path: str = '',
 ) -> int:
-    """Downloads all batches for a dataset and writes atomically to output_filepath."""
+    """Downloads all batches for a dataset and writes as-is atomically to output_filepath."""
     tasks: list[tuple[list[str], str]] = []
     for rank in regional_ranks:
         for i in range(0, len(indicators), batch_size):
@@ -559,36 +404,10 @@ def download_dataset(
                     regional_rank=rank,
                 ))
 
-    if is_census:
-        all_records = _derive_census_population_rows(all_records, census_mode)
-
     if not all_records:
         raise RuntimeError(
             f'No records retrieved for dataset {os.path.basename(output_filepath)}'
         )
-
-    all_records = _apply_historical_supplement(
-        os.path.basename(output_filepath),
-        all_records,
-        historical_gcs_path=historical_gcs_path,
-    )
-
-    if census_mode == 'municipality':
-        # Split municipality census by year (matching CNS jpn_aa1_aa2_age_gender_{year}.csv)
-        # so multi-core processing can run across all census years in parallel.
-        output_dir = os.path.dirname(output_filepath)
-        by_year: dict[str, list[dict[str, str]]] = {}
-        for r in all_records:
-            by_year.setdefault(r['year'], []).append(r)
-        # Remove any old unsplit jpn_aa1_aa2_age_gender.csv if present
-        if os.path.exists(output_filepath):
-            os.remove(output_filepath)
-        for yr, yr_rows in sorted(by_year.items()):
-            yr_filepath = os.path.join(output_dir,
-                                       f'jpn_aa1_aa2_age_gender_{yr}.csv')
-            _write_csv_atomically(yr_filepath, yr_rows)
-            logging.info('Saved %d rows to %s', len(yr_rows), yr_filepath)
-        return len(all_records)
 
     _write_csv_atomically(output_filepath, all_records)
     logging.info('Saved %d rows to %s', len(all_records), output_filepath)
@@ -597,30 +416,22 @@ def download_dataset(
 
 def _cleanup_stale_csvs(output_dir: str) -> None:
     """Removes any stale CSV files in output_dir not produced by DATASET_CONFIGS."""
-    expected_fixed = {
-        fn for fn, cfg in DATASET_CONFIGS.items()
-        if cfg.get('census_mode') != 'municipality'
-    }
+    expected_files = set(DATASET_CONFIGS.keys())
     for entry in os.listdir(output_dir):
         if not entry.endswith('.csv'):
             continue
-        if entry in expected_fixed:
-            continue
-        if entry.startswith('jpn_aa1_aa2_age_gender_') and entry[
-                len('jpn_aa1_aa2_age_gender_'):-4].isdigit():
-            continue
-        stale_path = os.path.join(output_dir, entry)
-        if os.path.isfile(stale_path):
-            logging.info('Removing stale CSV file: %s', stale_path)
-            os.remove(stale_path)
+        if entry not in expected_files:
+            stale_path = os.path.join(output_dir, entry)
+            if os.path.isfile(stale_path):
+                logging.info('Removing stale CSV file: %s', stale_path)
+                os.remove(stale_path)
 
 
 def download_all(
     output_dir: str,
     max_workers: int = 8,
-    historical_gcs_path: str = '',
 ) -> None:
-    """Downloads all configured Japan Census datasets into output_dir."""
+    """Downloads all configured Japan Census datasets as-is into output_dir."""
     os.makedirs(output_dir, exist_ok=True)
     _cleanup_stale_csvs(output_dir)
     total_rows = 0
@@ -632,10 +443,7 @@ def download_all(
             indicators=cfg['indicators'],
             regional_ranks=cfg['regional_ranks'],
             batch_size=cfg['batch_size'],
-            is_census=cfg.get('is_census', False),
-            census_mode=cfg.get('census_mode', ''),
             max_workers=max_workers,
-            historical_gcs_path=historical_gcs_path,
         )
         total_rows += count
     _cleanup_stale_csvs(output_dir)
@@ -656,7 +464,6 @@ def main(argv: list[str]) -> None:
         download_all(
             output_dir,
             max_workers=_FLAGS.max_workers,
-            historical_gcs_path=_FLAGS.historical_gcs_path,
         )
     except Exception as e:
         logging.fatal('%s', e, exc_info=True)

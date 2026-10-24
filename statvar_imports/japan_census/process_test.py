@@ -14,6 +14,7 @@
 # limitations under the License.
 """Unit tests for Japan Census process.py."""
 
+import csv
 import os
 import sys
 import tempfile
@@ -31,6 +32,10 @@ import process
 
 
 class ProcessTest(unittest.TestCase):
+
+    def tearDown(self):
+        process._HISTORICAL_CACHE.clear()
+        super().tearDown()
 
     def test_expand_input_files_sorts_largest_first(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -175,8 +180,125 @@ class ProcessTest(unittest.TestCase):
             mock_file_copy.side_effect = _fake_copy
             local_path = process._prepare_local_statvar_mcf(
                 'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf', tmp_dir)
-            self.assertEqual(local_path, os.path.join(tmp_dir, 'stat_vars.mcf'))
+            self.assertEqual(local_path, os.path.join(tmp_dir,
+                                                      'stat_vars.mcf'))
             mock_file_copy.assert_called_once()
+
+    def test_apply_historical_supplement_from_path(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            hist_csv = os.path.join(tmp_dir, 'deleted_historical_data.csv')
+            with open(hist_csv, 'w', encoding='utf-8', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(
+                    ['dataset', 'year', 'indicatorCd', 'regionCd', 'value'])
+                writer.writerow([
+                    'jpn_aa1_gender_age_total_population.csv',
+                    '1920',
+                    '0201010000000010000',
+                    '01000',
+                    '2359183',
+                ])
+            merged = process._apply_historical_supplement(
+                'jpn_aa1_gender_age_total_population.csv',
+                [],
+                historical_gcs_path=hist_csv,
+            )
+            self.assertEqual(len(merged), 1)
+            self.assertEqual(merged[0]['year'], '1920')
+            self.assertEqual(merged[0]['regionCd'], '01000')
+            self.assertEqual(merged[0]['value'], '2359183')
+
+    def test_load_historical_rows_missing_file_raises(self):
+        with self.assertRaises(Exception):
+            process._load_historical_rows(
+                '/nonexistent/deleted_historical_data.csv')
+
+    def test_derive_census_population_rows(self):
+        sample_records = [
+            # 2020 (Census year) Total population
+            {
+                'year': '2020',
+                'regionCd': '00000',
+                'indicatorCd': '0201010000000010000',
+                'value': '126146099',
+            },
+            # 2020 0-4, 5-9, 10-14 (<15 bracket)
+            {
+                'year': '2020',
+                'regionCd': '00000',
+                'indicatorCd': '0201010020000010010',
+                'value': '4830000',
+            },
+            {
+                'year': '2020',
+                'regionCd': '00000',
+                'indicatorCd': '0201010020000010020',
+                'value': '5130000',
+            },
+            {
+                'year': '2020',
+                'regionCd': '00000',
+                'indicatorCd': '0201010020000010030',
+                'value': '5360000',
+            },
+            # 2021 (non-census year)
+            {
+                'year': '2021',
+                'regionCd': '00000',
+                'indicatorCd': '0201010000000010000',
+                'value': '125502000',
+            },
+        ]
+        derived = process._derive_census_population_rows(sample_records,
+                                                         mode='national')
+        # Non-census year 2021 should be filtered out
+        years = {r['year'] for r in derived}
+        self.assertEqual(years, {'2020'})
+        # Should contain total and derived <15 sum (4830000 + 5130000 + 5360000 = 15320000)
+        under_15 = [
+            r for r in derived if r['indicatorCd'] == '0201010010000010010'
+        ]
+        self.assertEqual(len(under_15), 1)
+        self.assertEqual(under_15[0]['value'], '15320000')
+
+    def test_prepare_shard_inputs_stages_files(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_dir = os.path.join(tmp_dir, 'inputs')
+            staging_dir = os.path.join(tmp_dir, 'staged')
+            os.makedirs(input_dir, exist_ok=True)
+            os.makedirs(staging_dir, exist_ok=True)
+
+            muni_file = os.path.join(input_dir, 'jpn_aa1_aa2_age_gender.csv')
+            with open(muni_file, 'w', encoding='utf-8', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=process.CSV_HEADER)
+                writer.writeheader()
+                writer.writerow({
+                    'year': '2020',
+                    'indicatorCd': '0201010000000010000',
+                    'regionCd': '01100',
+                    'value': '1961996',
+                })
+                writer.writerow({
+                    'year': '2015',
+                    'indicatorCd': '0201010000000010000',
+                    'regionCd': '01100',
+                    'value': '1952356',
+                })
+
+            staged = process._prepare_shard_inputs(
+                [muni_file],
+                staging_dir=staging_dir,
+            )
+            # Should have split into two year shards: 2015 and 2020
+            self.assertEqual(len(staged), 2)
+            staged_names = {os.path.basename(p) for p in staged}
+            self.assertEqual(
+                staged_names,
+                {
+                    'jpn_aa1_aa2_age_gender_2015.csv',
+                    'jpn_aa1_aa2_age_gender_2020.csv'
+                },
+            )
 
     @mock.patch.object(process.logging, 'fatal')
     @mock.patch.object(process,

@@ -22,19 +22,19 @@ This project downloads, processes, and imports demographic, employment, educatio
 
 ## 2. Preprocessing Steps
 
-The import pipeline queries the e-Stat Statistical Dashboard JSON API in parallel, merges static pre-1975/archival census records from `gs://unresolved_mcf/country/japan/deleted_historical_data.csv` so no historical observations are lost, and processes all 18 input files in parallel via `process.py`.
+The import pipeline queries the e-Stat Statistical Dashboard JSON API in parallel to download raw datasets as-is, and then `process.py` preprocesses Census broad age sums, merges historical archival records from `gs://unresolved_mcf/country/japan/deleted_historical_data.csv`, and runs `stat_var_processor.py` across shards in parallel.
 
 *   **Files**:
-    *   `download_script.py`: Queries the e-Stat Statistical Dashboard API (`https://dashboard.e-stat.go.jp/api/1.0/Json/getData`), computes exact broad age-group sums (`<15`, `15–64`, `65+`, `85+`) from 5-year census brackets, merges historical records from `gs://unresolved_mcf/country/japan/deleted_historical_data.csv` (`--historical_gcs_path`), and writes 18 standardized CSV files into `input_files/`.
-    *   `process.py`: Multi-process wrapper around `stat_var_processor.py` that processes all `input_files/*.csv` shards in parallel (`--parallelism=2`) and deterministically merges the resulting `.csv`, `.tmcf`, `.mcf`, and `counters.csv` outputs into `output_files/`.
+    *   `download_script.py`: Queries the e-Stat Statistical Dashboard API (`https://dashboard.e-stat.go.jp/api/1.0/Json/getData`) and writes the 9 raw CSV dataset files as-is into `input_files/` without preprocessing.
+    *   `process.py`: Preprocesses raw input files (computes exact broad age-group sums for Census datasets, merges historical records from `gs://unresolved_mcf/country/japan/deleted_historical_data.csv`, and stages municipality census files by year), runs `stat_var_processor.py` across shards in parallel (`--parallelism=2`), and deterministically merges the resulting `.csv`, `.tmcf`, `.mcf`, and `counters.csv` outputs into `output_files/`.
     *   `japan_census_metadata.csv`: Configuration file for `stat_var_processor.py` specifying output columns, header rows, mapped columns, and provenance URL.
     *   `japan_census_pv_map.csv`: Property-value mapping file mapping e-Stat indicator codes (`indicatorCd`) and 5-digit region codes (`regionCd`) to Data Commons StatisticalVariables and place DCIDs (`country/JPN` and `wikidataId/Q...`).
     *   `validation_config.json`: Configuration defining historical deletion (`<= 0.1%`), value bounds, and date freshness validation rules across all 101 StatisticalVariables.
     *   `test_data/`: Sample input data (`sample_input.csv`) and expected output (`sample_expected_output.csv`) for testing.
 
 *   **Transformation pipeline**:
-    1.  `download_script.py` fetches all 9 dataset groups from the e-Stat JSON API using concurrent workers and atomic file writes into `input_files/`.
-    2.  `process.py` invokes `stat_var_processor.py` in parallel across the 18 input CSVs against `japan_census_pv_map.csv` and `japan_census_metadata.csv`, referencing canonical schema `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
+    1.  `download_script.py` fetches all 9 raw datasets from the e-Stat JSON API as-is using concurrent workers and atomic file writes into `input_files/`.
+    2.  `process.py` preprocesses the raw input CSVs in a temporary staging directory (deriving broad age sums for Census datasets, applying historical data supplements, and splitting municipality census data by year) and invokes `stat_var_processor.py` in parallel across the staged input CSVs against `japan_census_pv_map.csv` and `japan_census_metadata.csv`, referencing canonical schema `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
     3.  The processor filters non-target regional aggregate rows via `#IgnoreRow`, resolves place DCIDs, and produces `output_files/japan_census_output.csv` and `output_files/japan_census_output.tmcf`. To preserve 1:1 historical series continuity (`0` deleted / `0` modified records) with the legacy `Japan_Census` import:
         *   Labor force counts (`0301010000010010010`, `0301010000020010010`, `0301010000030010010`, reported by e-Stat in units of `10,000 persons`) apply `#Multiply,10` to match the historical scaling (in thousands).
         *   Indicator `1201040500000010000` (`Number of upper secondary school teachers (full-time)`) maps to `dcid:Count_Teacher_UniversityAndCollegeTeacher` to match the legacy StatVar assignment across `1975`–`2021`.

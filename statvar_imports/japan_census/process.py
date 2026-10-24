@@ -12,15 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Parallel wrapper for running stat_var_processor.py across multiple input CSVs.
+"""Parallel processor for Japan Census datasets.
 
-Spawns concurrent worker processes (one per input CSV file), merges all output
-CSVs, MCFs, and counters into the unified output_path, and preserves full
-stat_var_processor CLI flag compatibility.
+Preprocesses raw input CSV files (computes exact broad age-group sums for Census
+datasets, merges historical records from GCS CSV, and splits municipality census
+shards by year), runs stat_var_processor.py concurrently across shards, and merges
+output CSV, TMCF, MCFs, and counters into unified output files.
 """
 
 from collections import defaultdict
 import concurrent.futures
+import csv
 import glob
 import os
 import shutil
@@ -71,11 +73,277 @@ flags.DEFINE_string(
     'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf',
     'Path to existing StatVar MCF file.',
 )
+flags.DEFINE_string(
+    'historical_gcs_path',
+    'gs://unresolved_mcf/country/japan/deleted_historical_data.csv',
+    'GCS path to the deleted historical data CSV file.',
+)
 flags.DEFINE_integer(
     'parallelism',
     2,
     'Maximum number of concurrent stat_var_processor worker processes.',
 )
+
+CSV_HEADER = [
+    'year',
+    'indicatorCd',
+    'regionCd',
+    'value',
+    'indicatorName',
+    'unitCd',
+    'unitName',
+    'statCd',
+    'regionName',
+    'timeCd',
+    'cycle',
+    'regionRank',
+    'isSeasonal',
+    'isProvisional',
+]
+
+
+def _derive_census_population_rows(records: list[dict[str, str]],
+                                   mode: str) -> list[dict[str, str]]:
+    """Filters to 5-year census years and computes exact unrounded broad age sums.
+
+    At National (RegionalRank=2) and Prefecture (RegionalRank=3) levels, direct
+    broad-age indicators (0201010*100000100*) report rounded annual Population
+    Estimates (in thousands), whereas summing the 5-year Census age brackets
+    (0201010*20000010* + 0201010*30000011000) yields the exact unrounded Population
+    Census counts for <15, 15-64, 65+, and 85+.
+    """
+    census_records = [
+        r for r in records if r['year'].isdigit() and int(r['year']) % 5 == 0
+    ]
+
+    by_reg_yr_ind: dict[tuple[str, str, str], dict[str, str]] = {}
+    reg_meta: dict[tuple[str, str], dict[str, str]] = {}
+    for r in census_records:
+        key = (r['regionCd'], r['year'], r['indicatorCd'])
+        by_reg_yr_ind[key] = r
+        reg_meta[(r['regionCd'], r['year'])] = r
+
+    output_rows: list[dict[str, str]] = []
+    # Keep total population (Both sexes, Male, Female) and 5-year brackets:
+    # National keeps 010..230 (0-4 through 110+); Prefecture keeps 010..170 (0-4 through 80-84);
+    # Municipality keeps only the 3 totals + 9 broad age sums (<15, 15-64, 65+ for Both/Male/Female = 12 StatVars).
+    if mode == 'municipality':
+        allowed_5yr: set[str] = set()
+    else:
+        max_5yr_suffix = 230 if mode == 'national' else 170
+        allowed_5yr = {
+            f'0201010{g}20000010{i:03d}'
+            for g in ('0', '1', '2')
+            for i in range(10, max_5yr_suffix + 10, 10)
+        }
+    allowed_totals = {
+        '0201010000000010000',
+        '0201010100000010000',
+        '0201010200000010000',
+    }
+
+    for r in census_records:
+        ind = r['indicatorCd']
+        if ind in allowed_totals or ind in allowed_5yr:
+            output_rows.append(r)
+
+    # Derive exact Census counts for <15, 15-64, 65+, and (for National/Prefecture) 85+ from 5-year brackets.
+    broad_specs = [
+        ('10000010010', 'Population (under 15)',
+         [f'{i:03d}' for i in (10, 20, 30)], False),
+        ('10000010020', 'Population (15-64)',
+         [f'{i:03d}' for i in range(40, 140, 10)], False),
+        ('10000010030', 'Population (65 and over)',
+         [f'{i:03d}' for i in range(140, 210, 10)], True),
+    ]
+    if mode != 'municipality':
+        broad_specs.append(('40000010070', 'Population (85 and over)',
+                            [f'{i:03d}' for i in (180, 190, 200)], True))
+
+    for reg_cd, yr in sorted(reg_meta.keys()):
+        base = reg_meta[(reg_cd, yr)]
+        for g in ('0', '1', '2'):
+            for target_tail, desc, suffixes, include_100plus in broad_specs:
+                part_codes = [f'0201010{g}20000010{s}' for s in suffixes]
+                if include_100plus:
+                    part_codes.append(f'0201010{g}30000011000')
+                vals: list[int] = []
+                valid = True
+                for c in part_codes:
+                    rec = by_reg_yr_ind.get((reg_cd, yr, c))
+                    if not rec or not rec['value'].lstrip('-').isdigit():
+                        valid = False
+                        break
+                    vals.append(int(rec['value']))
+                if valid:
+                    new_row = dict(base)
+                    new_row['indicatorCd'] = f'0201010{g}{target_tail}'
+                    new_row['indicatorName'] = desc
+                    new_row['value'] = str(sum(vals))
+                    output_rows.append(new_row)
+
+    return output_rows
+
+
+_HISTORICAL_CACHE: dict[str, list[dict[str, str]]] = {}
+
+
+def _load_historical_rows(historical_gcs_path: str) -> list[dict[str, str]]:
+    """Loads and caches historical rows from GCS or local CSV."""
+    if not historical_gcs_path:
+        return []
+    if historical_gcs_path in _HISTORICAL_CACHE:
+        return _HISTORICAL_CACHE[historical_gcs_path]
+    logging.info('Reading historical deleted data: %s', historical_gcs_path)
+    with file_util.FileIO(historical_gcs_path, 'r', encoding='utf-8') as f:
+        rows = list(csv.DictReader(f))
+    if not rows:
+        raise RuntimeError(
+            f'Historical supplement file is empty: {historical_gcs_path}')
+    _HISTORICAL_CACHE[historical_gcs_path] = rows
+    return rows
+
+
+def _apply_historical_supplement(
+    dataset_filename: str,
+    records: list[dict[str, str]],
+    historical_gcs_path: str = '',
+) -> list[dict[str, str]]:
+    """Merges pre-1975 historical Census and exact archival rows from GCS CSV."""
+    if not historical_gcs_path:
+        return records
+    hist_rows = _load_historical_rows(historical_gcs_path)
+    if not hist_rows:
+        return records
+
+    by_key: dict[tuple[str, str, str], dict[str, str]] = {}
+    for r in records:
+        by_key[(r['regionCd'], r['year'], r['indicatorCd'])] = r
+
+    norm_target = dataset_filename.replace('jpn_employement.csv',
+                                           'jpn_employment.csv')
+    added_or_updated = 0
+    for s in hist_rows:
+        norm_src = s['dataset'].replace('jpn_employement.csv',
+                                        'jpn_employment.csv')
+        if norm_src != norm_target:
+            continue
+        key = (s['regionCd'], s['year'], s['indicatorCd'])
+        if key in by_key:
+            by_key[key]['value'] = s['value']
+        else:
+            by_key[key] = {
+                'year': s['year'],
+                'indicatorCd': s['indicatorCd'],
+                'regionCd': s['regionCd'],
+                'value': s['value'],
+                'indicatorName': '',
+                'unitCd': '',
+                'unitName': '',
+                'statCd': '',
+                'regionName': '',
+                'timeCd': f"{s['year']}CY00",
+                'cycle': '3',
+                'regionRank': '2' if s['regionCd'] == '00000' else '3',
+                'isSeasonal': '1',
+                'isProvisional': '0',
+            }
+        added_or_updated += 1
+
+    if added_or_updated:
+        logging.info(
+            'Applied %d historical supplement rows to %s',
+            added_or_updated,
+            dataset_filename,
+        )
+    return list(by_key.values())
+
+
+def _write_staged_csv(
+    filepath: str,
+    rows: list[dict[str, str]],
+    fieldnames: list[str],
+) -> None:
+    """Writes preprocessed rows to a staged CSV file."""
+    if not rows:
+        return
+    all_keys = list(fieldnames)
+    for r in rows:
+        for k in r.keys():
+            if k not in all_keys:
+                all_keys.append(k)
+    with open(filepath, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=all_keys, lineterminator='\n')
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _prepare_shard_inputs(
+    input_files: list[str],
+    staging_dir: str,
+    historical_gcs_path: str = '',
+) -> list[str]:
+    """Preprocesses raw input files into staged shard CSV files.
+
+    Applies Census broad age derivations, historical data supplement merging,
+    and municipality year-splitting in the temporary staging directory.
+    """
+    for filepath in input_files:
+        if not os.path.exists(filepath):
+            continue
+        filename = os.path.basename(filepath)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+            fieldnames = list(reader.fieldnames or CSV_HEADER)
+
+        if not rows:
+            continue
+
+        if filename == 'jpn_gender_age_total_population.csv':
+            rows = _derive_census_population_rows(rows, mode='national')
+            rows = _apply_historical_supplement(filename, rows,
+                                                historical_gcs_path)
+            out_file = os.path.join(staging_dir, filename)
+            _write_staged_csv(out_file, rows, fieldnames)
+        elif filename == 'jpn_aa1_gender_age_total_population.csv':
+            rows = _derive_census_population_rows(rows, mode='prefecture')
+            rows = _apply_historical_supplement(filename, rows,
+                                                historical_gcs_path)
+            out_file = os.path.join(staging_dir, filename)
+            _write_staged_csv(out_file, rows, fieldnames)
+        elif filename == 'jpn_aa1_aa2_age_gender.csv':
+            rows = _derive_census_population_rows(rows, mode='municipality')
+            rows = _apply_historical_supplement(filename, rows,
+                                                historical_gcs_path)
+            by_year: dict[str, list[dict[str, str]]] = {}
+            for r in rows:
+                by_year.setdefault(r['year'], []).append(r)
+            for yr, yr_rows in sorted(by_year.items()):
+                yr_file = os.path.join(staging_dir,
+                                       f'jpn_aa1_aa2_age_gender_{yr}.csv')
+                _write_staged_csv(yr_file, yr_rows, fieldnames)
+        elif (filename.startswith('jpn_aa1_aa2_age_gender_')
+              and filename.endswith('.csv')):
+            has_5yr = any('20000010' in r.get('indicatorCd', '')
+                          for r in rows[:100])
+            if has_5yr:
+                rows = _derive_census_population_rows(rows,
+                                                      mode='municipality')
+            rows = _apply_historical_supplement(filename, rows,
+                                                historical_gcs_path)
+            out_file = os.path.join(staging_dir, filename)
+            _write_staged_csv(out_file, rows, fieldnames)
+        else:
+            rows = _apply_historical_supplement(filename, rows,
+                                                historical_gcs_path)
+            out_file = os.path.join(staging_dir, filename)
+            _write_staged_csv(out_file, rows, fieldnames)
+
+    return sorted(
+        glob.glob(os.path.join(staging_dir, '*.csv')),
+        key=lambda p: -os.path.getsize(p),
+    )
 
 
 def _expand_input_files(input_data: str) -> list[str]:
@@ -93,7 +361,6 @@ def _expand_input_files(input_data: str) -> list[str]:
             files.extend(matched)
         elif os.path.exists(pattern):
             files.append(pattern)
-    # Sort largest files first so long-running shards start immediately.
     return sorted(set(files), key=lambda p: -os.path.getsize(p))
 
 
@@ -189,9 +456,8 @@ def _counter_aggregation_mode(key: str) -> str:
     cardinality cannot be reconstructed from per-shard integer counts alone.
     """
     lower = key.lower()
-    if (lower == 'existing-statvars-from-mcf' or
-            lower.startswith('existing-') or
-            lower.endswith('output-svobs-unique-typeof')):
+    if (lower == 'existing-statvars-from-mcf' or lower.startswith('existing-')
+            or lower.endswith('output-svobs-unique-typeof')):
         return 'max'
     if 'start_time' in lower:
         return 'min'
@@ -283,14 +549,15 @@ def _merge_mcf_files(shard_prefixes: list[str], suffix: str,
     if not seen_nodes:
         return
 
-    body = ''.join(
-        seen_nodes[node_key] + '\n\n' for node_key in sorted(seen_nodes.keys()))
+    body = ''.join(seen_nodes[node_key] + '\n\n'
+                   for node_key in sorted(seen_nodes.keys()))
     _atomic_write_text(final_mcf_path, body)
 
 
 def _prepare_local_statvar_mcf(existing_statvar_mcf: str, tmp_dir: str) -> str:
     """Copies a gs:// existing_statvar_mcf file once to tmp_dir for all shards."""
-    if not existing_statvar_mcf or not existing_statvar_mcf.startswith('gs://'):
+    if not existing_statvar_mcf or not existing_statvar_mcf.startswith(
+            'gs://'):
         return existing_statvar_mcf
     local_mcf = os.path.join(
         tmp_dir,
@@ -309,8 +576,8 @@ def _prepare_local_statvar_mcf(existing_statvar_mcf: str, tmp_dir: str) -> str:
 
 def _run_pipeline() -> None:
     """Executes the parallel sharded stat_var_processor pipeline and merges outputs."""
-    input_files = _expand_input_files(_FLAGS.input_data)
-    if not input_files:
+    raw_input_files = _expand_input_files(_FLAGS.input_data)
+    if not raw_input_files:
         raise RuntimeError(f'No input files matched: {_FLAGS.input_data}')
 
     output_path = os.path.abspath(_FLAGS.output_path)
@@ -318,16 +585,29 @@ def _run_pipeline() -> None:
     os.makedirs(output_dir, exist_ok=True)
 
     shards_tmp_dir = tempfile.mkdtemp(prefix='.shards_', dir=output_dir)
-    max_workers = max(
-        1, min(_FLAGS.parallelism, len(input_files),
-               os.cpu_count() or 1))
-    logging.info(
-        'Processing %d input files across %d parallel workers...',
-        len(input_files),
-        max_workers,
-    )
 
     try:
+        staging_dir = os.path.join(shards_tmp_dir, 'staged_inputs')
+        os.makedirs(staging_dir, exist_ok=True)
+        shard_input_files = _prepare_shard_inputs(
+            raw_input_files,
+            staging_dir=staging_dir,
+            historical_gcs_path=_FLAGS.historical_gcs_path,
+        )
+        if not shard_input_files:
+            raise RuntimeError(
+                f'No staged input files generated from: {raw_input_files}')
+
+        max_workers = max(
+            1,
+            min(_FLAGS.parallelism, len(shard_input_files),
+                os.cpu_count() or 1))
+        logging.info(
+            'Processing %d staged input files across %d parallel workers...',
+            len(shard_input_files),
+            max_workers,
+        )
+
         local_statvar_mcf = _prepare_local_statvar_mcf(
             _FLAGS.existing_statvar_mcf, shards_tmp_dir)
         shard_prefixes: list[str] = []
@@ -336,7 +616,7 @@ def _run_pipeline() -> None:
 
         with concurrent.futures.ThreadPoolExecutor(
                 max_workers=max_workers) as executor:
-            for idx, input_file in enumerate(input_files):
+            for idx, input_file in enumerate(shard_input_files):
                 base = os.path.splitext(os.path.basename(input_file))[0]
                 s_prefix = os.path.join(shards_tmp_dir,
                                         f'shard_{idx:02d}_{base}')
