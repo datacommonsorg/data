@@ -24,7 +24,7 @@
                 "memory": 256,
                 "disk": 200
         },
-        "cron_schedule": "30 01 * * 5",
+        "cron_schedule": "30 1 * * 5",
         "_comment": "Schedule: Weekly on Friday at 01:30 UTC",
         "validation_config_file": "validation_config.json"
       }

@@ -42,7 +42,7 @@
                     "cleaned_csv": "output/PM2.5CensusTract_3.csv"
                 }
             ],
-            "cron_schedule": "0 04 * * 4",
+            "cron_schedule": "0 4 * * 4",
             "_comment": "Schedule: Weekly on Thursday at 04:00 UTC"
         },
         {
@@ -87,7 +87,7 @@
                     "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_3.csv"
                 }
             ],
-            "cron_schedule": "0 01 * * 6",
+            "cron_schedule": "0 1 * * 6",
             "_comment": "Schedule: Weekly on Saturday at 01:00 UTC"
         },
         {
@@ -129,7 +129,7 @@
                     "cleaned_csv": "output/PM25county_3.csv"
                 }
             ],
-            "cron_schedule": "30 04 * * 0",
+            "cron_schedule": "30 4 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 04:30 UTC"
         },
         {
@@ -159,7 +159,7 @@
                     "cleaned_csv": "output/OzoneCounty.csv"
                 }
             ],
-            "cron_schedule": "30 03 * * 3",
+            "cron_schedule": "30 3 * * 3",
             "_comment": "Schedule: Weekly on Wednesday at 03:30 UTC"
         }
     ]

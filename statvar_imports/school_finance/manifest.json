@@ -20,7 +20,7 @@
           "cleaned_csv": "output/school_finance_output.csv"
         }
       ],
-      "cron_schedule": "0 03 * * 5",
+      "cron_schedule": "0 3 * * 5",
       "_comment": "Schedule: Weekly on Friday at 03:00 UTC",
       "resource_limits": {
         "cpu": 16,

@@ -32,7 +32,7 @@
                 "input_files/offenses/*.csv",
                 "input_files/restraint_and_seclusion/*.*"
             ],
-            "cron_schedule": "30 07 * * 3",
+            "cron_schedule": "30 7 * * 3",
             "_comment": "Schedule: Weekly on Wednesday at 07:30 UTC",
             "resource_limits": {
                 "cpu": 32,

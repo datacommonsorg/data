@@ -19,7 +19,7 @@
             "source_files": [
                 "REGION_DEMOGR_life_expectancy.csv"
             ],
-            "cron_schedule": "0 03 * * 0",
+            "cron_schedule": "0 3 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 03:00 UTC"
         }
     ]

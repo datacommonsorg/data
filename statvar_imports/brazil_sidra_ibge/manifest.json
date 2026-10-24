@@ -44,7 +44,7 @@
                 "golden_data/*.csv",
                 "counters/*.csv"
             ],
-            "cron_schedule": "0 00 * * 2",
+            "cron_schedule": "0 0 * * 2",
             "_comment": "Schedule: Weekly on Tuesday at 00:00 UTC",
             "validation_config_file": "validation_config.json"
         }

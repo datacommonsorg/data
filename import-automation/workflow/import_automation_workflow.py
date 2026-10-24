@@ -202,7 +202,6 @@ def normalize_batch_resources(
 # TODO: Move staging and prod ingestion denylist configuration to each import's manifest.json.
 PROD_DENYLIST = frozenset({
     "Brazil_RuralDevelopmentProgram",
-    "CDC500",
     "CDC_OzoneCounty",
     "CDC_PM25County",
     "CensusCountyBusinessPatterns",

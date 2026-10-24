@@ -20,7 +20,7 @@
           "cleaned_csv": "output/algebra1_output_.csv"
         }
       ],
-      "cron_schedule": "0 09 * * 4",
+      "cron_schedule": "0 9 * * 4",
       "_comment": "Schedule: Weekly on Thursday at 09:00 UTC",
       "resource_limits": {
             "cpu": 8,

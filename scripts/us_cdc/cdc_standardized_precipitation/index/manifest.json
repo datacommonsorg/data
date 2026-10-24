@@ -19,10 +19,12 @@
                 }
             ],
             "source_files": [
-                "CDC_StandardizedPrecipitationIndex_input.csv"
+                "CDC_StandardizedPrecipitationIndex_input.csv",
+                "validation_config.json"
             ],
-            "cron_schedule": "0 04 * * 0",
-            "_comment": "Schedule: Weekly on Sunday at 04:00 UTC"
+            "cron_schedule": "0 4 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 04:00 UTC",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
