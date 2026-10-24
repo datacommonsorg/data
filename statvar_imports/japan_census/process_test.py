@@ -198,15 +198,29 @@ class ProcessTest(unittest.TestCase):
                     '01000',
                     '2359183',
                 ])
+                writer.writerow([
+                    'jpn_aa1_gender_age_total_population.csv',
+                    '2020',
+                    '0201010000000010000',
+                    '01000',
+                    '9999999',
+                ])
+            live_rows = [{
+                'year': '2020',
+                'indicatorCd': '0201010000000010000',
+                'regionCd': '01000',
+                'value': '5224614',
+            }]
             merged = process._apply_historical_supplement(
                 'jpn_aa1_gender_age_total_population.csv',
-                [],
+                live_rows,
                 historical_gcs_path=hist_csv,
             )
-            self.assertEqual(len(merged), 1)
-            self.assertEqual(merged[0]['year'], '1920')
-            self.assertEqual(merged[0]['regionCd'], '01000')
-            self.assertEqual(merged[0]['value'], '2359183')
+            by_yr = {r['year']: r for r in merged}
+            self.assertEqual(len(by_yr), 2)
+            self.assertEqual(by_yr['1920']['value'], '2359183')
+            # Live value must be preserved over historical supplement value
+            self.assertEqual(by_yr['2020']['value'], '5224614')
 
     def test_load_historical_rows_missing_file_raises(self):
         with self.assertRaises(Exception):

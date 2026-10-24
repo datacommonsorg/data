@@ -222,7 +222,7 @@ def _apply_historical_supplement(
 
     norm_target = dataset_filename.replace('jpn_employement.csv',
                                            'jpn_employment.csv')
-    added_or_updated = 0
+    added = 0
     for s in hist_rows:
         norm_src = s['dataset'].replace('jpn_employement.csv',
                                         'jpn_employment.csv')
@@ -230,30 +230,29 @@ def _apply_historical_supplement(
             continue
         key = (s['regionCd'], s['year'], s['indicatorCd'])
         if key in by_key:
-            by_key[key]['value'] = s['value']
-        else:
-            by_key[key] = {
-                'year': s['year'],
-                'indicatorCd': s['indicatorCd'],
-                'regionCd': s['regionCd'],
-                'value': s['value'],
-                'indicatorName': '',
-                'unitCd': '',
-                'unitName': '',
-                'statCd': '',
-                'regionName': '',
-                'timeCd': f"{s['year']}CY00",
-                'cycle': '3',
-                'regionRank': '2' if s['regionCd'] == '00000' else '3',
-                'isSeasonal': '1',
-                'isProvisional': '0',
-            }
-        added_or_updated += 1
+            continue
+        by_key[key] = {
+            'year': s['year'],
+            'indicatorCd': s['indicatorCd'],
+            'regionCd': s['regionCd'],
+            'value': s['value'],
+            'indicatorName': '',
+            'unitCd': '',
+            'unitName': '',
+            'statCd': '',
+            'regionName': '',
+            'timeCd': f"{s['year']}CY00",
+            'cycle': '3',
+            'regionRank': '2' if s['regionCd'] == '00000' else '3',
+            'isSeasonal': '1',
+            'isProvisional': '0',
+        }
+        added += 1
 
-    if added_or_updated:
+    if added:
         logging.info(
             'Applied %d historical supplement rows to %s',
-            added_or_updated,
+            added,
             dataset_filename,
         )
     return list(by_key.values())
