@@ -1,0 +1,54 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Uganda_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://uganda.opendataforafrica.org/",
+            "provenance_description": "Uganda Demographics, Health and Education statistics from Uganda Bureau of Statistics (UBOS).",
+            "scripts": [
+                "download.sh",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/fidjrwf.csv --pv_map=fidjrwf_pvmap.csv --config_file=fidjrwf_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/fidjrwf --output_counters=counters/fidjrwf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ewvclpb.csv --pv_map=ewvclpb_pvmap.csv --config_file=ewvclpb_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/ewvclpb --output_counters=counters/ewvclpb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/yvitjl.csv --pv_map=yvitjl_pvmap.csv --config_file=yvitjl_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/yvitjl --output_counters=counters/yvitjl_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/qiubrhc.csv --pv_map=qiubrhc_pvmap.csv --config_file=qiubrhc_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/qiubrhc --output_counters=counters/qiubrhc_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/fidjrwf.tmcf",
+                    "cleaned_csv": "output/fidjrwf.csv",
+                    "node_mcf": "output/fidjrwf*.mcf"
+                },
+                {
+                    "template_mcf": "output/ewvclpb.tmcf",
+                    "cleaned_csv": "output/ewvclpb.csv",
+                    "node_mcf": "output/ewvclpb*.mcf"
+                },
+                {
+                    "template_mcf": "output/yvitjl.tmcf",
+                    "cleaned_csv": "output/yvitjl.csv",
+                    "node_mcf": "output/yvitjl*.mcf"
+                },
+                {
+                    "template_mcf": "output/qiubrhc.tmcf",
+                    "cleaned_csv": "output/qiubrhc.csv",
+                    "node_mcf": "output/qiubrhc*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*",
+                "counters/*",
+                "validation_config.json",
+                "places_resolved.csv"
+            ],
+            "cron_schedule": "0 5 1 1,4,7,10 *",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            }
+        }
+    ]
+}
