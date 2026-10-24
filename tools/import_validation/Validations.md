@@ -103,71 +103,107 @@ The missing golden rows are listed in the validation report json.
 The goldens can be generated from a CSV file using the `validator_goldens.py`
 script.
 
-To generate goldens for the summary_report.csv to verify that all the expected
-StatVars are generated with the corresponding number of places and dates, run
-the following:
+### Shared Global Golden Baselines in GCS
 
-This will generate the golden files using summary_report.csv as the default input:
+Common golden baseline lists of prominent StatVars and Places (consolidated across `website` and `mixer` NL embeddings, Topic/SDG/UNDATA configs, Explore landing page queries, Chart configs, and E2E golden test suites) are stored in GCS under `gs://unresolved_mcf/import_validation/`:
 
-```shell
-    python3 validator_goldens.py \
-      --validate_goldens_input=summary_report.csv \
-      --generate_goldens=goldens_data/golden_summary_report.csv \
-      --generate_goldens_property_sets="StatVar|NumPlaces|MinDate|MeasurementMethods|Units|ScalingFactors|observationPeriods"
-```
+- **Global StatVars (2,104 StatVars):** `gs://unresolved_mcf/import_validation/golden_statvars.csv`
+- **Global Places (249 Places):** `gs://unresolved_mcf/import_validation/golden_places.csv`
+- **Additional NL StatVar & Place lists:** `gs://unresolved_mcf/import_validation/nl_statvars.csv` and `gs://unresolved_mcf/import_validation/top_100k_places.csv`
 
-To validate summary_report.csv against a golden file run the below command:
+### Steps to Generate Import-Specific Goldens for a New Import
 
-```shell
-   python3 validator_goldens.py \
-      --validate_goldens_input=summary_report.csv \
-      --validate_goldens=goldens_data/golden_summary_report.csv 
-```
+#### Step 1: Generate `golden_data/golden_summary_report.csv` (StatVars & Metadata)
 
-To generate goldens for observations that include important
-statvars, places and dates, run the following with selected StatVar and
-place dcids loaded from txt files:
+From the `summary_report.csv` produced by `dc-import genmcf` (either from a local run or `gs://datcom-prod-imports/<import_dir>/<import_name>/<version>/input0/genmcf/summary_report.csv`), generate `golden_data/golden_summary_report.csv` retaining **only the 5 stable metadata columns** (`StatVar|MeasurementMethods|Units|ScalingFactors|observationPeriods`). Do **not** include volatile columns (`NumPlaces`, `NumObservations`, `MinValue`, `MaxValue`, `NumObservationsDates`, `MinDate`, `MaxDate`), which change on routine auto-refresh runs:
 
 ```shell
-    python3 validator_goldens.py \
-      --validate_goldens_input=output/observations.csv \
-      --generate_goldens=golden_data/golden_observations.csv \
-      --goldens_must_include="variableMeasured:gs://unresolved_mcf/import_validation/nl_statvars.csv,observationAbout:gs://unresolved_mcf/import_validation/top_100k_places.csv" \
-      --generate_goldens_property_sets="variableMeasured|unit|scalingFactor|observationPeriod|measurementMethod,observationAbout,observationDate"
+python3 tools/import_validation/validator_goldens.py \
+  --validate_goldens_input=summary_report.csv \
+  --generate_goldens=golden_data/golden_summary_report.csv \
+  --goldens_must_include="StatVar:gs://unresolved_mcf/import_validation/golden_statvars.csv" \
+  --generate_goldens_property_sets="StatVar|MeasurementMethods|Units|ScalingFactors|observationPeriods"
 ```
 
-To enable goldens validation with files generated above
-while relaxing the default deleted records threshold, add the following
-validation rules to the validation config:
+*(If a specialized domain import has no overlap with `golden_statvars.csv`, omit `--goldens_must_include` or pass `--goldens_sample_rows=20` to sample up to 20 StatVars from `summary_report.csv`.)*
+
+To validate `summary_report.csv` against the generated golden file:
+
+```shell
+python3 tools/import_validation/validator_goldens.py \
+  --validate_goldens_input=summary_report.csv \
+  --validate_goldens=golden_data/golden_summary_report.csv
+```
+
+#### Step 2: Generate `golden_data/golden_observations.csv` (Places / Observations)
+
+Identify the place column in your import's cleaned output CSV (as mapped to `observationAbout` in the `.tmcf` file — e.g., `observationAbout`, `Place`, `GeoId`, `dcid`, `location`) and generate `golden_data/golden_observations.csv` filtered against `gs://unresolved_mcf/import_validation/golden_places.csv`:
+
+```shell
+python3 tools/import_validation/validator_goldens.py \
+  --validate_goldens_input=output/observations.csv \
+  --generate_goldens=golden_data/golden_observations.csv \
+  --goldens_must_include="observationAbout:gs://unresolved_mcf/import_validation/golden_places.csv" \
+  --generate_goldens_property_sets="observationAbout"
+```
+
+*(Replace `observationAbout` with your CSV's actual place column name if different. Skip generating `golden_observations.csv` if `observationAbout` is a hardcoded constant in your `.tmcf` such as `observationAbout: dcid:country/USA`.)*
+
+To generate goldens for observations that jointly match prominent StatVars, Places, and dates across multiple property sets, you can also run:
+
+```shell
+python3 tools/import_validation/validator_goldens.py \
+  --validate_goldens_input=output/observations.csv \
+  --generate_goldens=golden_data/golden_observations.csv \
+  --goldens_must_include="variableMeasured:gs://unresolved_mcf/import_validation/golden_statvars.csv,observationAbout:gs://unresolved_mcf/import_validation/golden_places.csv" \
+  --generate_goldens_property_sets="variableMeasured|unit|scalingFactor|observationPeriod|measurementMethod,observationAbout,observationDate"
+```
+
+#### Step 3: Wire `validation_config.json` and `manifest.json`
+
+At runtime in `ImportExecutor`, the merged `validation_config.json` is written to `<import_dir>/<import_name>/<version>/input<N>/validation/validation_config.json` (4 directory levels below `<import_dir>`), and relative paths in `params` are resolved relative to that directory (`../../../../`).
+
+Add `check_goldens_summary_report` and `check_goldens_output_csv` to your import's `validation_config.json`:
 
 ```json
 {
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Relax default deleted records threshold to 10% with additional goldens check to catch statvar series deletions",
-            "validator": "DELETED_RECORDS_PERCENT",
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
             "params": {
-                "threshold": 10
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
             }
         },
         {
-            "rule_id": "check_golden_summary_report",
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_golden_observations_statvar_places_dates",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_observations.csv",
-                "input_files": "output/observations.csv"
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output/observations.csv"
             }
         }
     ]
 }
 ```
+
+Then in `manifest.json`, ensure the import specification references `"validation_config_file"` and includes `"golden_data/*.csv"` in `"source_files"`:
+
+```json
+{
+    "import_name": "MyImportName",
+    "validation_config_file": "validation_config.json",
+    "source_files": [
+        "golden_data/*.csv"
+    ]
+}
+```
+
+#### Important Caveats for Multi-Input and Multi-Spec Imports
+
+- **Multi-Input Imports (`len(import_inputs) > 1`):** `ImportExecutor` runs `ValidationRunner` in a loop once per `input<N>` directory using the same `validation_config.json`. If `check_goldens_summary_report` omits `input_files`, `ValidationRunner` validates `golden_summary_report.csv` against each `input<N>/genmcf/summary_report.csv` in turn — which fails if different inputs partition different StatVars. Either include only StatVars common to all inputs in `golden_summary_report.csv`, or explicitly pin `"input_files": "../../input0/genmcf/summary_report.csv"` in `check_goldens_summary_report`'s `params`.
+- **Multi-Spec Manifests (`len(import_specifications) > 1`):** Use per-specification filenames (`golden_data/golden_summary_report_<import_name>.csv`, `golden_data/golden_observations_<import_name>.csv`, and `validation_config_<import_name>.json`) so specifications in the same directory do not overwrite each other.
+
 
