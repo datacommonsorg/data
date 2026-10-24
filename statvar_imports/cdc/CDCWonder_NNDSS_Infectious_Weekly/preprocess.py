@@ -8,6 +8,7 @@ from pathlib import Path
 import datetime
 import importlib.util
 import shutil
+import time
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 util_script_path = os.path.abspath(os.path.join(script_dir, '../../../util/download_util_script.py'))
@@ -105,29 +106,47 @@ def preprocess_data(filepath: str):
     except Exception as e:
         if os.path.exists(temp_filepath): os.remove(temp_filepath)
         logging.error(f"Error during Pandas processing: {e}")
-        logging.fatal(f"An unexpected error occurred: {e}")
         raise RuntimeError(f"Import job failed An unexpected error occurred: {e}")
 
 def main(argv):
     """Download CDC data, validate it, preprocess it, and rename the output."""
     logging.info("Starting download phase...")
-    try:
-        download_file(url=SOURCE_URL,
-                  output_folder=INPUT_DIR,
-                  unzip=False,
-                  headers= None,
-                  tries= 3,
-                  delay= 5,
-                  backoff= 2)
-        logging.info("Download function completed.")
-    except Exception as e:
-        logging.error(f"Failed during download: {e}")
-        logging.fatal(f"Failed to download NNDSS weekly data file,{e}")
-        raise RuntimeError(f"Failed to download NNDSS weekly data file,{e}")
-    
-    # Check if file actually downloaded and check its size
-    if not os.path.exists(INPUT_FILE):
-        logging.fatal("The file 'rows.csv' was never downloaded.")
+    max_download_attempts = 3
+    retry_delay_secs = 5
+    backoff_factor = 2
+    download_ok = False
+
+    for attempt in range(1, max_download_attempts + 1):
+        try:
+            logging.info(f"Download attempt {attempt}/{max_download_attempts}...")
+            if os.path.exists(INPUT_FILE):
+                os.remove(INPUT_FILE)
+            download_ok = download_file(url=SOURCE_URL,
+                      output_folder=INPUT_DIR,
+                      unzip=False,
+                      headers=None,
+                      tries=3,
+                      delay=5,
+                      backoff=2)
+            if download_ok and os.path.exists(INPUT_FILE):
+                logging.info("Download function completed.")
+                break
+            logging.warning(
+                f"Download attempt {attempt}/{max_download_attempts} returned {download_ok} "
+                f"(file exists: {os.path.exists(INPUT_FILE)})."
+            )
+        except Exception as e:
+            logging.warning(
+                f"Download attempt {attempt}/{max_download_attempts} raised exception: {e}"
+            )
+
+        if attempt < max_download_attempts:
+            logging.info(f"Retrying download in {retry_delay_secs} seconds...")
+            time.sleep(retry_delay_secs)
+            retry_delay_secs *= backoff_factor
+
+    if not download_ok or not os.path.exists(INPUT_FILE):
+        logging.error("The file 'rows.csv' could not be downloaded after all retry attempts.")
         sys.exit(1)
         
     file_size_mb = os.path.getsize(INPUT_FILE) / (1024 * 1024)
