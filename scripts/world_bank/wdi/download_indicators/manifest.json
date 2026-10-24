@@ -15,7 +15,8 @@
                     "cleaned_csv": "cleaned_wdi.csv"
                 }
             ],
-            "cron_schedule": "0 0 1 * *"
+            "cron_schedule": "30 6 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 06:30 UTC"
         }
     ]
 }
