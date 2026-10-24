@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Median_Concentration_AirPollutant_Ozone,[],[PartsPerBillion],[],[P8H]
+Mean_Concentration_AirPollutant_Ozone,[],[PartsPerBillion],[],[P8H]
+Max_Concentration_AirPollutant_Ozone,[],[PartsPerBillion],[],[P8H]

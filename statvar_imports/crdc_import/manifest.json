@@ -30,14 +30,16 @@
             "source_files": [
                 "input_files/chronic_absenteeism/*.*",
                 "input_files/offenses/*.csv",
-                "input_files/restraint_and_seclusion/*.*"
+                "input_files/restraint_and_seclusion/*.*",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "0 8 1,15 * *",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
                 "disk": 400
-            }
+            },
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

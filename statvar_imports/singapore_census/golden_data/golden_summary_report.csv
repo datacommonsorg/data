@@ -1,0 +1,13 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Death,[],[],[],[]
+Count_Death_DiseasesOfBloodAndBloodFormingOrgansAndImmuneDisorders,[],[],[],[]
+Count_Death_DiseasesOfTheDigestiveSystem,[],[],[],[]
+GrowthRate_Count_Person,[],[Percent],[],[]
+Count_Person_PerArea,[],[PersonPerSquareKilometer],[],[]
+Count_Death_DiseasesOfTheCirculatorySystem,[],[],[],[]
+Count_MortalityEvent_HypertensiveHeartDisease,[],[],[],[]
+Count_Death_DiseasesOfTheRespiratorySystem,[],[],[],[]
+Count_Person,[],[],[],[]
+Count_Death_CertainInfectiousParasiticDiseases,[],[],[],[]
+Count_Death_Male,[],[],[],[]
+Count_MortalityEvent_Suicide,[],[],[],[]

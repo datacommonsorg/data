@@ -1,0 +1,12 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+InterestRate_TreasuryBill_1Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryNote_10Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryNote_3Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryNote_5Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryNote_7Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryNote_2Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryBond_30Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryBill_3Month,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryBill_6Month,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryBond_20Year,[ConstantMaturityRate],[Percent],[],[]
+InterestRate_TreasuryBill_1Month,[ConstantMaturityRate],[Percent],[],[]

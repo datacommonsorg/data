@@ -1,0 +1,7 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Covid19MobilityTrend_Workplace,[],[Percent],[],[]
+Covid19MobilityTrend_LocalBusiness,[],[Percent],[],[]
+Covid19MobilityTrend_Residence,[],[Percent],[],[]
+Covid19MobilityTrend_GroceryStoreAndPharmacy,[],[Percent],[],[]
+Covid19MobilityTrend_TransportHub,[],[Percent],[],[]
+Covid19MobilityTrend_Park,[],[Percent],[],[]

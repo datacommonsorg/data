@@ -13,7 +13,8 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/snpe-at30june21-population-table.csv --pv_map=subnational_pvmap.csv --config_file=subnational_metadata.csv --places_resolved_csv=subnational_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/nzl_subnational_output --log_level=-2 --log_every_n=1000"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -25,7 +26,8 @@
                     "cleaned_csv": "output_files/nzl_subnational_output.csv"
                 }
             ],
-            "cron_schedule": "0 06 * * 2"
+            "cron_schedule": "0 06 * * 2",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

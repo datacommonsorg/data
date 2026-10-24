@@ -23,6 +23,22 @@
                 "query": "SELECT StatVar, MaxDate FROM stats",
                 "condition": "MaxDate >= '2025'"
             }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output/airpollution_emission_trends_tier1.csv"
+            }
         }
     ]
 }

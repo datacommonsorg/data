@@ -18,9 +18,11 @@
             ],
             "source_files": [
                 "nama_10r_3gdp.tsv.gz",
-                "input_files/input_file.tsv"
+                "input_files/input_file.tsv",
+                "golden_data/*.csv"
             ],
-            "cron_schedule": "30 04 * * 2"
+            "cron_schedule": "30 04 * * 2",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

@@ -29,7 +29,11 @@
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
-            }
+            },
+            "validation_config_file": "validation_config.json",
+            "source_files": [
+                "golden_data/*.csv"
+            ]
         }
     ]
 }

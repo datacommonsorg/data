@@ -16,7 +16,8 @@
                 "wir_2552_wiki/input_files/WIR255OD2552.csv",
                 "wir_2552_wiki/input_files/WIR255OD2552_rollups.csv",
                 "wir_2552_wiki/counters/*.csv",
-                "wir_2552_wiki/validation_config.json"
+                "wir_2552_wiki/validation_config.json",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -45,7 +46,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki"
             ],
             "source_files": [
-                "bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv"
+                "bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -53,7 +55,8 @@
                     "cleaned_csv": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 29 * *"
+            "cron_schedule": "0 6 29 * *",
+            "validation_config_file": "validation_config_Zurich_Population_By_Age.json"
         },
         {
             "import_name": "Zurich_Population",
@@ -69,7 +72,8 @@
             "source_files": [
                 "bev_3240_wiki/input_files/BEV324OD3240.csv",
                 "bev_3240_wiki/counters/*.csv",
-                "bev_3240_wiki/validation_config.json"
+                "bev_3240_wiki/validation_config.json",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -98,7 +102,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_hel_wiki/input_files/bev_4031_hel_wiki.csv --pv_map=bev_4031_hel_wiki/bev_4031_hel_wiki_pvmap.csv --config_file=bev_4031_hel_wiki/bev_4031_hel_wiki_metadata.csv --output_path=bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki"
             ],
             "source_files": [
-                "bev_4031_hel_wiki/input_files/bev_4031_hel_wiki.csv"
+                "bev_4031_hel_wiki/input_files/bev_4031_hel_wiki.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -106,7 +111,8 @@
                     "cleaned_csv": "bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki.csv"
                 }
             ],
-            "cron_schedule": "45 15 29 * *"
+            "cron_schedule": "45 15 29 * *",
+            "validation_config_file": "validation_config_Zurich_Population_Number_Of_Birth_By_Origin.json"
         },
         {
             "import_name": "Zurich_Population_Number_Of_Birth",
@@ -120,7 +126,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_wiki/input_files/bev_4031_wiki.csv --pv_map=bev_4031_wiki/bev_4031_wiki_pvmap.csv --config_file=bev_4031_wiki/bev_4031_wiki_metadata.csv --output_path=bev_4031_wiki/output/zurich_bev_4031_wiki"
             ],
             "source_files": [
-                "bev_4031_wiki/input_files/bev_4031_wiki.csv"
+                "bev_4031_wiki/input_files/bev_4031_wiki.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -128,7 +135,8 @@
                     "cleaned_csv": "bev_4031_wiki/output/zurich_bev_4031_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 20 29 * *"
+            "cron_schedule": "0 20 29 * *",
+            "validation_config_file": "validation_config_Zurich_Population_Number_Of_Birth.json"
         },
         {
             "import_name": "Zurich_Population_By_Origin",
@@ -143,7 +151,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_hel_wiki/input_files/bev_3903_hel_wiki_utf8.csv --pv_map=bev_3903_hel_wiki/bev_3903_hel_wiki_pvmap.csv --config_file=bev_3903_hel_wiki/bev_3903_hel_wiki_metadata.csv --output_path=bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki"
             ],
             "source_files": [
-                "bev_3903_hel_wiki/input_files/bev_3903_hel_wiki.csv"
+                "bev_3903_hel_wiki/input_files/bev_3903_hel_wiki.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -151,7 +160,8 @@
                     "cleaned_csv": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.csv"
                 }
             ],
-            "cron_schedule": "15 1 29 * *"
+            "cron_schedule": "15 1 29 * *",
+            "validation_config_file": "validation_config_Zurich_Population_By_Origin.json"
         },
         {
             "import_name": "Zurich_Population_Number_Of_Birth_By_Sex",
@@ -165,7 +175,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_sex_wiki/input_files/bev_4031_sex_wiki.csv --pv_map=bev_4031_sex_wiki/bev_4031_sex_wiki_pvmap.csv --config_file=bev_4031_sex_wiki/bev_4031_sex_wiki_metadata.csv --output_path=bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki"
             ],
             "source_files": [
-                "bev_4031_sex_wiki/input_files/bev_4031_sex_wiki.csv"
+                "bev_4031_sex_wiki/input_files/bev_4031_sex_wiki.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -173,7 +184,8 @@
                     "cleaned_csv": "bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki.csv"
                 }
             ],
-            "cron_schedule": "07 19 29 * *"
+            "cron_schedule": "07 19 29 * *",
+            "validation_config_file": "validation_config_Zurich_Population_Number_Of_Birth_By_Sex.json"
         },
         {
             "import_name": "Zurich_Population_By_Sex",
@@ -187,7 +199,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_sex_wiki/input_files/bev_3903_sex_wiki.csv --pv_map=bev_3903_sex_wiki/bev_3903_sex_wiki_pvmap.csv --config_file=bev_3903_sex_wiki/bev_3903_sex_wiki_metadata.csv --output_path=bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki"
             ],
             "source_files": [
-                "bev_3903_sex_wiki/input_files/bev_3903_sex_wiki.csv"
+                "bev_3903_sex_wiki/input_files/bev_3903_sex_wiki.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -195,7 +208,8 @@
                     "cleaned_csv": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.csv"
                 }
             ],
-            "cron_schedule": "55 10 29 * *"
+            "cron_schedule": "55 10 29 * *",
+            "validation_config_file": "validation_config_Zurich_Population_By_Sex.json"
         }
     ]
 }

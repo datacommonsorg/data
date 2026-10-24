@@ -1,0 +1,12 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_CriminalActivities_Robbery,[],[],[],[P1Y]
+Count_CriminalActivities_PropertyCrime,[],[],[],[P1Y]
+Count_CriminalActivities_CombinedCrime,[],[],[],[P1Y]
+Count_CriminalActivities_MotorVehicleTheft,[],[],[],[P1Y]
+Count_CriminalActivities_AggravatedAssault,[],[],[],[P1Y]
+Count_CriminalActivities_MurderAndNonNegligentManslaughter,[],[],[],[P1Y]
+Count_CriminalActivities_Arson,[],[],[],[P1Y]
+Count_CriminalActivities_LarcenyTheft,[],[],[],[P1Y]
+Count_CriminalActivities_ForcibleRape,[],[],[],[P1Y]
+Count_CriminalActivities_Burglary,[],[],[],[P1Y]
+Count_CriminalActivities_ViolentCrime,[],[],[],[P1Y]

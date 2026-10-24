@@ -1,0 +1,5 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Mean_Concentration_AirPollutant_PM2.5,[],[MicrogramsPerCubicMeter],[],[P1Y]
+AirPollutant_Cancer_Risk,[],[PerMillionPerson],[],[P1Y]
+Mean_Concentration_AirPollutant_Ozone,[],[PartsPerBillion],[],[P1Y]
+Mean_Concentration_AirPollutant_DieselPM,[],[MicrogramsPerCubicMeter],[],[P1Y]

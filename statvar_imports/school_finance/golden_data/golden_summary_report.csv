@@ -1,0 +1,7 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+FullTimeEquivalent_Count_Teacher,[],[],[],[]
+Expenditure_EconomicActivity_Salaries_Teacher,[],[USDollar],[],[]
+Expenditure_EconomicActivity_Salaries,[],[USDollar],[],[]
+Expenditure_EconomicActivity_NonPersonnel,[],[USDollar],[],[]
+Expenditure_EconomicActivity_Salaries_InstructionalStaff,[],[USDollar],[],[]
+Mean_Expenditure_EconomicActivity_Salaries_Teacher,[],[USDollar],[],[]

@@ -1,0 +1,11 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Annual_Emissions_Methane_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_NitrousOxide_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_NitrogenTrifluoride_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_CarbonDioxide_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_Hydrofluorocarbon_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_Hydrofluoroether_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_Perfluorocarbon_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_SulfurHexafluoride_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_GreenhouseGas_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]
+Annual_Emissions_EPA_OtherFullyFluorinatedCompound_NonBiogenic,[EPA_GHGRP],[MetricTonCO2e],[],[P1Y]

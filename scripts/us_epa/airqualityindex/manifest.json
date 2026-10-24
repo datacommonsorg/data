@@ -11,7 +11,8 @@
                 "air_quality_aggregate.py"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {

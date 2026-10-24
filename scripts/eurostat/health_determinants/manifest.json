@@ -18,14 +18,16 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 2 2 * *"
+            "cron_schedule": "0 2 2 * *",
+            "validation_config_file": "validation_config_EuroStatHealth_AlcoholConsumption.json"
         },
         {
             "import_name": "EuroStatHealth_BodyMassIndex",
@@ -45,14 +47,16 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 2 * *"
+            "cron_schedule": "0 7 2 * *",
+            "validation_config_file": "validation_config_EuroStatHealth_BodyMassIndex.json"
         },
         {
             "import_name": "EuroStatHealth_FruitsAndVegetables",
@@ -72,14 +76,16 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 6 2 * *"
+            "cron_schedule": "0 6 2 * *",
+            "validation_config_file": "validation_config_EuroStatHealth_FruitsAndVegetables.json"
         },
         {
             "import_name": "EuroStatHealth_PhysicalActivity",
@@ -98,14 +104,16 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 5 2 * *"
+            "cron_schedule": "0 5 2 * *",
+            "validation_config_file": "validation_config_EuroStatHealth_PhysicalActivity.json"
         },
         {
             "import_name": "EuroStatHealth_SocialEnvironment",
@@ -125,14 +133,16 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 4 2 * *"
+            "cron_schedule": "0 4 2 * *",
+            "validation_config_file": "validation_config_EuroStatHealth_SocialEnvironment.json"
         },
         {
             "import_name": "EurostatHealth_Tobacco_Consumption",

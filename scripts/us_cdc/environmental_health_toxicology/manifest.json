@@ -13,14 +13,15 @@
             ],
             "source_files": [
                 "input_files/*",
-                "validation_config_census_tract.json"
+                "validation_config_CDC_PM25CensusTract.json",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
                 "disk": 2000
             },
-            "validation_config_file": "validation_config_census_tract.json",
+            "validation_config_file": "validation_config_CDC_PM25CensusTract.json",
             "config_override": {
                 "invoke_differ_tool": false
             },
@@ -57,14 +58,15 @@
             ],
             "source_files": [
                 "input_files/*",
-                "validation_config_census_tract.json"
+                "validation_config_CDC_OzoneCensusTract.json",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
                 "disk": 2000
             },
-            "validation_config_file": "validation_config_census_tract.json",
+            "validation_config_file": "validation_config_CDC_OzoneCensusTract.json",
             "config_override": {
                 "invoke_differ_tool": false
             },
@@ -101,14 +103,15 @@
             ],
             "source_files": [
                 "input_files/*",
-                "validation_config_county.json"
+                "validation_config_CDC_PM25County.json",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
                 "disk": 500
             },
-            "validation_config_file": "validation_config_county.json",
+            "validation_config_file": "validation_config_CDC_PM25County.json",
             "import_inputs": [
                 {
                     "template_mcf": "PM25CountyPollution.tmcf",
@@ -142,14 +145,15 @@
             ],
             "source_files": [
                 "input_files/*",
-                "validation_config_county.json"
+                "validation_config_CDC_OzoneCounty.json",
+                "golden_data/*.csv"
             ],
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
                 "disk": 500
             },
-            "validation_config_file": "validation_config_county.json",
+            "validation_config_file": "validation_config_CDC_OzoneCounty.json",
             "import_inputs": [
                 {
                     "template_mcf": "OzoneCountyPollution.tmcf",

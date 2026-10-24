@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+LifeExpectancy_Person_Male,[OECDRegionalStatistics],[Year],[],[P1Y]
+LifeExpectancy_Person_Female,[OECDRegionalStatistics],[Year],[],[P1Y]
+LifeExpectancy_Person,[OECDRegionalStatistics],[Year],[],[P1Y]

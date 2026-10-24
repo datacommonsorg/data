@@ -1,0 +1,3 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_BirthEvent_Native,[],[],[],[]
+Count_BirthEvent_ForeignBorn,[],[],[],[]

@@ -21,8 +21,10 @@
             ],
             "cron_schedule": "0 10 1,15 * *",
             "source_files": [
-                "tmp_data/*"
-            ]
+                "tmp_data/*",
+                "golden_data/*.csv"
+            ],
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

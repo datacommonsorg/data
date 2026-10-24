@@ -12,7 +12,8 @@
                 "process.py"
             ],
             "source_files": [
-                "gcs_folder/input_files/*/*.csv"
+                "gcs_folder/input_files/*/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -29,7 +30,8 @@
                 "cpu": 32,
                 "memory": 512,
                 "disk": 300
-            }
+            },
+            "validation_config_file": "validation_config.json"
         }
     ]
-} 
+}

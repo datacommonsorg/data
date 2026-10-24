@@ -22,7 +22,8 @@
             "source_files": [
                 "input_files/*.csv",
                 "counters/*.csv",
-                "validation_config.json"
+                "validation_config.json",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "30 08 8-14 * 6"
         }

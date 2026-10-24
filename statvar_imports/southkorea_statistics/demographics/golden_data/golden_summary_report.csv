@@ -1,0 +1,9 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person,[],[],[],[]
+Count_Person_ForeignBorn,[],[],[],[]
+Count_Household,[],[],[],[]
+Count_Person_Male,[],[],[],[]
+Count_HousingUnit,[],[],[],[]
+Count_Person_Native,[],[],[],[]
+Count_Person_Female,[],[],[],[]
+Count_Person_Female_ForeignBorn,[],[],[],[]

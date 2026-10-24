@@ -19,9 +19,11 @@
                 }
             ],
             "source_files": [
-                "CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv"
+                "CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv",
+                "golden_data/*.csv"
             ],
-            "cron_schedule": "0 10 1,15 * *"
+            "cron_schedule": "0 10 1,15 * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

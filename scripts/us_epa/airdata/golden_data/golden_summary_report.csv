@@ -1,0 +1,9 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Mean_Concentration_AirPollutant_PM2.5,"[, PM25_24hour_2012]",[MicrogramsPerCubicMeter_lc],[],[P1D]
+Mean_Concentration_AirPollutant_NO2,[NO2_1hour_2010],[PartsPerBillion],[],[P1D]
+Mean_Concentration_AirPollutant_Ozone,[Ozone_8hour_2015],[PartsPerMillion],[],[P1D]
+Max_Concentration_AirPollutant_NO2,[NO2_1hour_2010],[PartsPerBillion],[],[P1D]
+Max_Concentration_AirPollutant_Ozone,[Ozone_8hour_2015],[PartsPerMillion],[],[P1D]
+AirQualityIndex_AirPollutant_Ozone,[Ozone_8hour_2015],[],[],[P1D]
+Max_Concentration_AirPollutant_CO,"[CO_1hour_1971, CO_8hour_1971]",[PartsPerMillion],[],[P1D]
+AirQualityIndex_AirPollutant_NO2,[NO2_1hour_2010],[],[],[P1D]

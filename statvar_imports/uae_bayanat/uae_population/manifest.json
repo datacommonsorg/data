@@ -12,7 +12,8 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/uae_populationbyemiratesnationalityandgender.xlsx --pv_map=uae_population_pvmap.csv --config_file=uae_population_metadata.csv --places_resolved_csv=uae_population_places_resolved_csv.csv --output_path=output/uae_population_output"
             ],
             "source_files": [
-                "input/uae_populationbyemiratesnationalityandgender.xlsx"
+                "input/uae_populationbyemiratesnationalityandgender.xlsx",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -20,7 +21,8 @@
                     "cleaned_csv": "output/uae_population_output.csv"
                 }
             ],
-            "cron_schedule": "0 05 * * 1"
+            "cron_schedule": "0 05 * * 1",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

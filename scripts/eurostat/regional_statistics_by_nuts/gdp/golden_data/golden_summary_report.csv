@@ -1,0 +1,3 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Amount_EconomicActivity_GrossDomesticProduction_Nominal,"[EurostatRegionalStatistics, EuroBaseYear2020]","[NationalCurrency, Euro, PurchasingPowerStandard]",[],[P1Y]
+Amount_EconomicActivity_GrossDomesticProduction_Nominal_AsAFractionOf_Count_Person,"[EurostatRegionalStatistics, EuroBaseYear2020]","[Euro, PurchasingPowerStandard]",[],[P1Y]

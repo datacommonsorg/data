@@ -9,6 +9,13 @@
                 "query": "SELECT CAST(MAX(MaxDate) AS INTEGER) AS latest_year FROM stats",
                 "condition": "latest_year >= 2024"
             }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
         }
     ]
 }

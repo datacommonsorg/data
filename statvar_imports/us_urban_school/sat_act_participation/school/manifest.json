@@ -12,7 +12,8 @@
             ],
             "source_files": [
                 "input_files_school/*.xlsx",
-                "input_files_school/*.csv"
+                "input_files_school/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -25,7 +26,8 @@
                 "cpu": 16,
                 "memory": 256,
                 "disk": 500
-            }
+            },
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

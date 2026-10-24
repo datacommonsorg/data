@@ -17,9 +17,11 @@
                 }
             ],
             "source_files": [
-                "OurWorldInData_Covid19.csv"
+                "OurWorldInData_Covid19.csv",
+                "golden_data/*.csv"
             ],
-            "cron_schedule": "0 2 * * *"
+            "cron_schedule": "0 2 * * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

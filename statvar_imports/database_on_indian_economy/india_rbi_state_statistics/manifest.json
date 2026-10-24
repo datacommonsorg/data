@@ -15,7 +15,8 @@
                 "input_files/agriculture/*.xlsx",
                 "input_files/environment/*.xlsx",
                 "input_files/infrastructure/*.xlsx",
-                "input_files/price_and_wages/*.xlsx"
+                "input_files/price_and_wages/*.xlsx",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -91,7 +92,8 @@
                     "cleaned_csv": "output_files/infrastructure/state_wise_telephones_per_100_population_output.csv"
                 }
             ],
-            "cron_schedule": "0 10 * * 1"
+            "cron_schedule": "0 10 * * 1",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

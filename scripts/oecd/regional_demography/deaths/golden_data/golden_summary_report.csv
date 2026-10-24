@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Death,[OECDRegionalStatistics],[],[],[P1Y]
+Count_Death_Female,[OECDRegionalStatistics],[],[],[P1Y]
+Count_Death_Male,[OECDRegionalStatistics],[],[],[P1Y]

@@ -12,7 +12,8 @@
                 "parse_cdc_places.py"
             ],
             "source_files": [
-                "gcs_output/input_files/*.csv"
+                "gcs_output/input_files/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -37,7 +38,8 @@
                 "cpu": 16,
                 "memory": 256,
                 "disk": 500
-            }
+            },
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

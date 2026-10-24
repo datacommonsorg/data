@@ -1,0 +1,8 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]
+Count_Person_Female_AsianAlone,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]
+Count_Person_Female_BlackOrAfricanAmericanAlone,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]
+Count_Person_Male_AsianAlone,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]
+Count_Person_Female_TwoOrMoreRaces,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]
+Count_Person_Male_BlackOrAfricanAmericanAlone,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]
+Count_Person_Female_WhiteAlone,[dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards],[],[],[P1Y]

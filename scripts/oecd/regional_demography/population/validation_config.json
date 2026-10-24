@@ -26,6 +26,22 @@
                 "query": "SELECT * FROM stats WHERE StatVar NOT IN ('Count_Person_20To64Years', 'Count_Person_25To54Years', 'Count_Person_55To64Years')",
                 "condition": "CAST(MaxDate AS INTEGER) >= 2023"
             }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../OECD_population_cleaned.csv"
+            }
         }
     ]
 }

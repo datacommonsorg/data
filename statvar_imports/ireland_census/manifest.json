@@ -13,7 +13,8 @@
                 "run.sh"
             ],
             "source_files": [
-                "input_files/*.csv"
+                "input_files/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -61,7 +62,8 @@
                     "cleaned_csv": "output_files/irl_aa1_aa2_employment_output.csv"
                 }
             ],
-            "cron_schedule": "0 05 * * 5"
+            "cron_schedule": "0 05 * * 5",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

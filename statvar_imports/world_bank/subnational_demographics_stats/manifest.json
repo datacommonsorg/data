@@ -14,7 +14,8 @@
             "source_files": [
                 "input_files/P_Data_Extract_From_Subnational_Population.zip",
                 "counters/*.csv",
-                "validation_config.json"
+                "validation_config.json",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {

@@ -18,12 +18,14 @@
                 }
             ],
             "source_files": [
-                "treasury_constant_maturity_rates.csv"
+                "treasury_constant_maturity_rates.csv",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "15 3 * * *",
             "config_override": {
                 "enable_skip_status": false
-            }
+            },
+            "validation_config_file": "validation_config_USFed_ConstantMaturityRates_Test.json"
         },
         {
             "import_name": "USFed_ConstantMaturityRates",
@@ -43,9 +45,11 @@
                 }
             ],
             "source_files": [
-                "treasury_constant_maturity_rates.csv"
+                "treasury_constant_maturity_rates.csv",
+                "golden_data/*.csv"
             ],
-            "cron_schedule": "15 3 * * *"
+            "cron_schedule": "15 3 * * *",
+            "validation_config_file": "validation_config_USFed_ConstantMaturityRates.json"
         }
     ]
 }

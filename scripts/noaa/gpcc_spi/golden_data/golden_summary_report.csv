@@ -1,0 +1,3 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Area_DroughtEvent,[],[SquareKilometer],[],"[P1Y, P1M]"
+Count_DroughtEvent,[],[],[],"[P1Y, P1M]"

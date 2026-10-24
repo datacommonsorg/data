@@ -14,7 +14,8 @@
             "source_files": [
                 "gcs_output/input_files/*/*.csv",
                 "manifest.json",
-                "validation_config.json"
+                "validation_config.json",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {

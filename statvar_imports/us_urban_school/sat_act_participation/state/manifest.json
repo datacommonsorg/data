@@ -12,7 +12,8 @@
             ],
             "source_files": [
                 "input_files_state/*.xlsx",
-                "input_files_state/*.csv"
+                "input_files_state/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -20,7 +21,8 @@
                     "cleaned_csv": "output_files_state/output_*.csv"
                 }
             ],
-            "cron_schedule": "0 05 8,23 * *"
+            "cron_schedule": "0 05 8,23 * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

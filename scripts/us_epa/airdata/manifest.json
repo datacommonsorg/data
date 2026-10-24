@@ -18,7 +18,8 @@
                 }
             ],
             "source_files": [
-                "validation_config.json"
+                "validation_config.json",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "15 22 10 1,7 *",
             "validation_config_file": "validation_config.json",

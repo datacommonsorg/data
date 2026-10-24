@@ -1,0 +1,14 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../gcs_folder/output_files/us_nces_demographics_private_school.csv"
+            }
+        }
+    ]
+}

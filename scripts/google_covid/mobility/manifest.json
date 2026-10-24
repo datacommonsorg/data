@@ -11,7 +11,8 @@
                 "covidmobility.py"
             ],
             "source_files": [
-                "input/*"
+                "input/*",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -24,7 +25,8 @@
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
-            }
+            },
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

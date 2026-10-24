@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv",
+                "input_files": "../../input0/genmcf/summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016.csv"
+            }
+        }
+    ]
+}

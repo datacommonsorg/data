@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Death_Upto1Years,[],[],[],"[P1Y, P1M]"
+Count_Death,[],[],[],"[P1Y, P1M]"
+Count_BirthEvent_LiveBirth,[],[],[],"[P1Y, P1M]"

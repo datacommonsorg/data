@@ -22,7 +22,8 @@
                 "disk": 30
             },
             "source_files": [
-                "validation_config.json"
+                "validation_config.json",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "0 1 * * 1",
             "validation_config_file": "validation_config.json"

@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+worldBank/EG_ELC_ACCS_ZS,[WorldBank_WDI_CSV],[Percent],[],[P1Y]
+worldBank/NE_EXP_GNFS_CD,[WorldBank_WDI_CSV],[USDollar],[],[P1Y]
+worldBank/EG_ELC_ACCS_RU_ZS,[WorldBank_WDI_CSV],[Percent],[],[P1Y]

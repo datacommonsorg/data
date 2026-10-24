@@ -17,6 +17,22 @@
                 "query": "SELECT COUNT(DISTINCT StatVar) AS active_svs, MIN(MinDate) AS min_date FROM stats WHERE MaxDate >= '2020'",
                 "condition": "active_svs >= 385 AND min_date <= '2008'"
             }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../gcs_output/output_files/national_emissions.csv"
+            }
         }
     ]
 }

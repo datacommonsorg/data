@@ -16,7 +16,8 @@
             ],
             "source_files": [
                 "input_files/mex_admpop_adm*.csv",
-                "counters/*.csv"
+                "counters/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {

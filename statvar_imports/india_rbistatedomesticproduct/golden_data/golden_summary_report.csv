@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Amount_EconomicActivity_GrossValueAdded_RealValue,[CurrentPrice_WithBaseYear2011_12],[INR],[],[P1Y]
+Amount_EconomicActivity_GrossDomesticProduction_Nominal,[ConstantPrice_WithBaseYear2011_12],[INR],[],[P1Y]
+Amount_EconomicActivity_GrossDomesticProduction_RealValue,[CurrentPrice_WithBaseYear2011_12],[INR],[],[P1Y]

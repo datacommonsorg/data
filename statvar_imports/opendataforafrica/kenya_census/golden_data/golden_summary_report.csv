@@ -1,0 +1,10 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person_Rural,[],[],[],[P1Y]
+Count_Person_Urban,[],[],[],[P1Y]
+Count_Person,[],[],[],[P1Y]
+Count_Household_Rural,[],[],[],[P1Y]
+Count_Household,[],[],[],[P1Y]
+Count_Person_Male,[],[],[],[P1Y]
+Count_Person_PerArea,[],[PersonPerSquareKilometer],[],[P1Y]
+Count_Person_Female,[],[],[],[P1Y]
+Count_Household_Urban,[],[],[],[P1Y]

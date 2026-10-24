@@ -1,0 +1,13 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+LifeExpectancy_Person_Male,[],[Year],[],[]
+Count_Person,[],[],[],[]
+IncrementalCount_Person,[],[],[],[]
+Count_Person_Male,[],[],[],[]
+LifeExpectancy_Person_Female,[],[Year],[],[]
+Median_Age_Person,[],[Year],[],[]
+GrowthRate_Count_Person,[],[Percent],[],[]
+Count_Death,[],[],[],[]
+Count_Person_Divorced,[],[],[],[]
+Count_Person_Female,[],[],[],[]
+FertilityRate_Person_Female,[],[Percent],[],[]
+Count_BirthEvent_LiveBirth,[],[],[],[]

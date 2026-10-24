@@ -1,0 +1,6 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person_ConditionTuberculosisAndHIV_TreatmentNotEvaluated_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV,[],[Percent],[100],[]
+Count_Person_ConditionTuberculosisAndHIV_SuccessfullyTreated_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV,[],[Percent],[100],[]
+Count_Person_ConditionTuberculosisAndHIV_DiedDuringTreatment_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV,[],[Percent],[100],[]
+Count_Person_ConditionTuberculosisAndHIV_LostToFollowUp_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV,[],[Percent],[100],[]
+Count_Person_ConditionTuberculosisAndHIV_TreatmentFailed_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV,[],[Percent],[100],[]

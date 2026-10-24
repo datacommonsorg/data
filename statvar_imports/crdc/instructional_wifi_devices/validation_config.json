@@ -23,6 +23,22 @@
                 "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year, COUNT(*) OVER () AS total_svs FROM stats",
                 "condition": "max_year >= 2024 AND total_svs > 0"
             }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output/instructional_wifi_devices.csv"
+            }
         }
     ]
 }

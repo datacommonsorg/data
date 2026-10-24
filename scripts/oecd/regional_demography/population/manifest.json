@@ -17,7 +17,8 @@
                 }
             ],
             "source_files": [
-                "REGION_DEMOGR_population.csv"
+                "REGION_DEMOGR_population.csv",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "0 10 1,15 * *",
             "validation_config_file": "validation_config.json"

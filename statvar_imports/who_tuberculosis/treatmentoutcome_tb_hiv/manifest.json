@@ -18,9 +18,11 @@
                 }
             ],
             "source_files": [
-                "input_files/Tuberculosis_outcome_TB_HIV.csv"
+                "input_files/Tuberculosis_outcome_TB_HIV.csv",
+                "golden_data/*.csv"
             ],
-            "cron_schedule": "0 10 10,21 * *"
+            "cron_schedule": "0 10 10,21 * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

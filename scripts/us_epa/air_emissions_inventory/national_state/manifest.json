@@ -21,7 +21,8 @@
             "validation_config_file": "validation_config.json",
             "source_files": [
                 "input_files/*",
-                "validation_config.json"
+                "validation_config.json",
+                "golden_data/*.csv"
             ]
         }
     ]

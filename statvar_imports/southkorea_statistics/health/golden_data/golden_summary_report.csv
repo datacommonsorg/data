@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Death,[],[],[],[]
+Count_Person_Divorced,[],[],[],[]
+Count_BirthEvent,[],[],[],[]

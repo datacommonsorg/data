@@ -1,0 +1,4 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person,[UNData],[],[],[]
+Count_Person_Female,[UNData],[],[],[]
+Count_Person_Male,[UNData],[],[],[]

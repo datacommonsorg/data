@@ -24,9 +24,11 @@
             ],
             "source_files": [
                 "input_files/english/*",
-                "input_files/maths/*"
+                "input_files/maths/*",
+                "golden_data/*.csv"
             ],
-            "cron_schedule": "0 0 1 1,4,7,10 *"
+            "cron_schedule": "0 0 1 1,4,7,10 *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

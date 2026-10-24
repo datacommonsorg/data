@@ -1,0 +1,11 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Student_Male,[US_NCES_Demographics],[],[],[P1Y]
+Count_Faculty_LEAAdministrator,[US_NCES_Demographics],[],[],[P1Y]
+Count_Faculty_ElementarySchoolCounselor,[US_NCES_Demographics],[],[],[P1Y]
+Count_Teacher_SecondaryTeacher,[US_NCES_Demographics],[],[],[P1Y]
+Percent_Student_AsAFractionOf_Count_Teacher,[US_NCES_Demographics],[],[],[P1Y]
+Count_Student_Female,[US_NCES_Demographics],[],[],[P1Y]
+Count_Teacher,[US_NCES_Demographics],[],[],[P1Y]
+Count_Faculty_LEAAdministrativeSupportStaff,[US_NCES_Demographics],[],[],[P1Y]
+Count_Teacher_ElementaryTeacher,[US_NCES_Demographics],[],[],[P1Y]
+Count_Student,[US_NCES_Demographics],[],[],[P1Y]

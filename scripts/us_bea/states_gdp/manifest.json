@@ -13,7 +13,8 @@
                 "import_industry_data_and_gen_mcf.py"
             ],
             "source_files": [
-                "input_data/*.csv"
+                "input_data/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -27,7 +28,8 @@
                     "template_mcf": "states_industry_gdp.tmcf"
                 }
             ],
-            "cron_schedule": "30 10 30 1,4,7,10,12 *"
+            "cron_schedule": "30 10 30 1,4,7,10,12 *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

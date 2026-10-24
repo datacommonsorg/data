@@ -1,0 +1,21 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report_Zurich_Population_By_Age.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations_Zurich_Population_By_Age.csv",
+                "input_files": "../../../../bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
+            }
+        }
+    ]
+}

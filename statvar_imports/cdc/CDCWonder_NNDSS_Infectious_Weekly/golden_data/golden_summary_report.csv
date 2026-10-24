@@ -1,0 +1,3 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_MedicalConditionIncident_ConditionMalaria,[CDC_NNDSS_Diseases_WeeklyTables],[],[],[P1W]
+Count_MedicalConditionIncident_ConditionDengueDisease,[CDC_NNDSS_Diseases_WeeklyTables],[],[],[P1W]

@@ -1,0 +1,13 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person_Male_HispanicOrLatino,"[dcAggregate/CensusPEPSurvey, CensusPEPSurvey]",[],[],[P1Y]
+Count_Person_HispanicOrLatino_AsianOrPacificIslander,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_NotHispanicOrLatino_AmericanIndianOrAlaskaNativeAlone,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_Female_HispanicOrLatino,"[dcAggregate/CensusPEPSurvey, CensusPEPSurvey]",[],[],[P1Y]
+Count_Person_HispanicOrLatino_AmericanIndianOrAlaskaNativeAlone,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_Female_NotHispanicOrLatino,"[dcAggregate/CensusPEPSurvey, CensusPEPSurvey]",[],[],[P1Y]
+Count_Person_NotHispanicOrLatino_BlackOrAfricanAmericanAlone,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_HispanicOrLatino_WhiteAlone,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_WhiteAloneNotHispanicOrLatino,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_HispanicOrLatino_BlackOrAfricanAmericanAlone,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]
+Count_Person_Male_NotHispanicOrLatino,"[dcAggregate/CensusPEPSurvey, CensusPEPSurvey]",[],[],[P1Y]
+Count_Person_NotHispanicOrLatino_AsianOrPacificIslander,[CensusPEPSurvey_RaceUpto1999],[],[],[P1Y]

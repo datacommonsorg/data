@@ -34,7 +34,8 @@
             "source_files": [
                 "input_files/usbts_tract_household_transportation_2017_input.csv",
                 "input_files/usbts_tract_household_transportation_2009_input.csv",
-                "import_configs.json"
+                "import_configs.json",
+                "golden_data/*.csv"
             ],
             "cron_schedule": "0 1 6 * *",
             "resource_limits": {

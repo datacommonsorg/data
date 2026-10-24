@@ -1,0 +1,5 @@
+StatVar,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_PublicSchool_InstructionInPerson_ConditionCOVID19,[],[],[],[]
+Count_PublicSchool_InstructionInHybrid_ConditionCOVID19,[],[],[],[]
+Count_PublicSchool_NoEffect_ConditionCOVID19,[],[],[],[]
+Count_PublicSchool_InstructionInRemote_ConditionCOVID19,[],[],[],[]

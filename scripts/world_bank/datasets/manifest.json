@@ -13,7 +13,8 @@
             ],
             "cleanup_gcs_volume_mount": false,
             "source_files": [
-                "gcs_output/input_files/*.csv"
+                "gcs_output/input_files/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {

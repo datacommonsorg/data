@@ -23,6 +23,22 @@
                 "query": "SELECT MAX(CAST(LEFT(CAST(MaxDate AS VARCHAR), 4) AS INT)) AS max_year FROM stats",
                 "condition": "max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1)"
             }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output/EPA_AQI.csv"
+            }
         }
     ]
 }

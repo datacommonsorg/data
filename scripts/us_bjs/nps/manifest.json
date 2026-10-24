@@ -12,7 +12,8 @@
             ],
             "cleanup_gcs_volume_mount": false,
             "source_files": [
-                "input_files/*.tsv"
+                "input_files/*.tsv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
@@ -20,7 +21,8 @@
                     "cleaned_csv": "national_prison_stats.csv"
                 }
             ],
-            "cron_schedule": "0 9 5,25 * *"
+            "cron_schedule": "0 9 5,25 * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
