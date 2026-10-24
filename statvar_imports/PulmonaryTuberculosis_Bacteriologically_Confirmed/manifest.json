@@ -20,8 +20,8 @@
                     "cleaned_csv": "TB_Bacteriologically_Confirmed_output.csv"
                 }
             ],
-            "cron_schedule": "0 0 1 1,4,7,10 *",
-            "_comment": "Schedule: Quarterly on day 1 of Jan, Apr, Jul, and Oct at 00:00 UTC (quarterly release)",
+            "cron_schedule": "0 11 * * 6",
+            "_comment": "Schedule: Weekly on Saturday at 11:00 UTC",
             "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
         }
     ],

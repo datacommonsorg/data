@@ -20,8 +20,8 @@
           "cleaned_csv": "output/retention_output.csv"
         }
       ],
-      "cron_schedule": "30 7 27 * *",
-      "_comment": "Schedule: Monthly on day 27 at 07:30 UTC (end-of-month release)",
+      "cron_schedule": "30 9 * * 2",
+      "_comment": "Schedule: Weekly on Tuesday at 09:30 UTC",
       "resource_limits": {
         "cpu": 16,
         "memory": 128,

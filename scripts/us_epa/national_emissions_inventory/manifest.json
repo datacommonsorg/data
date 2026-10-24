@@ -22,8 +22,8 @@
                     "cleaned_csv": "gcs_output/output_files/national_emissions.csv"
                 }
             ],
-            "cron_schedule": "0 0 1 1-12/3 *",
-            "_comment": "Schedule: Quarterly on day 1 of Jan, Apr, Jul, and Oct at 00:00 UTC (quarterly release)",
+            "cron_schedule": "0 9 * * 2",
+            "_comment": "Schedule: Weekly on Tuesday at 09:00 UTC",
             "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 8,

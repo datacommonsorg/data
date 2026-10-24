@@ -24,8 +24,8 @@
                     "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_public_place.csv"
                 }
             ],
-            "cron_schedule": "30 3 2 3,6,9,12 *",
-            "_comment": "Schedule: Quarterly on day 2 of Mar, Jun, Sep, and Dec at 03:30 UTC (aligned with NCES quarterly release)",
+            "cron_schedule": "30 11 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 11:30 UTC",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,

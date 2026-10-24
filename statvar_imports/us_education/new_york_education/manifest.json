@@ -26,8 +26,8 @@
                 "input_files/english/*",
                 "input_files/maths/*"
             ],
-            "cron_schedule": "0 0 1 1,4,7,10 *",
-            "_comment": "Schedule: Quarterly on day 1 of Jan, Apr, Jul, and Oct at 00:00 UTC (quarterly release)"
+            "cron_schedule": "30 8 * * 5",
+            "_comment": "Schedule: Weekly on Friday at 08:30 UTC"
         }
     ]
 }
