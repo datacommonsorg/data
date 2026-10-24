@@ -22,9 +22,10 @@ import pandas as pd
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+sys.path.append(os.path.join(_SCRIPT_PATH, '..'))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../common'))  # for resolve_geo_id
-from data_loader import SubjectTableDataLoaderBase
-from resolve_geo_id import convert_to_place_dcid
+from common.data_loader import SubjectTableDataLoaderBase
+from common.resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
 
@@ -171,7 +172,12 @@ class S2409SubjectTableDataLoaderBase(SubjectTableDataLoaderBase):
                 obs_df = pd.DataFrame(columns=self.csv_columns)
                 obs_df['Place'] = place_geoIds
                 obs_df['StatVar'] = column_map[column]['Node']
-                obs_df['Quantity'] = df[column].values.tolist()
+                # Clean the quantity values by removing commas and trailing top/bottom-coding markers ('+' or '-')
+                obs_df['Quantity'] = pd.to_numeric(
+                    df[column].astype(str).str.replace(r',|[+-]$',
+                                                       '',
+                                                       regex=True),
+                    errors='coerce').tolist()
                 # add unit to the csv
                 try:
                     unit = column_map[column]['unit']
