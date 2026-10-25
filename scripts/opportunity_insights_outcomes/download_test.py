@@ -339,11 +339,11 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_sharding_all_datasets(self):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
         raw_dir = os.path.join(test_data_dir, 'raw_data')
-        expected_input_dir = os.path.join(test_data_dir, 'input_files')
+        expected_input_dir = os.path.join(test_data_dir, 'output')
         fake_header_to_sv = _load_expected_header_to_sv(expected_input_dir)
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            shard_dir = os.path.join(tmpdir, 'input_files')
+            shard_dir = os.path.join(tmpdir, 'output')
             os.makedirs(shard_dir, exist_ok=True)
 
             with mock.patch.object(

@@ -37,7 +37,7 @@ flags.DEFINE_string(
 )
 flags.DEFINE_string(
     'shard_dir',
-    os.path.join(_MODULE_DIR, 'input_files'),
+    os.path.join(_MODULE_DIR, 'output'),
     'Directory for generated cleaned wide CSVs, custom TMCFs, and StatVar MCFs.',
 )
 flags.DEFINE_string(
