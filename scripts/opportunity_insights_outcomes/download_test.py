@@ -292,7 +292,6 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 sys.argv[0],
                 f'--input_dir={os.path.join(tmpdir, "raw")}',
                 f'--shard_dir={os.path.join(tmpdir, "out")}',
-                f'--counters_file={os.path.join(tmpdir, "counters", "output_counters.csv")}',
             ])
             with mock.patch.object(preprocess.logging, 'fatal') as mock_fatal:
                 preprocess.main([])
@@ -459,7 +458,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 download.download_all_sources(tmpdir, force_download=True)
                 self.assertEqual(mock_dl.call_count, 12)
 
-    def test_resolve_headers_via_svp_logs_missing_headers_and_counters(self):
+    def test_resolve_headers_via_svp_logs_missing_headers(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             for filename, _, mode in preprocess.DATASET_CONFIGS:
                 with open(os.path.join(tmpdir, filename),
@@ -486,11 +485,6 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     for a in cmd
                     if a.startswith('--output_path=')
                 ][0]
-                counters_path = [
-                    a.split('=', 1)[1]
-                    for a in cmd
-                    if a.startswith('--output_counters=')
-                ][0]
                 with open(f'{out_prefix}.csv',
                           'w',
                           encoding='utf-8',
@@ -516,31 +510,20 @@ class DownloadAndPvmapTest(unittest.TestCase):
                           'w',
                           encoding='utf-8') as f:
                     f.write('Node: dcid:NewStatVar\n')
-                with open(counters_path, 'w', encoding='utf-8',
-                          newline='') as f:
-                    w = csv.writer(f)
-                    w.writerow(['key', 'value'])
-                    w.writerow(['dropped-output-statvars-mcf', '5400'])
-                    w.writerow(
-                        ['1:process_input_error-svobs-missing-property', '0'])
                 return mock.Mock(returncode=0, stderr='')
 
             dest_prefix = os.path.join(tmpdir, 'dest_out', 'output')
-            dest_counters = os.path.join(tmpdir, 'dest_counters',
-                                         'output_counters.csv')
             with mock.patch('subprocess.run', side_effect=fake_run_success):
                 resolved = preprocess._resolve_headers_via_svp(
                     tmpdir,
                     existing_statvar_mcf='',
                     sv_output_prefix=dest_prefix,
-                    counters_path=dest_counters,
                 )
             self.assertEqual(len(resolved), 17)
             self.assertEqual(resolved['kfr_p25'], ('2014', 'P2Y', 'dc/sv1', ''))
             self.assertTrue(os.path.exists(f'{dest_prefix}_stat_vars.mcf'))
             self.assertTrue(
                 os.path.exists(f'{dest_prefix}_stat_vars_schema.mcf'))
-            self.assertTrue(os.path.exists(dest_counters))
 
             def make_single_row_runner(val_str):
 
@@ -606,11 +589,6 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     for a in cmd
                     if a.startswith('--output_path=')
                 ][0]
-                counters_path = [
-                    a.split('=', 1)[1]
-                    for a in cmd
-                    if a.startswith('--output_counters=')
-                ][0]
                 with open(f'{out_prefix}.csv',
                           'w',
                           encoding='utf-8',
@@ -623,19 +601,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         'value',
                         'unit',
                     ])
-                with open(counters_path, 'w', encoding='utf-8',
-                          newline='') as f:
-                    w = csv.writer(f)
-                    w.writerow(['key', 'value'])
-                    w.writerow(
-                        ['1:process_input_error-svobs-missing-property', '1'])
-                    w.writerow(['unmapped_pvs', '1'])
                 return mock.Mock(returncode=0, stderr='')
 
             with mock.patch('subprocess.run', side_effect=fake_run_fail):
                 with self.assertRaisesRegex(
                         RuntimeError,
-                        r'kfr_p25.*1:process_input_error-svobs-missing-property.*unmapped_pvs',
+                        r'Unmapped column headers.*kfr_p25',
                 ):
                     preprocess._resolve_headers_via_svp(tmpdir,
                                                         existing_statvar_mcf='')
@@ -650,7 +621,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
             with mock.patch('subprocess.run', side_effect=fake_run_success):
                 with self.assertRaisesRegex(
-                        RuntimeError, r'kfr_p25_c1993.*unmapped_cohort_tokens'):
+                        RuntimeError, r'Unmapped column headers.*kfr_p25_c1993'):
                     preprocess._resolve_headers_via_svp(tmpdir,
                                                         existing_statvar_mcf='')
 

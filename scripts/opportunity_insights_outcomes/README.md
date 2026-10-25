@@ -17,11 +17,11 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
    ```bash
    python3 download.py
    ```
-2. **Resolve headers via `stat_var_processor.py` and write cleaned wide CSVs, custom `.tmcf` files, StatVar MCFs, and counters (`output/` and `counters/`):**
+2. **Resolve headers via `stat_var_processor.py` and write cleaned wide CSVs, custom `.tmcf` files, and StatVar MCFs (`output/`):**
    ```bash
    python3 preprocess.py
    ```
-   * **Note on `counters/output_counters.csv`:** Because `preprocess.py` invokes `stat_var_processor.py` on a compact header-resolution seed table (`11,247` unique normalized column headers across all datasets and birth cohorts), `counters/output_counters.csv` reflects this schema-resolution pass. Full observation counts across all 6 cleaned wide CSVs (`output/*_cleaned.csv`, totaling `283,560,361` observations across `209,544` rows) are logged by `preprocess.py`.
+   * Full observation counts across all 6 cleaned wide CSVs (`output/*_cleaned.csv`, totaling `283,560,361` observations across `209,544` rows) are logged by `preprocess.py`.
 
 ## Testing & Generating Expected Test Outputs
 
@@ -67,7 +67,7 @@ Run all commands below from `data/scripts/opportunity_insights_outcomes/`:
 
 ## Directory & File Structure
 * `download.py`: Scrapes the Opportunity Insights catalog (`https://opportunityinsights.org/data/`) with canonical fallback URLs, downloads raw CSV/ZIP archives with bounded retries, and extracts them into `raw_data/`.
-* `preprocess.py`: Normalizes multi-word column headers, resolves all unique column headers via `stat_var_processor.py` (emitting `output/output_stat_vars*.mcf` and `counters/output_counters.csv`), and writes the 6 cleaned wide CSVs (`output/*_cleaned.csv`) and 6 custom multi-node `.tmcf` files (`output/*_cleaned.tmcf`) in parallel across CPU cores with numeric values formatted via `str_from_number(val, precision_digits=5)`.
+* `preprocess.py`: Normalizes multi-word column headers, resolves all unique column headers via `stat_var_processor.py` (emitting `output/output_stat_vars*.mcf`), and writes the 6 cleaned wide CSVs (`output/*_cleaned.csv`) and 6 custom multi-node `.tmcf` files (`output/*_cleaned.tmcf`) in parallel across CPU cores with numeric values formatted via `str_from_number(val, precision_digits=5)`.
 * `pvmap.csv`: Property-value mapping table translating normalized column tokens (`_`-delimited) into Data Commons `StatisticalVariable` and `StatVarObservation` properties.
 * `metadata.csv`: Configuration for `stat_var_processor.py` (`word_delimiter: "_"`, `output_columns: "observationAbout,observationDate,observationPeriod,variableMeasured,value,unit"`).
 * `manifest.json`: Automated import specification, script execution sequence, GCS `import_inputs` (`output/*_cleaned.tmcf` and `output/*_cleaned.csv`), `node_mcf` (`output/*.mcf`), monthly cron schedule (`0 8 1 * *`), and resource limits.

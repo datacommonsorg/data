@@ -40,11 +40,6 @@ flags.DEFINE_string(
     os.path.join(_MODULE_DIR, 'output'),
     'Directory for generated cleaned wide CSVs, custom TMCFs, and StatVar MCFs.',
 )
-flags.DEFINE_string(
-    'counters_file',
-    os.path.join(_MODULE_DIR, 'counters', 'output_counters.csv'),
-    'Output path for stat_var_processor.py resolution counters.',
-)
 flags.DEFINE_integer(
     'max_rows_per_shard',
     5_000,
@@ -287,12 +282,36 @@ def _write_dataset_tmcf(
         tmcf_file.write('\n\n'.join(blocks) + ('\n' if blocks else ''))
 
 
+def _stage_existing_statvar_mcf(existing_statvar_mcf: str, tmpdir: str) -> str:
+    """Stages a single gs:// MCF file to tmpdir without requiring storage.buckets.get permission."""
+    if (not existing_statvar_mcf or
+            not existing_statvar_mcf.startswith('gs://') or
+            '*' in existing_statvar_mcf or ',' in existing_statvar_mcf):
+        return existing_statvar_mcf
+    try:
+        from google.cloud import storage  # pylint: disable=import-outside-toplevel
+        bucket_name, blob_name = existing_statvar_mcf[len('gs://'):].split(
+            '/', 1)
+        local_mcf = os.path.join(
+            tmpdir,
+            os.path.basename(blob_name) or 'existing_stat_vars.mcf')
+        storage.Client().bucket(bucket_name).blob(
+            blob_name).download_to_filename(local_mcf)
+        return local_mcf
+    except Exception as exc:  # pylint: disable=broad-except
+        logging.warning(
+            'Could not pre-stage %s locally (%s); passing URI directly.',
+            existing_statvar_mcf,
+            exc,
+        )
+        return existing_statvar_mcf
+
+
 def _resolve_headers_via_svp(
     raw_dir: str,
     max_cols_per_seed: int = 4_000,
     existing_statvar_mcf: str = DEFAULT_EXISTING_STATVAR_MCF,
     sv_output_prefix: str = '',
-    counters_path: str = '',
 ) -> dict[str, tuple[str, str, str, str]]:
     """Resolves all unique column headers via stat_var_processor.py in a temp directory."""
     repo_root = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
@@ -354,7 +373,6 @@ def _resolve_headers_via_svp(
             seed_files.append(seed_path)
 
         out_prefix = os.path.join(tmpdir, 'sv_seed')
-        counters_seed = os.path.join(tmpdir, 'counters_seed.csv')
         cmd = [
             sys.executable,
             svp_script,
@@ -362,10 +380,11 @@ def _resolve_headers_via_svp(
             f'--pv_map={pvmap_path}',
             f'--config_file={config_path}',
             f'--output_path={out_prefix}',
-            f'--output_counters={counters_seed}',
         ]
         if existing_statvar_mcf:
-            cmd.append(f'--existing_statvar_mcf={existing_statvar_mcf}')
+            staged_mcf = _stage_existing_statvar_mcf(existing_statvar_mcf,
+                                                     tmpdir)
+            cmd.append(f'--existing_statvar_mcf={staged_mcf}')
         res = subprocess.run(
             cmd,
             capture_output=True,
@@ -376,23 +395,6 @@ def _resolve_headers_via_svp(
             raise RuntimeError(
                 f'Header resolution via stat_var_processor.py failed: {res.stderr}'
             )
-
-        bad_counters = {}
-        if os.path.exists(counters_seed):
-            with open(counters_seed, mode='r', encoding='utf-8') as f:
-                for row in csv.DictReader(f):
-                    k = row.get('key', '')
-                    v = (row.get('value') or '').strip()
-                    if v in ('', '0', '0.0'):
-                        continue
-                    if k.startswith((
-                            '1:process_input_error-',
-                            '1:process_input_dropped-',
-                            'dropped_',
-                            'error_',
-                            'unmapped_',
-                    )) or 'unmapped' in k:
-                        bad_counters[k] = v
 
         # Seed header resolution relies on unscaled 1..N observation values
         # (no MultiplyFactor/scalingFactor in pvmap.csv) to recover col_id.
@@ -422,22 +424,16 @@ def _resolve_headers_via_svp(
         unmapped_cohorts = (sorted(discovered_cohort_tokens -
                                    pvmap_keys) if pvmap_keys else [])
         if unmapped_cohorts:
-            bad_counters['unmapped_cohort_tokens'] = ','.join(unmapped_cohorts)
             unmapped_suffixes = tuple(f'_{c}' for c in unmapped_cohorts)
             for h in list(header_to_sv):
                 if h.endswith(unmapped_suffixes):
                     del header_to_sv[h]
 
         missing = sorted(set(unique_headers) - set(header_to_sv))
-        if missing or bad_counters:
-            logging.error(
-                'Unmapped column headers: %s; seed error counters: %s',
-                missing,
-                bad_counters,
-            )
+        if missing:
+            logging.error('Unmapped column headers: %s', missing)
             raise RuntimeError(
-                f'Unmapped column headers ({len(missing)}): {missing}; counters: {bad_counters}'
-            )
+                f'Unmapped column headers ({len(missing)}): {missing}')
 
         if sv_output_prefix:
             os.makedirs(
@@ -448,10 +444,6 @@ def _resolve_headers_via_svp(
                 src_mcf = f'{out_prefix}{suffix}'
                 if os.path.exists(src_mcf):
                     shutil.copyfile(src_mcf, f'{sv_output_prefix}{suffix}')
-        if counters_path and os.path.exists(counters_seed):
-            os.makedirs(os.path.dirname(os.path.abspath(counters_path)),
-                        exist_ok=True)
-            shutil.copyfile(counters_seed, counters_path)
 
     logging.info(
         'Resolved %d unique column headers via stat_var_processor.py',
@@ -613,7 +605,6 @@ def prepare_parallel_shards_and_svp_inputs(
     rows_per_chunk: int = 5_000,
     workers: int = 0,
     existing_statvar_mcf: str = DEFAULT_EXISTING_STATVAR_MCF,
-    counters_path: str = '',
 ) -> int:
     """Resolves headers via stat_var_processor.py and writes cleaned wide CSVs and custom TMCFs into shard_dir."""
     del rows_per_chunk
@@ -626,7 +617,6 @@ def prepare_parallel_shards_and_svp_inputs(
         raw_dir,
         existing_statvar_mcf=existing_statvar_mcf,
         sv_output_prefix=os.path.join(shard_dir, 'output'),
-        counters_path=counters_path,
     )
 
     tasks = []
@@ -677,16 +667,12 @@ def prepare_parallel_shards_and_svp_inputs(
 
 def main(_):
     os.makedirs(FLAGS.shard_dir, exist_ok=True)
-    if FLAGS.counters_file:
-        os.makedirs(os.path.dirname(os.path.abspath(FLAGS.counters_file)),
-                    exist_ok=True)
     try:
         prepare_parallel_shards_and_svp_inputs(
             FLAGS.input_dir,
             FLAGS.shard_dir,
             rows_per_chunk=FLAGS.max_rows_per_shard,
             existing_statvar_mcf=FLAGS.existing_statvar_mcf,
-            counters_path=FLAGS.counters_file,
         )
     except (FileNotFoundError, ValueError, RuntimeError) as e:
         logging.fatal('Preprocessing failed: %s', e)
