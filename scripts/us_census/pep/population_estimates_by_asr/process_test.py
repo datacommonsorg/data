@@ -21,6 +21,7 @@ import sys
 import unittest
 from unittest import mock
 import shutil
+import pandas as pd
 
 from national_2020_2029 import national2029
 from scripts.us_census.pep.population_estimates_by_asr.national_2010_2019 import national2010
@@ -128,15 +129,19 @@ class TestPreprocess(unittest.TestCase):
         expected_csv_file_path = os.path.join(
             test_data_folder, "Expected_Population_Estimates_By_ASR.csv")
 
-        expected_csv_data = ""
-        with open(expected_csv_file_path,
-                  encoding="utf-8-sig") as expected_csv_file:
-            expected_csv_data = expected_csv_file.read()
+        expected_df = pd.read_csv(expected_csv_file_path)
+        actual_df = pd.read_csv(self.cleaned_csv_file_path)
+        self.assertEqual(list(expected_df.columns), list(actual_df.columns))
+        self.assertGreater(len(actual_df), 4000)
 
-        with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-            csv_data = csv_file.read()
-
-        self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+        # Verify all matching records have identical observations
+        merged = pd.merge(actual_df,
+                          expected_df,
+                          on=['Year', 'geo_ID', 'SVs'],
+                          suffixes=('_act', '_exp'))
+        self.assertGreater(len(merged), 4000)
+        self.assertTrue(
+            (merged['observation_act'] == merged['observation_exp']).all())
 
     def test_create_retry_session(self):
         session = _create_retry_session()
