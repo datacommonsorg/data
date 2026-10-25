@@ -1,0 +1,199 @@
+Node: E:tract_outcomes_late_simple_cleaned->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/4nphwc53977z2
+value: C:tract_outcomes_late_simple_cleaned->jail_black_female_p25_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/nzdqjqzs5xnh
+value: C:tract_outcomes_late_simple_cleaned->kfr_black_female_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E2
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/hmx1k6db02en9
+value: C:tract_outcomes_late_simple_cleaned->kfr_female_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E3
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/w104gmh31x705
+value: C:tract_outcomes_late_simple_cleaned->kfr_white_female_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E4
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/yw9kj5j5l9f32
+value: C:tract_outcomes_late_simple_cleaned->kfr_black_male_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E5
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/59wvrd94pjz3f
+value: C:tract_outcomes_late_simple_cleaned->kfr_male_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E6
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/z3fmq1y2crmdb
+value: C:tract_outcomes_late_simple_cleaned->kfr_white_male_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E7
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/g5rjblchzdyg9
+value: C:tract_outcomes_late_simple_cleaned->kfr_black_p25_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E8
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/cl00l9h2vpkv3
+value: C:tract_outcomes_late_simple_cleaned->jail_p25_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E9
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/2bv81rqdfrl19
+value: C:tract_outcomes_late_simple_cleaned->jail_white_p25_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E10
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2010-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/vnswm543gym5h
+value: C:tract_outcomes_late_simple_cleaned->kidn_latekidn
+
+Node: E:tract_outcomes_late_simple_cleaned->E11
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/tq3pvsgqvh6eb
+value: C:tract_outcomes_late_simple_cleaned->kfr_p25_se_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E12
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2010-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/xs1zgpt1r82w8
+value: C:tract_outcomes_late_simple_cleaned->kidn_male_latekidn
+
+Node: E:tract_outcomes_late_simple_cleaned->E13
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/sx8z84jc4sdb
+value: C:tract_outcomes_late_simple_cleaned->jail_male_p25_se_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E14
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/wl1k0q6d26rq5
+value: C:tract_outcomes_late_simple_cleaned->kfr_female_p25_se_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E15
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/gz3c5rs3dmqf6
+value: C:tract_outcomes_late_simple_cleaned->jail_female_p25_se_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E16
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/yswmsdd0d6f95
+value: C:tract_outcomes_late_simple_cleaned->kfr_white_p25_se_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E17
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2010-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/xp5b5z8kwdt8b
+value: C:tract_outcomes_late_simple_cleaned->kidn_white_male_latekidn
+
+Node: E:tract_outcomes_late_simple_cleaned->E18
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/hlrhl4pr30w21
+value: C:tract_outcomes_late_simple_cleaned->kfr_white_male_p25_se_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E19
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2010-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/0c2w1ln27wyb
+value: C:tract_outcomes_late_simple_cleaned->kidn_white_female_latekidn
+
+Node: E:tract_outcomes_late_simple_cleaned->E20
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/3skj76zsynn2f
+value: C:tract_outcomes_late_simple_cleaned->jail_white_female_p25_se_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E21
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/4jepwcllq7qbh
+value: C:tract_outcomes_late_simple_cleaned->kfr_black_p25_se_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E22
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2020-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/mvpsbppjkjjhc
+value: C:tract_outcomes_late_simple_cleaned->jail_black_p25_se_latejail
+
+Node: E:tract_outcomes_late_simple_cleaned->E23
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/8e3w4zz64nxx
+value: C:tract_outcomes_late_simple_cleaned->kfr_black_male_p25_se_late
+
+Node: E:tract_outcomes_late_simple_cleaned->E24
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_late_simple_cleaned->geo_id
+observationDate: "2016"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/4hbye5qhbq5b3
+value: C:tract_outcomes_late_simple_cleaned->kfr_black_female_p25_se_late

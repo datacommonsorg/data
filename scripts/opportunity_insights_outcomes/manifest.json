@@ -13,9 +13,29 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/output.tmcf",
-                    "cleaned_csv": "output/output*.csv",
-                    "node_mcf": "output/*.mcf"
+                    "template_mcf": "input_files/commuting_zone_outcomes_cleaned.tmcf",
+                    "cleaned_csv": "input_files/commuting_zone_outcomes_cleaned.csv",
+                    "node_mcf": "input_files/*.mcf"
+                },
+                {
+                    "template_mcf": "input_files/county_outcomes_cleaned.tmcf",
+                    "cleaned_csv": "input_files/county_outcomes_cleaned.csv"
+                },
+                {
+                    "template_mcf": "input_files/tract_outcomes_cleaned.tmcf",
+                    "cleaned_csv": "input_files/tract_outcomes_cleaned.csv"
+                },
+                {
+                    "template_mcf": "input_files/tract_outcomes_late_simple_cleaned.tmcf",
+                    "cleaned_csv": "input_files/tract_outcomes_late_simple_cleaned.csv"
+                },
+                {
+                    "template_mcf": "input_files/county_by_cohort_outcomes_cleaned.tmcf",
+                    "cleaned_csv": "input_files/county_by_cohort_outcomes_cleaned.csv"
+                },
+                {
+                    "template_mcf": "input_files/cz_by_cohort_outcomes_cleaned.tmcf",
+                    "cleaned_csv": "input_files/cz_by_cohort_outcomes_cleaned.csv"
                 }
             ],
             "source_files": [

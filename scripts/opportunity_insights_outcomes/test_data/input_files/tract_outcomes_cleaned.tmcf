@@ -1,0 +1,280 @@
+Node: E:tract_outcomes_cleaned->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/w33eys8z7htv
+value: C:tract_outcomes_cleaned->kir_female_p1
+
+Node: E:tract_outcomes_cleaned->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2015"
+observationPeriod: "P1Y"
+variableMeasured: dcid:dc/40f52pvr14f98
+value: C:tract_outcomes_cleaned->married_female_p1
+
+Node: E:tract_outcomes_cleaned->E2
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1991"
+observationPeriod: "P12Y"
+variableMeasured: dcid:dc/8r37tzzsy5pmg
+value: C:tract_outcomes_cleaned->teenbrth_female_n
+
+Node: E:tract_outcomes_cleaned->E3
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/fnwzl6kr3q5q6
+value: C:tract_outcomes_cleaned->kirtop01_female_p1
+
+Node: E:tract_outcomes_cleaned->E4
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1996"
+observationPeriod: "P20Y"
+variableMeasured: dcid:dc/vbvk1skcln7cb
+value: C:tract_outcomes_cleaned->staytract_female_p1
+
+Node: E:tract_outcomes_cleaned->E5
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/3xzn0pbml12g5
+value: C:tract_outcomes_cleaned->spouserk_female_p1
+
+Node: E:tract_outcomes_cleaned->E6
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2007"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/8gq0q1c2w1js5
+value: C:tract_outcomes_cleaned->marr29_female_p1
+
+Node: E:tract_outcomes_cleaned->E7
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2004"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/kgt1302mvdd5g
+value: C:tract_outcomes_cleaned->work26_female_p1
+
+Node: E:tract_outcomes_cleaned->E8
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1994"
+observationPeriod: "P13Y"
+variableMeasured: dcid:dc/0hws8kr4h37z5
+value: C:tract_outcomes_cleaned->fracyearsxw_white_female
+
+Node: E:tract_outcomes_cleaned->E9
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/824qy34bye1q5
+value: C:tract_outcomes_cleaned->kfrtop20_male_p75
+
+Node: E:tract_outcomes_cleaned->E10
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2015"
+observationPeriod: "P1Y"
+variableMeasured: dcid:dc/20lv9lyzs1l2b
+value: C:tract_outcomes_cleaned->working_male_p75
+
+Node: E:tract_outcomes_cleaned->E11
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1994"
+observationPeriod: "P13Y"
+variableMeasured: dcid:dc/3170xrdjmel2f
+value: C:tract_outcomes_cleaned->fracyearsxw_male
+
+Node: E:tract_outcomes_cleaned->E12
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1996"
+observationPeriod: "P20Y"
+variableMeasured: dcid:dc/lly4dbjqgf7fg
+value: C:tract_outcomes_cleaned->staycz_male_p75
+
+Node: E:tract_outcomes_cleaned->E13
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2002"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/2m1d5xyl7j48d
+value: C:tract_outcomes_cleaned->marr24_male_p75
+
+Node: E:tract_outcomes_cleaned->E14
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2007"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/w5syf4m7x1tzd
+value: C:tract_outcomes_cleaned->kfr29_male_p75
+
+Node: E:tract_outcomes_cleaned->E15
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2007"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/7nsxx5j5y4n6d
+value: C:tract_outcomes_cleaned->work29_male_p75
+
+Node: E:tract_outcomes_cleaned->E16
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/jf5lq3s8kw37g
+value: C:tract_outcomes_cleaned->kir_black_mean
+
+Node: E:tract_outcomes_cleaned->E17
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2015"
+observationPeriod: "P1Y"
+variableMeasured: dcid:dc/9vwz2l0qlkfxf
+value: C:tract_outcomes_cleaned->married_black_mean
+
+Node: E:tract_outcomes_cleaned->E18
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2004"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/bf0gcxkl9pcs1
+value: C:tract_outcomes_cleaned->kir26_black_mean
+
+Node: E:tract_outcomes_cleaned->E19
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1994"
+observationPeriod: "P22Y"
+variableMeasured: dcid:dc/ejjz6srvht1y6
+value: C:tract_outcomes_cleaned->twopar_black_mean
+
+Node: E:tract_outcomes_cleaned->E20
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2002"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/jnkjdh4mdyek9
+value: C:tract_outcomes_cleaned->kfr24_black_mean
+
+Node: E:tract_outcomes_cleaned->E21
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2010"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/seytbv7xwxc2d
+value: C:tract_outcomes_cleaned->marr32_black_mean
+
+Node: E:tract_outcomes_cleaned->E22
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/yx6xq3exmqnw6
+value: C:tract_outcomes_cleaned->kirstycz_p1
+
+Node: E:tract_outcomes_cleaned->E23
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1994"
+observationPeriod: "P7Y"
+variableMeasured: dcid:dc/8vfxherg1cvbg
+value: C:tract_outcomes_cleaned->parrank_white_mean
+
+Node: E:tract_outcomes_cleaned->E24
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1994"
+observationPeriod: "P7Y"
+variableMeasured: dcid:dc/c5y00v1390qfc
+value: C:tract_outcomes_cleaned->kidblwp50
+
+Node: E:tract_outcomes_cleaned->E25
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2010-04-01"
+observationPeriod: "P1D"
+variableMeasured: dcid:dc/695psq9hc6gd7
+value: C:tract_outcomes_cleaned->jail_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E26
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1994"
+observationPeriod: "P22Y"
+variableMeasured: dcid:dc/petpbjzekcny
+value: C:tract_outcomes_cleaned->hasdad_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E27
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/d47g13hcf49j9
+value: C:tract_outcomes_cleaned->kirtop01_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E28
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "1996"
+observationPeriod: "P20Y"
+variableMeasured: dcid:dc/txxtfmtf8l6p7
+value: C:tract_outcomes_cleaned->staycz_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E29
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2002"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/eb7mpnkh65wy7
+value: C:tract_outcomes_cleaned->marr24_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E30
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2007"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/6dnsbhkr5mvcd
+value: C:tract_outcomes_cleaned->kfr29_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E31
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2007"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/ebnn649gk1kcd
+value: C:tract_outcomes_cleaned->work29_female_p75_se
+
+Node: E:tract_outcomes_cleaned->E32
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2004"
+observationPeriod: "P6Y"
+variableMeasured: dcid:dc/0ckqqrkncmnqb
+value: C:tract_outcomes_cleaned->kfr26_white_meanse
+
+Node: E:tract_outcomes_cleaned->E33
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:dc/1etvy42xf5g4g
+value: C:tract_outcomes_cleaned->kfr_white_meanse
+
+Node: E:tract_outcomes_cleaned->E34
+typeOf: dcs:StatVarObservation
+observationAbout: C:tract_outcomes_cleaned->geo_id
+observationDate: "2014"
+observationPeriod: "P2Y"
+variableMeasured: dcid:HouseholdIncome_OpportunityInsightsCohort_Percentile25_BlackOrAfricanAmericanAlone
+unit: dcs:USDollar
+value: C:tract_outcomes_cleaned->kfi_black_p25

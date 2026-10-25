@@ -36,9 +36,9 @@ flags.DEFINE_string(
     'Directory containing downloaded raw Opportunity Insights CSV files.',
 )
 flags.DEFINE_string(
-    'sv_output_prefix',
-    os.path.join(_MODULE_DIR, 'output', 'output'),
-    'Output prefix for generated TMCF, MCF, and StatVarObservation CSV shards.',
+    'shard_dir',
+    os.path.join(_MODULE_DIR, 'input_files'),
+    'Directory for generated cleaned wide CSVs, custom TMCFs, and StatVar MCFs.',
 )
 flags.DEFINE_string(
     'counters_file',
@@ -48,7 +48,7 @@ flags.DEFINE_string(
 flags.DEFINE_integer(
     'max_rows_per_shard',
     5_000,
-    'Maximum rows per output CSV shard.',
+    'Maximum rows per chunk (retained for CLI compatibility).',
 )
 
 DEFAULT_EXISTING_STATVAR_MCF = (
@@ -234,22 +234,57 @@ def _mapped_cohort_years(
     return sorted(years, key=int) if years else list(_DEFAULT_COHORT_YEARS)
 
 
-def _write_tmcf(sv_output_prefix: str) -> str:
-    """Writes the StatVarObservation TMCF file for sv_output_prefix."""
-    table_name = os.path.basename(sv_output_prefix) or 'output'
-    tmcf_path = f'{sv_output_prefix}.tmcf'
+def _write_dataset_tmcf(
+    tmcf_path: str,
+    table_name: str,
+    norm_cols: list[str],
+    dataset_mode: str,
+    header_to_sv: dict[str, tuple[str, str, str, str]],
+) -> None:
+    """Writes a custom per-dataset TMCF file mapping wide CSV columns to StatVarObservations."""
     os.makedirs(os.path.dirname(os.path.abspath(tmcf_path)), exist_ok=True)
+    cohort_years = _mapped_cohort_years(header_to_sv)
+    blocks = []
+    node_idx = 0
+    for norm_col in norm_cols:
+        sv_meta = None
+        if dataset_mode == 'annual_cohort_1978_1992':
+            for y in cohort_years:
+                sv_meta = header_to_sv.get(f'{norm_col}_c{y}')
+                if sv_meta:
+                    break
+            if not sv_meta:
+                sv_meta = header_to_sv.get(norm_col)
+        else:
+            sv_meta = header_to_sv.get(norm_col)
+
+        if not sv_meta:
+            continue
+
+        obs_date, obs_period, var_measured, unit = sv_meta
+        sv_ref = (var_measured if var_measured.startswith(
+            ('dcid:', 'dcs:')) else f'dcid:{var_measured}')
+        lines = [
+            f'Node: E:{table_name}->E{node_idx}',
+            'typeOf: dcs:StatVarObservation',
+            f'observationAbout: C:{table_name}->geo_id',
+        ]
+        if dataset_mode == 'annual_cohort_1978_1992':
+            lines.append(f'observationDate: C:{table_name}->obs_date')
+        else:
+            lines.append(f'observationDate: "{obs_date}"')
+        lines.append(f'observationPeriod: "{obs_period}"')
+        lines.append(f'variableMeasured: {sv_ref}')
+        if unit:
+            unit_ref = (unit if unit.startswith(
+                ('dcid:', 'dcs:')) else f'dcs:{unit}')
+            lines.append(f'unit: {unit_ref}')
+        lines.append(f'value: C:{table_name}->{norm_col}')
+        blocks.append('\n'.join(lines))
+        node_idx += 1
+
     with open(tmcf_path, mode='w', encoding='utf-8', newline='\n') as tmcf_file:
-        tmcf_file.write(
-            f'Node: E:{table_name}->E0\n'
-            f'observationAbout: C:{table_name}->observationAbout\n'
-            f'observationDate: C:{table_name}->observationDate\n'
-            f'observationPeriod: C:{table_name}->observationPeriod\n'
-            f'variableMeasured: C:{table_name}->variableMeasured\n'
-            f'value: C:{table_name}->value\n'
-            f'unit: C:{table_name}->unit\n'
-            'typeOf: dcs:StatVarObservation\n')
-    return tmcf_path
+        tmcf_file.write('\n\n'.join(blocks) + ('\n' if blocks else ''))
 
 
 def _resolve_headers_via_svp(
@@ -486,17 +521,16 @@ def _format_geo_from_row_list(row: list[str], col_indices: dict[str, int],
     )
 
 
-def _expand_chunk_worker(args: tuple) -> int:
-    """Worker function to expand a slice of wide CSV rows into StatVarObservations."""
+def _clean_dataset_worker(args: tuple) -> int:
+    """Worker function to write a cleaned wide CSV and custom TMCF for one dataset."""
     (
         input_path,
         geo_level,
         dataset_mode,
-        start_row,
-        end_row,
         out_csv_path,
+        out_tmcf_path,
+        table_name,
         header_to_sv,
-        start_offset,
     ) = args
 
     obs_written = 0
@@ -509,54 +543,34 @@ def _expand_chunk_worker(args: tuple) -> int:
         col_indices = {h: i for i, h in enumerate(raw_headers)}
         _validate_required_columns(col_indices, geo_level, dataset_mode,
                                    input_path)
-        data_col_positions = [(i, h)
-                              for i, h in enumerate(raw_headers)
-                              if h not in _NON_DATA_COLUMNS]
+        data_cols = [(i, normalize_column_header(h, dataset_mode))
+                     for i, h in enumerate(raw_headers)
+                     if h not in _NON_DATA_COLUMNS]
+        norm_cols = [norm_h for _, norm_h in data_cols]
+
+        _write_dataset_tmcf(
+            out_tmcf_path,
+            table_name,
+            norm_cols,
+            dataset_mode,
+            header_to_sv,
+        )
 
         writer = csv.writer(outfile)
-        writer.writerow([
-            'observationAbout',
-            'observationDate',
-            'observationPeriod',
-            'variableMeasured',
-            'value',
-            'unit',
-        ])
-
-        if dataset_mode != 'annual_cohort_1978_1992':
-            col_specs = []
-            for pos, h in data_col_positions:
-                norm_h = normalize_column_header(h, dataset_mode)
-                sv_meta = header_to_sv.get(norm_h)
-                if sv_meta:
-                    col_specs.append(
-                        (pos, sv_meta[0], sv_meta[1], sv_meta[2], sv_meta[3]))
-        else:
-            cohort_col_specs = {}
+        if dataset_mode == 'annual_cohort_1978_1992':
+            writer.writerow(['geo_id', 'obs_date'] + norm_cols)
+            cohort_to_obs_date: dict[str, str] = {}
             for y in _mapped_cohort_years(header_to_sv):
-                ctok = f'c{y}'
-                specs = []
-                for pos, h in data_col_positions:
-                    norm_h = normalize_column_header(h, dataset_mode, ctok)
-                    sv_meta = header_to_sv.get(norm_h)
+                for norm_h in norm_cols:
+                    sv_meta = header_to_sv.get(f'{norm_h}_c{y}')
                     if sv_meta:
-                        specs.append((pos, sv_meta[0], sv_meta[1], sv_meta[2],
-                                      sv_meta[3]))
-                cohort_col_specs[y] = specs
-
-        if start_offset > 0:
-            infile.seek(start_offset)
-            base_row_idx = start_row
+                        cohort_to_obs_date[y] = sv_meta[0]
+                        break
         else:
-            base_row_idx = 0
+            writer.writerow(['geo_id'] + norm_cols)
 
         reader = csv.reader(infile)
-        for offset_idx, row in enumerate(reader):
-            row_idx = base_row_idx + offset_idx
-            if row_idx < start_row:
-                continue
-            if end_row > 0 and row_idx >= end_row:
-                break
+        for row in reader:
             if not row:
                 continue
 
@@ -564,133 +578,112 @@ def _expand_chunk_worker(args: tuple) -> int:
                 cohort_str = _parse_cohort(row, col_indices)
                 if not cohort_str:
                     continue
-                if cohort_str not in cohort_col_specs:
+                if cohort_str not in cohort_to_obs_date:
                     raise ValueError(
                         f'Unmapped birth cohort {cohort_str} in {input_path}')
-                active_specs = cohort_col_specs[cohort_str]
-            else:
-                active_specs = col_specs
+                obs_date = cohort_to_obs_date[cohort_str]
 
             geo_id = _format_geo_from_row_list(row, col_indices, geo_level)
             if not geo_id:
                 continue
 
-            out_batch = []
-            for pos, obs_date, obs_period, var_measured, unit in active_specs:
+            cleaned_vals = []
+            row_obs = 0
+            for pos, _ in data_cols:
                 val = _extract_row_cell(row, pos)
-                if not _is_valid_number(val):
-                    continue
-                out_batch.append((
-                    geo_id,
-                    obs_date,
-                    obs_period,
-                    var_measured,
-                    str_from_number(val, precision_digits=5),
-                    unit,
-                ))
-            if out_batch:
-                writer.writerows(out_batch)
-                obs_written += len(out_batch)
+                if _is_valid_number(val):
+                    cleaned_vals.append(val)
+                    row_obs += 1
+                else:
+                    cleaned_vals.append('')
 
-    if obs_written == 0 and os.path.exists(out_csv_path):
-        os.remove(out_csv_path)
+            if row_obs > 0:
+                if dataset_mode == 'annual_cohort_1978_1992':
+                    writer.writerow([geo_id, obs_date] + cleaned_vals)
+                else:
+                    writer.writerow([geo_id] + cleaned_vals)
+                obs_written += row_obs
+
     return obs_written
 
 
 def prepare_parallel_shards_and_svp_inputs(
     raw_dir: str,
-    sv_output_prefix: str,
+    shard_dir: str,
     rows_per_chunk: int = 5_000,
     workers: int = 0,
     existing_statvar_mcf: str = DEFAULT_EXISTING_STATVAR_MCF,
     counters_path: str = '',
 ) -> int:
-    """Resolves headers via stat_var_processor.py, writes TMCF/MCF, and expands all cells across parallel workers into output/output_part_*.csv."""
-    out_dir = os.path.dirname(sv_output_prefix) or '.'
-    os.makedirs(out_dir, exist_ok=True)
-    base_prefix = os.path.basename(sv_output_prefix)
-    for fname in os.listdir(out_dir):
-        if fname.startswith(base_prefix) and fname.endswith('.csv'):
-            os.remove(os.path.join(out_dir, fname))
+    """Resolves headers via stat_var_processor.py and writes cleaned wide CSVs and custom TMCFs into shard_dir."""
+    del rows_per_chunk
+    os.makedirs(shard_dir, exist_ok=True)
+    for fname in os.listdir(shard_dir):
+        if fname.endswith(('_cleaned.csv', '_cleaned.tmcf')):
+            os.remove(os.path.join(shard_dir, fname))
 
     header_to_sv = _resolve_headers_via_svp(
         raw_dir,
         existing_statvar_mcf=existing_statvar_mcf,
-        sv_output_prefix=sv_output_prefix,
+        sv_output_prefix=os.path.join(shard_dir, 'output'),
         counters_path=counters_path,
     )
-    _write_tmcf(sv_output_prefix)
 
-    chunk_size = max(1, rows_per_chunk)
     tasks = []
-    part_idx = 1
     for filename, geo_level, dataset_mode in DATASET_CONFIGS:
         input_path = os.path.join(raw_dir, filename)
-        chunk_offsets: dict[int, int] = {}
-        total_rows = 0
-
-        with open(input_path, mode='r', encoding='utf-8') as infile:
-            raw_headers = next(csv.reader([infile.readline()]), [])
-            col_indices = {h: i for i, h in enumerate(raw_headers)}
-            _validate_required_columns(col_indices, geo_level, dataset_mode,
-                                       input_path)
-            row_idx = 0
-            while True:
-                if row_idx % chunk_size == 0:
-                    chunk_offsets[row_idx] = infile.tell()
-                raw_line = infile.readline()
-                if not raw_line:
-                    break
-                row_idx += 1
-                total_rows = row_idx
-
-        if total_rows > 0:
-            for start_row in range(0, total_rows, chunk_size):
-                end_row = start_row + chunk_size
-                part_path = f'{sv_output_prefix}_part_{part_idx:04d}.csv'
-                tasks.append((
-                    input_path,
-                    geo_level,
-                    dataset_mode,
-                    start_row,
-                    end_row,
-                    part_path,
-                    header_to_sv,
-                    chunk_offsets.get(start_row, 0),
-                ))
-                part_idx += 1
+        if not os.path.exists(input_path):
+            raise FileNotFoundError(
+                f'Required input file not found for {filename}: {input_path}')
+        stem = os.path.splitext(filename)[0]
+        table_name = f'{stem}_cleaned'
+        out_csv_path = os.path.join(shard_dir, f'{table_name}.csv')
+        out_tmcf_path = os.path.join(shard_dir, f'{table_name}.tmcf')
+        tasks.append((
+            input_path,
+            geo_level,
+            dataset_mode,
+            out_csv_path,
+            out_tmcf_path,
+            table_name,
+            header_to_sv,
+        ))
 
     total_obs = 0
     if tasks:
         num_workers = workers if workers > 0 else (os.cpu_count() or 4)
         logging.info(
-            'Expanding %d dataset chunks across %d parallel worker processes...',
+            'Cleaning %d datasets and generating custom TMCFs across %d worker processes...',
             len(tasks),
             num_workers,
         )
-        with concurrent.futures.ProcessPoolExecutor(
-                max_workers=num_workers) as ex:
-            for count in ex.map(_expand_chunk_worker, tasks):
-                total_obs += count
+        if num_workers == 1:
+            for task in tasks:
+                total_obs += _clean_dataset_worker(task)
+        else:
+            with concurrent.futures.ProcessPoolExecutor(
+                    max_workers=min(num_workers, len(tasks))) as ex:
+                for count in ex.map(_clean_dataset_worker, tasks):
+                    total_obs += count
 
     logging.info(
-        'Parallel shard preparation complete: wrote %d StatVarObservations to %s_part_*.csv and %s.tmcf.',
+        'Dataset preparation complete: wrote %d valid observations across %d cleaned CSVs and TMCFs in %s.',
         total_obs,
-        sv_output_prefix,
-        sv_output_prefix,
+        len(tasks),
+        shard_dir,
     )
     return total_obs
 
 
 def main(_):
-    os.makedirs(os.path.dirname(FLAGS.sv_output_prefix), exist_ok=True)
+    os.makedirs(FLAGS.shard_dir, exist_ok=True)
     if FLAGS.counters_file:
         os.makedirs(os.path.dirname(os.path.abspath(FLAGS.counters_file)),
                     exist_ok=True)
     try:
         prepare_parallel_shards_and_svp_inputs(
             FLAGS.input_dir,
-            FLAGS.sv_output_prefix,
+            FLAGS.shard_dir,
             rows_per_chunk=FLAGS.max_rows_per_shard,
             existing_statvar_mcf=FLAGS.existing_statvar_mcf,
             counters_path=FLAGS.counters_file,
