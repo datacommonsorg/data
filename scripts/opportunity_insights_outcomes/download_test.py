@@ -27,37 +27,53 @@ _REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from statvar_imports.opportunity_insights_outcomes import download
-from statvar_imports.opportunity_insights_outcomes import preprocess
+from scripts.opportunity_insights_outcomes import download
+from scripts.opportunity_insights_outcomes import preprocess
 
 
 def _load_expected_header_to_sv(
-    expected_input_dir: str, expected_output_csv: str
+    raw_dir: str, expected_output_dir: str
 ) -> dict[str, tuple[str, str, str, str]]:
     """Reconstructs header_to_sv from committed test_data without running stat_var_processor.py."""
-    ordered_headers = []
-    for fname in sorted(os.listdir(expected_input_dir)):
-        if not fname.endswith('_cleaned.csv'):
-            continue
-        with open(
-            os.path.join(expected_input_dir, fname), 'r', encoding='utf-8'
-        ) as f:
-            reader = csv.reader(f)
-            headers = next(reader)[1:]
-            for row in reader:
-                for idx, val in enumerate(row[1:]):
-                    if val.strip():
-                        ordered_headers.append(headers[idx])
-
     header_to_sv = {}
-    with open(expected_output_csv, 'r', encoding='utf-8') as f:
-        for norm_h, row in zip(ordered_headers, csv.DictReader(f)):
-            header_to_sv[norm_h] = (
-                row['observationDate'],
-                row['observationPeriod'],
-                row['variableMeasured'],
-                row.get('unit', ''),
-            )
+    for part_idx, (filename, _, dataset_mode) in enumerate(
+        preprocess.DATASET_CONFIGS, start=1
+    ):
+        ordered_headers = []
+        with open(os.path.join(raw_dir, filename), 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            raw_headers = next(reader)
+            col_indices = {h: i for i, h in enumerate(raw_headers)}
+            data_col_positions = [
+                (i, h)
+                for i, h in enumerate(raw_headers)
+                if h not in preprocess._NON_DATA_COLUMNS
+            ]
+            for row in reader:
+                ctok = (
+                    f'c{preprocess._parse_cohort(row, col_indices)}'
+                    if dataset_mode == 'annual_cohort_1978_1992'
+                    else ''
+                )
+                for pos, h in data_col_positions:
+                    val = preprocess._extract_row_cell(row, pos)
+                    if preprocess._is_valid_number(val):
+                        ordered_headers.append(
+                            preprocess.normalize_column_header(
+                                h, dataset_mode, ctok
+                            )
+                        )
+        part_csv = os.path.join(
+            expected_output_dir, f'output_part_{part_idx:04d}.csv'
+        )
+        with open(part_csv, 'r', encoding='utf-8') as f:
+            for norm_h, row in zip(ordered_headers, csv.DictReader(f)):
+                header_to_sv[norm_h] = (
+                    row['observationDate'],
+                    row['observationPeriod'],
+                    row['variableMeasured'],
+                    row.get('unit', ''),
+                )
     return header_to_sv
 
 
@@ -174,7 +190,6 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_skips_missing_value_placeholders(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             raw_dir = os.path.join(tmpdir, 'raw')
-            shard_dir = os.path.join(tmpdir, 'input_files')
             out_dir = os.path.join(tmpdir, 'output')
             os.makedirs(raw_dir, exist_ok=True)
             for filename, _, mode in preprocess.DATASET_CONFIGS:
@@ -213,24 +228,32 @@ class DownloadAndPvmapTest(unittest.TestCase):
             ):
                 obs_count = preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
-                    shard_dir,
                     os.path.join(out_dir, 'output'),
                     rows_per_chunk=1,
                     workers=1,
                     existing_statvar_mcf='',
                 )
-            self.assertEqual(obs_count, 1)
+            self.assertEqual(obs_count, 3)
+            self.assertTrue(os.path.exists(os.path.join(out_dir, 'output.tmcf')))
 
-            out_csv = os.path.join(shard_dir, 'commuting_zone_outcomes_cleaned.csv')
-            with open(out_csv, 'r', encoding='utf-8') as f:
-                rows = list(csv.DictReader(f))
+            rows = []
+            for fname in sorted(os.listdir(out_dir)):
+                if fname.startswith('output_part_') and fname.endswith('.csv'):
+                    with open(
+                        os.path.join(out_dir, fname), 'r', encoding='utf-8'
+                    ) as f:
+                        rows.extend(list(csv.DictReader(f)))
 
-            self.assertEqual(len(rows), 2)
-            self.assertEqual(rows[0]['geo_id'], 'geoId/cz00100')
-            self.assertEqual(rows[0]['kir_natam_female_p1'], '')
-            self.assertEqual(rows[0]['kir_natam_female_mean'], '0.35973939')
-            self.assertEqual(rows[1]['geo_id'], 'geoId/cz00102')
-            self.assertEqual(rows[1]['kir_natam_female_p1'], '0.25')
+            self.assertEqual(len(rows), 3)
+            self.assertEqual(rows[0]['observationAbout'], 'geoId/cz00100')
+            self.assertEqual(rows[0]['variableMeasured'], 'dc/mean')
+            self.assertEqual(rows[0]['value'], '0.35974')
+            self.assertEqual(rows[1]['observationAbout'], 'geoId/cz00102')
+            self.assertEqual(rows[1]['variableMeasured'], 'dc/p1')
+            self.assertEqual(rows[1]['value'], '0.25')
+            self.assertEqual(rows[2]['observationAbout'], 'geoId/cz00102')
+            self.assertEqual(rows[2]['variableMeasured'], 'dc/mean')
+            self.assertEqual(rows[2]['value'], '0.5')
             with self.assertRaises(ValueError):
                 preprocess._validate_required_columns(
                     {'state': 0}, 'county', 'annual_cohort_1978_1992', 'bad.csv'
@@ -241,15 +264,14 @@ class DownloadAndPvmapTest(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):
                 preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir=os.path.join(tmpdir, 'raw'),
-                    shard_dir=os.path.join(tmpdir, 'out'),
                     sv_output_prefix=os.path.join(tmpdir, 'output', 'output'),
                     existing_statvar_mcf='',
                 )
             preprocess.FLAGS([
                 sys.argv[0],
                 f'--input_dir={os.path.join(tmpdir, "raw")}',
-                f'--shard_dir={os.path.join(tmpdir, "out")}',
                 f'--sv_output_prefix={os.path.join(tmpdir, "output", "output")}',
+                f'--counters_file={os.path.join(tmpdir, "counters", "output_counters.csv")}',
             ])
             with mock.patch.object(preprocess.logging, 'fatal') as mock_fatal:
                 preprocess.main([])
@@ -293,16 +315,13 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_sharding_all_datasets(self):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
         raw_dir = os.path.join(test_data_dir, 'raw_data')
-        expected_input_dir = os.path.join(test_data_dir, 'input_files')
         expected_output_dir = os.path.join(test_data_dir, 'output')
         fake_header_to_sv = _load_expected_header_to_sv(
-            expected_input_dir, os.path.join(expected_output_dir, 'output.csv')
+            raw_dir, expected_output_dir
         )
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            shard_dir = os.path.join(tmpdir, 'input_files')
             out_dir = os.path.join(tmpdir, 'output')
-            os.makedirs(shard_dir, exist_ok=True)
             os.makedirs(out_dir, exist_ok=True)
 
             sv_out_prefix = os.path.join(out_dir, 'output')
@@ -313,31 +332,20 @@ class DownloadAndPvmapTest(unittest.TestCase):
             ):
                 preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
-                    shard_dir,
                     sv_out_prefix,
                     rows_per_chunk=5000,
                     workers=2,
                     existing_statvar_mcf='',
                 )
 
-            actual_cleaned = sorted(
-                f for f in os.listdir(shard_dir) if f.endswith('_cleaned.csv')
-            )
-            expected_cleaned = sorted(
-                f
-                for f in os.listdir(expected_input_dir)
-                if f.endswith('_cleaned.csv')
-            )
-            self.assertEqual(actual_cleaned, expected_cleaned)
-            for fname in expected_cleaned:
-                with open(
-                    os.path.join(shard_dir, fname), 'r', encoding='utf-8'
-                ) as f_actual, open(
-                    os.path.join(expected_input_dir, fname),
-                    'r',
-                    encoding='utf-8',
-                ) as f_expected:
-                    self.assertEqual(f_actual.read(), f_expected.read())
+            with open(
+                os.path.join(out_dir, 'output.tmcf'), 'r', encoding='utf-8'
+            ) as f_actual_tmcf, open(
+                os.path.join(expected_output_dir, 'output.tmcf'),
+                'r',
+                encoding='utf-8',
+            ) as f_expected_tmcf:
+                self.assertEqual(f_actual_tmcf.read(), f_expected_tmcf.read())
 
             actual_parts = sorted(
                 f
@@ -366,7 +374,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     os.path.join(out_dir, fname), 'r', encoding='utf-8'
                 ) as f:
                     sv_rows.extend(list(csv.DictReader(f)))
-            self.assertEqual(len(sv_rows), 120)
+            self.assertEqual(len(sv_rows), 300)
             for row in sv_rows:
                 val = row['value']
                 self.assertFalse(val.startswith(('.', '-.')))
@@ -473,6 +481,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     ])
                     for idx in range(1, 18):
                         w.writerow(['geoId/seed000', '2014', 'P2Y', f'dc/sv{idx}', str(idx), ''])
+                with open(f'{out_prefix}_stat_vars.mcf', 'w', encoding='utf-8') as f:
+                    f.write('Node: dcid:dc/sv1\n')
+                with open(f'{out_prefix}_stat_vars_schema.mcf', 'w', encoding='utf-8') as f:
+                    f.write('Node: dcid:NewStatVar\n')
                 with open(counters_path, 'w', encoding='utf-8', newline='') as f:
                     w = csv.writer(f)
                     w.writerow(['key', 'value'])
@@ -480,12 +492,20 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     w.writerow(['1:process_input_error-svobs-missing-property', '0'])
                 return mock.Mock(returncode=0, stderr='')
 
+            dest_prefix = os.path.join(tmpdir, 'dest_out', 'output')
+            dest_counters = os.path.join(tmpdir, 'dest_counters', 'output_counters.csv')
             with mock.patch('subprocess.run', side_effect=fake_run_success):
                 resolved = preprocess._resolve_headers_via_svp(
-                    tmpdir, existing_statvar_mcf=''
+                    tmpdir,
+                    existing_statvar_mcf='',
+                    sv_output_prefix=dest_prefix,
+                    counters_path=dest_counters,
                 )
             self.assertEqual(len(resolved), 17)
             self.assertEqual(resolved['kfr_p25'], ('2014', 'P2Y', 'dc/sv1', ''))
+            self.assertTrue(os.path.exists(f'{dest_prefix}_stat_vars.mcf'))
+            self.assertTrue(os.path.exists(f'{dest_prefix}_stat_vars_schema.mcf'))
+            self.assertTrue(os.path.exists(dest_counters))
 
             def make_single_row_runner(val_str):
                 def _runner(cmd, **kwargs):
@@ -602,7 +622,6 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 ):
                     preprocess.prepare_parallel_shards_and_svp_inputs(
                         tmpdir,
-                        os.path.join(tmpdir, 'shards'),
                         os.path.join(tmpdir, 'out', 'output'),
                         workers=1,
                         existing_statvar_mcf='',

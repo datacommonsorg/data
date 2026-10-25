@@ -11,13 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Resolves headers, formats geoIds, and shards Opportunity Insights CSVs for stat_var_processor.py."""
+"""Resolves headers, formats geoIds, and generates Opportunity Insights cleaned CSV shards and TMCF."""
 
 import concurrent.futures
 import csv
 import math
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -35,14 +36,14 @@ flags.DEFINE_string(
     'Directory containing downloaded raw Opportunity Insights CSV files.',
 )
 flags.DEFINE_string(
-    'shard_dir',
-    os.path.join(_MODULE_DIR, 'input_files'),
-    'Directory where cleaned CSV inputs for stat_var_processor.py will be written.',
-)
-flags.DEFINE_string(
     'sv_output_prefix',
     os.path.join(_MODULE_DIR, 'output', 'output'),
-    'Output prefix for parallel StatVarObservation CSV shards.',
+    'Output prefix for generated TMCF, MCF, and StatVarObservation CSV shards.',
+)
+flags.DEFINE_string(
+    'counters_file',
+    os.path.join(_MODULE_DIR, 'counters', 'output_counters.csv'),
+    'Output path for stat_var_processor.py resolution counters.',
 )
 flags.DEFINE_integer(
     'max_rows_per_shard',
@@ -239,10 +240,31 @@ def _mapped_cohort_years(
     return sorted(years, key=int) if years else list(_DEFAULT_COHORT_YEARS)
 
 
+def _write_tmcf(sv_output_prefix: str) -> str:
+    """Writes the StatVarObservation TMCF file for sv_output_prefix."""
+    table_name = os.path.basename(sv_output_prefix) or 'output'
+    tmcf_path = f'{sv_output_prefix}.tmcf'
+    os.makedirs(os.path.dirname(os.path.abspath(tmcf_path)), exist_ok=True)
+    with open(tmcf_path, mode='w', encoding='utf-8', newline='\n') as tmcf_file:
+        tmcf_file.write(
+            f'Node: E:{table_name}->E0\n'
+            f'observationAbout: C:{table_name}->observationAbout\n'
+            f'observationDate: C:{table_name}->observationDate\n'
+            f'observationPeriod: C:{table_name}->observationPeriod\n'
+            f'variableMeasured: C:{table_name}->variableMeasured\n'
+            f'value: C:{table_name}->value\n'
+            f'unit: C:{table_name}->unit\n'
+            'typeOf: dcs:StatVarObservation\n'
+        )
+    return tmcf_path
+
+
 def _resolve_headers_via_svp(
     raw_dir: str,
     max_cols_per_seed: int = 4_000,
     existing_statvar_mcf: str = DEFAULT_EXISTING_STATVAR_MCF,
+    sv_output_prefix: str = '',
+    counters_path: str = '',
 ) -> dict[str, tuple[str, str, str, str]]:
     """Resolves all unique column headers via stat_var_processor.py in a temp directory."""
     repo_root = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
@@ -389,16 +411,32 @@ def _resolve_headers_via_svp(
                 if h.endswith(unmapped_suffixes):
                     del header_to_sv[h]
 
-    missing = sorted(set(unique_headers) - set(header_to_sv))
-    if missing or bad_counters:
-        logging.error(
-            'Unmapped column headers: %s; seed error counters: %s',
-            missing,
-            bad_counters,
-        )
-        raise RuntimeError(
-            f'Unmapped column headers ({len(missing)}): {missing}; counters: {bad_counters}'
-        )
+        missing = sorted(set(unique_headers) - set(header_to_sv))
+        if missing or bad_counters:
+            logging.error(
+                'Unmapped column headers: %s; seed error counters: %s',
+                missing,
+                bad_counters,
+            )
+            raise RuntimeError(
+                f'Unmapped column headers ({len(missing)}): {missing}; counters: {bad_counters}'
+            )
+
+        if sv_output_prefix:
+            os.makedirs(
+                os.path.dirname(os.path.abspath(sv_output_prefix)),
+                exist_ok=True,
+            )
+            for suffix in ('_stat_vars.mcf', '_stat_vars_schema.mcf'):
+                src_mcf = f'{out_prefix}{suffix}'
+                if os.path.exists(src_mcf):
+                    shutil.copyfile(src_mcf, f'{sv_output_prefix}{suffix}')
+        if counters_path and os.path.exists(counters_seed):
+            os.makedirs(
+                os.path.dirname(os.path.abspath(counters_path)), exist_ok=True
+            )
+            shutil.copyfile(counters_seed, counters_path)
+
     logging.info(
         'Resolved %d unique column headers via stat_var_processor.py',
         len(header_to_sv),
@@ -468,7 +506,7 @@ def _format_geo_from_row_list(
 
 
 def _expand_chunk_worker(args: tuple) -> int:
-    """Worker function to expand a slice of wide CSV rows into StatVarObservations, skipping cells already routed to input_files/*_cleaned.csv."""
+    """Worker function to expand a slice of wide CSV rows into StatVarObservations."""
     (
         input_path,
         geo_level,
@@ -477,7 +515,6 @@ def _expand_chunk_worker(args: tuple) -> int:
         end_row,
         out_csv_path,
         header_to_sv,
-        emitted_by_row,
         start_offset,
     ) = args
 
@@ -555,15 +592,12 @@ def _expand_chunk_worker(args: tuple) -> int:
             else:
                 active_specs = col_specs
 
-            skip_positions = emitted_by_row.get(row_idx)
             geo_id = _format_geo_from_row_list(row, col_indices, geo_level)
             if not geo_id:
                 continue
 
             out_batch = []
             for pos, obs_date, obs_period, var_measured, unit in active_specs:
-                if skip_positions and pos in skip_positions:
-                    continue
                 val = _extract_row_cell(row, pos)
                 if not _is_valid_number(val):
                     continue
@@ -586,18 +620,13 @@ def _expand_chunk_worker(args: tuple) -> int:
 
 def prepare_parallel_shards_and_svp_inputs(
     raw_dir: str,
-    shard_dir: str,
     sv_output_prefix: str,
     rows_per_chunk: int = 5_000,
     workers: int = 0,
     existing_statvar_mcf: str = DEFAULT_EXISTING_STATVAR_MCF,
+    counters_path: str = '',
 ) -> int:
-    """Routes the first non-empty observation of each column into shard_dir/*_cleaned.csv for stat_var_processor.py, and expands all remaining cells across parallel workers into output/output_part_*.csv."""
-    os.makedirs(shard_dir, exist_ok=True)
-    for fname in os.listdir(shard_dir):
-        if fname.endswith('_cleaned.csv'):
-            os.remove(os.path.join(shard_dir, fname))
-
+    """Resolves headers via stat_var_processor.py, writes TMCF/MCF, and expands all cells across parallel workers into output/output_part_*.csv."""
     out_dir = os.path.dirname(sv_output_prefix) or '.'
     os.makedirs(out_dir, exist_ok=True)
     base_prefix = os.path.basename(sv_output_prefix)
@@ -606,16 +635,18 @@ def prepare_parallel_shards_and_svp_inputs(
             os.remove(os.path.join(out_dir, fname))
 
     header_to_sv = _resolve_headers_via_svp(
-        raw_dir, existing_statvar_mcf=existing_statvar_mcf
+        raw_dir,
+        existing_statvar_mcf=existing_statvar_mcf,
+        sv_output_prefix=sv_output_prefix,
+        counters_path=counters_path,
     )
+    _write_tmcf(sv_output_prefix)
 
     chunk_size = max(1, rows_per_chunk)
     tasks = []
     part_idx = 1
     for filename, geo_level, dataset_mode in DATASET_CONFIGS:
         input_path = os.path.join(raw_dir, filename)
-        stem = os.path.splitext(filename)[0]
-        emitted_by_row: dict[int, set[int]] = {}
         chunk_offsets: dict[int, int] = {}
         total_rows = 0
 
@@ -625,150 +656,19 @@ def prepare_parallel_shards_and_svp_inputs(
             _validate_required_columns(
                 col_indices, geo_level, dataset_mode, input_path
             )
-            data_col_positions = [
-                (i, h)
-                for i, h in enumerate(raw_headers)
-                if h not in _NON_DATA_COLUMNS
-            ]
-            num_data_cols = len(data_col_positions)
-
-            if dataset_mode == 'annual_cohort_1978_1992':
-                mapped_years = _mapped_cohort_years(header_to_sv)
-                unseen_by_cohort = {
-                    y: set(range(num_data_cols)) for y in mapped_years
-                }
-                svp_rows_by_cohort: dict[str, list[list[str]]] = {
-                    y: [] for y in mapped_years
-                }
-                row_idx = 0
-                while True:
-                    if row_idx % chunk_size == 0:
-                        chunk_offsets[row_idx] = infile.tell()
-                    raw_line = infile.readline()
-                    if not raw_line:
-                        break
-                    current_row_idx = row_idx
-                    row_idx += 1
-                    total_rows = row_idx
-                    if not any(unseen_by_cohort.values()):
-                        continue
-                    row = next(csv.reader([raw_line]), [])
-                    if not row:
-                        continue
-                    geo_id = _format_geo_from_row_list(
-                        row, col_indices, geo_level
-                    )
-                    if not geo_id:
-                        continue
-                    cohort_str = _parse_cohort(row, col_indices)
-                    if not cohort_str:
-                        continue
-                    if cohort_str not in unseen_by_cohort:
-                        raise ValueError(
-                            f'Unmapped birth cohort {cohort_str} in {input_path}'
-                        )
-                    unseen = unseen_by_cohort[cohort_str]
-                    if not unseen:
-                        continue
-                    matched_d_indices = []
-                    for d_idx in unseen:
-                        pos = data_col_positions[d_idx][0]
-                        val = _extract_row_cell(row, pos)
-                        if _is_valid_number(val):
-                            matched_d_indices.append(d_idx)
-                    if matched_d_indices:
-                        cleaned_vals = [''] * num_data_cols
-                        row_emitted = emitted_by_row.setdefault(
-                            current_row_idx, set()
-                        )
-                        for d_idx in matched_d_indices:
-                            pos = data_col_positions[d_idx][0]
-                            cleaned_vals[d_idx] = _extract_row_cell(row, pos)
-                            unseen.remove(d_idx)
-                            row_emitted.add(pos)
-                        svp_rows_by_cohort[cohort_str].append(
-                            [geo_id] + cleaned_vals
-                        )
-
-                for cohort_str, svp_rows in svp_rows_by_cohort.items():
-                    if not svp_rows:
-                        continue
-                    cohort_token = f'c{cohort_str}'
-                    header = ['geo_id'] + [
-                        normalize_column_header(c, dataset_mode, cohort_token)
-                        for _, c in data_col_positions
-                    ]
-                    shard_path = os.path.join(
-                        shard_dir, f'{stem}_{cohort_token}_part_000_cleaned.csv'
-                    )
-                    with open(
-                        shard_path, mode='w', encoding='utf-8', newline=''
-                    ) as out:
-                        w = csv.writer(out)
-                        w.writerow(header)
-                        w.writerows(svp_rows)
-            else:
-                unseen = set(range(num_data_cols))
-                svp_rows = []
-                row_idx = 0
-                while True:
-                    if row_idx % chunk_size == 0:
-                        chunk_offsets[row_idx] = infile.tell()
-                    raw_line = infile.readline()
-                    if not raw_line:
-                        break
-                    current_row_idx = row_idx
-                    row_idx += 1
-                    total_rows = row_idx
-                    if not unseen:
-                        continue
-                    row = next(csv.reader([raw_line]), [])
-                    if not row:
-                        continue
-                    geo_id = _format_geo_from_row_list(
-                        row, col_indices, geo_level
-                    )
-                    if not geo_id:
-                        continue
-                    matched_d_indices = []
-                    for d_idx in unseen:
-                        pos = data_col_positions[d_idx][0]
-                        val = _extract_row_cell(row, pos)
-                        if _is_valid_number(val):
-                            matched_d_indices.append(d_idx)
-                    if matched_d_indices:
-                        cleaned_vals = [''] * num_data_cols
-                        row_emitted = emitted_by_row.setdefault(
-                            current_row_idx, set()
-                        )
-                        for d_idx in matched_d_indices:
-                            pos = data_col_positions[d_idx][0]
-                            cleaned_vals[d_idx] = _extract_row_cell(row, pos)
-                            unseen.remove(d_idx)
-                            row_emitted.add(pos)
-                        svp_rows.append([geo_id] + cleaned_vals)
-
-                if svp_rows:
-                    header = ['geo_id'] + [
-                        normalize_column_header(c, dataset_mode)
-                        for _, c in data_col_positions
-                    ]
-                    shard_path = os.path.join(shard_dir, f'{stem}_cleaned.csv')
-                    with open(
-                        shard_path, mode='w', encoding='utf-8', newline=''
-                    ) as out:
-                        w = csv.writer(out)
-                        w.writerow(header)
-                        w.writerows(svp_rows)
+            row_idx = 0
+            while True:
+                if row_idx % chunk_size == 0:
+                    chunk_offsets[row_idx] = infile.tell()
+                raw_line = infile.readline()
+                if not raw_line:
+                    break
+                row_idx += 1
+                total_rows = row_idx
 
         if total_rows > 0:
             for start_row in range(0, total_rows, chunk_size):
                 end_row = start_row + chunk_size
-                chunk_emitted = {
-                    r: positions
-                    for r, positions in emitted_by_row.items()
-                    if start_row <= r < end_row
-                }
                 part_path = f'{sv_output_prefix}_part_{part_idx:04d}.csv'
                 tasks.append((
                     input_path,
@@ -778,7 +678,6 @@ def prepare_parallel_shards_and_svp_inputs(
                     end_row,
                     part_path,
                     header_to_sv,
-                    chunk_emitted,
                     chunk_offsets.get(start_row, 0),
                 ))
                 part_idx += 1
@@ -796,25 +695,27 @@ def prepare_parallel_shards_and_svp_inputs(
                 total_obs += count
 
     logging.info(
-        'Parallel shard preparation complete: wrote %d StatVarObservations to %s_part_*.csv and first-seen column seed CSVs to %s for final stat_var_processor.py execution.',
+        'Parallel shard preparation complete: wrote %d StatVarObservations to %s_part_*.csv and %s.tmcf.',
         total_obs,
         sv_output_prefix,
-        shard_dir,
+        sv_output_prefix,
     )
     return total_obs
 
 
 def main(_):
-    os.makedirs(FLAGS.shard_dir, exist_ok=True)
     os.makedirs(os.path.dirname(FLAGS.sv_output_prefix), exist_ok=True)
-    os.makedirs(os.path.join(_MODULE_DIR, 'counters'), exist_ok=True)
+    if FLAGS.counters_file:
+        os.makedirs(
+            os.path.dirname(os.path.abspath(FLAGS.counters_file)), exist_ok=True
+        )
     try:
         prepare_parallel_shards_and_svp_inputs(
             FLAGS.input_dir,
-            FLAGS.shard_dir,
             FLAGS.sv_output_prefix,
             rows_per_chunk=FLAGS.max_rows_per_shard,
             existing_statvar_mcf=FLAGS.existing_statvar_mcf,
+            counters_path=FLAGS.counters_file,
         )
     except (FileNotFoundError, ValueError, RuntimeError) as e:
         logging.fatal('Preprocessing failed: %s', e)
