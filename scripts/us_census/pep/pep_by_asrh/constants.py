@@ -27,7 +27,9 @@ INPUT_DIRS = [
     "1980_1989/national", "1990_1999/national", "2000_2009/national",
     "2010_2020/national", "1980_1989/state", "1990_1999/state",
     "2000_2009/state", "2010_2020/state", "1990_1999/county",
-    "2000_2009/county", "2010_2020/county"
+    "2000_2009/county", "2010_2020/county", "2020_2022/state",
+    "2020_2022/county"
+    #, "2020_2022/state", "2020_2022/county", "2020_2022/national"
 ]
 
 NATIONALS_INPUT_DIR = {
@@ -35,20 +37,24 @@ NATIONALS_INPUT_DIR = {
     "1990_1999": "1990_1999/national",
     "2000_2009": "2000_2009/national",
     "2010_2020": "2010_2020/national"
+    #,
+    #"2020_2022": "2020_2022/national"
 }
 
 STATE_INPUT_DIR = {
     "1980_1989": "1980_1989/state",
     "1990_1999": "1990_1999/state",
     "2000_2009": "2000_2009/state",
-    "2010_2020": "2010_2020/state"
+    "2010_2020": "2010_2020/state",
+    "2020_2022": "2020_2022/state"
 }
 
 COUNTY_INPUT_DIR = {
     "1980_1989": "1980_1989/county",
     "1990_1999": "1990_1999/county",
     "2000_2009": "2000_2009/county",
-    "2010_2020": "2010_2020/county"
+    "2010_2020": "2010_2020/county",
+    "2020_2022": "2020_2022/county"
 }
 
 RACE_UPTO_1999 = "CensusPEPSurvey_RaceUpto1999"
