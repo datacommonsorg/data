@@ -16,7 +16,8 @@ This Python Script is for State Level Data 2020-2029.
 '''
 import os
 import pandas as pd
-from common_functions import input_url, gender_based_grouping, extract_year
+from common_functions import (input_url, gender_based_grouping, extract_year,
+                              load_url_or_path)
 
 
 def state2029(url_file: str, output_folder: str):
@@ -24,7 +25,7 @@ def state2029(url_file: str, output_folder: str):
    This Python Script Loads csv datasets from 2020-2029 on a State Level,
    cleans it and create a cleaned csv.
    '''
-    df = pd.read_csv(url_file, encoding='ISO-8859-1')
+    df = pd.read_csv(load_url_or_path(url_file), encoding='ISO-8859-1')
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_state_2020_2029.csv'),

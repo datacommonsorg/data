@@ -20,6 +20,7 @@ is processed as is.
 import pandas as pd
 import os
 import logging
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -41,7 +42,9 @@ def process_county_2020_2029(url: str) -> pd.DataFrame:
     _INPUT_FILE_PATH = os.path.join(parent_dir, 'output_files/intermediate')
 
     # reading the csv input file
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     df.to_csv(_CODEDIR + "/../input_files/" + 'county_result_2020_2029.csv',
               index=False)
 

@@ -19,6 +19,7 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,7 +37,7 @@ def process_state_1970_1979(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading the csv input file
-    df = pd.read_csv(url, skiprows=5, header=0, thousands=',')
+    df = pd.read_csv(load_url_or_path(url), skiprows=5, header=0, thousands=',')
     df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1970_1979.csv")
     df.rename(columns={
         'Year of Estimate': 'Year',

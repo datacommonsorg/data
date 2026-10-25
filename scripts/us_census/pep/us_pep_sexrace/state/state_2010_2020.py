@@ -19,6 +19,7 @@ is processed as is.
 
 import pandas as pd
 import os
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,7 +37,9 @@ def process_state_2010_2020(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Coulumn names of cleaned dataframe
     """
     # reading input file to dataframe
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     df.to_csv(_CODEDIR + "/../input_files/" + 'state_result_2010_2020.csv',
               index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month

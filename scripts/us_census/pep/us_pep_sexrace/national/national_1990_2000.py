@@ -19,6 +19,7 @@ from state 1990-2000 file.
 
 import pandas as pd
 import os
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -38,10 +39,10 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
     final_df = pd.DataFrame()
     for url in urls:
         # reading the csv input file
-        df = pd.read_table(url,
+        df = pd.read_table(load_url_or_path(url),
                            skiprows=15,
                            header=None,
-                           delim_whitespace=True,
+                           sep=r'\s+',
                            index_col=False,
                            engine='python')
         df.to_csv(_CODEDIR + "/../input_files/" +

@@ -59,11 +59,15 @@ import requests
 import shutil
 import json
 import time
+import tempfile
 from datetime import datetime as dt
 from absl import logging
 
 from absl import app
 from absl import flags
+from retry import retry
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from constants import DOWNLOAD_DIR, PROCESS_AS_IS_DIR, PROCESS_AGG_DIR, RACE
 from constants import OUTPUT_DIR, STAT_VAR_COL_MAPPING, WORKING_DIRECTORIES
@@ -506,6 +510,7 @@ def _process_state_files_1990_2000(download_dir):
                 f"No input files found in directory: {input_file_path}")
             return
 
+        files_processed = 0
         for file in files_list:
             try:
                 temp_file_df = pd.read_fwf(input_file_path + file,
@@ -525,9 +530,16 @@ def _process_state_files_1990_2000(download_dir):
                                         header=False,
                                         index=False,
                                         mode='a')
+                files_processed += 1
             except Exception as e:
                 logging.error(f"Error processing file {file}: {e}")
                 continue  # Proceed with the next file if this one fails
+
+        if files_processed != len(files_list):
+            logging.fatal(
+                f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
+            )
+            return
 
         # After processing all files, aggregate the data
         df = pd.read_csv(output_file_path + output_temp_file_name)
@@ -632,6 +644,7 @@ def _process_county_files_1990_2000(download_dir):
                                 (37, 46), (46, 55), (55, 64), (64, 73),
                                 (73, 82)]
 
+        files_processed = 0
         for file in files_list:
             try:
                 df = pd.read_fwf(input_file_path + file,
@@ -655,10 +668,17 @@ def _process_county_files_1990_2000(download_dir):
                               header=False)
 
                 logging.info(f"Processed and saved file: {file}")
+                files_processed += 1
 
             except Exception as e:
                 logging.error(f"Error processing file {file}: {e}")
                 continue  # Continue with the next file if this one fails
+
+        if files_processed != len(files_list):
+            logging.fatal(
+                f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
+            )
+            return
 
         # Section 2 - Writing Aggregated Data
         output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/'
@@ -707,12 +727,12 @@ def _process_county_files_2000_2010(download_dir):
 
         # Check if the number of files in the directory matches the expected count
         if not files_list:
-            logging.error(
+            logging.fatal(
                 f"No input files found in the directory: {input_file_path}")
             return
 
         if len(files_list) != expected_files_count:
-            logging.error(
+            logging.fatal(
                 f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}."
             )
             return
@@ -768,10 +788,17 @@ def _process_county_files_2000_2010(download_dir):
                               mode='a')
 
                 logging.info(f"Processed and saved file: {file}")
+                files_processed += 1
 
             except Exception as e:
                 logging.error(f"Error processing file {file}: {e}")
                 continue  # Continue with the next file if this one fails
+
+        if files_processed != len(files_list):
+            logging.fatal(
+                f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
+            )
+            return
 
         # Section 2 - Writing Aggregated data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -839,6 +866,7 @@ def _process_county_files_2010_2020(download_dir):
 
         files_list.sort()
 
+        files_processed = 0
         for file in files_list:
             try:
                 df = pd.read_csv(input_file_path + file,
@@ -899,10 +927,17 @@ def _process_county_files_2010_2020(download_dir):
                               header=False)
 
                 logging.info(f"Processed and saved file: {file}")
+                files_processed += 1
 
             except Exception as e:
                 logging.error(f"Error processing file {file}: {e}")
                 continue  # Continue with the next file if this one fails
+
+        if files_processed != len(files_list):
+            logging.fatal(
+                f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
+            )
+            return
 
         # Section 2 - Writing Aggregated Data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -974,6 +1009,7 @@ def _process_county_files_2020_2029(download_dir):
 
         files_list.sort()
 
+        files_processed = 0
         for file in files_list:
             try:
                 df = pd.read_csv(input_file_path + file,
@@ -1035,10 +1071,17 @@ def _process_county_files_2020_2029(download_dir):
                               header=False)
 
                 logging.info(f"Processed and saved file: {file}")
+                files_processed += 1
 
             except Exception as e:
                 logging.error(f"Error processing file {file}: {e}")
                 continue  # Continue with the next file if this one fails
+
+        if files_processed != len(files_list):
+            logging.fatal(
+                f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
+            )
+            return
 
         # Section 2 - Writing Aggregated Data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -1599,6 +1642,91 @@ def _consolidate_files(output_path):
     _consolidate_all_geo_files(output_path)
 
 
+_BASELINE_YEAR = 2025
+
+
+def _create_retry_session(retries=5, backoff_factor=2):
+    """Creates a requests.Session with automatic retry on transient HTTP errors."""
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
+        'Accept':
+            '*/*',
+    })
+    retry_strategy = Retry(
+        total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=['HEAD', 'GET'],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
+
+
+def _is_html_response(content_type, first_bytes=b''):
+    """Returns True if the response headers or body indicate an HTML/WAF error page."""
+    if 'html' in (content_type or '').lower():
+        return True
+    if first_bytes:
+        head = first_bytes[:512].lstrip().lower()
+        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
+                b'<title>request rejected</title>' in head or
+                b'the requested url was rejected' in head):
+            return True
+    return False
+
+
+@retry(tries=3, delay=5, backoff=2)
+def _head_with_html_retry(session, url, timeout=30):
+    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
+    response = session.head(url, timeout=timeout, allow_redirects=True)
+    content_type = response.headers.get('Content-Type', '').lower()
+    if (response.status_code == 200 and 'html' in content_type and
+            not url.lower().endswith(('.html', '.htm'))):
+        raise ValueError(
+            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
+        )
+    return response
+
+
+@retry(tries=5, delay=5, backoff=2)
+def download_with_retry(session, url, dest_path):
+    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
+    with session.get(url, stream=True, timeout=60) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=os.path.dirname(dest_path))
+        try:
+            first_chunk = b''
+            with os.fdopen(fd, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        if not first_chunk:
+                            first_chunk = chunk[:512]
+                            if (not url.lower().endswith(
+                                ('.html', '.htm')) and _is_html_response(
+                                    content_type, first_chunk)):
+                                raise ValueError(
+                                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+                                )
+                        f.write(chunk)
+            if not first_chunk:
+                raise ValueError(f'Downloaded empty file from URL: {url}')
+            os.replace(tmp_path, dest_path)
+        except Exception:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            raise
+
+
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
@@ -1608,26 +1736,40 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
 
-    # This method will generate URLs for the years 2023 to 2029
-    for url in urls_to_scan:
-        for future_year in range(2030, 2022, -1):
-            YEAR = future_year
-            file_path = os.path.join(_MODULE_DIR,
-                                     "input_files/2020_2029/county/"
-                                    )  # Dynamic folder structure and file name
-            url_to_check = url.format(YEAR=YEAR)
-            logging.info(f"checking url: {url_to_check}")
-            try:
-                check_url = requests.head(url_to_check)
-                if check_url.status_code == 200:
-                    _FILES_TO_DOWNLOAD.append({
-                        "download_path": url_to_check,
-                        "file_path": file_path
-                    })
-                    logging.info(f"url added to download: {url_to_check}")
-                    break
-            except:
-                logging.error(f"URL is not accessible: {url_to_check}")
+    session = _create_retry_session()
+    file_path = os.path.join(_MODULE_DIR, "input_files/2020_2029/county/")
+    try:
+        # This method will generate URLs for the years 2025 to 2029
+        for url in urls_to_scan:
+            url_found = False
+            for future_year in range(2030, _BASELINE_YEAR - 1, -1):
+                url_to_check = url.format(YEAR=future_year)
+                logging.info(f"checking url: {url_to_check}")
+                try:
+                    check_url = _head_with_html_retry(session, url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append({
+                            "download_path": url_to_check,
+                            "file_path": file_path
+                        })
+                        logging.info(f"url added to download: {url_to_check}")
+                        url_found = True
+                        break
+                except Exception as e:
+                    logging.warning(
+                        f"URL is not accessible: {url_to_check} ({e})")
+
+            if not url_found:
+                fallback_url = url.format(YEAR=_BASELINE_YEAR)
+                logging.warning(
+                    f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
+                )
+                _FILES_TO_DOWNLOAD.append({
+                    "download_path": fallback_url,
+                    "file_path": file_path
+                })
+    finally:
+        session.close()
 
 
 def download_files():
@@ -1641,62 +1783,34 @@ def download_files():
   """
 
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
-    max_retry = 5
+    session = _create_retry_session()
+    try:
+        for file_to_download in _FILES_TO_DOWNLOAD:
+            url = file_to_download['download_path']
 
-    for file_to_download in _FILES_TO_DOWNLOAD:
-        file_name_to_save = None
-        url = file_to_download['download_path']
+            # Determine the filename to save the downloaded file
+            if 'file_name' in file_to_download:
+                file_name_to_save = file_to_download['file_name']
+            else:
+                file_name_to_save = url.split('/')[-1]
 
-        # Determine the filename to save the downloaded file
-        if 'file_name' in file_to_download:
-            file_name_to_save = file_to_download['file_name']
-        else:
-            file_name_to_save = url.split('/')[-1]
+            # Include file path if specified
+            if 'file_path' in file_to_download:
+                file_name_to_save = os.path.join(file_to_download['file_path'],
+                                                 file_name_to_save)
 
-        # Include file path if specified
-        if 'file_path' in file_to_download:
-            file_name_to_save = os.path.join(file_to_download['file_path'],
-                                             file_name_to_save)
-
-        retry_number = 0
-        is_file_downloaded = False
-
-        while not is_file_downloaded:
+            dest_path = os.path.join(_INPUT_FILE_PATH, file_name_to_save)
             try:
-                # Download the file with retries
-                with session.get(url, stream=True) as response:
-                    response.raise_for_status()
-
-                    if response.status_code == 200:
-                        # Create the download directory if it doesn't exist
-                        os.makedirs(os.path.dirname(
-                            os.path.join(_INPUT_FILE_PATH, file_name_to_save)),
-                                    exist_ok=True)
-                        with open(
-                                os.path.join(_INPUT_FILE_PATH,
-                                             file_name_to_save), 'wb') as f:
-                            f.write(response.content)
-                        file_to_download['is_downloaded'] = True
-                        logging.info(f"Downloaded file: {url}")
-                        is_file_downloaded = True
-                    else:
-                        logging.info(f"Retry file download: {url}")
-                        time.sleep(5)
-                        retry_number += 1
-
+                download_with_retry(session, url, dest_path)
+                file_to_download['is_downloaded'] = True
+                logging.info(f"Downloaded file: {url}")
             except Exception as e:
-                logging.fatal(f"Error downloading {url}: {e}")
-                time.sleep(5)
-                retry_number += 1
-
-            if retry_number > max_retry:
-                logging.fatal(
-                    f"Error downloading {url} after {max_retry} retries")
-                # Exit the function if download fails after retries
+                logging.fatal(f"Error downloading {url} after retries: {e}")
                 return False
 
-    return True  # All files downloaded successfully (or at least attempted)
+        return True
+    finally:
+        session.close()
 
 
 def _process_files(download_dir):

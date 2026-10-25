@@ -18,7 +18,7 @@ import os
 import numpy as np
 import pandas as pd
 from common_functions import (replace_age, gender_based_grouping,
-                              race_based_grouping)
+                              race_based_grouping, load_url_or_path)
 
 
 def county1990(output_folder: str):
@@ -42,7 +42,7 @@ def county1990(output_folder: str):
                 '/popest/tables/1990-2000/counties/asrh/casrh'+str(j)+'.txt'
             cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                 ,8,9,10,11,12,13,14,15,16,17]
-            df = pd.read_table(url,index_col=False,sep=r'\s+'\
+            df = pd.read_table(load_url_or_path(url),index_col=False,sep=r'\s+'\
                 ,skiprows=16,skipfooter=14,engine='python',names=cols,\
                     encoding='ISO-8859-1')
             #Writing raw data to csv

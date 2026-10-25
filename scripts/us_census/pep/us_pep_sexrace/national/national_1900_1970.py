@@ -20,6 +20,7 @@ is processed as is.
 import pandas as pd
 import os
 from absl import logging
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -50,7 +51,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
                 # reading the csv format input file
                 # and converting it to a dataframe
-                df = pd.read_csv(file)
+                df = pd.read_csv(load_url_or_path(file))
                 #Saving file to local
                 df.to_csv(_CODEDIR + "/../input_files/" +
                           "nationals_result_1900_1959.csv",
@@ -89,7 +90,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
             else:
                 # reading the csv format input file
                 # and converting it to a dataframe
-                df2 = pd.read_csv(file)
+                df2 = pd.read_csv(load_url_or_path(file))
                 df2.to_csv(_CODEDIR + "/../input_files/" +
                            "nationals_result_1960_1979.csv",
                            index=False)

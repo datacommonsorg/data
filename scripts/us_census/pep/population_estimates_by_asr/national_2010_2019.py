@@ -16,7 +16,7 @@ This Python Script is for National Level Data 2010-2019.
 '''
 import os
 import pandas as pd
-from common_functions import input_url
+from common_functions import input_url, load_url_or_path
 
 
 def national2010(url_file: str, output_folder: str):
@@ -29,9 +29,12 @@ def national2010(url_file: str, output_folder: str):
     _sheets = input_url(url_file, "2010-19sheets")
     # Used to collect data after every loop for every file's df.
     df_final = pd.DataFrame()
+    excel_source = load_url_or_path(_urls)
     for sheet in _sheets:
         df_sheet = pd.DataFrame()
-        df = pd.read_excel(_urls, sheet, skiprows=4, header=0)
+        if hasattr(excel_source, 'seek'):
+            excel_source.seek(0)
+        df = pd.read_excel(excel_source, sheet, skiprows=4, header=0)
         #Writing raw data to csv
         df.to_csv(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "raw_data",

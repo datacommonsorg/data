@@ -19,6 +19,7 @@ from state 2010-2020 file.
 
 import pandas as pd
 import os
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,7 +37,9 @@ def process_national_2020_2022(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading input file to dataframe
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     df.to_csv(_CODEDIR + "/../input_files/" + 'nationals_result_2020_2022.csv',
               index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month

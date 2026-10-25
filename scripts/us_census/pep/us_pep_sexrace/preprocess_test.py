@@ -16,12 +16,16 @@ Script to automate the testing for USA Population by Sex Race preprocess script.
 """
 
 import os
+import shutil
 import unittest
+from unittest import mock
 import sys
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
+import common
+import preprocess
 from preprocess import process
 from preprocess import add_future_year_urls
 
@@ -36,13 +40,26 @@ class TestPreprocess(unittest.TestCase):
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing
     """
-    ip_config_files = test_data_folder + os.sep + "config_files"
-    ip_files = os.listdir(ip_config_files)
-    config_files = []
-    for file in ip_files:
-        config_files.append(ip_config_files + os.sep + file)
-    add_future_year_urls()
-    process(config_files, test=True)
+
+    @classmethod
+    def setUpClass(cls):
+        ip_config_files = test_data_folder + os.sep + "config_files"
+        ip_files = os.listdir(ip_config_files)
+        config_files = []
+        for file in ip_files:
+            config_files.append(ip_config_files + os.sep + file)
+        mock_resp = mock.MagicMock(status_code=503)
+        with mock.patch("preprocess._head_with_html_retry",
+                        return_value=mock_resp):
+            add_future_year_urls()
+        process(config_files, test=True)
+
+    @classmethod
+    def tearDownClass(cls):
+        for folder in ["output_files", "input_files"]:
+            folder_path = os.path.join(module_dir_, folder)
+            if os.path.exists(folder_path):
+                shutil.rmtree(folder_path)
 
     def test_mcf_tmcf_files(self):
         """
@@ -112,3 +129,41 @@ class TestPreprocess(unittest.TestCase):
                 actual_csv_data = actual_csv_file.read()
 
             self.assertEqual(expected_csv_data.strip(), actual_csv_data.strip())
+
+    def test_retry_session_configuration(self):
+        session = preprocess._create_retry_session()
+        self.assertIn("Mozilla/5.0", session.headers.get("User-Agent", ""))
+        adapter = session.get_adapter("https://www2.census.gov/")
+        self.assertEqual(adapter.max_retries.total, 5)
+        self.assertIn(429, adapter.max_retries.status_forcelist)
+        self.assertIn(503, adapter.max_retries.status_forcelist)
+
+    def test_is_html_response(self):
+        resp = mock.MagicMock()
+        resp.headers = {"Content-Type": "text/html"}
+        self.assertTrue(preprocess._is_html_response(resp))
+
+        resp_csv = mock.MagicMock()
+        resp_csv.headers = {"Content-Type": "text/csv"}
+        self.assertFalse(
+            preprocess._is_html_response(resp_csv, b"YEAR,STATE,COUNTY\n"))
+        self.assertTrue(
+            preprocess._is_html_response(
+                resp_csv, b"<!DOCTYPE html><html>blocked</html>"))
+
+    def test_load_url_or_path_caches_repeated_url(self):
+        url = "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/asrh/cc-est2025-alldata.csv"
+        with mock.patch("preprocess._fetch_url_bytes",
+                        return_value=b"col1,col2\n1,2\n") as mock_fetch:
+            buf1 = preprocess.load_url_or_path(url)
+            buf2 = preprocess.load_url_or_path(url)
+            self.assertEqual(mock_fetch.call_count, 1)
+            self.assertEqual(buf1.read(), b"col1,col2\n1,2\n")
+            self.assertEqual(buf2.read(), b"col1,col2\n1,2\n")
+
+    @mock.patch("preprocess._head_with_html_retry",
+                return_value=mock.MagicMock(status_code=503))
+    def test_add_future_year_urls_fallback_to_baseline(self, mock_head):
+        add_future_year_urls()
+        self.assertEqual(len(preprocess._FILES_TO_DOWNLOAD), 1)
+        self.assertIn("2025", preprocess._FILES_TO_DOWNLOAD[0]["download_path"])

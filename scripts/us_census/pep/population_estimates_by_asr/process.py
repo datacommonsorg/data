@@ -44,6 +44,7 @@ from county_1990_2000 import county1990
 from county_2000_2010 import county2000
 from county_2010_2020 import county2010
 from county_2020_2029 import county2029
+from common_functions import _create_retry_session, _head_with_html_retry
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -53,32 +54,47 @@ flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = []
+_BASELINE_YEAR = 2025
 
 
-# This method will generate URLs for the years 2020 to 2029
+# This method will generate URLs for the years 2025 to 2029
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
+    _FILES_TO_DOWNLOAD = []
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-agesex-res.csv",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ]
-    #To check the latest available year
-    session = requests.Session()
-    for url in urls_to_scan:
-        for YEAR in range(2030, 2020, -1):
-            url_to_check = url.format(YEAR=YEAR)
-            try:
-                check_url = session.head(url_to_check,
-                                         allow_redirects=True,
-                                         timeout=5)
-                if check_url.status_code == 200:
-                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-                    break
-                else:
-                    logging.warning(f"URL is not accessible: {url_to_check}")
-            except Exception as e:
-                logging.error(f"URL is not accessible {url_to_check}: {e}")
+    # To check the latest available year
+    session = _create_retry_session()
+    try:
+        for url in urls_to_scan:
+            url_found = False
+            for YEAR in range(2030, _BASELINE_YEAR - 1, -1):
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = _head_with_html_retry(session, url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+                        url_found = True
+                        break
+                    else:
+                        logging.warning(
+                            f"URL is not accessible: {url_to_check}")
+                except Exception as e:
+                    logging.warning(
+                        f"URL is not accessible {url_to_check}: {e}")
+
+            if not url_found:
+                fallback_url = url.format(YEAR=_BASELINE_YEAR)
+                logging.warning(
+                    f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
+                )
+                _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
+    finally:
+        session.close()
 
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -271,7 +287,7 @@ class USCensusPEPByASR:
 
         logging.info(f"Number of files processed {processed_count}")
         # After processing all files, ensure all files were processed
-        if processed_count == total_files_to_process & total_files_to_process > 0:
+        if processed_count == total_files_to_process and total_files_to_process > 0:
             # Drop the unwanted columns and NA.
             logging.info(f"Dropping unwanted columns and NA")
             final_df.drop(columns=['Unnamed: 0'], inplace=True)
@@ -360,7 +376,6 @@ def main(_):
                                      "raw_data")
         if not os.path.exists(raw_data_path):
             os.mkdir(raw_data_path)
-        add_future_year_urls()
         download_files()
     if mode == "" or mode == "process":
         ip_files = os.listdir(input_path)

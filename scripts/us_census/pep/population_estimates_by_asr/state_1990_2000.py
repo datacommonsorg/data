@@ -17,7 +17,7 @@ This Python Script is for State Level Data 1990-2000.
 import os
 import pandas as pd
 from urllib.parse import urlparse
-from common_functions import input_url
+from common_functions import input_url, load_url_or_path
 
 
 def state1990(url_file: str, output_folder: str):
@@ -29,7 +29,10 @@ def state1990(url_file: str, output_folder: str):
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for url in _urls:
-        df = pd.read_table(url, skiprows=15, sep=r'\s+', header=None)
+        df = pd.read_table(load_url_or_path(url),
+                           skiprows=15,
+                           sep=r'\s+',
+                           header=None)
         #Copying the raw data
         filename = urlparse(url).path.split('/')[-1]
         df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),

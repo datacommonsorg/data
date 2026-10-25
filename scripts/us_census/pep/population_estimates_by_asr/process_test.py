@@ -19,22 +19,32 @@ import os
 from os import path
 import sys
 import unittest
+from unittest import mock
 import shutil
 
-from national_2020_2021 import national2020
+from national_2020_2029 import national2029
 from scripts.us_census.pep.population_estimates_by_asr.national_2010_2019 import national2010
 from national_2000_2010 import national2000
 from state_1990_2000 import state1990
 from state_2010_2020 import state2010
 from county_1970_1979 import county1970
 from county_1980_1989 import county1980
-from process import USCensusPEPByASR
+import process as process_module
+from process import USCensusPEPByASR, _BASELINE_YEAR, add_future_year_urls
+from common_functions import (
+    _create_retry_session,
+    _fetch_url_bytes,
+    _is_html_response,
+)
+
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 test_data_folder = os.path.join(module_dir_, "test_data")
 op_data_folder = os.path.join(module_dir_, "test_output_data")
 input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "test_temp_files")
+raw_data_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "raw_data")
 
 
 class TestPreprocess(unittest.TestCase):
@@ -45,35 +55,43 @@ class TestPreprocess(unittest.TestCase):
     cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
     mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
     tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
-    if not os.path.exists(input_path):
-        os.mkdir(input_path)
-    national_url_file = "test_data/test_input_data/national_test.json"
-    state_url_file = "test_data/test_input_data/state_test.json"
-    county_url_file = "test_data/test_input_data/county_test.json"
-    output_folder = "test_temp_files"
-    national2020(national_url_file, output_folder)
-    national2010(national_url_file, output_folder)
-    national2000(national_url_file, output_folder)
-    state2010(state_url_file, output_folder)
-    state1990(state_url_file, output_folder)
-    county1980(county_url_file, output_folder)
-    county1970(county_url_file, output_folder)
 
-    ip_data = [
-        os.path.join(input_path, 'county_1970_1979.csv'),
-        os.path.join(input_path, 'county_1980_1989.csv'),
-        os.path.join(input_path, 'state_1980_1989.csv'),
-        os.path.join(input_path, 'state_1990_2000.csv'),
-        os.path.join(input_path, 'state_2010_2020.csv'),
-        os.path.join(input_path, 'national_1990_2000.csv'),
-        os.path.join(input_path, 'national_2000_2010.csv'),
-        os.path.join(input_path, 'national_2010_2019.csv'),
-        os.path.join(input_path, 'national_2020_2021.csv')
-    ]
+    @classmethod
+    def setUpClass(cls):
+        os.makedirs(input_path, exist_ok=True)
+        national_url_file = "test_data/test_input_data/national_test.json"
+        state_url_file = "test_data/test_input_data/state_test.json"
+        county_url_file = "test_data/test_input_data/county_test.json"
+        output_folder = "test_temp_files"
+        national2029(national_url_file, output_folder)
+        national2010(national_url_file, output_folder)
+        national2000(national_url_file, output_folder)
+        state2010(state_url_file, output_folder)
+        state1990(state_url_file, output_folder)
+        county1980(county_url_file, output_folder)
+        county1970(county_url_file, output_folder)
 
-    base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,
-                            tmcf_file_path)
-    base.process()
+        ip_data = [
+            os.path.join(input_path, 'county_1970_1979.csv'),
+            os.path.join(input_path, 'county_1980_1989.csv'),
+            os.path.join(input_path, 'state_1980_1989.csv'),
+            os.path.join(input_path, 'state_1990_2000.csv'),
+            os.path.join(input_path, 'state_2010_2019.csv'),
+            os.path.join(input_path, 'national_1990_2000.csv'),
+            os.path.join(input_path, 'national_2000_2010.csv'),
+            os.path.join(input_path, 'national_2010_2019.csv'),
+            os.path.join(input_path, 'national_2020_2029.csv')
+        ]
+
+        base = USCensusPEPByASR(ip_data, cls.cleaned_csv_file_path,
+                                cls.mcf_file_path, cls.tmcf_file_path)
+        base.process()
+
+    @classmethod
+    def tearDownClass(cls):
+        for folder in (input_path, op_data_folder, raw_data_folder):
+            if os.path.exists(folder):
+                shutil.rmtree(folder)
 
     def test_mcf_tmcf_files(self):
         """
@@ -119,6 +137,37 @@ class TestPreprocess(unittest.TestCase):
             csv_data = csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+    def test_create_retry_session(self):
+        session = _create_retry_session()
+        self.assertIn('DataCommonsImport',
+                      session.headers.get('User-Agent', ''))
+        adapter = session.get_adapter('https://www2.census.gov')
+        self.assertEqual(adapter.max_retries.total, 5)
+        self.assertIn(429, adapter.max_retries.status_forcelist)
+        self.assertIn(503, adapter.max_retries.status_forcelist)
+        session.close()
+
+    def test_is_html_response_detects_waf_rejection(self):
+        waf_body = (
+            b'<html><head><title>Request Rejected</title></head>'
+            b'<body>The requested URL was rejected. Please consult with your administrator.</body></html>'
+        )
+        self.assertTrue(_is_html_response('application/octet-stream', waf_body))
+        self.assertTrue(_is_html_response('text/html; charset=utf-8', b''))
+        self.assertFalse(_is_html_response('text/csv',
+                                           b'SUMLEV,STATE,COUNTY\n'))
+
+    @mock.patch('process._head_with_html_retry')
+    def test_add_future_year_urls_fallback_to_baseline(self, mock_head):
+        mock_head.side_effect = Exception('Connection reset')
+        add_future_year_urls()
+        downloaded_urls = [
+            item['download_path'] for item in process_module._FILES_TO_DOWNLOAD
+        ]
+        self.assertEqual(len(downloaded_urls), 3)
+        self.assertTrue(
+            all(f'2020-{_BASELINE_YEAR}' in url for url in downloaded_urls))
 
 
 if __name__ == '__main__':
