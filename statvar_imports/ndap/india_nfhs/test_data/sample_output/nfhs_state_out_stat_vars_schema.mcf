@@ -1,0 +1,877 @@
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+domainIncludes: dcid:PregnantWoman,dcid:BirthEvent
+
+Node: dcid:bankAccountType
+typeOf: dcs:Property
+name: "bankAccountType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:BankAccountTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:BankAccountTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BankAccountTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:SavingsAccount
+typeOf: dcid:BankAccountTypeEnum
+name: "Savings Account"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+rangeIncludes: dcid:QuantityRange
+domainIncludes: dcid:BirthEvent,dcid:NonPregnantWoman,dcid:MortalityEvent,dcid:MenstrualWoman
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+domainIncludes: dcid:Person,dcid:Children,dcid:Mother,dcid:NonPregnantWoman
+rangeIncludes: dcid:Disease,dcid:CauseOfDeathAndDisabilityEnum
+
+Node: dcid:familyPlanningType
+typeOf: dcs:Property
+name: "familyPlanningType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:FamilyPlanningTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:FamilyPlanningTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FamilyPlanningTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:AnyFamilyPlanning
+typeOf: dcid:FamilyPlanningTypeEnum
+name: "Any Family Planning"
+isProvisional: dcs:True
+
+Node: dcid:ModernFamilyPlanning
+typeOf: dcid:FamilyPlanningTypeEnum
+name: "Modern Family Planning"
+isProvisional: dcs:True
+
+Node: dcid:healthEstablishmentType
+typeOf: dcs:Property
+name: "healthEstablishmentType"
+domainIncludes: dcid:ExpenditureActivity,dcid:BirthEvent,dcid:Children
+rangeIncludes: dcid:VaccinationCentreEnum
+
+Node: dcid:PublicHealthFacility
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Public Health Facility"
+isProvisional: dcs:True
+
+Node: dcid:expenditureType
+typeOf: dcs:Property
+name: "expenditureType"
+domainIncludes: dcid:ExpenditureActivity
+
+Node: dcid:ChildBirthExpenditure
+typeOf: dcid:ExpenditureTypeEnum
+name: "Child Birth Expenditure"
+isProvisional: dcs:True
+
+Node: dcid:childBirthMethod
+typeOf: dcs:Property
+name: "childBirthMethod"
+domainIncludes: dcid:ExpenditureActivity,dcid:BirthEvent
+rangeIncludes: dcid:ChildBirthMethodEnum
+isProvisional: dcs:True
+
+Node: dcid:ChildBirthMethodEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ChildBirthMethodEnum"
+isProvisional: dcs:True
+
+Node: dcid:NormalDelivey
+typeOf: dcid:ChildBirthMethodEnum
+name: "Normal Delivey"
+isProvisional: dcs:True
+
+Node: dcid:birthConductedBy
+typeOf: dcs:Property
+name: "birthConductedBy"
+domainIncludes: dcid:BirthEvent
+rangeIncludes: dcid:BirthConductedByEnum
+isProvisional: dcs:True
+
+Node: dcid:BirthConductedByEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BirthConductedByEnum"
+isProvisional: dcs:True
+
+Node: dcid:HealthPersonnel
+typeOf: dcid:BirthConductedByEnum
+name: "Health Personnel"
+isProvisional: dcs:True
+
+Node: dcid:Cesarean
+typeOf: dcid:ChildBirthMethodEnum
+name: "Cesarean"
+isProvisional: dcs:True
+
+Node: dcid:foodIntakeType
+typeOf: dcs:Property
+name: "foodIntakeType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:FoodIntakeTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:FoodIntakeTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FoodIntakeTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:BreastMilk
+typeOf: dcid:FoodIntakeTypeEnum
+name: "Breast Milk"
+isProvisional: dcs:True
+
+Node: dcid:dietType
+typeOf: dcs:Property
+name: "dietType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:DietTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:DietTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "DietTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:AdequateDiet
+typeOf: dcid:DietTypeEnum
+name: "Adequate Diet"
+isProvisional: dcs:True
+
+Node: dcid:vaccineInformation
+typeOf: dcs:Property
+name: "vaccineInformation"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:VaccineInformationEnum
+isProvisional: dcs:True
+
+Node: dcid:VaccineInformationEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "VaccineInformationEnum"
+isProvisional: dcs:True
+
+Node: dcid:VaccinationCard__MotherRecall
+typeOf: dcid:VaccineInformationEnum
+name: "Vaccination Card__ Mother Recall"
+isProvisional: dcs:True
+
+Node: dcid:vaccineStatus
+typeOf: dcs:Property
+name: "vaccineStatus"
+domainIncludes: dcid:Person
+
+Node: dcid:VaccinationCard
+typeOf: dcid:VaccineInformationEnum
+name: "Vaccination Card"
+isProvisional: dcs:True
+
+Node: dcid:Penta__DPT3
+typeOf: dcid:VaccineTypeEnum
+name: "Penta__ DPT3"
+isProvisional: dcs:True
+
+Node: dcid:vaccineDoseReceived
+typeOf: dcs:Property
+name: "vaccineDoseReceived"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:QuantityRange
+isProvisional: dcs:True
+
+Node: dcid:Penta__HepatitisB
+typeOf: dcid:VaccineTypeEnum
+name: "Penta__ Hepatitis B"
+isProvisional: dcs:True
+
+Node: dcid:vaccinationCentre
+typeOf: dcs:Property
+name: "vaccinationCentre"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:VaccinationCentreEnum,dcid:HealthEstablishmentTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:VaccinationCentreEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "VaccinationCentreEnum"
+isProvisional: dcs:True
+
+Node: dcid:PrivateHealthFacility
+typeOf: dcid:VaccinationCentreEnum
+name: "Private Health Facility"
+isProvisional: dcs:True
+
+Node: dcid:SolidFood__SemisolidFood__BreastMilk
+typeOf: dcid:FoodIntakeTypeEnum
+name: "Solid Food__ Semisolid Food__ Breast Milk"
+isProvisional: dcs:True
+
+Node: dcid:vitaminType
+typeOf: dcs:Property
+name: "vitaminType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:VitaminTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:VitaminTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "VitaminTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:VitaminA
+typeOf: dcid:VitaminTypeEnum
+name: "Vitamin A"
+isProvisional: dcs:True
+
+Node: dcid:healthBehavior
+typeOf: dcs:Property
+name: "healthBehavior"
+rangeIncludes: dcid:BodyMassIndexClassificationEnum
+
+Node: dcid:breastFeedingPractice
+typeOf: dcs:Property
+name: "breastFeedingPractice"
+domainIncludes: dcid:Person
+
+Node: dcid:BreastFeedingWithinOneHourOfBirth
+typeOf: dcid:BreastFeedingPracticeEnum
+name: "Breast Feeding Within One Hour Of Birth"
+isProvisional: dcs:True
+
+Node: dcid:birthRegistrationStatus
+typeOf: dcs:Property
+name: "birthRegistrationStatus"
+domainIncludes: dcid:BirthEvent
+rangeIncludes: dcid:BirthRegistrationStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:BirthRegistrationStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BirthRegistrationStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:RegisteredWithCivilAuthority
+typeOf: dcid:BirthRegistrationStatusEnum
+name: "Registered With Civil Authority"
+isProvisional: dcs:True
+
+Node: dcid:HealthFacility__HealthProvider
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Health Facility__ Health Provider"
+isProvisional: dcs:True
+
+Node: dcid:healthPrevention
+typeOf: dcs:Property
+name: "healthPrevention"
+domainIncludes: dcid:Children,dcid:Mother
+
+Node: dcid:OralRehydrationSalt
+typeOf: dcid:HealthPreventionEnum
+name: "Oral Rehydration Salt"
+isProvisional: dcs:True
+
+Node: dcid:ReceivedZinc
+typeOf: dcid:HealthPreventionEnum
+name: "Received Zinc"
+isProvisional: dcs:True
+
+Node: dcid:Fever__SymptomsOfAcuteRespiratoryInfection
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Fever__ Symptoms Of Acute Respiratory Infection"
+isProvisional: dcs:True
+
+Node: dcid:birthControlMethod
+typeOf: dcs:Property
+name: "birthControlMethod"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:BirthControlMethodEnum
+isProvisional: dcs:True
+
+Node: dcid:BirthControlMethodEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BirthControlMethodEnum"
+isProvisional: dcs:True
+
+Node: dcid:Condom
+typeOf: dcid:BirthControlMethodEnum
+name: "Condom"
+isProvisional: dcs:True
+
+Node: dcid:householdDecisionMaking
+typeOf: dcs:Property
+name: "householdDecisionMaking"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:HouseholdDecisionMakingEnum
+isProvisional: dcs:True
+
+Node: dcid:HouseholdDecisionMakingEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "HouseholdDecisionMakingEnum"
+isProvisional: dcs:True
+
+Node: dcid:ParticipatedInThreeDecisions
+typeOf: dcid:HouseholdDecisionMakingEnum
+name: "Participated In Three Decisions"
+isProvisional: dcs:True
+
+Node: dcid:crimeType
+typeOf: dcs:Property
+name: "crimeType"
+domainIncludes: dcid:Person
+
+Node: dcid:Pregnant
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Pregnant"
+isProvisional: dcs:True
+
+Node: dcid:PhysicalViolence
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Physical Violence"
+isProvisional: dcs:True
+
+Node: dcid:levelOfSchool
+typeOf: dcs:Property
+name: "levelOfSchool"
+domainIncludes: dcid:Person
+
+Node: dcid:EverAttendedSchool
+typeOf: dcid:USC_LevelOfSchoolEnum
+name: "Ever Attended School"
+isProvisional: dcs:True
+
+Node: dcid:Sterilization
+typeOf: dcid:BirthControlMethodEnum
+name: "Sterilization"
+isProvisional: dcs:True
+
+Node: dcid:healthCareAdvice
+typeOf: dcs:Property
+name: "healthCareAdvice"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:HealthCareAdviceEnum
+isProvisional: dcs:True
+
+Node: dcid:HealthCareAdviceEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "HealthCareAdviceEnum"
+isProvisional: dcs:True
+
+Node: dcid:HealthWorkerTalkedAboutFamilyPlanning
+typeOf: dcid:HealthCareAdviceEnum
+name: "Health Worker Talked About Family Planning"
+isProvisional: dcs:True
+
+Node: dcid:birthCenter
+typeOf: dcs:Property
+name: "birthCenter"
+domainIncludes: dcid:BirthEvent,dcid:Children
+rangeIncludes: dcid:Class
+isProvisional: dcs:True
+
+Node: dcid:cookingMethod
+typeOf: dcs:Property
+name: "cookingMethod"
+domainIncludes: dcid:Households
+
+Node: dcid:CleanFuelForCooking
+typeOf: dcid:Text
+name: "Clean Fuel For Cooking"
+isProvisional: dcs:True
+
+Node: dcid:typeOfSaltUsed
+typeOf: dcs:Property
+name: "typeOfSaltUsed"
+domainIncludes: dcid:Households
+rangeIncludes: dcid:TypeOfSaltUsedEnum
+isProvisional: dcs:True
+
+Node: dcid:TypeOfSaltUsedEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "TypeOfSaltUsedEnum"
+isProvisional: dcs:True
+
+Node: dcid:IodizedSalt
+typeOf: dcid:TypeOfSaltUsedEnum
+name: "Iodized Salt"
+isProvisional: dcs:True
+
+Node: dcid:healthInsurance
+typeOf: dcs:Property
+name: "healthInsurance"
+domainIncludes: dcid:Households
+
+Node: dcid:WithHealthInsurance__WithHealthFinanceScheme
+typeOf: dcid:USC_HealthInsuranceEnum
+name: "With Health Insurance__ With Health Finance Scheme"
+isProvisional: dcs:True
+
+Node: dcid:IntrauterineDevice__PostpartumIntrauterineContraceptiveDevice
+typeOf: dcid:BirthControlMethodEnum
+name: "Intrauterine Device__ Postpartum Intrauterine Contraceptive Device"
+isProvisional: dcs:True
+
+Node: dcid:ageGroupClassification
+typeOf: dcs:Property
+name: "ageGroupClassification"
+domainIncludes: dcid:MortalityEvent
+
+Node: dcid:Injectables
+typeOf: dcid:FamilyPlanningTypeEnum
+name: "Injectables"
+isProvisional: dcs:True
+
+Node: dcid:InstitutionalHealthFacility
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Institutional Health Facility"
+isProvisional: dcs:True
+
+Node: dcid:MaleSterlization
+typeOf: dcid:BirthControlMethodEnum
+name: "Male Sterlization"
+isProvisional: dcs:True
+
+Node: dcid:MarriedBefore21Years
+typeOf: dcid:USC_MaritalStatusEnum
+name: "Married Before 21 Years"
+isProvisional: dcs:True
+
+Node: dcid:Overweight__Obesity
+typeOf: dcid:HealthBehaviorEnum
+name: "Overweight__ Obesity"
+isProvisional: dcs:True
+
+Node: dcid:knowledgeAbout
+typeOf: dcs:Property
+name: "knowledgeAbout"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum
+isProvisional: dcs:True
+
+Node: dcid:BenefitsOfUsingCondom
+typeOf: dcid:CauseOfDeathAndDisabilityEnum
+name: "Benefits Of Using Condom"
+isProvisional: dcs:True
+
+Node: dcid:BodyMassIndexBelowNormal
+typeOf: dcid:HealthBehaviorEnum
+name: "Body Mass Index Below Normal"
+isProvisional: dcs:True
+
+Node: dcid:schoolingDuration
+typeOf: dcs:Property
+name: "schoolingDuration"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:consumptionPeriod
+typeOf: dcs:Property
+name: "consumptionPeriod"
+domainIncludes: dcid:Mother
+rangeIncludes: dcid:QuantityRange
+isProvisional: dcs:True
+
+Node: dcid:Mother
+typeOf: dcid:Thing
+name: "Mother"
+isProvisional: dcs:True
+
+Node: dcid:ConsumedIronFolicAcid
+typeOf: dcid:HealthPreventionEnum
+name: "Consumed Iron Folic Acid"
+isProvisional: dcs:True
+
+Node: dcid:antenatalStatus
+typeOf: dcs:Property
+name: "antenatalStatus"
+domainIncludes: dcid:Mother
+rangeIncludes: dcid:AntenatalStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:AntenatalStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "AntenatalStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:AntenatalCareWithinFirstTrimester
+typeOf: dcid:AntenatalStatusEnum
+name: "Antenatal Care Within First Trimester"
+isProvisional: dcs:True
+
+Node: dcid:Atleast4AntenatalCareVisit
+typeOf: dcid:AntenatalStatusEnum
+name: "Atleast 4Antenatal Care Visit"
+isProvisional: dcs:True
+
+Node: dcid:postnatalCareStatus
+typeOf: dcs:Property
+name: "postnatalCareStatus"
+domainIncludes: dcid:Mother
+rangeIncludes: dcid:PostnatalCareStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:PostnatalCareStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "PostnatalCareStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:ReceivedPostnatalCare
+typeOf: dcid:PostnatalCareStatusEnum
+name: "Received Postnatal Care"
+isProvisional: dcs:True
+
+Node: dcid:postnatalCareReceivedFrom
+typeOf: dcs:Property
+name: "postnatalCareReceivedFrom"
+domainIncludes: dcid:Mother,dcid:Children
+rangeIncludes: dcid:PostnatalCareReceivedFromEnum
+isProvisional: dcs:True
+
+Node: dcid:PostnatalCareReceivedFromEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "PostnatalCareReceivedFromEnum"
+isProvisional: dcs:True
+
+Node: dcid:Doctor__Nurse__LadyHealthVisitor__AuxiliaryNurseMidwifery__Midwife__HealthPersonnel
+typeOf: dcid:PostnatalCareReceivedFromEnum
+name: "Doctor__ Nurse__ Lady Health Visitor__ Auxiliary Nurse Midwifery__ Midwife__ Health Personnel"
+isProvisional: dcs:True
+
+Node: dcid:pregnancyHealthPrevention
+typeOf: dcs:Property
+name: "pregnancyHealthPrevention"
+domainIncludes: dcid:Mother
+rangeIncludes: dcid:PregnancyHealthPreventionEnum
+isProvisional: dcs:True
+
+Node: dcid:PregnancyHealthPreventionEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "PregnancyHealthPreventionEnum"
+isProvisional: dcs:True
+
+Node: dcid:ProtectionAgainstNeonatalTetanus
+typeOf: dcid:PregnancyHealthPreventionEnum
+name: "Protection Against Neonatal Tetanus"
+isProvisional: dcs:True
+
+Node: dcid:Neonate
+typeOf: dcid:AgeGroupClassificationEnum
+name: "Neonate"
+isProvisional: dcs:True
+
+Node: dcid:OtherThanBreastFeeding
+typeOf: dcid:FoodIntakeTypeEnum
+name: "Other Than Breast Feeding"
+isProvisional: dcs:True
+
+Node: dcid:NonPregnantWoman
+typeOf: dcid:Thing
+name: "Non Pregnant Woman"
+isProvisional: dcs:True
+
+Node: dcid:BirthControlPill
+typeOf: dcid:BirthControlMethodEnum
+name: "Birth Control Pill"
+isProvisional: dcs:True
+
+Node: dcid:householdFacilityStatus
+typeOf: dcs:Property
+name: "householdFacilityStatus"
+domainIncludes: dcid:Households
+rangeIncludes: dcid:HouseholdFacilityStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:HouseholdFacilityStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "HouseholdFacilityStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:ImprovedSanitationFacility
+typeOf: dcid:HouseholdFacilityStatusEnum
+name: "Improved Sanitation Facility"
+isProvisional: dcs:True
+
+Node: dcid:ImprovedDrinkingWaterSource
+typeOf: dcid:HouseholdFacilityStatusEnum
+name: "Improved Drinking Water Source"
+isProvisional: dcs:True
+
+Node: dcid:WithElectricity
+typeOf: dcid:HouseholdFacilityStatusEnum
+name: "With Electricity"
+isProvisional: dcs:True
+
+Node: dcid:PregnantWoman
+typeOf: dcid:Thing
+name: "Pregnant Woman"
+isProvisional: dcs:True
+
+Node: dcid:SymptomsOfAcuteRespiratoryInfection
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Symptoms Of Acute Respiratory Infection"
+isProvisional: dcs:True
+
+Node: dcid:pregnancyCare
+typeOf: dcs:Property
+name: "pregnancyCare"
+domainIncludes: dcid:PregnantWoman
+rangeIncludes: dcid:PregnancyCareEnum
+isProvisional: dcs:True
+
+Node: dcid:PregnancyCareEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "PregnancyCareEnum"
+isProvisional: dcs:True
+
+Node: dcid:MotherChildProtectionCard
+typeOf: dcid:PregnancyCareEnum
+name: "Mother Child Protection Card"
+isProvisional: dcs:True
+
+Node: dcid:WithUnmetNeed
+typeOf: dcid:FamilyPlanningTypeEnum
+name: "With Unmet Need"
+isProvisional: dcs:True
+
+Node: dcid:MenstrualWoman
+typeOf: dcid:Thing
+name: "Menstrual Woman"
+isProvisional: dcs:True
+
+Node: dcid:menstrualHygieneStatus
+typeOf: dcs:Property
+name: "menstrualHygieneStatus"
+domainIncludes: dcid:MenstrualWoman
+rangeIncludes: dcid:MenstrualHygieneStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:MenstrualHygieneStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MenstrualHygieneStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:HygienicMethodsOfProtection
+typeOf: dcid:MenstrualHygieneStatusEnum
+name: "Hygienic Methods Of Protection"
+isProvisional: dcs:True
+
+Node: dcid:MarriedBefore18Years
+typeOf: dcid:USC_MaritalStatusEnum
+name: "Married Before 18 Years"
+isProvisional: dcs:True
+
+Node: dcid:deviceUsed
+typeOf: dcs:Property
+name: "deviceUsed"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:DeviceUsedEnum
+isProvisional: dcs:True
+
+Node: dcid:DeviceUsedEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "DeviceUsedEnum"
+isProvisional: dcs:True
+
+Node: dcid:MobilePhone
+typeOf: dcid:DeviceUsedEnum
+name: "Mobile Phone"
+isProvisional: dcs:True
+
+Node: dcid:assetsOwned
+typeOf: dcs:Property
+name: "assetsOwned"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:AssetsOwnedEnum
+isProvisional: dcs:True
+
+Node: dcid:AssetsOwnedEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "AssetsOwnedEnum"
+isProvisional: dcs:True
+
+Node: dcid:House__Land
+typeOf: dcid:AssetsOwnedEnum
+name: "House__ Land"
+isProvisional: dcs:True
+
+Node: dcid:paymentMethod
+typeOf: dcs:Property
+name: "paymentMethod"
+domainIncludes: dcid:Person
+
+Node: dcid:CashPayment
+typeOf: dcid:PaymentMethod
+name: "Cash Payment"
+isProvisional: dcs:True
+
+Node: dcid:victimAge
+typeOf: dcs:Property
+name: "victimAge"
+domainIncludes: dcid:Person
+
+Node: dcid:SexualViolence
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Sexual Violence"
+isProvisional: dcs:True
+
+Node: dcid:placeOfResidenceClassification
+typeOf: dcs:Property
+name: "placeOfResidenceClassification"
+domainIncludes: dcid:Person,dcid:ExpenditureActivity,dcid:BirthEvent,dcid:Children,dcid:MortalityEvent,dcid:Households,dcid:Mother,dcid:NonPregnantWoman,dcid:MenstrualWoman
+rangeIncludes: dcid:HumanSettlementClassificationEnum
+
+Node: dcid:vaccineType
+typeOf: dcs:Property
+name: "vaccineType"
+rangeIncludes: dcid:EtiologyEnum
+
+Node: dcid:schoolGradeLevel
+typeOf: dcs:Property
+name: "schoolGradeLevel"
+domainIncludes: dcid:Person
+
+Node: dcid:PrePrimarySchool
+typeOf: dcid:SchoolLevelEnum
+name: "Pre Primary School"
+isProvisional: dcs:True
+
+Node: dcid:MeasurementQualifierEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementQualifierEnum"
+isProvisional: dcs:True
+
+Node: dcid:Triennial
+typeOf: dcid:MeasurementQualifierEnum
+name: "Triennial"
+isProvisional: dcs:True
+
+Node: dcid:deathRegistrationStatus
+typeOf: dcs:Property
+name: "deathRegistrationStatus"
+domainIncludes: dcid:MortalityEvent
+rangeIncludes: dcid:BirthRegistrationStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:EverUsedInternet
+typeOf: dcid:USC_InternetAccessStatusEnum
+name: "Ever Used Internet"
+isProvisional: dcs:True
+
+Node: dcid:HighRiskOfWaistToHipRatio
+typeOf: dcid:HealthBehaviorEnum
+name: "High Risk Of Waist To Hip Ratio"
+isProvisional: dcs:True
+
+Node: dcid:HighBloodSugarLevel
+typeOf: dcid:HealthOutcomeEnum
+name: "High Blood Sugar Level"
+isProvisional: dcs:True
+
+Node: dcid:HighBloodSugarLevel__VeryHighBloodSugarLevel
+typeOf: dcid:HealthOutcomeEnum
+name: "High Blood Sugar Level__ Very High Blood Sugar Level"
+isProvisional: dcs:True
+
+Node: dcid:VeryHighBloodSugarLevel
+typeOf: dcid:HealthOutcomeEnum
+name: "Very High Blood Sugar Level"
+isProvisional: dcs:True
+
+Node: dcid:diseaseControlMeasure
+typeOf: dcs:Property
+name: "diseaseControlMeasure"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:DiseaseControlMeasureEnum
+isProvisional: dcs:True
+
+Node: dcid:DiseaseControlMeasureEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "DiseaseControlMeasureEnum"
+isProvisional: dcs:True
+
+Node: dcid:TakingMedicine
+typeOf: dcid:DiseaseControlMeasureEnum
+name: "Taking Medicine"
+isProvisional: dcs:True
+
+Node: dcid:ElevatedBloodPressure
+typeOf: dcid:HealthOutcomeEnum
+name: "Elevated Blood Pressure"
+isProvisional: dcs:True
+
+Node: dcid:OralCavityExamination
+typeOf: dcid:HealthPreventionEnum
+name: "Oral Cavity Examination"
+isProvisional: dcs:True
+
+Node: dcid:OralCancer
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Oral Cancer"
+isProvisional: dcs:True
+
+Node: dcid:MidlyElevatedBloodPressure
+typeOf: dcid:HealthOutcomeEnum
+name: "Midly Elevated Blood Pressure"
+isProvisional: dcs:True
+
+Node: dcid:ModeratelyElevatedBloodPressure__SeverelyElevatedBloodPressure
+typeOf: dcid:HealthOutcomeEnum
+name: "Moderately Elevated Blood Pressure__ Severely Elevated Blood Pressure"
+isProvisional: dcs:True
+
+Node: dcid:BreastCancerExamination
+typeOf: dcid:HealthPreventionEnum
+name: "Breast Cancer Examination"
+isProvisional: dcs:True
+
+Node: dcid:postBirthCare
+typeOf: dcs:Property
+name: "postBirthCare"
+domainIncludes: dcid:Children
+rangeIncludes: dcid:PostBirthCareEnum
+isProvisional: dcs:True
+
+Node: dcid:PostBirthCareEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "PostBirthCareEnum"
+isProvisional: dcs:True
+
+Node: dcid:ReceivedBirthCareWithin24Hour
+typeOf: dcid:PostBirthCareEnum
+name: "Received Birth Care Within 24 Hour"
+isProvisional: dcs:True
+
