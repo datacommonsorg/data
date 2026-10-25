@@ -1,0 +1,11 @@
+Node: E:mesh_qual_qualifier->E1
+typeOf: dcs:MeSHQualifier
+dcid: C:mesh_qual_qualifier->Qualifier_dcid
+name: C:mesh_qual_qualifier->QualifierName
+dateCreated: C:mesh_qual_qualifier->DateCreated
+dateRevised: C:mesh_qual_qualifier->DateRevised
+dateEstablished: C:mesh_qual_qualifier->DateEstablished
+description: C:mesh_qual_qualifier->Annotation
+identifier: C:mesh_qual_qualifier->QualifierUI
+note: C:mesh_qual_qualifier->HistoryNote
+medicalSubjectHeadingTreeNumber: C:mesh_qual_qualifier->TreeNumber
