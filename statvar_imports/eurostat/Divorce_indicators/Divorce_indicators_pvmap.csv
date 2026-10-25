@@ -1,0 +1,39 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
+
+# Global Dataflow properties (Standard Data Commons Vital Events Modeling)
+"DATAFLOW:ESTAT:DEMO_NDIV(1.0)",populationType,dcs:DivorceEvent,measuredProperty,dcs:count,statType,dcs:measuredValue,,,,
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+LAST UPDATE,#ignore,"",,,,,,,,
+CONF_STATUS,#ignore,"",,,,,,,,
+
+# Frequency dimension (P1Y for Annual series)
+freq:A,observationPeriod,P1Y,,,,,,,,
+
+# --- Divorce Indicators (indic_de) ---
+# DIV: Absolute count of divorces
+indic_de:DIV,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,statType,dcs:measuredValue,,,,
+
+# DIVMARPCT: Divorces per 100 marriages (Divorces divided by MarriageEvent count)
+indic_de:DIVMARPCT,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,measurementDenominator,dcs:Count_MarriageEvent,scalingFactor,100,,
+
+# GDIVRT: Crude divorce rate (Divorces per 1,000 residents)
+indic_de:GDIVRT,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,measurementDenominator,dcs:Count_Person,scalingFactor,1000,,
+
+# --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
+geo,observationAbout,{Data},,,,,,,,
+
+# Time and Value
+TIME_PERIOD,observationDate,{Data},,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,
+
+# Safely Ignoring Transient and Composite Status Flags to Prevent Ingestion Warnings
+OBS_FLAG:b,#ignore,"",,,,,,,,
+OBS_FLAG:e,#ignore,"",,,,,,,,
+OBS_FLAG:p,#ignore,"",,,,,,,,
+OBS_FLAG:i,#ignore,"",,,,,,,,
+OBS_FLAG:bp,#ignore,"",,,,,,,,
+OBS_FLAG:ep,#ignore,"",,,,,,,,
+
+# Missing values
+OBS_FLAG:M,MissingValue,"",,,,,,,,
