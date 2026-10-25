@@ -17,7 +17,8 @@ This Python Script is for State Level Data 1990-2000.
 import os
 import pandas as pd
 from urllib.parse import urlparse
-from common_functions import input_url, load_url_or_path
+from common_functions import input_url
+from process import load_url_or_path
 
 
 def state1990(url_file: str, output_folder: str):

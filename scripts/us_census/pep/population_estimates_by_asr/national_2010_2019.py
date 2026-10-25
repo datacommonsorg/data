@@ -16,7 +16,8 @@ This Python Script is for National Level Data 2010-2019.
 '''
 import os
 import pandas as pd
-from common_functions import input_url, load_url_or_path
+from common_functions import input_url
+from process import load_url_or_path
 
 
 def national2010(url_file: str, output_folder: str):

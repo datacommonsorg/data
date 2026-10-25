@@ -17,7 +17,8 @@ This Python Script is for State Level Data 1970-1979.
 import os
 import pandas as pd
 from common_functions import (input_url, gender_based_grouping,
-                              race_based_grouping, load_url_or_path)
+                              race_based_grouping)
+from process import load_url_or_path
 
 
 def state1970(url_file: str, output_folder: str):

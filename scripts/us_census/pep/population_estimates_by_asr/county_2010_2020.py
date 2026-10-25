@@ -17,7 +17,8 @@ This Python Script is for County Level Data 2010-2020.
 import os
 import numpy as np
 import pandas as pd
-from common_functions import input_url, replace_agegrp, load_url_or_path
+from common_functions import input_url, replace_agegrp
+from process import load_url_or_path
 
 
 def county2010(url_file: str, output_folder: str):

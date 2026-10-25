@@ -31,7 +31,7 @@ from county_1970_1979 import county1970
 from county_1980_1989 import county1980
 import process as process_module
 from process import USCensusPEPByASR, _BASELINE_YEAR, add_future_year_urls
-from common_functions import (
+from process import (
     _create_retry_session,
     _fetch_url_bytes,
     _is_html_response,

@@ -18,7 +18,8 @@ import os
 from zipfile import ZipFile
 import pandas as pd
 import numpy as np
-from common_functions import input_url, load_url_or_path
+from common_functions import input_url
+from process import load_url_or_path
 
 
 def column_naming(df: pd.DataFrame):

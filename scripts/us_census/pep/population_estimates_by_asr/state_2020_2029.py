@@ -16,8 +16,8 @@ This Python Script is for State Level Data 2020-2029.
 '''
 import os
 import pandas as pd
-from common_functions import (input_url, gender_based_grouping, extract_year,
-                              load_url_or_path)
+from common_functions import (input_url, gender_based_grouping, extract_year)
+from process import load_url_or_path
 
 
 def state2029(url_file: str, output_folder: str):

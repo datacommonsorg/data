@@ -15,36 +15,153 @@
 This Python Script Load the datasets, cleans it and generates 
 cleaned CSV, MCF, TMCF file.
 """
-import os
-import pandas as pd
-import numpy as np
-
-import requests
-import shutil
-import time
+import io
 import json
-from absl import logging
-
+import os
+import shutil
+import tempfile
+import time
 from absl import app
 from absl import flags
-from national_1900_1959 import national1900
-from national_1960_1979 import national1960
-from national_1980_1989 import national1980
-from national_2000_2010 import national2000
-from national_2010_2019 import national2010
-from national_2020_2029 import national2029
-from state_1970_1979 import state1970
-from state_1990_2000 import state1990
-from state_2000_2010 import state2000
-from state_2010_2020 import state2010
-from state_2020_2029 import state2029
-from county_1970_1979 import county1970
-from county_1980_1989 import county1980
-from county_1990_2000 import county1990
-from county_2000_2010 import county2000
-from county_2010_2020 import county2010
-from county_2020_2029 import county2029
-from common_functions import _create_retry_session, _head_with_html_retry
+from absl import logging
+import numpy as np
+import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from retry import retry
+from urllib3.util.retry import Retry
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_LAST_FETCHED_URL = {}
+
+
+def ensure_raw_data_dir():
+    """Ensures the raw_data directory exists inside the module directory."""
+    raw_dir = os.path.join(_MODULE_DIR, "raw_data")
+    os.makedirs(raw_dir, exist_ok=True)
+    return raw_dir
+
+
+def _create_retry_session(retries=5, backoff_factor=2):
+    """Creates a requests.Session with automatic retry on transient HTTP errors."""
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
+        'Accept':
+            '*/*',
+    })
+    retry_strategy = Retry(
+        total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504, 520],
+        allowed_methods=['HEAD', 'GET'],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
+
+
+def _is_html_response(content_type, first_bytes=b''):
+    """Returns True if the response headers or body indicate an HTML/WAF error page."""
+    if 'html' in (content_type or '').lower():
+        return True
+    if first_bytes:
+        head = first_bytes[:512].lstrip().lower()
+        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
+                b'<title>request rejected</title>' in head or
+                b'the requested url was rejected' in head):
+            return True
+    return False
+
+
+@retry(tries=3, delay=5, backoff=2)
+def _head_with_html_retry(session, url, timeout=30):
+    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
+    response = session.head(url, timeout=timeout, allow_redirects=True)
+    content_type = response.headers.get('Content-Type', '').lower()
+    if (response.status_code == 200 and 'html' in content_type and
+            not url.lower().endswith(('.html', '.htm'))):
+        raise ValueError(
+            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
+        )
+    return response
+
+
+@retry(tries=5, delay=5, backoff=2)
+def download_with_retry(session, url, dest_path):
+    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
+    with session.get(url, stream=True, timeout=60) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=os.path.dirname(dest_path))
+        try:
+            first_chunk = b''
+            with os.fdopen(fd, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        if not first_chunk:
+                            first_chunk = chunk[:512]
+                            if (not url.lower().endswith(
+                                ('.html', '.htm')) and _is_html_response(
+                                    content_type, first_chunk)):
+                                raise ValueError(
+                                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+                                )
+                        f.write(chunk)
+            if not first_chunk:
+                raise ValueError(f'Downloaded empty file from URL: {url}')
+            os.replace(tmp_path, dest_path)
+        except Exception:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            raise
+
+
+@retry(tries=5, delay=5, backoff=2)
+def _fetch_url_bytes(url: str) -> bytes:
+    """Fetches URL content with retries and WAF/HTML rejection."""
+    session = _create_retry_session()
+    try:
+        with session.get(url, timeout=60) as response:
+            response.raise_for_status()
+            content_type = response.headers.get('Content-Type', '')
+            content = response.content
+            if not content:
+                raise ValueError(f'Downloaded empty response from URL: {url}')
+            if (not url.lower().endswith(('.html', '.htm')) and
+                    _is_html_response(content_type, content[:512])):
+                raise ValueError(
+                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+                )
+            return content
+    finally:
+        session.close()
+
+
+def load_url_or_path(url_or_path: str):
+    """Returns a BytesIO buffer for HTTP/HTTPS URLs (with retries, WAF checks, and caching) or the local path."""
+    ensure_raw_data_dir()
+    if isinstance(url_or_path, str):
+        if url_or_path.lower().startswith(('http://', 'https://')):
+            if url_or_path in _LAST_FETCHED_URL:
+                data = _LAST_FETCHED_URL[url_or_path]
+            else:
+                data = _fetch_url_bytes(url_or_path)
+                _LAST_FETCHED_URL[url_or_path] = data
+            return io.BytesIO(data)
+        if not os.path.isabs(url_or_path) and not os.path.exists(url_or_path):
+            candidate = os.path.join(_MODULE_DIR, url_or_path)
+            if os.path.exists(candidate):
+                return candidate
+    return url_or_path
+
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -327,6 +444,24 @@ def download_files():
     output_folder = "input_data"
     logging.info("Download starts")
     try:
+        from national_1900_1959 import national1900
+        from national_1960_1979 import national1960
+        from national_1980_1989 import national1980
+        from national_2000_2010 import national2000
+        from national_2010_2019 import national2010
+        from national_2020_2029 import national2029
+        from state_1970_1979 import state1970
+        from state_1990_2000 import state1990
+        from state_2000_2010 import state2000
+        from state_2010_2020 import state2010
+        from state_2020_2029 import state2029
+        from county_1970_1979 import county1970
+        from county_1980_1989 import county1980
+        from county_1990_2000 import county1990
+        from county_2000_2010 import county2000
+        from county_2010_2020 import county2010
+        from county_2020_2029 import county2029
+
         add_future_year_urls()
         national1900(output_folder)
         national1960(output_folder)

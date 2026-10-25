@@ -16,7 +16,8 @@ This Python Script is for National Level Data 2000-2010.
 '''
 import os
 import pandas as pd
-from common_functions import input_url, race_based_grouping, load_url_or_path
+from common_functions import input_url, race_based_grouping
+from process import load_url_or_path
 
 
 def national2000(url_file: str, output_folder: str):

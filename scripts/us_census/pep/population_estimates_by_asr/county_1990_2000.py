@@ -18,7 +18,8 @@ import os
 import numpy as np
 import pandas as pd
 from common_functions import (replace_age, gender_based_grouping,
-                              race_based_grouping, load_url_or_path)
+                              race_based_grouping)
+from process import load_url_or_path
 
 
 def county1990(output_folder: str):

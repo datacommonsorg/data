@@ -17,7 +17,7 @@ This Python Script is for National Level Data 1900-1959
 import os
 import pandas as pd
 from absl import logging
-from common_functions import load_url_or_path
+from process import load_url_or_path
 
 
 def national1900(output_folder: str):

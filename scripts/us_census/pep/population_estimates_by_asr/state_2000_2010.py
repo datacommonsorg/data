@@ -16,7 +16,8 @@ This Python Script is for State Level Data 2000-2010
 '''
 import os
 import pandas as pd
-from common_functions import input_url, replace_agegrp, load_url_or_path
+from common_functions import input_url, replace_agegrp
+from process import load_url_or_path
 
 
 def state2000(url_file: str, output_folder: str):

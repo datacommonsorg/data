@@ -17,7 +17,8 @@ This Python Script is for County and State Level Data 1980-1989.
 import os
 import pandas as pd
 from common_functions import (input_url, replace_age, race_based_grouping,
-                              gender_based_grouping, load_url_or_path)
+                              gender_based_grouping)
+from process import load_url_or_path
 
 
 def county1980(url_file: str, output_folder: str):
