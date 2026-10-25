@@ -621,7 +621,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
             with mock.patch('subprocess.run', side_effect=fake_run_success):
                 with self.assertRaisesRegex(
-                        RuntimeError, r'Unmapped column headers.*kfr_p25_c1993'):
+                        RuntimeError,
+                        r'Unmapped column headers.*kfr_p25_c1993'):
                     preprocess._resolve_headers_via_svp(tmpdir,
                                                         existing_statvar_mcf='')
 
