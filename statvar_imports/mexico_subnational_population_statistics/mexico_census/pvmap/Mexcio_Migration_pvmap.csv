@@ -1,0 +1,18 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+"Población total nacida en otro país residente en México por entidad federativa según sexo y países seleccionados, años censales de 2000, 2010 y 2020",#ignore,,,,,,,
+Entidad federativa,measuredProperty,count,populationType,Person,statType,measuredValue,nativity,ForeignBorn
+Estados Unidos de América,placeOfBirth,country/USA,,,,,,
+Guatemala,placeOfBirth,country/GTM,,,,,,
+Japón,placeOfBirth,country/JPN,,,,,,
+España,placeOfBirth,country/ESP,,,,,,
+Francia,placeOfBirth,country/FRA,,,,,,
+Otros,placeOfBirth,INEGI_OtherCountries,,,,,,
+Total,gender,"""""",,,,,,
+Hombres,gender,Male,,,,,,
+Mujeres,gender,Female,,,,,,
+2000,observationDate,2000,value,{Number},,,,
+2010,observationDate,2010,value,{Number},,,,
+2020,observationDate,2020,value,{Number},,,,
+2030,observationDate,2030,value,{Number},,,,
+2040,observationDate,2040,value,{Number},,,,
+2050,observationDate,2050,value,{Number},,,,

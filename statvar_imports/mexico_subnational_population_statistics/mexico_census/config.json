@@ -1,0 +1,101 @@
+{
+  "pxweb_api_base_url": "https://www.inegi.org.mx/app/tabulados/pxwebapi/api",
+  "cuadros_api_base_url": "https://www.inegi.org.mx/app/tabulados/serviciocuadros/wsDataService.svc/listaindicadorbiinegi",
+  "datasets": {
+    "Mexcio_Migration": {
+      "source_type": "pxweb",
+      "pxq_id": "Migracion_Migracion_03_793b2477-4037-43d4-9a60-90fb2592cdbc",
+      "file_id": "Migracion/Migracion_03"
+    },
+    "Mexico_Avg_Annual_Growth_Rate": {
+      "source_type": "pxweb",
+      "pxq_id": "Poblacion_Poblacion_03_13b8bdfc-8744-4623-a652-03cb6901fd47",
+      "file_id": "Poblacion/Poblacion_03"
+    },
+    "Mexico_Births_Registered": {
+      "source_type": "pxweb",
+      "pxq_id": "Natalidad_Natalidad_01_97690dcd-1099-4e34-ba7f-1180912653bb",
+      "file_id": "Natalidad/Natalidad_01"
+    },
+    "Mexico_Death_Diabetes": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_04_a1dc683e-1076-4f64-ba03-03fa3b006165",
+      "file_id": "Mortalidad/Mortalidad_04"
+    },
+    "Mexico_Deaths_Registered": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_01_aeaa2051-0ce2-44e6-bb92-bf11ff078e7b",
+      "file_id": "Mortalidad/Mortalidad_01"
+    },
+    "Mexico_Homicide_Population": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_08_d78470fc-94a9-4b13-b2f2-677f5ef1801f",
+      "file_id": "Mortalidad/Mortalidad_08"
+    },
+    "Mexico_Infant_Mortality": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_02_0babb09a-23c1-41cd-ad74-9c93ed69cd53",
+      "file_id": "Mortalidad/Mortalidad_02"
+    },
+    "Mexico_LifeExpectancy": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_09_8d50a2d5-a862-4f99-aca8-1d9274cbcb74",
+      "file_id": "Mortalidad/Mortalidad_09"
+    },
+    "Mexico_Male_Mortality_Rate": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_03_636c022e-24cc-4dd4-baf1-bc2ae2d217e4",
+      "file_id": "Mortalidad/Mortalidad_03"
+    },
+    "Mexico_Median_Age": {
+      "source_type": "pxweb",
+      "pxq_id": "Poblacion_Poblacion_04_bb9a3db4-4c69-4231-aaaf-abef21dda472",
+      "file_id": "Poblacion/Poblacion_04"
+    },
+    "Mexico_Population_Density": {
+      "source_type": "pxweb",
+      "pxq_id": "Poblacion_Poblacion_07_fb7d5132-39f0-4a6c-b6f6-4cbe440e048d",
+      "file_id": "Poblacion/Poblacion_07"
+    },
+    "Mexico_Religion_Catholic": {
+      "source_type": "pxweb",
+      "pxq_id": "Religion_Religion_01_a7ac48a2-4339-47d4-841e-f34d0d2b3382",
+      "file_id": "Religion/Religion_01"
+    },
+    "Mexico_Religion_Irreligion": {
+      "source_type": "pxweb",
+      "pxq_id": "Religion_Religion_03_c593726b-18ee-426d-b361-597436ef0127",
+      "file_id": "Religion/Religion_03"
+    },
+    "Mexico_Religion_OtherReligionThanCatholicism": {
+      "source_type": "pxweb",
+      "pxq_id": "Religion_Religion_02_a8634e3c-358d-4727-9085-b54d3f600f13",
+      "file_id": "Religion/Religion_02"
+    },
+    "Mexico_SchoolEnrollment": {
+      "source_type": "pxweb",
+      "pxq_id": "Educacion_Educacion_06_a36c6b2e-fe8f-486a-b5d2-239a02eb0baa",
+      "file_id": "Educacion/Educacion_06"
+    },
+    "Mexico_Student_Teacher_Ratio": {
+      "source_type": "pxweb",
+      "pxq_id": "Educacion_Educacion_08_133ada64-259a-414f-b55d-3ea9ee0ec0ef",
+      "file_id": "Educacion/Educacion_08"
+    },
+    "Mexico_Suicide_Population": {
+      "source_type": "pxweb",
+      "pxq_id": "Mortalidad_Mortalidad_07_0ad0c30d-03fb-4034-8777-552a12cf087d",
+      "file_id": "Mortalidad/Mortalidad_07"
+    },
+    "Mexico_Total_Population": {
+      "source_type": "pxweb",
+      "pxq_id": "Poblacion_Poblacion_01_e60cd8cf-927f-4b94-823e-972457a12d4b",
+      "file_id": "Poblacion/Poblacion_01"
+    },
+    "Mexico_Unemployed_Population": {
+      "source_type": "cuadros",
+      "indicators": "446566|446713|446718",
+      "start_year": "2019"
+    }
+  }
+}
