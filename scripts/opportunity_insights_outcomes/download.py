@@ -49,41 +49,57 @@ flags.DEFINE_bool(
     'If True, re-download and overwrite existing files.',
 )
 
-USER_AGENT = (
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
-    '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-)
+USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+              '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36')
 
 DEFAULT_SOURCE_FILES = {
     'commuting_zone_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/cz_outcomes.csv',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/cz_outcomes\.csv',
-        'is_zip': False,
+        'url':
+            'https://opportunityinsights.org/wp-content/uploads/2018/10/cz_outcomes.csv',
+        'pattern':
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/cz_outcomes\.csv',
+        'is_zip':
+            False,
     },
     'county_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/county_outcomes.zip',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/county_outcomes\.zip',
-        'is_zip': True,
+        'url':
+            'https://opportunityinsights.org/wp-content/uploads/2018/10/county_outcomes.zip',
+        'pattern':
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/county_outcomes\.zip',
+        'is_zip':
+            True,
     },
     'tract_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2018/10/tract_outcomes.zip',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes\.zip',
-        'is_zip': True,
+        'url':
+            'https://opportunityinsights.org/wp-content/uploads/2018/10/tract_outcomes.zip',
+        'pattern':
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes\.zip',
+        'is_zip':
+            True,
     },
     'tract_outcomes_late_simple.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple.csv',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes_late_simple\.csv',
-        'is_zip': False,
+        'url':
+            'https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple.csv',
+        'pattern':
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes_late_simple\.csv',
+        'is_zip':
+            False,
     },
     'county_by_cohort_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_3_County_by_Cohort_Estimates\.csv|county_cohort\.zip)',
-        'is_zip': False,
+        'url':
+            'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv',
+        'pattern':
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_3_County_by_Cohort_Estimates\.csv|county_cohort\.zip)',
+        'is_zip':
+            False,
     },
     'cz_by_cohort_outcomes.csv': {
-        'url': 'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_4_cz_by_cohort_estimates.csv',
-        'pattern': r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_4_cz_by_cohort_estimates\.csv|cz_cohort\.zip)',
-        'is_zip': False,
+        'url':
+            'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_4_cz_by_cohort_estimates.csv',
+        'pattern':
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_4_cz_by_cohort_estimates\.csv|cz_cohort\.zip)',
+        'is_zip':
+            False,
     },
 }
 
@@ -107,11 +123,12 @@ def discover_latest_urls(page_url: str) -> dict[str, str]:
                 matches = re.findall(spec['pattern'], str(html))
                 if matches:
                     discovered[filename] = matches[0]
-                    logging.info('Discovered URL for %s: %s', filename, matches[0])
+                    logging.info('Discovered URL for %s: %s', filename,
+                                 matches[0])
     except Exception as exc:  # pylint: disable=broad-except
         logging.warning(
-            'Could not scrape %s (%s); using canonical fallback URLs.', page_url, exc
-        )
+            'Could not scrape %s (%s); using canonical fallback URLs.',
+            page_url, exc)
     return discovered
 
 
@@ -192,26 +209,23 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
             return
         if os.path.exists(zip_path):
             os.remove(zip_path)
-        logging.fatal('Downloaded file is not a valid ZIP archive: %s', zip_path)
+        logging.fatal('Downloaded file is not a valid ZIP archive: %s',
+                      zip_path)
         return
 
     try:
         with zipfile.ZipFile(zip_path, 'r') as zf:
             csv_members = [
-                m
-                for m in zf.namelist()
-                if m.lower().endswith('.csv')
-                and '__MACOSX' not in m
-                and not os.path.basename(m).startswith('._')
-                and not m.endswith('/')
+                m for m in zf.namelist()
+                if m.lower().endswith('.csv') and '__MACOSX' not in m and
+                not os.path.basename(m).startswith('._') and not m.endswith('/')
             ]
             if not csv_members:
                 logging.fatal('No CSV file found inside archive: %s', zip_path)
                 return
             target_name = os.path.basename(target_csv_path).lower()
             matching = [
-                m
-                for m in csv_members
+                m for m in csv_members
                 if os.path.basename(m).lower() == target_name
             ]
             member = matching[0] if matching else csv_members[0]
@@ -222,9 +236,8 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
                     csv_members,
                     member,
                 )
-            logging.info(
-                'Extracting %s from %s -> %s', member, zip_path, target_csv_path
-            )
+            logging.info('Extracting %s from %s -> %s', member, zip_path,
+                         target_csv_path)
             with zf.open(member) as src, open(tmp_csv_path, 'wb') as dst:
                 shutil.copyfileobj(src, dst)
         os.replace(tmp_csv_path, target_csv_path)

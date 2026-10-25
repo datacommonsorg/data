@@ -52,8 +52,7 @@ flags.DEFINE_integer(
 )
 
 DEFAULT_EXISTING_STATVAR_MCF = (
-    'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf'
-)
+    'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf')
 
 flags.DEFINE_string(
     'existing_statvar_mcf',
@@ -136,9 +135,8 @@ def _is_valid_number(val: str) -> bool:
         return False
 
 
-def str_from_number(
-    number: int | float | str, precision_digits: int | None = 5
-) -> str:
+def str_from_number(number: int | float | str,
+                    precision_digits: int | None = 5) -> str:
     """Converts a number or numeric string to its formatted string representation matching stat_var_processor.py."""
     num = float(number) if isinstance(number, str) else number
     if int(num) == num:
@@ -181,16 +179,15 @@ def format_geo_id(row: dict, geo_level: str) -> str:
     raise ValueError(f'Unsupported geo_level: {geo_level}')
 
 
-def normalize_column_header(
-    col: str, dataset_mode: str = 'baseline_1978_1983', cohort_token: str = ''
-) -> str:
+def normalize_column_header(col: str,
+                            dataset_mode: str = 'baseline_1978_1983',
+                            cohort_token: str = '') -> str:
     """Normalizes column tokens into single-word PVMAP tokens, strips 'pooled', and appends cohort token."""
     race_pat = 'pooled|aian|asian|black|hisp|natam|white|other'
     gender_pat = 'pooled|male|female'
 
     kid_n_match = re.fullmatch(
-        f'(?:kid_)?(({race_pat})_({gender_pat}))_(?:n|count)', col
-    )
+        f'(?:kid_)?(({race_pat})_({gender_pat}))_(?:n|count)', col)
     if kid_n_match:
         base_col = f'kidn_{kid_n_match.group(1)}'
         if dataset_mode == 'late_cohort_1984_1989':
@@ -200,8 +197,7 @@ def normalize_column_header(
         return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
     blw_p50_match = re.fullmatch(
-        f'(?:kid_)?(({race_pat})_({gender_pat}))_blw_p50_(?:n|count)', col
-    )
+        f'(?:kid_)?(({race_pat})_({gender_pat}))_blw_p50_(?:n|count)', col)
     if blw_p50_match:
         base_col = f'kidblwp50_{blw_p50_match.group(1)}'
         normalized = f'{base_col}_{cohort_token}' if cohort_token else base_col
@@ -218,9 +214,8 @@ def normalize_column_header(
         normalized = col
 
     for old_tok, new_tok in _MULTI_WORD_TOKEN_REWRITES:
-        normalized = re.sub(
-            r'(^|_)' + old_tok + r'(?=_|$)', r'\1' + new_tok, normalized
-        )
+        normalized = re.sub(r'(^|_)' + old_tok + r'(?=_|$)', r'\1' + new_tok,
+                            normalized)
     return '_'.join(t for t in normalized.split('_') if t != 'pooled')
 
 
@@ -229,8 +224,7 @@ _COHORT_TOKEN_RE = re.compile(r'(?:^|_)c(\d+)$')
 
 
 def _mapped_cohort_years(
-    header_to_sv: dict[str, tuple[str, str, str, str]],
-) -> list[str]:
+    header_to_sv: dict[str, tuple[str, str, str, str]],) -> list[str]:
     """Returns sorted birth cohort year strings present in resolved header_to_sv keys."""
     years = set()
     for h in header_to_sv:
@@ -254,8 +248,7 @@ def _write_tmcf(sv_output_prefix: str) -> str:
             f'variableMeasured: C:{table_name}->variableMeasured\n'
             f'value: C:{table_name}->value\n'
             f'unit: C:{table_name}->unit\n'
-            'typeOf: dcs:StatVarObservation\n'
-        )
+            'typeOf: dcs:StatVarObservation\n')
     return tmcf_path
 
 
@@ -268,9 +261,8 @@ def _resolve_headers_via_svp(
 ) -> dict[str, tuple[str, str, str, str]]:
     """Resolves all unique column headers via stat_var_processor.py in a temp directory."""
     repo_root = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
-    svp_script = os.path.join(
-        repo_root, 'tools/statvar_importer/stat_var_processor.py'
-    )
+    svp_script = os.path.join(repo_root,
+                              'tools/statvar_importer/stat_var_processor.py')
     pvmap_path = os.path.join(_MODULE_DIR, 'pvmap.csv')
     config_path = os.path.join(_MODULE_DIR, 'metadata.csv')
 
@@ -288,8 +280,7 @@ def _resolve_headers_via_svp(
         input_path = os.path.join(raw_dir, filename)
         if not os.path.exists(input_path):
             raise FileNotFoundError(
-                f'Required input file not found for {filename}: {input_path}'
-            )
+                f'Required input file not found for {filename}: {input_path}')
         with open(input_path, mode='r', encoding='utf-8') as f:
             reader = csv.reader(f)
             raw_headers = next(reader)
@@ -315,21 +306,16 @@ def _resolve_headers_via_svp(
     with tempfile.TemporaryDirectory() as tmpdir:
         seed_files = []
         for chunk_idx, start in enumerate(
-            range(0, len(unique_headers), max_cols_per_seed)
-        ):
-            chunk_headers = unique_headers[start : start + max_cols_per_seed]
+                range(0, len(unique_headers), max_cols_per_seed)):
+            chunk_headers = unique_headers[start:start + max_cols_per_seed]
             seed_path = os.path.join(
-                tmpdir, f'schema_seed_part_{chunk_idx:03d}_cleaned.csv'
-            )
-            with open(
-                seed_path, mode='w', encoding='utf-8', newline=''
-            ) as s_file:
+                tmpdir, f'schema_seed_part_{chunk_idx:03d}_cleaned.csv')
+            with open(seed_path, mode='w', encoding='utf-8',
+                      newline='') as s_file:
                 w = csv.writer(s_file)
                 w.writerow(['geo_id'] + chunk_headers)
-                w.writerow(
-                    [f'geoId/seed{chunk_idx:03d}']
-                    + [str(i + 1) for i in range(len(chunk_headers))]
-                )
+                w.writerow([f'geoId/seed{chunk_idx:03d}'] +
+                           [str(i + 1) for i in range(len(chunk_headers))])
             seed_files.append(seed_path)
 
         out_prefix = os.path.join(tmpdir, 'sv_seed')
@@ -365,11 +351,11 @@ def _resolve_headers_via_svp(
                     if v in ('', '0', '0.0'):
                         continue
                     if k.startswith((
-                        '1:process_input_error-',
-                        '1:process_input_dropped-',
-                        'dropped_',
-                        'error_',
-                        'unmapped_',
+                            '1:process_input_error-',
+                            '1:process_input_dropped-',
+                            'dropped_',
+                            'error_',
+                            'unmapped_',
                     )) or 'unmapped' in k:
                         bad_counters[k] = v
 
@@ -381,8 +367,7 @@ def _resolve_headers_via_svp(
                 seed_place = row['observationAbout'].split('geoId/seed')[-1]
                 chunk_idx = int(seed_place)
                 col_id = chunk_idx * max_cols_per_seed + int(
-                    round(float(row['value']))
-                )
+                    round(float(row['value'])))
                 if not (1 <= col_id <= len(unique_headers)):
                     raise RuntimeError(
                         f'Out-of-bounds col_id {col_id} (expected 1..{len(unique_headers)}) from seed row: {row}'
@@ -399,11 +384,8 @@ def _resolve_headers_via_svp(
                     row.get('unit', ''),
                 )
 
-        unmapped_cohorts = (
-            sorted(discovered_cohort_tokens - pvmap_keys)
-            if pvmap_keys
-            else []
-        )
+        unmapped_cohorts = (sorted(discovered_cohort_tokens -
+                                   pvmap_keys) if pvmap_keys else [])
         if unmapped_cohorts:
             bad_counters['unmapped_cohort_tokens'] = ','.join(unmapped_cohorts)
             unmapped_suffixes = tuple(f'_{c}' for c in unmapped_cohorts)
@@ -432,9 +414,8 @@ def _resolve_headers_via_svp(
                 if os.path.exists(src_mcf):
                     shutil.copyfile(src_mcf, f'{sv_output_prefix}{suffix}')
         if counters_path and os.path.exists(counters_seed):
-            os.makedirs(
-                os.path.dirname(os.path.abspath(counters_path)), exist_ok=True
-            )
+            os.makedirs(os.path.dirname(os.path.abspath(counters_path)),
+                        exist_ok=True)
             shutil.copyfile(counters_seed, counters_path)
 
     logging.info(
@@ -460,7 +441,8 @@ def _extract_row_cell(row: list[str], pos: int | None) -> str:
 
 def _parse_cohort(row: list[str], col_indices: dict[str, int]) -> str:
     """Safely extracts and validates the annual cohort year string from a CSV row."""
-    return _to_positive_int_str(_extract_row_cell(row, col_indices.get('cohort')))
+    return _to_positive_int_str(
+        _extract_row_cell(row, col_indices.get('cohort')))
 
 
 def _validate_required_columns(
@@ -478,9 +460,8 @@ def _validate_required_columns(
         raise ValueError(f'Missing required columns {missing} in {input_path}')
 
 
-def _format_geo_from_row_list(
-    row: list[str], col_indices: dict[str, int], geo_level: str
-) -> str:
+def _format_geo_from_row_list(row: list[str], col_indices: dict[str, int],
+                              geo_level: str) -> str:
     """Formats geoId/<FIPS> or geoId/cz<ID> directly from a csv.reader row list."""
     if geo_level == 'county':
         return format_geo_id(
@@ -519,17 +500,18 @@ def _expand_chunk_worker(args: tuple) -> int:
     ) = args
 
     obs_written = 0
-    with open(input_path, mode='r', encoding='utf-8') as infile, open(
-        out_csv_path, mode='w', encoding='utf-8', newline=''
-    ) as outfile:
+    with open(input_path, mode='r',
+              encoding='utf-8') as infile, open(out_csv_path,
+                                                mode='w',
+                                                encoding='utf-8',
+                                                newline='') as outfile:
         raw_headers = next(csv.reader([infile.readline()]), [])
         col_indices = {h: i for i, h in enumerate(raw_headers)}
-        _validate_required_columns(col_indices, geo_level, dataset_mode, input_path)
-        data_col_positions = [
-            (i, h)
-            for i, h in enumerate(raw_headers)
-            if h not in _NON_DATA_COLUMNS
-        ]
+        _validate_required_columns(col_indices, geo_level, dataset_mode,
+                                   input_path)
+        data_col_positions = [(i, h)
+                              for i, h in enumerate(raw_headers)
+                              if h not in _NON_DATA_COLUMNS]
 
         writer = csv.writer(outfile)
         writer.writerow([
@@ -548,8 +530,7 @@ def _expand_chunk_worker(args: tuple) -> int:
                 sv_meta = header_to_sv.get(norm_h)
                 if sv_meta:
                     col_specs.append(
-                        (pos, sv_meta[0], sv_meta[1], sv_meta[2], sv_meta[3])
-                    )
+                        (pos, sv_meta[0], sv_meta[1], sv_meta[2], sv_meta[3]))
         else:
             cohort_col_specs = {}
             for y in _mapped_cohort_years(header_to_sv):
@@ -559,9 +540,8 @@ def _expand_chunk_worker(args: tuple) -> int:
                     norm_h = normalize_column_header(h, dataset_mode, ctok)
                     sv_meta = header_to_sv.get(norm_h)
                     if sv_meta:
-                        specs.append(
-                            (pos, sv_meta[0], sv_meta[1], sv_meta[2], sv_meta[3])
-                        )
+                        specs.append((pos, sv_meta[0], sv_meta[1], sv_meta[2],
+                                      sv_meta[3]))
                 cohort_col_specs[y] = specs
 
         if start_offset > 0:
@@ -586,8 +566,7 @@ def _expand_chunk_worker(args: tuple) -> int:
                     continue
                 if cohort_str not in cohort_col_specs:
                     raise ValueError(
-                        f'Unmapped birth cohort {cohort_str} in {input_path}'
-                    )
+                        f'Unmapped birth cohort {cohort_str} in {input_path}')
                 active_specs = cohort_col_specs[cohort_str]
             else:
                 active_specs = col_specs
@@ -653,9 +632,8 @@ def prepare_parallel_shards_and_svp_inputs(
         with open(input_path, mode='r', encoding='utf-8') as infile:
             raw_headers = next(csv.reader([infile.readline()]), [])
             col_indices = {h: i for i, h in enumerate(raw_headers)}
-            _validate_required_columns(
-                col_indices, geo_level, dataset_mode, input_path
-            )
+            _validate_required_columns(col_indices, geo_level, dataset_mode,
+                                       input_path)
             row_idx = 0
             while True:
                 if row_idx % chunk_size == 0:
@@ -690,7 +668,8 @@ def prepare_parallel_shards_and_svp_inputs(
             len(tasks),
             num_workers,
         )
-        with concurrent.futures.ProcessPoolExecutor(max_workers=num_workers) as ex:
+        with concurrent.futures.ProcessPoolExecutor(
+                max_workers=num_workers) as ex:
             for count in ex.map(_expand_chunk_worker, tasks):
                 total_obs += count
 
@@ -706,9 +685,8 @@ def prepare_parallel_shards_and_svp_inputs(
 def main(_):
     os.makedirs(os.path.dirname(FLAGS.sv_output_prefix), exist_ok=True)
     if FLAGS.counters_file:
-        os.makedirs(
-            os.path.dirname(os.path.abspath(FLAGS.counters_file)), exist_ok=True
-        )
+        os.makedirs(os.path.dirname(os.path.abspath(FLAGS.counters_file)),
+                    exist_ok=True)
     try:
         prepare_parallel_shards_and_svp_inputs(
             FLAGS.input_dir,

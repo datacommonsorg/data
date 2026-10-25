@@ -32,40 +32,32 @@ from scripts.opportunity_insights_outcomes import preprocess
 
 
 def _load_expected_header_to_sv(
-    raw_dir: str, expected_output_dir: str
-) -> dict[str, tuple[str, str, str, str]]:
+        raw_dir: str,
+        expected_output_dir: str) -> dict[str, tuple[str, str, str, str]]:
     """Reconstructs header_to_sv from committed test_data without running stat_var_processor.py."""
     header_to_sv = {}
-    for part_idx, (filename, _, dataset_mode) in enumerate(
-        preprocess.DATASET_CONFIGS, start=1
-    ):
+    for part_idx, (filename, _,
+                   dataset_mode) in enumerate(preprocess.DATASET_CONFIGS,
+                                              start=1):
         ordered_headers = []
         with open(os.path.join(raw_dir, filename), 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
             raw_headers = next(reader)
             col_indices = {h: i for i, h in enumerate(raw_headers)}
-            data_col_positions = [
-                (i, h)
-                for i, h in enumerate(raw_headers)
-                if h not in preprocess._NON_DATA_COLUMNS
-            ]
+            data_col_positions = [(i, h)
+                                  for i, h in enumerate(raw_headers)
+                                  if h not in preprocess._NON_DATA_COLUMNS]
             for row in reader:
-                ctok = (
-                    f'c{preprocess._parse_cohort(row, col_indices)}'
-                    if dataset_mode == 'annual_cohort_1978_1992'
-                    else ''
-                )
+                ctok = (f'c{preprocess._parse_cohort(row, col_indices)}'
+                        if dataset_mode == 'annual_cohort_1978_1992' else '')
                 for pos, h in data_col_positions:
                     val = preprocess._extract_row_cell(row, pos)
                     if preprocess._is_valid_number(val):
                         ordered_headers.append(
                             preprocess.normalize_column_header(
-                                h, dataset_mode, ctok
-                            )
-                        )
-        part_csv = os.path.join(
-            expected_output_dir, f'output_part_{part_idx:04d}.csv'
-        )
+                                h, dataset_mode, ctok))
+        part_csv = os.path.join(expected_output_dir,
+                                f'output_part_{part_idx:04d}.csv')
         with open(part_csv, 'r', encoding='utf-8') as f:
             for norm_h, row in zip(ordered_headers, csv.DictReader(f)):
                 header_to_sv[norm_h] = (
@@ -89,37 +81,53 @@ class DownloadAndPvmapTest(unittest.TestCase):
             'geoId/cz00100',
         )
         self.assertEqual(
-            preprocess.format_geo_id({'state': '6', 'county': '85'}, 'county'),
+            preprocess.format_geo_id({
+                'state': '6',
+                'county': '85'
+            }, 'county'),
             'geoId/06085',
         )
         self.assertEqual(
-            preprocess.format_geo_id({'state': '6.0', 'county': '85.0'}, 'county'),
+            preprocess.format_geo_id({
+                'state': '6.0',
+                'county': '85.0'
+            }, 'county'),
             'geoId/06085',
         )
         self.assertEqual(
             preprocess.format_geo_id(
-                {'state': '6', 'county': '85', 'tract': '500100'}, 'tract'
-            ),
+                {
+                    'state': '6',
+                    'county': '85',
+                    'tract': '500100'
+                }, 'tract'),
             'geoId/06085500100',
         )
         self.assertEqual(
             preprocess.format_geo_id(
-                {'state': '6.0', 'county': '85.0', 'tract': '500100.0'}, 'tract'
-            ),
+                {
+                    'state': '6.0',
+                    'county': '85.0',
+                    'tract': '500100.0'
+                }, 'tract'),
             'geoId/06085500100',
         )
         for bad_cz in ('', '0', '-1', 'NA'):
             self.assertEqual(
-                preprocess.format_geo_id({'cz': bad_cz}, 'commuting_zone'), ''
-            )
+                preprocess.format_geo_id({'cz': bad_cz}, 'commuting_zone'), '')
         self.assertEqual(
-            preprocess.format_geo_id({'state': '0', 'county': '85'}, 'county'),
+            preprocess.format_geo_id({
+                'state': '0',
+                'county': '85'
+            }, 'county'),
             '',
         )
         self.assertEqual(
-            preprocess.format_geo_id(
-                {'state': '6', 'county': '85', 'tract': ''}, 'tract'
-            ),
+            preprocess.format_geo_id({
+                'state': '6',
+                'county': '85',
+                'tract': ''
+            }, 'tract'),
             '',
         )
 
@@ -128,10 +136,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
             dest_path = os.path.join(tmpdir, 'sample.csv')
             fake_response = mock.MagicMock()
             fake_response.__enter__.return_value = fake_response
-            fake_response.iter_content.return_value = [b'cz,val\n', b'100,0.5\n']
+            fake_response.iter_content.return_value = [
+                b'cz,val\n', b'100,0.5\n'
+            ]
             with mock.patch(
-                'util.download_util_script._retry_method',
-                return_value=fake_response,
+                    'util.download_util_script._retry_method',
+                    return_value=fake_response,
             ) as mock_req:
                 download.download_file(
                     'https://example.com/sample.csv',
@@ -163,8 +173,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
             broken_response.iter_content.side_effect = broken_stream
             retry_dest = os.path.join(tmpdir, 'retry.csv')
             with mock.patch(
-                'util.download_util_script._retry_method',
-                side_effect=[broken_response, fake_response],
+                    'util.download_util_script._retry_method',
+                    side_effect=[broken_response, fake_response],
             ) as mock_retry_req:
                 download.download_file(
                     'https://example.com/retry.csv',
@@ -176,9 +186,9 @@ class DownloadAndPvmapTest(unittest.TestCase):
             with open(retry_dest, 'r', encoding='utf-8') as f:
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
-            with mock.patch(
-                'util.download_util_script._retry_method', return_value=None
-            ), mock.patch.object(download.logging, 'fatal') as mock_fatal:
+            with mock.patch('util.download_util_script._retry_method',
+                            return_value=None), mock.patch.object(
+                                download.logging, 'fatal') as mock_fatal:
                 download.download_file(
                     'https://example.com/fail.csv',
                     os.path.join(tmpdir, 'fail.csv'),
@@ -193,9 +203,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
             out_dir = os.path.join(tmpdir, 'output')
             os.makedirs(raw_dir, exist_ok=True)
             for filename, _, mode in preprocess.DATASET_CONFIGS:
-                with open(
-                    os.path.join(raw_dir, filename), 'w', encoding='utf-8', newline=''
-                ) as f:
+                with open(os.path.join(raw_dir, filename),
+                          'w',
+                          encoding='utf-8',
+                          newline='') as f:
                     w = csv.writer(f)
                     if filename == 'commuting_zone_outcomes.csv':
                         w.writerow([
@@ -209,22 +220,28 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         w.writerow(['101', '', 'n/a'])
                         w.writerow(['102', '0.25', '0.50'])
                     elif mode == 'annual_cohort_1978_1992':
-                        w.writerow(['state', 'county', 'cz', 'cohort', 'kir_natam_female_mean'])
+                        w.writerow([
+                            'state', 'county', 'cz', 'cohort',
+                            'kir_natam_female_mean'
+                        ])
                         w.writerow(['6', '85', '100', 'NA', '0.5'])
                         w.writerow(['6', '85', '100', '.', '0.5'])
                         w.writerow(['6', '85', '100', 'Inf', '0.5'])
                         w.writerow(['6', '85', '100', '1978.5', '0.5'])
                         w.writerow(['6', '85', '100'])  # truncated row
                     else:
-                        w.writerow(['state', 'county', 'tract', 'cz', 'kir_natam_female_mean'])
+                        w.writerow([
+                            'state', 'county', 'tract', 'cz',
+                            'kir_natam_female_mean'
+                        ])
 
             with mock.patch.object(
-                preprocess,
-                '_resolve_headers_via_svp',
-                return_value={
-                    'kir_natam_female_p1': ('2014', 'P2Y', 'dc/p1', ''),
-                    'kir_natam_female_mean': ('2014', 'P2Y', 'dc/mean', ''),
-                },
+                    preprocess,
+                    '_resolve_headers_via_svp',
+                    return_value={
+                        'kir_natam_female_p1': ('2014', 'P2Y', 'dc/p1', ''),
+                        'kir_natam_female_mean': ('2014', 'P2Y', 'dc/mean', ''),
+                    },
             ):
                 obs_count = preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
@@ -234,14 +251,15 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     existing_statvar_mcf='',
                 )
             self.assertEqual(obs_count, 3)
-            self.assertTrue(os.path.exists(os.path.join(out_dir, 'output.tmcf')))
+            self.assertTrue(os.path.exists(os.path.join(out_dir,
+                                                        'output.tmcf')))
 
             rows = []
             for fname in sorted(os.listdir(out_dir)):
                 if fname.startswith('output_part_') and fname.endswith('.csv'):
-                    with open(
-                        os.path.join(out_dir, fname), 'r', encoding='utf-8'
-                    ) as f:
+                    with open(os.path.join(out_dir, fname),
+                              'r',
+                              encoding='utf-8') as f:
                         rows.extend(list(csv.DictReader(f)))
 
             self.assertEqual(len(rows), 3)
@@ -255,9 +273,9 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(rows[2]['variableMeasured'], 'dc/mean')
             self.assertEqual(rows[2]['value'], '0.5')
             with self.assertRaises(ValueError):
-                preprocess._validate_required_columns(
-                    {'state': 0}, 'county', 'annual_cohort_1978_1992', 'bad.csv'
-                )
+                preprocess._validate_required_columns({'state': 0}, 'county',
+                                                      'annual_cohort_1978_1992',
+                                                      'bad.csv')
 
     def test_main_raises_on_missing_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -283,7 +301,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
             target_csv = os.path.join(tmpdir, 'extracted.csv')
             with zipfile.ZipFile(zip_path, 'w') as zf:
                 zf.writestr('._extracted.csv', 'appledouble,metadata\n')
-                zf.writestr('folder/__MACOSX/._data.csv', 'corrupted,metadata\n')
+                zf.writestr('folder/__MACOSX/._data.csv',
+                            'corrupted,metadata\n')
                 zf.writestr('folder/readme.csv', 'wrong,file\n')
                 zf.writestr('folder/extracted.csv', 'cz,val\n100,0.5\n')
 
@@ -294,7 +313,9 @@ class DownloadAndPvmapTest(unittest.TestCase):
             raw_csv_zip = os.path.join(tmpdir, 'tract_outcomes.csv.zip')
             raw_csv_target = os.path.join(tmpdir, 'tract_outcomes.csv')
             with open(raw_csv_zip, 'w', encoding='utf-8') as f:
-                f.write('state,county,tract,cz,czname,val\n6,85,500100,100,San Jose,0.5\n')
+                f.write(
+                    'state,county,tract,cz,czname,val\n6,85,500100,100,San Jose,0.5\n'
+                )
             download.extract_csv_from_zip(raw_csv_zip, raw_csv_target)
             self.assertFalse(os.path.exists(raw_csv_zip))
             with open(raw_csv_target, 'r', encoding='utf-8') as f:
@@ -316,9 +337,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
         raw_dir = os.path.join(test_data_dir, 'raw_data')
         expected_output_dir = os.path.join(test_data_dir, 'output')
-        fake_header_to_sv = _load_expected_header_to_sv(
-            raw_dir, expected_output_dir
-        )
+        fake_header_to_sv = _load_expected_header_to_sv(raw_dir,
+                                                        expected_output_dir)
 
         with tempfile.TemporaryDirectory() as tmpdir:
             out_dir = os.path.join(tmpdir, 'output')
@@ -326,9 +346,9 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
             sv_out_prefix = os.path.join(out_dir, 'output')
             with mock.patch.object(
-                preprocess,
-                '_resolve_headers_via_svp',
-                return_value=fake_header_to_sv,
+                    preprocess,
+                    '_resolve_headers_via_svp',
+                    return_value=fake_header_to_sv,
             ):
                 preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
@@ -338,41 +358,35 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     existing_statvar_mcf='',
                 )
 
-            with open(
-                os.path.join(out_dir, 'output.tmcf'), 'r', encoding='utf-8'
-            ) as f_actual_tmcf, open(
-                os.path.join(expected_output_dir, 'output.tmcf'),
-                'r',
-                encoding='utf-8',
-            ) as f_expected_tmcf:
+            with open(os.path.join(out_dir, 'output.tmcf'),
+                      'r',
+                      encoding='utf-8') as f_actual_tmcf, open(
+                          os.path.join(expected_output_dir, 'output.tmcf'),
+                          'r',
+                          encoding='utf-8',
+                      ) as f_expected_tmcf:
                 self.assertEqual(f_actual_tmcf.read(), f_expected_tmcf.read())
 
             actual_parts = sorted(
-                f
-                for f in os.listdir(out_dir)
-                if f.startswith('output_part_') and f.endswith('.csv')
-            )
+                f for f in os.listdir(out_dir)
+                if f.startswith('output_part_') and f.endswith('.csv'))
             expected_parts = sorted(
-                f
-                for f in os.listdir(expected_output_dir)
-                if f.startswith('output_part_') and f.endswith('.csv')
-            )
+                f for f in os.listdir(expected_output_dir)
+                if f.startswith('output_part_') and f.endswith('.csv'))
             self.assertEqual(actual_parts, expected_parts)
             for fname in expected_parts:
-                with open(
-                    os.path.join(out_dir, fname), 'r', encoding='utf-8'
-                ) as f_actual, open(
-                    os.path.join(expected_output_dir, fname),
-                    'r',
-                    encoding='utf-8',
-                ) as f_expected:
+                with open(os.path.join(out_dir, fname), 'r',
+                          encoding='utf-8') as f_actual, open(
+                              os.path.join(expected_output_dir, fname),
+                              'r',
+                              encoding='utf-8',
+                          ) as f_expected:
                     self.assertEqual(f_actual.read(), f_expected.read())
 
             sv_rows = []
             for fname in actual_parts:
-                with open(
-                    os.path.join(out_dir, fname), 'r', encoding='utf-8'
-                ) as f:
+                with open(os.path.join(out_dir, fname), 'r',
+                          encoding='utf-8') as f:
                     sv_rows.extend(list(csv.DictReader(f)))
             self.assertEqual(len(sv_rows), 300)
             for row in sv_rows:
@@ -384,14 +398,22 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_is_valid_number(self):
         self.assertTrue(preprocess._is_valid_number('0.35973939'))
         self.assertTrue(preprocess._is_valid_number('-12.5'))
-        for invalid in ('', 'NA', 'N/A', '.', 'nan', 'null', '-', 's', 'Inf', '-Inf'):
+        for invalid in ('', 'NA', 'N/A', '.', 'nan', 'null', '-', 's', 'Inf',
+                        '-Inf'):
             self.assertFalse(preprocess._is_valid_number(invalid))
 
     def test_str_from_number(self):
-        self.assertEqual(preprocess.str_from_number('.14216326', precision_digits=5), '0.14216')
-        self.assertEqual(preprocess.str_from_number('-.021205151', precision_digits=5), '-0.02121')
-        self.assertEqual(preprocess.str_from_number('1644.0', precision_digits=5), '1644')
-        self.assertEqual(preprocess.str_from_number(29301.76, precision_digits=5), '29301.76')
+        self.assertEqual(
+            preprocess.str_from_number('.14216326', precision_digits=5),
+            '0.14216')
+        self.assertEqual(
+            preprocess.str_from_number('-.021205151', precision_digits=5),
+            '-0.02121')
+        self.assertEqual(
+            preprocess.str_from_number('1644.0', precision_digits=5), '1644')
+        self.assertEqual(
+            preprocess.str_from_number(29301.76, precision_digits=5),
+            '29301.76')
 
     def test_discover_latest_urls_matches_cohort_zips(self):
         sample_html = (
@@ -402,12 +424,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
         fake_response.__enter__.return_value = fake_response
         fake_response.text = sample_html
         with mock.patch(
-            'util.download_util_script._retry_method',
-            return_value=fake_response,
+                'util.download_util_script._retry_method',
+                return_value=fake_response,
         ), mock.patch.object(
-            download.requests_cache,
-            'disabled',
-            wraps=download.requests_cache.disabled,
+                download.requests_cache,
+                'disabled',
+                wraps=download.requests_cache.disabled,
         ) as mock_disabled:
             urls = download.discover_latest_urls('https://example.com/data/')
             mock_disabled.assert_called_once()
@@ -436,13 +458,17 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         f.write(b'cz,val\n100,0.5\n')
 
             with mock.patch.object(
-                download,
-                'discover_latest_urls',
-                return_value={k: v['url'] for k, v in download.DEFAULT_SOURCE_FILES.items()},
-            ), mock.patch.object(
-                download, 'download_file', side_effect=fake_download
-            ) as mock_dl:
-                files = download.download_all_sources(tmpdir, force_download=False)
+                    download,
+                    'discover_latest_urls',
+                    return_value={
+                        k: v['url']
+                        for k, v in download.DEFAULT_SOURCE_FILES.items()
+                    },
+            ), mock.patch.object(download,
+                                 'download_file',
+                                 side_effect=fake_download) as mock_dl:
+                files = download.download_all_sources(tmpdir,
+                                                      force_download=False)
                 self.assertEqual(len(files), 6)
                 self.assertEqual(mock_dl.call_count, 6)
 
@@ -455,21 +481,39 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_resolve_headers_via_svp_logs_missing_headers_and_counters(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             for filename, _, mode in preprocess.DATASET_CONFIGS:
-                with open(
-                    os.path.join(tmpdir, filename), 'w', encoding='utf-8', newline=''
-                ) as f:
+                with open(os.path.join(tmpdir, filename),
+                          'w',
+                          encoding='utf-8',
+                          newline='') as f:
                     w = csv.writer(f)
                     if mode == 'annual_cohort_1978_1992':
-                        w.writerow(['state', 'county', 'cz', 'cohort', 'kfr_pooled_pooled_p25'])
+                        w.writerow([
+                            'state', 'county', 'cz', 'cohort',
+                            'kfr_pooled_pooled_p25'
+                        ])
                     else:
-                        w.writerow(['state', 'county', 'tract', 'cz', 'kfr_pooled_pooled_p25'])
+                        w.writerow([
+                            'state', 'county', 'tract', 'cz',
+                            'kfr_pooled_pooled_p25'
+                        ])
 
             def fake_run_success(cmd, **kwargs):
                 del kwargs
                 self.assertEqual(cmd[0], sys.executable)
-                out_prefix = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_path=')][0]
-                counters_path = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_counters=')][0]
-                with open(f'{out_prefix}.csv', 'w', encoding='utf-8', newline='') as f:
+                out_prefix = [
+                    a.split('=', 1)[1]
+                    for a in cmd
+                    if a.startswith('--output_path=')
+                ][0]
+                counters_path = [
+                    a.split('=', 1)[1]
+                    for a in cmd
+                    if a.startswith('--output_counters=')
+                ][0]
+                with open(f'{out_prefix}.csv',
+                          'w',
+                          encoding='utf-8',
+                          newline='') as f:
                     w = csv.writer(f)
                     w.writerow([
                         'observationAbout',
@@ -480,20 +524,29 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         'unit',
                     ])
                     for idx in range(1, 18):
-                        w.writerow(['geoId/seed000', '2014', 'P2Y', f'dc/sv{idx}', str(idx), ''])
-                with open(f'{out_prefix}_stat_vars.mcf', 'w', encoding='utf-8') as f:
+                        w.writerow([
+                            'geoId/seed000', '2014', 'P2Y', f'dc/sv{idx}',
+                            str(idx), ''
+                        ])
+                with open(f'{out_prefix}_stat_vars.mcf', 'w',
+                          encoding='utf-8') as f:
                     f.write('Node: dcid:dc/sv1\n')
-                with open(f'{out_prefix}_stat_vars_schema.mcf', 'w', encoding='utf-8') as f:
+                with open(f'{out_prefix}_stat_vars_schema.mcf',
+                          'w',
+                          encoding='utf-8') as f:
                     f.write('Node: dcid:NewStatVar\n')
-                with open(counters_path, 'w', encoding='utf-8', newline='') as f:
+                with open(counters_path, 'w', encoding='utf-8',
+                          newline='') as f:
                     w = csv.writer(f)
                     w.writerow(['key', 'value'])
                     w.writerow(['dropped-output-statvars-mcf', '5400'])
-                    w.writerow(['1:process_input_error-svobs-missing-property', '0'])
+                    w.writerow(
+                        ['1:process_input_error-svobs-missing-property', '0'])
                 return mock.Mock(returncode=0, stderr='')
 
             dest_prefix = os.path.join(tmpdir, 'dest_out', 'output')
-            dest_counters = os.path.join(tmpdir, 'dest_counters', 'output_counters.csv')
+            dest_counters = os.path.join(tmpdir, 'dest_counters',
+                                         'output_counters.csv')
             with mock.patch('subprocess.run', side_effect=fake_run_success):
                 resolved = preprocess._resolve_headers_via_svp(
                     tmpdir,
@@ -504,10 +557,12 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(len(resolved), 17)
             self.assertEqual(resolved['kfr_p25'], ('2014', 'P2Y', 'dc/sv1', ''))
             self.assertTrue(os.path.exists(f'{dest_prefix}_stat_vars.mcf'))
-            self.assertTrue(os.path.exists(f'{dest_prefix}_stat_vars_schema.mcf'))
+            self.assertTrue(
+                os.path.exists(f'{dest_prefix}_stat_vars_schema.mcf'))
             self.assertTrue(os.path.exists(dest_counters))
 
             def make_single_row_runner(val_str):
+
                 def _runner(cmd, **kwargs):
                     del kwargs
                     out_prefix = [
@@ -515,9 +570,10 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         for a in cmd
                         if a.startswith('--output_path=')
                     ][0]
-                    with open(
-                        f'{out_prefix}.csv', 'w', encoding='utf-8', newline=''
-                    ) as f:
+                    with open(f'{out_prefix}.csv',
+                              'w',
+                              encoding='utf-8',
+                              newline='') as f:
                         w = csv.writer(f)
                         w.writerow([
                             'observationAbout',
@@ -547,31 +603,37 @@ class DownloadAndPvmapTest(unittest.TestCase):
 
                 return _runner
 
-            with mock.patch(
-                'subprocess.run', side_effect=make_single_row_runner('999')
-            ):
-                with self.assertRaisesRegex(
-                    RuntimeError, r'Out-of-bounds col_id 999'
-                ):
-                    preprocess._resolve_headers_via_svp(
-                        tmpdir, existing_statvar_mcf=''
-                    )
+            with mock.patch('subprocess.run',
+                            side_effect=make_single_row_runner('999')):
+                with self.assertRaisesRegex(RuntimeError,
+                                            r'Out-of-bounds col_id 999'):
+                    preprocess._resolve_headers_via_svp(tmpdir,
+                                                        existing_statvar_mcf='')
 
-            with mock.patch(
-                'subprocess.run', side_effect=make_single_row_runner('1')
-            ):
+            with mock.patch('subprocess.run',
+                            side_effect=make_single_row_runner('1')):
                 with self.assertRaisesRegex(
-                    RuntimeError, r'Duplicate seed resolution for col_id 1'
-                ):
-                    preprocess._resolve_headers_via_svp(
-                        tmpdir, existing_statvar_mcf=''
-                    )
+                        RuntimeError,
+                        r'Duplicate seed resolution for col_id 1'):
+                    preprocess._resolve_headers_via_svp(tmpdir,
+                                                        existing_statvar_mcf='')
 
             def fake_run_fail(cmd, **kwargs):
                 del kwargs
-                out_prefix = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_path=')][0]
-                counters_path = [a.split('=', 1)[1] for a in cmd if a.startswith('--output_counters=')][0]
-                with open(f'{out_prefix}.csv', 'w', encoding='utf-8', newline='') as f:
+                out_prefix = [
+                    a.split('=', 1)[1]
+                    for a in cmd
+                    if a.startswith('--output_path=')
+                ][0]
+                counters_path = [
+                    a.split('=', 1)[1]
+                    for a in cmd
+                    if a.startswith('--output_counters=')
+                ][0]
+                with open(f'{out_prefix}.csv',
+                          'w',
+                          encoding='utf-8',
+                          newline='') as f:
                     csv.writer(f).writerow([
                         'observationAbout',
                         'observationDate',
@@ -580,46 +642,46 @@ class DownloadAndPvmapTest(unittest.TestCase):
                         'value',
                         'unit',
                     ])
-                with open(counters_path, 'w', encoding='utf-8', newline='') as f:
+                with open(counters_path, 'w', encoding='utf-8',
+                          newline='') as f:
                     w = csv.writer(f)
                     w.writerow(['key', 'value'])
-                    w.writerow(['1:process_input_error-svobs-missing-property', '1'])
+                    w.writerow(
+                        ['1:process_input_error-svobs-missing-property', '1'])
                     w.writerow(['unmapped_pvs', '1'])
                 return mock.Mock(returncode=0, stderr='')
 
             with mock.patch('subprocess.run', side_effect=fake_run_fail):
                 with self.assertRaisesRegex(
-                    RuntimeError,
-                    r'kfr_p25.*1:process_input_error-svobs-missing-property.*unmapped_pvs',
+                        RuntimeError,
+                        r'kfr_p25.*1:process_input_error-svobs-missing-property.*unmapped_pvs',
                 ):
-                    preprocess._resolve_headers_via_svp(
-                        tmpdir, existing_statvar_mcf=''
-                    )
+                    preprocess._resolve_headers_via_svp(tmpdir,
+                                                        existing_statvar_mcf='')
 
             with open(
-                os.path.join(tmpdir, 'county_by_cohort_outcomes.csv'),
-                'a',
-                encoding='utf-8',
-                newline='',
+                    os.path.join(tmpdir, 'county_by_cohort_outcomes.csv'),
+                    'a',
+                    encoding='utf-8',
+                    newline='',
             ) as f:
                 csv.writer(f).writerow(['6', '85', '100', '1993', '0.5'])
 
             with mock.patch('subprocess.run', side_effect=fake_run_success):
                 with self.assertRaisesRegex(
-                    RuntimeError, r'kfr_p25_c1993.*unmapped_cohort_tokens'
-                ):
-                    preprocess._resolve_headers_via_svp(
-                        tmpdir, existing_statvar_mcf=''
-                    )
+                        RuntimeError, r'kfr_p25_c1993.*unmapped_cohort_tokens'):
+                    preprocess._resolve_headers_via_svp(tmpdir,
+                                                        existing_statvar_mcf='')
 
             with mock.patch.object(
-                preprocess,
-                '_resolve_headers_via_svp',
-                return_value={'kfr_p25_c1978': ('2005', 'P1Y', 'dc/sv1', '')},
+                    preprocess,
+                    '_resolve_headers_via_svp',
+                    return_value={
+                        'kfr_p25_c1978': ('2005', 'P1Y', 'dc/sv1', '')
+                    },
             ):
-                with self.assertRaisesRegex(
-                    ValueError, r'Unmapped birth cohort 1993'
-                ):
+                with self.assertRaisesRegex(ValueError,
+                                            r'Unmapped birth cohort 1993'):
                     preprocess.prepare_parallel_shards_and_svp_inputs(
                         tmpdir,
                         os.path.join(tmpdir, 'out', 'output'),
