@@ -132,11 +132,15 @@ class TestPreprocess(unittest.TestCase):
 
     def test_retry_session_configuration(self):
         session = preprocess._create_retry_session()
-        self.assertIn("Mozilla/5.0", session.headers.get("User-Agent", ""))
-        adapter = session.get_adapter("https://www2.census.gov/")
-        self.assertEqual(adapter.max_retries.total, 5)
-        self.assertIn(429, adapter.max_retries.status_forcelist)
-        self.assertIn(503, adapter.max_retries.status_forcelist)
+        try:
+            self.assertIn("Mozilla/5.0", session.headers.get("User-Agent", ""))
+            adapter = session.get_adapter("https://www2.census.gov/")
+            self.assertEqual(adapter.max_retries.total, 5)
+            self.assertIn(429, adapter.max_retries.status_forcelist)
+            self.assertIn(503, adapter.max_retries.status_forcelist)
+            self.assertIn(520, adapter.max_retries.status_forcelist)
+        finally:
+            session.close()
 
     def test_is_html_response(self):
         resp = mock.MagicMock()
@@ -152,6 +156,9 @@ class TestPreprocess(unittest.TestCase):
                 resp_csv, b"<!DOCTYPE html><html>blocked</html>"))
 
     def test_load_url_or_path_caches_repeated_url(self):
+        orig_cache = preprocess._LAST_FETCHED_URL
+        self.addCleanup(setattr, preprocess, '_LAST_FETCHED_URL', orig_cache)
+        preprocess._LAST_FETCHED_URL = (None, None)
         url = "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/asrh/cc-est2025-alldata.csv"
         with mock.patch("preprocess._fetch_url_bytes",
                         return_value=b"col1,col2\n1,2\n") as mock_fetch:
@@ -161,9 +168,13 @@ class TestPreprocess(unittest.TestCase):
             self.assertEqual(buf1.read(), b"col1,col2\n1,2\n")
             self.assertEqual(buf2.read(), b"col1,col2\n1,2\n")
 
-    @mock.patch("preprocess._head_with_html_retry",
-                return_value=mock.MagicMock(status_code=503))
+    @mock.patch.object(preprocess,
+                       "_head_with_html_retry",
+                       return_value=mock.MagicMock(status_code=503))
     def test_add_future_year_urls_fallback_to_baseline(self, mock_head):
+        orig_files = list(preprocess._FILES_TO_DOWNLOAD
+                         ) if preprocess._FILES_TO_DOWNLOAD else None
+        self.addCleanup(setattr, preprocess, '_FILES_TO_DOWNLOAD', orig_files)
         add_future_year_urls()
         self.assertEqual(len(preprocess._FILES_TO_DOWNLOAD), 1)
         self.assertIn("2025", preprocess._FILES_TO_DOWNLOAD[0]["download_path"])

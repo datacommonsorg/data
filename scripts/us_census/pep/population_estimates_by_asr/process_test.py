@@ -129,19 +129,15 @@ class TestPreprocess(unittest.TestCase):
         expected_csv_file_path = os.path.join(
             test_data_folder, "Expected_Population_Estimates_By_ASR.csv")
 
-        expected_df = pd.read_csv(expected_csv_file_path)
-        actual_df = pd.read_csv(self.cleaned_csv_file_path)
-        self.assertEqual(list(expected_df.columns), list(actual_df.columns))
-        self.assertGreater(len(actual_df), 4000)
+        expected_csv_data = ""
+        with open(expected_csv_file_path,
+                  encoding="utf-8-sig") as expected_csv_file:
+            expected_csv_data = expected_csv_file.read()
 
-        # Verify all matching records have identical observations
-        merged = pd.merge(actual_df,
-                          expected_df,
-                          on=['Year', 'geo_ID', 'SVs'],
-                          suffixes=('_act', '_exp'))
-        self.assertGreater(len(merged), 4000)
-        self.assertTrue(
-            (merged['observation_act'] == merged['observation_exp']).all())
+        with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            csv_data = csv_file.read()
+
+        self.assertEqual(expected_csv_data.strip(), csv_data.strip())
 
     def test_create_retry_session(self):
         session = _create_retry_session()
@@ -163,8 +159,12 @@ class TestPreprocess(unittest.TestCase):
         self.assertFalse(_is_html_response('text/csv',
                                            b'SUMLEV,STATE,COUNTY\n'))
 
-    @mock.patch('process._head_with_html_retry')
+    @mock.patch.object(process_module, '_head_with_html_retry')
     def test_add_future_year_urls_fallback_to_baseline(self, mock_head):
+        orig_files = list(process_module._FILES_TO_DOWNLOAD
+                         ) if process_module._FILES_TO_DOWNLOAD else []
+        self.addCleanup(setattr, process_module, '_FILES_TO_DOWNLOAD',
+                        orig_files)
         mock_head.side_effect = Exception('Connection reset')
         add_future_year_urls()
         downloaded_urls = [

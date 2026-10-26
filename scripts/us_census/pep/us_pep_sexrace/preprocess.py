@@ -27,15 +27,12 @@ import shutil
 import time
 from datetime import datetime as dt
 from absl import logging
-from absl import flags
 import pandas as pd
 
 import io
 from requests.adapters import HTTPAdapter
 from retry import retry
 from urllib3.util.retry import Retry
-
-_FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
@@ -58,7 +55,7 @@ def _create_retry_session(retries=5, backoff_factor=2):
         read=retries,
         status=retries,
         backoff_factor=backoff_factor,
-        status_forcelist=[429, 500, 502, 503, 504],
+        status_forcelist=[429, 500, 502, 503, 504, 520],
         allowed_methods=['HEAD', 'GET'],
         raise_on_status=False,
     )
@@ -85,7 +82,10 @@ def _is_html_response(response_or_content_type, first_bytes=b''):
     return False
 
 
-@retry(tries=3, delay=5, backoff=2)
+@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+       tries=3,
+       delay=5,
+       backoff=2)
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
@@ -98,7 +98,10 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(tries=5, delay=5, backoff=2)
+@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+       tries=5,
+       delay=5,
+       backoff=2)
 def _fetch_url_bytes(url: str) -> bytes:
     """Fetches URL content with retries and WAF/HTML rejection."""
     session = _create_retry_session()
@@ -312,6 +315,9 @@ def downloadFiles(config_files: list, test=False):
                         f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
+    finally:
+        global _LAST_FETCHED_URL
+        _LAST_FETCHED_URL = (None, None)
 
 
 def process(config_files: list, test=False):
@@ -388,7 +394,7 @@ def process(config_files: list, test=False):
 
 
 def main(_):
-    mode = _FLAGS.mode
+    mode = FLAGS.mode
     """
     Creating and processing input files
     """

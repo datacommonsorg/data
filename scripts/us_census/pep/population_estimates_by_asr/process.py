@@ -32,7 +32,6 @@ from retry import retry
 from urllib3.util.retry import Retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_LAST_FETCHED_URL = {}
 
 
 def ensure_raw_data_dir():
@@ -80,7 +79,10 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(tries=3, delay=5, backoff=2)
+@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+       tries=3,
+       delay=5,
+       backoff=2)
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
@@ -93,38 +95,10 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(tries=5, delay=5, backoff=2)
-def download_with_retry(session, url, dest_path):
-    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
-    with session.get(url, stream=True, timeout=60) as response:
-        response.raise_for_status()
-        content_type = response.headers.get('Content-Type', '')
-        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-        fd, tmp_path = tempfile.mkstemp(dir=os.path.dirname(dest_path))
-        try:
-            first_chunk = b''
-            with os.fdopen(fd, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        if not first_chunk:
-                            first_chunk = chunk[:512]
-                            if (not url.lower().endswith(
-                                ('.html', '.htm')) and _is_html_response(
-                                    content_type, first_chunk)):
-                                raise ValueError(
-                                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
-                                )
-                        f.write(chunk)
-            if not first_chunk:
-                raise ValueError(f'Downloaded empty file from URL: {url}')
-            os.replace(tmp_path, dest_path)
-        except Exception:
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-            raise
-
-
-@retry(tries=5, delay=5, backoff=2)
+@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+       tries=5,
+       delay=5,
+       backoff=2)
 def _fetch_url_bytes(url: str) -> bytes:
     """Fetches URL content with retries and WAF/HTML rejection."""
     session = _create_retry_session()
@@ -146,15 +120,11 @@ def _fetch_url_bytes(url: str) -> bytes:
 
 
 def load_url_or_path(url_or_path: str):
-    """Returns a BytesIO buffer for HTTP/HTTPS URLs (with retries, WAF checks, and caching) or the local path."""
+    """Returns a BytesIO buffer for HTTP/HTTPS URLs (with retries and WAF checks) or the local path."""
     ensure_raw_data_dir()
     if isinstance(url_or_path, str):
         if url_or_path.lower().startswith(('http://', 'https://')):
-            if url_or_path in _LAST_FETCHED_URL:
-                data = _LAST_FETCHED_URL[url_or_path]
-            else:
-                data = _fetch_url_bytes(url_or_path)
-                _LAST_FETCHED_URL[url_or_path] = data
+            data = _fetch_url_bytes(url_or_path)
             return io.BytesIO(data)
         if not os.path.isabs(url_or_path) and not os.path.exists(url_or_path):
             candidate = os.path.join(_MODULE_DIR, url_or_path)
@@ -168,7 +138,6 @@ DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = []
 _BASELINE_YEAR = 2025

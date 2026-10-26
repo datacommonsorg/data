@@ -31,18 +31,17 @@ def national2010(url_file: str, output_folder: str):
     # Used to collect data after every loop for every file's df.
     df_final = pd.DataFrame()
     excel_source = load_url_or_path(_urls)
-    for sheet in _sheets:
-        df_sheet = pd.DataFrame()
-        if hasattr(excel_source, 'seek'):
-            excel_source.seek(0)
-        df = pd.read_excel(excel_source, sheet, skiprows=4, header=0)
-        #Writing raw data to csv
-        df.to_csv(os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "raw_data",
-            'raw_data_national_2010_2019_' + str(sheet) + '.csv'),
-                  index=False)
-        # Dropping extra columns
-        df = df.drop(['Census', 'Estimates Base'], axis=1)
+    with pd.ExcelFile(excel_source) as xls:
+        for sheet in _sheets:
+            df_sheet = pd.DataFrame()
+            df = pd.read_excel(xls, sheet, skiprows=4, header=0)
+            #Writing raw data to csv
+            df.to_csv(os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "raw_data",
+                'raw_data_national_2010_2019_' + str(sheet) + '.csv'),
+                      index=False)
+            # Dropping extra columns
+            df = df.drop(['Census', 'Estimates Base'], axis=1)
         # Deleting the row with garbage information , 0 denotes the row
         df = df.drop([0], axis=0)
         # Cleaning the data to

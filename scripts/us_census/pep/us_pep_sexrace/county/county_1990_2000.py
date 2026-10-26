@@ -81,8 +81,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             df.drop(df[df['Race'] >= 11].index, inplace=True)
 
             # summing all the ages value as age is not required
-            df['Total'] = df.loc[:, COLUMNS_TO_SUM].sum(axis=1)
-            df['Total'].astype(int)
+            df['Total'] = df.loc[:, COLUMNS_TO_SUM].sum(axis=1).astype(int)
 
             # dropping unwanted age columns
             df.drop(columns=COLUMNS_TO_SUM, inplace=True)

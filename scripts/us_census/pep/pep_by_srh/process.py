@@ -539,7 +539,6 @@ def _process_state_files_1990_2000(download_dir):
             logging.fatal(
                 f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
             )
-            return
 
         # After processing all files, aggregate the data
         df = pd.read_csv(output_file_path + output_temp_file_name)
@@ -678,7 +677,6 @@ def _process_county_files_1990_2000(download_dir):
             logging.fatal(
                 f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
             )
-            return
 
         # Section 2 - Writing Aggregated Data
         output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/'
@@ -722,20 +720,9 @@ def _process_county_files_2000_2010(download_dir):
         files_list = os.listdir(input_file_path)
         files_list.sort()
 
-        # Expected number of files
-        expected_files_count = len(files_list)
-
-        # Check if the number of files in the directory matches the expected count
         if not files_list:
             logging.fatal(
                 f"No input files found in the directory: {input_file_path}")
-            return
-
-        if len(files_list) != expected_files_count:
-            logging.fatal(
-                f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}."
-            )
-            return
 
         files_processed = 0  # Track the number of successfully processed files
 
@@ -798,7 +785,6 @@ def _process_county_files_2000_2010(download_dir):
             logging.fatal(
                 f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
             )
-            return
 
         # Section 2 - Writing Aggregated data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -937,7 +923,6 @@ def _process_county_files_2010_2020(download_dir):
             logging.fatal(
                 f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
             )
-            return
 
         # Section 2 - Writing Aggregated Data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -1081,7 +1066,6 @@ def _process_county_files_2020_2029(download_dir):
             logging.fatal(
                 f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted."
             )
-            return
 
         # Section 2 - Writing Aggregated Data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -1660,7 +1644,7 @@ def _create_retry_session(retries=5, backoff_factor=2):
         read=retries,
         status=retries,
         backoff_factor=backoff_factor,
-        status_forcelist=[429, 500, 502, 503, 504],
+        status_forcelist=[429, 500, 502, 503, 504, 520],
         allowed_methods=['HEAD', 'GET'],
         raise_on_status=False,
     )
@@ -1683,7 +1667,10 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(tries=3, delay=5, backoff=2)
+@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+       tries=3,
+       delay=5,
+       backoff=2)
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
@@ -1696,14 +1683,18 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(tries=5, delay=5, backoff=2)
+@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+       tries=5,
+       delay=5,
+       backoff=2)
 def download_with_retry(session, url, dest_path):
     """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
     with session.get(url, stream=True, timeout=60) as response:
         response.raise_for_status()
         content_type = response.headers.get('Content-Type', '')
-        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-        fd, tmp_path = tempfile.mkstemp(dir=os.path.dirname(dest_path))
+        dest_dir = os.path.dirname(os.path.abspath(dest_path))
+        os.makedirs(dest_dir, exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
         try:
             first_chunk = b''
             with os.fdopen(fd, 'wb') as f:
@@ -1806,7 +1797,6 @@ def download_files():
                 logging.info(f"Downloaded file: {url}")
             except Exception as e:
                 logging.fatal(f"Error downloading {url} after retries: {e}")
-                return False
 
         return True
     finally:

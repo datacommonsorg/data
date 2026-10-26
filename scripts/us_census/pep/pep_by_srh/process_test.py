@@ -171,6 +171,7 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(adapter.max_retries.total, 5)
         self.assertIn(429, adapter.max_retries.status_forcelist)
         self.assertIn(503, adapter.max_retries.status_forcelist)
+        self.assertIn(520, adapter.max_retries.status_forcelist)
         session.close()
 
     def test_download_with_retry_rejects_waf_html(self):
@@ -194,8 +195,12 @@ class ProcessTest(unittest.TestCase):
                 )
             self.assertFalse(os.path.exists(dest_path))
 
-    @mock.patch('process._head_with_html_retry')
+    @mock.patch.object(process_module, '_head_with_html_retry')
     def test_add_future_year_urls_fallback_to_baseline(self, mock_head):
+        orig_files = list(process_module._FILES_TO_DOWNLOAD
+                         ) if process_module._FILES_TO_DOWNLOAD else []
+        self.addCleanup(setattr, process_module, '_FILES_TO_DOWNLOAD',
+                        orig_files)
         mock_head.side_effect = Exception('Connection reset')
         add_future_year_urls()
         expected_url = (
