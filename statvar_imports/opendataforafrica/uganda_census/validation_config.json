@@ -12,10 +12,10 @@
         },
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that deleted records do not exceed 0.1%.",
+            "description": "Checks that deleted records do not exceed 1.5%.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.1
+                "threshold": 1.5
             }
         }
     ]

@@ -144,12 +144,15 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertIn("OBS_VALUE", df.columns)
 
     def test_convert_sdmx_xml_to_dataframe_region_normalization(self):
-        """Tests that REGIONID_REGION is normalized for KN.A58 and missing values."""
+        """Tests that REGIONID_REGION is normalized for KN.A58, KN.AA62, and missing values."""
         sample_xml = """<?xml version="1.0" encoding="utf-8"?>
 <StructureSpecificData>
   <DataSet>
     <Series REGION="KN.A58" REGIONID_REGION="  " FREQ="A">
       <Obs TIME_PERIOD="2014" OBS_VALUE="100"/>
+    </Series>
+    <Series REGION="KN.AA62" REGIONID_REGION="" FREQ="A">
+      <Obs TIME_PERIOD="2014" OBS_VALUE="150"/>
     </Series>
     <Series REGION="UG-101" FREQ="A">
       <Obs TIME_PERIOD="2014" OBS_VALUE="200"/>
@@ -162,11 +165,13 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
             f.write(sample_xml)
 
         df = convert_sdmx_xml_to_dataframe(xml_file)
-        self.assertEqual(len(df), 2)
+        self.assertEqual(len(df), 3)
         row1 = df[df["REGION"] == "KN.A58"].iloc[0]
         self.assertEqual(row1["REGIONID_REGION"], "Nyadri")
-        row2 = df[df["REGION"] == "UG-101"].iloc[0]
-        self.assertEqual(row2["REGIONID_REGION"], "UG-101")
+        row2 = df[df["REGION"] == "KN.AA62"].iloc[0]
+        self.assertEqual(row2["REGIONID_REGION"], "Nyadri")
+        row3 = df[df["REGION"] == "UG-101"].iloc[0]
+        self.assertEqual(row3["REGIONID_REGION"], "UG-101")
 
     def test_convert_sdmx_xml_to_dataframe_empty_xml_raises_error(self):
         """Tests that empty XML with no Series/Obs raises ValueError."""

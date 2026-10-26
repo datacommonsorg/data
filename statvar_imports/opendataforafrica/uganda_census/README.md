@@ -28,7 +28,7 @@
 | `*_indicator.csv` | Indicator reference definitions |
 | `input_files/` | Raw input data CSVs (synced to GCS `source_files`) |
 | `counters/` | Runtime counters output directory (`.gitignore` excluded from Git) |
-| `test_data/` | Small hermetic unit test input fixtures (<= 5 rows) |
+| `test_data/` | Small hermetic unit test input fixtures (<= 50 rows) |
 | `output/` | Generated CSV observations, TMCF, and StatVar MCF files |
 
 ## 3. Dataset Mapping Index
@@ -38,6 +38,7 @@ The import processes 4 tables from UBOS Open Data:
 1. `fidjrwf`: Uganda Regional Population Statistics (1969 – 2016)
 2. `ewvclpb`: Uganda Regional Education Statistics (2011 – 2016)
 3. `yvitjl`: Uganda Regional Health Statistics Database (2005 – 2016)
+   - *Legacy Note*: Hospital bed counts by ownership (`KN.PH.BEDS.*`) are mapped to legacy `Count_HealthEstablishment*` StatVars from `Uganda_stat_var.mcf` (where PHP = Private Health Practitioners is mapped to `PartialHospitalizationProgram`) for backward compatibility.
 4. `qiubrhc`: Uganda Census Populations by District (1980, 1991, 2002, 2014)
 
 ## 4. Ingestion Workflow

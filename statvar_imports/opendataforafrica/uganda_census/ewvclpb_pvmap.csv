@@ -1,11 +1,11 @@
 "key","p1","v1","p2","v2","p3","v3","p4","v4","p5","v5","p6","v6","p7","v7","p8","v8"
-"REGION","observationAbout","{Data}",,,,,,,,,,,,,,
+"REGIONID_REGION","observationAbout","{Data}",,,,,,,,,,,,,,
 "TIME_PERIOD","observationDate","{Number}",,,,,,,,,,,,,,
 "OBS_VALUE","value","{Number}",,,,,,,,,,,,,,
 "FREQ","observationPeriod","P1Y",,,,,,,,,,,,,,
 "SEX:KN.S2","gender","Male",,,,,,,,,,,,,,
 "SEX:KN.S3","gender","Female",,,,,,,,,,,,,,
-"INDICATOR:KN.A73","measuredProperty","count","populationType","Student","schoolEnrollment","EnrolledInSchool","schoolGradeLevel","PrimaryEducation","unit","Percent",,,,
+"INDICATOR:KN.A73","#ignore","not mapped",,,,,,,,,,,,,,
 "INDICATOR:KN.A32","measuredProperty","count","populationType","Student","schoolEnrollment","EnrolledInSchool","schoolGradeLevel","PrimaryEducation","unit","Percent",,,,
 "INDICATOR:KN.A47","measuredProperty","count","populationType","Student","schoolEnrollment","EnrolledInSchool","schoolGradeLevel","SecondaryEducation","unit","Percent",,,,
 "INDICATOR:KN.A35","measuredProperty","count","populationType","Student","schoolGradeLevel","PrimaryEducation","statType","measuredValue","measurementDenominator","+populationType=Teacher,schoolGradeLevel=PrimaryEducation",,,,
