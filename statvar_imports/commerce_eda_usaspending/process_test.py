@@ -325,9 +325,8 @@ class TestProcessUSASpending(unittest.TestCase):
         # Total is 1234.6 + 5678.4 = 6913.0 -> 6913
         df_expected = pd.DataFrame({
             "Place": ["TX", "TX", "TX"],
-            "State or Territory / EDA Program": [
-                "Total", "Planning", "Public Works"
-            ],
+            "State or Territory / EDA Program":
+            ["Total", "Planning", "Public Works"],
             "Year": [2022, 2022, 2022],
             "Value": [6913, 5678, 1235],
         })
@@ -435,9 +434,8 @@ class TestProcessUSASpending(unittest.TestCase):
         # Public Works should be dropped, and Total must equal 98992 (not 83674)
         df_expected = pd.DataFrame({
             "Place": ["MP", "MP"],
-            "State or Territory / EDA Program": [
-                "Total", "Economic Adjustment Assistance"
-            ],
+            "State or Territory / EDA Program":
+            ["Total", "Economic Adjustment Assistance"],
             "Year": [2014, 2014],
             "Value": [98992, 98992],
         })
@@ -624,7 +622,7 @@ class TestProcessUSASpending(unittest.TestCase):
     def test_get_current_fiscal_year(self):
         import datetime
         from statvar_imports.commerce_eda_usaspending.process import (
-            get_current_fiscal_year,)
+            get_current_fiscal_year, )
         self.assertEqual(
             get_current_fiscal_year(datetime.datetime(2026, 9, 30)), 2026)
         self.assertEqual(
@@ -651,7 +649,7 @@ class TestProcessUSASpending(unittest.TestCase):
 
     def test_deduplicate_awards_fallback_across_batches(self):
         from statvar_imports.commerce_eda_usaspending.process import (
-            _deduplicate_awards,)
+            _deduplicate_awards, )
         batch1 = [{
             "Place of Performance State Code": "AL",
             "CFDA Number": "11.300",
@@ -668,6 +666,76 @@ class TestProcessUSASpending(unittest.TestCase):
         _deduplicate_awards(batch1, unique_awards)
         _deduplicate_awards(batch2, unique_awards)
         self.assertEqual(len(unique_awards), 2)
+
+    @patch("absl.logging.warning")
+    def test_missing_state_code_logging(self, mock_warning):
+        mock_awards = [
+            {
+                "Award ID": "USA_NULL_STATE",
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "USA",
+                "CFDA Number": "11.300",
+                "Start Date": "2023-05-01",
+                "Award Amount": 50000.0,
+            },
+            {
+                "Award ID": "INVALID_STATE",
+                "Place of Performance State Code": "ZZ",
+                "Place of Performance Country Code": "USA",
+                "CFDA Number": "11.300",
+                "Start Date": "2023-05-01",
+                "Award Amount": 25000.0,
+            },
+            {
+                "Award ID": "VALID_STATE",
+                "Place of Performance State Code": "WA",
+                "Place of Performance Country Code": "USA",
+                "CFDA Number": "11.300",
+                "Start Date": "2023-05-01",
+                "Award Amount": 100000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2022,
+            end_year=2024,
+            output_path=self.output_csv,
+        )
+        warning_messages = [
+            call.args[0] for call in mock_warning.call_args_list
+        ]
+        self.assertTrue(
+            any("Skipped 2 awards due to missing or unmapped Place of Performance State Code (unmapped codes: ['ZZ'])"
+                in msg for msg in warning_messages))
+
+    def test_forward_dated_fy_boundary(self):
+        mock_awards = [
+            # Obligated in late FY 2024 with Oct 1, 2024 start date -> FY 2025 (end_year + 1, retained)
+            {
+                "Award ID": "FWD_FY25",
+                "Place of Performance State Code": "OR",
+                "CFDA Number": "11.300",
+                "Start Date": "2024-10-01",
+                "Award Amount": 80000.0,
+            },
+            # Beyond end_year + 1 -> FY 2026 (dropped)
+            {
+                "Award ID": "BEYOND_FY26",
+                "Place of Performance State Code": "OR",
+                "CFDA Number": "11.300",
+                "Start Date": "2025-10-01",
+                "Award Amount": 90000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2022,
+            end_year=2024,
+            output_path=self.output_csv,
+        )
+        df_actual = pd.read_csv(self.output_csv)
+        self.assertEqual(list(df_actual["Year"]), [2025, 2025])
+        self.assertEqual(list(df_actual["Value"]), [80000, 80000])
 
 
 if __name__ == "__main__":

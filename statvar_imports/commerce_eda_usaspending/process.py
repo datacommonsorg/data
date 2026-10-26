@@ -100,8 +100,8 @@ def _deduplicate_awards(awards, unique_awards=None):
             unique_awards[award_id] = award
         else:
             fallback_key = (
-                award.get("Place of Performance State Code") or
-                award.get("Place of Performance Country Code"),
+                award.get("Place of Performance State Code")
+                or award.get("Place of Performance Country Code"),
                 award.get("CFDA Number"),
                 award.get("Start Date"),
                 award.get("Award Amount"),
@@ -139,17 +139,19 @@ def fetch_usaspending_data(start_year,
                 payload = {
                     "filters": {
                         "agencies": [{
-                            "type": "awarding",
-                            "tier": "subtier",
-                            "name": "Economic Development Administration"
+                            "type":
+                            "awarding",
+                            "tier":
+                            "subtier",
+                            "name":
+                            "Economic Development Administration"
                         }],
                         "time_period": [{
                             "start_date": start_date,
                             "end_date": end_date
                         }],
-                        "award_type_codes": [
-                            "02", "03", "04", "05", "F001", "F002"
-                        ]
+                        "award_type_codes":
+                        ["02", "03", "04", "05", "F001", "F002"]
                     },
                     "fields": [
                         "Award ID", "Start Date", "Award Amount",
@@ -157,10 +159,14 @@ def fetch_usaspending_data(start_year,
                         "Place of Performance Country Code", "CFDA Number",
                         "generated_internal_id"
                     ],
-                    "sort": "Award ID",
-                    "order": "asc",
-                    "limit": 100,
-                    "page": page
+                    "sort":
+                    "Award ID",
+                    "order":
+                    "asc",
+                    "limit":
+                    100,
+                    "page":
+                    page
                 }
                 logging.info(f"POST {url} [FY {fy} Page {page}]")
 
@@ -169,7 +175,8 @@ def fetch_usaspending_data(start_year,
                     response.raise_for_status()
                     data = response.json()
                 except Exception as err:
-                    logging.error(f"Failed to fetch FY {fy} page {page}: {err}")
+                    logging.error(
+                        f"Failed to fetch FY {fy} page {page}: {err}")
                     raise
 
                 results = data.get("results", [])
@@ -214,15 +221,20 @@ def process_data(awards, start_year, end_year, output_path):
 
     data_rows = []
     unmapped_cfdas = set()
+    skipped_missing_state_count = 0
+    unmapped_states = set()
     for a in unique_awards.values():
-        state_code = str(a.get("Place of Performance State Code") or
-                         "").strip().upper()
+        state_code = str(a.get("Place of Performance State Code")
+                         or "").strip().upper()
         if not state_code:
             country_code = str(
-                a.get("Place of Performance Country Code") or
-                "").strip().upper()
+                a.get("Place of Performance Country Code")
+                or "").strip().upper()
             state_code = COUNTRY_TO_STATE_CODE.get(country_code, "")
         if not state_code or state_code not in VALID_STATE_CODES:
+            skipped_missing_state_count += 1
+            if state_code:
+                unmapped_states.add(state_code)
             continue
 
         cfda = str(a.get("CFDA Number") or "").strip()
@@ -232,9 +244,14 @@ def process_data(awards, start_year, end_year, output_path):
                 unmapped_cfdas.add(cfda)
             continue
 
+        # Note: USAspending's time_period filter queries by transaction
+        # action_date, whereas observations are bucketed by the fiscal year of
+        # the period-of-performance Start Date. Allow fy <= end_year + 1 on the
+        # upper bound so awards obligated late in end_year (e.g., September)
+        # with an October 1 Start Date (FY end_year + 1) are not dropped.
         start_date = a.get("Start Date")
         fy = get_fiscal_year(start_date)
-        if not fy or fy < start_year or fy > end_year:
+        if not fy or fy < start_year or fy > end_year + 1:
             continue
 
         amount = float(a.get("Award Amount") or 0.0)
@@ -244,6 +261,12 @@ def process_data(awards, start_year, end_year, output_path):
             "Year": str(fy),
             "Amount": amount
         })
+
+    if skipped_missing_state_count > 0:
+        logging.warning(
+            f"Skipped {skipped_missing_state_count} awards due to missing or "
+            f"unmapped Place of Performance State Code "
+            f"(unmapped codes: {sorted(list(unmapped_states))})")
 
     if unmapped_cfdas:
         logging.warning(
@@ -318,8 +341,8 @@ def process_data(awards, start_year, end_year, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     tmp_output_path = output_path + ".tmp"
     final_df.to_csv(tmp_output_path, index=False, header=True)
-    if (not final_df.empty and os.path.exists(tmp_output_path) and
-            os.path.getsize(tmp_output_path) > 0):
+    if (not final_df.empty and os.path.exists(tmp_output_path)
+            and os.path.getsize(tmp_output_path) > 0):
         os.replace(tmp_output_path, output_path)
         logging.info(
             f"[SUCCESS] Processed data saved successfully to {output_path}")
