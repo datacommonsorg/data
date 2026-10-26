@@ -15,9 +15,11 @@
 
 import hashlib
 import json
+import math
 import os
 import sys
 import tempfile
+import time
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -26,6 +28,7 @@ from absl import flags
 from absl import logging
 from google.cloud import storage
 import pandas as pd
+import requests
 
 _FLAGS = flags.FLAGS
 
@@ -58,6 +61,17 @@ _SENSITIVE_QUERY_KEYS = frozenset({
     'access_token',
 })
 
+_DEFAULT_RETRY_TRIES = 3
+_DEFAULT_RETRY_DELAY_SECONDS = 5.0
+_DEFAULT_RETRY_BACKOFF = 2.0
+_DEFAULT_REQUEST_TIMEOUT_SECONDS = 30
+_NON_RETRYABLE_REQUEST_EXCEPTIONS = (
+    requests.exceptions.MissingSchema,
+    requests.exceptions.InvalidSchema,
+    requests.exceptions.InvalidURL,
+    requests.exceptions.InvalidHeader,
+)
+
 
 def _add_util_to_path() -> None:
     """Adds the repository 'util' directory to sys.path dynamically."""
@@ -75,7 +89,6 @@ def _add_util_to_path() -> None:
 _add_util_to_path()
 
 try:
-    from download_util_script import _retry_method
     import file_util
 except ImportError as e:
     logging.fatal('Import Error: Could not find utility scripts: %s', e)
@@ -120,10 +133,17 @@ def _build_paginated_url(base_url: str, page_num: int) -> str:
 
 def load_config(path: str) -> Dict[str, Any]:
     """Loads configuration JSON from GCS or local disk."""
+    if not path or not path.strip():
+        raise ValueError('Configuration path must be non-empty.')
     if path.startswith('gs://'):
+        parts = urlsplit(path)
+        bucket_name = parts.netloc.strip()
+        blob_name = parts.path.lstrip('/')
+        if not bucket_name or not blob_name or blob_name.endswith('/'):
+            raise ValueError(
+                'Invalid GCS configuration URI (expected gs://<bucket>/<object>): '
+                f'{_sanitize_url(path)}')
         client = storage.Client()
-        bucket_name = path.split('/')[2]
-        blob_name = '/'.join(path.split('/')[3:])
         blob = client.bucket(bucket_name).blob(blob_name)
         return json.loads(blob.download_as_text())
     return file_util.file_load_py_dict(path)
@@ -131,7 +151,12 @@ def load_config(path: str) -> Dict[str, Any]:
 
 def normalize_datasets_config(config: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Normalizes download_config.json into a list of dataset specifications."""
-    if 'datasets' in config and isinstance(config['datasets'], list):
+    if not isinstance(config, dict):
+        raise ValueError('Configuration payload must be a JSON object.')
+
+    if 'datasets' in config:
+        if not isinstance(config['datasets'], list):
+            raise ValueError("'datasets' in configuration must be a list.")
         return config['datasets']
 
     input_files_dir = config.get('input_files', 'input_files/')
@@ -140,17 +165,33 @@ def normalize_datasets_config(config: Dict[str, Any]) -> List[Dict[str, Any]]:
     urban_pop_url = (config.get('state_urban_population_url') or
                      config.get('url_7209'))
 
-    if not state_pop_url and not urban_pop_url and isinstance(
+    if (not state_pop_url or not urban_pop_url) and isinstance(
             config.get('url'), list):
         for u in config['url']:
-            if '7208' in u:
+            if not isinstance(u, str):
+                continue
+            if not state_pop_url and '7208' in u:
                 state_pop_url = u
-            elif '7209' in u:
+            elif not urban_pop_url and '7209' in u:
                 urban_pop_url = u
 
-    datasets: List[Dict[str, Any]] = []
-    if state_pop_url:
-        datasets.append({
+    state_pop_url = (state_pop_url.strip()
+                     if isinstance(state_pop_url, str) else '')
+    urban_pop_url = (urban_pop_url.strip()
+                     if isinstance(urban_pop_url, str) else '')
+
+    missing_datasets: List[str] = []
+    if not state_pop_url:
+        missing_datasets.append('state_population_url (dataset 7208)')
+    if not urban_pop_url:
+        missing_datasets.append('state_urban_population_url (dataset 7209)')
+    if missing_datasets:
+        raise ValueError(
+            'Missing required dataset URL(s) in download configuration: ' +
+            ', '.join(missing_datasets))
+
+    return [
+        {
             'name':
                 'state_population',
             'url':
@@ -167,9 +208,8 @@ def normalize_datasets_config(config: Dict[str, Any]) -> List[Dict[str, Any]]:
                 config.get('state_population_value_key', 'I7208_4'),
             'value_column':
                 _STATE_POP_COLUMN,
-        })
-    if urban_pop_url:
-        datasets.append({
+        },
+        {
             'name':
                 'state_urban_population',
             'url':
@@ -186,21 +226,49 @@ def normalize_datasets_config(config: Dict[str, Any]) -> List[Dict[str, Any]]:
                 config.get('state_urban_population_value_key', 'I7209_4'),
             'value_column':
                 _URBAN_POP_COLUMN,
-        })
-    return datasets
+        },
+    ]
 
 
-def _extract_indicator_value(raw_val: Any) -> Any:
-    """Unwraps NDAP indicator value objects (e.g., TotalPopulationWeight or avg)."""
+def _is_missing_dimension(val: Any) -> bool:
+    """Returns True if a required dimension field is null, blank, or non-scalar."""
+    if val is None or isinstance(val, (bool, dict, list)):
+        return True
+    if isinstance(val, str):
+        return not val.strip()
+    return False
+
+
+def _extract_indicator_value(raw_val: Any) -> Optional[Any]:
+    """Unwraps NDAP indicator value objects into a validated numeric scalar."""
     val = raw_val
     if isinstance(raw_val, dict):
+        val = None
         for key in ('TotalPopulationWeight', 'avg', 'value', 'sum'):
             if key in raw_val and raw_val[key] is not None:
                 val = raw_val[key]
                 break
-    if isinstance(val, float) and val.is_integer():
-        return int(val)
-    return val
+    if val is None or isinstance(val, (bool, dict, list)):
+        return None
+    if isinstance(val, str):
+        stripped = val.strip()
+        if not stripped:
+            return None
+        try:
+            numeric = float(stripped)
+        except ValueError:
+            return None
+        if not math.isfinite(numeric):
+            return None
+        return int(numeric) if numeric.is_integer() else numeric
+    if isinstance(val, (int, float)):
+        if isinstance(val, float):
+            if not math.isfinite(val):
+                return None
+            if val.is_integer():
+                return int(val)
+        return val
+    return None
 
 
 def _resolve_keys_from_headers(
@@ -257,7 +325,100 @@ def _hash_records(records: List[Dict[str, Any]]) -> str:
     return digest.hexdigest()
 
 
-def download_dataset(dataset_cfg: Dict[str, Any]) -> List[Tuple[Any, ...]]:
+def _is_retryable_request_exception(
+    exc: requests.exceptions.RequestException,) -> bool:
+    """Returns True when a RequestException is transient and should be retried."""
+    if isinstance(exc, _NON_RETRYABLE_REQUEST_EXCEPTIONS):
+        return False
+    if isinstance(exc, requests.exceptions.HTTPError):
+        resp = getattr(exc, 'response', None)
+        status_code = (getattr(resp, 'status_code', None)
+                       if resp is not None else None)
+        if isinstance(status_code, int):
+            return status_code in (408, 429) or 500 <= status_code < 600
+    return True
+
+
+def _format_request_error(exc: requests.exceptions.RequestException) -> str:
+    """Formats a credential-safe summary of a requests exception."""
+    err_type = type(exc).__name__
+    resp = getattr(exc, 'response', None)
+    status_code = (getattr(resp, 'status_code', None)
+                   if resp is not None else None)
+    if isinstance(status_code, int):
+        return f'{err_type} (HTTP {status_code})'
+    return err_type
+
+
+def _fetch_page_json(
+    session: requests.Session,
+    api_url: str,
+    sanitized_url: str,
+    dataset_name: str,
+    page_num: int,
+    tries: int = _DEFAULT_RETRY_TRIES,
+    delay: float = _DEFAULT_RETRY_DELAY_SECONDS,
+    backoff: float = _DEFAULT_RETRY_BACKOFF,
+    timeout: int = _DEFAULT_REQUEST_TIMEOUT_SECONDS,
+) -> Any:
+    """Fetches and decodes one JSON page with bounded retries and safe logging."""
+    max_attempts = max(1, tries)
+    current_delay = delay
+    failure_message: Optional[str] = None
+
+    for attempt in range(1, max_attempts + 1):
+        logging.info(
+            'Fetching %s page %d (attempt %d/%d) from GET %s',
+            dataset_name,
+            page_num,
+            attempt,
+            max_attempts,
+            sanitized_url,
+        )
+        try:
+            response = session.get(api_url, stream=False, timeout=timeout)
+            response.raise_for_status()
+            try:
+                return response.json()
+            except ValueError as exc:
+                failure_message = (
+                    f'Failed to parse JSON for {dataset_name} on page '
+                    f'{page_num} from {sanitized_url}: {type(exc).__name__}')
+                break
+        except requests.exceptions.RequestException as exc:
+            error_summary = _format_request_error(exc)
+            should_retry = (attempt < max_attempts and
+                            _is_retryable_request_exception(exc))
+            if not should_retry:
+                failure_message = (
+                    f'Failed to retrieve data for {dataset_name} on page '
+                    f'{page_num} from {sanitized_url} after {attempt} '
+                    f'attempt(s): {error_summary}')
+                break
+            logging.warning(
+                'Transient error fetching %s page %d (attempt %d/%d) from '
+                'GET %s (%s); retrying in %.1fs.',
+                dataset_name,
+                page_num,
+                attempt,
+                max_attempts,
+                sanitized_url,
+                error_summary,
+                current_delay,
+            )
+            time.sleep(current_delay)
+            current_delay *= backoff
+
+    raise RuntimeError(
+        failure_message or
+        f'Failed to retrieve data for {dataset_name} on page {page_num} '
+        f'from {sanitized_url}') from None
+
+
+def download_dataset(
+    dataset_cfg: Dict[str, Any],
+    session: Optional[requests.Session] = None,
+) -> List[Tuple[Any, ...]]:
     """Downloads all paginated rows for one NDAP dataset specification."""
     dataset_name = dataset_cfg.get('name', 'unknown_dataset')
     url = dataset_cfg.get('url')
@@ -270,80 +431,95 @@ def download_dataset(dataset_cfg: Dict[str, Any]) -> List[Tuple[Any, ...]]:
     gender_key = dataset_cfg.get('gender_key')
     value_key = dataset_cfg.get('value_key')
 
-    while True:
-        api_url = _build_paginated_url(url, page_num)
-        sanitized_url = _sanitize_url(api_url)
-        logging.info('Fetching %s page %d from GET %s', dataset_name, page_num,
-                     sanitized_url)
-
-        response = _retry_method(api_url, None, 3, 5, 2)
-        if not response:
-            raise RuntimeError(
-                f'Failed to retrieve data for {dataset_name} on page {page_num} '
-                f'from {sanitized_url}')
-
-        try:
-            response_data = response.json()
-        except ValueError as e:
-            raise RuntimeError(
-                f'Failed to parse JSON for {dataset_name} on page {page_num} '
-                f'from {sanitized_url}: {e}') from e
-
-        if not isinstance(response_data, dict):
-            raise RuntimeError(
-                f'Unexpected JSON payload type for {dataset_name} on page {page_num}'
+    owns_session = session is None
+    active_session = requests.Session() if owns_session else session
+    try:
+        while True:
+            api_url = _build_paginated_url(url, page_num)
+            sanitized_url = _sanitize_url(api_url)
+            response_data = _fetch_page_json(
+                session=active_session,
+                api_url=api_url,
+                sanitized_url=sanitized_url,
+                dataset_name=dataset_name,
+                page_num=page_num,
             )
 
-        records = response_data.get('Data')
-        if not records:
-            logging.info('No more records on page %d for %s.', page_num,
-                         dataset_name)
-            break
-
-        if not isinstance(records, list):
-            raise RuntimeError(
-                f"Expected 'Data' to be a list for {dataset_name} on page {page_num}"
-            )
-
-        page_hash = _hash_records(records)
-        if page_hash in seen_page_hashes:
-            logging.info(
-                'Duplicate page %d detected for %s; stopping pagination.',
-                page_num, dataset_name)
-            break
-        seen_page_hashes.add(page_hash)
-
-        gender_key, value_key = _resolve_keys_from_headers(
-            response_data.get('Headers'),
-            records[0],
-            gender_key,
-            value_key,
-        )
-        if not gender_key or not value_key:
-            raise RuntimeError(
-                f'Could not resolve gender_key ({gender_key}) or value_key '
-                f'({value_key}) for {dataset_name}')
-
-        for item in records:
-            country = item.get('Country', 'India')
-            state = item.get('StateName') or item.get('State')
-            year = item.get('Year')
-            gender = item.get(gender_key)
-            raw_val = item.get(value_key)
-            if state is None or year is None or gender is None or raw_val is None:
+            if not isinstance(response_data, dict):
                 raise RuntimeError(
-                    f'Missing required fields in record for {dataset_name} on '
-                    f'page {page_num}: state={state}, year={year}, gender={gender}'
-                )
-            rows.append((
-                country,
-                state,
-                year,
-                gender,
-                _extract_indicator_value(raw_val),
-            ))
+                    f'Unexpected JSON payload type for {dataset_name} on page '
+                    f'{page_num}')
 
-        page_num += 1
+            records = response_data.get('Data')
+            if not records:
+                logging.info('No more records on page %d for %s.', page_num,
+                             dataset_name)
+                break
+
+            if not isinstance(records, list):
+                raise RuntimeError(
+                    f"Expected 'Data' to be a list for {dataset_name} on page "
+                    f'{page_num}')
+
+            page_hash = _hash_records(records)
+            if page_hash in seen_page_hashes:
+                logging.info(
+                    'Duplicate page %d detected for %s; stopping pagination.',
+                    page_num, dataset_name)
+                break
+            seen_page_hashes.add(page_hash)
+
+            if not isinstance(records[0], dict):
+                raise RuntimeError(
+                    f'Expected record items to be objects for {dataset_name} '
+                    f'on page {page_num}')
+
+            gender_key, value_key = _resolve_keys_from_headers(
+                response_data.get('Headers'),
+                records[0],
+                gender_key,
+                value_key,
+            )
+            if not gender_key or not value_key:
+                raise RuntimeError(
+                    f'Could not resolve gender_key ({gender_key}) or value_key '
+                    f'({value_key}) for {dataset_name}')
+
+            for item in records:
+                if not isinstance(item, dict):
+                    raise RuntimeError(
+                        f'Expected record item to be an object for '
+                        f'{dataset_name} on page {page_num}')
+                raw_country = item.get('Country')
+                country = (raw_country.strip()
+                           if isinstance(raw_country, str) and
+                           raw_country.strip() else 'India')
+                state = item.get('StateName')
+                if _is_missing_dimension(state):
+                    state = item.get('State')
+                year = item.get('Year')
+                gender = item.get(gender_key)
+                raw_val = item.get(value_key)
+                extracted_val = _extract_indicator_value(raw_val)
+                if (_is_missing_dimension(state) or
+                        _is_missing_dimension(year) or
+                        _is_missing_dimension(gender) or extracted_val is None):
+                    raise RuntimeError(
+                        f'Missing or invalid required fields in record for '
+                        f'{dataset_name} on page {page_num}: state={state!r}, '
+                        f'year={year!r}, gender={gender!r}, value={raw_val!r}')
+                rows.append((
+                    country,
+                    state,
+                    year,
+                    gender,
+                    extracted_val,
+                ))
+
+            page_num += 1
+    finally:
+        if owns_session:
+            active_session.close()
 
     return rows
 
@@ -367,13 +543,21 @@ def save_dataset(rows: List[Tuple[Any, ...]], dataset_cfg: Dict[str,
     columns = ['Country', 'State', 'Year', 'Gender', value_column]
     df = pd.DataFrame(rows, columns=columns)
 
-    temp_fd, temp_path = tempfile.mkstemp(dir=output_dir, suffix='.tmp.csv')
+    temp_path: Optional[str] = None
     try:
-        with os.fdopen(temp_fd, 'w', encoding='utf-8', newline='') as tmp_file:
+        with tempfile.NamedTemporaryFile(
+                mode='w',
+                encoding='utf-8',
+                newline='',
+                dir=output_dir,
+                suffix='.tmp.csv',
+                delete=False,
+        ) as tmp_file:
+            temp_path = tmp_file.name
             df.to_csv(tmp_file, index=False)
         os.replace(temp_path, output_path)
-    except Exception:
-        if os.path.exists(temp_path):
+    except BaseException:
+        if temp_path and os.path.exists(temp_path):
             os.remove(temp_path)
         raise
 
@@ -390,9 +574,13 @@ def main(_) -> None:
         raise RuntimeError(
             f'No datasets configured in {_sanitize_url(config_path)}')
 
-    for dataset_cfg in datasets:
-        rows = download_dataset(dataset_cfg)
-        save_dataset(rows, dataset_cfg)
+    session = requests.Session()
+    try:
+        for dataset_cfg in datasets:
+            rows = download_dataset(dataset_cfg, session=session)
+            save_dataset(rows, dataset_cfg)
+    finally:
+        session.close()
 
 
 if __name__ == '__main__':

@@ -24,15 +24,23 @@
 }
 ```
 
-To download the raw input files:
+Run the download and processing commands below from the import directory (`statvar_imports/india_ndap/niti_india_population_projection/`).
+
+To download the raw input files using the default GCS configuration:
 
 ```bash
 python3 download_script.py
 ```
 
+To run locally without GCS `gs://unresolved_mcf/...` access, pass a local configuration JSON via `--download_config_path`:
+
+```bash
+python3 download_script.py --download_config_path=/path/to/download_config.json
+```
+
 ### Data Processing
 
-After the files are downloaded to `input_files/`, the data is processed using `stat_var_processor.py`:
+After the files are downloaded to `input_files/`, the data is processed from `statvar_imports/india_ndap/niti_india_population_projection/` using `stat_var_processor.py`:
 
  * India State Population
 
@@ -58,3 +66,10 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_counters=counters/india_state_urban_population_counters.csv
 ```
 
+### Testing
+
+From the repository root, run the unit test suite with:
+
+```bash
+./run_tests.sh -p statvar_imports/india_ndap/niti_india_population_projection
+```
