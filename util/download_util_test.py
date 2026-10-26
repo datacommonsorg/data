@@ -56,13 +56,11 @@ class DownloadUtilTest(unittest.TestCase):
         mock_get.return_value = mock_response
 
         # Download URL with GET parameters
-        response = download_util.request_url(
-            url='https://api.datacommons.org/v2/resolve',
-            params={
-                'nodes': ['india'],
-                'property': '<-description->dcid'
-            },
-            output='JSON')
+        url = 'https://api.datacommons.org/v2/resolve'
+        params = {'nodes': ['india'], 'property': '<-description->dcid'}
+        response = download_util.request_url(url=url,
+                                             params=params,
+                                             output='JSON')
         self.assertTrue(isinstance(response, dict))
         try:
             nodes = response['entities'][0]['candidates']
@@ -72,14 +70,10 @@ class DownloadUtilTest(unittest.TestCase):
             )
         country_dcids = [node.get('dcid', '') for node in nodes]
         self.assertIn('country/IND', country_dcids)
-        mock_get.assert_called_once_with(
-            'https://api.datacommons.org/v2/resolve',
-            headers={},
-            params={
-                'nodes': ['india'],
-                'property': '<-description->dcid'
-            },
-            timeout=30)
+        mock_get.assert_called_once_with(url,
+                                         headers={},
+                                         params=params,
+                                         timeout=30)
 
     def test_prefilled_url(self):
         test_response = download_util.request_url(url='http://test.case.com/',
