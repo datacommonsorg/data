@@ -56,7 +56,7 @@ When updated census data is published on Kenya Open Data for Africa:
    ```
 3. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
    ```bash
-   gcloud storage cp input_files/*.csv gs://datacommons_public/unresolved_mcf/opendataforafrica/kenya_census/input_files/
+   gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/
    ```
 
 ### 4.2 Automated Ingestion Pipeline
