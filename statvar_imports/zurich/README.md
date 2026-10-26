@@ -288,11 +288,15 @@ Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
     District/City geographic rollups.
   - Consolidating into `Zurich_Population_By_Age_Sex_Origin_Combined` (`108`
     StatVars) and `Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined`
-    (`9` StatVars) preserves 100% of the observations from all 6 legacy split
-    imports (`0` deleted observations verified via `ImportDiffer`) while adding
-    District (`Kreis 1`–`12`), City (`Ganze Stadt`), and 2-way/3-way
-    demographic cross-tabulations in a single unified pipeline per dataset (the
-    6 legacy split imports will be paused later after cutover).
+    (`9` StatVars) via the shared rollup helper (`rollup_util.py`) preserves
+    100% of the observations from all 6 legacy split imports (`0` deleted
+    observations verified via `ImportDiffer`) while adding District (`Kreis
+    1`–`12`), City (`Ganze Stadt`), and 2-way/3-way demographic
+    cross-tabulations in a single unified pipeline per dataset (the 6 legacy
+    split imports will be paused later after cutover). Note: for OD4031,
+    `ImportDiffer` against the 3 legacy birth imports shows `0` deleted
+    observations, `6,016` added observations, and `390` modified observations
+    reflecting upstream historical birth count revisions in `BEV403OD4031.csv`.
 - **Temporal & Spatial Aggregation**: Aggregates daily births into annual totals
   (`GueltigAbDatJahr`) across all 3 geographic levels: Quarter (`QuarLang`),
   District (`KreisLang` mapped to `QuarLang`), and City (`Ganze Stadt`).
