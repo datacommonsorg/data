@@ -28,6 +28,7 @@ import json
 import os
 import pickle
 import pprint
+import shutil
 import sys
 import tempfile
 
@@ -110,12 +111,35 @@ class FileIO:
         self._errors = errors
         self._fd = None
 
+        try:
+            self._prepare_tempfile(use_tempfile)
+            self._open_file(self._tmp_filename or self._filename)
+        except Exception:
+            self._remove_tempfile()
+            raise
+
+    def _create_tempfile(self, prefix: str = None, dir: str = None) -> str:
+        """Create a temporary file and immediately close its OS descriptor."""
+        fd, self._tmp_filename = tempfile.mkstemp(prefix=prefix, dir=dir)
+        os.close(fd)
+        return self._tmp_filename
+
+    def _remove_tempfile(self):
+        """Delete the temporary file if it exists on disk."""
+        if self._tmp_filename:
+            logging.debug(f'Deleting tempfile: {self._tmp_filename}')
+            if os.path.exists(self._tmp_filename):
+                os.remove(self._tmp_filename)
+            self._tmp_filename = None
+
+    def _prepare_tempfile(self, use_tempfile: bool):
+        """Create a local temporary copy for remote reads or atomic writes."""
         if not file_is_local(self._filename):
             # Create a local copy for non-local files.
             if file_is_gcs(self._filename):
                 if self._mode.startswith('r') and use_tempfile:
                     # Copy over the GCS file locally before read().
-                    fd, self._tmp_filename = tempfile.mkstemp()
+                    self._create_tempfile()
                     logging.debug(
                         f'Copying file: {self._filename} to {self._tmp_filename}'
                     )
@@ -126,7 +150,7 @@ class FileIO:
                         gcsfile.close()
             elif file_is_google_spreadsheet(self._filename):
                 # Copy over spreadsheet to local CSV file.
-                fd, self._tmp_filename = tempfile.mkstemp()
+                self._create_tempfile()
                 file_copy_from_spreadsheet(
                     url=self._filename,
                     worksheet_title=None,
@@ -135,25 +159,24 @@ class FileIO:
 
         # Create a local temporary file for writes.
         # The temp file is renamed or copied to the original filename after write.
-        if self._mode.startswith('w') and use_tempfile:
-            dirname = None
-            if file_is_local(self._filename):
-                # Create the local directory for output if required.
-                dirname = file_makedirs(self._filename)
+        if (self._filename and self._mode.startswith('w') and use_tempfile and
+                not (file_is_local(self._filename) and
+                     os.path.isdir(self._filename))):
+            # Create the local directory for output if required.
+            dirname = (file_makedirs(self._filename) or '.'
+                       if file_is_local(self._filename) else None)
             # Create a tmp file for writing that will be renamed to
             # the given filename on close.
             # Use the output directory for local temporary files
             # to allow move within the same file system.
             basename = os.path.basename(self._filename)
-            fd, self._tmp_filename = tempfile.mkstemp(prefix=f'.{basename}',
-                                                      dir=dirname)
+            self._create_tempfile(prefix=f'.{basename}', dir=dirname)
             logging.debug(
                 f'Created tmpfile {self._tmp_filename} for write to {self._filename}'
             )
-        filename = self._tmp_filename
-        if not filename:
-            filename = self._filename
 
+    def _open_file(self, filename: str):
+        """Open the underlying local or GCS file handle."""
         if file_is_gcs(filename):
             logging.debug(f'Opening GCSFile:{filename} mode:{self._mode}')
             if self._mode.startswith('r'):
@@ -172,6 +195,24 @@ class FileIO:
                 errors=self._errors,
             )
 
+    def _commit_tempfile(self):
+        """Copy or move the written temporary file to the target destination."""
+        if file_is_gcs(self._filename):
+            # Copy the tmp file to the requested GCS file.
+            logging.debug(f'Copying {self._tmp_filename} to {self._filename}')
+            with open(self._tmp_filename, mode='rb') as tmpfile:
+                blob = file_get_gcs_blob(self._filename, exists=False)
+                gcsfile = storage.fileio.BlobWriter(blob)
+                _copy_file_chunks(tmpfile, gcsfile)
+                gcsfile.close()
+        elif file_is_google_spreadsheet(self._filename):
+            file_copy_to_spreadsheet(self._tmp_filename, self._filename)
+        else:
+            # Rename the tmp file to the original local file.
+            logging.debug(f'Renaming {self._tmp_filename} to {self._filename}')
+            shutil.move(self._tmp_filename, self._filename)
+            self._tmp_filename = None
+
     def __del__(self):
         """Cleanup any temporary files."""
         self.__exit__(None, None, None)
@@ -185,40 +226,23 @@ class FileIO:
 
     Close the file handles and copy temporary files and delete them.
     """
+        if not self._fd:
+            self._remove_tempfile()
+            return
 
         # Close the file handle.
-        if self._fd:
-            logging.debug(
-                f'Closing file:{self._filename}, tmp:{self._tmp_filename}')
-            self._fd.__exit__(exc_type, exc_value, exc_tb)
-            self._fd = None
+        logging.debug(
+            f'Closing file:{self._filename}, tmp:{self._tmp_filename}')
+        self._fd.__exit__(exc_type, exc_value, exc_tb)
+        self._fd = None
 
-        # Copy over the temp file written into the original file.
-        if self._tmp_filename and self._mode.startswith('w'):
-            if file_is_gcs(self._filename):
-                # Copy the tmp file to the requested GCS file.
-                logging.debug(
-                    f'Copying {self._tmp_filename} to {self._filename}')
-                with open(self._tmp_filename, mode='rb') as tmpfile:
-                    blob = file_get_gcs_blob(self._filename, exists=False)
-                    gcsfile = storage.fileio.BlobWriter(blob)
-                    _copy_file_chunks(tmpfile, gcsfile)
-                    gcsfile.close()
-            elif file_is_google_spreadsheet(self._filename):
-                file_copy_to_spreadsheet(self._tmp_filename, self._filename)
-            else:
-                # Rename the tmp file to the original local file.
-                if self._tmp_filename:
-                    logging.debug(
-                        f'Renaming {self._tmp_filename} to {self._filename}')
-                    os.rename(self._tmp_filename, self._filename)
-                self._tmp_filename = None
-
-        # Delete the temporary file
-        if self._tmp_filename:
-            logging.debug(f'Deleting tempfile: {self._tmp_filename}')
-            os.remove(self._tmp_filename)
-            self._tmp_filename = None
+        try:
+            # Copy over the temp file written into the original file.
+            if (exc_type is None and self._tmp_filename and
+                    self._mode.startswith('w')):
+                self._commit_tempfile()
+        finally:
+            self._remove_tempfile()
 
     def read(self, *args, **kwargs):
         """Read from the file handle."""
@@ -369,7 +393,7 @@ def file_get_matching(filepat: Union[str, list]) -> list:
                     files.add(file)
             elif file:
                 # Add any unsupported file
-                files.add(f)
+                files.add(file)
     return sorted(files)
 
 
