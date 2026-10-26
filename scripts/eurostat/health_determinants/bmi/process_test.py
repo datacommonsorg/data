@@ -16,6 +16,7 @@ Script to automate the testing for EuroStat BMI (Body Mass Index) process script
 """
 import os
 import sys
+from absl import flags
 import pandas as pd
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -30,6 +31,8 @@ for _mod in [
         m for m in sys.modules if m == 'common' or m.startswith('common.')
 ]:
     sys.modules.pop(_mod, None)
+if 'input_path' in flags.FLAGS:
+    delattr(flags.FLAGS, 'input_path')
 
 
 class BMITest(CommonTestClass.CommonTestCases):
