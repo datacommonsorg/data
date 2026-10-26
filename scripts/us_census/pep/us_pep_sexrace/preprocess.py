@@ -20,6 +20,7 @@ four output CSV, MCF and TMCF.
 
 import os
 import json
+import sys
 from absl import app
 from absl import flags
 import requests
@@ -34,7 +35,11 @@ from requests.adapters import HTTPAdapter
 from retry import retry
 from urllib3.util.retry import Retry
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
+if __name__ == '__main__':
+    sys.modules.setdefault('preprocess', sys.modules['__main__'])
+
+if 'mode' not in flags.FLAGS:
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _MODULE_DIR = os.path.dirname(__file__)
 _LAST_FETCHED_URL = (None, None)
@@ -172,7 +177,9 @@ from common import (
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+if 'input_path' not in flags.FLAGS:
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'output_files/intermediate')
 _FILES_TO_DOWNLOAD = None
 _BASELINE_YEAR = 2025
