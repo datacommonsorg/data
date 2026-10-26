@@ -46,7 +46,7 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "bmi/input_files/*"
             ],
             "resource_limits": {
                 "cpu": 8,
