@@ -120,17 +120,17 @@ class FileIO:
 
     def _create_tempfile(self, prefix: str = None, dir: str = None) -> str:
         """Create a temporary file and immediately close its OS descriptor."""
+        self._remove_tempfile()
         fd, self._tmp_filename = tempfile.mkstemp(prefix=prefix, dir=dir)
         os.close(fd)
         return self._tmp_filename
 
     def _remove_tempfile(self):
         """Delete the temporary file if it exists on disk."""
-        if self._tmp_filename:
-            logging.debug(f'Deleting tempfile: {self._tmp_filename}')
-            if os.path.exists(self._tmp_filename):
-                os.remove(self._tmp_filename)
-            self._tmp_filename = None
+        tmp_filename, self._tmp_filename = self._tmp_filename, None
+        if tmp_filename and os.path.exists(tmp_filename):
+            logging.debug(f'Deleting tempfile: {tmp_filename}')
+            os.remove(tmp_filename)
 
     def _prepare_tempfile(self, use_tempfile: bool):
         """Create a local temporary copy for remote reads or atomic writes."""
@@ -145,9 +145,8 @@ class FileIO:
                     )
                     with open(self._tmp_filename, mode='wb') as tmpfile:
                         blob = file_get_gcs_blob(self._filename, exists=True)
-                        gcsfile = storage.fileio.BlobReader(blob)
-                        _copy_file_chunks(gcsfile, tmpfile)
-                        gcsfile.close()
+                        with storage.fileio.BlobReader(blob) as gcsfile:
+                            _copy_file_chunks(gcsfile, tmpfile)
             elif file_is_google_spreadsheet(self._filename):
                 # Copy over spreadsheet to local CSV file.
                 self._create_tempfile()
@@ -202,9 +201,8 @@ class FileIO:
             logging.debug(f'Copying {self._tmp_filename} to {self._filename}')
             with open(self._tmp_filename, mode='rb') as tmpfile:
                 blob = file_get_gcs_blob(self._filename, exists=False)
-                gcsfile = storage.fileio.BlobWriter(blob)
-                _copy_file_chunks(tmpfile, gcsfile)
-                gcsfile.close()
+                with storage.fileio.BlobWriter(blob) as gcsfile:
+                    _copy_file_chunks(tmpfile, gcsfile)
         elif file_is_google_spreadsheet(self._filename):
             file_copy_to_spreadsheet(self._tmp_filename, self._filename)
         else:
@@ -230,13 +228,13 @@ class FileIO:
             self._remove_tempfile()
             return
 
-        # Close the file handle.
-        logging.debug(
-            f'Closing file:{self._filename}, tmp:{self._tmp_filename}')
-        self._fd.__exit__(exc_type, exc_value, exc_tb)
-        self._fd = None
-
         try:
+            # Close the file handle.
+            logging.debug(
+                f'Closing file:{self._filename}, tmp:{self._tmp_filename}')
+            fd, self._fd = self._fd, None
+            fd.__exit__(exc_type, exc_value, exc_tb)
+
             # Copy over the temp file written into the original file.
             if (exc_type is None and self._tmp_filename and
                     self._mode.startswith('w')):
