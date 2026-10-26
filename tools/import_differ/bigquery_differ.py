@@ -163,7 +163,7 @@ def _open_text_stream(path: str, mode: str = 'r'):
             if not blob:
                 raise RuntimeError(
                     f'Failed to create GCS blob for write: {path}')
-            raw_stream = storage.fileio.BlobWriter(blob)
+            raw_stream = storage.fileio.BlobWriter(blob, ignore_flush=True)
             with io.TextIOWrapper(raw_stream, encoding='utf-8',
                                   newline=newline) as stream:
                 yield stream
