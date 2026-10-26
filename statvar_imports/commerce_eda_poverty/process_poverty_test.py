@@ -407,10 +407,13 @@ class TestProcessPoverty(unittest.TestCase):
                 'Data Source―Most Recent Estimate\n'
             )
             with open(csv_path, "w", encoding="utf-8") as f:
-                f.write("Table 1. EDA PPC Report (1990-2021) Summary\n")
+                f.write(
+                    '"Table 1. EDA PPC Report (1990-2021)\n'
+                    'Summary by Census GEOID"\n'
+                )
                 f.write(headers)
                 f.write(
-                    'Autauga County, AL,01001,15.7,10.9,13.3,"SAIPE, 2021"\n'
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2021"\n'
                 )
 
             preprocess_poverty(
@@ -434,11 +437,18 @@ class TestProcessPoverty(unittest.TestCase):
             with open(csv_path, "w", encoding="utf-8") as f:
                 f.write(headers)
                 f.write(
-                    'Autauga County, AL,01001,15.7,10.9,13.3,"SAIPE, 2021*"\n'
+                    '"Autauga County, AL",01001,15.7,10.9,13.3,"SAIPE, 2021*"\n'
                 )
                 f.write(
-                    "Barbour County, AL,01005,25.2,26.8,29.0,"
+                    '"Barbour County, AL",01005,25.2,26.8,29.0,'
                     '"SAIPE, 2021 [1]"\n'
+                )
+                f.write(
+                    '"Adjuntas Municipio, PR",72001,63.3,57.5,58.8,'
+                    '"ACS 5-YEAR, 2017-2021"\n'
+                )
+                f.write(
+                    '"Historical County, AL",01007,21.2,20.6,NA,"NA"\n'
                 )
 
             preprocess_poverty(
@@ -446,11 +456,16 @@ class TestProcessPoverty(unittest.TestCase):
             )
             self.assertTrue(os.path.exists(cleaned_csv))
             df = pd.read_csv(cleaned_csv, dtype={"GEOID": str, "year": str})
-            self.assertEqual(len(df), 6)
+            self.assertEqual(len(df), 11)
             recent_years = set(
                 df.loc[df["year"] != "1990"].loc[df["year"] != "2000", "year"]
             )
             self.assertEqual(recent_years, {"2021"})
+            pr_rows = df[df["GEOID"] == "72001"]
+            self.assertEqual(list(pr_rows["year"]), ["1990", "2000", "2021"])
+            self.assertEqual(list(pr_rows["poverty_rate"]), [63.3, 57.5, 58.8])
+            na_rows = df[df["GEOID"] == "01007"]
+            self.assertEqual(list(na_rows["year"]), ["1990", "2000"])
 
     def test_preprocess_poverty_deduplicates_duplicate_geoids(self):
         with tempfile.TemporaryDirectory() as tmpdir:

@@ -29,10 +29,10 @@ The preprocessing script (`process_poverty.py`) reads the downloaded source file
 The dataset benchmarks poverty rates across statutory periods:
 - **1990**: 1990 Decennial Census (`year=1990`)
 - **2000**: 2000 Decennial Census (`year=2000`)
-- **2020**: 2020 Island Areas Decennial Census (`year=2020` for territory county equivalents `60`, `66`, `69`, `78`)
-- **2021**: 2021 SAIPE / 2017–2021 ACS 5-Year Estimates (`year=2021` for all 50 states, DC, and Puerto Rico)
+- **2020**: 2020 Island Areas Decennial Census (`year=2020` for 11 territory county equivalents across FIPS prefixes `60`, `66`, `69`, `78`)
+- **2021**: 2021 Small Area Income and Poverty Estimates (`"SAIPE, 2021"`, `year=2021` for 3,143 counties across all 50 states and DC) and 2017–2021 ACS 5-Year Estimates (`"ACS 5-YEAR, 2017-2021"`, `year=2021` for all 78 Puerto Rico municipios; `3,143 + 78 = 3,221`)
 
-It covers 3,232 U.S. counties, county equivalents, and island territories. Island territories in the EDA dataset use 5-digit county-equivalent FIPS codes (e.g., 60010 for Eastern District, AS; 66010 for Guam; 69085 for Northern Islands, MP; 78010 for St. Croix, VI).
+It covers 3,232 U.S. counties, county equivalents, and island territories (`3,143` state/DC counties + `78` Puerto Rico municipios + `11` island territory county equivalents). Island territories in the EDA dataset use 5-digit county-equivalent FIPS codes (e.g., 60010 for Eastern District, AS; 66010 for Guam; 69085 for Northern Islands, MP; 78010 for St. Croix, VI).
 
 > [!NOTE]
 > Direct automated HTTP requests to `eda.gov` may encounter Cloudflare bot protection (HTTP 403 Forbidden). `download_poverty.py` automatically falls back to an archive mirror of the official FY23 workbook. For manual/semi-automated refresh when upstream releases a new workbook, operators can download via a browser and provide it locally via `--input_file`.
@@ -42,9 +42,10 @@ It covers 3,232 U.S. counties, county equivalents, and island territories. Islan
 The raw EDA dataset cannot be mapped directly into Data Commons observations using `stat_var_processor.py` / `poverty_pvmap.csv` alone because:
 1. **Format Reshaping (Wide to Long)**: The raw sheet contains one row per county with multiple poverty percentage columns corresponding to different time periods (`1990 Decennial Census, % in Poverty`, `2000 Decennial Census, % in Poverty`, and `Most Recent Estimate, % in Poverty*`). PV mapping requires normalized long-format records with explicit observation dates.
 2. **Dynamic & Heterogeneous Observation Dates**: The "Most Recent Estimate" is not uniform across places:
-   - For all 50 U.S. states, DC, and Puerto Rico, the benchmark is SAIPE 2021 (`year=2021`).
-   - For Island Territories (American Samoa, Guam, Northern Mariana Islands, U.S. Virgin Islands: FIPS prefixes `60`, `66`, `69`, `78`), SAIPE does not produce estimates; the benchmark is the 2020 Island Areas Decennial Census (`year=2020`).
-   - The survey year is either conditionally determined by territory FIPS or parsed dynamically from the `Data Source―Most Recent Estimate` column (`"SAIPE, 2021"` vs `"Decennial Census, 2020"`). PV map CSV configurations cannot conditionally branch date assignment based on state FIPS code or evaluate regex over free-text notes.
+   - For all 50 U.S. states and DC (3,143 counties), the benchmark is the 2021 Small Area Income and Poverty Estimates (`"SAIPE, 2021"` -> `year=2021`).
+   - For Puerto Rico (78 municipios; `3,143 + 78 = 3,221`), because the Island Areas Census does not cover Puerto Rico and SAIPE data is unavailable, EDA uses the 2017–2021 American Community Survey 5-Year Estimates (`"ACS 5-YEAR, 2017-2021"` -> end year `year=2021`).
+   - For Island Territories (11 county equivalents across American Samoa, Guam, Northern Mariana Islands, and U.S. Virgin Islands: FIPS prefixes `60`, `66`, `69`, `78`; `3,221 + 11 = 3,232`), SAIPE does not produce estimates; the benchmark is the 2020 Island Areas Decennial Census (`"Decennial Census, 2020"` -> `year=2020`).
+   - The survey year is parsed dynamically from the `Data Source―Most Recent Estimate` column (extracting the final 4-digit year so multi-year ranges like `"ACS 5-YEAR, 2017-2021"` resolve to `2021`, or falling back to territory FIPS prefix). Note that `poverty_pvmap.csv` intentionally sets `observationPeriod: P1Y` across all 3,232 places (including the 78 Puerto Rico municipios) to maintain a uniform facet across the entire EDA Persistent Poverty benchmark series. PV map CSV configurations cannot conditionally branch date assignment based on state FIPS code or evaluate regex over free-text notes.
 3. **Data Cleaning & Filtering**:
    - Upstream Excel/CSV files contain non-tabular preamble headers, subtitles, and footnote rows that must be stripped.
    - Raw county FIPS codes in Excel often drop leading zeros (e.g. `1001` instead of `01001`) and include state-level summary rollups (e.g. `01000` for Alabama statewide) that must be filtered out so they are not ingested as county entities.

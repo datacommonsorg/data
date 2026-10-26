@@ -16,12 +16,12 @@
 
 This script fetches the official Persistent Poverty Counties dataset from the
 U.S. Economic Development Administration (EDA) / Department of Commerce:
-  https://www.eda.gov/performance/tools/ (EDA_FY23_PPCs.xlsx)
+  https://www.eda.gov/performance/resources/persistent-poverty-counties (EDA_FY23_PPCs.xlsx)
 It downloads the official Excel workbook (with automatic mirror failover),
 supports ingesting directly from an existing input file, extracts the underlying
 county-level poverty data table (3,232 places across 1990, 2000, and 2020/2021),
-and stages the raw CSV and workbook under input_files/ and output/ for
-preprocessing.
+and stages the workbook and extracted CSV under input_files/ for preprocessing
+(and optionally writes a raw CSV copy when --raw_csv_path is explicitly provided).
 """
 
 import csv

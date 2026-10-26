@@ -27,13 +27,24 @@ Why Preprocessing is Required (Why PV Map Alone is Insufficient):
    a normalized long format where each row represents a single observation (GEOID,
    date, poverty_rate).
 2. Dynamic & Heterogeneous Observation Dates: The "Most Recent Estimate" is not
-   from a single survey year. For the 50 US states, DC, and Puerto Rico, the
-   benchmark is SAIPE 2021. However, SAIPE does not cover island territories
-   (American Samoa, Guam, Northern Mariana Islands, US Virgin Islands); their
-   estimates come from the 2020 Island Areas Decennial Census. Preprocessing parses
-   the survey year dynamically from the 'Data Source' note (or territory FIPS prefix)
-   to assign 2020 vs 2021 per record. PV Map CSV configurations cannot conditionally
-   extract and branch dates based on FIPS prefixes or free-text regex matching.
+   from a single survey year:
+   - For the 50 US states and DC (3,143 counties), the benchmark is the 2021
+     Small Area Income and Poverty Estimates (SAIPE, "SAIPE, 2021" -> 2021).
+   - For Puerto Rico (78 municipios; 3,143 + 78 = 3,221), SAIPE and the Island
+     Areas Census are unavailable, so EDA uses the 2017-2021 American Community
+     Survey 5-year estimates ("ACS 5-YEAR, 2017-2021" -> end year 2021).
+   - For the 4 Island Territories (11 county equivalents across American Samoa,
+     Guam, Northern Mariana Islands, and US Virgin Islands; 3,221 + 11 = 3,232),
+     estimates come from the 2020 Island Areas Decennial Census ("Decennial
+     Census, 2020" -> 2020).
+   Preprocessing parses the survey year dynamically from the 'Data Source' note
+   (extracting the final 4-digit year so multi-year ranges like "2017-2021" map
+   to "2021", or falling back to territory FIPS prefix) to assign 2020 vs 2021
+   per record. Note that poverty_pvmap.csv intentionally sets a uniform
+   observationPeriod: P1Y across all 3,232 places so that all jurisdictions in
+   the EDA Persistent Poverty benchmark series share a single cohesive facet.
+   PV Map CSV configurations cannot conditionally extract and branch dates based
+   on FIPS prefixes or free-text regex matching.
 3. Metadata and Footnote Cleaning: Upstream Excel/CSV files contain non-tabular
    header titles, subtitle rows, and footnote rows at the bottom that must be skipped.
 4. FIPS Code Standardization & Filtering: GEOIDs in raw files may lack leading zeros
@@ -41,6 +52,7 @@ Why Preprocessing is Required (Why PV Map Alone is Insufficient):
    filtered out from county-level statistical variables.
 """
 
+import csv
 import datetime
 import os
 import re
@@ -226,19 +238,36 @@ def preprocess_poverty(
     if src_path.lower().endswith((".xlsx", ".xls")):
         df = _extract_dataframe_from_excel(src_path)
     else:
-        # Detect header row index by scanning lines until 'GEOID' is found
-        skip = None
-        with open(src_path, "r", encoding="utf-8", errors="ignore") as f:
-            for idx, line in enumerate(f):
-                if "GEOID" in line.upper():
-                    skip = idx
-                    break
-        if skip is None:
+        # Parse CSV rows via csv.reader so multi-line preamble cells never
+        # desynchronize logical record indices from physical line numbers.
+        with open(
+            src_path, "r", encoding="utf-8", errors="ignore", newline=""
+        ) as f:
+            rows = list(csv.reader(f))
+        if not rows:
+            raise ValueError(f"CSV file is empty: {src_path}")
+
+        header_idx = None
+        for idx, row in enumerate(rows):
+            if any(cell.strip().upper() == "GEOID" for cell in row):
+                header_idx = idx
+                break
+        if header_idx is None:
             raise ValueError(
                 "Could not find header row containing 'GEOID' in CSV file: "
                 f"{src_path}"
             )
-        df = pd.read_csv(src_path, skiprows=skip, dtype=str)
+
+        headers = [cell.strip() for cell in rows[header_idx]]
+        data_rows = []
+        for r in rows[header_idx + 1 :]:
+            if not any(cell.strip() for cell in r):
+                continue
+            padded = [cell.strip() for cell in r[: len(headers)]]
+            if len(padded) < len(headers):
+                padded.extend([""] * (len(headers) - len(padded)))
+            data_rows.append(padded)
+        df = pd.DataFrame(data_rows, columns=headers)
 
     if df.empty:
         raise ValueError(f"File not read properly into dataframe: {src_path}")
@@ -295,7 +324,13 @@ def preprocess_poverty(
     if data_source_cols:
         ds_col = data_source_cols[0]
         ds_vals = df[ds_col].fillna("").astype(str).str.strip()
-        has_ds = (ds_vals != "") & (ds_vals.str.lower() != "nan")
+        recent_rate_valid = pd.to_numeric(
+            df["poverty_rate_recent"].astype(str).str.strip(), errors="coerce"
+        ).notna()
+        has_ds = (
+            ~ds_vals.str.lower().isin({"", "nan", "na", "n/a", "none"})
+            & recent_rate_valid
+        )
         extracted_years = ds_vals.str.findall(r"\b(?:19|20)\d{2}\b").str[-1]
         unrecognized_mask = has_ds & extracted_years.isna()
         if unrecognized_mask.any():
