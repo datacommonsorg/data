@@ -1,16 +1,1 @@
-# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/fidjrwf_input.csv --pv_map=fidjrwf_pvmap.csv --config_file=fidjrwf_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=test_data/fidjrwf_output --existing_statvar_mcf=Uganda_common.mcf" on 2026-10-01 07:47:54.074395
-
-Node: dcid:Count_Person
-typeOf: dcid:StatisticalVariable
-name: "Total Population"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-
-Node: dcid:GrowthRate_Count_Person
-typeOf: dcid:StatisticalVariable
-name: "Census Population Growth Rate"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:growthRate
-
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/fidjrwf_input.csv --pv_map=fidjrwf_pvmap.csv --config_file=fidjrwf_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=test_data/fidjrwf_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-10-26

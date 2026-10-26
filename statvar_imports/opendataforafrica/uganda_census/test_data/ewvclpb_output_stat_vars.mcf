@@ -1,60 +1,4 @@
-# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/ewvclpb_input.csv --pv_map=ewvclpb_pvmap.csv --config_file=ewvclpb_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=test_data/ewvclpb_output --existing_statvar_mcf=Uganda_common.mcf" on 2026-10-01 07:47:57.269801
-
-Node: dcid:Count_ClassRoom_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:ClassRoom
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-schoolGradeLevel: dcid:PrimaryEducation
-
-Node: dcid:Count_School_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:School
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-schoolGradeLevel: dcid:PrimaryEducation
-
-Node: dcid:Count_Student_6To12Years_Female_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Student
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [6 12 Years]
-gender: dcid:Female
-schoolGradeLevel: dcid:PrimaryEducation
-
-Node: dcid:Count_Student_6To12Years_Male_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Student
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [6 12 Years]
-gender: dcid:Male
-schoolGradeLevel: dcid:PrimaryEducation
-
-Node: dcid:Count_Student_6To12Years_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Student
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [6 12 Years]
-schoolGradeLevel: dcid:PrimaryEducation
-
-Node: dcid:Count_Student_EnrolledInSchool_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Student
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-schoolEnrollment: dcid:EnrolledInSchool
-schoolGradeLevel: dcid:PrimaryEducation
-
-Node: dcid:Count_Student_Male_PrimaryEducation
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Student
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-gender: dcid:Male
-schoolGradeLevel: dcid:PrimaryEducation
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/ewvclpb_input.csv --pv_map=ewvclpb_pvmap.csv --config_file=ewvclpb_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=test_data/ewvclpb_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-10-26
 
 Node: dcid:Count_Student_PrimaryEducation
 typeOf: dcid:StatisticalVariable
@@ -63,10 +7,16 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 schoolGradeLevel: dcid:PrimaryEducation
 
+Node: dcid:Count_Student_SecondaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolGradeLevel: dcid:SecondaryEducation
+
 Node: dcid:Count_Teacher_PrimaryEducation
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Teacher
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 schoolGradeLevel: dcid:PrimaryEducation
-

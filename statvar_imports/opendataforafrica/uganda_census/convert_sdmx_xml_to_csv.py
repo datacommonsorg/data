@@ -35,7 +35,7 @@ def _normalize_region_columns(df: pd.DataFrame) -> pd.DataFrame:
     if 'REGIONID_REGION' in df.columns and 'REGION' in df.columns:
         empty_mask = (df['REGIONID_REGION'].isna()) | (
             df['REGIONID_REGION'].astype(str).str.strip().isin(['', 'nan', 'None']))
-        df.loc[(df['REGION'] == 'KN.A58') & empty_mask, 'REGIONID_REGION'] = 'Nyadri'
+        df.loc[df['REGION'].isin(['KN.A58', 'KN.AA62']) & empty_mask, 'REGIONID_REGION'] = 'Nyadri'
         empty_mask = (df['REGIONID_REGION'].isna()) | (
             df['REGIONID_REGION'].astype(str).str.strip().isin(['', 'nan', 'None']))
         df.loc[empty_mask, 'REGIONID_REGION'] = df['REGION']
