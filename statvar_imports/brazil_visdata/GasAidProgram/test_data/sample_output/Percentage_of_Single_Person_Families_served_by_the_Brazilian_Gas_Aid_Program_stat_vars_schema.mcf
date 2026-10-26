@@ -1,0 +1,45 @@
+Node: dcid:governmentPaymentStatus
+typeOf: dcs:Property
+name: "governmentPaymentStatus"
+domainIncludes: dcid:Household
+
+Node: dcid:ReceivedPaymentPreviousMonth
+typeOf: dcid:GovernmentPaymentStatusEnum
+name: "Received Payment Previous Month"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household,dcid:Place
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household,dcid:Place
+
+Node: dcid:GasAidProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Gas Aid Program"
+isProvisional: dcs:True
+
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:Household,dcid:Place
+
+Node: dcid:SinglePerson
+typeOf: dcid:HouseholdTypeEnum
+name: "Single Person"
+isProvisional: dcs:True
+
+Node: dcid:benefitsStatus
+typeOf: dcs:Property
+name: "benefitsStatus"
+domainIncludes: dcid:Place
+
+Node: dcid:16OrMorePercentHouseholds
+typeOf: dcid:BenefitsStatusEnum
+name: "1 6Or More Percent Households"
+isProvisional: dcs:True
+
