@@ -137,7 +137,8 @@ def process(_INPUT_FILE_PATH, _OUTOUT_FILE_PATH, date_from_start_processing):
                 date_from_start_processing)]
             in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
             logging.info(
-                f"Data frame before writing to output csv file {in_df}")
+                f"Writing {len(in_df)} rows for {series_name} to output csv file"
+            )
             in_df.to_csv(_OUTOUT_FILE_PATH + "/" + series_name + ".csv",
                          index=False)
         except Exception as e:
