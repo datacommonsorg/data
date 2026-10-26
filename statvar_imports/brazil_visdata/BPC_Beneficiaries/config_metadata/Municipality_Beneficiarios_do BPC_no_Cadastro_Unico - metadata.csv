@@ -1,0 +1,17 @@
+parameter,value
+url,
+description,BPC beneficiaries in the Single Registry
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+header_rows,1
+mapped_rows,1
+mapped_columns,0
+#input_rows,500
+#dropping_statvar_without_svobs,0
+schemaless,1
