@@ -1,0 +1,7 @@
+{
+	"output_columns" : "observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input",
+	"places_resolved_csv" : "https://docs.google.com/spreadsheets/d/1OBgzF7wHhOe11--wXk0ESnIw6TFHxI7ZIngHrXWTcDk/edit#gid=94255091",
+	"word_delimiter" : " ",
+	"header_rows" : 1,
+	"mapped_columns" : "12"
+}
