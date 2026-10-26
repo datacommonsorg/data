@@ -72,8 +72,8 @@ This import uses a fully automated refresh process.
 
 ### Automation
 
-This import pipeline is configured to run automatically on a monthly schedule.
+This import pipeline is configured to run automatically on a weekly schedule.
 
-- Cron Expression: 30 08 25 * *
+- Cron Expression: 0 9 * * 4
 
-Schedule: The script runs at 8:30 AM on the 25th day of every month.
+Schedule: Weekly on Thursday at 09:00 UTC.
