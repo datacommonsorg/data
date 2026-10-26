@@ -47,17 +47,6 @@ steps:
       - '/app/tools/import_validation/runner_test.py'
     waitFor: ['push']
 
-  # Tag image as stable and push
-  - name: 'gcr.io/cloud-builders/docker'
-    id: 'tag'
-    entrypoint: 'bash'
-    waitFor: ['unit-test']
-    args:
-      - '-c'
-      - |
-        docker tag ${_DOCKER_IMAGE}:${_TAG} ${_DOCKER_IMAGE}:stable \
-        && docker push ${_DOCKER_IMAGE}:stable
-
 substitutions:
   _DOCKER_IMAGE: 'us-docker.pkg.dev/${PROJECT_ID}/gcr.io/dc-import-validator'
   _TAG: '${COMMIT_SHA:-latest}'
@@ -65,3 +54,4 @@ substitutions:
 options:
   logging: CLOUD_LOGGING_ONLY
   dynamicSubstitutions: true
+  substitutionOption: 'ALLOW_LOOSE'
