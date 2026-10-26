@@ -1,0 +1,72 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IPEDS_FTE_Enrollment_National",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nces.ed.gov/ipeds/trendgenerator/",
+            "provenance_description": "Data focuses on Full-Time Equivalent (FTE) enrollment across U.S. postsecondary institutions",
+            "scripts": [
+            "run.sh",
+            "preprocess.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/controlOfInstitution_data.csv --pv_map=pvmap/controlOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/ControlOfInstitution_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/degreeOfUrbanization_data.csv --pv_map=pvmap/degreeOfUrbanization_pvmap.csv --config_file=metadata.csv --output_path=output/DegreeOfUrbanization_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/highestDegreeOffered_data.csv --pv_map=pvmap/highestDegreeOffered_pvmap.csv --config_file=metadata.csv --output_path=output/HighestDegreeOffered_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/historicallyBlackCollegeOrUniversity_data.csv --pv_map=pvmap/historicallyBlackCollegeOrUniversity_pvmap.csv --config_file=metadata.csv --output_path=output/HistoricallyBlackCollegeOrUniversity_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/institutionalCategory_data.csv --pv_map=pvmap/institutionalCategory_pvmap.csv --config_file=metadata.csv --output_path=output/InstitutionalCategory_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/levelOfInstitution_data.csv --pv_map=pvmap/levelOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/LevelOfInstitution_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/levelOfStudent_data.csv --pv_map=pvmap/levelOfStudent_pvmap.csv --config_file=metadata.csv --output_path=output/LevelOfStudent_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/sectorOfInstitution_data.csv --pv_map=pvmap/sectorOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/SectorOfInstitution_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/state_data.csv --pv_map=pvmap/state_pvmap.csv --config_file=metadata.csv --output_path=output/State_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/totalStudents_data.csv --pv_map=pvmap/totalStudents_pvmap.csv --config_file=metadata.csv --output_path=output/TotalStudents_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/ControlOfInstitution_output.tmcf",
+                    "cleaned_csv": "output/ControlOfInstitution_output.csv"
+                },
+                {
+                    "template_mcf": "output/DegreeOfUrbanization_output.tmcf",
+                    "cleaned_csv": "output/DegreeOfUrbanization_output.csv"
+                },
+                {
+                    "template_mcf": "output/HighestDegreeOffered_output.tmcf",
+                    "cleaned_csv": "output/HighestDegreeOffered_output.csv"
+                },
+                {
+                    "template_mcf": "output/HistoricallyBlackCollegeOrUniversity_output.tmcf",
+                    "cleaned_csv": "output/HistoricallyBlackCollegeOrUniversity_output.csv"
+                },
+                {
+                    "template_mcf": "output/InstitutionalCategory_output.tmcf",
+                    "cleaned_csv": "output/InstitutionalCategory_output.csv"
+                },
+                {
+                    "template_mcf": "output/LevelOfInstitution_output.tmcf",
+                    "cleaned_csv": "output/LevelOfInstitution_output.csv"
+                },
+                {
+                    "template_mcf": "output/LevelOfStudent_output.tmcf",
+                    "cleaned_csv": "output/LevelOfStudent_output.csv"
+                },
+                {
+                    "template_mcf": "output/SectorOfInstitution_output.tmcf",
+                    "cleaned_csv": "output/SectorOfInstitution_output.csv"
+                },
+                {
+                    "template_mcf": "output/State_output.tmcf",
+                    "cleaned_csv": "output/State_output.csv"
+                },
+                {
+                    "template_mcf": "output/TotalStudents_output.tmcf",
+                    "cleaned_csv": "output/TotalStudents_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 5 3,17 * *"
+        }
+    ]
+}
