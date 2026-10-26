@@ -19,11 +19,11 @@ framework. The executor owns runner selection; see the
 [differ invocation](executor/app/executor/import_executor.py). Import Differ
 owns the [comparison and artifact contracts](../tools/import_differ/README.md).
 
-Status of various import jobs can be monitored in the ImportStatus spanner table via the [Data Studio dashboard](https://datastudio.google.com/c/reporting/e88fda74-50c9-46c6-88aa-c84342ceba48).
+Status of various import jobs and versions is managed by the [import-helper service](helper/README.md) (`import-automation/helper`) and can be monitored in the ImportSummary / ImportStatus Spanner tables via the [Data Studio dashboard](https://datastudio.google.com/c/reporting/e88fda74-50c9-46c6-88aa-c84342ceba48).
 
 ## Ingestion Pipeline
 DataCommons runs various import jobs on cloud batch that generate the output MCF data on GCS. The output from these jobs is consumed by the graph ingestion pipeline (Dataflow) to push data into the knowledge graph (Spanner). More details about the ingestion pipeline are available [here](https://github.com/datacommonsorg/import/tree/master/pipeline/ingestion). 
 
 A GCP [cloud workflow](https://github.com/datacommonsorg/import/blob/master/pipeline/workflow/spanner-ingestion-workflow.yaml) is used to coordinate control between auto-refresh import jobs and the ingestion dataflow pipeline.  To maintain data consistency, a global lock is used to ensure that only a single execution of the workflow is active at any time. The workflow relies on various [Spanner tables](https://github.com/datacommonsorg/import/blob/master/pipeline/workflow/ingestion-helper/schema.sql) for metadata management and [helper cloud functions](https://github.com/datacommonsorg/import/blob/master/pipeline/workflow/ingestion-helper/README.md) to control the execution.
 
-Infrastructure deployment for the various components in the import automation stack is automated using a [Terraform script](https://github.com/datacommonsorg/import/blob/master/pipeline/terraform/main.tf).
+Infrastructure deployment for the various components in the import automation stack is automated using a [Terraform script](terraform/main.tf).

@@ -33,12 +33,9 @@ class ImportValidationTest(unittest.TestCase):
 
         os.makedirs(self.differ_path, exist_ok=True)
 
-        # Find the project root using the canonical git command
-        result = subprocess.run(['git', 'rev-parse', '--show-toplevel'],
-                                capture_output=True,
-                                text=True,
-                                check=True)
-        self.project_root = result.stdout.strip()
+        # Find the project root relative to this test file
+        self.project_root = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', '..'))
 
         # Create an empty differ summary, as it is required
         with open(os.path.join(self.differ_path, 'differ_summary.json'),
@@ -332,6 +329,40 @@ class ImportValidationTest(unittest.TestCase):
             result.returncode, 0,
             f"Script should not have thrown an exception. Stderr: {result.stderr}"
         )
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
+    def test_missing_differ_file_passes_deleted_records_percent(self):
+        """
+    Tests that DELETED_RECORDS_PERCENT passes with 0% when --differ_output is
+    not provided.
+    """
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "check_deleted_records_percent",
+                        "validator": "DELETED_RECORDS_PERCENT",
+                        "scope": {},
+                        "params": {
+                            "threshold": 0
+                        }
+                    }]
+                }, f)
+
+        result = subprocess.run([
+            sys.executable, '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--stats_summary={self.stats_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                capture_output=True,
+                                text=True,
+                                cwd=self.project_root)
+
+        self.assertEqual(result.returncode, 0,
+                         f"Script should have passed. Stderr: {result.stderr}")
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')

@@ -1,0 +1,3 @@
+year,date,statefips,countyfips,pm25_max_pred,pm25_med_pred,pm25_mean_pred,pm25_pop_pred,dcid
+2016,2016-01-01,01,001,12.035500,11.173300,11.307642,11.313675,geoId/01001
+2016,2016-01-01,01,003,9.117200,8.486000,8.497219,8.483280,geoId/01003

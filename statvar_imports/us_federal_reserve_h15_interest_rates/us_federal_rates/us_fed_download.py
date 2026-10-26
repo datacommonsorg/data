@@ -23,10 +23,17 @@ Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 date = datetime.date.today().strftime('%Y-%m-%d')
 
-@retry(tries=3, delay=5, backoff=2)
+@retry(exceptions=requests.exceptions.RequestException, tries=5, delay=10, backoff=2)
 def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=10)
+    response = requests.get(url, headers=headers, timeout=30)
     response.raise_for_status()
+    if not response.content or b"Series Description" not in response.content:
+        logging.warning(
+            f"Empty or invalid CSV response ({len(response.content)} bytes) from {url}; retrying..."
+        )
+        raise requests.exceptions.RequestException(
+            f"Received empty or invalid CSV response ({len(response.content)} bytes) from {url}"
+        )
     return response
 
 def download_files(us_fed_urls):
