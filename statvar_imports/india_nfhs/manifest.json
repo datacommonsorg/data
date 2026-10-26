@@ -19,11 +19,6 @@
                     "cleaned_csv": "output/*.csv"
                 }
             ],
-            "source_file": [
-                "gcs_output/NFHS_Survey4.csv",
-                "gcs_output/NFHS_state.csv",
-                "gcs_output/NFHS_Survey5.csv"
-            ],
             "cron_schedule": "30 05 * * 1",
             "resource_limits": {
                 "cpu": 8,
@@ -32,6 +27,9 @@
             },
             "validation_config_file": "validation_config.json",
             "source_files": [
+                "gcs_output/NFHS_Survey4.csv",
+                "gcs_output/NFHS_state.csv",
+                "gcs_output/NFHS_Survey5.csv",
                 "golden_data/*.csv"
             ]
         }

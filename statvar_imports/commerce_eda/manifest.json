@@ -27,12 +27,10 @@
                     "cleaned_csv": "output/Poverty_output.csv"
                 }
             ],
-            "source_file": [
-                "input_file/*"
-            ],
             "cron_schedule": "30 05 * * 1",
             "validation_config_file": "validation_config.json",
             "source_files": [
+                "input_file/*",
                 "golden_data/*.csv"
             ]
         }

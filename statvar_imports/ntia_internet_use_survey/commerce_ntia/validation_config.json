@@ -29,6 +29,7 @@
         },
         {
             "rule_id": "check_goldens_summary_report",
+            "description": "Verifies that expected StatVars and metadata in golden_summary_report.csv are present in the summary report",
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/golden_summary_report.csv",
