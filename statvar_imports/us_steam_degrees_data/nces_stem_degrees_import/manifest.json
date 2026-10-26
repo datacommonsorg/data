@@ -20,7 +20,8 @@
                     "cleaned_csv": "output/nces_steam_degree.csv"
                 }
             ],
-            "cron_schedule": "0 05 4,18 * *",
+            "cron_schedule": "30 9 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 09:30 UTC",
             "validation_config_file": "validation_config.json"
         }
     ]
