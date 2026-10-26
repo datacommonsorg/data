@@ -450,13 +450,16 @@ class TestProcessPoverty(unittest.TestCase):
                 f.write(
                     '"Historical County, AL",01007,21.2,20.6,NA,"NA"\n'
                 )
+                f.write(
+                    '"Sentinel County, AL",01009,18.4,17.2,-999,"Not Available"\n'
+                )
 
             preprocess_poverty(
                 src_path=csv_path, dst_path=cleaned_csv, min_county_count=1
             )
             self.assertTrue(os.path.exists(cleaned_csv))
             df = pd.read_csv(cleaned_csv, dtype={"GEOID": str, "year": str})
-            self.assertEqual(len(df), 11)
+            self.assertEqual(len(df), 13)
             recent_years = set(
                 df.loc[df["year"] != "1990"].loc[df["year"] != "2000", "year"]
             )
@@ -466,6 +469,8 @@ class TestProcessPoverty(unittest.TestCase):
             self.assertEqual(list(pr_rows["poverty_rate"]), [63.3, 57.5, 58.8])
             na_rows = df[df["GEOID"] == "01007"]
             self.assertEqual(list(na_rows["year"]), ["1990", "2000"])
+            sentinel_rows = df[df["GEOID"] == "01009"]
+            self.assertEqual(list(sentinel_rows["year"]), ["1990", "2000"])
 
     def test_preprocess_poverty_deduplicates_duplicate_geoids(self):
         with tempfile.TemporaryDirectory() as tmpdir:

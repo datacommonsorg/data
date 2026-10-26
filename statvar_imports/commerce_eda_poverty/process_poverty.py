@@ -324,9 +324,14 @@ def preprocess_poverty(
     if data_source_cols:
         ds_col = data_source_cols[0]
         ds_vals = df[ds_col].fillna("").astype(str).str.strip()
-        recent_rate_valid = pd.to_numeric(
+        numeric_recent = pd.to_numeric(
             df["poverty_rate_recent"].astype(str).str.strip(), errors="coerce"
-        ).notna()
+        )
+        recent_rate_valid = (
+            numeric_recent.notna()
+            & (numeric_recent >= 0.0)
+            & (numeric_recent <= 100.0)
+        )
         has_ds = (
             ~ds_vals.str.lower().isin({"", "nan", "na", "n/a", "none"})
             & recent_rate_valid

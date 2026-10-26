@@ -36,6 +36,8 @@ It covers 3,232 U.S. counties, county equivalents, and island territories (`3,14
 
 > [!NOTE]
 > Direct automated HTTP requests to `eda.gov` may encounter Cloudflare bot protection (HTTP 403 Forbidden). `download_poverty.py` automatically falls back to an archive mirror of the official FY23 workbook. For manual/semi-automated refresh when upstream releases a new workbook, operators can download via a browser and provide it locally via `--input_file`.
+>
+> **Legacy `Commerce_EDA` Migration Note:** This standalone `Commerce_EDA_Poverty` import (`dc/base/Commerce_EDA_Poverty`) splits the Persistent Poverty Counties table out of the legacy combined `Commerce_EDA` import (`statvar_imports/commerce_eda`, alongside `Commerce_EDA_USAspending`). In accordance with Data Commons migration practice, the legacy `Commerce_EDA` import is retained temporarily until all split imports are merged and verified in production, and will be retired in an immediate follow-up cleanup PR/CL tracked under `b/548896854`.
 
 ### Why Preprocessing is Required (Why PV Map Alone is Insufficient)
 
