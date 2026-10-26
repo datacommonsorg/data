@@ -180,8 +180,7 @@ class ProcessTest(unittest.TestCase):
             mock_file_copy.side_effect = _fake_copy
             local_path = process._prepare_local_statvar_mcf(
                 'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf', tmp_dir)
-            self.assertEqual(local_path, os.path.join(tmp_dir,
-                                                      'stat_vars.mcf'))
+            self.assertEqual(local_path, os.path.join(tmp_dir, 'stat_vars.mcf'))
             mock_file_copy.assert_called_once()
 
     def test_apply_historical_supplement_from_path(self):
@@ -226,6 +225,15 @@ class ProcessTest(unittest.TestCase):
         with self.assertRaises(Exception):
             process._load_historical_rows(
                 '/nonexistent/deleted_historical_data.csv')
+
+    def test_apply_historical_supplement_skips_unknown_dataset(self):
+        rows = [{'year': '2020', 'indicatorCd': '0201010000000010000'}]
+        result = process._apply_historical_supplement(
+            'sample_input.csv',
+            rows,
+            historical_gcs_path='gs://nonexistent/deleted_historical_data.csv',
+        )
+        self.assertEqual(result, rows)
 
     def test_derive_census_population_rows(self):
         sample_records = [

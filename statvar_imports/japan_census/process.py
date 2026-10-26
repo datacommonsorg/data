@@ -132,8 +132,7 @@ def _derive_census_population_rows(records: list[dict[str, str]],
     else:
         max_5yr_suffix = 230 if mode == 'national' else 170
         allowed_5yr = {
-            f'0201010{g}20000010{i:03d}'
-            for g in ('0', '1', '2')
+            f'0201010{g}20000010{i:03d}' for g in ('0', '1', '2')
             for i in range(10, max_5yr_suffix + 10, 10)
         }
     allowed_totals = {
@@ -204,6 +203,20 @@ def _load_historical_rows(historical_gcs_path: str) -> list[dict[str, str]]:
     return rows
 
 
+_HISTORICAL_SUPPLEMENT_DATASETS = frozenset({
+    'jpn_gender_age_total_population.csv',
+    'jpn_aa1_gender_age_total_population.csv',
+    'jpn_aa1_aa2_age_gender.csv',
+    'jpn_employment.csv',
+    'jpn_employement.csv',
+    'jpn_unemploymentrate.csv',
+    'jpn_student.csv',
+    'jpn_aa1_teacher.csv',
+    'jpn_aa1_death.csv',
+    'jpn_aa1_health.csv',
+})
+
+
 def _apply_historical_supplement(
     dataset_filename: str,
     records: list[dict[str, str]],
@@ -211,6 +224,11 @@ def _apply_historical_supplement(
 ) -> list[dict[str, str]]:
     """Merges pre-1975 historical Census and exact archival rows from GCS CSV."""
     if not historical_gcs_path:
+        return records
+    is_aa2_shard = (dataset_filename.startswith('jpn_aa1_aa2_age_gender_') and
+                    dataset_filename.endswith('.csv'))
+    if (dataset_filename not in _HISTORICAL_SUPPLEMENT_DATASETS and
+            not is_aa2_shard):
         return records
     hist_rows = _load_historical_rows(historical_gcs_path)
     if not hist_rows:
@@ -322,13 +340,11 @@ def _prepare_shard_inputs(
                 yr_file = os.path.join(staging_dir,
                                        f'jpn_aa1_aa2_age_gender_{yr}.csv')
                 _write_staged_csv(yr_file, yr_rows, fieldnames)
-        elif (filename.startswith('jpn_aa1_aa2_age_gender_')
-              and filename.endswith('.csv')):
-            has_5yr = any('20000010' in r.get('indicatorCd', '')
-                          for r in rows[:100])
+        elif (filename.startswith('jpn_aa1_aa2_age_gender_') and
+              filename.endswith('.csv')):
+            has_5yr = any('20000010' in r.get('indicatorCd', '') for r in rows)
             if has_5yr:
-                rows = _derive_census_population_rows(rows,
-                                                      mode='municipality')
+                rows = _derive_census_population_rows(rows, mode='municipality')
             rows = _apply_historical_supplement(filename, rows,
                                                 historical_gcs_path)
             out_file = os.path.join(staging_dir, filename)
@@ -455,8 +471,9 @@ def _counter_aggregation_mode(key: str) -> str:
     cardinality cannot be reconstructed from per-shard integer counts alone.
     """
     lower = key.lower()
-    if (lower == 'existing-statvars-from-mcf' or lower.startswith('existing-')
-            or lower.endswith('output-svobs-unique-typeof')):
+    if (lower == 'existing-statvars-from-mcf' or
+            lower.startswith('existing-') or
+            lower.endswith('output-svobs-unique-typeof')):
         return 'max'
     if 'start_time' in lower:
         return 'min'
@@ -548,15 +565,14 @@ def _merge_mcf_files(shard_prefixes: list[str], suffix: str,
     if not seen_nodes:
         return
 
-    body = ''.join(seen_nodes[node_key] + '\n\n'
-                   for node_key in sorted(seen_nodes.keys()))
+    body = ''.join(
+        seen_nodes[node_key] + '\n\n' for node_key in sorted(seen_nodes.keys()))
     _atomic_write_text(final_mcf_path, body)
 
 
 def _prepare_local_statvar_mcf(existing_statvar_mcf: str, tmp_dir: str) -> str:
     """Copies a gs:// existing_statvar_mcf file once to tmp_dir for all shards."""
-    if not existing_statvar_mcf or not existing_statvar_mcf.startswith(
-            'gs://'):
+    if not existing_statvar_mcf or not existing_statvar_mcf.startswith('gs://'):
         return existing_statvar_mcf
     local_mcf = os.path.join(
         tmp_dir,

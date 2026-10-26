@@ -99,8 +99,7 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '0301010000030010010',  # Not in labour force (Both sexes)
         ],
         'regional_ranks': ['2'],
-        'batch_size':
-        3,
+        'batch_size': 3,
     },
     'jpn_unemploymentrate.csv': {
         'indicators': [
@@ -117,8 +116,7 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '1201050800000010000',  # University students and graduate school students
         ],
         'regional_ranks': ['2'],
-        'batch_size':
-        4,
+        'batch_size': 4,
     },
     'jpn_aa1_teacher.csv': {
         'indicators': [
@@ -127,8 +125,7 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '1201040500000010000',  # Teachers of senior high schools
         ],
         'regional_ranks': ['2', '3'],
-        'batch_size':
-        3,
+        'batch_size': 3,
     },
     'jpn_aa1_health.csv': {
         'indicators': [
@@ -137,8 +134,7 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '1505130000000010070',  # Deaths by causes (suicide)
         ],
         'regional_ranks': ['2', '3'],
-        'batch_size':
-        3,
+        'batch_size': 3,
     },
     'jpn_aa1_death.csv': {
         'indicators': [
@@ -147,8 +143,7 @@ DATASET_CONFIGS: dict[str, dict[str, Any]] = {
             '0203020200000010000',  # Deaths (Female)
         ],
         'regional_ranks': ['2', '3'],
-        'batch_size':
-        3,
+        'batch_size': 3,
     },
     'jpn_gender_age_total_population.csv': {
         'indicators': _build_population_5yr_indicators(),
@@ -180,8 +175,9 @@ def _extract_class_lookup(class_objs: list[dict[str, Any]] | dict[str, Any],
                 classes = [classes]
             return {
                 str(c.get('@code', '')):
-                str(c.get('@name') if '@name' in c else c.get('$', ''))
-                for c in classes if isinstance(c, dict)
+                    str(c.get('@name') if '@name' in c else c.get('$', ''))
+                for c in classes
+                if isinstance(c, dict)
             }
     return {}
 
@@ -236,34 +232,20 @@ def parse_estat_json_response(data: dict[str, Any]) -> list[dict[str, str]]:
                                 time_cd[:4] if len(time_cd) >= 4 else time_cd)
 
         parsed_records.append({
-            'year':
-            year_str,
-            'indicatorCd':
-            ind_cd,
-            'regionCd':
-            reg_cd,
-            'value':
-            str(val_obj.get('$', '')),
-            'indicatorName':
-            indicator_map.get(ind_cd, ''),
-            'unitCd':
-            unit_cd,
-            'unitName':
-            unit_map.get(unit_cd, ''),
-            'statCd':
-            str(val_obj.get('@stat', '')),
-            'regionName':
-            region_map.get(reg_cd, ''),
-            'timeCd':
-            time_cd,
-            'cycle':
-            str(val_obj.get('@cycle', '')),
-            'regionRank':
-            str(val_obj.get('@regionRank', '')),
-            'isSeasonal':
-            str(val_obj.get('@isSeasonal', '')),
-            'isProvisional':
-            str(val_obj.get('@isProvisional', '')),
+            'year': year_str,
+            'indicatorCd': ind_cd,
+            'regionCd': reg_cd,
+            'value': str(val_obj.get('$', '')),
+            'indicatorName': indicator_map.get(ind_cd, ''),
+            'unitCd': unit_cd,
+            'unitName': unit_map.get(unit_cd, ''),
+            'statCd': str(val_obj.get('@stat', '')),
+            'regionName': region_map.get(reg_cd, ''),
+            'timeCd': time_cd,
+            'cycle': str(val_obj.get('@cycle', '')),
+            'regionRank': str(val_obj.get('@regionRank', '')),
+            'isSeasonal': str(val_obj.get('@isSeasonal', '')),
+            'isProvisional': str(val_obj.get('@isProvisional', '')),
         })
 
     if not parsed_records:

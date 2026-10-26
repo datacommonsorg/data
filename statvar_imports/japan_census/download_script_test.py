@@ -67,7 +67,7 @@ class DownloadScriptTest(unittest.TestCase):
                             },
                             {
                                 '@id':
-                                'time',
+                                    'time',
                                 'CLASS': [
                                     {
                                         '@code': '1953CY00',

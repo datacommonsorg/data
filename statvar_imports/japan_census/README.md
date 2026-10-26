@@ -84,14 +84,15 @@ python3 process.py \
   --parallelism=2
 ```
 
-### Run Sample Integration Test
+### Run Sample Integration Test (Offline)
 
 ```bash
-python3 ../../tools/statvar_importer/stat_var_processor.py \
+python3 process.py \
   --input_data=test_data/sample_input.csv \
   --pv_map=japan_census_pv_map.csv \
   --config_file=japan_census_metadata.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --historical_gcs_path="" \
+  --existing_statvar_mcf="" \
   --output_path=test_data/sample_expected_output
 ```
 
