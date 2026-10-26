@@ -2,20 +2,29 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary (>= 2009).",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2009' AND total_svs > 0"
-            }
-        },
-        {
             "rule_id": "check_deleted_records_percent",
             "description": "Checks that deleted records do not exceed 0.1%.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_overall_freshness",
+            "description": "Verifies that the overall dataset reaches recent reporting years (>= 2024).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) >= '2024' AS is_fresh, COUNT(*) AS row_cnt FROM stats",
+                "condition": "is_fresh = TRUE AND row_cnt > 0"
+            }
+        },
+        {
+            "rule_id": "check_all_statvars_historical_floor",
+            "description": "Verify all active StatVars meet the minimum historical boundary (>= 2009).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2009' AND total_svs > 0"
             }
         }
     ]

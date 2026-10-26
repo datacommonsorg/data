@@ -17,4 +17,4 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "${SCRIPT_DIR}/input_files"
-gcloud storage cp --recursive "gs://unresolved_mcf/opendataforafrica/kenya_census/input_files/*" "${SCRIPT_DIR}/input_files/"
+gcloud storage cp --recursive "gs://datacommons_public/unresolved_mcf/opendataforafrica/kenya_census/input_files/*" "${SCRIPT_DIR}/input_files/"
