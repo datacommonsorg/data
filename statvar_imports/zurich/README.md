@@ -233,8 +233,7 @@ Rollup Logic & Explanation (`bev_3903_all/generate_rollups.py`):
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 1,15 * *" (Runs at 6:00 AM on the 1st and 15th of every
-month).
+Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
 
 5. Script Execution Details
 
@@ -313,8 +312,7 @@ Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 20 1,15 * *" (Runs at 8:00 PM on the 1st and 15th of
-every month).
+Fully Autorefresh: "0 20 * * 5" (Runs weekly on Friday at 20:00 UTC).
 
 5. Script Execution Details
 
