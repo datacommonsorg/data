@@ -51,10 +51,10 @@ The import pipeline queries the e-Stat Statistical Dashboard JSON API in paralle
 
 ## 3. Automated Import
 
-This import is configured for automated monthly execution in `manifest.json`.
+This import is configured for automated weekly execution in `manifest.json`.
 
 ### Automated Steps
-1. The automated job triggers on cron schedule `0 5 1 * *` configured in `manifest.json`.
+1. The automated job triggers on cron schedule `0 5 * * 1` configured in `manifest.json`.
 2. `download_script.py` queries the e-Stat Dashboard API and populates `input_files/*.csv`.
 3. `process.py` runs `stat_var_processor.py` with `--parallelism=2` to generate `output_files/japan_census_output.csv` and `output_files/japan_census_output.tmcf`.
 4. Validation rules in `validation_config.json` are evaluated before publication.
