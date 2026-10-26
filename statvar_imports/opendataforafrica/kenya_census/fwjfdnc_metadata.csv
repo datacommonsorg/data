@@ -14,3 +14,4 @@ drop_statvars_without_svobs,0
 mapped_rows,1
 mapped_columns,12
 #input_rows,19
+generate_schema_mcf,False
