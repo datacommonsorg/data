@@ -30,8 +30,8 @@
                 "memory": 2,
                 "disk": 30
             },
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC",
+            "cron_schedule": "0 10 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 10:00 UTC",
             "validation_config_file": "wir_2552_wiki/validation_config.json"
         },
         {
@@ -54,8 +54,8 @@
                     "cleaned_csv": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC"
+            "cron_schedule": "30 11 * * 6",
+            "_comment": "Schedule: Weekly on Saturday at 11:30 UTC"
         },
         {
             "import_name": "Zurich_Population",
@@ -85,8 +85,8 @@
                 "memory": 2,
                 "disk": 30
             },
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC",
+            "cron_schedule": "30 2 * * 1",
+            "_comment": "Schedule: Weekly on Monday at 02:30 UTC",
             "validation_config_file": "bev_3240_wiki/validation_config.json"
         },
         {
@@ -109,8 +109,8 @@
                     "cleaned_csv": "bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC"
+            "cron_schedule": "30 11 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 11:30 UTC"
         },
         {
             "import_name": "Zurich_Population_Number_Of_Birth",
@@ -132,8 +132,8 @@
                     "cleaned_csv": "bev_4031_wiki/output/zurich_bev_4031_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC"
+            "cron_schedule": "30 10 * * 1",
+            "_comment": "Schedule: Weekly on Monday at 10:30 UTC"
         },
         {
             "import_name": "Zurich_Population_By_Origin",
@@ -156,8 +156,8 @@
                     "cleaned_csv": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC"
+            "cron_schedule": "30 10 * * 2",
+            "_comment": "Schedule: Weekly on Tuesday at 10:30 UTC"
         },
         {
             "import_name": "Zurich_Population_Number_Of_Birth_By_Sex",
@@ -179,8 +179,8 @@
                     "cleaned_csv": "bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC"
+            "cron_schedule": "0 12 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 12:00 UTC"
         },
         {
             "import_name": "Zurich_Population_By_Sex",
@@ -202,8 +202,8 @@
                     "cleaned_csv": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.csv"
                 }
             ],
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC"
+            "cron_schedule": "30 12 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 12:30 UTC"
         },
         {
             "import_name": "Zurich_Population_By_Age_Sex_Origin_Combined",
@@ -220,7 +220,7 @@
             "source_files": [
                 "bev_3903_all/input_files/BEV390OD3903.csv",
                 "bev_3903_all/input_files/BEV390OD3903_rollups.csv",
-                "bev_3903_all/output/*_stat_vars.mcf",
+                "bev_3903_all/zurich_population_bev_3903_wiki_stat_vars.mcf",
                 "bev_3903_all/counters/*.csv",
                 "bev_3903_all/validation_config.json"
             ],
@@ -228,7 +228,7 @@
                 {
                     "template_mcf": "bev_3903_all/output/zurich_population_bev_3903_wiki.tmcf",
                     "cleaned_csv": "bev_3903_all/output/zurich_population_bev_3903_wiki.csv",
-                    "node_mcf": "bev_3903_all/output/*_stat_vars.mcf"
+                    "node_mcf": "bev_3903_all/zurich_population_bev_3903_wiki_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
@@ -271,8 +271,8 @@
                 "memory": 4,
                 "disk": 30
             },
-            "cron_schedule": "0 6 * * 5",
-            "_comment": "Schedule: Weekly on Friday at 06:00 UTC",
+            "cron_schedule": "0 20 * * 5",
+            "_comment": "Schedule: Weekly on Friday at 20:00 UTC",
             "validation_config_file": "bev_4031_all/validation_config.json"
         }
     ]

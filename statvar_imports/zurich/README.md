@@ -22,7 +22,7 @@ Rollup Logic & Explanation (`wir_2552_wiki/generate_rollups.py`):
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:"0 2 1,15 * * " (Runs at 2:00 AM on the 1st and 15th day of every month).
 
 5. Script Execution Details
 
@@ -44,7 +44,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 0 6 29 * * " (Runs at 6:00 AM on the 29th of every month).
 
 5. Script Execution Details
 
@@ -66,7 +66,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 30 11 1,15 * * " (Runs at 11:30 AM on the 1st and 15th of every month).
 
 5. Script Execution Details
 
@@ -88,7 +88,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 45 15 29 * * " (Runs at 3:45 PM on the 29th of every month).
 
 5. Script Execution Details
 
@@ -110,7 +110,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 0 20 29 * * " (Runs at 8:00 PM on the 29th of every month).
 
 5. Script Execution Details
 
@@ -133,7 +133,7 @@ Release Frequency: P1Y
     example: python3 convert_to_utf8.py --input_csv_path=bev_3903_hel_wiki.csv
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 15 1 29 * * " (Runs at 1:15 AM on the 29th of every month).
 
 5. Script Execution Details
 
@@ -155,7 +155,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 07 19 29 * * " (Runs at 7:07 PM on the 29th of every month).
 
 5. Script Execution Details
 
@@ -178,7 +178,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh:" 55 10 29 * * " (Runs at 10:55 AM on the 29th of every month).
 
 5. Script Execution Details
 
@@ -312,7 +312,7 @@ Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
 
 4. Autorefresh Type
 
-Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+Fully Autorefresh: "0 20 * * 5" (Runs weekly on Friday at 20:00 UTC).
 
 5. Script Execution Details
 
