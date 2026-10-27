@@ -187,13 +187,14 @@ Fully Autorefresh:" 55 10 29 * * " (Runs at 10:55 AM on the 29th of every month)
 #####
 
 
-1. "import_name": "Zurich_Population_By_Age_Sex_Origin_Combined"
+1. "import_name": "Zurich_Population_By_Age_Sex_Origin"
 
 2. Import Overview
-Population of Zurich city by age, sex, and origin at City, District (Kreise),
-and Quarter (Quartiere) Level, consolidating the 3 legacy split imports
-(`Zurich_Population_By_Age`, `Zurich_Population_By_Origin`,
-`Zurich_Population_By_Sex`, which will be paused later after cutover).
+Population by statistical city district, origin, gender, year of age, 5-year age
+groups and year at City, District (Kreise), and Quarter (Quartiere) Level,
+consolidating the 3 legacy split imports (`Zurich_Population_By_Age`,
+`Zurich_Population_By_Origin`, `Zurich_Population_By_Sex`, which will be paused
+later after cutover).
 Source URL: [BEV390OD3903 Dataset](https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903)
 Import Type: Fully Autorefresh
 Source Data Availability: 1993 onwards
@@ -245,7 +246,7 @@ python3 bev_3903_all/generate_rollups.py && \
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --input_data=bev_3903_all/input_files/BEV390OD3903_rollups.csv \
-  --pv_map=bev_3903_all/bev_3903_wiki_pvmap.csv \
+  --pv_map=bev_3903_all/bev_3903_wiki_pvmap.csv,zurich_places_pvmap.csv \
   --config_file=bev_3903_all/bev_3903_wiki_metadata.csv \
   --output_columns=observationAbout,observationDate,value,variableMeasured \
   --output_path=bev_3903_all/output/zurich_population_bev_3903_wiki \
@@ -255,12 +256,12 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
 #####
 
 
-1. "import_name": "Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined"
+1. "import_name": "Zurich_Population_Number_Of_Birth_By_Sex_Origin"
 
 2. Import Overview
-Consolidated live births in Zurich city by sex and origin at City
-(`wikidataId/Q72`), District (`Kreise` 1–12), and Quarter (`Quartiere` 34
-quarters) Level, consolidating the 3 legacy split imports
+Number of live births by statistical city district, gender, age group and origin
+at City (`wikidataId/Q72`), District (`Kreise` 1–12), and Quarter (`Quartiere`
+34 quarters) Level, consolidating the 3 legacy split imports
 (`Zurich_Population_Number_Of_Birth`,
 `Zurich_Population_Number_Of_Birth_By_Origin`,
 `Zurich_Population_Number_Of_Birth_By_Sex`, which will be paused later after
@@ -275,7 +276,7 @@ Generate demographic and geographic rollups from the downloaded dataset:
 python3 bev_4031_all/generate_rollups.py
 
 Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
-- **Why Source Migration & Consolidation into 2 Combined Imports Was Performed**:
+- **Why Source Migration & Consolidation into 2 Imports Was Performed**:
   - Previously, `BEV390OD3903.csv` and `BEV403OD4031.csv` from Statistics Zurich
     (`data.stadt-zuerich.ch`) were ingested via 6 separate legacy split imports
     (`Zurich_Population_By_Age`, `Zurich_Population_By_Origin`,
@@ -285,17 +286,17 @@ Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
     the same source CSV independently and only emitted 1-dimensional
     Quarter-level slices, omitting multi-dimensional cross-tabulations and
     District/City geographic rollups.
-  - Consolidating into `Zurich_Population_By_Age_Sex_Origin_Combined` (`108`
-    StatVars) and `Zurich_Population_Number_Of_Birth_By_Sex_Origin_Combined`
-    (`9` StatVars) via the shared rollup helper (`rollup_util.py`) preserves
-    100% of the observations from all 6 legacy split imports (`0` deleted
-    observations verified via `ImportDiffer`) while adding District (`Kreis
-    1`–`12`), City (`Ganze Stadt`), and 2-way/3-way demographic
-    cross-tabulations in a single unified pipeline per dataset (the 6 legacy
-    split imports will be paused later after cutover). Note: for OD4031,
-    `ImportDiffer` against the 3 legacy birth imports shows `0` deleted
-    observations, `6,016` added observations, and `390` modified observations
-    reflecting upstream historical birth count revisions in `BEV403OD4031.csv`.
+  - Consolidating into `Zurich_Population_By_Age_Sex_Origin` (`108` StatVars)
+    and `Zurich_Population_Number_Of_Birth_By_Sex_Origin` (`9` StatVars) via the
+    shared rollup helper (`rollup_util.py`) preserves 100% of the observations
+    from all 6 legacy split imports (`0` deleted observations verified via
+    `ImportDiffer`) while adding District (`Kreis 1`–`12`), City (`Ganze
+    Stadt`), and 2-way/3-way demographic cross-tabulations in a single unified
+    pipeline per dataset (the 6 legacy split imports will be paused later after
+    cutover). Note: for OD4031, `ImportDiffer` against the 3 legacy birth
+    imports shows `0` deleted observations, `6,016` added observations, and
+    `390` modified observations reflecting upstream historical birth count
+    revisions in `BEV403OD4031.csv`.
 - **Temporal & Spatial Aggregation**: Aggregates daily births into annual totals
   (`GueltigAbDatJahr`) across all 3 geographic levels: Quarter (`QuarLang`),
   District (`KreisLang` mapped to `QuarLang`), and City (`Ganze Stadt`).
@@ -324,7 +325,7 @@ python3 bev_4031_all/generate_rollups.py && \
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --input_data=bev_4031_all/input_files/BEV403OD4031_rollups.csv \
-  --pv_map=bev_4031_all/bev_4031_wiki_pvmap.csv \
+  --pv_map=bev_4031_all/bev_4031_wiki_pvmap.csv,zurich_places_pvmap.csv \
   --config_file=bev_4031_all/bev_4031_wiki_metadata.csv \
   --output_columns=observationAbout,observationDate,value,variableMeasured \
   --output_path=bev_4031_all/output/zurich_bev_4031_wiki \
