@@ -18,18 +18,32 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INPUT_DIR="${INPUT_DIR:-${SCRIPT_DIR}/input_files}"
 OUTPUT_DIR="${OUTPUT_DIR:-${SCRIPT_DIR}/output}"
-GCS_MMG_PREFIX="${GCS_MMG_PREFIX:-gs://unresolved_mcf/feeding_america/map_meal_gap}"
+GCS_MMG_PREFIX="${GCS_MMG_PREFIX:-gs://unresolved_mcf/feeding_america/map_meal_gap/latest}"
 GCS_FI_INPUT_PREFIX="${GCS_FI_INPUT_PREFIX:-gs://unresolved_mcf/feeding_america/food_insecurity/input_files}"
+
+for arg in "$@"; do
+  case "${arg}" in
+    --input_dir=*)
+      INPUT_DIR="${arg#*=}"
+      ;;
+    --output_dir=*)
+      OUTPUT_DIR="${arg#*=}"
+      ;;
+  esac
+done
 
 mkdir -p "${INPUT_DIR}" "${OUTPUT_DIR}"
 
-if ! compgen -G "${INPUT_DIR}/*.csv" >/dev/null && ! compgen -G "${INPUT_DIR}/*.xlsx" >/dev/null; then
+if ! compgen -G "${INPUT_DIR}/*.csv" >/dev/null && ! compgen -G "${INPUT_DIR}/*.xlsx" >/dev/null && ! compgen -G "${INPUT_DIR}/table/*.csv" >/dev/null; then
   echo "Staging Feeding America source files from GCS into ${INPUT_DIR}..."
+  mkdir -p "${INPUT_DIR}/table"
   if command -v gcloud >/dev/null 2>&1; then
+    gcloud storage cp "${GCS_MMG_PREFIX}/table/FeedingAmerica_MMG.csv" "${INPUT_DIR}/table/" 2>/dev/null || true
     gcloud storage cp "${GCS_MMG_PREFIX}/*.csv" "${INPUT_DIR}/" 2>/dev/null || true
     gcloud storage cp "${GCS_MMG_PREFIX}/*.xlsx" "${INPUT_DIR}/" 2>/dev/null || true
     gcloud storage cp "${GCS_FI_INPUT_PREFIX}/*.xlsx" "${INPUT_DIR}/" 2>/dev/null || true
   elif command -v gsutil >/dev/null 2>&1; then
+    gsutil cp "${GCS_MMG_PREFIX}/table/FeedingAmerica_MMG.csv" "${INPUT_DIR}/table/" 2>/dev/null || true
     gsutil cp "${GCS_MMG_PREFIX}/*.csv" "${INPUT_DIR}/" 2>/dev/null || true
     gsutil cp "${GCS_MMG_PREFIX}/*.xlsx" "${INPUT_DIR}/" 2>/dev/null || true
     gsutil cp "${GCS_FI_INPUT_PREFIX}/*.xlsx" "${INPUT_DIR}/" 2>/dev/null || true
