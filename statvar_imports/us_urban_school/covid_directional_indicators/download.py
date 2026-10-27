@@ -60,7 +60,7 @@ def rename_column(file_path):
             logging.info(f"Skipping year column addition for unsupported file format: {file_path.suffix}")
             return
         if 'SCH_DIND_VIRTUALTYPE' in df.columns:
-            df.rename(columns={'SCH_DIND_VIRTUALTYPE': 'SCH_DIND_REMOTETYPE'}, inplace=True)
+            df = df.rename(columns={'SCH_DIND_VIRTUALTYPE': 'SCH_DIND_REMOTETYPE'})
             logging.info("-> Renamed column 'SCH_DIND_VIRTUALTYPE' to 'SCH_DIND_REMOTETYPE'.")
         if file_path.suffix == '.xlsx':
             df.to_excel(file_path, index=False)

@@ -320,9 +320,8 @@ if __name__ == '__main__':
         read_file.insert(_YEAR_INDEX, 'Year', year)
         # Since the legacy rape column value should not be included in the total count, nor in forcible rape value, we drop it.
         if year in YEARS_WITH_TWO_RAPE_COLUMNS:
-            read_file.drop(read_file.columns[[_LEGACY_RAPE_INDEX]],
-                           axis=1,
-                           inplace=True)
+            read_file = read_file.drop(read_file.columns[[_LEGACY_RAPE_INDEX]],
+                                       axis=1)
         read_file.to_csv(csv_file, index=None, header=True)
         csv_files.append(csv_file)
         os.remove(xls_file)
