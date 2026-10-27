@@ -190,11 +190,10 @@ class ImportDiffer:
           else Diff.DELETED.name if row[Column.diff_type.name] == 'left_only' \
           else Diff.MODIFIED.name if row[Column.value_combined.name + '_x'] != row[Column.value_combined.name + '_y'] \
           else Diff.UNMODIFIED.name, axis=1)
-        result.drop(
-            result[result[Column.diff_type.name] == Diff.UNMODIFIED.name].index,
-            inplace=True)
+        result = result.drop(
+            result[result[Column.diff_type.name] == Diff.UNMODIFIED.name].index)
         # result.sort_values(by=[Column.diff_type.name], inplace=True)
-        result.reset_index(drop=True, inplace=True)
+        result = result.reset_index(drop=True)
         if result.empty:
             column_list = [
                 Column.key_combined.name, Column.value_combined.name + '_x',
@@ -254,7 +253,7 @@ class ImportDiffer:
                 })
 
         schema_df = pd.DataFrame(schema_list)
-        schema_df.drop_duplicates(inplace=True)
+        schema_df = schema_df.drop_duplicates()
         obs_df = pd.DataFrame(obs_list)
         return obs_df, schema_df
 

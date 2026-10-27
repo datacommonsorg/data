@@ -915,7 +915,7 @@ def _process_cities(file_path: str,
         data_df['Location'] = data_df.apply(lambda x: _generate_fips_code(x),
                                             axis=1)
 
-        data_df.dropna(subset=['Location'], inplace=True)
+        data_df = data_df.dropna(subset=['Location'])
 
         key = "POPESTIMATE"
         if "sub-est2010-alt" == file_name_without_ext:

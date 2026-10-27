@@ -67,17 +67,16 @@ class IndiaPostPincodesDataLoader:
     def process(self):
         self.raw_df = pd.read_csv(self.pincode_csv, dtype=str)
         self.raw_df.fillna('', inplace=True)
-        self.raw_df.drop_duplicates(subset=["Pincode", "StateName", "District"],
-                                    inplace=True)
-        self.raw_df.drop([
+        self.raw_df = self.raw_df.drop_duplicates(
+            subset=["Pincode", "StateName", "District"])
+        self.raw_df = self.raw_df.drop([
             "CircleName", "RegionName", "DivisionName", "OfficeName",
             "OfficeType", "Delivery", "Latitude", "Longitude"
         ],
-                         axis=1,
-                         inplace=True,
-                         errors="ignore")
-        self.raw_df.sort_values(by=["Pincode", "StateName", "District"],
-                                inplace=True)
+                                       axis=1,
+                                       errors="ignore")
+        self.raw_df = self.raw_df.sort_values(
+            by=["Pincode", "StateName", "District"])
         self.raw_df["DistrictLGDCode"] = self.raw_df.apply(
             lambda row: self._setup_location(row), axis=1)
 
@@ -91,10 +90,9 @@ class IndiaPostPincodesDataLoader:
         self.raw_df = self.raw_df.join(self.raw_df['DistrictLGDCode'].str.split(
             ',', expand=True).add_prefix('DistrictLGDCode'))
         # Drop the DistrictLGDCode Column
-        self.raw_df.drop(["DistrictLGDCode"],
-                         axis=1,
-                         inplace=True,
-                         errors="ignore")
+        self.raw_df = self.raw_df.drop(["DistrictLGDCode"],
+                                       axis=1,
+                                       errors="ignore")
 
         # Add column PincodeDCID derived from Pincode
         self.raw_df["PincodeDCID"] = self.raw_df["Pincode"].apply(

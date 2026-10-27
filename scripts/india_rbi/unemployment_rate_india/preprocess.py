@@ -149,8 +149,8 @@ class UnempolymentRateIndiaLoader:
     def _make_column_numerical(self, column):
         self.clean_df[column] = self.clean_df[column].astype(str).str.replace(
             ',', '')
-        self.clean_df[column].loc[self.clean_df[column] == '.'] = np.nan
-        self.clean_df[column].loc[self.clean_df[column] == '-'] = np.nan
+        self.clean_df.loc[self.clean_df[column] == '.', column] = np.nan
+        self.clean_df.loc[self.clean_df[column] == '-', column] = np.nan
         self.clean_df[column] = pd.to_numeric(self.clean_df[column],
                                               errors='coerce')
 
