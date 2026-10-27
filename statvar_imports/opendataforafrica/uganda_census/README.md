@@ -62,7 +62,7 @@ During scheduled import runs, the automated pipeline executes:
 3. **Validation**: Validates data freshness, record deletion thresholds, and schema lint rules.
 
 ### 4.3 Refresh Schedule
-The automated pipeline executes on a quarterly schedule (`0 5 1 1,4,7,10 *` - at 05:00 UTC on the 1st of January, April, July, and October) via Cloud Batch / GCP Cloud Run.
+The automated pipeline executes on a weekly schedule (`0 5 * * 1` - at 05:00 UTC every Monday) via Cloud Batch / GCP Cloud Run.
 
 ## 5. Running the Data Processor
 
