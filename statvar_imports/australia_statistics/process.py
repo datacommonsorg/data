@@ -760,7 +760,7 @@ def _stage_inputs(raw_files: list[str], staged_dir: str) -> list[str]:
                 'abs_lf_sdmx.csv',
                 'abs_erp_q_sdmx.csv',
         ):
-            with open(fpath, 'r', encoding='utf-8') as f:
+            with open(fpath, 'r', encoding='utf-8-sig') as f:
                 first_line = f.readline().strip()
             if first_line.startswith('observationDate,'):
                 staged_files.append(fpath)

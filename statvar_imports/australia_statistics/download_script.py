@@ -114,15 +114,15 @@ def _get_session() -> requests.Session:
 def _fetch_bytes(url: str, timeout: int = 60) -> bytes:
     """Downloads raw bytes from a URL with retry logic."""
     session = _get_session()
-    for attempt in range(4):
+    for attempt in range(10):
         try:
             resp = session.get(url, timeout=timeout)
             resp.raise_for_status()
             if not resp.content:
                 raise RuntimeError(f'Empty response body from {url}')
             return resp.content
-        except Exception as e:
-            if attempt == 3:
+        except requests.exceptions.RequestException as e:
+            if attempt == 9:
                 raise RuntimeError(f'Failed to download {url}: {e}') from e
             time.sleep(2**attempt)
     raise RuntimeError(f'Unreachable download failure for {url}')
@@ -159,7 +159,7 @@ def _download_static_file(filename: str, url: str,
     logging.info('Downloading %s from %s...', filename, url)
     content = _fetch_bytes(url)
     if filename.endswith('.csv'):
-        text_head = content[:256].decode('utf-8', errors='ignore').lstrip()
+        text_head = content[:256].decode('utf-8-sig', errors='ignore').lstrip()
         if not text_head.startswith('DATAFLOW,'):
             raise RuntimeError(
                 f'Invalid SDMX CSV payload from {url}: {text_head[:100]!r}')
