@@ -254,9 +254,11 @@ class DataFrameGenerator:
             pd.DataFrame: DataFrame with header
         """
         if len(header) > 0:
-            for index, column_name in enumerate(header):
-                df.rename(columns={df.columns[index]: column_name},
-                          inplace=True)
+            rename_dict = {
+                df.columns[index]: column_name
+                for index, column_name in enumerate(header)
+            }
+            df = df.rename(columns=rename_dict)
         return df
 
     def make_pascal_case(self, df: pd.DataFrame,
@@ -311,7 +313,7 @@ class DivisionCls:
                       )  # Assuming FIRST_MCF_ENTRY is defined elsewhere
 
         global DIVISION_DICT
-        df.sort_values(by=['division_namePascalCase'], inplace=True)
+        df = df.sort_values(by=['division_namePascalCase'])
         with open(mcf_file_path, 'a') as file:
             for _, row in df.iterrows():
                 mcf_line = DIVISION_MCF.format(

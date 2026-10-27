@@ -43,7 +43,7 @@ def county2000(output_folder: str):
                       index=False)
             # Filter years 1 - 12.
             df['Year'] = df['YEAR']
-            df.drop(columns=['YEAR'], inplace=True)
+            df = df.drop(columns=['YEAR'])
             df = df.query("Year not in [1,12,13]")
             # Filter by agegrp = 99.
             df = df.query("AGEGRP != 99")
@@ -72,8 +72,8 @@ def county2000(output_folder: str):
             # 1 if it starts from 0To4
             df = replace_agegrp(df, 0)
             # Drop unwanted columns.
-            df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],\
-                inplace=True)
+            df = df.drop(
+                columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],)
             df = df.drop(columns=[
                 'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE',
                 'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE',
