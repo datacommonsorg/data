@@ -1,0 +1,5 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+"10180","Abilene, TX (Metropolitan Statistical Area)",6,MARPP,1,"...","RPPs: All items","Index",89.947,90.354
+"10180","Abilene, TX (Metropolitan Statistical Area)",6,MARPP,2,"...","RPPs: Goods","Index",95.1,95.4
+"10180","Abilene, TX (Metropolitan Statistical Area)",6,MARPP,3,"...","RPPs: Services: Rents","Index",73.2,(NA)
+"10180","Abilene, TX (Metropolitan Statistical Area)",6,MAIRPD,1,"...","Implicit regional price deflator","Index",99.9,99.9

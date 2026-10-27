@@ -1,0 +1,28 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "BEAGDPPriceParity",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.bea.gov/data/gdp/gdp-county-metro-and-other-areas",
+      "provenance_description": "GDP by county and metropolitan area and Regional Price Parities by state and metro area from the Bureau of Economic Analysis.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*",
+        "golden_data/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "bea_gdp_rpp.tmcf",
+          "cleaned_csv": "output/bea_gdp_rpp.csv",
+          "node_mcf": "*.mcf"
+        }
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 0 15 * *"
+    }
+  ]
+}
