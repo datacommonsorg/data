@@ -1,0 +1,27 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "FeedingAmerica_MapMealGap",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://map.feedingamerica.org/",
+      "provenance_description": "Feeding America Map the Meal Gap county and state food insecurity estimates.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*",
+        "golden_data/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/FeedingAmerica_MMG.tmcf",
+          "cleaned_csv": "output/FeedingAmerica_MMG.csv"
+        }
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 0 1 6 *"
+    }
+  ]
+}

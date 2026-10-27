@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Ensure historical 2018-2019 baseline observations are preserved.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_empty_import",
+      "description": "Ensure the import generates observations.",
+      "validator": "EMPTY_IMPORT_CHECK",
+      "params": {}
+    },
+    {
+      "rule_id": "check_missing_refs_count",
+      "description": "Ensure all referenced StatVars and entities exist.",
+      "validator": "MISSING_REFS_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Ensure zero genmcf lint errors.",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Ensure all 8 active annual StatVars share a consistent MaxDate.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^(?!.*EligibleForSomeFederalBenefits).*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_not_regressed",
+      "description": "Verify MaxDate is at least 2021 for all 8 active StatVars.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar NOT LIKE '%EligibleForSomeFederalBenefits'",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2021"
+      }
+    },
+    {
+      "rule_id": "check_max_date_some_federal_benefits",
+      "description": "Verify MaxDate is at least 2020 for Count_Person_FoodInsecure_EligibleForSomeFederalBenefits (not split separately by Feeding America in 2021).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar LIKE '%EligibleForSomeFederalBenefits'",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2020"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report",
+      "description": "Verify summary report matches golden StatVar summary.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations",
+      "description": "Verify output observations contain golden places.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_observations.csv",
+        "input_files": "output/FeedingAmerica_MMG.csv"
+      }
+    }
+  ]
+}

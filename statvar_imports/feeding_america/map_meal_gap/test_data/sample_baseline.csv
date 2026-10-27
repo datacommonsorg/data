@@ -1,0 +1,4 @@
+dcid,observationDate,Count_Person_FoodInsecure,Count_Person_FoodInsecure_EligibleForAllFederalBenefits,Count_Person_FoodInsecure_EligibleForSomeFederalBenefits,Count_Person_FoodInsecure_IneligibleForFederalBenefits,Count_Child_FoodInsecure,Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits,Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits,Mean_MealCost_Person_FoodSecure,Annual_FoodBudgetShortfall
+geoId/01,2018,829220,441850.0,127470.0,259670.0,240000,192000.0,48000.0,2.99,422972000
+geoId/04,2018,967120,623690.0,,343430.0,309560,213596.4,95963.6,2.97,489578000
+geoId/01001,2018,8650,4325.0,1522.4,2802.6,2570,1927.5,642.5,3.23,4768000

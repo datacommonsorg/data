@@ -1,0 +1,73 @@
+Node: E:FeedingAmerica_MMG->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_FoodInsecure
+value: C:FeedingAmerica_MMG->Count_Person_FoodInsecure
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_FoodInsecure_EligibleForAllFederalBenefits
+value: C:FeedingAmerica_MMG->Count_Person_FoodInsecure_EligibleForAllFederalBenefits
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_FoodInsecure_EligibleForSomeFederalBenefits
+value: C:FeedingAmerica_MMG->Count_Person_FoodInsecure_EligibleForSomeFederalBenefits
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_FoodInsecure_IneligibleForFederalBenefits
+value: C:FeedingAmerica_MMG->Count_Person_FoodInsecure_IneligibleForFederalBenefits
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Child_FoodInsecure
+value: C:FeedingAmerica_MMG->Count_Child_FoodInsecure
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits
+value: C:FeedingAmerica_MMG->Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits
+value: C:FeedingAmerica_MMG->Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+
+Node: E:FeedingAmerica_MMG->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_MealCost_Person_FoodSecure
+value: C:FeedingAmerica_MMG->Mean_MealCost_Person_FoodSecure
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+unit: dcs:USDollar
+
+Node: E:FeedingAmerica_MMG->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Annual_FoodBudgetShortfall
+value: C:FeedingAmerica_MMG->Annual_FoodBudgetShortfall
+observationAbout: C:FeedingAmerica_MMG->observationAbout
+observationDate: C:FeedingAmerica_MMG->observationDate
+measurementMethod: dcs:FeedingAmerica_Estimate
+unit: dcs:USDollar
