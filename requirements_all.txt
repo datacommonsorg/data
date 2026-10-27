@@ -25,6 +25,8 @@ rasterio
 rdp
 requests-mock
 s2sphere
+# Note: run_tests.sh installs with `--torch-backend cpu` so sentence-transformers
+# pulls in CPU-only PyTorch instead of 4+ GB of NVIDIA CUDA/GPU packages.
 sentence-transformers
 tabula-py
 yapf

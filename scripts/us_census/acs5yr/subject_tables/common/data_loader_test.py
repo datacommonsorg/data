@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ Test for the data loader for the subject tables"""
-import unittest
 import os
+import tempfile
+import unittest
 from .data_loader import process_subject_tables
 
 base_path = os.path.dirname(__file__)
@@ -23,29 +24,46 @@ base_path = os.path.dirname(__file__)
 class DataLoaderBaseTest(unittest.TestCase):
     # TODO: resolve issues to the spec and column map based on current working directory
     def test_zip_file_input(self):
-        process_subject_tables(
-            table_prefix='test_zip_alabama',
-            input_path=os.path.join(base_path, "./testdata/s2702_alabama.zip"),
-            output_dir=os.path.join(base_path, "./testdata/"),
-            column_map_path=os.path.join(
-                base_path, "./testdata/column_map_from_zip_expected.json"),
-            spec_path=os.path.join(base_path, "./testdata/spec_s2702.json"),
-            debug=False,
-            delimiter='!!',
-            has_percent=True)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            process_subject_tables(
+                table_prefix='test_zip_alabama',
+                input_path=os.path.join(base_path,
+                                        "./testdata/s2702_alabama.zip"),
+                output_dir=tmp_dir,
+                column_map_path=os.path.join(
+                    base_path, "./testdata/column_map_from_zip_expected.json"),
+                spec_path=os.path.join(base_path, "./testdata/spec_s2702.json"),
+                debug=False,
+                delimiter='!!',
+                has_percent=True)
+            for ext in ['_cleaned.csv', '_output.mcf', '_output.tmcf']:
+                with open(os.path.join(
+                        tmp_dir, f'test_zip_alabama{ext}')) as actual, open(
+                            os.path.join(base_path,
+                                         f'./testdata/test_zip_alabama{ext}')
+                        ) as expected:
+                    self.assertEqual(actual.read(), expected.read())
 
     def test_csv_file_input(self):
-        process_subject_tables(
-            table_prefix='test_csv_2013',
-            input_path=os.path.join(base_path,
-                                    "./testdata/ACSST5Y2013_S2702.csv"),
-            output_dir=os.path.join(base_path, "./testdata/"),
-            column_map_path=os.path.join(
-                base_path, "./testdata/column_map_from_zip_expected.json"),
-            spec_path=os.path.join(base_path, "./testdata/spec_s2702.json"),
-            debug=False,
-            delimiter='!!',
-            has_percent=True)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            process_subject_tables(
+                table_prefix='test_csv_2013',
+                input_path=os.path.join(base_path,
+                                        "./testdata/ACSST5Y2013_S2702.csv"),
+                output_dir=tmp_dir,
+                column_map_path=os.path.join(
+                    base_path, "./testdata/column_map_from_zip_expected.json"),
+                spec_path=os.path.join(base_path, "./testdata/spec_s2702.json"),
+                debug=False,
+                delimiter='!!',
+                has_percent=True)
+            for ext in ['_cleaned.csv', '_output.mcf', '_output.tmcf']:
+                with open(os.path.join(
+                        tmp_dir, f'test_csv_2013{ext}')) as actual, open(
+                            os.path.join(
+                                base_path,
+                                f'./testdata/test_csv_2013{ext}')) as expected:
+                    self.assertEqual(actual.read(), expected.read())
 
     # TODO: add tests for processing a directory of files
 

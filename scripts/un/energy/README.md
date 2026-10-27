@@ -8,8 +8,7 @@ The data set is organized by energy source types and for each source, the csv fi
 
 The data set can be downloaded from [UNData explorer](http://data.un.org/Explorer.aspx) with the following API:
 ```
-https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:${ID}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc
-Where ${ID} is a 2-letter energy code, for eg: 'BT' for Bitumen, 'MO' for Motor gasoline, 'KR' for Kerosene.
+_DOWNLOAD_URL = 'https://data.un.org/legacy/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 ```
 
 The energy data file has the following columns:
