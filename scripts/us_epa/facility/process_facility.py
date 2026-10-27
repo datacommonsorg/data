@@ -15,12 +15,8 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
 from util.dc_api_wrapper import dc_api_get_node_property
-
-# Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
-from us_epa.util.crosswalk import Crosswalk
-from us_epa.util import facilities_helper as fh
+from scripts.us_epa.util.crosswalk import Crosswalk
+from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
@@ -72,19 +68,6 @@ def _gen_tmcf():
     return '\n'.join(lines)
 
 
-def _v(table, row, col):
-    prefixed_key = table + '.' + col
-    if prefixed_key in row:
-        return row.get(prefixed_key, '') or ''
-    if col in row:
-        return row.get(col, '') or ''
-    return row.get(col.lower(), '') or ''
-
-
-def _cv(table, row, col):
-    return _v(table, row, col).strip().title()
-
-
 def _str(v):
     if not v:
         return ''
@@ -100,30 +83,25 @@ def _clean_coord(val):
     return val
 
 
-def _get_name(table, row):
-    name = _cv(table, row, 'FACILITY_NAME')
-    return name.replace(' Llc', ' LLC')
-
-
 def _get_address(table, row):
     parts = []
     for k in ['ADDRESS1', 'ADDRESS2', 'CITY', 'STATE_NAME']:
-        p = _cv(table, row, k)
+        p = fh.cv(table, row, k)
         if p:
             parts.append(p)
     address = ', '.join(parts)
-    p = _cv(table, row, 'ZIP')
+    p = fh.cv(table, row, 'ZIP')
     if p:
         address += ' - ' + p
     return address
 
 
 def _get_naics(table, row):
-    naics = (_v(table, row, 'NAICS_CODE') if table
-             in ('V_GHG_INJECTION_FACILITIES',
-                 _CONSOLIDATED_TABLE) else _v(table, row, 'PRIMARY_NAICS_CODE'))
+    naics = (fh.v(table, row, 'NAICS_CODE') if table in (
+        'V_GHG_INJECTION_FACILITIES',
+        _CONSOLIDATED_TABLE) else fh.v(table, row, 'PRIMARY_NAICS_CODE'))
     if not naics:
-        naics = _v(table, row, 'PRIMARY_NAICS_CODE') or _v(
+        naics = fh.v(table, row, 'PRIMARY_NAICS_CODE') or fh.v(
             table, row, 'NAICS_CODE')
     if not naics:
         return ''
@@ -291,33 +269,30 @@ def _get_input_tables(input_tables_path):
 
 def _deduplicate_facility_rows(table, rows):
     """Deduplicates facility rows by FACILITY_ID, keeping the latest YEAR row and backfilling missing fields."""
-    by_id = {}
+    rows_by_id = {}
     missing_facility_id_count = 0
-    for row in rows:
-        ghg_id = _v(table, row, 'FACILITY_ID')
+    for idx, row in enumerate(rows):
+        ghg_id = fh.v(table, row, 'FACILITY_ID')
         if not ghg_id:
             missing_facility_id_count += 1
             logging.warning(
                 'Skipping row with missing FACILITY_ID in %s (count=%d): %s',
                 table, missing_facility_id_count, row)
             continue
-        year_str = _v(table, row, 'YEAR')
+        year_str = fh.v(table, row, 'YEAR')
         year = int(year_str) if year_str.isdigit() else 0
-        if ghg_id not in by_id:
-            by_id[ghg_id] = (year, dict(row))
-        else:
-            prev_year, prev_row = by_id[ghg_id]
-            if year >= prev_year:
-                merged = dict(row)
-                for k, v in prev_row.items():
-                    if not merged.get(k) and v:
-                        merged[k] = v
-                by_id[ghg_id] = (year, merged)
-            else:
-                for k, v in row.items():
-                    if not prev_row.get(k) and v:
-                        prev_row[k] = v
-    return [item[1] for item in by_id.values()]
+        rows_by_id.setdefault(ghg_id, []).append((year, idx, dict(row)))
+
+    deduped = []
+    for ghg_id, entries in rows_by_id.items():
+        entries.sort(key=lambda item: (item[0], item[1]), reverse=True)
+        merged = dict(entries[0][2])
+        for _, _, older_row in entries[1:]:
+            for k, val in older_row.items():
+                if not merged.get(k) and val:
+                    merged[k] = val
+        deduped.append(merged)
+    return deduped
 
 
 def process(input_tables_path, output_path):
@@ -344,23 +319,23 @@ def process(input_tables_path, output_path):
 
             if len(deduped_rows) > 20:
                 all_zips = [
-                    'zip/' + _v(table, r, 'ZIP')[:5]
+                    'zip/' + fh.v(table, r, 'ZIP')[:5]
                     for r in deduped_rows
-                    if _v(table, r, 'ZIP')
+                    if fh.v(table, r, 'ZIP')
                 ]
                 print(
                     f'Pre-fetching county candidates for {len(set(all_zips))} unique ZCTAs...'
                 )
                 fh.prefetch_county_candidates(all_zips,
                                               cache_file=os.path.join(
-                                                  output_path,
+                                                  input_tables_path,
                                                   'zcta_county_cache.json'))
                 all_counties = set()
                 for r in deduped_rows:
-                    fips = _v(table, r, 'COUNTY_FIPS')
+                    fips = fh.v(table, r, 'COUNTY_FIPS')
                     if fips:
                         all_counties.add('geoId/' + fips)
-                    z = 'zip/' + _v(table, r, 'ZIP')[:5]
+                    z = 'zip/' + fh.v(table, r, 'ZIP')[:5]
                     for clist in fh.get_county_candidates(z):
                         all_counties.update(clist)
                 print(
@@ -368,12 +343,13 @@ def process(input_tables_path, output_path):
                 )
                 _prefetch_geojson(all_counties,
                                   cache_file=os.path.join(
-                                      output_path, 'county_geojson_cache.json'))
+                                      input_tables_path,
+                                      'county_geojson_cache.json'))
                 all_pp_dcids = [
                     'eia/pp/' + v
                     for r in deduped_rows
                     for v in crosswalk.get_power_plant_ids(
-                        _v(table, r, 'FACILITY_ID'))
+                        fh.v(table, r, 'FACILITY_ID'))
                 ]
                 print(
                     f'Checking existence for {len(set(all_pp_dcids))} unique EIA power plants...'
@@ -384,7 +360,7 @@ def process(input_tables_path, output_path):
 
             missing_facility_id_count = 0
             for in_row in deduped_rows:
-                ghg_id = _v(table, in_row, 'FACILITY_ID')
+                ghg_id = fh.v(table, in_row, 'FACILITY_ID')
                 if not ghg_id:
                     missing_facility_id_count += 1
                     logging.warning(
@@ -395,16 +371,16 @@ def process(input_tables_path, output_path):
                     continue
                 processed_ids.add(ghg_id)
 
-                lat = _clean_coord(_v(table, in_row, 'LATITUDE'))
-                lng = _clean_coord(_v(table, in_row, 'LONGITUDE'))
-                zip = 'zip/' + _v(table, in_row,
-                                  'ZIP')[:5]  # zips have extension
-                county = 'geoId/' + _v(table, in_row, 'COUNTY_FIPS')
+                lat = _clean_coord(fh.v(table, in_row, 'LATITUDE'))
+                lng = _clean_coord(fh.v(table, in_row, 'LONGITUDE'))
+                zip = 'zip/' + fh.v(table, in_row,
+                                    'ZIP')[:5]  # zips have extension
+                county = 'geoId/' + fh.v(table, in_row, 'COUNTY_FIPS')
 
                 zip, county, lat, lng = _resolve_places(ghg_id, zip, county,
                                                         lat, lng)
 
-                frs_id = crosswalk.get_frs_id(ghg_id) or _v(
+                frs_id = crosswalk.get_frs_id(ghg_id) or fh.v(
                     table, in_row, 'FRS_ID')
 
                 out_row = {
@@ -422,7 +398,7 @@ def process(input_tables_path, output_path):
                                                        v) in existing_pp
                         ]),
                     _NAME:
-                        _str(_get_name(table, in_row)),
+                        _str(fh.get_name(table, in_row, 'FACILITY_NAME')),
                     _ADDRESS:
                         _str(_get_address(table, in_row)),
                     _CIP:

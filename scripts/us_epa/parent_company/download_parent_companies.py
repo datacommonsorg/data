@@ -22,8 +22,10 @@ from absl import flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))
-from us_epa.util import facilities_helper as fh
+REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_PATH, '../../..'))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 

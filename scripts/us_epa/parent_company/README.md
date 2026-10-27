@@ -3,7 +3,7 @@
 
 This directory contains scripts to import the EPA parent company information and
 facility ownership data from the following GHG table:
-- [`V_PARENT_COMPANY_INFO`](https://data.epa.gov/efservice/V_PARENT_COMPANY_INFO/)
+- [`V_PARENT_COMPANY_INFO`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_PARENT_COMPANY_INFO)
 
 The generated parent companies are of type `EpaParentCompany` and they are
 attached to a `CensusZipCodeTabulationArea` and `County` (via
@@ -35,10 +35,10 @@ percentage and if no percentage is provided it is assumed to be 100.
       ./generate.sh
       ```
 
-2. To run unit tests:
+2. To run unit tests (from the repository root):
 
       ```
-      python3 -m unittest discover -v -s ../ -p "*_test.py"
+      ./run_tests.sh -p scripts/us_epa/parent_company
       ```
 
 3. To validate the imports, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
@@ -49,8 +49,9 @@ percentage and if no percentage is provided it is assumed to be 100.
       output/table/EpaParentCompanyTable.tmcf \
       output/table/EpaParentCompanyTable.csv
 
-    dc-import genmcf -o=dc_generated/ownership \
+    dc-import genmcf --allow-non-numeric-obs-values -o=dc_generated/ownership \
       output/table/EpaParentCompanyTable.mcf \
+      output/table/EpaParentCompanyNodes.mcf \
       output/ownership/EpaParentCompanyOwnership.mcf \
       output/ownership/EpaParentCompanyOwnership.tmcf \
       output/ownership/EpaParentCompanyOwnership.csv
@@ -105,6 +106,7 @@ percentage and if no percentage is provided it is assumed to be 100.
     ```bash
     dc-import genmcf -o=dc_generated/svobs \
       output/table/EpaParentCompanyTable.mcf \
+      output/table/EpaParentCompanyNodes.mcf \
       output/svobs/SVObs.tmcf \
       output/svobs/SVObs.csv
     ```

@@ -18,16 +18,22 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(REPO_ROOT))
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
+from scripts.us_epa.parent_company import download_existing_facilities as defac
+from scripts.us_epa.parent_company import pre_process
+from scripts.us_epa.parent_company import process_parent_company as ppc
+from scripts.us_epa.parent_company.process_parent_company import (
+    _COUNTERS_COMPANIES,)
 from scripts.us_epa.parent_company.process_parent_company import (
     process_companies,)
 from scripts.us_epa.parent_company.process_parent_company import (
     process_svobs,)
-from scripts.us_epa.parent_company.process_parent_company import (
-    _COUNTERS_COMPANIES,)
+from scripts.us_epa.util import facilities_helper as fh
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _INPUT_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -37,6 +43,15 @@ _EXPECTED_DIR = os.path.join(_CODEDIR, 'testdata', 'expected')
 _EXPECTED_OWNERSHIP_DIR = _EXPECTED_DIR + "/ownership"
 _EXPECTED_TABLE_DIR = _EXPECTED_DIR + "/table"
 _EXPECTED_SVOBS_DIR = _EXPECTED_DIR + "/svobs"
+
+_FAKE_COUNTY_CANDIDATES = {
+    'zip/14221': [['geoId/36029'], []],
+    'zip/02912': [['geoId/44007'], []],
+    'zip/77099': [[], ['geoId/48157', 'geoId/48201']],
+    'zip/99501': [['geoId/02020'], []],
+    'zip/77079': [['geoId/48201'], []],
+    'zip/99503': [[], ['geoId/02020', 'geoId/02050']],
+}
 
 # We have test-cases to cover all the different mapping scenarios.
 _EXPECTED_COUNTERS = {
@@ -307,6 +322,21 @@ def compare_files(t, output_path, expected_path):
 
 class ProcessTest(unittest.TestCase):
 
+    def setUp(self):
+        super().setUp()
+        fh._COUNTY_CANDIDATES_CACHE.clear()
+        fh._COUNTY_CANDIDATES_CACHE.update(_FAKE_COUNTY_CANDIDATES)
+        self._dc_patcher = mock.patch.object(
+            fh,
+            'dc_api_get_node_property',
+            side_effect=AssertionError(
+                'Unexpected live Data Commons API call in unit test'))
+        self._dc_patcher.start()
+
+    def tearDown(self):
+        self._dc_patcher.stop()
+        super().tearDown()
+
     def test_parent_companies_e2e(self):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -320,6 +350,12 @@ class ProcessTest(unittest.TestCase):
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_TABLE_DIR, fname)
                 compare_files(self, output_path, expected_path)
+            nodes_mcf_path = os.path.join(tmp_dir, 'EpaParentCompanyNodes.mcf')
+            self.assertTrue(os.path.exists(nodes_mcf_path))
+            with open(nodes_mcf_path) as fp:
+                nodes_mcf = fp.read()
+            self.assertIn('Node: dcid:EpaParentCompany/NationalFuelGasCo',
+                          nodes_mcf)
             for fname in [
                     'EpaParentCompanyOwnership.csv',
                     'EpaParentCompanyOwnership.tmcf',
@@ -343,10 +379,42 @@ class ProcessTest(unittest.TestCase):
                 expected_path = os.path.join(_EXPECTED_SVOBS_DIR, fname)
                 compare_files(self, output_path, expected_path)
 
-    def test_main_output_modes(self):
-        from unittest import mock
-        from scripts.us_epa.parent_company import process_parent_company as ppc
+    def test_svobs_filters_non_ghgrp_facets(self):
+        facets = {
+            'facet/other': {
+                'importName': 'OtherImport',
+                'observationPeriod': 'P1Y',
+            },
+            'facet/ghgrp': {
+                'importName': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+            },
+        }
+        ordered_facets = [
+            {
+                'facetId': 'facet/other',
+                'observations': [{
+                    'date': '2016',
+                    'value': 9999
+                }],
+            },
+            {
+                'facetId': 'facet/ghgrp',
+                'observations': [{
+                    'date': '2016',
+                    'value': 100
+                }],
+            },
+        ]
+        got = ppc._get_key_val_for_svobs(
+            'epaGhgrpFacilityId/1004962',
+            'Annual_Emissions_Methane_NonBiogenic', _FACILITY_COMPANY_OWNERSHIP,
+            ordered_facets, facets)
+        key = ('EpaParentCompany/abc', 'Annual_Emissions_Methane_NonBiogenic',
+               'P1Y', '2016')
+        self.assertEqual(got[key]['value'], 100.0)
 
+    def test_main_output_modes(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             ppc.FLAGS.mark_as_parsed()
             ppc.FLAGS.input_download_path = _INPUT_DATA_DIR
@@ -366,9 +434,13 @@ class ProcessTest(unittest.TestCase):
 
             ownership_csv = os.path.join(tmp_dir, "ownership",
                                          "EpaParentCompanyOwnership.csv")
+            table_csv = os.path.join(tmp_dir, "table",
+                                     "EpaParentCompanyTable.csv")
             table_mcf = os.path.join(tmp_dir, "table",
                                      "EpaParentCompanyTable.mcf")
             self.assertTrue(os.path.exists(ownership_csv))
+            with open(table_csv) as fp:
+                original_table_csv = fp.read()
             os.remove(table_mcf)
 
             # Mode 'svobs' skips process_companies when ownership CSV exists,
@@ -381,6 +453,62 @@ class ProcessTest(unittest.TestCase):
                 mock_gen_svobs.assert_called_once_with(
                     ownership_csv, os.path.join(tmp_dir, "svobs"))
             self.assertTrue(os.path.exists(table_mcf))
+
+            # If ownership CSV is missing in 'svobs' mode while table CSV exists,
+            # regenerating ownership CSV must preserve the existing table CSV.
+            os.remove(ownership_csv)
+            with mock.patch.object(ppc,
+                                   "generate_svobs_helper") as mock_gen_svobs:
+                ppc.main([])
+                mock_gen_svobs.assert_called_once()
+            with open(table_csv) as fp:
+                self.assertEqual(fp.read(), original_table_csv)
+
+    def test_preprocess_clears_duplicates_and_skips_blank_facility_id(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with open(os.path.join(tmp_dir, 'existing_facilities.csv'),
+                      'w') as fp:
+                fp.write('epaGhgrpFacilityId\nepaGhgrpFacilityId/1001\n')
+            with open(os.path.join(tmp_dir, 'V_PARENT_COMPANY_INFO.csv'),
+                      'w') as fp:
+                fp.write(
+                    'FACILITY_ID,PARENT_COMPANY_NAME,PARENT_CO_STREET_ADDRESS,'
+                    'PARENT_CO_CITY,PARENT_CO_STATE,PARENT_CO_ZIP\n'
+                    ',BLANK FACILITY CO,1 MAIN,CITY,ST,12345\n'
+                    '1001,ACME CORP,1 MAIN,CITY,ST,12345\n')
+            pre_process._DUPLICATE_MAPPING['StaleKey'] = 'StaleVal'
+            pre_process.preprocess(tmp_dir, 'existing_facilities')
+            self.assertNotIn('StaleKey', pre_process._DUPLICATE_MAPPING)
+            self.assertTrue(
+                os.path.exists(os.path.join(tmp_dir,
+                                            'DuplicateIdMappings.csv')))
+
+    def test_download_existing_facilities_error_and_atomic_write(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            fake_client = mock.Mock()
+            with mock.patch.object(defac,
+                                   'get_datacommons_client',
+                                   return_value=fake_client), \
+                 mock.patch.object(defac, 'dc_api_wrapper', return_value=None):
+                with self.assertRaises(RuntimeError):
+                    defac.download_existing_facilities(tmp_dir)
+
+            node = mock.Mock(dcid='epaGhgrpFacilityId/1000035')
+            fake_resp = mock.Mock()
+            fake_resp.get_properties.return_value = {
+                'EpaReportingFacility': {
+                    'typeOf': [node]
+                }
+            }
+            with mock.patch.object(defac,
+                                   'get_datacommons_client',
+                                   return_value=fake_client), \
+                 mock.patch.object(defac,
+                                   'dc_api_wrapper',
+                                   return_value=fake_resp):
+                out_file = defac.download_existing_facilities(tmp_dir)
+            self.assertTrue(os.path.exists(out_file))
+            self.assertFalse(os.path.exists(out_file + '.tmp'))
 
 
 if __name__ == '__main__':

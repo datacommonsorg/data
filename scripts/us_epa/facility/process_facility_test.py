@@ -1,18 +1,27 @@
 """Tests for process_facility.py"""
 
 import os
+import sys
 import tempfile
 import unittest
 from unittest import mock
+
 import pandas as pd
-from . import download_efservice
-from .process_facility import process
-from .process_facility import _COUNTERS
-from .process_facility import _extract_first_geojson
-from .process_facility import _parse_geojson_polygon
-from .process_facility import fh
+from shapely import geometry
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(_CODEDIR, '..', '..', '..'))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+
+from scripts.us_epa.facility import download_efservice
+from scripts.us_epa.facility import process_facility
+from scripts.us_epa.facility.process_facility import _COUNTERS
+from scripts.us_epa.facility.process_facility import _extract_first_geojson
+from scripts.us_epa.facility.process_facility import _parse_geojson_polygon
+from scripts.us_epa.facility.process_facility import process
+from scripts.us_epa.util import facilities_helper as fh
+
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
 _EXPECTED_DIR = os.path.join(_CODEDIR, 'testdata', 'expected')
 
@@ -33,8 +42,43 @@ _EXPECTED_COUNTERS = {
     'zipbased_county_wrong_latlng': ['1006603']
 }
 
+_FAKE_COUNTY_CANDIDATES = {
+    'zip/45331': [['geoId/39037'], []],
+    'zip/36922': [[], ['geoId/01023', 'geoId/01119']],
+    'zip/93251': [['geoId/06029'], []],
+    'zip/71443': [[], []],
+    'zip/82001': [['geoId/56021'], []],
+    'zip/87417': [['geoId/35045'], []],
+}
+
+_FAKE_POLYGONS = {
+    'geoId/39037': geometry.box(-84.812411, 39.916528, -84.425902, 40.354259),
+    'geoId/01023': geometry.box(-88.4, 31.7, -87.9, 32.3),
+    'geoId/06029': geometry.box(-120.194146, 34.790629, -117.616195, 35.798149),
+    'geoId/56021': geometry.box(-105.280636, 40.998048, -104.05216, 41.656655),
+    'geoId/35045': geometry.box(-109.046183, 36.000288, -107.420913, 37.000005),
+}
+
 
 class ProcessTest(unittest.TestCase):
+
+    def setUp(self):
+        super().setUp()
+        fh._COUNTY_CANDIDATES_CACHE.clear()
+        fh._COUNTY_CANDIDATES_CACHE.update(_FAKE_COUNTY_CANDIDATES)
+        process_facility._POLYGON_CACHE.clear()
+        process_facility._POLYGON_CACHE.update(_FAKE_POLYGONS)
+        process_facility._GEOJSON_CACHE.clear()
+        self._dc_patcher = mock.patch.object(
+            fh,
+            'dc_api_get_node_property',
+            side_effect=AssertionError(
+                'Unexpected live Data Commons API call in unit test'))
+        self._dc_patcher.start()
+
+    def tearDown(self):
+        self._dc_patcher.stop()
+        super().tearDown()
 
     def test_e2e(self):
         self.maxDiff = None
@@ -56,15 +100,17 @@ class ProcessTest(unittest.TestCase):
                  open(os.path.join(in_dir, 'crosswalks.csv'), 'w') as dst:
                 dst.write(src.read())
 
+            # Note: rows are intentionally ordered newest-first (2016 before 2010)
+            # with missing county_fips in 2016 to verify order-independent backfill.
             pub_dim_csv = (
                 'facility_id,facility_name,address1,address2,city,state,state_name,'
                 'zip,county_fips,county,latitude,longitude,year,naics_code,frs_id\n'
                 ',MISSING ID LLC,123 MAIN ST,,GREENVILLE,OH,OHIO,'
                 '45331,39037,DARKE COUNTY,40.081111000000000,-84.591667000000000,2010,325193,110037615694\n'
+                '1000035,THE ANDERSONS MARATHON HOLDINGS LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
+                '45331,,DARKE COUNTY,40.081111000000000,-84.591667000000000,2016,325193,\n'
                 '1000035,OLD NAME LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
                 '45331,39037,DARKE COUNTY,40.081111000000000,-84.591667000000000,2010,325193,110037615694\n'
-                '1000035,THE ANDERSONS MARATHON HOLDINGS LLC,5728 E SEBRING WARNER RD,,GREENVILLE,OH,OHIO,'
-                '45331,,DARKE COUNTY,40.081111000000000,-84.591667000000000,2016,325193,110037615694\n'
             )
             with open(os.path.join(in_dir, 'PUB_DIM_FACILITY.csv'), 'w') as fp:
                 fp.write(pub_dim_csv)
@@ -97,7 +143,7 @@ class ProcessTest(unittest.TestCase):
                     fh.requests,
                     'get',
                     side_effect=[RuntimeError('transient error'), page1,
-                                       page2]):
+                                 page2]):
                 fh.download('https://example.com/',
                             'PUB_DIM_FACILITY',
                             1,
@@ -120,8 +166,11 @@ class ProcessTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             table_csv = os.path.join(tmp_dir, 'PUB_DIM_FACILITY.csv')
             crosswalk_csv = os.path.join(tmp_dir, 'crosswalks.csv')
+            # Rows ordered newest-first with empty frs_id in 2016 and populated frs_id in 2010.
             with open(table_csv, 'w') as fp:
-                fp.write('facility_id,frs_id\n1000035,110037615694\n')
+                fp.write('facility_id,frs_id,year\n'
+                         '1000035,,2016\n'
+                         '1000035,110037615694,2010\n')
             with open(crosswalk_csv, 'w') as fp:
                 fp.write('stale\n')
             fake_oris = pd.DataFrame({

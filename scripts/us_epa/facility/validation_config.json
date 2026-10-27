@@ -8,6 +8,14 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Ensures no critical lint or schema errors exist in the import.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
         }
     ]
 }

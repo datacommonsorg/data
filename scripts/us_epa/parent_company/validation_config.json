@@ -11,9 +11,8 @@
         },
         {
             "rule_id": "check_lint_error_count",
-            "description": "Disabled because dc-import genmcf reports missing references for newly added EpaParentCompany entities before EPA_ParentCompanies is ingested into KG, and non-numeric value errors on EpaParentCompanyOwnership when run without --allow-non-numeric-svobs.",
+            "description": "Ensures no critical lint or schema errors exist in the import.",
             "validator": "LINT_ERROR_COUNT",
-            "enabled": false,
             "params": {
                 "threshold": 0
             }

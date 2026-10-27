@@ -3,7 +3,7 @@
 
 This directory contains scripts to import the EPA facility data from the
 consolidated GHGRP facility table:
-- [`PUB_DIM_FACILITY`](https://data.epa.gov/efservice/PUB_DIM_FACILITY/)
+- [`PUB_DIM_FACILITY`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=PUB_DIM_FACILITY)
   (which consolidates the retired legacy Envirofacts views
   `V_GHG_EMITTER_FACILITIES`, `V_GHG_SUPPLIER_FACILITIES`, and
   `V_GHG_INJECTION_FACILITIES`, covering Direct Emitters, Suppliers, and CO2
@@ -35,10 +35,10 @@ EIA power plant import), so we refer to them from `EpaReportingFacility` nodes.
       ./generate.sh
       ```
 
-2. To run unit tests:
+2. To run unit tests (from the repository root):
 
       ```
-      python3 -m unittest discover -v -t ../../.. -s . -p "*_test.py"
+      ./run_tests.sh -p scripts/us_epa/facility
       ```
 
 3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:

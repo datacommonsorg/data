@@ -28,15 +28,24 @@ from absl import flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
-from us_epa.util import facilities_helper as fh
-from us_epa.parent_company import static_corrections as sc
+REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_PATH, "../../.."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.us_epa.parent_company import static_corrections as sc
+from scripts.us_epa.util import facilities_helper as fh
 
-flags.DEFINE_string("input_download_path", "input_files", "Input directory")
-flags.DEFINE_string("existing_facilities_file", "existing_facilities",
-                    "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
-                    "Output directory for processed data.")
+flags.DEFINE_string("input_download_path",
+                    "input_files",
+                    "Input directory",
+                    allow_override=True)
+flags.DEFINE_string("existing_facilities_file",
+                    "existing_facilities",
+                    "Filename for existing facilities ids",
+                    allow_override=True)
+flags.DEFINE_string("output_base_path",
+                    "output",
+                    "Output directory for processed data.",
+                    allow_override=True)
 
 FLAGS = flags.FLAGS
 
@@ -170,6 +179,7 @@ def _resolve_multiple_indirections():
 
 
 def preprocess(input_table_path, existing_facilities_file):
+    _DUPLICATE_MAPPING.clear()
     # Get the existing facility ids in a set.
     existing_facilities_path = os.path.join(input_table_path,
                                             existing_facilities_file + ".csv")
@@ -198,6 +208,8 @@ def preprocess(input_table_path, existing_facilities_file):
                                in_row,
                                "FACILITY_ID",
                                table_prefix=_TABLE_PREFIX)
+            if not facility_id:
+                continue
             ghg_id = _EPA_FACILITY_GHG_ID + "/" + facility_id
 
             # Only proceed if the facility_id exists in Data Commons.
@@ -255,7 +267,8 @@ def preprocess(input_table_path, existing_facilities_file):
     # Write.
     print("Writing to file...")
     output_path = os.path.join(input_table_path, "DuplicateIdMappings.csv")
-    with open(output_path, "w") as opth:
+    tmp_output_path = output_path + ".tmp"
+    with open(tmp_output_path, "w") as opth:
         writer = csv.DictWriter(opth, ["Id", "MappedTo", "Occurences"],
                                 doublequote=False,
                                 escapechar="\\")
@@ -265,6 +278,7 @@ def preprocess(input_table_path, existing_facilities_file):
             d = {"Id": k, "MappedTo": v, "Occurences": company_id_count[v]}
             writer.writerow(d)
             num_rows_written += 1
+    os.replace(tmp_output_path, output_path)
 
     # Print some statistics.
     print("****************")

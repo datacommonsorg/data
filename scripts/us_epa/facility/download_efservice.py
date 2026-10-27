@@ -14,9 +14,10 @@ from absl import flags
 from absl import logging
 
 # Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))
-from us_epa.util import facilities_helper as fh
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[3]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
@@ -85,12 +86,30 @@ def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
     df = pd.read_csv(table_csv_path, dtype=str)
     fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'
     frs_col = 'frs_id' if 'frs_id' in df.columns else 'FRS_ID'
+    year_col = ('year' if 'year' in df.columns else
+                ('YEAR' if 'YEAR' in df.columns else None))
     if fac_col in df.columns:
         fac_df = pd.DataFrame({
-            'Facility Id': df[fac_col],
-            'FRS Id': df[frs_col] if frs_col in df.columns else '',
-        }).dropna(subset=['Facility Id']).drop_duplicates(
-            subset=['Facility Id'], keep='last')
+            'Facility Id':
+                df[fac_col],
+            'FRS Id': (df[frs_col].fillna('').str.strip()
+                       if frs_col in df.columns else ''),
+            '_year': (pd.to_numeric(df[year_col], errors='coerce').fillna(0)
+                      if year_col else 0),
+        })
+        fac_df['Facility Id'] = fac_df['Facility Id'].fillna('').str.strip()
+        fac_df = fac_df[fac_df['Facility Id'] != '']
+        fac_df['_fac_order'] = fac_df.groupby('Facility Id',
+                                              sort=False).ngroup()
+        fac_df = fac_df.sort_values(by=['_fac_order', '_year'],
+                                    ascending=[True, True],
+                                    kind='mergesort')
+        fac_df['FRS Id'] = fac_df['FRS Id'].replace('', pd.NA)
+        fac_df['FRS Id'] = fac_df.groupby('Facility Id')['FRS Id'].ffill()
+        fac_df['FRS Id'] = fac_df['FRS Id'].fillna('')
+        fac_df = fac_df[['Facility Id',
+                         'FRS Id']].drop_duplicates(subset=['Facility Id'],
+                                                    keep='last')
         merged = fac_df.merge(oris_df, how='left',
                               on='Facility Id').drop_duplicates(
                                   subset=['Facility Id'], keep='first')

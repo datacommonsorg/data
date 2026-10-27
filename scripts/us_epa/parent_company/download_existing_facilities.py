@@ -27,6 +27,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from util.dc_api_wrapper import dc_api_wrapper
 from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
@@ -43,8 +44,17 @@ def download_existing_facilities(output_path: str) -> str:
     logging.info(
         'Fetching existing EpaReportingFacility nodes from Data Commons...')
     client = get_datacommons_client()
-    response = client.node.fetch_property_values(
-        node_dcids="EpaReportingFacility", properties="typeOf", out=False)
+    response = dc_api_wrapper(
+        function=client.node.fetch_property_values,
+        args={
+            'node_dcids': 'EpaReportingFacility',
+            'properties': 'typeOf',
+            'out': False,
+        },
+    )
+    if not response:
+        raise RuntimeError(
+            'Failed to fetch EpaReportingFacility nodes from Data Commons.')
     facility_nodes = response.get_properties().get("EpaReportingFacility",
                                                    {}).get("typeOf", [])
     facility_ids = []
@@ -56,10 +66,16 @@ def download_existing_facilities(output_path: str) -> str:
         facility_ids_set.add(value)
         facility_ids.append(value)
 
+    if not facility_ids:
+        raise RuntimeError(
+            'No EpaReportingFacility nodes returned from Data Commons.')
+
     logging.info(f'Found {len(facility_ids)} unique EpaReportingFacility DCIDs '
                  f'(from {len(facility_nodes)} raw node entries).')
     df = pd.DataFrame.from_dict({"epaGhgrpFacilityId": facility_ids})
-    df.to_csv(out_file, mode="w", header=True, index=False)
+    tmp_file = out_file + '.tmp'
+    df.to_csv(tmp_file, mode="w", header=True, index=False)
+    os.replace(tmp_file, out_file)
     logging.info(f'Wrote existing facilities to {out_file}.')
     return out_file
 
