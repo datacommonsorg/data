@@ -220,7 +220,6 @@
             "source_files": [
                 "bev_3903_all/input_files/BEV390OD3903.csv",
                 "bev_3903_all/input_files/BEV390OD3903_rollups.csv",
-                "bev_3903_all/zurich_population_bev_3903_wiki_stat_vars.mcf",
                 "bev_3903_all/counters/*.csv",
                 "bev_3903_all/validation_config.json"
             ],
@@ -228,7 +227,7 @@
                 {
                     "template_mcf": "bev_3903_all/output/zurich_population_bev_3903_wiki.tmcf",
                     "cleaned_csv": "bev_3903_all/output/zurich_population_bev_3903_wiki.csv",
-                    "node_mcf": "bev_3903_all/zurich_population_bev_3903_wiki_stat_vars.mcf"
+                    "node_mcf": "bev_3903_all/*.mcf"
                 }
             ],
             "resource_limits": {
@@ -255,7 +254,6 @@
             "source_files": [
                 "bev_4031_all/input_files/BEV403OD4031.csv",
                 "bev_4031_all/input_files/BEV403OD4031_rollups.csv",
-                "bev_4031_all/output/*_stat_vars.mcf",
                 "bev_4031_all/counters/*.csv",
                 "bev_4031_all/validation_config.json"
             ],
@@ -263,7 +261,7 @@
                 {
                     "template_mcf": "bev_4031_all/output/zurich_bev_4031_wiki.tmcf",
                     "cleaned_csv": "bev_4031_all/output/zurich_bev_4031_wiki.csv",
-                    "node_mcf": "bev_4031_all/output/*_stat_vars.mcf"
+                    "node_mcf": "bev_4031_all/output/*.mcf"
                 }
             ],
             "resource_limits": {
