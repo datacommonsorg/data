@@ -64,3 +64,18 @@ bash statvar_imports/Bulgaria_NSI_Demographics/download.sh
 - `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `MaxDate >= '2021'` and `total_svs > 0`.
 - `check_deleted_records_percent`: Ensures deleted records do not exceed `0.1%`.
 
+## 6. Staging & Production Verification
+- **Resolved MCF**:
+  - GCS: `gs://resolved_mcf/country/Bulgaria/20261026/nodes.mcf@2`
+  - CNS: `/cns/jv-d/home/datcom/v3_resolved_mcf/country/Bulgaria/20261026/nodes.mcf@2` (21.74 MB, 55,981 nodes)
+    - `nodes.mcf-00000-of-00002`: Annual demographic refresh dataset (11,960 nodes)
+    - `nodes.mcf-00001-of-00002`: Historical multi-decade dataset (44,021 nodes)
+- **Unresolved Staging**:
+  - GCS: `gs://unresolved_mcf/country/Bulgaria/20261026/`
+  - CNS: `/cns/jv-d/home/datcom/v3_mcf/country/Bulgaria/20261026/`
+  - Tables: `BulgariaNSI_Demographics.tmcf`, `BulgariaNSI_Demographics.csv`, `BulgariaNSI_Demographics_history.tmcf`, `BulgariaNSI_Demographics_history.csv`
+- **Google3 Integration**:
+  - Import Manifest: `datacommons/import/mcf/manifest/international_stats/Bulgaria_Census.textproto` (cl/1007847204)
+  - Provenance: `datacommons/import/mcf/resolved_mcf/import/Bulgaria_Census.mcf`
+
+
