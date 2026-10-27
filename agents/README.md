@@ -56,3 +56,10 @@ To merge considered signals into the import code-review guidelines, use the
 Provide the miner output directory and the data repository path. The prompt
 requires a clean current branch, leaves guideline edits uncommitted, and writes
 a decision report beside the miner output.
+
+## Generate import StatVar and Place goldens
+
+To generate `golden_data/golden_summary_report*.csv` and
+`golden_data/golden_observations*.csv` and wire `GOLDENS_CHECK` rules in
+`validation_config*.json` and `manifest.json` for a new or existing import, use
+the [`dc-import-golden-generator` skill](skills/dc-import-golden-generator/SKILL.md).

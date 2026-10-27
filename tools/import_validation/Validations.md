@@ -105,9 +105,9 @@ script.
 
 ### Shared Global Golden Baselines in GCS
 
-Common golden baseline lists of prominent StatVars and Places (consolidated across `website` and `mixer` NL embeddings, Topic/SDG/UNDATA configs, Explore landing page queries, Chart configs, and E2E golden test suites) are stored in GCS under `gs://unresolved_mcf/import_validation/`:
+Common golden baseline lists of prominent StatVars and Places (consolidated across `website` and `mixer` NL embeddings, Topic/SDG/UNDATA configs, Explore landing page queries, Chart configs, E2E golden test suites, and historical Data Release deletion-analysis bugs) are stored in GCS under `gs://unresolved_mcf/import_validation/`:
 
-- **Global StatVars (2,104 StatVars):** `gs://unresolved_mcf/import_validation/golden_statvars.csv`
+- **Global StatVars (2,147 StatVars):** `gs://unresolved_mcf/import_validation/golden_statvars.csv`
 - **Global Places (249 Places):** `gs://unresolved_mcf/import_validation/golden_places.csv`
 - **Automated Per-Import Golden Generator Script:** `gs://unresolved_mcf/import_validation/generate_import_goldens.py`
 - **Additional NL StatVar & Place lists:** `gs://unresolved_mcf/import_validation/nl_statvars.csv` and `gs://unresolved_mcf/import_validation/top_100k_places.csv`
@@ -117,8 +117,18 @@ Common golden baseline lists of prominent StatVars and Places (consolidated acro
 To automatically generate `golden_data/golden_summary_report.csv`, `golden_data/golden_observations.csv`, and wire `validation_config.json` and `manifest.json` from the latest auto-refresh output in `gs://datcom-prod-imports`:
 
 ```shell
-gsutil cp gs://unresolved_mcf/import_validation/generate_import_goldens.py /tmp/generate_import_goldens.py
-python3 /tmp/generate_import_goldens.py --manifest <import_dir> --force-refresh --apply
+python3 tools/import_validation/generate_import_goldens.py \
+  --manifest <import_dir> --force-refresh --apply
+```
+
+Or for a brand-new import with local `summary_report.csv` and cleaned observation CSV outputs:
+
+```shell
+python3 tools/import_validation/generate_import_goldens.py \
+  --manifest <import_dir> \
+  --summary-report /path/to/summary_report.csv \
+  --cleaned-csv /path/to/output.csv \
+  --apply
 ```
 
 Alternatively, you can generate each golden file manually using `validator_goldens.py`:
