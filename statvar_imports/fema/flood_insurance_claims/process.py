@@ -164,11 +164,19 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
         df['policyCount'].notna() &
         (df['policyCount'].astype(str).str.strip() != ''), 1.0, np.nan)
 
-    # Geographic entities with zero-padding
-    tract_clean = (df['censusTract'].astype(str).str.strip().str.replace(
-        r'\.0$', '',
-        regex=True).apply(_pad_code, target_len=11,
-                          min_len=10).str.extract(r'([0-9]{11,})')[0])
+    # Geographic entities with zero-padding (supports both v2 censusTract and v3 censusGeoid)
+    if 'censusTract' in df.columns:
+        tract_clean = (df['censusTract'].astype(str).str.strip().str.replace(
+            r'\.0$', '',
+            regex=True).apply(_pad_code, target_len=11,
+                              min_len=10).str.extract(r'([0-9]{11,})')[0])
+    elif 'censusGeoid' in df.columns:
+        tract_clean = (df['censusGeoid'].astype(str).str.strip().str.replace(
+            r'\.0$', '',
+            regex=True).apply(_pad_code, target_len=12,
+                              min_len=11).str.extract(r'([0-9]{11,})')[0])
+    else:
+        tract_clean = pd.Series([None] * len(df), index=df.index)
     df['tract_place'] = tract_clean.apply(lambda x: f"dcid:geoId/{x[:11]}"
                                           if pd.notna(x) else None)
 
@@ -307,11 +315,11 @@ def process_data_vectorized(
 
     state_map, risk_zone_map = _load_mappings(pv_map_arg)
 
-    usecols = [
-        'dateOfLoss', 'yearOfLoss', 'censusTract', 'countyCode', 'state',
-        'ratedFloodZone', 'amountPaidOnBuildingClaim',
+    expected_cols = {
+        'dateOfLoss', 'yearOfLoss', 'censusTract', 'censusGeoid', 'countyCode',
+        'state', 'ratedFloodZone', 'amountPaidOnBuildingClaim',
         'amountPaidOnContentsClaim', 'policyCount'
-    ]
+    }
 
     max_cpus = os.cpu_count() or 1
     workers = num_workers if num_workers is not None else max(1, max_cpus)
@@ -327,7 +335,7 @@ def process_data_vectorized(
         input_data, chunk_size, workers)
 
     reader = pd.read_csv(input_data,
-                         usecols=usecols,
+                         usecols=lambda c: c in expected_cols,
                          dtype=str,
                          chunksize=chunk_size,
                          low_memory=False)

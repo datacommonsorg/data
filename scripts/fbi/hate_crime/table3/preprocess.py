@@ -138,12 +138,12 @@ def _clean_dataframe(df: pd.DataFrame, year: str,
             else:
                 df.at[idx, 'offense type'] = 'other crimes against property'
 
-    df.set_index('offense type', inplace=True)
+    df = df.set_index('offense type')
 
     if year in _YEARS_WITH_TWO_RAPE_COLUMNS:
         df.loc['rape (revised definition)'] += df.loc[
             'rape (legacy definition)']
-        df.drop(['rape (legacy definition)'], inplace=True)
+        df = df.drop(['rape (legacy definition)'])
     return df
 
 
