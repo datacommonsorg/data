@@ -6,6 +6,15 @@ SCRIPT_PATH=$(realpath "$(dirname "$0")")
 mkdir -p "$SCRIPT_PATH/output_files" "$SCRIPT_PATH/counters"
 
 # --- 1. Process 2010, 2012, and 2014 Files (Comma-separated XLSX format) ---
+for file in \
+  "$SCRIPT_PATH/input_files/2010_Enrollment.xlsx" \
+  "$SCRIPT_PATH/input_files/2012_Enrollment.xlsx" \
+  "$SCRIPT_PATH/input_files/2014_Enrollment.xlsx"; do
+  if [[ ! -s "$file" ]]; then
+    echo "Error: Required input file $file is missing or empty!"
+    exit 1
+  fi
+done
 LEGACY_XLSX_FILES="$SCRIPT_PATH/input_files/2010_Enrollment.xlsx,$SCRIPT_PATH/input_files/2012_Enrollment.xlsx,$SCRIPT_PATH/input_files/2014_Enrollment.xlsx"
 
 # Race and Sex (2010-2014)
@@ -49,6 +58,10 @@ python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
 
 # --- 2. Process 2016 File (Separate CSV) ---
 SINGLE_2016_FILE="$SCRIPT_PATH/input_files/2016_Enrollment.csv"
+if [[ ! -s "$SINGLE_2016_FILE" ]]; then
+  echo "Error: Required input file $SINGLE_2016_FILE is missing or empty!"
+  exit 1
+fi
 
 # Race and Sex (2016)
 python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
