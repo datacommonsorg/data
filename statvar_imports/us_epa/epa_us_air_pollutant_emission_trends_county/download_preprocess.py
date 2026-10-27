@@ -104,12 +104,21 @@ def download_file(url: str, dest_path: str):
     """Streams the download to destination path."""
     logging.info(f"Downloading: {url} -> {os.path.basename(dest_path)}")
     headers = {"User-Agent": "Mozilla/5.0"}
-    with requests.get(url, headers=headers, stream=True, timeout=120) as resp:
-        resp.raise_for_status()
-        with open(dest_path, "wb") as f:
-            for chunk in resp.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    f.write(chunk)
+    temp_path = dest_path + ".tmp"
+    try:
+        with requests.get(url, headers=headers, stream=True, timeout=120) as resp:
+            resp.raise_for_status()
+            with open(temp_path, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        f.write(chunk)
+        os.replace(temp_path, dest_path)
+    finally:
+        if os.path.exists(temp_path):
+            try:
+                os.remove(temp_path)
+            except OSError:
+                pass
 
 
 def extract_databases_from_zip(zip_path: str):
@@ -159,7 +168,6 @@ def export_db_to_csv(db_path: str, year: int):
         proc = subprocess.Popen(
             ["mdb-export", db_path, table],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
             errors="replace",
@@ -186,7 +194,8 @@ def export_db_to_csv(db_path: str, year: int):
                             row[stfips_idx] = "88"
                         writer.writerow([year] + row)
 
-        proc.wait()
+        if proc.wait() != 0:
+            raise RuntimeError(f"mdb-export failed with exit code {proc.returncode}")
 
 
 def main():
