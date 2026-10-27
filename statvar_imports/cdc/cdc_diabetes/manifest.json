@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "CDCDiabetes",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://gis.cdc.gov/grasp/diabetes/DiabetesAtlas.html#",
+      "provenance_description": "County Data for Diabetes, Obesity and Leisure-Time Physical Inactivity from the US Diabetes Surveillance System",
+      "scripts": [
+        "run.sh"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/cdc_diabetes.tmcf",
+          "cleaned_csv": "output/cdc_diabetes.csv"
+        }
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "30 05 * * 1"
+    }
+  ]
+}

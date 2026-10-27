@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "max_date_consistent",
+      "validator": "MAX_DATE_CONSISTENT"
+    },
+    {
+      "rule_id": "min_expected_max_date_2024",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2024"
+      }
+    },
+    {
+      "rule_id": "num_places_min_2900",
+      "validator": "NUM_PLACES_COUNT",
+      "params": {
+        "minimum": 2900
+      }
+    },
+    {
+      "rule_id": "unit_consistency",
+      "validator": "UNIT_CONSISTENCY_CHECK"
+    },
+    {
+      "rule_id": "min_value_zero",
+      "validator": "MIN_VALUE_CHECK",
+      "params": {
+        "minimum": 0
+      }
+    },
+    {
+      "rule_id": "max_value_100",
+      "validator": "MAX_VALUE_CHECK",
+      "params": {
+        "maximum": 100
+      }
+    },
+    {
+      "rule_id": "check_deleted_records_percent",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_missing_refs_count",
+      "validator": "MISSING_REFS_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_golden_summary_report",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_golden_observations_statvar_places_dates",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_observations.csv",
+        "input_files": "output/cdc_diabetes.csv"
+      }
+    }
+  ]
+}
