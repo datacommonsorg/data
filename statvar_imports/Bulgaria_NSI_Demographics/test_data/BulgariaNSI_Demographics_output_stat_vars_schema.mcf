@@ -1,5 +1,0 @@
-Node: dcid:placeOfResidenceClassification
-typeOf: dcs:Property
-name: "placeOfResidenceClassification"
-rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
-
