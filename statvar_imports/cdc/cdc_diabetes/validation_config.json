@@ -63,15 +63,15 @@
       "rule_id": "check_golden_summary_report",
       "validator": "GOLDENS_CHECK",
       "params": {
-        "golden_files": "golden_data/golden_summary_report.csv"
+        "golden_files": "../../../../golden_data/golden_summary_report.csv"
       }
     },
     {
       "rule_id": "check_golden_observations_statvar_places_dates",
       "validator": "GOLDENS_CHECK",
       "params": {
-        "golden_files": "golden_data/golden_observations.csv",
-        "input_files": "output/cdc_diabetes.csv"
+        "golden_files": "../../../../golden_data/golden_observations.csv",
+        "input_files": "../../../../output/cdc_diabetes.csv"
       }
     }
   ]

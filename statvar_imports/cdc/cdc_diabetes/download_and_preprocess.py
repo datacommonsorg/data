@@ -813,16 +813,20 @@ def process_all(
 
 def main(argv: List[str]) -> None:
     if len(argv) > 1:
-        raise app.UsageError('Too many command-line arguments.')
-    process_all(
-        baseline_dir=FLAGS.baseline_dir,
-        gcs_baseline_prefix=FLAGS.gcs_baseline_prefix,
-        raw_input_dir=FLAGS.raw_input_dir,
-        output_dir=FLAGS.output_dir,
-        skip_baseline=FLAGS.skip_baseline,
-        fetch_api=FLAGS.fetch_api,
-        min_api_year=FLAGS.min_api_year,
-    )
+        logging.fatal('Too many command-line arguments: %s', argv[1:])
+    try:
+        process_all(
+            baseline_dir=FLAGS.baseline_dir,
+            gcs_baseline_prefix=FLAGS.gcs_baseline_prefix,
+            raw_input_dir=FLAGS.raw_input_dir,
+            output_dir=FLAGS.output_dir,
+            skip_baseline=FLAGS.skip_baseline,
+            fetch_api=FLAGS.fetch_api,
+            min_api_year=FLAGS.min_api_year,
+        )
+    except Exception as exc:  # pylint: disable=broad-except
+        logging.fatal(
+            'Failed to download and preprocess CDC Diabetes data: %s', exc)
 
 
 if __name__ == '__main__':
