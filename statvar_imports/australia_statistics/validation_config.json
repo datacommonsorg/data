@@ -2,6 +2,27 @@
   "schema_version": "1.0",
   "rules": [
     {
+      "rule_id": "check_goldens_summary_report",
+      "validator": "GOLDENS_CHECK",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "golden_files": "golden_data/golden_summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv",
+      "validator": "GOLDENS_CHECK",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "golden_files": "golden_data/golden_observations.csv",
+        "input_files": "output_files/australia_statistics_output.csv"
+      }
+    },
+    {
       "rule_id": "check_deleted_records_percent",
       "description": "Strictly enforce historical deletion threshold of 0.1%",
       "validator": "DELETED_RECORDS_PERCENT",
