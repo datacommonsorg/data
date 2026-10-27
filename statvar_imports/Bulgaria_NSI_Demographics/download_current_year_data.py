@@ -92,6 +92,8 @@ def list_gcs_files(gcs_dir: str) -> list[str]:
 def to_num(val_str: str) -> int:
     """Converts value string to int, treating '-' as 0."""
     v = val_str.replace(" ", "").replace("\xa0", "").strip()
+    if v.endswith(".0"):
+        v = v[:-2]
     if v.isdigit():
         return int(v)
     return 0
@@ -262,12 +264,11 @@ def check_and_download_nsi(local_dir: str, gcs_dir: str, force: bool = False, dr
         for _, row in df.iterrows():
             clean_vals = []
             for i, v in enumerate(row.values):
-                val_str = str(v).replace(" ", "").replace("\xa0", "").strip()
                 if i > 0:
-                    if val_str.isdigit() or val_str == "-":
-                        clean_vals.append(val_str)
-                    else:
-                        clean_vals.append(val_str)
+                    val_str = str(v).replace(" ", "").replace("\xa0", "").strip()
+                    if val_str.endswith(".0"):
+                        val_str = val_str[:-2]
+                    clean_vals.append(val_str)
                 else:
                     # Clean age label or district label
                     clean_vals.append(str(v).replace("\xa0", " ").strip())

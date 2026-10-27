@@ -19,7 +19,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "${SCRIPT_DIR}/input_files"
 
 # Fetch all staged input files from GCS bucket
-gcloud storage cp --recursive "gs://unresolved_mcf/country/Bulgaria/input_files/*.csv" "${SCRIPT_DIR}/input_files/"
+if command -v gcloud &> /dev/null; then
+    gcloud storage cp --recursive "gs://unresolved_mcf/country/Bulgaria/input_files/*.csv" "${SCRIPT_DIR}/input_files/"
+else
+    gsutil cp "gs://unresolved_mcf/country/Bulgaria/input_files/*.csv" "${SCRIPT_DIR}/input_files/"
+fi
 
 # Sanitize trailing non-breaking spaces (\xa0), triple quotes, and footnote asterisks from NSI web exports
 python3 - "${SCRIPT_DIR}/input_files" << 'EOF'
