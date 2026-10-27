@@ -127,16 +127,13 @@ def process_2020_report(input_path: str,
             df[['temp', 'pH']] = df['Temo. DH'].str.split(n=1, expand=True)
 
             #replace the entires with start with '<' since the after splitting the column associated with the data is wrong.
-            df['Hardness Cadmium'].replace(to_replace=r'^<',
-                                           value='- <',
-                                           regex=True,
-                                           inplace=True)
+            df['Hardness Cadmium'] = df['Hardness Cadmium'].replace(
+                to_replace=r'^<', value='- <', regex=True)
             df[['Hardness',
                 'Cadmium']] = df['Hardness Cadmium'].str.split(n=1, expand=True)
-            df.drop(columns=[
+            df = df.drop(columns=[
                 'Unnamed: 0', 'Unnamed: 1', 'Temo. DH', 'Hardness Cadmium'
-            ],
-                    inplace=True)
+            ])
 
         if idx == 2:
             df = df.replace(to_replace=_REPLACE_MAP, regex=True)
@@ -147,9 +144,8 @@ def process_2020_report(input_path: str,
             df['observationDate'] = pd.to_datetime(
                 df['observationDate']).ffill()
             df[['temp', 'pH']] = df['Temp. pH'].str.split(n=1, expand=True)
-            df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'],
-                    inplace=True)
-            df.rename(columns={'Su lfate': 'Sulfate'}, inplace=True)
+            df = df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'])
+            df = df.rename(columns={'Su lfate': 'Sulfate'})
 
         if idx == 1:
             df = df[~df['Unnamed: 0'].str.contains('Averages')]
@@ -161,9 +157,8 @@ def process_2020_report(input_path: str,
             df['observationDate'] = pd.to_datetime(
                 df['observationDate']).ffill()
             df[['temp', 'pH']] = df['Temp. pH'].str.split(n=1, expand=True)
-            df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'],
-                    inplace=True)
-            df.rename(columns={"0 .0 .": "D.O."}, inplace=True)
+            df = df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'])
+            df = df.rename(columns={"0 .0 .": "D.O."})
 
         if idx == 0:
             df = df.replace(to_replace=_REPLACE_MAP, regex=True)
@@ -175,8 +170,7 @@ def process_2020_report(input_path: str,
                 df['observationDate']).ffill()
             df[['temp', 'pH']] = df['Temp. pH'].str.split(n=1, expand=True)
 
-            df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'],
-                    inplace=True)
+            df = df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'])
 
         df['observationAbout'] = _TAR_CREEK_WELL_MAP[extracted_well_name]
         df = df[columns]

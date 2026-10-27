@@ -73,7 +73,7 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     # Rename the spi col from "spi_01" for example to spi.
     # This is so that data for all accumulation periods have a standard SPI column
     # for the tmcf to express.
-    df.rename(columns={spi_col: "spi"}, inplace=True)
+    df = df.rename(columns={spi_col: "spi"})
     df['variable'] = f'dcs:StandardizedPrecipitationIndex_Atmosphere_{int(period)}MonthPeriod'
 
     df['period'] = f'"[{int(period)} dcs:Monthly]"'
