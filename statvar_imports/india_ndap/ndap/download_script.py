@@ -81,7 +81,7 @@ def main(_):
         df["OBS_Year"] = np.where(df["Temp_year"]>90,
                                   1900+df["Temp_year"],
                                   2000+df["Temp_year"])
-        df.drop(columns="Temp_year",inplace=True)
+        df = df.drop(columns="Temp_year")
         df=df[['Country', 'State/UT', 'Year', 'Time period', 'OBS_Year', 'Gender', 'Life expectancy in years']]
         df.to_csv(input_filename, index=False)
         logging.info("Data saved to India_LifeExpectancy_input.csv")
