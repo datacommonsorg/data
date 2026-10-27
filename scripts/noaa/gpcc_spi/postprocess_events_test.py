@@ -89,6 +89,25 @@ class PostprocessEventsTest(unittest.TestCase):
                     nodes_mcf_path=nodes_mcf,
                 )
 
+    def test_postprocess_events_missing_columns_raises(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            events_csv = os.path.join(tmp_dir, 'drought_events.csv')
+            bad_svobs = os.path.join(tmp_dir, 'bad_svobs.csv')
+            nodes_mcf = os.path.join(tmp_dir, 'drought_event_nodes.mcf')
+
+            with open(bad_svobs, 'w', encoding='utf-8') as f:
+                f.write('dcid,observationDate\n')
+                f.write(
+                    'droughtEvent/2022-01_s2CellId/0x308b800000000000,2022-01\n'
+                )
+
+            with self.assertRaises(ValueError):
+                postprocess_events(
+                    events_csv_path=events_csv,
+                    svobs_csv_path=bad_svobs,
+                    nodes_mcf_path=nodes_mcf,
+                )
+
 
 if __name__ == '__main__':
     unittest.main()
