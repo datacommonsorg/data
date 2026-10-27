@@ -11,6 +11,7 @@ from absl import flags
 from absl import logging
 from shapely import geometry
 
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
@@ -21,11 +22,11 @@ from scripts.us_epa.util import facilities_helper as fh
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'epa_input_tables_path', 'input_files',
+    'epa_input_tables_path', os.path.join(_SCRIPT_PATH, 'input_files'),
     'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
 )
 flags.DEFINE_string('epa_output_path',
-                    'output',
+                    os.path.join(_SCRIPT_PATH, 'output'),
                     'Output directory',
                     allow_override=True)
 

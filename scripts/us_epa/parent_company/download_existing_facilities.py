@@ -23,6 +23,7 @@ from absl import app
 from absl import flags
 from absl import logging
 
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
@@ -34,7 +35,9 @@ FLAGS = flags.FLAGS
 
 
 def _define_flags() -> None:
-    flags.DEFINE_string('output_path', 'input_files', 'Output directory')
+    flags.DEFINE_string('output_path', os.path.join(_SCRIPT_PATH,
+                                                    'input_files'),
+                        'Output directory')
 
 
 def download_existing_facilities(output_path: str) -> str:

@@ -35,16 +35,12 @@ from scripts.us_epa.parent_company import static_corrections as sc
 from scripts.us_epa.util import facilities_helper as fh
 
 flags.DEFINE_string("input_download_path",
-                    "input_files",
+                    os.path.join(_SCRIPT_PATH, "input_files"),
                     "Input directory",
                     allow_override=True)
 flags.DEFINE_string("existing_facilities_file",
                     "existing_facilities",
                     "Filename for existing facilities ids",
-                    allow_override=True)
-flags.DEFINE_string("output_base_path",
-                    "output",
-                    "Output directory for processed data.",
                     allow_override=True)
 
 FLAGS = flags.FLAGS

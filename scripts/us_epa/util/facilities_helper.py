@@ -286,35 +286,9 @@ def get_county_candidates(zcta):
     """
     if not zcta or zcta in ('zip/', 'zip/00000'):
         return [[], []]
-    if zcta in _COUNTY_CANDIDATES_CACHE:
-        return _COUNTY_CANDIDATES_CACHE[zcta]
-    candidate_lists = []
-    # Aggregate candidates to make a single typeOf lookup.
-    all_candidates = set()
-    for prop in ['containedInPlace', 'geoOverlaps']:
-        resp = dc_api_get_node_property([zcta], prop)
-        values = resp.get(zcta, {}).get(prop, '')
-        candidates = _parse_property_values(values)
-        candidate_lists.append(candidates)
-        all_candidates.update(candidates)
-    type_map = {}
-    if all_candidates:
-        # V2 node property values do not filter outgoing arcs by constraints.
-        type_resp = dc_api_get_node_property(sorted(all_candidates), 'typeOf')
-        for candidate in all_candidates:
-            values = type_resp.get(candidate, {}).get('typeOf', '')
-            type_map[candidate] = set(
-                _type_suffix(value_type)
-                for value_type in _parse_property_values(values))
-    filtered_lists = []
-    for candidates in candidate_lists:
-        filtered = []
-        for candidate in candidates:
-            if 'County' in type_map.get(candidate, set()):
-                filtered.append(candidate)
-        filtered_lists.append(sorted(filtered))
-    _COUNTY_CANDIDATES_CACHE[zcta] = filtered_lists
-    return filtered_lists
+    if zcta not in _COUNTY_CANDIDATES_CACHE:
+        prefetch_county_candidates([zcta])
+    return _COUNTY_CANDIDATES_CACHE.get(zcta, [[], []])
 
 
 # Returns a union all StatVars associated with all facilities using the

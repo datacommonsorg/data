@@ -43,11 +43,7 @@
                 {
                     "template_mcf": "output/ownership/EpaParentCompanyOwnership.tmcf",
                     "cleaned_csv": "output/ownership/EpaParentCompanyOwnership.csv",
-                    "node_mcf": [
-                        "output/table/EpaParentCompanyTable.mcf",
-                        "output/table/EpaParentCompanyNodes.mcf",
-                        "output/ownership/EpaParentCompanyOwnership.mcf"
-                    ]
+                    "node_mcf": "output/*/*.mcf"
                 }
             ],
             "cron_schedule": "0 8 8,22 * *",
@@ -73,10 +69,7 @@
                 {
                     "template_mcf": "output/svobs/SVObs.tmcf",
                     "cleaned_csv": "output/svobs/SVObs.csv",
-                    "node_mcf": [
-                        "output/table/EpaParentCompanyTable.mcf",
-                        "output/table/EpaParentCompanyNodes.mcf"
-                    ]
+                    "node_mcf": "output/table/*.mcf"
                 }
             ],
             "cron_schedule": "0 8 10,24 * *",

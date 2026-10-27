@@ -14,6 +14,7 @@ from absl import flags
 from absl import logging
 
 # Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[3]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
@@ -24,7 +25,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
                     'Name of table to download')
 flags.DEFINE_string('epa_output_path',
-                    'input_files',
+                    os.path.join(_SCRIPT_PATH, 'input_files'),
                     'Output directory',
                     allow_override=True)
 

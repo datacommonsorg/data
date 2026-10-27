@@ -33,10 +33,12 @@ from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path", "input_files", "Input directory")
+flags.DEFINE_string("input_download_path",
+                    os.path.join(_SCRIPT_PATH, "input_files"),
+                    "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
+flags.DEFINE_string("output_base_path", os.path.join(_SCRIPT_PATH, "output"),
                     "Output directory for processed data.")
 flags.DEFINE_string("parent_co_output_path", "table",
                     "Output directory for company info.")

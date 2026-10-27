@@ -31,7 +31,8 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('companies_table_name', 'V_PARENT_COMPANY_INFO',
                     'Name of table to download')
-flags.DEFINE_string('output_path', 'input_files', 'Output directory')
+flags.DEFINE_string('output_path', os.path.join(_SCRIPT_PATH, 'input_files'),
+                    'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000

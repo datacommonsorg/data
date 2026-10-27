@@ -434,12 +434,29 @@ class ProcessTest(unittest.TestCase):
 
     def test_main_output_modes(self):
         import shutil
+        ppc.FLAGS.mark_as_parsed()
+        flag_names = (
+            "input_download_path",
+            "existing_facilities_file",
+            "output_base_path",
+            "parent_co_output_path",
+            "ownership_output_path",
+            "svobs_output_path",
+            "output_mode",
+            "generate_svobs",
+        )
+        saved_flags = {name: getattr(ppc.FLAGS, name) for name in flag_names}
+
+        def _restore_flags():
+            for name, val in saved_flags.items():
+                setattr(ppc.FLAGS, name, val)
+
+        self.addCleanup(_restore_flags)
         with tempfile.TemporaryDirectory(
         ) as in_dir, tempfile.TemporaryDirectory() as tmp_dir:
             for fname in os.listdir(_INPUT_DATA_DIR):
                 shutil.copy(os.path.join(_INPUT_DATA_DIR, fname),
                             os.path.join(in_dir, fname))
-            ppc.FLAGS.mark_as_parsed()
             ppc.FLAGS.input_download_path = in_dir
             ppc.FLAGS.existing_facilities_file = _EXISTING_FACILITIES_FILENAME
             ppc.FLAGS.output_base_path = tmp_dir
