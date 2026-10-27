@@ -20,7 +20,8 @@
                     "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_district_place.csv"
                 }
             ],
-            "cron_schedule": "30 3 3 3,6,9,12 *",
+            "cron_schedule": "0 8 * * 5",
+            "_comment": "Schedule: Weekly on Friday at 08:00 UTC",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
