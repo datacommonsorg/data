@@ -90,7 +90,7 @@
                 "places_resolved.csv",
                 "validation_config.json"
             ],
-            "cron_schedule": "0 5 1 1,4,7,10 *",
+            "cron_schedule": "0 5 * * 1",
             "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 1,

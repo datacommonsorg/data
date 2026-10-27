@@ -5,7 +5,7 @@
 - **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
 - **Publisher**: Kenya National Bureau of Statistics (KNBS)
 - **Import Type**: `Semi-Automated`
-- **Schedule**: Quarterly
+- **Schedule**: Weekly (Every Monday at 05:00 UTC)
 - **Coverage**: Demographics, Health, Education, Economy (2002 – present)
 - **Entity Resolution**:
   - National level: `country/KEN`
