@@ -1,8 +1,4 @@
 observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
-dcid:country/UGA,2012,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,115,Percent,,P1Y
-dcid:country/UGA,2013,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,113,Percent,,P1Y
-dcid:country/UGA,2014,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,117,Percent,,P1Y
-dcid:country/UGA,2015,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,109,Percent,,P1Y
 dcid:country/UGA,2012,dcid:Count_Student_PrimaryEducation,8329000,,,P1Y
 dcid:country/UGA,2013,dcid:Count_Student_PrimaryEducation,8459000,,,P1Y
 dcid:country/UGA,2014,dcid:Count_Student_PrimaryEducation,8773000,,,P1Y
@@ -38,3 +34,7 @@ dcid:country/UGA,2014,dcid:Count_Student_6To12Years_Female_PrimaryEducation,3606
 dcid:country/UGA,2015,dcid:Count_Student_6To12Years_Female_PrimaryEducation,3673000,,,P1Y
 dcid:country/UGA,2016,dcid:Count_Student_6To12Years_Female_PrimaryEducation,3731000,,,P1Y
 dcid:country/UGA,2011,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,118,Percent,,P1Y
+dcid:country/UGA,2012,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,115,Percent,,P1Y
+dcid:country/UGA,2013,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,113,Percent,,P1Y
+dcid:country/UGA,2014,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,117,Percent,,P1Y
+dcid:country/UGA,2015,dcid:Count_Student_EnrolledInSchool_PrimaryEducation,109,Percent,,P1Y
