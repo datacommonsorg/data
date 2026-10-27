@@ -16,6 +16,8 @@
 import os
 import tempfile
 import unittest
+from unittest import mock
+import urllib.error
 
 from scripts.us_bea.gdp_price_parity import process_bea_gdp_rpp
 
@@ -139,6 +141,26 @@ class ProcessBeaGdpRppTest(unittest.TestCase):
             process_bea_gdp_rpp.normalize_msa_geofips('"41940"'),
             'dcid:geoId/C41940',
         )
+
+    def test_empty_directory_raises_runtime_error(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_csv = os.path.join(tmp_dir, 'out.csv')
+            with self.assertRaises(RuntimeError):
+                process_bea_gdp_rpp.process_all(tmp_dir,
+                                                out_csv,
+                                                download=False)
+
+    @mock.patch('time.sleep', return_value=None)
+    @mock.patch('urllib.request.urlopen')
+    def test_download_with_retries_and_failure(self, mock_urlopen, _):
+        mock_urlopen.side_effect = urllib.error.URLError(
+            'transient network error')
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            target = os.path.join(tmp_dir, 'test.zip')
+            with self.assertRaises(RuntimeError):
+                process_bea_gdp_rpp._download_with_retries(
+                    'https://example.com/test.zip', target, max_retries=2)
+            self.assertEqual(mock_urlopen.call_count, 2)
 
 
 if __name__ == '__main__':

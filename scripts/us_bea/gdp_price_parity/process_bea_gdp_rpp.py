@@ -165,20 +165,20 @@ def read_csv_from_zip_or_dir(input_dir: str, zip_name: str,
     readers = []
     zip_path = os.path.join(input_dir, zip_name)
     if os.path.exists(zip_path) and zipfile.is_zipfile(zip_path):
-        zf = zipfile.ZipFile(zip_path, 'r')
-        all_areas = [
-            name for name in zf.namelist()
-            if name.upper().endswith('.CSV') and 'ALL_AREAS' in name.upper()
-        ]
-        target_names = (all_areas if all_areas else [
-            name for name in zf.namelist() if name.upper().endswith('.CSV') and
-            os.path.basename(name).upper().startswith(file_prefix.upper())
-        ])
-        for name in sorted(target_names):
-            raw_bytes = zf.read(name)
-            text = raw_bytes.decode('latin-1')
-            readers.append(csv.DictReader(io.StringIO(text)))
-        zf.close()
+        with zipfile.ZipFile(zip_path, 'r') as zf:
+            all_areas = [
+                name for name in zf.namelist() if
+                name.upper().endswith('.CSV') and 'ALL_AREAS' in name.upper()
+            ]
+            target_names = (all_areas if all_areas else [
+                name for name in zf.namelist()
+                if name.upper().endswith('.CSV') and
+                os.path.basename(name).upper().startswith(file_prefix.upper())
+            ])
+            for name in sorted(target_names):
+                raw_bytes = zf.read(name)
+                text = raw_bytes.decode('latin-1')
+                readers.append(csv.DictReader(io.StringIO(text)))
         return readers
 
     if os.path.isdir(input_dir):
