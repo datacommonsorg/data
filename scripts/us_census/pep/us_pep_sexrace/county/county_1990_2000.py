@@ -63,7 +63,8 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
                                skipfooter=14,
                                engine='python',
                                names=_cols,
-                               encoding='ISO-8859-1')
+                               encoding='ISO-8859-1',
+                               on_bad_lines=lambda line: line[:len(_cols)])
             df.to_csv(_CODEDIR + "/../input_files/" +
                       'county_result_1990_2000.csv')
             # dropping the rows which are having broken values

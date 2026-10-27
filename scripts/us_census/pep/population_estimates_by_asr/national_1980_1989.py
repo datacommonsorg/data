@@ -89,12 +89,13 @@ def national1980(url_file: str, output_folder: str):
                                index_col=False,
                                sep=r'\s+',
                                engine='python',
-                               names=cols)
+                               names=cols,
+                               on_bad_lines=lambda line: line[:len(cols)])
             df = df.loc[df['0'].isin(['2I', '9P'])]
             df['1'] = df['1'].astype(str)
             # Divinding rows with 100 and others to make the format similar
             # rows with 100 have a different format.
-            df1 = df[df['1'].str.contains("100")]
+            df1 = df[df['1'].str.contains("100")].copy()
             # Removing rows with 999 as they denote total age,
             # which is not needed in ASR
             df = df[~df['1'].str.contains("999")]
