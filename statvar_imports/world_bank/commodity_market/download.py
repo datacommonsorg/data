@@ -44,14 +44,14 @@ def process_xlsx(file_path):
                 header_row1 = df.iloc[4, 1:].astype(str).tolist()
                 header_row2 = df.iloc[5, 1:].astype(str).tolist()
                 df = df.iloc[6:].copy()
-                df.reset_index(drop=True, inplace=True)
+                df = df.reset_index(drop=True)
 
                 first_col = df.iloc[:, 0].astype(str)
                 year_col = first_col.str.extract(r'(\d{4})')[0]
                 month_col = first_col.str.extract(r'(M\d{2})')[0]
                 df.insert(0, 'Year', year_col)
                 df.insert(1, 'Month', month_col)
-                df.drop(columns=[df.columns[2]], inplace=True)
+                df = df.drop(columns=[df.columns[2]])
 
                 new_columns = ['Year', 'Month'] + header_row1
                 df.columns = new_columns
@@ -78,7 +78,7 @@ def process_xlsx(file_path):
                 first_col = data_df.iloc[:, 0].astype(str)
                 data_df.insert(0, 'Year', first_col.str.extract(r'(\d{4})')[0])
                 data_df.insert(1, 'Month', first_col.str.extract(r'(M\d{2})')[0])
-                data_df.drop(columns=[data_df.columns[2]], inplace=True)
+                data_df = data_df.drop(columns=[data_df.columns[2]])
 
                 data_df.to_csv(output_csv_path, index=False)
                 logging.info(f"Saved processed sheet to {output_csv_path}")
