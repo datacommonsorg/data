@@ -316,7 +316,7 @@ def __process_ndap_api(api_url, output_dir, output_filename=None):
     df = pd.DataFrame(all_fetched_records)
     
     valid_renames = {old_name: new_name for old_name, new_name in column_name_mapping.items() if old_name in df.columns}
-    df.rename(columns=valid_renames, inplace=True)
+    df = df.rename(columns=valid_renames)
 
     df = __preprocess_dataframe(df)
 

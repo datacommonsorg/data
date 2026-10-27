@@ -77,14 +77,14 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             # and making the geoId of 5 digit as county
             df.loc[:, 'geo_ID'] = [f'{x:05}' for x in df.loc[:, 'geo_ID']]
             # columns after 11 where having origin hence not required
-            df.drop(df[df['Race'] >= 11].index, inplace=True)
+            df = df.drop(df[df['Race'] >= 11].index)
 
             # summing all the ages value as age is not required
             df.loc[:, 'Total'] = df.loc[:, COLUMNS_TO_SUM].sum(axis=1)
             df['Total'].astype(int)
 
             # dropping unwanted age columns
-            df.drop(columns=COLUMNS_TO_SUM, inplace=True)
+            df = df.drop(columns=COLUMNS_TO_SUM)
 
             # changing the column values as per metadata
             df = df.replace({
@@ -104,7 +104,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
 
             # extracting year
             df['Year'] = df['Year'].astype(str) + "-" + df['geo_ID'].astype(str)
-            df.drop(columns=['geo_ID'], inplace=True)
+            df = df.drop(columns=['geo_ID'])
 
             # it groups the df as per columns provided
             # performs the provided functions on the data
@@ -115,7 +115,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]
             df['Year'] = df['Year'].str.split('-', expand=True)[0]
             # dropping unwanted column
-            df.drop(columns=['level_0'], inplace=True)
+            df = df.drop(columns=['level_0'])
 
             # writing the dataframe to final dataframe
             final_df = pd.concat([final_df, df])
