@@ -23,7 +23,7 @@
 | `*_pvmap.csv` | Property-Value schema mappings for `stat_var_processor.py` |
 | `*_metadata.csv` | Processor configuration files declaring header rows and column mappings |
 | `places_resolved.csv` | Unified place resolver mapping for County / AdministrativeUnit place identifiers |
-| `*_indicator.csv` | Indicator reference definitions |
+| `*_indicators.csv` | Indicator reference definitions |
 | `input_files/` | Raw input data CSVs (synced to GCS `source_files`) |
 | `counters/` | Runtime counters output directory (`.gitignore` excluded from Git) |
 | `test_data/` | Small hermetic unit test input fixtures (<= 5 rows) |
@@ -39,10 +39,10 @@ The import processes 12 tables from KNBS Open Data:
 5. `gxbucsd`: School enrollment by administrative unit (counties via `places_resolved.csv`)
 6. `ixdvqrf`: Birth events by sex (`country/KEN`)
 7. `rsfzlbg`: County population indicators (counties via `places_resolved.csv`)
-8. `srricmg`: National household expenditure categories (`country/KEN`)
+8. `srricmg`: Gross Domestic Product (GDP) by Expenditure (`country/KEN`)
 9. `tdxdksf`: KCPE primary examination mean assessment scores (`country/KEN`)
 10. `vdbvyfd`: Adult education enrollment by county and sex (counties via `places_resolved.csv`)
-11. `welrttb`: Employment and labor force status (`country/KEN`)
+11. `welrttb`: KCPE examination candidates and subject performance (`country/KEN`)
 12. `xszlbb`: National economic production and industry indicators (`country/KEN`)
 
 ## 4. Ingestion Workflow

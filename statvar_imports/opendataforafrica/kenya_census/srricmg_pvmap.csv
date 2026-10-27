@@ -1,9 +1,9 @@
 "key","prop","val","p1","v1","p2","v2",,,,
 "TIME_PERIOD","observationDate","{Number}",,,,,,,,
 "OBS_VALUE","value","{Number}","populationType","ExpenditureActivity","observationAbout","country/KEN","measuredProperty","amount",,
-"INDICATOR:I1","activitySource","GrossDomesticProduction","measurementQualifier","RealValue","name","""Expenditure on the Gross Domestic Product, current Price on {ET}""","unit","KES","#Multiply",1000000
-"INDICATOR:I2","activitySource","GrossDomesticProduction","measurementDenominator","-expenditureType","name","""Expenditure on the Gross Domestic Product, percentage contribution to GDP on {ET}""","unit","Percent",,
-"INDICATOR:I3","activitySource","GrossDomesticProduction","measurementQualifier","Nominal","name","""Expenditure on the Gross Domestic Product, constant 2016 prices on {ET}""","unit","KES","#Multiply",1000000
+"INDICATOR:I1","activitySource","GrossDomesticProduction","measurementQualifier","Nominal","name","""Expenditure on the Gross Domestic Product, current Price on {ET}""","unit","KES","#Multiply",1000000
+"INDICATOR:I2","activitySource","GrossDomesticProduction","measurementDenominator","-expenditureType","name","""Expenditure on the Gross Domestic Product, percentage contribution to GDP on {ET}""","unit","Percent","scalingFactor",100
+"INDICATOR:I3","activitySource","GrossDomesticProduction","measurementQualifier","RealValue","name","""Expenditure on the Gross Domestic Product, constant 2016 prices on {ET}""","unit","KES","#Multiply",1000000
 "INDICATOR:I4","activitySource","GrossDomesticProduction","#ignore","ignore",,,,,,
 "EXPENDITURE_CATEGORY:EX1","expenditureType","GovernmentFinalConsumption","ET","""government final consumption expenditure""",,,,,,
 "EXPENDITURE_CATEGORY:EX2","expenditureType","PrivateFinalConsumption","ET","""private final consumption expenditure""",,,,,,
@@ -15,3 +15,4 @@
 "EXPENDITURE_CATEGORY:EX8","expenditureType","ImportsGoodsAndServices","ET","""Imports of goods and services""",,,,,,
 "EXPENDITURE_CATEGORY:EX9","expenditureType","DiscrepancyExpenditure","ET","""discrepancy expenditure""",,,,,,
 "EXPENDITURE_CATEGORY:EX10","#ignore","ignore",,,,,,,,
+"FREQ","observationPeriod","P1Y",,,,,,,,

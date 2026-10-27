@@ -30,6 +30,9 @@ logging.basicConfig(
 )
 
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     """Reads SDMX XML using sdmx1 and converts to a pandas DataFrame."""
     if not os.path.exists(xml_path):
@@ -139,7 +142,7 @@ def main():
     )
     parser.add_argument(
         '--output_dir',
-        default='input_files',
+        default=os.path.join(_MODULE_DIR, 'input_files'),
         help=
         'Directory where output CSVs should be written (default: input_files)',
     )
