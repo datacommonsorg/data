@@ -353,15 +353,18 @@ def _national_latest(file_path: str) -> pd.DataFrame:
                 2: 'Count_Person_Female'
             }})
         column_list = []
+        rename_dict = {}
         for year in range(2021, 2031):
             column_name = f'POPESTIMATE{year}'
             if column_name in df.columns:
-                df = df.rename(columns={column_name: str(year)})
+                rename_dict[column_name] = str(year)
                 column_list.append(str(year))
 
         # Ensure columns are renamed correctly before dropping unnecessary ones
         if 'SEX' in df.columns:
-            df = df.rename(columns={'SEX': 'Year'})
+            rename_dict['SEX'] = 'Year'
+
+        df = df.rename(columns=rename_dict)
 
         column_list.insert(0, "Year")
         df = df.drop(columns=df.columns.difference(column_list))

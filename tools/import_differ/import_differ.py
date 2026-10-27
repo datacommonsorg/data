@@ -190,8 +190,7 @@ class ImportDiffer:
           else Diff.DELETED.name if row[Column.diff_type.name] == 'left_only' \
           else Diff.MODIFIED.name if row[Column.value_combined.name + '_x'] != row[Column.value_combined.name + '_y'] \
           else Diff.UNMODIFIED.name, axis=1)
-        result = result.drop(
-            result[result[Column.diff_type.name] == Diff.UNMODIFIED.name].index)
+        result = result[result[Column.diff_type.name] != Diff.UNMODIFIED.name]
         # result.sort_values(by=[Column.diff_type.name], inplace=True)
         result = result.reset_index(drop=True)
         if result.empty:

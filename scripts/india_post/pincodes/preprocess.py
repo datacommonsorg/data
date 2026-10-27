@@ -66,7 +66,7 @@ class IndiaPostPincodesDataLoader:
 
     def process(self):
         self.raw_df = pd.read_csv(self.pincode_csv, dtype=str)
-        self.raw_df.fillna('', inplace=True)
+        self.raw_df = self.raw_df.fillna('')
         self.raw_df = self.raw_df.drop_duplicates(
             subset=["Pincode", "StateName", "District"])
         self.raw_df = self.raw_df.drop([
