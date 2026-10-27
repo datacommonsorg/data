@@ -8,7 +8,7 @@
         "data_source": "stats"
       },
       "params": {
-        "golden_files": "golden_data/golden_summary_report.csv"
+        "golden_files": "../../../../golden_data/golden_summary_report.csv"
       }
     },
     {
@@ -18,8 +18,8 @@
         "data_source": "stats"
       },
       "params": {
-        "golden_files": "golden_data/golden_observations.csv",
-        "input_files": "output_files/australia_statistics_output.csv"
+        "golden_files": "../../../../golden_data/golden_observations.csv",
+        "input_files": "../../../../output_files/australia_statistics_output.csv"
       }
     },
     {
