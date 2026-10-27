@@ -19,7 +19,8 @@
                     "node_mcf": "output/*.mcf"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "30 1 * * 2",
+            "_comment": "Schedule: Weekly on Tuesday at 01:30 UTC",
             "validation_config_file": "validation_config.json",
             "source_files": [
                 "gcs_output/source_files/*",
