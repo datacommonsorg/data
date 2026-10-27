@@ -1,0 +1,44 @@
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household,dcid:EconomicActivity
+
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:Household,dcid:EconomicActivity
+rangeIncludes: dcid:FamilyTypeEnum
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household,dcid:EconomicActivity
+
+Node: dcid:Brazil_FoodAcquisitionProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Food Acquisition Program"
+isProvisional: dcs:True
+
+Node: dcid:foodSource
+typeOf: dcs:Property
+name: "foodSource"
+domainIncludes: dcid:Household,dcid:EconomicActivity
+rangeIncludes: dcid:FoodSourceEnum
+isProvisional: dcs:True
+
+Node: dcid:FoodSourceEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FoodSourceEnum"
+isProvisional: dcs:True
+
+Node: dcid:Supply
+typeOf: dcid:FoodSourceEnum
+name: "Supply"
+isProvisional: dcs:True
+
+Node: dcid:governmentPaymentStatus
+typeOf: dcs:Property
+name: "governmentPaymentStatus"
+domainIncludes: dcid:EconomicActivity
+

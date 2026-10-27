@@ -1,0 +1,38 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1k9Zr0xq5mBA_Pscnv6MmYa6lpp47qpsP8r8txtqcHPs/edit?gid=1697123838#gid=1697123838 --output_path=/usr/local/google/home/shamimansari/outputfile/Brazil28052025/" on 2025-05-29 02:38:05.912120
+
+Node: dcid:Amount_EconomicActivity_BrazilFoodAcquisitionProgram_Supply_GovernmentPayment_FarmingFamily_Milk
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to family farmers participating in the Food Acquisition Program (PAA) to supply the food under the Purchase with Milk Modality"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total pago aos agricultores familiares participantes do Programa de Aquisição de Alimentos (PAA) para fornecimento de alimentos na Modalidade Compra com Leite@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+foodSource: dcid:Supply
+governmentPaymentStatus: dcid:GovernmentPayment
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:Milk
+
+Node: dcid:Amount_Food_BrazilFoodAcquisitionProgram_Purchase_Milk
+typeOf: dcid:StatisticalVariable
+description: "Total quantity of milk (Liters) purchased from family farmers participating in the Food Acquisition Program (PAA) Under the Purchase with Milk Modality"
+populationType: dcid:Food
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Quantidade total de leite (Litros) adquirido de agricultores familiares participantes do Programa de Aquisição de Alimentos (PAA) na Modalidade Compra com Leite@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+foodSource: dcid:Purchase
+purchaseModality: dcid:Milk
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_Supply_FarmingFamily_Milk
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Participating in the Food Acquisition Program (PAA) to suppy the food under the purchase with Milk Modality"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Participantes do Programa de Aquisição de Alimentos (PAA) para fornecimento de alimentos na modalidade compra com Leite@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+foodSource: dcid:Supply
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:Milk
+
