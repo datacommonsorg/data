@@ -164,7 +164,9 @@
     },
     "workExperience": {
       "Worked full-time, year round in the past 12 months": "USC_FullTimeYearRoundWorker",
-      "Worked less than full-time, year round in the past 12 months": "LessThanFullTimeYearRoundWorker",
+      "Worked less than full-time, year round in the past 12 months": "LessThanFullTimeYearRoundWorker"
+    },
+    "workStatus": {
       "Did not work": "DidNotWork"
     },
     "establishmentOwnership": {
@@ -253,6 +255,9 @@
       "age": "[16 - Years]"
     },
     "workExperience": {
+      "age": "[16 64 Years]"
+    },
+    "workStatus": {
       "age": "[16 64 Years]"
     },
     "workerClassification": {
