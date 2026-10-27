@@ -7,7 +7,6 @@ This pipeline ingests demographic and institutional data from the **National Cen
 * **Data Nature**: Canonical Census/NCES public-use survey microdata (`pss*.csv` / `pss*.txt`) with up to 335 columns per wave.
 * **Periodicity**: Biennial (`P2Y`).
 * **Entities**: ~65,648 unique private schools.
-* **Observations**: ~9,082,570 demographic observation rows across 35 Statistical Variables.
 
 ---
 
@@ -24,13 +23,13 @@ NCES_PrivateSchool (Place) ─────────────► NCES_Priva
 (Defines: dcid:nces/...)                  (Refs: observationAbout: dcs:nces/...)
 ```
 
-### Staggered Quarterly Cron Schedule
+### Staggered weekly Cron Schedule
 | Import Name | Domain | Script Invocations | Staggered `cron_schedule` |
 | :--- | :--- | :--- | :--- |
-| **`NCES_PrivateSchool`** | Place Entities | `download.py`<br>`process.py --mode=place` | `"30 4 3 3,6,9,12 *"` (Day 3, 04:30 UTC) |
-| **`NCES_PrivateSchoolStats`** | Statistical Observations | `download.py`<br>`process.py --mode=stats` | `"30 7 10 3,6,9,12 *"` (Day 10, 07:30 UTC) |
+| **`NCES_PrivateSchool`** | Place Entities | `download.py`<br>`process.py --mode=place` | `"0 11 * * 3"` (Wednesday, 11:00 UTC) |
+| **`NCES_PrivateSchoolStats`** | Statistical Observations | `download.py`<br>`process.py --mode=stats` | `"0 11 * * 2"` (Tuesday, 11:00 UTC) |
 
-The 7-day interval guarantees that newly onboarded private school entities from modern survey waves (2021–22 and 2023–24) are ingested and indexed in Data Commons before the Stats import processes observations about them.
+The 7-day interval guarantees that newly onboarded private school entities from modern survey waves are ingested and indexed in Data Commons before the Stats import processes observations about them.
 
 ---
 
