@@ -137,7 +137,7 @@ def clean_extracted_table_data(df: pd.DataFrame) -> pd.DataFrame:
         r'(\d+.\d+)').astype('float')
     clean_df['Error'] = clean_df['Prevalence, % (SE)'].str.extract(
         r'\((\d+.\d+)').astype('float')
-    clean_df.drop(columns=['Prevalence, % (SE)'], inplace=True)
+    clean_df = clean_df.drop(columns=['Prevalence, % (SE)'])
 
     # unpivot the column
     clean_df = clean_df.melt(

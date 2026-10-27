@@ -66,11 +66,11 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
         # Robust sorting logic for 'Series No' to handle both integers and hierarchical strings (e.g., '1.1.1').
         try:
             df_long['sort_key'] = df_long['Series No'].str.split('.').apply(lambda x: [int(i) for i in x])
-            df_long.sort_values(by='sort_key', inplace=True)
+            df_long = df_long.sort_values(by='sort_key')
         except (AttributeError, ValueError):
             # Fallback to a simple numeric sort if the 'Series No' format is not hierarchical.
             df_long['Series No'] = pd.to_numeric(df_long['Series No'], errors='coerce')
-            df_long.sort_values(by='Series No', inplace=True)
+            df_long = df_long.sort_values(by='Series No')
 
         desired_order = df_long['Data Series'].unique()
 
@@ -82,7 +82,7 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
                                  aggfunc='first')
 
         df_wide = df_wide.reindex(desired_order)
-        df_wide.reset_index(inplace=True)
+        df_wide = df_wide.reset_index()
         df_wide.columns.name = None
 
         #  column sorting to handle both yearly and monthly data keys.
