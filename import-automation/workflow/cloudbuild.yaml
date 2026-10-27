@@ -23,9 +23,6 @@
 
 substitutions:
   _PROJECT_ID: 'datcom-import-automation-prod'
-  _PROJECT_NUMBER: '965988403328'
-  _GCS_BUCKET_ID: 'datcom-prod-imports'
-  _GCS_MOUNT_BUCKET: 'datcom-volume-mount'
   _TEST_PROJECT_ID: 'datcom-ci'
   _TEST_PROJECT_NUMBER: '879489846695'
   _TEST_GCS_BUCKET_ID: 'datcom-ci-test'
@@ -65,7 +62,7 @@ steps:
         python -m py_compile import-automation/workflow/import_automation_e2e.py
         echo "DAG syntax validation passed."
 
-  # 3a. Deploy import-automation-workflow-staging to Test (datcom-ci) and Staging (datcom-import-automation-prod)
+  # 3a. Deploy import-automation-workflow to Test (datcom-ci)
   - id: 'deploy-test-workflow'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -74,20 +71,14 @@ steps:
       - '-c'
       - |
         if [ "${_DEPLOY_CLOUD_WORKFLOWS}" != "true" ]; then
-          echo "Skipping staging Cloud Workflows deployment (_DEPLOY_CLOUD_WORKFLOWS=${_DEPLOY_CLOUD_WORKFLOWS})."
+          echo "Skipping test Cloud Workflows deployment (_DEPLOY_CLOUD_WORKFLOWS=${_DEPLOY_CLOUD_WORKFLOWS})."
           exit 0
         fi
-        gcloud workflows deploy import-automation-workflow-staging \
+        gcloud workflows deploy import-automation-workflow \
           --project="${_TEST_PROJECT_ID}" \
           --location="${_LOCATION}" \
           --source=import-automation/workflow/import-automation-workflow.yaml \
-          --set-env-vars="LOCATION=${_LOCATION},GCS_BUCKET_ID=${_TEST_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_TEST_GCS_MOUNT_BUCKET},PROJECT_NUMBER=${_TEST_PROJECT_NUMBER},ENV_SUFFIX=-staging,IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
-
-        gcloud workflows deploy import-automation-workflow-staging \
-          --project="${_PROJECT_ID}" \
-          --location="${_LOCATION}" \
-          --source=import-automation/workflow/import-automation-workflow.yaml \
-          --set-env-vars="LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},PROJECT_NUMBER=${_PROJECT_NUMBER},ENV_SUFFIX=-staging,IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
+          --set-env-vars="LOCATION=${_LOCATION},GCS_BUCKET_ID=${_TEST_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_TEST_GCS_MOUNT_BUCKET},PROJECT_NUMBER=${_TEST_PROJECT_NUMBER},IMPORT_HELPER_SERVICE=import-helper-service,INGESTION_HELPER_SERVICE=ingestion-helper-service"
 
   # 3b. Deploy/Sync DAGs, factory, and catalog to Cloud Composer GCS bucket
   - id: 'deploy-dags'
