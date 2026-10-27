@@ -12,8 +12,9 @@
                 "process.py"
             ],
             "resource_limits": {
-                "cpu": 2,
-                "memory": 8
+                "cpu": 8,
+                "memory": 64,
+                "disk": 100
             },
             "source_files": [
                 "input_files/*",
