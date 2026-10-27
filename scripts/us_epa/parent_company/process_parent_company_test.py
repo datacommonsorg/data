@@ -320,20 +320,38 @@ def compare_files(t, output_path, expected_path):
             t.assertEqual(got, want)
 
 
+def _fake_dc_api_get_node_property(dcids, prop, config=None):
+    del config
+    if prop == ['containedInPlace', 'geoOverlaps']:
+        return {
+            z: {
+                'containedInPlace': _FAKE_COUNTY_CANDIDATES.get(z, [[], []])[0],
+                'geoOverlaps': _FAKE_COUNTY_CANDIDATES.get(z, [[], []])[1],
+            } for z in dcids
+        }
+    if prop == 'typeOf':
+        return {d: {'typeOf': ['County']} for d in dcids}
+    raise AssertionError(
+        f'Unexpected dc_api_get_node_property call for prop={prop}')
+
+
 class ProcessTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
-        fh._COUNTY_CANDIDATES_CACHE.clear()
-        fh._COUNTY_CANDIDATES_CACHE.update(_FAKE_COUNTY_CANDIDATES)
         self._dc_patcher = mock.patch.object(
             fh,
             'dc_api_get_node_property',
-            side_effect=AssertionError(
-                'Unexpected live Data Commons API call in unit test'))
+            side_effect=_fake_dc_api_get_node_property)
+        self._def_patcher = mock.patch.object(
+            fh,
+            'dc_api_is_defined_dcid',
+            side_effect=lambda dcids, config=None: {d: True for d in dcids})
         self._dc_patcher.start()
+        self._def_patcher.start()
 
     def tearDown(self):
+        self._def_patcher.stop()
         self._dc_patcher.stop()
         super().tearDown()
 
@@ -415,9 +433,14 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(got[key]['value'], 100.0)
 
     def test_main_output_modes(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
+        import shutil
+        with tempfile.TemporaryDirectory(
+        ) as in_dir, tempfile.TemporaryDirectory() as tmp_dir:
+            for fname in os.listdir(_INPUT_DATA_DIR):
+                shutil.copy(os.path.join(_INPUT_DATA_DIR, fname),
+                            os.path.join(in_dir, fname))
             ppc.FLAGS.mark_as_parsed()
-            ppc.FLAGS.input_download_path = _INPUT_DATA_DIR
+            ppc.FLAGS.input_download_path = in_dir
             ppc.FLAGS.existing_facilities_file = _EXISTING_FACILITIES_FILENAME
             ppc.FLAGS.output_base_path = tmp_dir
             ppc.FLAGS.parent_co_output_path = "table"
@@ -425,7 +448,7 @@ class ProcessTest(unittest.TestCase):
             ppc.FLAGS.svobs_output_path = "svobs"
             ppc.FLAGS.generate_svobs = None
 
-            # Mode 'companies' only runs process_companies, not generate_svobs_helper.
+            # Mode 'companies' runs process_companies with resolve_geo=True, write_table=True.
             ppc.FLAGS.output_mode = "companies"
             with mock.patch.object(ppc,
                                    "generate_svobs_helper") as mock_gen_svobs:
@@ -441,9 +464,25 @@ class ProcessTest(unittest.TestCase):
             self.assertTrue(os.path.exists(ownership_csv))
             with open(table_csv) as fp:
                 original_table_csv = fp.read()
+
+            # Mode 'ownership' generates ownership outputs without geo resolution
+            # and without overwriting EpaParentCompanyTable.csv.
+            os.remove(ownership_csv)
+            ppc.FLAGS.output_mode = "ownership"
+            with mock.patch.object(
+                    fh,
+                    "prefetch_county_candidates") as mock_prefetch_counties, \
+                 mock.patch.object(ppc,
+                                   "generate_svobs_helper") as mock_gen_svobs:
+                ppc.main([])
+                mock_prefetch_counties.assert_not_called()
+                mock_gen_svobs.assert_not_called()
+            self.assertTrue(os.path.exists(ownership_csv))
+            with open(table_csv) as fp:
+                self.assertEqual(fp.read(), original_table_csv)
             os.remove(table_mcf)
 
-            # Mode 'svobs' skips process_companies when ownership CSV exists,
+            # Mode 'svobs' skips process_companies when ownership CSV and Nodes.mcf exist,
             # ensures EpaParentCompanyTable.mcf exists, and runs generate_svobs_helper.
             ppc.FLAGS.output_mode = "svobs"
             with mock.patch.object(ppc, "process_companies") as mock_proc_co, \

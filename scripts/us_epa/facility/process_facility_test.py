@@ -1,5 +1,6 @@
 """Tests for process_facility.py"""
 
+import json
 import os
 import sys
 import tempfile
@@ -60,24 +61,51 @@ _FAKE_POLYGONS = {
 }
 
 
+def _fake_dc_api_get_node_property(dcids, prop, config=None):
+    del config
+    if prop == ['containedInPlace', 'geoOverlaps']:
+        return {
+            z: {
+                'containedInPlace': _FAKE_COUNTY_CANDIDATES.get(z, [[], []])[0],
+                'geoOverlaps': _FAKE_COUNTY_CANDIDATES.get(z, [[], []])[1],
+            } for z in dcids
+        }
+    if prop == 'geoJsonCoordinates':
+        return {
+            c: {
+                'geoJsonCoordinates':
+                    json.dumps(geometry.mapping(_FAKE_POLYGONS[c]))
+            } for c in dcids if c in _FAKE_POLYGONS
+        }
+    if prop == 'typeOf':
+        return {
+            d: {
+                'typeOf': ['County']
+                          if d.startswith('geoId/') else ['PowerPlant']
+            } for d in dcids
+        }
+    raise AssertionError(
+        f'Unexpected dc_api_get_node_property call for prop={prop}')
+
+
 class ProcessTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
-        fh._COUNTY_CANDIDATES_CACHE.clear()
-        fh._COUNTY_CANDIDATES_CACHE.update(_FAKE_COUNTY_CANDIDATES)
-        process_facility._POLYGON_CACHE.clear()
-        process_facility._POLYGON_CACHE.update(_FAKE_POLYGONS)
-        process_facility._GEOJSON_CACHE.clear()
-        self._dc_patcher = mock.patch.object(
+        self._fh_dc_patcher = mock.patch.object(
             fh,
             'dc_api_get_node_property',
-            side_effect=AssertionError(
-                'Unexpected live Data Commons API call in unit test'))
-        self._dc_patcher.start()
+            side_effect=_fake_dc_api_get_node_property)
+        self._pf_dc_patcher = mock.patch.object(
+            process_facility,
+            'dc_api_get_node_property',
+            side_effect=_fake_dc_api_get_node_property)
+        self._fh_dc_patcher.start()
+        self._pf_dc_patcher.start()
 
     def tearDown(self):
-        self._dc_patcher.stop()
+        self._pf_dc_patcher.stop()
+        self._fh_dc_patcher.stop()
         super().tearDown()
 
     def test_e2e(self):

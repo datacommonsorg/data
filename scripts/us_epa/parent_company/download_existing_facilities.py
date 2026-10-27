@@ -38,7 +38,7 @@ def _define_flags() -> None:
 
 
 def download_existing_facilities(output_path: str) -> str:
-    Path(output_path).mkdir(exist_ok=True)
+    Path(output_path).mkdir(parents=True, exist_ok=True)
     out_file = os.path.join(output_path, 'existing_facilities.csv')
 
     logging.info(
@@ -51,6 +51,8 @@ def download_existing_facilities(output_path: str) -> str:
             'properties': 'typeOf',
             'out': False,
         },
+        retries=5,
+        retry_secs=5,
     )
     if not response:
         raise RuntimeError(

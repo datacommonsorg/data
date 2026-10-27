@@ -160,8 +160,10 @@ def _prefetch_geojson(dcids, cache_file=None):
         if gj:
             _GEOJSON_CACHE[dcid] = gj
     if cache_file:
-        with open(cache_file, 'w') as fp:
+        tmp_cache_file = cache_file + '.tmp'
+        with open(tmp_cache_file, 'w') as fp:
             json.dump(_GEOJSON_CACHE, fp)
+        os.replace(tmp_cache_file, cache_file)
 
 
 def _get_existing_power_plants(pp_dcids):
@@ -288,16 +290,29 @@ def _deduplicate_facility_rows(table, rows):
         entries.sort(key=lambda item: (item[0], item[1]), reverse=True)
         merged = dict(entries[0][2])
         for _, _, older_row in entries[1:]:
+            if not (fh.v(table, merged, 'LATITUDE') and
+                    fh.v(table, merged, 'LONGITUDE')):
+                if (fh.v(table, older_row, 'LATITUDE') and
+                        fh.v(table, older_row, 'LONGITUDE')):
+                    for k, val in older_row.items():
+                        if k.upper().endswith(
+                            ('LATITUDE', 'LONGITUDE')) and val:
+                            merged[k] = val
             for k, val in older_row.items():
+                if k.upper().endswith(('LATITUDE', 'LONGITUDE')):
+                    continue
                 if not merged.get(k) and val:
                     merged[k] = val
         deduped.append(merged)
     return deduped
 
 
-def process(input_tables_path, output_path):
+def process(input_tables_path, output_path, cache_dir=None):
     for v in _COUNTERS.values():
         v.clear()
+    _GEOJSON_CACHE.clear()
+    _POLYGON_CACHE.clear()
+    fh._COUNTY_CANDIDATES_CACHE.clear()
     crosswalk = Crosswalk(os.path.join(input_tables_path, _CROSSWALK_FILE))
     processed_ids = set()
     tables = _get_input_tables(input_tables_path)
@@ -317,46 +332,41 @@ def process(input_tables_path, output_path):
                 cr = csv.DictReader(rfp)
                 deduped_rows = _deduplicate_facility_rows(table, cr)
 
-            if len(deduped_rows) > 20:
-                all_zips = [
-                    'zip/' + fh.v(table, r, 'ZIP')[:5]
-                    for r in deduped_rows
-                    if fh.v(table, r, 'ZIP')
-                ]
-                print(
-                    f'Pre-fetching county candidates for {len(set(all_zips))} unique ZCTAs...'
-                )
-                fh.prefetch_county_candidates(all_zips,
-                                              cache_file=os.path.join(
-                                                  input_tables_path,
-                                                  'zcta_county_cache.json'))
-                all_counties = set()
-                for r in deduped_rows:
-                    fips = fh.v(table, r, 'COUNTY_FIPS')
-                    if fips:
-                        all_counties.add('geoId/' + fips)
-                    z = 'zip/' + fh.v(table, r, 'ZIP')[:5]
-                    for clist in fh.get_county_candidates(z):
-                        all_counties.update(clist)
-                print(
-                    f'Pre-fetching GeoJSON coordinates for {len(all_counties)} unique counties...'
-                )
-                _prefetch_geojson(all_counties,
-                                  cache_file=os.path.join(
-                                      input_tables_path,
-                                      'county_geojson_cache.json'))
-                all_pp_dcids = [
-                    'eia/pp/' + v
-                    for r in deduped_rows
-                    for v in crosswalk.get_power_plant_ids(
-                        fh.v(table, r, 'FACILITY_ID'))
-                ]
-                print(
-                    f'Checking existence for {len(set(all_pp_dcids))} unique EIA power plants...'
-                )
-                existing_pp = _get_existing_power_plants(all_pp_dcids)
-            else:
-                existing_pp = None
+            all_zips = [
+                'zip/' + fh.v(table, r, 'ZIP')[:5]
+                for r in deduped_rows
+                if fh.v(table, r, 'ZIP')
+            ]
+            print(
+                f'Pre-fetching county candidates for {len(set(all_zips))} unique ZCTAs...'
+            )
+            zcta_cache_file = (os.path.join(cache_dir, 'zcta_county_cache.json')
+                               if cache_dir else None)
+            fh.prefetch_county_candidates(all_zips, cache_file=zcta_cache_file)
+            all_counties = set()
+            for r in deduped_rows:
+                fips = fh.v(table, r, 'COUNTY_FIPS')
+                if fips:
+                    all_counties.add('geoId/' + fips)
+                z = 'zip/' + fh.v(table, r, 'ZIP')[:5]
+                for clist in fh.get_county_candidates(z):
+                    all_counties.update(clist)
+            print(
+                f'Pre-fetching GeoJSON coordinates for {len(all_counties)} unique counties...'
+            )
+            geojson_cache_file = (os.path.join(
+                cache_dir, 'county_geojson_cache.json') if cache_dir else None)
+            _prefetch_geojson(all_counties, cache_file=geojson_cache_file)
+            all_pp_dcids = [
+                'eia/pp/' + v
+                for r in deduped_rows
+                for v in crosswalk.get_power_plant_ids(
+                    fh.v(table, r, 'FACILITY_ID'))
+            ]
+            print(
+                f'Checking existence for {len(set(all_pp_dcids))} unique EIA power plants...'
+            )
+            existing_pp = _get_existing_power_plants(all_pp_dcids)
 
             missing_facility_id_count = 0
             for in_row in deduped_rows:
@@ -394,8 +404,7 @@ def process(input_tables_path, output_path):
                         ', '.join([
                             'dcid:eia/pp/' + v
                             for v in crosswalk.get_power_plant_ids(ghg_id)
-                            if existing_pp is None or ('eia/pp/' +
-                                                       v) in existing_pp
+                            if ('eia/pp/' + v) in existing_pp
                         ]),
                     _NAME:
                         _str(fh.get_name(table, in_row, 'FACILITY_NAME')),
@@ -435,7 +444,9 @@ def main(_):
             f'No input facility tables found in {FLAGS.epa_input_tables_path}')
     Path(FLAGS.epa_output_path).mkdir(parents=True, exist_ok=True)
 
-    process(FLAGS.epa_input_tables_path, FLAGS.epa_output_path)
+    process(FLAGS.epa_input_tables_path,
+            FLAGS.epa_output_path,
+            cache_dir=FLAGS.epa_input_tables_path)
 
 
 if __name__ == '__main__':

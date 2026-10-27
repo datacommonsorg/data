@@ -45,9 +45,10 @@ flags.DEFINE_string("ownership_output_path", "ownership",
 flags.DEFINE_string("svobs_output_path", "svobs",
                     "Output directory for StatVarObs.")
 flags.DEFINE_enum(
-    "output_mode", "all", ["companies", "svobs", "all"],
-    "Output mode: 'companies' to only run process_companies(), "
-    "'svobs' to run generate_svobs_helper(), or 'all' to run both.")
+    "output_mode", "all", ["companies", "ownership", "svobs", "all"],
+    "Output mode: 'companies' to generate company table and ownership outputs, "
+    "'ownership' to generate ownership outputs without geo resolution, "
+    "'svobs' to run generate_svobs_helper(), or 'all' to run all.")
 flags.DEFINE_bool(
     "generate_svobs", None,
     "Whether to run generate_svobs_helper(). Overrides output_mode if set.")
@@ -117,9 +118,15 @@ def _gen_ownership_mcf():
         "measuredProperty: owns",
         "statType: measurementResult",
         "\n",
+        "Node: dcid:owns",
+        "typeOf: schema:Property",
+        "domainIncludes: dcs:EpaParentCompany, dcs:Organization",
+        "rangeIncludes: dcs:EpaReportingFacility",
+        'name: "owns"',
+        "\n",
         "Node: dcid:ownershipPercentage",
         "typeOf: schema:Property",
-        "domainIncludes: dcs:EpaParentCompany",
+        "domainIncludes: dcs:EpaParentCompany, dcs:StatVarObservation",
         "rangeIncludes: schema:Number",
         'name: "ownershipPercentage"',
     ]
@@ -295,11 +302,12 @@ def process_companies(input_table_path,
                       output_path_info,
                       output_path_ownership,
                       resolve_geo=True,
-                      write_table=True):
+                      write_table=True,
+                      cache_dir=None):
     for counter_set in _COUNTERS_COMPANIES.values():
         counter_set.clear()
+    fh._COUNTY_CANDIDATES_CACHE.clear()
 
-    company_ids_replaced_counter = 0
     # First retrieve the ID duplicate mappings.
     dupes = {}
     dupes_filepath = os.path.join(input_table_path, "DuplicateIdMappings.csv")
@@ -339,7 +347,7 @@ def process_companies(input_table_path,
             pd.read_csv(existing_facilities_path)[_EPA_FACILITY_GHG_ID].values)
         input_table = os.path.join(input_table_path, _TABLE + ".csv")
         invalid_zctas = set()
-        if resolve_geo and "testdata" not in input_table_path:
+        if resolve_geo:
             all_zctas = set()
             with open(input_table, "r") as rfp:
                 for row in csv.DictReader(rfp):
@@ -349,8 +357,8 @@ def process_companies(input_table_path,
                              table_prefix=_TABLE_PREFIX)[:5]
                     if z:
                         all_zctas.add("zip/" + z)
-            cache_file = os.path.join(input_table_path,
-                                      "zcta_county_cache.json")
+            cache_file = (os.path.join(cache_dir, "zcta_county_cache.json")
+                          if cache_dir else None)
             fh.prefetch_county_candidates(all_zctas, cache_file=cache_file)
             no_county_zctas = sorted(
                 z for z in all_zctas
@@ -397,7 +405,6 @@ def process_companies(input_table_path,
                 # Replace the company_id with a duplicate mapping, if it exists.
                 if company_id in dupes:
                     _COUNTERS_COMPANIES["company_ids_replaced"].add(company_id)
-                    company_ids_replaced_counter += 1
                     company_id = dupes[company_id]
                 company_id = "EpaParentCompany/" + company_id
                 if company_id.lower() in processed_companies:
@@ -477,7 +484,8 @@ def process_companies(input_table_path,
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
         print("Geo Resolution Stats: \n" + counters_string(_COUNTERS_COMPANIES))
 
-    print("Company ID duplicated replaced = ", company_ids_replaced_counter)
+    print("Company ID duplicated replaced = ",
+          len(_COUNTERS_COMPANIES["company_ids_replaced"]))
 
     # Write the MCF and TMCF files in their respective destination locations.
     with open(table_path + "Table.mcf", "w") as fp:
@@ -489,7 +497,7 @@ def process_companies(input_table_path,
     with open(ownership_path + "Ownership.mcf", "w") as fp:
         fp.write(_gen_ownership_mcf())
 
-    if write_table or not os.path.exists(table_path + "Table.tmcf"):
+    if write_table:
         with open(table_path + "Table.tmcf", "w") as fp:
             fp.write(_gen_company_tmcf())
 
@@ -606,35 +614,38 @@ def main(_):
     output_path_ownership = os.path.join(FLAGS.output_base_path,
                                          FLAGS.ownership_output_path)
 
-    pathlib.Path(FLAGS.output_base_path).mkdir(exist_ok=True)
-    pathlib.Path(output_path_info).mkdir(exist_ok=True)
-    pathlib.Path(output_path_ownership).mkdir(exist_ok=True)
+    pathlib.Path(FLAGS.output_base_path).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(output_path_info).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(output_path_ownership).mkdir(parents=True, exist_ok=True)
 
     output_mode = FLAGS.output_mode
     if FLAGS.generate_svobs is not None:
         output_mode = "all" if FLAGS.generate_svobs else "companies"
 
     run_companies = output_mode in ("companies", "all")
+    run_ownership = output_mode in ("companies", "ownership", "all")
     run_svobs = output_mode in ("svobs", "all")
 
-    table_csv_filepath = os.path.join(output_path_info,
-                                      _OUT_FILE_PREFIX + "Table.csv")
     table_mcf_filepath = os.path.join(output_path_info,
                                       _OUT_FILE_PREFIX + "Table.mcf")
+    nodes_mcf_filepath = os.path.join(output_path_info,
+                                      _OUT_FILE_PREFIX + "Nodes.mcf")
     ownership_path = os.path.join(output_path_ownership, _OUT_FILE_PREFIX)
     ownership_relationships_filepath = ownership_path + "Ownership.csv"
 
-    # Run process_companies() when requested, or if svobs mode requires
-    # the ownership CSV and it has not been generated yet.
-    if run_companies or (run_svobs and
-                         not os.path.exists(ownership_relationships_filepath)):
-        write_table = run_companies or not os.path.exists(table_csv_filepath)
+    # Run process_companies() when companies or ownership mode is requested, or
+    # if svobs mode requires the ownership CSV / company node MCFs and they
+    # have not been generated yet.
+    if run_ownership or (run_svobs and
+                         (not os.path.exists(ownership_relationships_filepath)
+                          or not os.path.exists(nodes_mcf_filepath))):
         process_companies(FLAGS.input_download_path,
                           FLAGS.existing_facilities_file,
                           output_path_info,
                           output_path_ownership,
                           resolve_geo=run_companies,
-                          write_table=write_table)
+                          write_table=run_companies,
+                          cache_dir=FLAGS.input_download_path)
     elif not os.path.exists(table_mcf_filepath):
         with open(table_mcf_filepath, "w") as fp:
             fp.write(_gen_table_mcf())
@@ -646,7 +657,7 @@ def main(_):
 
         svobs_path_info = os.path.join(FLAGS.output_base_path,
                                        FLAGS.svobs_output_path)
-        pathlib.Path(svobs_path_info).mkdir(exist_ok=True)
+        pathlib.Path(svobs_path_info).mkdir(parents=True, exist_ok=True)
 
         # Generate the new SVOs.
         generate_svobs_helper(ownership_relationships_filepath, svobs_path_info)

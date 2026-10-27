@@ -87,13 +87,12 @@ percentage and if no percentage is provided it is assumed to be 100.
           "NumRowSuccesses": "127966",
           "NumPVSuccesses": "1023728",
           "Existence_NumChecks": "1082380",
-          "NumNodeSuccesses": "135382",
+          "NumNodeSuccesses": "135383",
           "Existence_NumDcCalls": "7"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
-          "Existence_MissingTriple_domainIncludes": "1",
           "StatsCheck_Inconsistent_Values": "122",
           "StatsCheck_Data_Holes": "2"
         }

@@ -104,12 +104,22 @@ def get_address(table, row, table_prefix=""):
     return address
 
 
-def _fetch_page_csv(url, max_retries=5, retry_backoff_sec=2.0, timeout=60):
+def _fetch_page_csv(url,
+                    max_retries=5,
+                    retry_backoff_sec=2.0,
+                    timeout=60,
+                    session=None):
     """Fetches a single CSV page from Envirofacts with retry/backoff and timeout."""
     last_err = None
+    getter = session.get if session is not None else requests.get
     for attempt in range(1, max_retries + 1):
         try:
-            resp = requests.get(url, timeout=timeout)
+            resp = getter(url, timeout=timeout)
+            status_code = getattr(resp, 'status_code', None)
+            if isinstance(
+                    status_code,
+                    int) and 400 <= status_code < 500 and status_code != 429:
+                resp.raise_for_status()
             resp.raise_for_status()
             raw_bytes = getattr(resp, 'content', None)
             if isinstance(raw_bytes, bytes):
@@ -121,6 +131,22 @@ def _fetch_page_csv(url, max_retries=5, retry_backoff_sec=2.0, timeout=60):
             return pd.read_csv(io.StringIO(text), dtype=str)
         except pd.errors.EmptyDataError:
             return None
+        except requests.HTTPError as e:
+            status_code = getattr(getattr(e, 'response', None), 'status_code',
+                                  None)
+            if isinstance(
+                    status_code,
+                    int) and 400 <= status_code < 500 and status_code != 429:
+                raise RuntimeError(
+                    f'Permanent HTTP {status_code} error downloading {url}: {e}'
+                ) from e
+            last_err = e
+            if attempt < max_retries:
+                sleep_sec = retry_backoff_sec * (2**(attempt - 1))
+                logging.warning(
+                    'Download attempt %d/%d failed for %s (%s); retrying in %.1fs...',
+                    attempt, max_retries, url, e, sleep_sec)
+                time.sleep(sleep_sec)
         except Exception as e:
             last_err = e
             if attempt < max_retries:
@@ -247,8 +273,10 @@ def prefetch_county_candidates(zctas, cache_file=None):
         _COUNTY_CANDIDATES_CACHE[zcta] = filtered_lists
 
     if cache_file:
-        with open(cache_file, 'w') as fp:
+        tmp_cache_file = cache_file + '.tmp'
+        with open(tmp_cache_file, 'w') as fp:
             json.dump(_COUNTY_CANDIDATES_CACHE, fp)
+        os.replace(tmp_cache_file, cache_file)
 
 
 def get_county_candidates(zcta):

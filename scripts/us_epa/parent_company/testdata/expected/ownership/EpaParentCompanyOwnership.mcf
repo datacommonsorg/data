@@ -6,8 +6,15 @@ measuredProperty: owns
 statType: measurementResult
 
 
+Node: dcid:owns
+typeOf: schema:Property
+domainIncludes: dcs:EpaParentCompany, dcs:Organization
+rangeIncludes: dcs:EpaReportingFacility
+name: "owns"
+
+
 Node: dcid:ownershipPercentage
 typeOf: schema:Property
-domainIncludes: dcs:EpaParentCompany
+domainIncludes: dcs:EpaParentCompany, dcs:StatVarObservation
 rangeIncludes: schema:Number
 name: "ownershipPercentage"
