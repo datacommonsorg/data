@@ -123,13 +123,12 @@ class AQIDataLoader:
         df['dcid'] = df['site'].map(site_dcid_map)
 
         # Renaming columns to match the names in TMCF and dropping unwanted columns
-        df.rename(columns=self.clean_column_names, inplace=True)
-        df.drop([
+        df = df.rename(columns=self.clean_column_names)
+        df = df.drop([
             'query_name', 'from_date', 'from_time', 'to_date', 'to_time', 'id',
             'site'
         ],
-                axis=1,
-                inplace=True)
+                     axis=1)
 
         self.raw_df = df
 

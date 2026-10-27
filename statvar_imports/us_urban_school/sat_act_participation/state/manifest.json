@@ -20,7 +20,8 @@
                     "cleaned_csv": "output_files_state/output_*.csv"
                 }
             ],
-            "cron_schedule": "0 05 8,23 * *"
+            "cron_schedule": "0 2 * * 1",
+            "_comment": "Schedule: Weekly on Monday at 02:00 UTC"
         }
     ]
 }
