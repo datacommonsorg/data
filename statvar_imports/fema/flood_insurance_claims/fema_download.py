@@ -31,11 +31,11 @@ from util.download_util_script import download_file, _retry_method
 from absl import flags
 
 flags.DEFINE_string('api_url',
-                    'https://www.fema.gov/api/open/v2/FimaNfipClaims',
+                    'https://www.fema.gov/api/open/v3/NfipClaims',
                     'The base URL of the API endpoint to download data from.')
 flags.DEFINE_string(
     'bulk_url',
-    'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
+    'https://www.fema.gov/about/reports-and-data/openfema/v3/NfipClaimsV3.csv',
     'The direct bulk download URL for the full dataset.')
 flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
                     'The temporary directory to store downloaded chunks.')
@@ -254,9 +254,13 @@ def download_data(api_url: str,
             csv_url = f"{api_url}?$format=csv&$skip={skip_count}&$top={PAGE_SIZE}"
             logging.info("Requesting data from: %s", csv_url)
 
-            # The download utility incorrectly appends an .xlsx extension.
-            util_output_filename = "FimaNfipClaims.xlsx"
-            util_output_path = os.path.join(temp_dir, util_output_filename)
+            # The download utility appends an .xlsx extension to the URL basename.
+            url_basename = os.path.basename(api_url.split('?')[0].rstrip('/'))
+            candidate_filenames = [
+                f"{url_basename}.xlsx" if url_basename else "NfipClaims.xlsx",
+                "NfipClaims.xlsx",
+                "FimaNfipClaims.xlsx",
+            ]
 
             chunk_filename = f"FimaNfipClaims_{skip_count}.csv"
             chunk_filepath = os.path.join(temp_dir, chunk_filename)
@@ -268,6 +272,12 @@ def download_data(api_url: str,
                                              delay=10,
                                              backoff=2,
                                              session=session)
+
+            util_output_path = next(
+                (os.path.join(temp_dir, name)
+                 for name in candidate_filenames
+                 if os.path.exists(os.path.join(temp_dir, name))),
+                os.path.join(temp_dir, "FimaNfipClaims.xlsx"))
 
             if not download_success or not os.path.exists(util_output_path):
                 logging.error(

@@ -148,6 +148,43 @@ class ProcessTest(unittest.TestCase):
         self.assertIn('dcid:geoId/06079', places)
         self.assertIn('dcid:geoId/06079012705', places)
 
+    def test_v3_census_geoid_schema(self):
+        """Test that OpenFEMA v3 censusGeoid (12-digit block group) extracts 11-digit census tract DCIDs without data loss."""
+        v2_csv = os.path.join(self.test_dir, 'v2_fixture.csv')
+        v3_csv = os.path.join(self.test_dir, 'v3_fixture.csv')
+        with open(v2_csv, 'w', encoding='utf-8') as f:
+            f.write(
+                'censusTract,countyCode,state,dateOfLoss,yearOfLoss,ratedFloodZone,amountPaidOnBuildingClaim,amountPaidOnContentsClaim,policyCount\n'
+                '06079012705,06079,CA,2020-05-10,2020,A,100.0,50.0,1\n'
+                '6079012705,6079,CA,2020-05-10,2020,A,200.0,100.0,1\n'
+                ',06079,CA,2020-05-10,2020,X,300.0,150.0,1\n')
+        with open(v3_csv, 'w', encoding='utf-8') as f:
+            f.write(
+                'censusGeoid,countyCode,state,dateOfLoss,yearOfLoss,ratedFloodZone,amountPaidOnBuildingClaim,amountPaidOnContentsClaim,policyCount\n'
+                '060790127051,06079,CA,2020-05-10,2020,A,100.0,50.0,1\n'
+                '60790127052,6079,CA,2020-05-10,2020,A,200.0,100.0,1\n'
+                ',06079,CA,2020-05-10,2020,X,300.0,150.0,1\n')
+
+        v2_out = os.path.join(self.test_dir, 'v2_out')
+        v3_out = os.path.join(self.test_dir, 'v3_out')
+        process.process_data_vectorized(input_data=v2_csv,
+                                        output_path=v2_out,
+                                        pv_map_arg=None,
+                                        chunk_size=10,
+                                        num_workers=1,
+                                        output_counters=self.counters_path)
+        process.process_data_vectorized(input_data=v3_csv,
+                                        output_path=v3_out,
+                                        pv_map_arg=None,
+                                        chunk_size=10,
+                                        num_workers=1,
+                                        output_counters=self.counters_path)
+
+        df_v2 = pd.read_csv(f"{v2_out}.csv")
+        df_v3 = pd.read_csv(f"{v3_out}.csv")
+        pd.testing.assert_frame_equal(df_v2, df_v3)
+
+
     def test_empty_input_raises_runtime_error(self):
         empty_csv = os.path.join(self.test_dir, 'empty.csv')
         with open(empty_csv, 'w', encoding='utf-8') as f:
