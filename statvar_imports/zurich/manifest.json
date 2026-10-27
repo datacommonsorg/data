@@ -227,7 +227,7 @@
                 {
                     "template_mcf": "bev_3903_all/output/zurich_population_bev_3903_wiki.tmcf",
                     "cleaned_csv": "bev_3903_all/output/zurich_population_bev_3903_wiki.csv",
-                    "node_mcf": "bev_3903_all/*.mcf"
+                    "node_mcf": "bev_3903_all/output/*.mcf"
                 }
             ],
             "resource_limits": {

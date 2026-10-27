@@ -13,4 +13,3 @@ header_rows,1
 #aggregate_duplicate_svobs,sum
 reconcile_nodes,False
 generate_schema_mcf,False
-generate_statvar_mcf,False

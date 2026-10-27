@@ -68,6 +68,7 @@ def process_demographic_rollups(
     required_cols = [
         year_col, 'QuarLang', 'KreisLang', *demographic_cols, val_col
     ]
+    # val_col (AnzBestWir) must remain the final column so demographic columns are bound in locals() before #Eval executes.
     output_cols = [year_col, 'QuarLang', *demographic_cols, val_col]
 
     missing_cols = [col for col in required_cols if col not in df.columns]

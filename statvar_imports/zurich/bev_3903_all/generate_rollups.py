@@ -46,6 +46,7 @@ YEAR_COL = 'StichtagDatJahr'
 DEMOGRAPHIC_COLS = ['AlterV10Kurz', 'SexKurz', 'HerkunftLang']
 VAL_COL = 'AnzBestWir'
 REQUIRED_COLS = [YEAR_COL, 'QuarLang', 'KreisLang', *DEMOGRAPHIC_COLS, VAL_COL]
+# VAL_COL (AnzBestWir) must remain the final column so demographic columns are bound in locals() before #Eval executes.
 OUTPUT_COLS = [YEAR_COL, 'QuarLang', *DEMOGRAPHIC_COLS, VAL_COL]
 
 
