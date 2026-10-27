@@ -13,8 +13,8 @@ regionRank,#ignore,regional rank metadata,value,{@Data}
 isSeasonal,#ignore,seasonal adjustment flag,value,{@Data}
 isProvisional,#ignore,provisional flag,value,{@Data}
 -,#IgnoreRow,True,#ignore,suppressed or missing value
-0301010000010010010,dcid,Count_Person_Employed,populationType,Person,measuredProperty,count,employment,BLS_Employed,employmentStatus,BLS_Employed,#Multiply,10
-0301010000020010010,dcid,Count_Person_Unemployed,populationType,Person,measuredProperty,count,employment,BLS_Unemployed,employmentStatus,BLS_Unemployed,#Multiply,10
+0301010000010010010,dcid,Count_Person_Employed,populationType,Person,measuredProperty,count,employment,BLS_Employed,#Multiply,10
+0301010000020010010,dcid,Count_Person_Unemployed,populationType,Person,measuredProperty,count,employment,BLS_Unemployed,#Multiply,10
 0301010000030010010,dcid,Count_Person_NotInLaborForce,populationType,Person,measuredProperty,count,employmentStatus,BLS_NotInLaborForce,age,Years16Onwards,#Multiply,10
 0301010000020020010,populationType,Person,measuredProperty,unemploymentRate
 1201050300000010000,populationType,Student,measuredProperty,count,schoolGradeLevel,PrimarySchool
