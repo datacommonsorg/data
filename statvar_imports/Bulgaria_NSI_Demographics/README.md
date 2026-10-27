@@ -22,6 +22,8 @@ The import is fully automated via scheduled Cloud Batch / Cloud Run execution:
 2. **GCS Inspection**: Checks `gs://unresolved_mcf/country/Bulgaria/input_files/` to see if `BulgariaNSI_Demographics_Year_input_{YEAR}.csv` is already staged. If present, it logs that the data is up to date and exits cleanly.
 3. **Parsing & Formatting**: When a new year's release is detected, it parses the HTML table, formats it into the standard single-year CSV schema (matching the Google Sheet layout), validates row counts and arithmetic (Total = Urban + Rural = Male + Female), and uploads directly to GCS.
 
+> **Operational Note on Cloudflare Protection**: The live NSI portal (`nsi.bg`) enforces Cloudflare bot protection, which returns HTTP 403 Forbidden to requests originating from cloud/datacenter IP ranges. `download_current_year_data.py` gracefully detects this and falls back to existing verified files staged in `gs://unresolved_mcf/country/Bulgaria/input_files/`. When a new annual release is published by NSI, it can be staged to GCS via an authorized proxy or manual upload.
+
 ### 3.2 Automated Ingestion Workflow (`download.sh` & `stat_var_processor.py`)
 1. **Download Step (`download.sh`)**: Pulls all staged input CSVs from `gs://unresolved_mcf/country/Bulgaria/input_files/*.csv` into local `input_files/` and automatically sanitizes quotes, age hyphens, and non-breaking spaces.
 2. **Transform (`stat_var_processor.py`)**: Runs `stat_var_processor.py` for both Annual and Historical datasets:
