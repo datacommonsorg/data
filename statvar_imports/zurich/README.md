@@ -198,7 +198,7 @@ later after cutover).
 Source URL: [BEV390OD3903 Dataset](https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903)
 Import Type: Fully Autorefresh
 Source Data Availability: 1993 onwards
-Release Frequency: P1Y
+Release Frequency: P1W (Weekly)
 
 3. Preprocessing Steps (Yes)
 Generate demographic and geographic rollups from the downloaded dataset:
@@ -269,7 +269,7 @@ cutover).
 Source URL: [BEV403OD4031 Dataset](https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031)
 Import Type: Fully Autorefresh
 Source Data Availability: 1998 onwards
-Release Frequency: P1Y
+Release Frequency: P1W (Weekly)
 
 3. Preprocessing Steps (Yes)
 Generate demographic and geographic rollups from the downloaded dataset:
