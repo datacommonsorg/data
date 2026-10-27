@@ -31,7 +31,7 @@ def national2029(url_file: str, output_folder: str):
                            "raw_data", 'raw_data_national_2020_2029.csv'),
               index=False)
 
-    df = df.drop(df[(df['SEX'] == 0) | (df['AGE'] == 999)].index)
+    df = df[(df['SEX'] != 0) & (df['AGE'] != 999)]
     df = df.replace({'SEX': {2: 'Female', 1: 'Male'}})
     pop_estimate_cols = [
         col for col in df.columns if col.startswith('POPESTIMATE')

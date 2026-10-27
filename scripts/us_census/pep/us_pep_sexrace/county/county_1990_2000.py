@@ -77,7 +77,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             # and making the geoId of 5 digit as county
             df.loc[:, 'geo_ID'] = [f'{x:05}' for x in df.loc[:, 'geo_ID']]
             # columns after 11 where having origin hence not required
-            df = df.drop(df[df['Race'] >= 11].index)
+            df = df[df['Race'] < 11]
 
             # summing all the ages value as age is not required
             df.loc[:, 'Total'] = df.loc[:, COLUMNS_TO_SUM].sum(axis=1)

@@ -254,8 +254,11 @@ class DataFrameGenerator:
             pd.DataFrame: DataFrame with header
         """
         if len(header) > 0:
-            for index, column_name in enumerate(header):
-                df = df.rename(columns={df.columns[index]: column_name})
+            rename_dict = {
+                df.columns[index]: column_name
+                for index, column_name in enumerate(header)
+            }
+            df = df.rename(columns=rename_dict)
         return df
 
     def make_pascal_case(self, df: pd.DataFrame,

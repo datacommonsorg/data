@@ -80,8 +80,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     df['SR'] = df['Sex'] + ' ' + df['Race']
 
     # dropping unwanted columns
-    df = df.drop(columns=COLUMNS_TO_SUM)
-    df = df.drop(columns=['Info', 'Sex', 'Race'])
+    df = df.drop(columns=COLUMNS_TO_SUM + ['Info', 'Sex', 'Race'])
 
     # group the df as per columns provided
     df = df.groupby(['Year', 'SR']).sum().transpose().stack(0).reset_index()

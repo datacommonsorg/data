@@ -87,8 +87,7 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     if "2020" in file:
         # "2020" refers to the file name: "CC-EST2020" which carries a different
         # format hence, extra rows/columns needed to be dropped from the file.
-        df = df.drop(df[df['ORIGIN'] != 0].index)
-        df = df.drop(df[df['SEX'] != 0].index)
+        df = df[(df['ORIGIN'] == 0) & (df['SEX'] == 0)]
         df = df.drop(['STATE','DIVISION','SUMLEV','SEX','ORIGIN'\
             ,'AGE','REGION','ESTIMATESBASE2010','CENSUS2010POP'\
             ,'POPESTIMATE042020'],axis=1)
@@ -618,10 +617,8 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
     try:
-        # dropping unwanted rows after the data
-        df = df.drop(df.index[65:])
-        # dropping the first 14 unwanted rows
-        df = df.drop(df.index[1:14])
+        # keep header row (0) and data rows (14..64), dropping unwanted rows
+        df = pd.concat([df.iloc[:1], df.iloc[14:65]])
         modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
         for j in modify:
             df.iloc[j, 0] = str(df.iloc[j, 0]) + " " + str(df.iloc[j, 1])

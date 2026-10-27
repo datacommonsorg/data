@@ -62,7 +62,7 @@ def county1990(output_folder: str):
             df = replace_age(df)
 
             # Columns after 11 where having origin.
-            df = df.drop(df[df['Race'] >= 11].index)
+            df = df[df['Race'] < 11]
             # Changing the column values as per metadata.
             df['Race'] = df['Race'].astype(int).astype(str)
             df = df.replace({

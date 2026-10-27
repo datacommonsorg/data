@@ -139,7 +139,7 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     # dropping unwanted columns
     df = df.drop(columns=['index', 'BothSexes'])
 
-    df = df.drop(df[df['Year'] == "2010"].index)
+    df = df[df['Year'] != '2010']
 
     df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
               "nationals_result_2000_2010.csv")
