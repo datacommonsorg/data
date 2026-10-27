@@ -299,8 +299,11 @@ def check_and_download_nsi(local_dir: str, gcs_dir: str, force: bool = False, dr
         except Exception as e2:
             print(f"❌ Upload failed: {e2}")
 
-    if upload_success:
-        print(f"✓ Successfully uploaded to {gcs_target_path}!")
+    if not upload_success:
+        print(f"❌ Upload to {gcs_target_path} failed.")
+        sys.exit(1)
+
+    print(f"✓ Successfully uploaded to {gcs_target_path}!")
     print("=" * 70)
 
 

@@ -26,17 +26,19 @@
                 {
                     "template_mcf": "output/BulgariaNSI_Demographics.tmcf",
                     "cleaned_csv": "output/BulgariaNSI_Demographics.csv",
-                    "node_mcf": "output/BulgariaNSI_Demographics*.mcf"
+                    "node_mcf": "output/BulgariaNSI_Demographics.mcf"
                 },
                 {
                     "template_mcf": "output/BulgariaNSI_Demographics_history.tmcf",
                     "cleaned_csv": "output/BulgariaNSI_Demographics_history.csv",
-                    "node_mcf": "output/BulgariaNSI_Demographics_history*.mcf"
+                    "node_mcf": "output/BulgariaNSI_Demographics_history.mcf"
                 }
             ],
             "source_files": [
                 "input_files/*.csv",
                 "counters/*.csv",
+                "*.csv",
+                "manifest.json",
                 "validation_config.json"
             ],
             "cron_schedule": "0 10 * * 1",

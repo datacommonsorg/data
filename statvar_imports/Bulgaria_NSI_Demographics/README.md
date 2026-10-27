@@ -34,14 +34,16 @@ The import is fully automated via scheduled Cloud Batch / Cloud Run execution:
 
 ## 4. Running the Data Processor Locally
 
-To run the pipeline locally from the `data` repository root:
+To run the pipeline locally, navigate to the import directory:
 
 ```bash
-# 1. Fetch staged input files and sanitize spaces/asterisks
-bash statvar_imports/Bulgaria_NSI_Demographics/download.sh
+cd statvar_imports/Bulgaria_NSI_Demographics
 
-# 2. Process historical multi-decade files (2001 to 2021)
-.env/bin/python tools/statvar_importer/stat_var_processor.py \
+# 1. Fetch staged input files and sanitize spaces/asterisks
+bash download.sh
+
+# 2. Process historical multi-decade files (2001 to 2023)
+../../.env/bin/python ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/BulgariaNSI_Demographics_2001to2010_input.csv,input_files/BulgariaNSI_Demographics_2011_2022_2023_input.csv,input_files/BulgariaNSI_Demographics_2012to2021_input.csv \
   --pv_map=BulgariaNSI_Demographics_history_pvmap.csv \
   --config_file=BulgariaNSI_Demographics_history_metadata.csv \
@@ -50,7 +52,7 @@ bash statvar_imports/Bulgaria_NSI_Demographics/download.sh
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 
 # 3. Process annual demographic refresh files (2024, 2025, ...)
-.env/bin/python tools/statvar_importer/stat_var_processor.py \
+../../.env/bin/python ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/BulgariaNSI_Demographics_Year_input_*.csv \
   --pv_map=BulgariaNSI_Demographics_pvmap.csv \
   --config_file=BulgariaNSI_Demographics_metadata.csv \
@@ -61,7 +63,8 @@ bash statvar_imports/Bulgaria_NSI_Demographics/download.sh
 
 ## 5. Validation Configuration
 `validation_config.json` enforces:
-- `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `MaxDate >= '2021'` and `total_svs > 0`.
+- `check_max_date_consistent`: Ensures MaxDate is uniform across all generated StatVars within each input.
+- `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `MaxDate >= '2023'` and `total_svs > 0`.
 - `check_deleted_records_percent`: Ensures deleted records do not exceed `0.1%`.
 
 ## 6. Staging & Production Verification

@@ -2,12 +2,18 @@
     "schema_version": "1.0",
     "rules": [
         {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verifies that MaxDate is uniform across all generated StatVars within each input.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary (>= 2021).",
+            "description": "Verify all active StatVars meet the freshness boundary.",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2021' AND total_svs > 0"
+                "condition": "MaxDate >= '2023' AND total_svs > 0"
             }
         },
         {
