@@ -1,42 +1,44 @@
 {
-    "import_specifications": [
+  "import_specifications": [
+    {
+      "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://opendata.dwd.de/climate_environment/GPCC/html/gpcc_monitoring_v2022_doi_download.html",
+      "provenance_description": "Standardized Precipitation Index (Pearson distribution) data derived from NOAA GPCC monthly precipitation data.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "source_files/raw_data/*.nc",
+        "golden_data/*.csv"
+      ],
+      "import_inputs": [
         {
-            "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.drought.gov/data-maps-tools/global-precipitation-climatology-centre-gpcc-standardized-precipitation-index-spi",
-            "provenance_description": "SPI for 1 degree grids calculated from monthly precipitation data using the Pearson distribution.",
-            "scripts": [
-                "run.sh"
-            ],
-            "source_files": [
-                "input_files/*"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "gpcc_spi.tmcf",
-                    "cleaned_csv": "output_files/*.csv"
-                },
-                {
-                    "template_mcf": "gpcc_spi_aggregation.tmcf",
-                    "cleaned_csv": "output_files/aggregations/*.csv"
-                },
-                {
-                    "template_mcf": "drought_spi_9m_polygon_place_svobs.tmcf",
-                    "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
-                },
-                {
-                    "template_mcf": "drought_spi_9m_polygon_events.tmcf",
-                    "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
-                },
-                {
-                    "template_mcf": "drought_spi_9m_polygon_svobs.tmcf",
-                    "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
-                }
-            ],
-            "cron_schedule": "30 1 * * 3",
-            "_comment": "Schedule: Weekly on Wednesday at 01:30 UTC"
+          "template_mcf": "gpcc_spi.tmcf",
+          "cleaned_csv": "output_files/gpcc_spi_pearson_*.csv"
+        },
+        {
+          "template_mcf": "gpcc_spi_aggregation.tmcf",
+          "cleaned_csv": "output_files/agg_gpcc_spi_pearson_*.csv"
+        },
+        {
+          "template_mcf": "drought_spi_9m_polygon_place_svobs.tmcf",
+          "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
+        },
+        {
+          "template_mcf": "drought_spi_9m_polygon_events.tmcf",
+          "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
+        },
+        {
+          "template_mcf": "drought_spi_9m_polygon_svobs.tmcf",
+          "node_mcf": "output_files/events_spi_9m_polygon/events/drought_event_nodes.mcf",
+          "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
         }
-    ]
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "30 05 12 * *"
+    }
+  ]
 }

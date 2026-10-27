@@ -1,0 +1,6 @@
+dcid,observationDate,area,standardizedPrecipitationIndex
+droughtEvent/2022-01_s2CellId/0x308b800000000000,2022-01,25461.44,-2.66
+droughtEvent/2022-01_s2CellId/0x308b800000000000,2022-01,28445.06,-3.12
+droughtEvent/2022-01_s2CellId/0x308b800000000000,2022-02,15000.0,-2.1
+droughtEvent/2022-02_s2CellId/0x89c25c0000000000,2022-02,12345.67,-2.45
+droughtEvent/2022-03_s2CellId/0x1111000000000000,2022-03,5000.0,-2.05

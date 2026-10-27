@@ -16,11 +16,15 @@ Unit tests for preprocess_gpcc_spi.py
 Usage: python -m unittest discover -v -s ../ -p "preprocess_gpcc_spi_test.py"
 '''
 import unittest
-from .preprocess_gpcc_spi import preprocess_one
 import os
 import tempfile
 import filecmp
 from dataclasses import dataclass
+
+try:
+    from .preprocess_gpcc_spi import preprocess_one
+except ImportError:
+    from preprocess_gpcc_spi import preprocess_one
 
 # module_dir is the path to where this test is running from.
 module_dir = os.path.dirname(__file__)
