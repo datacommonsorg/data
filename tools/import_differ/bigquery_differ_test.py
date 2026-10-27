@@ -16,7 +16,6 @@
 import csv
 import json
 import os
-import sqlite3
 import sys
 import tempfile
 import unittest
@@ -142,7 +141,7 @@ class BigQueryDifferTest(unittest.TestCase):
             },
         )
 
-    def test_format_key_combined_sql_matches_mcf_parser(self):
+    def test_stream_mcf_to_csv_full_facet_properties(self):
         agg_mcf = """
 Node: dcid:dc/o/test1
 typeOf: dcs:StatVarObservation
@@ -176,37 +175,58 @@ measurementMethod: dcs:DataCommonsAggregate
             with open(obs_csv, 'r', encoding='utf-8') as f:
                 csv_rows = list(csv.DictReader(f))
 
-        con = sqlite3.connect(':memory:')
-        con.create_function(
-            'CONCAT',
-            -1,
-            lambda *args: ''.join('' if a is None else str(a) for a in args),
+        self.assertEqual(len(csv_rows), 2)
+        self.assertEqual(
+            csv_rows[0],
+            {
+                'key_combined':
+                    'dcid:Count_Person_Producer;dcid:geoId/06;"2017";"P1Y";'
+                    'dcid:dcAggregate/USDAAgricultureCensus;dcid:Person;"100"',
+                'variableMeasured': 'dcid:Count_Person_Producer',
+                'value': '66000',
+                'observationAbout': 'geoId/06',
+                'observationDate': '2017',
+                'observationPeriod': 'P1Y',
+                'measurementMethod': 'dcAggregate/USDAAgricultureCensus',
+                'unit': 'Person',
+                'scalingFactor': '100',
+                'row_num': '1',
+            },
         )
-        key_expr = bigquery_differ.format_key_combined_sql(
-            'variableMeasured',
-            'observationAbout',
-            'observationDate',
-            'observationPeriod',
-            'measurementMethod',
-            'unit',
-            'scalingFactor',
+        self.assertEqual(
+            csv_rows[1]['key_combined'],
+            'dcid:Count_Person_Total;dcid:country/USA;"2020";;'
+            'dcid:DataCommonsAggregate;;',
         )
-        for row in csv_rows:
-            sql = f"""
-            SELECT {key_expr} AS sql_key FROM (
-                SELECT
-                    '{row["variableMeasured"]}' AS variableMeasured,
-                    '{row["observationAbout"]}' AS observationAbout,
-                    '{row["observationDate"]}' AS observationDate,
-                    '{row["observationPeriod"]}' AS observationPeriod,
-                    '{row["measurementMethod"]}' AS measurementMethod,
-                    '{row["unit"]}' AS unit,
-                    '{row["scalingFactor"]}' AS scalingFactor
-            )
-            """
-            sql_key = con.execute(sql).fetchone()[0]
-            self.assertEqual(sql_key, row['key_combined'])
-        con.close()
+        self.assertEqual(csv_rows[1]['row_num'], '2')
+
+    def test_cleanup_shared_bq_tables(self):
+        mock_client = mock.MagicMock()
+        bigquery_differ.cleanup_shared_bq_tables(
+            project_id='test-proj',
+            shared_table_ids=None,
+            bq_client=mock_client,
+        )
+        mock_client.delete_table.assert_not_called()
+
+        shared_ids = bigquery_differ.get_import_bq_table_ids(
+            'test-proj.test_dataset', 'test_imp', '2026_09_17', 'input0')
+        bigquery_differ.cleanup_shared_bq_tables(
+            project_id='test-proj',
+            shared_table_ids=shared_ids,
+            bq_client=mock_client,
+        )
+        deleted = [
+            call.args[0] for call in mock_client.delete_table.call_args_list
+        ]
+        self.assertEqual(
+            deleted,
+            [
+                shared_ids['raw_obs'],
+                shared_ids['raw_schema'],
+                shared_ids['agg_obs'],
+            ],
+        )
 
     @mock.patch('bigquery_differ.bigquery.Client')
     def test_run_bigquery_differ_mocked(self, mock_bq_client_cls):
@@ -344,14 +364,6 @@ measurementMethod: dcs:DataCommonsAggregate
             self.assertEqual(summary['previous_obs_count'], 1)
             self.assertEqual(summary['added_obs_count'], 3)
             self.assertEqual(summary['modified_obs_count'], 1)
-
-            obs_sql = mock_client.query.call_args_list[0][0][0]
-            self.assertIn('UNION ALL', obs_sql)
-            self.assertIn(shared_ids['raw_obs'], obs_sql)
-            self.assertIn(shared_ids['agg_obs'], obs_sql)
-
-            schema_sql = mock_client.query.call_args_list[1][0][0]
-            self.assertIn(shared_ids['raw_schema'], schema_sql)
 
             deleted_tables = [
                 call[0][0] for call in mock_client.delete_table.call_args_list
