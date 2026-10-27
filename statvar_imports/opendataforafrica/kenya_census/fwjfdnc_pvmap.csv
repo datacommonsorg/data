@@ -9,7 +9,7 @@
 "AREA:U","placeOfResidenceClassification","Urban",,,,
 "AREA:R","placeOfResidenceClassification","Rural",,,,
 "MEASURE:M1","measuredProperty","area","unit","SquareKilometer","populationType","LandCover"
-"MEASURE:M2","populationType","Person","measurementDenominator","area","unit","PersonPerSquareKilometer"
+"MEASURE:M2","populationType","Person","measurementDenominator","dcid:area","unit","PersonPerSquareKilometer"
 "TIME_PERIOD","observationDate","{Number}",,,,
 "OBS_VALUE","value","{Number}",,,,
 "FREQ","observationPeriod","P1Y",,,,

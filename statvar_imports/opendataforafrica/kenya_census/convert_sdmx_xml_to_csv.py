@@ -24,12 +24,6 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import sdmx
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-)
-
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -39,6 +33,7 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
         raise FileNotFoundError(f'XML file not found: {xml_path}')
 
     # 1. Read SDMX XML with sdmx1
+    parsed = None
     try:
         with open(xml_path, 'rb') as f:
             xml_bytes = f.read()
@@ -46,7 +41,11 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
                 io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
             msg = sdmx.read_sdmx(io.BytesIO(xml_bytes), format='XML')
             parsed = sdmx.to_pandas(msg)
+    except Exception as e:
+        logging.info('sdmx parser skipped for %s (%s); attempting fallback',
+                     xml_path, e)
 
+    if parsed is not None:
         if isinstance(parsed, dict):
             dfs = [
                 v.reset_index() if hasattr(v, 'reset_index') else v
@@ -74,9 +73,6 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
                     },
                               inplace=True)
             return df
-    except Exception as e:
-        logging.info('sdmx parser skipped for %s (%s); attempting fallback',
-                     xml_path, e)
 
     # 2. Fallback path for headerless / structure-less XML files
     try:
@@ -128,6 +124,10 @@ def convert_sdmx_xml_to_csv(xml_path: str, output_csv_path: str) -> None:
 
 
 def main():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s',
+    )
     parser = argparse.ArgumentParser(
         description='Convert Kenya Census SDMX XML files to CSV format.')
     parser.add_argument(
