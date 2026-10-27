@@ -1,3 +1,33 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Preprocesses raw OECD Regional Education SDMX CSV data before StatVar processing.
+
+Steps performed:
+1. Finds the latest raw SDMX CSV (e.g., `A.........`) in `gcs_output/source_files/`
+   and retains the original file for provenance.
+2. Filters out empty `OBS_VALUE` rows and standard error rows (`STATISTICAL_OPERATION == 'SE'`).
+3. Resolves `REF_AREA` codes using `oecd_regional_education_places_resolved.csv`,
+   projects the 7 required columns into `oecd_regional_education_data.csv`, and logs
+   unmapped places to `counters/unresolved_places.csv`.
+
+Features not directly supported by `stat_var_processor.py`:
+- Dynamic filename discovery (`A.........`) while preserving the raw source file.
+- Disambiguating duplicate `Education level` column headers in the raw SDMX
+  `csvfilewithlabels` format.
+- Logging unmapped place codes to a separate counter file without failing the job,
+  plus a fail-fast check if 100% of rows are dropped.
+"""
 import csv
 import os
 import re
