@@ -1,0 +1,72 @@
+# Auto generated using command: "/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_var_processor.py --input_data=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_health_condition_states_int.csv --pv_map=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_health_condition_states_map.py --config=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_config.conf --output_path=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/output_files/aus_health_condition_state --existing_statvar_mcf=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_vars.mcf" on 2023-05-15 09:35:29.281044
+
+Node: dcid:Count_Person_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Stroke
+

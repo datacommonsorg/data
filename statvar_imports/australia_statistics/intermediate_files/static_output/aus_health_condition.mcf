@@ -1,0 +1,4912 @@
+# Auto generated using command: "/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_var_processor.py --input_data=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_health_condition_int.csv --pv_map=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_health_condition_map.py --config=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_config.conf --output_path=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/output_files/aus_health_condition --existing_statvar_mcf=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_vars.mcf" on 2023-05-15 09:39:42.733046
+
+Node: dcid:Count_Person_0To4Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_0To4Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_0To4Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_0To4Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_0To4Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_0To4Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_0To4Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_0To4Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_0To4Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_0To4Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_0To4Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_10To14Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_10To14Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_10To14Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_10To14Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_10To14Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_10To14Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_10To14Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_10To14Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_10To14Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_10To14Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_10To14Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_10To14Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_15To19Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_15To19Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_15To19Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_15To19Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_15To19Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_15To19Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_15To19Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_15To19Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_15To19Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_15To19Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_15To19Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_20To24Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_20To24Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_20To24Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_20To24Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_20To24Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_20To24Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_20To24Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_20To24Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_20To24Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_20To24Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_20To24Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_20To24Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_25To29Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_25To29Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_25To29Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_25To29Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_25To29Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_25To29Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_25To29Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_25To29Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_25To29Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_25To29Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_25To29Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_25To29Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_30To34Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_30To34Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_30To34Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_30To34Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_30To34Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_30To34Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_30To34Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_30To34Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_30To34Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_30To34Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_30To34Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_30To34Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [30 34 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_35To39Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_35To39Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_35To39Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_35To39Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_35To39Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_35To39Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_35To39Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_35To39Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_35To39Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_35To39Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_35To39Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_35To39Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_40To44Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_40To44Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_40To44Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_40To44Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_40To44Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_40To44Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_40To44Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_40To44Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_40To44Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_40To44Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_40To44Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_40To44Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_45To49Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_45To49Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_45To49Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_45To49Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_45To49Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_45To49Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_45To49Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_45To49Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_45To49Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_45To49Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_45To49Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_45To49Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_50To54Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_50To54Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_50To54Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_50To54Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_50To54Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_50To54Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_50To54Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_50To54Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_50To54Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_50To54Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_50To54Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_50To54Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_55To59Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_55To59Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_55To59Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_55To59Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_55To59Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_55To59Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_55To59Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_55To59Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_55To59Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_55To59Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_55To59Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_55To59Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_5To9Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_5To9Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_5To9Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_5To9Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_5To9Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_5To9Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_5To9Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_5To9Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_5To9Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_5To9Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_5To9Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_5To9Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 9 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_60To64Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_60To64Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_60To64Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_60To64Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_60To64Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_60To64Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_60To64Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_60To64Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_60To64Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_60To64Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_60To64Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_60To64Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_65To69Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_65To69Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_65To69Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_65To69Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_65To69Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_65To69Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_65To69Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_65To69Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_65To69Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_65To69Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_65To69Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_65To69Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_70To74Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_70To74Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_70To74Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_70To74Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_70To74Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_70To74Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_70To74Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_70To74Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_70To74Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_70To74Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_70To74Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_70To74Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_75To79Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_75To79Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_75To79Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_75To79Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_75To79Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_75To79Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_75To79Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_75To79Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_75To79Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_75To79Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_75To79Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_75To79Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 79 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_80To84Years_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_80To84Years_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_80To84Years_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_80To84Years_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_80To84Years_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_80To84Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_80To84Years_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_80To84Years_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_80To84Years_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_80To84Years_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_80To84Years_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_80To84Years_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 84 Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_85OrMoreYears_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_85OrMoreYears_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_85OrMoreYears_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [85 - Years]
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_Female_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_Female_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_Female_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_Female_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_Female_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_Female_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_Female_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_Female_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_Female_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_Female_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+medicalCondition: dcid:Stroke
+
+Node: dcid:Count_Person_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_Male_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_Male_ConditionCancer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_Person_Male_ConditionDementia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:Dementia
+
+Node: dcid:Count_Person_Male_ConditionDiabetes
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:Diabetes
+
+Node: dcid:Count_Person_Male_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Count_Person_Male_ConditionKidneyDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:KidneyDisease
+
+Node: dcid:Count_Person_Male_ConditionLungCondition
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:LungCondition
+
+Node: dcid:Count_Person_Male_ConditionMentalHealthNotGood
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:MentalHealthNotGood
+
+Node: dcid:Count_Person_Male_ConditionStroke
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+medicalCondition: dcid:Stroke
+

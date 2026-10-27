@@ -1,0 +1,113 @@
+# Auto generated using command: "/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_var_processor.py --input_data=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_weekly_household_income.csv --pv_map=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_weekly_household_income_map.py --config=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_config.conf --output_path=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/output_files/aus_weekly_household_income --existing_statvar_mcf=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_vars.mcf" on 2023-05-08 22:46:55.764578
+
+Node: dcid:Weekly_Income_Household_IncomeOf10Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [10 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf20Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [20 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf30Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [30 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf40Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [40 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf60Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [60 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf70Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [70 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf80Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [80 Percentile]
+
+Node: dcid:Weekly_Income_Household_IncomeOf90Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: [90 Percentile]
+
+Node: dcid:Weekly_Mean_Income_Household_IncomeOfPercentile0To20
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:meanValue
+income: dcid:Percentile0To20
+
+Node: dcid:Weekly_Mean_Income_Household_IncomeOfPercentile20To40
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:meanValue
+income: dcid:Percentile20To40
+
+Node: dcid:Weekly_Mean_Income_Household_IncomeOfPercentile40To60
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:meanValue
+income: dcid:Percentile40To60
+
+Node: dcid:Weekly_Mean_Income_Household_IncomeOfPercentile60To80
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:meanValue
+income: dcid:Percentile60To80
+
+Node: dcid:Weekly_Mean_Income_Household_IncomeOfPercentile80To100
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:meanValue
+income: dcid:Percentile80To100
+
+Node: dcid:Weekly_Median_Income_Household
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:medianValue
+
