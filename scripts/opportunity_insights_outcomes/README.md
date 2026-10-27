@@ -17,23 +17,23 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
    ```bash
    python3 download.py
    ```
-2. **Resolve headers via `stat_var_processor.py` and write cleaned wide CSVs, custom `.tmcf` files, and StatVar MCFs (`output/`):**
+2. **Resolve headers via `stat_var_processor.py` and write balanced `StatVarObservation` CSV shards (`output/output_part_*.csv`), `output/output.tmcf`, and StatVar MCFs (`output/output_stat_vars*.mcf`):**
    ```bash
    python3 preprocess.py
    ```
-   * Full observation counts across all 6 cleaned wide CSVs (`output/*_cleaned.csv`, totaling `283,560,361` observations across `209,544` rows) are logged by `preprocess.py`.
+   * Full observation counts across all 42 balanced shards (`output/output_part_*.csv`, totaling `283,560,361` observations) are logged by `preprocess.py`.
 
 ## Testing & Generating Expected Test Outputs
 
-Sample raw inputs (2 data rows per file) are located under `test_data/raw_data/`, with expected test outputs (`*_cleaned.csv` and `*_cleaned.tmcf`) under `test_data/output/`.
+Sample raw inputs (2 data rows per file) are located under `test_data/raw_data/`, with expected test outputs (`output_part_0001.csv`–`output_part_0006.csv` and `output.tmcf`) under `test_data/output/`.
 
 Run all commands below from `data/scripts/opportunity_insights_outcomes/`:
 
-1. **Run `preprocess.py` on `test_data/raw_data` to generate `test_data/output/*_cleaned.csv` and `test_data/output/*_cleaned.tmcf`:**
+1. **Run `preprocess.py` on `test_data/raw_data` to generate `test_data/output/output_part_*.csv` and `test_data/output/output.tmcf`:**
    ```bash
    python3 preprocess.py \
      --input_dir=test_data/raw_data \
-     --shard_dir=test_data/output \
+     --sv_output_prefix=test_data/output/output \
      --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
    ```
 
@@ -67,11 +67,11 @@ Run all commands below from `data/scripts/opportunity_insights_outcomes/`:
 
 ## Directory & File Structure
 * `download.py`: Scrapes the Opportunity Insights catalog (`https://opportunityinsights.org/data/`) with canonical fallback URLs, downloads raw CSV/ZIP archives with bounded retries, and extracts them into `raw_data/`.
-* `preprocess.py`: Normalizes multi-word column headers, resolves all unique column headers via `stat_var_processor.py` (emitting `output/output_stat_vars*.mcf`), and writes the 6 cleaned wide CSVs (`output/*_cleaned.csv`) and 6 custom multi-node `.tmcf` files (`output/*_cleaned.tmcf`) in parallel across CPU cores with numeric values formatted via `str_from_number(val, precision_digits=5)`.
+* `preprocess.py`: Normalizes multi-word column headers, resolves all unique column headers via `stat_var_processor.py` (emitting `output/output_stat_vars*.mcf`), and expands all 6 datasets in parallel across CPU cores into balanced `StatVarObservation` CSV shards (`output/output_part_*.csv`) and `output/output.tmcf` with numeric values formatted to 5 decimal digits.
 * `pvmap.csv`: Property-value mapping table translating normalized column tokens (`_`-delimited) into Data Commons `StatisticalVariable` and `StatVarObservation` properties.
 * `metadata.csv`: Configuration for `stat_var_processor.py` (`word_delimiter: "_"`, `output_columns: "observationAbout,observationDate,observationPeriod,variableMeasured,value,unit"`).
-* `manifest.json`: Automated import specification, script execution sequence, GCS `import_inputs` (`output/*_cleaned.tmcf` and `output/*_cleaned.csv`), `node_mcf` (`output/*.mcf`), monthly cron schedule (`0 8 1 * *`), and resource limits.
-* `download_test.py`: Unit and end-to-end integration test suite covering URL discovery, archive extraction, header normalization, cleaned wide CSV + custom `.tmcf` generation, and `stat_var_processor.py` output equivalence.
+* `manifest.json`: Automated import specification, script execution sequence, GCS `import_inputs` (`output/output.tmcf` and `output/output_part_*.csv`), `node_mcf` (`output/*.mcf`), monthly cron schedule (`0 8 1 * *`), and resource limits.
+* `download_test.py`: Unit and end-to-end integration test suite covering URL discovery, archive extraction, header normalization, balanced parallel shard generation, and `stat_var_processor.py` output equivalence.
 
 ---
 
@@ -87,19 +87,19 @@ Run all commands below from `data/scripts/opportunity_insights_outcomes/`:
 ## Validation & `dc-import` (`genmcf`) Results
 
 ### Running `genmcf` Locally
-To validate the cleaned wide CSVs (`output/*_cleaned.csv`), custom `.tmcf` files (`output/*_cleaned.tmcf`), and generated StatVar MCFs (`output/*.mcf`) locally with `import-tool.jar`:
+To validate the generated shards (`output/output_part_*.csv`), `output/output.tmcf`, and StatVar MCFs (`output/*.mcf`) locally with `import-tool.jar`:
 
 ```bash
 java -Xmx90g -jar ~/Downloads/import-tool.jar genmcf \
   -n=4 \
-  output/*_cleaned.csv \
-  output/*_cleaned.tmcf \
+  output/output_part_*.csv \
+  output/output.tmcf \
   output/*.mcf
 ```
 
 ### Summary Metrics
 * **Status:** Succeeded with **0 errors / 0 fatals**
-* **Total Cleaned Wide CSV Rows:** `209,544` across the 6 `output/*_cleaned.csv` files (`283,560,361` total valid cell observations)
+* **Total Observations (`NumRowSuccesses`):** `283,560,361` across `output/output_part_*.csv`
 * **Total MCF Nodes Generated (`NumNodeSuccesses`):** `283,658,483`
 * **Unique StatisticalVariables:** `10,596` active StatVars emitted with observations (out of `11,247` total mapped StatVars across `10,815` existing `dc/` StatVars and `432` new schema StatVars)
 

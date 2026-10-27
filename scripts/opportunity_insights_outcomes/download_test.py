@@ -32,47 +32,39 @@ from scripts.opportunity_insights_outcomes import preprocess
 
 
 def _load_expected_header_to_sv(
-    expected_input_dir: str,) -> dict[str, tuple[str, str, str, str]]:
-    """Reconstructs header_to_sv from committed test_data TMCFs without running stat_var_processor.py."""
+        raw_dir: str,
+        expected_output_dir: str) -> dict[str, tuple[str, str, str, str]]:
+    """Reconstructs header_to_sv from committed test_data without running stat_var_processor.py."""
     header_to_sv = {}
-    for fname in sorted(os.listdir(expected_input_dir)):
-        if not fname.endswith('_cleaned.tmcf'):
-            continue
-        with open(os.path.join(expected_input_dir, fname),
-                  'r',
-                  encoding='utf-8') as f:
-            text = f.read()
-        for block in text.strip().split('\n\n'):
-            if not block.strip():
-                continue
-            kv = {}
-            for line in block.strip().splitlines():
-                if ':' in line:
-                    k, v = line.split(':', 1)
-                    kv[k.strip()] = v.strip()
-            norm_h = kv['value'].split('->', 1)[1]
-            obs_date = kv['observationDate'].strip('"')
-            obs_period = kv['observationPeriod'].strip('"')
-            var_measured = kv['variableMeasured']
-            if var_measured.startswith('dcid:dc/'):
-                var_measured = var_measured[len('dcid:'):]
-            unit = kv.get('unit', '')
-            if unit.startswith('dcs:'):
-                unit = unit[len('dcs:'):]
-            if obs_date.startswith('C:'):
-                for cohort_year in range(1978, 1993):
-                    header_to_sv[f'{norm_h}_c{cohort_year}'] = (
-                        str(cohort_year + 27),
-                        obs_period,
-                        var_measured,
-                        unit,
-                    )
-            else:
+    for part_idx, (filename, _,
+                   dataset_mode) in enumerate(preprocess.DATASET_CONFIGS,
+                                              start=1):
+        ordered_headers = []
+        with open(os.path.join(raw_dir, filename), 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            raw_headers = next(reader)
+            col_indices = {h: i for i, h in enumerate(raw_headers)}
+            data_col_positions = [(i, h)
+                                  for i, h in enumerate(raw_headers)
+                                  if h not in preprocess._NON_DATA_COLUMNS]
+            for row in reader:
+                ctok = (f'c{preprocess._parse_cohort(row, col_indices)}'
+                        if dataset_mode == 'annual_cohort_1978_1992' else '')
+                for pos, h in data_col_positions:
+                    val = preprocess._extract_row_cell(row, pos)
+                    if preprocess._is_valid_number(val):
+                        ordered_headers.append(
+                            preprocess.normalize_column_header(
+                                h, dataset_mode, ctok))
+        part_csv = os.path.join(expected_output_dir,
+                                f'output_part_{part_idx:04d}.csv')
+        with open(part_csv, 'r', encoding='utf-8') as f:
+            for norm_h, row in zip(ordered_headers, csv.DictReader(f)):
                 header_to_sv[norm_h] = (
-                    obs_date,
-                    obs_period,
-                    var_measured,
-                    unit,
+                    row['observationDate'],
+                    row['observationPeriod'],
+                    row['variableMeasured'],
+                    row.get('unit', ''),
                 )
     return header_to_sv
 
@@ -208,7 +200,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_skips_missing_value_placeholders(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             raw_dir = os.path.join(tmpdir, 'raw')
-            shard_dir = os.path.join(tmpdir, 'input_files')
+            out_dir = os.path.join(tmpdir, 'output')
             os.makedirs(raw_dir, exist_ok=True)
             for filename, _, mode in preprocess.DATASET_CONFIGS:
                 with open(os.path.join(raw_dir, filename),
@@ -243,6 +235,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
                             'kir_natam_female_mean'
                         ])
 
+            sv_out_prefix = os.path.join(out_dir, 'output')
             with mock.patch.object(
                     preprocess,
                     '_resolve_headers_via_svp',
@@ -253,28 +246,33 @@ class DownloadAndPvmapTest(unittest.TestCase):
             ):
                 obs_count = preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
-                    shard_dir,
+                    sv_out_prefix,
                     rows_per_chunk=1,
                     workers=1,
                     existing_statvar_mcf='',
                 )
             self.assertEqual(obs_count, 3)
+            self.assertTrue(os.path.exists(os.path.join(out_dir,
+                                                        'output.tmcf')))
 
-            out_csv = os.path.join(shard_dir,
-                                   'commuting_zone_outcomes_cleaned.csv')
-            out_tmcf = os.path.join(shard_dir,
-                                    'commuting_zone_outcomes_cleaned.tmcf')
-            self.assertTrue(os.path.exists(out_tmcf))
-            with open(out_csv, 'r', encoding='utf-8') as f:
-                rows = list(csv.DictReader(f))
+            rows = []
+            for fname in sorted(os.listdir(out_dir)):
+                if fname.startswith('output_part_') and fname.endswith('.csv'):
+                    with open(os.path.join(out_dir, fname),
+                              'r',
+                              encoding='utf-8') as f:
+                        rows.extend(list(csv.DictReader(f)))
 
-            self.assertEqual(len(rows), 2)
-            self.assertEqual(rows[0]['geo_id'], 'geoId/cz00100')
-            self.assertEqual(rows[0]['kir_natam_female_p1'], '')
-            self.assertEqual(rows[0]['kir_natam_female_mean'], '0.35973939')
-            self.assertEqual(rows[1]['geo_id'], 'geoId/cz00102')
-            self.assertEqual(rows[1]['kir_natam_female_p1'], '0.25')
-            self.assertEqual(rows[1]['kir_natam_female_mean'], '0.50')
+            self.assertEqual(len(rows), 3)
+            self.assertEqual(rows[0]['observationAbout'], 'geoId/cz00100')
+            self.assertEqual(rows[0]['variableMeasured'], 'dc/mean')
+            self.assertEqual(rows[0]['value'], '0.35974')
+            self.assertEqual(rows[1]['observationAbout'], 'geoId/cz00102')
+            self.assertEqual(rows[1]['variableMeasured'], 'dc/p1')
+            self.assertEqual(rows[1]['value'], '0.25')
+            self.assertEqual(rows[2]['observationAbout'], 'geoId/cz00102')
+            self.assertEqual(rows[2]['variableMeasured'], 'dc/mean')
+            self.assertEqual(rows[2]['value'], '0.5')
             with self.assertRaises(ValueError):
                 preprocess._validate_required_columns({'state': 0}, 'county',
                                                       'annual_cohort_1978_1992',
@@ -285,13 +283,13 @@ class DownloadAndPvmapTest(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):
                 preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir=os.path.join(tmpdir, 'raw'),
-                    shard_dir=os.path.join(tmpdir, 'out'),
+                    sv_output_prefix=os.path.join(tmpdir, 'output', 'output'),
                     existing_statvar_mcf='',
                 )
             preprocess.FLAGS([
                 sys.argv[0],
                 f'--input_dir={os.path.join(tmpdir, "raw")}',
-                f'--shard_dir={os.path.join(tmpdir, "out")}',
+                f'--sv_output_prefix={os.path.join(tmpdir, "output", "output")}',
             ])
             with mock.patch.object(preprocess.logging, 'fatal') as mock_fatal:
                 preprocess.main([])
@@ -338,13 +336,15 @@ class DownloadAndPvmapTest(unittest.TestCase):
     def test_sharding_all_datasets(self):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
         raw_dir = os.path.join(test_data_dir, 'raw_data')
-        expected_input_dir = os.path.join(test_data_dir, 'output')
-        fake_header_to_sv = _load_expected_header_to_sv(expected_input_dir)
+        expected_output_dir = os.path.join(test_data_dir, 'output')
+        fake_header_to_sv = _load_expected_header_to_sv(raw_dir,
+                                                        expected_output_dir)
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            shard_dir = os.path.join(tmpdir, 'output')
-            os.makedirs(shard_dir, exist_ok=True)
+            out_dir = os.path.join(tmpdir, 'output')
+            os.makedirs(out_dir, exist_ok=True)
 
+            sv_out_prefix = os.path.join(out_dir, 'output')
             with mock.patch.object(
                     preprocess,
                     '_resolve_headers_via_svp',
@@ -352,28 +352,54 @@ class DownloadAndPvmapTest(unittest.TestCase):
             ):
                 obs_count = preprocess.prepare_parallel_shards_and_svp_inputs(
                     raw_dir,
-                    shard_dir,
+                    sv_out_prefix,
                     rows_per_chunk=5000,
                     workers=2,
                     existing_statvar_mcf='',
                 )
             self.assertEqual(obs_count, 300)
 
-            actual_files = sorted(f for f in os.listdir(shard_dir)
-                                  if f.endswith(('_cleaned.csv',
-                                                 '_cleaned.tmcf')))
-            expected_files = sorted(f for f in os.listdir(expected_input_dir)
-                                    if f.endswith(('_cleaned.csv',
-                                                   '_cleaned.tmcf')))
-            self.assertEqual(actual_files, expected_files)
-            for fname in expected_files:
-                with open(os.path.join(shard_dir, fname), 'r',
+            with open(os.path.join(out_dir, 'output.tmcf'),
+                      'r',
+                      encoding='utf-8') as f_actual_tmcf, open(
+                          os.path.join(expected_output_dir, 'output.tmcf'),
+                          'r',
+                          encoding='utf-8',
+                      ) as f_expected_tmcf:
+                self.assertEqual(f_actual_tmcf.read(), f_expected_tmcf.read())
+
+            actual_parts = sorted(
+                f for f in os.listdir(out_dir)
+                if f.startswith('output_part_') and f.endswith('.csv'))
+            expected_parts = sorted(
+                f for f in os.listdir(expected_output_dir)
+                if f.startswith('output_part_') and f.endswith('.csv'))
+            self.assertEqual(actual_parts, expected_parts)
+            for fname in expected_parts:
+                with open(os.path.join(out_dir, fname), 'r',
                           encoding='utf-8') as f_actual, open(
-                              os.path.join(expected_input_dir, fname),
+                              os.path.join(expected_output_dir, fname),
                               'r',
                               encoding='utf-8',
                           ) as f_expected:
                     self.assertEqual(f_actual.read(), f_expected.read())
+
+            sv_rows = []
+            for fname in actual_parts:
+                with open(os.path.join(out_dir, fname), 'r',
+                          encoding='utf-8') as f:
+                    sv_rows.extend(list(csv.DictReader(f)))
+            self.assertEqual(len(sv_rows), 300)
+            for row in sv_rows:
+                val = row['value']
+                self.assertFalse(val.startswith(('.', '-.')))
+                if '.' in val:
+                    self.assertLessEqual(len(val.split('.')[1]), 5)
+
+        self.assertEqual(preprocess._compute_chunk_size(1, 10823), 1)
+        self.assertEqual(preprocess._compute_chunk_size(5000, 10823), 1616)
+        self.assertEqual(preprocess._compute_chunk_size(5000, 7892), 2217)
+        self.assertEqual(preprocess._compute_chunk_size(5000, 90), 50000)
 
     def test_is_valid_number(self):
         self.assertTrue(preprocess._is_valid_number('0.35973939'))
