@@ -1,0 +1,39 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Argentina_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.indec.gob.ar/",
+            "provenance_description": "Argentina Census population, urban/rural population, literacy, and infant mortality statistics from Instituto Nacional de Estadística y Censos (INDEC)",
+            "scripts": [
+                "download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=argentina_census_pvmap.csv --config_file=argentina_census_metadata.csv --places_resolved_csv=argentina_places_resolved.csv --statvar_dcid_remap_csv=argentina_statvar_remap.csv --output_path=output_files/argentina_census_output --output_counters=counters/argentina_census_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/argentina_census_output.tmcf",
+                    "cleaned_csv": "output_files/argentina_census_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "argentina_census_pvmap.csv",
+                "argentina_census_metadata.csv",
+                "argentina_places_resolved.csv",
+                "argentina_statvar_remap.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 5 1 * *",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
