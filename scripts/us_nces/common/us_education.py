@@ -501,8 +501,8 @@ class USEducation:
             col_post_2017].combine_first(self._final_df_place[col_pre_2017])
 
         # Clean up the old columns
-        self._final_df_place.drop(columns=[col_pre_2017, col_post_2017],
-                                  inplace=True)
+        self._final_df_place = self._final_df_place.drop(
+            columns=[col_pre_2017, col_post_2017])
 
         # Restructuring School District ID according to Data Commons.
         self._final_df_place["State_District_ID"] = \
@@ -1070,7 +1070,7 @@ class USEducation:
                     df_final["year"] = pd.to_numeric(df_final["year"])
                     df_final["year"] = df_final["year"] + 1
                     # Dropping Duplicates and writing to a file
-                    df_final.drop_duplicates(inplace=True)
+                    df_final = df_final.drop_duplicates()
                     df_final.to_csv(self._cleaned_csv_file_path,
                                     header=False,
                                     index=False,
