@@ -100,14 +100,17 @@ java -Xmx90g -jar ~/Downloads/import-tool.jar genmcf \
 ### Summary Metrics
 * **Status:** Succeeded with **0 errors / 0 fatals**
 * **Total Observations (`NumRowSuccesses`):** `283,560,361` across `output/output_part_*.csv`
-* **Total MCF Nodes Generated (`NumNodeSuccesses`):** `283,658,483`
+* **Total MCF Nodes Generated (`NumNodeSuccesses`):** `283,661,010`
+* **Total Property-Value Successes (`NumPVSuccesses`):** `2,276,128,676`
 * **Unique StatisticalVariables:** `10,596` active StatVars emitted with observations (out of `11,247` total mapped StatVars across `10,815` existing `dc/` StatVars and `432` new schema StatVars)
 
 ### Explanation of Warnings & Data Holes (`report.json`)
 All warnings in `dc_generated/report.json` are expected characteristics of the source dataset:
 
-1. **`StatsCheck_Data_Holes` (`442` warnings):**
-   * **New vs. Existing Data:** All 442 holes occur exclusively in the **new 2024 annual birth-cohort datasets** (`county_by_cohort_outcomes.csv` and `cz_by_cohort_outcomes.csv`, where each birth cohort `1978`–`1992` maps to an annual `observationDate` `2005`–`2019` with `observationPeriod: P1Y`). The legacy Data Commons import only included multi-year pooled cohorts (single `observationDate` per StatVar/place) and therefore had no multi-date time series on which `StatsCheck_Data_Holes` could trigger.
-   * **Root Cause (Valid Source Suppression):** Opportunity Insights suppresses cells (leaving them blank `""` in the raw CSVs) when a county or commuting zone has an insufficient sample size (`kid_n`) for a specific demographic subgroup in a single birth year. For example, in `county_by_cohort_outcomes.csv` for Calhoun County, AL (`geoId/01015`), `AsianAlone` (`asian`) rows are present for cohorts `1982` (`2009`), `1984` (`2011`), and `1985` (`2012`), but all `asian` outcome columns are blank (`""`) in the raw source file for cohort `1983` (`2010`).
-2. **`StatsCheck_MaxPercentFluctuationGreaterThan100` (`262`), `StatsCheck_MaxPercentFluctuationGreaterThan500` (`76`), and `StatsCheck_3_Sigma` (`38`):**
-   * Expected year-to-year variance in the 1-year birth cohort series (`P1Y`) for small demographic subgroups in smaller counties and commuting zones.
+1. **`StatsCheck_Data_Holes` (`640` warnings):**
+   * **New vs. Existing Data:** All 640 holes occur exclusively in the **new 2024 annual birth-cohort datasets** (`county_by_cohort_outcomes.csv` and `cz_by_cohort_outcomes.csv`, where each birth cohort `1978`–`1992` maps to an annual `observationDate` `2005`–`2019` with `observationPeriod: P1Y`). The legacy Data Commons import only included multi-year pooled cohorts (single `observationDate` per StatVar/place) and therefore had no multi-date time series on which `StatsCheck_Data_Holes` could trigger.
+   * **Root Cause (Valid Source Suppression):** Opportunity Insights suppresses cells (leaving them blank `""` in the raw CSVs) when a county or commuting zone has an insufficient sample size (`kid_n`) for a specific demographic subgroup in a single birth year. For example, in `county_by_cohort_outcomes.csv` for Hill County, MT (`geoId/30041`), `AmericanIndianAndAlaskaNativeAlone` (`aian`) female outcome rows are present for cohorts `1980` (`2007`), `1982` (`2009`), and `1985`–`1992` (`2012`–`2019`), while the intermediate single-year cohorts are suppressed (`""`) in the raw source file.
+2. **`StrSplit_EmptyToken_unit` (`275,914,573` warnings):**
+   * Expected because the shared `output_columns` schema includes `unit`. Only the dollar-denominated income metrics (`kfi_*` and `kii_*`, `7,645,788` rows) have `unit: USDollar`; the remaining `275,914,573` rows are dimensionless ranks, fractions, or counts with an empty `unit` column.
+3. **`StatsCheck_MaxPercentFluctuationGreaterThan100` (`259`), `StatsCheck_MaxPercentFluctuationGreaterThan500` (`86`), and `StatsCheck_3_Sigma` (`41`):**
+   * Expected year-to-year variance in the 1-year birth cohort series (`P1Y`) and between the 2010 and 2020 decennial census point-in-time (`P1D`) estimates for small demographic subgroups in smaller counties, commuting zones, and census tracts.
