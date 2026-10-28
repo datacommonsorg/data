@@ -88,6 +88,18 @@ class DownloadTest(unittest.TestCase):
                 f'Unexpected URL domain: {url}',
             )
 
+    def test_fetch_url_with_download_util(self):
+        test_url = 'https://www.indec.gob.ar/ftp/test_payload.xls'
+        download.download_util.set_test_url_download_response(
+            test_url, {}, b'FAKE_XLS_BYTES')
+        self.assertEqual(download.fetch_url(test_url), b'FAKE_XLS_BYTES')
+
+        html_url = 'https://www.indec.gob.ar/ftp/error.xls'
+        download.download_util.set_test_url_download_response(
+            html_url, {}, b'<!DOCTYPE html><html>Error</html>')
+        with self.assertRaises(RuntimeError):
+            download.fetch_url(html_url)
+
     def test_stat_var_processor_sample(self):
         processor_script = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
                                         'stat_var_processor.py')

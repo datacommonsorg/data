@@ -30,16 +30,21 @@ import csv
 import io
 import os
 import re
+import sys
 import unicodedata
 import zipfile
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_UTIL_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', 'util'))
+if _UTIL_DIR not in sys.path:
+    sys.path.insert(1, _UTIL_DIR)
 
 from absl import app
 from absl import flags
 from absl import logging
+import download_util
 import openpyxl
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+import requests_cache
 import xlrd
 
 FLAGS = flags.FLAGS
@@ -369,64 +374,40 @@ PROVINCE_NORM_MAP = {_norm_key(j[0]): j[0] for j in JURISDICTIONS}
 PROVINCE_NORM_MAP['tierra del fuego'] = (
     'Tierra del Fuego, Antártida e Islas del Atlántico Sur')
 
+DEFAULT_HEADERS = {'User-Agent': 'Mozilla/5.0 (DataCommons-StatVarImporter)'}
 
-def create_session(retries: int = 3,
-                   pool_maxsize: int = 16) -> requests.Session:
-    """Creates a requests.Session with connection pooling and retry backoff."""
-    session = requests.Session()
-    session.headers.update(
-        {'User-Agent': 'Mozilla/5.0 (DataCommons-StatVarImporter)'})
-    retry_strategy = Retry(
-        total=retries,
-        backoff_factor=1.0,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=['GET', 'HEAD'],
+
+def fetch_url(url: str, retries: int = 3, retry_secs: int = 5) -> bytes:
+    """Downloads bytes from an HTTP/HTTPS URL using download_util.request_url."""
+    if not requests_cache.is_installed():
+        requests_cache.install_cache(backend='memory', expires_after=300)
+    data = download_util.request_url(
+        url=url,
+        headers=DEFAULT_HEADERS,
+        output='bytes',
+        timeout=45,
+        retries=retries,
+        retry_secs=retry_secs,
+        use_cache=False,
     )
-    adapter = HTTPAdapter(
-        max_retries=retry_strategy,
-        pool_connections=pool_maxsize,
-        pool_maxsize=pool_maxsize,
-    )
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-    return session
-
-
-def fetch_url(url: str,
-              session: requests.Session | None = None,
-              retries: int = 3) -> bytes:
-    """Downloads bytes from an HTTP/HTTPS URL with retries and validation."""
-    own_session = session is None
-    sess = session if session is not None else create_session(retries=retries)
-    try:
-        logging.info('GET %s', url)
-        resp = sess.get(url, timeout=45)
-        if resp.status_code != 200:
-            raise RuntimeError(
-                f'HTTP {resp.status_code} when downloading {url}')
-        data = resp.content
-        if not data or data[:15].lstrip().startswith((b'<!DOCTYPE', b'<html')):
-            raise RuntimeError(
-                f'Received HTML error or empty payload for {url}')
-        return data
-    finally:
-        if own_session:
-            sess.close()
+    if not data or not isinstance(data, bytes) or data[:15].lstrip().startswith(
+        (b'<!DOCTYPE', b'<html')):
+        raise RuntimeError(f'Received HTML error or empty payload for {url}')
+    return data
 
 
 def fetch_all_urls(urls: list[str], max_workers: int = 16) -> dict[str, bytes]:
-    """Downloads a list of URLs concurrently and returns {url: bytes}."""
+    """Downloads a list of URLs concurrently using download_util and returns {url: bytes}."""
+    if not requests_cache.is_installed():
+        requests_cache.install_cache(backend='memory', expires_after=300)
     unique_urls = sorted(set(urls))
     logging.info('Downloading %d unique files from INDEC...', len(unique_urls))
     results = {}
-    with create_session(retries=3, pool_maxsize=max_workers) as session:
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            fut_to_url = {
-                executor.submit(fetch_url, u, session): u for u in unique_urls
-            }
-            for fut in as_completed(fut_to_url):
-                url = fut_to_url[fut]
-                results[url] = fut.result()
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        fut_to_url = {executor.submit(fetch_url, u): u for u in unique_urls}
+        for fut in as_completed(fut_to_url):
+            url = fut_to_url[fut]
+            results[url] = fut.result()
     logging.info('Successfully downloaded %d files.', len(results))
     return results
 
