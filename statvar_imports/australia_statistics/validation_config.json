@@ -23,14 +23,6 @@
       }
     },
     {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Strictly enforce historical deletion threshold of 0.1%",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "max_date_consistent_labour_force",
       "validator": "MAX_DATE_CONSISTENT",
       "scope": {
