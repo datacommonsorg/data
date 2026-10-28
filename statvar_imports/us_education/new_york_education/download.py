@@ -306,7 +306,7 @@ def process_and_save_data(file_paths):
             else:
                 # Get the names of the first four columns for deduplication
                 subset_cols = df.columns[:4].tolist()
-                df.drop_duplicates(subset=subset_cols, keep='first', inplace=True)
+                df = df.drop_duplicates(subset=subset_cols, keep='first')
 
             # Overwrite the original file with the processed data
             df.to_csv(file_path, index=False)
