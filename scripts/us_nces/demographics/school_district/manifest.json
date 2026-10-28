@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "NCES_SchoolDistrict",
+            "import_name": "NCES_SchoolDistrictStats",
             "curator_emails": [
                 "support@datacommons.org"
             ],
