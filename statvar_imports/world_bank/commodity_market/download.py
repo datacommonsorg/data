@@ -21,7 +21,7 @@ def download_file(url, filename):
         raise
 
 def clean_values(df):
-    return df.map(lambda x: pd.NA if isinstance(x, str) and ("..." in x or "â€¦" in x or x.strip() in ["...", "..", "â€¦"]) else x)
+    return df.map(lambda x: pd.NA if isinstance(x, str) and ("..." in x or "…" in x or x.strip() in ["...", "..", "…"]) else x)
 
 def process_xlsx(file_path):
     try:
