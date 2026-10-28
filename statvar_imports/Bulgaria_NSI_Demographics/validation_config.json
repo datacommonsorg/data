@@ -3,17 +3,17 @@
     "rules": [
         {
             "rule_id": "check_max_date_consistent",
-            "description": "Verifies that MaxDate is uniform across all generated StatVars within each input.",
+            "description": "Verifies that MaxDate is uniform across all generated StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
             "params": {}
         },
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary (MaxDate >= '2025' for annual 207-SV input; MaxDate >= '2023' for historical 66-SV input).",
+            "description": "Verify all active StatVars meet the freshness boundary (MaxDate >= '2025').",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "((StatVar LIKE '%Urban%' OR StatVar LIKE '%Rural%' OR total_svs > 100) AND MaxDate >= '2025') OR (total_svs = 66 AND MaxDate >= '2023')"
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "MaxDate >= '2025'"
             }
         },
         {

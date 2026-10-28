@@ -12,7 +12,6 @@
             "scripts": [
                 "download_current_year_data.py --allow-staged-fallback",
                 "download.sh",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/BulgariaNSI_Demographics_2001to2010_input.csv,input_files/BulgariaNSI_Demographics_2011_2022_2023_input.csv,input_files/BulgariaNSI_Demographics_2012to2021_input.csv --pv_map=BulgariaNSI_Demographics_history_pvmap.csv --config_file=BulgariaNSI_Demographics_history_metadata.csv --output_path=output/BulgariaNSI_Demographics_history --output_counters=counters/BulgariaNSI_Demographics_history_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/BulgariaNSI_Demographics_Year_input_*.csv --pv_map=BulgariaNSI_Demographics_pvmap.csv --config_file=BulgariaNSI_Demographics_metadata.csv --output_path=output/BulgariaNSI_Demographics --output_counters=counters/BulgariaNSI_Demographics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
@@ -20,15 +19,10 @@
                     "template_mcf": "output/BulgariaNSI_Demographics.tmcf",
                     "cleaned_csv": "output/BulgariaNSI_Demographics.csv",
                     "node_mcf": "output/BulgariaNSI_Demographics_stat_vars*.mcf"
-                },
-                {
-                    "template_mcf": "output/BulgariaNSI_Demographics_history.tmcf",
-                    "cleaned_csv": "output/BulgariaNSI_Demographics_history.csv",
-                    "node_mcf": "output/BulgariaNSI_Demographics_history_stat_vars*.mcf"
                 }
             ],
             "source_files": [
-                "input_files/*.csv",
+                "input_files/BulgariaNSI_Demographics_Year_input_*.csv",
                 "counters/*.csv",
                 "*.csv",
                 "manifest.json",
