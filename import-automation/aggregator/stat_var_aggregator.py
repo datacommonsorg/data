@@ -60,9 +60,11 @@ ALLOWED_AGG_METHODS = frozenset({"SUM", "MIN", "MAX", "AVG"})
 DEFAULT_CONFIG_PATH = os.path.join(_SCRIPT_DIR, "statvar_aggregation.yaml")
 
 STAT_VAR_AGG_MCF_FILENAME = "stat_var_agg_nodes.mcf"
+STAT_VAR_SERIES_AGG_MCF_FILENAME = "stat_var_series_agg_nodes.mcf"
 
 DEFAULT_EXCLUDE_FILENAMES = frozenset({
     STAT_VAR_AGG_MCF_FILENAME,
+    STAT_VAR_SERIES_AGG_MCF_FILENAME,
     "instance_mcf_nodes.mcf",
     "failed_instance_mcf_nodes.mcf",
 })
@@ -882,7 +884,10 @@ def run_bigquery_aggregation(
         temp_dir=gcs_temp_dir,
         suffix=f"raw_{import_name}_{input_prefix}",
         expiration_hours=expiration_hours,
-        exclude_filenames={STAT_VAR_AGG_MCF_FILENAME},
+        exclude_filenames={
+            STAT_VAR_AGG_MCF_FILENAME,
+            STAT_VAR_SERIES_AGG_MCF_FILENAME,
+        },
     )
     if raw_obs_count == 0:
         logging.info(

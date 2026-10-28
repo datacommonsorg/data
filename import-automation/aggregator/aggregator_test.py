@@ -459,8 +459,13 @@ class StatVarAggregatorTest(unittest.TestCase):
             self.assertEqual(expected_tables, res["table_ids"])
 
             _, load_kwargs = mock_load_mcf.call_args
-            self.assertEqual({"stat_var_agg_nodes.mcf"},
-                             load_kwargs["exclude_filenames"])
+            self.assertEqual(
+                {
+                    "stat_var_agg_nodes.mcf",
+                    "stat_var_series_agg_nodes.mcf",
+                },
+                load_kwargs["exclude_filenames"],
+            )
             select_job.result.assert_called_once_with(page_size=10000)
             mock_bq_client.update_table.assert_called_once()
 

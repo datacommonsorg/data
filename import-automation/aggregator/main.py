@@ -42,6 +42,7 @@ for _p in [
 
 import file_util
 import stat_var_aggregator
+import stat_var_series_aggregator
 
 FLAGS = flags.FLAGS
 
@@ -84,11 +85,17 @@ def _define_cli_flags() -> None:
             12,
             "TTL in hours for temporary BigQuery tables.",
         )
-    if "config_path" not in FLAGS:
+    if "statvar_config_path" not in FLAGS:
         flags.DEFINE_string(
-            "config_path",
+            "statvar_config_path",
             "",
             "Optional path override to statvar_aggregation.yaml.",
+        )
+    if "statvar_series_config_path" not in FLAGS:
+        flags.DEFINE_string(
+            "statvar_series_config_path",
+            "",
+            "Optional path override to statvar_series_aggregation.yaml.",
         )
 
 
@@ -137,9 +144,10 @@ def run_aggregation_job(
     bucket_name: str = "",
     bq_dataset: str = "datcom_import_differ",
     bq_table_ttl_hours: int = 12,
-    config_path: Optional[str] = None,
+    statvar_config_path: Optional[str] = None,
+    statvar_series_config_path: Optional[str] = None,
 ) -> int:
-    """Executes StatVar aggregation for an import version if configured in statvar_aggregation.yaml."""
+    """Executes StatVar and/or StatVar series aggregation for an import version if configured."""
     start_time = time.time()
     if ":" not in absolute_import_name:
         raise ValueError(
@@ -148,13 +156,18 @@ def run_aggregation_job(
     relative_import_dir, import_name = absolute_import_name.split(":", 1)
     output_dir = f"{relative_import_dir}/{import_name}"
 
-    rules = stat_var_aggregator.load_stat_var_aggregation_config(
+    statvar_rules = stat_var_aggregator.load_stat_var_aggregation_config(
         import_name=import_name,
-        config_path=config_path or None,
+        config_path=statvar_config_path or None,
     )
-    if not rules:
+    series_rounds = (
+        stat_var_series_aggregator.load_stat_var_series_aggregation_config(
+            import_name=import_name,
+            config_path=statvar_series_config_path or None,
+        ))
+    if not statvar_rules and not series_rounds:
         logging.info(
-            "No StatVar aggregation rules configured for %s; skipping aggregation job.",
+            "No StatVar or StatVar series aggregation rules configured for %s; skipping aggregation job.",
             import_name,
         )
         return 0
@@ -187,10 +200,11 @@ def run_aggregation_job(
         )
 
     logging.info(
-        "Running StatVar aggregation for %s version=%s (%d rules)",
+        "Running StatVar aggregation for %s version=%s (%d statvar rules, %d series rounds)",
         output_dir,
         version,
-        len(rules),
+        len(statvar_rules),
+        len(series_rounds),
     )
 
     summary_raw = _read_gcs_text(gcs_client, bucket_name,
@@ -216,6 +230,10 @@ def run_aggregation_job(
             )
             local_agg_mcf = os.path.join(
                 local_genmcf_dir, stat_var_aggregator.STAT_VAR_AGG_MCF_FILENAME)
+            local_series_agg_mcf = os.path.join(
+                local_genmcf_dir,
+                stat_var_series_aggregator.STAT_VAR_SERIES_AGG_MCF_FILENAME,
+            )
             local_summary_csv = os.path.join(local_genmcf_dir,
                                              "summary_report.csv")
 
@@ -237,32 +255,73 @@ def run_aggregation_job(
             gcs_temp_dir = (
                 f"gs://{bucket_name}/{output_dir}/{version}/{input_prefix}/aggregation/_tmp"
             )
-            res = stat_var_aggregator.run_bigquery_aggregation(
-                mcf_pattern=mcf_pattern,
-                aggregations=rules,
-                output_mcf_path=local_agg_mcf,
-                project_id=project_id,
-                dataset_id=bq_dataset,
-                import_name=import_name,
-                version=version,
-                input_prefix=input_prefix,
-                summary_report_path=local_summary_csv
-                if summary_exists else None,
-                gcs_temp_dir=gcs_temp_dir,
-                expiration_hours=bq_table_ttl_hours,
-            )
+            prefix_agg_count = 0
+            ran_raw_obs = False
+            created_agg_obs = False
 
-            agg_count = int(res.get("agg_obs_count", 0))
-            total_agg_obs += agg_count
-            if agg_count > 0 and os.path.exists(local_agg_mcf):
-                agg_mcf_blob_path = (
-                    f"{output_dir}/{version}/{input_prefix}/genmcf/"
-                    f"{stat_var_aggregator.STAT_VAR_AGG_MCF_FILENAME}")
-                bucket.blob(agg_mcf_blob_path).upload_from_filename(
-                    local_agg_mcf)
-                if summary_exists and os.path.exists(local_summary_csv):
-                    bucket.blob(summary_blob_path).upload_from_filename(
-                        local_summary_csv)
+            if statvar_rules:
+                res = stat_var_aggregator.run_bigquery_aggregation(
+                    mcf_pattern=mcf_pattern,
+                    aggregations=statvar_rules,
+                    output_mcf_path=local_agg_mcf,
+                    project_id=project_id,
+                    dataset_id=bq_dataset,
+                    import_name=import_name,
+                    version=version,
+                    input_prefix=input_prefix,
+                    summary_report_path=local_summary_csv
+                    if summary_exists else None,
+                    gcs_temp_dir=gcs_temp_dir,
+                    expiration_hours=bq_table_ttl_hours,
+                )
+                statvar_raw_obs_count = int(res.get("raw_obs_count", 0))
+                agg_count = int(res.get("agg_obs_count", 0))
+                prefix_agg_count += agg_count
+                total_agg_obs += agg_count
+                ran_raw_obs = ("table_ids" not in res or bool(res["table_ids"]))
+                created_agg_obs = bool(statvar_raw_obs_count > 0 or
+                                       agg_count > 0)
+                if agg_count > 0 and os.path.exists(local_agg_mcf):
+                    agg_mcf_blob_path = (
+                        f"{output_dir}/{version}/{input_prefix}/genmcf/"
+                        f"{stat_var_aggregator.STAT_VAR_AGG_MCF_FILENAME}")
+                    bucket.blob(agg_mcf_blob_path).upload_from_filename(
+                        local_agg_mcf)
+
+            if series_rounds:
+                series_res = (
+                    stat_var_series_aggregator.run_bigquery_series_aggregation(
+                        mcf_pattern=mcf_pattern,
+                        rounds=series_rounds,
+                        output_mcf_path=local_series_agg_mcf,
+                        project_id=project_id,
+                        dataset_id=bq_dataset,
+                        import_name=import_name,
+                        version=version,
+                        input_prefix=input_prefix,
+                        summary_report_path=local_summary_csv
+                        if summary_exists else None,
+                        gcs_temp_dir=gcs_temp_dir,
+                        expiration_hours=bq_table_ttl_hours,
+                        reuse_existing_raw_obs=ran_raw_obs,
+                        append_to_agg_obs=created_agg_obs,
+                    ))
+                series_agg_count = int(series_res.get("agg_obs_count", 0))
+                prefix_agg_count += series_agg_count
+                total_agg_obs += series_agg_count
+                if series_agg_count > 0 and os.path.exists(
+                        local_series_agg_mcf):
+                    series_mcf_blob_path = (
+                        f"{output_dir}/{version}/{input_prefix}/genmcf/"
+                        f"{stat_var_series_aggregator.STAT_VAR_SERIES_AGG_MCF_FILENAME}"
+                    )
+                    bucket.blob(series_mcf_blob_path).upload_from_filename(
+                        local_series_agg_mcf)
+
+            if (prefix_agg_count > 0 and summary_exists and
+                    os.path.exists(local_summary_csv)):
+                bucket.blob(summary_blob_path).upload_from_filename(
+                    local_summary_csv)
 
     stats = import_summary.setdefault("import_stats", {})
     stats["aggregation_execution_time"] = int(time.time() - start_time)
@@ -292,7 +351,8 @@ def main(_):
         bucket_name=FLAGS.gcs_bucket,
         bq_dataset=FLAGS.bq_dataset,
         bq_table_ttl_hours=FLAGS.bq_table_ttl_hours,
-        config_path=FLAGS.config_path or None,
+        statvar_config_path=FLAGS.statvar_config_path or None,
+        statvar_series_config_path=FLAGS.statvar_series_config_path or None,
     )
     sys.exit(code)
 
