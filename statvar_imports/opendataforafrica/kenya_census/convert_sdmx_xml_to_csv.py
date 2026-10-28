@@ -84,19 +84,22 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     for elem in root.iter():
         if elem.tag.endswith('Series'):
             series_attrib = {
-                k.split('}')[-1]: v for k, v in elem.attrib.items()
+                k.split('}')[-1]: v
+                for k, v in elem.attrib.items()
             }
             for child in elem:
                 if child.tag.endswith('Obs'):
                     obs_attrib = {
-                        k.split('}')[-1]: v for k, v in child.attrib.items()
+                        k.split('}')[-1]: v
+                        for k, v in child.attrib.items()
                     }
                     rows.append({**series_attrib, **obs_attrib})
         elif elem.tag.endswith('DataSet'):
             for child in elem:
                 if child.tag.endswith('Obs'):
                     obs_attrib = {
-                        k.split('}')[-1]: v for k, v in child.attrib.items()
+                        k.split('}')[-1]: v
+                        for k, v in child.attrib.items()
                     }
                     rows.append(obs_attrib)
 
