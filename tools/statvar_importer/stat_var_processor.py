@@ -1378,6 +1378,46 @@ class StatVarsMap:
         return pvs
 
 
+def parse_mapped_columns(mapped_columns) -> list:
+    """Parses mapped_columns config parameter into a list of 1-based column indices.
+
+    Accepts integer count (N -> 1..N), single column letter ('C' -> 1..3),
+    comma-separated column letters/numbers ('A,C,AA' -> [1, 3, 27]), or lists.
+    Spreadsheet column letters are strictly ASCII (A-Z).
+    """
+    if not mapped_columns:
+        return []
+    mapped_columns_indices = []
+    if not isinstance(mapped_columns, list):
+        if isinstance(mapped_columns, str):
+            mapped_columns = mapped_columns.split(',')
+        elif isinstance(mapped_columns,
+                        int) and not isinstance(mapped_columns, bool):
+            mapped_columns = [mapped_columns]
+        elif isinstance(mapped_columns, tuple):
+            mapped_columns = list(mapped_columns)
+        else:
+            mapped_columns = []
+    for col in mapped_columns:
+        if isinstance(col, int) and not isinstance(col, bool) and col > 0:
+            mapped_columns_indices.append(col)
+        elif isinstance(col, str):
+            col = col.strip()
+            if not col:
+                continue
+            if col.isalpha() and col.isascii():
+                # Convert letters to int index.
+                col_index = 0
+                for c in col:
+                    col_index = col_index * 26 + (ord(c.upper()) - ord('A') + 1)
+                mapped_columns_indices.append(col_index)
+            elif col.isdigit() and int(col) > 0:
+                mapped_columns_indices.append(int(col))
+    if len(mapped_columns_indices) == 1:
+        mapped_columns_indices = list(range(1, mapped_columns_indices[0] + 1))
+    return mapped_columns_indices
+
+
 class StatVarDataProcessor:
     """Class to process data and generate StatVars and StatVarObs."""
 
@@ -1494,37 +1534,7 @@ class StatVarDataProcessor:
         # Convert mapped columns from letters to int
         mapped_columns = self._config.get('mapped_columns', 0)
         if mapped_columns:
-            mapped_columns_indices = []
-            if not isinstance(mapped_columns, list):
-                if isinstance(mapped_columns, str):
-                    mapped_columns = mapped_columns.split(',')
-                elif isinstance(mapped_columns,
-                                int) and not isinstance(mapped_columns, bool):
-                    mapped_columns = [mapped_columns]
-                elif isinstance(mapped_columns, tuple):
-                    mapped_columns = list(mapped_columns)
-                else:
-                    mapped_columns = []
-            for col in mapped_columns:
-                if isinstance(col,
-                              int) and not isinstance(col, bool) and col > 0:
-                    mapped_columns_indices.append(col)
-                elif isinstance(col, str):
-                    col = col.strip()
-                    if not col:
-                        continue
-                    if col.isalpha() and col.isascii():
-                        # Convert letters to int index.
-                        col_index = 0
-                        for c in col:
-                            col_index = col_index * 26 + (ord(c.upper()) -
-                                                          ord('A') + 1)
-                        mapped_columns_indices.append(col_index)
-                    elif col.isdigit() and int(col) > 0:
-                        mapped_columns_indices.append(int(col))
-            if len(mapped_columns_indices) == 1:
-                mapped_columns_indices = list(
-                    range(1, mapped_columns_indices[0] + 1))
+            mapped_columns_indices = parse_mapped_columns(mapped_columns)
             self._config.set_config('mapped_columns', mapped_columns_indices)
             logging.log_every_n(
                 logging.DEBUG,
