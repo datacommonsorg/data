@@ -759,9 +759,10 @@ class StatVarsMap:
     properties. The statvar and related observations will be dropped from the
     output.
     """
+        statvar_dcid = strip_namespace(svobs.get('variableMeasured', None))
         # Check if SVObs aggregation is enabled.
         if svobs_key not in self._statvar_obs_map:
-            log.error(f'Unexpected missing SVObs: {svobs_key}:{svobs}')
+            logging.error(f'Unexpected missing SVObs: {svobs_key}:{svobs}')
             self._counters.add_counter(
                 'error-statvar-obs-missing-for-dup-svobs', 1, statvar_dcid)
             return
@@ -776,7 +777,6 @@ class StatVarsMap:
             existing_svobs[dup_svobs_key] = []
         # Add the duplicate SVObs to the original SVObs.
         existing_svobs[dup_svobs_key].append(svobs)
-        statvar_dcid = strip_namespace(svobs.get('variableMeasured', None))
         if not statvar_dcid:
             logging.log_every_n(
                 logging.ERROR,
@@ -1498,18 +1498,28 @@ class StatVarDataProcessor:
             if not isinstance(mapped_columns, list):
                 if isinstance(mapped_columns, str):
                     mapped_columns = mapped_columns.split(',')
-                elif isinstance(mapped_columns, int):
-                    mapped_columns_indices.append(
-                        list(range(1, mapped_columns + 1)))
+                elif isinstance(mapped_columns,
+                                int) and not isinstance(mapped_columns, bool):
+                    mapped_columns = [mapped_columns]
+                elif isinstance(mapped_columns, tuple):
+                    mapped_columns = list(mapped_columns)
+                else:
+                    mapped_columns = []
             for col in mapped_columns:
-                if isinstance(col, str) and col:
-                    if col[0].isalpha():
+                if isinstance(col, int) and not isinstance(col, bool):
+                    mapped_columns_indices.append(col)
+                elif isinstance(col, str):
+                    col = col.strip()
+                    if not col:
+                        continue
+                    if col.isalpha():
                         # Convert letters to int index.
                         col_index = 0
                         for c in col:
-                            col_index = col_index * 26 + (ord(c) - ord('A') + 1)
-                        mapped_columns_indices.append(col)
-                    elif col[0].isdigit():
+                            col_index = col_index * 26 + (ord(c.upper()) -
+                                                          ord('A') + 1)
+                        mapped_columns_indices.append(col_index)
+                    elif col.isdigit():
                         mapped_columns_indices.append(int(col))
             if len(mapped_columns_indices) == 1:
                 mapped_columns_indices = list(

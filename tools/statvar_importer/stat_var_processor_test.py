@@ -31,7 +31,7 @@ sys.path.append(
 
 from counters import Counters
 from mcf_diff import diff_mcf_files
-from stat_var_processor import StatVarDataProcessor, process
+from stat_var_processor import StatVarDataProcessor, StatVarsMap, process
 
 
 class TestStatVarProcessor(unittest.TestCase):
@@ -145,6 +145,110 @@ class TestStatVarProcessor(unittest.TestCase):
         for test_file in self.test_files:
             logging.info(f'Testing file {test_file}...')
             self.process_file(test_file)
+
+    def test_setup_config_mapped_columns_int(self):
+        """Tests integer mapped_columns expands to 1..N."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': 4})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 2, 3, 4])
+
+    def test_setup_config_mapped_columns_single_int_list(self):
+        """Tests single-element integer list expands to 1..N."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': [4]})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 2, 3, 4])
+
+    def test_setup_config_mapped_columns_multi_int_list(self):
+        """Tests multi-element integer list preserves specific indices."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': [1, 3, 5]})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 3, 5])
+
+    def test_setup_config_mapped_columns_single_letter(self):
+        """Tests single uppercase column letter expands to 1..N."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': 'C'})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 2, 3])
+
+    def test_setup_config_mapped_columns_lowercase_single_letter(self):
+        """Tests single lowercase column letter expands to 1..N."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': 'c'})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 2, 3])
+
+    def test_setup_config_mapped_columns_multi_letters(self):
+        """Tests comma-separated column letters convert to 1-based indices."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': 'A,C,AA'})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 3, 27])
+
+    def test_setup_config_mapped_columns_multi_letters_whitespace_mixed_case(
+            self):
+        """Tests whitespace-padded mixed-case column letters parse cleanly."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': ' A , c , aa '})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 3, 27])
+
+    def test_setup_config_mapped_columns_letter_list(self):
+        """Tests list of column letters converts to 1-based indices."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': ['A', 'C', 'AA']})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 3, 27])
+
+    def test_setup_config_mapped_columns_single_numeric_str(self):
+        """Tests single numeric string expands to 1..N."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': '3'})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 2, 3])
+
+    def test_setup_config_mapped_columns_multi_numeric_str(self):
+        """Tests comma-separated numeric strings preserve specific indices."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': '1,3,5'})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 3, 5])
+
+    def test_setup_config_mapped_columns_multi_numeric_str_whitespace(self):
+        """Tests whitespace-padded numeric strings parse to specific indices."""
+        processor = StatVarDataProcessor()
+        processor.setup_config({'mapped_columns': ' 1 , 3 , 5 '})
+        self.assertEqual(processor._config.get('mapped_columns'), [1, 3, 5])
+
+
+class TestStatVarsMap(unittest.TestCase):
+    """Unit tests for StatVarsMap."""
+
+    def test_set_statvar_dup_svobs_missing_key_prefixed_variable(self):
+        """Tests missing svobs_key with prefixed variableMeasured."""
+        statvars_map = StatVarsMap(config_dict={'debug': True})
+        statvars_map.set_statvar_dup_svobs('missing_key_1', {
+            'variableMeasured': 'dcid:Count_Person',
+            'value': 10,
+        })
+        self.assertEqual(
+            statvars_map._counters.get_counter(
+                'error-statvar-obs-missing-for-dup-svobs'), 1)
+        self.assertEqual(
+            statvars_map._counters.get_counter(
+                'error-statvar-obs-missing-for-dup-svobs_Count_Person'), 1)
+
+    def test_set_statvar_dup_svobs_missing_key_missing_variable(self):
+        """Tests missing svobs_key when variableMeasured is absent."""
+        statvars_map = StatVarsMap(config_dict={'debug': True})
+        statvars_map.set_statvar_dup_svobs('missing_key_2', {'value': 20})
+        self.assertEqual(
+            statvars_map._counters.get_counter(
+                'error-statvar-obs-missing-for-dup-svobs'), 1)
+
+    def test_set_statvar_dup_svobs_missing_key_empty_variable(self):
+        """Tests missing svobs_key when variableMeasured is empty."""
+        statvars_map = StatVarsMap(config_dict={'debug': True})
+        statvars_map.set_statvar_dup_svobs('missing_key_3', {
+            'variableMeasured': '',
+            'value': 30,
+        })
+        self.assertEqual(
+            statvars_map._counters.get_counter(
+                'error-statvar-obs-missing-for-dup-svobs'), 1)
 
 
 if __name__ == '__main__':
