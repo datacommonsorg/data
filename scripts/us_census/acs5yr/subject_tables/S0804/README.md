@@ -4,7 +4,7 @@ The table provides data on the number of people who commute to work by means of 
 
 - Car, truck, or van - Drove Alone
 - Car, truck, or van - Carpooled
-- Public transportation (excluding taxicab) (2010–2018) / Public transportation (2019–2024)
+- Public transportation (excluding taxicab) / Public transportation
 - Worked from home
 
 The data is sliced by the following properties:

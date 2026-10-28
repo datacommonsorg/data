@@ -50,6 +50,9 @@
         "statType": {
             "Margin of Error": "marginOfError"
         },
+        "unit": {
+            "Margin of Error": ""
+        },
         "age": {
             "16 to 19 years": "[16 19 Years]",
             "20 to 24 years": "[20 24 Years]",
