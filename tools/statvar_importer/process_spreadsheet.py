@@ -108,7 +108,7 @@ def gdrive_get_credentials(token_file: str = 'tokens.json'):
                 f'{_HOME_DIR}/.config/gspread/credentials.json', _SCOPES)
             creds = flow.run_local_server(port=8100)
         # Save the credentials for the next run
-        with file_utli.FileIO(token_file, 'w') as token:
+        with file_util.FileIO(token_file, 'w') as token:
             token.write(creds.to_json())
     return creds
 

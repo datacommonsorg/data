@@ -31,7 +31,7 @@ sys.path.append(
 
 from counters import Counters
 from mcf_diff import diff_mcf_files
-from stat_var_processor import StatVarDataProcessor, process
+from stat_var_processor import StatVarDataProcessor, StatVarsMap, parse_mapped_columns, process
 
 
 class TestStatVarProcessor(unittest.TestCase):
@@ -145,6 +145,66 @@ class TestStatVarProcessor(unittest.TestCase):
         for test_file in self.test_files:
             logging.info(f'Testing file {test_file}...')
             self.process_file(test_file)
+
+
+class TestParseMappedColumns(unittest.TestCase):
+    """Unit tests for parse_mapped_columns."""
+
+    def test_parse_mapped_columns_int(self):
+        """Tests integer mapped_columns expands to 1..N."""
+        self.assertEqual(parse_mapped_columns(4), [1, 2, 3, 4])
+
+    def test_parse_mapped_columns_multi_int_list(self):
+        """Tests multi-element integer list preserves specific indices."""
+        self.assertEqual(parse_mapped_columns([1, 3, 5]), [1, 3, 5])
+
+    def test_parse_mapped_columns_single_letter(self):
+        """Tests single uppercase column letter expands to 1..N."""
+        self.assertEqual(parse_mapped_columns('C'), [1, 2, 3])
+
+    def test_parse_mapped_columns_multi_letters(self):
+        """Tests comma-separated column letters convert to 1-based indices."""
+        self.assertEqual(parse_mapped_columns('A,C,AA'), [1, 3, 27])
+
+    def test_parse_mapped_columns_multi_letters_whitespace_mixed_case(self):
+        """Tests whitespace-padded mixed-case column letters parse cleanly."""
+        self.assertEqual(parse_mapped_columns(' A , c , aa '), [1, 3, 27])
+
+    def test_parse_mapped_columns_zero_str(self):
+        """Tests string zero does not produce column index 0."""
+        self.assertEqual(parse_mapped_columns('0'), [])
+
+    def test_parse_mapped_columns_non_ascii_letter(self):
+        """Tests non-ASCII column letter is not parsed as a column index."""
+        self.assertEqual(parse_mapped_columns('é'), [])
+
+
+class TestStatVarsMap(unittest.TestCase):
+    """Unit tests for StatVarsMap."""
+
+    def test_set_statvar_dup_svobs_missing_key_prefixed_variable(self):
+        """Tests missing svobs_key with prefixed variableMeasured."""
+        counters = {}
+        statvars_map = StatVarsMap(config_dict={'debug': True},
+                                   counters_dict=counters)
+        statvars_map.set_statvar_dup_svobs('missing_key_1', {
+            'variableMeasured': 'dcid:Count_Person',
+            'value': 10,
+        })
+        self.assertEqual(
+            counters.get('error-statvar-obs-missing-for-dup-svobs'), 1)
+        self.assertEqual(
+            counters.get(
+                'error-statvar-obs-missing-for-dup-svobs_Count_Person'), 1)
+
+    def test_set_statvar_dup_svobs_missing_key_missing_variable(self):
+        """Tests missing svobs_key when variableMeasured is absent."""
+        counters = {}
+        statvars_map = StatVarsMap(config_dict={'debug': True},
+                                   counters_dict=counters)
+        statvars_map.set_statvar_dup_svobs('missing_key_2', {'value': 20})
+        self.assertEqual(
+            counters.get('error-statvar-obs-missing-for-dup-svobs'), 1)
 
 
 if __name__ == '__main__':
