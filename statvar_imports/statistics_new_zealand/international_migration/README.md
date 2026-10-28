@@ -7,7 +7,7 @@ Imports New Zealand international migration estimates (citizenship by visa by co
 - **Direct CSV URL**: https://www.stats.govt.nz/assets/Uploads/International-migration/International-migration-August-2026/Download-data/international-migration-august-2026-citizenship-by-visa-by-country-of-last-permanent-residence.csv
 - **License**: [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
 - **Place Coverage**: New Zealand (`country/NZL`)
-- **Release Frequency**: Monthly
+- **Release Frequency**: Weekly
 
 ## Important Files
 - `manifest.json`: Import automation specification.
