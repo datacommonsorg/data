@@ -32,7 +32,7 @@ The import is fully automated via scheduled Cloud Batch / Cloud Run execution:
 3. **Resolution & Validation (`genmcf`, differ, import_validation)**:
    - Resolves nodes via `genmcf`.
    - Compares against baseline version in GCS using `ImportDiffer`.
-   - Validates freshness (`MaxDate >= '2021'`) and checks deleted records threshold ($\le 0.1\%$) per `validation_config.json`.
+   - Validates freshness (`MaxDate >= '2025'` for the 207-StatVar annual series and `MaxDate >= '2023'` for the 66-StatVar historical series) and checks deleted records threshold ($\le 0.1\%$) per `validation_config.json`.
 
 ## 4. Running the Data Processor Locally
 
@@ -66,21 +66,7 @@ bash download.sh
 ## 5. Validation Configuration
 `validation_config.json` enforces:
 - `check_max_date_consistent`: Ensures MaxDate is uniform across all generated StatVars within each input.
-- `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `MaxDate >= '2023'` and `total_svs > 0`.
+- `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `MaxDate >= '2025'` for the annual series (`total_svs > 100` / Urban & Rural breakdown) and `MaxDate >= '2023'` for the historical series (`total_svs = 66`).
 - `check_deleted_records_percent`: Ensures deleted records do not exceed `0.1%`.
-
-## 6. Staging & Production Verification
-- **Resolved MCF**:
-  - GCS: `gs://resolved_mcf/country/Bulgaria/20261026/nodes.mcf@2`
-  - CNS: `/cns/jv-d/home/datcom/v3_resolved_mcf/country/Bulgaria/20261026/nodes.mcf@2` (21.74 MB, 55,981 nodes)
-    - `nodes.mcf-00000-of-00002`: Annual demographic refresh dataset (11,960 nodes)
-    - `nodes.mcf-00001-of-00002`: Historical multi-decade dataset (44,021 nodes)
-- **Unresolved Staging**:
-  - GCS: `gs://unresolved_mcf/country/Bulgaria/20261026/`
-  - CNS: `/cns/jv-d/home/datcom/v3_mcf/country/Bulgaria/20261026/`
-  - Tables: `BulgariaNSI_Demographics.tmcf`, `BulgariaNSI_Demographics.csv`, `BulgariaNSI_Demographics_history.tmcf`, `BulgariaNSI_Demographics_history.csv`
-- **Google3 Integration**:
-  - Import Manifest: `datacommons/import/mcf/manifest/international_stats/Bulgaria_Census.textproto` (cl/1007847204)
-  - Provenance: `datacommons/import/mcf/resolved_mcf/import/Bulgaria_Census.mcf`
 
 

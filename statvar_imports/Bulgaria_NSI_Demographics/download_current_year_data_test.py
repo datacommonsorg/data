@@ -27,8 +27,10 @@ if SCRIPT_DIR not in sys.path:
 from download_current_year_data import (
     EXPECTED_AGES,
     EXPECTED_DISTRICTS,
+    EXPECTED_HISTORICAL_AGES,
     to_num,
     validate_file_format,
+    validate_historical_file_format,
 )
 
 
@@ -43,20 +45,69 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
     def _create_mock_csv(self, year=2025, tamper_type=None):
         rows = [
             [
-                f"POPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE AND SEX AS OF 31.12.{year} (MOCK)",
-                "", "", "", "", "", "", "", "", ""
+                ("POPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE AND SEX"
+                 f" AS OF 31.12.{year} (MOCK)"),
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
             ],
             [
-                "Districts Age (years)", "Total", "", "", "Urban residence",
-                "", "", "Rural residence", "", ""
+                "Districts Age (years)",
+                "Total",
+                "",
+                "",
+                "Urban residence",
+                "",
+                "",
+                "Rural residence",
+                "",
+                "",
             ],
             [
-                "", "Total", "Male", "Female", "Total", "Male", "Female",
-                "Total", "Male", "Female"
+                "",
+                "Total",
+                "Male",
+                "Female",
+                "Total",
+                "Male",
+                "Female",
+                "Total",
+                "Male",
+                "Female",
             ],
         ]
+        n_ages = len(EXPECTED_AGES)
         for d in EXPECTED_DISTRICTS:
-            rows.append([d, "", "", "", "", "", "", "", "", ""])
+            d_tot = 100 * n_ages
+            d_m = 60 * n_ages
+            d_fem = 40 * n_ages
+            d_urb = 70 * n_ages
+            d_urb_m = 42 * n_ages
+            d_urb_fem = 28 * n_ages
+            d_rur = 30 * n_ages
+            d_rur_m = 18 * n_ages
+            d_rur_fem = 12 * n_ages
+            if tamper_type == "district_row_sex" and d == EXPECTED_DISTRICTS[0]:
+                d_fem = 100  # breaks d_tot == d_m + d_fem
+
+            rows.append([
+                d,
+                str(d_tot),
+                str(d_m),
+                str(d_fem),
+                str(d_urb),
+                str(d_urb_m),
+                str(d_urb_fem),
+                str(d_rur),
+                str(d_rur_m),
+                str(d_rur_fem),
+            ])
             for a in EXPECTED_AGES:
                 tot = 100
                 m = 60
@@ -68,12 +119,22 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                 rur_m = 18
                 rur_fem = 12
 
-                if tamper_type == "arithmetic_residence" and d == EXPECTED_DISTRICTS[
-                        0] and a == EXPECTED_AGES[0]:
+                if (tamper_type == "arithmetic_residence"
+                        and d == EXPECTED_DISTRICTS[0]
+                        and a == EXPECTED_AGES[0]):
                     rur_tot = 50  # 70 + 50 != 100
-                elif tamper_type == "arithmetic_sex" and d == EXPECTED_DISTRICTS[
-                        0] and a == EXPECTED_AGES[0]:
+                elif (tamper_type == "arithmetic_sex"
+                      and d == EXPECTED_DISTRICTS[0]
+                      and a == EXPECTED_AGES[0]):
                     fem = 30  # 60 + 30 != 100
+                elif (tamper_type == "arithmetic_urban_sex"
+                      and d == EXPECTED_DISTRICTS[0]
+                      and a == EXPECTED_AGES[0]):
+                    urb_fem = 20  # 42 + 20 != 70
+                elif (tamper_type == "arithmetic_rural_sex"
+                      and d == EXPECTED_DISTRICTS[0]
+                      and a == EXPECTED_AGES[0]):
+                    rur_fem = 10  # 18 + 10 != 30
 
                 row = [
                     a,
@@ -89,11 +150,13 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                 ]
                 rows.append(row)
 
-        temp_file = tempfile.NamedTemporaryFile(mode="w",
-                                                delete=False,
-                                                suffix=".csv",
-                                                newline="",
-                                                dir="/tmp")
+        temp_file = tempfile.NamedTemporaryFile(
+            mode="w",
+            delete=False,
+            suffix=".csv",
+            newline="",
+            dir="/tmp",
+        )
         writer = csv.writer(temp_file)
         writer.writerows(rows)
         temp_file.close()
@@ -107,14 +170,30 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
             if os.path.exists(csv_path):
                 os.remove(csv_path)
 
+    def test_validate_file_format_district_row_failure(self):
+        csv_path = self._create_mock_csv(year=2025,
+                                         tamper_type="district_row_sex")
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                validate_file_format(csv_path, expected_year=2025)
+            self.assertIn(
+                "Total (2200) != Male (1320) + Female (100)",
+                str(ctx.exception),
+            )
+        finally:
+            if os.path.exists(csv_path):
+                os.remove(csv_path)
+
     def test_validate_file_format_arithmetic_residence_failure(self):
         csv_path = self._create_mock_csv(year=2025,
                                          tamper_type="arithmetic_residence")
         try:
             with self.assertRaises(ValueError) as ctx:
                 validate_file_format(csv_path, expected_year=2025)
-            self.assertIn("Total (100) != Urban (70) + Rural (50)",
-                          str(ctx.exception))
+            self.assertIn(
+                "Total (100) != Urban (70) + Rural (50)",
+                str(ctx.exception),
+            )
         finally:
             if os.path.exists(csv_path):
                 os.remove(csv_path)
@@ -125,11 +204,72 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         try:
             with self.assertRaises(ValueError) as ctx:
                 validate_file_format(csv_path, expected_year=2025)
-            self.assertIn("Total (100) != Male (60) + Female (30)",
-                          str(ctx.exception))
+            self.assertIn(
+                "Total (100) != Male (60) + Female (30)",
+                str(ctx.exception),
+            )
         finally:
             if os.path.exists(csv_path):
                 os.remove(csv_path)
+
+    def test_validate_file_format_urban_sex_failure(self):
+        csv_path = self._create_mock_csv(year=2025,
+                                         tamper_type="arithmetic_urban_sex")
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                validate_file_format(csv_path, expected_year=2025)
+            self.assertIn(
+                "Urban (70) != Urban Male (42) + Urban Female (20)",
+                str(ctx.exception),
+            )
+        finally:
+            if os.path.exists(csv_path):
+                os.remove(csv_path)
+
+    def test_validate_file_format_rural_sex_failure(self):
+        csv_path = self._create_mock_csv(year=2025,
+                                         tamper_type="arithmetic_rural_sex")
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                validate_file_format(csv_path, expected_year=2025)
+            self.assertIn(
+                "Rural (30) != Rural Male (18) + Rural Female (10)",
+                str(ctx.exception),
+            )
+        finally:
+            if os.path.exists(csv_path):
+                os.remove(csv_path)
+
+    def test_validate_historical_file_format(self):
+        rows = [
+            ["POPULATION BY DISTRICTS, AGE AND SEX AS OF 31.12.", "", "", ""],
+            ["Districts", "Population as of 31.12.2011", "", ""],
+            ["Age (years)", "Total", "Male", "Female"],
+        ]
+        n_ages = len(EXPECTED_HISTORICAL_AGES)
+        for d in EXPECTED_DISTRICTS:
+            rows.append(
+                [d, str(100 * n_ages),
+                 str(48 * n_ages),
+                 str(52 * n_ages)])
+            for a in EXPECTED_HISTORICAL_AGES:
+                rows.append([a, "100", "48", "52"])
+
+        temp_file = tempfile.NamedTemporaryFile(
+            mode="w",
+            delete=False,
+            suffix=".csv",
+            newline="",
+            dir="/tmp",
+        )
+        writer = csv.writer(temp_file)
+        writer.writerows(rows)
+        temp_file.close()
+        try:
+            self.assertTrue(validate_historical_file_format(temp_file.name))
+        finally:
+            if os.path.exists(temp_file.name):
+                os.remove(temp_file.name)
 
 
 if __name__ == "__main__":

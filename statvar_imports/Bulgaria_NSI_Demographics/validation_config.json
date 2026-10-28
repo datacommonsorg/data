@@ -9,11 +9,11 @@
         },
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary.",
+            "description": "Verify all active StatVars meet the freshness boundary (MaxDate >= '2025' for annual 207-SV input; MaxDate >= '2023' for historical 66-SV input).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2023' AND total_svs > 0"
+                "condition": "((StatVar LIKE '%Urban%' OR StatVar LIKE '%Rural%' OR total_svs > 100) AND MaxDate >= '2025') OR (total_svs = 66 AND MaxDate >= '2023')"
             }
         },
         {

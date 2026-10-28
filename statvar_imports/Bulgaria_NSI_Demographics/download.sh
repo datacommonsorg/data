@@ -25,17 +25,31 @@ else
     gsutil cp "gs://unresolved_mcf/country/Bulgaria/input_files/*.csv" "${SCRIPT_DIR}/input_files/"
 fi
 
-# Sanitize trailing non-breaking spaces (\xa0), triple quotes, and footnote asterisks from NSI web exports
-python3 - "${SCRIPT_DIR}/input_files" << 'EOF'
-import glob, os, re, sys
+# Sanitize trailing non-breaking spaces (\xa0), triple quotes, and footnote asterisks from NSI web exports,
+# and validate arithmetic consistency across both annual and historical CSVs.
+python3 - "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}" << 'EOF'
+import csv, glob, os, re, sys
 
 input_dir = sys.argv[1]
-for fpath in glob.glob(os.path.join(input_dir, '*.csv')):
+script_dir = sys.argv[2]
+sys.path.insert(0, script_dir)
+from download_current_year_data import validate_file_format, validate_historical_file_format
+
+for fpath in sorted(glob.glob(os.path.join(input_dir, '*.csv'))):
     with open(fpath, 'r', encoding='utf-8') as f:
         content = f.read()
     content = content.replace('"""', '"').replace('\xa0', ' ').replace('AS OF 31.12.*', 'AS OF 31.12.')
     content = re.sub(r'(\b\d+)\s*-\s*(\d+\b)', r'\1 - \2', content)
-    lines = [l.rstrip() for l in content.splitlines()]
-    with open(fpath, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(lines) + '\n')
+    reader = list(csv.reader(content.splitlines()))
+    cleaned_rows = [[c.strip() for c in row] for row in reader]
+    with open(fpath, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerows(cleaned_rows)
+
+    bname = os.path.basename(fpath)
+    m = re.search(r'Year_input_(\d{4})\.csv$', bname)
+    if m:
+        validate_file_format(fpath, int(m.group(1)))
+    else:
+        validate_historical_file_format(fpath)
 EOF
