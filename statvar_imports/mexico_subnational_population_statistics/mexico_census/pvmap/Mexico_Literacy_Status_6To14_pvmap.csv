@@ -1,4 +1,5 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4
+"Población de 6 a 14 años por entidad federativa según aptitud de leer y escribir, 2020",observationDate,2020,,,,,,
 "Población de 6 a 14 años por entidad federativa y sexo según aptitud para leer y escribir, 2020",observationDate,2020,,,,,,
 "Población de 6 a 14 años por entidad federativa y sexo según aptitud para leer y escribir, 2025",observationDate,2025,,,,,,
 "Población de 6 a 14 años por entidad federativa y sexo según aptitud para leer y escribir, 2030",observationDate,2030,,,,,,
@@ -11,5 +12,10 @@ Total,gender,"""""",,,,,,
 Mujeres,gender,Female,,,,,,
 Hombres,gender,Male,,,,,,
 Población de 6 a 14 años (Valor),value,{Number},,,,,,
+Sabe leer y escribir (Valor),value,{Number},literacyStatus,Literate,,,,
+No sabe leer y escribir (Valor),value,{Number},literacyStatus,Illiterate,,,,
 Sabe leer y escribir (Valor porcentual),value,{Number},literacyStatus,Literate,unit,Percent,,
 No sabe leer y escribir (Valor porcentual),value,{Number},literacyStatus,Illiterate,unit,Percent,,
+
+
+

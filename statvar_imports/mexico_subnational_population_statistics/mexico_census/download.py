@@ -13,25 +13,31 @@
 # limitations under the License.
 """Downloads raw INEGI data for the 21 MexicoCensus datasets.
 
-All API base URLs and dataset identifiers are loaded from config.json or
-overridden via command-line flags. No URLs are hardcoded in this script.
+All API base URLs, GCS bucket paths, and dataset identifiers are loaded from
+config.json. No URLs are hardcoded in this script.
 """
 
 import csv
 import datetime
+import fnmatch
+import glob
 import itertools
 import json
 import os
+import re
+import shutil
 from typing import Any, Dict, List, Optional, Tuple
 
 from absl import app
 from absl import flags
 from absl import logging
+from google.cloud import storage
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 
 FLAGS = flags.FLAGS
 
@@ -39,26 +45,6 @@ flags.DEFINE_string(
     'config_path',
     os.path.join(_SCRIPT_DIR, 'config.json'),
     'Path to JSON configuration file containing API endpoints and datasets.',
-)
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_SCRIPT_DIR, 'input_files'),
-    'Directory where downloaded raw input CSV files are written.',
-)
-flags.DEFINE_string(
-    'pxweb_api_base_url',
-    None,
-    'Optional override for INEGI PxWeb API base URL.',
-)
-flags.DEFINE_string(
-    'cuadros_api_base_url',
-    None,
-    'Optional override for INEGI ServicioCuadros API base URL.',
-)
-flags.DEFINE_list(
-    'datasets',
-    None,
-    'Optional comma-separated list of dataset names to download.',
 )
 
 _INEGI_HEADER_TITLE = (
@@ -478,12 +464,6 @@ def fetch_cuadros_raw_table(
     return parse_cuadros_response(json_data)
 
 
-def read_csv_rows(csv_path: str) -> List[List[str]]:
-    """Reads all rows from a UTF-8 CSV file."""
-    with open(csv_path, 'r', encoding='utf-8') as f:
-        return list(csv.reader(f))
-
-
 def write_csv_rows(output_path: str, rows: List[List[str]]) -> None:
     """Atomically writes CSV rows to output_path via a temporary .tmp file."""
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
@@ -494,65 +474,166 @@ def write_csv_rows(output_path: str, rows: List[List[str]]) -> None:
     os.replace(temp_file, output_path)
 
 
-def download_all_datasets(
-    config_path: str,
+def _extract_snapshot_year(rows: List[List[str]]) -> Optional[str]:
+    """Extracts the 4-digit snapshot year from the INEGI table title row."""
+    if len(rows) < 2 or not rows[1]:
+        return None
+    title_cell = str(rows[1][0]).strip()
+    matches = re.findall(r'\b(19\d{2}|20\d{2})\b', title_cell)
+    return matches[-1] if matches else None
+
+
+def _parse_gcs_uri(gcs_uri: str) -> Tuple[str, str]:
+    """Splits a gs://bucket/prefix URI into (bucket_name, prefix_without_trailing_slash)."""
+    without_scheme = gcs_uri[len('gs://'):].strip('/')
+    if '/' in without_scheme:
+        bucket_name, prefix = without_scheme.split('/', 1)
+        return bucket_name, prefix.strip('/')
+    return without_scheme, ''
+
+
+def _write_year_archived_dataset(
+    ds_name: str,
+    ds_cfg: Dict[str, Any],
+    raw_rows: List[List[str]],
     output_dir: str,
-    pxweb_base_override: Optional[str] = None,
-    cuadros_base_override: Optional[str] = None,
-    selected_datasets: Optional[List[str]] = None,
+    historical_override: Optional[str] = None,
 ) -> None:
+    """Syncs historical year snapshots via historical_inputs/ (and GCS) and copies to output_dir."""
+    hist_target = (historical_override or
+                   ds_cfg.get('historical_dir', 'historical_inputs'))
+
+    # Remove any legacy un-suffixed input file so globbing *_input.csv does not
+    # process the latest snapshot twice.
+    legacy_path = os.path.join(output_dir, f'{ds_name}_input.csv')
+    if os.path.exists(legacy_path):
+        os.remove(legacy_path)
+
+    file_pattern = f'{ds_name}_*_input.csv'
+    year = _extract_snapshot_year(raw_rows)
+    out_filename = (f'{ds_name}_{year}_input.csv'
+                    if year else f'{ds_name}_input.csv')
+    out_path = os.path.join(output_dir, out_filename)
+
+    if hist_target.startswith('gs://'):
+        bucket_name, prefix = _parse_gcs_uri(hist_target)
+        if not prefix.endswith('historical_inputs'):
+            prefix = (f'{prefix}/historical_inputs'
+                      if prefix else 'historical_inputs')
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(bucket_name)
+        blob_prefix = f'{prefix}/{ds_name}_'
+
+        local_hist_dir = os.path.join(_SCRIPT_DIR, 'historical_inputs')
+        os.makedirs(local_hist_dir, exist_ok=True)
+
+        # 1. Download all previously archived year snapshots from GCS
+        #    (gs://.../historical_inputs/) into local historical_inputs/.
+        for blob in bucket.list_blobs(prefix=blob_prefix):
+            fname = os.path.basename(blob.name)
+            if fnmatch.fnmatch(fname, file_pattern):
+                hist_file_path = os.path.join(local_hist_dir, fname)
+                blob.download_to_filename(hist_file_path)
+                logging.info(
+                    'Downloaded historical snapshot gs://%s/%s -> %s',
+                    bucket_name,
+                    blob.name,
+                    hist_file_path,
+                )
+
+        # 2. Write the newly downloaded INEGI snapshot to local historical_inputs/
+        #    and upload it back to gs://.../historical_inputs/.
+        hist_out_path = os.path.join(local_hist_dir, out_filename)
+        write_csv_rows(hist_out_path, raw_rows)
+        if year:
+            dest_blob_name = f'{prefix}/{out_filename}'
+            dest_blob = bucket.blob(dest_blob_name)
+            dest_blob.upload_from_filename(hist_out_path)
+            logging.info(
+                'Uploaded year snapshot %s -> gs://%s/%s',
+                hist_out_path,
+                bucket_name,
+                dest_blob_name,
+            )
+
+        # 3. Copy all year snapshots from local historical_inputs/ to output_dir (input_files/).
+        pattern = os.path.join(local_hist_dir, file_pattern)
+        for hist_path in sorted(glob.glob(pattern)):
+            dest_path = os.path.join(output_dir, os.path.basename(hist_path))
+            if os.path.abspath(hist_path) != os.path.abspath(dest_path):
+                shutil.copy2(hist_path, dest_path)
+    else:
+        hist_dir = (hist_target if os.path.isabs(hist_target) else os.path.join(
+            _SCRIPT_DIR, hist_target))
+        os.makedirs(hist_dir, exist_ok=True)
+        hist_out_path = os.path.join(hist_dir, out_filename)
+        write_csv_rows(hist_out_path, raw_rows)
+
+        pattern = os.path.join(hist_dir, file_pattern)
+        for hist_path in sorted(glob.glob(pattern)):
+            dest_path = os.path.join(output_dir, os.path.basename(hist_path))
+            if os.path.abspath(hist_path) != os.path.abspath(dest_path):
+                shutil.copy2(hist_path, dest_path)
+
+    logging.info(
+        'Successfully wrote %s (%d rows).',
+        out_path,
+        len(raw_rows),
+    )
+
+
+def download_all_datasets(config_path: str) -> None:
     """Downloads all configured raw datasets and writes input_files/*_input.csv."""
     with open(config_path, 'r', encoding='utf-8') as f:
         config = json.load(f)
 
-    pxweb_base = pxweb_base_override or config.get('pxweb_api_base_url', '')
-    cuadros_base = cuadros_base_override or config.get(
-        'cuadros_api_base_url', '')
+    pxweb_base = config.get('pxweb_api_base_url', '')
+    cuadros_base = config.get('cuadros_api_base_url', '')
     if not pxweb_base or not cuadros_base:
-        raise ValueError(
-            'API base URLs must be provided via config.json or CLI flags.')
+        raise ValueError('API base URLs must be provided in config.json.')
 
+    hist_default = config.get('historical_gcs_path')
     datasets_cfg: Dict[str, Dict[str, Any]] = config.get('datasets', {})
-    target_names = selected_datasets or sorted(datasets_cfg.keys())
 
-    os.makedirs(output_dir, exist_ok=True)
-    session = create_http_session()
+    os.makedirs(_OUTPUT_DIR, exist_ok=True)
+    with create_http_session() as session:
+        for ds_name in sorted(datasets_cfg.keys()):
+            ds_cfg = datasets_cfg[ds_name]
+            source_type = ds_cfg.get('source_type', 'pxweb')
 
-    for ds_name in target_names:
-        if ds_name not in datasets_cfg:
-            raise KeyError(f'Unknown dataset in --datasets: {ds_name}')
-        ds_cfg = datasets_cfg[ds_name]
-        source_type = ds_cfg.get('source_type', 'pxweb')
+            logging.info('Downloading raw data for %s (%s)...', ds_name,
+                         source_type)
+            if source_type == 'pxweb':
+                raw_rows = fetch_pxweb_raw_table(session, pxweb_base, ds_cfg)
+            elif source_type == 'cuadros':
+                raw_rows = fetch_cuadros_raw_table(session, cuadros_base,
+                                                   ds_cfg)
+            else:
+                raise ValueError(
+                    f'Unsupported source_type for {ds_name}: {source_type}')
 
-        logging.info('Downloading raw data for %s (%s)...', ds_name,
-                     source_type)
-        if source_type == 'pxweb':
-            raw_rows = fetch_pxweb_raw_table(session, pxweb_base, ds_cfg)
-        elif source_type == 'cuadros':
-            raw_rows = fetch_cuadros_raw_table(session, cuadros_base, ds_cfg)
-        else:
-            raise ValueError(
-                f'Unsupported source_type for {ds_name}: {source_type}')
-
-        out_path = os.path.join(output_dir, f'{ds_name}_input.csv')
-        write_csv_rows(out_path, raw_rows)
-        logging.info(
-            'Successfully wrote %s (%d rows).',
-            out_path,
-            len(raw_rows),
-        )
+            if ds_cfg.get('archive_by_year'):
+                _write_year_archived_dataset(
+                    ds_name,
+                    ds_cfg,
+                    raw_rows,
+                    _OUTPUT_DIR,
+                    historical_override=hist_default,
+                )
+            else:
+                out_path = os.path.join(_OUTPUT_DIR, f'{ds_name}_input.csv')
+                write_csv_rows(out_path, raw_rows)
+                logging.info(
+                    'Successfully wrote %s (%d rows).',
+                    out_path,
+                    len(raw_rows),
+                )
 
 
 def main(argv: List[str]) -> None:
     """CLI entry point."""
     del argv
-    download_all_datasets(
-        config_path=FLAGS.config_path,
-        output_dir=FLAGS.output_dir,
-        pxweb_base_override=FLAGS.pxweb_api_base_url,
-        cuadros_base_override=FLAGS.cuadros_api_base_url,
-        selected_datasets=FLAGS.datasets,
-    )
+    download_all_datasets(config_path=FLAGS.config_path)
 
 
 if __name__ == '__main__':

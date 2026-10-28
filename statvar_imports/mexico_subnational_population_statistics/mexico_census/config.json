@@ -1,8 +1,9 @@
 {
   "pxweb_api_base_url": "https://www.inegi.org.mx/app/tabulados/pxwebapi/api",
   "cuadros_api_base_url": "https://www.inegi.org.mx/app/tabulados/serviciocuadros/wsDataService.svc/listaindicadorbiinegi",
+  "historical_gcs_path": "gs://unresolved_mcf/mexico_census/historical_inputs",
   "datasets": {
-    "Mexcio_Migration": {
+    "Mexico_Migration": {
       "source_type": "pxweb",
       "pxq_id": "Migracion_Migracion_03_793b2477-4037-43d4-9a60-90fb2592cdbc",
       "file_id": "Migracion/Migracion_03"
@@ -41,6 +42,20 @@
       "source_type": "pxweb",
       "pxq_id": "Mortalidad_Mortalidad_09_8d50a2d5-a862-4f99-aca8-1d9274cbcb74",
       "file_id": "Mortalidad/Mortalidad_09"
+    },
+    "Mexico_Literacy_Status_6To14": {
+      "source_type": "pxweb",
+      "pxq_id": "Educacion_Educacion_01_72949576-02b2-48ba-8e9e-58e6412c1fd0",
+      "file_id": "Educacion/Educacion_01",
+      "archive_by_year": true,
+      "historical_dir": "gs://unresolved_mcf/mexico_census/historical_inputs"
+    },
+    "Mexico_Literate_15OrMore": {
+      "source_type": "pxweb",
+      "pxq_id": "Educacion_Educacion_02_fa5c35ea-9385-41f0-86df-bf2bbfc929e3",
+      "file_id": "Educacion/Educacion_02",
+      "archive_by_year": true,
+      "historical_dir": "gs://unresolved_mcf/mexico_census/historical_inputs"
     },
     "Mexico_Male_Mortality_Rate": {
       "source_type": "pxweb",
