@@ -27,17 +27,17 @@ To preserve true marginal totals across `EducationalAttainment`, `Gender`, and `
 | 1 | `education_nuts1` | **Group 1: Total** | NUTS1 | 3 | 3 | 6 | `education_total_pvmap.csv` | `education_total_metadata.csv` | `education_total_statvar_remap.csv` |
 | 2 | `education_nuts2` | **Group 1: Total** | NUTS2 | 8 | 3 | 6 | `education_total_pvmap.csv` | `education_total_metadata.csv` | `education_total_statvar_remap.csv` |
 | 3 | `education_nuts3` | **Group 1: Total** | NUTS3 | 21 | 3 | 6 | `education_total_pvmap.csv` | `education_total_metadata.csv` | `education_total_statvar_remap.csv` |
-| 4 | `education_muncipaltiy` | **Group 1: Total** | Municipality | 289 | 3 | 6 | `education_total_pvmap.csv` | `education_total_metadata.csv` | `education_total_statvar_remap.csv` |
+| 4 | `education_municipality` | **Group 1: Total** | Municipality | 289 | 3 | 6 | `education_total_pvmap.csv` | `education_total_metadata.csv` | `education_total_statvar_remap.csv` |
 | 5 | `education_gender_nuts1` | **Group 2: Gender** | NUTS1 | 3 | 4 | 12 | `education_gender_pvmap.csv` | `education_gender_metadata.csv` | `education_gender_statvar_remap.csv` |
 | 6 | `education_gender_nuts2` | **Group 2: Gender** | NUTS2 | 8 | 4 | 12 | `education_gender_pvmap.csv` | `education_gender_metadata.csv` | `education_gender_statvar_remap.csv` |
 | 7 | `education_gender_nuts3` | **Group 2: Gender** | NUTS3 | 21 | 4 | 12 | `education_gender_pvmap.csv` | `education_gender_metadata.csv` | `education_gender_statvar_remap.csv` |
-| 8 | `education_gender_muncipaltiy` | **Group 2: Gender** | Municipality | 289 | 4 | 12 | `education_gender_pvmap.csv` | `education_gender_metadata.csv` | `education_gender_statvar_remap.csv` |
+| 8 | `education_gender_municipality` | **Group 2: Gender** | Municipality | 289 | 4 | 12 | `education_gender_pvmap.csv` | `education_gender_metadata.csv` | `education_gender_statvar_remap.csv` |
 | 9 | `education_age_nuts1` | **Group 3: Age** | NUTS1 | 3 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
 | 10 | `education_age_nuts2` | **Group 3: Age** | NUTS2 | 8 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
 | 11 | `education_age_nuts3` | **Group 3: Age** | NUTS3 | 21 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
-| 12 | `education_age_muncipality_1` | **Group 3: Age** | Municipality (Part 1) | 107 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
-| 13 | `education_age_muncipality_2` | **Group 3: Age** | Municipality (Part 2) | 96 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
-| 14 | `education_age_muncipality_3` | **Group 3: Age** | Municipality (Part 3) | 86 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
+| 12 | `education_age_municipality_1` | **Group 3: Age** | Municipality (Part 1) | 107 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
+| 13 | `education_age_municipality_2` | **Group 3: Age** | Municipality (Part 2) | 96 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
+| 14 | `education_age_municipality_3` | **Group 3: Age** | Municipality (Part 3) | 86 | 3 | 36 | `education_age_pvmap.csv` | `education_age_metadata.csv` | `education_age_statvar_remap.csv` |
 | 15 | `education_age_gender_nuts1` | **Group 4: Age×Gender** | NUTS1 | 3 | 4 | 72 | `education_age_gender_pvmap.csv` | `education_age_gender_metadata.csv` | `education_age_gender_statvar_remap.csv` |
 | 16 | `education_age_gender_nuts2` | **Group 4: Age×Gender** | NUTS2 | 8 | 4 | 72 | `education_age_gender_pvmap.csv` | `education_age_gender_metadata.csv` | `education_age_gender_statvar_remap.csv` |
 | 17 | `education_age_gender_nuts3` | **Group 4: Age×Gender** | NUTS3 | 21 | 4 | 72 | `education_age_gender_pvmap.csv` | `education_age_gender_metadata.csv` | `education_age_gender_statvar_remap.csv` |

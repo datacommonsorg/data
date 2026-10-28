@@ -33,9 +33,9 @@
                     "node_mcf": "output/education_nuts3*.mcf"
                 },
                 {
-                    "template_mcf": "output/education_muncipaltiy.tmcf",
-                    "cleaned_csv": "output/education_muncipaltiy.csv",
-                    "node_mcf": "output/education_muncipaltiy*.mcf"
+                    "template_mcf": "output/education_municipality.tmcf",
+                    "cleaned_csv": "output/education_municipality.csv",
+                    "node_mcf": "output/education_municipality*.mcf"
                 },
                 {
                     "template_mcf": "output/education_gender_nuts1.tmcf",
@@ -53,9 +53,9 @@
                     "node_mcf": "output/education_gender_nuts3*.mcf"
                 },
                 {
-                    "template_mcf": "output/education_gender_muncipaltiy.tmcf",
-                    "cleaned_csv": "output/education_gender_muncipaltiy.csv",
-                    "node_mcf": "output/education_gender_muncipaltiy*.mcf"
+                    "template_mcf": "output/education_gender_municipality.tmcf",
+                    "cleaned_csv": "output/education_gender_municipality.csv",
+                    "node_mcf": "output/education_gender_municipality*.mcf"
                 },
                 {
                     "template_mcf": "output/education_age_nuts1.tmcf",
@@ -73,19 +73,19 @@
                     "node_mcf": "output/education_age_nuts3*.mcf"
                 },
                 {
-                    "template_mcf": "output/education_age_muncipality_1.tmcf",
-                    "cleaned_csv": "output/education_age_muncipality_1.csv",
-                    "node_mcf": "output/education_age_muncipality_1*.mcf"
+                    "template_mcf": "output/education_age_municipality_1.tmcf",
+                    "cleaned_csv": "output/education_age_municipality_1.csv",
+                    "node_mcf": "output/education_age_municipality_1*.mcf"
                 },
                 {
-                    "template_mcf": "output/education_age_muncipality_2.tmcf",
-                    "cleaned_csv": "output/education_age_muncipality_2.csv",
-                    "node_mcf": "output/education_age_muncipality_2*.mcf"
+                    "template_mcf": "output/education_age_municipality_2.tmcf",
+                    "cleaned_csv": "output/education_age_municipality_2.csv",
+                    "node_mcf": "output/education_age_municipality_2*.mcf"
                 },
                 {
-                    "template_mcf": "output/education_age_muncipality_3.tmcf",
-                    "cleaned_csv": "output/education_age_muncipality_3.csv",
-                    "node_mcf": "output/education_age_muncipality_3*.mcf"
+                    "template_mcf": "output/education_age_municipality_3.tmcf",
+                    "cleaned_csv": "output/education_age_municipality_3.csv",
+                    "node_mcf": "output/education_age_municipality_3*.mcf"
                 },
                 {
                     "template_mcf": "output/education_age_gender_nuts1.tmcf",

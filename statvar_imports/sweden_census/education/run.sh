@@ -41,7 +41,7 @@ run_group() {
 }
 
 # 1. Group 1: Total by Education Level (4 files, 6 StatVars, mapped_columns=3)
-for f in education_nuts1 education_nuts2 education_nuts3 education_muncipaltiy; do
+for f in education_nuts1 education_nuts2 education_nuts3 education_municipality; do
   run_group "$f" \
     "education_total_pvmap.csv" \
     "education_total_metadata.csv" \
@@ -49,7 +49,7 @@ for f in education_nuts1 education_nuts2 education_nuts3 education_muncipaltiy; 
 done
 
 # 2. Group 2: By Education Level & Gender (4 files, 12 StatVars, mapped_columns=4)
-for f in education_gender_nuts1 education_gender_nuts2 education_gender_nuts3 education_gender_muncipaltiy; do
+for f in education_gender_nuts1 education_gender_nuts2 education_gender_nuts3 education_gender_municipality; do
   run_group "$f" \
     "education_gender_pvmap.csv" \
     "education_gender_metadata.csv" \
@@ -58,7 +58,7 @@ done
 
 # 3. Group 3: By Education Level & Age Group (6 files, 36 StatVars, mapped_columns=3)
 for f in education_age_nuts1 education_age_nuts2 education_age_nuts3 \
-         education_age_muncipality_1 education_age_muncipality_2 education_age_muncipality_3; do
+         education_age_municipality_1 education_age_municipality_2 education_age_municipality_3; do
   run_group "$f" \
     "education_age_pvmap.csv" \
     "education_age_metadata.csv" \

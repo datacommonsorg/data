@@ -257,9 +257,20 @@ def query_scb_chunk(
       resp.raise_for_status()
       # Handle UTF-8 BOM if present in SCB JSON response
       text = resp.content.decode('utf-8-sig')
-      data = json.loads(text).get('data', [])
+      resp_json = json.loads(text)
+      cols = [
+          col['code']
+          for col in resp_json.get('columns', [])
+          if col.get('type') != 'c'
+      ]
+      data = resp_json.get('data', [])
       logging.info('Received %d records from SCB API.', len(data))
-      return data
+      results = []
+      for row in data:
+        row_dict = dict(zip(cols, row['key']))
+        row_dict['value'] = row['values'][0]
+        results.append(row_dict)
+      return results
     except requests.HTTPError as e:
       if (
           e.response is not None
@@ -424,8 +435,12 @@ def main(argv):
         contents_code,
     )
     for row in rows:
-      reg_code, age_code, edu_code, sex_code, yr = row['key']
-      val_str = row['values'][0]
+      reg_code = row['Region']
+      age_code = row['Alder']
+      edu_code = row['UtbildningsNiva']
+      sex_code = row['Kon']
+      yr = row['Tid']
+      val_str = row['value']
       val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
 
       nuts3_label, nuts2_label, nuts1_label = COUNTY_TO_NUTS[reg_code]
@@ -470,8 +485,12 @@ def main(argv):
           contents_code,
       )
       for row in rows:
-        reg_code, age_code, edu_code, sex_code, yr = row['key']
-        val_str = row['values'][0]
+        reg_code = row['Region']
+        age_code = row['Alder']
+        edu_code = row['UtbildningsNiva']
+        sex_code = row['Kon']
+        yr = row['Tid']
+        val_str = row['value']
         val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
 
         muni_label = muni_code_to_label[reg_code]
@@ -525,7 +544,7 @@ def main(argv):
       data_store,
   )
   write_wide_csv(
-      os.path.join(out_dir, 'education_muncipaltiy.csv'),
+      os.path.join(out_dir, 'education_municipality.csv'),
       title_no_sex,
       False,
       muni_labels_sorted,
@@ -563,7 +582,7 @@ def main(argv):
       data_store,
   )
   write_wide_csv(
-      os.path.join(out_dir, 'education_gender_muncipaltiy.csv'),
+      os.path.join(out_dir, 'education_gender_municipality.csv'),
       title_with_sex,
       True,
       muni_labels_sorted,
@@ -602,7 +621,7 @@ def main(argv):
   )
   # Split municipalities into 3 parts (107, 96, 87; 86 after skipping 2463 Åsele)
   write_wide_csv(
-      os.path.join(out_dir, 'education_age_muncipality_1.csv'),
+      os.path.join(out_dir, 'education_age_municipality_1.csv'),
       title_no_sex,
       False,
       muni_labels_sorted[:107],
@@ -611,7 +630,7 @@ def main(argv):
       data_store,
   )
   write_wide_csv(
-      os.path.join(out_dir, 'education_age_muncipality_2.csv'),
+      os.path.join(out_dir, 'education_age_municipality_2.csv'),
       title_no_sex,
       False,
       muni_labels_sorted[107:203],
@@ -620,7 +639,7 @@ def main(argv):
       data_store,
   )
   write_wide_csv(
-      os.path.join(out_dir, 'education_age_muncipality_3.csv'),
+      os.path.join(out_dir, 'education_age_municipality_3.csv'),
       title_no_sex,
       False,
       muni_labels_sorted[203:],

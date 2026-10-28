@@ -70,10 +70,19 @@ class DownloadEducationUnitTest(unittest.TestCase):
     fake_session = mock.MagicMock(spec=requests.Session)
     fake_resp = mock.MagicMock()
     fake_resp.status_code = 200
-    expected_rows = [
+    columns = [
+        {'code': 'Region'},
+        {'code': 'Alder'},
+        {'code': 'UtbildningsNiva'},
+        {'code': 'Kon'},
+        {'code': 'Tid'},
+    ]
+    data = [
         {'key': ['01', 'tot16-74', '1', '1', '2024'], 'values': ['123']}
     ]
-    fake_resp.content = json.dumps({'data': expected_rows}).encode('utf-8-sig')
+    fake_resp.content = json.dumps({'columns': columns, 'data': data}).encode(
+        'utf-8-sig'
+    )
     fake_session.post.return_value = fake_resp
 
     rows = download_education.query_scb_chunk(
@@ -85,7 +94,15 @@ class DownloadEducationUnitTest(unittest.TestCase):
         years=['2024'],
         contents_code='UF0506B1',
     )
-    self.assertEqual(rows, expected_rows)
+    expected_results = [{
+        'Region': '01',
+        'Alder': 'tot16-74',
+        'UtbildningsNiva': '1',
+        'Kon': '1',
+        'Tid': '2024',
+        'value': '123',
+    }]
+    self.assertEqual(rows, expected_results)
     self.assertEqual(fake_session.post.call_count, 1)
 
   def test_query_scb_chunk_fails_immediately_on_400(self):
