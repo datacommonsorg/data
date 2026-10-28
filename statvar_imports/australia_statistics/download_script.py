@@ -77,8 +77,7 @@ ABS_HEALTH_2021_URL = (
 ABS_INCOME_URL = (
     'https://www.abs.gov.au/statistics/economy/finance/'
     'household-income-and-wealth-australia/2019-20/'
-    '1.%20Household%20income%20and%20income%20distribution%2C%20Australia.xlsx'
-)
+    '1.%20Household%20income%20and%20income%20distribution%2C%20Australia.xlsx')
 
 STATIC_DATASETS: dict[str, str] = {
     'abs_lf_sdmx.csv': ABS_LF_SDMX_URL,
@@ -169,7 +168,7 @@ def _download_static_file(filename: str, url: str,
 
 
 def _download_recent_life_expectancy_workbooks(
-    output_dir: str, ) -> dict[str, int]:
+    output_dir: str,) -> dict[str, int]:
     """Downloads ABS 3-year period Life Tables workbooks as-is (2016-2018+)."""
     session = _get_session()
     current_year = time.gmtime().tm_year

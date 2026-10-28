@@ -251,8 +251,8 @@ def parse_sdmx_labour_force_csv(csv_text: str) -> list[dict[str, str]]:
         sex = r.get('SEX', '').strip()
         period = r.get('TIME_PERIOD', '').strip()
         obs_val = r.get('OBS_VALUE', '').strip()
-        if (not obs_val or region not in SDMX_REGION_CODES
-                or (measure, sex) not in LF_MEASURES):
+        if (not obs_val or region not in SDMX_REGION_CODES or
+            (measure, sex) not in LF_MEASURES):
             continue
         indicator_cd = f'LF_{measure}_{sex}'
         if measure == 'M13':
@@ -279,8 +279,8 @@ def parse_sdmx_erp_q_csv(csv_text: str) -> list[dict[str, str]]:
         sex = r.get('SEX', '').strip()
         age = r.get('AGE', '').strip()
         obs_val = r.get('OBS_VALUE', '').strip()
-        if (not obs_val or region not in SDMX_REGION_CODES
-                or sex not in ('1', '2', '3') or age not in ERP_AGES):
+        if (not obs_val or region not in SDMX_REGION_CODES or
+                sex not in ('1', '2', '3') or age not in ERP_AGES):
             continue
         indicator_cd = f'ERP_{sex}_{age}'
         val_str = str(int(round(float(obs_val))))
@@ -289,7 +289,7 @@ def parse_sdmx_erp_q_csv(csv_text: str) -> list[dict[str, str]]:
 
 
 def parse_census_2021_population_xlsx(
-    xlsx_bytes: bytes, ) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    xlsx_bytes: bytes,) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
     """Parses 2021 Census Population data summary.xlsx (Table 1 and Table 3)."""
     wb = openpyxl.load_workbook(io.BytesIO(xlsx_bytes), data_only=True)
     gender_rows: list[dict[str, str]] = []
@@ -368,7 +368,8 @@ def parse_historical_population_xls(
         sh = wb.sheet_by_name(sheet_name)
         years = {
             c: str(int(float(sh.cell_value(4, c))))
-            for c in range(1, sh.ncols) if sh.cell_value(4, c) != ''
+            for c in range(1, sh.ncols)
+            if sh.cell_value(4, c) != ''
         }
         gender_lbl: str | None = None
         out: list[dict[str, str]] = []
@@ -378,8 +379,8 @@ def parse_historical_population_xls(
                 gender_lbl = lbl
                 continue
             if lbl in HIST_AGE_LABELS and gender_lbl is not None:
-                age_key = ('6-9' if (five_to_six
-                                     and lbl in ('5-9', '5-9 years')) else lbl)
+                age_key = ('6-9' if (five_to_six and
+                                     lbl in ('5-9', '5-9 years')) else lbl)
                 indicator_cd = f'POP_{gender_lbl}_{age_key}'
                 for c, yr in years.items():
                     val = sh.cell_value(r, c)
@@ -413,7 +414,7 @@ def parse_historical_population_xls(
 
 
 def parse_health_2021_xlsx(
-    xlsx_bytes: bytes, ) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    xlsx_bytes: bytes,) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
     """Parses 2021 Census Health data summary.xlsx (Table 1 and Table 3)."""
     wb = openpyxl.load_workbook(io.BytesIO(xlsx_bytes), data_only=True)
 
@@ -512,7 +513,7 @@ def parse_household_income_xlsx(xlsx_bytes: bytes) -> list[dict[str, str]]:
 
 
 def parse_historical_life_expectancy_xls(
-    xls_bytes: bytes, ) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    xls_bytes: bytes,) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
     """Parses ABS 3105065001ds0006_2019.xls (Tables 6.1, 6.2, and 6.6)."""
     wb = xlrd.open_workbook(file_contents=xls_bytes)
 
@@ -558,7 +559,8 @@ def parse_historical_life_expectancy_xls(
         sh = wb.sheet_by_name(sname)
         cols = {
             c: str(sh.cell_value(4, c)).strip().split('-')[1]
-            for c in range(1, sh.ncols) if str(sh.cell_value(4, c)).strip()
+            for c in range(1, sh.ncols)
+            if str(sh.cell_value(4, c)).strip()
         }
         for r in range(6, sh.nrows):
             age_v = sh.cell_value(r, 0)
@@ -897,12 +899,10 @@ def _stage_inputs(raw_files: list[str], staged_dir: str) -> list[str]:
 def _prepare_local_statvar_mcf(existing_statvar_mcf: str,
                                shards_tmp_dir: str) -> str:
     """Copies GCS existing_statvar_mcf locally once so shards do not re-download."""
-    if not existing_statvar_mcf or not existing_statvar_mcf.startswith(
-            'gs://'):
+    if not existing_statvar_mcf or not existing_statvar_mcf.startswith('gs://'):
         return existing_statvar_mcf
     local_mcf = os.path.join(shards_tmp_dir, 'cached_stat_vars.mcf')
-    logging.info('Caching %s locally to %s...', existing_statvar_mcf,
-                 local_mcf)
+    logging.info('Caching %s locally to %s...', existing_statvar_mcf, local_mcf)
     file_util.file_copy(existing_statvar_mcf, local_mcf)
     return local_mcf
 
@@ -976,8 +976,9 @@ def _merge_csv_files(shard_prefixes: list[str], final_csv_path: str) -> int:
 def _counter_aggregation_mode(key: str) -> str:
     """Determines how a counter key should be aggregated across shards."""
     lower = key.lower()
-    if (lower == 'existing-statvars-from-mcf' or lower.startswith('existing-')
-            or lower.endswith('output-svobs-unique-typeof')):
+    if (lower == 'existing-statvars-from-mcf' or
+            lower.startswith('existing-') or
+            lower.endswith('output-svobs-unique-typeof')):
         return 'max'
     if 'start_time' in lower:
         return 'min'
@@ -1071,8 +1072,8 @@ def _merge_mcf_files(shard_prefixes: list[str], suffix: str,
     if not seen_nodes:
         return
 
-    body = ('\n\n'.join(seen_nodes[k]
-                        for k in sorted(seen_nodes.keys())) + '\n\n')
+    body = ('\n\n'.join(seen_nodes[k] for k in sorted(seen_nodes.keys())) +
+            '\n\n')
     _atomic_write_text(final_mcf_path, body)
 
 
