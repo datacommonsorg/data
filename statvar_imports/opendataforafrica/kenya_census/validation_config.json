@@ -7,7 +7,7 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "CASE WHEN StatVar IN ('Count_Student_KenyaCertificateSecondaryEducation', 'Count_Student_KenyaCertificateSecondaryEducation_Female', 'Count_Student_KenyaCertificateSecondaryEducation_Male') THEN MaxDate >= '2022' WHEN StatVar = 'Count_BirthEvent_LiveBirth' THEN MaxDate >= '2020' WHEN StatVar LIKE 'Count_Death%' OR StatVar LIKE 'Count_BirthEvent%' OR StatVar LIKE 'Amount_EconomicActivity_GrossDomesticProduction%' OR StatVar LIKE 'Count_Student_KenyaCertificateSecondaryEducation%' OR StatVar LIKE 'Count_Person_KenyaCertificateSecondaryEducation%' THEN MaxDate >= '2024' ELSE MaxDate >= '2009' END AND total_svs > 0"
+                "condition": "CASE WHEN StatVar IN ('Count_Student_KenyaCertificateSecondaryEducation', 'Count_Student_KenyaCertificateSecondaryEducation_Female', 'Count_Student_KenyaCertificateSecondaryEducation_Male') THEN MaxDate >= '2022' WHEN StatVar = 'Count_BirthEvent_LiveBirth' THEN MaxDate >= '2020' WHEN regexp_matches(StatVar, '^(Count_(Death|MortalityEvent|BirthEvent|(Student|Person)_KenyaCertificateSecondaryEducation)|(Nominal_|RealValue_|GrowthRate_)?Amount_(Economic|Expenditure)Activity_GrossDomesticProduction)') THEN MaxDate >= '2024' ELSE MaxDate >= '2009' END AND total_svs > 0"
             }
         },
         {
