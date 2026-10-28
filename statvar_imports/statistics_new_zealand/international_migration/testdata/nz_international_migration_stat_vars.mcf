@@ -1,14 +1,13 @@
-# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=testdata/test_input.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=places_resolved.csv --output_path=testdata/nz_international_migration" on 2026-10-28 09:07:11.962812
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=testdata/test_input.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=places_resolved.csv --output_path=testdata/nz_international_migration" on 2026-10-28 09:51:43.821039
 
-Node: dcid:Count_Person_Citizenship_NZ_CountryOfResidence_Afghanistan_MigrationDirection_Arrivals_PassengerType_Long-term_migrant_VisaType_NZ_and_Australian_citizens
+Node: dcid:Count_Person_NZ_Afghanistan_Arrivals_Long-term_migrant_NZ_and_Australian_citizens
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
-measuredProperty: dcid:Count_Person_Citizenship_NZ_CountryOfResidence_Afghanistan_MigrationDirection_Arrivals_PassengerType_Long-term_migrant_VisaType_NZ_and_Australian_citizens
+measuredProperty: dcid:count
 statType: dcid:measuredValue
-# Citizenship: dcid:NZ
-# CountryOfResidence: dcid:Afghanistan
-# MigrationDirection: dcid:Arrivals
-# PassengerType: "Long-term migrant"
-# VisaType: "NZ and Australian citizens"
-# measuredProperty:dcid:count
+citizenship: dcid:NZ
+countryOfResidence: dcid:Afghanistan
+migrationDirection: dcid:Arrivals
+passengerType: "Long-term migrant"
+visaType: "NZ and Australian citizens"
 

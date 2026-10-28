@@ -1,0 +1,77 @@
+Node: dcid:passengerType
+typeOf: dcs:Property
+name: "passengerType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:PassengerTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:PassengerTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "PassengerTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:Long-term migrant
+typeOf: dcid:PassengerTypeEnum
+name: "Long-term migrant"
+isProvisional: dcs:True
+
+Node: dcid:migrationDirection
+typeOf: dcs:Property
+name: "migrationDirection"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:MigrationDirectionEnum
+isProvisional: dcs:True
+
+Node: dcid:MigrationDirectionEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MigrationDirectionEnum"
+isProvisional: dcs:True
+
+Node: dcid:Arrivals
+typeOf: dcid:MigrationDirectionEnum
+name: "Arrivals"
+isProvisional: dcs:True
+
+Node: dcid:NZ
+typeOf: dcid:CitizenshipEnum
+name: "NZ"
+isProvisional: dcs:True
+
+Node: dcid:visaType
+typeOf: dcs:Property
+name: "visaType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:VisaTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:VisaTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "VisaTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:NZ and Australian citizens
+typeOf: dcid:VisaTypeEnum
+name: "NZ and  Australian citizens"
+isProvisional: dcs:True
+
+Node: dcid:countryOfResidence
+typeOf: dcs:Property
+name: "countryOfResidence"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:CountryOfResidenceEnum
+isProvisional: dcs:True
+
+Node: dcid:CountryOfResidenceEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "CountryOfResidenceEnum"
+isProvisional: dcs:True
+
+Node: dcid:Afghanistan
+typeOf: dcid:CountryOfResidenceEnum
+name: "Afghanistan"
+isProvisional: dcs:True
+
