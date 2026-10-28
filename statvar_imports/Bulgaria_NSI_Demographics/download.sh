@@ -28,7 +28,7 @@ fi
 # Sanitize trailing non-breaking spaces (\xa0), triple quotes, and footnote asterisks from NSI web exports,
 # and validate arithmetic consistency across all annual CSVs.
 python3 - "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}" << 'EOF'
-import csv, glob, os, re, sys
+import csv, glob, io, os, re, sys
 
 input_dir = sys.argv[1]
 script_dir = sys.argv[2]
@@ -40,8 +40,8 @@ for fpath in sorted(glob.glob(os.path.join(input_dir, 'BulgariaNSI_Demographics_
         content = f.read()
     content = content.replace('"""', '"').replace('\xa0', ' ').replace('AS OF 31.12.*', 'AS OF 31.12.')
     content = re.sub(r'(\b\d+)\s*-\s*(\d+\b)', r'\1 - \2', content)
-    reader = list(csv.reader(content.splitlines()))
-    cleaned_rows = [[c.strip() for c in row] for row in reader]
+    reader = list(csv.reader(io.StringIO(content)))
+    cleaned_rows = [[re.sub(r'\s+', ' ', c).strip() for c in row] for row in reader]
     with open(fpath, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerows(cleaned_rows)
