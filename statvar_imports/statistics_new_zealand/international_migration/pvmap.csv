@@ -1,0 +1,8 @@
+key,property,value,p2,v2,p3,v3,p4,v4
+year_month,observationDate,{Data},,,,,,
+passenger_type,observationAbout,New Zealand,PassengerType,{Data},,,,
+direction,MigrationDirection,{Data},,,,,,
+citizenship,Citizenship,{Data},,,,,,
+visa,VisaType,{Data},,,,,,
+country_of_residence,CountryOfResidence,{Data},,,,,,
+estimate,value,{Number},populationType,Person,measuredProperty,count,statType,measuredValue

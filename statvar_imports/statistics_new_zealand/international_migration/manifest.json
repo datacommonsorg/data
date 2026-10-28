@@ -1,0 +1,28 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NZ_International_Migration",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.stats.govt.nz/large-datasets/csv-files-for-download/",
+      "provenance_description": "International migration citizenship by visa by country of last permanent residence for New Zealand from Stats NZ (CC-BY-4.0).",
+      "scripts": [
+        "../../../util/download_util_script.py --download_url=https://www.stats.govt.nz/assets/Uploads/International-migration/International-migration-August-2026/Download-data/international-migration-august-2026-citizenship-by-visa-by-country-of-last-permanent-residence.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/international-migration-august-2026-citizenship-by-visa-by-country-of-last-permanent-residence.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/nz_international_migration --output_counters=counters/nz_international_migration_counters.csv --log_level=2 --log_every_n=1000"
+      ],
+      "source_files": [
+        "input_files/*",
+        "counters/*"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/nz_international_migration.tmcf",
+          "cleaned_csv": "output_files/nz_international_migration.csv",
+          "node_mcf": "output_files/*.mcf"
+        }
+      ],
+      "cron_schedule": "0 06 * * 2"
+    }
+  ]
+}
