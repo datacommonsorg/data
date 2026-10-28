@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that the latest date is the same for all StatVars within each dataset.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verifies that MaxDate meets the expected freshness threshold (up to 2025).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "MaxDate >= '2025'"
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Sweden_Census_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__UF__UF0506__UF0506B/Utbildning/table/tableViewLayout1/",
+            "provenance_description": "Population 16-74 years of age by region, highest level of education, age and sex from Statistics Sweden (SCB).",
+            "scripts": [
+                "download_education.py --output_dir=input_files",
+                "run.sh"
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/education_nuts1.tmcf",
+                    "cleaned_csv": "output/education_nuts1.csv",
+                    "node_mcf": "output/education_nuts1*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_nuts2.tmcf",
+                    "cleaned_csv": "output/education_nuts2.csv",
+                    "node_mcf": "output/education_nuts2*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_nuts3.tmcf",
+                    "cleaned_csv": "output/education_nuts3.csv",
+                    "node_mcf": "output/education_nuts3*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_muncipaltiy.tmcf",
+                    "cleaned_csv": "output/education_muncipaltiy.csv",
+                    "node_mcf": "output/education_muncipaltiy*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_gender_nuts1.tmcf",
+                    "cleaned_csv": "output/education_gender_nuts1.csv",
+                    "node_mcf": "output/education_gender_nuts1*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_gender_nuts2.tmcf",
+                    "cleaned_csv": "output/education_gender_nuts2.csv",
+                    "node_mcf": "output/education_gender_nuts2*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_gender_nuts3.tmcf",
+                    "cleaned_csv": "output/education_gender_nuts3.csv",
+                    "node_mcf": "output/education_gender_nuts3*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_gender_muncipaltiy.tmcf",
+                    "cleaned_csv": "output/education_gender_muncipaltiy.csv",
+                    "node_mcf": "output/education_gender_muncipaltiy*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_nuts1.tmcf",
+                    "cleaned_csv": "output/education_age_nuts1.csv",
+                    "node_mcf": "output/education_age_nuts1*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_nuts2.tmcf",
+                    "cleaned_csv": "output/education_age_nuts2.csv",
+                    "node_mcf": "output/education_age_nuts2*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_nuts3.tmcf",
+                    "cleaned_csv": "output/education_age_nuts3.csv",
+                    "node_mcf": "output/education_age_nuts3*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_muncipality_1.tmcf",
+                    "cleaned_csv": "output/education_age_muncipality_1.csv",
+                    "node_mcf": "output/education_age_muncipality_1*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_muncipality_2.tmcf",
+                    "cleaned_csv": "output/education_age_muncipality_2.csv",
+                    "node_mcf": "output/education_age_muncipality_2*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_muncipality_3.tmcf",
+                    "cleaned_csv": "output/education_age_muncipality_3.csv",
+                    "node_mcf": "output/education_age_muncipality_3*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_gender_nuts1.tmcf",
+                    "cleaned_csv": "output/education_age_gender_nuts1.csv",
+                    "node_mcf": "output/education_age_gender_nuts1*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_gender_nuts2.tmcf",
+                    "cleaned_csv": "output/education_age_gender_nuts2.csv",
+                    "node_mcf": "output/education_age_gender_nuts2*.mcf"
+                },
+                {
+                    "template_mcf": "output/education_age_gender_nuts3.tmcf",
+                    "cleaned_csv": "output/education_age_gender_nuts3.csv",
+                    "node_mcf": "output/education_age_gender_nuts3*.mcf"
+                }
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 05 15 5 *"
+        }
+    ]
+}
