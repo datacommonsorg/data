@@ -25,12 +25,12 @@ The annual refresh is automated via scheduled Cloud Batch / Cloud Run execution:
 > **Operational Note on Cloudflare Protection**: The live NSI portal (`nsi.bg`) enforces Cloudflare bot protection, which returns HTTP 403 Forbidden to requests originating from cloud/datacenter IP ranges. When invoked with `--allow-staged-fallback` in scheduled runs, `download_current_year_data.py` detects this and falls back to existing verified files staged in `gs://unresolved_mcf/country/Bulgaria/input_files/`. When a new annual release is published by NSI, it can be staged to GCS via an authorized proxy or manual upload.
 
 ### 3.2 Automated Ingestion Workflow (`download.sh` & `stat_var_processor.py`)
-1. **Download Step (`download.sh`)**: Pulls all staged annual input CSVs (`BulgariaNSI_Demographics_Year_input_*.csv`) from `gs://unresolved_mcf/country/Bulgaria/input_files/` into local `input_files/`, sanitizes quotes/spaces/hyphens, and validates internal arithmetic across all 29 districts and 22 age cohorts.
-2. **Transform (`stat_var_processor.py`)**: Transforms `input_files/BulgariaNSI_Demographics_Year_input_*.csv` using `BulgariaNSI_Demographics_pvmap.csv` and `BulgariaNSI_Demographics_metadata.csv` into `output/BulgariaNSI_Demographics.csv` and `.tmcf`.
+1. **Download Step (`download.sh`)**: Pulls all staged annual input CSVs (`BulgariaNSI_Demographics_Year_input_*.csv`) from `gs://unresolved_mcf/country/Bulgaria/input_files/` into local `input_files/` (preserved untouched for `source_files`), writes sanitized copies (normalizing quotes, non-breaking spaces, and hyphens) to `sanitized_input_files/`, and validates internal horizontal and vertical arithmetic across all 29 districts and 22 age cohorts.
+2. **Transform (`stat_var_processor.py`)**: Transforms `sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv` using `BulgariaNSI_Demographics_pvmap.csv` and `BulgariaNSI_Demographics_metadata.csv` into `output/BulgariaNSI_Demographics.csv` and `.tmcf`.
 3. **Resolution & Validation (`genmcf`, differ, import_validation)**:
    - Resolves nodes via `genmcf`.
    - Compares against baseline version in GCS using `ImportDiffer`.
-   - Validates uniform `MaxDate`, freshness (`MaxDate >= '2025'`), and deleted records threshold ($\le 0.1\%$) per `validation_config.json`.
+   - Validates uniform `MaxDate`, relative 1-year publication lag freshness (`TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1`), and deleted records threshold ($\le 0.1\%$) per `validation_config.json`.
 
 ## 4. Running the Data Processor Locally
 
@@ -44,7 +44,7 @@ bash download.sh
 
 # 2. Process annual demographic refresh files (2024, 2025, ...)
 ../../.env/bin/python ../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input_files/BulgariaNSI_Demographics_Year_input_*.csv \
+  --input_data=sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv \
   --pv_map=BulgariaNSI_Demographics_pvmap.csv \
   --config_file=BulgariaNSI_Demographics_metadata.csv \
   --output_path=output/BulgariaNSI_Demographics \
@@ -55,5 +55,5 @@ bash download.sh
 ## 5. Validation Configuration
 `validation_config.json` enforces:
 - `check_max_date_consistent`: Ensures `MaxDate` is uniform across all 207 generated StatVars.
-- `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `MaxDate >= '2025'`.
+- `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1`.
 - `check_deleted_records_percent`: Ensures deleted records do not exceed `0.1%`.

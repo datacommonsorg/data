@@ -27,10 +27,8 @@ if SCRIPT_DIR not in sys.path:
 from download_current_year_data import (
     EXPECTED_AGES,
     EXPECTED_DISTRICTS,
-    EXPECTED_HISTORICAL_AGES,
     to_num,
     validate_file_format,
-    validate_historical_file_format,
 )
 
 
@@ -95,6 +93,17 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
             d_rur_fem = 12 * n_ages
             if tamper_type == "district_row_sex" and d == EXPECTED_DISTRICTS[0]:
                 d_fem = 100  # breaks d_tot == d_m + d_fem
+            elif tamper_type == "vertical_sum" and d == EXPECTED_DISTRICTS[0]:
+                # Keep horizontal sums valid on the district row, but break vertical sum
+                d_tot = 200 * n_ages
+                d_m = 120 * n_ages
+                d_fem = 80 * n_ages
+                d_urb = 140 * n_ages
+                d_urb_m = 84 * n_ages
+                d_urb_fem = 56 * n_ages
+                d_rur = 60 * n_ages
+                d_rur_m = 36 * n_ages
+                d_rur_fem = 24 * n_ages
 
             rows.append([
                 d,
@@ -240,36 +249,18 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
             if os.path.exists(csv_path):
                 os.remove(csv_path)
 
-    def test_validate_historical_file_format(self):
-        rows = [
-            ["POPULATION BY DISTRICTS, AGE AND SEX AS OF 31.12.", "", "", ""],
-            ["Districts", "Population as of 31.12.2011", "", ""],
-            ["Age (years)", "Total", "Male", "Female"],
-        ]
-        n_ages = len(EXPECTED_HISTORICAL_AGES)
-        for d in EXPECTED_DISTRICTS:
-            rows.append(
-                [d, str(100 * n_ages),
-                 str(48 * n_ages),
-                 str(52 * n_ages)])
-            for a in EXPECTED_HISTORICAL_AGES:
-                rows.append([a, "100", "48", "52"])
-
-        temp_file = tempfile.NamedTemporaryFile(
-            mode="w",
-            delete=False,
-            suffix=".csv",
-            newline="",
-            dir="/tmp",
-        )
-        writer = csv.writer(temp_file)
-        writer.writerows(rows)
-        temp_file.close()
+    def test_validate_file_format_vertical_sum_failure(self):
+        csv_path = self._create_mock_csv(year=2025, tamper_type="vertical_sum")
         try:
-            self.assertTrue(validate_historical_file_format(temp_file.name))
+            with self.assertRaises(ValueError) as ctx:
+                validate_file_format(csv_path, expected_year=2025)
+            self.assertIn(
+                "District 'Total', col 1: District header (4400) != sum of age rows (2200).",
+                str(ctx.exception),
+            )
         finally:
-            if os.path.exists(temp_file.name):
-                os.remove(temp_file.name)
+            if os.path.exists(csv_path):
+                os.remove(csv_path)
 
 
 if __name__ == "__main__":

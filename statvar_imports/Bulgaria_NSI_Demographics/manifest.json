@@ -12,7 +12,7 @@
             "scripts": [
                 "download_current_year_data.py --allow-staged-fallback",
                 "download.sh",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/BulgariaNSI_Demographics_Year_input_*.csv --pv_map=BulgariaNSI_Demographics_pvmap.csv --config_file=BulgariaNSI_Demographics_metadata.csv --output_path=output/BulgariaNSI_Demographics --output_counters=counters/BulgariaNSI_Demographics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv --pv_map=BulgariaNSI_Demographics_pvmap.csv --config_file=BulgariaNSI_Demographics_metadata.csv --output_path=output/BulgariaNSI_Demographics --output_counters=counters/BulgariaNSI_Demographics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {

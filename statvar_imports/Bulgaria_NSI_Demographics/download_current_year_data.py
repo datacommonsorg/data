@@ -30,7 +30,8 @@ constraints:
    - All 22 age cohorts (0, 1 - 4, 5 - 9, ..., 100 +)
    - Internal consistency on both district and age rows:
      Total = Urban + Rural, Total = Male + Female,
-     Urban = Urban_Male + Urban_Female, Rural = Rural_Male + Rural_Female
+     Urban = Urban_Male + Urban_Female, Rural = Rural_Male + Rural_Female,
+     and District Header = sum of 22 age cohorts across all 9 numeric columns.
 4. Automatically uploads the verified file to the shared GCS folder:
        gs://unresolved_mcf/country/Bulgaria/input_files/
 """
@@ -42,6 +43,12 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
+
+try:
+    from absl import logging
+except ImportError:
+    import logging
 import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
@@ -116,30 +123,6 @@ EXPECTED_AGES = [
     "100 +",
 ]
 
-EXPECTED_HISTORICAL_AGES = [
-    "0 - 4",
-    "5 - 9",
-    "10 - 14",
-    "15 - 19",
-    "20 - 24",
-    "25 - 29",
-    "30 - 34",
-    "35 - 39",
-    "40 - 44",
-    "45 - 49",
-    "50 - 54",
-    "55 - 59",
-    "60 - 64",
-    "65 - 69",
-    "70 - 74",
-    "75 - 79",
-    "80 - 84",
-    "85 - 89",
-    "90 - 94",
-    "95 - 99",
-    "100+",
-]
-
 
 def _create_retry_session() -> requests.Session:
     """Creates a requests.Session configured with retry/backoff."""
@@ -167,7 +150,7 @@ def list_gcs_files(gcs_dir: str) -> list[str]:
         ]
         return files
     except Exception as e:
-        print(f"  Notice: gcloud storage list failed ({e}), trying gsutil...")
+        logging.warning("gcloud storage list failed (%s), trying gsutil...", e)
         try:
             cmd = ["gsutil", "ls", gcs_dir.rstrip("/") + "/"]
             res = subprocess.run(cmd,
@@ -238,9 +221,8 @@ def _validate_annual_row_values(row: list[str], row_idx: int, label: str):
 
 def validate_file_format(file_path: str, expected_year: int) -> bool:
     """Strictly validates CSV format against the reference 2024 template schema."""
-    print(
-        f"\n[Validation] Verifying format against reference schema ({file_path})..."
-    )
+    logging.info("Verifying format against reference schema (%s)...",
+                 file_path)
 
     with open(file_path, "r", encoding="utf-8") as f:
         reader = list(csv.reader(f))
@@ -317,6 +299,7 @@ def validate_file_format(file_path: str, expected_year: int) -> bool:
         row_idx += 1
 
         # Age cohort rows
+        a_rows = []
         for age in EXPECTED_AGES:
             a_row = reader[row_idx]
             if len(a_row) != 10:
@@ -329,85 +312,21 @@ def validate_file_format(file_path: str, expected_year: int) -> bool:
                     f"Row {row_idx}: Expected age '{age}' for district "
                     f"'{district}', got '{a_name}'.")
             _validate_annual_row_values(a_row, row_idx, f"{district} - {age}")
+            a_rows.append(a_row)
             row_idx += 1
 
-    print("  ✓ Format validation PASSED: Exactly matches reference template "
-          "structure and internal arithmetic!")
-    return True
-
-
-def validate_historical_file_format(file_path: str) -> bool:
-    """Validates historical multi-year CSV structure and Total == Male + Female."""
-    with open(file_path, "r", encoding="utf-8") as f:
-        rows = [r for r in csv.reader(f) if any(c.strip() for c in r)]
-
-    # Locate the 'Age (years)' subheader row
-    subheader_idx = None
-    for idx, r in enumerate(rows[:10]):
-        if r and r[0].strip() == "Age (years)":
-            subheader_idx = idx
-            break
-    if subheader_idx is None:
-        raise ValueError(f"{file_path}: Missing 'Age (years)' header row.")
-
-    num_cols = len(rows[subheader_idx])
-    if (num_cols - 1) % 3 != 0 or num_cols < 4:
-        raise ValueError(
-            f"{file_path}: Expected 1 + 3*N columns, got {num_cols}.")
-    num_years = (num_cols - 1) // 3
-
-    data_rows = rows[subheader_idx + 1:]
-    expected_data_rows = len(EXPECTED_DISTRICTS) * (
-        1 + len(EXPECTED_HISTORICAL_AGES))
-    if len(data_rows) < expected_data_rows:
-        raise ValueError(
-            f"{file_path}: Expected at least {expected_data_rows} data rows, "
-            f"got {len(data_rows)}.")
-
-    seen_districts = []
-    for b_idx in range(len(EXPECTED_DISTRICTS)):
-        base = b_idx * (1 + len(EXPECTED_HISTORICAL_AGES))
-        d_row = data_rows[base]
-        d_name = d_row[0].replace("\xa0", " ").strip()
-        if d_name not in EXPECTED_DISTRICTS:
-            raise ValueError(
-                f"{file_path}: Block {b_idx} unexpected district '{d_name}'.")
-        seen_districts.append(d_name)
-        district = d_name
-        a_rows = data_rows[base + 1:base + 1 + len(EXPECTED_HISTORICAL_AGES)]
-        for a_idx, expected_age in enumerate(EXPECTED_HISTORICAL_AGES):
-            a_name = a_rows[a_idx][0].replace("\xa0", " ").strip()
-            if a_name != expected_age:
-                raise ValueError(
-                    f"{file_path}: District '{district}' expected age "
-                    f"'{expected_age}', got '{a_name}'.")
-
-        # Check Total == Male + Female on district header and all age rows
-        for r in [d_row] + a_rows:
-            label = f"{district} - {r[0].strip()}"
-            for y_i in range(num_years):
-                c = 1 + y_i * 3
-                tot = to_num(r[c])
-                m = to_num(r[c + 1])
-                fem = to_num(r[c + 2])
-                if tot != m + fem:
-                    raise ValueError(
-                        f"{file_path} ({label}, year_idx={y_i}): "
-                        f"Total ({tot}) != Male ({m}) + Female ({fem}).")
-
-        # Check vertical sum: district header == sum of 21 age cohorts
-        for c in range(1, num_cols):
-            d_val = to_num(d_row[c])
-            a_sum = sum(to_num(r[c]) for r in a_rows)
+        # Vertical sum validation: District header == sum of 22 age cohorts
+        for col_i in range(1, 10):
+            d_val = to_num(d_row[col_i])
+            a_sum = sum(to_num(r[col_i]) for r in a_rows)
             if d_val != a_sum:
                 raise ValueError(
-                    f"{file_path} ({district}, col={c}): "
+                    f"District '{district}', col {col_i}: "
                     f"District header ({d_val}) != sum of age rows ({a_sum}).")
 
-    if set(seen_districts) != set(EXPECTED_DISTRICTS):
-        raise ValueError(
-            f"{file_path}: District set mismatch: "
-            f"missing {set(EXPECTED_DISTRICTS) - set(seen_districts)}.")
+    logging.info(
+        "Format validation PASSED: Exactly matches reference template "
+        "structure and internal arithmetic!")
     return True
 
 
@@ -420,11 +339,9 @@ def check_and_download_nsi(
 ):
     """Checks for newly published data, validates format, and uploads to GCS if new."""
     os.makedirs(local_dir, exist_ok=True)
-    print("=" * 70)
-    print("Bulgaria NSI Demographics: Monthly Monitor & Auto-Downloader")
-    print(f"Source Portal:   {NSI_URL}")
-    print(f"Destination GCS: {gcs_dir}")
-    print("=" * 70)
+    logging.info(
+        "Bulgaria NSI Demographics: Monthly Monitor & Auto-Downloader "
+        "(Source: %s, Destination GCS: %s)", NSI_URL, gcs_dir)
 
     html_content = None
     session = _create_retry_session()
@@ -432,12 +349,12 @@ def check_and_download_nsi(
         resp = session.get(NSI_URL, headers=HEADERS, timeout=25)
         if resp.status_code == 200:
             html_content = resp.text
-            print("✓ Successfully connected to live NSI portal.")
+            logging.info("Successfully connected to live NSI portal.")
         else:
-            print(f"Warning: NSI portal returned HTTP {resp.status_code} "
-                  f"for {NSI_URL}.")
+            logging.warning("NSI portal returned HTTP %d for %s.",
+                            resp.status_code, NSI_URL)
     except Exception as e:
-        print(f"Notice: Direct request to nsi.bg failed: {e}")
+        logging.warning("Direct request to nsi.bg failed: %s", e)
 
     # Fallback to cached copy if environment restricts direct outbound HTTP to nsi.bg
     if not html_content:
@@ -445,21 +362,24 @@ def check_and_download_nsi(
         if os.path.exists(cache_path):
             with open(cache_path, "r", encoding="utf-8", errors="ignore") as f:
                 html_content = f.read()
-            print("Using cached HTML snapshot for NSI table.")
+            logging.info("Using cached HTML snapshot for NSI table.")
 
     if not html_content:
-        print("Warning: Direct connection to NSI portal blocked "
-              "(e.g. Cloudflare challenge/firewall).")
+        logging.warning("Direct connection to NSI portal blocked "
+                        "(e.g. Cloudflare challenge/firewall).")
         if allow_staged_fallback:
-            print("Checking if input files are already present in GCS "
-                  f"({gcs_dir}) (--allow-staged-fallback enabled)...")
+            logging.info(
+                "Checking if input files are already present in GCS "
+                "(%s) (--allow-staged-fallback enabled)...", gcs_dir)
             existing_gcs_files = list_gcs_files(gcs_dir)
             if existing_gcs_files:
-                print(f"✓ Existing files in GCS folder: {existing_gcs_files}. "
-                      "Proceeding with staged data.")
+                logging.info(
+                    "Existing files in GCS folder: %s. "
+                    "Proceeding with staged data.", existing_gcs_files)
                 return
-        print("❌ Error: Unable to fetch live NSI portal content "
-              "(pass --allow-staged-fallback to use existing GCS files).")
+        logging.error(
+            "Unable to fetch live NSI portal content "
+            "(pass --allow-staged-fallback to use existing GCS files).")
         sys.exit(1)
 
     # 1. Detect Year from caption (<div id="ttitle">...31.12.YYYY...</div>)
@@ -471,12 +391,12 @@ def check_and_download_nsi(
     caption_text = ttitle_match.group(1) if ttitle_match else html_content
     year_match = re.search(r"31\.12\.(\d{4})", caption_text)
     if not year_match:
-        print("❌ Error: Could not parse reference year from caption: "
-              f"'{caption_text[:200]}'")
+        logging.error("Could not parse reference year from caption: '%s'",
+                      caption_text[:200])
         sys.exit(1)
 
     detected_year = int(year_match.group(1))
-    print(f"✓ Detected published year on NSI portal: {detected_year}")
+    logging.info("Detected published year on NSI portal: %d", detected_year)
 
     target_filename = (
         f"BulgariaNSI_Demographics_Year_input_{detected_year}.csv")
@@ -485,15 +405,17 @@ def check_and_download_nsi(
 
     # 2. Check if file already exists in GCS
     existing_gcs_files = list_gcs_files(gcs_dir)
-    print(f"Current files in GCS folder: {existing_gcs_files}")
+    logging.info("Current files in GCS folder: %s", existing_gcs_files)
 
     if target_filename in existing_gcs_files and not force:
-        print(f"\n✓ Up-to-date: '{target_filename}' is already present in "
-              f"{gcs_dir}.")
-        print("No new annual release detected. Exiting.")
+        logging.info(
+            "Up-to-date: '%s' is already present in %s. "
+            "No new annual release detected. Exiting.", target_filename,
+            gcs_dir)
         return
 
-    print(f"\n⚡ Processing release for {detected_year}! Formatting dataset...")
+    logging.info("Processing release for %d! Formatting dataset...",
+                 detected_year)
 
     # 3. Parse HTML table
     try:
@@ -502,100 +424,114 @@ def check_and_download_nsi(
     except ValueError:
         tables = []
     if not tables:
-        print(
-            "❌ Error: Could not locate table with class 'nsit3' in page HTML.")
+        logging.error(
+            "Could not locate table with class 'nsit3' in page HTML.")
         sys.exit(1)
     df = tables[0]
 
     # Clean strings and non-breaking spaces
     for col in df.columns:
-        if df[col].dtype == object:
+        if pd.api.types.is_string_dtype(df[col]):
             df[col] = (df[col].astype(str).str.replace("\xa0",
                                                        " ").str.strip())
 
-    # 4. Write CSV in exact structure matching Google Sheet
-    with open(local_output_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        # Header rows
-        writer.writerow([
-            "\nPOPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE AND SEX"
-            f" AS OF 31.12.{detected_year}\n(Number)\n"
-        ] + [""] * 9)
-        writer.writerow([
-            "Districts Age (years)",
-            "Total",
-            "",
-            "",
-            "Urban residence",
-            "",
-            "",
-            "Rural residence",
-            "",
-            "",
-        ])
-        writer.writerow([
-            "",
-            "Total",
-            "Male",
-            "Female",
-            "Total",
-            "Male",
-            "Female",
-            "Total",
-            "Male",
-            "Female",
-        ])
+    # 4. Write CSV to temporary file first, validate, then atomically replace
+    tmp_fd, tmp_path = tempfile.mkstemp(prefix=f".{target_filename}.",
+                                        suffix=".tmp",
+                                        dir=local_dir)
+    try:
+        with os.fdopen(tmp_fd, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            # Header rows
+            writer.writerow([
+                "\nPOPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE AND SEX"
+                f" AS OF 31.12.{detected_year}\n(Number)\n"
+            ] + [""] * 9)
+            writer.writerow([
+                "Districts Age (years)",
+                "Total",
+                "",
+                "",
+                "Urban residence",
+                "",
+                "",
+                "Rural residence",
+                "",
+                "",
+            ])
+            writer.writerow([
+                "",
+                "Total",
+                "Male",
+                "Female",
+                "Total",
+                "Male",
+                "Female",
+                "Total",
+                "Male",
+                "Female",
+            ])
 
-        for _, row in df.iterrows():
-            clean_vals = []
-            for i, v in enumerate(row.values):
-                if i > 0:
-                    val_str = (str(v).replace(" ", "").replace("\xa0",
-                                                               "").strip())
-                    if val_str.endswith(".0"):
-                        val_str = val_str[:-2]
-                    clean_vals.append(val_str)
-                else:
-                    # Clean age label or district label
-                    clean_vals.append(str(v).replace("\xa0", " ").strip())
-            writer.writerow(clean_vals)
+            for _, row in df.iterrows():
+                clean_vals = []
+                for i, v in enumerate(row.values):
+                    if i > 0:
+                        val_str = (str(v).replace(" ", "").replace("\xa0",
+                                                                   "").strip())
+                        if val_str.endswith(".0"):
+                            val_str = val_str[:-2]
+                        clean_vals.append(val_str)
+                    else:
+                        # Clean age label or district label
+                        clean_vals.append(str(v).replace("\xa0", " ").strip())
+                writer.writerow(clean_vals)
 
-    print(f"✓ Saved local file: {local_output_path} "
-          f"({os.path.getsize(local_output_path):,} bytes)")
+        # 5. Format validation against reference template before moving into place
+        validate_file_format(tmp_path, detected_year)
+        os.replace(tmp_path, local_output_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
 
-    # 5. Format validation against reference template
-    validate_file_format(local_output_path, detected_year)
+    logging.info("Saved validated local file: %s (%d bytes)",
+                 local_output_path, os.path.getsize(local_output_path))
 
     # 6. Upload to shared GCS destination
     if dry_run:
-        print("\n[Dry Run] Validation succeeded! Skipping upload to "
-              f"{gcs_target_path}.")
+        logging.info("[Dry Run] Validation succeeded! Skipping upload to %s.",
+                     gcs_target_path)
         return
 
-    print(f"\nUploading '{target_filename}' to {gcs_target_path}...")
+    logging.info("Uploading '%s' to %s...", target_filename, gcs_target_path)
     upload_success = False
     try:
         cmd = ["gcloud", "storage", "cp", local_output_path, gcs_target_path]
         subprocess.run(cmd, check=True, capture_output=True, text=True)
         upload_success = True
     except Exception as e:
-        print(f"  Notice: gcloud storage failed ({e}), trying gsutil...")
+        logging.warning("gcloud storage failed (%s), trying gsutil...", e)
         try:
             cmd = ["gsutil", "cp", local_output_path, gcs_target_path]
             subprocess.run(cmd, check=True, capture_output=True, text=True)
             upload_success = True
         except Exception as e2:
-            print(f"❌ Upload failed: {e2}")
+            logging.error("Upload failed: %s", e2)
 
     if not upload_success:
-        print(f"❌ Upload to {gcs_target_path} failed.")
+        if os.path.exists(local_output_path):
+            os.remove(local_output_path)
+        logging.error("Upload to %s failed.", gcs_target_path)
         sys.exit(1)
 
-    print(f"✓ Successfully uploaded to {gcs_target_path}!")
-    print("=" * 70)
+    logging.info("Successfully uploaded to %s!", gcs_target_path)
 
 
 def main():
+    if hasattr(logging, "set_verbosity"):
+        logging.set_verbosity(logging.INFO)
+    else:
+        logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(description=(
         "Monthly checker and auto-downloader for Bulgaria NSI demographics."))
     parser.add_argument(

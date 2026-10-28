@@ -9,11 +9,11 @@
         },
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary (MaxDate >= '2025').",
+            "description": "Verify all active StatVars meet the 1-year publication lag freshness boundary (TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate FROM stats",
-                "condition": "MaxDate >= '2025'"
+                "condition": "TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1"
             }
         },
         {
