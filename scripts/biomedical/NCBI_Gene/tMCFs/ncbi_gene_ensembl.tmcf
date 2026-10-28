@@ -1,0 +1,14 @@
+Node: E:ncbi_gene_ensembl->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_ensembl->GeneID
+ensemblGeneId: C:ncbi_gene_ensembl->Ensembl_gene_identifier
+
+Node: E:ncbi_gene_ensembl->E2
+typeOf: dcs:RnaTranscript
+dcid: C:ncbi_gene_ensembl->dcid_rna_transcript
+name: C:ncbi_gene_ensembl->Ensembl_rna_identifier
+ensemblProteinId: C:ncbi_gene_ensembl->Ensembl_protein_identifier
+ensemblRnaId: C:ncbi_gene_ensembl->Ensembl_rna_identifier
+refSeqProteinAccession: C:ncbi_gene_ensembl->protein_accession.version
+refSeqRnaNucleotideAccession: C:ncbi_gene_ensembl->RNA_nucleotide_accession.version
+transcribedFromGene: E:ncbi_gene_ensembl->E1
