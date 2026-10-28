@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -24,7 +25,7 @@ sys.path.append(_SCRIPT_DIR)
 import download_util
 
 
-class TestCounters(unittest.TestCase):
+class DownloadUtilTest(unittest.TestCase):
 
     def setUp(self):
         # Setup a response for non-existant URL for latest tests
@@ -36,15 +37,30 @@ class TestCounters(unittest.TestCase):
             params={},
             response=b'{"param": "value"}')
 
-    def test_request_url(self):
+    def tearDown(self):
+        download_util._PREFILLED_RESPONSE.clear()
+
+    @mock.patch('download_util.requests_cache.install_cache')
+    @mock.patch('download_util.requests.get')
+    def test_request_url(self, mock_get, mock_install_cache):
+        mock_response = mock.MagicMock()
+        mock_response.ok = True
+        mock_response.json.return_value = {
+            'entities': [{
+                'node': 'india',
+                'candidates': [{
+                    'dcid': 'country/IND'
+                }]
+            }]
+        }
+        mock_get.return_value = mock_response
+
         # Download URL with GET parameters
-        response = download_util.request_url(
-            url='https://api.datacommons.org/v2/resolve',
-            params={
-                'nodes': ['india'],
-                'property': '<-description->dcid'
-            },
-            output='JSON')
+        url = 'https://api.datacommons.org/v2/resolve'
+        params = {'nodes': ['india'], 'property': '<-description->dcid'}
+        response = download_util.request_url(url=url,
+                                             params=params,
+                                             output='JSON')
         self.assertTrue(isinstance(response, dict))
         try:
             nodes = response['entities'][0]['candidates']
@@ -54,6 +70,10 @@ class TestCounters(unittest.TestCase):
             )
         country_dcids = [node.get('dcid', '') for node in nodes]
         self.assertIn('country/IND', country_dcids)
+        mock_get.assert_called_once_with(url,
+                                         headers={},
+                                         params=params,
+                                         timeout=30)
 
     def test_prefilled_url(self):
         test_response = download_util.request_url(url='http://test.case.com/',
@@ -70,3 +90,7 @@ class TestCounters(unittest.TestCase):
             with open(filename) as fp:
                 contents = fp.read()
                 self.assertEqual('{"param": "value"}', contents)
+
+
+if __name__ == '__main__':
+    unittest.main()
