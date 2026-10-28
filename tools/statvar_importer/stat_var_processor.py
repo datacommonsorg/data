@@ -1506,20 +1506,21 @@ class StatVarDataProcessor:
                 else:
                     mapped_columns = []
             for col in mapped_columns:
-                if isinstance(col, int) and not isinstance(col, bool):
+                if isinstance(col,
+                              int) and not isinstance(col, bool) and col > 0:
                     mapped_columns_indices.append(col)
                 elif isinstance(col, str):
                     col = col.strip()
                     if not col:
                         continue
-                    if col.isalpha():
+                    if col.isalpha() and col.isascii():
                         # Convert letters to int index.
                         col_index = 0
                         for c in col:
                             col_index = col_index * 26 + (ord(c.upper()) -
                                                           ord('A') + 1)
                         mapped_columns_indices.append(col_index)
-                    elif col.isdigit():
+                    elif col.isdigit() and int(col) > 0:
                         mapped_columns_indices.append(int(col))
             if len(mapped_columns_indices) == 1:
                 mapped_columns_indices = list(
