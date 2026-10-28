@@ -99,7 +99,7 @@
       "description": "Verify MaxDate is within allowable publication lag and values are non-negative (and within [0, 100] for unemployment rates) for active recurring ABS series",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^(LifeExpectancy_|UnemploymentRate_|Count_Person_Employed|Count_Person_Unemployed|dc/nm9hcklgg5zb3)') OR (regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, '(Condition|6To9Years)'))",
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^(LifeExpectancy_|UnemploymentRate_|dc/nm9hcklgg5zb3)') OR (regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, '(Condition|6To9Years)'))",
         "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4) AND total_svs = 266 AND NumPlaces >= 1 AND MinValue >= 0 AND (NOT regexp_matches(StatVar, '^UnemploymentRate_') OR MaxValue <= 100)"
       }
     },
