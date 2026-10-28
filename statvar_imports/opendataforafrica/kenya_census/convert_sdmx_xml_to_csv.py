@@ -27,6 +27,11 @@ import sdmx
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
+def _strip_ns(attrib: dict[str, str]) -> dict[str, str]:
+    """Strips XML namespace prefixes from attribute keys."""
+    return {k.split('}')[-1]: v for k, v in attrib.items()}
+
+
 def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     """Reads SDMX XML using sdmx1 and converts to a pandas DataFrame."""
     if not os.path.exists(xml_path):
@@ -83,24 +88,15 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     rows = []
     for elem in root.iter():
         if elem.tag.endswith('Series'):
-            series_attrib = {
-                k.split('}')[-1]: v
-                for k, v in elem.attrib.items()
-            }
+            series_attrib = _strip_ns(elem.attrib)
             for child in elem:
                 if child.tag.endswith('Obs'):
-                    obs_attrib = {
-                        k.split('}')[-1]: v
-                        for k, v in child.attrib.items()
-                    }
+                    obs_attrib = _strip_ns(child.attrib)
                     rows.append({**series_attrib, **obs_attrib})
         elif elem.tag.endswith('DataSet'):
             for child in elem:
                 if child.tag.endswith('Obs'):
-                    obs_attrib = {
-                        k.split('}')[-1]: v
-                        for k, v in child.attrib.items()
-                    }
+                    obs_attrib = _strip_ns(child.attrib)
                     rows.append(obs_attrib)
 
     if not rows:
