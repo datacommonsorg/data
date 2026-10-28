@@ -57,10 +57,14 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
                 for v in parsed.values()
             ]
             df = pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
+        elif isinstance(parsed, pd.DataFrame):
+            if isinstance(parsed.index,
+                          pd.MultiIndex) or parsed.index.name is not None:
+                df = parsed.reset_index()
+            else:
+                df = parsed
         elif hasattr(parsed, 'reset_index'):
             df = parsed.reset_index()
-        elif isinstance(parsed, pd.DataFrame):
-            df = parsed
         else:
             df = None
 

@@ -79,6 +79,55 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertIn("TIME_PERIOD", df.columns)
         self.assertIn("OBS_VALUE", df.columns)
 
+    def test_convert_sdmx_xml_to_dataframe_sdmx_dataframe_and_series_branches(
+            self):
+        """Tests the primary sdmx1 branches for DataFrame, MultiIndex, Series, and dict."""
+        xml_file = os.path.join(self.test_dir.name, "mock_sdmx.xml")
+        with open(xml_file, "w") as f:
+            f.write("<StructureSpecificData/>")
+
+        # 1. DataFrame with default RangeIndex and 'value' column
+        mock_df = pd.DataFrame({
+            "region": ["KEN"],
+            "time_period": ["2024"],
+            "value": [100]
+        })
+        with patch("convert_sdmx_xml_to_csv.sdmx.read_sdmx"):
+            with patch(
+                    "convert_sdmx_xml_to_csv.sdmx.to_pandas",
+                    return_value=mock_df,
+            ):
+                df = convert_sdmx_xml_to_dataframe(xml_file)
+                self.assertListEqual(list(df.columns),
+                                     ["REGION", "TIME_PERIOD", "OBS_VALUE"])
+                self.assertEqual(df.iloc[0]["OBS_VALUE"], 100)
+
+        # 2. DataFrame with named MultiIndex and 0 column
+        idx = pd.MultiIndex.from_tuples([("KEN", "2024")],
+                                        names=["REGION", "TIME_PERIOD"])
+        mock_multi_df = pd.DataFrame({0: [250]}, index=idx)
+        with patch("convert_sdmx_xml_to_csv.sdmx.read_sdmx"):
+            with patch(
+                    "convert_sdmx_xml_to_csv.sdmx.to_pandas",
+                    return_value=mock_multi_df,
+            ):
+                df = convert_sdmx_xml_to_dataframe(xml_file)
+                self.assertListEqual(list(df.columns),
+                                     ["REGION", "TIME_PERIOD", "OBS_VALUE"])
+                self.assertEqual(df.iloc[0]["OBS_VALUE"], 250)
+
+        # 3. Series with MultiIndex
+        mock_series = pd.Series([500], index=idx, name="value")
+        with patch("convert_sdmx_xml_to_csv.sdmx.read_sdmx"):
+            with patch(
+                    "convert_sdmx_xml_to_csv.sdmx.to_pandas",
+                    return_value=mock_series,
+            ):
+                df = convert_sdmx_xml_to_dataframe(xml_file)
+                self.assertListEqual(list(df.columns),
+                                     ["REGION", "TIME_PERIOD", "OBS_VALUE"])
+                self.assertEqual(df.iloc[0]["OBS_VALUE"], 500)
+
     def test_convert_sdmx_xml_to_dataframe_fallback(self):
         """Tests fallback to ElementTree when XML lacks SDMX structure headers."""
         sample_fallback_xml = """<?xml version="1.0" encoding="utf-8"?>

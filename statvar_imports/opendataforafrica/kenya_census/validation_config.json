@@ -3,11 +3,11 @@
     "rules": [
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet scoped freshness boundaries (2024 for refreshed series, 2022/2020 for education/vital stats, >= 2009 for historical census).",
+            "description": "Verify all active StatVars meet scoped freshness boundaries (2024 for refreshed series, 2022/2020 for education/vital stats, 2019 for 2019 census, and >= 2009 for 2009 historical census).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "CASE WHEN StatVar IN ('Count_Student_KenyaCertificateSecondaryEducation', 'Count_Student_KenyaCertificateSecondaryEducation_Female', 'Count_Student_KenyaCertificateSecondaryEducation_Male') THEN MaxDate >= '2022' WHEN StatVar = 'Count_BirthEvent_LiveBirth' THEN MaxDate >= '2020' WHEN regexp_matches(StatVar, '^(Count_(Death|MortalityEvent|BirthEvent|(Student|Person)_KenyaCertificateSecondaryEducation)|(Nominal_|RealValue_|GrowthRate_)?Amount_(Economic|Expenditure)Activity_GrossDomesticProduction)') THEN MaxDate >= '2024' ELSE MaxDate >= '2009' END AND total_svs > 0"
+                "condition": "CASE WHEN StatVar IN ('Count_Student_KenyaCertificateSecondaryEducation', 'Count_Student_KenyaCertificateSecondaryEducation_Female', 'Count_Student_KenyaCertificateSecondaryEducation_Male') OR regexp_matches(StatVar, '^(Mean_AssessmentScore_Student_|Count_Student_.*AdultEducation|Count_Person_KenyaCertificatePrimaryEducation_)') THEN MaxDate >= '2022' WHEN StatVar IN ('Count_BirthEvent_LiveBirth', 'Count_MaternalMortalityEvent', 'Count_Student_PrimarySchool', 'Count_Student_SecondarySchool') THEN MaxDate >= '2020' WHEN regexp_matches(StatVar, '^(Count_(Death|MortalityEvent|BirthEvent|(Student|Person)_KenyaCertificateSecondaryEducation)|(Nominal_|RealValue_|GrowthRate_)?Amount_(Economic|Expenditure)Activity_GrossDomesticProduction)') THEN MaxDate >= '2024' WHEN regexp_matches(StatVar, '^(Count_Household|Area_LandCover|Count_Person($|_(Female|Male|Intersex|Urban|Rural|PerArea)))') THEN MaxDate >= '2019' ELSE MaxDate >= '2009' END AND total_svs > 0"
             }
         },
         {
