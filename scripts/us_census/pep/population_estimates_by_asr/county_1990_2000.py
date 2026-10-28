@@ -69,7 +69,7 @@ def county1990(output_folder: str):
             df = replace_age(df)
 
             # Columns after 11 where having origin.
-            df.drop(df[df['Race'] >= 11].index, inplace=True)
+            df = df[df['Race'] < 11]
             # Changing the column values as per metadata.
             df['Race'] = df['Race'].astype(int).astype(str)
             df = df.replace({
@@ -89,7 +89,7 @@ def county1990(output_folder: str):
             df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='Age' , \
                 value_name='observation')
             df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['Race']
-            df.drop(columns=['Race', 'Age'], inplace=True)
+            df = df.drop(columns=['Race', 'Age'])
             # writing the dataframe to final dataframe
             final_df = pd.concat([final_df, df])
 

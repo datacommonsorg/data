@@ -48,8 +48,7 @@ def county2029(url_file: str, output_folder: str):
     # Code 0 is sent if AGEGRP starts from 0 and 1 if it starts from 0To4
     df = replace_agegrp(df, 1)
     # Drop unwanted columns.
-    df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
-        inplace=True)
+    df = df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],)
     df = df.drop(columns=[
         'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE',
         'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
@@ -73,7 +72,7 @@ def county2029(url_file: str, output_folder: str):
     ]
 
     df['Year'] = df['YEAR']
-    df.drop(columns=['YEAR'], inplace=True)
+    df = df.drop(columns=['YEAR'])
     df['WhiteAloneAgg'] = df['WA_MALE'].astype(int) + df['WA_FEMALE'].astype(
         int)
     df['BlackOrAfricanAmericanAlone'] = df['BA_MALE'].astype(int)\

@@ -62,7 +62,7 @@ def county1980(url_file: str, output_folder: str):
     df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='sv' ,\
         value_name='observation')
     df['SVs'] = 'Count_Person_' + df['sv'] + '_' + df['Race']
-    df.drop(columns=['Race', 'sv'], inplace=True)
+    df = df.drop(columns=['Race', 'sv'])
     # Generating Aggregated Data by using Group by on rows.
     df_as = pd.concat([df_as, df])
     df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
@@ -83,7 +83,7 @@ def county1980(url_file: str, output_folder: str):
     final_df = final_df.groupby(['Year','geo_ID','SVs', 'Measurement_Method'], dropna=False).sum()\
     .stack(0).reset_index()
     final_df['observation'] = final_df[0]
-    final_df.drop(columns=['level_4', 0], inplace=True)
+    final_df = final_df.drop(columns=['level_4', 0])
     final_df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
     final_df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,

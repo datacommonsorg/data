@@ -62,7 +62,7 @@ def county1970(url_file: str, output_folder: str):
     df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='sv' ,\
        value_name='observation')
     df['SVs'] = 'Count_Person_' + df['sv'] + '_' + df['Race']
-    df.drop(columns=['Race', 'sv'], inplace=True)
+    df = df.drop(columns=['Race', 'sv'])
     df['geo_ID'] = 'geoId/' + df['geo_ID']
     # Making copies of the current DF to be aggregated upon.
     final_df = pd.concat([final_df, df])

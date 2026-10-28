@@ -32,7 +32,7 @@ def state2000(url_file: str, output_folder: str):
                            "raw_data", 'raw_data_state_2000_2010.csv'),
               index=False)
     # Filtering the data needed.
-    df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index, inplace=True)
+    df = df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index)
     df = df.query("STATE != 0")
     df = df.query("AGEGRP != 0")
     df = df.query("ORIGIN == 0")
@@ -60,9 +60,8 @@ def state2000(url_file: str, output_folder: str):
     # Code 0 is sent if AGEGRP starts from 0 and 1 if it starts from 0To4
     df = replace_agegrp(df, 1)
     # Dropping unwanted columns.
-    df.drop(columns=['REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
-            'ESTIMATESBASE2000','CENSUS2010POP','POPESTIMATE2010'],\
-            inplace=True)
+    df = df.drop(columns=['REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
+            'ESTIMATESBASE2000','CENSUS2010POP','POPESTIMATE2010'],)
     df = df.melt(id_vars=['geo_ID','AGEGRP','SEX','RACE'], var_name='Year'\
             ,value_name='observation')
     # Making the years more understandable.

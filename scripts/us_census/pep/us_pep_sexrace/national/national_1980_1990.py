@@ -81,8 +81,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     df['SR'] = df['Sex'] + ' ' + df['Race']
 
     # dropping unwanted columns
-    df.drop(columns=COLUMNS_TO_SUM, inplace=True)
-    df.drop(columns=['Info', 'Sex', 'Race'], inplace=True)
+    df = df.drop(columns=COLUMNS_TO_SUM + ['Info', 'Sex', 'Race'])
 
     # group the df as per columns provided
     df = df.groupby(['Year', 'SR']).sum().transpose().stack(0).reset_index()
@@ -93,7 +92,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     df['Year'] = df['Year'].str.split('-', expand=True)[1]
 
     # dropping unwanted column
-    df.drop(columns=['level_0'], inplace=True)
+    df = df.drop(columns=['level_0'])
 
     # providing proper column names
     female_columns = [
@@ -118,7 +117,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     # aggregating columns to get Count_Person_Female
     df["Count_Person_Female"] = df[female_columns].sum(axis=1)
 
-    df.drop(columns=['geo_ID'], inplace=True)
+    df = df.drop(columns=['geo_ID'])
 
     df = df.groupby(['Year']).sum().reset_index()
 

@@ -55,7 +55,7 @@ def national1960(output_folder: str):
         df['Age'] = df['Age'].str.replace("85+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
         # Dropping unwanted columns Total (0) and Other Races (9-11)
-        df.drop(columns=['0', '9', '10', '11'], inplace=True)
+        df = df.drop(columns=['0', '9', '10', '11'])
         # Melt funtion used to change the Data frame format from wide to long.
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
         # Providing proper column names.
@@ -73,7 +73,7 @@ def national1960(output_folder: str):
         })
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
         # Dropping unwanted columns.
-        df.drop(columns=['Age', 'sv'], inplace=True)
+        df = df.drop(columns=['Age', 'sv'])
         # Inserting Year,Location and Measurement_Method to the dataframe.
         # Extracting year values from url.
         year = url[-8:-4]

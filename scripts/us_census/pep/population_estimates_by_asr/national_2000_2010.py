@@ -56,7 +56,7 @@ def national2000(url_file: str, output_folder: str):
     ])
     # Melt funtion used to change the Data frame format from wide to long.
     df['Year'] = df['YEAR']
-    df.drop(columns=['YEAR'], inplace=True)
+    df = df.drop(columns=['YEAR'])
     df = df.melt(id_vars=['Year','AGE'], var_name='sv' ,\
         value_name='observation')
     # Providing proper columns names.

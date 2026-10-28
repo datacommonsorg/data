@@ -62,7 +62,7 @@ def national1900(output_folder: str):
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
         # dropping unwanted columns
-        df.drop(columns=['0'], inplace=True)
+        df = df.drop(columns=['0'])
         # melt function is used to change the dataframe format from wide to long
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
         # giving proper column names
@@ -79,7 +79,7 @@ def national1900(output_folder: str):
             }
         })
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
-        df.drop(columns=['Age', 'sv'], inplace=True)
+        df = df.drop(columns=['Age', 'sv'])
         #to swap the columns
         year = url[-8:-4]
         # inserting location,year column and measurement_method to the dataframe

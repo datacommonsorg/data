@@ -63,8 +63,8 @@ def process_county_2020_2029(url: str) -> pd.DataFrame:
         + (df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME',\
-        'AGEGRP'], axis=1, inplace=True)
+    df = df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME',\
+        'AGEGRP'], axis=1)
 
     # all these column contain hispanic and non-hispanic
     # which are not required as not considering origin

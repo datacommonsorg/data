@@ -59,7 +59,7 @@ def process_county_1970_1979(url: str) -> pd.DataFrame:
     # providing geoId to the dataframe and making the geoId of 5 digit as county
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
     df['Year'] = df['Year'].astype(str) + "-" + df['geo_ID'].astype(str)
-    df.drop(columns=['geo_ID'], inplace=True)
+    df = df.drop(columns=['geo_ID'])
 
     # dropping the unwanted columns
     df = df.drop(columns=COLUMNS_TO_SUM)
@@ -82,7 +82,7 @@ def process_county_1970_1979(url: str) -> pd.DataFrame:
         .sum().transpose().stack(0).reset_index()
 
     # dropping unwanted column
-    df.drop(columns='level_0', inplace=True)
+    df = df.drop(columns='level_0')
 
     # splitting column into geoId and Year
     df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]
