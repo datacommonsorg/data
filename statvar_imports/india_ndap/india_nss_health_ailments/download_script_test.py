@@ -19,7 +19,8 @@ import unittest
 from unittest.mock import Mock, patch
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_PATH)
+sys.path.insert(0, _SCRIPT_PATH)
+sys.modules.pop('download_script', None)
 
 import download_script
 
@@ -127,10 +128,11 @@ class DownloadScriptTest(unittest.TestCase):
     @patch('download_script._retry_method')
     @patch('download_script.logging.fatal')
     def test_download_data_json_decode_error(self, mock_fatal, mock_retry,
-                                            mock_load_config):
+                                             mock_load_config):
         mock_load_config.return_value = {'url': 'http://fake-api.com?param=1'}
         mock_response = Mock()
-        mock_response.json.side_effect = json.JSONDecodeError('Expecting value', '', 0)
+        mock_response.json.side_effect = json.JSONDecodeError(
+            'Expecting value', '', 0)
         mock_retry.return_value = mock_response
         mock_fatal.side_effect = SystemExit('Fatal error')
         with self.assertRaises(SystemExit):
