@@ -21,13 +21,28 @@ from unittest import mock
 
 import sys
 
+from absl import flags
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _MODULE_DIR)
+
+_SAVED_FLAGS = {
+    _name: flags.FLAGS[_name]
+    for _name in ('states', 'years', 'output_dir', 'delay', 'timeout',
+                  'skip_existing', 'batch_size', 'batch_cooldown')
+    if _name in flags.FLAGS
+}
+for _flag_name in _SAVED_FLAGS:
+    delattr(flags.FLAGS, _flag_name)
 
 try:
     from statvar_imports.us_cdc.single_race import download
 except ModuleNotFoundError:
     import download
+
+for _flag_name, _flag_obj in _SAVED_FLAGS.items():
+    delattr(flags.FLAGS, _flag_name)
+    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class DownloadTest(unittest.TestCase):
@@ -314,7 +329,8 @@ class DownloadTest(unittest.TestCase):
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "execute_query")
     def test_download_state_network_exception_bubbles(self, mock_query):
         """Tests that network or runtime exceptions bubble up without entering chunking."""
-        mock_query.side_effect = download.requests.ConnectionError("Connection aborted")
+        mock_query.side_effect = download.requests.ConnectionError(
+            "Connection aborted")
 
         downloader = download.CdcWonderSingleRaceDownloader()
         with self.assertRaises(download.requests.ConnectionError):
@@ -338,8 +354,8 @@ class DownloadTest(unittest.TestCase):
                 delay=0.0,
                 skip_existing=False,
             )
-            expected_file = (
-                Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_02.csv")
+            expected_file = (Path(temp_dir) /
+                             "UnderlyingCauseofDeath_SingleRace_02.csv")
             self.assertTrue(expected_file.exists())
             lines = expected_file.read_text(encoding="utf-8").splitlines()
             self.assertEqual(len(lines), 2)
@@ -349,16 +365,15 @@ class DownloadTest(unittest.TestCase):
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "init_session")
     @mock.patch.object(download.CdcWonderSingleRaceDownloader, "download_state")
     def test_download_single_race_data_purges_preexisting_files(
-        self, mock_download_state, mock_init
-    ):
+            self, mock_download_state, mock_init):
         """Tests that stale monolithic or chunked files are purged before new downloads."""
         with tempfile.TemporaryDirectory() as temp_dir:
             # Create old monolithic file and unrelated state file
-            old_monolith = (
-                Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_02.csv")
+            old_monolith = (Path(temp_dir) /
+                            "UnderlyingCauseofDeath_SingleRace_02.csv")
             old_monolith.write_text("old data")
-            other_state = (
-                Path(temp_dir) / "UnderlyingCauseofDeath_SingleRace_04.csv")
+            other_state = (Path(temp_dir) /
+                           "UnderlyingCauseofDeath_SingleRace_04.csv")
             other_state.write_text("other state data")
 
             # Mock new download returning a 2-year chunk
@@ -377,9 +392,8 @@ class DownloadTest(unittest.TestCase):
 
             # Monolith for 02 should be purged, new chunk should exist, and other state intact
             self.assertFalse(old_monolith.exists())
-            new_chunk = (
-                Path(temp_dir) /
-                "UnderlyingCauseofDeath_SingleRace_02_2018_2019.csv")
+            new_chunk = (Path(temp_dir) /
+                         "UnderlyingCauseofDeath_SingleRace_02_2018_2019.csv")
             self.assertTrue(new_chunk.exists())
             self.assertTrue(other_state.exists())
             mock_init.assert_called_once()
@@ -408,8 +422,7 @@ class DownloadTest(unittest.TestCase):
 
     @mock.patch.object(download, "CdcWonderSingleRaceDownloader")
     def test_download_single_race_data_filters_unavailable_years(
-        self, mock_downloader_cls
-    ):
+            self, mock_downloader_cls):
         """Tests that unpublished future years are filtered out from requested years."""
         mock_instance = mock.MagicMock()
         mock_instance.available_years = ["2018", "2019", "2020", "2024"]
