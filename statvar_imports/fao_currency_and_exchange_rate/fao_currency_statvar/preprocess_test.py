@@ -16,8 +16,14 @@ Script to automate the testing for FAO_Currency_statvar import.
 """
 
 import os
+import sys
 import unittest
 from absl import app, logging
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+sys.modules.pop('preprocess', None)
 
 from preprocess import melt_year_and_flag_columns
 

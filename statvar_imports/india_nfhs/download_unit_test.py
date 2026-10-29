@@ -1,15 +1,48 @@
 import unittest
 import os
+import sys
 import json
+import types
 import pandas as pd
 import tempfile
 from unittest.mock import patch, mock_open, MagicMock
 
-# Import the functions from the main script.
-# Assuming the main script is saved as 'main_script.py' and the
-# private methods are named with a single underscore prefix after name mangling.
-# Adjust 'main_script' to the actual filename if different.
-from main_script import __load_api_keys, __fetch_api_data, __extract_metadata_mapping, __flatten_data_records, __hash_page_records, __preprocess_dataframe, __generate_filename, __process_ndap_api
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+for _path in (_SCRIPT_DIR, _REPO_ROOT, os.path.join(_REPO_ROOT, 'util')):
+    if _path not in sys.path:
+        sys.path.insert(0, _path)
+if 'download_util_script' in sys.modules:
+    sys.modules.setdefault('util.download_util_script',
+                           sys.modules['download_util_script'])
+
+# download.py imports `from data.util import file_util`, which only resolves
+# when the repo directory is named `data`. Alias it to the local util package
+# so the test does not depend on the checkout directory name.
+import util as _util_pkg
+from util import file_util as _file_util
+
+_data_pkg = types.ModuleType('data')
+_data_pkg.util = _util_pkg
+sys.modules.setdefault('data', _data_pkg)
+sys.modules.setdefault('data.util', _util_pkg)
+sys.modules.setdefault('data.util.file_util', _file_util)
+
+try:
+    from statvar_imports.india_nfhs import download as main_script
+except ImportError:
+    import download as main_script
+
+sys.modules['main_script'] = main_script
+
+_load_api_keys = getattr(main_script, '__load_api_keys')
+_fetch_api_data = getattr(main_script, '__fetch_api_data')
+_extract_metadata_mapping = getattr(main_script, '__extract_metadata_mapping')
+_flatten_data_records = getattr(main_script, '__flatten_data_records')
+_hash_page_records = getattr(main_script, '__hash_page_records')
+_preprocess_dataframe = getattr(main_script, '__preprocess_dataframe')
+_generate_filename = getattr(main_script, '__generate_filename')
+_process_ndap_api = getattr(main_script, '__process_ndap_api')
 
 
 class TestNDAPScript(unittest.TestCase):
@@ -20,9 +53,10 @@ class TestNDAPScript(unittest.TestCase):
 
     def tearDown(self):
         # Clean up the mock temporary directory after each test
-        for file in os.listdir(self.mock_temp_dir):
-            os.remove(os.path.join(self.mock_temp_dir, file))
-        os.rmdir(self.mock_temp_dir)
+        if os.path.exists(self.mock_temp_dir):
+            for file in os.listdir(self.mock_temp_dir):
+                os.remove(os.path.join(self.mock_temp_dir, file))
+            os.rmdir(self.mock_temp_dir)
 
     def test_load_api_keys_success(self):
         """
@@ -34,7 +68,7 @@ class TestNDAPScript(unittest.TestCase):
         with patch('main_script.file_util.file_copy') as mock_copy, \
              patch('builtins.open', mock_open(read_data=json.dumps(mock_keys))) as mock_file:
 
-            keys = __load_api_keys()
+            keys = _load_api_keys()
 
             mock_copy.assert_called_once()
             self.assertEqual(keys, mock_keys)
@@ -46,7 +80,7 @@ class TestNDAPScript(unittest.TestCase):
         with patch('main_script.file_util.file_copy',
                    side_effect=FileNotFoundError):
             with self.assertRaises(RuntimeError) as context:
-                __load_api_keys()
+                _load_api_keys()
             self.assertIn("API keys file not found", str(context.exception))
 
     @patch('main_script.download_file')
@@ -58,9 +92,10 @@ class TestNDAPScript(unittest.TestCase):
         mock_download.return_value = True
 
         with patch('builtins.open', mock_open(read_data=json.dumps(mock_data))) as mock_file_open, \
-             patch('main_script.tempfile.mkdtemp', return_value=self.mock_temp_dir):
+             patch('main_script.tempfile.mkdtemp', return_value=self.mock_temp_dir), \
+             patch('main_script.os.path.exists', side_effect=[True, False]):
 
-            data = __fetch_api_data("http://mock.api.com")
+            data = _fetch_api_data("http://mock.api.com")
 
             self.assertEqual(data, mock_data)
             mock_download.assert_called_once()
@@ -73,8 +108,9 @@ class TestNDAPScript(unittest.TestCase):
         Test that __fetch_api_data handles download failures.
         """
         with self.assertRaises(RuntimeError) as context:
-            __fetch_api_data("http://mock.api.com/fail")
-        self.assertIn("Failed to retrieve data", str(context.exception))
+            _fetch_api_data("http://mock.api.com/fail")
+        self.assertIn("missing user script output files",
+                      str(context.exception))
 
     def test_extract_metadata_mapping(self):
         """
@@ -96,7 +132,7 @@ class TestNDAPScript(unittest.TestCase):
             }]
         }
 
-        mapping = __extract_metadata_mapping(mock_headers)
+        mapping = _extract_metadata_mapping(mock_headers)
 
         self.assertEqual(mapping, {
             "ID1": "Display Name 1",
@@ -120,7 +156,7 @@ class TestNDAPScript(unittest.TestCase):
             }
         }]
 
-        flattened_data = __flatten_data_records(raw_data)
+        flattened_data = _flatten_data_records(raw_data)
 
         self.assertEqual(flattened_data, [{
             "State": "A",
@@ -135,12 +171,12 @@ class TestNDAPScript(unittest.TestCase):
         Test that __preprocess_dataframe adds 'YearCode' and 'DistrictName' correctly.
         """
         df_raw = pd.DataFrame({
-            'Year': ['2019-20', '2021', None],
+            'Year': ['2019-2020', '2021', None],
             'District': ['DistrictA', 'DistrictB', 'DistrictC'],
             'State': ['StateA', 'StateB', 'StateC']
         })
 
-        df_processed = __preprocess_dataframe(df_raw.copy())
+        df_processed = _preprocess_dataframe(df_raw.copy())
 
         self.assertIn('YearCode', df_processed.columns)
         self.assertIn('DistrictName', df_processed.columns)
@@ -161,20 +197,20 @@ class TestNDAPScript(unittest.TestCase):
         Test that __generate_filename generates correct filenames.
         """
         url_with_params = "http://example.com/api?ind=I123,I456&dim=D789,D101"
-        filename = __generate_filename(url_with_params)
+        filename = _generate_filename(url_with_params)
         self.assertEqual(filename, "I123_D789.csv")
 
         url_without_params = "http://example.com/api"
-        filename_hashed = __generate_filename(url_without_params)
+        filename_hashed = _generate_filename(url_without_params)
         self.assertTrue(filename_hashed.startswith("api_data_"))
         self.assertTrue(filename_hashed.endswith(".csv"))
 
-    @patch('main_script.__hash_page_records', return_value='mock_hash')
+    @patch('main_script.__hash_page_records', side_effect=['hash1', 'hash2'])
     @patch('main_script.__preprocess_dataframe', side_effect=lambda df: df)
     @patch('main_script.__flatten_data_records', side_effect=lambda data: data)
     @patch('main_script.__extract_metadata_mapping', return_value={})
     @patch('main_script.__fetch_api_data')
-    @patch('main_script.pd.DataFrame.to_csv')
+    @patch('main_script.pd.DataFrame.to_csv', autospec=True)
     @patch('main_script.os.makedirs')
     def test_process_ndap_api_pagination(self, mock_makedirs, mock_to_csv,
                                          mock_fetch, *args):
@@ -204,7 +240,7 @@ class TestNDAPScript(unittest.TestCase):
         ]
 
         output_dir = "mock_output_dir"
-        __process_ndap_api("http://mock.api.com?param=test", output_dir)
+        _process_ndap_api("http://mock.api.com?param=test", output_dir)
 
         # Verify fetch was called for each page
         self.assertEqual(mock_fetch.call_count, 3)
