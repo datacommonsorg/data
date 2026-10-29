@@ -42,8 +42,10 @@ try:
 except ModuleNotFoundError:
     import download
 
+for _flag_name in ('output_dir', 'max_workers'):
+    if _flag_name in flags.FLAGS:
+        delattr(flags.FLAGS, _flag_name)
 for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    delattr(flags.FLAGS, _flag_name)
     flags.FLAGS[_flag_name] = _flag_obj
 
 
