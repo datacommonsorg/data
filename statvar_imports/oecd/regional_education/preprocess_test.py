@@ -33,7 +33,8 @@ class PreprocessTest(unittest.TestCase):
 
     def setUp(self):
         self.temp_dir = tempfile.mkdtemp()
-        self.gcs_source_dir = os.path.join(self.temp_dir, 'gcs_output', 'source_files')
+        self.gcs_source_dir = os.path.join(self.temp_dir, 'gcs_output',
+                                           'source_files')
         os.makedirs(self.gcs_source_dir, exist_ok=True)
         self.places_file = os.path.join(
             self.temp_dir, 'oecd_regional_education_places_resolved.csv')
@@ -63,8 +64,14 @@ class PreprocessTest(unittest.TestCase):
             'AGE', 'OBS_VALUE', 'STATISTICAL_OPERATION', 'EXTRA_COL'
         ]
         rows = [
-            ['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '35.5', 'NORMAL', 'foo'],
-            ['PT19', '2021', '0', 'F', 'Secondary education', 'Y25T34', '42.1', '', 'bar'],
+            [
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '35.5', 'NORMAL', 'foo'
+            ],
+            [
+                'PT19', '2021', '0', 'F', 'Secondary education', 'Y25T34',
+                '42.1', '', 'bar'
+            ],
         ]
         with open(src_csv, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -98,8 +105,14 @@ class PreprocessTest(unittest.TestCase):
             'AGE', 'OBS_VALUE', 'STATISTICAL_OPERATION'
         ]
         rows = [
-            ['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '35.5', 'SE'],
-            ['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '35.5', 'ESTIMATE'],
+            [
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '35.5', 'SE'
+            ],
+            [
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '35.5', 'ESTIMATE'
+            ],
         ]
         with open(src_csv, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -155,15 +168,24 @@ class PreprocessTest(unittest.TestCase):
         ]
         rows = [
             ['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '12.4'],
-            ['UNKNOWN_1', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '15.0'],
-            ['UNKNOWN_2', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '18.0'],
+            [
+                'UNKNOWN_1', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '15.0'
+            ],
+            [
+                'UNKNOWN_2', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '18.0'
+            ],
         ]
         with open(src_csv, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)
             writer.writerows(rows)
 
-        _filter_csv(src_csv, dst_csv, valid_places, unmapped_log_path=unmapped_log)
+        _filter_csv(src_csv,
+                    dst_csv,
+                    valid_places,
+                    unmapped_log_path=unmapped_log)
 
         with open(dst_csv, 'r', encoding='utf-8') as f:
             out_rows = list(csv.reader(f))
@@ -186,7 +208,10 @@ class PreprocessTest(unittest.TestCase):
             'AGE', 'OBS_VALUE'
         ]
         rows = [
-            ['dcid:country/USA', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '45.0'],
+            [
+                'dcid:country/USA', '2020', '0', '_T', 'Tertiary education',
+                'Y25T64', '45.0'
+            ],
         ]
         with open(src_csv, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -221,7 +246,10 @@ class PreprocessTest(unittest.TestCase):
             'AGE', 'OBS_VALUE'
         ]
         rows = [
-            ['UNMAPPED', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '12.4'],
+            [
+                'UNMAPPED', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '12.4'
+            ],
         ]
         with open(src_csv, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -266,9 +294,18 @@ class PreprocessTest(unittest.TestCase):
             'AGE', 'OBS_VALUE', 'STATISTICAL_OPERATION'
         ]
         rows = [
-            ['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '35.5', 'NORMAL'],
-            ['PT19', '2021', '0', 'F', 'Secondary education', 'Y25T34', '42.1', ''],
-            ['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '1.2', 'SE'],
+            [
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '35.5', 'NORMAL'
+            ],
+            [
+                'PT19', '2021', '0', 'F', 'Secondary education', 'Y25T34',
+                '42.1', ''
+            ],
+            [
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '1.2', 'SE'
+            ],
         ]
         with open(raw_path, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -277,12 +314,15 @@ class PreprocessTest(unittest.TestCase):
 
         preprocess(base_path=self.temp_dir)
 
-        target_csv = os.path.join(self.gcs_source_dir, 'oecd_regional_education_data.csv')
+        target_csv = os.path.join(self.gcs_source_dir,
+                                  'oecd_regional_education_data.csv')
         self.assertTrue(os.path.isfile(target_csv))
         # Verify raw file was preserved for GCS archiving
         self.assertTrue(os.path.isfile(raw_path))
         # Verify tmp file was replaced
-        self.assertFalse(os.path.isfile(os.path.join(self.gcs_source_dir, 'filtered_tmp.csv')))
+        self.assertFalse(
+            os.path.isfile(os.path.join(self.gcs_source_dir,
+                                        'filtered_tmp.csv')))
 
         with open(target_csv, 'r', encoding='utf-8') as f:
             out_rows = list(csv.reader(f))
@@ -307,7 +347,10 @@ class PreprocessTest(unittest.TestCase):
         with open(older_file, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)
-            writer.writerow(['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '10.0'])
+            writer.writerow([
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '10.0'
+            ])
 
         # Set older mtime
         old_time = time.time() - 100
@@ -318,14 +361,18 @@ class PreprocessTest(unittest.TestCase):
         with open(newer_file, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)
-            writer.writerow(['US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64', '99.0'])
+            writer.writerow([
+                'US56', '2020', '0', '_T', 'Tertiary education', 'Y25T64',
+                '99.0'
+            ])
 
         new_time = time.time()
         os.utime(newer_file, (new_time, new_time))
 
         preprocess(base_path=self.temp_dir)
 
-        target_csv = os.path.join(self.gcs_source_dir, 'oecd_regional_education_data.csv')
+        target_csv = os.path.join(self.gcs_source_dir,
+                                  'oecd_regional_education_data.csv')
         with open(target_csv, 'r', encoding='utf-8') as f:
             out_rows = list(csv.reader(f))
         # Value 99.0 from newer_file should have been selected
