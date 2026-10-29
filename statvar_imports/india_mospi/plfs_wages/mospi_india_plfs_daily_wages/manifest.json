@@ -1,0 +1,29 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "MOSPI_IndiaPLFS_DailyWages",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://esankhyiki.mospi.gov.in/macroindicators?product=plfs",
+            "provenance_description": "Periodic Labour Force Survey (PLFS) average daily wage earnings from casual labour work other than public works in India from the Ministry of Statistics and Programme Implementation (MoSPI).",
+            "scripts": [
+                "download.py",
+                "../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/daily_wages_input.csv --pv_map=daily_wages_pvmap.csv --config_file=daily_wages_metadata.csv --places_resolved_csv=daily_wages_places.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,dailywages_stat_vars.mcf --output_path=output/daily_wages_output --output_counters=counters/daily_wages_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/daily_wages_output.tmcf",
+                    "cleaned_csv": "output/daily_wages_output.csv",
+                    "node_mcf": "*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv"
+            ],
+            "cron_schedule": "0 3 * * 1",
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}

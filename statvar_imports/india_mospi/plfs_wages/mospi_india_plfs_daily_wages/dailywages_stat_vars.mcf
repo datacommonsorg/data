@@ -1,0 +1,83 @@
+Node: dcid:Mean_WagesDaily_Person_Female_WorkerOtherThanPublicWorkerOccupation
+name: "Mean daily wages of female worker other than public worker"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+gender: dcid:Female
+occupation: dcid:WorkerOtherThanPublicWorker
+
+Node: dcid:Mean_WagesDaily_Person_Female_WorkerOtherThanPublicWorkerOccupation_Rural
+name: "Mean daily wages of female worker other than public worker in rural area"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+gender: dcid:Female
+occupation: dcid:WorkerOtherThanPublicWorker
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Mean_WagesDaily_Person_Female_WorkerOtherThanPublicWorkerOccupation_Urban
+name: "Mean daily wages of female worker other than public worker in urban area"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+gender: dcid:Female
+occupation: dcid:WorkerOtherThanPublicWorker
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Mean_WagesDaily_Person_Male_WorkerOtherThanPublicWorkerOccupation
+name: "Mean daily wages of male worker other than public worker"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+gender: dcid:Male
+occupation: dcid:WorkerOtherThanPublicWorker
+
+Node: dcid:Mean_WagesDaily_Person_Male_WorkerOtherThanPublicWorkerOccupation_Rural
+name: "Mean daily wages of male worker other than public worker in rural area"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+gender: dcid:Male
+occupation: dcid:WorkerOtherThanPublicWorker
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Mean_WagesDaily_Person_Male_WorkerOtherThanPublicWorkerOccupation_Urban
+name: "Mean daily wages of male worker other than public worker in urban area"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+gender: dcid:Male
+occupation: dcid:WorkerOtherThanPublicWorker
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Mean_WagesDaily_Person_WorkerOtherThanPublicWorkerOccupation
+name: "Mean daily wages of worker other than public worker"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+occupation: dcid:WorkerOtherThanPublicWorker
+
+Node: dcid:Mean_WagesDaily_Person_WorkerOtherThanPublicWorkerOccupation_Rural
+name: "Mean daily wages of worker other than public worker in rural area"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+occupation: dcid:WorkerOtherThanPublicWorker
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Mean_WagesDaily_Person_WorkerOtherThanPublicWorkerOccupation_Urban
+name: "Mean daily wages of worker other than public worker in urban area"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:wagesDaily
+statType: dcid:meanValue
+occupation: dcid:WorkerOtherThanPublicWorker
+placeOfResidenceClassification: dcid:Urban
