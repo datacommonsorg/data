@@ -9,10 +9,11 @@ repository contracts and instructions take precedence.
   manifest contract, and verify that every referenced script and input exists.
 - Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
   generated schema/statvar MCF files (e.g., `output/*.mcf`).
-- Always retain downloaded source files in GCS via `source_files`, alongside
-  other operational artifacts (e.g., counter files from `--output_counters`,
-  `manifest.json`, or configs); do not confuse source artifacts with import
-  inputs.
+- Verify that `source_files` matches every file the download step writes, so
+  each version keeps its source data for debugging and source attribution.
+  List other operational artifacts there too (e.g., counter files from
+  `--output_counters`, `manifest.json`, or configs); do not confuse source
+  artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Keep curator contacts valid without prescribing one fixed email value.
@@ -59,24 +60,11 @@ repository contracts and instructions take precedence.
 
 ## Import validation
 
-**CRITICAL: When `golden_summary_report.csv` or `validation_config.json` are present, you MUST rigorously enforce all validation and freshness rules defined in this section.**
-
 - Configure `stat_var_processor` invocations with `--output_counters` to write
   counters to a file (e.g. under `counters/`), and ensure those counter files are
   included in the manifest's `source_files` so they are copied to GCS for
   validation.
-- Require explicit date validation in `validation_config.json` to ensure freshness
-  and date consistency across refreshes (since `golden_summary_report.csv`
-  intentionally excludes `MaxDate`):
-  - Read the latest accepted version from GCS:
-    `gcloud storage cat gs://<output_bucket>/<import_prefix>/latest_version.txt`
-    (use `datcom-prod-imports` by default).
-  - Read the latest summary report:
-    `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
-  - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
-    - When `MaxDate` is uniform across StatVars, require `MAX_DATE_CONSISTENT`. If missing from `validation_config.json`, report a P2 finding.
-    - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data, or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within allowable lag (months/years) for the dataset's refresh schedule.
-    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`.
+
 
 When reviewing `validation_config*.json` or a manifest change to
 `validation_config_file`, read:
@@ -84,6 +72,9 @@ When reviewing `validation_config*.json` or a manifest change to
 - [Import validation framework](../../../../tools/import_validation/README.md)
 - [Validation configuration and golden checks](../../../../tools/import_validation/Validations.md)
 - [Import artifact layout](../../../common/references/import-automation/artifact-layout.md)
+- Verify that each `validation_config*.json` in the import is set as
+  `validation_config_file` on its import specification in `manifest.json`;
+  without it, auto-refresh runs only the default validations.
 - Resolve local `GOLDENS_CHECK` paths relative to the validation config file
   passed to the runner, and verify that every `golden_files` path or glob
   matches at least one intended golden file.
@@ -91,9 +82,22 @@ When reviewing `validation_config*.json` or a manifest change to
   `<import>/<ImportName>/<version>/input<N>/validation/merged_validation_config.json`
   as the base. For example, reference `<import>/golden_data/golden_summary_report.csv`
   as `../../../../golden_data/golden_summary_report.csv`.
+- Require explicit date validation in `validation_config.json` to ensure freshness
+  and to catch refreshes that drop the latest data (since
+  `golden_summary_report.csv` intentionally excludes `MaxDate`):
+  - Read the latest accepted version from GCS:
+    `gcloud storage cat gs://<output_bucket>/<import_prefix>/latest_version.txt`
+    (use `datcom-prod-imports` by default).
+  - Read the latest summary report:
+    `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
+  - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
+    - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data, or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within allowable lag (months/years) for the dataset's refresh schedule.
+    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`. If Per-StatVar checks get complicated (e.g. multiple sql conditions), prefer defining rules only for important statvars.
 
 ## Download and processing reliability
 
+- Prefer the shared helpers in [util/](../../../../util/) over new code that
+  does the same job.
 - Use the shared [Data Commons API wrapper](../../../../util/dc_api_wrapper.py)
   for Data Commons API calls unless it lacks the required functionality.
 - Use [download_util.py](../../../../util/download_util.py) or
@@ -118,3 +122,7 @@ When reviewing `validation_config*.json` or a manifest change to
   paths with representative fixtures.
 - Keep checked-in fixtures representative and generally no more than 100
   records.
+- Verify that every directory from the top-level import folder (`scripts/` or
+  `statvar_imports/`) down to each `*_test.py` file has an `__init__.py`;
+  `./run_tests.sh` uses `unittest discover`, which skips directories without
+  one.

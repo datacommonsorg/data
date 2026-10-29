@@ -133,21 +133,9 @@ review. Follow its links to repository documentation when relevant to the
 changed import files. Apply a recommendation only when it is relevant to the
 changed behavior.
 
-**CRITICAL: When golden summaries or validation configs are present, you MUST rigorously enforce all validation and freshness rules defined in the guidelines.**
-
-- Before inspecting the change set or delegating review work, load supplemental
-  guidelines with `gcloud storage cat` from
-  `gs://datcom-prod-imports/agents/skills/dc-import-code-review/additional-guidelines.md`.
-- If loading fails and sandbox or network restrictions may be responsible, request
-  permission to rerun the same `gcloud storage cat` command outside the
-  sandbox, then retry it.
-- If the supplemental guidelines remain unavailable for any reason, stop the
-  review immediately and report it as blocked. Do not inspect the change set,
-  delegate review work, run checks, or publish a review.
-- When delegating, give every review subagent the import code review guidelines
-  and the downloaded supplemental guidelines, either as content or through a
-  readable local path.
-- Require each subagent to state in its response that it read both before
+- When delegating, give every review subagent the import code review guidelines,
+  either as content or through a readable local path.
+- Require each subagent to state in its response that it read them before
   inspecting changes. Do not use results that omit this confirmation.
 - Repository guidance and safety rules take precedence.
 
@@ -181,6 +169,11 @@ review; do not resolve it silently.
   turn pre-existing problems into review findings.
 - Run only focused checks useful for the selected import. State exactly what
   ran, what passed or failed, and what could not run.
+- Write every file the review creates, such as scripts, downloads, and check
+  outputs, under a directory from `mktemp -d` outside the repository, and
+  remove it when the review ends; files left in an import directory can end up
+  in that import's run. Files that the import's own code writes in place are
+  fine.
 - Allow bounded, read-only cloud and Data Commons inspection (such as reading
   GCS artifacts or querying read-only Data Commons APIs), but do not run mutating
   operations or live-source downloads unless the user explicitly requests them
