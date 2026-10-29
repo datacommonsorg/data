@@ -8,6 +8,7 @@ logging.set_verbosity(logging.INFO)
 # logging.set_verbosity(logging.DEBUG)
 # --------------------------------------
 
+
 def rename_target_file(base_path='.'):
     folder_name = 'gcs_output/source_files'
     target_folder = os.path.join(base_path, folder_name)
@@ -15,8 +16,9 @@ def rename_target_file(base_path='.'):
     try:
         # Check if the folder exists
         if not os.path.isdir(target_folder):
-            logging.fatal(f"Folder '{folder_name}' not found in '{base_path}'") # Changed to error for non-fatal issues
-            return # Exit function if folder not found
+            logging.fatal(f"Folder '{folder_name}' not found in '{base_path}'"
+                         )  # Changed to error for non-fatal issues
+            return  # Exit function if folder not found
 
         # Pattern to match any file starting with 'A'
         pattern = re.compile(r'^A.*$', re.IGNORECASE)
@@ -27,16 +29,22 @@ def rename_target_file(base_path='.'):
             logging.info(f"Checking file: {filename}")
             if pattern.match(filename):
                 old_path = os.path.join(target_folder, filename)
-                new_path = os.path.join(target_folder, 'oecd_regional_education_data.csv')
+                new_path = os.path.join(target_folder,
+                                        'oecd_regional_education_data.csv')
 
                 try:
                     os.rename(old_path, new_path)
-                    logging.info(f"Renamed '{filename}' to 'oecd_regional_education_data.csv'")
+                    logging.info(
+                        f"Renamed '{filename}' to 'oecd_regional_education_data.csv'"
+                    )
                     renamed = True
                 except PermissionError:
-                    logging.warning(f"Permission denied while renaming '{filename}'.") # Changed to warning
+                    logging.warning(
+                        f"Permission denied while renaming '{filename}'."
+                    )  # Changed to warning
                 except OSError as e:
-                    logging.fatal(f"OS error while renaming '{filename}': {e}") # Changed to error
+                    logging.fatal(f"OS error while renaming '{filename}': {e}"
+                                 )  # Changed to error
                 break  # Rename only the first match
 
         if not renamed:
@@ -49,7 +57,9 @@ def rename_target_file(base_path='.'):
         # This block might not be hit if caught earlier, but good for other PermissionError
         logging.fatal(f"Global permission error: {e}")
     except Exception as e:
-        logging.fatal(f"An unexpected critical error occurred: {e}") # Changed to critical for unexpected errors
+        logging.fatal(f"An unexpected critical error occurred: {e}"
+                     )  # Changed to critical for unexpected errors
+
 
 # Run it
 rename_target_file()

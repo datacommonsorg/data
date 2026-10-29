@@ -40,6 +40,7 @@ class DownloadTest(unittest.TestCase):
             temp_path = f'{target_path}.tmp'
 
             with mock.patch.object(pd.DataFrame, 'to_csv') as mock_to_csv:
+
                 def create_empty_tmp(path, index=False):
                     with open(path, 'w'):
                         pass
@@ -159,8 +160,7 @@ class DownloadTest(unittest.TestCase):
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
     )
     def test_download_column_order_with_missing_first_row_keys(
-        self, mock_create_session
-    ):
+            self, mock_create_session):
         mock_session = mock.MagicMock()
         mock_session.__enter__.return_value = mock_session
         mock_create_session.return_value = mock_session

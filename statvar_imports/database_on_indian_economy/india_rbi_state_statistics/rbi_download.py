@@ -29,6 +29,7 @@ flags.DEFINE_string(
     'gs://unresolved_mcf/india_rbi/state_statistics/configs.py',
     'Config file path')
 
+
 def reads_config_file():
     _FLAGS = flags.FLAGS
     config_file_path = _FLAGS.config_file_path
@@ -45,6 +46,7 @@ def reads_config_file():
     except Exception as e:
         logging.fatal(f"Cannot extract url and related configs: {e}")
 
+
 def download_files(URL_CONFIG):
     try:
         for config in URL_CONFIG:
@@ -53,7 +55,11 @@ def download_files(URL_CONFIG):
             file_name = config.get("filename")
             file_path = os.path.join(INPUT_DIR, category_name, file_name)
             os.makedirs(os.path.join(INPUT_DIR, category_name), exist_ok=True)
-            file_response = _retry_method(config_url, headers=None, tries=3, delay=5, backoff=2)
+            file_response = _retry_method(config_url,
+                                          headers=None,
+                                          tries=3,
+                                          delay=5,
+                                          backoff=2)
             if file_response:
                 with open(file_path, 'wb') as f:
                     f.write(file_response.content)
@@ -66,26 +72,30 @@ def preprocess_files(directory_path):
     if not os.path.isdir(directory_path):
         logging.info(f"Error: Directory not found at '{directory_path}'")
         return
-    
+
     xlsx_files = [f for f in os.listdir(directory_path) if f.endswith('.xlsx')]
 
     if not xlsx_files:
         logging.info(f"No XLSX files found in the directory: {directory_path}")
         return
 
-    logging.info(f"Found {len(xlsx_files)} XLSX files to process in '{directory_path}'.")
+    logging.info(
+        f"Found {len(xlsx_files)} XLSX files to process in '{directory_path}'.")
 
     for file_name in xlsx_files:
         file_path = os.path.join(directory_path, file_name)
         logging.info(f"Processing file: {file_path}")
         try:
-            all_sheets_data = pd.read_excel(file_path, sheet_name=None, header=None)
+            all_sheets_data = pd.read_excel(file_path,
+                                            sheet_name=None,
+                                            header=None)
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 for sheet_name, df in all_sheets_data.items():
-                    df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip())
+                    df = df.map(lambda x: str(x).replace('*', '').replace(
+                        '@', '').strip())
                     mask = df.eq('State/Union Territory').any(axis=1)
                     state_positions = df[mask] == 'State/Union Territory'
-                    
+
                     def safe_to_numeric(val):
                         val_str = str(val)
                         if val_str.isdigit():
@@ -95,11 +105,15 @@ def preprocess_files(directory_path):
                             return float_val
                         except ValueError:
                             return val
-                    
+
                     df_num = df[mask].applymap(safe_to_numeric)
-                    converted = df_num.mask(state_positions, 'State/Union Territory')
+                    converted = df_num.mask(state_positions,
+                                            'State/Union Territory')
                     df.loc[mask, :] = converted
-                    df.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+                    df.to_excel(writer,
+                                sheet_name=sheet_name,
+                                index=False,
+                                header=False)
 
         except Exception as e:
             logging.fatal(f"Error processing {file_name}: {e}")
@@ -112,11 +126,13 @@ def main(_):
     RBI_URL = configs['URLS_CONFIG']
     download_files(RBI_URL)
     logging.info("Download process Completed successfully")
-    directories = ['agriculture', 'environment', 'infrastructure', 'price_and_wages']
+    directories = [
+        'agriculture', 'environment', 'infrastructure', 'price_and_wages'
+    ]
     for directory in directories:
         preprocess_files(os.path.join(INPUT_DIR, directory))
     logging.info("Pre-process Completed successfully")
 
 
-if __name__ == "__main__":  
+if __name__ == "__main__":
     app.run(main)

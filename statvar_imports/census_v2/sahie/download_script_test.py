@@ -24,6 +24,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_PATH)
 import download_script
 
+
 class DownloadScriptTest(unittest.TestCase):
 
     def setUp(self):
@@ -35,15 +36,15 @@ class DownloadScriptTest(unittest.TestCase):
         self.test_dir.cleanup()
 
     def test_clean_csv_file(self):
-        dummy_content = (
-            "This is a description line to be removed.\n"
-            "Another line of metadata.\n"
-            "year,version,statefips,countyfips,geocat\n"
-            "2022,1,01,001,County\n"
-        )
+        dummy_content = ("This is a description line to be removed.\n"
+                         "Another line of metadata.\n"
+                         "year,version,statefips,countyfips,geocat\n"
+                         "2022,1,01,001,County\n")
         dummy_content_encoded = dummy_content.encode('utf-8')
 
-        with tempfile.NamedTemporaryFile(mode='wb', delete=False, dir=self.test_dir.name) as tmp:
+        with tempfile.NamedTemporaryFile(mode='wb',
+                                         delete=False,
+                                         dir=self.test_dir.name) as tmp:
             tmp.write(dummy_content_encoded)
             tmp_path = tmp.name
 
@@ -52,10 +53,8 @@ class DownloadScriptTest(unittest.TestCase):
         with open(tmp_path, 'r', encoding='utf-8') as f:
             cleaned_content = f.read()
 
-        expected_content = (
-            "year,version,statefips,countyfips,geocat\n"
-            "2022,1,01,001,County\n"
-        )
+        expected_content = ("year,version,statefips,countyfips,geocat\n"
+                            "2022,1,01,001,County\n")
         self.assertEqual(cleaned_content, expected_content)
 
     @patch('download_script.download_file')
@@ -70,7 +69,7 @@ class DownloadScriptTest(unittest.TestCase):
             with open(dummy_csv_path, 'w') as f:
                 f.write("dummy_data")
             return True
-        
+
         mock_download.side_effect = side_effect_download
 
         original_cwd = os.getcwd()
@@ -87,7 +86,8 @@ class DownloadScriptTest(unittest.TestCase):
     @patch('download_script.download_file', return_value=False)
     @patch('download_script.datetime')
     @patch('absl.logging.warning')
-    def test_main_download_failure(self, mock_logging_warning, mock_datetime, mock_download):
+    def test_main_download_failure(self, mock_logging_warning, mock_datetime,
+                                   mock_download):
         mock_datetime.datetime.now.return_value.year = 2020
 
         original_cwd = os.getcwd()
@@ -96,9 +96,12 @@ class DownloadScriptTest(unittest.TestCase):
             download_script.main(None)
         finally:
             os.chdir(original_cwd)
-        
+
         self.assertEqual(mock_download.call_count, 1)
-        mock_logging_warning.assert_called_with("Failed to download or process data for year 2018. Stopping further downloads.")
+        mock_logging_warning.assert_called_with(
+            "Failed to download or process data for year 2018. Stopping further downloads."
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -28,18 +28,14 @@ class DownloadTest(unittest.TestCase):
         tn_template = 'https://tn.example/{year}/Diabetes_County_{year}.xlsx'
         gcs_template = 'gs://test-bucket/input/Diabetes_County_{year}.xlsx'
 
-        self.assertEqual(
-            download.generate_urls(2019, 2020, tn_template),
-            [
-                'https://tn.example/2019/Diabetes_County_2019.xlsx',
-                'https://tn.example/2020/Diabetes_County_2020.xlsx',
-            ])
-        self.assertEqual(
-            download.generate_urls(2019, 2020, gcs_template),
-            [
-                'gs://test-bucket/input/Diabetes_County_2019.xlsx',
-                'gs://test-bucket/input/Diabetes_County_2020.xlsx',
-            ])
+        self.assertEqual(download.generate_urls(2019, 2020, tn_template), [
+            'https://tn.example/2019/Diabetes_County_2019.xlsx',
+            'https://tn.example/2020/Diabetes_County_2020.xlsx',
+        ])
+        self.assertEqual(download.generate_urls(2019, 2020, gcs_template), [
+            'gs://test-bucket/input/Diabetes_County_2019.xlsx',
+            'gs://test-bucket/input/Diabetes_County_2020.xlsx',
+        ])
 
     @mock.patch.object(download.storage, 'Client')
     def test_gcs_download_skips_missing_file(self, mock_client):

@@ -67,11 +67,12 @@ class DownloadScriptTest(unittest.TestCase):
     def test_preprocess_file(self):
         # Create a dummy CSV
         csv_path = os.path.join(self.test_dir, "test_preprocess.csv")
-        df = pd.DataFrame({
-            'LEAID': ['12345', '0123456'],
-            'SCHID': ['6789', '01234']
-        },
-                              dtype=str)
+        df = pd.DataFrame(
+            {
+                'LEAID': ['12345', '0123456'],
+                'SCHID': ['6789', '01234']
+            },
+            dtype=str)
         df.to_csv(csv_path, index=False)
 
         # Preprocess the file
@@ -124,13 +125,14 @@ class DownloadScriptTest(unittest.TestCase):
 
         # Assertions
         final_files = os.listdir(self.test_dir)
-        self.assertEqual(len(final_files), 2)  # Should only have the 2 kept files
+        self.assertEqual(len(final_files),
+                         2)  # Should only have the 2 kept files
 
         # Check Offenses file
         offenses_file = [f for f in final_files if 'offenses' in f][0]
         self.assertTrue(offenses_file.startswith('crdc_2017-18_offenses'))
         df_offenses = pd.read_csv(os.path.join(self.test_dir, offenses_file),
-                                    dtype=str)
+                                  dtype=str)
         self.assertIn('year', df_offenses.columns)
         df_offenses['year'] = pd.to_numeric(df_offenses['year'])
         self.assertEqual(df_offenses['year'].iloc[0], 2018)
