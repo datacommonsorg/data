@@ -97,11 +97,11 @@ Then apply these rules:
     `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
   - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
     - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data, or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within allowable lag (months/years) for the dataset's refresh schedule.
-    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`. If Per-StatVar checks get complicated (e.g. multiple sql conditions), prefer defining rules only for important statvars.
+    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`. If Per-StatVar checks get complicated (e.g. multiple sql conditions), prefer defining rules only for important StatVars.
 
 ## Download and processing reliability
 
-- Prefer the shared helpers in [util/](../../../../util/) over new code that
+- Prefer the shared helpers in [util/](../../../../util/README.md) over new code that
   does the same job, such as [mcf_dict_util.py](../../../../util/mcf_dict_util.py)
   for reading, editing, and writing MCF, and
   [file_util.py](../../../../util/file_util.py) or
