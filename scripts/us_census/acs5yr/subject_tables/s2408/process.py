@@ -176,9 +176,7 @@ class S2408SubjectTableLoader(SubjectTableDataLoaderBase):
                 obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                 # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
+                obs_df = obs_df.dropna(subset=['Place', 'Quantity'], axis=0)
 
                 # Write the processed observations to the clean_csv
                 if self.year_count == 0:
