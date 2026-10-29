@@ -1,0 +1,53 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Enforce zero deleted historical observations across refreshes.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Ensure all 9 monthly wage StatVars share the same latest date.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Ensure MaxDate does not regress below 2025 and stays within MoSPI PLFS annual publication lag.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS VARCHAR) AS max_date_str FROM stats",
+                "condition": "max_date_str >= '2025' AND CAST(SUBSTR(max_date_str, 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - 2"
+            }
+        },
+        {
+            "rule_id": "check_min_value",
+            "description": "Ensure monthly wage values in INR are non-negative.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_num_observations",
+            "description": "Ensure each StatVar retains at least the baseline 1,182 observations.",
+            "validator": "NUM_OBSERVATIONS_CHECK",
+            "params": {
+                "minimum": 1182
+            }
+        },
+        {
+            "rule_id": "check_statvar_count",
+            "description": "Ensure all 9 monthly wage StatisticalVariables are emitted.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS sv_count FROM stats",
+                "condition": "sv_count >= 9"
+            }
+        }
+    ]
+}
