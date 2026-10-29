@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Unit tests for us_fed_download.py."""
 
 import os
 import shutil
@@ -25,27 +26,26 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
-import us_fed_download
+try:
+    from statvar_imports.us_federal_reserve_h15_interest_rates.us_federal_rates import us_fed_download
+except (ImportError, ModuleNotFoundError):
+    import us_fed_download
 
-VALID_CSV_CONTENT = (
-    b"Series Description,Federal funds effective rate\n"
-    b"Unit:,Percent:_Per_Year\n"
-    b"Multiplier:,1\n"
-    b"Currency:,NA\n"
-    b"Unique Identifier: ,H15/H15/RIFSPFF_N.WW\n"
-    b"Time Period,RIFSPFF_N.WW\n"
-    b"1970-01-07,8.45\n"
-    b"1970-01-14,8.96\n"
-)
+VALID_CSV_CONTENT = (b"Series Description,Federal funds effective rate\n"
+                     b"Unit:,Percent:_Per_Year\n"
+                     b"Multiplier:,1\n"
+                     b"Currency:,NA\n"
+                     b"Unique Identifier: ,H15/H15/RIFSPFF_N.WW\n"
+                     b"Time Period,RIFSPFF_N.WW\n"
+                     b"1970-01-07,8.45\n"
+                     b"1970-01-14,8.96\n")
 
-HEADER_ONLY_CSV_CONTENT = (
-    b"Series Description,Federal funds effective rate\n"
-    b"Unit:,Percent:_Per_Year\n"
-    b"Multiplier:,1\n"
-    b"Currency:,NA\n"
-    b"Unique Identifier: ,H15/H15/RIFSPFF_N.WW\n"
-    b"Time Period,RIFSPFF_N.WW\n"
-)
+HEADER_ONLY_CSV_CONTENT = (b"Series Description,Federal funds effective rate\n"
+                           b"Unit:,Percent:_Per_Year\n"
+                           b"Multiplier:,1\n"
+                           b"Currency:,NA\n"
+                           b"Unique Identifier: ,H15/H15/RIFSPFF_N.WW\n"
+                           b"Time Period,RIFSPFF_N.WW\n")
 
 
 class UsFedDownloadTest(unittest.TestCase):
@@ -60,7 +60,7 @@ class UsFedDownloadTest(unittest.TestCase):
         shutil.rmtree(self.test_dir)
 
     @patch("retry.api.time.sleep")
-    @patch("us_fed_download.requests.get")
+    @patch.object(us_fed_download.requests, "get")
     def test_retry_method_valid_csv_succeeds(self, mock_get, mock_sleep):
         mock_response = MagicMock()
         mock_response.content = VALID_CSV_CONTENT
@@ -70,16 +70,15 @@ class UsFedDownloadTest(unittest.TestCase):
         response = us_fed_download.retry_method("https://example.com/data.csv")
 
         self.assertEqual(response.content, VALID_CSV_CONTENT)
-        mock_get.assert_called_once_with(
-            "https://example.com/data.csv", headers=None, timeout=30
-        )
+        mock_get.assert_called_once_with("https://example.com/data.csv",
+                                         headers=None,
+                                         timeout=30)
         mock_sleep.assert_not_called()
 
     @patch("retry.api.time.sleep")
-    @patch("us_fed_download.requests.get")
+    @patch.object(us_fed_download.requests, "get")
     def test_retry_method_retries_on_empty_or_invalid_content(
-        self, mock_get, mock_sleep
-    ):
+            self, mock_get, mock_sleep):
         empty_response = MagicMock()
         empty_response.content = b""
         empty_response.raise_for_status.return_value = None
@@ -110,10 +109,9 @@ class UsFedDownloadTest(unittest.TestCase):
         self.assertEqual(mock_sleep.call_count, 3)
 
     @patch("retry.api.time.sleep")
-    @patch("us_fed_download.requests.get")
+    @patch.object(us_fed_download.requests, "get")
     def test_retry_method_exhausted_raises_request_exception(
-        self, mock_get, mock_sleep
-    ):
+            self, mock_get, mock_sleep):
         empty_response = MagicMock()
         empty_response.content = b""
         empty_response.raise_for_status.return_value = None
@@ -125,7 +123,7 @@ class UsFedDownloadTest(unittest.TestCase):
         self.assertEqual(mock_get.call_count, 5)
         self.assertEqual(mock_sleep.call_count, 4)
 
-    @patch("us_fed_download.requests.get")
+    @patch.object(us_fed_download.requests, "get")
     def test_download_files_creates_dir_and_writes_files(self, mock_get):
         mock_response = MagicMock()
         mock_response.content = VALID_CSV_CONTENT
@@ -134,8 +132,7 @@ class UsFedDownloadTest(unittest.TestCase):
 
         self.assertFalse(os.path.exists(us_fed_download.INPUT_DIR))
         us_fed_download.download_files(
-            ["https://example.com/1?to={}", "https://example.com/2?to={}"]
-        )
+            ["https://example.com/1?to={}", "https://example.com/2?to={}"])
         self.assertTrue(os.path.exists(us_fed_download.INPUT_DIR))
 
         file1 = os.path.join(us_fed_download.INPUT_DIR, "us_fed_input_1.csv")
@@ -144,13 +141,53 @@ class UsFedDownloadTest(unittest.TestCase):
         self.assertTrue(os.path.exists(file2))
         with open(file1, "rb") as f:
             self.assertEqual(f.read(), VALID_CSV_CONTENT)
+        with open(file2, "rb") as f:
+            self.assertEqual(f.read(), VALID_CSV_CONTENT)
 
-    @patch("us_fed_download.logging.fatal")
+    @patch.object(us_fed_download, "download_files")
+    def test_main_calls_download_files(self, mock_download_files):
+        us_fed_download.main([])
+        mock_download_files.assert_called_once_with(
+            us_fed_download.config.us_fed_urls)
+
     @patch("retry.api.time.sleep")
-    @patch("us_fed_download.requests.get")
+    @patch.object(us_fed_download.requests, "get")
+    def test_retry_method_retries_on_http_error(self, mock_get, mock_sleep):
+        error_response = MagicMock()
+        error_response.raise_for_status.side_effect = requests.exceptions.HTTPError(
+            "500 Server Error")
+
+        valid_response = MagicMock()
+        valid_response.content = VALID_CSV_CONTENT
+        valid_response.raise_for_status.return_value = None
+
+        mock_get.side_effect = [error_response, valid_response]
+
+        response = us_fed_download.retry_method("https://example.com/data.csv")
+
+        self.assertEqual(response.content, VALID_CSV_CONTENT)
+        self.assertEqual(mock_get.call_count, 2)
+        self.assertEqual(mock_sleep.call_count, 1)
+
+    @patch("retry.api.time.sleep")
+    @patch.object(us_fed_download.requests, "get")
+    def test_retry_method_accepts_bom_and_quotes(self, mock_get, mock_sleep):
+        bom_content = b'\xef\xbb\xbf"' + VALID_CSV_CONTENT
+        mock_response = MagicMock()
+        mock_response.content = bom_content
+        mock_response.raise_for_status.return_value = None
+        mock_get.return_value = mock_response
+
+        response = us_fed_download.retry_method("https://example.com/data.csv")
+
+        self.assertEqual(response.content, bom_content)
+        mock_sleep.assert_not_called()
+
+    @patch.object(us_fed_download.logging, "fatal")
+    @patch("retry.api.time.sleep")
+    @patch.object(us_fed_download.requests, "get")
     def test_download_files_exhausted_retries_calls_logging_fatal(
-        self, mock_get, mock_sleep, mock_fatal
-    ):
+            self, mock_get, mock_sleep, mock_fatal):
         empty_response = MagicMock()
         empty_response.content = b""
         empty_response.raise_for_status.return_value = None
