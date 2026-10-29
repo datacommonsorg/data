@@ -19,16 +19,14 @@ aggregates individual ages into the 6 standard 10-year brackets + total (16-74),
 rolls up Swedish counties into NUTS3, NUTS2, and NUTS1, and writes the 17 raw
 input CSVs into `input_files/`.
 
-Uses Data Commons GitHub `util/download_util_script.py` (`_retry_method`) when
-available in the repository, falling back to `urllib3.util.retry.Retry` +
-`requests.adapters.HTTPAdapter` when run standalone.
+Uses `urllib3.util.retry.Retry` + `requests.adapters.HTTPAdapter` for resilient
+HTTP requests against the SCB PxWeb API.
 """
 
 import collections
 import csv
 import json
 import os
-import sys
 import time
 from typing import Dict, List, Optional, Tuple
 from absl import app
@@ -38,17 +36,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Add repository root and util directory to sys.path for Data Commons download utility
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..', '..'))
-for _path in (_REPO_ROOT, os.path.join(_REPO_ROOT, 'util')):
-  if _path not in sys.path:
-    sys.path.insert(0, _path)
-
-try:
-  import download_util_script as _dc_download_util  # pylint: disable=g-import-not-at-top
-except ImportError:
-  _dc_download_util = None
 
 FLAGS = flags.FLAGS
 
@@ -189,15 +177,8 @@ def _create_retry_session(
 
 
 def fetch_metadata(session: requests.Session) -> Dict:
-  """Fetches table metadata from SCB PxWeb API using Data Commons download util."""
+  """Fetches table metadata from SCB PxWeb API using the retry-configured session."""
   logging.info('Fetching metadata from %s', SCB_API_URL)
-  if _dc_download_util is not None and hasattr(
-      _dc_download_util, '_retry_method'
-  ):
-    response = _dc_download_util._retry_method(  # pylint: disable=protected-access
-        SCB_API_URL, headers=None, tries=5, delay=5, backoff=2, session=session
-    )
-    return json.loads(response.content.decode('utf-8-sig'))
   response = session.get(SCB_API_URL, timeout=60)
   response.raise_for_status()
   return json.loads(response.content.decode('utf-8-sig'))
@@ -363,8 +344,9 @@ def main(argv):
       key=int,
   )
   if not all_years:
-    raise RuntimeError(
-        f'No years found in SCB metadata matching start_year={FLAGS.start_year}'
+    logging.fatal(
+        'No years found in SCB metadata matching start_year=%s',
+        FLAGS.start_year,
     )
   logging.info(
       'Dynamically discovered available years: %s..%s (%d years)',

@@ -73,7 +73,7 @@ To preserve true marginal totals across `EducationalAttainment`, `Gender`, and `
 ## 4. Directory Layout
 
 ```text
-statvar_imports/sweden/education/
+statvar_imports/sweden_census/education/
 ├── README.md                                 # Documentation
 ├── manifest.json                             # Automated import specification
 ├── validation_config.json                    # Import validation rules

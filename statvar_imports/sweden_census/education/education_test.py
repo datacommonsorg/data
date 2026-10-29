@@ -58,13 +58,13 @@ class DownloadEducationUnitTest(unittest.TestCase):
     )
     fake_session.get.return_value = fake_resp
 
-    with mock.patch.object(download_education, '_dc_download_util', None):
-      result = download_education.fetch_metadata(fake_session)
+    result = download_education.fetch_metadata(fake_session)
 
     self.assertEqual(result, {'title': 'Utbildning', 'variables': []})
     fake_session.get.assert_called_once_with(
         download_education.SCB_API_URL, timeout=60
     )
+    fake_resp.raise_for_status.assert_called_once()
 
   def test_query_scb_chunk_success(self):
     fake_session = mock.MagicMock(spec=requests.Session)
