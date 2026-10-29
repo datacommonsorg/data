@@ -39,6 +39,7 @@ except ImportError:
     import logging as std_logging
 
     class _CompatLogger:
+
         def __init__(self):
             self._logger = std_logging.getLogger(__name__)
             self._logger.setLevel(std_logging.INFO)
@@ -67,8 +68,6 @@ except ImportError:
 def preprocess(base_path=None):
     if base_path is None:
         base_path = os.path.dirname(os.path.abspath(__file__))
-
-def rename_target_file(base_path='.'):
     folder_name = 'gcs_output/source_files'
     target_folder = os.path.join(base_path, folder_name)
     counters_folder = os.path.join(base_path, 'counters')
@@ -99,31 +98,26 @@ def rename_target_file(base_path='.'):
             f"No valid places loaded from {places_resolved_file}. "
             "Aborting preprocessing to prevent silent data drop.")
 
-    logging.info(f"Loaded {len(valid_places)} valid places from {places_resolved_file}")
+    logging.info(
+        f"Loaded {len(valid_places)} valid places from {places_resolved_file}")
 
     if not os.path.isdir(target_folder):
         logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
-        raise FileNotFoundError(f"Folder '{folder_name}' not found in '{base_path}'")
-    try:
-        # Check if the folder exists
-        if not os.path.isdir(target_folder):
-            logging.fatal(f"Folder '{folder_name}' not found in '{base_path}'"
-                         )  # Changed to error for non-fatal issues
-            return  # Exit function if folder not found
+        raise FileNotFoundError(
+            f"Folder '{folder_name}' not found in '{base_path}'")
 
     pattern = re.compile(r'^(?:A.*|OECD.*|.*REG_EDU.*)$', re.IGNORECASE)
     candidate_files = [
         f for f in os.listdir(target_folder)
-        if os.path.isfile(os.path.join(target_folder, f))
-        and not f.startswith('.')
-        and f not in ('oecd_regional_education_data.csv', 'filtered_tmp.csv')
-        and pattern.match(f)
+        if os.path.isfile(os.path.join(target_folder, f)) and
+        not f.startswith('.') and
+        f not in ('oecd_regional_education_data.csv',
+                  'filtered_tmp.csv') and pattern.match(f)
     ]
     if candidate_files:
         candidate_files.sort(
             key=lambda f: os.path.getmtime(os.path.join(target_folder, f)),
-            reverse=True
-        )
+            reverse=True)
         raw_file = candidate_files[0]
         if len(candidate_files) > 1:
             logging.info(
@@ -134,19 +128,17 @@ def rename_target_file(base_path='.'):
 
     target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
     unmapped_log_path = os.path.join(counters_folder, 'unresolved_places.csv')
-        # Search through files in the folder
-        for filename in os.listdir(target_folder):
-            logging.info(f"Checking file: {filename}")
-            if pattern.match(filename):
-                old_path = os.path.join(target_folder, filename)
-                new_path = os.path.join(target_folder,
-                                        'oecd_regional_education_data.csv')
 
     if raw_file:
         src_path = os.path.join(target_folder, raw_file)
         tmp_path = os.path.join(target_folder, 'filtered_tmp.csv')
-        logging.info(f"Filtering '{raw_file}' into 'oecd_regional_education_data.csv'...")
-        _filter_csv(src_path, tmp_path, valid_places, unmapped_log_path=unmapped_log_path)
+        logging.info(
+            f"Filtering '{raw_file}' into 'oecd_regional_education_data.csv'..."
+        )
+        _filter_csv(src_path,
+                    tmp_path,
+                    valid_places,
+                    unmapped_log_path=unmapped_log_path)
         os.replace(tmp_path, target_csv)
         # Preserve original downloaded raw file in GCS source_files per Data Commons guidelines
         logging.info(f"Retained raw downloaded source file at '{src_path}'.")
@@ -154,16 +146,23 @@ def rename_target_file(base_path='.'):
     elif os.path.isfile(target_csv) and valid_places:
         tmp_path = os.path.join(target_folder, 'filtered_tmp.csv')
         logging.info(f"Checking and filtering existing '{target_csv}'...")
-        _filter_csv(target_csv, tmp_path, valid_places, unmapped_log_path=unmapped_log_path)
+        _filter_csv(target_csv,
+                    tmp_path,
+                    valid_places,
+                    unmapped_log_path=unmapped_log_path)
         os.replace(tmp_path, target_csv)
         logging.info("Filtering completed successfully.")
     else:
         logging.error("No matching source data file found to process.")
         raise FileNotFoundError(
-            f"No candidate raw data file found to process in '{target_folder}'.")
+            f"No candidate raw data file found to process in '{target_folder}'."
+        )
 
 
-def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_path: str = None):
+def _filter_csv(src_path: str,
+                dst_path: str,
+                valid_places: dict,
+                unmapped_log_path: str = None):
     required_columns = [
         'REF_AREA',
         'TIME_PERIOD',
@@ -221,7 +220,10 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
                     resolved_dcid = clean_ref
 
                 if resolved_dcid:
-                    out_row = [row[idx] if len(row) > idx else '' for idx in col_indices]
+                    out_row = [
+                        row[idx] if len(row) > idx else ''
+                        for idx in col_indices
+                    ]
                     out_row[out_ref_area_idx] = resolved_dcid
                     writer.writerow(out_row)
                     kept += 1
@@ -237,54 +239,31 @@ def _filter_csv(src_path: str, dst_path: str, valid_places: dict, unmapped_log_p
                 "Output CSV would be completely empty. "
                 "Aborting preprocessing to prevent silent data drop.")
 
-        logging.info(f"Filtered source data: {kept} rows kept, {dropped} rows dropped.")
+        logging.info(
+            f"Filtered source data: {kept} rows kept, {dropped} rows dropped.")
         if unmapped_places:
             logging.warning(
                 f"Encountered {len(unmapped_places)} unmapped REF_AREA codes. "
                 f"Sample unmapped places: {sorted(list(unmapped_places))[:25]}")
             if unmapped_log_path:
                 try:
-                    os.makedirs(os.path.dirname(unmapped_log_path), exist_ok=True)
-                    with open(unmapped_log_path, 'w', encoding='utf-8', newline='') as uf:
+                    os.makedirs(os.path.dirname(unmapped_log_path),
+                                exist_ok=True)
+                    with open(unmapped_log_path,
+                              'w',
+                              encoding='utf-8',
+                              newline='') as uf:
                         u_writer = csv.writer(uf)
                         u_writer.writerow(['unmapped_ref_area'])
                         for p in sorted(unmapped_places):
                             u_writer.writerow([p])
                     logging.info(
-                        f"Wrote {len(unmapped_places)} unmapped places to {unmapped_log_path}")
+                        f"Wrote {len(unmapped_places)} unmapped places to {unmapped_log_path}"
+                    )
                 except Exception as e:
-                    logging.warning(f"Failed to write unmapped places log: {e}")
+                    logging.warning(
+                        f"Failed to write unmapped places log: {e}")
 
 
 if __name__ == '__main__':
     preprocess()
-                    os.rename(old_path, new_path)
-                    logging.info(
-                        f"Renamed '{filename}' to 'oecd_regional_education_data.csv'"
-                    )
-                    renamed = True
-                except PermissionError:
-                    logging.warning(
-                        f"Permission denied while renaming '{filename}'."
-                    )  # Changed to warning
-                except OSError as e:
-                    logging.fatal(f"OS error while renaming '{filename}': {e}"
-                                 )  # Changed to error
-                break  # Rename only the first match
-
-        if not renamed:
-            logging.info("No matching file starting with 'A' found to rename.")
-
-    except FileNotFoundError as e:
-        # This block might not be hit if caught earlier, but good for other FileNotFoundError
-        logging.fatal(f"File system error: {e}")
-    except PermissionError as e:
-        # This block might not be hit if caught earlier, but good for other PermissionError
-        logging.fatal(f"Global permission error: {e}")
-    except Exception as e:
-        logging.fatal(f"An unexpected critical error occurred: {e}"
-                     )  # Changed to critical for unexpected errors
-
-
-# Run it
-rename_target_file()
