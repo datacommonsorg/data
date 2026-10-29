@@ -9,11 +9,11 @@ repository contracts and instructions take precedence.
   manifest contract, and verify that every referenced script and input exists.
 - Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
   generated schema/statvar MCF files (e.g., `output/*.mcf`).
-- Verify that `source_files` matches every file the download step writes, so
-  each version keeps its source data for debugging and source attribution.
-  List other operational artifacts there too (e.g., counter files from
-  `--output_counters`, `manifest.json`, or configs); do not confuse source
-  artifacts with import inputs.
+- Verify that `source_files` patterns cover every source file the download
+  step saves, so each version keeps its source data for debugging and source
+  attribution. List other operational artifacts there too (e.g., counter
+  files from `--output_counters`, `manifest.json`, or configs); do not
+  confuse source artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Keep curator contacts valid without prescribing one fixed email value.
@@ -102,12 +102,20 @@ Then apply these rules:
 ## Download and processing reliability
 
 - Prefer the shared helpers in [util/](../../../../util/) over new code that
-  does the same job.
+  does the same job, such as [mcf_dict_util.py](../../../../util/mcf_dict_util.py)
+  for reading, editing, and writing MCF, and
+  [file_util.py](../../../../util/file_util.py) or
+  [gcs_file.py](../../../../util/gcs_file.py) for local and GCS file operations.
 - Use the shared [Data Commons API wrapper](../../../../util/dc_api_wrapper.py)
   for Data Commons API calls unless it lacks the required functionality.
 - Use [download_util.py](../../../../util/download_util.py) or
   [download_util_script.py](../../../../util/download_util_script.py) for
   downloads unless both lack the required functionality.
+- Use [xml_to_json.py](../../../../util/xml_to_json.py) to convert XML source
+  files to JSON.
+- Use [sdmx_cli.py](../../../../tools/sdmx_import/sdmx_cli.py) for SDMX
+  downloads. When it lacks the required functionality, use the `sdmx1` library
+  it is built on instead of custom SDMX requests or parsing.
 - Log each outbound request's method, sanitized URL, query parameters, and
   request body. Redact credentials and sensitive data.
 - Consume every page from paginated sources.

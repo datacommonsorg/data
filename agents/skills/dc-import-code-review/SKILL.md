@@ -137,7 +137,6 @@ changed behavior.
   either as content or through a readable local path.
 - Require each subagent to state in its response that it read them before
   inspecting changes. Do not use results that omit this confirmation.
-- Repository guidance and safety rules take precedence.
 
 When any in-scope `manifest.json` changes, also read the current shared
 [import manifest reference](../../common/references/import-automation/manifest.md).
@@ -170,10 +169,11 @@ review; do not resolve it silently.
 - Run only focused checks useful for the selected import. State exactly what
   ran, what passed or failed, and what could not run.
 - Write every file the review creates, such as scripts, downloads, and check
-  outputs, under a directory from `mktemp -d` outside the repository, and
-  remove it when the review ends; files left in an import directory can end up
-  in that import's run. Files that the import's own code writes in place are
-  fine.
+  outputs, under one `mktemp -d` root outside the repository (for a pull
+  request, the temporary root above), and remove it when the review ends;
+  files left in an import directory can end up in that import's run. If the
+  import's own code writes files in place, list them in the report and leave
+  them.
 - Allow bounded, read-only cloud and Data Commons inspection (such as reading
   GCS artifacts or querying read-only Data Commons APIs), but do not run mutating
   operations or live-source downloads unless the user explicitly requests them
