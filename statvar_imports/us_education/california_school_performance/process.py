@@ -35,9 +35,8 @@ from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
-for _p in (_REPO_ROOT, _SCRIPT_DIR):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 try:
     from statvar_imports.us_education.california_school_performance import download

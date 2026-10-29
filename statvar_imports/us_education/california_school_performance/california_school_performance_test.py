@@ -22,12 +22,11 @@ from unittest.mock import patch
 
 from absl import flags
 
-# Ensure repository root and script directory are in sys.path
+# Ensure repository root is in sys.path
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
-for _p in (_REPO_ROOT, _SCRIPT_DIR):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 _CONFLICTING_FLAGS = (
     'years',
