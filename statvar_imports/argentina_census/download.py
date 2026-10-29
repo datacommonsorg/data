@@ -42,10 +42,12 @@ if _UTIL_DIR not in sys.path:
 from absl import app
 from absl import flags
 from absl import logging
-import download_util
 import openpyxl
 import requests_cache
 import xlrd
+
+requests_cache.install_cache(backend='memory', expires_after=300)
+import download_util  # pylint: disable=wrong-import-position
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -379,8 +381,7 @@ DEFAULT_HEADERS = {'User-Agent': 'Mozilla/5.0 (DataCommons-StatVarImporter)'}
 
 def fetch_url(url: str, retries: int = 3, retry_secs: int = 5) -> bytes:
     """Downloads bytes from an HTTP/HTTPS URL using download_util.request_url."""
-    if not requests_cache.is_installed():
-        requests_cache.install_cache(backend='memory', expires_after=300)
+    logging.info('GET %s', url)
     data = download_util.request_url(
         url=url,
         headers=DEFAULT_HEADERS,
@@ -398,8 +399,6 @@ def fetch_url(url: str, retries: int = 3, retry_secs: int = 5) -> bytes:
 
 def fetch_all_urls(urls: list[str], max_workers: int = 16) -> dict[str, bytes]:
     """Downloads a list of URLs concurrently using download_util and returns {url: bytes}."""
-    if not requests_cache.is_installed():
-        requests_cache.install_cache(backend='memory', expires_after=300)
     unique_urls = sorted(set(urls))
     logging.info('Downloading %d unique files from INDEC...', len(unique_urls))
     results = {}
@@ -484,6 +483,8 @@ def parse_age_sex_sheet_xls(
     wb = xlrd.open_workbook(file_contents=xls_bytes)
     sh = wb.sheet_by_index(0)
     rows_out = []
+    if sh.ncols == 0:
+        return rows_out
     in_70_74_block = 0
     for rx in range(sh.nrows):
         raw_age = sh.cell_value(rx, 0)
@@ -643,9 +644,16 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         xls_g2 = extract_xls_from_zip(cache[zip_url], f'c80b_{g2_1980}_g2.xls')
         wb = xlrd.open_workbook(file_contents=xls_g2)
         sh = wb.sheet_by_index(0)
+        if sh.ncols < 10:
+            logging.warning(
+                'Skipping 1980 urban/rural processing for %s due to insufficient columns (%d)',
+                j_name,
+                sh.ncols,
+            )
+            continue
         for rx in range(sh.nrows):
             age = normalize_age_label(sh.cell_value(rx, 0))
-            if age not in VALID_AGES or sh.ncols < 10:
+            if age not in VALID_AGES:
                 continue
             u_tot, u_m, u_f = (
                 fmt_num(sh.cell_value(rx, 4)),
@@ -667,6 +675,13 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         url_c101 = f'{BASE_FTP_URL}/censos/2001/{sub_2001}/Datos/{code_2001}000C101.xls'
         wb_101 = xlrd.open_workbook(file_contents=cache[url_c101])
         sh_101 = wb_101.sheet_by_index(0)
+        if sh_101.ncols < 2:
+            logging.warning(
+                'Skipping 1991 urban/rural processing for %s due to insufficient columns (%d)',
+                j_name,
+                sh_101.ncols,
+            )
+            continue
         for rx in range(sh_101.nrows):
             lbl = str(sh_101.cell_value(rx, 0)).strip().lower()
             val_1991 = fmt_num(sh_101.cell_value(rx, 1))
@@ -689,13 +704,21 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             file_contents=cache[url_c105]).sheet_by_index(0)
         sh_f = xlrd.open_workbook(
             file_contents=cache[url_c106]).sheet_by_index(0)
+        if (sh_tot.nrows < 8 or sh_tot.ncols < 2 or sh_m.nrows < 8 or
+                sh_m.ncols < 2 or sh_f.nrows < 8 or sh_f.ncols < 2):
+            logging.warning(
+                'Skipping 2001 urban/rural processing for %s due to unexpected sheet dimensions',
+                j_name,
+            )
+            continue
         age_headers = ['Total'] + [
             normalize_age_label(sh_tot.cell_value(3, cx))
             for cx in range(2, sh_tot.ncols)
         ]
         for area_name, rx in [('Urbana', 6), ('Rural', 7)]:
             for idx_c, age in enumerate(age_headers, start=1):
-                if not age:
+                if (not age or idx_c >= sh_tot.ncols or idx_c >= sh_m.ncols or
+                        idx_c >= sh_f.ncols):
                     continue
                 vt = fmt_num(sh_tot.cell_value(rx, idx_c))
                 vm = fmt_num(sh_m.cell_value(rx, idx_c))
@@ -709,19 +732,20 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
     url_ur_2010 = f'{BASE_FTP_URL}/cuadros/poblacion/n020210.xls'
     sh_ur10 = xlrd.open_workbook(
         file_contents=cache[url_ur_2010]).sheet_by_index(0)
-    for rx in range(sh_ur10.nrows):
-        raw_j = str(sh_ur10.cell_value(rx, 0)).strip()
-        nk = _norm_key(raw_j)
-        if nk in PROVINCE_NORM_MAP and sh_ur10.ncols >= 5:
-            j_name = PROVINCE_NORM_MAP[nk]
-            u_2010 = fmt_num(sh_ur10.cell_value(rx, 2))
-            r_2010 = fmt_num(sh_ur10.cell_value(rx, 4))
-            if u_2010:
-                ur_rows.append(
-                    ('Urbana', 'Total', '2010', j_name, u_2010, '', ''))
-            if r_2010:
-                ur_rows.append(
-                    ('Rural', 'Total', '2010', j_name, r_2010, '', ''))
+    if sh_ur10.ncols >= 5:
+        for rx in range(sh_ur10.nrows):
+            raw_j = str(sh_ur10.cell_value(rx, 0)).strip()
+            nk = _norm_key(raw_j)
+            if nk in PROVINCE_NORM_MAP:
+                j_name = PROVINCE_NORM_MAP[nk]
+                u_2010 = fmt_num(sh_ur10.cell_value(rx, 2))
+                r_2010 = fmt_num(sh_ur10.cell_value(rx, 4))
+                if u_2010:
+                    ur_rows.append(
+                        ('Urbana', 'Total', '2010', j_name, u_2010, '', ''))
+                if r_2010:
+                    ur_rows.append(
+                        ('Rural', 'Total', '2010', j_name, r_2010, '', ''))
 
     ur_csv_path = os.path.join(output_dir, 'argentina_urban_rural.csv')
     _write_csv_atomically(
@@ -747,13 +771,14 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         'argentina_places_resolved.csv',
     )
     resolved_aa2_norm = {}
-    if os.path.exists(places_path):
-        with open(places_path, encoding='utf-8') as pf:
-            for row in csv.DictReader(pf):
-                pname = row.get('place_name') or row.get('name', '')
-                if '__' in pname:
-                    p_part, d_part = pname.split('__', 1)
-                    resolved_aa2_norm[(p_part, _norm_key(d_part))] = pname
+    if not os.path.exists(places_path):
+        raise FileNotFoundError(f'Missing resolved places file: {places_path}')
+    with open(places_path, encoding='utf-8') as pf:
+        for row in csv.DictReader(pf):
+            pname = row.get('place_name') or row.get('name', '')
+            if '__' in pname:
+                p_part, d_part = pname.split('__', 1)
+                resolved_aa2_norm[(p_part, _norm_key(d_part))] = pname
 
     aa2_rows = []
     for (
@@ -773,6 +798,13 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         url_p1 = f'{BASE_FTP_URL}/censos/2010/CuadrosDefinitivos/{p1_2010}.xls'
         sh_p1 = xlrd.open_workbook(
             file_contents=cache[url_p1]).sheet_by_index(0)
+        if sh_p1.ncols < 3:
+            logging.warning(
+                'Skipping 2010 AA2 processing for %s due to unexpected sheet columns (%d)',
+                j_name,
+                sh_p1.ncols,
+            )
+            continue
         for rx in range(sh_p1.nrows):
             lbl = ' '.join(str(sh_p1.cell_value(rx, 0)).strip().split())
             if not lbl or lbl.lower().startswith((
@@ -791,6 +823,12 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             if v2010 == '2010':
                 continue
             if (j_name, _norm_key(lbl)) not in resolved_aa2_norm:
+                if v2001 or v2010:
+                    logging.warning(
+                        'Unmapped 2001/2010 AA2 department in %s: %s',
+                        j_name,
+                        lbl,
+                    )
                 continue
             dept_key = resolved_aa2_norm[(j_name, _norm_key(lbl))]
             if v2001:
@@ -840,19 +878,20 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
     lit_rows = []
     url_p7 = f'{BASE_FTP_URL}/censos/2010/CuadrosDefinitivos/Total_pais/P7-P_Total_pais.xls'
     sh_p7 = xlrd.open_workbook(file_contents=cache[url_p7]).sheet_by_index(0)
-    for rx in range(sh_p7.nrows):
-        raw_j = ' '.join(str(sh_p7.cell_value(rx, 0)).strip().split())
-        nk = _norm_key(raw_j)
-        if nk in PROVINCE_NORM_MAP and sh_p7.ncols >= 6:
-            j_name = PROVINCE_NORM_MAP[nk]
-            v_tot10 = fmt_num(sh_p7.cell_value(rx, 1))
-            v_lit = fmt_num(sh_p7.cell_value(rx, 2))
-            v_illit = fmt_num(sh_p7.cell_value(rx, 5))
-            if v_tot10 and v_lit and v_illit:
-                v_pct = fmt_num(
-                    round(float(v_illit) * 100.0 / float(v_tot10), 1))
-                lit_rows.append(
-                    ('2010', j_name, v_tot10, v_lit, v_illit, v_pct))
+    if sh_p7.ncols >= 6:
+        for rx in range(sh_p7.nrows):
+            raw_j = ' '.join(str(sh_p7.cell_value(rx, 0)).strip().split())
+            nk = _norm_key(raw_j)
+            if nk in PROVINCE_NORM_MAP:
+                j_name = PROVINCE_NORM_MAP[nk]
+                v_tot10 = fmt_num(sh_p7.cell_value(rx, 1))
+                v_lit = fmt_num(sh_p7.cell_value(rx, 2))
+                v_illit = fmt_num(sh_p7.cell_value(rx, 5))
+                if v_tot10 and v_lit and v_illit:
+                    v_pct = fmt_num(
+                        round(float(v_illit) * 100.0 / float(v_tot10), 1))
+                    lit_rows.append(
+                        ('2010', j_name, v_tot10, v_lit, v_illit, v_pct))
 
     lit_csv_path = os.path.join(output_dir, 'argentina_literacy.csv')
     _write_csv_atomically(
@@ -954,7 +993,8 @@ def main(_):
         build_datasets(cache, FLAGS.output_dir)
     except Exception as e:  # pylint: disable=broad-except
         logging.fatal('Failed to download and build Argentina Census data: %s',
-                      e)
+                      e,
+                      exc_info=True)
 
 
 if __name__ == '__main__':

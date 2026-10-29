@@ -36,7 +36,7 @@
                 }
             },
             "params": {
-                "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE StatVar LIKE 'Count_Person%' AND NOT regexp_matches(StatVar, '(Urban|Rural|Literate|Illiterate|10OrMoreYears|85OrMoreYears|95OrMoreYears|99OrMoreYears)') GROUP BY StatVar",
+                "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, '(Urban|Rural|Literate|Illiterate|10OrMoreYears|85OrMoreYears|95OrMoreYears|99OrMoreYears)') GROUP BY StatVar",
                 "condition": "TotalObs >= 24 AND CAST(LatestDate AS INTEGER) >= 2022",
                 "failure_message": "Active Census StatVar validation failed for Argentina_Census."
             }

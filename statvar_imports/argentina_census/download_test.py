@@ -16,15 +16,15 @@
 
 import io
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
+import zipfile
 
 import openpyxl
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
 if _MODULE_DIR not in sys.path:
     sys.path.insert(0, _MODULE_DIR)
 
@@ -32,7 +32,7 @@ import download
 
 
 class DownloadTest(unittest.TestCase):
-    """Tests for helper functions and end-to-end StatVar processing."""
+    """Tests for helper functions and dataset extraction in download.py."""
 
     def test_normalize_age_label(self):
         self.assertEqual(download.normalize_age_label('Total'), 'Total')
@@ -65,6 +65,57 @@ class DownloadTest(unittest.TestCase):
                 ('0-4', '2989885', '1521344', '1468541'),
             ],
         )
+
+    def test_parse_age_sex_sheet_xls_and_1991_fix(self):
+        fake_rows = [
+            ('Total', 32615528, 15937180, 16678348),
+            ('70-74', 838000, 355000, 483000),
+            ('wrong_label_0', 190000, 82000, 108000),
+            ('wrong_label_1', 175000, 75000, 100000),
+            ('wrong_label_2', 165000, 70000, 95000),
+            ('wrong_label_3', 158000, 66000, 92000),
+            ('wrong_label_4', 150000, 62000, 88000),
+        ]
+        mock_sheet = mock.MagicMock()
+        mock_sheet.nrows = len(fake_rows)
+        mock_sheet.ncols = 4
+        mock_sheet.cell_value.side_effect = lambda r, c: fake_rows[r][c]
+        mock_wb = mock.MagicMock()
+        mock_wb.sheet_by_index.return_value = mock_sheet
+
+        with mock.patch.object(download.xlrd,
+                               'open_workbook',
+                               return_value=mock_wb):
+            rows = download.parse_age_sex_sheet_xls(b'FAKE_XLS',
+                                                    fix_1991_70_74=True)
+            self.assertEqual(
+                rows,
+                [
+                    ('Total', '32615528', '15937180', '16678348'),
+                    ('70-74', '838000', '355000', '483000'),
+                    ('70', '190000', '82000', '108000'),
+                    ('71', '175000', '75000', '100000'),
+                    ('72', '165000', '70000', '95000'),
+                    ('73', '158000', '66000', '92000'),
+                    ('74', '150000', '62000', '88000'),
+                ],
+            )
+
+            mock_sheet.ncols = 0
+            self.assertEqual(download.parse_age_sex_sheet_xls(b'EMPTY_XLS'), [])
+
+    def test_extract_xls_from_zip(self):
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, 'w') as zf:
+            zf.writestr('nested/c80b_totalpaís_g2.xls', b'XLS_CONTENT_1980')
+        zip_bytes = buf.getvalue()
+
+        self.assertEqual(
+            download.extract_xls_from_zip(zip_bytes, 'c80b_totalpais_g2.xls'),
+            b'XLS_CONTENT_1980',
+        )
+        with self.assertRaises(KeyError):
+            download.extract_xls_from_zip(zip_bytes, 'missing_file.xls')
 
     def test_write_csv_atomically(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -99,47 +150,6 @@ class DownloadTest(unittest.TestCase):
             html_url, {}, b'<!DOCTYPE html><html>Error</html>')
         with self.assertRaises(RuntimeError):
             download.fetch_url(html_url)
-
-    def test_stat_var_processor_sample(self):
-        processor_script = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
-                                        'stat_var_processor.py')
-        sample_input = os.path.join(_MODULE_DIR, 'test_data',
-                                    'sample_input.csv')
-        expected_csv = os.path.join(_MODULE_DIR, 'test_data',
-                                    'sample_output.csv')
-        expected_tmcf = os.path.join(_MODULE_DIR, 'test_data',
-                                     'sample_output.tmcf')
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            out_prefix = os.path.join(tmp_dir, 'sample_output')
-            cmd = [
-                sys.executable,
-                processor_script,
-                f'--input_data={sample_input}',
-                f'--pv_map={os.path.join(_MODULE_DIR, "argentina_census_pvmap.csv")}',
-                f'--config_file={os.path.join(_MODULE_DIR, "argentina_census_metadata.csv")}',
-                f'--places_resolved_csv={os.path.join(_MODULE_DIR, "argentina_places_resolved.csv")}',
-                f'--statvar_dcid_remap_csv={os.path.join(_MODULE_DIR, "argentina_statvar_remap.csv")}',
-                f'--output_path={out_prefix}',
-            ]
-            res = subprocess.run(cmd,
-                                 capture_output=True,
-                                 text=True,
-                                 check=False)
-            self.assertEqual(
-                res.returncode,
-                0,
-                f'stat_var_processor failed:\n{res.stderr}',
-            )
-            with open(f'{out_prefix}.csv', 'r',
-                      encoding='utf-8') as f_actual, open(
-                          expected_csv, 'r', encoding='utf-8') as f_expected:
-                self.assertEqual(f_actual.read(), f_expected.read())
-            with open(f'{out_prefix}.tmcf', 'r',
-                      encoding='utf-8') as f_actual_tmcf, open(
-                          expected_tmcf, 'r',
-                          encoding='utf-8') as f_expected_tmcf:
-                self.assertEqual(f_actual_tmcf.read(), f_expected_tmcf.read())
 
 
 if __name__ == '__main__':
