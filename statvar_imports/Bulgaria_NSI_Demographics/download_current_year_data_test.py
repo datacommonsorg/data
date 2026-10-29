@@ -451,6 +451,29 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             list_gcs_files("gs://mock-bucket/input_files")
 
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_missing_ttitle_fails(
+        self,
+        mock_create_session,
+    ):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.text = "<html><body>Updated 31.12.2025</body></html>"
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                check_and_download_nsi(
+                    local_dir=tmp_dir,
+                    gcs_dir="gs://mock-bucket/input_files",
+                )
+            self.assertEqual(ctx.exception.code, 1)
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
 
 if __name__ == "__main__":
     unittest.main()

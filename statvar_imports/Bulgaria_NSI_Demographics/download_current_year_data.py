@@ -195,7 +195,7 @@ def normalize_cell(val: str, is_numeric_col: bool = False) -> str:
 
 def sanitize_csv_content(content: str) -> list[list[str]]:
     """Parses raw CSV text and normalizes all cells for PVMap and validation."""
-    reader = list(csv.reader(io.StringIO(content.replace('"""', '"'))))
+    reader = list(csv.reader(io.StringIO(content)))
     return [[
         normalize_cell(c, is_numeric_col=(r_idx >= 3 and c_idx > 0))
         for c_idx, c in enumerate(row)
@@ -432,7 +432,10 @@ def check_and_download_nsi(
         html_content,
         flags=re.IGNORECASE | re.DOTALL,
     )
-    caption_text = ttitle_match.group(1) if ttitle_match else html_content
+    if not ttitle_match:
+        logging.error("Could not find <div id='ttitle'> caption in NSI HTML.")
+        sys.exit(1)
+    caption_text = ttitle_match.group(1)
     year_match = re.search(r"31\.12\.(\d{4})", caption_text)
     if not year_match:
         logging.error("Could not parse reference year from caption: '%s'",
