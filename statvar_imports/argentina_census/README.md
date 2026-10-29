@@ -34,7 +34,6 @@ This directory contains the automated `stat_var_processor.py` import pipeline fo
      --pv_map=statvar_imports/argentina_census/argentina_census_pvmap.csv \
      --config_file=statvar_imports/argentina_census/argentina_census_metadata.csv \
      --places_resolved_csv=statvar_imports/argentina_census/argentina_places_resolved.csv \
-     --statvar_dcid_remap_csv=statvar_imports/argentina_census/argentina_statvar_remap.csv \
      --output_path=statvar_imports/argentina_census/output_files/argentina_census_output \
      --output_counters=statvar_imports/argentina_census/counters/argentina_census_counters.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
