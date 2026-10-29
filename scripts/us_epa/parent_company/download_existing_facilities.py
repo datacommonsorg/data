@@ -62,14 +62,11 @@ def download_existing_facilities(output_path: str) -> str:
             'Failed to fetch EpaReportingFacility nodes from Data Commons.')
     facility_nodes = response.get_properties().get("EpaReportingFacility",
                                                    {}).get("typeOf", [])
-    facility_ids = []
-    facility_ids_set = set()
-    for node in facility_nodes:
-        value = getattr(node, "dcid", None)
-        if not value or value in facility_ids_set:
-            continue
-        facility_ids_set.add(value)
-        facility_ids.append(value)
+    facility_ids = sorted({
+        getattr(node, "dcid", None)
+        for node in facility_nodes
+        if getattr(node, "dcid", None)
+    })
 
     if not facility_ids:
         raise RuntimeError(

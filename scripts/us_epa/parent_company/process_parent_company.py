@@ -579,7 +579,7 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
     for (facility_id, year) in facility_company_ownership:
         facilities.add(facility_id)
 
-    facilities = list(facilities)
+    facilities = sorted(facilities)
 
     statVars = fh.get_all_statvars(facilities)
     facility_sv_map, facets = fh.get_all_svobs(facilities, statVars)
