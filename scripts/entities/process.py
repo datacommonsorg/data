@@ -1,4 +1,5 @@
 # Copyright 2025 Google LLC
+
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,41 +20,46 @@ Currently, it only checks the existince of the files on GCS.
 from absl import app
 from absl import flags
 from absl import logging
-import datetime
-from google.cloud import storage
 import os
+import sys
+
+# Add the scripts directory to sys.path
+script_dir = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', '..', 'import-automation',
+                 'executor', 'scripts'))
+sys.path.append(script_dir)
+import generate_provisional_nodes
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("entity", "Schema", "Entity type (Schema/Place).")
+flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
+flags.DEFINE_string("version", "", "Import version.")
+flags.DEFINE_string(
+    "output_dir", "",
+    "Directory to write output files (default: directory containing manifest.json)."
+)
 
-BUCKET_NAME = 'datcom-prod-imports'
-FILE_NAME = 'staging_version.txt'
 
+def process(entity_type: str, version: str, output_dir: str = ""):
+    logging.info(f'Processing import {entity_type} for version {version}')
+    local_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), entity_type, version))
 
-def process(entity_type: str):
-    # Ensure the import data is available in GCS.
-    current_date = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
-    logging.info(f'Checking import {entity_type} for date {current_date}')
-    file_path = os.path.join('scripts', os.path.basename(os.getcwd()),
-                             entity_type, FILE_NAME)
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(BUCKET_NAME)
-    blob = bucket.blob(file_path)
-    version = blob.download_as_text()
-    if version == current_date:
-        logging.info(
-            f'Successfully validated import {entity_type} for date {current_date}'
-        )
-        return 0
-    else:
-        raise RuntimeError(
-            f'{entity_type} data not present in GCS bucket {BUCKET_NAME} for date {current_date}'
-        )
+    # Default output directory to the folder containing manifest.json (os.path.dirname(__file__))
+    if not output_dir:
+        output_dir = os.path.abspath(os.path.dirname(__file__))
+
+    # Local path to data
+    logging.info(
+        f'Generating provisional nodes for {entity_type} in {local_path} (output: {output_dir})'
+    )
+    generate_provisional_nodes.generate_provisional_nodes(local_path,
+                                                          output_dir=output_dir)
+    return 0
 
 
 def main(_):
     """Runs the code."""
-    process(FLAGS.entity)
+    process(FLAGS.entity, FLAGS.version, FLAGS.output_dir)
 
 
 if __name__ == "__main__":

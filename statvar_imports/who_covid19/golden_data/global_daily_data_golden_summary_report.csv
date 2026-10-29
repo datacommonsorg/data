@@ -1,0 +1,5 @@
+"StatVar","MinDate","MeasurementMethods","Units","NumPlaces","ScalingFactors","observationPeriods"
+"IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase","2020-01-04","[]","[]","236","[]","[P1D]"
+"CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased","2020-01-04","[]","[]","236","[]","[]"
+"CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase","2020-01-04","[]","[]","236","[]","[]"
+"IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased","2020-01-04","[]","[]","231","[]","[P1D]"

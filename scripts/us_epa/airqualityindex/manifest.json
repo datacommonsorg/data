@@ -19,7 +19,14 @@
                     "cleaned_csv": "output/EPA_AQI.csv"
                 }
             ],
-            "cron_schedule": "15 22 10 1,7 *"
+            "cron_schedule": "30 10 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 10:30 UTC",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 32,
+                "memory": 128,
+                "disk": 300
+            }
         }
     ]
 }

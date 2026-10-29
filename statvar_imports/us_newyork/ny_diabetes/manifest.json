@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "NYU_NewYork_Diabetes",
+            "import_name": "NewYorkUniversity_Diabetes",
             "curator_emails": [
                 "support@datacommons.org"
             ],
@@ -31,7 +31,14 @@
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_data.csv",
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv",
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv"
-            ]
+            ],
+            "cron_schedule": "30 7 * * 2",
+            "_comment": "Schedule: Weekly on Tuesday at 07:30 UTC",
+            "resource_limits": {
+                "cpu": 4, 
+                "memory": 8, 
+                "disk":100
+            }
 
         }
     ]

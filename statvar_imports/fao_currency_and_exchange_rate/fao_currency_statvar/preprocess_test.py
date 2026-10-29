@@ -16,12 +16,23 @@ Script to automate the testing for FAO_Currency_statvar import.
 """
 
 import os
+import shutil
+import sys
+import tempfile
 import unittest
 from absl import app, logging
+import pandas as pd
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+sys.modules.pop('preprocess', None)
 
 from preprocess import melt_year_and_flag_columns
 
-input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata/")
+input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "testdata/")
+
 
 class TestPreprocess(unittest.TestCase):
     """
@@ -30,35 +41,37 @@ class TestPreprocess(unittest.TestCase):
     and compare it with expected results.
     """
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
-
-    
+    def setUp(self):
+        self._temp_dir = tempfile.mkdtemp()
         input_file = os.path.join(input_dir, 'Exchange_rate_E_All_Data.csv')
-        self.actual_output_file = os.path.join(input_dir, 'final_input_data.csv')
-        self.expected_output_file = os.path.join(input_dir, 'final_input_data_expected.csv')
+        self.actual_output_file = os.path.join(self._temp_dir,
+                                               'final_input_data.csv')
+        self.expected_output_file = os.path.join(
+            input_dir, 'final_input_data_expected.csv')
 
         melt_year_and_flag_columns(input_file, self.actual_output_file)
+
+    def tearDown(self):
+        shutil.rmtree(self._temp_dir, ignore_errors=True)
 
     def test_input_csv_files(self):
         """
         This method tests input csv files generated using preprocess module against
         expected results.
         """
-        with open(self.actual_output_file, encoding="UTF-8") as act_input_file:
-            self.actual_input_data = act_input_file.read()
+        # Compare as tables with a small float tolerance: the last digits of
+        # parsed floats differ across pandas/numpy builds.
+        pd.testing.assert_frame_equal(pd.read_csv(self.actual_output_file),
+                                      pd.read_csv(self.expected_output_file),
+                                      check_exact=False,
+                                      rtol=1e-12)
 
-        with open(self.expected_output_file, encoding="utf-8") as exp_input_file:
-            self.expected_input_data = exp_input_file.read()
-
-        self.assertEqual(self.actual_input_data.strip(),
-                         self.expected_input_data.strip())
-        
         logging.info("Testing completed for preprocessed input file!")
+
 
 def main(argv):
     unittest.main()
 
+
 if __name__ == '__main__':
     app.run(main)
-    

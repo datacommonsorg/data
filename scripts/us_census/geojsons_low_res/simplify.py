@@ -85,7 +85,10 @@ class GeojsonSimplifier:
                 assert len(coords[i]) == 1
                 c = coords[i][0]
             original_size += len(c)
-            new_c = rdp.rdp(c, epsilon=epsilon)
+            # Pad to 3D to avoid NumPy 2.0+ deprecation/error on np.cross(2D) in rdp library
+            c_3d = [[p[0], p[1], 0.0] for p in c]
+            new_c_3d = rdp.rdp(c_3d, epsilon=epsilon)
+            new_c = [[p[0], p[1]] for p in new_c_3d]
             simplified_size += len(new_c)
             if len(new_c) >= 3:
                 # Simplify the polygon succeeded, not yielding a line

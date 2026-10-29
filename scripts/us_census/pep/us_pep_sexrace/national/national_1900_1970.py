@@ -19,6 +19,7 @@ is processed as is.
 
 import pandas as pd
 import os
+from absl import logging
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -56,6 +57,12 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                           index=False)
 
                 # providing proper column names
+                if len(df.columns) != 10:
+                    logging.error(
+                        f"Schema mismatch for {file}: expected 10 columns, but got {len(df.columns)}."
+                    )
+                    raise ValueError(
+                        f"Expected 10 columns, got {len(df.columns)}")
                 df.columns = [
                     "Age", "All race total", "Count_Person_Male",
                     "Count_Person_Female", "White Total",
@@ -65,10 +72,9 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 ]
 
                 # dropping the unwanted columns
-                df.drop(columns=[
+                df = df.drop(columns=[
                     "Age", "All race total", "White Total", "Nonwhite Total"
-                ],
-                        inplace=True)
+                ])
 
                 # inserting year column to the dataframe
                 df.insert(loc=0, column='Year', value=year)
@@ -87,6 +93,12 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                            "nationals_result_1960_1979.csv",
                            index=False)
                 # providing proper column names
+                if len(df2.columns) != 13:
+                    logging.error(
+                        f"Schema mismatch for {file}: expected 13 columns, but got {len(df2.columns)}."
+                    )
+                    raise ValueError(
+                        f"Expected 13 columns, got {len(df2.columns)}")
                 df2.columns = [
                     "Age", "All race total", "Count_Person_Male",
                     "Count_Person_Female", "White Total",
@@ -99,12 +111,11 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 ]
 
                 # dropping the unwanted columns
-                df2.drop(columns=[
+                df2 = df2.drop(columns=[
                     "Age", "All race total", "White Total", "Black Total",
                     "Other Races Total", "Count_Person_Male_OtherRaces",
                     "Count_Person_Female_OtherRaces"
-                ],
-                         inplace=True)
+                ])
 
                 # inserting year column
                 df2.insert(loc=0, column='Year', value=year)

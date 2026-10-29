@@ -26,7 +26,7 @@ function download_key_families() {
     echo "File $WORKING_DIR/key_family.xml already exists. Skipping download."
     return
   fi
-  curl -s --location "https://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx" \
+  curl -s --fail --location "https://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx" \
     --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9;v=b3;q=0.7' \
     --header 'Accept-Encoding: gzip, deflate, br, zstd' \
     --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
@@ -42,7 +42,7 @@ function download_and_convert_dataset() {
   local dataset="$1" # Pass dataset as an argument
   for i in $(seq 1 $((MAX_RETRIES + 1))); do
     echo "Attempt $dataset $i of $((MAX_RETRIES + 1))..."
-    if curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
+    if curl -s --fail --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
       --header 'Accept: text/html,application/xhtml+xml,application/xml' \
       --header 'Accept-Encoding: gzip, deflate, br, zstd' \
       --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \

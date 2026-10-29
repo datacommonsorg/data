@@ -1,0 +1,38 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.5
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that active Monthly and Quarterly Electricity StatVars have observations within 1 year of the current year and active Annual StatVars are within 2 years.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE NOT regexp_matches(StatVar, '(LigniteCoal|SubbituminousCoal)_IndustrialNonCogen$|Geothermal_(ElectricUtilityCogen|Commercial(NonCogen)?)$|OtherGases_CommercialCogen$|(Monthly|Quarterly)_Generation_Electricity_(ConventionalHydroelectric|UtilityScaleSolar(Photovoltaic)?)_ElectricUtilityCogen$')",
+                "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^(Monthly|Quarterly)_') THEN 1 ELSE 2 END"
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report_EIA_Electricity.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations_EIA_Electricity.csv",
+                "input_files": "../../../../gcs_output/ELEC/ELEC.csv"
+            }
+        }
+    ]
+}

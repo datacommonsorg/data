@@ -86,8 +86,11 @@ class AQIDataLoader:
         """
         self.clean_df[column] = self.clean_df[column].astype(str).str.replace(
             ',', '')
-        self.clean_df[column] = pd.to_numeric(self.clean_df[column],
-                                              errors="ignore")
+        try:
+            self.clean_df[column] = pd.to_numeric(self.clean_df[column],
+                                                  errors="raise")
+        except (ValueError, TypeError):
+            pass
 
     def _delete_extracted_files(self, extracted_path: str):
         """
@@ -120,13 +123,12 @@ class AQIDataLoader:
         df['dcid'] = df['site'].map(site_dcid_map)
 
         # Renaming columns to match the names in TMCF and dropping unwanted columns
-        df.rename(columns=self.clean_column_names, inplace=True)
-        df.drop([
+        df = df.rename(columns=self.clean_column_names)
+        df = df.drop([
             'query_name', 'from_date', 'from_time', 'to_date', 'to_time', 'id',
             'site'
         ],
-                axis=1,
-                inplace=True)
+                     axis=1)
 
         self.raw_df = df
 
@@ -149,9 +151,13 @@ class AQIDataLoader:
             self.clean_df.to_csv(csv_file_path,
                                  mode='a',
                                  index=False,
-                                 header=False)
+                                 header=False,
+                                 na_rep="nan")
         else:
-            self.clean_df.to_csv(csv_file_path, index=False, header=True)
+            self.clean_df.to_csv(csv_file_path,
+                                 index=False,
+                                 header=True,
+                                 na_rep="nan")
 
 
 def main():

@@ -299,7 +299,7 @@ def fingerprint_node(pvs: dict,
     for p in sorted(normalized_pvs.keys()):
         if p not in ignore_props:
             if not compare_props or p in compare_props:
-                fp.append(f'{p}:{normalized_pvs[p]}')
+                fp.append(f'{p}={normalized_pvs[p]}')
     return ';'.join(fp)
 
 

@@ -29,7 +29,7 @@ def state1990(url_file: str, output_folder: str):
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for url in _urls:
-        df = pd.read_table(url, skiprows=15, delim_whitespace=True, header=None)
+        df = pd.read_table(url, skiprows=15, sep=r'\s+', header=None)
         #Copying the raw data
         filename = urlparse(url).path.split('/')[-1]
         df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -62,9 +62,9 @@ def state1990(url_file: str, output_folder: str):
         df['Male_AsianOrPacificIslander'] = df["NHAPIM"] + df["HAPIM"]
         df['Female_AsianOrPacificIslander'] = df["NHAPIF"] + df["HAPIF"]
         # Dropping the old unwanted columns.
-        df.drop(columns=['NHWM','NHWF','NHBM','NHBF','NHAIANM','NHAIANF',\
+        df = df.drop(columns=['NHWM','NHWF','NHBM','NHBF','NHAIANM','NHAIANF',\
             'NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF','HAPIM'\
-            ,'HAPIF'],inplace=True)
+            ,'HAPIF'])
         df['geo_ID'] = [f'{x:02}' for x in df['geo_ID']]
         df['geo_ID'] = 'geoId/' + df['geo_ID']
         df['Age'] = df['Age'].astype(str)
@@ -73,7 +73,7 @@ def state1990(url_file: str, output_folder: str):
         df = df.melt(id_vars=['Year','geo_ID','Age'], var_name='sv' , \
             value_name='observation')
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
-        df.drop(columns=['Age', 'sv'], inplace=True)
+        df = df.drop(columns=['Age', 'sv'])
         df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
         final_df = pd.concat([final_df, df])
 

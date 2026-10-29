@@ -35,13 +35,22 @@ class PVMapGeneratorTest(unittest.TestCase):
         self._data_file.write_text('header\nvalue')
         self._metadata_file = Path('metadata.csv')
         self._metadata_file.write_text('parameter,value')
+        self._extra_instruction_file = Path('extra_instructions.md')
+        self._extra_instruction_file.write_text(
+            'Use provided place guidance before auto-resolution.',
+            encoding='utf-8')
 
     def tearDown(self):
         os.chdir(
             self._cwd)  # Restore prior cwd so later tests see original state.
         self._temp_dir.cleanup()
 
-    def _make_generator(self, *, is_sdmx: bool) -> PVMapGenerator:
+    def _make_generator(self,
+                        *,
+                        is_sdmx: bool,
+                        extra_instruction_files=None,
+                        extra_instruction_max_bytes: int = 65536,
+                        working_dir=None) -> PVMapGenerator:
         data_config = DataConfig(
             input_data=[str(self._data_file)],
             input_metadata=[str(self._metadata_file)],
@@ -52,6 +61,9 @@ class PVMapGeneratorTest(unittest.TestCase):
             dry_run=True,
             max_iterations=3,
             output_path='output/output_file',
+            extra_instruction_files=extra_instruction_files or [],
+            extra_instruction_max_bytes=extra_instruction_max_bytes,
+            working_dir=working_dir,
         )
         return PVMapGenerator(config)
 
@@ -131,6 +143,7 @@ class PVMapGeneratorTest(unittest.TestCase):
         # Working directory reference should match the temp execution root.
         expected_working_dir = str(Path(self._temp_dir.name).resolve())
         self.assertIn(expected_working_dir, prompt_text)
+        self.assertIn('"extra_instruction_files": []', prompt_text)
 
     def test_generate_prompt_csv(self):
         generator = self._make_generator(is_sdmx=False)
@@ -230,6 +243,74 @@ class PVMapGeneratorTest(unittest.TestCase):
         # Verify input paths are also absolute in the prompt
         self.assertIn(str(data_file.resolve()), prompt_text)
         self.assertIn(str(metadata_file.resolve()), prompt_text)
+
+    def test_generate_prompt_with_relative_extra_instruction_file(self):
+        generator = self._make_generator(
+            is_sdmx=False,
+            extra_instruction_files=[str(self._extra_instruction_file)])
+
+        result = generator.generate()
+
+        self._assert_generation_result(result)
+        prompt_text = self._read_prompt_path(result).read_text()
+        self.assertIn(str(self._extra_instruction_file.resolve()),
+                      prompt_text,
+                      msg='Extra instruction file path missing from prompt')
+        self.assertIn(
+            'use them as supplemental guidance for dataset-specific mappings',
+            prompt_text)
+        self.assertIn(
+            'Before starting, read all files listed in `extra_instruction_files`',
+            prompt_text)
+        self.assertIn('"extra_instruction_files": [', prompt_text)
+
+    def test_accepts_absolute_extra_instruction_file_outside_working_directory(
+            self):
+        with tempfile.TemporaryDirectory() as other_dir:
+            external_file = Path(other_dir) / 'instructions.md'
+            external_file.write_text('Use contextual place names.',
+                                     encoding='utf-8')
+
+            generator = self._make_generator(
+                is_sdmx=False,
+                extra_instruction_files=[str(external_file.resolve())])
+
+            result = generator.generate()
+
+            self._assert_generation_result(result)
+            prompt_text = self._read_prompt_path(result).read_text()
+            self.assertIn(str(external_file.resolve()), prompt_text)
+
+    def test_rejects_missing_extra_instruction_file(self):
+        with self.assertRaisesRegex(ValueError,
+                                    'Extra instruction file does not exist'):
+            self._make_generator(is_sdmx=False,
+                                 extra_instruction_files=['missing.md'])
+
+    def test_rejects_directory_extra_instruction_file(self):
+        extra_dir = Path('extra_dir')
+        extra_dir.mkdir()
+        with self.assertRaisesRegex(ValueError,
+                                    'Extra instruction path is not a file'):
+            self._make_generator(is_sdmx=False,
+                                 extra_instruction_files=[str(extra_dir)])
+
+    def test_rejects_oversized_extra_instruction_file(self):
+        oversized_file = Path('oversized.txt')
+        oversized_file.write_text('abcdefghijk', encoding='utf-8')
+        with self.assertRaisesRegex(ValueError,
+                                    'Extra instruction file is larger than'):
+            self._make_generator(is_sdmx=False,
+                                 extra_instruction_files=[str(oversized_file)],
+                                 extra_instruction_max_bytes=10)
+
+    def test_rejects_non_utf8_extra_instruction_file(self):
+        binary_file = Path('binary.bin')
+        binary_file.write_bytes(b'\xff\xfe\x00')
+        with self.assertRaisesRegex(
+                ValueError, 'Extra instruction file is not valid UTF-8 text'):
+            self._make_generator(is_sdmx=False,
+                                 extra_instruction_files=[str(binary_file)])
 
     def test_rejects_invalid_output_path(self):
         data_config = DataConfig(

@@ -16,6 +16,8 @@ This Python Script is for National Level Data 1900-1959
 '''
 import os
 import pandas as pd
+import requests
+from absl import logging
 
 
 def national1900(output_folder: str):
@@ -26,6 +28,7 @@ def national1900(output_folder: str):
     # Used to collect data after every loop for every file's df
     final_df = pd.DataFrame()
     # The numbers 00 to 60 signify the available files as per year numbers
+    session = requests.Session()
     for i in range(00, 60):
         j = f'{i:02}'
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
@@ -41,8 +44,22 @@ def national1900(output_folder: str):
         # 8=Female_NonWhiteAlone
         cols = ['Age', '0', '1', '2', '3', '4', '5', '6', '7', '8']
         # reading the csv format input file and converting it to a dataframe
-        df = pd.read_csv(url,names=cols,engine='python',skiprows=9,\
-            skipfooter=15,encoding='ISO-8859-1')
+        try:
+            # Check if the URL is accessible
+            response = session.head(url, allow_redirects=True, timeout=5)
+            if response.status_code != 200:
+                logging.warning(f"Skipping {url} as it is not accessible.")
+                continue
+
+            df = pd.read_csv(url,
+                             names=cols,
+                             engine='python',
+                             skiprows=9,
+                             skipfooter=15,
+                             encoding='ISO-8859-1')
+        except Exception as e:
+            logging.error(f"Error reading {url}: {e}")
+            continue
         #Writing raw data to csv
         df.to_csv(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "raw_data",
@@ -56,7 +73,7 @@ def national1900(output_folder: str):
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
         # dropping unwanted columns
-        df.drop(columns=['0'], inplace=True)
+        df = df.drop(columns=['0'])
         # melt function is used to change the dataframe format from wide to long
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
         # giving proper column names
@@ -73,7 +90,7 @@ def national1900(output_folder: str):
             }
         })
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
-        df.drop(columns=['Age', 'sv'], inplace=True)
+        df = df.drop(columns=['Age', 'sv'])
         #to swap the columns
         year = url[-8:-4]
         # inserting location,year column and measurement_method to the dataframe

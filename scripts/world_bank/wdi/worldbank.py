@@ -39,6 +39,10 @@ flags.DEFINE_string(
     "indicatorSchemaFile",
     os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
 flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_string(
+    'historical_gcs_path',
+    'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
+    'GCS path to the deleted historical data CSV file')
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -229,56 +233,59 @@ def read_worldbank(iso3166alpha3, mode):
     """
     if mode in ["download", '']:
         logging.info('Downloading input file for country %s', iso3166alpha3)
-        country_zip = ("http://api.worldbank.org/v2/en/country/" +
-                       iso3166alpha3 + "?downloadformat=csv")
+
+        # 1. Attempt CSV ZIP Download
+        csv_url = f"http://api.worldbank.org/v2/en/country/{iso3166alpha3}?downloadformat=csv"
         r = retry_call(requests.get,
-                       fargs=[country_zip],
+                       fargs=[csv_url],
                        tries=3,
                        delay=20,
                        backoff=1.5)
+
         if r.status_code != 200:
             logging.fatal('Failed to retrieve %s', iso3166alpha3)
-        if not os.path.exists(os.path.join(_MODULE_DIR, 'source_data')):
-            os.mkdir(os.path.join(_MODULE_DIR, 'source_data'))
-        with open(
-                os.path.join(_MODULE_DIR, 'source_data',
-                             iso3166alpha3 + '.zip'), 'wb') as f:
-            f.write(r.content)
 
-        filebytes = io.BytesIO(r.content)
-        myzipfile = zipfile.ZipFile(filebytes)
-
-        # We need to select the data file which starts with "API",
-        # but does not have an otherwise regular filename structure.
-        file_to_open = None
-        for file in myzipfile.namelist():
-            if file.startswith("API"):
-                file_to_open = file
-                break
-        assert file_to_open is not None, \
-            "Failed to find data for" + iso3166alpha3
+        myzipfile = zipfile.ZipFile(io.BytesIO(r.content))
+        file_to_open = next(
+            (f for f in myzipfile.namelist() if f.startswith("API")), None)
 
         df = None
-        # Captures any text contained in double quotatations.
-        line_match = re.compile(r"\"([^\"]*)\"")
+        # Check if CSV exists in the ZIP
+        if file_to_open:
+            line_match = re.compile(r"\"([^\"]*)\"")
+            for line in myzipfile.open(file_to_open).readlines():
+                cols = line_match.findall(line.decode("utf-8"))
+                if len(cols) > 2:
+                    if df is None:
+                        df = pd.DataFrame(columns=cols)
+                    else:
+                        df = pd.concat(
+                            [df, pd.DataFrame([cols], columns=df.columns)],
+                            ignore_index=True)
 
-        for line in myzipfile.open(file_to_open).readlines():
-            # Cells are contained in quotations and comma separated.
-            cols = line_match.findall(line.decode("utf-8"))
+        # 2. FALLBACK: Download Excel ZIP if CSV was missing or invalid
+        if df is None:
+            logging.info('API file not in CSV zip. Trying Excel zip for %s',
+                         iso3166alpha3)
+            excel_url = f"http://api.worldbank.org/v2/en/country/{iso3166alpha3}?downloadformat=excel"
+            r_ex = retry_call(requests.get,
+                              fargs=[excel_url],
+                              tries=3,
+                              delay=20,
+                              backoff=1.5)
 
-            # CSVs include header informational lines which should be ignored.
-            if len(cols) > 2:
-                # Use first row as the header.
-                if df is None:
-                    df = pd.DataFrame(columns=cols)
-                else:
-                    df = pd.concat(
-                        [df, pd.DataFrame([cols], columns=df.columns)],
-                        ignore_index=True)
-
+            if r_ex.status_code == 200:
+                # The Excel "ZIP" usually contains an .xls file.
+                # World Bank sometimes sends the .xls directly or inside a zip.
+                # This logic handles the Excel stream directly:
+                df = pd.read_excel(io.BytesIO(r_ex.content),
+                                   sheet_name=0,
+                                   skiprows=3)
+            else:
+                logging.warning('Failed to find data in any format for %s',
+                                iso3166alpha3)
+                return None
         df = df.rename(columns=WORLDBANK_COL_REMAP)
-
-        # Turn each year into its own row.
         df = df.set_index(
             ['CountryName', 'CountryCode', 'IndicatorName', 'IndicatorCode'])
         df = df.stack()
@@ -286,14 +293,15 @@ def read_worldbank(iso3166alpha3, mode):
         df.name = "Value"
         df = df.reset_index()
 
-        # Convert to numeric and drop empty values.
-        df['Value'] = pd.to_numeric(df['Value'])
-        df = df.dropna()
-        if not os.path.exists(
-                os.path.join(_MODULE_DIR, 'preprocessed_source_csv')):
-            os.mkdir(os.path.join(_MODULE_DIR, 'preprocessed_source_csv'))
-        df.to_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv',
-                  index=False)
+        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+        df = df.dropna(subset=['Value'])
+
+        # Save preprocessed version
+        out_path = os.path.join(_MODULE_DIR, 'preprocessed_source_csv',
+                                f'{iso3166alpha3}.csv')
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        df.to_csv(out_path, index=False)
+
     else:
         df = pd.read_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv')
     return df
@@ -415,15 +423,21 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
     for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
         country_df = read_worldbank(country_code, mode)
 
+        if country_df is None:
+            continue
+
         # Remove unneccessary indicators.
         country_df = country_df[country_df['IndicatorCode'].isin(
             indicators_to_keep)]
-
         # Map country codes to ISO.
         country_df['ISO3166Alpha3'] = country_code
-
         # Add new row to main datframe.
         country_df_list.append(country_df)
+    # 3. Handle the empty list case OUTSIDE the loop
+    if not country_df_list:
+        logging.error("No data was downloaded for any country.")
+        # Return empty DF with expected columns to satisfy the rest of the pipeline
+        return pd.DataFrame(columns=['StatisticalVariable', 'Year', 'Value'])
 
     worldbank_dataframe = pd.concat(country_df_list)
     # Map indicator codes to unique Statistical Variable.
@@ -462,7 +476,9 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         if saveOutput:
             TMCF_PATH = 'output/WorldBank.tmcf'
         else:
-            TMCF_PATH = 'test_data/output/output_generated.tmcf'
+            TMCF_PATH = os.path.join(_MODULE_DIR,
+                                     'test_data/output/output_generated.tmcf')
+        os.makedirs(os.path.dirname(TMCF_PATH), exist_ok=True)
         with open(TMCF_PATH, 'w', newline='') as f_out:
             for index, enum in enumerate(tmcfs_for_stat_vars):
                 tmcf, stat_var_obs_cols, stat_vars_in_group = enum
@@ -494,13 +510,40 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
         if saveOutput:
             logging.info("Writing output csv")
-            df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
-                                                    float_format='%.10f',
-                                                    index=False)
+            output_file_path = 'output/WorldBank.csv'
+            final_df = merge_historical_data(df.drop('IndicatorCode', axis=1),
+                                             _FLAGS.historical_gcs_path)
+            final_df.to_csv(output_file_path, float_format='%.10f', index=False)
         else:
             return df
     except Exception as e:
         logging.fatal(f"Error generating output {e}")
+
+
+def merge_historical_data(df, historical_gcs_path):
+    """Merges and deduplicates historical deleted data from GCS into df."""
+    if not historical_gcs_path:
+        return df
+    try:
+        composite_keys = [
+            'StatisticalVariable', 'ISO3166Alpha3', 'Year', 'observationPeriod',
+            'unit', 'measurementMethod', 'scalingFactor'
+        ]
+        deleted_df = retry_call(
+            pd.read_csv,
+            fargs=[historical_gcs_path],
+            fkwargs={'dtype': {
+                k: str for k in composite_keys
+            }},
+            tries=3,
+            delay=5,
+            backoff=2)
+        df = pd.concat([df, deleted_df], ignore_index=True)
+        for col in composite_keys:
+            df[col] = df[col].fillna('').astype(str).str.removesuffix('.0')
+        return df.drop_duplicates(subset=composite_keys, keep='first')
+    except Exception as e:
+        logging.fatal(f"Could not read historical deleted data from GCS: {e}")
 
 
 def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
@@ -533,6 +576,8 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
 def process(indicator_codes, worldbank_dataframe, saveOutput=True):
     logging.info("Processing the input files")
     try:
+        os.makedirs('output', exist_ok=True)
+
         # Add source description to note.
         def add_source_to_description(row):
             if not pd.isna(row['Source']):

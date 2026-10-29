@@ -91,7 +91,7 @@ def national1980(url_file: str, output_folder: str):
         # Delimitng the columns by whitespace.
         df = pd.read_table(file,
                            index_col=False,
-                           delim_whitespace=True,
+                           sep=r'\s+',
                            engine='python',
                            names=cols)
         df = df.loc[df['0'].isin(['2I', '9P'])]
@@ -128,7 +128,7 @@ def national1980(url_file: str, output_folder: str):
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'] + 'Years'
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['SVs']
-        df.drop(columns=['Age'], inplace=True)
+        df = df.drop(columns=['Age'])
         df['Measurement_Method'] = np.where(df['SVs'].str.contains("Aggr"), \
             'dcAggregate/CensusPEPSurvey', 'CensusPEPSurvey')
         df['SVs'] = df['SVs'].str.replace('Aggr', '')

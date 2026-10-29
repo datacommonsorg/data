@@ -56,7 +56,7 @@ flags.DEFINE_integer('years_per_batch', 10,
 # Parameters:
 #   energy_code: two-letter code for the energy source
 #   years: comma separated list of years
-_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
+_DOWNLOAD_URL = 'https://data.un.org/legacy/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
 def download_energy_dataset(
@@ -83,6 +83,7 @@ def download_energy_dataset(
     Returns:
       A list of output files downloaded.
     """
+    output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
         logging.info(
@@ -90,13 +91,11 @@ def download_energy_dataset(
             str(supported_datasets))
         return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
-    years_list = list(range(start_year, years_per_batch + 1))
     years_list = [str(y) for y in range(start_year, end_year + 1)]
     batch_years = [
         years_list[i:i + years_per_batch]
         for i in range(0, len(years_list), years_per_batch)
     ]
-    output_files = []
     for year_batch in batch_years:
         start_year = year_batch[0]
         end_year = year_batch[-1]
@@ -105,7 +104,11 @@ def download_energy_dataset(
         logging.info(
             f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}'
         )
-        download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
+        # The data.un.org load balancer redirects any /legacy/ URL containing
+        # literal 'WS' to the root path. '\u0174S' ('ŴS') bypasses the load
+        # balancer rule while matching 'WS' in UNdata's SQL Server collation.
+        query_energy_code = '\u0174S' if energy_dataset == 'WS' else energy_dataset
+        download_url = _DOWNLOAD_URL.format(energy_code=query_energy_code,
                                             years=years_str)
         download_successful = download_file(url=download_url,
                                             output_folder=output,
@@ -117,7 +120,8 @@ def download_energy_dataset(
         if download_successful:
             logging.info(f"Download of '{download_url}' completed.")
             for f in os.listdir(output):
-                output_files.append(os.path.join(output, f))
+                if f.endswith('.csv'):
+                    output_files.append(os.path.join(output, f))
         else:
             logging.fatal(f"Download or processing of '{download_url}' failed")
     return output_files

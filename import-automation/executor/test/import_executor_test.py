@@ -15,13 +15,18 @@
 Tests for import_executor.py.
 """
 
+import json
+import os
 import unittest
 from unittest import mock
 import subprocess
 import tempfile
+import threading
 
 from app.executor import import_executor
 from app.executor.import_executor import ImportStatus
+from tools.import_validation.result import ValidationResult, ValidationStatus
+from tools.import_validation.runner import ValidationRunner
 
 
 class ImportExecutorTest(unittest.TestCase):
@@ -43,6 +48,27 @@ class ImportExecutorTest(unittest.TestCase):
         self.assertRaises(subprocess.TimeoutExpired,
                           import_executor._run_with_timeout, ['sleep', '5'],
                           0.1)
+
+    def test_run_with_timeout_async_drains_streams_concurrently(self):
+        barrier = threading.Barrier(2)
+
+        def stream(line):
+            barrier.wait(timeout=5)
+            yield line
+
+        process = mock.Mock(returncode=0)
+        process.stdout = stream(b'stdout\n')
+        process.stderr = stream(b'stderr\n')
+
+        with mock.patch.object(import_executor.subprocess,
+                               'Popen',
+                               return_value=process):
+            result = import_executor._run_with_timeout_async(['command'], 1)
+
+        self.assertEqual(0, result.returncode)
+        self.assertEqual(b'stdout\n', result.stdout)
+        self.assertEqual(b'stderr\n', result.stderr)
+        process.wait.assert_called_once_with()
 
     def test_create_venv(self):
         with tempfile.NamedTemporaryFile(mode='w+') as requirements:
@@ -83,11 +109,7 @@ class ImportExecutorTest(unittest.TestCase):
         expected = (
             'message\n'
             '[Subprocess command]: printf "out" & >&2 printf "err" & exit 1\n'
-            '[Subprocess return code]: 1\n'
-            '[Subprocess stdout]:\n'
-            'out\n'
-            '[Subprocess stderr]:\n'
-            'err')
+            '[Subprocess return code]: 1')
         self.assertEqual(expected, message)
 
     def test_construct_process_message_no_output(self):
@@ -102,3 +124,62 @@ class ImportExecutorTest(unittest.TestCase):
                     '[Subprocess command]: exit 0\n'
                     '[Subprocess return code]: 0')
         self.assertEqual(expected, message)
+
+    def test_get_validation_message(self):
+        executor = import_executor.ImportExecutor(
+            uploader=mock.MagicMock(),
+            github=mock.MagicMock(),
+            config=mock.MagicMock(),
+        )
+        results = [
+            ValidationResult(ValidationStatus.PASSED, 'check_empty_import'),
+            ValidationResult(ValidationStatus.FAILED, 'check_lint_error_count'),
+            ValidationResult(ValidationStatus.DATA_ERROR,
+                             'check_deleted_records_percent'),
+            ValidationResult(ValidationStatus.CONFIG_ERROR, 'check_min_value'),
+        ]
+        self.assertEqual(
+            'FAILED: check_lint_error_count, check_deleted_records_percent, check_min_value',
+            executor._get_validation_message(results),
+        )
+        self.assertEqual(
+            'FAILED: None',
+            executor._get_validation_message([
+                ValidationResult(ValidationStatus.PASSED, 'check_empty_import')
+            ]),
+        )
+
+    def test_get_validation_message_from_runner(self):
+        executor = import_executor.ImportExecutor(
+            uploader=mock.MagicMock(),
+            github=mock.MagicMock(),
+            config=mock.MagicMock(),
+        )
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, 'validation_config.json')
+            output_path = os.path.join(tmp_dir, 'validation_output.csv')
+            with open(config_path, 'w') as f:
+                json.dump(
+                    {
+                        'rules': [{
+                            'rule_id': 'check_deleted_records_percent',
+                            'validator': 'DELETED_RECORDS_PERCENT',
+                            'params': {
+                                'threshold': 0
+                            },
+                        }]
+                    }, f)
+            runner = ValidationRunner(
+                validation_config_path=config_path,
+                differ_output='',
+                stats_summary='',
+                lint_report='',
+                validation_output=output_path,
+            )
+            overall_status, results = runner.run_validations()
+            self.assertTrue(overall_status)
+            self.assertEqual(results[0].status.name, 'PASSED')
+            self.assertEqual(
+                executor._get_validation_message(results),
+                'FAILED: None',
+            )

@@ -13,7 +13,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "alcohol_consumption/output/eurostat_population_alcoholconsumption.tmcf",
-                    "cleaned_csv": "alcohol_consumption/output/eurostat_population_alcoholconsumption.csv"
+                    "cleaned_csv": "alcohol_consumption/output/eurostat_population_alcoholconsumption.csv",
+                    "node_mcf": "alcohol_consumption/output/eurostat_population_alcoholconsumption.mcf"
                 }
             ],
             "source_files": [
@@ -24,7 +25,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 2 2 * *"
+            "cron_schedule": "30 0 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 00:30 UTC"
         },
         {
             "import_name": "EuroStatHealth_BodyMassIndex",
@@ -39,18 +41,20 @@
             "import_inputs": [
                 {
                     "template_mcf": "bmi/output/eurostat_population_bmi.tmcf",
-                    "cleaned_csv": "bmi/output/eurostat_population_bmi.csv"
+                    "cleaned_csv": "bmi/output/eurostat_population_bmi.csv",
+                    "node_mcf": "bmi/output/eurostat_population_bmi.mcf"
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "bmi/input_files/*"
             ],
             "resource_limits": {
                 "cpu": 8,
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 2 * *"
+            "cron_schedule": "0 1 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 01:00 UTC"
         },
         {
             "import_name": "EuroStatHealth_FruitsAndVegetables",
@@ -65,7 +69,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "fruits_vegetables/output/eurostat_population_fruits_vegetables.tmcf",
-                    "cleaned_csv": "fruits_vegetables/output/eurostat_population_fruits_vegetables.csv"
+                    "cleaned_csv": "fruits_vegetables/output/eurostat_population_fruits_vegetables.csv",
+                    "node_mcf": "fruits_vegetables/output/eurostat_population_fruits_vegetables.mcf"
                 }
             ],
             "source_files": [
@@ -76,7 +81,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 6 2 * *"
+            "cron_schedule": "0 0 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 00:00 UTC"
         },
         {
             "import_name": "EuroStatHealth_PhysicalActivity",
@@ -102,7 +108,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 5 2 * *"
+            "cron_schedule": "0 1 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 01:00 UTC"
         },
         {
             "import_name": "EuroStatHealth_SocialEnvironment",
@@ -117,7 +124,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "social_environment/output/eurostat_population_social_environment.tmcf",
-                    "cleaned_csv": "social_environment/output/eurostat_population_social_environment.csv"
+                    "cleaned_csv": "social_environment/output/eurostat_population_social_environment.csv",
+                    "node_mcf": "social_environment/output/eurostat_population_social_environment.mcf"
                 }
             ],
             "source_files": [
@@ -128,7 +136,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 4 2 * *"
+            "cron_schedule": "30 1 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 01:30 UTC"
         },
         {
             "import_name": "EurostatHealth_Tobacco_Consumption",
@@ -143,7 +152,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.tmcf",
-                    "cleaned_csv": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.csv"
+                    "cleaned_csv": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.csv",
+                    "node_mcf": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.mcf"
                 }
             ],
             "source_files": [
@@ -154,7 +164,9 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 3 2 * *"
+            "cron_schedule": "30 0 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 00:30 UTC",
+            "validation_config_file": "validation_config_Tobacco_Consumption.json"
         }
     ]
 }

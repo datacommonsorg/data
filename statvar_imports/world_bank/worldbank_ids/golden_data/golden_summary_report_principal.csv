@@ -1,0 +1,50 @@
+Units,observationPeriods,ScalingFactors,NumPlaces,MinDate,MeasurementMethods,StatVar
+[USDollar],[P1Y],[],12,1988,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryCIV
+[USDollar],[P1Y],[],11,2012,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderWorldTradeOrganization
+[USDollar],[P1Y],[],7,1988,[],AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_CommercialBank_LongTermExternalDebt_LenderCountryZWE
+[USDollar],[P1Y],[],11,1978,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Bilateral_LongTermExternalDebt_LenderCountryBRB
+[USDollar],[P1Y],[],99,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryBEL
+[USDollar],[P1Y],[],41,1972,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Bilateral_LongTermExternalDebt_LenderCountryBRA
+[USDollar],[P1Y],[],16,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCouncilofEurope
+[USDollar],[P1Y],[],7,1995,[],AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Bilateral_LongTermExternalDebt_LenderCountryBRN
+[USDollar],[P1Y],[],11,1970,[],AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryZWE
+[USDollar],[P1Y],[],8,2024,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_CommercialBank_LongTermExternalDebt_LenderCountryCIV
+[USDollar],[P1Y],[],6,1978,[],AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryGAB
+[USDollar],[P1Y],[],17,1984,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCentralBankofWestAfricanStates
+[USDollar],[P1Y],[],6,2013,[],AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryGRD
+[USDollar],[P1Y],[],13,2013,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PubliclyGuaranteed_LongTermExternalDebt_LenderCaribbeanCommunity
+[USDollar],[P1Y],[],20,1970,[],AmountPrincipalRepayment_Debt_OfficialCreditor_Concessional_PubliclyGuaranteed_Bilateral_LongTermExternalDebt_LenderCountrySUN
+[USDollar],[P1Y],[],13,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Bilateral_LongTermExternalDebt_LenderCountryIDN
+[USDollar],[P1Y],[],11,2011,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderEurasianDevelopmentBank
+[USDollar],[P1Y],[],6,2025,[WorldBankProjection],AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryBLZ
+[USDollar],[P1Y],[],7,2023,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_WorldBankOtherPrivate_LongTermExternalDebt_LenderCountryLKA
+[USDollar],[P1Y],[],55,1984,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryCHN
+[USDollar],[P1Y],[],33,2012,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderAfricanExportImportBank
+[USDollar],[P1Y],[],16,1995,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryBLR
+[USDollar],[P1Y],[],7,1981,[],AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryKEN
+[USDollar],[P1Y],[],25,1996,[],AmountPrincipalRepayment_Debt_PubliclyGuaranteed_LongTermExternalDebt_LenderCountrySVK
+[USDollar],[P1Y],[],76,1972,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_Concessional_PubliclyGuaranteed_Bilateral_LongTermExternalDebt_LenderCountryITA
+[USDollar],[P1Y],[],17,1984,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Multilateral_LongTermExternalDebt_LenderCentralBankofWestAfricanStates
+[USDollar],[P1Y],[],31,1978,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Multilateral_LongTermExternalDebt_LenderArabFundforEconomicSocialDevelopment
+[USDollar],[P1Y],[],62,1970,[],AmountPrincipalRepayment_Debt_PubliclyGuaranteed_LongTermExternalDebt_LenderCountrySUN
+[USDollar],[P1Y],[],109,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryKWT
+[USDollar],[P1Y],[],17,1974,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryTHA
+[USDollar],[P1Y],[],7,2025,[WorldBankProjection],AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryGNQ
+[USDollar],[P1Y],[],7,2025,[WorldBankProjection],AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_CommercialBank_LongTermExternalDebt_LenderArabBankforEconomicDevinAfrica
+[USDollar],[P1Y],[],16,1995,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryBLR
+[USDollar],[P1Y],[],6,2025,[WorldBankProjection],AmountPrincipalRepayment_Debt_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryBLZ
+[USDollar],[P1Y],[],95,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_WorldBankOtherPrivate_LongTermExternalDebt_LenderCountryDEU
+[USDollar],[P1Y],[],6,2025,[WorldBankProjection],AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryBLZ
+[USDollar],[P1Y],[],11,2011,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Multilateral_LongTermExternalDebt_LenderEurasianDevelopmentBank
+[USDollar],[P1Y],[],17,1981,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderWestAfricanDevelopmentBank
+[USDollar],[P1Y],[],7,2020,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_Multilateral_LongTermExternalDebt_LenderSouthAsianDevelopmentFund
+[USDollar],[P1Y],[],6,1984,[],AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryPRI
+[USDollar],[P1Y],[],56,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryISR
+[USDollar],[P1Y],[],20,1990,[],AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryCYP
+[USDollar],[P1Y],[],108,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryKWT
+[USDollar],[P1Y],[],65,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryNOR
+[USDollar],[P1Y],[],84,1977,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryARE
+[USDollar],[P1Y],[],40,2017,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderAsianInfrastructureInvestmentBank
+[USDollar],[P1Y],[],25,1977,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_PrivateCreditor_PubliclyGuaranteed_CommercialBank_LongTermExternalDebt_LenderCountryFIN
+[USDollar],[P1Y],[],6,1973,[],AmountPrincipalRepayment_Debt_OfficialCreditor_PubliclyGuaranteed_LongTermExternalDebt_LenderCountryZMB
+[USDollar],[P1Y],[],52,1970,"[, WorldBankProjection]",AmountPrincipalRepayment_Debt_LongTermExternalDebt_LenderCountryROU

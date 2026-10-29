@@ -1,6 +1,7 @@
-Node: E:cpi_u->E0
-observationAbout: C:cpi_u->observationAbout
-observationDate: C:cpi_u->observationDate
-value: C:cpi_u->value
-variableMeasured: C:cpi_u->variableMeasured
+Node: E:cpi_u_output->E0
+observationAbout: C:cpi_u_output->observationAbout
+observationDate: C:cpi_u_output->observationDate
+value: C:cpi_u_output->value
+variableMeasured: C:cpi_u_output->variableMeasured
+#Aggregate: last
 typeOf: dcs:StatVarObservation

@@ -134,8 +134,8 @@ def preprocess_data(file_path):
                 ",", n=1, expand=True)
             preprocessed_df['statistical_variable'] = split_df[0]
             preprocessed_df['geo'] = split_df[1]
-            preprocessed_df.drop(columns=[preprocessed_df.columns[0]],
-                                 inplace=True)
+            preprocessed_df = preprocessed_df.drop(
+                columns=[preprocessed_df.columns[0]])
 
             preprocessed_df = (preprocessed_df.set_index(
                 ["geo", "time"]).pivot(columns="statistical_variable")
@@ -180,6 +180,20 @@ def clean_data(preprocessed_df, output_path):
     # number of columns should be 2 + 2X, we want the first 2 + X
     try:
         logging.info('Cleaning process start. ')
+
+        # Skip redundant IDs
+        ids_to_skip = [
+            'HUX', 'HUXX', 'HUXXX', 'FRX', 'FRXX', 'FRXXX', 'EEXX', 'EEXXX'
+        ]
+        mask_to_skip = preprocessed_df['geo'].isin(ids_to_skip)
+        if mask_to_skip.any():
+            skipped_data = preprocessed_df[mask_to_skip]
+            logging.info(
+                f"Skipping redundant IDs: {skipped_data['geo'].unique().tolist()}"
+            )
+
+        preprocessed_df = preprocessed_df[~mask_to_skip].copy()
+
         num_clean_columns = len(preprocessed_df.columns) // 2 + 1
         # drop unused columns
         clean_df = preprocessed_df.iloc[:, :num_clean_columns]

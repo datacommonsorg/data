@@ -1,5 +1,5 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
-Aimag,observationAbout,{Data},,,,,,,,
+Region,observationAbout,{Data},,,,,,,,
 ,,,,,,,,,,
 1989,observationDate,1989,value,{Number},populationType,Abortion,measuredProperty,count,,
 1990,observationDate,1990,value,{Number},populationType,Abortion,measuredProperty,count,,

@@ -175,12 +175,9 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
                 if year in year_range:
                     df.columns = columns
     #Dropping unwanted columns, need to drop population,agency unit from 2020 data and population column from other year data
-    df.drop(['population', 'agency unit'],
-            axis=1,
-            inplace=True,
-            errors='ignore')
-    df['state'] = df['state'].fillna(method='ffill')
-    df['agency type'] = df['agency type'].fillna(method='ffill')
+    df = df.drop(['population', 'agency unit'], axis=1, errors='ignore')
+    df['state'] = df['state'].ffill()
+    df['agency type'] = df['agency type'].ffill()
 
     # Assigning agency to state
     df.loc[df['agency type'] == 'Total',

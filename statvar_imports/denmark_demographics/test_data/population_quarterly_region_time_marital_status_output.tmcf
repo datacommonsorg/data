@@ -1,0 +1,6 @@
+Node: E:population_quarterly_region_time_marital_status_output->E0
+observationDate: C:population_quarterly_region_time_marital_status_output->observationDate
+value: C:population_quarterly_region_time_marital_status_output->value
+observationAbout: C:population_quarterly_region_time_marital_status_output->observationAbout
+variableMeasured: C:population_quarterly_region_time_marital_status_output->variableMeasured
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,8 @@
+# Keep distributions synchronized with REQUIRED_MODULES in
+# agents/common/scripts/check_python_dependencies.py.
+absl-py
+google-api-core
+google-auth
+google-cloud-storage
+pyopenssl
+pyyaml

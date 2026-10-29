@@ -1,0 +1,6 @@
+"MeasurementMethods","Units","NumPlaces","ScalingFactors","observationPeriods","StatVar","MinDate"
+"[dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999]","[]","3213","[]","[P1Y]","Count_Person_WhiteAlone","1900"
+"[CensusPEPSurvey_RaceUpto1999]","[]","3193","[]","[P1Y]","Count_Person_AsianOrPacificIslander","1990"
+"[CensusPEPSurvey_RaceUpto1999]","[]","1","[]","[P1Y]","Count_Person_NonWhite","1900"
+"[dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999]","[]","3213","[]","[P1Y]","Count_Person_BlackOrAfricanAmericanAlone","1960"
+"[CensusPEPSurvey_RaceUpto1999]","[]","3193","[]","[P1Y]","Count_Person_AmericanIndianAndAlaskaNativeAlone","1990"

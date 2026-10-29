@@ -1,0 +1,14 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that the latest non-projected WDI observation date meets expected freshness.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(CAST(MaxDate AS INT)) AS max_year FROM stats WHERE MeasurementMethods LIKE '%WorldBank_WDI_CSV%' AND CAST(MaxDate AS INT) <= YEAR(CURRENT_DATE) HAVING COUNT(*) > 0",
+                "condition": "max_year >= 2024"
+            }
+        }
+    ]
+}

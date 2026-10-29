@@ -73,6 +73,13 @@ This script offers three modes of operation: download, process, or both download
 3. Process Only (python3 import_data.py --mode=process):
 ```
 
+### ADDED historical file 
+```
+ historical_deleted.csv
+ 
+```
+To prevent data loss, the script now merges the fresh GDP output with a historical data file to fill in any missing gaps. If a record exists in both files, the script follows a validation rule that prioritizes the fresh output as the source. This ensures we keep a complete, up-to-date dataset without losing older historical records.
+
 ### Testing Procedure
 
 How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.

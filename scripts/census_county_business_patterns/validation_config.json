@@ -1,0 +1,14 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_date_freshness_canonical_statvars",
+            "description": "Verifies that canonical StatVars meet the expected Census CBP release freshness (>= 2023)",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_Establishment_NAICSTransportationWarehousing', 'Count_Worker_NAICSRetailTrade')",
+                "condition": "MaxDate >= '2023'"
+            }
+        }
+    ]
+}

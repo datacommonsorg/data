@@ -1,0 +1,363 @@
+Node: dcid:pressure
+typeOf: schema:Property
+name: "pressure"
+description: "Force applied perpendicular to the surface of an object per unit area over which that force is distributed."
+descriptionUrl: "https://en.wikipedia.org/wiki/Pressure"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:height
+typeOf: dcs:Property
+name: "height"
+domainIncludes: dcid:Atmosphere,dcid:Cloud,dcid:Graupel,dcid:Ice,dcid:IceCover,dcid:LandCover,dcid:Place,dcid:Rainwater,dcid:SeaIce,dcid:Snow,dcid:Soil
+rangeIncludes: dcid:QuantityRange,dcid:DepthClassificationEnum
+
+Node: dcid:mixingRatio
+typeOf: schema:Property
+name: "mixingRatio"
+description: "Mass of water vapor per unit mass of dry air."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:LowestHybridLevel
+typeOf: dcid:DepthClassificationEnum
+name: "Lowest Hybrid Level"
+
+Node: dcid:reflectivity
+typeOf: schema:Property
+name: "reflectivity"
+description: "Amount of radar energy that is returned (reflected) back toward a radar after hitting targets in the atmosphere"
+descriptionUrl: "https://www.noaa.gov/jetstream/reflectivity"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:compositeReflectivity
+typeOf: schema:Property
+name: "compositeReflectivity"
+description: "A radar product that is composed of the greatest echo intensity (reflectivity) from any elevation angle seen by the radar."
+descriptionUrl: "https://www.noaa.gov/jetstream/reflectivity"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:PlanetaryBoundaryLayer
+typeOf: dcid:DepthClassificationEnum
+name: "Planetary Boundary Layer"
+description: "Lowest part of the atmosphere directly influenced by its contact with a planetary surface."
+descriptionUrl: "https://en.wikipedia.org/wiki/Planetary_boundary_layer"
+
+Node: dcid:ventilationRate
+typeOf: schema:Property
+name: "ventilationRate"
+description: "Product of the mixing height multiplied by the transport wind speed."
+descriptionUrl: "https://www.weather.gov/riw/fire_smoke_dispersal"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:geopotentialHeight
+typeOf: schema:Property
+name: "geopotentialHeight"
+description: "It measures the height of a pressure surface above sea level, accounting for the fact that gravity varies slightly across the Earth."
+descriptionUrl: "https://en.wikipedia.org/wiki/Geopotential_height"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:velocity
+typeOf: schema:Property
+name: "velocity"
+description: "Rate of change of position with respect to time including magnitude and direction."
+descriptionUrl: "https://en.wikipedia.org/wiki/Velocity"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:PressureVerticalVelocity
+typeOf: dcid:MeasurementQualifierEnum
+name: "Pressure Vertical Velocity"
+description: "Vertical motion of air expressed as rate of pressure change with time"
+descriptionUrl: "https://www.weather.gov/source/zhu/ZHU_Training_Page/Miscellaneous/omega/omega.html"
+
+Node: dcid:GeometricVerticalVelocity
+typeOf: dcid:MeasurementQualifierEnum
+name: "Geometric Vertical Velocity"
+description: "Vertical component of air motion expressed in height (geometric) coordinates, representing the rate of change of an air parcel's physical height with time."
+
+Node: dcid:absoluteVorticity
+typeOf: schema:Property
+name: "absoluteVorticity"
+description: "Measure of the total rotation of an air parcel in the atmosphere"
+descriptionUrl: "https://www.weather.gov/source/zhu/ZHU_Training_Page/Miscellaneous/vorticity/vorticity.html"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:hainesIndex
+typeOf: schema:Property
+name: "hainesIndex"
+description: "A meteorological fire-weather index designed to evaluate the potential for large or erratic wildfire behavior due to atmospheric conditions, specifically dryness and instability in the lower atmosphere."
+descriptionUrl: "https://en.wikipedia.org/wiki/Haines_Index"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:MSLPEtaReduction
+typeOf: dcid:MeasurementQualifierEnum
+name: "Mean Sea Level Pressure ETA Model Reduction"
+description: "A specialized, computationally derived technique for calculating atmospheric pressure at sea level, specifically designed to address the unique step-mountain topography of the Eta model to prevent spurious, unrealistic pressure patterns in mountainous regions."
+
+Node: dcid:depth
+typeOf: dcs:Property
+name: "depth"
+domainIncludes: dcid:Soil
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:volumetricSoilMoisture
+typeOf: schema:Property
+name: "volumetricSoilMoisture"
+description: "Water contained in the upper part of the soil mantle. This moisture evaporates from the soil and is used and transpired by vegetation."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=soil%20moisture"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:liquidWaterContent
+typeOf: schema:Property
+name: "liquidWaterContent"
+description: "Liquid water content is the mass of liquid water droplets contained in a unit volume of air."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:cloudWaterContent
+typeOf: schema:Property
+name: "cloudWaterContent"
+description: "Cloud water content is the mass of liquid cloud droplets suspended in air, excluding precipitation-sized water drops."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:snowWaterEquivalent
+typeOf: schema:Property
+name: "snowWaterEquivalent"
+description: "The water content obtained from melting accumulated snow."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=snow%20water%20equivalent"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:thickness
+typeOf: schema:Property
+name: "thickness"
+description: "Thickness is the measurement of the distance (in meters) between any two constant pressure surfaces."
+descriptionUrl: "https://www.noaa.gov/jetstream/upper-air-charts/constant-pressure-charts-thickness"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:Apparent
+typeOf: dcid:MeasurementQualifierEnum
+name: "Apparent"
+description: "A measure of human discomfort due to combined heat and humidity (e.g., heat index)."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=apparent%20temperature"
+
+Node: dcid:frozenPrecipitation
+typeOf: schema:Property
+name: "frozenPrecipitation"
+description: "Frozen precipitation is precipitation that falls to the surface in solid form, such as snow or ice pellets."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:occurrence
+typeOf: schema:Property
+name: "occurrence"
+description: "Categorical occurrence of ice/snow/rain"
+rangeIncludes: dcid:Integer
+
+Node: dcid:precipitationType
+typeOf: dcs:Property
+name: "precipitationType"
+domainIncludes: dcid:Place
+description: "Precipitation type is the diagnosed form of precipitation reaching the surface, based on atmospheric temperature structure and hydrometeor characteristics."
+rangeIncludes: dcid:NOAA_WeatherConditionEnum,dcid:WeatherConditionEnum
+
+Node: dcid:IcePellets
+typeOf: dcid:PrecipitationTypeEnum
+name: "Ice pellets"
+description: "pellets of ice composed of frozen or mostly frozen raindrops or refrozen partially melted snowflakes"
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=ice+pellets"
+
+Node: dcid:surfaceRoughness
+typeOf: schema:Property
+name: "surfaceRoughness"
+description: "Parameter describing the aerodynamic roughness of the Earth's surface that influences near-surface wind and surface-atmosphere momentum exchange."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:frictionalVelocity
+typeOf: schema:Property
+name: "frictionalVelocity"
+description: "A turbulence velocity scale derived from surface stress that characterizes momentum transfer between the atmosphere and the surface."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:landCoverType
+typeOf: dcs:Property
+name: "landCoverType"
+domainIncludes: dcid:Place
+description: "A categorical classification of the Earth's surface used by the model to define land-surface properties and surface-atmosphere interactions."
+
+Node: dcid:Vegetation
+typeOf: dcid:FarmTypeEnum
+name: "Vegetation"
+
+Node: dcid:soilType
+typeOf: schema:Property
+name: "soilType"
+description: "Classification of soil based on physical and hydraulic properties."
+rangeIncludes: dcid:SoilTypeEnum
+
+Node: dcid:SoilTypeEnum
+typeOf: schema:Class
+name: "SoilTypeEnum"
+description: "An enumeration of different soil types."
+subClassOf: schema:Enumeration
+
+Node: dcid:wiltingPoint
+typeOf: schema:Property
+name: "wiltingPoint"
+description: "The minimum amount of water in the soil that the plant requires not to wilt."
+descriptionUrl: "https://en.wikipedia.org/wiki/Permanent_wilting_point"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:fieldCapacity
+typeOf: schema:Property
+name: "fieldCapacity"
+description: "The soil moisture content remaining after excess water has drained and is available for plant uptake."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:sunshineDuration
+typeOf: schema:Property
+name: "sunshineDuration"
+description: "The amount of time sunlight was detected at a given point."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=sunshine"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:surfaceLiftedIndex
+typeOf: schema:Property
+name: "surfaceLiftedIndex"
+description: "Difference between the observed 500-hPa temperature and the temperature of a surface-based air parcel lifted to 500 hPa."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=lifted%20index"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:convectiveAvailablePotentialEnergy
+typeOf: schema:Property
+name: "convectiveAvailablePotentialEnergy"
+description: "A measure of the amount of energy available for convection"
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=cape"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:convectiveInhibition
+typeOf: schema:Property
+name: "convectiveInhibition"
+description: "The integrated negative buoyancy that must be overcome for an air parcel to reach its level of free convection."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=convective%20inhibition"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:cloudWater
+typeOf: schema:Property
+name: "cloudWater"
+description: "The liquid water content of clouds in the form of suspended cloud droplets."
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:LowCloudLayer
+typeOf: dcid:DepthClassificationEnum
+name: "Low Cloud Layer"
+
+Node: dcid:MiddleCloudLayer
+typeOf: dcid:DepthClassificationEnum
+name: "Middle Cloud Layer"
+description: "A term used to signify clouds with bases between 6,500 and 23,000 feet. At the higher altitudes, they may also have some ice crystals, but they are composed mainly of water droplets."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=middle+cloud"
+
+Node: dcid:HighCloudLayer
+typeOf: dcid:DepthClassificationEnum
+name: "High Cloud Layer"
+description: "These clouds have bases between 16,500 and 45,000 feet in the mid latitudes. At this level they are composed of primarily of ice crystals. Some clouds at this level are cirrus, cirrocumulus, and cirrostratus."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=high+cloud"
+
+Node: dcid:CloudCeiling
+typeOf: dcid:DepthClassificationEnum
+name: "Cloud Ceiling"
+description: "The height above ground level of the lowest cloud layer covering more than half of the sky, diagnosed from model cloud fields."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=ceiling"
+
+Node: dcid:stormRelativeHelicity
+typeOf: schema:Property
+name: "stormRelativeHelicity"
+description: "The integrated measure of streamwise vorticity in the lower atmosphere relative to storm motion, indicating the potential for rotating updrafts."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=helicity"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:stormMotion
+typeOf: schema:Property
+name: "stormMotion"
+description: "The speed and direction at which a thunderstorm travels."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=storm%20motion"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:windComponent
+typeOf: dcs:Property
+name: "windComponent"
+description: "Wind shear can be broken down into vertical and horizontal components."
+descriptionUrl: "https://en.wikipedia.org/wiki/Wind"
+domainIncludes: dcid:Atmosphere
+rangeIncludes: dcid:WindComponentEnum
+
+Node: dcid:Tropopause
+typeOf: dcid:DepthClassificationEnum
+name: "Tropopause"
+description: "The upper boundary of the troposphere, usually characterized by an abrupt change in lapse rate from positive (decreasing temperature with height) to neutral or negative (temperature constant or increasing with height)."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=tropopause"
+
+Node: dcid:altitude
+typeOf: schema:Property
+name: "altitude"
+description: "Altitude is a distance measurement, usually in the vertical or up direction, between a reference datum and a point or object."
+descriptionUrl: "https://en.wikipedia.org/wiki/Altitude"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:ICAOStandardAtmosphere
+typeOf: dcid:MeasurementQualifierEnum
+name: "International Civil Aviation Organization Standard Atmosphere"
+description: "The ICAO Standard Atmosphere is a reference model defining standard vertical profiles of temperature and pressure used for aviation and atmospheric calculations."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=standard%20atmosphere"
+
+Node: dcid:windShear
+typeOf: schema:Property
+name: "windShear"
+description: "Wind shear is the change in wind speed and/or direction with height, diagnosed from model wind fields."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=wind%20shear"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:MaxWind
+typeOf: dcid:DepthClassificationEnum
+name: "Max Wind"
+
+Node: dcid:Isotherm0C
+typeOf: dcid:DepthClassificationEnum
+name: "Isotherm 0C"
+description: "The 0 °C isotherm is the atmospheric level or line where the air temperature equals 0 degrees Celsius, indicating the freezing level."
+
+Node: dcid:HighestTroposphericFreezingLevel
+typeOf: dcid:DepthClassificationEnum
+name: "Highest Tropospheric Freezing Level"
+
+Node: dcid:bestLiftedIndex
+typeOf: schema:Property
+name: "bestLiftedIndex"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:0.33To1SigmaLayer
+typeOf: dcid:DepthClassificationEnum
+name: "0.33 To 1 Sigma Layer"
+description: "The 0.33-1 sigma layer represents the lower atmospheric layer between 0.33 and 1.0 of normalized surface pressure, encompassing the boundary layer and lower troposphere."
+
+Node: dcid:0.995SigmaLevel
+typeOf: dcid:DepthClassificationEnum
+name: "0.995 Sigma Level"
+description: "0.995 sigma level is a terrain-following model level located at 99.5% of surface pressure, representing near-surface atmospheric conditions."
+
+Node: dcid:potentialTemperature
+typeOf: schema:Property
+name: "potentialTemperature"
+description: "The temperature a parcel of dry air would have if brought adiabatically (i.e., without transfer of heat or mass) to a standard pressure level of 1000 mbar."
+descriptionUrl: "https://forecast.weather.gov/glossary.php?word=potential%20temperature"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:LiftedParcelLevel
+typeOf: dcid:MeasurementQualifierEnum
+name: "Lifted Parcel Level"
+description: "The height at which the relative humidity of an air parcel will reach 100% with respect to liquid water when it cooled by dry adiabatic lifting."
+descriptionUrl: "https://en.wikipedia.org/wiki/Lifting_condensation_level"
+
+Node: dcid:PotentialVorticity2PVU
+typeOf: dcid:DepthClassificationEnum
+name: "Potential Vorticity 2 PVU"
+
+Node: dcid:PotentialVorticityNeg2PVU
+typeOf: dcid:DepthClassificationEnum
+name: "Potential Vorticity Neg 2 PVU"

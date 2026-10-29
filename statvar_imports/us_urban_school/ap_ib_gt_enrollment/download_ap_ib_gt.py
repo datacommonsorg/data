@@ -27,7 +27,8 @@ import sys
 FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
-flags.DEFINE_boolean('ib', False, 'Download International Baccalaureate data only.')
+flags.DEFINE_boolean('ib', False,
+                     'Download International Baccalaureate data only.')
 flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
 
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
@@ -40,7 +41,6 @@ DATA_CONFIGS = {
         "search_constraint": {
             "2009-10": "CRDC-data_SCH_Pt 1-Advanced Placement.xlsx"
         },
-
         "output_name_fragment": "AP_Enrollment",
         "output_dir_name": "advanced_placements/input_files",
         "pvmap_config": "ap_enrollment_pvmap.csv"
@@ -50,9 +50,9 @@ DATA_CONFIGS = {
     "ib": {
         "keywords": [r'IB', r'International Baccalaureate'],
         "search_constraint": {
-            "2009-10": "CRDC-data_SCH_Pt 1-Enrollment_Pt 1-Students enrolled in IB Diploma Programme.xlsx"
+            "2009-10":
+                "CRDC-data_SCH_Pt 1-Enrollment_Pt 1-Students enrolled in IB Diploma Programme.xlsx"
         },
-
         "output_name_fragment": "IB_Enrollment",
         "output_dir_name": "international_baccalaureate/input_files",
         "pvmap_config": "ib_enrollment_pvmap.csv"
@@ -62,28 +62,41 @@ DATA_CONFIGS = {
     "gt": {
         "keywords": [r'Gifted', r'Talented'],
         "search_constraint": {
-            "2009-10": "CRDC-data_SCH_Pt 1-Enrollment_Pt 1-Students enrolled in Gifted-Talented Programs.xlsx"
+            "2009-10":
+                "CRDC-data_SCH_Pt 1-Enrollment_Pt 1-Students enrolled in Gifted-Talented Programs.xlsx"
         },
-
         "output_name_fragment": "GT_Enrollment",
         "output_dir_name": "gifted_and_talented/input_files",
         "pvmap_config": "gt_enrollment_pvmap.csv"
     }
-
 }
 
 HARDCODED_CONFIGS = {
-    "2021-22": {"final_year": 2022},
-    "2020-21": {"final_year": 2021},
-    "2017-18": {"final_year": 2018},
-    "2015-16": {"final_year": 2016},
-    "2013-14": {"final_year": 2014},
-    "2011-12": {"final_year": 2012},
-    "2009-10": {"final_year": 2010}
-
+    "2021-22": {
+        "final_year": 2022
+    },
+    "2020-21": {
+        "final_year": 2021
+    },
+    "2017-18": {
+        "final_year": 2018
+    },
+    "2015-16": {
+        "final_year": 2016
+    },
+    "2013-14": {
+        "final_year": 2014
+    },
+    "2011-12": {
+        "final_year": 2012
+    },
+    "2009-10": {
+        "final_year": 2010
+    }
 }
 
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
+
 
 def add_year_column(file_path, year):
     """
@@ -101,17 +114,23 @@ def add_year_column(file_path, year):
             try:
                 df = pd.read_csv(file_path, low_memory=False, encoding='latin1')
             except pd.errors.EmptyDataError:
-                logging.warning(f"Warning: No data found in {file_path.name}. Deleting empty file.")
-                os.remove(file_path) # Delete the empty file
+                logging.warning(
+                    f"Warning: No data found in {file_path.name}. Deleting empty file."
+                )
+                os.remove(file_path)  # Delete the empty file
                 return
         else:
 
-            logging.info(f"Skipping year column addition for unsupported file format: {file_path.suffix}")
+            logging.info(
+                f"Skipping year column addition for unsupported file format: {file_path.suffix}"
+            )
             return
 
         if df.empty:
-            logging.warning(f"Warning: DataFrame is empty after reading {file_path.name}. Deleting empty file.")
-            os.remove(file_path) # Delete the empty file
+            logging.warning(
+                f"Warning: DataFrame is empty after reading {file_path.name}. Deleting empty file."
+            )
+            os.remove(file_path)  # Delete the empty file
             return
 
         # Add YEAR column
@@ -124,7 +143,9 @@ def add_year_column(file_path, year):
             df["ncesid"] = df["LEAID"] + df["SCHID"]
 
         else:
-            logging.warning(f"-> Warning: Missing LEAID or SCHID columns for NCESID creation in {file_path.name}")
+            logging.warning(
+                f"-> Warning: Missing LEAID or SCHID columns for NCESID creation in {file_path.name}"
+            )
 
         # Reorder columns to place 'YEAR', 'ncesid', and 'JJ' (if present) at the beginning
         cols = df.columns.tolist()
@@ -147,16 +168,22 @@ def add_year_column(file_path, year):
         elif file_path.suffix == '.csv':
             df.to_csv(file_path, index=False)
 
-        logging.info(f"-> Successfully added 'YEAR' and 'ncesid' columns to {file_path.name}")
+        logging.info(
+            f"-> Successfully added 'YEAR' and 'ncesid' columns to {file_path.name}"
+        )
 
     except Exception as e:
 
         # If an error occurs during processing but after the file was created, attempt to delete it.
         if file_path.exists():
             os.remove(file_path)
-            logging.error(f"Deleted incomplete/corrupted file {file_path.name} due to error: {e}")
+            logging.error(
+                f"Deleted incomplete/corrupted file {file_path.name} due to error: {e}"
+            )
 
-        raise RuntimeError(f"Failed to add year/ncesid column to {file_path.name}: {e}")
+        raise RuntimeError(
+            f"Failed to add year/ncesid column to {file_path.name}: {e}")
+
 
 def generate_future_configs(start_year):
     """
@@ -172,13 +199,11 @@ def generate_future_configs(start_year):
         if year_range_key in HARDCODED_CONFIGS:
             continue
 
-        generated_configs[year_range_key] = {
-            "final_year": end_year
-        }
+        generated_configs[year_range_key] = {"final_year": end_year}
     return generated_configs
 
-@retry(tries=3, delay=5, backoff=2)
 
+@retry(tries=3, delay=5, backoff=2)
 def download_url_with_retry(zip_url):
     """
     Handles downloading the ZIP content with retries and status checks.
@@ -188,6 +213,7 @@ def download_url_with_retry(zip_url):
     response = requests.get(zip_url, stream=True, timeout=180)
     response.raise_for_status()
     return response
+
 
 def get_file_keywords(data_type, config_key):
     """
@@ -202,6 +228,7 @@ def get_file_keywords(data_type, config_key):
     pvmap_config = config.get("pvmap_config")
     return keywords, specific_constraint, output_name_fragment, pvmap_config
 
+
 def get_req_cols_from_config(config_path):
     """
     Reads a CSV config file to extract a list of required column names.
@@ -209,21 +236,29 @@ def get_req_cols_from_config(config_path):
     and adds 'LEAID' and 'SCHID'.
     """
     try:
-        df = pd.read_csv(config_path, header=None, usecols=[0], on_bad_lines='skip')
+        df = pd.read_csv(config_path,
+                         header=None,
+                         usecols=[0],
+                         on_bad_lines='skip')
         # Get first column as a list
         req_cols = df[0].tolist()
         # Remove header 'key'
         if 'key' in req_cols:
             req_cols.remove('key')
         # Filter out values
-        req_cols = [col for col in req_cols if col not in ['YEAR', 'ncesid', ''] and pd.notna(col)]
+        req_cols = [
+            col for col in req_cols
+            if col not in ['YEAR', 'ncesid', ''] and pd.notna(col)
+        ]
         # Add necessary columns for ncesid creation
         req_cols.extend(['LEAID', 'SCHID'])
         return req_cols
 
     except Exception as e:
-        logging.error(f"Failed to read or process config file {config_path}: {e}")
+        logging.error(
+            f"Failed to read or process config file {config_path}: {e}")
         return None
+
 
 def download_and_extract(config_key, config_data, data_type, output_dir):
     """
@@ -231,10 +266,13 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     then adds the year column and ncesid.
     """
     final_year = config_data["final_year"]
-    keywords, search_constraint, output_name_fragment, pvmap_config = get_file_keywords(data_type, config_key)
+    keywords, search_constraint, output_name_fragment, pvmap_config = get_file_keywords(
+        data_type, config_key)
     url_fragment = f"{config_key}-crdc-data"
     zip_url = BASE_URL_TEMPLATE.format(url_fragment)
-    logging.info(f"\n--- Processing {config_key} data ({data_type.capitalize()}) (Final Year: {final_year}) ---")
+    logging.info(
+        f"\n--- Processing {config_key} data ({data_type.capitalize()}) (Final Year: {final_year}) ---"
+    )
 
     try:
         logging.info(f"Source URL: {zip_url}")
@@ -242,22 +280,28 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
         response = download_url_with_retry(zip_url)
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
-            logging.info(f"File not found (404) for {config_key}. Assuming release is not yet available and skipping.")
+            logging.info(
+                f"File not found (404) for {config_key}. Assuming release is not yet available and skipping."
+            )
             return
         raise
     except Exception as e:
-        raise RuntimeError(f"Failed to connect/download archive after retries for {config_key}: {e}")
+        raise RuntimeError(
+            f"Failed to connect/download archive after retries for {config_key}: {e}"
+        )
 
     logging.info("Download successful. Now extracting...")
-    
+
     try:
         zip_content = io.BytesIO(response.content)
         with zipfile.ZipFile(zip_content) as zip_ref:
             if data_type == 'ap' and config_key in ["2009-10", "2011-12"]:
-                logging.info(f"--- Applying special AP subject handling for {config_key} data ---")
-                
+                logging.info(
+                    f"--- Applying special AP subject handling for {config_key} data ---"
+                )
+
                 math_file_name, science_file_name = None, None
-                
+
                 # Find the math and science files in the zip
                 for name in zip_ref.namelist():
                     normalized_name = name.lower()
@@ -266,27 +310,34 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
                         math_file_name = name
                     elif 'ap' in normalized_name and 'science' in normalized_name and 'students' in normalized_name and not '$' in name:
                         science_file_name = name
-                
+
                 if not math_file_name or not science_file_name:
-                    logging.warning(f"Could not find both AP Mathematics and Science files for {config_key}.")
+                    logging.warning(
+                        f"Could not find both AP Mathematics and Science files for {config_key}."
+                    )
                     return
-                    
+
                 # Read both files into pandas dataframes
                 with zip_ref.open(math_file_name) as math_file:
                     df_math = pd.read_excel(math_file)
                 with zip_ref.open(science_file_name) as science_file:
                     df_science = pd.read_excel(science_file)
-                
+
                 # Merge the dataframes
-                merged_df = pd.merge(df_math, df_science, on=['LEAID', 'SCHID'], how='outer')
-                
+                merged_df = pd.merge(df_math,
+                                     df_science,
+                                     on=['LEAID', 'SCHID'],
+                                     how='outer')
+
                 # Save the merged dataframe
                 output_name = f"{final_year}_{output_name_fragment}.xlsx"
                 output_path = output_dir / output_name
                 merged_df.to_excel(output_path, index=False)
-                
+
                 add_year_column(output_path, final_year)
-                logging.info(f"Successfully extracted, merged, and saved: {output_path.name}")
+                logging.info(
+                    f"Successfully extracted, merged, and saved: {output_path.name}"
+                )
                 return
 
             output_name = f"{final_year}_{output_name_fragment}.csv"
@@ -295,7 +346,7 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
             target_member = None
             for name in zip_ref.namelist():
                 normalized_name = name.replace('\\', '/').lower()
-                
+
                 general_match = False
                 for pattern in keywords:
                     if re.search(pattern, name, re.IGNORECASE):
@@ -314,30 +365,39 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
                             break
 
             if not target_member:
-                logging.warning(f"Error: Could not find '{output_name_fragment}' data file using keyword search in archive {config_key}.")
-                logging.info("Files found in ZIP (showing first 5):\n" + '\n'.join(zip_ref.namelist()[:5]))
+                logging.warning(
+                    f"Error: Could not find '{output_name_fragment}' data file using keyword search in archive {config_key}."
+                )
+                logging.info("Files found in ZIP (showing first 5):\n" +
+                             '\n'.join(zip_ref.namelist()[:5]))
                 return
 
             if target_member.lower().endswith(".xlsx"):
                 output_path = output_dir / output_name.replace(".csv", ".xlsx")
-            
+
             logging.info(f"Found internal file: {target_member}")
 
             with zip_ref.open(target_member) as source_file:
                 target_content = source_file.read()
-            
+
             with open(output_path, 'wb') as f:
                 f.write(target_content)
 
             add_year_column(output_path, final_year)
-                
-            logging.info(f"Successfully extracted and saved: {output_path.name}")
+
+            logging.info(
+                f"Successfully extracted and saved: {output_path.name}")
 
     except zipfile.BadZipFile:
-        logging.warning(f"Downloaded content for {config_key} is not a valid ZIP file. Skipping.")
+        logging.warning(
+            f"Downloaded content for {config_key} is not a valid ZIP file. Skipping."
+        )
         return
     except Exception as e:
-        raise RuntimeError(f"An unhandled error occurred during extraction/processing for {config_key}: {e}")
+        raise RuntimeError(
+            f"An unhandled error occurred during extraction/processing for {config_key}: {e}"
+        )
+
 
 def main(_):
     """
@@ -359,10 +419,12 @@ def main(_):
         data_types_to_download = list(DATA_CONFIGS.keys())
 
     all_configs = HARDCODED_CONFIGS.copy()
-    latest_known_year = max(int(k.split('-')[0]) for k in HARDCODED_CONFIGS.keys()) + 2
+    latest_known_year = max(
+        int(k.split('-')[0]) for k in HARDCODED_CONFIGS.keys()) + 2
     future_configs = generate_future_configs(latest_known_year)
     all_configs.update(future_configs)
-    sorted_configs = sorted(all_configs.items(), key=lambda item: int(item[0].split('-')[0]))
+    sorted_configs = sorted(all_configs.items(),
+                            key=lambda item: int(item[0].split('-')[0]))
 
     for year_range, config_data in sorted_configs:
         for data_type in data_types_to_download:
@@ -370,10 +432,11 @@ def main(_):
             output_dir_name = config["output_dir_name"]
             OUTPUT_DIR = BASE_OUTPUT_DIR / output_dir_name
             OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-            
+
             download_and_extract(year_range, config_data, data_type, OUTPUT_DIR)
-            
+
     logging.info(f"\n--- All downloads complete ---")
+
 
 if __name__ == '__main__':
     app.run(main)

@@ -64,17 +64,21 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ]
     #To check the latest available year
+    session = requests.Session()
     for url in urls_to_scan:
         for YEAR in range(2030, 2020, -1):
             url_to_check = url.format(YEAR=YEAR)
             try:
-                check_url = requests.head(url_to_check)
+                check_url = session.head(url_to_check,
+                                         allow_redirects=True,
+                                         timeout=5)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     break
-
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+                else:
+                    logging.warning(f"URL is not accessible: {url_to_check}")
+            except Exception as e:
+                logging.error(f"URL is not accessible {url_to_check}: {e}")
 
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -124,11 +128,10 @@ def _measurement_aggregate(df: pd.DataFrame) -> list:
     """
     derived_df = df[df['Measurement_Method'].str.contains('dcAggregate')]
     aggregated_rows = list(derived_df['SVs'] + derived_df['geo_ID'])
-    df['info'] = df['SVs'] + df['geo_ID']
-    aggregate_list = np.where(df['info'].isin(aggregated_rows),
+    info = df['SVs'] + df['geo_ID']
+    aggregate_list = np.where(info.isin(aggregated_rows),
                               'dcAggregate/CensusPEPSurvey_PartialAggregate',
                               'CensusPEPSurvey')
-    df.drop(columns=['info'], inplace=True)
     return aggregate_list.tolist()
 
 
@@ -270,9 +273,11 @@ class USCensusPEPByASR:
         if processed_count == total_files_to_process & total_files_to_process > 0:
             # Drop the unwanted columns and NA.
             logging.info(f"Dropping unwanted columns and NA")
-            final_df.drop(columns=['Unnamed: 0'], inplace=True)
+            final_df = final_df.drop(columns=['Unnamed: 0'])
             final_df = final_df.dropna()
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
+            final_df['observation'] = final_df['observation'].astype(
+                float).astype(int)
             logging.info(f"Sorting data {final_df.shape} by year, geo-id")
             final_df = final_df.sort_values(by=['Year', 'geo_ID'])
             logging.info(f"Setting measurement method")

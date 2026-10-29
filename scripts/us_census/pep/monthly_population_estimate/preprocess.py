@@ -241,12 +241,11 @@ class CensusUSACountryPopulation:
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
         # _return_year("1999") or _return_year("1999 [1]"): 1999
         # _return_year(".07 1"): pd.NA
-        df['Year'] = df['Year and Month'].apply(_return_year).fillna(
-            method='ffill', limit=12)
+        df['Year'] = df['Year and Month'].apply(_return_year).ffill(limit=12)
         # _return_year("1999") or _return_year("1999 [1]"): pd.NA
         # _return_year(".07 1"): 07
         df['Month'] = df['Year and Month'].apply(_return_month)
-        df.dropna(subset=['Year', 'Month'], inplace=True)
+        df = df.dropna(subset=['Year', 'Month'])
 
         # Creating new Date Column and Final Date format is yyyy-mm
         df['Date'] = df['Year'] + df['Month']
@@ -265,9 +264,9 @@ class CensusUSACountryPopulation:
             df = df[df['Date'] < dt(2010, 4, 1)]
         if 'na-est2019-01.xlsx' in file:
             df = df[df['Date'] < dt(2020, 4, 1)]
-        df.dropna(subset=['Date'], inplace=True)
+        df = df.dropna(subset=['Date'])
         df['Date'] = df['Date'].dt.strftime('%Y-%m')
-        df.drop_duplicates(subset=['Date'], inplace=True)
+        df = df.drop_duplicates(subset=['Date'])
 
         # Deriving new SV Count_Person_InArmedForcesOverseas as
         # subtracting Resident Population from
@@ -314,12 +313,11 @@ class CensusUSACountryPopulation:
             else:
                 self._df = pd.concat([self._df, df], ignore_index=True)
 
-            self._df.sort_values(by=['Date', 'date_range'],
-                                 ascending=False,
-                                 inplace=True)
+            self._df = self._df.sort_values(by=['Date', 'date_range'],
+                                            ascending=False)
             # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
-            self._df.drop_duplicates("Date", keep="last", inplace=True)
-            self._df.drop(['date_range'], axis=1, inplace=True)
+            self._df = self._df.drop_duplicates("Date", keep="last")
+            self._df = self._df.drop(['date_range'], axis=1)
             float_col = self._df.select_dtypes(include=['float64'])
             for col in float_col.columns.values:
                 try:
@@ -463,19 +461,23 @@ def add_future_year_urls():
     ]
     # This method checks for URLs from 2030 down to 2021. If a valid URL is found for any year, the method stops and adds it to the download URL.
     #
-    for url in urls_to_scan:
-        for future_year in range(2030, 2021, -1):
-            YEAR = future_year
+    with requests.Session() as session:
+        for url in urls_to_scan:
+            for future_year in range(2030, 2020, -1):
+                YEAR = future_year
 
-            url_to_check = url.format(YEAR=YEAR)
-            try:
-                check_url = requests.head(url_to_check)
-                if check_url.status_code == 200:
-                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-                    break
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = session.head(url_to_check,
+                                             allow_redirects=True,
+                                             timeout=5)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+                        break
 
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+                except requests.exceptions.RequestException as e:
+                    logging.error(f"URL is not accessible {url_to_check}: {e}")
 
 
 def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
@@ -532,7 +534,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     df['Year and Month'] = df[['Year and Month', 'Date']]\
                                     .apply(_concat_cols, axis=1)
-    df.drop(columns=['Date'], inplace=True)
+    df = df.drop(columns=['Date'])
     for col in df.columns:
         df[col] = df[col].str.replace(",", "")
 
@@ -568,8 +570,8 @@ def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
         Series: A DataFrame column with values multiplied by the scaling factor.
     """
     res = col
-    if col not in [None, np.nan]:
-        if col.isdigit():
+    if not pd.isna(col) and col is not None:
+        if isinstance(col, str) and col.isdigit():
             res = int(col) * _SCALING_FACTOR_TXT_FILE
     return res
 
@@ -585,10 +587,10 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
-    res = col[0]
-    if col[1] is None:
+    res = col.iloc[0]
+    if pd.isna(col.iloc[1]) or col.iloc[1] is None:
         return res
-    res = col[0] + ' ' + col[1]
+    res = str(col.iloc[0]) + ' ' + str(col.iloc[1])
     return res
 
 
@@ -654,7 +656,7 @@ def download_files():
                     ]
                     df = pd.read_table(url,
                                        index_col=False,
-                                       delim_whitespace=True,
+                                       sep=r'\s+',
                                        engine='python',
                                        skiprows=17,
                                        names=cols)

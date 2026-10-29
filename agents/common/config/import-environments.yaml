@@ -1,0 +1,43 @@
+# Repository-configured defaults used by dc-import-diagnostics. Explicit values
+# in a request override the corresponding field for that request.
+
+default_environment: prod
+
+environments:
+  prod:
+    scheduler:
+      project: datcom-import-automation-prod
+      location: us-central1
+
+    workflow:
+      project: datcom-import-automation-prod
+      location: us-central1
+      import_workflow: import-automation-workflow
+
+    batch:
+      project: datcom-import-automation-prod
+      location: us-central1
+
+    gcs:
+      client_project: datcom-204919
+      output_bucket: datcom-prod-imports
+
+    spanner:
+      project: datcom-store
+      instance: dc-graph-staging
+      database: dc_graph
+
+  # Test environment (sometimes called dev environment, used for testing import changes).
+  # Batch jobs are run directly and outputs are checked in GCS.
+  test:
+    # Scheduler: not configured in test
+    # Workflow: not configured in test
+
+    batch:
+      project: datcom-infosys-dev
+      location: us-central1
+
+    gcs:
+      output_bucket: datcom-import-test
+
+    # Spanner: not configured in test
