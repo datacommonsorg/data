@@ -1,0 +1,39 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Srilanka_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.humdata.org/dataset/cod-ps-lka",
+            "provenance_description": "Census Data for Sri Lanka",
+            "scripts": [
+                "download.py --output_dir=input_files --pv_map=srilanka_census_pvmap.csv",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=srilanka_census_pvmap.csv --config_file=srilanka_census_metadata.csv --output_path=output_files/srilanka_census_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/srilanka_census_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/srilanka_census_output.tmcf",
+                    "cleaned_csv": "output_files/srilanka_census_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "srilanka_census_pvmap.csv",
+                "srilanka_census_metadata.csv",
+                "srilanka_places_resolved.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "cron_schedule": "30 05 * * 1",
+            "_comment": "Schedule: Weekly on Monday at 05:30 UTC",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
