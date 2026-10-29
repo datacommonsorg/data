@@ -72,9 +72,13 @@ When reviewing `validation_config*.json` or a manifest change to
 - [Import validation framework](../../../../tools/import_validation/README.md)
 - [Validation configuration and golden checks](../../../../tools/import_validation/Validations.md)
 - [Import artifact layout](../../../common/references/import-automation/artifact-layout.md)
-- Verify that each `validation_config*.json` in the import is set as
-  `validation_config_file` on its import specification in `manifest.json`;
-  without it, auto-refresh runs only the default validations.
+
+Then apply these rules:
+
+- Verify that each config meant for auto-refresh is set as
+  `validation_config_file` on its import specification in `manifest.json`, and
+  that the path exists relative to the import directory; otherwise auto-refresh
+  runs only the default validations.
 - Resolve local `GOLDENS_CHECK` paths relative to the validation config file
   passed to the runner, and verify that every `golden_files` path or glob
   matches at least one intended golden file.
@@ -87,7 +91,8 @@ When reviewing `validation_config*.json` or a manifest change to
   `golden_summary_report.csv` intentionally excludes `MaxDate`):
   - Read the latest accepted version from GCS:
     `gcloud storage cat gs://<output_bucket>/<import_prefix>/latest_version.txt`
-    (use `datcom-prod-imports` by default).
+    (use the bucket of the environment whose artifacts the PR, bug, or CL
+    links; `datcom-prod-imports` by default).
   - Read the latest summary report:
     `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
   - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
