@@ -121,7 +121,7 @@ def process_sites(input_path: str, output_path: str, precision: int = 6) -> int:
                  'FederalGovernmentOwned', 'PrivatelyOwned'),
         site_ownership.index)
     # The way we used this dataset, we have a lot of duplicates
-    site_ownership.drop_duplicates(inplace=True)
+    site_ownership = site_ownership.drop_duplicates()
 
     site_csv = npl_sites[[
         'Site Name', 'Site EPA ID', 'Site Score', 'Region ID', 'Latitude',
@@ -136,8 +136,8 @@ def process_sites(input_path: str, output_path: str, precision: int = 6) -> int:
     site_csv['containedInPlace'] = site_csv.apply(get_geoId,
                                                   args=(geo_map,),
                                                   axis=1)
-    site_csv.drop(columns=['Latitude', 'Longitude'], inplace=True)
-    site_csv.rename(columns=_COL_NAME_MAP, inplace=True)
+    site_csv = site_csv.drop(columns=['Latitude', 'Longitude'])
+    site_csv = site_csv.rename(columns=_COL_NAME_MAP)
     # We processed 1,715 superfund sites -- initially all of them did not have `establishmentOwnership`.
     # After the merge, we have 1,317 PrivatelyOwned sites, 158 FederalGovernmentOwned sites and 240 sites do not have a value for the establishmentOwnership property.
     site_csv = pd.merge(site_csv, site_ownership, on='epaId', how='left')

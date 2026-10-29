@@ -204,7 +204,7 @@ def process_df(df):
 
     # Get cause-dcid for the fire cause.
     def get_cause(cause_str):
-        if cause_str:
+        if cause_str and not pd.isna(cause_str):
             cause = cause_str.replace(" ", "").replace("/", "Or")
             if cause in mapping.CAUSE_DCID_MAP:
                 cause = mapping.CAUSE_DCID_MAP[cause]
