@@ -1677,10 +1677,7 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(exceptions=ValueError,
-       tries=3,
-       delay=5,
-       backoff=2)
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
@@ -1693,10 +1690,7 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(exceptions=ValueError,
-       tries=3,
-       delay=5,
-       backoff=2)
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
 def download_with_retry(session, url, dest_path):
     """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
     with session.get(url, stream=True, timeout=60) as response:
@@ -1756,8 +1750,7 @@ def add_future_year_urls():
                     url_found = True
                     break
             except Exception as e:
-                logging.warning(
-                    f"URL is not accessible: {url_to_check} ({e})")
+                logging.warning(f"URL is not accessible: {url_to_check} ({e})")
 
         if not url_found:
             fallback_url = url.format(YEAR=_BASELINE_YEAR)

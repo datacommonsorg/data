@@ -94,10 +94,7 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(exceptions=ValueError,
-       tries=3,
-       delay=5,
-       backoff=2)
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
@@ -110,10 +107,7 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(exceptions=ValueError,
-       tries=3,
-       delay=5,
-       backoff=2)
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
 def _fetch_url_bytes(url: str, session: requests.Session = None) -> bytes:
     """Fetches URL content with retries and WAF/HTML rejection."""
     if session is None:
@@ -177,16 +171,13 @@ def add_future_year_urls():
             try:
                 check_url = _head_with_html_retry(session, url_to_check)
                 if check_url.status_code == 200:
-                    _FILES_TO_DOWNLOAD.append(
-                        {"download_path": url_to_check})
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     url_found = True
                     break
                 else:
-                    logging.warning(
-                        f"URL is not accessible: {url_to_check}")
+                    logging.warning(f"URL is not accessible: {url_to_check}")
             except Exception as e:
-                logging.warning(
-                    f"URL is not accessible {url_to_check}: {e}")
+                logging.warning(f"URL is not accessible {url_to_check}: {e}")
 
         if not url_found:
             fallback_url = url.format(YEAR=_BASELINE_YEAR)
