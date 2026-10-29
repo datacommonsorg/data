@@ -18,13 +18,12 @@
                 {
                     "template_mcf": "output/BulgariaNSI_Demographics.tmcf",
                     "cleaned_csv": "output/BulgariaNSI_Demographics.csv",
-                    "node_mcf": "output/BulgariaNSI_Demographics_stat_vars*.mcf"
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [
                 "input_files/BulgariaNSI_Demographics_Year_input_*.csv",
                 "counters/*.csv",
-                "*.csv",
                 "manifest.json",
                 "validation_config.json"
             ],
