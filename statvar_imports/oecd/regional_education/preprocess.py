@@ -1,4 +1,4 @@
-# Copyright 2026 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,136 +11,117 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Preprocesses raw OECD Regional Education SDMX CSV data before StatVar processing.
+"""Preprocesses raw OECD Regional Education data before stat_var_processor execution.
 
-Steps performed:
-1. Finds the latest raw SDMX CSV (e.g., `A.........`) in `gcs_output/source_files/`
-   and retains the original file for provenance.
-2. Filters out empty `OBS_VALUE` rows and standard error rows (`STATISTICAL_OPERATION == 'SE'`).
-3. Resolves `REF_AREA` codes using `oecd_regional_education_places_resolved.csv`,
-   projects the 7 required columns into `oecd_regional_education_data.csv`, and logs
-   unmapped places to `counters/unresolved_places.csv`.
-
-Features not directly supported by `stat_var_processor.py`:
-- Dynamic filename discovery (`A.........`) while preserving the raw source file.
-- Disambiguating duplicate `Education level` column headers in the raw SDMX
-  `csvfilewithlabels` format.
-- Logging unmapped place codes to a separate counter file without failing the job,
-  plus a fail-fast check if 100% of rows are dropped.
+1. Locates the downloaded raw source data file in gcs_output/source_files/
+   and writes the cleaned output to oecd_regional_education_data.csv while
+   retaining the original raw downloaded file for GCS archiving.
+2. Filters out rows whose REF_AREA is not present in
+   oecd_regional_education_places_resolved.csv to prevent unresolved place
+   counters and warnings during StatVar processing.
+3. Strips unused columns so only required columns are passed downstream,
+   avoiding noisy unmapped column value counters.
 """
+
 import csv
 import os
 import re
+from absl import logging
 
-try:
-    from absl import logging
-    logging.set_verbosity(logging.INFO)
-except ImportError:
-    import logging as std_logging
-
-    class _CompatLogger:
-
-        def __init__(self):
-            self._logger = std_logging.getLogger(__name__)
-            self._logger.setLevel(std_logging.INFO)
-            if not self._logger.handlers:
-                handler = std_logging.StreamHandler()
-                handler.setFormatter(
-                    std_logging.Formatter('%(levelname)s:%(message)s'))
-                self._logger.addHandler(handler)
-
-        def set_verbosity(self, level):
-            self._logger.setLevel(level)
-
-        def info(self, msg, *args, **kwargs):
-            self._logger.info(msg, *args, **kwargs)
-
-        def warning(self, msg, *args, **kwargs):
-            self._logger.warning(msg, *args, **kwargs)
-
-        def error(self, msg, *args, **kwargs):
-            self._logger.error(msg, *args, **kwargs)
-
-    logging = _CompatLogger()
-    logging.set_verbosity(std_logging.INFO)
+logging.set_verbosity(logging.INFO)
 
 
-def preprocess(base_path=None):
+def preprocess(base_path: str = None):
+    """Preprocesses raw OECD Regional Education data before stat_var_processor execution.
+
+    1. Locates the downloaded raw source data file in gcs_output/source_files/
+       and writes the cleaned output to oecd_regional_education_data.csv while
+       retaining the original raw downloaded file for GCS archiving.
+    2. Filters out rows whose REF_AREA is not present in
+       oecd_regional_education_places_resolved.csv to prevent unresolved place
+       counters and warnings during StatVar processing.
+    3. Strips unused columns so only required columns are passed downstream,
+       avoiding noisy unmapped column value counters.
+
+    Args:
+        base_path: Optional base directory path. Defaults to the directory
+            containing this script.
+
+    Raises:
+        FileNotFoundError: If required input directories, places_resolved file,
+            or candidate raw data files are missing.
+        PermissionError: If file system permissions prevent reading or writing.
+        ValueError: If places_resolved or filtered output is empty, or required
+            columns are missing.
+    """
     if base_path is None:
         base_path = os.path.dirname(os.path.abspath(__file__))
-    folder_name = 'gcs_output/source_files'
-    target_folder = os.path.join(base_path, folder_name)
-    counters_folder = os.path.join(base_path, 'counters')
-    os.makedirs(counters_folder, exist_ok=True)
-    output_folder = os.path.join(base_path, 'output')
-    os.makedirs(output_folder, exist_ok=True)
 
+    target_folder = os.path.join(base_path, 'gcs_output', 'source_files')
     places_resolved_file = os.path.join(
         base_path, 'oecd_regional_education_places_resolved.csv')
-    valid_places = {}
-    if not os.path.isfile(places_resolved_file):
-        raise FileNotFoundError(
-            f"Places resolved file not found: {places_resolved_file}. "
-            "Aborting preprocessing to prevent silent data drop.")
+    target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
+    unmapped_log_path = os.path.join(base_path, 'counters',
+                                     'unresolved_places.csv')
 
+    if not os.path.exists(target_folder):
+        logging.error(f"Target folder not found: {target_folder}")
+        raise FileNotFoundError(f"Target folder not found: {target_folder}")
+
+    if not os.path.isdir(target_folder):
+        logging.error(
+            f"Target path exists, but is not a directory: {target_folder}")
+        raise NotADirectoryError(
+            f"Target path exists, but is not a directory: {target_folder}")
+
+    if not os.path.isfile(places_resolved_file):
+        logging.error(f"Places resolved file not found: {places_resolved_file}")
+        raise FileNotFoundError(
+            f"Places resolved file not found: {places_resolved_file}")
+
+    valid_places = {}
     with open(places_resolved_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            dcid = row.get('dcid', '').strip()
             place_name = row.get('place_name', '').strip()
-            if dcid and place_name:
+            dcid = row.get('dcid', '').strip()
+            if place_name and dcid:
                 if not dcid.startswith('dcid:'):
-                    dcid = f'dcid:{dcid}'
+                    dcid = f"dcid:{dcid}"
                 valid_places[place_name] = dcid
 
     if not valid_places:
-        raise ValueError(
-            f"No valid places loaded from {places_resolved_file}. "
-            "Aborting preprocessing to prevent silent data drop.")
+        raise ValueError(f"No valid places loaded from {places_resolved_file}. "
+                         "Aborting preprocessing to prevent silent data drop.")
 
     logging.info(
         f"Loaded {len(valid_places)} valid places from {places_resolved_file}")
 
-    if not os.path.isdir(target_folder):
-        logging.error(f"Folder '{folder_name}' not found in '{base_path}'")
-        raise FileNotFoundError(
-            f"Folder '{folder_name}' not found in '{base_path}'")
-
+    src_path = None
+    # Match OECD SDMX downloaded file names (e.g. 'A.........', 'OECD.CFE.EDS...',
+    # or files containing 'REG_EDU') while excluding already processed/temp files.
     pattern = re.compile(r'^(?:A.*|OECD.*|.*REG_EDU.*)$', re.IGNORECASE)
     candidate_files = [
         f for f in os.listdir(target_folder)
-        if os.path.isfile(os.path.join(target_folder, f)) and
-        not f.startswith('.') and
-        f not in ('oecd_regional_education_data.csv',
-                  'filtered_tmp.csv') and pattern.match(f)
+        if os.path.isfile(os.path.join(target_folder, f)) and not f.startswith(
+            '.') and f not in ('oecd_regional_education_data.csv',
+                               'filtered_tmp.csv') and pattern.match(f)
     ]
     if candidate_files:
         candidate_files.sort(
             key=lambda f: os.path.getmtime(os.path.join(target_folder, f)),
             reverse=True)
-        raw_file = candidate_files[0]
-        if len(candidate_files) > 1:
-            logging.info(
-                f"Found multiple candidate source files: {candidate_files}. "
-                f"Selecting newest file '{raw_file}'.")
-    else:
-        raw_file = None
+        chosen_file = candidate_files[0]
+        src_path = os.path.join(target_folder, chosen_file)
+        logging.info(f"Found raw data file '{chosen_file}' to process.")
 
-    target_csv = os.path.join(target_folder, 'oecd_regional_education_data.csv')
-    unmapped_log_path = os.path.join(counters_folder, 'unresolved_places.csv')
-
-    if raw_file:
-        src_path = os.path.join(target_folder, raw_file)
+    if src_path and valid_places:
         tmp_path = os.path.join(target_folder, 'filtered_tmp.csv')
-        logging.info(
-            f"Filtering '{raw_file}' into 'oecd_regional_education_data.csv'..."
-        )
         _filter_csv(src_path,
                     tmp_path,
                     valid_places,
                     unmapped_log_path=unmapped_log_path)
         os.replace(tmp_path, target_csv)
-        # Preserve original downloaded raw file in GCS source_files per Data Commons guidelines
         logging.info(f"Retained raw downloaded source file at '{src_path}'.")
         logging.info("Preprocessing and filtering completed successfully.")
     elif os.path.isfile(target_csv) and valid_places:
@@ -261,8 +242,7 @@ def _filter_csv(src_path: str,
                         f"Wrote {len(unmapped_places)} unmapped places to {unmapped_log_path}"
                     )
                 except Exception as e:
-                    logging.warning(
-                        f"Failed to write unmapped places log: {e}")
+                    logging.warning(f"Failed to write unmapped places log: {e}")
 
 
 if __name__ == '__main__':
