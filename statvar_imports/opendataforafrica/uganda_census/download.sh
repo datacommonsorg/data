@@ -23,4 +23,4 @@ mkdir -p "${SCRIPT_DIR}/output"
 # Stage provisional place node for Conflict Areas to output/
 cp "${SCRIPT_DIR}/qiubrhc_places.mcf" "${SCRIPT_DIR}/output/qiubrhc_places.mcf"
 
-gcloud storage cp --recursive "gs://unresolved_mcf/opendataforafrica/uganda_census/input_files/*" "${SCRIPT_DIR}/input_files/"
+gcloud storage cp --verbosity=error --recursive "gs://unresolved_mcf/opendataforafrica/uganda_census/input_files/*" "${SCRIPT_DIR}/input_files/"
