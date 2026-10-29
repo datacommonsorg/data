@@ -195,11 +195,12 @@ def normalize_cell(val: str, is_numeric_col: bool = False) -> str:
 
 def sanitize_csv_content(content: str) -> list[list[str]]:
     """Parses raw CSV text and normalizes all cells for PVMap and validation."""
-    cleaned = (content.replace('"""', '"').replace("\xa0", " ").replace(
-        "AS OF 31.12.*", "AS OF 31.12."))
-    cleaned = re.sub(r"(\b\d+)\s*-\s*(\d+\b)", r"\1 - \2", cleaned)
-    reader = list(csv.reader(io.StringIO(cleaned)))
-    return [[re.sub(r"\s+", " ", c).strip() for c in row] for row in reader]
+    reader = list(csv.reader(io.StringIO(content.replace('"""', '"'))))
+    return [[
+        normalize_cell(c, is_numeric_col=(r_idx >= 3 and c_idx > 0))
+        for c_idx, c in enumerate(row)
+    ]
+            for r_idx, row in enumerate(reader)]
 
 
 def to_num(val_str: str) -> int:
@@ -411,10 +412,14 @@ def check_and_download_nsi(
                 "Checking if input files are already present in GCS "
                 "(%s) (--allow-staged-fallback enabled)...", gcs_dir)
             existing_gcs_files = list_gcs_files(gcs_dir)
-            if existing_gcs_files:
+            annual_files = [
+                f for f in existing_gcs_files if re.match(
+                    r"BulgariaNSI_Demographics_Year_input_\d{4}\.csv$", f)
+            ]
+            if annual_files:
                 logging.info(
-                    "Existing files in GCS folder: %s. "
-                    "Proceeding with staged data.", existing_gcs_files)
+                    "Existing annual files in GCS folder: %s. "
+                    "Proceeding with staged data.", annual_files)
                 return
         logging.error(
             "Unable to fetch live NSI portal content "

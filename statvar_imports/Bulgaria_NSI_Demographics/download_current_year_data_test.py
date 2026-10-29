@@ -33,6 +33,7 @@ from download_current_year_data import (
     check_and_download_nsi,
     list_gcs_files,
     normalize_cell,
+    sanitize_csv_content,
     to_num,
     validate_file_format,
 )
@@ -52,6 +53,17 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         self.assertEqual(normalize_cell("AS OF 31.12.*"), "AS OF 31.12.")
         self.assertEqual(normalize_cell(" 1 234.0 ", is_numeric_col=True),
                          "1234")
+
+    def test_sanitize_csv_content(self):
+        raw = ("POPULATION AS OF 31.12.**2025,col1\n"
+               "Districts Age (years),Total\n"
+               ",Total\n"
+               "Total, 6 423 207.0 \n"
+               "100+, 501.0 \n")
+        rows = sanitize_csv_content(raw)
+        self.assertEqual(rows[0][0], "POPULATION AS OF 31.12.2025")
+        self.assertEqual(rows[3], ["Total", "6423207"])
+        self.assertEqual(rows[4], ["100 +", "501"])
 
     def _create_mock_csv(self, year=2025, tamper_type=None):
         rows = [
@@ -400,6 +412,34 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
             )
             mock_list_gcs.assert_called_once_with(
                 "gs://mock-bucket/input_files")
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch(
+        "download_current_year_data.list_gcs_files",
+        return_value=["BulgariaNSI_Demographics_2001to2010_input.csv"],
+    )
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_http_403_fails_without_annual_files(
+        self,
+        mock_create_session,
+        mock_list_gcs,
+    ):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 403
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                check_and_download_nsi(
+                    local_dir=tmp_dir,
+                    gcs_dir="gs://mock-bucket/input_files",
+                    allow_staged_fallback=True,
+                )
+            self.assertEqual(ctx.exception.code, 1)
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
