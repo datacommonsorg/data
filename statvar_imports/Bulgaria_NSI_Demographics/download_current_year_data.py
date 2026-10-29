@@ -166,6 +166,29 @@ def list_gcs_files(gcs_dir: str) -> list[str]:
             return []
 
 
+def normalize_cell(val: str, is_numeric_col: bool = False) -> str:
+    """Normalizes NSI cell text (whitespace, hyphens, footnote asterisks, .0)."""
+    s = str(val).replace('"""', '"').replace("\xa0", " ")
+    s = re.sub(r"(AS OF 31\.12\.)\*+", r"\1", s)
+    if is_numeric_col:
+        s = re.sub(r"\s+", "", s)
+        if s.endswith(".0"):
+            s = s[:-2]
+        return s
+    s = re.sub(r"(\b\d+)\s*-\s*(\d+\b)", r"\1 - \2", s)
+    s = re.sub(r"(\b100)\s*\+", r"\1 +", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def sanitize_csv_content(content: str) -> list[list[str]]:
+    """Parses raw CSV text and normalizes all cells for PVMap and validation."""
+    cleaned = (content.replace('"""', '"').replace("\xa0", " ").replace(
+        "AS OF 31.12.*", "AS OF 31.12."))
+    cleaned = re.sub(r"(\b\d+)\s*-\s*(\d+\b)", r"\1 - \2", cleaned)
+    reader = list(csv.reader(io.StringIO(cleaned)))
+    return [[re.sub(r"\s+", " ", c).strip() for c in row] for row in reader]
+
+
 def to_num(val_str: str) -> int:
     """Converts value string to int, treating '-' as 0."""
     v = val_str.replace(" ", "").replace("\xa0", "").strip()
@@ -444,8 +467,8 @@ def check_and_download_nsi(
             writer = csv.writer(f)
             # Header rows
             writer.writerow([
-                "\nPOPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE AND SEX"
-                f" AS OF 31.12.{detected_year}\n(Number)\n"
+                "POPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE AND SEX"
+                f" AS OF 31.12.{detected_year} (Number)"
             ] + [""] * 9)
             writer.writerow([
                 "Districts Age (years)",
@@ -473,17 +496,10 @@ def check_and_download_nsi(
             ])
 
             for _, row in df.iterrows():
-                clean_vals = []
-                for i, v in enumerate(row.values):
-                    if i > 0:
-                        val_str = (str(v).replace(" ", "").replace("\xa0",
-                                                                   "").strip())
-                        if val_str.endswith(".0"):
-                            val_str = val_str[:-2]
-                        clean_vals.append(val_str)
-                    else:
-                        # Clean age label or district label
-                        clean_vals.append(str(v).replace("\xa0", " ").strip())
+                clean_vals = [
+                    normalize_cell(v, is_numeric_col=(i > 0))
+                    for i, v in enumerate(row.values)
+                ]
                 writer.writerow(clean_vals)
 
         # 5. Format validation against reference template before moving into place

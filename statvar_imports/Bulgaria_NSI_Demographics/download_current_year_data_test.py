@@ -15,9 +15,11 @@
 
 import csv
 import os
+import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 # Ensure the parent directory is in sys.path
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,6 +29,8 @@ if SCRIPT_DIR not in sys.path:
 from download_current_year_data import (
     EXPECTED_AGES,
     EXPECTED_DISTRICTS,
+    check_and_download_nsi,
+    normalize_cell,
     to_num,
     validate_file_format,
 )
@@ -39,6 +43,13 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         self.assertEqual(to_num(" 456 "), 456)
         self.assertEqual(to_num("-"), 0)
         self.assertEqual(to_num("0"), 0)
+
+    def test_normalize_cell(self):
+        self.assertEqual(normalize_cell("1-4"), "1 - 4")
+        self.assertEqual(normalize_cell("100+"), "100 +")
+        self.assertEqual(normalize_cell("AS OF 31.12.*"), "AS OF 31.12.")
+        self.assertEqual(normalize_cell(" 1 234.0 ", is_numeric_col=True),
+                         "1234")
 
     def _create_mock_csv(self, year=2025, tamper_type=None):
         rows = [
@@ -171,6 +182,35 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         temp_file.close()
         return temp_file.name
 
+    def _build_mock_html(self, year=2025, tight_hyphens=False):
+        n_ages = len(EXPECTED_AGES)
+        trs = []
+        for d in EXPECTED_DISTRICTS:
+            d_vals = [
+                d,
+                100 * n_ages,
+                60 * n_ages,
+                40 * n_ages,
+                70 * n_ages,
+                42 * n_ages,
+                28 * n_ages,
+                30 * n_ages,
+                18 * n_ages,
+                12 * n_ages,
+            ]
+            tds = "".join(f"<td>{v}</td>" for v in d_vals)
+            trs.append(f"<tr>{tds}</tr>")
+            for a in EXPECTED_AGES:
+                age_label = a.replace(" - ", "-") if tight_hyphens else a
+                a_vals = [age_label, "100.0", 60, 40, 70, 42, 28, 30, 18, 12]
+                tds = "".join(f"<td>{v}</td>" for v in a_vals)
+                trs.append(f"<tr>{tds}</tr>")
+        table_body = "\n".join(trs)
+        return (
+            f'<div id="ttitle">POPULATION BY DISTRICTS, AGE, PLACE OF RESIDENCE'
+            f" AND SEX AS OF 31.12.{year}</div>"
+            f'<table class="nsit3">{table_body}</table>')
+
     def test_validate_file_format_success(self):
         csv_path = self._create_mock_csv(year=2025)
         try:
@@ -261,6 +301,86 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         finally:
             if os.path.exists(csv_path):
                 os.remove(csv_path)
+
+    @mock.patch("download_current_year_data.list_gcs_files", return_value=[])
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_html_parsing_and_dry_run(
+        self,
+        mock_create_session,
+        mock_list_gcs,
+    ):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.text = self._build_mock_html(year=2026, tight_hyphens=True)
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            check_and_download_nsi(
+                local_dir=tmp_dir,
+                gcs_dir="gs://mock-bucket/input_files",
+                force=True,
+                dry_run=True,
+            )
+            expected_csv = os.path.join(
+                tmp_dir, "BulgariaNSI_Demographics_Year_input_2026.csv")
+            self.assertTrue(os.path.exists(expected_csv))
+            self.assertTrue(validate_file_format(expected_csv, 2026))
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_http_403_fail_closed(
+        self,
+        mock_create_session,
+    ):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 403
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                check_and_download_nsi(
+                    local_dir=tmp_dir,
+                    gcs_dir="gs://mock-bucket/input_files",
+                    allow_staged_fallback=False,
+                )
+            self.assertEqual(ctx.exception.code, 1)
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch(
+        "download_current_year_data.list_gcs_files",
+        return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"],
+    )
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_http_403_staged_fallback(
+        self,
+        mock_create_session,
+        mock_list_gcs,
+    ):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 403
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            check_and_download_nsi(
+                local_dir=tmp_dir,
+                gcs_dir="gs://mock-bucket/input_files",
+                allow_staged_fallback=True,
+            )
+            mock_list_gcs.assert_called_once_with(
+                "gs://mock-bucket/input_files")
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":

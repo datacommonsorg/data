@@ -34,13 +34,13 @@ fi
 # and footnote asterisks from NSI web exports) into sanitized_input_files/,
 # and validate structural and arithmetic consistency across all annual CSVs.
 "${PYTHON_BIN}" - "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/sanitized_input_files" "${SCRIPT_DIR}" << 'EOF'
-import csv, glob, io, os, re, sys
+import csv, glob, os, re, sys
 
 input_dir = sys.argv[1]
 sanitized_dir = sys.argv[2]
 script_dir = sys.argv[3]
 sys.path.insert(0, script_dir)
-from download_current_year_data import validate_file_format
+from download_current_year_data import sanitize_csv_content, validate_file_format
 
 files = sorted(glob.glob(os.path.join(input_dir, 'BulgariaNSI_Demographics_Year_input_*.csv')))
 if not files:
@@ -53,11 +53,7 @@ for fpath in files:
         sys.exit(f"Error: Input file '{bname}' does not match expected pattern 'Year_input_YYYY.csv'")
 
     with open(fpath, 'r', encoding='utf-8') as f:
-        content = f.read()
-    content = content.replace('"""', '"').replace('\xa0', ' ').replace('AS OF 31.12.*', 'AS OF 31.12.')
-    content = re.sub(r'(\b\d+)\s*-\s*(\d+\b)', r'\1 - \2', content)
-    reader = list(csv.reader(io.StringIO(content)))
-    cleaned_rows = [[re.sub(r'\s+', ' ', c).strip() for c in row] for row in reader]
+        cleaned_rows = sanitize_csv_content(f.read())
 
     out_path = os.path.join(sanitized_dir, bname)
     with open(out_path, 'w', newline='', encoding='utf-8') as f:
