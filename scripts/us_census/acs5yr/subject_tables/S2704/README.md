@@ -61,7 +61,7 @@ python3 process.py \
   --input_path=S2704/input_data/S2704.zip \
   --output_dir=S2704
 
-cd ../../..
+cd ../../../..
 ```
 
 - `--option=all`: Runs both column map generation (`column_map.json`) and observation processing (`S2704_cleaned.csv`, `S2704_output.mcf`, `S2704_output.tmcf`, `S2704_summary.json`). You can also run `--option=colmap` followed by `--option=process` sequentially.
@@ -89,4 +89,6 @@ cd scripts/us_census/acs5yr/subject_tables/S2704
 java -jar ~/Downloads/import_tools_import-tool.jar lint \
   S2704_output.tmcf \
   S2704_cleaned.csv
+
+cd ../../../../..
 ```
