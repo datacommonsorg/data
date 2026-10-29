@@ -2,16 +2,16 @@
     "summary": {
         "column map generator commit SHA": "",
         "data processing script commit SHA": "",
-        "total StatVarObservations": 1754
+        "total StatVarObservations": 150
     },
     "2024": {
         "filename": "S0804_test/ACSST5Y2024.S0804_data_with_overlays_1111-11-11T111111.csv",
-        "number of columns in dataset": 778,
+        "number of columns in dataset": 62,
         "number of rows in dataset": 3,
-        "number of statVars generated for columns": 736,
-        "number of observations": 1754,
-        "number of unique StatVars with observations": 708,
-        "number of unique geos": 1,
-        "number of StatVars in mcf_dict": 736
+        "number of statVars generated for columns": 60,
+        "number of observations": 150,
+        "number of unique StatVars with observations": 54,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 60
     }
 }
