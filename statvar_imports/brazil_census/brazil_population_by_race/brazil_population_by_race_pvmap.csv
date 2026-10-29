@@ -1,0 +1,11 @@
+key,prop,val,p1,v1
+Localidade,observationAbout,{Data},,
+Ano,observationDate,{Number},observationPeriod,P1Y
+Populacao,value,{Number},populationType,Person
+Cor:Total,#ignore,#ignore,,
+Cor:Branca,race,dcs:Brazil_Branca,,
+Cor:Preta,race,dcs:Black,,
+Cor:Amarela,race,dcs:Brazil_Amarela,,
+Cor:Parda,race,dcs:Brazil_Pardo,,
+Cor:Indígena,race,dcs:Brazil_Indigneous,,
+Cor:Sem declaração,race,UnknownRace,,

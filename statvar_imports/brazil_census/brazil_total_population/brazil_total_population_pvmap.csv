@@ -1,0 +1,7 @@
+key,prop,val,p1,v1
+Localidade,observationAbout,{Data},,
+Ano,observationDate,{Number},observationPeriod,P1Y
+Populacao,value,{Number},populationType,Person
+Sexo:Total,populationType,Person,,
+Sexo:Homens,gender,Male,,
+Sexo:Mulheres,gender,Female,,

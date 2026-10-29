@@ -1,0 +1,226 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Brazil_Census_Population_By_Age_And_Sex",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9514",
+            "provenance_description": "Brazil Census: Resident Population by Age and Sex from IBGE (1940-2022+).",
+            "scripts": [
+                "brazil_population_by_age_and_sex/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_population_by_age_and_sex/input_files/brazil_population_by_age_and_sex.csv --pv_map=brazil_population_by_age_and_sex/brazil_population_by_age_and_sex_pvmap.csv --config_file=brazil_population_by_age_and_sex/brazil_population_by_age_and_sex_metadata.csv --places_resolved_csv=brazil_population_by_age_and_sex/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_population_by_age_and_sex/brazil_population_by_age_and_sex --output_counters=brazil_population_by_age_and_sex/counters/brazil_population_by_age_and_sex_counters.csv"
+            ],
+            "source_files": [
+                "brazil_population_by_age_and_sex/input_files/brazil_population_by_age_and_sex.csv",
+                "brazil_population_by_age_and_sex/counters/*.csv",
+                "brazil_population_by_age_and_sex/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.tmcf",
+                    "cleaned_csv": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.csv",
+                    "node_mcf": "brazil_population_by_age_and_sex/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_population_by_age_and_sex/validation_config.json"
+        },
+        {
+            "import_name": "Brazil_Census_Population_By_Race",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9605",
+            "provenance_description": "Brazil Census: Resident Population by Color or Race (Cor ou ra\u00e7a) from IBGE (1940-2022+).",
+            "scripts": [
+                "brazil_population_by_race/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_population_by_race/input_files/brazil_population_by_race.csv --pv_map=brazil_population_by_race/brazil_population_by_race_pvmap.csv --config_file=brazil_population_by_race/brazil_population_by_race_metadata.csv --places_resolved_csv=brazil_population_by_race/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_population_by_race/brazil_population_by_race --output_counters=brazil_population_by_race/counters/brazil_population_by_race_counters.csv"
+            ],
+            "source_files": [
+                "brazil_population_by_race/input_files/brazil_population_by_race.csv",
+                "brazil_population_by_race/counters/*.csv",
+                "brazil_population_by_race/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_population_by_race/brazil_population_by_race.tmcf",
+                    "cleaned_csv": "brazil_population_by_race/brazil_population_by_race.csv",
+                    "node_mcf": "brazil_population_by_race/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_population_by_race/validation_config.json"
+        },
+        {
+            "import_name": "Brazil_Census_Population_By_Religion",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9537",
+            "provenance_description": "Brazil Census: Resident Population by Religion from IBGE (1940-2022+).",
+            "scripts": [
+                "brazil_population_by_religion/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_population_by_religion/input_files/brazil_population_by_religion.csv --pv_map=brazil_population_by_religion/brazil_population_by_religion_pvmap.csv --config_file=brazil_population_by_religion/brazil_population_by_religion_metadata.csv --places_resolved_csv=brazil_population_by_religion/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_population_by_religion/brazil_population_by_religion --output_counters=brazil_population_by_religion/counters/brazil_population_by_religion_counters.csv"
+            ],
+            "source_files": [
+                "brazil_population_by_religion/input_files/brazil_population_by_religion.csv",
+                "brazil_population_by_religion/counters/*.csv",
+                "brazil_population_by_religion/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_population_by_religion/brazil_population_by_religion.tmcf",
+                    "cleaned_csv": "brazil_population_by_religion/brazil_population_by_religion.csv",
+                    "node_mcf": "brazil_population_by_religion/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_population_by_religion/validation_config.json"
+        },
+        {
+            "import_name": "Brazil_Census_Population_By_Residence",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9923",
+            "provenance_description": "Brazil Census: Resident Population by Residence (Urban/Rural) from IBGE (1940-2022+).",
+            "scripts": [
+                "brazil_population_by_residence/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_population_by_residence/input_files/brazil_population_by_residence.csv --pv_map=brazil_population_by_residence/brazil_population_by_residence_pvmap.csv --config_file=brazil_population_by_residence/brazil_population_by_residence_metadata.csv --places_resolved_csv=brazil_population_by_residence/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_population_by_residence/brazil_population_by_residence --output_counters=brazil_population_by_residence/counters/brazil_population_by_residence_counters.csv"
+            ],
+            "source_files": [
+                "brazil_population_by_residence/input_files/brazil_population_by_residence.csv",
+                "brazil_population_by_residence/counters/*.csv",
+                "brazil_population_by_residence/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_population_by_residence/brazil_population_by_residence.tmcf",
+                    "cleaned_csv": "brazil_population_by_residence/brazil_population_by_residence.csv",
+                    "node_mcf": "brazil_population_by_residence/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_population_by_residence/validation_config.json"
+        },
+        {
+            "import_name": "Brazil_Census_Literacy",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9543",
+            "provenance_description": "Brazil Census: Population count and Literacy rates from IBGE (1940-2022+).",
+            "scripts": [
+                "brazil_literacy/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_literacy/input_files/brazil_literacy.csv --pv_map=brazil_literacy/brazil_literacy_pvmap.csv --config_file=brazil_literacy/brazil_literacy_metadata.csv --places_resolved_csv=brazil_literacy/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_literacy/brazil_literacy --output_counters=brazil_literacy/counters/brazil_literacy_counters.csv"
+            ],
+            "source_files": [
+                "brazil_literacy/input_files/brazil_literacy.csv",
+                "brazil_literacy/brazil_literacy_rates.csv",
+                "brazil_literacy/counters/*.csv",
+                "brazil_literacy/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_literacy/brazil_literacy.tmcf",
+                    "cleaned_csv": "brazil_literacy/brazil_literacy.csv",
+                    "node_mcf": "brazil_literacy/*.mcf"
+                },
+                {
+                    "template_mcf": "brazil_literacy/brazil_literacy_rates.tmcf",
+                    "cleaned_csv": "brazil_literacy/brazil_literacy_rates.csv"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_literacy/validation_config.json"
+        },
+        {
+            "import_name": "Brazil_Census_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/3987",
+            "provenance_description": "Brazil Census: School and Daycare attendance by administrative network and course from IBGE (2000-2022+).",
+            "scripts": [
+                "brazil_education/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_education/input_files/brazil_education.csv --pv_map=brazil_education/brazil_education_pvmap.csv --config_file=brazil_education/brazil_education_metadata.csv --places_resolved_csv=brazil_education/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_education/brazil_education --output_counters=brazil_education/counters/brazil_education_counters.csv"
+            ],
+            "source_files": [
+                "brazil_education/input_files/brazil_education.csv",
+                "brazil_education/counters/*.csv",
+                "brazil_education/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_education/brazil_education.tmcf",
+                    "cleaned_csv": "brazil_education/brazil_education.csv",
+                    "node_mcf": "brazil_education/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_education/validation_config.json"
+        },
+        {
+            "import_name": "Brazil_Census_Total_Population",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9514",
+            "provenance_description": "Brazil Census: Total resident population by Sex from IBGE at National, Regional, State, and Municipal levels (1991-2022+).",
+            "scripts": [
+                "brazil_total_population/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_total_population/input_files/brazil_total_population.csv --pv_map=brazil_total_population/brazil_total_population_pvmap.csv --config_file=brazil_total_population/brazil_total_population_metadata.csv --places_resolved_csv=brazil_total_population/brazil_places_resolved.csv --output_columns=observationAbout,observationDate,observationPeriod,value,variableMeasured --output_path=brazil_total_population/brazil_total_population --output_counters=brazil_total_population/counters/brazil_total_population_counters.csv"
+            ],
+            "source_files": [
+                "brazil_total_population/input_files/brazil_total_population.csv",
+                "brazil_total_population/counters/*.csv",
+                "brazil_total_population/validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "brazil_total_population/brazil_total_population.tmcf",
+                    "cleaned_csv": "brazil_total_population/brazil_total_population.csv",
+                    "node_mcf": "brazil_total_population/*.mcf"
+                }
+            ],
+            "resource_limits": {
+                "cpu": 1,
+                "memory": 2,
+                "disk": 30
+            },
+            "cron_schedule": "0 10 1 * *",
+            "validation_config_file": "brazil_total_population/validation_config.json"
+        }
+    ]
+}

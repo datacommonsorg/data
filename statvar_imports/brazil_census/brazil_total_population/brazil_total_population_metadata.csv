@@ -1,0 +1,7 @@
+parameter,value
+url,https://sidra.ibge.gov.br/tabela/9514
+description,Brazil Census: Total resident population from IBGE
+#place_type,Country,AdministrativeArea1
+output_columns,"observationAbout,observationDate,observationPeriod,value,variableMeasured"
+header_rows,1
+reconcile_nodes,False
