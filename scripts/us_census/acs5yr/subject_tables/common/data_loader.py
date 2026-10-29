@@ -430,10 +430,10 @@ class SubjectTableDataLoaderBase:
         ## write into the output tmcf
         tmcf_contents = '\n'.join(tmcf_contents)
         if not self.debug:
-            clean_csv.drop(columns=['Column'], inplace=True)
+            clean_csv = clean_csv.drop(columns=['Column'])
 
         ## update the csv by dropping empty column
-        clean_csv.drop(columns=empty_cols, inplace=True)
+        clean_csv = clean_csv.drop(columns=empty_cols)
         clean_csv.to_csv(self.clean_csv_path, index=False)
         return tmcf_contents
 
