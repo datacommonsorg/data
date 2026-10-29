@@ -119,8 +119,9 @@ class Validator:
 
         local_df = stats_df.copy()
         try:
-            local_df['MaxDate'] = pd.to_datetime(local_df['MaxDate'],
-                                                 format='mixed')
+            max_date_str = local_df['MaxDate'].astype(str).str.replace(
+                r'\.0$', '', regex=True)
+            local_df['MaxDate'] = pd.to_datetime(max_date_str, format='mixed')
         except (ValueError, TypeError) as e:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,

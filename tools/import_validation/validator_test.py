@@ -70,12 +70,18 @@ class TestMaxDateLatestValidation(unittest.TestCase):
 
     def test_max_date_latest_passes_on_mixed_date_formats(self):
         current_year = datetime.now().year
-        test_df = pd.DataFrame(
-            {'MaxDate': [f'{current_year}-05', f'{current_year - 1}']})
+        test_df = pd.DataFrame({
+            'MaxDate': [
+                f'{current_year}-05',
+                f'{current_year - 1}',
+                current_year,
+                float(current_year),
+            ]
+        })
         result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
-        self.assertEqual(result.details['rows_processed'], 2)
-        self.assertEqual(result.details['rows_succeeded'], 2)
+        self.assertEqual(result.details['rows_processed'], 4)
+        self.assertEqual(result.details['rows_succeeded'], 4)
         self.assertEqual(result.details['rows_failed'], 0)
 
     def test_max_date_latest_does_not_mutate_input_dataframe(self):
