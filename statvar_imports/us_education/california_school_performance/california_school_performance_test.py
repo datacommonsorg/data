@@ -22,10 +22,12 @@ from unittest.mock import patch
 
 from absl import flags
 
-# Ensure import directory is in sys.path
+# Ensure repository root and script directory are in sys.path
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if _SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, _SCRIPT_DIR)
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
+for _p in (_REPO_ROOT, _SCRIPT_DIR):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 _CONFLICTING_FLAGS = (
     'years',
@@ -50,11 +52,13 @@ _SAVED_FLAGS = {
 for _flag_name in _SAVED_FLAGS:
     delattr(flags.FLAGS, _flag_name)
 
-import download
-import process
+from statvar_imports.us_education.california_school_performance import download
+from statvar_imports.us_education.california_school_performance import process
 
+for _flag_name in _CONFLICTING_FLAGS:
+    if _flag_name in flags.FLAGS:
+        delattr(flags.FLAGS, _flag_name)
 for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    delattr(flags.FLAGS, _flag_name)
     flags.FLAGS[_flag_name] = _flag_obj
 
 

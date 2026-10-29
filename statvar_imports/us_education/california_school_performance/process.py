@@ -34,10 +34,15 @@ from absl import flags
 from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if _SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, _SCRIPT_DIR)
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
+for _p in (_REPO_ROOT, _SCRIPT_DIR):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
-import download
+try:
+    from statvar_imports.us_education.california_school_performance import download
+except ModuleNotFoundError:
+    import download
 
 FLAGS = flags.FLAGS
 
