@@ -1,20 +1,7 @@
 Node: dcid:EpaOrganizationOwnership
+name: "EPA facility parent company ownership"
 description: "The ownership of an EPA Facility by an Organization in a given year."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:EpaParentCompany
 measuredProperty: owns
 statType: measurementResult
-
-
-Node: dcid:owns
-typeOf: schema:Property
-domainIncludes: dcs:EpaParentCompany, dcs:Organization
-rangeIncludes: dcs:EpaReportingFacility
-name: "owns"
-
-
-Node: dcid:ownershipPercentage
-typeOf: schema:Property
-domainIncludes: dcs:EpaParentCompany, dcs:StatVarObservation
-rangeIncludes: schema:Number
-name: "ownershipPercentage"

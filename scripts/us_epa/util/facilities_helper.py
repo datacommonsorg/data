@@ -316,7 +316,11 @@ def get_all_statvars(facility_ids):
             },
             retries=5,
             retry_secs=5,
-        ).to_dict()
+        )
+        if response is None:
+            continue
+        response = response.to_dict() if hasattr(response,
+                                                 'to_dict') else response
         statVars.update(response.get('byVariable', {}).keys())
 
     print("****Done getting existing StatVars.")
@@ -359,7 +363,11 @@ def get_all_svobs(facility_ids, svs):
             },
             retries=5,
             retry_secs=5,
-        ).to_dict()
+        )
+        if response is None:
+            continue
+        response = response.to_dict() if hasattr(response,
+                                                 'to_dict') else response
         batch_by_variable = response.get('byVariable', {})
         batch_facets = response.get('facets', {})
         for stat_var, var_data in batch_by_variable.items():

@@ -95,42 +95,15 @@ _COUNTERS_COMPANIES = {
 }
 
 
-def _gen_table_mcf():
-    lines = [
-        "Node: dcid:EpaParentCompany",
-        "subClassOf: dcs:Organization",
-        'name: "EpaParentCompany"',
-        "typeOf: schema:Class",
-        "\n",
-        "Node: dcid:locatedIn",
-        "typeOf: schema:Property",
-        "domainIncludes: dcs:Organization, schema:Place",
-        "rangeIncludes: schema:Place",
-        'name: "locatedIn"',
-    ]
-    return "\n".join(lines)
-
-
 def _gen_ownership_mcf():
     lines = [
         "Node: dcid:EpaOrganizationOwnership",
+        'name: "EPA facility parent company ownership"',
         'description: "The ownership of an EPA Facility by an Organization in a given year."',
         "typeOf: dcs:StatisticalVariable",
         "populationType: dcs:EpaParentCompany",
         "measuredProperty: owns",
         "statType: measurementResult",
-        "\n",
-        "Node: dcid:owns",
-        "typeOf: schema:Property",
-        "domainIncludes: dcs:EpaParentCompany, dcs:Organization",
-        "rangeIncludes: dcs:EpaReportingFacility",
-        'name: "owns"',
-        "\n",
-        "Node: dcid:ownershipPercentage",
-        "typeOf: schema:Property",
-        "domainIncludes: dcs:EpaParentCompany, dcs:StatVarObservation",
-        "rangeIncludes: schema:Number",
-        'name: "ownershipPercentage"',
     ]
     return "\n".join(lines)
 
@@ -490,9 +463,6 @@ def process_companies(input_table_path,
           len(_COUNTERS_COMPANIES["company_ids_replaced"]))
 
     # Write the MCF and TMCF files in their respective destination locations.
-    with open(table_path + "Table.mcf", "w") as fp:
-        fp.write(_gen_table_mcf())
-
     with open(table_path + "Nodes.mcf", "w") as fp:
         fp.write(_gen_company_nodes_mcf(processed_companies.values()))
 
@@ -628,8 +598,6 @@ def main(_):
     run_ownership = output_mode in ("companies", "ownership", "all")
     run_svobs = output_mode in ("svobs", "all")
 
-    table_mcf_filepath = os.path.join(output_path_info,
-                                      _OUT_FILE_PREFIX + "Table.mcf")
     nodes_mcf_filepath = os.path.join(output_path_info,
                                       _OUT_FILE_PREFIX + "Nodes.mcf")
     ownership_path = os.path.join(output_path_ownership, _OUT_FILE_PREFIX)
@@ -648,9 +616,6 @@ def main(_):
                           resolve_geo=run_companies,
                           write_table=run_companies,
                           cache_dir=FLAGS.input_download_path)
-    elif not os.path.exists(table_mcf_filepath):
-        with open(table_mcf_filepath, "w") as fp:
-            fp.write(_gen_table_mcf())
 
     if run_svobs:
         if not os.path.exists(ownership_relationships_filepath):

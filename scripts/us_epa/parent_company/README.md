@@ -45,12 +45,10 @@ percentage and if no percentage is provided it is assumed to be 100.
 
     ```bash
     dc-import genmcf -o=dc_generated/table \
-      output/table/EpaParentCompanyTable.mcf \
       output/table/EpaParentCompanyTable.tmcf \
       output/table/EpaParentCompanyTable.csv
 
     dc-import genmcf --allow-non-numeric-obs-values -o=dc_generated/ownership \
-      output/table/EpaParentCompanyTable.mcf \
       output/table/EpaParentCompanyNodes.mcf \
       output/ownership/EpaParentCompanyOwnership.mcf \
       output/ownership/EpaParentCompanyOwnership.tmcf \
@@ -104,7 +102,6 @@ percentage and if no percentage is provided it is assumed to be 100.
 
     ```bash
     dc-import genmcf -o=dc_generated/svobs \
-      output/table/EpaParentCompanyTable.mcf \
       output/table/EpaParentCompanyNodes.mcf \
       output/svobs/SVObs.tmcf \
       output/svobs/SVObs.csv

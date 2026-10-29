@@ -362,8 +362,8 @@ class ProcessTest(unittest.TestCase):
                               tmp_dir, tmp_dir)
             self.assertEqual(_COUNTERS_COMPANIES, _EXPECTED_COUNTERS)
             for fname in [
-                    'EpaParentCompanyTable.csv', 'EpaParentCompanyTable.tmcf',
-                    'EpaParentCompanyTable.mcf'
+                    'EpaParentCompanyTable.csv',
+                    'EpaParentCompanyTable.tmcf',
             ]:
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_TABLE_DIR, fname)
@@ -476,9 +476,10 @@ class ProcessTest(unittest.TestCase):
                                          "EpaParentCompanyOwnership.csv")
             table_csv = os.path.join(tmp_dir, "table",
                                      "EpaParentCompanyTable.csv")
-            table_mcf = os.path.join(tmp_dir, "table",
-                                     "EpaParentCompanyTable.mcf")
+            nodes_mcf = os.path.join(tmp_dir, "table",
+                                     "EpaParentCompanyNodes.mcf")
             self.assertTrue(os.path.exists(ownership_csv))
+            self.assertTrue(os.path.exists(nodes_mcf))
             with open(table_csv) as fp:
                 original_table_csv = fp.read()
 
@@ -497,10 +498,9 @@ class ProcessTest(unittest.TestCase):
             self.assertTrue(os.path.exists(ownership_csv))
             with open(table_csv) as fp:
                 self.assertEqual(fp.read(), original_table_csv)
-            os.remove(table_mcf)
 
             # Mode 'svobs' skips process_companies when ownership CSV and Nodes.mcf exist,
-            # ensures EpaParentCompanyTable.mcf exists, and runs generate_svobs_helper.
+            # and runs generate_svobs_helper.
             ppc.FLAGS.output_mode = "svobs"
             with mock.patch.object(ppc, "process_companies") as mock_proc_co, \
                  mock.patch.object(ppc, "generate_svobs_helper") as mock_gen_svobs:
@@ -508,7 +508,6 @@ class ProcessTest(unittest.TestCase):
                 mock_proc_co.assert_not_called()
                 mock_gen_svobs.assert_called_once_with(
                     ownership_csv, os.path.join(tmp_dir, "svobs"))
-            self.assertTrue(os.path.exists(table_mcf))
 
             # If ownership CSV is missing in 'svobs' mode while table CSV exists,
             # regenerating ownership CSV must preserve the existing table CSV.
@@ -565,6 +564,18 @@ class ProcessTest(unittest.TestCase):
                 out_file = defac.download_existing_facilities(tmp_dir)
             self.assertTrue(os.path.exists(out_file))
             self.assertFalse(os.path.exists(out_file + '.tmp'))
+
+    def test_get_all_statvars_and_svobs_handle_none_response(self):
+        fake_client = mock.Mock()
+        with mock.patch.object(fh,
+                               'get_datacommons_client',
+                               return_value=fake_client), \
+             mock.patch.object(fh, 'dc_api_wrapper', return_value=None):
+            self.assertEqual(fh.get_all_statvars(['epaGhgrpFacilityId/1001']),
+                             set())
+            self.assertEqual(
+                fh.get_all_svobs(['epaGhgrpFacilityId/1001'], {'Count_Person'}),
+                ({}, {}))
 
 
 if __name__ == '__main__':

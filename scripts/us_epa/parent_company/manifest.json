@@ -16,8 +16,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/table/EpaParentCompanyTable.tmcf",
-                    "cleaned_csv": "output/table/EpaParentCompanyTable.csv",
-                    "node_mcf": "output/table/EpaParentCompanyTable.mcf"
+                    "cleaned_csv": "output/table/EpaParentCompanyTable.csv"
                 }
             ],
             "cron_schedule": "0 8 5,19 * *",
