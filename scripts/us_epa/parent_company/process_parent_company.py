@@ -22,18 +22,23 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
-from us_epa.util import facilities_helper as fh
+REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_PATH, "../../.."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
+flags.DEFINE_string("input_download_path",
+                    os.path.join(_SCRIPT_PATH, "input_files"),
+                    "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
+flags.DEFINE_string("output_base_path", os.path.join(_SCRIPT_PATH, "output"),
                     "Output directory for processed data.")
 flags.DEFINE_string("parent_co_output_path", "table",
                     "Output directory for company info.")
@@ -41,6 +46,14 @@ flags.DEFINE_string("ownership_output_path", "ownership",
                     "Output directory for ownership.")
 flags.DEFINE_string("svobs_output_path", "svobs",
                     "Output directory for StatVarObs.")
+flags.DEFINE_enum(
+    "output_mode", "all", ["companies", "ownership", "svobs", "all"],
+    "Output mode: 'companies' to generate company table and ownership outputs, "
+    "'ownership' to generate ownership outputs without geo resolution, "
+    "'svobs' to run generate_svobs_helper(), or 'all' to run all.")
+flags.DEFINE_bool(
+    "generate_svobs", None,
+    "Whether to run generate_svobs_helper(). Overrides output_mode if set.")
 
 # V_PARENT_COMPANY_INFO table
 _TABLE_PREFIX = "D_GHG_B"
@@ -48,7 +61,6 @@ _TABLE = "V_PARENT_COMPANY_INFO"
 
 _OUT_FILE_PREFIX = "EpaParentCompany"
 _OUT_SVOBS_FILE_PREFIX = "SVObs"
-_COUNTY_CANDIDATES_CACHE = {}
 
 # Cleaned CSV Columns
 # - "locatedIn" is a repeated list of refs to County and Census ZCTA
@@ -83,38 +95,24 @@ _COUNTERS_COMPANIES = {
 }
 
 
-def _gen_table_mcf():
-    lines = [
-        "Node: dcid:EpaParentCompany",
-        "subClassOf: dcs:Organization",
-        "name: EpaParentCompany",
-        "typeOf: schema:Class",
-        "\n",
-        "Node: dcid:locatedIn",
-        "typeOf: schema:Property",
-        "domainIncludes: schema:Place",
-        "rangeIncludes: schema:Place",
-        "name: locatedIn",
-    ]
-    return "\n".join(lines)
-
-
 def _gen_ownership_mcf():
     lines = [
         "Node: dcid:EpaOrganizationOwnership",
-        "description: The ownership of an EPA Facility by an Organization in a given year.",
+        'name: "EPA facility parent company ownership"',
+        'description: "The ownership of an EPA Facility by an Organization in a given year."',
         "typeOf: dcs:StatisticalVariable",
         "populationType: dcs:EpaParentCompany",
         "measuredProperty: owns",
         "statType: measurementResult",
-        "\n",
-        "Node: dcid:ownershipPercentage",
-        "typeOf: schema:Property",
-        "domainIncludes: dcs:EpaParentCompany",
-        "rangeIncludes: schema:Number",
-        "name: ownershipPercentage",
     ]
     return "\n".join(lines)
+
+
+def _gen_company_nodes_mcf(company_dcids):
+    blocks = []
+    for dcid in company_dcids:
+        blocks.append(f"Node: dcid:{dcid}\ntypeOf: dcs:EpaParentCompany\n")
+    return "\n".join(blocks)
 
 
 def _gen_ownership_tmcf():
@@ -197,6 +195,19 @@ def _get_county(company_id, zip, year):
     return county
 
 
+def _is_ghgrp_facet(facet_meta):
+    """Returns True if the facet belongs to EPA_GHGRP or has no provenance metadata."""
+    if not facet_meta:
+        return True
+    import_name = facet_meta.get('importName', '')
+    measurement_method = facet_meta.get('measurementMethod', '')
+    prov_url = facet_meta.get('provenanceUrl', '')
+    if not (import_name or measurement_method or prov_url):
+        return True
+    return ('EPA_GHGRP' in import_name or 'EPA_GHGRP' in measurement_method or
+            'ghgreporting' in prov_url)
+
+
 # Returns a mapping from a key to value.
 # key: (company_id, StatVar, Obs Period, Obs Date)
 # value: a map of all elements in the Key and the observed Value multiplied by
@@ -206,9 +217,10 @@ def _get_key_val_for_svobs(facility_id, stat_var, facility_comp_ownership,
     key_val = {}
     for ordered_facet in ordered_facets:
         facet_id = ordered_facet.get('facetId')
-        observation_period = ''
-        if facet_id and facet_id in facets:
-            observation_period = facets[facet_id].get('observationPeriod', '')
+        facet_meta = facets.get(facet_id, {}) if facet_id and facets else {}
+        if not _is_ghgrp_facet(facet_meta):
+            continue
+        observation_period = facet_meta.get('observationPeriod', '')
         for observation in ordered_facet.get('observations', []):
             dt = observation.get('date')
             v = observation.get('value')
@@ -217,18 +229,20 @@ def _get_key_val_for_svobs(facility_id, stat_var, facility_comp_ownership,
             if (facility_id, dt) in facility_comp_ownership:
                 for company_id, percentage in facility_comp_ownership[(
                         facility_id, dt)].items():
+                    try:
+                        scaled_val = float(v) * float(percentage) / 100
+                    except (ValueError, TypeError):
+                        continue
                     key = (company_id, stat_var, observation_period, dt)
-                    if key not in key_val:
-                        key_val[key] = {}
-                    key_val.update({
-                        key: {
-                            _PARENT_COMPANY_DCID: company_id,
-                            _SV_MEASURED: stat_var,
-                            _OBSERVATION_PERIOD: observation_period,
-                            _OBSERVATION_DATE: dt,
-                            _SVO_VAL: v * float(percentage) / 100
-                        }
-                    })
+                    if key in key_val:
+                        continue
+                    key_val[key] = {
+                        _PARENT_COMPANY_DCID: company_id,
+                        _SV_MEASURED: stat_var,
+                        _OBSERVATION_PERIOD: observation_period,
+                        _OBSERVATION_DATE: dt,
+                        _SVO_VAL: scaled_val
+                    }
 
     return key_val
 
@@ -258,10 +272,17 @@ def counters_string(counter_dict):
     return "\n".join(result)
 
 
-def process_companies(input_table_path, existing_facilities_file,
-                      output_path_info, output_path_ownership):
+def process_companies(input_table_path,
+                      existing_facilities_file,
+                      output_path_info,
+                      output_path_ownership,
+                      resolve_geo=True,
+                      write_table=True,
+                      cache_dir=None):
+    for counter_set in _COUNTERS_COMPANIES.values():
+        counter_set.clear()
+    fh._COUNTY_CANDIDATES_CACHE.clear()
 
-    company_ids_replaced_counter = 0
     # First retrieve the ID duplicate mappings.
     dupes = {}
     dupes_filepath = os.path.join(input_table_path, "DuplicateIdMappings.csv")
@@ -270,12 +291,13 @@ def process_companies(input_table_path, existing_facilities_file,
         for row in cr:
             dupes[row['Id']] = row['MappedTo']
 
-    processed_companies = set()
+    processed_companies = {}
     # Writing two CSVs: one for the CompanyInfo; the other for the Ownership StatVarObs.
     table_path = os.path.join(output_path_info, _OUT_FILE_PREFIX)
     ownership_path = os.path.join(output_path_ownership, _OUT_FILE_PREFIX)
+    table_csv_target = (table_path + "Table.csv" if write_table else os.devnull)
     with \
-        open(table_path + "Table.csv", "w") as twfp, \
+        open(table_csv_target, "w") as twfp, \
         open(ownership_path + "Ownership.csv", "w") as owfp:
         # IMPORTANT: We want to escape double quote (\") if it is specified in the cell
         # value, rather than the default of using two double quotes ("")
@@ -283,7 +305,8 @@ def process_companies(input_table_path, existing_facilities_file,
                                      _TABLE_CLEAN_CSV_HDR,
                                      doublequote=False,
                                      escapechar="\\")
-        tableWriter.writeheader()
+        if write_table:
+            tableWriter.writeheader()
 
         ownershipWriter = csv.DictWriter(owfp,
                                          _OWNERSHIP_CLEAN_CSV_HDR,
@@ -298,7 +321,32 @@ def process_companies(input_table_path, existing_facilities_file,
         facility_ids = set(
             pd.read_csv(existing_facilities_path)[_EPA_FACILITY_GHG_ID].values)
         input_table = os.path.join(input_table_path, _TABLE + ".csv")
+        invalid_zctas = set()
+        if resolve_geo:
+            all_zctas = set()
+            with open(input_table, "r") as rfp:
+                for row in csv.DictReader(rfp):
+                    z = fh.v(_TABLE,
+                             row,
+                             "PARENT_CO_ZIP",
+                             table_prefix=_TABLE_PREFIX)[:5]
+                    if z:
+                        all_zctas.add("zip/" + z)
+            cache_file = (os.path.join(cache_dir, "zcta_county_cache.json")
+                          if cache_dir else None)
+            fh.prefetch_county_candidates(all_zctas, cache_file=cache_file)
+            no_county_zctas = sorted(
+                z for z in all_zctas
+                if z != "zip/00000" and not any(fh.get_county_candidates(z)))
+            if no_county_zctas:
+                defined_zctas = fh.dc_api_is_defined_dcid(
+                    no_county_zctas, {"dc_api_batch_size": 200})
+                invalid_zctas = {
+                    z for z, is_def in defined_zctas.items() if not is_def
+                }
+
         rows_written = 0
+        missing_facility_id_count = 0
         with open(input_table, "r") as rfp:
             cr = csv.DictReader(rfp)
             for in_row in cr:
@@ -306,7 +354,12 @@ def process_companies(input_table_path, existing_facilities_file,
                               in_row,
                               "FACILITY_ID",
                               table_prefix=_TABLE_PREFIX)
-                assert ghg_id, str(in_row)
+                if not ghg_id:
+                    missing_facility_id_count += 1
+                    logging.warning(
+                        "Skipping row with missing FACILITY_ID in %s (count=%d): %s",
+                        _TABLE, missing_facility_id_count, in_row)
+                    continue
                 ghg_id = _EPA_FACILITY_GHG_ID + "/" + ghg_id
 
                 company_name = fh.get_name(_TABLE,
@@ -320,13 +373,17 @@ def process_companies(input_table_path, existing_facilities_file,
                 company_name = company_name.replace("\"", "").replace("'", "")
 
                 company_id = fh.name_to_id(company_name)
-                assert company_id, str(in_row)
+                if not company_id:
+                    _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
+                    continue
 
                 # Replace the company_id with a duplicate mapping, if it exists.
                 if company_id in dupes:
                     _COUNTERS_COMPANIES["company_ids_replaced"].add(company_id)
                     company_id = dupes[company_id]
                 company_id = "EpaParentCompany/" + company_id
+                if company_id.lower() in processed_companies:
+                    company_id = processed_companies[company_id.lower()]
 
                 year = fh.v(_TABLE, in_row, "YEAR", table_prefix=_TABLE_PREFIX)
                 if not year:
@@ -366,46 +423,55 @@ def process_companies(input_table_path, existing_facilities_file,
                 # This can happen when the name of the company is formatted differently. We only
                 # need one version.
                 if company_id.lower() not in processed_companies:
-                    # zips have extension
-                    zip_code = fh.v(_TABLE,
-                                    in_row,
-                                    "PARENT_CO_ZIP",
-                                    table_prefix=_TABLE_PREFIX)[:5]
-                    zip = ""
-                    if zip_code:
-                        zip = "zip/" + zip_code
-                    county = _get_county(company_id, zip, year)
+                    if resolve_geo:
+                        # zips have extension
+                        zip_code = fh.v(_TABLE,
+                                        in_row,
+                                        "PARENT_CO_ZIP",
+                                        table_prefix=_TABLE_PREFIX)[:5]
+                        zip = ""
+                        if zip_code:
+                            zip = "zip/" + zip_code
+                        county = _get_county(company_id, zip, year)
+                        if not county and zip in invalid_zctas:
+                            zip = ""
+                    else:
+                        zip = ""
+                        county = ""
 
-                    table_out_row = {
-                        _DCID:
-                            company_id,
-                        _NAME:
-                            _str(company_name),
-                        _ADDRESS:
-                            _str(
-                                fh.get_address(_TABLE,
-                                               in_row,
-                                               table_prefix=_TABLE_PREFIX)),
-                        _CIP:
-                            ", ".join(fh.get_cip(zip, county)),
-                    }
-                    tableWriter.writerow(table_out_row)
-                    processed_companies.add(company_id.lower())
+                    if write_table:
+                        table_out_row = {
+                            _DCID:
+                                company_id,
+                            _NAME:
+                                _str(company_name),
+                            _ADDRESS:
+                                _str(
+                                    fh.get_address(_TABLE,
+                                                   in_row,
+                                                   table_prefix=_TABLE_PREFIX)),
+                            _CIP:
+                                ", ".join(fh.get_cip(zip, county)),
+                        }
+                        tableWriter.writerow(table_out_row)
+                    processed_companies[company_id.lower()] = company_id
 
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
         print("Geo Resolution Stats: \n" + counters_string(_COUNTERS_COMPANIES))
 
-    print("Company ID duplicated replaced = ", company_ids_replaced_counter)
+    print("Company ID duplicated replaced = ",
+          len(_COUNTERS_COMPANIES["company_ids_replaced"]))
 
     # Write the MCF and TMCF files in their respective destination locations.
-    with open(table_path + "Table.mcf", "w") as fp:
-        fp.write(_gen_table_mcf())
+    with open(table_path + "Nodes.mcf", "w") as fp:
+        fp.write(_gen_company_nodes_mcf(processed_companies.values()))
 
     with open(ownership_path + "Ownership.mcf", "w") as fp:
         fp.write(_gen_ownership_mcf())
 
-    with open(table_path + "Table.tmcf", "w") as fp:
-        fp.write(_gen_company_tmcf())
+    if write_table:
+        with open(table_path + "Table.tmcf", "w") as fp:
+            fp.write(_gen_company_tmcf())
 
     with open(ownership_path + "Ownership.tmcf", "w") as fp:
         fp.write(_gen_ownership_tmcf())
@@ -483,7 +549,7 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
     for (facility_id, year) in facility_company_ownership:
         facilities.add(facility_id)
 
-    facilities = list(facilities)
+    facilities = sorted(facilities)
 
     statVars = fh.get_all_statvars(facilities)
     facility_sv_map, facets = fh.get_all_svobs(facilities, statVars)
@@ -496,42 +562,72 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
 
 def main(_):
     # Validate inputs.
-    assert FLAGS.output_base_path
-    assert FLAGS.parent_co_output_path
-    assert FLAGS.ownership_output_path
-    assert FLAGS.input_download_path
-    assert FLAGS.existing_facilities_file
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path,
-                     FLAGS.existing_facilities_file + ".csv"))
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path, _TABLE + ".csv"))
+    if not FLAGS.output_base_path:
+        raise ValueError("output_base_path must be provided.")
+    if not FLAGS.parent_co_output_path:
+        raise ValueError("parent_co_output_path must be provided.")
+    if not FLAGS.ownership_output_path:
+        raise ValueError("ownership_output_path must be provided.")
+    if not FLAGS.input_download_path:
+        raise ValueError("input_download_path must be provided.")
+    if not FLAGS.existing_facilities_file:
+        raise ValueError("existing_facilities_file must be provided.")
+    existing_facilities_csv = os.path.join(
+        FLAGS.input_download_path, FLAGS.existing_facilities_file + ".csv")
+    if not os.path.exists(existing_facilities_csv):
+        raise FileNotFoundError(
+            f"Existing facilities file not found: {existing_facilities_csv}")
+    table_csv = os.path.join(FLAGS.input_download_path, _TABLE + ".csv")
+    if not os.path.exists(table_csv):
+        raise FileNotFoundError(f"Input table not found: {table_csv}")
 
     output_path_info = os.path.join(FLAGS.output_base_path,
                                     FLAGS.parent_co_output_path)
     output_path_ownership = os.path.join(FLAGS.output_base_path,
                                          FLAGS.ownership_output_path)
 
-    pathlib.Path(FLAGS.output_base_path).mkdir(exist_ok=True)
-    pathlib.Path(output_path_info).mkdir(exist_ok=True)
-    pathlib.Path(output_path_ownership).mkdir(exist_ok=True)
+    pathlib.Path(FLAGS.output_base_path).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(output_path_info).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(output_path_ownership).mkdir(parents=True, exist_ok=True)
 
-    # First process companies.
-    process_companies(FLAGS.input_download_path, FLAGS.existing_facilities_file,
-                      output_path_info, output_path_ownership)
+    output_mode = FLAGS.output_mode
+    if FLAGS.generate_svobs is not None:
+        output_mode = "all" if FLAGS.generate_svobs else "companies"
 
-    # Now process the StatVarObs.
-    # First check that the output csv from process_companies() exists.
+    run_companies = output_mode in ("companies", "all")
+    run_ownership = output_mode in ("companies", "ownership", "all")
+    run_svobs = output_mode in ("svobs", "all")
+
+    nodes_mcf_filepath = os.path.join(output_path_info,
+                                      _OUT_FILE_PREFIX + "Nodes.mcf")
     ownership_path = os.path.join(output_path_ownership, _OUT_FILE_PREFIX)
     ownership_relationships_filepath = ownership_path + "Ownership.csv"
-    assert os.path.exists(ownership_relationships_filepath)
 
-    svobs_path_info = os.path.join(FLAGS.output_base_path,
-                                   FLAGS.svobs_output_path)
-    pathlib.Path(svobs_path_info).mkdir(exist_ok=True)
+    # Run process_companies() when companies or ownership mode is requested, or
+    # if svobs mode requires the ownership CSV / company node MCFs and they
+    # have not been generated yet.
+    if run_ownership or (run_svobs and
+                         (not os.path.exists(ownership_relationships_filepath)
+                          or not os.path.exists(nodes_mcf_filepath))):
+        process_companies(FLAGS.input_download_path,
+                          FLAGS.existing_facilities_file,
+                          output_path_info,
+                          output_path_ownership,
+                          resolve_geo=run_companies,
+                          write_table=run_companies,
+                          cache_dir=FLAGS.input_download_path)
 
-    # Generate the new SVOs.
-    generate_svobs_helper(ownership_relationships_filepath, svobs_path_info)
+    if run_svobs:
+        if not os.path.exists(ownership_relationships_filepath):
+            raise FileNotFoundError(
+                f"Ownership CSV not found: {ownership_relationships_filepath}")
+
+        svobs_path_info = os.path.join(FLAGS.output_base_path,
+                                       FLAGS.svobs_output_path)
+        pathlib.Path(svobs_path_info).mkdir(parents=True, exist_ok=True)
+
+        # Generate the new SVOs.
+        generate_svobs_helper(ownership_relationships_filepath, svobs_path_info)
 
 
 if __name__ == "__main__":

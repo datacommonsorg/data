@@ -28,15 +28,20 @@ from absl import flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
-from us_epa.util import facilities_helper as fh
-from us_epa.parent_company import static_corrections as sc
+REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_PATH, "../../.."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.us_epa.parent_company import static_corrections as sc
+from scripts.us_epa.util import facilities_helper as fh
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
-flags.DEFINE_string("existing_facilities_file", "existing_facilities",
-                    "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
-                    "Output directory for processed data.")
+flags.DEFINE_string("input_download_path",
+                    os.path.join(_SCRIPT_PATH, "input_files"),
+                    "Input directory",
+                    allow_override=True)
+flags.DEFINE_string("existing_facilities_file",
+                    "existing_facilities",
+                    "Filename for existing facilities ids",
+                    allow_override=True)
 
 FLAGS = flags.FLAGS
 
@@ -125,7 +130,7 @@ def _insert_overlaps(loc_map, company_id_count):
     count_dupe_loc = 0
     loc_id_contained_count = 0
     for a, v in loc_map.items():
-        v = list(v)
+        v = sorted(v)
         if len(v) > 1:
             count_dupe_loc += 1
             id_match_found = False
@@ -170,6 +175,7 @@ def _resolve_multiple_indirections():
 
 
 def preprocess(input_table_path, existing_facilities_file):
+    _DUPLICATE_MAPPING.clear()
     # Get the existing facility ids in a set.
     existing_facilities_path = os.path.join(input_table_path,
                                             existing_facilities_file + ".csv")
@@ -198,6 +204,8 @@ def preprocess(input_table_path, existing_facilities_file):
                                in_row,
                                "FACILITY_ID",
                                table_prefix=_TABLE_PREFIX)
+            if not facility_id:
+                continue
             ghg_id = _EPA_FACILITY_GHG_ID + "/" + facility_id
 
             # Only proceed if the facility_id exists in Data Commons.
@@ -211,8 +219,10 @@ def preprocess(input_table_path, existing_facilities_file):
             company_name = company_name.replace("\"", "").replace("'", "")
             if not company_name:
                 continue
-            unique_company_names.add(company_name)
             company_id = fh.name_to_id(company_name)
+            if not company_id:
+                continue
+            unique_company_names.add(company_name)
 
             address = _str(
                 fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX))
@@ -253,7 +263,8 @@ def preprocess(input_table_path, existing_facilities_file):
     # Write.
     print("Writing to file...")
     output_path = os.path.join(input_table_path, "DuplicateIdMappings.csv")
-    with open(output_path, "w") as opth:
+    tmp_output_path = output_path + ".tmp"
+    with open(tmp_output_path, "w") as opth:
         writer = csv.DictWriter(opth, ["Id", "MappedTo", "Occurences"],
                                 doublequote=False,
                                 escapechar="\\")
@@ -263,6 +274,7 @@ def preprocess(input_table_path, existing_facilities_file):
             d = {"Id": k, "MappedTo": v, "Occurences": company_id_count[v]}
             writer.writerow(d)
             num_rows_written += 1
+    os.replace(tmp_output_path, output_path)
 
     # Print some statistics.
     print("****************")
@@ -284,13 +296,18 @@ def preprocess(input_table_path, existing_facilities_file):
 
 def main(_):
     # Validate inputs.
-    assert FLAGS.input_download_path
-    assert FLAGS.existing_facilities_file
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path,
-                     FLAGS.existing_facilities_file + ".csv"))
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path, _TABLE + ".csv"))
+    if not FLAGS.input_download_path:
+        raise ValueError("input_download_path must be provided.")
+    if not FLAGS.existing_facilities_file:
+        raise ValueError("existing_facilities_file must be provided.")
+    existing_facilities_csv = os.path.join(
+        FLAGS.input_download_path, FLAGS.existing_facilities_file + ".csv")
+    if not os.path.exists(existing_facilities_csv):
+        raise FileNotFoundError(
+            f"Existing facilities file not found: {existing_facilities_csv}")
+    table_csv = os.path.join(FLAGS.input_download_path, _TABLE + ".csv")
+    if not os.path.exists(table_csv):
+        raise FileNotFoundError(f"Input table not found: {table_csv}")
 
     preprocess(FLAGS.input_download_path, FLAGS.existing_facilities_file)
 
