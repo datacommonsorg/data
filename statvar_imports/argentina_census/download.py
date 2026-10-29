@@ -42,12 +42,10 @@ if _UTIL_DIR not in sys.path:
 from absl import app
 from absl import flags
 from absl import logging
+import download_util
 import openpyxl
 import requests_cache
 import xlrd
-
-requests_cache.install_cache(backend='memory', expires_after=300)
-import download_util  # pylint: disable=wrong-import-position
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -399,6 +397,8 @@ def fetch_url(url: str, retries: int = 3, retry_secs: int = 5) -> bytes:
 
 def fetch_all_urls(urls: list[str], max_workers: int = 16) -> dict[str, bytes]:
     """Downloads a list of URLs concurrently using download_util and returns {url: bytes}."""
+    if not requests_cache.is_installed():
+        requests_cache.install_cache(backend='memory', expires_after=300)
     unique_urls = sorted(set(urls))
     logging.info('Downloading %d unique files from INDEC...', len(unique_urls))
     results = {}
