@@ -57,6 +57,7 @@ from urllib3.util.retry import Retry
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_LOCAL_DIR = os.path.join(SCRIPT_DIR, "input_files")
 DEFAULT_GCS_DIR = "gs://unresolved_mcf/country/Bulgaria/input_files"
+SUBPROCESS_TIMEOUT_SECONDS = 120
 
 NSI_URL = "https://www.nsi.bg/en/statistical-data/206/649"
 
@@ -141,29 +142,41 @@ def _create_retry_session() -> requests.Session:
 
 def list_gcs_files(gcs_dir: str) -> list[str]:
     """Lists files currently in the shared GCS destination folder."""
+    target = gcs_dir.rstrip("/") + "/"
     try:
-        cmd = ["gcloud", "storage", "ls", gcs_dir.rstrip("/") + "/"]
-        res = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        files = [
-            os.path.basename(line.strip()) for line in res.stdout.splitlines()
+        cmd = ["gcloud", "storage", "ls", target]
+        res = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=SUBPROCESS_TIMEOUT_SECONDS,
+        )
+        return [
+            os.path.basename(line.strip())
+            for line in res.stdout.splitlines()
             if line.strip()
         ]
-        return files
     except Exception as e:
         logging.warning("gcloud storage list failed (%s), trying gsutil...", e)
         try:
-            cmd = ["gsutil", "ls", gcs_dir.rstrip("/") + "/"]
-            res = subprocess.run(cmd,
-                                 capture_output=True,
-                                 text=True,
-                                 check=True)
-            files = [
+            cmd = ["gsutil", "ls", target]
+            res = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                check=True,
+                timeout=SUBPROCESS_TIMEOUT_SECONDS,
+            )
+            return [
                 os.path.basename(line.strip())
-                for line in res.stdout.splitlines() if line.strip()
+                for line in res.stdout.splitlines()
+                if line.strip()
             ]
-            return files
-        except Exception:
-            return []
+        except Exception as e2:
+            logging.error("Failed to list GCS directory %s: %s", target, e2)
+            raise RuntimeError(
+                f"Failed to list GCS directory {target}: {e2}") from e2
 
 
 def normalize_cell(val: str, is_numeric_col: bool = False) -> str:
@@ -244,15 +257,13 @@ def _validate_annual_row_values(row: list[str], row_idx: int, label: str):
 
 def validate_file_format(file_path: str, expected_year: int) -> bool:
     """Strictly validates CSV format against the reference 2024 template schema."""
-    logging.info("Verifying format against reference schema (%s)...",
-                 file_path)
+    logging.info("Verifying format against reference schema (%s)...", file_path)
 
     with open(file_path, "r", encoding="utf-8") as f:
         reader = list(csv.reader(f))
 
     # 1. Row count: 3 Header rows + (29 districts * 23 rows) = 670 rows
-    expected_total_rows = 3 + len(EXPECTED_DISTRICTS) * (1 +
-                                                         len(EXPECTED_AGES))
+    expected_total_rows = 3 + len(EXPECTED_DISTRICTS) * (1 + len(EXPECTED_AGES))
     if len(reader) != expected_total_rows:
         raise ValueError(
             f"Validation failed: Expected exactly {expected_total_rows} rows, "
@@ -347,9 +358,8 @@ def validate_file_format(file_path: str, expected_year: int) -> bool:
                     f"District '{district}', col {col_i}: "
                     f"District header ({d_val}) != sum of age rows ({a_sum}).")
 
-    logging.info(
-        "Format validation PASSED: Exactly matches reference template "
-        "structure and internal arithmetic!")
+    logging.info("Format validation PASSED: Exactly matches reference template "
+                 "structure and internal arithmetic!")
     return True
 
 
@@ -367,17 +377,25 @@ def check_and_download_nsi(
         "(Source: %s, Destination GCS: %s)", NSI_URL, gcs_dir)
 
     html_content = None
+    is_cloudflare_blocked = False
     session = _create_retry_session()
     try:
         resp = session.get(NSI_URL, headers=HEADERS, timeout=25)
         if resp.status_code == 200:
             html_content = resp.text
             logging.info("Successfully connected to live NSI portal.")
+        elif resp.status_code == 403:
+            is_cloudflare_blocked = True
+            logging.warning(
+                "NSI portal returned HTTP 403 (Cloudflare challenge/block) "
+                "for %s.", NSI_URL)
         else:
-            logging.warning("NSI portal returned HTTP %d for %s.",
-                            resp.status_code, NSI_URL)
+            logging.error("NSI portal returned unexpected HTTP %d for %s.",
+                          resp.status_code, NSI_URL)
+            sys.exit(1)
     except Exception as e:
-        logging.warning("Direct request to nsi.bg failed: %s", e)
+        logging.error("Direct request to nsi.bg failed: %s", e)
+        sys.exit(1)
 
     # Fallback to cached copy if environment restricts direct outbound HTTP to nsi.bg
     if not html_content:
@@ -388,9 +406,7 @@ def check_and_download_nsi(
             logging.info("Using cached HTML snapshot for NSI table.")
 
     if not html_content:
-        logging.warning("Direct connection to NSI portal blocked "
-                        "(e.g. Cloudflare challenge/firewall).")
-        if allow_staged_fallback:
+        if is_cloudflare_blocked and allow_staged_fallback:
             logging.info(
                 "Checking if input files are already present in GCS "
                 "(%s) (--allow-staged-fallback enabled)...", gcs_dir)
@@ -447,16 +463,14 @@ def check_and_download_nsi(
     except ValueError:
         tables = []
     if not tables:
-        logging.error(
-            "Could not locate table with class 'nsit3' in page HTML.")
+        logging.error("Could not locate table with class 'nsit3' in page HTML.")
         sys.exit(1)
     df = tables[0]
 
     # Clean strings and non-breaking spaces
     for col in df.columns:
         if pd.api.types.is_string_dtype(df[col]):
-            df[col] = (df[col].astype(str).str.replace("\xa0",
-                                                       " ").str.strip())
+            df[col] = (df[col].astype(str).str.replace("\xa0", " ").str.strip())
 
     # 4. Write CSV to temporary file first, validate, then atomically replace
     tmp_fd, tmp_path = tempfile.mkstemp(prefix=f".{target_filename}.",
@@ -510,8 +524,8 @@ def check_and_download_nsi(
             os.remove(tmp_path)
         raise
 
-    logging.info("Saved validated local file: %s (%d bytes)",
-                 local_output_path, os.path.getsize(local_output_path))
+    logging.info("Saved validated local file: %s (%d bytes)", local_output_path,
+                 os.path.getsize(local_output_path))
 
     # 6. Upload to shared GCS destination
     if dry_run:
@@ -523,13 +537,25 @@ def check_and_download_nsi(
     upload_success = False
     try:
         cmd = ["gcloud", "storage", "cp", local_output_path, gcs_target_path]
-        subprocess.run(cmd, check=True, capture_output=True, text=True)
+        subprocess.run(
+            cmd,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=SUBPROCESS_TIMEOUT_SECONDS,
+        )
         upload_success = True
     except Exception as e:
         logging.warning("gcloud storage failed (%s), trying gsutil...", e)
         try:
             cmd = ["gsutil", "cp", local_output_path, gcs_target_path]
-            subprocess.run(cmd, check=True, capture_output=True, text=True)
+            subprocess.run(
+                cmd,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=SUBPROCESS_TIMEOUT_SECONDS,
+            )
             upload_success = True
         except Exception as e2:
             logging.error("Upload failed: %s", e2)

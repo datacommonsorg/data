@@ -104,110 +104,6 @@ statType: dcid:measuredValue
 age: [1 4 Years]
 placeOfResidenceClassification: dcid:Urban
 
-Node: dcid:Count_Person_90To94Years_Female_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [90 94 Years]
-gender: dcid:Female
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_90To94Years_Female_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [90 94 Years]
-gender: dcid:Female
-placeOfResidenceClassification: dcid:Urban
-
-Node: dcid:Count_Person_90To94Years_Male_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [90 94 Years]
-gender: dcid:Male
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_90To94Years_Male_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [90 94 Years]
-gender: dcid:Male
-placeOfResidenceClassification: dcid:Urban
-
-Node: dcid:Count_Person_90To94Years_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [90 94 Years]
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_90To94Years_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [90 94 Years]
-placeOfResidenceClassification: dcid:Urban
-
-Node: dcid:Count_Person_95To99Years_Female_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [95 99 Years]
-gender: dcid:Female
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_95To99Years_Female_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [95 99 Years]
-gender: dcid:Female
-placeOfResidenceClassification: dcid:Urban
-
-Node: dcid:Count_Person_95To99Years_Male_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [95 99 Years]
-gender: dcid:Male
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_95To99Years_Male_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [95 99 Years]
-gender: dcid:Male
-placeOfResidenceClassification: dcid:Urban
-
-Node: dcid:Count_Person_95To99Years_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [95 99 Years]
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_95To99Years_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [95 99 Years]
-placeOfResidenceClassification: dcid:Urban
-
 Node: dcid:Count_Person_Rural
 typeOf: dcid:StatisticalVariable
 name: "Population Living in Rural Areas"
@@ -223,3 +119,4 @@ populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 placeOfResidenceClassification: dcid:Urban
+

@@ -16,6 +16,7 @@
 import csv
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -30,6 +31,7 @@ from download_current_year_data import (
     EXPECTED_AGES,
     EXPECTED_DISTRICTS,
     check_and_download_nsi,
+    list_gcs_files,
     normalize_cell,
     to_num,
     validate_file_format,
@@ -139,21 +141,17 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                 rur_m = 18
                 rur_fem = 12
 
-                if (tamper_type == "arithmetic_residence"
-                        and d == EXPECTED_DISTRICTS[0]
-                        and a == EXPECTED_AGES[0]):
+                if (tamper_type == "arithmetic_residence" and
+                        d == EXPECTED_DISTRICTS[0] and a == EXPECTED_AGES[0]):
                     rur_tot = 50  # 70 + 50 != 100
-                elif (tamper_type == "arithmetic_sex"
-                      and d == EXPECTED_DISTRICTS[0]
-                      and a == EXPECTED_AGES[0]):
+                elif (tamper_type == "arithmetic_sex" and
+                      d == EXPECTED_DISTRICTS[0] and a == EXPECTED_AGES[0]):
                     fem = 30  # 60 + 30 != 100
-                elif (tamper_type == "arithmetic_urban_sex"
-                      and d == EXPECTED_DISTRICTS[0]
-                      and a == EXPECTED_AGES[0]):
+                elif (tamper_type == "arithmetic_urban_sex" and
+                      d == EXPECTED_DISTRICTS[0] and a == EXPECTED_AGES[0]):
                     urb_fem = 20  # 42 + 20 != 70
-                elif (tamper_type == "arithmetic_rural_sex"
-                      and d == EXPECTED_DISTRICTS[0]
-                      and a == EXPECTED_AGES[0]):
+                elif (tamper_type == "arithmetic_rural_sex" and
+                      d == EXPECTED_DISTRICTS[0] and a == EXPECTED_AGES[0]):
                     rur_fem = 10  # 18 + 10 != 30
 
                 row = [
@@ -354,6 +352,29 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_http_404_fails_even_with_fallback(
+        self,
+        mock_create_session,
+    ):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 404
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                check_and_download_nsi(
+                    local_dir=tmp_dir,
+                    gcs_dir="gs://mock-bucket/input_files",
+                    allow_staged_fallback=True,
+                )
+            self.assertEqual(ctx.exception.code, 1)
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
     @mock.patch(
         "download_current_year_data.list_gcs_files",
         return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"],
@@ -381,6 +402,14 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                 "gs://mock-bucket/input_files")
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch(
+        "download_current_year_data.subprocess.run",
+        side_effect=subprocess.CalledProcessError(1, "gcloud"),
+    )
+    def test_list_gcs_files_raises_on_failure(self, mock_run):
+        with self.assertRaises(RuntimeError):
+            list_gcs_files("gs://mock-bucket/input_files")
 
 
 if __name__ == "__main__":
