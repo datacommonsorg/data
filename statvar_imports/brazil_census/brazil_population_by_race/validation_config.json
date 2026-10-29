@@ -1,0 +1,59 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks deleted records threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "scope": {
+                "data_source": "differ_summary"
+            },
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "description": "Checks missing refs threshold.",
+            "validator": "MISSING_REFS_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Checks lint error count.",
+            "validator": "LINT_ERROR_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Checks date freshness.",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "(StatVar = 'Count_Person' AND MaxDate >= '1940') OR (StatVar != 'Count_Person' AND MaxDate >= '2000')"
+            }
+        },
+        {
+            "rule_id": "check_num_places_consistent",
+            "description": "Checks place count consistency.",
+            "validator": "NUM_PLACES_CONSISTENT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {}
+        }
+    ]
+}
