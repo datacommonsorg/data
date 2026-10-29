@@ -19,13 +19,28 @@ import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
 
+from absl import flags
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
+if 'download_util_script' in sys.modules:
+    sys.modules.setdefault('util.download_util_script',
+                           sys.modules['download_util_script'])
+_SAVED_FLAGS = {
+    _name: flags.FLAGS[_name]
+    for _name in ('api_url', 'bulk_url', 'temp_dir', 'output_dir')
+    if _name in flags.FLAGS
+}
+for _flag_name in _SAVED_FLAGS:
+    delattr(flags.FLAGS, _flag_name)
 
 import fema_download
+
+for _flag_name, _flag_obj in _SAVED_FLAGS.items():
+    delattr(flags.FLAGS, _flag_name)
+    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class FemaDownloadTest(unittest.TestCase):
@@ -289,8 +304,10 @@ class FemaDownloadTest(unittest.TestCase):
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
-    def test_download_data_bulk_missing_header_fallback(
-            self, mock_get_total_records, mock_download_file, mock_rmtree):
+    def test_download_data_bulk_missing_header_fallback(self,
+                                                        mock_get_total_records,
+                                                        mock_download_file,
+                                                        mock_rmtree):
         """Test that bulk download missing expected header falls back to pagination."""
         original_page_size = fema_download.PAGE_SIZE
         fema_download.PAGE_SIZE = 2
@@ -341,8 +358,7 @@ class FemaDownloadTest(unittest.TestCase):
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
-    def test_download_data_bulk_too_small_fallback(self,
-                                                   mock_get_total_records,
+    def test_download_data_bulk_too_small_fallback(self, mock_get_total_records,
                                                    mock_download_file,
                                                    mock_rmtree):
         """Test that bulk download below min_size threshold falls back to pagination."""
@@ -406,8 +422,7 @@ class FemaDownloadTest(unittest.TestCase):
                     with open(os.path.join(output_folder, "truncated.csv"),
                               'w') as f:
                         f.write(
-                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n"
-                        )
+                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n")
                     return True
                 if "$skip=0" in url:
                     util_out = os.path.join(output_folder,
@@ -549,8 +564,7 @@ class FemaDownloadTest(unittest.TestCase):
             def side_effect(url, output_folder, **kwargs):
                 if url.startswith("http://fake-bulk.com/"):
                     # Bulk file downloads but has 0 data rows (fails tolerance against expected 2)
-                    out_file = os.path.join(output_folder,
-                                            "FimaNfipClaims.csv")
+                    out_file = os.path.join(output_folder, "FimaNfipClaims.csv")
                     with open(out_file, "w", encoding="utf-8") as f:
                         f.write("dateOfLoss,yearOfLoss,state\n")
                     return True
@@ -600,12 +614,10 @@ class FemaDownloadTest(unittest.TestCase):
 
             def side_effect(url, output_folder, **kwargs):
                 if url.startswith("http://fake-bulk.com/"):
-                    out_file = os.path.join(output_folder,
-                                            "FimaNfipClaims.csv")
+                    out_file = os.path.join(output_folder, "FimaNfipClaims.csv")
                     with open(out_file, "w", encoding="utf-8") as f:
                         f.write(
-                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n"
-                        )
+                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n")
                     return True
                 if "$skip=0" in url:
                     util_out = os.path.join(output_folder,
@@ -685,6 +697,46 @@ class FemaDownloadTest(unittest.TestCase):
                     if f.startswith("FimaNfipClaims_")
                 ]
                 self.assertEqual(chunk_files, [])
+        finally:
+            fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    @patch('fema_download.get_total_records')
+    def test_download_data_pagination_v3_nfipclaims_xlsx(
+            self, mock_get_total_records, mock_download_file, mock_rmtree):
+        """Test pagination when download_file writes NfipClaims.xlsx (OpenFEMA v3 endpoint)."""
+        original_page_size = fema_download.PAGE_SIZE
+        fema_download.PAGE_SIZE = 2
+        try:
+            mock_get_total_records.return_value = 3
+
+            def side_effect(url, output_folder, **kwargs):
+                util_out = os.path.join(output_folder, "NfipClaims.xlsx")
+                if "$skip=0" in url:
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n1,A\n2,B\n")
+                    return True
+                elif f"$skip={fema_download.PAGE_SIZE}" in url:
+                    with open(util_out, 'wb') as f:
+                        f.write(b"headerA,headerB\n3,C\n")
+                    return True
+                return False
+
+            mock_download_file.side_effect = side_effect
+            output_dir = os.path.join(self.test_dir, 'input_file')
+            temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
+
+            fema_download.download_data(
+                api_url='https://www.fema.gov/api/open/v3/NfipClaims',
+                temp_dir=temp_dir,
+                output_dir=output_dir)
+
+            final_filepath = os.path.join(output_dir, 'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content, b"headerA,headerB\n1,A\n2,B\n3,C\n")
         finally:
             fema_download.PAGE_SIZE = original_page_size
 

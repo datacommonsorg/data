@@ -23,7 +23,8 @@
                     "stat_var_mcf": "StatisticsPoland_output_stat_vars.mcf"
                 }
             ],
-            "cron_schedule": "0 0 1 1,4,7,10 *",
+            "cron_schedule": "30 11 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 11:30 UTC",
             "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 8,
