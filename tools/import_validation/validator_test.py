@@ -68,6 +68,33 @@ class TestMaxDateLatestValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
+    def test_max_date_latest_passes_on_mixed_date_formats(self):
+        current_year = datetime.now().year
+        test_df = pd.DataFrame(
+            {'MaxDate': [f'{current_year}-05', f'{current_year - 1}']})
+        result = self.validator.validate_max_date_latest(test_df, {})
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['rows_processed'], 2)
+        self.assertEqual(result.details['rows_succeeded'], 2)
+        self.assertEqual(result.details['rows_failed'], 0)
+
+    def test_max_date_latest_does_not_mutate_input_dataframe(self):
+        current_year = datetime.now().year
+        test_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'MaxDate': [f'{current_year}-05', f'{current_year}-06']
+        })
+        result_max_date = self.validator.validate_max_date_latest(test_df, {})
+        self.assertEqual(result_max_date.status, ValidationStatus.PASSED)
+
+        # Subsequent rule relying on original string column format
+        result_sql = self.validator.validate_sql(
+            test_df, pd.DataFrame(), {
+                'query': 'SELECT MAX(MaxDate) AS MaxDate FROM stats',
+                'condition': f"MaxDate >= '{current_year}-01'"
+            })
+        self.assertEqual(result_sql.status, ValidationStatus.PASSED)
+
 
 class TestDeletedRecordsCountValidation(unittest.TestCase):
     '''Test Class for the DELETED_RECORDS_COUNT validation rule.'''

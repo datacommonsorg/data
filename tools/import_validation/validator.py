@@ -117,8 +117,22 @@ class Validator:
                                         'rows_failed': 0
                                     })
 
-        stats_df['MaxDate'] = pd.to_datetime(stats_df['MaxDate'])
-        max_date_year = stats_df['MaxDate'].dt.year.max()
+        local_df = stats_df.copy()
+        try:
+            local_df['MaxDate'] = pd.to_datetime(local_df['MaxDate'],
+                                                 format='mixed')
+        except (ValueError, TypeError) as e:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'MAX_DATE_LATEST',
+                message=f"Failed to parse dates in 'MaxDate' column: {e}")
+
+        max_date_year = local_df['MaxDate'].dt.year.max()
+        if pd.isna(max_date_year):
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'MAX_DATE_LATEST',
+                message="No valid dates found in 'MaxDate' column.")
         current_year = pd.to_datetime('today').year
 
         if max_date_year < current_year:
