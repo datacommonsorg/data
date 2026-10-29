@@ -20,13 +20,42 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from absl import flags
+
 # Ensure import directory is in sys.path
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
+_CONFLICTING_FLAGS = (
+    'years',
+    'data_mode',
+    'output_dir',
+    'raw_dir',
+    'test_mode',
+    'clean',
+    'keep_all_entities',
+    'input_data',
+    'pv_map',
+    'school_code_mapping',
+    'output_path',
+    'output_counters',
+    'num_workers',
+)
+_SAVED_FLAGS = {
+    _name: flags.FLAGS[_name]
+    for _name in _CONFLICTING_FLAGS
+    if _name in flags.FLAGS
+}
+for _flag_name in _SAVED_FLAGS:
+    delattr(flags.FLAGS, _flag_name)
+
 import download
 import process
+
+for _flag_name, _flag_obj in _SAVED_FLAGS.items():
+    delattr(flags.FLAGS, _flag_name)
+    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class CaliforniaSchoolPerformanceTest(unittest.TestCase):
@@ -296,7 +325,8 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 mock_flags.keep_all_entities = True
                 download.main([])
 
-            master_path = os.path.join(tmp_dir, 'sb_ca_all_years_normalized.txt')
+            master_path = os.path.join(tmp_dir,
+                                       'sb_ca_all_years_normalized.txt')
             self.assertTrue(os.path.exists(single_path))
             self.assertTrue(os.path.exists(master_path))
             with open(single_path, 'r', encoding='utf-8') as f1, \
