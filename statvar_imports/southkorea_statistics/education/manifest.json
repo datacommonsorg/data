@@ -54,7 +54,8 @@
           "cleaned_csv": "output/middle_school_2.csv"
         }
       ],
-      "cron_schedule": "0 10 1,15 * *",
+      "cron_schedule": "30 0 * * 1",
+      "_comment": "Schedule: Weekly on Monday at 00:30 UTC",
       "source_files": ["source_files/*.csv"]
     }
   ]

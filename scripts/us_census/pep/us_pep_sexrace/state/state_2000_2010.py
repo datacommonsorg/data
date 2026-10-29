@@ -39,11 +39,10 @@ def process_state_2000_2010(url: str) -> pd.DataFrame:
     df = pd.read_csv(url, header=0)
     df.to_csv(_CODEDIR + "/../input_files/" + "state_result_2000_2010.csv")
     # dropping unwanted columns
-    df.drop(columns=[
+    df = df.drop(columns=[
         "REGION", "DIVISION", "ESTIMATESBASE2000", "CENSUS2010POP",
         "POPESTIMATE2010"
-    ],
-            inplace=True)
+    ])
 
     # agegrp = 0 is only required as it gives total of all ages
     df = df.query("AGEGRP == 0")
@@ -75,7 +74,7 @@ def process_state_2000_2010(url: str) -> pd.DataFrame:
 
     df['INFO'] = "Count_Person_" + df['SEX'] + '_' + df['RACE']
     df['INFO'] = df['INFO'].astype(str).str.replace('_All_Races_Combined', '')
-    df.drop(columns=["ORIGIN", "AGEGRP", "RACE", "SEX", "NAME"], inplace=True)
+    df = df.drop(columns=["ORIGIN", "AGEGRP", "RACE", "SEX", "NAME"])
 
     # creating geoId and making them 2 digit as state
     df['STATE'] = [f'{x:02}' for x in df['STATE']]
@@ -86,7 +85,7 @@ def process_state_2000_2010(url: str) -> pd.DataFrame:
 
     # to extract year from level_0 column which is the last 4 char
     df['Year'] = df['level_0'].str[-4:]
-    df.drop(columns=["level_0"], inplace=True)
+    df = df.drop(columns=["level_0"])
     df = df.reindex(columns=[
         'Year', 'STATE', 'Count_Person_Female',
         'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
