@@ -59,9 +59,11 @@ def download_files(us_fed_urls):
         logging.fatal(f"Failed to download file: {e}")
 
 
+
 def main(argv):
     us_fed_urls = config.us_fed_urls
     download_files(us_fed_urls)
+
 
 if __name__ == "__main__":
     app.run(main)

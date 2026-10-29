@@ -21,6 +21,7 @@ from absl import logging
 
 logging.set_verbosity(logging.INFO)
 
+
 def process_singstat_json_to_wide_csv(json_data_str, output_filename):
     """
     Parses a JSON string from the SingStat API, creates a wide-format DataFrame,
@@ -39,7 +40,8 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
 
     records = []
     if "Data" not in data or "row" not in data["Data"]:
-        logging.info("JSON structure not as expected: Missing 'Data' or 'row' key.")
+        logging.info(
+            "JSON structure not as expected: Missing 'Data' or 'row' key.")
         return
 
     for row_item in data["Data"]["row"]:
@@ -61,16 +63,19 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
 
     if records:
         df_long = pd.DataFrame(records)
-        df_long['Data Series'] = df_long['Row Text'] + ' (' + df_long['Unit of Measure'] + ')'
+        df_long['Data Series'] = df_long['Row Text'] + ' (' + df_long[
+            'Unit of Measure'] + ')'
 
         # Robust sorting logic for 'Series No' to handle both integers and hierarchical strings (e.g., '1.1.1').
         try:
-            df_long['sort_key'] = df_long['Series No'].str.split('.').apply(lambda x: [int(i) for i in x])
-            df_long.sort_values(by='sort_key', inplace=True)
+            df_long['sort_key'] = df_long['Series No'].str.split('.').apply(
+                lambda x: [int(i) for i in x])
+            df_long = df_long.sort_values(by='sort_key')
         except (AttributeError, ValueError):
             # Fallback to a simple numeric sort if the 'Series No' format is not hierarchical.
-            df_long['Series No'] = pd.to_numeric(df_long['Series No'], errors='coerce')
-            df_long.sort_values(by='Series No', inplace=True)
+            df_long['Series No'] = pd.to_numeric(df_long['Series No'],
+                                                 errors='coerce')
+            df_long = df_long.sort_values(by='Series No')
 
         desired_order = df_long['Data Series'].unique()
 
@@ -82,34 +87,44 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
                                  aggfunc='first')
 
         df_wide = df_wide.reindex(desired_order)
-        df_wide.reset_index(inplace=True)
+        df_wide = df_wide.reset_index()
         df_wide.columns.name = None
 
         #  column sorting to handle both yearly and monthly data keys.
         all_columns = df_wide.columns.tolist()
         data_series_column = all_columns[0]
         year_columns = [col for col in all_columns[1:] if str(col).isdigit()]
-        monthly_columns = [col for col in all_columns[1:] if not str(col).isdigit()]
-        
+        monthly_columns = [
+            col for col in all_columns[1:] if not str(col).isdigit()
+        ]
+
         year_columns.sort(key=int, reverse=True)
-        
+
         final_columns = [data_series_column] + year_columns + monthly_columns
         df_wide = df_wide[final_columns]
-        
+
         df_wide.to_csv(output_filename, index=False)
-        logging.info(f"Successfully converted data to '{output_filename}' in wide format.")
+        logging.info(
+            f"Successfully converted data to '{output_filename}' in wide format."
+        )
     else:
         logging.warning("No records found to convert.")
 
+
 def main(_):
     """Main function to fetch data for multiple tables and process them."""
-    hdr = {'User-Agent': 'Mozilla/5.0', "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,/;q=0.8"}
+    hdr = {
+        'User-Agent':
+            'Mozilla/5.0',
+        "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,/;q=0.8"
+    }
     output_folder = "input_files"
-    
+
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
         logging.info(f"Created output folder: {output_folder}")
-    
+
     table_id_configs = {
         "M810001": "Population_Indicator.csv",
         "M810011": "Population_Resident.csv",
@@ -119,24 +134,30 @@ def main(_):
         "M810501": "Life_Expectancy.csv",
         "M810131": "DeathByCause.csv"
     }
-    
+
     for table_id, filename in table_id_configs.items():
         url = f"https://tablebuilder.singstat.gov.sg/api/table/tabledata/{table_id}"
         output_filename = os.path.join(output_folder, filename)
-        
-        logging.info(f"Fetching data for table ID: {table_id} -> Saving to '{output_filename}'")
+
+        logging.info(
+            f"Fetching data for table ID: {table_id} -> Saving to '{output_filename}'"
+        )
         try:
             request = Request(url, headers=hdr)
             with urlopen(request) as response:
                 data_bytes = response.read()
                 json_data_string = data_bytes.decode('utf-8')
-            
+
             process_singstat_json_to_wide_csv(json_data_string, output_filename)
         except Exception as e:
-            logging.fatal(f"An error occurred during data fetching or processing for table {table_id}: {e}")
-            raise RuntimeError(f"Failed to process table {table_id} due to an error: {e}")
+            logging.fatal(
+                f"An error occurred during data fetching or processing for table {table_id}: {e}"
+            )
+            raise RuntimeError(
+                f"Failed to process table {table_id} due to an error: {e}")
 
         logging.info("-" * 50)
+
 
 if __name__ == "__main__":
     app.run(main)

@@ -230,8 +230,8 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         }]
         mock_get.return_value = mock_response
 
-        brazil_download_script.fetch_aggregate_series(
-            6461, 4096, "N1[1]", "202201")
+        brazil_download_script.fetch_aggregate_series(6461, 4096, "N1[1]",
+                                                      "202201")
         expected_url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos/202201/variaveis/4096?localidades=N1[1]"
         mock_log_info.assert_any_call(
             f"Fetching IBGE aggregate series: GET {expected_url}")

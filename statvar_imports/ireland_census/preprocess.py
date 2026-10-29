@@ -16,7 +16,9 @@ import os
 import pandas as pd
 from absl import app, logging
 
-INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "input_files")
+
 
 # Removing state level data for the years 2008-2021 which was existing in the suicides.csv file.
 def preprocess():
@@ -27,10 +29,13 @@ def preprocess():
                 df = pd.read_csv(filepath)
                 if 'Area of Residence' in df.columns and 'Year' in df.columns:
                     years_to_drop = range(2008, 2022)
-                    mask = (df['Area of Residence'] == 'State') & (df['Year'].isin(years_to_drop))
+                    mask = (df['Area of Residence']
+                            == 'State') & (df['Year'].isin(years_to_drop))
                     df = df[~mask]
                 df.to_csv(filepath, index=False)
-                logging.info("Successfully dropped State level values for the years 2008 to 2021.")
+                logging.info(
+                    "Successfully dropped State level values for the years 2008 to 2021."
+                )
 
     except Exception as e:
         logging.fatal(f"Failed to preprocess the file: {e}")
@@ -38,6 +43,7 @@ def preprocess():
 
 def main(argv):
     preprocess()
+
 
 if __name__ == "__main__":
     app.run(main)
