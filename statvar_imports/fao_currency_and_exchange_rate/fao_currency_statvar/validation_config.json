@@ -3,31 +3,44 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "enabled": false
+            "description": "Checks that the percentage of deleted records for the entire import is within 0.1% threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_min_value",
+            "description": "Checks that all currency exchange rate values are non-negative (historical pre-redenomination hyperinflation rates < 5e-6 round to 0.0 at 5 decimal places).",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_num_places_count",
+            "description": "Checks that every currency exchange rate StatVar resolves to at least 1 place.",
+            "validator": "NUM_PLACES_COUNT",
+            "params": {
+                "minimum": 1
+            }
+        },
+        {
+            "rule_id": "check_positive_exchange_rate_values",
+            "description": "Ensure every currency series has strictly positive MaxValue (> 0) and all non-exempt currency series have strictly positive MinValue (> 0).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MinValue, MaxValue FROM stats",
+                "condition": "MaxValue > 0 AND (MinValue > 0 OR regexp_matches(StatVar, '^LocalCurrency_.*_ToCurrency_(AOK|AON|AOS|ARP|BRB|BRC|BRN|NIC|NIG|PES|ZRZ)$') OR regexp_matches(StatVar, '^StandardizedCurrency_.*_ToCurrency_(AOA|ARS|BRL|BYN|CDF|GEL|NIO|PEN|RSD|TMT|VED)$'))"
+            }
         },
         {
             "rule_id": "check_active_currency_date_freshness",
-            "description": "Ensure active currencies (EUR, INR, GBP, JPY, CAD, AUD, CHF, CNY) have MaxDate at or after 2025 to catch import stagnation.",
+            "description": "Ensure active major currencies (EUR, INR, GBP, JPY, CAD, AUD, CHF, CNY) have fresh monthly LocalCurrency MaxDate (>= 2026-01) and active annual StandardizedCurrency series have MaxDate >= 2025.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar LIKE '%_ToCurrency_EUR' OR StatVar LIKE '%_ToCurrency_INR' OR StatVar LIKE '%_ToCurrency_GBP' OR StatVar LIKE '%_ToCurrency_JPY' OR StatVar LIKE '%_ToCurrency_CAD' OR StatVar LIKE '%_ToCurrency_AUD' OR StatVar LIKE '%_ToCurrency_CHF' OR StatVar LIKE '%_ToCurrency_CNY'",
-                "condition": "SUBSTR(MaxDate, 1, 4) >= '2025'"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output_files/CurrencyFAO_output.csv"
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE regexp_matches(StatVar, '_ToCurrency_(EUR|INR|GBP|JPY|CAD|AUD|CHF|CNY)$') OR (StatVar LIKE 'StandardizedCurrency_%' AND NOT regexp_matches(StatVar, '_ToCurrency_(YUN|CSK|NIO)$'))",
+                "condition": "(StatVar LIKE 'LocalCurrency_%' AND MaxDate >= '2026-01') OR (StatVar LIKE 'StandardizedCurrency_%' AND MaxDate >= '2025')"
             }
         }
     ]

@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Configuration variables and location mappings for IBGE SIDRA data extraction."""
 
 from typing import Any, Dict, List, Tuple
@@ -57,9 +56,10 @@ LOCATIONS = {
 # Panel 1: Employment and Unemployment / Labor Force
 # ---------------------------------------------------------
 
-def get_panel_1_specs(
-    s1: Dict[str, Any], s2: Dict[str, Any], s3: Dict[str, Any], s4: Dict[str, Any]
-) -> List[Tuple[str, Dict[str, Any]]]:
+
+def get_panel_1_specs(s1: Dict[str, Any], s2: Dict[str, Any], s3: Dict[str,
+                                                                       Any],
+                      s4: Dict[str, Any]) -> List[Tuple[str, Dict[str, Any]]]:
     """Returns indicator specification mappings for Panel 1."""
     return [
         (
@@ -80,9 +80,11 @@ def get_panel_1_specs(
         ),
     ]
 
+
 # ---------------------------------------------------------
 # Panel 2: Population & Economic Sectors
 # ---------------------------------------------------------
+
 
 def get_panel_2_specs(
     s_pop: Dict[str, Any],
@@ -93,7 +95,8 @@ def get_panel_2_specs(
     """Returns indicator specification mappings for Panel 2."""
     return [
         ("População total (milhares)", s_pop),
-        ("Pessoas de 14 anos ou mais de idade (milhares)", m_6463.get("32385", {})),
+        ("Pessoas de 14 anos ou mais de idade (milhares)",
+         m_6463.get("32385", {})),
         (
             "Pessoas de 14 anos ou mais de idade, na força de trabalho, na semana de referência (milhares)",
             m_6463.get("32386", {}),
@@ -188,9 +191,11 @@ def get_panel_2_specs(
         ),
     ]
 
+
 # ---------------------------------------------------------
 # Panel 3: Average Real Income
 # ---------------------------------------------------------
+
 
 def get_panel_3_specs(
     s_all_usual: Dict[str, Any],
@@ -291,13 +296,15 @@ def get_panel_3_specs(
         ),
     ]
 
+
 # ---------------------------------------------------------
 # Panel 4: Mass Income
 # ---------------------------------------------------------
 
+
 def get_panel_4_specs(
-    s_mass_usual: Dict[str, Any], s_mass_eff: Dict[str, Any]
-) -> List[Tuple[str, Dict[str, Any]]]:
+        s_mass_usual: Dict[str, Any],
+        s_mass_eff: Dict[str, Any]) -> List[Tuple[str, Dict[str, Any]]]:
     """Returns indicator specification mappings for Panel 4."""
     return [
         (
