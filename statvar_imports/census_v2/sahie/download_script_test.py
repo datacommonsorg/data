@@ -21,7 +21,8 @@ import sys
 
 # Adjust the path to import the script under test
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_PATH)
+sys.path.insert(0, _SCRIPT_PATH)
+sys.modules.pop('download_script', None)
 import download_script
 
 
@@ -57,9 +58,9 @@ class DownloadScriptTest(unittest.TestCase):
                             "2022,1,01,001,County\n")
         self.assertEqual(cleaned_content, expected_content)
 
-    @patch('download_script.download_file')
-    @patch('download_script.datetime')
-    @patch('download_script.clean_csv_file')
+    @patch.object(download_script, 'download_file')
+    @patch.object(download_script, 'datetime')
+    @patch.object(download_script, 'clean_csv_file')
     def test_main_success(self, mock_clean, mock_datetime, mock_download):
         mock_datetime.datetime.now.return_value.year = 2023
 
@@ -75,7 +76,8 @@ class DownloadScriptTest(unittest.TestCase):
         original_cwd = os.getcwd()
         os.chdir(self.test_dir.name)
         try:
-            download_script.main(None)
+            with patch.object(download_script, '_CURRENT_YEAR', 2023):
+                download_script.main(None)
         finally:
             os.chdir(original_cwd)
 
@@ -83,8 +85,8 @@ class DownloadScriptTest(unittest.TestCase):
         self.assertEqual(mock_download.call_count, 6)
         self.assertEqual(mock_clean.call_count, 6)
 
-    @patch('download_script.download_file', return_value=False)
-    @patch('download_script.datetime')
+    @patch.object(download_script, 'download_file', return_value=False)
+    @patch.object(download_script, 'datetime')
     @patch('absl.logging.warning')
     def test_main_download_failure(self, mock_logging_warning, mock_datetime,
                                    mock_download):
@@ -93,7 +95,8 @@ class DownloadScriptTest(unittest.TestCase):
         original_cwd = os.getcwd()
         os.chdir(self.test_dir.name)
         try:
-            download_script.main(None)
+            with patch.object(download_script, '_CURRENT_YEAR', 2020):
+                download_script.main(None)
         finally:
             os.chdir(original_cwd)
 

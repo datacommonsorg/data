@@ -19,7 +19,10 @@ from unittest import mock
 
 from google.api_core import exceptions
 
-import download
+try:
+    from statvar_imports.nyu_diabetes.tennessee import download
+except ModuleNotFoundError:
+    import download
 
 
 class DownloadTest(unittest.TestCase):
