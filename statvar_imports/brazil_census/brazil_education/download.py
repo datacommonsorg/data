@@ -518,7 +518,7 @@ def download_all_years(
             all_rows = cached_df.to_dict("records") + all_rows
         except Exception:
             pass
-    df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "RedeEnsino", "NivelEnsino"])
+    df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "RedeEnsino", "NivelEnsino"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
 

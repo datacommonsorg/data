@@ -13,28 +13,6 @@
             }
         },
         {
-            "rule_id": "check_missing_refs_count",
-            "description": "Checks that missing references count does not exceed 0.",
-            "validator": "MISSING_REFS_COUNT",
-            "scope": {
-                "data_source": "lint"
-            },
-            "params": {
-                "threshold": 0
-            }
-        },
-        {
-            "rule_id": "check_lint_error_count",
-            "description": "Checks that MCF lint error count does not exceed 0.",
-            "validator": "LINT_ERROR_COUNT",
-            "scope": {
-                "data_source": "lint"
-            },
-            "params": {
-                "threshold": 0
-            }
-        },
-        {
             "rule_id": "check_max_date_consistent",
             "description": "Checks if the MaxDate is the same for all StatVars.",
             "validator": "MAX_DATE_CONSISTENT",

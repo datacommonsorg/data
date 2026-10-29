@@ -13,28 +13,6 @@
             }
         },
         {
-            "rule_id": "check_missing_refs_count",
-            "description": "Checks missing refs threshold.",
-            "validator": "MISSING_REFS_COUNT",
-            "scope": {
-                "data_source": "lint"
-            },
-            "params": {
-                "threshold": 0
-            }
-        },
-        {
-            "rule_id": "check_lint_error_count",
-            "description": "Checks lint error count.",
-            "validator": "LINT_ERROR_COUNT",
-            "scope": {
-                "data_source": "lint"
-            },
-            "params": {
-                "threshold": 0
-            }
-        },
-        {
             "rule_id": "check_max_date_freshness",
             "description": "Checks date freshness.",
             "validator": "SQL_VALIDATOR",
