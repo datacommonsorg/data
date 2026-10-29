@@ -19,7 +19,8 @@ import unittest
 from unittest.mock import Mock, patch
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_PATH)
+sys.path.insert(0, _SCRIPT_PATH)
+sys.modules.pop('download_script', None)
 
 import download_script
 
