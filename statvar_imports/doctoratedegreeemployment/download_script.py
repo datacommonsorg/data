@@ -24,6 +24,7 @@ URL = "https://ncses.nsf.gov/pubs/nsf19304/assets/data/tables/wmpd19-sr-tab09-02
 OUTPUT_FOLDER = "source_files"
 OUTPUT_CSV = os.path.join(OUTPUT_FOLDER, "wmpd19-sr-tab09-026.csv")
 
+
 def download_excel(url):
     """Downloads an Excel file from a given URL into a BytesIO object.
 
@@ -38,6 +39,7 @@ def download_excel(url):
     response.raise_for_status()
     logging.info("Download successful")
     return BytesIO(response.content)
+
 
 def extract_year(file_stream):
     """Extracts a four-digit year from the metadata in the Excel file stream.
@@ -61,6 +63,7 @@ def extract_year(file_stream):
     else:
         raise ValueError("Could not extract year from metadata row.")
 
+
 def process_excel(file_stream, year):
     """Processes the Excel data, cleans it, and adds a 'Year' column.
 
@@ -76,12 +79,8 @@ def process_excel(file_stream, year):
     """
     df = pd.read_excel(file_stream, engine='openpyxl', skiprows=4)
     expected_cols = [
-        "Occupation, sex, race, and ethnicity",
-        "Total",
-        "Tenured",
-        "On tenure track",
-        "Not on tenure track",
-        "Tenure not applicable"
+        "Occupation, sex, race, and ethnicity", "Total", "Tenured",
+        "On tenure track", "Not on tenure track", "Tenure not applicable"
     ]
     df.columns = expected_cols[:len(df.columns)]
     df.insert(1, "Year", year)
@@ -93,10 +92,13 @@ def process_excel(file_stream, year):
                 if idx + 1 < len(df):
                     df.at[idx, col] = None
                     df.at[idx + 1, col] = "Tenure not applicable"
-                    logging.info(f"Moved 'Tenure not applicable' from row {idx} to {idx + 1}")
+                    logging.info(
+                        f"Moved 'Tenure not applicable' from row {idx} to {idx + 1}"
+                    )
                 break
 
     return df
+
 
 def save_to_csv(df, filename):
     """Saves a pandas DataFrame to a CSV file.
@@ -111,6 +113,7 @@ def save_to_csv(df, filename):
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     df.to_csv(filename, index=False)
     logging.info(f"Saved cleaned data to {filename}")
+
 
 def main(argv):
     """Main function to run the data processing pipeline.
@@ -130,6 +133,7 @@ def main(argv):
     except Exception as e:
         logging.fatal(f"A error occurred: {e}", exc_info=True)
         raise RuntimeError(f"Script execution failed due to a error: {e}")
+
 
 if __name__ == "__main__":
     app.run(main)
