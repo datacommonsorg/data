@@ -1628,6 +1628,7 @@ def _consolidate_files(output_path):
 
 
 _BASELINE_YEAR = 2025
+_SESSION = None
 
 
 def _create_retry_session(retries=5, backoff_factor=2):
@@ -1655,6 +1656,14 @@ def _create_retry_session(retries=5, backoff_factor=2):
     return session
 
 
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
 def _is_html_response(content_type, first_bytes=b''):
     """Returns True if the response headers or body indicate an HTML/WAF error page."""
     if 'html' in (content_type or '').lower():
@@ -1668,7 +1677,7 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+@retry(exceptions=ValueError,
        tries=3,
        delay=5,
        backoff=2)
@@ -1684,8 +1693,8 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(exceptions=(requests.exceptions.RequestException, ValueError),
-       tries=5,
+@retry(exceptions=ValueError,
+       tries=3,
        delay=5,
        backoff=2)
 def download_with_retry(session, url, dest_path):
@@ -1728,40 +1737,37 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
 
-    session = _create_retry_session()
-    file_path = os.path.join(_MODULE_DIR, "input_files/2020_2029/county/")
-    try:
-        # This method will generate URLs for the years 2025 to 2029
-        for url in urls_to_scan:
-            url_found = False
-            for future_year in range(2030, _BASELINE_YEAR - 1, -1):
-                url_to_check = url.format(YEAR=future_year)
-                logging.info(f"checking url: {url_to_check}")
-                try:
-                    check_url = _head_with_html_retry(session, url_to_check)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append({
-                            "download_path": url_to_check,
-                            "file_path": file_path
-                        })
-                        logging.info(f"url added to download: {url_to_check}")
-                        url_found = True
-                        break
-                except Exception as e:
-                    logging.warning(
-                        f"URL is not accessible: {url_to_check} ({e})")
-
-            if not url_found:
-                fallback_url = url.format(YEAR=_BASELINE_YEAR)
+    session = _get_session()
+    file_path = "2020_2029/county/"
+    # This method will generate URLs for the years 2025 to 2029
+    for url in urls_to_scan:
+        url_found = False
+        for future_year in range(2030, _BASELINE_YEAR - 1, -1):
+            url_to_check = url.format(YEAR=future_year)
+            logging.info(f"checking url: {url_to_check}")
+            try:
+                check_url = _head_with_html_retry(session, url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append({
+                        "download_path": url_to_check,
+                        "file_path": file_path
+                    })
+                    logging.info(f"url added to download: {url_to_check}")
+                    url_found = True
+                    break
+            except Exception as e:
                 logging.warning(
-                    f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
-                )
-                _FILES_TO_DOWNLOAD.append({
-                    "download_path": fallback_url,
-                    "file_path": file_path
-                })
-    finally:
-        session.close()
+                    f"URL is not accessible: {url_to_check} ({e})")
+
+        if not url_found:
+            fallback_url = url.format(YEAR=_BASELINE_YEAR)
+            logging.warning(
+                f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({
+                "download_path": fallback_url,
+                "file_path": file_path
+            })
 
 
 def download_files():
@@ -1775,7 +1781,7 @@ def download_files():
   """
 
     global _FILES_TO_DOWNLOAD
-    session = _create_retry_session()
+    session = _get_session()
     try:
         for file_to_download in _FILES_TO_DOWNLOAD:
             url = file_to_download['download_path']

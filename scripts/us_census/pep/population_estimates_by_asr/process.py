@@ -45,6 +45,9 @@ def ensure_raw_data_dir():
     return raw_dir
 
 
+_SESSION = None
+
+
 def _create_retry_session(retries=5, backoff_factor=2):
     """Creates a requests.Session with automatic retry on transient HTTP errors."""
     session = requests.Session()
@@ -70,6 +73,14 @@ def _create_retry_session(retries=5, backoff_factor=2):
     return session
 
 
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
 def _is_html_response(content_type, first_bytes=b''):
     """Returns True if the response headers or body indicate an HTML/WAF error page."""
     if 'html' in (content_type or '').lower():
@@ -83,7 +94,7 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(exceptions=(requests.exceptions.RequestException, ValueError),
+@retry(exceptions=ValueError,
        tries=3,
        delay=5,
        backoff=2)
@@ -99,28 +110,26 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(exceptions=(requests.exceptions.RequestException, ValueError),
-       tries=5,
+@retry(exceptions=ValueError,
+       tries=3,
        delay=5,
        backoff=2)
-def _fetch_url_bytes(url: str) -> bytes:
+def _fetch_url_bytes(url: str, session: requests.Session = None) -> bytes:
     """Fetches URL content with retries and WAF/HTML rejection."""
-    session = _create_retry_session()
-    try:
-        with session.get(url, timeout=60) as response:
-            response.raise_for_status()
-            content_type = response.headers.get('Content-Type', '')
-            content = response.content
-            if not content:
-                raise ValueError(f'Downloaded empty response from URL: {url}')
-            if (not url.lower().endswith(('.html', '.htm')) and
-                    _is_html_response(content_type, content[:512])):
-                raise ValueError(
-                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
-                )
-            return content
-    finally:
-        session.close()
+    if session is None:
+        session = _get_session()
+    with session.get(url, timeout=60) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        content = response.content
+        if not content:
+            raise ValueError(f'Downloaded empty response from URL: {url}')
+        if (not url.lower().endswith(('.html', '.htm')) and
+                _is_html_response(content_type, content[:512])):
+            raise ValueError(
+                f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+            )
+        return content
 
 
 def load_url_or_path(url_or_path: str):
@@ -160,34 +169,31 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ]
     # To check the latest available year
-    session = _create_retry_session()
-    try:
-        for url in urls_to_scan:
-            url_found = False
-            for YEAR in range(2030, _BASELINE_YEAR - 1, -1):
-                url_to_check = url.format(YEAR=YEAR)
-                try:
-                    check_url = _head_with_html_retry(session, url_to_check)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                        url_found = True
-                        break
-                    else:
-                        logging.warning(
-                            f"URL is not accessible: {url_to_check}")
-                except Exception as e:
+    session = _get_session()
+    for url in urls_to_scan:
+        url_found = False
+        for YEAR in range(2030, _BASELINE_YEAR - 1, -1):
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = _head_with_html_retry(session, url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append(
+                        {"download_path": url_to_check})
+                    url_found = True
+                    break
+                else:
                     logging.warning(
-                        f"URL is not accessible {url_to_check}: {e}")
-
-            if not url_found:
-                fallback_url = url.format(YEAR=_BASELINE_YEAR)
+                        f"URL is not accessible: {url_to_check}")
+            except Exception as e:
                 logging.warning(
-                    f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
-                )
-                _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
-    finally:
-        session.close()
+                    f"URL is not accessible {url_to_check}: {e}")
+
+        if not url_found:
+            fallback_url = url.format(YEAR=_BASELINE_YEAR)
+            logging.warning(
+                f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
 
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -382,7 +388,7 @@ class USCensusPEPByASR:
         if processed_count == total_files_to_process and total_files_to_process > 0:
             # Drop the unwanted columns and NA.
             logging.info(f"Dropping unwanted columns and NA")
-            final_df = final_df.drop(columns=['Unnamed: 0'])
+            final_df = final_df.drop(columns=['Unnamed: 0'], errors='ignore')
             final_df = final_df.dropna()
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
             final_df['observation'] = final_df['observation'].astype(
