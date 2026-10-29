@@ -80,13 +80,16 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
         )
 
     @patch.object(download, 'probe_url_exists', return_value=False)
-    def test_download_parse_years(self, _):
+    def test_download_parse_years(self, mock_probe):
         """Verify year string parsing logic for single, list, range, and 'all'."""
         self.assertEqual(download.parse_years('2023'), [2023])
         self.assertEqual(download.parse_years('2023, 2024'), [2023, 2024])
         self.assertEqual(download.parse_years('2021-2023'), [2021, 2022, 2023])
+        mock_probe.assert_not_called()
+
         self.assertEqual(download.parse_years('2023-present'),
                          [2023, 2024, 2025])
+        self.assertGreater(mock_probe.call_count, 0)
         all_years = download.parse_years('all')
         self.assertIn(2015, all_years)
         self.assertIn(2024, all_years)

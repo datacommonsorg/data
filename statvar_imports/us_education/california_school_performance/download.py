@@ -230,9 +230,18 @@ def get_all_available_years(data_mode: str = 'all_groups') -> list[int]:
 
 def parse_years(years_str: str, data_mode: str = 'all_groups') -> list[int]:
     """Parses year specification into a sorted list of ints."""
-    all_years = get_all_available_years(data_mode=data_mode)
-    if years_str.strip().lower() in ('all', '*'):
-        return all_years
+    stripped = years_str.strip().lower()
+    if stripped in ('all', '*'):
+        return get_all_available_years(data_mode=data_mode)
+
+    all_years: list[int] | None = None
+
+    def _is_year_available(y: int) -> bool:
+        if y in KNOWN_YEAR_URL_MAP:
+            return True
+        if all_years is not None:
+            return y in all_years
+        return bool(discover_year_urls(y, data_mode=data_mode))
 
     years = set()
     for part in years_str.split(','):
@@ -243,19 +252,20 @@ def parse_years(years_str: str, data_mode: str = 'all_groups') -> list[int]:
                 start_year = int(start_str.strip())
                 end_token = end_str.strip().lower()
                 if end_token in ('', 'present', 'latest', 'now'):
+                    if all_years is None:
+                        all_years = get_all_available_years(data_mode=data_mode)
                     end_year = (max(all_years)
                                 if all_years else datetime.now().year)
                 else:
                     end_year = int(end_token)
                 for y in range(start_year, end_year + 1):
-                    if y in all_years or discover_year_urls(
-                            y, data_mode=data_mode):
+                    if _is_year_available(y):
                         years.add(y)
             except ValueError:
                 logging.warning('Invalid year range format: %s', part)
         elif part.isdigit():
             y = int(part)
-            if y in all_years or discover_year_urls(y, data_mode=data_mode):
+            if _is_year_available(y):
                 years.add(y)
             else:
                 logging.warning('Year %d not available from source.', y)
