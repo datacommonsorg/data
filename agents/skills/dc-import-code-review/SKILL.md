@@ -190,7 +190,7 @@ Use priority to describe remediation urgency, not confidence:
 
 | Priority | Meaning |
 |---|---|
-| P0 | Immediate security issue, broad data corruption, or production emergency |
+| P0 | Immediate security issue, broad data corruption, production emergency, or a failed check that a review workflow marks as required before merge |
 | P1 | Likely incorrect data, import failure, or serious reliability problem |
 | P2 | Realistic validation, testing, maintainability, or operational risk |
 | P3 | Minor, localized improvement |
