@@ -23,22 +23,22 @@ from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
-flags.DEFINE_string(
-        'download_config_path',
-        'gs://unresolved_mcf/india_ndap/ndap/download_config.json',
-        'Input directory where config files downloaded.')
+
+flags.DEFINE_string('download_config_path',
+                    'gs://unresolved_mcf/india_ndap/ndap/download_config.json',
+                    'Input directory where config files downloaded.')
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/')) 
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 from download_util_script import _retry_method
 
 
 def main(_):
     all_data = []
-    _FLAGS = flags.FLAGS 
+    _FLAGS = flags.FLAGS
     download_config_path = _FLAGS.download_config_path
     storage_client = storage.Client()
-    bucket_name =  download_config_path.split('/')[2]
+    bucket_name = download_config_path.split('/')[2]
     bucket = storage_client.bucket(bucket_name)
     blob_name = '/'.join(download_config_path.split('/')[3:])
     blob = bucket.blob(blob_name)
@@ -46,47 +46,59 @@ def main(_):
     try:
         file_config = json.loads(file_contents)
         url = file_config.get('url')
-        input_files = file_config.get('input_files') 
-       
+        input_files = file_config.get('input_files')
+
     except json.JSONDecodeError:
         logging.fatal("Cannot extract url and input files path.")
-    page_num = 1 
-    while True: 
+    page_num = 1
+    while True:
         api_url = f"{url}&pageno={page_num}"
         response = _retry_method(api_url, None, 3, 5, 2)
         response_data = response.json()
-        if response_data and 'Data' in response_data and len(response_data['Data']) > 0:
+        if response_data and 'Data' in response_data and len(
+                response_data['Data']) > 0:
             keys = response_data['Data']
             try:
                 if not isinstance(keys, list):
                     logging.fatal(f"Value for key 'Data' is not a list.")
             except KeyError as e:
-                logging.fatal(f"Missing expected key '{e}' in the API response.")
-                break 
-            
+                logging.fatal(
+                    f"Missing expected key '{e}' in the API response.")
+                break
+
             for i in keys:
                 # Here the reference for D7375_3: Time Period of the Value, D7375_4: Gender, I7375_5: Observation Value
-                a = a=i['Country'],i['StateName'],i['Year'],i['D7375_3'],i['D7375_4'],i['I7375_5']['TotalPopulationWeight']
+                a = a = i['Country'], i['StateName'], i['Year'], i[
+                    'D7375_3'], i['D7375_4'], i['I7375_5'][
+                        'TotalPopulationWeight']
                 all_data.append(a)
-            page_num += 1 
+            page_num += 1
         else:
             logging.error(f"failed to retrieve data from page {page_num}")
             break
     if all_data:
-       
-        df = pd.DataFrame(all_data, columns=['Country', 'State/UT', 'Year', 'Time period', 'Gender', 'Life expectancy in years'])
+
+        df = pd.DataFrame(all_data,
+                          columns=[
+                              'Country', 'State/UT', 'Year', 'Time period',
+                              'Gender', 'Life expectancy in years'
+                          ])
         os.makedirs(input_files, exist_ok=True)
         df["Temp_year"] = df["Time period"].str[5:].astype(int)
-        input_filename = os.path.join(input_files, 'India_LifeExpectancy_input.csv')
-        df["OBS_Year"] = np.where(df["Temp_year"]>90,
-                                  1900+df["Temp_year"],
-                                  2000+df["Temp_year"])
+        input_filename = os.path.join(input_files,
+                                      'India_LifeExpectancy_input.csv')
+        df["OBS_Year"] = np.where(df["Temp_year"] > 90, 1900 + df["Temp_year"],
+                                  2000 + df["Temp_year"])
         df = df.drop(columns="Temp_year")
-        df=df[['Country', 'State/UT', 'Year', 'Time period', 'OBS_Year', 'Gender', 'Life expectancy in years']]
+        df = df[[
+            'Country', 'State/UT', 'Year', 'Time period', 'OBS_Year', 'Gender',
+            'Life expectancy in years'
+        ]]
         df.to_csv(input_filename, index=False)
         logging.info("Data saved to India_LifeExpectancy_input.csv")
     else:
         logging.info("No data was retrieved from the API.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     app.run(main)

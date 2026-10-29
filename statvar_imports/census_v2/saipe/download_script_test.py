@@ -20,6 +20,7 @@ from unittest.mock import patch
 
 import download_script
 
+
 class DownloadScriptTest(unittest.TestCase):
 
     def setUp(self):
@@ -32,22 +33,25 @@ class DownloadScriptTest(unittest.TestCase):
     def test_download_saipe_data(self, mock_download_file):
         start_year = 2020
         end_year = 2021
-        
+
         download_script.download_saipe_data(start_year, end_year, self.temp_dir)
 
         expected_calls = [
             unittest.mock.call(
-                url='https://www2.census.gov/programs-surveys/saipe/datasets/2020/2020-school-districts/ussd20.xls',
-                output_file=os.path.join(self.temp_dir, 'saipe_school_district_2020.xls')
-            ),
+                url=
+                'https://www2.census.gov/programs-surveys/saipe/datasets/2020/2020-school-districts/ussd20.xls',
+                output_file=os.path.join(self.temp_dir,
+                                         'saipe_school_district_2020.xls')),
             unittest.mock.call(
-                url='https://www2.census.gov/programs-surveys/saipe/datasets/2021/2021-school-districts/ussd21.xls',
-                output_file=os.path.join(self.temp_dir, 'saipe_school_district_2021.xls')
-            )
+                url=
+                'https://www2.census.gov/programs-surveys/saipe/datasets/2021/2021-school-districts/ussd21.xls',
+                output_file=os.path.join(self.temp_dir,
+                                         'saipe_school_district_2021.xls'))
         ]
-        
+
         mock_download_file.assert_has_calls(expected_calls, any_order=True)
         self.assertEqual(mock_download_file.call_count, 2)
+
 
 if __name__ == '__main__':
     unittest.main()

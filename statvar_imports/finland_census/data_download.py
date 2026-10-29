@@ -42,7 +42,7 @@ API_URL = 'https://pxdata.stat.fi/PXWeb/api/v1/en/StatFin/vaerak/11ra.px'
 def get_variable_codes() -> tuple[str, str, str]:
     """Fetches table metadata and maps structural concepts to API codes."""
     logging.info('Fetching table metadata from %s...', API_URL)
-    
+
     try:
         metadata = download_util.request_url(
             url=API_URL,
@@ -51,7 +51,8 @@ def get_variable_codes() -> tuple[str, str, str]:
             retry_secs=5,
         )
         if not metadata or not isinstance(metadata, dict):
-            raise RuntimeError('Failed to fetch valid JSON metadata from PxWeb API.')
+            raise RuntimeError(
+                'Failed to fetch valid JSON metadata from PxWeb API.')
 
         area_code = None
         info_code = None
@@ -104,25 +105,38 @@ def download_data(output_path: str) -> None:
     area_code, info_code, year_code = get_variable_codes()
     logging.info(
         'Mapped variable codes -> Area: %s, Info: %s, Year: %s',
-        area_code, info_code, year_code,
+        area_code,
+        info_code,
+        year_code,
     )
 
     query = {
         'query': [
             {
                 'code': area_code,
-                'selection': {'filter': 'item', 'values': ['SSS']}, # 'SSS' selects the 'WHOLE COUNTRY'
+                'selection': {
+                    'filter': 'item',
+                    'values': ['SSS']
+                },  # 'SSS' selects the 'WHOLE COUNTRY'
             },
             {
                 'code': info_code,
-                'selection': {'filter': 'all', 'values': ['*']}, # '*' selects all metrics
+                'selection': {
+                    'filter': 'all',
+                    'values': ['*']
+                },  # '*' selects all metrics
             },
             {
                 'code': year_code,
-                'selection': {'filter': 'all', 'values': ['*']}, # '*' selects all years
+                'selection': {
+                    'filter': 'all',
+                    'values': ['*']
+                },  # '*' selects all years
             },
         ],
-        'response': {'format': 'csv'},
+        'response': {
+            'format': 'csv'
+        },
     }
 
     logging.info('Sending POST query to retrieve CSV data...')
@@ -145,7 +159,8 @@ def download_data(output_path: str) -> None:
         with FileIO(output_path, 'w') as f:
             f.write(formatted_content)
 
-        logging.info('Successfully downloaded data and saved to %s', output_path)
+        logging.info('Successfully downloaded data and saved to %s',
+                     output_path)
     except Exception as e:
         logging.error('Failed to download and save CSV data: %s', e)
         raise
