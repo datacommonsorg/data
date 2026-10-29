@@ -74,7 +74,7 @@ class CommonTestClass:
                 with open(csv_file_path, encoding="UTF-8") as csv_file:
                     actual_csv_data = csv_file.read()
 
-                self.assertEquals(expected_csv_data, actual_csv_data)
+                self.assertEqual(expected_csv_data, actual_csv_data)
 
         def test_mcf(self):
             expected_mcf_file_path = os.path.join(
@@ -90,7 +90,7 @@ class CommonTestClass:
                 with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                     actual_mcf_data = mcf_file.read()
 
-                self.assertEquals(expected_mcf_data, actual_mcf_data)
+                self.assertEqual(expected_mcf_data, actual_mcf_data)
 
         def test_tmcf(self):
             expected_tmcf_file_path = os.path.join(
@@ -107,4 +107,4 @@ class CommonTestClass:
                 with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
                     actual_tmcf_data = tmcf_file.read()
 
-                self.assertEquals(expected_tmcf_data, actual_tmcf_data)
+                self.assertEqual(expected_tmcf_data, actual_tmcf_data)

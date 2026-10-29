@@ -267,7 +267,7 @@ def _national_2000_2010(file_path: str) -> pd.DataFrame:
         for col in float_col.columns.values:
             df[col] = df[col].astype('int64')
             df[col] = df[col].astype("str").str.replace("-1", "")
-        df.rename(columns={'SEX': 'Year'}, inplace=True)
+        df = df.rename(columns={'SEX': 'Year'})
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
@@ -303,21 +303,21 @@ def _national_2010_2020(file_path: str) -> pd.DataFrame:
                 1: 'Count_Person_Male',
                 2: 'Count_Person_Female'
             }})
-        df.rename(columns={
-            'POPESTIMATE2010': '2010',
-            'POPESTIMATE2011': '2011',
-            'POPESTIMATE2012': '2012',
-            'POPESTIMATE2013': '2013',
-            'POPESTIMATE2014': '2014',
-            'POPESTIMATE2015': '2015',
-            'POPESTIMATE2016': '2016',
-            'POPESTIMATE2017': '2017',
-            'POPESTIMATE2018': '2018',
-            'POPESTIMATE2019': '2019',
-            'POPESTIMATE2020': '2020',
-            'SEX': 'Year'
-        },
-                  inplace=True)
+        df = df.rename(
+            columns={
+                'POPESTIMATE2010': '2010',
+                'POPESTIMATE2011': '2011',
+                'POPESTIMATE2012': '2012',
+                'POPESTIMATE2013': '2013',
+                'POPESTIMATE2014': '2014',
+                'POPESTIMATE2015': '2015',
+                'POPESTIMATE2016': '2016',
+                'POPESTIMATE2017': '2017',
+                'POPESTIMATE2018': '2018',
+                'POPESTIMATE2019': '2019',
+                'POPESTIMATE2020': '2020',
+                'SEX': 'Year'
+            })
         # replacing rows with columns
         # making the first row as column name
         # to get all dataframe in one formate
@@ -353,15 +353,18 @@ def _national_latest(file_path: str) -> pd.DataFrame:
                 2: 'Count_Person_Female'
             }})
         column_list = []
+        rename_dict = {}
         for year in range(2021, 2031):
             column_name = f'POPESTIMATE{year}'
             if column_name in df.columns:
-                df.rename(columns={column_name: str(year)}, inplace=True)
+                rename_dict[column_name] = str(year)
                 column_list.append(str(year))
 
         # Ensure columns are renamed correctly before dropping unnecessary ones
         if 'SEX' in df.columns:
-            df.rename(columns={'SEX': 'Year'}, inplace=True)
+            rename_dict['SEX'] = 'Year'
+
+        df = df.rename(columns=rename_dict)
 
         column_list.insert(0, "Year")
         df = df.drop(columns=df.columns.difference(column_list))
@@ -813,19 +816,19 @@ def _county_2000_2010(file_path: str) -> pd.DataFrame:
             'POPESTIMATE2009', 'geo_ID'
         ]))
 
-        df.rename(columns={
-            'POPESTIMATE2000': '2000',
-            'POPESTIMATE2001': '2001',
-            'POPESTIMATE2002': '2002',
-            'POPESTIMATE2003': '2003',
-            'POPESTIMATE2004': '2004',
-            'POPESTIMATE2005': '2005',
-            'POPESTIMATE2006': '2006',
-            'POPESTIMATE2007': '2007',
-            'POPESTIMATE2008': '2008',
-            'POPESTIMATE2009': '2009'
-        },
-                  inplace=True)
+        df = df.rename(
+            columns={
+                'POPESTIMATE2000': '2000',
+                'POPESTIMATE2001': '2001',
+                'POPESTIMATE2002': '2002',
+                'POPESTIMATE2003': '2003',
+                'POPESTIMATE2004': '2004',
+                'POPESTIMATE2005': '2005',
+                'POPESTIMATE2006': '2006',
+                'POPESTIMATE2007': '2007',
+                'POPESTIMATE2008': '2008',
+                'POPESTIMATE2009': '2009'
+            })
         # replacing rows with columns
         # to get all dataframe in one formate
         df = df.groupby(['geo_ID',
@@ -1107,9 +1110,8 @@ class PopulationEstimateBySex:
                 final_df['Observation'], errors='coerce').astype('Int64')
             subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
             # 2. Drop duplicates based on those columns, keeping the first occurrence
-            final_df.drop_duplicates(subset=subset_cols,
-                                     keep='first',
-                                     inplace=True)
+            final_df = final_df.drop_duplicates(subset=subset_cols,
+                                                keep='first')
             final_df.to_csv(self._cleaned_csv_file_path, index=False)
             sv_list = ['Count_Person_Female', 'Count_Person_Male']
             self._generate_mcf(sv_list)
