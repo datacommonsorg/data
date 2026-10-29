@@ -13,6 +13,7 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county_input_file/*.csv --pv_map=aggregate_pvmap.csv --config_file=aggregate_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/county_tier1_aggregate --output_counters=output_files/county_tier1_aggregate_counters.txt"
             ],
             "source_files": [
+                "input_files/*.*",
                 "input_files/county_input_file/*.csv",
                 "output_files/*_counters.txt"
             ],
