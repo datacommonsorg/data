@@ -4,6 +4,7 @@ import sys
 import json
 import types
 import pandas as pd
+import shutil
 import tempfile
 from unittest.mock import patch, mock_open, MagicMock
 
@@ -53,10 +54,7 @@ class TestNDAPScript(unittest.TestCase):
 
     def tearDown(self):
         # Clean up the mock temporary directory after each test
-        if os.path.exists(self.mock_temp_dir):
-            for file in os.listdir(self.mock_temp_dir):
-                os.remove(os.path.join(self.mock_temp_dir, file))
-            os.rmdir(self.mock_temp_dir)
+        shutil.rmtree(self.mock_temp_dir, ignore_errors=True)
 
     def test_load_api_keys_success(self):
         """
