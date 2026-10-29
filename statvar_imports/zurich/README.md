@@ -200,37 +200,17 @@ Import Type: Fully Autorefresh
 Source Data Availability: 1993 onwards
 Release Frequency: P1W (Weekly)
 
-3. Preprocessing Steps (Yes)
-Generate demographic and geographic rollups from the downloaded dataset:
-python3 bev_3903_all/generate_rollups.py
+3. Preprocessing Steps (None)
+No custom rollup scripts are used. Ingestion and aggregation are performed directly by `stat_var_processor.py` using native `multi_value_properties` and `aggregate_duplicate_svobs: sum`.
 
-Rollup Logic & Explanation (`bev_3903_all/generate_rollups.py`):
-- **Why Rollup Aggregation is Required**:
-  - The upstream dataset (`BEV390OD3903.csv`) publishes granular
-    single-year-of-age (`AlterVCd` `0`–`100`) rows grouped into 10-year age
-    brackets (`AlterV10Kurz`) crossed with gender (`SexKurz`) and nativity
-    (`HerkunftLang`) at the Quarter (`QuarLang`) level, with District
-    (`KreisLang`) provided as an attribute column. It does not publish
-    pre-aggregated rows for Districts (`Kreis 1`–`12`), the City total
-    (`Ganze Stadt`), or marginal 2-way, 1-way, and total demographic breakdowns.
-  - Consolidating these breakdowns into a single script unifies the 3 separate
-    legacy imports (`Zurich_Population_By_Age`, `Zurich_Population_By_Origin`,
-    `Zurich_Population_By_Sex`, to be paused later) into one unified import.
-- **Spatial Levels Aggregated**: Computes aggregations across all 3 geographic
-  levels: Quarter (`QuarLang`), District (`KreisLang` mapped to `QuarLang`),
-  and City (`Ganze Stadt`).
-- **Demographic Slices Generated**: For each spatial level and year
-  (`StichtagDatJahr`), computes all 8 combinations:
-  1. Full 3-way: `AlterV10Kurz` x `SexKurz` x `HerkunftLang`
-  2. 2-way marginals: `AlterV10Kurz` x `SexKurz`, `AlterV10Kurz` x
-     `HerkunftLang`, `SexKurz` x `HerkunftLang`
-  3. 1-way marginals: `AlterV10Kurz` only, `SexKurz` only, `HerkunftLang` only
-  4. Total population (`Count_Person` with all demographic dimensions empty)
-- **Unknown Region Exclusion & Numeric Coercion**: Filters out null/empty labels
-  and unknown region rows (`QuarSort`/`QuarCd`/`KreisCd` `990` or `999`, or
-  `'Unbekannt'`), coerces `AnzBestWir` to numeric, uses `sum(min_count=1)` and
-  `.dropna()` so suppressed (`'K'`) slices are dropped rather than emitted as
-  false `0` counts, and casts valid sums back to integers.
+- **Automated `measurementMethod: dcs:DataCommonsAggregate`**:
+  - `stat_var_processor.py` detects when multiple rows aggregate into the same place-date-variable bucket and automatically assigns `measurementMethod: dcs:DataCommonsAggregate`. Leaf/unaggregated observations remain unflagged.
+- **On-Demand Dynamic StatVar Generation**:
+  - `stat_var_processor.py` dynamically resolves constraint properties (`age`, `gender`, `nativity`) and outputs canonical `StatisticalVariable` schema definitions into `output/`.
+- **Spatial Levels Aggregated**:
+  - Multi-value `observationAbout` maps each row simultaneously to Quarter (`QuarLang`), District (`KreisLang`), and City (`wikidataId/Q72`), aggregating sums automatically.
+- **Unknown Region Filtering**:
+  - Unknown quarters (`QuarSort:999`, `QuarCd:999`, `QuarLang:Unbekannt`) and unknown districts (`KreisCd:990`, `KreisLang:Kreis Unbekannt`) are excluded declaratively via `#IgnoreRow,True` in `zurich_places_pvmap.csv`.
 
 4. Autorefresh Type
 
@@ -242,13 +222,12 @@ Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
 python3 ../../util/download_util_script.py \
   --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903/download/BEV390OD3903.csv \
   --output_folder=bev_3903_all/input_files && \
-python3 bev_3903_all/generate_rollups.py && \
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --input_data=bev_3903_all/input_files/BEV390OD3903_rollups.csv \
+  --input_data=bev_3903_all/input_files/BEV390OD3903.csv \
   --pv_map=bev_3903_all/bev_3903_wiki_pvmap.csv,zurich_places_pvmap.csv \
   --config_file=bev_3903_all/bev_3903_wiki_metadata.csv \
-  --output_columns=observationAbout,observationDate,value,variableMeasured \
+  --output_columns=observationAbout,observationDate,variableMeasured,value,measurementMethod \
   --output_path=bev_3903_all/output/zurich_population_bev_3903_wiki \
   --output_counters=bev_3903_all/counters/zurich_population_bev_3903_wiki_counters.csv
 ```
@@ -271,45 +250,17 @@ Import Type: Fully Autorefresh
 Source Data Availability: 1998 onwards
 Release Frequency: P1W (Weekly)
 
-3. Preprocessing Steps (Yes)
-Generate demographic and geographic rollups from the downloaded dataset:
-python3 bev_4031_all/generate_rollups.py
+3. Preprocessing Steps (None)
+No custom rollup scripts are used. Ingestion and aggregation are performed directly by `stat_var_processor.py` using native `multi_value_properties` and `aggregate_duplicate_svobs: sum`.
 
-Rollup Logic & Explanation (`bev_4031_all/generate_rollups.py`):
-- **Why Source Migration & Consolidation into 2 Imports Was Performed**:
-  - Previously, `BEV390OD3903.csv` and `BEV403OD4031.csv` from Statistics Zurich
-    (`data.stadt-zuerich.ch`) were ingested via 6 separate legacy split imports
-    (`Zurich_Population_By_Age`, `Zurich_Population_By_Origin`,
-    `Zurich_Population_By_Sex`, and `Zurich_Population_Number_Of_Birth`,
-    `Zurich_Population_Number_Of_Birth_By_Origin`,
-    `Zurich_Population_Number_Of_Birth_By_Sex`). Each legacy import downloaded
-    the same source CSV independently and only emitted 1-dimensional
-    Quarter-level slices, omitting multi-dimensional cross-tabulations and
-    District/City geographic rollups.
-  - Consolidating into `Zurich_Population_By_Age_Sex_Origin` (`108` StatVars)
-    and `Zurich_Population_Number_Of_Birth_By_Sex_Origin` (`9` StatVars) via the
-    shared rollup helper (`rollup_util.py`) preserves 100% of the observations
-    from all 6 legacy split imports (`0` deleted observations verified via
-    `ImportDiffer`) while adding District (`Kreis 1`–`12`), City (`Ganze
-    Stadt`), and 2-way/3-way demographic cross-tabulations in a single unified
-    pipeline per dataset (the 6 legacy split imports will be paused later after
-    cutover). Note: for OD4031, `ImportDiffer` against the 3 legacy birth
-    imports shows `0` deleted observations, `6,016` added observations, and
-    `390` modified observations reflecting upstream historical birth count
-    revisions in `BEV403OD4031.csv`.
-- **Temporal & Spatial Aggregation**: Aggregates daily births into annual totals
-  (`GueltigAbDatJahr`) across all 3 geographic levels: Quarter (`QuarLang`),
-  District (`KreisLang` mapped to `QuarLang`), and City (`Ganze Stadt`).
-- **Demographic Slices Generated**: For each spatial level and year, computes
-  all 4 combinations:
-  1. Full 2-way: `SexLang` x `HerkunftLang`
-  2. 1-way marginals: `SexLang` only, `HerkunftLang` only
-  3. Total births (`Count_BirthEvent` with both demographic dimensions empty)
-- **Unknown Region Exclusion & Numeric Coercion**: Filters out null/empty labels
-  and unknown region rows (`QuarCd`/`KreisCd` `990` or `999`, or `'Unbekannt'`),
-  coerces `AnzGebuWir` to numeric, uses `sum(min_count=1)` and `.dropna()` so
-  suppressed (`'K'`) slices are dropped rather than emitted as false `0` counts,
-  and casts valid sums back to integers.
+- **Automated `measurementMethod: dcs:DataCommonsAggregate`**:
+  - `stat_var_processor.py` detects when multiple rows aggregate into the same place-date-variable bucket and automatically assigns `measurementMethod: dcs:DataCommonsAggregate`. Leaf/unaggregated observations remain unflagged.
+- **On-Demand Dynamic StatVar Generation**:
+  - Canonical `Count_BirthEvent_*` StatVars are dynamically synthesized on demand by `stat_var_processor.py`.
+- **Temporal & Spatial Aggregation**:
+  - Daily births are aggregated into annual totals (`GueltigAbDatJahr`) across all 3 geographic levels: Quarter (`QuarLang`), District (`KreisLang`), and City (`wikidataId/Q72`).
+- **Unknown Region Filtering**:
+  - Unknown quarters and districts are excluded declaratively via `#IgnoreRow,True` in `zurich_places_pvmap.csv`.
 
 4. Autorefresh Type
 
@@ -321,13 +272,12 @@ Fully Autorefresh: "0 20 * * 5" (Runs weekly on Friday at 20:00 UTC).
 python3 ../../util/download_util_script.py \
   --download_url=https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031/download/BEV403OD4031.csv \
   --output_folder=bev_4031_all/input_files && \
-python3 bev_4031_all/generate_rollups.py && \
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --input_data=bev_4031_all/input_files/BEV403OD4031_rollups.csv \
+  --input_data=bev_4031_all/input_files/BEV403OD4031.csv \
   --pv_map=bev_4031_all/bev_4031_wiki_pvmap.csv,zurich_places_pvmap.csv \
   --config_file=bev_4031_all/bev_4031_wiki_metadata.csv \
-  --output_columns=observationAbout,observationDate,value,variableMeasured \
+  --output_columns=observationAbout,observationDate,variableMeasured,value,measurementMethod \
   --output_path=bev_4031_all/output/zurich_bev_4031_wiki \
   --output_counters=bev_4031_all/counters/zurich_bev_4031_wiki_counters.csv
 ```

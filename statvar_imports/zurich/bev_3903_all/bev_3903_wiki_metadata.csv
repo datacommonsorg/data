@@ -1,16 +1,8 @@
 parameter,value
 url,https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903
-description,
+description,"Population by statistical city district, origin, gender, year of age, 5-year age groups and year."
 place_type,City
-#places_within,
-start_date,
-end_date,
-release_frequency,
-process,
-comments,
-output_columns,"observationAbout,observationDate,value,variableMeasured"
+output_columns,"observationAbout,observationDate,variableMeasured,value,measurementMethod"
 header_rows,1
-#aggregate_duplicate_svobs,sum
-reconcile_nodes,False
-generate_schema_mcf,False
-generate_statvar_mcf,False
+multi_value_properties,"gender,nativity,age,observationAbout"
+aggregate_duplicate_svobs,sum
