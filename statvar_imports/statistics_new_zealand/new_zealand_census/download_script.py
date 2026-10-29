@@ -28,6 +28,7 @@ def download_with_retry_method(url, headers=None):
     response.raise_for_status()
     return response
 
+
 def download_files(urls, excel_file, output_path):
     """Downloads zip files from URLs, unzips them, and copies an Excel file to the output path.
 
@@ -37,7 +38,7 @@ def download_files(urls, excel_file, output_path):
         output_path: The directory where all files will be saved.
     """
     try:
-        os.makedirs(output_path, exist_ok=True)  
+        os.makedirs(output_path, exist_ok=True)
 
         for url in urls:
             try:
@@ -46,22 +47,27 @@ def download_files(urls, excel_file, output_path):
                 with zipfile.ZipFile(io.BytesIO(response.content)) as zip_file:
                     for file_info in zip_file.infolist():
                         file_name = os.path.basename(file_info.filename)
-                        if not file_name or ("components-change" in file_name or "population-by-broad-age-group" in file_name):
+                        if not file_name or ("components-change" in file_name or
+                                             "population-by-broad-age-group"
+                                             in file_name):
                             continue
                         file_path = os.path.join(output_path, file_name)
                         os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                        with zip_file.open(file_info) as source, open(file_path, "wb") as target:
+                        with zip_file.open(file_info) as source, open(
+                                file_path, "wb") as target:
                             target.write(source.read())
 
                 logging.info(f"Zip file from {url} downloaded and unzipped.")
 
             except Exception as e:
-                logging.fatal(f"An unexpected error occurred processing {url}: {e}")
+                logging.fatal(
+                    f"An unexpected error occurred processing {url}: {e}")
 
         try:
             df = pd.read_excel(excel_file)
             processed_df = process_excel_data(df)
-            new_excel_path = os.path.join(output_path, os.path.basename(excel_file))
+            new_excel_path = os.path.join(output_path,
+                                          os.path.basename(excel_file))
             if processed_df is not None:
                 processed_df.to_excel(new_excel_path, index=False)
             logging.info(f"Excel file copied to: {new_excel_path}")
@@ -71,7 +77,7 @@ def download_files(urls, excel_file, output_path):
         logging.info("File processing complete.")
 
     except Exception as e:
-        logging.fatal(f"A general error occurred: {e}")  
+        logging.fatal(f"A general error occurred: {e}")
 
 
 def process_excel_data(df):
@@ -90,7 +96,8 @@ def process_excel_data(df):
 
     for index, row in df.iterrows():
         row_values = row.tolist()
-        if pd.isna(row_values[1]) and pd.isna(row_values[2]) and pd.isna(row_values[3]) and not pd.isna(row_values[0]):
+        if pd.isna(row_values[1]) and pd.isna(row_values[2]) and pd.isna(
+                row_values[3]) and not pd.isna(row_values[0]):
             current_prefix = row_values[0]
             result.append(row_values)
         elif current_prefix is not None:
@@ -101,8 +108,10 @@ def process_excel_data(df):
 
     return pd.DataFrame(result)
 
+
 def main(argv):
     download_files(config.urls, config.excel_file, _INPUT_FILE_PATH)
 
-if __name__ == "__main__":  
+
+if __name__ == "__main__":
     app.run(main)

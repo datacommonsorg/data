@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 This script downloads and processes the Civil Rights Data Collection (CRDC) data.
 
@@ -83,16 +82,13 @@ def add_year_column(filepath: str, year: int):
             f"Added 'year' column with value {year} to {os.path.basename(filepath)}"
         )
     except Exception as e:
-        logging.warning(
-            f"Could not add year column to {filepath}: {e}")
-
-
-
+        logging.warning(f"Could not add year column to {filepath}: {e}")
 
 
 def main(_):
     os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
-    logging.info(f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
+    logging.info(
+        f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
 
     # The 2018-19 CRDC data was not collected due to the COVID-19 pandemic.
     # The 2020-21 CRDC data was delayed and released later.
@@ -162,9 +158,6 @@ def main(_):
                     # Add the year column
                     end_year = int(f"20{year_range.split('-')[1]}")
                     add_year_column(new_filepath, end_year)
-
-
-
 
         # Clean up the temporary directory for the year
         logging.info(f"Removing temporary directory: {temp_output_dir}")

@@ -28,16 +28,20 @@ Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 sys.path.append(os.path.join(script_dir, '../../../util'))
 
 from download_util_script import download_file
-    
+
+
 #Function to extract and process the CSV file from ZIP
 def extract_and_process():
     zip_path = os.path.join(INPUT_DIR, "CAGDP9.zip")
     logging.info("Extracting ZIP file...")
-    
+
     try:
         with zipfile.ZipFile(zip_path, "r") as zip_ref:
             zip_ref.extractall(INPUT_DIR)
-            input_file = [filename for filename in zip_ref.namelist() if filename.endswith(".csv") and "ALL_AREAS" in filename]
+            input_file = [
+                filename for filename in zip_ref.namelist()
+                if filename.endswith(".csv") and "ALL_AREAS" in filename
+            ]
             input_file_path = os.path.join(INPUT_DIR, input_file[0])
             for filename in os.listdir(INPUT_DIR):
                 file_path = os.path.join(INPUT_DIR, filename)
@@ -47,21 +51,22 @@ def extract_and_process():
                 if os.path.isfile(file_path):
                     os.remove(file_path)
                 elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)             
+                    shutil.rmtree(file_path)
     except Exception as e:
         logging.fatal(f"Failed to extract the file: {e}")
+
 
 def main(argv):
     download_file(url=BEA_ZIP_URL,
                   output_folder=INPUT_DIR,
                   unzip=False,
-                  headers= None,
-                  tries= 3,
-                  delay= 5,
-                  backoff= 2)
-    
+                  headers=None,
+                  tries=3,
+                  delay=5,
+                  backoff=2)
+
     extract_and_process()
 
-if __name__ == "__main__":  
-    app.run(main)
 
+if __name__ == "__main__":
+    app.run(main)
