@@ -21,7 +21,6 @@ import os
 import re
 import config
 import google.auth
-from google.auth import jwt
 from google.auth.transport.requests import Request
 from google.cloud import storage
 from google.cloud.workflows import executions_v1
@@ -289,34 +288,6 @@ def get_next_refresh(project_id: str, location: str, import_name: str) -> str | 
     except Exception as e:
         logging.warning(f"Error connecting to Cloud Scheduler for {import_name}: {e}")
         return None
-
-
-def get_caller_identity(request):
-    """Extracts caller email from Authorization header (JWT)."""
-    auth_header = request.headers.get('Authorization')
-    if auth_header:
-        parts = auth_header.split()
-        if len(parts) == 2 and parts[0].lower() == 'bearer':
-            token = parts[1]
-            unverified_claims = {}
-            try:
-                unverified_claims = jwt.decode(token, verify=False)
-                id_info = id_token.verify_oauth2_token(token,
-                                                       Request())
-                return id_info.get('email', 'unknown_email')
-            except Exception as e:
-                if unverified_claims:
-                    logging.warning(
-                        f"Could not decode unverified token for debugging: {e}")
-                    email = unverified_claims.get('email', 'unknown_email')
-                    return f"{email}"
-                return 'decode_error'
-        else:
-            logging.warning(
-                f"Invalid Authorization header format. Parts: {len(parts)}")
-    else:
-        logging.warning("No Authorization header received.")
-    return 'no_auth_header'
 
 
 def get_import_params(request: dict) -> dict:

@@ -17,14 +17,15 @@ import os
 import sys
 import tempfile
 import unittest
-
-from .process import set_column_map
-from .data_loader import process_subject_tables
+import pandas as pd
 
 # Allows the unittest to access table directories in relative path. Also used to
 # import modules for generating cleaned CSV, MCF and Column Map
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-# sys.path.append(os.path.join(_SCRIPT_PATH, '..'))
+sys.path.append(os.path.join(_SCRIPT_PATH, '..'))
+
+from s2409.process import set_column_map
+from s2409.data_loader import process_subject_tables
 
 table_dir_path = os.path.join(_SCRIPT_PATH, '.')
 
@@ -121,3 +122,41 @@ class TestSubjectTableS2409(unittest.TestCase):
                 test_csv, expected_csv = _read_files(test_csv_path,
                                                      paths['csv'])
                 self.assertEqual(test_csv, expected_csv)
+
+    def test_quantity_cleaning(self):
+        paths = _get_paths(table_dir_path)
+        col_name = ('Median earnings (dollars)!!Estimate!!Full-time, year-round'
+                    ' civilian employed population 16 years and over')
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_input_path = os.path.join(
+                tmp_dir, 'ACSST5Y2010.S2409_data_with_overlays_test.csv')
+            rows = [
+                ['GEO_ID', 'NAME', 'S2409_C04_001E'],
+                ['id', 'Geographic Area Name', col_name],
+                ['0400000US01', 'Alabama', '2,500-'],
+                ['0400000US02', 'Alaska', '250,000+'],
+                ['0400000US04', 'Arizona', '45,678'],
+                ['0400000US05', 'Arkansas', '1.25e-02'],
+                ['0400000US06', 'California', '-'],
+                ['0400000US08', 'Colorado', 'N'],
+                ['0400000US09', 'Connecticut', 'unparseable_val'],
+                ['9500000US0199999', 'Remainder of Alabama', '30,000'],
+            ]
+            pd.DataFrame(rows).to_csv(csv_input_path, header=False, index=False)
+
+            process_subject_tables(table_prefix='clean_test',
+                                   input_path=csv_input_path,
+                                   output_dir=tmp_dir,
+                                   column_map_path=paths['cmap'],
+                                   spec_path=paths['spec'],
+                                   debug=False,
+                                   delimiter='!!',
+                                   has_percent=False)
+
+            cleaned_df = pd.read_csv(
+                os.path.join(tmp_dir, 'clean_test_cleaned.csv'))
+            self.assertEqual(cleaned_df['Place'].tolist(),
+                             ['geoId/01', 'geoId/02', 'geoId/04', 'geoId/05'])
+            self.assertEqual(cleaned_df['Quantity'].tolist(),
+                             [2500.0, 250000.0, 45678.0, 0.0125])
