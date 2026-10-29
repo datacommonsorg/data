@@ -83,6 +83,10 @@ Validation is configured in `validation_config.json`:
    StatVars.
 3. `check_deleted_records_percent` (`DELETED_RECORDS_PERCENT`): Enforces that deleted observations
    do not exceed `0.1%`.
+4. `check_goldens_summary_report` (`GOLDENS_CHECK`): Validates `summary_report.csv` against
+   `golden_data/golden_summary_report.csv` (108 StatVars).
+5. `check_goldens_observations` (`GOLDENS_CHECK`): Validates `StatisticsPoland_output.csv` against
+   `golden_data/golden_observations.csv` (17 Polish geographic entities).
 
 ## Troubleshooting & Operations
 - **HTTP 429 / Rate Limiting:** The script uses `requests.Session` with `urllib3.util.Retry`
@@ -91,4 +95,3 @@ Validation is configured in `validation_config.json`:
   via `export BDL_API_KEY="..."`.
 - **GCS Offline Access:** If executing in an environment without GCS access, the download script
   automatically falls back to `test/StatisticsPoland_input.csv` for column structure.
-

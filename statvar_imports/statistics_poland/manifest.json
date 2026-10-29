@@ -14,6 +14,7 @@
             "source_files": [
                 "source_files/*.csv",
                 "counters/*.csv",
+                "golden_data/*.csv",
                 "validation_config.json"
             ],
             "import_inputs": [
