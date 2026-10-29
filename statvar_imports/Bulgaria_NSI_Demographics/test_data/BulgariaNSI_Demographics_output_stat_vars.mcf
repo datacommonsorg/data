@@ -1,122 +1,106 @@
-# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/Bulgaria_NSI_Demographics/test_data/BulgariaNSI_Demographics_input.csv --pv_map=statvar_imports/Bulgaria_NSI_Demographics/BulgariaNSI_Demographics_pvmap.csv --output_path=statvar_imports/Bulgaria_NSI_Demographics/test_data/BulgariaNSI_Demographics_output --config_file=statvar_imports/Bulgaria_NSI_Demographics/BulgariaNSI_Demographics_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-28 07:00:49.483260
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/Bulgaria_NSI_Demographics/test_data/BulgariaNSI_Demographics_input.csv --pv_map=statvar_imports/Bulgaria_NSI_Demographics/BulgariaNSI_Demographics_pvmap.csv --config_file=statvar_imports/Bulgaria_NSI_Demographics/BulgariaNSI_Demographics_metadata.csv --output_path=statvar_imports/Bulgaria_NSI_Demographics/test_data/BulgariaNSI_Demographics_output --places_resolved_csv=statvar_imports/Bulgaria_NSI_Demographics/place_resolution.csv" on 2026-10-29 13:55:28.913969
 
-Node: dcid:Count_Person_100OrMoreYears_Female_Rural
+Node: dcid:Count_Person_0Years_Female_Rural
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [100 - Years]
+age: [0 Years]
 gender: dcid:Female
 placeOfResidenceClassification: dcid:Rural
 
-Node: dcid:Count_Person_100OrMoreYears_Female_Urban
+Node: dcid:Count_Person_0Years_Female_Urban
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [100 - Years]
+age: [0 Years]
 gender: dcid:Female
 placeOfResidenceClassification: dcid:Urban
 
-Node: dcid:Count_Person_100OrMoreYears_Male_Rural
+Node: dcid:Count_Person_0Years_Male_Rural
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [100 - Years]
+age: [0 Years]
 gender: dcid:Male
 placeOfResidenceClassification: dcid:Rural
 
-Node: dcid:Count_Person_100OrMoreYears_Male_Urban
+Node: dcid:Count_Person_0Years_Male_Urban
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [100 - Years]
+age: [0 Years]
 gender: dcid:Male
 placeOfResidenceClassification: dcid:Urban
 
-Node: dcid:Count_Person_100OrMoreYears_Rural
+Node: dcid:Count_Person_5To9Years_Female_Rural
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [100 - Years]
-placeOfResidenceClassification: dcid:Rural
-
-Node: dcid:Count_Person_100OrMoreYears_Urban
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [100 - Years]
-placeOfResidenceClassification: dcid:Urban
-
-Node: dcid:Count_Person_1To4Years_Female_Rural
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [1 4 Years]
+age: [5 9 Years]
 gender: dcid:Female
 placeOfResidenceClassification: dcid:Rural
 
-Node: dcid:Count_Person_1To4Years_Female_Urban
+Node: dcid:Count_Person_5To9Years_Female_Urban
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [1 4 Years]
+age: [5 9 Years]
 gender: dcid:Female
 placeOfResidenceClassification: dcid:Urban
 
-Node: dcid:Count_Person_1To4Years_Male_Rural
+Node: dcid:Count_Person_5To9Years_Male_Rural
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [1 4 Years]
+age: [5 9 Years]
 gender: dcid:Male
 placeOfResidenceClassification: dcid:Rural
 
-Node: dcid:Count_Person_1To4Years_Male_Urban
+Node: dcid:Count_Person_5To9Years_Male_Urban
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [1 4 Years]
+age: [5 9 Years]
 gender: dcid:Male
 placeOfResidenceClassification: dcid:Urban
 
-Node: dcid:Count_Person_1To4Years_Rural
+Node: dcid:Count_Person_Female_Rural
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [1 4 Years]
+gender: dcid:Female
 placeOfResidenceClassification: dcid:Rural
 
-Node: dcid:Count_Person_1To4Years_Urban
+Node: dcid:Count_Person_Female_Urban
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-age: [1 4 Years]
+gender: dcid:Female
 placeOfResidenceClassification: dcid:Urban
 
-Node: dcid:Count_Person_Rural
+Node: dcid:Count_Person_Male_Rural
 typeOf: dcid:StatisticalVariable
-name: "Population Living in Rural Areas"
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
+gender: dcid:Male
 placeOfResidenceClassification: dcid:Rural
 
-Node: dcid:Count_Person_Urban
+Node: dcid:Count_Person_Male_Urban
 typeOf: dcid:StatisticalVariable
-name: "Population Living in Urban Areas"
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
+gender: dcid:Male
 placeOfResidenceClassification: dcid:Urban
 

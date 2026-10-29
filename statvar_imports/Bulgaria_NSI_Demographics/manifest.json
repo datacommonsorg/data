@@ -8,7 +8,6 @@
             ],
             "provenance_url": "https://www.nsi.bg/en/statistical-data/206/649",
             "provenance_description": "Bulgaria Population Census and Statistics from National Statistical Institute (Automated: NSI portal monitoring with automated Cloud Batch/Run extraction, transformation, and validation).",
-            "import_type": "Automated",
             "scripts": [
                 "download_current_year_data.py --allow-staged-fallback",
                 "download.sh",
