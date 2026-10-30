@@ -12,7 +12,7 @@ This directory contains the automated Data Commons import pipeline for **Sweden 
 | **REST API Endpoint** | `https://api.scb.se/OV0104/v1/doris/sv/ssd/START/UF/UF0506/UF0506B/Utbildning` |
 | **Geographic Coverage** | 321 Sub-national Places in Sweden: `3` NUTS1 (`nuts/SE1`–`SE3`), `8` NUTS2 (`nuts/SE11`–`SE33`), `21` NUTS3 Counties (`nuts/SE110`–`SE332`), and `289` Municipalities (`wikidataId/Q*`) |
 | **Temporal Coverage** | `1985–2025` (Annual, dynamically discovers new years `2026+` via SCB API) |
-| **Release Frequency** | Annual (published in April each year; scheduled cron `0 05 15 5 *`) |
+| **Release Frequency** | Annual (published in April each year; scheduled weekly cron `0 05 * * 1`) |
 | **Total Unique StatVars** | **126** unique `StatisticalVariable` DCIDs (`6` Total + `12` Gender + `36` Age + `72` Age×Gender) |
 | **Total SVObs (`1985–2025`)** | **805,158** (`746,240` historical `1985–2022` + `58,918` new `2023–2025`) |
 
