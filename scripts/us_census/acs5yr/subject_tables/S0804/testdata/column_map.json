@@ -1,0 +1,608 @@
+{
+    "2024": {
+        "Estimate!!Total!!Workers 16 years and over": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!16 to 19 years": {
+            "Node": "dcid:Count_Person_16To19Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 19 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!16 to 19 years": {
+            "Node": "dcid:MarginOfError_Count_Person_16To19Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 19 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!20 to 24 years": {
+            "Node": "dcid:Count_Person_20To24Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[20 24 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!20 to 24 years": {
+            "Node": "dcid:MarginOfError_Count_Person_20To24Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[20 24 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!25 to 44 years": {
+            "Node": "dcid:Count_Person_25To44Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 44 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!25 to 44 years": {
+            "Node": "dcid:MarginOfError_Count_Person_25To44Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 44 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!45 to 54 years": {
+            "Node": "dcid:Count_Person_45To54Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[45 54 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!45 to 54 years": {
+            "Node": "dcid:MarginOfError_Count_Person_45To54Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[45 54 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!55 to 59 years": {
+            "Node": "dcid:Count_Person_55To59Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[55 59 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!55 to 59 years": {
+            "Node": "dcid:MarginOfError_Count_Person_55To59Years_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[55 59 Years]",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!60 years and over": {
+            "Node": "dcid:Count_Person_Years60Onwards_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years60Onwards",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!60 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_Years60Onwards_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years60Onwards",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!AGE!!Median age (years)": {
+            "Node": "dcid:Median_Age_Person_Years16Onwards_Employed",
+            "statType": "dcs:medianValue",
+            "measuredProperty": "dcs:age",
+            "unit": "Years",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!AGE!!Median age (years)": {
+            "Node": "dcid:MarginOfError_Age_Person_Years16Onwards_Employed",
+            "statType": "dcs:marginOfError",
+            "measuredProperty": "dcs:age",
+            "unit": "Years",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!SEX!!Male": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!SEX!!Male": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!SEX!!Female": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!SEX!!Female": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_White",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:White",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_White",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:White",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_AmericanIndianOrAlaskaNative",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:AmericanIndianOrAlaskaNative",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_AmericanIndianOrAlaskaNative",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:AmericanIndianOrAlaskaNative",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_Asian",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:Asian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Asian",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:Asian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_NativeHawaiianAndOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:NativeHawaiianAndOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_NativeHawaiianAndOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:NativeHawaiianAndOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "ethnicity": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "ethnicity": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino origin": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "ethnicity": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino origin": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "ethnicity": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Native": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_Native",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:Native",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Native": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Native",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:Native",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Foreign born": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_ForeignBorn",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:ForeignBorn",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Foreign born": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_ForeignBorn",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:ForeignBorn",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Foreign born!!Naturalized U.S. citizen": {
+            "Node": "dcid:Count_Person_Years16Onwards_USCitizenByNaturalization_Employed_ForeignBorn",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:ForeignBorn",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Foreign born!!Naturalized U.S. citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_USCitizenByNaturalization_Employed_ForeignBorn",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:ForeignBorn",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Foreign born!!Not a U.S. citizen": {
+            "Node": "dcid:Count_Person_Years16Onwards_NotAUSCitizen_Employed_ForeignBorn",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:ForeignBorn",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!NATIVITY AND CITIZENSHIP STATUS!!Foreign born!!Not a U.S. citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_NotAUSCitizen_Employed_ForeignBorn",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "nativity": "dcs:ForeignBorn",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Speak language other than English": {
+            "Node": "dcid:Count_Person_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Speak language other than English": {
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Speak language other than English!!Speak English \"very well\"": {
+            "Node": "dcid:Count_Person_SpeakEnglishVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "abilityToSpeakEnglish": "dcs:SpeakEnglishVeryWell",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Speak language other than English!!Speak English \"very well\"": {
+            "Node": "dcid:MarginOfError_Count_Person_SpeakEnglishVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "abilityToSpeakEnglish": "dcs:SpeakEnglishVeryWell",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Workers 16 years and over!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Speak language other than English!!Speak English less than \"very well\"": {
+            "Node": "dcid:Count_Person_SpeakEnglishLessThanVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "abilityToSpeakEnglish": "dcs:SpeakEnglishLessThanVeryWell",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Workers 16 years and over!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Speak language other than English!!Speak English less than \"very well\"": {
+            "Node": "dcid:MarginOfError_Count_Person_SpeakEnglishLessThanVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "dcs:Years16Onwards",
+            "employmentStatus": "dcs:Employed",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "abilityToSpeakEnglish": "dcs:SpeakEnglishLessThanVeryWell",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS) FOR WORKERS!!Workers 16 years and over with earnings": {
+            "Node": "dcid:Annual_Count_Person_Years16Onwards_Employed_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "measurementQualifier": "dcs:Annual",
+            "age": "dcs:Years16Onwards",
+            "incomeStatus": "dcs:WithEarnings",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS) FOR WORKERS!!Workers 16 years and over with earnings": {
+            "Node": "dcid:Annual_MarginOfError_Count_Person_Years16Onwards_Employed_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "measurementQualifier": "dcs:Annual",
+            "age": "dcs:Years16Onwards",
+            "incomeStatus": "dcs:WithEarnings",
+            "employmentStatus": "dcs:Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS) FOR WORKERS!!Workers 16 years and over with earnings!!$1 to $9,999 or loss": {
+            "Node": "dcid:Annual_Count_Person_Years16Onwards_Employed_IncomeOf9999OrLessUSDollar_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "measurementQualifier": "dcs:Annual",
+            "age": "dcs:Years16Onwards",
+            "incomeStatus": "dcs:WithEarnings",
+            "employmentStatus": "dcs:Employed",
+            "income": "[- 9999 USDollar]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS) FOR WORKERS!!Workers 16 years and over with earnings!!$1 to $9,999 or loss": {
+            "Node": "dcid:Annual_MarginOfError_Count_Person_Years16Onwards_Employed_IncomeOf9999OrLessUSDollar_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "measurementQualifier": "dcs:Annual",
+            "age": "dcs:Years16Onwards",
+            "incomeStatus": "dcs:WithEarnings",
+            "employmentStatus": "dcs:Employed",
+            "income": "[- 9999 USDollar]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS) FOR WORKERS!!Workers 16 years and over with earnings!!$10,000 to $14,999": {
+            "Node": "dcid:Annual_Count_Person_Years16Onwards_Employed_IncomeOf10000To14999USDollar_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "measurementQualifier": "dcs:Annual",
+            "age": "dcs:Years16Onwards",
+            "incomeStatus": "dcs:WithEarnings",
+            "employmentStatus": "dcs:Employed",
+            "income": "[10000 14999 USDollar]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!EARNINGS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS) FOR WORKERS!!Workers 16 years and over with earnings!!$10,000 to $14,999": {
+            "Node": "dcid:Annual_MarginOfError_Count_Person_Years16Onwards_Employed_IncomeOf10000To14999USDollar_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "measurementQualifier": "dcs:Annual",
+            "age": "dcs:Years16Onwards",
+            "incomeStatus": "dcs:WithEarnings",
+            "employmentStatus": "dcs:Employed",
+            "income": "[10000 14999 USDollar]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}

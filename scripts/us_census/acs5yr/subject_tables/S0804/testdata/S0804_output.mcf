@@ -1,0 +1,542 @@
+Node: dcid:Count_Person_Years16Onwards_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To19Years_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 19 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To19Years_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 19 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [20 24 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To24Years_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [20 24 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To44Years_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 44 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To44Years_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 44 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [45 54 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [45 54 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [55 59 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To59Years_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [55 59 Years]
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years60Onwards_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years60Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years60Onwards_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years60Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Years16Onwards_Employed
+statType: dcs:medianValue
+measuredProperty: dcs:age
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Age_Person_Years16Onwards_Employed
+statType: dcs:marginOfError
+measuredProperty: dcs:age
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_OneRace
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_OneRace
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_White
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:White
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_White
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:White
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_AmericanIndianOrAlaskaNative
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:AmericanIndianOrAlaskaNative
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_AmericanIndianOrAlaskaNative
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:AmericanIndianOrAlaskaNative
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_Asian
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:Asian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Asian
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:Asian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_NativeHawaiianAndOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_NativeHawaiianAndOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_SomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_SomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_TwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_TwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+ethnicity: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+ethnicity: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+ethnicity: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+ethnicity: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_Native
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_Native
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:Native
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_USCitizenByNaturalization_Employed_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_USCitizenByNaturalization_Employed_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_NotAUSCitizen_Employed_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_NotAUSCitizen_Employed_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+nativity: dcs:ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SpeakEnglishVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+abilityToSpeakEnglish: dcs:SpeakEnglishVeryWell
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SpeakEnglishVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+abilityToSpeakEnglish: dcs:SpeakEnglishVeryWell
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SpeakEnglishLessThanVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+abilityToSpeakEnglish: dcs:SpeakEnglishLessThanVeryWell
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SpeakEnglishLessThanVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+abilityToSpeakEnglish: dcs:SpeakEnglishLessThanVeryWell
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_Count_Person_Years16Onwards_Employed_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_MarginOfError_Count_Person_Years16Onwards_Employed_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_Count_Person_Years16Onwards_Employed_IncomeOf9999OrLessUSDollar_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+income: [- 9999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_MarginOfError_Count_Person_Years16Onwards_Employed_IncomeOf9999OrLessUSDollar_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+income: [- 9999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_Count_Person_Years16Onwards_Employed_IncomeOf10000To14999USDollar_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+income: [10000 14999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_MarginOfError_Count_Person_Years16Onwards_Employed_IncomeOf10000To14999USDollar_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+income: [10000 14999 USDollar]
+typeOf: dcs:StatisticalVariable
+
