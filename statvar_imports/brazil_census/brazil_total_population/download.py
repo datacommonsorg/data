@@ -143,6 +143,8 @@ def parse_raw_pop_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
             if not place_raw or pd.isna(r.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
                 continue
             place = place_raw.replace("Região ", "").strip()
+            if place in ("Unidades da Federação", "Grandes Regiões", "Brasil e Unidades da Federação"):
+                continue
             if place == "Brasil":
                 place = "Brazil"
 
@@ -297,7 +299,11 @@ def download_all_years(
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. 2022+ Census from SIDRA API (Table 9514)
+        # 1. Raw input files from GCS / local scratch (including Brazil_2022_Muncipal_POP.xlsx and POPU91*.XLS)
+        raw_rows = fetch_raw_input_files()
+        all_rows.extend(raw_rows)
+
+        # 2. 2022+ Census from SIDRA API (Table 9514) — authoritative final census values override preliminary XLS
         raw_2022 = fetch_sidra_data(session, TABLE_9514_API_URL)
         logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9514.")
         for r in raw_2022[1:]:
@@ -322,7 +328,7 @@ def download_all_years(
             sexo = str(r.get("D4N", "Total")).strip()
             all_rows.append({"Ano": year, "Localidade": loc, "Sexo": sexo, "Populacao": val})
 
-        # 2. 2010 Census from SIDRA API (Table 1378)
+        # 3. 2010 Census from SIDRA API (Table 1378)
         raw_2010 = fetch_sidra_data(session, TABLE_1378_API_URL)
         logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 1378.")
         for r in raw_2010[1:]:
@@ -340,10 +346,6 @@ def download_all_years(
 
             sexo = str(r.get("D5N", "Total")).strip()
             all_rows.append({"Ano": 2010, "Localidade": loc, "Sexo": sexo, "Populacao": val})
-
-        # 3. Raw input files from GCS / local scratch (including Brazil_2022_Muncipal_POP.xlsx and POPU91*.XLS)
-        raw_rows = fetch_raw_input_files()
-        all_rows.extend(raw_rows)
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
