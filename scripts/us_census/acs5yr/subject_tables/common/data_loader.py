@@ -257,6 +257,7 @@ class SubjectTableDataLoaderBase:
         str_cols = df.select_dtypes(include=['object', 'string']).columns
         if len(str_cols) > 0 and not df.empty:
             df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
+            df[str_cols] = df[str_cols].replace({'+': '','-': ''})
         return df
 
     def _process_dataframe(self, df, filename):
