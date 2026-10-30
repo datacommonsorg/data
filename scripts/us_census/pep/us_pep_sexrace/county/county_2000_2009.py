@@ -19,6 +19,7 @@ is processed as is.
 
 import pandas as pd
 import os
+from preprocess import load_url_or_path
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -45,7 +46,9 @@ def process_county_2000_2009(url: str) -> pd.DataFrame:
             _url = url + str(j) + '.csv'
 
             # reading the input csv as dataframe
-            df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+            df = pd.read_csv(load_url_or_path(_url),
+                             encoding='ISO-8859-1',
+                             low_memory=False)
             df.to_csv(_CODEDIR + "/../input_files/" +
                       "county_result_2000_2009.csv")
             # years having 1 and 12 and 13 value are not requried

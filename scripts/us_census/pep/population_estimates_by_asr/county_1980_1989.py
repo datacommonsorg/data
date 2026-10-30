@@ -18,6 +18,7 @@ import os
 import pandas as pd
 from common_functions import (input_url, replace_age, race_based_grouping,
                               gender_based_grouping)
+from process import load_url_or_path
 
 
 def county1980(url_file: str, output_folder: str):
@@ -35,7 +36,7 @@ def county1980(url_file: str, output_folder: str):
     df_ar = pd.DataFrame()
     cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                     ,8,9,10,11,12,13,14,15,16,17]
-    df = pd.read_csv(_url,skiprows=7,names=cols,low_memory=False,\
+    df = pd.read_csv(load_url_or_path(_url),skiprows=7,names=cols,low_memory=False,\
         encoding='ISO-8859-1')
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -79,7 +80,7 @@ def county1980(url_file: str, output_folder: str):
                      'county_1980_1989.csv'))
     # Aggregating the County Data on geo_ID to make State Data.
     final_df['geo_ID'] = final_df['geo_ID'].str[:-3]
-    final_df = final_df.groupby(['Year','geo_ID','SVs', 'Measurement_Method']).sum()\
+    final_df = final_df.groupby(['Year','geo_ID','SVs', 'Measurement_Method'], dropna=False).sum()\
     .stack(0).reset_index()
     final_df['observation'] = final_df[0]
     final_df = final_df.drop(columns=['level_4', 0])

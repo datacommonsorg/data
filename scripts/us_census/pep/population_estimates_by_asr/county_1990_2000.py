@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 from common_functions import (replace_age, gender_based_grouping,
                               race_based_grouping)
+from process import load_url_or_path
 
 
 def county1990(output_folder: str):
@@ -42,9 +43,15 @@ def county1990(output_folder: str):
                 '/popest/tables/1990-2000/counties/asrh/casrh'+str(j)+'.txt'
             cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                 ,8,9,10,11,12,13,14,15,16,17]
-            df = pd.read_table(url,index_col=False,sep=r'\s+'\
-                ,skiprows=16,skipfooter=14,engine='python',names=cols,\
-                    encoding='ISO-8859-1')
+            df = pd.read_table(load_url_or_path(url),
+                               index_col=False,
+                               sep=r'\s+',
+                               skiprows=16,
+                               skipfooter=14,
+                               engine='python',
+                               names=cols,
+                               encoding='ISO-8859-1',
+                               on_bad_lines=lambda line: line[:len(cols)])
             #Writing raw data to csv
             df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    "raw_data", 'raw_data_county_1990_2000.csv'),
@@ -52,7 +59,7 @@ def county1990(output_folder: str):
             # Removing the lines that have false symbols.
             num_df = (df.drop(cols, axis=1).join(df[cols]\
                 .apply(pd.to_numeric, errors='coerce')))
-            df = num_df[num_df[cols].notnull().all(axis=1)]
+            df = num_df[num_df[cols].notnull().all(axis=1)].copy()
             df[1:] = df[1:].apply(pd.to_numeric)
             df['geo_ID'] = df['geo_ID'].astype(int)
 

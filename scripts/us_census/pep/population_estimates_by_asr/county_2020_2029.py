@@ -18,6 +18,7 @@ import os
 import numpy as np
 import pandas as pd
 from common_functions import input_url, replace_agegrp
+from process import load_url_or_path
 
 
 def county2029(url_file: str, output_folder: str):
@@ -25,7 +26,9 @@ def county2029(url_file: str, output_folder: str):
     This Python Script Loads csv datasets from 2020-2029 on a County Level,
     cleans it and create a cleaned csv.
     '''
-    df = pd.read_csv(url_file, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url_file),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_county_2020_2029.csv'),

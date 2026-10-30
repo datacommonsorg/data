@@ -20,6 +20,7 @@ four output CSV, MCF and TMCF.
 
 import os
 import json
+import sys
 from absl import app
 from absl import flags
 import requests
@@ -27,12 +28,123 @@ import shutil
 import time
 from datetime import datetime as dt
 from absl import logging
-from absl import flags
 import pandas as pd
 
-_FLAGS = flags.FLAGS
+import io
+from requests.adapters import HTTPAdapter
+from retry import retry
+from urllib3.util.retry import Retry
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
+if __name__ == '__main__':
+    sys.modules.setdefault('preprocess', sys.modules['__main__'])
+
+if 'mode' not in flags.FLAGS:
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
+_MODULE_DIR = os.path.dirname(__file__)
+_LAST_FETCHED_URL = (None, None)
+_SESSION = None
+
+
+def _create_retry_session(retries=5, backoff_factor=2):
+    """Creates a requests.Session with automatic retry on transient HTTP errors."""
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
+        'Accept':
+            '*/*',
+    })
+    retry_strategy = Retry(
+        total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504, 520],
+        allowed_methods=['HEAD', 'GET'],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
+
+
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
+def _is_html_response(response_or_content_type, first_bytes=b''):
+    """Returns True if the response headers or body indicate an HTML/WAF error page."""
+    if hasattr(response_or_content_type, 'headers'):
+        content_type = response_or_content_type.headers.get('Content-Type', '')
+    else:
+        content_type = str(response_or_content_type or '')
+    if 'html' in content_type.lower():
+        return True
+    if first_bytes:
+        head = first_bytes[:512].lstrip().lower()
+        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
+                b'<title>request rejected</title>' in head or
+                b'the requested url was rejected' in head):
+            return True
+    return False
+
+
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
+def _head_with_html_retry(session, url, timeout=30):
+    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
+    response = session.head(url, timeout=timeout, allow_redirects=True)
+    content_type = response.headers.get('Content-Type', '').lower()
+    if (response.status_code == 200 and 'html' in content_type and
+            not url.lower().endswith(('.html', '.htm'))):
+        raise ValueError(
+            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
+        )
+    return response
+
+
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
+def _fetch_url_bytes(url: str, session: requests.Session = None) -> bytes:
+    """Fetches URL content with retries and WAF/HTML rejection."""
+    if session is None:
+        session = _get_session()
+    with session.get(url, timeout=60) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        content = response.content
+        if not content:
+            raise ValueError(f'Downloaded empty response from URL: {url}')
+        if (not url.lower().endswith(('.html', '.htm')) and
+                _is_html_response(content_type, content[:512])):
+            raise ValueError(
+                f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+            )
+        return content
+
+
+def load_url_or_path(url_or_path: str):
+    """Returns a BytesIO buffer for HTTP/HTTPS URLs (with retries, WAF checks, and single-URL cache) or the local path."""
+    global _LAST_FETCHED_URL
+    if isinstance(url_or_path, str):
+        if url_or_path.lower().startswith(('http://', 'https://')):
+            if _LAST_FETCHED_URL[0] == url_or_path and _LAST_FETCHED_URL[
+                    1] is not None:
+                return io.BytesIO(_LAST_FETCHED_URL[1])
+            content = _fetch_url_bytes(url_or_path)
+            _LAST_FETCHED_URL = (url_or_path, content)
+            return io.BytesIO(content)
+        if not os.path.isabs(url_or_path) and not os.path.exists(url_or_path):
+            candidate = os.path.join(_MODULE_DIR, url_or_path)
+            if os.path.exists(candidate):
+                return candidate
+    return url_or_path
+
 
 from national.national_1900_1970 import process_national_1900_1970
 from national.national_1980_1990 import process_national_1980_1990
@@ -56,15 +168,22 @@ from county.county_2010_2020 import process_county_2010_2020
 from county.county_2020_2022 import process_county_2020_2022
 from county.county_2020_2029 import process_county_2020_2029
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
-from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE, __INPUTFILES
+from common import (
+    Outputfiles,
+    _OUTPUTFINAL,
+    _OUTPUTINTERMEDIATE,
+    __INPUTFILES,
+)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
-_MODULE_DIR = os.path.dirname(__file__)
+if 'input_path' not in flags.FLAGS:
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'output_files/intermediate')
 _FILES_TO_DOWNLOAD = None
+_BASELINE_YEAR = 2025
 
 
 def _get_urls(json_file_path, key, test):
@@ -94,25 +213,42 @@ def _get_urls(json_file_path, key, test):
 
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
-        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    _FILES_TO_DOWNLOAD = []
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
-    # This method will generate URLs for the years 2024 to 2029
-    for future_year in range(2024, 2030):
-        if dt.now().year > future_year:
-            YEAR = future_year
-            for url in urls_to_scan:
-                url_to_check = url.format(YEAR=YEAR)
-                try:
-                    check_url = requests.head(url_to_check)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
+    # This method will generate URLs for the years 2025 to 2029
+    session = _get_session()
+    for url in urls_to_scan:
+        url_found = False
+        for future_year in range(2030, _BASELINE_YEAR - 1, -1):
+            url_to_check = url.format(YEAR=future_year)
+            try:
+                check_url = _head_with_html_retry(session, url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    url_found = True
+                    break
+            except Exception as e:
+                logging.warning(f"URL is not accessible {url_to_check}: {e}")
 
-                except:
-                    logging.error(f"URL is not accessable {url_to_check}")
+        if not url_found:
+            fallback_url = url.format(YEAR=_BASELINE_YEAR)
+            logging.warning(
+                f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
+
+
+def _config_sort_key(config_file, test):
+    """Sort key grouping config files by target URL so shared CSVs hit cache."""
+    try:
+        urls = _get_urls(config_file, "urls", test)
+        if isinstance(urls, list):
+            return (str(tuple(urls)), str(config_file))
+        return (str(urls), str(config_file))
+    except Exception:
+        return (str(config_file), str(config_file))
 
 
 def downloadFiles(config_files: list, test=False):
@@ -122,10 +258,11 @@ def downloadFiles(config_files: list, test=False):
         config_files: List of config file
         test=False
     '''
-    flag = None
-    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
-    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
-    os.system("mkdir -p " + os.path.join(_MODULE_DIR, __INPUTFILES))
+    os.makedirs(os.path.join(_MODULE_DIR, _OUTPUTFINAL), exist_ok=True)
+    os.makedirs(os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE), exist_ok=True)
+    os.makedirs(os.path.join(_MODULE_DIR, __INPUTFILES), exist_ok=True)
+    config_files = sorted(config_files,
+                          key=lambda cf: _config_sort_key(cf, test))
     try:
         for config_file in config_files:
             try:
@@ -170,30 +307,38 @@ def downloadFiles(config_files: list, test=False):
                 elif "county_2020_2022.json" in config_file:
                     process_county_2020_2022(files)
             except Exception as e:
-                logging.error(f"Failed to process {config_file}: {e}")
+                logging.fatal(f"Failed to process {config_file}: {e}")
 
         global _FILES_TO_DOWNLOAD
-        for file in _FILES_TO_DOWNLOAD:
-            file_name_to_save = None
+        for file in _FILES_TO_DOWNLOAD or []:
             url = file['download_path']
+            if test and url.startswith(('http://', 'https://')):
+                test_fixture = os.path.join(
+                    _MODULE_DIR,
+                    "test_data/input_files/2020_2029/cc-est2025-alldata.csv")
+                if os.path.exists(test_fixture):
+                    url = test_fixture
             #Calling 2023 onwards methods
             try:
                 process_national_2020_2029(url)
             except Exception as e:
-                logging.error(
+                logging.fatal(
                     f"Failed to process national 2020-2029 for {url}: {e}")
             try:
                 process_county_2020_2029(url)
             except Exception as e:
-                logging.error(
+                logging.fatal(
                     f"Failed to process county 2020-2029 for {url}: {e}")
             try:
                 process_state_2020_2029(url)
             except Exception as e:
-                logging.error(
+                logging.fatal(
                     f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
+    finally:
+        global _LAST_FETCHED_URL
+        _LAST_FETCHED_URL = (None, None)
 
 
 def process(config_files: list, test=False):
@@ -208,6 +353,8 @@ def process(config_files: list, test=False):
     Returns:
         None.
     """
+    if test:
+        downloadFiles(config_files, test=True)
 
     input_files = []
     # Walk through the directory and its subdirectories
@@ -217,7 +364,6 @@ def process(config_files: list, test=False):
             input_files.append(file_path)
     # Now `input_files` contains paths to all the files in `_INPUT_FILE_PATH` and its subdirectories
 
-    processed_count = 0
     processed_count = len(input_files)
     logging.info(f"No of files to be processed {processed_count}")
     # list of national output files before year 2000
@@ -233,7 +379,7 @@ def process(config_files: list, test=False):
         "county_result_1980_1989.csv", "county_result_1990_2000.csv"
     ]
 
-    # list of state and county output files before after 2000
+    # list of state and county output files after year 2000
     state_county_after_2000 = [
         "state_result_2000_2010.csv", "state_result_2010_2020.csv",
         "county_result_2000_2009.csv", "county_result_2010_2020.csv",
@@ -263,13 +409,15 @@ def process(config_files: list, test=False):
 
 
 def main(_):
-    mode = _FLAGS.mode
+    mode = FLAGS.mode
     """
     Creating and processing input files
     """
     input_path = FLAGS.input_path
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+    ip_files = [
+        os.path.join(input_path, file)
+        for file in sorted(os.listdir(input_path))
+    ]
 
     if mode == "" or mode == "download":
         # download & process

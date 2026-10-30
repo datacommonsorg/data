@@ -17,6 +17,7 @@ This Python Script is for National Level Data 2020-2029.
 import os
 import pandas as pd
 from common_functions import input_url, extract_year
+from process import load_url_or_path
 
 
 def national2029(url_file: str, output_folder: str):
@@ -25,7 +26,9 @@ def national2029(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    df = pd.read_csv(url_file, header=0)
+    if url_file.endswith('.json'):
+        url_file = input_url(url_file, "2020-21")
+    df = pd.read_csv(load_url_or_path(url_file), header=0)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_national_2020_2029.csv'),

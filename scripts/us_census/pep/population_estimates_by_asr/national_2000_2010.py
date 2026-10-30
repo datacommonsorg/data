@@ -17,6 +17,7 @@ This Python Script is for National Level Data 2000-2010.
 import os
 import pandas as pd
 from common_functions import input_url, race_based_grouping
+from process import load_url_or_path
 
 
 def national2000(url_file: str, output_folder: str):
@@ -27,7 +28,9 @@ def national2000(url_file: str, output_folder: str):
     # Getting input URL from the JSON file.
     _url = input_url(url_file, "2000-10")
     # Reading the csv format input file and converting it to a dataframe.
-    df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(_url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'national_2000_2010.csv'),

@@ -15,70 +15,176 @@
 This Python Script Load the datasets, cleans it and generates 
 cleaned CSV, MCF, TMCF file.
 """
-import os
-import pandas as pd
-import numpy as np
-
-import requests
-import shutil
-import time
+import io
 import json
-from absl import logging
-
+import os
+import shutil
+import sys
+import tempfile
+import time
 from absl import app
 from absl import flags
-from national_1900_1959 import national1900
-from national_1960_1979 import national1960
-from national_1980_1989 import national1980
-from national_2000_2010 import national2000
-from national_2010_2019 import national2010
-from national_2020_2029 import national2029
-from state_1970_1979 import state1970
-from state_1990_2000 import state1990
-from state_2000_2010 import state2000
-from state_2010_2020 import state2010
-from state_2020_2029 import state2029
-from county_1970_1979 import county1970
-from county_1980_1989 import county1980
-from county_1990_2000 import county1990
-from county_2000_2010 import county2000
-from county_2010_2020 import county2010
-from county_2020_2029 import county2029
+from absl import logging
+import numpy as np
+import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from retry import retry
+from urllib3.util.retry import Retry
+
+if __name__ == '__main__':
+    sys.modules.setdefault('process', sys.modules['__main__'])
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def ensure_raw_data_dir():
+    """Ensures the raw_data directory exists inside the module directory."""
+    raw_dir = os.path.join(_MODULE_DIR, "raw_data")
+    os.makedirs(raw_dir, exist_ok=True)
+    return raw_dir
+
+
+_SESSION = None
+
+
+def _create_retry_session(retries=5, backoff_factor=2):
+    """Creates a requests.Session with automatic retry on transient HTTP errors."""
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
+        'Accept':
+            '*/*',
+    })
+    retry_strategy = Retry(
+        total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504, 520],
+        allowed_methods=['HEAD', 'GET'],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
+
+
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
+def _is_html_response(content_type, first_bytes=b''):
+    """Returns True if the response headers or body indicate an HTML/WAF error page."""
+    if 'html' in (content_type or '').lower():
+        return True
+    if first_bytes:
+        head = first_bytes[:512].lstrip().lower()
+        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
+                b'<title>request rejected</title>' in head or
+                b'the requested url was rejected' in head):
+            return True
+    return False
+
+
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
+def _head_with_html_retry(session, url, timeout=30):
+    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
+    response = session.head(url, timeout=timeout, allow_redirects=True)
+    content_type = response.headers.get('Content-Type', '').lower()
+    if (response.status_code == 200 and 'html' in content_type and
+            not url.lower().endswith(('.html', '.htm'))):
+        raise ValueError(
+            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
+        )
+    return response
+
+
+@retry(exceptions=ValueError, tries=3, delay=5, backoff=2)
+def _fetch_url_bytes(url: str, session: requests.Session = None) -> bytes:
+    """Fetches URL content with retries and WAF/HTML rejection."""
+    if session is None:
+        session = _get_session()
+    with session.get(url, timeout=60) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        content = response.content
+        if not content:
+            raise ValueError(f'Downloaded empty response from URL: {url}')
+        if (not url.lower().endswith(('.html', '.htm')) and
+                _is_html_response(content_type, content[:512])):
+            raise ValueError(
+                f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+            )
+        return content
+
+
+def load_url_or_path(url_or_path: str):
+    """Returns a BytesIO buffer for HTTP/HTTPS URLs (with retries and WAF checks) or the local path."""
+    ensure_raw_data_dir()
+    if isinstance(url_or_path, str):
+        if url_or_path.lower().startswith(('http://', 'https://')):
+            data = _fetch_url_bytes(url_or_path)
+            return io.BytesIO(data)
+        if not os.path.isabs(url_or_path) and not os.path.exists(url_or_path):
+            candidate = os.path.join(_MODULE_DIR, url_or_path)
+            if os.path.exists(candidate):
+                return candidate
+    return url_or_path
+
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+if 'mode' not in FLAGS:
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+if 'input_path' not in FLAGS:
+    flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH,
+                        "Import Data File's List")
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = []
+_BASELINE_YEAR = 2025
 
 
-# This method will generate URLs for the years 2020 to 2029
+# This method will generate URLs for the years 2025 to 2029
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
+    _FILES_TO_DOWNLOAD = []
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-agesex-res.csv",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ]
-    #To check the latest available year
-    session = requests.Session()
+    # To check the latest available year
+    session = _get_session()
     for url in urls_to_scan:
-        for YEAR in range(2030, 2020, -1):
+        url_found = False
+        for YEAR in range(2030, _BASELINE_YEAR - 1, -1):
             url_to_check = url.format(YEAR=YEAR)
             try:
-                check_url = session.head(url_to_check,
-                                         allow_redirects=True,
-                                         timeout=5)
+                check_url = _head_with_html_retry(session, url_to_check)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    url_found = True
                     break
                 else:
                     logging.warning(f"URL is not accessible: {url_to_check}")
             except Exception as e:
-                logging.error(f"URL is not accessible {url_to_check}: {e}")
+                logging.warning(f"URL is not accessible {url_to_check}: {e}")
+
+        if not url_found:
+            fallback_url = url.format(YEAR=_BASELINE_YEAR)
+            logging.warning(
+                f"All HEAD probes failed for {url}; falling back to baseline year {_BASELINE_YEAR}: {fallback_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
 
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -270,10 +376,10 @@ class USCensusPEPByASR:
 
         logging.info(f"Number of files processed {processed_count}")
         # After processing all files, ensure all files were processed
-        if processed_count == total_files_to_process & total_files_to_process > 0:
+        if processed_count == total_files_to_process and total_files_to_process > 0:
             # Drop the unwanted columns and NA.
             logging.info(f"Dropping unwanted columns and NA")
-            final_df = final_df.drop(columns=['Unnamed: 0'])
+            final_df = final_df.drop(columns=['Unnamed: 0'], errors='ignore')
             final_df = final_df.dropna()
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
             final_df['observation'] = final_df['observation'].astype(
@@ -310,6 +416,24 @@ def download_files():
     output_folder = "input_data"
     logging.info("Download starts")
     try:
+        from national_1900_1959 import national1900
+        from national_1960_1979 import national1960
+        from national_1980_1989 import national1980
+        from national_2000_2010 import national2000
+        from national_2010_2019 import national2010
+        from national_2020_2029 import national2029
+        from state_1970_1979 import state1970
+        from state_1990_2000 import state1990
+        from state_2000_2010 import state2000
+        from state_2010_2020 import state2010
+        from state_2020_2029 import state2029
+        from county_1970_1979 import county1970
+        from county_1980_1989 import county1980
+        from county_1990_2000 import county1990
+        from county_2000_2010 import county2000
+        from county_2010_2020 import county2010
+        from county_2020_2029 import county2029
+
         add_future_year_urls()
         national1900(output_folder)
         national1960(output_folder)
@@ -359,7 +483,6 @@ def main(_):
                                      "raw_data")
         if not os.path.exists(raw_data_path):
             os.mkdir(raw_data_path)
-        add_future_year_urls()
         download_files()
     if mode == "" or mode == "process":
         ip_files = os.listdir(input_path)

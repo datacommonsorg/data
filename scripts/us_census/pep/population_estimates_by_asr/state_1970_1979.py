@@ -18,6 +18,7 @@ import os
 import pandas as pd
 from common_functions import (input_url, gender_based_grouping,
                               race_based_grouping)
+from process import load_url_or_path
 
 
 def state1970(url_file: str, output_folder: str):
@@ -27,7 +28,7 @@ def state1970(url_file: str, output_folder: str):
       '''
 
     _url = input_url(url_file, "1970-79")
-    df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
+    df = pd.read_csv(load_url_or_path(_url), skiprows=5, encoding='ISO-8859-1')
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_state_1970_1979.csv'),

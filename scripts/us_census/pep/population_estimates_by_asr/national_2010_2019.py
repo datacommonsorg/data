@@ -17,6 +17,7 @@ This Python Script is for National Level Data 2010-2019.
 import os
 import pandas as pd
 from common_functions import input_url
+from process import load_url_or_path
 
 
 def national2010(url_file: str, output_folder: str):
@@ -29,46 +30,50 @@ def national2010(url_file: str, output_folder: str):
     _sheets = input_url(url_file, "2010-19sheets")
     # Used to collect data after every loop for every file's df.
     df_final = pd.DataFrame()
-    for sheet in _sheets:
-        df_sheet = pd.DataFrame()
-        df = pd.read_excel(_urls, sheet, skiprows=4, header=0)
-        #Writing raw data to csv
-        df.to_csv(os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "raw_data",
-            'raw_data_national_2010_2019_' + str(sheet) + '.csv'),
-                  index=False)
-        # Dropping extra columns
-        df = df.drop(['Census', 'Estimates Base'], axis=1)
-        # Deleting the row with garbage information , 0 denotes the row
-        df = df.drop([0], axis=0)
-        # Cleaning the data to
-        df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "").str.replace\
-            ("Under 5", "0 to 4").str.replace(" ", "").str.replace("to", "To")\
-            .str.replace("years", "Years").str.replace("85Yearsandover", \
-            "85OrMoreYears")
-        # Due to data being in a different format for male/female, and also
-        # required some extra processing. So, it has been put into other dfs
-        # df_sex(has data to be processed by gender),
-        # df_sheet(has data of a single sheet in excel) so it can be processed
-        # seperately before being put into our main df.
-        # 0 to 18 are the total values to be picked.
-        # 36 to 54 are the male values to be picked.
-        # 72 to 90 are the female values to be picked.
-        if sheet != 'Total':
-            df_sex = df[0:18]
+    excel_source = load_url_or_path(_urls)
+    with pd.ExcelFile(excel_source) as xls:
+        for sheet in _sheets:
+            df_sheet = pd.DataFrame()
+            df = pd.read_excel(xls, sheet, skiprows=4, header=0)
+            #Writing raw data to csv
+            df.to_csv(os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "raw_data",
+                'raw_data_national_2010_2019_' + str(sheet) + '.csv'),
+                      index=False)
+            # Dropping extra columns
+            df = df.drop(['Census', 'Estimates Base'], axis=1)
+            # Deleting the row with garbage information , 0 denotes the row
+            df = df.drop([0], axis=0)
+            # Cleaning the data to
+            df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(
+                ".", "").str.replace("Under 5", "0 to 4").str.replace(
+                    " ", "").str.replace("to", "To").str.replace(
+                        "years", "Years").str.replace("85Yearsandover",
+                                                      "85OrMoreYears")
+            # Due to data being in a different format for male/female, and also
+            # required some extra processing. So, it has been put into other dfs
+            # df_sex(has data to be processed by gender),
+            # df_sheet(has data of a single sheet in excel) so it can be processed
+            # seperately before being put into our main df.
+            # 0 to 18 are the total values to be picked.
+            # 36 to 54 are the male values to be picked.
+            # 72 to 90 are the female values to be picked.
+            if sheet != 'Total':
+                df_sex = df[0:18]
+                df_sheet = pd.concat([df_sheet, df_sex])
+            df_sex = df[36:54]
+            df_sex['Unnamed: 0'] = df_sex['Unnamed: 0'] + '_Male'
             df_sheet = pd.concat([df_sheet, df_sex])
-        df_sex = df[36:54]
-        df_sex['Unnamed: 0'] = df_sex['Unnamed: 0'] + '_Male'
-        df_sheet = pd.concat([df_sheet, df_sex])
-        df_sex = df[72:90]
-        df_sex['Unnamed: 0'] = df_sex['Unnamed: 0'] + '_Female'
-        df_sheet = pd.concat([df_sheet, df_sex])
-        df_sheet['Unnamed: 0'] = df_sheet['Unnamed: 0'] + '_' + sheet + 'Alone'
-        df_sheet = df_sheet.melt(id_vars=['Unnamed: 0'],
-                                 var_name='Year',
-                                 value_name='observation')
-        df_sheet.columns = df_sheet.columns.str.replace('Unnamed: 0', 'SVs')
-        df_final = pd.concat([df_final, df_sheet])
+            df_sex = df[72:90]
+            df_sex['Unnamed: 0'] = df_sex['Unnamed: 0'] + '_Female'
+            df_sheet = pd.concat([df_sheet, df_sex])
+            df_sheet['Unnamed: 0'] = (df_sheet['Unnamed: 0'] + '_' + sheet +
+                                      'Alone')
+            df_sheet = df_sheet.melt(id_vars=['Unnamed: 0'],
+                                     var_name='Year',
+                                     value_name='observation')
+            df_sheet.columns = df_sheet.columns.str.replace('Unnamed: 0', 'SVs')
+            df_final = pd.concat([df_final, df_sheet])
     df_final['SVs'] = (df_final['SVs'].str.replace(
         "_TotalAlone",
         "").str.replace("Black", "BlackOrAfricanAmerican").str.replace(

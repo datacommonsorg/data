@@ -19,6 +19,7 @@ import os
 import pandas as pd
 import numpy as np
 from common_functions import replace_agegrp
+from process import load_url_or_path
 
 
 def county2000(output_folder: str):
@@ -35,7 +36,7 @@ def county2000(output_folder: str):
             j = f'{i:02}'
             url = 'https://www2.census.gov/programs-surveys/popest/datasets/2'+\
                 '000-2010/intercensal/county/co-est00int-alldata-'+str(j)+'.csv'
-            df = pd.read_csv(url, encoding='ISO-8859-1')
+            df = pd.read_csv(load_url_or_path(url), encoding='ISO-8859-1')
             #Writing raw data to csv
             df.to_csv(os.path.join(
                 os.path.dirname(os.path.abspath(__file__)), "raw_data",

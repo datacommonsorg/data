@@ -18,6 +18,7 @@ import os
 import numpy as np
 import pandas as pd
 from common_functions import input_url, replace_agegrp
+from process import load_url_or_path
 
 
 def county2010(url_file: str, output_folder: str):
@@ -26,7 +27,9 @@ def county2010(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     _url = input_url(url_file, "2010-20")
-    df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(_url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_county_2010_2020.csv'),
