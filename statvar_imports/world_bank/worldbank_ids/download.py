@@ -23,7 +23,10 @@ from datetime import datetime
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('start_year', 1970, 'The starting year for data download.')
-flags.DEFINE_integer('end_year', datetime.now().year + 6, 'The ending year for data download (current year + offset).')
+flags.DEFINE_integer(
+    'end_year',
+    datetime.now().year + 6,
+    'The ending year for data download (current year + offset).')
 start_time = time()
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
@@ -75,10 +78,21 @@ principal = [
 
 disbursed = [
     "DT.DOD.DLXF.CD",
-    "DT.DOD.DPPG.CD","DT.DOD.PNGC.CD","DT.DOD.OFFT.CD","DT.DOD.MLAT.CD",
-    "DT.DOD.MIBR.CD","DT.DOD.MIDA.CD","DT.DOD.MLTC.CD","DT.DOD.BLAT.CD",
-    "DT.DOD.BLTC.CD","DT.DOD.PRVT.CD","DT.DOD.PBND.CD","DT.DOD.PCBK.CD",
-    "DT.DOD.PROP.CD","DT.DOD.DPNG.CD","DT.DOD.PNGB.CD",
+    "DT.DOD.DPPG.CD",
+    "DT.DOD.PNGC.CD",
+    "DT.DOD.OFFT.CD",
+    "DT.DOD.MLAT.CD",
+    "DT.DOD.MIBR.CD",
+    "DT.DOD.MIDA.CD",
+    "DT.DOD.MLTC.CD",
+    "DT.DOD.BLAT.CD",
+    "DT.DOD.BLTC.CD",
+    "DT.DOD.PRVT.CD",
+    "DT.DOD.PBND.CD",
+    "DT.DOD.PCBK.CD",
+    "DT.DOD.PROP.CD",
+    "DT.DOD.DPNG.CD",
+    "DT.DOD.PNGB.CD",
 ]
 
 currency = [
@@ -90,6 +104,7 @@ currency = [
 indicator_list = [interest, currency, principal, disbursed]
 indicator_listname = ["interest", "currency", "principal", "disbursed"]
 
+
 def main(_):
     # Itterating each list to download the respective data.
     for idx, indicator in enumerate(indicator_list):
@@ -98,31 +113,34 @@ def main(_):
         # Load the indicators.
         logging.info("Loaded data for%s", indicator)
         debt_id.load_data(indicators=indicator,
-                        start_year=FLAGS.start_year,
-                        end_year=FLAGS.end_year)
+                          start_year=FLAGS.start_year,
+                          end_year=FLAGS.end_year)
         # Get the data as a DataFrame
         df = debt_id.get_data()
         try:
             # Extracting only the year part for data.
-            df["YEARMOD"]=df["year"].dt.year
+            df["YEARMOD"] = df["year"].dt.year
             # Creating a column for measurementMethod.
             current_year = datetime.now().year
-            passyear = current_year-2
-            df["Measure"]=np.where(df["YEARMOD"]>passyear,
-                                "WorldBankProjection",'')
+            passyear = current_year - 2
+            df["Measure"] = np.where(df["YEARMOD"] > passyear,
+                                     "WorldBankProjection", '')
         except Exception as e:
-            logging.fatal("Unable to generate new columns as the source specified columns do not exist%s", 
-                           e)
+            logging.fatal(
+                "Unable to generate new columns as the source specified columns do not exist%s",
+                e)
             sys.exit(1)
 
         # Writing the data to  a local file.s
-        logging.info("Writing data to%s",
-                    f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv\n")
+        logging.info(
+            "Writing data to%s",
+            f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv\n")
         df.to_csv(f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv",
-                index=False)
+                  index=False)
 
     elapsed_time = round((time() - start_time) / 60, 2)
     logging.info(f"Script completed in {elapsed_time} mins")
+
 
 if __name__ == '__main__':
     app.run(main)
