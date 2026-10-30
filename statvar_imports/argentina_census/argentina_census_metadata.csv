@@ -5,5 +5,5 @@ header_rows,1
 mapped_rows,1
 mapped_columns,2
 word_delimiter,""""""
-generate_statvar_mcf,False
+generate_statvar_mcf,True
 output_columns,"observationDate,observationAbout,variableMeasured,value,unit,scalingFactor"
