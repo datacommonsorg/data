@@ -116,6 +116,19 @@ def load_place_mappings() -> Tuple[Dict[str, str], Dict[str, str]]:
         if os.path.isfile(path_91) and not map_91:
             with open(path_91, "r", encoding="utf-8") as f:
                 map_91 = json.load(f)
+    if not muni_map or not map_91:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket(GCS_BUCKET_NAME)
+            if not muni_map:
+                b = bucket.blob("country/brazil/intermediate_files/muncial_state_brazil_mapping.json")
+                muni_map = json.loads(b.download_as_text())
+            if not map_91:
+                b = bucket.blob("country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
+                map_91 = json.loads(b.download_as_text())
+        except Exception as e:
+            logging.warning(f"Could not load place mappings from GCS: {e}")
     return muni_map, map_91
 
 
@@ -218,6 +231,16 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
     if muni_path:
         with open(muni_path, "rb") as f:
             rows.extend(parse_raw_municipal_2022(f.read(), muni_map))
+    else:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket(GCS_BUCKET_NAME)
+            blob = bucket.blob(GCS_MUNI_2022_FILE)
+            content = blob.download_as_bytes()
+            rows.extend(parse_raw_municipal_2022(content, muni_map))
+        except Exception as e:
+            logging.warning(f"Could not load {GCS_MUNI_2022_FILE} from GCS: {e}")
 
     # 2. 2022 UFs POP
     scratch_uf = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "POP2022_Brasil_e_UFs.xls")
@@ -226,16 +249,40 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
     if uf_path:
         with open(uf_path, "rb") as f:
             rows.extend(parse_raw_pop_xls(f.read()))
+    else:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket(GCS_BUCKET_NAME)
+            blob = bucket.blob(GCS_POP_2022_FILE)
+            content = blob.download_as_bytes()
+            rows.extend(parse_raw_pop_xls(content))
+        except Exception as e:
+            logging.warning(f"Could not load {GCS_POP_2022_FILE} from GCS: {e}")
 
     # 3. 1991 POPU state files
     scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files")
     alt_dir = os.path.join("/data", "scratch", "input_files")
     input_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_dir if os.path.isdir(alt_dir) else None)
+    found_1991 = False
     if input_dir:
         popu_files = sorted(glob.glob(os.path.join(input_dir, "POPU91*.XLS")) + glob.glob(os.path.join(input_dir, "Brazil_1991_gender", "*.xls")))
         for pf in popu_files:
             with open(pf, "rb") as f:
                 rows.extend(parse_raw_1991_popu(f.read(), map_91))
+                found_1991 = True
+    if not found_1991:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket(GCS_BUCKET_NAME)
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            for b in blobs:
+                if b.name.upper().endswith(".XLS"):
+                    content = b.download_as_bytes()
+                    rows.extend(parse_raw_1991_popu(content, map_91))
+        except Exception as e:
+            logging.warning(f"Could not load 1991 POPU files from GCS: {e}")
 
     return rows
 
