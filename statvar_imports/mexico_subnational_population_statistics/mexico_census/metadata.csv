@@ -1,0 +1,4 @@
+parameter,value
+url,https://www.inegi.org.mx/temas/
+description,"Mexican Demographics, Economy, Health and Education data from National Institute of Statistics and Geography (INEGI) at Country and State level."
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,observationPeriod"

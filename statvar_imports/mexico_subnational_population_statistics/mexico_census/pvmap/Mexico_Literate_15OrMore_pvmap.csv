@@ -1,0 +1,21 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+"Población de 15 años y más por entidad federativa según condición de alfabetismo, 2020",observationDate,2020,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2020",observationDate,2020,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2025",observationDate,2025,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2030",observationDate,2030,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2035",observationDate,2035,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2040",observationDate,2040,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2045",observationDate,2045,,,,,,
+"Población de 15 años y más por entidad federativa y sexo según condición de alfabetismo, 2050",observationDate,2050,,,,,,
+Entidad federativa,measuredProperty,count,populationType,Person,statType,measuredValue,age,[15 - Years]
+Total,gender,"""""",,,,,,
+Mujeres,gender,Female,,,,,,
+Hombres,gender,Male,,,,,,
+Población de 15 años y más (Valor),value,{Number},,,,,,
+Alfabeta (Valor),value,{Number},literacyStatus,Literate,,,,
+Analfabeta (Valor),value,{Number},literacyStatus,Illiterate,,,,
+Alfabeta (Valor porcentual),value,{Number},literacyStatus,Literate,unit,Percent,,
+Analfabeta (Valor porcentual),value,{Number},literacyStatus,Illiterate,unit,Percent,,
+
+
+
