@@ -1,0 +1,10 @@
+parameter,value
+place_type,Country
+places_within,country/LKA
+places_resolved_csv,srilanka_places_resolved.csv
+header_rows,1
+word_delimiter,""""""
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+skip_constant_csv_columns,False
+drop_statvars_without_svobs,False
+generate_statvar_name,False
