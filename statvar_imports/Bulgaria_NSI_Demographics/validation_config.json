@@ -1,0 +1,28 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verifies that MaxDate is uniform across all generated StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_all_statvars_freshness",
+            "description": "Verify all active StatVars meet the 1-year publication lag freshness boundary (TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1"
+            }
+        },
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed 0.1%.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        }
+    ]
+}
