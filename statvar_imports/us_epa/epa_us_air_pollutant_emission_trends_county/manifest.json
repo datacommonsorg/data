@@ -15,7 +15,8 @@
             "source_files": [
                 "input_files/*.*",
                 "input_files/county_input_file/*.csv",
-                "output_files/*_counters.txt"
+                "output_files/*_counters.txt",
+                "validation_config.json"
             ],
             "import_inputs": [
                 {
@@ -24,7 +25,8 @@
                     "node_mcf": "output_files/*.mcf"
                 }
             ],
-            "cron_schedule": "0 07 * * 2"
+            "cron_schedule": "0 07 * * 2",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

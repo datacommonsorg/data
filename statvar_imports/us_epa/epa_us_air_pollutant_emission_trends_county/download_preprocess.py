@@ -153,7 +153,7 @@ def export_db_to_csv(db_path: str, year: int):
         )
     except subprocess.CalledProcessError as e:
         logging.error(f"Error reading tables from {db_path}: {e.stderr.strip()}")
-        return
+        raise
 
     tables = [t.strip() for t in res.stdout.splitlines() if t.strip()]
 
@@ -221,7 +221,7 @@ def main():
                 logging.error(f"Failed to download {url}: {e}")
                 if os.path.exists(local_file):
                     os.remove(local_file)
-                continue
+                raise
 
         # 2. Extract or Identify DB files
         db_files_to_process = []

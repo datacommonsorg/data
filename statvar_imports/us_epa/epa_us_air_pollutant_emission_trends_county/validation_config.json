@@ -1,0 +1,11 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks that the latest date (MaxDate) is consistent across all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        }
+    ]
+}
