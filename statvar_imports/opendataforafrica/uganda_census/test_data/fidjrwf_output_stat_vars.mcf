@@ -1,0 +1,1 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/fidjrwf_input.csv --pv_map=fidjrwf_pvmap.csv --config_file=fidjrwf_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=test_data/fidjrwf_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-10-26

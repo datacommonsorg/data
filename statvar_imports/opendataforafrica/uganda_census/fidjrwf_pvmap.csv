@@ -1,0 +1,63 @@
+"key","p1","v1","p2","v2","p3","v3","p4","v4","p5","v5","p6","v6","p7","v7"
+"REGIONID_REGION","observationAbout","{Data}",,,,,,,,,,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,,,,,,,
+"OBS_VALUE","value","{Number}",,,,,,,,,,,,
+"FREQ","observationPeriod","P1Y",,,,,,,,,,,,
+"FREQ:A","observationPeriod","P1Y",,,,,,,,,,,,
+"REGION:KN.A7","observationAbout","wikidataId/Q1364817",,,,,,,,,,,,
+"VARIABLE:KN.A2","populationType","Person","measuredProperty","count","statType","measuredValue","name","Total Population",,,,,,
+"VARIABLE:KN.A3","populationType","Person","measuredProperty","count","statType","growthRate","unit","Percent","name","Census Population Growth Rate",,,,
+"VARIABLE:KN.A7","#ignore","not mapped",,,,,,,,,,,,
+"VARIABLE:KN.A8","populationType","Person","measuredProperty","count","statType","measuredValue","placeOfResidenceClassification","Rural","name","Rural Population",,,,
+"VARIABLE:KN.A9","populationType","Person","measuredProperty","count","statType","measuredValue","placeOfResidenceClassification","Urban","name","Urban Population",,,,
+"VARIABLE:KN.A11","populationType","Person","measuredProperty","count","statType","measuredValue","age","[0 4 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A12","populationType","Person","measuredProperty","count","statType","measuredValue","age","[5 9 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A13","populationType","Person","measuredProperty","count","statType","measuredValue","age","[10 14 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A14","populationType","Person","measuredProperty","count","statType","measuredValue","age","[15 19 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A15","populationType","Person","measuredProperty","count","statType","measuredValue","age","[20 24 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A16","populationType","Person","measuredProperty","count","statType","measuredValue","age","[25 29 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A17","populationType","Person","measuredProperty","count","statType","measuredValue","age","[30 34 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A18","populationType","Person","measuredProperty","count","statType","measuredValue","age","[35 39 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A19","populationType","Person","measuredProperty","count","statType","measuredValue","age","[40 44 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A20","populationType","Person","measuredProperty","count","statType","measuredValue","age","[45 49 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A21","populationType","Person","measuredProperty","count","statType","measuredValue","age","[50 54 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A22","populationType","Person","measuredProperty","count","statType","measuredValue","age","[55 59 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A23","populationType","Person","measuredProperty","count","statType","measuredValue","age","[60 64 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A24","populationType","Person","measuredProperty","count","statType","measuredValue","age","[65 69 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A25","populationType","Person","measuredProperty","count","statType","measuredValue","age","[70 74 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A26","populationType","Person","measuredProperty","count","statType","measuredValue","age","[75 79 Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A27","populationType","Person","measuredProperty","count","statType","measuredValue","age","[80 - Years]","#Multiply","1000",,,,
+"VARIABLE:KN.A28","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[0 4 Years]","#Multiply","1000"
+"VARIABLE:KN.A29","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[5 9 Years]","#Multiply","1000"
+"VARIABLE:KN.A30","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[10 14 Years]","#Multiply","1000"
+"VARIABLE:KN.A31","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[15 19 Years]","#Multiply","1000"
+"VARIABLE:KN.A32","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[20 24 Years]","#Multiply","1000"
+"VARIABLE:KN.A33","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[25 29 Years]","#Multiply","1000"
+"VARIABLE:KN.A34","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[30 34 Years]","#Multiply","1000"
+"VARIABLE:KN.A35","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[35 39 Years]","#Multiply","1000"
+"VARIABLE:KN.A36","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[40 44 Years]","#Multiply","1000"
+"VARIABLE:KN.A37","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[45 49 Years]","#Multiply","1000"
+"VARIABLE:KN.A38","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[50 54 Years]","#Multiply","1000"
+"VARIABLE:KN.A39","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[55 59 Years]","#Multiply","1000"
+"VARIABLE:KN.A40","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[60 64 Years]","#Multiply","1000"
+"VARIABLE:KN.A41","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[65 69 Years]","#Multiply","1000"
+"VARIABLE:KN.A42","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[70 74 Years]","#Multiply","1000"
+"VARIABLE:KN.A43","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[75 79 Years]","#Multiply","1000"
+"VARIABLE:KN.A44","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","age","[80 - Years]","#Multiply","1000"
+"VARIABLE:KN.A45","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[0 4 Years]","#Multiply","1000"
+"VARIABLE:KN.A46","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[5 9 Years]","#Multiply","1000"
+"VARIABLE:KN.A47","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[10 14 Years]","#Multiply","1000"
+"VARIABLE:KN.A48","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[15 19 Years]","#Multiply","1000"
+"VARIABLE:KN.A49","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[20 24 Years]","#Multiply","1000"
+"VARIABLE:KN.A50","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[25 29 Years]","#Multiply","1000"
+"VARIABLE:KN.A51","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[30 34 Years]","#Multiply","1000"
+"VARIABLE:KN.A52","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[35 39 Years]","#Multiply","1000"
+"VARIABLE:KN.A53","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[40 44 Years]","#Multiply","1000"
+"VARIABLE:KN.A54","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[45 49 Years]","#Multiply","1000"
+"VARIABLE:KN.A55","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[50 54 Years]","#Multiply","1000"
+"VARIABLE:KN.A56","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[55 59 Years]","#Multiply","1000"
+"VARIABLE:KN.A57","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[60 64 Years]","#Multiply","1000"
+"VARIABLE:KN.A58","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[65 69 Years]","#Multiply","1000"
+"VARIABLE:KN.A59","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[70 74 Years]","#Multiply","1000"
+"VARIABLE:KN.A60","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[75 79 Years]","#Multiply","1000"
+"VARIABLE:KN.A61","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","age","[80 - Years]","#Multiply","1000"

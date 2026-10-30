@@ -399,7 +399,7 @@ class ImportExecutor:
         content = blob.download_as_text()
         if not content:
             return ''
-        return content
+        return content.strip()
 
     def _get_latest_version(self, import_dir: str) -> str:
         """

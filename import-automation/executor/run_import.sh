@@ -209,7 +209,7 @@ function load_manifest {
     echo_fatal "Unable to find file '$manifest_file'"
   fi
   MANIFEST=$(cat "$manifest_file")
-  IMPORT_DIR=$(realpath $(dirname "$manifest_file") | sed -e 's,.*/data/,,')
+  IMPORT_DIR=$(realpath $(dirname "$manifest_file") | sed -e 's,.*\(statvar_imports\|scripts\)/,\1/,')
   if [[ -n "$IMPORT_NAME" ]]; then
     grep -q "$IMPORT_NAME" "$manifest_file" || echo_fatal "Import $IMPORT_NAME not present in $manifest_file"
   fi
