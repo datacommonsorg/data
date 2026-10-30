@@ -105,7 +105,7 @@ def process_and_modify_data_cascading(file_path):
             # If it's not a top-level header, and we have a last known header
             if last_known_header is not None:
                 df.iloc[i, 0] = f"{last_known_header}:{current_cell_value}"
-    
+
     return df
 
 
@@ -133,7 +133,6 @@ def main(argv):
                 logging.fatal(
                     f"Download or processing of '{file_name_from_url}' failed")
                 sys.exit(1)
-
 
         except FileNotFoundError:
             logging.fatal(

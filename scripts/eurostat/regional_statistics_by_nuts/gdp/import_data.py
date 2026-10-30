@@ -41,9 +41,6 @@ sys.path.insert(1, '../../../../util')
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
 
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  # default='warn'
-
 
 class EurostatGDPImporter:
     """Pulls GDP data from the Eurostat database. Specifically, it processes the

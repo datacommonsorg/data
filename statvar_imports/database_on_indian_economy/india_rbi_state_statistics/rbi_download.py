@@ -45,40 +45,10 @@ DEFAULT_HEADERS = {
     'https://www.rbi.org.in/',
 }
 
-RBI_PORTAL_URL = (
-    'https://www.rbi.org.in/Scripts/AnnualPublications.aspx?'
-    'head=Handbook%20of%20Statistics%20on%20Indian%20States'
-)
-XLSX_ZIP_SIGNATURE = b'PK\x03\x04'
 
-
-def create_retry_session(
-        retries: int = 4,
-        backoff_factor: float = 2.0,
-        status_forcelist: tuple = (429, 500, 502, 503, 504),
-) -> requests.Session:
-    """Creates a requests.Session with connection pooling, retries, and browser headers."""
-    session = requests.Session()
-    retry_strategy = Retry(
-        total=retries,
-        backoff_factor=backoff_factor,
-        status_forcelist=status_forcelist,
-        allowed_methods=["HEAD", "GET"],
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry_strategy,
-                          pool_connections=10,
-                          pool_maxsize=10)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    session.headers.update(DEFAULT_HEADERS)
-    session.verify = True
-    return session
-
-
-def _load_local_config(file_path):
-    if not os.path.exists(file_path):
-        return None
+def reads_config_file():
+    _FLAGS = flags.FLAGS
+    config_file_path = _FLAGS.config_file_path
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -87,181 +57,32 @@ def _load_local_config(file_path):
     return None
 
 
-def reads_config_file():
-    _FLAGS = flags.FLAGS
+
+def download_files(URL_CONFIG):
     try:
-        config_file_path = _FLAGS.config_file_path
-    except (flags.UnparsedFlagAccessError, AttributeError):
-        try:
-            config_file_path = _FLAGS['config_file_path'].value
-        except Exception:
-            config_file_path = DEFAULT_CONFIG_JSON
-
-    # 1. If it's a local file path (or doesn't start with gs://), try loading it
-    if config_file_path and not config_file_path.startswith('gs://'):
-        config = _load_local_config(config_file_path)
-        if config and 'URLS_CONFIG' in config:
-            logging.info(f"Loaded config from local path: {config_file_path}")
-            return config
-        logging.warning(
-            f"Could not load config from local file '{config_file_path}'")
-
-    # 2. If it's a GCS path, try loading from GCS
-    if config_file_path and config_file_path.startswith('gs://'):
-        try:
-            storage_client = storage.Client()
-            parts = config_file_path[5:].split('/', 1)
-            bucket_name = parts[0]
-            blob_name = parts[1] if len(parts) > 1 else ''
-            bucket = storage_client.bucket(bucket_name)
-            blob = bucket.blob(blob_name)
-            file_contents = blob.download_as_text()
-            if config_file_path.endswith('.json'):
-                return json.loads(file_contents)
-            # Deprecated: Legacy Python config (.py) via exec().
-            # All imports should standardize on version-controlled JSON configuration.
-            logging.warning(
-                f"DEPRECATION WARNING: Loading Python configuration via exec() "
-                f"from '{config_file_path}' is deprecated and will be removed. "
-                "Please migrate to JSON format ('configs.json').")
-            local_vars = {}
-            exec(file_contents, {}, local_vars)
-            return local_vars
-        except Exception as e:
-            logging.warning(
-                f"Cannot extract url and related configs from GCS '{config_file_path}': {e}. "
-                "Falling back to local configuration.")
-
-    # 3. Fall back to local configs.json in SCRIPT_DIR
-    config = _load_local_config(DEFAULT_CONFIG_JSON)
-    if config and 'URLS_CONFIG' in config:
-        logging.info(
-            f"Loaded fallback configuration from {DEFAULT_CONFIG_JSON}")
-        return config
-
-    logging.error(
-        "Cannot extract url and related configs: all sources failed.")
-    raise RuntimeError(
-        "Cannot extract url and related configs: all sources failed.")
-
-
-def download_files(URL_CONFIG, session=None, delay=0.5):
-    if not URL_CONFIG:
-        logging.warning("No URL configurations provided to download.")
-        return []
-
-    if session is None:
-        session = create_retry_session()
-        try:
-            logging.info(
-                f"Warming up session with RBI portal cookies from {RBI_PORTAL_URL}"
-            )
-            session.get(RBI_PORTAL_URL, timeout=30)
-        except Exception as e:
-            logging.warning(
-                f"Could not warm up session from {RBI_PORTAL_URL}: {e}")
-
-    failed_downloads = []
-
-    for config in URL_CONFIG:
-        config_url = config.get("url")
-        category_name = config.get("category")
-        file_name = config.get("filename")
-        if not config_url or not category_name or not file_name:
-            logging.warning(f"Skipping incomplete config: {config}")
-            failed_downloads.append(file_name or str(config))
-            continue
-
-        target_dir = os.path.join(INPUT_DIR, category_name)
-        os.makedirs(target_dir, exist_ok=True)
-        file_path = os.path.join(target_dir, file_name)
-
-        force_download = False
-        try:
-            force_download = flags.FLAGS.force_download
-        except (flags.UnparsedFlagAccessError, AttributeError):
-            pass
-
-        if os.path.exists(file_path):
-            if not force_download and os.path.getsize(file_path) > 0:
-                with open(file_path, 'rb') as f:
-                    magic = f.read(4)
-                if magic == XLSX_ZIP_SIGNATURE:
-                    logging.info(f"Skipping existing valid file: {file_name}")
-                    continue
-                try:
-                    os.remove(file_path)
-                except OSError:
-                    pass
-            elif not force_download and os.path.getsize(file_path) == 0:
-                try:
-                    os.remove(file_path)
-                except OSError:
-                    pass
-
-        try:
-            logging.info(f"Attempting GET request to: {config_url}")
-            response = session.get(config_url, timeout=45)
-
-            if response.status_code == 404:
-                logging.error(
-                    f"Table not found (HTTP 404) at {config_url} for {file_name}"
-                )
-                failed_downloads.append(file_name)
-                continue
-
-            response.raise_for_status()
-            content = response.content
-
-            if not content:
-                logging.error(
-                    f"Empty response received for {file_name} from {config_url}"
-                )
-                failed_downloads.append(file_name)
-                continue
-
-            if not content.startswith(XLSX_ZIP_SIGNATURE):
-                snippet = content[:50].decode('utf-8', errors='replace')
-                logging.error(
-                    f"Invalid file format received for {file_name} from {config_url}: "
-                    f"expected XLSX ZIP signature, got: {snippet!r}")
-                failed_downloads.append(file_name)
-                continue
-
-            # Write atomically to a temporary directory, then move into place
-            with tempfile.TemporaryDirectory(dir=target_dir) as tmp_dir:
-                temp_path = os.path.join(tmp_dir, file_name)
-                with open(temp_path, 'wb') as tmp_file:
-                    tmp_file.write(content)
-                os.replace(temp_path, file_path)
-            logging.info(
-                f"Downloaded the file {file_name} successfully ({len(content)} bytes)."
-            )
-
-            if delay > 0:
-                time.sleep(delay)
-
-        except Exception as e:
-            logging.error(
-                f"Failed to download table {file_name} from {config_url}: {e}")
-            failed_downloads.append(file_name)
-
-    return failed_downloads
-
-
-def _apply_map(df, func):
-    """Version-agnostic element-wise DataFrame mapping
-    (uses df.map if available, else df.applymap).
-    """
-    if hasattr(df, 'map'):
-        return df.map(func)
-    return df.applymap(func)
+        for config in URL_CONFIG:
+            config_url = config.get("url")
+            category_name = config.get("category")
+            file_name = config.get("filename")
+            file_path = os.path.join(INPUT_DIR, category_name, file_name)
+            os.makedirs(os.path.join(INPUT_DIR, category_name), exist_ok=True)
+            file_response = _retry_method(config_url,
+                                          headers=None,
+                                          tries=3,
+                                          delay=5,
+                                          backoff=2)
+            if file_response:
+                with open(file_path, 'wb') as f:
+                    f.write(file_response.content)
+                logging.info(f"Downloaded the file {file_name} successfully.")
+    except Exception as e:
+        logging.fatal(f"Download error: {str(e)}")
 
 
 def preprocess_files(directory_path):
     if not os.path.isdir(directory_path):
-        logging.error(f"Error: Directory not found at '{directory_path}'")
-        return [directory_path]
+        logging.info(f"Error: Directory not found at '{directory_path}'")
+        return
 
     xlsx_files = [f for f in os.listdir(directory_path) if f.endswith('.xlsx')]
 
@@ -274,7 +95,8 @@ def preprocess_files(directory_path):
         f"Found {len(xlsx_files)} XLSX files to process in '{directory_path}'."
     )
 
-    failed_files = []
+    logging.info(
+        f"Found {len(xlsx_files)} XLSX files to process in '{directory_path}'.")
 
     for file_name in sorted(xlsx_files):
         file_path = os.path.join(directory_path, file_name)
@@ -282,72 +104,32 @@ def preprocess_files(directory_path):
         try:
             all_sheets_data = pd.read_excel(file_path,
                                             sheet_name=None,
-                                            header=None,
-                                            engine='openpyxl')
+                                            header=None)
+            with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
+                for sheet_name, df in all_sheets_data.items():
+                    df = df.map(lambda x: str(x).replace('*', '').replace(
+                        '@', '').strip())
+                    mask = df.eq('State/Union Territory').any(axis=1)
+                    state_positions = df[mask] == 'State/Union Territory'
 
-            def clean_cell(val):
-                if pd.isna(val):
-                    return val
-                if isinstance(val, (int, float)):
-                    return val
-                val_str = str(val).replace('*', '').replace('@', '').strip()
-                if not val_str or val_str.lower() == 'nan':
-                    return float('nan')
-                return val_str
+                    def safe_to_numeric(val):
+                        val_str = str(val)
+                        if val_str.isdigit():
+                            return int(val_str)
+                        try:
+                            float_val = float(val_str)
+                            return float_val
+                        except ValueError:
+                            return val
 
-            def safe_to_numeric(val):
-                if pd.isna(val):
-                    return val
-                if isinstance(val, int) and not isinstance(val, bool):
-                    return val
-                if isinstance(val, float):
-                    return int(val) if val.is_integer() else val
-                val_str = str(val).strip()
-                if not val_str or val_str.lower() == 'nan':
-                    return float('nan')
-                if val_str.isdigit():
-                    return int(val_str)
-                try:
-                    float_val = float(val_str)
-                    if float_val.is_integer():
-                        return int(float_val)
-                    return float_val
-                except ValueError:
-                    return val
-
-            def is_state_header(val):
-                if pd.isna(val):
-                    return False
-                return bool(
-                    re.search(
-                        r'state\s*/\s*(?:union(?:\s*territory)?|u\.?t\.?\b)',
-                        str(val), re.IGNORECASE))
-
-            for sheet_name, df in all_sheets_data.items():
-                df = _apply_map(df, clean_cell)
-                is_state_cell = _apply_map(df, is_state_header)
-                mask = is_state_cell.any(axis=1)
-
-                if mask.any():
-                    state_positions = is_state_cell.loc[mask]
-                    df_num = _apply_map(df[mask], safe_to_numeric)
-                    converted = df_num.mask(state_positions, df[mask])
-                    df = df.astype(object)
+                    df_num = df[mask].applymap(safe_to_numeric)
+                    converted = df_num.mask(state_positions,
+                                            'State/Union Territory')
                     df.loc[mask, :] = converted
-                all_sheets_data[sheet_name] = df
-
-            with tempfile.TemporaryDirectory(dir=directory_path) as output_dir:
-                output_path = os.path.join(output_dir, file_name)
-                with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
-                    for sheet_name, df in all_sheets_data.items():
-                        df.to_excel(writer,
-                                    sheet_name=sheet_name,
-                                    index=False,
-                                    header=False)
-                os.replace(output_path, file_path)
-            logging.info(
-                f"Successfully processed {file_name} ({len(all_sheets_data)} sheet(s))."
-            )
+                    df.to_excel(writer,
+                                sheet_name=sheet_name,
+                                index=False,
+                                header=False)
 
         except Exception as e:
             logging.error(f"Error processing {file_name}: {e}")
@@ -377,7 +159,6 @@ def main(argv):
     directories = [
         'agriculture', 'environment', 'infrastructure', 'price_and_wages'
     ]
-    failed_preprocesses = []
     for directory in directories:
         failed = preprocess_files(os.path.join(INPUT_DIR, directory))
         if failed:

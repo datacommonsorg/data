@@ -1,0 +1,99 @@
+Notes,Disease,Disease Code,Year,Year Code,Regions/States,Regions/States Code,Case Count
+,Anthrax,10350,2023,2023,United States,U.S.,0
+,Anthrax,10350,2023,2023,New England,REGION1,0
+,Anthrax,10350,2023,2023,Connecticut,09,0
+,Anthrax,10350,2023,2023,Maine,23,0
+,Anthrax,10350,2023,2023,Massachusetts,25,0
+,Anthrax,10350,2023,2023,New Hampshire,33,0
+,Anthrax,10350,2023,2023,Rhode Island,44,0
+,Anthrax,10350,2023,2023,Vermont,50,0
+,Anthrax,10350,2023,2023,Middle Atlantic,REGION2,0
+,Anthrax,10350,2023,2023,New Jersey,34,0
+,Anthrax,10350,2023,2023,New York (excluding New York City),36888,0
+,Anthrax,10350,2023,2023,New York City,75772,0
+,Anthrax,10350,2023,2023,Pennsylvania,42,0
+,Anthrax,10350,2023,2023,East North Central,REGION3,0
+,Anthrax,10350,2023,2023,Illinois,17,0
+,Anthrax,10350,2023,2023,Indiana,18,0
+,Anthrax,10350,2023,2023,Michigan,26,0
+,Anthrax,10350,2023,2023,Ohio,39,0
+,Anthrax,10350,2023,2023,Wisconsin,55,0
+,Anthrax,10350,2023,2023,West North Central,REGION4,0
+,Anthrax,10350,2023,2023,Iowa,19,0
+,Anthrax,10350,2023,2023,Kansas,20,0
+,Anthrax,10350,2023,2023,Minnesota,27,0
+,Anthrax,10350,2023,2023,Missouri,29,0
+,Anthrax,10350,2023,2023,Nebraska,31,0
+,Anthrax,10350,2023,2023,North Dakota,38,0
+,Anthrax,10350,2023,2023,South Dakota,46,0
+,Anthrax,10350,2023,2023,South Atlantic,REGION5,0
+,Anthrax,10350,2023,2023,Delaware,10,0
+,Anthrax,10350,2023,2023,District of Columbia,11,0
+,Anthrax,10350,2023,2023,Florida,12,0
+,Anthrax,10350,2023,2023,Georgia,13,0
+,Anthrax,10350,2023,2023,Maryland,24,0
+,Anthrax,10350,2023,2023,North Carolina,37,0
+,Anthrax,10350,2023,2023,South Carolina,45,0
+,Anthrax,10350,2023,2023,Virginia,51,0
+,Anthrax,10350,2023,2023,West Virginia,54,0
+,Anthrax,10350,2023,2023,East South Central,REGION6,0
+,Anthrax,10350,2023,2023,Alabama,01,0
+,Anthrax,10350,2023,2023,Kentucky,21,0
+,Anthrax,10350,2023,2023,Mississippi,28,0
+,Anthrax,10350,2023,2023,Tennessee,47,0
+,Anthrax,10350,2023,2023,West South Central,REGION7,0
+,Anthrax,10350,2023,2023,Arkansas,05,0
+,Anthrax,10350,2023,2023,Louisiana,22,0
+,Anthrax,10350,2023,2023,Oklahoma,40,0
+,Anthrax,10350,2023,2023,Texas,48,0
+,Anthrax,10350,2023,2023,Mountain,REGION8,0
+,Anthrax,10350,2023,2023,Arizona,04,0
+,Anthrax,10350,2023,2023,Colorado,08,0
+,Anthrax,10350,2023,2023,Idaho,16,0
+,Anthrax,10350,2023,2023,Montana,30,0
+,Anthrax,10350,2023,2023,Nevada,32,0
+,Anthrax,10350,2023,2023,New Mexico,35,0
+,Anthrax,10350,2023,2023,Utah,49,0
+,Anthrax,10350,2023,2023,Wyoming,56,0
+,Anthrax,10350,2023,2023,Pacific,REGION9,0
+,Anthrax,10350,2023,2023,Alaska,02,0
+,Anthrax,10350,2023,2023,California,06,0
+,Anthrax,10350,2023,2023,Hawaii,15,0
+,Anthrax,10350,2023,2023,Oregon,41,0
+,Anthrax,10350,2023,2023,Washington,53,0
+,Anthrax,10350,2023,2023,Territories,REGION10,0
+,Anthrax,10350,2023,2023,American Samoa,60,0
+,Anthrax,10350,2023,2023,Commonwealth of Northern Mariana Islands,69,0
+,Anthrax,10350,2023,2023,Guam,66,0
+,Anthrax,10350,2023,2023,Puerto Rico,72,0
+,Anthrax,10350,2023,2023,U.S. Virgin Islands,78,0
+,Anthrax,10350,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,United States,U.S.,150
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,New England,REGION1,11
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Connecticut,09,2
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Maine,23,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Massachusetts,25,7
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,New Hampshire,33,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Rhode Island,44,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Vermont,50,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Middle Atlantic,REGION2,44
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,New Jersey,34,13
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,New York (excluding New York City),36888,12
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,New York City,75772,14
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Pennsylvania,42,5
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,East North Central,REGION3,15
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Illinois,17,12
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Indiana,18,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Michigan,26,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Ohio,39,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Wisconsin,55,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,West North Central,REGION4,6
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Iowa,19,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Kansas,20,2
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Minnesota,27,3
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Missouri,29,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Nebraska,31,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,North Dakota,38,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,South Dakota,46,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,South Atlantic,REGION5,21
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Delaware,10,0

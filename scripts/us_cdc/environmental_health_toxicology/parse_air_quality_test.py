@@ -8,14 +8,19 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-import unittest
 import os
-from .parse_air_quality import clean_air_quality_data
+import shutil
+import sys
+import unittest
 
 _MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, _MODULE_DIR)
+
+try:
+    from .parse_air_quality import clean_air_quality_data
+except ImportError:
+    from parse_air_quality import clean_air_quality_data
+
 TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
 INPUT_DIR = 'input_files'
 OUTPUT_DIR = 'actual_output_files'
@@ -63,15 +68,13 @@ TEST_DATA = [{
         os.path.join(TEST_DATA_DIR, "CDC_PM25County", INPUT_DIR),
     "output_dir":
         os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_DIR),
-    "expected_file":
+    "expected_files": [
         os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_FILES,
-                     "PM25county.csv"),
+                     f"PM25county_{i}.csv") for i in range(4)
+    ],
     "files": [{
-        "input_file_name":
-            "PM2.5County_input_0.csv",
-        "output_file_name":
-            os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_DIR,
-                         "PM25county.csv")
+        "input_file_name": "PM2.5County_input_0.csv",
+        "output_file_name": "PM25county.csv"
     }]
 }, {
     "import_name":
@@ -103,19 +106,34 @@ class TestParseAirQuality(unittest.TestCase):
         Tests the clean_air_quality_data function for all the 4 imports.
         """
         for data in TEST_DATA:
-            for data1 in data["files"]:
-                output_dir = data["output_dir"]
-                os.makedirs(output_dir, exist_ok=True)
-                clean_air_quality_data(TEST_DATA, data["import_name"],
-                                       data["input_dir"], output_dir)
-                with open(data1["output_file_name"],
-                          encoding="utf-8") as actual_csv_file:
-                    actual_csv_data = actual_csv_file.read().strip()
-                with open(data["expected_file"],
-                          encoding="utf-8") as expected_csv_file:
-                    expected_csv_data = expected_csv_file.read().strip()
+            output_dir = data["output_dir"]
+            os.makedirs(output_dir, exist_ok=True)
+            clean_air_quality_data(TEST_DATA, data["import_name"],
+                                   data["input_dir"], output_dir)
+            if "expected_files" in data:
+                for expected_file in data["expected_files"]:
+                    file_name = os.path.basename(expected_file)
+                    actual_file = os.path.join(output_dir, file_name)
+                    with open(actual_file, encoding="utf-8") as actual_csv_file:
+                        actual_csv_data = actual_csv_file.read().strip()
+                    with open(expected_file,
+                              encoding="utf-8") as expected_csv_file:
+                        expected_csv_data = expected_csv_file.read().strip()
+                    self.assertEqual(expected_csv_data, actual_csv_data)
+            else:
+                for data1 in data["files"]:
+                    with open(data1["output_file_name"],
+                              encoding="utf-8") as actual_csv_file:
+                        actual_csv_data = actual_csv_file.read().strip()
+                    with open(data["expected_file"],
+                              encoding="utf-8") as expected_csv_file:
+                        expected_csv_data = expected_csv_file.read().strip()
 
-                self.assertEqual(expected_csv_data, actual_csv_data)
+                    self.assertEqual(expected_csv_data, actual_csv_data)
+
+    def tearDown(self):
+        for data in TEST_DATA:
+            shutil.rmtree(data["output_dir"], ignore_errors=True)
 
 
 if __name__ == '__main__':
