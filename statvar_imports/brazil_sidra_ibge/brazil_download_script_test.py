@@ -47,6 +47,38 @@ class BrazilDownloadScriptTest(unittest.TestCase):
             expected_status_codes.issubset(
                 set(adapter.max_retries.status_forcelist)))
 
+    def test_build_apisidra_series_url_valid(self):
+        """Tests URL construction for unclassified and classified series queries."""
+        url_unclassified = brazil_download_script.build_apisidra_series_url(
+            6461, 4096, "N1[1]", "202201|202202")
+        self.assertEqual(
+            url_unclassified,
+            "https://apisidra.ibge.gov.br/values/t/6461/n1/1/v/4096/p/202201,202202",
+        )
+
+        url_classified = brazil_download_script.build_apisidra_series_url(
+            6463, 1641, " N3[35] ", "202201|202202", classif=" 629[all] ")
+        self.assertEqual(
+            url_classified,
+            "https://apisidra.ibge.gov.br/values/t/6463/n3/35/v/1641/p/202201,202202/c629/all",
+        )
+
+    def test_build_apisidra_series_url_invalid_regex(self):
+        """Tests that malformed geo_code or classif inputs raise ValueError."""
+        for bad_geo in ["invalid_geo", "N1", "N1[]", "X1[1]", "1[1]"]:
+            with self.subTest(bad_geo=bad_geo):
+                with self.assertRaisesRegex(ValueError,
+                                            "Invalid geo_code format"):
+                    brazil_download_script.build_apisidra_series_url(
+                        6461, 4096, bad_geo, "202201")
+
+        for bad_classif in ["invalid_classif", "629", "629[]", "c629[all]"]:
+            with self.subTest(bad_classif=bad_classif):
+                with self.assertRaisesRegex(ValueError,
+                                            "Invalid classif format"):
+                    brazil_download_script.build_apisidra_series_url(
+                        6463, 1641, "N1[1]", "202201", classif=bad_classif)
+
     @patch("brazil_download_script.SESSION.get")
     def test_get_available_periods_success(self, mock_get):
         """Tests successful retrieval and filtering of period metadata."""
@@ -80,6 +112,46 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         self.assertEqual([p["id"] for p in periods],
                          ["202201", "202202", "202203"])
 
+    @patch("brazil_download_script.SESSION.get")
+    def test_get_available_periods_apisidra_format(self, mock_get):
+        """Tests retrieval and filtering of period metadata in apisidra tabular format."""
+        mock_response = MagicMock()
+        mock_response.json.return_value = [
+            {
+                "D3C": "Trimestre (Código)",
+                "D3N": "Trimestre"
+            },
+            {
+                "D3C": "202104",
+                "D3N": "4º trimestre 2021"
+            },
+            {
+                "D3C": "202201",
+                "D3N": "1º trimestre 2022"
+            },
+            {
+                "D3C": "202202",
+                "D3N": "2º trimestre 2022"
+            },
+        ]
+        mock_get.return_value = mock_response
+
+        periods = brazil_download_script.get_available_periods()
+        self.assertEqual(len(periods), 2)
+        self.assertEqual(
+            periods,
+            [
+                {
+                    "id": "202201",
+                    "literals": ["1º trimestre 2022"]
+                },
+                {
+                    "id": "202202",
+                    "literals": ["2º trimestre 2022"]
+                },
+            ],
+        )
+
     @patch("brazil_download_script.logging.info")
     @patch("brazil_download_script.SESSION.get")
     def test_get_available_periods_logging(self, mock_get, mock_log_info):
@@ -98,7 +170,7 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         mock_get.return_value = mock_response
 
         brazil_download_script.get_available_periods()
-        expected_url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos"
+        expected_url = "https://apisidra.ibge.gov.br/values/t/6461/n1/1/v/4096/p/all"
         mock_log_info.assert_any_call(
             f"Fetching IBGE period metadata: GET {expected_url}")
         mock_log_info.assert_any_call(
@@ -211,6 +283,65 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         self.assertIn("Total", result)
         self.assertEqual(result["Total"], {"202201": "62.1", "202202": "62.6"})
 
+    @patch("brazil_download_script.SESSION.get")
+    def test_fetch_aggregate_series_apisidra_formats(self, mock_get):
+        """Tests fetching unclassified and classified series in apisidra tabular format."""
+        mock_response = MagicMock()
+        mock_response.json.return_value = [
+            {
+                "D3C": "Trimestre (Código)",
+                "V": "Valor"
+            },
+            {
+                "D3C": "202201",
+                "V": "62.1"
+            },
+            {
+                "D3C": "202202",
+                "V": "62.6"
+            },
+        ]
+        mock_get.return_value = mock_response
+
+        res_unclass = brazil_download_script.fetch_aggregate_series(
+            6461, 4096, "N1[1]", "202201|202202")
+        self.assertEqual(res_unclass,
+                         {"Total": {
+                             "202201": "62.1",
+                             "202202": "62.6"
+                         }})
+
+        mock_response.json.return_value = [
+            {
+                "D3C": "Trimestre (Código)",
+                "D4C": "Categoria (Código)",
+                "V": "Valor"
+            },
+            {
+                "D3C": "202201",
+                "D4C": "32385",
+                "V": "175000"
+            },
+            {
+                "D3C": "202202",
+                "D4C": "32386",
+                "V": "106000"
+            },
+        ]
+        res_class = brazil_download_script.fetch_aggregate_series(
+            6463, 1641, "N1[1]", "202201|202202", classif="629[all]")
+        self.assertEqual(
+            res_class,
+            {
+                "32385": {
+                    "202201": "175000"
+                },
+                "32386": {
+                    "202202": "106000"
+                },
+            },
+        )
+
     @patch("brazil_download_script.logging.info")
     @patch("brazil_download_script.SESSION.get")
     def test_fetch_aggregate_series_logging(self, mock_get, mock_log_info):
@@ -232,7 +363,7 @@ class BrazilDownloadScriptTest(unittest.TestCase):
 
         brazil_download_script.fetch_aggregate_series(6461, 4096, "N1[1]",
                                                       "202201")
-        expected_url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos/202201/variaveis/4096?localidades=N1[1]"
+        expected_url = "https://apisidra.ibge.gov.br/values/t/6461/n1/1/v/4096/p/202201"
         mock_log_info.assert_any_call(
             f"Fetching IBGE aggregate series: GET {expected_url}")
         mock_log_info.assert_any_call(
