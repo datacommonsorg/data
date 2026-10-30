@@ -1,0 +1,9 @@
+Node: dcid:droughtEvent/2022-01_s2CellId/0x308b800000000000
+typeOf: dcs:DroughtEvent
+
+Node: dcid:droughtEvent/2022-02_s2CellId/0x89c25c0000000000
+typeOf: dcs:DroughtEvent
+
+Node: dcid:droughtEvent/2022-03_s2CellId/0x1111000000000000
+typeOf: dcs:DroughtEvent
+

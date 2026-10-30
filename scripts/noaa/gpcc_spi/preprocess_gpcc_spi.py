@@ -55,7 +55,7 @@ def to_one_degree_grid_place(latlon):
   Change longitude from 0 ~ 360 scale to -180 ~ 180 scale.
   Change coordinate from middle of the grid to north west point of the grid.
   """
-    return f'grid_1/{math.floor(latlon[0])}_{math.floor((latlon[1]+180)%360 - 180)}'
+    return f'grid_1/{math.floor(latlon.iloc[0])}_{math.floor((latlon.iloc[1]+180)%360 - 180)}'
 
 
 def nc_to_df(nc_path, period, spi_col, start_date, end_date):
