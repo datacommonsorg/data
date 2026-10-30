@@ -1,0 +1,8 @@
+parameter,value
+url,https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031
+description,"Number of live births by statistical city district, gender, age group and origin."
+place_type,City
+output_columns,"observationAbout,observationDate,variableMeasured,value,measurementMethod"
+header_rows,1
+multi_value_properties,"gender,nativity,observationAbout"
+aggregate_duplicate_svobs,sum
