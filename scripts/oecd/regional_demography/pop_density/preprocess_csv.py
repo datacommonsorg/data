@@ -82,7 +82,7 @@ def process_data(df, output_file_path):
         'POP': 'Count_Person_PerArea'
         # 'SURF': 'Area',
     }
-    df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    df_cleaned = df_cleaned.rename(columns=VAR_to_statsvars)
     # Filtering the column
     df_cleaned_reset = df_cleaned[["Region", "Year", "Count_Person_PerArea"]]
     logging.info("Writing output to %s", output_file_path)
