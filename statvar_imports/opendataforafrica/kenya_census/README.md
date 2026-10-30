@@ -4,7 +4,7 @@
 
 - **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
 - **Publisher**: Kenya National Bureau of Statistics (KNBS)
-- **Import Type**: `Semi-Automated`
+- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `kenya.opendataforafrica.org` require semi-automated SDMX XML downloads staged to GCS rather than `auto1w`)
 - **Schedule**: Weekly (Every Monday at 05:00 UTC)
 - **Coverage**: Demographics, Health, Education, Economy (2002 – present)
 - **Entity Resolution**:
@@ -94,10 +94,12 @@ Run `stat_var_processor.py` using repo-relative paths from the repository root:
 
 ### 6.1 Unit Tests
 
-Run the hermetic unit tests for the XML conversion routine:
+Run the hermetic unit tests for the XML conversion routine via `unittest discover` or `run_tests.sh`:
 
 ```bash
-.env/bin/python -m unittest statvar_imports/opendataforafrica/kenya_census/convert_sdmx_xml_to_csv_test.py
+./run_tests.sh -p statvar_imports/opendataforafrica/kenya_census
+# or directly:
+.env/bin/python3 -m unittest discover -v -s statvar_imports/opendataforafrica/kenya_census -p "*_test.py"
 ```
 
 ### 6.2 Pre-Submission Validation Rules
