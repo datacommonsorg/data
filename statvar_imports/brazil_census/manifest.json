@@ -21,13 +21,14 @@
                 {
                     "template_mcf": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.tmcf",
                     "cleaned_csv": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.csv",
-                    "node_mcf": "brazil_population_by_age_and_sex/*.mcf"
+                    "node_mcf": "brazil_population_by_age_and_sex/*_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_population_by_age_and_sex/validation_config.json"
@@ -53,13 +54,14 @@
                 {
                     "template_mcf": "brazil_population_by_race/brazil_population_by_race.tmcf",
                     "cleaned_csv": "brazil_population_by_race/brazil_population_by_race.csv",
-                    "node_mcf": "brazil_population_by_race/*.mcf"
+                    "node_mcf": "brazil_population_by_race/*_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_population_by_race/validation_config.json"
@@ -85,13 +87,14 @@
                 {
                     "template_mcf": "brazil_population_by_religion/brazil_population_by_religion.tmcf",
                     "cleaned_csv": "brazil_population_by_religion/brazil_population_by_religion.csv",
-                    "node_mcf": "brazil_population_by_religion/*.mcf"
+                    "node_mcf": "brazil_population_by_religion/*_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_population_by_religion/validation_config.json"
@@ -117,13 +120,14 @@
                 {
                     "template_mcf": "brazil_population_by_residence/brazil_population_by_residence.tmcf",
                     "cleaned_csv": "brazil_population_by_residence/brazil_population_by_residence.csv",
-                    "node_mcf": "brazil_population_by_residence/*.mcf"
+                    "node_mcf": "brazil_population_by_residence/*_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_population_by_residence/validation_config.json"
@@ -133,7 +137,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://sidra.ibge.gov.br/tabela/9543",
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9952",
             "provenance_description": "Brazil Census: Population count and Literacy rates from IBGE (1940-2022+).",
             "scripts": [
                 "brazil_literacy/download.py",
@@ -150,7 +154,7 @@
                 {
                     "template_mcf": "brazil_literacy/brazil_literacy.tmcf",
                     "cleaned_csv": "brazil_literacy/brazil_literacy.csv",
-                    "node_mcf": "brazil_literacy/*.mcf"
+                    "node_mcf": "brazil_literacy/*_stat_vars.mcf"
                 },
                 {
                     "template_mcf": "brazil_literacy/brazil_literacy_rates.tmcf",
@@ -160,7 +164,8 @@
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_literacy/validation_config.json"
@@ -170,7 +175,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://sidra.ibge.gov.br/tabela/3987",
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/1972",
             "provenance_description": "Brazil Census: School and Daycare attendance by administrative network and course from IBGE (2000-2022+).",
             "scripts": [
                 "brazil_education/download.py",
@@ -186,13 +191,14 @@
                 {
                     "template_mcf": "brazil_education/brazil_education.tmcf",
                     "cleaned_csv": "brazil_education/brazil_education.csv",
-                    "node_mcf": "brazil_education/*.mcf"
+                    "node_mcf": "brazil_education/*_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_education/validation_config.json"
@@ -218,13 +224,14 @@
                 {
                     "template_mcf": "brazil_total_population/brazil_total_population.tmcf",
                     "cleaned_csv": "brazil_total_population/brazil_total_population.csv",
-                    "node_mcf": "brazil_total_population/*.mcf"
+                    "node_mcf": "brazil_total_population/*_stat_vars.mcf"
                 }
             ],
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,
-                "disk": 30
+                "disk": 100,
+                "disk_size": "100Gi"
             },
             "cron_schedule": "0 10 1 * *",
             "validation_config_file": "brazil_total_population/validation_config.json"

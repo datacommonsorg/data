@@ -1,0 +1,77 @@
+# Auto generated using command: "/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_literacy/test_data/sample_brazil_literacy.csv --pv_map=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_literacy/brazil_literacy_pvmap.csv --config_file=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_literacy/brazil_literacy_metadata.csv --places_resolved_csv=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_places_resolved.csv --existing_statvar_mcf= --output_path=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_literacy/test_data/brazil_literacy_output" on 2026-10-30 11:24:23.332330
+
+Node: dcid:Count_Person_15OrMoreYears
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+
+Node: dcid:Count_Person_15OrMoreYears_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_15OrMoreYears_Female_Illiterate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Female
+literacyStatus: dcid:Illiterate
+
+Node: dcid:Count_Person_15OrMoreYears_Female_Literate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Female
+literacyStatus: dcid:Literate
+
+Node: dcid:Count_Person_15OrMoreYears_Illiterate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+literacyStatus: dcid:Illiterate
+
+Node: dcid:Count_Person_15OrMoreYears_Literate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+literacyStatus: dcid:Literate
+
+Node: dcid:Count_Person_15OrMoreYears_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_15OrMoreYears_Male_Illiterate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+literacyStatus: dcid:Illiterate
+
+Node: dcid:Count_Person_15OrMoreYears_Male_Literate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+literacyStatus: dcid:Literate
+

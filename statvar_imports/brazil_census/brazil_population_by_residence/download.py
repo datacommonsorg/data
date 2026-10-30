@@ -303,7 +303,17 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             with open(p91, "r", encoding="utf-8") as f:
                 map_91 = json.load(f)
             break
+    if not map_91:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket(GCS_BUCKET_NAME)
+            blob = bucket.blob("country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
+            map_91 = json.loads(blob.download_as_text())
+        except Exception as e:
+            logging.warning(f"Could not load Brazil_Place_Mapping_1991.json from GCS: {e}")
 
+    found_1991 = False
     input_dirs = [os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files"), os.path.join("/data", "scratch", "input_files")]
     for idir in input_dirs:
         if os.path.isdir(idir):
@@ -311,7 +321,20 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             for pf in pops_files:
                 with open(pf, "rb") as f:
                     rows.extend(parse_raw_1991_pops(f.read(), map_91))
-            break
+                    found_1991 = True
+            if found_1991:
+                break
+    if not found_1991:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket(GCS_BUCKET_NAME)
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_residence"))
+            for b in blobs:
+                if b.name.lower().endswith(".xls"):
+                    rows.extend(parse_raw_1991_pops(b.download_as_bytes(), map_91))
+        except Exception as e:
+            logging.warning(f"Could not load 1991 POPS files from GCS: {e}")
 
     return rows
 
@@ -327,66 +350,60 @@ def download_all_years(
 
     try:
         # 1. Modern 2022+ Censuses from SIDRA API (Table 9923)
-        try:
-            raw_2022 = fetch_sidra_data(session, TABLE_9923_API_URL)
-            logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9923.")
-            for r in raw_2022[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_2022 = fetch_sidra_data(session, TABLE_9923_API_URL)
+        logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9923.")
+        for r in raw_2022[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                year_str = str(r.get("D3N", "2022")).strip()
-                try:
-                    year = int(year_str)
-                except ValueError:
-                    continue
+            year_str = str(r.get("D3N", "2022")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
 
-                situacao = str(r.get("D4N", "Total")).strip()
-                all_rows.append({
-                    "Ano": year,
-                    "Localidade": loc,
-                    "Situacao": situacao,
-                    "Sexo": "Total",
-                    "Populacao": val,
-                })
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 9923 query failed: {e}")
+            situacao = str(r.get("D4N", "Total")).strip()
+            all_rows.append({
+                "Ano": year,
+                "Localidade": loc,
+                "Situacao": situacao,
+                "Sexo": "Total",
+                "Populacao": val,
+            })
 
         # 2. 2010 Census from SIDRA API (Table 608)
-        try:
-            raw_2010 = fetch_sidra_data(session, TABLE_608_API_URL)
-            logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608.")
-            for r in raw_2010[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_2010 = fetch_sidra_data(session, TABLE_608_API_URL)
+        logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608.")
+        for r in raw_2010[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
 
-                situacao = str(r.get("D4N", "Total")).strip()
-                all_rows.append({
-                    "Ano": 2010,
-                    "Localidade": loc,
-                    "Situacao": situacao,
-                    "Sexo": "Total",
-                    "Populacao": val,
-                })
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 608 query failed: {e}")
+            situacao = str(r.get("D4N", "Total")).strip()
+            all_rows.append({
+                "Ano": 2010,
+                "Localidade": loc,
+                "Situacao": situacao,
+                "Sexo": "Total",
+                "Populacao": val,
+            })
 
         # 3. Historical data from raw input files in GCS input_files
         raw_rows = fetch_raw_input_files()
@@ -404,12 +421,6 @@ def download_all_years(
             return target_path
         raise RuntimeError("No residence records retrieved from data sources.")
 
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE) and os.path.isfile(target_path):
-        try:
-            cached_df = pd.read_csv(target_path, low_memory=False)
-            all_rows = cached_df.to_dict("records") + all_rows
-        except Exception:
-            pass
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Situacao", "Sexo"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)

@@ -224,40 +224,37 @@ def download_all_years(
 
     try:
         # 1. Primary Source: Live SIDRA API (Table 9605)
-        try:
-            raw_sidra = fetch_sidra_data(session, TABLE_9605_API_URL)
-            logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605.")
-            for r in raw_sidra[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_sidra = fetch_sidra_data(session, TABLE_9605_API_URL)
+        logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605.")
+        for r in raw_sidra[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                year_str = str(r.get("D3N", "")).strip()
-                try:
-                    year = int(year_str)
-                except ValueError:
-                    continue
+            year_str = str(r.get("D3N", "")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
 
-                cor_raw = str(r.get("D4N", "Total")).strip()
-                if cor_raw in ["Sem declaração", "Não declarada"]:
-                    continue
+            cor_raw = str(r.get("D4N", "Total")).strip()
+            if cor_raw in ["Sem declaração", "Não declarada"]:
+                continue
 
-                all_rows.append({
-                    "Ano": year,
-                    "Localidade": loc,
-                    "Cor": cor_raw,
-                    "Populacao": val,
-                })
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 9605 query failed: {e}")
+            all_rows.append({
+                "Ano": year,
+                "Localidade": loc,
+                "Cor": cor_raw,
+                "Populacao": val,
+            })
 
         # 2. Historical data from raw input files in GCS input_files
         raw_rows = fetch_raw_input_files()
@@ -275,12 +272,6 @@ def download_all_years(
             return target_path
         raise RuntimeError("No race records retrieved from data sources.")
 
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE) and os.path.isfile(target_path):
-        try:
-            cached_df = pd.read_csv(target_path, low_memory=False)
-            all_rows = cached_df.to_dict("records") + all_rows
-        except Exception:
-            pass
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Cor"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)

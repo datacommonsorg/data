@@ -66,7 +66,7 @@ TABLE_1378_API_URL = (
 
 # Mapping of DCID to localidade name
 DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brasil',
+    'country/BRA': 'Brazil',
     'wikidataId/Q478465': 'Norte',
     'wikidataId/Q1136194': 'Nordeste',
     'wikidataId/Q1088815': 'Sudeste',
@@ -225,9 +225,12 @@ def download_all_years(
         logging.info(f"Retrieved {len(raw_2022) - 1} records for 2022 Census.")
         rows_2022: List[Dict[str, str]] = []
         for r in raw_2022[1:]:
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
             rows_2022.append({
                 "Ano": str(r.get("D3N", "2022")).strip(),
-                "Localidade": str(r.get("D1N", "")).strip(),
+                "Localidade": loc,
                 "Idade": str(r.get("D5N", "")).strip(),
                 "Sexo": str(r.get("D4N", "")).strip(),
                 "Populacao": str(r.get("V", "")).strip(),
@@ -241,9 +244,12 @@ def download_all_years(
         logging.info(f"Retrieved {len(raw_2010) - 1} records for 2010 Census.")
         rows_2010: List[Dict[str, str]] = []
         for r in raw_2010[1:]:
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
             rows_2010.append({
                 "Ano": str(r.get("D3N", "2010")).strip(),
-                "Localidade": str(r.get("D1N", "")).strip(),
+                "Localidade": loc,
                 "Idade": str(r.get("D6N", "")).strip(),
                 "Sexo": str(r.get("D5N", "")).strip(),
                 "Populacao": str(r.get("V", "")).strip(),
@@ -356,12 +362,6 @@ def download_all_years(
             return target_path
         raise RuntimeError("No census records retrieved from data sources.")
 
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE) and os.path.isfile(target_path):
-        try:
-            cached_df = pd.read_csv(target_path, low_memory=False)
-            all_rows = cached_df.to_dict("records") + all_rows
-        except Exception:
-            pass
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Idade", "Sexo"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
@@ -399,9 +399,12 @@ def download_table_9514(
         raw_json = fetch_sidra_data(session, TABLE_9514_API_URL)
         rows: List[Dict[str, str]] = []
         for r in raw_json[1:]:
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
             rows.append({
                 "Ano": str(r.get("D3N", "2022")).strip(),
-                "Localidade": str(r.get("D1N", "")).strip(),
+                "Localidade": loc,
                 "Idade": str(r.get("D5N", "")).strip(),
                 "Sexo": str(r.get("D4N", "")).strip(),
                 "Populacao": str(r.get("V", "")).strip(),

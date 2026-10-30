@@ -1,5 +1,5 @@
 parameter,value
-url,https://sidra.ibge.gov.br/tabela/9543
+url,https://sidra.ibge.gov.br/tabela/9952
 description,Brazil Census: Population count by Literacy status from IBGE
 #place_type,Country,AdministrativeArea1
 output_columns,"observationAbout,observationDate,observationPeriod,value,variableMeasured"

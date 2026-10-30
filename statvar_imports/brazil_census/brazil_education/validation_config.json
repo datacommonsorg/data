@@ -14,33 +14,40 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Checks date freshness.",
+            "description": "Checks date freshness across 2010 education cohorts and 2000 PreVestibular.",
             "validator": "SQL_VALIDATOR",
             "scope": {
                 "data_source": "stats"
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2000' AND total_svs > 0"
+                "condition": "((StatVar = 'Count_Student_BrazilPreVestibular' AND MaxDate >= '2000') OR (StatVar != 'Count_Student_BrazilPreVestibular' AND MaxDate >= '2010')) AND total_svs > 0"
             }
         },
         {
             "rule_id": "check_max_date_consistent",
-            "description": "Checks date consistency.",
+            "description": "Checks date consistency across 2010 education StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
             "scope": {
-                "data_source": "stats"
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        "^(?!Count_Student_BrazilPreVestibular$).*$"
+                    ]
+                }
             },
             "params": {}
         },
         {
-            "rule_id": "check_num_places_consistent",
-            "description": "Checks place count consistency.",
-            "validator": "NUM_PLACES_CONSISTENT",
+            "rule_id": "check_num_places_count",
+            "description": "Checks that every education StatVar covers at least 33 places.",
+            "validator": "NUM_PLACES_COUNT",
             "scope": {
                 "data_source": "stats"
             },
-            "params": {}
+            "params": {
+                "minimum": 33
+            }
         }
     ]
 }

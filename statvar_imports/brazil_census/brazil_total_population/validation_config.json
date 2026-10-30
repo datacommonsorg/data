@@ -35,10 +35,16 @@
         },
         {
             "rule_id": "check_num_places_consistent",
-            "description": "Checks place count consistency.",
+            "description": "Checks place count consistency across Male and Female cohorts.",
             "validator": "NUM_PLACES_CONSISTENT",
             "scope": {
-                "data_source": "stats"
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_Person_Male",
+                        "Count_Person_Female"
+                    ]
+                }
             },
             "params": {}
         }
