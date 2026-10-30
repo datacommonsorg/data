@@ -2,7 +2,7 @@ key,prop,val,p1,v1
 Localidade,observationAbout,{Data},,
 Ano,observationDate,{Number},observationPeriod,P1Y
 Populacao,value,{Number},populationType,Person
-Religiao:Total,#ignore,#ignore,,
+Religiao:Total,populationType,Person,,
 Religiao:Católica Apostólica Romana,religion,dcs:RomanCatholicismApostolic,,
 Religiao:Evangélica,religion,dcs:Evangelical,,
 Religiao:Outras Religiões,religion,dcs:Brazil_OtherReligion,,

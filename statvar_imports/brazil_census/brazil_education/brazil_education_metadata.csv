@@ -1,5 +1,5 @@
 parameter,value
-url,https://sidra.ibge.gov.br/tabela/3987
+url,https://sidra.ibge.gov.br/tabela/1972
 description,Brazil Census: Student count by Education Level from IBGE
 #place_type,Country,AdministrativeArea1
 output_columns,"observationAbout,observationDate,observationPeriod,value,variableMeasured"

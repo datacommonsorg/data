@@ -1,0 +1,183 @@
+# Auto generated using command: "/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_education/test_data/sample_brazil_education.csv --pv_map=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_education/brazil_education_pvmap.csv --config_file=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_education/brazil_education_metadata.csv --places_resolved_csv=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_places_resolved.csv --existing_statvar_mcf= --output_path=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_education/test_data/brazil_education_output" on 2026-10-30 11:24:20.209097
+
+Node: dcid:Count_Student
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Student_AdultEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:AdultEducation
+
+Node: dcid:Count_Student_AdultEducation_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:AdultEducation
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_AdultEducation_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:AdultEducation
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_BRAHighSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:BRA_HighSchool
+
+Node: dcid:Count_Student_BRAHighSchool_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:BRA_HighSchool
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_BRAHighSchool_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:BRA_HighSchool
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_BachelorsDegree
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:BachelorsDegree
+
+Node: dcid:Count_Student_BachelorsDegree_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:BachelorsDegree
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_BachelorsDegree_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:BachelorsDegree
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_MastersDegreeOrHigher
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:MastersDegreeOrHigher
+
+Node: dcid:Count_Student_MastersDegreeOrHigher_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:MastersDegreeOrHigher
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_MastersDegreeOrHigher_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:MastersDegreeOrHigher
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_Nursery
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:Nursery
+
+Node: dcid:Count_Student_Nursery_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:Nursery
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_Nursery_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:Nursery
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_PreKindergarten_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:PreKindergarten
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_PreKindergarten_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:PreKindergarten
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_PrimaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:PrimaryEducation
+
+Node: dcid:Count_Student_PrimaryEducation_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:PrimaryEducation
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_PrimaryEducation_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentLevel: dcid:PrimaryEducation
+typeOfSchool: dcid:PublicSchool
+
+Node: dcid:Count_Student_PrivateSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+typeOfSchool: dcid:PrivateSchool
+
+Node: dcid:Count_Student_PublicSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+typeOfSchool: dcid:PublicSchool
+

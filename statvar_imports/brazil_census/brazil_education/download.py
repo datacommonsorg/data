@@ -58,7 +58,7 @@ UF_CODES_2000 = [
 ]
 
 DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brasil',
+    'country/BRA': 'Brazil',
     'wikidataId/Q478465': 'Norte',
     'wikidataId/Q1136194': 'Nordeste',
     'wikidataId/Q1088815': 'Sudeste',
@@ -149,7 +149,7 @@ def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]
 
 
 def load_municipal_mapping() -> Dict[str, str]:
-    """Loads place code mapping to wikidata ID."""
+    """Loads place code mapping to wikidata ID from local scratch or GCS."""
     candidate_paths = [
         os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files", "muncial_state_brazil_mapping.json"),
         os.path.join("/data", "scratch", "intermediate_files", "muncial_state_brazil_mapping.json"),
@@ -159,6 +159,14 @@ def load_municipal_mapping() -> Dict[str, str]:
         if os.path.isfile(p):
             with open(p, "r", encoding="utf-8") as f:
                 return json.load(f)
+    try:
+        from google.cloud import storage
+        client = storage.Client()
+        bucket = client.bucket(GCS_BUCKET_NAME)
+        blob = bucket.blob("country/brazil/intermediate_files/muncial_state_brazil_mapping.json")
+        return json.loads(blob.download_as_text())
+    except Exception as e:
+        logging.warning(f"Could not load municipal mapping from GCS: {e}")
     return {}
 
 
@@ -444,53 +452,71 @@ def download_all_years(
 
     try:
         # 1. Live SIDRA API (Table 1972)
-        try:
-            raw_sidra = fetch_sidra_data(session, TABLE_1972_API_URL)
-            logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 1972.")
-            for r in raw_sidra[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_sidra = fetch_sidra_data(session, TABLE_1972_API_URL)
+        logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 1972.")
+        sidra_acc: Dict[tuple, int] = {}
+        for r in raw_sidra[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                year_str = str(r.get("D3N", "")).strip()
-                try:
-                    year = int(year_str)
-                except ValueError:
-                    continue
+            year_str = str(r.get("D3N", "")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                rede = str(r.get("D4N", "Total")).strip()
-                nivel_raw = str(r.get("D5N", "Total")).strip()
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
+            rede = str(r.get("D4N", "Total")).strip()
+            d5c = str(r.get("D5C", "")).strip()
+            nivel_raw = str(r.get("D5N", "")).strip()
 
+            nivel = None
+            if d5c == "0" or (not d5c and nivel_raw == "Total"):
                 nivel = "Total"
-                if "Creche" in nivel_raw:
-                    nivel = "Creche"
-                elif "Pré-escolar" in nivel_raw:
-                    nivel = "Pré-escolar"
-                elif "fundamental" in nivel_raw.lower():
-                    nivel = "Fundamental"
-                elif "médio" in nivel_raw.lower():
-                    nivel = "Médio"
-                elif "graduação" in nivel_raw.lower():
-                    nivel = "Superior Graduação"
-                elif "mestrado" in nivel_raw.lower() or "doutorado" in nivel_raw.lower():
-                    nivel = "Pós-graduação"
-                elif "adultos" in nivel_raw.lower():
-                    nivel = "Educação de Jovens e Adultos"
+            elif d5c == "95301" or (not d5c and nivel_raw == "Creche"):
+                nivel = "Creche"
+            elif d5c in ("95302", "107454") or (not d5c and nivel_raw in ("Pré-escolar", "Pré-escolar ou classe de alfabetização")):
+                nivel = "Pré-escolar"
+            elif d5c == "7904" or (not d5c and nivel_raw == "Classe de alfabetização"):
+                nivel = "Classe de alfabetização"
+            elif d5c in ("95303", "7905") or (not d5c and nivel_raw in ("Alfabetização de adultos", "Alfabetização de jovens e adultos", "Educação de Jovens e Adultos")):
+                nivel = "Educação de Jovens e Adultos"
+            elif d5c in ("95304", "7906") or (not d5c and nivel_raw in ("Fundamental", "Regular de ensino fundamental")):
+                nivel = "Fundamental"
+            elif d5c in ("95305", "7908") or (not d5c and nivel_raw in ("Médio", "Regular do ensino médio")):
+                nivel = "Médio"
+            elif d5c == "95306" or (not d5c and nivel_raw == "Pré-vestibular"):
+                nivel = "Pré-vestibular"
+            elif d5c == "95307" or (not d5c and nivel_raw in ("Superior de graduação", "Superior Graduação")):
+                nivel = "Superior Graduação"
+            elif d5c in ("95308", "7911", "7912") or (not d5c and nivel_raw in ("Mestrado ou doutorado", "Mestrado", "Doutorado", "Pós-graduação")):
+                nivel = "Pós-graduação"
 
-                all_rows.append({
-                    "Ano": year,
-                    "Localidade": loc,
-                    "RedeEnsino": rede,
-                    "NivelEnsino": nivel,
-                    "Estudantes": val,
-                })
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 1972 query failed: {e}")
+            if nivel is None:
+                continue
+            if nivel == "Pré-vestibular" and rede != "Total":
+                continue
+            if nivel == "Classe de alfabetização" and rede == "Total":
+                continue
+
+            key = (year, loc, rede, nivel)
+            sidra_acc[key] = sidra_acc.get(key, 0) + val
+
+        for (year, loc, rede, nivel), val in sidra_acc.items():
+            all_rows.append({
+                "Ano": year,
+                "Localidade": loc,
+                "RedeEnsino": rede,
+                "NivelEnsino": nivel,
+                "Estudantes": val,
+            })
 
         # 2. Historical & Municipal data from live IBGE FTP portal or raw input files
         raw_input_rows = fetch_from_ibge_ftp_or_input_files(session)
@@ -512,12 +538,6 @@ def download_all_years(
             return target_path
         raise RuntimeError("No education records retrieved from data sources.")
 
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE) and os.path.isfile(target_path):
-        try:
-            cached_df = pd.read_csv(target_path, low_memory=False)
-            all_rows = cached_df.to_dict("records") + all_rows
-        except Exception:
-            pass
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "RedeEnsino", "NivelEnsino"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)

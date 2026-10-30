@@ -14,31 +14,43 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Checks date freshness.",
+            "description": "Checks date freshness for active 2022 residence cohorts and historical 2000 gender-split cohorts.",
             "validator": "SQL_VALIDATOR",
             "scope": {
                 "data_source": "stats"
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2000' AND total_svs > 0"
+                "condition": "((StatVar IN ('Count_Person', 'Count_Person_Urban', 'Count_Person_Rural') AND MaxDate >= '2022') OR (StatVar NOT IN ('Count_Person', 'Count_Person_Urban', 'Count_Person_Rural') AND MaxDate >= '2000')) AND total_svs > 0"
             }
         },
         {
             "rule_id": "check_max_date_consistent",
-            "description": "Checks date consistency.",
+            "description": "Checks date consistency across active 2022 residence StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
             "scope": {
-                "data_source": "stats"
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_Person",
+                        "Count_Person_Urban",
+                        "Count_Person_Rural"
+                    ]
+                }
             },
             "params": {}
         },
         {
             "rule_id": "check_num_places_consistent",
-            "description": "Checks place count consistency.",
+            "description": "Checks place count consistency for state-level gender-split residence cohorts.",
             "validator": "NUM_PLACES_CONSISTENT",
             "scope": {
-                "data_source": "stats"
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        ".*_(Male|Female)$"
+                    ]
+                }
             },
             "params": {}
         }

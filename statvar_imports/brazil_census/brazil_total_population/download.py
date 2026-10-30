@@ -43,7 +43,7 @@ SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9514: População residente por sexo (2022+ Census)
 TABLE_9514_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all"
-    f"/v/93/p/all/c2/all/c287/0/c286/113635?formato=json"
+    f"/v/93/p/all/c2/all/c287/100362/c286/113635?formato=json"
 )
 # Table 1378: População residente por sexo (2010 Census)
 TABLE_1378_API_URL = (
@@ -298,54 +298,48 @@ def download_all_years(
 
     try:
         # 1. 2022+ Census from SIDRA API (Table 9514)
-        try:
-            raw_2022 = fetch_sidra_data(session, TABLE_9514_API_URL)
-            logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9514.")
-            for r in raw_2022[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_2022 = fetch_sidra_data(session, TABLE_9514_API_URL)
+        logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9514.")
+        for r in raw_2022[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                year_str = str(r.get("D3N", "2022")).strip()
-                try:
-                    year = int(year_str)
-                except ValueError:
-                    continue
+            year_str = str(r.get("D3N", "2022")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
 
-                sexo = str(r.get("D4N", "Total")).strip()
-                all_rows.append({"Ano": year, "Localidade": loc, "Sexo": sexo, "Populacao": val})
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 9514 query failed: {e}")
+            sexo = str(r.get("D4N", "Total")).strip()
+            all_rows.append({"Ano": year, "Localidade": loc, "Sexo": sexo, "Populacao": val})
 
         # 2. 2010 Census from SIDRA API (Table 1378)
-        try:
-            raw_2010 = fetch_sidra_data(session, TABLE_1378_API_URL)
-            logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 1378.")
-            for r in raw_2010[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_2010 = fetch_sidra_data(session, TABLE_1378_API_URL)
+        logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 1378.")
+        for r in raw_2010[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
 
-                sexo = str(r.get("D5N", "Total")).strip()
-                all_rows.append({"Ano": 2010, "Localidade": loc, "Sexo": sexo, "Populacao": val})
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 1378 query failed: {e}")
+            sexo = str(r.get("D5N", "Total")).strip()
+            all_rows.append({"Ano": 2010, "Localidade": loc, "Sexo": sexo, "Populacao": val})
 
         # 3. Raw input files from GCS / local scratch (including Brazil_2022_Muncipal_POP.xlsx and POPU91*.XLS)
         raw_rows = fetch_raw_input_files()
@@ -363,12 +357,6 @@ def download_all_years(
             return target_path
         raise RuntimeError("No population records retrieved from data sources.")
 
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE) and os.path.isfile(target_path):
-        try:
-            cached_df = pd.read_csv(target_path, low_memory=False)
-            all_rows = cached_df.to_dict("records") + all_rows
-        except Exception:
-            pass
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Sexo"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)

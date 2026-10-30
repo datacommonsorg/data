@@ -13,6 +13,7 @@
 # limitations under the License.
 """Unit tests for Brazil Census Table 9514 download module."""
 
+import importlib.util
 import os
 import shutil
 import sys
@@ -20,18 +21,21 @@ import tempfile
 import unittest
 from unittest.mock import MagicMock
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, SCRIPT_DIR)
-
 import pandas as pd
 import requests
 
-from download import (
-    FLAGS,
-    download_table_9514,
-    get_robust_session,
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_SPEC = importlib.util.spec_from_file_location(
+    "brazil_population_by_age_and_sex_download",
+    os.path.join(SCRIPT_DIR, "download.py"),
 )
+download_mod = importlib.util.module_from_spec(_SPEC)
+sys.modules["brazil_population_by_age_and_sex_download"] = download_mod
+_SPEC.loader.exec_module(download_mod)
+
+FLAGS = download_mod.FLAGS
+download_table_9514 = download_mod.download_table_9514
+get_robust_session = download_mod.get_robust_session
 
 
 class DownloadTest(unittest.TestCase):
@@ -62,9 +66,7 @@ class DownloadTest(unittest.TestCase):
         session = MagicMock()
         mock_response = MagicMock()
         mock_payload = [
-            {
-                "NC": "Nível Territorial (Código)"
-            },
+            {"NC": "Nível Territorial (Código)"},
             {
                 "NC": "1",
                 "D1N": "Brasil",
@@ -87,14 +89,18 @@ class DownloadTest(unittest.TestCase):
         session.get.return_value = mock_response
 
         out_csv = os.path.join(self.test_dir, "output.csv")
-        saved_file = download_table_9514(session=session, output_file=out_csv)
+        saved_file = download_table_9514(
+            session=session, output_file=out_csv, fallback_to_cached=False
+        )
         self.assertTrue(os.path.isfile(saved_file))
 
         df = pd.read_csv(saved_file)
         self.assertEqual(len(df), 2)
-        self.assertEqual(list(df.columns),
-                         ["Ano", "Localidade", "Idade", "Sexo", "Populacao"])
-        self.assertEqual(df["Localidade"].iloc[0], "Brasil")
+        self.assertEqual(
+            list(df.columns),
+            ["Ano", "Localidade", "Idade", "Sexo", "Populacao"],
+        )
+        self.assertEqual(df["Localidade"].iloc[0], "Brazil")
         self.assertEqual(df["Populacao"].iloc[0], 203080756)
 
     def test_download_table_9514_empty_response_raises(self):
@@ -107,20 +113,23 @@ class DownloadTest(unittest.TestCase):
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         with self.assertRaises(RuntimeError) as ctx:
-            download_table_9514(session=session, output_file=out_csv)
+            download_table_9514(
+                session=session, output_file=out_csv, fallback_to_cached=False
+            )
         self.assertIn("Invalid or empty response payload", str(ctx.exception))
 
     def test_download_table_9514_network_failure_raises(self):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
-            "Connection timed out")
+            "Connection timed out"
+        )
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         with self.assertRaises(RuntimeError) as ctx:
-            download_table_9514(session=session,
-                                output_file=out_csv,
-                                fallback_to_cached=False)
+            download_table_9514(
+                session=session, output_file=out_csv, fallback_to_cached=False
+            )
         self.assertIn("Network error fetching Table 9514", str(ctx.exception))
 
     def test_download_table_9514_fallback_to_cached(self):
@@ -131,12 +140,13 @@ class DownloadTest(unittest.TestCase):
         cached_csv = os.path.join(self.test_dir, "cached.csv")
         with open(cached_csv, "w", encoding="utf-8") as f:
             f.write(
-                "Ano,Localidade,Idade,Sexo,Populacao\n2022,Brasil,Total,Total,100\n"
+                "Ano,Localidade,Idade,Sexo,Populacao\n"
+                "2022,Brazil,Total,Total,100\n"
             )
 
-        saved = download_table_9514(session=session,
-                                    output_file=cached_csv,
-                                    fallback_to_cached=True)
+        saved = download_table_9514(
+            session=session, output_file=cached_csv, fallback_to_cached=True
+        )
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
 

@@ -1,0 +1,36 @@
+# Auto generated using command: "/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_population_by_religion/test_data/sample_brazil_population_by_religion.csv --pv_map=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_population_by_religion/brazil_population_by_religion_pvmap.csv --config_file=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_population_by_religion/brazil_population_by_religion_metadata.csv --places_resolved_csv=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_places_resolved.csv --existing_statvar_mcf= --output_path=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_population_by_religion/test_data/brazil_population_by_religion_output" on 2026-10-30 11:24:33.104525
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_Evangelical
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+religion: dcid:Evangelical
+
+Node: dcid:Count_Person_Irreligion
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+religion: dcid:Irreligion
+
+Node: dcid:Count_Person_ReligionNotStated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+religion: dcid:ReligionNotStated
+
+Node: dcid:Count_Person_RomanCatholicismApostolic
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+religion: dcid:RomanCatholicismApostolic
+

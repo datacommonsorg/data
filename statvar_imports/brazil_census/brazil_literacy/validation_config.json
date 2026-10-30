@@ -14,33 +14,48 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Checks date freshness.",
+            "description": "Checks date freshness across 2022, 2010, 2000, and 1940 literacy StatVar cohorts.",
             "validator": "SQL_VALIDATOR",
             "scope": {
                 "data_source": "stats"
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '1940' AND total_svs > 0"
+                "condition": "((StatVar IN ('Count_Person_15OrMoreYears', 'Count_Person_15OrMoreYears_Male', 'Count_Person_15OrMoreYears_Female', 'Count_Person_15OrMoreYears_Literate', 'Count_Person_15OrMoreYears_Male_Literate', 'Count_Person_15OrMoreYears_Female_Literate', 'Count_Person_15OrMoreYears_Illiterate', 'Count_Person_15OrMoreYears_Male_Illiterate', 'Count_Person_15OrMoreYears_Female_Illiterate') AND MaxDate >= '2022') OR (StatVar LIKE '%Illiterate_AsAFractionOf%' AND MaxDate >= '2010') OR (StatVar LIKE '%Literate_AsAFractionOf%' AND MaxDate >= '2000') OR (StatVar NOT IN ('Count_Person_15OrMoreYears', 'Count_Person_15OrMoreYears_Male', 'Count_Person_15OrMoreYears_Female', 'Count_Person_15OrMoreYears_Literate', 'Count_Person_15OrMoreYears_Male_Literate', 'Count_Person_15OrMoreYears_Female_Literate', 'Count_Person_15OrMoreYears_Illiterate', 'Count_Person_15OrMoreYears_Male_Illiterate', 'Count_Person_15OrMoreYears_Female_Illiterate') AND StatVar NOT LIKE '%_AsAFractionOf_%' AND MaxDate >= '1940')) AND total_svs > 0"
             }
         },
         {
             "rule_id": "check_max_date_consistent",
-            "description": "Checks date consistency.",
+            "description": "Checks date consistency across active 2022 15+ literacy StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
             "scope": {
-                "data_source": "stats"
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_Person_15OrMoreYears",
+                        "Count_Person_15OrMoreYears_Male",
+                        "Count_Person_15OrMoreYears_Female",
+                        "Count_Person_15OrMoreYears_Literate",
+                        "Count_Person_15OrMoreYears_Male_Literate",
+                        "Count_Person_15OrMoreYears_Female_Literate",
+                        "Count_Person_15OrMoreYears_Illiterate",
+                        "Count_Person_15OrMoreYears_Male_Illiterate",
+                        "Count_Person_15OrMoreYears_Female_Illiterate"
+                    ]
+                }
             },
             "params": {}
         },
         {
-            "rule_id": "check_num_places_consistent",
-            "description": "Checks place count consistency.",
-            "validator": "NUM_PLACES_CONSISTENT",
+            "rule_id": "check_num_places_count",
+            "description": "Checks that every literacy StatVar covers at least 33 places.",
+            "validator": "NUM_PLACES_COUNT",
             "scope": {
                 "data_source": "stats"
             },
-            "params": {}
+            "params": {
+                "minimum": 33
+            }
         }
     ]
 }

@@ -1,0 +1,7 @@
+Node: E:brazil_education_output->E0
+observationAbout: C:brazil_education_output->observationAbout
+observationDate: C:brazil_education_output->observationDate
+observationPeriod: C:brazil_education_output->observationPeriod
+value: C:brazil_education_output->value
+variableMeasured: C:brazil_education_output->variableMeasured
+typeOf: dcs:StatVarObservation

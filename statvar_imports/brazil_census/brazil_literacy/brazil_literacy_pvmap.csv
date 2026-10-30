@@ -19,6 +19,7 @@ Raca:Branca,race,dcs:Brazil_Branca,,
 Raca:Preta,race,dcs:Black,,
 Raca:Parda,race,dcs:Brazil_Pardo,,
 Raca:Amarela,race,dcs:Brazil_Amarela,,
+# Note: dcs:Brazil_Indigneous (dcs:BrazilIndigneous) spelling is intentional for legacy schema compatibility.
 Raca:Indígena,race,dcs:Brazil_Indigneous,,
 Sexo:Total,populationType,Person,,
 Sexo:Masculino,gender,Male,,

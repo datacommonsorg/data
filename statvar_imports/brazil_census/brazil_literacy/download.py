@@ -240,8 +240,8 @@ def fetch_2010_illiterate_race() -> List[Dict[str, Any]]:
     return []
 
 
-def parse_2000_literacy_files() -> List[Dict[str, Any]]:
-    """Loads 2000 municipal literacy workbooks across all states."""
+def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
+    """Parses a single 2000 municipal literacy XLS workbook."""
     col_map = {
         1: ('10 anos ou mais', 'Total'),
         2: ('10 anos ou mais', 'Alfabetizada'),
@@ -252,82 +252,105 @@ def parse_2000_literacy_files() -> List[Dict[str, Any]]:
         10: ('20 anos ou mais', 'Total'),
         11: ('20 anos ou mais', 'Alfabetizada'),
     }
+    rows: List[Dict[str, Any]] = []
+    try:
+        df = pd.read_excel(io.BytesIO(content_bytes), header=None, skiprows=3)
+        muni_start = None
+        for idx in range(6, len(df)):
+            val = df.iloc[idx, 0]
+            if pd.notna(val) and "munic" in str(val).lower():
+                muni_start = idx + 1
+                break
+        if muni_start is None:
+            muni_start = 6
+        code_col = 13 if df.shape[1] > 13 else None
+        if code_col is None:
+            for col_i in range(df.shape[1]):
+                for row_i in range(min(8, len(df))):
+                    if "código" in str(df.iloc[row_i, col_i]).lower() or "codigo" in str(df.iloc[row_i, col_i]).lower():
+                        code_col = col_i
+                        break
+                if code_col is not None:
+                    break
+
+        for idx in range(len(df)):
+            val0 = str(df.iloc[idx, 0]).strip()
+            if val0 == "Total":
+                raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
+                if raw_code and raw_code.isnumeric():
+                    for c_idx, (age, status) in col_map.items():
+                        if c_idx < df.shape[1]:
+                            val = df.iloc[idx, c_idx]
+                            if pd.notna(val) and str(val).strip() not in ["-", "...", "..", ""]:
+                                try:
+                                    val_int = int(round(float(val)))
+                                    rows.append({
+                                        "Ano": 2000,
+                                        "Localidade": raw_code,
+                                        "FaixaEtaria": age,
+                                        "Raca": "Total",
+                                        "StatusAlfabetizacao": status,
+                                        "Sexo": "Total",
+                                        "Populacao": val_int
+                                    })
+                                except (ValueError, TypeError):
+                                    pass
+                break
+
+        for idx in range(muni_start, len(df)):
+            raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
+            place = raw_code if (raw_code and raw_code.isnumeric() and len(raw_code) == 7) else str(df.iloc[idx, 0]).strip()
+            if not place or pd.isna(df.iloc[idx, 0]) or place == "nan" or "fonte" in place.lower() or "nota" in place.lower():
+                continue
+            for c_idx, (age, status) in col_map.items():
+                if c_idx >= df.shape[1]:
+                    continue
+                val = df.iloc[idx, c_idx]
+                if pd.isna(val) or str(val).strip() in ["-", "...", "..", ""]:
+                    continue
+                try:
+                    val_int = int(round(float(val)))
+                    rows.append({
+                        "Ano": 2000,
+                        "Localidade": place,
+                        "FaixaEtaria": age,
+                        "Raca": "Total",
+                        "StatusAlfabetizacao": status,
+                        "Sexo": "Total",
+                        "Populacao": val_int
+                    })
+                except (ValueError, TypeError):
+                    continue
+    except Exception as e:
+        logging.warning(f"Error parsing 2000 literacy XLS: {e}")
+    return rows
+
+
+def parse_2000_literacy_files() -> List[Dict[str, Any]]:
+    """Loads 2000 municipal literacy workbooks across all states from local scratch or GCS."""
     scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_2000_literacy_input")
     alt_scratch = os.path.join("/data", "scratch", "input_files", "Brazil_2000_literacy_input")
     local_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_scratch if os.path.isdir(alt_scratch) else None)
 
-    rows = []
+    rows: List[Dict[str, Any]] = []
     if local_dir:
         files = sorted(glob.glob(os.path.join(local_dir, "*.xls")))
         for fpath in files:
-            try:
-                df = pd.read_excel(fpath, header=None, skiprows=3)
-                muni_start = None
-                for idx in range(6, len(df)):
-                    val = df.iloc[idx, 0]
-                    if pd.notna(val) and "munic" in str(val).lower():
-                        muni_start = idx + 1
-                        break
-                code_col = 13 if df.shape[1] > 13 else None
-                if code_col is None:
-                    for col_i in range(df.shape[1]):
-                        for row_i in range(8):
-                            if "código" in str(df.iloc[row_i, col_i]).lower() or "codigo" in str(df.iloc[row_i, col_i]).lower():
-                                code_col = col_i
-                                break
-                        if code_col is not None:
-                            break
+            with open(fpath, "rb") as f:
+                rows.extend(parse_2000_literacy_xls(f.read()))
+        if rows:
+            return rows
 
-                for idx in range(len(df)):
-                    val0 = str(df.iloc[idx, 0]).strip()
-                    if val0 == "Total":
-                        raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
-                        if raw_code and raw_code.isnumeric():
-                            for c_idx, (age, status) in col_map.items():
-                                if c_idx < df.shape[1]:
-                                    val = df.iloc[idx, c_idx]
-                                    if pd.notna(val) and str(val).strip() not in ["-", "...", "..", ""]:
-                                        try:
-                                            val_int = int(round(float(val)))
-                                            rows.append({
-                                                "Ano": 2000,
-                                                "Localidade": raw_code,
-                                                "FaixaEtaria": age,
-                                                "Raca": "Total",
-                                                "StatusAlfabetizacao": status,
-                                                "Sexo": "Total",
-                                                "Populacao": val_int
-                                            })
-                                        except (ValueError, TypeError):
-                                            pass
-                        break
-
-                for idx in range(muni_start, len(df)):
-                    raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
-                    place = raw_code if (raw_code and raw_code.isnumeric() and len(raw_code) == 7) else str(df.iloc[idx, 0]).strip()
-                    if not place or pd.isna(df.iloc[idx, 0]) or place == "nan" or "fonte" in place.lower() or "nota" in place.lower():
-                        continue
-                    for c_idx, (age, status) in col_map.items():
-                        if c_idx >= df.shape[1]:
-                            continue
-                        val = df.iloc[idx, c_idx]
-                        if pd.isna(val) or str(val).strip() in ["-", "...", "..", ""]:
-                            continue
-                        try:
-                            val_int = int(round(float(val)))
-                            rows.append({
-                                "Ano": 2000,
-                                "Localidade": place,
-                                "FaixaEtaria": age,
-                                "Raca": "Total",
-                                "StatusAlfabetizacao": status,
-                                "Sexo": "Total",
-                                "Populacao": val_int
-                            })
-                        except (ValueError, TypeError):
-                            continue
-            except Exception as e:
-                logging.warning(f"Error parsing 2000 literacy file {fpath}: {e}")
+    try:
+        from google.cloud import storage
+        client = storage.Client()
+        bucket = client.bucket(GCS_BUCKET_NAME)
+        blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_2000_literacy_input"))
+        for b in blobs:
+            if b.name.lower().endswith(".xls"):
+                rows.extend(parse_2000_literacy_xls(b.download_as_bytes()))
+    except Exception as e:
+        logging.warning(f"Could not load 2000 literacy files from GCS: {e}")
     return rows
 
 
@@ -342,53 +365,50 @@ def download_all_years(
 
     try:
         # 1. Primary Source: Live SIDRA API (Table 9952)
-        try:
-            raw_sidra = fetch_sidra_data(session, TABLE_9952_API_URL)
-            logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9952.")
-            for r in raw_sidra[1:]:
-                val_str = r.get("V")
-                if val_str in ["-", "...", "..", None, ""]:
-                    continue
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
+        raw_sidra = fetch_sidra_data(session, TABLE_9952_API_URL)
+        logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9952.")
+        for r in raw_sidra[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
 
-                year_str = str(r.get("D3N", "2022")).strip()
-                try:
-                    year = int(year_str)
-                except ValueError:
-                    continue
+            year_str = str(r.get("D3N", "2022")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
 
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
 
-                status_raw = str(r.get("D4N", "Total")).strip()
-                status = "Total"
-                if "Alfabetizadas" in status_raw or "Alfabetizada" in status_raw:
-                    status = "Alfabetizada"
-                elif "Não alfabetizadas" in status_raw or "Analfabeta" in status_raw:
-                    status = "Analfabeta"
+            status_raw = str(r.get("D4N", "Total")).strip()
+            status = "Total"
+            if "Alfabetizadas" in status_raw or "Alfabetizada" in status_raw:
+                status = "Alfabetizada"
+            elif "Não alfabetizadas" in status_raw or "Analfabeta" in status_raw:
+                status = "Analfabeta"
 
-                sexo_raw = str(r.get("D5N", "Total")).strip()
-                sexo = "Total"
-                if "Homens" in sexo_raw:
-                    sexo = "Masculino"
-                elif "Mulheres" in sexo_raw:
-                    sexo = "Feminino"
+            sexo_raw = str(r.get("D5N", "Total")).strip()
+            sexo = "Total"
+            if "Homens" in sexo_raw:
+                sexo = "Masculino"
+            elif "Mulheres" in sexo_raw:
+                sexo = "Feminino"
 
-                all_rows.append({
-                    "Ano": year,
-                    "Localidade": loc,
-                    "FaixaEtaria": "15 anos ou mais",
-                    "Raca": "Total",
-                    "StatusAlfabetizacao": status,
-                    "Sexo": sexo,
-                    "Populacao": val,
-                })
-        except Exception as e:
-            logging.warning(f"Live SIDRA Table 9952 query failed: {e}")
+            all_rows.append({
+                "Ano": year,
+                "Localidade": loc,
+                "FaixaEtaria": "15 anos ou mais",
+                "Raca": "Total",
+                "StatusAlfabetizacao": status,
+                "Sexo": sexo,
+                "Populacao": val,
+            })
 
         # 2. Historical data from raw input files in GCS (1940)
         raw_rows = fetch_raw_input_files()
@@ -414,12 +434,6 @@ def download_all_years(
             return target_path
         raise RuntimeError("No literacy records retrieved from data sources.")
 
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE) and os.path.isfile(target_path):
-        try:
-            cached_df = pd.read_csv(target_path, low_memory=False)
-            all_rows = cached_df.to_dict("records") + all_rows
-        except Exception:
-            pass
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "FaixaEtaria", "Raca", "StatusAlfabetizacao", "Sexo"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
@@ -454,10 +468,27 @@ def download_all_years(
     return target_path
 
 
-def ensure_literacy_rates_file() -> None:
+def _write_rates_atomically(combined: pd.DataFrame, rates_out: str) -> None:
+    """Writes literacy rates CSV atomically."""
+    out_dir = os.path.dirname(os.path.abspath(rates_out))
+    os.makedirs(out_dir, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        delete=False,
+        dir=out_dir,
+        suffix=".csv",
+        encoding="utf-8",
+        newline="",
+    ) as tmp_file:
+        tmp_path = tmp_file.name
+        combined.to_csv(tmp_file, index=False, encoding="utf-8")
+    os.replace(tmp_path, rates_out)
+
+
+def ensure_literacy_rates_file(rates_out: Optional[str] = None) -> None:
     """Ensures fractional literacy rate observations (2000 & 2010) are generated."""
-    rates_out = os.path.join(SCRIPT_DIR, "brazil_literacy_rates.csv")
-    if os.path.isfile(rates_out) and os.path.getsize(rates_out) > 1000000:
+    target_rates = rates_out or os.path.join(SCRIPT_DIR, "brazil_literacy_rates.csv")
+    if os.path.isfile(target_rates) and os.path.getsize(target_rates) > 1000000:
         return
     scratch_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "golden_output_files")
     alt_base = os.path.join("/data", "scratch", "golden_output_files")
@@ -471,8 +502,8 @@ def ensure_literacy_rates_file() -> None:
             df2_rates = df2[df2["unit"] == "dcs:Percent"]
             combined = pd.concat([df1, df2_rates], ignore_index=True)
             combined["scalingFactor"] = 100
-            combined.to_csv(rates_out, index=False)
-            logging.info(f"Generated {len(combined)} rows in {rates_out}")
+            _write_rates_atomically(combined, target_rates)
+            logging.info(f"Generated {len(combined)} rows in {target_rates}")
             return
 
     try:
@@ -486,10 +517,13 @@ def ensure_literacy_rates_file() -> None:
         df2_rates = df2[df2["unit"] == "dcs:Percent"]
         combined = pd.concat([df1, df2_rates], ignore_index=True)
         combined["scalingFactor"] = 100
-        combined.to_csv(rates_out, index=False)
-        logging.info(f"Generated {len(combined)} rows in {rates_out} from GCS")
+        _write_rates_atomically(combined, target_rates)
+        logging.info(f"Generated {len(combined)} rows in {target_rates} from GCS")
     except Exception as e:
-        logging.warning(f"Could not generate {rates_out} from GCS: {e}")
+        if os.path.isfile(target_rates) and os.path.getsize(target_rates) > 0:
+            logging.warning(f"Could not regenerate {target_rates} from GCS ({e}); using existing file.")
+            return
+        raise RuntimeError(f"Could not generate {target_rates} from GCS: {e}") from e
 
 
 def main(argv: List[str]) -> None:

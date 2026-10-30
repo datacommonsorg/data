@@ -1,0 +1,22 @@
+# Auto generated using command: "/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_total_population/test_data/sample_brazil_total_population.csv --pv_map=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_total_population/brazil_total_population_pvmap.csv --config_file=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_total_population/brazil_total_population_metadata.csv --places_resolved_csv=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_places_resolved.csv --existing_statvar_mcf= --output_path=/usr/local/google/home/abhishekjaisw/.gemini/jetski/brain/48a3dc5a-e39b-4025-8ad8-b9c76a59dcd2/scratch/brazil_wt/statvar_imports/brazil_census/brazil_total_population/test_data/brazil_total_population_output" on 2026-10-30 11:24:39.428489
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+
+Node: dcid:Count_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+
