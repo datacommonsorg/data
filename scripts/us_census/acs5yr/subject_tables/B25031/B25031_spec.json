@@ -1,0 +1,55 @@
+{
+    "populationType": {
+        "_DEFAULT": "schema:HousingUnit"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "grossRent",
+            "statType": "medianValue"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "numberOfBedrooms": {
+            "no bedroom": "dcid:Bedrooms0",
+            "1 bedroom": "dcid:Bedrooms1",
+            "2 bedrooms": "dcid:Bedrooms2",
+            "3 bedrooms": "dcid:Bedrooms3",
+            "4 bedrooms": "dcid:Bedrooms4",
+            "5 or more bedrooms": "dcid:Bedrooms5Onwards"
+        },
+        "unit": {
+            "Median gross rent --": "USDollar",
+            "Median gross rent": "USDollar"
+        },
+        "measurementQualifier": {
+            "Median gross rent --": "Monthly",
+            "Median gross rent": "Monthly"
+        }
+    },
+    "overwrite_dcids": {
+        "Monthly_Median_GrossRent_HousingUnit_Bedrooms0": "Monthly_Median_GrossRent_HousingUnit_0Bedrooms",
+        "Monthly_MarginOfError_GrossRent_HousingUnit_Bedrooms0": "Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms",
+        "Monthly_Median_GrossRent_HousingUnit_Bedrooms1": "Monthly_Median_GrossRent_HousingUnit_1Bedrooms",
+        "Monthly_MarginOfError_GrossRent_HousingUnit_Bedrooms1": "Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms",
+        "Monthly_Median_GrossRent_HousingUnit_Bedrooms2": "Monthly_Median_GrossRent_HousingUnit_2Bedrooms",
+        "Monthly_MarginOfError_GrossRent_HousingUnit_Bedrooms2": "Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms",
+        "Monthly_Median_GrossRent_HousingUnit_Bedrooms3": "Monthly_Median_GrossRent_HousingUnit_3Bedrooms",
+        "Monthly_MarginOfError_GrossRent_HousingUnit_Bedrooms3": "Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms",
+        "Monthly_Median_GrossRent_HousingUnit_Bedrooms4": "Monthly_Median_GrossRent_HousingUnit_4Bedrooms",
+        "Monthly_MarginOfError_GrossRent_HousingUnit_Bedrooms4": "Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms",
+        "Monthly_Median_GrossRent_HousingUnit_Bedrooms5Onwards": "Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms",
+        "Monthly_MarginOfError_GrossRent_HousingUnit_Bedrooms5Onwards": "Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms"
+    },
+    "denominators": {},
+    "ignoreColumns": [
+        "id",
+        "Geography",
+        "Geographic Area Name",
+        "Annotation of Estimate",
+        "Annotation of Margin of Error"
+    ]
+}

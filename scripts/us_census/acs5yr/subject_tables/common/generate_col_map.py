@@ -16,6 +16,7 @@ Module to generate a column map to their corresponding statistical variable defi
 """
 import os
 import io
+import re
 import sys
 import logging
 import json
@@ -95,7 +96,9 @@ def process_zip_file(zip_file_path,
                     csv_reader = csv.reader(csv_file)
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
+                            year = re.search(
+                                r'ACS[SD]T\d+Y(\d{4})',
+                                os.path.basename(filename)).group(1)
                             column_map[year] = generate_stat_var_map(
                                 spec_dict, line, delimiter)
                             break
