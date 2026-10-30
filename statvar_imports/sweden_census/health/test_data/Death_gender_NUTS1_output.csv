@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:nuts/SE1,2023,16804,dcid:Count_Death_Male,,
+dcid:nuts/SE1,2024,16250,dcid:Count_Death_Male,,
+dcid:nuts/SE1,2025,16420,dcid:Count_Death_Male,,
+dcid:nuts/SE1,2023,16350,dcid:Count_Death_Female,,
+dcid:nuts/SE1,2024,15850,dcid:Count_Death_Female,,
+dcid:nuts/SE1,2025,16030,dcid:Count_Death_Female,,
+dcid:nuts/SE2,2023,21740,dcid:Count_Death_Male,,
+dcid:nuts/SE2,2024,21300,dcid:Count_Death_Male,,
+dcid:nuts/SE2,2025,21480,dcid:Count_Death_Male,,
+dcid:nuts/SE2,2023,21150,dcid:Count_Death_Female,,
+dcid:nuts/SE2,2024,20650,dcid:Count_Death_Female,,
+dcid:nuts/SE2,2025,20830,dcid:Count_Death_Female,,
