@@ -53,8 +53,7 @@ DEFAULT_INPUT_CSV = os.path.join(DEFAULT_OUTPUT_DIR, "Poverty.csv")
 DEFAULT_RAW_CSV_FILE = None
 
 HTTP_HEADERS = {
-    "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                   "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"),
+    "User-Agent": "DataCommons-Import/1.0 (+https://datacommons.org)",
     "Accept": "*/*",
 }
 
