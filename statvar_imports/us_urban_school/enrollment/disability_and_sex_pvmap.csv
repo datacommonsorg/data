@@ -2,6 +2,8 @@ YEAR,observationDate,{Data},,,,,,,,,,,,,,,,,,
 ncesid,observationAbout,nces/{Data},,,,,,,,,,,,,,,,,,
 JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,,,,,,,,,
 JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,,,,,,,,,
+SCH_JUST:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,,,,,,,,,
+SCH_JUST:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,,,,,,,,,
 SCH_IDEAENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Male,educationProgram,IDEA,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,disabilityStatus,WithDisability
 SCH_IDEAENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Female,educationProgram,IDEA,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,disabilityStatus,WithDisability
 SCH_IDEAENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,educationProgram,IDEA,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,disabilityStatus,WithDisability
