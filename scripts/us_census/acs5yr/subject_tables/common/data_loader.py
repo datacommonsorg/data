@@ -13,6 +13,7 @@
 # limitations under the License.
 """Common data processing module for ACS Subject Tables"""
 import os
+import re
 import sys
 import json
 from zipfile import ZipFile
@@ -261,7 +262,8 @@ class SubjectTableDataLoaderBase:
 
     def _process_dataframe(self, df, filename):
         """processes a dataframe read from a csv file"""
-        year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
+        year = re.search(rf'ACS[SD]T{self.estimate_period}Y(\d{{4}})',
+                         os.path.basename(filename)).group(1)
         logging.info(f"Processing: {filename}")
 
         # if column map is not available generate, will rarely be False
