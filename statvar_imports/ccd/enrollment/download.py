@@ -20,17 +20,20 @@ import requests
 def download_file_from_url(url: str, output_file: str):
     """Downloads a file from a URL to a local file."""
     response = requests.get(url)
-    response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
+    response.raise_for_status(
+    )  # Raise an HTTPError for bad responses (4xx or 5xx)
     with open(output_file, "wb") as f:
         f.write(response.content)
+
 
 _SV_INDEX_URL = "https://nces.ed.gov/programs/digest/d24/tables/xls/tabn203.65.xlsx"
 _SV_INDEX_FILE_NAME = "tabn203.65.xlsx"
 _SV_INDEX_CSV_FILE_NAME = "ccd_enrollment_input.csv"
 
+
 def download_data(output_dir: str):
     """Downloads the Enrollment in public elementary and secondary schools, by level, grade, and race/ethnicity data and processes it."""
-    
+
     # Create the output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
 
@@ -41,17 +44,28 @@ def download_data(output_dir: str):
     # Read the Excel file, skipping the first two rows
     df = pd.read_excel(excel_file_path, skiprows=3)
 
-    df = df.drop(columns=["Unnamed: 2","Unnamed: 4","Prekindergarten.1"])
+    df = df.drop(columns=["Unnamed: 2", "Unnamed: 4", "Prekindergarten.1"])
 
     # Replace specified strings in the DataFrame
-    df = df.rename(columns={"Unnamed: 1": "All grades","Total":"Total_PK_8","Total.1":"Total_9_12"})
-    df.replace(to_replace=r'Ungraded\\1\\', value='Ungraded_1', regex=True, inplace=True)
-    df.replace(to_replace=r'Ungraded\\1,2\\', value='Ungraded1_2', regex=True, inplace=True)
+    df = df.rename(columns={
+        "Unnamed: 1": "All grades",
+        "Total": "Total_PK_8",
+        "Total.1": "Total_9_12"
+    })
+    df.replace(to_replace=r'Ungraded\\1\\',
+               value='Ungraded_1',
+               regex=True,
+               inplace=True)
+    df.replace(to_replace=r'Ungraded\\1,2\\',
+               value='Ungraded1_2',
+               regex=True,
+               inplace=True)
 
     # Save the processed data to a CSV file
     csv_file_path = os.path.join(output_dir, _SV_INDEX_CSV_FILE_NAME)
     df.to_csv(csv_file_path, index=False)
     print(f"Downloaded and processed data saved to: {csv_file_path}")
+
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(__file__)
