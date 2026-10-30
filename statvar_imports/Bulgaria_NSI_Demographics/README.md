@@ -34,10 +34,13 @@ The annual refresh is automated via scheduled Cloud Batch / Cloud Run execution:
 
 ## 4. Running the Data Processor Locally
 
-To run the pipeline locally, navigate to the import directory:
+To run the pipeline and unit tests locally, navigate to the import directory:
 
 ```bash
 cd statvar_imports/Bulgaria_NSI_Demographics
+
+# 0. Check NSI portal for new annual releases (or verify staged GCS files)
+../../.env/bin/python download_current_year_data.py --allow-staged-fallback
 
 # 1. Fetch staged annual input files and validate format/arithmetic
 bash download.sh
@@ -50,6 +53,10 @@ bash download.sh
   --output_path=output/BulgariaNSI_Demographics \
   --output_counters=counters/BulgariaNSI_Demographics_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+
+# 3. Run unit tests (from repository root)
+cd ../..
+./run_tests.sh -p statvar_imports/Bulgaria_NSI_Demographics
 ```
 
 ## 5. Validation Configuration
