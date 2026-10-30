@@ -232,6 +232,8 @@ def parse_population_xlsx(xlsx_bytes: bytes) -> list[dict[str, str]]:
         for raw_row in rows[1:]:
             row_dict = dict(zip(headers, raw_row))
             year_str = _format_cell_value(row_dict.get('year'))
+            if year_str.startswith('#'):
+                continue
             place_code = _extract_place_code(row_dict)
             if not year_str or not place_code:
                 continue
@@ -359,7 +361,8 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
         if not isinstance(csv_bytes, bytes) or not csv_bytes:
             raise RuntimeError(f'Failed to download bytes from {csv_url}')
         population_rows.extend(
-            parse_population_csv(csv_bytes.decode('utf-8-sig')))
+            parse_population_csv(
+                csv_bytes.decode('utf-8-sig', errors='replace')))
 
     if not population_rows:
         raise RuntimeError('No population rows extracted from HDX.')
@@ -385,8 +388,10 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
                                            retry_secs=5)
     if not isinstance(agri_bytes, bytes) or not agri_bytes:
         raise RuntimeError(f'Failed to download bytes from {agri_url}')
-    agri_rows = parse_wdi_csv(agri_bytes.decode('utf-8-sig'),
-                              allowed_indicators=mapped_indicators)
+    agri_rows = parse_wdi_csv(
+        agri_bytes.decode('utf-8-sig', errors='replace'),
+        allowed_indicators=mapped_indicators,
+    )
     if not agri_rows:
         raise RuntimeError('No agriculture rows extracted from HDX.')
     agri_output_path = os.path.join(output_dir, 'srilanka_agriculture.csv')
@@ -409,8 +414,10 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
                                           retry_secs=5)
     if not isinstance(edu_bytes, bytes) or not edu_bytes:
         raise RuntimeError(f'Failed to download bytes from {edu_url}')
-    edu_rows = parse_wdi_csv(edu_bytes.decode('utf-8-sig'),
-                             allowed_indicators=mapped_indicators)
+    edu_rows = parse_wdi_csv(
+        edu_bytes.decode('utf-8-sig', errors='replace'),
+        allowed_indicators=mapped_indicators,
+    )
     if not edu_rows:
         raise RuntimeError('No education rows extracted from HDX.')
     edu_output_path = os.path.join(output_dir, 'srilanka_education.csv')

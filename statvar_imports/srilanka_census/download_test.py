@@ -35,6 +35,9 @@ class DownloadTest(unittest.TestCase):
                        ] + (download.POPULATION_COLUMNS)
         ws0 = wb.create_sheet('lka_admpop_adm0_2022')
         ws0.append(headers_adm0)
+        ws0.append(
+            ['#date+year', '#country+code', '#country+name', '#country+code'] +
+            ['#population'] * 54)
         ws0.append(['2022', 'LKA', 'Sri Lanka', 'LK'] + [100] * 54)
 
         headers_adm1 = [
