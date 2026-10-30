@@ -1,0 +1,9 @@
+U.S. Diabetes Surveillance System (https://gis.cdc.gov/grasp/diabetes/DiabetesAtlas.html)
+Diagnosed Diabetes, Age-Adjusted Percentage, Adults Aged 20+ Years, Total, 2022
+County,State,CountyFIPS,Percentage,Lower Limit,Upper Limit
+Autauga County,Alabama,1001,9.8,7.6,12.2
+State Summary,Alabama,01000,10.5,9.0,12.0
+Kalawao County,Hawaii,15005,No Data,No Data,No Data
+Loving County,Texas,48301,Suppressed,Suppressed,Suppressed
+Teton County,Wyoming,56039,4.5,3.1,6.5
+"Footnote: US Diabetes Surveillance System, CDC"
