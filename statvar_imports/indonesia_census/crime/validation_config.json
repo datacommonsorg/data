@@ -1,0 +1,45 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_crime_max_date_consistency",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_CriminalActivities"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_crime_min_observations_and_freshness",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_CriminalActivities"
+                    ]
+                }
+            },
+            "params": {
+                "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE NumPlaces >= 35 GROUP BY StatVar",
+                "condition": "TotalObs >= 800 AND CAST(LatestDate AS INTEGER) >= 2024",
+                "failure_message": "Crime StatVar observation count or freshness validation failed."
+            }
+        }
+    ]
+}
