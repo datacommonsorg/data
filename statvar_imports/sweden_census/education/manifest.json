@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Sweden_Census_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__UF__UF0506__UF0506B/Utbildning/table/tableViewLayout1/",
+            "provenance_description": "Population 16-74 years of age by region, highest level of education, age and sex from Statistics Sweden (SCB).",
+            "scripts": [
+                "download_education.py --output_dir=input_files",
+                "run.sh"
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/education_nuts1.tmcf",
+                    "cleaned_csv": "output/*.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 05 * * 1"
+        }
+    ]
+}
