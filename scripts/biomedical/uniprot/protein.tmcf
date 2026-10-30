@@ -1,0 +1,19 @@
+Node: E:protein->E1
+typeOf: dcs:Protein
+dcid: C:protein->dcid	
+alternateNCBIProteinAccessionNumber: C:protein->uniprotID
+name: C:protein->EntryName
+description: C:protein->ProteinName
+uniProtID: C:protein->EntryName
+organismName: C:protein->OrganismName
+proteinExistenceEvidenceType: C:protein->ProteinExistence
+geneID: C:protein->GeneDcid
+
+Node: E:protein->E2
+typeOf: dcs:ProteinExistenceEvidenceTypeEnum 
+dcid: C:protein->ProteinExistence
+
+Node: E:protein->E3
+typeOf: dcs:Gene
+dcid: C:protein->GeneDcid
+name: C:protein->GeneName
