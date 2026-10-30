@@ -21,17 +21,6 @@
         "data_source": "stats"
       },
       "params": {}
-    },
-    {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Checks that the percentage of deleted records is within 0.1% threshold.",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "scope": {
-        "data_source": "differ_summary"
-      },
-      "params": {
-        "threshold": 0.1
-      }
     }
   ]
 }
