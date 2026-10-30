@@ -1,0 +1,742 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import json
+import os
+import sys
+import tempfile
+import unittest
+from unittest.mock import MagicMock, patch
+import pandas as pd
+import requests
+
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
+sys.path.insert(0, PROJECT_ROOT)
+
+from statvar_imports.commerce_eda_usaspending.process import (
+    fetch_usaspending_data,
+    process_data,
+)
+
+
+class TestProcessUSASpending(unittest.TestCase):
+
+    def setUp(self):
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.output_csv = os.path.join(self.temp_dir.name,
+                                       "investment_cleaned.csv")
+
+    def tearDown(self):
+        self.temp_dir.cleanup()
+
+    @patch("time.sleep", return_value=None)
+    @patch("requests.Session.post")
+    def test_fetch_usaspending_data_success(self, mock_post, mock_sleep):
+        # Mock a paginated API response (2 pages)
+        mock_resp1 = MagicMock()
+        mock_resp1.status_code = 200
+        mock_resp1.json.return_value = {
+            "results": [{
+                "Award ID": "123",
+                "Start Date": "2012-10-15",
+                "Award Amount": 100000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": True
+            },
+        }
+
+        mock_resp2 = MagicMock()
+        mock_resp2.status_code = 200
+        mock_resp2.json.return_value = {
+            "results": [{
+                "Award ID": "456",
+                "Start Date": "2013-05-10",
+                "Award Amount": 50000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": False
+            },
+        }
+
+        mock_post.side_effect = [mock_resp1, mock_resp2]
+        raw_json_path = os.path.join(self.temp_dir.name, "raw_awards.json")
+
+        awards = fetch_usaspending_data(start_year=2013,
+                                        end_year=2013,
+                                        raw_output_path=raw_json_path)
+
+        self.assertEqual(len(awards), 2)
+        self.assertEqual(awards[0]["Award ID"], "123")
+        self.assertEqual(awards[1]["Award ID"], "456")
+        self.assertEqual(mock_post.call_count, 2)
+        self.assertTrue(os.path.exists(raw_json_path))
+        first_call_payload = mock_post.call_args_list[0][1]["json"]
+        first_call_fields = first_call_payload["fields"]
+        self.assertIn("generated_internal_id", first_call_fields)
+        self.assertIn("Place of Performance Country Code", first_call_fields)
+        self.assertEqual(first_call_payload["sort"], "Award ID")
+        self.assertEqual(first_call_payload["order"], "asc")
+
+    @patch("time.sleep", return_value=None)
+    @patch("requests.Session.post")
+    def test_fetch_usaspending_data_failure(self, mock_post, mock_sleep):
+        # Mock API error (non-200)
+        mock_resp = MagicMock()
+        mock_resp.status_code = 500
+        mock_resp.text = "Internal Server Error"
+        mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError(
+            "Internal Server Error")
+        mock_post.return_value = mock_resp
+
+        with self.assertRaises(requests.exceptions.HTTPError):
+            fetch_usaspending_data(start_year=2012, end_year=2014)
+
+    def test_process_data(self):
+        # Mock API award records
+        mock_awards = [
+            # Alabama Public Works FY 2013 (start date 2012-10-15 -> FY 2013)
+            {
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2012-10-15",
+                "Award Amount": 100000.0,
+            },
+            # Alabama Public Works FY 2013 (start date 2013-05-10 -> FY 2013) - should be aggregated
+            {
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2013-05-10",
+                "Award Amount": 50000.0,
+            },
+            # Alaska Planning FY 2014
+            {
+                "Place of Performance State Code": "AK",
+                "CFDA Number": "11.302",
+                "Start Date": "2014-04-20",
+                "Award Amount": 25000.0,
+            },
+            # Invalid state (ignored)
+            {
+                "Place of Performance State Code": "XX",
+                "CFDA Number": "11.300",
+                "Start Date": "2013-05-10",
+                "Award Amount": 10000.0,
+            },
+            # Invalid CFDA (ignored)
+            {
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "99.999",
+                "Start Date": "2013-05-10",
+                "Award Amount": 10000.0,
+            },
+            # Out of year range (FY 2011)
+            {
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2011-05-10",
+                "Award Amount": 10000.0,
+            },
+        ]
+
+        # Run process
+        process_data(
+            mock_awards,
+            start_year=2012,
+            end_year=2015,
+            output_path=self.output_csv,
+        )
+
+        self.assertTrue(os.path.exists(self.output_csv))
+
+        # Compare DataFrames
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.DataFrame({
+            "Place": ["AK", "AK", "AL", "AL"],
+            "State or Territory / EDA Program": [
+                "Total",
+                "Planning",
+                "Total",
+                "Public Works",
+            ],
+            "Year": [2014, 2014, 2013, 2013],
+            "Value": [25000, 25000, 150000, 150000],
+        })
+
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_new_programs(self):
+        mock_awards = [
+            # CFDA 11.313 -> Trade Adjustment Assistance for Firms
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.313",
+                "Start Date": "2020-01-15",
+                "Award Amount": 10000.0,
+            },
+            # CFDA 11.312 -> Research and National Technical Assistance
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.312",
+                "Start Date": "2020-02-15",
+                "Award Amount": 20000.0,
+            },
+            # CFDA 11.300 -> Public Works
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.300",
+                "Start Date": "2020-03-15",
+                "Award Amount": 30000.0,
+            },
+            # CFDA 11.024 -> Regional Innovation Strategies
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.024",
+                "Start Date": "2020-04-15",
+                "Award Amount": 15000.0,
+            },
+        ]
+
+        process_data(
+            mock_awards,
+            start_year=2019,
+            end_year=2021,
+            output_path=self.output_csv,
+        )
+
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.DataFrame({
+            "Place": ["CA", "CA", "CA", "CA", "CA"],
+            "State or Territory / EDA Program": [
+                "Total",
+                "Public Works",
+                "Regional Innovation Strategies",
+                "Research and National Technical Assistance",
+                "Trade Adjustment Assistance for Firms",
+            ],
+            "Year": [2020, 2020, 2020, 2020, 2020],
+            "Value": [75000, 30000, 15000, 20000, 10000],
+        })
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_new_territories(self):
+        mock_awards = [
+            # Federated States of Micronesia (FSM -> FM) via Country Code with State Code None
+            {
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "FSM",
+                "CFDA Number": "11.303",
+                "Start Date": "2016-09-01",
+                "Award Amount": 25000.0,
+            },
+            # Palau (PLW -> PW) via Country Code with State Code None
+            {
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "PLW",
+                "CFDA Number": "11.302",
+                "Start Date": "2021-05-01",
+                "Award Amount": 50000.0,
+            },
+            # Marshall Islands (MHL -> MH) via Country Code with State Code None
+            {
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "MHL",
+                "CFDA Number": "11.307",
+                "Start Date": "2021-06-01",
+                "Award Amount": 75000.0,
+            },
+        ]
+
+        process_data(
+            mock_awards,
+            start_year=2015,
+            end_year=2022,
+            output_path=self.output_csv,
+        )
+
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.DataFrame({
+            "Place": [
+                "FM",
+                "FM",
+                "MH",
+                "MH",
+                "PW",
+                "PW",
+            ],
+            "State or Territory / EDA Program": [
+                "Total",
+                "Technical Assistance",
+                "Total",
+                "Economic Adjustment Assistance",
+                "Total",
+                "Planning",
+            ],
+            "Year": [2016, 2016, 2021, 2021, 2021, 2021],
+            "Value": [25000, 25000, 75000, 75000, 50000, 50000],
+        })
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_rounding(self):
+        mock_awards = [
+            # 1234.6 rounds to 1235
+            {
+                "Place of Performance State Code": "TX",
+                "CFDA Number": "11.300",
+                "Start Date": "2022-01-10",
+                "Award Amount": 1234.6,
+            },
+            # 5678.4 rounds to 5678
+            {
+                "Place of Performance State Code": "TX",
+                "CFDA Number": "11.302",
+                "Start Date": "2022-02-10",
+                "Award Amount": 5678.4,
+            },
+        ]
+
+        process_data(
+            mock_awards,
+            start_year=2021,
+            end_year=2023,
+            output_path=self.output_csv,
+        )
+
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        # Total is 1234.6 + 5678.4 = 6913.0 -> 6913
+        df_expected = pd.DataFrame({
+            "Place": ["TX", "TX", "TX"],
+            "State or Territory / EDA Program":
+            ["Total", "Planning", "Public Works"],
+            "Year": [2022, 2022, 2022],
+            "Value": [6913, 5678, 1235],
+        })
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_empty_awards_guard(self):
+        # Empty list of awards
+        with self.assertRaises(RuntimeError):
+            process_data([],
+                         start_year=2012,
+                         end_year=2024,
+                         output_path=self.output_csv)
+        self.assertFalse(os.path.exists(self.output_csv))
+
+        # Awards with no matching/valid records
+        invalid_awards = [{
+            "Place of Performance State Code": "UNKNOWN",
+            "CFDA Number": "00.000",
+            "Start Date": "1990-01-01",
+            "Award Amount": 1000.0,
+        }]
+        with self.assertRaises(RuntimeError):
+            process_data(
+                invalid_awards,
+                start_year=2012,
+                end_year=2024,
+                output_path=self.output_csv,
+            )
+        self.assertFalse(os.path.exists(self.output_csv))
+
+    def test_date_parsing_and_amount_guards(self):
+        mock_awards = [
+            # Malformed date string (should be safely skipped)
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": "invalid-date",
+                "Award Amount": 50000.0,
+            },
+            # Missing / None date string (should be safely skipped)
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": None,
+                "Award Amount": 50000.0,
+            },
+            # None Award Amount (should default to 0.0 and be dropped by positive amount filter)
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": "2022-05-15",
+                "Award Amount": None,
+            },
+            # Valid award
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": "2022-05-15",
+                "Award Amount": 120000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2021,
+            end_year=2023,
+            output_path=self.output_csv,
+        )
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.DataFrame({
+            "Place": ["NY", "NY"],
+            "State or Territory / EDA Program": ["Total", "Public Works"],
+            "Year": [2022, 2022],
+            "Value": [120000, 120000],
+        })
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_deobligation_handling(self):
+        # When an award de-obligation results in negative net amount for a program,
+        # it must be filtered out, and Total must equal the sum of surviving positive programs.
+        mock_awards = [
+            # Public Works: -$15,318 (net de-obligation)
+            {
+                "Place of Performance State Code": "MP",
+                "CFDA Number": "11.300",
+                "Start Date": "2014-03-01",
+                "Award Amount": -15318.0,
+            },
+            # Economic Adjustment Assistance: +$98,992
+            {
+                "Place of Performance State Code": "MP",
+                "CFDA Number": "11.307",
+                "Start Date": "2014-06-01",
+                "Award Amount": 98992.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2013,
+            end_year=2015,
+            output_path=self.output_csv,
+        )
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        # Public Works should be dropped, and Total must equal 98992 (not 83674)
+        df_expected = pd.DataFrame({
+            "Place": ["MP", "MP"],
+            "State or Territory / EDA Program":
+            ["Total", "Economic Adjustment Assistance"],
+            "Year": [2014, 2014],
+            "Value": [98992, 98992],
+        })
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_modern_eda_cfdas(self):
+        # Test the 4 newly added EDA programs
+        mock_awards = [
+            # 11.039 -> Regional Technology and Innovation Hubs
+            {
+                "Place of Performance State Code": "CO",
+                "CFDA Number": "11.039",
+                "Start Date": "2023-11-01",
+                "Award Amount": 500000.0,
+            },
+            # 11.040 -> Distressed Area Recompete Pilot Program
+            {
+                "Place of Performance State Code": "CO",
+                "CFDA Number": "11.040",
+                "Start Date": "2024-01-15",
+                "Award Amount": 250000.0,
+            },
+            # 11.030 -> Science and Research Park Development Grants
+            {
+                "Place of Performance State Code": "CO",
+                "CFDA Number": "11.030",
+                "Start Date": "2023-12-01",
+                "Award Amount": 100000.0,
+            },
+            # 11.023 -> STEM Talent Challenge
+            {
+                "Place of Performance State Code": "CO",
+                "CFDA Number": "11.023",
+                "Start Date": "2024-02-01",
+                "Award Amount": 50000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2023,
+            end_year=2025,
+            output_path=self.output_csv,
+        )
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        self.assertEqual(len(df_actual[df_actual["Year"] == 2024]), 5)
+        # Total for 2024 should be 500000 + 250000 + 100000 + 50000 = 900000
+        total_row = df_actual[(df_actual["Year"] == 2024) & (
+            df_actual["State or Territory / EDA Program"] == "Total")]
+        self.assertEqual(int(total_row["Value"].iloc[0]), 900000)
+
+    @patch("time.sleep", return_value=None)
+    @patch("requests.Session.post")
+    def test_fetch_usaspending_data_deduplication(self, mock_post, mock_sleep):
+        # Mock FY 2013 returning award "A1" with 100k
+        mock_resp1 = MagicMock()
+        mock_resp1.status_code = 200
+        mock_resp1.json.return_value = {
+            "results": [{
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Start Date": "2012-10-15",
+                "Award Amount": 100000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": False
+            },
+        }
+
+        # Mock FY 2014 returning amendment of award "A1" with updated 120k
+        mock_resp2 = MagicMock()
+        mock_resp2.status_code = 200
+        mock_resp2.json.return_value = {
+            "results": [{
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Start Date": "2012-10-15",
+                "Award Amount": 120000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": False
+            },
+        }
+
+        mock_post.side_effect = [mock_resp1, mock_resp2]
+        awards = fetch_usaspending_data(start_year=2013, end_year=2014)
+
+        # Should be deduplicated to 1 award with the latest amount (120,000)
+        self.assertEqual(len(awards), 1)
+        self.assertEqual(awards[0]["Award ID"], "A1")
+        self.assertEqual(awards[0]["Award Amount"], 120000.0)
+
+    def test_process_data_deduplication(self):
+        # Multiple instances of the same award ID should not double-count
+        mock_awards = [
+            {
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2012-10-15",
+                "Award Amount": 100000.0,
+            },
+            {
+                "Award ID": "A1",
+                "generated_internal_id": "GEN_A1",
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2012-10-15",
+                "Award Amount": 120000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2012,
+            end_year=2015,
+            output_path=self.output_csv,
+        )
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        # Total should be 120000, NOT 220000
+        total_row = df_actual[df_actual["State or Territory / EDA Program"] ==
+                              "Total"]
+        self.assertEqual(int(total_row["Value"].iloc[0]), 120000)
+
+    @patch("time.sleep", return_value=None)
+    @patch("requests.Session.post")
+    def test_fetch_usaspending_data_max_pages_ceiling(self, mock_post,
+                                                      mock_sleep):
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "results": [{
+                "Award ID": "123",
+                "Start Date": "2013-05-10",
+                "Award Amount": 50000.0,
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+            }],
+            "page_metadata": {
+                "hasNext": True
+            },
+        }
+        mock_post.return_value = mock_resp
+
+        with patch(
+                "statvar_imports.commerce_eda_usaspending.process.MAX_PAGES_PER_FY",
+                2):
+            with self.assertRaises(RuntimeError) as ctx:
+                fetch_usaspending_data(start_year=2013, end_year=2013)
+            self.assertIn("Exceeded maximum page threshold (2) for FY 2013",
+                          str(ctx.exception))
+
+    def test_all_non_positive_awards_guard(self):
+        mock_awards = [
+            {
+                "Place of Performance State Code": "AL",
+                "CFDA Number": "11.300",
+                "Start Date": "2020-05-01",
+                "Award Amount": -5000.0,
+            },
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.302",
+                "Start Date": "2020-06-01",
+                "Award Amount": 0.0,
+            },
+        ]
+        with self.assertRaises(RuntimeError) as ctx:
+            process_data(
+                mock_awards,
+                start_year=2019,
+                end_year=2021,
+                output_path=self.output_csv,
+            )
+        self.assertIn("No positive investment records after aggregation",
+                      str(ctx.exception))
+        self.assertFalse(os.path.exists(self.output_csv))
+
+    def test_get_current_fiscal_year(self):
+        import datetime
+        from statvar_imports.commerce_eda_usaspending.process import (
+            get_current_fiscal_year, )
+        self.assertEqual(
+            get_current_fiscal_year(datetime.datetime(2026, 9, 30)), 2026)
+        self.assertEqual(
+            get_current_fiscal_year(datetime.datetime(2026, 10, 1)), 2027)
+
+    def test_process_data_with_sample_fixtures(self):
+        sample_input_path = os.path.join(MODULE_DIR, "test_data",
+                                         "sample_awards.json")
+        sample_expected_path = os.path.join(MODULE_DIR, "test_data",
+                                            "sample_output.csv")
+        with open(sample_input_path, "r", encoding="utf-8") as f:
+            sample_awards = json.load(f)
+
+        process_data(
+            sample_awards,
+            start_year=2023,
+            end_year=2024,
+            output_path=self.output_csv,
+        )
+
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.read_csv(sample_expected_path)
+        pd.testing.assert_frame_equal(df_actual, df_expected)
+
+    def test_deduplicate_awards_fallback_across_batches(self):
+        from statvar_imports.commerce_eda_usaspending.process import (
+            _deduplicate_awards, )
+        batch1 = [{
+            "Place of Performance State Code": "AL",
+            "CFDA Number": "11.300",
+            "Start Date": "2020-05-01",
+            "Award Amount": 50000.0,
+        }]
+        batch2 = [{
+            "Place of Performance State Code": "AL",
+            "CFDA Number": "11.300",
+            "Start Date": "2020-05-01",
+            "Award Amount": 50000.0,
+        }]
+        unique_awards = {}
+        _deduplicate_awards(batch1, unique_awards)
+        _deduplicate_awards(batch2, unique_awards)
+        self.assertEqual(len(unique_awards), 2)
+
+    @patch("absl.logging.warning")
+    def test_missing_state_code_logging(self, mock_warning):
+        mock_awards = [
+            {
+                "Award ID": "USA_NULL_STATE",
+                "Place of Performance State Code": None,
+                "Place of Performance Country Code": "USA",
+                "CFDA Number": "11.300",
+                "Start Date": "2023-05-01",
+                "Award Amount": 50000.0,
+            },
+            {
+                "Award ID": "INVALID_STATE",
+                "Place of Performance State Code": "ZZ",
+                "Place of Performance Country Code": "USA",
+                "CFDA Number": "11.300",
+                "Start Date": "2023-05-01",
+                "Award Amount": 25000.0,
+            },
+            {
+                "Award ID": "VALID_STATE",
+                "Place of Performance State Code": "WA",
+                "Place of Performance Country Code": "USA",
+                "CFDA Number": "11.300",
+                "Start Date": "2023-05-01",
+                "Award Amount": 100000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2022,
+            end_year=2024,
+            output_path=self.output_csv,
+        )
+        warning_messages = [
+            call.args[0] for call in mock_warning.call_args_list
+        ]
+        self.assertTrue(
+            any("Skipped 2 awards due to missing or unmapped Place of Performance State Code (unmapped codes: ['ZZ'])"
+                in msg for msg in warning_messages))
+
+    def test_forward_dated_fy_boundary(self):
+        mock_awards = [
+            # Obligated in late FY 2024 with Oct 1, 2024 start date -> FY 2025 (end_year + 1, retained)
+            {
+                "Award ID": "FWD_FY25",
+                "Place of Performance State Code": "OR",
+                "CFDA Number": "11.300",
+                "Start Date": "2024-10-01",
+                "Award Amount": 80000.0,
+            },
+            # Beyond end_year + 1 -> FY 2026 (dropped)
+            {
+                "Award ID": "BEYOND_FY26",
+                "Place of Performance State Code": "OR",
+                "CFDA Number": "11.300",
+                "Start Date": "2025-10-01",
+                "Award Amount": 90000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2022,
+            end_year=2024,
+            output_path=self.output_csv,
+        )
+        df_actual = pd.read_csv(self.output_csv)
+        self.assertEqual(list(df_actual["Year"]), [2025, 2025])
+        self.assertEqual(list(df_actual["Value"]), [80000, 80000])
+
+
+if __name__ == "__main__":
+    unittest.main()

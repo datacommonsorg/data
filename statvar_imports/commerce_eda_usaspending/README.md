@@ -1,0 +1,78 @@
+# Commerce_EDA_USAspending
+
+This importer fetches and processes U.S. Economic Development Administration (EDA) investment datasets dynamically from USAspending.gov.
+
+- **Source**: [USAspending.gov](https://www.usaspending.gov/) ([API Endpoint](https://api.usaspending.gov/api/v2/search/spending_by_award/))
+- **Place Type**: U.S. States and Territories (`AdministrativeArea1`)
+- **Time Coverage**: FY 2012 to Present (dynamically fetched by federal fiscal year)
+- **Import Type**: Automated API-based import
+- **Release Frequency**: Weekly (Mondays 05:30 UTC, `30 05 * * 1`)
+
+## Prerequisites
+
+- Python 3.10+ with `pandas`, `requests`, `urllib3`, and `absl-py` installed (see repository `.env` or `requirements.txt`).
+- Outbound HTTPS access to `https://api.usaspending.gov/api/v2/search/spending_by_award/`.
+
+## Important Files
+
+- `manifest.json`: Import automation specification, script sequence, input/output artifact paths (`node_mcf` configured with `output/*.mcf`), and weekly cron schedule (`30 05 * * 1`).
+- `process.py`: Fetches EDA award obligations from the USAspending REST API partitioned by fiscal year, deduplicates cross-FY award amendments, excludes net negative de-obligations, and outputs `input_files/investment_cleaned.csv`.
+- `process_test.py`: Hermetic unit test suite covering pagination, deduplication, de-obligations, fiscal year calculation, sample fixtures, and error handling.
+- `test_data/`: Hermetic sample input (`sample_awards.json`) and expected output (`sample_output.csv`) fixtures for unit testing.
+- `investment_pvmap.csv`: Property-value mappings converting state/territory codes, years, and EDA program names into Data Commons schema observations.
+- `investment_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
+- `investment_schema.mcf`: Schema definitions for new `InvestmentProgramEnum` instances.
+- `validation_config.json`: Validation rules (`check_deleted_records_percent`, `active_programs_freshness`, `non_negative_investment_amounts`).
+
+## Pipeline Steps
+
+### 1. Run Tests
+Verify unit tests pass from the repository root:
+```bash
+./run_tests.sh -p statvar_imports/commerce_eda_usaspending
+```
+
+### 2. Preprocessing (`process.py`)
+Run the Python script from `statvar_imports/commerce_eda_usaspending/` to download all awards from USAspending.gov partitioned by fiscal year and aggregate them into clean tall format:
+```bash
+python3 statvar_imports/commerce_eda_usaspending/process.py
+```
+Outputs produced:
+- `input_files/raw_usaspending_eda_awards.json`: Raw award JSON payloads from the API.
+- `input_files/investment_cleaned.csv`: Aggregated tall format with columns `Place,State or Territory / EDA Program,Year,Value`.
+
+### 3. Statistical Variable Processing
+Run Data Commons `stat_var_processor.py` from `statvar_imports/commerce_eda_usaspending/` to generate the final MCF and CSV files for import:
+```bash
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --input_data=input_files/investment_cleaned.csv \
+  --pv_map=investment_pvmap.csv \
+  --config_file=investment_metadata.csv \
+  --existing_schema_mcf=investment_schema.mcf \
+  --output_path=output/investment_output \
+  --output_counters=counters/investment_counters.csv
+```
+Outputs produced:
+- `output/investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
+- `output/investment_output.tmcf`: Template MCF mapping observation properties.
+- `output/investment_output_stat_vars.mcf`: Node MCF for new `StatisticalVariable` entities.
+- `counters/investment_counters.csv`: Processing counters and diff statistics.
+
+### 4. Refresh & Validation Procedure
+Validate generated outputs against `validation_config.json` from the repository root:
+```bash
+python3 -m tools.import_validation.runner \
+  --validation_config=statvar_imports/commerce_eda_usaspending/validation_config.json \
+  --stats_summary=statvar_imports/commerce_eda_usaspending/output/summary_report.csv \
+  --lint_report=statvar_imports/commerce_eda_usaspending/output/report.json \
+  --differ_output=statvar_imports/commerce_eda_usaspending/output \
+  --validation_output=statvar_imports/commerce_eda_usaspending/output/validation_output.csv
+```
+
+## Data Processing & Methodology
+- **Cumulative Award Inception Semantics**: `process.py` queries the USAspending `/api/v2/search/spending_by_award/` endpoint (filtering on `award_type_codes: ["02", "03", "04", "05", "F001", "F002"]` with deterministic `sort: "Award ID"`, `order: "asc"`) and groups awards by the federal fiscal year of each award's period-of-performance `Start Date` (where October–December maps to `year + 1`), summing the total `Award Amount`. Consequently, multi-year grants and subsequent obligation modifications/amendments are attributed as cumulative lifetime award obligations to the fiscal year of award inception rather than individual annual outlay transactions.
+- **Fiscal Year Query Filter vs. Start Date Bucketing**: The USAspending `filters.time_period` parameter queries awards by transaction `action_date` within each fiscal year (`[fy - 1-10-01, fy-09-30]`), whereas `process_data` buckets observations by the fiscal year of the period-of-performance `Start Date`. To prevent dropping awards obligated late in `end_year` (e.g., September) whose period-of-performance `Start Date` is October 1 (`fy = end_year + 1`), `process_data` permits `start_year <= fy <= end_year + 1` while excluding awards whose initial `Start Date` precedes `start_year`.
+- **Year Partitioning**: API queries are partitioned fiscal-year by fiscal-year up to the current federal fiscal year to prevent USAspending's 10,000-record pagination ceiling.
+- **De-obligations**: Award adjustments resulting in net non-positive annual funding for a program in a state are excluded, ensuring State Totals are mathematically consistent with the sum of reported components.
+- **Coverage & Missing Place-of-Performance Handling**: Covers all 50 U.S. states, the District of Columbia, and 8 U.S. territories / Freely Associated States (`AS`, `FM`, `GU`, `MH`, `MP`, `PR`, `PW`, `VI` — 59 geographies total, falling back to `Place of Performance Country Code` `FSM -> FM`, `MHL -> MH`, `PLW -> PW` when `Place of Performance State Code` is null) and all 11 historical and modern EDA programs including CHIPS Act Tech Hubs (11.039), Recompete Pilot (11.040), Science and Research Park Development Grants (11.030), and STEM Talent Challenge (11.023). Awards lacking a valid `Place of Performance State Code` (including domestic `USA` records with a null state code) are excluded from state-level place-of-performance aggregations and logged via a warning summary count.
