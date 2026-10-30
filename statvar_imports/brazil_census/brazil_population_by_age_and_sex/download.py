@@ -118,7 +118,7 @@ if "output_file" not in FLAGS:
     flags.DEFINE_string(
         "output_file",
         "",
-        "Output CSV file path. Defaults to input_files/population_by_age_and_sex.csv.",
+        "Output CSV file path. Defaults to input_files/brazil_population_by_age_and_sex.csv.",
     )
 if "fallback_to_cached" not in FLAGS:
     flags.DEFINE_boolean(
@@ -127,10 +127,9 @@ if "fallback_to_cached" not in FLAGS:
         "Whether to fallback to locally cached CSV if live download fails.",
     )
 
-PARENT_DIR = os.path.dirname(SCRIPT_DIR)
-DEFAULT_OUTPUT_DIR = os.path.join(PARENT_DIR, "input_files")
+DEFAULT_OUTPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
 DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR,
-                                   "population_by_age_and_sex.csv")
+                                   "brazil_population_by_age_and_sex.csv")
 
 
 def get_robust_session() -> requests.Session:

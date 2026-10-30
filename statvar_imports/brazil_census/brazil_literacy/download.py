@@ -473,6 +473,23 @@ def ensure_literacy_rates_file() -> None:
             combined["scalingFactor"] = 100
             combined.to_csv(rates_out, index=False)
             logging.info(f"Generated {len(combined)} rows in {rates_out}")
+            return
+
+    try:
+        from google.cloud import storage
+        client = storage.Client()
+        bucket = client.bucket(GCS_BUCKET_NAME)
+        b1 = bucket.blob("country/brazil/output_files/Brazil_2000_2010_Illiterate_age.csv")
+        b2 = bucket.blob("country/brazil/output_files/Brazil_2000_literate.csv")
+        df1 = pd.read_csv(io.BytesIO(b1.download_as_bytes()))
+        df2 = pd.read_csv(io.BytesIO(b2.download_as_bytes()))
+        df2_rates = df2[df2["unit"] == "dcs:Percent"]
+        combined = pd.concat([df1, df2_rates], ignore_index=True)
+        combined["scalingFactor"] = 100
+        combined.to_csv(rates_out, index=False)
+        logging.info(f"Generated {len(combined)} rows in {rates_out} from GCS")
+    except Exception as e:
+        logging.warning(f"Could not generate {rates_out} from GCS: {e}")
 
 
 def main(argv: List[str]) -> None:
