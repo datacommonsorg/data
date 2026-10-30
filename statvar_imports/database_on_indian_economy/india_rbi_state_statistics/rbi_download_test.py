@@ -82,9 +82,8 @@ class PreprocessFilesTest(absltest.TestCase):
     def test_preprocess_files_preserves_nan(self):
         with tempfile.TemporaryDirectory() as directory:
             file_path = pathlib.Path(directory) / 'source.xlsx'
-            initial_df = pd.DataFrame(
-                [['State/Union Territory', '2015*', None],
-                 ['Andhra Pradesh', None, '30.5']])
+            initial_df = pd.DataFrame([['State/Union Territory', '2015*', None],
+                                       ['Andhra Pradesh', None, '30.5']])
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 initial_df.to_excel(writer,
                                     sheet_name='Sheet1',
@@ -204,8 +203,7 @@ class ReadsConfigFileTest(absltest.TestCase):
         mock_blob = mock.MagicMock()
         mock_blob.download_as_text.return_value = (
             'URLS_CONFIG = [{"url": "http://example.com/test.xlsx", '
-            '"category": "cat", "filename": "test.xlsx"}]\n'
-        )
+            '"category": "cat", "filename": "test.xlsx"}]\n')
         mock_bucket = mock.MagicMock()
         mock_bucket.blob.return_value = mock_blob
         mock_client = mock.MagicMock()
@@ -219,10 +217,8 @@ class ReadsConfigFileTest(absltest.TestCase):
                 rbi_download.logging, 'warning') as mock_warning:
             configs = rbi_download.reads_config_file()
             self.assertIn('URLS_CONFIG', configs)
-            deprecation_logged = any(
-                'DEPRECATION WARNING' in str(call[0][0])
-                for call in mock_warning.call_args_list
-            )
+            deprecation_logged = any('DEPRECATION WARNING' in str(call[0][0])
+                                     for call in mock_warning.call_args_list)
             self.assertTrue(deprecation_logged)
 
 
