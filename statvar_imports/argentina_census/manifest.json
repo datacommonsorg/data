@@ -27,7 +27,8 @@
                 "validation_config.json"
             ],
             "validation_config_file": "validation_config.json",
-            "cron_schedule": "0 5 1 * *",
+            "cron_schedule": "0 5 * * 1",
+            "_comment": "Schedule: Weekly on Monday at 05:00 UTC",
             "resource_limits": {
                 "cpu": 8,
                 "memory": 32,
