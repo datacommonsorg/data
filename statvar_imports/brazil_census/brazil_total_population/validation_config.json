@@ -1,0 +1,52 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks deleted records threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "scope": {
+                "data_source": "differ_summary"
+            },
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Checks date freshness.",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MaxDate >= '2022' AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks date consistency.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_num_places_consistent",
+            "description": "Checks place count consistency across Male and Female cohorts.",
+            "validator": "NUM_PLACES_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_Person_Male",
+                        "Count_Person_Female"
+                    ]
+                }
+            },
+            "params": {}
+        }
+    ]
+}

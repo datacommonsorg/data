@@ -1,0 +1,15 @@
+# Ignore generated output and downloaded intermediate files
+__pycache__/
+*.pyc
+counters/
+input_files/
+*_stat_vars.mcf
+*_stat_vars_schema.mcf
+brazil_*/*.csv
+brazil_*/*.tmcf
+!brazil_*/*_pvmap.csv
+!brazil_*/*_metadata.csv
+!brazil_*/*_places_resolved.csv
+!brazil_literacy/brazil_literacy_rates.tmcf
+!brazil_*/test_data/*
+!brazil_*/config_files/*

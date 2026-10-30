@@ -1,0 +1,9 @@
+Node: E:brazil_literacy_rates->E0
+observationDate: C:brazil_literacy_rates->observationDate
+observationAbout: C:brazil_literacy_rates->observationAbout
+value: C:brazil_literacy_rates->value
+unit: C:brazil_literacy_rates->unit
+scalingFactor: 100
+variableMeasured: C:brazil_literacy_rates->variableMeasured
+observationPeriod: P1Y
+typeOf: dcs:StatVarObservation
