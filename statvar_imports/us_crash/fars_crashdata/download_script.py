@@ -25,11 +25,12 @@ import datetime
 from absl import app
 from absl import logging
 import download_config
+
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 GCS_OUTPUT_DIR = os.path.join(_SCRIPT_PATH, 'gcs_output')
 if not os.path.exists(GCS_OUTPUT_DIR):
-            os.makedirs(GCS_OUTPUT_DIR)
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/')) 
+    os.makedirs(GCS_OUTPUT_DIR)
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 from download_util_script import _retry_method
 
 
@@ -53,46 +54,53 @@ def download_and_extract_data(url, input_folder, year):
         if filename.endswith(".zip"):
             try:
                 with zipfile.ZipFile(filepath, 'r') as zip_ref:
-                    if zip_ref.namelist(): 
+                    if zip_ref.namelist():
                         found_accident_csv = False
                         for item in zip_ref.infolist():
                             if item.filename.upper().endswith("ACCIDENT.CSV"):
                                 parts = item.filename.split("/")
                                 output_filename = f"ACCIDENT_{year}.csv"
-                                output_filepath = os.path.join(input_folder, output_filename)
+                                output_filepath = os.path.join(
+                                    input_folder, output_filename)
 
-                                with zip_ref.open(item) as source, open(output_filepath, "wb") as target:
+                                with zip_ref.open(item) as source, open(
+                                        output_filepath, "wb") as target:
                                     shutil.copyfileobj(source, target)
-                                logging.info(f"Extracted {output_filename} from {filename}")
+                                logging.info(
+                                    f"Extracted {output_filename} from {filename}"
+                                )
                                 found_accident_csv = True
 
                         if not found_accident_csv:
-                            logging.info(f"ACCIDENT.CSV not found in {filename}")
+                            logging.info(
+                                f"ACCIDENT.CSV not found in {filename}")
 
                     else:
                         logging.info(f"Zip file {filename} is empty.")
 
-
             except Exception as e:
-                logging.fatal(f"An error occurred during extraction from {filename}: {e}")
+                logging.fatal(
+                    f"An error occurred during extraction from {filename}: {e}")
                 raise RuntimeError(
-                    'Failed to extract files from zip. Check logs for details.') from e
+                    'Failed to extract files from zip. Check logs for details.'
+                ) from e
     except requests.exceptions.HTTPError as e:
 
         if e.response.status_code == 404:
-            return "no_data_at_url" 
+            return "no_data_at_url"
 
 
 def main(argv):
 
     year = download_config.start_year
-    current_year = datetime.datetime.now().year  
+    current_year = datetime.datetime.now().year
     while year <= current_year:
         url = download_config.base_url.format(year=year)
         logging.info(f"Attempting to download data for {year} from: {url}")
 
-        expected_output_filepath = os.path.join(
-            GCS_OUTPUT_DIR, download_config.input_folder, f"ACCIDENT_{year}.csv")
+        expected_output_filepath = os.path.join(GCS_OUTPUT_DIR,
+                                                download_config.input_folder,
+                                                f"ACCIDENT_{year}.csv")
         if os.path.exists(expected_output_filepath):
             logging.info(
                 f"ACCIDENT_{year}.csv already exists. Skipping download for {year}."
@@ -111,5 +119,6 @@ def main(argv):
 
     logging.info("Download and extraction process complete.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     app.run(main)

@@ -109,7 +109,6 @@ def download_and_convert_excel_to_csv():
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
-        
 
 
 def main(argv):

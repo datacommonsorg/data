@@ -42,9 +42,6 @@ FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year_industry', None,
                      'The latest year to look for in the filename (optional).')
 
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  # default='warn'
-
 
 class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     """Pulls GDP industry-level state data from BEA.

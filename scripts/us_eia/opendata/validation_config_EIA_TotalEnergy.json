@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the threshold.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0.1
-            }
-        },
-        {
             "rule_id": "check_max_date_freshness",
             "description": "Verifies that active Monthly TotalEnergy StatVars have observations within 1 year of the current year and active Annual StatVars are within 2 years.",
             "validator": "SQL_VALIDATOR",

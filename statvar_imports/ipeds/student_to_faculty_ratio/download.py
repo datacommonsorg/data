@@ -47,7 +47,9 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 try:
     from download_util_script import download_file
 except ImportError as e:
-    logging.fatal("Could not import 'download_file'. Please ensure the utility script is accessible. Original error: %s", e)
+    logging.fatal(
+        "Could not import 'download_file'. Please ensure the utility script is accessible. Original error: %s",
+        e)
 
 DOWNLOAD_DIR = os.path.join(_SCRIPT_PATH, "input_files")
 # Pattern to match files ending in '_rv' followed by a file extension
@@ -67,9 +69,12 @@ def is_valid_csv(file_path: str) -> bool:
     try:
         with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
             first_line = f.readline()
-            if not first_line or "<html" in first_line.lower() or "<!doctype" in first_line.lower():
+            if not first_line or "<html" in first_line.lower(
+            ) or "<!doctype" in first_line.lower():
                 return False
-            headers = {h.strip().upper().strip('"') for h in first_line.split(',')}
+            headers = {
+                h.strip().upper().strip('"') for h in first_line.split(',')
+            }
             return REQUIRED_COLUMNS.issubset(headers)
     except Exception as e:
         logging.warning("Failed to validate CSV %s: %s", file_path, e)
@@ -87,7 +92,7 @@ def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
     try:
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             all_files = zip_ref.namelist()
-            
+
             # Prefer revised files first
             files_to_extract = [
                 f for f in all_files if RV_PATTERN.search(os.path.basename(f))
@@ -95,7 +100,8 @@ def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
             # Fall back to provisional files if no revised file is in the zip
             if not files_to_extract:
                 files_to_extract = [
-                    f for f in all_files if PROVISIONAL_PATTERN.search(os.path.basename(f))
+                    f for f in all_files
+                    if PROVISIONAL_PATTERN.search(os.path.basename(f))
                 ]
 
             if not files_to_extract:
@@ -108,10 +114,14 @@ def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
             return True
 
     except zipfile.BadZipFile:
-        logging.warning("  %s is a corrupted or empty zip file. Trying next URL...", zip_filename)
+        logging.warning(
+            "  %s is a corrupted or empty zip file. Trying next URL...",
+            zip_filename)
         return False
     except Exception as e:
-        logging.warning("  An unexpected error occurred during unzipping/extraction of %s: %s", zip_filename, e)
+        logging.warning(
+            "  An unexpected error occurred during unzipping/extraction of %s: %s",
+            zip_filename, e)
         return False
     finally:
         if os.path.exists(zip_path):
@@ -135,14 +145,12 @@ def download_for_year(year: int) -> bool:
             url = url_template.format(year)
 
         try:
-            download_success = download_file(
-                url=url,
-                output_folder=DOWNLOAD_DIR,
-                unzip=False,
-                tries=4,
-                delay=2,
-                backoff=2
-            )
+            download_success = download_file(url=url,
+                                             output_folder=DOWNLOAD_DIR,
+                                             unzip=False,
+                                             tries=4,
+                                             delay=2,
+                                             backoff=2)
 
             if download_success:
                 # Determine the filename inferred by download_file
@@ -156,25 +164,34 @@ def download_for_year(year: int) -> bool:
                 download_path = os.path.join(DOWNLOAD_DIR, file_name)
                 default_zip_path = os.path.join(DOWNLOAD_DIR, f"EF{year}D.zip")
 
-                actual_download_path = download_path if os.path.exists(download_path) else default_zip_path
+                actual_download_path = download_path if os.path.exists(
+                    download_path) else default_zip_path
 
                 if os.path.exists(actual_download_path):
                     if zipfile.is_zipfile(actual_download_path):
-                        if process_and_filter_zip(actual_download_path, DOWNLOAD_DIR):
-                            logging.info("  Successfully fetched and extracted dataset for year %d.", year)
+                        if process_and_filter_zip(actual_download_path,
+                                                  DOWNLOAD_DIR):
+                            logging.info(
+                                "  Successfully fetched and extracted dataset for year %d.",
+                                year)
                             return True
                     else:
                         # Direct CSV download (e.g. from data-generator)
                         if is_valid_csv(actual_download_path):
                             target_name = f"ef{year}d_rv.csv" if "HasRV=1" in url else f"ef{year}d.csv"
-                            target_path = os.path.join(DOWNLOAD_DIR, target_name)
+                            target_path = os.path.join(DOWNLOAD_DIR,
+                                                       target_name)
                             if os.path.exists(target_path):
                                 os.remove(target_path)
                             os.rename(actual_download_path, target_path)
-                            logging.info("  Successfully fetched direct CSV dataset for year %d.", year)
+                            logging.info(
+                                "  Successfully fetched direct CSV dataset for year %d.",
+                                year)
                             return True
                         else:
-                            logging.warning("  Downloaded file from %s is not a valid CSV dataset with expected columns.", url)
+                            logging.warning(
+                                "  Downloaded file from %s is not a valid CSV dataset with expected columns.",
+                                url)
                             if os.path.exists(actual_download_path):
                                 try:
                                     os.remove(actual_download_path)
@@ -185,7 +202,8 @@ def download_for_year(year: int) -> bool:
         except Exception as e:
             logging.warning("  Candidate URL %s failed: %s", url, e)
 
-    logging.warning("Warning: No dataset found for year %d across candidate URLs.", year)
+    logging.warning(
+        "Warning: No dataset found for year %d across candidate URLs.", year)
     return False
 
 
@@ -201,7 +219,8 @@ def main(_):
             os.makedirs(DOWNLOAD_DIR)
             logging.info("Created directory: %s", DOWNLOAD_DIR)
         except OSError as e:
-            logging.fatal("FATAL ERROR: Could not create directory %s: %s", DOWNLOAD_DIR, e)
+            logging.fatal("FATAL ERROR: Could not create directory %s: %s",
+                          DOWNLOAD_DIR, e)
 
     # 2. Iterate through required year range and track results
     successful_years = []
@@ -218,21 +237,17 @@ def main(_):
     if not successful_years:
         logging.fatal(
             "FATAL ERROR: Zero datasets were successfully downloaded across years %d-%d.",
-            START_YEAR, END_YEAR
-        )
+            START_YEAR, END_YEAR)
 
     if failed_years:
-        logging.info(
-            "No datasets downloaded for year(s): %s",
-            failed_years
-        )
+        logging.info("No datasets downloaded for year(s): %s", failed_years)
 
     logging.info(
         "\nDownload summary: Successfully fetched %d dataset(s) for years: %s",
-        len(successful_years),
-        successful_years
-    )
-    logging.info("\nScript finished. Filtered files extracted to the '%s' folder.", DOWNLOAD_DIR)
+        len(successful_years), successful_years)
+    logging.info(
+        "\nScript finished. Filtered files extracted to the '%s' folder.",
+        DOWNLOAD_DIR)
 
 
 if __name__ == "__main__":
