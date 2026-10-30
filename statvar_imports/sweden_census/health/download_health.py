@@ -382,7 +382,8 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
         ],
         key=int,
     )
-    ckm_contents = var_ckm['ContentsCode']['values'][0]
+    ckm_contents = (var_ckm['ContentsCode']['values'][0] if ckm_years and
+                    var_ckm['ContentsCode']['values'] else None)
 
     all_years = sorted(hist_years + ckm_years, key=int)
     if not all_years:
