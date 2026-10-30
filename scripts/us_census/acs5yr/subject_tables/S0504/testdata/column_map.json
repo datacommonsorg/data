@@ -1,0 +1,614 @@
+{
+    "2024": {
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered before 2000": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered 2010 or later": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Male": {
+            "Node": "dcid:Count_Person_Male_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Male": {
+            "Node": "dcid:MarginOfError_Count_Person_Male_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Female": {
+            "Node": "dcid:Count_Person_Female_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Female": {
+            "Node": "dcid:MarginOfError_Count_Person_Female_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!18 to 24 years": {
+            "Node": "dcid:Count_Person_18To24Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[18 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!18 to 24 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To24Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[18 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!25 to 44 years": {
+            "Node": "dcid:Count_Person_25To44Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!25 to 44 years": {
+            "Node": "dcid:MarginOfError_Count_Person_25To44Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!45 to 54 years": {
+            "Node": "dcid:Count_Person_45To54Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[45 54 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!45 to 54 years": {
+            "Node": "dcid:MarginOfError_Count_Person_45To54Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[45 54 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!55 to 64 years": {
+            "Node": "dcid:Count_Person_55To64Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[55 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!55 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_55To64Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[55 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!75 to 84 years": {
+            "Node": "dcid:Count_Person_75To84Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[75 84 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!75 to 84 years": {
+            "Node": "dcid:MarginOfError_Count_Person_75To84Years_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[75 84 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Median age (years)": {
+            "Node": "dcid:Median_Age_Person_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:age",
+            "unit": "Years",
+            "statType": "dcs:medianValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!SEX AND AGE!!Median age (years)": {
+            "Node": "dcid:MarginOfError_Age_Person_ForeignBorn_PlaceOfBirthAfrica",
+            "measuredProperty": "dcs:age",
+            "unit": "Years",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAfrica_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Foreign-born; Born in Africa!!Foreign-born population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAfrica_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:africa",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}
