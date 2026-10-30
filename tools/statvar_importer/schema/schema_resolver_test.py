@@ -140,3 +140,7 @@ class SchemaResolverTest(unittest.TestCase):
 
         resolved_place = self._resolver.resolve_node({'state': 'geoId/04'})
         self.assertEqual({}, resolved_place)
+
+
+if __name__ == '__main__':
+    unittest.main()

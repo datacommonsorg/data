@@ -3,7 +3,7 @@
       {
         "import_name": "USFEMA_FloodInsuranceClaims",
         "curator_emails": ["support@datacommons.org"],
-        "provenance_url": "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2",
+        "provenance_url": "https://www.fema.gov/openfema-data-page/nfip-redacted-claims-v3",
         "provenance_description": "National flood insurance claims data",
         "scripts": [
             "fema_download.py",
