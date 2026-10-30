@@ -11,9 +11,9 @@ subClassOf: dcs:Enumeration
 name: "PassengerTypeEnum"
 isProvisional: dcs:True
 
-Node: dcid:Long-term migrant
+Node: dcid:LongTermMigrant
 typeOf: dcid:PassengerTypeEnum
-name: "Long-term migrant"
+name: "Long Term Migrant"
 isProvisional: dcs:True
 
 Node: dcid:migrationDirection
@@ -34,9 +34,9 @@ typeOf: dcid:MigrationDirectionEnum
 name: "Arrivals"
 isProvisional: dcs:True
 
-Node: dcid:NZ
+Node: dcid:NZCitizen
 typeOf: dcid:CitizenshipEnum
-name: "NZ"
+name: "NZCitizen"
 isProvisional: dcs:True
 
 Node: dcid:visaType
@@ -52,26 +52,15 @@ subClassOf: dcs:Enumeration
 name: "VisaTypeEnum"
 isProvisional: dcs:True
 
-Node: dcid:NZ and Australian citizens
+Node: dcid:NZAndAustralianCitizenVisa
 typeOf: dcid:VisaTypeEnum
-name: "NZ and  Australian citizens"
+name: "NZAnd Australian Citizen Visa"
 isProvisional: dcs:True
 
 Node: dcid:countryOfResidence
 typeOf: dcs:Property
 name: "countryOfResidence"
 domainIncludes: dcid:Person
-rangeIncludes: dcid:CountryOfResidenceEnum
-isProvisional: dcs:True
-
-Node: dcid:CountryOfResidenceEnum
-typeOf: schema:Class
-subClassOf: dcs:Enumeration
-name: "CountryOfResidenceEnum"
-isProvisional: dcs:True
-
-Node: dcid:Afghanistan
-typeOf: dcid:CountryOfResidenceEnum
-name: "Afghanistan"
+rangeIncludes: dcid:Country
 isProvisional: dcs:True
 
