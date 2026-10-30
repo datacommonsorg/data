@@ -1,4 +1,4 @@
-# NZ_International_Migration
+# NewZealand_Statistics_Migration
 
 ## Overview
 Imports New Zealand international migration estimates (citizenship by visa by country of last permanent residence) published by Stats NZ.

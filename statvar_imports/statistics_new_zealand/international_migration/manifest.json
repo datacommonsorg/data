@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "NZ_International_Migration",
+      "import_name": "NewZealand_Statistics_Migration",
       "curator_emails": [
         "support@datacommons.org"
       ],
