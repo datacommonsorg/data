@@ -1,0 +1,6 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+GEOID,#Eval,"observationAbout = 'geoId/' + str(int(Number)).zfill(5)",#Filter,"not observationAbout.endswith('000') and not (float(value) < 0.0 or float(value) > 100.0)",,,,,,,,,,
+"1990 Decennial Census, % in Poverty",observationDate,1990,measurementMethod,dcs:USDecennialCensus,unit,Percent,scalingFactor,100,observationPeriod,P1Y,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+"2000 Decennial Census, % in Poverty",observationDate,2000,measurementMethod,dcs:USDecennialCensus,unit,Percent,scalingFactor,100,observationPeriod,P1Y,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+"Most Recent Estimate, % in Poverty*",observationDate,{RecentYear},measurementMethod,{RecentMethod},unit,Percent,scalingFactor,100,observationPeriod,P1Y,value,{Number},variableMeasured,dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+"Data Source―Most Recent Estimate",#Regex,"(?P<RecentSource>.*)[, -]+(?P<RecentYear>[0-9]{4}) *$",#Eval,"RecentMethod = 'dcs:USDecennialCensus' if 'DECENNIAL' in RecentSource.upper() else 'dcs:EDA_Estimate'",,,,,,,,,,
