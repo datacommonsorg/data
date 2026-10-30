@@ -667,7 +667,6 @@
         "HOUSING TENURE": "HousingUnit",
         "ROOMS": "HousingUnit",
         "1.01 or more occupants per room": "HousingUnit",
-        "Occupied housing units": "HousingUnit",
         "VEHICLES AVAILABLE": "HousingUnit",
         "No telephone service available": "HousingUnit",
         "Owner-occupied housing units": "HousingUnit",
