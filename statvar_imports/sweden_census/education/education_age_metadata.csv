@@ -1,6 +1,0 @@
-parameter,value
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
-header_rows,3
-word_delimiter,""""""
-mapped_rows,3
-mapped_columns,3

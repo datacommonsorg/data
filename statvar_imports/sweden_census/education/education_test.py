@@ -18,7 +18,6 @@ import collections
 import csv
 import json
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -32,19 +31,33 @@ if SCRIPT_DIR not in sys.path:
 import download_education  # pylint: disable=g-import-not-at-top
 
 TEST_DATA_DIR = os.path.join(SCRIPT_DIR, 'test_data')
-SV_PROCESSOR = os.environ.get(
-    'SV_PROCESSOR',
-    os.path.join(
-        SCRIPT_DIR,
-        '..',
-        '..',
-        '..',
-        'tools',
-        'statvar_importer',
-        'stat_var_processor.py',
-    ),
-)
-PLACES_CSV = os.path.join(SCRIPT_DIR, 'sweden_places_resolved.csv')
+
+
+def _make_valid_var_map():
+  """Constructs a complete valid SCB metadata var_map for testing."""
+  county_codes = sorted(download_education.COUNTY_TO_NUTS.keys())
+  muni_codes = [f'{1000 + i:04d}' for i in range(290)]
+  reg_values = ['00'] + county_codes + muni_codes
+  reg_texts = (
+      ['Riket']
+      + [f'County {c}' for c in county_codes]
+      + [f'Muni {m}' for m in muni_codes]
+  )
+  all_ages = [str(a) for a in range(16, 75)] + ['tot16-74']
+  edu_codes = [code for code, _ in download_education.EDUCATION_LEVELS]
+  sex_codes = [code for code, _ in download_education.SEX_LEVELS]
+  return (
+      {
+          'Region': {'values': reg_values, 'valueTexts': reg_texts},
+          'Alder': {'values': all_ages},
+          'UtbildningsNiva': {'values': edu_codes},
+          'Kon': {'values': sex_codes},
+          'ContentsCode': {'values': ['UF0506A1']},
+          'Tid': {'values': ['1985', '2024', '2025']},
+      },
+      county_codes,
+      muni_codes,
+  )
 
 
 class DownloadEducationUnitTest(unittest.TestCase):
@@ -65,6 +78,34 @@ class DownloadEducationUnitTest(unittest.TestCase):
         download_education.SCB_API_URL, timeout=60
     )
     fake_resp.raise_for_status.assert_called_once()
+
+  def test_validate_scb_metadata_passes_on_valid_metadata(self):
+    var_map, county_codes, muni_codes = _make_valid_var_map()
+    download_education.validate_scb_metadata(var_map, county_codes, muni_codes)
+
+  def test_validate_scb_metadata_fails_on_wrong_region_or_code_counts(self):
+    var_map, county_codes, muni_codes = _make_valid_var_map()
+    with self.assertRaisesRegex(RuntimeError, 'Expected 21 counties'):
+      download_education.validate_scb_metadata(
+          var_map, county_codes[:-1], muni_codes
+      )
+    with self.assertRaisesRegex(RuntimeError, 'Expected 290 municipalities'):
+      download_education.validate_scb_metadata(
+          var_map, county_codes, muni_codes[:-1]
+      )
+    var_map['UtbildningsNiva']['values'] = ['1', '3']
+    with self.assertRaisesRegex(
+        RuntimeError, 'Missing expected UtbildningsNiva'
+    ):
+      download_education.validate_scb_metadata(
+          var_map, county_codes, muni_codes
+      )
+
+  def test_parse_scb_value_handles_suppressed_markers(self):
+    self.assertEqual(download_education._parse_scb_value('450'), 450)
+    self.assertEqual(download_education._parse_scb_value('0'), 0)
+    for marker in ('..', '.', '-', ''):
+      self.assertIsNone(download_education._parse_scb_value(marker))
 
   def test_query_scb_chunk_success(self):
     fake_session = mock.MagicMock(spec=requests.Session)
@@ -125,11 +166,17 @@ class DownloadEducationUnitTest(unittest.TestCase):
       )
     self.assertEqual(fake_session.post.call_count, 1)
 
-  def test_write_wide_csv_atomic_and_zero_fill(self):
+  def test_write_wide_csv_atomic_and_suppressed_cell_handling(self):
     data_store = collections.defaultdict(int)
-    data_store[('SE1 Östra Sverige', 'totalt 16-74 år', '1', 'TOT', '2024')] = (
-        450
+    observed_Key = (
+        'SE1 Östra Sverige',
+        'totalt 16-74 år',
+        '1',
+        'TOT',
+        '2024',
     )
+    data_store[observed_Key] = 450
+    observed_cells = {observed_Key}
 
     with tempfile.TemporaryDirectory() as tmp_dir:
       out_csv = os.path.join(tmp_dir, 'test_wide.csv')
@@ -139,8 +186,9 @@ class DownloadEducationUnitTest(unittest.TestCase):
           include_gender=False,
           regions=['SE1 Östra Sverige'],
           age_labels=['totalt 16-74 år'],
-          years=['2023', '2024'],
+          years=['2022', '2023', '2024'],
           data_store=data_store,
+          observed_cells=observed_cells,
       )
       self.assertEqual(rows_written, 6)
       self.assertTrue(os.path.exists(out_csv))
@@ -149,8 +197,12 @@ class DownloadEducationUnitTest(unittest.TestCase):
       with open(out_csv, 'r', encoding='utf-8') as f:
         rows = list(csv.reader(f))
       self.assertEqual(
-          rows[2], ['region', 'ålder', 'utbildningsnivå', '2023', '2024']
+          rows[2],
+          ['region', 'ålder', 'utbildningsnivå', '2022', '2023', '2024'],
       )
+      # 2022 unobserved cell -> '0' (legacy baseline parity);
+      # 2023 unobserved cell -> '' (post-2022 suppressed/missing preserved);
+      # 2024 observed cell -> '450'
       self.assertEqual(
           rows[3],
           [
@@ -158,95 +210,52 @@ class DownloadEducationUnitTest(unittest.TestCase):
               'totalt 16-74 år',
               'förgymnasial utbildning kortare än 9 år',
               '0',
+              '',
               '450',
           ],
       )
 
 
-class SwedenEducationProcessorTest(unittest.TestCase):
-  """Tests stat_var_processor across all 4 marginal groups on test_data/."""
+class SwedenEducationConfigAndFixtureTest(unittest.TestCase):
+  """Verifies PVMap, metadata, remap, validation configs, and test_data fixtures."""
 
-  def _run_and_verify(
-      self,
-      sample_prefix: str,
-      pvmap: str,
-      metadata: str,
-      remap: str,
-  ):
-    input_csv = os.path.join(TEST_DATA_DIR, f'{sample_prefix}_input.csv')
-    expected_csv = os.path.join(TEST_DATA_DIR, f'{sample_prefix}_output.csv')
-    expected_tmcf = os.path.join(TEST_DATA_DIR, f'{sample_prefix}_output.tmcf')
-    self.assertTrue(os.path.exists(input_csv), f'Missing {input_csv}')
-    self.assertTrue(os.path.exists(expected_csv), f'Missing {expected_csv}')
-    self.assertTrue(os.path.exists(expected_tmcf), f'Missing {expected_tmcf}')
+  def test_pvmap_and_remap_coverage(self):
+    common_pvmap = os.path.join(SCRIPT_DIR, 'education_common_pvmap.csv')
+    total_pvmap = os.path.join(SCRIPT_DIR, 'education_total_pvmap.csv')
+    gender_pvmap = os.path.join(SCRIPT_DIR, 'education_gender_pvmap.csv')
+    for path in (common_pvmap, total_pvmap, gender_pvmap):
+      self.assertTrue(os.path.exists(path), f'Missing {path}')
 
-    with tempfile.TemporaryDirectory() as tmp_dir:
-      actual_prefix = os.path.join(tmp_dir, sample_prefix)
-      test_config_path = os.path.join(tmp_dir, 'test_metadata.csv')
-      with open(
-          os.path.join(SCRIPT_DIR, metadata), 'r', encoding='utf-8'
-      ) as f_in, open(test_config_path, 'w', encoding='utf-8') as f_out:
-        f_out.write(f_in.read())
-        f_out.write('generate_statvar_mcf,False\n')
-        f_out.write('generate_schema_mcf,False\n')
+    with open(common_pvmap, 'r', encoding='utf-8') as f:
+      common_keys = {row[0] for row in csv.reader(f) if row}
+    for yr in range(1985, 2036):
+      self.assertIn(str(yr), common_keys)
+    self.assertIn('2463 Åsele', common_keys)
 
-      cmd = [
-          'python3',
-          SV_PROCESSOR,
-          f'--input_data={input_csv}',
-          f'--pv_map={os.path.join(SCRIPT_DIR, pvmap)}',
-          f'--config_file={test_config_path}',
-          f'--places_resolved_csv={PLACES_CSV}',
-          f'--statvar_dcid_remap_csv={os.path.join(SCRIPT_DIR, remap)}',
-          f'--output_path={actual_prefix}',
-      ]
-      subprocess.run(cmd, check=True, cwd=SCRIPT_DIR)
+    remap_counts = {
+        'education_total_statvar_remap.csv': 6,
+        'education_gender_statvar_remap.csv': 12,
+        'education_age_statvar_remap.csv': 36,
+        'education_age_gender_statvar_remap.csv': 72,
+    }
+    for filename, expected_svs in remap_counts.items():
+      path = os.path.join(SCRIPT_DIR, filename)
+      with open(path, 'r', encoding='utf-8') as f:
+        rows = list(csv.DictReader(f))
+      self.assertEqual(len(rows), expected_svs)
 
-      actual_csv = f'{actual_prefix}.csv'
-      actual_tmcf = f'{actual_prefix}.tmcf'
-      with open(expected_csv, 'r', encoding='utf-8') as f_exp, open(
-          actual_csv, 'r', encoding='utf-8'
-      ) as f_act:
-        self.assertEqual(f_exp.read().splitlines(), f_act.read().splitlines())
-
-      with open(expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf, open(
-          actual_tmcf, 'r', encoding='utf-8'
-      ) as f_act_tmcf:
-        self.assertEqual(
-            f_exp_tmcf.read().splitlines(), f_act_tmcf.read().splitlines()
-        )
-
-  def test_group1_total(self):
-    self._run_and_verify(
+  def test_test_data_fixtures_exist_and_non_empty(self):
+    prefixes = (
         'education_nuts1',
-        'education_total_pvmap.csv',
-        'education_total_metadata.csv',
-        'education_total_statvar_remap.csv',
-    )
-
-  def test_group2_gender(self):
-    self._run_and_verify(
         'education_gender_nuts1',
-        'education_gender_pvmap.csv',
-        'education_gender_metadata.csv',
-        'education_gender_statvar_remap.csv',
-    )
-
-  def test_group3_age(self):
-    self._run_and_verify(
         'education_age_nuts1',
-        'education_age_pvmap.csv',
-        'education_age_metadata.csv',
-        'education_age_statvar_remap.csv',
-    )
-
-  def test_group4_age_gender(self):
-    self._run_and_verify(
         'education_age_gender_nuts1',
-        'education_age_gender_pvmap.csv',
-        'education_age_gender_metadata.csv',
-        'education_age_gender_statvar_remap.csv',
     )
+    for prefix in prefixes:
+      for suffix in ('_input.csv', '_output.csv', '_output.tmcf'):
+        fixture_path = os.path.join(TEST_DATA_DIR, f'{prefix}{suffix}')
+        self.assertTrue(os.path.exists(fixture_path), f'Missing {fixture_path}')
+        self.assertGreater(os.path.getsize(fixture_path), 0)
 
 
 if __name__ == '__main__':

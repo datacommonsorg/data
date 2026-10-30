@@ -17,6 +17,8 @@ EXISTING_STATVAR_MCF="${EXISTING_STATVAR_MCF-gs://unresolved_mcf/scripts/statvar
 rm -rf output counters
 mkdir -p output counters
 
+COMMON_PVMAP="education_common_pvmap.csv"
+
 run_group() {
   local file_stem="$1"
   local pvmap="$2"
@@ -24,11 +26,11 @@ run_group() {
   local remap="$4"
 
   echo "=================================================================="
-  echo "Processing ${file_stem}.csv with ${pvmap} ..."
+  echo "Processing ${file_stem}.csv with ${COMMON_PVMAP},${pvmap} ..."
   echo "=================================================================="
   python3 "${SV_PROCESSOR}" \
     --input_data="input_files/${file_stem}.csv" \
-    --pv_map="${pvmap}" \
+    --pv_map="${COMMON_PVMAP},${pvmap}" \
     --config_file="${metadata}" \
     --places_resolved_csv="${PLACES_CSV}" \
     --statvar_dcid_remap_csv="${remap}" \
@@ -60,16 +62,16 @@ done
 for f in education_age_nuts1 education_age_nuts2 education_age_nuts3 \
          education_age_municipality_1 education_age_municipality_2 education_age_municipality_3; do
   run_group "$f" \
-    "education_age_pvmap.csv" \
-    "education_age_metadata.csv" \
+    "education_total_pvmap.csv" \
+    "education_total_metadata.csv" \
     "education_age_statvar_remap.csv"
 done
 
 # 4. Group 4: By Education Level, Age Group & Gender (3 files, 72 StatVars, mapped_columns=4)
 for f in education_age_gender_nuts1 education_age_gender_nuts2 education_age_gender_nuts3; do
   run_group "$f" \
-    "education_age_gender_pvmap.csv" \
-    "education_age_gender_metadata.csv" \
+    "education_gender_pvmap.csv" \
+    "education_gender_metadata.csv" \
     "education_age_gender_statvar_remap.csv"
 done
 

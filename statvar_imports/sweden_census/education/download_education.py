@@ -168,7 +168,7 @@ def _create_retry_session(
       connect=retries,
       backoff_factor=backoff_factor,
       status_forcelist=[429, 500, 502, 503, 504],
-      allowed_methods=['HEAD', 'GET', 'OPTIONS'],
+      allowed_methods=['HEAD', 'GET', 'POST', 'OPTIONS'],
   )
   adapter = HTTPAdapter(max_retries=retry_strategy)
   session.mount('https://', adapter)
@@ -182,6 +182,73 @@ def fetch_metadata(session: requests.Session) -> Dict:
   response = session.get(SCB_API_URL, timeout=60)
   response.raise_for_status()
   return json.loads(response.content.decode('utf-8-sig'))
+
+
+def _parse_scb_value(val_str: str) -> Optional[int]:
+  """Parses an SCB observation string, returning None for suppressed/missing cells."""
+  cleaned = str(val_str).strip()
+  if cleaned in ('..', '.', '-', ''):
+    return None
+  return int(cleaned)
+
+
+def validate_scb_metadata(
+    var_map: Dict[str, Dict],
+    county_codes: List[str],
+    muni_codes: List[str],
+) -> None:
+  """Validates SCB metadata variables, codes, and region counts before querying."""
+  required_vars = (
+      'Region',
+      'Alder',
+      'UtbildningsNiva',
+      'Kon',
+      'ContentsCode',
+      'Tid',
+  )
+  missing_vars = [v for v in required_vars if v not in var_map]
+  if missing_vars:
+    raise RuntimeError(
+        f'Missing required variables in SCB metadata: {missing_vars}'
+    )
+
+  if not var_map['ContentsCode'].get('values'):
+    raise RuntimeError('SCB metadata ContentsCode has no values.')
+
+  available_ages = set(var_map['Alder'].get('values', []))
+  required_ages = {
+      age for _, ages in AGE_GROUPS for age in ages
+  } | {'tot16-74'}
+  missing_ages = sorted(required_ages - available_ages)
+  if missing_ages:
+    raise RuntimeError(
+        f'Missing expected Alder codes in SCB metadata: {missing_ages}'
+    )
+
+  available_edu = set(var_map['UtbildningsNiva'].get('values', []))
+  required_edu = {code for code, _ in EDUCATION_LEVELS}
+  missing_edu = sorted(required_edu - available_edu)
+  if missing_edu:
+    raise RuntimeError(
+        f'Missing expected UtbildningsNiva codes in SCB metadata: {missing_edu}'
+    )
+
+  available_sex = set(var_map['Kon'].get('values', []))
+  required_sex = {code for code, _ in SEX_LEVELS}
+  missing_sex = sorted(required_sex - available_sex)
+  if missing_sex:
+    raise RuntimeError(
+        f'Missing expected Kon codes in SCB metadata: {missing_sex}'
+    )
+
+  if len(county_codes) != 21:
+    raise RuntimeError(
+        f'Expected 21 counties in SCB metadata, found {len(county_codes)}.'
+    )
+  if len(muni_codes) != 290:
+    raise RuntimeError(
+        f'Expected 290 municipalities in SCB metadata, found {len(muni_codes)}.'
+    )
 
 
 def query_scb_chunk(
@@ -233,8 +300,6 @@ def query_scb_chunk(
           logging.warning('Rate limited (429). Sleeping %ds...', wait_sec)
           time.sleep(wait_sec)
           continue
-      if 400 <= resp.status_code < 500 and resp.status_code != 429:
-        resp.raise_for_status()
       resp.raise_for_status()
       # Handle UTF-8 BOM if present in SCB JSON response
       text = resp.content.decode('utf-8-sig')
@@ -278,6 +343,19 @@ def query_scb_chunk(
   ) from last_exc
 
 
+def _format_cell_value(
+    key: Tuple[str, str, str, str, str],
+    data_store: Dict[Tuple[str, str, str, str, str], int],
+    observed_cells: Optional[set],
+    legacy_zero_fill_max_year: int = 2022,
+):
+  """Returns cell value, preserving '' for post-2022 unobserved/suppressed cells."""
+  if observed_cells is None or key in observed_cells:
+    return data_store.get(key, 0)
+  yr = int(key[4])
+  return 0 if yr <= legacy_zero_fill_max_year else ''
+
+
 def write_wide_csv(
     filepath: str,
     title: str,
@@ -286,6 +364,7 @@ def write_wide_csv(
     age_labels: List[str],
     years: List[str],
     data_store: Dict,
+    observed_cells: Optional[set] = None,
 ) -> int:
   """Writes a raw wide-format CSV matching the legacy Sweden Education PVMap."""
   os.makedirs(os.path.dirname(filepath), exist_ok=True)
@@ -307,14 +386,22 @@ def write_wide_csv(
           if include_gender:
             for sex_code, sex_text in SEX_LEVELS:
               year_vals = [
-                  data_store.get((reg, age_label, edu_code, sex_code, yr), 0)
+                  _format_cell_value(
+                      (reg, age_label, edu_code, sex_code, yr),
+                      data_store,
+                      observed_cells,
+                  )
                   for yr in years
               ]
               writer.writerow([reg, age_label, edu_text, sex_text] + year_vals)
               rows_written += 1
           else:
             year_vals = [
-                data_store.get((reg, age_label, edu_code, 'TOT', yr), 0)
+                _format_cell_value(
+                    (reg, age_label, edu_code, 'TOT', yr),
+                    data_store,
+                    observed_cells,
+                )
                 for yr in years
             ]
             writer.writerow([reg, age_label, edu_text] + year_vals)
@@ -332,7 +419,33 @@ def main(argv):
   session = _create_retry_session()
   meta = fetch_metadata(session)
 
-  var_map = {v['code']: v for v in meta['variables']}
+  var_map = {v['code']: v for v in meta.get('variables', [])}
+  if 'Region' not in var_map or 'Tid' not in var_map:
+    logging.fatal('SCB metadata is missing Region or Tid variables.')
+
+  # Separate 2-digit county codes (21 counties) and 4-digit municipality codes (290 municipalities)
+  reg_values = var_map['Region']['values']
+  reg_texts = var_map['Region']['valueTexts']
+  county_codes: List[str] = []
+  muni_codes: List[str] = []
+  muni_code_to_label: Dict[str, str] = {}
+
+  for code, text in zip(reg_values, reg_texts):
+    if code == '00':
+      continue
+    elif len(code) == 2 and code in COUNTY_TO_NUTS:
+      county_codes.append(code)
+    elif len(code) == 4:
+      muni_codes.append(code)
+      muni_code_to_label[code] = f'{code} {text}'
+
+  validate_scb_metadata(var_map, county_codes, muni_codes)
+  logging.info(
+      'Validated SCB metadata: %d counties and %d municipalities.',
+      len(county_codes),
+      len(muni_codes),
+  )
+
   # Dynamically detect all available years >= start_year (and <= end_year if specified)
   all_years = sorted(
       [
@@ -359,28 +472,6 @@ def main(argv):
   contents_code = var_map['ContentsCode']['values'][0]
   logging.info('Using ContentsCode: %s', contents_code)
 
-  # Separate 2-digit county codes (21 counties) and 4-digit municipality codes (290 municipalities)
-  reg_values = var_map['Region']['values']
-  reg_texts = var_map['Region']['valueTexts']
-  county_codes: List[str] = []
-  muni_codes: List[str] = []
-  muni_code_to_label: Dict[str, str] = {}
-
-  for code, text in zip(reg_values, reg_texts):
-    if code == '00':
-      continue
-    elif len(code) == 2 and code in COUNTY_TO_NUTS:
-      county_codes.append(code)
-    elif len(code) == 4:
-      muni_codes.append(code)
-      muni_code_to_label[code] = f'{code} {text}'
-
-  logging.info(
-      'Found %d counties and %d municipalities.',
-      len(county_codes),
-      len(muni_codes),
-  )
-
   edu_codes = [code for code, _ in EDUCATION_LEVELS]
   sex_codes = [code for code, _ in SEX_LEVELS]
 
@@ -396,6 +487,7 @@ def main(argv):
   data_store: Dict[Tuple[str, str, str, str, str], int] = collections.defaultdict(
       int
   )
+  observed_cells = set()
 
   # 1. Fetch County-level data (21 counties) for individual ages 16..74 + tot16-74
   # Roll up into NUTS3, NUTS2, and NUTS1 across all 4 marginal views.
@@ -422,8 +514,9 @@ def main(argv):
       edu_code = row['UtbildningsNiva']
       sex_code = row['Kon']
       yr = row['Tid']
-      val_str = row['value']
-      val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
+      val = _parse_scb_value(row['value'])
+      if val is None:
+        continue
 
       nuts3_label, nuts2_label, nuts1_label = COUNTY_TO_NUTS[reg_code]
       target_age = (
@@ -433,8 +526,12 @@ def main(argv):
       )
 
       for nuts_label in (nuts1_label, nuts2_label, nuts3_label):
-        data_store[(nuts_label, target_age, edu_code, sex_code, yr)] += val
-        data_store[(nuts_label, target_age, edu_code, 'TOT', yr)] += val
+        sex_key = (nuts_label, target_age, edu_code, sex_code, yr)
+        tot_key = (nuts_label, target_age, edu_code, 'TOT', yr)
+        data_store[sex_key] += val
+        data_store[tot_key] += val
+        observed_cells.add(sex_key)
+        observed_cells.add(tot_key)
     time.sleep(1.2)
 
   # 2. Fetch Municipality-level data (290 municipalities)
@@ -472,8 +569,9 @@ def main(argv):
         edu_code = row['UtbildningsNiva']
         sex_code = row['Kon']
         yr = row['Tid']
-        val_str = row['value']
-        val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
+        val = _parse_scb_value(row['value'])
+        if val is None:
+          continue
 
         muni_label = muni_code_to_label[reg_code]
         target_age = (
@@ -481,8 +579,12 @@ def main(argv):
             if age_code == 'tot16-74'
             else age_to_bracket[age_code]
         )
-        data_store[(muni_label, target_age, edu_code, sex_code, yr)] += val
-        data_store[(muni_label, target_age, edu_code, 'TOT', yr)] += val
+        sex_key = (muni_label, target_age, edu_code, sex_code, yr)
+        tot_key = (muni_label, target_age, edu_code, 'TOT', yr)
+        data_store[sex_key] += val
+        data_store[tot_key] += val
+        observed_cells.add(sex_key)
+        observed_cells.add(tot_key)
       time.sleep(1.2)
 
   # 3. Write out the 17 raw CSV files into output_dir (cleaning stale CSVs first)
@@ -506,6 +608,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_nuts2.csv'),
@@ -515,6 +618,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_nuts3.csv'),
@@ -524,6 +628,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_municipality.csv'),
@@ -533,6 +638,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
 
   # Group 2: By Education Level & Gender (4 files)
@@ -544,6 +650,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_gender_nuts2.csv'),
@@ -553,6 +660,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_gender_nuts3.csv'),
@@ -562,6 +670,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_gender_municipality.csv'),
@@ -571,6 +680,7 @@ def main(argv):
       [TOTAL_AGE_LABEL],
       all_years,
       data_store,
+      observed_cells,
   )
 
   # Group 3: By Education Level & Age Group (6 files)
@@ -582,6 +692,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_nuts2.csv'),
@@ -591,6 +702,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_nuts3.csv'),
@@ -600,6 +712,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   # Split municipalities into 3 parts (107, 96, 87; 86 after skipping 2463 Åsele)
   write_wide_csv(
@@ -610,6 +723,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_municipality_2.csv'),
@@ -619,6 +733,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_municipality_3.csv'),
@@ -628,6 +743,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
 
   # Group 4: By Education Level, Age Group & Gender (3 files)
@@ -639,6 +755,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_gender_nuts2.csv'),
@@ -648,6 +765,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_gender_nuts3.csv'),
@@ -657,6 +775,7 @@ def main(argv):
       age_bracket_labels,
       all_years,
       data_store,
+      observed_cells,
   )
 
   logging.info(
