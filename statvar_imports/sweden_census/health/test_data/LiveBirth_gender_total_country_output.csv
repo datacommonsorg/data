@@ -1,0 +1,10 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:country/SWE,2023,100051,dcid:Count_BirthEvent_LiveBirth,,
+dcid:country/SWE,2024,98451,dcid:Count_BirthEvent_LiveBirth,,
+dcid:country/SWE,2025,98657,dcid:Count_BirthEvent_LiveBirth,,
+dcid:country/SWE,2023,51396,dcid:Count_BirthEvent_LiveBirth_Male,,
+dcid:country/SWE,2024,50550,dcid:Count_BirthEvent_LiveBirth_Male,,
+dcid:country/SWE,2025,50723,dcid:Count_BirthEvent_LiveBirth_Male,,
+dcid:country/SWE,2023,48655,dcid:Count_BirthEvent_LiveBirth_Female,,
+dcid:country/SWE,2024,47901,dcid:Count_BirthEvent_LiveBirth_Female,,
+dcid:country/SWE,2025,47934,dcid:Count_BirthEvent_LiveBirth_Female,,
