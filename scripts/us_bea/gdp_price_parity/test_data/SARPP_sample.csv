@@ -1,0 +1,6 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+" 00000","United States",0,SARPP,1,"...","RPPs: All items","Index",100.0,100.0
+" 01000","Alabama",5,SARPP,1,"...","RPPs: All items","Index",89.895,90.029
+" 01000","Alabama",5,SARPP,4,"...","RPPs: Services: Other","Index",92.5,93.1
+" 01000","Alabama",5,SARPP,5,"...","RPPs: Services: Housing","Index",74.8,75.2
+" 01000","Alabama",5,SAIRPD,1,"...","Implicit regional price deflator","Index",99.1,99.2
