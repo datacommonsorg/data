@@ -9,5 +9,7 @@ release_frequency,P1Y
 process,
 comments,
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
-header_rows,1
+header_rows,3
+filter_data_min_value,0
+filter_data_max_value,100
 output_only_new_statvars,True

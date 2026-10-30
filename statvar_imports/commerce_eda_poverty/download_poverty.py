@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Download script for Commerce EDA Persistent Poverty Counties (PPC) dataset.
 
 This script fetches the official Persistent Poverty Counties dataset from the
@@ -20,8 +19,9 @@ U.S. Economic Development Administration (EDA) / Department of Commerce:
 It downloads the official Excel workbook (with automatic mirror failover),
 supports ingesting directly from an existing input file, extracts the underlying
 county-level poverty data table (3,232 places across 1990, 2000, and 2020/2021),
-and stages the workbook and extracted CSV under input_files/ for preprocessing
-(and optionally writes a raw CSV copy when --raw_csv_path is explicitly provided).
+and stages the workbook and extracted CSV under input_files/ for processing by
+stat_var_processor.py (and optionally writes a raw CSV copy when --raw_csv_path
+is explicitly provided).
 """
 
 import csv
@@ -42,12 +42,10 @@ if PROJECT_ROOT not in sys.path:
 from util.download_util import request_url
 
 EDA_PPC_XLSX_URL = (
-    "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
-)
+    "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx")
 EDA_PPC_MIRROR_URL = (
     "https://web.archive.org/web/20250308204521if_/"
-    "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx"
-)
+    "https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx")
 
 DEFAULT_OUTPUT_DIR = os.path.join(MODULE_DIR, "input_files")
 DEFAULT_OUTPUT_XLSX = os.path.join(DEFAULT_OUTPUT_DIR, "EDA_FY23_PPCs.xlsx")
@@ -55,10 +53,8 @@ DEFAULT_INPUT_CSV = os.path.join(DEFAULT_OUTPUT_DIR, "Poverty.csv")
 DEFAULT_RAW_CSV_FILE = None
 
 HTTP_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    ),
+    "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"),
     "Accept": "*/*",
 }
 
@@ -123,9 +119,9 @@ def download_file(
     tmp_path = None
     try:
         if session is not None:
-            response = session.get(
-                download_url, headers=HTTP_HEADERS, timeout=timeout
-            )
+            response = session.get(download_url,
+                                   headers=HTTP_HEADERS,
+                                   timeout=timeout)
             if hasattr(response, "raise_for_status"):
                 response.raise_for_status()
             content = response.content
@@ -140,8 +136,7 @@ def download_file(
         if not content:
             logging.error("Empty response body received from %s", download_url)
             raise RuntimeError(
-                f"Empty response body received from {download_url}"
-            )
+                f"Empty response body received from {download_url}")
         if require_zip_signature and not content.startswith(b"PK\x03\x04"):
             logging.error(
                 "Downloaded content from %s is not a valid ZIP/XLSX archive.",
@@ -149,22 +144,20 @@ def download_file(
             )
             raise ValueError(
                 f"Downloaded content from {download_url} is not a valid "
-                "ZIP/XLSX archive."
-            )
+                "ZIP/XLSX archive.")
 
-        with tempfile.NamedTemporaryFile(
-            "wb", dir=dst_dir, delete=False, suffix=".tmp"
-        ) as tmp:
+        with tempfile.NamedTemporaryFile("wb",
+                                         dir=dst_dir,
+                                         delete=False,
+                                         suffix=".tmp") as tmp:
             tmp_path = tmp.name
             tmp.write(content)
 
         if not os.path.exists(tmp_path) or os.path.getsize(tmp_path) == 0:
-            logging.error(
-                "Temporary download file is missing or empty: %s", tmp_path
-            )
+            logging.error("Temporary download file is missing or empty: %s",
+                          tmp_path)
             raise RuntimeError(
-                f"Temporary download file is missing or empty: {tmp_path}"
-            )
+                f"Temporary download file is missing or empty: {tmp_path}")
 
         os.replace(tmp_path, output_path)
         tmp_path = None
@@ -180,7 +173,6 @@ def download_file(
                 os.unlink(tmp_path)
             except OSError:
                 pass
-
 
 
 def extract_sheet_to_csv(
@@ -201,10 +193,8 @@ def extract_sheet_to_csv(
             selected_sheet = target_sheet_name
         else:
             for name in sheet_names:
-                if any(
-                    k in name.lower()
-                    for k in ["underlying", "poverty", "data", "ppc"]
-                ):
+                if any(k in name.lower()
+                       for k in ["underlying", "poverty", "data", "ppc"]):
                     selected_sheet = name
                     break
             if not selected_sheet:
@@ -216,9 +206,8 @@ def extract_sheet_to_csv(
                 selected_sheet,
             )
 
-        logging.info(
-            "Extracting sheet '%s' from Excel workbook...", selected_sheet
-        )
+        logging.info("Extracting sheet '%s' from Excel workbook...",
+                     selected_sheet)
         ws = wb[selected_sheet]
 
         dst_dir = os.path.dirname(os.path.abspath(csv_output_path))
@@ -228,21 +217,20 @@ def extract_sheet_to_csv(
         tmp_path = None
         try:
             with tempfile.NamedTemporaryFile(
-                "w",
-                dir=dst_dir,
-                delete=False,
-                suffix=".tmp",
-                encoding="utf-8",
-                newline="",
+                    "w",
+                    dir=dst_dir,
+                    delete=False,
+                    suffix=".tmp",
+                    encoding="utf-8",
+                    newline="",
             ) as tmp:
                 tmp_path = tmp.name
                 writer = csv.writer(tmp)
                 for row in ws.iter_rows(values_only=True):
                     if not any(row):
                         continue
-                    writer.writerow(
-                        [("" if c is None else str(c)) for c in row]
-                    )
+                    writer.writerow([("" if c is None else str(c)) for c in row
+                                    ])
                     row_count += 1
 
             os.replace(tmp_path, csv_output_path)
@@ -271,9 +259,10 @@ def copy_file_atomically(src_path, dst_path):
     os.makedirs(dst_dir, exist_ok=True)
     tmp_path = None
     try:
-        with tempfile.NamedTemporaryFile(
-            "wb", dir=dst_dir, delete=False, suffix=".tmp"
-        ) as tmp:
+        with tempfile.NamedTemporaryFile("wb",
+                                         dir=dst_dir,
+                                         delete=False,
+                                         suffix=".tmp") as tmp:
             tmp_path = tmp.name
             with open(src_path, "rb") as fsrc:
                 shutil.copyfileobj(fsrc, tmp)
@@ -303,8 +292,7 @@ def download_poverty_dataset(
     if input_file:
         if not os.path.exists(input_file) or os.path.getsize(input_file) == 0:
             raise FileNotFoundError(
-                f"Input file not found or empty: {input_file}"
-            )
+                f"Input file not found or empty: {input_file}")
         logging.info("Using provided local input file: %s", input_file)
         if input_file.lower().endswith((".xlsx", ".xls")):
             copy_file_atomically(input_file, output_xlsx_path)
@@ -325,9 +313,8 @@ def download_poverty_dataset(
                     path_to_clean,
                 )
             except OSError as e:
-                logging.warning(
-                    "Could not remove existing file %s: %s", path_to_clean, e
-                )
+                logging.warning("Could not remove existing file %s: %s",
+                                path_to_clean, e)
 
     # Case 2: Download from web with primary and mirror fallback
     content = None
@@ -357,9 +344,7 @@ def download_poverty_dataset(
             break
         except Exception as e:
             last_err = e
-            logging.warning(
-                "Failed to download or process from %s: %s", url, e
-            )
+            logging.warning("Failed to download or process from %s: %s", url, e)
             if os.path.exists(output_xlsx_path):
                 try:
                     os.remove(output_xlsx_path)
@@ -380,8 +365,7 @@ def download_poverty_dataset(
         )
         raise RuntimeError(
             f"Failed to acquire dataset from all URLs: {urls_to_try}. "
-            f"Last error: {last_err}"
-        ) from last_err
+            f"Last error: {last_err}") from last_err
 
     if raw_csv_path:
         copy_file_atomically(output_csv_path, raw_csv_path)

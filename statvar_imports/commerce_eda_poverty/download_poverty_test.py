@@ -11,11 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Unit tests for Commerce EDA Persistent Poverty Counties download script."""
 
 import io
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -68,30 +68,26 @@ def _create_mock_eda_workbook(filepath=None):
             "",
             "",
         ])
-        ws_data.append(
-            [
-                "Autauga County, AL",
-                "01001",
-                15.7,
-                10.9,
-                13.3,
-                "SAIPE, 2021",
-                "No",
-                1,
-            ]
-        )
-        ws_data.append(
-            [
-                "Barbour County, AL",
-                "01005",
-                25.2,
-                26.8,
-                29.0,
-                "SAIPE, 2021",
-                "Yes",
-                2,
-            ]
-        )
+        ws_data.append([
+            "Autauga County, AL",
+            "01001",
+            15.7,
+            10.9,
+            13.3,
+            "SAIPE, 2021",
+            "No",
+            1,
+        ])
+        ws_data.append([
+            "Barbour County, AL",
+            "01005",
+            25.2,
+            26.8,
+            29.0,
+            "SAIPE, 2021",
+            "Yes",
+            2,
+        ])
         ws_data.append([
             "Eastern District, AS",
             "60010",
@@ -122,9 +118,9 @@ class TestDownloadPoverty(unittest.TestCase):
             test_content = b"PK\x03\x04test_content"
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                return_value=test_content,
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    return_value=test_content,
             ) as mock_request_url:
                 content = download_file(
                     "https://example.gov/EDA_FY23_PPCs.xlsx",
@@ -150,9 +146,9 @@ class TestDownloadPoverty(unittest.TestCase):
             test_content = b"PK\x03\x04param_test"
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                return_value=test_content,
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    return_value=test_content,
             ) as mock_request_url:
                 content = download_file(
                     "https://example.gov/EDA_FY23_PPCs.xlsx",
@@ -176,9 +172,9 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "fail.xlsx")
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                return_value=None,
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    return_value=None,
             ) as mock_request_url:
                 with self.assertRaises(RuntimeError):
                     download_file(
@@ -195,9 +191,9 @@ class TestDownloadPoverty(unittest.TestCase):
             out_file = os.path.join(tmpdir, "empty.xlsx")
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                return_value=b"",
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    return_value=b"",
             ) as mock_request_url:
                 with self.assertRaises(RuntimeError):
                     download_file(
@@ -210,6 +206,7 @@ class TestDownloadPoverty(unittest.TestCase):
             self.assertFalse(os.path.exists(out_file))
 
     def test_download_file_session_without_mount_supported(self):
+
         class DuckSession:
 
             def __init__(self):
@@ -243,9 +240,9 @@ class TestDownloadPoverty(unittest.TestCase):
             csv_path = os.path.join(tmpdir, "extracted.csv")
             excel_bytes = _create_mock_eda_workbook()
 
-            extract_sheet_to_csv(
-                excel_bytes, csv_path, target_sheet_name="Underlying_Data"
-            )
+            extract_sheet_to_csv(excel_bytes,
+                                 csv_path,
+                                 target_sheet_name="Underlying_Data")
             self.assertTrue(os.path.exists(csv_path))
 
             df = pd.read_csv(csv_path, skiprows=2, dtype=str)
@@ -328,9 +325,9 @@ class TestDownloadPoverty(unittest.TestCase):
                 return excel_bytes
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                side_effect=mock_request,
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    side_effect=mock_request,
             ):
                 res = download_poverty_dataset(
                     source_url=EDA_PPC_XLSX_URL,
@@ -352,8 +349,7 @@ class TestDownloadPoverty(unittest.TestCase):
             download_poverty_dataset(input_file="/nonexistent/path/Poverty.csv")
 
     def test_download_poverty_dataset_all_urls_fail_raises_and_cleans_stale_files(
-        self,
-    ):
+        self,):
         with tempfile.TemporaryDirectory() as tmpdir:
             dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
             dst_csv = os.path.join(tmpdir, "Poverty.csv")
@@ -363,9 +359,9 @@ class TestDownloadPoverty(unittest.TestCase):
                     f.write("stale_data")
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                side_effect=RuntimeError("HTTP 503"),
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    side_effect=RuntimeError("HTTP 503"),
             ):
                 with self.assertRaises(RuntimeError) as ctx:
                     download_poverty_dataset(
@@ -377,16 +373,14 @@ class TestDownloadPoverty(unittest.TestCase):
                         max_retries=1,
                     )
 
-            self.assertIn(
-                "Failed to acquire dataset from all URLs", str(ctx.exception)
-            )
+            self.assertIn("Failed to acquire dataset from all URLs",
+                          str(ctx.exception))
             self.assertFalse(os.path.exists(dst_xlsx))
             self.assertFalse(os.path.exists(dst_csv))
             self.assertFalse(os.path.exists(dst_raw_csv))
 
     def test_download_poverty_dataset_primary_html_challenge_mirror_succeed(
-        self,
-    ):
+        self,):
         with tempfile.TemporaryDirectory() as tmpdir:
             dst_xlsx = os.path.join(tmpdir, "EDA_FY23_PPCs.xlsx")
             dst_csv = os.path.join(tmpdir, "Poverty.csv")
@@ -396,16 +390,14 @@ class TestDownloadPoverty(unittest.TestCase):
 
             def mock_request(url, **kwargs):
                 if parse.urlparse(url).netloc == "www.eda.gov":
-                    return (
-                        b"<!DOCTYPE html><html><title>Just a moment..."
-                        b"</title></html>"
-                    )
+                    return (b"<!DOCTYPE html><html><title>Just a moment..."
+                            b"</title></html>")
                 return excel_bytes
 
             with mock.patch(
-                "statvar_imports.commerce_eda_poverty.download_poverty"
-                ".request_url",
-                side_effect=mock_request,
+                    "statvar_imports.commerce_eda_poverty.download_poverty"
+                    ".request_url",
+                    side_effect=mock_request,
             ):
                 res = download_poverty_dataset(
                     source_url=EDA_PPC_XLSX_URL,
@@ -423,6 +415,105 @@ class TestDownloadPoverty(unittest.TestCase):
             self.assertEqual(len(df), 3)
 
 
+class TestPovertyPvMapProcessor(unittest.TestCase):
+    """Tests for direct raw CSV processing via poverty_pvmap.csv and stat_var_processor.py."""
+
+    def setUp(self):
+        self.processor_script = os.path.join(PROJECT_ROOT, "tools",
+                                             "statvar_importer",
+                                             "stat_var_processor.py")
+        self.pv_map = os.path.join(MODULE_DIR, "poverty_pvmap.csv")
+        self.config_file = os.path.join(MODULE_DIR, "poverty_metadata.csv")
+        self.golden_input = os.path.join(MODULE_DIR, "test_data",
+                                         "Poverty_input.csv")
+        self.golden_expected = os.path.join(MODULE_DIR, "test_data",
+                                            "Poverty_expected_output.csv")
+        self.statvar_mcf_content = (
+            "Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person\n"
+            "typeOf: dcs:StatisticalVariable\n"
+            "populationType: dcs:Person\n"
+            "measuredProperty: dcs:count\n"
+            "statType: dcs:measuredValue\n"
+            "measurementDenominator: dcs:Count_Person\n"
+            "povertyStatus: dcs:BelowPovertyLevelInThePast12Months\n")
+
+    def _run_stat_var_processor(self, input_csv, tmpdir):
+        mcf_path = os.path.join(tmpdir, "stat_vars.mcf")
+        with open(mcf_path, "w", encoding="utf-8") as f:
+            f.write(self.statvar_mcf_content)
+        output_prefix = os.path.join(tmpdir, "Poverty_output")
+        counters_path = os.path.join(tmpdir, "Poverty_counters.csv")
+        subprocess.run(
+            [
+                sys.executable,
+                self.processor_script,
+                f"--input_data={input_csv}",
+                f"--pv_map={self.pv_map}",
+                f"--config_file={self.config_file}",
+                f"--existing_statvar_mcf={mcf_path}",
+                f"--output_path={output_prefix}",
+                f"--output_counters={counters_path}",
+            ],
+            cwd=tmpdir,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return output_prefix + ".csv", counters_path
+
+    def test_pvmap_end_to_end_golden_fixture(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_csv, _ = self._run_stat_var_processor(self.golden_input, tmpdir)
+            actual_df = pd.read_csv(out_csv, dtype=str)
+            expected_df = pd.read_csv(self.golden_expected, dtype=str)
+            pd.testing.assert_frame_equal(actual_df, expected_df)
+
+    def test_pvmap_geoid_padding_state_filtering_and_dynamic_years(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_csv = os.path.join(tmpdir, "synthetic_raw.csv")
+            with open(raw_csv, "w", encoding="utf-8") as f:
+                f.write(
+                    "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021,,,,,,,,,\n"
+                    "Identifing Information,,Census Bureau Data,,,,FY23 Persistent Poverty,Census GEO PPC Code,Notes,\n"
+                    'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty* ",Data Source―Most Recent Estimate,,,,\n'
+                    '"Alabama State",01000,18.3,16.1,16.3,"SAIPE, 2021",No,1,,\n'
+                    '"Autauga County, AL",1001,15.7,10.9,13.3,"SAIPE, 2023",No,1,,\n'
+                    '"Adjuntas Municipio, PR",72001,59.9,50.5,63.4,"ACS 5-YEAR, 2017-2021",Yes,2,,\n'
+                    '"Eastern District, AS",60010,56.0,105.0,52.2,"Decennial Census, 2020",Yes,2,,\n'
+                )
+
+            out_csv, _ = self._run_stat_var_processor(raw_csv, tmpdir)
+            df = pd.read_csv(out_csv, dtype=str)
+
+            # 01000 state summary row filtered out; 105.0 out-of-range value filtered out
+            self.assertNotIn("geoId/01000", set(df["observationAbout"]))
+            self.assertEqual(
+                set(df["observationAbout"]),
+                {"geoId/01001", "geoId/72001", "geoId/60010"},
+            )
+
+            # Verify 4-digit GEOID 1001 padded to geoId/01001 and dynamic year 2023
+            autauga_recent = df[(df["observationAbout"] == "geoId/01001") &
+                                (df["observationDate"] == "2023")]
+            self.assertEqual(len(autauga_recent), 1)
+            self.assertEqual(autauga_recent.iloc[0]["measurementMethod"],
+                             "dcs:EDA_Estimate")
+
+            # Verify PR ACS 5-YEAR 2017-2021 resolves to end year 2021 with dcs:EDA_Estimate
+            pr_recent = df[(df["observationAbout"] == "geoId/72001") &
+                           (df["observationDate"] == "2021")]
+            self.assertEqual(len(pr_recent), 1)
+            self.assertEqual(pr_recent.iloc[0]["measurementMethod"],
+                             "dcs:EDA_Estimate")
+
+            # Verify Island Area Decennial Census 2020 resolves to 2020 with dcs:USDecennialCensus,
+            # and out-of-range 2000 value (105.0) was dropped
+            as_rows = df[df["observationAbout"] == "geoId/60010"]
+            self.assertEqual(set(as_rows["observationDate"]), {"1990", "2020"})
+            as_recent = as_rows[as_rows["observationDate"] == "2020"]
+            self.assertEqual(as_recent.iloc[0]["measurementMethod"],
+                             "dcs:USDecennialCensus")
+
+
 if __name__ == "__main__":
     unittest.main()
-

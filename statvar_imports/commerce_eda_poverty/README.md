@@ -22,9 +22,7 @@ Date: *September 2026*
 
 This automated dataset import fetches and processes historical and recent county-level poverty percentage rates published by the U.S. Economic Development Administration (EDA) (`https://www.eda.gov/performance/resources/persistent-poverty-counties`) for Persistent Poverty Counties (PPCs) and all benchmarked U.S. counties.
 
-The download script (`download_poverty.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 county rows) into `input_files/Poverty.csv`.
-
-The preprocessing script (`process_poverty.py`) reads the downloaded source file locally, cleans and standardizes 5-digit FIPS codes and poverty percentages into normalized `(GEOID, year, poverty_rate)` records in `output/Poverty_cleaned.csv`, and feeds the cleaned data into `stat_var_processor.py`. Neither script relies on Google Cloud Storage (GCS) staging.
+The download script (`download_poverty.py`) downloads the official `EDA_FY23_PPCs.xlsx` workbook directly from EDA (with automatic fallback to the Wayback Machine archive mirror if Cloudflare bot detection blocks automated requests, or from a local file via `--input_file`) into `input_files/EDA_FY23_PPCs.xlsx`. It extracts the `Underlying_Data` sheet (3,241 rows) into `input_files/Poverty.csv`, which is then processed directly by `stat_var_processor.py` using `poverty_pvmap.csv` and `poverty_metadata.csv`.
 
 The dataset benchmarks poverty rates across statutory periods:
 - **1990**: 1990 Decennial Census (`year=1990`)
@@ -39,18 +37,17 @@ It covers 3,232 U.S. counties, county equivalents, and island territories (`3,14
 >
 > **Legacy `Commerce_EDA` Migration Note:** This standalone `Commerce_EDA_Poverty` import (`dc/base/Commerce_EDA_Poverty`) splits the Persistent Poverty Counties table out of the legacy combined `Commerce_EDA` import (`statvar_imports/commerce_eda`, alongside `Commerce_EDA_USAspending`). In accordance with Data Commons migration practice, the legacy `Commerce_EDA` import is retained temporarily until all split imports are merged and verified in production, and will be retired in an immediate follow-up cleanup PR/CL tracked under `b/548896854`.
 
-### Why Preprocessing is Required (Why PV Map Alone is Insufficient)
+### Direct PV Mapping Design (`poverty_pvmap.csv` & `poverty_metadata.csv`)
 
-The raw EDA dataset cannot be mapped directly into Data Commons observations using `stat_var_processor.py` / `poverty_pvmap.csv` alone because:
-1. **Format Reshaping (Wide to Long)**: The raw sheet contains one row per county with multiple poverty percentage columns corresponding to different time periods (`1990 Decennial Census, % in Poverty`, `2000 Decennial Census, % in Poverty`, and `Most Recent Estimate, % in Poverty*`). PV mapping requires normalized long-format records with explicit observation dates.
-2. **Dynamic & Heterogeneous Observation Dates**: The "Most Recent Estimate" is not uniform across places:
-   - For all 50 U.S. states and DC (3,143 counties), the benchmark is the 2021 Small Area Income and Poverty Estimates (`"SAIPE, 2021"` -> `year=2021`).
-   - For Puerto Rico (78 municipios; `3,143 + 78 = 3,221`), because the Island Areas Census does not cover Puerto Rico and SAIPE data is unavailable, EDA uses the 2017–2021 American Community Survey 5-Year Estimates (`"ACS 5-YEAR, 2017-2021"` -> end year `year=2021`).
-   - For Island Territories (11 county equivalents across American Samoa, Guam, Northern Mariana Islands, and U.S. Virgin Islands: FIPS prefixes `60`, `66`, `69`, `78`; `3,221 + 11 = 3,232`), SAIPE does not produce estimates; the benchmark is the 2020 Island Areas Decennial Census (`"Decennial Census, 2020"` -> `year=2020`).
-   - The survey year is parsed dynamically from the `Data Source―Most Recent Estimate` column (extracting the final 4-digit year so multi-year ranges like `"ACS 5-YEAR, 2017-2021"` resolve to `2021`, or falling back to territory FIPS prefix). Note that `poverty_pvmap.csv` intentionally sets `observationPeriod: P1Y` across all 3,232 places (including the 78 Puerto Rico municipios) to maintain a uniform facet across the entire EDA Persistent Poverty benchmark series. PV map CSV configurations cannot conditionally branch date assignment based on state FIPS code or evaluate regex over free-text notes.
-3. **Data Cleaning & Filtering**:
-   - Upstream Excel/CSV files contain non-tabular preamble headers, subtitles, and footnote rows that must be stripped.
-   - Raw county FIPS codes in Excel often drop leading zeros (e.g. `1001` instead of `01001`) and include state-level summary rollups (e.g. `01000` for Alabama statewide) that must be filtered out so they are not ingested as county entities.
+`stat_var_processor.py` processes the raw extracted `input_files/Poverty.csv` directly without a separate Python preprocessing script:
+1. **Multi-Column (Wide-to-Long) Observation Emission**: Each numeric benchmark column (`1990 Decennial Census, % in Poverty`, `2000 Decennial Census, % in Poverty`, and `Most Recent Estimate, % in Poverty*`) maps `value: {Number}` and `variableMeasured: dcs:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person`, emitting up to three `StatVarObservation` records per county row while inheriting row-level `observationAbout` from `GEOID`.
+2. **Dynamic Observation Date & Measurement Method Resolution**: The `Data Source―Most Recent Estimate` column uses `#Regex` (`(?P<RecentSource>.*)[, -]+(?P<RecentYear>[0-9]{4}) *$`) and `#Eval` to dynamically resolve `{RecentYear}` and `{RecentMethod}` per row:
+   - `"SAIPE, 2021"` (50 states and DC, 3,143 counties) $\rightarrow$ `observationDate: 2021`, `measurementMethod: dcs:EDA_Estimate`
+   - `"ACS 5-YEAR, 2017-2021"` (Puerto Rico, 78 municipios) $\rightarrow$ `observationDate: 2021`, `measurementMethod: dcs:EDA_Estimate`
+   - `"Decennial Census, 2020"` (Island territories, 11 county equivalents) $\rightarrow$ `observationDate: 2020`, `measurementMethod: dcs:USDecennialCensus`
+3. **Header Handling, GEOID Zero-Padding & Filtering**:
+   - `poverty_metadata.csv` sets `header_rows,3` so the 2-row title banner is treated as preamble and Row 3 is used as the column header; trailing free-text source/footnote rows contain no numeric cells in mapped observation columns and are automatically ignored.
+   - `GEOID` uses `#Eval` (`observationAbout = 'geoId/' + str(int(Number)).zfill(5)`) to zero-pad 4-digit FIPS codes and `#Filter` (`not observationAbout.endswith('000')`) to exclude state-level summary rollups, while `filter_data_min_value,0` and `filter_data_max_value,100` enforce valid percentage bounds $[0.0, 100.0]$.
 
 ---
 
@@ -63,7 +60,7 @@ name: "Population: Below Poverty Level in The Past 12 Months (Per Capita)"
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-measurementDenominator: dcid:Count_Person
+measurementDenominator: dcs:Count_Person
 povertyStatus: dcid:BelowPovertyLevelInThePast12Months
 ```
 
@@ -72,7 +69,7 @@ povertyStatus: dcid:BelowPovertyLevelInThePast12Months
 ## Working Directory Context
 
 Commands in this workflow depend on the working directory:
-- **Module directory (`statvar_imports/commerce_eda_poverty/`)**: Execute download, preprocessing, and pipeline scripts (`download_poverty.py`, `process_poverty.py`, `stat_var_processor.py`).
+- **Module directory (`statvar_imports/commerce_eda_poverty/`)**: Execute download and pipeline scripts (`download_poverty.py`, `stat_var_processor.py`).
 - **Repository root (`data/`)**: Execute validation runner, test scripts (`./run_tests.sh`), and unittest module invocations.
 
 ---
@@ -104,17 +101,11 @@ To ingest a local copy directly without downloading:
 python3 download_poverty.py --input_file=input_files/EDA_FY23_PPCs.xlsx
 ```
 
-### 2. Preprocess Dataset (`process_poverty.py`)
-Run from `statvar_imports/commerce_eda_poverty/`. Ingests the downloaded source file locally, standardizes 5-digit county and county-equivalent island territory FIPS codes, partitions the recent rates into 2020 (island territories) and 2021 (states, DC, PR), validates survey year bounds [2020..current year], enforces percentage value bounds $[0.0, 100.0]$, and atomically outputs `output/Poverty_cleaned.csv`:
-```bash
-python3 process_poverty.py
-```
-
-### 3. Generate Data Commons Observations (`stat_var_processor.py`)
+### 2. Generate Data Commons Observations (`stat_var_processor.py`)
 Run from `statvar_imports/commerce_eda_poverty/`. Matches the scripts configured in `manifest.json`:
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=output/Poverty_cleaned.csv \
+  --input_data=input_files/Poverty.csv \
   --pv_map=poverty_pvmap.csv \
   --config_file=poverty_metadata.csv \
   --output_path=output/Poverty_output \
