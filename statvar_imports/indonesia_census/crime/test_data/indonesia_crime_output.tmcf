@@ -1,0 +1,6 @@
+Node: E:indonesia_crime_output->E0
+observationAbout: C:indonesia_crime_output->observationAbout
+observationDate: C:indonesia_crime_output->observationDate
+value: C:indonesia_crime_output->value
+variableMeasured: C:indonesia_crime_output->variableMeasured
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,38 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Indonesia_Census_Crime",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.bps.go.id/en/statistics-table/2/MTAxIzI=/number-of-crime-according-to-police-territorial-jurisdiction.html",
+            "provenance_description": "Badan Pusat Statistik (BPS - Statistics Indonesia) - Number Of Crime According To Police Territorial Jurisdiction",
+            "scripts": [
+                "download.py --output_dir=input_files",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/crime_according_to_police_territorial_jurisdiction.csv --pv_map=indonesia_crime_pvmap.csv --config_file=indonesia_crime_metadata.csv --places_resolved_csv=indonesia_crime_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_crime_output --output_counters=counters/indonesia_crime_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/indonesia_crime_output.tmcf",
+                    "cleaned_csv": "output_files/indonesia_crime_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "indonesia_crime_pvmap.csv",
+                "indonesia_crime_metadata.csv",
+                "indonesia_crime_places_resolved.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "cron_schedule": "0 05 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 4,
+                "disk": 30
+            }
+        }
+    ]
+}
