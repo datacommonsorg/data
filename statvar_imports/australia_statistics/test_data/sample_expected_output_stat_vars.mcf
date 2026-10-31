@@ -1,0 +1,125 @@
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_0To4Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years0To4
+gender: dcid:Male
+
+Node: dcid:Count_Person_0To4Years_Male_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years0To4
+gender: dcid:Male
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_ConditionArthritis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Arthritis
+
+Node: dcid:Count_Person_ConditionAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Asthma
+
+Node: dcid:Count_Person_Employed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:Employed
+gender: dcid:Male
+
+Node: dcid:Count_Person_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+
+Node: dcid:Count_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+
+Node: dcid:Count_Person_Unemployed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:BLS_Unemployed
+
+Node: dcid:LifeExpectancy_Person_10Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: dcid:Years10
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+gender: dcid:Male
+
+Node: dcid:UnemploymentRate_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:unemploymentRate
+statType: dcid:measuredValue
+
+Node: dcid:Weekly_Income_Household_IncomeOf90Percentile
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:measuredValue
+income: dcid:Percentile90
+
+Node: dcid:Weekly_Mean_Income_Household_IncomeOfPercentile0To20
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:meanValue
+income: dcid:Percentile0To20
+
+Node: dcid:Weekly_Median_Income_Household
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:income
+measurementQualifier: dcid:Weekly
+statType: dcid:medianValue
+
+Node: dcid:dc/nm9hcklgg5zb3
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:Employed
+
