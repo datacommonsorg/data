@@ -323,19 +323,25 @@ def _build_batch_job_spec(
     resources: dict[str, Any],
     gcs_mount_bucket: str,
     gcs_mount_path: str = "/tmp/gcs",
+    entrypoint: str | None = None,
+    commands: list[str] | None = None,
 ) -> dict[str, Any]:
     """Builds a dictionary-based Cloud Batch job descriptor."""
     sa_email = get_config_var("CLOUD_BATCH_SERVICE_ACCOUNT")
+    container_spec: dict[str, Any] = {
+        "imageUri":
+            image_uri,
+        "commands":
+            commands if commands is not None else [
+                f"--import_name={import_name}",
+                f"--import_config={import_config}",
+            ],
+    }
+    if entrypoint:
+        container_spec["entrypoint"] = entrypoint
     task_spec = {
         "runnables": [{
-            "container": {
-                "imageUri":
-                    image_uri,
-                "commands": [
-                    f"--import_name={import_name}",
-                    f"--import_config={import_config}"
-                ]
-            },
+            "container": container_spec,
             "environment": {
                 "variables": {
                     "IMPORT_NAME": import_name,
@@ -479,7 +485,7 @@ def _compute_batch_exec_time(
 
 
 class CloudBatchImportSensor(BaseSensorOperator):
-    """Submits and polls a Google Cloud Batch import job in reschedule mode.
+    """Submits and polls a Google Cloud Batch import or validation job in reschedule mode.
 
     Running in ``mode="reschedule"`` ensures each poke executes quickly and releases
     the Celery worker slot between checks. This prevents long-running imports (>6h)
@@ -496,6 +502,7 @@ class CloudBatchImportSensor(BaseSensorOperator):
         mode: str = "reschedule",
         poke_interval: int = 60,
         timeout: int = 604800,
+        is_validation: bool = False,
         **kwargs: Any,
     ):
         super().__init__(
@@ -506,20 +513,36 @@ class CloudBatchImportSensor(BaseSensorOperator):
         )
         self.import_name = import_name
         self.gcp_conn_id = gcp_conn_id
+        self.is_validation = is_validation
         self._job_result: dict[str, Any] = {}
 
     def poke(self, context: dict[str, Any]) -> bool:
         cfg = resolve_workflow_context(context,
                                        default_import_name=self.import_name)
-        if cfg["skipImportJob"]:
-            logging.info(
-                "skipImportJob is True; skipping Cloud Batch import job.")
-            raise AirflowSkipException(
-                "Import job skipped by configuration (skipImportJob=True).")
+        if self.is_validation:
+            if cfg["skipImportJob"] or not cfg.get("splitValidationJob"):
+                logging.info(
+                    "Skipping Cloud Batch validation job (skipImportJob=%s, splitValidationJob=%s).",
+                    cfg["skipImportJob"],
+                    cfg.get("splitValidationJob"),
+                )
+                raise AirflowSkipException(
+                    f"Validation job skipped by configuration (skipImportJob={cfg['skipImportJob']}, splitValidationJob={cfg.get('splitValidationJob')})."
+                )
+            job_id = cfg["validationJobId"]
+            job_label = "validation"
+        else:
+            if cfg["skipImportJob"]:
+                logging.info(
+                    "skipImportJob is True; skipping Cloud Batch import job.")
+                raise AirflowSkipException(
+                    "Import job skipped by configuration (skipImportJob=True).")
+            job_id = cfg["jobId"]
+            job_label = "import"
 
         hook = CloudBatchHook(gcp_conn_id=self.gcp_conn_id)
         job_resource_name = (
-            f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{cfg['jobId']}"
+            f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{job_id}"
         )
         poke_start_time = time.time()
         job = None
@@ -530,24 +553,42 @@ class CloudBatchImportSensor(BaseSensorOperator):
             except Exception as get_err:
                 if not _is_not_found_error(get_err):
                     raise
-                job_spec = _build_batch_job_spec(
-                    cfg["imageUri"],
-                    cfg["importName"],
-                    cfg["batchImportConfig"],
-                    cfg["jobId"],
-                    cfg["resources"],
-                    cfg["gcsMountBucket"],
-                    cfg["gcsMountPath"],
-                )
+                if self.is_validation:
+                    job_spec = _build_batch_job_spec(
+                        cfg["imageUri"],
+                        cfg["importName"],
+                        cfg["importConfig"],
+                        job_id,
+                        cfg["resources"],
+                        cfg["gcsMountBucket"],
+                        cfg["gcsMountPath"],
+                        entrypoint="python",
+                        commands=[
+                            "/data/import-automation/validator/main.py",
+                            f"--import_name={cfg['importName']}",
+                            f"--import_config={cfg['importConfig']}",
+                        ],
+                    )
+                else:
+                    job_spec = _build_batch_job_spec(
+                        cfg["imageUri"],
+                        cfg["importName"],
+                        cfg["batchImportConfig"],
+                        job_id,
+                        cfg["resources"],
+                        cfg["gcsMountBucket"],
+                        cfg["gcsMountPath"],
+                    )
                 logging.info(
-                    "Submitting Cloud Batch job '%s' (%s, %s)...",
-                    cfg["jobId"],
+                    "Submitting Cloud Batch %s job '%s' (%s, %s)...",
+                    job_label,
+                    job_id,
                     cfg["projectId"],
                     cfg["region"],
                 )
                 try:
                     job = hook.submit_batch_job(
-                        job_name=cfg["jobId"],
+                        job_name=job_id,
                         job=job_spec,
                         region=cfg["region"],
                         project_id=cfg["projectId"],
@@ -555,8 +596,9 @@ class CloudBatchImportSensor(BaseSensorOperator):
                 except Exception as submit_err:
                     if _is_already_exists_error(submit_err):
                         logging.info(
-                            "Cloud Batch job '%s' already exists; fetching status.",
-                            cfg["jobId"],
+                            "Cloud Batch %s job '%s' already exists; fetching status.",
+                            job_label,
+                            job_id,
                         )
                         job = hook.get_conn().get_job(name=job_resource_name)
                     else:
@@ -570,11 +612,11 @@ class CloudBatchImportSensor(BaseSensorOperator):
             if state == "SUCCEEDED":
                 exec_time = _compute_batch_exec_time(job, context,
                                                      poke_start_time)
-                logging.info("Cloud Batch job '%s' succeeded in %ss.",
-                             cfg["jobId"], exec_time)
+                logging.info("Cloud Batch %s job '%s' succeeded in %ss.",
+                             job_label, job_id, exec_time)
                 self._job_result = {
                     "status": "SUCCESS",
-                    "jobId": cfg["jobId"],
+                    "jobId": job_id,
                     "name": job_resource_name,
                     "executionTime": exec_time,
                     "result": str(job),
@@ -589,12 +631,13 @@ class CloudBatchImportSensor(BaseSensorOperator):
                     for ev in status_events[-3:])
                 detail = f" (events: {event_desc})" if event_desc else ""
                 raise RuntimeError(
-                    f"Cloud Batch job '{cfg['jobId']}' entered terminal state {state}{detail}"
+                    f"Cloud Batch {job_label} job '{job_id}' entered terminal state {state}{detail}"
                 )
 
             logging.info(
-                "Cloud Batch job '%s' is in state %s; rescheduling next check in %ss.",
-                cfg["jobId"],
+                "Cloud Batch %s job '%s' is in state %s; rescheduling next check in %ss.",
+                job_label,
+                job_id,
                 state,
                 self.poke_interval,
             )
@@ -602,9 +645,10 @@ class CloudBatchImportSensor(BaseSensorOperator):
         except Exception as e:
             exec_time = _compute_batch_exec_time(job, context, poke_start_time)
             helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
-            _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
+            _report_import_failure(helper_url, job_id, cfg["importName"],
                                    cfg["gcsImportBucket"], exec_time)
-            raise AirflowException(f"Cloud Batch import job failed: {e}") from e
+            raise AirflowException(
+                f"Cloud Batch {job_label} job failed: {e}") from e
 
     def execute(self, context: dict[str, Any]) -> dict[str, Any]:
         super().execute(context)
@@ -612,13 +656,14 @@ class CloudBatchImportSensor(BaseSensorOperator):
             return self._job_result
         cfg = resolve_workflow_context(context,
                                        default_import_name=self.import_name)
+        job_id = cfg["validationJobId"] if self.is_validation else cfg["jobId"]
         return {
             "status":
                 "SUCCESS",
             "jobId":
-                cfg["jobId"],
+                job_id,
             "name":
-                f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{cfg['jobId']}",
+                f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{job_id}",
             "executionTime":
                 0,
             "result":
@@ -656,109 +701,37 @@ def _run_import_job_fn(import_name: str = "", **context: Any) -> dict[str, Any]:
 run_import_job.function = _run_import_job_fn  # type: ignore[attr-defined]
 
 
-def _run_cloud_run_job(
-    project_id: str,
-    region: str,
-    job_name: str,
-    args: list[str],
-    timeout_seconds: int = 7200,
-    poll_interval: int = 15,
-) -> dict[str, Any]:
-    """Triggers a Cloud Run v2 Job execution and polls the LRO until completion."""
-    import google.auth
-    from google.auth.transport.requests import AuthorizedSession
-
-    creds, _ = google.auth.default(
-        scopes=["https://www.googleapis.com/auth/cloud-platform"])
-    session = AuthorizedSession(creds)
-
-    run_url = f"https://run.googleapis.com/v2/projects/{project_id}/locations/{region}/jobs/{job_name}:run"
-    payload = {
-        "overrides": {
-            "containerOverrides": [{
-                "args": args,
-            }]
-        }
-    }
-    logging.info("Triggering Cloud Run job '%s' via %s with args: %s", job_name,
-                 run_url, args)
-    resp = session.post(run_url, json=payload, timeout=60)
-    resp.raise_for_status()
-    operation = resp.json()
-    op_name = operation.get("name")
-    if not op_name:
-        raise RuntimeError(
-            f"Cloud Run jobs.run did not return an operation name: {operation}")
-
-    logging.info(
-        "Waiting for Cloud Run job operation '%s' to complete (timeout: %ss)...",
-        op_name, timeout_seconds)
-    op_url = f"https://run.googleapis.com/v2/{op_name}"
-    start_time = time.time()
-
-    while True:
-        if operation.get("done"):
-            if "error" in operation:
-                err = operation["error"]
-                raise RuntimeError(
-                    f"Cloud Run job '{job_name}' failed with error: {err}")
-            response_data = operation.get("response", {})
-            failed_count = response_data.get("failedCount", 0)
-            cancelled_count = response_data.get("cancelledCount", 0)
-            if failed_count > 0 or cancelled_count > 0:
-                raise RuntimeError(
-                    f"Cloud Run job '{job_name}' execution failed "
-                    f"(failedCount={failed_count}, cancelledCount={cancelled_count}): {response_data}"
-                )
-            logging.info("Cloud Run job '%s' completed successfully.", job_name)
-            return response_data or operation
-
-        if time.time() - start_time > timeout_seconds:
-            raise TimeoutError(
-                f"Cloud Run job '{job_name}' operation '{op_name}' timed out after {timeout_seconds}s."
-            )
-
-        time.sleep(poll_interval)
-        poll_resp = session.get(op_url, timeout=60)
-        poll_resp.raise_for_status()
-        operation = poll_resp.json()
+def run_validation_job(
+    import_name: str = "",
+    task_id: str = "run_validation_job",
+    **kwargs: Any,
+) -> CloudBatchImportSensor:
+    """Creates a reschedule-mode sensor that submits and monitors a Cloud Batch validation job."""
+    return CloudBatchImportSensor(
+        task_id=task_id,
+        import_name=import_name,
+        is_validation=True,
+        **kwargs,
+    )
 
 
-@task(task_id="run_validation_job")
-def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
-    """Executes the Cloud Run validation job after the Batch import job."""
-    cfg = resolve_workflow_context(context, default_import_name=import_name)
-    if cfg["skipImportJob"]:
-        logging.info(
-            "skipImportJob is True; skipping Cloud Run validation job.")
-        raise AirflowSkipException(
-            "Validation job skipped by configuration (skipImportJob=True).")
-
-    start_time = time.time()
-    try:
-        res = _run_cloud_run_job(
-            project_id=cfg["projectId"],
-            region=cfg["region"],
-            job_name=cfg["validationJobName"],
-            args=[
-                f"--import_name={cfg['importName']}",
-                f"--import_config={cfg['importConfig']}",
-            ],
-            timeout_seconds=7200,
-        )
-        exec_time = int(time.time() - start_time)
+def _run_validation_job_fn(import_name: str = "",
+                           **context: Any) -> dict[str, Any]:
+    sensor = CloudBatchImportSensor(
+        task_id="run_validation_job",
+        import_name=import_name,
+        is_validation=True,
+    )
+    if not sensor.poke(context):
+        cfg = resolve_workflow_context(context, default_import_name=import_name)
         return {
-            "status": "SUCCESS",
-            "jobName": cfg["validationJobName"],
-            "executionTime": exec_time,
-            "result": str(res),
+            "status": "RUNNING",
+            "jobId": cfg["validationJobId"],
         }
-    except Exception as e:
-        exec_time = int(time.time() - start_time)
-        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
-        _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
-                               cfg["gcsImportBucket"], exec_time)
-        raise AirflowException(f"Cloud Run validation job failed: {e}") from e
+    return sensor._job_result
+
+
+run_validation_job.function = _run_validation_job_fn  # type: ignore[attr-defined]
 
 
 # -----------------------------------------------------------------------------
@@ -926,9 +899,6 @@ def resolve_workflow_context(context: dict[str, Any],
                                "spanner-ingestion-workflow",
                                "SPANNER_INGESTION_WORKFLOW_NAME")
 
-    validation_job_name = cfg_val("validationJobName", "import-validator-job",
-                                  "VALIDATION_JOB_NAME")
-
     import_config = get_val("importConfig")
     if not import_config or import_config == "{}":
         import_config_dict: dict[str, Any] = {
@@ -947,8 +917,14 @@ def resolve_workflow_context(context: dict[str, Any],
     else:
         import_config_dict = {}
 
+    split_validation_job = to_bool("splitValidationJob", False)
+    batch_config_dict = dict(import_config_dict)
+    if split_validation_job:
+        batch_config_dict["invoke_import_validation"] = False
+        batch_config_dict["invoke_differ_tool"] = False
+
     import_config_str = json.dumps(import_config_dict)
-    batch_import_config_str = import_config_str
+    batch_import_config_str = json.dumps(batch_config_dict)
 
     exec_dt = (context.get("logical_date") or
                getattr(dag_run, "logical_date", None) or
@@ -956,6 +932,10 @@ def resolve_workflow_context(context: dict[str, Any],
                getattr(dag_run, "start_date", None))
     run_ts = int(exec_dt.timestamp()) if exec_dt else int(time.time())
     run_id = dag_run.run_id if dag_run else f"manual__{datetime.now(timezone.utc).isoformat()}"
+    job_id = get_val("jobId") or generate_job_id(import_name, run_ts)
+    validation_job_id = (get_val("validationJobId") or
+                         get_val("validationJobName") or
+                         f"{job_id[:58].rstrip('-')}-val")
 
     def helper_url(service_name: str, suffix: str = "") -> str:
         svc = f"{service_name}{suffix}"
@@ -971,15 +951,19 @@ def resolve_workflow_context(context: dict[str, Any],
         "importName":
             import_name,
         "jobId":
-            get_val("jobId") or generate_job_id(import_name, run_ts),
+            job_id,
+        "validationJobId":
+            validation_job_id,
+        "validationJobName":
+            validation_job_id,
         "imageUri":
             get_val("imageUri", DEFAULT_IMAGE_URI),
         "importConfig":
             import_config_str,
         "batchImportConfig":
             batch_import_config_str,
-        "validationJobName":
-            validation_job_name,
+        "splitValidationJob":
+            split_validation_job,
         "gcsMountBucket":
             gcs_mount_bucket,
         "gcsImportBucket":
@@ -1233,6 +1217,13 @@ base_dag_params = {
         Param(default=False,
               type="boolean",
               description="Skip Batch import job"),
+    "splitValidationJob":
+        Param(
+            default=False,
+            type="boolean",
+            description=
+            "Run validation in a separate Cloud Batch job using BigQuery differ",
+        ),
     "skipStagingIngestion":
         Param(default=False,
               type="boolean",
@@ -1372,8 +1363,8 @@ def build_dag(
             execution_id=
             "{{ (ti.xcom_pull(task_ids='trigger_staging_ingestion') or {}).get('executionId', '') }}",
             mode="reschedule",
-            poke_interval=60,
-            timeout=21600,
+            poke_interval=300,
+            timeout=86400,
         )
         prod_wait = WorkflowExecutionSensor(
             task_id="wait_prod_ingestion",
@@ -1386,17 +1377,19 @@ def build_dag(
             execution_id=
             "{{ (ti.xcom_pull(task_ids='trigger_prod_ingestion') or {}).get('executionId', '') }}",
             mode="reschedule",
-            poke_interval=60,
-            timeout=21600,
+            poke_interval=300,
+            timeout=86400,
         )
         batch_task = run_import_job(import_name=import_name)
+        validation_task = run_validation_job(import_name=import_name)
         version_task = update_import_version()
         staging_task = trigger_staging_ingestion()
         prod_task = trigger_prod_ingestion()
         summary_task = workflow_summary()
 
         pipeline: list[Any] = [
-            batch_task, version_task, staging_task, staging_wait
+            batch_task, validation_task, version_task, staging_task,
+            staging_wait
         ]
         if has_golden_check:
             golden_task = verify_golden_tests()
