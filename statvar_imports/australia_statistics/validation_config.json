@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_goldens_summary_report",
+      "validator": "GOLDENS_CHECK",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "golden_files": "golden_data/golden_summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv",
+      "validator": "GOLDENS_CHECK",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "golden_files": "golden_data/golden_observations.csv",
+        "input_files": "output_files/*.csv"
+      }
+    },
+    {
+      "rule_id": "check_employment_max_date",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_Person_Employed', 'Count_Person_Employed_Male', 'Count_Person_Employed_Female', 'Count_Person_Unemployed', 'Count_Person_Unemployed_Male', 'Count_Person_Unemployed_Female', 'UnemploymentRate_Person', 'UnemploymentRate_Person_Male', 'UnemploymentRate_Person_Female', 'dc/nm9hcklgg5zb3')",
+        "condition": "MaxDate >= '2025-01'",
+        "failure_message": "Employment StatVars must include refreshed data from 2025-01 or later."
+      }
+    },
+    {
+      "rule_id": "check_life_expectancy_max_date",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar LIKE 'LifeExpectancy_Person_%'",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2021",
+        "failure_message": "Life Expectancy StatVars must cover 2021 or later."
+      }
+    },
+    {
+      "rule_id": "check_census_population_max_date",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_Person', 'Count_Person_Male', 'Count_Person_Female')",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2021",
+        "failure_message": "Census Population StatVars must cover 2021 or later."
+      }
+    },
+    {
+      "rule_id": "check_min_value_count",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "query": "SELECT StatVar, NumObservations FROM stats",
+        "condition": "NumObservations >= 1",
+        "failure_message": "Every StatVar must have at least 1 observation."
+      }
+    },
+    {
+      "rule_id": "check_deleted_records_percent",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "scope": {
+        "data_source": "differ_summary"
+      },
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_missing_refs_count",
+      "validator": "MISSING_REFS_COUNT",
+      "scope": {
+        "data_source": "lint"
+      },
+      "params": {
+        "threshold": 0
+      }
+    }
+  ]
+}

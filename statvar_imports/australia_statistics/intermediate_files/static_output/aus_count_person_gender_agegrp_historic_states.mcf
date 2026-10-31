@@ -1,0 +1,24 @@
+# Auto generated using command: "/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_var_processor.py --input_data=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_count_person_gender_agegrp_historic_states_int.csv --pv_map=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_count_person_gender_agegrp_historic_states_map.py --config=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_config.conf --output_path=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/output_files/aus_count_person_gender_agegrp_historic_states --existing_statvar_mcf=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_vars.mcf" on 2023-05-08 16:08:00.048149
+
+Node: dcid:Count_Person_6To9Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 9 Years]
+
+Node: dcid:Count_Person_6To9Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 9 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_6To9Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 9 Years]
+gender: dcid:Male

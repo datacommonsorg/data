@@ -1,0 +1,32 @@
+Node: dcid:Unemployed
+typeOf: dcs:EmploymentEnum
+name: "Unemployed"
+description: "The condition of one who is capable of working, actively seeking work, but unable to find any work."
+
+Node: dcid:Dementia
+typeOf: dcs:MedicalConditionIncidentTypeEnum
+name: "Dementia"
+description: "Dementia describe a group of symptoms affecting memory, thinking and social abilities severely enough to interfere with your daily life."
+
+Node: dcid:KidneyDisease
+typeOf: dcs:MedicalConditionIncidentTypeEnum
+name: "Kidney Disease"
+description: "Kidney disease is a condition in which the kidneys are damaged and cannot filter blood as well as they should."
+
+Node: dcid:LungCondition
+typeOf: dcs:MedicalConditionIncidentTypeEnum
+name: "Lung Condition"
+description: "Lung Condition is any problem in the lungs that prevents the lungs from working properly."
+
+Node: dcid:DiseasesOfHeart
+typeOf: dcs:ICD10_113CausesOfDeath, dcs:MedicalConditionIncidentTypeEnum
+name: "DiseasesOfHeart"
+description: "Corresponds to ICD10 Codes I00-I09,I11,I13,I20-I51"
+
+Node: dcid:medicalCondition
+name: "medicalCondition"
+typeOf: schema:Property
+description: "A medical condition is a broad term that includes all diseases and disorders."
+descriptionUrl: "https://en.wikipedia.org/wiki/Lists_of_diseases"
+domainIncludes: schema:Person, dcs:Disease
+rangeIncludes: dcs:MedicalConditionIncidentTypeEnum, dcs:Disease, dcs:HealthOutcomeEnum
