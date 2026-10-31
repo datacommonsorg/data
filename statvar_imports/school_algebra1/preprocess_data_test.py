@@ -14,12 +14,16 @@
 """Unit tests for preprocess_data.py."""
 
 import os
+import sys
 import tempfile
 import unittest
 import pandas as pd
-import preprocess_data
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+
+import preprocess_data
 
 
 class PreprocessDataTest(unittest.TestCase):
