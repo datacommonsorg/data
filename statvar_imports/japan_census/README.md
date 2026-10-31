@@ -29,8 +29,8 @@ The import pipeline queries the e-Stat Statistical Dashboard JSON API in paralle
     *   `process.py`: Preprocesses raw input files (computes exact broad age-group sums for Census datasets, merges historical records from `gs://unresolved_mcf/country/japan/deleted_historical_data.csv`, and stages municipality census files by year), runs `stat_var_processor.py` across shards in parallel (`--parallelism=2`), and deterministically merges the resulting `.csv`, `.tmcf`, `.mcf`, and `counters.csv` outputs into `output_files/`.
     *   `japan_census_metadata.csv`: Configuration file for `stat_var_processor.py` specifying output columns, header rows, mapped columns, and provenance URL.
     *   `japan_census_pv_map.csv`: Property-value mapping file mapping e-Stat indicator codes (`indicatorCd`) and 5-digit region codes (`regionCd`) to Data Commons StatisticalVariables and place DCIDs (`country/JPN` and `wikidataId/Q...`).
-    *   `validation_config.json`: Configuration defining historical deletion (`<= 0.1%`), value bounds, and date freshness validation rules across all 101 StatisticalVariables.
-    *   `test_data/`: Sample input data (`sample_input.csv`) and expected output (`sample_expected_output.csv`) for testing.
+    *   `validation_config.json`: Configuration defining value bounds and date freshness validation rules across all 101 StatisticalVariables.
+    *   `test_data/`: Sample input data (`sample_input.csv`) and expected outputs (`sample_expected_output.csv`, `sample_expected_output.tmcf`) for testing.
 
 *   **Transformation pipeline**:
     1.  `download_script.py` fetches all 9 raw datasets from the e-Stat JSON API as-is using concurrent workers and atomic file writes into `input_files/`.
@@ -41,8 +41,7 @@ The import pipeline queries the e-Stat Statistical Dashboard JSON API in paralle
     4.  Aggregated processor counters are written to `counters/japan_census_counters.csv`.
 
 *   **Data Quality Checks**:
-    *   Automated validation via `tools/import_validation/runner.py` evaluates the output against `validation_config.json`, enforcing:
-        *   `check_deleted_records_percent`: Historical deletion threshold `<= 0.1%` (`0` deleted records).
+    *   Automated validation via `tools/import_validation/runner.py` evaluates the output against `validation_config.json` (alongside the default `<= 0.1%` historical deletion threshold), enforcing:
         *   `check_max_date_freshness`: Verifies `MaxDate`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person`) across all 92 active recurring indicators.
         *   `check_max_date_historical_indicators`: Verifies `MaxDate >= 2020` and `MinValue >= 0` across the 9 discontinued centenarian sub-brackets (`100–104`, `105–109`, `110+`).
         *   `check_max_date_consistent_*`: Scoped `MAX_DATE_CONSISTENT` rules verifying uniform `MaxDate` within each co-released survey group (Population Census, Labor Force & Deaths, Teachers, Students, Causes of Death, and Historical Centenarians).
