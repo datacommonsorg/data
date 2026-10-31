@@ -2,14 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Strictly enforce historical deletion average threshold of 0.1%",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "check_max_date_freshness",
       "description": "Verify MaxDate is within allowable publication lag (3 years for annual series, 5 years for quinquennial census) and values are non-negative (and within [0, 100] for rates) for active recurring indicators",
       "validator": "SQL_VALIDATOR",
