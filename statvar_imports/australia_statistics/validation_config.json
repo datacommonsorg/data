@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_goldens_summary_report",
+      "validator": "GOLDENS_CHECK",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv",
+      "validator": "GOLDENS_CHECK",
+      "scope": {
+        "data_source": "stats"
+      },
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations.csv",
+        "input_files": "../../../../output_files/australia_statistics_output.csv"
+      }
+    },
+    {
+      "rule_id": "max_date_consistent_labour_force",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^(dc/nm9hcklgg5zb3|Count_Person_(Employed|Unemployed).*|UnemploymentRate_Person.*)$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_population_erp",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_Person(_(0To4|5To9|10To14|15To19|20To24|25To29|30To34|35To39|40To44|45To49|50To54|55To59|60To64|65To69|70To74|75To79|80To84|85OrMore)Years)?(_(Male|Female))?$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_life_expectancy",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^LifeExpectancy_Person.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_health_conditions",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_Person_.*Condition.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_weekly_income",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Weekly_.*_Income_Household.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_historic_states_6to9",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_Person_6To9Years.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_active_indicators_freshness_and_bounds",
+      "description": "Verify MaxDate is within allowable publication lag and values are non-negative (and within [0, 100] for unemployment rates) for active recurring ABS series",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^(LifeExpectancy_|UnemploymentRate_|dc/nm9hcklgg5zb3)') OR (regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, '(Condition|6To9Years)'))",
+        "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4) AND total_svs = 266 AND NumPlaces >= 1 AND MinValue >= 0 AND (NOT regexp_matches(StatVar, '^UnemploymentRate_') OR MaxValue <= 100)"
+      }
+    },
+    {
+      "rule_id": "check_census_and_survey_indicators_bounds",
+      "description": "Verify MaxDate and non-negative values for 5-year Census health conditions, biennial household income survey, and historical state age-bracket series",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '(Condition|^Weekly_|6To9Years)')",
+        "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= 2016 AND total_svs = 587 AND NumPlaces >= 1 AND MinValue >= 0"
+      }
+    }
+  ]
+}

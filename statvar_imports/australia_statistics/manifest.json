@@ -1,0 +1,36 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "AustraliaStatistics",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.abs.gov.au/",
+            "provenance_description": "Australia Population Census, Estimated Resident Population, Labour Force, Life Expectancy, Household Income, and Long-Term Health Condition Statistics from the Australian Bureau of Statistics (ABS).",
+            "scripts": [
+                "download_script.py",
+                "process.py --input_data=input_files/* --pv_map=australia_statistics_pv_map.csv --config_file=australia_statistics_metadata.csv --output_path=output_files/australia_statistics_output --output_counters=counters/australia_statistics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --parallelism=2"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/australia_statistics_output.tmcf",
+                    "cleaned_csv": "output_files/australia_statistics_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*",
+                "counters/*.csv",
+                "golden_data/*.csv",
+                "validation_config.json"
+            ],
+            "cron_schedule": "0 5 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
