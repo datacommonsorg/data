@@ -1,0 +1,32 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "FeedingAmerica_MapMealGap",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.feedingamerica.org/research/map-the-meal-gap/by-county",
+      "provenance_description": "Feeding America Map the Meal Gap Data",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*",
+        "golden_data/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/FeedingAmerica_MMG.tmcf",
+          "cleaned_csv": "output/FeedingAmerica_MMG.csv"
+        }
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 6 * * 1",
+      "resource_limits": {
+        "cpu": 4,
+        "memory": 16,
+        "disk": "60G"
+      }
+    }
+  ]
+}
