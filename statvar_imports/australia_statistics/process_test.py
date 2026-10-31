@@ -31,6 +31,19 @@ if _REPO_ROOT not in sys.path:
 
 from statvar_imports.australia_statistics import process
 
+for _flag_name in (
+        'input_data',
+        'pv_map',
+        'config_file',
+        'output_path',
+        'output_counters',
+        'existing_statvar_mcf',
+        'parallelism',
+        'shard_timeout',
+):
+    if _flag_name in process._FLAGS:
+        delattr(process._FLAGS, _flag_name)
+
 
 class ProcessTest(unittest.TestCase):
 

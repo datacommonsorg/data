@@ -28,6 +28,10 @@ if _REPO_ROOT not in sys.path:
 
 from statvar_imports.australia_statistics import download_script
 
+for _flag_name in ('output_dir', 'max_workers'):
+    if _flag_name in download_script._FLAGS:
+        delattr(download_script._FLAGS, _flag_name)
+
 
 class DownloadScriptTest(unittest.TestCase):
 
