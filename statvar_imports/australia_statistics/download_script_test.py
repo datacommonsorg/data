@@ -20,14 +20,13 @@ import tempfile
 import unittest
 from unittest import mock
 
-# Ensure repository root and module directory are in sys.path for local and root-level test runs
+# Ensure repository root is in sys.path for both local and root-level test runs
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../..'))
-for _p in (_SCRIPT_DIR, _REPO_ROOT):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
-import download_script
+from statvar_imports.australia_statistics import download_script
 
 
 class DownloadScriptTest(unittest.TestCase):
