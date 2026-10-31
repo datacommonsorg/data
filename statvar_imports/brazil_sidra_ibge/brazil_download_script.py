@@ -18,6 +18,7 @@ the output into CSV files.
 """
 
 import os
+import re
 import time
 from typing import Any, Dict, List, Optional
 
@@ -57,6 +58,7 @@ SESSION = get_robust_session()
 # --- Configuration Constants ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DOWNLOAD_DIR = os.path.join(SCRIPT_DIR, "input_files")
+APISIDRA_BASE_URL = "https://apisidra.ibge.gov.br/values"
 
 # Maps panel indices (1 to 4) to their target folder names
 PANEL_FOLDER_MAP = {
@@ -70,6 +72,31 @@ PANEL_FOLDER_MAP = {
 PERIOD_START = "202201"
 
 
+def build_apisidra_series_url(
+    agg_id: int,
+    var_id: int,
+    geo_code: str,
+    period_query: str,
+    classif: Optional[str] = None,
+) -> str:
+    """Builds the IBGE SIDRA REST API URL for an aggregate series query."""
+    geo_match = re.match(r"^([Nn]\d+)\[(.+)\]$", geo_code.strip())
+    if not geo_match:
+        raise ValueError(f"Invalid geo_code format: {geo_code}")
+    level = geo_match.group(1).lower()
+    loc_id = geo_match.group(2)
+    periods_param = period_query.replace("|", ",")
+
+    url = (f"{APISIDRA_BASE_URL}/t/{agg_id}/{level}/{loc_id}"
+           f"/v/{var_id}/p/{periods_param}")
+    if classif:
+        classif_match = re.match(r"^(\d+)\[(.+)\]$", classif.strip())
+        if not classif_match:
+            raise ValueError(f"Invalid classif format: {classif}")
+        url += f"/c{classif_match.group(1)}/{classif_match.group(2)}"
+    return url
+
+
 def get_available_periods() -> List[Dict[str, Any]]:
     """Fetches available period metadata starting from Q1 2022 to the latest available period.
 
@@ -80,7 +107,7 @@ def get_available_periods() -> List[Dict[str, Any]]:
         RuntimeError: If the network request fails, returns an invalid response,
             or no periods are found starting from PERIOD_START.
     """
-    url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos"
+    url = f"{APISIDRA_BASE_URL}/t/6461/n1/1/v/4096/p/all"
     headers = {"User-Agent": "Mozilla/5.0"}
 
     try:
@@ -95,11 +122,31 @@ def get_available_periods() -> List[Dict[str, Any]]:
                 f"Invalid or empty period metadata response from IBGE API. "
                 f"URL: {url}, Response preview: {str(periods_data)[:200]}")
             raise RuntimeError(err_msg)
-
-        periods = [
-            p for p in periods_data
-            if isinstance(p, dict) and p.get("id", "") >= PERIOD_START
-        ]
+        first_item = periods_data[0]
+        if isinstance(first_item, dict) and "D3C" in first_item:
+            seen_ids = set()
+            periods = []
+            for row in periods_data[1:]:
+                if not isinstance(row, dict):
+                    continue
+                p_id = str(row.get("D3C", "")).strip()
+                if p_id >= PERIOD_START and p_id not in seen_ids:
+                    seen_ids.add(p_id)
+                    literal = str(row.get("D3N", "")).strip()
+                    periods.append({
+                        "id": p_id,
+                        "literals": [literal] if literal else [],
+                    })
+        elif isinstance(first_item, dict) and "id" in first_item:
+            periods = [
+                p for p in periods_data
+                if isinstance(p, dict) and p.get("id", "") >= PERIOD_START
+            ]
+        else:
+            err_msg = (
+                f"Invalid or empty period metadata response from IBGE API. "
+                f"URL: {url}, Response preview: {str(periods_data)[:200]}")
+            raise RuntimeError(err_msg)
         if not periods:
             err_msg = (
                 f"No available periods found starting from {PERIOD_START}. "
@@ -181,9 +228,8 @@ def fetch_aggregate_series(
         RuntimeError: If the network request fails, returns HTTP error, or response
             contains invalid/unexpected payload structure.
     """
-    url = f"https://servicodados.ibge.gov.br/api/v3/agregados/{agg_id}/periodos/{period_query}/variaveis/{var_id}?localidades={geo_code}"
-    if classif:
-        url += f"&classificacao={classif}"
+    url = build_apisidra_series_url(agg_id, var_id, geo_code, period_query,
+                                    classif)
 
     context = f"URL: {url} (agg_id={agg_id}, var_id={var_id}, geo_code={geo_code}, period_query={period_query}, classif={classif})"
     headers = {"User-Agent": "Mozilla/5.0"}
@@ -194,25 +240,43 @@ def fetch_aggregate_series(
 
         data = r.json()
 
-        # Guard check to ensure valid list structure returned from API
-        if not isinstance(data,
-                          list) or not data or "resultados" not in data[0]:
+        if not isinstance(data, list) or not data or not isinstance(
+                data[0], dict):
             err_msg = f"Invalid or empty response structure from IBGE API. Context: {context}. Response preview: {str(data)[:300]}"
             raise RuntimeError(err_msg)
 
-        result_map = {}
-        for res in data[0]["resultados"]:
-            cat_key = "Total"
-            # Extract category classification keys if present
-            if res.get("classificacoes"):
-                cats = res["classificacoes"][0].get("categoria", {})
-                if cats:
-                    cat_key = list(cats.keys())[0]
+        result_map: Dict[str, Dict[str, str]] = {}
+        first_item = data[0]
 
-            # Map time-series dictionary to category key
-            for s in res.get("series", []):
-                serie = s.get("serie", {})
-                result_map[cat_key] = serie
+        if "D3C" in first_item and "V" in first_item:
+            if len(data) < 2:
+                err_msg = f"Empty data rows returned from IBGE SIDRA API. Context: {context}. Response preview: {str(data)[:300]}"
+                raise RuntimeError(err_msg)
+            for row in data[1:]:
+                if not isinstance(row, dict):
+                    continue
+                cat_key = str(row.get(
+                    "D4C", "Total")) if classif and "D4C" in row else "Total"
+                period_id = str(row.get("D3C", "")).strip()
+                if period_id:
+                    result_map.setdefault(cat_key,
+                                          {})[period_id] = str(row.get("V", ""))
+        elif "resultados" in first_item:
+            for res in first_item["resultados"]:
+                cat_key = "Total"
+                # Extract category classification keys if present
+                if res.get("classificacoes"):
+                    cats = res["classificacoes"][0].get("categoria", {})
+                    if cats:
+                        cat_key = list(cats.keys())[0]
+
+                # Map time-series dictionary to category key
+                for s in res.get("series", []):
+                    serie = s.get("serie", {})
+                    result_map[cat_key] = serie
+        else:
+            err_msg = f"Invalid or empty response structure from IBGE API. Context: {context}. Response preview: {str(data)[:300]}"
+            raise RuntimeError(err_msg)
 
         logging.info(
             f"Successfully retrieved {len(result_map)} series from {url}")
