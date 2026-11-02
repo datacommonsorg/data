@@ -62,6 +62,8 @@ class DownloadDemographicUnitTest(unittest.TestCase):
     self.assertEqual(download_demographic._parse_int_value('..'), 0)
     self.assertEqual(download_demographic._parse_int_value('-'), 0)
     self.assertEqual(download_demographic._parse_int_value(''), 0)
+    self.assertEqual(download_demographic._parse_int_value(None), 0)
+    self.assertEqual(download_demographic._parse_int_value('N/A'), 0)
 
   def test_load_nuts_hierarchy_and_age_to_bracket(self):
     county_name_to_nuts, nuts_groups = download_demographic._load_nuts_hierarchy(

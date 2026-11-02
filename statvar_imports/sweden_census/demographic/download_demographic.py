@@ -129,12 +129,17 @@ def query_scb_chunk(
     return json.loads(text).get("data", [])
 
 
-def _parse_int_value(raw_val: str) -> int:
+def _parse_int_value(raw_val: Any) -> int:
     """Parses a numeric string from SCB API, treating '..' or '-' as 0."""
-    val_str = str(raw_val).strip()
-    if not val_str or val_str in ("..", "-", "."):
+    if raw_val is None:
         return 0
-    return int(float(val_str))
+    val_str = str(raw_val).strip()
+    if not val_str or val_str in ("..", "-", ".", "None"):
+        return 0
+    try:
+        return int(float(val_str))
+    except ValueError:
+        return 0
 
 
 def _age_to_bracket(age_code: str, max_open_age: int) -> Optional[str]:
@@ -627,7 +632,10 @@ def main(argv: List[str]) -> None:
         end_year=FLAGS.end_year,
     )
     if os.path.exists("http_cache.sqlite"):
-        os.remove("http_cache.sqlite")
+        try:
+            os.remove("http_cache.sqlite")
+        except OSError:
+            pass
     logging.info(
         "Successfully generated all 23 Demographic raw input CSVs in %s "
         "(National: %s..%s, Sub-National: %s..%s).",
