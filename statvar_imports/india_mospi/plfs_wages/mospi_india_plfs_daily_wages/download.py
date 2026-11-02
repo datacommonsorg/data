@@ -201,13 +201,13 @@ def _fetch_page(
                     f'MoSPI API returned statusCode=False for params={params}: '
                     f"{payload.get('msg')}")
             return payload
-        except (requests.Timeout, requests.ConnectionError) as exc:
+        except (requests.Timeout, requests.ConnectionError, ValueError) as exc:
             if attempt >= max_retries:
                 raise RuntimeError(
                     f'Exhausted {max_retries} attempts fetching {api_url} '
                     f'params={params}') from exc
             logging.warning(
-                'Transient network error on %s params=%s (%s); retrying in %.1fs',
+                'Transient error on %s params=%s (%s); retrying in %.1fs',
                 api_url, params, exc, delay)
         except requests.HTTPError as exc:
             status = exc.response.status_code if exc.response is not None else None
@@ -323,18 +323,28 @@ def load_baseline_csv(baseline_path: str) -> pd.DataFrame:
     return df[COLUMNS].copy()
 
 
+def _has_non_empty_value(df: pd.DataFrame) -> pd.Series:
+    """Returns a boolean Series True where `value` has non-whitespace content."""
+    return df['value'].fillna('').astype(str).str.strip().ne('')
+
+
 def merge_records(baseline_df: pd.DataFrame,
                   live_df: pd.DataFrame | None = None) -> pd.DataFrame:
     """Merges live MoSPI records over historical baseline without losing keys."""
-    if live_df is None or live_df.empty:
-        merged = baseline_df[COLUMNS].drop_duplicates(subset=KEY_COLUMNS,
-                                                      keep='last')
-        return merged.reset_index(drop=True)
+    base = baseline_df[COLUMNS].copy()
+    if live_df is not None and not live_df.empty:
+        valid_live = live_df[COLUMNS][_has_non_empty_value(live_df)]
+        combined = pd.concat([base, valid_live], ignore_index=True)
+    else:
+        combined = base
 
-    combined = pd.concat([baseline_df[COLUMNS], live_df[COLUMNS]],
-                         ignore_index=True)
-    merged = combined.drop_duplicates(subset=KEY_COLUMNS, keep='last')
-    return merged.reset_index(drop=True)
+    # Order empty values before non-empty values stably so blank rows never
+    # overwrite valid observations while non-empty live rows override baseline.
+    ordered = (combined.assign(
+        _has_val=_has_non_empty_value(combined)).sort_values(
+            by='_has_val', kind='mergesort').drop(columns=['_has_val']))
+    merged = ordered.drop_duplicates(subset=KEY_COLUMNS, keep='last')
+    return merged.sort_index().reset_index(drop=True)
 
 
 def write_csv_atomically(df: pd.DataFrame, output_file: str) -> None:

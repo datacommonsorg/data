@@ -186,6 +186,37 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(session.get.call_count, 1)
         mock_sleep.assert_not_called()
 
+    @mock.patch.object(download.time, 'sleep')
+    def test_fetch_page_retries_transient_invalid_json_and_succeeds(
+            self, mock_sleep):
+        session = mock.Mock(spec=requests.Session)
+        bad_json_resp = mock.Mock(spec=requests.Response)
+        bad_json_resp.status_code = 200
+        bad_json_resp.raise_for_status.return_value = None
+        bad_json_resp.json.side_effect = requests.exceptions.JSONDecodeError(
+            'Expecting value', '<html>gateway timeout</html>', 0)
+        non_dict_resp = _mock_response(
+            200, ['unexpected', 'list'])  # type: ignore[arg-type]
+        ok_payload = {'statusCode': True, 'data': [], 'meta_data': {}}
+        session.get.side_effect = [
+            bad_json_resp,
+            non_dict_resp,
+            _mock_response(200, ok_payload),
+        ]
+
+        result = download._fetch_page(
+            session=session,
+            api_url='https://api.mospi.gov.in/api/plfs/getData',
+            params={'page': 1},
+            max_retries=3,
+            retry_delay_seconds=1.0,
+            retry_backoff=2.0,
+        )
+
+        self.assertEqual(result, ok_payload)
+        self.assertEqual(session.get.call_count, 3)
+        self.assertEqual(mock_sleep.call_count, 2)
+
     def test_merge_records_retains_historical_rows_and_updates_new_years(self):
         baseline_df = pd.DataFrame(
             [
@@ -225,6 +256,55 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(by_year['2017-18'], '252.6')
         self.assertEqual(by_year['2025'], '445.5')
         self.assertEqual(by_year['2026'], '470.2')
+
+    def test_merge_records_ignores_empty_or_whitespace_live_values(self):
+        baseline_df = pd.DataFrame(
+            [
+                {
+                    col: '' if v is None else str(v) for col, v in
+                    _sample_api_record('Agriculture Year', '2017-18', 'Jul-Sep',
+                                       '252.6').items()
+                },
+                {
+                    col: '' if v is None else str(v)
+                    for col, v in _sample_api_record('Calendar Year', '2024',
+                                                     None, '410.0').items()
+                },
+                {
+                    col: '' if v is None else str(v)
+                    for col, v in _sample_api_record(
+                        'Agriculture Year', '2023-24', 'Oct-Dec', None).items()
+                },
+            ],
+            columns=download.COLUMNS,
+        )
+        live_df = pd.DataFrame(
+            [
+                {
+                    col: '' if v is None else str(v)
+                    for col, v in _sample_api_record(
+                        'Agriculture Year', '2017-18', 'Jul-Sep', None).items()
+                },
+                {
+                    col: '' if v is None else str(v)
+                    for col, v in _sample_api_record('Calendar Year', '2024',
+                                                     None, '   ').items()
+                },
+                {
+                    col: '' if v is None else str(v) for col, v in
+                    _sample_api_record('Agriculture Year', '2023-24', 'Oct-Dec',
+                                       '315.4').items()
+                },
+            ],
+            columns=download.COLUMNS,
+        )
+
+        merged = download.merge_records(baseline_df, live_df)
+
+        by_year = dict(zip(merged['year'], merged['value']))
+        self.assertEqual(by_year['2017-18'], '252.6')
+        self.assertEqual(by_year['2024'], '410.0')
+        self.assertEqual(by_year['2023-24'], '315.4')
 
     def test_write_csv_atomically_and_load_baseline_roundtrip(self):
         df = pd.DataFrame(

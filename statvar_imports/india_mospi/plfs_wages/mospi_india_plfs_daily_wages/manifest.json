@@ -20,7 +20,9 @@
             ],
             "source_files": [
                 "input_files/*.csv",
-                "counters/*.csv"
+                "counters/*.csv",
+                "*.csv",
+                "manifest.json"
             ],
             "cron_schedule": "0 3 * * 1",
             "validation_config_file": "validation_config.json"
