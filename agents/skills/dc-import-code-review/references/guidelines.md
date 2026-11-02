@@ -136,6 +136,7 @@ Then apply these rules:
 - Keep checked-in fixtures representative and generally no more than 100
   records.
 - Verify that every directory from the top-level import folder (`scripts/` or
-  `statvar_imports/`) down to each `*_test.py` file has an `__init__.py`;
-  `./run_tests.sh` uses `unittest discover`, which skips directories without
-  one.
+  `statvar_imports/`) down to each `*_test.py` file has an `__init__.py`, and
+  report a missing one as P1; `./run_tests.sh` uses `unittest discover`, which
+  skips directories without one, so those tests never run and the check still
+  passes.
