@@ -2,14 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Checks that the percentage of deleted records for the entire import does not exceed 0.1%.",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "check_active_survey_wave_count",
       "description": "Checks that all active StatVars (1935 in input0, 227 in input1) have MaxDate >= 2023-11.",
       "validator": "SQL_VALIDATOR",

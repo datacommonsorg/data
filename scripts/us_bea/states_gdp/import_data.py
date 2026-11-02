@@ -33,9 +33,6 @@ import pandas as pd
 
 logging.set_verbosity(logging.INFO)
 
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None
-
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year', None,
                      'The latest year to look for in the filename (optional).')

@@ -36,10 +36,9 @@ def state1970(url_file: str, output_folder: str):
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)
     # Dropping the old unwanted columns.
-    df.drop(columns=['State Name', 'FIPS State Code'], inplace=True)
-    df.rename(columns=\
-       {'Year of Estimate': 'Year','Race/Sex Indicator': 'Race/Sex'},\
-          inplace=True)
+    df = df.drop(columns=['State Name', 'FIPS State Code'])
+    df = df.rename(columns=\
+       {'Year of Estimate': 'Year','Race/Sex Indicator': 'Race/Sex'},)
 
     df['Race/Sex'] = df['Race/Sex'].astype(str)
     df = df.replace({

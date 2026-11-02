@@ -90,7 +90,7 @@ def process_county_2000_2009(url: str) -> pd.DataFrame:
             df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)\
                 + (df['COUNTY'].map(str)).str.zfill(3)
 
-            df.drop(columns=['STATE', 'COUNTY'], inplace=True)
+            df = df.drop(columns=['STATE', 'COUNTY'])
 
             # writing dataframe to final dataframe
             final_df = pd.concat([final_df, df], ignore_index=True)

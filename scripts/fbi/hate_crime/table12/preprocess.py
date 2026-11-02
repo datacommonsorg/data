@@ -114,9 +114,8 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
                 year_range = year_range_str.split(",")
                 if year in year_range:
                     df.columns = columns
-    df.drop(['agencies', 'pop covered', 'agencies submitting reports'],
-            axis=1,
-            inplace=True)
+    df = df.drop(['agencies', 'pop covered', 'agencies submitting reports'],
+                 axis=1)
 
     df.state = df.state.str.replace(r'\d+', '', regex=True)
 

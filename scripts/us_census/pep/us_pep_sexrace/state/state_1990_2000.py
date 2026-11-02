@@ -79,7 +79,7 @@ def process_state_1990_2000(urls: str) -> pd.DataFrame:
             df[k] = df['NH' + v] + df['H' + v]
 
         # dropping unwanted columns which are having origin
-        df.drop(columns=['Age'] + srh_columns, inplace=True)
+        df = df.drop(columns=['Age'] + srh_columns)
 
         # providing geoId to the dataframe and
         # making the geoId of 2 digit as state

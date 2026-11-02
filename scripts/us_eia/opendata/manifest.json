@@ -20,7 +20,8 @@
                     "cleaned_csv": "gcs_output/COAL/COAL.csv"
                 }
             ],
-            "cron_schedule": "0 14 5,20 * *",
+            "cron_schedule": "0 5 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 05:00 UTC",
             "validation_config_file": "validation_config_EIA_Coal.json"
         },
         {
@@ -48,7 +49,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 5,20 * *",
+            "cron_schedule": "0 4 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 04:00 UTC",
             "validation_config_file": "validation_config_EIA_Electricity.json"
         },
         {
@@ -71,7 +73,8 @@
                     "cleaned_csv": "gcs_output/NG/NG.csv"
                 }
             ],
-            "cron_schedule": "0 8 5,20 * *",
+            "cron_schedule": "30 5 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 05:30 UTC",
             "validation_config_file": "validation_config_EIA_NaturalGas.json"
         },
         {
@@ -94,7 +97,8 @@
                     "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
                 }
             ],
-            "cron_schedule": "0 9 5,20 * *",
+            "cron_schedule": "30 2 * * 6",
+            "_comment": "Schedule: Weekly on Saturday at 02:30 UTC",
             "validation_config_file": "validation_config_EIA_NuclearOutages.json"
         },
         {
@@ -117,7 +121,8 @@
                     "cleaned_csv": "gcs_output/PET/PET.csv"
                 }
             ],
-            "cron_schedule": "0 10 5,20 * *",
+            "cron_schedule": "30 5 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 05:30 UTC",
             "validation_config_file": "validation_config_EIA_Petroleum.json"
         },
         {
@@ -140,7 +145,8 @@
                     "cleaned_csv": "gcs_output/INTL/INTL.csv"
                 }
             ],
-            "cron_schedule": "0 11 5,20 * *",
+            "cron_schedule": "30 4 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 04:30 UTC",
             "validation_config_file": "validation_config_EIA_International.json"
         },
         {
@@ -163,7 +169,8 @@
                     "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
                 }
             ],
-            "cron_schedule": "0 12 5,20 * *",
+            "cron_schedule": "0 6 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 06:00 UTC",
             "validation_config_file": "validation_config_EIA_SEDS.json"
         },
         {
@@ -186,7 +193,8 @@
                     "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
                 }
             ],
-            "cron_schedule": "0 13 5,20 * *",
+            "cron_schedule": "0 0 * * 5",
+            "_comment": "Schedule: Weekly on Friday at 00:00 UTC",
             "validation_config_file": "validation_config_EIA_TotalEnergy.json"
         }
     ]

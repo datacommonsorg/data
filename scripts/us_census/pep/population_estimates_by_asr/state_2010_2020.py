@@ -55,8 +55,8 @@ def state2010(url_file: str, output_folder: str):
     df['AGE'] = df['AGE'] + 'Years'
     df['AGE'] = df['AGE'].str.replace("85Years", "85OrMoreYears")
     # Drop unwanted columns.
-    df.drop(columns=['SUMLEV','REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
-       'ESTIMATESBASE2010','CENSUS2010POP','POPESTIMATE042020','POPESTIMATE2020'], inplace=True)
+    df = df.drop(columns=['SUMLEV','REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
+       'ESTIMATESBASE2010','CENSUS2010POP','POPESTIMATE042020','POPESTIMATE2020'])
     df = df.melt(id_vars=['geo_ID','AGE','SEX','RACE'], var_name='Year' , \
        value_name='observation')
     # Making the years more understandable.

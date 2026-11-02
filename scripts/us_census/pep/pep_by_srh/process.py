@@ -365,7 +365,7 @@ def _process_state_files_1980_1990(download_dir):
                     df["ALL_AGE"] += df[age]
 
                 # Drop individual age columns
-                df.drop(age_columns, axis=1, inplace=True)
+                df = df.drop(age_columns, axis=1)
 
                 # Pivot the data by LOCATION and YEAR_TEMP, with multi-level columns
                 df = df.pivot(index=['LOCATION', 'YEAR_TEMP'],
@@ -390,7 +390,7 @@ def _process_state_files_1980_1990(download_dir):
                 df.insert(0, 'YEAR', 1980 + df['YEAR_TEMP'], True)
                 df['LOCATION'] = 'geoId/' + (
                     df['LOCATION'].map(str)).str.zfill(2)
-                df.drop(["YEAR_TEMP"], axis=1, inplace=True)
+                df = df.drop(["YEAR_TEMP"], axis=1)
 
                 # Define column headers
                 column_header = ['YEAR', 'LOCATION']
@@ -407,7 +407,7 @@ def _process_state_files_1980_1990(download_dir):
                 }
 
                 # Use df.rename() to rename columns
-                df.rename(columns=column_mapping, inplace=True)
+                df = df.rename(columns=column_mapping)
 
                 # Write to the final output file, appending if necessary
                 if file == files_list[0]:
@@ -531,7 +531,7 @@ def _process_state_files_1990_2000(download_dir):
 
         # After processing all files, aggregate the data
         df = pd.read_csv(output_file_path + output_temp_file_name)
-        df.drop(["AGE"], axis=1, inplace=True)
+        df = df.drop(["AGE"], axis=1)
         df = df.groupby(['YEAR', 'LOCATION']).agg('sum').reset_index()
         df['LOCATION'] = 'geoId/' + df['LOCATION'].map(str).str.zfill(2)
         df.to_csv(output_file_path + output_file_name, index=False)
@@ -1153,7 +1153,7 @@ def _consolidate_national_files():
         try:
             df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                              'national_consolidated_temp.csv')
-            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df = df.sort_values(by=['LOCATION', 'SV', 'YEAR'])
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'national_consolidated_as_is_final.csv',
                       header=True,
@@ -1205,7 +1205,7 @@ def _consolidate_national_files():
         try:
             df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
                              'national_consolidated_temp.csv')
-            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df = df.sort_values(by=['LOCATION', 'SV', 'YEAR'])
             df.insert(3, 'MEASUREMENT_METHOD',
                       'dcs:dcAggregate/CensusPEPSurvey', True)
             df["MEASUREMENT_METHOD"] = df.apply(
@@ -1294,7 +1294,7 @@ def _consolidate_state_files():
         try:
             df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                              'state_consolidated_temp.csv')
-            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df = df.sort_values(by=['LOCATION', 'SV', 'YEAR'])
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'state_consolidated_as_is_final.csv',
                       header=True,
@@ -1347,7 +1347,7 @@ def _consolidate_state_files():
         try:
             df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
                              'state_consolidated_temp.csv')
-            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df = df.sort_values(by=['LOCATION', 'SV', 'YEAR'])
             df.insert(3, 'MEASUREMENT_METHOD',
                       'dcs:dcAggregate/CensusPEPSurvey', True)
             df["MEASUREMENT_METHOD"] = df.apply(
@@ -1436,7 +1436,7 @@ def _consolidate_county_files():
         try:
             df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                              'county_consolidated_temp.csv')
-            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df = df.sort_values(by=['LOCATION', 'SV', 'YEAR'])
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_as_is_final.csv',
                       header=True,
@@ -1492,7 +1492,7 @@ def _consolidate_county_files():
         try:
             df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
                              'county_consolidated_temp.csv')
-            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df = df.sort_values(by=['LOCATION', 'SV', 'YEAR'])
             df.insert(3, 'MEASUREMENT_METHOD',
                       'dcs:dcAggregate/CensusPEPSurvey', True)
             df["MEASUREMENT_METHOD"] = df.apply(

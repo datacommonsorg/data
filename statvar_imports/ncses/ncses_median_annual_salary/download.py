@@ -22,10 +22,12 @@ from absl import app
 from absl import logging
 from retry import retry
 
+
 @retry(tries=3, delay=2)
 def download_retry(url):
     response = requests.get(url, stream=True, timeout=30)
     return response
+
 
 def download_xlsx_from_ncses_table(url, current_year):
     """
@@ -62,17 +64,21 @@ def download_xlsx_from_ncses_table(url, current_year):
         if href and desired_zip_filename.lower() in href.lower():
             if href.lower().endswith('.zip'):
                 all_zip_links_found_on_page.append(link)
-                if os.path.basename(href).lower() == desired_zip_filename.lower():
+                if os.path.basename(
+                        href).lower() == desired_zip_filename.lower():
                     download_link = link
                     break
 
     if not download_link and len(all_zip_links_found_on_page) == 1:
         download_link = all_zip_links_found_on_page[0]
-        logging.info(f"Found a single ZIP link containing '{desired_zip_filename}' in its href: {download_link.get('href')}")
+        logging.info(
+            f"Found a single ZIP link containing '{desired_zip_filename}' in its href: {download_link.get('href')}"
+        )
     elif not download_link:
-        logging.warning(f"No suitable download link found for {desired_zip_filename} on {url}")
+        logging.warning(
+            f"No suitable download link found for {desired_zip_filename} on {url}"
+        )
         return False
-
 
     xlsx_url = download_link.get('href')
     # If the URL is relative, make it absolute
@@ -90,7 +96,8 @@ def download_xlsx_from_ncses_table(url, current_year):
         source_files_zip_base_dir = "source_files"
         os.makedirs(source_files_zip_base_dir, exist_ok=True)
         unique_zip_filename = f"{current_year}_{desired_zip_filename}"
-        zip_filepath = os.path.join(source_files_zip_base_dir, unique_zip_filename)
+        zip_filepath = os.path.join(source_files_zip_base_dir,
+                                    unique_zip_filename)
         with open(zip_filepath, 'wb') as f:
             for chunk in download_response.iter_content(chunk_size=8192):
                 f.write(chunk)
@@ -111,52 +118,65 @@ def download_xlsx_from_ncses_table(url, current_year):
             for f in extracted_files:
                 full_file_path = os.path.join(extract_path, f)
                 # Check if it's a file and an XLSX, and if it contains the desired fragment
-                if os.path.isfile(full_file_path) and f.lower().endswith('.xlsx'):
+                if os.path.isfile(full_file_path) and f.lower().endswith(
+                        '.xlsx'):
                     if required_data.lower() in f.lower():
-                        logging.info(f"Keeping target XLSX file: {full_file_path}")
+                        logging.info(
+                            f"Keeping target XLSX file: {full_file_path}")
                     else:
                         # removing unnecessary xlsx files
                         os.remove(full_file_path)
-                        logging.info(f"Removed non-target XLSX file: {full_file_path}")
+                        logging.info(
+                            f"Removed non-target XLSX file: {full_file_path}")
 
-                elif os.path.isfile(full_file_path): # Remove other non-XLSX file like pdfs
+                elif os.path.isfile(
+                        full_file_path):  # Remove other non-XLSX file like pdfs
                     os.remove(full_file_path)
                     logging.info(f"Removed non-XLSX file: {full_file_path}")
         else:
-            logging.fatal("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
+            logging.fatal(
+                "Downloaded file is not a valid ZIP archive (or could not be identified as such)."
+            )
 
-    except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError) as e:  
-        logging.fatal(f"An unexpected error occurred during file processing: {e}")
-        return False # Return False to indicate failure for this year
+    except (requests.exceptions.RequestException, zipfile.BadZipFile,
+            OSError) as e:
+        logging.fatal(
+            f"An unexpected error occurred during file processing: {e}")
+        return False  # Return False to indicate failure for this year
 
     return True
+
 
 def main(argv):
     # In the UI data is available from 2021 only.
     start_year = 2021
 
-    base_url="https://ncses.nsf.gov/surveys/national-survey-college-graduates/{year}#data"
+    base_url = "https://ncses.nsf.gov/surveys/national-survey-college-graduates/{year}#data"
 
     failure = 0
-    failure_threshold = 3 
+    failure_threshold = 3
 
-    while True: 
+    while True:
         target_url = base_url.format(year=start_year)
         logging.info(f"Attempting to process data for year: {start_year}")
 
         if download_xlsx_from_ncses_table(target_url, start_year):
             logging.info(f"Successfully processed data for year: {start_year}")
-            failure = 0 
+            failure = 0
         else:
-            logging.warning(f"No data available or error fetching URL for year {start_year}.")
-            failure += 1 
+            logging.warning(
+                f"No data available or error fetching URL for year {start_year}."
+            )
+            failure += 1
 
-     
         if failure >= failure_threshold:
-            logging.info(f"Reached {failure_threshold} consecutive years with no data.Exiting.")
-            break 
+            logging.info(
+                f"Reached {failure_threshold} consecutive years with no data.Exiting."
+            )
+            break
         #getting data on every 2 years
         start_year += 2
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     app.run(main)

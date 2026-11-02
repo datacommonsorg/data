@@ -173,10 +173,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
                 year_range = year_range_str.split(",")
                 if year in year_range:
                     df.columns = columns
-    df.drop(['population', 'agency unit'],
-            axis=1,
-            inplace=True,
-            errors='ignore')
+    df = df.drop(['population', 'agency unit'], axis=1, errors='ignore')
 
     df['state'] = df['state'].ffill()
     df['agency type'] = df['agency type'].ffill()

@@ -128,11 +128,10 @@ def _measurement_aggregate(df: pd.DataFrame) -> list:
     """
     derived_df = df[df['Measurement_Method'].str.contains('dcAggregate')]
     aggregated_rows = list(derived_df['SVs'] + derived_df['geo_ID'])
-    df['info'] = df['SVs'] + df['geo_ID']
-    aggregate_list = np.where(df['info'].isin(aggregated_rows),
+    info = df['SVs'] + df['geo_ID']
+    aggregate_list = np.where(info.isin(aggregated_rows),
                               'dcAggregate/CensusPEPSurvey_PartialAggregate',
                               'CensusPEPSurvey')
-    df.drop(columns=['info'], inplace=True)
     return aggregate_list.tolist()
 
 
@@ -274,7 +273,7 @@ class USCensusPEPByASR:
         if processed_count == total_files_to_process & total_files_to_process > 0:
             # Drop the unwanted columns and NA.
             logging.info(f"Dropping unwanted columns and NA")
-            final_df.drop(columns=['Unnamed: 0'], inplace=True)
+            final_df = final_df.drop(columns=['Unnamed: 0'])
             final_df = final_df.dropna()
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
             final_df['observation'] = final_df['observation'].astype(

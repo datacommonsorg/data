@@ -54,9 +54,8 @@ def process_state_2020_2022(url: str) -> pd.DataFrame:
                df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-            axis=1,
-            inplace=True)
+    df = df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                 axis=1)
 
     # dropping unwanted columns
     df = df.drop(columns=[

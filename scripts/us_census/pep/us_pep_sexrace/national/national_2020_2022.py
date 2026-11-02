@@ -53,9 +53,8 @@ def process_national_2020_2022(url: str) -> pd.DataFrame:
                df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-            axis=1,
-            inplace=True)
+    df = df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                 axis=1)
 
     # dropping unwanted columns
     df = df.drop(columns=[
@@ -118,7 +117,7 @@ def process_national_2020_2022(url: str) -> pd.DataFrame:
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
 
-    df.drop(columns=['geo_ID'], inplace=True)
+    df = df.drop(columns=['geo_ID'])
 
     df = df.groupby(['Year']).sum().reset_index()
 

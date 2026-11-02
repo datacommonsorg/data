@@ -154,7 +154,7 @@ def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
         df['Month'] = df['Month'].astype(str)
         df['Month'] = df['Month'].str.zfill(2)
         df['observationDate'] = df['Year'] + '-' + df['Month']
-        df.drop(columns=['Year', 'Month'], inplace=True)
+        df = df.drop(columns=['Year', 'Month'])
         return df
     except Exception as e:
         logging.fatal(f"Error while generating observationDate : {e}")
@@ -330,7 +330,7 @@ def fix_place_names(clean_df):
         clean_df['observationAbout'] = clean_df['State'].apply(get_place_dcid)
         clean_df = clean_df[~(clean_df['observationAbout']
                               == '')]  # remove MultiState
-        clean_df.drop(columns=['State'], inplace=True)
+        clean_df = clean_df.drop(columns=['State'])
         return clean_df
     except Exception as e:
         logging.fatal(f"Error while fixing place name : {e}")
@@ -436,9 +436,8 @@ def process_non_infectious_data(input_file_path: str = None,
         # another check to ensure there is only 1 Etiology in the clean_csv
         clean_df = clean_df[~(clean_df['Etiology'].str.contains(';'))]
         # removing unused columns
-        clean_df.drop(
-            columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'],
-            inplace=True)
+        clean_df = clean_df.drop(
+            columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'])
         clean_df.to_csv(os.path.join(target_output, f'{_FILE_PREFIX}.csv'),
                         index=False)
 

@@ -72,10 +72,9 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 ]
 
                 # dropping the unwanted columns
-                df.drop(columns=[
+                df = df.drop(columns=[
                     "Age", "All race total", "White Total", "Nonwhite Total"
-                ],
-                        inplace=True)
+                ])
 
                 # inserting year column to the dataframe
                 df.insert(loc=0, column='Year', value=year)
@@ -112,12 +111,11 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 ]
 
                 # dropping the unwanted columns
-                df2.drop(columns=[
+                df2 = df2.drop(columns=[
                     "Age", "All race total", "White Total", "Black Total",
                     "Other Races Total", "Count_Person_Male_OtherRaces",
                     "Count_Person_Female_OtherRaces"
-                ],
-                         inplace=True)
+                ])
 
                 # inserting year column
                 df2.insert(loc=0, column='Year', value=year)

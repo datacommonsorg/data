@@ -15,7 +15,6 @@ module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
 import wfigs_data
 
-pd.set_option("display.max_rows", None)
 pd.set_option("future.no_silent_downcasting", True)
 
 

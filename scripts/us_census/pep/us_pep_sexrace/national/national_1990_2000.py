@@ -81,7 +81,7 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
             df[k] = df['NH' + v] + df['H' + v]
 
         # dropping unwanted columns which are having origin
-        df.drop(columns=['Age'] + srh_columns, inplace=True)
+        df = df.drop(columns=['Age'] + srh_columns)
 
         # providing geoId to the dataframe
         # and making the geoId of 2 digit as state
@@ -95,7 +95,7 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
         # concatenating the value to final dataframe
         final_df = pd.concat([final_df, df])
 
-    final_df.drop(columns=['geo_ID'], inplace=True)
+    final_df = final_df.drop(columns=['geo_ID'])
 
     final_df = final_df.groupby(['Year']).sum().reset_index()
 

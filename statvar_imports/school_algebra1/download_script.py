@@ -79,7 +79,6 @@ def preprocess_file(filepath: str, year: int):
         raise RuntimeError(e)
 
 
-
 def main(_):
     os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
     logging.info(
@@ -129,8 +128,9 @@ def main(_):
 
             # Use a cleaner check for the required files
             if (extension in ['.csv', '.xlsx'] and
-                    (category_name.lower() in base.lower() or
-                     (year == 2015 and "CRDC 2015-16 School Data" in base and "layout" not in base.lower()))):
+                (category_name.lower() in base.lower() or
+                 (year == 2015 and "CRDC 2015-16 School Data" in base and
+                  "layout" not in base.lower()))):
                 if 'lea' in base.lower() and extension == '.xlsx':
                     logging.info(
                         f"Skipping and removing Excel file: '{filename}' because it contains 'LEA'."
@@ -148,7 +148,9 @@ def main(_):
 
                 # Check for 'enrollment' or 'algebra_ii' in the filename and remove if found
                 if "enrollment" in clean_base or "algebra_ii" in clean_base:
-                    logging.info(f"Skipping and removing file: '{new_filename}' because it contains 'enrollment' or 'algebra_ii'.")
+                    logging.info(
+                        f"Skipping and removing file: '{new_filename}' because it contains 'enrollment' or 'algebra_ii'."
+                    )
                     os.remove(new_filepath)
                     continue
 

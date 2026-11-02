@@ -54,7 +54,7 @@ def process_national_before_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         df = df.replace('nan', '')
         # writing output to final csv
@@ -84,7 +84,7 @@ def process_state_county_before_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         # writing output to final csv
         df = df[[
@@ -130,7 +130,7 @@ def process_state_county_after_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         df = df.replace('nan', '')
         #Year,geo_ID
@@ -160,7 +160,7 @@ def process_national_after_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         # dropping unwanted column
         df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
