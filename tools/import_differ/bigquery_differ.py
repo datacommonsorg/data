@@ -48,7 +48,7 @@ import os
 import re
 import sys
 import tempfile
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 import uuid
 
 from absl import app
@@ -65,7 +65,7 @@ sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
 from file_util import file_get_gcs_blob, file_get_matching, file_is_gcs
-from mcf_file_util import normalize_value
+from mcf_file_util import normalize_value, strip_namespace, strip_value
 
 OBSERVATION_KEY_PROPERTIES = [
     'variableMeasured',
@@ -77,16 +77,108 @@ OBSERVATION_KEY_PROPERTIES = [
     'scalingFactor',
 ]
 
+OBS_CSV_COLUMNS = [
+    'key_combined',
+    'variableMeasured',
+    'value',
+    'observationAbout',
+    'observationDate',
+    'observationPeriod',
+    'measurementMethod',
+    'unit',
+    'scalingFactor',
+    'row_num',
+]
+
 OBS_BQ_SCHEMA = [
     bigquery.SchemaField('key_combined', 'STRING'),
     bigquery.SchemaField('variableMeasured', 'STRING'),
     bigquery.SchemaField('value', 'STRING'),
+    bigquery.SchemaField('observationAbout', 'STRING'),
+    bigquery.SchemaField('observationDate', 'STRING'),
+    bigquery.SchemaField('observationPeriod', 'STRING'),
+    bigquery.SchemaField('measurementMethod', 'STRING'),
+    bigquery.SchemaField('unit', 'STRING'),
+    bigquery.SchemaField('scalingFactor', 'STRING'),
+    bigquery.SchemaField('row_num', 'INT64'),
 ]
 
 SCHEMA_NODE_BQ_SCHEMA = [
     bigquery.SchemaField('dcid', 'STRING'),
     bigquery.SchemaField('value_combined', 'STRING'),
 ]
+
+
+def get_import_bq_table_ids(
+    dataset_ref: str,
+    import_name: str,
+    version: str,
+    input_prefix: str = 'input0',
+) -> Dict[str, str]:
+    """Returns deterministic BigQuery table IDs shared between aggregator and validator jobs."""
+    safe_import = re.sub(r'[^a-zA-Z0-9_]', '_', import_name)
+    safe_version = re.sub(r'[^a-zA-Z0-9_]', '_', version)
+    safe_prefix = re.sub(r'[^a-zA-Z0-9_]', '_', input_prefix)
+    tag = f'{safe_import}_{safe_version}_{safe_prefix}'
+    return {
+        'raw_obs': f'{dataset_ref}.raw_obs_{tag}',
+        'raw_schema': f'{dataset_ref}.raw_schema_{tag}',
+        'agg_obs': f'{dataset_ref}.agg_obs_{tag}',
+    }
+
+
+def format_key_combined_sql(
+    var_expr: str,
+    about_expr: str,
+    date_expr: str,
+    period_expr: str,
+    method_expr: str,
+    unit_expr: str,
+    scaling_expr: str,
+) -> str:
+    """Returns a SQL expression computing key_combined identical to _flush_node_to_csv."""
+
+    def _dcid_sql(expr: str) -> str:
+        return (f"CASE WHEN COALESCE({expr}, '') = '' THEN '' "
+                f"WHEN {expr} LIKE 'dcid:%' THEN {expr} "
+                f"ELSE CONCAT('dcid:', {expr}) END")
+
+    def _quote_sql(expr: str) -> str:
+        return (f"CASE WHEN COALESCE({expr}, '') = '' THEN '' "
+                f"WHEN {expr} LIKE '\"%\"' THEN {expr} "
+                f"ELSE CONCAT('\"', {expr}, '\"') END")
+
+    return (f"CONCAT("
+            f"{_dcid_sql(var_expr)}, ';', "
+            f"{_dcid_sql(about_expr)}, ';', "
+            f"{_quote_sql(date_expr)}, ';', "
+            f"{_quote_sql(period_expr)}, ';', "
+            f"{_dcid_sql(method_expr)}, ';', "
+            f"{_dcid_sql(unit_expr)}, ';', "
+            f"{_quote_sql(scaling_expr)}"
+            f")")
+
+
+def cleanup_shared_bq_tables(
+    project_id: str,
+    shared_table_ids: Optional[Dict[str, str]],
+    bq_client: Optional[bigquery.Client] = None,
+) -> None:
+    """Deletes shared temporary BigQuery tables (raw_obs, raw_schema, agg_obs) if they exist."""
+    if not shared_table_ids:
+        return
+    if not project_id:
+        project_id = os.environ.get('GOOGLE_CLOUD_PROJECT') or os.environ.get(
+            'PROJECT_ID', '')
+    try:
+        client = bq_client or bigquery.Client(project=project_id)
+        for key in ('raw_obs', 'raw_schema', 'agg_obs'):
+            table_id = shared_table_ids.get(key)
+            if table_id:
+                client.delete_table(table_id, not_found_ok=True)
+    except Exception as exc:
+        logging.warning('Failed to clean up shared BigQuery tables %s: %s',
+                        shared_table_ids, exc)
 
 
 def ensure_bq_dataset(bq_client: bigquery.Client,
@@ -115,8 +207,22 @@ def _normalize_prop_val(value) -> str:
     return str(value) if value is not None else ''
 
 
-def _flush_node_to_csv(node: Dict[str, Any], obs_writer: csv.writer,
-                       schema_writer: csv.writer) -> Tuple[int, int]:
+def _clean_prop_val(value) -> str:
+    """Strips namespace prefixes (dcid:, dcs:, schema:) and surrounding quotes."""
+    if value is None:
+        return ''
+    if isinstance(value, list):
+        value = value[-1] if value else ''
+    val = strip_value(str(value)).strip()
+    if len(val) >= 2 and val[0] == '"' and val[-1] == '"':
+        val = val[1:-1].strip()
+    return strip_namespace(val).strip('"').strip()
+
+
+def _flush_node_to_csv(node: Dict[str, Any],
+                       obs_writer: csv.writer,
+                       schema_writer: csv.writer,
+                       row_num: int = 1) -> Tuple[int, int]:
     """Writes a single parsed MCF node to either the observation or schema CSV writer."""
     type_of = node.get('typeOf', '')
     type_of_list = type_of if isinstance(type_of, list) else [type_of]
@@ -128,7 +234,24 @@ def _flush_node_to_csv(node: Dict[str, Any], obs_writer: csv.writer,
         key_combined = ';'.join(key_parts)
         var_measured = _normalize_prop_val(node.get('variableMeasured', ''))
         val = _normalize_prop_val(node.get('value', ''))
-        obs_writer.writerow([key_combined, var_measured, val])
+        obs_about = _clean_prop_val(node.get('observationAbout', ''))
+        obs_date = _clean_prop_val(node.get('observationDate', ''))
+        obs_period = _clean_prop_val(node.get('observationPeriod', ''))
+        m_method = _clean_prop_val(node.get('measurementMethod', ''))
+        unit = _clean_prop_val(node.get('unit', ''))
+        scaling = _clean_prop_val(node.get('scalingFactor', ''))
+        obs_writer.writerow([
+            key_combined,
+            var_measured,
+            val,
+            obs_about,
+            obs_date,
+            obs_period,
+            m_method,
+            unit,
+            scaling,
+            row_num,
+        ])
         return 1, 0
     else:
         raw_id = node.get('dcid') or node.get('Node', '')
@@ -195,10 +318,18 @@ def _remove_temp_file(path: str) -> None:
         logging.warning('Failed to remove temporary file %s: %s', path, exc)
 
 
-def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
-                      schema_csv_path: str) -> Tuple[int, int]:
+def stream_mcf_to_csv(
+    mcf_pattern: str,
+    obs_csv_path: str,
+    schema_csv_path: str,
+    exclude_filenames: Optional[Set[str]] = None,
+) -> Tuple[int, int]:
     """Streams MCF files node-by-node into observation and schema CSVs in O(1) memory."""
     mcf_files = file_get_matching(mcf_pattern)
+    if exclude_filenames:
+        mcf_files = [
+            f for f in mcf_files if os.path.basename(f) not in exclude_filenames
+        ]
     total_obs = 0
     total_schema = 0
 
@@ -206,7 +337,7 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
          _open_text_stream(schema_csv_path, mode='w') as schema_file:
         obs_writer = csv.writer(obs_file)
         schema_writer = csv.writer(schema_file)
-        obs_writer.writerow(['key_combined', 'variableMeasured', 'value'])
+        obs_writer.writerow(OBS_CSV_COLUMNS)
         schema_writer.writerow(['dcid', 'value_combined'])
 
         for mcf_file in mcf_files:
@@ -218,7 +349,10 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
                     if not line or line.startswith('#'):
                         if current_node:
                             o_inc, s_inc = _flush_node_to_csv(
-                                current_node, obs_writer, schema_writer)
+                                current_node,
+                                obs_writer,
+                                schema_writer,
+                                row_num=total_obs + 1)
                             total_obs += o_inc
                             total_schema += s_inc
                             current_node = {}
@@ -229,7 +363,10 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
                         v = v.strip()
                         if k == 'Node' and current_node:
                             o_inc, s_inc = _flush_node_to_csv(
-                                current_node, obs_writer, schema_writer)
+                                current_node,
+                                obs_writer,
+                                schema_writer,
+                                row_num=total_obs + 1)
                             total_obs += o_inc
                             total_schema += s_inc
                             current_node = {}
@@ -241,8 +378,10 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
                         else:
                             current_node[k] = v
                 if current_node:
-                    o_inc, s_inc = _flush_node_to_csv(current_node, obs_writer,
-                                                      schema_writer)
+                    o_inc, s_inc = _flush_node_to_csv(current_node,
+                                                      obs_writer,
+                                                      schema_writer,
+                                                      row_num=total_obs + 1)
                     total_obs += o_inc
                     total_schema += s_inc
 
@@ -281,13 +420,16 @@ def load_csv_to_bq_table(bq_client: bigquery.Client,
     bq_client.update_table(table, ['expires'])
 
 
-def load_mcf_to_bq_tables(bq_client: bigquery.Client,
-                          mcf_pattern: str,
-                          obs_table_ref: str,
-                          schema_table_ref: str,
-                          temp_dir: Optional[str] = None,
-                          suffix: str = '',
-                          expiration_hours: int = 12) -> Tuple[int, int]:
+def load_mcf_to_bq_tables(
+    bq_client: bigquery.Client,
+    mcf_pattern: str,
+    obs_table_ref: str,
+    schema_table_ref: Optional[str] = None,
+    temp_dir: Optional[str] = None,
+    suffix: str = '',
+    expiration_hours: int = 12,
+    exclude_filenames: Optional[Set[str]] = None,
+) -> Tuple[int, int]:
     """Streams MCF files to CSVs and loads them into BigQuery observation and schema tables."""
     with contextlib.ExitStack() as stack:
         base_dir = (temp_dir.rstrip('/') if temp_dir else stack.enter_context(
@@ -299,18 +441,24 @@ def load_mcf_to_bq_tables(bq_client: bigquery.Client,
                       else os.path.join(base_dir, f'schema{tag}.csv'))
 
         try:
-            obs_count, schema_count = stream_mcf_to_csv(mcf_pattern, obs_csv,
-                                                        schema_csv)
+            obs_count, schema_count = stream_mcf_to_csv(
+                mcf_pattern,
+                obs_csv,
+                schema_csv,
+                exclude_filenames=exclude_filenames)
             try:
                 load_csv_to_bq_table(bq_client, obs_csv, obs_table_ref,
                                      OBS_BQ_SCHEMA, expiration_hours)
             finally:
                 _remove_temp_file(obs_csv)
-            try:
-                load_csv_to_bq_table(bq_client, schema_csv, schema_table_ref,
-                                     SCHEMA_NODE_BQ_SCHEMA, expiration_hours)
-            finally:
-                _remove_temp_file(schema_csv)
+            if schema_table_ref:
+                try:
+                    load_csv_to_bq_table(bq_client, schema_csv,
+                                         schema_table_ref,
+                                         SCHEMA_NODE_BQ_SCHEMA,
+                                         expiration_hours)
+                finally:
+                    _remove_temp_file(schema_csv)
         finally:
             _remove_temp_file(obs_csv)
             _remove_temp_file(schema_csv)
@@ -323,6 +471,23 @@ def _sanitize_job_suffix(job_name: str) -> str:
     return f'{cleaned}_{uuid.uuid4().hex[:8]}'
 
 
+def _get_existing_bq_table(bq_client: bigquery.Client,
+                           table_ref: Optional[str]) -> Optional[Any]:
+    """Returns the BigQuery Table object if table_ref exists, else None."""
+    if not table_ref:
+        return None
+    try:
+        return bq_client.get_table(table_ref)
+    except Exception:
+        return None
+
+
+def _get_table_num_rows(table_obj: Any) -> int:
+    """Extracts an integer row count from a BigQuery Table object if available."""
+    num_rows = getattr(table_obj, 'num_rows', 0)
+    return int(num_rows) if isinstance(num_rows, (int, float)) else 0
+
+
 def run_bigquery_differ(
     current_data: str,
     previous_data: str,
@@ -332,6 +497,7 @@ def run_bigquery_differ(
     dataset_id: str = 'datcom_import_differ',
     gcs_temp_dir: Optional[str] = None,
     expiration_hours: int = 12,
+    shared_table_ids: Optional[Dict[str, str]] = None,
 ) -> Dict:
     """Executes dataset diff using streaming MCF-to-CSV and BigQuery FULL OUTER JOIN."""
     if not project_id:
@@ -348,16 +514,68 @@ def run_bigquery_differ(
     curr_schema_table = f'{dataset_ref}.curr_schema_{suffix}'
     prev_schema_table = f'{dataset_ref}.prev_schema_{suffix}'
 
+    raw_obs_table = shared_table_ids.get(
+        'raw_obs') if shared_table_ids else None
+    raw_schema_table = (shared_table_ids.get('raw_schema')
+                        if shared_table_ids else None)
+    agg_obs_table = shared_table_ids.get(
+        'agg_obs') if shared_table_ids else None
+
+    tables_to_delete: List[str] = []
+
     try:
-        logging.info('Step 1/3: Loading current MCF data into BigQuery...')
-        curr_obs_count, curr_schema_count = load_mcf_to_bq_tables(
-            bq_client,
-            current_data,
-            curr_obs_table,
-            curr_schema_table,
-            temp_dir=gcs_temp_dir,
-            suffix=f'curr_{suffix}',
-            expiration_hours=expiration_hours)
+        raw_obs_tbl_obj = _get_existing_bq_table(bq_client, raw_obs_table)
+        if raw_obs_table and raw_obs_tbl_obj is not None:
+            logging.info(
+                'Step 1/3: Reusing existing BigQuery table %s from aggregation job...',
+                raw_obs_table)
+            active_curr_obs_table = raw_obs_table
+            curr_obs_count = _get_table_num_rows(raw_obs_tbl_obj)
+
+            agg_obs_tbl_obj = _get_existing_bq_table(bq_client, agg_obs_table)
+            has_agg_obs = bool(agg_obs_table and agg_obs_tbl_obj is not None)
+            if has_agg_obs:
+                curr_obs_count += _get_table_num_rows(agg_obs_tbl_obj)
+
+            raw_schema_tbl_obj = _get_existing_bq_table(bq_client,
+                                                        raw_schema_table)
+            if raw_schema_table and raw_schema_tbl_obj is not None:
+                active_curr_schema_table = raw_schema_table
+                curr_schema_count = _get_table_num_rows(raw_schema_tbl_obj)
+            else:
+                active_curr_schema_table = raw_schema_table or curr_schema_table
+                curr_schema_count = 0
+
+            tables_to_delete = [
+                t for t in (raw_obs_table, raw_schema_table, agg_obs_table,
+                            prev_obs_table, prev_schema_table) if t
+            ]
+        else:
+            has_agg_obs = False
+            active_curr_obs_table = curr_obs_table
+            active_curr_schema_table = curr_schema_table
+            if shared_table_ids:
+                tables_to_delete = [
+                    t for t in (curr_obs_table, prev_obs_table,
+                                curr_schema_table, prev_schema_table,
+                                raw_obs_table, raw_schema_table, agg_obs_table)
+                    if t
+                ]
+            else:
+                tables_to_delete = [
+                    curr_obs_table, prev_obs_table, curr_schema_table,
+                    prev_schema_table
+                ]
+
+            logging.info('Step 1/3: Loading current MCF data into BigQuery...')
+            curr_obs_count, curr_schema_count = load_mcf_to_bq_tables(
+                bq_client,
+                current_data,
+                curr_obs_table,
+                curr_schema_table,
+                temp_dir=gcs_temp_dir,
+                suffix=f'curr_{suffix}',
+                expiration_hours=expiration_hours)
 
         logging.info('Step 2/3: Loading previous MCF data into BigQuery...')
         prev_obs_count, prev_schema_count = load_mcf_to_bq_tables(
@@ -370,6 +588,15 @@ def run_bigquery_differ(
             expiration_hours=expiration_hours)
 
         logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
+        if has_agg_obs and agg_obs_table:
+            curr_obs_source_sql = f"""(
+              SELECT key_combined, variableMeasured, value FROM `{active_curr_obs_table}`
+              UNION ALL
+              SELECT key_combined, variableMeasured, value FROM `{agg_obs_table}`
+            )"""
+        else:
+            curr_obs_source_sql = f'`{active_curr_obs_table}`'
+
         obs_diff_sql = f"""
         WITH diff AS (
           SELECT
@@ -380,7 +607,7 @@ def run_bigquery_differ(
               WHEN c.value != p.value THEN 'MODIFIED'
               ELSE 'UNMODIFIED'
             END AS diff_type
-          FROM `{curr_obs_table}` c
+          FROM {curr_obs_source_sql} c
           FULL OUTER JOIN `{prev_obs_table}` p
             ON c.key_combined = p.key_combined
           WHERE c.value IS DISTINCT FROM p.value
@@ -405,7 +632,7 @@ def run_bigquery_differ(
               WHEN c.value_combined != p.value_combined THEN 'MODIFIED'
               ELSE 'UNMODIFIED'
             END AS diff_type
-          FROM `{curr_schema_table}` c
+          FROM `{active_curr_schema_table}` c
           FULL OUTER JOIN `{prev_schema_table}` p
             ON c.dcid = p.dcid
           WHERE c.value_combined IS DISTINCT FROM p.value_combined
@@ -425,8 +652,13 @@ def run_bigquery_differ(
             added_schema = deleted_schema = modified_schema = 0
 
     finally:
-        for table_id in (curr_obs_table, prev_obs_table, curr_schema_table,
-                         prev_schema_table):
+        if not tables_to_delete:
+            tables_to_delete = [
+                t for t in (curr_obs_table, prev_obs_table, curr_schema_table,
+                            prev_schema_table, raw_obs_table, raw_schema_table,
+                            agg_obs_table) if t
+            ]
+        for table_id in dict.fromkeys(tables_to_delete):
             bq_client.delete_table(table_id, not_found_ok=True)
 
     added_obs = int(obs_diff_df['ADDED'].sum()) if not obs_diff_df.empty else 0

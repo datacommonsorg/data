@@ -56,13 +56,11 @@ flags.DEFINE_string('version', '',
 flags.DEFINE_string('gcs_bucket', '',
                     'GCS bucket name (defaults to env GCS_BUCKET_ID).')
 if 'bq_dataset' not in FLAGS:
-    flags.DEFINE_string(
-        'bq_dataset', 'datcom_import_differ',
-        'BigQuery dataset ID for temporary differ tables.')
+    flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
+                        'BigQuery dataset ID for temporary differ tables.')
 if 'bq_table_ttl_hours' not in FLAGS:
-    flags.DEFINE_integer(
-        'bq_table_ttl_hours', 12,
-        'TTL in hours for temporary BigQuery differ tables.')
+    flags.DEFINE_integer('bq_table_ttl_hours', 12,
+                         'TTL in hours for temporary BigQuery differ tables.')
 
 
 def _read_gcs_text(client: storage.Client, bucket_name: str,
@@ -132,8 +130,8 @@ def _resolve_validation_config(client: storage.Client, bucket_name: str,
             file_util.file_copy(gcs_override_cfg, local_override_cfg)
             logging.info('Downloaded override validation config from GCS: %s',
                          gcs_override_cfg)
-            return merge_and_save_config(default_val_config,
-                                         local_override_cfg, tmpdir)
+            return merge_and_save_config(default_val_config, local_override_cfg,
+                                         tmpdir)
 
         local_repo_cfg = os.path.join(_ROOT_DIR, relative_import_dir,
                                       custom_cfg_rel)
@@ -169,8 +167,7 @@ def run_validation_job(absolute_import_name: str,
     user_config = json.loads(import_config_str) if import_config_str else {}
     if not bucket_name:
         bucket_name = (user_config.get('storage_prod_bucket_name') or
-                       os.environ.get('GCS_BUCKET_ID') or
-                       'datcom-prod-imports')
+                       os.environ.get('GCS_BUCKET_ID') or 'datcom-prod-imports')
     project_id = (user_config.get('gcp_project_id') or
                   os.environ.get('PROJECT_ID') or
                   os.environ.get('GOOGLE_CLOUD_PROJECT', ''))
@@ -206,9 +203,8 @@ def run_validation_job(absolute_import_name: str,
     logging.info('Running validator for %s version=%s (latest=%s)', output_dir,
                  version, latest_version or 'None')
 
-    summary_raw = _read_gcs_text(
-        gcs_client, bucket_name,
-        f'{output_dir}/{version}/import_summary.json')
+    summary_raw = _read_gcs_text(gcs_client, bucket_name,
+                                 f'{output_dir}/{version}/import_summary.json')
     import_summary: Dict = json.loads(summary_raw) if summary_raw else {
         'import_name': import_name,
         'latest_version': f'gs://{bucket_name}/{output_dir}/{version}',
@@ -241,6 +237,9 @@ def run_validation_job(absolute_import_name: str,
 
             diff_found = True
             differ_output_dir = ''
+            shared_table_ids = bigquery_differ.get_import_bq_table_ids(
+                f'{project_id}.{bq_dataset}', import_name, version,
+                input_prefix)
 
             # 1. Run BigQuery Differ if previous version exists
             if previous_mcf_pattern and file_util.file_get_matching(
@@ -259,6 +258,7 @@ def run_validation_job(absolute_import_name: str,
                     dataset_id=bq_dataset,
                     gcs_temp_dir=gcs_temp_dir,
                     expiration_hours=bq_table_ttl_hours,
+                    shared_table_ids=shared_table_ids,
                 )
                 diff_found = (differ_summary.get('obs_diff_count', 1) != 0 or
                               differ_summary.get('schema_diff_count', 1) != 0)
@@ -267,6 +267,10 @@ def run_validation_job(absolute_import_name: str,
                 logging.info(
                     'No previous MCF files found at %s; skipping differ.',
                     previous_mcf_pattern)
+                bigquery_differ.cleanup_shared_bq_tables(
+                    project_id=project_id,
+                    shared_table_ids=shared_table_ids,
+                )
 
             if not differ_status:
                 differ_status = diff_found

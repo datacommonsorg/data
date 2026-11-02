@@ -92,6 +92,82 @@ class ValidatorTest(unittest.TestCase):
         self.assertIn(summary_blob_key, uploaded_blobs)
         updated_summary = json.loads(uploaded_blobs[summary_blob_key])
         self.assertEqual(updated_summary['status'], 'STAGING')
+        mock_bq_differ.assert_called_once()
+        self.assertEqual(
+            mock_bq_differ.call_args[1]['shared_table_ids'],
+            {
+                'raw_obs':
+                    'test-proj.test_dataset.raw_obs_treasury_2026_09_17_input0',
+                'raw_schema':
+                    'test-proj.test_dataset.raw_schema_treasury_2026_09_17_input0',
+                'agg_obs':
+                    'test-proj.test_dataset.agg_obs_treasury_2026_09_17_input0',
+            },
+        )
+
+    @mock.patch('main.ValidationRunner')
+    @mock.patch('main.bigquery_differ.cleanup_shared_bq_tables')
+    @mock.patch('main.bigquery_differ.run_bigquery_differ')
+    @mock.patch('main.file_util.file_copy')
+    @mock.patch('main.file_util.file_get_matching')
+    @mock.patch('main.storage.Client')
+    def test_run_validation_job_cleans_up_shared_tables_when_no_previous_version(
+            self, mock_storage_cls, mock_matching, mock_copy, mock_bq_differ,
+            mock_cleanup_shared, mock_runner_cls):
+        mock_gcs = mock_storage_cls.return_value
+        mock_bucket = mock.MagicMock()
+        mock_gcs.bucket.return_value = mock_bucket
+
+        blob_store = {
+            'scripts/us_fed/treasury/staging_version.txt':
+                '2026_09_17',
+            'scripts/us_fed/treasury/2026_09_17/import_summary.json':
+                json.dumps({
+                    'import_name': 'treasury',
+                    'status': 'PENDING'
+                }),
+        }
+        uploaded_blobs = {}
+
+        def _get_blob(path):
+            b = mock.MagicMock()
+            b.name = path
+            b.exists.return_value = path in blob_store
+            b.download_as_text.return_value = blob_store.get(path, '')
+            b.upload_from_string.side_effect = lambda c: uploaded_blobs.__setitem__(
+                path, c)
+            return b
+
+        mock_bucket.blob.side_effect = _get_blob
+        mock_iterator = mock.MagicMock()
+        mock_iterator.prefixes = []
+        mock_gcs.list_blobs.return_value = mock_iterator
+
+        mock_matching.return_value = []
+        mock_runner = mock_runner_cls.return_value
+        mock_runner.run_validations.return_value = (True, [])
+
+        exit_code = validator_main.run_validation_job(
+            absolute_import_name='scripts/us_fed:treasury',
+            import_config_str='{"gcp_project_id": "test-proj"}',
+            version_override='',
+            bucket_name='test-bucket',
+            bq_dataset='test_dataset',
+        )
+
+        self.assertEqual(exit_code, 0)
+        mock_bq_differ.assert_not_called()
+        mock_cleanup_shared.assert_called_once_with(
+            project_id='test-proj',
+            shared_table_ids={
+                'raw_obs':
+                    'test-proj.test_dataset.raw_obs_treasury_2026_09_17_input0',
+                'raw_schema':
+                    'test-proj.test_dataset.raw_schema_treasury_2026_09_17_input0',
+                'agg_obs':
+                    'test-proj.test_dataset.agg_obs_treasury_2026_09_17_input0',
+            },
+        )
 
     @mock.patch('main.merge_and_save_config')
     @mock.patch('main._read_gcs_text')
