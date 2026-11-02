@@ -12,4 +12,3 @@ output_columns,"observationAbout,observationDate,variableMeasured,value,unit,sca
 header_rows,3
 filter_data_min_value,0
 filter_data_max_value,100
-output_only_new_statvars,True

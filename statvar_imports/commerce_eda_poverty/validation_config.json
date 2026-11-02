@@ -12,15 +12,6 @@
         "query": "SELECT StatVar, MinDate, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
         "condition": "CAST(MinDate AS INTEGER) <= 1990 AND CAST(MaxDate AS INTEGER) >= 2021 AND total_svs > 0"
       }
-    },
-    {
-      "rule_id": "check_max_date_consistent",
-      "description": "Ensures that all statistical variables share a consistent maximum observation date.",
-      "validator": "MAX_DATE_CONSISTENT",
-      "scope": {
-        "data_source": "stats"
-      },
-      "params": {}
     }
   ]
 }

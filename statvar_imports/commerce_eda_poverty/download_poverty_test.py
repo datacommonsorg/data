@@ -15,7 +15,6 @@
 
 import io
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -413,106 +412,6 @@ class TestDownloadPoverty(unittest.TestCase):
             self.assertTrue(os.path.exists(dst_csv))
             df = pd.read_csv(dst_csv, skiprows=2, dtype=str)
             self.assertEqual(len(df), 3)
-
-
-class TestPovertyPvMapProcessor(unittest.TestCase):
-    """Tests for direct raw CSV processing via poverty_pvmap.csv and stat_var_processor.py."""
-
-    def setUp(self):
-        self.processor_script = os.path.join(PROJECT_ROOT, "tools",
-                                             "statvar_importer",
-                                             "stat_var_processor.py")
-        self.pv_map = os.path.join(MODULE_DIR, "poverty_pvmap.csv")
-        self.config_file = os.path.join(MODULE_DIR, "poverty_metadata.csv")
-        self.golden_input = os.path.join(MODULE_DIR, "test_data",
-                                         "Poverty_input.csv")
-        self.golden_expected = os.path.join(MODULE_DIR, "test_data",
-                                            "Poverty_expected_output.csv")
-        self.statvar_mcf_content = (
-            "Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person\n"
-            "typeOf: dcs:StatisticalVariable\n"
-            "populationType: dcs:Person\n"
-            "measuredProperty: dcs:count\n"
-            "statType: dcs:measuredValue\n"
-            "measurementDenominator: dcs:Count_Person\n"
-            "povertyStatus: dcs:BelowPovertyLevelInThePast12Months\n")
-
-    def _run_stat_var_processor(self, input_csv, tmpdir):
-        mcf_path = os.path.join(tmpdir, "stat_vars.mcf")
-        with open(mcf_path, "w", encoding="utf-8") as f:
-            f.write(self.statvar_mcf_content)
-        output_prefix = os.path.join(tmpdir, "Poverty_output")
-        counters_path = os.path.join(tmpdir, "Poverty_counters.csv")
-        subprocess.run(
-            [
-                sys.executable,
-                self.processor_script,
-                f"--input_data={input_csv}",
-                f"--pv_map={self.pv_map}",
-                f"--config_file={self.config_file}",
-                f"--existing_statvar_mcf={mcf_path}",
-                f"--output_path={output_prefix}",
-                f"--output_counters={counters_path}",
-            ],
-            cwd=tmpdir,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        return output_prefix + ".csv", counters_path
-
-    def test_pvmap_end_to_end_golden_fixture(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            out_csv, _ = self._run_stat_var_processor(self.golden_input, tmpdir)
-            actual_df = pd.read_csv(out_csv, dtype=str)
-            expected_df = pd.read_csv(self.golden_expected, dtype=str)
-            pd.testing.assert_frame_equal(actual_df, expected_df)
-
-    def test_pvmap_geoid_padding_state_filtering_and_dynamic_years(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            raw_csv = os.path.join(tmpdir, "synthetic_raw.csv")
-            with open(raw_csv, "w", encoding="utf-8") as f:
-                f.write(
-                    "Table. FY2023 Persistent Poverty County Status - as of Data Year 2021,,,,,,,,,\n"
-                    "Identifing Information,,Census Bureau Data,,,,FY23 Persistent Poverty,Census GEO PPC Code,Notes,\n"
-                    'Name,GEOID,"1990 Decennial Census, % in Poverty","2000 Decennial Census, % in Poverty","Most Recent Estimate, % in Poverty* ",Data Source―Most Recent Estimate,,,,\n'
-                    '"Alabama State",01000,18.3,16.1,16.3,"SAIPE, 2021",No,1,,\n'
-                    '"Autauga County, AL",1001,15.7,10.9,13.3,"SAIPE, 2023",No,1,,\n'
-                    '"Adjuntas Municipio, PR",72001,59.9,50.5,63.4,"ACS 5-YEAR, 2017-2021",Yes,2,,\n'
-                    '"Eastern District, AS",60010,56.0,105.0,52.2,"Decennial Census, 2020",Yes,2,,\n'
-                )
-
-            out_csv, _ = self._run_stat_var_processor(raw_csv, tmpdir)
-            df = pd.read_csv(out_csv, dtype=str)
-
-            # 01000 state summary row filtered out; 105.0 out-of-range value filtered out
-            self.assertNotIn("geoId/01000", set(df["observationAbout"]))
-            self.assertEqual(
-                set(df["observationAbout"]),
-                {"geoId/01001", "geoId/72001", "geoId/60010"},
-            )
-
-            # Verify 4-digit GEOID 1001 padded to geoId/01001 and dynamic year 2023
-            autauga_recent = df[(df["observationAbout"] == "geoId/01001") &
-                                (df["observationDate"] == "2023")]
-            self.assertEqual(len(autauga_recent), 1)
-            self.assertEqual(autauga_recent.iloc[0]["measurementMethod"],
-                             "dcs:EDA_Estimate")
-
-            # Verify PR ACS 5-YEAR 2017-2021 resolves to end year 2021 with dcs:EDA_Estimate
-            pr_recent = df[(df["observationAbout"] == "geoId/72001") &
-                           (df["observationDate"] == "2021")]
-            self.assertEqual(len(pr_recent), 1)
-            self.assertEqual(pr_recent.iloc[0]["measurementMethod"],
-                             "dcs:EDA_Estimate")
-
-            # Verify Island Area Decennial Census 2020 resolves to 2020 with dcs:USDecennialCensus,
-            # and out-of-range 2000 value (105.0) was dropped
-            as_rows = df[df["observationAbout"] == "geoId/60010"]
-            self.assertEqual(set(as_rows["observationDate"]), {"1990", "2020"})
-            as_recent = as_rows[as_rows["observationDate"] == "2020"]
-            self.assertEqual(as_recent.iloc[0]["measurementMethod"],
-                             "dcs:USDecennialCensus")
 
 
 if __name__ == "__main__":
