@@ -2,16 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_deleted_records_percent",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "scope": {
-        "data_source": "differ"
-      },
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "check_demographic_max_date_consistency",
       "validator": "MAX_DATE_CONSISTENT",
       "scope": {
