@@ -76,7 +76,7 @@ def aggregate_with_loop(agg_dir, place_grid_ratio_dict, spi_df, period):
         merged = relevant_spis.merge(place_df)
         merged['spi'] = merged['spi'] * merged['ratio']
 
-        weighted = merged.groupby('time').agg('sum')
+        weighted = merged.groupby('time')[['spi', 'ratio']].agg('sum')
 
         filtered = weighted.loc[weighted['ratio'] > 0.999].reset_index()
 
@@ -105,8 +105,7 @@ def _read_spi_data_csv(csv_path):
 
     df = pd.read_csv(csv_path, usecols=['time', 'place', 'spi'])
     df['grid_key'] = df['place'].map(grid_to_coord)
-    df.drop('place', axis=1)
-    df.set_index('grid_key')
+    df = df.drop('place', axis=1)
     return df
 
 
