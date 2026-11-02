@@ -280,7 +280,7 @@ def load_baseline_csv(baseline_path: str) -> pd.DataFrame:
     if not matching:
         raise FileNotFoundError(
             f'Baseline CSV not found at path: {baseline_path}')
-    with file_util.FileIO(matching[0], 'r') as csv_file:
+    with file_util.FileIO(matching[0], 'r', encoding='utf-8') as csv_file:
         df = pd.read_csv(csv_file, dtype=str, keep_default_na=False)
     missing = [col for col in COLUMNS if col not in df.columns]
     if missing:

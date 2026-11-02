@@ -233,7 +233,11 @@ class DownloadTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             out_path = os.path.join(tmp_dir, 'nested', 'daily_wages_input.csv')
             download.write_csv_atomically(df, out_path)
-            loaded = download.load_baseline_csv(out_path)
+            with mock.patch.object(download.file_util,
+                                   'FileIO',
+                                   wraps=download.file_util.FileIO) as spy_io:
+                loaded = download.load_baseline_csv(out_path)
+                spy_io.assert_called_once_with(out_path, 'r', encoding='utf-8')
             pd.testing.assert_frame_equal(loaded, df)
 
 
