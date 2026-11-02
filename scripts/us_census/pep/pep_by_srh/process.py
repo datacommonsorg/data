@@ -54,6 +54,7 @@ output_files - output files (mcf, tmcf and csv are written here)
 """
 
 import os
+import sys
 import pandas as pd
 import requests
 import shutil
@@ -69,17 +70,27 @@ from retry import retry
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from constants import DOWNLOAD_DIR, PROCESS_AS_IS_DIR, PROCESS_AGG_DIR, RACE
-from constants import OUTPUT_DIR, STAT_VAR_COL_MAPPING, WORKING_DIRECTORIES
-from mcf_generator import generate_mcf
-from tmcf_generator import generate_tmcf
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.pep_by_srh.constants import (
+    DOWNLOAD_DIR,
+    OUTPUT_DIR,
+    PROCESS_AGG_DIR,
+    PROCESS_AS_IS_DIR,
+    RACE,
+    STAT_VAR_COL_MAPPING,
+    WORKING_DIRECTORIES,
+)
+from us_census.pep.pep_by_srh.mcf_generator import generate_mcf
+from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
 
 _FLAGS = flags.FLAGS
 
 if 'mode' not in _FLAGS:
     flags.DEFINE_string('mode', '', 'Options: download or process')
-
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 output_path = '/output_files/'
 _FILES_TO_DOWNLOAD = []
@@ -1773,7 +1784,7 @@ def download_files():
       bool: True if all files were downloaded successfully, False otherwise.
   """
 
-    global _FILES_TO_DOWNLOAD
+    global _FILES_TO_DOWNLOAD, _SESSION
     session = _get_session()
     try:
         for file_to_download in _FILES_TO_DOWNLOAD:
@@ -1801,6 +1812,7 @@ def download_files():
         return True
     finally:
         session.close()
+        _SESSION = None
 
 
 def _process_files(download_dir):

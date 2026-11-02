@@ -19,9 +19,14 @@ is processed as is.
 
 import pandas as pd
 import os
-from preprocess import load_url_or_path
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_county_2000_2009(url: str) -> pd.DataFrame:

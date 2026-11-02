@@ -19,9 +19,14 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
-from preprocess import load_url_or_path
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_state_1980_1990(url: str) -> pd.DataFrame:

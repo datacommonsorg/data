@@ -23,23 +23,29 @@ from unittest import mock
 import shutil
 import pandas as pd
 
-from national_2020_2029 import national2029
-from scripts.us_census.pep.population_estimates_by_asr.national_2010_2019 import national2010
-from national_2000_2010 import national2000
-from state_1990_2000 import state1990
-from state_2010_2020 import state2010
-from county_1970_1979 import county1970
-from county_1980_1989 import county1980
-import process as process_module
-from process import USCensusPEPByASR, _BASELINE_YEAR, add_future_year_urls
-from process import (
+# module_dir_ is the path to where this test is running from.
+module_dir_ = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(module_dir_, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.national_2020_2029 import national2029
+from us_census.pep.population_estimates_by_asr.national_2010_2019 import national2010
+from us_census.pep.population_estimates_by_asr.national_2000_2010 import national2000
+from us_census.pep.population_estimates_by_asr.state_1990_2000 import state1990
+from us_census.pep.population_estimates_by_asr.state_2010_2020 import state2010
+from us_census.pep.population_estimates_by_asr.county_1970_1979 import county1970
+from us_census.pep.population_estimates_by_asr.county_1980_1989 import county1980
+import us_census.pep.population_estimates_by_asr.process as process_module
+from us_census.pep.population_estimates_by_asr.process import (
+    USCensusPEPByASR,
+    _BASELINE_YEAR,
     _create_retry_session,
     _fetch_url_bytes,
     _is_html_response,
+    add_future_year_urls,
 )
 
-# module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
 test_data_folder = os.path.join(module_dir_, "test_data")
 op_data_folder = os.path.join(module_dir_, "test_output_data")
 input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),

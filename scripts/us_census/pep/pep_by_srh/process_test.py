@@ -18,14 +18,20 @@ process, generate_mcf and generate_tmcf scripts.
 
 import os
 import shutil
+import sys
 import tempfile
 import unittest
 from unittest import mock
-from mcf_generator import generate_mcf
-from tmcf_generator import generate_tmcf
 
-import process as process_module
-from process import (
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.pep_by_srh.mcf_generator import generate_mcf
+from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
+import us_census.pep.pep_by_srh.process as process_module
+from us_census.pep.pep_by_srh.process import (
     _BASELINE_YEAR,
     _create_retry_session,
     _head_with_html_retry,
@@ -33,9 +39,8 @@ from process import (
     download_with_retry,
     process,
 )
-from constants import OUTPUT_DIR
+from us_census.pep.pep_by_srh.constants import OUTPUT_DIR
 
-_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _ACTUAL_RESULTS_DIR = os.path.join(_CODEDIR, "testdata", "actual_results")
 
 

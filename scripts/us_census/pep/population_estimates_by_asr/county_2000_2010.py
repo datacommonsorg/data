@@ -16,10 +16,17 @@ This Python Script is for County Level Data 2000-2010.
 '''
 
 import os
+import sys
 import pandas as pd
 import numpy as np
-from common_functions import replace_agegrp
-from process import load_url_or_path
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import replace_agegrp
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def county2000(output_folder: str):

@@ -35,13 +35,20 @@ from requests.adapters import HTTPAdapter
 from retry import retry
 from urllib3.util.retry import Retry
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
 if __name__ == '__main__':
-    sys.modules.setdefault('preprocess', sys.modules['__main__'])
+    import us_census.pep.us_pep_sexrace as _sexrace_pkg
+    sys.modules.setdefault('us_census.pep.us_pep_sexrace.preprocess',
+                           sys.modules['__main__'])
+    setattr(_sexrace_pkg, 'preprocess', sys.modules['__main__'])
 
 if 'mode' not in flags.FLAGS:
     flags.DEFINE_string('mode', '', 'Options: download or process')
 
-_MODULE_DIR = os.path.dirname(__file__)
 _LAST_FETCHED_URL = (None, None)
 _SESSION = None
 
@@ -146,29 +153,33 @@ def load_url_or_path(url_or_path: str):
     return url_or_path
 
 
-from national.national_1900_1970 import process_national_1900_1970
-from national.national_1980_1990 import process_national_1980_1990
-from national.national_1990_2000 import process_national_1990_2000
-from national.national_2000_2010 import process_national_2000_2010
-from national.national_2010_2020 import process_national_2010_2020
-from national.national_2020_2022 import process_national_2020_2022
-from national.national_2020_2029 import process_national_2020_2029
-from state.state_1970_1979 import process_state_1970_1979
-from state.state_1980_1990 import process_state_1980_1990
-from state.state_1990_2000 import process_state_1990_2000
-from state.state_2000_2010 import process_state_2000_2010
-from state.state_2010_2020 import process_state_2010_2020
-from state.state_2020_2022 import process_state_2020_2022
-from state.state_2020_2029 import process_state_2020_2029
-from county.county_1970_1979 import process_county_1970_1979
-from county.county_1980_1989 import process_county_1980_1989
-from county.county_1990_2000 import process_county_1990_2000
-from county.county_2000_2009 import process_county_2000_2009
-from county.county_2010_2020 import process_county_2010_2020
-from county.county_2020_2022 import process_county_2020_2022
-from county.county_2020_2029 import process_county_2020_2029
-from postprocess import create_single_csv, generate_mcf, generate_tmcf
-from common import (
+from us_census.pep.us_pep_sexrace.national.national_1900_1970 import process_national_1900_1970
+from us_census.pep.us_pep_sexrace.national.national_1980_1990 import process_national_1980_1990
+from us_census.pep.us_pep_sexrace.national.national_1990_2000 import process_national_1990_2000
+from us_census.pep.us_pep_sexrace.national.national_2000_2010 import process_national_2000_2010
+from us_census.pep.us_pep_sexrace.national.national_2010_2020 import process_national_2010_2020
+from us_census.pep.us_pep_sexrace.national.national_2020_2022 import process_national_2020_2022
+from us_census.pep.us_pep_sexrace.national.national_2020_2029 import process_national_2020_2029
+from us_census.pep.us_pep_sexrace.state.state_1970_1979 import process_state_1970_1979
+from us_census.pep.us_pep_sexrace.state.state_1980_1990 import process_state_1980_1990
+from us_census.pep.us_pep_sexrace.state.state_1990_2000 import process_state_1990_2000
+from us_census.pep.us_pep_sexrace.state.state_2000_2010 import process_state_2000_2010
+from us_census.pep.us_pep_sexrace.state.state_2010_2020 import process_state_2010_2020
+from us_census.pep.us_pep_sexrace.state.state_2020_2022 import process_state_2020_2022
+from us_census.pep.us_pep_sexrace.state.state_2020_2029 import process_state_2020_2029
+from us_census.pep.us_pep_sexrace.county.county_1970_1979 import process_county_1970_1979
+from us_census.pep.us_pep_sexrace.county.county_1980_1989 import process_county_1980_1989
+from us_census.pep.us_pep_sexrace.county.county_1990_2000 import process_county_1990_2000
+from us_census.pep.us_pep_sexrace.county.county_2000_2009 import process_county_2000_2009
+from us_census.pep.us_pep_sexrace.county.county_2010_2020 import process_county_2010_2020
+from us_census.pep.us_pep_sexrace.county.county_2020_2022 import process_county_2020_2022
+from us_census.pep.us_pep_sexrace.county.county_2020_2029 import process_county_2020_2029
+from us_census.pep.us_pep_sexrace.postprocess import (
+    create_single_csv,
+    generate_mcf,
+    generate_tmcf,
+)
+from us_census.pep.us_pep_sexrace.common import (
     Outputfiles,
     _OUTPUTFINAL,
     _OUTPUTINTERMEDIATE,

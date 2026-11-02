@@ -32,10 +32,16 @@ from requests.adapters import HTTPAdapter
 from retry import retry
 from urllib3.util.retry import Retry
 
-if __name__ == '__main__':
-    sys.modules.setdefault('process', sys.modules['__main__'])
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+if __name__ == '__main__':
+    import us_census.pep.population_estimates_by_asr as _asr_pkg
+    sys.modules.setdefault('us_census.pep.population_estimates_by_asr.process',
+                           sys.modules['__main__'])
+    setattr(_asr_pkg, 'process', sys.modules['__main__'])
 
 
 def ensure_raw_data_dir():
@@ -416,23 +422,23 @@ def download_files():
     output_folder = "input_data"
     logging.info("Download starts")
     try:
-        from national_1900_1959 import national1900
-        from national_1960_1979 import national1960
-        from national_1980_1989 import national1980
-        from national_2000_2010 import national2000
-        from national_2010_2019 import national2010
-        from national_2020_2029 import national2029
-        from state_1970_1979 import state1970
-        from state_1990_2000 import state1990
-        from state_2000_2010 import state2000
-        from state_2010_2020 import state2010
-        from state_2020_2029 import state2029
-        from county_1970_1979 import county1970
-        from county_1980_1989 import county1980
-        from county_1990_2000 import county1990
-        from county_2000_2010 import county2000
-        from county_2010_2020 import county2010
-        from county_2020_2029 import county2029
+        from us_census.pep.population_estimates_by_asr.national_1900_1959 import national1900
+        from us_census.pep.population_estimates_by_asr.national_1960_1979 import national1960
+        from us_census.pep.population_estimates_by_asr.national_1980_1989 import national1980
+        from us_census.pep.population_estimates_by_asr.national_2000_2010 import national2000
+        from us_census.pep.population_estimates_by_asr.national_2010_2019 import national2010
+        from us_census.pep.population_estimates_by_asr.national_2020_2029 import national2029
+        from us_census.pep.population_estimates_by_asr.state_1970_1979 import state1970
+        from us_census.pep.population_estimates_by_asr.state_1990_2000 import state1990
+        from us_census.pep.population_estimates_by_asr.state_2000_2010 import state2000
+        from us_census.pep.population_estimates_by_asr.state_2010_2020 import state2010
+        from us_census.pep.population_estimates_by_asr.state_2020_2029 import state2029
+        from us_census.pep.population_estimates_by_asr.county_1970_1979 import county1970
+        from us_census.pep.population_estimates_by_asr.county_1980_1989 import county1980
+        from us_census.pep.population_estimates_by_asr.county_1990_2000 import county1990
+        from us_census.pep.population_estimates_by_asr.county_2000_2010 import county2000
+        from us_census.pep.population_estimates_by_asr.county_2010_2020 import county2010
+        from us_census.pep.population_estimates_by_asr.county_2020_2029 import county2029
 
         add_future_year_urls()
         national1900(output_folder)

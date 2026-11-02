@@ -15,10 +15,17 @@
 This Python Script is for State Level Data 1990-2000.
 '''
 import os
+import sys
 import pandas as pd
 from urllib.parse import urlparse
-from common_functions import input_url
-from process import load_url_or_path
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def state1990(url_file: str, output_folder: str):

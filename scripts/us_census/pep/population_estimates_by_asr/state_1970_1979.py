@@ -15,10 +15,20 @@
 This Python Script is for State Level Data 1970-1979.
 '''
 import os
+import sys
 import pandas as pd
-from common_functions import (input_url, gender_based_grouping,
-                              race_based_grouping)
-from process import load_url_or_path
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import (
+    gender_based_grouping,
+    input_url,
+    race_based_grouping,
+)
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def state1970(url_file: str, output_folder: str):

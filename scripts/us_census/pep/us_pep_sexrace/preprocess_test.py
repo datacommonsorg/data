@@ -22,12 +22,15 @@ from unittest import mock
 import sys
 
 # module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-sys.path.insert(0, module_dir_)
-import common
-import preprocess
-from preprocess import process
-from preprocess import add_future_year_urls
+module_dir_ = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(module_dir_, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+import us_census.pep.us_pep_sexrace.common as common
+import us_census.pep.us_pep_sexrace.preprocess as preprocess
+from us_census.pep.us_pep_sexrace.preprocess import process
+from us_census.pep.us_pep_sexrace.preprocess import add_future_year_urls
 
 expected_data_folder = os.path.join(module_dir_,
                                     "test_data/expected_output_files")
@@ -49,8 +52,9 @@ class TestPreprocess(unittest.TestCase):
         for file in ip_files:
             config_files.append(ip_config_files + os.sep + file)
         mock_resp = mock.MagicMock(status_code=503)
-        with mock.patch("preprocess._head_with_html_retry",
-                        return_value=mock_resp):
+        with mock.patch.object(preprocess,
+                               "_head_with_html_retry",
+                               return_value=mock_resp):
             add_future_year_urls()
         process(config_files, test=True)
 
@@ -160,8 +164,9 @@ class TestPreprocess(unittest.TestCase):
         self.addCleanup(setattr, preprocess, '_LAST_FETCHED_URL', orig_cache)
         preprocess._LAST_FETCHED_URL = (None, None)
         url = "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/asrh/cc-est2025-alldata.csv"
-        with mock.patch("preprocess._fetch_url_bytes",
-                        return_value=b"col1,col2\n1,2\n") as mock_fetch:
+        with mock.patch.object(preprocess,
+                               "_fetch_url_bytes",
+                               return_value=b"col1,col2\n1,2\n") as mock_fetch:
             buf1 = preprocess.load_url_or_path(url)
             buf2 = preprocess.load_url_or_path(url)
             self.assertEqual(mock_fetch.call_count, 1)

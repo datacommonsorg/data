@@ -15,9 +15,16 @@
 This Python Script is for National Level Data 2010-2019.
 '''
 import os
+import sys
 import pandas as pd
-from common_functions import input_url
-from process import load_url_or_path
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def national2010(url_file: str, output_folder: str):
