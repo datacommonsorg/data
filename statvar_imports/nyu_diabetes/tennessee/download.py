@@ -44,9 +44,9 @@ Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 
 def create_retry_session(
-        retries: int = 3,
-        backoff_factor: float = 2.0,
-        status_forcelist: tuple = (429, 500, 502, 503, 504),
+    retries: int = 5,
+    backoff_factor: float = 2.0,
+    status_forcelist: tuple = (429, 500, 502, 503, 504, 520),
 ) -> requests.Session:
     session = requests.Session()
     retry_strategy = Retry(
@@ -55,6 +55,7 @@ def create_retry_session(
         status_forcelist=status_forcelist,
         allowed_methods=["HEAD", "GET", "OPTIONS"],
         raise_on_status=False,
+        respect_retry_after_header=True,
     )
     adapter = HTTPAdapter(max_retries=retry_strategy,
                           pool_connections=10,
@@ -107,6 +108,11 @@ def download_files(url_list, save_folder):
             )
             downloaded_count += 1
         except requests.exceptions.RequestException as e:
+            year = extract_year(filename)
+            if downloaded_count > 0 and year and year > 2022:
+                logging.warning(
+                    f"Skipping future unreleased year {year} after error: {e}")
+                continue
             logging.error(
                 f"Download failed: source={url}, destination={file_path}, error={e}"
             )

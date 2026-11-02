@@ -92,6 +92,50 @@ class DownloadTest(unittest.TestCase):
                     ['gs://test-bucket/input/Diabetes_County_2019.xlsx'],
                     temp_dir)
 
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_skips_404(self, mock_session_factory):
+        mock_session = mock.Mock()
+        mock_response = mock.Mock()
+        mock_response.status_code = 404
+        mock_session.get.return_value = mock_response
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with self.assertRaisesRegex(
+                    RuntimeError, 'No files were successfully downloaded'):
+                download.download_files(
+                    ['https://tn.example/2023/Diabetes_County_2023.xlsx'],
+                    temp_dir)
+
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_skips_unreleased_future_year_error(
+            self, mock_session_factory):
+        mock_session = mock.Mock()
+        mock_resp_success = mock.Mock()
+        mock_resp_success.status_code = 200
+        mock_resp_success.headers = {'content-length': '8'}
+        mock_resp_success.iter_content.return_value = [b'content!']
+        mock_resp_success.__enter__ = mock.Mock(return_value=mock_resp_success)
+        mock_resp_success.__exit__ = mock.Mock(return_value=False)
+
+        import requests
+        mock_session.get.side_effect = [
+            mock_resp_success,
+            requests.exceptions.ConnectionError('reset by peer'),
+        ]
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            urls = [
+                'https://tn.example/2022/Diabetes_County_2022.xlsx',
+                'https://tn.example/2023/Diabetes_County_2023.xlsx',
+            ]
+            download.download_files(urls, temp_dir)
+            self.assertTrue(
+                (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
+            self.assertFalse(
+                (Path(temp_dir) / 'Diabetes_County_2023.xlsx').exists())
+
 
 if __name__ == '__main__':
     unittest.main()
