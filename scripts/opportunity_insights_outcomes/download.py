@@ -57,7 +57,7 @@ DEFAULT_SOURCE_FILES = {
         'url':
             'https://opportunityinsights.org/wp-content/uploads/2018/10/cz_outcomes.csv',
         'pattern':
-            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/cz_outcomes\.csv',
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/cz_outcomes(?:[-_v]+\d+)?\.csv',
         'is_zip':
             False,
     },
@@ -65,7 +65,7 @@ DEFAULT_SOURCE_FILES = {
         'url':
             'https://opportunityinsights.org/wp-content/uploads/2018/10/county_outcomes.zip',
         'pattern':
-            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/county_outcomes\.zip',
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/county_outcomes(?:[-_v]+\d+)?\.zip',
         'is_zip':
             True,
     },
@@ -73,7 +73,7 @@ DEFAULT_SOURCE_FILES = {
         'url':
             'https://opportunityinsights.org/wp-content/uploads/2018/10/tract_outcomes.zip',
         'pattern':
-            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes\.zip',
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes(?:[-_v]+\d+)?\.zip',
         'is_zip':
             True,
     },
@@ -81,7 +81,7 @@ DEFAULT_SOURCE_FILES = {
         'url':
             'https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple.csv',
         'pattern':
-            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes_late_simple\.csv',
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/tract_outcomes_late_simple(?:[-_v]+\d+)?\.csv',
         'is_zip':
             False,
     },
@@ -89,7 +89,7 @@ DEFAULT_SOURCE_FILES = {
         'url':
             'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv',
         'pattern':
-            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_3_County_by_Cohort_Estimates\.csv|county_cohort\.zip)',
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_3_County_by_Cohort_Estimates(?:[-_v]+\d+)?\.csv|county_cohort(?:[-_v]+\d+)?\.zip)',
         'is_zip':
             False,
     },
@@ -97,11 +97,48 @@ DEFAULT_SOURCE_FILES = {
         'url':
             'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_4_cz_by_cohort_estimates.csv',
         'pattern':
-            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_4_cz_by_cohort_estimates\.csv|cz_cohort\.zip)',
+            r'https://opportunityinsights\.org/wp-content/uploads/[^"\'>\s]+/(?:Table_4_cz_by_cohort_estimates(?:[-_v]+\d+)?\.csv|cz_cohort(?:[-_v]+\d+)?\.zip)',
         'is_zip':
             False,
     },
 }
+
+_UPLOAD_DATE_PATTERN = re.compile(r'/uploads/(\d{4})/(\d{1,2})/')
+_REVISION_SUFFIX_PATTERN = re.compile(r'(?:[-_v]+)(\d+)(?=\.[^./]+$)')
+
+
+def _extract_url_sort_key(url: str,
+                          canonical_url: str) -> tuple[int, int, int, bool]:
+    """Builds a sort key ranking newer WordPress uploads, revisions, and canonical names first."""
+    date_match = _UPLOAD_DATE_PATTERN.search(url)
+    year, month = (int(date_match.group(1)),
+                   int(date_match.group(2))) if date_match else (0, 0)
+    basename = os.path.basename(url)
+    rev_match = _REVISION_SUFFIX_PATTERN.search(basename)
+    revision = int(rev_match.group(1)) if rev_match else 0
+    is_canonical_name = basename.lower() == os.path.basename(
+        canonical_url).lower()
+    return (year, month, revision, is_canonical_name)
+
+
+def _select_latest_url(matches: list[str], canonical_url: str,
+                       filename: str) -> str:
+    """Deduplicates and selects the highest-ranked candidate URL for a dataset."""
+    unique_matches = list(dict.fromkeys(matches))
+    if len(unique_matches) == 1:
+        return unique_matches[0]
+    ranked = sorted(
+        unique_matches,
+        key=lambda candidate: _extract_url_sort_key(candidate, canonical_url),
+        reverse=True,
+    )
+    logging.info(
+        'Multiple candidate URLs found for %s (%s); selected %s',
+        filename,
+        unique_matches,
+        ranked[0],
+    )
+    return ranked[0]
 
 
 def discover_latest_urls(page_url: str) -> dict[str, str]:
@@ -122,9 +159,11 @@ def discover_latest_urls(page_url: str) -> dict[str, str]:
             for filename, spec in DEFAULT_SOURCE_FILES.items():
                 matches = re.findall(spec['pattern'], str(html))
                 if matches:
-                    discovered[filename] = matches[0]
+                    selected = _select_latest_url(matches, spec['url'],
+                                                  filename)
+                    discovered[filename] = selected
                     logging.info('Discovered URL for %s: %s', filename,
-                                 matches[0])
+                                 selected)
     except Exception as exc:  # pylint: disable=broad-except
         logging.warning(
             'Could not scrape %s (%s); using canonical fallback URLs.',

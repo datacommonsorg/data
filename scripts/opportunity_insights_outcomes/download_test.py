@@ -449,6 +449,39 @@ class DownloadAndPvmapTest(unittest.TestCase):
             'https://opportunityinsights.org/wp-content/uploads/2024/07/cz_cohort.zip',
         )
 
+    def test_discover_latest_urls_ranks_multiple_matches(self):
+        sample_html = (
+            # Older upload appears first; newer upload appears below.
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2018/10/cz_outcomes.csv">Old CZ</a>'
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2025/03/cz_outcomes.csv">New CZ</a>'
+            # Same month upload: revised suffix (-1) appears after base file.
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple.csv">v0</a>'
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple-1.csv">v1</a>'
+            # Same upload month: alternate zip appears first, canonical CSV below.
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/county_cohort.zip">Alt Zip</a>'
+            '<a href="https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv">Canonical CSV</a>'
+        )
+        fake_response = mock.MagicMock()
+        fake_response.__enter__.return_value = fake_response
+        fake_response.text = sample_html
+        with mock.patch(
+                'util.download_util_script._retry_method',
+                return_value=fake_response,
+        ):
+            urls = download.discover_latest_urls('https://example.com/data/')
+        self.assertEqual(
+            urls['commuting_zone_outcomes.csv'],
+            'https://opportunityinsights.org/wp-content/uploads/2025/03/cz_outcomes.csv',
+        )
+        self.assertEqual(
+            urls['tract_outcomes_late_simple.csv'],
+            'https://opportunityinsights.org/wp-content/uploads/2024/08/tract_outcomes_late_simple-1.csv',
+        )
+        self.assertEqual(
+            urls['county_by_cohort_outcomes.csv'],
+            'https://opportunityinsights.org/wp-content/uploads/2024/07/Table_3_County_by_Cohort_Estimates.csv',
+        )
+
     def test_download_all_sources(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             zip_buf = io.BytesIO()
