@@ -87,11 +87,8 @@ def fetch_metadata(api_url: str) -> Dict[str, Any]:
         raise RuntimeError(f"Empty metadata response from SCB API: {api_url}")
     if isinstance(content_bytes, dict):
         return content_bytes
-    text = (
-        content_bytes.decode("utf-8-sig")
-        if isinstance(content_bytes, bytes)
-        else str(content_bytes)
-    )
+    text = (content_bytes.decode("utf-8-sig") if isinstance(
+        content_bytes, bytes) else str(content_bytes))
     return json.loads(text)
 
 
@@ -101,11 +98,16 @@ def query_scb_chunk(
 ) -> List[Dict[str, Any]]:
     """Executes a JSON POST query against an SCB PxWeb endpoint using download_util."""
     payload = {
-        "query": [
-            {"code": code, "selection": {"filter": "item", "values": list(vals)}}
-            for code, vals in query_items
-        ],
-        "response": {"format": "json"},
+        "query": [{
+            "code": code,
+            "selection": {
+                "filter": "item",
+                "values": list(vals)
+            }
+        } for code, vals in query_items],
+        "response": {
+            "format": "json"
+        },
     }
     time.sleep(REQUEST_SLEEP_SECONDS)
     content_bytes = download_util.request_url(
@@ -121,11 +123,8 @@ def query_scb_chunk(
         raise RuntimeError(f"Failed to download SCB POST chunk from {api_url}")
     if isinstance(content_bytes, dict):
         return content_bytes.get("data", [])
-    text = (
-        content_bytes.decode("utf-8-sig")
-        if isinstance(content_bytes, bytes)
-        else str(content_bytes)
-    )
+    text = (content_bytes.decode("utf-8-sig") if isinstance(
+        content_bytes, bytes) else str(content_bytes))
     return json.loads(text).get("data", [])
 
 
@@ -183,7 +182,8 @@ def _load_nuts_hierarchy(
         nuts3_code, county_name = nuts3_label.split(" ", 1)
         nuts2_label = nuts_code_to_label[nuts3_code[:4]]
         nuts1_label = nuts_code_to_label[nuts3_code[:3]]
-        county_name_to_nuts[county_name] = (nuts3_label, nuts2_label, nuts1_label)
+        county_name_to_nuts[county_name] = (nuts3_label, nuts2_label,
+                                            nuts1_label)
 
     return county_name_to_nuts, nuts_groups
 
@@ -228,23 +228,15 @@ def download_and_write_national_files(
     var_map = {v["code"]: v for v in meta.get("variables", [])}
 
     all_years = sorted(
-        (
-            y
-            for y in var_map["Tid"]["values"]
-            if y.isdigit()
-            and int(y) >= start_year
-            and (end_year is None or int(y) <= end_year)
-        ),
+        (y for y in var_map["Tid"]["values"]
+         if y.isdigit() and int(y) >= start_year and
+         (end_year is None or int(y) <= end_year)),
         key=int,
     )
-    sex_items = [
-        (c, t.strip())
-        for c, t in zip(
-            var_map["Kon"]["values"],
-            var_map["Kon"].get("valueTexts", var_map["Kon"]["values"]),
-        )
-        if c in ("1", "2")
-    ]
+    sex_items = [(c, t.strip()) for c, t in zip(
+        var_map["Kon"]["values"],
+        var_map["Kon"].get("valueTexts", var_map["Kon"]["values"]),
+    ) if c in ("1", "2")]
     all_sexes = [c for c, _ in sex_items]
     contents_code = var_map["ContentsCode"]["values"][0]
 
@@ -259,10 +251,11 @@ def download_and_write_national_files(
             if bracket not in age_brackets:
                 age_brackets.append(bracket)
 
-    bracket_sex_year: Dict[Tuple[str, str, str], int] = collections.defaultdict(int)
+    bracket_sex_year: Dict[Tuple[str, str, str],
+                           int] = collections.defaultdict(int)
 
     for i in range(0, len(all_years), 60):
-        year_chunk = all_years[i : i + 60]
+        year_chunk = all_years[i:i + 60]
         data = query_scb_chunk(
             NATIONAL_API_URL,
             [
@@ -276,9 +269,8 @@ def download_and_write_national_files(
             age_code, sex_code, year = row["key"][:3]
             bracket = age_code_to_bracket.get(age_code)
             if bracket is not None:
-                bracket_sex_year[(bracket, sex_code, year)] += _parse_int_value(
-                    row["values"][0]
-                )
+                bracket_sex_year[(bracket, sex_code,
+                                  year)] += _parse_int_value(row["values"][0])
 
     # 1. population_country.csv
     _write_csv(
@@ -287,19 +279,13 @@ def download_and_write_national_files(
             "Folkmängd efter år",
             [],
             all_years,
-            [
-                [""]
-                + [
-                    str(
-                        sum(
-                            bracket_sex_year[(b, s, y)]
-                            for b in age_brackets
-                            for s, _ in sex_items
-                        )
-                    )
-                    for y in all_years
-                ]
-            ],
+            [[""] + [
+                str(
+                    sum(bracket_sex_year[(b, s, y)]
+                        for b in age_brackets
+                        for s, _ in sex_items))
+                for y in all_years
+            ]],
         ),
     )
 
@@ -310,14 +296,13 @@ def download_and_write_national_files(
             "Folkmängd efter kön och år",
             ["kön"],
             all_years,
-            [
-                [sex_label]
-                + [
-                    str(sum(bracket_sex_year[(b, sex_code, y)] for b in age_brackets))
-                    for y in all_years
-                ]
-                for sex_code, sex_label in sex_items
-            ],
+            [[sex_label] + [
+                str(
+                    sum(bracket_sex_year[(b, sex_code, y)]
+                        for b in age_brackets))
+                for y in all_years
+            ]
+             for sex_code, sex_label in sex_items],
         ),
     )
 
@@ -328,14 +313,12 @@ def download_and_write_national_files(
             "Folkmängd efter ålder och år",
             ["ålder"],
             all_years,
-            [
-                [b]
-                + [
-                    str(sum(bracket_sex_year[(b, s, y)] for s, _ in sex_items))
-                    for y in all_years
-                ]
-                for b in age_brackets
-            ],
+            [[b] + [
+                str(sum(bracket_sex_year[(b, s, y)]
+                        for s, _ in sex_items))
+                for y in all_years
+            ]
+             for b in age_brackets],
         ),
     )
 
@@ -346,12 +329,11 @@ def download_and_write_national_files(
             "Folkmängd efter ålder, kön och år",
             ["ålder", "kön"],
             all_years,
-            [
-                [b, sex_label]
-                + [str(bracket_sex_year[(b, sex_code, y)]) for y in all_years]
-                for b in age_brackets
-                for sex_code, sex_label in sex_items
-            ],
+            [[b, sex_label] +
+             [str(bracket_sex_year[(b, sex_code, y)])
+              for y in all_years]
+             for b in age_brackets
+             for sex_code, sex_label in sex_items],
         ),
     )
     return all_years
@@ -359,7 +341,8 @@ def download_and_write_national_files(
 
 def download_and_write_subnational_files(
     output_dir: str,
-    places_csv_path: str = os.path.join(_SCRIPT_DIR, "sweden_places_resolved.csv"),
+    places_csv_path: str = os.path.join(_SCRIPT_DIR,
+                                        "sweden_places_resolved.csv"),
     start_year: int = 1968,
     end_year: Optional[int] = None,
 ) -> List[str]:
@@ -369,13 +352,9 @@ def download_and_write_subnational_files(
     var_map = {v["code"]: v for v in meta.get("variables", [])}
 
     all_years = sorted(
-        (
-            y
-            for y in var_map["Tid"]["values"]
-            if y.isdigit()
-            and int(y) >= start_year
-            and (end_year is None or int(y) <= end_year)
-        ),
+        (y for y in var_map["Tid"]["values"]
+         if y.isdigit() and int(y) >= start_year and
+         (end_year is None or int(y) <= end_year)),
         key=int,
     )
 
@@ -384,9 +363,8 @@ def download_and_write_subnational_files(
     muni_codes: List[str] = []
     muni_code_to_label: Dict[str, str] = {}
 
-    for code, text in zip(
-        var_map["Region"]["values"], var_map["Region"]["valueTexts"]
-    ):
+    for code, text in zip(var_map["Region"]["values"],
+                          var_map["Region"]["valueTexts"]):
         if code == "00":
             continue
         clean_text = text.removeprefix(code).strip()
@@ -403,29 +381,22 @@ def download_and_write_subnational_files(
             f"found {len(county_codes)} counties and {len(muni_codes)} municipalities."
         )
 
-    marital_items = [
-        (c, t.strip())
-        for c, t in zip(
-            var_map["Civilstand"]["values"],
-            var_map["Civilstand"].get("valueTexts", var_map["Civilstand"]["values"]),
-        )
-    ]
+    marital_items = [(c, t.strip())
+                     for c, t in zip(
+                         var_map["Civilstand"]["values"],
+                         var_map["Civilstand"].get(
+                             "valueTexts", var_map["Civilstand"]["values"]),
+                     )]
     all_marital = [c for c, _ in marital_items]
 
-    sex_items = [
-        (c, t.strip())
-        for c, t in zip(
-            var_map["Kon"]["values"],
-            var_map["Kon"].get("valueTexts", var_map["Kon"]["values"]),
-        )
-        if c in ("1", "2")
-    ]
+    sex_items = [(c, t.strip()) for c, t in zip(
+        var_map["Kon"]["values"],
+        var_map["Kon"].get("valueTexts", var_map["Kon"]["values"]),
+    ) if c in ("1", "2")]
     all_sexes = [c for c, _ in sex_items]
-    contents_code = (
-        "BE0101N1"
-        if "BE0101N1" in var_map["ContentsCode"]["values"]
-        else var_map["ContentsCode"]["values"][0]
-    )
+    contents_code = ("BE0101N1"
+                     if "BE0101N1" in var_map["ContentsCode"]["values"] else
+                     var_map["ContentsCode"]["values"][0])
 
     single_ages: List[str] = []
     age_code_to_bracket: Dict[str, str] = {}
@@ -441,14 +412,14 @@ def download_and_write_subnational_files(
 
     tot_age_code = "tot" if "tot" in available_ages else None
 
-    ms_sex_year: Dict[Tuple[str, str, str, str], int] = collections.defaultdict(int)
-    age_ms_sex_year: Dict[Tuple[str, str, str, str, str], int] = (
-        collections.defaultdict(int)
-    )
+    ms_sex_year: Dict[Tuple[str, str, str, str],
+                      int] = collections.defaultdict(int)
+    age_ms_sex_year: Dict[Tuple[str, str, str, str, str],
+                          int] = (collections.defaultdict(int))
 
     # 1. Fetch 21 Counties by single-year ages, marital status, sex, and year (5 years/chunk)
     for i in range(0, len(all_years), 5):
-        year_chunk = all_years[i : i + 5]
+        year_chunk = all_years[i:i + 5]
         data = query_scb_chunk(
             SUBNATIONAL_API_URL,
             [
@@ -465,14 +436,15 @@ def download_and_write_subnational_files(
             bracket = age_code_to_bracket[age_code]
             val = _parse_int_value(row["values"][0])
             for reg_label in county_code_to_nuts[c_code]:
-                age_ms_sex_year[(reg_label, ms_code, bracket, sex_code, year)] += val
+                age_ms_sex_year[(reg_label, ms_code, bracket, sex_code,
+                                 year)] += val
                 ms_sex_year[(reg_label, ms_code, sex_code, year)] += val
 
     # 2. Fetch 290 Municipalities with Alder='tot' (or single_ages if 'tot' unavailable)
     muni_ages = [tot_age_code] if tot_age_code is not None else single_ages
     muni_year_chunk = 20 if tot_age_code is not None else 1
     for i in range(0, len(all_years), muni_year_chunk):
-        year_chunk = all_years[i : i + muni_year_chunk]
+        year_chunk = all_years[i:i + muni_year_chunk]
         data = query_scb_chunk(
             SUBNATIONAL_API_URL,
             [
@@ -487,9 +459,8 @@ def download_and_write_subnational_files(
         for row in data:
             m_code, ms_code, _, sex_code, year = row["key"][:5]
             reg_label = muni_code_to_label[m_code]
-            ms_sex_year[(reg_label, ms_code, sex_code, year)] += _parse_int_value(
-                row["values"][0]
-            )
+            ms_sex_year[(reg_label, ms_code, sex_code,
+                         year)] += _parse_int_value(row["values"][0])
 
     title = "Folkmängd efter region, civilstånd, ålder, kön och år"
     region_groups = {
@@ -505,20 +476,14 @@ def download_and_write_subnational_files(
                 title,
                 ["region"],
                 all_years,
-                [
-                    [reg]
-                    + [
-                        str(
-                            sum(
-                                ms_sex_year[(reg, ms_c, s_c, y)]
-                                for ms_c, _ in marital_items
-                                for s_c, _ in sex_items
-                            )
-                        )
-                        for y in all_years
-                    ]
-                    for reg in regions
-                ],
+                [[reg] + [
+                    str(
+                        sum(ms_sex_year[(reg, ms_c, s_c, y)]
+                            for ms_c, _ in marital_items
+                            for s_c, _ in sex_items))
+                    for y in all_years
+                ]
+                 for reg in regions],
             ),
         )
 
@@ -529,20 +494,14 @@ def download_and_write_subnational_files(
                 title,
                 ["region", "kön"],
                 all_years,
-                [
-                    [reg, sex_label]
-                    + [
-                        str(
-                            sum(
-                                ms_sex_year[(reg, ms_c, sex_code, y)]
-                                for ms_c, _ in marital_items
-                            )
-                        )
-                        for y in all_years
-                    ]
-                    for reg in regions
-                    for sex_code, sex_label in sex_items
-                ],
+                [[reg, sex_label] + [
+                    str(
+                        sum(ms_sex_year[(reg, ms_c, sex_code, y)]
+                            for ms_c, _ in marital_items))
+                    for y in all_years
+                ]
+                 for reg in regions
+                 for sex_code, sex_label in sex_items],
             ),
         )
 
@@ -553,61 +512,52 @@ def download_and_write_subnational_files(
                 title,
                 ["region", "civilstånd"],
                 all_years,
-                [
-                    [reg, ms_label]
-                    + [
-                        str(
-                            sum(
-                                ms_sex_year[(reg, ms_code, s_c, y)]
-                                for s_c, _ in sex_items
-                            )
-                        )
-                        for y in all_years
-                    ]
-                    for reg in regions
-                    for ms_code, ms_label in marital_items
-                ],
+                [[reg, ms_label] + [
+                    str(
+                        sum(ms_sex_year[(reg, ms_code, s_c, y)]
+                            for s_c, _ in sex_items))
+                    for y in all_years
+                ]
+                 for reg in regions
+                 for ms_code, ms_label in marital_items],
             ),
         )
 
         # 4. population_maritalstatus_gender_{geo}.csv
         _write_csv(
-            os.path.join(output_dir, f"population_maritalstatus_gender_{geo}.csv"),
+            os.path.join(output_dir,
+                         f"population_maritalstatus_gender_{geo}.csv"),
             _build_sheet(
                 title,
                 ["region", "civilstånd", "kön"],
                 all_years,
-                [
-                    [reg, ms_label, sex_label]
-                    + [str(ms_sex_year[(reg, ms_code, sex_code, y)]) for y in all_years]
-                    for reg in regions
-                    for ms_code, ms_label in marital_items
-                    for sex_code, sex_label in sex_items
-                ],
+                [[reg, ms_label, sex_label] + [
+                    str(ms_sex_year[(reg, ms_code, sex_code, y)])
+                    for y in all_years
+                ]
+                 for reg in regions
+                 for ms_code, ms_label in marital_items
+                 for sex_code, sex_label in sex_items],
             ),
         )
 
         # 5. population_age_maritalstatus_gender_{geo}.csv (nuts1, nuts2, nuts3)
         if geo in ("nuts1", "nuts2", "nuts3"):
             _write_csv(
-                os.path.join(
-                    output_dir, f"population_age_maritalstatus_gender_{geo}.csv"
-                ),
+                os.path.join(output_dir,
+                             f"population_age_maritalstatus_gender_{geo}.csv"),
                 _build_sheet(
                     title,
                     ["region", "civilstånd", "ålder", "kön"],
                     all_years,
-                    [
-                        [reg, ms_label, b, sex_label]
-                        + [
-                            str(age_ms_sex_year[(reg, ms_code, b, sex_code, y)])
-                            for y in all_years
-                        ]
-                        for reg in regions
-                        for ms_code, ms_label in marital_items
-                        for b in age_brackets
-                        for sex_code, sex_label in sex_items
-                    ],
+                    [[reg, ms_label, b, sex_label] + [
+                        str(age_ms_sex_year[(reg, ms_code, b, sex_code, y)])
+                        for y in all_years
+                    ]
+                     for reg in regions
+                     for ms_code, ms_label in marital_items
+                     for b in age_brackets
+                     for sex_code, sex_label in sex_items],
                 ),
             )
 
