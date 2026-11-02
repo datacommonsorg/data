@@ -47,8 +47,8 @@ repository contracts and instructions take precedence.
   incomplete output as successful output.
 - Use structured logging for operational progress and failures. Raise an
   exception for unrecoverable errors so tests can assert it with
-  `assertRaises`; `absl.logging.fatal()` stops the process only under
-  `app.run()` and continues silently under `unittest`.
+  `assertRaises`; `absl.logging.fatal()` aborts only under `app.run()`, so
+  tests either skip past it or crash the runner.
 
 ## Data transformation
 
