@@ -38,7 +38,7 @@ echo "Creating a directory for the sharded files"
 mkdir -p output_files/shard
 
 echo "Sharding pcc_spi_pearson_09.csv based on year and writing them to the shard folder."
-bash ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 "df=df.sort_values(by=['time', 'place'], kind='mergesort');df['year']=df['time'].str.slice(0,4)" -shard year
+bash ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 "df=df.sort_values(by=['time', 'place'], kind='stable');df['year']=df['time'].str.slice(0,4)" -shard year
 
 
 # Convert into events
@@ -187,7 +187,8 @@ try:
         if b_dcid in used_b:
             continue
         sd = r["startDate"]
-        seed_cell = b_dcid.split("_", 1)[1]
+        idx = b_dcid.find("grid_1/")
+        seed_cell = b_dcid[idx:] if idx != -1 else ""
         for c_dcid in c_by_sd_cell.get((sd, seed_cell), []):
             if c_dcid not in used_c:
                 remap_c_to_b[c_dcid] = b_dcid
@@ -307,7 +308,7 @@ with open(svobs_csv, "r", encoding="utf-8", newline="") as f:
 with open(events_nodes_mcf, "w", encoding="utf-8") as f:
     for q_dcid, (val, unit) in sorted(quantities.items()):
         f.write(
-            f"Node: {q_dcid}\n"
+            f"Node: dcid:{q_dcid}\n"
             f"dcid: \"{q_dcid}\"\n"
             f"name: \"{unit} {val}\"\n"
             f"typeOf: dcid:Quantity\n"
@@ -316,7 +317,7 @@ with open(events_nodes_mcf, "w", encoding="utf-8") as f:
         )
     for ll_dcid, (lat_s, lon_s) in sorted(latlongs.items()):
         f.write(
-            f"Node: {ll_dcid}\n"
+            f"Node: dcid:{ll_dcid}\n"
             f"dcid: \"{ll_dcid}\"\n"
             f"name: \"{lat_s},{lon_s}\"\n"
             f"typeOf: dcid:GeoCoordinates\n"
