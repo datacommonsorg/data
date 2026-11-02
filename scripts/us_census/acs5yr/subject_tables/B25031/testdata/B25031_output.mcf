@@ -1,0 +1,110 @@
+Node: dcid:Monthly_Median_GrossRent_HousingUnit
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms0
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms0
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms1
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms1
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms2
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms2
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms3
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms3
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms4
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms4
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:medianValue
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms5Onwards
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms
+measuredProperty: dcs:grossRent
+statType: dcs:marginOfError
+populationType: schema:HousingUnit
+measurementQualifier: dcs:Monthly
+numberOfBedrooms: dcid:Bedrooms5Onwards
+typeOf: dcs:StatisticalVariable
+

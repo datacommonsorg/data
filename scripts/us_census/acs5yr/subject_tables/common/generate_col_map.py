@@ -59,7 +59,8 @@ def process_zip_file(zip_file_path,
                      write_output=True,
                      output_dir_path='./',
                      delimiter='!!',
-                     header_row=1):
+                     header_row=1,
+                     estimate_period=5):
     """Given a zip file of datasets in csv format, the function builds a column map for each year
   Args:
     zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
@@ -96,9 +97,14 @@ def process_zip_file(zip_file_path,
                     csv_reader = csv.reader(csv_file)
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
-                            year = re.search(
-                                r'ACS[SD]T\d+Y(\d{4})',
-                                os.path.basename(filename)).group(1)
+                            match = re.search(
+                                rf'ACS[SD]T{estimate_period}Y(\d{{4}})',
+                                os.path.basename(filename))
+                            if not match:
+                                raise ValueError(
+                                    f"Unable to extract year from filename: {filename}"
+                                )
+                            year = match.group(1)
                             column_map[year] = generate_stat_var_map(
                                 spec_dict, line, delimiter)
                             break
