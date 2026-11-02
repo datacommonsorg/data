@@ -1,0 +1,7 @@
+mapped_row,5
+mapped_column,3
+number_decimal,","
+number_separator," "
+observationDate,observationDate,{Number},,
+observationAbout,observationAbout,{Data},populationType,dcs:Person
+Jumlah Penduduk (Ribu),value,{Number},#Multiply,1000

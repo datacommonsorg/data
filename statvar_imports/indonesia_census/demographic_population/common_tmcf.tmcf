@@ -1,0 +1,8 @@
+Node: E:idn_demographic->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:idn_demographic->observationAbout
+observationDate: C:idn_demographic->observationDate
+value: C:idn_demographic->value
+variableMeasured: C:idn_demographic->variableMeasured
+unit: C:idn_demographic->unit
+scalingFactor: C:idn_demographic->scalingFactor

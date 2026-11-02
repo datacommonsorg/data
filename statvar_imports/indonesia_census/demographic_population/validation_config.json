@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "scope": {
+        "data_source": "differ"
+      },
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_demographic_max_date_consistency",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "data_source": "stats",
+        "variables": {
+          "dcids": [
+            "Count_Person",
+            "Count_Person_Male",
+            "Count_Person_Female"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_demographic_min_observations_and_freshness",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats",
+        "variables": {
+          "dcids": [
+            "Count_Person",
+            "Count_Person_Male",
+            "Count_Person_Female"
+          ]
+        }
+      },
+      "params": {
+        "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE NumPlaces >= 500 GROUP BY StatVar",
+        "condition": "TotalObs >= 1500 AND CAST(LatestDate AS INTEGER) >= 2024",
+        "failure_message": "Demographic population StatVar observation count or freshness validation failed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,444 @@
+#!/usr/bin/env python3
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Downloads Indonesia Demographic Population data from BPS WebAPI."""
+
+import csv
+import html
+import os
+import re
+import sys
+from typing import Any
+
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
+
+from absl import app
+from absl import flags
+from absl import logging
+import download_util
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'output_dir',
+    os.path.join(_CODEDIR, 'input_files'),
+    'Directory path to save the downloaded input CSV files.',
+)
+flags.DEFINE_string(
+    'population_filename',
+    'idn_population_2023_2025.csv',
+    'Filename for the total population CSV table.',
+)
+flags.DEFINE_string(
+    'age_gender_filename',
+    'idn_age_gender_2023_2025.csv',
+    'Filename for the age and gender population CSV table.',
+)
+flags.DEFINE_string(
+    'domain',
+    '0000',
+    'BPS domain code (0000 for national/all-province/regency tables).',
+)
+flags.DEFINE_integer(
+    'total_var_id',
+    2790,
+    'BPS variable ID for Total Population by Regency/City and Age Group.',
+)
+flags.DEFINE_integer(
+    'male_var_id',
+    2791,
+    'BPS variable ID for Male Population by Regency/City and Age Group.',
+)
+flags.DEFINE_integer(
+    'female_var_id',
+    2792,
+    'BPS variable ID for Female Population by Regency/City and Age Group.',
+)
+flags.DEFINE_integer(
+    'start_year',
+    2023,
+    'Minimum observation year to include in the downloaded CSV files.',
+)
+flags.DEFINE_string(
+    'api_key',
+    os.environ.get('BPS_API_KEY', 'dc6660972b3db647a0d48eba65fba051'),
+    'BPS WebAPI key.',
+)
+
+BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
+MAX_YEARS_PER_REQUEST = 3
+
+PROVINCE_SUFFIX_BY_CODE: dict[int, str] = {
+    1100: 'Aceh',
+    1200: 'Sumatera Utara',
+    1300: 'Sumatera Barat',
+    1400: 'Riau',
+    1500: 'Jambi',
+    1600: 'Sumatera Selatan',
+    1700: 'Bengkulu',
+    1800: 'Lampung',
+    1900: 'Kep. Bangka Belitung',
+    2100: 'Kepulauan Riau',
+    3100: 'DKI Jakarta',
+    3200: 'Jawa Barat',
+    3300: 'Jawa Tengah',
+    3400: 'DI Yogyakarta',
+    3500: 'Jawa Timur',
+    3600: 'Banten',
+    5100: 'Bali',
+    5200: 'Nusa Tenggara Barat',
+    5300: 'Nusa Tenggara Timur',
+    6100: 'Kalimantan Barat',
+    6200: 'Kalimantan Tengah',
+    6300: 'Kalimantan Selatan',
+    6400: 'Kalimantan Timur',
+    6500: 'Kalimantan Utara',
+    7100: 'Sulawesi Utara',
+    7200: 'Sulawesi Tengah',
+    7300: 'Sulawesi Selatan',
+    7400: 'Sulawesi Tenggara',
+    7500: 'Gorontalo',
+    7600: 'Sulawesi Barat',
+    8100: 'Maluku',
+    8200: 'Maluku Utara',
+    9100: 'Papua Barat',
+    9200: 'Papua Barat Daya',
+    9400: 'Papua',
+    9500: 'Papua Selatan',
+    9600: 'Papua Tengah',
+    9700: 'Papua Pegunungan',
+}
+
+
+def clean_bps_label(raw_label: Any) -> str:
+    """Strips HTML tags and normalizes whitespace in BPS labels."""
+    text = html.unescape(str(raw_label))
+    text = re.sub(r'<[^>]+>', '', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
+
+
+def format_place_name(code: int, raw_label: Any) -> str:
+    """Formats a BPS region code and label to match idn_places_resolved.csv."""
+    label = clean_bps_label(raw_label)
+    if code == 9999 or label.upper() == 'INDONESIA':
+        return 'INDONESIA'
+    if code % 100 == 0:
+        return f'{label.upper()}, INDONESIA'
+    prov_code = (code // 100) * 100
+    prov_name = PROVINCE_SUFFIX_BY_CODE.get(prov_code, '')
+    if prov_name:
+        return f'{label}, {prov_name}, Indonesia'
+    return f'{label}, Indonesia'
+
+
+def format_thousand_comma(exact_persons: int | float | str) -> str:
+    """Formats an exact person count into thousands with comma decimal separator.
+
+    Matches idn_population_pvmap.csv (`number_decimal, ","` and `#Multiply, 1000`)
+    so that StatVarProcessor restores the exact integer person count.
+    """
+    val_int = int(round(float(exact_persons)))
+    whole = val_int // 1000
+    rem = val_int % 1000
+    if rem == 0:
+        return str(whole)
+    rem_str = f'{rem:03d}'.rstrip('0')
+    return f'{whole},{rem_str}'
+
+
+def fetch_available_years(
+    domain: str,
+    var_id: int,
+    api_key: str,
+) -> list[dict[str, Any]]:
+    """Fetches all available year definitions (th_id, th) for a BPS variable."""
+    years: list[dict[str, Any]] = []
+    page = 1
+    while True:
+        url = (f'{BPS_API_BASE_URL}/model/th/lang/ind/domain/{domain}'
+               f'/var/{var_id}/page/{page}/key/{api_key}/')
+        resp = download_util.request_url(url=url, output='json')
+        if not isinstance(resp, dict) or resp.get('status') != 'OK':
+            logging.fatal(
+                'Failed to fetch available years from BPS WebAPI (page %d): %s',
+                page,
+                resp,
+            )
+        data = resp.get('data')
+        if not isinstance(data, list) or len(data) < 2:
+            break
+        meta, items = data[0], data[1]
+        if isinstance(items, list):
+            years.extend(items)
+        total_pages = int(meta.get('pages', 1)) if isinstance(meta, dict) else 1
+        if page >= total_pages:
+            break
+        page += 1
+
+    years.sort(key=lambda item: int(item['th_id']))
+    return years
+
+
+def fetch_variable_data(
+    domain: str,
+    var_id: int,
+    api_key: str,
+    start_year: int = 2023,
+) -> tuple[list[tuple[int, str]], list[str], list[str],
+           dict[tuple[int, str, str], str]]:
+    """Downloads year chunks for a BPS demographic variable.
+
+    Returns:
+      places: Ordered list of (region_code, formatted_place_name).
+      age_groups: Ordered list of age group labels (including 'TOTAL').
+      year_labels: Ordered list of year strings.
+      values: Dict mapping (region_code, age_group_label, year_str) -> value str.
+    """
+    all_years = fetch_available_years(domain=domain,
+                                      var_id=var_id,
+                                      api_key=api_key)
+    if not all_years:
+        logging.fatal('No years returned for BPS var_id=%d.', var_id)
+
+    years = [
+        y for y in all_years
+        if str(y.get('th', '')).strip().isdigit() and int(
+            str(y['th']).strip()) >= start_year
+    ]
+    if not years:
+        years = all_years
+
+    places: list[tuple[int, str]] = []
+    seen_codes: set[int] = set()
+    age_groups: list[str] = []
+    seen_ages: set[str] = set()
+    year_labels: list[str] = [str(y['th']).strip() for y in years]
+    values: dict[tuple[int, str, str], str] = {}
+
+    for idx in range(0, len(years), MAX_YEARS_PER_REQUEST):
+        chunk = years[idx:idx + MAX_YEARS_PER_REQUEST]
+        th_param = ';'.join(str(y['th_id']) for y in chunk)
+        url = (f'{BPS_API_BASE_URL}/model/data/lang/ind/domain/{domain}'
+               f'/var/{var_id}/th/{th_param}/key/{api_key}/')
+        resp = download_util.request_url(url=url, output='json')
+        if not isinstance(resp, dict) or resp.get('status') != 'OK':
+            logging.fatal(
+                'Failed to fetch demographic data for var=%d th=%s: %s',
+                var_id,
+                th_param,
+                resp,
+            )
+
+        var_list = resp.get('var', [])
+        turvar_list = resp.get('turvar', [])
+        turtahun_list = resp.get('turtahun', [])
+        vervar_list = resp.get('vervar', [])
+        tahun_list = resp.get('tahun', [])
+        datacontent = resp.get('datacontent', {})
+
+        if not (var_list and turvar_list and turtahun_list):
+            logging.fatal(
+                'Incomplete metadata in BPS response for var=%d th=%s.',
+                var_id,
+                th_param,
+            )
+
+        vid = var_list[0]['val']
+        tt_val = turtahun_list[0]['val']
+
+        for tv in turvar_list:
+            age_label = clean_bps_label(tv['label'])
+            if age_label not in seen_ages:
+                seen_ages.add(age_label)
+                age_groups.append(age_label)
+
+        for vv in vervar_list:
+            code = int(vv['val'])
+            place_name = format_place_name(code, vv['label'])
+            if code not in seen_codes:
+                seen_codes.add(code)
+                places.append((code, place_name))
+            for tv in turvar_list:
+                age_label = clean_bps_label(tv['label'])
+                tv_val = tv['val']
+                for ty in tahun_list:
+                    year_str = str(ty['label']).strip()
+                    cell_key = f'{code}{vid}{tv_val}{ty["val"]}{tt_val}'
+                    raw_val = datacontent.get(cell_key)
+                    if raw_val is not None and str(raw_val).strip() != '':
+                        if isinstance(raw_val, float) and raw_val.is_integer():
+                            values[(code, age_label,
+                                    year_str)] = str(int(raw_val))
+                        else:
+                            values[(code, age_label,
+                                    year_str)] = str(raw_val).strip()
+
+    return places, age_groups, year_labels, values
+
+
+def write_population_csv(
+    output_path: str,
+    places: list[tuple[int, str]],
+    year_labels: list[str],
+    total_values: dict[tuple[int, str, str], str],
+) -> None:
+    """Writes idn_population_2023_2025.csv matching idn_population_pvmap.csv."""
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    with open(output_path, 'w', newline='', encoding='utf-8') as fp:
+        writer = csv.writer(fp)
+        writer.writerow([
+            'observationAbout',
+            'observationDate',
+            'Jumlah Penduduk (Ribu)',
+        ])
+        row_count = 0
+        for code, place_name in places:
+            for year in year_labels:
+                raw_val = total_values.get((code, 'TOTAL', year))
+                if raw_val is None or raw_val == '':
+                    continue
+                writer.writerow([
+                    place_name,
+                    year,
+                    format_thousand_comma(raw_val),
+                ])
+                row_count += 1
+    logging.info('Wrote %d total population rows to %s', row_count, output_path)
+
+
+def write_age_gender_csv(
+    output_path: str,
+    places: list[tuple[int, str]],
+    age_groups: list[str],
+    year_labels: list[str],
+    total_values: dict[tuple[int, str, str], str],
+    male_values: dict[tuple[int, str, str], str],
+    female_values: dict[tuple[int, str, str], str],
+) -> None:
+    """Writes idn_age_gender_2023_2025.csv matching idn_age_gender_pvmap.csv."""
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    with open(output_path, 'w', newline='', encoding='utf-8') as fp:
+        writer = csv.writer(fp)
+        writer.writerow([
+            'observationAbout',
+            'observationDate',
+            'Kelompok Umur',
+            'Penduduk (Laki-Laki)',
+            'Penduduk (Perempuan)',
+            'Penduduk (Laki-Laki + Perempuan)',
+        ])
+        row_count = 0
+        for code, place_name in places:
+            for year in year_labels:
+                for age_label in age_groups:
+                    m_val = male_values.get((code, age_label, year), '')
+                    f_val = female_values.get((code, age_label, year), '')
+                    t_val = total_values.get((code, age_label, year), '')
+                    if not (m_val or f_val or t_val):
+                        continue
+                    if age_label.upper() == 'TOTAL':
+                        # Emit gender totals (Count_Person_Male / Count_Person_Female)
+                        # without an age bracket; leave total column empty here so
+                        # Count_Person is not duplicated across both CSVs, or emit if needed.
+                        writer.writerow([
+                            place_name,
+                            year,
+                            'TOTAL',
+                            m_val,
+                            f_val,
+                            '',
+                        ])
+                    else:
+                        writer.writerow([
+                            place_name,
+                            year,
+                            age_label,
+                            m_val,
+                            f_val,
+                            t_val,
+                        ])
+                    row_count += 1
+    logging.info('Wrote %d age/gender rows to %s', row_count, output_path)
+
+
+def download_demographic_data(
+    domain: str,
+    total_var_id: int,
+    male_var_id: int,
+    female_var_id: int,
+    api_key: str,
+    output_dir: str,
+    population_filename: str,
+    age_gender_filename: str,
+    start_year: int = 2023,
+) -> tuple[str, str]:
+    """Downloads BPS demographic tables and writes both input CSV files."""
+    places, age_groups, year_labels, total_values = fetch_variable_data(
+        domain=domain,
+        var_id=total_var_id,
+        api_key=api_key,
+        start_year=start_year,
+    )
+    _, _, _, male_values = fetch_variable_data(
+        domain=domain,
+        var_id=male_var_id,
+        api_key=api_key,
+        start_year=start_year,
+    )
+    _, _, _, female_values = fetch_variable_data(
+        domain=domain,
+        var_id=female_var_id,
+        api_key=api_key,
+        start_year=start_year,
+    )
+
+    pop_path = os.path.join(output_dir, population_filename)
+    write_population_csv(
+        output_path=pop_path,
+        places=places,
+        year_labels=year_labels,
+        total_values=total_values,
+    )
+
+    ag_path = os.path.join(output_dir, age_gender_filename)
+    write_age_gender_csv(
+        output_path=ag_path,
+        places=places,
+        age_groups=age_groups,
+        year_labels=year_labels,
+        total_values=total_values,
+        male_values=male_values,
+        female_values=female_values,
+    )
+    return pop_path, ag_path
+
+
+def main(_) -> None:
+    logging.set_verbosity(logging.INFO)
+    download_demographic_data(
+        domain=_FLAGS.domain,
+        total_var_id=_FLAGS.total_var_id,
+        male_var_id=_FLAGS.male_var_id,
+        female_var_id=_FLAGS.female_var_id,
+        api_key=_FLAGS.api_key,
+        output_dir=_FLAGS.output_dir,
+        population_filename=_FLAGS.population_filename,
+        age_gender_filename=_FLAGS.age_gender_filename,
+        start_year=_FLAGS.start_year,
+    )
+
+
+if __name__ == '__main__':
+    app.run(main)
