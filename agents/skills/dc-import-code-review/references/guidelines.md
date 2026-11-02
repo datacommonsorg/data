@@ -45,8 +45,10 @@ repository contracts and instructions take precedence.
   output.
 - Make directory creation and repeated execution safe, and do not expose
   incomplete output as successful output.
-- Use structured logging for operational progress and failures; do not assume
-  that a logging severity terminates execution.
+- Use structured logging for operational progress and failures. Raise an
+  exception for unrecoverable errors so tests can assert it with
+  `assertRaises`; `absl.logging.fatal()` stops the process only under
+  `app.run()` and continues silently under `unittest`.
 
 ## Data transformation
 
