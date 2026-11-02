@@ -27,6 +27,12 @@ except ModuleNotFoundError:
 
 class DownloadTest(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        if not download.FLAGS.is_parsed():
+            download.FLAGS.mark_as_parsed()
+
     def test_generate_urls_for_tn_and_gcs(self):
         tn_template = 'https://tn.example/{year}/Diabetes_County_{year}.xlsx'
         gcs_template = 'gs://test-bucket/input/Diabetes_County_{year}.xlsx'
@@ -139,6 +145,22 @@ class DownloadTest(unittest.TestCase):
             self.assertTrue(
                 (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
             self.assertFalse(partial_file.exists())
+
+    @mock.patch.object(download, 'process_excel_files')
+    @mock.patch.object(download, 'download_files_from_gcs')
+    @mock.patch.object(download, 'download_files')
+    def test_main_falls_back_to_gcs_on_tn_failure(self, mock_download_tn,
+                                                  mock_download_gcs,
+                                                  mock_process):
+        import requests
+        mock_download_tn.side_effect = requests.exceptions.HTTPError(
+            '403 Client Error: Forbidden')
+
+        download.main(None)
+
+        mock_download_tn.assert_called_once()
+        mock_download_gcs.assert_called_once()
+        mock_process.assert_called_once()
 
 
 if __name__ == '__main__':

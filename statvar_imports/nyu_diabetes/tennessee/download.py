@@ -235,7 +235,13 @@ def main(_):
         download_files_from_gcs(final_urls, save_folder=INPUT_DIR)
     else:
         final_urls = generate_urls(start_year, current_year, tn_url_template)
-        download_files(final_urls, save_folder=INPUT_DIR)
+        try:
+            download_files(final_urls, save_folder=INPUT_DIR)
+        except (requests.exceptions.RequestException, RuntimeError) as e:
+            logging.warning(
+                f"Failed to download from TN.gov ({e}). Falling back to GCS...")
+            gcs_urls = generate_urls(start_year, current_year, gcs_url_template)
+            download_files_from_gcs(gcs_urls, save_folder=INPUT_DIR)
     process_excel_files(INPUT_DIR)
 
 
