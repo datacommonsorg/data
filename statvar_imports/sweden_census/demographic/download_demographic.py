@@ -41,6 +41,7 @@ flags.DEFINE_string(
     "output_dir",
     os.path.join(_SCRIPT_DIR, "input_files"),
     "Output directory for generated raw wide-format CSV files.",
+    allow_override=True,
 )
 flags.DEFINE_string(
     "places_resolved_csv",

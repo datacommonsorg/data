@@ -30,9 +30,15 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
+FLAGS = flags.FLAGS
+_SAVED_OUTPUT_DIR_FLAG = (FLAGS['output_dir']
+                          if 'output_dir' in FLAGS else None)
+
 import download_demographic  # pylint: disable=g-import-not-at-top
 
-FLAGS = flags.FLAGS
+if _SAVED_OUTPUT_DIR_FLAG is not None:
+    delattr(FLAGS, 'output_dir')
+    FLAGS['output_dir'] = _SAVED_OUTPUT_DIR_FLAG
 if not FLAGS.is_parsed():
     FLAGS.mark_as_parsed()
 
