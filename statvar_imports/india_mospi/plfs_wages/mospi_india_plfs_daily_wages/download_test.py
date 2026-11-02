@@ -26,7 +26,11 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
-import download  # pylint: disable=wrong-import-position
+try:
+    from statvar_imports.india_mospi.plfs_wages.mospi_india_plfs_daily_wages import (
+        download,)
+except ModuleNotFoundError:
+    import download  # pylint: disable=wrong-import-position
 
 
 def _sample_api_record(
@@ -143,7 +147,7 @@ class DownloadTest(unittest.TestCase):
             download.fetch_mospi_daily_wages(session=session,
                                              retry_delay_seconds=0.01)
 
-    @mock.patch('download.time.sleep')
+    @mock.patch.object(download.time, 'sleep')
     def test_fetch_page_retries_transient_503_and_succeeds(self, mock_sleep):
         session = mock.Mock(spec=requests.Session)
         ok_payload = {'statusCode': True, 'data': [], 'meta_data': {}}
@@ -166,7 +170,7 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(session.get.call_count, 3)
         self.assertEqual(mock_sleep.call_count, 2)
 
-    @mock.patch('download.time.sleep')
+    @mock.patch.object(download.time, 'sleep')
     def test_fetch_page_does_not_retry_permanent_400(self, mock_sleep):
         session = mock.Mock(spec=requests.Session)
         session.get.return_value = _mock_response(400, {'msg': 'Bad Request'})

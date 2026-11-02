@@ -18,7 +18,6 @@
 - `daily_wages_pvmap.csv`: Property-value mappings for `stat_var_processor.py`.
 - `daily_wages_metadata.csv`: Processor configuration parameters (`header_rows`, `output_columns`).
 - `daily_wages_places.csv`: Resolved place DCID mappings for India and all states/UTs.
-- `dailywages_stat_vars.mcf` & `dailywages_stat_vars_schema.mcf`: Custom `StatisticalVariable` and `WorkerOtherThanPublicWorker` schema definitions included via `"node_mcf": "*.mcf"`.
 - `manifest.json`: Cloud Batch import automation specification.
 - `validation_config.json`: Import validation rules (`0%` deleted records, uniform `MaxDate`, freshness lag check, non-negative values, observation count floor, and StatVar count check).
 - `test_data/`: Sample input (`daily_wages_input.csv`) and expected output (`daily_wages_output.csv`, `daily_wages_output.tmcf`).
@@ -37,7 +36,7 @@ From this import directory (`statvar_imports/india_mospi/plfs_wages/mospi_india_
   --pv_map=daily_wages_pvmap.csv \
   --config_file=daily_wages_metadata.csv \
   --places_resolved_csv=daily_wages_places.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,dailywages_stat_vars.mcf \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_path=output/daily_wages_output \
   --output_counters=counters/daily_wages_counters.csv
 ```

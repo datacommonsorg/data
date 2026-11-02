@@ -82,29 +82,59 @@ KEY_COLUMNS = [
 _RETRYABLE_STATUS_CODES = frozenset({429, 500, 502, 503, 504})
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('api_url', DEFAULT_API_URL,
-                    'MoSPI eSankhyiki PLFS getData REST endpoint.')
+flags.DEFINE_string(
+    'api_url',
+    DEFAULT_API_URL,
+    'MoSPI eSankhyiki PLFS getData REST endpoint.',
+    allow_override=True,
+)
 flags.DEFINE_string(
     'gcs_baseline_path',
     DEFAULT_GCS_BASELINE,
     'GCS URI (or local path) of the staged historical baseline CSV.',
+    allow_override=True,
 )
-flags.DEFINE_string('output_file', DEFAULT_OUTPUT_FILE,
-                    'Destination CSV path for merged raw input data.')
-flags.DEFINE_integer('page_size', MAX_PAGE_SIZE,
-                     'Records per API page (MoSPI enforces <= 200).')
-flags.DEFINE_integer('timeout_seconds', 30, 'Per-request HTTP timeout.')
+flags.DEFINE_string(
+    'output_file',
+    DEFAULT_OUTPUT_FILE,
+    'Destination CSV path for merged raw input data.',
+    allow_override=True,
+)
 flags.DEFINE_integer(
-    'max_retries', 3,
-    'Maximum retry attempts for transient HTTP/network errors.')
-flags.DEFINE_float('retry_delay_seconds', 5.0,
-                   'Initial backoff delay in seconds between retries.')
-flags.DEFINE_float('retry_backoff', 2.0,
-                   'Exponential backoff multiplier between retry attempts.')
+    'page_size',
+    MAX_PAGE_SIZE,
+    'Records per API page (MoSPI enforces <= 200).',
+    allow_override=True,
+)
+flags.DEFINE_integer(
+    'timeout_seconds',
+    30,
+    'Per-request HTTP timeout.',
+    allow_override=True,
+)
+flags.DEFINE_integer(
+    'max_retries',
+    3,
+    'Maximum retry attempts for transient HTTP/network errors.',
+    allow_override=True,
+)
+flags.DEFINE_float(
+    'retry_delay_seconds',
+    5.0,
+    'Initial backoff delay in seconds between retries.',
+    allow_override=True,
+)
+flags.DEFINE_float(
+    'retry_backoff',
+    2.0,
+    'Exponential backoff multiplier between retry attempts.',
+    allow_override=True,
+)
 flags.DEFINE_bool(
     'skip_live_api',
     False,
     'If true, only stage the GCS baseline without querying the live MoSPI API.',
+    allow_override=True,
 )
 
 
