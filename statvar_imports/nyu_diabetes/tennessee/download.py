@@ -83,9 +83,11 @@ def download_files(url_list, save_folder):
         logging.info(
             f"Starting download: source={url}, destination={file_path}")
 
+        response = None
         try:
             response = session.get(url, timeout=120, stream=True)
             if response.status_code == 404:
+                response.close()
                 logging.info(f"File not yet available (404), skipping: {url}")
                 continue
             response.raise_for_status()
@@ -108,11 +110,13 @@ def download_files(url_list, save_folder):
             )
             downloaded_count += 1
         except requests.exceptions.RequestException as e:
+            if response is not None:
+                response.close()
             Path(file_path).unlink(missing_ok=True)
             year = extract_year(filename)
             current_year = date.today().year
             # Tennessee death statistics typically has a 3-year publication lag.
-            if downloaded_count > 0 and year and year >= current_year - 3:
+            if downloaded_count > 0 and year and year > current_year - 3:
                 logging.warning(
                     f"Skipping future unreleased year {year} after error: {e}")
                 continue

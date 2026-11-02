@@ -17,7 +17,9 @@ import tempfile
 import unittest
 from unittest import mock
 
+from absl.testing import flagsaver
 from google.api_core import exceptions
+import requests
 
 try:
     from statvar_imports.nyu_diabetes.tennessee import download
@@ -112,6 +114,7 @@ class DownloadTest(unittest.TestCase):
                 download.download_files(
                     ['https://tn.example/2023/Diabetes_County_2023.xlsx'],
                     temp_dir)
+        mock_response.close.assert_called_once()
 
     @mock.patch.object(download, 'date')
     @mock.patch.object(download, 'create_retry_session')
@@ -126,7 +129,38 @@ class DownloadTest(unittest.TestCase):
         mock_resp_success.__enter__ = mock.Mock(return_value=mock_resp_success)
         mock_resp_success.__exit__ = mock.Mock(return_value=False)
 
-        import requests
+        mock_session.get.side_effect = [
+            mock_resp_success,
+            requests.exceptions.ConnectionError('reset by peer'),
+        ]
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            partial_file = Path(temp_dir) / 'Diabetes_County_2024.xlsx'
+            partial_file.write_bytes(b'partial corrupt data')
+
+            urls = [
+                'https://tn.example/2022/Diabetes_County_2022.xlsx',
+                'https://tn.example/2024/Diabetes_County_2024.xlsx',
+            ]
+            download.download_files(urls, temp_dir)
+            self.assertTrue(
+                (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
+            self.assertFalse(partial_file.exists())
+
+    @mock.patch.object(download, 'date')
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_raises_on_due_year_error(self, mock_session_factory,
+                                                     mock_date):
+        mock_date.today.return_value.year = 2026
+        mock_session = mock.Mock()
+        mock_resp_success = mock.Mock()
+        mock_resp_success.status_code = 200
+        mock_resp_success.headers = {'content-length': '8'}
+        mock_resp_success.iter_content.return_value = [b'content!']
+        mock_resp_success.__enter__ = mock.Mock(return_value=mock_resp_success)
+        mock_resp_success.__exit__ = mock.Mock(return_value=False)
+
         mock_session.get.side_effect = [
             mock_resp_success,
             requests.exceptions.ConnectionError('reset by peer'),
@@ -141,24 +175,55 @@ class DownloadTest(unittest.TestCase):
                 'https://tn.example/2022/Diabetes_County_2022.xlsx',
                 'https://tn.example/2023/Diabetes_County_2023.xlsx',
             ]
-            download.download_files(urls, temp_dir)
+            with self.assertRaises(requests.exceptions.ConnectionError):
+                download.download_files(urls, temp_dir)
             self.assertTrue(
                 (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
             self.assertFalse(partial_file.exists())
 
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_closes_response_on_http_error(
+            self, mock_session_factory):
+        mock_session = mock.Mock()
+        mock_response = mock.Mock()
+        mock_response.status_code = 403
+        mock_response.raise_for_status.side_effect = (
+            requests.exceptions.HTTPError('403 Forbidden'))
+        mock_session.get.return_value = mock_response
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with self.assertRaises(requests.exceptions.HTTPError):
+                download.download_files(
+                    ['https://tn.example/2022/Diabetes_County_2022.xlsx'],
+                    temp_dir)
+        mock_response.close.assert_called_once()
+
+    @flagsaver.flagsaver(download_source='tn')
     @mock.patch.object(download, 'process_excel_files')
     @mock.patch.object(download, 'download_files_from_gcs')
     @mock.patch.object(download, 'download_files')
     def test_main_falls_back_to_gcs_on_tn_failure(self, mock_download_tn,
                                                   mock_download_gcs,
                                                   mock_process):
-        import requests
         mock_download_tn.side_effect = requests.exceptions.HTTPError(
             '403 Client Error: Forbidden')
 
         download.main(None)
 
         mock_download_tn.assert_called_once()
+        mock_download_gcs.assert_called_once()
+        mock_process.assert_called_once()
+
+    @flagsaver.flagsaver(download_source='gcs')
+    @mock.patch.object(download, 'process_excel_files')
+    @mock.patch.object(download, 'download_files_from_gcs')
+    @mock.patch.object(download, 'download_files')
+    def test_main_with_gcs_source(self, mock_download_tn, mock_download_gcs,
+                                  mock_process):
+        download.main(None)
+
+        mock_download_tn.assert_not_called()
         mock_download_gcs.assert_called_once()
         mock_process.assert_called_once()
 
