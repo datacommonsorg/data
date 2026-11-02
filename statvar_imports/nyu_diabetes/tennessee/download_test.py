@@ -107,9 +107,11 @@ class DownloadTest(unittest.TestCase):
                     ['https://tn.example/2023/Diabetes_County_2023.xlsx'],
                     temp_dir)
 
+    @mock.patch.object(download, 'date')
     @mock.patch.object(download, 'create_retry_session')
     def test_download_files_skips_unreleased_future_year_error(
-            self, mock_session_factory):
+            self, mock_session_factory, mock_date):
+        mock_date.today.return_value.year = 2026
         mock_session = mock.Mock()
         mock_resp_success = mock.Mock()
         mock_resp_success.status_code = 200
@@ -126,6 +128,9 @@ class DownloadTest(unittest.TestCase):
         mock_session_factory.return_value = mock_session
 
         with tempfile.TemporaryDirectory() as temp_dir:
+            partial_file = Path(temp_dir) / 'Diabetes_County_2023.xlsx'
+            partial_file.write_bytes(b'partial corrupt data')
+
             urls = [
                 'https://tn.example/2022/Diabetes_County_2022.xlsx',
                 'https://tn.example/2023/Diabetes_County_2023.xlsx',
@@ -133,8 +138,7 @@ class DownloadTest(unittest.TestCase):
             download.download_files(urls, temp_dir)
             self.assertTrue(
                 (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
-            self.assertFalse(
-                (Path(temp_dir) / 'Diabetes_County_2023.xlsx').exists())
+            self.assertFalse(partial_file.exists())
 
 
 if __name__ == '__main__':

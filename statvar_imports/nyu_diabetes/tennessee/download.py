@@ -108,8 +108,11 @@ def download_files(url_list, save_folder):
             )
             downloaded_count += 1
         except requests.exceptions.RequestException as e:
+            Path(file_path).unlink(missing_ok=True)
             year = extract_year(filename)
-            if downloaded_count > 0 and year and year > 2022:
+            current_year = date.today().year
+            # Tennessee death statistics typically has a 3-year publication lag.
+            if downloaded_count > 0 and year and year >= current_year - 3:
                 logging.warning(
                     f"Skipping future unreleased year {year} after error: {e}")
                 continue
