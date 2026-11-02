@@ -56,9 +56,10 @@ python3 process.py \
   --has_percent=False
 ```
 
-To run the Data Commons import tool (`genmcf`) locally without external API existence-check errors:
+To run the Data Commons import tool (`genmcf`) locally without external API existence-check errors (using the [Data Commons Import Tool JAR](https://github.com/datacommonsorg/import/releases) or building it from [`tools/import_validation`](https://github.com/datacommonsorg/import)):
 
 ```bash
+curl -L -O https://datacommons.org/import-tool/datacommons-import-tool-0.1-jar-with-dependencies.jar
 java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar genmcf \
   -e=false \
   B25031/B25031_cleaned.csv \
@@ -85,6 +86,7 @@ gcloud dataflow flex-template run "btable-b25031-dev-differ" \
 
 - `B25031_spec.json`: JSON specification mapping Census column tokens, bedroom counts, units (`USDollar`), and measurement qualifiers (`Monthly`) to Data Commons schema properties.
 - `B25031_summary.json`: Summary of per-vintage column counts, row counts, StatVar counts, and observation counts (`2015`–`2024`).
+- `testdata/`: Hermetic test fixtures (`B25031_test.zip`, `B25031_cleaned.csv`, `B25031_output.mcf`, `B25031_output.tmcf`, and `column_map.json`) validated by `subject_table_test.py`.
 
 ## Running Tests
 
