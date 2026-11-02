@@ -74,10 +74,7 @@ def list_cns_csvs(cns_dir: str) -> list[str]:
 def normalize_dcid(val: str) -> str:
   """Normalizes observationAbout/variableMeasured strings."""
   val = val.strip()
-  if val.startswith("dcid:wikidataId/"):
-    return val[len("dcid:") :]
-  if val.startswith("dcid:country/"):
-    return val[len("dcid:") :]
+  val = val.removeprefix("dcid:")
   if val.endswith(")"):
     val = val.rstrip(")")
   return val

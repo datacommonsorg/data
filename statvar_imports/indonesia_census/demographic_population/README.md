@@ -7,7 +7,7 @@
 * **Data Download URL (BPS WebAPI):**
   * `https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/domain/0000/var/{2790,2791,2792}/`
   * `https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/{2790,2791,2792}/`
-* **Release Frequency / Refresh Schedule:** Monthly check (`0 6 1 * *`, `P1Y` source release frequency)
+* **Release Frequency / Refresh Schedule:** Weekly check (`0 05 * * 1`, `P1Y` source release frequency)
 * **Geographic Coverage:**
   * Country (`country/IDN`)
   * 38 Provinces (`AdministrativeArea1`, `wikidataId/Q...`, including the 4 new Papua provinces split in late 2022: `Southwest Papua`, `South Papua`, `Central Papua`, `Highland Papua`)
