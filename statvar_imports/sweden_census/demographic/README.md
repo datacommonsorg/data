@@ -1,4 +1,4 @@
-# Sweden Census: Demographic Population Statistics (1860–2025)
+# Sweden Census: Demographic Population Statistics (1860–2024)
 
 ## 1. Import Overview
 
@@ -9,14 +9,14 @@ This directory contains the automated Data Commons import pipeline for **Sweden 
 | **Source Agency** | Statistics Sweden (SCB / *Statistiska centralbyrån*) |
 | **Import Type** | Automated (Python PxWeb REST API downloader + `stat_var_processor.py`) |
 | **Authentication** | None (Public SCB PxWeb REST API; rate-limited to 10 requests / 10 seconds) |
-| **SCB Table IDs** | `BE0101A/BefolkningR1860N` (National `1860–2024`) & `BE0101A/BefolkningNy` (Sub-National `1968–2025`) |
+| **SCB Table IDs** | `BE0101A/BefolkningR1860N` (National `1860–2024`) & `BE0101A/BefolkningNy` (Sub-National `1968–2024`) |
 | **Source URL** | [SCB Statistikdatabasen — BE0101A](https://www.statistikdatabasen.scb.se/pxweb/en/ssd/START__BE__BE0101__BE0101A/) |
 | **REST API Endpoints** | `https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860N`<br>`https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningNy` |
 | **Geographic Coverage** | **322** Places in Sweden: `1` Country (`country/SWE`), `3` NUTS1 (`nuts/SE1`–`SE3`), `8` NUTS2 (`nuts/SE11`–`SE33`), `21` NUTS3 Counties (`nuts/SE110`–`SE332`), and `289` Municipalities (`wikidataId/Q*`) |
-| **Temporal Coverage** | `1860–2024` (National, 165 years) & `1968–2025` (Sub-National, 58 years; dynamically discovers new years via SCB API) |
+| **Temporal Coverage** | `1860–2024` (National, 165 years) & `1968–2024` (Sub-National, 57 years; dynamically discovers new years via SCB API) |
 | **Release Frequency** | Annual (scheduled weekly cron `0 05 * * 1`) |
 | **Total Unique StatVars** | **139** unique `StatisticalVariable` DCIDs across all breakdowns |
-| **Total SVObs (`1860–2025`)** | **441,402** (`426,062` historical `1860–2022` + `15,340` new `2023–2025`) |
+| **Total SVObs (`1860–2024`)** | **441,402** (`426,062` historical `1860–2022` + `15,340` new `2023–2024`) |
 
 ---
 
