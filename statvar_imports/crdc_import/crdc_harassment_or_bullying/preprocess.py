@@ -15,13 +15,14 @@
 import os
 import re
 from glob import glob
-import pandas as pd # Required library for handling Excel and robust CSV files
+import pandas as pd  # Required library for handling Excel and robust CSV files
 
 # --- Configuration ---
-# Set the directory where your files are located. 
-TARGET_DIR = 'input_files' 
+# Set the directory where your files are located.
+TARGET_DIR = 'input_files'
 # Define the delimiter used in your CSV files. This is only used for CSV files.
 DELIMITER = ','
+
 
 def extract_year_from_filename(filename):
     """
@@ -35,6 +36,7 @@ def extract_year_from_filename(filename):
         return match.group(2)
     return None
 
+
 def clean_dataframe(df):
     """
     Cleans string columns in the DataFrame by removing all backticks, quotes, 
@@ -42,21 +44,22 @@ def clean_dataframe(df):
     cleaning step to handle inconsistent quoting and backticks in source data.
     """
     # Regex to find all backticks, single quotes, and double quotes globally
-    chars_to_remove = r"[`'\"]" 
+    chars_to_remove = r"[`'\"]"
 
     for col in df.columns:
         # Only process columns that are of object (string) type
         if df[col].dtype == 'object':
             # Convert to string to handle potential NaNs and other types cleanly
             s = df[col].astype(str)
-            
+
             # 1. Remove ALL instances of the target characters globally in the string
             s = s.str.replace(chars_to_remove, '', regex=True)
-            
+
             # 2. Strip leading/trailing whitespace
             df[col] = s.str.strip()
-            
+
     return df
+
 
 def process_file(filepath, year):
     """
@@ -71,7 +74,7 @@ def process_file(filepath, year):
         return
 
     print(f"Processing {filepath}... Inserting Year: {year}")
-    
+
     file_extension = os.path.splitext(filepath)[1].lower()
 
     # 1. Read the file content using pandas
@@ -84,17 +87,21 @@ def process_file(filepath, year):
             # Assumes data is in the first sheet (sheet_name=0)
             df = pd.read_excel(filepath, sheet_name=0)
         else:
-            print(f"Skipping {filepath}: Unsupported file format ({file_extension}). Only CSV, XLSX, and XLS are supported.")
+            print(
+                f"Skipping {filepath}: Unsupported file format ({file_extension}). Only CSV, XLSX, and XLS are supported."
+            )
             return
 
     except ImportError:
-        print(f"Error: Required library missing. Please install pandas and openpyxl: pip install pandas openpyxl")
+        print(
+            f"Error: Required library missing. Please install pandas and openpyxl: pip install pandas openpyxl"
+        )
         return
     except Exception as e:
         # Catch reading errors
         print(f"Error reading {filepath}: {e}")
         return
-    
+
     if df.empty:
         print(f"File {filepath} is empty. Skipping modification.")
         return
@@ -103,51 +110,53 @@ def process_file(filepath, year):
     # Apply aggressive cleaning to remove backticks and quotes globally
     df = clean_dataframe(df)
     # -------------------------
-    
+
     # 2. Modify the data
-    
-    # Check if 'Year' column already exists 
+
+    # Check if 'Year' column already exists
     if 'Year' in df.columns:
-        print(f"File {filepath} already contains a 'Year' column. Skipping modification.")
+        print(
+            f"File {filepath} already contains a 'Year' column. Skipping modification."
+        )
         return
 
     # Assign the new column with the year value
     df['Year'] = year
-    
+
     is_2010_file = (year == '2010')
-    
+
     # Conditional addition of the 'NA' column
     if is_2010_file:
         print(f"Adding 'NA' column for 2010 file: {filepath}")
         # Add the "NA" column with missing values (pd.NA)
-        df['NA'] = pd.NA 
-    
+        df['NA'] = pd.NA
+
     # Reorder columns: Get all column names
     cols = df.columns.tolist()
-    
+
     # Handle the case where the DataFrame might be read without any columns if it was malformed
     if not cols:
-         print(f"Error: Could not identify columns in {filepath}.")
-         return
-         
+        print(f"Error: Could not identify columns in {filepath}.")
+        return
+
     first_col = cols[0]
-    
+
     # Define the base new column list: [First Col, 'Year', ...]
     new_cols = [first_col, 'Year']
-    
+
     # If it's a 2010 file, insert 'NA' after 'Year'
     if is_2010_file:
         new_cols.append('NA')
-        
-    # Append all remaining columns 
+
+    # Append all remaining columns
     # We use a set for efficient exclusion of the columns we've already placed
     cols_to_exclude = {first_col, 'Year'}
     if is_2010_file:
         cols_to_exclude.add('NA')
-        
+
     remaining_cols = [col for col in cols if col not in cols_to_exclude]
     new_cols.extend(remaining_cols)
-    
+
     # Apply the new column order
     df = df[new_cols]
 
@@ -160,7 +169,7 @@ def process_file(filepath, year):
             # Save Excel file (index=False prevents writing the pandas index)
             # Using the same engine as read_excel for consistency
             df.to_excel(filepath, index=False, engine='openpyxl')
-            
+
         print(f"Successfully updated {filepath}.")
     except Exception as e:
         print(f"Error writing to {filepath}: {e}")
@@ -172,28 +181,31 @@ def main():
     It iterates over files in the defined TARGET_DIR and modifies them.
     """
     print(f"Starting file processing in directory: {TARGET_DIR}")
-    
+
     # Get all files in the target directory
     all_files = glob(os.path.join(TARGET_DIR, '*'))
-    
+
     # Filter out directories, focusing only on files that can be processed.
     file_paths = [f for f in all_files if os.path.isfile(f)]
-    
+
     if not file_paths:
-        print(f"No files found in {TARGET_DIR}. Please check the path and ensure files exist.")
+        print(
+            f"No files found in {TARGET_DIR}. Please check the path and ensure files exist."
+        )
         return
 
     # Process each file found
     for filepath in file_paths:
         filename = os.path.basename(filepath)
-        
+
         # 1. Extract the year
         year = extract_year_from_filename(filename)
-        
+
         # 2. Process the file
         process_file(filepath, year)
 
     print("\nFile processing complete.")
+
 
 if __name__ == "__main__":
     main()

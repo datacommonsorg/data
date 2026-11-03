@@ -19,9 +19,15 @@ is processed as is.
 
 import pandas as pd
 import os
+import sys
 import logging
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_county_2020_2029(url: str) -> pd.DataFrame:
@@ -41,7 +47,9 @@ def process_county_2020_2029(url: str) -> pd.DataFrame:
     _INPUT_FILE_PATH = os.path.join(parent_dir, 'output_files/intermediate')
 
     # reading the csv input file
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     df.to_csv(_CODEDIR + "/../input_files/" + 'county_result_2020_2029.csv',
               index=False)
 
@@ -60,8 +68,8 @@ def process_county_2020_2029(url: str) -> pd.DataFrame:
         + (df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME',\
-        'AGEGRP'], axis=1, inplace=True)
+    df = df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME',\
+        'AGEGRP'], axis=1)
 
     # all these column contain hispanic and non-hispanic
     # which are not required as not considering origin

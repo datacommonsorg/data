@@ -19,9 +19,15 @@ is processed as is.
 
 import pandas as pd
 import os
+import sys
 from absl import logging
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
@@ -50,7 +56,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
                 # reading the csv format input file
                 # and converting it to a dataframe
-                df = pd.read_csv(file)
+                df = pd.read_csv(load_url_or_path(file))
                 #Saving file to local
                 df.to_csv(_CODEDIR + "/../input_files/" +
                           "nationals_result_1900_1959.csv",
@@ -72,10 +78,9 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 ]
 
                 # dropping the unwanted columns
-                df.drop(columns=[
+                df = df.drop(columns=[
                     "Age", "All race total", "White Total", "Nonwhite Total"
-                ],
-                        inplace=True)
+                ])
 
                 # inserting year column to the dataframe
                 df.insert(loc=0, column='Year', value=year)
@@ -89,7 +94,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
             else:
                 # reading the csv format input file
                 # and converting it to a dataframe
-                df2 = pd.read_csv(file)
+                df2 = pd.read_csv(load_url_or_path(file))
                 df2.to_csv(_CODEDIR + "/../input_files/" +
                            "nationals_result_1960_1979.csv",
                            index=False)
@@ -112,12 +117,11 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 ]
 
                 # dropping the unwanted columns
-                df2.drop(columns=[
+                df2 = df2.drop(columns=[
                     "Age", "All race total", "White Total", "Black Total",
                     "Other Races Total", "Count_Person_Male_OtherRaces",
                     "Count_Person_Female_OtherRaces"
-                ],
-                         inplace=True)
+                ])
 
                 # inserting year column
                 df2.insert(loc=0, column='Year', value=year)

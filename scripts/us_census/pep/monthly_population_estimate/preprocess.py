@@ -245,7 +245,7 @@ class CensusUSACountryPopulation:
         # _return_year("1999") or _return_year("1999 [1]"): pd.NA
         # _return_year(".07 1"): 07
         df['Month'] = df['Year and Month'].apply(_return_month)
-        df.dropna(subset=['Year', 'Month'], inplace=True)
+        df = df.dropna(subset=['Year', 'Month'])
 
         # Creating new Date Column and Final Date format is yyyy-mm
         df['Date'] = df['Year'] + df['Month']
@@ -264,9 +264,9 @@ class CensusUSACountryPopulation:
             df = df[df['Date'] < dt(2010, 4, 1)]
         if 'na-est2019-01.xlsx' in file:
             df = df[df['Date'] < dt(2020, 4, 1)]
-        df.dropna(subset=['Date'], inplace=True)
+        df = df.dropna(subset=['Date'])
         df['Date'] = df['Date'].dt.strftime('%Y-%m')
-        df.drop_duplicates(subset=['Date'], inplace=True)
+        df = df.drop_duplicates(subset=['Date'])
 
         # Deriving new SV Count_Person_InArmedForcesOverseas as
         # subtracting Resident Population from
@@ -313,12 +313,11 @@ class CensusUSACountryPopulation:
             else:
                 self._df = pd.concat([self._df, df], ignore_index=True)
 
-            self._df.sort_values(by=['Date', 'date_range'],
-                                 ascending=False,
-                                 inplace=True)
+            self._df = self._df.sort_values(by=['Date', 'date_range'],
+                                            ascending=False)
             # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
-            self._df.drop_duplicates("Date", keep="last", inplace=True)
-            self._df.drop(['date_range'], axis=1, inplace=True)
+            self._df = self._df.drop_duplicates("Date", keep="last")
+            self._df = self._df.drop(['date_range'], axis=1)
             float_col = self._df.select_dtypes(include=['float64'])
             for col in float_col.columns.values:
                 try:
@@ -535,7 +534,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     df['Year and Month'] = df[['Year and Month', 'Date']]\
                                     .apply(_concat_cols, axis=1)
-    df.drop(columns=['Date'], inplace=True)
+    df = df.drop(columns=['Date'])
     for col in df.columns:
         df[col] = df[col].str.replace(",", "")
 

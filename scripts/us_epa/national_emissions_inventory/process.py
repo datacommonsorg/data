@@ -124,7 +124,7 @@ class USAirEmissionTrends:
             df (pd.DataFrame): provides the regularized df as output
         """
         if '2008' in file_path or '2011' in file_path:
-            df.rename(columns=replacement_08_11, inplace=True)
+            df = df.rename(columns=replacement_08_11)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
                 df['emissions type code'] = ''
@@ -140,7 +140,7 @@ class USAirEmissionTrends:
                 df['pollutant type(s)'] = 'nan'
             elif 'point_' in os.path.basename(
                     file_path) or 'facility_process' in file_path:
-                df.rename(columns=replacement_point_17, inplace=True)
+                df = df.rename(columns=replacement_point_17)
                 df['emissions type code'] = ''
             elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
@@ -150,23 +150,23 @@ class USAirEmissionTrends:
                 df['pollutant type(s)'] = 'nan'
             elif 'point_' in os.path.basename(
                     file_path) or 'facility_process' in file_path:
-                df.rename(columns=replacement_20, inplace=True)
+                df = df.rename(columns=replacement_20)
                 df['emissions type code'] = ''
             elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
             if 'fips code' not in df.columns and 'tribal name' in df.columns:
-                df.rename(columns=replacement_tribes, inplace=True)
+                df = df.rename(columns=replacement_tribes)
                 df = self._data_standardize(df, 'fips code')
             else:
-                df.rename(columns=replacement_14, inplace=True)
+                df = df.rename(columns=replacement_14)
                 if 'event' in file_path or 'process' in file_path:
                     df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         elif '2014' in file_path:
-            df.rename(columns=replacement_14, inplace=True)
+            df = df.rename(columns=replacement_14)
             if 'event' in file_path or 'process' in file_path:
                 df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
@@ -215,7 +215,7 @@ class USAirEmissionTrends:
                                                       regex=True).str.strip()
         df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
                              df['scc'].str[0])
-        df.rename(columns=replacement_17, inplace=True)
+        df = df.rename(columns=replacement_17)
         df_pollutants = df[df['pollutant code'].isin(pollutants)]
         df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
         df['pollutant code'] = ''
@@ -246,7 +246,7 @@ class USAirEmissionTrends:
                 df = df.sort_values(by=[
                     'geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'
                 ])
-                df.dropna(subset=['observation'], inplace=True)
+                df = df.dropna(subset=['observation'])
                 df['observation'] = np.where(df['unit'] == 'Pound',
                                              df['observation'] / 2000,
                                              df['observation'])
@@ -360,7 +360,7 @@ class USAirEmissionTrends:
                 batch_concat = batch_concat.sort_values(by=[
                     'geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'
                 ])
-                batch_concat.dropna(subset=['observation'], inplace=True)
+                batch_concat = batch_concat.dropna(subset=['observation'])
                 batch_concat['observation'] = np.where(
                     batch_concat['unit'] == 'Pound',
                     batch_concat['observation'] / 2000,
@@ -386,7 +386,7 @@ class USAirEmissionTrends:
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
-        self.final_df.dropna(subset=['observation'], inplace=True)
+        self.final_df = self.final_df.dropna(subset=['observation'])
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
             self.final_df['observation'] / 2000, self.final_df['observation'])

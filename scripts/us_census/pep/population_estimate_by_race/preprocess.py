@@ -87,8 +87,7 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     if "2020" in file:
         # "2020" refers to the file name: "CC-EST2020" which carries a different
         # format hence, extra rows/columns needed to be dropped from the file.
-        df.drop(df[df['ORIGIN'] != 0].index, inplace=True)
-        df.drop(df[df['SEX'] != 0].index, inplace=True)
+        df = df[(df['ORIGIN'] == 0) & (df['SEX'] == 0)]
         df = df.drop(['STATE','DIVISION','SUMLEV','SEX','ORIGIN'\
             ,'AGE','REGION','ESTIMATESBASE2010','CENSUS2010POP'\
             ,'POPESTIMATE042020'],axis=1)
@@ -124,7 +123,7 @@ def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.drop(['Census', 'Estimates Base'], axis=1)
     df = df.drop([1], axis=0)
-    df.drop(df.index[7:], inplace=True)
+    df = df.drop(df.index[7:])
     df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "")
     df['Geographic Area'] = 'United States'
 
@@ -167,8 +166,8 @@ def _clean_county_70_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             df['Total People'] = df['Total People'] + df[i]
         df['FIPS'] = [f'{x:05}' for x in df['FIPS']]
         df['Info'] = df['Year'].astype(str) + '-' + df['FIPS'].astype(str)
-        df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,\
-            13,14,15,16,17,18],inplace=True)
+        df = df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,\
+            13,14,15,16,17,18])
         df = df.groupby(['Info','Race/Sex']).sum().transpose().\
             stack(0).reset_index()
         df['Year'] = df['Info'].str.split('-', expand=True)[0]
@@ -176,7 +175,7 @@ def _clean_county_70_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df['Total'] = df[1] + df[2] + df[3] + df[4] + df[5] + df[6]
         df['White Alone'] = df[1] + df[2]
         df['Black or African American Alone'] = df[3] + df[4]
-        df.drop(columns=['Info', 'level_0', 1, 2, 3, 4, 5, 6], inplace=True)
+        df = df.drop(columns=['Info', 'level_0', 1, 2, 3, 4, 5, 6])
     except Exception as e:
         logging.fatal(
             f"error in the method clean_county_70_xls_file,{file_path} -{e}")
@@ -207,8 +206,8 @@ def _clean_county_80_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             df[16]+df[17]+df[18]
         df['FIPS'] = [f'{x:05}' for x in df['FIPS']]
         df['Info'] = df['Year'].astype(str) + '-' + df['FIPS'].astype(str)
-        df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,13,14\
-            ,15,16,17,18],inplace=True)
+        df = df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,13,14\
+            ,15,16,17,18])
         df = df.groupby(['Info','Race/Sex']).sum().transpose().\
             stack(0).reset_index()
         df['Year'] = df['Info'].str.split('-', expand=True)[0]
@@ -219,14 +218,14 @@ def _clean_county_80_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df['White Alone'] = df['White male'] + df['White female']
         df['Black or African American Alone'] = df['Black male'] + \
             df['Black female']
-        df.drop(columns=['Info','level_0','White male','White female','Black male'\
-            ,'Black female','Other races male','Other races female'],inplace=True)
+        df = df.drop(columns=['Info','level_0','White male','White female','Black male'\
+            ,'Black female','Other races male','Other races female'])
         final_df = pd.DataFrame()
         final_df = pd.concat([final_df, df])
         df['geo_ID'] = df['geo_ID'].str[:-3]
         df = df.groupby(['Year','geo_ID']).sum().\
             reset_index()
-        df.drop(columns=['Total'], inplace=True)
+        df = df.drop(columns=['Total'])
         df_temp = pd.DataFrame()
         df_temp = pd.concat([df, df_temp])
         df_temp['geo_ID'] = "country/USA"
@@ -450,11 +449,11 @@ def _clean_county_2010_csv_file(df: pd.DataFrame,
         }
         df = df.replace({"AGEGRP": conversion_of_agebracket_to_value})
         # drop unwanted columns
-        df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
-            inplace=True)
+        df = df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME',
+                              'CTYNAME'],)
         df = df.loc[:, :'NAC_FEMALE']
         df['Year'] = df['YEAR']
-        df.drop(columns=['YEAR'], inplace=True)
+        df = df.drop(columns=['YEAR'])
         df['WhiteAlone'] = df['WA_MALE'].astype(int) + df['WA_FEMALE'].astype(
             int)
         df['BlackOrAfricanAmericanAlone'] = df['BA_MALE'].astype(int)\
@@ -478,15 +477,14 @@ def _clean_county_2010_csv_file(df: pd.DataFrame,
         df['NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOr'+\
             'MoreOtherRaces']= df['NAC_MALE']\
                 .astype(int)+df['NAC_FEMALE'].astype(int)
-        df.drop(columns=[
+        df = df.drop(columns=[
             'AGEGRP', 'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE',
             'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE',
             'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE',
             'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE',
             'IAC_MALE', 'IAC_FEMALE', 'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE',
             'NAC_FEMALE'
-        ],
-                inplace=True)
+        ])
     except Exception as e:
         logging.fatal(
             f"error in the method clean_county_2010_csv_file,{file_path} -{e}")
@@ -564,11 +562,11 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
         }
         df = df.replace({"AGEGRP": conversion_of_agebracket_to_value})
         # drop unwanted columns
-        df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
-            inplace=True)
+        df = df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME',
+                              'CTYNAME'],)
         df = df.loc[:, :'NAC_FEMALE']
         df['Year'] = df['YEAR']
-        df.drop(columns=['YEAR'], inplace=True)
+        df = df.drop(columns=['YEAR'])
         df['WhiteAlone'] = df['WA_MALE'].astype(int) + df['WA_FEMALE'].astype(
             int)
         df['BlackOrAfricanAmericanAlone'] = df['BA_MALE'].astype(int)\
@@ -592,15 +590,14 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
         df['NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOr'+\
             'MoreOtherRaces']= df['NAC_MALE']\
                 .astype(int)+df['NAC_FEMALE'].astype(int)
-        df.drop(columns=[
+        df = df.drop(columns=[
             'AGEGRP', 'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE',
             'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE',
             'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE',
             'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE',
             'IAC_MALE', 'IAC_FEMALE', 'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE',
             'NAC_FEMALE'
-        ],
-                inplace=True)
+        ])
     except Exception as e:
         logging.fatal(
             f"error in the method clean_county_2022_csv_file,{file_path} -{e}")
@@ -620,10 +617,8 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
     try:
-        # dropping unwanted rows after the data
-        df.drop(df.index[65:], inplace=True)
-        # dropping the first 14 unwanted rows
-        df.drop(df.index[1:14], inplace=True)
+        # keep header row (0) and data rows (14..64), dropping unwanted rows
+        df = pd.concat([df.iloc[:1], df.iloc[14:65]])
         modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
         for j in modify:
             df.iloc[j, 0] = str(df.iloc[j, 0]) + " " + str(df.iloc[j, 1])
@@ -633,7 +628,7 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             df.iloc[9, 1]) + " " + str(df.iloc[9, 2])
         for i in range(3, 11):
             df.iloc[9, i - 2] = df.iloc[9, i]
-        df.drop(columns=["3", "4", "8", "9", "10"], inplace=True)
+        df = df.drop(columns=["3", "4", "8", "9", "10"])
         # Replacing the reuired columns.
         df.columns = df.columns.str.replace('Area', 'Geographic Area')
         df.columns = df.columns.str.replace('1', 'Total')
@@ -715,7 +710,7 @@ def _clean_county_90_txt_file(file: str) -> pd.DataFrame:
                         list1.append(x)
                 df.loc[len(df.index)] = list1
     df["geo_ID"] = "geoId/" + df["FIPS"]
-    df.drop(columns=["FIPS", 1, 2, 3], inplace=True)
+    df = df.drop(columns=["FIPS", 1, 2, 3])
     df["Year"] = "19" + file[-6:-4]
     df = df.drop(df[(df['geo_ID'].str.endswith('000'))].index)
     return df
@@ -1012,9 +1007,7 @@ class CensusUSAPopulationByRace:
             else:
                 self.df = pd.concat([self.df, df], ignore_index=True)
             self.df['Year'] = pd.to_numeric(self.df['Year'])
-            self.df.sort_values(by=['Year', 'geo_ID'],
-                                ascending=True,
-                                inplace=True)
+            self.df = self.df.sort_values(by=['Year', 'geo_ID'], ascending=True)
             self.df = self.df[["Year","geo_ID",
                 "Count_Person_WhiteAlone",\
                 "Count_Person_BlackOrAfricanAmericanAlone",\

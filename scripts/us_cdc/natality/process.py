@@ -299,12 +299,11 @@ def aggregate_state_to_country(state_df: pd.DataFrame) -> pd.DataFrame:
     df_count = state_df.loc[state_df['StatVar'].str.startswith('Count')].copy()
     df_count = _filter_zero_unknown_placeholders(df_count)
     if 'Unit' in df_count.columns:
-        df_count.drop('Unit', axis=1, inplace=True)
-    df_count.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
-                             keep='last',
-                             inplace=True)
+        df_count = df_count.drop('Unit', axis=1)
+    df_count = df_count.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
+                                        keep='last')
     df_count['Quantity'] = pd.to_numeric(df_count['Quantity'], errors='coerce')
-    df_count.dropna(subset=['Quantity'], inplace=True)
+    df_count = df_count.dropna(subset=['Quantity'])
     if df_count.empty:
         return pd.DataFrame(columns=['Year', 'StatVar', 'Quantity'])
 
@@ -313,7 +312,7 @@ def aggregate_state_to_country(state_df: pd.DataFrame) -> pd.DataFrame:
     if pd.api.types.is_numeric_dtype(country_df['Quantity']):
         country_df['Quantity'] = (
             country_df['Quantity'].round().astype('int64').astype(str))
-    country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
+    country_df = country_df.sort_values(by=['Year', 'StatVar'])
     return country_df
 
 
@@ -441,11 +440,11 @@ def process_data(input_dir: str, output_dir: str) -> bool:
                 _UNIT_NORMALIZATION)
         final_state_df = final_state_df[~final_state_df['Geo'].
                                         isin(['geoId/99', 'geoId/00'])]
-        final_state_df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
-                                       keep='last',
-                                       inplace=True)
+        final_state_df = final_state_df.drop_duplicates(
+            subset=['Year', 'Geo', 'StatVar'], keep='last')
         final_state_df = _normalize_quantities(final_state_df)
-        final_state_df.sort_values(by=['Year', 'Geo', 'StatVar'], inplace=True)
+        final_state_df = final_state_df.sort_values(
+            by=['Year', 'Geo', 'StatVar'])
         state_out = os.path.join(output_dir, 'state.csv')
         final_state_df.to_csv(state_out, index=False)
         logging.info(f'Generated state.csv with {len(final_state_df)} rows.')
@@ -453,7 +452,7 @@ def process_data(input_dir: str, output_dir: str) -> bool:
         # Compute country totals directly from consolidated state data
         final_country_df = aggregate_state_to_country(final_state_df)
         final_country_df = _normalize_quantities(final_country_df)
-        final_country_df.sort_values(by=['Year', 'StatVar'], inplace=True)
+        final_country_df = final_country_df.sort_values(by=['Year', 'StatVar'])
         country_out = os.path.join(output_dir, 'country.csv')
         final_country_df.to_csv(country_out, index=False)
         logging.info(
@@ -470,11 +469,11 @@ def process_data(input_dir: str, output_dir: str) -> bool:
             final_county_df['Geo'].notna() &
             ~final_county_df['Geo'].isin(['geoId/99999', 'geoId/00000']) &
             ~final_county_df['Geo'].str.endswith('999', na=False)]
-        final_county_df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
-                                        keep='last',
-                                        inplace=True)
+        final_county_df = final_county_df.drop_duplicates(
+            subset=['Year', 'Geo', 'StatVar'], keep='last')
         final_county_df = _normalize_quantities(final_county_df)
-        final_county_df.sort_values(by=['Year', 'Geo', 'StatVar'], inplace=True)
+        final_county_df = final_county_df.sort_values(
+            by=['Year', 'Geo', 'StatVar'])
         county_out = os.path.join(output_dir, 'county.csv')
         final_county_df.to_csv(county_out, index=False)
         logging.info(f'Generated county.csv with {len(final_county_df)} rows.')

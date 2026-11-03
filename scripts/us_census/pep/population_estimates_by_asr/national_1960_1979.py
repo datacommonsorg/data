@@ -15,9 +15,16 @@
 This Python Script is for National Level Data 1960-1979.
 '''
 import os
+import sys
 import pandas as pd
-import requests
 from absl import logging
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def national1960(output_folder: str):
@@ -28,7 +35,6 @@ def national1960(output_folder: str):
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     # The numbers 60 to 80 signify the available files as per year numbers
-    session = requests.Session()
     for i in range(60, 80):
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
             '1900-1980/national/asrh/pe-11-19'+str(i)+'.csv'
@@ -41,21 +47,11 @@ def national1960(output_folder: str):
         ]
         # Reading the csv format input file and converting it to a dataframe.
         # Skipping unwanted rows from top and bottom.
-        try:
-            # Check if the URL is accessible
-            response = session.head(url, allow_redirects=True, timeout=5)
-            if response.status_code != 200:
-                logging.warning(f"Skipping {url} as it is not accessible.")
-                continue
-
-            df = pd.read_csv(url,
-                             names=cols,
-                             engine='python',
-                             skiprows=8,
-                             skipfooter=15)
-        except Exception as e:
-            logging.error(f"Error reading {url}: {e}")
-            continue
+        df = pd.read_csv(load_url_or_path(url),
+                         names=cols,
+                         engine='python',
+                         skiprows=8,
+                         skipfooter=15)
         #Writing raw data to csv
         df.to_csv(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "raw_data",
@@ -66,7 +62,7 @@ def national1960(output_folder: str):
         df['Age'] = df['Age'].str.replace("85+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
         # Dropping unwanted columns Total (0) and Other Races (9-11)
-        df.drop(columns=['0', '9', '10', '11'], inplace=True)
+        df = df.drop(columns=['0', '9', '10', '11'])
         # Melt funtion used to change the Data frame format from wide to long.
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
         # Providing proper column names.
@@ -84,7 +80,7 @@ def national1960(output_folder: str):
         })
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
         # Dropping unwanted columns.
-        df.drop(columns=['Age', 'sv'], inplace=True)
+        df = df.drop(columns=['Age', 'sv'])
         # Inserting Year,Location and Measurement_Method to the dataframe.
         # Extracting year values from url.
         year = url[-8:-4]

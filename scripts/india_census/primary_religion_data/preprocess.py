@@ -165,10 +165,9 @@ class CensusPrimaryReligiousDataLoader():
         # We delete them only if they exists
         # From pandas documentation:
         # If errors=‘ignore’, suppress error and only existing labels are dropped
-        self.raw_df.drop(
+        self.raw_df = self.raw_df.drop(
             ["State", "District", "Subdistt", "Town/Village", "Name"],
             axis=1,
-            inplace=True,
             errors='ignore')
 
         # Once the above columns are dropped, we will have
@@ -204,28 +203,25 @@ class CensusPrimaryReligiousDataLoader():
         self.raw_df['Year'] = self.census_year
 
         # Remove data_category_column as its not required
-        self.raw_df.drop([self.data_category_column],
-                         axis=1,
-                         inplace=True,
-                         errors='ignore')
+        self.raw_df = self.raw_df.drop([self.data_category_column],
+                                       axis=1,
+                                       errors='ignore')
 
         # Export it as CSV. It will have the following columns
         # Name,TRU,columnName,value,StatisticalVariable,Year
         if path.exists(self.csv_file_path):
-            self.raw_df.drop_duplicates(
+            self.raw_df = self.raw_df.drop_duplicates(
                 subset=["census_location_id", "StatisticalVariable", "Year"],
-                keep="first",
-                inplace=True)
+                keep="first")
             self.raw_df.to_csv(self.csv_file_path,
                                quoting=csv.QUOTE_ALL,
                                mode='a',
                                index=False,
                                header=False)
         else:
-            self.raw_df.drop_duplicates(
+            self.raw_df = self.raw_df.drop_duplicates(
                 subset=["census_location_id", "StatisticalVariable", "Year"],
-                keep="first",
-                inplace=True)
+                keep="first")
             self.raw_df.to_csv(self.csv_file_path,
                                quoting=csv.QUOTE_ALL,
                                index=False,
@@ -502,5 +498,5 @@ if __name__ == '__main__':
         "StatisticalVariable": str
     }
     data = pd.read_csv(csv_file_path, dtype=dtype)
-    data.drop_duplicates(inplace=True)
+    data = data.drop_duplicates()
     data.to_csv(csv_file_path, quoting=csv.QUOTE_ALL, index=False, header=True)

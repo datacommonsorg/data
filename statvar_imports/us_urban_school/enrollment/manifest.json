@@ -8,48 +8,59 @@
       "scripts": ["../download.py --data_type=enrollment","run.sh"],
       "source_files": [
         "input_files/*.xlsx",
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv",
+        "validation_config.json"
       ],
       "import_inputs": [
         {
           "template_mcf": "output_files/enrollment_by_race_and_sex_2010_2014_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2010_2014_output.csv"
+          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2010_2014_output.csv",
+          "node_mcf": "output_files/enrollment_by_race_and_sex_2010_2014_output*.mcf"
         },
         {
           "template_mcf": "output_files/enrollment_by_race_and_sex_2016_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2016_output.csv"
+          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2016_output.csv",
+          "node_mcf": "output_files/enrollment_by_race_and_sex_2016_output*.mcf"
         },
         {
-          "template_mcf": "output_files/enrollment_by_race_and_sex_2018_2022_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2018_2022_output.csv"
+          "template_mcf": "output_files/enrollment_by_race_and_sex_2018Onwards_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2018Onwards_output.csv",
+          "node_mcf": "output_files/enrollment_by_race_and_sex_2018Onwards_output*.mcf"
         },
         {
           "template_mcf": "output_files/enrollment_by_disability_and_sex_2010_2014_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2010_2014_output.csv"
+          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2010_2014_output.csv",
+          "node_mcf": "output_files/enrollment_by_disability_and_sex_2010_2014_output*.mcf"
         },
         {
           "template_mcf": "output_files/enrollment_by_disability_and_sex_2016_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2016_output.csv"
+          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2016_output.csv",
+          "node_mcf": "output_files/enrollment_by_disability_and_sex_2016_output*.mcf"
         },
         {
-          "template_mcf": "output_files/enrollment_by_disability_and_sex_2018_2022_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2018_2022_output.csv"
+          "template_mcf": "output_files/enrollment_by_disability_and_sex_2018Onwards_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2018Onwards_output.csv",
+          "node_mcf": "output_files/enrollment_by_disability_and_sex_2018Onwards_output*.mcf"
         },
         {
           "template_mcf": "output_files/enrollment_by_lep_and_sex_2010_2014_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2010_2014_output.csv"
+          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2010_2014_output.csv",
+          "node_mcf": "output_files/enrollment_by_lep_and_sex_2010_2014_output*.mcf"
         },
         {
           "template_mcf": "output_files/enrollment_by_lep_and_sex_2016_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2016_output.csv"
+          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2016_output.csv",
+          "node_mcf": "output_files/enrollment_by_lep_and_sex_2016_output*.mcf"
         },
         {
-          "template_mcf": "output_files/enrollment_by_lep_and_sex_2018_2022_output.tmcf",
-          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2018_2022_output.csv"
+          "template_mcf": "output_files/enrollment_by_lep_and_sex_2018Onwards_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2018Onwards_output.csv",
+          "node_mcf": "output_files/enrollment_by_lep_and_sex_2018Onwards_output*.mcf"
         }
       ],
-      "cron_schedule": "0 05 * * 5"
+      "cron_schedule": "0 05 * * 5",
+      "validation_config_file": "validation_config.json"
     }
   ]
 }
-

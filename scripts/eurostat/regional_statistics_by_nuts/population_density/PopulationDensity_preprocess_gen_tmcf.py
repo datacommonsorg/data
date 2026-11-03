@@ -88,7 +88,7 @@ def translate_wide_to_long(file_path):
         new = df[header[0]].str.split(",", n=1, expand=True)
         df['geo'] = new[1]
         df['unit'] = new[0]
-        df.drop(columns=[header[0]], inplace=True)
+        df = df.drop(columns=[header[0]])
         df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
             g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
                                     else COUNTRY_MAP.get(geo, f'{geo}'))
