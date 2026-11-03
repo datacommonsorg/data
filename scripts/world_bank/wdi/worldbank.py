@@ -155,8 +155,6 @@ RESOLUTION_TO_EXISTING_DCID = {
         'Count_Person_Upto4Years_Male_Wasting_AsFractionOf_Count_Person_Upto4Years_Male',
     'dcs:WorldBank/SH_STA_WAST_FE_ZS':
         'Count_Person_Upto4Years_Female_Wasting_AsFractionOf_Count_Person_Upto4Years_Female',
-    'dcs:WorldBank/SH_XPD_CHEX_PC_CD':
-        'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person',
     'dcs:WorldBank/SH_ALC_PCAP_LI':
         'Amount_Consumption_Alcohol_15OrMoreYears_AsFractionOf_Count_Person_15OrMoreYears',
     'dcs:WorldBank/SI_POV_GINI':

@@ -88,7 +88,6 @@ class EuroStatFruitsVegetables(EuroStat):
         "Male": "gender",
         "Female": "gender",
         "Education": "education",
-        "Percentile": "incomequin",
         "Urban": "residence",
         "Rural": "residence",
         "Limitation": "lev_limit",

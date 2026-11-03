@@ -147,10 +147,6 @@ def county2029(url_file: str, output_folder: str):
             "Male_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces",
         'NAC_FEMALE':
             "Female_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces",
-        'NHWAC_MALE':
-            "Male_NotHispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",
-        'NHWAC_FEMALE':
-            "Female_NotHispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",
         'NHBAC_MALE':
             "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces",
         'NHBAC_FEMALE':

@@ -160,7 +160,6 @@ TITLE_DELETIONS = [
 # Map of input title text to output replacement text.
 TITLE_REPLACEMENTS = {
     '24 to 59 months old': '2 to 5 years old',
-    '36 to 47 months old': '3 to 4 years old',
     '36 to 59 months old': '3 to 5 years old',
     '12 to 23 months': '1 to 2 years old',
     '24 to 35 months': '2 to 3 years old',

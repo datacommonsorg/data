@@ -21,8 +21,6 @@ import os
 
 # Map of dimension code to title to use to build a dcid for that dimension
 PROP_TITLE_MAP = {
-    "GOVERNMENTBENEFIT":
-        "Substance Use Disorder Government Benefit",
     "GROUP":
         "Substance Use Disorder Resource Group",
     "RSUDPREVENTIONPROGRAMME":
@@ -43,8 +41,6 @@ PROP_TITLE_MAP = {
         "Occupation",
     "PROGRAMME":
         "Substance Use Disorder Program",
-    "RSUDREP":
-        "Representative Type",
     "RSUDSPECIFICPOPULATION":
         "Grouping Of People",
     "DRUGSUPERVISION":
