@@ -272,7 +272,7 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
         if prop_dcid not in seen_dcids:
             description = ""
             if d_code in PROP_NODE_DESCRIPTION_MAP:
-                name = PROP_NODE_DESCRIPTION_MAP[d_code]
+                description = PROP_NODE_DESCRIPTION_MAP[d_code]
             domainType = "Thing"
             if d_code in person_dim_types:
                 domainType = "Person"
