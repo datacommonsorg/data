@@ -27,15 +27,20 @@ cd scripts/us_census/acs5yr/subject_tables
 
 ## Downloading Raw Data
 
-Raw data overlays (`ACSST5Y<YEAR>.S0801_data_with_overlays_*.csv`) are downloaded from the [U.S. Census Bureau data.census.gov S0801 table](https://data.census.gov/table/ACSST5Y2024.S0801?q=S0801) or via the common ACS API downloader utility and packaged into `S0801/S0801_2010_2024.zip`:
+Raw data overlays (`ACSST5Y<YEAR>.S0801_data_with_overlays_*.csv`) are downloaded from the [U.S. Census Bureau data.census.gov S0801 table](https://data.census.gov/table/ACSST5Y2024.S0801?q=S0801) or via the common ACS API downloader utility (run from `scripts/us_census/api_utils`) and packaged into `S0801/S0801_2010_2024.zip`:
 
 ```bash
-python3 ../../api_utils/census_api_data_downloader.py \
+cd scripts/us_census/api_utils
+python3 census_api_data_downloader.py \
+  --dataset=acs/acs5/subject \
   --table_id=S0801 \
-  --output_path=S0801/ \
+  --output_path=../acs5yr/subject_tables/S0801/ \
   --api_key=<CENSUS_API_KEY> \
   --start_year=2010 \
-  --end_year=2024
+  --end_year=2024 \
+  --all_summaries
+cd ../acs5yr/subject_tables
+cp S0801/acs/acs5/subject/S0801/S0801.zip S0801/S0801_2010_2024.zip
 ```
 
 ## Processing & Generating Artifacts
