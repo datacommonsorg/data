@@ -159,8 +159,6 @@ def diff_mcf_node_pvs(node_1: dict,
   """
     if config is None:
         config = {}
-    dcid1 = get_node_dcid(node_1)
-    dcid2 = get_node_dcid(node_2)
     compare_props = set(config.get('compare_property', []))
     if not compare_props:
         compare_props = set(node_1.keys())

@@ -25,7 +25,6 @@ import numpy as np
 import json
 import pandas as pd
 from preprocess_data import preprocess_df
-import sys
 from absl import app
 from absl import logging
 from absl import flags

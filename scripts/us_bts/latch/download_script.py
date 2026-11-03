@@ -176,17 +176,16 @@ def download_all_files_from_config(download_dir: str,
 
         output_path = os.path.join(download_dir, file_name)
 
-        success = False
         try:
             file_name_lower = file_name.lower()
             parsed_url = urlparse(url)
 
             if file_name_lower.endswith('.gz'):
-                success = _download_and_decompress_gz(url=parsed_url,
-                                                      output_path=output_path)
+                _download_and_decompress_gz(url=parsed_url,
+                                            output_path=output_path)
 
             elif file_name_lower.endswith('.zip'):
-                success = download_file(
+                download_file(
                     url,
                     output_folder=download_dir,
                     unzip=True,  # Instruct util to unzip
@@ -196,12 +195,12 @@ def download_all_files_from_config(download_dir: str,
             # This heuristic might need adjustment based on specific URL patterns.
             elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or '.' not in os.path.basename(
                     parsed_url.path):
-                success = _download_paginated_socrata_file(
-                    url=url, output_path=output_path)
+                _download_paginated_socrata_file(url=url,
+                                                 output_path=output_path)
             else:
                 # For all other direct file downloads, use the robust utility.
                 # The 'file_name' from config is NOT passed here as per 'no modification to download_util_script.py' constraint.
-                success = download_file(
+                download_file(
                     url=url,
                     output_folder=download_dir,
                     unzip=False,

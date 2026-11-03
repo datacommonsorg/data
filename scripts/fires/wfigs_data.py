@@ -174,7 +174,7 @@ def process_df(df):
                 return location
             else:
                 return None
-        except Exception as e:
+        except Exception:
             logging.debug("Failed resolution for ({0},{1} for fire {2})".format(
                 latitude, longitude, row.UniqueFireIdentifier))
             return ''

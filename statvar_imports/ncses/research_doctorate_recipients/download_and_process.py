@@ -112,7 +112,6 @@ def process_and_modify_data_cascading(file_path):
 def main(argv):
     for config in DOWNLOAD_CONFIGS:
         url = config["url"]
-        desired_output_csv_name = config["output_csv_name"]
 
         logging.info(f"Attempting to download: {url}")
 

@@ -100,8 +100,8 @@ def _print_counters(counters, steps=None):
     if steps is None or row_key not in counters or counters[
             row_key] % steps == 0:
         if 'inputs_processed' in counters:
-            start_ts = counters['time_start']
-            end_ts = time.perf_counter()
+            # TODO: Print the counters. This function is currently a no-op.
+            pass
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
@@ -384,7 +384,6 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     country_code = data_row['Country or Area Code']
     country_name = data_row['Country or Area']
     t_code = data_row['Transaction Code']
-    ct_code = data_row['Commodity - Transaction Code']
     ct_name = data_row['Commodity - Transaction']
     year = data_row['Year']
     units = data_row['Unit']

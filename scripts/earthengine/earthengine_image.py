@@ -40,7 +40,6 @@ To view task status, visit https://code.earthengine.google.com/tasks
 """
 
 import ast
-import datetime
 import ee
 import glob
 import os

@@ -412,7 +412,6 @@ def shard_csv_data(
         (file_prefix, file_ext) = os.path.splitext(file)
     else:
         fd, file_prefix = tempfile.mkstemp()
-        file_ext = '.csv'
     column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
     output_path = f'{file_prefix}-{column_suffix}'
     logging.info(f'Sharding {files} into {len(shards)} shards by column'

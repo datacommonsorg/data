@@ -1515,7 +1515,6 @@ class GeoEventsProcessor:
             self._counters.add_counter('error_input_rows_date_out_of_order', 1)
             logging.error(f'Old date in row:{filename}:{row_index}:{row}')
             return False
-        prev_date = date
         for p in self._event_props:
             if p in row:
                 data = utils.str_get_numeric_value(row[p])
@@ -1729,8 +1728,6 @@ class GeoEventsProcessor:
         typeof = event_pvs.get('typeOf',
                                self._config.get('event_type', 'FloodEvent'))
         start_date = event_pvs.get('startDate')
-        # Get a named location for the event
-        start_location = event_pvs.get('startLocation')
         if not locations:
             locations = _get_list(event_pvs.get('affectedPlace', ''))
         location_name = self._get_smallest_place_name(locations)

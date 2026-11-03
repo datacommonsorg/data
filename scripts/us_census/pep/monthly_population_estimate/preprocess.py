@@ -599,7 +599,6 @@ def download_files():
     This method allows to download the input files.
     """
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None

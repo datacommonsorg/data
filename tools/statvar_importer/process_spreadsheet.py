@@ -298,8 +298,8 @@ def process_spreadsheets(
                     'pv_map_files': [],
                 }
                 if parallelism > 1:
-                    task = pool.apply_async(stat_var_processor.process,
-                                            kwds=process_args)
+                    pool.apply_async(stat_var_processor.process,
+                                     kwds=process_args)
                 else:
                     stat_var_processor.process(**process_args)
             pool.close()

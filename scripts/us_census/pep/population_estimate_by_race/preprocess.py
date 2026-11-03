@@ -1289,7 +1289,6 @@ def download_files():
     """
 
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
@@ -1408,7 +1407,6 @@ def main(_):
         os.mkdir(input_path)
     if not os.path.exists(output_path):
         os.mkdir(output_path)
-    cleaned_csv_path = output_path
     mcf_path = output_path
     tmcf_path = output_path
     input_path = _FLAGS.input_path

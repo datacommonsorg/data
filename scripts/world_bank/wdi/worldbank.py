@@ -15,7 +15,6 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-import logging
 import itertools
 import requests
 import zipfile

@@ -214,7 +214,6 @@ class WikiPlaceResolver:
             lookup_names[name] = key
 
         # Get candidate wiki Ids for all names
-        wiki_ids = set()
         logging.log_every_n(
             logging.DEBUG, f'Looking up wiki ids for {len(lookup_names)} names',
             self._log_every_n)

@@ -258,7 +258,7 @@ def main(_):
             loader.generate_mcf()
             loader.generate_tmcf()
             logging.info("Processing completed!")
-        except Exception as e:
+        except Exception:
             logging.fatal('Download error')
 
 

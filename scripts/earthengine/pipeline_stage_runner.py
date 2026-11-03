@@ -354,6 +354,6 @@ def _format(string: str, params: dict) -> str:
             formatted_str = string.format(**params)
         elif isinstance(string, list):
             formatted_str = [_format(s, params) for s in string]
-    except (KeyError, IndexError) as e:
+    except (KeyError, IndexError):
         logging.error(f'Format error for {string} with {params}')
     return formatted_str

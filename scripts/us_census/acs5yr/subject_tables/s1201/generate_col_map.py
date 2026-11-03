@@ -70,7 +70,6 @@ def process_zip_file(zip_file_path,
     f.close()
 
     column_map = {}
-    counter_dict = {}
 
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():

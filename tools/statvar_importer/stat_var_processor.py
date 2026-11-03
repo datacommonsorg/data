@@ -2745,7 +2745,7 @@ class StatVarDataProcessor:
             resolved_date = datetime.datetime.strptime(
                 date_normalized,
                 output_date_format).strftime(output_date_format)
-        except ValueError as e:
+        except ValueError:
             # Date is not in expected format. Try formatting it.
             logging.log_every_n(
                 2, f'Formatting date {date} into {output_date_format}',
@@ -2766,7 +2766,7 @@ class StatVarDataProcessor:
                         2,
                         f'Formatted date {date} as {input_date_format} into {resolved_date}',
                         self._log_every_n)
-                except ValueError as e:
+                except ValueError:
                     logging.log_every_n(
                         logging.ERROR,
                         f'Unable to parse date {date_normalized} as {input_date_format}',
@@ -2935,7 +2935,6 @@ def process(
         f' {config_dict}...')
     input_data = prepare_input_data(config_dict)
     input_files = file_util.file_get_matching(input_data)
-    num_inputs = len(input_files)
     if file_util.file_is_local(output_path):
         output_dir = os.path.dirname(output_path)
         if output_dir:

@@ -68,12 +68,12 @@ def download_file(url, input_file_path):
                         shutil.copyfile(old_file, new_file)
                         os.remove(old_file)
                         count += 1
-            except Exception as e:
+            except Exception:
                 logging.warning(
                     f"No Excel link found for year 20{year} or No future url found"
                 )
                 break
-    except Exception as e:
+    except Exception:
         logging.fatal("Error during the main loop")
     finally:
         driver.quit()

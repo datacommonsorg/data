@@ -260,7 +260,7 @@ def get_node_name(node: dict) -> str:
 def is_numeric(value: str) -> bool:
     """Returns True if the value is a number."""
     try:
-        n = float(value)
+        float(value)
         return True
     except ValueError:
         return False

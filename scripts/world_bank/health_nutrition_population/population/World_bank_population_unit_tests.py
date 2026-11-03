@@ -30,7 +30,7 @@ class TestWBPopulation(unittest.TestCase):
                                        'WorldBankHNP_Population_Tests')
         print(f'test file path: {data_input}, output: {test_output}')
 
-        test_counters = population.process(2, test_output, 32)
+        population.process(2, test_output, 32)
 
         for output in ['.csv']:
             print(filecmp.cmp(test_output + output, expected_output + output))

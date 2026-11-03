@@ -284,8 +284,6 @@ def main(unused_argv):
     destination_folder = folder_path + '/input_files/'
 
     _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-    DESTINATION_PATH = os.path.join(_SCRIPT_PATH,
-                                    'download_folder/input_files/')
     DOWNLOAD_DIRECTORY = (os.path.join(_SCRIPT_PATH, 'download_folder'))
     if not os.path.exists(DOWNLOAD_DIRECTORY):
         os.makedirs(DOWNLOAD_DIRECTORY)

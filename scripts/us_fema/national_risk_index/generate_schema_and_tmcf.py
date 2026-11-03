@@ -401,7 +401,6 @@ def format_ind_hazard_field_properties_to_schema(properties):
     measured_property = properties["measured_property"]
     measurement_qualifier = properties["measurement_qualifier"]
     impacted_thing = properties["impacted_thing"]
-    unit = properties["unit"]
 
     # create a list of names that might go on the dcid
     dcid_list = [

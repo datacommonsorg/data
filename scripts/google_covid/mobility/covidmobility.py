@@ -70,7 +70,6 @@ def clean_csv(input_path: str, output_path: str) -> None:
     """
 
     try:
-        visited_dcids: set = set()
         logging.info(
             f"Starting CSV cleaning from '{input_path}' to '{output_path}'")
         # If output file already exists, remove it.
