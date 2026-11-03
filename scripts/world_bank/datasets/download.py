@@ -146,7 +146,7 @@ def main():
                 is_downloaded = item['is_downloaded']
                 if not is_downloaded:
                     logging.fatal("all files were not downloaded successfully")
-    except Exception as e:
+    except Exception:
         logging.fatal('Error while opening the config file')
 
 

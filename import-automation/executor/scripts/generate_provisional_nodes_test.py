@@ -106,7 +106,7 @@ containedInPlace:  dcid : CountryA
         output_file = generate_provisional_nodes(self.test_dir, no_spanner=True)
 
         with open(output_file, "r") as f:
-            content = f.read()
+            f.read()
 
     def test_node_property_definition(self):
         mcf_content = """Node:

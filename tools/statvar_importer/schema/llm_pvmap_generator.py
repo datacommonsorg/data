@@ -272,7 +272,7 @@ def get_sample_sv_name_pvs(nodes: dict, config: dict = None) -> str:
             # Check if statvar has any unique property or value.
             select_sv = True
             for pv in sv_pvs.split(','):
-                if not pv or not ':' in pv:
+                if not pv or ':' not in pv:
                     continue
                 prop, value = pv.split(':', 1)
                 if pv in _IGNORE_NODES:
@@ -327,7 +327,7 @@ def get_nodes_from_pv_string(sv_name_pvs: str,
         if not line:
             continue
         line = line.strip()
-        if not line or not name_pv_separator in line:
+        if not line or name_pv_separator not in line:
             continue
         key, sv_name_pvs = line.split(name_pv_separator, 1)
         node = nodes.get(key, {})

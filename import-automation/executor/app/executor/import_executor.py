@@ -378,7 +378,7 @@ class ImportExecutor:
             if self.notifier and not self.config.disable_email_notifications:
                 msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
                 msg += f'{_SEE_LOGS_MESSAGE}\n\n'
-                msg += f'Stack Trace: \n'
+                msg += 'Stack Trace: \n'
                 msg += f'{exc}'
                 self.notifier.send(
                     subject=f'Import Automation Failure - {import_name}',
@@ -1039,7 +1039,7 @@ class ImportExecutor:
                 timeout=self.config.importer_import_timeout,
             )
         logging.info(f'Import status summary: {import_summary}')
-        logging.info(f'Import workflow completed successfully!')
+        logging.info('Import workflow completed successfully!')
 
     @log_function_call
     def _upload_import_inputs(self, import_dir: str, output_dir: str,

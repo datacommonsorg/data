@@ -1242,7 +1242,7 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
             df['Geographic Area'] = "United States"
         return df
     except Exception as e:
-        logging.fatal(f"Error Downloading the file:", e)
+        logging.fatal("Error Downloading the file:", e)
 
 
 def add_future_yearurls():
@@ -1289,7 +1289,6 @@ def download_files():
     """
 
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
@@ -1305,7 +1304,7 @@ def download_files():
         is_file_downloaded = False
         # headers = {'User-Agent': 'Mozilla/5.0'}
         # response = requests.get(url, headers=headers)
-        while is_file_downloaded == False:
+        while not is_file_downloaded:
             try:
                 headers = {'User-Agent': 'Mozilla/5.0'}
                 response = requests.get(url, headers=headers, timeout=60)
@@ -1408,7 +1407,6 @@ def main(_):
         os.mkdir(input_path)
     if not os.path.exists(output_path):
         os.mkdir(output_path)
-    cleaned_csv_path = output_path
     mcf_path = output_path
     tmcf_path = output_path
     input_path = _FLAGS.input_path

@@ -35,7 +35,6 @@ from app.service import file_uploader
 from app.service import github_api
 from app.service import email_notifier
 from app.service import import_service
-from app.service import email_notifier
 
 
 def create_app():
