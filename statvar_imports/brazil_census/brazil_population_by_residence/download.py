@@ -40,11 +40,18 @@ from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9923: População residente por situação do domicílio (2022)
-TABLE_9923_API_URL = f"{SIDRA_BASE_URL}/values/t/9923/n1/all/n2/all/n3/all/v/93/p/all/c1/all?formato=json"
+# Includes municipal level (n6/all) alongside macro levels (n1, n2, n3).
+TABLE_9923_API_URL = f"{SIDRA_BASE_URL}/values/t/9923/n1/all/n2/all/n3/all/n6/all/v/93/p/all/c1/all?formato=json"
 
 # Table 608: População residente por situação do domicílio e sexo (2010)
-# Includes classification c1 (Situação: Total, Urbana, Rural) and c2 (Sexo: Total, Homens, Mulheres)
-TABLE_608_API_URL = f"{SIDRA_BASE_URL}/values/t/608/n1/all/n2/all/n3/all/v/93/p/all/c1/all/c2/all?formato=json"
+# Split into two queries to stay within SIDRA's 50,000 value limit:
+# 1) Total sex across all levels (national, regional, state, municipal) = ~16.8k values
+# 2) Male and Female sex split across macro levels (national, regional, state) = ~200 values
+TABLE_608_API_URLS = [
+    f"{SIDRA_BASE_URL}/values/t/608/n1/all/n2/all/n3/all/n6/all/v/93/p/all/c1/all/c2/0?formato=json",
+    f"{SIDRA_BASE_URL}/values/t/608/n1/all/n2/all/n3/all/v/93/p/all/c1/all/c2/4,5?formato=json",
+]
+TABLE_608_API_URL = TABLE_608_API_URLS[0]
 
 FLAGS = flags.FLAGS
 if "output_file" not in FLAGS:
@@ -330,32 +337,36 @@ def download_all_years(
         # 2. 2010 Census from SIDRA API (Table 608)
         # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
         # Classification c1 is Situação (Total, Urbana, Rural) and c2 is Sexo (Total, Homens, Mulheres).
-        raw_2010 = fetch_sidra_data(session, TABLE_608_API_URL)
-        logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608.")
         sexo_map = {"Homens": "Masculino", "Mulheres": "Feminino", "Total": "Total"}
-        for r in raw_2010[1:]:
-            val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
-                continue
-            try:
-                val = int(round(float(val_str)))
-            except (ValueError, TypeError):
-                continue
+        for url in TABLE_608_API_URLS:
+            raw_2010 = fetch_sidra_data(session, url)
+            logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608 query: {url}")
+            for r in raw_2010[1:]:
+                val_str = r.get("V")
+                if val_str in ["-", "...", "..", None, ""]:
+                    continue
+                try:
+                    val = int(round(float(val_str)))
+                except (ValueError, TypeError):
+                    continue
 
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
+                if str(r.get("NC", "")).strip() == "6":
+                    loc = str(r.get("D1C", "")).strip()
+                else:
+                    loc = str(r.get("D1N", "")).strip()
+                    if loc == "Brasil":
+                        loc = "Brazil"
 
-            situacao = str(r.get("D4N", "Total")).strip()
-            sexo_raw = str(r.get("D5N", "Total")).strip()
-            sexo = sexo_map.get(sexo_raw, "Total")
-            all_rows.append({
-                "Ano": 2010,
-                "Localidade": loc,
-                "Situacao": situacao,
-                "Sexo": sexo,
-                "Populacao": val,
-            })
+                situacao = str(r.get("D4N", "Total")).strip()
+                sexo_raw = str(r.get("D5N", "Total")).strip()
+                sexo = sexo_map.get(sexo_raw, "Total")
+                all_rows.append({
+                    "Ano": 2010,
+                    "Localidade": loc,
+                    "Situacao": situacao,
+                    "Sexo": sexo,
+                    "Populacao": val,
+                })
 
         # 3. 2022+ Census from SIDRA API (Table 9923)
         raw_2022 = fetch_sidra_data(session, TABLE_9923_API_URL)
@@ -375,9 +386,12 @@ def download_all_years(
             except ValueError:
                 continue
 
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
+            if str(r.get("NC", "")).strip() == "6":
+                loc = str(r.get("D1C", "")).strip()
+            else:
+                loc = str(r.get("D1N", "")).strip()
+                if loc == "Brasil":
+                    loc = "Brazil"
 
             situacao = str(r.get("D4N", "Total")).strip()
             all_rows.append({
