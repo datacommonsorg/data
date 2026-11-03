@@ -130,5 +130,5 @@ Or via `unittest`:
 
 The import configuration in `validation_config.json` enforces:
 - `check_all_statvars_freshness`: `SQL_VALIDATOR` freshness check ensuring all active StatVars meet the freshness boundary (`MaxDate >= '2002'`).
-- `check_deleted_records_percent`: `DELETED_RECORDS_PERCENT` ensuring deleted records do not exceed `0.1%` (`threshold: 0.1`).
-Zero lint errors is enforced by default in the execution pipeline.
+
+Deleted records check (`check_deleted_records_percent`) and zero lint errors are enforced by default in the execution pipeline.
