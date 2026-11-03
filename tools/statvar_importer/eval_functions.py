@@ -135,14 +135,16 @@ SAFE_BUILTINS = MappingProxyType({
 
 # Restricted namespaces for allowed modules (immutable)
 SAFE_MODULES = MappingProxyType({
-    're': types.SimpleNamespace(
-        sub=re.sub,
-        search=re.search,
-        match=re.match,
-        split=re.split,
-        findall=re.findall,
-    ),
-    'datetime': datetime,
+    're':
+        types.SimpleNamespace(
+            sub=re.sub,
+            search=re.search,
+            match=re.match,
+            split=re.split,
+            findall=re.findall,
+        ),
+    'datetime':
+        datetime,
 })
 
 # Callable functions that are safe to call in expressions (immutable)
@@ -165,28 +167,63 @@ SAFE_CALLABLES = MappingProxyType({
 
 # Safe method names for string and container manipulation (immutable)
 SAFE_METHODS = frozenset({
-    'split', 'rsplit', 'lower', 'upper', 'title', 'capitalize',
-    'strip', 'lstrip', 'rstrip', 'replace', 'zfill', 'join',
-    'startswith', 'endswith', 'find', 'rfind', 'count', 'format',
-    'get', 'values', 'keys', 'items'
+    'split', 'rsplit', 'lower', 'upper', 'title', 'capitalize', 'strip',
+    'lstrip', 'rstrip', 'replace', 'zfill', 'join', 'startswith', 'endswith',
+    'find', 'rfind', 'count', 'format', 'get', 'values', 'keys', 'items'
 })
 
 # Permitted AST syntax nodes in expressions
 ALLOWED_NODE_TYPES = (
-    ast.Expression, ast.Expr, ast.Assign,
-    ast.Constant, ast.Name,
-    ast.UnaryOp, ast.UAdd, ast.USub, ast.Not, ast.Invert,
-    ast.BinOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow,
-    ast.BitAnd, ast.BitOr, ast.BitXor, ast.LShift, ast.RShift,
-    ast.BoolOp, ast.And, ast.Or,
-    ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE, ast.Is, ast.IsNot, ast.In, ast.NotIn,
+    ast.Expression,
+    ast.Expr,
+    ast.Assign,
+    ast.Constant,
+    ast.Name,
+    ast.UnaryOp,
+    ast.UAdd,
+    ast.USub,
+    ast.Not,
+    ast.Invert,
+    ast.BinOp,
+    ast.Add,
+    ast.Sub,
+    ast.Mult,
+    ast.Div,
+    ast.FloorDiv,
+    ast.Mod,
+    ast.Pow,
+    ast.BitAnd,
+    ast.BitOr,
+    ast.BitXor,
+    ast.LShift,
+    ast.RShift,
+    ast.BoolOp,
+    ast.And,
+    ast.Or,
+    ast.Compare,
+    ast.Eq,
+    ast.NotEq,
+    ast.Lt,
+    ast.LtE,
+    ast.Gt,
+    ast.GtE,
+    ast.Is,
+    ast.IsNot,
+    ast.In,
+    ast.NotIn,
     ast.IfExp,
     ast.Call,
     ast.Attribute,
-    ast.Subscript, ast.Slice,
-    ast.List, ast.Tuple, ast.Dict, ast.Set,
-    ast.FormattedValue, ast.JoinedStr,
-    ast.Load, ast.Store,
+    ast.Subscript,
+    ast.Slice,
+    ast.List,
+    ast.Tuple,
+    ast.Dict,
+    ast.Set,
+    ast.FormattedValue,
+    ast.JoinedStr,
+    ast.Load,
+    ast.Store,
 )
 
 # A dictionary of functions and modules that are safe to use in `eval()`.
@@ -216,21 +253,25 @@ def _validate_ast_safety(node: ast.AST, allowed_callables: set):
         if isinstance(subnode, ast.Attribute):
             if subnode.attr.startswith('_'):
                 raise ValueError(
-                    f"Access to private attribute '{subnode.attr}' is prohibited")
+                    f"Access to private attribute '{subnode.attr}' is prohibited"
+                )
 
         # Prohibit access to private variable names
         if isinstance(subnode, ast.Name):
             if subnode.id.startswith('_'):
                 raise ValueError(
-                    f"Access to private identifier '{subnode.id}' is prohibited")
+                    f"Access to private identifier '{subnode.id}' is prohibited"
+                )
 
         # Validate function and method invocations
         if isinstance(subnode, ast.Call):
             func = subnode.func
             if isinstance(func, ast.Name):
                 if func.id.startswith('_') or (func.id not in SAFE_BUILTINS and
-                                               func.id not in allowed_callables):
-                    raise ValueError(f"Call to unauthorized function: {func.id}")
+                                               func.id
+                                               not in allowed_callables):
+                    raise ValueError(
+                        f"Call to unauthorized function: {func.id}")
             elif isinstance(func, ast.Attribute):
                 attr = func.attr
                 if attr.startswith('_'):
@@ -251,7 +292,8 @@ def _validate_ast_safety(node: ast.AST, allowed_callables: set):
                     raise ValueError(f"Call to unauthorized method: {attr}")
             else:
                 raise ValueError(
-                    f"Call to unauthorized callable construct: {type(func).__name__}")
+                    f"Call to unauthorized callable construct: {type(func).__name__}"
+                )
 
 
 def evaluate_statement(eval_str: str,

@@ -91,27 +91,25 @@ class TestEvaluateStatement(unittest.TestCase):
 
     def test_security_blocks_eval_exec(self):
         # Disallow nested eval/exec
-        self.assertEqual(
-            ('', None), eval_functions.evaluate_statement('eval("1 + 1")'))
-        self.assertEqual(
-            ('', None),
-            eval_functions.evaluate_statement('exec("import os")'))
+        self.assertEqual(('', None),
+                         eval_functions.evaluate_statement('eval("1 + 1")'))
+        self.assertEqual(('', None),
+                         eval_functions.evaluate_statement('exec("import os")'))
 
     def test_security_blocks_dunder_attributes(self):
         # Disallow dunder attributes to prevent sandbox breakouts
         self.assertEqual(
             ('', None),
             eval_functions.evaluate_statement('().__class__.__bases__'))
-        self.assertEqual(
-            ('', None),
-            eval_functions.evaluate_statement(
-                'Data.__class__.__mro__[1].__subclasses__()', {'Data': 'test'}))
+        self.assertEqual(('', None),
+                         eval_functions.evaluate_statement(
+                             'Data.__class__.__mro__[1].__subclasses__()',
+                             {'Data': 'test'}))
 
     def test_security_blocks_indirect_calls(self):
         # Disallow calling methods indirectly to bypass SAFE_METHODS
-        self.assertEqual(
-            ('', None),
-            eval_functions.evaluate_statement('[[].append][0](1)'))
+        self.assertEqual(('', None),
+                         eval_functions.evaluate_statement('[[].append][0](1)'))
 
     def test_dicts_are_immutable(self):
         # Verify that dictionaries and sets cannot be modified at runtime
@@ -126,31 +124,30 @@ class TestEvaluateStatement(unittest.TestCase):
 
     def test_security_allows_safe_module_functions(self):
         # Allowed module functions like re.sub should work
-        self.assertEqual(
-            ('cleaned', '123'),
-            eval_functions.evaluate_statement(
-                "cleaned = re.sub(r'\\D', '', Data)", {'Data': 'abc123xyz'}))
+        self.assertEqual(('cleaned', '123'),
+                         eval_functions.evaluate_statement(
+                             "cleaned = re.sub(r'\\D', '', Data)",
+                             {'Data': 'abc123xyz'}))
 
     def test_security_allows_safe_methods(self):
         # Safe string methods like split, lower, upper, replace, zfill
         self.assertEqual(
             ('code', '0042'),
-            eval_functions.evaluate_statement(
-                'code = str(42).zfill(4)', {}))
+            eval_functions.evaluate_statement('code = str(42).zfill(4)', {}))
         self.assertEqual(
             ('res', 'hello world'),
-            eval_functions.evaluate_statement(
-                "res = ' '.join(Data.split('_'))", {'Data': 'hello_world'}))
+            eval_functions.evaluate_statement("res = ' '.join(Data.split('_'))",
+                                              {'Data': 'hello_world'}))
 
     def test_security_allows_ternary_and_arithmetic(self):
-        self.assertEqual(
-            ('status', 'Active'),
-            eval_functions.evaluate_statement(
-                "status = 'Active' if Data == 'Y' else 'Inactive'", {'Data': 'Y'}))
+        self.assertEqual(('status', 'Active'),
+                         eval_functions.evaluate_statement(
+                             "status = 'Active' if Data == 'Y' else 'Inactive'",
+                             {'Data': 'Y'}))
         self.assertEqual(
             ('val', 45.3592),
-            eval_functions.evaluate_statement(
-                'val = Number * 0.453592', {'Number': 100}))
+            eval_functions.evaluate_statement('val = Number * 0.453592',
+                                              {'Number': 100}))
 
 
 class TestFormatDate(unittest.TestCase):
