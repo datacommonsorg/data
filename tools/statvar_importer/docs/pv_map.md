@@ -15,6 +15,8 @@ female,gender,Female
 total population,value,{Number},populationType,Person,measuredProperty,count
 ```
 
+The parts of a row are:
+
 - **Key**: text that appears in the source data, either a column header, a cell
   value, or a label row.
 - **Property**: a Data Commons property, such as `gender`, or an observation
@@ -51,7 +53,9 @@ The processor looks up keys in this order of scope:
 1. **Column headers.** PVs from a header apply to every cell below it.
 1. **Cells.** PVs from a label cell apply to the other values in the same row.
 1. **Label rows.** A row with a label and no values, such as
-   `Count of all Males`, applies its PVs to the rows below it.
+   `Count of all Males`, applies its PVs to the rows below it. This works when
+   `header_rows` is left unset; otherwise mark the label with `#Header` (see
+   [sectioned headers](advanced_processing.md#sectioned-headers)).
 
 Keys match with these rules:
 
@@ -61,10 +65,11 @@ Keys match with these rules:
   combine: `female` and `total population` both apply to
   `Total Population Female`.
 - **Case.** A lowercase key matches whole-cell text in any case: `female`
-  matches `Female` and `FEMALE`. A key that matches a phrase *inside* longer
-  text is case-sensitive. For example, `pulmonary TB` matches
-  `…diagnosed with pulmonary TB…`, but `pulmonary tb` doesn't. Copy the source
-  casing for phrase keys.
+  matches `Female` and `FEMALE`. A key that matches only part of the text also
+  ignores case in short text, such as `fips code` in `Place Fips Code`. In long
+  text, such as sentence-length indicator names, partial matches are
+  case-sensitive: `pulmonary TB` matches `…diagnosed with pulmonary TB…`, but
+  `pulmonary tb` doesn't. Copy the source casing for those keys.
 
 NOTE: Every PV map row counts as a key, including comment rows. Keep comment
 rows to a few words: long comments change how keys match and can stop keys from
@@ -159,6 +164,8 @@ kings county ca,observationAbout,geoId/06031
 georgia,observationAbout,geoId/13
 #georgia,observationAbout,country/GEO
 ```
+
+The rows follow these rules:
 
 - **Codes:** map the code column with one pattern row.
 - **Names:** add one lowercase row per place name.

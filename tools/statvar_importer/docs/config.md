@@ -7,7 +7,7 @@ change it. Set them in `<import>_statvar_processor_config.csv` as
 `parameter,value` rows, and quote values that contain commas.
 
 For every setting and its default, see
-[`get_default_config`](../config_flags.py).
+[`get_default_config`](../config_flags.py) in the Python source.
 
 ## How settings combine
 
@@ -24,18 +24,18 @@ such as `mapped_coloumns` is silently ignored. Copy names from this page or from
 
 ## Input layout
 
-| Setting          | Default                  | When to change it                                                                                              |
-| ---------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `header_rows`    | `-1` (look up every row) | Set to the number of header rows, usually `1`.                                                                 |
-| `mapped_columns` | not set                  | Set to the number of label columns at the left, such as `3`. Only those cells, plus headers, are looked up.    |
-| `mapped_rows`    | not set                  | Set to the number of label rows at the top of a wide sheet, where categories run across the columns.           |
-| `header_columns` | `-1`                     | Set to the number of label columns in a transposed sheet whose headers run down the left side.                 |
-| `input_columns`  | all                      | Process only the first N columns.                                                                              |
-| `input_rows`     | all                      | Process only the first N rows, for sample runs.                                                                |
-| `input_encoding` | `utf-8`                  | Set for sources in another encoding, such as `latin-1`.                                                        |
-| `ignore_rows`    | none                     | Skip the listed line numbers, such as `"[1,5]"`.                                                               |
-| `data_url`       | not set                  | Download the input from a URL when `--input_data` doesn't exist locally.                                       |
-| `process_rows`   | all                      | Process only the listed line numbers, such as `"1,2,15"`. Include the header line. Use it to debug a few rows. |
+| Setting          | Default                              | When to change it                                                                                                                                                                 |
+| ---------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `header_rows`    | `-1` (detect headers and label rows) | Set to the line number of the last header row, counted from the top of the file including title lines. Leave unset when rows with only a label must apply to the rows below them. |
+| `mapped_columns` | not set                              | Set to the number of label columns at the left, such as `3`. Only those cells, plus headers, are looked up. Set it only together with `header_rows`.                              |
+| `mapped_rows`    | not set                              | Set to the number of label rows at the top of a wide sheet, where categories run across the columns.                                                                              |
+| `header_columns` | `-1`                                 | Set to the number of label columns in a transposed sheet whose headers run down the left side.                                                                                    |
+| `input_columns`  | all                                  | Process only the first N columns.                                                                                                                                                 |
+| `input_rows`     | all                                  | Process only the first N rows, for sample runs.                                                                                                                                   |
+| `input_encoding` | `utf-8`                              | Set for sources in another encoding, such as `latin-1`.                                                                                                                           |
+| `ignore_rows`    | none                                 | Skip the listed line numbers, such as `"[1,5]"`.                                                                                                                                  |
+| `data_url`       | not set                              | Download the input from a URL when `--input_data` doesn't exist locally.                                                                                                          |
+| `process_rows`   | all                                  | Process only the listed line numbers, such as `"1,2,15"`. Include the header line. Use it to debug a few rows.                                                                    |
 
 When neither `mapped_columns` nor `mapped_rows` is set, every cell is looked up
 in the PV map. That is slower and can match numbers by accident.

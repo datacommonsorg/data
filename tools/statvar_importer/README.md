@@ -120,7 +120,8 @@ This input is part of `test_data/sample_input.csv`:
 | Count of all Males |                 |      |            |             |               |
 | Orange County CA   | 6123            | 2020 | 25-30      | A-PI        | 12345.0       |
 
-This PV map handles it (from `test_data/quickstart_pvmap.csv`):
+This excerpt of `test_data/quickstart_pvmap.csv` handles it (the full file also
+maps `30-35`, `females`, and the fraction column):
 
 ```csv
 key,p1,v1,p2,v2,p3,v3
@@ -155,14 +156,20 @@ The processor applies keys with these rules:
 1. **It looks up header text and cell text.** Column header PVs apply to every
    cell below the header. Cell PVs apply to the other values in the same row. A
    row with only a label, such as `Count of all Males`, applies to the rows
-   below it.
+   below it when `header_rows` is left unset (see
+   [Write a config](#write-a-config)).
+
 1. **Keys match whole words.** `man` doesn't match `woman`.
+
 1. **The longest matching key wins**, and keys that match different parts of the
    text combine: `total persons` and `males` can both apply.
-1. **Lowercase keys match whole-cell text in any case**, so `total persons`
-   matches `Total Persons` and `TOTAL PERSONS`. A key that matches a phrase
-   *inside* longer text is case-sensitive, so copy the source casing (for
-   example `pulmonary TB`).
+
+1. **Case.** A lowercase key matches whole-cell text in any case:
+   `total persons` matches `Total Persons` and `TOTAL PERSONS`. A key that
+   matches only part of the text, such as `fips code` in `Place Fips Code`, also
+   ignores case in short text. In long text, such as sentence-length indicator
+   names, partial matches are case-sensitive, so copy the source casing for
+   those keys (for example `pulmonary TB`).
 
 ### References and local variables
 
@@ -233,16 +240,23 @@ understand the source and the processing.
 
 The processing settings work like this:
 
-- `header_rows,1`: the first row holds column headers, and its text is looked up
-  in the PV map.
+- `header_rows,1`: line 1 of the file holds the column headers, and their text
+  is looked up in the PV map. The count starts at the top of the file and
+  includes title lines: if the headers are on line 3, set `header_rows,3`.
 - `mapped_columns,3`: cell values in the first 3 columns are looked up. Value
   cells in the other columns aren't. If you set neither `mapped_columns` nor
-  `mapped_rows`, every cell is looked up.
+  `mapped_rows`, every cell is looked up. Set `mapped_columns` only together
+  with `header_rows`; without it, no header is found and the output is empty.
 - `output_columns`: the CSV columns, in order. Always set it so the CSV and TMCF
   stay the same across runs, and end it with `#input`. Add `unit`,
   `scalingFactor`, `measurementMethod`, or `observationPeriod` when your data
   sets them.
 - `input_rows`: process only the first N rows. Use it for sample runs.
+
+Some files have title lines and rows with only a label that apply to the rows
+below them, as `test_data/sample_input.csv` does. For these, leave `header_rows`
+and `mapped_columns` unset, and the processor finds the header and label rows
+itself. The quick-start config works this way.
 
 If your sheet has header rows inside the data, see `#Header` in
 [Advanced processing](docs/advanced_processing.md). For other settings, see the
@@ -282,8 +296,11 @@ georgia,observationAbout,geoId/13
 #georgia,observationAbout,country/GEO
 ```
 
+The rows follow these rules:
+
 - Map a column of codes with one pattern row, such as `country/{Data}` for ISO
-  3166 alpha-3 codes.
+  3166 alpha-3 codes. US county FIPS codes need 5 digits; pad them with
+  `#Format,observationAbout=geoId/{Data:0>5}` if the source drops leading zeros.
 - Map place names with one lowercase row per name.
 - For an ambiguous name, keep the best candidate as the active row and list the
   other candidates as commented rows, with a short note on the choice.
@@ -307,7 +324,9 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
 ```
 
 `--existing_statvar_mcf` reuses existing StatVars instead of creating
-duplicates. Keep this folder layout:
+duplicates. Reading `gs://unresolved_mcf` needs access to that Data Commons
+bucket and `gcloud` credentials; without access, the run fails with
+`403 Forbidden`. Leave the flag out for local tests. Keep this folder layout:
 
 - `input_files/`: downloaded source files, unchanged.
 - `output/`: only the CSV, TMCF, and MCF files for the import tool.
@@ -392,20 +411,24 @@ java -jar datacommons-import-tool.jar lint -o lint_report \
 ```
 
 Open `lint_report/summary_report.html`, or `lint_report/report.json`, and fix
-every error. Review the warnings.
+every error. Review the warnings. Lint checks references against the Data
+Commons API; without network access, add `-e=false -ep=false` to skip those
+checks.
 
 Need readable StatVar names? See the tip in [Tools](docs/tools.md).
 
 ## Common problems
 
-| Symptom                                                                | Likely cause                                                                                 | Fix                                                                       |
-| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| The CSV has no rows or too few rows                                    | A value column has no `value,{Number}` mapping, or `header_rows` / `mapped_columns` is wrong | Map the value column. Check that `header_rows` points at the header row.  |
-| `dropped-svobs-unresolved-place`                                       | `observationAbout` is missing or isn't a DCID                                                | Map the place column; see [Map places](#map-places).                      |
-| `error-statvar-missing-property`, `dropped-svobs-with-invalid-statvar` | The StatVar lacks `populationType` or `measuredProperty`                                     | Add the property to the value column's PV map row.                        |
-| `error-svobs-missing-property`, `dropped-svobs-invalid`                | The SVObs lacks `observationDate`, `observationAbout`, or `value`                            | Map the date, place, and value columns.                                   |
-| `error-statvar-with-dup-svobs`, a StatVar missing                      | Two rows produce the same StatVar, place, and date with different values                     | Add the missing distinguishing property, such as `gender`, to the PV map. |
-| High `warning-missing-property-key`, properties missing                | A key doesn't match the source text                                                          | Check spelling and casing (rule 4), and keep comment rows short.          |
+| Symptom                                                                  | Likely cause                                                                                                                                       | Fix                                                                                                                   |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| The CSV has no rows or too few rows                                      | A value column has no `value,{Number}` mapping; `header_rows` / `mapped_columns` is wrong; or a mandatory property is missing (see the rows below) | Map the value column. Count `header_rows` from the top of the file, and set `mapped_columns` only with `header_rows`. |
+| `dropped-svobs-unresolved-place`                                         | `observationAbout` is missing or isn't a DCID                                                                                                      | Map the place column; see [Map places](#map-places).                                                                  |
+| `error-statvar-missing-property`, `dropped-svobs-with-invalid-statvar`   | The StatVar lacks `populationType` or `measuredProperty`                                                                                           | Add the property to the value column's PV map row.                                                                    |
+| `error-svobs-missing-property`, `dropped-svobs-invalid`                  | The SVObs lacks `observationDate`, `observationAbout`, or `value`                                                                                  | Map the date, place, and value columns.                                                                               |
+| `error-statvar-with-dup-svobs`, a StatVar missing                        | Two rows produce the same StatVar, place, and date with different values                                                                           | Add the missing distinguishing property, such as `gender`, to the PV map.                                             |
+| High `warning-missing-property-key`, properties missing                  | A key doesn't match the source text                                                                                                                | Check spelling and casing (rule 4), and keep comment rows short.                                                      |
+| A label row such as `Count of all Males` doesn't apply to the rows below | `header_rows` is set                                                                                                                               | Leave `header_rows` unset, or mark the label with `#Header`.                                                          |
+| A config setting has no effect                                           | The setting name has a typo; unknown names are ignored                                                                                             | Check the name against [Advanced configuration](docs/config.md).                                                      |
 
 For more, see [Troubleshooting](docs/troubleshooting.md).
 

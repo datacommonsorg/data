@@ -17,6 +17,8 @@ key,p1,v1,p2,v2,p3,v3,p4,v4
 population,value,{Number},populationType,Person,measuredProperty,count,#Filter,"Allow=float(value) >= 0"
 ```
 
+Keep these points in mind:
+
 - Property values are strings, so cast them: `float(value)` or `int(value)`.
 - The counter `filter-dropped-svobs-pvs` counts dropped observations.
 - Keep filters explicit and testable. Don't hard-code a future-year cutoff, such
@@ -76,6 +78,10 @@ and `#Format` for simple string templates:
 key,p1,v1
 state,#Format,observationAbout=geoId/{Data:0>2}
 ```
+
+An `#Eval` on a column header key also runs on the header cell itself, where
+`Number` isn't set. The resulting `Failed to evaluate` log lines and
+`warning-unresolved-value-ref` counts are expected when the output is right.
 
 WARNING: A failed `#Eval` or `#Filter` expression doesn't raise an error. The
 property is silently missing. Test new expressions on a few rows with `--debug`
@@ -168,6 +174,9 @@ share,value,{Number},populationType,Person,measuredProperty,count,measurementDen
 A `Female` share of `48.5` becomes an observation of
 `Count_Person_Female_AsAFractionOf_Count_Person` with `scalingFactor: 100`.
 
+To remove several properties, quote the list, for example
+`measurementDenominator,"-age,-race,-gender"` for a share of all persons.
+
 ## Number formats
 
 For sources that write `1.234,5` for 1234.5, set the decimal mark and the
@@ -183,10 +192,10 @@ number_separator,". "
 
 ## StatVar DCIDs and names
 
-**Remap a generated DCID.** When a generated StatVar DCID must match an existing
-StatVar, list it in a CSV with a `key` column of generated DCIDs and a `dcid`
-column of the DCIDs to use, and set `statvar_dcid_remap_csv` (or the
-`--statvar_dcid_remap_csv` flag):
+**Remap a generated DCID.** Use a remap file when a generated StatVar DCID must
+match an existing StatVar. List generated DCIDs in a `key` column and the DCIDs
+to use in a `dcid` column, then set `statvar_dcid_remap_csv` or the
+`--statvar_dcid_remap_csv` flag:
 
 ```csv
 key,dcid
