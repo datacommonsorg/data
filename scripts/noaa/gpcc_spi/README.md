@@ -1,7 +1,7 @@
 # GPCC SPI Import
 
 ## Overview
-This pipeline downloads Global Precipitation Climatology Centre (GPCC) monthly precipitation data from Deutscher Wetterdienst (DWD), computes the Standardized Precipitation Index (SPI) using the Pearson Type III distribution across 6 time scales (1, 3, 6, 9, 36, and 72 months), and generates inputs for **5 Data Commons imports**:
+This pipeline downloads Global Precipitation Climatology Centre (GPCC) Standardized Precipitation Index (SPI) NetCDF datasets (Pearson Type III distribution across 6 time scales: 1, 3, 6, 9, 36, and 72 months) from NOAA NCEI (`https://www.ncei.noaa.gov/pub/data/nidis/gpcc/spi-pearson/`) and generates inputs for **5 Data Commons imports**:
 
 1. **`NOAA_GPCC_StandardardizedPrecipitationIndex` (`input0`):**
    - **Template MCF:** `gpcc_spi.tmcf`
@@ -30,20 +30,20 @@ This pipeline downloads Global Precipitation Climatology Centre (GPCC) monthly p
 
 ### `run.sh`
 Main entrypoint executed by the automated import pipeline (`manifest.json`):
-1. Runs `download.py` to download GPCC historical (`full_data_monthly_v2022`, `1891–2019`) and live monthly (`first_guess_monthly`, `2020–present`) NetCDF files into `source_data/` and merge them into `source_data/merged.nc`.
-2. Runs `preprocess_gpcc_spi.py` to compute SPI via `climate-indices` (`process_climate_indices`), saving NetCDF files to `input_files/` and 1-degree grid CSVs (`2010-12` onward) to `output_files/`.
+1. Runs `download.py` to download the live GPCC SPI Pearson NetCDF files (`gpcc_spi_pearson_{01,03,06,09,36,72}.nc`) from NOAA NCEI into `input_files/`.
+2. Runs `preprocess_gpcc_spi.py` to convert the NetCDF files into 1-degree grid CSVs (`2010-12` onward) in `output_files/`.
 3. Runs `gpcc_spi_aggregation.py` to compute area-weighted place aggregations in `output_files/aggregations/`.
-4. Shards `output_files/gpcc_spi_pearson_09.csv` by year using `csv_splitter.py` and runs `event_aggregator.py` (`events_spi_9m_polygon_config.py`) to generate 9-month SPI polygon drought events and observations under `output_files/events_spi_9m_polygon/`.
+4. Shards `output_files/gpcc_spi_pearson_09.csv` by year using `tools/pd_csv.sh` and runs `scripts/earthengine/process_events.py` (`events_drought_gpcc_spi_9m_polygon.py`) to generate 9-month SPI polygon drought events and observations under `output_files/events_spi_9m_polygon/`.
 5. Reconciles overlapping drought event IDs against the previous production baseline (`latest_version.txt`) and generates companion `node_mcf` files (`drought_spi_9m_polygon_events_nodes.mcf` and `drought_spi_9m_polygon_svobs_nodes.mcf`).
 
 ### `download.py`
-Downloads `.nc.gz` files from `https://opendata.dwd.de/climate_environment/GPCC/`, decompresses them, aligns coordinate grids, and outputs `merged.nc`.
+Downloads `gpcc-spi-pearson-{01,03,06,09,36,72}.nc` from `https://www.ncei.noaa.gov/pub/data/nidis/gpcc/spi-pearson/` into `input_files/`.
 
 ### `preprocess_gpcc_spi.py`
-Computes SPI using the Pearson distribution (`spi_pearson_01`, `03`, `06`, `09`, `36`, `72`) and converts NetCDF grid coordinates to 1-degree `grid_1/<lat>_<lon>` place DCIDs.
+Reads `input_files/gpcc_spi_pearson_*.nc`, filters dates from `start_date` to `end_date` (current date), converts NetCDF grid coordinates to 1-degree `grid_1/<lat>_<lon>` place DCIDs, and outputs `output_files/gpcc_spi_pearson_*.csv`.
 
 ### `gpcc_spi_aggregation.py`
-Joins 1-degree grid SPI values with containment ratios (`grid_1_contains.csv`) to produce weighted SPI aggregations for administrative places.
+Joins 1-degree grid SPI values (`output_files/*.csv`) with place area ratios (`geojson_data/place_area_ratio.json`) to produce weighted SPI aggregations for administrative places in `output_files/aggregations/`.
 
 ## Running Tests
 
