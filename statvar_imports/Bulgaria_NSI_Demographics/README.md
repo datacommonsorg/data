@@ -63,4 +63,4 @@ cd ../..
 `validation_config.json` enforces:
 - `check_max_date_consistent`: Ensures `MaxDate` is uniform across all 207 generated StatVars.
 - `check_all_statvars_freshness`: SQL validator verifying that all active StatVars meet `TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1`.
-- `check_deleted_records_percent`: Ensures deleted records do not exceed `0.1%`.
+(Deleted records threshold `<= 0.1%`, empty import, missing refs, and lint checks are enforced via the global `tools/import_validation/validation_config.json`.)

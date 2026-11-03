@@ -15,14 +15,6 @@
                 "query": "SELECT StatVar, MaxDate FROM stats",
                 "condition": "TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1"
             }
-        },
-        {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that deleted records do not exceed 0.1%.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0.1
-            }
         }
     ]
 }
