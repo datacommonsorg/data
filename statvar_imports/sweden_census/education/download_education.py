@@ -343,16 +343,48 @@ def query_scb_chunk(
   ) from last_exc
 
 
+def _accumulate_row(
+    target_regions: List[str],
+    target_age: str,
+    edu_code: str,
+    sex_code: str,
+    yr: str,
+    val: Optional[int],
+    data_store: Dict[Tuple[str, str, str, str, str], int],
+    observed_cells: set,
+    suppressed_cells: set,
+) -> None:
+  """Accumulates a single SCB cell into regional/age/sex aggregates, propagating suppression."""
+  for reg_label in target_regions:
+    sex_key = (reg_label, target_age, edu_code, sex_code, yr)
+    tot_key = (reg_label, target_age, edu_code, 'TOT', yr)
+    if val is None:
+      suppressed_cells.add(sex_key)
+      suppressed_cells.add(tot_key)
+    else:
+      data_store[sex_key] += val
+      data_store[tot_key] += val
+      observed_cells.add(sex_key)
+      observed_cells.add(tot_key)
+
+
 def _format_cell_value(
     key: Tuple[str, str, str, str, str],
     data_store: Dict[Tuple[str, str, str, str, str], int],
     observed_cells: Optional[set],
+    suppressed_cells: Optional[set] = None,
     legacy_zero_fill_max_year: int = 2022,
 ):
   """Returns cell value, preserving '' for post-2022 unobserved/suppressed cells."""
+  yr = int(key[4])
+  if (
+      yr > legacy_zero_fill_max_year
+      and suppressed_cells is not None
+      and key in suppressed_cells
+  ):
+    return ''
   if observed_cells is None or key in observed_cells:
     return data_store.get(key, 0)
-  yr = int(key[4])
   return 0 if yr <= legacy_zero_fill_max_year else ''
 
 
@@ -365,6 +397,7 @@ def write_wide_csv(
     years: List[str],
     data_store: Dict,
     observed_cells: Optional[set] = None,
+    suppressed_cells: Optional[set] = None,
 ) -> int:
   """Writes a raw wide-format CSV matching the legacy Sweden Education PVMap."""
   os.makedirs(os.path.dirname(filepath), exist_ok=True)
@@ -390,6 +423,7 @@ def write_wide_csv(
                       (reg, age_label, edu_code, sex_code, yr),
                       data_store,
                       observed_cells,
+                      suppressed_cells,
                   )
                   for yr in years
               ]
@@ -401,6 +435,7 @@ def write_wide_csv(
                     (reg, age_label, edu_code, 'TOT', yr),
                     data_store,
                     observed_cells,
+                    suppressed_cells,
                 )
                 for yr in years
             ]
@@ -488,6 +523,7 @@ def main(argv):
       int
   )
   observed_cells = set()
+  suppressed_cells = set()
 
   # 1. Fetch County-level data (21 counties) for individual ages 16..74 + tot16-74
   # Roll up into NUTS3, NUTS2, and NUTS1 across all 4 marginal views.
@@ -515,23 +551,23 @@ def main(argv):
       sex_code = row['Kon']
       yr = row['Tid']
       val = _parse_scb_value(row['value'])
-      if val is None:
-        continue
-
       nuts3_label, nuts2_label, nuts1_label = COUNTY_TO_NUTS[reg_code]
       target_age = (
           TOTAL_AGE_LABEL
           if age_code == 'tot16-74'
           else age_to_bracket[age_code]
       )
-
-      for nuts_label in (nuts1_label, nuts2_label, nuts3_label):
-        sex_key = (nuts_label, target_age, edu_code, sex_code, yr)
-        tot_key = (nuts_label, target_age, edu_code, 'TOT', yr)
-        data_store[sex_key] += val
-        data_store[tot_key] += val
-        observed_cells.add(sex_key)
-        observed_cells.add(tot_key)
+      _accumulate_row(
+          [nuts1_label, nuts2_label, nuts3_label],
+          target_age,
+          edu_code,
+          sex_code,
+          yr,
+          val,
+          data_store,
+          observed_cells,
+          suppressed_cells,
+      )
     time.sleep(1.2)
 
   # 2. Fetch Municipality-level data (290 municipalities)
@@ -570,21 +606,23 @@ def main(argv):
         sex_code = row['Kon']
         yr = row['Tid']
         val = _parse_scb_value(row['value'])
-        if val is None:
-          continue
-
         muni_label = muni_code_to_label[reg_code]
         target_age = (
             TOTAL_AGE_LABEL
             if age_code == 'tot16-74'
             else age_to_bracket[age_code]
         )
-        sex_key = (muni_label, target_age, edu_code, sex_code, yr)
-        tot_key = (muni_label, target_age, edu_code, 'TOT', yr)
-        data_store[sex_key] += val
-        data_store[tot_key] += val
-        observed_cells.add(sex_key)
-        observed_cells.add(tot_key)
+        _accumulate_row(
+            [muni_label],
+            target_age,
+            edu_code,
+            sex_code,
+            yr,
+            val,
+            data_store,
+            observed_cells,
+            suppressed_cells,
+        )
       time.sleep(1.2)
 
   # 3. Write out the 17 raw CSV files into output_dir (cleaning stale CSVs first)
@@ -609,6 +647,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_nuts2.csv'),
@@ -619,6 +658,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_nuts3.csv'),
@@ -629,6 +669,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_municipality.csv'),
@@ -639,6 +680,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
 
   # Group 2: By Education Level & Gender (4 files)
@@ -651,6 +693,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_gender_nuts2.csv'),
@@ -661,6 +704,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_gender_nuts3.csv'),
@@ -671,6 +715,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_gender_municipality.csv'),
@@ -681,6 +726,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
 
   # Group 3: By Education Level & Age Group (6 files)
@@ -693,6 +739,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_nuts2.csv'),
@@ -703,6 +750,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_nuts3.csv'),
@@ -713,6 +761,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   # Split municipalities into 3 parts (107, 96, 87; 86 after skipping 2463 Åsele)
   write_wide_csv(
@@ -724,6 +773,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_municipality_2.csv'),
@@ -734,6 +784,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_municipality_3.csv'),
@@ -744,6 +795,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
 
   # Group 4: By Education Level, Age Group & Gender (3 files)
@@ -756,6 +808,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_gender_nuts2.csv'),
@@ -766,6 +819,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
   write_wide_csv(
       os.path.join(out_dir, 'education_age_gender_nuts3.csv'),
@@ -776,6 +830,7 @@ def main(argv):
       all_years,
       data_store,
       observed_cells,
+      suppressed_cells,
   )
 
   logging.info(

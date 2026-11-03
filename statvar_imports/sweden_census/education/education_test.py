@@ -215,6 +215,59 @@ class DownloadEducationUnitTest(unittest.TestCase):
           ],
       )
 
+  def test_accumulate_row_propagates_suppression_to_post2022_aggregates(self):
+    data_store = collections.defaultdict(int)
+    observed_cells = set()
+    suppressed_cells = set()
+
+    # In 2024, male ('1') is observed (100), but female ('2') is suppressed (None)
+    download_education._accumulate_row(
+        target_regions=['SE1 Östra Sverige'],
+        target_age='totalt 16-74 år',
+        edu_code='1',
+        sex_code='1',
+        yr='2024',
+        val=100,
+        data_store=data_store,
+        observed_cells=observed_cells,
+        suppressed_cells=suppressed_cells,
+    )
+    download_education._accumulate_row(
+        target_regions=['SE1 Östra Sverige'],
+        target_age='totalt 16-74 år',
+        edu_code='1',
+        sex_code='2',
+        yr='2024',
+        val=None,
+        data_store=data_store,
+        observed_cells=observed_cells,
+        suppressed_cells=suppressed_cells,
+    )
+
+    male_key = ('SE1 Östra Sverige', 'totalt 16-74 år', '1', '1', '2024')
+    female_key = ('SE1 Östra Sverige', 'totalt 16-74 år', '1', '2', '2024')
+    tot_key = ('SE1 Östra Sverige', 'totalt 16-74 år', '1', 'TOT', '2024')
+
+    self.assertEqual(
+        download_education._format_cell_value(
+            male_key, data_store, observed_cells, suppressed_cells
+        ),
+        100,
+    )
+    self.assertEqual(
+        download_education._format_cell_value(
+            female_key, data_store, observed_cells, suppressed_cells
+        ),
+        '',
+    )
+    # Aggregate TOT key must be '' rather than partial sum 100
+    self.assertEqual(
+        download_education._format_cell_value(
+            tot_key, data_store, observed_cells, suppressed_cells
+        ),
+        '',
+    )
+
 
 class SwedenEducationConfigAndFixtureTest(unittest.TestCase):
   """Verifies PVMap, metadata, remap, validation configs, and test_data fixtures."""
@@ -243,6 +296,12 @@ class SwedenEducationConfigAndFixtureTest(unittest.TestCase):
       with open(path, 'r', encoding='utf-8') as f:
         rows = list(csv.DictReader(f))
       self.assertEqual(len(rows), expected_svs)
+
+    manifest_path = os.path.join(SCRIPT_DIR, 'manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+      manifest = json.load(f)
+    source_files = manifest['import_specifications'][0]['source_files']
+    self.assertIn('*_statvar_remap.csv', source_files)
 
   def test_test_data_fixtures_exist_and_non_empty(self):
     prefixes = (
