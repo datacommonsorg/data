@@ -1,0 +1,15 @@
+Year,Place,StatVar,Quantity,Unit
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit,1348,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit,2,USDollar
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms,1185,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms,5,USDollar
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_1Bedrooms,1180,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_1Bedrooms,3,USDollar
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_2Bedrooms,1338,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_2Bedrooms,2,USDollar
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_3Bedrooms,1500,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_3Bedrooms,3,USDollar
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_4Bedrooms,1861,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_4Bedrooms,9,USDollar
+2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_5OrMoreBedrooms,1976,USDollar
+2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_5OrMoreBedrooms,19,USDollar
