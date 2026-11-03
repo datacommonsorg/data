@@ -40,7 +40,6 @@ flags.DEFINE_enum(
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
-Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 
 def create_retry_session(
@@ -75,55 +74,74 @@ def download_files(url_list, save_folder):
     downloaded_count = 0
     session = create_retry_session()
 
-    for url in url_list:
-        parsed_url = urlparse(url)
-        filename = os.path.basename(parsed_url.path)
-        file_path = os.path.join(save_folder, filename)
+    try:
+        for url in url_list:
+            parsed_url = urlparse(url)
+            filename = os.path.basename(parsed_url.path)
+            file_path = os.path.join(save_folder, filename)
 
-        logging.info(
-            f"Starting download: source={url}, destination={file_path}")
-
-        response = None
-        try:
-            response = session.get(url, timeout=120, stream=True)
-            if response.status_code == 404:
-                response.close()
-                logging.info(f"File not yet available (404), skipping: {url}")
-                continue
-            response.raise_for_status()
-
-            with response as r:
-                total_size = int(r.headers.get('content-length', 0))
-                block_size = 1024
-                with open(file_path,
-                          'wb') as f, tqdm(total=total_size,
-                                           unit='B',
-                                           unit_scale=True,
-                                           desc=filename,
-                                           leave=False) as progress_bar:
-                    for chunk in r.iter_content(block_size):
-                        f.write(chunk)
-                        progress_bar.update(len(chunk))
-            file_size = os.path.getsize(file_path)
             logging.info(
-                f"Completed download: source={url}, destination={file_path}, size_bytes={file_size}"
-            )
-            downloaded_count += 1
-        except requests.exceptions.RequestException as e:
-            if response is not None:
-                response.close()
-            Path(file_path).unlink(missing_ok=True)
-            year = extract_year(filename)
-            current_year = date.today().year
-            # Tennessee death statistics typically has a 3-year publication lag.
-            if downloaded_count > 0 and year and year > current_year - 3:
-                logging.warning(
-                    f"Skipping future unreleased year {year} after error: {e}")
-                continue
-            logging.error(
-                f"Download failed: source={url}, destination={file_path}, error={e}"
-            )
-            raise
+                f"Starting download: source={url}, destination={file_path}")
+
+            response = None
+            try:
+                response = session.get(url, timeout=120, stream=True)
+                if response.status_code == 404:
+                    year = extract_year(filename)
+                    current_year = date.today().year
+                    if downloaded_count > 0 and year and year >= current_year - 3:
+                        response.close()
+                        logging.info(
+                            f"File not yet available (404), skipping unreleased year {year}: {url}"
+                        )
+                        continue
+                    logging.error(
+                        f"Download failed with 404 for due year {year}: {url}")
+                    raise requests.exceptions.HTTPError(
+                        f"404 Client Error: Not Found for due year {year}: {url}"
+                    )
+                response.raise_for_status()
+
+                with response as r:
+                    total_size = int(r.headers.get('content-length', 0))
+                    block_size = 1024
+                    with open(file_path,
+                              'wb') as f, tqdm(total=total_size,
+                                               unit='B',
+                                               unit_scale=True,
+                                               desc=filename,
+                                               leave=False) as progress_bar:
+                        for chunk in r.iter_content(block_size):
+                            f.write(chunk)
+                            progress_bar.update(len(chunk))
+                file_size = os.path.getsize(file_path)
+                logging.info(
+                    f"Completed download: source={url}, destination={file_path}, size_bytes={file_size}"
+                )
+                downloaded_count += 1
+            except requests.exceptions.RequestException as e:
+                if response is not None:
+                    response.close()
+                Path(file_path).unlink(missing_ok=True)
+                year = extract_year(filename)
+                current_year = date.today().year
+                # Tennessee death statistics typically has a 3-year publication lag.
+                if downloaded_count > 0 and year and year > current_year - 3:
+                    logging.warning(
+                        f"Skipping future unreleased year {year} after error: {e}"
+                    )
+                    continue
+                logging.error(
+                    f"Download failed: source={url}, destination={file_path}, error={e}"
+                )
+                raise
+            except Exception:
+                if response is not None:
+                    response.close()
+                Path(file_path).unlink(missing_ok=True)
+                raise
+    finally:
+        session.close()
 
     if url_list and downloaded_count == 0:
         raise RuntimeError("No files were successfully downloaded.")
@@ -153,7 +171,9 @@ def download_files_from_gcs(url_list, save_folder):
             continue
         except Exception as e:
             Path(file_path).unlink(missing_ok=True)
-            e.add_note(f"Failed to download GCS object {url}")
+            logging.error(f"Failed to download GCS object {url}: {e}")
+            if hasattr(e, 'add_note'):
+                e.add_note(f"Failed to download GCS object {url}")
             raise
 
         file_size = os.path.getsize(file_path)
@@ -229,6 +249,7 @@ def process_excel_files(input_dir):
 
 
 def main(_):
+    Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
     tn_url_template = "https://www.tn.gov/content/dam/tn/health/documents/vital-statistics/death/{year}/Diabetes_County_{year}.xlsx"
     gcs_url_template = "gs://unresolved_mcf/nyu_diabetes/tennessee/latest/input_files/Diabetes_County_{year}.xlsx"
     start_year = 2019

@@ -100,8 +100,68 @@ class DownloadTest(unittest.TestCase):
                     ['gs://test-bucket/input/Diabetes_County_2019.xlsx'],
                     temp_dir)
 
+    @mock.patch.object(download, 'date')
     @mock.patch.object(download, 'create_retry_session')
-    def test_download_files_skips_404(self, mock_session_factory):
+    def test_download_files_skips_unreleased_year_404(self,
+                                                      mock_session_factory,
+                                                      mock_date):
+        mock_date.today.return_value.year = 2026
+        mock_session = mock.Mock()
+        mock_resp_success = mock.Mock()
+        mock_resp_success.status_code = 200
+        mock_resp_success.headers = {'content-length': '8'}
+        mock_resp_success.iter_content.return_value = [b'content!']
+        mock_resp_success.__enter__ = mock.Mock(return_value=mock_resp_success)
+        mock_resp_success.__exit__ = mock.Mock(return_value=False)
+
+        mock_resp_404 = mock.Mock()
+        mock_resp_404.status_code = 404
+
+        mock_session.get.side_effect = [mock_resp_success, mock_resp_404]
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            urls = [
+                'https://tn.example/2022/Diabetes_County_2022.xlsx',
+                'https://tn.example/2024/Diabetes_County_2024.xlsx',
+            ]
+            download.download_files(urls, temp_dir)
+            self.assertTrue(
+                (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
+        mock_resp_404.close.assert_called_once()
+        mock_session.close.assert_called_once()
+
+    @mock.patch.object(download, 'date')
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_raises_on_due_year_404(self, mock_session_factory,
+                                                   mock_date):
+        mock_date.today.return_value.year = 2026
+        mock_session = mock.Mock()
+        mock_resp_success = mock.Mock()
+        mock_resp_success.status_code = 200
+        mock_resp_success.headers = {'content-length': '8'}
+        mock_resp_success.iter_content.return_value = [b'content!']
+        mock_resp_success.__enter__ = mock.Mock(return_value=mock_resp_success)
+        mock_resp_success.__exit__ = mock.Mock(return_value=False)
+
+        mock_resp_404 = mock.Mock()
+        mock_resp_404.status_code = 404
+
+        mock_session.get.side_effect = [mock_resp_success, mock_resp_404]
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            urls = [
+                'https://tn.example/2022/Diabetes_County_2022.xlsx',
+                'https://tn.example/2020/Diabetes_County_2020.xlsx',
+            ]
+            with self.assertRaises(requests.exceptions.HTTPError):
+                download.download_files(urls, temp_dir)
+        mock_resp_404.close.assert_called_once()
+        mock_session.close.assert_called_once()
+
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_raises_on_initial_404(self, mock_session_factory):
         mock_session = mock.Mock()
         mock_response = mock.Mock()
         mock_response.status_code = 404
@@ -109,12 +169,35 @@ class DownloadTest(unittest.TestCase):
         mock_session_factory.return_value = mock_session
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            with self.assertRaisesRegex(
-                    RuntimeError, 'No files were successfully downloaded'):
+            with self.assertRaises(requests.exceptions.HTTPError):
                 download.download_files(
                     ['https://tn.example/2023/Diabetes_County_2023.xlsx'],
                     temp_dir)
         mock_response.close.assert_called_once()
+        mock_session.close.assert_called_once()
+
+    @mock.patch.object(download, 'create_retry_session')
+    def test_download_files_cleans_up_on_unexpected_exception(
+            self, mock_session_factory):
+        mock_session = mock.Mock()
+        mock_resp = mock.Mock()
+        mock_resp.status_code = 200
+        mock_resp.headers = {'content-length': '8'}
+        mock_resp.iter_content.side_effect = OSError('Disk full')
+        mock_resp.__enter__ = mock.Mock(return_value=mock_resp)
+        mock_resp.__exit__ = mock.Mock(return_value=False)
+        mock_session.get.return_value = mock_resp
+        mock_session_factory.return_value = mock_session
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with self.assertRaises(OSError):
+                download.download_files(
+                    ['https://tn.example/2022/Diabetes_County_2022.xlsx'],
+                    temp_dir)
+            self.assertFalse(
+                (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
+        mock_resp.close.assert_called_once()
+        mock_session.close.assert_called_once()
 
     @mock.patch.object(download, 'date')
     @mock.patch.object(download, 'create_retry_session')
