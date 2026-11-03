@@ -36,7 +36,7 @@ from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9537: População residente por religião
-TABLE_9537_API_URL = f"{SIDRA_BASE_URL}/values/t/9537/n1/all/n2/all/n3/all/v/1000093/p/all/c11575/all?formato=json"
+TABLE_9537_API_URL = f"{SIDRA_BASE_URL}/values/t/9537/n1/all/n2/all/n3/all/v/140/p/all/c133/all/c2/0/c58/0?formato=json"
 
 FLAGS = flags.FLAGS
 if "output_file" not in FLAGS:
