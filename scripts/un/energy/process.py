@@ -100,8 +100,8 @@ def _print_counters(counters, steps=None):
     if steps is None or row_key not in counters or counters[
             row_key] % steps == 0:
         if 'inputs_processed' in counters:
-            start_ts = counters['time_start']
-            end_ts = time.perf_counter()
+            # TODO: Print the counters. This function is currently a no-op.
+            pass
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
@@ -242,8 +242,8 @@ def is_valid_stat_var(sv_pv: dict, counters=None) -> bool:
     for prop in STAT_VAR_REQUIRED_PROPERTIES:
         if prop not in sv_pv:
             _add_error_counter(
-                f'error_missing_property_{p}',
-                f'Stat var missing property {p}, statVar: {sv_pv}', counters)
+                f'error_missing_property_{prop}',
+                f'Stat var missing property {prop}, statVar: {sv_pv}', counters)
             return False
 
     return True
@@ -384,7 +384,6 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     country_code = data_row['Country or Area Code']
     country_name = data_row['Country or Area']
     t_code = data_row['Transaction Code']
-    ct_code = data_row['Commodity - Transaction Code']
     ct_name = data_row['Commodity - Transaction']
     year = data_row['Year']
     units = data_row['Unit']
@@ -395,7 +394,7 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     if fuel == 'Commodity Code' or fuel == 'fnSeqID' or fuel == '1' or fuel == '':
         return
     if fuel is None or country_code is None or t_code is None or year is None or quantity is None:
-        _add_error_counter(f'error_invalid_input_row',
+        _add_error_counter('error_invalid_input_row',
                            f'Invalid data row {data_row}', counters)
         return
 
@@ -592,7 +591,7 @@ def process(in_paths: list,
 def main(_):
     csv_data_files = FLAGS.csv_data_files
     if len(csv_data_files) == 0:
-        logging.info(f'Downloading energy data set files')
+        logging.info('Downloading energy data set files')
         csv_data_files = download.download_un_energy_dataset()
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
@@ -600,7 +599,7 @@ def main(_):
                 FLAGS.copy_input_columns, FLAGS.output_counters)
     else:
         logging.error(
-            f'Please specify files to process with --csv_data_files=<,>')
+            'Please specify files to process with --csv_data_files=<,>')
 
 
 if __name__ == '__main__':

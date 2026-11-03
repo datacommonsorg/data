@@ -372,7 +372,7 @@ def generate_goldens(input_files: str,
             logging.info(
                 f'Using sampled file: {sampled_file} with {len(input_nodes)} nodes'
             )
-            counters.add_counter(f'generate-goldens-sampled-nodes',
+            counters.add_counter('generate-goldens-sampled-nodes',
                                  len(input_nodes))
     else:
         input_nodes = load_nodes_from_file(input_files)

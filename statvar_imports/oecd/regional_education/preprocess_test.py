@@ -229,7 +229,7 @@ class PreprocessTest(unittest.TestCase):
         """Test ValueError is raised when source file is empty."""
         src_csv = os.path.join(self.temp_dir, 'empty.csv')
         dst_csv = os.path.join(self.temp_dir, 'output.csv')
-        with open(src_csv, 'w', encoding='utf-8') as f:
+        with open(src_csv, 'w', encoding='utf-8'):
             pass
 
         with self.assertRaises(ValueError):

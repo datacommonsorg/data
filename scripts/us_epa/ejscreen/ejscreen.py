@@ -21,7 +21,6 @@ from absl import logging, flags, app
 import sys
 import time
 from retry import retry
-import requests
 import shutil
 from pathlib import Path
 

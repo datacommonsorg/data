@@ -150,7 +150,7 @@ def main(_):
 
         download_and_extract_2015_16(data_type, OUTPUT_DIR)
 
-    logging.info(f"\n--- All 2015-16 downloads complete ---")
+    logging.info("\n--- All 2015-16 downloads complete ---")
 
 
 if __name__ == '__main__':

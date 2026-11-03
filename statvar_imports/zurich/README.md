@@ -185,3 +185,100 @@ Fully Autorefresh:" 55 10 29 * * " (Runs at 10:55 AM on the 29th of every month)
 "python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/zurich/bev_3903_sex_wiki/test_data/bev_3903_sex_wiki_input.csv' --pv_map='../../statvar_imports/zurich/bev_3903_sex_wiki/bev_3903_sex_wiki_pvmap.csv' --config_file='../../statvar_imports/zurich/bev_3903_sex_wiki/bev_3903_sex_wiki_metadata.csv' --output_path=../../statvar_imports/zurich/bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki_output"
 
 #####
+
+
+1. "import_name": "Zurich_Population_By_Age_Sex_Origin"
+
+2. Import Overview
+Population by statistical city district, origin, gender, year of age, 5-year age
+groups and year at City, District (Kreise), and Quarter (Quartiere) Level,
+consolidating the 3 legacy split imports (`Zurich_Population_By_Age`,
+`Zurich_Population_By_Origin`, `Zurich_Population_By_Sex`, which will be paused
+later after cutover).
+Source URL: [BEV390OD3903 Dataset](https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903)
+Import Type: Fully Autorefresh
+Source Data Availability: 1993 onwards
+Release Frequency: P1W (Weekly)
+
+3. Preprocessing Steps (None)
+No custom rollup scripts are used. Ingestion and aggregation are performed directly by `stat_var_processor.py` using native `multi_value_properties` and `aggregate_duplicate_svobs: sum`.
+
+- **Automated `measurementMethod: dcs:DataCommonsAggregate`**:
+  - `stat_var_processor.py` detects when multiple rows aggregate into the same place-date-variable bucket and automatically assigns `measurementMethod: dcs:DataCommonsAggregate`. Leaf/unaggregated observations remain unflagged.
+- **On-Demand Dynamic StatVar Generation**:
+  - `stat_var_processor.py` dynamically resolves constraint properties (`age`, `gender`, `nativity`) and outputs canonical `StatisticalVariable` schema definitions into `output/`.
+- **Spatial Levels Aggregated**:
+  - Multi-value `observationAbout` maps each row simultaneously to Quarter (`QuarLang`), District (`KreisLang`), and City (`wikidataId/Q72`), aggregating sums automatically.
+- **Unknown Region Filtering**:
+  - Unknown quarters (`QuarSort:999`, `QuarCd:999`, `QuarLang:Unbekannt`) and unknown districts (`KreisCd:990`, `KreisLang:Kreis Unbekannt`) are excluded declaratively via `#IgnoreRow,True` in `zurich_places_pvmap.csv`.
+
+4. Autorefresh Type
+
+Fully Autorefresh: "0 6 * * 5" (Runs weekly on Friday at 06:00 UTC).
+
+5. Script Execution Details
+
+```bash
+python3 ../../util/download_util_script.py \
+  --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903/download/BEV390OD3903.csv \
+  --output_folder=bev_3903_all/input_files && \
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --input_data=bev_3903_all/input_files/BEV390OD3903.csv \
+  --pv_map=bev_3903_all/bev_3903_wiki_pvmap.csv,zurich_places_pvmap.csv \
+  --config_file=bev_3903_all/bev_3903_wiki_metadata.csv \
+  --output_columns=observationAbout,observationDate,variableMeasured,value,measurementMethod \
+  --output_path=bev_3903_all/output/zurich_population_bev_3903_wiki \
+  --output_counters=bev_3903_all/counters/zurich_population_bev_3903_wiki_counters.csv
+```
+
+#####
+
+
+1. "import_name": "Zurich_Population_Number_Of_Birth_By_Sex_Origin"
+
+2. Import Overview
+Number of live births by statistical city district, gender, age group and origin
+at City (`wikidataId/Q72`), District (`Kreise` 1–12), and Quarter (`Quartiere`
+34 quarters) Level, consolidating the 3 legacy split imports
+(`Zurich_Population_Number_Of_Birth`,
+`Zurich_Population_Number_Of_Birth_By_Origin`,
+`Zurich_Population_Number_Of_Birth_By_Sex`, which will be paused later after
+cutover).
+Source URL: [BEV403OD4031 Dataset](https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031)
+Import Type: Fully Autorefresh
+Source Data Availability: 1998 onwards
+Release Frequency: P1W (Weekly)
+
+3. Preprocessing Steps (None)
+No custom rollup scripts are used. Ingestion and aggregation are performed directly by `stat_var_processor.py` using native `multi_value_properties` and `aggregate_duplicate_svobs: sum`.
+
+- **Automated `measurementMethod: dcs:DataCommonsAggregate`**:
+  - `stat_var_processor.py` detects when multiple rows aggregate into the same place-date-variable bucket and automatically assigns `measurementMethod: dcs:DataCommonsAggregate`. Leaf/unaggregated observations remain unflagged.
+- **On-Demand Dynamic StatVar Generation**:
+  - Canonical `Count_BirthEvent_*` StatVars are dynamically synthesized on demand by `stat_var_processor.py`.
+- **Temporal & Spatial Aggregation**:
+  - Daily births are aggregated into annual totals (`GueltigAbDatJahr`) across all 3 geographic levels: Quarter (`QuarLang`), District (`KreisLang`), and City (`wikidataId/Q72`).
+- **Unknown Region Filtering**:
+  - Unknown quarters and districts are excluded declaratively via `#IgnoreRow,True` in `zurich_places_pvmap.csv`.
+
+4. Autorefresh Type
+
+Fully Autorefresh: "0 20 * * 5" (Runs weekly on Friday at 20:00 UTC).
+
+5. Script Execution Details
+
+```bash
+python3 ../../util/download_util_script.py \
+  --download_url=https://data.stadt-zuerich.ch/dataset/bev_tag_geburten_quartier_geschl_ag_herkunft_od4031/download/BEV403OD4031.csv \
+  --output_folder=bev_4031_all/input_files && \
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --input_data=bev_4031_all/input_files/BEV403OD4031.csv \
+  --pv_map=bev_4031_all/bev_4031_wiki_pvmap.csv,zurich_places_pvmap.csv \
+  --config_file=bev_4031_all/bev_4031_wiki_metadata.csv \
+  --output_columns=observationAbout,observationDate,variableMeasured,value,measurementMethod \
+  --output_path=bev_4031_all/output/zurich_bev_4031_wiki \
+  --output_counters=bev_4031_all/counters/zurich_bev_4031_wiki_counters.csv
+```
+
