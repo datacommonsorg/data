@@ -445,15 +445,12 @@ _TITLE = {
 }
 
 _SCHOOL_PUBLIC_TYPE = {
-    "1-Regular school": "NCES_PublicSchoolTypeRegular",
-    "1-Regular School": "NCES_PublicSchoolTypeRegular",
-    "2-Special education school": "NCES_PublicSchoolTypeSpecialEducation",
-    "2-Special Education School": "NCES_PublicSchoolTypeSpecialEducation",
-    "3-Vocational school": "NCES_PublicSchoolTypeVocational",
-    "3-Career and Technical school": "NCES_PublicSchoolTypeVocational",
-    "3-Career and Technical School": "NCES_PublicSchoolTypeVocational",
-    "4-Alternative/other school": "NCES_PublicSchoolTypeOther",
-    "4-Alternative Education School": "NCES_PublicSchoolTypeOther",
+    "1-regular school": "NCES_PublicSchoolTypeRegular",
+    "2-special education school": "NCES_PublicSchoolTypeSpecialEducation",
+    "3-vocational school": "NCES_PublicSchoolTypeVocational",
+    "3-career and technical school": "NCES_PublicSchoolTypeVocational",
+    "4-alternative/other school": "NCES_PublicSchoolTypeOther",
+    "4-alternative education school": "NCES_PublicSchoolTypeOther",
     np.nan: "NCES_PublicSchoolTypeDataMissing",
     "–": "NCES_PublicSchoolTypeDataMissing",
     "†": "NCES_PublicSchoolTypeDataNotApplicable",
@@ -522,6 +519,10 @@ def replace_values(data_df: pd.DataFrame,
         "State_School_ID": _NAN,
         "State_Name": _STATE_NAME
     }
+
+    if "School_Type_Public" in data_df.columns:
+        data_df["School_Type_Public"] = data_df["School_Type_Public"].str.lower(
+        )
 
     df_columns = data_df.columns.to_list()
     for column, replacements in cols_mapper.items():

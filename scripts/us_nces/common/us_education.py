@@ -76,8 +76,6 @@ def _format_fips_code(val, length: int) -> str:
     if pd.isna(val):
         return ''
     s = str(val).strip()
-    if not s or s.lower() in ('nan', 'none', '<na>', '†', '–', '‡'):
-        return ''
     if s.endswith('.0'):
         s = s[:-2]
     if not s.isdigit():
