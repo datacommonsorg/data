@@ -361,8 +361,8 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
         if not isinstance(csv_bytes, bytes) or not csv_bytes:
             raise RuntimeError(f'Failed to download bytes from {csv_url}')
         population_rows.extend(
-            parse_population_csv(
-                csv_bytes.decode('utf-8-sig', errors='replace')))
+            parse_population_csv(csv_bytes.decode('utf-8-sig',
+                                                  errors='replace')))
 
     if not population_rows:
         raise RuntimeError('No population rows extracted from HDX.')

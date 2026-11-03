@@ -14,14 +14,20 @@
 # limitations under the License.
 """Unit tests for Sri Lanka Census download.py."""
 
+import csv
 import io
 import os
+import sys
 import tempfile
 import unittest
 from unittest import mock
 
-import download
-import openpyxl
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+if _MODULE_DIR not in sys.path:
+    sys.path.insert(0, _MODULE_DIR)
+
+import download  # pylint: disable=wrong-import-position
+import openpyxl  # pylint: disable=wrong-import-position
 
 
 class DownloadTest(unittest.TestCase):
@@ -160,6 +166,30 @@ class DownloadTest(unittest.TestCase):
                                             'srilanka_agriculture.csv')))
             self.assertTrue(
                 os.path.exists(os.path.join(out_dir, 'srilanka_education.csv')))
+
+    def test_test_data_fixtures_cover_all_domains(self):
+        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
+        for fixture_name in (
+                'sample_input.csv',
+                'srilanka_agriculture.csv',
+                'srilanka_education.csv',
+                'sample_output.csv',
+                'sample_output.tmcf',
+        ):
+            self.assertTrue(
+                os.path.exists(os.path.join(test_data_dir, fixture_name)),
+                f'Missing fixture: {fixture_name}',
+            )
+
+        with open(os.path.join(test_data_dir, 'sample_output.csv'),
+                  'r',
+                  encoding='utf-8') as f:
+            rows = list(csv.DictReader(f))
+        self.assertLess(len(rows), 100)
+        stat_vars = {row['variableMeasured'] for row in rows}
+        self.assertIn('dcid:Count_Person', stat_vars)
+        self.assertIn('dcid:Area_LandCover_ArableLand', stat_vars)
+        self.assertIn('dcid:Count_Student_PrePrimaryEducation', stat_vars)
 
 
 if __name__ == '__main__':

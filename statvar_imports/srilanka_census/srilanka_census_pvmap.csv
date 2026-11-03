@@ -4,41 +4,8 @@ Year,observationDate,{Number}
 Value,value,{Number}
 Country Name,,
 Indicator Name,,
-LKA,observationAbout,dcid:country/LKA
-LK1,observationAbout,dcid:wikidataId/Q856686
-LK2,observationAbout,dcid:wikidataId/Q190716
-LK3,observationAbout,dcid:wikidataId/Q876308
-LK4,observationAbout,dcid:wikidataId/Q598745
-LK5,observationAbout,dcid:wikidataId/Q1046126
-LK6,observationAbout,dcid:wikidataId/Q876339
-LK7,observationAbout,dcid:wikidataId/Q1057124
-LK8,observationAbout,dcid:wikidataId/Q876293
-LK9,observationAbout,dcid:wikidataId/Q853272
-LK11,observationAbout,dcid:wikidataId/Q606287
-LK12,observationAbout,dcid:wikidataId/Q206344
-LK13,observationAbout,dcid:wikidataId/Q728935
-LK21,observationAbout,dcid:wikidataId/Q723002
-LK22,observationAbout,dcid:wikidataId/Q787421
-LK23,observationAbout,dcid:wikidataId/Q1583950
-LK31,observationAbout,dcid:wikidataId/Q647649
-LK32,observationAbout,dcid:wikidataId/Q1281285
-LK33,observationAbout,dcid:wikidataId/Q723006
-LK41,observationAbout,dcid:wikidataId/Q1520182
-LK42,observationAbout,dcid:wikidataId/Q178003
-LK43,observationAbout,dcid:wikidataId/Q527980
-LK44,observationAbout,dcid:wikidataId/Q1587508
-LK45,observationAbout,dcid:wikidataId/Q1584007
-LK51,observationAbout,dcid:wikidataId/Q810960
-LK52,observationAbout,dcid:wikidataId/Q474395
-LK53,observationAbout,dcid:wikidataId/Q1493318
-LK61,observationAbout,dcid:wikidataId/Q745073
-LK62,observationAbout,dcid:wikidataId/Q1665318
-LK71,observationAbout,dcid:wikidataId/Q612614
-LK72,observationAbout,dcid:wikidataId/Q931057
-LK81,observationAbout,dcid:wikidataId/Q799713
-LK82,observationAbout,dcid:wikidataId/Q923420
-LK91,observationAbout,dcid:wikidataId/Q1587175
-LK92,observationAbout,dcid:wikidataId/Q1737803
+place_code,observationAbout,{Data}
+Country ISO3,observationAbout,{Data}
 F_TL,variableMeasured,dcid:Count_Person_Female,value,{Number}
 M_TL,variableMeasured,dcid:Count_Person_Male,value,{Number}
 T_TL,variableMeasured,dcid:Count_Person,value,{Number}
