@@ -26,7 +26,7 @@ The annual refresh is automated via scheduled Cloud Batch / Cloud Run execution:
 
 ### 3.2 Automated Ingestion Workflow (`download.sh` & `stat_var_processor.py`)
 1. **Download Step (`download.sh`)**: Pulls all staged annual input CSVs (`BulgariaNSI_Demographics_Year_input_*.csv`) from `gs://unresolved_mcf/country/Bulgaria/input_files/` into local `input_files/` (preserved untouched for `source_files`), writes sanitized copies (normalizing quotes, non-breaking spaces, and hyphens) to `sanitized_input_files/`, and validates internal horizontal and vertical arithmetic across all 29 districts and 22 age cohorts.
-2. **Transform (`stat_var_processor.py`)**: Transforms `sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv` using `BulgariaNSI_Demographics_pvmap.csv` and `BulgariaNSI_Demographics_metadata.csv` into `output/BulgariaNSI_Demographics.csv` and `.tmcf`.
+2. **Transform (`stat_var_processor.py`)**: Transforms `sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv` using `BulgariaNSI_Demographics_pvmap.csv` (which maps annual header rows through `2033`) and `BulgariaNSI_Demographics_metadata.csv` into `output/BulgariaNSI_Demographics.csv` and `.tmcf`.
 3. **Resolution & Validation (`genmcf`, differ, import_validation)**:
    - Resolves nodes via `genmcf`.
    - Compares against baseline version in GCS using `ImportDiffer`.

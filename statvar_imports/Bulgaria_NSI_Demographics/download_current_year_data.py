@@ -280,6 +280,13 @@ def validate_file_format(file_path: str, expected_year: int) -> bool:
     if expected_title_part not in r1[0]:
         raise ValueError(f"Header Row 1 title mismatch: '{r1[0]}', "
                          f"expected to contain '{expected_title_part}'.")
+    pvmap_path = os.path.join(SCRIPT_DIR, "BulgariaNSI_Demographics_pvmap.csv")
+    if os.path.exists(pvmap_path):
+        with open(pvmap_path, "r", encoding="utf-8") as pv_f:
+            if f"31.12.{expected_year}" not in pv_f.read():
+                raise ValueError(
+                    f"Year {expected_year} (31.12.{expected_year}) is not "
+                    "mapped in BulgariaNSI_Demographics_pvmap.csv.")
 
     # 3. Header Row 2
     r2 = reader[1]
@@ -397,14 +404,6 @@ def check_and_download_nsi(
     except Exception as e:
         logging.error("Direct request to nsi.bg failed: %s", e)
         sys.exit(1)
-
-    # Fallback to cached copy if environment restricts direct outbound HTTP to nsi.bg
-    if not html_content:
-        cache_path = os.path.join(SCRIPT_DIR, "cached_nsi_page.html")
-        if os.path.exists(cache_path):
-            with open(cache_path, "r", encoding="utf-8", errors="ignore") as f:
-                html_content = f.read()
-            logging.info("Using cached HTML snapshot for NSI table.")
 
     if not html_content:
         if is_cloudflare_blocked and allow_staged_fallback:
