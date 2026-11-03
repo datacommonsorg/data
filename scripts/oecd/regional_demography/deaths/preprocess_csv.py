@@ -76,7 +76,7 @@ def process_data(df, output_file_path):
             f"Unable to pivot the dataframe and retain the columns:{e}")
         return None
     # Renaming column headers to their SVs
-    df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    df_cleaned = df_cleaned.rename(columns=VAR_to_statsvars)
     # Filtering the reuired columns
     df_cleaned_reset = df_cleaned.reindex(columns=reindex_columns)
     logging.info("Writing output to %s", output_file_path)

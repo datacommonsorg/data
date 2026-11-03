@@ -16,9 +16,17 @@ This Python Script is for County Level Data 2000-2010.
 '''
 
 import os
+import sys
 import pandas as pd
 import numpy as np
-from common_functions import replace_agegrp
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import replace_agegrp
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def county2000(output_folder: str):
@@ -35,7 +43,7 @@ def county2000(output_folder: str):
             j = f'{i:02}'
             url = 'https://www2.census.gov/programs-surveys/popest/datasets/2'+\
                 '000-2010/intercensal/county/co-est00int-alldata-'+str(j)+'.csv'
-            df = pd.read_csv(url, encoding='ISO-8859-1')
+            df = pd.read_csv(load_url_or_path(url), encoding='ISO-8859-1')
             #Writing raw data to csv
             df.to_csv(os.path.join(
                 os.path.dirname(os.path.abspath(__file__)), "raw_data",
@@ -43,7 +51,7 @@ def county2000(output_folder: str):
                       index=False)
             # Filter years 1 - 12.
             df['Year'] = df['YEAR']
-            df.drop(columns=['YEAR'], inplace=True)
+            df = df.drop(columns=['YEAR'])
             df = df.query("Year not in [1,12,13]")
             # Filter by agegrp = 99.
             df = df.query("AGEGRP != 99")
@@ -72,8 +80,8 @@ def county2000(output_folder: str):
             # 1 if it starts from 0To4
             df = replace_agegrp(df, 0)
             # Drop unwanted columns.
-            df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],\
-                inplace=True)
+            df = df.drop(
+                columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],)
             df = df.drop(columns=[
                 'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE',
                 'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE',

@@ -30,8 +30,8 @@ from common.us_air_pollution_emission_trends import USAirPollutionEmissionTrends
 # Add the path to the 'util' directory to sys.path
 sys.path.insert(
     0,
-    os.path.abspath(
-        os.path.join(os.path.dirname(__file__), '../../../../../data/util')))
+    os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                 '../../../../util')))
 
 # importing from util
 from statvar_dcid_generator import get_statvar_dcid
@@ -106,9 +106,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             }
 
             sv_list = pd.unique(self._final_df['SV'])
-            sv_list = [
-                item for item in sv_list if not (pd.isnull(item)) == True
-            ]
+            sv_list = [item for item in sv_list if not pd.isnull(item)]
             logging.info("===========sv List==========" + str(sv_list))
             sv_list.sort()
 
@@ -131,9 +129,9 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                 # Reconstruct the generated_sv without 'Total' if it was removed
                 cleaned_generated_sv = '_'.join(generated_sv_parts)
 
-                # Skip emissionSource in the mcf if 'Total' is in the generated_sv
+                # Skip emissionSource in the mcf if 'Total' is in emissionSource
                 if 'Total' in sv_property[0]:
-                    source = ''  # Don't add emissionSource if 'Total' is part of emissionSource
+                    source = ''
                 else:
                     source = '\nemissionSource: dcs:' + sv_property[0]
 
@@ -166,7 +164,21 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             df (pd.DataFrame): provides the cleaned df as output
         """
         try:
-            df = pd.read_excel(file_path, SHEET_STATE, skiprows=1, header=0)
+            with pd.ExcelFile(file_path) as excel_file:
+                sheet_name = SHEET_STATE
+                if sheet_name not in excel_file.sheet_names:
+                    for candidate in excel_file.sheet_names:
+                        if (candidate.replace(
+                                '_',
+                                ' ').strip().lower() == SHEET_STATE.lower()):
+                            sheet_name = candidate
+                            break
+                df = pd.read_excel(excel_file, sheet_name, skiprows=0, header=0)
+                if 'State FIPS' not in df.columns:
+                    df = pd.read_excel(excel_file,
+                                       sheet_name,
+                                       skiprows=1,
+                                       header=0)
             # Adding geoId/ and making the State FIPS code of 2 numbers
             # Eg - 1 -> geoId/01
             df['geo_Id'] = [f'{x:02}' for x in df['State FIPS']]
@@ -184,10 +196,18 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             df = df.melt(id_vars=['SV_TEMP', 'geo_Id'],
                          var_name='year',
                          value_name='observation')
-            df['year'] = (df['year'].str[-2:]).astype(int)
+            years = pd.to_numeric(df['year'].astype(str).str.replace(
+                'emissions', '', case=False).str.strip(),
+                                  errors='coerce')
+            if years.isna().any():
+                invalid_cols = df.loc[years.isna(), 'year'].unique().tolist()
+                raise ValueError(
+                    f"Unparseable year columns in state file: {invalid_cols}")
+            years = years.astype(int)
             # As 2001 is available as 01 and 1999 is available as 99,
             # Putting a logic to change it to proper year
-            df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
+            df['year'] = np.where((years >= 90) & (years < 100), years + 1900,
+                                  np.where(years < 90, years + 2000, years))
             # Making copy and using group by to get Aggregated Values.
             df_agg = self.aggregate_columns(
                 df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'],
@@ -195,7 +215,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
             df = pd.concat([df, df_agg])
             return df
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             logging.fatal(f"File not found: {file_path}")
         except Exception as e:
             logging.fatal(f"Missing column in state emissions file: {e}")
@@ -215,8 +235,9 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             final_df = pd.DataFrame()
             # Reading different sheets of Excel one at a time
             for sheet in SHEETS_NATIONAL:
-                # Number of rows to skip vary by sheet, inserting if-else for the same.
-                skiphead = SKIPHEAD_AMMONIA_NATIONAL if sheet == 'NH3' else SKIPHEAD_OTHERS_NATIONAL
+                # Number of rows to skip vary by sheet
+                skiphead = (SKIPHEAD_AMMONIA_NATIONAL
+                            if sheet == 'NH3' else SKIPHEAD_OTHERS_NATIONAL)
                 skipfoot = 1
                 df = pd.read_excel(file_path,
                                    sheet,
@@ -225,12 +246,12 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                                    header=0)
                 # NA values are present as 'NA ' and also as '', removing 'NA '
                 # to process the column.
-                df = df.replace('NA ', np.nan)
+                df = df.replace(['NA ', 'NA', 'N/A'], np.nan)
                 # Dropping rows with only Null Values.
                 df = df.dropna(how='all')
-                # Clean the 'Source Category' column to handle any formatting issues
+                # Clean the 'Source Category' column to handle formatting issues
                 df['Source Category'] = df['Source Category'].str.strip()
-                # Drop only specific unwanted rows, ensuring important ones are retained
+                # Drop only specific unwanted rows
                 df = df.drop(
                     df[(df['Source Category'] == 'Miscellaneous') |
                        (df['Source Category'] == 'Total without wildfires') |
@@ -255,7 +276,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             final_df['geo_Id'] = 'country/USA'
             final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
             return final_df
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             logging.fatal(f"File not found: {file_path}")
         except Exception as e:
             logging.fatal(f"Missing column in national emissions file: {e}")
@@ -283,21 +304,20 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             }
             for file_path in self._input_files:
                 # Extract filename without extension
-                file_name = file_path.split("/")[-1][:-5]
+                file_name = os.path.splitext(os.path.basename(file_path))[0]
                 logging.info(f"Processing file: {file_name}")
                 # Initialize a variable to store the matched method
                 matched_method = None
                 # Check if the filename matches any pattern
                 for pattern, method in source_file_to_method_mapping.items():
-                    if re.match(pattern, file_name):
+                    if re.match(pattern, file_name, re.IGNORECASE):
                         matched_method = method
                         break  # Exit the loop as soon as a match is found
-                # If no match is found, log the error and break the loop
+                # If no match is found, log the fatal error
                 if not matched_method:
                     logging.fatal(
-                        f"No parsing method found for file: {file_name}. Stopping execution."
-                    )
-                    break
+                        f"No parsing method found for file: {file_name}. "
+                        "Stopping execution.")
 
                 # Process the file using the matched method
                 df = matched_method(file_path)
@@ -306,25 +326,38 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
 
             self._final_df = self._final_df.sort_values(
                 by=['geo_Id', 'year', 'SV_TEMP', 'observation'])
-            self._final_df['observation'].replace('', np.nan, inplace=True)
-            self._final_df.dropna(subset=['observation'], inplace=True)
-            self._final_df.dropna(subset=['SV_TEMP'], inplace=True)
+            self._final_df['observation'] = self._final_df[
+                'observation'].replace('', np.nan)
+            self._final_df['observation'] = pd.to_numeric(
+                self._final_df['observation'], errors='coerce')
+            self._final_df = self._final_df.dropna(subset=['observation'])
+            self._final_df = self._final_df.dropna(subset=['SV_TEMP'])
             self._final_df['observation'] = self._final_df[
                 'observation'].astype(float) * _SCALING_FACTOR
             self._add_sv_and_mcf_column_to_final_df()
         except Exception as e:
             logging.fatal(f"Error parsing source files: {e}")
-            raise
 
 
 def main(_):
     input_path = FLAGS.input_path
     logging.info(f"Input path: {input_path}")
     try:
-        ip_files = os.listdir(input_path)
+        if not os.path.exists(input_path):
+            raise FileNotFoundError(f"Input path does not exist: {input_path}")
+        if not os.listdir(input_path):
+            raise FileNotFoundError(f"Input directory is empty: {input_path}")
+        ip_files = [
+            file for file in sorted(os.listdir(input_path))
+            if file.lower().endswith(('.xlsx', '.xls'))
+        ]
         logging.info(f"Found {len(ip_files)} files in input path.")
+        if not ip_files:
+            raise FileNotFoundError(
+                f"No Excel files (.xlsx/.xls) found in input path: {input_path}"
+            )
 
-        ip_files = [input_path + os.sep + file for file in ip_files]
+        ip_files = [os.path.join(input_path, file) for file in ip_files]
         output_file_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "output")
         # Defining Output Files
@@ -357,12 +390,10 @@ def main(_):
             logging.info(f"TMCF file generated: {tmcf_path}")
         except Exception as e:
             logging.fatal(f"Error generating outputs: {e}")
-            raise
 
-    except Exception:
+    except Exception as e:
         logging.fatal(
-            f"There are no files in the input path: {input_path} to download.")
-        raise
+            f"Failed to read input files from {input_path}. Details: {e}")
 
 
 if __name__ == "__main__":

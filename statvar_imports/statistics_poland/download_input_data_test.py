@@ -90,13 +90,8 @@ class DownloadInputDataTest(unittest.TestCase):
         mock_resp.status_code = 200
         session.get.return_value = mock_resp
 
-        headers = {
-            'X-ClientId': 'secret-key-123',
-            'Accept': 'application/json'
-        }
-        resp = make_request(session,
-                            'https://example.com/api',
-                            headers=headers)
+        headers = {'X-ClientId': 'secret-key-123', 'Accept': 'application/json'}
+        resp = make_request(session, 'https://example.com/api', headers=headers)
         self.assertIsNotNone(resp)
         self.assertEqual(resp.status_code, 200)
 
@@ -115,9 +110,8 @@ class DownloadInputDataTest(unittest.TestCase):
         with self.assertLogs(level='ERROR') as cm:
             with self.assertRaises(RuntimeError):
                 fetch_variables(session)
-            self.assertTrue(
-                any("status 403" in log for log in cm.output),
-                f"Expected 'status 403' in logs, got: {cm.output}")
+            self.assertTrue(any("status 403" in log for log in cm.output),
+                            f"Expected 'status 403' in logs, got: {cm.output}")
 
     def test_fetch_variables_mocked(self):
         session = MagicMock()
@@ -216,8 +210,9 @@ class DownloadInputDataTest(unittest.TestCase):
         template_columns = pd.MultiIndex.from_tuples(
             [('0-2', 'total', 'total', '2024')],
             names=['Age', 'Sex', 'Location', 'Year'])
-        mock_load_template.return_value = pd.DataFrame(
-            10, index=template_index, columns=template_columns)
+        mock_load_template.return_value = pd.DataFrame(10,
+                                                       index=template_index,
+                                                       columns=template_columns)
         # Slices present in template but unmatched in metadata
         mock_fetch.return_value = {'999': 'unrelated_variable'}
 
@@ -235,8 +230,9 @@ class DownloadInputDataTest(unittest.TestCase):
         template_columns = pd.MultiIndex.from_tuples(
             [('0-2', 'total', 'total', '2024')],
             names=['Age', 'Sex', 'Location', 'Year'])
-        mock_load_template.return_value = pd.DataFrame(
-            10, index=template_index, columns=template_columns)
+        mock_load_template.return_value = pd.DataFrame(10,
+                                                       index=template_index,
+                                                       columns=template_columns)
         mock_fetch.return_value = {'102': 'ludność 0-2'}
 
         # Mock download returning 500 error
@@ -258,8 +254,9 @@ class DownloadInputDataTest(unittest.TestCase):
         template_columns = pd.MultiIndex.from_tuples(
             [('0-2', 'total', 'total', '2024')],
             names=['Age', 'Sex', 'Location', 'Year'])
-        mock_load_template.return_value = pd.DataFrame(
-            10, index=template_index, columns=template_columns)
+        mock_load_template.return_value = pd.DataFrame(10,
+                                                       index=template_index,
+                                                       columns=template_columns)
         mock_fetch.return_value = {'102': 'ludność 0-2'}
 
         # Mock download returning an unmapped region alongside POLAND

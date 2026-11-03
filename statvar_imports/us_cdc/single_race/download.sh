@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -e -o pipefail
+set -euo pipefail
 
-mkdir -p input_files
-gcloud storage cp gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/*.csv input_files/
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+mkdir -p "${SCRIPT_DIR}/input_files"
+
+python3 "${SCRIPT_DIR}/download.py" "$@"

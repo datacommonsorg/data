@@ -298,7 +298,7 @@ def process_places(in_file, out_dir):
     df['containedInPlace'] = df['locations'].apply(
         lambda x: to_contained_places(x, id2cip))
 
-    df.drop(['locations', 'lat', 'lon'], axis=1, inplace=True)
+    df = df.drop(['locations', 'lat', 'lon'], axis=1)
     df = df[['latitude', 'longitude', 'typeOf', 'dcid', 'containedInPlace']]
     df.to_csv(os.path.join(out_dir, 'sea_level_places.csv'), index=False)
 

@@ -15,6 +15,8 @@
 Tests for import_executor.py.
 """
 
+import json
+import os
 import unittest
 from unittest import mock
 import subprocess
@@ -23,6 +25,8 @@ import threading
 
 from app.executor import import_executor
 from app.executor.import_executor import ImportStatus
+from tools.import_validation.result import ValidationResult, ValidationStatus
+from tools.import_validation.runner import ValidationRunner
 
 
 class ImportExecutorTest(unittest.TestCase):
@@ -120,3 +124,62 @@ class ImportExecutorTest(unittest.TestCase):
                     '[Subprocess command]: exit 0\n'
                     '[Subprocess return code]: 0')
         self.assertEqual(expected, message)
+
+    def test_get_validation_message(self):
+        executor = import_executor.ImportExecutor(
+            uploader=mock.MagicMock(),
+            github=mock.MagicMock(),
+            config=mock.MagicMock(),
+        )
+        results = [
+            ValidationResult(ValidationStatus.PASSED, 'check_empty_import'),
+            ValidationResult(ValidationStatus.FAILED, 'check_lint_error_count'),
+            ValidationResult(ValidationStatus.DATA_ERROR,
+                             'check_deleted_records_percent'),
+            ValidationResult(ValidationStatus.CONFIG_ERROR, 'check_min_value'),
+        ]
+        self.assertEqual(
+            'FAILED: check_lint_error_count, check_deleted_records_percent, check_min_value',
+            executor._get_validation_message(results),
+        )
+        self.assertEqual(
+            'FAILED: None',
+            executor._get_validation_message([
+                ValidationResult(ValidationStatus.PASSED, 'check_empty_import')
+            ]),
+        )
+
+    def test_get_validation_message_from_runner(self):
+        executor = import_executor.ImportExecutor(
+            uploader=mock.MagicMock(),
+            github=mock.MagicMock(),
+            config=mock.MagicMock(),
+        )
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            config_path = os.path.join(tmp_dir, 'validation_config.json')
+            output_path = os.path.join(tmp_dir, 'validation_output.csv')
+            with open(config_path, 'w') as f:
+                json.dump(
+                    {
+                        'rules': [{
+                            'rule_id': 'check_deleted_records_percent',
+                            'validator': 'DELETED_RECORDS_PERCENT',
+                            'params': {
+                                'threshold': 0
+                            },
+                        }]
+                    }, f)
+            runner = ValidationRunner(
+                validation_config_path=config_path,
+                differ_output='',
+                stats_summary='',
+                lint_report='',
+                validation_output=output_path,
+            )
+            overall_status, results = runner.run_validations()
+            self.assertTrue(overall_status)
+            self.assertEqual(results[0].status.name, 'PASSED')
+            self.assertEqual(
+                executor._get_validation_message(results),
+                'FAILED: None',
+            )

@@ -214,7 +214,7 @@ def make_time_place_aggregation(dataframe,
                                   multi_index=multi_index)
     agg_state['Place'] = agg_state.apply(
         lambda row: convert_to_place_dcid(row['STATE_ABBR']), axis=1)
-    agg_state.drop(columns=['STATE_ABBR'], inplace=True)
+    agg_state = agg_state.drop(columns=['STATE_ABBR'])
     agg_list.append(agg_state)
 
     # Year + City
@@ -228,7 +228,7 @@ def make_time_place_aggregation(dataframe,
     agg_city['Place'] = agg_city.apply(lambda row: convert_to_place_dcid(
         row['STATE_ABBR'], row['PUG_AGENCY_NAME'], 'City'),
                                        axis=1)
-    agg_city.drop(columns=['PUG_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
+    agg_city = agg_city.drop(columns=['PUG_AGENCY_NAME', 'STATE_ABBR'])
     agg_list.append(agg_city)
 
     return agg_list

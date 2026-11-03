@@ -211,11 +211,10 @@ def clean_census_tract_data(data):
     try:
         data["LocationName"] = data["LocationName"].apply(
             generate_census_tract_dcids)
-        data.rename(columns={
+        data = data.rename(columns={
             'MeasureId': 'StatVar',
             'LocationName': 'Location'
-        },
-                    inplace=True)
+        })
         data = data.drop(columns=[
             "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
             "StateDesc", "CountyName", "CountyFIPS", "Data_Value_Unit",
@@ -243,11 +242,10 @@ def clean_county_data(data):
     """
     try:
         data["LocationID"] = data["LocationID"].apply(generate_county_dcids)
-        data.rename(columns={
+        data = data.rename(columns={
             'MeasureId': 'StatVar',
             'LocationID': 'Location'
-        },
-                    inplace=True)
+        })
         data = data.drop(columns=[
             "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
             "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
@@ -268,11 +266,10 @@ def clean_city_data(data):
     """
     try:
         data["LocationID"] = data["LocationID"].apply(generate_city_dcids)
-        data.rename(columns={
+        data = data.rename(columns={
             'MeasureId': 'StatVar',
             'LocationID': 'Location'
-        },
-                    inplace=True)
+        })
         data = data.drop(columns=[
             "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
             "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
@@ -293,11 +290,10 @@ def clean_zip_code_data(data):
     """
     try:
         data["LocationID"] = data["LocationID"].apply(generate_zip_code_dcids)
-        data.rename(columns={
+        data = data.rename(columns={
             'MeasureId': 'StatVar',
             'LocationID': 'Location'
-        },
-                    inplace=True)
+        })
         data = data.drop(columns=[
             "Measure", "Category", "DataSource", "Data_Value_Type",
             "Data_Value_Unit", "Data_Value_Footnote_Symbol",

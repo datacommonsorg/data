@@ -118,10 +118,7 @@ def make_request(session, url, headers=None, params=None, timeout=60):
             sanitized_headers['X-ClientId'] = '***REDACTED***'
         logging.info(
             f"HTTP GET {url} params={params} headers={sanitized_headers}")
-        return session.get(url,
-                           headers=headers,
-                           params=params,
-                           timeout=timeout)
+        return session.get(url, headers=headers, params=params, timeout=timeout)
     except Exception as e:
         logging.error(f"HTTP GET failed for {url}: {e}")
         return None
@@ -254,8 +251,7 @@ def download_and_process():
 
             sample_res = results[0]
             api_name_key = next(
-                (k for k in ['name', 'n', 'unitName'] if k in sample_res),
-                None)
+                (k for k in ['name', 'n', 'unitName'] if k in sample_res), None)
             if not api_name_key:
                 error_msg = f"Could not determine region name key for var {var_id} level {lv}"
                 logging.error(error_msg)

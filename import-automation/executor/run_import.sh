@@ -254,10 +254,10 @@ function build_docker {
 # Get the latest import output from GCS
 function get_latest_gcs_import_output {
   echo_log "Looking for import files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
-  STAGING_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/staging_version.txt)
+  STAGING_VERSION=$(gcloud storage cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/staging_version.txt)
   if [[ -n "$STAGING_VERSION" ]]; then
     echo_log "staging_version.txt: $STAGING_VERSION"
-    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$STAGING_VERSION
+    run_cmd gcloud storage ls --long --recursive gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$STAGING_VERSION
     echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$STAGING_VERSION"
   else
     echo_log "No files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME"
@@ -277,19 +277,19 @@ function add_import_version_notes {
   # Check if the version exists
   gcs_ver_dir="gs://$GCS_BUCKET/$import_dir/$import_name/$version"
   echo_log "Looking for import version: $gcs_ver_dir"
-  dir=$(gsutil ls "$gcs_ver_dir")
+  dir=$(gcloud storage ls "$gcs_ver_dir")
   [[ -z "$dir" ]] && echo_fatal "Unable to find latest version dir $gcs_ver_dir"
 
   # fetch any existing notes
   tmp_note_file="$TMP_DIR/import-note-$import_name.txt"
-  gsutil cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null
+  gcloud storage cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null
 
   # Update notes on GCS
   new_notes="[$(date +%Y-%m-%d:%H:%M:%S)]: Update by $USER, Note: $notes"
   echo_log "Adding note to $gcs_ver_dir/$NOTES_FILE: $new_notes"
   echo "$new_notes" >> $tmp_note_file
 
-  run_cmd gsutil cp $tmp_note_file $gcs_ver_dir/$NOTES_FILE
+  run_cmd gcloud storage cp $tmp_note_file $gcs_ver_dir/$NOTES_FILE
 }
 
 # Get the config overrides for import executor

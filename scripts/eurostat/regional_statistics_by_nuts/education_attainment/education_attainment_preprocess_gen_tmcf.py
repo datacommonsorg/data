@@ -143,7 +143,7 @@ def translate_wide_to_long(file_path):
                 'level': new[1],
                 'sex': new[0]
             }))
-        df.drop(columns=[header[0]], inplace=True)
+        df = df.drop(columns=[header[0]])
 
         df["sex-level"] = df["sex"] + "_" + df["level"] + "_" + df["age"]
 

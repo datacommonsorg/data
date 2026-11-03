@@ -37,7 +37,7 @@ These are the attributes that we will use
 | pollutant type(s)   				    | The type of Gas generated which pollutes the Air. 			    |
 
 ### Cleaned Data
-Cleaned data will be inside [output/national_emissions.csv] as a CSV file with the following columns.
+Cleaned data will be inside [gcs_output/output_files/national_emissions.csv] as a CSV file with the following columns.
 
 - year
 - geo_Id
@@ -48,8 +48,8 @@ Cleaned data will be inside [output/national_emissions.csv] as a CSV file with t
 
 
 ### MCFs and Template MCFs
-- [output/national_emissions.mcf]
-- [output/national_emissions.tmcf]
+- [gcs_output/output_files/national_emissions.mcf]
+- [gcs_output/output_files/national_emissions.tmcf]
 
 
 ### Running Tests

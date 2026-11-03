@@ -201,8 +201,7 @@ def _clean_census_tract_file(input_file_name: str, input_file_path: str,
                                 value_vars=[str(census_tract + '_pred')],
                                 var_name='StatisticalVariable',
                                 value_name='Value')
-            chunk.rename(columns={census_tract + '_stdd': 'Error'},
-                         inplace=True)
+            chunk = chunk.rename(columns={census_tract + '_stdd': 'Error'})
             chunk['ctfips'] = chunk['ctfips'].astype(str).str.zfill(11)
             chunk["dcid"] = "geoId/" + chunk["ctfips"].astype(str)
             chunk['StatisticalVariable'] = chunk['StatisticalVariable'].map(

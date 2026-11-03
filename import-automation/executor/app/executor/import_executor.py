@@ -738,7 +738,7 @@ class ImportExecutor:
         failed_validations = []
 
         for res in validation_results:
-            if res.status.name == 'FAILED':
+            if res.status.name != ValidationStatus.PASSED.name:
                 failed_validations.append(res.name)
 
         return f"FAILED: {', '.join(failed_validations) if failed_validations else 'None'}"

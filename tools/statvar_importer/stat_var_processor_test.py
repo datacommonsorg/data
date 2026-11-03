@@ -78,12 +78,10 @@ class TestStatVarProcessor(unittest.TestCase):
                 f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
                 f'actual:{actual_file}:{df_actual.columns.to_list()}, ',
             )
-            df_expected.sort_values(by=df_expected.columns.to_list(),
-                                    inplace=True,
-                                    ignore_index=True)
-            df_actual.sort_values(by=df_expected.columns.to_list(),
-                                  inplace=True,
-                                  ignore_index=True)
+            df_expected = df_expected.sort_values(
+                by=df_expected.columns.to_list(), ignore_index=True)
+            df_actual = df_actual.sort_values(by=df_expected.columns.to_list(),
+                                              ignore_index=True)
             self.assertTrue(
                 df_expected.equals(df_actual),
                 f'Found diffs in CSV rows:' +
