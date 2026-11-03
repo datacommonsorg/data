@@ -178,8 +178,7 @@ def parse_raw_municipal_2022(content_bytes: bytes, mapping: Dict[str, str]) -> L
             except (ValueError, TypeError):
                 continue
             place_id = mapping.get(full_code, muni_name)
-            clean_place = place_id.replace("dcid:", "")
-            rows.append({"Ano": 2022, "Localidade": clean_place, "Sexo": "Total", "Populacao": pop})
+            rows.append({"Ano": 2022, "Localidade": place_id, "Sexo": "Total", "Populacao": pop})
     except Exception as e:
         logging.warning(f"Error parsing raw 2022 municipal POP xlsx: {e}")
     return rows
@@ -200,7 +199,7 @@ def parse_raw_1991_popu(content_bytes: bytes, map_91: Dict[str, str]) -> List[Di
 
             fem_val = row.iloc[1]
             masc_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
+            place_resolved = map_91.get(place_raw, place_raw)
 
             f_int = None
             m_int = None
@@ -381,12 +380,6 @@ def download_all_years(
 
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
-
-    counters_dir = os.path.join(os.path.dirname(target_dir), "counters")
-    os.makedirs(counters_dir, exist_ok=True)
-    counters_file = os.path.join(counters_dir, "brazil_total_population_counters.csv")
-    with open(counters_file, "w", encoding="utf-8") as f:
-        f.write(f"key,value\nnum_rows_processed,{len(df)}\nnum_places,{df['Localidade'].nunique()}\nnum_statvars,3\n")
 
     return target_path
 

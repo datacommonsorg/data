@@ -11,14 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Automated download script for Brazil Census multi-year demographic data.
+"""Automated download script for Brazil Census Population by Age and Sex data.
 
-Downloads demographic census data for Brazil from IBGE SIDRA REST API (2022 Table 9514,
-2010 Table 1378) and integrates historical census data (1940, 1991, 2000) into a single,
-clean tabular CSV input file.
+Downloads resident population by detailed age and sex from official IBGE sources:
+1. Live IBGE SIDRA REST API:
+   - Table 9514: População residente por sexo e idade (2022 Census)
+2. Raw historical census workbooks from GCS (1940, 1991, 2000):
+   - Brazil_1940_age_sex.xls
+   - Brazil_2000_age_sex.xls
+   - POPU91*.XLS (1991 Census across all 27 Brazilian states)
 """
 
+import glob
 import io
+import json
 import os
 import sys
 import tempfile
@@ -33,87 +39,18 @@ import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-from google.cloud import storage
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-
-# 2022 Census: Table 9514 (Resident population by age and sex)
-TABLE_9514_ID = "9514"
-VARIABLE_RESIDENT_POPULATION = "93"
-FORM_AGE_DECLARATION_TOTAL = "113635"
-TABLE_9514_AGE_CODES = [
-    "100362", "93070", "93084", "93085", "93086", "93087", "93088", "93089",
-    "93090", "93091", "93092", "93093", "93094", "93095", "93096", "93097",
-    "93098", "49108", "49109", "60040", "60041", "6653"
-]
-TABLE_9514_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/{TABLE_9514_ID}/n1/all/n2/all/n3/all"
-    f"/v/{VARIABLE_RESIDENT_POPULATION}/p/all/c2/all"
-    f"/c287/{','.join(TABLE_9514_AGE_CODES)}"
-    f"/c286/{FORM_AGE_DECLARATION_TOTAL}")
-
-# 2010 Census: Table 1378 (Resident population by age and sex)
-TABLE_1378_ID = "1378"
-TABLE_1378_AGE_CODES = [
-    "0", "93070", "93084", "93085", "93087", "93088", "93089", "93090",
-    "93091", "93092", "93093", "93094", "93095", "93096", "93097", "93098",
-    "93099", "93100", "6653"
-]
-TABLE_1378_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/{TABLE_1378_ID}/n1/all/n2/all/n3/all"
-    f"/v/{VARIABLE_RESIDENT_POPULATION}/p/all/c1/0/c2/all"
-    f"/c287/{','.join(TABLE_1378_AGE_CODES)}/c455/0?formato=json")
-
-# Mapping of DCID to localidade name
-DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brazil',
-    'wikidataId/Q478465': 'Norte',
-    'wikidataId/Q1136194': 'Nordeste',
-    'wikidataId/Q1088815': 'Sudeste',
-    'wikidataId/Q1060042': 'Sul',
-    'wikidataId/Q980175': 'Centro-Oeste',
-    'wikidataId/Q40780': 'Acre',
-    'wikidataId/Q40885': 'Alagoas',
-    'wikidataId/Q40130': 'Amapá',
-    'wikidataId/Q40040': 'Amazonas',
-    'wikidataId/Q40430': 'Bahia',
-    'wikidataId/Q40123': 'Ceará',
-    'wikidataId/Q119158': 'Distrito Federal',
-    'wikidataId/Q43233': 'Espírito Santo',
-    'wikidataId/Q41587': 'Goiás',
-    'wikidataId/Q42362': 'Maranhão',
-    'wikidataId/Q42824': 'Mato Grosso',
-    'wikidataId/Q43319': 'Mato Grosso do Sul',
-    'wikidataId/Q39109': 'Minas Gerais',
-    'wikidataId/Q39517': 'Pará',
-    'wikidataId/Q38088': 'Paraíba',
-    'wikidataId/Q15499': 'Paraná',
-    'wikidataId/Q40942': 'Pernambuco',
-    'wikidataId/Q42722': 'Piauí',
-    'wikidataId/Q41428': 'Rio de Janeiro',
-    'wikidataId/Q43255': 'Rio Grande do Norte',
-    'wikidataId/Q40030': 'Rio Grande do Sul',
-    'wikidataId/Q43235': 'Rondônia',
-    'wikidataId/Q42508': 'Roraima',
-    'wikidataId/Q41115': 'Santa Catarina',
-    'wikidataId/Q175': 'São Paulo',
-    'wikidataId/Q43783': 'Sergipe',
-    'wikidataId/Q43695': 'Tocantins'
-}
+# Table 9514: População residente por sexo e idade (v/93 = População residente, c2/all = Sexo, c287/100362 = Total age)
+TABLE_9514_API_URL = f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/v/93/p/all/c2/all/c287/all?formato=json"
 
 COHORTS_0_14 = ['0 a 4 anos', '5 a 9 anos', '10 a 14 anos']
 COHORTS_15_59 = [
     '15 a 19 anos', '20 a 24 anos', '25 a 29 anos', '30 a 34 anos', '35 a 39 anos',
     '40 a 44 anos', '45 a 49 anos', '50 a 54 anos', '55 a 59 anos'
 ]
-COHORTS_60_PLUS = [
-    '60 a 64 anos', '65 a 69 anos', '70 a 74 anos', '75 a 79 anos', '80 a 84 anos',
-    '85 a 89 anos', '90 a 94 anos', '95 a 99 anos', '100 anos ou mais',
-    '80 a 89 anos', '90 a 99 anos'
-]
 
 FLAGS = flags.FLAGS
-
 if "output_file" not in FLAGS:
     flags.DEFINE_string(
         "output_file",
@@ -128,12 +65,11 @@ if "fallback_to_cached" not in FLAGS:
     )
 
 DEFAULT_OUTPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
-DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR,
-                                   "brazil_population_by_age_and_sex.csv")
+DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR, "brazil_population_by_age_and_sex.csv")
 
 
 def get_robust_session() -> requests.Session:
-    """Configures a requests Session with automated retries and connection pooling."""
+    """Configures a requests Session with retries and connection pooling."""
     session = requests.Session()
     retries = Retry(
         total=10,
@@ -159,7 +95,6 @@ def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]
 
 def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> List[Dict[str, str]]:
     """Computes De 0 a 14 anos, De 15 a 59 anos, and De 60 anos ou mais from 5-year cohorts."""
-    # Group by (Localidade, Sexo)
     lookup: Dict[str, Dict[str, int]] = {}
     for r in rows:
         if r["Ano"] != year:
@@ -177,9 +112,10 @@ def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> Lis
     agg_rows: List[Dict[str, str]] = []
     for key, idade_dict in lookup.items():
         localidade, sexo = key.split("||", 1)
-        # 0To14
-        sum_0_14 = sum(idade_dict.get(c, 0) for c in COHORTS_0_14)
+
+        # 0 to 14
         if any(c in idade_dict for c in COHORTS_0_14):
+            sum_0_14 = sum(idade_dict.get(c, 0) for c in COHORTS_0_14)
             agg_rows.append({
                 "Ano": year,
                 "Localidade": localidade,
@@ -187,9 +123,10 @@ def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> Lis
                 "Sexo": sexo,
                 "Populacao": str(sum_0_14),
             })
-        # 15To59
-        sum_15_59 = sum(idade_dict.get(c, 0) for c in COHORTS_15_59)
+
+        # 15 to 59
         if any(c in idade_dict for c in COHORTS_15_59):
+            sum_15_59 = sum(idade_dict.get(c, 0) for c in COHORTS_15_59)
             agg_rows.append({
                 "Ano": year,
                 "Localidade": localidade,
@@ -197,9 +134,17 @@ def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> Lis
                 "Sexo": sexo,
                 "Populacao": str(sum_15_59),
             })
-        # 60OrMore
-        sum_60_plus = sum(idade_dict.get(c, 0) for c in COHORTS_60_PLUS if c in idade_dict)
-        if any(c in idade_dict for c in COHORTS_60_PLUS):
+
+        # 60 and older: avoid double counting 80-99 if both 5-year and 10-year cohorts exist
+        has_5yr_80_plus = any(c in idade_dict for c in ['80 a 84 anos', '85 a 89 anos', '90 a 94 anos', '95 a 99 anos'])
+        cohorts_60 = ['60 a 64 anos', '65 a 69 anos', '70 a 74 anos', '75 a 79 anos', '100 anos ou mais']
+        if has_5yr_80_plus:
+            cohorts_60 += ['80 a 84 anos', '85 a 89 anos', '90 a 94 anos', '95 a 99 anos']
+        else:
+            cohorts_60 += ['80 a 89 anos', '90 a 99 anos']
+
+        if any(c in idade_dict for c in cohorts_60):
+            sum_60_plus = sum(idade_dict.get(c, 0) for c in cohorts_60)
             agg_rows.append({
                 "Ano": year,
                 "Localidade": localidade,
@@ -207,7 +152,167 @@ def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> Lis
                 "Sexo": sexo,
                 "Populacao": str(sum_60_plus),
             })
+
     return agg_rows
+
+
+def parse_raw_hist_age_sex_xls(content_bytes: bytes, year: int) -> List[Dict[str, str]]:
+    """Parses raw historical IBGE Table 4/5 age and sex XLS workbooks (1940, 2000)."""
+    rows: List[Dict[str, str]] = []
+    try:
+        xls = pd.ExcelFile(io.BytesIO(content_bytes))
+        sheet_sex = [
+            (xls.sheet_names[0], 'Total'),
+            (xls.sheet_names[1], 'Homens'),
+            (xls.sheet_names[2], 'Mulheres'),
+        ]
+        idade_cols = {
+            1: 'Total',
+            2: 'De 0 a 14 anos',
+            3: 'De 15 a 59 anos',
+            4: 'De 60 anos ou mais',
+        }
+        for sname, sex in sheet_sex:
+            df = pd.read_excel(xls, sheet_name=sname)
+            for r_idx in range(7, len(df)):
+                place = str(df.iloc[r_idx, 0]).strip()
+                if not place or pd.isna(df.iloc[r_idx, 0]) or 'continua' in place.lower():
+                    continue
+                if place == 'Brasil':
+                    place = 'Brazil'
+                for col_i, idade in idade_cols.items():
+                    if col_i >= df.shape[1]:
+                        continue
+                    val = df.iloc[r_idx, col_i]
+                    if pd.isna(val) or str(val).strip() in ['-', '...', '..', '']:
+                        continue
+                    try:
+                        val_int = int(round(float(val)))
+                        rows.append({
+                            'Ano': str(year),
+                            'Localidade': place,
+                            'Idade': idade,
+                            'Sexo': sex,
+                            'Populacao': str(val_int),
+                        })
+                    except (ValueError, TypeError):
+                        pass
+    except Exception as e:
+        logging.warning(f"Error parsing {year} age/sex XLS: {e}")
+    return rows
+
+
+def parse_raw_1991_popu_age_sex(content_bytes: bytes, map_91: Dict[str, str]) -> List[Dict[str, str]]:
+    """Parses raw 1991 POPU state workbook for age/sex import (Idade='Total')."""
+    rows: List[Dict[str, str]] = []
+    try:
+        df = pd.read_excel(io.BytesIO(content_bytes))
+        for r_idx in range(1, len(df)):
+            row = df.iloc[r_idx]
+            place_raw = str(row.iloc[0]).strip()
+            if not place_raw or pd.isna(row.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
+                continue
+            if len(row) < 3:
+                continue
+
+            fem_val = row.iloc[1]
+            masc_val = row.iloc[2]
+            place_resolved = map_91.get(place_raw, place_raw)
+
+            f_int = None
+            m_int = None
+            try:
+                f_int = int(round(float(fem_val)))
+                rows.append({"Ano": "1991", "Localidade": place_resolved, "Idade": "Total", "Sexo": "Mulheres", "Populacao": str(f_int)})
+            except (ValueError, TypeError):
+                pass
+            try:
+                m_int = int(round(float(masc_val)))
+                rows.append({"Ano": "1991", "Localidade": place_resolved, "Idade": "Total", "Sexo": "Homens", "Populacao": str(m_int)})
+            except (ValueError, TypeError):
+                pass
+            if f_int is not None and m_int is not None:
+                rows.append({"Ano": "1991", "Localidade": place_resolved, "Idade": "Total", "Sexo": "Total", "Populacao": str(f_int + m_int)})
+    except Exception as e:
+        logging.warning(f"Error parsing 1991 POPU workbook: {e}")
+    return rows
+
+
+def load_1991_mapping() -> Dict[str, str]:
+    """Loads 1991 place mapping from local scratch or GCS."""
+    cand = [
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files", "Brazil_Place_Mapping_1991.json"),
+        os.path.join("/data", "scratch", "intermediate_files", "Brazil_Place_Mapping_1991.json"),
+    ]
+    for c in cand:
+        if os.path.isfile(c):
+            with open(c, "r", encoding="utf-8") as f:
+                return json.load(f)
+    try:
+        from google.cloud import storage
+        client = storage.Client()
+        bucket = client.bucket("unresolved_mcf")
+        blob = bucket.blob("country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
+        return json.loads(blob.download_as_text())
+    except Exception as e:
+        logging.warning(f"Could not load 1991 mapping from GCS: {e}")
+    return {}
+
+
+def fetch_raw_historical_files() -> List[Dict[str, str]]:
+    """Loads 1940, 1991, and 2000 historical age and sex records from raw input workbooks."""
+    rows: List[Dict[str, str]] = []
+
+    # 1. 1940 & 2000 raw age/sex workbooks
+    for year, fname in [(1940, "Brazil_1940_age_sex.xls"), (2000, "Brazil_2000_age_sex.xls")]:
+        scratch_p = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", fname)
+        alt_p = os.path.join("/data", "scratch", "input_files", fname)
+        local_path = scratch_p if os.path.isfile(scratch_p) else (alt_p if os.path.isfile(alt_p) else None)
+
+        if local_path:
+            with open(local_path, "rb") as f:
+                rows.extend(parse_raw_hist_age_sex_xls(f.read(), year))
+        else:
+            try:
+                from google.cloud import storage
+                client = storage.Client()
+                bucket = client.bucket("unresolved_mcf")
+                blob = bucket.blob(f"country/brazil/input_files/{fname}")
+                content = blob.download_as_bytes()
+                rows.extend(parse_raw_hist_age_sex_xls(content, year))
+            except Exception as e:
+                logging.warning(f"Could not load {fname} from GCS: {e}")
+
+    # 2. 1991 raw POPU workbooks
+    map_91 = load_1991_mapping()
+    cand_dirs = [
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1991_gender"),
+        os.path.join("/data", "scratch", "input_files", "Brazil_1991_gender"),
+    ]
+    found_1991 = False
+    for d in cand_dirs:
+        if os.path.isdir(d):
+            popu_files = sorted(glob.glob(os.path.join(d, "POPU91*.XLS")) + glob.glob(os.path.join(d, "*.xls")))
+            for pf in popu_files:
+                with open(pf, "rb") as f:
+                    rows.extend(parse_raw_1991_popu_age_sex(f.read(), map_91))
+                    found_1991 = True
+            if found_1991:
+                break
+    if not found_1991:
+        try:
+            from google.cloud import storage
+            client = storage.Client()
+            bucket = client.bucket("unresolved_mcf")
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            for b in blobs:
+                if b.name.upper().endswith(".XLS"):
+                    content = b.download_as_bytes()
+                    rows.extend(parse_raw_1991_popu_age_sex(content, map_91))
+        except Exception as e:
+            logging.warning(f"Could not load 1991 POPU workbooks from GCS: {e}")
+
+    return rows
 
 
 def download_all_years(
@@ -215,167 +320,63 @@ def download_all_years(
     output_file: Optional[str] = None,
     fallback_to_cached: bool = False,
 ) -> str:
-    """Downloads census demographic data across all available years (1940-2022)."""
+    """Downloads Brazil Census population by age and sex across all census years."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
     all_rows: List[Dict[str, str]] = []
 
     try:
-        # 1. 2022 Census (Table 9514)
-        raw_2022 = fetch_sidra_data(session, TABLE_9514_API_URL)
-        logging.info(f"Retrieved {len(raw_2022) - 1} records for 2022 Census.")
-        rows_2022: List[Dict[str, str]] = []
-        for r in raw_2022[1:]:
+        # 1. Historical data from raw input workbooks (1940, 1991, 2000)
+        # Added first so live SIDRA API records take precedence on overlapping keys in drop_duplicates(keep="last").
+        raw_rows = fetch_raw_historical_files()
+        all_rows.extend(raw_rows)
+        logging.info(f"Loaded {len(raw_rows)} raw historical age/sex records for 1940, 1991, and 2000.")
+
+        # 2. Live SIDRA API (Table 9514 for 2022+)
+        raw_json = fetch_sidra_data(session, TABLE_9514_API_URL)
+        sidra_2022_rows: List[Dict[str, str]] = []
+        for r in raw_json[1:]:
             loc = str(r.get("D1N", "")).strip()
             if loc == "Brasil":
                 loc = "Brazil"
-            rows_2022.append({
+            sidra_2022_rows.append({
                 "Ano": str(r.get("D3N", "2022")).strip(),
                 "Localidade": loc,
                 "Idade": str(r.get("D5N", "")).strip(),
                 "Sexo": str(r.get("D4N", "")).strip(),
                 "Populacao": str(r.get("V", "")).strip(),
             })
-        all_rows.extend(rows_2022)
-        # Compute broad age brackets for 2022
-        all_rows.extend(compute_broad_age_aggregations(rows_2022, "2022"))
+        all_rows.extend(sidra_2022_rows)
 
-        # 2. 2010 Census (Table 1378)
-        raw_2010 = fetch_sidra_data(session, TABLE_1378_API_URL)
-        logging.info(f"Retrieved {len(raw_2010) - 1} records for 2010 Census.")
-        rows_2010: List[Dict[str, str]] = []
-        for r in raw_2010[1:]:
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
-            rows_2010.append({
-                "Ano": str(r.get("D3N", "2010")).strip(),
-                "Localidade": loc,
-                "Idade": str(r.get("D6N", "")).strip(),
-                "Sexo": str(r.get("D5N", "")).strip(),
-                "Populacao": str(r.get("V", "")).strip(),
-            })
-        all_rows.extend(rows_2010)
-        # Compute broad age brackets for 2010
-        all_rows.extend(compute_broad_age_aggregations(rows_2010, "2010"))
-
-        # 3. 1940 & 2000 historical age and sex cohorts
-        try:
-            local_hist = os.path.join(SCRIPT_DIR, "input_files", "Brazil_1940_2000_age_sex.csv")
-            scratch_hist = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "golden_output_files", "Brazil_1940_2000_age_sex.csv")
-            alt_hist = os.path.join("/data", "scratch", "golden_output_files", "Brazil_1940_2000_age_sex.csv")
-            hist_path = local_hist if os.path.isfile(local_hist) else (scratch_hist if os.path.isfile(scratch_hist) else (alt_hist if os.path.isfile(alt_hist) else None))
-
-            df_hist = None
-            if hist_path:
-                df_hist = pd.read_csv(hist_path)
-            else:
-                client = storage.Client()
-                bucket = client.bucket("unresolved_mcf")
-                blob_hist = bucket.blob("country/brazil/output_files/Brazil_1940_2000_age_sex.csv")
-                content_hist = blob_hist.download_as_text()
-                df_hist = pd.read_csv(io.StringIO(content_hist))
-
-            if df_hist is not None:
-                for _, r in df_hist.iterrows():
-                    place_dcid = str(r["observationAbout"]).replace("dcid:", "")
-                    place_name = DCID_TO_PLACE_NAME.get(place_dcid, place_dcid)
-                    year = str(r["observationDate"])
-                    sv = str(r["variableMeasured"]).replace("dcid:", "")
-                    val = str(int(round(float(r["value"]))))
-
-                    sex = "Total"
-                    if sv.endswith("_Male"):
-                        sex = "Homens"
-                        base_sv = sv[:-5]
-                    elif sv.endswith("_Female"):
-                        sex = "Mulheres"
-                        base_sv = sv[:-7]
-                    else:
-                        base_sv = sv
-
-                    idade = "Total"
-                    if base_sv == "Count_Person_0To14Years":
-                        idade = "De 0 a 14 anos"
-                    elif base_sv == "Count_Person_15To59Years":
-                        idade = "De 15 a 59 anos"
-                    elif base_sv == "Count_Person_60OrMoreYears":
-                        idade = "De 60 anos ou mais"
-
-                    all_rows.append({
-                        "Ano": year,
-                        "Localidade": place_name,
-                        "Idade": idade,
-                        "Sexo": sex,
-                        "Populacao": val,
-                    })
-                logging.info(f"Loaded {len(df_hist)} historical age/sex records for 1940 and 2000.")
-        except Exception as e:
-            logging.warning(f"Could not load 1940/2000 history: {e}")
-
-        # 4. 1991 from local scratch / golden files or GCS
-        try:
-            local_91 = os.path.join(SCRIPT_DIR, "input_files", "Brazil_1991_gender.csv")
-            scratch_91 = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "golden_output_files", "Brazil_1991_gender.csv")
-            alt_91 = os.path.join("/data", "scratch", "golden_output_files", "Brazil_1991_gender.csv")
-            path_91 = local_91 if os.path.isfile(local_91) else (scratch_91 if os.path.isfile(scratch_91) else (alt_91 if os.path.isfile(alt_91) else None))
-            df_91 = None
-            if path_91:
-                df_91 = pd.read_csv(path_91)
-            else:
-                client = storage.Client()
-                bucket = client.bucket("unresolved_mcf")
-                blob_91 = bucket.blob("country/brazil/output_files/Brazil_1991_gender.csv")
-                content_91 = blob_91.download_as_text()
-                df_91 = pd.read_csv(io.StringIO(content_91))
-
-            if df_91 is not None:
-                m_dict: Dict[str, int] = {}
-                f_dict: Dict[str, int] = {}
-                for _, r in df_91.iterrows():
-                    place_dcid = str(r["observationAbout"]).replace("dcid:", "")
-                    place_name = DCID_TO_PLACE_NAME.get(place_dcid, place_dcid)
-                    sv = str(r["variableMeasured"]).replace("dcid:", "")
-                    val = int(round(float(r["value"])))
-                    if sv == "Count_Person_Male":
-                        m_dict[place_name] = val
-                        all_rows.append({"Ano": "1991", "Localidade": place_name, "Idade": "Total", "Sexo": "Homens", "Populacao": str(val)})
-                    elif sv == "Count_Person_Female":
-                        f_dict[place_name] = val
-                        all_rows.append({"Ano": "1991", "Localidade": place_name, "Idade": "Total", "Sexo": "Mulheres", "Populacao": str(val)})
-
-                for pl in set(list(m_dict.keys()) + list(f_dict.keys())):
-                    tot = m_dict.get(pl, 0) + f_dict.get(pl, 0)
-                    all_rows.append({"Ano": "1991", "Localidade": pl, "Idade": "Total", "Sexo": "Total", "Populacao": str(tot)})
-                logging.info(f"Loaded {len(df_91)} records for 1991 gender.")
-        except Exception as e:
-            logging.warning(f"Could not load 1991 history: {e}")
+        # 3. Compute broad age aggregations (0To14, 15To59, 60OrMore) for 2022
+        agg_rows = compute_broad_age_aggregations(sidra_2022_rows, "2022")
+        all_rows.extend(agg_rows)
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
             logging.warning(f"Live fetch failed ({e}). Fallback to existing: {target_path}")
             return target_path
-        logging.error(f"Download failure: {e}")
-        raise RuntimeError(f"Network error fetching Census data: {e}") from e
+        logging.error(f"Download error: {e}")
+        raise RuntimeError(f"Error downloading Brazil Census age/sex data: {e}") from e
 
     if not all_rows:
         if fallback_to_cached and os.path.isfile(target_path):
             return target_path
-        raise RuntimeError("No census records retrieved from data sources.")
+        raise RuntimeError("No age/sex records retrieved from data sources.")
 
     df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Idade", "Sexo"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
 
     with tempfile.NamedTemporaryFile(
-            mode="w",
-            delete=False,
-            dir=target_dir,
-            suffix=".csv",
-            encoding="utf-8",
-            newline="",
-    ) as tmp_file:
-        tmp_path = tmp_file.name
-        df.to_csv(tmp_file, index=False, encoding="utf-8")
+        mode="w",
+        delete=False,
+        dir=target_dir,
+        suffix=".csv",
+        encoding="utf-8",
+        newline="",
+    ) as tmp:
+        tmp_path = tmp.name
+        df.to_csv(tmp, index=False, encoding="utf-8")
 
     if not os.path.isfile(tmp_path) or os.path.getsize(tmp_path) == 0:
         if os.path.isfile(tmp_path):
@@ -383,44 +384,9 @@ def download_all_years(
         raise RuntimeError(f"Atomic CSV write failed: {tmp_path} is missing or empty.")
 
     os.replace(tmp_path, target_path)
-    logging.info(f"Atomically wrote input CSV to {target_path} ({len(df)} rows, {os.path.getsize(target_path)} bytes)")
+    logging.info(f"Wrote {len(df)} records to {target_path}")
+
     return target_path
-
-
-# Backward compatible alias for unit tests
-def download_table_9514(
-    session: requests.Session,
-    output_file: Optional[str] = None,
-    fallback_to_cached: bool = False,
-) -> str:
-    """Wrapper for backward compatibility with Table 9514 callers and tests."""
-    target_path = output_file or DEFAULT_OUTPUT_FILE
-    try:
-        raw_json = fetch_sidra_data(session, TABLE_9514_API_URL)
-        rows: List[Dict[str, str]] = []
-        for r in raw_json[1:]:
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
-            rows.append({
-                "Ano": str(r.get("D3N", "2022")).strip(),
-                "Localidade": loc,
-                "Idade": str(r.get("D5N", "")).strip(),
-                "Sexo": str(r.get("D4N", "")).strip(),
-                "Populacao": str(r.get("V", "")).strip(),
-            })
-        df = pd.DataFrame(rows)
-        target_dir = os.path.dirname(os.path.abspath(target_path))
-        os.makedirs(target_dir, exist_ok=True)
-        with tempfile.NamedTemporaryFile(mode="w", delete=False, dir=target_dir, suffix=".csv", encoding="utf-8", newline="") as tmp:
-            tmp_path = tmp.name
-            df.to_csv(tmp, index=False, encoding="utf-8")
-        os.replace(tmp_path, target_path)
-        return target_path
-    except Exception as e:
-        if fallback_to_cached and os.path.isfile(target_path):
-            return target_path
-        raise RuntimeError(f"Network error fetching Table 9514: {e}") from e
 
 
 def main(argv: List[str]) -> None:
@@ -437,9 +403,10 @@ def main(argv: List[str]) -> None:
             output_file=target_file,
             fallback_to_cached=FLAGS.fallback_to_cached,
         )
-        logging.info(f"Multi-year download completed successfully: {saved_file}")
+        logging.info(f"Successfully generated Brazil Census age/sex data at: {saved_file}")
     except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census data: {e}", exc_info=True)
+        logging.error(f"Fatal error executing Brazil Census age/sex download: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

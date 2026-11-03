@@ -46,51 +46,6 @@ GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_RACE_1940_FILE = "country/brazil/input_files/Brazil_1940_Race.xls"
 GCS_RACE_2000_FILE = "country/brazil/input_files/Brazil_2000_Race.xls"
 
-DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brazil',
-    'wikidataId/Q478465': 'Norte',
-    'wikidataId/Q1136194': 'Nordeste',
-    'wikidataId/Q1088815': 'Sudeste',
-    'wikidataId/Q1060042': 'Sul',
-    'wikidataId/Q980175': 'Centro-Oeste',
-    'wikidataId/Q40780': 'Acre',
-    'wikidataId/Q40885': 'Alagoas',
-    'wikidataId/Q40130': 'Amapá',
-    'wikidataId/Q40040': 'Amazonas',
-    'wikidataId/Q40430': 'Bahia',
-    'wikidataId/Q40123': 'Ceará',
-    'wikidataId/Q119158': 'Distrito Federal',
-    'wikidataId/Q43233': 'Espírito Santo',
-    'wikidataId/Q41587': 'Goiás',
-    'wikidataId/Q42362': 'Maranhão',
-    'wikidataId/Q42824': 'Mato Grosso',
-    'wikidataId/Q43319': 'Mato Grosso do Sul',
-    'wikidataId/Q39109': 'Minas Gerais',
-    'wikidataId/Q39517': 'Pará',
-    'wikidataId/Q38088': 'Paraíba',
-    'wikidataId/Q15499': 'Paraná',
-    'wikidataId/Q40942': 'Pernambuco',
-    'wikidataId/Q42722': 'Piauí',
-    'wikidataId/Q41428': 'Rio de Janeiro',
-    'wikidataId/Q43255': 'Rio Grande do Norte',
-    'wikidataId/Q40030': 'Rio Grande do Sul',
-    'wikidataId/Q43235': 'Rondônia',
-    'wikidataId/Q42508': 'Roraima',
-    'wikidataId/Q41115': 'Santa Catarina',
-    'wikidataId/Q175': 'São Paulo',
-    'wikidataId/Q43783': 'Sergipe',
-    'wikidataId/Q43695': 'Tocantins'
-}
-
-COR_MAP = {
-    'Total': 'Total',
-    'Branca': 'Branca',
-    'Preta': 'Preta',
-    'Amarela': 'Amarela',
-    'Parda': 'Parda',
-    'Indígena': 'Indígena',
-}
-
 FLAGS = flags.FLAGS
 if "output_file" not in FLAGS:
     flags.DEFINE_string(
@@ -223,7 +178,12 @@ def download_all_years(
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Primary Source: Live SIDRA API (Table 9605)
+        # 1. Historical data from raw input files in GCS input_files
+        # Appended first so live SIDRA records take precedence in drop_duplicates(keep="last").
+        raw_rows = fetch_raw_input_files()
+        all_rows.extend(raw_rows)
+
+        # 2. Primary Source: Live SIDRA API (Table 9605)
         raw_sidra = fetch_sidra_data(session, TABLE_9605_API_URL)
         logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605.")
         for r in raw_sidra[1:]:
@@ -255,10 +215,6 @@ def download_all_years(
                 "Cor": cor_raw,
                 "Populacao": val,
             })
-
-        # 2. Historical data from raw input files in GCS input_files
-        raw_rows = fetch_raw_input_files()
-        all_rows.extend(raw_rows)
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
@@ -294,12 +250,6 @@ def download_all_years(
 
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
-
-    counters_dir = os.path.join(os.path.dirname(target_dir), "counters")
-    os.makedirs(counters_dir, exist_ok=True)
-    counters_file = os.path.join(counters_dir, "brazil_population_by_race_counters.csv")
-    with open(counters_file, "w", encoding="utf-8") as f:
-        f.write(f"key,value\nnum_rows_processed,{len(df)}\nnum_places,{df['Localidade'].nunique()}\nnum_statvars,7\n")
 
     return target_path
 

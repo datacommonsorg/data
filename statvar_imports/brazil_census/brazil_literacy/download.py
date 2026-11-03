@@ -457,12 +457,6 @@ def download_all_years(
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
 
-    counters_dir = os.path.join(os.path.dirname(target_dir), "counters")
-    os.makedirs(counters_dir, exist_ok=True)
-    counters_file = os.path.join(counters_dir, "brazil_literacy_counters.csv")
-    with open(counters_file, "w", encoding="utf-8") as f:
-        f.write(f"key,value\nnum_rows_processed,{len(df)}\nnum_places,{df['Localidade'].nunique()}\nnum_statvars,9\n")
-
     ensure_literacy_rates_file()
 
     return target_path
@@ -490,28 +484,29 @@ def ensure_literacy_rates_file(rates_out: Optional[str] = None) -> None:
     target_rates = rates_out or os.path.join(SCRIPT_DIR, "brazil_literacy_rates.csv")
     if os.path.isfile(target_rates) and os.path.getsize(target_rates) > 1000000:
         return
-    scratch_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "golden_output_files")
-    alt_base = os.path.join("/data", "scratch", "golden_output_files")
-    base = scratch_base if os.path.isdir(scratch_base) else (alt_base if os.path.isdir(alt_base) else None)
-    if base:
-        p1 = os.path.join(base, "Brazil_2000_2010_Illiterate_age.csv")
-        p2 = os.path.join(base, "Brazil_2000_literate.csv")
-        if os.path.isfile(p1) and os.path.isfile(p2):
-            df1 = pd.read_csv(p1)
-            df2 = pd.read_csv(p2)
-            df2_rates = df2[df2["unit"] == "dcs:Percent"]
-            combined = pd.concat([df1, df2_rates], ignore_index=True)
-            combined["scalingFactor"] = 100
-            _write_rates_atomically(combined, target_rates)
-            logging.info(f"Generated {len(combined)} rows in {target_rates}")
-            return
+    scratch_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files")
+    alt_base = os.path.join("/data", "scratch", "input_files")
+    golden_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "golden_output_files")
+    for base in [scratch_base, alt_base, golden_base]:
+        if os.path.isdir(base):
+            p1 = os.path.join(base, "Brazil_2000_2010_Illiterate_age.csv")
+            p2 = os.path.join(base, "Brazil_2000_literate.csv")
+            if os.path.isfile(p1) and os.path.isfile(p2):
+                df1 = pd.read_csv(p1)
+                df2 = pd.read_csv(p2)
+                df2_rates = df2[df2["unit"] == "dcs:Percent"]
+                combined = pd.concat([df1, df2_rates], ignore_index=True)
+                combined["scalingFactor"] = 100
+                _write_rates_atomically(combined, target_rates)
+                logging.info(f"Generated {len(combined)} rows in {target_rates}")
+                return
 
     try:
         from google.cloud import storage
         client = storage.Client()
         bucket = client.bucket(GCS_BUCKET_NAME)
-        b1 = bucket.blob("country/brazil/output_files/Brazil_2000_2010_Illiterate_age.csv")
-        b2 = bucket.blob("country/brazil/output_files/Brazil_2000_literate.csv")
+        b1 = bucket.blob("country/brazil/input_files/Brazil_2000_2010_Illiterate_age.csv")
+        b2 = bucket.blob("country/brazil/input_files/Brazil_2000_literate.csv")
         df1 = pd.read_csv(io.BytesIO(b1.download_as_bytes()))
         df2 = pd.read_csv(io.BytesIO(b2.download_as_bytes()))
         df2_rates = df2[df2["unit"] == "dcs:Percent"]

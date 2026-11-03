@@ -14,25 +14,32 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Checks date freshness across 2010 education cohorts and 2000 PreVestibular.",
+            "description": "Checks date freshness across 2022 education cohorts, 2010 school networks, and 2000 PreVestibular.",
             "validator": "SQL_VALIDATOR",
             "scope": {
                 "data_source": "stats"
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "((StatVar = 'Count_Student_BrazilPreVestibular' AND MaxDate >= '2000') OR (StatVar != 'Count_Student_BrazilPreVestibular' AND MaxDate >= '2010')) AND total_svs > 0"
+                "condition": "(CASE WHEN StatVar IN ('Count_Student', 'Count_Student_Nursery', 'Count_Student_PreKindergarten', 'Count_Student_AdultEducation', 'Count_Student_PrimarySchool', 'Count_Student_BrazilHighSchool', 'Count_Student_UndergraduateLevel', 'Count_Student_PostGraduateLevel') THEN MaxDate >= '2022' WHEN StatVar = 'Count_Student_BrazilPreVestibular' THEN MaxDate >= '2000' ELSE MaxDate >= '2010' END) AND total_svs > 0"
             }
         },
         {
             "rule_id": "check_max_date_consistent",
-            "description": "Checks date consistency across 2010 education StatVars.",
+            "description": "Checks date consistency across active 2022 education StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
             "scope": {
                 "data_source": "stats",
                 "variables": {
-                    "regex": [
-                        "^(?!Count_Student_BrazilPreVestibular$).*$"
+                    "dcids": [
+                        "Count_Student",
+                        "Count_Student_Nursery",
+                        "Count_Student_PreKindergarten",
+                        "Count_Student_AdultEducation",
+                        "Count_Student_PrimarySchool",
+                        "Count_Student_BrazilHighSchool",
+                        "Count_Student_UndergraduateLevel",
+                        "Count_Student_PostGraduateLevel"
                     ]
                 }
             },

@@ -11,12 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Automated download script for Brazil Census Population by Residence data.
+"""Automated download script for Brazil Census Population by Residence (Urban/Rural) data.
 
-Downloads urban/rural residence demographic data from official IBGE SIDRA REST API
-(Table 9923 for 2022+ and Table 608 for 2010) and, if not available in live upstream source,
-reads raw input files from GCS (gs://unresolved_mcf/country/brazil/input_files/Brazil_1940_2000_Residence/*.xls),
-integrating them into a clean tabular CSV input file.
+Downloads resident population by urban and rural residence classification from official IBGE sources:
+1. Live IBGE SIDRA REST API:
+   - Table 9923 (2022 Census População residente por situação do domicílio)
+   - Table 608 (2010 Census População residente por situação do domicílio e sexo)
+2. Fallback to raw historical census files from GCS (1940, 1991, 2000).
 """
 
 import glob
@@ -25,7 +26,7 @@ import json
 import os
 import sys
 import tempfile
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
@@ -38,55 +39,12 @@ from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-# Table 9923: População residente por situação do domicílio (2022+ Census)
-TABLE_9923_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/9923/n1/all/n2/all/n3/all"
-    f"/v/93/p/all/c1/all?formato=json"
-)
-# Table 608: População residente por situação do domicílio (2010 Census)
-TABLE_608_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/608/n1/all/n2/all/n3/all"
-    f"/v/93/p/all/c1/all?formato=json"
-)
+# Table 9923: População residente por situação do domicílio (2022)
+TABLE_9923_API_URL = f"{SIDRA_BASE_URL}/values/t/9923/n1/all/n2/all/n3/all/v/93/p/all/c1/all?formato=json"
 
-GCS_BUCKET_NAME = "unresolved_mcf"
-GCS_RESIDENCE_DIR = "country/brazil/input_files/Brazil_1940_2000_Residence"
-
-DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brazil',
-    'wikidataId/Q478465': 'Norte',
-    'wikidataId/Q1136194': 'Nordeste',
-    'wikidataId/Q1088815': 'Sudeste',
-    'wikidataId/Q1060042': 'Sul',
-    'wikidataId/Q980175': 'Centro-Oeste',
-    'wikidataId/Q40780': 'Acre',
-    'wikidataId/Q40885': 'Alagoas',
-    'wikidataId/Q40130': 'Amapá',
-    'wikidataId/Q40040': 'Amazonas',
-    'wikidataId/Q40430': 'Bahia',
-    'wikidataId/Q40123': 'Ceará',
-    'wikidataId/Q119158': 'Distrito Federal',
-    'wikidataId/Q43233': 'Espírito Santo',
-    'wikidataId/Q41587': 'Goiás',
-    'wikidataId/Q42362': 'Maranhão',
-    'wikidataId/Q42824': 'Mato Grosso',
-    'wikidataId/Q43319': 'Mato Grosso do Sul',
-    'wikidataId/Q39109': 'Minas Gerais',
-    'wikidataId/Q39517': 'Pará',
-    'wikidataId/Q38088': 'Paraíba',
-    'wikidataId/Q15499': 'Paraná',
-    'wikidataId/Q40942': 'Pernambuco',
-    'wikidataId/Q42722': 'Piauí',
-    'wikidataId/Q41428': 'Rio de Janeiro',
-    'wikidataId/Q43255': 'Rio Grande do Norte',
-    'wikidataId/Q40030': 'Rio Grande do Sul',
-    'wikidataId/Q43235': 'Rondônia',
-    'wikidataId/Q42508': 'Roraima',
-    'wikidataId/Q41115': 'Santa Catarina',
-    'wikidataId/Q175': 'São Paulo',
-    'wikidataId/Q43783': 'Sergipe',
-    'wikidataId/Q43695': 'Tocantins'
-}
+# Table 608: População residente por situação do domicílio e sexo (2010)
+# Includes classification c1 (Situação: Total, Urbana, Rural) and c2 (Sexo: Total, Homens, Mulheres)
+TABLE_608_API_URL = f"{SIDRA_BASE_URL}/values/t/608/n1/all/n2/all/n3/all/v/93/p/all/c1/all/c2/all?formato=json"
 
 FLAGS = flags.FLAGS
 if "output_file" not in FLAGS:
@@ -132,44 +90,32 @@ def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]
 
 
 def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
-    """Parses raw IBGE residence XLS workbook (tab001 / tab002)."""
+    """Parses raw IBGE Table 1 residence XLS workbook."""
     rows: List[Dict[str, Any]] = []
     try:
         df = pd.read_excel(io.BytesIO(content_bytes))
-        if len(df) <= 6:
+        if len(df) <= 5:
             return rows
-        header_row = df.iloc[6]
-        col_map: Dict[int, Tuple[str, str]] = {}
+        header_row = df.iloc[5]
+        col_map: Dict[int, tuple] = {}
         for idx, c in enumerate(header_row):
-            c_str = str(c).lower()
-            if "toral population" in c_str or "total population" in c_str:
+            c_str = str(c).strip()
+            if "Total" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
                 col_map[idx] = ("Total", "Total")
-            elif "total male" in c_str:
-                col_map[idx] = ("Total", "Masculino")
-            elif "total female" in c_str:
-                col_map[idx] = ("Total", "Feminino")
-            elif "total urban" in c_str:
+            elif "Urbana" in c_str:
                 col_map[idx] = ("Urbana", "Total")
-            elif "urban male" in c_str:
-                col_map[idx] = ("Urbana", "Masculino")
-            elif "urban" in c_str and ("frmale" in c_str or "female" in c_str):
-                col_map[idx] = ("Urbana", "Feminino")
-            elif "total rural" in c_str:
+            elif "Rural" in c_str:
                 col_map[idx] = ("Rural", "Total")
-            elif "rural male" in c_str:
-                col_map[idx] = ("Rural", "Masculino")
-            elif "rural female" in c_str:
-                col_map[idx] = ("Rural", "Feminino")
 
-        for r_idx in range(7, len(df)):
+        for r_idx in range(6, len(df)):
             r = df.iloc[r_idx]
             place = str(r.iloc[0]).strip()
-            if not place or pd.isna(r.iloc[0]) or ("fonte" in place.lower() and "fonte boa" not in place.lower()):
+            if not place or pd.isna(r.iloc[0]) or "fonte" in place.lower():
                 continue
             if place == "Brasil":
                 place = "Brazil"
 
-            for c_idx, (situacao, sexo) in col_map.items():
+            for c_idx, (sit, sex) in col_map.items():
                 val = r.iloc[c_idx]
                 if pd.isna(val):
                     continue
@@ -177,83 +123,125 @@ def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, A
                     val_int = int(round(float(val)))
                 except (ValueError, TypeError):
                     continue
-                rows.append({"Ano": year, "Localidade": place, "Situacao": situacao, "Sexo": sexo, "Populacao": val_int})
+                rows.append({"Ano": year, "Localidade": place, "Situacao": sit, "Sexo": sex, "Populacao": val_int})
     except Exception as e:
         logging.warning(f"Error parsing raw residence XLS: {e}")
     return rows
 
 
-def parse_raw_1991_pops(content_bytes: bytes, map_91: Dict[str, str]) -> List[Dict[str, Any]]:
-    """Parses raw 1991 POPS state workbook (Rural and Urbana)."""
+def parse_raw_1991_residence(content_bytes: bytes, map_91: Dict[str, str]) -> List[Dict[str, Any]]:
+    """Parses raw 1991 residence workbook."""
     rows: List[Dict[str, Any]] = []
     try:
         df = pd.read_excel(io.BytesIO(content_bytes))
         for r_idx in range(1, len(df)):
             row = df.iloc[r_idx]
             place_raw = str(row.iloc[0]).strip()
-            place_lower = place_raw.lower()
-            if not place_raw or pd.isna(row.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
+            if not place_raw or pd.isna(row.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
                 continue
             if len(row) < 3:
                 continue
 
-            rural_val = row.iloc[1]
-            urban_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
+            urb_val = row.iloc[1]
+            rur_val = row.iloc[2]
+            place_resolved = map_91.get(place_raw, place_raw)
 
-            r_int = None
             u_int = None
+            r_int = None
             try:
-                r_int = int(round(float(rural_val)))
-                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Rural", "Sexo": "Total", "Populacao": r_int})
-            except (ValueError, TypeError):
-                pass
-            try:
-                u_int = int(round(float(urban_val)))
+                u_int = int(round(float(urb_val)))
                 rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Urbana", "Sexo": "Total", "Populacao": u_int})
             except (ValueError, TypeError):
                 pass
-            if r_int is not None and u_int is not None:
-                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Total", "Sexo": "Total", "Populacao": r_int + u_int})
+            try:
+                r_int = int(round(float(rur_val)))
+                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Rural", "Sexo": "Total", "Populacao": r_int})
+            except (ValueError, TypeError):
+                pass
+            if u_int is not None and r_int is not None:
+                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Total", "Sexo": "Total", "Populacao": u_int + r_int})
     except Exception as e:
-        logging.warning(f"Error parsing 1991 POPS XLS: {e}")
+        logging.warning(f"Error parsing 1991 residence XLS: {e}")
     return rows
 
 
-def parse_raw_2010_residence_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
-    """Parses raw Brazil_2010_Residence.xls workbook across tab2A, tab2B, tab2C for all 5,564 municipalities."""
+def load_1991_mapping() -> Dict[str, str]:
+    """Loads 1991 place name mapping to resolved DCIDs."""
+    cand = [
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files", "Brazil_Place_Mapping_1991.json"),
+        os.path.join("/data", "scratch", "intermediate_files", "Brazil_Place_Mapping_1991.json"),
+    ]
+    for c in cand:
+        if os.path.isfile(c):
+            with open(c, "r", encoding="utf-8") as f:
+                return json.load(f)
+    try:
+        from google.cloud import storage
+        client = storage.Client()
+        bucket = client.bucket("unresolved_mcf")
+        blob = bucket.blob("country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
+        return json.loads(blob.download_as_text())
+    except Exception as e:
+        logging.warning(f"Could not load 1991 mapping from GCS: {e}")
+    return {}
+
+
+def parse_raw_residence_gender_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
+    """Parses raw IBGE Table 1 residence by sex XLS workbook."""
     rows: List[Dict[str, Any]] = []
     try:
-        for sheet, sit in [('tab2A', 'Total'), ('tab2B', 'Urbana'), ('tab2C', 'Rural')]:
-            df = pd.read_excel(io.BytesIO(content_bytes), sheet_name=sheet, header=None, skiprows=4)
-            for idx in range(5, len(df)):
-                code = str(df.iloc[idx, 0]).strip()
-                val = df.iloc[idx, 3]
-                if pd.isna(df.iloc[idx, 0]) or not code or code == "nan":
-                    continue
-                code_lower = code.lower()
-                if ("fonte" in code_lower and "fonte boa" not in code_lower) or "nota" in code_lower:
+        df = pd.read_excel(io.BytesIO(content_bytes))
+        if len(df) <= 5:
+            return rows
+        header_row = df.iloc[5]
+        col_map: Dict[int, tuple] = {}
+        for idx, c in enumerate(header_row):
+            c_str = str(c).strip()
+            if "Total" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
+                col_map[idx] = ("Total", "Total")
+            elif "Homens" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
+                col_map[idx] = ("Total", "Masculino")
+            elif "Mulheres" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
+                col_map[idx] = ("Total", "Feminino")
+            elif "Urbana Total" in c_str or ("Urbana" in c_str and "Total" in c_str):
+                col_map[idx] = ("Urbana", "Total")
+            elif "Urbana Homens" in c_str or ("Urbana" in c_str and "Homens" in c_str):
+                col_map[idx] = ("Urbana", "Masculino")
+            elif "Urbana Mulheres" in c_str or ("Urbana" in c_str and "Mulheres" in c_str):
+                col_map[idx] = ("Urbana", "Feminino")
+            elif "Rural Total" in c_str or ("Rural" in c_str and "Total" in c_str):
+                col_map[idx] = ("Rural", "Total")
+            elif "Rural Homens" in c_str or ("Rural" in c_str and "Homens" in c_str):
+                col_map[idx] = ("Rural", "Masculino")
+            elif "Rural Mulheres" in c_str or ("Rural" in c_str and "Mulheres" in c_str):
+                col_map[idx] = ("Rural", "Feminino")
+
+        for r_idx in range(6, len(df)):
+            r = df.iloc[r_idx]
+            place = str(r.iloc[0]).strip()
+            if not place or pd.isna(r.iloc[0]) or "fonte" in place.lower():
+                continue
+            if place == "Brasil":
+                place = "Brazil"
+
+            for c_idx, (sit, sex) in col_map.items():
+                val = r.iloc[c_idx]
+                if pd.isna(val):
                     continue
                 try:
                     val_int = int(round(float(val)))
-                    rows.append({
-                        "Ano": 2010,
-                        "Localidade": code,
-                        "Situacao": sit,
-                        "Sexo": "Total",
-                        "Populacao": val_int
-                    })
                 except (ValueError, TypeError):
                     continue
+                rows.append({"Ano": year, "Localidade": place, "Situacao": sit, "Sexo": sex, "Populacao": val_int})
     except Exception as e:
-        logging.warning(f"Error parsing Brazil_2010_Residence.xls: {e}")
+        logging.warning(f"Error parsing raw residence gender XLS: {e}")
     return rows
 
 
 def fetch_raw_input_files() -> List[Dict[str, Any]]:
     """Reads raw input files from GCS input_files or local scratch."""
     rows: List[Dict[str, Any]] = []
-    year_files = [(1940, "tab001.xls"), (2000, "tab002.xls")]
+    year_files = [(1940, "Brazil_1940_Residence.xls"), (2000, "Brazil_2000_Residence.xls")]
 
     for year, fname in year_files:
         scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1940_2000_Residence", fname)
@@ -262,65 +250,50 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
 
         if local_path:
             with open(local_path, "rb") as f:
-                r = parse_raw_residence_xls(f.read(), year)
-                rows.extend(r)
+                rows.extend(parse_raw_residence_xls(f.read(), year))
         else:
             try:
                 from google.cloud import storage
                 client = storage.Client()
-                bucket = client.bucket(GCS_BUCKET_NAME)
-                blob_path = f"{GCS_RESIDENCE_DIR}/{fname}"
-                blob = bucket.blob(blob_path)
+                bucket = client.bucket("unresolved_mcf")
+                blob = bucket.blob(f"country/brazil/input_files/Brazil_1940_2000_Residence/{fname}")
                 content = blob.download_as_bytes()
-                r = parse_raw_residence_xls(content, year)
-                rows.extend(r)
+                rows.extend(parse_raw_residence_xls(content, year))
             except Exception as e:
-                logging.warning(f"Could not load raw residence file from GCS gs://{GCS_BUCKET_NAME}/{GCS_RESIDENCE_DIR}/{fname}: {e}")
+                logging.warning(f"Could not load {fname} from GCS: {e}")
 
-    # Load 2010 municipal residence workbook
-    r2010_scratch = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_2010_Residence.xls")
-    r2010_alt = os.path.join("/data", "scratch", "input_files", "Brazil_2010_Residence.xls")
-    r2010_path = r2010_scratch if os.path.isfile(r2010_scratch) else (r2010_alt if os.path.isfile(r2010_alt) else None)
-    if r2010_path:
-        with open(r2010_path, "rb") as f:
-            rows.extend(parse_raw_2010_residence_xls(f.read()))
-    else:
-        try:
-            from google.cloud import storage
-            client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            blob = bucket.blob("country/brazil/input_files/Brazil_2010_Residence.xls")
-            content = blob.download_as_bytes()
-            rows.extend(parse_raw_2010_residence_xls(content))
-        except Exception as e:
-            logging.warning(f"Could not load Brazil_2010_Residence.xls from GCS gs://{GCS_BUCKET_NAME}/country/brazil/input_files/Brazil_2010_Residence.xls: {e}")
+    # Historical Residence by Gender (1940, 2000)
+    for year, tab_name in [(1940, "Brazil_AA1_1940_2000_tab001.xls"), (2000, "Brazil_AA1_1940_2000_tab002.xls")]:
+        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", tab_name)
+        alt_scratch = os.path.join("/data", "scratch", "input_files", tab_name)
+        local_path = scratch_file if os.path.isfile(scratch_file) else (alt_scratch if os.path.isfile(alt_scratch) else None)
+        if local_path:
+            with open(local_path, "rb") as f:
+                rows.extend(parse_raw_residence_gender_xls(f.read(), year))
+        else:
+            try:
+                from google.cloud import storage
+                client = storage.Client()
+                bucket = client.bucket("unresolved_mcf")
+                blob = bucket.blob(f"country/brazil/input_files/{tab_name}")
+                content = blob.download_as_bytes()
+                rows.extend(parse_raw_residence_gender_xls(content, year))
+            except Exception as e:
+                logging.warning(f"Could not load {tab_name} from GCS: {e}")
 
-    # Load 1991 POPS files across all states
-    map_91 = {}
-    for d in [os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files"), os.path.join("/data", "scratch", "intermediate_files")]:
-        p91 = os.path.join(d, "Brazil_Place_Mapping_1991.json")
-        if os.path.isfile(p91):
-            with open(p91, "r", encoding="utf-8") as f:
-                map_91 = json.load(f)
-            break
-    if not map_91:
-        try:
-            from google.cloud import storage
-            client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            blob = bucket.blob("country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
-            map_91 = json.loads(blob.download_as_text())
-        except Exception as e:
-            logging.warning(f"Could not load Brazil_Place_Mapping_1991.json from GCS: {e}")
-
+    # 1991 Residence
+    map_91 = load_1991_mapping()
+    cand_dirs = [
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1991_residence"),
+        os.path.join("/data", "scratch", "input_files", "Brazil_1991_residence"),
+    ]
     found_1991 = False
-    input_dirs = [os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files"), os.path.join("/data", "scratch", "input_files")]
-    for idir in input_dirs:
-        if os.path.isdir(idir):
-            pops_files = sorted(glob.glob(os.path.join(idir, "POPS91*.XLS")) + glob.glob(os.path.join(idir, "Brazil_1991_residence", "*.xls")))
+    for d in cand_dirs:
+        if os.path.isdir(d):
+            pops_files = sorted(glob.glob(os.path.join(d, "POPS91*.XLS")) + glob.glob(os.path.join(d, "*.xls")))
             for pf in pops_files:
                 with open(pf, "rb") as f:
-                    rows.extend(parse_raw_1991_pops(f.read(), map_91))
+                    rows.extend(parse_raw_1991_residence(f.read(), map_91))
                     found_1991 = True
             if found_1991:
                 break
@@ -328,11 +301,12 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
         try:
             from google.cloud import storage
             client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_residence"))
+            bucket = client.bucket("unresolved_mcf")
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91"))
             for b in blobs:
-                if b.name.lower().endswith(".xls"):
-                    rows.extend(parse_raw_1991_pops(b.download_as_bytes(), map_91))
+                if b.name.upper().endswith(".XLS"):
+                    content = b.download_as_bytes()
+                    rows.extend(parse_raw_1991_residence(content, map_91))
         except Exception as e:
             logging.warning(f"Could not load 1991 POPS files from GCS: {e}")
 
@@ -344,12 +318,46 @@ def download_all_years(
     output_file: Optional[str] = None,
     fallback_to_cached: bool = False,
 ) -> str:
-    """Downloads Brazil Census residence data across past, present, and future censuses."""
+    """Downloads Brazil Census residence data across all census years."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Modern 2022+ Censuses from SIDRA API (Table 9923)
+        # 1. Historical data from raw input files in GCS input_files (1940, 1991, 2000)
+        raw_rows = fetch_raw_input_files()
+        all_rows.extend(raw_rows)
+
+        # 2. 2010 Census from SIDRA API (Table 608)
+        # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
+        # Classification c1 is Situação (Total, Urbana, Rural) and c2 is Sexo (Total, Homens, Mulheres).
+        raw_2010 = fetch_sidra_data(session, TABLE_608_API_URL)
+        logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608.")
+        sexo_map = {"Homens": "Masculino", "Mulheres": "Feminino", "Total": "Total"}
+        for r in raw_2010[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
+
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
+
+            situacao = str(r.get("D4N", "Total")).strip()
+            sexo_raw = str(r.get("D5N", "Total")).strip()
+            sexo = sexo_map.get(sexo_raw, "Total")
+            all_rows.append({
+                "Ano": 2010,
+                "Localidade": loc,
+                "Situacao": situacao,
+                "Sexo": sexo,
+                "Populacao": val,
+            })
+
+        # 3. 2022+ Census from SIDRA API (Table 9923)
         raw_2022 = fetch_sidra_data(session, TABLE_9923_API_URL)
         logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9923.")
         for r in raw_2022[1:]:
@@ -361,7 +369,7 @@ def download_all_years(
             except (ValueError, TypeError):
                 continue
 
-            year_str = str(r.get("D3N", "2022")).strip()
+            year_str = str(r.get("D3N", "")).strip()
             try:
                 year = int(year_str)
             except ValueError:
@@ -379,35 +387,6 @@ def download_all_years(
                 "Sexo": "Total",
                 "Populacao": val,
             })
-
-        # 2. 2010 Census from SIDRA API (Table 608)
-        raw_2010 = fetch_sidra_data(session, TABLE_608_API_URL)
-        logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608.")
-        for r in raw_2010[1:]:
-            val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
-                continue
-            try:
-                val = int(round(float(val_str)))
-            except (ValueError, TypeError):
-                continue
-
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
-
-            situacao = str(r.get("D4N", "Total")).strip()
-            all_rows.append({
-                "Ano": 2010,
-                "Localidade": loc,
-                "Situacao": situacao,
-                "Sexo": "Total",
-                "Populacao": val,
-            })
-
-        # 3. Historical data from raw input files in GCS input_files
-        raw_rows = fetch_raw_input_files()
-        all_rows.extend(raw_rows)
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
@@ -444,12 +423,6 @@ def download_all_years(
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
 
-    counters_dir = os.path.join(os.path.dirname(target_dir), "counters")
-    os.makedirs(counters_dir, exist_ok=True)
-    counters_file = os.path.join(counters_dir, "brazil_population_by_residence_counters.csv")
-    with open(counters_file, "w", encoding="utf-8") as f:
-        f.write(f"key,value\nnum_rows_processed,{len(df)}\nnum_places,{df['Localidade'].nunique()}\nnum_statvars,9\n")
-
     return target_path
 
 
@@ -467,9 +440,10 @@ def main(argv: List[str]) -> None:
             output_file=target_file,
             fallback_to_cached=FLAGS.fallback_to_cached,
         )
-        logging.info(f"Residence download completed successfully: {saved_file}")
+        logging.info(f"Successfully generated Brazil Census residence data at: {saved_file}")
     except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census residence data: {e}", exc_info=True)
+        logging.error(f"Fatal error executing Brazil Census residence download: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

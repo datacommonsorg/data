@@ -16,6 +16,7 @@
 import importlib.util
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -169,6 +170,36 @@ class DownloadTest(unittest.TestCase):
         )
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
+
+
+
+    def test_stat_var_processor_sample_data(self):
+        """Verifies stat_var_processor correctly processes test_data sample CSV."""
+        repo_dir = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
+        processor_script = os.path.join(repo_dir, "tools", "statvar_importer", "stat_var_processor.py")
+        if not os.path.isfile(processor_script):
+            self.skipTest("stat_var_processor.py not found")
+        imp_name = os.path.basename(SCRIPT_DIR)
+        sample_csv = os.path.join(SCRIPT_DIR, "test_data", f"sample_{imp_name}.csv")
+        pv_map = os.path.join(SCRIPT_DIR, f"{imp_name}_pvmap.csv")
+        metadata_csv = os.path.join(SCRIPT_DIR, f"{imp_name}_metadata.csv")
+        places_csv = os.path.join(SCRIPT_DIR, "..", "brazil_places_resolved.csv")
+        out_prefix = os.path.join(self.test_dir, f"{imp_name}_out")
+        cmd = [
+            sys.executable,
+            processor_script,
+            f"--input_data={sample_csv}",
+            f"--pv_map={pv_map}",
+            f"--config_file={metadata_csv}",
+            f"--places_resolved_csv={places_csv}",
+            f"--output_path={out_prefix}",
+        ]
+        res = subprocess.run(cmd, cwd=repo_dir, capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"stat_var_processor failed: {res.stderr}")
+        self.assertTrue(os.path.isfile(f"{out_prefix}.csv"))
+        self.assertTrue(os.path.isfile(f"{out_prefix}.tmcf"))
+        df_out = pd.read_csv(f"{out_prefix}.csv")
+        self.assertGreater(len(df_out), 0)
 
 
 if __name__ == "__main__":

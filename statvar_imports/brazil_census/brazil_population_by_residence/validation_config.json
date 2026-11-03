@@ -14,14 +14,14 @@
         },
         {
             "rule_id": "check_max_date_freshness",
-            "description": "Checks date freshness for active 2022 residence cohorts and historical 2000 gender-split cohorts.",
+            "description": "Checks date freshness for active 2022 residence cohorts and 2010 gender-split cohorts.",
             "validator": "SQL_VALIDATOR",
             "scope": {
                 "data_source": "stats"
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "((StatVar IN ('Count_Person', 'Count_Person_Urban', 'Count_Person_Rural') AND MaxDate >= '2022') OR (StatVar NOT IN ('Count_Person', 'Count_Person_Urban', 'Count_Person_Rural') AND MaxDate >= '2000')) AND total_svs > 0"
+                "condition": "(CASE WHEN StatVar IN ('Count_Person', 'Count_Person_Urban', 'Count_Person_Rural') THEN MaxDate >= '2022' ELSE MaxDate >= '2010' END) AND total_svs > 0"
             }
         },
         {

@@ -13,10 +13,9 @@
 # limitations under the License.
 """Automated download script for Brazil Census Population by Religion data.
 
-Downloads religion demographic data from official IBGE SIDRA REST API (Table 9537)
-and, if not available in live upstream source, reads raw input files from GCS
-(gs://unresolved_mcf/country/brazil/input_files/Brazil_1940_2000_religion/*.xls),
-integrating them into a clean tabular CSV input file.
+Downloads resident population by religious affiliation from official IBGE sources:
+1. Live IBGE SIDRA REST API (Table 9537) for 2022 and future censuses.
+2. Fallback to raw historical census files from GCS (1940, 2000).
 """
 
 import io
@@ -36,50 +35,8 @@ from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-# Table 9537: População residente por religião (2022+ Census)
-TABLE_9537_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/9537/n1/all/n2/all/n3/all"
-    f"/v/140/p/all/c133/all/c2/0/c58/0?formato=json"
-)
-
-GCS_BUCKET_NAME = "unresolved_mcf"
-GCS_RELIGION_DIR = "country/brazil/input_files/Brazil_1940_2000_religion"
-
-DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brazil',
-    'wikidataId/Q478465': 'Norte',
-    'wikidataId/Q1136194': 'Nordeste',
-    'wikidataId/Q1088815': 'Sudeste',
-    'wikidataId/Q1060042': 'Sul',
-    'wikidataId/Q980175': 'Centro-Oeste',
-    'wikidataId/Q40780': 'Acre',
-    'wikidataId/Q40885': 'Alagoas',
-    'wikidataId/Q40130': 'Amapá',
-    'wikidataId/Q40040': 'Amazonas',
-    'wikidataId/Q40430': 'Bahia',
-    'wikidataId/Q40123': 'Ceará',
-    'wikidataId/Q119158': 'Distrito Federal',
-    'wikidataId/Q43233': 'Espírito Santo',
-    'wikidataId/Q41587': 'Goiás',
-    'wikidataId/Q42362': 'Maranhão',
-    'wikidataId/Q42824': 'Mato Grosso',
-    'wikidataId/Q43319': 'Mato Grosso do Sul',
-    'wikidataId/Q39109': 'Minas Gerais',
-    'wikidataId/Q39517': 'Pará',
-    'wikidataId/Q38088': 'Paraíba',
-    'wikidataId/Q15499': 'Paraná',
-    'wikidataId/Q40942': 'Pernambuco',
-    'wikidataId/Q42722': 'Piauí',
-    'wikidataId/Q41428': 'Rio de Janeiro',
-    'wikidataId/Q43255': 'Rio Grande do Norte',
-    'wikidataId/Q40030': 'Rio Grande do Sul',
-    'wikidataId/Q43235': 'Rondônia',
-    'wikidataId/Q42508': 'Roraima',
-    'wikidataId/Q41115': 'Santa Catarina',
-    'wikidataId/Q175': 'São Paulo',
-    'wikidataId/Q43783': 'Sergipe',
-    'wikidataId/Q43695': 'Tocantins'
-}
+# Table 9537: População residente por religião
+TABLE_9537_API_URL = f"{SIDRA_BASE_URL}/values/t/9537/n1/all/n2/all/n3/all/v/1000093/p/all/c11575/all?formato=json"
 
 FLAGS = flags.FLAGS
 if "output_file" not in FLAGS:
@@ -182,20 +139,17 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
 
         if local_path:
             with open(local_path, "rb") as f:
-                r = parse_raw_religion_xls(f.read(), year)
-                rows.extend(r)
+                rows.extend(parse_raw_religion_xls(f.read(), year))
         else:
             try:
                 from google.cloud import storage
                 client = storage.Client()
-                bucket = client.bucket(GCS_BUCKET_NAME)
-                blob_path = f"{GCS_RELIGION_DIR}/{fname}"
-                blob = bucket.blob(blob_path)
+                bucket = client.bucket("unresolved_mcf")
+                blob = bucket.blob(f"country/brazil/input_files/Brazil_1940_2000_religion/{fname}")
                 content = blob.download_as_bytes()
-                r = parse_raw_religion_xls(content, year)
-                rows.extend(r)
+                rows.extend(parse_raw_religion_xls(content, year))
             except Exception as e:
-                logging.warning(f"Could not load raw religion file from GCS gs://{GCS_BUCKET_NAME}/{GCS_RELIGION_DIR}/{fname}: {e}")
+                logging.warning(f"Could not load {fname} from GCS: {e}")
 
     return rows
 
@@ -205,15 +159,21 @@ def download_all_years(
     output_file: Optional[str] = None,
     fallback_to_cached: bool = False,
 ) -> str:
-    """Downloads Brazil Census religion data across past, present, and future censuses."""
+    """Downloads Brazil Census religion data across all census years."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Primary Source: Live SIDRA API (Table 9537)
+        # 1. Historical data from raw input files in GCS input_files (1940, 2000)
+        raw_rows = fetch_raw_input_files()
+        all_rows.extend(raw_rows)
+
+        # 2. Live SIDRA API (Table 9537 for 2022)
+        # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
         raw_sidra = fetch_sidra_data(session, TABLE_9537_API_URL)
         logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9537.")
         other_rel_acc: Dict[str, int] = {}
+        nao_declarada_acc: Dict[str, int] = {}
         for r in raw_sidra[1:]:
             val_str = r.get("V")
             if val_str in ["-", "...", "..", None, ""]:
@@ -245,18 +205,19 @@ def download_all_years(
             elif "Sem religião" in rel_raw:
                 all_rows.append({"Ano": year, "Localidade": loc, "Religiao": "Sem Religião", "Populacao": val})
             elif "Sem declaração" in rel_raw or "Não sabe" in rel_raw:
-                all_rows.append({"Ano": year, "Localidade": loc, "Religiao": "Não Declarada", "Populacao": val})
+                key = f"{year}||{loc}"
+                nao_declarada_acc[key] = nao_declarada_acc.get(key, 0) + val
             else:
                 key = f"{year}||{loc}"
                 other_rel_acc[key] = other_rel_acc.get(key, 0) + val
 
+        for key, val in nao_declarada_acc.items():
+            y_str, l_str = key.split("||", 1)
+            all_rows.append({"Ano": int(y_str), "Localidade": l_str, "Religiao": "Não Declarada", "Populacao": val})
+
         for key, val in other_rel_acc.items():
             y_str, l_str = key.split("||", 1)
             all_rows.append({"Ano": int(y_str), "Localidade": l_str, "Religiao": "Outras Religiões", "Populacao": val})
-
-        # 2. Historical data from raw input files in GCS input_files
-        raw_rows = fetch_raw_input_files()
-        all_rows.extend(raw_rows)
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
@@ -293,12 +254,6 @@ def download_all_years(
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
 
-    counters_dir = os.path.join(os.path.dirname(target_dir), "counters")
-    os.makedirs(counters_dir, exist_ok=True)
-    counters_file = os.path.join(counters_dir, "brazil_population_by_religion_counters.csv")
-    with open(counters_file, "w", encoding="utf-8") as f:
-        f.write(f"key,value\nnum_rows_processed,{len(df)}\nnum_places,{df['Localidade'].nunique()}\nnum_statvars,6\n")
-
     return target_path
 
 
@@ -316,9 +271,10 @@ def main(argv: List[str]) -> None:
             output_file=target_file,
             fallback_to_cached=FLAGS.fallback_to_cached,
         )
-        logging.info(f"Religion download completed successfully: {saved_file}")
+        logging.info(f"Successfully generated Brazil Census religion data at: {saved_file}")
     except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census religion data: {e}", exc_info=True)
+        logging.error(f"Fatal error executing Brazil Census religion download: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

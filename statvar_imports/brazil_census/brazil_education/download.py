@@ -14,7 +14,9 @@
 """Automated download script for Brazil Census Education data.
 
 Downloads educational enrollment data directly from official IBGE sources:
-1. Live IBGE SIDRA REST API (Table 1972) for 2000, 2010, and future censuses.
+1. Live IBGE SIDRA REST API:
+   - Table 1972 for 2000 and 2010 (by education level and public/private school network).
+   - Tables 10057, 10058, 10059 for 2022 (student attendance across 3 age cohorts: 0-5, 6-17, 18+).
 2. Official IBGE Census Downloads Portal (https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/educacao/Municipios/)
    for municipal-level education workbooks.
 3. Fallback to raw input files from GCS (gs://unresolved_mcf/country/brazil/input_files/Brazil_2000_education_input/*.xls)
@@ -28,7 +30,7 @@ import os
 import sys
 import tempfile
 import zipfile
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
@@ -41,11 +43,35 @@ from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-# Table 1972: Pessoas que frequentavam escola ou creche por rede e nível de ensino
+# Table 1972: Pessoas que frequentavam escola ou creche por rede e nível de ensino (2000, 2010)
 TABLE_1972_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/1972/n1/all/n2/all/n3/all"
     f"/v/690/p/all/c11797/all/c11798/all?formato=json"
 )
+
+# 2022 SIDRA Education tables across 3 disjoint age cohorts:
+# Table 10057: Pessoas de até 5 anos (v/13282)
+# Table 10058: Pessoas de 6 a 17 anos (v/13283)
+# Table 10059: Pessoas de 18 anos ou mais (v/13284)
+TABLE_2022_EDUCATION_SPECS: List[Tuple[str, str]] = [
+    ("10057", "13282"),
+    ("10058", "13283"),
+    ("10059", "13284"),
+]
+
+D4C_2022_TO_NIVEL: Dict[str, str] = {
+    "95300": "Total",
+    "95301": "Creche",
+    "107454": "Pré-escolar",
+    "7905": "Educação de Jovens e Adultos",
+    "7907": "Educação de Jovens e Adultos",
+    "7909": "Educação de Jovens e Adultos",
+    "7906": "Fundamental",
+    "7908": "Médio",
+    "95307": "Superior Graduação",
+    "7911": "Pós-graduação",
+    "7912": "Pós-graduação",
+}
 
 IBGE_FTP_2000_EDUCATION_BASE = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/educacao/Municipios/"
 GCS_BUCKET_NAME = "unresolved_mcf"
@@ -56,42 +82,6 @@ UF_CODES_2000 = [
     "mg", "ms", "mt", "pa", "pb", "pe", "pi", "pr", "rj", "rn",
     "ro", "rr", "rs", "sc", "se", "sp", "to"
 ]
-
-DCID_TO_PLACE_NAME = {
-    'country/BRA': 'Brazil',
-    'wikidataId/Q478465': 'Norte',
-    'wikidataId/Q1136194': 'Nordeste',
-    'wikidataId/Q1088815': 'Sudeste',
-    'wikidataId/Q1060042': 'Sul',
-    'wikidataId/Q980175': 'Centro-Oeste',
-    'wikidataId/Q40780': 'Acre',
-    'wikidataId/Q40885': 'Alagoas',
-    'wikidataId/Q40130': 'Amapá',
-    'wikidataId/Q40040': 'Amazonas',
-    'wikidataId/Q40430': 'Bahia',
-    'wikidataId/Q40123': 'Ceará',
-    'wikidataId/Q119158': 'Distrito Federal',
-    'wikidataId/Q43233': 'Espírito Santo',
-    'wikidataId/Q41587': 'Goiás',
-    'wikidataId/Q42362': 'Maranhão',
-    'wikidataId/Q42824': 'Mato Grosso',
-    'wikidataId/Q43319': 'Mato Grosso do Sul',
-    'wikidataId/Q39109': 'Minas Gerais',
-    'wikidataId/Q39517': 'Pará',
-    'wikidataId/Q38088': 'Paraíba',
-    'wikidataId/Q15499': 'Paraná',
-    'wikidataId/Q40942': 'Pernambuco',
-    'wikidataId/Q42722': 'Piauí',
-    'wikidataId/Q41428': 'Rio de Janeiro',
-    'wikidataId/Q43255': 'Rio Grande do Norte',
-    'wikidataId/Q40030': 'Rio Grande do Sul',
-    'wikidataId/Q43235': 'Rondônia',
-    'wikidataId/Q42508': 'Roraima',
-    'wikidataId/Q41115': 'Santa Catarina',
-    'wikidataId/Q175': 'São Paulo',
-    'wikidataId/Q43783': 'Sergipe',
-    'wikidataId/Q43695': 'Tocantins'
-}
 
 RAW_COL_TO_NIVEL = {
     'Total Student': 'Total',
@@ -201,9 +191,6 @@ def parse_raw_education_xls(file_content: bytes, mapping: Dict[str, str]) -> Lis
             if not place_resolved:
                 continue
 
-            clean_place = place_resolved.replace("dcid:", "")
-            clean_place = DCID_TO_PLACE_NAME.get(clean_place, clean_place)
-
             for c_idx, nivel in col_map.items():
                 val = r.iloc[c_idx]
                 if pd.isna(val):
@@ -215,7 +202,7 @@ def parse_raw_education_xls(file_content: bytes, mapping: Dict[str, str]) -> Lis
 
                 rows.append({
                     "Ano": 2000,
-                    "Localidade": clean_place,
+                    "Localidade": place_resolved,
                     "RedeEnsino": "Total",
                     "NivelEnsino": nivel,
                     "Estudantes": val_int,
@@ -253,7 +240,7 @@ def fetch_from_ibge_ftp_or_input_files(session: requests.Session) -> List[Dict[s
     alt_scratch = os.path.join("/data", "scratch", "input_files", "Brazil_2000_education_input")
     local_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_scratch if os.path.isdir(alt_scratch) else None)
 
-    if local_dir:
+    if local_dir and os.path.isdir(local_dir) and os.listdir(local_dir):
         xls_files = sorted(glob.glob(os.path.join(local_dir, "*.xls")))
         for fpath in xls_files:
             with open(fpath, "rb") as f:
@@ -421,7 +408,7 @@ def fetch_2010_education_files() -> List[Dict[str, Any]]:
         alt_scratch = os.path.join("/data", "scratch", "input_files", folder)
         local_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_scratch if os.path.isdir(alt_scratch) else None)
 
-        if local_dir:
+        if local_dir and os.path.isdir(local_dir) and os.listdir(local_dir):
             xls_files = sorted(glob.glob(os.path.join(local_dir, "*.xls")))
             for fpath in xls_files:
                 with open(fpath, "rb") as f:
@@ -441,6 +428,42 @@ def fetch_2010_education_files() -> List[Dict[str, Any]]:
     return rows
 
 
+def fetch_2022_education_sidra(session: requests.Session) -> Dict[Tuple[int, str, str, str], int]:
+    """Fetches 2022 student attendance by education level from SIDRA Tables 10057, 10058, 10059.
+
+    Sums student counts across the three disjoint age cohorts:
+    - Table 10057: Pessoas de até 5 anos (v/13282)
+    - Table 10058: Pessoas de 6 a 17 anos (v/13283)
+    - Table 10059: Pessoas de 18 anos ou mais (v/13284)
+    providing complete 2022 observations for RedeEnsino='Total'.
+    """
+    sidra_2022_acc: Dict[Tuple[int, str, str, str], int] = {}
+    for tid, vid in TABLE_2022_EDUCATION_SPECS:
+        url = f"{SIDRA_BASE_URL}/values/t/{tid}/n1/all/n2/all/n3/all/v/{vid}/p/all/c11798/all?formato=json"
+        raw_data = fetch_sidra_data(session, url)
+        for r in raw_data[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
+
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
+
+            d4c = str(r.get("D4C", "")).strip()
+            nivel = D4C_2022_TO_NIVEL.get(d4c)
+            if not nivel:
+                continue
+
+            key = (2022, loc, "Total", nivel)
+            sidra_2022_acc[key] = sidra_2022_acc.get(key, 0) + val
+    return sidra_2022_acc
+
+
 def download_all_years(
     session: requests.Session,
     output_file: Optional[str] = None,
@@ -451,7 +474,16 @@ def download_all_years(
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Live SIDRA API (Table 1972)
+        # 1. Historical & Municipal data from live IBGE FTP portal or raw input files (2000)
+        raw_input_rows = fetch_from_ibge_ftp_or_input_files(session)
+        all_rows.extend(raw_input_rows)
+
+        # 2. 2010 Municipal Education workbooks (Public and Private)
+        rows_2010 = fetch_2010_education_files()
+        all_rows.extend(rows_2010)
+
+        # 3. Live SIDRA API (Table 1972 for 2000 and 2010)
+        # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
         raw_sidra = fetch_sidra_data(session, TABLE_1972_API_URL)
         logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 1972.")
         sidra_acc: Dict[tuple, int] = {}
@@ -518,13 +550,16 @@ def download_all_years(
                 "Estudantes": val,
             })
 
-        # 2. Historical & Municipal data from live IBGE FTP portal or raw input files
-        raw_input_rows = fetch_from_ibge_ftp_or_input_files(session)
-        all_rows.extend(raw_input_rows)
-
-        # 3. 2010 Municipal Education workbooks (Public and Private)
-        rows_2010 = fetch_2010_education_files()
-        all_rows.extend(rows_2010)
+        # 4. Live 2022 Census Education from SIDRA Tables 10057, 10058, 10059
+        sidra_2022_acc = fetch_2022_education_sidra(session)
+        for (year, loc, rede, nivel), val in sidra_2022_acc.items():
+            all_rows.append({
+                "Ano": year,
+                "Localidade": loc,
+                "RedeEnsino": rede,
+                "NivelEnsino": nivel,
+                "Estudantes": val,
+            })
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
@@ -561,12 +596,6 @@ def download_all_years(
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
 
-    counters_dir = os.path.join(os.path.dirname(target_dir), "counters")
-    os.makedirs(counters_dir, exist_ok=True)
-    counters_file = os.path.join(counters_dir, "brazil_education_counters.csv")
-    with open(counters_file, "w", encoding="utf-8") as f:
-        f.write(f"key,value\nnum_rows_processed,{len(df)}\nnum_places,{df['Localidade'].nunique()}\nnum_statvars,9\n")
-
     return target_path
 
 
@@ -584,9 +613,10 @@ def main(argv: List[str]) -> None:
             output_file=target_file,
             fallback_to_cached=FLAGS.fallback_to_cached,
         )
-        logging.info(f"Education download completed successfully: {saved_file}")
+        logging.info(f"Successfully generated Brazil Census education data at: {saved_file}")
     except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census education data: {e}", exc_info=True)
+        logging.error(f"Fatal error executing Brazil Census education download: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
