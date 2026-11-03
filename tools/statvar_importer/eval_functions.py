@@ -39,6 +39,7 @@ import ast
 from datetime import datetime
 import re
 import types
+from types import MappingProxyType
 
 from absl import logging
 import dateutil
@@ -112,8 +113,8 @@ def str_to_camel_case(input_string: str,
         [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
 
-# Minimal Safe Builtins allowed in eval
-SAFE_BUILTINS = {
+# Minimal Safe Builtins allowed in eval (immutable)
+SAFE_BUILTINS = MappingProxyType({
     'int': int,
     'float': float,
     'str': str,
@@ -130,10 +131,10 @@ SAFE_BUILTINS = {
     'True': True,
     'False': False,
     'None': None,
-}
+})
 
-# Restricted namespaces for allowed modules
-SAFE_MODULES = {
+# Restricted namespaces for allowed modules (immutable)
+SAFE_MODULES = MappingProxyType({
     're': types.SimpleNamespace(
         sub=re.sub,
         search=re.search,
@@ -142,10 +143,10 @@ SAFE_MODULES = {
         findall=re.findall,
     ),
     'datetime': datetime,
-}
+})
 
-# Callable functions that are safe to call in expressions
-SAFE_CALLABLES = {
+# Callable functions that are safe to call in expressions (immutable)
+SAFE_CALLABLES = MappingProxyType({
     'dateutil_parser_parse': dateutil.parser.parse,
     'format_date': format_date,
     'datetime': datetime,
@@ -160,15 +161,15 @@ SAFE_CALLABLES = {
     're.split': re.split,
     're.findall': re.findall,
     'datetime.strptime': datetime.strptime,
-}
+})
 
-# Safe method names for string and container manipulation
-SAFE_METHODS = {
+# Safe method names for string and container manipulation (immutable)
+SAFE_METHODS = frozenset({
     'split', 'rsplit', 'lower', 'upper', 'title', 'capitalize',
     'strip', 'lstrip', 'rstrip', 'replace', 'zfill', 'join',
     'startswith', 'endswith', 'find', 'rfind', 'count', 'format',
     'get', 'values', 'keys', 'items'
-}
+})
 
 # Permitted AST syntax nodes in expressions
 ALLOWED_NODE_TYPES = (
@@ -192,7 +193,7 @@ ALLOWED_NODE_TYPES = (
 # This dictionary acts as a safelist, defining the execution environment for
 # the `evaluate_statement` function. By controlling the available globals,
 # we can prevent the execution of arbitrary or unsafe code.
-EVAL_GLOBALS = {
+EVAL_GLOBALS = MappingProxyType({
     'dateutil_parser_parse': dateutil.parser.parse,
     'format_date': format_date,
     'datetime': datetime,
@@ -201,7 +202,7 @@ EVAL_GLOBALS = {
     'str_to_camel_case': str_to_camel_case,
     're': SAFE_MODULES['re'],
     're_sub': re.sub,
-}
+})
 
 
 def _validate_ast_safety(node: ast.AST, allowed_callables: set):
@@ -248,6 +249,9 @@ def _validate_ast_safety(node: ast.AST, allowed_callables: set):
                             f"Call to unauthorized function: {full_name}")
                 elif attr not in SAFE_METHODS:
                     raise ValueError(f"Call to unauthorized method: {attr}")
+            else:
+                raise ValueError(
+                    f"Call to unauthorized callable construct: {type(func).__name__}")
 
 
 def evaluate_statement(eval_str: str,

@@ -107,6 +107,23 @@ class TestEvaluateStatement(unittest.TestCase):
             eval_functions.evaluate_statement(
                 'Data.__class__.__mro__[1].__subclasses__()', {'Data': 'test'}))
 
+    def test_security_blocks_indirect_calls(self):
+        # Disallow calling methods indirectly to bypass SAFE_METHODS
+        self.assertEqual(
+            ('', None),
+            eval_functions.evaluate_statement('[[].append][0](1)'))
+
+    def test_dicts_are_immutable(self):
+        # Verify that dictionaries and sets cannot be modified at runtime
+        with self.assertRaises(TypeError):
+            eval_functions.SAFE_BUILTINS['int'] = None
+        with self.assertRaises(TypeError):
+            eval_functions.SAFE_MODULES['re'] = None
+        with self.assertRaises(TypeError):
+            eval_functions.SAFE_CALLABLES['format_date'] = None
+        with self.assertRaises(TypeError):
+            eval_functions.EVAL_GLOBALS['datetime'] = None
+
     def test_security_allows_safe_module_functions(self):
         # Allowed module functions like re.sub should work
         self.assertEqual(
