@@ -101,28 +101,40 @@ def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, A
     rows: List[Dict[str, Any]] = []
     try:
         df = pd.read_excel(io.BytesIO(content_bytes))
-        if len(df) <= 5:
+        if len(df) <= 6:
             return rows
-        header_row = df.iloc[5]
-        col_map: Dict[int, tuple] = {}
+        header_row = df.iloc[6]
+        col_map: Dict[int, Tuple[str, str]] = {}
         for idx, c in enumerate(header_row):
-            c_str = str(c).strip()
-            if "Total" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
+            c_str = str(c).lower()
+            if "toral population" in c_str or "total population" in c_str:
                 col_map[idx] = ("Total", "Total")
-            elif "Urbana" in c_str:
+            elif "total male" in c_str:
+                col_map[idx] = ("Total", "Masculino")
+            elif "total female" in c_str:
+                col_map[idx] = ("Total", "Feminino")
+            elif "total urban" in c_str:
                 col_map[idx] = ("Urbana", "Total")
-            elif "Rural" in c_str:
+            elif "urban male" in c_str:
+                col_map[idx] = ("Urbana", "Masculino")
+            elif "urban" in c_str and ("frmale" in c_str or "female" in c_str):
+                col_map[idx] = ("Urbana", "Feminino")
+            elif "total rural" in c_str:
                 col_map[idx] = ("Rural", "Total")
+            elif "rural male" in c_str:
+                col_map[idx] = ("Rural", "Masculino")
+            elif "rural female" in c_str:
+                col_map[idx] = ("Rural", "Feminino")
 
-        for r_idx in range(6, len(df)):
+        for r_idx in range(7, len(df)):
             r = df.iloc[r_idx]
             place = str(r.iloc[0]).strip()
-            if not place or pd.isna(r.iloc[0]) or "fonte" in place.lower():
+            if not place or pd.isna(r.iloc[0]) or ("fonte" in place.lower() and "fonte boa" not in place.lower()) or "nota" in place.lower():
                 continue
             if place == "Brasil":
                 place = "Brazil"
 
-            for c_idx, (sit, sex) in col_map.items():
+            for c_idx, (situacao, sexo) in col_map.items():
                 val = r.iloc[c_idx]
                 if pd.isna(val):
                     continue
@@ -130,7 +142,7 @@ def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, A
                     val_int = int(round(float(val)))
                 except (ValueError, TypeError):
                     continue
-                rows.append({"Ano": year, "Localidade": place, "Situacao": sit, "Sexo": sex, "Populacao": val_int})
+                rows.append({"Ano": year, "Localidade": place, "Situacao": situacao, "Sexo": sexo, "Populacao": val_int})
     except Exception as e:
         logging.warning(f"Error parsing raw residence XLS: {e}")
     return rows
@@ -144,24 +156,25 @@ def parse_raw_1991_residence(content_bytes: bytes, map_91: Dict[str, str]) -> Li
         for r_idx in range(1, len(df)):
             row = df.iloc[r_idx]
             place_raw = str(row.iloc[0]).strip()
-            if not place_raw or pd.isna(row.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
+            place_lower = place_raw.lower()
+            if not place_raw or pd.isna(row.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             if len(row) < 3:
                 continue
 
-            urb_val = row.iloc[1]
-            rur_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw, place_raw)
+            rural_val = row.iloc[1]
+            urban_val = row.iloc[2]
+            place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
 
             u_int = None
             r_int = None
             try:
-                u_int = int(round(float(urb_val)))
+                u_int = int(round(float(urban_val)))
                 rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Urbana", "Sexo": "Total", "Populacao": u_int})
             except (ValueError, TypeError):
                 pass
             try:
-                r_int = int(round(float(rur_val)))
+                r_int = int(round(float(rural_val)))
                 rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Rural", "Sexo": "Total", "Populacao": r_int})
             except (ValueError, TypeError):
                 pass
@@ -194,61 +207,14 @@ def load_1991_mapping() -> Dict[str, str]:
 
 
 def parse_raw_residence_gender_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
-    """Parses raw IBGE Table 1 residence by sex XLS workbook."""
-    rows: List[Dict[str, Any]] = []
-    try:
-        df = pd.read_excel(io.BytesIO(content_bytes))
-        if len(df) <= 5:
-            return rows
-        header_row = df.iloc[5]
-        col_map: Dict[int, tuple] = {}
-        for idx, c in enumerate(header_row):
-            c_str = str(c).strip()
-            if "Total" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
-                col_map[idx] = ("Total", "Total")
-            elif "Homens" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
-                col_map[idx] = ("Total", "Masculino")
-            elif "Mulheres" in c_str and "Urbana" not in c_str and "Rural" not in c_str:
-                col_map[idx] = ("Total", "Feminino")
-            elif "Urbana Total" in c_str or ("Urbana" in c_str and "Total" in c_str):
-                col_map[idx] = ("Urbana", "Total")
-            elif "Urbana Homens" in c_str or ("Urbana" in c_str and "Homens" in c_str):
-                col_map[idx] = ("Urbana", "Masculino")
-            elif "Urbana Mulheres" in c_str or ("Urbana" in c_str and "Mulheres" in c_str):
-                col_map[idx] = ("Urbana", "Feminino")
-            elif "Rural Total" in c_str or ("Rural" in c_str and "Total" in c_str):
-                col_map[idx] = ("Rural", "Total")
-            elif "Rural Homens" in c_str or ("Rural" in c_str and "Homens" in c_str):
-                col_map[idx] = ("Rural", "Masculino")
-            elif "Rural Mulheres" in c_str or ("Rural" in c_str and "Mulheres" in c_str):
-                col_map[idx] = ("Rural", "Feminino")
-
-        for r_idx in range(6, len(df)):
-            r = df.iloc[r_idx]
-            place = str(r.iloc[0]).strip()
-            if not place or pd.isna(r.iloc[0]) or "fonte" in place.lower():
-                continue
-            if place == "Brasil":
-                place = "Brazil"
-
-            for c_idx, (sit, sex) in col_map.items():
-                val = r.iloc[c_idx]
-                if pd.isna(val):
-                    continue
-                try:
-                    val_int = int(round(float(val)))
-                except (ValueError, TypeError):
-                    continue
-                rows.append({"Ano": year, "Localidade": place, "Situacao": sit, "Sexo": sex, "Populacao": val_int})
-    except Exception as e:
-        logging.warning(f"Error parsing raw residence gender XLS: {e}")
-    return rows
+    """Backward-compatible alias for parse_raw_residence_xls."""
+    return parse_raw_residence_xls(content_bytes, year)
 
 
 def fetch_raw_input_files() -> List[Dict[str, Any]]:
     """Reads raw input files from GCS input_files or local scratch."""
     rows: List[Dict[str, Any]] = []
-    year_files = [(1940, "Brazil_1940_Residence.xls"), (2000, "Brazil_2000_Residence.xls")]
+    year_files = [(1940, "tab001.xls"), (2000, "tab002.xls")]
 
     for year, fname in year_files:
         scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1940_2000_Residence", fname)
@@ -269,30 +235,13 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             except Exception as e:
                 logging.warning(f"Could not load {fname} from GCS: {e}")
 
-    # Historical Residence by Gender (1940, 2000)
-    for year, tab_name in [(1940, "Brazil_AA1_1940_2000_tab001.xls"), (2000, "Brazil_AA1_1940_2000_tab002.xls")]:
-        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", tab_name)
-        alt_scratch = os.path.join("/data", "scratch", "input_files", tab_name)
-        local_path = scratch_file if os.path.isfile(scratch_file) else (alt_scratch if os.path.isfile(alt_scratch) else None)
-        if local_path:
-            with open(local_path, "rb") as f:
-                rows.extend(parse_raw_residence_gender_xls(f.read(), year))
-        else:
-            try:
-                from google.cloud import storage
-                client = storage.Client()
-                bucket = client.bucket("unresolved_mcf")
-                blob = bucket.blob(f"country/brazil/input_files/{tab_name}")
-                content = blob.download_as_bytes()
-                rows.extend(parse_raw_residence_gender_xls(content, year))
-            except Exception as e:
-                logging.warning(f"Could not load {tab_name} from GCS: {e}")
-
     # 1991 Residence
     map_91 = load_1991_mapping()
     cand_dirs = [
         os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1991_residence"),
         os.path.join("/data", "scratch", "input_files", "Brazil_1991_residence"),
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files"),
+        os.path.join("/data", "scratch", "input_files"),
     ]
     found_1991 = False
     for d in cand_dirs:
@@ -309,7 +258,7 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             from google.cloud import storage
             client = storage.Client()
             bucket = client.bucket("unresolved_mcf")
-            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91"))
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_residence/POPS91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91"))
             for b in blobs:
                 if b.name.upper().endswith(".XLS"):
                     content = b.download_as_bytes()

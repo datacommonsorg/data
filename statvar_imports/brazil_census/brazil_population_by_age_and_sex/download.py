@@ -41,8 +41,19 @@ from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-# Table 9514: População residente por sexo e idade (v/93 = População residente, c2/all = Sexo, c287/100362 = Total age)
+# Table 9514: População residente por sexo e idade (2022+ Census)
 TABLE_9514_API_URL = f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/v/93/p/all/c2/all/c287/all?formato=json"
+
+# Table 1378: População residente por sexo e idade (2010 Census)
+TABLE_1378_AGE_CODES = [
+    "0", "93070", "93084", "93085", "93087", "93088", "93089", "93090",
+    "93091", "93092", "93093", "93094", "93095", "93096", "93097", "93098",
+    "93099", "93100", "6653"
+]
+TABLE_1378_API_URL = (
+    f"{SIDRA_BASE_URL}/values/t/1378/n1/all/n2/all/n3/all/v/93/p/all/c1/0/c2/all"
+    f"/c287/{','.join(TABLE_1378_AGE_CODES)}/c455/0?formato=json"
+)
 
 COHORTS_0_14 = ['0 a 4 anos', '5 a 9 anos', '10 a 14 anos']
 COHORTS_15_59 = [
@@ -217,7 +228,7 @@ def parse_raw_1991_popu_age_sex(content_bytes: bytes, map_91: Dict[str, str]) ->
 
             fem_val = row.iloc[1]
             masc_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw, place_raw)
+            place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
 
             f_int = None
             m_int = None
@@ -288,6 +299,8 @@ def fetch_raw_historical_files() -> List[Dict[str, str]]:
     cand_dirs = [
         os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1991_gender"),
         os.path.join("/data", "scratch", "input_files", "Brazil_1991_gender"),
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files"),
+        os.path.join("/data", "scratch", "input_files"),
     ]
     found_1991 = False
     for d in cand_dirs:
@@ -304,7 +317,7 @@ def fetch_raw_historical_files() -> List[Dict[str, str]]:
             from google.cloud import storage
             client = storage.Client()
             bucket = client.bucket("unresolved_mcf")
-            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
             for b in blobs:
                 if b.name.upper().endswith(".XLS"):
                     content = b.download_as_bytes()
@@ -331,7 +344,30 @@ def download_all_years(
         all_rows.extend(raw_rows)
         logging.info(f"Loaded {len(raw_rows)} raw historical age/sex records for 1940, 1991, and 2000.")
 
-        # 2. Live SIDRA API (Table 9514 for 2022+)
+        # 2. Live SIDRA API (Table 1378 for 2010 Census)
+        raw_1378 = fetch_sidra_data(session, TABLE_1378_API_URL)
+        sidra_2010_rows: List[Dict[str, str]] = []
+        for r in raw_1378[1:]:
+            loc = str(r.get("D1N", "")).strip()
+            if loc == "Brasil":
+                loc = "Brazil"
+            idade = str(r.get("D6N") or r.get("D5N") or "").strip()
+            sexo = str(r.get("D5N") if r.get("D6N") else r.get("D4N") or "").strip()
+            val = str(r.get("V", "")).strip()
+            if val in ["-", "...", "..", ""]:
+                continue
+            sidra_2010_rows.append({
+                "Ano": str(r.get("D3N", "2010")).strip(),
+                "Localidade": loc,
+                "Idade": idade,
+                "Sexo": sexo,
+                "Populacao": val,
+            })
+        all_rows.extend(sidra_2010_rows)
+        all_rows.extend(compute_broad_age_aggregations(sidra_2010_rows, "2010"))
+        logging.info(f"Loaded {len(sidra_2010_rows)} records from SIDRA Table 1378 (2010).")
+
+        # 3. Live SIDRA API (Table 9514 for 2022+ Census)
         raw_json = fetch_sidra_data(session, TABLE_9514_API_URL)
         sidra_2022_rows: List[Dict[str, str]] = []
         for r in raw_json[1:]:
@@ -347,7 +383,7 @@ def download_all_years(
             })
         all_rows.extend(sidra_2022_rows)
 
-        # 3. Compute broad age aggregations (0To14, 15To59, 60OrMore) for 2022
+        # 4. Compute broad age aggregations (0To14, 15To59, 60OrMore) for 2022
         agg_rows = compute_broad_age_aggregations(sidra_2022_rows, "2022")
         all_rows.extend(agg_rows)
 
