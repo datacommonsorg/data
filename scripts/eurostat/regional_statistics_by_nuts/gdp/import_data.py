@@ -111,7 +111,7 @@ class EurostatGDPImporter:
             logging.info(f'Processing file: {input_file}')
             self.raw_df = pd.read_table(input_file)
             self.raw_df = self.raw_df.rename(columns=({
-                'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+                r'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
             }))
             self.raw_df['unit,geo\\time'] = self.raw_df[
                 'unit,geo\\time'].str.slice(2)

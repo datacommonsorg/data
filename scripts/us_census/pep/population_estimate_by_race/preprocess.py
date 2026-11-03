@@ -1242,7 +1242,7 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
             df['Geographic Area'] = "United States"
         return df
     except Exception as e:
-        logging.fatal(f"Error Downloading the file:", e)
+        logging.fatal("Error Downloading the file:", e)
 
 
 def add_future_yearurls():

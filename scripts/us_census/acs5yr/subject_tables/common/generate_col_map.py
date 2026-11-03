@@ -95,7 +95,7 @@ def process_zip_file(zip_file_path,
                     csv_reader = csv.reader(csv_file)
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
+                            year = filename.split('ACSST5Y')[1][:4]
                             column_map[year] = generate_stat_var_map(
                                 spec_dict, line, delimiter)
                             break

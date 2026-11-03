@@ -209,7 +209,7 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
     </tr>
 """
             form_params_html += form_input
-        form_params_html += f"""   <tr>
+        form_params_html += """   <tr>
       <td colspan="2" style="text-align:center; vertical-align:middle">
         <input type="submit" value="Submit">
       </td>

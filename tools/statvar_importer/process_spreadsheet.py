@@ -101,7 +101,7 @@ def gdrive_get_credentials(token_file: str = 'tokens.json'):
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            logging.info(f'Refreshing credentials')
+            logging.info('Refreshing credentials')
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(

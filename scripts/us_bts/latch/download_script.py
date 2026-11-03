@@ -194,7 +194,7 @@ def download_all_files_from_config(download_dir: str,
             # Heuristic for Socrata API pagination: check if URL contains $limit or $offset,
             # or if it's a common Socrata resource path (e.g., /resource/ABCD-EFGH.json)
             # This heuristic might need adjustment based on specific URL patterns.
-            elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or not '.' in os.path.basename(
+            elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or '.' not in os.path.basename(
                     parsed_url.path):
                 success = _download_paginated_socrata_file(
                     url=url, output_path=output_path)

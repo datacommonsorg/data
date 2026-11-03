@@ -256,7 +256,7 @@ def check_mcf_urls(nodes: dict[str, dict],
                 msg = cached_url.get('message', '')
                 counters.add_counter(f'url-cache-hits-{url_status}', 1)
             else:
-                counters.add_counter(f'url-lookups', 1)
+                counters.add_counter('url-lookups', 1)
                 url_status, msg = get_url_status(url)
                 url_status_cache[url] = {'status': url_status, 'message': msg}
                 counters.add_counter(f'url-status-{url_status}', 1)
@@ -394,7 +394,7 @@ def sanity_check_mcf(input_mcf: str,
     input_files = file_util.file_get_matching(input_mcf)
     for mcf_file in input_files:
         nodes = _get_nodes_from_file(mcf_file)
-        counters.add_counter(f'sanity-input-mcf-file', 1, mcf_file)
+        counters.add_counter('sanity-input-mcf-file', 1, mcf_file)
         logging.info(
             f'Loaded {len(nodes)} nodes from file for sanity check: {mcf_file}')
         context = {'file': mcf_file}

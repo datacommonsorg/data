@@ -273,9 +273,9 @@ def format_human_readable_name_from_properties(properties, is_composite):
     measured_property = properties["measured_property"]
 
     if measured_property == "expectedLoss":
-        statvar_name = f"Annual Expected Loss from Natural Hazard Impact"
+        statvar_name = "Annual Expected Loss from Natural Hazard Impact"
     elif measured_property == "femaNaturalHazardRiskIndex":
-        statvar_name = f"FEMA National Risk Index for Natural Hazard Impact"
+        statvar_name = "FEMA National Risk Index for Natural Hazard Impact"
     else:  # community resilience, social vulnerability
         m_prop_with_spaces = add_spaces_before_capital_letters(
             measured_property)

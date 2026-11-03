@@ -136,7 +136,7 @@ def main(argv):
 
         except FileNotFoundError:
             logging.fatal(
-                f"Error: Python interpreter or download script not found. Check your paths."
+                "Error: Python interpreter or download script not found. Check your paths."
             )
             sys.exit(1)
         except Exception as e:

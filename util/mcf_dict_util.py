@@ -336,7 +336,7 @@ def drop_nodes(node_list: list, dcid_list: list) -> list:
     """
     ret_list = []
     for node_dict in node_list:
-        if not get_dcid_node(node_dict) in dcid_list:
+        if get_dcid_node(node_dict) not in dcid_list:
             ret_list.append(node_dict.copy())
     return ret_list
 

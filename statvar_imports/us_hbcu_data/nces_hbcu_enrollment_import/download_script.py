@@ -74,7 +74,7 @@ def download_file(url, input_file_path):
                 )
                 break
     except Exception as e:
-        logging.fatal(f"Error during the main loop")
+        logging.fatal("Error during the main loop")
     finally:
         driver.quit()
         logging.info("ChromeDriver has been closed.")

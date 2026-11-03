@@ -72,7 +72,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
-            'freq,indic_de,unit,geo\TIME_PERIOD': 'indic_de,unit,geo\\time'
+            r'freq,indic_de,unit,geo\TIME_PERIOD': 'indic_de,unit,geo\\time'
         }))
         df['indic_de,unit,geo\\time'] = df['indic_de,unit,geo\\time'].str.slice(
             2)

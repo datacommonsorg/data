@@ -77,7 +77,7 @@ class EuroStatFruitsVegetables(EuroStat):
         "incomequin":
             "\nincome: [{property_value}]",
         "healthbehavior":
-            "\healthBehaviour: dcs:{property_value}",
+            r"\healthBehaviour: dcs:{property_value}",
         "healthbehavior_bmi":
             "__{property_value}",
     }
@@ -260,7 +260,7 @@ def main(_):
             loader.generate_tmcf()
             logging.info("Processing completed!")
         except Exception as e:
-            logging.fatal(f'Download error')
+            logging.fatal('Download error')
 
 
 if __name__ == "__main__":

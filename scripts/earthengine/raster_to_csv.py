@@ -242,7 +242,7 @@ def get_raster_data_point(
         (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
     if lat > 90 or lat < -90 or lng > 180 or lng < -180:
         logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
-        counter.add_counter(f'invalid-lat-lng', 1)
+        counter.add_counter('invalid-lat-lng', 1)
         return None
     data['latitude'] = lat
     data['longitude'] = lng

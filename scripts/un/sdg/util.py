@@ -185,9 +185,9 @@ def format_description(s):
         Curated string.
     '''
     # Remove <=2 levels of ().
-    formatted = re.sub('\((?:[^)(]|\([^)(]*\))*\)', '', s)
+    formatted = re.sub(r'\((?:[^)(]|\([^)(]*\))*\)', '', s)
     # Remove <=2 levels of [].
-    formatted = re.sub('\[(?:[^)(]|\[[^)(]*\])*\]', '', formatted)
+    formatted = re.sub(r'\[(?:[^)(]|\[[^)(]*\])*\]', '', formatted)
     # Remove references indicated by 'million USD'.
     formatted = formatted.split(', million USD')[0]
     # Remove extra spaces.

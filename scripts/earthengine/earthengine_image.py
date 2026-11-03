@@ -604,7 +604,7 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
         fileFormat='GeoTIFF')
     task.start()
     print(f'Created EE task: {task}')
-    print(f'Visit https://code.earthengine.google.com/tasks to view status.')
+    print('Visit https://code.earthengine.google.com/tasks to view status.')
     return task
 
 

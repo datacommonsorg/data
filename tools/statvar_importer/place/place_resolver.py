@@ -336,8 +336,7 @@ class PlaceResolver:
         """Returns dictionary with dcids for each place resolved using the DC API."""
         if not self._config.get('dc_api_key', ''):
             logging.log_every_n(
-                logging.DEBUG,
-                f'Skipping DC API resolve as dc_api_key not set.',
+                logging.DEBUG, 'Skipping DC API resolve as dc_api_key not set.',
                 self._log_every_n)
             return {}
 
@@ -461,7 +460,7 @@ class PlaceResolver:
                 cached_place = self._get_cache_value(place_key, 'latitude')
                 if cached_place:
                     self._counters.add_counter(
-                        f'dc-api-resolve-latlng-cache-hits', 1)
+                        'dc-api-resolve-latlng-cache-hits', 1)
                     results[key].update(cached_place)
                 else:
                     resolve_places.append({
@@ -481,9 +480,9 @@ class PlaceResolver:
                 logging.DEBUG,
                 f'Resolving {len(resolve_places)} lat/long places {resolve_places}',
                 self._log_every_n)
-            self._counters.add_counter(f'dc-api-resolve-latlng-places',
+            self._counters.add_counter('dc-api-resolve-latlng-places',
                                        len(resolve_places))
-            self._counters.add_counter(f'dc-api-resolve-latlng-calls', 1)
+            self._counters.add_counter('dc-api-resolve-latlng-calls', 1)
             resolved_place_ids = dc_api_batched_wrapper(
                 function=dc_api_resolve_latlng,
                 dcids=resolve_places,
@@ -574,8 +573,8 @@ class PlaceResolver:
                 results[key] = place
                 results[key].update(place_result)
                 self._set_cache_value(place_name, place_result)
-                self._counters.add_counter(f'place-name-match-results', 1)
-            self._counters.add_counter(f'place-name-match-lookups', 1)
+                self._counters.add_counter('place-name-match-results', 1)
+            self._counters.add_counter('place-name-match-lookups', 1)
         return results
 
     def get_maps_placeid(
@@ -600,9 +599,9 @@ class PlaceResolver:
       dictionary with attributes such as placeId, latitude, and longitude.
     """
         if not name:
-            logging.log_every_n(
-                logging.DEBUG, f'Unable to resolve maps place with empty name',
-                self._log_every_n)
+            logging.log_every_n(logging.DEBUG,
+                                'Unable to resolve maps place with empty name',
+                                self._log_every_n)
             return {}
 
         if self._config.get('maps_api_text_search', True):
@@ -619,7 +618,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.log_every_n(
                 logging.ERROR,
-                f'No maps key. Please set --maps_api_key for place lookup.',
+                'No maps key. Please set --maps_api_key for place lookup.',
                 self._log_every_n)
             return {}
         params = {
@@ -683,7 +682,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.log_every_n(
                 logging.ERROR,
-                f'No maps key. Please set --maps_api_key for place lookup.',
+                'No maps key. Please set --maps_api_key for place lookup.',
                 self._log_every_n)
             return {}
         query_tokens = [name]
@@ -973,7 +972,7 @@ class PlaceResolver:
                         # Found a cached dcid for the place.
                         # Copy over the properties to resolved_places.
                         self._counters.add_counter(
-                            f'place-resolver-name-cache-hits', 1)
+                            'place-resolver-name-cache-hits', 1)
                         resolved_place = place
             if resolved_place:
                 resolved_places[key] = resolved_place
@@ -1086,8 +1085,7 @@ class PlaceResolver:
                 config=self._config.get_configs(),
             )
             self._counters.add_counter(
-                f'dc-api-prop-value-containedInPlace-lookups',
-                len(lookup_dcids))
+                'dc-api-prop-value-containedInPlace-lookups', len(lookup_dcids))
             # Cache the property:value for the response.
             for dcid, prop_values in dc_api_resp.items():
                 val = prop_values.get('containedInPlace')

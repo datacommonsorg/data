@@ -1116,7 +1116,7 @@ class PopulationEstimateBySex:
             sv_list = ['Count_Person_Female', 'Count_Person_Male']
             self._generate_mcf(sv_list)
             self._generate_tmcf()
-            logging.info(f'Processing is completed successfully!')
+            logging.info('Processing is completed successfully!')
         else:
             logging.fatal(
                 "Aborting output files as no of files to process not matching processed files"

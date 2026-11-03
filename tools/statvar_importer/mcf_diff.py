@@ -193,7 +193,7 @@ def diff_mcf_node_pvs(node_1: dict,
     for d in diff:
         diff_str.append(d)
         if d[0] == ' ':
-            counters and counters.add_counter(f'PVs-matched', 1)
+            counters and counters.add_counter('PVs-matched', 1)
         else:
             prop = ''
             value = ''
@@ -224,13 +224,13 @@ def diff_mcf_node_pvs(node_1: dict,
 
         if len(node1) > 0:
             if len(node2) > 0:
-                counters and counters.add_counter(f'nodes-with-diff', 1)
+                counters and counters.add_counter('nodes-with-diff', 1)
             else:
-                counters and counters.add_counter(f'nodes-missing-in-mcf2', 1)
+                counters and counters.add_counter('nodes-missing-in-mcf2', 1)
         else:
-            counters and counters.add_counter(f'nodes-missing-in-mcf1', 1)
+            counters and counters.add_counter('nodes-missing-in-mcf1', 1)
     else:
-        counters and counters.add_counter(f'nodes-matched', 1)
+        counters and counters.add_counter('nodes-matched', 1)
     return has_diff, '\n'.join(diff_str), pvs_added, pvs_deleted, pvs_modified
 
 
@@ -254,7 +254,7 @@ def diff_mcf_nodes(nodes1: dict,
     diff_str = []
     for dcid1 in nodes1.keys():
         if dcid1 not in nodes2:
-            counters.add_counter(f'dcid-missing-in-nodes2', 1,
+            counters.add_counter('dcid-missing-in-nodes2', 1,
                                  f'dcid={dcid1}, PVs={nodes1[dcid1]}')
 
     # Compare PVs across all nodes.
@@ -273,7 +273,7 @@ def diff_mcf_nodes(nodes1: dict,
     dcids2 = set(nodes2.keys())
     diff = dcids2.difference(dcids1)
     for dcid2 in diff:
-        counters.add_counter(f'dcid-missing-in-nodes1', 1,
+        counters.add_counter('dcid-missing-in-nodes1', 1,
                              f'dcid={dcid2}, PVs={nodes2[dcid2]}')
     return '\n'.join(diff_str)
 
@@ -382,8 +382,8 @@ def diff_mcf_files(file1: str,
 
 def main(_):
     if not _FLAGS.mcf1 or not _FLAGS.mcf2:
-        print(f'Please provide two MCF files to compare with --mcf1=<file1>'
-              f' --mcf2=<file2>')
+        print('Please provide two MCF files to compare with --mcf1=<file1>'
+              ' --mcf2=<file2>')
     else:
         diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2, get_diff_config())
 

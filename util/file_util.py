@@ -1119,8 +1119,7 @@ def file_get_csv_reader_options(
     if not delim_chars:
         # Get non alphanumeric characters from data.
         delim_chars = {c for c in rows[0].strip() if not c.isalnum()}
-        logging.debug(f'Looking for delimiter in %s among %s', file,
-                      delim_chars)
+        logging.debug('Looking for delimiter in %s among %s', file, delim_chars)
     char_counts = {c: [] for c in delim_chars}
     for index in range(1, len(rows) - 1):
         # Count possible delimiter characters per row

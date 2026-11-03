@@ -157,7 +157,7 @@ class Process_ETMCF_Test(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with self.assertRaisesRegex(
                     Exception,
-                    "Exactly one '\?' expected in variableMeasured*"):
+                    r"Exactly one '\?' expected in variableMeasured*"):
                 process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
                                                     input_etmcf, input_csv,
                                                     output_tmcf, output_csv)
