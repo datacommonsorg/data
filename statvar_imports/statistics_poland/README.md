@@ -70,9 +70,9 @@ statvar_imports/statistics_poland/test/StatisticsPoland_output_counters.csv \
 ```
 
 ## Testing
-Run the hermetic unit tests via pytest:
+Run the hermetic unit tests via the repository test runner:
 ```bash
-.env/bin/python -m pytest statvar_imports/statistics_poland -v
+./run_tests.sh -p statvar_imports/statistics_poland
 ```
 
 ## Validation & Quality Rules
