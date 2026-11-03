@@ -34,7 +34,7 @@ Main entrypoint executed by the automated import pipeline (`manifest.json`):
 2. Runs `preprocess_gpcc_spi.py` to convert the NetCDF files into 1-degree grid CSVs (`2010-12` onward) in `output_files/`.
 3. Runs `gpcc_spi_aggregation.py` to compute area-weighted place aggregations in `output_files/aggregations/`.
 4. Shards `output_files/gpcc_spi_pearson_09.csv` by year using `tools/pd_csv.sh` and runs `scripts/earthengine/process_events.py` (`events_drought_gpcc_spi_9m_polygon.py`) to generate 9-month SPI polygon drought events and observations under `output_files/events_spi_9m_polygon/`.
-5. Reconciles overlapping drought event IDs against the previous production baseline (`latest_version.txt`) and generates companion `node_mcf` files (`drought_spi_9m_polygon_events_nodes.mcf` and `drought_spi_9m_polygon_svobs_nodes.mcf`).
+5. Generates companion `node_mcf` files (`drought_spi_9m_polygon_events_nodes.mcf` and `drought_spi_9m_polygon_svobs_nodes.mcf`) so local resolution resolves all `Quantity`, `GeoCoordinates`, and `DroughtEvent` references.
 
 ### `download.py`
 Downloads `gpcc-spi-pearson-{01,03,06,09,36,72}.nc` from `https://www.ncei.noaa.gov/pub/data/nidis/gpcc/spi-pearson/` into `input_files/`.
