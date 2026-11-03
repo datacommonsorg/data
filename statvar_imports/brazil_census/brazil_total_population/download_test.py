@@ -173,12 +173,29 @@ class DownloadTest(unittest.TestCase):
         metadata_csv = os.path.join(SCRIPT_DIR, f"{imp_name}_metadata.csv")
         places_csv = os.path.join(SCRIPT_DIR, "..", "brazil_places_resolved.csv")
         out_prefix = os.path.join(self.test_dir, f"{imp_name}_out")
+        import csv
+        import json
+
+        # Create hermetic test config with reconcile_nodes=False to avoid external DC API calls
+        meta = {"reconcile_nodes": False}
+        if os.path.isfile(metadata_csv):
+            with open(metadata_csv, encoding="utf-8") as f:
+                for row in csv.reader(f):
+                    if row and len(row) == 2 and not row[0].startswith("#"):
+                        meta[row[0].strip()] = row[1].strip()
+            meta["reconcile_nodes"] = False
+            if "header_rows" in meta:
+                meta["header_rows"] = int(meta["header_rows"])
+        cfg_json = os.path.join(self.test_dir, "test_config.json")
+        with open(cfg_json, "w", encoding="utf-8") as f:
+            json.dump(meta, f)
+
         cmd = [
             sys.executable,
             processor_script,
             f"--input_data={sample_csv}",
             f"--pv_map={pv_map}",
-            f"--config_file={metadata_csv}",
+            f"--config_file={cfg_json}",
             f"--places_resolved_csv={places_csv}",
             f"--output_path={out_prefix}",
         ]

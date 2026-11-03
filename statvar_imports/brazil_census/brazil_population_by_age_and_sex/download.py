@@ -42,7 +42,17 @@ from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9514: População residente por sexo e idade (2022+ Census)
-TABLE_9514_API_URL = f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/v/93/p/all/c2/all/c287/all?formato=json"
+# 100362 is Total, followed by 5-year cohorts and 100 anos ou mais (6653).
+# /c286/113635 selects "Total" for Forma de declaração da idade to avoid duplicates.
+TABLE_9514_AGE_CODES = [
+    "100362", "93070", "93084", "93085", "93086", "93087", "93088", "93089",
+    "93090", "93091", "93092", "93093", "93094", "93095", "93096", "93097",
+    "93098", "49108", "49109", "60040", "60041", "6653"
+]
+TABLE_9514_API_URL = (
+    f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/v/93/p/all/c2/all"
+    f"/c287/{','.join(TABLE_9514_AGE_CODES)}/c286/113635?formato=json"
+)
 
 # Table 1378: População residente por sexo e idade (2010 Census)
 TABLE_1378_AGE_CODES = [
