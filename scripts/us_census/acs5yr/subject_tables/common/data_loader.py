@@ -210,7 +210,6 @@ class SubjectTableDataLoaderBase:
         self.mcf_dict = {}
 
         # initialize a dictionary of counters
-        # TODO: Add a means to fill the git commit SHA
         self.counter_dict = {
             "summary": {
                 "column map generator commit SHA":
