@@ -277,7 +277,8 @@ Need filters, scaling, aggregation, or computed values? See
 [Advanced processing](docs/advanced_processing.md). For the full PV map
 reference, see [PV map guide](docs/pv_map.md). To find existing schema for a
 label, see `schema_matcher.py` in [Schema tools](schema/README.md). To generate
-a PV map automatically, see [tools/agentic_import](../agentic_import/README.md).
+a PV map automatically, see
+[tools/agentic_import](https://github.com/datacommonsorg/data/tree/master/tools/agentic_import).
 
 ## Write a config
 
@@ -498,7 +499,7 @@ the Data Commons API, so it needs network access. `-e=false -ep=false` skips the
 reference checks, but the statistics checks still call the API.
 
 Need readable StatVar names? See the tip in
-[Schema tools](schema/README.md#tip-generate-readable-statvar-names).
+[Schema tools](schema/README.md#generate-readable-statvar-names).
 
 ## Common problems
 
@@ -517,17 +518,17 @@ For more, see [Troubleshooting](docs/troubleshooting.md).
 
 ## Related tools and docs
 
-| Task                                                        | Where                                                                             |
-| ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| PV map reference                                            | [PV map guide](docs/pv_map.md)                                                    |
-| Filters, scaling, aggregation, defaults, large inputs       | [Advanced processing](docs/advanced_processing.md)                                |
-| All config settings                                         | [Advanced configuration](docs/config.md)                                          |
-| A run produced fewer rows than expected                     | [Troubleshooting](docs/troubleshooting.md)                                        |
-| Resolve many place names                                    | [Place tools](place/README.md)                                                    |
-| Find existing schema, draft PV maps, generate StatVar names | [Schema tools](schema/README.md)                                                  |
-| Compare or merge MCF, sample large inputs                   | [Tools](docs/tools.md)                                                            |
-| Generate a PV map automatically                             | [tools/agentic_import](../agentic_import/README.md)                               |
-| Review an import change before a pull request               | [dc-import-code-review skill](../../agents/skills/dc-import-code-review/SKILL.md) |
-| Diagnose a failed or changed production refresh             | [dc-import-diagnostics skill](../../agents/skills/dc-import-diagnostics/SKILL.md) |
-| Validation rules for auto-refresh                           | [Import validation](../import_validation/README.md)                               |
-| Run the unit tests                                          | `./run_tests.sh -p tools/statvar_importer`                                        |
+| Task                                                        | Where                                                                                           |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| PV map reference                                            | [PV map guide](docs/pv_map.md)                                                                  |
+| Filters, scaling, aggregation, defaults, large inputs       | [Advanced processing](docs/advanced_processing.md)                                              |
+| All config settings                                         | [Advanced configuration](docs/config.md)                                                        |
+| A run produced fewer rows than expected                     | [Troubleshooting](docs/troubleshooting.md)                                                      |
+| Resolve many place names                                    | [Place tools](place/README.md)                                                                  |
+| Find existing schema, draft PV maps, generate StatVar names | [Schema tools](schema/README.md)                                                                |
+| Compare or merge MCF, sample large inputs                   | [Tools](docs/tools.md)                                                                          |
+| Generate a PV map automatically                             | [tools/agentic_import](https://github.com/datacommonsorg/data/tree/master/tools/agentic_import) |
+| Review an import change before a pull request               | [dc-import-code-review skill](../../agents/skills/dc-import-code-review/SKILL.md)               |
+| Diagnose a failed or changed production refresh             | [dc-import-diagnostics skill](../../agents/skills/dc-import-diagnostics/SKILL.md)               |
+| Validation rules for auto-refresh                           | [Import validation](../import_validation/README.md)                                             |
+| Run the unit tests                                          | `./run_tests.sh -p tools/statvar_importer`                                                      |

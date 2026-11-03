@@ -308,7 +308,7 @@ generated DCID. The default is `measuredValue,StatisticalVariable`.
 the StatVar properties, or `llm_generate_statvar_name,True` with
 `--google_genai_key` to generate names with Gemini. To name StatVars after
 processing instead, see the
-[tip in Schema tools](../schema/README.md#tip-generate-readable-statvar-names).
+[tip in Schema tools](../schema/README.md#generate-readable-statvar-names).
 
 **Schemaless StatVars.** With `schemaless,True`, properties that start with a
 capital letter and aren't in the Data Commons schema are allowed. They are used
@@ -324,7 +324,7 @@ in the DCID and written as comments in the StatVar MCF. See
 | `spell_check`             | Set to `False` to skip spell checks of the generated StatVars.                                                 |
 | `spell_allow_words`       | Words the spell check accepts, for example `"prediabetes,sigmoidoscopy"`.                                      |
 
-## Defaults, overrides, and roll-ups
+## Defaults and roll-ups
 
 ### Defaults
 

@@ -341,7 +341,7 @@ WARNING: Don't use `#Regex` on a file-name key. It runs on every cell's value,
 not on the file name, and corrupts the data.
 
 For PVs that apply to all files, see `DEFAULT_PV` in
-[Advanced processing](advanced_processing.md#defaults-overrides-and-roll-ups).
+[Advanced processing](advanced_processing.md#defaults-and-roll-ups).
 
 ## JSON and Python dictionary formats
 
