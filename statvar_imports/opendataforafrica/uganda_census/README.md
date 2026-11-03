@@ -4,7 +4,7 @@
 
 - **Source**: [Uganda Open Data for Africa](https://uganda.opendataforafrica.org/)
 - **Publisher**: Uganda Bureau of Statistics (UBOS)
-- **Import Type**: `Semi-Automated`
+- **Import Type**: `Automated` (Weekly cron schedule)
 - **Schedule**: Weekly (`0 5 * * 1`)
 - **Coverage**: Demographics, Health, Education, Census populations (1969 – 2016)
 - **Entity Resolution**:
