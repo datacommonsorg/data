@@ -265,7 +265,7 @@ class CensusPrimaryAbstractDataLoaderBase:
 
         key = "{0}_{1}".format(
             row["columnName"],
-            place_of_residence if place_of_residence != None else "Total")
+            place_of_residence if place_of_residence is not None else "Total")
         self.stat_var_index[key] = name
 
         self.mcf.append(row)

@@ -558,6 +558,6 @@ def _parse_dict(dict_str: str) -> dict:
     """Returns a dict parsed from text string."""
     try:
         return ast.literal_eval(dict_str)
-    except (NameError, ValueError) as e:
+    except (NameError, ValueError):
         logging.error(f'Unable to parse dict {dict_str}')
     return {}

@@ -195,12 +195,12 @@ def filter_data_series(data: dict,
                 pvs.pop('#Key')
             data.pop(date)
             data_dropped = True
-            counters.add_counter(f'filter-data-dropped', 1)
+            counters.add_counter('filter-data-dropped', 1)
         else:
             prev_value = value
             prev_dt = dt
     if data_dropped:
-        counters.add_counter(f'filter-data-series-with-drops', 1)
+        counters.add_counter('filter-data-series-with-drops', 1)
     return data
 
 

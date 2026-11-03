@@ -94,7 +94,7 @@ def process_file(filepath, year):
 
     except ImportError:
         print(
-            f"Error: Required library missing. Please install pandas and openpyxl: pip install pandas openpyxl"
+            "Error: Required library missing. Please install pandas and openpyxl: pip install pandas openpyxl"
         )
         return
     except Exception as e:

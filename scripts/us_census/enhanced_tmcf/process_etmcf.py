@@ -109,7 +109,6 @@ def _process_var_measured_new_column(
     # Step 1: split on '&'
     query_format = source_str + "?"
     query_split = opaque_portion.split("&")
-    num_params = len(query_split)
 
     ordered_csv_column_names = []
     index = 0
@@ -243,7 +242,6 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
     new_csv_columns: List[NewCSVColumn] = []
 
     T = ""
-    data_files = ""
     tmcf_out = os.path.join(output_folder, output_tmcf_filename + ".tmcf")
     csv_out = os.path.join(output_folder, output_csv_filename + ".csv")
 
@@ -261,7 +259,6 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
                 T = line.split("=")[1].replace("\n", "")
                 continue
             elif line.startswith("DATAFILES="):
-                data_files = line.split("=")[1].replace("\n", "")
                 continue
             elif line == "" or line == "\n":
                 if not output_started:

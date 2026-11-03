@@ -243,7 +243,7 @@ def main(_):
     logging.info(f'Repo root directory: {repo_dir}')
     cfg = configs.ExecutorConfig()
     override_config = {}
-    logging.info(f'Reading Cloud scheduler configs from secret manager.')
+    logging.info('Reading Cloud scheduler configs from secret manager.')
     scheduler_config_dict = _get_scheduler_config(
         _FLAGS.gcp_project_id, _FLAGS.scheduler_config_secret)
     if mode == 'update':

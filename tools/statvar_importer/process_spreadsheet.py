@@ -101,14 +101,14 @@ def gdrive_get_credentials(token_file: str = 'tokens.json'):
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            logging.info(f'Refreshing credentials')
+            logging.info('Refreshing credentials')
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 f'{_HOME_DIR}/.config/gspread/credentials.json', _SCOPES)
             creds = flow.run_local_server(port=8100)
         # Save the credentials for the next run
-        with file_utli.FileIO(token_file, 'w') as token:
+        with file_util.FileIO(token_file, 'w') as token:
             token.write(creds.to_json())
     return creds
 
@@ -298,8 +298,8 @@ def process_spreadsheets(
                     'pv_map_files': [],
                 }
                 if parallelism > 1:
-                    task = pool.apply_async(stat_var_processor.process,
-                                            kwds=process_args)
+                    pool.apply_async(stat_var_processor.process,
+                                     kwds=process_args)
                 else:
                     stat_var_processor.process(**process_args)
             pool.close()
