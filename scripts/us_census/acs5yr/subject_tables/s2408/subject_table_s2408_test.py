@@ -13,6 +13,7 @@
 # limitations under the License.
 """Test for S2408 of the subject table."""
 
+import csv
 import os
 import tempfile
 import unittest
@@ -112,3 +113,43 @@ class TestSubjectTableS2408(unittest.TestCase):
                 test_csv, expected_csv = _read_files(test_csv_path,
                                                      paths['csv'])
                 self.assertEqual(test_csv, expected_csv)
+
+    def test_process_dataframe_drops_unresolved_places(self):
+        script_path = os.path.dirname(os.path.abspath(__file__))
+        paths = _get_paths(os.path.join(script_path, '.'))
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_csv_path = os.path.join(
+                tmp_dir, 'ACSST5Y2023.S2408_data_with_overlays_test.csv')
+            col_name = (
+                'Estimate!!Total!!Civilian employed population 16 years and '
+                'over')
+            rows = [
+                ['GEO_ID', 'S2408_C01_001E'],
+                ['id', col_name],
+                ['1400000US47001020100', '2064'],
+                ['9500000US0199999', '1500'],
+                ['0200000US1', '5000'],
+            ]
+            with open(input_csv_path, 'w', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerows(rows)
+
+            process_subject_tables(table_prefix='test_unresolved',
+                                   input_path=input_csv_path,
+                                   output_dir=tmp_dir,
+                                   column_map_path=paths['cmap'],
+                                   spec_path=paths['spec'],
+                                   debug=False,
+                                   delimiter='!!',
+                                   has_percent=True)
+
+            test_csv_path = os.path.join(tmp_dir, 'test_unresolved_cleaned.csv')
+            with open(test_csv_path, 'r') as f:
+                result_rows = list(csv.DictReader(f))
+
+            self.assertEqual(len(result_rows), 1)
+            self.assertEqual(result_rows[0]['Place'], 'geoId/47001020100')
+            self.assertEqual(result_rows[0]['StatVar'],
+                             'dcid:Count_Person_Civilian_Employed')
+            self.assertEqual(float(result_rows[0]['Quantity']), 2064.0)
