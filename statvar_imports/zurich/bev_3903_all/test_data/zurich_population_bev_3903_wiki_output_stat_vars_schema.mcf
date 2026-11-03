@@ -1,0 +1,5 @@
+Node: dcid:nativity
+typeOf: dcs:Property
+name: "nativity"
+rangeIncludes: dcid:NativityEnum,dcid:USC_PlaceOfBirthEnum
+
