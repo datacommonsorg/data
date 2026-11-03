@@ -324,6 +324,17 @@ class DownloadTest(unittest.TestCase):
                 spy_io.assert_called_once_with(out_path, 'r', encoding='utf-8')
             pd.testing.assert_frame_equal(loaded, df)
 
+    def test_fixture_schema_and_coverage(self):
+        fixture_path = os.path.join(_SCRIPT_DIR, 'test_data',
+                                    'daily_wages_input.csv')
+        loaded = download.load_baseline_csv(fixture_path)
+        self.assertEqual(list(loaded.columns), download.COLUMNS)
+        self.assertLess(len(loaded), 100)
+        self.assertEqual(
+            set(loaded['year_type']),
+            {'Agriculture Year', 'Calendar Year'},
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
