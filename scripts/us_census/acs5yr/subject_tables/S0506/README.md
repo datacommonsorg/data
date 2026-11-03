@@ -61,7 +61,9 @@ python3 process.py \
 To run the Data Commons import tool (`genmcf`) locally without external API existence-check errors (using the [Data Commons Import Tool JAR](https://github.com/datacommonsorg/import/releases)):
 
 ```bash
-curl -L -O https://datacommons.org/import-tool/datacommons-import-tool-0.1-jar-with-dependencies.jar
+# Download the latest release JAR from https://github.com/datacommonsorg/import/releases
+curl -L -o datacommons-import-tool-0.1-jar-with-dependencies.jar \
+  https://github.com/datacommonsorg/import/releases/latest/download/datacommons-import-tool.jar
 java -Xmx32g -jar datacommons-import-tool-0.1-jar-with-dependencies.jar genmcf \
   -e=false \
   -r=SUMMARY \

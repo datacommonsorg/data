@@ -13,6 +13,7 @@
 # limitations under the License.
 """Common data processing module for ACS Subject Tables"""
 import os
+import subprocess
 import sys
 import json
 from zipfile import ZipFile
@@ -28,6 +29,20 @@ from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
 _COLUMN_BATCH_SIZE = 100
+
+
+def _get_git_commit_sha(file_path):
+    """Returns the latest git commit SHA for the given file path, or empty string."""
+    try:
+        return subprocess.check_output(
+            ['git', 'log', '-n', '1', '--format=%H', '--', file_path],
+            cwd=_SCRIPT_PATH,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).strip()
+    except Exception:
+        return ''
+
 
 # TODO: Consider using logs for logging warning messages for debug at a later
 # date
@@ -198,9 +213,13 @@ class SubjectTableDataLoaderBase:
         # TODO: Add a means to fill the git commit SHA
         self.counter_dict = {
             "summary": {
-                "column map generator commit SHA": "",
-                "data processing script commit SHA": "",
-                "total StatVarObservations": 0,
+                "column map generator commit SHA":
+                    _get_git_commit_sha(
+                        os.path.join(_SCRIPT_PATH, 'generate_col_map.py')),
+                "data processing script commit SHA":
+                    _get_git_commit_sha(os.path.abspath(__file__)),
+                "total StatVarObservations":
+                    0,
             },
         }
 
