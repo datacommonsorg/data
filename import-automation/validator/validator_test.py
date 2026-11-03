@@ -29,12 +29,14 @@ import main as validator_main
 class ValidatorTest(unittest.TestCase):
 
     @mock.patch('main.ValidationRunner')
+    @mock.patch('main.ImportDiffer')
     @mock.patch('main.bigquery_differ.run_bigquery_differ')
     @mock.patch('main.file_util.file_copy')
     @mock.patch('main.file_util.file_get_matching')
     @mock.patch('main.storage.Client')
     def test_run_validation_job_staging(self, mock_storage_cls, mock_matching,
                                         mock_copy, mock_bq_differ,
+                                        mock_import_differ_cls,
                                         mock_runner_cls):
         mock_gcs = mock_storage_cls.return_value
         mock_bucket = mock.MagicMock()
@@ -71,6 +73,11 @@ class ValidatorTest(unittest.TestCase):
         mock_gcs.list_blobs.return_value = mock_iterator
 
         mock_matching.return_value = ['gs://bucket/file.mcf']
+        mock_import_differ = mock_import_differ_cls.return_value
+        mock_import_differ.run_differ.return_value = {
+            'obs_diff_count': 10,
+            'schema_diff_count': 0,
+        }
         mock_bq_differ.return_value = {
             'obs_diff_count': 10,
             'schema_diff_count': 0,
@@ -79,6 +86,7 @@ class ValidatorTest(unittest.TestCase):
         mock_runner = mock_runner_cls.return_value
         mock_runner.run_validations.return_value = (True, [])
 
+        # Default (run_bq_differ=False): uses native Python ImportDiffer
         exit_code = validator_main.run_validation_job(
             absolute_import_name='scripts/us_fed:treasury',
             import_config_str='{"gcp_project_id": "test-proj"}',
@@ -88,10 +96,39 @@ class ValidatorTest(unittest.TestCase):
         )
 
         self.assertEqual(exit_code, 0)
+        mock_import_differ.run_differ.assert_called_once()
+        mock_bq_differ.assert_not_called()
         summary_blob_key = 'scripts/us_fed/treasury/2026_09_17/import_summary.json'
         self.assertIn(summary_blob_key, uploaded_blobs)
         updated_summary = json.loads(uploaded_blobs[summary_blob_key])
         self.assertEqual(updated_summary['status'], 'STAGING')
+
+        # When run_bq_differ=True: uses BigQuery differ
+        mock_import_differ.run_differ.reset_mock()
+        exit_code_bq = validator_main.run_validation_job(
+            absolute_import_name='scripts/us_fed:treasury',
+            import_config_str='{"gcp_project_id": "test-proj"}',
+            version_override='',
+            bucket_name='test-bucket',
+            bq_dataset='test_dataset',
+            run_bq_differ=True,
+        )
+        self.assertEqual(exit_code_bq, 0)
+        mock_bq_differ.assert_called_once()
+        mock_import_differ.run_differ.assert_not_called()
+
+        # When ValidationRunner reports a failure: returns exit_code=1 and records VALIDATION status
+        mock_runner.run_validations.return_value = (False, [])
+        exit_code_fail = validator_main.run_validation_job(
+            absolute_import_name='scripts/us_fed:treasury',
+            import_config_str='{"gcp_project_id": "test-proj"}',
+            version_override='',
+            bucket_name='test-bucket',
+            bq_dataset='test_dataset',
+        )
+        self.assertEqual(exit_code_fail, 1)
+        failed_summary = json.loads(uploaded_blobs[summary_blob_key])
+        self.assertEqual(failed_summary['status'], 'VALIDATION')
 
     @mock.patch('main.merge_and_save_config')
     @mock.patch('main._read_gcs_text')
