@@ -70,7 +70,7 @@ class ProcessEventsTest(unittest.TestCase):
         df_actual = pd.read_csv(actual_file)
         self.assertEqual(
             df_expected.columns.to_list(), df_actual.columns.to_list(),
-            f'Found different columns in CSV files:' +
+            'Found different columns in CSV files:' +
             f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
             f'actual:{actual_file}:{df_actual.columns.to_list()}, ')
         if ignore_columns:
@@ -83,7 +83,7 @@ class ProcessEventsTest(unittest.TestCase):
         df_actual = df_actual.sort_values(by=df_expected.columns.to_list(),
                                           ignore_index=True)
         self.assertTrue(
-            df_expected.equals(df_actual), f'Found diffs in CSV rows:' +
+            df_expected.equals(df_actual), 'Found diffs in CSV rows:' +
             f'"{actual_file}" vs "{expected_file}":')
 
     def test_process(self):

@@ -34,7 +34,7 @@ import mcf_filter
 from mcf_file_util import load_mcf_nodes
 
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
+from mcf_file_util import write_mcf_nodes
 
 
 class TestMCFFilter(unittest.TestCase):

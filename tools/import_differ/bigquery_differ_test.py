@@ -158,6 +158,25 @@ class BigQueryDifferTest(unittest.TestCase):
 
             self.assertEqual(mock_client.delete_table.call_count, 4)
 
+    @mock.patch('bigquery_differ.storage.fileio.BlobWriter')
+    @mock.patch('bigquery_differ.file_get_gcs_blob')
+    def test_open_text_stream_gcs_write_ignores_flush(self, mock_get_blob,
+                                                      mock_blob_writer_cls):
+        import io
+        mock_blob = mock.MagicMock()
+        mock_get_blob.return_value = mock_blob
+        raw_buf = io.BytesIO()
+        raw_buf.close = mock.MagicMock()
+        mock_blob_writer_cls.return_value = raw_buf
+
+        with bigquery_differ._open_text_stream('gs://test-bucket/out.csv',
+                                               mode='w') as stream:
+            stream.write('col1,col2\n1,2\n')
+
+        mock_blob_writer_cls.assert_called_once_with(mock_blob,
+                                                     ignore_flush=True)
+        raw_buf.close.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -203,7 +203,7 @@ def trigger_job(project_id, location, absolute_import_name, job_id_suffix: str):
     job_id = f'{_fix_absolute_import_name(absolute_import_name)}{job_id_suffix}'
     job_name = f'projects/{project_id}/locations/{location}/jobs/{job_id}'
     try:
-        job = client.run_job(scheduler_v1.RunJobRequest(name=job_name))
+        client.run_job(scheduler_v1.RunJobRequest(name=job_name))
     except NotFound:
         raise Exception('Attempted to trigger non-existing job %s.'
                         'Please check Cloud Scheduler on UI to see '
