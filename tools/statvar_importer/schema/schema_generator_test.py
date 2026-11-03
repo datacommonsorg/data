@@ -13,10 +13,17 @@
 # limitations under the License.
 """Unit tests for schema_generator.py."""
 
+import os
+import sys
 import unittest
 
 from absl import app
 from absl import logging
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+
 import schema_generator
 
 
@@ -122,3 +129,7 @@ class SchemaGeneratorTest(unittest.TestCase):
                 'energySource': 'dcid:Bagasse',
                 'energySourceType': 'dcid:Renewable',
             }))
+
+
+if __name__ == '__main__':
+    unittest.main()

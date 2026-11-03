@@ -18,6 +18,7 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
+from absl import flags
 import pandas as pd
 
 # Ensure repository root is in sys.path for local and root-level test runs
@@ -26,10 +27,22 @@ repo_root = os.path.abspath(os.path.join(script_dir, '../../..'))
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
+_SAVED_FLAGS = {
+    _name: flags.FLAGS[_name]
+    for _name in ('output_dir', 'endpoint')
+    if _name in flags.FLAGS
+}
+for _flag_name in _SAVED_FLAGS:
+    delattr(flags.FLAGS, _flag_name)
+
 from statvar_imports.us_newyork.ny_brfss_health_indicators.download import (
     atomic_to_csv,
     download_health_indicators,
 )
+
+for _flag_name, _flag_obj in _SAVED_FLAGS.items():
+    delattr(flags.FLAGS, _flag_name)
+    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class DownloadTest(unittest.TestCase):
@@ -40,6 +53,7 @@ class DownloadTest(unittest.TestCase):
             temp_path = f'{target_path}.tmp'
 
             with mock.patch.object(pd.DataFrame, 'to_csv') as mock_to_csv:
+
                 def create_empty_tmp(path, index=False):
                     with open(path, 'w'):
                         pass
@@ -159,8 +173,7 @@ class DownloadTest(unittest.TestCase):
         'statvar_imports.us_newyork.ny_brfss_health_indicators.download.create_session'
     )
     def test_download_column_order_with_missing_first_row_keys(
-        self, mock_create_session
-    ):
+            self, mock_create_session):
         mock_session = mock.MagicMock()
         mock_session.__enter__.return_value = mock_session
         mock_create_session.return_value = mock_session

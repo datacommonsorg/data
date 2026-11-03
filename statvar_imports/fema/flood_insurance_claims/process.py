@@ -164,11 +164,19 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
         df['policyCount'].notna() &
         (df['policyCount'].astype(str).str.strip() != ''), 1.0, np.nan)
 
-    # Geographic entities with zero-padding
-    tract_clean = (df['censusTract'].astype(str).str.strip().str.replace(
-        r'\.0$', '',
-        regex=True).apply(_pad_code, target_len=11,
-                          min_len=10).str.extract(r'([0-9]{11,})')[0])
+    # Geographic entities with zero-padding (supports both v2 censusTract and v3 censusGeoid)
+    if 'censusTract' in df.columns:
+        tract_clean = (df['censusTract'].astype(str).str.strip().str.replace(
+            r'\.0$', '',
+            regex=True).apply(_pad_code, target_len=11,
+                              min_len=10).str.extract(r'([0-9]{11,})')[0])
+    elif 'censusGeoid' in df.columns:
+        tract_clean = (df['censusGeoid'].astype(str).str.strip().str.replace(
+            r'\.0$', '',
+            regex=True).apply(_pad_code, target_len=12,
+                              min_len=11).str.extract(r'([0-9]{11,})')[0])
+    else:
+        tract_clean = pd.Series([None] * len(df), index=df.index)
     df['tract_place'] = tract_clean.apply(lambda x: f"dcid:geoId/{x[:11]}"
                                           if pd.notna(x) else None)
 
@@ -194,8 +202,8 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
     unique_zones = df['ratedFloodZone'].dropna().unique()
     zone_dict = {
         z:
-        f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
-        not in ('nan', 'none', '') else "FEMAFloodZone"
+            f"FEMAFloodZone{str(z).strip()}" if str(z).strip().lower()
+            not in ('nan', 'none', '') else "FEMAFloodZone"
         for z in unique_zones
     }
     df['specific_zone'] = df['ratedFloodZone'].map(zone_dict).fillna(
@@ -204,9 +212,7 @@ def _process_chunk(df: pd.DataFrame, state_map: dict,
         risk_zone_map)
     df['all_zone'] = ""
 
-    place_cols = [
-        'tract_place', 'county_place', 'state_place', 'country_place'
-    ]
+    place_cols = ['tract_place', 'county_place', 'state_place', 'country_place']
     date_configs = [('month_date', 'P1M'), ('year_date', 'P1Y')]
     zone_cols = ['specific_zone', 'risk_zone', 'all_zone']
 
@@ -307,11 +313,11 @@ def process_data_vectorized(
 
     state_map, risk_zone_map = _load_mappings(pv_map_arg)
 
-    usecols = [
-        'dateOfLoss', 'yearOfLoss', 'censusTract', 'countyCode', 'state',
-        'ratedFloodZone', 'amountPaidOnBuildingClaim',
+    expected_cols = {
+        'dateOfLoss', 'yearOfLoss', 'censusTract', 'censusGeoid', 'countyCode',
+        'state', 'ratedFloodZone', 'amountPaidOnBuildingClaim',
         'amountPaidOnContentsClaim', 'policyCount'
-    ]
+    }
 
     max_cpus = os.cpu_count() or 1
     workers = num_workers if num_workers is not None else max(1, max_cpus)
@@ -327,7 +333,7 @@ def process_data_vectorized(
         input_data, chunk_size, workers)
 
     reader = pd.read_csv(input_data,
-                         usecols=usecols,
+                         usecols=lambda c: c in expected_cols,
                          dtype=str,
                          chunksize=chunk_size,
                          low_memory=False)
@@ -391,8 +397,7 @@ def process_data_vectorized(
                  len(final_agg))
 
     statvar_specs = [
-        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '',
-         0),
+        ('claim_count', 'CountOfClaims', 'BuildingStructureAndContents', '', 0),
         ('b_val', 'SettlementAmount', 'BuildingStructure', 'dcs:USDollar', 2),
         ('c_val', 'SettlementAmount', 'BuildingContents', 'dcs:USDollar', 2),
         ('bc_val', 'SettlementAmount', 'BuildingStructureAndContents',
@@ -405,8 +410,7 @@ def process_data_vectorized(
         if len(sub) > 0:
             unique_zones = sub['zone'].unique()
             sv_map = {
-                z: _make_statvar_name(z, metric, thing)
-                for z in unique_zones
+                z: _make_statvar_name(z, metric, thing) for z in unique_zones
             }
             sub['variableMeasured'] = sub['zone'].map(sv_map)
             if round_digits == 0:
@@ -422,8 +426,8 @@ def process_data_vectorized(
         out_df = pd.concat(dfs_to_concat, ignore_index=True)
     else:
         out_df = pd.DataFrame(columns=[
-            'observationDate', 'observationAbout', 'value',
-            'observationPeriod', 'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value', 'observationPeriod',
+            'unit', 'variableMeasured'
         ])
 
     out_df = out_df.rename(
