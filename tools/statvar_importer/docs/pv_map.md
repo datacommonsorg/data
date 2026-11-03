@@ -208,6 +208,32 @@ Because a colon marks a column-scoped key, avoid colons in other keys. For a
 header such as `Projected Population (UOM:Number)`, use part of it without the
 colon, such as `projected population`.
 
+## Keys for a cell position
+
+When a cell's text has no key, the processor also tries keys for the cell's
+position, in this order: `Cell:<row>:<column>`, `Column:<column>`, and
+`Row:<row>`. Rows and columns count from 1, the same as in the `#input` column,
+so the first header line is row 1:
+
+```csv
+#key,property-1,value-1,property-2,value-2,property-3,value-3
+Cell:1:4,value,{Number},populationType,Person,gender,Female
+Column:5,#ignore,skip
+Row:3,#ignore,skip
+```
+
+In this example:
+
+- `Cell:1:4` maps the header cell in line 1, column 4, for example a header
+  that's empty or that repeats in other columns.
+- `Column:5,#ignore` skips the cells in column 5.
+- `Row:3,#ignore` skips the cells in line 3.
+
+WARNING: A position key replaces the column header's mapping for every cell it
+matches, the same as a cell key. `Column:4,measurementMethod,Survey` drops the
+values in column 4, because those cells lose `value,{Number}`. Use position keys
+for header cells and for `#ignore`, not to add properties to value cells.
+
 ## Places
 
 Put place mappings in their own PV map, `<source>_places_pvmap.csv`, so every

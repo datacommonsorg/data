@@ -72,7 +72,22 @@ Use `#Eval` to compute a property with a Python expression of the form
 - Cell values: `Data` (text) and `Number`.
 - Any other property or local variable in the same row, such as `Year`.
 - These functions: `format_date`, `str_to_camel_case`, `dateutil_parser_parse`,
-  `datetime`, `datetime_strptime`, `relativedelta`, `re`, and `re_sub`.
+  `datetime`, `datetime_strptime`, `relativedelta`, `re` (for example `re.sub`),
+  and `re_sub`.
+- Python built-ins such as `int`, `float`, and `str`, and string methods on text
+  values, such as `zfill`, `split`, `replace`, and `lower`.
+
+**Clean up text.** String methods and `re.sub` handle codes and labels that need
+small fixes:
+
+```csv
+#key,property-1,value-1
+fips,#Eval,"observationAbout='geoId/' + Data.zfill(5)"
+year,#Eval,"observationDate=re.sub(r'[^0-9]', '', Data)"
+```
+
+`6001` becomes `geoId/06001`, and `Y2020` becomes `2020`. Similarly,
+`Data.split('-')[0].replace('FY ', '')` turns `FY 2020-21` into `2020`.
 
 **Generate schema values from the source.** When a column holds category names,
 such as products, `str_to_camel_case` turns each name into an enum value. You
@@ -409,6 +424,32 @@ except `first` and `last` set `measurementMethod` to `DataCommonsAggregate`, or
 prefix an existing method with `dcAggregate/`. `mean` also sets
 `statType: meanValue`. The generated TMCF can include an `#Aggregate` line; lint
 accepts it.
+
+## Speed up processing
+
+Before you process a large input, estimate the run time and remove work the
+processor doesn't need to do:
+
+1. **Estimate the time for the full input.** Process the first rows with
+   `--input_rows=5000`, then read `process_remaining_time` in the counters file
+   (`1:process_input_process_remaining_time`). It's the estimated number of
+   seconds for the rest of the input, from the rate so far and the row count of
+   the input files. For example, 5,000 rows of a 60,000-row file took 9 seconds,
+   with 113 seconds remaining. Long runs also log it with the other counters
+   periodically.
+1. **Look up only label cells.** Set `header_rows` and `mapped_columns`, so the
+   processor looks up only the header rows and the label columns instead of
+   every cell; see [Input layout](config.md#input-layout). In a table with two
+   label columns and two value columns, this halved the PV map lookups.
+1. **Resolve places ahead of time.** Map every place to a DCID in the PV map,
+   for example `fips,observationAbout,geoId/{Data}` or a places PV map, or list
+   every name in `places_resolved_csv`. A place that's still a name after the PV
+   map lookup is sent to the place resolver, which calls the Data Commons or
+   Maps API for each observation. The processor turns this resolution on
+   whenever `places_resolved_csv`, `places_csv`, `dc_api_key`, or `maps_api_key`
+   is set, and `resolve_places,0` doesn't turn it off.
+1. **Split the input.** If the run is still too slow, process shards in
+   parallel, as described in the next section.
 
 ## Process large inputs in parallel
 
