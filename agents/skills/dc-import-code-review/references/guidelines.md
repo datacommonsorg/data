@@ -42,8 +42,9 @@ repository contracts and instructions take precedence.
 - Catch specific exceptions only when handling or enriching them; preserve the
   original traceback and include safe operational context.
 - Check HTTP responses, external-command exit status, and helper return values
-  (such as `download_util_script.download_file()` returning `False`) before
-  accepting their output.
+  (such as `download_util_script.download_file()` returning `False` or
+  `download_util.download_file_from_url()` returning `None`) before accepting
+  their output.
 - Make directory creation and repeated execution safe, and do not expose
   incomplete output as successful output.
 - Use structured logging for operational progress and failures.
