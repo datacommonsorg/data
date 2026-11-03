@@ -6,6 +6,7 @@ process,
 comments,
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
 header_rows,1
+# Disable external KG API node reconciliation so newly defined EDA program StatVars and explicit PV map names are preserved prior to schema ingestion.
 reconcile_nodes,False
 spell_allow_words,recompete
 

@@ -737,6 +737,16 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertEqual(list(df_actual["Year"]), [2025, 2025])
         self.assertEqual(list(df_actual["Value"]), [80000, 80000])
 
+    @patch(
+        "statvar_imports.commerce_eda_usaspending.process.fetch_usaspending_data",
+        side_effect=RuntimeError("API unreachable"),
+    )
+    def test_main_propagates_exceptions(self, mock_fetch):
+        from statvar_imports.commerce_eda_usaspending.process import main
+        with self.assertRaises(RuntimeError) as ctx:
+            main([])
+        self.assertIn("API unreachable", str(ctx.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

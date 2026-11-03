@@ -87,7 +87,7 @@ def get_fiscal_year(date_str):
 
 def get_current_fiscal_year(now=None):
     if now is None:
-        now = datetime.datetime.now()
+        now = datetime.datetime.now(datetime.timezone.utc)
     return now.year + 1 if now.month >= 10 else now.year
 
 
@@ -370,8 +370,9 @@ def main(argv):
         logging.info(f"Total awards retrieved: {len(awards)}")
 
         process_data(awards, start_year, end_year, output_path)
-    except Exception as err:
-        logging.fatal(f"Import pipeline failed: {err}", exc_info=True)
+    except (RuntimeError, ValueError, OSError) as err:
+        logging.exception(f"Import pipeline failed: {err}")
+        raise
 
 
 if __name__ == "__main__":
