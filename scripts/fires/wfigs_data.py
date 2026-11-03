@@ -119,7 +119,7 @@ def process_df(df):
     A Pandas dataframe containing process field values for various incidents.
   """
     ll2p = latlng_recon_geojson.LatLng2Places()
-    df = df[df["IncidentName"].str.contains("DO NOT USE") == False]
+    df = df[df["IncidentName"].str.contains("DO NOT USE").eq(False)]
     initial_size = df.shape[0]
     df = df.drop_duplicates()
     logging.info("Initial size: %s, without duplicates: %s" %

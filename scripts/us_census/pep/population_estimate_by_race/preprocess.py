@@ -1305,7 +1305,7 @@ def download_files():
         is_file_downloaded = False
         # headers = {'User-Agent': 'Mozilla/5.0'}
         # response = requests.get(url, headers=headers)
-        while is_file_downloaded == False:
+        while not is_file_downloaded:
             try:
                 headers = {'User-Agent': 'Mozilla/5.0'}
                 response = requests.get(url, headers=headers, timeout=60)

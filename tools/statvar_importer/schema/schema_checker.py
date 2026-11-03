@@ -129,7 +129,7 @@ def get_urls_in_string(value: str, url_regex: re.Pattern = None) -> list[str]:
       list of URLs found in the value.
     """
     urls = []
-    if url_regex == None:
+    if url_regex is None:
         url_regex = get_url_regex()
     for matches in url_regex.finditer(str(value).strip()):
         url = matches.groupdict().get('url')
@@ -150,7 +150,7 @@ def get_node_urls(node: dict[str, str],
       dictionary keyed by URLs in the node with property as value.
     """
     node_urls = {}
-    if url_regex == None:
+    if url_regex is None:
         url_regex = get_url_regex()
     for prop, value in node.items():
         if prop and prop.startswith('#'):

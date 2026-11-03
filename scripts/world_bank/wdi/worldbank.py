@@ -623,8 +623,8 @@ def process(indicator_codes, worldbank_dataframe, saveOutput=True):
             axis=1)
 
         # Convert integer columns.
-        int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] ==
-                                         True]['IndicatorCode'].unique()))
+        int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'].eq(
+            True)]['IndicatorCode'].unique()))
         worldbank_subset = worldbank_dataframe[
             worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
         worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(

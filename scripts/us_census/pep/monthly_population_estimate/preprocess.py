@@ -612,7 +612,7 @@ def download_files():
         retry_number = 0
 
         is_file_downloaded = False
-        while is_file_downloaded == False:
+        while not is_file_downloaded:
             try:
                 df = None
                 file_name = url.split("/")[-1]

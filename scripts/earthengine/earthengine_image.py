@@ -499,7 +499,7 @@ def ee_generate_image(config: dict) -> ee.Image:
         if dataset in config['datasets']:
             logging.info(f'Loading dataset: {dataset} from {config}')
             img = ee_generate_image(config['datasets'][dataset])
-            if img == None:
+            if img is None:
                 logging.error(f'Unable to get image for dataset {dataset}')
 
     # Load image from the config parameters and filter.

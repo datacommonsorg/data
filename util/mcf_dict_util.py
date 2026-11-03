@@ -180,7 +180,7 @@ def mcf_dict_rename_prop(node_dict: Union[dict, OrderedDict], old_prop: str,
     if old_prop in node_dict:
         new_tuples = [(new_prop, v) if k == old_prop else (k, v)
                       for k, v in node_dict.items()]
-        if type(node_dict) == type(OrderedDict()):
+        if type(node_dict) is OrderedDict:
             return OrderedDict(new_tuples)
         else:
             return Dict(new_tuples)

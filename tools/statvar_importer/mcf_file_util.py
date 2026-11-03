@@ -529,7 +529,7 @@ def load_mcf_nodes(
     if not filenames:
         return nodes
 
-    if counters == None:
+    if counters is None:
         counters = Counters()
 
     # Load files in order of input
