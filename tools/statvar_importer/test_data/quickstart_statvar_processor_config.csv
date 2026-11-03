@@ -2,4 +2,4 @@ parameter,value
 import_name,statvar_processor_quickstart
 description,"Sample population counts by county, age, race, and gender for the StatVar Processor quick start."
 url,https://github.com/datacommonsorg/data/tree/master/tools/statvar_importer/test_data
-output_columns,"observationDate,observationAbout,value,variableMeasured,#input"
+output_columns,"observationAbout,observationDate,variableMeasured,value,#input"

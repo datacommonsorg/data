@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,p3,v3,p4,v4
+#key,property-1,value-1,property-2,value-2,property-3,value-3
 # place,,,,,,,,
 fips code,observationAbout,geoId/{Number},,,,,,
 # date,,,,,,,,
@@ -13,5 +13,5 @@ a-pi,race,AsianOrPacificIslander,,,,,,
 males,gender,Male,,,,,,
 females,gender,Female,,,,,,
 # value columns,,,,,,,,
-total persons,value,{Number},populationType,Person,measuredProperty,count,,
-fraction,value,{Number},populationType,Person,measuredProperty,count,measurementDenominator,Count_Person
+total persons,value,{Number},populationType,Person,,
+fraction,value,{Number},populationType,Person,measurementDenominator,Count_Person

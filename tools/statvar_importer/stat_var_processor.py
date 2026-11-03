@@ -1572,13 +1572,21 @@ class StatVarDataProcessor:
         line_number: int = None,
         column_number: int = None,
     ):
+        """Sets the input context used in the '#input' reference.
+
+        Args:
+          filename: input file being processed.
+          line_number: line number in the file, counted from 1.
+          column_number: column index in the row, counted from 0. It is
+            stored counted from 1, like the line number.
+        """
         if filename:
             self._context['__FILE__'] = filename
             self._current_filename = os.path.basename(filename)
-        if line_number:
+        if line_number is not None:
             self._context['__LINE__'] = line_number
-        if column_number:
-            self._context['__COLUMN__'] = column_number
+        if column_number is not None:
+            self._context['__COLUMN__'] = column_number + 1
         self._file_context = f'{self._context.get("__FILE__")}:{self._context.get("__LINE__")}:{self._context.get("__COLUMN__")}'
 
     def init_file_section(self):

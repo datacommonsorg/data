@@ -18,6 +18,28 @@ Settings come from three places. A later source overrides an earlier one:
 1. PV map rows whose key is a config setting name, for example
    `mapped_columns,3` inside a PV map.
 
+### PV maps with the same key
+
+You can pass several PV maps with `--pv_map=a.csv,b.csv`. When both map the same
+key, the file loaded last wins for each property. Properties that only the
+earlier file sets are kept. For example, if `a.csv` has `wh,race,WhiteAlone` and
+`b.csv` has `wh,race,BlackOrAfricanAmericanAlone`, the output uses
+`BlackOrAfricanAmericanAlone`.
+
+### On and off values
+
+In a CSV config, write on/off settings as `1` and `0`. `True`, `False`, `yes`,
+`no`, `on`, and `off` also work, in any case. An empty value means off:
+
+```csv
+parameter,value
+reconcile_nodes,0
+match_substring_word_boundary,0
+```
+
+The processor converts the value to the type of the setting's default. A setting
+without a default in `config_flags.py` keeps the text as is.
+
 WARNING: The processor accepts any setting name without checking it, so a typo
 such as `mapped_coloumns` is silently ignored. Copy names from this page or from
 `get_default_config`.
@@ -45,6 +67,7 @@ in the PV map. That is slower and can match numbers by accident.
 | Setting                              | Default      | When to change it                                                                                                                                                                                                                |
 | ------------------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `word_delimiter`                     | space        | Set when the source joins words with another character, for example `!!` in US Census headers (`Total!!Male!!Under 5 years`), so keys can match each part; see [several PVs from one cell](pv_map.md#several-pvs-from-one-cell). |
+| `match_substring_word_boundary`      | on           | Turn off to let lowercase keys match inside long text in any case; see [How keys match](pv_map.md#how-keys-match). Keys then also match inside words.                                                                            |
 | `number_decimal`, `number_separator` | `.` and `, ` | Set for sources such as `1.234,5`; see [number formats](advanced_processing.md#number-formats).                                                                                                                                  |
 
 ## StatVars
@@ -59,7 +82,7 @@ in the PV map. That is slower and can match numbers by accident.
 | `generate_statvar_name`, `llm_generate_statvar_name` | `False`                                              | Generate StatVar names; see [StatVar DCIDs and names](advanced_processing.md#statvar-dcids-and-names).                                                                                      |
 | `schemaless`                                         | `False`                                              | Allow StatVar properties that aren't in the schema; see [StatVar DCIDs and names](advanced_processing.md#statvar-dcids-and-names).                                                          |
 | `generate_schema_mcf`                                | `True`                                               | Set to `False` to skip writing `_stat_vars_schema.mcf`.                                                                                                                                     |
-| `reconcile_nodes`                                    | `True`                                               | Set to `False` to skip replacing superseded StatVars and values with their successors.                                                                                                      |
+| `reconcile_nodes`                                    | `True`                                               | Turn off to skip replacing superseded StatVars and values with their successors.                                                                                                            |
 | `aggregate_duplicate_svobs`                          | not set                                              | Aggregate duplicate observations for all StatVars; see [aggregation](advanced_processing.md#aggregate-duplicates).                                                                          |
 
 ## Place resolution

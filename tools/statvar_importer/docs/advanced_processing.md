@@ -13,16 +13,24 @@ Python expression of the form `<name>=<expression>`. When it evaluates to
 `False`, the observation is dropped:
 
 ```csv
-key,p1,v1,p2,v2,p3,v3,p4,v4
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4
 population,value,{Number},populationType,Person,measuredProperty,count,#Filter,"Allow=float(value) >= 0"
 ```
 
 Keep these points in mind:
 
 - Property values are strings, so cast them: `float(value)` or `int(value)`.
+
 - The counter `filter-dropped-svobs-pvs` counts dropped observations.
-- Keep filters explicit and testable. Don't hard-code a future-year cutoff, such
-  as `int(observationDate) <= 2024`; it silently drops new data after a refresh.
+
+- Keep filters explicit and testable. Don't hard-code a year cutoff, such as
+  `int(observationDate) <= 2024`; it silently drops new data after a refresh.
+  Compute it from the current date instead, for example to keep only the last
+  two years:
+
+  ```csv
+  population,value,{Number},populationType,Person,#Filter,"Allow=int(observationDate[:4]) >= datetime.now().year - 2"
+  ```
 
 ## Scale values
 
@@ -30,11 +38,13 @@ Use `#Multiply` when the source reports values in units of N, such as "in
 thousands". The processor stores the actual value:
 
 ```csv
-key,p1,v1,p2,v2,p3,v3,p4,v4
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4
 population (thousands),value,{Number},populationType,Person,measuredProperty,count,#Multiply,1000
 ```
 
-A source value of `1.5` becomes `1500`.
+A source value of `1.5` becomes `1500`. Imports most often key this on the unit
+word in a header: `thousand` (`#Multiply,1000`), `lakh` (`#Multiply,100000`), or
+`crore` (`#Multiply,10000000`).
 
 For percentages, keep the source number and add `scalingFactor,100` together
 with a denominator, as in the example in
@@ -47,7 +57,7 @@ with a denominator, as in the example in
 for example rows marked as provisional, use `#IgnoreRow,True`:
 
 ```csv
-key,p1,v1
+#key,property-1,value-1
 provisional,#IgnoreRow,True
 ```
 
@@ -64,24 +74,56 @@ Use `#Eval` to compute a property with a Python expression of the form
 - These functions: `format_date`, `str_to_camel_case`, `dateutil_parser_parse`,
   `datetime`, `datetime_strptime`, `relativedelta`, `re`, and `re_sub`.
 
-Pad a code with zeros:
+**Generate schema values from the source.** When a column holds category names,
+such as products, `str_to_camel_case` turns each name into an enum value. You
+don't need one PV map row per name:
 
 ```csv
-key,p1,v1
-fips,#Eval,"observationAbout=f'geoId/{int(Number):02d}'"
+#key,property-1,value-1,property-2,value-2
+product,#Eval,"ProductEnum=str_to_camel_case(Data)",productType,{ProductEnum}
 ```
 
-Use `#Regex` to extract parts of a cell into local variables with named groups,
-and `#Format` for simple string templates:
+`Crude oil` and `Natural Gas (LNG)` become `productType: CrudeOil` and
+`productType: NaturalGasLNG`, in the StatVars `Amount_EnergyImport_CrudeOil` and
+`Amount_EnergyImport_NaturalGasLNG`. Values that aren't in the Data Commons
+schema yet go to `_stat_vars_schema.mcf` as provisional enum values. Review that
+file, because each new spelling in the source creates a new value.
+
+Pad a code with zeros. `Number` and `Data` are both stored as text, so pad
+`Data` with a string format:
 
 ```csv
-key,p1,v1
+#key,property-1,value-1
+fips,#Eval,"observationAbout=f'geoId/{Data:0>2}'"
+```
+
+`6` becomes `geoId/06`. To compute with a number, cast it first, for example
+`int(Number) * 2`.
+
+Use `#Regex` to extract parts of a cell into local variables with named groups.
+For example, to turn `Age: 10 - 20` into an age range:
+
+```csv
+#key,property-1,value-1,property-2,value-2
+age group,#Regex,(?P<StartAge>[0-9]+) *- *(?P<EndAge>[0-9]+),age,[{StartAge} {EndAge} Years]
+```
+
+`Age: 10 - 20` and `Age: 21-30` become `age: [10 20 Years]` and
+`age: [21 30 Years]` (StatVars `..._10To20Years` and `..._21To30Years`). The
+pattern can match anywhere in the cell.
+
+Use `#Format` for simple string templates:
+
+```csv
+#key,property-1,value-1
 state,#Format,observationAbout=geoId/{Data:0>2}
 ```
 
-An `#Eval` on a column header key also runs on the header cell itself, where
-`Number` isn't set. The resulting `Failed to evaluate` log lines and
-`warning-unresolved-value-ref` counts are expected when the output is right.
+Every `#` directive on a column header key, such as `#Eval`, `#Regex`,
+`#Format`, or `#Filter`, runs for each value in that column. It also runs on the
+header cell itself, where `Number` isn't set. The resulting `Failed to evaluate`
+log lines and `warning-unresolved-value-ref` counts are expected when the output
+is right.
 
 WARNING: A failed `#Eval` or `#Filter` expression doesn't raise an error. The
 property is silently missing. Test new expressions on a few rows with `--debug`
@@ -92,30 +134,63 @@ property is silently missing. Test new expressions on a few rows with `--debug`
 The processor normalizes common date formats automatically (see the
 [PV map guide](pv_map.md#dates)). Use these patterns for other dates.
 
-**Quarters:** extract the year and quarter with `#Regex`, compute the first
-month with `#Eval`, and set `observationPeriod`:
+**Quarters:** `observationDate` is the end of the period: `YYYY` stands for the
+whole year, and a quarter uses its last month. Extract the year and quarter with
+`#Regex`, compute the last month with `#Eval`, and set `observationPeriod`:
 
 ```csv
-key,p1,v1,p2,v2,p3,v3
-quarter,#Regex,^(?P<Year>[0-9]{4})-Q(?P<Quarter>[1-4])$,#Eval,"observationDate=f'{Year}-{int(Quarter)*3-2:02d}'",observationPeriod,P3M
+#key,property-1,value-1,property-2,value-2,property-3,value-3
+quarter,#Regex,^(?P<Year>[0-9]{4})-Q(?P<Quarter>[1-4])$,#Eval,"observationDate=f'{Year}-{int(Quarter)*3:02d}'",observationPeriod,P3M
 ```
 
-`2020-Q3` becomes `observationDate: 2020-07` with `observationPeriod: P3M`.
+`2020-Q1` becomes `observationDate: 2020-03` and `2020-Q3` becomes `2020-09`,
+with `observationPeriod: P3M`.
+
+Cells that don't match a `#Regex` keep their other PVs.
+
+**A year inside text:** use `#Regex` alone. Name the group after the property to
+set it directly:
+
+```csv
+#key,property-1,value-1
+year,#Regex,(?P<observationDate>[0-9]{4})
+```
+
+`Calendar Year (Jan - Dec), 2026` becomes `observationDate: 2026`. You can also
+name the group `Year` and use `{Year}` in another value.
 
 **Free-form dates:** use `format_date`, which returns `YYYY-MM-DD`:
 
 ```csv
-key,p1,v1
+#key,property-1,value-1
 date,#Eval,observationDate=format_date(Data)
 ```
 
 `Thu Nov 16 2023` becomes `2023-11-16`.
 
+### Parse dates
+
+Use these `#Eval` functions to parse and format dates. Each example parses
+`15/02/2022`:
+
+| Expression                                                                                          | Result       | Use                                         |
+| --------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------- |
+| `observationDate=format_date(Data)`                                                                 | `2022-02-15` | Free-form dates, output as `YYYY-MM-DD`     |
+| `observationDate=format_date(Data, '%Y-%m')`                                                        | `2022-02`    | The same, with an output format             |
+| `observationDate=dateutil_parser_parse(Data, dayfirst=True).strftime('%Y-%m-%d')`                   | `2022-02-15` | Day-first dates                             |
+| `observationDate=datetime_strptime(Data, '%d/%m/%Y').strftime('%Y-%m-%d')`                          | `2022-02-15` | An exact input format                       |
+| `observationDate=(datetime_strptime(Data, '%d/%m/%Y') - relativedelta(months=1)).strftime('%Y-%m')` | `2022-01`    | Date arithmetic, such as the previous month |
+
+Quote the expression in the CSV because it contains commas, for example
+`date,#Eval,"observationDate=format_date(Data, '%Y-%m')"`. You can also assign
+the result to a local variable and use it, as in
+`date,#Eval,"Date=format_date(Data)",observationDate,{Date}`.
+
 **Ambiguous dates:** a date such as `01/02/2020` can be read as January or
 February. Parse it with an explicit format:
 
 ```csv
-key,p1,v1
+#key,property-1,value-1
 date,#Eval,"observationDate=datetime_strptime(Data, '%d/%m/%Y').strftime('%Y-%m-%d')"
 ```
 
@@ -129,7 +204,7 @@ and one for women. Mark the header text with `#Header` and list the properties
 that apply down the columns:
 
 ```csv
-key,p1,v1,p2,v2
+#key,property-1,value-1,property-2,value-2
 male,gender,Male,#Header,gender
 female,gender,Female,#Header,gender
 ```
@@ -149,15 +224,19 @@ than replacing them. Repeat every property that changes in each header row.
 
 ## Merged header cells
 
-When a header cell is blank, the processor copies the PVs of the header to its
-left, as for a merged cell that spans two columns. In a sheet whose blank header
-cells are separate columns, that creates duplicate StatVars. Stop the copying
-with `#MergedCell,0`:
+A header that spans several columns, as a merged cell does, leaves the cells to
+its right blank. `#MergedCell,<N>` copies the header's PVs to the next `N` blank
+header cells and no further:
 
 ```csv
-key,p1,v1,p2,v2,p3,v3
-male,gender,Male,#MergedCell,0,value,{Number}
+#key,property-1,value-1,property-2,value-2,property-3,value-3
+male,gender,Male,#MergedCell,2,value,{Number},populationType,Person
 ```
+
+With the headers `year,male,,,female`, `male` applies to its own column and the
+next 2 blank columns; `female` starts a new header. Without `#MergedCell`, a
+header copies into every blank header cell to its right. Use `#MergedCell,0` to
+stop the copying when blank header cells are separate columns.
 
 ## Derived denominators
 
@@ -166,7 +245,7 @@ properties minus the ones that define the share. Prefix each removed property
 with `-`:
 
 ```csv
-key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4,property-5,value-5
 female,gender,Female
 share,value,{Number},populationType,Person,measuredProperty,count,measurementDenominator,-gender,scalingFactor,100
 ```
@@ -175,7 +254,9 @@ A `Female` share of `48.5` becomes an observation of
 `Count_Person_Female_AsAFractionOf_Count_Person` with `scalingFactor: 100`.
 
 To remove several properties, quote the list, for example
-`measurementDenominator,"-age,-race,-gender"` for a share of all persons.
+`measurementDenominator,"-age,-race,-gender"` for a share of all persons. You
+can also name the denominator StatVar directly, for example
+`measurementDenominator,Count_Person`.
 
 ## Number formats
 
@@ -212,7 +293,7 @@ generated DCID. The default is `measuredValue,StatisticalVariable`.
 the StatVar properties, or `llm_generate_statvar_name,True` with
 `--google_genai_key` to generate names with Gemini. To name StatVars after
 processing instead, see the
-[tip in Tools](tools.md#tip-generate-readable-statvar-names).
+[tip in Schema tools](../schema/README.md#tip-generate-readable-statvar-names).
 
 **Schemaless StatVars.** With `schemaless,True`, properties that start with a
 capital letter and aren't in the Data Commons schema are allowed. They are used
@@ -243,7 +324,7 @@ A PV map row with the key `DEFAULT_PV` applies its PVs to every cell of every
 input file:
 
 ```csv
-key,p1,v1,p2,v2
+#key,property-1,value-1,property-2,value-2
 DEFAULT_PV,measurementMethod,CensusEstimate
 ```
 
@@ -263,10 +344,11 @@ values up to a state total:
 ```csv
 parameter,value
 multi_value_properties,observationAbout
+output_columns,"observationAbout,observationDate,variableMeasured,value,measurementMethod"
 ```
 
 ```csv
-key,p1,v1,p2,v2,p3,v3,p4,v4
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4
 fips,observationAbout,geoId/{Data}
 year,observationDate,{Number}
 total population,value,{Number},populationType,Person,measuredProperty,count,#Aggregate,sum
@@ -275,6 +357,42 @@ DEFAULT_PV,observationAbout,geoId/06
 
 For counties `06001` (100) and `06003` (50) in 2020, the output has both county
 rows and `geoId/06, 2020, 150` with `measurementMethod: DataCommonsAggregate`.
+
+NOTE: List `measurementMethod` in `output_columns` when you aggregate. Without
+`output_columns`, the output drops the `DataCommonsAggregate` method.
+
+**Roll up a constraint property to a total.** The same pattern gives totals
+across a constraint property, such as `gender`. Give each gender value a second,
+empty value with a trailing comma, so each cell produces one observation with
+the gender and one without it. `#Aggregate` sums the observations without a
+gender into the total:
+
+```csv
+parameter,value
+multi_value_properties,gender
+output_columns,"observationAbout,observationDate,variableMeasured,value,measurementMethod"
+```
+
+```csv
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4
+fips,observationAbout,geoId/{Data}
+year,observationDate,{Number}
+male,gender,"Male,",value,{Number},populationType,Person,#Aggregate,sum
+female,gender,"Female,",value,{Number},populationType,Person,#Aggregate,sum
+```
+
+For this input:
+
+```csv
+fips,year,male,female
+06001,2020,60,40
+06003,2020,30,20
+```
+
+The output has `Count_Person_Male` and `Count_Person_Female` for each county,
+plus `Count_Person` with `100` for `06001` and `50` for `06003`, with
+`measurementMethod: DataCommonsAggregate`. A `DEFAULT_PV` row with an empty
+`gender` doesn't work for this; it produces no totals.
 
 ### Aggregate duplicates
 
@@ -289,13 +407,21 @@ rows are parts of one total, aggregate them:
 The types are `sum`, `min`, `max`, `mean`, `list`, `first`, and `last`. All
 except `first` and `last` set `measurementMethod` to `DataCommonsAggregate`, or
 prefix an existing method with `dcAggregate/`. `mean` also sets
-`statType: meanValue`.
+`statType: meanValue`. The generated TMCF can include an `#Aggregate` line; lint
+accepts it.
 
 ## Process large inputs in parallel
 
 For inputs too large for one run, split them into shards, process the shards in
 parallel, and merge the outputs. Run these steps from the import's folder with
 the repository environment active:
+
+1. **Fix the output columns.** Set `output_columns` in the config, for example
+   `observationAbout,observationDate,variableMeasured,value,measurementMethod`.
+   Then every shard writes the same columns in the same order, and all the shard
+   CSVs can use one TMCF. Without it, each shard picks its own columns: a
+   property with one value in a shard, such as a single date, moves from the CSV
+   into the TMCF.
 
 1. **Shard by a column.** Choose a column such that rows that aggregate
    together, with the same StatVar, place, and date, land in the same shard, for
@@ -327,8 +453,7 @@ the repository environment active:
    ```
 
 1. **Merge the outputs.** Concatenate the CSVs with one header, reuse one TMCF
-   (identical across shards because `output_columns` is fixed), and merge the
-   StatVar MCF files:
+   (identical across shards because of step 1), and merge the StatVar MCF files:
 
    ```bash
    mkdir -p output

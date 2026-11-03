@@ -9,7 +9,7 @@ Start with the workflow, then find your symptom in the tables.
    `--output_counters=counters/<import>_counters.csv`.
 1. Read the counters (see [Counters to check](#counters-to-check)).
 1. Trace a few output rows to the source with the `#input` column, for example
-   `data.csv:4:5` (file, line 4, column 5).
+   `data.csv:4:6`: the file, line 4, and column 6, both counted from 1.
 1. Fix the PV map or config and rerun.
 1. Lint the output (see [Check the results](../README.md#check-the-results)).
 
@@ -26,26 +26,29 @@ Some counter names carry a stage prefix, such as
 | What caused the drops?     | `error-svobs-missing-property`, `error-statvar-missing-property`, `error-statvar-with-dup-svobs`, `error-mismatched-svobs`                                                                     |
 | What was written?          | `generated-statvars`, `output-svobs-csv-rows`                                                                                                                                                  |
 
-`error-unresolved-place` also counts header and section rows, so a nonzero value
-alone isn't a problem.
+A counter that is missing from the file is 0. `error-unresolved-place` and
+`warning-svobs-missing-place` also count header and label rows, so nonzero
+values alone aren't a problem. `input-header-rows` counts header and label rows;
+`input-rows-ignored-preprocess` and `input-rows-ignored-too-few-columns` count
+blank lines, titles, and footers.
 
 ## Common problems
 
-| Symptom                                                                  | Likely cause                                                                                     | Fix                                                                                                                                                               |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The run stops with `429 Too Many Requests` and writes no output          | Without `DC_API_KEY`, the processor uses a shared Data Commons API key that is rate limited      | Set `DC_API_KEY` to your own key; see [Setup](../README.md#setup).                                                                                                |
-| The CSV has no rows or too few rows                                      | A value column has no `value,{Number}` mapping                                                   | Add `value,{Number}` to the value column's header row in the PV map.                                                                                              |
-| The CSV has no rows; `warning-svobs-missing-place` is high               | `header_rows` doesn't point at the header line, or `mapped_columns` is set without `header_rows` | Count `header_rows` from the top of the file, including title lines, or leave both unset.                                                                         |
-| `dropped-svobs-unresolved-place`                                         | `observationAbout` is missing or isn't a DCID                                                    | Map the place column; see [Map places](../README.md#map-places).                                                                                                  |
-| Place names in `--places_resolved_csv` don't resolve                     | A PV map key matches text inside the names, such as `county` in `Kings County CA`                | Use a specific key, such as `county name`; see the [place tools](../place/README.md).                                                                             |
-| `error-statvar-missing-property`, `dropped-svobs-with-invalid-statvar`   | A StatVar lacks `populationType` or `measuredProperty`                                           | Add the property to the value column's PV map row.                                                                                                                |
-| `error-svobs-missing-property`, `dropped-svobs-invalid`                  | An SVObs lacks `observationDate`, `observationAbout`, or `value`                                 | Map the date, place, and value columns.                                                                                                                           |
-| `error-statvar-with-dup-svobs`, a StatVar missing                        | Rows produce the same StatVar, place, and date with different values                             | Add the property that tells the rows apart, such as `gender`. If the rows are parts of one total, see [aggregation](advanced_processing.md#aggregate-duplicates). |
-| A property is missing from some StatVars                                 | The key doesn't match the source text                                                            | Check the spelling. A key that matches a phrase inside longer text is case-sensitive; copy the source casing. Keep comment rows short.                            |
-| A label row such as `Count of all Males` doesn't apply to the rows below | `header_rows` is set, so label rows are treated as data                                          | Leave `header_rows` and `mapped_columns` unset, or mark the label with `#Header`.                                                                                 |
-| A config setting has no effect                                           | The setting name has a typo                                                                      | Check the name against [Advanced configuration](config.md).                                                                                                       |
-| `#Ignore` or `#header` has no effect                                     | Keywords are case-sensitive                                                                      | Write `#ignore` and `#Header`.                                                                                                                                    |
-| A computed property is missing                                           | A `#Eval` or `#Filter` expression failed silently                                                | Test it on a few rows with `--debug`; cast strings with `float()` or `int()`.                                                                                     |
+| Symptom                                                                     | Likely cause                                                                                                                            | Fix                                                                                                                                                               |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The run stops with `429 Too Many Requests`, leaving empty or partial output | Without `DC_API_KEY`, the processor uses a shared Data Commons API key that is rate limited                                             | Set `DC_API_KEY` to your own key; see [Setup](../README.md#setup).                                                                                                |
+| The CSV has no rows or too few rows                                         | A value column has no `value,{Number}` mapping                                                                                          | Add `value,{Number}` to the value column's header row in the PV map.                                                                                              |
+| The CSV has no rows; `warning-svobs-missing-place` is high                  | `header_rows` doesn't point at the header line, or `mapped_columns` is set without `header_rows`                                        | Count `header_rows` from the top of the file, including title lines, or leave both unset.                                                                         |
+| `dropped-svobs-unresolved-place`                                            | `observationAbout` is missing or isn't a DCID                                                                                           | Map the place column; see [Map places](../README.md#map-places).                                                                                                  |
+| Place names in `--places_resolved_csv` don't resolve                        | A PV map key matches text inside the names, such as `county` in `Kings County CA`                                                       | Use a specific key, such as `county name`; see the [place tools](../place/README.md).                                                                             |
+| `error-statvar-missing-property`, `dropped-svobs-with-invalid-statvar`      | A StatVar lacks `populationType` or `measuredProperty`                                                                                  | Add the property to the value column's PV map row.                                                                                                                |
+| `error-svobs-missing-property`, `dropped-svobs-invalid`                     | An SVObs lacks `observationDate`, `observationAbout`, or `value`                                                                        | Map the date, place, and value columns.                                                                                                                           |
+| `error-statvar-with-dup-svobs`, a StatVar missing                           | Rows produce the same StatVar, place, and date with different values. The StatVar is dropped with all its observations, from every row. | Add the property that tells the rows apart, such as `gender`. If the rows are parts of one total, see [aggregation](advanced_processing.md#aggregate-duplicates). |
+| A property is missing from some StatVars                                    | The key doesn't match the source text                                                                                                   | Check the spelling. A key that matches a phrase inside longer text is case-sensitive; copy the source casing. Keep comment rows short.                            |
+| A label row such as `Count of all Males` doesn't apply to the rows below    | `header_rows` is set, so label rows are treated as data                                                                                 | Leave `header_rows` and `mapped_columns` unset, or mark the label with `#Header`.                                                                                 |
+| A config setting has no effect                                              | The setting name has a typo                                                                                                             | Check the name against [Advanced configuration](config.md).                                                                                                       |
+| `#Ignore` or `#header` has no effect                                        | Keywords are case-sensitive                                                                                                             | Write `#ignore` and `#Header`.                                                                                                                                    |
+| A computed property is missing                                              | A `#Eval` or `#Filter` expression failed silently                                                                                       | Test it on a few rows with `--debug`; cast strings with `float()` or `int()`.                                                                                     |
 
 ## Wrong values
 
@@ -63,14 +66,19 @@ alone isn't a problem.
 `dc-import lint` checks the CSV, TMCF, and MCF files. Errors that come from the
 PV map are fixed there:
 
-| Lint error                                                           | Fix in the PV map                                                                                                                     |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| An undefined property or enum value, such as an unknown `race` value | Use an existing value (find one with `schema_matcher.py`, see [Tools](tools.md)), or review the new value in `_stat_vars_schema.mcf`. |
-| A malformed DCID                                                     | Check the place pattern, for example `country/{Data}` needs ISO 3166 alpha-3 codes.                                                   |
-| `existing_statvar_mcf` fails with `403 Forbidden`                    | You don't have access to `gs://unresolved_mcf`; leave the flag out for local tests.                                                   |
-| Lint fails with `ConnectException` and writes no report              | Lint can't reach the Data Commons API; add `-e=false -ep=false`.                                                                      |
-| A value that isn't a number                                          | Check that the `value` column holds numbers and that footers are excluded.                                                            |
-| A date that isn't ISO 8601                                           | Map dates with a format the processor normalizes, or convert them with `#Eval`.                                                       |
+| Lint error                                                           | Fix in the PV map                                                                                                                                         |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| An undefined property or enum value, such as an unknown `race` value | Use an existing value (find one with `schema_matcher.py`, see [Schema tools](../schema/README.md)), or review the new value in `_stat_vars_schema.mcf`.   |
+| A malformed DCID                                                     | Check the place pattern, for example `country/{Data}` needs ISO 3166 alpha-3 codes.                                                                       |
+| `existing_statvar_mcf` fails with `403 Forbidden`                    | You don't have access to `gs://unresolved_mcf`; leave the flag out for local tests.                                                                       |
+| Lint fails with `ConnectException` and writes no report              | Lint can't reach the Data Commons API. Run it with network access; `-e=false -ep=false` reduces the calls, and `-s=false` crashes in the current release. |
+| A value that isn't a number                                          | Check that the `value` column holds numbers and that footers are excluded.                                                                                |
+| A date that isn't ISO 8601                                           | Map dates with a format the processor normalizes, or convert them with `#Eval`.                                                                           |
+
+Warnings about empty values in optional columns, such as
+`StrSplit_EmptyToken_scalingFactor` for `unit`, `scalingFactor`,
+`measurementMethod`, or `observationPeriod`, are expected when only some rows
+set the column. Ignore them.
 
 Warnings such as `Existence_FailedDcCall_*` mean that lint couldn't reach the
 Data Commons API to check a reference. Rerun with network access before you
@@ -91,6 +99,21 @@ grep -n "Total Persons" /tmp/debug/run.log | head
 
 To debug specific rows, set `process_rows` in the config; see
 [Advanced configuration](config.md#debug-a-few-rows).
+
+For more detail, use `--log_level` instead of `--debug`:
+
+- `--log_level=2` also logs how references such as `{Number}` and `{Data}` are
+  resolved for each cell (`Resolved references`).
+- `--log_level=3` also logs every PV map lookup: each text tried as a key, with
+  its column prefix (`Search PVs for <column>:<text>`), each partial-match
+  fragment, and the keys that matched (`Got PVs for`).
+
+Level 3 writes about ten times as many lookup lines, so combine it with
+`--input_rows` or `process_rows`, and search the log for the source text:
+
+```bash
+grep -n "Search PVs for.*Total Persons\|Got PVs for" /tmp/debug/run.log | head
+```
 
 ## Observations dropped between versions
 

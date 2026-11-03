@@ -37,6 +37,11 @@ from resolving. Use a specific key, such as `county name`.
 
 ### Generate the file with `place_resolver.py`
 
+WARNING: In testing, `place_resolver.py` resolved no names, even with a valid
+API key and with `--resolve_api_url=https://api.datacommons.org/v2/resolve` (the
+default is the `autopush` endpoint). Check the output, and fall back to a
+hand-written places PV map if names come back empty.
+
 To look up DCIDs for many names, generate the file and review it:
 
 1. Create a CSV with the names in a `place_name` column. Quote names that
