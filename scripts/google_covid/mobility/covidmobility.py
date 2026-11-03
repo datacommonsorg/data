@@ -105,9 +105,10 @@ def clean_csv(input_path: str, output_path: str) -> None:
                 sub_region2: str = row['sub_region_2']
                 country_code: str = row['country_region_code']
                 date = row['date']
-            except KeyError:
+            except KeyError as e:
                 logging.error(
                     f"Missing expected column in row: {e}. Skipping row.")
+                continue
 
             # Convert the region name to a dcid/geoId.
             region_dcid: str = _get_region_dcid(sub_region2, sub_region1,

@@ -377,14 +377,14 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
             # Get max value to filter by min threshold.
             reducers = ['max']
         if 'band_max' in config:
-            if not reducer:
+            if not reducers:
                 # Get min value to filter by max threshold alone.
-                reducer = ['min']
+                reducers = ['min']
             else:
                 # Get mean value if both min/max thresholds are set.
-                reducer = ['mean']
+                reducers = ['mean']
         elif 'band_eq' in config:
-            reducer = ['last']
+            reducers = ['last']
     img = ee.Image()
     for reducer in reducers:
         if reducer not in _REDUCER_DICT:

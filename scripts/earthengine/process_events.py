@@ -425,7 +425,7 @@ class GeoEventsProcessor:
             if max_distance_km:
                 place_distance_km = utils.place_distance(
                     place_id, _first(new_neighbours))
-                if place_distance == 0 or place_distance_km > max_distance:
+                if place_distance_km == 0 or place_distance_km > max_distance_km:
                     # Neighbours are too far. Ignore them
                     break
             for n in new_neighbours:
@@ -610,7 +610,7 @@ class GeoEventsProcessor:
         # the earliest date.
         root_event = self.merge_events(event_ids)
         if not root_event:
-            logging.debug(f'Unable to find event for {root_event_id}')
+            logging.debug(f'Unable to find event for {event_ids}')
             return None
         root_event_id = root_event.event_id()
         root_event.add_place_pvs(place_id, date, pvs)

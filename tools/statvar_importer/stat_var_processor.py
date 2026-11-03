@@ -760,9 +760,9 @@ class StatVarsMap:
     """
         # Check if SVObs aggregation is enabled.
         if svobs_key not in self._statvar_obs_map:
-            log.error(f'Unexpected missing SVObs: {svobs_key}:{svobs}')
+            logging.error(f'Unexpected missing SVObs: {svobs_key}:{svobs}')
             self._counters.add_counter(
-                'error-statvar-obs-missing-for-dup-svobs', 1, statvar_dcid)
+                'error-statvar-obs-missing-for-dup-svobs', 1, svobs_key)
             return
         existing_svobs = self._statvar_obs_map.get(svobs_key, None)
         if not existing_svobs:

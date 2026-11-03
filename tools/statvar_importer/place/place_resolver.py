@@ -742,6 +742,8 @@ class PlaceResolver:
         wiki_props = self._wiki_resolver.get_config_wiki_props()
         if not wiki_props:
             # No properties to lookup. Only resolve place names.
+            unresolved_places = {}
+            results = {}
             self._get_unresolved_places(places, unresolved_places, results)
         else:
             unresolved_places = places

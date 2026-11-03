@@ -497,7 +497,7 @@ def add_data_point(
                     cur_data[f'#{prop}:count'] = cur_num + new_num
             except TypeError as e:
                 logging.error(
-                    f'Error {e} in aggregating: {agr}: prop: {prop}, for new'
+                    f'Error {e} in aggregating: {aggr}: prop: {prop}, for new'
                     f' {data_point} with old: {cur_data}')
 
         # Update lat/long to centroid.

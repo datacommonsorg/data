@@ -205,7 +205,9 @@ class StageRunner:
                         output_dir, os.path.basename(input_filename)),
                                                        suffix=f'-{stage_name}')
                 else:
-                    filename = f'{output_dir}/{import_name}-{stage_name}-{start_date}-{time_period}{file_ext}'
+                    # import_name, start_date and time_period are filled in
+                    # from the config by _format() below.
+                    filename = f'{output_dir}/{{import_name}}-{stage_name}-{{start_date}}-{{time_period}}{file_ext}'
 
         return _format(filename, self.config)
 

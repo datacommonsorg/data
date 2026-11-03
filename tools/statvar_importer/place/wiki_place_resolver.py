@@ -415,8 +415,8 @@ class WikiPlaceResolver:
             if isinstance(prop_item, dict):
                 # Property has multiple values in different languages.
                 if langs and '*' in langs:
-                    langs = list(lang)
-                    langs.append(prop_item.keys())
+                    langs = list(langs)
+                    langs.extend(prop_item.keys())
                 for lang in langs:
                     value = prop_item.get(lang)
                     if value:

@@ -347,7 +347,7 @@ def run_http_server(
 
     # Add form inputs for all flags for the module.
     if not module:
-        module = basename(sys.argv[0]).split('.py')[0]
+        module = os.path.basename(sys.argv[0]).split('.py')[0]
     logging.info(f'Getting flags for module: {module}')
     form_config = _get_form_config(config)
     form_inputs = form_config.get('form_input', [])

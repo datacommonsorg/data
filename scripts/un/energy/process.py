@@ -242,8 +242,8 @@ def is_valid_stat_var(sv_pv: dict, counters=None) -> bool:
     for prop in STAT_VAR_REQUIRED_PROPERTIES:
         if prop not in sv_pv:
             _add_error_counter(
-                f'error_missing_property_{p}',
-                f'Stat var missing property {p}, statVar: {sv_pv}', counters)
+                f'error_missing_property_{prop}',
+                f'Stat var missing property {prop}, statVar: {sv_pv}', counters)
             return False
 
     return True
