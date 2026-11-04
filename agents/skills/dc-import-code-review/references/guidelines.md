@@ -33,7 +33,7 @@ repository contracts and instructions take precedence.
 - [rule-binary-files] Commit text files only; keep archives of any format,
   pickles, and other binary files out of the PR unless they are stored
   through Git LFS. Excel and PDF files are allowed only under `test_data/`;
-  tests that need an archive build it at run time from text fixtures.
+  tests that need an archive build it at run time from test fixtures.
 
 ## Execution and failure handling
 
