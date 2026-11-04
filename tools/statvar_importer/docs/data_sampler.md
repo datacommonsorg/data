@@ -199,6 +199,11 @@ Keep these points in mind:
   gave 2,183 rows.
 - **The regex doesn't apply to row keys.** Row keys track every combination,
   including empty cells and numbers.
+- **Column names must match the header** exactly, including case and spaces. If
+  a row key names a column that isn't in the header rows, the sampler stops with
+  `Missing row key columns in headers` and lists the missing columns. For a file
+  with title lines, set `--sampler_header_rows`; see
+  [Title lines above the header](#title-lines-above-the-header).
 - **Only the row keys are tracked** when you don't set
   `--sampler_unique_columns`. Set both to also track single columns with the
   regex.
@@ -502,8 +507,10 @@ mind:
 
 If the file starts with title lines, count them in `--sampler_header_rows`, for
 example `--sampler_header_rows=2` for one title line. The names in
-`--sampler_unique_columns` must appear in these header rows. Otherwise, the
-sampler stops with `Missing unique columns in headers`.
+`--sampler_unique_columns` and `--sampler_row_keys` must appear in these header
+rows. Otherwise, the sampler stops before it reads the data, with
+`Missing unique columns in headers` or `Missing row key columns in headers`, and
+writes no output.
 
 ### Files with other delimiters
 

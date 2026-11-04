@@ -89,7 +89,9 @@ flags.DEFINE_list(
     'selected if the combination of its values in the key columns is new, '
     'subject to sampler_rows_per_key and sampler_uniques_per_column. '
     'sampler_column_regex does not apply to row keys. When set without '
-    'sampler_unique_columns, only the row keys are tracked.')
+    'sampler_unique_columns, only the row keys are tracked. Every key column '
+    'must be in the header rows (see sampler_header_rows); otherwise the '
+    'sampler raises an error before reading the data.')
 flags.DEFINE_list(
     'sampler_column_keys', [],
     'A list of "column:file" pairs containing values that MUST be included '
