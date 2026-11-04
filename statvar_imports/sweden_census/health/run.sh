@@ -49,18 +49,11 @@ MAX_JOBS="${MAX_JOBS:-4}"
 pids=()
 
 run_bg() {
+  while (( $(jobs -rp | wc -l) >= MAX_JOBS )); do
+    wait -n
+  done
   run_group "$@" &
   pids+=($!)
-  if (( ${#pids[@]} >= MAX_JOBS )); then
-    wait -n
-    local alive=()
-    for pid in "${pids[@]}"; do
-      if kill -0 "$pid" 2>/dev/null; then
-        alive+=("$pid")
-      fi
-    done
-    pids=("${alive[@]}")
-  fi
 }
 
 # 1. Group 1: Total Deaths by Region (4 files, 1 StatVar, mapped_columns=2)
