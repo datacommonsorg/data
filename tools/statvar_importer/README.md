@@ -63,7 +63,9 @@ you it is done:
    *Done when* every value column maps `value,{Number}` and the
    [mandatory properties](#mandatory-properties) are covered.
 1. **Run on a sample** with `--input_rows=100` and
-   `--output_counters=counters/<import>_counters.csv`. *Done when* the command
+   `--output_counters=counters/<import>_counters.csv`. For large or long-format
+   inputs, test on a sample with every indicator, category, and place instead;
+   see the [data sampler guide](docs/data_sampler.md). *Done when* the command
    exits with code 0 and every `dropped-*` counter is 0 or explained.
 1. **Check the output.** Read the counters, then trace 3 output rows back to the
    source with the `#input` column. *Done when* every
@@ -402,6 +404,11 @@ bucket and `gcloud` credentials; without access, the run fails with
 - `output/`: only the CSV, TMCF, and MCF files for the import tool.
 - `counters/`: counters. Keep them out of `output/`, which the import tool reads
   as a whole.
+- `test_data/`: a small `sample_input.csv` and its expected output for tests. To
+  create a sample input that makes the processor generate every StatVar and
+  SVObs property combination, see
+  [A test input that covers every StatVar](docs/data_sampler.md#a-test-input-that-covers-every-statvar).
+  Store test files longer than about 1,000 lines with Git LFS.
 
 Add the command to the import's `manifest.json`:
 
@@ -526,7 +533,8 @@ For more, see [Troubleshooting](docs/troubleshooting.md).
 | A run produced fewer rows than expected                     | [Troubleshooting](docs/troubleshooting.md)                                                      |
 | Resolve many place names                                    | [Place tools](place/README.md)                                                                  |
 | Find existing schema, draft PV maps, generate StatVar names | [Schema tools](schema/README.md)                                                                |
-| Compare or merge MCF, sample large inputs                   | [Tools](docs/tools.md)                                                                          |
+| Make a test sample with every indicator and place           | [Data sampler](docs/data_sampler.md)                                                            |
+| Compare or merge MCF                                        | [Tools](docs/tools.md)                                                                          |
 | Generate a PV map automatically                             | [tools/agentic_import](https://github.com/datacommonsorg/data/tree/master/tools/agentic_import) |
 | Review an import change before a pull request               | [dc-import-code-review skill](../../agents/skills/dc-import-code-review/SKILL.md)               |
 | Diagnose a failed or changed production refresh             | [dc-import-diagnostics skill](../../agents/skills/dc-import-diagnostics/SKILL.md)               |
