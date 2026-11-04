@@ -66,15 +66,20 @@ class DownloadTest(unittest.TestCase):
         ]
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            stale_file = Path(temp_dir) / 'Diabetes_County_2020.xlsx'
-            stale_file.write_bytes(b'stale data')
+            existing_file = Path(temp_dir) / 'Diabetes_County_2020.xlsx'
+            existing_file.write_bytes(b'existing data')
 
             download.download_files_from_gcs(urls, temp_dir)
 
             self.assertEqual(
                 (Path(temp_dir) / 'Diabetes_County_2019.xlsx').read_bytes(),
                 b'new data')
-            self.assertFalse(stale_file.exists())
+            self.assertTrue(existing_file.exists())
+            self.assertEqual(existing_file.read_bytes(), b'existing data')
+            self.assertFalse(
+                (Path(temp_dir) / 'Diabetes_County_2019.xlsx.tmp').exists())
+            self.assertFalse(
+                (Path(temp_dir) / 'Diabetes_County_2020.xlsx.tmp').exists())
 
     @mock.patch.object(download.storage, 'Client')
     def test_gcs_download_fails_when_no_files_exist(self, mock_client):
@@ -201,8 +206,9 @@ class DownloadTest(unittest.TestCase):
 
     @mock.patch.object(download, 'date')
     @mock.patch.object(download, 'create_retry_session')
-    def test_download_files_skips_unreleased_future_year_error(
-            self, mock_session_factory, mock_date):
+    def test_download_files_raises_on_future_year_error(self,
+                                                        mock_session_factory,
+                                                        mock_date):
         mock_date.today.return_value.year = 2026
         mock_session = mock.Mock()
         mock_resp_success = mock.Mock()
@@ -226,7 +232,8 @@ class DownloadTest(unittest.TestCase):
                 'https://tn.example/2022/Diabetes_County_2022.xlsx',
                 'https://tn.example/2024/Diabetes_County_2024.xlsx',
             ]
-            download.download_files(urls, temp_dir)
+            with self.assertRaises(requests.exceptions.ConnectionError):
+                download.download_files(urls, temp_dir)
             self.assertTrue(
                 (Path(temp_dir) / 'Diabetes_County_2022.xlsx').exists())
             self.assertFalse(partial_file.exists())

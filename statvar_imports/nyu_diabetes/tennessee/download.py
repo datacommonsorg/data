@@ -95,8 +95,6 @@ def download_files(url_list, save_folder):
                             f"File not yet available (404), skipping unreleased year {year}: {url}"
                         )
                         continue
-                    logging.error(
-                        f"Download failed with 404 for due year {year}: {url}")
                     raise requests.exceptions.HTTPError(
                         f"404 Client Error: Not Found for due year {year}: {url}"
                     )
@@ -123,14 +121,6 @@ def download_files(url_list, save_folder):
                 if response is not None:
                     response.close()
                 Path(file_path).unlink(missing_ok=True)
-                year = extract_year(filename)
-                current_year = date.today().year
-                # Tennessee death statistics typically has a 3-year publication lag.
-                if downloaded_count > 0 and year and year > current_year - 3:
-                    logging.warning(
-                        f"Skipping future unreleased year {year} after error: {e}"
-                    )
-                    continue
                 logging.error(
                     f"Download failed: source={url}, destination={file_path}, error={e}"
                 )
@@ -156,7 +146,8 @@ def download_files_from_gcs(url_list, save_folder):
         parsed_url = urlparse(url)
         filename = os.path.basename(parsed_url.path)
         file_path = os.path.join(save_folder, filename)
-        Path(file_path).unlink(missing_ok=True)
+        temp_file_path = f"{file_path}.tmp"
+        Path(temp_file_path).unlink(missing_ok=True)
 
         logging.info(
             f"Starting download: source={url}, destination={file_path}")
@@ -164,13 +155,14 @@ def download_files_from_gcs(url_list, save_folder):
         try:
             blob = storage_client.bucket(parsed_url.netloc).blob(
                 parsed_url.path.lstrip('/'))
-            blob.download_to_filename(file_path)
+            blob.download_to_filename(temp_file_path)
+            os.replace(temp_file_path, file_path)
         except exceptions.NotFound:
-            Path(file_path).unlink(missing_ok=True)
+            Path(temp_file_path).unlink(missing_ok=True)
             logging.warning(f"GCS object not found, skipping: source={url}")
             continue
         except Exception as e:
-            Path(file_path).unlink(missing_ok=True)
+            Path(temp_file_path).unlink(missing_ok=True)
             logging.error(f"Failed to download GCS object {url}: {e}")
             if hasattr(e, 'add_note'):
                 e.add_note(f"Failed to download GCS object {url}")
