@@ -83,18 +83,25 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                          '5-14 år')
         self.assertEqual(download_demographic._age_to_bracket('95', 105),
                          '95-104 år')
+        self.assertEqual(download_demographic._age_to_bracket('100+1', 105),
+                         '95-104 år')
+        self.assertIsNone(download_demographic._age_to_bracket('100+5', 105))
+        self.assertIsNone(download_demographic._age_to_bracket('100+10', 105))
         self.assertEqual(download_demographic._age_to_bracket('110+', 105),
                          '105+ år')
         self.assertEqual(download_demographic._age_to_bracket('95', 95),
                          '95+ år')
+        self.assertEqual(download_demographic._age_to_bracket('100+1', 95),
+                         '95+ år')
         self.assertIsNone(download_demographic._age_to_bracket('tot', 95))
+        self.assertIsNone(download_demographic._age_to_bracket('TotSA', 95))
 
     def test_download_and_write_national_files_mocked(self):
-        meta_payload = json.dumps({
+        meta_hist_payload = json.dumps({
             'variables': [
                 {
                     'code': 'Alder',
-                    'values': ['0', '5', '105', '110+']
+                    'values': ['0', '5', '105', '110+', 'tot']
                 },
                 {
                     'code': 'Kon',
@@ -112,7 +119,7 @@ class DownloadDemographicUnitTest(unittest.TestCase):
             ]
         }).encode('utf-8')
 
-        post_payload = json.dumps({
+        post_hist_payload = json.dumps({
             'data': [
                 {
                     'key': ['0', '1', '1860'],
@@ -123,8 +130,24 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                     'values': ['90']
                 },
                 {
+                    'key': ['tot', '1', '1860'],
+                    'values': ['100']
+                },
+                {
+                    'key': ['tot', '2', '1860'],
+                    'values': ['90']
+                },
+                {
                     'key': ['5', '1', '2024'],
                     'values': ['200']
+                },
+                {
+                    'key': ['tot', '1', '2024'],
+                    'values': ['200']
+                },
+                {
+                    'key': ['tot', '2', '2024'],
+                    'values': ['5']
                 },
                 {
                     'key': ['105', '2', '1860'],
@@ -137,20 +160,68 @@ class DownloadDemographicUnitTest(unittest.TestCase):
             ]
         }).encode('utf-8')
 
+        meta_ckm_payload = json.dumps({
+            'variables': [
+                {
+                    'code': 'Alder',
+                    'values': ['0', '5', '95', '100+1', '100+5', 'TotSA']
+                },
+                {
+                    'code': 'Kon',
+                    'values': ['TotSa', '1', '2'],
+                    'valueTexts': ['totalt', 'män', 'kvinnor'],
+                },
+                {
+                    'code': 'ContentsCode',
+                    'values': ['0000088D']
+                },
+                {
+                    'code': 'Tid',
+                    'values': ['2025']
+                },
+            ]
+        }).encode('utf-8')
+
+        post_ckm_payload = json.dumps({
+            'data': [
+                {
+                    'key': ['0', '1', '2025'],
+                    'values': ['110']
+                },
+                {
+                    'key': ['100+1', '2', '2025'],
+                    'values': ['15']
+                },
+                {
+                    'key': ['TotSA', '1', '2025'],
+                    'values': ['110']
+                },
+                {
+                    'key': ['TotSA', '2', '2025'],
+                    'values': ['15']
+                },
+            ]
+        }).encode('utf-8')
+
         with tempfile.TemporaryDirectory() as tmp_dir:
             with mock.patch.object(download_demographic,
                                    'REQUEST_SLEEP_SECONDS',
                                    0.0), mock.patch.object(
                                        download_demographic.download_util,
                                        'request_url',
-                                       side_effect=[meta_payload, post_payload],
+                                       side_effect=[
+                                           meta_hist_payload,
+                                           post_hist_payload,
+                                           meta_ckm_payload,
+                                           post_ckm_payload,
+                                       ],
                                    ):
                 years = download_demographic.download_and_write_national_files(
                     output_dir=tmp_dir,
                     start_year=1860,
-                    end_year=2024,
+                    end_year=2025,
                 )
-            self.assertEqual(years, ['1860', '2024'])
+            self.assertEqual(years, ['1860', '2024', '2025'])
             for fname in (
                     'population_country.csv',
                     'population_gender_country.csv',
@@ -164,6 +235,7 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                 self.assertGreaterEqual(len(rows), 4)
                 self.assertIn('1860', rows[2])
                 self.assertIn('2024', rows[2])
+                self.assertIn('2025', rows[2])
 
     def test_download_and_write_subnational_files_mocked(self):
         county_name_to_nuts, _ = download_demographic._load_nuts_hierarchy(
@@ -172,7 +244,7 @@ class DownloadDemographicUnitTest(unittest.TestCase):
         county_codes = [f'{i + 1:02d}' for i in range(21)]
         muni_codes = [f'{1000 + i:04d}' for i in range(290)]
         muni_texts = [f'Muni{i}' for i in range(290)]
-        meta_payload = json.dumps({
+        meta_hist_payload = json.dumps({
             'variables': [
                 {
                     'code': 'Region',
@@ -180,12 +252,10 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                     'valueTexts': ['Riket'] + county_names + muni_texts,
                 },
                 {
-                    'code':
-                        'Civilstand',
-                    'values': ['OG', 'G', 'S', 'ÄKL'],
-                    'valueTexts': [
-                        'ogifta', 'gifta', 'skilda', 'änkor/änklingar'
-                    ],
+                    'code': 'Civilstand',
+                    'values': ['OG', 'G', 'SK', 'ÄNKL'],
+                    'valueTexts':
+                    ['ogifta', 'gifta', 'skilda', 'änkor/änklingar'],
                 },
                 {
                     'code': 'Alder',
@@ -207,17 +277,80 @@ class DownloadDemographicUnitTest(unittest.TestCase):
             ]
         }).encode('utf-8')
 
-        county_payload = json.dumps({
-            'data': [{
-                'key': ['01', 'OG', '0', '1', '1968'],
-                'values': ['500']
-            },]
+        county_hist_payload = json.dumps({
+            'data': [
+                {
+                    'key': ['01', 'OG', '0', '1', '1968'],
+                    'values': ['500']
+                },
+                {
+                    'key': ['01', 'OG', 'tot', '1', '1968'],
+                    'values': ['500']
+                },
+            ]
         }).encode('utf-8')
-        muni_payload = json.dumps({
-            'data': [{
-                'key': ['1000', 'G', 'tot', '2', '2024'],
-                'values': ['300']
-            },]
+        muni_hist_payload = json.dumps({
+            'data': [
+                {
+                    'key': ['1000', 'G', 'tot', '2', '2024'],
+                    'values': ['300']
+                },
+            ]
+        }).encode('utf-8')
+
+        meta_ckm_payload = json.dumps({
+            'variables': [
+                {
+                    'code': 'Region',
+                    'values': ['00'] + county_codes + muni_codes,
+                    'valueTexts': ['Riket'] + county_names + muni_texts,
+                },
+                {
+                    'code':
+                    'Civilstand',
+                    'values': ['SC', 'OG', 'G', 'SK', 'ÄNKL'],
+                    'valueTexts':
+                    ['totalt', 'ogifta', 'gifta', 'skilda', 'änkor/änklingar'],
+                },
+                {
+                    'code': 'Alder',
+                    'values': ['0', '95', '100+1', 'TotSA']
+                },
+                {
+                    'code': 'Kon',
+                    'values': ['TotSa', '1', '2'],
+                    'valueTexts': ['totalt', 'män', 'kvinnor'],
+                },
+                {
+                    'code': 'ContentsCode',
+                    'values': ['000007ME']
+                },
+                {
+                    'code': 'Tid',
+                    'values': ['2025']
+                },
+            ]
+        }).encode('utf-8')
+
+        county_ckm_payload = json.dumps({
+            'data': [
+                {
+                    'key': ['01', 'OG', '0', '1', '2025'],
+                    'values': ['520']
+                },
+                {
+                    'key': ['01', 'OG', 'TotSA', '1', '2025'],
+                    'values': ['520']
+                },
+            ]
+        }).encode('utf-8')
+        muni_ckm_payload = json.dumps({
+            'data': [
+                {
+                    'key': ['1000', 'G', 'TotSA', '2', '2025'],
+                    'values': ['310']
+                },
+            ]
         }).encode('utf-8')
 
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -227,17 +360,21 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                                        download_demographic.download_util,
                                        'request_url',
                                        side_effect=[
-                                           meta_payload, county_payload,
-                                           muni_payload
+                                           meta_hist_payload,
+                                           county_hist_payload,
+                                           muni_hist_payload,
+                                           meta_ckm_payload,
+                                           county_ckm_payload,
+                                           muni_ckm_payload,
                                        ],
                                    ):
                 years = download_demographic.download_and_write_subnational_files(
                     output_dir=tmp_dir,
                     places_csv_path=PLACES_CSV,
                     start_year=1968,
-                    end_year=2024,
+                    end_year=2025,
                 )
-            self.assertEqual(years, ['1968', '2024'])
+            self.assertEqual(years, ['1968', '2024', '2025'])
             created_csvs = sorted(os.listdir(tmp_dir))
             self.assertEqual(len(created_csvs), 19)
             self.assertIn('population_nuts1.csv', created_csvs)
@@ -256,7 +393,8 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
         expected_tmcf = os.path.join(TEST_DATA_DIR,
                                      f'{sample_prefix}_output.tmcf')
         self.assertTrue(os.path.exists(input_csv), f'Missing {input_csv}')
-        self.assertTrue(os.path.exists(expected_csv), f'Missing {expected_csv}')
+        self.assertTrue(os.path.exists(expected_csv),
+                        f'Missing {expected_csv}')
         self.assertTrue(os.path.exists(expected_tmcf),
                         f'Missing {expected_tmcf}')
 
@@ -294,8 +432,9 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
                 self.assertEqual(f_exp.read().splitlines(),
                                  f_act.read().splitlines())
 
-            with open(expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf, open(
-                    actual_tmcf, 'r', encoding='utf-8') as f_act_tmcf:
+            with open(expected_tmcf, 'r',
+                      encoding='utf-8') as f_exp_tmcf, open(
+                          actual_tmcf, 'r', encoding='utf-8') as f_act_tmcf:
                 self.assertEqual(
                     sorted(f_exp_tmcf.read().splitlines()),
                     sorted(f_act_tmcf.read().splitlines()),
@@ -335,7 +474,8 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
             fpath = os.path.join(SCRIPT_DIR, fname)
             with open(fpath, 'r', encoding='utf-8') as f:
                 rows = [
-                    tuple(r) for r in csv.reader(f) if any(c.strip() for c in r)
+                    tuple(r) for r in csv.reader(f)
+                    if any(c.strip() for c in r)
                 ]
             data_rows = rows[1:]
             keys = [r[0].strip() for r in data_rows]

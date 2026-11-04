@@ -1,4 +1,4 @@
-# Sweden Census: Demographic Population Statistics (1860–2024)
+# Sweden Census: Demographic Population Statistics (1860–2025)
 
 ## 1. Import Overview
 
@@ -9,14 +9,14 @@ This directory contains the automated Data Commons import pipeline for **Sweden 
 | **Source Agency** | Statistics Sweden (SCB / *Statistiska centralbyrån*) |
 | **Import Type** | Automated (Python PxWeb REST API downloader + `stat_var_processor.py`) |
 | **Authentication** | None (Public SCB PxWeb REST API; rate-limited to 10 requests / 10 seconds) |
-| **SCB Table IDs** | `BE0101A/BefolkningR1860N` (National `1860–2024`) & `BE0101A/BefolkningNy` (Sub-National `1968–2024`) |
+| **SCB Table IDs** | `BE0101A/BefolkningR1860N` (`1860–2024`) & `BE0101A/BefolkningR1860NCKM` (`2025+`) (National)<br>`BE0101A/BefolkningNy` (`1968–2024`) & `BE0101A/BefolkningCKM` (`2025+`) (Sub-National) |
 | **Source URL** | [SCB Statistikdatabasen — BE0101A](https://www.statistikdatabasen.scb.se/pxweb/en/ssd/START__BE__BE0101__BE0101A/) |
-| **REST API Endpoints** | `https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860N`<br>`https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningNy` |
+| **REST API Endpoints** | `https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860N`<br>`https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860NCKM`<br>`https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningNy`<br>`https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningCKM` |
 | **Geographic Coverage** | **322** Places in Sweden: `1` Country (`country/SWE`), `3` NUTS1 (`nuts/SE1`–`SE3`), `8` NUTS2 (`nuts/SE11`–`SE33`), `21` NUTS3 Counties (`nuts/SE110`–`SE332`), and `289` Municipalities (`wikidataId/Q*`) |
-| **Temporal Coverage** | `1860–2024` (National, 165 years) & `1968–2024` (Sub-National, 57 years; dynamically discovers new years via SCB API) |
+| **Temporal Coverage** | `1860–2025` (National, 166 years) & `1968–2025` (Sub-National, 58 years; dynamically discovers new years via SCB API) |
 | **Release Frequency** | Annual (scheduled weekly cron `0 05 * * 1`) |
 | **Total Unique StatVars** | **139** unique `StatisticalVariable` DCIDs across all breakdowns |
-| **Total SVObs (`1860–2024`)** | **441,402** (`426,062` historical `1860–2022` + `15,340` new `2023–2024`) |
+| **Total SVObs (`1860–2025`)** | **449,072** (`426,062` historical `1860–2022` + `23,010` new `2023–2025`) |
 
 ---
 
@@ -26,29 +26,29 @@ All **23** CSV sub-imports are processed using a single unified PVMap (`demograp
 
 | # | Sub-Import File Stem | Group | Place Level | Places | Dim Cols | Unique SVs | Output SVObs | PVMap | Metadata Config | StatVar Remap |
 | :-: | :--- | :--- | :--- | ---: | :-: | ---: | ---: | :--- | :--- | :--- |
-| 1 | `population_country` | **1A: National Total** | Country (`country/SWE`) | 1 | 1 | 1 | 165 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 2 | `population_gender_country` | **1A: National Gender** | Country (`country/SWE`) | 1 | 1 | 2 | 330 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 3 | `population_age_country` | **1A: National Age** | Country (`country/SWE`) | 1 | 1 | 12 | 1,980 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 4 | `population_age_gender_country` | **1A: National Age×Gender** | Country (`country/SWE`) | 1 | 2 | 24 | 3,960 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 5 | `population_nuts1` | **1B: Sub-National Total** | NUTS1 | 3 | 1 | 1 | 171 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 6 | `population_nuts2` | **1B: Sub-National Total** | NUTS2 | 8 | 1 | 1 | 456 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 7 | `population_nuts3` | **1B: Sub-National Total** | NUTS3 | 21 | 1 | 1 | 1,197 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 8 | `population_municipality` | **1B: Sub-National Total** | Municipality | 289 | 1 | 1 | 16,473 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 9 | `population_gender_nuts1` | **1B: Sub-National Gender** | NUTS1 | 3 | 2 | 2 | 342 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 10 | `population_gender_nuts2` | **1B: Sub-National Gender** | NUTS2 | 8 | 2 | 2 | 912 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 11 | `population_gender_nuts3` | **1B: Sub-National Gender** | NUTS3 | 21 | 2 | 2 | 2,394 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 12 | `population_gender_municipality` | **1B: Sub-National Gender** | Municipality | 289 | 2 | 2 | 32,946 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 13 | `population_maritalstatus_nuts1` | **1B: Sub-National Marital** | NUTS1 | 3 | 2 | 4 | 684 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 14 | `population_maritalstatus_nuts2` | **1B: Sub-National Marital** | NUTS2 | 8 | 2 | 4 | 1,824 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 15 | `population_maritalstatus_nuts3` | **1B: Sub-National Marital** | NUTS3 | 21 | 2 | 4 | 4,788 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 16 | `population_maritalstatus_municipality` | **1B: Sub-National Marital** | Municipality | 289 | 2 | 4 | 65,892 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 17 | `population_maritalstatus_gender_nuts1` | **1B: Marital×Gender** | NUTS1 | 3 | 3 | 8 | 1,368 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 18 | `population_maritalstatus_gender_nuts2` | **1B: Marital×Gender** | NUTS2 | 8 | 3 | 8 | 3,648 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 19 | `population_maritalstatus_gender_nuts3` | **1B: Marital×Gender** | NUTS3 | 21 | 3 | 8 | 9,576 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 20 | `population_maritalstatus_gender_municipality` | **1B: Marital×Gender** | Municipality | 289 | 3 | 8 | 131,784 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 21 | `population_age_maritalstatus_gender_nuts1` | **1B: Age×Marital×Gender** | NUTS1 | 3 | 4 | 88 | 15,048 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 22 | `population_age_maritalstatus_gender_nuts2` | **1B: Age×Marital×Gender** | NUTS2 | 8 | 4 | 88 | 40,128 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
-| 23 | `population_age_maritalstatus_gender_nuts3` | **1B: Age×Marital×Gender** | NUTS3 | 21 | 4 | 88 | 105,336 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 1 | `population_country` | **1A: National Total** | Country (`country/SWE`) | 1 | 1 | 1 | 166 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 2 | `population_gender_country` | **1A: National Gender** | Country (`country/SWE`) | 1 | 1 | 2 | 332 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 3 | `population_age_country` | **1A: National Age** | Country (`country/SWE`) | 1 | 1 | 12 | 1,992 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 4 | `population_age_gender_country` | **1A: National Age×Gender** | Country (`country/SWE`) | 1 | 2 | 24 | 3,984 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 5 | `population_nuts1` | **1B: Sub-National Total** | NUTS1 | 3 | 1 | 1 | 174 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 6 | `population_nuts2` | **1B: Sub-National Total** | NUTS2 | 8 | 1 | 1 | 464 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 7 | `population_nuts3` | **1B: Sub-National Total** | NUTS3 | 21 | 1 | 1 | 1,218 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 8 | `population_municipality` | **1B: Sub-National Total** | Municipality | 289 | 1 | 1 | 16,762 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 9 | `population_gender_nuts1` | **1B: Sub-National Gender** | NUTS1 | 3 | 2 | 2 | 348 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 10 | `population_gender_nuts2` | **1B: Sub-National Gender** | NUTS2 | 8 | 2 | 2 | 928 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 11 | `population_gender_nuts3` | **1B: Sub-National Gender** | NUTS3 | 21 | 2 | 2 | 2,436 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 12 | `population_gender_municipality` | **1B: Sub-National Gender** | Municipality | 289 | 2 | 2 | 33,524 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 13 | `population_maritalstatus_nuts1` | **1B: Sub-National Marital** | NUTS1 | 3 | 2 | 4 | 696 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 14 | `population_maritalstatus_nuts2` | **1B: Sub-National Marital** | NUTS2 | 8 | 2 | 4 | 1,856 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 15 | `population_maritalstatus_nuts3` | **1B: Sub-National Marital** | NUTS3 | 21 | 2 | 4 | 4,872 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 16 | `population_maritalstatus_municipality` | **1B: Sub-National Marital** | Municipality | 289 | 2 | 4 | 67,048 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 17 | `population_maritalstatus_gender_nuts1` | **1B: Marital×Gender** | NUTS1 | 3 | 3 | 8 | 1,392 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 18 | `population_maritalstatus_gender_nuts2` | **1B: Marital×Gender** | NUTS2 | 8 | 3 | 8 | 3,712 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 19 | `population_maritalstatus_gender_nuts3` | **1B: Marital×Gender** | NUTS3 | 21 | 3 | 8 | 9,744 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 20 | `population_maritalstatus_gender_municipality` | **1B: Marital×Gender** | Municipality | 289 | 3 | 8 | 134,096 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 21 | `population_age_maritalstatus_gender_nuts1` | **1B: Age×Marital×Gender** | NUTS1 | 3 | 4 | 88 | 15,312 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 22 | `population_age_maritalstatus_gender_nuts2` | **1B: Age×Marital×Gender** | NUTS2 | 8 | 4 | 88 | 40,832 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
+| 23 | `population_age_maritalstatus_gender_nuts3` | **1B: Age×Marital×Gender** | NUTS3 | 21 | 4 | 88 | 107,184 | `demographic_pvmap.csv` | `demographic_metadata.csv` | `demographic_statvar_remap.csv` |
 
 ---
 
@@ -76,10 +76,10 @@ All **23** CSV sub-imports are processed using a single unified PVMap (`demograp
   - `65-74 år` $\rightarrow$ `[65 74 Years]`
   - `75-84 år` $\rightarrow$ `[75 84 Years]`
   - `85-94 år` $\rightarrow$ `[85 94 Years]`
-- National upper brackets (`BefolkningR1860N`, 12 brackets total):
+- National upper brackets (`BefolkningR1860N` & `BefolkningR1860NCKM`, 12 brackets total):
   - `95-104 år` $\rightarrow$ `[95 104 Years]`
   - `105+ år` $\rightarrow$ `[105 - Years]`
-- Sub-National upper bracket (`BefolkningNy`, 11 brackets total):
+- Sub-National upper bracket (`BefolkningNy` & `BefolkningCKM`, 11 brackets total):
   - `95+ år` $\rightarrow$ `[95 - Years]`
 
 ---
@@ -92,7 +92,7 @@ statvar_imports/sweden_census/demographic/
 ├── manifest.json                             # Automated import specification
 ├── validation_config.json                    # Import validation rules
 ├── download_demographic.py                   # SCB PxWeb REST API downloader using download_util (23 CSVs)
-├── run.sh                                    # Runs stat_var_processor.py across all 23 CSVs
+├── run.sh                                    # Runs stat_var_processor.py across all 23 CSVs in parallel
 ├── demographic_test.py                       # Unit & configuration test suite
 ├── sweden_places_resolved.csv                # 321 resolved Sweden sub-national place DCIDs
 ├── demographic_pvmap.csv                     # Unified PVMap (places, gender, marital, ages, None:1860-2035)
@@ -112,14 +112,15 @@ statvar_imports/sweden_census/demographic/
 ```bash
 python3 download_demographic.py --output_dir=input_files
 ```
-- Queries `BefolkningR1860N` (`1860–latest`) and `BefolkningNy` (`1968–latest`) on Statistics Sweden's PxWeb v1 API and writes all 23 wide-format CSVs to `input_files/`.
+- Queries `BefolkningR1860N` (`1860–2024`) + `BefolkningR1860NCKM` (`2025–latest`) for National files and `BefolkningNy` (`1968–2024`) + `BefolkningCKM` (`2025–latest`) for Sub-National files on Statistics Sweden's PxWeb v1 API, writing all 23 wide-format CSVs to `input_files/`.
+- Uses official SCB total-age codes (`tot` in `1860–2024` / `TotSA` in `2025+`) for non-age-stratified totals (`population_country.csv`, `population_gender_country.csv`, and regional non-age breakdowns) to preserve historical unknown-age counts and match legacy baseline observations (`0` modified historical records).
 - Respects SCB's `10 requests / 10 seconds` rate limit (`1.2s` sleep between POST requests) with exponential backoff retry.
 
 ### Step 2: Process All 23 CSVs via `stat_var_processor.py`
 ```bash
 bash run.sh
 ```
-- Runs `stat_var_processor.py` across all 23 CSVs in `input_files/` using `demographic_pvmap.csv`, `demographic_metadata.csv`, `demographic_statvar_remap.csv`, and `sweden_places_resolved.csv`, writing cleaned `.csv` and `.tmcf` files to `output/` and diagnostics to `counters/`.
+- Runs `stat_var_processor.py` across all 23 CSVs in `input_files/` with bounded parallelism (`MAX_PARALLEL=4`) using `demographic_pvmap.csv`, `demographic_metadata.csv`, `demographic_statvar_remap.csv`, and `sweden_places_resolved.csv`, writing cleaned `.csv` and `.tmcf` files to `output/` and diagnostics to `counters/`.
 
 ### Step 3: Run Unit Tests
 ```bash
@@ -132,6 +133,6 @@ python3 demographic_test.py
 
 1. **Unified Single-Config Architecture (`demographic_metadata.csv` + `demographic_pvmap.csv`)**:
    - **Country vs. Sub-National `observationAbout`**: `Cell:3:1,observationAbout,dcid:country/SWE` and `region,observationAbout,{Data}` allow the same PVMap to handle both the 4 national files (where cell `3:1` is `""`, `kön`, or `ålder` and falls through to `Cell:3:1`) and the 19 sub-national files (where cell `3:1` is `region`, which takes precedence over `Cell:3:1`).
-   - **Header-Scoped Year Keys (`None:1860`–`None:2035`)**: Prefixing year keys with `None:` ensures they match **only on Row 3** (where `get_last_column_header_key(col_index)` is `None`) and resolve `{Key}` to the 4-digit year. On data rows (`Row 4+`), `get_last_column_header_key(col_index)` is the column header, preventing numeric population values in `1860..2024` within columns `2..4` from colliding with year keys when `mapped_columns=4`.
+   - **Header-Scoped Year Keys (`None:1860`–`None:2035`)**: Prefixing year keys with `None:` ensures they match **only on Row 3** (where `get_last_column_header_key(col_index)` is `None`) and resolve `{Key}` to the 4-digit year. On data rows (`Row 4+`), `get_last_column_header_key(col_index)` is the column header, preventing numeric population values in `1860..2025` within columns `2..4` from colliding with year keys when `mapped_columns=4`.
 2. **Historical Place Set (`321` Sub-National Places / `2463 Åsele` Exclusion)**:
    - Municipality `2463 Åsele` is marked `#ignore,skip` in `demographic_pvmap.csv` to match the historical Sweden Census place set (`289` municipalities + `3` NUTS1 + `8` NUTS2 + `21` NUTS3 = `321` sub-national places + `country/SWE` = `322` total places) with `0` unresolved places.

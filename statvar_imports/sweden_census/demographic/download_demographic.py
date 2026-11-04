@@ -15,8 +15,9 @@
 
 Dynamically discovers years, regions, age brackets, gender, and marital status
 from Statistics Sweden (SCB) PxWeb REST API v1 metadata (`BefolkningR1860N` and
-`BefolkningNy`) and `sweden_places_resolved.csv`, and writes all 23 wide-format
-CSVs into `input_files/`.
+`BefolkningR1860NCKM` for National 1860-latest; `BefolkningNy` and
+`BefolkningCKM` for Sub-National 1968-latest) and `sweden_places_resolved.csv`,
+and writes all 23 wide-format CSVs into `input_files/`.
 """
 
 import collections
@@ -67,8 +68,14 @@ flags.DEFINE_integer(
 NATIONAL_API_URL = (
     "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860N"
 )
+NATIONAL_CKM_API_URL = (
+    "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860NCKM"
+)
 SUBNATIONAL_API_URL = (
     "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningNy"
+)
+SUBNATIONAL_CKM_API_URL = (
+    "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningCKM"
 )
 REQUEST_SLEEP_SECONDS = 1.2
 
@@ -143,10 +150,19 @@ def _parse_int_value(raw_val: Any) -> int:
 
 
 def _age_to_bracket(age_code: str, max_open_age: int) -> Optional[str]:
-    """Maps a single-year SCB age code ('0'..'110+') to its 10-year age bracket label."""
-    digits = age_code.rstrip("+").strip()
-    if not digits.isdigit():
-        return None
+    """Maps a single-year SCB age code ('0'..'110+' or '100+1') to its 10-year age bracket label."""
+    code = age_code.strip()
+    if code == "100+1":
+        digits = "100"
+    elif "+" in code:
+        prefix, suffix = code.split("+", 1)
+        if suffix or not prefix.isdigit():
+            return None
+        digits = prefix
+    else:
+        if not code.isdigit():
+            return None
+        digits = code
     age = int(digits)
     if age < 5:
         return "0-4 år"
@@ -224,14 +240,14 @@ def download_and_write_national_files(
     start_year: int = 1860,
     end_year: Optional[int] = None,
 ) -> List[str]:
-    """Downloads National population (1860-latest) from BefolkningR1860N and writes 4 CSVs."""
+    """Downloads National population (1860-2024 from BefolkningR1860N and 2025+ from BefolkningR1860NCKM) and writes 4 CSVs."""
     meta = fetch_metadata(NATIONAL_API_URL)
     var_map = {v["code"]: v for v in meta.get("variables", [])}
 
-    all_years = sorted(
+    hist_years = sorted(
         (y for y in var_map["Tid"]["values"]
-         if y.isdigit() and int(y) >= start_year and
-         (end_year is None or int(y) <= end_year)),
+         if y.isdigit() and int(y) >= start_year and int(y) <= 2024 and (
+             end_year is None or int(y) <= end_year)),
         key=int,
     )
     sex_items = [(c, t.strip()) for c, t in zip(
@@ -241,26 +257,32 @@ def download_and_write_national_files(
     all_sexes = [c for c, _ in sex_items]
     contents_code = var_map["ContentsCode"]["values"][0]
 
-    all_ages: List[str] = []
+    available_hist_ages = var_map["Alder"]["values"]
+    hist_single_ages: List[str] = []
     age_code_to_bracket: Dict[str, str] = {}
     age_brackets: List[str] = []
-    for age_code in var_map["Alder"]["values"]:
+    for age_code in available_hist_ages:
         bracket = _age_to_bracket(age_code, max_open_age=105)
         if bracket is not None:
-            all_ages.append(age_code)
+            hist_single_ages.append(age_code)
             age_code_to_bracket[age_code] = bracket
             if bracket not in age_brackets:
                 age_brackets.append(bracket)
 
+    hist_tot_age = "tot" if "tot" in available_hist_ages else None
+    hist_query_ages = (hist_single_ages +
+                       [hist_tot_age] if hist_tot_age else hist_single_ages)
+
     bracket_sex_year: Dict[Tuple[str, str, str],
                            int] = collections.defaultdict(int)
+    total_sex_year: Dict[Tuple[str, str], int] = collections.defaultdict(int)
 
-    for i in range(0, len(all_years), 60):
-        year_chunk = all_years[i:i + 60]
+    for i in range(0, len(hist_years), 60):
+        year_chunk = hist_years[i:i + 60]
         data = query_scb_chunk(
             NATIONAL_API_URL,
             [
-                ("Alder", all_ages),
+                ("Alder", hist_query_ages),
                 ("Kon", all_sexes),
                 ("ContentsCode", [contents_code]),
                 ("Tid", year_chunk),
@@ -268,10 +290,69 @@ def download_and_write_national_files(
         )
         for row in data:
             age_code, sex_code, year = row["key"][:3]
-            bracket = age_code_to_bracket.get(age_code)
-            if bracket is not None:
-                bracket_sex_year[(bracket, sex_code,
-                                  year)] += _parse_int_value(row["values"][0])
+            val = _parse_int_value(row["values"][0])
+            if hist_tot_age and age_code == hist_tot_age:
+                total_sex_year[(sex_code, year)] += val
+            else:
+                bracket = age_code_to_bracket.get(age_code)
+                if bracket is not None:
+                    bracket_sex_year[(bracket, sex_code, year)] += val
+                    if not hist_tot_age:
+                        total_sex_year[(sex_code, year)] += val
+
+    # Discover and fetch 2025+ years from BefolkningR1860NCKM
+    ckm_years: List[str] = []
+    if end_year is None or end_year >= 2025:
+        meta_ckm = fetch_metadata(NATIONAL_CKM_API_URL)
+        var_ckm = {v["code"]: v for v in meta_ckm.get("variables", [])}
+        ckm_years = sorted(
+            (y for y in var_ckm.get("Tid", {}).get("values", [])
+             if y.isdigit() and int(y) >= max(start_year, 2025) and y not in
+             hist_years and (end_year is None or int(y) <= end_year)),
+            key=int,
+        )
+        if ckm_years:
+            ckm_contents = var_ckm["ContentsCode"]["values"][0]
+            available_ckm_ages = var_ckm["Alder"]["values"]
+            ckm_single_ages: List[str] = []
+            ckm_age_to_bracket: Dict[str, str] = {}
+            for age_code in available_ckm_ages:
+                # In CKM tables, ages go up to 99 + '100+1' (mapped to 95-104 år)
+                bracket = _age_to_bracket(age_code, max_open_age=105)
+                if bracket is not None:
+                    ckm_single_ages.append(age_code)
+                    ckm_age_to_bracket[age_code] = bracket
+                    if bracket not in age_brackets:
+                        age_brackets.append(bracket)
+            ckm_tot_age = ("TotSA" if "TotSA" in available_ckm_ages else
+                           ("tot" if "tot" in available_ckm_ages else None))
+            ckm_query_ages = (ckm_single_ages + [ckm_tot_age]
+                              if ckm_tot_age else ckm_single_ages)
+
+            for i in range(0, len(ckm_years), 60):
+                year_chunk = ckm_years[i:i + 60]
+                data = query_scb_chunk(
+                    NATIONAL_CKM_API_URL,
+                    [
+                        ("Alder", ckm_query_ages),
+                        ("Kon", all_sexes),
+                        ("ContentsCode", [ckm_contents]),
+                        ("Tid", year_chunk),
+                    ],
+                )
+                for row in data:
+                    age_code, sex_code, year = row["key"][:3]
+                    val = _parse_int_value(row["values"][0])
+                    if ckm_tot_age and age_code == ckm_tot_age:
+                        total_sex_year[(sex_code, year)] += val
+                    else:
+                        bracket = ckm_age_to_bracket.get(age_code)
+                        if bracket is not None:
+                            bracket_sex_year[(bracket, sex_code, year)] += val
+                            if not ckm_tot_age:
+                                total_sex_year[(sex_code, year)] += val
+
+    all_years = sorted(hist_years + ckm_years, key=int)
 
     # 1. population_country.csv
     _write_csv(
@@ -281,10 +362,7 @@ def download_and_write_national_files(
             [],
             all_years,
             [[""] + [
-                str(
-                    sum(bracket_sex_year[(b, s, y)]
-                        for b in age_brackets
-                        for s, _ in sex_items))
+                str(sum(total_sex_year[(s, y)] for s, _ in sex_items))
                 for y in all_years
             ]],
         ),
@@ -297,12 +375,8 @@ def download_and_write_national_files(
             "Folkmängd efter kön och år",
             ["kön"],
             all_years,
-            [[sex_label] + [
-                str(
-                    sum(bracket_sex_year[(b, sex_code, y)]
-                        for b in age_brackets))
-                for y in all_years
-            ]
+            [[sex_label] +
+             [str(total_sex_year[(sex_code, y)]) for y in all_years]
              for sex_code, sex_label in sex_items],
         ),
     )
@@ -315,11 +389,9 @@ def download_and_write_national_files(
             ["ålder"],
             all_years,
             [[b] + [
-                str(sum(bracket_sex_year[(b, s, y)]
-                        for s, _ in sex_items))
+                str(sum(bracket_sex_year[(b, s, y)] for s, _ in sex_items))
                 for y in all_years
-            ]
-             for b in age_brackets],
+            ] for b in age_brackets],
         ),
     )
 
@@ -331,10 +403,8 @@ def download_and_write_national_files(
             ["ålder", "kön"],
             all_years,
             [[b, sex_label] +
-             [str(bracket_sex_year[(b, sex_code, y)])
-              for y in all_years]
-             for b in age_brackets
-             for sex_code, sex_label in sex_items],
+             [str(bracket_sex_year[(b, sex_code, y)]) for y in all_years]
+             for b in age_brackets for sex_code, sex_label in sex_items],
         ),
     )
     return all_years
@@ -347,15 +417,15 @@ def download_and_write_subnational_files(
     start_year: int = 1968,
     end_year: Optional[int] = None,
 ) -> List[str]:
-    """Downloads Sub-National population (1968-latest) from BefolkningNy and writes 19 CSVs."""
+    """Downloads Sub-National population (1968-2024 from BefolkningNy and 2025+ from BefolkningCKM) and writes 19 CSVs."""
     county_name_to_nuts, nuts_groups = _load_nuts_hierarchy(places_csv_path)
     meta = fetch_metadata(SUBNATIONAL_API_URL)
     var_map = {v["code"]: v for v in meta.get("variables", [])}
 
-    all_years = sorted(
+    hist_years = sorted(
         (y for y in var_map["Tid"]["values"]
-         if y.isdigit() and int(y) >= start_year and
-         (end_year is None or int(y) <= end_year)),
+         if y.isdigit() and int(y) >= start_year and int(y) <= 2024 and (
+             end_year is None or int(y) <= end_year)),
         key=int,
     )
 
@@ -387,7 +457,7 @@ def download_and_write_subnational_files(
                          var_map["Civilstand"]["values"],
                          var_map["Civilstand"].get(
                              "valueTexts", var_map["Civilstand"]["values"]),
-                     )]
+                     ) if c != "SC"]
     all_marital = [c for c, _ in marital_items]
 
     sex_items = [(c, t.strip()) for c, t in zip(
@@ -412,21 +482,23 @@ def download_and_write_subnational_files(
                 age_brackets.append(bracket)
 
     tot_age_code = "tot" if "tot" in available_ages else None
+    county_query_ages = (single_ages +
+                         [tot_age_code] if tot_age_code else single_ages)
 
     ms_sex_year: Dict[Tuple[str, str, str, str],
                       int] = collections.defaultdict(int)
     age_ms_sex_year: Dict[Tuple[str, str, str, str, str],
                           int] = (collections.defaultdict(int))
 
-    # 1. Fetch 21 Counties by single-year ages, marital status, sex, and year (5 years/chunk)
-    for i in range(0, len(all_years), 5):
-        year_chunk = all_years[i:i + 5]
+    # 1A. Fetch 21 Counties from BefolkningNy (1968-2024) by single-year ages + 'tot'
+    for i in range(0, len(hist_years), 5):
+        year_chunk = hist_years[i:i + 5]
         data = query_scb_chunk(
             SUBNATIONAL_API_URL,
             [
                 ("Region", county_codes),
                 ("Civilstand", all_marital),
-                ("Alder", single_ages),
+                ("Alder", county_query_ages),
                 ("Kon", all_sexes),
                 ("ContentsCode", [contents_code]),
                 ("Tid", year_chunk),
@@ -434,18 +506,25 @@ def download_and_write_subnational_files(
         )
         for row in data:
             c_code, ms_code, age_code, sex_code, year = row["key"][:5]
-            bracket = age_code_to_bracket[age_code]
             val = _parse_int_value(row["values"][0])
-            for reg_label in county_code_to_nuts[c_code]:
-                age_ms_sex_year[(reg_label, ms_code, bracket, sex_code,
-                                 year)] += val
-                ms_sex_year[(reg_label, ms_code, sex_code, year)] += val
+            if tot_age_code and age_code == tot_age_code:
+                for reg_label in county_code_to_nuts[c_code]:
+                    ms_sex_year[(reg_label, ms_code, sex_code, year)] += val
+            else:
+                bracket = age_code_to_bracket.get(age_code)
+                if bracket is not None:
+                    for reg_label in county_code_to_nuts[c_code]:
+                        age_ms_sex_year[(reg_label, ms_code, bracket, sex_code,
+                                         year)] += val
+                        if not tot_age_code:
+                            ms_sex_year[(reg_label, ms_code, sex_code,
+                                         year)] += val
 
-    # 2. Fetch 290 Municipalities with Alder='tot' (or single_ages if 'tot' unavailable)
+    # 2A. Fetch 290 Municipalities from BefolkningNy (1968-2024) with Alder='tot'
     muni_ages = [tot_age_code] if tot_age_code is not None else single_ages
     muni_year_chunk = 20 if tot_age_code is not None else 1
-    for i in range(0, len(all_years), muni_year_chunk):
-        year_chunk = all_years[i:i + muni_year_chunk]
+    for i in range(0, len(hist_years), muni_year_chunk):
+        year_chunk = hist_years[i:i + muni_year_chunk]
         data = query_scb_chunk(
             SUBNATIONAL_API_URL,
             [
@@ -462,6 +541,92 @@ def download_and_write_subnational_files(
             reg_label = muni_code_to_label[m_code]
             ms_sex_year[(reg_label, ms_code, sex_code,
                          year)] += _parse_int_value(row["values"][0])
+
+    # 1B & 2B. Discover and fetch 2025+ years from BefolkningCKM
+    ckm_years: List[str] = []
+    if end_year is None or end_year >= 2025:
+        meta_ckm = fetch_metadata(SUBNATIONAL_CKM_API_URL)
+        var_ckm = {v["code"]: v for v in meta_ckm.get("variables", [])}
+        ckm_years = sorted(
+            (y for y in var_ckm.get("Tid", {}).get("values", [])
+             if y.isdigit() and int(y) >= max(start_year, 2025) and y not in
+             hist_years and (end_year is None or int(y) <= end_year)),
+            key=int,
+        )
+        if ckm_years:
+            ckm_contents = ("000007ME"
+                            if "000007ME" in var_ckm["ContentsCode"]["values"]
+                            else var_ckm["ContentsCode"]["values"][0])
+            available_ckm_ages = var_ckm["Alder"]["values"]
+            ckm_single_ages: List[str] = []
+            ckm_age_to_bracket: Dict[str, str] = {}
+            for age_code in available_ckm_ages:
+                bracket = _age_to_bracket(age_code, max_open_age=95)
+                if bracket is not None:
+                    ckm_single_ages.append(age_code)
+                    ckm_age_to_bracket[age_code] = bracket
+                    if bracket not in age_brackets:
+                        age_brackets.append(bracket)
+            ckm_tot_age = ("TotSA" if "TotSA" in available_ckm_ages else
+                           ("tot" if "tot" in available_ckm_ages else None))
+            ckm_county_ages = (ckm_single_ages + [ckm_tot_age]
+                               if ckm_tot_age else ckm_single_ages)
+
+            # 1B. Fetch 21 Counties from BefolkningCKM (2025+)
+            for i in range(0, len(ckm_years), 5):
+                year_chunk = ckm_years[i:i + 5]
+                data = query_scb_chunk(
+                    SUBNATIONAL_CKM_API_URL,
+                    [
+                        ("Region", county_codes),
+                        ("Civilstand", all_marital),
+                        ("Alder", ckm_county_ages),
+                        ("Kon", all_sexes),
+                        ("ContentsCode", [ckm_contents]),
+                        ("Tid", year_chunk),
+                    ],
+                )
+                for row in data:
+                    c_code, ms_code, age_code, sex_code, year = row["key"][:5]
+                    val = _parse_int_value(row["values"][0])
+                    if ckm_tot_age and age_code == ckm_tot_age:
+                        for reg_label in county_code_to_nuts[c_code]:
+                            ms_sex_year[(reg_label, ms_code, sex_code,
+                                         year)] += val
+                    else:
+                        bracket = ckm_age_to_bracket.get(age_code)
+                        if bracket is not None:
+                            for reg_label in county_code_to_nuts[c_code]:
+                                age_ms_sex_year[(reg_label, ms_code, bracket,
+                                                 sex_code, year)] += val
+                                if not ckm_tot_age:
+                                    ms_sex_year[(reg_label, ms_code, sex_code,
+                                                 year)] += val
+
+            # 2B. Fetch 290 Municipalities from BefolkningCKM (2025+)
+            ckm_muni_ages = ([ckm_tot_age]
+                             if ckm_tot_age is not None else ckm_single_ages)
+            ckm_muni_chunk = 20 if ckm_tot_age is not None else 1
+            for i in range(0, len(ckm_years), ckm_muni_chunk):
+                year_chunk = ckm_years[i:i + ckm_muni_chunk]
+                data = query_scb_chunk(
+                    SUBNATIONAL_CKM_API_URL,
+                    [
+                        ("Region", muni_codes),
+                        ("Civilstand", all_marital),
+                        ("Alder", ckm_muni_ages),
+                        ("Kon", all_sexes),
+                        ("ContentsCode", [ckm_contents]),
+                        ("Tid", year_chunk),
+                    ],
+                )
+                for row in data:
+                    m_code, ms_code, _, sex_code, year = row["key"][:5]
+                    reg_label = muni_code_to_label[m_code]
+                    ms_sex_year[(reg_label, ms_code, sex_code,
+                                 year)] += _parse_int_value(row["values"][0])
+
+    all_years = sorted(hist_years + ckm_years, key=int)
 
     title = "Folkmängd efter region, civilstånd, ålder, kön och år"
     region_groups = {
@@ -481,10 +646,8 @@ def download_and_write_subnational_files(
                     str(
                         sum(ms_sex_year[(reg, ms_c, s_c, y)]
                             for ms_c, _ in marital_items
-                            for s_c, _ in sex_items))
-                    for y in all_years
-                ]
-                 for reg in regions],
+                            for s_c, _ in sex_items)) for y in all_years
+                ] for reg in regions],
             ),
         )
 
@@ -498,11 +661,8 @@ def download_and_write_subnational_files(
                 [[reg, sex_label] + [
                     str(
                         sum(ms_sex_year[(reg, ms_c, sex_code, y)]
-                            for ms_c, _ in marital_items))
-                    for y in all_years
-                ]
-                 for reg in regions
-                 for sex_code, sex_label in sex_items],
+                            for ms_c, _ in marital_items)) for y in all_years
+                ] for reg in regions for sex_code, sex_label in sex_items],
             ),
         )
 
@@ -516,11 +676,8 @@ def download_and_write_subnational_files(
                 [[reg, ms_label] + [
                     str(
                         sum(ms_sex_year[(reg, ms_code, s_c, y)]
-                            for s_c, _ in sex_items))
-                    for y in all_years
-                ]
-                 for reg in regions
-                 for ms_code, ms_label in marital_items],
+                            for s_c, _ in sex_items)) for y in all_years
+                ] for reg in regions for ms_code, ms_label in marital_items],
             ),
         )
 
@@ -535,9 +692,7 @@ def download_and_write_subnational_files(
                 [[reg, ms_label, sex_label] + [
                     str(ms_sex_year[(reg, ms_code, sex_code, y)])
                     for y in all_years
-                ]
-                 for reg in regions
-                 for ms_code, ms_label in marital_items
+                ] for reg in regions for ms_code, ms_label in marital_items
                  for sex_code, sex_label in sex_items],
             ),
         )
@@ -554,9 +709,7 @@ def download_and_write_subnational_files(
                     [[reg, ms_label, b, sex_label] + [
                         str(age_ms_sex_year[(reg, ms_code, b, sex_code, y)])
                         for y in all_years
-                    ]
-                     for reg in regions
-                     for ms_code, ms_label in marital_items
+                    ] for reg in regions for ms_code, ms_label in marital_items
                      for b in age_brackets
                      for sex_code, sex_label in sex_items],
                 ),

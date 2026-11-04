@@ -9,11 +9,11 @@
     },
     {
       "rule_id": "check_max_date_freshness",
-      "description": "Verifies that MaxDate meets the expected freshness threshold (up to 2024).",
+      "description": "Verifies that MaxDate meets the expected freshness threshold (up to 2025).",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate FROM stats",
-        "condition": "MaxDate >= '2024'"
+        "condition": "MaxDate >= '2025'"
       }
     }
   ]
