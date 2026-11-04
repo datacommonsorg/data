@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +21,9 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
-from absl import flags
+
 import requests
+from absl import flags
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
@@ -87,13 +87,15 @@ class DownloadHealthUnitTest(unittest.TestCase):
         fake_resp.content = json.dumps({'data': []}).encode('utf-8-sig')
         fake_session.post.return_value = fake_resp
 
-        with mock.patch.object(download_health.time, 'sleep'):
-            with self.assertRaises(RuntimeError):
-                download_health.post_scb_query(
-                    session=fake_session,
-                    url=download_health.SCB_DEATHS_URL,
-                    query_items=[],
-                )
+        with (
+                mock.patch.object(download_health.time, 'sleep'),
+                self.assertRaises(RuntimeError),
+        ):
+            download_health.post_scb_query(
+                session=fake_session,
+                url=download_health.SCB_DEATHS_URL,
+                query_items=[],
+            )
 
     def test_post_scb_query_fails_immediately_on_400(self):
         fake_session = mock.MagicMock(spec=requests.Session)

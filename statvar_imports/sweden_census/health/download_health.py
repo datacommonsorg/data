@@ -31,11 +31,9 @@ import csv
 import json
 import os
 import time
-from typing import Dict, List, Tuple
-from absl import app
-from absl import flags
-from absl import logging
+
 import requests
+from absl import app, flags, logging
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -72,14 +70,14 @@ SCB_LIVEBIRTH_URL = (
     'BefUtvKon1749')
 
 # Sex codes in SCB Deaths & Fertility tables
-SEX_LEVELS: List[Tuple[str, str]] = [
+SEX_LEVELS: list[tuple[str, str]] = [
     ('1', 'män'),
     ('2', 'kvinnor'),
 ]
 
 # 11 Age brackets used in Sweden Deaths by Age & Gender import
-DEATH_AGE_GROUPS: List[Tuple[str, List[str]]] = [
-    ('0-4 år', [str(a) for a in range(0, 5)]),
+DEATH_AGE_GROUPS: list[tuple[str, list[str]]] = [
+    ('0-4 år', [str(a) for a in range(5)]),
     ('5-14 år', [str(a) for a in range(5, 15)]),
     ('15-24 år', [str(a) for a in range(15, 25)]),
     ('25-34 år', [str(a) for a in range(25, 35)]),
@@ -94,7 +92,7 @@ DEATH_AGE_GROUPS: List[Tuple[str, List[str]]] = [
 TOTAL_DEATH_AGE_LABEL = 'totalt ålder'
 
 # Mapping from 2-digit SCB County code -> (NUTS3 label, NUTS2 label, NUTS1 label)
-COUNTY_TO_NUTS: Dict[str, Tuple[str, str, str]] = {
+COUNTY_TO_NUTS: dict[str, tuple[str, str, str]] = {
     '01': ('SE110 Stockholms län', 'SE11 Stockholm', 'SE1 Östra Sverige'),
     '03': (
         'SE121 Uppsala län',
@@ -174,13 +172,13 @@ COUNTY_TO_NUTS: Dict[str, Tuple[str, str, str]] = {
     ),
 }
 
-NUTS1_ORDER: List[str] = [
+NUTS1_ORDER: list[str] = [
     'SE1 Östra Sverige',
     'SE2 Södra Sverige',
     'SE3 Norra Sverige',
 ]
 
-NUTS2_ORDER: List[str] = [
+NUTS2_ORDER: list[str] = [
     'SE11 Stockholm',
     'SE12 Östra Mellansverige',
     'SE21 Småland med öarna',
@@ -191,7 +189,7 @@ NUTS2_ORDER: List[str] = [
     'SE33 Övre Norrland',
 ]
 
-NUTS3_ORDER: List[str] = [
+NUTS3_ORDER: list[str] = [
     'SE110 Stockholms län',
     'SE121 Uppsala län',
     'SE122 Södermanlands län',
@@ -234,7 +232,7 @@ def _create_retry_session(retries: int = 5,
     return session
 
 
-def fetch_metadata(session: requests.Session, url: str) -> Dict:
+def fetch_metadata(session: requests.Session, url: str) -> dict:
     """Fetches table metadata from SCB PxWeb API."""
     logging.info('Fetching metadata from %s', url)
     response = session.get(url, timeout=60)
@@ -245,8 +243,8 @@ def fetch_metadata(session: requests.Session, url: str) -> Dict:
 def post_scb_query(
     session: requests.Session,
     url: str,
-    query_items: List[Dict],
-) -> List[Dict]:
+    query_items: list[dict],
+) -> list[dict]:
     """Executes a JSON-POST query against SCB PxWeb API using session retry."""
     payload = {
         'query': query_items,
@@ -273,10 +271,10 @@ def write_deaths_wide_csv(
     filepath: str,
     title: str,
     include_gender: bool,
-    regions: List[str],
-    age_labels: List[str],
-    years: List[str],
-    data_store: Dict,
+    regions: list[str],
+    age_labels: list[str],
+    years: list[str],
+    data_store: dict,
 ) -> int:
     """Writes a raw wide-format CSV matching the Sweden Deaths PVMaps."""
     if not data_store:
@@ -368,9 +366,9 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
     # Separate 21 counties and 290 municipalities
     reg_values = var_hist['Region']['values']
     reg_texts = var_hist['Region']['valueTexts']
-    county_codes: List[str] = []
-    muni_codes: List[str] = []
-    muni_code_to_label: Dict[str, str] = {}
+    county_codes: list[str] = []
+    muni_codes: list[str] = []
+    muni_code_to_label: dict[str, str] = {}
     for code, text in zip(reg_values, reg_texts):
         if code == '00':
             continue
@@ -380,17 +378,17 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
             muni_codes.append(code)
             muni_code_to_label[code] = f'{code} {text}'
 
-    age_to_bracket: Dict[str, str] = {}
+    age_to_bracket: dict[str, str] = {}
     for bracket_label, ages in DEATH_AGE_GROUPS:
         for a in ages:
             age_to_bracket[a] = bracket_label
 
-    hist_ages = [str(a) for a in range(0, 100)] + ['100+', 'tot']
-    ckm_ages = [str(a) for a in range(0, 100)] + ['100+1', 'TotSA']
+    hist_ages = [str(a) for a in range(100)] + ['100+', 'tot']
+    ckm_ages = [str(a) for a in range(100)] + ['100+1', 'TotSA']
     sex_codes = [code for code, _ in SEX_LEVELS]
 
     # Data store: (region_label, age_label, sex_code_or_TOT, year) -> int count
-    data_store: Dict[Tuple[str, str, str, str],
+    data_store: dict[tuple[str, str, str, str],
                      int] = collections.defaultdict(int)
 
     # 1A. Fetch County-level data from DodaFodelsearK (1968-2024) in 15-year chunks
@@ -798,7 +796,7 @@ def download_fertility(session: requests.Session, out_dir: str) -> None:
             },
         ],
     )
-    store: Dict[Tuple[str, str, str], str] = {}
+    store: dict[tuple[str, str, str], str] = {}
     for row in rows:
         reg_code, sex_code, yr = row['key']
         muni_label = muni_code_to_label[reg_code]
@@ -873,7 +871,7 @@ def download_livebirths(session: requests.Session, out_dir: str) -> None:
             },
         ],
     )
-    store: Dict[Tuple[str, str], str] = {}
+    store: dict[tuple[str, str], str] = {}
     for row in rows:
         sex_code, yr = row['key']
         store[(sex_code, yr)] = row['values'][0]
@@ -893,7 +891,7 @@ def download_livebirths(session: requests.Session, out_dir: str) -> None:
         writer.writerow([])
         writer.writerow(['kön'] + all_years)
         for sex_code, sex_label in sex_rows:
-            vals: List[str] = []
+            vals: list[str] = []
             for yr in all_years:
                 if (sex_code, yr) not in store:
                     raise RuntimeError(
@@ -915,7 +913,7 @@ def main(argv):
     out_dir = FLAGS.output_dir
     os.makedirs(out_dir, exist_ok=True)
     for existing_file in os.listdir(out_dir):
-        if existing_file.endswith('.csv') or existing_file.endswith('.tmp'):
+        if existing_file.endswith(('.csv', '.tmp')):
             os.remove(os.path.join(out_dir, existing_file))
 
     session = _create_retry_session()
