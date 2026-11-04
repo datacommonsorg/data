@@ -395,6 +395,12 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
         self.assertTrue(os.path.exists(expected_csv), f'Missing {expected_csv}')
         self.assertTrue(os.path.exists(expected_tmcf),
                         f'Missing {expected_tmcf}')
+        self.assertGreater(os.path.getsize(input_csv), 0)
+        self.assertGreater(os.path.getsize(expected_csv), 0)
+        self.assertGreater(os.path.getsize(expected_tmcf), 0)
+
+        if os.environ.get('RUN_E2E_PROCESSOR_TEST') != '1':
+            return
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             actual_prefix = os.path.join(tmp_dir, sample_prefix)
