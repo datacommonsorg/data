@@ -47,12 +47,14 @@ flags.DEFINE_string(
     'output_dir',
     os.path.join(_SCRIPT_DIR, 'input_files'),
     'Directory to save downloaded raw input CSV files.',
+    allow_override=True,
 )
 flags.DEFINE_integer(
     'end_year',
     None,
     'Optional end year. Defaults to None (automatically fetches up to the '
     'latest available year in SCB API, e.g. 2025+ in future runs).',
+    allow_override=True,
 )
 
 # SCB PxWeb REST API endpoints for Category 2 (Health & Vital Statistics)
