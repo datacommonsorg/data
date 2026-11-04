@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Fails if more than 0.1% of previous records are deleted.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_empty_import",
+      "description": "Fails if the import produces 0 records.",
+      "validator": "EMPTY_IMPORT_CHECK",
+      "params": {}
+    },
+    {
+      "rule_id": "check_missing_refs_count",
+      "description": "Fails if there are unresolved references.",
+      "validator": "MISSING_REFS_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_lint_error_count",
+      "description": "Fails if import-tool genmcf reports lint errors.",
+      "validator": "LINT_ERROR_COUNT",
+      "params": {
+        "threshold": 0
+      }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that MaxDate is consistent across all StatVars.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_not_regressed",
+      "description": "Ensures all BEA GDP and RPP StatVars reach at least 2023.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2023"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report",
+      "description": "Validates summary_report.csv against golden_summary_report.csv.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv",
+      "description": "Validates output/bea_gdp_rpp.csv against golden_observations.csv.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations.csv",
+        "input_files": "../../../../output/bea_gdp_rpp.csv",
+        "goldens_key_property": [
+          "observationAbout"
+        ]
+      }
+    }
+  ]
+}

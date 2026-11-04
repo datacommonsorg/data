@@ -1,0 +1,46 @@
+Node: dcid:RegionalPriceParity_AllItems
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:regionalPriceParity
+statType: dcs:measuredValue
+constraintProperties: dcs:consumable
+consumable: dcs:AllItems
+
+Node: dcid:RegionalPriceParity_Goods
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:regionalPriceParity
+statType: dcs:measuredValue
+constraintProperties: dcs:consumable
+consumable: dcs:Goods
+
+Node: dcid:RegionalPriceParity_Services_Rents
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:regionalPriceParity
+statType: dcs:measuredValue
+constraintProperties: dcs:consumable
+consumable: dcs:Services_Rents
+
+Node: dcid:RegionalPriceParity_Services_Other
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:regionalPriceParity
+statType: dcs:measuredValue
+constraintProperties: dcs:consumable
+consumable: dcs:Services_Other
+
+Node: dcid:RegionalPriceParity_Services_Housing
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:regionalPriceParity
+statType: dcs:measuredValue
+constraintProperties: dcs:consumable
+consumable: dcs:Services_Housing
+
+Node: dcid:regionalPriceParity
+typeOf: schema:Property
+name: "regionalPriceParity"
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number
+description: "Regional Price Parities (RPPs) measure the differences in price levels across states and metropolitan areas for a given year and are expressed as a percentage of the overall national price level."
