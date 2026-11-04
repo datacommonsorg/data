@@ -103,7 +103,7 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
     ):
         mock_resp = mock.MagicMock()
         mock_resp.status_code = 200
-        mock_resp.text = self._build_mock_html(year=2026, total_val=6500000)
+        mock_resp.text = self._build_mock_html(year=2026, total_val=6423207)
         mock_session = mock.MagicMock()
         mock_session.get.return_value = mock_resp
         mock_create_session.return_value = mock_session
@@ -129,7 +129,7 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
             with open(expected_csv, "r", encoding="utf-8") as f:
                 rows = list(csv.reader(f))
             self.assertEqual(rows[3][0], "Total")
-            self.assertEqual(rows[3][1], "6500000")
+            self.assertEqual(rows[3][1], "6423207")
             self.assertEqual(rows[4][0], "1 - 4")
             self.assertEqual(rows[4][1], "228158")
             # Verify '-' is preserved untouched for stat_var_processor

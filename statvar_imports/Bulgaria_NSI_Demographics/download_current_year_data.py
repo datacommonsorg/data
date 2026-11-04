@@ -120,13 +120,13 @@ def list_gcs_files(gcs_dir: str) -> list[str]:
             timeout=SUBPROCESS_TIMEOUT_SECONDS,
         )
         return [
-            os.path.basename(line.strip()) for line in res.stdout.splitlines()
+            os.path.basename(line.strip())
+            for line in res.stdout.splitlines()
             if line.strip()
         ]
     except Exception as e:
         logging.error("Failed to list GCS directory %s: %s", target, e)
-        raise RuntimeError(
-            f"Failed to list GCS directory {target}: {e}") from e
+        raise RuntimeError(f"Failed to list GCS directory {target}: {e}") from e
 
 
 def _upload_to_gcs(local_path: str, gcs_target_path: str):
@@ -168,7 +168,8 @@ def sanitize_csv_content(content: str) -> list[list[str]]:
     return [[
         normalize_cell(c, is_numeric_col=(r_idx >= 3 and c_idx > 0))
         for c_idx, c in enumerate(row)
-    ] for r_idx, row in enumerate(reader)]
+    ]
+            for r_idx, row in enumerate(reader)]
 
 
 def sanitize_directory_files(input_dir: str, sanitized_dir: str):
@@ -198,6 +199,116 @@ def sanitize_directory_files(input_dir: str, sanitized_dir: str):
             writer.writerows(cleaned_rows)
         logging.info("Sanitized %s -> %s (%d rows)", fpath, out_path,
                      len(cleaned_rows))
+
+
+def to_int_or_zero(val: str) -> int:
+    """Converts a formatted string cell into integer, returning 0 for missing/empty."""
+    v = val.strip().replace(" ", "").replace(",", "")
+    if not v or v == "-":
+        return 0
+    return int(v)
+
+
+def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
+    """Validates horizontal and vertical arithmetic consistency of the generated CSV."""
+    logging.info("Validating horizontal and vertical sums (%s)...", file_path)
+    with open(file_path, "r", encoding="utf-8") as f:
+        reader = list(csv.reader(f))
+
+    if len(reader) < 4:
+        raise ValueError(
+            f"CSV file {file_path} is too short ({len(reader)} rows).")
+
+    # Full table contains 3 header rows + 29 places * 23 rows = 670 rows
+    is_full_table = (len(reader) >= 670)
+
+    row_idx = 3
+    while row_idx < len(reader):
+        d_row = reader[row_idx]
+        d_name = d_row[0].strip()
+
+        # Horizontal checks on district total row:
+        # Col 1: Total, 2: Male, 3: Female, 4: Urban Total, 5: Urban Male, 6: Urban Female,
+        # 7: Rural Total, 8: Rural Male, 9: Rural Female
+        tot, m, fem, urb, urb_m, urb_f, rur, rur_m, rur_f = [
+            to_int_or_zero(x) for x in d_row[1:10]
+        ]
+        has_dash = any(x.strip() == "-" for x in d_row[1:10])
+        if not has_dash:
+            if tot != urb + rur:
+                raise ValueError(
+                    f"District '{d_name}': Total ({tot}) != Urban ({urb}) + Rural ({rur})."
+                )
+            if tot != m + fem:
+                raise ValueError(
+                    f"District '{d_name}': Total ({tot}) != Male ({m}) + Female ({fem})."
+                )
+            if urb != urb_m + urb_f:
+                raise ValueError(
+                    f"District '{d_name}': Urban ({urb}) != Urban Male ({urb_m}) + Urban Female ({urb_f})."
+                )
+            if rur != rur_m + rur_f:
+                raise ValueError(
+                    f"District '{d_name}': Rural ({rur}) != Rural Male ({rur_m}) + Rural Female ({rur_f})."
+                )
+            if m != urb_m + rur_m:
+                raise ValueError(
+                    f"District '{d_name}': Male ({m}) != Urban Male ({urb_m}) + Rural Male ({rur_m})."
+                )
+            if fem != urb_f + rur_f:
+                raise ValueError(
+                    f"District '{d_name}': Female ({fem}) != Urban Female ({urb_f}) + Rural Female ({rur_f})."
+                )
+
+        if is_full_table:
+            # 22 age cohort rows following each district header
+            a_rows = []
+            for _ in range(22):
+                row_idx += 1
+                if row_idx >= len(reader):
+                    break
+                a_row = reader[row_idx]
+                a_rows.append(a_row)
+                a_name = a_row[0].strip()
+                atot, am, afem, aurb, aurb_m, aurb_f, arur, arur_m, arur_f = [
+                    to_int_or_zero(x) for x in a_row[1:10]
+                ]
+                a_has_dash = any(x.strip() == "-" for x in a_row[1:10])
+                if not a_has_dash:
+                    if atot != aurb + arur:
+                        raise ValueError(
+                            f"Cohort '{d_name} - {a_name}': Total ({atot}) != Urban ({aurb}) + Rural ({arur})."
+                        )
+                    if atot != am + afem:
+                        raise ValueError(
+                            f"Cohort '{d_name} - {a_name}': Total ({atot}) != Male ({am}) + Female ({afem})."
+                        )
+                    if aurb != aurb_m + aurb_f:
+                        raise ValueError(
+                            f"Cohort '{d_name} - {a_name}': Urban ({aurb}) != Urban Male ({aurb_m}) + Urban Female ({aurb_f})."
+                        )
+                    if arur != arur_m + arur_f:
+                        raise ValueError(
+                            f"Cohort '{d_name} - {a_name}': Rural ({arur}) != Rural Male ({arur_m}) + Rural Female ({arur_f})."
+                        )
+
+            # Vertical sum check: District header == sum of 22 age cohorts
+            cohorts_have_dash = any(
+                "-" in r[col_i] for r in a_rows for col_i in range(1, 10))
+            if not cohorts_have_dash:
+                for col_i in range(1, 10):
+                    d_val = to_int_or_zero(d_row[col_i])
+                    a_sum = sum(to_int_or_zero(r[col_i]) for r in a_rows)
+                    if d_val != a_sum:
+                        raise ValueError(
+                            f"District '{d_name}', col {col_i}: District header ({d_val}) != sum of 22 age cohorts ({a_sum})."
+                        )
+
+        row_idx += 1
+
+    logging.info("Horizontal and vertical sum validation PASSED for %s!",
+                 file_path)
+    return True
 
 
 def check_and_download_nsi(
@@ -301,15 +412,13 @@ def check_and_download_nsi(
     except ValueError:
         tables = []
     if not tables:
-        logging.error(
-            "Could not locate table with class 'nsit3' in page HTML.")
+        logging.error("Could not locate table with class 'nsit3' in page HTML.")
         sys.exit(1)
     df = tables[0]
 
     for col in df.columns:
         if pd.api.types.is_string_dtype(df[col]):
-            df[col] = (df[col].astype(str).str.replace("\xa0",
-                                                       " ").str.strip())
+            df[col] = (df[col].astype(str).str.replace("\xa0", " ").str.strip())
 
     # 4. Write CSV to temporary file first, then atomically replace
     tmp_fd, tmp_path = tempfile.mkstemp(prefix=f".{target_filename}.",
@@ -355,6 +464,8 @@ def check_and_download_nsi(
                 ]
                 writer.writerow(clean_vals)
 
+        # 5. Validate horizontal and vertical arithmetic sums before moving into place
+        _validate_horizontal_and_vertical_sums(tmp_path)
         os.replace(tmp_path, local_output_path)
     except Exception:
         if os.path.exists(tmp_path):
