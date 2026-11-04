@@ -18,6 +18,8 @@ Testing utilities.
 import requests.exceptions
 import google.api_core.exceptions
 
+NUM_LINES_TO_CHECK = 50
+
 
 class ResponseMock:
     """Mock class for request.Response."""

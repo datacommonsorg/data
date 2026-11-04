@@ -178,20 +178,6 @@ class ImportExecutor:
         self.local_repo_dir: str = local_repo_dir
         self.counters = Counters()
 
-    def execute_imports_on_commit(self, commit_sha: str) -> ExecutionResult:
-        """Executes imports upon a GitHub commit.
-
-    Args:
-        commit_sha: ID of the commit as a string.
-
-    Returns:
-        ExecutionResult object describing the results of the imports.
-    """
-        return run_and_handle_exception(
-            self._execute_imports_on_commit_helper,
-            commit_sha,
-        )
-
     def execute_imports_on_update(self,
                                   absolute_import_name: str) -> ExecutionResult:
         """Executes imports upon a scheduled update.
@@ -279,68 +265,6 @@ class ImportExecutor:
         logging.info('%s: END', absolute_import_name)
         return ExecutionResult(ImportStatus.SUCCESS, executed_imports,
                                'No issues')
-
-    def _execute_imports_on_commit_helper(
-        self,
-        commit_sha: str,
-    ) -> ExecutionResult:
-        """Helper for execute_imports_on_commit.
-
-    Args: See execute_imports_on_commit.
-
-    Returns:
-        ExecutionResult object describing the results of the executions.
-
-    Raises:
-        ExecutionError: The execution of an import failed for any reason.
-    """
-
-        # Import targets specified in the commit message,
-        # e.g., 'scripts/us_fed/treasury:constant_maturity', 'constant_maturity'
-        targets = import_target.find_targets_in_commit(commit_sha, 'IMPORTS',
-                                                       self.github)
-        if not targets:
-            return ExecutionResult(
-                ImportStatus.SKIP, [],
-                'No import target specified in commit message')
-        # Relative paths to directories having files changed by the commit
-        # containing manifests, e.g. 'scripts/us_fed/treasury'.
-        manifest_dirs = self.github.find_dirs_in_commit_containing_file(
-            commit_sha, self.config.manifest_filename)
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            repo_dir = self.github.download_repo(
-                tmpdir, commit_sha, self.config.repo_download_timeout)
-            logging.info(f'Downloaded repo: {repo_dir}')
-
-            imports_to_execute = import_target.find_imports_to_execute(
-                targets=targets,
-                manifest_dirs=manifest_dirs,
-                manifest_filename=self.config.manifest_filename,
-                repo_dir=repo_dir,
-            )
-
-            executed_imports = []
-            for relative_dir, spec in imports_to_execute:
-                try:
-                    self._import_one(
-                        repo_dir=repo_dir,
-                        relative_import_dir=relative_dir,
-                        absolute_import_dir=os.path.join(
-                            repo_dir, relative_dir),
-                        import_spec=spec,
-                    )
-
-                except Exception:
-                    raise ExecutionError(
-                        ExecutionResult(ImportStatus.FAILURE, executed_imports,
-                                        traceback.format_exc()))
-                absolute_name = import_target.get_absolute_import_name(
-                    relative_dir, spec['import_name'])
-                executed_imports.append(absolute_name)
-
-            return ExecutionResult(ImportStatus.SUCCESS, executed_imports,
-                                   'No issues')
 
     @log_function_call
     def _import_one(
