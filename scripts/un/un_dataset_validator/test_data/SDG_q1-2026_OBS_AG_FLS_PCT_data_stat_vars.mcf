@@ -1,0 +1,35 @@
+Node: dcid:undata/AG_FLS_PCT.PRODUCT--AGG_ANIMAL_PROD
+typeOf: dcid:StatisticalVariable
+populationType: dcid:UN_SDG_-AG_FLS_PCT
+measuredProperty: dcid:value
+statType: dcid:measuredValue
+product: dcid:UN_PRODUCT-AGG_ANIMAL_PROD
+
+Node: dcid:undata/AG_FLS_PCT.PRODUCT--AGG_CRL_PUL
+typeOf: dcid:StatisticalVariable
+populationType: dcid:UN_SDG_-AG_FLS_PCT
+measuredProperty: dcid:value
+statType: dcid:measuredValue
+product: dcid:UN_PRODUCT-AGG_CRL_PUL
+
+Node: dcid:undata/AG_FLS_PCT.PRODUCT--AGG_FRT_VGT
+typeOf: dcid:StatisticalVariable
+populationType: dcid:UN_SDG_-AG_FLS_PCT
+measuredProperty: dcid:value
+statType: dcid:measuredValue
+product: dcid:UN_PRODUCT-AGG_FRT_VGT
+
+Node: dcid:undata/AG_FLS_PCT.PRODUCT--AGG_RT_TBR
+typeOf: dcid:StatisticalVariable
+populationType: dcid:UN_SDG_-AG_FLS_PCT
+measuredProperty: dcid:value
+statType: dcid:measuredValue
+product: dcid:UN_PRODUCT-AGG_RT_TBR
+
+Node: dcid:undata/AG_FLS_PCT.PRODUCT--_T
+typeOf: dcid:StatisticalVariable
+populationType: dcid:UN_SDG_-AG_FLS_PCT
+measuredProperty: dcid:value
+statType: dcid:measuredValue
+product: dcid:UN_PRODUCT-_T
+
