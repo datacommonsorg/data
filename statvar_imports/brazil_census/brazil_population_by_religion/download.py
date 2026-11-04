@@ -108,7 +108,8 @@ def parse_raw_religion_xls(content_bytes: bytes, year: int) -> List[Dict[str, An
         for r_idx in range(6, len(df)):
             r = df.iloc[r_idx]
             place = str(r.iloc[0]).strip()
-            if not place or pd.isna(r.iloc[0]) or "fonte" in place.lower():
+            place_lower = place.lower()
+            if not place or pd.isna(r.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower):
                 continue
             if place == "Brasil":
                 place = "Brazil"

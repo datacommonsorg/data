@@ -108,7 +108,8 @@ def parse_raw_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
             for r_idx in range(8, len(df)):
                 r = df.iloc[r_idx]
                 place = str(r.iloc[0]).strip()
-                if not place or pd.isna(r.iloc[0]) or "fonte" in place.lower() or "nota" in place.lower() or "placename" in place.lower():
+                place_lower = place.lower()
+                if not place or pd.isna(r.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower or "placename" in place_lower:
                     continue
                 if place == "Brasil":
                     place = "Brazil"
@@ -193,9 +194,10 @@ def parse_2010_illiterate_race_xls(content_bytes: bytes) -> List[Dict[str, Any]]
             df = pd.read_excel(xl, sheet_name=sheet, header=None, skiprows=4)
             for idx in range(6, len(df)):
                 code = str(df.iloc[idx, 0]).strip()
+                code_lower = code.lower()
                 if pd.isna(df.iloc[idx, 0]) or not code or code == "nan":
                     continue
-                if "fonte" in code.lower() or "nota" in code.lower():
+                if ("fonte" in code_lower and "fonte boa" not in code_lower) or "nota" in code_lower:
                     continue
                 place = "Brazil" if code == "Brazil" else code
                 for c_idx, age in col_ages.items():
@@ -300,7 +302,8 @@ def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
         for idx in range(muni_start, len(df)):
             raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
             place = raw_code if (raw_code and raw_code.isnumeric() and len(raw_code) == 7) else str(df.iloc[idx, 0]).strip()
-            if not place or pd.isna(df.iloc[idx, 0]) or place == "nan" or "fonte" in place.lower() or "nota" in place.lower():
+            place_lower = place.lower()
+            if not place or pd.isna(df.iloc[idx, 0]) or place == "nan" or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             for c_idx, (age, status) in col_map.items():
                 if c_idx >= df.shape[1]:

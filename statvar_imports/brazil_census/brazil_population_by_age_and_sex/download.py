@@ -56,7 +56,7 @@ TABLE_9514_API_URL = (
 
 # Table 1378: População residente por sexo e idade (2010 Census)
 TABLE_1378_AGE_CODES = [
-    "0", "93070", "93084", "93085", "93087", "93088", "93089", "93090",
+    "0", "93070", "93084", "93085", "93086", "93087", "93088", "93089", "93090",
     "93091", "93092", "93093", "93094", "93095", "93096", "93097", "93098",
     "93099", "93100", "6653"
 ]
@@ -135,7 +135,7 @@ def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> Lis
         localidade, sexo = key.split("||", 1)
 
         # 0 to 14
-        if any(c in idade_dict for c in COHORTS_0_14):
+        if all(c in idade_dict for c in COHORTS_0_14):
             sum_0_14 = sum(idade_dict.get(c, 0) for c in COHORTS_0_14)
             agg_rows.append({
                 "Ano": year,
@@ -146,7 +146,7 @@ def compute_broad_age_aggregations(rows: List[Dict[str, str]], year: str) -> Lis
             })
 
         # 15 to 59
-        if any(c in idade_dict for c in COHORTS_15_59):
+        if all(c in idade_dict for c in COHORTS_15_59):
             sum_15_59 = sum(idade_dict.get(c, 0) for c in COHORTS_15_59)
             agg_rows.append({
                 "Ano": year,
@@ -231,7 +231,8 @@ def parse_raw_1991_popu_age_sex(content_bytes: bytes, map_91: Dict[str, str]) ->
         for r_idx in range(1, len(df)):
             row = df.iloc[r_idx]
             place_raw = str(row.iloc[0]).strip()
-            if not place_raw or pd.isna(row.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
+            place_lower = place_raw.lower()
+            if not place_raw or pd.isna(row.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             if len(row) < 3:
                 continue
@@ -313,10 +314,15 @@ def fetch_raw_historical_files() -> List[Dict[str, str]]:
         os.path.join("/data", "scratch", "input_files"),
     ]
     found_1991 = False
+    seen_popu_basenames = set()
     for d in cand_dirs:
         if os.path.isdir(d):
             popu_files = sorted(glob.glob(os.path.join(d, "POPU91*.XLS")) + glob.glob(os.path.join(d, "*.xls")))
             for pf in popu_files:
+                bname = os.path.basename(pf).upper()
+                if bname in seen_popu_basenames:
+                    continue
+                seen_popu_basenames.add(bname)
                 with open(pf, "rb") as f:
                     rows.extend(parse_raw_1991_popu_age_sex(f.read(), map_91))
                     found_1991 = True
@@ -329,7 +335,9 @@ def fetch_raw_historical_files() -> List[Dict[str, str]]:
             bucket = client.bucket("unresolved_mcf")
             blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
             for b in blobs:
-                if b.name.upper().endswith(".XLS"):
+                bname = os.path.basename(b.name).upper()
+                if bname.endswith(".XLS") and bname not in seen_popu_basenames:
+                    seen_popu_basenames.add(bname)
                     content = b.download_as_bytes()
                     rows.extend(parse_raw_1991_popu_age_sex(content, map_91))
         except Exception as e:

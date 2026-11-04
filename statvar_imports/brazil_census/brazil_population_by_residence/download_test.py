@@ -65,27 +65,23 @@ class DownloadTest(unittest.TestCase):
     def test_download_mocked_success(self, mock_raw_input):
         """Tests successful download and CSV emission."""
         session = MagicMock()
-        mock_response = MagicMock()
-        mock_payload = [
-            {"NC": "Nível Territorial"},
-            {
-                "NC": "1",
-                "D1N": "Brasil",
-                "D3N": "2022",
-                "D4N": "Total",
-                "V": "203080756",
-            },
-            {
-                "NC": "1",
-                "D1N": "Brasil",
-                "D3N": "2022",
-                "D4N": "Urbana",
-                "V": "177508417",
-            },
-        ]
-        mock_response.json.return_value = mock_payload
-        mock_response.raise_for_status.return_value = None
-        session.get.return_value = mock_response
+        def get_mock_response(url, **kwargs):
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "608" in url:
+                resp.json.return_value = [
+                    {"NC": "Nível Territorial"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2010", "D5N": "Total", "V": "190755799"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2010", "D5N": "Urbana", "V": "160925792"},
+                ]
+            else:
+                resp.json.return_value = [
+                    {"NC": "Nível Territorial"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2022", "D4N": "Total", "V": "203080756"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2022", "D4N": "Urbana", "V": "177508417"},
+                ]
+            return resp
+        session.get.side_effect = get_mock_response
 
         mock_raw_input.return_value = [
             {

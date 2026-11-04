@@ -67,40 +67,24 @@ class DownloadTest(unittest.TestCase):
     def test_download_mocked_success(self, _mock_ftp, _mock_2010):
         """Tests successful download and CSV emission with exact D5C category mapping."""
         session = MagicMock()
-        mock_response = MagicMock()
-        mock_payload = [
-            {"NC": "Nível Territorial"},
-            {
-                "NC": "1",
-                "D1N": "Brasil",
-                "D3N": "2010",
-                "D4N": "Total",
-                "D5C": "0",
-                "D5N": "Total",
-                "V": "59565188",
-            },
-            {
-                "NC": "1",
-                "D1N": "Brasil",
-                "D3N": "2010",
-                "D4N": "Pública",
-                "D5C": "95304",
-                "D5N": "Regular do ensino fundamental",
-                "V": "27500000",
-            },
-            {
-                "NC": "1",
-                "D1N": "Brasil",
-                "D3N": "2010",
-                "D4N": "Total",
-                "D5C": "7910",
-                "D5N": "Especialização de nível superior",
-                "V": "666613",
-            },
-        ]
-        mock_response.json.return_value = mock_payload
-        mock_response.raise_for_status.return_value = None
-        session.get.return_value = mock_response
+        def get_mock_response(url, **kwargs):
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "1972" in url:
+                resp.json.return_value = [
+                    {"NC": "Nível Territorial"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2010", "D4N": "Total", "D5C": "0", "D5N": "Total", "V": "59565188"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2010", "D4N": "Pública", "D5C": "95304", "D5N": "Regular do ensino fundamental", "V": "27500000"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2010", "D4N": "Total", "D5C": "7910", "D5N": "Especialização de nível superior", "V": "666613"},
+                ]
+            else:
+                resp.json.return_value = [
+                    {"NC": "Nível Territorial"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2022", "D4C": "0", "D4N": "Total", "V": "10000000"},
+                    {"NC": "1", "D1N": "Brasil", "D3N": "2022", "D4C": "116562", "D4N": "Creche", "V": "2000000"},
+                ]
+            return resp
+        session.get.side_effect = get_mock_response
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         saved_file = download_all_years(

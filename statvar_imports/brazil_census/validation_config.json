@@ -1,0 +1,39 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks deleted records threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "scope": {
+                "data_source": "differ_summary"
+            },
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Checks date freshness across Brazil Census StatVars.",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "CASE WHEN StatVar IN ('Count_Student', 'Count_Student_Nursery', 'Count_Student_PreKindergarten', 'Count_Student_AdultEducation', 'Count_Student_PrimaryEducation', 'Count_Student_BRAHighSchool', 'Count_Student_BachelorsDegree', 'Count_Student_MastersDegreeOrHigher', 'Count_Person_15OrMoreYears', 'Count_Person_15OrMoreYears_Male', 'Count_Person_15OrMoreYears_Female', 'Count_Person_15OrMoreYears_Literate', 'Count_Person_15OrMoreYears_Male_Literate', 'Count_Person_15OrMoreYears_Female_Literate', 'Count_Person_15OrMoreYears_Illiterate', 'Count_Person_15OrMoreYears_Male_Illiterate', 'Count_Person_15OrMoreYears_Female_Illiterate') OR StatVar LIKE 'Count_Person_10OrMoreYears%' OR StatVar LIKE 'Count_Person_%Years%' THEN MaxDate >= '2022' WHEN StatVar LIKE '%Illiterate_AsAFractionOf%' OR StatVar LIKE '%School%' THEN MaxDate >= '2010' WHEN StatVar = 'Count_Student_BrazilPreVestibular' OR StatVar LIKE '%Literate_AsAFractionOf%' THEN MaxDate >= '2000' ELSE MaxDate >= '1940' END AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_num_places_count",
+            "description": "Checks that StatVars cover at least 27 places (or 33 for state+region+national).",
+            "validator": "NUM_PLACES_COUNT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "minimum": 27
+            }
+        }
+    ]
+}

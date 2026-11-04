@@ -244,10 +244,15 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
         os.path.join("/data", "scratch", "input_files"),
     ]
     found_1991 = False
+    seen_pops_basenames = set()
     for d in cand_dirs:
         if os.path.isdir(d):
             pops_files = sorted(glob.glob(os.path.join(d, "POPS91*.XLS")) + glob.glob(os.path.join(d, "*.xls")))
             for pf in pops_files:
+                bname = os.path.basename(pf).upper()
+                if bname in seen_pops_basenames:
+                    continue
+                seen_pops_basenames.add(bname)
                 with open(pf, "rb") as f:
                     rows.extend(parse_raw_1991_residence(f.read(), map_91))
                     found_1991 = True
@@ -260,7 +265,9 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             bucket = client.bucket("unresolved_mcf")
             blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_residence/POPS91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91"))
             for b in blobs:
-                if b.name.upper().endswith(".XLS"):
+                bname = os.path.basename(b.name).upper()
+                if bname.endswith(".XLS") and bname not in seen_pops_basenames:
+                    seen_pops_basenames.add(bname)
                     content = b.download_as_bytes()
                     rows.extend(parse_raw_1991_residence(content, map_91))
         except Exception as e:

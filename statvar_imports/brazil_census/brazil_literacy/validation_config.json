@@ -47,6 +47,34 @@
             "params": {}
         },
         {
+            "rule_id": "check_max_date_consistent_rates_2010",
+            "description": "Checks date consistency across 2010 literacy rate StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        ".*Illiterate_AsAFractionOf.*"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_consistent_rates_2000",
+            "description": "Checks date consistency across 2000 literacy rate StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        ".*Literate_AsAFractionOf.*"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
             "rule_id": "check_num_places_count",
             "description": "Checks that every literacy StatVar covers at least 33 places.",
             "validator": "NUM_PLACES_COUNT",

@@ -21,7 +21,7 @@
             },
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "((StatVar = 'Count_Person' AND MaxDate >= '1940') OR (StatVar != 'Count_Person' AND MaxDate >= '2022')) AND total_svs > 0"
+                "condition": "((StatVar LIKE 'Count_Person_10OrMoreYears%' AND MaxDate >= '2022') OR (StatVar NOT LIKE 'Count_Person_10OrMoreYears%' AND MaxDate >= '1940')) AND total_svs > 0"
             }
         },
         {
@@ -32,7 +32,7 @@
                 "data_source": "stats",
                 "variables": {
                     "regex": [
-                        "^(?!Count_Person$).*$"
+                        "^Count_Person_10OrMoreYears.*$"
                     ]
                 }
             },

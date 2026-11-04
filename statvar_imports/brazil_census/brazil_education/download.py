@@ -373,7 +373,8 @@ def parse_2010_education_file(content_bytes: bytes, rede: str) -> List[Dict[str,
             place = raw_code if is_muni_code else str(df.iloc[idx, 0]).strip()
             if not place or (pd.isna(df.iloc[idx, 0]) and not is_muni_code):
                 continue
-            if place == "nan" or "fonte" in place.lower() or "nota" in place.lower():
+            place_lower = place.lower()
+            if place == "nan" or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
                 if c_idx >= df.shape[1]:

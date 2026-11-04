@@ -124,11 +124,8 @@ class Counters():
 
     def __del__(self):
         '''Log the counters when the object is deleted.'''
-        try:
-            self._update_periodic_counters()
-            logging.debug(self.get_counters_string())
-        except Exception:
-            pass
+        self._update_periodic_counters()
+        logging.debug(self.get_counters_string())
 
     def add_counter(self,
                     counter_name: str,
@@ -432,13 +429,10 @@ class Counters():
 
     def _update_process_counters(self):
         '''Update process counters for memory and time.'''
-        try:
-            process = psutil.Process(os.getpid())
-            mem = process.memory_info()
-            self.max_counter('process-mem-rss', mem.rss)
-            self.max_counter('process-mem', mem.vms)
-            cpu_times = process.cpu_times()
-            self.set_counter('process-time-user-secs', cpu_times.user)
-            self.set_counter('process-time-sys-secs', cpu_times.system)
-        except Exception:
-            pass
+        process = psutil.Process(os.getpid())
+        mem = process.memory_info()
+        self.max_counter('process-mem-rss', mem.rss)
+        self.max_counter('process-mem', mem.vms)
+        cpu_times = process.cpu_times()
+        self.set_counter('process-time-user-secs', cpu_times.user)
+        self.set_counter('process-time-sys-secs', cpu_times.system)

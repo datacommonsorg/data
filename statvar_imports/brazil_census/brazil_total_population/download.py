@@ -42,7 +42,7 @@ from urllib3.util import Retry
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9514: População residente por sexo (2022+ Census)
 TABLE_9514_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all"
+    f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/n6/all"
     f"/v/93/p/all/c2/all/c287/100362/c286/113635?formato=json"
 )
 # Table 1378: População residente por sexo (2010 Census)
@@ -140,7 +140,8 @@ def parse_raw_pop_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
         for r_idx in range(1, len(df)):
             r = df.iloc[r_idx]
             place_raw = str(r.iloc[0]).strip()
-            if not place_raw or pd.isna(r.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
+            place_lower = place_raw.lower()
+            if not place_raw or pd.isna(r.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             place = place_raw.replace("Região ", "").strip()
             if place in ("Unidades da Federação", "Grandes Regiões", "Brasil e Unidades da Federação"):
@@ -177,7 +178,7 @@ def parse_raw_municipal_2022(content_bytes: bytes, mapping: Dict[str, str]) -> L
                 pop = int(pop_str)
             except (ValueError, TypeError):
                 continue
-            place_id = mapping.get(full_code, muni_name)
+            place_id = mapping.get(full_code, muni_name).replace("dcid:", "")
             rows.append({"Ano": 2022, "Localidade": place_id, "Sexo": "Total", "Populacao": pop})
     except Exception as e:
         logging.warning(f"Error parsing raw 2022 municipal POP xlsx: {e}")
@@ -192,14 +193,15 @@ def parse_raw_1991_popu(content_bytes: bytes, map_91: Dict[str, str]) -> List[Di
         for r_idx in range(1, len(df)):
             row = df.iloc[r_idx]
             place_raw = str(row.iloc[0]).strip()
-            if not place_raw or pd.isna(row.iloc[0]) or "fonte" in place_raw.lower() or "nota" in place_raw.lower():
+            place_lower = place_raw.lower()
+            if not place_raw or pd.isna(row.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             if len(row) < 3:
                 continue
 
             fem_val = row.iloc[1]
             masc_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw, place_raw)
+            place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
 
             f_int = None
             m_int = None
@@ -266,9 +268,14 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
     alt_dir = os.path.join("/data", "scratch", "input_files")
     input_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_dir if os.path.isdir(alt_dir) else None)
     found_1991 = False
+    seen_popu_basenames = set()
     if input_dir:
-        popu_files = sorted(glob.glob(os.path.join(input_dir, "POPU91*.XLS")) + glob.glob(os.path.join(input_dir, "Brazil_1991_gender", "*.xls")))
+        popu_files = sorted(glob.glob(os.path.join(input_dir, "Brazil_1991_gender", "*.xls")) + glob.glob(os.path.join(input_dir, "POPU91*.XLS")))
         for pf in popu_files:
+            bname = os.path.basename(pf).upper()
+            if bname in seen_popu_basenames:
+                continue
+            seen_popu_basenames.add(bname)
             with open(pf, "rb") as f:
                 rows.extend(parse_raw_1991_popu(f.read(), map_91))
                 found_1991 = True
@@ -277,9 +284,11 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             from google.cloud import storage
             client = storage.Client()
             bucket = client.bucket(GCS_BUCKET_NAME)
-            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
             for b in blobs:
-                if b.name.upper().endswith(".XLS"):
+                bname = os.path.basename(b.name).upper()
+                if bname.endswith(".XLS") and bname not in seen_popu_basenames:
+                    seen_popu_basenames.add(bname)
                     content = b.download_as_bytes()
                     rows.extend(parse_raw_1991_popu(content, map_91))
         except Exception as e:
@@ -301,6 +310,7 @@ def download_all_years(
         # 1. Raw input files from GCS / local scratch (including Brazil_2022_Muncipal_POP.xlsx and POPU91*.XLS)
         raw_rows = fetch_raw_input_files()
         all_rows.extend(raw_rows)
+        muni_map, _ = load_place_mappings()
 
         # 2. 2022+ Census from SIDRA API (Table 9514) — authoritative final census values override preliminary XLS
         raw_2022 = fetch_sidra_data(session, TABLE_9514_API_URL)
@@ -320,9 +330,14 @@ def download_all_years(
             except ValueError:
                 continue
 
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
+            nc = str(r.get("NC", "")).strip()
+            d1c = str(r.get("D1C", "")).strip()
+            if nc == "6" and d1c:
+                loc = muni_map.get(d1c, d1c).replace("dcid:", "")
+            else:
+                loc = str(r.get("D1N", "")).strip()
+                if loc == "Brasil":
+                    loc = "Brazil"
 
             sexo = str(r.get("D4N", "Total")).strip()
             all_rows.append({"Ano": year, "Localidade": loc, "Sexo": sexo, "Populacao": val})
