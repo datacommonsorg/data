@@ -25,7 +25,7 @@ The annual refresh is automated via scheduled Cloud Batch / Cloud Run execution:
 > **Operational Note on Cloudflare Protection**: The live NSI portal (`nsi.bg`) enforces Cloudflare bot protection, which returns HTTP 403 Forbidden to requests originating from cloud/datacenter IP ranges. When invoked with `--allow_staged_fallback` in scheduled runs, `download_current_year_data.py` detects this and falls back to existing verified files staged in `gs://unresolved_mcf/country/Bulgaria/input_files/`. When a new annual release is published by NSI, it can be staged to GCS via an authorized proxy or manual upload.
 
 ### 3.2 Transformation, Resolution & Validation (`stat_var_processor.py` & `validation_config.json`)
-1. **Transform (`stat_var_processor.py`)**: Transforms `sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv` using `BulgariaNSI_Demographics_pvmap.csv` (which maps annual header rows through `2033`) and `BulgariaNSI_Demographics_metadata.csv` into `output/BulgariaNSI_Demographics.csv` and `.tmcf`.
+1. **Transform (`stat_var_processor.py`)**: Transforms `sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv` using `BulgariaNSI_Demographics_pvmap.csv` (which maps annual header rows through `2050`) and `BulgariaNSI_Demographics_metadata.csv` into `output/BulgariaNSI_Demographics.csv` and `.tmcf`.
 2. **Resolution & Validation (`genmcf`, differ, import_validation)**:
    - Resolves nodes via `genmcf`.
    - Compares against baseline version in GCS using `ImportDiffer`.
