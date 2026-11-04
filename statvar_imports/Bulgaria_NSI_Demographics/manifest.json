@@ -9,7 +9,6 @@
             "provenance_url": "https://www.nsi.bg/en/statistical-data/206/649",
             "provenance_description": "Bulgaria Population Census and Statistics from National Statistical Institute (Automated: NSI portal monitoring with automated Cloud Batch/Run extraction, transformation, and validation).",
             "scripts": [
-                "download_current_year_data.py --allow-staged-fallback",
                 "download.sh",
                 "../../tools/statvar_importer/stat_var_processor.py --input_data=sanitized_input_files/BulgariaNSI_Demographics_Year_input_*.csv --pv_map=BulgariaNSI_Demographics_pvmap.csv --config_file=BulgariaNSI_Demographics_metadata.csv --output_path=output/BulgariaNSI_Demographics --output_counters=counters/BulgariaNSI_Demographics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
@@ -21,7 +20,7 @@
                 }
             ],
             "source_files": [
-                "input_files/BulgariaNSI_Demographics_Year_input_*.csv",
+                "input_files/BulgariaNSI_Demographics_Year_input_*",
                 "counters/*.csv",
                 "manifest.json",
                 "validation_config.json"
