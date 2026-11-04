@@ -95,7 +95,7 @@ def preprocess_data(file_path):
         logging.info(f'Processing file: {file_path}')
         raw_df = pd.read_csv(file_path, sep="\t")
         raw_df = raw_df.rename(columns=({
-            'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
+            r'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
         }))
         raw_df['indic_de,geo\\time'] = raw_df['indic_de,geo\\time'].str.slice(2)
 
@@ -134,8 +134,8 @@ def preprocess_data(file_path):
                 ",", n=1, expand=True)
             preprocessed_df['statistical_variable'] = split_df[0]
             preprocessed_df['geo'] = split_df[1]
-            preprocessed_df.drop(columns=[preprocessed_df.columns[0]],
-                                 inplace=True)
+            preprocessed_df = preprocessed_df.drop(
+                columns=[preprocessed_df.columns[0]])
 
             preprocessed_df = (preprocessed_df.set_index(
                 ["geo", "time"]).pivot(columns="statistical_variable")

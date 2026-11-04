@@ -29,7 +29,7 @@ module_dir_ = os.path.dirname(__file__)
 class TestPreprocess(unittest.TestCase):
 
     def test_create_cleaned_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
+        with tempfile.TemporaryDirectory():
             pincode_csv_path = os.path.join(module_dir_, 'test_data/test.csv')
             clean_csv_file_path = os.path.join(module_dir_,
                                                'test_data/clean.csv')

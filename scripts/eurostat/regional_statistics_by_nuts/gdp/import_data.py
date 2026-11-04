@@ -25,7 +25,6 @@ import numpy as np
 import json
 import pandas as pd
 from preprocess_data import preprocess_df
-import sys
 from absl import app
 from absl import logging
 from absl import flags
@@ -40,9 +39,6 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 sys.path.insert(1, '../../../../util')
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
-
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  # default='warn'
 
 
 class EurostatGDPImporter:
@@ -114,7 +110,7 @@ class EurostatGDPImporter:
             logging.info(f'Processing file: {input_file}')
             self.raw_df = pd.read_table(input_file)
             self.raw_df = self.raw_df.rename(columns=({
-                'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+                r'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
             }))
             self.raw_df['unit,geo\\time'] = self.raw_df[
                 'unit,geo\\time'].str.slice(2)

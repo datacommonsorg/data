@@ -19,8 +19,14 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_state_1980_1990(url: str) -> pd.DataFrame:
@@ -46,9 +52,9 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
     _cols.extend(COLUMNS_TO_SUM)
 
     # reading the csv input file
-    df = pd.read_table(url,
+    df = pd.read_table(load_url_or_path(url),
                        index_col=False,
-                       delim_whitespace=True,
+                       sep=r'\s+',
                        engine='python',
                        names=_cols)
     df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1980_1990.csv")
@@ -56,7 +62,7 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
     df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 
     # dropping unwanted columns
-    df.drop(columns=COLUMNS_TO_SUM, inplace=True)
+    df = df.drop(columns=COLUMNS_TO_SUM)
 
     # extracting year and geoid from Info column
     df['Info'] = [f'{x:05}' for x in df['Info']]
@@ -80,7 +86,7 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
         }
     })
     df['SR'] = df['Sex'] + ' ' + df['Race']
-    df.drop(columns=['Info', 'Sex', 'Race'], inplace=True)
+    df = df.drop(columns=['Info', 'Sex', 'Race'])
 
     # it groups the df as per columns provided
     # performs the provided functions on the data
@@ -93,7 +99,7 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
     df['Year'] = df['Year'].str.split('-', expand=True)[1]
 
     # dropping unwanted column
-    df.drop(columns=['level_0'], inplace=True)
+    df = df.drop(columns=['level_0'])
 
     # providing proper column names
     female_columns = [

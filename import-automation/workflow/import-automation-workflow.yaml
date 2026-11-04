@@ -20,8 +20,11 @@ main:
           - stagingDenylist:
               "NOAA_GlobalForecastSystem": true
           - prodDenylist:
+              "CDC_OzoneCensusTract": true
               "CDC_OzoneCounty": true
+              "CDC_PM25CensusTract": true
               "CDC_PM25County": true
+              "EPACriteriaAirPollutants": true
               "NOAA_GlobalForecastSystem": true
               "USFed_ConstantMaturityRates_Test": true
           - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}

@@ -125,7 +125,7 @@ def create_csv(csv_file_path):
 
 
 def create_sites_mcf(sites_mcf_file_path):
-    with open(sites_mcf_file_path, 'w', encoding='utf-8') as f_out:
+    with open(sites_mcf_file_path, 'w', encoding='utf-8'):
         pass
 
 

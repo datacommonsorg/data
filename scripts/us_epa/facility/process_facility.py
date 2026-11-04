@@ -266,7 +266,7 @@ def main(_):
     for t in _TABLES:
         assert os.path.exists(
             os.path.join(FLAGS.epa_input_tables_path, t + '.csv'))
-    pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
+    Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
 
     process(FLAGS.epa_input_tables_path, FLAGS.epa_output_path)
 

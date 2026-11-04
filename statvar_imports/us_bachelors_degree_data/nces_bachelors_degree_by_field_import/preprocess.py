@@ -15,6 +15,7 @@
 import os, shutil, re
 from absl import logging, app
 
+
 def move_latest_files(input_dir, latest_dir):
     """
     Identifies the latest male and female data files, and moves them to a
@@ -24,7 +25,8 @@ def move_latest_files(input_dir, latest_dir):
     logging.info(f"Created or found latest files directory: {latest_dir}")
 
     # Use a regex for robust parsing of filenames like 'table_40_13.xlsx'
-    file_pattern = re.compile(r"table_(?P<gender_code>40|50)_(?P<num>\d+)\.xlsx")
+    file_pattern = re.compile(
+        r"table_(?P<gender_code>40|50)_(?P<num>\d+)\.xlsx")
 
     male_files = []
     female_files = []
@@ -45,7 +47,7 @@ def move_latest_files(input_dir, latest_dir):
 
         if data["gender_code"] == "40":
             male_files.append(file_info)
-        else: # gender_code == "50"
+        else:  # gender_code == "50"
             female_files.append(file_info)
 
     #Sort the lists to find the latest file easily
@@ -65,15 +67,18 @@ def move_latest_files(input_dir, latest_dir):
         shutil.move(latest_female["path"], dest_path)
         logging.info(f"Moved latest female file: {latest_female['filename']}")
 
+
 def main(_):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     input_dir = os.path.join(script_dir, "input_files")
     input_dir_latest = os.path.join(script_dir, "input_files_latest")
     try:
-        move_latest_files(input_dir,input_dir_latest)
+        move_latest_files(input_dir, input_dir_latest)
     except Exception as e:
-        logging.fatal(f"A critical error prevented pre process the data from  completing: {e}")
+        logging.fatal(
+            f"A critical error prevented pre process the data from  completing: {e}"
+        )
+
 
 if __name__ == "__main__":
-   app.run(main)
-
+    app.run(main)

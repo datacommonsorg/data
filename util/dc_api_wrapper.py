@@ -266,10 +266,10 @@ def get_dc_api_key(config: dict = None) -> str:
     if not api_key:
         logging.log_first_n(
             logging.WARNING,
-            f'Using default DC API key with limited quota. '
-            f'Please set an API key in the environment variable: DC_API_KEY.'
-            f'Refer https://docs.datacommons.org/api/python/v2/#authentication '
-            f'for more details.',
+            'Using default DC API key with limited quota. '
+            'Please set an API key in the environment variable: DC_API_KEY.'
+            'Refer https://docs.datacommons.org/api/python/v2/#authentication '
+            'for more details.',
             n=1,
         )
         api_key = _DEFAULT_DC_API_KEY

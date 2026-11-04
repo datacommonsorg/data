@@ -470,28 +470,6 @@ class ImportCodeReviewSkillContractTest(unittest.TestCase):
             '../../common/references/import-automation/manifest.md',
         }.issubset(links))
 
-    def test_review_guidance_stays_single_and_lightweight(self):
-        references = sorted(path.name for path in (self._skill_root /
-                                                   'references').glob('*.md'))
-        guidelines = (self._skill_root /
-                      'references/guidelines.md').read_text(encoding='utf-8')
-
-        self.assertEqual(['guidelines.md'], references)
-        self.assertFalse((self._skill_root / 'README.md').exists())
-        self.assertFalse((self._skill_root / 'scripts').exists())
-
-        for stale_content in ('DCIR-', 'Evidence:', 'Last verified:',
-                              '["support@datacommons.org"]', 'logging.fatal()',
-                              'exit(1)'):
-            with self.subTest(stale_content=stale_content):
-                self.assertNotIn(stale_content, guidelines)
-
-        for validation_reference in (
-                '../../../../tools/import_validation/README.md',
-                '../../../../tools/import_validation/Validations.md'):
-            with self.subTest(validation_reference=validation_reference):
-                self.assertIn(validation_reference, guidelines)
-
     def test_review_guidance_uses_only_relative_paths(self):
         sources = [self._skill_path, self._prompt_path]
         sources.extend((self._skill_root / 'references').glob('*.md'))

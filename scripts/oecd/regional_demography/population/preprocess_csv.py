@@ -72,14 +72,14 @@ def process_data(df, output_file_path):
             f"Unable to pivot the dataframe and retain the column:{e}")
         return None
     # Renaming column headers to SVs
-    df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    df_cleaned = df_cleaned.rename(columns=VAR_to_statsvars)
     drop_cols = []
     csv_columns = {'REG_ID', 'Reference area', 'TIME_PERIOD'}
     csv_columns.update(VAR_to_statsvars.values())
     for col in df_cleaned.columns:
         if col not in csv_columns:
             drop_cols.append(col)
-    df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
+    df_cleaned = df_cleaned.drop(columns=drop_cols, axis=0)
     # Resetting the columns according to the requirement
     df_cleaned_reset = df_cleaned.reindex(columns=reindex_column)
     logging.info("Writing output to %s", output_file_path)

@@ -33,9 +33,6 @@ import pandas as pd
 
 logging.set_verbosity(logging.INFO)
 
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None
-
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year', None,
                      'The latest year to look for in the filename (optional).')
@@ -140,8 +137,7 @@ class StateGDPDataLoader:
             data = list(reader)
             if data:
                 self.raw_df = pd.DataFrame(data, columns=header)
-                logging.info(
-                    f"Successfully loaded data from provided raw data.")
+                logging.info("Successfully loaded data from provided raw data.")
             else:
                 self.raw_df = None
                 raise ValueError("Error: No data found in provided raw data.")
