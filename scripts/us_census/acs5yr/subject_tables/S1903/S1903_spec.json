@@ -25,7 +25,7 @@
             "Hispanic or Latino origin (of any race)": "HispanicOrLatino",
             "White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
         },
-        "age": {
+        "householderAge": {
             "15 to 24 years": "[15 24 Years]",
             "25 to 44 years": "[25 44 Years]",
             "45 to 64 years": "[45 64 Years]",
@@ -44,5 +44,6 @@
         "Percent Distribution",
         "FAMILY INCOME BY FAMILY SIZE",
         "FAMILY INCOME BY NUMBER OF EARNERS"
-    ]
+    ],
+    "denominators": {}
 }
