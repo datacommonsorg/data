@@ -80,6 +80,8 @@ class AvroFileDictIO(FileDictIO):
                  headers: list = None,
                  schema: dict = None,
                  encoding: str = None,
+                 start_offset: int = 0,
+                 end_offset: int = None,
                  **kwargs):
         """Initializes an `AvroFileDictIO` reader or writer.
 
@@ -91,15 +93,27 @@ class AvroFileDictIO(FileDictIO):
             record written.
           schema: Optional Avro schema dictionary.
           encoding: Optional encoding parameter (unused for binary Avro files).
+          start_offset: Optional starting byte offset for read mode.
+          end_offset: Optional ending byte offset for read mode.
           **kwargs: Optional format-specific keyword arguments.
         """
         # Ensure binary mode for Avro files.
         if 'b' not in mode:
             mode = mode + 'b'
-        super().__init__(filename, mode, headers, encoding, **kwargs)
         self._fastavro_reader = None
         self._fastavro_writer = None
         self._avro_schema = dict(schema) if schema else {}
+        self._block_reader = None
+        self._current_block_records = iter([])
+        self._sync_marker = None
+        self._header_end_pos = 0
+        super().__init__(filename,
+                         mode,
+                         headers,
+                         encoding,
+                         start_offset=start_offset,
+                         end_offset=end_offset,
+                         **kwargs)
         self.open()
 
     def open(self):
@@ -108,9 +122,17 @@ class AvroFileDictIO(FileDictIO):
         super().open()
         if self.is_read_mode():
             # Read the file handle using fastavro.reader and extract headers from schema.
-            self._fastavro_reader = fastavro.reader(self.get_file_handle())
+            fp = self.get_file_handle()
+            self._fastavro_reader = fastavro.reader(fp)
             self._avro_schema = self._fastavro_reader.writer_schema
+            self._sync_marker = self._fastavro_reader._header['sync']
+            self._header_end_pos = fp.tell()
             self._headers = self._get_headers_from_schema(self._avro_schema)
+            self._current_block_records = iter([])
+            if self._start_offset > 0:
+                self.seek(self._start_offset)
+            else:
+                self.seek(0)
             logging.level_debug() and logging.debug(
                 f'Opened AVRO file {self.filename()} for {self._mode} with headers: {self.headers()}, schema: {self._avro_schema}'
             )
@@ -138,6 +160,8 @@ class AvroFileDictIO(FileDictIO):
             self._fastavro_writer.flush()
             self._fastavro_writer = None
         self._fastavro_reader = None
+        self._block_reader = None
+        self._current_block_records = iter([])
         super().close()
 
     def write_header(self):
@@ -222,28 +246,112 @@ class AvroFileDictIO(FileDictIO):
                 return bytes(value)
         return value
 
+    def seek(self, offset: int) -> int:
+        """Seeks to the first Avro block starting at or after `offset`.
+
+        Caveats:
+          - Block-Level Granularity: Apache Avro Object Container files are split
+            at block boundaries (each block contains a batch of records, controlled
+            by sync_interval). Seeking lands on the nearest block boundary;
+            individual records within a block cannot be split by byte offset.
+          - Sync Marker Requirement: Blocks are terminated by a 16-byte random
+            sync marker defined in the file header. The reader must always read
+            the file header (schema + sync marker) at offset 0 first before seeking.
+          - Compression: Avro block compression (e.g., deflate, snappy, zstandard)
+            is applied per-block. Parallel chunk reading works out-of-the-box
+            even with compressed Avro blocks because each block decompresses
+            independently.
+
+        Args:
+          offset: Byte offset in the file to seek past.
+
+        Returns:
+          The actual byte offset where the next Avro block begins.
+
+        Raises:
+          UnsupportedOperation: If the file is not opened in read mode.
+        """
+        if not self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot seek in write mode for AVRO file {self.filename()}')
+        fp = self.get_file_handle()
+        if fp is None:
+            return 0
+        self._start_offset = offset
+        sync = self._sync_marker
+
+        if offset <= self._header_end_pos:
+            target_pos = self._header_end_pos
+        else:
+            search_start = max(self._header_end_pos, offset - len(sync))
+            fp.seek(search_start)
+            chunk_size = 65536
+            buf = b''
+            curr_pos = search_start
+            target_pos = None
+            while True:
+                chunk = fp.read(chunk_size)
+                if not chunk:
+                    target_pos = fp.tell()
+                    break
+                buf += chunk
+                offset_in_buf = 0
+                found = False
+                while True:
+                    idx = buf.find(sync, offset_in_buf)
+                    if idx == -1:
+                        break
+                    sync_end = curr_pos + idx + len(sync)
+                    if sync_end >= offset:
+                        target_pos = sync_end
+                        found = True
+                        break
+                    offset_in_buf = idx + 1
+                if found:
+                    break
+                keep = len(sync) - 1
+                curr_pos += len(buf) - keep
+                buf = buf[-keep:]
+
+        fp.seek(0)
+        self._block_reader = fastavro.block_reader(fp)
+        fp.seek(target_pos)
+        self._next_record_start = target_pos
+        self._current_block_records = iter([])
+        return target_pos
+
     def next(self) -> dict:
         """Returns the next dictionary record read from the Avro file.
 
         Keys with `None` values are omitted from the returned dictionary.
 
         Returns:
-          A `dict` representing the next Avro record, or `None` at end of file.
+          A `dict` representing the next Avro record, or `None` if end of file
+          or `end_offset` is reached.
         """
-        try:
-            if self._fastavro_reader:
-                record = next(self._fastavro_reader)
-                # Drop any keys with None values.
+        while True:
+            try:
+                record = next(self._current_block_records)
                 output_record = {
                     k: v for k, v in record.items() if v is not None
                 }
                 self._record_index += 1
                 return output_record
+            except StopIteration:
+                pass
 
-        except StopIteration:
-            # Reached end of file.
-            return None
-        return None
+            if not self._block_reader:
+                return None
+            try:
+                block = next(self._block_reader)
+            except StopIteration:
+                return None
+
+            if self._end_offset is not None and block.offset >= self._end_offset:
+                return None
+
+            self._next_record_start = block.offset
+            self._current_block_records = iter(block)
 
     def _get_headers_from_schema(self, schema: dict = None) -> list:
         """Extracts and returns the ordered list of field names from an Avro schema.
@@ -287,11 +395,7 @@ class AvroFileDictIO(FileDictIO):
                 'type': ['string', 'null'],
                 'default': None
             })
-        schema = {
-            'name': 'DictRecord',
-            'type': 'record',
-            'fields': fields
-        }
+        schema = {'name': 'DictRecord', 'type': 'record', 'fields': fields}
         return schema
 
     def headers(self) -> list:

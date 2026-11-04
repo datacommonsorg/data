@@ -65,13 +65,27 @@ class AvroFileDictIOTest(unittest.TestCase):
     def test_avro_custom_schema_and_types(self):
         avro_file_path = os.path.join(self.test_dir.name, 'test_schema.avro')
         schema = {
-            'name': 'Person',
-            'type': 'record',
+            'name':
+                'Person',
+            'type':
+                'record',
             'fields': [
-                {'name': 'name', 'type': 'string'},
-                {'name': 'age', 'type': 'int'},
-                {'name': 'score', 'type': 'float'},
-                {'name': 'active', 'type': 'boolean'},
+                {
+                    'name': 'name',
+                    'type': 'string'
+                },
+                {
+                    'name': 'age',
+                    'type': 'int'
+                },
+                {
+                    'name': 'score',
+                    'type': 'float'
+                },
+                {
+                    'name': 'active',
+                    'type': 'boolean'
+                },
             ],
         }
         input_data = [{
@@ -108,8 +122,14 @@ class AvroFileDictIOTest(unittest.TestCase):
     def test_avro_write_without_headers_and_drop_in_compatibility(self):
         avro_file_path = os.path.join(self.test_dir.name, 'no_headers.avro')
         rows = [
-            {'dcid': 'dc/1', 'value': '100'},
-            {'dcid': 'dc/2', 'value': '200'},
+            {
+                'dcid': 'dc/1',
+                'value': '100'
+            },
+            {
+                'dcid': 'dc/2',
+                'value': '200'
+            },
         ]
 
         with open_dict_file(avro_file_path, 'w') as writer:

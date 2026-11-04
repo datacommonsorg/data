@@ -78,8 +78,14 @@ class CsvFileDictIOTest(unittest.TestCase):
         csv_file_path = os.path.join(self.test_dir.name, 'drop_in.csv')
         headers = ['dcid', 'value']
         rows = [
-            {'dcid': 'dc/1', 'value': '100'},
-            {'dcid': 'dc/2', 'value': '200'},
+            {
+                'dcid': 'dc/1',
+                'value': '100'
+            },
+            {
+                'dcid': 'dc/2',
+                'value': '200'
+            },
         ]
 
         with open_dict_file(csv_file_path, 'w', headers=headers) as writer:
@@ -100,13 +106,25 @@ class CsvFileDictIOTest(unittest.TestCase):
         # 4 KB sample used to sniff the CSV dialect.
         data = [{'id': f'plain{i}', 'value': f'v{i}'} for i in range(400)]
         data += [
-            {'id': 'backslash', 'value': 'C:\\data\\file'},
-            {'id': 'quote', 'value': 'say "hi"'},
-            {'id': 'comma', 'value': 'a,b'},
-            {'id': 'newline', 'value': 'line1\nline2'},
+            {
+                'id': 'backslash',
+                'value': 'C:\\data\\file'
+            },
+            {
+                'id': 'quote',
+                'value': 'say "hi"'
+            },
+            {
+                'id': 'comma',
+                'value': 'a,b'
+            },
+            {
+                'id': 'newline',
+                'value': 'line1\nline2'
+            },
         ]
-        with open_dict_file(csv_file_path, 'w',
-                            headers=['id', 'value']) as writer:
+        with open_dict_file(csv_file_path, 'w', headers=['id',
+                                                         'value']) as writer:
             writer.write(data)
 
         # RFC 4180: backslashes are written as is and quotes are doubled.
@@ -117,6 +135,18 @@ class CsvFileDictIOTest(unittest.TestCase):
 
         with open_dict_file(csv_file_path, 'r') as reader:
             self.assertEqual(data, reader.readlines())
+
+    def test_csv_read_single_quoted_values(self):
+        csv_file_path = os.path.join(self.test_dir.name, 'single_quoted.csv')
+        with open(csv_file_path, 'w') as f:
+            f.write('id,value,note\n')
+            for i in range(20):
+                f.write(f"id{i},'a,{i}',x\n")
+
+        with open_dict_file(csv_file_path, 'r') as reader:
+            rows = reader.readlines()
+        self.assertEqual(20, len(rows))
+        self.assertEqual({'id': 'id0', 'value': 'a,0', 'note': 'x'}, rows[0])
 
 
 if __name__ == '__main__':

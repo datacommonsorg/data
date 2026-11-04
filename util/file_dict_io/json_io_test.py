@@ -66,23 +66,44 @@ class JsonFileDictIOTest(unittest.TestCase):
             )
         with open_dict_file(multiline_path, 'r') as reader:
             self.assertEqual([
-                {'name': 'Alice', 'meta': {'id': 1}},
-                {'name': 'Bob', 'meta': {'id': 2}},
+                {
+                    'name': 'Alice',
+                    'meta': {
+                        'id': 1
+                    }
+                },
+                {
+                    'name': 'Bob',
+                    'meta': {
+                        'id': 2
+                    }
+                },
             ], reader.readlines())
 
     def test_json_nested_dicts_and_escaped_characters(self):
         complex_records = [
             {
                 'id': '1',
-                'nested': {'level1': {'level2': [1, 2, {'k': 'v'}]}},
+                'nested': {
+                    'level1': {
+                        'level2': [1, 2, {
+                            'k': 'v'
+                        }]
+                    }
+                },
                 'braces_in_str': 'value with } and { and }} inside string',
                 'escaped': 'quote: \"} backslash: \\\\ parens: (a, b) [c]',
             },
             {
-                'id': '2',
-                'nested': {'empty': {}},
-                'braces_in_str': '} leading and trailing {',
-                'escaped': 'line1\\nline2 (escaped) \"nested_quote_with_}_inside\"',
+                'id':
+                    '2',
+                'nested': {
+                    'empty': {}
+                },
+                'braces_in_str':
+                    '} leading and trailing {',
+                'escaped':
+                    'line1\\nline2 (escaped) \"nested_quote_with_}_inside\"',
             },
         ]
         for ext in ['.json', '.jsonl']:
@@ -101,8 +122,14 @@ class JsonFileDictIOTest(unittest.TestCase):
 
     def test_json_drop_in_compatibility(self):
         rows = [
-            {'dcid': 'dc/1', 'value': '100'},
-            {'dcid': 'dc/2', 'value': '200'},
+            {
+                'dcid': 'dc/1',
+                'value': '100'
+            },
+            {
+                'dcid': 'dc/2',
+                'value': '200'
+            },
         ]
         for ext in ['.json', '.jsonl']:
             file_path = os.path.join(self.test_dir.name, f'drop_in{ext}')

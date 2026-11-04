@@ -58,6 +58,7 @@ from file_dict_io.sharded_io import (
     ShardedFileDictIO,
     get_default_shard_config,
     is_sharded_file,
+    record_to_canonical_str,
     str_to_int_hash,
 )
 
@@ -67,6 +68,8 @@ def open_dict_file(filename: str | list,
                    headers: list = None,
                    encoding: str = None,
                    schema: dict = None,
+                   start_offset: int = 0,
+                   end_offset: int = None,
                    **kwargs) -> FileDictIO:
     """Opens a dictionary record file using the registered `FileDictIO` handler.
 
@@ -89,6 +92,11 @@ def open_dict_file(filename: str | list,
         for row in reader:
           print(row)
 
+      # Read a chunk in parallel from byte offset range [10MB, 20MB):
+      with open_dict_file('large.csv', 'r', start_offset=10_000_000, end_offset=20_000_000) as reader:
+        for row in reader:
+          process(row)
+
     Args:
       filename: Path, sharded pattern, or URL to the file(s) to open.
       mode: File open mode ('r' for read, 'w' for write).
@@ -97,6 +105,10 @@ def open_dict_file(filename: str | list,
         first record written.
       encoding: Optional character encoding for text-based formats.
       schema: Optional Avro schema dictionary (used only for `.avro` files).
+      start_offset: Optional starting byte offset. If > 0, seeks to the first
+        complete record starting at or after this offset.
+      end_offset: Optional ending byte offset. If specified, stops before any
+        record whose start byte offset is >= `end_offset`.
       **kwargs: Additional keyword arguments (including sharding options such
         as `shard_key`, `shard_count`, `shard_skip_duplicates`, `config`, etc.)
         passed to the handler constructor.
@@ -111,8 +123,12 @@ def open_dict_file(filename: str | list,
                        mode=mode,
                        headers=headers,
                        encoding=encoding,
+                       start_offset=start_offset,
+                       end_offset=end_offset,
                        **kwargs)
 
+
+open_file_dict = open_dict_file
 
 __all__ = [
     'FileDictIO',
@@ -122,6 +138,7 @@ __all__ = [
     'JsonFileDictIO',
     'ShardedFileDictIO',
     'open_dict_file',
+    'open_file_dict',
     'is_csv_file',
     'is_avro_file',
     'is_json_file',
@@ -130,5 +147,6 @@ __all__ = [
     'is_sharded_file',
     'get_default_shard_config',
     'get_record_dcid',
+    'record_to_canonical_str',
     'str_to_int_hash',
 ]

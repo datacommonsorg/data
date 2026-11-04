@@ -25,6 +25,7 @@ Example:
 """
 
 from abc import ABC, abstractmethod
+from io import UnsupportedOperation
 import os
 import sys
 from absl import logging
@@ -33,9 +34,9 @@ _PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 _UTIL_DIR = os.path.dirname(_PACKAGE_DIR)
 _DATA_DIR = os.path.dirname(_UTIL_DIR)
 for _path in (
-    _UTIL_DIR,
-    _DATA_DIR,
-    os.path.join(_DATA_DIR, 'tools', 'statvar_importer'),
+        _UTIL_DIR,
+        _DATA_DIR,
+        os.path.join(_DATA_DIR, 'tools', 'statvar_importer'),
 ):
     if _path not in sys.path:
         sys.path.append(_path)
@@ -62,6 +63,8 @@ class FileDictIO(ABC):
                  mode: str = 'r',
                  headers: list = None,
                  encoding: str = None,
+                 start_offset: int = 0,
+                 end_offset: int = None,
                  **kwargs):
         """Initializes a FileDictIO instance.
 
@@ -71,13 +74,27 @@ class FileDictIO(ABC):
           headers: Optional list of column names (for CSV/AVRO) or header
             comment lines (for MCF).
           encoding: Optional character encoding for text files.
+          start_offset: Optional starting byte offset. If > 0, seeks to the
+            first complete record starting at or after this offset.
+          end_offset: Optional ending byte offset. If set, reading stops before
+            any record whose start offset is >= `end_offset`.
           **kwargs: Optional format-specific keyword arguments.
         """
+        if 'seek' in kwargs and not start_offset:
+            start_offset = kwargs.pop('seek')
+        if 'start_offset' in kwargs and not start_offset:
+            start_offset = kwargs.pop('start_offset')
+        if 'end_offset' in kwargs and end_offset is None:
+            end_offset = kwargs.pop('end_offset')
         del kwargs
         self._filename = filename
         self._mode = mode
         self._encoding = encoding
         self._headers = list(headers) if headers else []
+        self._start_offset = int(
+            start_offset) if start_offset is not None else 0
+        self._end_offset = int(end_offset) if end_offset is not None else None
+        self._next_record_start = 0
         self._fp = None
         self._record_index = 0
         self._header_written = False
@@ -276,6 +293,88 @@ class FileDictIO(ABC):
     def current_record_index(self) -> int:
         """Returns the 1-based index of the most recently read or written record."""
         return self._record_index
+
+    def start_offset(self) -> int:
+        """Returns the starting byte offset configured for this reader."""
+        return self._start_offset
+
+    def end_offset(self) -> int | None:
+        """Returns the ending byte offset configured for this reader, or None."""
+        return self._end_offset
+
+    def tell(self) -> int:
+        """Returns the current byte position in the underlying file."""
+        fp = self.get_file_handle()
+        if fp is not None and hasattr(fp, 'tell'):
+            try:
+                return fp.tell()
+            except (OSError, IOError):
+                return self._next_record_start
+        return self._next_record_start
+
+    def _seek_to_next_line(self, offset: int) -> int:
+        """Positions the file handle at the first line starting at or after `offset`.
+
+        Uses the underlying binary `fp.buffer` for UTF-8 and single-byte text
+        encodings so landing inside a multi-byte UTF-8 character at `offset - 1`
+        never raises `UnicodeDecodeError`.
+
+        Args:
+          offset: Byte offset in the file to seek past.
+
+        Returns:
+          The aligned byte offset where the next line begins (0 if `offset <= 0`).
+        """
+        fp = self.get_file_handle()
+        if fp is None:
+            return 0
+        if offset <= 0:
+            fp.seek(0)
+            return 0
+
+        raw_buf = getattr(fp, 'buffer', None)
+        enc = (getattr(fp, 'encoding', None) or self._encoding or
+               'utf-8').lower().replace('_', '-')
+        if raw_buf is not None and not enc.startswith(('utf-16', 'utf-32')):
+            raw_buf.seek(offset - 1)
+            prev = raw_buf.read(1)
+            if prev and prev != b'\n':
+                raw_buf.readline()
+            target = raw_buf.tell()
+            fp.seek(target)
+            return target
+
+        fp.seek(offset - 1)
+        prev = fp.read(1)
+        if prev and prev != '\n':
+            fp.readline()
+        return fp.tell()
+
+    def seek(self, offset: int) -> int:
+        """Seeks to the first complete record starting at or after `offset`.
+
+        Subclasses override this method to provide format-specific record
+        boundary scanning and caveat handling.
+
+        Args:
+          offset: Byte offset in the file to seek past.
+
+        Returns:
+          The actual byte offset where the next record begins.
+
+        Raises:
+          UnsupportedOperation: If the file is not opened in read mode.
+        """
+        if not self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot seek file opened in write mode: {self.filename()}')
+        fp = self.get_file_handle()
+        if fp is not None and hasattr(fp, 'seek'):
+            fp.seek(offset)
+            self._start_offset = offset
+            self._next_record_start = self.tell()
+            return self._next_record_start
+        return 0
 
     @property
     def fieldnames(self) -> list:

@@ -14,6 +14,7 @@
 """Unit tests for `ShardedFileDictIO` across CSV, MCF, Avro, and JSON formats."""
 
 import csv
+from io import UnsupportedOperation
 import os
 import sys
 import tempfile
@@ -50,10 +51,22 @@ class ShardedFileDictIOTest(unittest.TestCase):
 
     def test_shard_csv_write_and_read(self):
         data = [
-            {'id': '11', 'value': 'a'},
-            {'id': '21', 'value': 'b'},
-            {'id': '11', 'value': 'c'},
-            {'id': '31', 'value': 'd'},
+            {
+                'id': '11',
+                'value': 'a'
+            },
+            {
+                'id': '21',
+                'value': 'b'
+            },
+            {
+                'id': '11',
+                'value': 'c'
+            },
+            {
+                'id': '31',
+                'value': 'd'
+            },
         ]
         output_path = os.path.join(self.test_dir.name, 'output@3.csv')
         with open_dict_file(output_path, 'w', shard_key='{id}') as writer:
@@ -83,10 +96,22 @@ class ShardedFileDictIOTest(unittest.TestCase):
 
     def test_shard_mcf_write_and_read(self):
         data = [
-            {'Node': 'dcid:node11', 'prop': 'a'},
-            {'Node': 'dcid:node22', 'prop': 'b'},
-            {'Node': 'dcid:node11', 'prop': 'c'},
-            {'Node': 'dcid:node33', 'prop': 'd'},
+            {
+                'Node': 'dcid:node11',
+                'prop': 'a'
+            },
+            {
+                'Node': 'dcid:node22',
+                'prop': 'b'
+            },
+            {
+                'Node': 'dcid:node11',
+                'prop': 'c'
+            },
+            {
+                'Node': 'dcid:node33',
+                'prop': 'd'
+            },
         ]
         output_path = os.path.join(self.test_dir.name, 'output@3.mcf')
         with open_dict_file(output_path, 'w', shard_key='Node') as writer:
@@ -112,10 +137,22 @@ class ShardedFileDictIOTest(unittest.TestCase):
 
     def test_shard_avro_write_and_read(self):
         data = [
-            {'dcid': 'dc/11', 'value': '100'},
-            {'dcid': 'dc/22', 'value': '200'},
-            {'dcid': 'dc/11', 'value': '300'},
-            {'dcid': 'dc/33', 'value': '400'},
+            {
+                'dcid': 'dc/11',
+                'value': '100'
+            },
+            {
+                'dcid': 'dc/22',
+                'value': '200'
+            },
+            {
+                'dcid': 'dc/11',
+                'value': '300'
+            },
+            {
+                'dcid': 'dc/33',
+                'value': '400'
+            },
         ]
         output_path = os.path.join(self.test_dir.name, 'output@3.avro')
         with open_dict_file(output_path, 'w', shard_key='dcid') as writer:
@@ -138,11 +175,26 @@ class ShardedFileDictIOTest(unittest.TestCase):
         from file_sharder import shard_file
 
         data = [
-            {'id': 'US_CA', 'value': 'a'},
-            {'id': 'IN_MH', 'value': 'b'},
-            {'id': 'US_CA', 'value': 'a'},  # duplicate
-            {'id': 'US_NY', 'value': 'd'},
-            {'id': 'IN_KA', 'value': 'e'},
+            {
+                'id': 'US_CA',
+                'value': 'a'
+            },
+            {
+                'id': 'IN_MH',
+                'value': 'b'
+            },
+            {
+                'id': 'US_CA',
+                'value': 'a'
+            },  # duplicate
+            {
+                'id': 'US_NY',
+                'value': 'd'
+            },
+            {
+                'id': 'IN_KA',
+                'value': 'e'
+            },
         ]
         input_csv = os.path.join(self.test_dir.name, 'raw_input.csv')
         with open_dict_file(input_csv, 'w') as writer:
@@ -164,9 +216,18 @@ class ShardedFileDictIOTest(unittest.TestCase):
             self.assertEqual(3, len(read_rows))
             self.assertCountEqual(
                 [
-                    {'id': 'US_CA', 'value': 'a'},
-                    {'id': 'IN_MH', 'value': 'b'},
-                    {'id': 'US_NY', 'value': 'd'},
+                    {
+                        'id': 'US_CA',
+                        'value': 'a'
+                    },
+                    {
+                        'id': 'IN_MH',
+                        'value': 'b'
+                    },
+                    {
+                        'id': 'US_NY',
+                        'value': 'd'
+                    },
                 ],
                 read_rows,
             )
@@ -175,9 +236,21 @@ class ShardedFileDictIOTest(unittest.TestCase):
         col_pattern = os.path.join(self.test_dir.name,
                                    'by_country-{country}.csv')
         country_rows = [
-            {'country': 'USA', 'year': '2024', 'v': '1'},
-            {'country': 'IND', 'year': '2025', 'v': '2'},
-            {'country': 'USA', 'year': '2024', 'v': '3'},
+            {
+                'country': 'USA',
+                'year': '2024',
+                'v': '1'
+            },
+            {
+                'country': 'IND',
+                'year': '2025',
+                'v': '2'
+            },
+            {
+                'country': 'USA',
+                'year': '2024',
+                'v': '3'
+            },
         ]
         with open_dict_file(col_pattern, 'w', shard_key='country') as writer:
             writer.write(country_rows)
@@ -190,8 +263,16 @@ class ShardedFileDictIOTest(unittest.TestCase):
         with open_dict_file(usa_file, 'r') as usa_reader:
             self.assertEqual(
                 [
-                    {'country': 'USA', 'year': '2024', 'v': '1'},
-                    {'country': 'USA', 'year': '2024', 'v': '3'},
+                    {
+                        'country': 'USA',
+                        'year': '2024',
+                        'v': '1'
+                    },
+                    {
+                        'country': 'USA',
+                        'year': '2024',
+                        'v': '3'
+                    },
                 ],
                 usa_reader.readlines(),
             )
@@ -199,8 +280,14 @@ class ShardedFileDictIOTest(unittest.TestCase):
     def test_shard_extension_before_at_sign(self):
         # Verify patterns of the form 'shards.mcf@10', 'shards.csv@3', 'shards.avro@3', 'shards.json@3'
         mcf_data = [
-            {'Node': 'dcid:n1', 'typeOf': 'dcs:Place'},
-            {'Node': 'dcid:n2', 'typeOf': 'dcs:Place'},
+            {
+                'Node': 'dcid:n1',
+                'typeOf': 'dcs:Place'
+            },
+            {
+                'Node': 'dcid:n2',
+                'typeOf': 'dcs:Place'
+            },
         ]
         mcf_pattern = os.path.join(self.test_dir.name, 'shards.mcf@10')
         with open_dict_file(mcf_pattern, 'w', shard_key='Node') as writer:
@@ -214,8 +301,14 @@ class ShardedFileDictIOTest(unittest.TestCase):
             self.assertEqual(2, len(reader.readlines()))
 
         row_data = [
-            {'dcid': 'dc/1', 'val': '10'},
-            {'dcid': 'dc/2', 'val': '20'},
+            {
+                'dcid': 'dc/1',
+                'val': '10'
+            },
+            {
+                'dcid': 'dc/2',
+                'val': '20'
+            },
         ]
         for ext in ['csv', 'avro', 'json']:
             pattern = os.path.join(self.test_dir.name, f'shards.{ext}@3')
@@ -272,9 +365,7 @@ class ShardedFileDictIOTest(unittest.TestCase):
         pattern = os.path.join(self.test_dir.name, 'parallel@4.csv')
         records = [{'id': f'key_{i}', 'val': str(i)} for i in range(40)]
 
-        with open_dict_file(pattern,
-                            'w',
-                            headers=['id', 'val'],
+        with open_dict_file(pattern, 'w', headers=['id', 'val'],
                             shard_key='id') as writer:
             with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
                 list(pool.map(writer.write_record, records))
@@ -290,6 +381,7 @@ class ShardedFileDictIOTest(unittest.TestCase):
                 writer.counters().get_counter('shard-output-records'))
 
         with open_dict_file(pattern, 'r') as reader:
+
             def _read_all_worker(_):
                 items = []
                 while True:
@@ -308,13 +400,25 @@ class ShardedFileDictIOTest(unittest.TestCase):
 
     def test_dcid_and_node_shard_keys_use_node_dcid(self):
         records = [
-            {'dcid': 'geoId/06'},
-            {'dcid': '"geoId/06"'},
-            {'Node': 'dcid:geoId/06'},
+            {
+                'dcid': 'geoId/06'
+            },
+            {
+                'dcid': '"geoId/06"'
+            },
+            {
+                'Node': 'dcid:geoId/06'
+            },
             # A blank dcid falls back to the Node.
-            {'dcid': '', 'Node': 'dcid:geoId/06'},
+            {
+                'dcid': '',
+                'Node': 'dcid:geoId/06'
+            },
             # The dcid takes precedence over the Node.
-            {'dcid': 'geoId/06', 'Node': 'l:obs1'},
+            {
+                'dcid': 'geoId/06',
+                'Node': 'l:obs1'
+            },
         ]
         for shard_key in ('dcid', 'Node', '{dcid}', None):
             kwargs = {'shard_key': shard_key} if shard_key else {}
@@ -340,6 +444,24 @@ class ShardedFileDictIOTest(unittest.TestCase):
             self.assertTrue(text.startswith('# Generated\n'), text)
             self.assertNotIn('#dcid', text)
             self.assertNotIn('#value', text)
+
+    def test_sharded_io_seek_tell_offsets_unsupported(self):
+        output_path = os.path.join(self.test_dir.name, 'unsupported@2.csv')
+        with open_dict_file(output_path, 'w', headers=['id']) as writer:
+            writer.write([{'id': '1'}, {'id': '2'}])
+
+        # start_offset / end_offset should raise UnsupportedOperation on sharded patterns
+        with self.assertRaises(UnsupportedOperation):
+            open_dict_file(output_path, 'r', start_offset=10)
+        with self.assertRaises(UnsupportedOperation):
+            open_dict_file(output_path, 'r', end_offset=10)
+
+        # seek and tell should raise UnsupportedOperation on sharded readers
+        with open_dict_file(output_path, 'r') as reader:
+            with self.assertRaises(UnsupportedOperation):
+                reader.seek(0)
+            with self.assertRaises(UnsupportedOperation):
+                reader.tell()
 
 
 if __name__ == '__main__':

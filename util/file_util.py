@@ -228,6 +228,14 @@ class FileIO:
         """Read from the file handle."""
         return self._fd.readline(*args, **kwargs)
 
+    def seek(self, *args, **kwargs):
+        """Seek in the file handle."""
+        return self._fd.seek(*args, **kwargs)
+
+    def tell(self, *args, **kwargs):
+        """Tell the position in the file handle."""
+        return self._fd.tell(*args, **kwargs)
+
     def write(self, *args, **kwargs):
         """Write into the file handle."""
         return self._fd.write(*args, **kwargs)
@@ -1084,7 +1092,10 @@ def file_get_csv_reader_options(
         rawdata = file_get_sample_bytes(file)
         if encoding is None:
             encoding = file_get_encoding(file, rawdata=rawdata)
-        data = rawdata.decode(encoding)
+        try:
+            data = rawdata.decode(encoding)
+        except UnicodeDecodeError:
+            data = rawdata.decode('utf-8', errors='replace')
 
     # Get the dialect for the data
     try:

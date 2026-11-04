@@ -109,6 +109,8 @@ class JsonFileDictIO(FileDictIO):
                  mode: str = 'r',
                  headers: list = None,
                  encoding: str = None,
+                 start_offset: int = 0,
+                 end_offset: int = None,
                  **kwargs):
         """Initializes a `JsonFileDictIO` reader or writer.
 
@@ -117,18 +119,29 @@ class JsonFileDictIO(FileDictIO):
           mode: File open mode ('r' for read, 'w' for write).
           headers: Optional header parameter (unused for JSON/JSONL files).
           encoding: Optional text encoding.
+          start_offset: Optional starting byte offset for read mode.
+          end_offset: Optional ending byte offset for read mode.
           **kwargs: Optional format-specific keyword arguments.
         """
         self._is_jsonl = is_jsonl_file(filename)
         self._buffer = ''
         self._decoder = json.JSONDecoder()
-        super().__init__(filename, mode, headers, encoding, **kwargs)
+        super().__init__(filename,
+                         mode,
+                         headers,
+                         encoding,
+                         start_offset=start_offset,
+                         end_offset=end_offset,
+                         **kwargs)
         self.open()
 
     def open(self):
         """Opens the JSON or JSONL file for reading or writing."""
         super().open()
         self._buffer = ''
+        self._next_record_start = 0
+        if self.is_read_mode() and self._start_offset > 0:
+            self.seek(self._start_offset)
         logging.level_debug() and logging.debug(
             f'Opened JSON file {self.filename()} for {self._mode} (jsonl={self._is_jsonl})'
         )
@@ -169,7 +182,8 @@ class JsonFileDictIO(FileDictIO):
 
     def close(self):
         """Finalizes the JSON array (if `.json` write mode) and closes the file."""
-        if self._fp is not None and not self.is_read_mode() and not self._is_jsonl:
+        if self._fp is not None and not self.is_read_mode(
+        ) and not self._is_jsonl:
             fp = self.get_file_handle()
             if fp is not None:
                 if self._record_index > 0:
@@ -179,6 +193,63 @@ class JsonFileDictIO(FileDictIO):
         self._buffer = ''
         super().close()
 
+    def seek(self, offset: int) -> int:
+        """Seeks to the first JSON/JSONL record starting at or after `offset`.
+
+        Caveats:
+          - JSON Lines (.jsonl / .ndjson): Seeking is robust, fast, and exact.
+            Each line contains a complete JSON record with no unescaped newlines.
+            Seeking discards any partial line after `offset` and begins at the
+            next line boundary.
+          - Standard JSON Array (.json): Standard JSON files are not inherently
+            splittable if minified (e.g. `[{"a":1},{"b":2}]`) or if strings
+            contain nested brackets/newlines across lines. For formatted JSON
+            arrays (where each object starts on a line with '{'), seeking scans
+            forward for the next line containing '{'. Using .jsonl is strongly
+            recommended for parallel reading.
+
+        Args:
+          offset: Byte offset in the file to seek past.
+
+        Returns:
+          The actual byte offset where the next record begins.
+
+        Raises:
+          UnsupportedOperation: If the file is not opened in read mode.
+        """
+        if not self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot seek in write mode for JSON file {self.filename()}')
+        fp = self.get_file_handle()
+        if fp is None:
+            return 0
+        self._start_offset = offset
+        self._buffer = ''
+        if offset <= 0:
+            fp.seek(0)
+            self._next_record_start = 0
+            return 0
+
+        self._next_record_start = self._seek_to_next_line(offset)
+
+        if not self._is_jsonl:
+            # For standard formatted JSON arrays, scan for the line starting
+            # the next object. Record anchor is `pos` (start of the line) so it
+            # aligns with `_seek_to_next_line` boundaries even with indentation.
+            while True:
+                pos = fp.tell()
+                line = fp.readline()
+                if not line:
+                    self._next_record_start = fp.tell()
+                    break
+                if '{' in line:
+                    idx = line.find('{')
+                    self._next_record_start = pos
+                    self._buffer = line[idx:]
+                    break
+
+        return self._next_record_start
+
     def next(self) -> dict:
         """Reads lines incrementally and parses the next JSON dictionary record upon closing `}`.
 
@@ -187,11 +258,34 @@ class JsonFileDictIO(FileDictIO):
         memory.
 
         Returns:
-          A `dict` representing the next JSON object, or `None` at end of file.
+          A `dict` representing the next JSON object, or `None` if end of file
+          or `end_offset` is reached.
         """
         fp = self.get_file_handle()
         if fp is None:
             return None
+
+        if self._end_offset is not None and self._next_record_start is not None:
+            if self._next_record_start >= self._end_offset:
+                return None
+
+        if self._is_jsonl:
+            while True:
+                if self._end_offset is not None:
+                    line_pos = fp.tell()
+                    if line_pos >= self._end_offset:
+                        self._next_record_start = line_pos
+                        return None
+                line = fp.readline()
+                if not line:
+                    self._next_record_start = fp.tell()
+                    return None
+                line = line.strip()
+                if not line:
+                    continue
+                self._next_record_start = fp.tell()
+                self._record_index += 1
+                return json.loads(line)
 
         while True:
             # Strip leading whitespace, commas, and array brackets between records.
@@ -210,10 +304,26 @@ class JsonFileDictIO(FileDictIO):
 
             # Read lines until a line containing '}' is found or EOF is reached.
             while True:
+                line_pos = fp.tell()
                 line = fp.readline()
                 if not line:
                     self._buffer = ''
+                    self._next_record_start = fp.tell()
                     return None
+                if not self._buffer:
+                    stripped = line.lstrip(' \t\r\n,[]')
+                    if not stripped:
+                        continue
+                    if '{' in stripped:
+                        idx = stripped.find('{')
+                        self._next_record_start = line_pos
+                        if (self._end_offset is not None and
+                                self._next_record_start >= self._end_offset):
+                            return None
+                        self._buffer = stripped[idx:]
+                        if '}' in self._buffer:
+                            break
+                        continue
                 self._buffer += line
                 if '}' in line:
                     break

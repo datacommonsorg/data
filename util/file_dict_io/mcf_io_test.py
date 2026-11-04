@@ -115,14 +115,13 @@ class McfFileDictIOTest(unittest.TestCase):
     def test_get_record_dcid(self):
         self.assertEqual('geoId/06', get_record_dcid({'dcid': 'geoId/06'}))
         self.assertEqual('geoId/06', get_record_dcid({'dcid': '"geoId/06"'}))
-        self.assertEqual('geoId/06',
-                         get_record_dcid({'Node': 'dcid:geoId/06'}))
+        self.assertEqual('geoId/06', get_record_dcid({'Node': 'dcid:geoId/06'}))
         # A blank dcid falls back to the Node.
-        self.assertEqual(
-            'geoId/06', get_record_dcid({
-                'dcid': '',
-                'Node': 'dcid:geoId/06'
-            }))
+        self.assertEqual('geoId/06',
+                         get_record_dcid({
+                             'dcid': '',
+                             'Node': 'dcid:geoId/06'
+                         }))
         # The dcid takes precedence over the Node.
         self.assertEqual(
             'dc/o/abc', get_record_dcid({

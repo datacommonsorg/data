@@ -103,6 +103,27 @@ def _hash_key_to_shard(key: str, shard_count: int) -> int:
     return str_to_int_hash(key) % shard_count
 
 
+def record_to_canonical_str(record: dict) -> str:
+    """Returns a deterministic string for `record`, used as its fingerprint.
+
+    The record is normalized with `mcf_file_util.normalize_mcf_node`, so
+    records that differ only in property order or value-list order give the
+    same string. If normalization fails, the record's JSON with sorted keys
+    is used.
+
+    Args:
+      record: Dictionary record.
+
+    Returns:
+      Canonical string for `record`.
+    """
+    try:
+        normalized = mcf_file_util.normalize_mcf_node(record)
+        return mcf_file_util.node_dict_to_text(normalized)
+    except Exception:
+        return json.dumps(record, sort_keys=True, default=str)
+
+
 def is_sharded_file(filename: str | list) -> bool:
     """Returns True if `filename` represents a sharded file pattern or file list.
 
@@ -258,6 +279,12 @@ class ShardedFileDictIO(FileDictIO):
             self._config.get('estimated_num_records') or 0)
         self._shards_prepared: bool = False
 
+        if self._start_offset > 0 or self._end_offset is not None:
+            raise UnsupportedOperation(
+                f'start_offset and end_offset are not supported for sharded file pattern: {self.filename()}. '
+                'Parallelize across shards by partitioning the list of shard files '
+                'returned by ShardedFileDictIO.resolve_input_files() instead.')
+
         self.open()
 
     def open(self):
@@ -280,16 +307,18 @@ class ShardedFileDictIO(FileDictIO):
 
     def close(self):
         """Merges per-shard counters and closes all open input and output shard handles."""
-        self._merge_shard_counters()
-        if self._current_fp is not None:
+        if hasattr(self, '_shard_counters'):
+            self._merge_shard_counters()
+        if getattr(self, '_current_fp', None) is not None:
             self._current_fp.close()
             self._current_fp = None
-        for index, fp in list(self._output_fp.items()):
+        for index, fp in list(getattr(self, '_output_fp', {}).items()):
             if fp is not None:
                 with self._get_shard_lock(index):
                     fp.close()
             self._output_fp[index] = None
-        self._output_fp.clear()
+        if hasattr(self, '_output_fp'):
+            self._output_fp.clear()
         super().close()
 
     def next(self) -> dict:
@@ -322,6 +351,28 @@ class ShardedFileDictIO(FileDictIO):
                     break
 
         return None
+
+    def seek(self, offset: int) -> int:
+        """Seeking by byte offset is not supported across sharded file collections.
+
+        Raises:
+          UnsupportedOperation: Always, because sharded datasets are collections
+            of separate files.
+        """
+        raise UnsupportedOperation(
+            f'Cannot seek in sharded file pattern {self.filename()}. '
+            'Parallelize across shards by partitioning the list of shard files '
+            'returned by ShardedFileDictIO.resolve_input_files() instead.')
+
+    def tell(self) -> int:
+        """Byte position is not supported across sharded file collections.
+
+        Raises:
+          UnsupportedOperation: Always.
+        """
+        raise UnsupportedOperation(
+            f'tell() is not supported on sharded file collection {self.filename()}.'
+        )
 
     def write_record(self, record: dict, key: str = None):
         """Routes and writes a single dictionary record to its target output shard.
@@ -513,9 +564,8 @@ class ShardedFileDictIO(FileDictIO):
         """
         if self._shard_key is None:
             self._infer_default_shard_key(
-                self._headers or [
-                    k for k in record.keys() if not str(k).startswith('#')
-                ])
+                self._headers or
+                [k for k in record.keys() if not str(k).startswith('#')])
 
         key = None
         if self._shard_key:
@@ -535,7 +585,7 @@ class ShardedFileDictIO(FileDictIO):
                 if val is not None:
                     key = str(val)
         if key is None:
-            key = self._record_to_canonical_str(record)
+            key = record_to_canonical_str(record)
 
         if self._shard_key_prefix_length > 0:
             key = key[:self._shard_key_prefix_length]
@@ -646,8 +696,7 @@ class ShardedFileDictIO(FileDictIO):
                 base, prefix_ext = os.path.splitext(prefix)
                 candidate_globs = []
                 if prefix_ext:
-                    candidate_globs.append(
-                        f'{prefix}-[0-9]*-of-{count_pat}')
+                    candidate_globs.append(f'{prefix}-[0-9]*-of-{count_pat}')
                     candidate_globs.append(
                         f'{base}-[0-9]*-of-{count_pat}{prefix_ext}')
                 elif spec_ext:
@@ -656,8 +705,7 @@ class ShardedFileDictIO(FileDictIO):
                     candidate_globs.append(
                         f'{prefix}{spec_ext}-[0-9]*-of-{count_pat}')
                 else:
-                    candidate_globs.append(
-                        f'{prefix}-[0-9]*-of-{count_pat}')
+                    candidate_globs.append(f'{prefix}-[0-9]*-of-{count_pat}')
             else:
                 candidate_globs = [pattern]
 
@@ -705,8 +753,8 @@ class ShardedFileDictIO(FileDictIO):
                     h for h in headers if not str(h).startswith('#')
                 ]
                 if non_comment_headers:
-                    return int(
-                        estimated_lines / max(1, len(non_comment_headers)))
+                    return int(estimated_lines /
+                               max(1, len(non_comment_headers)))
             with file_util.FileIO(first_file, use_tempfile=False) as fp:
                 sample = fp.read(4000)
             if isinstance(sample, bytes):
@@ -783,8 +831,8 @@ class ShardedFileDictIO(FileDictIO):
                 self._shard_key = custom_cols[0]
         elif self._shard_key:
             clean_key = self._shard_key.strip('{}')
-            if clean_key in placeholders and clean_key not in (
-                    'index', 'shard_count'):
+            if clean_key in placeholders and clean_key not in ('index',
+                                                               'shard_count'):
                 self._shard_by_column_value = True
                 self._shard_count = 0
 
@@ -836,9 +884,9 @@ class ShardedFileDictIO(FileDictIO):
                 shard_counter = self.get_shard_counters(index)
                 if shard_counter._counters:
                     for name, count in list(shard_counter._counters.items()):
-                        if (name == 'start_time' or
-                                name.startswith(('process_', 'process-')) or
-                                (name == 'processed' and count == 0)):
+                        if (name == 'start_time' or name.startswith(
+                            ('process_', 'process-')) or
+                            (name == 'processed' and count == 0)):
                             continue
                         self._counters.add_counter(name, count)
                     shard_counter._counters.clear()
@@ -852,11 +900,3 @@ class ShardedFileDictIO(FileDictIO):
                 self._shard_key = 'Node'
             else:
                 self._shard_key = candidate_keys[0]
-
-    def _record_to_canonical_str(self, record: dict) -> str:
-        """Normalizes and serializes `record` deterministically for fingerprinting."""
-        try:
-            normalized = mcf_file_util.normalize_mcf_node(record)
-            return mcf_file_util.node_dict_to_text(normalized)
-        except Exception:
-            return json.dumps(record, sort_keys=True, default=str)

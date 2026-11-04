@@ -36,12 +36,25 @@ To generate a specified number of output shards, use the `@N` suffix:
 To dynamically determine the shard count with a target number of records per shard:
   --records_per_shard=<count> --shard_output=<prefix>*.csv
 
+To add default values for properties that are missing or empty, separate the
+properties with ';' (a value can be a comma separated list):
+  --shard_default_pvs="typeOf:dcs:StatVarObservation;measurementMethod=dcs:A,dcs:B"
+
+To emit only some columns, or columns computed from other columns, separate
+the columns with ';'. A column without '=' copies the input value; anything
+after '=' is a Python expression with the input columns as variables and the
+`eval_functions` helpers such as `format_date`:
+  --shard_output_columns="dcid;value=int(v) * 100;label=f'{dcid}-{year}';date=format_date(d, '%Y-%m');typeOf='dcs:StatVarObservation'"
+Default values are added before the output columns are computed.
+
 Example usage within a Python script:
   import file_sharder
 
   shard_configs = {
       'shard_key': 'observationAbout',
       'shard_count': 100,
+      'shard_default_pvs': 'unit:dcs:Count',
+      'shard_output_columns': "observationAbout;value=float(value);unit",
   }
   file_sharder.shard_file(input_file, output_path, shard_configs)
 """
@@ -69,22 +82,33 @@ sys.path.append(
     os.path.join(os.path.dirname(_SCRIPT_DIR), 'tools', 'statvar_importer'))
 
 from counters import CounterOptions, Counters
+import file_util
 from file_dict_io import (
     FileDictIO,
     ShardedFileDictIO,
     get_default_shard_config as get_base_shard_config,
     get_record_dcid,
+    is_avro_file,
+    is_csv_file,
+    is_jsonl_file,
+    is_mcf_file,
     open_dict_file,
+    record_to_canonical_str,
     str_to_int_hash,
 )
 import mcf_file_util
+from eval_functions import evaluate_statement
 
 # Defaults
 _DEFAULT_RECORDS_PER_SHARD = 100000
 _DEFAULT_SHARD_FILENAME = 'shard-{index:05}-of-{shard_count:05d}'
+_DEFAULT_MIN_CHUNK_SIZE = 32 * 1024 * 1024
 _NUM_DEDUP_BUCKETS = 64
 # Number of input records between updates to the global progress counters.
 _PROGRESS_BATCH_SIZE = 100000
+# Separator between property-value items in `shard_default_pvs` and
+# `shard_output_columns`. Not ',', since a value can be a comma separated list.
+_PV_ITEM_SEPARATOR = ';'
 
 # Counters specific to a `Counters` instance (timestamps, rates, and totals set
 # separately) that must not be summed when merging counters.
@@ -138,16 +162,30 @@ flags.DEFINE_float(
     'the same shard key are kept or dropped together.')
 flags.DEFINE_integer('shard_threads', 1,
                      'Maximum number of parallel threads for reading inputs.')
-flags.DEFINE_list(
-    'shard_default_pvs', [],
-    'Default property:value pairs to add to each record if not present '
-    '(e.g. "typeOf:StatVarObservation").')
+flags.DEFINE_integer(
+    'shard_min_chunk_size', _DEFAULT_MIN_CHUNK_SIZE,
+    'Minimum byte size of chunks when splitting a file across parallel workers.'
+)
+flags.DEFINE_string(
+    'shard_default_pvs', '',
+    'Default property values to add to a record when the property is missing '
+    'or empty, separated by ";", each as <property>:<value> or '
+    '<property>=<value>. A value can be a comma separated list. Example: '
+    '"typeOf:dcs:StatVarObservation;measurementMethod=dcs:A,dcs:B".')
 flags.DEFINE_bool(
     'shard_generate_dcid', False,
     'Generate a deterministic dcid for records that do not have a dcid/Node.')
 flags.DEFINE_list(
     'shard_dcid_ignore_props', [],
     'Additional properties to ignore when generating a dcid for a record.')
+
+flags.DEFINE_string(
+    'shard_output_columns', None,
+    'Output columns separated by ";", each as <column> to copy the input '
+    'value, or <column>=<expression>, a Python expression with the input '
+    'columns as variables. Example: '
+    '"dcid;value=int(v)*2;label=f\'{id}-{year}\';typeOf=\'StatVarObservation\'".'
+)
 
 
 def _base32_encode_uint64(value: int) -> str:
@@ -178,16 +216,23 @@ def generate_node_dcid(
          start with `#`, with a value that is not empty after removing
          surrounding spaces and double quotes. Returns `''` if there are none,
          or if any of these values starts with `l:` (a local reference).
-      2. Values: each value is converted to a string, and surrounding spaces
-         and double quotes are removed. A quantity range such as
-         `[10 20 Years]` is normalized with `mcf_file_util.normalize_range`.
-         Then, if the value has no `"` and its first non-letter character is
-         `:`, everything up to and including that `:` is removed and
-         surrounding whitespace is stripped, so `dcid:geoId/06` becomes
-         `geoId/06` (`mcf_file_util.strip_namespace`).
+      2. Values: the properties are normalized with
+         `mcf_file_util.normalize_mcf_node(props, quantity_range_to_dcid=True)`
+         and each normalized value is converted to a string. That normalizes
+         each value with `mcf_file_util.normalize_value`:
+         - A value with `,` is a list: items are split (as CSV if the value
+           has `"`), normalized, deduplicated, sorted and joined with `,`,
+           so `dcs:B, A` becomes `dcid:A,dcid:B`. A quoted list with `{` or
+           `[` is kept as is.
+         - A quantity range `[10 20 Years]` becomes `dcid:Years10To20`.
+         - A number is written without trailing zeros: `1.0` becomes `1`.
+         - A value with a space, or a quoted value, is enclosed in `"`. A
+           quoted value longer than 100 characters is kept as is.
+         - Any other value gets the `dcid:` namespace instead of its own, and
+           `__` separated parts are sorted: `a__c__b` becomes `dcid:a__b__c`.
       3. Key: the JSON array of `[property, value]` pairs sorted by property
          (Unicode code point order), with no whitespace, for example
-         `[["observationAbout","geoId/06"],["value","39538223"]]`. Only `"`,
+         `[["observationAbout","dcid:geoId/06"],["value","39538223"]]`. Only `"`,
          `\` and U+0000 to U+001F are escaped, as `\"`, `\\`, `\b`, `\f`,
          `\n`, `\r`, `\t` or `\u00xx` with lowercase hex. All other
          characters, including non-ASCII, `/`, `<`, `>` and `&`, are written
@@ -219,7 +264,7 @@ def generate_node_dcid(
     if not type_of and 'observationAbout' in record and 'variableMeasured' in record:
         type_of = 'StatVarObservation'
 
-    props = []
+    props = {}
     for prop, raw_val in record.items():
         if not prop or str(prop).startswith('#') or prop in ignore_props:
             continue
@@ -228,19 +273,15 @@ def generate_node_dcid(
             continue
         if val_str.startswith('l:'):
             return ''
-        props.append(prop)
+        # normalize_mcf_node reads Node and dcid as strings.
+        props[prop] = str(raw_val) if prop in ('Node', 'dcid') else raw_val
 
     if not props:
         return ''
 
-    props.sort()
-    pairs = []
-    for prop in props:
-        val_str = str(record[prop]).strip(' "')
-        if val_str.startswith('['):
-            val_str = mcf_file_util.normalize_range(
-                val_str, quantity_range_to_dcid=True)
-        pairs.append([prop, mcf_file_util.strip_namespace(val_str)])
+    normalized = mcf_file_util.normalize_mcf_node(props,
+                                                  quantity_range_to_dcid=True)
+    pairs = [[prop, str(val)] for prop, val in sorted(normalized.items())]
 
     # JSON keeps the property and value boundaries unambiguous. Joining
     # 'prop=value' strings gave {'a': 'b', 'c': 'd'} and {'a': 'bc=d'} the
@@ -250,26 +291,94 @@ def generate_node_dcid(
     return f'{prefix}{_get_long_id(key_string)}'
 
 
-def _parse_default_pvs(default_pvs: dict | list | str | None) -> dict[str, str]:
-    """Parses `default_pvs` from a dict, list of 'prop:val' strings, or comma-separated string."""
-    if not default_pvs:
+def _parse_list(value: list | str | None, sep: str = ',') -> list:
+    """Returns `value` as a list, splitting a string on `sep` and dropping empty items."""
+    if not value:
+        return []
+    if isinstance(value, str):
+        value = value.split(sep)
+    return [
+        item.strip() if isinstance(item, str) else item
+        for item in value
+        if not isinstance(item, str) or item.strip()
+    ]
+
+
+def _parse_pvs(pvs: dict | list | str | None,
+               pv_seps: str,
+               require_value: bool = False,
+               item_sep: str = _PV_ITEM_SEPARATOR) -> dict[str, str]:
+    """Parses property-value pairs from a dict, a list, or a string.
+
+    Args:
+      pvs: A dict of property to value, a list of `'<prop><sep><value>'`
+        strings, or a string of them separated by `item_sep`.
+      pv_seps: Characters that separate a property from its value. The first
+        one found in an item is used, so the value can contain any of them:
+        with `pv_seps=':='`, `'typeOf=dcs:Place'` is `typeOf` and `dcs:Place`.
+      require_value: If True, items without a separator are ignored.
+        Otherwise they get an empty value.
+      item_sep: Separator between items in a string. Defaults to `';'`, so
+        values can be comma separated lists.
+
+    Returns:
+      Dict of property to value, in the order given.
+    """
+    if not pvs:
         return {}
-    if isinstance(default_pvs, dict):
-        return {str(k).strip(): str(v).strip() for k, v in default_pvs.items() if k}
-    items = (
-        [s.strip() for s in default_pvs.split(',') if s.strip()]
-        if isinstance(default_pvs, str) else list(default_pvs)
-    )
+    if isinstance(pvs, dict):
+        items = pvs.items()
+    else:
+        items = []
+        for item in _parse_list(pvs, item_sep):
+            if not isinstance(item, str):
+                continue
+            positions = [p for p in (item.find(s) for s in pv_seps) if p >= 0]
+            if positions:
+                pos = min(positions)
+                items.append((item[:pos], item[pos + 1:]))
+            elif not require_value:
+                items.append((item, ''))
     parsed = {}
-    for item in items:
-        if not isinstance(item, str):
-            continue
-        sep = ':' if ':' in item else ('=' if '=' in item else None)
-        if sep:
-            prop, val = item.split(sep, 1)
-            if prop.strip():
-                parsed[prop.strip()] = val.strip()
+    for prop, val in items:
+        prop = str(prop).strip()
+        if prop:
+            parsed[prop] = '' if val is None else str(val).strip()
     return parsed
+
+
+def _parse_default_pvs(default_pvs: dict | list | str | None) -> dict[str, str]:
+    """Parses `shard_default_pvs` into a dict of property to default value.
+
+    Args:
+      default_pvs: A dict of property to value, a list of `'<prop>:<value>'`
+        or `'<prop>=<value>'` strings, or a string of them separated by `;`,
+        such as `'typeOf:dcs:StatVarObservation;measurementMethod=dcs:A,dcs:B'`.
+        The first `:` or `=` separates the property from the value, and the
+        value can be a comma separated list. Items without a value are
+        ignored.
+
+    Returns:
+      Dict of property to default value, in the order given.
+    """
+    return _parse_pvs(default_pvs, pv_seps=':=', require_value=True)
+
+
+def _parse_output_columns(columns: dict | list | str | None) -> dict[str, str]:
+    """Parses `shard_output_columns` into a dict of output column to expression.
+
+    Args:
+      columns: A dict of column to expression, a list of `'<column>'` or
+        `'<column>=<expression>'` strings, or a string of them separated by
+        `;`, such as `"id;v2=int(v) * 2;label=f'{id}-{year}'"`. Everything
+        after the first `=` is the expression, so it can contain `=`, `:` and
+        `,`, but not `;`.
+
+    Returns:
+      Dict of output column to its expression (`''` to copy the input
+      column), in the order given.
+    """
+    return _parse_pvs(columns, pv_seps='=')
 
 
 @functools.lru_cache(maxsize=131072)
@@ -300,6 +409,37 @@ def _is_additive_counter(name: str, value) -> bool:
     return isinstance(value, (int, float))
 
 
+def _merge_counters(source: Counters, *targets: Counters):
+    """Adds the additive counters in `source` to each of `targets`.
+
+    Skips `processed`, which `FileSharder` adds to the global counters as
+    input records are read, and non-additive counters such as timestamps and
+    rates (see `_is_additive_counter`).
+    """
+    for name, count in source.get_counters().items():
+        if name == 'processed' or not _is_additive_counter(name, count):
+            continue
+        for target in targets:
+            target.add_counter(name, count)
+
+
+def is_seekable_file(filename: str) -> bool:
+    """Returns True if the file format supports parallel chunk reading via seek()."""
+    if not isinstance(filename, str):
+        return False
+    lower = filename.lower()
+    if lower.endswith(('.gz', '.bz2', '.zst', '.zip', '.tgz', '.tar')):
+        return False
+    if file_util.file_is_google_spreadsheet(filename):
+        return False
+    return (is_avro_file(lower) or is_mcf_file(lower) or is_jsonl_file(lower) or
+            is_csv_file(lower))
+
+
+# Backward compatibility alias
+is_splittable_file = is_seekable_file
+
+
 def get_default_shard_config() -> dict:
     """Returns the default config for sharding based on command-line flags."""
     if not _FLAGS.is_parsed():
@@ -315,9 +455,11 @@ def get_default_shard_config() -> dict:
         'shard_headers': _FLAGS.shard_headers,
         'shard_sample_rate': _FLAGS.shard_sample_rate,
         'shard_threads': _FLAGS.shard_threads,
+        'shard_min_chunk_size': _FLAGS.shard_min_chunk_size,
         'shard_default_pvs': _FLAGS.shard_default_pvs,
         'shard_generate_dcid': _FLAGS.shard_generate_dcid,
         'shard_dcid_ignore_props': _FLAGS.shard_dcid_ignore_props,
+        'shard_output_columns': _FLAGS.shard_output_columns,
     })
     return config
 
@@ -327,6 +469,7 @@ class FileSharder:
 
     Reads multiple input files in parallel with a separate `FileDictIO` reader
     per input file, applying default property values (`shard_default_pvs`),
+    output column selection and expressions (`shard_output_columns`),
     deterministic DCID generation (`shard_generate_dcid`), shard-independent
     deduplication (`shard_skip_duplicates`), deterministic key sampling
     (`shard_sample_rate`), and record limits (`shard_input_records`), while
@@ -358,12 +501,12 @@ class FileSharder:
         # Validate before creating any state so invalid configs fail cleanly.
         self.setup_sample_rate()
         self._counters = counters if counters is not None else Counters()
-        self._reader_counters = Counters(
-            options=CounterOptions(show_every_n_sec=0))
-        self._writer_counters = Counters(
-            options=CounterOptions(show_every_n_sec=0))
-        self._output_path = (
-            output_path or self._config.get('shard_output_path') or '')
+        self._reader_counters = Counters(options=CounterOptions(
+            show_every_n_sec=0))
+        self._writer_counters = Counters(options=CounterOptions(
+            show_every_n_sec=0))
+        self._output_path = (output_path or
+                             self._config.get('shard_output_path') or '')
         self._lock = threading.Lock()
         self._dedup_locks = [
             threading.Lock() for _ in range(_NUM_DEDUP_BUCKETS)
@@ -376,16 +519,14 @@ class FileSharder:
         self._default_pvs = _parse_default_pvs(
             self._config.get('shard_default_pvs') or
             self._config.get('default_pvs'))
+        self._output_pvs = _parse_output_columns(
+            self._config.get('shard_output_columns'))
         self._generate_dcid = bool(
             self._config.get('shard_generate_dcid') or
             self._config.get('generate_dcid', False))
-        extra_ignore_props = (
+        extra_ignore_props = _parse_list(
             self._config.get('shard_dcid_ignore_props') or
-            self._config.get('dcid_ignore_props') or [])
-        if isinstance(extra_ignore_props, str):
-            extra_ignore_props = [
-                p.strip() for p in extra_ignore_props.split(',') if p.strip()
-            ]
+            self._config.get('dcid_ignore_props'))
         self._dcid_ignore_props = frozenset(_DCID_IGNORE_PROPS |
                                             set(extra_ignore_props))
 
@@ -393,7 +534,8 @@ class FileSharder:
         self._headers = list(self._config.get('shard_headers') or [])
         self._shard_key = self._config.get('shard_key') or None
         if self._input_files and not self._headers:
-            with open_dict_file(self._input_files[0], mode='r') as preview_reader:
+            with open_dict_file(self._input_files[0],
+                                mode='r') as preview_reader:
                 preview_headers = preview_reader.headers()
                 if preview_headers:
                     self._headers = list(preview_headers)
@@ -401,26 +543,27 @@ class FileSharder:
         if not self._output_path and self._input_files:
             self._output_path = self._input_files[0]
 
-        if self._headers and not str(self._headers[0]).startswith('#'):
-            for prop in self._default_pvs:
-                if prop not in self._headers:
-                    self._headers.append(prop)
-            if (self._generate_dcid and 'dcid' not in self._headers and
-                    'Node' not in self._headers):
-                self._headers.insert(0, 'dcid')
+        # Input headers are used to estimate the number of input records.
+        self._input_headers = list(self._headers)
+        if self._headers or self._output_pvs:
+            self._headers = self._get_output_headers(self._headers)
 
         writer_config = {
-            'shard_key': self._shard_key,
-            'shard_key_prefix_length': self._config.get(
-                'shard_key_prefix_length', 0),
-            'shard_count': self._config.get('shard_count', 0),
-            'records_per_shard': self._config.get(
-                'records_per_shard', _DEFAULT_RECORDS_PER_SHARD),
-            'shard_headers': self._headers,
+            'shard_key':
+                self._shard_key,
+            'shard_key_prefix_length':
+                self._config.get('shard_key_prefix_length', 0),
+            'shard_count':
+                self._config.get('shard_count', 0),
+            'records_per_shard':
+                self._config.get('records_per_shard',
+                                 _DEFAULT_RECORDS_PER_SHARD),
+            'shard_headers':
+                self._headers,
             # Used to derive shard_count from records_per_shard, so size the
             # shards for the expected number of records after sampling.
-            'estimated_num_records': round(
-                self.get_input_records_estimate() * self._sample_rate),
+            'estimated_num_records':
+                round(self.get_input_records_estimate() * self._sample_rate),
         }
 
         self._writer = ShardedFileDictIO(
@@ -440,11 +583,7 @@ class FileSharder:
             self._writer.close()
         writer_counters = getattr(self, '_writer_counters', None)
         if writer_counters is not None:
-            for name, count in writer_counters.get_counters().items():
-                # Global 'processed' counts input records as they are read.
-                if name == 'processed' or not _is_additive_counter(name, count):
-                    continue
-                self._counters.add_counter(name, count)
+            _merge_counters(writer_counters, self._counters)
             writer_counters._counters.clear()
 
     def apply_default_pvs(self, record: dict) -> dict:
@@ -477,19 +616,14 @@ class FileSharder:
     def is_duplicate_record(self, record: dict) -> bool:
         """Returns True if `record` is a duplicate of a previously seen record.
 
-        Normalizes the record using `mcf_file_util.normalize_mcf_node` so
+        Uses the record fingerprint (`record_to_canonical_str`), so
         equivalent nodes with different property ordering or value list ordering
         are recognized as duplicates. Uses hash-bucketed locks (`_NUM_DEDUP_BUCKETS`)
         keyed by the record fingerprint hash so duplicate detection is completely
         independent of `shard_index` while remaining lock-contention-free across
         worker threads.
         """
-        try:
-            normalized = mcf_file_util.normalize_mcf_node(record)
-            canonical = mcf_file_util.node_dict_to_text(normalized)
-        except Exception:
-            canonical = json.dumps(record, sort_keys=True, default=str)
-        record_hash = str_to_int_hash(canonical)
+        record_hash = str_to_int_hash(record_to_canonical_str(record))
         bucket_idx = record_hash % _NUM_DEDUP_BUCKETS
         with self._dedup_locks[bucket_idx]:
             seen_set = self._records_seen_buckets[bucket_idx]
@@ -529,10 +663,130 @@ class FileSharder:
     def get_input_records_estimate(self) -> int:
         """Returns the estimated number of input records across `self._input_files`."""
         return ShardedFileDictIO.estimate_input_records(self._input_files,
-                                                        self._headers)
+                                                        self._input_headers)
 
-    def _process_input_file(self, input_file: str) -> tuple[int, int]:
-        """Reads and shards a single `input_file` using its own `FileDictIO` reader."""
+    def _get_output_headers(self, input_headers: list) -> list:
+        """Returns the output shard headers for records with `input_headers`.
+
+        With `shard_output_columns`, the headers are the output columns.
+        Otherwise they are `input_headers` plus any `shard_default_pvs`. For
+        CSV-style headers, `dcid` is added first if `shard_generate_dcid` is
+        set and there is no `dcid` or `Node` column. MCF comment headers
+        (starting with `#`) are returned as is.
+        """
+        if self._output_pvs:
+            headers = list(self._output_pvs)
+        else:
+            headers = list(input_headers)
+            if not headers or str(headers[0]).startswith('#'):
+                return headers
+            for prop in self._default_pvs:
+                if prop not in headers:
+                    headers.append(prop)
+        if (self._generate_dcid and 'dcid' not in headers and
+                'Node' not in headers):
+            headers.insert(0, 'dcid')
+        return headers
+
+    def get_output_record(self,
+                          record: dict,
+                          counters: Counters = None) -> dict:
+        """Returns a record with only the `shard_output_columns`.
+
+        A column without an expression (`'col'`) gets the input value of
+        `col`. A column with an expression (`'v2=int(v) * 2'`) gets the result
+        of `eval_functions.evaluate_statement`, with the input columns as
+        variables and the `eval_functions` helpers such as `format_date` and
+        `str_to_camel_case`. Constants must be quoted (`"typeOf='Place'"`),
+        and f-strings combine columns (`"label=f'{id}-{year}'"`). A column is
+        left out if it has no value or its expression fails.
+
+        Args:
+          record: Input record.
+          counters: Optional `Counters` to count expressions that failed, as
+            `shard-output-column-errors`.
+
+        Returns:
+          New dict with the output columns, in the configured order.
+        """
+        output_record = {}
+        for prop, expr in self._output_pvs.items():
+            if not expr:
+                value = record.get(prop)
+            else:
+                # Pass 'prop=expr' so evaluate_statement splits at the first
+                # '=' and the expression can contain '=', as in 'a == b'.
+                _, value = evaluate_statement(f'{prop}={expr}', record)
+                if value is None and counters is not None:
+                    counters.add_counter('shard-output-column-errors', 1)
+            if value is not None:
+                output_record[prop] = value
+        return output_record
+
+    def _generate_input_tasks(
+            self, max_threads: int) -> list[tuple[str, int, int | None]]:
+        """Generates worker tasks (filename, start_offset, end_offset).
+
+        Seekable files whose size is at least 2 * shard_min_chunk_size are
+        divided into byte chunks across available worker threads. Non-seekable
+        files or files smaller than the chunk threshold are read as a single
+        task (filename, 0, None).
+        """
+        min_chunk_size = int(
+            self._config.get('shard_min_chunk_size') or _DEFAULT_MIN_CHUNK_SIZE)
+        if min_chunk_size <= 0:
+            min_chunk_size = _DEFAULT_MIN_CHUNK_SIZE
+
+        seekable_count = sum(
+            1 for f in self._input_files if is_seekable_file(f))
+        non_seekable_count = len(self._input_files) - seekable_count
+        self._counters.set_counter('shard-seekable-files', seekable_count)
+        self._reader_counters.set_counter('shard-seekable-files',
+                                          seekable_count)
+        self._counters.set_counter('shard-non-seekable-files',
+                                   non_seekable_count)
+        self._reader_counters.set_counter('shard-non-seekable-files',
+                                          non_seekable_count)
+
+        if max_threads <= 1:
+            self._counters.set_counter('shard-chunks', len(self._input_files))
+            self._reader_counters.set_counter('shard-chunks',
+                                              len(self._input_files))
+            return [(f, 0, None) for f in self._input_files]
+
+        tasks = []
+        for input_file in self._input_files:
+            if not is_seekable_file(input_file):
+                tasks.append((input_file, 0, None))
+                continue
+
+            file_size = file_util.file_get_size(input_file)
+            if file_size is None or file_size < min_chunk_size * 2:
+                tasks.append((input_file, 0, None))
+                continue
+
+            num_chunks = max(1, min(max_threads, file_size // min_chunk_size))
+            if num_chunks <= 1:
+                tasks.append((input_file, 0, None))
+                continue
+
+            chunk_size = file_size // num_chunks
+            for i in range(num_chunks):
+                start = i * chunk_size
+                end = (i + 1) * chunk_size if i < num_chunks - 1 else None
+                tasks.append((input_file, start, end))
+
+        self._counters.set_counter('shard-chunks', len(tasks))
+        self._reader_counters.set_counter('shard-chunks', len(tasks))
+        return tasks
+
+    def _process_input_file(
+        self,
+        input_file: str,
+        start_offset: int = 0,
+        end_offset: int = None,
+    ) -> tuple[int, int]:
+        """Reads and shards a single `input_file` chunk using its own `FileDictIO` reader."""
         max_records = int(self._config.get('shard_input_records', sys.maxsize))
         skip_duplicates = bool(self._config.get('shard_skip_duplicates', False))
         sample_enabled = self._sample_rate < 1.0
@@ -546,27 +800,26 @@ class FileSharder:
             file_counters = Counters(options=CounterOptions(show_every_n_sec=0))
         else:
             file_counters = Counters()
-        file_counters.add_counter(
-            'total',
-            ShardedFileDictIO.estimate_input_records([input_file],
-                                                     self._headers),
-        )
-        file_counters.add_counter('shard-input-files', 1)
+        if start_offset == 0:
+            file_counters.add_counter(
+                'total',
+                ShardedFileDictIO.estimate_input_records([input_file],
+                                                         self._input_headers),
+            )
+            file_counters.add_counter('shard-input-files', 1)
         file_input_records = 0
         file_output_records = 0
         batch_processed = 0
 
-        with open_dict_file(input_file, mode='r') as reader:
+        with open_dict_file(
+                input_file,
+                mode='r',
+                start_offset=start_offset,
+                end_offset=end_offset,
+        ) as reader:
             file_headers = reader.headers()
             if file_headers:
-                expected_headers = list(file_headers)
-                if not str(expected_headers[0]).startswith('#'):
-                    for prop in default_pvs:
-                        if prop not in expected_headers:
-                            expected_headers.append(prop)
-                    if (generate_dcid and 'dcid' not in expected_headers and
-                            'Node' not in expected_headers):
-                        expected_headers.insert(0, 'dcid')
+                expected_headers = self._get_output_headers(file_headers)
                 with self._lock:
                     if not self._headers:
                         self._headers = expected_headers
@@ -596,6 +849,8 @@ class FileSharder:
                 if default_pvs:
                     self.apply_default_pvs(record)
                     file_counters.add_counter('shard-default-pvs-applied', 1)
+                if self._output_pvs:
+                    record = self.get_output_record(record, file_counters)
 
                 if generate_dcid:
                     prev_dcid = get_record_dcid(record)
@@ -628,14 +883,12 @@ class FileSharder:
 
         self._add_processed_records(file_counters, batch_processed)
         with self._lock:
-            for name, count in file_counters.get_counters().items():
-                # 'processed' is already added by _add_processed_records().
-                if name == 'processed' or not _is_additive_counter(name, count):
-                    continue
-                self._reader_counters.add_counter(name, count)
-                self._counters.add_counter(name, count)
-            self._reader_counters.add_counter(
-                'total', file_counters.get_counter('total'))
+            # 'processed' is already added by _add_processed_records().
+            _merge_counters(file_counters, self._reader_counters,
+                            self._counters)
+            if self._reader_counters.get_counter('total') == 0:
+                self._reader_counters.add_counter(
+                    'total', file_counters.get_counter('total'))
         return file_input_records, file_output_records
 
     def _add_processed_records(self, file_counters: Counters, count: int):
@@ -662,47 +915,82 @@ class FileSharder:
             self.close()
             return
 
-        self._counters.add_counter('total', self.get_input_records_estimate())
+        total_estimate = self.get_input_records_estimate()
+        self._counters.set_counter('total', total_estimate)
+        self._reader_counters.set_counter('total', total_estimate)
+        self._counters.set_counter('processed', 0)
+        self._reader_counters.set_counter('processed', 0)
+
         num_input_records = 0
         num_output_records = 0
 
-        num_files = len(self._input_files)
-        max_workers = max(
-            1,
-            min(num_files, int(self._config.get('shard_threads') or 1)),
-        )
+        shard_threads = int(self._config.get('shard_threads') or 1)
+        tasks = self._generate_input_tasks(max_threads=shard_threads)
+        max_workers = max(1, min(len(tasks), shard_threads))
         self._num_workers = max_workers
+
+        self._counters.set_counter('shard-workers', max_workers)
+        self._counters.set_counter('workers', max_workers)
+        self._reader_counters.set_counter('shard-workers', max_workers)
+        self._reader_counters.set_counter('workers', max_workers)
+
+        self._counters.set_counter('shard-tasks', len(tasks))
+        self._reader_counters.set_counter('shard-tasks', len(tasks))
+        self._counters.set_counter('shard-tasks-completed', 0)
+        self._reader_counters.set_counter('shard-tasks-completed', 0)
+
         if max_workers == 1:
-            for input_file in self._input_files:
-                in_cnt, out_cnt = self._process_input_file(input_file)
+            for input_file, start_offset, end_offset in tasks:
+                in_cnt, out_cnt = self._process_input_file(
+                    input_file,
+                    start_offset=start_offset,
+                    end_offset=end_offset)
                 num_input_records += in_cnt
                 num_output_records += out_cnt
+                self._counters.add_counter('shard-tasks-completed', 1)
+                self._reader_counters.add_counter('shard-tasks-completed', 1)
         else:
             executor = concurrent.futures.ThreadPoolExecutor(
                 max_workers=max_workers)
             try:
                 futures = [
-                    executor.submit(self._process_input_file, input_file)
-                    for input_file in self._input_files
+                    executor.submit(
+                        self._process_input_file,
+                        input_file,
+                        start_offset=start_offset,
+                        end_offset=end_offset,
+                    ) for input_file, start_offset, end_offset in tasks
                 ]
-                concurrent.futures.wait(futures)
-                for future in futures:
+                for future in concurrent.futures.as_completed(futures):
                     in_cnt, out_cnt = future.result()
-                    num_input_records += in_cnt
-                    num_output_records += out_cnt
+                    with self._lock:
+                        num_input_records += in_cnt
+                        num_output_records += out_cnt
+                        self._counters.add_counter('shard-tasks-completed', 1)
+                        self._reader_counters.add_counter(
+                            'shard-tasks-completed', 1)
             finally:
                 # shutdown(wait=True) joins all worker threads before proceeding.
                 executor.shutdown(wait=True)
+
+        if num_input_records > self._counters.get_counter('total'):
+            self._counters.set_counter('total', num_input_records)
+            self._reader_counters.set_counter('total', num_input_records)
+        self._counters.set_counter('processed', num_input_records)
+        self._reader_counters.set_counter('processed', num_input_records)
+        self._counters.set_counter('shard-input-records', num_input_records)
+        self._reader_counters.set_counter('shard-input-records',
+                                          num_input_records)
 
         reader_counters_str = self._reader_counters.get_counters_string()
         writer_counters_str = self._writer.counters().get_counters_string()
         self.close()
         logging.info(
             f'Sharded {num_input_records} records from {len(self._input_files)} files '
+            f'({len(tasks)} tasks, {max_workers} workers) '
             f'into {len(self._writer.files())} shards with {num_output_records} records.\n'
             f'Reader {reader_counters_str}\n'
-            f'Writer {writer_counters_str}'
-        )
+            f'Writer {writer_counters_str}')
 
 
 def shard_file(input_file: str,

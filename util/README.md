@@ -1,6 +1,13 @@
 # Utility libraries for importing data into Data Commons
 
-[TOC]
+## Table of contents
+
+- [Python](#python)
+  - [Util libraries](#util-libraries)
+  - [Testing libraries](#testing-libraries)
+- [Go](#go)
+  - [Util libraries](#util-libraries-1)
+  - [Testing libraries](#testing-libraries-1)
 
 This folder hosts utility libraries helpful for creating Meta Content Framework
 (MCF) files that the Data Commons graph can ingest. While you are free to use
@@ -16,6 +23,16 @@ To date, all our util libraries cater to writing MCF.
 
 -   `alpha2_to_dcid`: This library contains mappings from 2-character country
     and US state codes to their unique Data Commons IDs.
+
+-   `file_dict_io`: Reads and writes structured records (CSV, TSV, JSON,
+    JSON Lines, MCF, Avro, and sharded file collections) as Python dictionaries,
+    with seekable byte-range chunking for parallel workers. See the
+    [`file_dict_io` documentation](doc/file_dict_io.md).
+
+-   `file_sharder`: Partitions large tabular and graph datasets into sharded
+    output files by key hash, row count, or fixed shard count with
+    multi-threaded chunk processing, deduplication, and sampling. See the
+    [File Sharder documentation](doc/file_sharder.md).
 
 -   `latlng_recon_geojson`: This library helps map lat/lng coordinate pairs to
     US States, Countries and Continents.  It does so by using the GeoJSONs from
@@ -69,6 +86,14 @@ To date, all our util libraries cater to writing MCF.
 #### Testing `sharding_writer`
 
 Test coming soon.
+
+#### Testing `file_sharder`
+
+`python3 -m unittest file_sharder_test.py`
+
+#### Testing `file_dict_io`
+
+`python3 -m unittest discover -s file_dict_io -p "*_test.py"`
 
 ## Go
 

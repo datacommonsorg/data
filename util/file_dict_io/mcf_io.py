@@ -20,6 +20,7 @@ Example:
     writer.write({'Node': 'dcid:Person1', 'typeOf': 'dcs:Person'})
 """
 
+from io import UnsupportedOperation
 import os
 from absl import logging
 
@@ -50,6 +51,13 @@ def is_mcf_file(filename: str) -> bool:
 
 # Properties that hold the id of a node, in order of precedence.
 NODE_ID_PROPS = ('dcid', 'Node')
+
+
+def _is_node_line(stripped_line: str) -> bool:
+    """Returns True if a stripped line starts an MCF `Node:` declaration."""
+    if not stripped_line.startswith('Node'):
+        return False
+    return stripped_line[4:].lstrip(' \t').startswith(':')
 
 
 def get_record_dcid(record: dict) -> str:
@@ -112,6 +120,8 @@ class McfFileDictIO(FileDictIO):
                  mode: str = 'r',
                  headers: list = None,
                  encoding: str = None,
+                 start_offset: int = 0,
+                 end_offset: int = None,
                  **kwargs):
         """Initializes an `McfFileDictIO` reader or writer.
 
@@ -121,9 +131,17 @@ class McfFileDictIO(FileDictIO):
           headers: Optional list of comment strings to write at the top of the
             MCF file.
           encoding: Optional text encoding.
+          start_offset: Optional starting byte offset for read mode.
+          end_offset: Optional ending byte offset for read mode.
           **kwargs: Optional format-specific keyword arguments.
         """
-        super().__init__(filename, mode, headers, encoding, **kwargs)
+        super().__init__(filename,
+                         mode,
+                         headers,
+                         encoding,
+                         start_offset=start_offset,
+                         end_offset=end_offset,
+                         **kwargs)
         self._lines = []
         self.open()
 
@@ -132,6 +150,10 @@ class McfFileDictIO(FileDictIO):
         logging.info(f'Opening MCF file {self._filename} for {self._mode}')
         super().open()
         self.write_header()
+        self._lines = []
+        self._next_record_start = 0
+        if self.is_read_mode() and self._start_offset > 0:
+            self.seek(self._start_offset)
 
     def write_header(self):
         """Writes the MCF file headers as `#`-prefixed comments once."""
@@ -177,46 +199,131 @@ class McfFileDictIO(FileDictIO):
         self._record_index += 1
         return ret
 
+    def seek(self, offset: int) -> int:
+        """Seeks to the first MCF node starting at or after `offset`.
+
+        Caveats:
+          - Node Demarcation: Seeks forward until an unindented line starting
+            with 'Node:' is found. Lines before the first 'Node:' (such as comments
+            or blank lines) are skipped.
+          - Multiline Property Values: Standard MCF specifies each PV pair on a line.
+            If a string property contains embedded newlines with 'Node:', it could be
+            mistaken for a node boundary, though standard MCF escapes or wraps strings.
+          - Header Comments: Header comments at the top of the file are bypassed
+            when seeking to an offset > 0.
+
+        Args:
+          offset: Byte offset in the file to seek past.
+
+        Returns:
+          The actual byte offset where the next MCF node starts.
+
+        Raises:
+          UnsupportedOperation: If the file is not opened in read mode.
+        """
+        if not self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot seek in write mode for MCF file {self.filename()}')
+        fp = self.get_file_handle()
+        if fp is None:
+            return 0
+        self._start_offset = offset
+        self._lines = []
+        if offset <= 0:
+            fp.seek(0)
+            self._next_record_start = 0
+            return 0
+
+        self._seek_to_next_line(offset)
+
+        while True:
+            line_pos = fp.tell()
+            line = fp.readline()
+            if not line:
+                self._next_record_start = fp.tell()
+                return self._next_record_start
+            stripped = line.strip()
+            if _is_node_line(stripped):
+                self._lines = [stripped]
+                self._next_record_start = line_pos
+                return line_pos
+
     def next(self) -> dict:
         """Returns the next MCF node in the file as a dictionary.
 
         Returns:
           A `dict` of property-value pairs for the next MCF node, or `None` if
-          there are no more MCF nodes in the file.
+          there are no more MCF nodes in the file or `end_offset` is reached.
         """
         fp = self.get_file_handle()
-        # Skip leading empty lines.
+        if fp is None:
+            return None
+
+        if self._end_offset is not None and self._next_record_start is not None:
+            if self._next_record_start >= self._end_offset:
+                return None
+
+        # Skip leading empty lines and file comments before the first Node.
         seen_node = False
         if not self._lines:
-            for line in fp:
+            while True:
+                line_pos = fp.tell()
+                line = fp.readline()
                 if not line:
-                    # End of file.
-                    break
-                line = line.strip()
-                if line != '':
-                    # Found the start of the next node.
-                    self._lines.append(line.strip())
-                    break
+                    return None
+                stripped = line.strip()
+                if stripped != '':
+                    if _is_node_line(stripped):
+                        self._lines.append(stripped)
+                        self._next_record_start = line_pos
+                        if (self._end_offset is not None and
+                                self._next_record_start >= self._end_offset):
+                            self._lines = []
+                            return None
+                        break
+                    else:
+                        continue
 
         # Read all non-empty lines until the empty line at the end of the record.
         lines = self._lines
+        self._lines = []
         for line in lines:
-            if line.startswith('Node:'):
+            if _is_node_line(line):
                 seen_node = True
-        for line in fp:
+
+        next_node_pos = None
+        while True:
+            line_pos = fp.tell()
+            line = fp.readline()
             if not line:
+                next_node_pos = fp.tell()
                 break
-            line = line.strip()
-            if line == '':
-                self._lines = []
+            stripped = line.strip()
+            if stripped == '':
+                # Node ended by blank line. Find the next node start position.
+                while True:
+                    cand_pos = fp.tell()
+                    next_line = fp.readline()
+                    if not next_line:
+                        next_node_pos = fp.tell()
+                        break
+                    next_stripped = next_line.strip()
+                    if _is_node_line(next_stripped):
+                        self._lines = [next_stripped]
+                        next_node_pos = cand_pos
+                        break
                 break
-            if line.startswith('Node'):
+            if _is_node_line(stripped):
                 if seen_node:
                     # Start of next record without an intervening empty line.
-                    self._lines = [line]
+                    self._lines = [stripped]
+                    next_node_pos = line_pos
                     break
                 seen_node = True
-            lines.append(line)
+            lines.append(stripped)
+
+        self._next_record_start = next_node_pos if next_node_pos is not None else fp.tell(
+        )
 
         # Parse property:value lines into a dict.
         if not lines:

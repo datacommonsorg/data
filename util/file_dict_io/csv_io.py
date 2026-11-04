@@ -81,6 +81,8 @@ class CsvFileDictIO(FileDictIO):
                  mode: str = 'r',
                  headers: list = None,
                  encoding: str = None,
+                 start_offset: int = 0,
+                 end_offset: int = None,
                  **kwargs):
         """Initializes a `CsvFileDictIO` reader or writer.
 
@@ -90,11 +92,22 @@ class CsvFileDictIO(FileDictIO):
           headers: Optional list of column names for writing. If omitted,
             column headers are inferred from the first record written.
           encoding: Optional text encoding.
+          start_offset: Optional starting byte offset for read mode.
+          end_offset: Optional ending byte offset for read mode.
           **kwargs: Optional format-specific keyword arguments.
         """
-        super().__init__(filename, mode, headers, encoding, **kwargs)
+        self._csv_options = {}
         self._csv_reader = None
         self._csv_writer = None
+        self._header_end_pos = 0
+        self._reading_row = False
+        super().__init__(filename,
+                         mode,
+                         headers,
+                         encoding,
+                         start_offset=start_offset,
+                         end_offset=end_offset,
+                         **kwargs)
         self.open()
 
     def open(self):
@@ -103,13 +116,38 @@ class CsvFileDictIO(FileDictIO):
         super().open()
         if self.is_read_mode():
             # Read the CSV file handle using DictReader and populate headers.
-            options = file_util.file_get_csv_reader_options(
-                self.filename(), {'delimiter': ','})
-            # Use RFC 4180 quoting instead of the sniffed quote settings: the
-            # sniffer sets doublequote=False if its sample has no "" in a field.
-            options.update(doublequote=True, quotechar='"')
-            self._csv_reader = csv.DictReader(self.get_file_handle(), **options)
-            self.set_headers(self._csv_reader.fieldnames)
+            fp = self.get_file_handle()
+            fp.seek(0)
+            sample = fp.read(4096)
+            options = file_util.file_get_csv_reader_options(self.filename(),
+                                                            {'delimiter': ','},
+                                                            data=sample)
+            # Use RFC 4180 doubled quotes: the sniffer sets doublequote=False
+            # if its sample has no "" in a field. The sniffed quotechar is
+            # kept, so files quoted with ' still read correctly.
+            options.update(doublequote=True)
+            self._csv_options = options
+            fp.seek(0)
+            header_reader = csv.reader(iter(fp.readline, ''),
+                                       **self._csv_options)
+            file_headers = []
+            try:
+                file_headers = next(header_reader)
+                while file_headers == []:
+                    file_headers = next(header_reader)
+            except StopIteration:
+                file_headers = []
+            self._header_end_pos = fp.tell()
+            if not self._headers:
+                self.set_headers(file_headers)
+            if self._start_offset > 0:
+                self.seek(self._start_offset)
+            else:
+                self._next_record_start = self._header_end_pos
+                self._reading_row = False
+                self._csv_reader = csv.DictReader(self._iter_csv_lines(),
+                                                  fieldnames=self.headers(),
+                                                  **self._csv_options)
             logging.level_debug() and logging.debug(
                 f'Opened CSV file {self.filename()} for {self._mode} with options: {options}, headers: {self.headers()}'
             )
@@ -171,22 +209,91 @@ class CsvFileDictIO(FileDictIO):
             f'Cannot write record to CSV file {self.filename()} in mode {self._mode} with headers {self.headers()}'
         )
 
+    def seek(self, offset: int) -> int:
+        """Seeks to the first complete CSV record starting at or after `offset`.
+
+        Caveats:
+          - Multiline Quoted Values: RFC 4180 permits CSV fields to contain raw
+            newlines within quotes (e.g. `"line1\nline2"`). If `offset` falls
+            inside a multiline quoted field, scanning for the next newline `\n`
+            will split the cell across record boundaries and corrupt the first
+            read row. Seeking is safe for CSV/TSV files whose field values do not
+            contain unescaped raw newlines.
+          - Blank Lines: Trailing or empty lines are skipped cleanly.
+
+        Args:
+          offset: Byte offset in the file to seek past.
+
+        Returns:
+          The actual byte offset where the next CSV record begins.
+
+        Raises:
+          UnsupportedOperation: If the file is not opened in read mode.
+        """
+        if not self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot seek in write mode for CSV file {self.filename()}')
+        fp = self.get_file_handle()
+        if fp is None:
+            return 0
+        self._start_offset = offset
+
+        if offset <= self._header_end_pos:
+            fp.seek(self._header_end_pos)
+            self._next_record_start = self._header_end_pos
+        else:
+            self._next_record_start = self._seek_to_next_line(offset)
+
+        self._reading_row = False
+        self._csv_reader = csv.DictReader(self._iter_csv_lines(),
+                                          fieldnames=self.headers(),
+                                          **self._csv_options)
+        return self._next_record_start
+
+    def _iter_csv_lines(self):
+        """Yields CSV lines while enforcing `end_offset` at record boundaries."""
+        fp = self.get_file_handle()
+        if fp is None:
+            return
+        if self._end_offset is None:
+            yield from iter(fp.readline, '')
+            return
+        end_offset = self._end_offset
+        while True:
+            if not self._reading_row:
+                pos = fp.tell()
+                self._next_record_start = pos
+                if pos >= end_offset:
+                    return
+            line = fp.readline()
+            if not line:
+                return
+            if not self._reading_row and line in ('\n', '\r\n', '\r'):
+                continue
+            self._reading_row = True
+            yield line
+
     def next(self) -> dict:
         """Returns the next row from the CSV file as a dictionary.
 
         Returns:
-          A `dict` for the next CSV row, or `None` if the end of the file is
-          reached.
+          A `dict` for the next CSV row, or `None` if the end of the file or
+          `end_offset` is reached.
         """
-        try:
-            if self._csv_reader:
-                row = next(self._csv_reader)
-                self._record_index += 1
-                return row
-        except StopIteration:
-            # Reached end of file.
+        if not self._csv_reader:
             return None
-        return None
+        if self._end_offset is not None and self._next_record_start is not None:
+            if self._next_record_start >= self._end_offset:
+                return None
+        self._reading_row = False
+        try:
+            row = next(self._csv_reader)
+            fp = self.get_file_handle()
+            self._next_record_start = fp.tell() if fp else None
+            self._record_index += 1
+            return row
+        except StopIteration:
+            return None
 
     def headers(self) -> list:
         """Returns the list of column names for the CSV file."""
