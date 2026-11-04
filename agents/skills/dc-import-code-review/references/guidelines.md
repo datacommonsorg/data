@@ -30,6 +30,10 @@ repository contracts and instructions take precedence.
 - Keep test inputs and expected CSV or TMCF outputs clearly paired without
   requiring one universal test-directory layout.
 - Declare new dependencies in the repository-supported dependency file.
+- [rule-binary-files] Commit text files only; keep archives of any format,
+  pickles, and other binary files out of the PR unless they are stored
+  through Git LFS. Excel and PDF files are allowed only under `test_data/`;
+  tests that need an archive build it at run time from text fixtures.
 
 ## Execution and failure handling
 
