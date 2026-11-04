@@ -20,7 +20,8 @@
                 }
             ],
             "source_files": [
-                "input_files/BulgariaNSI_Demographics_Year_input_*",
+                "input_files/*.csv",
+                "input_files/*.html",
                 "counters/*.csv",
                 "manifest.json",
                 "validation_config.json"

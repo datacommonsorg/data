@@ -268,6 +268,10 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                     gcs_dir="gs://mock-bucket/input_files",
                 )
             self.assertEqual(ctx.exception.code, 1)
+            # Verify raw HTML was still saved for debugging before failing
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(tmp_dir, "nsi_demographics_page.html")))
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 

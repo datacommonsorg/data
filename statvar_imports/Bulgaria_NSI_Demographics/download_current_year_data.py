@@ -214,12 +214,17 @@ def check_and_download_nsi(
 
     html_content = None
     is_cloudflare_blocked = False
+    raw_html_path = os.path.join(local_dir, "nsi_demographics_page.html")
     session = _create_retry_session()
     try:
         resp = session.get(NSI_URL, headers=HEADERS, timeout=25)
         if resp.status_code == 200:
             html_content = resp.text
             logging.info("Successfully connected to live NSI portal.")
+            with open(raw_html_path, "w", encoding="utf-8") as html_f:
+                html_f.write(html_content)
+            logging.info("Saved raw NSI HTML to %s (%d bytes)", raw_html_path,
+                         os.path.getsize(raw_html_path))
         elif resp.status_code == 403:
             is_cloudflare_blocked = True
             logging.warning(
@@ -272,13 +277,14 @@ def check_and_download_nsi(
     detected_year = int(year_match.group(1))
     logging.info("Detected published year on NSI portal: %d", detected_year)
 
-    # 2. Save raw HTML to local_dir (for source_files and debugging/archival)
+    # 2. Rename raw HTML with detected year (for source_files and debugging/archival)
     html_filename = f"BulgariaNSI_Demographics_Year_input_{detected_year}.html"
     local_html_path = os.path.join(local_dir, html_filename)
-    with open(local_html_path, "w", encoding="utf-8") as html_f:
-        html_f.write(html_content)
-    logging.info("Saved raw NSI HTML to %s (%d bytes)", local_html_path,
-                 os.path.getsize(local_html_path))
+    if os.path.exists(raw_html_path):
+        os.replace(raw_html_path, local_html_path)
+    else:
+        with open(local_html_path, "w", encoding="utf-8") as html_f:
+            html_f.write(html_content)
 
     target_filename = (
         f"BulgariaNSI_Demographics_Year_input_{detected_year}.csv")
