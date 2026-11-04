@@ -34,8 +34,6 @@ new_mapping_names = {
         "Annual_Consumption_Fuel_EnergyIndustry_LiquifiedPetroleumGas_EnergyIndustryOwnUse",
     "Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_LiquefiedPetroleumGas":
         "Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_LiquifiedPetroleumGas",
-    "Annual_Generation_Fuel_LiquefiedPetroleumGas_PetroleumPlants":
-        "Annual_Generation_Fuel_LiquifiedPetroleumGas_PetroleumPlants",
     "Annual_Consumption_Fuel_MiningAndQuarryingIndustry_LiquefiedPetroleumGas":
         "Annual_Consumption_Fuel_MiningAndQuarryingIndustry_LiquifiedPetroleumGas",
     "Annual_Consumption_Fuel_IronSteel_LiquefiedPetroleumGas":
@@ -53,8 +51,6 @@ new_mapping_names = {
     "Annual_Consumption_Fuel_PaperPulpPrintIndustry_LiquefiedPetroleumGas":
         "Annual_Consumption_Fuel_PaperPulpPrintIndustry_LiquifiedPetroleumGas",
     "Annual_Consumption_Fuel_TextileAndLeatherIndustry_LiquefiedPetroleumGas":
-        "Annual_Consumption_Fuel_TextileAndLeatherIndustry_LiquifiedPetroleumGas",
-    "Annual_Consumption_Fuel_WoodAndWoodProductsIndustry_LiquefiedPetroleumGas":
         "Annual_Consumption_Fuel_TextileAndLeatherIndustry_LiquifiedPetroleumGas",
     "Annual_Consumption_Fuel_NonFerrousMetalsIndustry_LiquefiedPetroleumGas":
         "Annual_Consumption_Fuel_NonFerrousMetalsIndustry_LiquifiedPetroleumGas",

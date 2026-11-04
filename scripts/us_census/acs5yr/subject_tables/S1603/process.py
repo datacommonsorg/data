@@ -167,13 +167,9 @@ def set_column_map(input_path, spec_path, output_dir):
 
 
 def main(argv):
-    option = FLAGS.option.lower()
-    table_prefix = FLAGS.table_prefix
     spec_path = FLAGS.spec_path
     input_path = FLAGS.input_path
     output_dir = FLAGS.output_dir
-    has_percent = FLAGS.has_percent
-    debug = FLAGS.debug
 
     set_column_map(input_path, spec_path, output_dir)
     data_loader = S1603SubjectTableDataLoader(table_id='S1603',

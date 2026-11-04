@@ -392,14 +392,14 @@ class PropertyValueMapper:
                     f'Duplicate key {key} in property maps: {dicts_with_key}',
                     self._log_every_n)
                 self._counters.add_counter(
-                    f'warning-multiple-property-key',
+                    'warning-multiple-property-key',
                     1,
                     f'{key}:' + ','.join(dicts_with_key),
                 )
         if not pvs:
             logging.level_debug() and logging.log_every_n(
                 3, f'Missing key {key} in property maps', self._log_every_n)
-            self._counters.add_counter(f'warning-missing-property-key', 1, key)
+            self._counters.add_counter('warning-missing-property-key', 1, key)
             return pvs
         logging.level_debug() and logging.log_every_n(
             logging.DEBUG, f'Got PVs for {key}:{pvs}', self._log_every_n)

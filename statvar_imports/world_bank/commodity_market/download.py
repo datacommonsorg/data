@@ -136,7 +136,7 @@ def process_xlsx(file_path):
             else:
                 logging.info(f"Skipping unrecognized sheet: {sheet_name}")
 
-    except Exception as e:
+    except Exception:
         logging.exception(f"Failed to process {file_path}")
         raise
 
