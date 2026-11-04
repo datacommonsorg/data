@@ -118,7 +118,8 @@ class DownloadTest(unittest.TestCase):
 
     def test_age_code_coverage(self):
         """Verifies TABLE_1378_AGE_CODES and TABLE_9514_AGE_CODES cover all required age cohorts."""
-        self.assertIn("93086", download_mod.TABLE_1378_AGE_CODES)
+        self.assertIn("107453", download_mod.TABLE_1378_AGE_CODES)
+        self.assertIn("111286", download_mod.TABLE_1378_AGE_CODES)
         self.assertIn("93086", download_mod.TABLE_9514_AGE_CODES)
         for c in download_mod.COHORTS_0_14:
             self.assertIn(c, download_mod.COHORTS_0_14)

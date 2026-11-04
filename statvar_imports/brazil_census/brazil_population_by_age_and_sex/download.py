@@ -55,8 +55,10 @@ TABLE_9514_API_URL = (
 )
 
 # Table 1378: População residente por sexo e idade (2010 Census)
+# Note: SIDRA Table 1378 splits 15-19 into 107453 ('15 a 17 anos') and 111286 ('18 ou 19 anos')
+# instead of a single 93086 code. Both codes are fetched and summed into '15 a 19 anos'.
 TABLE_1378_AGE_CODES = [
-    "0", "93070", "93084", "93085", "93086", "93087", "93088", "93089", "93090",
+    "0", "93070", "93084", "93085", "107453", "111286", "93087", "93088", "93089", "93090",
     "93091", "93092", "93093", "93094", "93095", "93096", "93097", "93098",
     "93099", "93100", "6653"
 ]
@@ -365,6 +367,7 @@ def download_all_years(
         # 2. Live SIDRA API (Table 1378 for 2010 Census)
         raw_1378 = fetch_sidra_data(session, TABLE_1378_API_URL)
         sidra_2010_rows: List[Dict[str, str]] = []
+        sub_15_19: Dict[str, Dict[str, int]] = {}
         for r in raw_1378[1:]:
             loc = str(r.get("D1N", "")).strip()
             if loc == "Brasil":
@@ -374,12 +377,31 @@ def download_all_years(
             val = str(r.get("V", "")).strip()
             if val in ["-", "...", "..", ""]:
                 continue
+            if idade in ["15 a 17 anos", "18 ou 19 anos"]:
+                key = f"{loc}||{sexo}"
+                if key not in sub_15_19:
+                    sub_15_19[key] = {}
+                try:
+                    sub_15_19[key][idade] = int(round(float(val)))
+                except (ValueError, TypeError):
+                    pass
+                continue
             sidra_2010_rows.append({
                 "Ano": str(r.get("D3N", "2010")).strip(),
                 "Localidade": loc,
                 "Idade": idade,
                 "Sexo": sexo,
                 "Populacao": val,
+            })
+        for key, d in sub_15_19.items():
+            loc, sexo = key.split("||", 1)
+            val_15_19 = sum(d.values())
+            sidra_2010_rows.append({
+                "Ano": "2010",
+                "Localidade": loc,
+                "Idade": "15 a 19 anos",
+                "Sexo": sexo,
+                "Populacao": str(val_15_19),
             })
         all_rows.extend(sidra_2010_rows)
         all_rows.extend(compute_broad_age_aggregations(sidra_2010_rows, "2010"))
