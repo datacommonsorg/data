@@ -65,9 +65,9 @@ repository contracts and instructions take precedence.
   StatisticalVariables and avoid creating duplicate statvar definitions.
 - Make aggregation, filtering, outlier handling, and date-range decisions
   explicit and testable; avoid arbitrary future-year cutoffs.
-- Retain non-numeric source placeholders (such as `-`) for `stat_var_processor`
-  to drop or drop those observations explicitly; convert them to `0` only when
-  the source defines them as zero.
+- Retain non-numeric source placeholders (such as `-`) so `stat_var_processor`
+  can drop them, or filter out those observations explicitly; convert them to `0`
+  only when the source defines them as zero.
 - Normalize or match case-insensitively when checking source strings, and
   check only strings needed to process the data.
 
