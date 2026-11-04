@@ -14,17 +14,18 @@
 
 import os
 import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 from six.moves import urllib
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../util'))
-sys.path.insert(1, '../../../../util')
+
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
-from absl import app
-from absl import logging
-from absl import flags
 
 flags.DEFINE_string('mode', '', 'Options: download or process')
 _FLAGS = flags.FLAGS
