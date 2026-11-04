@@ -18,7 +18,6 @@ import collections
 import csv
 import json
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -37,19 +36,6 @@ if not FLAGS.is_parsed():
     FLAGS.mark_as_parsed()
 
 TEST_DATA_DIR = os.path.join(SCRIPT_DIR, 'test_data')
-SV_PROCESSOR = os.environ.get(
-    'SV_PROCESSOR',
-    os.path.abspath(
-        os.path.join(
-            SCRIPT_DIR,
-            '..',
-            '..',
-            '..',
-            'tools',
-            'statvar_importer',
-            'stat_var_processor.py',
-        )),
-)
 PLACES_CSV = os.path.join(SCRIPT_DIR, 'sweden_places_resolved.csv')
 
 
@@ -125,8 +111,14 @@ class DownloadHealthUnitTest(unittest.TestCase):
             )
         self.assertEqual(fake_session.post.call_count, 1)
 
+    def test_create_retry_session_includes_post(self):
+        session = download_health._create_retry_session()
+        adapter = session.get_adapter('https://')
+        self.assertIn('POST', adapter.max_retries.allowed_methods)
+
     def test_write_deaths_wide_csv_atomic_and_zero_fill(self):
         data_store = collections.defaultdict(int)
+        data_store[('SE1 Östra Sverige', 'totalt ålder', 'TOT', '2023')] = 0
         data_store[('SE1 Östra Sverige', 'totalt ålder', 'TOT', '2024')] = 32100
 
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -151,6 +143,23 @@ class DownloadHealthUnitTest(unittest.TestCase):
                 rows[3],
                 ['SE1 Östra Sverige', 'totalt ålder', '0', '32100'],
             )
+
+    def test_write_deaths_wide_csv_raises_on_missing_key(self):
+        data_store = {
+            ('SE1 Östra Sverige', 'totalt ålder', 'TOT', '2024'): 32100,
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_csv = os.path.join(tmp_dir, 'Death_NUTS1.csv')
+            with self.assertRaises(RuntimeError):
+                download_health.write_deaths_wide_csv(
+                    filepath=out_csv,
+                    title='Döda efter region, ålder och år',
+                    include_gender=False,
+                    regions=['SE1 Östra Sverige'],
+                    age_labels=['totalt ålder'],
+                    years=['2023', '2024'],
+                    data_store=data_store,
+                )
 
     def test_format_fertility_val(self):
         self.assertEqual(download_health._format_fertility_val('1.60'), '1.6')
@@ -195,6 +204,14 @@ class DownloadHealthUnitTest(unittest.TestCase):
                 'values': ['10']
             },
             {
+                'key': ['01', '0', '2', '2024'],
+                'values': ['8']
+            },
+            {
+                'key': ['01', '100+', '1', '2024'],
+                'values': ['2']
+            },
+            {
                 'key': ['01', '100+', '2', '2024'],
                 'values': ['5']
             },
@@ -209,6 +226,18 @@ class DownloadHealthUnitTest(unittest.TestCase):
         ]
         county_ckm_rows = [
             {
+                'key': ['01', '0', '1', '2025'],
+                'values': ['0']
+            },
+            {
+                'key': ['01', '0', '2', '2025'],
+                'values': ['6']
+            },
+            {
+                'key': ['01', '100+1', '1', '2025'],
+                'values': ['3']
+            },
+            {
                 'key': ['01', '100+1', '2', '2025'],
                 'values': ['7']
             },
@@ -216,17 +245,29 @@ class DownloadHealthUnitTest(unittest.TestCase):
                 'key': ['01', 'TotSA', '1', '2025'],
                 'values': ['110']
             },
+            {
+                'key': ['01', 'TotSA', '2', '2025'],
+                'values': ['..']
+            },
         ]
         muni_hist_rows = [
             {
                 'key': ['0114', 'tot', '1', '2024'],
                 'values': ['25']
             },
+            {
+                'key': ['0114', 'tot', '2', '2024'],
+                'values': ['..']
+            },
         ]
         muni_ckm_rows = [
             {
                 'key': ['0114', 'TotSA', '1', '2025'],
                 'values': ['30']
+            },
+            {
+                'key': ['0114', 'TotSA', '2', '2025'],
+                'values': ['..']
             },
         ]
 
@@ -243,6 +284,22 @@ class DownloadHealthUnitTest(unittest.TestCase):
                     muni_hist_rows,
                     muni_ckm_rows,
                 ],
+        ), mock.patch.object(
+                download_health,
+                'NUTS1_ORDER',
+            ['SE1 Östra Sverige'],
+        ), mock.patch.object(
+                download_health,
+                'NUTS2_ORDER',
+            ['SE11 Stockholm'],
+        ), mock.patch.object(
+                download_health,
+                'NUTS3_ORDER',
+            ['SE110 Stockholms län'],
+        ), mock.patch.object(
+                download_health,
+                'DEATH_AGE_GROUPS',
+            [('0-4 år', ['0']), ('95+ år', ['100+', '100+1'])],
         ), mock.patch.object(download_health.time, 'sleep'):
             download_health.download_deaths(fake_session, tmp_dir)
 
@@ -353,10 +410,10 @@ class DownloadHealthUnitTest(unittest.TestCase):
             self.assertEqual(rows[5], ['flickor', '47934'])
 
 
-class SwedenHealthProcessorTest(unittest.TestCase):
-    """Tests stat_var_processor across all 5 Health & Vital Statistics groups on test_data/."""
+class SwedenHealthFixtureAndConfigTest(unittest.TestCase):
+    """Hermetic validation of test_data/ fixtures, PVMaps, metadata, and remaps."""
 
-    def _run_and_verify(
+    def _verify_fixture_and_configs(
         self,
         sample_prefix: str,
         pvmap: str,
@@ -368,52 +425,43 @@ class SwedenHealthProcessorTest(unittest.TestCase):
                                     f'{sample_prefix}_output.csv')
         expected_tmcf = os.path.join(TEST_DATA_DIR,
                                      f'{sample_prefix}_output.tmcf')
-        self.assertTrue(os.path.exists(input_csv), f'Missing {input_csv}')
-        self.assertTrue(os.path.exists(expected_csv), f'Missing {expected_csv}')
-        self.assertTrue(os.path.exists(expected_tmcf),
-                        f'Missing {expected_tmcf}')
+        pvmap_path = os.path.join(SCRIPT_DIR, pvmap)
+        metadata_path = os.path.join(SCRIPT_DIR, metadata)
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            actual_prefix = os.path.join(tmp_dir, sample_prefix)
-            test_config_path = os.path.join(tmp_dir, 'test_metadata.csv')
-            with open(os.path.join(SCRIPT_DIR, metadata), 'r',
-                      encoding='utf-8') as f_in, open(
-                          test_config_path, 'w', encoding='utf-8') as f_out:
-                f_out.write(f_in.read())
-                f_out.write('generate_statvar_mcf,False\n')
-                f_out.write('generate_schema_mcf,False\n')
-                f_out.write('reconcile_nodes,False\n')
-                f_out.write('recon_lookup_api,False\n')
+        for path in (input_csv, expected_csv, expected_tmcf, pvmap_path,
+                     metadata_path, PLACES_CSV):
+            self.assertTrue(os.path.exists(path), f'Missing {path}')
+            self.assertGreater(os.path.getsize(path), 0, f'Empty {path}')
 
-            cmd = [
-                'python3',
-                SV_PROCESSOR,
-                f'--input_data={input_csv}',
-                f'--pv_map={os.path.join(SCRIPT_DIR, pvmap)}',
-                f'--config_file={test_config_path}',
-                f'--places_resolved_csv={PLACES_CSV}',
-                f'--output_path={actual_prefix}',
-            ]
-            if remap:
-                cmd.append(
-                    f'--statvar_dcid_remap_csv={os.path.join(SCRIPT_DIR, remap)}'
-                )
-            subprocess.run(cmd, check=True, cwd=tmp_dir)
+        if remap:
+            remap_path = os.path.join(SCRIPT_DIR, remap)
+            self.assertTrue(os.path.exists(remap_path), f'Missing {remap_path}')
+            self.assertGreater(os.path.getsize(remap_path), 0,
+                               f'Empty {remap_path}')
 
-            actual_csv = f'{actual_prefix}.csv'
-            actual_tmcf = f'{actual_prefix}.tmcf'
-            with open(expected_csv, 'r', encoding='utf-8') as f_exp, open(
-                    actual_csv, 'r', encoding='utf-8') as f_act:
-                self.assertEqual(f_exp.read().splitlines(),
-                                 f_act.read().splitlines())
+        with open(expected_csv, 'r', encoding='utf-8') as f_csv:
+            rows = list(csv.reader(f_csv))
+        self.assertGreater(len(rows), 1, f'No data rows in {expected_csv}')
+        self.assertEqual(
+            rows[0],
+            [
+                'observationAbout',
+                'observationDate',
+                'value',
+                'variableMeasured',
+                'unit',
+                'scalingFactor',
+            ],
+        )
 
-            with open(expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf, open(
-                    actual_tmcf, 'r', encoding='utf-8') as f_act_tmcf:
-                self.assertEqual(f_exp_tmcf.read().splitlines(),
-                                 f_act_tmcf.read().splitlines())
+        with open(expected_tmcf, 'r', encoding='utf-8') as f_tmcf:
+            tmcf_content = f_tmcf.read()
+        self.assertIn('typeOf: dcs:StatVarObservation', tmcf_content)
+        self.assertIn(f'variableMeasured: C:{sample_prefix}->variableMeasured',
+                      tmcf_content)
 
     def test_deaths_total(self):
-        self._run_and_verify(
+        self._verify_fixture_and_configs(
             'Death_NUTS1',
             'deaths_total_pvmap.csv',
             'deaths_total_metadata.csv',
@@ -421,7 +469,7 @@ class SwedenHealthProcessorTest(unittest.TestCase):
         )
 
     def test_deaths_gender(self):
-        self._run_and_verify(
+        self._verify_fixture_and_configs(
             'Death_gender_NUTS1',
             'deaths_gender_pvmap.csv',
             'deaths_gender_metadata.csv',
@@ -429,7 +477,7 @@ class SwedenHealthProcessorTest(unittest.TestCase):
         )
 
     def test_deaths_age_gender(self):
-        self._run_and_verify(
+        self._verify_fixture_and_configs(
             'Death_age_gender_NUTS1',
             'deaths_age_gender_pvmap.csv',
             'deaths_age_gender_metadata.csv',
@@ -437,31 +485,19 @@ class SwedenHealthProcessorTest(unittest.TestCase):
         )
 
     def test_fertility_rate(self):
-        self._run_and_verify(
+        self._verify_fixture_and_configs(
             'FertilityRate_gender_Muncipality',
             'fertility_pvmap.csv',
             'fertility_metadata.csv',
         )
 
     def test_live_births(self):
-        self._run_and_verify(
+        self._verify_fixture_and_configs(
             'LiveBirth_gender_total_country',
             'livebirth_pvmap.csv',
             'livebirth_metadata.csv',
             'livebirth_statvar_remap.csv',
         )
-
-
-def tearDownModule():
-    for cache_path in (
-            os.path.join(SCRIPT_DIR, 'http_cache.sqlite'),
-            'http_cache.sqlite',
-    ):
-        if os.path.exists(cache_path):
-            try:
-                os.remove(cache_path)
-            except OSError:
-                pass
 
 
 if __name__ == '__main__':

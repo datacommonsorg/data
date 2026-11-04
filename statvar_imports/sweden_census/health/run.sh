@@ -45,9 +45,27 @@ run_group() {
     "counters/${file_stem}_counters.csv" || true
 }
 
+MAX_JOBS="${MAX_JOBS:-4}"
+pids=()
+
+run_bg() {
+  run_group "$@" &
+  pids+=($!)
+  if (( ${#pids[@]} >= MAX_JOBS )); then
+    wait -n
+    local alive=()
+    for pid in "${pids[@]}"; do
+      if kill -0 "$pid" 2>/dev/null; then
+        alive+=("$pid")
+      fi
+    done
+    pids=("${alive[@]}")
+  fi
+}
+
 # 1. Group 1: Total Deaths by Region (4 files, 1 StatVar, mapped_columns=2)
 for f in Death_NUTS1 Death_NUTS2 Death_NUTS3 Death_Muncipality; do
-  run_group "$f" \
+  run_bg "$f" \
     "deaths_total_pvmap.csv" \
     "deaths_total_metadata.csv" \
     "deaths_total_statvar_remap.csv"
@@ -55,7 +73,7 @@ done
 
 # 2. Group 2: Deaths by Gender (4 files, 2 StatVars, mapped_columns=3)
 for f in Death_gender_NUTS1 Death_gender_NUTS2 Death_gender_NUTS3 Death_gender_Muncipality; do
-  run_group "$f" \
+  run_bg "$f" \
     "deaths_gender_pvmap.csv" \
     "deaths_gender_metadata.csv" \
     "deaths_gender_statvar_remap.csv"
@@ -63,21 +81,25 @@ done
 
 # 3. Group 3: Deaths by Age & Gender (3 files, 22 StatVars, mapped_columns=3)
 for f in Death_age_gender_NUTS1 Death_age_gender_NUTS2 Death_age_gender_NUTS3; do
-  run_group "$f" \
+  run_bg "$f" \
     "deaths_age_gender_pvmap.csv" \
     "deaths_age_gender_metadata.csv" \
     "deaths_age_gender_statvar_remap.csv"
 done
 
 # 4. Group 4: Municipal Fertility Rate by Gender (1 file, 2 StatVars, mapped_columns=2)
-run_group "FertilityRate_gender_Muncipality" \
+run_bg "FertilityRate_gender_Muncipality" \
   "fertility_pvmap.csv" \
   "fertility_metadata.csv"
 
 # 5. Group 5: Historical National Live Births by Gender & Total (1 file, 3 StatVars)
-run_group "LiveBirth_gender_total_country" \
+run_bg "LiveBirth_gender_total_country" \
   "livebirth_pvmap.csv" \
   "livebirth_metadata.csv" \
   "livebirth_statvar_remap.csv"
+
+for pid in "${pids[@]}"; do
+  wait "$pid"
+done
 
 echo "All 13 Sweden Health & Vital Statistics CSVs processed successfully!"

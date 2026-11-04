@@ -31,7 +31,7 @@ import csv
 import json
 import os
 import time
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 from absl import app
 from absl import flags
 from absl import logging
@@ -224,7 +224,7 @@ def _create_retry_session(retries: int = 5,
         connect=retries,
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=['HEAD', 'GET', 'OPTIONS'],
+        allowed_methods=['HEAD', 'GET', 'POST', 'OPTIONS'],
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session.mount('https://', adapter)
@@ -245,7 +245,7 @@ def post_scb_query(
     url: str,
     query_items: List[Dict],
 ) -> List[Dict]:
-    """Executes a JSON-POST query against SCB PxWeb API with rate-limit retry."""
+    """Executes a JSON-POST query against SCB PxWeb API using session retry."""
     payload = {
         'query': query_items,
         'response': {
@@ -255,56 +255,16 @@ def post_scb_query(
     query_summary = ', '.join(
         f"{item.get('code')}={len(item.get('selection', {}).get('values', []))}"
         for item in query_items)
-    max_attempts = 5
-    last_exc: Optional[Exception] = None
-    for attempt in range(max_attempts):
-        try:
-            logging.info(
-                'POST %s [%s] (attempt=%d/%d)',
-                url,
-                query_summary,
-                attempt + 1,
-                max_attempts,
-            )
-            resp = session.post(url, json=payload, timeout=120)
-            if resp.status_code == 429:
-                if attempt < max_attempts - 1:
-                    wait_sec = 2**attempt
-                    logging.warning('Rate limited (429). Sleeping %ds...',
-                                    wait_sec)
-                    time.sleep(wait_sec)
-                    continue
-            resp.raise_for_status()
-            text = resp.content.decode('utf-8-sig')
-            data = json.loads(text).get('data', [])
-            if not data:
-                raise RuntimeError(
-                    f'Empty data returned from {url} for query [{query_summary}]'
-                )
-            logging.info('Received %d records from %s.', len(data), url)
-            return data
-        except requests.HTTPError as e:
-            if (e.response is not None and
-                    400 <= e.response.status_code < 500 and
-                    e.response.status_code != 429):
-                raise
-            last_exc = e
-        except Exception as e:  # pylint: disable=broad-except
-            last_exc = e
-
-        if attempt < max_attempts - 1:
-            wait_sec = 2**attempt
-            logging.warning(
-                'Attempt %d/%d failed (%s). Retrying in %ds...',
-                attempt + 1,
-                max_attempts,
-                last_exc,
-                wait_sec,
-            )
-            time.sleep(wait_sec)
-    raise RuntimeError(
-        f'Failed to query SCB PxWeb API {url} after {max_attempts} attempts.'
-    ) from last_exc
+    logging.info('POST %s [%s]', url, query_summary)
+    resp = session.post(url, json=payload, timeout=120)
+    resp.raise_for_status()
+    text = resp.content.decode('utf-8-sig')
+    data = json.loads(text).get('data', [])
+    if not data:
+        raise RuntimeError(
+            f'Empty data returned from {url} for query [{query_summary}]')
+    logging.info('Received %d records from %s.', len(data), url)
+    return data
 
 
 def write_deaths_wide_csv(
@@ -335,17 +295,23 @@ def write_deaths_wide_csv(
             for age_label in age_labels:
                 if include_gender:
                     for sex_code, sex_text in SEX_LEVELS:
-                        year_vals = [
-                            data_store.get((reg, age_label, sex_code, yr), 0)
-                            for yr in years
-                        ]
+                        year_vals = []
+                        for yr in years:
+                            key = (reg, age_label, sex_code, yr)
+                            if key not in data_store:
+                                raise RuntimeError(
+                                    f'Missing death observation for {key}')
+                            year_vals.append(data_store[key])
                         writer.writerow([reg, age_label, sex_text] + year_vals)
                         rows_written += 1
                 else:
-                    year_vals = [
-                        data_store.get((reg, age_label, 'TOT', yr), 0)
-                        for yr in years
-                    ]
+                    year_vals = []
+                    for yr in years:
+                        key = (reg, age_label, 'TOT', yr)
+                        if key not in data_store:
+                            raise RuntimeError(
+                                f'Missing total death observation for {key}')
+                        year_vals.append(data_store[key])
                     writer.writerow([reg, age_label] + year_vals)
                     rows_written += 1
 
@@ -473,6 +439,9 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
         for row in rows:
             reg_code, age_code, sex_code, yr = row['key']
             val_str = row['values'][0]
+            # Legacy CNS parity: SCB returns '..' when an age/region cell was
+            # not yet established; convert '..'/'.'/'-'/'' to 0 to match
+            # historical CNS raw input tables.
             val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
             nuts3_label, nuts2_label, nuts1_label = COUNTY_TO_NUTS[reg_code]
             target_age = (TOTAL_DEATH_AGE_LABEL
@@ -528,6 +497,7 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
         for row in rows:
             reg_code, age_code, sex_code, yr = row['key']
             val_str = row['values'][0]
+            # Legacy CNS parity: convert SCB missing markers ('..', '.', '-', '') to 0.
             val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
             nuts3_label, nuts2_label, nuts1_label = COUNTY_TO_NUTS[reg_code]
             target_age = (TOTAL_DEATH_AGE_LABEL
@@ -583,6 +553,9 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
         for row in rows:
             reg_code, _, sex_code, yr = row['key']
             val_str = row['values'][0]
+            # Legacy CNS parity: SCB returns '..' for municipalities in years
+            # prior to their municipal split (e.g., Nykvarn before 1999,
+            # Knivsta before 2003). Convert '..' to 0 to match legacy CNS inputs.
             val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
             muni_label = muni_code_to_label[reg_code]
             data_store[(muni_label, TOTAL_DEATH_AGE_LABEL, sex_code, yr)] += val
@@ -635,6 +608,7 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
         for row in rows:
             reg_code, _, sex_code, yr = row['key']
             val_str = row['values'][0]
+            # Legacy CNS parity: convert SCB missing markers ('..', '.', '-', '') to 0.
             val = int(val_str) if val_str not in ('..', '.', '-', '') else 0
             muni_label = muni_code_to_label[reg_code]
             data_store[(muni_label, TOTAL_DEATH_AGE_LABEL, sex_code, yr)] += val
