@@ -384,7 +384,7 @@ class USCensusPEPByASR:
         # After processing all files, ensure all files were processed
         if processed_count == total_files_to_process and total_files_to_process > 0:
             # Drop the unwanted columns and NA.
-            logging.info(f"Dropping unwanted columns and NA")
+            logging.info("Dropping unwanted columns and NA")
             final_df = final_df.drop(columns=['Unnamed: 0'], errors='ignore')
             final_df = final_df.dropna()
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
@@ -392,7 +392,7 @@ class USCensusPEPByASR:
                 float).astype(int)
             logging.info(f"Sorting data {final_df.shape} by year, geo-id")
             final_df = final_df.sort_values(by=['Year', 'geo_ID'])
-            logging.info(f"Setting measurement method")
+            logging.info("Setting measurement method")
             final_df = _measurement_method(final_df)
             logging.info(
                 f"Writing data {final_df.shape} to {self._cleaned_csv_file_path}"
@@ -402,7 +402,7 @@ class USCensusPEPByASR:
             logging.info(f"Generating MCF for {len(sv_list)}")
             sv_list.sort()
             self._generate_mcf(sv_list)
-            logging.info(f"Generating TMCF")
+            logging.info("Generating TMCF")
             self._generate_tmcf()
         else:
             logging.fatal(

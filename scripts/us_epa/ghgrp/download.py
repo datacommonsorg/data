@@ -285,7 +285,7 @@ class Downloader:
                                     usecols=CROSSWALK_COLS_TO_KEEP,
                                     engine='openpyxl')
         except Exception:
-            logging.warning(f"Using fallback CROSSWALK_URI for 2022")
+            logging.warning("Using fallback CROSSWALK_URI for 2022")
             oris_df = pd.read_excel(self._generate_and_validate(crosswalk_url,
                                                                 yr=2022),
                                     'ORIS Crosswalk',
