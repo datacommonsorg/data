@@ -252,10 +252,12 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                     'valueTexts': ['Riket'] + county_names + muni_texts,
                 },
                 {
-                    'code': 'Civilstand',
+                    'code':
+                        'Civilstand',
                     'values': ['OG', 'G', 'SK', 'ÄNKL'],
-                    'valueTexts':
-                    ['ogifta', 'gifta', 'skilda', 'änkor/änklingar'],
+                    'valueTexts': [
+                        'ogifta', 'gifta', 'skilda', 'änkor/änklingar'
+                    ],
                 },
                 {
                     'code': 'Alder',
@@ -290,12 +292,10 @@ class DownloadDemographicUnitTest(unittest.TestCase):
             ]
         }).encode('utf-8')
         muni_hist_payload = json.dumps({
-            'data': [
-                {
-                    'key': ['1000', 'G', 'tot', '2', '2024'],
-                    'values': ['300']
-                },
-            ]
+            'data': [{
+                'key': ['1000', 'G', 'tot', '2', '2024'],
+                'values': ['300']
+            },]
         }).encode('utf-8')
 
         meta_ckm_payload = json.dumps({
@@ -307,10 +307,11 @@ class DownloadDemographicUnitTest(unittest.TestCase):
                 },
                 {
                     'code':
-                    'Civilstand',
+                        'Civilstand',
                     'values': ['SC', 'OG', 'G', 'SK', 'ÄNKL'],
-                    'valueTexts':
-                    ['totalt', 'ogifta', 'gifta', 'skilda', 'änkor/änklingar'],
+                    'valueTexts': [
+                        'totalt', 'ogifta', 'gifta', 'skilda', 'änkor/änklingar'
+                    ],
                 },
                 {
                     'code': 'Alder',
@@ -345,12 +346,10 @@ class DownloadDemographicUnitTest(unittest.TestCase):
             ]
         }).encode('utf-8')
         muni_ckm_payload = json.dumps({
-            'data': [
-                {
-                    'key': ['1000', 'G', 'TotSA', '2', '2025'],
-                    'values': ['310']
-                },
-            ]
+            'data': [{
+                'key': ['1000', 'G', 'TotSA', '2', '2025'],
+                'values': ['310']
+            },]
         }).encode('utf-8')
 
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -393,8 +392,7 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
         expected_tmcf = os.path.join(TEST_DATA_DIR,
                                      f'{sample_prefix}_output.tmcf')
         self.assertTrue(os.path.exists(input_csv), f'Missing {input_csv}')
-        self.assertTrue(os.path.exists(expected_csv),
-                        f'Missing {expected_csv}')
+        self.assertTrue(os.path.exists(expected_csv), f'Missing {expected_csv}')
         self.assertTrue(os.path.exists(expected_tmcf),
                         f'Missing {expected_tmcf}')
 
@@ -432,9 +430,8 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
                 self.assertEqual(f_exp.read().splitlines(),
                                  f_act.read().splitlines())
 
-            with open(expected_tmcf, 'r',
-                      encoding='utf-8') as f_exp_tmcf, open(
-                          actual_tmcf, 'r', encoding='utf-8') as f_act_tmcf:
+            with open(expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf, open(
+                    actual_tmcf, 'r', encoding='utf-8') as f_act_tmcf:
                 self.assertEqual(
                     sorted(f_exp_tmcf.read().splitlines()),
                     sorted(f_act_tmcf.read().splitlines()),
@@ -474,8 +471,7 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
             fpath = os.path.join(SCRIPT_DIR, fname)
             with open(fpath, 'r', encoding='utf-8') as f:
                 rows = [
-                    tuple(r) for r in csv.reader(f)
-                    if any(c.strip() for c in r)
+                    tuple(r) for r in csv.reader(f) if any(c.strip() for c in r)
                 ]
             data_rows = rows[1:]
             keys = [r[0].strip() for r in data_rows]

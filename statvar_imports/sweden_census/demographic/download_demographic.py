@@ -246,8 +246,8 @@ def download_and_write_national_files(
 
     hist_years = sorted(
         (y for y in var_map["Tid"]["values"]
-         if y.isdigit() and int(y) >= start_year and int(y) <= 2024 and (
-             end_year is None or int(y) <= end_year)),
+         if y.isdigit() and int(y) >= start_year and int(y) <= 2024 and
+         (end_year is None or int(y) <= end_year)),
         key=int,
     )
     sex_items = [(c, t.strip()) for c, t in zip(
@@ -307,8 +307,8 @@ def download_and_write_national_files(
         var_ckm = {v["code"]: v for v in meta_ckm.get("variables", [])}
         ckm_years = sorted(
             (y for y in var_ckm.get("Tid", {}).get("values", [])
-             if y.isdigit() and int(y) >= max(start_year, 2025) and y not in
-             hist_years and (end_year is None or int(y) <= end_year)),
+             if y.isdigit() and int(y) >= max(start_year, 2025) and
+             y not in hist_years and (end_year is None or int(y) <= end_year)),
             key=int,
         )
         if ckm_years:
@@ -326,8 +326,8 @@ def download_and_write_national_files(
                         age_brackets.append(bracket)
             ckm_tot_age = ("TotSA" if "TotSA" in available_ckm_ages else
                            ("tot" if "tot" in available_ckm_ages else None))
-            ckm_query_ages = (ckm_single_ages + [ckm_tot_age]
-                              if ckm_tot_age else ckm_single_ages)
+            ckm_query_ages = (ckm_single_ages +
+                              [ckm_tot_age] if ckm_tot_age else ckm_single_ages)
 
             for i in range(0, len(ckm_years), 60):
                 year_chunk = ckm_years[i:i + 60]
@@ -362,7 +362,8 @@ def download_and_write_national_files(
             [],
             all_years,
             [[""] + [
-                str(sum(total_sex_year[(s, y)] for s, _ in sex_items))
+                str(sum(total_sex_year[(s, y)]
+                        for s, _ in sex_items))
                 for y in all_years
             ]],
         ),
@@ -376,7 +377,8 @@ def download_and_write_national_files(
             ["kön"],
             all_years,
             [[sex_label] +
-             [str(total_sex_year[(sex_code, y)]) for y in all_years]
+             [str(total_sex_year[(sex_code, y)])
+              for y in all_years]
              for sex_code, sex_label in sex_items],
         ),
     )
@@ -389,9 +391,11 @@ def download_and_write_national_files(
             ["ålder"],
             all_years,
             [[b] + [
-                str(sum(bracket_sex_year[(b, s, y)] for s, _ in sex_items))
+                str(sum(bracket_sex_year[(b, s, y)]
+                        for s, _ in sex_items))
                 for y in all_years
-            ] for b in age_brackets],
+            ]
+             for b in age_brackets],
         ),
     )
 
@@ -403,8 +407,10 @@ def download_and_write_national_files(
             ["ålder", "kön"],
             all_years,
             [[b, sex_label] +
-             [str(bracket_sex_year[(b, sex_code, y)]) for y in all_years]
-             for b in age_brackets for sex_code, sex_label in sex_items],
+             [str(bracket_sex_year[(b, sex_code, y)])
+              for y in all_years]
+             for b in age_brackets
+             for sex_code, sex_label in sex_items],
         ),
     )
     return all_years
@@ -424,8 +430,8 @@ def download_and_write_subnational_files(
 
     hist_years = sorted(
         (y for y in var_map["Tid"]["values"]
-         if y.isdigit() and int(y) >= start_year and int(y) <= 2024 and (
-             end_year is None or int(y) <= end_year)),
+         if y.isdigit() and int(y) >= start_year and int(y) <= 2024 and
+         (end_year is None or int(y) <= end_year)),
         key=int,
     )
 
@@ -457,7 +463,8 @@ def download_and_write_subnational_files(
                          var_map["Civilstand"]["values"],
                          var_map["Civilstand"].get(
                              "valueTexts", var_map["Civilstand"]["values"]),
-                     ) if c != "SC"]
+                     )
+                     if c != "SC"]
     all_marital = [c for c, _ in marital_items]
 
     sex_items = [(c, t.strip()) for c, t in zip(
@@ -549,8 +556,8 @@ def download_and_write_subnational_files(
         var_ckm = {v["code"]: v for v in meta_ckm.get("variables", [])}
         ckm_years = sorted(
             (y for y in var_ckm.get("Tid", {}).get("values", [])
-             if y.isdigit() and int(y) >= max(start_year, 2025) and y not in
-             hist_years and (end_year is None or int(y) <= end_year)),
+             if y.isdigit() and int(y) >= max(start_year, 2025) and
+             y not in hist_years and (end_year is None or int(y) <= end_year)),
             key=int,
         )
         if ckm_years:
@@ -646,8 +653,10 @@ def download_and_write_subnational_files(
                     str(
                         sum(ms_sex_year[(reg, ms_c, s_c, y)]
                             for ms_c, _ in marital_items
-                            for s_c, _ in sex_items)) for y in all_years
-                ] for reg in regions],
+                            for s_c, _ in sex_items))
+                    for y in all_years
+                ]
+                 for reg in regions],
             ),
         )
 
@@ -661,8 +670,11 @@ def download_and_write_subnational_files(
                 [[reg, sex_label] + [
                     str(
                         sum(ms_sex_year[(reg, ms_c, sex_code, y)]
-                            for ms_c, _ in marital_items)) for y in all_years
-                ] for reg in regions for sex_code, sex_label in sex_items],
+                            for ms_c, _ in marital_items))
+                    for y in all_years
+                ]
+                 for reg in regions
+                 for sex_code, sex_label in sex_items],
             ),
         )
 
@@ -676,8 +688,11 @@ def download_and_write_subnational_files(
                 [[reg, ms_label] + [
                     str(
                         sum(ms_sex_year[(reg, ms_code, s_c, y)]
-                            for s_c, _ in sex_items)) for y in all_years
-                ] for reg in regions for ms_code, ms_label in marital_items],
+                            for s_c, _ in sex_items))
+                    for y in all_years
+                ]
+                 for reg in regions
+                 for ms_code, ms_label in marital_items],
             ),
         )
 
@@ -692,7 +707,9 @@ def download_and_write_subnational_files(
                 [[reg, ms_label, sex_label] + [
                     str(ms_sex_year[(reg, ms_code, sex_code, y)])
                     for y in all_years
-                ] for reg in regions for ms_code, ms_label in marital_items
+                ]
+                 for reg in regions
+                 for ms_code, ms_label in marital_items
                  for sex_code, sex_label in sex_items],
             ),
         )
@@ -709,7 +726,9 @@ def download_and_write_subnational_files(
                     [[reg, ms_label, b, sex_label] + [
                         str(age_ms_sex_year[(reg, ms_code, b, sex_code, y)])
                         for y in all_years
-                    ] for reg in regions for ms_code, ms_label in marital_items
+                    ]
+                     for reg in regions
+                     for ms_code, ms_label in marital_items
                      for b in age_brackets
                      for sex_code, sex_label in sex_items],
                 ),

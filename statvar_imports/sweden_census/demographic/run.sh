@@ -38,11 +38,6 @@ process_csv() {
   local file_stem
   file_stem="$(basename "${input_csv}" .csv)"
 
-  local gen_tmcf="False"
-  if [[ "${file_stem}" == "population_nuts1" ]]; then
-    gen_tmcf="True"
-  fi
-
   echo "=================================================================="
   echo "Processing ${file_stem}.csv with ${PV_MAP} ..."
   echo "=================================================================="
@@ -54,7 +49,6 @@ process_csv() {
     --statvar_dcid_remap_csv="${REMAP_CSV}" \
     --existing_statvar_mcf="${EXISTING_STATVAR_MCF}" \
     --generate_statvar_name=True \
-    --generate_tmcf="${gen_tmcf}" \
     --skip_constant_csv_columns=False \
     --output_path="output/${file_stem}" \
     --output_counters="counters/${file_stem}_counters.csv"
