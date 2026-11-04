@@ -319,7 +319,7 @@ and pick the columns for you. Follow these steps:
    echo "$ROW_KEYS"
    ./agents/common/run_python.sh tools/statvar_importer/data_sampler.py \
      --sampler_input=<import-dir>/input_files/data.csv \
-     --sampler_output=<import-dir>/test_data/sample_input.csv \
+     --sampler_output=<import-dir>/test_data/<name>_input.csv \
      --sampler_header_rows=1 \
      --sampler_row_keys="$ROW_KEYS" \
      --sampler_uniques_per_column=-1 \
@@ -345,7 +345,7 @@ make the final test input with the next recipe.
 
 ### A test input that covers every StatVar
 
-To create `test_data/sample_input.csv` for an import, pick input rows from the
+To create `test_data/<name>_input.csv` for an import, pick input rows from the
 output of a full run instead of from the input columns. The sample then makes
 `stat_var_processor.py` generate every StatVar in the full output, with every
 combination of `unit`, `observationPeriod`, `measurementMethod`, and
@@ -381,7 +381,7 @@ which columns each property comes from. Follow these steps:
    import csv, os
    OUTPUT = '/tmp/full_output/<import>.csv'
    INPUT = '<import-dir>/input_files/data.csv'
-   SAMPLE = '<import-dir>/test_data/sample_input.csv'
+   SAMPLE = '<import-dir>/test_data/<name>_input.csv'
    HEADER_ROWS = 1  # Lines up to and including the column names.
    KEEP_ROWS_WITHOUT_OBS = False  # True keeps section label rows.
    KEY_PROPS = ['variableMeasured', 'unit', 'observationPeriod',
@@ -409,7 +409,7 @@ which columns each property comes from. Follow these steps:
    ```
 
 1. Process the sample with the same command, with
-   `--input_data=<import-dir>/test_data/sample_input.csv`, and check that its
+   `--input_data=<import-dir>/test_data/<name>_input.csv`, and check that its
    output has the same StatVars and property combinations as the full output.
 
 In the example, 54 rows reproduced all 27 StatVars and 54 combinations of the

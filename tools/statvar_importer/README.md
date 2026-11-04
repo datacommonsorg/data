@@ -11,7 +11,8 @@ StatisticalVariables and observations, ready for the Data Commons import tool.
   [Write a config](#write-a-config) ·
   [Write PV maps that survive auto-refresh](#write-pv-maps-that-survive-auto-refresh)
   · [Map places](#map-places) ·
-  [Add the processor to an import](#add-the-processor-to-an-import)
+  [Add the processor to an import](#add-the-processor-to-an-import) ·
+  [Create test data](#create-test-data)
 - **Check and fix:** [Check the results](#check-the-results) ·
   [Common problems](#common-problems)
 - **More:** [Related tools and docs](#related-tools-and-docs), including the
@@ -404,11 +405,8 @@ bucket and `gcloud` credentials; without access, the run fails with
 - `output/`: only the CSV, TMCF, and MCF files for the import tool.
 - `counters/`: counters. Keep them out of `output/`, which the import tool reads
   as a whole.
-- `test_data/`: a small `sample_input.csv` and its expected output for tests. To
-  create a sample input that makes the processor generate every StatVar and
-  SVObs property combination, see
-  [A test input that covers every StatVar](docs/data_sampler.md#a-test-input-that-covers-every-statvar).
-  Store test files longer than about 1,000 lines with Git LFS.
+- `test_data/`: a small input and its expected output; see
+  [Create test data](#create-test-data).
 
 Add the command to the import's `manifest.json`:
 
@@ -438,6 +436,81 @@ validation rules that run on each refresh (`validation_config_file`), see
 
 NOTE: Existing imports name the config `*_metadata.csv`. It has the same format
 and still works.
+
+## Create test data
+
+Keep a small input and its expected output in the import's `test_data/` folder.
+Reviewers and later refreshes use them to check that the PV map and config still
+produce the same output. Name the files after the import's output:
+
+- `test_data/<name>_input.csv`: a few rows in the same format as the source.
+- `test_data/<name>_output.csv`, `<name>_output.tmcf`, and
+  `<name>_output_stat_vars.mcf`: the processor's output for that input, plus
+  `<name>_output_stat_vars_schema.mcf` if the run writes it.
+
+For example, `statvar_imports/zurich/bev_3903_all/test_data/` has
+`bev_3903_wiki_input.csv` and `zurich_population_bev_3903_wiki_output.csv`, with
+the matching TMCF and MCF files.
+
+To create the test data, follow these steps:
+
+1. **Create the input.** While you write the PV map, use
+   [A representative sample for a new import](docs/data_sampler.md#a-representative-sample-for-a-new-import).
+   Once the PV map works, use
+   [A test input that covers every StatVar](docs/data_sampler.md#a-test-input-that-covers-every-statvar),
+   so the test covers every StatVar and observation property.
+
+1. **Generate the expected output.** From the import's folder, run the import's
+   command with the test input, and write the output to `test_data/`. Write the
+   counters elsewhere:
+
+   ```bash
+   python3 ../../tools/statvar_importer/stat_var_processor.py \
+     --input_data=test_data/<name>_input.csv \
+     --pv_map=<import>_pvmap.csv \
+     --config_file=<import>_statvar_processor_config.csv \
+     --output_path=test_data/<name>_output \
+     --output_counters=/tmp/<name>_test_counters.csv
+   ```
+
+   Use the same `--pv_map`, `--config_file`, and `--output_columns` as the
+   manifest.
+
+1. **Review the output** with the [success checks](#check-the-results), then
+   commit the input and output files. Don't commit counters.
+
+1. **Regenerate the output** whenever you change the PV map or the config, and
+   review its diff in the pull request.
+
+NOTE: If the test files have more than about 1,000 lines, store them with Git
+LFS. Run `git lfs track "<import-dir>/test_data/*.csv"` from the repository
+root, and commit the updated `.gitattributes`.
+
+To check that the test data is current, write a new output to a temporary folder
+and compare it with the committed files:
+
+```bash
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=test_data/<name>_input.csv \
+  --pv_map=<import>_pvmap.csv \
+  --config_file=<import>_statvar_processor_config.csv \
+  --output_path=/tmp/<name>_check/<name>_output \
+  --output_counters=/tmp/<name>_check/counters.csv
+for ext in .csv .tmcf; do
+  diff <(sort /tmp/<name>_check/<name>_output$ext) \
+    <(sort test_data/<name>_output$ext) && echo "Same: <name>_output$ext"
+done
+```
+
+The comparison sorts the lines, because the row order can change between
+processor versions. Don't expect `_stat_vars.mcf` to match exactly:
+
+- Its first line records the command and the time of the run.
+- It leaves out StatVars that already exist in Data Commons, so it gets shorter
+  as Data Commons adds them.
+
+In the Zurich example, the CSV and TMCF matched. The new `_stat_vars.mcf` had 20
+fewer StatVars than the committed one, because Data Commons now has them.
 
 ## Check the results
 
