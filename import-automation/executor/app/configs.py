@@ -184,7 +184,7 @@ class ExecutorConfig:
     # delete an import can take in seconds.
     importer_delete_timeout: float = 10 * 60
     # Executor type depends on where the executor runs
-    # Suppports one of: "GKE", "GAE", "CLOUD_RUN", "CLOUD_BATCH"
+    # Supports one of: "CLOUD_RUN", "CLOUD_BATCH"
     executor_type: str = 'CLOUD_BATCH'
 
     def get_data_refresh_config(self):
