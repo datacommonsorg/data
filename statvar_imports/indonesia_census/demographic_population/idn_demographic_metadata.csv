@@ -4,7 +4,7 @@ description,"Population Census and Demographic Statistics for Indonesia at Count
 #place_type,"Country,AdministrativeArea1,AdministrativeArea2,City"
 #places_within,country/IDN
 release_frequency,P1Y
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+output_columns,"observationAbout,observationDate,value,variableMeasured"
 input_encoding,utf-8-sig
 number_decimal,","
 number_separator," "

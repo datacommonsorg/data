@@ -28,12 +28,23 @@ from absl import app
 from absl import flags
 from absl import logging
 import download_util
+import file_util
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'output_dir',
     os.path.join(_CODEDIR, 'input_files'),
     'Directory path to save the downloaded input CSV files.',
+)
+flags.DEFINE_string(
+    'historical_gcs_dir',
+    'gs://unresolved_mcf/country/indonesia/demographic/historical',
+    'GCS directory containing the consolidated historical CSV files.',
+)
+flags.DEFINE_string(
+    'historical_output_dir',
+    os.path.join(_CODEDIR, 'output_files'),
+    'Directory path to copy the historical CSV and TMCF files into.',
 )
 flags.DEFINE_string(
     'population_filename',
@@ -78,6 +89,11 @@ flags.DEFINE_string(
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
 MAX_YEARS_PER_REQUEST = 3
+HISTORICAL_CSVS = (
+    'idn_population_historical_1971_2022.csv',
+    'idn_age_gender_historical_2010_2022.csv',
+)
+
 
 PROVINCE_SUFFIX_BY_CODE: dict[int, str] = {
     1100: 'Aceh',
@@ -425,8 +441,44 @@ def download_demographic_data(
     return pop_path, ag_path
 
 
+COMMON_TMCF_CONTENT = (
+    'Node: E:idn_demographic->E0\n'
+    'typeOf: dcs:StatVarObservation\n'
+    'observationAbout: C:idn_demographic->observationAbout\n'
+    'observationDate: C:idn_demographic->observationDate\n'
+    'value: C:idn_demographic->value\n'
+    'variableMeasured: C:idn_demographic->variableMeasured\n'
+)
+
+
+def copy_historical_files_from_gcs(
+    historical_gcs_dir: str,
+    historical_output_dir: str,
+) -> None:
+    """Copies consolidated historical CSVs from GCS and writes common_tmcf.tmcf into output_files."""
+    if not historical_gcs_dir:
+        return
+    os.makedirs(historical_output_dir, exist_ok=True)
+    dst_tmcf = os.path.join(historical_output_dir, 'common_tmcf.tmcf')
+    with open(dst_tmcf, mode='w', encoding='utf-8') as tmcf_f:
+        tmcf_f.write(COMMON_TMCF_CONTENT)
+    logging.info('Wrote historical TMCF to %s', dst_tmcf)
+
+    gcs_base = historical_gcs_dir.rstrip('/')
+    for fname in HISTORICAL_CSVS:
+        src_gcs = f'{gcs_base}/{fname}'
+        dst_local = os.path.join(historical_output_dir, fname)
+        logging.info('Copying historical CSV from %s to %s', src_gcs, dst_local)
+        file_util.file_copy(src_gcs, dst_local)
+
+
+
 def main(_) -> None:
     logging.set_verbosity(logging.INFO)
+    copy_historical_files_from_gcs(
+        historical_gcs_dir=_FLAGS.historical_gcs_dir,
+        historical_output_dir=_FLAGS.historical_output_dir,
+    )
     download_demographic_data(
         domain=_FLAGS.domain,
         total_var_id=_FLAGS.total_var_id,
@@ -442,3 +494,4 @@ def main(_) -> None:
 
 if __name__ == '__main__':
     app.run(main)
+

@@ -41,8 +41,6 @@ OUTPUT_COLUMNS = [
     "observationDate",
     "value",
     "variableMeasured",
-    "unit",
-    "scalingFactor",
 ]
 
 # Regex patterns for the 4 demographic sub-categories (403 files total):
@@ -113,16 +111,14 @@ def consolidate_files(
         total_rows_read += 1
         obs_about = normalize_dcid(row.get("observationAbout", ""))
         obs_date = row.get("observationDate", "").strip()
-        var_measured = row.get("variableMeasured", "").strip()
+        var_measured = normalize_dcid(row.get("variableMeasured", ""))
         val = row.get("value", "").strip()
-        unit = row.get("unit", "").strip()
-        scaling = row.get("scalingFactor", "").strip()
 
         if not obs_about or not obs_date or not var_measured or val == "":
           continue
 
-        if not var_measured.startswith("dcid:"):
-          var_measured = f"dcid:{var_measured}"
+        obs_about = f"dcid:{obs_about}"
+        var_measured = f"dcid:{var_measured}"
 
         key = (obs_about, obs_date, var_measured)
         deduped_rows[key] = {
@@ -130,8 +126,6 @@ def consolidate_files(
             "observationDate": obs_date,
             "value": val,
             "variableMeasured": var_measured,
-            "unit": unit,
-            "scalingFactor": scaling,
         }
 
   os.makedirs(os.path.dirname(output_csv_path) or ".", exist_ok=True)
@@ -140,6 +134,18 @@ def consolidate_files(
     writer.writeheader()
     for key in sorted(deduped_rows.keys()):
       writer.writerow(deduped_rows[key])
+
+  table_name = os.path.splitext(os.path.basename(output_csv_path))[0]
+  tmcf_path = os.path.splitext(output_csv_path)[0] + ".tmcf"
+  with open(tmcf_path, mode="w", encoding="utf-8") as tmcf_f:
+    tmcf_f.write(
+        f"Node: E:{table_name}->E0\n"
+        f"observationAbout: C:{table_name}->observationAbout\n"
+        f"observationDate: C:{table_name}->observationDate\n"
+        f"value: C:{table_name}->value\n"
+        f"variableMeasured: C:{table_name}->variableMeasured\n"
+        "typeOf: dcs:StatVarObservation\n"
+    )
 
   logging.info(
       "Wrote %s: %d unique observations (from %d raw rows across %d files).",

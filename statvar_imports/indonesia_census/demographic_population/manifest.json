@@ -5,7 +5,11 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.bps.go.id/",
       "provenance_description": "Population Census and Demographic Statistics for Indonesia.",
-      "scripts": ["run.sh"],
+      "scripts": [
+        "download.py --output_dir=input_files --historical_output_dir=output_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/idn_population_2023_2025.csv --pv_map=pvmaps/idn_population_pvmap.csv --config_file=idn_demographic_metadata.csv --places_resolved_csv=idn_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/idn_population_2023_2025 --output_counters=counters/idn_population_2023_2025_counters.csv",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/idn_age_gender_2023_2025.csv --pv_map=pvmaps/idn_age_gender_pvmap.csv --config_file=idn_demographic_metadata.csv --places_resolved_csv=idn_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/idn_age_gender_2023_2025 --output_counters=counters/idn_age_gender_2023_2025_counters.csv"
+      ],
       "import_inputs": [
         {
           "template_mcf": "output_files/common_tmcf.tmcf",
@@ -31,9 +35,7 @@
         "pvmaps/*.csv",
         "idn_demographic_metadata.csv",
         "idn_places_resolved.csv",
-        "common_tmcf.tmcf",
         "counters/*.csv",
-        "test_data/*.csv",
         "validation_config.json"
       ],
       "validation_config_file": "validation_config.json",
@@ -46,3 +48,4 @@
     }
   ]
 }
+

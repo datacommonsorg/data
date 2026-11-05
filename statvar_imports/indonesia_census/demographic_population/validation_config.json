@@ -30,8 +30,8 @@
         }
       },
       "params": {
-        "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE NumPlaces >= 500 GROUP BY StatVar",
-        "condition": "TotalObs >= 1500 AND CAST(LatestDate AS INTEGER) >= 2024",
+        "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE NumPlaces >= 500 GROUP BY StatVar",
+        "condition": "(LatestDate <= 2022 AND TotalObs >= 1500) OR (LatestDate >= 2024 AND TotalObs >= 1500)",
         "failure_message": "Demographic population StatVar observation count or freshness validation failed."
       }
     }

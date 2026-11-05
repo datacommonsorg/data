@@ -15,44 +15,76 @@
 
 ---
 
-## 2. Datasets & Consolidation Architecture
+## 2. Datasets & Architecture
 
-This import consolidates the **403 legacy Demographic CSVs** (`1971–2022`) from `/cns/jv-d/home/datcom/v3_mcf/country/indonesia/` into 2 historical baseline CSVs and automates the `2023–2025+` refresh from BPS WebAPI:
+This import downloads and processes Indonesia's demographic population statistics from the BPS WebAPI (`download.py` + `stat_var_processor.py`):
 
-1. **Historical Baseline (1971–2022)** (`consolidate_historical.py`):
-   * `idn_population_historical_1971_2022.csv`: Consolidated from 218 legacy Total Population CSVs (8 AA1 + 210 AA2).
-   * `idn_age_gender_historical_2010_2022.csv`: Consolidated from 185 legacy Age & Gender CSVs (5 AA1 + 180 AA2).
-   * Shared template MCF: `common_tmcf.tmcf`.
-
-2. **Automated BPS WebAPI Refresh (2023–2025+)** (`download.py` + `stat_var_processor.py`):
-   * **BPS Variable IDs**:
-     * `var_id=2790`: *Jumlah Penduduk menurut Kabupaten/Kota dan Kelompok Umur* (Total Population by Regency/City and Age Group)
-     * `var_id=2791`: *Jumlah Penduduk Laki-Laki menurut Kabupaten/Kota dan Kelompok umur* (Male Population by Regency/City and Age Group)
-     * `var_id=2792`: *Jumlah Penduduk Perempuan menurut Kabupaten Kota dan Kelompok Umur* (Female Population by Regency/City and Age Group)
-   * **Generated Input Files**:
-     * `input_files/idn_population_2023_2025.csv` (processed with `pvmaps/idn_population_pvmap.csv`)
-     * `input_files/idn_age_gender_2023_2025.csv` (processed with `pvmaps/idn_age_gender_pvmap.csv`)
-   * **StatVars (`52` total)**:
-     * `dcid:Count_Person`
-     * `dcid:Count_Person_Male`, `dcid:Count_Person_Female`
-     * 16 five-year age brackets (`0To4Years` .. `75OrMoreYears`) across Total, Male, and Female (`Count_Person_{Age}`, `Count_Person_{Age}_Male`, `Count_Person_{Age}_Female`).
+* **Historical Baseline in GCS (`1971–2022`)**:
+  * `gs://unresolved_mcf/country/indonesia/demographic/historical/idn_population_historical_1971_2022.csv` (`3,339` observations)
+  * `gs://unresolved_mcf/country/indonesia/demographic/historical/idn_age_gender_historical_2010_2022.csv` (`8,935` observations)
+  * Automatically copied by `download.py` into `output_files/` along with `output_files/common_tmcf.tmcf` on every run.
+* **BPS Variable IDs (`2023–2026+`)**:
+  * `var_id=2790`: *Jumlah Penduduk menurut Kabupaten/Kota dan Kelompok Umur* (Total Population by Regency/City and Age Group)
+  * `var_id=2791`: *Jumlah Penduduk Laki-Laki menurut Kabupaten/Kota dan Kelompok umur* (Male Population by Regency/City and Age Group)
+  * `var_id=2792`: *Jumlah Penduduk Perempuan menurut Kabupaten Kota dan Kelompok Umur* (Female Population by Regency/City and Age Group)
+* **Generated Input Files**:
+  * `input_files/idn_population_2023_2025.csv` (processed with `pvmaps/idn_population_pvmap.csv`)
+  * `input_files/idn_age_gender_2023_2025.csv` (processed with `pvmaps/idn_age_gender_pvmap.csv`)
+* **StatVars (`51` active)**:
+  * `dcid:Count_Person`
+  * `dcid:Count_Person_Male`, `dcid:Count_Person_Female`
+  * 16 five-year age brackets (`0To4Years` .. `75OrMoreYears`) across Total, Male, and Female (`Count_Person_{Age}`, `Count_Person_{Age}_Male`, `Count_Person_{Age}_Female`).
 
 ---
 
-## 3. How to Run
+## 3. Data Diffs & Refresh Summary (`differ_summary.json`)
 
-1. **Download and preprocess the source data from BPS WebAPI into `input_files/`:**
+Comparison against the legacy CNS Demographic CSVs (`/cns/jv-d/home/datcom/v3_mcf/country/indonesia/`):
+
+| Metric | Count | Explanation |
+|---|---|---|
+| **Previous Observations** | `12,274` | Legacy CNS demographic CSVs covering `1971–2022` |
+| **Current Observations** | `125,086` | Automated pipeline covering `1971–2022` historical + `2023–2026` BPS WebAPI data across all `553` places |
+| **Added Observations** | `+112,812` | `2023–2026` annual population (`+2,212` obs) and age/gender breakdown (`+110,600` obs) across 553 places |
+| **Modified Observations** | `0` | 100% exact value match across all `12,274` historical CNS observations |
+| **Deleted Observations** | `0` (`0.0%`) | Zero deletions |
+| **Schema Diffs** | `0` | All StatVars resolve to existing standard Data Commons `StatisticalVariable`s |
+
+---
+
+## 4. How to Run
+
+1. **Copy historical baseline CSVs from GCS into `output_files/` and download fresh BPS WebAPI data into `input_files/`:**
    ```bash
    python3 statvar_imports/indonesia_census/demographic_population/download.py \
-     --output_dir=statvar_imports/indonesia_census/demographic_population/input_files
+     --output_dir=statvar_imports/indonesia_census/demographic_population/input_files \
+     --historical_output_dir=statvar_imports/indonesia_census/demographic_population/output_files
    ```
 
-2. **Run the full pipeline (`run.sh`) or `stat_var_processor.py` directly:**
+2. **Process the downloaded CSVs using `stat_var_processor.py`:**
    ```bash
-   bash statvar_imports/indonesia_census/demographic_population/run.sh
+   python3 tools/statvar_importer/stat_var_processor.py \
+     --input_data=statvar_imports/indonesia_census/demographic_population/input_files/idn_population_2023_2025.csv \
+     --pv_map=statvar_imports/indonesia_census/demographic_population/pvmaps/idn_population_pvmap.csv \
+     --config_file=statvar_imports/indonesia_census/demographic_population/idn_demographic_metadata.csv \
+     --places_resolved_csv=statvar_imports/indonesia_census/demographic_population/idn_places_resolved.csv \
+     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+     --output_path=statvar_imports/indonesia_census/demographic_population/output_files/idn_population_2023_2025 \
+     --output_counters=statvar_imports/indonesia_census/demographic_population/counters/idn_population_2023_2025_counters.csv
+
+   python3 tools/statvar_importer/stat_var_processor.py \
+     --input_data=statvar_imports/indonesia_census/demographic_population/input_files/idn_age_gender_2023_2025.csv \
+     --pv_map=statvar_imports/indonesia_census/demographic_population/pvmaps/idn_age_gender_pvmap.csv \
+     --config_file=statvar_imports/indonesia_census/demographic_population/idn_demographic_metadata.csv \
+     --places_resolved_csv=statvar_imports/indonesia_census/demographic_population/idn_places_resolved.csv \
+     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+     --output_path=statvar_imports/indonesia_census/demographic_population/output_files/idn_age_gender_2023_2025 \
+     --output_counters=statvar_imports/indonesia_census/demographic_population/counters/idn_age_gender_2023_2025_counters.csv
    ```
 
 3. **Run unit tests:**
    ```bash
    python3 -m unittest discover -v -s statvar_imports/indonesia_census/demographic_population -p "*_test.py"
    ```
+
+

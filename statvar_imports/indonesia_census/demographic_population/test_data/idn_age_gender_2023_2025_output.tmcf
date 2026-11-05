@@ -3,6 +3,4 @@ observationAbout: C:idn_age_gender_2023_2025_output->observationAbout
 observationDate: C:idn_age_gender_2023_2025_output->observationDate
 value: C:idn_age_gender_2023_2025_output->value
 variableMeasured: C:idn_age_gender_2023_2025_output->variableMeasured
-unit: C:idn_age_gender_2023_2025_output->unit
-scalingFactor: C:idn_age_gender_2023_2025_output->scalingFactor
 typeOf: dcs:StatVarObservation
