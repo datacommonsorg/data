@@ -58,7 +58,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'years',
     '2023-present',
-    'Years to download: "2023-present" (post-2022 active years; 2015-2022 are in GCS historic/), "all" (2015-present, skipping 2020), range e.g. "2015-2024", or comma-separated "2023,2024".',
+    'Years to download: "2023-present" (post-2022 active years; 2015-2022 are retained in the historical production import), "all" (2015-present, skipping 2020), range e.g. "2015-2024", or comma-separated "2023,2024".',
 )
 flags.DEFINE_enum(
     'data_mode',
@@ -125,7 +125,7 @@ def get_school_code_map() -> dict[str, str]:
 
 
 # Known historical official zip filename per year: (all_subgroups_zip, all_students_zip).
-# Recent years (>=2022) and future years (>2025) also support dynamic version probing
+# Recent years (>=2022) and future years (>2026) also support dynamic version probing
 # from v4 down to v1 via discover_year_urls().
 KNOWN_YEAR_URL_MAP = {
     2015: ('sb_ca2015_all_csv_v3.zip', 'sb_ca2015_1_csv_v3.zip'),
@@ -138,6 +138,7 @@ KNOWN_YEAR_URL_MAP = {
     2023: ('sb_ca2023_all_csv_v1.zip', 'sb_ca2023_1_csv_v1.zip'),
     2024: ('sb_ca2024_all_csv_v1.zip', 'sb_ca2024_1_csv_v1.zip'),
     2025: ('sb_ca2025_all_csv_v1.zip', 'sb_ca2025_1_csv_v1.zip'),
+    2026: ('sb_ca2026_all_csv_v1.zip', 'sb_ca2026_1_csv_v1.zip'),
 }
 
 UNIFIED_HEADER = [
@@ -160,25 +161,31 @@ UNIFIED_HEADER = [
 
 
 def probe_url_exists(url: str, timeout: int = 10, max_retries: int = 3) -> bool:
-    """Checks if a remote URL exists using an HTTP HEAD probe with retries for transient errors."""
+    """Checks if a remote URL exists using a streamed ranged HTTP GET probe (Range: bytes=0-0)."""
     session = _get_http_session()
+    headers = {
+        'User-Agent': USER_AGENT,
+        'Range': 'bytes=0-0',
+    }
     for attempt in range(max_retries):
         try:
-            resp = session.head(url,
-                                headers={'User-Agent': USER_AGENT},
-                                allow_redirects=True,
-                                timeout=timeout)
-            if resp.status_code == 200:
-                return True
-            if resp.status_code == 404:
+            with session.get(url,
+                             headers=headers,
+                             allow_redirects=True,
+                             timeout=timeout,
+                             stream=True) as resp:
+                if resp.status_code in (200, 206):
+                    return True
+                if resp.status_code == 404:
+                    return False
+                logging.warning('HTTP error %d probing %s (attempt %d/%d)',
+                                resp.status_code, url, attempt + 1, max_retries)
+                if attempt < max_retries - 1 and resp.status_code in (429, 500,
+                                                                      502, 503,
+                                                                      504):
+                    time.sleep(2**attempt)
+                    continue
                 return False
-            logging.warning('HTTP error %d probing %s (attempt %d/%d)',
-                            resp.status_code, url, attempt + 1, max_retries)
-            if attempt < max_retries - 1 and resp.status_code in (429, 500, 502,
-                                                                  503, 504):
-                time.sleep(2**attempt)
-                continue
-            return False
         except requests.exceptions.RequestException as e:
             logging.warning('Network error probing %s (attempt %d/%d): %s', url,
                             attempt + 1, max_retries, e)
@@ -548,7 +555,7 @@ def main(argv):
                 out_filename='sb_ca_test_normalized.txt',
             )
         except Exception as e:
-            logging.fatal('Test mode download failed: %s', e)
+            raise RuntimeError(f'Test mode download failed: {e}') from e
         logging.info('Test mode completed. Created test file: %s', test_file)
         logging.info('Master all-years file was not modified in test mode.')
         return
@@ -582,16 +589,15 @@ def main(argv):
                 failed_years.append((year, str(e)))
 
     if failed_years:
-        logging.fatal(
-            'Import aborted due to download failures for years: %s',
-            sorted(failed_years),
+        raise RuntimeError(
+            f'Import aborted due to download failures for years: {sorted(failed_years)}'
         )
 
     all_normalized_files = [
         year_to_file[y] for y in sorted(year_to_file.keys())
     ]
     if not all_normalized_files:
-        logging.fatal('No files were successfully downloaded and processed.')
+        raise RuntimeError('No files were successfully downloaded and processed.')
 
     master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
     if (FLAGS.years.strip().lower() in ('all', '*') or '-' in FLAGS.years or
@@ -622,8 +628,9 @@ def main(argv):
             temp_master.close()
             if os.path.exists(temp_master.name):
                 os.unlink(temp_master.name)
-            logging.fatal('Failed to write master normalized file %s: %s',
-                          master_file, e)
+            raise RuntimeError(
+                f'Failed to write master normalized file {master_file}: {e}'
+            ) from e
 
         logging.info('Created master multi-year file: %s across %d years',
                      master_file, len(all_normalized_files))

@@ -74,7 +74,7 @@ The pipeline processes the full California CAASPP dataset across all geographic 
 > **Note**: Commands below should be run from this directory: `statvar_imports/us_education/california_school_performance/`.
 
 ### 1. Download and Process Active Years (`2023–Present`, Default)
-Historical data for `2015–2022` (`84.7M` observations) is stored in GCS under `historic/` (`gs://datcom-prod-imports/statvar_imports/us_education/california_school_performance/CaliforniaSchoolPerformance/historic/`) and automatically copied into `<version>/historic/genmcf/` on each run by the import executor. By default, `download.py` fetches and normalizes post-2022 years (`--years=2023-present`):
+Historical data for `2015–2022` (`84.7M` observations) is retained in the production import (`nodes.mcf@76`). By default, `download.py` fetches and normalizes post-2022 years (`--years=2023-present`):
 ```bash
 # Step 1: Download and normalize post-2022 years (default: --years=2023-present)
 python3 download.py

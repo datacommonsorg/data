@@ -111,6 +111,42 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
             ],
         )
 
+    def test_probe_url_exists_uses_ranged_get(self):
+        """Verify probe_url_exists uses a streamed ranged GET (Range: bytes=0-0) and accepts HTTP 206/200."""
+        from unittest.mock import MagicMock
+
+        mock_resp_206 = MagicMock()
+        mock_resp_206.status_code = 206
+        mock_resp_206.__enter__.return_value = mock_resp_206
+        mock_resp_206.__exit__.return_value = False
+
+        mock_resp_404 = MagicMock()
+        mock_resp_404.status_code = 404
+        mock_resp_404.__enter__.return_value = mock_resp_404
+        mock_resp_404.__exit__.return_value = False
+
+        mock_session = MagicMock()
+        mock_session.get.side_effect = [mock_resp_206, mock_resp_404]
+
+        with patch.object(download,
+                          '_get_http_session',
+                          return_value=mock_session):
+            url = f'{download.BASE_URL}sb_ca2026_all_csv_v1.zip'
+            self.assertTrue(download.probe_url_exists(url))
+            self.assertFalse(download.probe_url_exists(url))
+
+        mock_session.head.assert_not_called()
+        mock_session.get.assert_called_with(
+            url,
+            headers={
+                'User-Agent': download.USER_AGENT,
+                'Range': 'bytes=0-0',
+            },
+            allow_redirects=True,
+            timeout=10,
+            stream=True,
+        )
+
     @patch.object(download, 'probe_url_exists', return_value=False)
     def test_download_parse_years(self, mock_probe):
         """Verify year string parsing logic for single, list, range, and 'all'."""
@@ -120,11 +156,11 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
         mock_probe.assert_not_called()
 
         self.assertEqual(download.parse_years('2023-present'),
-                         [2023, 2024, 2025])
+                         [2023, 2024, 2025, 2026])
         self.assertGreater(mock_probe.call_count, 0)
         all_years = download.parse_years('all')
         self.assertIn(2015, all_years)
-        self.assertIn(2024, all_years)
+        self.assertIn(2026, all_years)
 
     def test_normalize_and_filter_stream_caret_delimited(self):
         """Verify record normalization and entity filtering for caret-delimited format."""
@@ -335,6 +371,34 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
             with open(single_path, 'r', encoding='utf-8') as f1, \
                  open(master_path, 'r', encoding='utf-8') as f2:
                 self.assertEqual(f1.read(), f2.read())
+
+    def test_error_paths_raise_exceptions(self):
+        """Verify download.main() and process.main() raise exceptions instead of logging.fatal()."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with patch.object(download, 'FLAGS') as mock_flags, \
+                 patch.object(download, 'download_and_process_year', side_effect=RuntimeError('network failure')):
+                mock_flags.output_dir = tmp_dir
+                mock_flags.raw_dir = os.path.join(tmp_dir, 'raw')
+                mock_flags.clean = False
+                mock_flags.test_mode = False
+                mock_flags.years = '2024'
+                mock_flags.data_mode = 'all_groups'
+                mock_flags.keep_all_entities = True
+                with self.assertRaises(RuntimeError):
+                    download.main([])
+
+            with patch.object(process, 'FLAGS') as mock_pflags:
+                mock_pflags.input_data = os.path.join(tmp_dir,
+                                                      'nonexistent.txt')
+                mock_pflags.pv_map = os.path.join(
+                    _SCRIPT_DIR, 'config',
+                    'california_school_performance_pvmap.csv')
+                mock_pflags.school_code_mapping = os.path.join(
+                    _SCRIPT_DIR, 'config', 'school_code_mapping.json')
+                mock_pflags.output_path = os.path.join(tmp_dir, 'out')
+                mock_pflags.output_counters = ''
+                with self.assertRaises(FileNotFoundError):
+                    process.main([])
 
 
 if __name__ == '__main__':
