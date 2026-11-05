@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+export PYTHONHASHSEED=0
 
 # PATH=$PATH:$(dirname $0)
 # # Sleep as long as N jobs of given name are running in background
@@ -39,7 +40,7 @@ rm -rf output_files/shard "output_files/events_${config}"
 mkdir -p output_files/shard
 
 echo "Sharding pcc_spi_pearson_09.csv based on year and writing them to the shard folder."
-bash ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
+bash ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 "df=df.sort_values(by=['time', 'place'], kind='mergesort'); df['year']=df['time'].str.slice(0,4)" -shard year
 
 
 # Convert into events
@@ -83,6 +84,9 @@ done
 # Generate companion node_mcf files for events (input3) and event_svobs (input4).
 python3 -c '
 import csv
+import sys
+
+csv.field_size_limit(sys.maxsize)
 
 events_csv = "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
 svobs_csv = "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
