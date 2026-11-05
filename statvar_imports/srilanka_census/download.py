@@ -20,6 +20,7 @@ import os
 import re
 import sys
 import tempfile
+import time
 from typing import Any
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
@@ -317,6 +318,30 @@ def write_csv_atomic(output_path: str, fieldnames: list[str],
         raise
 
 
+def _download_bytes_with_retry(url: str,
+                               retries: int = 5,
+                               retry_secs: int = 10) -> bytes:
+    """Downloads non-empty bytes from URL, retrying on transient empty responses."""
+    for attempt in range(retries):
+        content = download_util.request_url(url=url,
+                                            output='bytes',
+                                            timeout=60,
+                                            retries=3,
+                                            retry_secs=5)
+        if isinstance(content, bytes) and content:
+            return content
+        if attempt + 1 < retries:
+            logging.warning(
+                'Empty response from %s (attempt %d/%d); retrying in %ds...',
+                url,
+                attempt + 1,
+                retries,
+                retry_secs,
+            )
+            time.sleep(retry_secs)
+    raise RuntimeError(f'Failed to download bytes from {url}')
+
+
 def download_and_process(output_dir: str, pv_map_path: str) -> None:
     """Downloads all Sri Lanka datasets from HDX and writes input CSVs."""
     os.makedirs(output_dir, exist_ok=True)
@@ -338,13 +363,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
     if not xlsx_url:
         raise RuntimeError('Missing URL for lka_admpop_2022_v2.xlsx')
     logging.info('Downloading 2022 population workbook from %s...', xlsx_url)
-    xlsx_bytes = download_util.request_url(url=xlsx_url,
-                                           output='bytes',
-                                           timeout=60,
-                                           retries=3,
-                                           retry_secs=5)
-    if not isinstance(xlsx_bytes, bytes) or not xlsx_bytes:
-        raise RuntimeError(f'Failed to download bytes from {xlsx_url}')
+    xlsx_bytes = _download_bytes_with_retry(xlsx_url)
     population_rows.extend(parse_population_xlsx(xlsx_bytes))
 
     csv_resource_names = sorted(
@@ -353,13 +372,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
     for res_name in csv_resource_names:
         csv_url = pop_resources[res_name]
         logging.info('Downloading %s from %s...', res_name, csv_url)
-        csv_bytes = download_util.request_url(url=csv_url,
-                                              output='bytes',
-                                              timeout=60,
-                                              retries=3,
-                                              retry_secs=5)
-        if not isinstance(csv_bytes, bytes) or not csv_bytes:
-            raise RuntimeError(f'Failed to download bytes from {csv_url}')
+        csv_bytes = _download_bytes_with_retry(csv_url)
         population_rows.extend(
             parse_population_csv(csv_bytes.decode('utf-8-sig',
                                                   errors='replace')))
@@ -381,13 +394,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
     agri_url = (agri_resources.get('agriculture-and-rural-development_lka.csv')
                 or FALLBACK_AGRICULTURE_URL)
     logging.info('Downloading agriculture dataset from %s...', agri_url)
-    agri_bytes = download_util.request_url(url=agri_url,
-                                           output='bytes',
-                                           timeout=60,
-                                           retries=3,
-                                           retry_secs=5)
-    if not isinstance(agri_bytes, bytes) or not agri_bytes:
-        raise RuntimeError(f'Failed to download bytes from {agri_url}')
+    agri_bytes = _download_bytes_with_retry(agri_url)
     agri_rows = parse_wdi_csv(
         agri_bytes.decode('utf-8-sig', errors='replace'),
         allowed_indicators=mapped_indicators,
@@ -407,13 +414,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
     edu_resources = get_hdx_resources(EDUCATION_DATASET_ID)
     edu_url = edu_resources.get('education_lka.csv') or FALLBACK_EDUCATION_URL
     logging.info('Downloading education dataset from %s...', edu_url)
-    edu_bytes = download_util.request_url(url=edu_url,
-                                          output='bytes',
-                                          timeout=60,
-                                          retries=3,
-                                          retry_secs=5)
-    if not isinstance(edu_bytes, bytes) or not edu_bytes:
-        raise RuntimeError(f'Failed to download bytes from {edu_url}')
+    edu_bytes = _download_bytes_with_retry(edu_url)
     edu_rows = parse_wdi_csv(
         edu_bytes.decode('utf-8-sig', errors='replace'),
         allowed_indicators=mapped_indicators,
