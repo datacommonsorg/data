@@ -86,13 +86,14 @@ class ValidatorTest(unittest.TestCase):
         mock_runner = mock_runner_cls.return_value
         mock_runner.run_validations.return_value = (True, [])
 
-        # Default (run_bq_differ=False): uses native Python ImportDiffer
+        # When run_bq_differ=False: uses native Python ImportDiffer
         exit_code = validator_main.run_validation_job(
             absolute_import_name='scripts/us_fed:treasury',
             import_config_str='{"gcp_project_id": "test-proj"}',
             version_override='',
             bucket_name='test-bucket',
             bq_dataset='test_dataset',
+            run_bq_differ=False,
         )
 
         self.assertEqual(exit_code, 0)
@@ -125,6 +126,7 @@ class ValidatorTest(unittest.TestCase):
             version_override='',
             bucket_name='test-bucket',
             bq_dataset='test_dataset',
+            run_bq_differ=True,
         )
         self.assertEqual(exit_code_fail, 1)
         failed_summary = json.loads(uploaded_blobs[summary_blob_key])
@@ -168,6 +170,18 @@ class ValidatorTest(unittest.TestCase):
             '/tmp/test_val/custom_val.json',
             '/tmp/test_val',
         )
+
+    @mock.patch('main.storage.Client')
+    def test_run_validation_job_skips_when_disabled(self, mock_storage_cls):
+        code = validator_main.run_validation_job(
+            absolute_import_name='scripts/noaa_gfs:NOAA_GlobalForecastSystem',
+            import_config_str=json.dumps({'invoke_import_validation': False}),
+            version_override='',
+            bucket_name='test-bucket',
+            bq_dataset='datcom_import_differ',
+        )
+        self.assertEqual(code, 0)
+        mock_storage_cls.assert_not_called()
 
 
 if __name__ == '__main__':
