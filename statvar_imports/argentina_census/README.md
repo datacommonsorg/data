@@ -39,16 +39,37 @@
 
 ## 3. Data Diffs & Refresh Summary (`differ_summary.json`)
 
-Comparison against the previous production `Argentina_Census` import (`/cns/jv-d/home/datcom/v3_resolved_mcf/country/argentina/latest/`):
+Comparison against the previous production `Argentina_Census` manual import (`/cns/jv-d/home/datcom/v3_mcf/country/argentina/output_files/`, `41,104` observations across `148` legacy CSVs):
 
 | Metric | Count | Explanation |
 |---|---|---|
-| **Previous Observations** | `41,104` | Legacy import covering 1980–2010 Census & 2005–2019 Infant Mortality |
-| **Current Observations** | `51,318` | Refreshed import covering 1980–2022 Census & 2005–2023 Infant Mortality |
-| **Added Observations** | `+10,215` | 2022 National Census (`c2022_*_c4_*.xlsx` age/sex for Country + 23 Provinces, `c2022_*_c1_*.xlsx` AA2 department totals) and 2020–2023 Infant Mortality rates (`tasa_mortalidad_infantil_2005_2023.xls`) |
-| **Modified Observations** | `15` | Official INDEC historical revisions in the updated `tasa_mortalidad_infantil_2005_2023.xls` publication |
-| **Deleted Observations** | `1` (`0.002%`) | Single historical observation revised/suppressed in upstream INDEC publication (`DELETED_RECORDS_PERCENT` = `0.002%`, well below the `0.1%` threshold) |
+| **Previous Observations** | `41,104` | Legacy manual import covering 1980–2010 Census & 2005–2021 Infant Mortality |
+| **Current Observations** | `51,318` | Refreshed automated import covering 1980–2022 Census & 2005–2023 Infant Mortality |
+| **Added Observations** | `+10,215` | 2022 National Census (`c2022_*_c4_*.xlsx` age/sex for Country + 23 Provinces, `c2022_*_c1_*.xlsx` AA2 department totals), 2022–2023 Infant Mortality rates (`010506_2025.xlsx`, `+48` rows), and `1` corrected DCID row for Libertador General San Martín (`wikidataId/Q1120737` in `2010`, value `4707`) |
+| **Modified Observations** | `15` | All `15` modified rows are in year `2010` due to fixing legacy manual-import parsing bugs: `13` department-level `Count_Person` rows in Chubut where legacy truncated Spanish thousands separators (`.` in `11.141 -> 11`, `131.313 -> 131`, `186.583 -> 187`, etc.), `1` row in `Count_Person_10OrMoreYears_Literate` for Chaco (`wikidataId/Q44757`, `80602 -> 806020`), and `1` row in `Count_Person_10OrMoreYears_Illiterate_AsAFractionOf_Count_Person_10OrMoreYears` for Neuquén (`wikidataId/Q44800`, `23 -> 2.3`). `Count_MortalityEvent_AsAFractionOf_Count_BirthEvent_LiveBirth` has `0` modified and `0` deleted records. |
+| **Deleted Observations** | `1` (`0.002%`) | `('2010', 'wikidataId/Q1120737)', 'Count_Person')` (value `4707` in legacy `argentina_population_aa2_2010.csv:453`), caused by fixing a trailing parenthesis typo in the legacy place DCID for Libertador General San Martín Department, San Luis (`wikidataId/Q1120737` at `argentina_places_resolved.csv:418`) |
 | **Schema Diffs** | `0` | All `1,034` StatVars resolve to existing definitions in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` |
+
+### Detailed Breakdown of Deleted (1) and Modified (15) Observations (All in Year `2010`)
+
+| Diff Type | Year | Place (`observationAbout`) | Place Name | `variableMeasured` | Legacy Value | Current Value | Root Cause |
+|---|---|---|---|---|---|---|---|
+| `DELETED` (re-emitted as `ADDED` on clean DCID) | `2010` | `wikidataId/Q1120737)` -> `wikidataId/Q1120737` | Libertador General San Martín (San Luis) | `Count_Person` | `4707` | `4707` | Fixed trailing parenthesis typo in legacy `argentina_population_aa2_2010.csv:453` |
+| `MODIFIED` | `2010` | `wikidataId/Q1007366` | Gaiman (Chubut) | `Count_Person` | `11` | `11141` | Legacy truncated `.` thousands separator (`11.141`) |
+| `MODIFIED` | `2010` | `wikidataId/Q1008487` | Gastre (Chubut) | `Count_Person` | `1` | `1427` | Legacy truncated `.` thousands separator (`1.427`) |
+| `MODIFIED` | `2010` | `wikidataId/Q1088518` | Rawson (Chubut) | `Count_Person` | `131` | `131313` | Legacy truncated `.` thousands separator (`131.313`) |
+| `MODIFIED` | `2010` | `wikidataId/Q1088722` | Sarmiento (Chubut) | `Count_Person` | `11` | `11396` | Legacy truncated `.` thousands separator (`11.396`) |
+| `MODIFIED` | `2010` | `wikidataId/Q1088724` | Río Senguer (Chubut) | `Count_Person` | `6` | `5979` | Legacy truncated `.` thousands separator (`5.979`) |
+| `MODIFIED` | `2010` | `wikidataId/Q290328` | Telsen (Chubut) | `Count_Person` | `2` | `1644` | Legacy truncated `.` thousands separator (`1.644`) |
+| `MODIFIED` | `2010` | `wikidataId/Q368780` | Florentino Ameghino (Chubut) | `Count_Person` | `2` | `1627` | Legacy truncated `.` thousands separator (`1.627`) |
+| `MODIFIED` | `2010` | `wikidataId/Q372333` | Languiñeo (Chubut) | `Count_Person` | `3` | `3085` | Legacy truncated `.` thousands separator (`3.085`) |
+| `MODIFIED` | `2010` | `wikidataId/Q374155` | Futaleufú (Chubut) | `Count_Person` | `43` | `43076` | Legacy truncated `.` thousands separator (`43.076`) |
+| `MODIFIED` | `2010` | `wikidataId/Q662056` | Cushamen (Chubut) | `Count_Person` | `21` | `20919` | Legacy truncated `.` thousands separator (`20.919`) |
+| `MODIFIED` | `2010` | `wikidataId/Q690540` | Escalante (Chubut) | `Count_Person` | `187` | `186583` | Legacy truncated `.` thousands separator (`186.583`) |
+| `MODIFIED` | `2010` | `wikidataId/Q980073` | Paso de Indios (Chubut) | `Count_Person` | `2` | `1867` | Legacy truncated `.` thousands separator (`1.867`) |
+| `MODIFIED` | `2010` | `wikidataId/Q980641` | Tehuelches (Chubut) | `Count_Person` | `5` | `5390` | Legacy truncated `.` thousands separator (`5.390`) |
+| `MODIFIED` | `2010` | `wikidataId/Q44757` | Chaco | `Count_Person_10OrMoreYears_Literate` | `80602` | `806020` | Legacy truncated trailing zero (`80602` vs `806,020`) |
+| `MODIFIED` | `2010` | `wikidataId/Q44800` | Neuquén | `Count_Person_10OrMoreYears_Illiterate_AsAFractionOf_Count_Person_10OrMoreYears` | `23` | `2.3` | Legacy dropped decimal point (`23%` vs `2.3%`) |
 
 ---
 

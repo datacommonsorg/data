@@ -987,14 +987,9 @@ def collect_required_urls() -> list[str]:
 
 
 def main(_):
-    try:
-        urls = collect_required_urls()
-        cache = fetch_all_urls(urls, max_workers=FLAGS.max_workers)
-        build_datasets(cache, FLAGS.output_dir)
-    except Exception as e:  # pylint: disable=broad-except
-        logging.fatal('Failed to download and build Argentina Census data: %s',
-                      e,
-                      exc_info=True)
+    urls = collect_required_urls()
+    cache = fetch_all_urls(urls, max_workers=FLAGS.max_workers)
+    build_datasets(cache, FLAGS.output_dir)
 
 
 if __name__ == '__main__':
