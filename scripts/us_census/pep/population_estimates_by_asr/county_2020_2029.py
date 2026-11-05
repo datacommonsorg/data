@@ -15,9 +15,20 @@
 This Python Script is for County Level Data 2020-2029.
 '''
 import os
+import sys
 import numpy as np
 import pandas as pd
-from common_functions import input_url, replace_agegrp
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import (
+    input_url,
+    replace_agegrp,
+)
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def county2029(url_file: str, output_folder: str):
@@ -25,7 +36,9 @@ def county2029(url_file: str, output_folder: str):
     This Python Script Loads csv datasets from 2020-2029 on a County Level,
     cleans it and create a cleaned csv.
     '''
-    df = pd.read_csv(url_file, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url_file),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_county_2020_2029.csv'),
@@ -54,19 +67,6 @@ def county2029(url_file: str, output_folder: str):
         'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE', 'HAA_FEMALE',
         'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE', 'HTOM_FEMALE'
     ])
-
-    columns = [
-        'Year', 'geo_ID', 'AGEGRP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE',
-        'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
-        'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE',
-        'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE',
-        'IAC_FEMALE', 'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE',
-        'NHWAC_MALE', 'NHWAC_FEMALE', 'NHBAC_MALE', 'NHBAC_FEMALE',
-        'NHIAC_MALE', 'NHIAC_FEMALE', 'NHAAC_MALE', 'NHAAC_FEMALE',
-        'NHNAC_MALE', 'NHNAC_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE',
-        'HBAC_FEMALE', 'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE', 'HAAC_FEMALE',
-        'HNAC_MALE', 'HNAC_FEMALE'
-    ]
 
     df['Year'] = df['YEAR']
     df = df.drop(columns=['YEAR'])
@@ -134,10 +134,6 @@ def county2029(url_file: str, output_folder: str):
             "Male_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces",
         'NAC_FEMALE':
             "Female_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces",
-        'NHWAC_MALE':
-            "Male_NotHispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",
-        'NHWAC_FEMALE':
-            "Female_NotHispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",
         'NHBAC_MALE':
             "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces",
         'NHBAC_FEMALE':

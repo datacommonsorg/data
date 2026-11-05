@@ -653,7 +653,6 @@ def main(_):
         return
 
     logging.set_verbosity(1)
-    counters = Counters()
     config = ConfigMap(config_dict=get_data_annotator_config(),
                        filename=_FLAGS.data_annotator_config)
     generate_pvmap(_FLAGS.data_annotator_input, _FLAGS.annotator_output_pv_map,

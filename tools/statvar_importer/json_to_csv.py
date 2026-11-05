@@ -146,7 +146,7 @@ def file_json_to_csv(
 def main(_):
     if not _FLAGS.input_json:
         logging.error(
-            f'Please provide a JSON file to be converted to CSV with --input_json'
+            'Please provide a JSON file to be converted to CSV with --input_json'
         )
         return 1
     file_json_to_csv(
