@@ -178,7 +178,7 @@ def get_unit(row):
     Returns:
         Templated string.
     '''
-    if not '[Units]' in row:
+    if '[Units]' not in row:
         return ''
     unit = row['[Units]'].replace('^', '')
     template = UNIT_TEMPLATE.format_map({
@@ -237,7 +237,7 @@ def process_input_file(file, writer, concepts, svs, measurement_methods, units):
         ])
         try:
             for row in reader:
-                if not int(row['GeoAreaCode']) in PLACES:
+                if int(row['GeoAreaCode']) not in PLACES:
                     continue
                 if not is_float(row['Value']) or row['Value'] == 'NaN' or row[
                         'Value'] == 'Nan':

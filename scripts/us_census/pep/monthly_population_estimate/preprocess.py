@@ -599,7 +599,6 @@ def download_files():
     This method allows to download the input files.
     """
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
@@ -612,7 +611,7 @@ def download_files():
         retry_number = 0
 
         is_file_downloaded = False
-        while is_file_downloaded == False:
+        while not is_file_downloaded:
             try:
                 df = None
                 file_name = url.split("/")[-1]

@@ -297,7 +297,7 @@ class USAirEmissionTrends:
 
             pollutant_name = ''
             pollutant_value = ''
-            if pollutant_start != None:
+            if pollutant_start is not None:
                 for i in sv_property[pollutant_start:-3]:
                     pollutant = pollutant + i + '_'
                 pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')

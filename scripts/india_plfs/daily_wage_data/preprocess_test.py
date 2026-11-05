@@ -29,7 +29,7 @@ module_dir_ = os.path.dirname(__file__)
 class TestPreprocess(unittest.TestCase):
 
     def test_create_cleaned_wage_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
+        with tempfile.TemporaryDirectory():
             xlsx_file = os.path.join(module_dir_, 'test_data/test.xlsx')
             expected_file_path = os.path.join(module_dir_,
                                               'test_data/expected.csv')
@@ -56,7 +56,7 @@ class TestPreprocess(unittest.TestCase):
             self.assertEqual(expected_file_data, result_file_data)
 
     def test_data_in_cleaned_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
+        with tempfile.TemporaryDirectory():
             xlsx_file = os.path.join(module_dir_, 'test_data/test.csv')
             result_file_path = os.path.join(module_dir_,
                                             'test_data/test_cleaned.csv')

@@ -321,7 +321,7 @@ def expand_admin_route(row):
             continue
         # search for hidden dosage forms
         if admin_route in DOSAGE_FORM_IN_ADMIN_ROUTE:
-            if not 'DosageFormEnums' in row:
+            if 'DosageFormEnums' not in row:
                 row['DosageFormEnums'] = ''
             row['DosageFormEnums'] += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][0]
             admin_enums += DOSAGE_FORM_IN_ADMIN_ROUTE[admin_route][1]

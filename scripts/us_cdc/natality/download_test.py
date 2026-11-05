@@ -35,7 +35,7 @@ class DownloadTest(unittest.TestCase):
                 mock_driver = MagicMock()
                 mock_chrome.return_value = mock_driver
 
-                driver = download.create_chrome_driver(tmp_dir, headless=True)
+                download.create_chrome_driver(tmp_dir, headless=True)
                 mock_chrome.assert_called_once()
                 call_kwargs = mock_chrome.call_args[1]
                 options = call_kwargs['options']

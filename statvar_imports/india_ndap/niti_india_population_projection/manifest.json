@@ -1,0 +1,35 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NITIIndiaPopulationProjection",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ndap.niti.gov.in/dataset/7208",
+            "provenance_description": "Population projection at India country and state level (total and urban population).",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/india_state_population_input.csv --pv_map=india_state_population_pvmap.csv --config_file=india_state_population_metadata.csv --output_path=output/india_state_population --output_counters=counters/india_state_population_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/india_state_urban_population_input.csv --pv_map=india_state_urban_population_pvmap.csv --config_file=india_state_urban_population_metadata.csv --output_path=output/india_state_urban_population --output_counters=counters/india_state_urban_population_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/india_state_population.tmcf",
+                    "cleaned_csv": "output/india_state_population.csv",
+                    "node_mcf": "output/*.mcf"
+                },
+                {
+                    "template_mcf": "output/india_state_urban_population.tmcf",
+                    "cleaned_csv": "output/india_state_urban_population.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv"
+            ],
+            "cron_schedule": "0 3 * * 1",
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}
