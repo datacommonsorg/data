@@ -64,6 +64,7 @@ import functools
 import hashlib
 import json
 import os
+import re
 import sys
 import threading
 
@@ -186,6 +187,11 @@ flags.DEFINE_string(
     'columns as variables. Example: '
     '"dcid;value=int(v)*2;label=f\'{id}-{year}\';typeOf=\'StatVarObservation\'".'
 )
+flags.DEFINE_string(
+    'shard_encoding', None,
+    'Optional character encoding for reading text-based input files.')
+
+_ZERO_NUMERIC_RE = re.compile(r'^[+-]?(?:0+(?:\.0*)?|\.0+)$')
 
 
 def _base32_encode_uint64(value: int) -> str:
@@ -273,8 +279,17 @@ def generate_node_dcid(
             continue
         if val_str.startswith('l:'):
             return ''
-        # normalize_mcf_node reads Node and dcid as strings.
-        props[prop] = str(raw_val) if prop in ('Node', 'dcid') else raw_val
+        if isinstance(raw_val, bool):
+            props[prop] = str(raw_val)
+        elif isinstance(raw_val, (int, float)) and raw_val == 0:
+            props[prop] = '0'
+        elif isinstance(raw_val, str) and _ZERO_NUMERIC_RE.match(val_str):
+            props[prop] = '0'
+        elif prop in ('Node', 'dcid'):
+            # normalize_mcf_node reads Node and dcid as strings.
+            props[prop] = str(raw_val)
+        else:
+            props[prop] = raw_val
 
     if not props:
         return ''
@@ -425,41 +440,46 @@ def _merge_counters(source: Counters, *targets: Counters):
 
 def is_seekable_file(filename: str) -> bool:
     """Returns True if the file format supports parallel chunk reading via seek()."""
-    if not isinstance(filename, str):
+    if not isinstance(filename, str) or not file_util.file_is_local(filename):
         return False
     lower = filename.lower()
-    if lower.endswith(('.gz', '.bz2', '.zst', '.zip', '.tgz', '.tar')):
+    if lower.endswith(('.gz', '.bz2', '.zst', '.xz', '.zip', '.tgz', '.tar')):
         return False
     if file_util.file_is_google_spreadsheet(filename):
         return False
-    return (is_avro_file(lower) or is_mcf_file(lower) or is_jsonl_file(lower) or
-            is_csv_file(lower))
+    return (is_avro_file(filename) or is_mcf_file(filename) or
+            is_jsonl_file(filename) or is_csv_file(filename))
 
 
 # Backward compatibility alias
 is_splittable_file = is_seekable_file
 
 
+def _get_flag_value(name: str):
+    """Returns the flag value for `name` without mutating global parsed state."""
+    flag = _FLAGS[name]
+    return flag.value if _FLAGS.is_parsed() else flag._value
+
+
 def get_default_shard_config() -> dict:
     """Returns the default config for sharding based on command-line flags."""
-    if not _FLAGS.is_parsed():
-        _FLAGS.mark_as_parsed()
     config = get_base_shard_config()
     config.update({
-        'shard_key': _FLAGS.shard_key,
-        'shard_key_prefix_length': _FLAGS.shard_key_prefix_length,
-        'shard_count': _FLAGS.shard_count,
-        'records_per_shard': _FLAGS.records_per_shard,
-        'shard_skip_duplicates': _FLAGS.shard_skip_duplicates,
-        'shard_input_records': _FLAGS.shard_input_records,
-        'shard_headers': _FLAGS.shard_headers,
-        'shard_sample_rate': _FLAGS.shard_sample_rate,
-        'shard_threads': _FLAGS.shard_threads,
-        'shard_min_chunk_size': _FLAGS.shard_min_chunk_size,
-        'shard_default_pvs': _FLAGS.shard_default_pvs,
-        'shard_generate_dcid': _FLAGS.shard_generate_dcid,
-        'shard_dcid_ignore_props': _FLAGS.shard_dcid_ignore_props,
-        'shard_output_columns': _FLAGS.shard_output_columns,
+        'shard_key': _get_flag_value('shard_key'),
+        'shard_key_prefix_length': _get_flag_value('shard_key_prefix_length'),
+        'shard_count': _get_flag_value('shard_count'),
+        'records_per_shard': _get_flag_value('records_per_shard'),
+        'shard_skip_duplicates': _get_flag_value('shard_skip_duplicates'),
+        'shard_input_records': _get_flag_value('shard_input_records'),
+        'shard_headers': _get_flag_value('shard_headers'),
+        'shard_sample_rate': _get_flag_value('shard_sample_rate'),
+        'shard_threads': _get_flag_value('shard_threads'),
+        'shard_min_chunk_size': _get_flag_value('shard_min_chunk_size'),
+        'shard_default_pvs': _get_flag_value('shard_default_pvs'),
+        'shard_generate_dcid': _get_flag_value('shard_generate_dcid'),
+        'shard_dcid_ignore_props': _get_flag_value('shard_dcid_ignore_props'),
+        'shard_output_columns': _get_flag_value('shard_output_columns'),
+        'shard_encoding': _get_flag_value('shard_encoding'),
     })
     return config
 
@@ -507,6 +527,8 @@ class FileSharder:
             show_every_n_sec=0))
         self._output_path = (output_path or
                              self._config.get('shard_output_path') or '')
+        self._encoding = (self._config.get('shard_encoding') or
+                          self._config.get('encoding') or None)
         self._lock = threading.Lock()
         self._dedup_locks = [
             threading.Lock() for _ in range(_NUM_DEDUP_BUCKETS)
@@ -535,7 +557,8 @@ class FileSharder:
         self._shard_key = self._config.get('shard_key') or None
         if self._input_files and not self._headers:
             with open_dict_file(self._input_files[0],
-                                mode='r') as preview_reader:
+                                mode='r',
+                                encoding=self._encoding) as preview_reader:
                 preview_headers = preview_reader.headers()
                 if preview_headers:
                     self._headers = list(preview_headers)
@@ -547,6 +570,11 @@ class FileSharder:
         self._input_headers = list(self._headers)
         if self._headers or self._output_pvs:
             self._headers = self._get_output_headers(self._headers)
+
+        raw_estimate = self.get_input_records_estimate()
+        max_records = int(self._config.get('shard_input_records', sys.maxsize))
+        if 0 <= max_records < sys.maxsize:
+            raw_estimate = min(raw_estimate, max_records)
 
         writer_config = {
             'shard_key':
@@ -561,9 +589,9 @@ class FileSharder:
             'shard_headers':
                 self._headers,
             # Used to derive shard_count from records_per_shard, so size the
-            # shards for the expected number of records after sampling.
+            # shards for the expected number of records after limits & sampling.
             'estimated_num_records':
-                round(self.get_input_records_estimate() * self._sample_rate),
+                round(raw_estimate * self._sample_rate),
         }
 
         self._writer = ShardedFileDictIO(
@@ -814,6 +842,7 @@ class FileSharder:
         with open_dict_file(
                 input_file,
                 mode='r',
+                encoding=self._encoding,
                 start_offset=start_offset,
                 end_offset=end_offset,
         ) as reader:
@@ -849,6 +878,7 @@ class FileSharder:
                 if default_pvs:
                     self.apply_default_pvs(record)
                     file_counters.add_counter('shard-default-pvs-applied', 1)
+                pre_filter_record = record
                 if self._output_pvs:
                     record = self.get_output_record(record, file_counters)
 
@@ -862,19 +892,26 @@ class FileSharder:
                     file_counters.add_counter('shard-duplicate-dropped', 1)
                     continue
 
+                key_record = ({
+                    **pre_filter_record,
+                    **record
+                } if self._output_pvs else record)
                 key = None
                 if sample_enabled:
-                    key = self._writer.get_key_for_record(record)
+                    key = self._writer.get_key_for_record(key_record)
                     if not self.should_sample_key(key):
                         file_counters.add_counter('shard-sampled-dropped', 1)
                         continue
+                elif self._output_pvs:
+                    key = self._writer.get_key_for_record(key_record)
 
                 if not self._headers:
                     with self._lock:
                         if not self._headers:
                             self._headers = [
                                 prop for prop in record.keys()
-                                if not str(prop).startswith('#')
+                                if prop is not None and
+                                not str(prop).startswith('#')
                             ]
                             self._writer.set_headers(self._headers)
 

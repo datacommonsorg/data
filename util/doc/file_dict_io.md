@@ -24,7 +24,7 @@ Callers interact with `FileDictIO` objects as Python dictionaries. Each row, nod
 
 Supported formats include:
 
-- **CSV and TSV** (`CsvFileDictIO`): Delimited text files with header detection and type-preserving row streaming.
+- **CSV and TSV** (`CsvFileDictIO`): Delimited text files with header detection, RFC 4180 quote handling, and row streaming.
 - **JSON and JSON Lines** (`JsonFileDictIO`): JSON object lists (`.json`) and newline-delimited JSON objects (`.jsonl`, `.ndjson`).
 - **Meta Content Framework** (`McfFileDictIO`): Node-based graph definitions in standard Data Commons `.mcf` and `.tmcf` formats.
 - **Apache Avro** (`AvroFileDictIO`): Binary Object Container Files with embedded schemas and block-level compression.
@@ -124,7 +124,7 @@ with open_dict_file('nodes.mcf', mode='r') as reader:
 
 ### Apache Avro
 
-`AvroFileDictIO` reads and writes binary Apache Avro Object Container files using `fastavro`. Field types are converted automatically to match the schema:
+`AvroFileDictIO` reads and writes binary Apache Avro Object Container files using `fastavro`. Without an explicit `schema`, fields default to nullable strings (`['string', 'null']`); when a `schema` is provided, field values are coerced automatically to match the declared types:
 
 ```python
 from file_dict_io import open_dict_file

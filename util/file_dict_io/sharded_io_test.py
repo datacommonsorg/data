@@ -463,6 +463,52 @@ class ShardedFileDictIOTest(unittest.TestCase):
             with self.assertRaises(UnsupportedOperation):
                 reader.tell()
 
+    def test_column_template_readback_and_special_parent_dirs(self):
+        # 1. Read back shards written via `{column}` template pattern.
+        col_pattern = os.path.join(self.test_dir.name,
+                                   'by_country-{country}.csv')
+        rows = [
+            {
+                'country': 'USA',
+                'v': '1'
+            },
+            {
+                'country': 'IND',
+                'v': '2'
+            },
+            {
+                'country': 'USA',
+                'v': '3'
+            },
+        ]
+        with open_dict_file(col_pattern, 'w') as writer:
+            writer.write(rows)
+        with open_dict_file(col_pattern, 'r') as reader:
+            self.assertCountEqual(rows, reader.readlines())
+        with open_dict_file(col_pattern, 'rt') as reader:
+            with self.assertRaises(UnsupportedOperation):
+                reader.write({'country': 'CAN', 'v': '4'})
+
+        # 2. Parent directories containing '@' or '{...}' do not corrupt patterns.
+        at_dir = os.path.join(self.test_dir.name, 'user@domain.com')
+        os.makedirs(at_dir, exist_ok=True)
+        sharded_at = os.path.join(at_dir, 'out@2.csv')
+        with open_dict_file(sharded_at, 'w', headers=['id'],
+                            shard_key='id') as writer:
+            writer.write([{'id': '1'}, {'id': '2'}])
+        self.assertTrue(
+            os.path.exists(os.path.join(at_dir, 'out-00000-of-00002.csv')))
+        with open_dict_file(sharded_at, 'r') as reader:
+            self.assertCountEqual([{
+                'id': '1'
+            }, {
+                'id': '2'
+            }], reader.readlines())
+
+        brace_dir = os.path.join(self.test_dir.name, '{env}')
+        os.makedirs(brace_dir, exist_ok=True)
+        self.assertFalse(is_sharded_file(os.path.join(brace_dir, 'plain.csv')))
+
 
 if __name__ == '__main__':
     unittest.main()

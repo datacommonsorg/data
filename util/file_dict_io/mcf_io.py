@@ -21,10 +21,9 @@ Example:
 """
 
 from io import UnsupportedOperation
-import os
 from absl import logging
 
-from file_dict_io.base import FileDictIO
+from file_dict_io.base import FileDictIO, get_file_extension
 import mcf_file_util
 
 
@@ -41,23 +40,24 @@ def is_mcf_file(filename: str) -> bool:
       filename: Path to check.
 
     Returns:
-      `True` if the filename contains `.mcf` or `.tmcf`; `False` otherwise.
+      `True` if the normalized format extension is `.mcf` or `.tmcf`; `False`
+      otherwise.
     """
-    basename = os.path.basename(filename)
-    if '.mcf' in basename or '.tmcf' in basename:
-        return True
-    return False
+    return get_file_extension(filename) in ('.mcf', '.tmcf')
 
 
 # Properties that hold the id of a node, in order of precedence.
 NODE_ID_PROPS = ('dcid', 'Node')
 
 
-def _is_node_line(stripped_line: str) -> bool:
-    """Returns True if a stripped line starts an MCF `Node:` declaration."""
-    if not stripped_line.startswith('Node'):
+def _is_node_line(raw_line: str) -> bool:
+    """Returns True if an unindented line starts an MCF `Node:` declaration."""
+    line = raw_line.lstrip('\ufeff')
+    if not line or line[0] in (' ', '\t'):
         return False
-    return stripped_line[4:].lstrip(' \t').startswith(':')
+    if not line.startswith('Node'):
+        return False
+    return line[4:].lstrip(' \t').startswith(':')
 
 
 def get_record_dcid(record: dict) -> str:
@@ -184,14 +184,21 @@ class McfFileDictIO(FileDictIO):
 
         Returns:
           The number of characters written for the node text.
+
+        Raises:
+          UnsupportedOperation: If the file was opened in read mode.
         """
-        node = record
-        node_value = record.get('Node')
+        if self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot write record to MCF file {self.filename()} opened in read mode {self._mode}'
+            )
+        node = {
+            k: v for k, v in record.items() if k is not None and v is not None
+        }
+        node_value = node.get('Node')
         if node_value is None or not str(node_value).strip(' "'):
-            dcid = get_record_dcid(record)
+            dcid = get_record_dcid(node)
             if dcid:
-                # Add the Node to a copy so the caller's record is unchanged.
-                node = dict(record)
                 node['Node'] = f'dcid:{dcid}'
         record_str = mcf_file_util.node_dict_to_text(node)
         ret = self.get_file_handle().write(record_str)
@@ -242,9 +249,8 @@ class McfFileDictIO(FileDictIO):
             if not line:
                 self._next_record_start = fp.tell()
                 return self._next_record_start
-            stripped = line.strip()
-            if _is_node_line(stripped):
-                self._lines = [stripped]
+            if _is_node_line(line):
+                self._lines = [line]
                 self._next_record_start = line_pos
                 return line_pos
 
@@ -263,7 +269,7 @@ class McfFileDictIO(FileDictIO):
             if self._next_record_start >= self._end_offset:
                 return None
 
-        # Skip leading empty lines and file comments before the first Node.
+        # Skip leading empty lines and file comments before the first record.
         seen_node = False
         if not self._lines:
             while True:
@@ -272,24 +278,23 @@ class McfFileDictIO(FileDictIO):
                 if not line:
                     return None
                 stripped = line.strip()
-                if stripped != '':
-                    if _is_node_line(stripped):
-                        self._lines.append(stripped)
+                if stripped != '' and not stripped.startswith('#'):
+                    if self._start_offset <= 0 or _is_node_line(line):
+                        self._lines.append(line)
                         self._next_record_start = line_pos
                         if (self._end_offset is not None and
                                 self._next_record_start >= self._end_offset):
                             self._lines = []
                             return None
                         break
-                    else:
-                        continue
 
         # Read all non-empty lines until the empty line at the end of the record.
-        lines = self._lines
-        self._lines = []
-        for line in lines:
-            if _is_node_line(line):
+        lines = []
+        for raw_line in self._lines:
+            if _is_node_line(raw_line):
                 seen_node = True
+            lines.append(raw_line.strip())
+        self._lines = []
 
         next_node_pos = None
         while True:
@@ -308,15 +313,17 @@ class McfFileDictIO(FileDictIO):
                         next_node_pos = fp.tell()
                         break
                     next_stripped = next_line.strip()
-                    if _is_node_line(next_stripped):
-                        self._lines = [next_stripped]
-                        next_node_pos = cand_pos
-                        break
+                    if next_stripped != '' and not next_stripped.startswith(
+                            '#'):
+                        if self._start_offset <= 0 or _is_node_line(next_line):
+                            self._lines = [next_line]
+                            next_node_pos = cand_pos
+                            break
                 break
-            if _is_node_line(stripped):
+            if _is_node_line(line):
                 if seen_node:
                     # Start of next record without an intervening empty line.
-                    self._lines = [stripped]
+                    self._lines = [line]
                     next_node_pos = line_pos
                     break
                 seen_node = True

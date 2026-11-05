@@ -50,8 +50,8 @@ Examples:
 """
 
 from file_dict_io.avro_io import AvroFileDictIO, is_avro_file
-from file_dict_io.base import FileDictIO
-from file_dict_io.csv_io import CsvFileDictIO, is_csv_file
+from file_dict_io.base import FileDictIO, get_file_extension
+from file_dict_io.csv_io import CsvFileDictIO, is_csv_file, is_tsv_file
 from file_dict_io.json_io import JsonFileDictIO, is_json_file, is_jsonl_file
 from file_dict_io.mcf_io import McfFileDictIO, get_record_dcid, is_mcf_file
 from file_dict_io.sharded_io import (
@@ -110,7 +110,7 @@ def open_dict_file(filename: str | list,
       end_offset: Optional ending byte offset. If specified, stops before any
         record whose start byte offset is >= `end_offset`.
       **kwargs: Additional keyword arguments (including sharding options such
-        as `shard_key`, `shard_count`, `shard_skip_duplicates`, `config`, etc.)
+        as `shard_key`, `shard_count`, `records_per_shard`, `config`, etc.)
         passed to the handler constructor.
 
     Returns:
@@ -139,7 +139,9 @@ __all__ = [
     'ShardedFileDictIO',
     'open_dict_file',
     'open_file_dict',
+    'get_file_extension',
     'is_csv_file',
+    'is_tsv_file',
     'is_avro_file',
     'is_json_file',
     'is_jsonl_file',

@@ -22,10 +22,9 @@ Example:
 
 from io import UnsupportedOperation
 import json
-import os
 from absl import logging
 
-from file_dict_io.base import FileDictIO
+from file_dict_io.base import FileDictIO, get_file_extension
 
 
 def is_jsonl_file(filename: str) -> bool:
@@ -41,12 +40,10 @@ def is_jsonl_file(filename: str) -> bool:
       filename: Path to check.
 
     Returns:
-      `True` if the filename contains `.jsonl` or `.ndjson`; `False` otherwise.
+      `True` if the normalized format extension is `.jsonl` or `.ndjson`;
+      `False` otherwise.
     """
-    basename = os.path.basename(filename)
-    if '.jsonl' in basename or '.ndjson' in basename:
-        return True
-    return False
+    return get_file_extension(filename) in ('.jsonl', '.ndjson')
 
 
 def is_json_file(filename: str) -> bool:
@@ -63,13 +60,10 @@ def is_json_file(filename: str) -> bool:
       filename: Path to check.
 
     Returns:
-      `True` if the filename contains `.json`, `.jsonl`, or `.ndjson`; `False`
-      otherwise.
+      `True` if the normalized format extension is `.json`, `.jsonl`, or
+      `.ndjson`; `False` otherwise.
     """
-    basename = os.path.basename(filename)
-    if '.json' in basename or is_jsonl_file(filename):
-        return True
-    return False
+    return get_file_extension(filename) in ('.json', '.jsonl', '.ndjson')
 
 
 @FileDictIO.register
@@ -242,10 +236,10 @@ class JsonFileDictIO(FileDictIO):
                 if not line:
                     self._next_record_start = fp.tell()
                     break
-                if '{' in line:
-                    idx = line.find('{')
+                stripped = line.lstrip(' \t,[\ufeff')
+                if stripped.startswith('{'):
                     self._next_record_start = pos
-                    self._buffer = line[idx:]
+                    self._buffer = stripped
                     break
 
         return self._next_record_start
@@ -287,43 +281,51 @@ class JsonFileDictIO(FileDictIO):
                 self._record_index += 1
                 return json.loads(line)
 
+        next_check_size = 4096
         while True:
             # Strip leading whitespace, commas, and array brackets between records.
             self._buffer = self._buffer.lstrip(' \t\r\n,[]')
-            if '}' in self._buffer:
+            if self._buffer and (self._buffer[0] != '{' or '}' in self._buffer
+                                 or len(self._buffer) >= next_check_size):
                 try:
                     record, end_idx = self._decoder.raw_decode(self._buffer)
                     self._buffer = self._buffer[end_idx:]
+                    next_check_size = 4096
                     if isinstance(record, dict):
                         self._record_index += 1
                         return record
                     continue
-                except json.JSONDecodeError:
-                    # Incomplete multi-line JSON object; read more lines until next '}'.
-                    pass
+                except json.JSONDecodeError as err:
+                    if err.pos < len(self._buffer.rstrip()):
+                        self._buffer = ''
+                        raise
+                    if len(self._buffer) >= next_check_size:
+                        next_check_size = len(self._buffer) * 2
 
-            # Read lines until a line containing '}' is found or EOF is reached.
+            # Read lines incrementally until closing '}' (for objects) or EOF.
             while True:
                 line_pos = fp.tell()
                 line = fp.readline()
                 if not line:
+                    rem = self._buffer.lstrip(' \t\r\n,[]')
                     self._buffer = ''
                     self._next_record_start = fp.tell()
+                    if rem:
+                        self._decoder.raw_decode(rem)
                     return None
                 if not self._buffer:
                     stripped = line.lstrip(' \t\r\n,[]')
                     if not stripped:
                         continue
-                    if '{' in stripped:
-                        idx = stripped.find('{')
-                        self._next_record_start = line_pos
-                        if (self._end_offset is not None and
-                                self._next_record_start >= self._end_offset):
-                            return None
-                        self._buffer = stripped[idx:]
-                        if '}' in self._buffer:
-                            break
-                        continue
+                    self._next_record_start = line_pos
+                    if (self._end_offset is not None and
+                            self._next_record_start >= self._end_offset):
+                        return None
+                    self._buffer = stripped
+                    if self._buffer[0] != '{' or '}' in self._buffer:
+                        break
+                    continue
                 self._buffer += line
-                if '}' in line:
+                if (self._buffer[0] != '{' or '}' in line or
+                        len(self._buffer) >= next_check_size):
                     break

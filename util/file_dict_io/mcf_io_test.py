@@ -109,8 +109,14 @@ class McfFileDictIOTest(unittest.TestCase):
         self.assertEqual(1, text.count('Node:'))
 
     def test_mcf_write_without_ids_has_no_node(self):
-        text = self._write_mcf_text([{'dcid': '', 'value': '1'}])
+        mcf_file_path = os.path.join(self.test_dir.name, 'nodes.mcf')
+        with open_dict_file(mcf_file_path, mode='w') as writer:
+            writer.write_record({'dcid': '', 'value': '1'})
+        with open(mcf_file_path, 'r') as f:
+            text = f.read()
         self.assertNotIn('Node:', text)
+        with open_dict_file(mcf_file_path, mode='r') as reader:
+            self.assertEqual([{'value': '1'}], reader.readlines())
 
     def test_get_record_dcid(self):
         self.assertEqual('geoId/06', get_record_dcid({'dcid': 'geoId/06'}))

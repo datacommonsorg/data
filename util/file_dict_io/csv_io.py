@@ -22,11 +22,15 @@ Example:
 
 import csv
 from io import UnsupportedOperation
-import os
 from absl import logging
 
-from file_dict_io.base import FileDictIO
+from file_dict_io.base import FileDictIO, get_file_extension
 import file_util
+
+
+def is_tsv_file(filename: str) -> bool:
+    """Returns True if `filename` refers to a tab-separated (`.tsv`) file."""
+    return get_file_extension(filename) == '.tsv'
 
 
 def is_csv_file(filename: str) -> bool:
@@ -42,11 +46,12 @@ def is_csv_file(filename: str) -> bool:
       filename: Path or URL to check.
 
     Returns:
-      `True` if the filename contains `.csv` or `.tsv` or is a Google
-      Spreadsheet URL; `False` otherwise.
+      `True` if the normalized format extension is `.csv` or `.tsv` or if
+      `filename` is a Google Spreadsheet URL; `False` otherwise.
     """
-    basename = os.path.basename(filename)
-    if '.csv' in basename or '.tsv' in basename:
+    if not isinstance(filename, str):
+        return False
+    if get_file_extension(filename) in ('.csv', '.tsv'):
         return True
     if file_util.file_is_google_spreadsheet(filename):
         return True
@@ -114,14 +119,36 @@ class CsvFileDictIO(FileDictIO):
         """Opens the CSV file with `csv.DictReader` (read) or `csv.DictWriter` (write)."""
         # Create a file handle for the file.
         super().open()
+        is_tsv = is_tsv_file(self.filename())
+        default_delim = '\t' if is_tsv else ','
         if self.is_read_mode():
             # Read the CSV file handle using DictReader and populate headers.
             fp = self.get_file_handle()
             fp.seek(0)
-            sample = fp.read(4096)
-            options = file_util.file_get_csv_reader_options(self.filename(),
-                                                            {'delimiter': ','},
-                                                            data=sample)
+            try:
+                sample = fp.read(4096)
+            except UnicodeDecodeError:
+                if self._encoding is not None:
+                    raise
+                detected = file_util.file_get_encoding(self.filename())
+                if not detected or detected.lower().replace(
+                        '_', '-') in ('ascii', 'utf-8', 'utf8'):
+                    detected = 'latin-1'
+                self.close()
+                self._encoding = detected
+                super().open()
+                fp = self.get_file_handle()
+                fp.seek(0)
+                sample = fp.read(4096)
+            delim_chars = ['\t'] if is_tsv else [',', '\t', ';', '|']
+            options = file_util.file_get_csv_reader_options(
+                self.filename(),
+                {'delimiter': default_delim},
+                data=sample,
+                delim_chars=delim_chars,
+            )
+            if is_tsv:
+                options['delimiter'] = '\t'
             # Use RFC 4180 doubled quotes: the sniffer sets doublequote=False
             # if its sample has no "" in a field. The sniffed quotechar is
             # kept, so files quoted with ' still read correctly.
@@ -137,9 +164,15 @@ class CsvFileDictIO(FileDictIO):
                     file_headers = next(header_reader)
             except StopIteration:
                 file_headers = []
-            self._header_end_pos = fp.tell()
+            first_row_end = fp.tell()
             if not self._headers:
+                self._header_end_pos = first_row_end
                 self.set_headers(file_headers)
+            elif file_headers == self._headers:
+                self._header_end_pos = first_row_end
+            else:
+                self._header_end_pos = 0
+                fp.seek(0)
             if self._start_offset > 0:
                 self.seek(self._start_offset)
             else:
@@ -159,6 +192,7 @@ class CsvFileDictIO(FileDictIO):
                 self._csv_writer = csv.DictWriter(
                     self.get_file_handle(),
                     fieldnames=self.headers(),
+                    delimiter=default_delim,
                     extrasaction='ignore',
                     quotechar='"',
                     doublequote=True,
@@ -192,16 +226,18 @@ class CsvFileDictIO(FileDictIO):
           The return value of `csv.DictWriter.writerow`.
 
         Raises:
-          UnsupportedOperation: If the CSV writer cannot be initialized.
+          UnsupportedOperation: If opened in read mode or if the CSV writer
+            cannot be initialized (e.g. empty record with no headers).
         """
+        if self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot write record to CSV file {self.filename()} opened in read mode {self._mode}'
+            )
         if not self._csv_writer:
             # This is the first record; initialize the CSV writer from its keys.
             self.set_headers_from_record(record)
-            self.open()
-            if not self._csv_writer:
-                logging.fatal(
-                    f'Unable to open CSV file {self.filename()} for write without headers'
-                )
+            if self.headers():
+                self.open()
         if self._csv_writer:
             self._record_index += 1
             return self._csv_writer.writerow(record)

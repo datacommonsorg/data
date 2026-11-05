@@ -103,13 +103,47 @@ def _hash_key_to_shard(key: str, shard_count: int) -> int:
     return str_to_int_hash(key) % shard_count
 
 
+_ZERO_NUMERIC_RE = re.compile(r'^[+-]?(?:0+(?:\.0*)?|\.0+)$')
+
+
+def _canonicalize_prop_value(val):
+    """Returns a canonical representation of a single record property value."""
+    if isinstance(val, bool) or val is None:
+        return val
+    if isinstance(val, dict):
+        return {
+            str(k): _canonicalize_prop_value(v)
+            for k, v in sorted(val.items(), key=lambda item: str(item[0]))
+        }
+    if isinstance(val, (int, float)):
+        if val == 0:
+            return '0'
+        return str(mcf_file_util.normalize_value(val))
+    if isinstance(val, str):
+        stripped = val.strip()
+        if not stripped:
+            return ''
+        if _ZERO_NUMERIC_RE.match(stripped):
+            return '0'
+        if '$' in stripped or '%' in stripped or (',' not in stripped and
+                                                  stripped.count('.') > 1):
+            return stripped
+        return str(mcf_file_util.normalize_value(val))
+    if isinstance(val, list):
+        if any(isinstance(x, (dict, list, bool)) or x is None for x in val):
+            return [_canonicalize_prop_value(x) for x in val]
+        return str(mcf_file_util.normalize_value(val))
+    return str(val)
+
+
 def record_to_canonical_str(record: dict) -> str:
     """Returns a deterministic string for `record`, used as its fingerprint.
 
-    The record is normalized with `mcf_file_util.normalize_mcf_node`, so
-    records that differ only in property order or value-list order give the
-    same string. If normalization fails, the record's JSON with sorted keys
-    is used.
+    Normalizes property values with `mcf_file_util.normalize_value` so records
+    that differ only in property order, value-list order, or equivalent
+    `dcid`/`Node` notation produce the same string, while preserving `0`,
+    `False`, empty strings, blank `dcid` with `Node`, nested dicts, and extra
+    CSV columns (`None` key) without collisions.
 
     Args:
       record: Dictionary record.
@@ -117,11 +151,45 @@ def record_to_canonical_str(record: dict) -> str:
     Returns:
       Canonical string for `record`.
     """
+    if not record:
+        return '[]'
     try:
-        normalized = mcf_file_util.normalize_mcf_node(record)
-        return mcf_file_util.node_dict_to_text(normalized)
+        pairs = []
+        dcid = get_record_dcid(record)
+        if dcid:
+            pairs.append(['Node', mcf_file_util.add_namespace(dcid)])
+        extra_items = []
+        str_props = []
+        for prop, val in record.items():
+            if prop is None:
+                extra_items.append(_canonicalize_prop_value(val))
+                continue
+            prop_str = str(prop)
+            if prop_str.startswith('#'):
+                continue
+            if prop_str in NODE_ID_PROPS:
+                if not dcid and val is not None:
+                    raw = str(val).strip()
+                    if raw:
+                        str_props.append((prop_str, raw))
+                continue
+            if val is None:
+                continue
+            str_props.append((prop_str, _canonicalize_prop_value(val)))
+        for prop_str, norm_val in sorted(str_props, key=lambda item: item[0]):
+            pairs.append([prop_str, norm_val])
+        if extra_items:
+            pairs.append(['', extra_items])
+        return json.dumps(pairs,
+                          sort_keys=True,
+                          ensure_ascii=False,
+                          separators=(',', ':'),
+                          default=str)
     except Exception:
-        return json.dumps(record, sort_keys=True, default=str)
+        safe_record = {
+            ('' if k is None else str(k)): v for k, v in record.items()
+        }
+        return json.dumps(safe_record, sort_keys=True, default=str)
 
 
 def is_sharded_file(filename: str | list) -> bool:
@@ -153,7 +221,7 @@ def is_sharded_file(filename: str | list) -> bool:
     basename = os.path.basename(filename)
     if '@' in basename or '*' in filename or ',' in filename:
         return True
-    if '{' in filename and '}' in filename:
+    if '{' in basename and '}' in basename:
         return True
     return False
 
@@ -279,7 +347,7 @@ class ShardedFileDictIO(FileDictIO):
             self._config.get('estimated_num_records') or 0)
         self._shards_prepared: bool = False
 
-        if self._start_offset > 0 or self._end_offset is not None:
+        if self._start_offset != 0 or self._end_offset is not None:
             raise UnsupportedOperation(
                 f'start_offset and end_offset are not supported for sharded file pattern: {self.filename()}. '
                 'Parallelize across shards by partitioning the list of shard files '
@@ -341,8 +409,8 @@ class ShardedFileDictIO(FileDictIO):
                     self._counters.add_counter('shard-input-records', 1)
                     if not self._headers:
                         self._headers = [
-                            prop for prop in record.keys()
-                            if not str(prop).startswith('#')
+                            prop for prop in record.keys() if
+                            prop is not None and not str(prop).startswith('#')
                         ]
                     self._record_index += 1
                     return record
@@ -391,16 +459,17 @@ class ShardedFileDictIO(FileDictIO):
         Raises:
           UnsupportedOperation: If opened in read mode.
         """
-        if self._mode == 'r':
+        if self.is_read_mode():
             raise UnsupportedOperation(
-                f'Cannot write record to sharded file {self.filename()} opened in read mode'
+                f'Cannot write record to sharded file {self.filename()} opened in read mode {self._mode}'
             )
 
         if not self._shards_prepared:
             with self._init_lock:
                 if not self._headers:
                     non_comment_keys = [
-                        k for k in record.keys() if not str(k).startswith('#')
+                        k for k in record.keys()
+                        if k is not None and not str(k).startswith('#')
                     ]
                     if non_comment_keys and not (is_mcf_file(self._filename) or
                                                  is_json_file(self._filename)):
@@ -433,8 +502,8 @@ class ShardedFileDictIO(FileDictIO):
         """Returns the total number of records read or written across all shards."""
         if not self.is_read_mode() and (self._shard_record_counts or
                                         self._unflushed_shard_counts):
-            return sum(self._shard_record_counts.values()) + sum(
-                self._unflushed_shard_counts.values())
+            return sum(list(self._shard_record_counts.values())) + sum(
+                list(self._unflushed_shard_counts.values()))
         return self._record_index
 
     def counters(self) -> Counters:
@@ -485,14 +554,17 @@ class ShardedFileDictIO(FileDictIO):
             self._parse_output_pattern()
             output_pattern = self._output_pattern
 
-        if '{' not in output_pattern:
-            base, suffix = os.path.splitext(output_pattern)
+        dirname = os.path.dirname(output_pattern)
+        basename = os.path.basename(output_pattern)
+        if '{' not in basename:
+            base, suffix = os.path.splitext(basename)
             if not suffix:
-                suffix = '.csv' if is_csv_file(output_pattern) else '.mcf'
+                suffix = '.csv' if is_csv_file(basename) else '.mcf'
             if not base:
                 base = 'shard'
-            output_pattern = (
-                f'{base}-{{index:05d}}-of-{{shard_count:05d}}{suffix}')
+            basename = f'{base}-{{index:05d}}-of-{{shard_count:05d}}{suffix}'
+            output_pattern = os.path.join(dirname,
+                                          basename) if dirname else basename
             self._output_pattern = output_pattern
 
         effective_shard_count = self._shard_count
@@ -500,7 +572,7 @@ class ShardedFileDictIO(FileDictIO):
             effective_shard_count = self._estimate_shard_count()
 
         formatted_index = index
-        pattern_to_format = output_pattern
+        pattern_to_format = basename
         if not isinstance(index, int):
             if str(index).isdigit():
                 formatted_index = int(index)
@@ -522,7 +594,9 @@ class ShardedFileDictIO(FileDictIO):
             if placeholder not in format_vars:
                 format_vars[placeholder] = str(index)
 
-        return pattern_to_format.format(**format_vars)
+        formatted_base = pattern_to_format.format(**format_vars)
+        return os.path.join(dirname,
+                            formatted_base) if dirname else formatted_base
 
     def get_shard_file_handle(self, index: int | str) -> FileDictIO:
         """Returns (and lazily opens) the `FileDictIO` writer for shard `index`.
@@ -563,9 +637,10 @@ class ShardedFileDictIO(FileDictIO):
           The string key used to hash and route `record` to a shard.
         """
         if self._shard_key is None:
-            self._infer_default_shard_key(
-                self._headers or
-                [k for k in record.keys() if not str(k).startswith('#')])
+            self._infer_default_shard_key(self._headers or [
+                k for k in record.keys()
+                if k is not None and not str(k).startswith('#')
+            ])
 
         key = None
         if self._shard_key:
@@ -679,8 +754,12 @@ class ShardedFileDictIO(FileDictIO):
 
         matched_files = []
         for pattern in patterns:
-            if '@' in pattern:
-                prefix, shard_spec = pattern.split('@', 1)
+            dirname = os.path.dirname(pattern)
+            basename = os.path.basename(pattern)
+            if '@' in basename:
+                prefix_base, shard_spec = basename.rsplit('@', 1)
+                prefix = (os.path.join(dirname, prefix_base)
+                          if dirname else prefix_base)
                 spec_ext = ''
                 if '.' in shard_spec:
                     shard_count_str, ext_part = shard_spec.split('.', 1)
@@ -693,12 +772,13 @@ class ShardedFileDictIO(FileDictIO):
                 else:
                     count_pat = '[0-9]*'
 
-                base, prefix_ext = os.path.splitext(prefix)
+                base, prefix_ext = os.path.splitext(prefix_base)
+                base_path = os.path.join(dirname, base) if dirname else base
                 candidate_globs = []
                 if prefix_ext:
                     candidate_globs.append(f'{prefix}-[0-9]*-of-{count_pat}')
                     candidate_globs.append(
-                        f'{base}-[0-9]*-of-{count_pat}{prefix_ext}')
+                        f'{base_path}-[0-9]*-of-{count_pat}{prefix_ext}')
                 elif spec_ext:
                     candidate_globs.append(
                         f'{prefix}-[0-9]*-of-{count_pat}{spec_ext}')
@@ -706,6 +786,12 @@ class ShardedFileDictIO(FileDictIO):
                         f'{prefix}{spec_ext}-[0-9]*-of-{count_pat}')
                 else:
                     candidate_globs.append(f'{prefix}-[0-9]*-of-{count_pat}')
+            elif '{' in basename and '}' in basename:
+                glob_base = re.sub(r'\{[a-zA-Z_][a-zA-Z0-9_]*(?::[^}]*)?\}',
+                                   '*', basename)
+                glob_pat = os.path.join(dirname,
+                                        glob_base) if dirname else glob_base
+                candidate_globs = [pattern, glob_pat]
             else:
                 candidate_globs = [pattern]
 
@@ -731,7 +817,22 @@ class ShardedFileDictIO(FileDictIO):
             return 0
         first_file = files[0]
         if is_avro_file(first_file):
-            return 0
+            try:
+                import fastavro
+
+                filesize = file_util.file_get_size(files)
+                if filesize <= 0:
+                    return 0
+                with file_util.FileIO(first_file, mode='rb',
+                                      use_tempfile=False) as fp:
+                    block = next(iter(fastavro.block_reader(fp)), None)
+                    if block is None or block.num_records <= 0:
+                        return 0
+                    bytes_read = max(fp.tell(), 1)
+                    return max(block.num_records,
+                               int(filesize * (block.num_records / bytes_read)))
+            except Exception:
+                return 0
         try:
             if is_csv_file(first_file) or is_jsonl_file(first_file):
                 return file_util.file_estimate_num_rows(files)
@@ -793,10 +894,12 @@ class ShardedFileDictIO(FileDictIO):
         resolved later in `_prepare_output_shards()`.
         """
         output_pattern = self._filename
+        dirname = os.path.dirname(output_pattern)
+        basename = os.path.basename(output_pattern)
         shard_count = self._shard_count
 
-        if '@' in output_pattern:
-            prefix, shard_spec = output_pattern.split('@', 1)
+        if '@' in basename:
+            prefix, shard_spec = basename.rsplit('@', 1)
             suffix = ''
             if '.' in shard_spec:
                 shard_count_str, suffix_part = shard_spec.split('.', 1)
@@ -806,21 +909,21 @@ class ShardedFileDictIO(FileDictIO):
             if shard_count_str.isdigit():
                 shard_count = int(shard_count_str)
                 self._shard_count = shard_count
-            output_pattern = (
-                f'{prefix}-{{index:05d}}-of-{{shard_count:05d}}{suffix}')
+            basename = f'{prefix}-{{index:05d}}-of-{{shard_count:05d}}{suffix}'
 
-        if '*' in output_pattern:
-            prefix, suffix = output_pattern.split('*', 1)
-            output_pattern = (
-                f'{prefix}{{index:05d}}-of-{{shard_count:05d}}{suffix}')
+        if '*' in basename:
+            prefix, suffix = basename.split('*', 1)
+            basename = f'{prefix}{{index:05d}}-of-{{shard_count:05d}}{suffix}'
 
-        self._output_pattern = output_pattern
+        self._output_pattern = (os.path.join(dirname, basename)
+                                if dirname else basename)
         self._detect_column_value_pattern()
 
     def _detect_column_value_pattern(self):
-        """Detects `{column}` placeholders (such as `{year}`) in `_output_pattern`."""
+        """Detects `{column}` placeholders (such as `{year}`) in `_output_pattern`'s basename."""
+        basename = os.path.basename(self._output_pattern)
         placeholders = re.findall(r'\{([a-zA-Z_][a-zA-Z0-9_]*)(?::[^}]*)?\}',
-                                  self._output_pattern)
+                                  basename)
         custom_cols = [
             p for p in placeholders if p not in ('index', 'shard_count')
         ]
@@ -877,8 +980,8 @@ class ShardedFileDictIO(FileDictIO):
 
     def _merge_shard_counters(self):
         """Locks each shard, merges its `Counters` into `self._counters`, and resets the per-shard counter."""
-        all_indices = set(self._shard_counters.keys()) | set(
-            self._unflushed_shard_counts.keys())
+        all_indices = set(list(self._shard_counters.keys())) | set(
+            list(self._unflushed_shard_counts.keys()))
         for index in list(all_indices):
             with self._get_shard_lock(index):
                 shard_counter = self.get_shard_counters(index)

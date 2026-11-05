@@ -25,8 +25,6 @@ for _path in (_SCRIPT_DIR, _UTIL_DIR):
     if _path not in sys.path:
         sys.path.insert(0, _path)
 
-from avro_io_test import AvroFileDictIOTest
-from csv_io_test import CsvFileDictIOTest
 from file_dict_io import (
     AvroFileDictIO,
     CsvFileDictIO,
@@ -37,10 +35,6 @@ from file_dict_io import (
     open_dict_file,
     open_file_dict,
 )
-from json_io_test import JsonFileDictIOTest
-from mcf_io_test import McfFileDictIOTest
-from sharded_io_test import ShardedFileDictIOTest
-from file_sharder_test import TestFileSharder
 
 
 class FileDictIORegistryAndFactoryTest(unittest.TestCase):
@@ -458,6 +452,34 @@ class FileDictIORegistryAndFactoryTest(unittest.TestCase):
         self.assertGreater(non_empty_chunks, 2)
         self.assertEqual(len(expected_records), len(combined))
         self.assertEqual(expected_records, combined)
+
+    def test_case_insensitive_and_multi_extension_dispatch(self):
+        self.assertIs(FileDictIO.get_handler('CENSUS.CSV'), CsvFileDictIO)
+        self.assertIs(FileDictIO.get_handler('DATA.TSV'), CsvFileDictIO)
+        self.assertIs(FileDictIO.get_handler('DATA.AVRO'), AvroFileDictIO)
+        self.assertIs(FileDictIO.get_handler('DATA.JSON'), JsonFileDictIO)
+        self.assertIs(FileDictIO.get_handler('DATA.JSONL'), JsonFileDictIO)
+        self.assertIs(FileDictIO.get_handler('DATA.MCF'), McfFileDictIO)
+        self.assertIs(FileDictIO.get_handler('table.csv.mcf'), McfFileDictIO)
+        self.assertIs(FileDictIO.get_handler('table.mcf.csv'), CsvFileDictIO)
+        self.assertIs(FileDictIO.get_handler('table.csv.json'), JsonFileDictIO)
+        self.assertIs(FileDictIO.get_handler('table.avro.csv'), CsvFileDictIO)
+
+    def test_write_in_read_mode_and_immediate_close(self):
+        for ext in ('.csv', '.avro', '.json', '.jsonl', '.mcf'):
+            path = os.path.join(self.test_dir.name, f'readonly{ext}')
+            writer = open_dict_file(path,
+                                    'w',
+                                    headers=['id'] if ext != '.mcf' else None)
+            held_fp = writer._fp
+            writer.write({'Node': 'dcid:n1'} if ext == '.mcf' else {'id': '1'})
+            writer.close()
+            self.assertTrue(os.path.exists(path))
+            del held_fp
+
+            with open_dict_file(path, 'r') as reader:
+                with self.assertRaises(UnsupportedOperation):
+                    reader.write({'id': '2'})
 
 
 if __name__ == '__main__':

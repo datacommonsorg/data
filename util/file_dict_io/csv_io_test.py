@@ -148,6 +148,78 @@ class CsvFileDictIOTest(unittest.TestCase):
         self.assertEqual(20, len(rows))
         self.assertEqual({'id': 'id0', 'value': 'a,0', 'note': 'x'}, rows[0])
 
+    def test_tsv_write_and_read_with_commas_and_colons(self):
+        tsv_path = os.path.join(self.test_dir.name, 'places.tsv')
+        rows = [
+            {
+                'dcid': 'dcid:geoId/06',
+                'name': 'California, USA',
+                'typeOf': 'dcs:State'
+            },
+            {
+                'dcid': 'dcid:geoId/48',
+                'name': 'Texas, USA',
+                'typeOf': 'dcs:State'
+            },
+        ]
+        with open_dict_file(tsv_path, 'w') as writer:
+            writer.write(rows)
+
+        with open(tsv_path, 'r') as f:
+            first_line = f.readline()
+        self.assertIn('\t', first_line)
+
+        with open_dict_file(tsv_path, 'r') as reader:
+            self.assertEqual(['dcid', 'name', 'typeOf'], reader.headers())
+            self.assertEqual(rows, reader.readlines())
+
+    def test_csv_read_latin1_fallback(self):
+        csv_path = os.path.join(self.test_dir.name, 'latin1.csv')
+        with open(csv_path, 'w', encoding='latin-1') as f:
+            f.write('id,city\n1,São Paulo\n2,München\n')
+
+        with open_dict_file(csv_path, 'r') as reader:
+            self.assertEqual([
+                {
+                    'id': '1',
+                    'city': 'São Paulo'
+                },
+                {
+                    'id': '2',
+                    'city': 'München'
+                },
+            ], reader.readlines())
+
+    def test_csv_explicit_headers_and_single_col_colons(self):
+        headerless_path = os.path.join(self.test_dir.name, 'headerless.csv')
+        with open(headerless_path, 'w') as f:
+            f.write('1,Alice\n2,Bob\n')
+        with open_dict_file(headerless_path, 'r', headers=['id',
+                                                           'name']) as reader:
+            self.assertEqual([
+                {
+                    'id': '1',
+                    'name': 'Alice'
+                },
+                {
+                    'id': '2',
+                    'name': 'Bob'
+                },
+            ], reader.readlines())
+
+        single_col_path = os.path.join(self.test_dir.name, 'single_col.csv')
+        with open(single_col_path, 'w') as f:
+            f.write('node\ndcid:geoId/06\ndcid:geoId/48\n')
+        with open_dict_file(single_col_path, 'r') as reader:
+            self.assertEqual([
+                {
+                    'node': 'dcid:geoId/06'
+                },
+                {
+                    'node': 'dcid:geoId/48'
+                },
+            ], reader.readlines())
+
 
 if __name__ == '__main__':
     unittest.main()

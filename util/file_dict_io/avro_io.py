@@ -25,7 +25,7 @@ import os
 from absl import logging
 import fastavro
 
-from file_dict_io.base import FileDictIO
+from file_dict_io.base import FileDictIO, get_file_extension
 
 
 def is_avro_file(filename: str) -> bool:
@@ -41,12 +41,9 @@ def is_avro_file(filename: str) -> bool:
       filename: Path to check.
 
     Returns:
-      `True` if the filename contains `.avro`; `False` otherwise.
+      `True` if the normalized format extension is `.avro`; `False` otherwise.
     """
-    basename = os.path.basename(filename)
-    if '.avro' in basename:
-        return True
-    return False
+    return get_file_extension(filename) == '.avro'
 
 
 @FileDictIO.register
@@ -123,6 +120,17 @@ class AvroFileDictIO(FileDictIO):
         if self.is_read_mode():
             # Read the file handle using fastavro.reader and extract headers from schema.
             fp = self.get_file_handle()
+            fp.seek(0, os.SEEK_END)
+            if fp.tell() == 0:
+                fp.seek(0)
+                self._fastavro_reader = None
+                self._block_reader = None
+                self._sync_marker = None
+                self._header_end_pos = 0
+                self._next_record_start = 0
+                self._current_block_records = iter([])
+                return
+            fp.seek(0)
             self._fastavro_reader = fastavro.reader(fp)
             self._avro_schema = self._fastavro_reader.writer_schema
             self._sync_marker = self._fastavro_reader._header['sync']
@@ -181,19 +189,23 @@ class AvroFileDictIO(FileDictIO):
           The result of `fastavro.write.Writer.write`.
 
         Raises:
-          UnsupportedOperation: If the Avro writer cannot be initialized.
+          UnsupportedOperation: If opened in read mode or if the Avro writer
+            cannot be initialized.
         """
+        if self.is_read_mode():
+            raise UnsupportedOperation(
+                f'Cannot write record to AVRO file {self.filename()} opened in read mode {self._mode}'
+            )
+        clean_record = {k: v for k, v in record.items() if k is not None}
         if not self._fastavro_writer:
             # This is the first record; initialize schema and writer from its keys.
-            self.set_headers_from_record(record)
-            self.open()
-            if not self._fastavro_writer:
-                logging.fatal(
-                    f'Unable to open AVRO file {self.filename()} for write without headers'
-                )
+            self.set_headers_from_record(clean_record)
+            if self.headers():
+                self.open()
         if self._fastavro_writer:
             self._record_index += 1
-            return self._fastavro_writer.write(self.convert_record(record))
+            return self._fastavro_writer.write(
+                self.convert_record(clean_record))
         raise UnsupportedOperation(
             f'Cannot write record to AVRO file {self.filename()} in mode {self._mode} with headers {self.headers()}, schema {self._avro_schema}'
         )
@@ -208,18 +220,18 @@ class AvroFileDictIO(FileDictIO):
           A new dictionary with field values converted to their target schema
           types.
         """
-        output_record = dict(record)
+        output_record = {k: v for k, v in record.items() if k is not None}
         for field in self._avro_schema.get('fields', []):
             name = field.get('name')
             if not name:
                 continue
             value_type = field.get('type', 'string')
-            value = record.get(name)
+            value = output_record.get(name)
             if value is not None:
                 output_record[name] = self._get_value_type(value_type, value)
         return output_record
 
-    def _get_value_type(self, value_type: str | list, value):
+    def _get_value_type(self, value_type: str | list | dict, value):
         """Coerces `value` to the Python type corresponding to the Avro `value_type`.
 
         Args:
@@ -233,6 +245,8 @@ class AvroFileDictIO(FileDictIO):
         if isinstance(value_type, list):
             non_null_types = [t for t in value_type if t != 'null']
             value_type = non_null_types[0] if non_null_types else 'string'
+        if isinstance(value_type, dict):
+            value_type = value_type.get('type', value_type)
         match value_type:
             case 'string':
                 return str(value)
@@ -241,8 +255,22 @@ class AvroFileDictIO(FileDictIO):
             case 'float' | 'double':
                 return float(value)
             case 'boolean':
+                if isinstance(value, bool):
+                    return value
+                if isinstance(value, str):
+                    lowered = value.strip().lower()
+                    if lowered in ('false', '0', 'no', 'f', ''):
+                        return False
+                    if lowered in ('true', '1', 'yes', 't'):
+                        return True
+                    raise ValueError(
+                        f'Cannot coerce string {value!r} to Avro boolean')
                 return bool(value)
             case 'bytes':
+                if isinstance(value, bytes):
+                    return value
+                if isinstance(value, str):
+                    return value.encode('utf-8')
                 return bytes(value)
         return value
 
@@ -275,7 +303,9 @@ class AvroFileDictIO(FileDictIO):
             raise UnsupportedOperation(
                 f'Cannot seek in write mode for AVRO file {self.filename()}')
         fp = self.get_file_handle()
-        if fp is None:
+        if fp is None or self._sync_marker is None:
+            self._start_offset = offset
+            self._next_record_start = 0
             return 0
         self._start_offset = offset
         sync = self._sync_marker

@@ -70,10 +70,10 @@ shard_file(
     },
 )
 
-# Using FileSharder directly
+# Using FileSharder directly with dynamic shard sizing
 sharder = FileSharder(
     input_files='input.csv',
-    output_path='output@5.csv',
+    output_path='output@.csv',
     config={
         'shard_key': 'geoId',
         'records_per_shard': 50000,
@@ -104,6 +104,7 @@ The table below lists all configuration options. Each option can be passed as a 
 | `shard_output_columns` | `--shard_output_columns` | `str` | `None` | Output columns and transformation expressions separated by semicolons (e.g. `'geoId;val=int(raw_val)*2'`). |
 | `shard_generate_dcid` | `--shard_generate_dcid` | `bool` | `False` | When True, generates deterministic base32 DCIDs for graph nodes lacking identifiers. |
 | `shard_dcid_ignore_props`| `--shard_dcid_ignore_props` | `list` | `[]` | Extra property names to exclude when building node DCID keys. |
+| `shard_encoding` | `--shard_encoding` | `str` | `None` | Optional character encoding when reading text-based input files. |
 
 ## Progress counters
 
@@ -212,4 +213,4 @@ Completion: Counter `shard-sampled-dropped` reflects excluded keys. Kept records
 - **Compressed files process with a single worker per file.** Compressed formats (`.gz`, `.bz2`, `.zst`, `.zip`, `.tgz`, `.tar`) do not support random byte seeking. The sharder allocates one worker thread per compressed file.
 - **JSON Lists process as single files.** Standard `.json` containing a single root array or object does not support line-based byte seeking. Convert inputs to JSON Lines (`.jsonl`, `.ndjson`) to enable multi-threaded byte-range chunking.
 - **Shard output order is hash-partitioned.** Records route to shards by key hash. Within each output shard, records appear in arrival order rather than sorted key order.
-- **Output expressions evaluate via AST.** Expressions in `shard_output_columns` evaluate through Python's `eval_functions` AST parser. Supply single-statement Python expressions using input column names and standard math or string utilities.
+- **Output expressions use a restricted `eval()` environment.** Expressions in `shard_output_columns` run through `eval_functions.evaluate_statement` with input columns as variables, standard Python builtins (`int`, `float`, `round`, `str`, `len`), and `eval_functions` helpers (`format_date`, `str_to_camel_case`, `datetime_strptime`, `relativedelta`, `re_sub`).

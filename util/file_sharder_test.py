@@ -2,11 +2,17 @@ import unittest
 from unittest import mock
 import json
 import os
+import sys
 import tempfile
 import csv
 import re
 import dateutil.parser
 from absl import logging
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPT_DIR)
+
 from file_sharder import FileSharder, shard_file
 from file_dict_io import McfFileDictIO, open_file_dict
 import counters as counters_lib
@@ -882,6 +888,7 @@ class TestFileSharder(unittest.TestCase):
         self.assertFalse(file_sharder.is_seekable_file('data.tar.gz'))
         self.assertFalse(file_sharder.is_seekable_file('data.zip'))
         self.assertFalse(file_sharder.is_seekable_file('data.json'))
+        self.assertFalse(file_sharder.is_seekable_file('gs://bucket/data.csv'))
         self.assertFalse(file_sharder.is_seekable_file(None))
 
         # Backward compatibility alias
@@ -1017,6 +1024,126 @@ class TestFileSharder(unittest.TestCase):
         tasks_single = sharder._generate_input_tasks(max_threads=1)
         self.assertEqual([(csv_file, 0, None), (json_file, 0, None)],
                          tasks_single)
+
+    def test_dedup_preserves_zero_false_blank_dcid_and_ragged_csv(self):
+        jsonl_path = os.path.join(self.test_dir.name, 'zero_bool.jsonl')
+        with open_file_dict(jsonl_path, 'w') as writer:
+            writer.write([
+                {
+                    'id': 'p1',
+                    'value': 0
+                },
+                {
+                    'id': 'p1',
+                    'value': ''
+                },
+                {
+                    'id': 'p1',
+                    'value': False
+                },
+                {
+                    'id': 'p1'
+                },
+                {
+                    'id': 'p1',
+                    'value': 0
+                },
+            ])
+        out_jsonl = os.path.join(self.test_dir.name, 'zb_out@2.jsonl')
+        shard_file(jsonl_path, out_jsonl, {
+            'shard_key': 'id',
+            'shard_skip_duplicates': True
+        })
+        with open_file_dict(out_jsonl, 'r') as reader:
+            self.assertEqual(4, len(reader.readlines()))
+
+        # Blank dcid column must not collide distinct Node rows.
+        self._create_csv_file([
+            {
+                'Node': 'dcid:geoId/06',
+                'dcid': '',
+                'val': '1'
+            },
+            {
+                'Node': 'dcid:geoId/36',
+                'dcid': '',
+                'val': '1'
+            },
+            {
+                'Node': 'dcid:geoId/06',
+                'dcid': '',
+                'val': '1'
+            },
+        ])
+        out_nodes = os.path.join(self.test_dir.name, 'nodes_dedup@2.csv')
+        shard_file(self.input_file_path, out_nodes,
+                   {'shard_skip_duplicates': True})
+        self.assertEqual(2, len(sum(self._read_shards('nodes_dedup', 2), [])))
+
+        # Ragged CSV rows with extra unheadered columns do not raise TypeError.
+        ragged_csv = os.path.join(self.test_dir.name, 'ragged.csv')
+        with open(ragged_csv, 'w') as f:
+            f.write('id,val\n1\n2,b,extra_col\n3,c\n')
+        out_ragged = os.path.join(self.test_dir.name, 'ragged_out@2.csv')
+        shard_file(ragged_csv, out_ragged, {
+            'shard_generate_dcid': True,
+            'shard_skip_duplicates': True,
+        })
+        self.assertEqual(3, len(sum(self._read_shards('ragged_out', 2), [])))
+
+    def test_generate_node_dcid_preserves_zero_values(self):
+        base = {
+            'observationAbout': 'geoId/06',
+            'variableMeasured': 'Count_Crime',
+            'observationDate': '2020',
+        }
+        missing_dcid = file_sharder.generate_node_dcid(dict(base))
+        int_zero = file_sharder.generate_node_dcid({**base, 'value': 0})
+        float_zero = file_sharder.generate_node_dcid({**base, 'value': 0.0})
+        str_zero = file_sharder.generate_node_dcid({**base, 'value': '0'})
+        str_zero_dec = file_sharder.generate_node_dcid({**base, 'value': '0.0'})
+        self.assertNotEqual(missing_dcid, int_zero)
+        self.assertEqual(int_zero, float_zero)
+        self.assertEqual(int_zero, str_zero)
+        self.assertEqual(int_zero, str_zero_dec)
+
+    def test_shard_input_records_caps_dynamic_shard_count(self):
+        self._create_keyed_csv_file(num_keys=2000, rows_per_key=1)
+        output_path = os.path.join(self.test_dir.name, 'capped*.csv')
+        sharder = FileSharder(
+            self.input_file_path,
+            output_path,
+            {
+                'shard_input_records': 20,
+                'records_per_shard': 10,
+            },
+        )
+        sharder.process()
+        self.assertLessEqual(len(sharder._writer.files()), 4)
+        with open_file_dict(output_path, 'r') as reader:
+            self.assertEqual(20, len(reader.readlines()))
+
+    def test_shard_key_preserved_when_omitted_from_output_columns(self):
+        rows = [{
+            'country': 'USA',
+            'id': f'id_{i}',
+            'val': str(i)
+        } for i in range(20)]
+        self._create_csv_file(rows)
+        output_path = os.path.join(self.test_dir.name, 'country_routed@4.csv')
+        shard_file(
+            self.input_file_path,
+            output_path,
+            {
+                'shard_key': 'country',
+                'shard_output_columns': 'id;val',
+            },
+        )
+        shards = self._read_shards('country_routed', 4)
+        non_empty_shards = [s for s in shards if s]
+        self.assertEqual(1, len(non_empty_shards))
+        self.assertEqual(20, len(non_empty_shards[0]))
+        self.assertEqual(['id', 'val'], list(non_empty_shards[0][0].keys()))
 
 
 if __name__ == '__main__':

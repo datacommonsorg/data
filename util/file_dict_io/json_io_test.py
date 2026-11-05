@@ -143,6 +143,35 @@ class JsonFileDictIOTest(unittest.TestCase):
                 self.assertEqual(rows, [row for row in reader])
                 self.assertEqual(2, reader.line_num)
 
+    def test_malformed_and_truncated_json_raises_decode_error(self):
+        truncated_path = os.path.join(self.test_dir.name, 'truncated.json')
+        with open(truncated_path, 'w') as fp:
+            fp.write('[\n  {"id": "1"},\n  {"id": "2", "val": \n')
+        with open_dict_file(truncated_path, 'r') as reader:
+            self.assertEqual({'id': '1'}, reader.read())
+            with self.assertRaises(json.JSONDecodeError):
+                reader.read()
+
+        malformed_path = os.path.join(self.test_dir.name, 'malformed.json')
+        with open(malformed_path, 'w') as fp:
+            fp.write('[\n  {"bad": INVALID},\n  {"good": 1}\n]\n')
+        with open_dict_file(malformed_path, 'r') as reader:
+            with self.assertRaises(json.JSONDecodeError):
+                reader.readlines()
+
+    def test_json_empty_dicts_and_brace_in_non_dict_string(self):
+        empty_objs_path = os.path.join(self.test_dir.name, 'empty_objs.json')
+        with open_dict_file(empty_objs_path, 'w') as writer:
+            writer.write([{}, {'a': {}}, {}])
+        with open_dict_file(empty_objs_path, 'r') as reader:
+            self.assertEqual([{}, {'a': {}}, {}], reader.readlines())
+
+        mixed_path = os.path.join(self.test_dir.name, 'mixed.json')
+        with open(mixed_path, 'w') as fp:
+            fp.write('[\n  "string with { brace",\n  {"id": "1"}\n]\n')
+        with open_dict_file(mixed_path, 'r') as reader:
+            self.assertEqual([{'id': '1'}], reader.readlines())
+
 
 if __name__ == '__main__':
     unittest.main()

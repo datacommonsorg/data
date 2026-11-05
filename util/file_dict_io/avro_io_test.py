@@ -143,6 +143,61 @@ class AvroFileDictIOTest(unittest.TestCase):
             self.assertEqual(rows, [row for row in reader])
             self.assertEqual(2, reader.line_num)
 
+    def test_avro_string_boolean_bytes_and_empty_file(self):
+        avro_path = os.path.join(self.test_dir.name, 'bool_bytes.avro')
+        schema = {
+            'name':
+                'Rec',
+            'type':
+                'record',
+            'fields': [
+                {
+                    'name': 'flag',
+                    'type': 'boolean'
+                },
+                {
+                    'name': 'payload',
+                    'type': 'bytes'
+                },
+            ],
+        }
+        with open_dict_file(avro_path, 'w', schema=schema) as writer:
+            writer.write([
+                {
+                    'flag': 'false',
+                    'payload': 'hello'
+                },
+                {
+                    'flag': '0',
+                    'payload': b'raw'
+                },
+                {
+                    'flag': 'True',
+                    'payload': 'café'
+                },
+            ])
+        with open_dict_file(avro_path, 'r') as reader:
+            self.assertEqual([
+                {
+                    'flag': False,
+                    'payload': b'hello'
+                },
+                {
+                    'flag': False,
+                    'payload': b'raw'
+                },
+                {
+                    'flag': True,
+                    'payload': 'café'.encode('utf-8')
+                },
+            ], reader.readlines())
+
+        empty_path = os.path.join(self.test_dir.name, 'empty.avro')
+        with open_dict_file(empty_path, 'w'):
+            pass
+        with open_dict_file(empty_path, 'r') as reader:
+            self.assertEqual([], reader.readlines())
+
 
 if __name__ == '__main__':
     unittest.main()

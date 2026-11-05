@@ -27,6 +27,7 @@ Example:
 from abc import ABC, abstractmethod
 from io import UnsupportedOperation
 import os
+import re
 import sys
 from absl import logging
 
@@ -42,6 +43,35 @@ for _path in (
         sys.path.append(_path)
 
 import file_util
+
+_COMPRESSION_EXTS = frozenset({'.gz', '.bz2', '.zst', '.xz', '.zip'})
+_SHARD_SUFFIX_RE = re.compile(r'-(?:\d+|\*|\[0-9\]\*)-of-(?:\d+|\*|\[0-9\]\*)$')
+
+
+def get_file_extension(filename: str) -> str:
+    """Returns the normalized lowercase format extension for `filename`.
+
+    Handles shard suffixes (`shards.csv@3`, `output@3.csv`,
+    `shards.csv-00000-of-00003`) and compression suffixes (`data.csv.gz`) while
+    preserving the final format extension on multi-dot filenames (such as
+    `table.csv.mcf` -> `'.mcf'`).
+    """
+    if not isinstance(filename, str) or not filename:
+        return ''
+    basename = os.path.basename(filename).lower()
+    if '@' in basename:
+        prefix, shard_spec = basename.rsplit('@', 1)
+        if '.' in shard_spec:
+            _, ext_part = shard_spec.split('.', 1)
+            basename = f'{prefix}.{ext_part}'
+        else:
+            basename = prefix
+    basename = _SHARD_SUFFIX_RE.sub('', basename)
+    root, ext = os.path.splitext(basename)
+    while ext in _COMPRESSION_EXTS and root:
+        basename = _SHARD_SUFFIX_RE.sub('', root)
+        root, ext = os.path.splitext(basename)
+    return ext
 
 
 class FileDictIO(ABC):
@@ -237,13 +267,15 @@ class FileDictIO(ABC):
 
     def close(self):
         """Closes the open file handle and flushes any pending output."""
-        if self._fp is not None:
-            # Close the file handle.
-            del self._fp
-        self._fp = None
+        if getattr(self, '_fp', None) is not None:
+            fp = self._fp
+            self._fp = None
+            fp.__exit__(None, None, None)
 
     def get_file_handle(self):
         """Returns the underlying file-like handle from `FileIO`."""
+        if self._fp is None:
+            return None
         return self._fp.get_file_handle()
 
     def filename(self) -> str:

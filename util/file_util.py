@@ -116,6 +116,7 @@ class FileIO:
                 if self._mode.startswith('r') and use_tempfile:
                     # Copy over the GCS file locally before read().
                     fd, self._tmp_filename = tempfile.mkstemp()
+                    os.close(fd)
                     logging.debug(
                         f'Copying file: {self._filename} to {self._tmp_filename}'
                     )
@@ -127,6 +128,7 @@ class FileIO:
             elif file_is_google_spreadsheet(self._filename):
                 # Copy over spreadsheet to local CSV file.
                 fd, self._tmp_filename = tempfile.mkstemp()
+                os.close(fd)
                 file_copy_from_spreadsheet(
                     url=self._filename,
                     worksheet_title=None,
@@ -147,6 +149,7 @@ class FileIO:
             basename = os.path.basename(self._filename)
             fd, self._tmp_filename = tempfile.mkstemp(prefix=f'.{basename}',
                                                       dir=dirname)
+            os.close(fd)
             logging.debug(
                 f'Created tmpfile {self._tmp_filename} for write to {self._filename}'
             )
