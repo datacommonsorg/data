@@ -272,15 +272,16 @@ def parse_sdmx_erp_q_csv(csv_text: str) -> list[dict[str, str]]:
         if not period.endswith('-Q2'):
             continue
         year = period.split('-')[0]
-        if year == '2021':
-            # 2021 population is sourced from the 2021 Census Population Data Summary.
-            continue
         region = r.get('REGION', '').strip()
         sex = r.get('SEX', '').strip()
         age = r.get('AGE', '').strip()
         obs_val = r.get('OBS_VALUE', '').strip()
         if (not obs_val or region not in SDMX_REGION_CODES or
                 sex not in ('1', '2', '3') or age not in ERP_AGES):
+            continue
+        if year == '2021' and (region == 'AUS' or age == 'TOT'):
+            # 2021 national age-by-sex and state total counts are sourced from
+            # the 2021 Census Population Data Summary workbook.
             continue
         indicator_cd = f'ERP_{sex}_{age}'
         val_str = str(int(round(float(obs_val))))
@@ -334,7 +335,7 @@ def parse_census_2021_population_xlsx(
                     _make_row(
                         '2021',
                         f'POP_Males_{age_lbl}',
-                        'AUS_DBL',
+                        'AUS',
                         str(int(male_v)),
                     ))
             if female_v is not None:
@@ -342,7 +343,7 @@ def parse_census_2021_population_xlsx(
                     _make_row(
                         '2021',
                         f'POP_Females_{age_lbl}',
-                        'AUS_DBL',
+                        'AUS',
                         str(int(female_v)),
                     ))
             if total_v is not None:
@@ -350,7 +351,7 @@ def parse_census_2021_population_xlsx(
                     _make_row(
                         '2021',
                         f'POP_Persons_{age_lbl}',
-                        'AUS_DBL',
+                        'AUS',
                         str(int(total_v)),
                     ))
     return gender_rows, agegrp_rows
@@ -362,9 +363,7 @@ def parse_historical_population_xls(
     """Parses ABS 3105065001ds0002_2019.xls historical population tables."""
     wb = xlrd.open_workbook(file_contents=xls_bytes)
 
-    def _parse_sheet(sheet_name: str,
-                     region_cd: str,
-                     five_to_six: bool = False) -> list[dict[str, str]]:
+    def _parse_sheet(sheet_name: str, region_cd: str) -> list[dict[str, str]]:
         sh = wb.sheet_by_name(sheet_name)
         years = {
             c: str(int(float(sh.cell_value(4, c))))
@@ -379,9 +378,7 @@ def parse_historical_population_xls(
                 gender_lbl = lbl
                 continue
             if lbl in HIST_AGE_LABELS and gender_lbl is not None:
-                age_key = ('6-9' if (five_to_six and
-                                     lbl in ('5-9', '5-9 years')) else lbl)
-                indicator_cd = f'POP_{gender_lbl}_{age_key}'
+                indicator_cd = f'POP_{gender_lbl}_{lbl}'
                 for c, yr in years.items():
                     val = sh.cell_value(r, c)
                     if val != '' and val is not None:
@@ -394,21 +391,23 @@ def parse_historical_population_xls(
                             ))
         return out
 
-    aus_all = _parse_sheet('Table 2.1', 'AUS', five_to_six=False)
+    aus_all = _parse_sheet('Table 2.1', 'AUS')
     aus_1901_1985 = [r for r in aus_all if int(r['observationDate']) <= 1985]
     aus_1986_2016 = [r for r in aus_all if int(r['observationDate']) >= 1986]
 
     state_sheets = [
-        ('Table 2.4', 'NSW_DBL'),
-        ('Table 2.6', 'VIC_DBL'),
-        ('Table 2.8', 'QLD_DBL'),
-        ('Table 2.10', 'SA_DBL'),
-        ('Table 2.12', 'WA_DBL'),
-        ('Table 2.15', 'TAS_DBL'),
+        ('Table 2.4', 'NSW'),
+        ('Table 2.6', 'VIC'),
+        ('Table 2.8', 'QLD'),
+        ('Table 2.10', 'SA'),
+        ('Table 2.12', 'WA'),
+        ('Table 2.15', 'TAS'),
+        ('Table 2.16', 'NT'),
+        ('Table 2.17', 'ACT'),
     ]
     states_rows: list[dict[str, str]] = []
     for sname, reg_cd in state_sheets:
-        states_rows.extend(_parse_sheet(sname, reg_cd, five_to_six=True))
+        states_rows.extend(_parse_sheet(sname, reg_cd))
 
     return aus_1901_1985, aus_1986_2016, states_rows
 
@@ -977,8 +976,12 @@ def _counter_aggregation_mode(key: str) -> str:
     """Determines how a counter key should be aggregated across shards."""
     lower = key.lower()
     if (lower == 'existing-statvars-from-mcf' or
-            lower.startswith('existing-') or
-            lower.endswith('output-svobs-unique-typeof')):
+            lower.startswith('existing-') or 'unique' in lower or lower in (
+                'dropped-output-statvars-mcf',
+                'input-nodes-ignored',
+                'nodes-matched',
+                'error-node-merge-conflict',
+            )):
         return 'max'
     if 'start_time' in lower:
         return 'min'
@@ -989,8 +992,51 @@ def _counter_aggregation_mode(key: str) -> str:
     return 'sum'
 
 
-def _merge_counters(shard_counter_files: list[str],
-                    final_counters_path: str) -> None:
+def _compute_csv_cardinalities(final_csv_path: str) -> dict[str, float]:
+    """Computes exact cardinality counters from the merged output CSV file."""
+    if not final_csv_path or not os.path.exists(final_csv_path):
+        return {}
+    places: set[str] = set()
+    dates: set[str] = set()
+    values: set[str] = set()
+    vars_measured: set[str] = set()
+    units: set[str] = set()
+    row_count = 0
+    with open(final_csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row_count += 1
+            if row.get('observationAbout'):
+                places.add(row['observationAbout'])
+            if row.get('observationDate'):
+                dates.add(row['observationDate'])
+            if row.get('value'):
+                values.add(row['value'])
+            if row.get('variableMeasured'):
+                vars_measured.add(row['variableMeasured'])
+            if row.get('unit'):
+                units.add(row['unit'])
+    n_vars = float(len(vars_measured))
+    return {
+        'output-svobs-csv-rows': float(row_count),
+        'output-svobs-unique-observationAbout': float(len(places)),
+        'output-svobs-unique-observationDate': float(len(dates)),
+        'output-svobs-unique-value': float(len(values)),
+        'output-svobs-unique-variableMeasured': n_vars,
+        'output-svobs-unique-unit': float(len(units)),
+        'generated-unique-statvars': n_vars,
+        'dropped-output-statvars-mcf': n_vars,
+        'input-nodes-ignored': n_vars,
+        'nodes-matched': n_vars,
+        'error-node-merge-conflict': n_vars,
+    }
+
+
+def _merge_counters(
+    shard_counter_files: list[str],
+    final_counters_path: str,
+    final_csv_path: str = '',
+) -> None:
     """Aggregates numeric counters across all shards into final_counters_path."""
     if not final_counters_path:
         return
@@ -1003,12 +1049,15 @@ def _merge_counters(shard_counter_files: list[str],
         with open(cf, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
-                if not line or line.startswith('key,'):
+                if not line or line.startswith('key,') or line.startswith(
+                        '"key",'):
                     continue
                 parts = line.rsplit(',', 1)
                 if len(parts) != 2:
                     continue
-                k, v_str = parts[0].strip('"'), parts[1].strip()
+                k, v_str = parts[0].strip('"'), parts[1].strip().strip('"')
+                if k == 'key':
+                    continue
                 try:
                     if '.' in v_str:
                         values_by_key[k].append(float(v_str))
@@ -1017,6 +1066,12 @@ def _merge_counters(shard_counter_files: list[str],
                         values_by_key[k].append(float(int(v_str)))
                 except ValueError:
                     continue
+
+    exact_cardinalities = _compute_csv_cardinalities(final_csv_path)
+    for k, exact_val in exact_cardinalities.items():
+        if k in values_by_key:
+            values_by_key[k] = [exact_val]
+            is_int_map[k] = True
 
     out_lines = ['key,value\n']
     for k in sorted(values_by_key.keys()):
@@ -1168,8 +1223,11 @@ def _run_pipeline() -> None:
 
         # 4. Merge Counters
         if _FLAGS.output_counters:
-            _merge_counters(shard_counters,
-                            os.path.abspath(_FLAGS.output_counters))
+            _merge_counters(
+                shard_counters,
+                os.path.abspath(_FLAGS.output_counters),
+                final_csv,
+            )
             logging.info('Merged counters into %s', _FLAGS.output_counters)
 
     finally:
@@ -1181,7 +1239,8 @@ def main(_) -> None:
     try:
         _run_pipeline()
     except Exception as e:
-        logging.fatal('%s', e, exc_info=True)
+        logging.error('%s', e, exc_info=True)
+        raise
 
 
 if __name__ == '__main__':

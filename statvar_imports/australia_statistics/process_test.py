@@ -89,17 +89,31 @@ class ProcessTest(unittest.TestCase):
             },
         )
 
-    def test_parse_sdmx_erp_q_csv_filters_q2_and_skips_2021(self):
+    def test_parse_sdmx_erp_q_csv_filters_q2_and_retains_2021_state_age_sex(
+            self):
         sample_csv = (
             'DATAFLOW,MEASURE,SEX,AGE,REGION,FREQ,TIME_PERIOD,OBS_VALUE\n'
             'ABS:ERP_Q(1.0.0),1,3,TOT,AUS,Q,2021-Q2,25685412\n'
+            'ABS:ERP_Q(1.0.0),1,3,TOT,1,Q,2021-Q2,8095000\n'
+            'ABS:ERP_Q(1.0.0),1,1,A04,1,Q,2021-Q2,240000\n'
             'ABS:ERP_Q(1.0.0),1,3,TOT,AUS,Q,2025-Q1,27500000\n'
             'ABS:ERP_Q(1.0.0),1,3,TOT,AUS,Q,2025-Q2,27614411\n'
             'ABS:ERP_Q(1.0.0),1,1,A04,1,Q,2025-Q2,248100\n')
         rows = process.parse_sdmx_erp_q_csv(sample_csv)
-        self.assertEqual(len(rows), 2)
+        self.assertEqual(len(rows), 3)
         self.assertEqual(
             rows[0],
+            {
+                'observationDate': '2021',
+                'indicatorCd': 'ERP_1_A04',
+                'regionCd': '1',
+                'value': '240000',
+                'unit': '',
+                'scalingFactor': '',
+            },
+        )
+        self.assertEqual(
+            rows[1],
             {
                 'observationDate': '2025',
                 'indicatorCd': 'ERP_3_TOT',
@@ -110,7 +124,7 @@ class ProcessTest(unittest.TestCase):
             },
         )
         self.assertEqual(
-            rows[1],
+            rows[2],
             {
                 'observationDate': '2025',
                 'indicatorCd': 'ERP_1_A04',
@@ -215,10 +229,20 @@ class ProcessTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             c1 = os.path.join(tmp_dir, 'c1.csv')
             c2 = os.path.join(tmp_dir, 'c2.csv')
+            merged_csv = os.path.join(tmp_dir, 'merged.csv')
+            with open(merged_csv, 'w', encoding='utf-8') as f:
+                f.write(
+                    'observationAbout,observationDate,value,variableMeasured,unit,scalingFactor\n'
+                    'dcs:country/AUS,2021,25422788,dcs:Count_Person,,\n'
+                    'dcs:wikidataId/Q3224,2021,8072163,dcs:Count_Person,,\n'
+                    'dcs:country/AUS,2020,959,dcs:Weekly_Median_Income_Household,dcs:AUD,\n'
+                )
             with open(c1, 'w', encoding='utf-8') as f:
                 f.write('key,value\n'
                         'svobs-added,100\n'
                         'existing-statvars-from-mcf,141928\n'
+                        'output-svobs-unique-observationAbout,2\n'
+                        'output-svobs-unique-variableMeasured,1\n'
                         'process_start_time,1000\n'
                         'process_end_time,1050\n'
                         'processing_rate,10.0\n')
@@ -226,12 +250,16 @@ class ProcessTest(unittest.TestCase):
                 f.write('key,value\n'
                         'svobs-added,250\n'
                         'existing-statvars-from-mcf,141928\n'
+                        'output-svobs-unique-observationAbout,1\n'
+                        'output-svobs-unique-variableMeasured,2\n'
                         'process_start_time,1010\n'
                         'process_end_time,1080\n'
                         'processing_rate,20.0\n')
 
             final_counters = os.path.join(tmp_dir, 'merged_counters.csv')
-            process._merge_counters([c1, c2], final_counters)
+            process._merge_counters([c1, c2],
+                                    final_counters,
+                                    final_csv_path=merged_csv)
             with open(final_counters, 'r', encoding='utf-8') as f:
                 lines = f.read().splitlines()
             self.assertEqual(
@@ -239,6 +267,8 @@ class ProcessTest(unittest.TestCase):
                 [
                     'key,value',
                     'existing-statvars-from-mcf,141928',
+                    'output-svobs-unique-observationAbout,2',
+                    'output-svobs-unique-variableMeasured,2',
                     'process_end_time,1080',
                     'process_start_time,1000',
                     'processing_rate,15.00',

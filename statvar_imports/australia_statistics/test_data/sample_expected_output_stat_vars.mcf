@@ -64,6 +64,7 @@ populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 employment: dcid:BLS_Unemployed
+employmentStatus: dcid:Unemployed
 
 Node: dcid:LifeExpectancy_Person_10Years_Female
 typeOf: dcid:StatisticalVariable

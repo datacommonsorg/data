@@ -1,11 +1,10 @@
-key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,p9,v9
 observationDate,observationDate,{@Data}
 regionCd,observationAbout,{@Data}
 value,value,{Number}
 unit,#ignore,unit column handled via indicatorCd mapping,value,{@Data}
 scalingFactor,#ignore,scalingFactor metadata column,value,{@Data}
 AUS,observationAbout,country/AUS
-AUS_DBL,observationAbout,dcs:dcs:country/AUS
 NSW,observationAbout,wikidataId/Q3224
 VIC,observationAbout,wikidataId/Q36687
 QLD,observationAbout,wikidataId/Q36074
@@ -36,12 +35,6 @@ Qld,observationAbout,wikidataId/Q36074
 Tas.,observationAbout,wikidataId/Q34366
 ACT(a),observationAbout,wikidataId/Q3258
 Australia(b),observationAbout,country/AUS
-NSW_DBL,observationAbout,dcs:dcs:wikidataId/Q3224
-VIC_DBL,observationAbout,dcs:dcs:wikidataId/Q36687
-QLD_DBL,observationAbout,dcs:dcs:wikidataId/Q36074
-SA_DBL,observationAbout,dcs:dcs:wikidataId/Q35715
-WA_DBL,observationAbout,dcs:dcs:wikidataId/Q3206
-TAS_DBL,observationAbout,dcs:dcs:wikidataId/Q34366
 ERP_1_8599,dcid,Count_Person_85OrMoreYears_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years85Onwards
 ERP_1_A04,dcid,Count_Person_0To4Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years0To4
 ERP_1_A10,dcid,Count_Person_10To14Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years10To14
@@ -1060,9 +1053,9 @@ LF_M13_3,dcid,UnemploymentRate_Person,populationType,Person,measuredProperty,une
 LF_M3_1,dcid,Count_Person_Employed_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,employment,Employed,#Multiply,1000
 LF_M3_2,dcid,Count_Person_Employed_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,employment,Employed,#Multiply,1000
 LF_M3_3,dcid,dc/nm9hcklgg5zb3,populationType,Person,measuredProperty,count,statType,measuredValue,employment,Employed,#Multiply,1000
-LF_M6_1,dcid,Count_Person_Unemployed_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,employment,Unemployed,#Multiply,1000
-LF_M6_2,dcid,Count_Person_Unemployed_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,employment,Unemployed,#Multiply,1000
-LF_M6_3,dcid,Count_Person_Unemployed,populationType,Person,measuredProperty,count,statType,measuredValue,employment,BLS_Unemployed,#Multiply,1000
+LF_M6_1,dcid,Count_Person_Unemployed_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,employment,Unemployed,employmentStatus,Unemployed,#Multiply,1000
+LF_M6_2,dcid,Count_Person_Unemployed_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,employment,Unemployed,employmentStatus,Unemployed,#Multiply,1000
+LF_M6_3,dcid,Count_Person_Unemployed,populationType,Person,measuredProperty,count,statType,measuredValue,employment,BLS_Unemployed,employmentStatus,Unemployed,#Multiply,1000
 POP_Females_0-4,dcid,Count_Person_0To4Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years0To4
 POP_Females_0-4 years,dcid,Count_Person_0To4Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years0To4
 POP_Females_10-14,dcid,Count_Person_10To14Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years10To14
@@ -1087,7 +1080,6 @@ POP_Females_50-54,dcid,Count_Person_50To54Years_Female,populationType,Person,mea
 POP_Females_50-54 years,dcid,Count_Person_50To54Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years50To54
 POP_Females_55-59,dcid,Count_Person_55To59Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years55To59
 POP_Females_55-59 years,dcid,Count_Person_55To59Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years55To59
-POP_Females_6-9,dcid,Count_Person_6To9Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years6To9
 POP_Females_60-64,dcid,Count_Person_60To64Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years60To64
 POP_Females_60-64 years,dcid,Count_Person_60To64Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years60To64
 POP_Females_65-69,dcid,Count_Person_65To69Years_Female,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Female,age,Years65To69
@@ -1125,7 +1117,6 @@ POP_Males_50-54,dcid,Count_Person_50To54Years_Male,populationType,Person,measure
 POP_Males_50-54 years,dcid,Count_Person_50To54Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years50To54
 POP_Males_55-59,dcid,Count_Person_55To59Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years55To59
 POP_Males_55-59 years,dcid,Count_Person_55To59Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years55To59
-POP_Males_6-9,dcid,Count_Person_6To9Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years6To9
 POP_Males_60-64,dcid,Count_Person_60To64Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years60To64
 POP_Males_60-64 years,dcid,Count_Person_60To64Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years60To64
 POP_Males_65-69,dcid,Count_Person_65To69Years_Male,populationType,Person,measuredProperty,count,statType,measuredValue,gender,Male,age,Years65To69
@@ -1163,7 +1154,6 @@ POP_Persons_50-54,dcid,Count_Person_50To54Years,populationType,Person,measuredPr
 POP_Persons_50-54 years,dcid,Count_Person_50To54Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years50To54
 POP_Persons_55-59,dcid,Count_Person_55To59Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years55To59
 POP_Persons_55-59 years,dcid,Count_Person_55To59Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years55To59
-POP_Persons_6-9,dcid,Count_Person_6To9Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years6To9
 POP_Persons_60-64,dcid,Count_Person_60To64Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years60To64
 POP_Persons_60-64 years,dcid,Count_Person_60To64Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years60To64
 POP_Persons_65-69,dcid,Count_Person_65To69Years,populationType,Person,measuredProperty,count,statType,measuredValue,age,Years65To69

@@ -56,19 +56,42 @@ class DownloadScriptTest(unittest.TestCase):
                 self.assertEqual(f.read(), b'DATAFLOW,MEASURE\n')
 
     @mock.patch.object(download_script, '_fetch_bytes')
-    def test_download_static_file_validates_sdmx_csv_header(self, mock_fetch):
+    def test_download_static_file_validates_payload_magic_bytes(
+            self, mock_fetch):
         with tempfile.TemporaryDirectory() as tmp_dir:
             mock_fetch.return_value = b'<html>Error Page</html>'
             with self.assertRaises(RuntimeError):
                 download_script._download_static_file(
                     'abs_lf_sdmx.csv', 'https://example.com/lf.csv', tmp_dir)
+            with self.assertRaises(RuntimeError):
+                download_script._download_static_file(
+                    'census_2021_g01_aus.xlsx', 'https://example.com/g01.xlsx',
+                    tmp_dir)
+            with self.assertRaises(RuntimeError):
+                download_script._download_static_file(
+                    'historical_pop_2019.xls', 'https://example.com/pop.xls',
+                    tmp_dir)
 
-            mock_fetch.return_value = b'DATAFLOW,MEASURE,OBS_VALUE\nABS:LF,M3,10\n'
+            mock_fetch.return_value = (
+                b'DATAFLOW,MEASURE,OBS_VALUE\nABS:LF,M3,10\n')
             res = download_script._download_static_file(
                 'abs_lf_sdmx.csv', 'https://example.com/lf.csv', tmp_dir)
             self.assertIn('abs_lf_sdmx.csv', res)
             self.assertTrue(
                 os.path.exists(os.path.join(tmp_dir, 'abs_lf_sdmx.csv')))
+
+            mock_fetch.return_value = b'PK\x03\x04dummy_xlsx_bytes'
+            res_xlsx = download_script._download_static_file(
+                'census_2021_g01_aus.xlsx', 'https://example.com/g01.xlsx',
+                tmp_dir)
+            self.assertIn('census_2021_g01_aus.xlsx', res_xlsx)
+
+            mock_fetch.return_value = (
+                b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1dummy_xls_bytes')
+            res_xls = download_script._download_static_file(
+                'historical_pop_2019.xls', 'https://example.com/pop.xls',
+                tmp_dir)
+            self.assertIn('historical_pop_2019.xls', res_xls)
 
     def test_cleanup_stale_files_removes_unexpected_files(self):
         with tempfile.TemporaryDirectory() as tmp_dir:

@@ -110,12 +110,22 @@ def _get_session() -> requests.Session:
     return session
 
 
-def _fetch_bytes(url: str, timeout: int = 60) -> bytes:
+_XLSX_MAGIC = b'PK\x03\x04'
+_XLS_MAGIC = b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1'
+
+
+def _fetch_bytes(
+    url: str,
+    timeout: int = 60,
+    allow_404: bool = False,
+) -> bytes | None:
     """Downloads raw bytes from a URL with retry logic."""
     session = _get_session()
     for attempt in range(10):
         try:
             resp = session.get(url, timeout=timeout)
+            if allow_404 and resp.status_code == 404:
+                return None
             resp.raise_for_status()
             if not resp.content:
                 raise RuntimeError(f'Empty response body from {url}')
@@ -125,6 +135,23 @@ def _fetch_bytes(url: str, timeout: int = 60) -> bytes:
                 raise RuntimeError(f'Failed to download {url}: {e}') from e
             time.sleep(2**attempt)
     raise RuntimeError(f'Unreachable download failure for {url}')
+
+
+def _validate_payload(filename: str, content: bytes, url: str) -> None:
+    """Validates downloaded file format headers (SDMX CSV, ZIP .xlsx, OLE2 .xls)."""
+    if filename.endswith('.csv'):
+        text_head = content[:256].decode('utf-8-sig', errors='ignore').lstrip()
+        if not text_head.startswith('DATAFLOW,'):
+            raise RuntimeError(
+                f'Invalid SDMX CSV payload from {url}: {text_head[:100]!r}')
+    elif filename.endswith('.xlsx'):
+        if not content.startswith(_XLSX_MAGIC):
+            raise RuntimeError(
+                f'Invalid .xlsx (ZIP) magic bytes from {url}: {content[:8]!r}')
+    elif filename.endswith('.xls'):
+        if not content.startswith(_XLS_MAGIC):
+            raise RuntimeError(
+                f'Invalid .xls (OLE2) magic bytes from {url}: {content[:8]!r}')
 
 
 def _write_bytes_atomically(output_filepath: str, data: bytes) -> None:
@@ -157,11 +184,9 @@ def _download_static_file(filename: str, url: str,
     """Downloads a single raw source file as-is into output_dir."""
     logging.info('Downloading %s from %s...', filename, url)
     content = _fetch_bytes(url)
-    if filename.endswith('.csv'):
-        text_head = content[:256].decode('utf-8-sig', errors='ignore').lstrip()
-        if not text_head.startswith('DATAFLOW,'):
-            raise RuntimeError(
-                f'Invalid SDMX CSV payload from {url}: {text_head[:100]!r}')
+    if content is None:
+        raise RuntimeError(f'Empty response body from {url}')
+    _validate_payload(filename, content, url)
     out_path = os.path.join(output_dir, filename)
     _write_bytes_atomically(out_path, content)
     return {filename: len(content)}
@@ -170,7 +195,6 @@ def _download_static_file(filename: str, url: str,
 def _download_recent_life_expectancy_workbooks(
     output_dir: str,) -> dict[str, int]:
     """Downloads ABS 3-year period Life Tables workbooks as-is (2016-2018+)."""
-    session = _get_session()
     current_year = time.gmtime().tm_year
     downloaded: dict[str, int] = {}
 
@@ -181,20 +205,18 @@ def _download_recent_life_expectancy_workbooks(
         for ext in ('xlsx', 'xls'):
             url = (f'{ABS_LIFE_EXP_BASE_URL}/{period}/'
                    f'3302055001DO001_{period_nodash}.{ext}')
-            resp = session.get(url, timeout=30)
-            if resp.status_code == 404:
+            content = _fetch_bytes(url, timeout=30, allow_404=True)
+            if content is None:
                 continue
-            resp.raise_for_status()
-            if not resp.content:
-                raise RuntimeError(f'Empty response body from {url}')
             fname = f'life_expectancy_{period_nodash}.{ext}'
+            _validate_payload(fname, content, url)
             out_path = os.path.join(output_dir, fname)
-            _write_bytes_atomically(out_path, resp.content)
-            downloaded[fname] = len(resp.content)
+            _write_bytes_atomically(out_path, content)
+            downloaded[fname] = len(content)
             logging.info(
                 'Downloaded ABS Life Expectancy workbook %s (%d bytes)',
                 fname,
-                len(resp.content),
+                len(content),
             )
             break
 
@@ -267,7 +289,8 @@ def main(argv: list[str]) -> None:
             max_workers=_FLAGS.max_workers,
         )
     except Exception as e:
-        logging.fatal('%s', e, exc_info=True)
+        logging.error('%s', e, exc_info=True)
+        raise
 
 
 if __name__ == '__main__':
