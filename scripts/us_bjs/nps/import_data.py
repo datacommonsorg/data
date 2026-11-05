@@ -108,8 +108,8 @@ def main(args):
         processed_df = preprocess_data.preprocess_df(df)
         save_csv(processed_df, FILENAME)
         generate_tmcf(processed_df)
-    except IOError as e:
-        logging.info(f"error during saving processed csv")
+    except IOError:
+        logging.info("error during saving processed csv")
     except Exception as e:
         logging.fatal(f"error during data processing: {e}")
 

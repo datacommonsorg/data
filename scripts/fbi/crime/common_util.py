@@ -74,5 +74,5 @@ def int_from_field(f):
         f = float(f)
         f = int(f)
         return f
-    except ValueError as err:
+    except ValueError:
         return 0

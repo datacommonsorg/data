@@ -84,7 +84,6 @@ def _generate_mcf(region: int, division: int, state: int, name: str,
                   dcid_map: dict) -> str:
     '''Returns the MCF nodes for the given codes and also adds the dcid to the map.
     '''
-    mcf = []
     if state > 0:
         # Generate a contained in node for state.
         dcid = _get_state_dcid(state)

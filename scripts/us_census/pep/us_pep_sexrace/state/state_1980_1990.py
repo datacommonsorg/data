@@ -19,8 +19,14 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_state_1980_1990(url: str) -> pd.DataFrame:
@@ -46,9 +52,9 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
     _cols.extend(COLUMNS_TO_SUM)
 
     # reading the csv input file
-    df = pd.read_table(url,
+    df = pd.read_table(load_url_or_path(url),
                        index_col=False,
-                       delim_whitespace=True,
+                       sep=r'\s+',
                        engine='python',
                        names=_cols)
     df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1980_1990.csv")
