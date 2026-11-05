@@ -27,7 +27,7 @@ The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks 
     *   `process.py`: Extracts raw ABS source indicators and values from `input_files/*` into a unified staged CSV (`staged_files/australia_statistics_staged_input.csv`) with columns `observationDate,indicatorCd,regionCd,value`.
     *   `australia_statistics_metadata.csv`: Configuration file for `stat_var_processor.py` specifying output columns (`observationAbout,observationDate,value,variableMeasured,unit,scalingFactor`), header rows, mapped columns, numeric precision (`output_precision_digits,4`), and provenance URL.
     *   `australia_statistics_pv_map.csv`: Property-value mapping file mapping raw ABS indicator keys (`LF_*`, `ERP_*`, `POP_*`, `HEALTH_*`, `LE_*`, `INC_*`) and region identifiers to Data Commons StatisticalVariables, `#Multiply,1000` scaling (for Labour Force counts reported in thousands), and place DCIDs (`country/AUS` and `wikidataId/Q...`).
-    *   `validation_config.json`: Configuration defining 2 `GOLDENS_CHECK` rules, 5 scoped `MAX_DATE_CONSISTENT` rules, value bounds, and date freshness validation rules across all 850 StatisticalVariables (alongside the global `DELETED_RECORDS_PERCENT` rule).
+    *   `validation_config.json`: Configuration defining 5 scoped `MAX_DATE_CONSISTENT` rules, value bounds, and date freshness validation rules across all 850 StatisticalVariables (alongside the global `DELETED_RECORDS_PERCENT` rule).
     *   `test_data/`: Sample input data (`sample_input.csv`) and expected output (`sample_expected_output.csv`, `sample_expected_output.tmcf`, `sample_expected_output_stat_vars.mcf`) for testing.
 
 *   **Transformation pipeline**:
@@ -38,7 +38,6 @@ The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks 
 *   **Data Quality Checks**:
     *   Automated validation via `tools/import_validation/runner.py` evaluates the output against `validation_config.json` (plus global rules), enforcing:
         *   `check_deleted_records_percent`: Global historical deletion threshold `<= 0.1%`.
-        *   `check_goldens_summary_report` & `check_goldens_output_csv`: 2 `GOLDENS_CHECK` rules verifying golden summary report (`17` `nl_statvars.csv` StatisticalVariables) and observation samples (`9` `top_100k_places.csv` places).
         *   `max_date_consistent_*`: 5 scoped `MAX_DATE_CONSISTENT` rules verifying date consistency within each co-released ABS dataset family.
         *   `check_labour_force_monthly_freshness_and_bounds`: Verifies `MaxDate` (`1`-year rolling window), `total_svs >= 9`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person*`) across all 9 monthly Labour Force indicators.
         *   `check_active_indicators_freshness_and_bounds`: Verifies `MaxDate` (`3`-year rolling window), `total_svs >= 250`, `NumPlaces >= 1`, and `MinValue >= 0` across all 257 active annual/multi-year Estimated Resident Population and Life Expectancy indicators.

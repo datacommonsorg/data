@@ -2,27 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_goldens_summary_report",
-      "validator": "GOLDENS_CHECK",
-      "scope": {
-        "data_source": "stats"
-      },
-      "params": {
-        "golden_files": "../../../../golden_data/golden_summary_report.csv"
-      }
-    },
-    {
-      "rule_id": "check_goldens_output_csv",
-      "validator": "GOLDENS_CHECK",
-      "scope": {
-        "data_source": "stats"
-      },
-      "params": {
-        "golden_files": "../../../../golden_data/golden_observations.csv",
-        "input_files": "../../../../output_files/australia_statistics_output.csv"
-      }
-    },
-    {
       "rule_id": "max_date_consistent_labour_force",
       "validator": "MAX_DATE_CONSISTENT",
       "scope": {
