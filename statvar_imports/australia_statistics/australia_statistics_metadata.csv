@@ -2,7 +2,5 @@ parameter,value
 url,https://www.abs.gov.au/
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
 header_rows,1
-mapped_columns,"2,3"
-word_delimiter,""
-reconcile_nodes,""
+mapped_columns,3
 output_precision_digits,4

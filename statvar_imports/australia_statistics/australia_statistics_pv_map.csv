@@ -1,7 +1,6 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,p9,v9
 observationDate,observationDate,{@Data}
-indicatorCd,#Header,indicatorCd
-regionCd,#Header,regionCd
+regionCd,observationAbout,{@Data}
 value,value,{Number}
 AUS,observationAbout,country/AUS
 NSW,observationAbout,wikidataId/Q3224
