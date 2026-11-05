@@ -45,12 +45,13 @@
             "import_inputs": [
                 {
                     "template_mcf": "brazil_education/brazil_education.tmcf",
-                    "cleaned_csv": "brazil_education/brazil_education.csv"
+                    "cleaned_csv": "brazil_education/brazil_education.csv",
+                    "node_mcf": "brazil_education/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_literacy/brazil_literacy.tmcf",
                     "cleaned_csv": "brazil_literacy/brazil_literacy.csv",
-                    "node_mcf": "brazil_literacy/brazil_literacy_stat_vars.mcf"
+                    "node_mcf": "brazil_literacy/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_literacy/brazil_literacy_rates.tmcf",
@@ -58,24 +59,28 @@
                 },
                 {
                     "template_mcf": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.tmcf",
-                    "cleaned_csv": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.csv"
+                    "cleaned_csv": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.csv",
+                    "node_mcf": "brazil_population_by_age_and_sex/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_population_by_race/brazil_population_by_race.tmcf",
-                    "cleaned_csv": "brazil_population_by_race/brazil_population_by_race.csv"
+                    "cleaned_csv": "brazil_population_by_race/brazil_population_by_race.csv",
+                    "node_mcf": "brazil_population_by_race/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_population_by_religion/brazil_population_by_religion.tmcf",
                     "cleaned_csv": "brazil_population_by_religion/brazil_population_by_religion.csv",
-                    "node_mcf": "brazil_population_by_religion/brazil_population_by_religion_stat_vars.mcf"
+                    "node_mcf": "brazil_population_by_religion/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_population_by_residence/brazil_population_by_residence.tmcf",
-                    "cleaned_csv": "brazil_population_by_residence/brazil_population_by_residence.csv"
+                    "cleaned_csv": "brazil_population_by_residence/brazil_population_by_residence.csv",
+                    "node_mcf": "brazil_population_by_residence/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_total_population/brazil_total_population.tmcf",
-                    "cleaned_csv": "brazil_total_population/brazil_total_population.csv"
+                    "cleaned_csv": "brazil_total_population/brazil_total_population.csv",
+                    "node_mcf": "brazil_total_population/*.mcf"
                 }
             ],
             "resource_limits": {
