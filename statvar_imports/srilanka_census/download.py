@@ -319,8 +319,8 @@ def write_csv_atomic(output_path: str, fieldnames: list[str],
 
 
 def _download_bytes_with_retry(url: str,
-                               retries: int = 5,
-                               retry_secs: int = 10) -> bytes:
+                               retries: int = 10,
+                               retry_secs: int = 25) -> bytes:
     """Downloads non-empty bytes from URL, retrying on transient empty responses."""
     for attempt in range(retries):
         content = download_util.request_url(url=url,
