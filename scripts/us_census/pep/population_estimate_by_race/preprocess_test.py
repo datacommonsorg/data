@@ -16,12 +16,21 @@ Script to automate the testing for USA Population by Race preprocess script.
 """
 
 import os
+import sys
 import unittest
 import shutil
 from os import path
-from preprocess import CensusUSAPopulationByRace
+
 # module_dir is the path to where this test is running from.
-module_dir = os.path.dirname(__file__)
+module_dir = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(module_dir, '../../../'))
+for path_entry in (_SCRIPTS_DIR, module_dir):
+    if path_entry not in sys.path:
+        sys.path.append(path_entry)
+
+# pylint: disable=wrong-import-position
+from us_census.pep.population_estimate_by_race.preprocess import CensusUSAPopulationByRace
+# pylint: enable=wrong-import-position
 TEST_DATA_FOLDER = os.path.join(module_dir, "test_data")
 OP_DATA_FOLDER = os.path.join(module_dir, "test_output_data")
 
@@ -115,14 +124,14 @@ class TestPreprocess(unittest.TestCase):
 
     def test_create_retry_session(self):
         """Tests that _create_retry_session sets user agent and retry adapter."""
-        from preprocess import _create_retry_session
+        from us_census.pep.population_estimate_by_race.preprocess import _create_retry_session
         session = _create_retry_session()
         self.assertIn('User-Agent', session.headers)
         self.assertIn('DataCommonsImport', session.headers['User-Agent'])
 
     def test_is_html_response(self):
         """Tests HTML error page detection."""
-        from preprocess import _is_html_response
+        from us_census.pep.population_estimate_by_race.preprocess import _is_html_response
         self.assertTrue(_is_html_response('text/html'))
         self.assertTrue(_is_html_response('text/html; charset=utf-8'))
         self.assertTrue(

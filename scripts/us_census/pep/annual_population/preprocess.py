@@ -625,9 +625,8 @@ def _process_county_file_99c8_00(file_path: str) -> pd.DataFrame:
                     for idx, val in enumerate(years_list):
                         if idx == 0:
                             continue
-                        val_person = re.sub(r'[^\d]', '',
-                                            str(tmp_line[idx + 2]))
-                        if val_person:
+                        val_person = str(tmp_line[idx + 2]).strip()
+                        if val_person.isdigit():
                             outfile.write(f"{val},{fips_code},{val_person}\n")
     data_df = pd.read_csv("outfile.csv")
     data_df = data_df[data_df["Location"] != "country/USA"]
@@ -773,7 +772,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Processed County DataFrame
     """
     data_df = None
-    future_year_file_list = [f"co-est{x}-alldata" for x in range(2024, 2030)]
+    future_year_file_list = [f"co-est{x}-alldata" for x in range(2024, 2031)]
 
     if "99c8_00.txt" in file_path:
         data_df = _process_county_file_99c8_00(file_path)
@@ -905,7 +904,7 @@ def _process_cities(file_path: str,
         data_df = _process_city_1990_1999(file_path)
     if file_name_without_ext in [
             "sub-est2010-alt", "SUB-EST2020_ALL", "sub-est2021_all"
-    ] or file_name_without_ext.startswith("sub-est202"):
+    ] or re.search(r"sub-est20(?:2\d|30)", file_name_without_ext):
         data_df = _load_data_df(file_path,
                                 file_format="csv",
                                 header=0,
@@ -1071,7 +1070,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             elif file_name in [
                     'su-99-7_us.txt', "sub-est2010-alt.csv",
                     "SUB-EST2020_ALL.csv", "sub-est2021_all.csv"
-            ] or file_name.startswith("sub-est202"):
+            ] or re.search(r"sub-est20(?:2\d|30)", file_name):
                 data_df = _process_cities(file, is_summary_levels)
 
             if not data_df.empty:
@@ -1098,12 +1097,15 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
                                         kind="mergesort")
         final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
-        count_person_str = final_df["Count_Person"].astype(str).str.replace(
-            r"[^\d]", "", regex=True)
-        final_df["Count_Person"] = pd.to_numeric(count_person_str,
-                                                 errors="coerce")
+        final_df["Count_Person"] = pd.to_numeric(
+            final_df["Count_Person"].astype(str).str.replace(",",
+                                                             "",
+                                                             regex=False),
+            errors="coerce",
+        )
         final_df = final_df.dropna(subset=["Count_Person"])
-        final_df["Count_Person"] = final_df["Count_Person"].astype("int64")
+        final_df["Count_Person"] = final_df["Count_Person"].round().astype(
+            "int64")
         final_df[["Year", "Location",
                   "Count_Person"]].to_csv(cleaned_csv_file_path, index=False)
         _generate_mcf(mcf_file_path)

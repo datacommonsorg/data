@@ -161,10 +161,9 @@ def download_with_retry(session, url, dest_path):
             raise
 
 
-#Creating folder to store the raw data from source
+# Path to store the raw data from source
 raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              "raw_data")
-os.makedirs(raw_data_path, exist_ok=True)
 
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -721,6 +720,8 @@ def download_files():
     global _FILES_TO_DOWNLOAD, _SESSION
     session = _get_session()
     max_retry = 5
+    os.makedirs(raw_data_path, exist_ok=True)
+    os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
     try:
         for file_to_dowload in _FILES_TO_DOWNLOAD:
             url = file_to_dowload['download_path']

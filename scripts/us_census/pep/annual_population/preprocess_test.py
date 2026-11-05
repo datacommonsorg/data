@@ -355,6 +355,37 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
 
+    def test_process_float_count_person_not_inflated(self):
+        """Tests that float Count_Person values (e.g. 341784857.0) are not inflated by 10x."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_dir = os.path.join(tmp_dir, "input")
+            os.makedirs(input_dir, exist_ok=True)
+            dummy_file = os.path.join(input_dir, "NST-EST2024-POP.xlsx")
+            with open(dummy_file, "w") as f:
+                f.write("dummy")
+
+            mock_df = pd.DataFrame({
+                "Year": [2024],
+                "Location": ["country/USA"],
+                "Count_Person": [341784857.0],
+            })
+
+            cleaned_csv = os.path.join(tmp_dir, "cleaned.csv")
+            mcf_path = os.path.join(tmp_dir, "out.mcf")
+            tmcf_path = os.path.join(tmp_dir, "out.tmcf")
+
+            with patch("us_census.pep.annual_population.preprocess._process_nationals_2029",
+                       return_value=mock_df), \
+                 patch("us_census.pep.annual_population.preprocess._process_states_2029",
+                       return_value=pd.DataFrame()), \
+                 patch("us_census.pep.annual_population.preprocess._generate_mcf"), \
+                 patch("us_census.pep.annual_population.preprocess._generate_tmcf"):
+                process(input_dir, cleaned_csv, mcf_path, tmcf_path, False)
+
+            result_df = pd.read_csv(cleaned_csv)
+            self.assertEqual(result_df["Count_Person"].iloc[0], 341784857)
+            self.assertNotEqual(result_df["Count_Person"].iloc[0], 3417848570)
+
 
 if __name__ == '__main__':
     unittest.main()

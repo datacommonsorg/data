@@ -134,43 +134,6 @@ def _head_with_html_retry(session, url, timeout=30):
     return response
 
 
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
-       tries=3,
-       delay=5,
-       backoff=2)
-def download_with_retry(session, url, dest_path):
-    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
-    with session.get(url, stream=True, timeout=120) as response:
-        response.raise_for_status()
-        content_type = response.headers.get('Content-Type', '')
-        dest_dir = os.path.dirname(os.path.abspath(dest_path))
-        os.makedirs(dest_dir, exist_ok=True)
-        fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
-        try:
-            first_chunk = b''
-            with os.fdopen(fd, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        if not first_chunk:
-                            first_chunk = chunk[:512]
-                            if (not url.lower().endswith(
-                                ('.html', '.htm')) and _is_html_response(
-                                    content_type, first_chunk)):
-                                raise TransientDownloadError(
-                                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
-                                )
-                        f.write(chunk)
-            if not first_chunk:
-                raise TransientDownloadError(
-                    f'Downloaded empty file from URL: {url}')
-            os.replace(tmp_path, dest_path)
-        except Exception:
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-            raise
-
-
 # Generating geoID by taking Geographical area as input
 def _add_geo_id(df: pd.DataFrame) -> pd.DataFrame:
     short_forms = get_states()
@@ -781,6 +744,9 @@ def _clean_txt2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df = df[df['1'].str.contains("999")]
         df['Geographic Area'] = "United States"
         df['Year'] = df['1'].str[1:5]
+        for c in ['2', '5', '6', '7', '8', '9', '10', '11', '12']:
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
         df['Total'] = df['2']
         # Adding individual columns to derive the required column
         df['Total White'] = df['5'] + df['6']
@@ -1319,29 +1285,21 @@ class CensusUSAPopulationByRace:
 
 
 # The outputs are loaded into
-def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
+def _resolve_pe_11(file_name: str, text: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
 
     Arguments:
         file_name (str) : File name of csv dataset
-        url: str : Refers to file URL
+        text (str) : Response text content
 
     Returns:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
-    session = _get_session()
     year = file_name[-8:-4]
-    response = session.get(url, timeout=60)
-    response.raise_for_status()
-    content_type = response.headers.get('Content-Type', '').lower()
-    if _is_html_response(content_type, response.content[:512]):
-        raise TransientDownloadError(f"Server returned HTML/WAF for {url}")
     if int(year) < 1960:
         cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        df = pd.read_csv(StringIO(response.text),
-                         names=cols,
-                         on_bad_lines='skip')
+        df = pd.read_csv(StringIO(text), names=cols, on_bad_lines='skip')
         df = df[df["0"].str.contains("All ages", na=False)]
         df['Year'] = year
         df['Geographic Area'] = "United States"
@@ -1349,7 +1307,7 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
         cols = [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
         ]
-        df = pd.read_csv(StringIO(response.text),
+        df = pd.read_csv(StringIO(text),
                          names=cols,
                          skiprows=2,
                          on_bad_lines='skip')
@@ -1435,7 +1393,7 @@ def download_files():
                                         index=False,
                                         engine='xlsxwriter')
                         elif "pe-11" in url:
-                            df = _resolve_pe_11(file_name, url)
+                            df = _resolve_pe_11(file_name, response.text)
                             df.to_csv(os.path.join(download_local_path,
                                                    file_name),
                                       index=False)
@@ -1519,7 +1477,8 @@ def download_files():
                     logging.info(f"Downloaded file : {url}")
                     is_file_downloaded = True
 
-                except Exception as e:
+                except (TransientDownloadError,
+                        requests.exceptions.RequestException, OSError) as e:
                     logging.error(f"Retry file download {url} - {e}")
                     time.sleep(5)
                     retry_number += 1
