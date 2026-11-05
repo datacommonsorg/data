@@ -13,20 +13,18 @@
       "import_inputs": [
         {
           "template_mcf": "output_files/common_tmcf.tmcf",
-          "cleaned_csv": "output_files/idn_population_historical_1971_2022.csv"
-        },
-        {
-          "template_mcf": "output_files/common_tmcf.tmcf",
-          "cleaned_csv": "output_files/idn_age_gender_historical_2010_2022.csv"
-        },
-        {
-          "template_mcf": "output_files/idn_population_2023_2025.tmcf",
-          "cleaned_csv": "output_files/idn_population_2023_2025.csv",
+          "cleaned_csv": [
+            "output_files/idn_population_historical_1971_2022.csv",
+            "output_files/idn_population_2023_2025.csv"
+          ],
           "node_mcf": "output_files/idn_population_2023_2025*.mcf"
         },
         {
-          "template_mcf": "output_files/idn_age_gender_2023_2025.tmcf",
-          "cleaned_csv": "output_files/idn_age_gender_2023_2025.csv",
+          "template_mcf": "output_files/common_tmcf.tmcf",
+          "cleaned_csv": [
+            "output_files/idn_age_gender_historical_2010_2022.csv",
+            "output_files/idn_age_gender_2023_2025.csv"
+          ],
           "node_mcf": "output_files/idn_age_gender_2023_2025*.mcf"
         }
       ],
