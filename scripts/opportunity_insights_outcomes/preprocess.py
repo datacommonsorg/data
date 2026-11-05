@@ -278,7 +278,18 @@ def _stage_existing_statvar_mcf(existing_statvar_mcf: str, tmpdir: str) -> str:
             '*' in existing_statvar_mcf or ',' in existing_statvar_mcf):
         return existing_statvar_mcf
     try:
+        from google.api_core import exceptions as gcs_exceptions  # pylint: disable=import-outside-toplevel
+        from google.auth import exceptions as auth_exceptions  # pylint: disable=import-outside-toplevel
         from google.cloud import storage  # pylint: disable=import-outside-toplevel
+    except ImportError as exc:
+        logging.warning(
+            'Could not import google.cloud.storage for %s (%s); passing URI directly.',
+            existing_statvar_mcf,
+            exc,
+        )
+        return existing_statvar_mcf
+
+    try:
         bucket_name, blob_name = existing_statvar_mcf[len('gs://'):].split(
             '/', 1)
         local_mcf = os.path.join(
@@ -287,7 +298,13 @@ def _stage_existing_statvar_mcf(existing_statvar_mcf: str, tmpdir: str) -> str:
         storage.Client().bucket(bucket_name).blob(
             blob_name).download_to_filename(local_mcf)
         return local_mcf
-    except Exception as exc:  # pylint: disable=broad-except
+    except (
+            ValueError,
+            OSError,
+            gcs_exceptions.GoogleAPICallError,
+            gcs_exceptions.RetryError,
+            auth_exceptions.GoogleAuthError,
+    ) as exc:
         logging.warning(
             'Could not pre-stage %s locally (%s); passing URI directly.',
             existing_statvar_mcf,
