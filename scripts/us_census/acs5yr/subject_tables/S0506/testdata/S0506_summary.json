@@ -1,0 +1,17 @@
+{
+    "summary": {
+        "column map generator commit SHA": "c4834e75fce20571709155656ade98fb70d98dd5",
+        "data processing script commit SHA": "1a31557d0d036f12e9faa23ed9ff4c5f137f9328",
+        "total StatVarObservations": 28
+    },
+    "2024": {
+        "filename": "ACSST5Y2024.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 30,
+        "number of rows in dataset": 1,
+        "number of statVars generated for columns": 28,
+        "number of observations": 28,
+        "number of unique StatVars with observations": 28,
+        "number of unique geos": 1,
+        "number of StatVars in mcf_dict": 28
+    }
+}

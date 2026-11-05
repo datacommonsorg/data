@@ -1,0 +1,157 @@
+{
+    "summary": {
+        "column map generator commit SHA": "c4834e75fce20571709155656ade98fb70d98dd5",
+        "data processing script commit SHA": "1a31557d0d036f12e9faa23ed9ff4c5f137f9328",
+        "total StatVarObservations": 57127539
+    },
+    "2010": {
+        "filename": "ACSST5Y2010.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 158610,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 1136783,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 853,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2011": {
+        "filename": "ACSST5Y2011.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 192329,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 1279138,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 960,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2012": {
+        "filename": "ACSST5Y2012.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191640,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 3999243,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 2863,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2013": {
+        "filename": "ACSST5Y2013.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191599,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4033537,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 2892,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2014": {
+        "filename": "ACSST5Y2014.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191588,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4076166,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 2933,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2015": {
+        "filename": "ACSST5Y2015.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191616,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4098280,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 2970,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2016": {
+        "filename": "ACSST5Y2016.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191400,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4132663,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 2986,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2017": {
+        "filename": "ACSST5Y2017.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191398,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4177259,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3022,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2018": {
+        "filename": "ACSST5Y2018.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191380,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4184065,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3017,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2019": {
+        "filename": "ACSST5Y2019.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 191344,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4241230,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3063,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2020": {
+        "filename": "ACSST5Y2020.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 205013,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4183475,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3032,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2021": {
+        "filename": "ACSST5Y2021.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 205653,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4260425,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3069,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2022": {
+        "filename": "ACSST5Y2022.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 205947,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4324475,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3125,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2023": {
+        "filename": "ACSST5Y2023.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 205958,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4407145,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3202,
+        "number of StatVars in mcf_dict": 1400
+    },
+    "2024": {
+        "filename": "ACSST5Y2024.S0506_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 205944,
+        "number of statVars generated for columns": 1340,
+        "number of observations": 4593655,
+        "number of unique StatVars with observations": 1340,
+        "number of unique geos": 3358,
+        "number of StatVars in mcf_dict": 1400
+    }
+}
