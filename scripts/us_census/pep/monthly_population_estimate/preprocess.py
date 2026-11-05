@@ -103,7 +103,12 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(exceptions=(ValueError, requests.exceptions.RequestException),
+class TransientDownloadError(Exception):
+    """Raised when a transient download error occurs (e.g., WAF/HTML response)."""
+
+
+@retry(exceptions=(TransientDownloadError,
+                   requests.exceptions.RequestException),
        tries=3,
        delay=5,
        backoff=2)
@@ -113,13 +118,14 @@ def _head_with_html_retry(session, url, timeout=30):
     content_type = response.headers.get('Content-Type', '').lower()
     if (response.status_code == 200 and 'html' in content_type and
             not url.lower().endswith(('.html', '.htm'))):
-        raise ValueError(
+        raise TransientDownloadError(
             f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
         )
     return response
 
 
-@retry(exceptions=(ValueError, requests.exceptions.RequestException),
+@retry(exceptions=(TransientDownloadError,
+                   requests.exceptions.RequestException),
        tries=3,
        delay=5,
        backoff=2)
@@ -141,12 +147,13 @@ def download_with_retry(session, url, dest_path):
                             if (not url.lower().endswith(
                                 ('.html', '.htm')) and _is_html_response(
                                     content_type, first_chunk)):
-                                raise ValueError(
+                                raise TransientDownloadError(
                                     f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
                                 )
                         f.write(chunk)
             if not first_chunk:
-                raise ValueError(f'Downloaded empty file from URL: {url}')
+                raise TransientDownloadError(
+                    f'Downloaded empty file from URL: {url}')
             os.replace(tmp_path, dest_path)
         except Exception:
             if os.path.exists(tmp_path):
@@ -784,9 +791,7 @@ def download_files():
                     time.sleep(5)
                     retry_number += 1
                     if retry_number > max_retry:
-                        logging.fatal(f"Error downloading {url}")
-                        logging.error("Exit from script")
-                        sys.exit(1)
+                        raise RuntimeError(f"Error downloading {url}") from e
         return True
     finally:
         session.close()

@@ -41,6 +41,7 @@ from us_census.pep.annual_population.preprocess import (
     add_future_year_urls,
     popchg_file_name_pattern,
     USA,
+    TransientDownloadError,
 )
 import us_census.pep.annual_population.preprocess as prep
 from us_census.pep.annual_population.constants import TEST_DATA_DIR
@@ -233,7 +234,7 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
         self.assertIn(503, adapter.max_retries.status_forcelist)
 
     def test_download_with_retry_raises_on_html_error(self):
-        """Tests that download_with_retry raises ValueError on HTML error page (soft-404)."""
+        """Tests that download_with_retry raises TransientDownloadError on HTML error page (soft-404)."""
         session = MagicMock()
         mock_resp = MagicMock()
         mock_resp.status_code = 200
@@ -243,7 +244,7 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             dest_file = os.path.join(tmp_dir, 'test.xlsx')
-            with self.assertRaises(ValueError) as ctx:
+            with self.assertRaises(TransientDownloadError) as ctx:
                 download_with_retry.__wrapped__(session,
                                                 'https://census.gov/test.xlsx',
                                                 dest_file)

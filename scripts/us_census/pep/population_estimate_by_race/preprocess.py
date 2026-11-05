@@ -113,7 +113,12 @@ def _is_html_response(content_type, first_bytes=b''):
     return False
 
 
-@retry(exceptions=(ValueError, requests.exceptions.RequestException),
+class TransientDownloadError(Exception):
+    """Raised when a transient download error occurs (e.g., WAF/HTML response)."""
+
+
+@retry(exceptions=(TransientDownloadError,
+                   requests.exceptions.RequestException),
        tries=3,
        delay=5,
        backoff=2)
@@ -123,13 +128,14 @@ def _head_with_html_retry(session, url, timeout=30):
     content_type = response.headers.get('Content-Type', '').lower()
     if (response.status_code == 200 and 'html' in content_type and
             not url.lower().endswith(('.html', '.htm'))):
-        raise ValueError(
+        raise TransientDownloadError(
             f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
         )
     return response
 
 
-@retry(exceptions=(ValueError, requests.exceptions.RequestException),
+@retry(exceptions=(TransientDownloadError,
+                   requests.exceptions.RequestException),
        tries=3,
        delay=5,
        backoff=2)
@@ -151,12 +157,13 @@ def download_with_retry(session, url, dest_path):
                             if (not url.lower().endswith(
                                 ('.html', '.htm')) and _is_html_response(
                                     content_type, first_chunk)):
-                                raise ValueError(
+                                raise TransientDownloadError(
                                     f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
                                 )
                         f.write(chunk)
             if not first_chunk:
-                raise ValueError(f'Downloaded empty file from URL: {url}')
+                raise TransientDownloadError(
+                    f'Downloaded empty file from URL: {url}')
             os.replace(tmp_path, dest_path)
         except Exception:
             if os.path.exists(tmp_path):
@@ -1329,7 +1336,7 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
     response.raise_for_status()
     content_type = response.headers.get('Content-Type', '').lower()
     if _is_html_response(content_type, response.content[:512]):
-        raise ValueError(f"Server returned HTML/WAF for {url}")
+        raise TransientDownloadError(f"Server returned HTML/WAF for {url}")
     if int(year) < 1960:
         cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         df = pd.read_csv(StringIO(response.text),
@@ -1414,7 +1421,8 @@ def download_files():
                     content_type = response.headers.get('Content-Type',
                                                         '').lower()
                     if _is_html_response(content_type, response.content[:512]):
-                        raise ValueError(f"Server returned HTML/WAF for {url}")
+                        raise TransientDownloadError(
+                            f"Server returned HTML/WAF for {url}")
 
                     if ".csv" in url:
                         if "st-est" in url or 'SC-EST' in url:
@@ -1469,7 +1477,7 @@ def download_files():
                                                    file_name),
                                       index=False)
                         else:
-                            logging.fatal(f'Unknown csv file: {url}')
+                            raise ValueError(f'Unknown csv file: {url}')
 
                     elif ".txt" in url and "srh" in url:
                         if "crh" in url:
@@ -1506,7 +1514,7 @@ def download_files():
                                     header=False,
                                     engine='xlsxwriter')
                     else:
-                        logging.fatal(f'Unknown file - {url}')
+                        raise ValueError(f'Unknown file - {url}')
 
                     logging.info(f"Downloaded file : {url}")
                     is_file_downloaded = True
@@ -1516,8 +1524,8 @@ def download_files():
                     time.sleep(5)
                     retry_number += 1
                     if retry_number > max_retry:
-                        logging.fatal(f"Error downloading URL- {url} - {e}")
-                        sys.exit(1)
+                        raise RuntimeError(
+                            f"Error downloading URL- {url}") from e
         return True
     finally:
         session.close()

@@ -1121,15 +1121,25 @@ def _create_retry_session() -> requests.Session:
     return session
 
 
-@retry(tries=3, delay=2, backoff=2, exceptions=(ValueError,))
+class TransientDownloadError(Exception):
+    """Raised when a transient download error occurs (e.g., WAF/HTML response)."""
+
+
+@retry(exceptions=(TransientDownloadError,
+                   requests.exceptions.RequestException),
+       tries=3,
+       delay=2,
+       backoff=2)
 def _head_with_html_retry(session: requests.Session,
                           url: str,
                           timeout: int = 30) -> requests.Response:
     """Performs a HEAD request and retries if HTTP 200 returns an HTML error page."""
     response = session.head(url, allow_redirects=True, timeout=timeout)
     content_type = response.headers.get('Content-Type', '')
-    if response.status_code == 200 and 'html' in content_type.lower():
-        raise ValueError(f"Server returned HTTP 200 HTML response for {url}")
+    if (response.status_code == 200 and 'html' in content_type.lower() and
+            not url.lower().endswith(('.html', '.htm'))):
+        raise TransientDownloadError(
+            f"Server returned HTTP 200 HTML response for non-HTML URL: {url}")
     return response
 
 
@@ -1172,7 +1182,7 @@ def add_future_year_urls():
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     found = True
                     break
-            except (requests.RequestException, ValueError) as e:
+            except (requests.RequestException, TransientDownloadError) as e:
                 logging.error(f"URL is not accessible {url_to_check}: {e}")
         if not found:
             fallback_url = url.format(YEAR=baseline_year)
@@ -1182,14 +1192,19 @@ def add_future_year_urls():
             _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
 
 
-@retry(tries=3, delay=5, backoff=2, exceptions=(ValueError,))
+@retry(exceptions=(TransientDownloadError,
+                   requests.exceptions.RequestException),
+       tries=3,
+       delay=5,
+       backoff=2)
 def download_with_retry(session: requests.Session, url: str, dest_path: str):
     logging.info(f"Downloading file from URL: {url} -> {dest_path}")
     with session.get(url, stream=True, timeout=120) as response:
         response.raise_for_status()
         content_type = response.headers.get('Content-Type', '')
         if 'html' in content_type.lower():
-            raise ValueError(f"Server returned HTML error page for URL: {url}")
+            raise TransientDownloadError(
+                f"Server returned HTML error page for URL: {url}")
         tmp_file_path = None
         try:
             dest_dir = os.path.dirname(dest_path) or '.'
@@ -1263,7 +1278,7 @@ def download_files():
             )
 
     except Exception as e:
-        logging.fatal(f"Error occurred in download method {e}")
+        logging.error(f"Error occurred in download method {e}")
         raise
     finally:
         session.close()
