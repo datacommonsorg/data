@@ -1,0 +1,34 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_missing_refs",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_lint_errors",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_min_value_count",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, NumObservations FROM stats",
+                "condition": "NumObservations >= 1"
+            }
+        }
+    ]
+}
