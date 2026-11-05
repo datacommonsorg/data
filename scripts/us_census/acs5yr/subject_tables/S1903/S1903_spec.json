@@ -1,0 +1,49 @@
+{
+    "populationType": {
+        "_DEFAULT": "Household"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        },
+        "Median income (dollars)": {
+            "measuredProperty": "income",
+            "statType": "medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        }
+    },
+    "pvs": {
+        "householderRace": {
+            "White": "WhiteAlone",
+            "Black or African American": "BlackOrAfricanAmericanAlone",
+            "American Indian and Alaska Native": "AmericanIndianOrAlaskaNativeAlone",
+            "Asian": "AsianAlone",
+            "Native Hawaiian and Other Pacific Islander": "NativeHawaiianOrOtherPacificIslanderAlone",
+            "Some other race": "SomeOtherRaceAlone",
+            "Two or more races": "TwoOrMoreRaces",
+            "Hispanic or Latino origin (of any race)": "HispanicOrLatino",
+            "White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
+        },
+        "householderAge": {
+            "15 to 24 years": "[15 24 Years]",
+            "25 to 44 years": "[25 44 Years]",
+            "45 to 64 years": "[45 64 Years]",
+            "65 years and over": "[65 - Years]"
+        }
+    },
+    "ignoreColumns": [
+        "id",
+        "Geography",
+        "Geographic Area Name",
+        "Margin of Error",
+        "FAMILIES",
+        "NONFAMILY HOUSEHOLDS",
+        "PERCENT IMPUTED",
+        "PERCENT ALLOCATED",
+        "Percent Distribution",
+        "FAMILY INCOME BY FAMILY SIZE",
+        "FAMILY INCOME BY NUMBER OF EARNERS"
+    ],
+    "denominators": {}
+}
