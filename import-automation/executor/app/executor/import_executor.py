@@ -388,8 +388,8 @@ class ImportExecutor:
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
-            import_tool_args = [f'-o={output_path}', 'genmcf']
-            import_tool_args.extend(input_files)
+            import_tool_args = _get_import_tool_args(
+                output_path, input_files, self.config.import_tool_num_threads)
             timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
@@ -1378,6 +1378,24 @@ def _run_user_script(
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)
+
+
+def _get_import_tool_args(output_path: str, input_files: List[str],
+                          num_threads: int) -> List[str]:
+    """Returns the command line arguments for import tool genmcf.
+
+    Args:
+        output_path: Directory to write the genmcf output to.
+        input_files: Input files (TMCF, CSV, MCF) to process.
+        num_threads: Number of threads to use. If not positive, -n is not
+            passed and the import tool chooses the number of threads.
+    """
+    args = [f'-o={output_path}']
+    if num_threads > 0:
+        args.append(f'-n={num_threads}')
+    args.append('genmcf')
+    args.extend(input_files)
+    return args
 
 
 def _clean_time(
