@@ -1,0 +1,73 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_input/Municipality_Beneficio_de_Prestacao_Continuada_BPC_por_municipio_pagador_3 - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/pv_map/Municipality_Beneficio_de_Prestacao_Continuada_BPC_por_municipio_pagador_1 - pvmap.csv --config_file=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/config_metadata/Municipality_Beneficio_de_Prestacao_Continuada_BPC_por_municipio_pagador_3 - metadata.csv --places_resolved_csv=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/Municipality_Beneficiarios_do BPC_no_Cadastro_Unico - resolved_places.csv --output_path=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_output/Municipality_Beneficio_de_Prestacao_Continuada_BPC_por_municipio_pagador_3 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-06-17 10:35:42.535133
+
+Node: dcid:Amount_EconomicActivity_60OrMoreYears_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Valor total pago aos beneficiários do BPC Inscritos no Cadastro Único para Idosos (Idade>60 Anos)"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Amount_EconomicActivity_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_PermanentDisablity_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to beneficiaries of BPC Registered in the Single Registry under Permanent Disability"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total pago aos beneficiários do BPC Inscritos no Cadastro Único por Incapacidade Permanente@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+disabilityStatus: dcid:PermanentDisablity
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Annual_Amount_EconomicActivity_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to beneficiaries of BPC Registered in the Single Registry"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+alternateName: "Valor total pago aos beneficiários do BPC inscritos no Cadastro Único@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) Paid By Municipality"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único Idosos (Idade>60 Anos) Pagos pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry Paid By Municipality"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único Pago pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_PermanentDisablity_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability Paid By Municipality"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único por Incapacidade Permanente Pago pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+disabilityStatus: dcid:PermanentDisablity
+registrationStatus: dcid:Brazil_SingleRegistry
+

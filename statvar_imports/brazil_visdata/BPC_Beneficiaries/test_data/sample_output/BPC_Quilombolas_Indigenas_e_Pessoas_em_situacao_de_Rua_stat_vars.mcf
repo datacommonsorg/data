@@ -1,0 +1,74 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_input/BPC_Quilombolas_Indigenas_e_Pessoas_em_situacao_de_Rua - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/pv_map/BPC_Quilombolas_Indigenas_e_Pessoas_em_situacao_de_Rua - pvmap.csv --config_file=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/config_metadata/BPC_Quilombolas_Indigenas_e_Pessoas_em_situacao_de_Rua - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_output/BPC_Quilombolas_Indigenas_e_Pessoas_em_situacao_de_Rua --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-06-16 11:23:51.938202
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_HomelessFamily_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Elderly (over 60 years old) Beneficiaries of BPC Registered in the Single Registry Experiencing Homelessness."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Cadastrados no Cadastro Único Menores de Idosos (Idade>60) Com Tipo Familiar Sem Abrigo@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+householdType: dcid:HomelessFamily
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_IndigenasFamily_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Elderly (over 60 years old) Beneficiaries of BPC Registered in the Single Registry Who Belong to Indigenous Families."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Cadastrados no Cadastro Único Menores de Idosos (Idade>60) Com Família Indígena@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+householdType: dcid:IndigenasFamily
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_QuilombolasFamily_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Elderly (over 60 years old) Beneficiaries of BPC Registered in the Single Registry who belong to Quilombola Families."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Cadastrados no Cadastro Único Menores de Idosos (Idade>60) Com Família Quilombola@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+householdType: dcid:QuilombolasFamily
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_HomelessFamily_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry with Permanent Disability Experiencing Homelessness."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob Incapacidade Permanente com Tipo Familiar Sem Abrigo@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+householdType: dcid:HomelessFamily
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_IndigenasFamily_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry with Permanent Disability Who Belong to Indigenous Families."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob Incapacidade Permanente com Família Indígena@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+householdType: dcid:IndigenasFamily
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_QuilombolasFamily_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry with Permanent Disability Who Belong to Quilombola Families."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Cadastrados no Cadastro Único sob Incapacidade Permanente com Família Quilombola@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+householdType: dcid:QuilombolasFamily
+registrationStatus: dcid:Brazil_SingleRegistry
+
