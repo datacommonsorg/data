@@ -1,0 +1,11 @@
+"key","value"
+"url","https://uganda.opendataforafrica.org/ewvclpb/uganda-regional-education-statistics"
+"description","Uganda Regional Education Statistics"
+"#place_type","Country, AdministrativeArea1"
+"#places_within","country/UGA"
+"start_date",2007
+"end_date",2016
+"release_frequency","P1Y"
+"output_columns","observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+"mapped_rows",1
+"mapped_columns",7

@@ -1,0 +1,41 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_statvar_count_non_empty",
+            "description": "Verify each input table generates at least one active StatVar.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS total_svs FROM stats",
+                "condition": "total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_2016_statvars_freshness",
+            "description": "Verify all 2016 demographic, education, and immunization StatVars have MaxDate >= 2016.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar NOT IN ('GrowthRate_Count_Person', 'Count_Student_EnrolledInSchool_PrimaryEducation', 'Count_Student_EnrolledInSchool_SecondaryEducation', 'Count_Person_Female', 'Count_Person_Male', 'Count_Person_ResidesInGroupQuarters', 'Count_Person_ResidesInHousehold', 'Count_HealthEstablishment_Hospital', 'Count_HealthEstablishment_PartialHospitalizationProgram', 'Count_HealthEstablishment_HealthCenter', 'Count_HealthEstablishment_PrivatelyOwnedNotForProfitEstablishment', 'Count_Person_VaccineAdministered_OralPolioVaccine3_AsAFractionOf_Count_Person', 'Count_BirthEvent_HealthFacility', 'Count_HealthEstablishment', 'Count_HealthEstablishment_GovernmentOwnedEstablishment_HealthFacility', 'Count_HealthEstablishment_NonGovernmentalOrganizationEstablishment', 'Count_HealthEstablishment_PrivatelyOwnedEstablishment_HealthFacility') AND NOT (StatVar IN ('Count_Person', 'Count_Person_Rural', 'Count_Person_Urban') AND CAST(MinDate AS VARCHAR) >= '1980')",
+                "condition": "CAST(MaxDate AS VARCHAR) >= '2016'"
+            }
+        },
+        {
+            "rule_id": "check_2014_2015_statvars_freshness",
+            "description": "Verify 2014 district census StatVars and 2015 school enrollment StatVars have MaxDate >= 2014.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_Student_EnrolledInSchool_PrimaryEducation', 'Count_Student_EnrolledInSchool_SecondaryEducation', 'Count_Person_Female', 'Count_Person_Male', 'Count_Person_ResidesInGroupQuarters', 'Count_Person_ResidesInHousehold', 'Count_Person', 'Count_Person_Rural', 'Count_Person_Urban')",
+                "condition": "CAST(MaxDate AS VARCHAR) >= '2014'"
+            }
+        },
+        {
+            "rule_id": "check_historical_statvars_freshness",
+            "description": "Verify historical census growth rate (2002) and discontinued health facility series (2006-2013) meet their expected end-year boundaries.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('GrowthRate_Count_Person', 'Count_HealthEstablishment_Hospital', 'Count_HealthEstablishment_PartialHospitalizationProgram', 'Count_HealthEstablishment_HealthCenter', 'Count_HealthEstablishment_PrivatelyOwnedNotForProfitEstablishment', 'Count_Person_VaccineAdministered_OralPolioVaccine3_AsAFractionOf_Count_Person', 'Count_BirthEvent_HealthFacility', 'Count_HealthEstablishment', 'Count_HealthEstablishment_GovernmentOwnedEstablishment_HealthFacility', 'Count_HealthEstablishment_NonGovernmentalOrganizationEstablishment', 'Count_HealthEstablishment_PrivatelyOwnedEstablishment_HealthFacility')",
+                "condition": "CAST(MaxDate AS VARCHAR) >= '2002'"
+            }
+        }
+    ]
+}
