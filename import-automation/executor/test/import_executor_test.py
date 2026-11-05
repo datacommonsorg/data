@@ -45,15 +45,26 @@ class ImportExecutorTest(unittest.TestCase):
             '2020-07-15',
             import_executor._clean_date('2020-07-15T12:07:17.365264+00:00'))
 
-    def test_get_import_tool_args_with_num_threads(self):
+    @mock.patch.object(import_executor, '_get_cpu_count', return_value=8)
+    def test_get_import_tool_args_with_num_threads(self, _):
         self.assertEqual(['-o=/out', '-n=4', 'genmcf', 'a.tmcf', 'a.csv'],
                          import_executor._get_import_tool_args(
                              '/out', ['a.tmcf', 'a.csv'], 4))
 
-    def test_get_import_tool_args_without_num_threads(self):
+    @mock.patch.object(import_executor, '_get_cpu_count', return_value=2)
+    def test_get_import_tool_args_num_threads_capped_at_cpu_count(self, _):
+        self.assertEqual(['-o=/out', '-n=2', 'genmcf', 'a.tmcf', 'a.csv'],
+                         import_executor._get_import_tool_args(
+                             '/out', ['a.tmcf', 'a.csv'], 4))
+
+    @mock.patch.object(import_executor, '_get_cpu_count', return_value=8)
+    def test_get_import_tool_args_without_num_threads(self, _):
         self.assertEqual(['-o=/out', 'genmcf', 'a.tmcf', 'a.csv'],
                          import_executor._get_import_tool_args(
                              '/out', ['a.tmcf', 'a.csv'], 0))
+
+    def test_get_cpu_count_is_positive(self):
+        self.assertGreaterEqual(import_executor._get_cpu_count(), 1)
 
     def test_default_import_tool_num_threads(self):
         self.assertEqual(4, configs.ExecutorConfig().import_tool_num_threads)

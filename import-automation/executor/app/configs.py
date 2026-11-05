@@ -143,8 +143,9 @@ class ExecutorConfig:
     use_autopush_dc_api: bool = True
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
-    # Number of threads (-n) for import tool genmcf. CSV files are processed in
-    # parallel, one thread per file. 0 lets the import tool choose.
+    # Maximum number of threads (-n) for import tool genmcf, capped at the
+    # number of available CPUs. CSV files are processed in parallel, one thread
+    # per file. 0 lets the import tool choose.
     import_tool_num_threads: int = 4
     # Invoke differ tool.
     invoke_differ_tool: bool = True
