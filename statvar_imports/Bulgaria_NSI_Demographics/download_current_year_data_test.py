@@ -27,7 +27,9 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
+import requests
 from download_current_year_data import (
+    _validate_horizontal_and_vertical_sums,
     check_and_download_nsi,
     list_gcs_files,
     normalize_cell,
@@ -272,6 +274,144 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
             self.assertTrue(
                 os.path.exists(
                     os.path.join(tmp_dir, "nsi_demographics_page.html")))
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+
+    def _create_test_csv(self, rows):
+        tmp = tempfile.NamedTemporaryFile("w", delete=False, suffix=".csv")
+        writer = csv.writer(tmp)
+        writer.writerow(["Title", "", "", "", "", "", "", "", "", ""])
+        writer.writerow(["Sub", "", "", "", "", "", "", "", "", ""])
+        writer.writerow(["Header", "Total", "Male", "Female", "Urban Total", "Urban Male", "Urban Female", "Rural Total", "Rural Male", "Rural Female"])
+        for r in rows:
+            writer.writerow(r)
+        tmp.close()
+        return tmp.name
+
+    def test_validate_horizontal_and_vertical_sums_success(self):
+        rows = [
+            ["Total", "100", "50", "50", "60", "30", "30", "40", "20", "20"],
+            ["0", "40", "20", "20", "24", "12", "12", "16", "8", "8"],
+            ["1 - 4", "60", "30", "30", "36", "18", "18", "24", "12", "12"],
+        ]
+        csv_path = self._create_test_csv(rows)
+        try:
+            self.assertTrue(_validate_horizontal_and_vertical_sums(csv_path))
+        finally:
+            os.remove(csv_path)
+
+    def test_validate_horizontal_and_vertical_sums_horizontal_failure(self):
+        rows = [
+            ["Total", "100", "60", "30", "60", "30", "30", "40", "20", "20"],
+        ]
+        csv_path = self._create_test_csv(rows)
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                _validate_horizontal_and_vertical_sums(csv_path)
+            self.assertIn("Total (100) != Male (60) + Female (30)", str(ctx.exception))
+        finally:
+            os.remove(csv_path)
+
+    def test_validate_horizontal_and_vertical_sums_vertical_failure(self):
+        rows = [
+            ["Total", "100", "50", "50", "60", "30", "30", "40", "20", "20"],
+            ["0", "40", "20", "20", "24", "12", "12", "16", "8", "8"],
+            ["1 - 4", "50", "25", "25", "30", "15", "15", "20", "10", "10"],
+        ]
+        csv_path = self._create_test_csv(rows)
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                _validate_horizontal_and_vertical_sums(csv_path)
+            self.assertIn("District header (100) != sum of 2 age cohorts (90)", str(ctx.exception))
+        finally:
+            os.remove(csv_path)
+
+    def test_validate_horizontal_and_vertical_sums_with_dash_allowed(self):
+        rows = [
+            ["Total", "100", "50", "50", "60", "30", "30", "40", "20", "20"],
+            ["0", "100", "50", "50", "60", "30", "30", "40", "-", "20"],
+        ]
+        csv_path = self._create_test_csv(rows)
+        try:
+            self.assertTrue(_validate_horizontal_and_vertical_sums(csv_path))
+        finally:
+            os.remove(csv_path)
+
+    @mock.patch("download_current_year_data.list_gcs_files", return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"])
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_network_exception_fallback(self, mock_create_session, mock_list_gcs):
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = requests.RequestException("Connection timeout")
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            check_and_download_nsi(
+                local_dir=tmp_dir,
+                gcs_dir="gs://mock-bucket/input_files",
+                allow_staged_fallback=True,
+            )
+            mock_list_gcs.assert_called_once_with("gs://mock-bucket/input_files")
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_network_exception_fails_without_fallback(self, mock_create_session):
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = requests.RequestException("Connection timeout")
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                check_and_download_nsi(
+                    local_dir=tmp_dir,
+                    gcs_dir="gs://mock-bucket/input_files",
+                    allow_staged_fallback=False,
+                )
+            self.assertEqual(ctx.exception.code, 1)
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch("download_current_year_data.list_gcs_files", return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"])
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_http_503_fallback(self, mock_create_session, mock_list_gcs):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 503
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            check_and_download_nsi(
+                local_dir=tmp_dir,
+                gcs_dir="gs://mock-bucket/input_files",
+                allow_staged_fallback=True,
+            )
+            mock_list_gcs.assert_called_once_with("gs://mock-bucket/input_files")
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    @mock.patch("download_current_year_data._create_retry_session")
+    def test_check_and_download_nsi_http_503_fails_without_fallback(self, mock_create_session):
+        mock_resp = mock.MagicMock()
+        mock_resp.status_code = 503
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_resp
+        mock_create_session.return_value = mock_session
+
+        tmp_dir = tempfile.mkdtemp(dir="/tmp")
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                check_and_download_nsi(
+                    local_dir=tmp_dir,
+                    gcs_dir="gs://mock-bucket/input_files",
+                    allow_staged_fallback=False,
+                )
+            self.assertEqual(ctx.exception.code, 1)
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 

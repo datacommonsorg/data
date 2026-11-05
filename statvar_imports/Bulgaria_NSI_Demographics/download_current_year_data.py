@@ -210,7 +210,17 @@ def to_int_or_zero(val: str) -> int:
 
 
 def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
-    """Validates horizontal and vertical arithmetic consistency of the generated CSV."""
+    """Validates horizontal and vertical arithmetic consistency of the generated CSV.
+
+    Justification for custom Python validator:
+    summary_report.csv (the `stats` table queried by `SQL_VALIDATOR` in
+    validation_config.json) only stores aggregate `MinValue` and `MaxValue`
+    per StatVar across all places. Consequently, per-district cross-column
+    arithmetic sums (Total = Urban + Rural = Male + Female) and cross-row
+    arithmetic sums (District header = sum of age cohorts) cannot be expressed
+    in validation_config.json SQL rules and can only be verified in Python
+    prior to stat_var_processor.py execution.
+    """
     logging.info("Validating horizontal and vertical sums (%s)...", file_path)
     with open(file_path, "r", encoding="utf-8") as f:
         reader = list(csv.reader(f))
@@ -219,92 +229,94 @@ def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
         raise ValueError(
             f"CSV file {file_path} is too short ({len(reader)} rows).")
 
-    # Full table contains 3 header rows + 29 places * 23 rows = 670 rows
-    is_full_table = (len(reader) >= 670)
+    # Group rows into districts and their respective age cohort rows.
+    # Header rows occupy reader[0:3].
+    # District rows start with a letter (e.g. 'Total', 'Blagoevgrad', 'Sofia (stolitsa)').
+    # Age cohort rows start with a digit ('0', '1 - 4', '5 - 9', ..., '100 +').
+    grouped_districts = []  # List of tuples: (district_row, [cohort_rows])
+    current_district_row = None
+    current_cohort_rows = []
 
-    row_idx = 3
-    while row_idx < len(reader):
-        d_row = reader[row_idx]
-        d_name = d_row[0].strip()
+    for row in reader[3:]:
+        if not row or not any(x.strip() for x in row):
+            continue
+        first_cell = row[0].strip()
+        if not first_cell:
+            continue
+        if first_cell[0].isdigit():
+            if current_district_row is None:
+                raise ValueError(
+                    f"Found age cohort row '{first_cell}' without a preceding district row."
+                )
+            current_cohort_rows.append(row)
+        else:
+            if current_district_row is not None:
+                grouped_districts.append((current_district_row, current_cohort_rows))
+            current_district_row = row
+            current_cohort_rows = []
 
-        # Horizontal checks on district total row:
-        # Col 1: Total, 2: Male, 3: Female, 4: Urban Total, 5: Urban Male, 6: Urban Female,
-        # 7: Rural Total, 8: Rural Male, 9: Rural Female
+    if current_district_row is not None:
+        grouped_districts.append((current_district_row, current_cohort_rows))
+
+    if not grouped_districts:
+        raise ValueError(f"No district data found in {file_path}.")
+
+    def check_horizontal(row, label):
+        has_dash = any(x.strip() == "-" for x in row[1:10])
+        if has_dash:
+            return
         tot, m, fem, urb, urb_m, urb_f, rur, rur_m, rur_f = [
-            to_int_or_zero(x) for x in d_row[1:10]
+            to_int_or_zero(x) for x in row[1:10]
         ]
-        has_dash = any(x.strip() == "-" for x in d_row[1:10])
-        if not has_dash:
-            if tot != urb + rur:
-                raise ValueError(
-                    f"District '{d_name}': Total ({tot}) != Urban ({urb}) + Rural ({rur})."
-                )
-            if tot != m + fem:
-                raise ValueError(
-                    f"District '{d_name}': Total ({tot}) != Male ({m}) + Female ({fem})."
-                )
-            if urb != urb_m + urb_f:
-                raise ValueError(
-                    f"District '{d_name}': Urban ({urb}) != Urban Male ({urb_m}) + Urban Female ({urb_f})."
-                )
-            if rur != rur_m + rur_f:
-                raise ValueError(
-                    f"District '{d_name}': Rural ({rur}) != Rural Male ({rur_m}) + Rural Female ({rur_f})."
-                )
-            if m != urb_m + rur_m:
-                raise ValueError(
-                    f"District '{d_name}': Male ({m}) != Urban Male ({urb_m}) + Rural Male ({rur_m})."
-                )
-            if fem != urb_f + rur_f:
-                raise ValueError(
-                    f"District '{d_name}': Female ({fem}) != Urban Female ({urb_f}) + Rural Female ({rur_f})."
-                )
+        if tot != urb + rur:
+            raise ValueError(
+                f"{label}: Total ({tot}) != Urban ({urb}) + Rural ({rur})."
+            )
+        if tot != m + fem:
+            raise ValueError(
+                f"{label}: Total ({tot}) != Male ({m}) + Female ({fem})."
+            )
+        if urb != urb_m + urb_f:
+            raise ValueError(
+                f"{label}: Urban ({urb}) != Urban Male ({urb_m}) + Urban Female ({urb_f})."
+            )
+        if rur != rur_m + rur_f:
+            raise ValueError(
+                f"{label}: Rural ({rur}) != Rural Male ({rur_m}) + Rural Female ({rur_f})."
+            )
+        if m != urb_m + rur_m:
+            raise ValueError(
+                f"{label}: Male ({m}) != Urban Male ({urb_m}) + Rural Male ({rur_m})."
+            )
+        if fem != urb_f + rur_f:
+            raise ValueError(
+                f"{label}: Female ({fem}) != Urban Female ({urb_f}) + Rural Female ({rur_f})."
+            )
 
-        if is_full_table:
-            # 22 age cohort rows following each district header
-            a_rows = []
-            for _ in range(22):
-                row_idx += 1
-                if row_idx >= len(reader):
-                    break
-                a_row = reader[row_idx]
-                a_rows.append(a_row)
-                a_name = a_row[0].strip()
-                atot, am, afem, aurb, aurb_m, aurb_f, arur, arur_m, arur_f = [
-                    to_int_or_zero(x) for x in a_row[1:10]
-                ]
-                a_has_dash = any(x.strip() == "-" for x in a_row[1:10])
-                if not a_has_dash:
-                    if atot != aurb + arur:
-                        raise ValueError(
-                            f"Cohort '{d_name} - {a_name}': Total ({atot}) != Urban ({aurb}) + Rural ({arur})."
-                        )
-                    if atot != am + afem:
-                        raise ValueError(
-                            f"Cohort '{d_name} - {a_name}': Total ({atot}) != Male ({am}) + Female ({afem})."
-                        )
-                    if aurb != aurb_m + aurb_f:
-                        raise ValueError(
-                            f"Cohort '{d_name} - {a_name}': Urban ({aurb}) != Urban Male ({aurb_m}) + Urban Female ({aurb_f})."
-                        )
-                    if arur != arur_m + arur_f:
-                        raise ValueError(
-                            f"Cohort '{d_name} - {a_name}': Rural ({arur}) != Rural Male ({arur_m}) + Rural Female ({arur_f})."
-                        )
+    for d_row, a_rows in grouped_districts:
+        d_name = d_row[0].strip()
+        # 1. Horizontal check on district row
+        check_horizontal(d_row, f"District '{d_name}'")
 
-            # Vertical sum check: District header == sum of 22 age cohorts
+        # 2. Horizontal checks on each age cohort row
+        for a_row in a_rows:
+            a_name = a_row[0].strip()
+            check_horizontal(a_row, f"Cohort '{d_name} - {a_name}'")
+
+        # 3. Vertical sum check whenever a district has age cohorts
+        if a_rows:
             cohorts_have_dash = any(
-                "-" in r[col_i] for r in a_rows for col_i in range(1, 10))
-            if not cohorts_have_dash:
+                "-" in r[col_i].strip() for r in a_rows for col_i in range(1, 10))
+            district_has_dash = any(
+                "-" in d_row[col_i].strip() for col_i in range(1, 10))
+            if not cohorts_have_dash and not district_has_dash:
                 for col_i in range(1, 10):
                     d_val = to_int_or_zero(d_row[col_i])
                     a_sum = sum(to_int_or_zero(r[col_i]) for r in a_rows)
                     if d_val != a_sum:
                         raise ValueError(
-                            f"District '{d_name}', col {col_i}: District header ({d_val}) != sum of 22 age cohorts ({a_sum})."
+                            f"District '{d_name}', col {col_i}: District header ({d_val}) != sum of {len(a_rows)} age cohorts ({a_sum})."
                         )
-
-        row_idx += 1
 
     logging.info("Horizontal and vertical sum validation PASSED for %s!",
                  file_path)
@@ -324,7 +336,7 @@ def check_and_download_nsi(
         "(Source: %s, Destination GCS: %s)", NSI_URL, gcs_dir)
 
     html_content = None
-    is_cloudflare_blocked = False
+    fallback_eligible = False
     raw_html_path = os.path.join(local_dir, "nsi_demographics_page.html")
     session = _create_retry_session()
     try:
@@ -337,20 +349,25 @@ def check_and_download_nsi(
             logging.info("Saved raw NSI HTML to %s (%d bytes)", raw_html_path,
                          os.path.getsize(raw_html_path))
         elif resp.status_code == 403:
-            is_cloudflare_blocked = True
+            fallback_eligible = True
             logging.warning(
                 "NSI portal returned HTTP 403 (Cloudflare challenge/block) "
                 "for %s.", NSI_URL)
+        elif resp.status_code >= 500:
+            fallback_eligible = True
+            logging.warning(
+                "NSI portal returned server error HTTP %d for %s.",
+                resp.status_code, NSI_URL)
         else:
             logging.error("NSI portal returned unexpected HTTP %d for %s.",
                           resp.status_code, NSI_URL)
             sys.exit(1)
-    except Exception as e:
-        logging.error("Direct request to nsi.bg failed: %s", e)
-        sys.exit(1)
+    except (requests.RequestException, Exception) as e:
+        logging.warning("Direct request to nsi.bg failed: %s", e)
+        fallback_eligible = True
 
     if not html_content:
-        if is_cloudflare_blocked and allow_staged_fallback:
+        if fallback_eligible and allow_staged_fallback:
             logging.info(
                 "Checking if input files are already present in GCS "
                 "(%s) (--allow_staged_fallback enabled)...", gcs_dir)
