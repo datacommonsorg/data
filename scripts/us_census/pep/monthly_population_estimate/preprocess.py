@@ -21,6 +21,7 @@
 from dataclasses import replace
 import os
 import re
+import tempfile
 import warnings
 import requests
 import numpy as np
@@ -34,24 +35,129 @@ import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
+from retry import retry
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+if 'mode' not in FLAGS:
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+if 'input_path' not in FLAGS:
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
+_BASELINE_YEAR = 2025
+_SESSION = None
+
+
+def _create_retry_session(retries=5, backoff_factor=2):
+    """Creates a requests.Session with automatic retry on transient HTTP errors."""
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
+        'Accept':
+            '*/*',
+    })
+    retry_strategy = Retry(
+        total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504, 520],
+        allowed_methods=['HEAD', 'GET'],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
+
+
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
+def _is_html_response(content_type, first_bytes=b''):
+    """Returns True if the response headers or body indicate an HTML/WAF error page."""
+    if 'html' in (content_type or '').lower():
+        return True
+    if first_bytes:
+        head = first_bytes[:512].lstrip().lower()
+        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
+                b'<title>request rejected</title>' in head or
+                b'the requested url was rejected' in head):
+            return True
+    return False
+
+
+@retry(exceptions=(ValueError, requests.exceptions.RequestException),
+       tries=3,
+       delay=5,
+       backoff=2)
+def _head_with_html_retry(session, url, timeout=30):
+    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
+    response = session.head(url, timeout=timeout, allow_redirects=True)
+    content_type = response.headers.get('Content-Type', '').lower()
+    if (response.status_code == 200 and 'html' in content_type and
+            not url.lower().endswith(('.html', '.htm'))):
+        raise ValueError(
+            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
+        )
+    return response
+
+
+@retry(exceptions=(ValueError, requests.exceptions.RequestException),
+       tries=3,
+       delay=5,
+       backoff=2)
+def download_with_retry(session, url, dest_path):
+    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
+    with session.get(url, stream=True, timeout=120) as response:
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', '')
+        dest_dir = os.path.dirname(os.path.abspath(dest_path))
+        os.makedirs(dest_dir, exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
+        try:
+            first_chunk = b''
+            with os.fdopen(fd, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        if not first_chunk:
+                            first_chunk = chunk[:512]
+                            if (not url.lower().endswith(
+                                ('.html', '.htm')) and _is_html_response(
+                                    content_type, first_chunk)):
+                                raise ValueError(
+                                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
+                                )
+                        f.write(chunk)
+            if not first_chunk:
+                raise ValueError(f'Downloaded empty file from URL: {url}')
+            os.replace(tmp_path, dest_path)
+        except Exception:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            raise
+
 
 #Creating folder to store the raw data from source
 raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              "raw_data")
-if not os.path.exists(raw_data_path):
-    os.mkdir(raw_data_path)
+os.makedirs(raw_data_path, exist_ok=True)
 
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -206,8 +312,9 @@ class CensusUSACountryPopulation:
         self._file_name = None
         self._scaling_factor = 1
         # Finding the Dir Path
-        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
-            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
+        dir_name = os.path.dirname(self._cleaned_csv_file_path)
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
 
     def _load_data(self, file: str) -> pd.DataFrame:
         """
@@ -459,25 +566,31 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
-    # This method checks for URLs from 2030 down to 2021. If a valid URL is found for any year, the method stops and adds it to the download URL.
-    #
-    with requests.Session() as session:
-        for url in urls_to_scan:
-            for future_year in range(2030, 2020, -1):
-                YEAR = future_year
-
-                url_to_check = url.format(YEAR=YEAR)
-                try:
-                    check_url = session.head(url_to_check,
-                                             allow_redirects=True,
-                                             timeout=5)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                        break
-
-                except requests.exceptions.RequestException as e:
-                    logging.error(f"URL is not accessible {url_to_check}: {e}")
+    # Check for URLs from 2030 down to _BASELINE_YEAR. If a valid URL is found for any year,
+    # add it to the download URL. If none found, fallback to _BASELINE_YEAR.
+    session = _get_session()
+    for url in urls_to_scan:
+        found_url = None
+        for future_year in range(2030, _BASELINE_YEAR - 1, -1):
+            YEAR = future_year
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = _head_with_html_retry(session,
+                                                  url_to_check,
+                                                  timeout=10)
+                if check_url.status_code == 200:
+                    found_url = url_to_check
+                    break
+            except Exception as e:
+                logging.debug(f"URL is not accessible {url_to_check}: {e}")
+        if found_url:
+            _FILES_TO_DOWNLOAD.append({"download_path": found_url})
+        else:
+            baseline_url = url.format(YEAR=_BASELINE_YEAR)
+            logging.info(
+                f"No future year URL found; falling back to baseline: {baseline_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": baseline_url})
 
 
 def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
@@ -598,91 +711,86 @@ def download_files():
     """
     This method allows to download the input files.
     """
-    global _FILES_TO_DOWNLOAD
+    global _FILES_TO_DOWNLOAD, _SESSION
+    session = _get_session()
     max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
-        file_name = None
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name'] > 5):
-            file_name = file_to_dowload['file_name']
-        else:
-            file_name = url.split('/')[-1]
-        retry_number = 0
+    try:
+        for file_to_dowload in _FILES_TO_DOWNLOAD:
+            url = file_to_dowload['download_path']
+            if 'file_name' in file_to_dowload and len(
+                    file_to_dowload['file_name']) > 5:
+                file_name = file_to_dowload['file_name']
+            else:
+                file_name = url.split('/')[-1]
+            retry_number = 0
 
-        is_file_downloaded = False
-        while not is_file_downloaded:
-            try:
-                df = None
-                file_name = url.split("/")[-1]
+            is_file_downloaded = False
+            while not is_file_downloaded:
+                try:
+                    raw_file_dest = os.path.join(raw_data_path, file_name)
+                    download_with_retry(session, url, raw_file_dest)
 
-                if ".xls" in url:
-                    df = pd.read_excel(url, header=_HEADER)
-                    df.to_excel(os.path.join(raw_data_path, file_name),
-                                index=False,
-                                header=False,
-                                engine='xlsxwriter')
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                header=False,
-                                engine='xlsxwriter')
-                elif ".csv" in url:
-                    with requests.get(url, stream=True) as response:
-                        response.raise_for_status()
-                        if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
-                                f.write(response.content)
-                    file_name = file_name.replace(".csv", ".xlsx")
-                    df = pd.read_csv(url, header=None)
-                    df = _clean_csv_file(df)
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                engine='xlsxwriter')
-                elif ".txt" in url:
-                    with requests.get(url, stream=True) as response:
-                        response.raise_for_status()
-                        if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
-                                f.write(response.content)
-                    file_name = file_name.replace(".txt", ".xlsx")
-                    cols = [
-                        "Year and Month", "Date", "Resident Population",
-                        "Resident Population Plus Armed Forces Overseas",
-                        "Civilian Population",
-                        "Civilian NonInstitutionalized Population"
-                    ]
-                    df = pd.read_table(url,
-                                       index_col=False,
-                                       sep=r'\s+',
-                                       engine='python',
-                                       skiprows=17,
-                                       names=cols)
-                    # Skipping 17 rows as the initial 17 rows contains the information about
-                    # the file being used, heading files spread accross multiple lines and
-                    # other irrelevant information like source/contact details.
-                    df = _clean_txt_file(df)
-                    # Multiplying the data with scaling factor 1000.
-                    for col in df.columns:
-                        if "year" not in col.lower():
-                            df[col] = df[col].apply(_mulitply_scaling_factor)
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                engine='xlsxwriter')
+                    if ".xls" in url:
+                        df = pd.read_excel(raw_file_dest, header=_HEADER)
+                        df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
+                                    index=False,
+                                    header=False,
+                                    engine='xlsxwriter')
+                    elif ".csv" in url:
+                        out_file_name = file_name.replace(".csv", ".xlsx")
+                        df = pd.read_csv(raw_file_dest,
+                                         header=None,
+                                         on_bad_lines='skip')
+                        df = _clean_csv_file(df)
+                        df.to_excel(os.path.join(_INPUT_FILE_PATH,
+                                                 out_file_name),
+                                    index=False,
+                                    engine='xlsxwriter')
+                    elif ".txt" in url:
+                        out_file_name = file_name.replace(".txt", ".xlsx")
+                        cols = [
+                            "Year and Month", "Date", "Resident Population",
+                            "Resident Population Plus Armed Forces Overseas",
+                            "Civilian Population",
+                            "Civilian NonInstitutionalized Population"
+                        ]
+                        df = pd.read_table(
+                            raw_file_dest,
+                            index_col=False,
+                            sep=r'\s+',
+                            engine='python',
+                            skiprows=17,
+                            names=cols,
+                            on_bad_lines=lambda line: line[:len(cols)])
+                        # Skipping 17 rows as the initial 17 rows contains the information about
+                        # the file being used, heading files spread accross multiple lines and
+                        # other irrelevant information like source/contact details.
+                        df = _clean_txt_file(df)
+                        # Multiplying the data with scaling factor 1000.
+                        for col in df.columns:
+                            if "year" not in col.lower():
+                                df[col] = df[col].apply(
+                                    _mulitply_scaling_factor)
+                        df.to_excel(os.path.join(_INPUT_FILE_PATH,
+                                                 out_file_name),
+                                    index=False,
+                                    engine='xlsxwriter')
 
-                is_file_downloaded = True
-                logging.info(f"Downloaded file : {url}")
+                    is_file_downloaded = True
+                    logging.info(f"Downloaded and processed file : {url}")
 
-            except Exception as e:
-                logging.error(f"Retry file download {url} - {e}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.fatal(f"Error downloading {url}")
-                    logging.error("Exit from script")
-                    sys.exit(1)
-    return True
+                except Exception as e:
+                    logging.error(f"Retry file download {url} - {e}")
+                    time.sleep(5)
+                    retry_number += 1
+                    if retry_number > max_retry:
+                        logging.fatal(f"Error downloading {url}")
+                        logging.error("Exit from script")
+                        sys.exit(1)
+        return True
+    finally:
+        session.close()
+        _SESSION = None
 
 
 def main(_):

@@ -445,7 +445,7 @@ def process_states_1970_1979(file_path: str) -> pd.DataFrame:
                     loc = "geoId/" + f"{int(data[0]):02d}"
                     for year, val in dict(zip(cols, data[1:])).items():
                         outfile.write(f"{year},{loc},{val}\n")
-        data_df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0, on_bad_lines='skip')
         os.remove("out.csv")
         return data_df
 
@@ -497,7 +497,7 @@ def process_states_1980_1989(file_path: str) -> pd.DataFrame:
 
                     for year, val in dict(zip(cols, data)).items():
                         outfile.write(f"{year},{loc},{val}\n")
-        data_df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0, on_bad_lines='skip')
         os.remove("out.csv")
         return data_df
 
@@ -564,7 +564,7 @@ def process_states_1990_1999(file_path: str) -> pd.DataFrame:
                             outfile.write(f"{year},{loc},{val}\n")
                     if data[1] == "Wyoming":
                         start = False
-        data_df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0, on_bad_lines='skip')
         os.remove("out.csv")
         return data_df
 
@@ -594,7 +594,7 @@ def process_states_1900_1969(states_config: dict, file_path: str,
     _create_intermediate_file(file_path, temp_file1, temp_file2, s1, s2)
     _create_final_file(temp_file1, s1, op_file_name)
     _create_final_file(temp_file2, s2, op_file_name)
-    data_df = pd.read_csv(final_file_path, header=None)
+    data_df = pd.read_csv(final_file_path, header=None, on_bad_lines='skip')
     data_df.columns = ["Year", "Location", "Count_Person"]
     data_df["Count_Person"] = data_df["Count_Person"].multiply(scaling_factor)
     os.remove(temp_file1 + ".csv")

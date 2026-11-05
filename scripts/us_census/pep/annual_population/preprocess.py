@@ -59,10 +59,12 @@ _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    flags.DEFINE_string('mode', '', 'Options: download or process')
-    flags.DEFINE_bool(
-        'is_summary_levels', False,
-        'Options: True for all summary_levels and False for only 162')
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'is_summary_levels' not in _FLAGS:
+        flags.DEFINE_bool(
+            'is_summary_levels', False,
+            'Options: True for all summary_levels and False for only 162')
 
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -132,14 +134,18 @@ def _load_data_df(path: str,
     """
     data_df = None
     if file_format.lower().endswith("csv"):
-        data_df = pd.read_csv(path, header=header, encoding=encoding)
+        data_df = pd.read_csv(path,
+                              header=header,
+                              encoding=encoding,
+                              on_bad_lines='skip')
     elif file_format.lower() == "txt":
         data_df = pd.read_table(path,
                                 index_col=False,
                                 sep=r'\s+',
                                 engine='python',
                                 header=header,
-                                skiprows=skip_rows)
+                                skiprows=skip_rows,
+                                on_bad_lines='skip')
     elif file_format.lower() in ["xls", "xlsx"]:
         data_df = pd.read_excel(path, header=header)
     return data_df
@@ -1258,6 +1264,9 @@ def download_files():
 
     except Exception as e:
         logging.fatal(f"Error occurred in download method {e}")
+        raise
+    finally:
+        session.close()
 
 
 def main(_):

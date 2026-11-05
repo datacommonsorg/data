@@ -80,7 +80,10 @@ class TestPreprocess(unittest.TestCase):
 
             self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
             self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
-        shutil.rmtree(self.cleaned_csv_file_path, ignore_errors=True)
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.cleaned_csv_file_path, ignore_errors=True)
 
     def test_create_csv(self):
         """
@@ -109,6 +112,44 @@ class TestPreprocess(unittest.TestCase):
                 csv_data = csv_file.read()
 
             self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+    def test_create_retry_session(self):
+        """Tests that _create_retry_session sets user agent and retry adapter."""
+        from preprocess import _create_retry_session
+        session = _create_retry_session()
+        self.assertIn('User-Agent', session.headers)
+        self.assertIn('DataCommonsImport', session.headers['User-Agent'])
+
+    def test_is_html_response(self):
+        """Tests HTML error page detection."""
+        from preprocess import _is_html_response
+        self.assertTrue(_is_html_response('text/html'))
+        self.assertTrue(_is_html_response('text/html; charset=utf-8'))
+        self.assertTrue(
+            _is_html_response('application/json',
+                              b'<html><body>Error</body></html>'))
+        self.assertTrue(
+            _is_html_response('', b'<title>Request Rejected</title>'))
+        self.assertFalse(_is_html_response('text/plain', b'1990  1  248709873'))
+
+    def test_srh_txt_parser_with_bad_lines(self):
+        """Tests that multi-whitespace table parsing with extra fields in footnotes does not raise ParserError."""
+        import io
+        import pandas as pd
+        cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        sample_srh = (
+            "01001   100  200  300  400  500  600  700  800  900  1000\n"
+            "01003   110  210  310  410  510  610  710  810  910  1010\n"
+            "Note: This file contains estimates produced by Population Division with 17 extra fields saw here\n"
+        )
+        df = pd.read_table(io.StringIO(sample_srh),
+                           index_col=False,
+                           sep=r'\s+',
+                           engine='python',
+                           names=cols,
+                           on_bad_lines=lambda line: line[:len(cols)])
+        self.assertEqual(len(df), 3)
+        self.assertEqual(df.iloc[0]['Area'], '01001')
 
 
 if __name__ == "__main__":

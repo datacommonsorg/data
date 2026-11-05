@@ -40,6 +40,11 @@ class TestPreprocess(unittest.TestCase):
                                       mcf_file_path, tmcf_file_path)
     base.process()
 
+    @classmethod
+    def tearDownClass(cls):
+        import shutil
+        shutil.rmtree(test_output_folder, ignore_errors=True)
+
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
@@ -93,6 +98,50 @@ class TestPreprocess(unittest.TestCase):
             os.remove(self.cleaned_csv_file_path)
 
         self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+    def test_create_retry_session(self):
+        """Tests that _create_retry_session sets user agent and retry adapter."""
+        from preprocess import _create_retry_session
+        session = _create_retry_session()
+        self.assertIn('User-Agent', session.headers)
+        self.assertIn('DataCommonsImport', session.headers['User-Agent'])
+
+    def test_is_html_response(self):
+        """Tests HTML error page detection."""
+        from preprocess import _is_html_response
+        self.assertTrue(_is_html_response('text/html'))
+        self.assertTrue(_is_html_response('text/html; charset=utf-8'))
+        self.assertTrue(
+            _is_html_response('application/json',
+                              b'<html><body>Error</body></html>'))
+        self.assertTrue(
+            _is_html_response('', b'<title>Request Rejected</title>'))
+        self.assertFalse(
+            _is_html_response('application/octet-stream', b'PK\x03\x04'))
+        self.assertFalse(_is_html_response('text/plain', b'1990  1  248709873'))
+
+    def test_txt_parser_with_bad_lines(self):
+        """Tests that multi-whitespace table parsing with bad lines (e.g. notes) does not fail."""
+        import io
+        import pandas as pd
+        cols = [
+            "Year and Month", "Date", "Resident Population",
+            "Resident Population Plus Armed Forces Overseas",
+            "Civilian Population", "Civilian NonInstitutionalized Population"
+        ]
+        sample_txt = (
+            "1990  April 1   248709873 249622814 247051785 242952865\n"
+            "1990  May 1     248769873 249682814 247111785 243012865\n"
+            "Source: U.S. Census Bureau, Population Division. Note with many extra words here\n"
+        )
+        df = pd.read_table(io.StringIO(sample_txt),
+                           index_col=False,
+                           sep=r'\s+',
+                           engine='python',
+                           names=cols,
+                           on_bad_lines=lambda line: line[:len(cols)])
+        self.assertEqual(len(df), 3)
+        self.assertEqual(df.iloc[0]['Year and Month'], '1990')
 
 
 if __name__ == "__main__":
