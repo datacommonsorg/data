@@ -431,14 +431,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
 
 
 def main(_) -> None:
-    try:
-        download_and_process(_FLAGS.output_dir, _FLAGS.pv_map)
-    except Exception as e:  # pylint: disable=broad-except
-        logging.fatal(
-            'Failed to download and process Sri Lanka Census datasets: %s',
-            e,
-            exc_info=True,
-        )
+    download_and_process(_FLAGS.output_dir, _FLAGS.pv_map)
 
 
 if __name__ == '__main__':

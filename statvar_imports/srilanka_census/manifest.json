@@ -9,7 +9,7 @@
             "provenance_description": "Census Data for Sri Lanka",
             "scripts": [
                 "download.py --output_dir=input_files --pv_map=srilanka_census_pvmap.csv",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=srilanka_census_pvmap.csv --config_file=srilanka_census_metadata.csv --output_path=output_files/srilanka_census_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/srilanka_census_counters.csv"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=srilanka_census_pvmap.csv --config_file=srilanka_census_metadata.csv --places_resolved_csv=srilanka_places_resolved.csv --output_path=output_files/srilanka_census_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/srilanka_census_counters.csv"
             ],
             "import_inputs": [
                 {
