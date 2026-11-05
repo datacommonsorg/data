@@ -155,7 +155,7 @@ class SchemaResolver:
             logging.error(
                 f'Cannot add additional PVs {node} for existing node: {schema_node}'
             )
-            self._counters.add_counter(f'error-duplicate-node', 1)
+            self._counters.add_counter('error-duplicate-node', 1)
             return node_added
 
         normalized_node = normalize_mcf_node(node, quantity_range_to_dcid=True)

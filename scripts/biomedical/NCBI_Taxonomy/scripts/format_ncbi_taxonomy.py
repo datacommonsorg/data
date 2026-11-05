@@ -402,7 +402,7 @@ class NamesCls:
                         current_node[mapping_ncbi[
                             'property_type']] = char_replace(property_value)
 
-            except Exception as e:
+            except Exception:
                 logging.error(
                     f"Error resolving name_class - {row['name_class']}")
 

@@ -89,7 +89,7 @@ def process_zip_file(download_path, output_folder, extracted_year):
             f"All contents temporarily unzipped to {temp_extract_folder}")
 
         table_year_pattern = re.compile(
-            f"^Table_.*?{(str(extracted_year))}\.[^.]+$", re.IGNORECASE)
+            rf"^Table_.*?{(str(extracted_year))}\.[^.]+$", re.IGNORECASE)
         for root, dirs, files in os.walk(temp_extract_folder):
             for file in files:
                 file_path = os.path.join(root, file)

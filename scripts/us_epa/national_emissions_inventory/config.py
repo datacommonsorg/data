@@ -323,8 +323,6 @@ replace_metadata = {
         "PM10Filterable",
     "PM25-FIL":
         "PM2.5Filterable",
-    "132649":
-        "Dibenzofurans",
     "98862":
         "1_Phenylethanone",
     "100414":
@@ -349,8 +347,6 @@ replace_metadata = {
         "DieselPM10",
     "PM10-PRI":
         "PM10",
-    "PMFINE":
-        "PMFINE",
     "129000":
         "Pyrene",
     "205992":
@@ -613,8 +609,6 @@ replace_metadata = {
         "2_Methylaniline",
     "96093":
         "2_Phenyloxirane",
-    "98862":
-        "Cumene",
     "98953":
         "Nitrobenzene",
     "100027":
@@ -877,8 +871,6 @@ replace_metadata = {
         "1-Bromopropane",
     "Chloro_Methoxy_Methane":
         "Chloro(Methoxy)Methane",
-    "2_Methoxyethanol":
-        "2-Methoxyethanol",
     "1_2_Dimethoxyethane":
         "1,2-Dimethoxyethane",
     "1_Chloro_2_2_Chloroethoxy_Ethane":
@@ -895,8 +887,6 @@ replace_metadata = {
         "1-Methoxy-2-[2-(2-Methoxyethoxy)Ethoxy]Ethane",
     "2_2_2_Ethoxyethoxy_Ethoxy_Ethanol":
         "2-[2-(2-Ethoxyethoxy)Ethoxy]Ethanol",
-    "2_2_Hexoxyethoxy_Ethanol":
-        "2-(2-Hexoxyethoxy)Ethanol",
     "4_4_Amino_3_Methoxyphenyl_2_Methoxyaniline":
         "4-(4-Amino-3-Methoxyphenyl)-2-Methoxyaniline",
     "4_4_Amino_3_Methylphenyl_2_Methylaniline":
@@ -923,8 +913,6 @@ replace_metadata = {
         "Dibenzo[a,j]Acridine",
     "Dibenz_a_h_acridine":
         "Dibenz[a,h]acridine",
-    "Hydrazine":
-        "Hydrazine",
     "2_2_Bis_4_Chlorophenyl_2_Hydroxyacetate":
         "2,2-Bis(4-Chlorophenyl)-2-Hydroxyacetate",
     "2_Methyl_4_6_Dinitrophenol":
@@ -951,10 +939,6 @@ replace_metadata = {
         "Asbestos",
     "Trioxochromium":
         "Trioxochromium",
-    "Trifluralin":
-        "Trifluralin",
-    "5_Methylchrysene":
-        "5-Methylchrysene",
     "1_Nitropyrene":
         "1-Nitropyrene",
     "Chromic_Acid_VI":
@@ -997,16 +981,12 @@ replace_metadata = {
         "Ammonia",
     "Chromium_6":
         "Chromium(6+)",
-    "1_3_Xylene":
-        "1,3-Xylene",
     "Acenaphthylene":
         "Acenaphthylene",
     "Naphtho_1_2_B_Phenanthrene":
         "Naphtho[1,2-b]Phenanthrene",
     "Acetaldehyde":
         "Acetaldehyde",
-    "DieselPM10":
-        "Diesel PM10",
     "PM10":
         "PM10",
     "PMFINE":
@@ -1083,8 +1063,6 @@ replace_metadata = {
         "Phenanthrene",
     "Naphthalene":
         "Naphthalene",
-    "DieselPM2.5":
-        "Diesel PM2.5",
     "Buta_1_3_Diene":
         "Buta-1,3-Diene",
     "1_2_3_4_7_8_9_Heptachlorodibenzofuran":
@@ -1133,8 +1111,6 @@ replace_metadata = {
         "Cadmium",
     "Cobalt":
         "Cobalt",
-    "Cumene":
-        "Cumene",
     "Lead":
         "Lead",
     "Chlorine":
@@ -1163,8 +1139,6 @@ replace_metadata = {
         "PM10Filterable",
     "PM2.5Filterable":
         "PM2.5Filterable",
-    "Dibenzofurans":
-        "Dibenzofurans",
     "1_Phenylethanone":
         "1-Phenylethanone",
     "Glycol_Ethers":

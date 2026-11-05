@@ -305,7 +305,6 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
 
             target_member = None
             for name in zip_ref.namelist():
-                normalized_name = name.replace('\\', '/').lower()
 
                 general_match = False
                 for pattern in keywords:

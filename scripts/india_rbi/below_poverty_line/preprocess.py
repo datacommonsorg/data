@@ -47,7 +47,6 @@ INDIA_ISO_CODES = {
     "Sikkim": "IN-SK",
     "Tamil Nadu": "IN-TN",
     "Telengana": "IN-TG",
-    "Telangana": "IN-TG",
     "Tripura": "IN-TR",
     "Uttarakhand": "IN-UT",
     "Uttar Pradesh": "IN-UP",
