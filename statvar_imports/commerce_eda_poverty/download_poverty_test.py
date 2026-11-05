@@ -174,13 +174,12 @@ class TestDownloadPoverty(unittest.TestCase):
                     "statvar_imports.commerce_eda_poverty.download_poverty"
                     ".request_url",
                     return_value=None,
-            ) as mock_request_url:
-                with self.assertRaises(RuntimeError):
-                    download_file(
-                        "https://example.gov/EDA_FY23_PPCs.xlsx",
-                        out_file,
-                        max_retries=2,
-                    )
+            ) as mock_request_url, self.assertRaises(RuntimeError):
+                download_file(
+                    "https://example.gov/EDA_FY23_PPCs.xlsx",
+                    out_file,
+                    max_retries=2,
+                )
 
             mock_request_url.assert_called_once()
             self.assertFalse(os.path.exists(out_file))
@@ -193,13 +192,12 @@ class TestDownloadPoverty(unittest.TestCase):
                     "statvar_imports.commerce_eda_poverty.download_poverty"
                     ".request_url",
                     return_value=b"",
-            ) as mock_request_url:
-                with self.assertRaises(RuntimeError):
-                    download_file(
-                        "https://example.gov/EDA_FY23_PPCs.xlsx",
-                        out_file,
-                        max_retries=1,
-                    )
+            ) as mock_request_url, self.assertRaises(RuntimeError):
+                download_file(
+                    "https://example.gov/EDA_FY23_PPCs.xlsx",
+                    out_file,
+                    max_retries=1,
+                )
 
             mock_request_url.assert_called_once()
             self.assertFalse(os.path.exists(out_file))
@@ -361,16 +359,15 @@ class TestDownloadPoverty(unittest.TestCase):
                     "statvar_imports.commerce_eda_poverty.download_poverty"
                     ".request_url",
                     side_effect=RuntimeError("HTTP 503"),
-            ):
-                with self.assertRaises(RuntimeError) as ctx:
-                    download_poverty_dataset(
-                        source_url="https://example.gov/p1.xlsx",
-                        mirror_url="https://example.gov/m1.xlsx",
-                        output_xlsx_path=dst_xlsx,
-                        output_csv_path=dst_csv,
-                        raw_csv_path=dst_raw_csv,
-                        max_retries=1,
-                    )
+            ), self.assertRaises(RuntimeError) as ctx:
+                download_poverty_dataset(
+                    source_url="https://example.gov/p1.xlsx",
+                    mirror_url="https://example.gov/m1.xlsx",
+                    output_xlsx_path=dst_xlsx,
+                    output_csv_path=dst_csv,
+                    raw_csv_path=dst_raw_csv,
+                    max_retries=1,
+                )
 
             self.assertIn("Failed to acquire dataset from all URLs",
                           str(ctx.exception))

@@ -31,8 +31,8 @@ import shutil
 import sys
 import tempfile
 
-from absl import app, flags, logging
 import openpyxl
+from absl import app, flags, logging
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
@@ -341,7 +341,7 @@ def download_poverty_dataset(
                 url,
             )
             break
-        except Exception as e:
+        except (RuntimeError, ValueError, OSError) as e:
             last_err = e
             logging.warning("Failed to download or process from %s: %s", url, e)
             if os.path.exists(output_xlsx_path):
@@ -386,7 +386,7 @@ def main(argv):
             max_retries=FLAGS.max_retries,
             timeout=FLAGS.timeout,
         )
-    except Exception as e:
+    except (RuntimeError, ValueError, OSError) as e:
         logging.fatal(
             "Failed to download Commerce EDA Poverty dataset: %s",
             e,
