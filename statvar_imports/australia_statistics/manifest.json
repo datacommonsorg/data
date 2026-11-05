@@ -9,7 +9,8 @@
             "provenance_description": "Australia Population Census, Estimated Resident Population, Labour Force, Life Expectancy, Household Income, and Long-Term Health Condition Statistics from the Australian Bureau of Statistics (ABS).",
             "scripts": [
                 "download_script.py",
-                "process.py --input_data=input_files/* --pv_map=australia_statistics_pv_map.csv --config_file=australia_statistics_metadata.csv --output_path=output_files/australia_statistics_output --output_counters=counters/australia_statistics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --parallelism=2"
+                "process.py --input_data=input_files/* --output_csv=staged_files/australia_statistics_staged_input.csv",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=staged_files/australia_statistics_staged_input.csv --pv_map=australia_statistics_pv_map.csv --config_file=australia_statistics_metadata.csv --output_path=output_files/australia_statistics_output --output_counters=counters/australia_statistics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {

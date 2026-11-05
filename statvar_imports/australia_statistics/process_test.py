@@ -19,7 +19,6 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest import mock
 
 import openpyxl
 
@@ -31,16 +30,7 @@ if _REPO_ROOT not in sys.path:
 
 from statvar_imports.australia_statistics import process
 
-for _flag_name in (
-        'input_data',
-        'pv_map',
-        'config_file',
-        'output_path',
-        'output_counters',
-        'existing_statvar_mcf',
-        'parallelism',
-        'shard_timeout',
-):
+for _flag_name in ('input_data', 'output_csv'):
     if _flag_name in process._FLAGS:
         delattr(process._FLAGS, _flag_name)
 
@@ -180,132 +170,34 @@ class ProcessTest(unittest.TestCase):
             expanded = process._expand_input_files(pattern)
             self.assertEqual(expanded, [large_file, small_file])
 
-    def test_merge_csv_files_keeps_single_header_and_deduplicates(self):
+    def test_collect_staged_rows_and_write_staged_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            p1 = os.path.join(tmp_dir, 'shard_00')
-            p2 = os.path.join(tmp_dir, 'shard_01')
-            with open(f'{p1}.csv', 'w', encoding='utf-8') as f:
+            lf_path = os.path.join(tmp_dir, 'abs_lf_sdmx.csv')
+            with open(lf_path, 'w', encoding='utf-8') as f:
                 f.write(
-                    'observationAbout,observationDate,value,variableMeasured,unit,scalingFactor\n'
-                    'country/AUS,2021,25422788,dcid:Count_Person,,\n')
-            with open(f'{p2}.csv', 'w', encoding='utf-8') as f:
-                f.write(
-                    'observationAbout,observationDate,value,variableMeasured,unit,scalingFactor\n'
-                    'country/AUS,2021,25422788,dcid:Count_Person,,\n'
-                    'country/AUS,2020,959,dcid:Weekly_Median_Income_Household,AUD,\n'
-                )
+                    'DATAFLOW,MEASURE,SEX,AGE,TSEST,REGION,FREQ,TIME_PERIOD,OBS_VALUE\n'
+                    'ABS:LF(1.0.0),M3,3,1599,10,AUS,M,2026-09,14925.782419\n')
 
-            final_csv = os.path.join(tmp_dir, 'merged.csv')
-            total_rows = process._merge_csv_files([p1, p2], final_csv)
-            self.assertEqual(total_rows, 2)
-            with open(final_csv, 'r', encoding='utf-8') as f:
+            rows = process._collect_staged_rows([lf_path])
+            self.assertEqual(len(rows), 1)
+
+            staged_csv = os.path.join(tmp_dir, 'staged.csv')
+            process._write_staged_csv(staged_csv, rows)
+            with open(staged_csv, 'r', encoding='utf-8') as f:
                 lines = f.read().splitlines()
             self.assertEqual(
                 lines,
                 [
-                    'observationAbout,observationDate,value,variableMeasured,unit,scalingFactor',
-                    'country/AUS,2021,25422788,dcid:Count_Person,,',
-                    'country/AUS,2020,959,dcid:Weekly_Median_Income_Household,AUD,',
+                    'observationDate,indicatorCd,regionCd,value',
+                    '2026-09,LF_M3_3,AUS,14925.782419',
                 ],
             )
 
-    def test_merge_counters_aggregates_by_mode(self):
+    def test_write_staged_csv_raises_on_empty_rows(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            c1 = os.path.join(tmp_dir, 'c1.csv')
-            c2 = os.path.join(tmp_dir, 'c2.csv')
-            merged_csv = os.path.join(tmp_dir, 'merged.csv')
-            with open(merged_csv, 'w', encoding='utf-8') as f:
-                f.write(
-                    'observationAbout,observationDate,value,variableMeasured,unit,scalingFactor\n'
-                    'dcs:country/AUS,2021,25422788,dcs:Count_Person,,\n'
-                    'dcs:wikidataId/Q3224,2021,8072163,dcs:Count_Person,,\n'
-                    'dcs:country/AUS,2020,959,dcs:Weekly_Median_Income_Household,dcs:AUD,\n'
-                )
-            with open(c1, 'w', encoding='utf-8') as f:
-                f.write('key,value\n'
-                        'svobs-added,100\n'
-                        'error-node-merge-conflict,1\n'
-                        'existing-statvars-from-mcf,141928\n'
-                        'output-svobs-unique-observationAbout,2\n'
-                        'output-svobs-unique-variableMeasured,1\n'
-                        'process_start_time,1000\n'
-                        'process_end_time,1050\n'
-                        'processing_rate,10.0\n')
-            with open(c2, 'w', encoding='utf-8') as f:
-                f.write('key,value\n'
-                        'svobs-added,250\n'
-                        'error-node-merge-conflict,2\n'
-                        'existing-statvars-from-mcf,141928\n'
-                        'output-svobs-unique-observationAbout,1\n'
-                        'output-svobs-unique-variableMeasured,2\n'
-                        'process_start_time,1010\n'
-                        'process_end_time,1080\n'
-                        'processing_rate,20.0\n')
-
-            final_counters = os.path.join(tmp_dir, 'merged_counters.csv')
-            process._merge_counters([c1, c2],
-                                    final_counters,
-                                    final_csv_path=merged_csv)
-            with open(final_counters, 'r', encoding='utf-8') as f:
-                lines = f.read().splitlines()
-            self.assertEqual(
-                lines,
-                [
-                    'key,value',
-                    'error-node-merge-conflict,3',
-                    'existing-statvars-from-mcf,141928',
-                    'output-svobs-unique-observationAbout,2',
-                    'output-svobs-unique-variableMeasured,2',
-                    'process_end_time,1080',
-                    'process_start_time,1000',
-                    'processing_rate,15.00',
-                    'svobs-added,350',
-                ],
-            )
-
-    def test_merge_mcf_files_deduplicates_and_skips_empty(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            p1 = os.path.join(tmp_dir, 'shard_00')
-            p2 = os.path.join(tmp_dir, 'shard_01')
-            final_mcf = os.path.join(tmp_dir, 'merged_stat_vars.mcf')
-
-            process._merge_mcf_files([p1, p2], '_stat_vars.mcf', final_mcf)
-            self.assertFalse(os.path.exists(final_mcf))
-
-            node_block = ('# Auto generated comment\n\n'
-                          'Node: dcid:Count_Person\n'
-                          'typeOf: dcid:StatisticalVariable\n'
-                          'populationType: dcid:Person\n')
-            with open(f'{p1}_stat_vars.mcf', 'w', encoding='utf-8') as f:
-                f.write(node_block)
-            with open(f'{p2}_stat_vars.mcf', 'w', encoding='utf-8') as f:
-                f.write(node_block)
-
-            process._merge_mcf_files([p1, p2], '_stat_vars.mcf', final_mcf)
-            self.assertTrue(os.path.exists(final_mcf))
-            with open(final_mcf, 'r', encoding='utf-8') as f:
-                content = f.read()
-            self.assertEqual(content.count('Node: dcid:Count_Person'), 1)
-
-    @mock.patch.object(process.subprocess, 'run')
-    def test_run_shard_raises_on_nonzero_exit(self, mock_run):
-        mock_proc = mock.MagicMock()
-        mock_proc.returncode = 1
-        mock_proc.stderr = 'Processor failure details'
-        mock_run.return_value = mock_proc
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            out_prefix = os.path.join(tmp_dir, 'out_prefix')
+            staged_csv = os.path.join(tmp_dir, 'empty.csv')
             with self.assertRaises(RuntimeError):
-                process._run_shard(
-                    shard_idx=0,
-                    input_file='input.csv',
-                    shard_output_prefix=out_prefix,
-                    shard_counters_path='counters.csv',
-                    pv_map='pv.csv',
-                    config_file='meta.csv',
-                    existing_statvar_mcf='stat_vars.mcf',
-                )
+                process._write_staged_csv(staged_csv, [])
 
 
 if __name__ == '__main__':

@@ -12,18 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Preprocesses raw ABS source files and runs stat_var_processor.py in parallel."""
+"""Preprocesses raw ABS SDMX CSVs and Excel workbooks into a unified staged CSV."""
 
-from collections import defaultdict
-import concurrent.futures
 import csv
 import glob
 import io
 import os
 import re
-import shutil
-import subprocess
-import sys
 import tempfile
 from typing import Any
 
@@ -34,17 +29,6 @@ import openpyxl
 import xlrd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '../..'))
-_UTIL_DIR = os.path.join(_REPO_ROOT, 'util')
-for _p in (_REPO_ROOT, _UTIL_DIR):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
-
-import file_util
-
-_PROCESSOR_SCRIPT = os.path.abspath(
-    os.path.join(_MODULE_DIR,
-                 '../../tools/statvar_importer/stat_var_processor.py'))
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -53,39 +37,10 @@ flags.DEFINE_string(
     'Comma-separated list or glob pattern of raw ABS input files.',
 )
 flags.DEFINE_string(
-    'pv_map',
-    os.path.join(_MODULE_DIR, 'australia_statistics_pv_map.csv'),
-    'Path to the PV map CSV file.',
-)
-flags.DEFINE_string(
-    'config_file',
-    os.path.join(_MODULE_DIR, 'australia_statistics_metadata.csv'),
-    'Path to the metadata config CSV file.',
-)
-flags.DEFINE_string(
-    'output_path',
-    os.path.join(_MODULE_DIR, 'output_files/australia_statistics_output'),
-    'Output prefix path for merged CSV, TMCF, and MCF files.',
-)
-flags.DEFINE_string(
-    'output_counters',
-    os.path.join(_MODULE_DIR, 'counters/australia_statistics_counters.csv'),
-    'Output path for merged counters CSV file.',
-)
-flags.DEFINE_string(
-    'existing_statvar_mcf',
-    'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf',
-    'Path to existing StatVar MCF file.',
-)
-flags.DEFINE_integer(
-    'parallelism',
-    2,
-    'Maximum number of concurrent stat_var_processor worker processes.',
-)
-flags.DEFINE_integer(
-    'shard_timeout',
-    600,
-    'Timeout in seconds for each stat_var_processor shard subprocess.',
+    'output_csv',
+    os.path.join(_MODULE_DIR,
+                 'staged_files/australia_statistics_staged_input.csv'),
+    'Output path for the unified staged CSV file.',
 )
 
 CSV_HEADER = [
@@ -747,11 +702,10 @@ def _expand_input_files(input_data: str) -> list[str]:
     return sorted(valid_files, key=lambda p: -os.path.getsize(p))
 
 
-def _stage_inputs(raw_files: list[str], staged_dir: str) -> list[str]:
-    """Converts raw ABS SDMX CSVs and Excel workbooks into staged CSV shards."""
-    os.makedirs(staged_dir, exist_ok=True)
+def _collect_staged_rows(raw_files: list[str]) -> list[dict[str, str]]:
+    """Extracts and returns all standardized rows from raw ABS source files."""
     by_name = {os.path.basename(p): p for p in raw_files}
-    staged_files: list[str] = []
+    rows: list[dict[str, str]] = []
 
     # 1. Pass through already-standardized CSVs (e.g. test_data/sample_input.csv)
     for fname, fpath in sorted(by_name.items()):
@@ -760,101 +714,52 @@ def _stage_inputs(raw_files: list[str], staged_dir: str) -> list[str]:
                 'abs_erp_q_sdmx.csv',
         ):
             with open(fpath, 'r', encoding='utf-8-sig') as f:
-                first_line = f.readline().strip()
-            if first_line.startswith('observationDate,'):
-                staged_files.append(fpath)
+                reader = csv.DictReader(f)
+                if reader.fieldnames and 'observationDate' in reader.fieldnames:
+                    for row in reader:
+                        rows.append({
+                            'observationDate': row.get('observationDate', ''),
+                            'indicatorCd': row.get('indicatorCd', ''),
+                            'regionCd': row.get('regionCd', ''),
+                            'value': row.get('value', ''),
+                        })
 
     # 2. Labour Force SDMX CSV
     if 'abs_lf_sdmx.csv' in by_name:
         with open(by_name['abs_lf_sdmx.csv'], 'r', encoding='utf-8') as f:
-            lf_rows = parse_sdmx_labour_force_csv(f.read())
-        staged_files.append(
-            _write_staged_csv(os.path.join(staged_dir, 'aus_employment.csv'),
-                              lf_rows))
+            rows.extend(parse_sdmx_labour_force_csv(f.read()))
 
     # 3. 2021 Census Population Excel workbook
     if 'population_data_summary_2021.xlsx' in by_name:
         with open(by_name['population_data_summary_2021.xlsx'], 'rb') as f:
             g_2021, a_2021 = parse_census_2021_population_xlsx(f.read())
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir, 'aus_count_person_gender_2021.csv'),
-                g_2021,
-            ))
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir,
-                             'aus_count_person_gender_agegrp_2021.csv'),
-                a_2021,
-            ))
+        rows.extend(g_2021)
+        rows.extend(a_2021)
 
     # 4. Historical Population (.xls) + Quarterly ERP SDMX (.csv)
-    aus_1901_1985: list[dict[str, str]] = []
-    aus_1986_plus: list[dict[str, str]] = []
-    states_combined: list[dict[str, str]] = []
     if 'historical_population_2016.xls' in by_name:
         with open(by_name['historical_population_2016.xls'], 'rb') as f:
             p1, p2, p_states = parse_historical_population_xls(f.read())
-        aus_1901_1985.extend(p1)
-        aus_1986_plus.extend(p2)
-        states_combined.extend(p_states)
+        rows.extend(p1)
+        rows.extend(p2)
+        rows.extend(p_states)
     if 'abs_erp_q_sdmx.csv' in by_name:
         with open(by_name['abs_erp_q_sdmx.csv'], 'r', encoding='utf-8') as f:
-            erp_rows = parse_sdmx_erp_q_csv(f.read())
-        aus_1986_plus.extend([r for r in erp_rows if r['regionCd'] == 'AUS'])
-        states_combined.extend([r for r in erp_rows if r['regionCd'] != 'AUS'])
-
-    if aus_1901_1985:
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(
-                    staged_dir,
-                    'aus_count_person_gender_agegrp_historic_1901to1985.csv',
-                ),
-                aus_1901_1985,
-            ))
-    if aus_1986_plus:
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(
-                    staged_dir,
-                    'aus_count_person_gender_agegrp_historic_1986to2016.csv',
-                ),
-                aus_1986_plus,
-            ))
-    if states_combined:
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(
-                    staged_dir,
-                    'aus_count_person_gender_agegrp_historic_states.csv',
-                ),
-                states_combined,
-            ))
+            rows.extend(parse_sdmx_erp_q_csv(f.read()))
 
     # 5. 2021 Census Health Conditions Excel workbook
     if 'health_data_summary_2021.xlsx' in by_name:
         with open(by_name['health_data_summary_2021.xlsx'], 'rb') as f:
             nat_health, state_health = parse_health_2021_xlsx(f.read())
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir, 'aus_health_condition.csv'),
-                nat_health,
-            ))
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir, 'aus_health_condition_state.csv'),
-                state_health,
-            ))
+        rows.extend(nat_health)
+        rows.extend(state_health)
 
     # 6. Historical + Recent Life Expectancy workbooks
-    le_age_rows: list[dict[str, str]] = []
-    le_state_rows: list[dict[str, str]] = []
     if 'historical_life_expectancy_2016.xls' in by_name:
         with open(by_name['historical_life_expectancy_2016.xls'], 'rb') as f:
             h_age, h_state = parse_historical_life_expectancy_xls(f.read())
-        le_age_rows.extend(h_age)
-        le_state_rows.extend(h_state)
+        rows.extend(h_age)
+        rows.extend(h_state)
 
     le_pattern = re.compile(r'^life_expectancy_\d{4}(\d{4})\.(xlsx|xls)$')
     for fname in sorted(by_name.keys()):
@@ -864,267 +769,15 @@ def _stage_inputs(raw_files: list[str], staged_dir: str) -> list[str]:
             with open(by_name[fname], 'rb') as f:
                 r_age, r_state = parse_recent_life_expectancy_workbook(
                     f.read(), ext, end_yr)
-            le_age_rows.extend(r_age)
-            le_state_rows.extend(r_state)
-
-    if le_age_rows:
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir, 'aus_life_expectancy_gender_age.csv'),
-                le_age_rows,
-            ))
-    if le_state_rows:
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir, 'aus_life_expectancy_states.csv'),
-                le_state_rows,
-            ))
+            rows.extend(r_age)
+            rows.extend(r_state)
 
     # 7. Weekly Household Income Excel workbook
     if 'household_income_2019_20.xlsx' in by_name:
         with open(by_name['household_income_2019_20.xlsx'], 'rb') as f:
-            inc_rows = parse_household_income_xlsx(f.read())
-        staged_files.append(
-            _write_staged_csv(
-                os.path.join(staged_dir, 'aus_weekly_household_income.csv'),
-                inc_rows,
-            ))
+            rows.extend(parse_household_income_xlsx(f.read()))
 
-    return sorted(staged_files, key=lambda p: -os.path.getsize(p))
-
-
-def _prepare_local_statvar_mcf(existing_statvar_mcf: str,
-                               shards_tmp_dir: str) -> str:
-    """Copies GCS existing_statvar_mcf locally once so shards do not re-download."""
-    if not existing_statvar_mcf or not existing_statvar_mcf.startswith('gs://'):
-        return existing_statvar_mcf
-    local_mcf = os.path.join(shards_tmp_dir, 'cached_stat_vars.mcf')
-    logging.info('Caching %s locally to %s...', existing_statvar_mcf, local_mcf)
-    file_util.file_copy(existing_statvar_mcf, local_mcf)
-    return local_mcf
-
-
-def _run_shard(
-    shard_idx: int,
-    input_file: str,
-    shard_output_prefix: str,
-    shard_counters_path: str,
-    pv_map: str,
-    config_file: str,
-    existing_statvar_mcf: str,
-    timeout: int = 600,
-) -> tuple[int, str, str, str]:
-    """Runs stat_var_processor.py on a single staged CSV in an isolated work dir."""
-    shard_work_dir = f'{shard_output_prefix}_cwd'
-    os.makedirs(shard_work_dir, exist_ok=True)
-    cmd = [
-        sys.executable,
-        _PROCESSOR_SCRIPT,
-        f'--input_data={input_file}',
-        f'--pv_map={pv_map}',
-        f'--config_file={config_file}',
-        f'--output_path={shard_output_prefix}',
-        f'--output_counters={shard_counters_path}',
-        f'--existing_statvar_mcf={existing_statvar_mcf}',
-    ]
-    logging.info('[Shard %02d] Starting %s', shard_idx,
-                 os.path.basename(input_file))
-    proc = subprocess.run(cmd,
-                          cwd=shard_work_dir,
-                          capture_output=True,
-                          text=True,
-                          timeout=timeout)
-    if proc.returncode != 0:
-        raise RuntimeError(
-            f'Shard {shard_idx} ({input_file}) failed with exit code {proc.returncode}:\n'
-            f'{proc.stderr[-2000:]}')
-    logging.info('[Shard %02d] Finished %s', shard_idx,
-                 os.path.basename(input_file))
-    return shard_idx, input_file, shard_output_prefix, shard_counters_path
-
-
-def _merge_csv_files(shard_prefixes: list[str], final_csv_path: str) -> int:
-    """Merges shard CSV files into final_csv_path, deduplicating rows."""
-    seen_lines: set[str] = set()
-    ordered_lines: list[str] = []
-    header_line = ''
-
-    for prefix in shard_prefixes:
-        shard_csv = f'{prefix}.csv'
-        if not os.path.exists(shard_csv):
-            continue
-        with open(shard_csv, 'r', encoding='utf-8') as in_f:
-            header = in_f.readline()
-            if not header:
-                continue
-            if not header_line:
-                header_line = header
-            for line in in_f:
-                if line and line not in seen_lines:
-                    seen_lines.add(line)
-                    ordered_lines.append(line)
-
-    if not ordered_lines:
-        raise RuntimeError(
-            f'Merged CSV produced 0 data rows for {final_csv_path}')
-
-    _atomic_write_text(final_csv_path, header_line + ''.join(ordered_lines))
-    return len(ordered_lines)
-
-
-def _counter_aggregation_mode(key: str) -> str:
-    """Determines how a counter key should be aggregated across shards."""
-    lower = key.lower()
-    if (lower == 'existing-statvars-from-mcf' or
-            lower.startswith('existing-') or 'unique' in lower or lower in (
-                'dropped-output-statvars-mcf',
-                'input-nodes-ignored',
-                'nodes-matched',
-            )):
-        return 'max'
-    if 'start_time' in lower:
-        return 'min'
-    if 'end_time' in lower or 'mem' in lower:
-        return 'max'
-    if lower.endswith('_rate') or '_rate_' in lower:
-        return 'avg'
-    return 'sum'
-
-
-def _compute_csv_cardinalities(final_csv_path: str) -> dict[str, float]:
-    """Computes exact cardinality counters from the merged output CSV file."""
-    if not final_csv_path or not os.path.exists(final_csv_path):
-        return {}
-    places: set[str] = set()
-    dates: set[str] = set()
-    values: set[str] = set()
-    vars_measured: set[str] = set()
-    units: set[str] = set()
-    row_count = 0
-    with open(final_csv_path, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            row_count += 1
-            if row.get('observationAbout'):
-                places.add(row['observationAbout'])
-            if row.get('observationDate'):
-                dates.add(row['observationDate'])
-            if row.get('value'):
-                values.add(row['value'])
-            if row.get('variableMeasured'):
-                vars_measured.add(row['variableMeasured'])
-            if row.get('unit'):
-                units.add(row['unit'])
-    n_vars = float(len(vars_measured))
-    return {
-        'output-svobs-csv-rows': float(row_count),
-        'output-svobs-unique-observationAbout': float(len(places)),
-        'output-svobs-unique-observationDate': float(len(dates)),
-        'output-svobs-unique-value': float(len(values)),
-        'output-svobs-unique-variableMeasured': n_vars,
-        'output-svobs-unique-unit': float(len(units)),
-        'generated-unique-statvars': n_vars,
-    }
-
-
-def _merge_counters(
-    shard_counter_files: list[str],
-    final_counters_path: str,
-    final_csv_path: str = '',
-) -> None:
-    """Aggregates numeric counters across all shards into final_counters_path."""
-    if not final_counters_path:
-        return
-    values_by_key: dict[str, list[float]] = defaultdict(list)
-    is_int_map: dict[str, bool] = defaultdict(lambda: True)
-
-    for cf in shard_counter_files:
-        if not os.path.exists(cf):
-            continue
-        with open(cf, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith('key,') or line.startswith(
-                        '"key",'):
-                    continue
-                parts = line.rsplit(',', 1)
-                if len(parts) != 2:
-                    continue
-                k, v_str = parts[0].strip('"'), parts[1].strip().strip('"')
-                if k == 'key':
-                    continue
-                try:
-                    if '.' in v_str:
-                        values_by_key[k].append(float(v_str))
-                        is_int_map[k] = False
-                    else:
-                        values_by_key[k].append(float(int(v_str)))
-                except ValueError:
-                    continue
-
-    exact_cardinalities = _compute_csv_cardinalities(final_csv_path)
-    for k, exact_val in exact_cardinalities.items():
-        if k in values_by_key:
-            values_by_key[k] = [exact_val]
-            is_int_map[k] = True
-
-    out_lines = ['key,value\n']
-    for k in sorted(values_by_key.keys()):
-        vals = values_by_key[k]
-        mode = _counter_aggregation_mode(k)
-        if mode == 'max':
-            agg = max(vals)
-        elif mode == 'min':
-            agg = min(vals)
-        elif mode == 'avg':
-            agg = sum(vals) / len(vals)
-            is_int_map[k] = False
-        else:
-            agg = sum(vals)
-
-        if is_int_map[k]:
-            out_lines.append(f'{k},{int(round(agg))}\n')
-        else:
-            out_lines.append(f'{k},{agg:.2f}\n')
-
-    _atomic_write_text(final_counters_path, ''.join(out_lines))
-
-
-def _merge_mcf_files(shard_prefixes: list[str], suffix: str,
-                     final_mcf_path: str) -> None:
-    """Deduplicates MCF nodes by Node line across shards and writes final_mcf_path."""
-    seen_nodes: dict[str, str] = {}
-    for prefix in shard_prefixes:
-        shard_mcf = f'{prefix}{suffix}'
-        if not os.path.exists(shard_mcf):
-            continue
-        with open(shard_mcf, 'r', encoding='utf-8') as f:
-            content = f.read()
-        for block in content.split('\n\n'):
-            block = block.strip()
-            if not block:
-                continue
-            lines = [
-                l for l in block.splitlines() if not l.strip().startswith('#')
-            ]
-            if not lines:
-                continue
-            node_line = next((l for l in lines if l.startswith('Node:')),
-                             lines[0])
-            if node_line not in seen_nodes:
-                seen_nodes[node_line] = '\n'.join(lines)
-
-    if os.path.isdir(final_mcf_path):
-        shutil.rmtree(final_mcf_path)
-    elif os.path.exists(final_mcf_path):
-        os.remove(final_mcf_path)
-
-    if not seen_nodes:
-        return
-
-    body = ('\n\n'.join(seen_nodes[k] for k in sorted(seen_nodes.keys())) +
-            '\n\n')
-    _atomic_write_text(final_mcf_path, body)
+    return rows
 
 
 def _run_pipeline() -> None:
@@ -1132,103 +785,11 @@ def _run_pipeline() -> None:
     if not raw_files:
         raise RuntimeError(f'No input files matched: {_FLAGS.input_data}')
 
-    output_path = os.path.abspath(_FLAGS.output_path)
-    output_dir = os.path.dirname(output_path)
-    os.makedirs(output_dir, exist_ok=True)
-
-    shards_tmp_dir = tempfile.mkdtemp(prefix='.shards_', dir=output_dir)
-    try:
-        staged_dir = os.path.join(shards_tmp_dir, 'staged_inputs')
-        input_files = _stage_inputs(raw_files, staged_dir)
-        if not input_files:
-            raise RuntimeError(
-                f'Staging produced 0 CSV files from: {raw_files}')
-
-        local_statvar_mcf = _prepare_local_statvar_mcf(
-            _FLAGS.existing_statvar_mcf, shards_tmp_dir)
-
-        max_workers = max(
-            1, min(_FLAGS.parallelism, len(input_files),
-                   os.cpu_count() or 1))
-        logging.info(
-            'Processing %d staged CSV files across %d parallel workers...',
-            len(input_files),
-            max_workers,
-        )
-
-        shard_prefixes: list[str] = []
-        shard_counters: list[str] = []
-        futures = []
-
-        with concurrent.futures.ThreadPoolExecutor(
-                max_workers=max_workers) as executor:
-            for idx, input_file in enumerate(input_files):
-                base = os.path.splitext(os.path.basename(input_file))[0]
-                s_prefix = os.path.join(shards_tmp_dir,
-                                        f'shard_{idx:02d}_{base}')
-                s_counters = os.path.join(shards_tmp_dir,
-                                          f'counters_{idx:02d}_{base}.csv')
-                shard_prefixes.append(s_prefix)
-                shard_counters.append(s_counters)
-                futures.append(
-                    executor.submit(
-                        _run_shard,
-                        idx,
-                        os.path.abspath(input_file),
-                        s_prefix,
-                        s_counters,
-                        os.path.abspath(_FLAGS.pv_map),
-                        os.path.abspath(_FLAGS.config_file),
-                        local_statvar_mcf,
-                        _FLAGS.shard_timeout,
-                    ))
-
-            for fut in concurrent.futures.as_completed(futures):
-                fut.result()
-
-        # 1. Merge CSV outputs
-        final_csv = f'{output_path}.csv'
-        total_rows = _merge_csv_files(shard_prefixes, final_csv)
-        logging.info('Merged %d SVObs rows into %s', total_rows, final_csv)
-
-        # 2. Generate unified TMCF (normalizing table reference to output_path basename)
-        final_tmcf = f'{output_path}.tmcf'
-        table_name = os.path.basename(output_path)
-        for prefix in shard_prefixes:
-            shard_tmcf = f'{prefix}.tmcf'
-            if os.path.exists(shard_tmcf):
-                shard_table = os.path.basename(prefix)
-                with open(shard_tmcf, 'r', encoding='utf-8') as f:
-                    tmcf_text = (f.read().replace(f'E:{shard_table}->',
-                                                  f'E:{table_name}->').replace(
-                                                      f'C:{shard_table}->',
-                                                      f'C:{table_name}->'))
-                _atomic_write_text(final_tmcf, tmcf_text)
-                break
-        if not os.path.exists(final_tmcf):
-            raise RuntimeError(f'Failed to generate TMCF file: {final_tmcf}')
-
-        # 3. Merge StatVar MCF and Schema MCF files
-        _merge_mcf_files(shard_prefixes, '_stat_vars.mcf',
-                         f'{output_path}_stat_vars.mcf')
-        _merge_mcf_files(
-            shard_prefixes,
-            '_stat_vars_schema.mcf',
-            f'{output_path}_stat_vars_schema.mcf',
-        )
-
-        # 4. Merge Counters
-        if _FLAGS.output_counters:
-            _merge_counters(
-                shard_counters,
-                os.path.abspath(_FLAGS.output_counters),
-                final_csv,
-            )
-            logging.info('Merged counters into %s', _FLAGS.output_counters)
-
-    finally:
-        if os.path.exists(shards_tmp_dir):
-            shutil.rmtree(shards_tmp_dir)
+    rows = _collect_staged_rows(raw_files)
+    output_csv = os.path.abspath(_FLAGS.output_csv)
+    _write_staged_csv(output_csv, rows)
+    logging.info('Staged %d rows from %d input files into %s', len(rows),
+                 len(raw_files), output_csv)
 
 
 def main(_) -> None:

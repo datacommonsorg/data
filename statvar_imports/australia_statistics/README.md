@@ -20,11 +20,11 @@ This project downloads, processes, and imports demographic, labour force, life e
 
 ## 2. Preprocessing Steps
 
-The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks as-is via `download_script.py`, stages and parses them in a temporary directory inside `process.py`, and runs `stat_var_processor.py` in parallel across the staged CSV shards.
+The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks as-is via `download_script.py`, parses and standardizes them into a unified staged CSV via `process.py`, and runs `stat_var_processor.py` directly on the staged CSV.
 
 *   **Files**:
     *   `download_script.py`: Pure live downloader that fetches monthly Labour Force (`ABS,LF,1.0.0`) and quarterly Estimated Resident Population (`ABS,ERP_Q,1.0.0`) SDMX CSVs alongside ABS Census, Historical Population, Life Expectancy, Health Condition, and Household Income workbooks as-is into `input_files/` with SDMX CSV header and `.xls`/`.xlsx` magic-byte validation.
-    *   `process.py`: Extracts raw ABS source indicators and values from `input_files/*` into temporary staged CSV shards, caches `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` locally once, runs `stat_var_processor.py` in parallel (`--parallelism=2`), and deterministically merges the resulting `.csv`, `.tmcf`, `.mcf`, and exact `counters.csv` outputs into `output_files/`.
+    *   `process.py`: Extracts raw ABS source indicators and values from `input_files/*` into a unified staged CSV (`staged_files/australia_statistics_staged_input.csv`) with columns `observationDate,indicatorCd,regionCd,value`.
     *   `australia_statistics_metadata.csv`: Configuration file for `stat_var_processor.py` specifying output columns (`observationAbout,observationDate,value,variableMeasured,unit,scalingFactor`), header rows, mapped columns, numeric precision (`output_precision_digits,4`), and provenance URL.
     *   `australia_statistics_pv_map.csv`: Property-value mapping file mapping raw ABS indicator keys (`LF_*`, `ERP_*`, `POP_*`, `HEALTH_*`, `LE_*`, `INC_*`) and region identifiers to Data Commons StatisticalVariables, `#Multiply,1000` scaling (for Labour Force counts reported in thousands), and place DCIDs (`country/AUS` and `wikidataId/Q...`).
     *   `validation_config.json`: Configuration defining 2 `GOLDENS_CHECK` rules, 5 scoped `MAX_DATE_CONSISTENT` rules, value bounds, and date freshness validation rules across all 850 StatisticalVariables (alongside the global `DELETED_RECORDS_PERCENT` rule).
@@ -32,9 +32,8 @@ The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks 
 
 *   **Transformation pipeline**:
     1.  `download_script.py` downloads all raw ABS SDMX CSVs and Excel workbooks concurrently using thread-local retry-enabled HTTP sessions, payload signature validation, atomic file writes, and stale file cleanup into `input_files/`.
-    2.  `process.py` stages the raw files into temporary CSV shards, caches `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` locally once, and invokes `stat_var_processor.py` in parallel against `australia_statistics_pv_map.csv` and `australia_statistics_metadata.csv`.
-    3.  The processor maps all 850 StatisticalVariables and Australian geographic entities, scales Labour Force counts via `#Multiply,1000`, attaches `AUD` unit metadata to weekly household income observations, and writes `output_files/australia_statistics_output.csv` and `output_files/australia_statistics_output.tmcf`.
-    4.  Exact aggregated processor counters are written to `counters/australia_statistics_counters.csv`.
+    2.  `process.py` parses `input_files/*` into a single combined staged CSV (`staged_files/australia_statistics_staged_input.csv`).
+    3.  `stat_var_processor.py` maps all 850 StatisticalVariables and Australian geographic entities against `australia_statistics_pv_map.csv` and `australia_statistics_metadata.csv`, scales Labour Force counts via `#Multiply,1000`, attaches `AUD` unit metadata to weekly household income observations, and writes `output_files/australia_statistics_output.csv`, `output_files/australia_statistics_output.tmcf`, and `counters/australia_statistics_counters.csv`.
 
 *   **Data Quality Checks**:
     *   Automated validation via `tools/import_validation/runner.py` evaluates the output against `validation_config.json` (plus global rules), enforcing:
@@ -54,8 +53,9 @@ This import is configured for automated weekly execution in `manifest.json`.
 ### Automated Steps
 1. The automated job triggers on cron schedule `0 5 * * 1` configured in `manifest.json`.
 2. `download_script.py` queries the ABS SDMX API and publication endpoints and populates `input_files/*` with raw source files.
-3. `process.py` stages `input_files/*` and runs `stat_var_processor.py` with `--parallelism=2` to generate `output_files/australia_statistics_output.csv` and `output_files/australia_statistics_output.tmcf`.
-4. Validation rules in `validation_config.json` are evaluated before publication.
+3. `process.py` parses `input_files/*` into `staged_files/australia_statistics_staged_input.csv`.
+4. `stat_var_processor.py` processes `staged_files/australia_statistics_staged_input.csv` to generate `output_files/australia_statistics_output.csv`, `output_files/australia_statistics_output.tmcf`, and `counters/australia_statistics_counters.csv`.
+5. Validation rules in `validation_config.json` are evaluated before publication.
 
 ---
 
@@ -69,17 +69,20 @@ To run the import pipeline locally from `statvar_imports/australia_statistics/`:
 python3 download_script.py
 ```
 
-### Process the Data
+### Stage and Process the Data
 
 ```bash
 python3 process.py \
   --input_data="input_files/*" \
+  --output_csv=staged_files/australia_statistics_staged_input.csv
+
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=staged_files/australia_statistics_staged_input.csv \
   --pv_map=australia_statistics_pv_map.csv \
   --config_file=australia_statistics_metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_path=output_files/australia_statistics_output \
-  --output_counters=counters/australia_statistics_counters.csv \
-  --parallelism=2
+  --output_counters=counters/australia_statistics_counters.csv
 ```
 
 ### Run Sample Integration Test
