@@ -84,7 +84,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
-            'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD':
+            r'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD':
                 'unit,wstatus,nace_r2,geo\\time'
         }))
         df['unit,wstatus,nace_r2,geo\\time'] = df[

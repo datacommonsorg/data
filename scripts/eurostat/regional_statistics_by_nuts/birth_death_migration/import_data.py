@@ -97,7 +97,7 @@ def preprocess_data(file_path):
         logging.info(f'Processing file: {file_path}')
         raw_df = pd.read_csv(file_path, sep="\t")
         raw_df = raw_df.rename(columns=({
-            'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
+            r'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
         }))
         raw_df['indic_de,geo\\time'] = raw_df['indic_de,geo\\time'].str.slice(2)
 

@@ -412,7 +412,6 @@ def shard_csv_data(
         (file_prefix, file_ext) = os.path.splitext(file)
     else:
         fd, file_prefix = tempfile.mkstemp()
-        file_ext = '.csv'
     column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
     output_path = f'{file_prefix}-{column_suffix}'
     logging.info(f'Sharding {files} into {len(shards)} shards by column'
@@ -548,7 +547,7 @@ def prepare_input_data(config: Dict) -> List[str]:
         # Download input data from the URL.
         data_url = config.get('data_url', '')
         if not data_url:
-            raise RuntimeError(f'Provide data with --data_url or --input_data.')
+            raise RuntimeError('Provide data with --data_url or --input_data.')
         input_files = download_csv_from_url(data_url, input_data)
     input_files = convert_xls_to_csv(input_files, config.get('input_xls', []))
     shard_column = config.get('shard_input_by_column', '')

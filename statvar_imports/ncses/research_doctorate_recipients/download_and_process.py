@@ -112,7 +112,6 @@ def process_and_modify_data_cascading(file_path):
 def main(argv):
     for config in DOWNLOAD_CONFIGS:
         url = config["url"]
-        desired_output_csv_name = config["output_csv_name"]
 
         logging.info(f"Attempting to download: {url}")
 
@@ -136,7 +135,7 @@ def main(argv):
 
         except FileNotFoundError:
             logging.fatal(
-                f"Error: Python interpreter or download script not found. Check your paths."
+                "Error: Python interpreter or download script not found. Check your paths."
             )
             sys.exit(1)
         except Exception as e:

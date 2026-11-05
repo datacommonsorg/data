@@ -61,7 +61,6 @@ def main():
     all_tables_data = extract_all_table_data(url)
 
     if all_tables_data:
-        all_dfs = []
         for index, table in enumerate(all_tables_data):
             if index == 0:
                 df = pd.DataFrame(table[1:], columns=table[0])

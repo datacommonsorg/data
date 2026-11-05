@@ -272,7 +272,6 @@ def download_file_from_url(url: str,
         return content
 
     logging.info(f'Saving {len(content)} bytes from {url} into {output_file}')
-    output_dir = os.path.dirname(output_file)
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'wb') as fp:
         fp.write(content)

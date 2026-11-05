@@ -64,7 +64,7 @@ class TestNDAPScript(unittest.TestCase):
 
         # Mock file_util.file_copy to not perform any action
         with patch('main_script.file_util.file_copy') as mock_copy, \
-             patch('builtins.open', mock_open(read_data=json.dumps(mock_keys))) as mock_file:
+             patch('builtins.open', mock_open(read_data=json.dumps(mock_keys))):
 
             keys = _load_api_keys()
 

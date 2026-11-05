@@ -214,9 +214,9 @@ def _get_urls(json_file_path, key, test):
     urls = url_json[key]
 
     if test:
-        if (type(urls) == str):
+        if type(urls) is str:
             urls = os.path.join(_MODULE_DIR, urls)
-        elif (type(urls) == list):
+        elif type(urls) is list:
             urls = [os.path.join(_MODULE_DIR, url) for url in urls]
 
     return urls
