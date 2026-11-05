@@ -1,13 +1,11 @@
-# Mexico: National Institute of Statistics and Geography (INEGI) — `MexicoCensus`
+# Mexico: National Institute of Statistics and Geography (INEGI) — `MexicoCensus_Demographics`, `MexicoCensus_Health`, `MexicoCensus_Education`
 
 ## Import Overview
-This import (`MexicoCensus`) ingests national (`country/MEX`) and state-level demographic, vital statistics, health, education, religion, migration, and quarterly unemployment statistics from Mexico's **Instituto Nacional de Estadística y Geografía (INEGI)** across **21 datasets**:
+This directory ingests national (`country/MEX`) and state-level demographic, vital statistics, health, education, religion, migration, and quarterly unemployment statistics from Mexico's **Instituto Nacional de Estadística y Geografía (INEGI)** across **21 datasets** organized into **3 imports** in `manifest.json`:
 
-- **Demographics & Population**: Total Population, Population Density, Median Age, Average Annual Population Growth Rate, and International Migration (Foreign-Born Population).
-- **Vital Statistics & Mortality**: Registered Births, Registered Deaths, Infant Mortality, Male Mortality Rate (Excess Male Mortality Index), Life Expectancy, Diabetes Deaths, Homicides, and Suicides.
-- **Education**: Literacy Status (Ages 6 to 14), Literate Population (Ages 15 and Older), School Enrollment, and Student-to-Teacher / Student-to-School Ratios.
-- **Religion**: Catholic Population, Irreligious Population, and Population of Other Religions (Non-Catholic).
-- **Labor / Employment**: National Quarterly Unemployed Population (Total, With Work Experience, and Without Work Experience).
+1. **`MexicoCensus_Demographics` (Demographics — 12 Datasets)**: Total Population, Population Density, Median Age, Average Annual Population Growth Rate, International Migration, Registered Births, Religion (Catholic, Irreligion, Other Religions), Literacy Status (Ages 6–14 and Ages 15+), and National Quarterly Unemployed Population.
+2. **`MexicoCensus_Health` (Health — 7 Datasets)**: Registered Deaths, Infant Mortality, Life Expectancy, Male Mortality Rate (Excess Male Mortality Index), Diabetes Deaths, Homicides, and Suicides.
+3. **`MexicoCensus_Education` (Education — 2 Datasets)**: School Enrollment and Student-to-Teacher / Student-to-School Ratios.
 
 - **Source URL**: `https://www.inegi.org.mx/temas/`
 - **Import Type**: Automated Python API Downloader (`download.py`) + Data Commons `stat_var_processor.py`
@@ -19,31 +17,31 @@ This import (`MexicoCensus`) ingests national (`country/MEX`) and state-level de
 
 ## Dataset Details
 
-The import comprises **21 datasets** configured in `config.json` and `manifest.json`:
+The **21 datasets** configured in `config.json` and `manifest.json` are grouped across the 3 imports as follows:
 
-| # | Dataset Name | Description | Release Frequency |
-|---:|:---|:---|:---|
-| 1 | `Mexico_Migration` | Foreign-born population residing in Mexico by state, sex, and country of birth (`USA`, `GTM`, `JPN`, `ESP`, `FRA`, and `OtherCountries`). | `P10Y` |
-| 2 | `Mexico_Avg_Annual_Growth_Rate` | Average annual population growth rate (`GrowthRate_Count_Person`) by state over 5-year periods. | `P5Y` |
-| 3 | `Mexico_Births_Registered` | Registered live births (`Count_BirthEvent`) by state and sex. | `P1Y` |
-| 4 | `Mexico_Death_Diabetes` | Registered deaths caused by diabetes mellitus (`Count_MortalityEvent_Diabetes`) by state, 5-year age group, and sex. | `P1Y` |
-| 5 | `Mexico_Deaths_Registered` | Total registered deaths (`Count_Death`) by state of residence and sex. | `P1Y` |
-| 6 | `Mexico_Homicide_Population` | Registered deaths by homicide (`Count_MortalityEvent_Assault(Homicide)`) by state of residence and sex. | `P1Y` |
-| 7 | `Mexico_Infant_Mortality` | Registered deaths of infants under 1 year of age (`Count_Death_LessThan1Year`) by state of residence and sex. | `P1Y` |
-| 8 | `Mexico_LifeExpectancy` | Life expectancy at birth (`LifeExpectancy_Person`) by state and sex. | `P1Y` |
-| 9 | `Mexico_Literacy_Status_6To14` | Population aged 6 to 14 years by state, sex, and ability to read and write (literate vs. illiterate). | `P5Y` |
-| 10 | `Mexico_Literate_15OrMore` | Population aged 15 years and older by state, sex, and literacy condition (literate vs. illiterate). | `P5Y` |
-| 11 | `Mexico_Male_Mortality_Rate` | Male-to-female mortality ratio (`Count_Death_Male_AsAFractionOf_Count_Person_Male`) by state of residence. | `P1Y` |
-| 12 | `Mexico_Median_Age` | Median age of the population (`Median_Age_Person`) by state. | `P5Y` |
-| 13 | `Mexico_Population_Density` | Population density (`Count_Person_PerArea`, in `PersonPerSquareKilometer`) by state. | `P5Y` |
-| 14 | `Mexico_Religion_Catholic` | Population aged 5 years and older professing Catholicism by state, 5-year age group, and sex. | `P10Y` |
-| 15 | `Mexico_Religion_Irreligion` | Population aged 5 years and older with no religion by state, 5-year age group, and sex. | `P10Y` |
-| 16 | `Mexico_Religion_OtherReligionThanCatholicism` | Population aged 5 years and older professing a religion other than Catholicism by state, 5-year age group, and sex. | `P10Y` |
-| 17 | `Mexico_SchoolEnrollment` | Student enrollment (`Count_Student`) by state, education level, and sex across school cycles. | `P1Y` |
-| 18 | `Mexico_Student_Teacher_Ratio` | Student-to-teacher and student-to-school ratios by state and education level across school cycles. | `P1Y` |
-| 19 | `Mexico_Suicide_Population` | Registered deaths by suicide (`Count_Death_IntentionalSelfHarm(Suicide)`) by state of residence and sex. | `P1Y` |
-| 20 | `Mexico_Total_Population` | Total population (`Count_Person`) by state, 5-year age group, and sex. | `P5Y` |
-| 21 | `Mexico_Unemployed_Population` | National quarterly unemployed population (`Count_Person_Unemployed`, total and by work experience). | `P3M` |
+| # | Import Name | Dataset Name | Description | Release Frequency |
+|---:|:---|:---|:---|:---|
+| 1 | `MexicoCensus_Demographics` | `Mexico_Migration` | Foreign-born population residing in Mexico by state, sex, and country of birth (`USA`, `GTM`, `JPN`, `ESP`, `FRA`, and `OtherCountries`). | `P10Y` |
+| 2 | `MexicoCensus_Demographics` | `Mexico_Avg_Annual_Growth_Rate` | Average annual population growth rate (`GrowthRate_Count_Person`) by state over 5-year periods. | `P5Y` |
+| 3 | `MexicoCensus_Demographics` | `Mexico_Births_Registered` | Registered live births (`Count_BirthEvent`) by state and sex. | `P1Y` |
+| 4 | `MexicoCensus_Demographics` | `Mexico_Literacy_Status_6To14` | Population aged 6 to 14 years by state, sex, and ability to read and write (literate vs. illiterate). | `P5Y` |
+| 5 | `MexicoCensus_Demographics` | `Mexico_Literate_15OrMore` | Population aged 15 years and older by state, sex, and literacy condition (literate vs. illiterate). | `P5Y` |
+| 6 | `MexicoCensus_Demographics` | `Mexico_Median_Age` | Median age of the population (`Median_Age_Person`) by state. | `P5Y` |
+| 7 | `MexicoCensus_Demographics` | `Mexico_Population_Density` | Population density (`Count_Person_PerArea`, in `PersonPerSquareKilometer`) by state. | `P5Y` |
+| 8 | `MexicoCensus_Demographics` | `Mexico_Religion_Catholic` | Population aged 5 years and older professing Catholicism by state, 5-year age group, and sex. | `P10Y` |
+| 9 | `MexicoCensus_Demographics` | `Mexico_Religion_Irreligion` | Population aged 5 years and older with no religion by state, 5-year age group, and sex. | `P10Y` |
+| 10 | `MexicoCensus_Demographics` | `Mexico_Religion_OtherReligionThanCatholicism` | Population aged 5 years and older professing a religion other than Catholicism by state, 5-year age group, and sex. | `P10Y` |
+| 11 | `MexicoCensus_Demographics` | `Mexico_Total_Population` | Total population (`Count_Person`) by state, 5-year age group, and sex. | `P5Y` |
+| 12 | `MexicoCensus_Demographics` | `Mexico_Unemployed_Population` | National quarterly unemployed population (`Count_Person_Unemployed`, total and by work experience). | `P3M` |
+| 13 | `MexicoCensus_Health` | `Mexico_Death_Diabetes` | Registered deaths caused by diabetes mellitus (`Count_MortalityEvent_Diabetes`) by state, 5-year age group, and sex. | `P1Y` |
+| 14 | `MexicoCensus_Health` | `Mexico_Deaths_Registered` | Total registered deaths (`Count_Death`) by state of residence and sex. | `P1Y` |
+| 15 | `MexicoCensus_Health` | `Mexico_Homicide_Population` | Registered deaths by homicide (`Count_MortalityEvent_Assault(Homicide)`) by state of residence and sex. | `P1Y` |
+| 16 | `MexicoCensus_Health` | `Mexico_Infant_Mortality` | Registered deaths of infants under 1 year of age (`Count_Death_LessThan1Year`) by state of residence and sex. | `P1Y` |
+| 17 | `MexicoCensus_Health` | `Mexico_LifeExpectancy` | Life expectancy at birth (`LifeExpectancy_Person`) by state and sex. | `P1Y` |
+| 18 | `MexicoCensus_Health` | `Mexico_Male_Mortality_Rate` | Male-to-female mortality ratio (`Count_Death_Male_AsAFractionOf_Count_Death_Female`) by state of residence. | `P1Y` |
+| 19 | `MexicoCensus_Health` | `Mexico_Suicide_Population` | Registered deaths by suicide (`Count_Death_IntentionalSelfHarm(Suicide)`) by state of residence and sex. | `P1Y` |
+| 20 | `MexicoCensus_Education` | `Mexico_SchoolEnrollment` | Student enrollment (`Count_Student`) by state, education level, and sex across school cycles. | `P1Y` |
+| 21 | `MexicoCensus_Education` | `Mexico_Student_Teacher_Ratio` | Student-to-teacher and student-to-school ratios by state and education level across school cycles. | `P1Y` |
 
 ---
 
@@ -82,12 +80,12 @@ For `Mexico_Unemployed_Population`, `download.py` (`fetch_cuadros_raw_table`) ex
 
 Unlike multi-year INEGI tables that retain prior years as columns, `Educacion/Educacion_01` (`Mexico_Literacy_Status_6To14`) and `Educacion/Educacion_02` (`Mexico_Literate_15OrMore`) are **single-year cross-sectional snapshot tables** where INEGI overwrites the table in-place whenever a new census or intercensal survey is released (the reference year appears only in the table title row).
 
-To preserve all historical years without storing data files in the GitHub repository, these two datasets are configured in `config.json` with `"archive_by_year": true` and `"historical_dir": "gs://unresolved_mcf/mexico_census/historical_inputs"`. When `download.py` runs (`_write_year_archived_dataset`):
+To preserve all historical years without storing data files in the GitHub repository, these two datasets are configured in `config.json` with `"archive_by_year": true` and `"historical_dir": "gs://unresolved_mcf/mexico_census/demographics/latest/historical_inputs"`. When `download.py` runs (`_write_year_archived_dataset`):
 1. **Pull Historical Snapshots from GCS $\to$ Local `historical_inputs/`**:
-   - Connects to `gs://unresolved_mcf/mexico_census/historical_inputs/` and downloads all previously archived `<Dataset>_*_input.csv` snapshots into the local `historical_inputs/` folder.
+   - Connects to `gs://unresolved_mcf/mexico_census/demographics/latest/historical_inputs/` and downloads all previously archived `<Dataset>_*_input.csv` snapshots into the local `historical_inputs/` folder.
 2. **Save & Upload Current Year Snapshot $\to$ Local `historical_inputs/` and GCS**:
    - Extracts the 4-digit reference year from Row 2 (the INEGI table title) of the freshly downloaded table via `_extract_snapshot_year`.
-   - Writes `historical_inputs/<Dataset>_<Year>_input.csv` locally and uploads it back to `gs://unresolved_mcf/mexico_census/historical_inputs/<Dataset>_<Year>_input.csv` so future source updates are automatically archived alongside prior years.
+   - Writes `historical_inputs/<Dataset>_<Year>_input.csv` locally and uploads it back to `gs://unresolved_mcf/mexico_census/demographics/latest/historical_inputs/<Dataset>_<Year>_input.csv` so future source updates are automatically archived alongside prior years.
 3. **Copy All Year Snapshots $\to$ `input_files/`**:
    - Copies all `<Dataset>_*_input.csv` files from `historical_inputs/` into `input_files/` so `stat_var_processor.py` processes all historical and current snapshots together via the wildcard `--input_data=input_files/<Dataset>_*_input.csv`.
 
@@ -100,16 +98,14 @@ To preserve all historical years without storing data files in the GitHub reposi
 - **`config.json`**:
   - Stores `pxweb_api_base_url`, `cuadros_api_base_url`, `historical_gcs_path`, and the per-dataset API parameters for all 21 datasets.
 - **`manifest.json`**:
-  - Defines the automated import execution sequence (`download.py` followed by 21 `stat_var_processor.py` invocations), `source_files`, `import_inputs`, and `validation_config.json`.
+  - Defines the automated import execution sequence (`download.py` followed by 21 `stat_var_processor.py` invocations across 3 vertical imports), `source_files`, and `import_inputs`.
 - **`metadata.csv`**:
   - Shared `stat_var_processor.py` configuration file defining provenance URL and description parameters.
 - **`pvmap/place_mapping.csv`**:
   - Shared place-resolution PVMap (`#Header,observationAbout`) that maps `"Estados Unidos Mexicanos"` / `"Total"` to `country/MEX` and all 32 Mexican state names (including INEGI footnote-suffixed and historical variants) to their `wikidataId/Q...` DCIDs.
-- **`pvmap/<Dataset>_pvmap.csv`**:
-  - 21 dataset-specific Property-Value maps translating Spanish row stubs, column headers, and time periods into Data Commons `StatVarObservation` properties.
-  - For datasets where 4-digit observation counts can collide with 4-digit year headers (`Mexico_Deaths_Registered`, `Mexico_Death_Diabetes`, `Mexico_Homicide_Population`, `Mexico_Religion_Irreligion`, `Mexico_Religion_OtherReligionThanCatholicism`, `Mexico_Total_Population`), year keys are scoped with a leading colon (`:YEAR`) so only header-row cells match year keys.
-- **`validation_config.json`**:
-  - Differ validation rules applied during automated import runs.
+- **`pvmap/MexicoCensus_Demographics_pvmap.csv`, `pvmap/MexicoCensus_Health_pvmap.csv`, `pvmap/MexicoCensus_Education_pvmap.csv`**:
+  - 3 vertical-specific Property-Value maps (one per import in `manifest.json`) that combine the mappings for all 21 datasets across Demographics (12 datasets), Health (7 datasets), and Education (2 datasets), translating input filenames, Spanish row stubs, column headers, and time periods into Data Commons `StatVarObservation` properties.
+  - For PxWeb datasets where 4-digit observation counts can collide with 4-digit year headers, year keys are scoped with a leading colon (`:YEAR`) so only header-row cells match year keys, while `Mexico_Unemployed_Population` year headers in Column 0 are scoped under their sequential column-header chain (`Period:2019`, `2019:2020`, ...).
 
 ---
 
@@ -127,9 +123,10 @@ python3 download.py --config_path=config.json
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/<Dataset>_input.csv \
-  --pv_map=pvmap/<Dataset>_pvmap.csv,pvmap/place_mapping.csv \
+  --pv_map=pvmap/MexicoCensus_<Vertical>_pvmap.csv,pvmap/place_mapping.csv \
   --config_file=metadata.csv \
   --output_path=output/<Dataset>_output \
+  --output_counters=counters/<Dataset>_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
@@ -137,16 +134,18 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/Mexico_Literacy_Status_6To14_*_input.csv \
-  --pv_map=pvmap/Mexico_Literacy_Status_6To14_pvmap.csv,pvmap/place_mapping.csv \
+  --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv \
   --config_file=metadata.csv \
   --output_path=output/Mexico_Literacy_Status_6To14_output \
+  --output_counters=counters/Mexico_Literacy_Status_6To14_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/Mexico_Literate_15OrMore_*_input.csv \
-  --pv_map=pvmap/Mexico_Literate_15OrMore_pvmap.csv,pvmap/place_mapping.csv \
+  --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv \
   --config_file=metadata.csv \
   --output_path=output/Mexico_Literate_15OrMore_output \
+  --output_counters=counters/Mexico_Literate_15OrMore_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 

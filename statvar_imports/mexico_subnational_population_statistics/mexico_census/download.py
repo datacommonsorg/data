@@ -34,6 +34,7 @@ from absl import logging
 from google.cloud import storage
 import requests
 from requests.adapters import HTTPAdapter
+import urllib3
 from urllib3.util.retry import Retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -90,7 +91,17 @@ def create_http_session() -> requests.Session:
 def _http_get_json(session: requests.Session, url: str) -> Any:
     """Executes an HTTP GET request with tuple timeout and chained error."""
     try:
-        response = session.get(url, timeout=(10, 60))
+        try:
+            response = session.get(url, timeout=(10, 60))
+        except requests.exceptions.SSLError as ssl_exc:
+            logging.warning(
+                'SSL verification failed for %s (%s); retrying with verify=False.',
+                url,
+                ssl_exc,
+            )
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            session.verify = False
+            response = session.get(url, timeout=(10, 60), verify=False)
         response.raise_for_status()
         return response.json()
     except requests.RequestException as exc:
@@ -106,12 +117,28 @@ def _http_post_json(
 ) -> Any:
     """Executes an HTTP POST request with tuple timeout and chained error."""
     try:
-        response = session.post(
-            url,
-            json=json_body,
-            headers=headers,
-            timeout=(10, 90),
-        )
+        try:
+            response = session.post(
+                url,
+                json=json_body,
+                headers=headers,
+                timeout=(10, 90),
+            )
+        except requests.exceptions.SSLError as ssl_exc:
+            logging.warning(
+                'SSL verification failed for %s (%s); retrying with verify=False.',
+                url,
+                ssl_exc,
+            )
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            session.verify = False
+            response = session.post(
+                url,
+                json=json_body,
+                headers=headers,
+                timeout=(10, 90),
+                verify=False,
+            )
         response.raise_for_status()
         return response.json()
     except requests.RequestException as exc:

@@ -1,39 +1,40 @@
 {
     "import_specifications": [
         {
-            "import_name": "MexicoCensus",
+            "import_name": "MexicoCensus_Demographics",
             "curator_emails": [
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.inegi.org.mx/temas/",
-            "provenance_description": "Mexican Demographics, Economy, Health and Education data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
-            "validation_config_file": "validation_config.json",
+            "provenance_description": "Mexican Demographics, Population, Migration, Religion, Literacy and Unemployment data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
             "scripts": [
                 "download.py --config_path=config.json",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Migration_input.csv --pv_map=pvmap/Mexico_Migration_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Migration_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Avg_Annual_Growth_Rate_input.csv --pv_map=pvmap/Mexico_Avg_Annual_Growth_Rate_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Avg_Annual_Growth_Rate_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Births_Registered_input.csv --pv_map=pvmap/Mexico_Births_Registered_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Births_Registered_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Death_Diabetes_input.csv --pv_map=pvmap/Mexico_Death_Diabetes_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Death_Diabetes_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Deaths_Registered_input.csv --pv_map=pvmap/Mexico_Deaths_Registered_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Deaths_Registered_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Homicide_Population_input.csv --pv_map=pvmap/Mexico_Homicide_Population_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Homicide_Population_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Infant_Mortality_input.csv --pv_map=pvmap/Mexico_Infant_Mortality_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Infant_Mortality_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_LifeExpectancy_input.csv --pv_map=pvmap/Mexico_LifeExpectancy_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_LifeExpectancy_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Literacy_Status_6To14_*_input.csv --pv_map=pvmap/Mexico_Literacy_Status_6To14_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Literacy_Status_6To14_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Literate_15OrMore_*_input.csv --pv_map=pvmap/Mexico_Literate_15OrMore_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Literate_15OrMore_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Male_Mortality_Rate_input.csv --pv_map=pvmap/Mexico_Male_Mortality_Rate_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Male_Mortality_Rate_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Median_Age_input.csv --pv_map=pvmap/Mexico_Median_Age_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Median_Age_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Population_Density_input.csv --pv_map=pvmap/Mexico_Population_Density_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Population_Density_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Religion_Catholic_input.csv --pv_map=pvmap/Mexico_Religion_Catholic_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Religion_Catholic_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Religion_Irreligion_input.csv --pv_map=pvmap/Mexico_Religion_Irreligion_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Religion_Irreligion_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Religion_OtherReligionThanCatholicism_input.csv --pv_map=pvmap/Mexico_Religion_OtherReligionThanCatholicism_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Religion_OtherReligionThanCatholicism_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_SchoolEnrollment_input.csv --pv_map=pvmap/Mexico_SchoolEnrollment_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_SchoolEnrollment_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Student_Teacher_Ratio_input.csv --pv_map=pvmap/Mexico_Student_Teacher_Ratio_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Student_Teacher_Ratio_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Suicide_Population_input.csv --pv_map=pvmap/Mexico_Suicide_Population_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Suicide_Population_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Total_Population_input.csv --pv_map=pvmap/Mexico_Total_Population_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Total_Population_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Unemployed_Population_input.csv --pv_map=pvmap/Mexico_Unemployed_Population_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Unemployed_Population_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Migration_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Migration_output --output_counters=counters/Mexico_Migration_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Avg_Annual_Growth_Rate_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Avg_Annual_Growth_Rate_output --output_counters=counters/Mexico_Avg_Annual_Growth_Rate_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Births_Registered_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Births_Registered_output --output_counters=counters/Mexico_Births_Registered_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Literacy_Status_6To14_*_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Literacy_Status_6To14_output --output_counters=counters/Mexico_Literacy_Status_6To14_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Literate_15OrMore_*_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Literate_15OrMore_output --output_counters=counters/Mexico_Literate_15OrMore_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Median_Age_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Median_Age_output --output_counters=counters/Mexico_Median_Age_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Population_Density_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Population_Density_output --output_counters=counters/Mexico_Population_Density_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Religion_Catholic_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Religion_Catholic_output --output_counters=counters/Mexico_Religion_Catholic_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Religion_Irreligion_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Religion_Irreligion_output --output_counters=counters/Mexico_Religion_Irreligion_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Religion_OtherReligionThanCatholicism_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Religion_OtherReligionThanCatholicism_output --output_counters=counters/Mexico_Religion_OtherReligionThanCatholicism_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Total_Population_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Total_Population_output --output_counters=counters/Mexico_Total_Population_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Unemployed_Population_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Unemployed_Population_output --output_counters=counters/Mexico_Unemployed_Population_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "source_files": [
-                "input_files/*_input.csv",
+                "input_files/Mexico_Migration_input.csv",
+                "input_files/Mexico_Avg_Annual_Growth_Rate_input.csv",
+                "input_files/Mexico_Births_Registered_input.csv",
+                "input_files/Mexico_Literacy_Status_6To14_*_input.csv",
+                "input_files/Mexico_Literate_15OrMore_*_input.csv",
+                "input_files/Mexico_Median_Age_input.csv",
+                "input_files/Mexico_Population_Density_input.csv",
+                "input_files/Mexico_Religion_Catholic_input.csv",
+                "input_files/Mexico_Religion_Irreligion_input.csv",
+                "input_files/Mexico_Religion_OtherReligionThanCatholicism_input.csv",
+                "input_files/Mexico_Total_Population_input.csv",
+                "input_files/Mexico_Unemployed_Population_input.csv",
                 "counters/*.csv"
             ],
             "import_inputs": [
@@ -53,31 +54,6 @@
                     "node_mcf": "output/Mexico_Births_Registered_output*.mcf"
                 },
                 {
-                    "template_mcf": "output/Mexico_Death_Diabetes_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Death_Diabetes_output.csv",
-                    "node_mcf": "output/Mexico_Death_Diabetes_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_Deaths_Registered_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Deaths_Registered_output.csv",
-                    "node_mcf": "output/Mexico_Deaths_Registered_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_Homicide_Population_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Homicide_Population_output.csv",
-                    "node_mcf": "output/Mexico_Homicide_Population_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_Infant_Mortality_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Infant_Mortality_output.csv",
-                    "node_mcf": "output/Mexico_Infant_Mortality_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_LifeExpectancy_output.tmcf",
-                    "cleaned_csv": "output/Mexico_LifeExpectancy_output.csv",
-                    "node_mcf": "output/Mexico_LifeExpectancy_output*.mcf"
-                },
-                {
                     "template_mcf": "output/Mexico_Literacy_Status_6To14_output.tmcf",
                     "cleaned_csv": "output/Mexico_Literacy_Status_6To14_output.csv",
                     "node_mcf": "output/Mexico_Literacy_Status_6To14_output*.mcf"
@@ -86,11 +62,6 @@
                     "template_mcf": "output/Mexico_Literate_15OrMore_output.tmcf",
                     "cleaned_csv": "output/Mexico_Literate_15OrMore_output.csv",
                     "node_mcf": "output/Mexico_Literate_15OrMore_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_Male_Mortality_Rate_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Male_Mortality_Rate_output.csv",
-                    "node_mcf": "output/Mexico_Male_Mortality_Rate_output*.mcf"
                 },
                 {
                     "template_mcf": "output/Mexico_Median_Age_output.tmcf",
@@ -118,21 +89,6 @@
                     "node_mcf": "output/Mexico_Religion_OtherReligionThanCatholicism_output*.mcf"
                 },
                 {
-                    "template_mcf": "output/Mexico_SchoolEnrollment_output.tmcf",
-                    "cleaned_csv": "output/Mexico_SchoolEnrollment_output.csv",
-                    "node_mcf": "output/Mexico_SchoolEnrollment_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_Student_Teacher_Ratio_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Student_Teacher_Ratio_output.csv",
-                    "node_mcf": "output/Mexico_Student_Teacher_Ratio_output*.mcf"
-                },
-                {
-                    "template_mcf": "output/Mexico_Suicide_Population_output.tmcf",
-                    "cleaned_csv": "output/Mexico_Suicide_Population_output.csv",
-                    "node_mcf": "output/Mexico_Suicide_Population_output*.mcf"
-                },
-                {
                     "template_mcf": "output/Mexico_Total_Population_output.tmcf",
                     "cleaned_csv": "output/Mexico_Total_Population_output.csv",
                     "node_mcf": "output/Mexico_Total_Population_output*.mcf"
@@ -141,6 +97,103 @@
                     "template_mcf": "output/Mexico_Unemployed_Population_output.tmcf",
                     "cleaned_csv": "output/Mexico_Unemployed_Population_output.csv",
                     "node_mcf": "output/Mexico_Unemployed_Population_output*.mcf"
+                }
+            ],
+            "cron_schedule": "0 07 * * 3"
+        },
+        {
+            "import_name": "MexicoCensus_Health",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.inegi.org.mx/temas/",
+            "provenance_description": "Mexican Health and Mortality data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
+            "scripts": [
+                "download.py --config_path=config.json",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Death_Diabetes_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Death_Diabetes_output --output_counters=counters/Mexico_Death_Diabetes_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Deaths_Registered_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Deaths_Registered_output --output_counters=counters/Mexico_Deaths_Registered_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Homicide_Population_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Homicide_Population_output --output_counters=counters/Mexico_Homicide_Population_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Infant_Mortality_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Infant_Mortality_output --output_counters=counters/Mexico_Infant_Mortality_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_LifeExpectancy_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_LifeExpectancy_output --output_counters=counters/Mexico_LifeExpectancy_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Male_Mortality_Rate_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Male_Mortality_Rate_output --output_counters=counters/Mexico_Male_Mortality_Rate_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Suicide_Population_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Suicide_Population_output --output_counters=counters/Mexico_Suicide_Population_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "source_files": [
+                "input_files/Mexico_Death_Diabetes_input.csv",
+                "input_files/Mexico_Deaths_Registered_input.csv",
+                "input_files/Mexico_Homicide_Population_input.csv",
+                "input_files/Mexico_Infant_Mortality_input.csv",
+                "input_files/Mexico_LifeExpectancy_input.csv",
+                "input_files/Mexico_Male_Mortality_Rate_input.csv",
+                "input_files/Mexico_Suicide_Population_input.csv",
+                "counters/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/Mexico_Death_Diabetes_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Death_Diabetes_output.csv",
+                    "node_mcf": "output/Mexico_Death_Diabetes_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_Deaths_Registered_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Deaths_Registered_output.csv",
+                    "node_mcf": "output/Mexico_Deaths_Registered_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_Homicide_Population_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Homicide_Population_output.csv",
+                    "node_mcf": "output/Mexico_Homicide_Population_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_Infant_Mortality_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Infant_Mortality_output.csv",
+                    "node_mcf": "output/Mexico_Infant_Mortality_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_LifeExpectancy_output.tmcf",
+                    "cleaned_csv": "output/Mexico_LifeExpectancy_output.csv",
+                    "node_mcf": "output/Mexico_LifeExpectancy_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_Male_Mortality_Rate_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Male_Mortality_Rate_output.csv",
+                    "node_mcf": "output/Mexico_Male_Mortality_Rate_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_Suicide_Population_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Suicide_Population_output.csv",
+                    "node_mcf": "output/Mexico_Suicide_Population_output*.mcf"
+                }
+            ],
+            "cron_schedule": "0 07 * * 3"
+        },
+        {
+            "import_name": "MexicoCensus_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.inegi.org.mx/temas/",
+            "provenance_description": "Mexican Education Enrollment and Student-to-Teacher Ratio data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
+            "scripts": [
+                "download.py --config_path=config.json",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_SchoolEnrollment_input.csv --pv_map=pvmap/MexicoCensus_Education_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_SchoolEnrollment_output --output_counters=counters/Mexico_SchoolEnrollment_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Student_Teacher_Ratio_input.csv --pv_map=pvmap/MexicoCensus_Education_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Student_Teacher_Ratio_output --output_counters=counters/Mexico_Student_Teacher_Ratio_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "source_files": [
+                "input_files/Mexico_SchoolEnrollment_input.csv",
+                "input_files/Mexico_Student_Teacher_Ratio_input.csv",
+                "counters/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/Mexico_SchoolEnrollment_output.tmcf",
+                    "cleaned_csv": "output/Mexico_SchoolEnrollment_output.csv",
+                    "node_mcf": "output/Mexico_SchoolEnrollment_output*.mcf"
+                },
+                {
+                    "template_mcf": "output/Mexico_Student_Teacher_Ratio_output.tmcf",
+                    "cleaned_csv": "output/Mexico_Student_Teacher_Ratio_output.csv",
+                    "node_mcf": "output/Mexico_Student_Teacher_Ratio_output*.mcf"
                 }
             ],
             "cron_schedule": "0 07 * * 3"
