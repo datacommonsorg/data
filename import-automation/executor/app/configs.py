@@ -147,6 +147,9 @@ class ExecutorConfig:
     # number of available CPUs. CSV files are processed in parallel, one thread
     # per file. 0 lets the import tool choose.
     import_tool_num_threads: int = 4
+    # Maximum Java heap for import tool genmcf, as a percentage of the
+    # available memory (-XX:MaxRAMPercentage).
+    import_tool_max_ram_percentage: float = 75.0
     # Invoke differ tool.
     invoke_differ_tool: bool = True
     # Invoke validations before upload.

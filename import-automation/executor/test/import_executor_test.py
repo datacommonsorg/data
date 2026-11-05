@@ -69,6 +69,11 @@ class ImportExecutorTest(unittest.TestCase):
     def test_default_import_tool_num_threads(self):
         self.assertEqual(4, configs.ExecutorConfig().import_tool_num_threads)
 
+    def test_default_import_tool_max_ram_percentage(self):
+        self.assertEqual(
+            75.0,
+            configs.ExecutorConfig().import_tool_max_ram_percentage)
+
     def test_run_with_timeout(self):
         self.assertRaises(subprocess.TimeoutExpired,
                           import_executor._run_with_timeout, ['sleep', '5'],
