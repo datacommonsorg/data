@@ -268,14 +268,9 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
     alt_dir = os.path.join("/data", "scratch", "input_files")
     input_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_dir if os.path.isdir(alt_dir) else None)
     found_1991 = False
-    seen_popu_basenames = set()
     if input_dir:
         popu_files = sorted(glob.glob(os.path.join(input_dir, "Brazil_1991_gender", "*.xls")) + glob.glob(os.path.join(input_dir, "POPU91*.XLS")))
         for pf in popu_files:
-            bname = os.path.basename(pf).upper()
-            if bname in seen_popu_basenames:
-                continue
-            seen_popu_basenames.add(bname)
             with open(pf, "rb") as f:
                 rows.extend(parse_raw_1991_popu(f.read(), map_91))
                 found_1991 = True
@@ -287,8 +282,7 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
             for b in blobs:
                 bname = os.path.basename(b.name).upper()
-                if bname.endswith(".XLS") and bname not in seen_popu_basenames:
-                    seen_popu_basenames.add(bname)
+                if bname.endswith(".XLS"):
                     content = b.download_as_bytes()
                     rows.extend(parse_raw_1991_popu(content, map_91))
         except Exception as e:

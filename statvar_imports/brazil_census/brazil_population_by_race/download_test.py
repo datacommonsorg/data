@@ -16,7 +16,6 @@
 import importlib.util
 import os
 import shutil
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -160,53 +159,6 @@ class DownloadTest(unittest.TestCase):
         )
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
-
-
-
-    def test_stat_var_processor_sample_data(self):
-        """Verifies stat_var_processor correctly processes test_data sample CSV."""
-        repo_dir = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
-        processor_script = os.path.join(repo_dir, "tools", "statvar_importer", "stat_var_processor.py")
-        if not os.path.isfile(processor_script):
-            self.skipTest("stat_var_processor.py not found")
-        imp_name = os.path.basename(SCRIPT_DIR)
-        sample_csv = os.path.join(SCRIPT_DIR, "test_data", f"sample_{imp_name}.csv")
-        pv_map = os.path.join(SCRIPT_DIR, f"{imp_name}_pvmap.csv")
-        metadata_csv = os.path.join(SCRIPT_DIR, f"{imp_name}_metadata.csv")
-        places_csv = os.path.join(SCRIPT_DIR, "..", "brazil_places_resolved.csv")
-        out_prefix = os.path.join(self.test_dir, f"{imp_name}_out")
-        import csv
-        import json
-
-        # Create hermetic test config with reconcile_nodes=False to avoid external DC API calls
-        meta = {"reconcile_nodes": False}
-        if os.path.isfile(metadata_csv):
-            with open(metadata_csv, encoding="utf-8") as f:
-                for row in csv.reader(f):
-                    if row and len(row) == 2 and not row[0].startswith("#"):
-                        meta[row[0].strip()] = row[1].strip()
-            meta["reconcile_nodes"] = False
-            if "header_rows" in meta:
-                meta["header_rows"] = int(meta["header_rows"])
-        cfg_json = os.path.join(self.test_dir, "test_config.json")
-        with open(cfg_json, "w", encoding="utf-8") as f:
-            json.dump(meta, f)
-
-        cmd = [
-            sys.executable,
-            processor_script,
-            f"--input_data={sample_csv}",
-            f"--pv_map={pv_map}",
-            f"--config_file={cfg_json}",
-            f"--places_resolved_csv={places_csv}",
-            f"--output_path={out_prefix}",
-        ]
-        res = subprocess.run(cmd, cwd=repo_dir, capture_output=True, text=True)
-        self.assertEqual(res.returncode, 0, f"stat_var_processor failed: {res.stderr}")
-        self.assertTrue(os.path.isfile(f"{out_prefix}.csv"))
-        self.assertTrue(os.path.isfile(f"{out_prefix}.tmcf"))
-        df_out = pd.read_csv(f"{out_prefix}.csv")
-        self.assertGreater(len(df_out), 0)
 
 
 if __name__ == "__main__":

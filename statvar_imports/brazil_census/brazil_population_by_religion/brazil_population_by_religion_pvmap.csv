@@ -1,6 +1,6 @@
 key,prop,val,p1,v1
 Localidade,observationAbout,{Data},,
-Ano,observationDate,{Number},observationPeriod,P1Y,#Eval,"age='dcs:Years10Onwards' if '{Number}'=='2022' else None"
+Ano,observationDate,{Number},observationPeriod,P1Y,#Eval,"age='[10 - Years]' if '{Number}'=='2022' else None"
 Populacao,value,{Number},populationType,Person
 Religiao:Total,populationType,Person,,
 Religiao:Católica Apostólica Romana,religion,dcs:RomanCatholicismApostolic,,
