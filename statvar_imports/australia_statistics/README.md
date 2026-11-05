@@ -80,7 +80,6 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --pv_map=australia_statistics_pv_map.csv \
   --config_file=australia_statistics_metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --recon_property=variableMeasured,observationAbout \
   --output_path=output_files/australia_statistics_output \
   --output_counters=counters/australia_statistics_counters.csv
 ```
