@@ -625,9 +625,10 @@ def _process_county_file_99c8_00(file_path: str) -> pd.DataFrame:
                     for idx, val in enumerate(years_list):
                         if idx == 0:
                             continue
-                        outfile.write(
-                            str(val) + ',' + str(fips_code) + "," +
-                            str(tmp_line[idx + 2]) + "\n")
+                        val_person = re.sub(r'[^\d]', '',
+                                            str(tmp_line[idx + 2]))
+                        if val_person:
+                            outfile.write(f"{val},{fips_code},{val_person}\n")
     data_df = pd.read_csv("outfile.csv")
     data_df = data_df[data_df["Location"] != "country/USA"]
     os.remove("outfile.csv")
@@ -1091,11 +1092,18 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             logging.warning(
                 f"Mismatch between files expected ({total_files_to_process}) and processed ({processed_count})"
             )
+        final_df["Year"] = pd.to_numeric(final_df["Year"], errors="coerce")
+        final_df = final_df.dropna(subset=["Year"])
         final_df["Year"] = final_df["Year"].astype("int")
         final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
                                         kind="mergesort")
         final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
-        final_df["Count_Person"] = final_df["Count_Person"].astype("int")
+        count_person_str = final_df["Count_Person"].astype(str).str.replace(
+            r"[^\d]", "", regex=True)
+        final_df["Count_Person"] = pd.to_numeric(count_person_str,
+                                                 errors="coerce")
+        final_df = final_df.dropna(subset=["Count_Person"])
+        final_df["Count_Person"] = final_df["Count_Person"].astype("int64")
         final_df[["Year", "Location",
                   "Count_Person"]].to_csv(cleaned_csv_file_path, index=False)
         _generate_mcf(mcf_file_path)
