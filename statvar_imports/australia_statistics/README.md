@@ -39,9 +39,10 @@ The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks 
 *   **Data Quality Checks**:
     *   Automated validation via `tools/import_validation/runner.py` evaluates the output against `validation_config.json` (plus global rules), enforcing:
         *   `check_deleted_records_percent`: Global historical deletion threshold `<= 0.1%`.
-        *   `check_goldens_summary_report` & `check_goldens_output_csv`: 2 `GOLDENS_CHECK` rules verifying golden summary report and observation samples.
+        *   `check_goldens_summary_report` & `check_goldens_output_csv`: 2 `GOLDENS_CHECK` rules verifying golden summary report (`17` `nl_statvars.csv` StatisticalVariables) and observation samples (`9` `top_100k_places.csv` places).
         *   `max_date_consistent_*`: 5 scoped `MAX_DATE_CONSISTENT` rules verifying date consistency within each co-released ABS dataset family.
-        *   `check_active_indicators_freshness_and_bounds`: Verifies `MaxDate`, `total_svs >= 260`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person*`) across all 266 active recurring population, labour force, and life expectancy indicators.
+        *   `check_labour_force_monthly_freshness_and_bounds`: Verifies `MaxDate` (`1`-year rolling window), `total_svs >= 9`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person*`) across all 9 monthly Labour Force indicators.
+        *   `check_active_indicators_freshness_and_bounds`: Verifies `MaxDate` (`3`-year rolling window), `total_svs >= 250`, `NumPlaces >= 1`, and `MinValue >= 0` across all 257 active annual/multi-year Estimated Resident Population and Life Expectancy indicators.
         *   `check_census_and_survey_indicators_bounds`: Verifies `MaxDate >= 2016`, `total_svs >= 580`, `NumPlaces >= 1`, and `MinValue >= 0` across all 584 Census health condition and biennial household income indicators.
 
 ---

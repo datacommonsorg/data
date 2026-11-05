@@ -62,8 +62,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'LF_M3_3',
                 'regionCd': 'AUS',
                 'value': '14925.782419',
-                'unit': '',
-                'scalingFactor': '',
             },
         )
         self.assertEqual(
@@ -73,8 +71,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'LF_M6_1',
                 'regionCd': '1',
                 'value': '105.5',
-                'unit': '',
-                'scalingFactor': '',
             },
         )
         self.assertEqual(
@@ -84,8 +80,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'LF_M13_2',
                 'regionCd': '2',
                 'value': '4.2',
-                'unit': '',
-                'scalingFactor': '',
             },
         )
 
@@ -108,8 +102,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'ERP_1_A04',
                 'regionCd': '1',
                 'value': '240000',
-                'unit': '',
-                'scalingFactor': '',
             },
         )
         self.assertEqual(
@@ -119,8 +111,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'ERP_3_TOT',
                 'regionCd': 'AUS',
                 'value': '27614411',
-                'unit': '',
-                'scalingFactor': '',
             },
         )
         self.assertEqual(
@@ -130,8 +120,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'ERP_1_A04',
                 'regionCd': '1',
                 'value': '248100',
-                'unit': '',
-                'scalingFactor': '',
             },
         )
 
@@ -164,8 +152,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'INC_Lowest quintile',
                 'regionCd': 'AUS',
                 'value': '411',
-                'unit': 'AUD',
-                'scalingFactor': '',
             },
         )
         self.assertEqual(
@@ -175,8 +161,6 @@ class ProcessTest(unittest.TestCase):
                 'indicatorCd': 'INC_50th (P50)',
                 'regionCd': 'AUS',
                 'value': '959',
-                'unit': 'AUD',
-                'scalingFactor': '',
             },
         )
 
@@ -240,6 +224,7 @@ class ProcessTest(unittest.TestCase):
             with open(c1, 'w', encoding='utf-8') as f:
                 f.write('key,value\n'
                         'svobs-added,100\n'
+                        'error-node-merge-conflict,1\n'
                         'existing-statvars-from-mcf,141928\n'
                         'output-svobs-unique-observationAbout,2\n'
                         'output-svobs-unique-variableMeasured,1\n'
@@ -249,6 +234,7 @@ class ProcessTest(unittest.TestCase):
             with open(c2, 'w', encoding='utf-8') as f:
                 f.write('key,value\n'
                         'svobs-added,250\n'
+                        'error-node-merge-conflict,2\n'
                         'existing-statvars-from-mcf,141928\n'
                         'output-svobs-unique-observationAbout,1\n'
                         'output-svobs-unique-variableMeasured,2\n'
@@ -266,6 +252,7 @@ class ProcessTest(unittest.TestCase):
                 lines,
                 [
                     'key,value',
+                    'error-node-merge-conflict,3',
                     'existing-statvars-from-mcf,141928',
                     'output-svobs-unique-observationAbout,2',
                     'output-svobs-unique-variableMeasured,2',

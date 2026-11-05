@@ -25,13 +25,7 @@ from absl import app
 from absl import flags
 from absl import logging
 import requests
-from requests.adapters import HTTPAdapter
 import urllib3.util.connection
-from urllib3.util.retry import Retry
-
-# Force IPv4 resolution because data.api.abs.gov.au has broken IPv6 routing
-# from some cloud environments, causing IPv6 connection timeouts before fallback.
-urllib3.util.connection.allowed_gai_family = lambda: socket.AF_INET
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -91,19 +85,10 @@ STATIC_DATASETS: dict[str, str] = {
 
 
 def _get_session() -> requests.Session:
-    """Returns a thread-local HTTP session with retry logic for transient errors."""
+    """Returns a thread-local HTTP session."""
     session = getattr(_THREAD_LOCAL, 'session', None)
     if session is None:
         session = requests.Session()
-        retry = Retry(
-            total=5,
-            backoff_factor=1.5,
-            status_forcelist=(429, 500, 502, 503, 504),
-            allowed_methods=('HEAD', 'GET'),
-        )
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('https://', adapter)
-        session.mount('http://', adapter)
         session.headers.update(
             {'User-Agent': 'DataCommons-AustraliaStatistics-Importer/1.0'})
         _THREAD_LOCAL.session = session
@@ -121,8 +106,11 @@ def _fetch_bytes(
 ) -> bytes | None:
     """Downloads raw bytes from a URL with retry logic."""
     session = _get_session()
-    for attempt in range(10):
+    max_attempts = 10
+    for attempt in range(max_attempts):
         try:
+            logging.info('GET %s (attempt %d/%d)', url, attempt + 1,
+                         max_attempts)
             resp = session.get(url, timeout=timeout)
             if allow_404 and resp.status_code == 404:
                 return None
@@ -131,7 +119,7 @@ def _fetch_bytes(
                 raise RuntimeError(f'Empty response body from {url}')
             return resp.content
         except requests.exceptions.RequestException as e:
-            if attempt == 9:
+            if attempt == max_attempts - 1:
                 raise RuntimeError(f'Failed to download {url}: {e}') from e
             time.sleep(2**attempt)
     raise RuntimeError(f'Unreachable download failure for {url}')
@@ -281,6 +269,9 @@ def download_all(
 def main(argv: list[str]) -> None:
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
+    # Force IPv4 resolution because data.api.abs.gov.au has broken IPv6 routing
+    # from some cloud environments, causing IPv6 connection timeouts before fallback.
+    urllib3.util.connection.allowed_gai_family = lambda: socket.AF_INET
     output_dir = (_FLAGS.output_dir if os.path.isabs(_FLAGS.output_dir) else
                   os.path.join(_MODULE_DIR, _FLAGS.output_dir))
     try:

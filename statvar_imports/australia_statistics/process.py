@@ -82,14 +82,17 @@ flags.DEFINE_integer(
     2,
     'Maximum number of concurrent stat_var_processor worker processes.',
 )
+flags.DEFINE_integer(
+    'shard_timeout',
+    600,
+    'Timeout in seconds for each stat_var_processor shard subprocess.',
+)
 
 CSV_HEADER = [
     'observationDate',
     'indicatorCd',
     'regionCd',
     'value',
-    'unit',
-    'scalingFactor',
 ]
 
 SDMX_REGION_CODES = {'AUS', '1', '2', '3', '4', '5', '6', '7', '8'}
@@ -227,8 +230,6 @@ def _make_row(
     indicator_cd: str,
     region_cd: str,
     value: str,
-    unit: str = '',
-    scaling_factor: str = '',
 ) -> dict[str, str]:
     """Constructs a standardized input CSV row dictionary."""
     return {
@@ -236,8 +237,6 @@ def _make_row(
         'indicatorCd': str(indicator_cd),
         'regionCd': str(region_cd),
         'value': str(value),
-        'unit': str(unit),
-        'scalingFactor': str(scaling_factor),
     }
 
 
@@ -506,7 +505,6 @@ def parse_household_income_xlsx(xlsx_bytes: bytes) -> list[dict[str, str]]:
                             indicator_cd,
                             'AUS',
                             _format_number(val),
-                            unit='AUD',
                         ))
     return rows
 
@@ -914,6 +912,7 @@ def _run_shard(
     pv_map: str,
     config_file: str,
     existing_statvar_mcf: str,
+    timeout: int = 600,
 ) -> tuple[int, str, str, str]:
     """Runs stat_var_processor.py on a single staged CSV in an isolated work dir."""
     shard_work_dir = f'{shard_output_prefix}_cwd'
@@ -933,7 +932,8 @@ def _run_shard(
     proc = subprocess.run(cmd,
                           cwd=shard_work_dir,
                           capture_output=True,
-                          text=True)
+                          text=True,
+                          timeout=timeout)
     if proc.returncode != 0:
         raise RuntimeError(
             f'Shard {shard_idx} ({input_file}) failed with exit code {proc.returncode}:\n'
@@ -980,7 +980,6 @@ def _counter_aggregation_mode(key: str) -> str:
                 'dropped-output-statvars-mcf',
                 'input-nodes-ignored',
                 'nodes-matched',
-                'error-node-merge-conflict',
             )):
         return 'max'
     if 'start_time' in lower:
@@ -1025,10 +1024,6 @@ def _compute_csv_cardinalities(final_csv_path: str) -> dict[str, float]:
         'output-svobs-unique-variableMeasured': n_vars,
         'output-svobs-unique-unit': float(len(units)),
         'generated-unique-statvars': n_vars,
-        'dropped-output-statvars-mcf': n_vars,
-        'input-nodes-ignored': n_vars,
-        'nodes-matched': n_vars,
-        'error-node-merge-conflict': n_vars,
     }
 
 
@@ -1185,6 +1180,7 @@ def _run_pipeline() -> None:
                         os.path.abspath(_FLAGS.pv_map),
                         os.path.abspath(_FLAGS.config_file),
                         local_statvar_mcf,
+                        _FLAGS.shard_timeout,
                     ))
 
             for fut in concurrent.futures.as_completed(futures):

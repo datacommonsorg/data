@@ -83,12 +83,21 @@
       "params": {}
     },
     {
-      "rule_id": "check_active_indicators_freshness_and_bounds",
-      "description": "Verify MaxDate is within allowable publication lag and values are non-negative (and within [0, 100] for unemployment rates) for active recurring ABS series",
+      "rule_id": "check_labour_force_monthly_freshness_and_bounds",
+      "description": "Verify MaxDate is within 1 year and values are non-negative (and within [0, 100] for unemployment rates) for monthly ABS Labour Force series",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^(LifeExpectancy_|UnemploymentRate_|dc/nm9hcklgg5zb3)') OR (regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, 'Condition'))",
-        "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 260 AND NumPlaces >= 1 AND MinValue >= 0 AND (NOT regexp_matches(StatVar, '^UnemploymentRate_') OR MaxValue <= 100)"
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^(UnemploymentRate_|dc/nm9hcklgg5zb3|Count_Person_(Employed|Unemployed))')",
+        "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 1) AND total_svs >= 9 AND NumPlaces >= 1 AND MinValue >= 0 AND (NOT regexp_matches(StatVar, '^UnemploymentRate_') OR MaxValue <= 100)"
+      }
+    },
+    {
+      "rule_id": "check_active_indicators_freshness_and_bounds",
+      "description": "Verify MaxDate is within allowable publication lag and values are non-negative for annual Estimated Resident Population and 3-year Period Life Expectancy series",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE regexp_matches(StatVar, '^LifeExpectancy_') OR (regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, '(Condition|Employed|Unemployed)'))",
+        "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs >= 250 AND NumPlaces >= 1 AND MinValue >= 0"
       }
     },
     {
