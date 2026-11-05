@@ -36,10 +36,10 @@ The **21 datasets** configured in `config.json` and `manifest.json` are grouped 
 | 13 | `MexicoCensus_Health` | `Mexico_Death_Diabetes` | Registered deaths caused by diabetes mellitus (`Count_MortalityEvent_Diabetes`) by state, 5-year age group, and sex. | `P1Y` |
 | 14 | `MexicoCensus_Health` | `Mexico_Deaths_Registered` | Total registered deaths (`Count_Death`) by state of residence and sex. | `P1Y` |
 | 15 | `MexicoCensus_Health` | `Mexico_Homicide_Population` | Registered deaths by homicide (`Count_MortalityEvent_Assault(Homicide)`) by state of residence and sex. | `P1Y` |
-| 16 | `MexicoCensus_Health` | `Mexico_Infant_Mortality` | Registered deaths of infants under 1 year of age (`Count_Death_LessThan1Year`) by state of residence and sex. | `P1Y` |
+| 16 | `MexicoCensus_Health` | `Mexico_Infant_Mortality` | Registered deaths of infants under 1 year of age (`Count_Death_Upto1Years`) by state of residence and sex. | `P1Y` |
 | 17 | `MexicoCensus_Health` | `Mexico_LifeExpectancy` | Life expectancy at birth (`LifeExpectancy_Person`) by state and sex. | `P1Y` |
 | 18 | `MexicoCensus_Health` | `Mexico_Male_Mortality_Rate` | Male-to-female mortality ratio (`Count_Death_Male_AsAFractionOf_Count_Death_Female`) by state of residence. | `P1Y` |
-| 19 | `MexicoCensus_Health` | `Mexico_Suicide_Population` | Registered deaths by suicide (`Count_Death_IntentionalSelfHarm(Suicide)`) by state of residence and sex. | `P1Y` |
+| 19 | `MexicoCensus_Health` | `Mexico_Suicide_Population` | Registered deaths by suicide (`Count_MortalityEvent_IntentionalSelf-Harm(Suicide)`) by state of residence and sex. | `P1Y` |
 | 20 | `MexicoCensus_Education` | `Mexico_SchoolEnrollment` | Student enrollment (`Count_Student`) by state, education level, and sex across school cycles. | `P1Y` |
 | 21 | `MexicoCensus_Education` | `Mexico_Student_Teacher_Ratio` | Student-to-teacher and student-to-school ratios by state and education level across school cycles. | `P1Y` |
 
@@ -49,6 +49,7 @@ The **21 datasets** configured in `config.json` and `manifest.json` are grouped 
 
 ### 1. `download.py` and `config.json`
 `download.py` is the unified Python downloader that fetches all 21 datasets from INEGI's APIs and writes the raw CSV files into `input_files/`. All API base URLs, GCS bucket paths, and dataset identifiers are externalized in `config.json` (no URLs or bucket paths are hardcoded in `download.py`).
+- **TLS / `SSLError` Fallback**: All requests attempt standard TLS verification (`verify=True`) first. An `SSLError` fallback (`verify=False`) is included because `www.inegi.org.mx` serves an incomplete intermediate certificate chain that is missing from the default CA bundle in the Cloud Batch container environment (`[SSL: CERTIFICATE_VERIFY_FAILED] unable to get local issuer certificate`).
 
 #### Supported CLI Flag in `download.py`
 - `--config_path`: Path to the JSON configuration file (defaults to `config.json`).
@@ -160,9 +161,11 @@ For each of the 21 datasets (`<Dataset>`), `stat_var_processor.py` generates:
 - **StatVar Node MCF** (when custom StatVars are emitted): `output/<Dataset>_output_stat_vars.mcf` and `output/<Dataset>_output_stat_vars_schema.mcf`
 
 ### Cleaned CSV Columns
-Depending on whether a property is constant across all rows of a dataset (written to `.tmcf`) or varies per row (written as a CSV column), `output/<Dataset>_output.csv` contains:
-- `observationDate`: Reference year (`YYYY`) or quarter end-month (`YYYY-03`, `YYYY-06`, `YYYY-09`, `YYYY-12`).
+As configured via `output_columns` in `metadata.csv`, every `output/<Dataset>_output.csv` contains a fixed 7-column schema:
 - `observationAbout`: Resolved place DCID (`country/MEX` or state `wikidataId/Q...`).
+- `observationDate`: Reference year (`YYYY`) or quarter end-month (`YYYY-03`, `YYYY-06`, `YYYY-09`, `YYYY-12`).
 - `value`: Numeric observation value.
 - `variableMeasured`: Target Data Commons `StatisticalVariable` DCID.
-- `unit` (when multiple units exist in the same dataset, such as headcounts and `Percent` in the literacy datasets): Unit DCID.
+- `unit`: Unit DCID (e.g., `PersonPerSquareKilometer`, `Year`, `Percent`), or empty when not applicable.
+- `scalingFactor`: Scaling factor (e.g., `100`), or empty when not applicable.
+- `observationPeriod`: Observation period (e.g., `P5Y`), or empty when not applicable.
