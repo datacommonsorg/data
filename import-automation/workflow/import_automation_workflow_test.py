@@ -356,6 +356,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         tasks = {t.task_id: t for t in dag.tasks}
         expected_tasks = [
             'run_import_job',
+            'run_validation_job',
             'update_import_version',
             'trigger_staging_ingestion',
             'wait_staging_ingestion',
@@ -365,15 +366,17 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         ]
         for task_id in expected_tasks:
             self.assertIn(task_id, tasks)
-        self.assertNotIn('run_validation_job', tasks)
         self.assertNotIn('verify_golden_tests', tasks)
         self.assertNotIn('await_human_approval', tasks)
+        self.assertNotIn('runBQDiffer', dag.params)
+        self.assertNotIn('splitValidationJob', dag.params)
         self.assertNotIn('skipValidationJob', dag.params)
         self.assertNotIn('dryRunIngestion', dag.params)
         self.assertNotIn('forceIngestion', dag.params)
 
         # Ensure wait/sensor tasks run in reschedule mode so they do not hold worker slots
         self.assertEqual(tasks['run_import_job'].mode, 'reschedule')
+        self.assertEqual(tasks['run_validation_job'].mode, 'reschedule')
         self.assertEqual(tasks['wait_staging_ingestion'].mode, 'reschedule')
         self.assertEqual(tasks['wait_prod_ingestion'].mode, 'reschedule')
         self.assertEqual(tasks['trigger_prod_ingestion'].trigger_rule,
@@ -381,8 +384,10 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertEqual(tasks['workflow_summary'].trigger_rule, 'none_failed')
 
         # Check downstream ordering
-        self.assertIn(tasks['update_import_version'],
+        self.assertIn(tasks['run_validation_job'],
                       tasks['run_import_job'].downstream_list)
+        self.assertIn(tasks['update_import_version'],
+                      tasks['run_validation_job'].downstream_list)
         self.assertIn(tasks['trigger_staging_ingestion'],
                       tasks['update_import_version'].downstream_list)
         self.assertIn(tasks['wait_staging_ingestion'],
@@ -394,36 +399,52 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertIn(tasks['workflow_summary'],
                       tasks['wait_prod_ingestion'].downstream_list)
 
-    @patch('import_automation_workflow._run_cloud_run_job')
-    def test_validation_job_and_batch_config(self, mock_run_cr_job):
-        context = {
+    @patch('import_automation_workflow.CloudBatchHook')
+    def test_validation_job_and_batch_config(self, mock_batch_hook_cls):
+        mock_hook = mock_batch_hook_cls.return_value
+        val_context = {
             'params': {
                 'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
                 'importConfig': {
                     'custom_flag': True,
+                    'invoke_import_validation': True,
                 },
             }
         }
-        cfg = import_automation_workflow.resolve_workflow_context(context)
+        cfg = import_automation_workflow.resolve_workflow_context(val_context)
         batch_cfg = json.loads(cfg['batchImportConfig'])
         orig_cfg = json.loads(cfg['importConfig'])
 
-        self.assertNotIn('skipValidationJob', cfg)
-        self.assertNotIn('invoke_import_validation', batch_cfg)
-        self.assertNotIn('invoke_differ_tool', batch_cfg)
+        self.assertNotIn('runBQDiffer',
+                         import_automation_workflow.base_dag_params)
+        self.assertFalse(batch_cfg['invoke_import_validation'])
+        self.assertFalse(batch_cfg['invoke_differ_tool'])
         self.assertTrue(batch_cfg['custom_flag'])
-        self.assertEqual(batch_cfg, orig_cfg)
-        self.assertEqual(cfg['validationJobName'], 'import-validator-job')
+        self.assertTrue(orig_cfg['invoke_import_validation'])
+        self.assertTrue(cfg['validationJobId'].endswith('-val'))
 
-        mock_run_cr_job.return_value = {'status': 'SUCCEEDED'}
-        res = import_automation_workflow.run_validation_job.function(**context)
+        mock_hook.get_conn.return_value.get_job.side_effect = Exception(
+            '404 NotFound')
+        mock_submitted_job = MagicMock()
+        mock_submitted_job.status.state = 'SUCCEEDED'
+        mock_hook.submit_batch_job.return_value = mock_submitted_job
+
+        res = import_automation_workflow.run_validation_job.function(
+            **val_context)
         self.assertEqual(res['status'], 'SUCCESS')
-        mock_run_cr_job.assert_called_once()
-        call_args = mock_run_cr_job.call_args[1]
-        self.assertEqual(call_args['job_name'], 'import-validator-job')
+        mock_hook.submit_batch_job.assert_called_once()
+        call_kwargs = mock_hook.submit_batch_job.call_args[1]
+        self.assertTrue(call_kwargs['job_name'].endswith('-val'))
+        container_spec = (call_kwargs['job']['taskGroups'][0]['taskSpec']
+                          ['runnables'][0]['container'])
+        self.assertEqual(container_spec['imageUri'], cfg['imageUri'])
+        self.assertEqual(container_spec['entrypoint'], 'python')
+        self.assertEqual(container_spec['commands'][0],
+                         '/data/import-automation/validator/main.py')
         self.assertIn(
             '--import_name=scripts/us_fed:USFed_ConstantMaturityRates_Test',
-            call_args['args'])
+            container_spec['commands'])
+        self.assertIn('--run_bq_differ', container_spec['commands'])
 
     def test_skip_import_job_skips_batch_and_validation_jobs(self):
         context = {
@@ -442,6 +463,28 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         tasks = {t.task_id: t for t in dag.tasks}
         self.assertEqual(tasks['update_import_version'].trigger_rule,
                          'none_failed')
+
+        val_disabled_context = {
+            'params': {
+                'importName': 'scripts/noaa_gfs:NOAA_GlobalForecastSystem',
+                'importConfig': {
+                    'invoke_import_validation': False,
+                },
+            }
+        }
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_validation_job.function(
+                **val_disabled_context)
+
+        explicit_skip_val_context = {
+            'params': {
+                'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
+                'skipValidationJob': True,
+            }
+        }
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_validation_job.function(
+                **explicit_skip_val_context)
 
     def test_normalize_manifest_resource_limits(self):
         dag = import_automation_workflow.build_dag(
@@ -663,6 +706,45 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertIn('FAILED', str(ctx.exception))
         mock_report_failure.assert_called_once()
         hook_mock.submit_batch_job.assert_not_called()
+
+    @patch('import_automation_workflow._report_import_failure')
+    @patch('import_automation_workflow.CloudBatchHook')
+    def test_cloud_batch_validation_sensor_failure_records_validation_status(
+            self, mock_batch_hook_cls, mock_report_failure):
+        hook_mock = MagicMock()
+        conn_mock = MagicMock()
+        hook_mock.get_conn.return_value = conn_mock
+        mock_batch_hook_cls.return_value = hook_mock
+
+        failed_job = MagicMock()
+        failed_job.name = 'projects/p/locations/r/jobs/test-job-val'
+        failed_job.status.state = 5  # FAILED
+        ev = MagicMock()
+        ev.description = 'Task exited with non-zero code 1'
+        failed_job.status.status_events = [ev]
+        failed_job.create_time = None
+        conn_mock.get_job.return_value = failed_job
+
+        sensor = import_automation_workflow.CloudBatchImportSensor(
+            task_id='run_validation_job',
+            import_name='scripts/test:TestImport',
+            is_validation=True,
+        )
+        context = {
+            'params': {
+                'importName': 'scripts/test:TestImport',
+                'validationJobId': 'test-job-val',
+                'projectId': 'p',
+                'region': 'r',
+            }
+        }
+
+        with self.assertRaises(MockAirflowException) as ctx:
+            sensor.poke(context)
+        self.assertIn('FAILED', str(ctx.exception))
+        mock_report_failure.assert_called_once()
+        self.assertEqual(mock_report_failure.call_args[1].get('status'),
+                         'VALIDATION')
 
     def test_staging_and_prod_denylist_skips_ingestion(self):
         with patch.object(import_automation_workflow, 'STAGING_DENYLIST',

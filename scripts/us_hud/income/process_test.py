@@ -62,7 +62,6 @@ class ProcessTest(unittest.TestCase):
 
     def test_process_with_dynamic_csv(self):
         matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
-        output_data = []
         input_folder = TEST_DIR
 
         if not os.path.exists(OUTPUT_DIR):

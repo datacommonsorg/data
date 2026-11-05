@@ -79,7 +79,7 @@ class CollectionMerger:
                                     key_field=key_field,
                                     allow_overwrite=allow_overwrite,
                                     path=path)
-        if type(base) != type(incoming):
+        if type(base) is not type(incoming):
             location = path or 'root'
             logging.warning(f"Type mismatch at {location}; skipping.")
         return base

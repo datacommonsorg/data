@@ -144,7 +144,6 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
         """
         df = pd.read_csv(file_path, header=0, encoding='utf-8')
         df['year'] = year
-        df_final = pd.DataFrame()
         df['geo_Id'] = ''
 
         df = self.data_standardize(df, 'POLLUTANT', SOURCE_POLLUTANT)
