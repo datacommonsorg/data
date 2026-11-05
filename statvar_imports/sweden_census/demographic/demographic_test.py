@@ -417,7 +417,7 @@ class SwedenDemographicProcessorTest(unittest.TestCase):
                 f_out.write('recon_lookup_api,False\n')
 
             cmd = [
-                'python3',
+                sys.executable,
                 SV_PROCESSOR,
                 f'--input_data={input_csv}',
                 f'--pv_map={os.path.join(SCRIPT_DIR, "demographic_pvmap.csv")}',
