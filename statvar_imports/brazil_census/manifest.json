@@ -58,8 +58,7 @@
                 },
                 {
                     "template_mcf": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.tmcf",
-                    "cleaned_csv": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.csv",
-                    "node_mcf": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex_stat_vars.mcf"
+                    "cleaned_csv": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.csv"
                 },
                 {
                     "template_mcf": "brazil_population_by_race/brazil_population_by_race.tmcf",
