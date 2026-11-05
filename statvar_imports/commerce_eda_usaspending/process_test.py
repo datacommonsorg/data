@@ -325,8 +325,9 @@ class TestProcessUSASpending(unittest.TestCase):
         # Total is 1234.6 + 5678.4 = 6913.0 -> 6913
         df_expected = pd.DataFrame({
             "Place": ["TX", "TX", "TX"],
-            "State or Territory / EDA Program":
-            ["Total", "Planning", "Public Works"],
+            "State or Territory / EDA Program": [
+                "Total", "Planning", "Public Works"
+            ],
             "Year": [2022, 2022, 2022],
             "Value": [6913, 5678, 1235],
         })
@@ -434,8 +435,9 @@ class TestProcessUSASpending(unittest.TestCase):
         # Public Works should be dropped, and Total must equal 98992 (not 83674)
         df_expected = pd.DataFrame({
             "Place": ["MP", "MP"],
-            "State or Territory / EDA Program":
-            ["Total", "Economic Adjustment Assistance"],
+            "State or Territory / EDA Program": [
+                "Total", "Economic Adjustment Assistance"
+            ],
             "Year": [2014, 2014],
             "Value": [98992, 98992],
         })
@@ -622,7 +624,7 @@ class TestProcessUSASpending(unittest.TestCase):
     def test_get_current_fiscal_year(self):
         import datetime
         from statvar_imports.commerce_eda_usaspending.process import (
-            get_current_fiscal_year, )
+            get_current_fiscal_year,)
         self.assertEqual(
             get_current_fiscal_year(datetime.datetime(2026, 9, 30)), 2026)
         self.assertEqual(
@@ -649,7 +651,7 @@ class TestProcessUSASpending(unittest.TestCase):
 
     def test_deduplicate_awards_fallback_across_batches(self):
         from statvar_imports.commerce_eda_usaspending.process import (
-            _deduplicate_awards, )
+            _deduplicate_awards,)
         batch1 = [{
             "Place of Performance State Code": "AL",
             "CFDA Number": "11.300",

@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.usaspending.gov/",
-            "provenance_description": "EDA Investments by Applicant State and Program, dynamically sourced from USASpending.gov.",
+            "provenance_description": "EDA Investments by Place of Performance State and Program, dynamically sourced from USASpending.gov.",
             "scripts": [
                 "process.py",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/investment_cleaned.csv --pv_map=investment_pvmap.csv --config_file=investment_metadata.csv --existing_schema_mcf=investment_schema.mcf --output_path=output/investment_output --output_counters=counters/investment_counters.csv"
