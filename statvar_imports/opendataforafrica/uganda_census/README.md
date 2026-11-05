@@ -128,7 +128,17 @@ Or via `unittest`:
 
 ### 6.2 Pre-Submission Validation Rules
 
-The import configuration in `validation_config.json` enforces:
-- `check_all_statvars_freshness`: `SQL_VALIDATOR` freshness check ensuring all active StatVars meet the freshness boundary (`MaxDate >= '2002'`).
+The import configuration in `validation_config.json` enforces scoped `SQL_VALIDATOR` freshness and completeness checks across all 4 input tables:
+- `check_statvar_count_non_empty`: Verifies each input table generates at least one active StatVar (`total_svs > 0`).
+- `check_2016_statvars_freshness`: Verifies all 2016 demographic (`fidjrwf`), education (`ewvclpb`), and immunization/birth (`yvitjl`) StatVars meet `MaxDate >= '2016'`.
+- `check_2014_2015_statvars_freshness`: Verifies the 2014 district census StatVars (`qiubrhc`) and 2015 school enrollment StatVars (`ewvclpb`) meet `MaxDate >= '2014'`.
+- `check_historical_statvars_freshness`: Verifies historical census growth rate (`GrowthRate_Count_Person`, ending in `2002`) and discontinued health facility/bed series (`yvitjl`, ending in `2006`–`2013`) meet `MaxDate >= '2002'`.
 
 Deleted records check (`check_deleted_records_percent`) and zero lint errors are enforced by default in the execution pipeline.
+
+### 6.3 Comparison vs. 2023 Production Baseline
+
+Because the legacy 2023 manual import (`/cns/jv-d/home/datcom/v3_mcf/country/uganda/nodes.mcf-00000-of-00001`) was stored as a single monolithic MCF file rather than per-table subdirectories (`input0`–`input3`), the automated executor's per-input differ compares against the previous multi-input run. Direct observation-level comparison against the 2023 production MCF (`9,528` observations across `97` StatVars) vs. the 2026 automated refresh (`10,332` observations across `101` StatVars) confirms:
+- **Retained identical observations**: `9,351` / `9,528` (`98.14%`).
+- **Added StatVars & observations (`+981` obs, `+4` StatVars)**: Added 4 previously unmapped 2014 district census StatVars in `qiubrhc` (`Count_Person_Female`, `Count_Person_Male`, `Count_Person_ResidesInGroupQuarters`, `Count_Person_ResidesInHousehold`) plus updated district coverage (`country/UGA_ConflictAreas` and corrected district resolutions).
+- **Place DCID corrections (`177` obs, `1.86%`)**: Migrated `93` observations from `wikidataId/Q2318123` (Sembabule town) to `wikidataId/Q1364817` (Sembabule District, `AdministrativeArea1`) and `84` observations from `wikidataId/Q4987159` (Buliisa sub-county) to `wikidataId/Q1375868` (Buliisa District, `AdministrativeArea1`).

@@ -5,6 +5,7 @@
 "FREQ","observationPeriod","P1Y",,,,,,,,,,,,,,,,
 "VARIABLE:KN.PH.HU.HOS","populationType","HealthEstablishment","healthEstablishmentType","Hospital","measuredProperty","count","statType","measuredValue",,,,,,,,,,
 "VARIABLE:KN.PH.HU.HCC","populationType","HealthEstablishment","healthEstablishmentType","HealthCenter","measuredProperty","count","statType","measuredValue",,,,,,,,,,
+"# Legacy Note: KN.PH.BEDS.* hospital bed counts are mapped to existing Count_HealthEstablishment* StatVars in Uganda_stat_var.mcf (PHP = Private Health Practitioners mapped to PartialHospitalizationProgram) for backward compatibility.",,,,,,,,,,,,,,,,,,
 "VARIABLE:KN.PH.BEDS.TOTAL","populationType","HealthEstablishment","measuredProperty","count","statType","measuredValue",,,,,,,,,,,,,,
 "VARIABLE:KN.PH.BEDS.GOV","populationType","HealthEstablishment","healthEstablishmentType","HealthFacility","establishmentOwnership","GovernmentOwned","measuredProperty","count","statType","measuredValue",,,,,,,,
 "VARIABLE:KN.PH.BEDS.PNFP","populationType","HealthEstablishment","establishmentOwnership","PrivatelyOwnedNotForProfit","measuredProperty","count","statType","measuredValue",,,,,,,,,,,,

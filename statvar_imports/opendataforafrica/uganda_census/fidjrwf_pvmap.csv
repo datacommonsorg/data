@@ -4,7 +4,6 @@
 "OBS_VALUE","value","{Number}",,,,,,,,,,,,
 "FREQ","observationPeriod","P1Y",,,,,,,,,,,,
 "FREQ:A","observationPeriod","P1Y",,,,,,,,,,,,
-"REGION:KN.A7","observationAbout","wikidataId/Q1364817",,,,,,,,,,,,
 "VARIABLE:KN.A2","populationType","Person","measuredProperty","count","statType","measuredValue","name","Total Population",,,,,,
 "VARIABLE:KN.A3","populationType","Person","measuredProperty","count","statType","growthRate","unit","Percent","name","Census Population Growth Rate",,,,
 "VARIABLE:KN.A7","#ignore","not mapped",,,,,,,,,,,,
