@@ -1,0 +1,8 @@
+Node: E:FertilityRate_gender_Muncipality->E0
+observationAbout: C:FertilityRate_gender_Muncipality->observationAbout
+observationDate: C:FertilityRate_gender_Muncipality->observationDate
+value: C:FertilityRate_gender_Muncipality->value
+variableMeasured: C:FertilityRate_gender_Muncipality->variableMeasured
+unit: C:FertilityRate_gender_Muncipality->unit
+scalingFactor: C:FertilityRate_gender_Muncipality->scalingFactor
+typeOf: dcs:StatVarObservation
