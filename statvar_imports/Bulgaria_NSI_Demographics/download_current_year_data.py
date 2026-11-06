@@ -254,7 +254,8 @@ def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
             current_cohort_rows.append(row)
         else:
             if current_district_row is not None:
-                grouped_districts.append((current_district_row, current_cohort_rows))
+                grouped_districts.append(
+                    (current_district_row, current_cohort_rows))
             current_district_row = row
             current_cohort_rows = []
 
@@ -273,12 +274,10 @@ def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
         ]
         if tot != urb + rur:
             raise ValueError(
-                f"{label}: Total ({tot}) != Urban ({urb}) + Rural ({rur})."
-            )
+                f"{label}: Total ({tot}) != Urban ({urb}) + Rural ({rur}).")
         if tot != m + fem:
             raise ValueError(
-                f"{label}: Total ({tot}) != Male ({m}) + Female ({fem})."
-            )
+                f"{label}: Total ({tot}) != Male ({m}) + Female ({fem}).")
         if urb != urb_m + urb_f:
             raise ValueError(
                 f"{label}: Urban ({urb}) != Urban Male ({urb_m}) + Urban Female ({urb_f})."
@@ -308,8 +307,9 @@ def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
 
         # 3. Vertical sum check whenever a district has age cohorts
         if a_rows:
-            cohorts_have_dash = any(
-                "-" in r[col_i].strip() for r in a_rows for col_i in range(1, 10))
+            cohorts_have_dash = any("-" in r[col_i].strip()
+                                    for r in a_rows
+                                    for col_i in range(1, 10))
             district_has_dash = any(
                 "-" in d_row[col_i].strip() for col_i in range(1, 10))
             if not cohorts_have_dash and not district_has_dash:
@@ -358,9 +358,8 @@ def check_and_download_nsi(
                 "for %s.", NSI_URL)
         elif resp.status_code >= 500:
             fallback_eligible = True
-            logging.warning(
-                "NSI portal returned server error HTTP %d for %s.",
-                resp.status_code, NSI_URL)
+            logging.warning("NSI portal returned server error HTTP %d for %s.",
+                            resp.status_code, NSI_URL)
         else:
             logging.error("NSI portal returned unexpected HTTP %d for %s.",
                           resp.status_code, NSI_URL)
