@@ -95,7 +95,7 @@ The table below lists all configuration options. Each option can be passed as a 
 | `shard_key_prefix_length` | `--shard_key_prefix_length` | `int` | `0` | If greater than 0, uses only the first N characters of the key string to compute the shard hash. |
 | `shard_count` | `--shard_count` | `int` | `0` | Number of output shards. If 0, derived from total estimated records divided by `records_per_shard`. |
 | `records_per_shard` | `--records_per_shard` | `int` | `100000` | Target record count per shard when `shard_count` is not explicitly set. |
-| `shard_threads` | `--shard_threads` | `int` | `1` | Maximum number of concurrent reader worker threads. |
+| `shard_threads` | `--shard_threads` | `int` | `max(1, os.cpu_count() // 2)` | Maximum number of concurrent reader worker threads (defaults to 50% of CPU cores). |
 | `shard_min_chunk_size` | `--shard_min_chunk_size` | `int` | `33554432` (32 MB) | Minimum byte size for splitting a large seekable file into concurrent worker chunks. |
 | `shard_skip_duplicates` | `--shard_skip_duplicates` | `bool` | `False` | When True, drops duplicate records based on canonical content fingerprint. |
 | `shard_sample_rate` | `--shard_sample_rate` | `float` | `1.0` | Fraction of keys to keep in range `[0.0, 1.0]`. Records sharing the same key are kept or dropped together. |

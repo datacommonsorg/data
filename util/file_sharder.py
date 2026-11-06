@@ -121,6 +121,7 @@ from eval_functions import EVAL_GLOBALS, evaluate_statement
 _DEFAULT_RECORDS_PER_SHARD = 100000
 _DEFAULT_SHARD_FILENAME = 'shard-{index:05}-of-{shard_count:05d}'
 _DEFAULT_MIN_CHUNK_SIZE = 32 * 1024 * 1024
+_DEFAULT_SHARD_THREADS = max(1, (os.cpu_count() or 1) // 2)
 _NUM_DEDUP_BUCKETS = 64
 # Number of input records between updates to the global progress counters.
 _PROGRESS_BATCH_SIZE = 100000
@@ -156,8 +157,10 @@ flags.DEFINE_float(
     'shard_sample_rate', 1,
     'Fraction of shard keys to keep, in the range [0, 1]. All records with '
     'the same shard key are kept or dropped together.')
-flags.DEFINE_integer('shard_threads', 1,
-                     'Maximum number of parallel threads for reading inputs.')
+flags.DEFINE_integer(
+    'shard_threads', _DEFAULT_SHARD_THREADS,
+    'Maximum number of parallel threads for reading inputs. Defaults to 50% '
+    'of available CPU cores.')
 flags.DEFINE_integer(
     'shard_min_chunk_size', _DEFAULT_MIN_CHUNK_SIZE,
     'Minimum byte size of chunks when splitting a file across parallel workers.'
@@ -1093,7 +1096,8 @@ class FileSharder:
         num_input_records = 0
         num_output_records = 0
 
-        shard_threads = int(self._config.get('shard_threads') or 1)
+        shard_threads = int(
+            self._config.get('shard_threads') or _DEFAULT_SHARD_THREADS)
         tasks = self._generate_input_tasks(max_threads=shard_threads)
         max_workers = max(1, min(len(tasks), shard_threads))
         self._num_workers = max_workers
