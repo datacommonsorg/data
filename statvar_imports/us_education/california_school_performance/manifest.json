@@ -21,7 +21,6 @@
             "source_files": [
                 "raw_files/*",
                 "input_files/*",
-                "config/*",
                 "counters/*"
             ],
             "cron_schedule": "0 0 1 12 *",

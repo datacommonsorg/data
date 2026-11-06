@@ -22,7 +22,7 @@ california_school_performance/
 │   ├── sample_input.txt                               # Sample raw CAASPP input records
 │   ├── sample_state_output.csv                        # Expected sample CSV observations
 │   └── sample_state_output.tmcf                       # Expected sample TMCF mapping
-├── california_school_performance_test.py              # Unit tests for download, normalization, and processing
+├── download_process_test.py                           # Unit tests for download, normalization, and processing
 ├── download.py                                        # Automated data fetch and extraction script
 ├── process.py                                         # High-throughput processor generating CSV, TMCF, entity MCF, and counters
 ├── manifest.json                                      # Data Commons import specification
@@ -114,11 +114,11 @@ python3 download.py --test_mode
 
 Run unit tests from repository root:
 ```bash
-python3 -m unittest statvar_imports/us_education/california_school_performance/california_school_performance_test.py
+python3 -m unittest statvar_imports/us_education/california_school_performance/download_process_test.py
 ```
 Or directly from this directory:
 ```bash
-python3 -m unittest california_school_performance_test.py
+python3 -m unittest download_process_test.py
 ```
 
 ---
