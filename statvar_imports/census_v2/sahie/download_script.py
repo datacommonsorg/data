@@ -40,25 +40,29 @@ def clean_csv_file(file_path):
     temp_file_path = file_path + ".tmp"
     try:
         logging.info(
-            f"Reading {os.path.basename(file_path)} with UTF-8 encoding."
-        )
-        with open(file_path, 'r', encoding='utf-8') as infile, open(temp_file_path, 'w', encoding='utf-8') as outfile:
+            f"Reading {os.path.basename(file_path)} with UTF-8 encoding.")
+        with open(file_path, 'r', encoding='utf-8') as infile, open(
+                temp_file_path, 'w', encoding='utf-8') as outfile:
             found_header = False
             for line in infile:
                 # The actual CSV data starts with the header row.
                 if not found_header and all(
-                    part in line for part in header_parts):
+                        part in line for part in header_parts):
                     found_header = True
 
                 if found_header:
                     outfile.write(line)
-        
+
         shutil.move(temp_file_path, file_path)
-        logging.info(f"Successfully cleaned file: {os.path.basename(file_path)}")
+        logging.info(
+            f"Successfully cleaned file: {os.path.basename(file_path)}")
 
     except UnicodeDecodeError as e:
-        logging.fatal(f"File {file_path} is not valid UTF-8. Please check the source file encoding. Error: {e}")
-        raise RuntimeError(f"Failed to decode file {file_path} as UTF-8.") from e
+        logging.fatal(
+            f"File {file_path} is not valid UTF-8. Please check the source file encoding. Error: {e}"
+        )
+        raise RuntimeError(
+            f"Failed to decode file {file_path} as UTF-8.") from e
     except Exception as e:
         logging.fatal(f"Error processing file {file_path}: {e}")
         raise RuntimeError(f"Failed to process file {file_path}") from e
@@ -72,7 +76,8 @@ _CURRENT_YEAR = datetime.datetime.now().year
 
 def main(_):
     os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
-    logging.info(f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
+    logging.info(
+        f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
 
     try:
         for year in range(_START_YEAR, _CURRENT_YEAR + 1):
@@ -105,5 +110,6 @@ def main(_):
 
         logging.info("Final cleanup complete")
 
+
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

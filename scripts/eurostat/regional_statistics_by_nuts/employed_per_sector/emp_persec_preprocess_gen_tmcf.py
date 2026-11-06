@@ -84,7 +84,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
-            'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD':
+            r'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD':
                 'unit,wstatus,nace_r2,geo\\time'
         }))
         df['unit,wstatus,nace_r2,geo\\time'] = df[
@@ -110,7 +110,7 @@ def translate_wide_to_long(file_path):
                 'wstatus': new[1],
                 'unit': new[0]
             }))
-        df.drop(columns=[header[0]], inplace=True)
+        df = df.drop(columns=[header[0]])
 
         df["wstatus-nace"] = df["wstatus"] + "_" + df["nace_r2"]
         df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(

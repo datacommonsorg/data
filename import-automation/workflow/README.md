@@ -21,12 +21,13 @@ This directory contains the Apache Airflow DAG definitions and dynamic factory f
 4. **`import_automation_workflow.py`**:
    Core Airflow DAG definition that defines `build_dag` and executes the 4-stage pipeline:
    - **Cloud Batch Job**: Runs `dc-import-executor` container.
-   - **Staging Ingestion**: Updates staging version via `import-helper-service-staging`, triggers ingestion via Spanner Cloud Workflow, and polls until completion.
+   - **Validation Job**: Runs `dc-import-validator` Cloud Run Job (`import-validator-job`).
+   - **Version Update & Staging Ingestion**: Updates version via `import-helper-service`, triggers staging ingestion via Spanner Cloud Workflow, and polls until completion.
    - **Production Ingestion**: Triggers fire-and-forget production Spanner ingestion upon staging success.
    - **Workflow Summary**: Aggregates execution status across stages and reports errors.
 
 5. **`import-automation-workflow.yaml` & `import_automation_e2e.py`**:
-   Google Cloud Workflows definition (`import-automation-workflow` / `import-automation-workflow-staging`) and integration test runner for legacy Cloud Workflows orchestration.
+   Google Cloud Workflows definition (`import-automation-workflow`) and integration test runner for legacy Cloud Workflows orchestration.
 
 ## Continuous Deployment
 

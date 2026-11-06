@@ -17,6 +17,7 @@ Usage: python3 download.py
 '''
 
 import os
+import io
 import requests
 import zipfile
 from pathlib import Path
@@ -30,85 +31,121 @@ from absl import app
 # Define flags for command-line argument parsing
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'config_path', 'config.ini',  # Default path for config file
+    'config_path',
+    'config.ini',  # Default path for config file
     'Path to the config file')
 
 # Ensure the output directory exists
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_file")
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "input_file")
 Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
+
 
 # Read the config file
 def read_config_file():
     config = configparser.ConfigParser()
-    config.read(_FLAGS.config_path)
+    config_path = _FLAGS.config_path
+    if not os.path.isabs(config_path):
+        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   config_path)
+    config.read(config_path)
     return config
 
-# Retry function for handling request failures
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
+
+HEADERS = {
+    'User-Agent': ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+                   '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'),
+    'Accept': 'application/zip,application/octet-stream,*/*',
+}
+
+
+# Retry function for handling request failures and invalid zip files
+@retry(exceptions=(requests.exceptions.RequestException, zipfile.BadZipFile),
+       tries=4,
+       delay=5,
+       backoff=2)
+def retry_method(url, headers=HEADERS):
     response = requests.get(url, headers=headers, timeout=60)
     response.raise_for_status()
+    if not zipfile.is_zipfile(io.BytesIO(response.content)):
+        snippet = response.content[:300]
+        logging.warning(
+            f"Downloaded content from {url} is not a valid ZIP file! HTTP {response.status_code}, "
+            f"Content-Type: {response.headers.get('content-type')}, "
+            f"Length: {len(response.content)} bytes. Snippet: {snippet}")
+        raise zipfile.BadZipFile(
+            f"Downloaded content from {url} is not a valid ZIP file.")
     return response
+
 
 # Function to download and save the ZIP file
 def download_file():
-    logging.info("Starting download...")
     config = read_config_file()
     UN_ZIP_URL = config["DEFAULT"]["UN_ZIP_URL"]
+    logging.info(f"Starting download from {UN_ZIP_URL}...")
     zip_path = os.path.join(OUTPUT_DIR, "UNdata_Export.zip")
-    
+
     try:
         response = retry_method(UN_ZIP_URL)
         with open(zip_path, "wb") as f:
             f.write(response.content)
-        
-        logging.info(f"Downloaded file saved to {zip_path}")
+
+        logging.info(f"Downloaded file from {UN_ZIP_URL} saved to {zip_path}")
         return zip_path
-    
+
     except requests.exceptions.RequestException as e:
-        logging.fatal(f"Failed to download file: {e}")
-        return None
-    
+        logging.fatal(
+            f"Failed to download file from {UN_ZIP_URL} after retries: {e}")
+
+    except zipfile.BadZipFile as e:
+        logging.fatal(
+            f"Failed to obtain a valid ZIP file from {UN_ZIP_URL} after retries: {e}"
+        )
+
     except Exception as e:
-        logging.fatal(f"An unexpected error occurred during file download: {e}")
-        return None
+        logging.fatal(
+            f"An unexpected error occurred during file download from {UN_ZIP_URL}: {e}"
+        )
+
 
 # Function to extract and process the CSV file from ZIP
 def extract_and_process(zip_path):
     logging.info("Extracting ZIP file...")
-    
+
     try:
         with zipfile.ZipFile(zip_path, "r") as zip_ref:
             zip_ref.extractall(OUTPUT_DIR)
             csv_files = [f for f in zip_ref.namelist() if f.endswith(".csv")]
-            
+
             if not csv_files:
                 logging.fatal("No CSV files found in the ZIP archive!")
-                return
-            
+
             for csv_file in csv_files:
                 logging.info(f"Processing extracted file: {csv_file}")
                 csv_path = os.path.join(OUTPUT_DIR, csv_file)
-                
-                with open(csv_path, "r", encoding="utf-8", errors="replace") as f:
+
+                with open(csv_path, "r", encoding="utf-8",
+                          errors="replace") as f:
                     lines = f.readlines()
                     logging.info(f"Read {len(lines)} lines from {csv_file}")
-                    
+
     except zipfile.BadZipFile:
-        logging.fatal("Invalid ZIP file format!")
-        
+        file_size = os.path.getsize(zip_path) if os.path.exists(zip_path) else 0
+        logging.fatal(f"Invalid ZIP file format! File size: {file_size} bytes")
+
     except Exception as e:
-        logging.fatal(f"An unexpected error occurred during ZIP extraction: {e}")
+        logging.fatal(
+            f"An unexpected error occurred during ZIP extraction: {e}")
+
 
 # Main execution
 def main(argv):
     logging.set_verbosity(logging.INFO)
-    
+
     # Run the download and extraction process
     zip_path = download_file()
-    if zip_path:
-        extract_and_process(zip_path)
+    extract_and_process(zip_path)
+
 
 if __name__ == '__main__':
     app.run(main)
-

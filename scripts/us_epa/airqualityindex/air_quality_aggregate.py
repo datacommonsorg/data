@@ -25,7 +25,6 @@ from absl import logging
 from datetime import datetime
 from retry import retry
 import frozendict
-import os
 from pathlib import Path
 import time
 
@@ -187,7 +186,7 @@ def process(_INPUT_FILE_PATH, start_year, end_year):
         end_year (int): The ending year (exclusive) for which to process data.
                         Processing will stop at `end_year - 1`.
     """
-    output_file_name = f'EPA_AQI.csv'
+    output_file_name = 'EPA_AQI.csv'
     #Creating the output csv file beofre
     create_csv(output_file_name)
     for year in range(start_year, int(end_year)):
@@ -240,7 +239,7 @@ def main(_):
     if mode == "" or mode == "download":
         logging.info(f'inside mode {mode}')
         #downloading zip file for 'daily_aqi_by_county'
-        logging.info(f'downloading zipped files')
+        logging.info('downloading zipped files')
         download_url(input_file_path, start_year, end_year, CSV_URLS)
 
     if mode == "" or mode == "process":

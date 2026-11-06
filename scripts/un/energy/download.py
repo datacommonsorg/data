@@ -56,7 +56,7 @@ flags.DEFINE_integer('years_per_batch', 10,
 # Parameters:
 #   energy_code: two-letter code for the energy source
 #   years: comma separated list of years
-_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
+_DOWNLOAD_URL = 'https://data.un.org/legacy/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
 def download_energy_dataset(
@@ -104,7 +104,11 @@ def download_energy_dataset(
         logging.info(
             f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}'
         )
-        download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
+        # The data.un.org load balancer redirects any /legacy/ URL containing
+        # literal 'WS' to the root path. '\u0174S' ('ŴS') bypasses the load
+        # balancer rule while matching 'WS' in UNdata's SQL Server collation.
+        query_energy_code = '\u0174S' if energy_dataset == 'WS' else energy_dataset
+        download_url = _DOWNLOAD_URL.format(energy_code=query_energy_code,
                                             years=years_str)
         download_successful = download_file(url=download_url,
                                             output_folder=output,

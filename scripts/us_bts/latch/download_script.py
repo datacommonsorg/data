@@ -120,18 +120,19 @@ def _download_paginated_socrata_file(
 def create_download_configs(gcs_urls_config_file: str) -> List[Dict]:
     """Reads the URL config JSON from GCS and generates the download configurations."""
     try:
-        result = subprocess.run(['gsutil', 'cat', gcs_urls_config_file],
-                                capture_output=True,
-                                text=True,
-                                check=True,
-                                encoding='UTF-8')
+        result = subprocess.run(
+            ['gcloud', 'storage', 'cat', gcs_urls_config_file],
+            capture_output=True,
+            text=True,
+            check=True,
+            encoding='UTF-8')
         urls_config = json.loads(result.stdout)
         logging.info(
             f"Successfully loaded download configurations from {gcs_urls_config_file}"
         )
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         logging.fatal(
-            f"Failed to read GCS config file '{gcs_urls_config_file}': {e}. Ensure 'gsutil' is in your PATH and the file exists."
+            f"Failed to read GCS config file '{gcs_urls_config_file}': {e}. Ensure 'gcloud' is in your PATH and the file exists."
         )
         return []
     except json.JSONDecodeError as e:
@@ -175,17 +176,16 @@ def download_all_files_from_config(download_dir: str,
 
         output_path = os.path.join(download_dir, file_name)
 
-        success = False
         try:
             file_name_lower = file_name.lower()
             parsed_url = urlparse(url)
 
             if file_name_lower.endswith('.gz'):
-                success = _download_and_decompress_gz(url=parsed_url,
-                                                      output_path=output_path)
+                _download_and_decompress_gz(url=parsed_url,
+                                            output_path=output_path)
 
             elif file_name_lower.endswith('.zip'):
-                success = download_file(
+                download_file(
                     url,
                     output_folder=download_dir,
                     unzip=True,  # Instruct util to unzip
@@ -193,14 +193,14 @@ def download_all_files_from_config(download_dir: str,
             # Heuristic for Socrata API pagination: check if URL contains $limit or $offset,
             # or if it's a common Socrata resource path (e.g., /resource/ABCD-EFGH.json)
             # This heuristic might need adjustment based on specific URL patterns.
-            elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or not '.' in os.path.basename(
+            elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or '.' not in os.path.basename(
                     parsed_url.path):
-                success = _download_paginated_socrata_file(
-                    url=url, output_path=output_path)
+                _download_paginated_socrata_file(url=url,
+                                                 output_path=output_path)
             else:
                 # For all other direct file downloads, use the robust utility.
                 # The 'file_name' from config is NOT passed here as per 'no modification to download_util_script.py' constraint.
-                success = download_file(
+                download_file(
                     url=url,
                     output_folder=download_dir,
                     unzip=False,

@@ -19,8 +19,14 @@ from state 1990-2000 file.
 
 import pandas as pd
 import os
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_national_1990_2000(urls: str) -> pd.DataFrame:
@@ -38,10 +44,10 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
     final_df = pd.DataFrame()
     for url in urls:
         # reading the csv input file
-        df = pd.read_table(url,
+        df = pd.read_table(load_url_or_path(url),
                            skiprows=15,
                            header=None,
-                           delim_whitespace=True,
+                           sep=r'\s+',
                            index_col=False,
                            engine='python')
         df.to_csv(_CODEDIR + "/../input_files/" +
@@ -81,7 +87,7 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
             df[k] = df['NH' + v] + df['H' + v]
 
         # dropping unwanted columns which are having origin
-        df.drop(columns=['Age'] + srh_columns, inplace=True)
+        df = df.drop(columns=['Age'] + srh_columns)
 
         # providing geoId to the dataframe
         # and making the geoId of 2 digit as state
@@ -95,7 +101,7 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
         # concatenating the value to final dataframe
         final_df = pd.concat([final_df, df])
 
-    final_df.drop(columns=['geo_ID'], inplace=True)
+    final_df = final_df.drop(columns=['geo_ID'])
 
     final_df = final_df.groupby(['Year']).sum().reset_index()
 

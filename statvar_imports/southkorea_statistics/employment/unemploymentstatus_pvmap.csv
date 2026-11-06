@@ -1,8 +1,8 @@
 key,prop,value,,,,
-By province:Total,observationAbout,country/KOR,#Multiply,1000,,
-By gender:Total,populationType,Person,measuredProperty,count,employmentStatus,Unemployed
-Male,gender,Male,employmentStatus,Unemployed,populationType,Person
-Female,gender,Female,employmentStatus,Unemployed,populationType,Person
+By province:Total,observationAbout,country/KOR,,,,
+By gender:Total,populationType,Person,measuredProperty,count,employmentStatus,Unemployed,#Multiply,1000
+Male,gender,Male,employmentStatus,Unemployed,populationType,Person,#Multiply,1000
+Female,gender,Female,employmentStatus,Unemployed,populationType,Person,#Multiply,1000
 Seoul,observationAbout,wikidataId/Q8684,,,,
 Busan,observationAbout,wikidataId/Q16520,,,,
 Daegu,observationAbout,wikidataId/Q20927,,,,
@@ -10,14 +10,15 @@ Incheon,observationAbout,wikidataId/Q20934,,,,
 Gwangju,observationAbout,wikidataId/Q41283,,,,
 Daejeon,observationAbout,wikidataId/Q20921,,,,
 Ulsan,observationAbout,wikidataId/Q41278,,,,
-#Sejong-si,observationAbout,wikidataId/Q20929,,,,
+Sejong-si,observationAbout,wikidataId/Q20929,,,,
 Sejong,observationAbout,wikidataId/Q20929,,,,
 Gyeonggi-do,observationAbout,wikidataId/Q20937,,,,
 Gangwon-do,observationAbout,wikidataId/Q41071,,,,
-Gangwon-do,observationAbout,wikidataId/Q41071,,,,
+Gangwon State,observationAbout,wikidataId/Q41071,,,,
 Chungcheongbuk-do,observationAbout,wikidataId/Q41066,,,,
 Chungcheongnam-do,observationAbout,wikidataId/Q41070,,,,
 Jeonbuk-State,observationAbout,wikidataId/Q41157,,,,
+Jeonbuk State,observationAbout,wikidataId/Q41157,,,,
 Jeollabuk-do,observationAbout,wikidataId/Q41157,,,,
 Jeollanam-do,observationAbout,wikidataId/Q41161,,,,
 Gyeongsangbuk-do,observationAbout,wikidataId/Q41154,,,,

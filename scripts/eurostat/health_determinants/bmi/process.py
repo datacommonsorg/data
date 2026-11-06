@@ -18,21 +18,21 @@ and generates cleaned CSV, MCF, TMCF file.
 import os
 import sys
 from absl import app, flags, logging
+import pandas as pd
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
 from common.euro_stat import EuroStat
-# pylint: enable=wrong-import-position
 from common import import_download_details, download
+# pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 class EuroStatBMI(EuroStat):
     """
-    This Class has requried methods to generate Cleaned CSV,
+    This Class has required methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
 
@@ -44,29 +44,19 @@ class EuroStatBMI(EuroStat):
                      "{denominator}"
                      "{healthbehavior}"
                      "{education}"
-                     "{exercise}"
                      "{residence}"
-                     "{activity}"
-                     "{duration}"
                      "{citizenship}"
                      "{gender}"
                      "{incomequin}"
                      "{countryofbirth}"
                      "{lev_limit}"
-                     "{frequency}"
                      "\n{sv_name}\n")
 
-    # Temporary keys (activity_temp and duration_temp are used here.
-    # As we do correction to property in _property_correction method, we cannot
-    # replace value for activity and duration key at the same time when we are
-    # reading it in loop. Hence temp keys are used.
     _sv_properties_template = {
         "healthbehavior":
             "\nhealthBehavior: dcs:{property_value}",
         "gender":
             "\ngender: dcs:{property_value}",
-        "exercise":
-            "\nexerciseType: dcs:{property_value}",
         "education":
             "\neducationalAttainment: dcs:{property_value}",
         "incomequin":
@@ -75,16 +65,6 @@ class EuroStatBMI(EuroStat):
             "\nplaceOfResidenceClassification: dcs:{property_value}",
         "lev_limit":
             "\nglobalActivityLimitationindicator: dcs:{property_value}",
-        "activity":
-            "",
-        "activity_temp":
-            "\nphysicalActivityEffortLevel: dcs:{property_value}Level",
-        "frequency":
-            "\nactivityFrequency: dcs:{property_value}",
-        "duration":
-            "",
-        "duration_temp":
-            "{property_value}",
         "countryofbirth":
             "\nnativity: dcs:{property_value}",
         "citizenship":
@@ -92,23 +72,13 @@ class EuroStatBMI(EuroStat):
     }
 
     _sv_value_to_property_mapping = {
-        "PhysicalActivity": "healthbehavior",
         "Male": "gender",
         "Female": "gender",
-        "Aerobic": "exercise",
-        "MuscleStrengthening": "exercise",
-        "Walking": "exercise",
-        "Cycling": "exercise",
         "Education": "education",
         "Percentile": "incomequin",
         "Urban": "residence",
         "Rural": "residence",
         "Limitation": "lev_limit",
-        "ModerateActivity": "activity_temp",
-        "HeavyActivity": "activity_temp",
-        "NoActivity": "activity_temp",
-        "AtLeast30MinutesPerDay": "frequency",
-        "Minutes": "duration_temp",
         "ForeignBorn": "countryofbirth",
         "Native": "countryofbirth",
         "ForeignWithin": "citizenship",
@@ -144,80 +114,48 @@ class EuroStatBMI(EuroStat):
             download.download_files(download_files_urls, download_path)
         return True
 
+    _EXCLUDED_GEOS = frozenset({'EA', 'EA18', 'EA19', 'EA20', 'EEA', 'EFTA'})
+
+    def _parse_file(self, file_name: str, df: pd.DataFrame,
+                    import_name: str) -> pd.DataFrame:
+        """Overrides parent _parse_file to filter regional aggregates."""
+        df = super()._parse_file(file_name, df, import_name)
+        return df[~df['geo'].isin(self._EXCLUDED_GEOS)]
+
     # over-ridden parent abstract method
-    def _property_correction(self):
-        """
-        Correcting the property values.
-        """
+    def _property_correction(self) -> None:
+        """Correcting the property values."""
         for k, v in self._sv_properties.items():
-            if k == "healthbehavior_bmi":
-                self._sv_properties["healthbehavior"] += self._sv_properties[
-                    "healthbehavior_bmi"]
-            elif k == "activity_temp":
-                if self._sv_properties["lev_limit"]:
-                    self._sv_properties["activity"] = ""
-                else:
-                    self._sv_properties["activity"] = self._sv_properties[
-                        "activity_temp"]
-            elif k == "duration_temp" and v:
-                if "OrMoreMinutes" in self._sv_properties["duration_temp"]:
-                    self._sv_properties[
-                        "duration"] = "\nactivityDuration: ["\
-                            + self._sv_properties[
-                            "duration_temp"].replace("OrMoreMinutes",
-                                                     "") + " - Minute]"
-                elif "To" in self._sv_properties["duration_temp"]:
-                    self._sv_properties[
-                        "duration"] = "\nactivityDuration: ["\
-                            + self._sv_properties[
-                            "duration_temp"].replace("Minutes", "").replace(
-                                "To", " ") + " Minute]"
-                else:
-                    self._sv_properties[
-                        "duration"] = "\nactivityDuration: [Minute "\
-                            + self._sv_properties[
-                            "duration_temp"].replace("Minutes", "") + "]"
-            self._sv_properties[k] = v\
-                .replace("Or", "__")\
-                .replace("CountryOfBirth","")\
-                .replace("Citizenship", "")\
-                .replace("Percentile", " Percentile")\
-                .replace("IncomeOf", "")\
-                .replace("To", " ")\
-                .replace("EducationalAttainment","")\
-                .replace("ModerateActivityOrHeavyActivity",
-                "ModerateActivityLevel__HeavyActivity")
+            if k == "incomequin":
+                self._sv_properties[k] = (v.replace("To", " ").replace(
+                    "Percentile", " Percentile").replace("IncomeOf", ""))
+            elif k == "education":
+                self._sv_properties[k] = (v.replace("Or", "__").replace(
+                    "EducationalAttainment", ""))
+            elif k == "countryofbirth":
+                self._sv_properties[k] = v.replace("CountryOfBirth", "")
+            elif k == "citizenship":
+                self._sv_properties[k] = v.replace("Citizenship", "")
 
     # over-ridden parent abstract method
-    # pylint: disable=no-self-use
     def _sv_name_correction(self, sv_name: str) -> str:
-        return sv_name\
-            .replace("AWeek","A Week")\
-            .replace("Last12","Last 12")\
-            .replace("ACitizen","A Citizen")\
-            .replace("AMonth","A Month")\
-            .replace("To299", "To 299")\
-            .replace("To149","To 149")\
-            .replace("ACitizen","A Citizen")\
-            .replace("Least30", "Least 30")\
-            .replace("To"," To ")\
-            .replace("Of","Of ")\
-            .replace("Normalweight","Normal Weight")\
-            .replace(" Among Population","")\
-            .replace(" Population","")\
-            .replace('name: "','name: "Population: ')\
-            .replace("  "," ")
-
-    # pylint: enable=no-self-use
+        """Correcting the StatVar name."""
+        return (sv_name.replace("ACitizen", "A Citizen").replace(
+            "To", " To ").replace("Of", "Of ").replace(
+                "Normalweight",
+                "Normal Weight").replace(" Among Population", "").replace(
+                    " Population",
+                    "").replace('name: "',
+                                'name: "Population: ').replace("  ", " "))
 
 
 def main(_):
+    """Main function to run download and process pipeline."""
     mode = _FLAGS.mode
-    global import_name
     import_name = "bmi"
-    if mode == "" or mode == "download":
+    if mode in ('', 'download'):
         EuroStatBMI.download_data(import_name)
-    if mode == "" or mode == "process":
+    if mode in ('', 'process'):
         try:
             input_path = os.path.join(
                 os.path.dirname(os.path.abspath(__file__)), "input_files")
@@ -247,4 +185,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    flags.DEFINE_string('mode', '', 'Options: download or process')
     app.run(main)

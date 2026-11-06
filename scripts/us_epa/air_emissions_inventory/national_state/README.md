@@ -52,31 +52,29 @@ or
 
 ### Import Procedure
 
-The below script will download the data.
+The below script will download the data:
 
 `python3 download.py --config_path=unresolved_mcf/us_epa/config.json`
 
-Note on Configuration Management for Data Source URLs
+#### Configuration Management & Automatic Fallback for Data Source URLs
 
-To ensure consistent access to the most current data, a dedicated configuration file, config.json, will be maintained within our Google Cloud Storage (GCS) environment. This approach addresses the challenge posed by source URLs that contain dynamic and unpredictable year and date components, precluding their programmatic generation.
+To access the latest data, a configuration file (`config.json`) is stored in Google Cloud Storage (GCS) at `gs://unresolved_mcf/us_epa/config.json`. Because the EPA periodically publishes revised National and State `.xlsx` workbooks with new release-date suffixes (retiring the older URLs with HTTP 404), `download.py` uses a two-tier resolution strategy:
 
-Content Structure:
-The config.json file will adhere to a JSON array format, with each object in the array defining a download_path attribute. This attribute will contain the fully qualified URL for the latest available National and State-level data files.
+1. **Primary (GCS Config)**: Reads `download_path` entries from `--config_path` (passed as `bucket_name/path/to/config.json` without the `gs://` prefix) and verifies that all configured URLs return HTTP 200.
+2. **Automatic Fallback (Live EPA Trends Page Discovery)**: If the GCS config cannot be read or any configured URL returns a non-200 status (such as HTTP 404 after an EPA release update), `download.py` automatically scrapes `https://www.epa.gov/air-emissions-inventories/air-pollutant-emissions-trends-data` to discover and validate the current `national_tier1_caps*.xlsx` and `state_tier1*ktons.xlsx` URLs.
 
-The config_path parameter designates a Google Cloud Storage (GCS) location. It should be provided as the bucket and object path (e.g., my-bucket/path/to/config.json), without the gs:// prefix. The system will automatically prepend the gs:// scheme internally when accessing the resource."
+Current `config.json` Content (`gs://unresolved_mcf/us_epa/config.json`):
 
-Example config.json Content:
-
-JSON
-
+```json
 [
-  {"download_path": "https://www.epa.gov/system/files/other-files/2025-04/national_tier1_caps_21feb2025.xlsx"},
-  {"download_path": "https://www.epa.gov/system/files/other-files/2025-04/state_tier1_21feb2005_ktons.xlsx"}
+  {"download_path": "https://www.epa.gov/system/files/other-files/2026-09/national_tier1_caps_04sep2026.xlsx"},
+  {"download_path": "https://www.epa.gov/system/files/other-files/2026-09/state_tier1_1990_2025_04sep2026_ktons.xlsx"}
 ]
+```
+*(When the EPA publishes a newer release on the [Air Pollutant Emissions Trends Data](https://www.epa.gov/air-emissions-inventories/air-pollutant-emissions-trends-data) page, `download.py` automatically discovers the updated URLs if `config.json` has not yet been updated.)*
 
-Maintenance:
-This configuration mechanism requires manual updates to the config.json file whenever the source URLs for the National or State data undergo revision, thereby ensuring the application always references the latest datasets.
+#### Processing
 
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
+The below script cleans the downloaded workbooks and generates the final CSV, MCF, and TMCF files:
 
 `python3 process.py`

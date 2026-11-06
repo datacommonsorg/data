@@ -60,7 +60,7 @@ class TestStatVarProcessor(unittest.TestCase):
             self.assertEqual(
                 diff,
                 '',
-                f'Found diffs in MCF nodes:' +
+                'Found diffs in MCF nodes:' +
                 f'"{actual_file}" vs "{expected_file}":' +
                 f'{diff}\nCounters: {counters.get_counters_string()}',
             )
@@ -74,19 +74,17 @@ class TestStatVarProcessor(unittest.TestCase):
             self.assertEqual(
                 df_expected.columns.to_list(),
                 df_actual.columns.to_list(),
-                f'Found different columns in CSV files:' +
+                'Found different columns in CSV files:' +
                 f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
                 f'actual:{actual_file}:{df_actual.columns.to_list()}, ',
             )
-            df_expected.sort_values(by=df_expected.columns.to_list(),
-                                    inplace=True,
-                                    ignore_index=True)
-            df_actual.sort_values(by=df_expected.columns.to_list(),
-                                  inplace=True,
-                                  ignore_index=True)
+            df_expected = df_expected.sort_values(
+                by=df_expected.columns.to_list(), ignore_index=True)
+            df_actual = df_actual.sort_values(by=df_expected.columns.to_list(),
+                                              ignore_index=True)
             self.assertTrue(
                 df_expected.equals(df_actual),
-                f'Found diffs in CSV rows:' +
+                'Found diffs in CSV rows:' +
                 f'"{actual_file}" vs "{expected_file}":',
             )
 

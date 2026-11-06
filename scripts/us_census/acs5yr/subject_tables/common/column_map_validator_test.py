@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import tempfile
 import unittest
 
 from .column_map_validator import *
@@ -21,12 +22,12 @@ class TestColumnMapValidator(unittest.TestCase):
 
     def test_check_column_map(self):
         cur_dir = os.path.dirname(__file__)
-        ret = check_column_map(
-            os.path.join(cur_dir,
-                         './testdata/column_map_from_zip_expected.json'),
-            os.path.join(cur_dir, './testdata/S2702_yearwise_columns.json'),
-            os.path.join(cur_dir, './testdata/spec_s2702.json'),
-            os.path.join(cur_dir, './tmp'))
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            ret = check_column_map(
+                os.path.join(cur_dir,
+                             './testdata/column_map_from_zip_expected.json'),
+                os.path.join(cur_dir, './testdata/S2702_yearwise_columns.json'),
+                os.path.join(cur_dir, './testdata/spec_s2702.json'), tmp_dir)
         with open(
                 os.path.join(
                     cur_dir,

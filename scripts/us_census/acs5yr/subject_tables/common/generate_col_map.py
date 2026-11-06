@@ -33,10 +33,8 @@ from statvar_dcid_generator import get_statvar_dcid
 # intitalize the logger
 logging.basicConfig(
     level=logging.ERROR,
-    filename=os.path.join(_SCRIPT_PATH, 'make_column_map.log'),
     format="{asctime} {processName:<12} {message} ({filename}:{lineno})",
-    style="{",
-    filemode='w')
+    style="{")
 logging.StreamHandler(stream=None)
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.CRITICAL)
@@ -88,7 +86,6 @@ def process_zip_file(zip_file_path,
     f.close()
 
     column_map = {}
-    counter_dict = {}
 
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
@@ -97,7 +94,7 @@ def process_zip_file(zip_file_path,
                     csv_reader = csv.reader(csv_file)
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
+                            year = filename.split('ACSST5Y')[1][:4]
                             column_map[year] = generate_stat_var_map(
                                 spec_dict, line, delimiter)
                             break

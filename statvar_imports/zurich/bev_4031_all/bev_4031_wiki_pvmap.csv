@@ -1,0 +1,7 @@
+key,prop,val,p1,v1,p2,v2,p3,v3
+GueltigAbDatJahr,observationDate,{Number},observationAbout,wikidataId/Q72,,,,
+AnzGebuWir,value,{Number},populationType,BirthEvent,,,,
+SexLang:männlich,gender,Male,gender,"""""",#Aggregate,sum,,
+SexLang:weiblich,gender,Female,gender,"""""",#Aggregate,sum,,
+HerkunftLang:Schweizer*in,nativity,Native,nativity,"""""",#Aggregate,sum,,
+HerkunftLang:Ausländer*in,nativity,ForeignBorn,nativity,"""""",#Aggregate,sum,,

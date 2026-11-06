@@ -90,3 +90,7 @@ class SchemaSpellCheckerTest(unittest.TestCase):
         }},
                          schema_spell_checker.spell_check_nodes(
                              nodes, ConfigMap({'spell_check_text_only': True})))
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -71,7 +71,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
-            'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+            r'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
         }))
         df['unit,geo\\time'] = df['unit,geo\\time'].str.slice(2)
         header = list(df.columns.values)
@@ -88,7 +88,7 @@ def translate_wide_to_long(file_path):
         new = df[header[0]].str.split(",", n=1, expand=True)
         df['geo'] = new[1]
         df['unit'] = new[0]
-        df.drop(columns=[header[0]], inplace=True)
+        df = df.drop(columns=[header[0]])
         df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
             g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
                                     else COUNTRY_MAP.get(geo, f'{geo}'))

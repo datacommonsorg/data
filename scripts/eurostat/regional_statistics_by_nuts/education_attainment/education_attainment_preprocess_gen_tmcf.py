@@ -118,7 +118,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
-            'freq,sex,isced11,age,unit,geo\TIME_PERIOD':
+            r'freq,sex,isced11,age,unit,geo\TIME_PERIOD':
                 'sex,isced11,age,unit,geo\\time'
         }))
         df['sex,isced11,age,unit,geo\\time'] = df[
@@ -143,7 +143,7 @@ def translate_wide_to_long(file_path):
                 'level': new[1],
                 'sex': new[0]
             }))
-        df.drop(columns=[header[0]], inplace=True)
+        df = df.drop(columns=[header[0]])
 
         df["sex-level"] = df["sex"] + "_" + df["level"] + "_" + df["age"]
 

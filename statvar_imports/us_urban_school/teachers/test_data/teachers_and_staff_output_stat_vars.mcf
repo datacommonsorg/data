@@ -1,71 +1,144 @@
-Node: dcid:Count_Faculty_FullTimeEmployee_LawEnforcementOfficer
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Faculty
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
-facultyType: dcid:LawEnforcementOfficer
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/us_urban_school/teachers/test_data/teachers_and_staff_input.csv --pv_map=statvar_imports/us_urban_school/teachers/teachers_and_staff_pvmap.csv --config_file=statvar_imports/us_urban_school/teachers/metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=statvar_imports/us_urban_school/teachers/test_data/teachers_and_staff_output" on 2026-09-17 14:30:17.129349
 
-Node: dcid:Count_Faculty_FullTimeEmployee_Nurse
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Faculty
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
-facultyType: dcid:Nurse
-
-Node: dcid:Count_Faculty_FullTimeEmployee_SchoolCounselor
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Faculty
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
-facultyType: dcid:SchoolCounselor
-
-Node: dcid:Count_Faculty_FullTimeEmployee_SchoolPsychologist
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Faculty
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
-facultyType: dcid:SchoolPsychologist
-
-Node: dcid:Count_Faculty_FullTimeEmployee_SecurityGuard
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Faculty
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
-facultyType: dcid:SecurityGuard
-
-Node: dcid:Count_Faculty_FullTimeEmployee_SocialWorker
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Faculty
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
-facultyType: dcid:SocialWorker
-
-Node: dcid:Count_Teacher_Certified_FullTimeEmployee
+Node: dcid:Count_Teacher_Female_AmericanIndianOrAlaskaNativeAlone_CurrentSchoolYear
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Teacher
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-certificationStatus: dcid:Certified
-employmentStatus: dcid:FullTimeEmployee
+gender: dcid:Female
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+timePeriod: dcid:CurrentSchoolYear
 
-Node: dcid:Count_Teacher_FullTimeEmployee
+Node: dcid:Count_Teacher_Female_AsianAlone_CurrentSchoolYear
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Teacher
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-employmentStatus: dcid:FullTimeEmployee
+gender: dcid:Female
+race: dcid:AsianAlone
+timePeriod: dcid:CurrentSchoolYear
 
-Node: dcid:Count_Teacher_NotCertified_FullTimeEmployee
+Node: dcid:Count_Teacher_Female_Black_CurrentSchoolYear
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Teacher
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-certificationStatus: dcid:NotCertified
-employmentStatus: dcid:FullTimeEmployee
+gender: dcid:Female
+race: dcid:Black
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Female_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Female_HispanicOrLatino_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+race: dcid:HispanicOrLatino
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Female_NativeHawaiianOrOtherPacificIslanderAlone_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Female_TwoOrMoreRaces_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+race: dcid:TwoOrMoreRaces
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Female_WhiteAlone_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+race: dcid:WhiteAlone
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_AmericanIndianOrAlaskaNativeAlone_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_AsianAlone_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:AsianAlone
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_Black_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:Black
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_HispanicOrLatino_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:HispanicOrLatino
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_NativeHawaiianOrOtherPacificIslanderAlone_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_TwoOrMoreRaces_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:TwoOrMoreRaces
+timePeriod: dcid:CurrentSchoolYear
+
+Node: dcid:Count_Teacher_Male_WhiteAlone_CurrentSchoolYear
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:WhiteAlone
+timePeriod: dcid:CurrentSchoolYear
 

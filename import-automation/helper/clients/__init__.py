@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .bigquery import BigQueryClient
 from .spanner import SpannerClient
 from .storage import StorageClient
 
-__all__ = ["SpannerClient", "StorageClient"]
+__all__ = ["BigQueryClient", "SpannerClient", "StorageClient"]

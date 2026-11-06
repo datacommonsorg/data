@@ -42,7 +42,8 @@
                     "cleaned_csv": "output/commodity_annual_nominal_indices.csv"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "30 5 * * 5",
+            "_comment": "Schedule: Weekly on Friday at 05:30 UTC",
             "validation_config_file": "validation_config.json",
             "source_files": [
                 "input/*.csv",

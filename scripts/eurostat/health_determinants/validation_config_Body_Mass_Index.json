@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Standard maximum threshold of 0.1% deleted records for Eurostat BMI data refreshes",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_date_freshness",
+            "description": "Asserts active BMI StatVars have data through at least 2019 and historical EU28/ISCED97 series retain their expected latest year",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "CASE WHEN regexp_matches(StatVar, 'EU28') THEN MaxDate >= '2014' WHEN regexp_matches(StatVar, 'PrePrimaryEducation|TertiaryEducationStageOne') THEN MaxDate >= '2008' ELSE MaxDate >= '2019' END"
+            }
+        }
+    ]
+}

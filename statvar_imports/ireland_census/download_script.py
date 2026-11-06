@@ -34,14 +34,17 @@ DATA_CONFIG = {
     "population_by_employment.csv": "CNA22"
 }
 
-INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
+
 
 @retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
     response = requests.get(url, headers=headers, timeout=10)
     response.raise_for_status()
     return response
+
 
 def download_csv():
     logging.info("Starting download...")
@@ -62,6 +65,6 @@ def download_csv():
 def main(argv):
     download_csv()
 
+
 if __name__ == "__main__":
     app.run(main)
-

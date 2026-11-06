@@ -62,7 +62,7 @@ df_cleaned = df_clear.pivot_table(values='Value',
 # df_cleaned['YOU_DEATH_RA'] = df_cleaned['YOU_DEATH_RA'] / 1000
 df_cleaned = multi_index_to_single_index(df_cleaned)
 
-df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+df_cleaned = df_cleaned.rename(columns=VAR_to_statsvars)
 df_cleaned_reset = df_cleaned.reindex(columns=reindex_column)
 # df_cleaned.drop(columns=["REG_ID"], inplace=True)
 

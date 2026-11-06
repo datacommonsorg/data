@@ -12,28 +12,35 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
-CREATE TABLE ImportSummary (
-  ImportName STRING(MAX) NOT NULL,
-  LatestVersion STRING(MAX),
-  GraphPath STRING(MAX),
-  State STRING(1024) NOT NULL,
-  JobId STRING(1024),
-  WorkflowId STRING(1024),
+CREATE TABLE IF NOT EXISTS `{project_id}.{dataset_id}.{history_table}` (
+  ImportName STRING NOT NULL,
+  Version STRING,
+  Status STRING NOT NULL,
+  JobId STRING,
   ExecutionTime INT64,
   DataVolume INT64,
-  DataImportTimestamp TIMESTAMP OPTIONS ( allow_commit_timestamp = TRUE ),
-  StatusUpdateTimestamp TIMESTAMP OPTIONS ( allow_commit_timestamp = TRUE ),
+  UpdateTimestamp TIMESTAMP NOT NULL,
   NextRefreshTimestamp TIMESTAMP,
-) PRIMARY KEY(ImportName);
+  Comment STRING
+)
+PARTITION BY DATE(UpdateTimestamp)
+CLUSTER BY ImportName;
 
-CREATE TABLE ImportHistory (
-  ImportName STRING(MAX) NOT NULL,
-  Version STRING(MAX) NOT NULL,
-  UpdateTimestamp TIMESTAMP NOT NULL OPTIONS (allow_commit_timestamp=true),
-  WorkflowExecutionID STRING(1024),
-  JobId STRING(1024),
-  Status STRING(1024),
-  ExecutionTime INT64,
-  DataVolume INT64,
-  Comment STRING(MAX),
-) PRIMARY KEY (ImportName, UpdateTimestamp DESC);
+CREATE OR REPLACE VIEW `{project_id}.{dataset_id}.{summary_view}` AS
+SELECT
+  ImportName,
+  Version AS LatestVersion,
+  Status AS State,
+  JobId,
+  ExecutionTime,
+  DataVolume,
+  MAX(IF(Status = 'STAGING', UpdateTimestamp, NULL)) OVER (
+    PARTITION BY ImportName
+  ) AS DataImportTimestamp,
+  UpdateTimestamp AS StatusUpdateTimestamp,
+  NextRefreshTimestamp
+FROM `{project_id}.{dataset_id}.{history_table}`
+QUALIFY ROW_NUMBER() OVER (
+  PARTITION BY ImportName
+  ORDER BY UpdateTimestamp DESC
+) = 1;

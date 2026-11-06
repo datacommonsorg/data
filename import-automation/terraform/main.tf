@@ -72,9 +72,9 @@ variable "spanner_database_path" {
 }
 
 variable "bq_dataset_id" {
-  description = "BigQuery Dataset ID for aggregation"
+  description = "BigQuery Dataset ID for import automation and aggregation"
   type        = string
-  default     = "datacommons"
+  default     = "import_automation"
 }
 
 variable "bq_connection_id" {
@@ -336,8 +336,8 @@ resource "google_cloud_run_v2_job" "import_validator" {
         image = "${var.artifact_registry_url}/dc-import-validator:${var.image_version}"
         resources {
           limits = {
-            cpu    = "4"
-            memory = "16Gi"
+            cpu    = "8"
+            memory = "32Gi"
           }
         }
       }
