@@ -169,7 +169,7 @@ def main(_):
     # Ensure all directories exist
     os.makedirs(_BASE_DOWNLOAD_DIRECTORY, exist_ok=True)
     os.makedirs(_SOURCE_FILES_DIRECTORY, exist_ok=True)
-    logging.info(f"Base output directories ensured to exist.")
+    logging.info("Base output directories ensured to exist.")
 
     # Define all years to process
     # MODIFIED: Generate starting years from _START_YEAR (2009)

@@ -12,21 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
-from six.moves import urllib
+import os
 import sys
 
-sys.path.insert(1, '../../../../util')
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+from six.moves import urllib
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../util'))
+
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
-from absl import app
-from absl import logging
-from absl import flags
-import os
 
-_FLAGS = flags.FLAGS
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 flags.DEFINE_string('mode', '', 'Options: download or process')
+_FLAGS = flags.FLAGS
 
 
 def download_data(download_link, download_path):
@@ -95,7 +97,7 @@ def preprocess_data(file_path):
         logging.info(f'Processing file: {file_path}')
         raw_df = pd.read_csv(file_path, sep="\t")
         raw_df = raw_df.rename(columns=({
-            'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
+            r'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
         }))
         raw_df['indic_de,geo\\time'] = raw_df['indic_de,geo\\time'].str.slice(2)
 
@@ -105,16 +107,15 @@ def preprocess_data(file_path):
 
         # Convert from one-year per column (wide format) to one row per
         # data point (long format).
-        preprocessed_df = raw_df.melt(id_vars=[raw_df.columns[0]])
-        # Rename the variable column.
-        preprocessed_df.columns.values[1] = 'time'
+        preprocessed_df = raw_df.melt(id_vars=[raw_df.columns[0]],
+                                      var_name='time')
 
         # Split the index column into two.
         # Ex: 'unit,sex,age,geo\time' -> 'unit,sex,age' and 'geo'.
         # '\time' labels the other columns so it is confusing.
 
         # Append extra space for all cells in value column that do not come with a note, so that we can split them without error.
-        preprocessed_df.value = preprocessed_df.value.str.replace(
+        preprocessed_df['value'] = preprocessed_df['value'].str.replace(
             "([0-9:])$", lambda m: m.group(0) + ' ', regex=True)
 
         first_column_list = preprocessed_df.columns[0].rsplit(sep=",",

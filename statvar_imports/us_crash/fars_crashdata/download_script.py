@@ -58,7 +58,6 @@ def download_and_extract_data(url, input_folder, year):
                         found_accident_csv = False
                         for item in zip_ref.infolist():
                             if item.filename.upper().endswith("ACCIDENT.CSV"):
-                                parts = item.filename.split("/")
                                 output_filename = f"ACCIDENT_{year}.csv"
                                 output_filepath = os.path.join(
                                     input_folder, output_filename)

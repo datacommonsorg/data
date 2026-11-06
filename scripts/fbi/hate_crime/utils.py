@@ -196,7 +196,7 @@ def make_time_place_aggregation(dataframe,
         agg_dict = {}
     agg_list = []
 
-    if country == True:
+    if country:
         # Year + Country
         agg_country = agg_hate_crime_df(dataframe,
                                         groupby_cols=(['DATA_YEAR'] +

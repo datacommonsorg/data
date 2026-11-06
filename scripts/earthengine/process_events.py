@@ -425,7 +425,7 @@ class GeoEventsProcessor:
             if max_distance_km:
                 place_distance_km = utils.place_distance(
                     place_id, _first(new_neighbours))
-                if place_distance == 0 or place_distance_km > max_distance:
+                if place_distance_km == 0 or place_distance_km > max_distance_km:
                     # Neighbours are too far. Ignore them
                     break
             for n in new_neighbours:
@@ -610,7 +610,7 @@ class GeoEventsProcessor:
         # the earliest date.
         root_event = self.merge_events(event_ids)
         if not root_event:
-            logging.debug(f'Unable to find event for {root_event_id}')
+            logging.debug(f'Unable to find event for {event_ids}')
             return None
         root_event_id = root_event.event_id()
         root_event.add_place_pvs(place_id, date, pvs)
@@ -635,7 +635,7 @@ class GeoEventsProcessor:
     def cache_event_place_property(self, event_ids: list = None):
         '''Batch lookup properties for places in events.'''
         if not self._config.get('dc_api_enabled', True):
-            logging.info(f'Skipping lookup for place properties.')
+            logging.info('Skipping lookup for place properties.')
             return
         _set_counter_stage(self._counters, 'prefetch_place_property_')
         if event_ids is None:
@@ -1346,7 +1346,7 @@ class GeoEventsProcessor:
             # Generate the tMCF node for the statvar referring to the prop
             node = []
             node.append(f'Node: E:{tmcf_prefix}->E{len(tmcf_nodes)}')
-            node.append(f'typeOf: dcs:StatVarObservation')
+            node.append('typeOf: dcs:StatVarObservation')
             node.append(f'variableMeasured: dcs:{statvar_dcid}')
             node.append(f'observationAbout: C:{tmcf_prefix}->observationAbout')
             node.append(f'observationDate: C:{tmcf_prefix}->observationDate')
@@ -1515,7 +1515,6 @@ class GeoEventsProcessor:
             self._counters.add_counter('error_input_rows_date_out_of_order', 1)
             logging.error(f'Old date in row:{filename}:{row_index}:{row}')
             return False
-        prev_date = date
         for p in self._event_props:
             if p in row:
                 data = utils.str_get_numeric_value(row[p])
@@ -1555,16 +1554,16 @@ class GeoEventsProcessor:
                         == 'grid_1') and (not utils.is_grid_id(place_id)):
                     grid_id = utils.grid_id_from_lat_lng(1, lat, lng)
                     place_id = grid_id
-                    self._counters.add_counter(f'place_converted_to_grid_1', 1)
+                    self._counters.add_counter('place_converted_to_grid_1', 1)
                 elif (output_place_type
                       == 's2_10') and (not utils.is_s2_cell_id(place_id)):
                     s2cell_id = utils.s2_cell_to_dcid(
                         utils.s2_cell_from_latlng(lat, lng, 10))
                     place_id = s2cell_id
-                    self._counters.add_counter(f'place_converted_to_s2_level10',
+                    self._counters.add_counter('place_converted_to_s2_level10',
                                                1)
             else:
-                self._counters.add_counter(f'place_without_lat_lng', 1)
+                self._counters.add_counter('place_without_lat_lng', 1)
         if utils.is_s2_cell_id(place_id):
             # Place is an s2 cell. Convert to the right s2 level.
             s2_cell = utils.s2_cell_from_dcid(place_id)
@@ -1729,8 +1728,6 @@ class GeoEventsProcessor:
         typeof = event_pvs.get('typeOf',
                                self._config.get('event_type', 'FloodEvent'))
         start_date = event_pvs.get('startDate')
-        # Get a named location for the event
-        start_location = event_pvs.get('startLocation')
         if not locations:
             locations = _get_list(event_pvs.get('affectedPlace', ''))
         location_name = self._get_smallest_place_name(locations)
