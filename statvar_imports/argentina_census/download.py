@@ -374,6 +374,25 @@ PROVINCE_NORM_MAP = {_norm_key(j[0]): j[0] for j in JURISDICTIONS}
 PROVINCE_NORM_MAP['tierra del fuego'] = (
     'Tierra del Fuego, Antártida e Islas del Atlántico Sur')
 
+# Official 2022 INDEC Cuadro 1 department name variants mapped to their
+# canonical 2010 keys in argentina_places_resolved.csv.
+AA2_2022_ALIASES = {
+    ('La Rioja', 'angel vicente penaloza'):
+        'La Rioja__General Angel V. Peñaloza',
+    ('La Rioja', 'general felipe varela'):
+        'La Rioja__Coronel Felipe Varela',
+    ('La Rioja', 'general juan facundo quiroga'):
+        'La Rioja__General Juan F. Quiroga',
+    ('La Rioja', 'general ortiz de ocampo'):
+        'La Rioja__General Ocampo',
+    ('San Luis', 'juan martin de pueyrredon'):
+        'San Luis__La Capital (1)',
+    ('Santiago del Estero', 'juan felipe ibarra'):
+        'Santiago del Estero__Juan F. Ibarra',
+    ('Tucumán', 'juan bautista alberdi'):
+        'Tucumán__Juan B. Alberdi',
+}
+
 DEFAULT_HEADERS = {'User-Agent': 'Mozilla/5.0 (DataCommons-StatVarImporter)'}
 
 
@@ -578,13 +597,19 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         else:
             xls_1980 = extract_xls_from_zip(cache[zip_url],
                                             f'c80b_{c02_1980}_02.xls')
-        for age, v_tot, v_male, v_fem in parse_age_sex_sheet_xls(xls_1980):
+        rows_1980 = parse_age_sex_sheet_xls(xls_1980)
+        if not rows_1980:
+            raise RuntimeError(f'No 1980 population rows parsed for {j_name}')
+        for age, v_tot, v_male, v_fem in rows_1980:
             pop_rows.append((age, '1980', j_name, v_tot, v_male, v_fem))
 
         # 1991
         url_1991 = f'{BASE_FTP_URL}/censos/1991/cuadrosDefinitivos/{p2_1991}.xls'
-        for age, v_tot, v_male, v_fem in parse_age_sex_sheet_xls(
-                cache[url_1991], fix_1991_70_74=(j_name == 'Total del país')):
+        rows_1991 = parse_age_sex_sheet_xls(
+            cache[url_1991], fix_1991_70_74=(j_name == 'Total del país'))
+        if not rows_1991:
+            raise RuntimeError(f'No 1991 population rows parsed for {j_name}')
+        for age, v_tot, v_male, v_fem in rows_1991:
             pop_rows.append((age, '1991', j_name, v_tot, v_male, v_fem))
 
         # 2001
@@ -592,20 +617,26 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         url_2001 = (
             f'{BASE_FTP_URL}/censos/2001/{sub_2001}/Datos/{code_2001}000C61.xls'
         )
-        for age, v_tot, v_male, v_fem in parse_age_sex_sheet_xls(
-                cache[url_2001]):
+        rows_2001 = parse_age_sex_sheet_xls(cache[url_2001])
+        if not rows_2001:
+            raise RuntimeError(f'No 2001 population rows parsed for {j_name}')
+        for age, v_tot, v_male, v_fem in rows_2001:
             pop_rows.append((age, '2001', j_name, v_tot, v_male, v_fem))
 
         # 2010
         url_2010 = (
             f'{BASE_FTP_URL}/censos/2010/CuadrosDefinitivos/{p2_2010}.xls')
-        for age, v_tot, v_male, v_fem in parse_age_sex_sheet_xls(
-                cache[url_2010]):
+        rows_2010 = parse_age_sex_sheet_xls(cache[url_2010])
+        if not rows_2010:
+            raise RuntimeError(f'No 2010 population rows parsed for {j_name}')
+        for age, v_tot, v_male, v_fem in rows_2010:
             pop_rows.append((age, '2010', j_name, v_tot, v_male, v_fem))
 
         # 2022 (Refreshed)
-        for age, v_tot, v_male, v_fem in parse_age_sex_2022_xlsx(
-                cache[c4_url_2022]):
+        rows_2022 = parse_age_sex_2022_xlsx(cache[c4_url_2022])
+        if not rows_2022:
+            raise RuntimeError(f'No 2022 population rows parsed for {j_name}')
+        for age, v_tot, v_male, v_fem in rows_2022:
             pop_rows.append((age, '2022', j_name, v_tot, v_male, v_fem))
 
     pop_csv_path = os.path.join(output_dir, 'argentina_population.csv')
@@ -645,12 +676,10 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         wb = xlrd.open_workbook(file_contents=xls_g2)
         sh = wb.sheet_by_index(0)
         if sh.ncols < 10:
-            logging.warning(
-                'Skipping 1980 urban/rural processing for %s due to insufficient columns (%d)',
-                j_name,
-                sh.ncols,
+            raise RuntimeError(
+                f'Unexpected columns ({sh.ncols} < 10) in 1980 urban/rural sheet for {j_name}'
             )
-            continue
+        ur_1980_count = 0
         for rx in range(sh.nrows):
             age = normalize_age_label(sh.cell_value(rx, 0))
             if age not in VALID_AGES:
@@ -667,8 +696,12 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             )
             if u_tot and u_m and u_f:
                 ur_rows.append(('Urbana', age, '1980', j_name, u_tot, u_m, u_f))
+                ur_1980_count += 1
             if r_tot and r_m and r_f:
                 ur_rows.append(('Rural', age, '1980', j_name, r_tot, r_m, r_f))
+                ur_1980_count += 1
+        if ur_1980_count == 0:
+            raise RuntimeError(f'No 1980 urban/rural rows parsed for {j_name}')
 
         # 1991 Urban/Rural Total from {code_2001}000C101.xls
         sub_2001 = 'nacionales' if code_2001 == '01' else 'provinciales'
@@ -676,12 +709,10 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         wb_101 = xlrd.open_workbook(file_contents=cache[url_c101])
         sh_101 = wb_101.sheet_by_index(0)
         if sh_101.ncols < 2:
-            logging.warning(
-                'Skipping 1991 urban/rural processing for %s due to insufficient columns (%d)',
-                j_name,
-                sh_101.ncols,
+            raise RuntimeError(
+                f'Unexpected columns ({sh_101.ncols} < 2) in 1991 urban/rural sheet for {j_name}'
             )
-            continue
+        ur_1991_count = 0
         for rx in range(sh_101.nrows):
             lbl = str(sh_101.cell_value(rx, 0)).strip().lower()
             val_1991 = fmt_num(sh_101.cell_value(rx, 1))
@@ -690,9 +721,13 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             if lbl.startswith('urbana'):
                 ur_rows.append(
                     ('Urbana', 'Total', '1991', j_name, val_1991, '', ''))
+                ur_1991_count += 1
             elif lbl.startswith('rural'):
                 ur_rows.append(
                     ('Rural', 'Total', '1991', j_name, val_1991, '', ''))
+                ur_1991_count += 1
+        if ur_1991_count == 0:
+            raise RuntimeError(f'No 1991 urban/rural rows parsed for {j_name}')
 
         # 2001 Urban/Rural by Age and Sex from C104 (Total), C105 (Varones), C106 (Mujeres)
         url_c104 = f'{BASE_FTP_URL}/censos/2001/{sub_2001}/Datos/{code_2001}000C104.xls'
@@ -706,15 +741,14 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             file_contents=cache[url_c106]).sheet_by_index(0)
         if (sh_tot.nrows < 8 or sh_tot.ncols < 2 or sh_m.nrows < 8 or
                 sh_m.ncols < 2 or sh_f.nrows < 8 or sh_f.ncols < 2):
-            logging.warning(
-                'Skipping 2001 urban/rural processing for %s due to unexpected sheet dimensions',
-                j_name,
+            raise RuntimeError(
+                f'Unexpected sheet dimensions in 2001 urban/rural C104/C105/C106 for {j_name}'
             )
-            continue
         age_headers = ['Total'] + [
             normalize_age_label(sh_tot.cell_value(3, cx))
             for cx in range(2, sh_tot.ncols)
         ]
+        ur_2001_count = 0
         for area_name, rx in [('Urbana', 6), ('Rural', 7)]:
             for idx_c, age in enumerate(age_headers, start=1):
                 if (not age or idx_c >= sh_tot.ncols or idx_c >= sh_m.ncols or
@@ -724,28 +758,44 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
                 vm = fmt_num(sh_m.cell_value(rx, idx_c))
                 vf = fmt_num(sh_f.cell_value(rx, idx_c))
                 if vt or vm or vf:
+                    # Preserve legacy production StatVar naming (Count_Person_0To1Years_*)
+                    # for the 2001 C104/C105/C106 '1-4' age column to avoid deleting 144
+                    # existing 2001 observations in the production baseline.
                     out_age = '0-1' if age == '1-4' else age
                     ur_rows.append(
                         (area_name, out_age, '2001', j_name, vt, vm, vf))
+                    ur_2001_count += 1
+        if ur_2001_count == 0:
+            raise RuntimeError(f'No 2001 urban/rural rows parsed for {j_name}')
 
     # 2010 Urban/Rural Total from n020210.xls (Refreshed)
     url_ur_2010 = f'{BASE_FTP_URL}/cuadros/poblacion/n020210.xls'
     sh_ur10 = xlrd.open_workbook(
         file_contents=cache[url_ur_2010]).sheet_by_index(0)
-    if sh_ur10.ncols >= 5:
-        for rx in range(sh_ur10.nrows):
-            raw_j = str(sh_ur10.cell_value(rx, 0)).strip()
-            nk = _norm_key(raw_j)
-            if nk in PROVINCE_NORM_MAP:
-                j_name = PROVINCE_NORM_MAP[nk]
-                u_2010 = fmt_num(sh_ur10.cell_value(rx, 2))
-                r_2010 = fmt_num(sh_ur10.cell_value(rx, 4))
-                if u_2010:
-                    ur_rows.append(
-                        ('Urbana', 'Total', '2010', j_name, u_2010, '', ''))
-                if r_2010:
-                    ur_rows.append(
-                        ('Rural', 'Total', '2010', j_name, r_2010, '', ''))
+    if sh_ur10.ncols < 5:
+        raise RuntimeError(
+            f'Unexpected columns ({sh_ur10.ncols} < 5) in 2010 urban/rural n020210.xls'
+        )
+    ur_2010_seen = set()
+    for rx in range(sh_ur10.nrows):
+        raw_j = str(sh_ur10.cell_value(rx, 0)).strip()
+        nk = _norm_key(raw_j)
+        if nk in PROVINCE_NORM_MAP:
+            j_name = PROVINCE_NORM_MAP[nk]
+            u_2010 = fmt_num(sh_ur10.cell_value(rx, 2))
+            r_2010 = fmt_num(sh_ur10.cell_value(rx, 4))
+            if u_2010:
+                ur_rows.append(
+                    ('Urbana', 'Total', '2010', j_name, u_2010, '', ''))
+                ur_2010_seen.add(j_name)
+            if r_2010:
+                ur_rows.append(
+                    ('Rural', 'Total', '2010', j_name, r_2010, '', ''))
+                ur_2010_seen.add(j_name)
+    if len(ur_2010_seen) < len(JURISDICTIONS):
+        raise RuntimeError(
+            f'Expected {len(JURISDICTIONS)} jurisdictions in n020210.xls, got {len(ur_2010_seen)}'
+        )
 
     ur_csv_path = os.path.join(output_dir, 'argentina_urban_rural.csv')
     _write_csv_atomically(
@@ -779,6 +829,7 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             if '__' in pname:
                 p_part, d_part = pname.split('__', 1)
                 resolved_aa2_norm[(p_part, _norm_key(d_part))] = pname
+    resolved_aa2_norm.update(AA2_2022_ALIASES)
 
     aa2_rows = []
     for (
@@ -799,12 +850,10 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         sh_p1 = xlrd.open_workbook(
             file_contents=cache[url_p1]).sheet_by_index(0)
         if sh_p1.ncols < 3:
-            logging.warning(
-                'Skipping 2010 AA2 processing for %s due to unexpected sheet columns (%d)',
-                j_name,
-                sh_p1.ncols,
+            raise RuntimeError(
+                f'Unexpected columns ({sh_p1.ncols} < 3) in 2010 AA2 sheet for {j_name}'
             )
-            continue
+        seen_2010_depts = set()
         for rx in range(sh_p1.nrows):
             lbl = ' '.join(str(sh_p1.cell_value(rx, 0)).strip().split())
             if not lbl or lbl.lower().startswith((
@@ -818,25 +867,29 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
                     'resto',
             )):
                 continue
-            v2001 = fmt_num(sh_p1.cell_value(rx, 1))
-            v2010 = fmt_num(sh_p1.cell_value(rx, 2))
-            if v2010 == '2010':
-                continue
-            if (j_name, _norm_key(lbl)) not in resolved_aa2_norm:
-                if v2001 or v2010:
+            nk = _norm_key(lbl)
+            if (j_name, nk) not in resolved_aa2_norm:
+                v2001_raw = fmt_num(sh_p1.cell_value(rx, 1))
+                v2010_raw = fmt_num(sh_p1.cell_value(rx, 2))
+                if v2001_raw or v2010_raw:
                     logging.warning(
                         'Unmapped 2001/2010 AA2 department in %s: %s',
                         j_name,
                         lbl,
                     )
                 continue
-            dept_key = resolved_aa2_norm[(j_name, _norm_key(lbl))]
+            dept_key = resolved_aa2_norm[(j_name, nk)]
+            v2001 = fmt_num(sh_p1.cell_value(rx, 1))
+            v2010 = fmt_num(sh_p1.cell_value(rx, 2))
             if v2001:
                 aa2_rows.append(('2001', dept_key, v2001))
             if v2010:
                 aa2_rows.append(('2010', dept_key, v2010))
+                seen_2010_depts.add(dept_key)
+        if not seen_2010_depts:
+            raise RuntimeError(f'No 2010 AA2 departments parsed for {j_name}')
 
-        # 2022 AA2 Department population
+        # 2022 AA2 Department population (col 1 = Departamento/Partido, col 3 = 2022 population)
         if c1_url_2022:
             wb_c1 = openpyxl.load_workbook(io.BytesIO(cache[c1_url_2022]),
                                            data_only=True)
@@ -847,22 +900,39 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             for sname in c1_sheets:
                 sh_c1 = wb_c1[sname]
                 for row in sh_c1.iter_rows(values_only=True):
-                    if not row or len(row) < 4:
+                    if not row or len(row) < 4 or row[1] is None:
                         continue
-                    raw_d = row[1] if row[1] is not None else row[0]
-                    if raw_d is None:
+                    d_lbl = ' '.join(str(row[1]).strip().split())
+                    if not d_lbl or d_lbl.lower().startswith((
+                            'total',
+                            'departamento',
+                            'partido',
+                            'fuente',
+                            'nota',
+                            '(',
+                            '24 ',
+                            '31 ',
+                            'resto',
+                            'antártida',
+                            'antartida',
+                    )):
                         continue
-                    d_lbl = ' '.join(str(raw_d).strip().split())
                     nk = _norm_key(d_lbl)
-                    if (j_name, nk) in resolved_aa2_norm:
-                        dept_key = resolved_aa2_norm[(j_name, nk)]
-                        if dept_key in seen_2022_depts:
-                            continue
-                        v2022 = (fmt_num(row[3]) if len(row) > 3 and
-                                 fmt_num(row[3]) else fmt_num(row[2]))
-                        if v2022 and v2022 not in ('2010', '2022'):
-                            seen_2022_depts.add(dept_key)
-                            aa2_rows.append(('2022', dept_key, v2022))
+                    if (j_name, nk) not in resolved_aa2_norm:
+                        logging.warning(
+                            'Unmapped 2022 AA2 department in %s: %s', j_name,
+                            d_lbl)
+                        continue
+                    dept_key = resolved_aa2_norm[(j_name, nk)]
+                    if dept_key in seen_2022_depts:
+                        continue
+                    v2022 = fmt_num(row[3])
+                    if v2022:
+                        seen_2022_depts.add(dept_key)
+                        aa2_rows.append(('2022', dept_key, v2022))
+            if not seen_2022_depts:
+                raise RuntimeError(
+                    f'No 2022 AA2 departments parsed for {j_name}')
 
     aa2_csv_path = os.path.join(output_dir, 'argentina_population_aa2.csv')
     _write_csv_atomically(
@@ -878,20 +948,27 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
     lit_rows = []
     url_p7 = f'{BASE_FTP_URL}/censos/2010/CuadrosDefinitivos/Total_pais/P7-P_Total_pais.xls'
     sh_p7 = xlrd.open_workbook(file_contents=cache[url_p7]).sheet_by_index(0)
-    if sh_p7.ncols >= 6:
-        for rx in range(sh_p7.nrows):
-            raw_j = ' '.join(str(sh_p7.cell_value(rx, 0)).strip().split())
-            nk = _norm_key(raw_j)
-            if nk in PROVINCE_NORM_MAP:
-                j_name = PROVINCE_NORM_MAP[nk]
-                v_tot10 = fmt_num(sh_p7.cell_value(rx, 1))
-                v_lit = fmt_num(sh_p7.cell_value(rx, 2))
-                v_illit = fmt_num(sh_p7.cell_value(rx, 5))
-                if v_tot10 and v_lit and v_illit:
-                    v_pct = fmt_num(
-                        round(float(v_illit) * 100.0 / float(v_tot10), 1))
-                    lit_rows.append(
-                        ('2010', j_name, v_tot10, v_lit, v_illit, v_pct))
+    if sh_p7.ncols < 6:
+        raise RuntimeError(
+            f'Unexpected columns ({sh_p7.ncols} < 6) in 2010 literacy P7-P_Total_pais.xls'
+        )
+    for rx in range(sh_p7.nrows):
+        raw_j = ' '.join(str(sh_p7.cell_value(rx, 0)).strip().split())
+        nk = _norm_key(raw_j)
+        if nk in PROVINCE_NORM_MAP:
+            j_name = PROVINCE_NORM_MAP[nk]
+            v_tot10 = fmt_num(sh_p7.cell_value(rx, 1))
+            v_lit = fmt_num(sh_p7.cell_value(rx, 2))
+            v_illit = fmt_num(sh_p7.cell_value(rx, 5))
+            if v_tot10 and v_lit and v_illit:
+                v_pct = fmt_num(
+                    round(float(v_illit) * 100.0 / float(v_tot10), 1))
+                lit_rows.append(
+                    ('2010', j_name, v_tot10, v_lit, v_illit, v_pct))
+    if len(lit_rows) < len(JURISDICTIONS):
+        raise RuntimeError(
+            f'Expected {len(JURISDICTIONS)} jurisdictions in P7-P_Total_pais.xls, got {len(lit_rows)}'
+        )
 
     lit_csv_path = os.path.join(output_dir, 'argentina_literacy.csv')
     _write_csv_atomically(
@@ -925,7 +1002,12 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         if len(yr_candidates) >= 5:
             years_im = yr_candidates
             break
+    if not years_im:
+        raise RuntimeError(
+            'Could not find year headers in infant mortality sheet 010506_2025.xlsx'
+        )
 
+    im_jurisdictions = set()
     for row in im_matrix:
         if not row or row[0] is None:
             continue
@@ -937,6 +1019,11 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
                     val = fmt_num(row[col_idx])
                     if val:
                         im_rows.append((yr_str, j_name, val))
+                        im_jurisdictions.add(j_name)
+    if len(im_jurisdictions) < len(JURISDICTIONS):
+        raise RuntimeError(
+            f'Expected {len(JURISDICTIONS)} jurisdictions in 010506_2025.xlsx, got {len(im_jurisdictions)}'
+        )
 
     im_csv_path = os.path.join(output_dir, 'argentina_infant_mortality.csv')
     _write_csv_atomically(

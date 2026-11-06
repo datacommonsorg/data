@@ -8,7 +8,7 @@
 * **Data Download Landing Page:** `https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-84`
 * **Release Frequency / Refresh Schedule:** Weekly check (`0 5 * * 1`, `P1Y` source release frequency)
 * **Date Range in KG:** `1980` – `2023`
-* **Total Observations:** `51,318` across `1,034` unique `StatisticalVariable`s and `514` places (`country/ARG`, `23` AA1 Provinces, and `490` AA2 Departments/Partidos).
+* **Total Observations:** `51,325` across `1,034` unique `StatisticalVariable`s and `513` places (`country/ARG`, `23` AA1 Provinces, and `489` AA2 Departments/Partidos).
 
 ---
 
@@ -21,9 +21,9 @@
 2. **Urban and Rural Population by Age and Sex (`1980, 1991, 2001, 2010`)**
    - **Geographic levels:** Country (`country/ARG`) and 23 Provinces (AA1).
    - **Extracted file:** `input_files/argentina_urban_rural.csv`
-   - **StatVars:** `Count_Person_Urban`, `Count_Person_Rural`, `Count_Person_Urban_Male`, `Count_Person_Urban_Female`, `Count_Person_Rural_Male`, `Count_Person_Rural_Female`, and age/sex breakdowns (`Count_Person_<Age>_Urban_<Gender>`, `Count_Person_<Age>_Rural_<Gender>`).
+   - **StatVars:** `Count_Person_Urban`, `Count_Person_Rural`, `Count_Person_Urban_Male`, `Count_Person_Urban_Female`, `Count_Person_Rural_Male`, `Count_Person_Rural_Female`, and age/sex breakdowns (`Count_Person_<Age>_Urban_<Gender>`, `Count_Person_<Age>_Rural_<Gender>`). Note: In the 2001 urban/rural workbook (`c01totalpais7.xls`), the `1-4` age group is mapped to `0-1` (`Count_Person_0To1Years_*`) to preserve backwards compatibility with the 144 legacy 2001 production observations.
 3. **Department (AA2) Total Population (`2001, 2010, 2022`)**
-   - **Geographic levels:** 490 Departments / Partidos (AA2).
+   - **Geographic levels:** 489 Departments / Partidos (AA2).
    - **Extracted file:** `input_files/argentina_population_aa2.csv`
    - **StatVars:** `Count_Person`.
 4. **Literacy and Illiteracy for Population Aged 10+ Years (`2010`)**
@@ -44,8 +44,8 @@ Comparison against the previous production `Argentina_Census` manual import (`/c
 | Metric | Count | Explanation |
 |---|---|---|
 | **Previous Observations** | `41,104` | Legacy manual import covering 1980–2010 Census & 2005–2021 Infant Mortality |
-| **Current Observations** | `51,318` | Refreshed automated import covering 1980–2022 Census & 2005–2023 Infant Mortality |
-| **Added Observations** | `+10,215` | 2022 National Census (`c2022_*_c4_*.xlsx` age/sex for Country + 23 Provinces, `c2022_*_c1_*.xlsx` AA2 department totals), 2022–2023 Infant Mortality rates (`010506_2025.xlsx`, `+48` rows), and `1` corrected DCID row for Libertador General San Martín (`wikidataId/Q1120737` in `2010`, value `4707`) |
+| **Current Observations** | `51,325` | Refreshed automated import covering 1980–2022 Census & 2005–2023 Infant Mortality |
+| **Added Observations** | `+10,222` | 2022 National Census (`c2022_*_c4_*.xlsx` age/sex for Country + 23 Provinces, `c2022_*_c1_*.xlsx` AA2 department totals across 488 populated departments), 2022–2023 Infant Mortality rates (`010506_2025.xlsx`, `+48` rows), and `1` corrected DCID row for Libertador General San Martín (`wikidataId/Q1120737` in `2010`, value `4707`) |
 | **Modified Observations** | `15` | All `15` modified rows are in year `2010` due to fixing legacy manual-import parsing bugs: `13` department-level `Count_Person` rows in Chubut where legacy truncated Spanish thousands separators (`.` in `11.141 -> 11`, `131.313 -> 131`, `186.583 -> 187`, etc.), `1` row in `Count_Person_10OrMoreYears_Literate` for Chaco (`wikidataId/Q44757`, `80602 -> 806020`), and `1` row in `Count_Person_10OrMoreYears_Illiterate_AsAFractionOf_Count_Person_10OrMoreYears` for Neuquén (`wikidataId/Q44800`, `23 -> 2.3`). `Count_MortalityEvent_AsAFractionOf_Count_BirthEvent_LiveBirth` has `0` modified and `0` deleted records. |
 | **Deleted Observations** | `1` (`0.002%`) | `('2010', 'wikidataId/Q1120737)', 'Count_Person')` (value `4707` in legacy `argentina_population_aa2_2010.csv:453`), caused by fixing a trailing parenthesis typo in the legacy place DCID for Libertador General San Martín Department, San Luis (`wikidataId/Q1120737` at `argentina_places_resolved.csv:418`) |
 | **Schema Diffs** | `0` | All `1,034` StatVars resolve to existing definitions in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` |
@@ -75,11 +75,12 @@ Comparison against the previous production `Argentina_Census` manual import (`/c
 
 ## 4. Explanations for `genmcf` Data Warnings (`report.json`)
 
-* **Fatal / Error Count:** `0` fatal, `0` errors (`51,318` `NumRowSuccesses`, `51,318` `NumNodeSuccesses`).
+* **Fatal / Error Count:** `0` fatal, `0` errors (`51,325` `NumRowSuccesses`, `51,325` `NumNodeSuccesses`).
 * **Warnings Breakdown:**
-  * `StrSplit_EmptyToken_unit` (`51,294`) & `StrSplit_EmptyToken_scalingFactor` (`50,838`): Expected behavior from `stat_var_processor.py` outputting a unified CSV table with columns `observationDate,observationAbout,variableMeasured,value,unit,scalingFactor`. Pure population count observations do not have a `unit` or `scalingFactor`; only the illiteracy percentage (`24` rows, `unit: Percent, scalingFactor: 100`) and infant mortality rate (`456` rows, `scalingFactor: 1000`) populate those columns.
+  * `StrSplit_EmptyToken_unit` (`51,301`) & `StrSplit_EmptyToken_scalingFactor` (`50,845`): Expected behavior from `stat_var_processor.py` outputting a unified CSV table with columns `observationDate,observationAbout,variableMeasured,value,unit,scalingFactor`. Pure population count observations do not have a `unit` or `scalingFactor`; only the illiteracy percentage (`24` rows, `unit: Percent, scalingFactor: 100`) and infant mortality rate (`456` rows, `scalingFactor: 1000`) populate those columns.
   * `StatsCheck_Data_Holes` (`8,819`): Expected because national population censuses in Argentina are conducted decennially (`1980`, `1991`, `2001`, `2010`, `2022`) rather than every single year.
   * `StatsCheck_MaxPercentFluctuationGreaterThan100` (`1,588`) & `StatsCheck_MaxPercentFluctuationGreaterThan500` (`65`): Expected inter-censal population growth over 10- to 12-year intervals (`1980 -> 1991 -> 2001 -> 2010 -> 2022`), especially in older age cohorts (`80+` years) and fast-growing provinces/departments.
+
 
 ---
 
