@@ -1699,10 +1699,6 @@
             "Margin of Error!!Foreign-born; Born in Africa MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only"
         ],
         "Estimate!!Foreign-born; Born in Africa!!Occupied housing units": [
-            "Estimate!!Foreign-born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Estimate!!Foreign-born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Estimate!!Foreign-born; Born in Africa!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign-born; Born in Africa!!Occupied housing units!!ROOMS!!1 room",
             "Estimate!!Foreign-born; Born in Africa!!Occupied housing units!!ROOMS!!2 or 3 rooms",
@@ -1723,8 +1719,6 @@
             "Margin of Error!!Foreign-born; Born in Africa!!Occupied housing units!!SELECTED CHARACTERISTICS!!No telephone service available",
             "Estimate!!Foreign-born; Born in Africa!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
             "Margin of Error!!Foreign-born; Born in Africa!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
-            "Margin of Error!!Foreign-born; Born in Africa MOE!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Africa MOE!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Margin of Error!!Foreign-born; Born in Africa MOE!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign-born; Born in Africa MOE!!Occupied housing units!!ROOMS!!2 or 3 rooms",
             "Margin of Error!!Foreign-born; Born in Africa MOE!!Occupied housing units!!ROOMS!!4 or 5 rooms",
@@ -2222,10 +2216,6 @@
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only"
         ],
         "Estimate!!Foreign-born; Born in Northern America!!Occupied housing units": [
-            "Estimate!!Foreign-born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Estimate!!Foreign-born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Estimate!!Foreign-born; Born in Northern America!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign-born; Born in Northern America!!Occupied housing units!!ROOMS!!1 room",
             "Estimate!!Foreign-born; Born in Northern America!!Occupied housing units!!ROOMS!!2 or 3 rooms",
@@ -2246,8 +2236,6 @@
             "Margin of Error!!Foreign-born; Born in Northern America!!Occupied housing units!!SELECTED CHARACTERISTICS!!No telephone service available",
             "Estimate!!Foreign-born; Born in Northern America!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
             "Margin of Error!!Foreign-born; Born in Northern America!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
-            "Margin of Error!!Foreign-born; Born in Northern America MOE!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Northern America MOE!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!Occupied housing units!!ROOMS!!2 or 3 rooms",
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!Occupied housing units!!ROOMS!!4 or 5 rooms",
@@ -2745,10 +2733,6 @@
             "Margin of Error!!Foreign-born; Born in Oceania MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only"
         ],
         "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units": [
-            "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign-born; Born in Oceania!!Occupied housing units!!ROOMS!!1 room",
             "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units!!ROOMS!!2 or 3 rooms",
@@ -2769,8 +2753,6 @@
             "Margin of Error!!Foreign-born; Born in Oceania!!Occupied housing units!!SELECTED CHARACTERISTICS!!No telephone service available",
             "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
             "Margin of Error!!Foreign-born; Born in Oceania!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
-            "Margin of Error!!Foreign-born; Born in Oceania MOE!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign-born; Born in Oceania MOE!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Margin of Error!!Foreign-born; Born in Oceania MOE!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign-born; Born in Oceania MOE!!Occupied housing units!!ROOMS!!2 or 3 rooms",
             "Margin of Error!!Foreign-born; Born in Oceania MOE!!Occupied housing units!!ROOMS!!4 or 5 rooms",
@@ -3448,10 +3430,6 @@
             "Margin of Error!!Foreign born; Born in Africa MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only"
         ],
         "Estimate!!Foreign born; Born in Africa!!Occupied housing units": [
-            "Estimate!!Foreign born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Estimate!!Foreign born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Africa!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Estimate!!Foreign born; Born in Africa!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign born; Born in Africa!!Occupied housing units!!ROOMS!!1 room",
             "Estimate!!Foreign born; Born in Africa!!Occupied housing units!!ROOMS!!2 or 3 rooms",
@@ -3472,8 +3450,6 @@
             "Margin of Error!!Foreign born; Born in Africa!!Occupied housing units!!SELECTED CHARACTERISTICS!!No telephone service available",
             "Estimate!!Foreign born; Born in Africa!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
             "Margin of Error!!Foreign born; Born in Africa!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Margin of Error!!Foreign born; Born in Africa MOE!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign born; Born in Africa MOE!!Occupied housing units!!ROOMS!!2 or 3 rooms",
             "Margin of Error!!Foreign born; Born in Africa MOE!!Occupied housing units!!ROOMS!!4 or 5 rooms",
@@ -3941,10 +3917,6 @@
             "Margin of Error!!Foreign born; Born in Northern America MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only"
         ],
         "Estimate!!Foreign born; Born in Northern America!!Occupied housing units": [
-            "Estimate!!Foreign born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Estimate!!Foreign born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Estimate!!Foreign born; Born in Northern America!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign born; Born in Northern America!!Occupied housing units!!ROOMS!!1 room",
             "Estimate!!Foreign born; Born in Northern America!!Occupied housing units!!ROOMS!!2 or 3 rooms",
@@ -3965,8 +3937,6 @@
             "Margin of Error!!Foreign born; Born in Northern America!!Occupied housing units!!SELECTED CHARACTERISTICS!!No telephone service available",
             "Estimate!!Foreign born; Born in Northern America!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
             "Margin of Error!!Foreign born; Born in Northern America!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Margin of Error!!Foreign born; Born in Northern America MOE!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign born; Born in Northern America MOE!!Occupied housing units!!ROOMS!!2 or 3 rooms",
             "Margin of Error!!Foreign born; Born in Northern America MOE!!Occupied housing units!!ROOMS!!4 or 5 rooms",
@@ -4434,10 +4404,6 @@
             "Margin of Error!!Foreign born; Born in Oceania MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only"
         ],
         "Estimate!!Foreign born; Born in Oceania!!Occupied housing units": [
-            "Estimate!!Foreign born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Estimate!!Foreign born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Estimate!!Foreign born; Born in Oceania!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign born; Born in Oceania!!Occupied housing units!!ROOMS!!1 room",
             "Estimate!!Foreign born; Born in Oceania!!Occupied housing units!!ROOMS!!2 or 3 rooms",
@@ -4458,8 +4424,6 @@
             "Margin of Error!!Foreign born; Born in Oceania!!Occupied housing units!!SELECTED CHARACTERISTICS!!No telephone service available",
             "Estimate!!Foreign born; Born in Oceania!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
             "Margin of Error!!Foreign born; Born in Oceania!!Occupied housing units!!SELECTED CHARACTERISTICS!!Limited English Speaking Households",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Margin of Error!!Foreign born; Born in Oceania MOE!!Occupied housing units!!ROOMS!!1 room",
             "Margin of Error!!Foreign born; Born in Oceania MOE!!Occupied housing units!!ROOMS!!2 or 3 rooms",
             "Margin of Error!!Foreign born; Born in Oceania MOE!!Occupied housing units!!ROOMS!!4 or 5 rooms",
@@ -5010,10 +4974,6 @@
             "Foreign born; Born in Africa!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children under 18 years!!With related children under 5 years only"
         ],
         "Foreign born; Born in Africa!!Estimate!!Occupied housing units": [
-            "Foreign born; Born in Africa!!Estimate!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Africa!!Margin of Error!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Africa!!Estimate!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Foreign born; Born in Africa!!Margin of Error!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Foreign born; Born in Africa!!Estimate!!ROOMS!!1 room",
             "Foreign born; Born in Africa!!Margin of Error!!ROOMS!!1 room",
             "Foreign born; Born in Africa!!Estimate!!ROOMS!!2 or 3 rooms",
@@ -5038,10 +4998,6 @@
             "Foreign born; Born in Africa!!Estimate!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English \"very well\"",
             "Foreign born; Born in Africa!!Margin of Error!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English very well\"\"",
             "Foreign born; Born in Africa!!Margin of Error!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English \"very well\"",
-            "Foreign born; Born in Africa!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Africa!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Africa!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
-            "Foreign born; Born in Africa!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
             "Foreign born; Born in Africa!!Estimate!!SELECTED CHARACTERISTICS!!Linguistically isolated households",
             "Foreign born; Born in Africa!!Margin of Error!!SELECTED CHARACTERISTICS!!Linguistically isolated households"
         ],
@@ -5378,10 +5334,6 @@
             "Foreign born; Born in Northern America!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children under 18 years!!With related children under 5 years only"
         ],
         "Foreign born; Born in Northern America!!Estimate!!Occupied housing units": [
-            "Foreign born; Born in Northern America!!Estimate!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Northern America!!Margin of Error!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Northern America!!Estimate!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Foreign born; Born in Northern America!!Margin of Error!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Foreign born; Born in Northern America!!Estimate!!ROOMS!!1 room",
             "Foreign born; Born in Northern America!!Margin of Error!!ROOMS!!1 room",
             "Foreign born; Born in Northern America!!Estimate!!ROOMS!!2 or 3 rooms",
@@ -5406,10 +5358,6 @@
             "Foreign born; Born in Northern America!!Estimate!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English \"very well\"",
             "Foreign born; Born in Northern America!!Margin of Error!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English very well\"\"",
             "Foreign born; Born in Northern America!!Margin of Error!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English \"very well\"",
-            "Foreign born; Born in Northern America!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Northern America!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Northern America!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
-            "Foreign born; Born in Northern America!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
             "Foreign born; Born in Northern America!!Estimate!!SELECTED CHARACTERISTICS!!Linguistically isolated households",
             "Foreign born; Born in Northern America!!Margin of Error!!SELECTED CHARACTERISTICS!!Linguistically isolated households"
         ],
@@ -5746,10 +5694,6 @@
             "Foreign born; Born in Oceania!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children under 18 years!!With related children under 5 years only"
         ],
         "Foreign born; Born in Oceania!!Estimate!!Occupied housing units": [
-            "Foreign born; Born in Oceania!!Estimate!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Oceania!!Margin of Error!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Oceania!!Estimate!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
-            "Foreign born; Born in Oceania!!Margin of Error!!Occupied housing units!!HOUSING TENURE!!Renter-occupied housing units",
             "Foreign born; Born in Oceania!!Estimate!!ROOMS!!1 room",
             "Foreign born; Born in Oceania!!Margin of Error!!ROOMS!!1 room",
             "Foreign born; Born in Oceania!!Estimate!!ROOMS!!2 or 3 rooms",
@@ -5774,10 +5718,6 @@
             "Foreign born; Born in Oceania!!Estimate!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English \"very well\"",
             "Foreign born; Born in Oceania!!Margin of Error!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English very well\"\"",
             "Foreign born; Born in Oceania!!Margin of Error!!SELECTED CHARACTERISTICS!!Households with no one age 14 and over who speaks English only or speaks English \"very well\"",
-            "Foreign born; Born in Oceania!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Oceania!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
-            "Foreign born; Born in Oceania!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
-            "Foreign born; Born in Oceania!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
             "Foreign born; Born in Oceania!!Estimate!!SELECTED CHARACTERISTICS!!Linguistically isolated households",
             "Foreign born; Born in Oceania!!Margin of Error!!SELECTED CHARACTERISTICS!!Linguistically isolated households"
         ],
