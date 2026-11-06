@@ -1,6 +1,13 @@
 # Utility libraries for importing data into Data Commons
 
-[TOC]
+## Table of contents
+
+- [Python](#python)
+  - [Util libraries](#util-libraries)
+  - [Testing libraries](#testing-libraries)
+- [Go](#go)
+  - [Util libraries](#util-libraries-1)
+  - [Testing libraries](#testing-libraries-1)
 
 This folder hosts utility libraries helpful for creating Meta Content Framework
 (MCF) files that the Data Commons graph can ingest. While you are free to use
@@ -16,6 +23,16 @@ To date, all our util libraries cater to writing MCF.
 
 -   `alpha2_to_dcid`: This library contains mappings from 2-character country
     and US state codes to their unique Data Commons IDs.
+
+-   `file_dict_io`: Reads and writes structured records (CSV, TSV, JSON,
+    JSON Lines, MCF, Avro, and sharded file collections) as Python dictionaries,
+    with seekable byte-range chunking for parallel workers. See the
+    [`file_dict_io` documentation](file_dict_io/README.md).
+
+-   `file_sharder`: Partitions large tabular and graph datasets into sharded
+    output files by key hash, row count, or fixed shard count with
+    multi-threaded chunk processing, deduplication, and sampling. See the
+    [File Sharder documentation](doc/file_sharder.md).
 
 -   `latlng_recon_geojson`: This library helps map lat/lng coordinate pairs to
     US States, Countries and Continents.  It does so by using the GeoJSONs from
@@ -53,6 +70,11 @@ To date, all our util libraries cater to writing MCF.
     graph remain under 100 MB, so we've provided a class that will abstract
     writing to sharded files. See the file docstring for more detail.
 
+-   `dcid_generator`: Generates deterministic Data Commons IDs (`dcid`) for
+    `StatVarObservation` (`dc/o/<id>` via 64-bit FarmHash),
+    `StatisticalVariable` (`dc/<id>`), `Place`, and general MCF graph nodes
+    (matching `DcidGenerator.java` in `datacommonsorg/import`).
+
 -   `statvar_dcid_generator`: This library helps to generate the dcid for
     statistical variables.
 
@@ -62,6 +84,10 @@ To date, all our util libraries cater to writing MCF.
 
 `python3 -m unittest mcf_template_filler_test`
 
+#### Testing `dcid_generator`
+
+`python3 -m unittest dcid_generator_test.py`
+
 #### Testing `statvar_dcid_generator`
 
 `python3 -m unittest statvar_dcid_generator_test.py`
@@ -69,6 +95,14 @@ To date, all our util libraries cater to writing MCF.
 #### Testing `sharding_writer`
 
 Test coming soon.
+
+#### Testing `file_sharder`
+
+`python3 -m unittest file_sharder_test.py`
+
+#### Testing `file_dict_io`
+
+`python3 -m unittest discover -s file_dict_io -p "*_test.py"`
 
 ## Go
 

@@ -37,7 +37,9 @@ format, you could use:
 
 import ast
 from datetime import datetime
+import os
 import re
+import sys
 import types
 from types import MappingProxyType
 
@@ -45,6 +47,18 @@ from absl import logging
 import dateutil
 from dateutil import parser
 from dateutil.relativedelta import relativedelta
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_UTIL_DIR = os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util')
+if _UTIL_DIR not in sys.path:
+    sys.path.append(_UTIL_DIR)
+
+from dcid_generator import (
+    generate_node_dcid,
+    generate_place_dcid,
+    generate_statvar_obs_dcid,
+)
+from statvar_dcid_generator import get_statvar_dcid
 
 # String utility functions
 
@@ -163,6 +177,12 @@ SAFE_CALLABLES = MappingProxyType({
     're.split': re.split,
     're.findall': re.findall,
     'datetime.strptime': datetime.strptime,
+
+    # DCID generation functions:
+    'generate_node_dcid': generate_node_dcid,
+    'generate_statvar_obs_dcid': generate_statvar_obs_dcid,
+    'generate_place_dcid': generate_place_dcid,
+    'get_statvar_dcid': get_statvar_dcid,
 })
 
 # Safe method names for string and container manipulation (immutable)
@@ -239,6 +259,12 @@ EVAL_GLOBALS = MappingProxyType({
     'str_to_camel_case': str_to_camel_case,
     're': SAFE_MODULES['re'],
     're_sub': re.sub,
+
+    # DCID generation functions:
+    'generate_node_dcid': generate_node_dcid,
+    'generate_statvar_obs_dcid': generate_statvar_obs_dcid,
+    'generate_place_dcid': generate_place_dcid,
+    'get_statvar_dcid': get_statvar_dcid,
 })
 
 
