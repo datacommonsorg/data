@@ -19,6 +19,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 import openpyxl
 
@@ -33,6 +34,33 @@ from statvar_imports.australia_statistics import process
 for _flag_name in ('input_data', 'output_csv'):
     if _flag_name in process._FLAGS:
         delattr(process._FLAGS, _flag_name)
+
+
+class _FakeXlrdSheet:
+    """Minimal in-memory xlrd Sheet double for unit testing .xls parsers."""
+
+    def __init__(self, grid: list[list[object]]):
+        self._grid = grid
+        self.nrows = len(grid)
+        self.ncols = max((len(r) for r in grid), default=0)
+
+    def cell_value(self, rowx: int, colx: int) -> object:
+        if rowx < len(self._grid) and colx < len(self._grid[rowx]):
+            return self._grid[rowx][colx]
+        return ''
+
+
+class _FakeXlrdBook:
+    """Minimal in-memory xlrd Book double for unit testing .xls parsers."""
+
+    def __init__(self, sheets: dict[str, list[list[object]]]):
+        self._sheets = {k: _FakeXlrdSheet(v) for k, v in sheets.items()}
+
+    def sheet_names(self) -> list[str]:
+        return list(self._sheets.keys())
+
+    def sheet_by_name(self, name: str) -> _FakeXlrdSheet:
+        return self._sheets[name]
 
 
 class ProcessTest(unittest.TestCase):
@@ -113,6 +141,144 @@ class ProcessTest(unittest.TestCase):
             },
         )
 
+    def test_parse_census_2021_population_xlsx(self):
+        wb = openpyxl.Workbook()
+        ws1 = wb.active
+        ws1.title = 'Table 1'
+        ws1.cell(1, 1, 'New South Wales')
+        ws1.cell(1, 2, 3984166)
+        ws1.cell(1, 3, 4087992)
+        ws1.cell(1, 4, 8072163)
+
+        ws3 = wb.create_sheet('Table 3')
+        ws3.cell(1, 1, '0-4 years')
+        ws3.cell(1, 2, 743898)
+        ws3.cell(1, 3, 702777)
+        ws3.cell(1, 4, 1446675)
+
+        buf = io.BytesIO()
+        wb.save(buf)
+        gender_rows, agegrp_rows = process.parse_census_2021_population_xlsx(
+            buf.getvalue())
+        self.assertEqual(len(gender_rows), 3)
+        self.assertEqual(
+            gender_rows[0],
+            {
+                'observationDate': '2021',
+                'indicatorCd': 'POP_Males_Total',
+                'regionCd': 'New South Wales',
+                'value': '3984166',
+            },
+        )
+        self.assertEqual(len(agegrp_rows), 3)
+        self.assertEqual(
+            agegrp_rows[2],
+            {
+                'observationDate': '2021',
+                'indicatorCd': 'POP_Persons_0-4 years',
+                'regionCd': 'AUS',
+                'value': '1446675',
+            },
+        )
+
+    def test_parse_historical_population_xls(self):
+        sheet_grid = [
+            [],
+            [],
+            [],
+            [],
+            ['Age group', 1901, 2016],
+            ['Males', '', ''],
+            ['5-9', 230000, 780000],
+            ['Total', 1977928, 11950000],
+        ]
+        sheets = {
+            'Table 2.1': sheet_grid,
+            'Table 2.4': sheet_grid,
+            'Table 2.6': sheet_grid,
+            'Table 2.8': sheet_grid,
+            'Table 2.10': sheet_grid,
+            'Table 2.12': sheet_grid,
+            'Table 2.15': sheet_grid,
+            'Table 2.16': sheet_grid,
+            'Table 2.17': sheet_grid,
+        }
+        with mock.patch.object(
+                process.xlrd,
+                'open_workbook',
+                return_value=_FakeXlrdBook(sheets),
+        ):
+            aus_1901_1985, aus_1986_2016, states_rows = (
+                process.parse_historical_population_xls(b'fake_xls'))
+
+        self.assertEqual(len(aus_1901_1985), 2)
+        self.assertEqual(
+            aus_1901_1985[0],
+            {
+                'observationDate': '1901',
+                'indicatorCd': 'POP_Males_5-9',
+                'regionCd': 'AUS',
+                'value': '230000',
+            },
+        )
+        self.assertEqual(len(aus_1986_2016), 2)
+        self.assertEqual(
+            aus_1986_2016[0]['observationDate'],
+            '2016',
+        )
+        # 8 states (including NT in Table 2.16 and ACT in Table 2.17) * 4 values = 32
+        self.assertEqual(len(states_rows), 32)
+        regions = {r['regionCd'] for r in states_rows}
+        self.assertIn('NT', regions)
+        self.assertIn('ACT', regions)
+
+    def test_parse_health_2021_xlsx(self):
+        wb = openpyxl.Workbook()
+        ws1 = wb.active
+        ws1.title = 'Table 1'
+        ws1.cell(11, 2, '0-4')
+        ws1.cell(12, 2, 'years')
+        ws1.cell(11, 3, 'Total')
+        ws1.cell(12, 3, '')
+        ws1.cell(13, 2, 'MALES')
+        ws1.cell(14, 1, 'Asthma')
+        ws1.cell(14, 2, 41200)
+        ws1.cell(14, 3, 950000)
+        ws1.cell(15, 2, 'PERSONS')
+        ws1.cell(16, 1, 'Asthma')
+        ws1.cell(16, 2, 75000)
+        ws1.cell(16, 3, 2068000)  # Skipped in Table 1 since Table 3 has Total
+
+        ws3 = wb.create_sheet('Table 3')
+        ws3.cell(13, 1, 'Asthma')
+        for col_idx in range(2, 11):
+            ws3.cell(13, col_idx, 100000 * col_idx)
+
+        buf = io.BytesIO()
+        wb.save(buf)
+        national_rows, state_rows = process.parse_health_2021_xlsx(
+            buf.getvalue())
+        self.assertEqual(len(national_rows), 3)
+        self.assertEqual(
+            national_rows[0],
+            {
+                'observationDate': '2021',
+                'indicatorCd': 'HEALTH_MALES_0-4 years_Asthma',
+                'regionCd': 'AUS',
+                'value': '41200',
+            },
+        )
+        self.assertEqual(len(state_rows), 9)
+        self.assertEqual(
+            state_rows[0],
+            {
+                'observationDate': '2021',
+                'indicatorCd': 'HEALTH_Total_Asthma',
+                'regionCd': 'NSW',
+                'value': '200000',
+            },
+        )
+
     def test_parse_household_income_xlsx(self):
         wb = openpyxl.Workbook()
         ws = wb.active
@@ -153,6 +319,117 @@ class ProcessTest(unittest.TestCase):
                 'value': '959',
             },
         )
+
+    def test_parse_historical_life_expectancy_xls(self):
+        table_6_1 = [
+            [],
+            [],
+            [],
+            [],
+            [''] * 10 + ['1993-1995', '2015-2017'],
+            ['Males'] + [''] * 11,
+            ['NSW'] + [''] * 9 + [75.0, 80.5],
+        ]
+        table_6_2 = [
+            [],
+            [],
+            [],
+            [],
+            ['Age', '1881-1890', '2015-2017'],
+            [],
+            [1, 50.12, 79.85],
+        ]
+        table_6_6 = [
+            [],
+            [],
+            [],
+            [],
+            ['Age', '1881-1890', '2015-2017'],
+            [],
+            [1, 53.45, 84.1],
+        ]
+        sheets = {
+            'Table 6.1': table_6_1,
+            'Table 6.2': table_6_2,
+            'Table 6.6': table_6_6,
+        }
+        with mock.patch.object(
+                process.xlrd,
+                'open_workbook',
+                return_value=_FakeXlrdBook(sheets),
+        ):
+            age_rows, state_rows = process.parse_historical_life_expectancy_xls(
+                b'fake_xls')
+
+        self.assertEqual(len(state_rows), 1)
+        self.assertEqual(
+            state_rows[0],
+            {
+                'observationDate': '2017',
+                'indicatorCd': 'LE_Males_0',
+                'regionCd': 'NSW',
+                'value': '80.5',
+            },
+        )
+        self.assertEqual(len(age_rows), 4)
+        self.assertEqual(
+            age_rows[0],
+            {
+                'observationDate': '1890',
+                'indicatorCd': 'LE_Males_1',
+                'regionCd': 'AUS',
+                'value': '50.12',
+            },
+        )
+
+    def test_parse_recent_life_expectancy_workbook_xlsx_and_xls(self):
+        wb = openpyxl.Workbook()
+        wb.remove(wb.active)
+        for idx in range(1, 10):
+            ws = wb.create_sheet(f'Table_1.{idx}')
+            ws.cell(6, 1, 0)
+            ws.cell(6, 5, 81.2)
+            ws.cell(6, 9, 85.3)
+            ws.cell(7, 1, 1)
+            ws.cell(7, 5, 80.4)
+            ws.cell(7, 9, 84.5)
+        buf = io.BytesIO()
+        wb.save(buf)
+
+        age_rows, state_rows = process.parse_recent_life_expectancy_workbook(
+            buf.getvalue(), 'xlsx', '2024')
+        self.assertEqual(len(state_rows), 18)
+        self.assertEqual(len(age_rows), 2)
+        self.assertEqual(
+            age_rows[0],
+            {
+                'observationDate': '2024',
+                'indicatorCd': 'LE_Males_1',
+                'regionCd': 'AUS',
+                'value': '80.4',
+            },
+        )
+
+        xls_grid = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [0, '', '', '', 81.2, '', '', '', 85.3],
+            [1, '', '', '', 80.4, '', '', '', 84.5],
+        ]
+        xls_sheets = {f'Table_1.{idx}': xls_grid for idx in range(1, 10)}
+        with mock.patch.object(
+                process.xlrd,
+                'open_workbook',
+                return_value=_FakeXlrdBook(xls_sheets),
+        ):
+            age_xls, state_xls = process.parse_recent_life_expectancy_workbook(
+                b'fake_xls', 'xls', '2018')
+        self.assertEqual(len(state_xls), 18)
+        self.assertEqual(len(age_xls), 2)
 
     def test_expand_input_files_sorts_largest_first_and_skips_empty(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
