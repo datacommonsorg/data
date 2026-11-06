@@ -277,14 +277,15 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
-
-
     def _create_test_csv(self, rows):
         tmp = tempfile.NamedTemporaryFile("w", delete=False, suffix=".csv")
         writer = csv.writer(tmp)
         writer.writerow(["Title", "", "", "", "", "", "", "", "", ""])
         writer.writerow(["Sub", "", "", "", "", "", "", "", "", ""])
-        writer.writerow(["Header", "Total", "Male", "Female", "Urban Total", "Urban Male", "Urban Female", "Rural Total", "Rural Male", "Rural Female"])
+        writer.writerow([
+            "Header", "Total", "Male", "Female", "Urban Total", "Urban Male",
+            "Urban Female", "Rural Total", "Rural Male", "Rural Female"
+        ])
         for r in rows:
             writer.writerow(r)
         tmp.close()
@@ -310,7 +311,8 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         try:
             with self.assertRaises(ValueError) as ctx:
                 _validate_horizontal_and_vertical_sums(csv_path)
-            self.assertIn("Total (100) != Male (60) + Female (30)", str(ctx.exception))
+            self.assertIn("Total (100) != Male (60) + Female (30)",
+                          str(ctx.exception))
         finally:
             os.remove(csv_path)
 
@@ -324,7 +326,8 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         try:
             with self.assertRaises(ValueError) as ctx:
                 _validate_horizontal_and_vertical_sums(csv_path)
-            self.assertIn("District header (100) != sum of 2 age cohorts (90)", str(ctx.exception))
+            self.assertIn("District header (100) != sum of 2 age cohorts (90)",
+                          str(ctx.exception))
         finally:
             os.remove(csv_path)
 
@@ -339,11 +342,14 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         finally:
             os.remove(csv_path)
 
-    @mock.patch("download_current_year_data.list_gcs_files", return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"])
+    @mock.patch("download_current_year_data.list_gcs_files",
+                return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"])
     @mock.patch("download_current_year_data._create_retry_session")
-    def test_check_and_download_nsi_network_exception_fallback(self, mock_create_session, mock_list_gcs):
+    def test_check_and_download_nsi_network_exception_fallback(
+            self, mock_create_session, mock_list_gcs):
         mock_session = mock.MagicMock()
-        mock_session.get.side_effect = requests.RequestException("Connection timeout")
+        mock_session.get.side_effect = requests.RequestException(
+            "Connection timeout")
         mock_create_session.return_value = mock_session
 
         tmp_dir = tempfile.mkdtemp(dir="/tmp")
@@ -353,14 +359,17 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                 gcs_dir="gs://mock-bucket/input_files",
                 allow_staged_fallback=True,
             )
-            mock_list_gcs.assert_called_once_with("gs://mock-bucket/input_files")
+            mock_list_gcs.assert_called_once_with(
+                "gs://mock-bucket/input_files")
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
     @mock.patch("download_current_year_data._create_retry_session")
-    def test_check_and_download_nsi_network_exception_fails_without_fallback(self, mock_create_session):
+    def test_check_and_download_nsi_network_exception_fails_without_fallback(
+            self, mock_create_session):
         mock_session = mock.MagicMock()
-        mock_session.get.side_effect = requests.RequestException("Connection timeout")
+        mock_session.get.side_effect = requests.RequestException(
+            "Connection timeout")
         mock_create_session.return_value = mock_session
 
         tmp_dir = tempfile.mkdtemp(dir="/tmp")
@@ -375,9 +384,11 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
-    @mock.patch("download_current_year_data.list_gcs_files", return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"])
+    @mock.patch("download_current_year_data.list_gcs_files",
+                return_value=["BulgariaNSI_Demographics_Year_input_2025.csv"])
     @mock.patch("download_current_year_data._create_retry_session")
-    def test_check_and_download_nsi_http_503_fallback(self, mock_create_session, mock_list_gcs):
+    def test_check_and_download_nsi_http_503_fallback(self, mock_create_session,
+                                                      mock_list_gcs):
         mock_resp = mock.MagicMock()
         mock_resp.status_code = 503
         mock_session = mock.MagicMock()
@@ -391,12 +402,14 @@ class DownloadCurrentYearDataTest(unittest.TestCase):
                 gcs_dir="gs://mock-bucket/input_files",
                 allow_staged_fallback=True,
             )
-            mock_list_gcs.assert_called_once_with("gs://mock-bucket/input_files")
+            mock_list_gcs.assert_called_once_with(
+                "gs://mock-bucket/input_files")
         finally:
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
     @mock.patch("download_current_year_data._create_retry_session")
-    def test_check_and_download_nsi_http_503_fails_without_fallback(self, mock_create_session):
+    def test_check_and_download_nsi_http_503_fails_without_fallback(
+            self, mock_create_session):
         mock_resp = mock.MagicMock()
         mock_resp.status_code = 503
         mock_session = mock.MagicMock()
