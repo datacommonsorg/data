@@ -158,6 +158,9 @@ you import modules and run tests, as below.
 *   Code must be formatted according to the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     according to the [yapf formatter](https://github.com/google/yapf).
+*   Code must pass the [Ruff](https://docs.astral.sh/ruff/) lint checks
+    configured in [ruff.toml](ruff.toml). These are enforced in CI by
+    `./run_tests.sh -l`.
 *   Code must not generate lint errors or warnings according to
     [pylint](https://www.pylint.org/) configured for the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
@@ -177,16 +180,18 @@ Consider automating coding to satisfy some of these requirements.
 
 To run the tools via a command line (both installed after setup steps above):
 
+*   [ruff](https://docs.astral.sh/ruff/linter/), e.g.,
+    `ruff check scripts/my_import/`. Add `--fix` to apply safe fixes.
 *   [pylint](http://pylint.pycqa.org/en/latest/user_guide/run.html).
 *   [yapf](https://github.com/google/yapf#id2), execute using
     `--style google`, e.g.,
 
 ```shell
-# Update (--in-place) all files
+# Apply safe ruff fixes and update (--in-place) all files with yapf
 ./run_tests.sh -f
 
-# Produce differences between the current code and reformatted code.  Empty
-# output indicates correctly formatted code.
+# Run ruff, and produce differences between the current code and reformatted
+# code. Empty output indicates correctly formatted code.
 ./run_tests.sh -l
 ```
 
@@ -231,6 +236,15 @@ To disable yapf for some lines,
 # yapf: disable
 ... code ...
 # yapf: enable
+```
+
+To disable a ruff check for a particular line (use sparingly, for false
+positives), add a
+[noqa comment](https://docs.astral.sh/ruff/linter/#error-suppression) with the
+rule code:
+
+```
+x = compute()  # noqa: F841
 ```
 
 #### Go

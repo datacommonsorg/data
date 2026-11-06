@@ -60,7 +60,7 @@ def main(_):
             keys = response_data['Data']
             try:
                 if not isinstance(keys, list):
-                    logging.fatal(f"Value for key 'Data' is not a list.")
+                    logging.fatal("Value for key 'Data' is not a list.")
             except KeyError as e:
                 logging.fatal(
                     f"Missing expected key '{e}' in the API response.")

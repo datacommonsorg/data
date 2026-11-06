@@ -19,10 +19,16 @@ There are two mcf files generated
 """
 
 import os
+import sys
 import logging
-from constants import OUTPUT_DIR, MCF_SRH, MCF_SH, MCF_RH
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.pep_by_srh.constants import OUTPUT_DIR, MCF_SRH, MCF_SH, MCF_RH
+
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
 
 

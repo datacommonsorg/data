@@ -110,7 +110,7 @@ class WaterQualityBase():
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
             'indiaWris/',
             str(x['DistrictCode']), '_', ''.join(
-                re.split('\W+', x['Station Name']))
+                re.split(r'\W+', x['Station Name']))
         ]),
                                         axis=1)
 
