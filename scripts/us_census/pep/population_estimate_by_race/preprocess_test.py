@@ -17,6 +17,7 @@ Script to automate the testing for USA Population by Race preprocess script.
 
 import os
 import sys
+import tempfile
 import unittest
 import shutil
 from os import path
@@ -32,24 +33,27 @@ for path_entry in (_SCRIPTS_DIR, module_dir):
 from us_census.pep.population_estimate_by_race.preprocess import CensusUSAPopulationByRace
 # pylint: enable=wrong-import-position
 TEST_DATA_FOLDER = os.path.join(module_dir, "test_data")
-OP_DATA_FOLDER = os.path.join(module_dir, "test_output_data")
 
 
 class TestPreprocess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing
+    TestPreprocess is inheriting unittest class
+    properties which further required for unit testing
     """
 
-    cleaned_csv_file_path = OP_DATA_FOLDER
-    mcf_file_path = OP_DATA_FOLDER
-    tmcf_file_path = OP_DATA_FOLDER
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp_dir_obj = tempfile.TemporaryDirectory()
+        cls.cleaned_csv_file_path = cls.tmp_dir_obj.name
+        cls.mcf_file_path = cls.tmp_dir_obj.name
+        cls.tmcf_file_path = cls.tmp_dir_obj.name
 
-    ip_files = os.path.join(TEST_DATA_FOLDER, "test_files")
+        cls.ip_files = os.path.join(TEST_DATA_FOLDER, "test_files")
 
-    base = CensusUSAPopulationByRace(ip_files, cleaned_csv_file_path,
-                                     mcf_file_path, tmcf_file_path)
-    base.process()
+        base = CensusUSAPopulationByRace(cls.ip_files,
+                                         cls.cleaned_csv_file_path,
+                                         cls.mcf_file_path, cls.tmcf_file_path)
+        base.process()
 
     def test_mcf_tmcf_files(self):
         """
@@ -92,7 +96,7 @@ class TestPreprocess(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        shutil.rmtree(cls.cleaned_csv_file_path, ignore_errors=True)
+        cls.tmp_dir_obj.cleanup()
 
     def test_create_csv(self):
         """
@@ -142,23 +146,22 @@ class TestPreprocess(unittest.TestCase):
         self.assertFalse(_is_html_response('text/plain', b'1990  1  248709873'))
 
     def test_srh_txt_parser_with_bad_lines(self):
-        """Tests that multi-whitespace table parsing with extra fields in footnotes does not raise ParserError."""
+        """Tests that multi-whitespace table parsing with extra fields in footnotes skips notes cleanly."""
         import io
         import pandas as pd
         cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         sample_srh = (
-            "01001   100  200  300  400  500  600  700  800  900  1000\n"
-            "01003   110  210  310  410  510  610  710  810  910  1010\n"
+            "ALABAMA   100  200  300  400  500  600  700  800  900  1000\n"
+            "ALASKA    110  210  310  410  510  610  710  810  910  1010\n"
             "Note: This file contains estimates produced by Population Division with 17 extra fields saw here\n"
         )
         df = pd.read_table(io.StringIO(sample_srh),
-                           index_col=False,
                            sep=r'\s+',
                            engine='python',
                            names=cols,
-                           on_bad_lines=lambda line: line[:len(cols)])
-        self.assertEqual(len(df), 3)
-        self.assertEqual(df.iloc[0]['Area'], '01001')
+                           on_bad_lines='skip')
+        self.assertEqual(len(df), 2)
+        self.assertEqual(df.iloc[0]['Area'], 'ALABAMA')
 
 
 if __name__ == "__main__":

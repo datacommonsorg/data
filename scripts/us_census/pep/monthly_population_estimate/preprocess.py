@@ -74,7 +74,6 @@ def _create_retry_session(retries=5, backoff_factor=2):
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504, 520],
         allowed_methods=['HEAD', 'GET'],
-        raise_on_status=False,
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session.mount('https://', adapter)
@@ -115,6 +114,10 @@ class TransientDownloadError(Exception):
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
+    if response.status_code in (408, 429, 500, 502, 503, 504, 520):
+        raise TransientDownloadError(
+            f'Server returned transient status code {response.status_code} for URL: {url}'
+        )
     content_type = response.headers.get('Content-Type', '').lower()
     if (response.status_code == 200 and 'html' in content_type and
             not url.lower().endswith(('.html', '.htm'))):
@@ -587,7 +590,9 @@ def add_future_year_urls():
                 if check_url.status_code == 200:
                     found_url = url_to_check
                     break
-            except Exception as e:
+            except (TransientDownloadError,
+                    requests.exceptions.RequestException, OSError,
+                    ValueError) as e:
                 logging.debug(f"URL is not accessible {url_to_check}: {e}")
         if found_url:
             _FILES_TO_DOWNLOAD.append({"download_path": found_url})
@@ -762,17 +767,44 @@ def download_files():
                             "Civilian Population",
                             "Civilian NonInstitutionalized Population"
                         ]
-                        df = pd.read_table(
-                            raw_file_dest,
-                            index_col=False,
-                            sep=r'\s+',
-                            engine='python',
-                            skiprows=17,
-                            names=cols,
-                            on_bad_lines=lambda line: line[:len(cols)])
-                        # Skipping 17 rows as the initial 17 rows contains the information about
-                        # the file being used, heading files spread accross multiple lines and
-                        # other irrelevant information like source/contact details.
+                        months = {
+                            'january', 'february', 'march', 'april', 'may',
+                            'june', 'july', 'august', 'september', 'october',
+                            'november', 'december'
+                        }
+                        rows = []
+                        with open(raw_file_dest, 'r',
+                                  encoding='latin1') as f_in:
+                            for line in f_in:
+                                line_clean = line.strip()
+                                if not line_clean:
+                                    continue
+                                tokens = line_clean.split()
+                                if re.match(r'^\d{4}$', tokens[0]):
+                                    rows.append([
+                                        tokens[0], np.nan, np.nan, np.nan,
+                                        np.nan, np.nan
+                                    ])
+                                    continue
+                                if (tokens[0].lower() in months and
+                                        len(tokens) >= 4 and
+                                        tokens[1].isdigit()):
+                                    data_tokens = tokens[2:]
+                                    if data_tokens[0].lower() == '(census)':
+                                        data_tokens = data_tokens[1:]
+                                    if all(
+                                            re.match(r'^[0-9,]+$', t)
+                                            for t in data_tokens):
+                                        row = [tokens[0], tokens[1]]
+                                        for i in range(4):
+                                            if i < len(data_tokens):
+                                                row.append(
+                                                    data_tokens[i].replace(
+                                                        ',', ''))
+                                            else:
+                                                row.append(np.nan)
+                                        rows.append(row)
+                        df = pd.DataFrame(rows, columns=cols)
                         df = _clean_txt_file(df)
                         # Multiplying the data with scaling factor 1000.
                         for col in df.columns:
@@ -787,7 +819,9 @@ def download_files():
                     is_file_downloaded = True
                     logging.info(f"Downloaded and processed file : {url}")
 
-                except Exception as e:
+                except (TransientDownloadError,
+                        requests.exceptions.RequestException, OSError,
+                        ValueError) as e:
                     logging.error(f"Retry file download {url} - {e}")
                     time.sleep(5)
                     retry_number += 1

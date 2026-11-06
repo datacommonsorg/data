@@ -84,7 +84,6 @@ def _create_retry_session(retries=5, backoff_factor=2):
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504, 520],
         allowed_methods=['HEAD', 'GET'],
-        raise_on_status=False,
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session.mount('https://', adapter)
@@ -125,6 +124,10 @@ class TransientDownloadError(Exception):
 def _head_with_html_retry(session, url, timeout=30):
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
     response = session.head(url, timeout=timeout, allow_redirects=True)
+    if response.status_code in (408, 429, 500, 502, 503, 504, 520):
+        raise TransientDownloadError(
+            f'Server returned transient status code {response.status_code} for URL: {url}'
+        )
     content_type = response.headers.get('Content-Type', '').lower()
     if (response.status_code == 200 and 'html' in content_type and
             not url.lower().endswith(('.html', '.htm'))):
@@ -1032,7 +1035,7 @@ class CensusUSAPopulationByRace:
                                    sep=r'\s+',
                                    engine='python',
                                    names=cols,
-                                   on_bad_lines=lambda line: line[:len(cols)])
+                                   on_bad_lines='skip')
                 if "for" in file:
                     df = _clean_txt2_file(df, file)
         return df
@@ -1449,14 +1452,12 @@ def download_files():
                                       index=False)
                         else:
                             cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                            df = pd.read_table(
-                                StringIO(response.text),
-                                index_col=False,
-                                sep=r'\s+',
-                                engine='python',
-                                skiprows=14,
-                                names=cols,
-                                on_bad_lines=lambda line: line[:len(cols)])
+                            df = pd.read_table(StringIO(response.text),
+                                               sep=r'\s+',
+                                               engine='python',
+                                               skiprows=14,
+                                               names=cols,
+                                               on_bad_lines='skip')
                             file_name = file_name.replace(".txt", ".csv")
                             df.to_csv(os.path.join(download_local_path,
                                                    file_name),

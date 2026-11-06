@@ -119,7 +119,8 @@ def _load_data_df(path: str,
                   file_format: str,
                   header: str = None,
                   skip_rows: int = None,
-                  encoding: str = None) -> pd.DataFrame:
+                  encoding: str = None,
+                  names: list = None) -> pd.DataFrame:
     """
     Returns the DataFrame using input path and config.
     Args:
@@ -128,22 +129,21 @@ def _load_data_df(path: str,
         header (str, optional): Input File Header Index. Defaults to None.
         skip_rows (int, optional): Skip Rows Value. Defaults to None.
         encoding (str, optional): Input File Encoding. Defaults to None.
+        names (list, optional): Column names or range. Defaults to None.
 
     Returns:
         data_df (pd.DataFrame): Dataframe of input file
     """
     data_df = None
     if file_format.lower().endswith("csv"):
-        data_df = pd.read_csv(path,
-                              header=header,
-                              encoding=encoding,
-                              on_bad_lines='skip')
+        data_df = pd.read_csv(path, header=header, encoding=encoding)
     elif file_format.lower() == "txt":
         data_df = pd.read_table(path,
                                 index_col=False,
                                 sep=r'\s+',
                                 engine='python',
                                 header=header,
+                                names=names,
                                 skiprows=skip_rows,
                                 on_bad_lines='skip')
     elif file_format.lower() in ["xls", "xlsx"]:
@@ -654,7 +654,7 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
         "1978", "1979", "extra_data_col_1", "extra_data_col_2"
     ]
     if "e8089co.txt" in file_path:
-        skip_rows = 0
+        skip_rows = 23
         first_data_df_cols = [
             "Fips_Code", "Location", "extra_Location", "1980", "1981", "1982",
             "1983", "1984", "extra_data_col_1", "extra_data_col_2"
@@ -663,7 +663,7 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
             "Fips_Code", "Location", "extra_Location", "1985", "1986", "1987",
             "1988", "1989", "extra_data_col_1", "extra_data_col_2"
         ]
-    data_df = _load_data_df(file_path, "txt", None, skip_rows)
+    data_df = _load_data_df(file_path, "txt", None, skip_rows, names=range(10))
     data_df = clean_1970_1989_county_txt(data_df, first_data_df_cols,
                                          second_data_df_cols)
     data_df = _unpivot_data_df(data_df, "Location", data_df.columns[1:])

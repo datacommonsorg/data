@@ -338,8 +338,8 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
             any('NST-EST2023-POPCHG2020_2023.csv' in url
                 for url in download_urls))
 
-    def test_load_data_df_with_bad_lines(self):
-        """Tests that _load_data_df skips bad lines instead of raising ParserError."""
+    def test_load_data_df_raises_on_bad_csv_lines(self):
+        """Tests that _load_data_df raises ParserError on malformed CSV instead of silently skipping."""
         from us_census.pep.annual_population.preprocess import _load_data_df
         with tempfile.NamedTemporaryFile(mode='w', suffix='.csv',
                                          delete=False) as f:
@@ -349,8 +349,8 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
             f.write("4,5,6\n")
             tmp_path = f.name
         try:
-            df = _load_data_df(tmp_path, "csv", header=0)
-            self.assertEqual(len(df), 2)
+            with self.assertRaises(pd.errors.ParserError):
+                _load_data_df(tmp_path, "csv", header=0)
         finally:
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)

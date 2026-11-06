@@ -16,6 +16,7 @@ Script to automate the testing for USA Population preprocess script.
 """
 import os
 import sys
+import tempfile
 import unittest
 from os import path
 from absl import flags
@@ -31,28 +32,42 @@ for path_entry in (_SCRIPTS_DIR, _MODULE_DIR):
 from us_census.pep.monthly_population_estimate.preprocess import CensusUSACountryPopulation
 # pylint: enable=wrong-import-position
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "test_data", "input_files")
-test_output_folder = os.path.join(_MODULE_DIR, "test_data", "output_data")
 expected_op_folder = os.path.join(_MODULE_DIR, "test_data", "expected_output")
 
 
 class TestPreprocess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing
+    TestPreprocess is inheriting unittest class
+    properties which further required for unit testing
     """
 
-    cleaned_csv_file_path = os.path.join(test_output_folder, "data.csv")
-    mcf_file_path = os.path.join(test_output_folder, "test_census.mcf")
-    tmcf_file_path = os.path.join(test_output_folder, "test_census.tmcf")
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp_dir_obj = tempfile.TemporaryDirectory()
+        cls.cleaned_csv_file_path = os.path.join(cls.tmp_dir_obj.name,
+                                                 "data.csv")
+        cls.mcf_file_path = os.path.join(cls.tmp_dir_obj.name,
+                                         "test_census.mcf")
+        cls.tmcf_file_path = os.path.join(cls.tmp_dir_obj.name,
+                                          "test_census.tmcf")
 
-    base = CensusUSACountryPopulation(_INPUT_FILE_PATH, cleaned_csv_file_path,
-                                      mcf_file_path, tmcf_file_path)
-    base.process()
+        base = CensusUSACountryPopulation(_INPUT_FILE_PATH,
+                                          cls.cleaned_csv_file_path,
+                                          cls.mcf_file_path, cls.tmcf_file_path)
+        base.process()
+
+        with open(cls.mcf_file_path, encoding="UTF-8") as mcf_file:
+            cls.mcf_data = mcf_file.read()
+
+        with open(cls.tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            cls.tmcf_data = tmcf_file.read()
+
+        with open(cls.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            cls.csv_data = csv_file.read()
 
     @classmethod
     def tearDownClass(cls):
-        import shutil
-        shutil.rmtree(test_output_folder, ignore_errors=True)
+        cls.tmp_dir_obj.cleanup()
 
     def test_mcf_tmcf_files(self):
         """
@@ -73,19 +88,8 @@ class TestPreprocess(unittest.TestCase):
                   encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
-        with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
-            mcf_data = mcf_file.read()
-
-        with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
-            tmcf_data = tmcf_file.read()
-
-        if path.exists(self.mcf_file_path):
-            os.remove(self.mcf_file_path)
-        if path.exists(self.tmcf_file_path):
-            os.remove(self.tmcf_file_path)
-
-        self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
+        self.assertEqual(expected_mcf_data.strip(), self.mcf_data.strip())
+        self.assertEqual(expected_tmcf_data.strip(), self.tmcf_data.strip())
 
     def test_create_csv(self):
         """
@@ -95,18 +99,11 @@ class TestPreprocess(unittest.TestCase):
         expected_csv_file_path = os.path.join(expected_op_folder,
                                               "USA_Population_Count.csv")
 
-        expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8-sig") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
-        with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-            csv_data = csv_file.read()
-
-        if path.exists(self.cleaned_csv_file_path):
-            os.remove(self.cleaned_csv_file_path)
-
-        self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+        self.assertEqual(expected_csv_data.strip(), self.csv_data.strip())
 
     def test_create_retry_session(self):
         """Tests that _create_retry_session sets user agent and retry adapter."""
@@ -129,28 +126,51 @@ class TestPreprocess(unittest.TestCase):
             _is_html_response('application/octet-stream', b'PK\x03\x04'))
         self.assertFalse(_is_html_response('text/plain', b'1990  1  248709873'))
 
-    def test_txt_parser_with_bad_lines(self):
-        """Tests that multi-whitespace table parsing with bad lines (e.g. notes) does not fail."""
-        import io
-        import pandas as pd
-        cols = [
-            "Year and Month", "Date", "Resident Population",
-            "Resident Population Plus Armed Forces Overseas",
-            "Civilian Population", "Civilian NonInstitutionalized Population"
-        ]
+    def test_txt_parser_filters_non_data_lines(self):
+        """Tests that text table parsing filters out notes/headers and keeps valid data rows."""
+        import re
         sample_txt = (
-            "1990  April 1   248709873 249622814 247051785 242952865\n"
-            "1990  May 1     248769873 249682814 247111785 243012865\n"
+            "Monthly Estimates of the United States Population: April 1, 1980 to\n"
+            "July 1, 1999, with Short-Term Projections to November 1, 2000.\n"
+            "1990\n"
+            "April 1   248,709 249,622 247,051 242,952\n"
+            "May 1     248,769 249,682 247,111 243,012\n"
+            "April 1 (census) 226,546 227,061 224,968\n"
+            "Note: The estimates base population of April 1, 1990 is 248,790,925.\n"
             "Source: U.S. Census Bureau, Population Division. Note with many extra words here\n"
         )
-        df = pd.read_table(io.StringIO(sample_txt),
-                           index_col=False,
-                           sep=r'\s+',
-                           engine='python',
-                           names=cols,
-                           on_bad_lines=lambda line: line[:len(cols)])
-        self.assertEqual(len(df), 3)
-        self.assertEqual(df.iloc[0]['Year and Month'], '1990')
+        months = {
+            'january', 'february', 'march', 'april', 'may', 'june', 'july',
+            'august', 'september', 'october', 'november', 'december'
+        }
+        rows = []
+        for line in sample_txt.splitlines():
+            line_clean = line.strip()
+            if not line_clean:
+                continue
+            tokens = line_clean.split()
+            if re.match(r'^\d{4}$', tokens[0]):
+                rows.append([tokens[0], None, None, None, None, None])
+                continue
+            if (tokens[0].lower() in months and len(tokens) >= 4 and
+                    tokens[1].isdigit()):
+                data_tokens = tokens[2:]
+                if data_tokens[0].lower() == '(census)':
+                    data_tokens = data_tokens[1:]
+                if all(re.match(r'^[0-9,]+$', t) for t in data_tokens):
+                    row = [tokens[0], tokens[1]]
+                    for i in range(4):
+                        if i < len(data_tokens):
+                            row.append(data_tokens[i].replace(',', ''))
+                        else:
+                            row.append(None)
+                    rows.append(row)
+        self.assertEqual(len(rows), 4)
+        self.assertEqual(rows[0][0], '1990')
+        self.assertEqual(rows[1][:2], ['April', '1'])
+        self.assertEqual(rows[2][:2], ['May', '1'])
+        self.assertEqual(rows[3][:2], ['April', '1'])
+        self.assertEqual(rows[3][2], '226546')
 
 
 if __name__ == "__main__":
