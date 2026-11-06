@@ -67,6 +67,18 @@ After downloading, you can process the generated CSV files using the `stat_var_p
   --output_counters=counters/subsectors_counters.csv
 ```
 
+**For country-level total greenhouse gas emissions (CO2e 100-year):**
+
+```bash
+../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/all_countries_co2e_100yr.csv \
+  --pv_map=climate_pvmap_greenhousegas.csv \
+  --config_file=common_metadata.csv \
+  --output_path=output/output_greenhousegas \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_counters=counters/greenhousegas_counters.csv
+```
+
 ## Project Structure
 
 *   `download_and_segregate_by_gas.py`: A single, integrated script that generates a country list, downloads zip files, and segregates data by gas type.

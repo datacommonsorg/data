@@ -3,7 +3,8 @@ observationAbout: C:sample_output->observationAbout
 observationDate: C:sample_output->observationDate
 variableMeasured: C:sample_output->variableMeasured
 value: C:sample_output->value
-unit: MetricTon
-observationPeriod: P1Y
+unit: C:sample_output->unit
+measurementMethod: C:sample_output->measurementMethod
+observationPeriod: C:sample_output->observationPeriod
 #Aggregate: sum
 typeOf: dcs:StatVarObservation

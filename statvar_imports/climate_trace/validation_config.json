@@ -3,11 +3,16 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Threshold set to 1.6% to allow for the intentional deletion of Annual_Emissions_*_Removals series renamed to Annual_Emissions_*_EmissionRemovals.",
+            "description": "Threshold set to 0.1% to guard against unexpected series deletions.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Ensures all StatVars share a uniform latest observation year.",
+            "validator": "MAX_DATE_CONSISTENT"
         },
         {
             "rule_id": "check_max_date_freshness",
