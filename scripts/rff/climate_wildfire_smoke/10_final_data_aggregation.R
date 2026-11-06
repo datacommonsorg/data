@@ -20,15 +20,15 @@ forest_burned_acres_state_decadal <- read_csv("forest_burned_acres/forest_burned
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(Date, 1, 4)))
 
 forest_burned_acres_west <- read_csv("forest_burned_acres/forest_burned_acres_west") %>% select(-1) %>%
-  rename(Date = year, forest_burned_acres = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/4')
+  rename(Date = year, forest_burned_acres = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:usc/WestRegion')
 
 forest_burned_acres_west_decadal <- read_csv("forest_burned_acres/forest_burned_acres_west_decadal") %>% select(-1)  %>%
   rename(forest_burned_acres = variable, Date = decade) %>% 
-  mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:geoId/4', Date = as.numeric(substr(Date, 1, 4)))
+  mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:usc/WestRegion', Date = as.numeric(substr(Date, 1, 4)))
 
-forest_burned_acres =  bind_rows(forest_burned_acres_county, forest_burned_acres_county_decadal, 
-                                  forest_burned_acres_state, forest_burned_acres_state_decadal,
-                                  forest_burned_acres_west, forest_burned_acres_west_decadal)
+forest_burned_acres =  bind_rows(forest_burned_acres_county, forest_burned_acres_county_decadal %>% filter(Date != '2014'), 
+                                  forest_burned_acres_state, forest_burned_acres_state_decadal %>% filter(Date != '2014'),
+                                  forest_burned_acres_west, forest_burned_acres_west_decadal %>% filter(Date != '2014'))
 
 pct_forest_burned_county <- read_csv("pct_forest_burned/pct_forest_burned_county") %>% select(-1) %>%
   rename(Date = year, Geoid = countyfips) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid), pct_forest_burned = pct_forest_burned * 100)
@@ -45,15 +45,15 @@ pct_forest_burned_state_decadal <- read_csv("pct_forest_burned/pct_forest_burned
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(Date, 1, 4)), pct_forest_burned = pct_forest_burned * 100)
 
 pct_forest_burned_west <- read_csv("pct_forest_burned/pct_forest_burned_west") %>% select(-1) %>%
-  rename(Date = year, pct_forest_burned = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/4', pct_forest_burned = pct_forest_burned * 100)
+  rename(Date = year, pct_forest_burned = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:usc/WestRegion', pct_forest_burned = pct_forest_burned * 100)
 
 pct_forest_burned_west_decadal <- read_csv("pct_forest_burned/pct_forest_burned_west_decadal") %>% select(-1)  %>%
   rename(pct_forest_burned = variable, Date = decade) %>% 
-  mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:geoId/4', Date = as.numeric(substr(Date, 1, 4)), pct_forest_burned = pct_forest_burned * 100)
+  mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:usc/WestRegion', Date = as.numeric(substr(Date, 1, 4)), pct_forest_burned = pct_forest_burned * 100)
 
-pct_forest_burned =  bind_rows(pct_forest_burned_county, pct_forest_burned_county_decadal, 
-                                 pct_forest_burned_state, pct_forest_burned_state_decadal,
-                                 pct_forest_burned_west, pct_forest_burned_west_decadal)
+pct_forest_burned =  bind_rows(pct_forest_burned_county, pct_forest_burned_county_decadal %>% filter(Date != '2014'), 
+                                 pct_forest_burned_state, pct_forest_burned_state_decadal %>% filter(Date != '2014'),
+                                 pct_forest_burned_west, pct_forest_burned_west_decadal %>% filter(Date != '2014'))
 
 pct_high_severity_county <- read_csv("pct_high_severity/pct_high_severity_county") %>% select(-1) %>%
   rename(Date = year, Geoid = countyfips) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid), pct_high_severity = pct_high_severity * 100)
@@ -62,18 +62,30 @@ pct_high_severity_state <- read_csv("pct_high_severity/pct_high_severity_state")
   rename(Date = year, Geoid = st_fips, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid), pct_high_severity = pct_high_severity * 100)
 
 pct_high_severity_west <- read_csv("pct_high_severity/pct_high_severity_west") %>% select(-1) %>%
-  rename(Date = year, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/4', pct_high_severity = pct_high_severity * 100)
+  rename(Date = year, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:usc/WestRegion', pct_high_severity = pct_high_severity * 100)
 
-pct_high_severity =  bind_rows(pct_high_severity_county, 
-                               pct_high_severity_state,
-                               pct_high_severity_west)
+pct_high_severity_county_decadal <- read_csv("pct_high_severity/pct_high_severity_county_decadal") %>% select(-1) %>%
+  rename(Date = decade, Geoid = countyfips, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), 
+                                                       pct_high_severity = pct_high_severity * 100, Date = as.numeric(substr(Date, 1, 4)))
+
+pct_high_severity_state_decadal <- read_csv("pct_high_severity/pct_high_severity_state_decadal") %>% select(-1) %>%
+  rename(Date = decade, Geoid = st_fips, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), 
+                                                                                  pct_high_severity = pct_high_severity * 100, Date = as.numeric(substr(Date, 1, 4)))
+
+pct_high_severity_west_decadal <- read_csv("pct_high_severity/pct_high_severity_west_decadal") %>% select(-1) %>%
+  rename(Date = decade, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:usc/WestRegion', 
+                                                                 pct_high_severity = pct_high_severity * 100, Date = as.numeric(substr(Date, 1, 4)))
+
+pct_high_severity =  bind_rows(pct_high_severity_county, pct_high_severity_county_decadal %>% filter(Date != '2014'),
+                               pct_high_severity_state, pct_high_severity_state_decadal %>% filter(Date != '2014'),
+                               pct_high_severity_west, pct_high_severity_west_decadal %>% filter(Date != '2014'))
 
 PDSI_county <- read_csv("climate/PDSI_county.csv") %>%
   rename(Date = year, Geoid = county, mean_pdsi_forestarea = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 PDSI_state <- read_csv("climate/PDSI_state.csv") %>%
   rename(Date = year, Geoid = state, mean_pdsi_forestarea = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 PDSI_west <- read_csv("climate/PDSI_west.csv") %>%
-  rename(Date = year, mean_pdsi_forestarea = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/4')
+  rename(Date = year, mean_pdsi_forestarea = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:usc/WestRegion')
 
 PDSI =  bind_rows(PDSI_county, 
                   PDSI_state,
@@ -84,7 +96,7 @@ tmax_county <- read_csv("climate/tmax_county.csv") %>%
 tmax_state <- read_csv("climate/tmax_state.csv") %>%
   rename(Date = year, Geoid = state, mean_tmax_forestarea = mean_tmax) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 tmax_west <- read_csv("climate/tmax_west.csv") %>%
-  rename(Date = year, mean_tmax_forestarea = mean_tmax) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/4')
+  rename(Date = year, mean_tmax_forestarea = mean_tmax) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:usc/WestRegion')
 
 tmax =  bind_rows(tmax_county, 
                   tmax_state,
@@ -95,7 +107,7 @@ VPD_county <- read_csv("climate/VPD_county.csv") %>%
 VPD_state <- read_csv("climate/VPD_state.csv") %>%
   rename(Date = year, Geoid = state, mean_vpd_forestarea = max_vpd) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 VPD_west <- read_csv("climate/VPD_west.csv") %>%
-  rename(Date = year, mean_vpd_forestarea = mean_max_vpd) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/4')
+  rename(Date = year, mean_vpd_forestarea = mean_max_vpd) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:usc/WestRegion')
 
 VPD =  bind_rows(VPD_county, 
                   VPD_state,
@@ -106,7 +118,7 @@ VPD_county_allarea <- read_csv("climate/VPD_county_allarea.csv") %>%
 VPD_state_allarea <- read_csv("climate/VPD_state_allarea.csv") %>%
   rename(Date = year, Geoid = state, mean_vpd_county = mean_max_vpd) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 VPD_west_allarea <- read_csv("climate/VPD_us_allarea.csv") %>%
-  rename(Date = year, mean_vpd_county = mean_max_vpd) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/US')
+  rename(Date = year, mean_vpd_county = mean_max_vpd) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:country/USA')
 
 VPD_allarea =  bind_rows(VPD_county_allarea, 
                  VPD_state_allarea,
@@ -117,7 +129,7 @@ tmax_county_allarea <- read_csv("climate/tmax_county_allarea.csv") %>%
 tmax_state_allarea <- read_csv("climate/tmax_state_allarea.csv") %>%
   rename(Date = year, Geoid = state, mean_tmax_county = mean_tmax) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 tmax_west_allarea <- read_csv("climate/tmax_us_allarea.csv") %>%
-  rename(Date = year, mean_tmax_county = mean_tmax) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/US')
+  rename(Date = year, mean_tmax_county = mean_tmax) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:country/USA')
 
 tmax_allarea =  bind_rows(tmax_county_allarea, 
                          tmax_state_allarea,
@@ -128,7 +140,7 @@ PDSI_county_allarea <- read_csv("climate/PDSI_county_allarea.csv") %>%
 PDSI_state_allarea <- read_csv("climate/PDSI_state_allarea.csv") %>%
   rename(Date = year, Geoid = state, mean_pdsi_county = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
 PDSI_west_allarea <- read_csv("climate/PDSI_us_allarea.csv") %>%
-  rename(Date = year, mean_pdsi_county = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:geoId/US')
+  rename(Date = year, mean_pdsi_county = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = 'dcid:country/USA')
 
 PDSI_allarea =  bind_rows(PDSI_county_allarea, 
                           PDSI_state_allarea,
@@ -144,10 +156,10 @@ mtbs_state = mtbs_county %>%
 
 mtbs_region = mtbs_state %>%
   mutate(Geoid = case_when(
-    Geoid %in% c('09', '23', '25', '33', '44', '50', '34', '36', '42') ~ '1',
-    Geoid %in% c('18', '17', '26', '39', '55', '19', '20', '27', '29', '31', '38', '46') ~ '2',
-    Geoid %in% c('10', '11', '12', '13', '24', '37', '45', '51', '54', '01', '21', '28', '47', '05', '22', '40', '48') ~ '3',
-    Geoid %in% c('04', '08', '16', '35', '30', '49', '32', '56', '02', '06', '15', '41', '53') ~ '4')) %>%
+    Geoid %in% c('09', '23', '25', '33', '44', '50', '34', '36', '42') ~ 'NortheastRegion',
+    Geoid %in% c('18', '17', '26', '39', '55', '19', '20', '27', '29', '31', '38', '46') ~ 'MidwestRegion',
+    Geoid %in% c('10', '11', '12', '13', '24', '37', '45', '51', '54', '01', '21', '28', '47', '05', '22', '40', '48') ~ 'SouthRegion',
+    Geoid %in% c('04', '08', '16', '35', '30', '49', '32', '56', '02', '06', '15', '41', '53') ~ 'WestRegion')) %>%
   group_by(year, Geoid) %>%
   summarize(area_burned = sum(area_burned),
             area = sum(area)) %>% ungroup
@@ -159,45 +171,50 @@ mtbs_us = mtbs_region %>%
   ungroup %>% mutate(Geoid = str_c('US'))
 
 decade_county = mtbs_county %>% 
-  mutate(decade = (year - 1) %/% 10) %>% 
+  mutate(decade = (year - 5) %/% 10) %>% 
   group_by(decade, Geoid) %>% 
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade, Geoid) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
+  filter(Date != 1984) %>% filter(Date != 2015) %>%
   ungroup %>% select(-decade)
 
 decade_state = mtbs_state %>% 
-  mutate(decade = (year - 1) %/% 10) %>% 
+  mutate(decade = (year - 5) %/% 10) %>% 
   group_by(decade, Geoid) %>% 
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade, Geoid) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
+  filter(Date != 1984) %>% filter(Date != 2015) %>%
   ungroup %>% select(-decade)
 
 decade_region = mtbs_region %>% 
-  mutate(decade = (year - 1) %/% 10) %>% 
+  mutate(decade = (year - 5) %/% 10) %>% 
   group_by(decade, Geoid) %>% 
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade, Geoid) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
-  mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
+  mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:usc/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
+  filter(Date != 1984) %>% filter(Date != 2015) %>%
   ungroup %>% select(-decade)
 
 decade_us = mtbs_us %>% 
-  mutate(decade = (year - 1) %/% 10) %>% 
+  mutate(decade = (year - 5) %/% 10) %>% 
   group_by(decade) %>% 
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
-  mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:geoId/US', Date = as.numeric(substr(decade, 1, 4))) %>% select(-decade)
+  mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:country/USA', Date = as.numeric(substr(decade, 1, 4))) %>% select(-decade) %>%
+  filter(Date != 1984) %>% filter(Date != 2015)
 
 decade_mtbs = bind_rows(decade_us, decade_region, decade_state, decade_county)
-bind_mtbs = bind_rows(mtbs_us, mtbs_region, mtbs_state, mtbs_county) %>% 
+bind_mtbs = bind_rows(mtbs_us, mtbs_state, mtbs_county) %>% 
   mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid)) %>% rename(Date = year)
-bind_mtbs = bind_rows(decade_mtbs, bind_mtbs) %>%
+mtbs_region = mtbs_region %>% 
+  mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:usc/', Geoid)) %>% rename(Date = year)
+bind_mtbs = bind_rows(decade_mtbs, bind_mtbs, mtbs_region) %>%
   mutate(pct_area_burned = area_burned / area * 100) %>% select(-area)
 
-
 heatwave <- read_csv("climate/national_heatwave.csv") %>% select(-1) %>%
-  mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/US')) %>%
+  mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:country/USA')) %>%
   rename(Date = YEAR)
 
 heatwave_state <- read_csv("climate/state_heatwave.csv") %>% select(-1) %>%
@@ -209,7 +226,7 @@ state_smokePM <- read_csv("state_smokePM.csv") %>% select(-1) %>%
   rename(Date = YEAR) %>% select(-STATEFP)
 
 national_smokePM <- read_csv("national_smokePM.csv") %>% select(-1) %>%
-  mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/US')) %>%
+  mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:country/USA')) %>%
   rename(Date = YEAR)
 
 smoke_heatwave =  bind_rows(heatwave, 
@@ -217,7 +234,7 @@ smoke_heatwave =  bind_rows(heatwave,
                             state_smokePM,
                             national_smokePM)
 
-smokePM25_annual_county_stats <- read_csv("smokePM25_annual_county_stats.csv") %>% 
+smokePM25_annual_county_stats <- read_csv("smokePM25_annual_county_stats_revised.csv") %>% 
   mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', str_pad(GEOID, 5, 'left', '0'))) %>%
   rename(Date = year) %>% select(-GEOID)
 smokePM25_5year_county_stats_revised <- read_csv("smokePM25_5year_county_stats_revised.csv") %>% 
@@ -234,7 +251,7 @@ merge3 = merge(merge2, bind_mtbs, by = c('Geoid', 'Date', 'TimeIntervalType'), a
 
 pm25_smokepm25_merged <- read_csv("pm25_smokepm25_merged.csv") %>%
   mutate(TimeIntervalType = 'P1D', Geoid = str_c('dcid:geoId/', fips)) %>% 
-  select(-fips, -year) %>% rename(Date = date) %>% mutate(Date = as.character(Date))
+  select(-fips, -year, -PM25_pop_pred) %>% rename(Date = date) %>% mutate(Date = as.character(Date))
 
 merge5 = merge(merge3, PDSI, by = c('Geoid', 'Date', 'TimeIntervalType'), all = TRUE)
 merge6 = merge(merge5, tmax, by = c('Geoid', 'Date', 'TimeIntervalType'), all = TRUE)
@@ -248,5 +265,5 @@ merge12 = merge(merge11, smoke_pm25, by = c('Geoid', 'Date', 'TimeIntervalType')
 merge4 = merge(merge12, pm25_smokepm25_merged, by = c('Geoid', 'Date', 'TimeIntervalType'), all = TRUE)
 
 
-write_csv(merge4, "all_merged.csv", na="")
+write.csv(merge4, "output/all_merged.csv", na="")
 
