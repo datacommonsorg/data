@@ -1463,6 +1463,46 @@ class TestFileSharder(unittest.TestCase):
             hetero_rows,
         )
 
+    def test_shard_csv_by_column_prefix_per_state_fips(self):
+        rows = [
+            {
+                'fips': '06001',
+                'county_name': 'Alameda County',
+                'population': '1682353',
+            },
+            {
+                'fips': '06075',
+                'county_name': 'San Francisco County',
+                'population': '873965',
+            },
+            {
+                'fips': '36061',
+                'county_name': 'New York County',
+                'population': '1694251',
+            },
+        ]
+        self._create_csv_file(rows)
+        output_pattern = os.path.join(self.test_dir.name,
+                                      'counties-{state}.csv')
+        shard_file(
+            self.input_file_path,
+            output_pattern,
+            {
+                'shard_key': 'fips',
+                'shard_key_prefix_length': 2,
+            },
+        )
+        ca_path = os.path.join(self.test_dir.name, 'counties-06.csv')
+        ny_path = os.path.join(self.test_dir.name, 'counties-36.csv')
+        self.assertTrue(os.path.exists(ca_path))
+        self.assertTrue(os.path.exists(ny_path))
+        with open_dict_file(ca_path, 'r') as reader:
+            self.assertEqual(rows[:2], reader.readlines())
+        with open_dict_file(ny_path, 'r') as reader:
+            self.assertEqual(rows[2:], reader.readlines())
+        with open_dict_file(output_pattern, 'r') as reader:
+            self.assertCountEqual(rows, reader.readlines())
+
 
 if __name__ == '__main__':
     unittest.main()

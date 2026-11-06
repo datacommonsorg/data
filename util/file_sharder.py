@@ -1072,7 +1072,8 @@ class FileSharder:
                 key_record = ({
                     **pre_filter_record,
                     **record
-                } if (has_column_filter and self._shard_key) else record)
+                } if (has_column_filter and
+                      (self._shard_key or self._writer._shard_key)) else record)
                 key = self._get_record_shard_key(
                     record,
                     key_record=key_record,

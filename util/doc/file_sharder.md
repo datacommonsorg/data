@@ -16,8 +16,9 @@
   - [3. Read large seekable files with parallel workers](#3-read-large-seekable-files-with-parallel-workers)
   - [4. Transform columns and evaluate expressions](#4-transform-columns-and-evaluate-expressions)
   - [5. Convert observation CSV to MCF with generated DCID and typeOf:StatVarObservation](#5-convert-observation-csv-to-mcf-with-generated-dcid-and-typeofstatvarobservation)
-  - [6. Deduplicate records across inputs](#6-deduplicate-records-across-inputs)
-  - [7. Deterministic key sampling](#7-deterministic-key-sampling)
+  - [6. Split a CSV into separate files by column prefix (e.g., state FIPS code)](#6-split-a-csv-into-separate-files-by-column-prefix-eg-state-fips-code)
+  - [7. Deduplicate records across inputs](#7-deduplicate-records-across-inputs)
+  - [8. Deterministic key sampling](#8-deterministic-key-sampling)
 - [Limitations](#limitations)
 
 ## Overview
@@ -230,7 +231,44 @@ scalingFactor: 100
 
 Completion: Produces sharded `.mcf` files with `Node: dcid:dc/o/...` generated using `util/dcid_generator.py` (matching `DcidGenerator.forStatVarObs` in `datacommonsorg/import`), omitting `#input` and any ignored columns.
 
-### 6. Deduplicate records across inputs
+### 6. Split a CSV into separate files by column prefix (e.g., state FIPS code)
+
+Split a county-level CSV containing 5-digit `fips` codes (`06001`, `06075`, `36061`, ...) into separate output CSV files—one per state—named after the 2-digit state FIPS prefix (`06`, `36`, ...). Include `{fips}` in `--shard_output` and set `--shard_key_prefix_length=2` (`--shard_key="fips"` is inferred automatically from `{fips}` in the output filename):
+
+```bash
+python3 util/file_sharder.py \
+  --shard_input="data/counties.csv" \
+  --shard_output="data/by_state/counties-{fips}.csv" \
+  --shard_key="fips" \
+  --shard_key_prefix_length=2
+```
+
+For an input CSV (`data/counties.csv`):
+
+```csv
+fips,county_name,population
+06001,Alameda County,1682353
+06075,San Francisco County,873965
+36061,New York County,1694251
+```
+
+This creates one output CSV per 2-digit state prefix:
+
+- `data/by_state/counties-06.csv`:
+  ```csv
+  fips,county_name,population
+  06001,Alameda County,1682353
+  06075,San Francisco County,873965
+  ```
+- `data/by_state/counties-36.csv`:
+  ```csv
+  fips,county_name,population
+  36061,New York County,1694251
+  ```
+
+Completion: Produces one output file per distinct 2-character prefix (`counties-06.csv`, `counties-36.csv`, etc.), preserving leading zeros in the state FIPS code.
+
+### 7. Deduplicate records across inputs
 
 Drop duplicate rows or graph nodes across multiple files using content fingerprinting:
 
@@ -243,7 +281,7 @@ python3 util/file_sharder.py \
 
 Completion: Outputs contain unique records only. Counter `shard-duplicate-dropped` reports the total number of duplicate records removed.
 
-### 7. Deterministic key sampling
+### 8. Deterministic key sampling
 
 Keep a random sample of 10% of entities while ensuring all observations for a selected entity stay together:
 
@@ -262,4 +300,4 @@ Completion: Counter `shard-sampled-dropped` reflects excluded keys. Kept records
 - **Compressed files process with a single worker per file.** Compressed formats (`.gz`, `.bz2`, `.zst`, `.zip`, `.tgz`, `.tar`) do not support random byte seeking. The sharder allocates one worker thread per compressed file.
 - **JSON Lists process as single files.** Standard `.json` containing a single root array or object does not support line-based byte seeking. Convert inputs to JSON Lines (`.jsonl`, `.ndjson`) to enable multi-threaded byte-range chunking.
 - **Shard output order is hash-partitioned.** Records route to shards by key hash. Within each output shard, records appear in arrival order rather than sorted key order.
-- **Output expressions use a restricted `eval()` environment.** Expressions in `shard_output_columns` and `shard_add_columns` run through `eval_functions.evaluate_statement` with input columns as variables, standard Python builtins (`int`, `float`, `round`, `str`, `len`), and `eval_functions` helpers (`format_date`, `str_to_camel_case`, `datetime_strptime`, `relativedelta`, `re_sub`, `generate_node_dcid`, `generate_statvar_obs_dcid`, `generate_place_dcid`, `generate_statvar_hash_dcid`).
+- **Output expressions use a restricted `eval()` environment.** Expressions in `shard_output_columns` and `shard_add_columns` run through `eval_functions.evaluate_statement` with input columns as variables, standard Python builtins (`int`, `float`, `round`, `str`, `len`), and `eval_functions` helpers (`format_date`, `str_to_camel_case`, `datetime_strptime`, `relativedelta`, `re_sub`, `generate_node_dcid`, `generate_statvar_obs_dcid`, `generate_place_dcid`, `get_statvar_dcid`).

@@ -580,7 +580,8 @@ class ShardedFileDictIO(FileDictIO):
         formatted_index = index
         pattern_to_format = basename
         if not isinstance(index, int):
-            if str(index).isdigit():
+            if str(index).isdigit() and re.search(
+                    r'\{index:[^}]*[dioxX][^}]*\}', pattern_to_format):
                 formatted_index = int(index)
             else:
                 pattern_to_format = re.sub(r'\{index:[^}]+\}', '{index}',
