@@ -1,18 +1,16 @@
 # Copyright 2025 Google LLC
- #
- # Licensed under the Apache License, Version 2.0 (the "License");
- # you may not use this file except in compliance with the License.
- # You may obtain a copy of the License at
- #
- #      http://www.apache.org/licenses/LICENSE-2.0
- #
- # Unless required by applicable law or agreed to in writing, software
- # distributed under the License is distributed on an "AS IS" BASIS,
- # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- # See the License for the specific language governing permissions and
- # limitations under the License.
- 
-
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """ A Script to download BLS_CES State and National data.
     This script contains a download method which requires registered API key
     Go to "https://www.bls.gov/developers/api_faqs.htm#register2" to register for the key
@@ -41,13 +39,13 @@ from retry import retry
 from google.cloud import storage
 from google.api_core.exceptions import NotFound
 
-
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('place_type', '', 'state or national')
 flags.DEFINE_string('input_folder', '', 'download folder name')
 flags.DEFINE_string('source_folder', 'raw_data', 'raw data folder')
 
-BASE_GCS_PATH = "us_bls/ces/latest"   
+BASE_GCS_PATH = "us_bls/ces/latest"
+
 
 def read_gcs_path(config_path):
     """
@@ -75,8 +73,9 @@ def series_id_from_gcs(series_id_filename):
     Returns:
     - list: A list of series IDs extracted from the config file, or None if not found
     """
-    logging.info(f"Getting series ids from {BASE_GCS_PATH}/{series_id_filename}")
-    config_path =f"{BASE_GCS_PATH}/{series_id_filename}"
+    logging.info(
+        f"Getting series ids from {BASE_GCS_PATH}/{series_id_filename}")
+    config_path = f"{BASE_GCS_PATH}/{series_id_filename}"
     blob = read_gcs_path(config_path)
     file_contents = blob.download_as_text()
     match = re.search(r'series_id\s*=\s*(\[.*?\])', file_contents, re.DOTALL)
@@ -84,7 +83,7 @@ def series_id_from_gcs(series_id_filename):
         series_id_str = match.group(1)
         series_id_list = ast.literal_eval(series_id_str)
         return series_id_list
-    
+
 
 def get_api_key():
     """
@@ -138,10 +137,14 @@ def convert_to_raw_csv(download_folder, raw_data_folder):
                 lines = text_data.strip().split("\n")
                 cleaned_data = []
                 #skippig first 3 empty lines
-                assert len(lines) > 3,f"Not enough lines to skip headers in file: {filename}"
+                assert len(
+                    lines
+                ) > 3, f"Not enough lines to skip headers in file: {filename}"
                 data_lines = lines[3:]
                 for line in data_lines:
-                    cleaned_line = [field.strip() for field in line.split('|')[1:-1]]
+                    cleaned_line = [
+                        field.strip() for field in line.split('|')[1:-1]
+                    ]
                     cleaned_data.append(cleaned_line)
                 with open(csv_file_path, 'w', newline='') as csvfile:
                     writer = csv.writer(csvfile)
@@ -167,15 +170,18 @@ def process_raw_data_csv(download_folder):
     try:
         for input_csv_filename in os.listdir(download_folder):
             base_name, extension = os.path.splitext(input_csv_filename)
-            output_csv_filename = os.path.join(download_folder, base_name + '_output' + extension)
-            input_csv_filename = os.path.join(download_folder, input_csv_filename)
+            output_csv_filename = os.path.join(
+                download_folder, base_name + '_output' + extension)
+            input_csv_filename = os.path.join(download_folder,
+                                              input_csv_filename)
             if input_csv_filename.endswith(".csv"):
                 column_to_drop = ["series id", "footnotes"]
                 with open(input_csv_filename, mode='r') as infile:
                     reader = csv.DictReader(infile)
                     fieldnames = ['series_type', 'state_id', 'series_id_value'] + \
                                  [name for name in reader.fieldnames if name not in column_to_drop]
-                    with open(output_csv_filename, mode='w', newline='') as outfile:
+                    with open(output_csv_filename, mode='w',
+                              newline='') as outfile:
                         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
                         writer.writeheader()
                         for row in reader:
@@ -207,7 +213,9 @@ def merge_all_csvs(folder_path):
     """
     logging.info("Merging all the csvs..")
     try:
-        csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
+        csv_files = [
+            file for file in os.listdir(folder_path) if file.endswith('.csv')
+        ]
         output_filename = os.path.join(folder_path, 'merged_output.csv')
         with open(output_filename, mode='w', newline='') as outfile:
             writer = csv.writer(outfile)
@@ -253,11 +261,12 @@ def clear_folder(folder_path):
                         logging.error(f"Error while clearing {file_path}: {e}")
     except Exception as e:
         logging.error(f"Error in clear_folder: {e}")
-        
+
 
 # Retry decorator: Retries 3 times, with a 2-second delay, doubling each retry
 @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
-def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename):
+def download_data(download_folder_name, reg_key, bls_ces_url,
+                  series_id_filename):
     """
     Downloads the raw txt files from source.
     - Each api request takes at most 25 series ids at once.
@@ -272,7 +281,7 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
     """
     logging.info("Downloading started..")
     try:
-        
+
         series_id = series_id_from_gcs(series_id_filename)
         chunk_size = 30
         current_year = datetime.now().year
@@ -289,9 +298,12 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
                 p = requests.post(bls_ces_url, data=data, headers=headers)
                 p.raise_for_status()
                 json_data = json.loads(p.text)
-                if p.status_code == 200 and json_data.get("status") == "REQUEST_SUCCEEDED":
+                if p.status_code == 200 and json_data.get(
+                        "status") == "REQUEST_SUCCEEDED":
                     for series in json_data['Results']['series']:
-                        x = prettytable.PrettyTable(["series id", "year", "period", "value", "footnotes"])
+                        x = prettytable.PrettyTable([
+                            "series id", "year", "period", "value", "footnotes"
+                        ])
                         seriesId = series['seriesID']
                         for item in series['data']:
                             try:
@@ -303,10 +315,14 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
                                     if footnote:
                                         footnotes += footnote['text'] + ','
                                 if 'M01' <= period <= 'M12':
-                                    x.add_row([seriesId, year, period, value, footnotes.rstrip(',')])
+                                    x.add_row([
+                                        seriesId, year, period, value,
+                                        footnotes.rstrip(',')
+                                    ])
                             except Exception as e:
                                 logging.error(f"Data row error: {e}")
-                        file_name = os.path.join(download_folder_name, seriesId + '.txt')
+                        file_name = os.path.join(download_folder_name,
+                                                 seriesId + '.txt')
                         with open(file_name, 'w') as output:
                             output.write(x.get_string())
                 else:
@@ -324,21 +340,23 @@ def main(argv):
     try:
         reg_key, bls_ces_url = get_api_key()
         current_file_path = os.path.dirname(os.path.abspath(__file__))
-        download_folder_name = os.path.join(current_file_path, _FLAGS.input_folder, 'input_files')
-        source_data_folder = os.path.join(download_folder_name, _FLAGS.source_folder) 
-                                          
+        download_folder_name = os.path.join(current_file_path,
+                                            _FLAGS.input_folder, 'input_files')
+        source_data_folder = os.path.join(download_folder_name,
+                                          _FLAGS.source_folder)
+
         if not os.path.exists(download_folder_name):
             os.makedirs(download_folder_name)
         else:
             clear_folder(download_folder_name)
         if not os.path.exists(source_data_folder):
-                os.makedirs(source_data_folder)
+            os.makedirs(source_data_folder)
         else:
             clear_folder(source_data_folder)
-        
+
         if _FLAGS.place_type == "state":
             series_if_file_name = "state_series_id.py"
-            download_data(download_folder_name, reg_key, bls_ces_url, 
+            download_data(download_folder_name, reg_key, bls_ces_url,
                           series_if_file_name)
             convert_to_raw_csv(download_folder_name, source_data_folder)
             process_raw_data_csv(download_folder_name)
@@ -347,7 +365,7 @@ def main(argv):
 
         elif _FLAGS.place_type == "national":
             series_if_file_name = "national_series_id.py"
-            download_data(download_folder_name, reg_key, bls_ces_url, 
+            download_data(download_folder_name, reg_key, bls_ces_url,
                           series_if_file_name)
             convert_to_raw_csv(download_folder_name, source_data_folder)
             merge_all_csvs(download_folder_name)
@@ -355,11 +373,10 @@ def main(argv):
 
         else:
             logging.fatal("Place type must be either state or national")
-    
+
     except Exception as e:
         logging.fatal(f"Main function error: {e}")
 
 
 if __name__ == '__main__':
     app.run(main)
-

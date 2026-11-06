@@ -632,7 +632,9 @@ def download_single_race_data(
         valid_years = [y for y in years if y in downloader.available_years]
         if valid_years:
             if len(valid_years) < len(years):
-                skipped = [y for y in years if y not in downloader.available_years]
+                skipped = [
+                    y for y in years if y not in downloader.available_years
+                ]
                 logging.info(
                     "Skipping years not yet published in CDC WONDER: %s (querying: %s)",
                     skipped, valid_years)
@@ -640,8 +642,8 @@ def download_single_race_data(
         else:
             logging.warning(
                 "None of requested years %s found in CDC WONDER available years %s. "
-                "Defaulting to available years: %s",
-                years, downloader.available_years, downloader.available_years)
+                "Defaulting to available years: %s", years,
+                downloader.available_years, downloader.available_years)
             years = downloader.available_years
 
     total_files = 0

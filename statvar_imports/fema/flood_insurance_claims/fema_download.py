@@ -30,8 +30,7 @@ if data_dir not in sys.path:
 from util.download_util_script import download_file, _retry_method
 from absl import flags
 
-flags.DEFINE_string('api_url',
-                    'https://www.fema.gov/api/open/v3/NfipClaims',
+flags.DEFINE_string('api_url', 'https://www.fema.gov/api/open/v3/NfipClaims',
                     'The base URL of the API endpoint to download data from.')
 flags.DEFINE_string(
     'bulk_url',
@@ -180,10 +179,10 @@ def download_data(api_url: str,
                 shutil.rmtree(temp_dir)
             os.makedirs(temp_dir, exist_ok=True)
 
-            if download_file(url=bulk_url, output_folder=temp_dir,
-                             unzip=False):
+            if download_file(url=bulk_url, output_folder=temp_dir, unzip=False):
                 downloaded = [
-                    os.path.join(temp_dir, f) for f in os.listdir(temp_dir)
+                    os.path.join(temp_dir, f)
+                    for f in os.listdir(temp_dir)
                     if os.path.isfile(os.path.join(temp_dir, f))
                 ]
                 if downloaded:
@@ -196,8 +195,8 @@ def download_data(api_url: str,
                             e)
                         total_records = None
 
-                    if (total_records is not None and total_records > 0
-                            and _is_valid_bulk_file(
+                    if (total_records is not None and total_records > 0 and
+                            _is_valid_bulk_file(
                                 downloaded[0],
                                 min_bulk_size,
                                 expected_records=total_records)):
@@ -296,16 +295,14 @@ def download_data(api_url: str,
             with open(staging_filepath, 'ab') as f_staging:
                 if skip_count == 0:
                     f_staging.write(
-                        content if content.endswith(b'\n') else content +
-                        b'\n')
+                        content if content.endswith(b'\n') else content + b'\n')
                 else:
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1 and split_content[1].strip():
                         content_without_header = split_content[1]
                         f_staging.write(
                             content_without_header if content_without_header.
-                            endswith(b'\n') else content_without_header +
-                            b'\n')
+                            endswith(b'\n') else content_without_header + b'\n')
 
             if os.path.exists(chunk_filepath):
                 os.remove(chunk_filepath)

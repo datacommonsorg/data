@@ -44,7 +44,6 @@ INDIA_STATES_ISO_CODES = {
     "TAMIL NADU": "IN-TN",
     "TAMILNADU": "IN-TN",
     "TELENGANA": "IN-TG",
-    "TELANGANA": "IN-TG",
     "TRIPURA": "IN-TR",
     "UTTARAKHAND": "IN-UT",
     "UTTAR PRADESH": "IN-UP",

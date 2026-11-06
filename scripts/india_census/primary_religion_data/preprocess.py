@@ -341,7 +341,7 @@ class CensusPrimaryReligiousDataLoader():
 
         key = "{0}_{1}".format(
             row["columnName"],
-            place_of_residence if place_of_residence != None else "Total")
+            place_of_residence if place_of_residence is not None else "Total")
 
         if data_category:
             key = key + "_" + title_case(data_category)

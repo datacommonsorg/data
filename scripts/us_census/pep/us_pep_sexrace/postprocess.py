@@ -21,9 +21,18 @@ and generate final CSV, MCF, TMCF file.
 import pandas as pd
 from absl import logging
 import os
-from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.common import (
+    Outputfiles,
+    _OUTPUTFINAL,
+    _OUTPUTINTERMEDIATE,
+)
 
 
 def write_to_tmcf(filename: str, tmcf: str):

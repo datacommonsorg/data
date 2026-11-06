@@ -59,7 +59,6 @@ import property_value_utils as pv_utils
 
 from config_map import ConfigMap
 from counters import Counters
-from config_map import ConfigMap
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes
 from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
 
@@ -209,7 +208,7 @@ def spell_check_pvs(dcid: str,
     for prop, value in node.items():
         if should_ignore_spell_pv(prop, value, config):
             if counters:
-                counters.add_counter(f'spell-check-ignored-pvs', 1)
+                counters.add_counter('spell-check-ignored-pvs', 1)
             continue
         # Get words from property and value
         pv_words = set()
@@ -231,9 +230,9 @@ def spell_check_pvs(dcid: str,
                 words_misspelled.update(error_words)
                 misspelled_pvs[prop] = ', '.join(sorted(error_words))
             if counters:
-                counters.add_counter(f'spell-check-pvs', 1)
+                counters.add_counter('spell-check-pvs', 1)
                 if error_words:
-                    counters.add_counter(f'spell-check-pvs-errors', 1)
+                    counters.add_counter('spell-check-pvs-errors', 1)
     return misspelled_pvs, words_misspelled
 
 
@@ -273,10 +272,10 @@ def spell_check_nodes(nodes: dict,
             logging.error(f'SpellError: {dcid}: {misspelled_pvs}')
             node_errors[dcid] = misspelled_pvs
             error_words.update(misspelled_words)
-            counters.add_counter(f'spell-check-nodes-errors', 1, dcid)
+            counters.add_counter('spell-check-nodes-errors', 1, dcid)
     if error_words:
         logging.error(f'Words with spell errors: {error_words}')
-        counters.add_counter(f'error-spell-words', len(error_words))
+        counters.add_counter('error-spell-words', len(error_words))
     return node_errors
 
 
@@ -308,8 +307,8 @@ def spell_check_mcf(input_mcf: str,
     for mcf_file in input_files:
         logging.info(f'Loading MCF file: {mcf_file}')
         nodes = load_mcf_nodes(mcf_file)
-        counters.add_counter(f'input-mcf-file', 1, mcf_file)
-        counters.add_counter(f'total', len(nodes))
+        counters.add_counter('input-mcf-file', 1, mcf_file)
+        counters.add_counter('total', len(nodes))
         node_errors = spell_check_nodes(nodes, config, counters, spell_checker)
         if node_errors:
             for dcid, error_pvs in node_errors.items():
@@ -320,8 +319,8 @@ def spell_check_mcf(input_mcf: str,
                         'property': prop,
                         'spell_errors': errors,
                     }
-            counters.add_counter(f'files-with-spell-errors', 1, mcf_file)
-        counters.add_counter(f'processed', len(nodes))
+            counters.add_counter('files-with-spell-errors', 1, mcf_file)
+        counters.add_counter('processed', len(nodes))
     output_file = config.get('spell_check_output', '')
     if nodes_misspelled and output_file:
         # Save misspelled words
@@ -349,7 +348,7 @@ def get_spell_checker(config: ConfigMap = None,
         logging.info(f'Loading allowed words from {file}')
         spell_checker.word_frequency.load_text_file(file)
         if counters:
-            counters.add_counter(f'spell-allowlist-file', 1, file)
+            counters.add_counter('spell-allowlist-file', 1, file)
 
     if allow_words:
         if isinstance(allow_words, str):
@@ -360,8 +359,7 @@ def get_spell_checker(config: ConfigMap = None,
     logging.info(
         f'Spell checker loaded with {num_words} words from {allowlist_file}')
     if counters:
-        counters.add_counter(f'spell-allowlist-words', num_words,
-                             allowlist_file)
+        counters.add_counter('spell-allowlist-words', num_words, allowlist_file)
     return spell_checker
 
 

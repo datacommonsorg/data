@@ -34,12 +34,6 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class TestCriteriaGasesTest(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        from absl import flags
-        flags.FLAGS(
-            ["air_quality_aggregate_test.py", "--output_file_path", "output"])
-
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with open(
@@ -129,8 +123,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
             # Check if the output files were created
             expected_csv_path = os.path.join(MODULE_DIR, tmp_output_dir,
                                              'EPA_AQI.csv')
-            expected_tmcf_path = os.path.join(MODULE_DIR, tmp_output_dir,
-                                              'EPA_AQI.tmcf')
 
             self.assertTrue(os.path.isfile(expected_csv_path),
                             "CSV output file not created")

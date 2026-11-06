@@ -128,7 +128,6 @@ def get_mcf(series_lst, path="World_bank_hnp_population.mcf"):
                     f'[Years {age}]'
             }
             node = get_statvars(gender, age)
-            desc = f'Age population, age {age}, {gender.lower()}, interpolated'
             nodes.append(node)
             property_dict['node'] = node
 

@@ -377,7 +377,7 @@ def columns_from_CSVfile_list(
   """
     all_columns = []
 
-    if type(is_metadata) != type([]):
+    if type(is_metadata) is not list:
         is_metadata = list(is_metadata)
 
     if len(is_metadata) < len(csv_path_list):

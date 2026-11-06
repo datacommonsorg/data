@@ -22,9 +22,26 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+from absl import flags
 import requests
 
-import download
+_SAVED_FLAGS = {
+    _name: flags.FLAGS[_name]
+    for _name in ('states', 'years', 'output_dir', 'delay', 'timeout',
+                  'skip_existing', 'batch_size', 'batch_cooldown')
+    if _name in flags.FLAGS
+}
+for _flag_name in _SAVED_FLAGS:
+    delattr(flags.FLAGS, _flag_name)
+
+try:
+    from statvar_imports.us_cdc.county_mortality_underlyingCause import download
+except ModuleNotFoundError:
+    import download
+
+for _flag_name, _flag_obj in _SAVED_FLAGS.items():
+    delattr(flags.FLAGS, _flag_name)
+    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class DownloadTest(unittest.TestCase):
