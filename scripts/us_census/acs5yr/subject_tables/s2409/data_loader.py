@@ -209,12 +209,10 @@ class S2409SubjectTableDataLoaderBase(SubjectTableDataLoaderBase):
                 obs_df['Column'] = column
 
                 # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'].replace('', np.nan, inplace=True)
+                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                 # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
+                obs_df = obs_df.dropna(subset=['Place', 'Quantity'], axis=0)
 
                 # Write the processed observations to the clean_csv
                 if self.year_count == 0:

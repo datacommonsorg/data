@@ -138,13 +138,13 @@ class EuroStat:
         original_df_columns = df.columns
         df = split_column(df, df.columns.values.tolist()[0])
 
-        df.rename(columns={
-            r'geo\TIME_PERIOD': 'geo',
-            r'time\geo': 'time',
-            'isced97': 'isced11',
-            'quantile': 'quant_inc'
-        },
-                  inplace=True)
+        df = df.rename(
+            columns={
+                r'geo\TIME_PERIOD': 'geo',
+                r'time\geo': 'time',
+                'isced97': 'isced11',
+                'quantile': 'quant_inc'
+            })
 
         df = self._rename_frequency_column(df)
 
@@ -174,7 +174,7 @@ class EuroStat:
             var_name = 'time'
         del_columns.remove('SV')
 
-        df.drop(columns=del_columns, inplace=True)
+        df = df.drop(columns=del_columns)
 
         df = df.melt(id_vars=id_vars,
                      var_name=var_name,
@@ -263,15 +263,16 @@ class EuroStat:
                 final_df['info'].isin(u_rows),
                 'EurostatRegionalStatistics_DefinitionDiffers',
                 final_df['Measurement_Method'])
-            final_df.drop(columns=['info'], inplace=True)
+            final_df = final_df.drop(columns=['info'])
             for drop_obs_char in [':', ' ', 'u', 'd', 'c']:
                 final_df['observation'] = final_df['observation'].astype(
                     str).str.replace(drop_obs_char, '')
             final_df['observation'] = pd.to_numeric(final_df['observation'])
             final_df = final_df.replace({'geo': COUNTRY_MAP})
             final_df = final_df.sort_values(by=['geo', 'SV'])
-            final_df['observation'].replace('', np.nan, inplace=True)
-            final_df.dropna(subset=['observation'], inplace=True)
+            final_df['observation'] = final_df['observation'].replace(
+                '', np.nan)
+            final_df = final_df.dropna(subset=['observation'])
             self._df = final_df
             final_df.to_csv(self._cleaned_csv_file_path,
                             columns=[

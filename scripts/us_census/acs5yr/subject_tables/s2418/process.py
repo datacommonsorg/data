@@ -20,10 +20,6 @@ from zipfile import ZipFile
 import numpy as np
 import pandas as pd
 
-import os
-import sys
-import json
-
 from absl import app, flags
 
 # Allows the following module imports to work when running as a script
@@ -104,7 +100,7 @@ class S2418SubjectTableLoader(SubjectTableDataLoaderBase):
         # percentage to count only for years from 2010 - 2014.
         percent_years = ['2010', '2011', '2012', '2013', '2014']
         if self.has_percent and year in percent_years:
-            print(f"Converting percent to counts", end=" |  ", flush=True)
+            print("Converting percent to counts", end=" |  ", flush=True)
             df = self._convert_percent_to_numbers(df)
 
         # if column map is not available generate, will rarely be False
@@ -173,12 +169,10 @@ class S2418SubjectTableLoader(SubjectTableDataLoaderBase):
                 obs_df['Column'] = column
 
                 # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'].replace('', np.nan, inplace=True)
+                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                 # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
+                obs_df = obs_df.dropna(subset=['Place', 'Quantity'], axis=0)
 
                 # Write the processed observations to the clean_csv
                 if self.year_count == 0:

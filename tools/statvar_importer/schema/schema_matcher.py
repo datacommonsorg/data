@@ -201,13 +201,6 @@ class SchemaMatcher:
             statvar = self.schema_nodes.get(dcid)
             if prop == 'variableMeasured' and statvar:
                 # Add properties of the statvar.
-                ignore_props = self._config.get(
-                    'statvar_dcid_ignore_properties',
-                    [
-                        'description', 'name', 'nameWithLanguage',
-                        'descriptionUrl', 'alternateName'
-                    ],
-                )
                 for prop, value in statvar.items():
                     if prop and value:
                         _add_pv(prop, value, prop_as_key, pvs)

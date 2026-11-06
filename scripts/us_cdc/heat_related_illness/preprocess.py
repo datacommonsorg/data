@@ -159,9 +159,7 @@ def aggregate():
                      dtype={'Quantity': 'float64'})
 
     # Aggregating all stat vars
-    df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
-                       keep='first',
-                       inplace=True)
+    df = df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'], keep='first')
     country_df = df.groupby(by=['Year', 'StatVar'],
                             as_index=False).agg({'Quantity': 'sum'})
     country_df['Geo'] = "country/USA"

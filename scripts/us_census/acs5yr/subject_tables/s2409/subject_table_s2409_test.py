@@ -141,6 +141,7 @@ class TestSubjectTableS2409(unittest.TestCase):
                 ['0400000US06', 'California', '-'],
                 ['0400000US08', 'Colorado', 'N'],
                 ['0400000US09', 'Connecticut', 'unparseable_val'],
+                ['9500000US0199999', 'Remainder of Alabama', '30,000'],
             ]
             pd.DataFrame(rows).to_csv(csv_input_path, header=False, index=False)
 
