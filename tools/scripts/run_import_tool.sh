@@ -28,13 +28,13 @@
 # <path-to-data-repo> with the absolute path to your local checkout of the
 # `data` repository (e.g., ~/projects/data):
 #
-#   echo "alias dc-import='<path-to-data-repo>/tools/scripts/dc_import.sh'" >> ~/.bashrc
+#   echo "alias dc-import='<path-to-data-repo>/tools/scripts/run_import_tool.sh'" >> ~/.bashrc
 #   source ~/.bashrc
 #
 # Note: Aliases are not available in non-interactive shells (e.g., coding agents
 # or scripts). In those cases, call the script directly:
 #
-#   <path-to-data-repo>/tools/scripts/dc_import.sh lint ...
+#   <path-to-data-repo>/tools/scripts/run_import_tool.sh lint ...
 #
 # Note: Set `export DC_API_KEY="<your-key>"` if running existence or resolution
 # checks against the Data Commons API.
@@ -62,6 +62,10 @@
 #   DC_IMPORT_FORCE_UPDATE  Set to "1" or "true" to check for a newer version
 #                           immediately, even if the cached JAR was checked
 #                           within the last hour.
+#
+#   Set a variable for a single run by putting it before the command, e.g.:
+#
+#     DC_IMPORT_JAVA_OPTS="-Xmx8g" dc-import genmcf path/to/data.tmcf path/to/data.csv
 
 set -euo pipefail
 
