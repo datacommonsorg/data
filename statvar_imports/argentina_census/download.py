@@ -76,6 +76,18 @@ JURISDICTIONS = [
         f'{POBLACION_FTP_URL}/c2022_tp_est_c4.xlsx',
     ),
     (
+        'Ciudad Autónoma de Buenos Aires',
+        '02',
+        'pv_80_capitalfederal',
+        'capitalfederal',
+        '02',
+        'C91_P2_Capital_Federal',
+        'P2-P_Caba',
+        'P1-P_Caba',
+        f'{POBLACION_FTP_URL}/c2022_caba_est_c1_1.xlsx',
+        f'{POBLACION_FTP_URL}/c2022_caba_est_c4_1.xlsx',
+    ),
+    (
         'Buenos Aires',
         '07',
         'plv_80_buenosaires',
@@ -374,9 +386,14 @@ PROVINCE_NORM_MAP = {_norm_key(j[0]): j[0] for j in JURISDICTIONS}
 PROVINCE_NORM_MAP['tierra del fuego'] = (
     'Tierra del Fuego, Antártida e Islas del Atlántico Sur')
 
-# Official 2022 INDEC Cuadro 1 department name variants mapped to their
-# canonical 2010 keys in argentina_places_resolved.csv.
+# Official 2022 INDEC Cuadro 1 department name variants and 2010 CABA numeric
+# comuna labels mapped to their canonical keys in argentina_places_resolved.csv.
 AA2_2022_ALIASES = {
+    **{
+        ('Ciudad Autónoma de Buenos Aires', str(i)):
+            f'Ciudad Autónoma de Buenos Aires__Comuna {i}' for i in range(
+            1, 16)
+    },
     ('La Rioja', 'angel vicente penaloza'):
         'La Rioja__General Angel V. Peñaloza',
     ('La Rioja', 'general felipe varela'):
@@ -703,6 +720,11 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
         if ur_1980_count == 0:
             raise RuntimeError(f'No 1980 urban/rural rows parsed for {j_name}')
 
+        # INDEC 2001 C101/C104/C105/C106 for CABA (code '02') only contain a note
+        # stating that no rural population exists in Ciudad de Buenos Aires.
+        if code_2001 == '02':
+            continue
+
         # 1991 Urban/Rural Total from {code_2001}000C101.xls
         sub_2001 = 'nacionales' if code_2001 == '01' else 'provinciales'
         url_c101 = f'{BASE_FTP_URL}/censos/2001/{sub_2001}/Datos/{code_2001}000C101.xls'
@@ -855,8 +877,10 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
             )
         seen_2010_depts = set()
         for rx in range(sh_p1.nrows):
-            lbl = ' '.join(str(sh_p1.cell_value(rx, 0)).strip().split())
-            if not lbl or lbl.lower().startswith((
+            raw_cell = sh_p1.cell_value(rx, 0)
+            lbl = (fmt_num(raw_cell) if isinstance(raw_cell, (int, float)) else
+                   ' '.join(str(raw_cell).strip().split()))
+            if (not lbl or lbl.lower() == 'comuna' or lbl.lower().startswith((
                     'total',
                     'departamento',
                     'partido',
@@ -865,7 +889,10 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
                     '(',
                     '24 ',
                     'resto',
-            )):
+                    'los datos',
+                    'segun',
+                    'según',
+            ))):
                 continue
             nk = _norm_key(lbl)
             if (j_name, nk) not in resolved_aa2_norm:
@@ -903,19 +930,20 @@ def build_datasets(cache: dict[str, bytes], output_dir: str) -> None:
                     if not row or len(row) < 4 or row[1] is None:
                         continue
                     d_lbl = ' '.join(str(row[1]).strip().split())
-                    if not d_lbl or d_lbl.lower().startswith((
-                            'total',
-                            'departamento',
-                            'partido',
-                            'fuente',
-                            'nota',
-                            '(',
-                            '24 ',
-                            '31 ',
-                            'resto',
-                            'antártida',
-                            'antartida',
-                    )):
+                    if (not d_lbl or d_lbl.lower() == 'comuna' or
+                            d_lbl.lower().startswith((
+                                'total',
+                                'departamento',
+                                'partido',
+                                'fuente',
+                                'nota',
+                                '(',
+                                '24 ',
+                                '31 ',
+                                'resto',
+                                'antártida',
+                                'antartida',
+                            ))):
                         continue
                     nk = _norm_key(d_lbl)
                     if (j_name, nk) not in resolved_aa2_norm:
@@ -1057,7 +1085,9 @@ def collect_required_urls() -> list[str]:
         urls.append(
             f'{BASE_FTP_URL}/censos/1991/cuadrosDefinitivos/{p2_1991}.xls')
         sub_2001 = 'nacionales' if code_2001 == '01' else 'provinciales'
-        for tbl in ('C61', 'C101', 'C104', 'C105', 'C106'):
+        tables_2001 = (('C61',) if code_2001 == '02' else
+                       ('C61', 'C101', 'C104', 'C105', 'C106'))
+        for tbl in tables_2001:
             urls.append(
                 f'{BASE_FTP_URL}/censos/2001/{sub_2001}/Datos/{code_2001}000{tbl}.xls'
             )

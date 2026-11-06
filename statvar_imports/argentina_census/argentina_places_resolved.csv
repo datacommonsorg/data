@@ -1,6 +1,7 @@
 place_name,dcid
 Total del país,country/ARG
-Buenos Aires,wikidataId/Q1486
+Ciudad Autónoma de Buenos Aires,wikidataId/Q1486
+Buenos Aires,wikidataId/Q44754
 Catamarca,wikidataId/Q44756
 Chaco,wikidataId/Q44757
 Chubut,wikidataId/Q45007
@@ -512,3 +513,18 @@ Corrientes__San Miguel,wikidataId/Q1063338
 Corrientes__San Roque,wikidataId/Q374562
 Corrientes__Santo Tomé,wikidataId/Q967023
 Corrientes__Sauce,wikidataId/Q630600
+Ciudad Autónoma de Buenos Aires__Comuna 1,wikidataId/Q5780334
+Ciudad Autónoma de Buenos Aires__Comuna 2,wikidataId/Q27894563
+Ciudad Autónoma de Buenos Aires__Comuna 3,wikidataId/Q5780360
+Ciudad Autónoma de Buenos Aires__Comuna 4,wikidataId/Q5780369
+Ciudad Autónoma de Buenos Aires__Comuna 5,wikidataId/Q5685958
+Ciudad Autónoma de Buenos Aires__Comuna 6,wikidataId/Q27894595
+Ciudad Autónoma de Buenos Aires__Comuna 7,wikidataId/Q5780392
+Ciudad Autónoma de Buenos Aires__Comuna 8,wikidataId/Q5780399
+Ciudad Autónoma de Buenos Aires__Comuna 9,wikidataId/Q17499403
+Ciudad Autónoma de Buenos Aires__Comuna 10,wikidataId/Q5780312
+Ciudad Autónoma de Buenos Aires__Comuna 11,wikidataId/Q17488660
+Ciudad Autónoma de Buenos Aires__Comuna 12,wikidataId/Q5482069
+Ciudad Autónoma de Buenos Aires__Comuna 13,wikidataId/Q5780320
+Ciudad Autónoma de Buenos Aires__Comuna 14,wikidataId/Q27894582
+Ciudad Autónoma de Buenos Aires__Comuna 15,wikidataId/Q5780324
