@@ -145,6 +145,7 @@ def _load_data_df(path: str,
                                 header=header,
                                 names=names,
                                 skiprows=skip_rows,
+                                dtype=object,
                                 on_bad_lines='skip')
     elif file_format.lower() in ["xls", "xlsx"]:
         data_df = pd.read_excel(path, header=header)
@@ -825,8 +826,8 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
         data_df = data_df.iloc[1:, :]
         data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[:-2])
-        data_df["Count_Person"] = data_df["Count_Person"].str.replace(
-            ",", "", regex=False)
+        data_df["Count_Person"] = data_df["Count_Person"].astype(
+            str).str.replace(",", "", regex=False)
         data_df = data_df[["Year", "Location", "Count_Person"]]
 
     data_df = data_df[data_df["Location"] != "country/USA"]

@@ -696,6 +696,7 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
     try:
+        df = df.astype(object)
         # keep header row (0) and data rows (14..64), dropping unwanted rows
         df = pd.concat([df.iloc[:1], df.iloc[14:65]])
         modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
@@ -969,7 +970,7 @@ class CensusUSAPopulationByRace:
                 df = _clean_xls_file(df, file)
         elif ".csv" in file:
             if "srh" in file:
-                df = pd.read_csv(file)
+                df = pd.read_csv(file, dtype=object)
                 df["Year"] = "19" + file[-6:-4]
                 df = _clean_csv2_file(df, file)
             elif "co-est00" in file:
@@ -1457,6 +1458,7 @@ def download_files():
                                                engine='python',
                                                skiprows=14,
                                                names=cols,
+                                               dtype=str,
                                                on_bad_lines='skip')
                             file_name = file_name.replace(".txt", ".csv")
                             df.to_csv(os.path.join(download_local_path,
