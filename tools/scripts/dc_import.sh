@@ -94,6 +94,11 @@ ensure_latest_jar() {
     return 0
   fi
 
+  if ! command -v curl >/dev/null 2>&1; then
+    log_error "curl executable not found in PATH. Please install curl."
+    exit 1
+  fi
+
   local tmp_jar
   tmp_jar="$(mktemp "${CACHE_DIR}/import-tool.jar.tmp.XXXXXX")"
 
@@ -125,6 +130,8 @@ ensure_latest_jar() {
     else
       rm -f "${tmp_jar}"
       log_warn "Could not check for updates from ${JAR_URL}; using cached JAR."
+      # Update timestamp to avoid retrying the network request on every run when offline.
+      touch "${CACHED_JAR}"
     fi
   fi
 
