@@ -11,7 +11,7 @@
   * `https://data.humdata.org/dataset/world-bank-education-indicators-for-sri-lanka`
 * **Release Frequency / Refresh Schedule:** Weekly check (`30 05 * * 1`, `P1Y` source release frequency)
 * **Date Range in KG:** `1960` – `2025`
-* **Total Observations:** `13,130` active observations in `latest` + `182` historical observations (`13,312` total) across `197` unique `StatisticalVariable`s (`191` active + `6` historical) and `35` places (`country/LKA`, `9` AdministrativeArea1 Provinces `LK1`–`LK9`, and `25` AdministrativeArea2 Districts `LK11`–`LK92`).
+* **Total Observations:** `13,130` active observations in `latest` + `182` historical observations (`13,312` total) across `567` unique `StatisticalVariable`s (`561` active + `6` historical) and `35` places (`country/LKA`, `9` AdministrativeArea1 Provinces `LK1`–`LK9`, and `25` AdministrativeArea2 Districts `LK11`–`LK92`).
 
 ---
 
@@ -20,15 +20,15 @@
 1. **Subnational Population Statistics (`cod-ps-lka`, `2022–2023`)**
    - **Geographic levels:** Country (`country/LKA`), 9 Provinces (`LK1`–`LK9`), and 25 Districts (`LK11`–`LK92`).
    - **Extracted file:** `input_files/srilanka_population.csv`
-   - **StatVars (`57`):** `Count_Person`, `Count_Person_Male`, `Count_Person_Female`, and 5-year age/gender cohorts (`Count_Person_<Age>`, `Count_Person_<Age>_Male`, `Count_Person_<Age>_Female` for `0To4Years` through `75To79Years` and `80OrMoreYears`).
+   - **StatVars (`54`):** `Count_Person`, `Count_Person_Male`, `Count_Person_Female`, and 5-year age/gender cohorts (`Count_Person_<Age>`, `Count_Person_<Age>_Male`, `Count_Person_<Age>_Female` for `0To4Years` through `75To79Years` and `80OrMoreYears`).
 2. **World Bank Agriculture and Rural Development Indicators (`1960–2024`)**
    - **Geographic levels:** Country (`country/LKA`).
    - **Extracted file:** `input_files/srilanka_agriculture.csv`
-   - **StatVars (`19` active + `6` historical):** Agricultural land (`Area_Farm`, `Area_Farm_AsAFractionOf_Area`, `Area_Farm_IrrigatedLand_AsAFractionOf_Area_Farm`, `Area_Farm_ArableLand`, `Area_Farm_PermanentCrops`, `Area_Forest`), crop/cereal production and yield, livestock production index, fertilizer consumption, agricultural machinery, and rural population (`Count_Person_Rural`, `Count_Person_Rural_AsAFractionOf_Count_Person`, `GrowthRate_Count_Person_Rural`).
+   - **StatVars (`21` active + `6` historical):** Agricultural land (`Area_Farm`, `Area_Farm_AsAFractionOf_Area`, `Area_Farm_IrrigatedLand_AsAFractionOf_Area_Farm`, `Area_Farm_ArableLand`, `Area_Farm_PermanentCrops`, `Area_Forest`), crop/cereal production and yield, livestock production index, fertilizer consumption, agricultural machinery, and rural population (`Count_Person_Rural`, `Count_Person_Rural_AsAFractionOf_Count_Person`, `GrowthRate_Count_Person_Rural`).
 3. **World Bank Education Indicators (`1960–2025`)**
    - **Geographic levels:** Country (`country/LKA`).
    - **Extracted file:** `input_files/srilanka_education.csv`
-   - **StatVars (`115`):** School enrollment, gross/net intake, progression, completion, persistence, literacy rates, pupil-teacher ratios, education expenditure, and Barro-Lee educational attainment across age/sex cohorts (`15To19Years` through `75To79Years`, `15OrMoreYears`, `25OrMoreYears`, `15To24Years`).
+   - **StatVars (`486` across `115` WDI indicator series):** School enrollment, gross/net intake, progression, completion, persistence, literacy rates, pupil-teacher ratios, education expenditure, and Barro-Lee educational attainment across age/sex cohorts (`15To19Years` through `75To79Years`, `15OrMoreYears`, `25OrMoreYears`, `15To24Years`).
 
 ---
 
@@ -38,12 +38,12 @@ Comparison against the previous production `Srilanka_Census` import (`/cns/jv-d/
 
 | Metric | Count | Explanation |
 |---|---|---|
-| **Previous Observations** | `10,754` | Legacy import covering 1960–2021 WDI indicators and 2022 subnational population |
+| **Previous Observations** | `10,754` | Legacy import covering 1960–2021 WDI indicators and 2022 subnational population (`10,572` active baseline + `182` historical) |
 | **Current Observations** | `13,312` | `13,130` active observations in `latest` + `182` archived in `historical` |
 | **Added Observations** | `+2,558` | 2023 subnational population across Country, 9 Provinces, and 25 Districts (`+1,995` obs) plus 2022–2025 WDI Agriculture & Education updates (`+563` obs) |
 | **Modified Observations** | `588` | Official World Bank WDI historical revisions across 1960–2021 national series |
-| **Deleted Observations** | `0` (`0.0%`) | Zero deletions (`182` observations from 6 discontinued WDI agriculture indicators are preserved in `gs://unresolved_mcf/country/srilanka/historical/` and `gs://resolved_mcf/country/srilanka/historical/`) |
-| **Schema Diffs** | `0` | All `197` StatVars resolve to existing definitions in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` |
+| **Deleted Observations** | `0` (`0.0%`) | Zero deletions (`182` observations from 6 discontinued WDI agriculture indicators are preserved in `/cns/jv-d/home/datcom/v3_mcf/country/srilanka/historical/` and `/cns/jv-d/home/datcom/v3_resolved_mcf/country/srilanka/historical/`) |
+| **Schema Diffs** | `0` | All `567` StatVars (`561` active + `6` historical) resolve to existing definitions in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` |
 
 ---
 

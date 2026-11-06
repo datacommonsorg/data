@@ -36,7 +36,7 @@
             "rule_id": "check_education_indicators_count_and_freshness",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT COUNT(*) AS EduStatVars, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE StatVar LIKE 'Count_Student%' OR StatVar LIKE 'Count_Teacher%' OR StatVar LIKE 'Mean_SchoolingDuration%' OR StatVar LIKE '%Education%' OR StatVar LIKE '%School%'",
+                "query": "SELECT COUNT(*) AS EduStatVars, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^(Count_Student|Count_Teacher|Mean_SchoolingDuration)|Education|School')",
                 "condition": "EduStatVars >= 290 AND TotalObs >= 3300 AND LatestDate >= 2019",
                 "failure_message": "Education indicators count or freshness validation failed for Srilanka_Census."
             }
