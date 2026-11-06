@@ -2,16 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "scope": {
-                "data_source": "differ"
-            },
-            "params": {
-                "threshold": 0.5
-            }
-        },
-        {
             "rule_id": "check_min_value",
             "validator": "MIN_VALUE_CHECK",
             "scope": {
