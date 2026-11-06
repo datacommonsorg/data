@@ -24,8 +24,7 @@ class TestFileSharder(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.TemporaryDirectory()
         self.input_file_path = os.path.join(self.test_dir.name, 'input.csv')
-        self.mcf_input_file_path = os.path.join(self.test_dir.name,
-                                                'input.mcf')
+        self.mcf_input_file_path = os.path.join(self.test_dir.name, 'input.mcf')
 
     def tearDown(self):
         self.test_dir.cleanup()
@@ -300,8 +299,7 @@ class TestFileSharder(unittest.TestCase):
                 self.assertEqual('dcs:StatVarObservation', row['typeOf'])
                 self.assertTrue(row['dcid'].startswith('dc/o/'))
                 row_without_note = {
-                    k: v
-                    for k, v in row.items() if k != 'tempNote'
+                    k: v for k, v in row.items() if k != 'tempNote'
                 }
                 expected_dcid = generate_node_dcid(row_without_note)
                 self.assertEqual(expected_dcid, row['dcid'])
@@ -378,8 +376,8 @@ class TestFileSharder(unittest.TestCase):
             with open(path, 'w', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow(['id', 'value'])
-                writer.writerows([f'geoId/{row}', str(row)]
-                                 for row in range(30))
+                writer.writerows(
+                    [f'geoId/{row}', str(row)] for row in range(30))
             input_files.append(path)
         output_path = os.path.join(self.test_dir.name, 'rate_out@2.csv')
         # Print counters on every update so per-file processing rates are set.
@@ -388,8 +386,7 @@ class TestFileSharder(unittest.TestCase):
                                'get_default_counter_options',
                                return_value=print_always), mock.patch.object(
                                    file_sharder, '_PROGRESS_BATCH_SIZE', 10):
-            sharder = FileSharder(input_files, output_path,
-                                  {'shard_key': 'id'})
+            sharder = FileSharder(input_files, output_path, {'shard_key': 'id'})
             sharder.process()
 
         reader_counters = sharder._reader_counters.get_counters()
@@ -400,12 +397,11 @@ class TestFileSharder(unittest.TestCase):
     def test_records_per_shard_is_based_on_sampled_records(self):
         self._create_keyed_csv_file(num_keys=2000, rows_per_key=1)
         output_path = os.path.join(self.test_dir.name, 'sized.csv')
-        sharder = FileSharder(
-            self.input_file_path, output_path, {
-                'shard_key': 'id',
-                'records_per_shard': 100,
-                'shard_sample_rate': 0.25,
-            })
+        sharder = FileSharder(self.input_file_path, output_path, {
+            'shard_key': 'id',
+            'records_per_shard': 100,
+            'shard_sample_rate': 0.25,
+        })
         sharder.process()
 
         # About 500 sampled records need about 5 shards of 100 records, not
@@ -665,15 +661,16 @@ class TestFileSharder(unittest.TestCase):
         ])
         output_path = os.path.join(self.test_dir.name, 'cols@1.csv')
         counters = counters_lib.Counters()
-        shard_file(self.input_file_path,
-                   output_path, {
-                       'shard_output_columns':
-                       "id;v2=int(v) * 2;label=f'{id}-{year}';"
-                       'camel=str_to_camel_case(name);'
-                       "month=format_date(date, '%Y, %m');"
-                       "type=type or 'State';typeOf='dcs:Place';missing=nope"
-                   },
-                   counters=counters)
+        shard_file(
+            self.input_file_path,
+            output_path, {
+                'shard_output_columns':
+                    "id;v2=int(v) * 2;label=f'{id}-{year}';"
+                    'camel=str_to_camel_case(name);'
+                    "month=format_date(date, '%Y, %m');"
+                    "type=type or 'State';typeOf='dcs:Place';missing=nope"
+            },
+            counters=counters)
 
         path = os.path.join(self.test_dir.name, 'cols-00000-of-00001.csv')
         with open(path) as f:
@@ -728,7 +725,7 @@ class TestFileSharder(unittest.TestCase):
         shard_file(
             self.input_file_path, output_path, {
                 'shard_output_columns': 'observationAbout=place;'
-                'observationDate=year;value=int(v)',
+                                        'observationDate=year;value=int(v)',
                 'shard_generate_dcid': True,
             })
 
@@ -773,8 +770,8 @@ class TestFileSharder(unittest.TestCase):
             'dcid': 'geoId/3',
             'v': '3'
         }], sorted(rows, key=lambda r: r['dcid']))
-        self.assertEqual(
-            0, counters.get_counter('error-shard-mismatched-headers'))
+        self.assertEqual(0,
+                         counters.get_counter('error-shard-mismatched-headers'))
 
     def test_output_columns_computed_from_input_columns(self):
         input_rows = [
@@ -830,17 +827,26 @@ class TestFileSharder(unittest.TestCase):
             parsed_date = dateutil.parser.parse(row['date'])
             words = re.sub(r'[^A-Za-z_0-9]', ' ', row['name']).split()
             return {
-                'observationAbout': 'country/' + row['country'],
-                'observationDate': f"{row['year']}-{int(row['month']):02d}",
-                'date': parsed_date.strftime('%Y-%m-%d'),
-                'value': str(round(float(row['count']) / 1000, 2)),
-                'size': 'large' if int(row['count']) >= 1000 else 'small',
+                'observationAbout':
+                    'country/' + row['country'],
+                'observationDate':
+                    f"{row['year']}-{int(row['month']):02d}",
+                'date':
+                    parsed_date.strftime('%Y-%m-%d'),
+                'value':
+                    str(round(float(row['count']) / 1000, 2)),
+                'size':
+                    'large' if int(row['count']) >= 1000 else 'small',
                 'variableMeasured':
-                ''.join(w[0].upper() + w[1:] for w in words),
-                'code': re.sub('[^0-9]', '', row['zip']),
-                'measurementMethod': method,
-                'numMethods': str(len(method.split(','))),
-                'unit': 'dcs:Count',
+                    ''.join(w[0].upper() + w[1:] for w in words),
+                'code':
+                    re.sub('[^0-9]', '', row['zip']),
+                'measurementMethod':
+                    method,
+                'numMethods':
+                    str(len(method.split(','))),
+                'unit':
+                    'dcs:Count',
             }
 
         output_path = os.path.join(self.test_dir.name, 'computed@1.csv')
@@ -901,10 +907,7 @@ class TestFileSharder(unittest.TestCase):
             'shard_key': '{id}',
         }
         counters = counters_lib.Counters()
-        shard_file(self.input_file_path,
-                   output_path,
-                   config,
-                   counters=counters)
+        shard_file(self.input_file_path, output_path, config, counters=counters)
 
         shards = self._read_shards('parallel_out', 2)
         combined = shards[0] + shards[1]
@@ -1095,9 +1098,7 @@ class TestFileSharder(unittest.TestCase):
         int_zero = file_sharder.generate_node_dcid({**base, 'value': 0})
         float_zero = file_sharder.generate_node_dcid({**base, 'value': 0.0})
         str_zero = file_sharder.generate_node_dcid({**base, 'value': '0'})
-        str_zero_dec = file_sharder.generate_node_dcid({
-            **base, 'value': '0.0'
-        })
+        str_zero_dec = file_sharder.generate_node_dcid({**base, 'value': '0.0'})
         self.assertNotEqual(missing_dcid, int_zero)
         self.assertEqual(int_zero, float_zero)
         self.assertEqual(int_zero, str_zero)
@@ -1190,11 +1191,10 @@ class TestFileSharder(unittest.TestCase):
             self.input_file_path,
             mcf_out,
             {
-                'shard_ignore_columns':
-                'tmp_.*',
+                'shard_ignore_columns': 'tmp_.*',
                 'shard_add_columns':
-                'Node;typeOf=dcid:StatVarObservation;observationPeriod=P1M;'
-                'unit=$;measurementMethod=CACensus;scalingFactor=100',
+                    'Node;typeOf=dcid:StatVarObservation;observationPeriod=P1M;'
+                    'unit=$;measurementMethod=CACensus;scalingFactor=100',
             },
         )
         mcf_shard = os.path.join(self.test_dir.name,
@@ -1225,20 +1225,20 @@ class TestFileSharder(unittest.TestCase):
             output_path,
             {
                 'shard_ignore_columns':
-                '^#.*|.*_fips|sv|date|v',
+                    '^#.*|.*_fips|sv|date|v',
                 'shard_add_columns':
-                ';'.join([
-                    'dcid',
-                    'typeOf=dcid:StatVarObservation',
-                    'observationAbout=dcid:geoId/{state_fips}{county_fips}',
-                    'variableMeasured=dcid:{sv}',
-                    "observationDate=format_date(date, '%Y-%m')",
-                    'value=int(v) * 100',
-                    'observationPeriod=P1M',
-                    "unit='$'",
-                    'measurementMethod=CACensus',
-                    'scalingFactor=100',
-                ]),
+                    ';'.join([
+                        'dcid',
+                        'typeOf=dcid:StatVarObservation',
+                        'observationAbout=dcid:geoId/{state_fips}{county_fips}',
+                        'variableMeasured=dcid:{sv}',
+                        "observationDate=format_date(date, '%Y-%m')",
+                        'value=int(v) * 100',
+                        'observationPeriod=P1M',
+                        "unit='$'",
+                        'measurementMethod=CACensus',
+                        'scalingFactor=100',
+                    ]),
             },
             counters=counters,
         )
@@ -1306,11 +1306,10 @@ class TestFileSharder(unittest.TestCase):
             self.input_file_path,
             output_path,
             {
-                'shard_ignore_columns':
-                '#.*',
+                'shard_ignore_columns': '#.*',
                 'shard_output_columns':
-                'dcid;*;typeOf=dcid:StatVarObservation;'
-                'label={observationAbout}_{observationDate}',
+                    'dcid;*;typeOf=dcid:StatVarObservation;'
+                    'label={observationAbout}_{observationDate}',
             },
         )
         out_rows = self._read_shards('wildcard', 1)[0]
@@ -1349,11 +1348,10 @@ class TestFileSharder(unittest.TestCase):
             jsonl_path,
             out_path,
             {
-                'shard_ignore_columns':
-                'tmp_.*|year|month',
+                'shard_ignore_columns': 'tmp_.*|year|month',
                 'shard_add_columns':
-                "Node;typeOf=dcid:StatVarObservation;"
-                "observationDate=format_date(f'{year}-{month}', '%Y-%m')",
+                    "Node;typeOf=dcid:StatVarObservation;"
+                    "observationDate=format_date(f'{year}-{month}', '%Y-%m')",
             },
         )
         sharder.process()
@@ -1365,6 +1363,80 @@ class TestFileSharder(unittest.TestCase):
         self.assertEqual('2020-01', rows[0]['observationDate'])
         self.assertEqual('dcid:geoId/06', rows[0]['observationAbout'])
         self.assertNotEqual('tmp_ignore', sharder._writer._shard_key)
+
+    def test_auto_dcid_sharding_for_mcf_and_schema_vs_general_csv(self):
+        # 1. Observation CSV where all rows share the same first columns
+        #    ('typeOf' and 'observationAbout') and have no dcid/Node column.
+        obs_rows = [{
+            'typeOf': 'dcs:StatVarObservation',
+            'observationAbout': 'dcid:geoId/06',
+            'variableMeasured': f'dcid:Count_Person_{i}',
+            'observationDate': '2020',
+            'value': str(i * 100),
+        } for i in range(20)]
+        self._create_csv_file(obs_rows)
+
+        # Sharding to .mcf without --shard_generate_dcid automatically generates
+        # Node: dcid:dc/o/... and distributes across shards by that DCID.
+        mcf_out = os.path.join(self.test_dir.name, 'auto_obs@4.mcf')
+        mcf_counters = counters_lib.Counters()
+        shard_file(self.input_file_path, mcf_out, {}, counters=mcf_counters)
+        self.assertEqual(20, mcf_counters.get_counter('shard-dcid-generated'))
+
+        mcf_shards = []
+        for idx in range(4):
+            shard_path = os.path.join(self.test_dir.name,
+                                      f'auto_obs-{idx:05d}-of-00004.mcf')
+            with McfFileDictIO(shard_path, 'r') as reader:
+                nodes = reader.readlines()
+                for node in nodes:
+                    self.assertTrue(node['Node'].startswith('dcid:dc/o/'))
+                mcf_shards.append(nodes)
+        self.assertGreater(sum(1 for s in mcf_shards if s), 1)
+
+        # Sharding the same observation CSV to .csv without --shard_generate_dcid
+        # routes each row to the exact same shard using its generated DCID
+        # without adding an unrequested 'dcid' column to the CSV output.
+        csv_out = os.path.join(self.test_dir.name, 'auto_obs@4.csv')
+        csv_counters = counters_lib.Counters()
+        shard_file(self.input_file_path, csv_out, {}, counters=csv_counters)
+        self.assertEqual(0, csv_counters.get_counter('shard-dcid-generated'))
+        csv_shards = self._read_shards('auto_obs', 4)
+        for idx in range(4):
+            self.assertEqual(len(mcf_shards[idx]), len(csv_shards[idx]))
+            for row in csv_shards[idx]:
+                self.assertNotIn('dcid', row)
+                self.assertNotIn('Node', row)
+
+        # 2. General non-schema CSV sharded to .csv without shard_key or dcid
+        #    does not generate DCIDs and routes by its first column ('id').
+        general_rows = [
+            {
+                'id': 'key_1',
+                'val': 'a'
+            },
+            {
+                'id': 'key_2',
+                'val': 'b'
+            },
+            {
+                'id': 'key_1',
+                'val': 'c'
+            },
+        ]
+        self._create_csv_file(general_rows)
+        gen_out = os.path.join(self.test_dir.name, 'general@3.csv')
+        gen_counters = counters_lib.Counters()
+        shard_file(self.input_file_path, gen_out, {}, counters=gen_counters)
+        self.assertEqual(0, gen_counters.get_counter('shard-dcid-generated'))
+        gen_shards = self._read_shards('general', 3)
+        key1_shards = [
+            idx for idx, s in enumerate(gen_shards)
+            if any(r['id'] == 'key_1' for r in s)
+        ]
+        self.assertEqual(1, len(key1_shards))
+        for r in sum(gen_shards, []):
+            self.assertEqual(['id', 'val'], list(r.keys()))
 
 
 if __name__ == '__main__':

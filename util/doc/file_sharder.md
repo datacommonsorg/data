@@ -91,7 +91,7 @@ The table below lists all configuration options. Each option can be passed as a 
 | :--- | :--- | :--- | :--- | :--- |
 | `shard_input` | `--shard_input` | `str` | `''` | Input path, glob pattern, comma-separated list, or sharded pattern (`input@10.csv`). |
 | `shard_output` | `--shard_output` | `str` | `''` | Output pattern (`output@10.csv`, `output-*.mcf`, or template `shard-{index:05d}-of-{shard_count:05d}.csv`). |
-| `shard_key` | `--shard_key` | `str` | `''` | Column or property used to route records. Defaults to `dcid`, then `Node`, then the first header column. Format patterns such as `{geoId}-{year}` are supported. |
+| `shard_key` | `--shard_key` | `str` | `''` | Column or property used to route records. Defaults to `dcid`, then `Node`, then generated node `dcid` for schema/observation records, or the first header column for general CSVs. Format patterns such as `{geoId}-{year}` are supported. |
 | `shard_key_prefix_length` | `--shard_key_prefix_length` | `int` | `0` | If greater than 0, uses only the first N characters of the key string to compute the shard hash. |
 | `shard_count` | `--shard_count` | `int` | `0` | Number of output shards. If 0, derived from total estimated records divided by `records_per_shard`. |
 | `records_per_shard` | `--records_per_shard` | `int` | `100000` | Target record count per shard when `shard_count` is not explicitly set. |
@@ -105,7 +105,7 @@ The table below lists all configuration options. Each option can be passed as a 
 | `shard_add_columns` | `--shard_add_columns` | `str` | `''` | Columns to add or override while keeping non-ignored input columns, separated by semicolons (`<col>` or `<col>=<value_or_expr>`, e.g. `'dcid;typeOf=dcid:StatVarObservation;observationAbout=dcid:geoId/{fips}'`). |
 | `shard_output_columns` | `--shard_output_columns` | `str` | `None` | Output columns and transformation expressions separated by semicolons (e.g. `'dcid;*;val=int(raw_val)*2'`). Supports `*` for all non-ignored input columns. |
 | `shard_ignore_columns` | `--shard_ignore_columns` | `list` | `[]` | Column names or regular expressions (e.g. `'#input,^#.*,tmp_.*'`) to exclude from output records. For MCF outputs, `#.*` columns are ignored by default. |
-| `shard_generate_dcid` | `--shard_generate_dcid` | `bool` | `False` | When True (or when an output record has an empty `dcid`/`Node` column), generates deterministic base32 DCIDs via `util/dcid_generator.py` (replicating `DcidGenerator.java` FarmHash64 `dc/o/<id>` for `StatVarObservation`, assignable IDs for `Place`, `dc/<id>` for `StatisticalVariable`, and SHA-256 base32 `dc/<id>` for general nodes). |
+| `shard_generate_dcid` | `--shard_generate_dcid` | `bool` | `False` | When True (or automatically when writing `.mcf` outputs or when an output record has an empty `dcid`/`Node` column), generates deterministic base32 DCIDs via `util/dcid_generator.py` (replicating `DcidGenerator.java` FarmHash64 `dc/o/<id>` for `StatVarObservation`, assignable IDs for `Place`, `dc/<id>` for `StatisticalVariable`, and SHA-256 base32 `dc/<id>` for general nodes). |
 | `shard_dcid_ignore_props`| `--shard_dcid_ignore_props` | `list` | `[]` | Extra property names to exclude when building node DCID keys (e.g. `'value'` to compute value-independent observation DCIDs). |
 | `shard_encoding` | `--shard_encoding` | `str` | `None` | Optional character encoding when reading text-based input files. |
 
