@@ -32,8 +32,8 @@ class DownloadExistingFacilitiesTest(absltest.TestCase):
 
     def test_download_existing_facilities(self):
         facility_nodes = [
-            mock.Mock(dcid="epaGhgrpFacilityId/1001"),
             mock.Mock(dcid="epaGhgrpFacilityId/1002"),
+            mock.Mock(dcid="epaGhgrpFacilityId/1001"),
             mock.Mock(dcid="epaGhgrpFacilityId/1001"),
             mock.Mock(dcid=None),
         ]

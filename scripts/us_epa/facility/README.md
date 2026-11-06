@@ -2,10 +2,12 @@
 # EPA facilities reporting GHG information
 
 This directory contains scripts to import the EPA facility data from the
-following GHG tables:
-- [`V_GHG_EMITTER_FACILITIES`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_EMITTER_FACILITIES&p_topic=GHG)
-- [`V_GHG_SUPPLIER_FACILITIES`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_SUPPLIER_FACILITIES&p_topic=GHG)
-- [`V_GHG_INJECTION_FACILITIES`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_GHG_INJECTION_FACILITIES&p_topic=GHG)
+consolidated GHGRP facility table:
+- [`PUB_DIM_FACILITY`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=PUB_DIM_FACILITY)
+  (which consolidates the retired legacy Envirofacts views
+  `V_GHG_EMITTER_FACILITIES`, `V_GHG_SUPPLIER_FACILITIES`, and
+  `V_GHG_INJECTION_FACILITIES`, covering Direct Emitters, Suppliers, and CO2
+  Injection facilities).
 
 The generated facilities are of type `EpaReportingFacility` and they are
 attached to a `CensusZipCodeTabulationArea` and `County` (via
@@ -14,7 +16,8 @@ attached to a `CensusZipCodeTabulationArea` and `County` (via
 ## Resolution
 
 We use the "crosswalk" maps between the GHG Facility ID
-(`epaGhgrpFacilityId`), FRS ID (`epaFrsId`) and ORIS ID (`eiaPlantCode`).
+(`epaGhgrpFacilityId`), FRS ID (`epaFrsId`) and ORIS ID (`partOf` reference to
+`eia/pp/<code>`).
 
 Note that a single FRS ID or ORIS ID can have multiple GHG Facility IDs.
 Thus, the DCID is constructed using `epaGhgrpFacilityId`, but include all the
@@ -25,43 +28,48 @@ EIA power plant import), so we refer to them from `EpaReportingFacility` nodes.
 
 ## Generating and Validating Artifacts
 
-1. To compute crosswalks, download tables and regenerate the TMCF/CSV, run:
+1. To download `PUB_DIM_FACILITY`, compute crosswalks in `input_files/`, and
+   regenerate the TMCF/CSV in `output/`, run:
 
       ```
       ./generate.sh
       ```
 
-2. To run unit tests:
+2. To run unit tests (from the repository root):
 
       ```
-      python3 -m unittest discover -v -s ../ -p "*_test.py"
+      ./run_tests.sh -p scripts/us_epa/facility
       ```
 
 3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
 
     ```
-    dc-import lint output/*
+    dc-import genmcf output/*
     ```
 
-    This produced the following warning counters, where
-    `Existence_MissingReference_containedInPlace` is because there are zip codes that
-    are not Census ZCTAs (e.g, https://datacommons.org/browser/zip/16873).
+    This produces the following summary in `dc_generated/report.json`:
 
-    ```
+    ```json
       "levelSummary": {
-        "LEVEL_WARNING": "9010"
-      },
-      "counterSet": {
-        "counters": {
-          "Existence_NumChecks": "148256",
-          "Existence_NumDcCalls": "83",
-          "NumNodeSuccesses": "10512",
-          "NumPVSuccesses": "106998",
-          "NumRowSuccesses": "10512",
-          "StrSplit_EmptyToken_eiaPlantCode": "8498",
-          "StrSplit_EmptyToken_containedInPlace": "134",
-          "StrSplit_EmptyToken_naics": "2"
-          "Existence_MissingReference_containedInPlace": "376",
+        "LEVEL_INFO": {
+          "counters": {
+            "NumRowSuccesses": "11358",
+            "NumPVSuccesses": "111985",
+            "Existence_NumChecks": "158134",
+            "NumNodeSuccesses": "11358",
+            "Existence_NumDcCalls": "11"
+          }
+        },
+        "LEVEL_WARNING": {
+          "counters": {
+            "StrSplit_EmptyToken_partOf": "9392",
+            "StrSplit_EmptyToken_latitude": "1136",
+            "StrSplit_EmptyToken_naics": "1",
+            "API_EmptyDcCallResponse": "1",
+            "StrSplit_EmptyToken_containedInPlace": "633",
+            "StrSplit_EmptyToken_longitude": "1136",
+            "StrSplit_EmptyToken_epaFrsId": "655"
+          }
         }
-      },
+      }
     ```

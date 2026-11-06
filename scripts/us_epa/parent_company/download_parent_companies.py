@@ -15,32 +15,35 @@
 
 import os
 import pathlib
-import ssl
 import sys
-
-import pandas as pd
 
 from absl import app
 from absl import flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))
-from us_epa.util import facilities_helper as fh
+REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_PATH, '../../..'))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('companies_table_name', '', 'Name of table to download')
-flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
+flags.DEFINE_string('companies_table_name', 'V_PARENT_COMPANY_INFO',
+                    'Name of table to download')
+flags.DEFINE_string('output_path', os.path.join(_SCRIPT_PATH, 'input_files'),
+                    'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
 
 
 def main(_):
-    assert FLAGS.output_path
-    assert FLAGS.companies_table_name
-    pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
+    if not FLAGS.output_path:
+        raise ValueError('output_path must be provided.')
+    if not FLAGS.companies_table_name:
+        raise ValueError('companies_table_name must be provided.')
+    pathlib.Path(FLAGS.output_path).mkdir(parents=True, exist_ok=True)
     fh.download(_API_ROOT, FLAGS.companies_table_name, _MAX_ROWS,
                 FLAGS.output_path)
 
