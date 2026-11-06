@@ -42,10 +42,18 @@ properties with ';' (a value can be a comma separated list):
 
 To emit only some columns, or columns computed from other columns, separate
 the columns with ';'. A column without '=' copies the input value; anything
-after '=' is a Python expression with the input columns as variables and the
-`eval_functions` helpers such as `format_date`:
+after '=' is a fixed value, format template, or Python expression with the
+input columns as variables and the `eval_functions` helpers such as
+`format_date`:
   --shard_output_columns="dcid;value=int(v) * 100;label=f'{dcid}-{year}';date=format_date(d, '%Y-%m');typeOf='dcs:StatVarObservation'"
 Default values are added before the output columns are computed.
+
+To convert an observation CSV directly to sharded MCF files while dropping
+`#input`, adding `typeOf=dcid:StatVarObservation`, and auto-generating the
+`StatVarObservation` DCID:
+  --shard_input=observations.csv --shard_output=obs@10.mcf \
+  --shard_ignore_columns="#input" \
+  --shard_add_columns="Node;typeOf=dcid:StatVarObservation"
 
 Example usage within a Python script:
   import file_sharder

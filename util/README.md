@@ -70,6 +70,11 @@ To date, all our util libraries cater to writing MCF.
     graph remain under 100 MB, so we've provided a class that will abstract
     writing to sharded files. See the file docstring for more detail.
 
+-   `dcid_generator`: Generates deterministic Data Commons IDs (`dcid`) for
+    `StatVarObservation` (`dc/o/<id>` via 64-bit FarmHash),
+    `StatisticalVariable` (`dc/<id>`), `Place`, and general MCF graph nodes
+    (matching `DcidGenerator.java` in `datacommonsorg/import`).
+
 -   `statvar_dcid_generator`: This library helps to generate the dcid for
     statistical variables.
 
@@ -78,6 +83,10 @@ To date, all our util libraries cater to writing MCF.
 #### Testing `mcf_template_filler`
 
 `python3 -m unittest mcf_template_filler_test`
+
+#### Testing `dcid_generator`
+
+`python3 -m unittest dcid_generator_test.py`
 
 #### Testing `statvar_dcid_generator`
 

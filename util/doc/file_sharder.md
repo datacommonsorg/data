@@ -15,7 +15,7 @@
   - [2. Route MCF graph nodes into a fixed shard count](#2-route-mcf-graph-nodes-into-a-fixed-shard-count)
   - [3. Read large seekable files with parallel workers](#3-read-large-seekable-files-with-parallel-workers)
   - [4. Transform columns and evaluate expressions](#4-transform-columns-and-evaluate-expressions)
-  - [5. Convert CSV to MCF with column filtering, derived columns, and auto-generated DCIDs](#5-convert-csv-to-mcf-with-column-filtering-derived-columns-and-auto-generated-dcids)
+  - [5. Convert observation CSV to MCF with generated DCID and typeOf:StatVarObservation](#5-convert-observation-csv-to-mcf-with-generated-dcid-and-typeofstatvarobservation)
   - [6. Deduplicate records across inputs](#6-deduplicate-records-across-inputs)
   - [7. Deterministic key sampling](#7-deterministic-key-sampling)
 - [Limitations](#limitations)
@@ -184,9 +184,19 @@ python3 util/file_sharder.py \
 
 Completion: Output shards contain only the specified columns (`geoId`, `year`, `value`, `date`). The counter `shard-output-column-errors` confirms zero expression evaluation failures.
 
-### 5. Convert CSV to MCF with column filtering, derived columns, and auto-generated DCIDs
+### 5. Convert observation CSV to MCF with generated DCID and typeOf:StatVarObservation
 
-Convert a CSV file directly into sharded MCF files while dropping comment/helper columns (`#input`, `fips`), adding fixed and formatted columns (`typeOf=dcid:StatVarObservation`, `observationAbout=dcid:geoId/{fips}`), and automatically generating `DcidGenerator`-compatible `StatVarObservation` DCIDs (`dc/o/<id>`):
+Convert an observation CSV file directly into sharded MCF files by adding `Node` (or `dcid`) and `typeOf=dcid:StatVarObservation` via `--shard_add_columns`. Leaving `Node` (or `dcid`) without a value automatically invokes `dcid_generator.generate_node_dcid`, which generates `DcidGenerator`-compatible `StatVarObservation` DCIDs (`dc/o/<id>` via 64-bit FarmHash). Any `#.*` columns (such as `#input` from `stat_var_processor.py`) are excluded automatically when writing to `.mcf`, and additional helper columns can be dropped with `--shard_ignore_columns`:
+
+```bash
+python3 util/file_sharder.py \
+  --shard_input="data/observations.csv" \
+  --shard_output="data/mcf/obs@10.mcf" \
+  --shard_ignore_columns="#input" \
+  --shard_add_columns="Node;typeOf=dcid:StatVarObservation"
+```
+
+If `observationAbout` or other properties need to be derived from input columns (such as a `fips` column), include format templates or expressions in `--shard_add_columns`:
 
 ```bash
 python3 util/file_sharder.py \
@@ -196,7 +206,29 @@ python3 util/file_sharder.py \
   --shard_add_columns="Node;typeOf=dcid:StatVarObservation;observationAbout=dcid:geoId/{fips}"
 ```
 
-Completion: Produces sharded `.mcf` files with `Node: dcid:dc/o/...` generated using `util/dcid_generator.py` (matching `DcidGenerator.forStatVarObs` in `datacommonsorg/import`), omitting `#input` and `fips`.
+For an input CSV row:
+
+```csv
+#input,observationAbout,variableMeasured,observationDate,value,observationPeriod,unit,measurementMethod,scalingFactor
+row1,dcid:geoId/06001,dcid:Count_Person,2017-01,1000,P1M,$,CACensus,100
+```
+
+This writes the MCF node:
+
+```mcf
+Node: dcid:dc/o/3mptcb1vdfvr5
+typeOf: dcid:StatVarObservation
+observationAbout: dcid:geoId/06001
+variableMeasured: dcid:Count_Person
+observationDate: 2017-01
+value: 1000
+observationPeriod: dcid:P1M
+unit: dcid:$
+measurementMethod: dcid:CACensus
+scalingFactor: 100
+```
+
+Completion: Produces sharded `.mcf` files with `Node: dcid:dc/o/...` generated using `util/dcid_generator.py` (matching `DcidGenerator.forStatVarObs` in `datacommonsorg/import`), omitting `#input` and any ignored columns.
 
 ### 6. Deduplicate records across inputs
 
@@ -230,4 +262,4 @@ Completion: Counter `shard-sampled-dropped` reflects excluded keys. Kept records
 - **Compressed files process with a single worker per file.** Compressed formats (`.gz`, `.bz2`, `.zst`, `.zip`, `.tgz`, `.tar`) do not support random byte seeking. The sharder allocates one worker thread per compressed file.
 - **JSON Lists process as single files.** Standard `.json` containing a single root array or object does not support line-based byte seeking. Convert inputs to JSON Lines (`.jsonl`, `.ndjson`) to enable multi-threaded byte-range chunking.
 - **Shard output order is hash-partitioned.** Records route to shards by key hash. Within each output shard, records appear in arrival order rather than sorted key order.
-- **Output expressions use a restricted `eval()` environment.** Expressions in `shard_output_columns` run through `eval_functions.evaluate_statement` with input columns as variables, standard Python builtins (`int`, `float`, `round`, `str`, `len`), and `eval_functions` helpers (`format_date`, `str_to_camel_case`, `datetime_strptime`, `relativedelta`, `re_sub`).
+- **Output expressions use a restricted `eval()` environment.** Expressions in `shard_output_columns` and `shard_add_columns` run through `eval_functions.evaluate_statement` with input columns as variables, standard Python builtins (`int`, `float`, `round`, `str`, `len`), and `eval_functions` helpers (`format_date`, `str_to_camel_case`, `datetime_strptime`, `relativedelta`, `re_sub`, `generate_node_dcid`, `generate_statvar_obs_dcid`, `generate_place_dcid`, `generate_statvar_hash_dcid`).
