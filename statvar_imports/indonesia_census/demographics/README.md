@@ -28,8 +28,8 @@ This import downloads and processes Indonesia's demographic population statistic
   * `var_id=2791`: *Jumlah Penduduk Laki-Laki menurut Kabupaten/Kota dan Kelompok umur* (Male Population by Regency/City and Age Group)
   * `var_id=2792`: *Jumlah Penduduk Perempuan menurut Kabupaten Kota dan Kelompok Umur* (Female Population by Regency/City and Age Group)
 * **Generated Input Files**:
-  * `input_files/idn_population_2023_2025.csv` (processed with `pvmaps/idn_population_pvmap.csv`)
-  * `input_files/idn_age_gender_2023_2025.csv` (processed with `pvmaps/idn_age_gender_pvmap.csv`)
+  * `input_files/idn_population.csv` (processed with `pvmaps/idn_population_pvmap.csv`)
+  * `input_files/idn_age_gender.csv` (processed with `pvmaps/idn_age_gender_pvmap.csv`)
 * **StatVars (`51` active)**:
   * `dcid:Count_Person`
   * `dcid:Count_Person_Male`, `dcid:Count_Person_Female`
@@ -54,8 +54,9 @@ Comparison against the legacy CNS Demographic CSVs (`/cns/jv-d/home/datcom/v3_mc
 
 ## 4. How to Run
 
-1. **Copy historical baseline CSVs from GCS into `output_files/` and download fresh BPS WebAPI data into `input_files/`:**
+1. **Set your BPS WebAPI key and run `download.py` to copy historical baseline CSVs from GCS into `output_files/` and download fresh BPS WebAPI data into `input_files/`:**
    ```bash
+   export BPS_API_KEY="<your_bps_api_key>"
    python3 statvar_imports/indonesia_census/demographics/download.py \
      --output_dir=statvar_imports/indonesia_census/demographics/input_files \
      --historical_output_dir=statvar_imports/indonesia_census/demographics/output_files
@@ -64,22 +65,22 @@ Comparison against the legacy CNS Demographic CSVs (`/cns/jv-d/home/datcom/v3_mc
 2. **Process the downloaded CSVs using `stat_var_processor.py`:**
    ```bash
    python3 tools/statvar_importer/stat_var_processor.py \
-     --input_data=statvar_imports/indonesia_census/demographics/input_files/idn_population_2023_2025.csv \
+     --input_data=statvar_imports/indonesia_census/demographics/input_files/idn_population.csv \
      --pv_map=statvar_imports/indonesia_census/demographics/pvmaps/idn_population_pvmap.csv \
      --config_file=statvar_imports/indonesia_census/demographics/idn_demographic_metadata.csv \
      --places_resolved_csv=statvar_imports/indonesia_census/demographics/idn_places_resolved.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-     --output_path=statvar_imports/indonesia_census/demographics/output_files/idn_population_2023_2025 \
-     --output_counters=statvar_imports/indonesia_census/demographics/counters/idn_population_2023_2025_counters.csv
+     --output_path=statvar_imports/indonesia_census/demographics/output_files/idn_population \
+     --output_counters=statvar_imports/indonesia_census/demographics/counters/idn_population_counters.csv
 
    python3 tools/statvar_importer/stat_var_processor.py \
-     --input_data=statvar_imports/indonesia_census/demographics/input_files/idn_age_gender_2023_2025.csv \
+     --input_data=statvar_imports/indonesia_census/demographics/input_files/idn_age_gender.csv \
      --pv_map=statvar_imports/indonesia_census/demographics/pvmaps/idn_age_gender_pvmap.csv \
      --config_file=statvar_imports/indonesia_census/demographics/idn_demographic_metadata.csv \
      --places_resolved_csv=statvar_imports/indonesia_census/demographics/idn_places_resolved.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-     --output_path=statvar_imports/indonesia_census/demographics/output_files/idn_age_gender_2023_2025 \
-     --output_counters=statvar_imports/indonesia_census/demographics/counters/idn_age_gender_2023_2025_counters.csv
+     --output_path=statvar_imports/indonesia_census/demographics/output_files/idn_age_gender \
+     --output_counters=statvar_imports/indonesia_census/demographics/counters/idn_age_gender_counters.csv
    ```
 
 3. **Run unit tests:**

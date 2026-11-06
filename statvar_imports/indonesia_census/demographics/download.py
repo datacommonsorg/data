@@ -48,12 +48,12 @@ flags.DEFINE_string(
 )
 flags.DEFINE_string(
     'population_filename',
-    'idn_population_2023_2025.csv',
+    'idn_population.csv',
     'Filename for the total population CSV table.',
 )
 flags.DEFINE_string(
     'age_gender_filename',
-    'idn_age_gender_2023_2025.csv',
+    'idn_age_gender.csv',
     'Filename for the age and gender population CSV table.',
 )
 flags.DEFINE_string(
@@ -83,8 +83,8 @@ flags.DEFINE_integer(
 )
 flags.DEFINE_string(
     'api_key',
-    os.environ.get('BPS_API_KEY', 'dc6660972b3db647a0d48eba65fba051'),
-    'BPS WebAPI key.',
+    os.environ.get('BPS_API_KEY', ''),
+    'BPS WebAPI key (defaults to BPS_API_KEY environment variable).',
 )
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
@@ -93,7 +93,6 @@ HISTORICAL_CSVS = (
     'idn_population_historical_1971_2022.csv',
     'idn_age_gender_historical_2010_2022.csv',
 )
-
 
 PROVINCE_SUFFIX_BY_CODE: dict[int, str] = {
     1100: 'Aceh',
@@ -136,6 +135,63 @@ PROVINCE_SUFFIX_BY_CODE: dict[int, str] = {
     9700: 'Papua Pegunungan',
 }
 
+PRE_2022_PAPUA_PROVINCE_CODES: frozenset[int] = frozenset({9100, 9400})
+POST_2022_PAPUA_PROVINCE_CODES: frozenset[int] = frozenset(
+    {9200, 9500, 9600, 9700})
+
+# 26 regencies/cities carved out of Papua Barat (9100) and Papua (9400) into
+# Papua Barat Daya (9200), Papua Selatan (9500), Papua Tengah (9600), and
+# Papua Pegunungan (9700) in late 2022. BPS WebAPI returns both legacy 91xx/94xx
+# and current 92xx/95xx/96xx/97xx codes for these regencies.
+SPLIT_PAPUA_REGENCY_NAMES: frozenset[str] = frozenset({
+    # Moved from Papua Barat (9100) to Papua Barat Daya (9200)
+    'Sorong',
+    'Sorong Selatan',
+    'Raja Ampat',
+    'Tambrauw',
+    'Maybrat',
+    'Kota Sorong',
+    # Moved from Papua (9400) to Papua Selatan (9500)
+    'Merauke',
+    'Boven Digoel',
+    'Mappi',
+    'Asmat',
+    # Moved from Papua (9400) to Papua Tengah (9600)
+    'Nabire',
+    'Puncak Jaya',
+    'Mimika',
+    'Paniai',
+    'Puncak',
+    'Dogiyai',
+    'Intan Jaya',
+    'Deiyai',
+    # Moved from Papua (9400) to Papua Pegunungan (9700)
+    'Jayawijaya',
+    'Pegunungan Bintang',
+    'Yahukimo',
+    'Tolikara',
+    'Mamberamo Tengah',
+    'Yalimo',
+    'Lanny Jaya',
+    'Nduga',
+})
+
+
+def _validate_api_key(api_key: str) -> str:
+    """Validates that a non-empty BPS WebAPI key is provided."""
+    if not api_key or not api_key.strip():
+        raise ValueError(
+            'BPS WebAPI key is required. Set the BPS_API_KEY environment '
+            'variable or pass --api_key.')
+    return api_key.strip()
+
+
+def _sanitize_url(url: str, api_key: str) -> str:
+    """Redacts the BPS WebAPI key from a URL string before logging/raising."""
+    if api_key:
+        return url.replace(api_key, '<REDACTED>')
+    return url
+
 
 def clean_bps_label(raw_label: Any) -> str:
     """Strips HTML tags and normalizes whitespace in BPS labels."""
@@ -143,6 +199,20 @@ def clean_bps_label(raw_label: Any) -> str:
     text = re.sub(r'<[^>]+>', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text
+
+
+def is_legacy_split_papua_regency(
+    code: int,
+    raw_label: Any,
+    post_split_regencies: set[str] | frozenset[str] = SPLIT_PAPUA_REGENCY_NAMES,
+) -> bool:
+    """Returns True if code is a pre-2022 91xx/94xx code for a split Papua regency."""
+    if code == 9999 or code % 100 == 0:
+        return False
+    prov_code = (code // 100) * 100
+    if prov_code not in PRE_2022_PAPUA_PROVINCE_CODES:
+        return False
+    return clean_bps_label(raw_label) in post_split_regencies
 
 
 def format_place_name(code: int, raw_label: Any) -> str:
@@ -180,6 +250,7 @@ def fetch_available_years(
     api_key: str,
 ) -> list[dict[str, Any]]:
     """Fetches all available year definitions (th_id, th) for a BPS variable."""
+    api_key = _validate_api_key(api_key)
     years: list[dict[str, Any]] = []
     page = 1
     while True:
@@ -187,11 +258,10 @@ def fetch_available_years(
                f'/var/{var_id}/page/{page}/key/{api_key}/')
         resp = download_util.request_url(url=url, output='json')
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
-            logging.fatal(
-                'Failed to fetch available years from BPS WebAPI (page %d): %s',
-                page,
-                resp,
-            )
+            safe_url = _sanitize_url(url, api_key)
+            raise RuntimeError(
+                'Failed to fetch available years from BPS WebAPI '
+                f'(var_id={var_id}, page={page}, url={safe_url}): {resp}')
         data = resp.get('data')
         if not isinstance(data, list) or len(data) < 2:
             break
@@ -212,8 +282,8 @@ def fetch_variable_data(
     var_id: int,
     api_key: str,
     start_year: int = 2023,
-) -> tuple[list[tuple[int, str]], list[str], list[str],
-           dict[tuple[int, str, str], str]]:
+) -> tuple[list[tuple[int, str]], list[str], list[str], dict[tuple[int, str,
+                                                                   str], str]]:
     """Downloads year chunks for a BPS demographic variable.
 
     Returns:
@@ -222,19 +292,21 @@ def fetch_variable_data(
       year_labels: Ordered list of year strings.
       values: Dict mapping (region_code, age_group_label, year_str) -> value str.
     """
+    api_key = _validate_api_key(api_key)
     all_years = fetch_available_years(domain=domain,
                                       var_id=var_id,
                                       api_key=api_key)
     if not all_years:
-        logging.fatal('No years returned for BPS var_id=%d.', var_id)
+        raise ValueError(f'No years returned for BPS var_id={var_id}.')
 
     years = [
-        y for y in all_years
-        if str(y.get('th', '')).strip().isdigit() and int(
-            str(y['th']).strip()) >= start_year
+        y for y in all_years if str(y.get('th', '')).strip().isdigit() and
+        int(str(y['th']).strip()) >= start_year
     ]
     if not years:
-        years = all_years
+        raise ValueError(
+            f'No available years >= {start_year} found for BPS var_id={var_id}.'
+        )
 
     places: list[tuple[int, str]] = []
     seen_codes: set[int] = set()
@@ -250,12 +322,10 @@ def fetch_variable_data(
                f'/var/{var_id}/th/{th_param}/key/{api_key}/')
         resp = download_util.request_url(url=url, output='json')
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
-            logging.fatal(
-                'Failed to fetch demographic data for var=%d th=%s: %s',
-                var_id,
-                th_param,
-                resp,
-            )
+            safe_url = _sanitize_url(url, api_key)
+            raise RuntimeError(
+                f'Failed to fetch demographic data for var={var_id} '
+                f'th={th_param} (url={safe_url}): {resp}')
 
         var_list = resp.get('var', [])
         turvar_list = resp.get('turvar', [])
@@ -265,11 +335,10 @@ def fetch_variable_data(
         datacontent = resp.get('datacontent', {})
 
         if not (var_list and turvar_list and turtahun_list):
-            logging.fatal(
-                'Incomplete metadata in BPS response for var=%d th=%s.',
-                var_id,
-                th_param,
-            )
+            safe_url = _sanitize_url(url, api_key)
+            raise RuntimeError(
+                f'Incomplete metadata in BPS response for var={var_id} '
+                f'th={th_param} (url={safe_url}).')
 
         vid = var_list[0]['val']
         tt_val = turtahun_list[0]['val']
@@ -280,8 +349,18 @@ def fetch_variable_data(
                 seen_ages.add(age_label)
                 age_groups.append(age_label)
 
+        post_split_regencies = set(SPLIT_PAPUA_REGENCY_NAMES)
+        for vv in vervar_list:
+            vv_code = int(vv['val'])
+            if (vv_code != 9999 and vv_code % 100 != 0 and
+                (vv_code // 100) * 100 in POST_2022_PAPUA_PROVINCE_CODES):
+                post_split_regencies.add(clean_bps_label(vv['label']))
+
         for vv in vervar_list:
             code = int(vv['val'])
+            if is_legacy_split_papua_regency(code, vv['label'],
+                                             post_split_regencies):
+                continue
             place_name = format_place_name(code, vv['label'])
             if code not in seen_codes:
                 seen_codes.add(code)
@@ -310,7 +389,7 @@ def write_population_csv(
     year_labels: list[str],
     total_values: dict[tuple[int, str, str], str],
 ) -> None:
-    """Writes idn_population_2023_2025.csv matching idn_population_pvmap.csv."""
+    """Writes idn_population.csv matching idn_population_pvmap.csv."""
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', newline='', encoding='utf-8') as fp:
         writer = csv.writer(fp)
@@ -343,7 +422,7 @@ def write_age_gender_csv(
     male_values: dict[tuple[int, str, str], str],
     female_values: dict[tuple[int, str, str], str],
 ) -> None:
-    """Writes idn_age_gender_2023_2025.csv matching idn_age_gender_pvmap.csv."""
+    """Writes idn_age_gender.csv matching idn_age_gender_pvmap.csv."""
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', newline='', encoding='utf-8') as fp:
         writer = csv.writer(fp)
@@ -401,6 +480,7 @@ def download_demographic_data(
     start_year: int = 2023,
 ) -> tuple[str, str]:
     """Downloads BPS demographic tables and writes both input CSV files."""
+    api_key = _validate_api_key(api_key)
     places, age_groups, year_labels, total_values = fetch_variable_data(
         domain=domain,
         var_id=total_var_id,
@@ -447,8 +527,7 @@ COMMON_TMCF_CONTENT = (
     'observationAbout: C:idn_demographic->observationAbout\n'
     'observationDate: C:idn_demographic->observationDate\n'
     'value: C:idn_demographic->value\n'
-    'variableMeasured: C:idn_demographic->variableMeasured\n'
-)
+    'variableMeasured: C:idn_demographic->variableMeasured\n')
 
 
 def copy_historical_files_from_gcs(
@@ -472,7 +551,6 @@ def copy_historical_files_from_gcs(
         file_util.file_copy(src_gcs, dst_local)
 
 
-
 def main(_) -> None:
     logging.set_verbosity(logging.INFO)
     copy_historical_files_from_gcs(
@@ -494,4 +572,3 @@ def main(_) -> None:
 
 if __name__ == '__main__':
     app.run(main)
-

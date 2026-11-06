@@ -1,6 +1,0 @@
-Node: E:idn_population_2023_2025_output->E0
-observationAbout: C:idn_population_2023_2025_output->observationAbout
-observationDate: C:idn_population_2023_2025_output->observationDate
-value: C:idn_population_2023_2025_output->value
-variableMeasured: C:idn_population_2023_2025_output->variableMeasured
-typeOf: dcs:StatVarObservation

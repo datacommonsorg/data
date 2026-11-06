@@ -199,8 +199,8 @@ class DownloadTest(unittest.TestCase):
                 female_var_id=2792,
                 api_key=api_key,
                 output_dir=tmp_dir,
-                population_filename='idn_population_2023_2025.csv',
-                age_gender_filename='idn_age_gender_2023_2025.csv',
+                population_filename='idn_population.csv',
+                age_gender_filename='idn_age_gender.csv',
                 start_year=2023,
             )
 
@@ -256,6 +256,237 @@ class DownloadTest(unittest.TestCase):
                     '502479',
                 ],
             )
+
+    def test_missing_api_key_raises_value_error(self):
+        with self.assertRaisesRegex(ValueError, 'BPS WebAPI key is required'):
+            download.fetch_available_years(domain='0000',
+                                           var_id=2790,
+                                           api_key='')
+        with self.assertRaisesRegex(ValueError, 'BPS WebAPI key is required'):
+            download.fetch_variable_data(domain='0000',
+                                         var_id=2790,
+                                         api_key='   ',
+                                         start_year=2023)
+
+    def test_api_error_raises_runtime_error_with_redacted_key(self):
+        api_key = 'secret_bps_key'
+        th_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/'
+                  f'domain/0000/var/2790/page/1/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=th_url,
+            params={},
+            response={
+                'status': 'Error',
+                'message': 'Invalid key'
+            },
+        )
+        with self.assertRaises(RuntimeError) as ctx:
+            download.fetch_available_years(domain='0000',
+                                           var_id=2790,
+                                           api_key=api_key)
+        self.assertIn('<REDACTED>', str(ctx.exception))
+        self.assertNotIn(api_key, str(ctx.exception))
+
+    def test_empty_years_and_data_errors_raise_exceptions(self):
+        api_key = 'secret_bps_key'
+        th_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/'
+                  f'domain/0000/var/2790/page/1/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=th_url,
+            params={},
+            response={
+                'status': 'OK',
+                'data': [{
+                    'page': 1,
+                    'pages': 1
+                }, []]
+            },
+        )
+        with self.assertRaisesRegex(ValueError,
+                                    'No years returned for BPS var_id=2790'):
+            download.fetch_variable_data(domain='0000',
+                                         var_id=2790,
+                                         api_key=api_key,
+                                         start_year=2023)
+
+        download_util.set_test_url_download_response(
+            url=th_url,
+            params={},
+            response={
+                'status':
+                    'OK',
+                'data': [
+                    {
+                        'page': 1,
+                        'pages': 1
+                    },
+                    [{
+                        'th_id': 123,
+                        'th': '2023',
+                        'var_id': 2790
+                    }],
+                ],
+            },
+        )
+        data_url = ('https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/'
+                    f'domain/0000/var/2790/th/123/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=data_url,
+            params={},
+            response={
+                'status': 'Error',
+                'message': 'Backend error'
+            },
+        )
+        with self.assertRaises(RuntimeError) as ctx:
+            download.fetch_variable_data(domain='0000',
+                                         var_id=2790,
+                                         api_key=api_key,
+                                         start_year=2023)
+        self.assertIn('<REDACTED>', str(ctx.exception))
+        self.assertNotIn(api_key, str(ctx.exception))
+
+        download_util.set_test_url_download_response(
+            url=data_url,
+            params={},
+            response={
+                'status': 'OK',
+                'var': [],
+                'turvar': [],
+                'turtahun': []
+            },
+        )
+        with self.assertRaisesRegex(RuntimeError,
+                                    'Incomplete metadata in BPS response'):
+            download.fetch_variable_data(domain='0000',
+                                         var_id=2790,
+                                         api_key=api_key,
+                                         start_year=2023)
+
+    def test_no_years_meeting_start_year_raises_value_error(self):
+        api_key = 'test_key'
+        th_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/'
+                  f'domain/0000/var/2790/page/1/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=th_url,
+            params={},
+            response={
+                'status':
+                    'OK',
+                'data': [
+                    {
+                        'page': 1,
+                        'pages': 1
+                    },
+                    [{
+                        'th_id': 120,
+                        'th': '2020',
+                        'var_id': 2790
+                    }],
+                ],
+            },
+        )
+        with self.assertRaisesRegex(
+                ValueError,
+                'No available years >= 2023 found for BPS var_id=2790'):
+            download.fetch_variable_data(domain='0000',
+                                         var_id=2790,
+                                         api_key=api_key,
+                                         start_year=2023)
+
+    def test_skips_legacy_pre_2022_split_papua_regencies(self):
+        api_key = 'test_key'
+        th_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/'
+                  f'domain/0000/var/2790/page/1/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=th_url,
+            params={},
+            response={
+                'status':
+                    'OK',
+                'data': [
+                    {
+                        'page': 1,
+                        'pages': 1
+                    },
+                    [{
+                        'th_id': 123,
+                        'th': '2023',
+                        'var_id': 2790
+                    }],
+                ],
+            },
+        )
+        data_url = ('https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/'
+                    f'domain/0000/var/2790/th/123/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=data_url,
+            params={},
+            response={
+                'status': 'OK',
+                'var': [{
+                    'val': 2790,
+                    'label': 'Penduduk'
+                }],
+                'turvar': [{
+                    'val': 23,
+                    'label': 'TOTAL'
+                }],
+                'turtahun': [{
+                    'val': 0,
+                    'label': 'Tahun'
+                }],
+                'vervar': [
+                    {
+                        'val': 9401,
+                        'label': 'Merauke'
+                    },  # Legacy Papua code
+                    {
+                        'val': 9403,
+                        'label': 'Jayapura'
+                    },  # Non-split Papua code
+                    {
+                        'val': 9501,
+                        'label': 'Merauke'
+                    },  # Post-2022 South Papua
+                    {
+                        'val': 9107,
+                        'label': 'Sorong'
+                    },  # Legacy West Papua
+                    {
+                        'val': 9201,
+                        'label': 'Sorong'
+                    },  # Post-2022 SW Papua
+                ],
+                'tahun': [{
+                    'val': 123,
+                    'label': '2023'
+                }],
+                'datacontent': {
+                    '94012790231230': 237197,
+                    '94032790231230': 203159,
+                    '95012790231230': 237197,
+                    '91072790231230': 122033,
+                    '92012790231230': 122033,
+                },
+            },
+        )
+        places, _, _, values = download.fetch_variable_data(domain='0000',
+                                                            var_id=2790,
+                                                            api_key=api_key,
+                                                            start_year=2023)
+        self.assertEqual(
+            places,
+            [
+                (9403, 'Jayapura, Papua, Indonesia'),
+                (9501, 'Merauke, Papua Selatan, Indonesia'),
+                (9201, 'Sorong, Papua Barat Daya, Indonesia'),
+            ],
+        )
+        self.assertNotIn((9401, 'TOTAL', '2023'), values)
+        self.assertNotIn((9107, 'TOTAL', '2023'), values)
+        self.assertEqual(values[(9501, 'TOTAL', '2023')], '237197')
+        self.assertEqual(values[(9201, 'TOTAL', '2023')], '122033')
 
 
 if __name__ == '__main__':
