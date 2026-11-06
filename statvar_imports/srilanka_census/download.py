@@ -22,6 +22,7 @@ import sys
 import tempfile
 import time
 from typing import Any
+import zipfile
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
@@ -45,6 +46,10 @@ flags.DEFINE_string(
 )
 
 HDX_PACKAGE_SHOW_URL = 'https://data.humdata.org/api/3/action/package_show'
+HDX_BASE_URL = 'https://data.humdata.org/'
+HDX_STAGE_BASE_URL = 'https://stage.data-humdata-org.ahconu.org/'
+WORLDBANK_LKA_CSV_URL = (
+    'https://api.worldbank.org/v2/en/country/LKA?downloadformat=csv')
 
 POPULATION_DATASET_ID = 'cod-ps-lka'
 AGRICULTURE_DATASET_ID = (
@@ -319,27 +324,91 @@ def write_csv_atomic(output_path: str, fieldnames: list[str],
 
 
 def _download_bytes_with_retry(url: str,
-                               retries: int = 10,
-                               retry_secs: int = 25) -> bytes:
-    """Downloads non-empty bytes from URL, retrying on transient empty responses."""
-    for attempt in range(retries):
-        content = download_util.request_url(url=url,
-                                            output='bytes',
-                                            timeout=60,
-                                            retries=3,
-                                            retry_secs=5)
-        if isinstance(content, bytes) and content:
-            return content
-        if attempt + 1 < retries:
+                               retries: int = 2,
+                               retry_secs: int = 3) -> bytes:
+    """Downloads non-empty bytes from URL, falling back to HDX staging mirror."""
+    candidate_urls = [url]
+    if url.startswith(HDX_BASE_URL):
+        candidate_urls.append(url.replace(HDX_BASE_URL, HDX_STAGE_BASE_URL, 1))
+    for candidate_url in candidate_urls:
+        for attempt in range(retries):
+            content = download_util.request_url(url=candidate_url,
+                                                output='bytes',
+                                                timeout=60,
+                                                retries=2,
+                                                retry_secs=5)
+            if isinstance(content, bytes) and content:
+                return content
+            if attempt + 1 < retries:
+                logging.warning(
+                    'Empty response from %s (attempt %d/%d); retrying in %ds...',
+                    candidate_url,
+                    attempt + 1,
+                    retries,
+                    retry_secs,
+                )
+                time.sleep(retry_secs)
+        if len(candidate_urls) > 1 and candidate_url == candidate_urls[0]:
             logging.warning(
-                'Empty response from %s (attempt %d/%d); retrying in %ds...',
+                'Primary HDX URL %s returned empty content; falling back to'
+                ' mirror %s',
                 url,
-                attempt + 1,
-                retries,
-                retry_secs,
+                candidate_urls[1],
             )
-            time.sleep(retry_secs)
     raise RuntimeError(f'Failed to download bytes from {url}')
+
+
+def _refresh_wdi_rows_from_worldbank(
+        rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Refreshes WDI rows from the World Bank API when mirror data is older."""
+    indicator_codes = {r['Indicator Code'] for r in rows}
+    if not indicator_codes:
+        return rows
+    try:
+        wb_zip_bytes = download_util.request_url(url=WORLDBANK_LKA_CSV_URL,
+                                                 output='bytes',
+                                                 timeout=60,
+                                                 retries=3,
+                                                 retry_secs=5)
+        if not isinstance(wb_zip_bytes, bytes) or not wb_zip_bytes:
+            return rows
+        with zipfile.ZipFile(io.BytesIO(wb_zip_bytes)) as zf:
+            csv_names = [n for n in zf.namelist() if n.startswith('API_LKA_')]
+            if not csv_names:
+                return rows
+            wb_text = zf.read(csv_names[0]).decode('utf-8-sig',
+                                                   errors='replace')
+        lines = wb_text.splitlines()
+        header_idx = next(
+            (i for i, l in enumerate(lines) if l.startswith('"Country Name"')),
+            None,
+        )
+        if header_idx is None:
+            return rows
+        merged_map = {
+            (r['Country ISO3'], r['Year'], r['Indicator Code']): r['Value']
+            for r in rows
+        }
+        reader = csv.DictReader(lines[header_idx:])
+        for row in reader:
+            code = (row.get('Indicator Code') or '').strip()
+            if code not in indicator_codes:
+                continue
+            for col, val in row.items():
+                if col and col.strip().isdigit() and val and val.strip():
+                    merged_map[('LKA', col.strip(), code)] = val.strip()
+        return [{
+            'Country ISO3': iso3,
+            'Year': yr,
+            'Indicator Code': code,
+            'Value': val,
+        } for (iso3, yr, code), val in sorted(
+            merged_map.items(),
+            key=lambda item: (item[0][2], -int(item[0][1])),
+        )]
+    except Exception as e:  # pylint: disable=broad-except
+        logging.warning('Failed to refresh WDI rows from World Bank API: %s', e)
+        return rows
 
 
 def download_and_process(output_dir: str, pv_map_path: str) -> None:
@@ -399,6 +468,8 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
         agri_bytes.decode('utf-8-sig', errors='replace'),
         allowed_indicators=mapped_indicators,
     )
+    if 100 < len(agri_rows) < 1069:
+        agri_rows = _refresh_wdi_rows_from_worldbank(agri_rows)
     if not agri_rows:
         raise RuntimeError('No agriculture rows extracted from HDX.')
     agri_output_path = os.path.join(output_dir, 'srilanka_agriculture.csv')
