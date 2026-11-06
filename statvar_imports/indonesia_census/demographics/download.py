@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,11 +24,10 @@ from typing import Any
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
-from absl import app
-from absl import flags
-from absl import logging
 import download_util
 import file_util
+from absl import app, flags, logging
+from google.api_core import exceptions as api_core_exceptions
 from google.cloud import storage
 
 DEFAULT_API_KEY_GCS_PATH = (
@@ -221,7 +219,12 @@ def _load_api_key_from_path(api_key_gcs_path: str) -> str:
             val = payload.get('api_key')
             return val.strip() if isinstance(val, str) else ''
         return ''
-    except Exception as exc:  # pylint: disable=broad-except
+    except (
+            OSError,
+            ValueError,
+            RuntimeError,
+            api_core_exceptions.GoogleAPIError,
+    ) as exc:
         logging.warning('Unable to load BPS API key from %s: %s', path, exc)
         return ''
 
@@ -282,13 +285,13 @@ def format_place_name(code: int, raw_label: Any) -> str:
     return f'{label}, Indonesia'
 
 
-def format_thousand_comma(exact_persons: int | float | str) -> str:
+def format_thousand_comma(exact_persons: float | str) -> str:
     """Formats an exact person count into thousands with comma decimal separator.
 
     Matches idn_population_pvmap.csv (`number_decimal, ","` and `#Multiply, 1000`)
     so that StatVarProcessor restores the exact integer person count.
     """
-    val_int = int(round(float(exact_persons)))
+    val_int = round(float(exact_persons))
     whole = val_int // 1000
     rem = val_int % 1000
     if rem == 0:

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -280,14 +279,16 @@ class DownloadTest(unittest.TestCase):
                 api_key='',
                 api_key_gcs_path='gs://invalid_gcs_path_without_blob',
             )
-        with mock.patch.object(
-                download.storage,
-                'Client',
-                side_effect=RuntimeError('GCS unavailable'),
+        with (
+                mock.patch.object(
+                    download.storage,
+                    'Client',
+                    side_effect=RuntimeError('GCS unavailable'),
+                ),
+                self.assertRaisesRegex(ValueError,
+                                       'BPS WebAPI key is required'),
         ):
-            with self.assertRaisesRegex(ValueError,
-                                        'BPS WebAPI key is required'):
-                download._resolve_api_key(api_key='')
+            download._resolve_api_key(api_key='')
 
     def test_api_key_gcs_fallback(self):
         fallback_key = 'fallback_gcs_key'
@@ -607,6 +608,106 @@ class DownloadTest(unittest.TestCase):
         self.assertNotIn((9107, 'TOTAL', '2023'), values)
         self.assertEqual(values[(9501, 'TOTAL', '2023')], '237197')
         self.assertEqual(values[(9201, 'TOTAL', '2023')], '122033')
+
+    def test_copy_historical_files_from_gcs(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with mock.patch.object(download.file_util,
+                                   'file_copy') as mock_copy:
+                download.copy_historical_files_from_gcs('', tmp_dir)
+                mock_copy.assert_not_called()
+                self.assertFalse(
+                    os.path.exists(os.path.join(tmp_dir, 'common_tmcf.tmcf')))
+
+                gcs_dir = ('gs://unresolved_mcf/country/indonesia/demographic/'
+                           'historical/')
+                download.copy_historical_files_from_gcs(gcs_dir, tmp_dir)
+
+                dst_tmcf = os.path.join(tmp_dir, 'common_tmcf.tmcf')
+                self.assertTrue(os.path.exists(dst_tmcf))
+                with open(dst_tmcf, 'r', encoding='utf-8') as fp:
+                    self.assertEqual(fp.read(), download.COMMON_TMCF_CONTENT)
+
+                expected_calls = [
+                    mock.call(
+                        'gs://unresolved_mcf/country/indonesia/demographic/'
+                        f'historical/{fname}',
+                        os.path.join(tmp_dir, fname),
+                    ) for fname in download.HISTORICAL_CSVS
+                ]
+                mock_copy.assert_has_calls(expected_calls)
+                self.assertEqual(mock_copy.call_count,
+                                 len(download.HISTORICAL_CSVS))
+
+            with (
+                    mock.patch.object(
+                        download.file_util,
+                        'file_copy',
+                        side_effect=RuntimeError('GCS copy failed'),
+                    ),
+                    self.assertRaisesRegex(RuntimeError, 'GCS copy failed'),
+            ):
+                download.copy_historical_files_from_gcs(
+                    'gs://unresolved_mcf/country/indonesia/demographic/'
+                    'historical',
+                    tmp_dir,
+                )
+
+    def test_write_age_gender_csv_skips_blank_rows_and_suppresses_total(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_path = os.path.join(tmp_dir, 'nested', 'idn_age_gender.csv')
+            download.write_age_gender_csv(
+                output_path=out_path,
+                places=[(1100, 'ACEH, INDONESIA')],
+                age_groups=['TOTAL', '0-4', '5-9', '10-14'],
+                year_labels=['2023'],
+                total_values={
+                    (1100, 'TOTAL', '2023'): '5482527',
+                    (1100, '0-4', '2023'): '502479',
+                    (1100, '5-9', '2023'): '',
+                },
+                male_values={
+                    (1100, 'TOTAL', '2023'): '2747185',
+                    (1100, '0-4', '2023'): '256480',
+                    (1100, '5-9', '2023'): '',
+                },
+                female_values={
+                    (1100, 'TOTAL', '2023'): '2735342',
+                    (1100, '0-4', '2023'): '',
+                    (1100, '5-9', '2023'): '',
+                },
+            )
+
+            with open(out_path, 'r', encoding='utf-8') as fp:
+                rows = list(csv.reader(fp))
+            self.assertEqual(
+                rows,
+                [
+                    [
+                        'observationAbout',
+                        'observationDate',
+                        'Kelompok Umur',
+                        'Penduduk (Laki-Laki)',
+                        'Penduduk (Perempuan)',
+                        'Penduduk (Laki-Laki + Perempuan)',
+                    ],
+                    [
+                        'ACEH, INDONESIA',
+                        '2023',
+                        'TOTAL',
+                        '2747185',
+                        '2735342',
+                        '',
+                    ],
+                    [
+                        'ACEH, INDONESIA',
+                        '2023',
+                        '0-4',
+                        '256480',
+                        '',
+                        '502479',
+                    ],
+                ],
+            )
 
 
 if __name__ == '__main__':
