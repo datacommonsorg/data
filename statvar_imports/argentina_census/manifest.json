@@ -24,8 +24,7 @@
                 "argentina_census_metadata.csv",
                 "argentina_places_resolved.csv",
                 "argentina_statvar_remap.csv",
-                "counters/*.csv",
-                "validation_config.json"
+                "counters/*.csv"
             ],
             "validation_config_file": "validation_config.json",
             "cron_schedule": "0 5 * * 1",
