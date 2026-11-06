@@ -205,7 +205,9 @@ class StageRunner:
                         output_dir, os.path.basename(input_filename)),
                                                        suffix=f'-{stage_name}')
                 else:
-                    filename = f'{output_dir}/{import_name}-{stage_name}-{start_date}-{time_period}{file_ext}'
+                    # import_name, start_date and time_period are filled in
+                    # from the config by _format() below.
+                    filename = f'{output_dir}/{{import_name}}-{stage_name}-{{start_date}}-{{time_period}}{file_ext}'
 
         return _format(filename, self.config)
 
@@ -352,6 +354,6 @@ def _format(string: str, params: dict) -> str:
             formatted_str = string.format(**params)
         elif isinstance(string, list):
             formatted_str = [_format(s, params) for s in string]
-    except (KeyError, IndexError) as e:
+    except (KeyError, IndexError):
         logging.error(f'Format error for {string} with {params}')
     return formatted_str

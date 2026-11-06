@@ -242,7 +242,7 @@ def get_raster_data_point(
         (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
     if lat > 90 or lat < -90 or lng > 180 or lng < -180:
         logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
-        counter.add_counter(f'invalid-lat-lng', 1)
+        counter.add_counter('invalid-lat-lng', 1)
         return None
     data['latitude'] = lat
     data['longitude'] = lng
@@ -497,7 +497,7 @@ def add_data_point(
                     cur_data[f'#{prop}:count'] = cur_num + new_num
             except TypeError as e:
                 logging.error(
-                    f'Error {e} in aggregating: {agr}: prop: {prop}, for new'
+                    f'Error {e} in aggregating: {aggr}: prop: {prop}, for new'
                     f' {data_point} with old: {cur_data}')
 
         # Update lat/long to centroid.

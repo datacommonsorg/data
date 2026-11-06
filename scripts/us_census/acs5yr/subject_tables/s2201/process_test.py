@@ -235,7 +235,7 @@ class ProcessTest(unittest.TestCase):
 
 
 def main(argv):
-    a = ProcessTest(unittest.TestCase)
+    ProcessTest(unittest.TestCase)
 
 
 if __name__ == '__main__':
