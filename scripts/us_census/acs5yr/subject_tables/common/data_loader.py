@@ -252,17 +252,11 @@ class SubjectTableDataLoaderBase:
     def _replace_ignore_values_with_nan(self, df):
         """
         Replaces cells of the dataframe by column with nan if cell has values in
-        _IGNORED_VALUES, and strips commas and trailing '+' or '-' from
-        top/bottom-coded values.
+        _IGNORED_VALUES.
         """
         str_cols = df.select_dtypes(include=['object', 'string']).columns
         if len(str_cols) > 0 and not df.empty:
             df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
-            for col in str_cols:
-                if (col not in ('id', 'Geography', 'Geographic Area Name') and
-                        'Median earnings (dollars):' not in col):
-                    df[col] = df[col].map(lambda x: x.replace(',', '').rstrip(
-                        '+-') if isinstance(x, str) else x)
         return df
 
     def _process_dataframe(self, df, filename):
