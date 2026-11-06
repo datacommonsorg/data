@@ -388,12 +388,13 @@ class ImportExecutor:
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
-            import_tool_args = [f'-o={output_path}', 'genmcf']
-            import_tool_args.extend(input_files)
+            import_tool_args = _get_import_tool_args(
+                output_path, input_files, self.config.import_tool_num_threads)
             timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
-                script_path='-XX:MaxRAMPercentage=50.0 -jar ' +
+                script_path='-XX:MaxRAMPercentage='
+                f'{self.config.import_tool_max_ram_percentage} -jar ' +
                 self.config.import_tool_path,
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
@@ -1378,6 +1379,34 @@ def _run_user_script(
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)
+
+
+def _get_cpu_count() -> int:
+    """Returns the number of CPUs available to this process."""
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:  # Not available on some platforms (e.g. macOS).
+        return os.cpu_count() or 1
+
+
+def _get_import_tool_args(output_path: str, input_files: List[str],
+                          num_threads: int) -> List[str]:
+    """Returns the command line arguments for import tool genmcf.
+
+    Args:
+        output_path: Directory to write the genmcf output to.
+        input_files: Input files (TMCF, CSV, MCF) to process.
+        num_threads: Maximum number of threads to use. The number of threads
+            passed is capped at the number of available CPUs. If not positive,
+            -n is not passed and the import tool chooses the number of threads.
+    """
+    args = [f'-o={output_path}']
+    if num_threads > 0:
+        num_threads = min(num_threads, _get_cpu_count())
+        args.append(f'-n={num_threads}')
+    args.append('genmcf')
+    args.extend(input_files)
+    return args
 
 
 def _clean_time(
