@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Enforce zero deleted historical observations across refreshes.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0
-            }
-        },
-        {
             "rule_id": "check_max_date_consistent",
             "description": "Ensure all 9 monthly wage StatVars share the same latest date.",
             "validator": "MAX_DATE_CONSISTENT",

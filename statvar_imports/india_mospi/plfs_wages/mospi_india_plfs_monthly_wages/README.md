@@ -19,7 +19,7 @@
 - `monthly_wages_metadata.csv`: Processor configuration parameters (`header_rows`, `output_columns`).
 - `monthly_wages_places.csv`: Resolved place DCID mappings for India and all states/UTs.
 - `manifest.json`: Cloud Batch import automation specification.
-- `validation_config.json`: Import validation rules (`0%` deleted records, uniform `MaxDate`, freshness lag check, non-negative values, observation count floor, and StatVar count check).
+- `validation_config.json`: Import validation rules (uniform `MaxDate`, freshness lag check, non-negative values, observation count floor, and StatVar count check).
 - `test_data/`: Sample input (`monthly_wages_input.csv`) and expected output (`monthly_wages_output.csv`, `monthly_wages_output.tmcf`).
 
 ## Running Locally
