@@ -14,9 +14,11 @@
 """Utility functions to generate deterministic DCIDs for MCF nodes.
 
 Replicates Data Commons DCID generation from `datacommonsorg/import`
-(`DcidGenerator.java`) for `StatVarObservation`, `StatisticalVariable`, and
-`Place` nodes using 64-bit FarmHash fingerprints and base-32 encoding, while
-supporting normalized general MCF node DCIDs (`dc/<id>`).
+(`DcidGenerator.java`) for `StatVarObservation` (`dc/o/<id>`) and `Place` nodes
+using 64-bit FarmHash fingerprints and base-32 encoding, uses
+`statvar_dcid_generator.get_statvar_dcid` for human-readable
+`StatisticalVariable` DCIDs, and supports normalized general MCF node DCIDs
+(`dc/<id>`).
 """
 
 import json
@@ -32,6 +34,7 @@ sys.path.append(
 
 from file_dict_io import str_to_int_hash
 import mcf_file_util
+import statvar_dcid_generator
 
 # Base32 encoding map and bit constants (matching DcidGenerator.java)
 DCID_BASE32_MAP = '0123456789bcdfghjklmnpqrstvwxyze'
@@ -555,84 +558,6 @@ def generate_statvar_obs_dcid(
     return f'dc/o/{get_long_id(key_string)}'
 
 
-def generate_statvar_hash_dcid(
-    record: dict,
-    ignore_props: set[str] | frozenset[str] = None,
-) -> str:
-    """Generates a deterministic hashed DCID (`dc/<id>`) for a `StatisticalVariable` node.
-
-    Replicates `DcidGenerator.forStatVar` from `datacommonsorg/import`:
-    retains `FIXED_STAT_VAR_PROPS` and constraint properties (converting
-    quantity ranges like `[Years 16 -]` to `Years16Onwards`), sorts
-    `f'{prop}={val}'` alphabetically by property name, joins with `''`, and
-    hashes with 64-bit FarmHash + base32.
-
-    Args:
-      record: Dictionary of property-value pairs for the StatisticalVariable.
-      ignore_props: Optional set of additional property names to ignore.
-
-    Returns:
-      Generated DCID (`'dc/<id>'`), or `''` if required properties are missing
-      or an unresolved local reference (`l:`) is present.
-    """
-    if not record:
-        return ''
-    ignored = (ignore_props or frozenset()) | (
-        NON_CONSTRAINT_STAT_VAR_PROPERTIES - FIXED_STAT_VAR_PROPS)
-
-    sv_record = dict(record)
-    if 'typeOf' not in sv_record and 'typeOf' not in ignored:
-        sv_record['typeOf'] = 'StatisticalVariable'
-
-    sorted_props = []
-    for prop in sorted(sv_record.keys()):
-        if not prop or str(prop).startswith('#') or prop in ignored:
-            continue
-        raw_val = sv_record.get(prop)
-        val_str = _clean_scalar_value(raw_val)
-        if not val_str:
-            continue
-        if _has_local_ref(raw_val):
-            return ''
-        values = mcf_file_util.get_value_list(raw_val)
-        clean_vals = []
-        for v in values:
-            raw_v = str(v).strip()
-            v_str = raw_v.strip(' "')
-            if not v_str:
-                continue
-            if v_str.startswith('[') and v_str.endswith(']'):
-                v_str = mcf_file_util.normalize_range(
-                    v_str, quantity_range_to_dcid=True)
-                v_clean = _strip_mcf_namespace(v_str).strip(' "')
-            else:
-                v_clean = _strip_mcf_namespace(raw_v).strip(' "')
-            if v_clean.startswith('l:'):
-                return ''
-            clean_vals.append(v_clean)
-        if not clean_vals:
-            continue
-        clean_vals.sort()
-        sorted_props.append((prop, clean_vals))
-
-    if not sorted_props:
-        return ''
-    present_props = {prop for prop, _ in sorted_props}
-    if ('measuredProperty' not in ignored and
-            'measuredProperty' not in present_props):
-        return ''
-    if ('populationType' not in ignored and 'popType' not in ignored and
-            'populationType' not in present_props and
-            'popType' not in present_props):
-        return ''
-    key_parts = []
-    for prop, vals in sorted_props:
-        for val in vals:
-            key_parts.append(f'{prop}={val}')
-    key_string = ''.join(key_parts)
-    return f'dc/{get_long_id(key_string)}'
-
-
 def generate_node_dcid(
     record: dict,
     ignore_props: set[str] | frozenset[str] = DCID_IGNORE_PROPS,
@@ -652,8 +577,10 @@ def generate_node_dcid(
         `typeOf` is a Place type): uses `generate_place_dcid(record, ignore_props)`
         (e.g. `geoId/...`, `nuts/...`, `iso/...`, `wikidataId/...`), falling
         back to the general node hash if no assignable place ID property is set.
-      - `StatisticalVariable`: uses `generate_statvar_hash_dcid(record, ignore_props)`
-        (`dc/<id>`).
+      - `StatisticalVariable` (when `typeOf` is `StatisticalVariable`, or when
+        `measuredProperty` and `populationType`/`popType` are present with no
+        `typeOf`): uses `statvar_dcid_generator.get_statvar_dcid` to generate a
+        human-readable StatisticalVariable DCID.
       - Other nodes: normalizes all non-ignored properties with
         `mcf_file_util.normalize_mcf_node(props, quantity_range_to_dcid=True)`,
         serializes sorted `[property, value]` pairs as compact JSON, and
@@ -664,17 +591,21 @@ def generate_node_dcid(
       ignore_props: Set of property names to exclude when building the DCID key.
 
     Returns:
-      Generated DCID string (e.g. `'dc/o/...'`, `'geoId/...'`, or `'dc/...'`),
-      or `''` if no non-ignored properties are present or an unresolved local
-      reference (`l:...`) is found.
+      Generated DCID string (e.g. `'dc/o/...'`, `'geoId/...'`, `'Count_Person'`,
+      or `'dc/...'`), or `''` if no non-ignored properties are present or an
+      unresolved local reference (`l:...`) is found.
     """
     if not record:
         return ''
 
     ignored = DCID_IGNORE_PROPS if ignore_props is None else ignore_props
     type_of = _strip_mcf_namespace(str(record.get('typeOf', '')).strip(' "'))
-    if not type_of and 'observationAbout' in record and 'variableMeasured' in record:
-        type_of = 'StatVarObservation'
+    if not type_of:
+        if 'observationAbout' in record and 'variableMeasured' in record:
+            type_of = 'StatVarObservation'
+        elif 'measuredProperty' in record and ('populationType' in record or
+                                               'popType' in record):
+            type_of = 'StatisticalVariable'
 
     props = {}
     for prop, raw_val in record.items():
@@ -711,7 +642,17 @@ def generate_node_dcid(
             return place_dcid
 
     if type_of == 'StatisticalVariable':
-        return generate_statvar_hash_dcid(props, ignored)
+        sv_ignore = ignored | (NON_CONSTRAINT_STAT_VAR_PROPERTIES -
+                               FIXED_STAT_VAR_PROPS)
+        sv_props = {
+            k: _clean_scalar_value(v)
+            for k, v in props.items()
+            if k not in sv_ignore
+        }
+        if 'populationType' not in sv_props and 'popType' in sv_props:
+            sv_props['populationType'] = sv_props.pop('popType')
+        return statvar_dcid_generator.get_statvar_dcid(
+            sv_props, ignore_props=list(sv_ignore))
 
     normalized = mcf_file_util.normalize_mcf_node(props,
                                                   quantity_range_to_dcid=True)

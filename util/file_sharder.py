@@ -95,7 +95,6 @@ from dcid_generator import (
     DCID_IGNORE_PROPS,
     generate_node_dcid,
     generate_place_dcid,
-    generate_statvar_hash_dcid,
     generate_statvar_obs_dcid,
     get_long_id,
     get_sha256_long_id,

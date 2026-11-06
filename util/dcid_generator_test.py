@@ -276,8 +276,10 @@ class DcidGeneratorTest(unittest.TestCase):
             }),
         )
 
-    def test_generate_statvar_hash_dcid(self):
-        # Matches DcidGeneratorTest.funcStatVar and funcStatVarWithComplexValue
+    def test_generate_statvar_dcid_via_generate_node_dcid(self):
+        # StatisticalVariable nodes generate human-readable DCIDs via
+        # statvar_dcid_generator.get_statvar_dcid while ignoring non-constraint
+        # metadata properties.
         sv = {
             'Node': 'SomeNode',
             'typeOf': 'dcs:StatisticalVariable',
@@ -298,8 +300,9 @@ class DcidGeneratorTest(unittest.TestCase):
             'alternateName': '"SomeNode"',
             'censusACSTableId': '"B01003"',
             'memberOf': 'dcid:dc/g/FooSVG',
+            'definition': '"mp=count,pt=Person"',
         }
-        self.assertEqual('dc/g9y3wr60lwcg',
+        self.assertEqual('Count_Person_Male_Asian',
                          dcid_generator.generate_node_dcid(sv))
 
         sv_unresolved = {
@@ -314,11 +317,11 @@ class DcidGeneratorTest(unittest.TestCase):
             'typeOf': 'dcs:StatisticalVariable',
             'measuredProperty': 'dcs:count',
             'popType': 'dcid:Person',
-            'age': 'dcid:Years16Onwards',
+            'age': 'dcid:16OrMoreYears',
         }
-        self.assertEqual('dc/2v3xz3y0dbd8b',
+        self.assertEqual('Count_Person_16OrMoreYears',
                          dcid_generator.generate_node_dcid(sv_unresolved))
-        self.assertEqual('dc/2v3xz3y0dbd8b',
+        self.assertEqual('Count_Person_16OrMoreYears',
                          dcid_generator.generate_node_dcid(sv_resolved))
 
     def test_generate_node_dcid_general_normalization_and_zero_values(self):
@@ -429,8 +432,12 @@ class DcidGeneratorTest(unittest.TestCase):
             'gender': 'dcid:Male',
         }
         self.assertEqual(
-            dcid_generator.generate_statvar_hash_dcid(sv_str),
-            dcid_generator.generate_statvar_hash_dcid(sv_list),
+            'Count_Person_Male',
+            dcid_generator.generate_node_dcid(sv_str),
+        )
+        self.assertEqual(
+            dcid_generator.generate_node_dcid(sv_str),
+            dcid_generator.generate_node_dcid(sv_list),
         )
 
 

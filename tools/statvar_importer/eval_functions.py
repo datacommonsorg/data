@@ -53,9 +53,9 @@ if _UTIL_DIR not in sys.path:
 from dcid_generator import (
     generate_node_dcid,
     generate_place_dcid,
-    generate_statvar_hash_dcid,
     generate_statvar_obs_dcid,
 )
+from statvar_dcid_generator import get_statvar_dcid
 
 # String utility functions
 
@@ -155,7 +155,7 @@ EVAL_GLOBALS = {
     'generate_node_dcid': generate_node_dcid,
     'generate_statvar_obs_dcid': generate_statvar_obs_dcid,
     'generate_place_dcid': generate_place_dcid,
-    'generate_statvar_hash_dcid': generate_statvar_hash_dcid,
+    'get_statvar_dcid': get_statvar_dcid,
 }
 
 
