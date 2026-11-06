@@ -52,13 +52,14 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
     def test_country_list_api_failure_raises_exception(self,
                                                        mock_get_retry_session):
         mock_session = MagicMock()
+        mock_session.__enter__.return_value = mock_session
         mock_session.get.side_effect = requests.exceptions.RequestException(
             "API failure")
         mock_get_retry_session.return_value = mock_session
 
         with self.assertRaises(requests.exceptions.RequestException):
             download_and_segregate_by_gas.download_and_segregate_by_gas()
-        mock_session.close.assert_called_once()
+        mock_session.__exit__.assert_called_once()
 
     @patch('builtins.open', side_effect=FileNotFoundError())
     @patch('download_and_segregate_by_gas.download_and_process_zip')
@@ -68,6 +69,7 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
                                                        mock_download_zip,
                                                        mock_open):
         mock_session = MagicMock()
+        mock_session.__enter__.return_value = mock_session
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = [{'id': 'USA'}, {'id': 'IND'}]
@@ -81,7 +83,7 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
                                     "No data was downloaded for gas: co2"):
             download_and_segregate_by_gas.download_and_segregate_by_gas()
         self.assertEqual(mock_download_zip.call_count, 2)
-        mock_session.close.assert_called_once()
+        mock_session.__exit__.assert_called_once()
 
     def test_download_and_process_zip_404_returns_none(self):
         mock_session = MagicMock()
@@ -157,6 +159,7 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
                 f.write("IND\n")
 
             mock_session = MagicMock()
+            mock_session.__enter__.return_value = mock_session
             mock_response = MagicMock()
             mock_response.status_code = 200
             mock_response.json.return_value = [{'id': 'USA'}]
@@ -174,8 +177,9 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
 
             mock_download_zip.side_effect = side_effect
 
-            with patch('download_and_segregate_by_gas.os.path.dirname',
-                       return_value=tmp_dir):
+            with patch.object(
+                    download_and_segregate_by_gas, '__file__',
+                    os.path.join(tmp_dir, 'download_and_segregate_by_gas.py')):
                 download_and_segregate_by_gas.download_and_segregate_by_gas()
 
             output_dir = os.path.join(tmp_dir, 'input_files')
@@ -189,7 +193,7 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
                 self.assertIn("0.0000001", content)
                 self.assertNotIn("1e-07", content)
 
-            mock_session.close.assert_called_once()
+            mock_session.__exit__.assert_called_once()
 
 
 if __name__ == '__main__':

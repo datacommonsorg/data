@@ -110,143 +110,143 @@ def download_and_segregate_by_gas():
     """
     failed_downloads = []
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    session = get_retry_session()
-
-    logging.info("--- Step 1: Generating Country List ---")
-    api_country_codes = set()
-    countries_url = "https://api.climatetrace.org/v7/admins?level=0"
-    logging.info(f"Fetching country list from API: {countries_url}")
-    try:
-        response = session.get(countries_url, timeout=60)
-        response.raise_for_status()
-        countries = response.json()
-        api_country_codes = {country['id'] for country in countries}
-        logging.info(
-            f"Successfully fetched {len(api_country_codes)} countries from API ({countries_url}). "
-            f"Status: {response.status_code}.")
-    except requests.exceptions.RequestException as e:
-        status_code = (e.response.status_code
-                       if getattr(e, 'response', None) is not None else "N/A")
-        response_text = (e.response.text if getattr(e, 'response', None)
-                         is not None else "No response body")
-        logging.error(
-            f"Error: Could not fetch country list from API ({countries_url}). "
-            f"Status: {status_code}, Response: {response_text}, Error: {e}")
-        session.close()
-        raise
-
-    local_country_codes = set()
-    try:
-        with open(os.path.join(script_dir, 'check_country.csv'), 'r') as f:
-            local_country_codes = {line.strip() for line in f if line.strip()}
-        logging.info(
-            f"Read {len(local_country_codes)} countries from 'check_country.csv'."
-        )
-    except FileNotFoundError:
-        logging.warning(
-            "Warning: 'check_country.csv' not found. Will only use countries from API."
-        )
-
-    combined_codes = sorted(list(api_country_codes.union(local_country_codes)))
-    if not combined_codes:
-        logging.error("No countries to process. Exiting.")
-        session.close()
-        raise RuntimeError(
-            "No country codes found from API or check_country.csv.")
-
-    logging.info(f"Total unique countries to process: {len(combined_codes)}")
-
-    gases = ["co2", "ch4", "n2o", "co2e_20yr", "co2e_100yr"]
-    base_url = "https://downloads.climatetrace.org/latest/country_packages"
-
-    logging.info("--- Step 2: Downloading and Processing Data ---")
-
-    output_dir = os.path.join(script_dir, "input_files")
-    os.makedirs(output_dir, exist_ok=True)
-
-    logging.info(
-        f"Found data for the following gas types: {', '.join(gases)}\n")
-
-    for gas in gases:
-        logging.info(f"--- Starting processing for gas: {gas} ---")
-
-        gas_dataframes = []
-        critical_errors = []
-        skipped_count = 0
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_iso = {
-                executor.submit(
-                    download_and_process_zip,
-                    f"{base_url}/{gas}/{iso}.zip",
-                    iso,
-                    gas,
-                    session,
-                ):
-                    iso for iso in combined_codes
-            }
-            for future in as_completed(future_to_iso):
-                iso = future_to_iso[future]
-                try:
-                    result_df = future.result()
-                    if result_df is not None and not result_df.empty:
-                        gas_dataframes.append(result_df)
-                    else:
-                        skipped_count += 1
-                        failed_downloads.append(f"{iso} ({gas})")
-                except Exception as e:
-                    logging.error(f"Critical error for {iso} ({gas}): {e}")
-                    critical_errors.append(f"{iso} ({gas}) - Error: {e}")
-
-        logging.info(
-            f"Download summary for {gas}: {len(gas_dataframes)} succeeded, "
-            f"{skipped_count} skipped (404/empty), {len(critical_errors)} failed."
-        )
-
-        if critical_errors:
-            session.close()
-            raise RuntimeError(f"Critical download failures for {gas}:\n" +
-                               "\n".join(critical_errors))
-
-        if not gas_dataframes:
-            logging.error(
-                f"No data was downloaded for {gas}. The output file will not be created."
-            )
-            session.close()
-            raise RuntimeError(f"No data was downloaded for gas: {gas}")
-
-        output_filename = os.path.join(output_dir, f"all_countries_{gas}.csv")
-        temp_filename = f"{output_filename}.tmp"
-        logging.info(
-            f"\n  -> All downloads for {gas} complete. Concatenating...")
-
+    with get_retry_session() as session:
+        logging.info("--- Step 1: Generating Country List ---")
+        api_country_codes = set()
+        countries_url = "https://api.climatetrace.org/v7/admins?level=0"
+        logging.info(f"Fetching country list from API: {countries_url}")
         try:
-            final_df = pd.concat(gas_dataframes, ignore_index=True)
-
-            # Format emissions_quantity to avoid scientific notation
-            if 'emissions_quantity' in final_df.columns:
-                logging.info(f"  -> Formatting 'emissions_quantity' column...")
-                final_df['emissions_quantity'] = final_df[
-                    'emissions_quantity'].apply(_format_emission)
-
-            logging.info(f"  -> Saving combined data to {output_filename}...")
-            final_df.to_csv(temp_filename, index=False)
-            os.replace(temp_filename, output_filename)
+            response = session.get(countries_url, timeout=60)
+            response.raise_for_status()
+            countries = response.json()
+            api_country_codes = {country['id'] for country in countries}
             logging.info(
-                f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n"
-            )
-        except Exception as e:
-            if os.path.exists(temp_filename):
-                try:
-                    os.remove(temp_filename)
-                except OSError:
-                    pass
+                f"Successfully fetched {len(api_country_codes)} countries from API ({countries_url}). "
+                f"Status: {response.status_code}.")
+        except requests.exceptions.RequestException as e:
+            status_code = (e.response.status_code if getattr(
+                e, 'response', None) is not None else "N/A")
+            response_text = (e.response.text if getattr(e, 'response', None)
+                             is not None else "No response body")
             logging.error(
-                f"  -> An error occurred during the final processing for {gas}: {e}\n"
-            )
-            session.close()
+                f"Error: Could not fetch country list from API ({countries_url}). "
+                f"Status: {status_code}, Response: {response_text}, Error: {e}")
             raise
 
-    session.close()
+        local_country_codes = set()
+        try:
+            with open(os.path.join(script_dir, 'check_country.csv'), 'r') as f:
+                local_country_codes = {
+                    line.strip() for line in f if line.strip()
+                }
+            logging.info(
+                f"Read {len(local_country_codes)} countries from 'check_country.csv'."
+            )
+        except FileNotFoundError:
+            logging.warning(
+                "Warning: 'check_country.csv' not found. Will only use countries from API."
+            )
+
+        combined_codes = sorted(
+            list(api_country_codes.union(local_country_codes)))
+        if not combined_codes:
+            logging.error("No countries to process. Exiting.")
+            raise RuntimeError(
+                "No country codes found from API or check_country.csv.")
+
+        logging.info(
+            f"Total unique countries to process: {len(combined_codes)}")
+
+        gases = ["co2", "ch4", "n2o", "co2e_20yr", "co2e_100yr"]
+        base_url = "https://downloads.climatetrace.org/latest/country_packages"
+
+        logging.info("--- Step 2: Downloading and Processing Data ---")
+
+        output_dir = os.path.join(script_dir, "input_files")
+        os.makedirs(output_dir, exist_ok=True)
+
+        logging.info(
+            f"Found data for the following gas types: {', '.join(gases)}\n")
+
+        for gas in gases:
+            logging.info(f"--- Starting processing for gas: {gas} ---")
+
+            gas_dataframes = []
+            critical_errors = []
+            skipped_count = 0
+            with ThreadPoolExecutor(max_workers=10) as executor:
+                future_to_iso = {
+                    executor.submit(
+                        download_and_process_zip,
+                        f"{base_url}/{gas}/{iso}.zip",
+                        iso,
+                        gas,
+                        session,
+                    ):
+                        iso for iso in combined_codes
+                }
+                for future in as_completed(future_to_iso):
+                    iso = future_to_iso[future]
+                    try:
+                        result_df = future.result()
+                        if result_df is not None and not result_df.empty:
+                            gas_dataframes.append(result_df)
+                        else:
+                            skipped_count += 1
+                            failed_downloads.append(f"{iso} ({gas})")
+                    except Exception as e:
+                        logging.error(f"Critical error for {iso} ({gas}): {e}")
+                        critical_errors.append(f"{iso} ({gas}) - Error: {e}")
+
+            logging.info(
+                f"Download summary for {gas}: {len(gas_dataframes)} succeeded, "
+                f"{skipped_count} skipped (404/empty), {len(critical_errors)} failed."
+            )
+
+            if critical_errors:
+                raise RuntimeError(f"Critical download failures for {gas}:\n" +
+                                   "\n".join(critical_errors))
+
+            if not gas_dataframes:
+                logging.error(
+                    f"No data was downloaded for {gas}. The output file will not be created."
+                )
+                raise RuntimeError(f"No data was downloaded for gas: {gas}")
+
+            output_filename = os.path.join(output_dir,
+                                           f"all_countries_{gas}.csv")
+            temp_filename = f"{output_filename}.tmp"
+            logging.info(
+                f"\n  -> All downloads for {gas} complete. Concatenating...")
+
+            try:
+                final_df = pd.concat(gas_dataframes, ignore_index=True)
+
+                # Format emissions_quantity to avoid scientific notation
+                if 'emissions_quantity' in final_df.columns:
+                    logging.info(
+                        f"  -> Formatting 'emissions_quantity' column...")
+                    final_df['emissions_quantity'] = final_df[
+                        'emissions_quantity'].apply(_format_emission)
+
+                logging.info(
+                    f"  -> Saving combined data to {output_filename}...")
+                final_df.to_csv(temp_filename, index=False)
+                os.replace(temp_filename, output_filename)
+                logging.info(
+                    f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n"
+                )
+            except Exception as e:
+                if os.path.exists(temp_filename):
+                    try:
+                        os.remove(temp_filename)
+                    except OSError:
+                        pass
+                logging.error(
+                    f"  -> An error occurred during the final processing for {gas}: {e}\n"
+                )
+                raise
+
     logging.info("--- All processing complete. ---")
     if failed_downloads:
         logging.warning(
