@@ -56,29 +56,17 @@ _SCALING_FACTOR_TXT_FILE = 1000
 _BASELINE_YEAR = 2025
 _SESSION = None
 
-
-def _create_retry_session(retries=5, backoff_factor=2):
-    """Creates a requests.Session with automatic retry on transient HTTP errors."""
-    session = requests.Session()
-    session.headers.update({
-        'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
-        'Accept':
-            '*/*',
-    })
-    retry_strategy = Retry(
-        total=retries,
-        connect=retries,
-        read=retries,
-        status=retries,
-        backoff_factor=backoff_factor,
-        status_forcelist=[429, 500, 502, 503, 504, 520],
-        allowed_methods=['HEAD', 'GET'],
-    )
-    adapter = HTTPAdapter(max_retries=retry_strategy)
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-    return session
+_PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+if _PEP_DIR not in sys.path:
+    sys.path.insert(0, _PEP_DIR)
+from download_util import (
+    TransientDownloadError,
+    create_retry_session as _create_retry_session,
+    is_html_response as _is_html_response,
+    head_with_html_retry as _head_with_html_retry,
+    download_with_retry,
+    atomic_to_excel,
+)
 
 
 def _get_session():
@@ -89,79 +77,45 @@ def _get_session():
     return _SESSION
 
 
-def _is_html_response(content_type, first_bytes=b''):
-    """Returns True if the response headers or body indicate an HTML/WAF error page."""
-    if 'html' in (content_type or '').lower():
-        return True
-    if first_bytes:
-        head = first_bytes[:512].lstrip().lower()
-        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
-                b'<title>request rejected</title>' in head or
-                b'the requested url was rejected' in head):
-            return True
-    return False
-
-
-class TransientDownloadError(Exception):
-    """Raised when a transient download error occurs (e.g., WAF/HTML response)."""
-
-
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
-       tries=3,
-       delay=5,
-       backoff=2)
-def _head_with_html_retry(session, url, timeout=30):
-    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
-    response = session.head(url, timeout=timeout, allow_redirects=True)
-    if response.status_code in (408, 429, 500, 502, 503, 504, 520):
-        raise TransientDownloadError(
-            f'Server returned transient status code {response.status_code} for URL: {url}'
-        )
-    content_type = response.headers.get('Content-Type', '').lower()
-    if (response.status_code == 200 and 'html' in content_type and
-            not url.lower().endswith(('.html', '.htm'))):
-        raise TransientDownloadError(
-            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
-        )
-    return response
-
-
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
-       tries=3,
-       delay=5,
-       backoff=2)
-def download_with_retry(session, url, dest_path):
-    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
-    with session.get(url, stream=True, timeout=120) as response:
-        response.raise_for_status()
-        content_type = response.headers.get('Content-Type', '')
-        dest_dir = os.path.dirname(os.path.abspath(dest_path))
-        os.makedirs(dest_dir, exist_ok=True)
-        fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
-        try:
-            first_chunk = b''
-            with os.fdopen(fd, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        if not first_chunk:
-                            first_chunk = chunk[:512]
-                            if (not url.lower().endswith(
-                                ('.html', '.htm')) and _is_html_response(
-                                    content_type, first_chunk)):
-                                raise TransientDownloadError(
-                                    f'Server returned HTML/WAF response (Content-Type: {content_type}) for non-HTML URL: {url}'
-                                )
-                        f.write(chunk)
-            if not first_chunk:
-                raise TransientDownloadError(
-                    f'Downloaded empty file from URL: {url}')
-            os.replace(tmp_path, dest_path)
-        except Exception:
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-            raise
+def parse_nat_total_txt(text_or_file_path: str) -> pd.DataFrame:
+    """Parses nat-total.txt content or file path into a DataFrame, filtering notes and prose."""
+    cols = [
+        "Year and Month", "Date", "Resident Population",
+        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
+        "Civilian NonInstitutionalized Population"
+    ]
+    months = {
+        'january', 'february', 'march', 'april', 'may', 'june', 'july',
+        'august', 'september', 'october', 'november', 'december'
+    }
+    rows = []
+    if os.path.exists(text_or_file_path):
+        with open(text_or_file_path, 'r', encoding='latin1') as f_in:
+            lines = f_in.readlines()
+    else:
+        lines = text_or_file_path.splitlines()
+    for line in lines:
+        line_clean = line.strip()
+        if not line_clean:
+            continue
+        tokens = line_clean.split()
+        if re.match(r'^\d{4}$', tokens[0]):
+            rows.append([tokens[0], np.nan, np.nan, np.nan, np.nan, np.nan])
+            continue
+        if (tokens[0].lower() in months and len(tokens) >= 4 and
+                tokens[1].isdigit()):
+            data_tokens = tokens[2:]
+            if data_tokens[0].lower() == '(census)':
+                data_tokens = data_tokens[1:]
+            if all(re.match(r'^[0-9,]+$', t) for t in data_tokens):
+                row = [tokens[0], tokens[1]]
+                for i in range(4):
+                    if i < len(data_tokens):
+                        row.append(data_tokens[i].replace(',', ''))
+                    else:
+                        row.append(np.nan)
+                rows.append(row)
+    return pd.DataFrame(rows, columns=cols)
 
 
 # Path to store the raw data from source
@@ -730,9 +684,8 @@ def download_files():
     try:
         for file_to_dowload in _FILES_TO_DOWNLOAD:
             url = file_to_dowload['download_path']
-            if 'file_name' in file_to_dowload and len(
-                    file_to_dowload['file_name']) > 5:
-                file_name = file_to_dowload['file_name']
+            if file_to_dowload.get('file_name', '').strip():
+                file_name = file_to_dowload['file_name'].strip()
             else:
                 file_name = url.split('/')[-1]
             retry_number = 0
@@ -745,76 +698,37 @@ def download_files():
 
                     if ".xls" in url:
                         df = pd.read_excel(raw_file_dest, header=_HEADER)
-                        df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                    index=False,
-                                    header=False,
-                                    engine='xlsxwriter')
+                        atomic_to_excel(df,
+                                        os.path.join(_INPUT_FILE_PATH,
+                                                     file_name),
+                                        index=False,
+                                        header=False,
+                                        engine='xlsxwriter')
                     elif ".csv" in url:
                         out_file_name = file_name.replace(".csv", ".xlsx")
                         df = pd.read_csv(raw_file_dest,
                                          header=None,
                                          on_bad_lines='skip')
                         df = _clean_csv_file(df)
-                        df.to_excel(os.path.join(_INPUT_FILE_PATH,
-                                                 out_file_name),
-                                    index=False,
-                                    engine='xlsxwriter')
+                        atomic_to_excel(df,
+                                        os.path.join(_INPUT_FILE_PATH,
+                                                     out_file_name),
+                                        index=False,
+                                        engine='xlsxwriter')
                     elif ".txt" in url:
                         out_file_name = file_name.replace(".txt", ".xlsx")
-                        cols = [
-                            "Year and Month", "Date", "Resident Population",
-                            "Resident Population Plus Armed Forces Overseas",
-                            "Civilian Population",
-                            "Civilian NonInstitutionalized Population"
-                        ]
-                        months = {
-                            'january', 'february', 'march', 'april', 'may',
-                            'june', 'july', 'august', 'september', 'october',
-                            'november', 'december'
-                        }
-                        rows = []
-                        with open(raw_file_dest, 'r',
-                                  encoding='latin1') as f_in:
-                            for line in f_in:
-                                line_clean = line.strip()
-                                if not line_clean:
-                                    continue
-                                tokens = line_clean.split()
-                                if re.match(r'^\d{4}$', tokens[0]):
-                                    rows.append([
-                                        tokens[0], np.nan, np.nan, np.nan,
-                                        np.nan, np.nan
-                                    ])
-                                    continue
-                                if (tokens[0].lower() in months and
-                                        len(tokens) >= 4 and
-                                        tokens[1].isdigit()):
-                                    data_tokens = tokens[2:]
-                                    if data_tokens[0].lower() == '(census)':
-                                        data_tokens = data_tokens[1:]
-                                    if all(
-                                            re.match(r'^[0-9,]+$', t)
-                                            for t in data_tokens):
-                                        row = [tokens[0], tokens[1]]
-                                        for i in range(4):
-                                            if i < len(data_tokens):
-                                                row.append(
-                                                    data_tokens[i].replace(
-                                                        ',', ''))
-                                            else:
-                                                row.append(np.nan)
-                                        rows.append(row)
-                        df = pd.DataFrame(rows, columns=cols)
+                        df = parse_nat_total_txt(raw_file_dest)
                         df = _clean_txt_file(df)
                         # Multiplying the data with scaling factor 1000.
                         for col in df.columns:
                             if "year" not in col.lower():
                                 df[col] = df[col].apply(
                                     _mulitply_scaling_factor)
-                        df.to_excel(os.path.join(_INPUT_FILE_PATH,
-                                                 out_file_name),
-                                    index=False,
-                                    engine='xlsxwriter')
+                        atomic_to_excel(df,
+                                        os.path.join(_INPUT_FILE_PATH,
+                                                     out_file_name),
+                                        index=False,
+                                        engine='xlsxwriter')
 
                     is_file_downloaded = True
                     logging.info(f"Downloaded and processed file : {url}")

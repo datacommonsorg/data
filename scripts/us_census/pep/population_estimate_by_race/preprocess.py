@@ -66,29 +66,18 @@ _FILES_TO_DOWNLOAD = None
 _BASELINE_YEAR = 2025
 _SESSION = None
 
-
-def _create_retry_session(retries=5, backoff_factor=2):
-    """Creates a requests.Session with automatic retry on transient HTTP errors."""
-    session = requests.Session()
-    session.headers.update({
-        'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) DataCommonsImport/1.0 (https://datacommons.org)',
-        'Accept':
-            '*/*',
-    })
-    retry_strategy = Retry(
-        total=retries,
-        connect=retries,
-        read=retries,
-        status=retries,
-        backoff_factor=backoff_factor,
-        status_forcelist=[429, 500, 502, 503, 504, 520],
-        allowed_methods=['HEAD', 'GET'],
-    )
-    adapter = HTTPAdapter(max_retries=retry_strategy)
-    session.mount('https://', adapter)
-    session.mount('http://', adapter)
-    return session
+_PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+if _PEP_DIR not in sys.path:
+    sys.path.insert(0, _PEP_DIR)
+from download_util import (
+    TransientDownloadError,
+    create_retry_session as _create_retry_session,
+    is_html_response as _is_html_response,
+    head_with_html_retry as _head_with_html_retry,
+    download_with_retry,
+    atomic_to_csv,
+    atomic_to_excel,
+)
 
 
 def _get_session():
@@ -99,42 +88,20 @@ def _get_session():
     return _SESSION
 
 
-def _is_html_response(content_type, first_bytes=b''):
-    """Returns True if the response headers or body indicate an HTML/WAF error page."""
-    if 'html' in (content_type or '').lower():
-        return True
-    if first_bytes:
-        head = first_bytes[:512].lstrip().lower()
-        if (head.startswith(b'<html') or head.startswith(b'<!doctype html') or
-                b'<title>request rejected</title>' in head or
-                b'the requested url was rejected' in head):
-            return True
-    return False
-
-
-class TransientDownloadError(Exception):
-    """Raised when a transient download error occurs (e.g., WAF/HTML response)."""
-
-
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
-       tries=3,
-       delay=5,
-       backoff=2)
-def _head_with_html_retry(session, url, timeout=30):
-    """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
-    response = session.head(url, timeout=timeout, allow_redirects=True)
-    if response.status_code in (408, 429, 500, 502, 503, 504, 520):
-        raise TransientDownloadError(
-            f'Server returned transient status code {response.status_code} for URL: {url}'
-        )
-    content_type = response.headers.get('Content-Type', '').lower()
-    if (response.status_code == 200 and 'html' in content_type and
-            not url.lower().endswith(('.html', '.htm'))):
-        raise TransientDownloadError(
-            f'Server returned HTML (Content-Type: {content_type}) for non-HTML URL: {url}'
-        )
-    return response
+def parse_srh_txt(text_or_file, skiprows: int = 14) -> pd.DataFrame:
+    """Parses SRH .txt file or text content into a DataFrame."""
+    cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    if isinstance(text_or_file, str) and '\n' in text_or_file:
+        source = StringIO(text_or_file)
+    else:
+        source = text_or_file
+    return pd.read_table(source,
+                         sep=r'\s+',
+                         engine='python',
+                         skiprows=skiprows,
+                         names=cols,
+                         dtype=str,
+                         on_bad_lines='skip')
 
 
 # Generating geoID by taking Geographical area as input
@@ -611,7 +578,9 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
             '7': '2025',
             '8': '2026',
             '9': '2027',
-            '10': '2028'
+            '10': '2028',
+            '11': '2029',
+            '12': '2030'
         }
         df = df.replace({'YEAR': conversion_of_year_to_value})
         df.insert(6, 'geo_ID', 'geoId/', True)
@@ -998,7 +967,7 @@ class CensusUSAPopulationByRace:
                     df[col] = df[col].astype('int64')
 
             #This change as be done to make sure to process all future files
-            elif "cc-est202" in file:
+            elif "cc-est20" in file:
                 df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
                 df = _clean_county_2022_csv_file(df, file)
                 if df.empty:
@@ -1344,8 +1313,9 @@ def add_future_yearurls():
                 if checkurl.status_code == 200:
                     found_url = url_to_check
                     break
-            except Exception as e:
-                logging.debug(f"URL unreachable: {url_to_check} - {e}")
+            except (TransientDownloadError,
+                    requests.exceptions.RequestException, OSError) as e:
+                logging.warning(f"URL unreachable: {url_to_check} - {e}")
         if found_url:
             _FILES_TO_DOWNLOAD.append({"download_path": found_url})
         else:
@@ -1363,117 +1333,138 @@ def download_files():
     global _FILES_TO_DOWNLOAD, _SESSION
     session = _get_session()
     max_retry = 5
+    raw_data_dir = os.path.join(_INPUT_FILE_PATH, 'raw_data')
+    os.makedirs(raw_data_dir, exist_ok=True)
     try:
         for file_to_dowload in _FILES_TO_DOWNLOAD:
             url = file_to_dowload['download_path']
-            if 'file_name' in file_to_dowload and len(
-                    file_to_dowload['file_name']) > 5:
-                file_name = file_to_dowload['file_name']
+            if file_to_dowload.get('file_name', '').strip():
+                source_file_name = file_to_dowload['file_name'].strip()
             else:
-                file_name = url.split('/')[-1]
+                source_file_name = url.split('/')[-1]
             download_local_path = _INPUT_FILE_PATH
             retry_number = 0
 
             is_file_downloaded = False
             while not is_file_downloaded:
+                out_file_name = source_file_name
                 try:
-                    response = session.get(url, timeout=120)
-                    response.raise_for_status()
+                    raw_file_path = os.path.join(raw_data_dir, source_file_name)
+                    download_with_retry(session, url, raw_file_path)
 
-                    content_type = response.headers.get('Content-Type',
-                                                        '').lower()
-                    if _is_html_response(content_type, response.content[:512]):
-                        raise TransientDownloadError(
-                            f"Server returned HTML/WAF for {url}")
+                    with open(raw_file_path, 'rb') as f:
+                        raw_bytes = f.read()
 
                     if ".csv" in url:
                         if "st-est" in url or 'SC-EST' in url:
-                            file_name = file_name.replace(".csv", ".xlsx")
-                            df = pd.read_csv(StringIO(response.text),
+                            out_file_name = out_file_name.replace(
+                                ".csv", ".xlsx")
+                            df = pd.read_csv(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
                                              on_bad_lines='skip',
                                              header=0)
-                            df.to_excel(os.path.join(download_local_path,
-                                                     file_name),
-                                        index=False,
-                                        engine='xlsxwriter')
+                            atomic_to_excel(df,
+                                            os.path.join(
+                                                download_local_path,
+                                                out_file_name),
+                                            index=False,
+                                            engine='xlsxwriter')
                         elif "pe-11" in url:
-                            df = _resolve_pe_11(file_name, response.text)
-                            df.to_csv(os.path.join(download_local_path,
-                                                   file_name),
-                                      index=False)
+                            df = _resolve_pe_11(
+                                out_file_name,
+                                raw_bytes.decode('utf-8', errors='replace'))
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
                         elif "pe-19" in url:
-                            file_name = file_name.replace(".csv", ".xlsx")
-                            df = pd.read_csv(StringIO(response.text),
+                            out_file_name = out_file_name.replace(
+                                ".csv", ".xlsx")
+                            df = pd.read_csv(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
                                              skiprows=5,
                                              on_bad_lines='skip',
                                              header=0)
-                            df.to_excel(os.path.join(download_local_path,
-                                                     file_name),
-                                        index=False,
-                                        engine='xlsxwriter')
+                            atomic_to_excel(df,
+                                            os.path.join(
+                                                download_local_path,
+                                                out_file_name),
+                                            index=False,
+                                            engine='xlsxwriter')
                         elif "co-asr-7079" in url or "pe-02" in url:
-                            file_name = file_name.replace(".csv", ".xlsx")
+                            out_file_name = out_file_name.replace(
+                                ".csv", ".xlsx")
                             cols = [
                                 'Year', 'FIPS', 'Race/Sex', 1, 2, 3, 4, 5, 6, 7,
                                 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
                             ]
                             if "pe-02" in url:
-                                df = pd.read_csv(StringIO(response.text),
+                                df = pd.read_csv(StringIO(
+                                    raw_bytes.decode('utf-8',
+                                                     errors='replace')),
                                                  skiprows=7,
                                                  on_bad_lines='skip',
                                                  names=cols)
                             else:
-                                df = pd.read_csv(StringIO(response.text),
+                                df = pd.read_csv(StringIO(
+                                    raw_bytes.decode('utf-8',
+                                                     errors='replace')),
                                                  on_bad_lines='skip',
                                                  names=cols)
-                            df.to_excel(os.path.join(download_local_path,
-                                                     file_name),
-                                        index=False,
-                                        engine='xlsxwriter')
+                            atomic_to_excel(df,
+                                            os.path.join(
+                                                download_local_path,
+                                                out_file_name),
+                                            index=False,
+                                            engine='xlsxwriter')
                         elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
-                            df = pd.read_csv(StringIO(response.text),
+                            df = pd.read_csv(StringIO(
+                                raw_bytes.decode('ISO-8859-1',
+                                                 errors='replace')),
                                              on_bad_lines='skip',
                                              encoding='ISO-8859-1',
                                              low_memory=False)
-                            df.to_csv(os.path.join(download_local_path,
-                                                   file_name),
-                                      index=False)
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
                         else:
                             raise ValueError(f'Unknown csv file: {url}')
 
                     elif ".txt" in url and "srh" in url:
                         if "crh" in url:
-                            file_name = file_name.replace("crh", "USCounty")
-                            df = pd.read_table(StringIO(response.text),
+                            out_file_name = out_file_name.replace(
+                                "crh", "USCounty")
+                            df = pd.read_table(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
                                                index_col=False,
                                                engine='python',
                                                on_bad_lines='skip')
-                            df.to_csv(os.path.join(download_local_path,
-                                                   file_name),
-                                      index=False)
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
                         else:
-                            cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                            df = pd.read_table(StringIO(response.text),
-                                               sep=r'\s+',
-                                               engine='python',
-                                               skiprows=14,
-                                               names=cols,
-                                               dtype=str,
-                                               on_bad_lines='skip')
-                            file_name = file_name.replace(".txt", ".csv")
-                            df.to_csv(os.path.join(download_local_path,
-                                                   file_name),
-                                      index=False)
+                            df = parse_srh_txt(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
+                                               skiprows=14)
+                            out_file_name = out_file_name.replace(
+                                ".txt", ".csv")
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
 
                     elif "xlsx" in url:
-                        df = pd.read_excel(io.BytesIO(response.content),
+                        df = pd.read_excel(io.BytesIO(raw_bytes),
                                            skiprows=2,
                                            header=0)
-                        df.to_excel(os.path.join(download_local_path,
-                                                 file_name),
-                                    index=False,
-                                    header=False,
-                                    engine='xlsxwriter')
+                        atomic_to_excel(df,
+                                        os.path.join(download_local_path,
+                                                     out_file_name),
+                                        index=False,
+                                        header=False,
+                                        engine='xlsxwriter')
                     else:
                         raise ValueError(f'Unknown file - {url}')
 

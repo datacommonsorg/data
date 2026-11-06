@@ -147,19 +147,13 @@ class TestPreprocess(unittest.TestCase):
 
     def test_srh_txt_parser_with_bad_lines(self):
         """Tests that multi-whitespace table parsing with extra fields in footnotes skips notes cleanly."""
-        import io
-        import pandas as pd
-        cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        from us_census.pep.population_estimate_by_race.preprocess import parse_srh_txt
         sample_srh = (
             "ALABAMA   100  200  300  400  500  600  700  800  900  1000\n"
             "ALASKA    110  210  310  410  510  610  710  810  910  1010\n"
             "Note: This file contains estimates produced by Population Division with 17 extra fields saw here\n"
         )
-        df = pd.read_table(io.StringIO(sample_srh),
-                           sep=r'\s+',
-                           engine='python',
-                           names=cols,
-                           on_bad_lines='skip')
+        df = parse_srh_txt(sample_srh, skiprows=0)
         self.assertEqual(len(df), 2)
         self.assertEqual(df.iloc[0]['Area'], 'ALABAMA')
 

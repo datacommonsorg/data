@@ -1115,43 +1115,16 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         logging.fatal("No files were successfully processed.")
 
 
-def _create_retry_session() -> requests.Session:
-    """Creates a requests Session configured with retry and backoff for transient errors."""
-    session = requests.Session()
-    session.headers.update({'User-Agent': 'Mozilla/5.0'})
-    retries = Retry(
-        total=5,
-        backoff_factor=2,
-        status_forcelist=[408, 429, 500, 502, 503, 504, 520],
-        allowed_methods=["HEAD", "GET"],
-        respect_retry_after_header=True,
-    )
-    adapter = HTTPAdapter(max_retries=retries)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
-
-
-class TransientDownloadError(Exception):
-    """Raised when a transient download error occurs (e.g., WAF/HTML response)."""
-
-
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
-       tries=3,
-       delay=2,
-       backoff=2)
-def _head_with_html_retry(session: requests.Session,
-                          url: str,
-                          timeout: int = 30) -> requests.Response:
-    """Performs a HEAD request and retries if HTTP 200 returns an HTML error page."""
-    response = session.head(url, allow_redirects=True, timeout=timeout)
-    content_type = response.headers.get('Content-Type', '')
-    if (response.status_code == 200 and 'html' in content_type.lower() and
-            not url.lower().endswith(('.html', '.htm'))):
-        raise TransientDownloadError(
-            f"Server returned HTTP 200 HTML response for non-HTML URL: {url}")
-    return response
+_PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+if _PEP_DIR not in sys.path:
+    sys.path.insert(0, _PEP_DIR)
+from download_util import (
+    TransientDownloadError,
+    create_retry_session as _create_retry_session,
+    is_html_response as _is_html_response,
+    head_with_html_retry as _head_with_html_retry,
+    download_with_retry,
+)
 
 
 def add_future_year_urls():
@@ -1203,40 +1176,6 @@ def add_future_year_urls():
             _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
 
 
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
-       tries=3,
-       delay=5,
-       backoff=2)
-def download_with_retry(session: requests.Session, url: str, dest_path: str):
-    logging.info(f"Downloading file from URL: {url} -> {dest_path}")
-    with session.get(url, stream=True, timeout=120) as response:
-        response.raise_for_status()
-        content_type = response.headers.get('Content-Type', '')
-        if 'html' in content_type.lower():
-            raise TransientDownloadError(
-                f"Server returned HTML error page for URL: {url}")
-        tmp_file_path = None
-        try:
-            dest_dir = os.path.dirname(dest_path) or '.'
-            os.makedirs(dest_dir, exist_ok=True)
-            with tempfile.NamedTemporaryFile(dir=dest_dir,
-                                             delete=False) as tmp_file:
-                tmp_file_path = tmp_file.name
-                for chunk in response.iter_content(chunk_size=65536):
-                    if chunk:
-                        tmp_file.write(chunk)
-            os.replace(tmp_file_path, dest_path)
-            tmp_file_path = None
-        finally:
-            if tmp_file_path and os.path.exists(tmp_file_path):
-                try:
-                    os.remove(tmp_file_path)
-                except OSError:
-                    pass
-    logging.info(f"Downloaded file: {dest_path}")
-
-
 def download_files():
     """ This method will download data from the URLs specified in the input_url.json file.
         If any download attempt fails, the script will terminate.
@@ -1252,9 +1191,8 @@ def download_files():
         for file_to_download in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
             url = file_to_download['download_path']
-            if 'file_name' in file_to_download and len(
-                    file_to_download['file_name']) > 5:
-                file_name_to_save = file_to_download['file_name']
+            if file_to_download.get('file_name', '').strip():
+                file_name_to_save = file_to_download['file_name'].strip()
             else:
                 file_name_to_save = url.split('/')[-1]
             if 'file_path' in file_to_download:

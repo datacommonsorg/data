@@ -29,7 +29,10 @@ for path_entry in (_SCRIPTS_DIR, _MODULE_DIR):
         sys.path.append(path_entry)
 
 # pylint: disable=wrong-import-position
-from us_census.pep.monthly_population_estimate.preprocess import CensusUSACountryPopulation
+from us_census.pep.monthly_population_estimate.preprocess import (
+    CensusUSACountryPopulation,
+    parse_nat_total_txt,
+)
 # pylint: enable=wrong-import-position
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "test_data", "input_files")
 expected_op_folder = os.path.join(_MODULE_DIR, "test_data", "expected_output")
@@ -128,7 +131,6 @@ class TestPreprocess(unittest.TestCase):
 
     def test_txt_parser_filters_non_data_lines(self):
         """Tests that text table parsing filters out notes/headers and keeps valid data rows."""
-        import re
         sample_txt = (
             "Monthly Estimates of the United States Population: April 1, 1980 to\n"
             "July 1, 1999, with Short-Term Projections to November 1, 2000.\n"
@@ -139,38 +141,15 @@ class TestPreprocess(unittest.TestCase):
             "Note: The estimates base population of April 1, 1990 is 248,790,925.\n"
             "Source: U.S. Census Bureau, Population Division. Note with many extra words here\n"
         )
-        months = {
-            'january', 'february', 'march', 'april', 'may', 'june', 'july',
-            'august', 'september', 'october', 'november', 'december'
-        }
-        rows = []
-        for line in sample_txt.splitlines():
-            line_clean = line.strip()
-            if not line_clean:
-                continue
-            tokens = line_clean.split()
-            if re.match(r'^\d{4}$', tokens[0]):
-                rows.append([tokens[0], None, None, None, None, None])
-                continue
-            if (tokens[0].lower() in months and len(tokens) >= 4 and
-                    tokens[1].isdigit()):
-                data_tokens = tokens[2:]
-                if data_tokens[0].lower() == '(census)':
-                    data_tokens = data_tokens[1:]
-                if all(re.match(r'^[0-9,]+$', t) for t in data_tokens):
-                    row = [tokens[0], tokens[1]]
-                    for i in range(4):
-                        if i < len(data_tokens):
-                            row.append(data_tokens[i].replace(',', ''))
-                        else:
-                            row.append(None)
-                    rows.append(row)
-        self.assertEqual(len(rows), 4)
-        self.assertEqual(rows[0][0], '1990')
-        self.assertEqual(rows[1][:2], ['April', '1'])
-        self.assertEqual(rows[2][:2], ['May', '1'])
-        self.assertEqual(rows[3][:2], ['April', '1'])
-        self.assertEqual(rows[3][2], '226546')
+        df = parse_nat_total_txt(sample_txt)
+        self.assertEqual(len(df), 4)
+        self.assertEqual(df.iloc[0]["Year and Month"], '1990')
+        self.assertEqual(df.iloc[1]["Year and Month"], 'April')
+        self.assertEqual(df.iloc[1]["Date"], '1')
+        self.assertEqual(df.iloc[2]["Year and Month"], 'May')
+        self.assertEqual(df.iloc[3]["Year and Month"], 'April')
+        self.assertEqual(df.iloc[3]["Date"], '1')
+        self.assertEqual(df.iloc[3]["Resident Population"], '226546')
 
 
 if __name__ == "__main__":
