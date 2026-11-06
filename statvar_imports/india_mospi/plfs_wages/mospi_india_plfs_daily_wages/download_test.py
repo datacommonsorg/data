@@ -129,6 +129,44 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(df.iloc[2]['quarter'], '')
         self.assertEqual(df.iloc[2]['value'], '450.25')
 
+    def test_fetch_mospi_daily_wages_handles_omitted_quarter_and_plfs_year_prefix(
+            self):
+        session = mock.Mock(spec=requests.Session)
+        ag_records = []
+        for val in ('252.6', '264.9', '270.2', '281.9'):
+            rec = _sample_api_record('Agriculture Year', '2017-18', None, val)
+            rec.pop('quarter')
+            rec.pop('month')
+            ag_records.append(rec)
+        cal_rec = _sample_api_record('Calendar Year', 'PLFS 2025', None,
+                                     '450.25')
+        cal_rec.pop('quarter')
+        cal_rec.pop('month')
+        payload = {
+            'statusCode': True,
+            'meta_data': {
+                'page': 1,
+                'totalRecords': 5,
+                'totalPages': 1,
+                'recordPerPage': 200,
+            },
+            'data': ag_records + [cal_rec],
+        }
+        session.get.return_value = _mock_response(200, payload)
+
+        df = download.fetch_mospi_daily_wages(
+            session=session,
+            api_url='https://api.mospi.gov.in/api/plfs/getData',
+            retry_delay_seconds=0.01,
+        )
+
+        self.assertEqual(
+            list(df['quarter']),
+            ['Jul-Sep', 'Oct-Dec', 'Jan-Mar', 'Apr-Jun', ''],
+        )
+        self.assertEqual(df.iloc[4]['year'], '2025')
+        self.assertEqual(df.iloc[4]['month'], '')
+
     def test_fetch_mospi_daily_wages_raises_on_record_count_mismatch(self):
         session = mock.Mock(spec=requests.Session)
         payload = {

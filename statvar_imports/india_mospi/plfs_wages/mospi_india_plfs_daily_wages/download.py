@@ -221,6 +221,20 @@ def _fetch_page(
     raise RuntimeError(f'Unreachable retry state for {api_url}')
 
 
+_REQUIRED_API_COLUMNS = (
+    'year_type',
+    'year',
+    'frequency',
+    'indicator',
+    'state',
+    'gender',
+    'sector',
+    'value',
+    'unit',
+)
+_AGRICULTURE_YEAR_QUARTERS = ('Jul-Sep', 'Oct-Dec', 'Jan-Mar', 'Apr-Jun')
+
+
 def fetch_mospi_daily_wages(
     session: requests.Session,
     api_url: str = DEFAULT_API_URL,
@@ -236,6 +250,7 @@ def fetch_mospi_daily_wages(
             f'page_size must be in 1..{MAX_PAGE_SIZE}, got {page_size}')
 
     all_rows: list[dict[str, str]] = []
+    ag_group_counts: dict[tuple[str, str, str, str, str], int] = {}
     page = 1
     total_pages = 1
     expected_total_records: int | None = None
@@ -281,14 +296,55 @@ def fetch_mospi_daily_wages(
             )
 
         for item in records:
-            missing_cols = [col for col in COLUMNS if col not in item]
+            missing_cols = [
+                col for col in _REQUIRED_API_COLUMNS if col not in item
+            ]
             if missing_cols:
                 raise RuntimeError(
                     f'MoSPI API record on page {page} missing columns {missing_cols}'
                 )
+            year_type = '' if item['year_type'] is None else str(
+                item['year_type'])
+            year = '' if item['year'] is None else str(
+                item['year']).removeprefix('PLFS ').strip()
+            state = '' if item['state'] is None else str(item['state'])
+            gender = '' if item['gender'] is None else str(item['gender'])
+            sector = '' if item['sector'] is None else str(item['sector'])
+            if 'quarter' in item:
+                quarter = '' if item['quarter'] is None else str(
+                    item['quarter'])
+            elif year_type == 'Agriculture Year':
+                group_key = (year_type, year, state, gender, sector)
+                idx = ag_group_counts.get(group_key, 0)
+                quarter = _AGRICULTURE_YEAR_QUARTERS[
+                    idx % len(_AGRICULTURE_YEAR_QUARTERS)]
+                ag_group_counts[group_key] = idx + 1
+            else:
+                quarter = ''
+            month = '' if item.get('month') is None else str(item.get('month'))
             all_rows.append({
-                col: '' if item[col] is None else str(item[col])
-                for col in COLUMNS
+                'year_type':
+                    year_type,
+                'year':
+                    year,
+                'frequency':
+                    '' if item['frequency'] is None else str(item['frequency']),
+                'indicator':
+                    '' if item['indicator'] is None else str(item['indicator']),
+                'state':
+                    state,
+                'gender':
+                    gender,
+                'sector':
+                    sector,
+                'quarter':
+                    quarter,
+                'month':
+                    month,
+                'value':
+                    '' if item['value'] is None else str(item['value']),
+                'unit':
+                    '' if item['unit'] is None else str(item['unit']),
             })
         page += 1
 
