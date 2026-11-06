@@ -201,11 +201,14 @@ def sanitize_directory_files(input_dir: str, sanitized_dir: str):
                      len(cleaned_rows))
 
 
-def to_int_or_zero(val: str) -> int:
-    """Converts a formatted string cell into integer, returning 0 for missing/empty."""
+def _parse_int(val: str) -> int:
+    """Parses a formatted integer cell string.
+
+    Does not convert non-int values or placeholders to 0. Rows with non-integer
+    or placeholder values (such as '-') are skipped by callers prior to sum
+    validation.
+    """
     v = val.strip().replace(" ", "").replace(",", "")
-    if not v or v == "-":
-        return 0
     return int(v)
 
 
@@ -266,7 +269,7 @@ def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
         if has_dash:
             return
         tot, m, fem, urb, urb_m, urb_f, rur, rur_m, rur_f = [
-            to_int_or_zero(x) for x in row[1:10]
+            _parse_int(x) for x in row[1:10]
         ]
         if tot != urb + rur:
             raise ValueError(
@@ -311,8 +314,8 @@ def _validate_horizontal_and_vertical_sums(file_path: str) -> bool:
                 "-" in d_row[col_i].strip() for col_i in range(1, 10))
             if not cohorts_have_dash and not district_has_dash:
                 for col_i in range(1, 10):
-                    d_val = to_int_or_zero(d_row[col_i])
-                    a_sum = sum(to_int_or_zero(r[col_i]) for r in a_rows)
+                    d_val = _parse_int(d_row[col_i])
+                    a_sum = sum(_parse_int(r[col_i]) for r in a_rows)
                     if d_val != a_sum:
                         raise ValueError(
                             f"District '{d_name}', col {col_i}: District header ({d_val}) != sum of {len(a_rows)} age cohorts ({a_sum})."
