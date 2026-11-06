@@ -50,7 +50,8 @@ class SetConfigValueTest(unittest.TestCase):
     """Tests for set_config_value with boolean settings."""
 
     def test_bool_flag_not_in_config(self):
-        # 'resume' is a boolean flag that isn't in get_default_config().
+        # 'resume' is also in get_default_config(), but an empty config tests
+        # the fallback to the default of the flag with the same name.
         config = {}
         config_flags.set_config_value('resume', 'True', config)
         self.assertIs(config['resume'], True)
