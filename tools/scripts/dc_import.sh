@@ -31,6 +31,11 @@
 #   echo "alias dc-import='<path-to-data-repo>/tools/scripts/dc_import.sh'" >> ~/.bashrc
 #   source ~/.bashrc
 #
+# Note: Aliases are not available in non-interactive shells (e.g., coding agents
+# or scripts). In those cases, call the script directly:
+#
+#   <path-to-data-repo>/tools/scripts/dc_import.sh lint ...
+#
 # Note: Set `export DC_API_KEY="<your-key>"` if running existence or resolution
 # checks against the Data Commons API.
 #
@@ -51,7 +56,8 @@
 # ==============================================================================
 #   DC_IMPORT_JAR_URL       Override the GCS URL for import-tool.jar.
 #   DC_IMPORT_CACHE_DIR     Override the local cache directory
-#                           (default: ${XDG_CACHE_HOME:-~/.cache}/datacommons/dc-import).
+#                           (default: ${XDG_CACHE_HOME:-~/.cache}/datacommons/dc-import,
+#                           or ${TMPDIR:-/tmp}/dc-import-<uid> if HOME is unset).
 #   DC_IMPORT_JAVA_OPTS     Extra JVM flags (e.g., "-Xmx8g").
 #   DC_IMPORT_FORCE_UPDATE  Set to "1" or "true" to check for a newer version
 #                           immediately, even if the cached JAR was checked
@@ -60,13 +66,29 @@
 set -euo pipefail
 
 readonly DEFAULT_JAR_URL="https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar"
-readonly DEFAULT_CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/datacommons/dc-import"
 readonly CHECK_INTERVAL_MINUTES=60
+
+# Pick a default cache directory. Fall back to a per-user directory under /tmp
+# when neither XDG_CACHE_HOME nor HOME is set (e.g., minimal agent or CI shells).
+USING_TMP_CACHE_FALLBACK=0
+if [[ -n "${XDG_CACHE_HOME:-}" ]]; then
+  DEFAULT_CACHE_DIR="${XDG_CACHE_HOME}/datacommons/dc-import"
+elif [[ -n "${HOME:-}" ]]; then
+  DEFAULT_CACHE_DIR="${HOME}/.cache/datacommons/dc-import"
+else
+  DEFAULT_CACHE_DIR="${TMPDIR:-/tmp}/dc-import-$(id -u)"
+  USING_TMP_CACHE_FALLBACK=1
+fi
+readonly DEFAULT_CACHE_DIR
 
 readonly JAR_URL="${DC_IMPORT_JAR_URL:-${DEFAULT_JAR_URL}}"
 readonly CACHE_DIR="${DC_IMPORT_CACHE_DIR:-${DEFAULT_CACHE_DIR}}"
 readonly CACHED_JAR="${CACHE_DIR}/import-tool.jar"
 readonly JAVA_BIN="${JAVA_BIN:-java}"
+if [[ -n "${DC_IMPORT_CACHE_DIR:-}" ]]; then
+  USING_TMP_CACHE_FALLBACK=0
+fi
+readonly USING_TMP_CACHE_FALLBACK
 
 log_info() {
   echo "[dc-import] $*" >&2
@@ -85,7 +107,17 @@ is_force_update() {
 }
 
 ensure_latest_jar() {
-  mkdir -p "${CACHE_DIR}"
+  if [[ "${USING_TMP_CACHE_FALLBACK}" -eq 1 ]]; then
+    # /tmp is shared by all users, so create the directory as private and make
+    # sure it belongs to the current user before trusting a JAR inside it.
+    mkdir -p -m 700 "${CACHE_DIR}"
+    if [[ ! -O "${CACHE_DIR}" || -L "${CACHE_DIR}" ]]; then
+      log_error "Cache directory ${CACHE_DIR} is a symlink or not owned by the current user. Set DC_IMPORT_CACHE_DIR to a private directory."
+      exit 1
+    fi
+  else
+    mkdir -p "${CACHE_DIR}"
+  fi
 
   # Reuse the local JAR without checking GCS if it was fetched or verified
   # within the last hour, unless a forced update is requested.
