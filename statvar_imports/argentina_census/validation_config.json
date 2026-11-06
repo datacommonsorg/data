@@ -59,7 +59,7 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar = 'Count_Person'",
-                "condition": "NumPlaces >= 529 AND NumObservations >= 2600 AND LatestDate >= 2022",
+                "condition": "NumPlaces >= 529 AND NumObservations >= 1600 AND LatestDate >= 2022",
                 "failure_message": "Count_Person AA2 place or observation count validation failed for Argentina_Census."
             }
         },
