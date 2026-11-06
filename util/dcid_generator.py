@@ -427,7 +427,11 @@ def _clean_scalar_value(raw_val) -> str:
     if isinstance(raw_val, (int, float)) and raw_val == 0:
         return '0'
     if isinstance(raw_val, list):
-        return '' if not raw_val else _clean_scalar_value(raw_val[0])
+        for item in raw_val:
+            cleaned = _clean_scalar_value(item)
+            if cleaned:
+                return cleaned
+        return ''
     val_str = str(raw_val).strip(' "')
     if not val_str:
         return ''
@@ -611,9 +615,9 @@ def generate_node_dcid(
     for prop, raw_val in record.items():
         if not prop or str(prop).startswith('#') or prop in ignored:
             continue
-        val_str = '' if raw_val is None else str(raw_val).strip(' "')
-        if not val_str:
+        if not _clean_scalar_value(raw_val):
             continue
+        val_str = '' if raw_val is None else str(raw_val).strip(' "')
         if _has_local_ref(raw_val):
             return ''
         if isinstance(raw_val, bool):

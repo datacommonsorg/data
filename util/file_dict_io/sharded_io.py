@@ -325,7 +325,7 @@ class ShardedFileDictIO(FileDictIO):
         self._read_lock = threading.Lock()
         self._current_fp: FileDictIO | None = None
         self._output_fp: dict[int | str, FileDictIO] = {}
-        self._shard_locks: dict[int | str, threading.Lock] = {}
+        self._shard_locks: dict[int | str, threading.RLock] = {}
         self._shard_counters: dict[int | str, Counters] = {}
         self._shard_record_counts: dict[int | str, int] = {}
         self._unflushed_shard_counts: dict[int | str, int] = {}
@@ -532,13 +532,14 @@ class ShardedFileDictIO(FileDictIO):
                     counters = Counters(options=CounterOptions(
                         show_every_n_sec=0))
                     self._shard_counters[index] = counters
-        pending = self._unflushed_shard_counts.get(index, 0)
-        if pending > 0:
-            self._unflushed_shard_counts[index] = 0
-            self._shard_record_counts[index] = (
-                self._shard_record_counts.get(index, 0) + pending)
-            counters.add_counter(f'shard-{index}-outputs', pending)
-            counters.add_counter('shard-output-records', pending)
+        with self._get_shard_lock(index):
+            pending = self._unflushed_shard_counts.get(index, 0)
+            if pending > 0:
+                self._unflushed_shard_counts[index] = 0
+                self._shard_record_counts[index] = (
+                    self._shard_record_counts.get(index, 0) + pending)
+                counters.add_counter(f'shard-{index}-outputs', pending)
+                counters.add_counter('shard-output-records', pending)
         return counters
 
     def get_output_shard_filename(self, index: int | str) -> str:
@@ -614,6 +615,7 @@ class ShardedFileDictIO(FileDictIO):
         """
         fp = self._output_fp.get(index)
         if fp is None:
+            created = False
             with self._init_lock:
                 fp = self._output_fp.get(index)
                 if fp is None:
@@ -622,12 +624,14 @@ class ShardedFileDictIO(FileDictIO):
                                                      mode='w',
                                                      headers=self._headers)
                     self._output_fp[index] = fp
-                    self._shard_locks.setdefault(index, threading.Lock())
+                    self._shard_locks.setdefault(index, threading.RLock())
                     self._shard_record_counts.setdefault(index, 0)
                     self._unflushed_shard_counts.setdefault(index, 0)
                     self._files.append(output_file)
-                    self.get_shard_counters(index).add_counter(
-                        'shard-output-files', 1)
+                    created = True
+            if created:
+                self.get_shard_counters(index).add_counter(
+                    'shard-output-files', 1)
         return fp
 
     def get_key_for_record(self, record: dict) -> str:
@@ -973,19 +977,19 @@ class ShardedFileDictIO(FileDictIO):
             self._infer_default_shard_key(self._headers)
         if not self._shard_by_column_value and self._shard_count <= 0:
             self._shard_count = self._estimate_shard_count()
-        self._shards_prepared = True
         if self._shard_count > 0:
             for index in range(self._shard_count):
                 self.get_shard_file_handle(index)
+        self._shards_prepared = True
 
-    def _get_shard_lock(self, index: int | str) -> threading.Lock:
-        """Returns the per-shard `threading.Lock` for `index`."""
+    def _get_shard_lock(self, index: int | str) -> threading.RLock:
+        """Returns the per-shard `threading.RLock` for `index`."""
         lock = self._shard_locks.get(index)
         if lock is None:
             with self._init_lock:
                 lock = self._shard_locks.get(index)
                 if lock is None:
-                    lock = threading.Lock()
+                    lock = threading.RLock()
                     self._shard_locks[index] = lock
         return lock
 
