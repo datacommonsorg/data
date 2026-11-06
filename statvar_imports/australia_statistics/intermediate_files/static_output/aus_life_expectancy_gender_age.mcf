@@ -1,0 +1,1600 @@
+Node: dcid:LifeExpectancy_Person_0_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 0
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_0_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 0
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_10_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 10
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_10_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 10
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_11_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 11
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_11_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 11
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_12_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 12
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_12_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 12
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_13_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 13
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_13_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 13
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_14_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 14
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_14_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 14
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_15_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 15
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_15_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 15
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_16_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 16
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_16_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 16
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_17_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 17
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_17_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 17
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_18_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 18
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_18_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 18
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_19_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 19
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_19_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 19
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_1_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 1
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_1_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 1
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_20_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 20
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_20_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 20
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_21_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 21
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_21_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 21
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_22_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 22
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_22_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 22
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_23_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 23
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_23_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 23
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_24_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 24
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_24_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 24
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_25_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 25
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_25_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 25
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_26_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 26
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_26_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 26
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_27_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 27
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_27_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 27
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_28_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 28
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_28_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 28
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_29_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 29
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_29_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 29
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_2_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 2
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_2_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 2
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_30_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 30
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_30_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 30
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_31_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 31
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_31_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 31
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_32_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 32
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_32_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 32
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_33_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 33
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_33_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 33
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_34_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 34
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_34_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 34
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_35_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 35
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_35_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 35
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_36_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 36
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_36_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 36
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_37_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 37
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_37_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 37
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_38_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 38
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_38_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 38
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_39_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 39
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_39_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 39
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_3_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 3
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_3_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 3
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_40_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 40
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_40_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 40
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_41_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 41
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_41_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 41
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_42_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 42
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_42_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 42
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_43_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 43
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_43_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 43
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_44_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 44
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_44_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 44
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_45_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 45
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_45_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 45
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_46_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 46
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_46_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 46
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_47_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 47
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_47_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 47
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_48_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 48
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_48_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 48
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_49_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 49
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_49_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 49
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_4_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 4
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_4_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 4
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_50_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 50
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_50_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 50
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_51_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 51
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_51_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 51
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_52_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 52
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_52_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 52
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_53_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 53
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_53_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 53
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_54_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 54
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_54_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 54
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_55_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 55
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_55_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 55
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_56_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 56
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_56_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 56
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_57_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 57
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_57_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 57
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_58_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 58
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_58_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 58
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_59_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 59
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_59_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 59
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_5_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 5
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_5_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 5
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_60_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 60
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_60_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 60
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_61_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 61
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_61_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 61
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_62_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 62
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_62_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 62
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_63_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 63
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_63_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 63
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_64_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 64
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_64_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 64
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_65_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 65
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_65_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 65
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_66_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 66
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_66_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 66
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_67_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 67
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_67_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 67
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_68_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 68
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_68_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 68
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_69_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 69
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_69_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 69
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_6_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 6
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_6_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 6
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_70_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 70
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_70_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 70
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_71_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 71
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_71_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 71
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_72_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 72
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_72_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 72
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_73_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 73
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_73_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 73
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_74_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 74
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_74_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 74
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_75_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 75
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_75_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 75
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_76_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 76
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_76_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 76
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_77_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 77
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_77_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 77
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_78_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 78
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_78_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 78
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_79_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 79
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_79_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 79
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_7_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 7
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_7_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 7
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_80_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 80
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_80_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 80
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_81_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 81
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_81_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 81
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_82_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 82
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_82_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 82
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_83_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 83
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_83_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 83
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_84_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 84
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_84_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 84
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_85_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 85
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_85_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 85
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_86_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 86
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_86_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 86
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_87_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 87
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_87_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 87
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_88_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 88
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_88_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 88
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_89_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 89
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_89_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 89
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_8_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 8
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_8_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 8
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_90_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 90
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_90_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 90
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_91_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 91
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_91_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 91
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_92_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 92
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_92_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 92
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_93_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 93
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_93_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 93
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_94_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 94
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_94_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 94
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_95_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 95
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_95_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 95
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_96_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 96
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_96_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 96
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_97_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 97
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_97_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 97
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_98_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 98
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_98_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 98
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_99_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 99
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_99_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 99
+gender: dcid:Male
+
+Node: dcid:LifeExpectancy_Person_9_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 9
+gender: dcid:Female
+
+Node: dcid:LifeExpectancy_Person_9_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:lifeExpectancy
+statType: dcid:measuredValue
+age: 9
+gender: dcid:Male
+

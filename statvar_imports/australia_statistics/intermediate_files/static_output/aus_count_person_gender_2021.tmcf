@@ -1,0 +1,8 @@
+Node: E:aus_count_person_gender_2021->E0
+observationAbout: C:aus_count_person_gender_2021->observationAbout
+observationDate: C:aus_count_person_gender_2021->observationDate
+value: C:aus_count_person_gender_2021->value
+variableMeasured: C:aus_count_person_gender_2021->variableMeasured
+unit: C:aus_count_person_gender_2021->unit
+scalingFactor: C:aus_count_person_gender_2021->scalingFactor
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,27 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "AustraliaStatistics",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.abs.gov.au/",
+      "provenance_description": "Australian Bureau of Statistics (ABS) labour force, census population, life expectancy, household income, and health conditions.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "intermediate_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/aus_employment.tmcf",
+          "cleaned_csv": "output_files/*.csv",
+          "node_mcf": "output_files/*.mcf"
+        }
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 0 20 * *"
+    }
+  ]
+}
