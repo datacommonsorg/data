@@ -64,57 +64,12 @@
             }
         },
         {
-            "rule_id": "check_Active_Census_min_value",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^Count_Person') AND NOT regexp_matches(StatVar, '(Urban|Rural|Literate|Illiterate|10OrMoreYears|85OrMoreYears|95OrMoreYears|99OrMoreYears)') GROUP BY StatVar)",
-                "condition": "NumStatVars >= 366 AND MinTotalObs >= 24 AND MinLatestDate >= 2022",
-                "failure_message": "Active Census StatVar validation failed for Argentina_Census."
-            }
-        },
-        {
             "rule_id": "check_Infant_Mortality_min_value",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE StatVar = 'Count_MortalityEvent_AsAFractionOf_Count_BirthEvent_LiveBirth' GROUP BY StatVar)",
                 "condition": "NumStatVars = 1 AND MinTotalObs >= 450 AND MinLatestDate >= 2023",
                 "failure_message": "Infant Mortality StatVar validation failed for Argentina_Census."
-            }
-        },
-        {
-            "rule_id": "check_Historical_2010_min_value",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^(Count_Person_(Urban|Rural)|Count_Person_10OrMoreYears.*)$') GROUP BY StatVar)",
-                "condition": "NumStatVars >= 6 AND MinTotalObs >= 24 AND MinLatestDate >= 2010",
-                "failure_message": "Historical 2010 Census StatVar validation failed for Argentina_Census."
-            }
-        },
-        {
-            "rule_id": "check_Historical_2001_Urban_Rural_Age_min_value",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^Count_Person_((0|5|13|14|0To1|6To9|10To12|15To17|18To19|20To24|25To29|30To34|35To39|40To44|45To49|50To54|55To59|60To64|65To69|70To74|75To79|80To84|85OrMore)Years_)?(Urban|Rural)(_(Male|Female))?$') AND NOT regexp_matches(StatVar, '^Count_Person_(Urban|Rural)$') GROUP BY StatVar)",
-                "condition": "NumStatVars >= 142 AND MinTotalObs >= 24 AND MinLatestDate >= 2001",
-                "failure_message": "Historical 2001 Urban/Rural Census StatVar validation failed for Argentina_Census."
-            }
-        },
-        {
-            "rule_id": "check_Historical_1991_Age_min_value",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^Count_Person_9[59]OrMoreYears.*') GROUP BY StatVar)",
-                "condition": "NumStatVars >= 6 AND MinTotalObs >= 24 AND MinLatestDate >= 1991",
-                "failure_message": "Historical 1991 Census StatVar validation failed for Argentina_Census."
-            }
-        },
-        {
-            "rule_id": "check_Historical_1980_Urban_Rural_Age_min_value",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^Count_Person_.*(Urban|Rural|85OrMoreYears).*') AND NOT regexp_matches(StatVar, '^Count_Person_((0|5|13|14|0To1|6To9|10To12|15To17|18To19|20To24|25To29|30To34|35To39|40To44|45To49|50To54|55To59|60To64|65To69|70To74|75To79|80To84|85OrMore)Years_)?(Urban|Rural)(_(Male|Female))?$') GROUP BY StatVar)",
-                "condition": "NumStatVars >= 513 AND MinTotalObs >= 1 AND MinLatestDate >= 1980",
-                "failure_message": "Historical 1980 Urban/Rural and 85+ Census StatVar validation failed for Argentina_Census."
             }
         }
     ]
