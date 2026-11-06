@@ -1,0 +1,12 @@
+key,prop,val,p1,v1
+Localidade,observationAbout,{Data},,
+Ano,observationDate,{Number},observationPeriod,P1Y
+Populacao,value,{Number},populationType,Person
+Cor:Total,populationType,Person,,
+Cor:Branca,race,dcs:Brazil_Branca,,
+Cor:Preta,race,dcs:Black,,
+Cor:Amarela,race,dcs:Brazil_Amarela,,
+Cor:Parda,race,dcs:Brazil_Pardo,,
+# Note: dcs:Brazil_Indigneous (dcs:BrazilIndigneous) spelling is intentional for legacy schema compatibility.
+Cor:Indígena,race,dcs:Brazil_Indigneous,,
+Cor:Sem declaração,race,UnknownRace,,

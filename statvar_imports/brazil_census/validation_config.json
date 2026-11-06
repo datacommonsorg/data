@@ -1,0 +1,39 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks deleted records threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "scope": {
+                "data_source": "differ_summary"
+            },
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Checks date freshness across Brazil Census StatVars.",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "CASE WHEN StatVar IN ('Count_Person_10OrMoreYears_Male', 'Count_Person_10OrMoreYears_Female', 'Count_Person_10OrMoreYears_Illiterate', 'Count_Person_10OrMoreYears_Male_Illiterate', 'Count_Person_10OrMoreYears_Female_Illiterate', 'Count_Person_10OrMoreYears_Male_Literate', 'Count_Person_10OrMoreYears_Female_Literate') THEN MaxDate >= '1940' WHEN StatVar IN ('Count_Student_BrazilPreVestibular', 'Count_Person_10OrMoreYears', 'Count_Person_10OrMoreYears_Literate', 'Count_Person_10To14Years_Literate', 'Count_Person_15To19Years_Literate', 'Count_Person_20OrMoreYears', 'Count_Person_20OrMoreYears_Literate', 'Count_Person_UnknownRace', 'Count_Person_Irreligion', 'Count_Person_Evangelical', 'Count_Person_RomanCatholicismApostolic', 'Count_Person_BrazilOtherReligion', 'indianCensus/Count_Person_Religion_ReligionNotStated') OR regexp_matches(StatVar, 'Literate_AsAFractionOf') OR (StatVar IN ('Count_Person_10To14Years', 'Count_Person_15To19Years') AND total_svs = 53) OR (StatVar = 'Count_Person' AND total_svs = 11) THEN MaxDate >= '2000' WHEN regexp_matches(StatVar, '(School$|Illiterate_AsAFractionOf|^Count_Person_(15To24|25To39|40To59|60OrMore)Years_Illiterate|^Count_Person_15OrMoreYears_Illiterate_|^Count_Person_(80To89|90To99)Years)') OR StatVar IN ('Count_Person_Rural_Male', 'Count_Person_Rural_Female', 'Count_Person_Urban_Male', 'Count_Person_Urban_Female') OR (StatVar IN ('Count_Person_Male', 'Count_Person_Female') AND total_svs = 9) THEN MaxDate >= '2010' ELSE MaxDate >= '2022' END AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_num_places_count",
+            "description": "Checks that StatVars cover at least 27 places (or 33 for state+region+national).",
+            "validator": "NUM_PLACES_COUNT",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "minimum": 27
+            }
+        }
+    ]
+}
