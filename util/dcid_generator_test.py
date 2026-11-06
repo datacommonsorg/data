@@ -106,8 +106,7 @@ class DcidGeneratorTest(unittest.TestCase):
         node1 = {
             'Node': 'SVObs',
             'typeOf': 'dcs:StatVarObservation',
-            'variableMeasured':
-            'dcid:Count_Person_18OrMoreYears_Civilian_Male',
+            'variableMeasured': 'dcid:Count_Person_18OrMoreYears_Civilian_Male',
             'observationAbout': 'dcid:geoId/41051002901',
             'value': 1654,
             'observationDate': '"2014"',
@@ -137,28 +136,20 @@ class DcidGeneratorTest(unittest.TestCase):
         self.assertEqual(
             '',
             dcid_generator.generate_statvar_obs_dcid({
-                'typeOf':
-                'dcs:StatVarObservation',
-                'variableMeasured':
-                'dcid:Count_Person',
-                'value':
-                1000,
-                'observationDate':
-                '"2017-01"',
+                'typeOf': 'dcs:StatVarObservation',
+                'variableMeasured': 'dcid:Count_Person',
+                'value': 1000,
+                'observationDate': '"2017-01"',
             }),
         )
         # Missing variableMeasured
         self.assertEqual(
             '',
             dcid_generator.generate_statvar_obs_dcid({
-                'typeOf':
-                'dcs:StatVarObservation',
-                'observationAbout':
-                'dcid:geoId/06001',
-                'value':
-                1000,
-                'observationDate':
-                '"2017-01"',
+                'typeOf': 'dcs:StatVarObservation',
+                'observationAbout': 'dcid:geoId/06001',
+                'value': 1000,
+                'observationDate': '"2017-01"',
             }),
         )
         # Missing observationDate
@@ -175,14 +166,10 @@ class DcidGeneratorTest(unittest.TestCase):
         self.assertEqual(
             '',
             dcid_generator.generate_statvar_obs_dcid({
-                'typeOf':
-                'dcs:StatVarObservation',
-                'variableMeasured':
-                'dcid:Count_Person',
-                'observationAbout':
-                'dcid:geoId/06001',
-                'observationDate':
-                '"2017-01"',
+                'typeOf': 'dcs:StatVarObservation',
+                'variableMeasured': 'dcid:Count_Person',
+                'observationAbout': 'dcid:geoId/06001',
+                'observationDate': '"2017-01"',
             }),
         )
         # Unresolved local reference in variableMeasured
@@ -233,14 +220,10 @@ class DcidGeneratorTest(unittest.TestCase):
         self.assertEqual(
             'nuts/nutsCode_node_0',
             dcid_generator.generate_place_dcid({
-                'Node':
-                'node_0',
-                'typeOf':
-                'dcs:City',
-                'nutsCode':
-                '"nutsCode_node_0"',
-                'wikidataId':
-                '"wikidataId_node_0"',
+                'Node': 'node_0',
+                'typeOf': 'dcs:City',
+                'nutsCode': '"nutsCode_node_0"',
+                'wikidataId': '"wikidataId_node_0"',
             }),
         )
         self.assertEqual(
@@ -359,6 +342,25 @@ class DcidGeneratorTest(unittest.TestCase):
         self.assertEqual(dcid_generator.generate_node_dcid(node1),
                          dcid_generator.generate_node_dcid(node2))
 
+        # Ignored properties (definition, member, relevantVariable, DisplayName,
+        # shortDisplayName, ChildOf, url, etc.) do not change the generated DCID.
+        node_with_metadata = {
+            **node1,
+            'definition': '"mp=count,pt=Person"',
+            'member': 'dcid:dc/g/ChildSVG',
+            'memberOf': 'dcid:dc/g/ParentSVG',
+            'relevantVariable': 'dcid:Count_Person',
+            'DisplayName': '"Custom Display"',
+            'shortDisplayName': '"Short"',
+            'ChildOf': 'dcid:Root',
+            'url': '"https://example.org"',
+            'provenance': 'dcid:dc/base/Prov',
+        }
+        self.assertEqual(
+            dcid_generator.generate_node_dcid(node1),
+            dcid_generator.generate_node_dcid(node_with_metadata),
+        )
+
         # Preserves numeric zero values (0, 0.0, '0', '0.0').
         base = {
             'observationAbout': 'geoId/06',
@@ -389,12 +391,9 @@ class DcidGeneratorTest(unittest.TestCase):
         self.assertEqual(
             '',
             dcid_generator.generate_node_dcid({
-                'typeOf':
-                'dcs:StatisticalVariable',
-                'measuredProperty':
-                'dcs:count',
-                'populationType':
-                'dcs:Person',
+                'typeOf': 'dcs:StatisticalVariable',
+                'measuredProperty': 'dcs:count',
+                'populationType': 'dcs:Person',
                 'gender': ['dcid:Male', 'l:LocalGender'],
             }),
         )

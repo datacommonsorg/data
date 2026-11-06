@@ -53,11 +53,26 @@ DCID_IGNORE_PROPS = frozenset({
     'descriptionUrl',
     'alternateName',
     'nameWithLanguage',
-    'constraintProperties',
-    'memberOf',
-    'provenance',
+    'DisplayName',
+    'shortDisplayName',
     'label',
+    'url',
+    'definition',
+    'utteranceTemplate',
+    'source',
+    'footnote',
+    'constraintProperties',
+    'member',
+    'memberOf',
+    'linkedMember',
+    'linkedMemberOf',
+    'ChildOf',
+    'relevantVariable',
+    'provenance',
     'isPublic',
+    'isNormalizable',
+    'denominatorForNormalization',
+    'observationProperties',
     'keyString',
     'resMCFFile',
     'localCuratorLevelId',
@@ -96,22 +111,12 @@ FIXED_STAT_VAR_PROPS = frozenset({
 
 NON_CONSTRAINT_STAT_VAR_PROPERTIES = frozenset(
     DCID_IGNORE_PROPS | {
-        'url',
-        'utteranceTemplate',
-        'source',
-        'footnote',
         'populationGroup',
         'location',
         'childhoodLocation',
         'measurementMethod',
         'scalingFactor',
         'unit',
-        'isNormalizable',
-        'denominatorForNormalization',
-        'observationProperties',
-        'definition',
-        'linkedMember',
-        'linkedMemberOf',
     })
 
 # Place types and ordered assignable ID properties
@@ -366,8 +371,7 @@ def farmhash_fingerprint64(data: bytes | str) -> int:
     )
     return _hash_len_16(
         _u64(
-            _hash_len_16(v0, w0, mul) + _u64(_shift_mix(y) * _FARMHASH_K0) +
-            x),
+            _hash_len_16(v0, w0, mul) + _u64(_shift_mix(y) * _FARMHASH_K0) + x),
         _u64(_hash_len_16(v1, w1, mul) + z),
         mul,
     )
@@ -614,12 +618,12 @@ def generate_statvar_hash_dcid(
     if not sorted_props:
         return ''
     present_props = {prop for prop, _ in sorted_props}
-    if ('measuredProperty' not in ignored
-            and 'measuredProperty' not in present_props):
+    if ('measuredProperty' not in ignored and
+            'measuredProperty' not in present_props):
         return ''
-    if ('populationType' not in ignored and 'popType' not in ignored
-            and 'populationType' not in present_props
-            and 'popType' not in present_props):
+    if ('populationType' not in ignored and 'popType' not in ignored and
+            'populationType' not in present_props and
+            'popType' not in present_props):
         return ''
     key_parts = []
     for prop, vals in sorted_props:
