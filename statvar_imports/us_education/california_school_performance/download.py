@@ -340,11 +340,15 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
         'Students with Scores',
     )
     mean_idx = _idx('Mean Scale Score')
-    exc_idx = _idx('Percentage Standard Exceeded')
-    met_idx = _idx('Percentage Standard Met')
-    met_abv_idx = _idx('Percentage Standard Met and Above')
-    nearly_idx = _idx('Percentage Standard Nearly Met')
-    not_met_idx = _idx('Percentage Standard Not Met')
+    exc_idx = _idx('Percentage Standard Exceeded', 'Percentage Advanced')
+    met_idx = _idx('Percentage Standard Met', 'Percentage Proficient')
+    met_abv_idx = _idx(
+        'Percentage Standard Met and Above',
+        'Percentage Proficient and Above',
+        'Percentage Proficient and Advanced',
+    )
+    nearly_idx = _idx('Percentage Standard Nearly Met', 'Percentage Developing')
+    not_met_idx = _idx('Percentage Standard Not Met', 'Percentage Minimal')
 
     missing_cols = []
     if place_idx < 0 and (c_idx < 0 or d_idx < 0 or s_idx < 0):
@@ -358,16 +362,24 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
         missing_cols.append('Grade')
     if tid_idx < 0:
         missing_cols.append('Test ID / Test Id')
-    if all(idx < 0 for idx in (
-            tested_idx,
-            mean_idx,
-            exc_idx,
-            met_idx,
-            met_abv_idx,
-            nearly_idx,
-            not_met_idx,
-    )):
-        missing_cols.append('assessment metric columns')
+    if tested_idx < 0:
+        missing_cols.append('Total Students Tested / Students Tested')
+    if mean_idx < 0:
+        missing_cols.append('Mean Scale Score')
+    if exc_idx < 0:
+        missing_cols.append(
+            'Percentage Standard Exceeded / Percentage Advanced')
+    if met_idx < 0:
+        missing_cols.append('Percentage Standard Met / Percentage Proficient')
+    if met_abv_idx < 0:
+        missing_cols.append(
+            'Percentage Standard Met and Above / Percentage Proficient and Above'
+        )
+    if nearly_idx < 0:
+        missing_cols.append(
+            'Percentage Standard Nearly Met / Percentage Developing')
+    if not_met_idx < 0:
+        missing_cols.append('Percentage Standard Not Met / Percentage Minimal')
     if missing_cols:
         raise ValueError(
             f'Missing required CAASPP columns {missing_cols} in header: {raw_header}'
@@ -597,7 +609,8 @@ def main(argv):
         year_to_file[y] for y in sorted(year_to_file.keys())
     ]
     if not all_normalized_files:
-        raise RuntimeError('No files were successfully downloaded and processed.')
+        raise RuntimeError(
+            'No files were successfully downloaded and processed.')
 
     master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
     if (FLAGS.years.strip().lower() in ('all', '*') or '-' in FLAGS.years or

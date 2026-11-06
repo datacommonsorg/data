@@ -89,11 +89,30 @@ MEASUREMENT_METHOD = 'dcs:CaliforniaAssessmentOfStudentPerformanceAndProgress'
 OBS_TYPE = 'dcs:StatVarObservation'
 
 ACHIEVEMENT_LEVELS = (
-    ('Percentage Standard Exceeded', 'CA_StandardExceeded'),
-    ('Percentage Standard Met', 'CA_StandardMet'),
-    ('Percentage Standard Met and Above', 'CA_StandardMetAndAbove'),
-    ('Percentage Standard Nearly Met', 'CA_StandardNearlyMet'),
-    ('Percentage Standard Not Met', 'CA_StandardNotMet'),
+    (
+        ('Percentage Standard Exceeded', 'Percentage Advanced'),
+        'CA_StandardExceeded',
+    ),
+    (
+        ('Percentage Standard Met', 'Percentage Proficient'),
+        'CA_StandardMet',
+    ),
+    (
+        (
+            'Percentage Standard Met and Above',
+            'Percentage Proficient and Above',
+            'Percentage Proficient and Advanced',
+        ),
+        'CA_StandardMetAndAbove',
+    ),
+    (
+        ('Percentage Standard Nearly Met', 'Percentage Developing'),
+        'CA_StandardNearlyMet',
+    ),
+    (
+        ('Percentage Standard Not Met', 'Percentage Minimal'),
+        'CA_StandardNotMet',
+    ),
 )
 
 
@@ -332,8 +351,14 @@ def process_files(
                     ) if c in col_idx
                 ]
                 idx_mean = col_idx.get('Mean Scale Score', -1)
-                ach_col_indices = [(col_idx.get(col_name, -1), ach_code)
-                                   for col_name, ach_code in ACHIEVEMENT_LEVELS]
+                ach_col_indices = []
+                for col_aliases, ach_code in ACHIEVEMENT_LEVELS:
+                    matched_idx = -1
+                    for alias in col_aliases:
+                        if alias in col_idx:
+                            matched_idx = col_idx[alias]
+                            break
+                    ach_col_indices.append((matched_idx, ach_code))
 
                 missing_cols = []
                 if idx_place < 0 and (idx_county < 0 or idx_district < 0 or
@@ -348,9 +373,16 @@ def process_files(
                     missing_cols.append('Grade')
                 if idx_ts < 0:
                     missing_cols.append('Test ID / Test Id')
-                if not idx_tested_list and idx_mean < 0 and all(
-                        idx < 0 for idx, _ in ach_col_indices):
-                    missing_cols.append('assessment metric columns')
+                if not idx_tested_list:
+                    missing_cols.append(
+                        'Total Students Tested / Students Tested')
+                if idx_mean < 0:
+                    missing_cols.append('Mean Scale Score')
+                for (col_aliases, _), (idx_ach,
+                                       _) in zip(ACHIEVEMENT_LEVELS,
+                                                 ach_col_indices):
+                    if idx_ach < 0:
+                        missing_cols.append(' / '.join(col_aliases))
                 if missing_cols:
                     raise ValueError(
                         f'Missing required columns {missing_cols} in {file_path}: {raw_header}'

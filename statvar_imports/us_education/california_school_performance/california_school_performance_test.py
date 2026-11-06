@@ -209,13 +209,72 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
         self.assertEqual(rows[0][7], '1')  # Mapped Test Id
         self.assertEqual(rows[0][8], '125')  # Mapped Students Tested
 
+    def test_normalize_and_process_2026_proficient_headers(self):
+        """Verify 2026+ CAASPP achievement column names (Advanced/Proficient/Developing/Minimal) normalize and process into all 7 StatVar observations."""
+        sample_2026 = (
+            'County Code^District Code^District Name^School Code^School Name^Type ID^Filler^Test Year^Test Type^Test ID^Student Group ID^Grade^'
+            'Total Students Enrolled^Total Students Tested^Total Students Tested with Scores^Mean Scale Score^Percentage Advanced^Count Advanced^'
+            'Percentage Proficient^Count Proficient^Percentage Proficient and Above^Count Proficient and Above^Percentage Developing^Count Developing^'
+            'Percentage Minimal^Count Minimal^Overall Total\n'
+            '00^00000^^0000000^^4^^2026^B^1^1^3^398027^391082^390924^2413.7^23.84^93192^20.25^79174^44.09^172366^23.27^90987^32.63^127571^390924\n'
+        )
+        rows = list(
+            download.normalize_and_filter_stream(io.StringIO(sample_2026)))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(
+            rows[0],
+            [
+                '00',
+                '00000',
+                '0000000',
+                'geoId/06',
+                '2026',
+                '1',
+                '3',
+                '1',
+                '391082',
+                '2413.7',
+                '23.84',
+                '20.25',
+                '44.09',
+                '23.27',
+                '32.63',
+            ],
+        )
+
+        # Also verify direct raw processing via process.process_files emits all 7 metrics
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            raw_2026_file = os.path.join(tmp_dir, 'raw_2026.txt')
+            with open(raw_2026_file, 'w', encoding='utf-8') as f:
+                f.write(sample_2026)
+            out_prefix = os.path.join(tmp_dir, 'out_2026')
+            counters = process.process_files(
+                input_pattern=raw_2026_file,
+                pv_map_path=os.path.join(
+                    _SCRIPT_DIR, 'config',
+                    'california_school_performance_pvmap.csv'),
+                school_map_path=os.path.join(_SCRIPT_DIR, 'config',
+                                             'school_code_mapping.json'),
+                output_prefix=out_prefix,
+            )
+            self.assertEqual(counters['input_data_rows'], 1)
+            self.assertEqual(counters['output_svobs_rows'], 7)
+            self.assertEqual(counters['generated_statvars'], 7)
+
     def test_missing_required_headers_raises_value_error(self):
-        """Verify missing required columns raise ValueError instead of silently dropping rows."""
+        """Verify missing required columns or partial metric renames raise ValueError instead of silently dropping metrics."""
         bad_header_stream = io.StringIO(
             'County Code^District Code^School Code^Grade^Mean Scale Score\n'
             '00^00000^0000000^3^2400.0\n')
         with self.assertRaises(ValueError):
             list(download.normalize_and_filter_stream(bad_header_stream))
+
+        # Missing achievement percentage columns must also fail loudly even when tested/mean are present
+        partial_metric_stream = io.StringIO(
+            'County Code^District Code^School Code^Test Year^Test ID^Student Group ID^Grade^Total Students Tested^Mean Scale Score\n'
+            '00^00000^0000000^2026^1^1^3^391082^2413.7\n')
+        with self.assertRaises(ValueError):
+            list(download.normalize_and_filter_stream(partial_metric_stream))
 
     @patch.object(download, 'download_file')
     def test_corrupt_zip_redownload(self, mock_download):

@@ -61,11 +61,11 @@ The pipeline processes the full California CAASPP dataset across all geographic 
 - **Metrics**:
   - `Total Students Tested` / `Students Tested`: Count of students (`measuredProperty: count`, `measurementMethod: CaliforniaAssessmentOfStudentPerformanceAndProgress`)
   - `Mean Scale Score`: Mean assessment score (`measuredProperty: assessmentScore`, `statType: meanValue`)
-  - `Percentage Standard Exceeded`: Educational achievement level `CA_StandardExceeded` (`scalingFactor: 100`, `unit: Percent`)
-  - `Percentage Standard Met`: Educational achievement level `CA_StandardMet` (`scalingFactor: 100`, `unit: Percent`)
-  - `Percentage Standard Met and Above`: Educational achievement level `CA_StandardMetAndAbove` (`scalingFactor: 100`, `unit: Percent`)
-  - `Percentage Standard Nearly Met`: Educational achievement level `CA_StandardNearlyMet` (`scalingFactor: 100`, `unit: Percent`)
-  - `Percentage Standard Not Met`: Educational achievement level `CA_StandardNotMet` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Exceeded` (`Percentage Advanced` in 2026+): Educational achievement level `CA_StandardExceeded` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Met` (`Percentage Proficient` in 2026+): Educational achievement level `CA_StandardMet` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Met and Above` (`Percentage Proficient and Above` / `Percentage Proficient and Advanced` in 2026+): Educational achievement level `CA_StandardMetAndAbove` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Nearly Met` (`Percentage Developing` in 2026+): Educational achievement level `CA_StandardNearlyMet` (`scalingFactor: 100`, `unit: Percent`)
+  - `Percentage Standard Not Met` (`Percentage Minimal` in 2026+): Educational achievement level `CA_StandardNotMet` (`scalingFactor: 100`, `unit: Percent`)
 
 ---
 
