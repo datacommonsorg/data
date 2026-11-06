@@ -8,7 +8,7 @@
 - **GCS Historical Baseline**: `gs://unresolved_mcf/india_mospi/daily_wages/input_files/daily_wages_input.csv`
 - **Import Type**: Automated Refresh (`manifest.json`, scheduled weekly)
 - **Data Coverage**:
-  - `2017-05` to `2024-02` (`P3M` quarterly breakdowns across Agriculture Years `2017-18`–`2023-24`)
+  - `2017-08` to `2024-05` (`P3M` quarterly breakdowns across Agriculture Years `2017-18`–`2023-24`)
   - `2022` to `2025`+ (`P1Y` Calendar Year series)
 
 ## Directory Layout
