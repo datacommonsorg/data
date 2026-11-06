@@ -16,6 +16,7 @@
 
 import csv
 import html
+import json
 import os
 import re
 import sys
@@ -29,6 +30,10 @@ from absl import flags
 from absl import logging
 import download_util
 import file_util
+from google.cloud import storage
+
+DEFAULT_API_KEY_GCS_PATH = (
+    'gs://unresolved_mcf/country/indonesia/demographic/api_key.json')
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -85,6 +90,12 @@ flags.DEFINE_string(
     'api_key',
     os.environ.get('BPS_API_KEY', ''),
     'BPS WebAPI key (defaults to BPS_API_KEY environment variable).',
+)
+flags.DEFINE_string(
+    'api_key_gcs_path',
+    DEFAULT_API_KEY_GCS_PATH,
+    'GCS or local JSON path containing {"api_key": "..."} used when '
+    '--api_key / BPS_API_KEY is not set.',
 )
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
@@ -182,8 +193,50 @@ def _validate_api_key(api_key: str) -> str:
     if not api_key or not api_key.strip():
         raise ValueError(
             'BPS WebAPI key is required. Set the BPS_API_KEY environment '
-            'variable or pass --api_key.')
+            'variable, pass --api_key, or provide --api_key_gcs_path.')
     return api_key.strip()
+
+
+def _load_api_key_from_path(api_key_gcs_path: str) -> str:
+    """Loads the BPS WebAPI key from a JSON file in GCS or local disk."""
+    if not api_key_gcs_path or not api_key_gcs_path.strip():
+        return ''
+    path = api_key_gcs_path.strip()
+    try:
+        if path.startswith('gs://'):
+            bucket_and_blob = path[len('gs://'):].split('/', 1)
+            if len(bucket_and_blob) != 2 or not all(bucket_and_blob):
+                logging.warning('Invalid GCS path for BPS API key: %s', path)
+                return ''
+            bucket_name, blob_path = bucket_and_blob
+            blob = storage.Client().bucket(bucket_name).blob(blob_path)
+            raw = blob.download_as_text(encoding='utf-8').strip()
+        else:
+            with file_util.FileIO(path) as fp:
+                raw = fp.read().strip()
+        if not raw:
+            return ''
+        payload = json.loads(raw)
+        if isinstance(payload, dict):
+            val = payload.get('api_key')
+            return val.strip() if isinstance(val, str) else ''
+        return ''
+    except Exception as exc:  # pylint: disable=broad-except
+        logging.warning('Unable to load BPS API key from %s: %s', path, exc)
+        return ''
+
+
+def _resolve_api_key(
+    api_key: str,
+    api_key_gcs_path: str = DEFAULT_API_KEY_GCS_PATH,
+) -> str:
+    """Resolves BPS WebAPI key from explicit arg/env or GCS/local JSON fallback."""
+    if api_key and api_key.strip():
+        return api_key.strip()
+    fallback_key = _load_api_key_from_path(api_key_gcs_path)
+    if fallback_key:
+        return fallback_key
+    return _validate_api_key(api_key)
 
 
 def _sanitize_url(url: str, api_key: str) -> str:
@@ -478,9 +531,10 @@ def download_demographic_data(
     population_filename: str,
     age_gender_filename: str,
     start_year: int = 2023,
+    api_key_gcs_path: str = DEFAULT_API_KEY_GCS_PATH,
 ) -> tuple[str, str]:
     """Downloads BPS demographic tables and writes both input CSV files."""
-    api_key = _validate_api_key(api_key)
+    api_key = _resolve_api_key(api_key, api_key_gcs_path)
     places, age_groups, year_labels, total_values = fetch_variable_data(
         domain=domain,
         var_id=total_var_id,
@@ -567,6 +621,7 @@ def main(_) -> None:
         population_filename=_FLAGS.population_filename,
         age_gender_filename=_FLAGS.age_gender_filename,
         start_year=_FLAGS.start_year,
+        api_key_gcs_path=_FLAGS.api_key_gcs_path,
     )
 
 

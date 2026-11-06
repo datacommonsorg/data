@@ -54,7 +54,7 @@ Comparison against the legacy CNS Demographic CSVs (`/cns/jv-d/home/datcom/v3_mc
 
 ## 4. How to Run
 
-1. **Set your BPS WebAPI key and run `download.py` to copy historical baseline CSVs from GCS into `output_files/` and download fresh BPS WebAPI data into `input_files/`:**
+1. **Set your BPS WebAPI key (or rely on the default GCS key path `gs://unresolved_mcf/country/indonesia/demographic/api_key.json` via `--api_key_gcs_path` in Cloud Batch) and run `download.py` to copy historical baseline CSVs from GCS into `output_files/` and download fresh BPS WebAPI data into `input_files/`:**
    ```bash
    export BPS_API_KEY="<your_bps_api_key>"
    python3 statvar_imports/indonesia_census/demographics/download.py \

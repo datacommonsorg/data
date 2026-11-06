@@ -19,6 +19,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
@@ -267,6 +268,125 @@ class DownloadTest(unittest.TestCase):
                                          var_id=2790,
                                          api_key='   ',
                                          start_year=2023)
+        with self.assertRaisesRegex(ValueError, 'BPS WebAPI key is required'):
+            download._resolve_api_key(api_key='', api_key_gcs_path='')
+        with self.assertRaisesRegex(ValueError, 'BPS WebAPI key is required'):
+            download._resolve_api_key(
+                api_key='',
+                api_key_gcs_path='/nonexistent/path/api_key.json',
+            )
+        with self.assertRaisesRegex(ValueError, 'BPS WebAPI key is required'):
+            download._resolve_api_key(
+                api_key='',
+                api_key_gcs_path='gs://invalid_gcs_path_without_blob',
+            )
+        with mock.patch.object(
+                download.storage,
+                'Client',
+                side_effect=RuntimeError('GCS unavailable'),
+        ):
+            with self.assertRaisesRegex(ValueError,
+                                        'BPS WebAPI key is required'):
+                download._resolve_api_key(api_key='')
+
+    def test_api_key_gcs_fallback(self):
+        fallback_key = 'fallback_gcs_key'
+        self._register_bps_variable_responses(
+            api_key=fallback_key,
+            var_id=2790,
+            datacontent={'11002790231230': 5482527},
+        )
+        self._register_bps_variable_responses(
+            api_key=fallback_key,
+            var_id=2791,
+            datacontent={'11002791231230': 2747185},
+        )
+        self._register_bps_variable_responses(
+            api_key=fallback_key,
+            var_id=2792,
+            datacontent={'11002792231230': 2735342},
+        )
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            key_file = os.path.join(tmp_dir, 'api_key.json')
+            with open(key_file, 'w', encoding='utf-8') as fp:
+                fp.write(f'{{"api_key": "{fallback_key}"}}\n')
+
+            self.assertEqual(
+                download._resolve_api_key(api_key='',
+                                          api_key_gcs_path=key_file),
+                fallback_key,
+            )
+            self.assertEqual(
+                download._resolve_api_key(api_key='explicit_key',
+                                          api_key_gcs_path=key_file),
+                'explicit_key',
+            )
+
+            with mock.patch.object(download.storage, 'Client') as mock_client:
+                mock_blob = (mock_client.return_value.bucket.return_value.blob.
+                             return_value)
+                mock_blob.download_as_text.return_value = (
+                    f'{{"api_key": "{fallback_key}"}}')
+                self.assertEqual(
+                    download._resolve_api_key(api_key=''),
+                    fallback_key,
+                )
+                mock_client.return_value.bucket.assert_called_once_with(
+                    'unresolved_mcf')
+                mock_client.return_value.bucket.return_value.blob.assert_called_once_with(
+                    'country/indonesia/demographic/api_key.json')
+
+            pop_path, _ = download.download_demographic_data(
+                domain='0000',
+                total_var_id=2790,
+                male_var_id=2791,
+                female_var_id=2792,
+                api_key='',
+                output_dir=tmp_dir,
+                population_filename='idn_population.csv',
+                age_gender_filename='idn_age_gender.csv',
+                start_year=2023,
+                api_key_gcs_path=key_file,
+            )
+            with open(pop_path, 'r', encoding='utf-8') as fp:
+                pop_rows = list(csv.reader(fp))
+            self.assertEqual(
+                pop_rows,
+                [
+                    [
+                        'observationAbout',
+                        'observationDate',
+                        'Jumlah Penduduk (Ribu)',
+                    ],
+                    ['ACEH, INDONESIA', '2023', '5482,527'],
+                ],
+            )
+
+            for idx, invalid_payload in enumerate([
+                    '{"api_key": ""}\n',
+                    '{"api_key": "   "}\n',
+                    '{"api_key": true}\n',
+                    'null\n',
+                    '[]\n',
+                    'not-json-at-all\n',
+            ]):
+                bad_key_file = os.path.join(tmp_dir, f'bad_key_{idx}.json')
+                with open(bad_key_file, 'w', encoding='utf-8') as fp:
+                    fp.write(invalid_payload)
+                with self.assertRaisesRegex(ValueError,
+                                            'BPS WebAPI key is required'):
+                    download.download_demographic_data(
+                        domain='0000',
+                        total_var_id=2790,
+                        male_var_id=2791,
+                        female_var_id=2792,
+                        api_key='',
+                        output_dir=tmp_dir,
+                        population_filename='idn_population.csv',
+                        age_gender_filename='idn_age_gender.csv',
+                        start_year=2023,
+                        api_key_gcs_path=bad_key_file,
+                    )
 
     def test_api_error_raises_runtime_error_with_redacted_key(self):
         api_key = 'secret_bps_key'
