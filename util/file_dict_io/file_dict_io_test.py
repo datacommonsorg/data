@@ -522,6 +522,73 @@ class FileDictIORegistryAndFactoryTest(unittest.TestCase):
                 with self.assertRaises(UnsupportedOperation):
                     reader.write({'id': '2'})
 
+    def test_bom_and_corner_case_formats(self):
+        # 1. UTF-8 BOM in CSV, JSONL, and JSON without explicit encoding='utf-8-sig'
+        expected = [{
+            'id': '1',
+            'city': 'São Paulo'
+        }, {
+            'id': '2',
+            'city': 'München'
+        }]
+        bom_csv = os.path.join(self.test_dir.name, 'bom_default.csv')
+        with open(bom_csv, 'wb') as f:
+            f.write('\ufeffid,city\n1,São Paulo\n2,München\n'.encode('utf-8'))
+        self._assert_exact_split_at_every_byte(bom_csv, expected)
+
+        bom_jsonl = os.path.join(self.test_dir.name, 'bom_default.jsonl')
+        with open(bom_jsonl, 'wb') as f:
+            f.write(
+                '\ufeff{"id": "1", "city": "São Paulo"}\n{"id": "2", "city": "München"}\n'
+                .encode('utf-8'))
+        self._assert_exact_split_at_every_byte(bom_jsonl, expected)
+
+        # 2. JSON array starting with '[{...},' on line 1 and '}, {' on same line
+        inline_bracket_json = os.path.join(self.test_dir.name,
+                                           'inline_bracket.json')
+        with open(inline_bracket_json, 'w', encoding='utf-8') as f:
+            f.write('[{"id": "1", "city": "São Paulo"},\n'
+                    ' {"id": "2", "city": "München"}]\n')
+        self._assert_exact_split_at_every_byte(inline_bracket_json, expected)
+
+        same_line_close_open_json = os.path.join(self.test_dir.name,
+                                                 'close_open.json')
+        with open(same_line_close_open_json, 'w', encoding='utf-8') as f:
+            f.write('[\n'
+                    '  {\n'
+                    '    "id": "1",\n'
+                    '    "city": "São Paulo"\n'
+                    '  }, {\n'
+                    '    "id": "2",\n'
+                    '    "city": "München"\n'
+                    '  }\n'
+                    ']\n')
+        self._assert_exact_split_at_every_byte(same_line_close_open_json,
+                                               expected)
+
+        # 3. Writing MCF records (with '# comment' keys) and ragged CSV rows (with None key)
+        #    directly to headerless CSV and Avro writers filters out None and '#' keys.
+        for ext in ('.csv', '.avro'):
+            out_path = os.path.join(self.test_dir.name,
+                                    f'filtered_headers{ext}')
+            with open_dict_file(out_path, 'w') as writer:
+                writer.write({
+                    '# comment1': '# ignored comment',
+                    None: ['extra'],
+                    'id': '1',
+                    'name': 'Alice',
+                })
+            with open_dict_file(out_path, 'r') as reader:
+                self.assertEqual(['id', 'name'], reader.headers())
+                self.assertEqual([{
+                    'id': '1',
+                    'name': 'Alice'
+                }], reader.readlines())
+
+        # 4. Tuple of files passed to open_dict_file dispatches to ShardedFileDictIO
+        with open_dict_file((bom_csv, bom_jsonl), 'r') as tuple_reader:
+            self.assertEqual(4, len(tuple_reader.readlines()))
+
 
 if __name__ == '__main__':
     unittest.main()

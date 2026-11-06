@@ -164,6 +164,8 @@ class CsvFileDictIO(FileDictIO):
                     file_headers = next(header_reader)
             except StopIteration:
                 file_headers = []
+            if file_headers and isinstance(file_headers[0], str):
+                file_headers[0] = file_headers[0].lstrip('\ufeff')
             first_row_end = fp.tell()
             if not self._headers:
                 self._header_end_pos = first_row_end
@@ -171,8 +173,8 @@ class CsvFileDictIO(FileDictIO):
             elif file_headers == self._headers:
                 self._header_end_pos = first_row_end
             else:
-                self._header_end_pos = 0
-                fp.seek(0)
+                self._header_end_pos = 3 if sample.startswith('\ufeff') else 0
+                fp.seek(self._header_end_pos)
             if self._start_offset > 0:
                 self.seek(self._start_offset)
             else:

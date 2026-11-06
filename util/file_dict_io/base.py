@@ -314,7 +314,10 @@ class FileDictIO(ABC):
         if self._headers:
             # Headers already set; reuse them.
             return self._headers
-        headers = list(record.keys())
+        headers = [
+            k for k in record.keys()
+            if k is not None and not str(k).startswith('#')
+        ]
         if headers:
             logging.info(
                 f'Setting headers for {self.filename()} from first record: {headers}'

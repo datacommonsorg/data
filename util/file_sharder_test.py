@@ -14,7 +14,7 @@ if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
 from file_sharder import FileSharder, shard_file
-from file_dict_io import McfFileDictIO, open_file_dict
+from file_dict_io import McfFileDictIO, open_dict_file, open_file_dict
 import counters as counters_lib
 import file_sharder
 
@@ -1437,6 +1437,31 @@ class TestFileSharder(unittest.TestCase):
         self.assertEqual(1, len(key1_shards))
         for r in sum(gen_shards, []):
             self.assertEqual(['id', 'val'], list(r.keys()))
+
+        # 3. Heterogeneous MCF/JSONL records sharded to CSV/Avro preserve optional
+        #    properties that appear only after the first record.
+        hetero_jsonl = os.path.join(self.test_dir.name, 'hetero.jsonl')
+        with open_dict_file(hetero_jsonl, 'w') as writer:
+            writer.write({'dcid': 'n1', 'value': '10'})
+            writer.write({'dcid': 'n2', 'value': '20', 'unit': 'USD'})
+        hetero_csv_out = os.path.join(self.test_dir.name, 'hetero@2.csv')
+        shard_file(hetero_jsonl, hetero_csv_out, {})
+        hetero_rows = sum(self._read_shards('hetero', 2), [])
+        self.assertCountEqual(
+            [
+                {
+                    'dcid': 'n1',
+                    'value': '10',
+                    'unit': ''
+                },
+                {
+                    'dcid': 'n2',
+                    'value': '20',
+                    'unit': 'USD'
+                },
+            ],
+            hetero_rows,
+        )
 
 
 if __name__ == '__main__':

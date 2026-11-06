@@ -235,10 +235,13 @@ class JsonFileDictIO(FileDictIO):
                 stripped = no_bom.lstrip(' \t,[')
                 if stripped.startswith('{'):
                     if no_bom.lstrip(' \t').startswith('['):
-                        self._top_level_indent = 0
+                        self._top_level_indent = {
+                            0, len(no_bom) - len(stripped)
+                        }
                     else:
-                        self._top_level_indent = len(no_bom) - len(
-                            no_bom.lstrip(' \t'))
+                        self._top_level_indent = {
+                            len(no_bom) - len(no_bom.lstrip(' \t'))
+                        }
                     break
 
         self._next_record_start = self._seek_to_next_line(offset)
@@ -256,13 +259,19 @@ class JsonFileDictIO(FileDictIO):
                 no_bom = line.lstrip('\ufeff')
                 indent = len(no_bom) - len(no_bom.lstrip(' \t'))
                 stripped = no_bom.lstrip(' \t,[')
-                if stripped.startswith('{') and (
-                        self._top_level_indent is None or
-                        indent == self._top_level_indent or
-                        no_bom.lstrip(' \t').startswith('[')):
+                indent_ok = (self._top_level_indent is None or
+                             indent in self._top_level_indent or
+                             no_bom.lstrip(' \t').startswith('['))
+                if stripped.startswith('{') and indent_ok:
                     self._next_record_start = pos
                     self._buffer = stripped
                     break
+                if indent_ok and stripped.startswith('}'):
+                    after_close = stripped[1:].lstrip(' \t,')
+                    if after_close.startswith('{'):
+                        self._next_record_start = pos
+                        self._buffer = after_close
+                        break
 
         return self._next_record_start
 
@@ -294,24 +303,30 @@ class JsonFileDictIO(FileDictIO):
                         return None
                 line = fp.readline()
                 if not line:
-                    self._next_record_start = fp.tell()
+                    if self._end_offset is not None:
+                        self._next_record_start = fp.tell()
                     return None
-                line = line.strip()
+                line = line.lstrip('\ufeff').strip()
                 if not line:
                     continue
-                self._next_record_start = fp.tell()
+                if self._end_offset is not None:
+                    self._next_record_start = fp.tell()
                 self._record_index += 1
                 return json.loads(line)
 
         next_check_size = 4096
+        last_line_pos = self._next_record_start
         while True:
             # Strip leading whitespace, commas, and array brackets between records.
-            self._buffer = self._buffer.lstrip(' \t\r\n,[]')
+            self._buffer = self._buffer.lstrip('\ufeff \t\r\n,[]')
             if self._buffer and (self._buffer[0] != '{' or '}' in self._buffer
                                  or len(self._buffer) >= next_check_size):
                 try:
                     record, end_idx = self._decoder.raw_decode(self._buffer)
-                    self._buffer = self._buffer[end_idx:]
+                    self._buffer = self._buffer[end_idx:].lstrip(
+                        '\ufeff \t\r\n,[]')
+                    if self._buffer and last_line_pos is not None:
+                        self._next_record_start = last_line_pos
                     next_check_size = 4096
                     if isinstance(record, dict):
                         self._record_index += 1
@@ -326,17 +341,22 @@ class JsonFileDictIO(FileDictIO):
 
             # Read lines incrementally until closing '}' (for objects) or EOF.
             while True:
-                line_pos = fp.tell() if not self._buffer else None
+                line_pos = (fp.tell() if
+                            (not self._buffer or
+                             self._end_offset is not None) else None)
                 line = fp.readline()
                 if not line:
-                    rem = self._buffer.lstrip(' \t\r\n,[]')
+                    rem = self._buffer.lstrip('\ufeff \t\r\n,[]')
                     self._buffer = ''
-                    self._next_record_start = fp.tell()
+                    if self._end_offset is not None:
+                        self._next_record_start = fp.tell()
                     if rem:
                         self._decoder.raw_decode(rem)
                     return None
+                if line_pos is not None:
+                    last_line_pos = line_pos
                 if not self._buffer:
-                    stripped = line.lstrip(' \t\r\n,[]')
+                    stripped = line.lstrip('\ufeff \t\r\n,[]')
                     if not stripped:
                         continue
                     self._next_record_start = line_pos

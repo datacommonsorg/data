@@ -107,6 +107,7 @@ from file_dict_io import (
     get_record_dcid,
     is_avro_file,
     is_csv_file,
+    is_json_file,
     is_jsonl_file,
     is_mcf_file,
     open_dict_file,
@@ -489,6 +490,18 @@ class FileSharder:
                                 mode='r',
                                 encoding=self._encoding) as preview_reader:
                 preview_headers = preview_reader.headers()
+                if not preview_headers and not (is_mcf_file(
+                        self._output_path) or is_json_file(self._output_path)):
+                    seen_cols = {}
+                    for _ in range(1000):
+                        sample_rec = preview_reader.next()
+                        if sample_rec is None:
+                            break
+                        for k in sample_rec.keys():
+                            if (k is not None and not str(k).startswith('#') and
+                                    k not in seen_cols):
+                                seen_cols[k] = None
+                    preview_headers = list(seen_cols.keys())
                 if preview_headers:
                     self._headers = list(preview_headers)
 

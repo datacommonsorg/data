@@ -202,7 +202,11 @@ class AvroFileDictIO(FileDictIO):
             raise UnsupportedOperation(
                 f'Cannot write record to AVRO file {self.filename()} opened in read mode {self._mode}'
             )
-        clean_record = {k: v for k, v in record.items() if k is not None}
+        clean_record = {
+            k: v
+            for k, v in record.items()
+            if k is not None and not str(k).startswith('#')
+        }
         if not self._fastavro_writer:
             # This is the first record; initialize schema and writer from its keys.
             self.set_headers_from_record(clean_record)
@@ -226,7 +230,11 @@ class AvroFileDictIO(FileDictIO):
           A new dictionary with field values converted to their target schema
           types.
         """
-        output_record = {k: v for k, v in record.items() if k is not None}
+        output_record = {
+            k: v
+            for k, v in record.items()
+            if k is not None and not str(k).startswith('#')
+        }
         for field in self._avro_schema.get('fields', []):
             name = field.get('name')
             if not name:

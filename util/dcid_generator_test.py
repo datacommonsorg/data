@@ -440,6 +440,24 @@ class DcidGeneratorTest(unittest.TestCase):
             dcid_generator.generate_node_dcid(sv_list),
         )
 
+        # Multi-valued typeOf on Place nodes and single-element list IDs
+        self.assertEqual(
+            'geoId/06',
+            dcid_generator.generate_node_dcid({
+                'typeOf': 'dcs:AdministrativeArea1, dcs:State',
+                'geoId': '06',
+                'emptyList': [],
+                'blankList': [''],
+            }),
+        )
+        self.assertEqual(
+            'geoId/06001',
+            dcid_generator.generate_node_dcid({
+                'typeOf': ['AdministrativeArea2', 'County'],
+                'geoId': ['06001'],
+            }),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -483,12 +483,19 @@ def generate_place_dcid(
         if prop in ignored or prop not in record:
             continue
         raw_val = record.get(prop)
+        if isinstance(raw_val, list):
+            if len(raw_val) > 1:
+                continue
+            raw_val = raw_val[0] if raw_val else None
         val_str = _clean_scalar_value(raw_val)
         if not val_str:
             continue
+        raw_str = str(raw_val).strip()
+        if ',' in raw_str and len(mcf_file_util.get_value_list(raw_str)) != 1:
+            continue
         if _has_local_ref(raw_val):
             return ''
-        clean_val = _strip_mcf_namespace(str(raw_val).strip()).strip(' "')
+        clean_val = _strip_mcf_namespace(raw_str).strip(' "')
         if not clean_val or clean_val.startswith('l:'):
             continue
         prefix = _PLACE_ID_PREFIX_MAP.get(prop, prop)
@@ -603,7 +610,22 @@ def generate_node_dcid(
         return ''
 
     ignored = DCID_IGNORE_PROPS if ignore_props is None else ignore_props
-    type_of = _strip_mcf_namespace(str(record.get('typeOf', '')).strip(' "'))
+    raw_type_of = record.get('typeOf')
+    type_of_list = ([
+        _strip_mcf_namespace(str(t).strip(' "'))
+        for t in mcf_file_util.get_value_list(raw_type_of)
+        if str(t).strip(' "')
+    ] if raw_type_of else [])
+    if 'StatVarObservation' in type_of_list:
+        type_of = 'StatVarObservation'
+    elif 'StatisticalVariable' in type_of_list:
+        type_of = 'StatisticalVariable'
+    elif any(t in PLACE_TYPES for t in type_of_list):
+        type_of = next(t for t in type_of_list if t in PLACE_TYPES)
+    elif type_of_list:
+        type_of = type_of_list[0]
+    else:
+        type_of = ''
     if not type_of:
         if 'observationAbout' in record and 'variableMeasured' in record:
             type_of = 'StatVarObservation'

@@ -214,7 +214,7 @@ def is_sharded_file(filename: str | list) -> bool:
     Returns:
       `True` if `filename` refers to sharded files; `False` otherwise.
     """
-    if isinstance(filename, list):
+    if isinstance(filename, (list, tuple)):
         return True
     if not isinstance(filename, str):
         return False
