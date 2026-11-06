@@ -1,0 +1,76 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_min_value",
+            "validator": "MIN_VALUE_CHECK",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_Active_Census_max_date_consistency",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        "^(?!.*(Urban|Rural|Literate|Illiterate|10OrMoreYears|85OrMoreYears|95OrMoreYears|99OrMoreYears))Count_Person.*"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_Active_Census_num_places",
+            "validator": "NUM_PLACES_COUNT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        "^(?!.*(Urban|Rural|Literate|Illiterate|10OrMoreYears|85OrMoreYears|95OrMoreYears|99OrMoreYears))Count_Person.*"
+                    ]
+                }
+            },
+            "params": {
+                "minimum": 25
+            }
+        },
+        {
+            "rule_id": "check_Active_Census_num_observations",
+            "validator": "NUM_OBSERVATIONS_CHECK",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        "^(?!.*(Urban|Rural|Literate|Illiterate|10OrMoreYears|85OrMoreYears|95OrMoreYears|99OrMoreYears))Count_Person.*"
+                    ]
+                }
+            },
+            "params": {
+                "minimum": 69
+            }
+        },
+        {
+            "rule_id": "check_Count_Person_AA2_places",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar = 'Count_Person'",
+                "condition": "NumPlaces >= 529 AND NumObservations >= 1600 AND LatestDate >= 2022",
+                "failure_message": "Count_Person AA2 place or observation count validation failed for Argentina_Census."
+            }
+        },
+        {
+            "rule_id": "check_Infant_Mortality_min_value",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS NumStatVars, COALESCE(MIN(TotalObs), 0) AS MinTotalObs, COALESCE(MIN(LatestDate), 0) AS MinLatestDate FROM (SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE StatVar = 'Count_MortalityEvent_AsAFractionOf_Count_BirthEvent_LiveBirth' GROUP BY StatVar)",
+                "condition": "NumStatVars = 1 AND MinTotalObs >= 450 AND MinLatestDate >= 2023",
+                "failure_message": "Infant Mortality StatVar validation failed for Argentina_Census."
+            }
+        }
+    ]
+}
