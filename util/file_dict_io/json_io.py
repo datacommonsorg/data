@@ -119,6 +119,7 @@ class JsonFileDictIO(FileDictIO):
         """
         self._is_jsonl = is_jsonl_file(filename)
         self._buffer = ''
+        self._top_level_indent = None
         self._decoder = json.JSONDecoder()
         super().__init__(filename,
                          mode,
@@ -136,7 +137,7 @@ class JsonFileDictIO(FileDictIO):
         self._next_record_start = 0
         if self.is_read_mode() and self._start_offset > 0:
             self.seek(self._start_offset)
-        logging.level_debug() and logging.debug(
+        logging.debug(
             f'Opened JSON file {self.filename()} for {self._mode} (jsonl={self._is_jsonl})'
         )
 
@@ -224,20 +225,41 @@ class JsonFileDictIO(FileDictIO):
             self._next_record_start = 0
             return 0
 
+        if not self._is_jsonl and self._top_level_indent is None:
+            fp.seek(0)
+            while True:
+                first_line = fp.readline()
+                if not first_line:
+                    break
+                no_bom = first_line.lstrip('\ufeff')
+                stripped = no_bom.lstrip(' \t,[')
+                if stripped.startswith('{'):
+                    if no_bom.lstrip(' \t').startswith('['):
+                        self._top_level_indent = 0
+                    else:
+                        self._top_level_indent = len(no_bom) - len(
+                            no_bom.lstrip(' \t'))
+                    break
+
         self._next_record_start = self._seek_to_next_line(offset)
 
         if not self._is_jsonl:
             # For standard formatted JSON arrays, scan for the line starting
-            # the next object. Record anchor is `pos` (start of the line) so it
-            # aligns with `_seek_to_next_line` boundaries even with indentation.
+            # the next top-level object (matching the top-level indentation so
+            # nested objects on their own lines are skipped).
             while True:
                 pos = fp.tell()
                 line = fp.readline()
                 if not line:
                     self._next_record_start = fp.tell()
                     break
-                stripped = line.lstrip(' \t,[\ufeff')
-                if stripped.startswith('{'):
+                no_bom = line.lstrip('\ufeff')
+                indent = len(no_bom) - len(no_bom.lstrip(' \t'))
+                stripped = no_bom.lstrip(' \t,[')
+                if stripped.startswith('{') and (
+                        self._top_level_indent is None or
+                        indent == self._top_level_indent or
+                        no_bom.lstrip(' \t').startswith('[')):
                     self._next_record_start = pos
                     self._buffer = stripped
                     break

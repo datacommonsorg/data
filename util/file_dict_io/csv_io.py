@@ -181,31 +181,39 @@ class CsvFileDictIO(FileDictIO):
                 self._csv_reader = csv.DictReader(self._iter_csv_lines(),
                                                   fieldnames=self.headers(),
                                                   **self._csv_options)
-            logging.level_debug() and logging.debug(
+            logging.debug(
                 f'Opened CSV file {self.filename()} for {self._mode} with options: {options}, headers: {self.headers()}'
             )
         else:
             # Write to the CSV file handle using DictWriter if headers are known.
             if self.headers():
-                # RFC 4180: quote fields only when needed and double any quote
-                # inside a field. No escape character, so '\' is written as is.
-                self._csv_writer = csv.DictWriter(
-                    self.get_file_handle(),
-                    fieldnames=self.headers(),
-                    delimiter=default_delim,
-                    extrasaction='ignore',
-                    quotechar='"',
-                    doublequote=True,
-                    quoting=csv.QUOTE_MINIMAL,
-                )
-                self.write_header()
-                logging.level_debug() and logging.debug(
-                    f'Opened CSV file {self.filename()} for {self._mode} with headers: {self.headers()}'
-                )
+                self._init_writer()
             else:
                 logging.info(
                     f'Headers not set for CSV file {self.filename()}. Deferring headers until first record write.'
                 )
+
+    def _init_writer(self):
+        """Initializes `self._csv_writer` and writes the header row once."""
+        if not self.headers() or self._csv_writer:
+            return
+        is_tsv = get_file_extension(self._filename) == '.tsv'
+        default_delim = '\t' if is_tsv else ','
+        # RFC 4180: quote fields only when needed and double any quote
+        # inside a field. No escape character, so '\' is written as is.
+        self._csv_writer = csv.DictWriter(
+            self.get_file_handle(),
+            fieldnames=self.headers(),
+            delimiter=default_delim,
+            extrasaction='ignore',
+            quotechar='"',
+            doublequote=True,
+            quoting=csv.QUOTE_MINIMAL,
+        )
+        self.write_header()
+        logging.debug(
+            f'Opened CSV file {self.filename()} for {self._mode} with headers: {self.headers()}'
+        )
 
     def write_header(self):
         """Writes the CSV header row once."""
@@ -237,7 +245,7 @@ class CsvFileDictIO(FileDictIO):
             # This is the first record; initialize the CSV writer from its keys.
             self.set_headers_from_record(record)
             if self.headers():
-                self.open()
+                self._init_writer()
         if self._csv_writer:
             self._record_index += 1
             return self._csv_writer.writerow(record)

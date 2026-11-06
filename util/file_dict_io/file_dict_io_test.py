@@ -389,6 +389,47 @@ class FileDictIORegistryAndFactoryTest(unittest.TestCase):
             f.write(']\n')
         self._assert_exact_split_at_every_byte(json_path, csv_rows)
 
+        # 4b. Multi-line pretty-printed JSON array with nested objects
+        pretty_json_path = os.path.join(self.test_dir.name, 'pretty_utf8.json')
+        pretty_expected = [
+            {
+                'id': '1',
+                'city': 'São Paulo',
+                'meta': {
+                    'nested': 1
+                },
+            },
+            {
+                'id': '2',
+                'city': 'München',
+                'meta': {
+                    'nested': 2
+                },
+            },
+            {
+                'id': '3',
+                'city': '東京都 🌏',
+                'meta': {
+                    'nested': 3
+                },
+            },
+        ]
+        with open(pretty_json_path, 'w', encoding='utf-8') as f:
+            f.write('[\n')
+            for idx, item in enumerate(pretty_expected):
+                comma = ',' if idx < len(pretty_expected) - 1 else ''
+                f.write('  {\n'
+                        f'    "id": "{item["id"]}",\n'
+                        f'    "city": "{item["city"]}",\n'
+                        '    "meta":\n'
+                        '    {\n'
+                        f'      "nested": {item["meta"]["nested"]}\n'
+                        '    }\n'
+                        f'  }}{comma}\n')
+            f.write(']\n')
+        self._assert_exact_split_at_every_byte(pretty_json_path,
+                                               pretty_expected)
+
         # 5. MCF with raw multi-byte UTF-8, header comment, and `NodeType` property
         mcf_path = os.path.join(self.test_dir.name, 'utf8.mcf')
         mcf_expected = [

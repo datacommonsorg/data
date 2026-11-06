@@ -1,6 +1,6 @@
-# File dict IO
+# File dict IO user guide
 
-`file_dict_io` provides a unified dictionary-based reader and writer interface across structured data formats used in Data Commons. It abstracts format-specific parsing, schema encoding, and serialization behind standard Python dictionary operations. See also the [user guide in `util/doc/file_dict_io.md`](../doc/file_dict_io.md) and the [File Sharder user guide](../doc/file_sharder.md).
+`file_dict_io` provides a unified dictionary-based reader and writer interface across structured data formats used in Data Commons. It abstracts format-specific parsing, schema encoding, and serialization behind standard Python dictionary operations. See also the [File Sharder user guide](../doc/file_sharder.md).
 
 ## Table of contents
 

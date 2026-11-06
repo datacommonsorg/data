@@ -27,7 +27,7 @@ To date, all our util libraries cater to writing MCF.
 -   `file_dict_io`: Reads and writes structured records (CSV, TSV, JSON,
     JSON Lines, MCF, Avro, and sharded file collections) as Python dictionaries,
     with seekable byte-range chunking for parallel workers. See the
-    [`file_dict_io` documentation](doc/file_dict_io.md).
+    [`file_dict_io` documentation](file_dict_io/README.md).
 
 -   `file_sharder`: Partitions large tabular and graph datasets into sharded
     output files by key hash, row count, or fixed shard count with

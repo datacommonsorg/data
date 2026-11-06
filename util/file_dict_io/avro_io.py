@@ -141,26 +141,32 @@ class AvroFileDictIO(FileDictIO):
                 self.seek(self._start_offset)
             else:
                 self.seek(0)
-            logging.level_debug() and logging.debug(
+            logging.debug(
                 f'Opened AVRO file {self.filename()} for {self._mode} with headers: {self.headers()}, schema: {self._avro_schema}'
             )
         else:
             # Initialize the Avro writer if a schema or headers are available.
-            if not self._avro_schema and self.headers():
-                self._avro_schema = self._get_schema_from_headers(
-                    self.headers())
-            if self._avro_schema:
-                self._avro_schema = fastavro.parse_schema(self._avro_schema)
-                self._fastavro_writer = fastavro.write.Writer(
-                    self.get_file_handle(), self._avro_schema)
-                self._header_written = True
-                logging.level_debug() and logging.debug(
-                    f'Opened AVRO file {self.filename()} for {self._mode} with headers: {self.headers()}, schema: {self._avro_schema}'
-                )
+            if self._avro_schema or self.headers():
+                self._init_writer()
             else:
                 logging.info(
                     f'Headers not set for AVRO file {self.filename()}. Deferring schema until first record write.'
                 )
+
+    def _init_writer(self):
+        """Initializes `self._fastavro_writer` from `self._avro_schema` or `self.headers()`."""
+        if self._fastavro_writer:
+            return
+        if not self._avro_schema and self.headers():
+            self._avro_schema = self._get_schema_from_headers(self.headers())
+        if self._avro_schema:
+            self._avro_schema = fastavro.parse_schema(self._avro_schema)
+            self._fastavro_writer = fastavro.write.Writer(
+                self.get_file_handle(), self._avro_schema)
+            self._header_written = True
+            logging.debug(
+                f'Opened AVRO file {self.filename()} for {self._mode} with headers: {self.headers()}, schema: {self._avro_schema}'
+            )
 
     def close(self):
         """Flushes any buffered Avro blocks and closes the underlying file."""
@@ -201,7 +207,7 @@ class AvroFileDictIO(FileDictIO):
             # This is the first record; initialize schema and writer from its keys.
             self.set_headers_from_record(clean_record)
             if self.headers():
-                self.open()
+                self._init_writer()
         if self._fastavro_writer:
             self._record_index += 1
             return self._fastavro_writer.write(
