@@ -15,8 +15,9 @@
   - [2. Route MCF graph nodes into a fixed shard count](#2-route-mcf-graph-nodes-into-a-fixed-shard-count)
   - [3. Read large seekable files with parallel workers](#3-read-large-seekable-files-with-parallel-workers)
   - [4. Transform columns and evaluate expressions](#4-transform-columns-and-evaluate-expressions)
-  - [5. Deduplicate records across inputs](#5-deduplicate-records-across-inputs)
-  - [6. Deterministic key sampling](#6-deterministic-key-sampling)
+  - [5. Convert CSV to MCF with column filtering, derived columns, and auto-generated DCIDs](#5-convert-csv-to-mcf-with-column-filtering-derived-columns-and-auto-generated-dcids)
+  - [6. Deduplicate records across inputs](#6-deduplicate-records-across-inputs)
+  - [7. Deterministic key sampling](#7-deterministic-key-sampling)
 - [Limitations](#limitations)
 
 ## Overview
@@ -101,9 +102,11 @@ The table below lists all configuration options. Each option can be passed as a 
 | `shard_input_records` | `--shard_input_records` | `int` | `sys.maxsize` | Upper limit on input records to read before stopping. |
 | `shard_headers` | `--shard_headers` | `list` | `[]` | Explicit column headers for output files. |
 | `shard_default_pvs` | `--shard_default_pvs` | `str` | `''` | Default property values to fill when missing, separated by semicolons (e.g. `'typeOf:StatVarObservation;unit:Person'`). |
-| `shard_output_columns` | `--shard_output_columns` | `str` | `None` | Output columns and transformation expressions separated by semicolons (e.g. `'geoId;val=int(raw_val)*2'`). |
-| `shard_generate_dcid` | `--shard_generate_dcid` | `bool` | `False` | When True, generates deterministic base32 DCIDs for graph nodes lacking identifiers. |
-| `shard_dcid_ignore_props`| `--shard_dcid_ignore_props` | `list` | `[]` | Extra property names to exclude when building node DCID keys. |
+| `shard_add_columns` | `--shard_add_columns` | `str` | `''` | Columns to add or override while keeping non-ignored input columns, separated by semicolons (`<col>` or `<col>=<value_or_expr>`, e.g. `'dcid;typeOf=dcid:StatVarObservation;observationAbout=dcid:geoId/{fips}'`). |
+| `shard_output_columns` | `--shard_output_columns` | `str` | `None` | Output columns and transformation expressions separated by semicolons (e.g. `'dcid;*;val=int(raw_val)*2'`). Supports `*` for all non-ignored input columns. |
+| `shard_ignore_columns` | `--shard_ignore_columns` | `list` | `[]` | Column names or regular expressions (e.g. `'#input,^#.*,tmp_.*'`) to exclude from output records. For MCF outputs, `#.*` columns are ignored by default. |
+| `shard_generate_dcid` | `--shard_generate_dcid` | `bool` | `False` | When True (or when an output record has an empty `dcid`/`Node` column), generates deterministic base32 DCIDs via `util/dcid_generator.py` (replicating `DcidGenerator.java` FarmHash64 `dc/o/<id>` for `StatVarObservation`, assignable IDs for `Place`, `dc/<id>` for `StatisticalVariable`, and SHA-256 base32 `dc/<id>` for general nodes). |
+| `shard_dcid_ignore_props`| `--shard_dcid_ignore_props` | `list` | `[]` | Extra property names to exclude when building node DCID keys (e.g. `'value'` to compute value-independent observation DCIDs). |
 | `shard_encoding` | `--shard_encoding` | `str` | `None` | Optional character encoding when reading text-based input files. |
 
 ## Progress counters
@@ -181,7 +184,21 @@ python3 util/file_sharder.py \
 
 Completion: Output shards contain only the specified columns (`geoId`, `year`, `value`, `date`). The counter `shard-output-column-errors` confirms zero expression evaluation failures.
 
-### 5. Deduplicate records across inputs
+### 5. Convert CSV to MCF with column filtering, derived columns, and auto-generated DCIDs
+
+Convert a CSV file directly into sharded MCF files while dropping comment/helper columns (`#input`, `fips`), adding fixed and formatted columns (`typeOf=dcid:StatVarObservation`, `observationAbout=dcid:geoId/{fips}`), and automatically generating `DcidGenerator`-compatible `StatVarObservation` DCIDs (`dc/o/<id>`):
+
+```bash
+python3 util/file_sharder.py \
+  --shard_input="data/observations.csv" \
+  --shard_output="data/mcf/obs@10.mcf" \
+  --shard_ignore_columns="#input,fips" \
+  --shard_add_columns="Node;typeOf=dcid:StatVarObservation;observationAbout=dcid:geoId/{fips}"
+```
+
+Completion: Produces sharded `.mcf` files with `Node: dcid:dc/o/...` generated using `util/dcid_generator.py` (matching `DcidGenerator.forStatVarObs` in `datacommonsorg/import`), omitting `#input` and `fips`.
+
+### 6. Deduplicate records across inputs
 
 Drop duplicate rows or graph nodes across multiple files using content fingerprinting:
 
@@ -194,7 +211,7 @@ python3 util/file_sharder.py \
 
 Completion: Outputs contain unique records only. Counter `shard-duplicate-dropped` reports the total number of duplicate records removed.
 
-### 6. Deterministic key sampling
+### 7. Deterministic key sampling
 
 Keep a random sample of 10% of entities while ensuring all observations for a selected entity stay together:
 

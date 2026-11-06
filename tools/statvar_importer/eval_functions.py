@@ -36,12 +36,26 @@ format, you could use:
 """
 
 from datetime import datetime
+import os
 import re
+import sys
 
 from absl import logging
 import dateutil
 from dateutil import parser
 from dateutil.relativedelta import relativedelta
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_UTIL_DIR = os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util')
+if _UTIL_DIR not in sys.path:
+    sys.path.append(_UTIL_DIR)
+
+from dcid_generator import (
+    generate_node_dcid,
+    generate_place_dcid,
+    generate_statvar_hash_dcid,
+    generate_statvar_obs_dcid,
+)
 
 # String utility functions
 
@@ -136,6 +150,12 @@ EVAL_GLOBALS = {
     # - `re.sub`: The 'sub' function for string substitution.
     're': re,
     're_sub': re.sub,
+
+    # DCID generation functions:
+    'generate_node_dcid': generate_node_dcid,
+    'generate_statvar_obs_dcid': generate_statvar_obs_dcid,
+    'generate_place_dcid': generate_place_dcid,
+    'generate_statvar_hash_dcid': generate_statvar_hash_dcid,
 }
 
 

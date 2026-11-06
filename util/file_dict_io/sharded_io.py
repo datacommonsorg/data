@@ -125,8 +125,8 @@ def _canonicalize_prop_value(val):
             return ''
         if _ZERO_NUMERIC_RE.match(stripped):
             return '0'
-        if '$' in stripped or '%' in stripped or (',' not in stripped and
-                                                  stripped.count('.') > 1):
+        if '$' in stripped or '%' in stripped or (',' not in stripped
+                                                  and stripped.count('.') > 1):
             return stripped
         return str(mcf_file_util.normalize_value(val))
     if isinstance(val, list):
@@ -187,7 +187,8 @@ def record_to_canonical_str(record: dict) -> str:
                           default=str)
     except Exception:
         safe_record = {
-            ('' if k is None else str(k)): v for k, v in record.items()
+            ('' if k is None else str(k)): v
+            for k, v in record.items()
         }
         return json.dumps(safe_record, sort_keys=True, default=str)
 
@@ -335,8 +336,9 @@ class ShardedFileDictIO(FileDictIO):
         self._remaining_input_files: list[str] = []
         self._output_pattern: str = ''
         raw_shard_key = self._config.get('shard_key') or None
-        if (isinstance(raw_shard_key, str) and raw_shard_key.startswith('{') and
-                raw_shard_key.endswith('}') and raw_shard_key.count('{') == 1):
+        if (isinstance(raw_shard_key, str) and raw_shard_key.startswith('{')
+                and raw_shard_key.endswith('}')
+                and raw_shard_key.count('{') == 1):
             raw_shard_key = raw_shard_key[1:-1]
         self._shard_key: str | None = raw_shard_key
         self._shard_key_prefix_length: int = int(
@@ -409,8 +411,8 @@ class ShardedFileDictIO(FileDictIO):
                     self._counters.add_counter('shard-input-records', 1)
                     if not self._headers:
                         self._headers = [
-                            prop for prop in record.keys() if
-                            prop is not None and not str(prop).startswith('#')
+                            prop for prop in record.keys() if prop is not None
+                            and not str(prop).startswith('#')
                         ]
                     self._record_index += 1
                     return record
@@ -500,10 +502,11 @@ class ShardedFileDictIO(FileDictIO):
 
     def current_record_index(self) -> int:
         """Returns the total number of records read or written across all shards."""
-        if not self.is_read_mode() and (self._shard_record_counts or
-                                        self._unflushed_shard_counts):
-            return sum(list(self._shard_record_counts.values())) + sum(
-                list(self._unflushed_shard_counts.values()))
+        if not self.is_read_mode():
+            with self._init_lock:
+                if self._shard_record_counts or self._unflushed_shard_counts:
+                    return sum(list(self._shard_record_counts.values())) + sum(
+                        list(self._unflushed_shard_counts.values()))
         return self._record_index
 
     def counters(self) -> Counters:
@@ -713,7 +716,8 @@ class ShardedFileDictIO(FileDictIO):
             handler_cls = FileDictIO._default_handler
         if handler_cls is None:
             raise ValueError(
-                f'No FileDictIO handler found for shard file: {shard_filename}')
+                f'No FileDictIO handler found for shard file: {shard_filename}'
+            )
         if headers and issubclass(handler_cls, McfFileDictIO):
             # MCF headers are written as comment lines, so pass only comment
             # headers and not column names such as those from a CSV input.
@@ -748,7 +752,8 @@ class ShardedFileDictIO(FileDictIO):
         patterns = []
         for item in raw_items:
             if isinstance(item, str) and ',' in item:
-                patterns.extend(p.strip() for p in item.split(',') if p.strip())
+                patterns.extend(p.strip() for p in item.split(',')
+                                if p.strip())
             elif item:
                 patterns.append(item)
 
@@ -823,14 +828,16 @@ class ShardedFileDictIO(FileDictIO):
                 filesize = file_util.file_get_size(files)
                 if filesize <= 0:
                     return 0
-                with file_util.FileIO(first_file, mode='rb',
+                with file_util.FileIO(first_file,
+                                      mode='rb',
                                       use_tempfile=False) as fp:
                     block = next(iter(fastavro.block_reader(fp)), None)
                     if block is None or block.num_records <= 0:
                         return 0
                     bytes_read = max(fp.tell(), 1)
-                    return max(block.num_records,
-                               int(filesize * (block.num_records / bytes_read)))
+                    return max(
+                        block.num_records,
+                        int(filesize * (block.num_records / bytes_read)))
             except Exception:
                 return 0
         try:
@@ -863,8 +870,8 @@ class ShardedFileDictIO(FileDictIO):
             sample_lines = [
                 line.strip() for line in sample.splitlines() if line.strip()
             ]
-            node_count = sum(
-                1 for line in sample_lines if line.startswith('Node:'))
+            node_count = sum(1 for line in sample_lines
+                             if line.startswith('Node:'))
             if node_count > 0:
                 lines_per_node = max(1, len(sample_lines) / node_count)
                 return int(estimated_lines / lines_per_node)
@@ -945,7 +952,8 @@ class ShardedFileDictIO(FileDictIO):
         if shard_count > 0:
             return shard_count
         records_per_shard = int(
-            self._config.get('records_per_shard') or _DEFAULT_RECORDS_PER_SHARD)
+            self._config.get('records_per_shard')
+            or _DEFAULT_RECORDS_PER_SHARD)
         if records_per_shard <= 0:
             records_per_shard = _DEFAULT_RECORDS_PER_SHARD
         if self._estimated_num_records > 0:
@@ -980,16 +988,17 @@ class ShardedFileDictIO(FileDictIO):
 
     def _merge_shard_counters(self):
         """Locks each shard, merges its `Counters` into `self._counters`, and resets the per-shard counter."""
-        all_indices = set(list(self._shard_counters.keys())) | set(
-            list(self._unflushed_shard_counts.keys()))
+        with self._init_lock:
+            all_indices = set(list(self._shard_counters.keys())) | set(
+                list(self._unflushed_shard_counts.keys()))
         for index in list(all_indices):
             with self._get_shard_lock(index):
                 shard_counter = self.get_shard_counters(index)
                 if shard_counter._counters:
                     for name, count in list(shard_counter._counters.items()):
                         if (name == 'start_time' or name.startswith(
-                            ('process_', 'process-')) or
-                            (name == 'processed' and count == 0)):
+                            ('process_', 'process-'))
+                                or (name == 'processed' and count == 0)):
                             continue
                         self._counters.add_counter(name, count)
                     shard_counter._counters.clear()
