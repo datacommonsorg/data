@@ -18,10 +18,8 @@
     2. python3 preprocess.py -mode='download'
     3. python3 preprocess.py -mode='process'
 """
-from dataclasses import replace
 import os
 import re
-import tempfile
 import warnings
 import requests
 import numpy as np
@@ -35,9 +33,6 @@ import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
-from retry import retry
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 pd.set_option("display.max_columns", None)
 
@@ -62,7 +57,6 @@ if _PEP_DIR not in sys.path:
 from download_util import (
     TransientDownloadError,
     create_retry_session as _create_retry_session,
-    is_html_response as _is_html_response,
     head_with_html_retry as _head_with_html_retry,
     download_with_retry,
     atomic_to_excel,
@@ -384,19 +378,10 @@ class CensusUSACountryPopulation:
                 self._df = pd.concat([self._df, df], ignore_index=True)
 
             self._df = self._df.sort_values(by=['Date', 'date_range'],
-                                            ascending=False)
-            # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
+                                            ascending=[False, True])
             self._df = self._df.drop_duplicates("Date", keep="last")
-            self._df = self._df.drop(['date_range'], axis=1)
-            float_col = self._df.select_dtypes(include=['float64'])
-            for col in float_col.columns.values:
-                try:
-                    self._df[col] = self._df[col].astype('int64')
-                except:
-                    pass
-            self._df.to_csv(self._cleaned_csv_file_path, index=False)
         except Exception as e:
-            logging.fatal(f'Error when processing file:-{e}')
+            raise RuntimeError(f'Error when processing file: {e}') from e
         return True
 
     def _generate_mcf(self, df_cols: list) -> None:
@@ -490,9 +475,12 @@ class CensusUSACountryPopulation:
         cleaned CSV file, MCF file and TMCF file.
         """
         #input_path = FLAGS.input_path
-        ip_files = os.listdir(self.input_path)
+        ip_files = [
+            f for f in sorted(os.listdir(self.input_path))
+            if os.path.isfile(os.path.join(self.input_path, f))
+        ]
         self.input_files = [
-            self.input_path + os.sep + file for file in ip_files
+            os.path.join(self.input_path, file) for file in ip_files
         ]
         if len(self.input_files) == 0:
             logging.info("No files to process")
@@ -507,15 +495,28 @@ class CensusUSACountryPopulation:
             if result:
                 processed_count += 1
             else:
-                logging.fatal(f'Failed to process {file}')
+                raise RuntimeError(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
-        if total_files_to_process > 0 & (processed_count
-                                         == total_files_to_process):
+        if total_files_to_process > 0 and (processed_count
+                                           == total_files_to_process):
+            self._df = self._df.sort_values(by=['Date', 'date_range'],
+                                            ascending=[False, True])
+            self._df = self._df.drop_duplicates("Date", keep="last")
+            self._df = self._df.drop(['date_range'], axis=1)
+            float_col = self._df.select_dtypes(include=['float64'])
+            for col in float_col.columns.values:
+                try:
+                    self._df[col] = self._df[col].astype('Int64')
+                except Exception:
+                    pass
+            self._df.to_csv(self._cleaned_csv_file_path,
+                            index=False,
+                            float_format='%.0f')
             self._generate_mcf(self._df.columns)
             self._generate_tmcf(self._df.columns)
         else:
-            logging.fatal(
-                "Aborting output files as no of files to process not matching processed files"
+            raise RuntimeError(
+                f"Aborting output files: expected {total_files_to_process} files to process, but processed {processed_count}"
             )
 
 
@@ -529,12 +530,12 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
-    # Check for URLs from 2030 down to _BASELINE_YEAR. If a valid URL is found for any year,
-    # add it to the download URL. If none found, fallback to _BASELINE_YEAR.
+    # Check for URLs from dynamic future year down to _BASELINE_YEAR.
+    max_future_year = dt.today().year + 1
     session = _get_session()
     for url in urls_to_scan:
         found_url = None
-        for future_year in range(2030, _BASELINE_YEAR - 1, -1):
+        for future_year in range(max_future_year, _BASELINE_YEAR - 1, -1):
             YEAR = future_year
             url_to_check = url.format(YEAR=YEAR)
             try:
@@ -678,7 +679,6 @@ def download_files():
     """
     global _FILES_TO_DOWNLOAD, _SESSION
     session = _get_session()
-    max_retry = 5
     os.makedirs(raw_data_path, exist_ok=True)
     os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
     try:
@@ -688,12 +688,12 @@ def download_files():
                 file_name = file_to_dowload['file_name'].strip()
             else:
                 file_name = url.split('/')[-1]
-            retry_number = 0
 
+            raw_file_dest = os.path.join(raw_data_path, file_name)
+            retry_number = 0
             is_file_downloaded = False
             while not is_file_downloaded:
                 try:
-                    raw_file_dest = os.path.join(raw_data_path, file_name)
                     download_with_retry(session, url, raw_file_dest)
 
                     if ".xls" in url:
@@ -706,9 +706,7 @@ def download_files():
                                         engine='xlsxwriter')
                     elif ".csv" in url:
                         out_file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(raw_file_dest,
-                                         header=None,
-                                         on_bad_lines='skip')
+                        df = pd.read_csv(raw_file_dest, header=None)
                         df = _clean_csv_file(df)
                         atomic_to_excel(df,
                                         os.path.join(_INPUT_FILE_PATH,
@@ -729,18 +727,17 @@ def download_files():
                                                      out_file_name),
                                         index=False,
                                         engine='xlsxwriter')
-
                     is_file_downloaded = True
-                    logging.info(f"Downloaded and processed file : {url}")
-
-                except (TransientDownloadError,
-                        requests.exceptions.RequestException, OSError,
-                        ValueError) as e:
-                    logging.error(f"Retry file download {url} - {e}")
-                    time.sleep(5)
+                except (requests.exceptions.RequestException,
+                        TransientDownloadError, pd.errors.ParserError) as e:
                     retry_number += 1
-                    if retry_number > max_retry:
-                        raise RuntimeError(f"Error downloading {url}") from e
+                    if retry_number > 3:
+                        raise RuntimeError(
+                            f"Error downloading/processing file {url}: {e}"
+                        ) from e
+                    time.sleep(2)
+
+            logging.info(f"Downloaded and processed file : {url}")
         return True
     finally:
         session.close()

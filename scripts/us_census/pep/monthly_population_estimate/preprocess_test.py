@@ -117,7 +117,7 @@ class TestPreprocess(unittest.TestCase):
 
     def test_is_html_response(self):
         """Tests HTML error page detection."""
-        from us_census.pep.monthly_population_estimate.preprocess import _is_html_response
+        from us_census.pep.download_util import is_html_response as _is_html_response
         self.assertTrue(_is_html_response('text/html'))
         self.assertTrue(_is_html_response('text/html; charset=utf-8'))
         self.assertTrue(

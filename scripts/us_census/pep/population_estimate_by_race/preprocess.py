@@ -27,15 +27,12 @@ from io import StringIO
 import json
 import os
 import re
+import shutil
 import sys
-import tempfile
 import time
 from datetime import datetime as dt
 import warnings
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
-from retry import retry
 from absl import logging
 
 # To import util.alpha2_to_dcid
@@ -56,6 +53,7 @@ if 'mode' not in _FLAGS:
     flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_RAW_DATA_PATH = os.path.join(_MODULE_DIR, 'raw_data')
 
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
@@ -72,7 +70,6 @@ if _PEP_DIR not in sys.path:
 from download_util import (
     TransientDownloadError,
     create_retry_session as _create_retry_session,
-    is_html_response as _is_html_response,
     head_with_html_retry as _head_with_html_retry,
     download_with_retry,
     atomic_to_csv,
@@ -569,18 +566,9 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
         df = df.query("AGEGRP == 0")
         # filter years 3 - 14
         df['YEAR'] = df['YEAR'].astype(str)
+        max_year = max(dt.today().year + 5, 2035)
         conversion_of_year_to_value = {
-            '2': '2020',
-            '3': '2021',
-            '4': '2022',
-            '5': '2023',
-            '6': '2024',
-            '7': '2025',
-            '8': '2026',
-            '9': '2027',
-            '10': '2028',
-            '11': '2029',
-            '12': '2030'
+            str(idx): str(2018 + idx) for idx in range(2, max_year - 2018 + 1)
         }
         df = df.replace({'YEAR': conversion_of_year_to_value})
         df.insert(6, 'geo_ID', 'geoId/', True)
@@ -690,7 +678,8 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
 
         df["Geographic Area"] = [x.title() for x in df["Geographic Area"]]
     except Exception as e:
-        logging.fatal(f"error in the method clean_csv2_file,{file_path} -{e}")
+        raise RuntimeError(
+            f"error in the method clean_csv2_file, {file_path} - {e}") from e
     return df
 
 
@@ -991,7 +980,7 @@ class CensusUSAPopulationByRace:
                 for col in float_col.columns.values:
                     df[col] = df[col].astype('int64')
             else:
-                df = pd.read_csv(file, on_bad_lines='skip')
+                df = pd.read_csv(file)
                 df = _clean_csv_file(df, file)
         elif ".TXT" in file or ".txt" in file:
             if "USCounty" in file:
@@ -1111,9 +1100,12 @@ class CensusUSAPopulationByRace:
         cleaned CSV file, MCF file and TMCF file.
         """
         #input_path = _FLAGS.input_path
-        ip_files = os.listdir(self.input_path)
+        ip_files = [
+            f for f in sorted(os.listdir(self.input_path))
+            if os.path.isfile(os.path.join(self.input_path, f))
+        ]
         self.input_files = [
-            self.input_path + os.sep + file for file in ip_files
+            os.path.join(self.input_path, file) for file in ip_files
         ]
         processed_count = 0
         total_files_to_process = len(self.input_files)
@@ -1128,9 +1120,9 @@ class CensusUSAPopulationByRace:
             if result:
                 processed_count += 1
             else:
-                logging.fatal(f'Failed to process {file}')
+                raise RuntimeError(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
-        if processed_count == total_files_to_process & total_files_to_process > 0:
+        if processed_count == total_files_to_process and total_files_to_process > 0:
 
             name = "USA_Population_Count_by_Race_before_2000"
             generator_df=pd.read_csv\
@@ -1162,8 +1154,8 @@ class CensusUSAPopulationByRace:
             self._generate_mcf(generator_df.columns, name)
             self._generate_tmcf(generator_df.columns, name)
         else:
-            logging.fatal(
-                "Aborting output files as no of files to process not matching processed files"
+            raise RuntimeError(
+                f"Aborting output files: expected {total_files_to_process} files to process, but processed {processed_count}"
             )
 
     # Generating MCF files
@@ -1304,7 +1296,8 @@ def add_future_yearurls():
     session = _get_session()
     for url_template in urls_to_scan:
         found_url = None
-        for future_year in range(2030, _BASELINE_YEAR - 1, -1):
+        max_future_year = dt.today().year + 1
+        for future_year in range(max_future_year, _BASELINE_YEAR - 1, -1):
             url_to_check = url_template.replace("{YEAR}", str(future_year))
             try:
                 checkurl = _head_with_html_retry(session,
@@ -1332,9 +1325,9 @@ def download_files():
     """
     global _FILES_TO_DOWNLOAD, _SESSION
     session = _get_session()
-    max_retry = 5
-    raw_data_dir = os.path.join(_INPUT_FILE_PATH, 'raw_data')
+    raw_data_dir = _RAW_DATA_PATH
     os.makedirs(raw_data_dir, exist_ok=True)
+    os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
     try:
         for file_to_dowload in _FILES_TO_DOWNLOAD:
             url = file_to_dowload['download_path']
@@ -1343,13 +1336,13 @@ def download_files():
             else:
                 source_file_name = url.split('/')[-1]
             download_local_path = _INPUT_FILE_PATH
-            retry_number = 0
 
+            raw_file_path = os.path.join(raw_data_dir, source_file_name)
+            retry_number = 0
             is_file_downloaded = False
             while not is_file_downloaded:
                 out_file_name = source_file_name
                 try:
-                    raw_file_path = os.path.join(raw_data_dir, source_file_name)
                     download_with_retry(session, url, raw_file_path)
 
                     with open(raw_file_path, 'rb') as f:
@@ -1361,7 +1354,6 @@ def download_files():
                                 ".csv", ".xlsx")
                             df = pd.read_csv(StringIO(
                                 raw_bytes.decode('utf-8', errors='replace')),
-                                             on_bad_lines='skip',
                                              header=0)
                             atomic_to_excel(df,
                                             os.path.join(
@@ -1383,7 +1375,6 @@ def download_files():
                             df = pd.read_csv(StringIO(
                                 raw_bytes.decode('utf-8', errors='replace')),
                                              skiprows=5,
-                                             on_bad_lines='skip',
                                              header=0)
                             atomic_to_excel(df,
                                             os.path.join(
@@ -1403,13 +1394,11 @@ def download_files():
                                     raw_bytes.decode('utf-8',
                                                      errors='replace')),
                                                  skiprows=7,
-                                                 on_bad_lines='skip',
                                                  names=cols)
                             else:
                                 df = pd.read_csv(StringIO(
                                     raw_bytes.decode('utf-8',
                                                      errors='replace')),
-                                                 on_bad_lines='skip',
                                                  names=cols)
                             atomic_to_excel(df,
                                             os.path.join(
@@ -1418,16 +1407,10 @@ def download_files():
                                             index=False,
                                             engine='xlsxwriter')
                         elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
-                            df = pd.read_csv(StringIO(
-                                raw_bytes.decode('ISO-8859-1',
-                                                 errors='replace')),
-                                             on_bad_lines='skip',
-                                             encoding='ISO-8859-1',
-                                             low_memory=False)
-                            atomic_to_csv(df,
-                                          os.path.join(download_local_path,
-                                                       out_file_name),
-                                          index=False)
+                            shutil.copyfile(
+                                raw_file_path,
+                                os.path.join(download_local_path,
+                                             out_file_name))
                         else:
                             raise ValueError(f'Unknown csv file: {url}')
 
@@ -1467,18 +1450,17 @@ def download_files():
                                         engine='xlsxwriter')
                     else:
                         raise ValueError(f'Unknown file - {url}')
-
-                    logging.info(f"Downloaded file : {url}")
                     is_file_downloaded = True
-
-                except (TransientDownloadError,
-                        requests.exceptions.RequestException, OSError) as e:
-                    logging.error(f"Retry file download {url} - {e}")
-                    time.sleep(5)
+                except (requests.exceptions.RequestException,
+                        TransientDownloadError, pd.errors.ParserError) as e:
                     retry_number += 1
-                    if retry_number > max_retry:
+                    if retry_number > 3:
                         raise RuntimeError(
-                            f"Error downloading URL- {url}") from e
+                            f"Error downloading/processing file {url}: {e}"
+                        ) from e
+                    time.sleep(2)
+
+            logging.info(f"Downloaded file : {url}")
         return True
     finally:
         session.close()

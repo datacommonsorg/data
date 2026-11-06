@@ -36,6 +36,7 @@ input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
+import datetime
 import os
 import sys
 import json
@@ -43,17 +44,12 @@ import warnings
 import requests
 import time
 import re
-import tempfile
-from datetime import datetime as dt
 
 warnings.filterwarnings('ignore')
 import pandas as pd
 from absl import app
 from absl import logging
 from absl import flags
-from retry import retry
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 _FLAGS = flags.FLAGS
 
@@ -79,9 +75,9 @@ from clean import (clean_data_df, clean_1970_1989_county_txt,
                    process_states_1900_1969, process_states_1970_1979,
                    process_states_1980_1989, process_states_1990_1999)
 
-from constants import (INPUT_DIRS, OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960,
-                       USA, USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
-                       DISTRICT_OF_COLUMBIA_COUNTY_CODE, INPUT_DIR)
+from constants import (OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960, USA,
+                       USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
+                       DISTRICT_OF_COLUMBIA_COUNTY_CODE)
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2todcid
@@ -773,7 +769,6 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Processed County DataFrame
     """
     data_df = None
-    future_year_file_list = [f"co-est{x}-alldata" for x in range(2024, 2031)]
 
     if "99c8_00.txt" in file_path:
         data_df = _process_county_file_99c8_00(file_path)
@@ -783,8 +778,6 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df = data_df[data_df["Location"].str.len() != 8]
     elif "co-est2020" in file_path:
         data_df = _process_county_coest2020(file_path)
-    elif "co-est2023-alldata" in file_path:
-        data_df = _process_county_coest2029(file_path)
     elif "co-est2021" in file_path:
         data_df = _load_data_df(file_path, "xlsx", header=4)
         data_df.columns = ["Region", "04_2020", "2020", "2021"]
@@ -796,7 +789,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Location"] = data_df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.County), axis=1)
         data_df = _unpivot_data_df(data_df, ["Location"], ["2020", "2021"])
-    elif any([x for x in future_year_file_list if x in file_path]):
+    elif re.search(r"co-est20\d{2}-alldata", file_path):
         data_df = _process_county_coest2029(file_path)
     elif "co-est" in file_path:
         data_df = _load_data_df(file_path, "csv", encoding='ISO-8859-1')
@@ -905,7 +898,7 @@ def _process_cities(file_path: str,
         data_df = _process_city_1990_1999(file_path)
     if file_name_without_ext in [
             "sub-est2010-alt", "SUB-EST2020_ALL", "sub-est2021_all"
-    ] or re.search(r"sub-est20(?:2\d|30)", file_name_without_ext):
+    ] or re.search(r"sub-est20\d{2}", file_name_without_ext):
         data_df = _load_data_df(file_path,
                                 file_format="csv",
                                 header=0,
@@ -1071,7 +1064,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             elif file_name in [
                     'su-99-7_us.txt', "sub-est2010-alt.csv",
                     "SUB-EST2020_ALL.csv", "sub-est2021_all.csv"
-            ] or re.search(r"sub-est20(?:2\d|30)", file_name):
+            ] or re.search(r"sub-est20\d{2}", file_name):
                 data_df = _process_cities(file, is_summary_levels)
 
             if not data_df.empty:
@@ -1083,36 +1076,31 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             else:
                 logging.error(f"Failed to process {file}")
     except Exception as e:
-        logging.fatal(f"Error while processing files {e}")
+        raise RuntimeError(f"Error while processing files: {e}") from e
 
     logging.info(f"No of files to be processed {total_files_to_process}")
     logging.info(f"No of files processed {processed_count}")
-    if processed_count > 0:
-        if processed_count < total_files_to_process:
-            logging.warning(
-                f"Mismatch between files expected ({total_files_to_process}) and processed ({processed_count})"
-            )
-        final_df["Year"] = pd.to_numeric(final_df["Year"], errors="coerce")
-        final_df = final_df.dropna(subset=["Year"])
-        final_df["Year"] = final_df["Year"].astype("int")
-        final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
-                                        kind="mergesort")
-        final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
-        final_df["Count_Person"] = pd.to_numeric(
-            final_df["Count_Person"].astype(str).str.replace(",",
-                                                             "",
-                                                             regex=False),
-            errors="coerce",
+    if total_files_to_process == 0 or processed_count < total_files_to_process:
+        raise RuntimeError(
+            f"Expected {total_files_to_process} files to be processed, but only {processed_count} were processed successfully."
         )
-        final_df = final_df.dropna(subset=["Count_Person"])
-        final_df["Count_Person"] = final_df["Count_Person"].round().astype(
-            "int64")
-        final_df[["Year", "Location",
-                  "Count_Person"]].to_csv(cleaned_csv_file_path, index=False)
-        _generate_mcf(mcf_file_path)
-        _generate_tmcf(tmcf_file_path)
-    else:
-        logging.fatal("No files were successfully processed.")
+
+    final_df["Year"] = pd.to_numeric(final_df["Year"], errors="coerce")
+    final_df = final_df.dropna(subset=["Year"])
+    final_df["Year"] = final_df["Year"].astype("int")
+    final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
+                                    kind="mergesort")
+    final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
+    final_df["Count_Person"] = pd.to_numeric(
+        final_df["Count_Person"].astype(str).str.replace(",", "", regex=False),
+        errors="coerce",
+    )
+    final_df = final_df.dropna(subset=["Count_Person"])
+    final_df["Count_Person"] = final_df["Count_Person"].round().astype("int64")
+    final_df[["Year", "Location", "Count_Person"]].to_csv(cleaned_csv_file_path,
+                                                          index=False)
+    _generate_mcf(mcf_file_path)
+    _generate_tmcf(tmcf_file_path)
 
 
 _PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
@@ -1121,7 +1109,6 @@ if _PEP_DIR not in sys.path:
 from download_util import (
     TransientDownloadError,
     create_retry_session as _create_retry_session,
-    is_html_response as _is_html_response,
     head_with_html_retry as _head_with_html_retry,
     download_with_retry,
 )
@@ -1148,10 +1135,10 @@ def add_future_year_urls():
          2023),
     ]
     session = _create_retry_session()
-    # This method will get the latest year URLs available for the years baseline_year to 2030
+    max_future_year = datetime.date.today().year + 1
     for url, baseline_year in urls_to_scan:
         found = False
-        for future_year in range(2030, baseline_year - 1, -1):
+        for future_year in range(max_future_year, baseline_year - 1, -1):
             url_to_check = url.format(YEAR=future_year)
             try:
                 logging.info(f"checking future url if available {url_to_check}")

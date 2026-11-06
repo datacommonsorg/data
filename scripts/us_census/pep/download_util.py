@@ -69,8 +69,8 @@ def create_retry_session(retries: int = 5,
     return session
 
 
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
+@retry(exceptions=(TransientDownloadError, requests.exceptions.ConnectionError,
+                   requests.exceptions.Timeout),
        tries=3,
        delay=5,
        backoff=2)
@@ -78,6 +78,7 @@ def head_with_html_retry(session: requests.Session,
                          url: str,
                          timeout: int = 30) -> requests.Response:
     """Performs a HEAD request with retry when the server returns HTML for a non-HTML URL."""
+    logging.info(f'Requesting HEAD URL: {url}')
     response = session.head(url, timeout=timeout, allow_redirects=True)
     if response.status_code in TRANSIENT_STATUS_CODES:
         raise TransientDownloadError(
@@ -92,8 +93,8 @@ def head_with_html_retry(session: requests.Session,
     return response
 
 
-@retry(exceptions=(TransientDownloadError,
-                   requests.exceptions.RequestException),
+@retry(exceptions=(TransientDownloadError, requests.exceptions.ConnectionError,
+                   requests.exceptions.Timeout),
        tries=3,
        delay=5,
        backoff=2)
@@ -101,9 +102,13 @@ def download_with_retry(session: requests.Session,
                         url: str,
                         dest_path: str,
                         timeout: int = 120):
-    """Downloads a URL to dest_path atomically, retrying on HTTP errors or HTML/WAF pages."""
-    logging.info(f'Downloading file from URL: {url} -> {dest_path}')
+    """Downloads a URL to dest_path atomically, retrying on transient HTTP errors or HTML/WAF pages."""
+    logging.info(f'Downloading file (GET) from URL: {url} -> {dest_path}')
     with session.get(url, stream=True, timeout=timeout) as response:
+        if response.status_code in TRANSIENT_STATUS_CODES:
+            raise TransientDownloadError(
+                f'Server returned transient status code {response.status_code} for URL: {url}'
+            )
         response.raise_for_status()
         content_type = response.headers.get('Content-Type', '')
         if (not url.lower().endswith(('.html', '.htm')) and
@@ -113,7 +118,8 @@ def download_with_retry(session: requests.Session,
             )
         dest_dir = os.path.dirname(os.path.abspath(dest_path)) or '.'
         os.makedirs(dest_dir, exist_ok=True)
-        fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
+        suffix = os.path.splitext(dest_path)[1] or '.tmp'
+        fd, tmp_path = tempfile.mkstemp(dir=dest_dir, suffix=suffix)
         try:
             first_chunk = b''
             with os.fdopen(fd, 'wb') as f:
@@ -146,7 +152,8 @@ def atomic_to_csv(df, target_path: str, **kwargs):
     """Writes a DataFrame to CSV atomically via a temporary file."""
     dest_dir = os.path.dirname(os.path.abspath(target_path)) or '.'
     os.makedirs(dest_dir, exist_ok=True)
-    fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
+    suffix = os.path.splitext(target_path)[1] or '.csv'
+    fd, tmp_path = tempfile.mkstemp(dir=dest_dir, suffix=suffix)
     os.close(fd)
     try:
         df.to_csv(tmp_path, **kwargs)
@@ -164,7 +171,8 @@ def atomic_to_excel(df, target_path: str, **kwargs):
     """Writes a DataFrame to Excel atomically via a temporary file."""
     dest_dir = os.path.dirname(os.path.abspath(target_path)) or '.'
     os.makedirs(dest_dir, exist_ok=True)
-    fd, tmp_path = tempfile.mkstemp(dir=dest_dir)
+    suffix = os.path.splitext(target_path)[1] or '.xlsx'
+    fd, tmp_path = tempfile.mkstemp(dir=dest_dir, suffix=suffix)
     os.close(fd)
     try:
         df.to_excel(tmp_path, **kwargs)
