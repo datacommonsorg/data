@@ -28,7 +28,7 @@ The import pipeline downloads raw ABS SDMX CSVs and statistical Excel workbooks 
     *   `australia_statistics_metadata.csv`: Configuration file for `stat_var_processor.py` specifying output columns (`observationAbout,observationDate,value,variableMeasured,unit,scalingFactor`), header rows, mapped columns, numeric precision (`output_precision_digits,4`), and provenance URL.
     *   `australia_statistics_pv_map.csv`: Property-value mapping file mapping raw ABS indicator keys (`LF_*`, `ERP_*`, `POP_*`, `HEALTH_*`, `LE_*`, `INC_*`) and region identifiers to Data Commons StatisticalVariables, `#Multiply,1000` scaling (for Labour Force counts reported in thousands), and place DCIDs (`country/AUS` and `wikidataId/Q...`).
     *   `validation_config.json`: Configuration defining 5 scoped `MAX_DATE_CONSISTENT` rules, value bounds, and date freshness validation rules across all 850 StatisticalVariables (alongside the global `DELETED_RECORDS_PERCENT` rule).
-    *   `test_data/`: Sample input data (`sample_input.csv`) and expected output (`sample_expected_output.csv`, `sample_expected_output.tmcf`, `sample_expected_output_stat_vars.mcf`) for testing.
+    *   `test_data/`: Sample input data (`sample_input.csv`) and expected output (`sample_expected_output.csv`, `sample_expected_output.tmcf`) for testing.
 
 *   **Transformation pipeline**:
     1.  `download_script.py` downloads all raw ABS SDMX CSVs and Excel workbooks concurrently using thread-local retry-enabled HTTP sessions, payload signature validation, atomic file writes, and stale file cleanup into `input_files/`.
