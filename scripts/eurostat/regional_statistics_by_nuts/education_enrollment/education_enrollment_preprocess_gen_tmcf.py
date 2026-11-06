@@ -75,7 +75,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns={
-            'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'
+            r'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'
         })
         df['unit,sex,age,geo\\time'] = df['unit,sex,age,geo\\time'].str.slice(2)
         header = list(df.columns.values)

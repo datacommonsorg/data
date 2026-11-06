@@ -35,7 +35,9 @@ GitHub unchanged unless the user explicitly authorizes publishing under
   content. Publishing is limited to one comment-only review.
 - Enumerate every changed path before filtering the review.
 - Report findings only for changed files under `scripts/**` and
-  `statvar_imports/**`.
+  `statvar_imports/**`, plus the infra PR finding below.
+- [rule-infra-pr] Report changed paths outside those directories as one
+  finding asking to move them into a separate infra PR.
 - List changed paths outside those directories as skipped. Read unchanged or
   shared code only when needed to understand an in-scope change, and do not
   report unrelated findings from that context.

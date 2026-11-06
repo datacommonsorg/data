@@ -120,9 +120,9 @@ def configure_logging(enable_cloud_logging: bool):
             configure_cloud_logging()
             logging.info("Google Cloud Logging configured.")
         else:
-            logging.info(f'Not enabling cloud logging')
+            logging.info('Not enabling cloud logging')
     else:
-        logging.info(f'Not running on cloud, using default logging')
+        logging.info('Not running on cloud, using default logging')
 
 
 def log_function_call(func):

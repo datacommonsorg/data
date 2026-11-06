@@ -526,13 +526,14 @@ class CloudBatchImportSensor(BaseSensorOperator):
         cfg = resolve_workflow_context(context,
                                        default_import_name=self.import_name)
         if self.is_validation:
-            if cfg["skipImportJob"]:
+            if cfg["skipImportJob"] or cfg.get("skipValidationJob"):
                 logging.info(
-                    "skipImportJob is True; skipping Cloud Batch validation job."
+                    "Skipping Cloud Batch validation job (skipImportJob=%s, skipValidationJob=%s).",
+                    cfg["skipImportJob"],
+                    cfg.get("skipValidationJob"),
                 )
                 raise AirflowSkipException(
-                    "Validation job skipped by configuration (skipImportJob=True)."
-                )
+                    "Validation job skipped by configuration.")
             job_id = cfg["validationJobId"]
             job_label = "validation"
         else:
@@ -562,9 +563,8 @@ class CloudBatchImportSensor(BaseSensorOperator):
                         "/data/import-automation/validator/main.py",
                         f"--import_name={cfg['importName']}",
                         f"--import_config={cfg['importConfig']}",
+                        "--run_bq_differ",
                     ]
-                    if cfg.get("runBQDiffer"):
-                        val_commands.append("--run_bq_differ")
                     job_spec = _build_batch_job_spec(
                         cfg["imageUri"],
                         cfg["importName"],
@@ -912,25 +912,32 @@ def resolve_workflow_context(context: dict[str, Any],
                                "spanner-ingestion-workflow",
                                "SPANNER_INGESTION_WORKFLOW_NAME")
 
+    default_import_config: dict[str, Any] = {
+        "gcp_project_id": project_id,
+        "gcs_project_id": project_id,
+        "storage_prod_bucket_name": gcs_import_bucket,
+        "gcs_bucket_volume_mount": gcs_mount_bucket,
+    }
     import_config = get_val("importConfig")
     if not import_config or import_config == "{}":
-        import_config_dict: dict[str, Any] = {
-            "gcp_project_id": project_id,
-            "gcs_project_id": project_id,
-            "storage_prod_bucket_name": gcs_import_bucket,
-            "gcs_bucket_volume_mount": gcs_mount_bucket,
-        }
+        import_config_dict = dict(default_import_config)
     elif isinstance(import_config, str):
         try:
-            import_config_dict = json.loads(import_config)
+            parsed_cfg = json.loads(import_config)
+            import_config_dict = {
+                **default_import_config,
+                **(parsed_cfg if isinstance(parsed_cfg, dict) else {}),
+            }
         except Exception:
-            import_config_dict = {}
+            import_config_dict = dict(default_import_config)
     elif isinstance(import_config, dict):
-        import_config_dict = dict(import_config)
+        import_config_dict = {**default_import_config, **import_config}
     else:
-        import_config_dict = {}
+        import_config_dict = dict(default_import_config)
 
-    run_bq_differ = to_bool("runBQDiffer", False)
+    raw_invoke_val = import_config_dict.get("invoke_import_validation", True)
+    skip_validation_job = (raw_invoke_val is False or
+                           str(raw_invoke_val).lower() == "false")
     batch_config_dict = dict(import_config_dict)
     batch_config_dict["invoke_import_validation"] = False
     batch_config_dict["invoke_differ_tool"] = False
@@ -974,8 +981,6 @@ def resolve_workflow_context(context: dict[str, Any],
             import_config_str,
         "batchImportConfig":
             batch_import_config_str,
-        "runBQDiffer":
-            run_bq_differ,
         "gcsMountBucket":
             gcs_mount_bucket,
         "gcsImportBucket":
@@ -992,6 +997,9 @@ def resolve_workflow_context(context: dict[str, Any],
             spanner_workflow,
         "skipImportJob":
             to_bool("skipImportJob"),
+        "skipValidationJob":
+            to_bool("skipImportJob") or to_bool("skipValidationJob")
+            or skip_validation_job,
         "skipStagingIngestion":
             is_staging_denylisted(import_name)
             or to_bool("skipStagingIngestion"),
@@ -1229,13 +1237,6 @@ base_dag_params = {
         Param(default=False,
               type="boolean",
               description="Skip Batch import job"),
-    "runBQDiffer":
-        Param(
-            default=False,
-            type="boolean",
-            description=
-            "Run BigQuery differ instead of native Python differ in validation job",
-        ),
     "skipStagingIngestion":
         Param(default=False,
               type="boolean",

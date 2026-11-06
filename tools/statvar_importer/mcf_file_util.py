@@ -335,7 +335,7 @@ def get_non_name_props(pvs: dict,
     if not pvs:
         return props
     for prop in pvs.keys():
-        if prop and not prop in ignore_props and prop[0] != '#':
+        if prop and prop not in ignore_props and prop[0] != '#':
             props.add(prop)
     return props
 
@@ -439,7 +439,7 @@ def add_mcf_node(
         if not can_merge:
             logging.error(f'Cannot merge {dcid}: {node} with {pvs}')
             if counters is not None:
-                counters.add_counter(f'error-mcf-node-merge', 1, dcid)
+                counters.add_counter('error-mcf-node-merge', 1, dcid)
             return False
     node = nodes[dcid]
     for prop, value in pvs.items():
@@ -529,7 +529,7 @@ def load_mcf_nodes(
     if not filenames:
         return nodes
 
-    if counters == None:
+    if counters is None:
         counters = Counters()
 
     # Load files in order of input
@@ -1173,8 +1173,8 @@ def _get_new_node(normalize: bool = True) -> dict:
 
 def main(_):
     if not _FLAGS.input_mcf or not _FLAGS.output_mcf:
-        print(f'Please provide input and output MCF files with --input_mcf and'
-              f' --output_mcf.')
+        print('Please provide input and output MCF files with --input_mcf and'
+              ' --output_mcf.')
         return
     nodes = load_mcf_nodes(_FLAGS.input_mcf,
                            append_values=_FLAGS.append_values,

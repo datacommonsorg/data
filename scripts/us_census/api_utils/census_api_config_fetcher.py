@@ -360,11 +360,11 @@ def fetch_dataset_config_cache(param: str,
     rate_params['req_per_unit_time'] = 10
     rate_params['unit_time'] = 1
 
-    failed_urls_ctr = download_url_list_iterations(url_list,
-                                                   None,
-                                                   '',
-                                                   async_save_resp_json,
-                                                   rate_params=rate_params)
+    download_url_list_iterations(url_list,
+                                 None,
+                                 '',
+                                 async_save_resp_json,
+                                 rate_params=rate_params)
 
     with open(status_path, 'w') as fp:
         json.dump(url_list, fp, indent=2)

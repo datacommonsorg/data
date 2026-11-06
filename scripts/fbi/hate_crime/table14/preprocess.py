@@ -73,7 +73,7 @@ def _write_row(year: int, geo: str, statvar_dcid: str, obs_date: str,
 def _remove_from_list(l: list, e: str):
     try:
         l.remove(e)
-    except ValueError as err:
+    except ValueError:
         print(f"{e} not in list")
 
 
@@ -205,7 +205,6 @@ def main(argv):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
-    tmp_dir = '.'
     if table_num not in config:
         logging.fatal(
             f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
