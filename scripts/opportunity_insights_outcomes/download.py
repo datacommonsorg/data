@@ -29,12 +29,20 @@ _REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from util import download_util_script
+import util
+
+if 'download_util_script' in sys.modules:
+    download_util_script = sys.modules['download_util_script']
+    sys.modules['util.download_util_script'] = download_util_script
+    util.download_util_script = download_util_script
+else:
+    from util import download_util_script
+    sys.modules['download_util_script'] = download_util_script
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'output_dir',
+    'raw_output_dir',
     os.path.join(_MODULE_DIR, 'raw_data'),
     'Directory where raw Opportunity Insights CSV files will be stored.',
 )
@@ -319,12 +327,20 @@ def download_all_sources(
 
 
 def main(_):
+    out_dir = (FLAGS.output_dir if ('output_dir' in FLAGS and FLAGS.output_dir)
+               else FLAGS.raw_output_dir)
     download_all_sources(
-        FLAGS.output_dir,
+        out_dir,
         FLAGS.source_page_url,
         force_download=FLAGS.force_download,
     )
 
 
 if __name__ == '__main__':
+    if 'output_dir' not in FLAGS:
+        flags.DEFINE_string(
+            'output_dir',
+            '',
+            'Optional alias for --raw_output_dir when invoked directly.',
+        )
     app.run(main)
