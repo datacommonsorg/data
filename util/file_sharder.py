@@ -1198,7 +1198,10 @@ def shard_file(input_file: str,
       counters: Optional `Counters` object to track stats.
     """
     file_sharder = FileSharder(input_file, output_path, config, counters)
-    file_sharder.process()
+    try:
+        file_sharder.process()
+    finally:
+        file_sharder.close()
 
 
 def main(_):

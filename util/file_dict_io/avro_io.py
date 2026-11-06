@@ -96,7 +96,7 @@ class AvroFileDictIO(FileDictIO):
         """
         # Ensure binary mode for Avro files.
         if 'b' not in mode:
-            mode = mode + 'b'
+            mode = mode.replace('t', '') + 'b'
         self._fastavro_reader = None
         self._fastavro_writer = None
         self._avro_schema = dict(schema) if schema else {}

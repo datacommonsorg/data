@@ -326,7 +326,7 @@ class JsonFileDictIO(FileDictIO):
 
             # Read lines incrementally until closing '}' (for objects) or EOF.
             while True:
-                line_pos = fp.tell()
+                line_pos = fp.tell() if not self._buffer else None
                 line = fp.readline()
                 if not line:
                     rem = self._buffer.lstrip(' \t\r\n,[]')

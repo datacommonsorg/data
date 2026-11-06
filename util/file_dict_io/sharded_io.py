@@ -753,7 +753,7 @@ class ShardedFileDictIO(FileDictIO):
         are matched (`node.mcf-[0-9]*-of-00010` or `node-[0-9]*-of-00010.mcf`),
         preventing false matches against `nodes.mcf-...` or `...-of-00002`.
         """
-        if isinstance(filename, list):
+        if isinstance(filename, (list, tuple)):
             raw_items = filename
         elif isinstance(filename, str):
             raw_items = [filename]
