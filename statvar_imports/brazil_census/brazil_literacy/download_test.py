@@ -26,8 +26,7 @@ import requests
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _SPEC = importlib.util.spec_from_file_location(
-    "brazil_literacy_download", os.path.join(SCRIPT_DIR, "download.py")
-)
+    "brazil_literacy_download", os.path.join(SCRIPT_DIR, "download.py"))
 download_mod = importlib.util.module_from_spec(_SPEC)
 sys.modules["brazil_literacy_download"] = download_mod
 _SPEC.loader.exec_module(download_mod)
@@ -63,14 +62,15 @@ class DownloadTest(unittest.TestCase):
     @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
     @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_mocked_success(
-        self, _mock_raw, _mock_2010, _mock_2000, mock_rates
-    ):
+    def test_download_mocked_success(self, _mock_raw, _mock_2010, _mock_2000,
+                                     mock_rates):
         """Tests successful download and CSV emission."""
         session = MagicMock()
         mock_response = MagicMock()
         mock_payload = [
-            {"NC": "Nível Territorial"},
+            {
+                "NC": "Nível Territorial"
+            },
             {
                 "NC": "1",
                 "D1N": "Brasil",
@@ -93,9 +93,9 @@ class DownloadTest(unittest.TestCase):
         session.get.return_value = mock_response
 
         out_csv = os.path.join(self.test_dir, "output.csv")
-        saved_file = download_all_years(
-            session=session, output_file=out_csv, fallback_to_cached=False
-        )
+        saved_file = download_all_years(session=session,
+                                        output_file=out_csv,
+                                        fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
         mock_rates.assert_called_once()
 
@@ -119,9 +119,8 @@ class DownloadTest(unittest.TestCase):
     @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
     @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_empty_response_raises(
-        self, _mock_raw, _mock_2010, _mock_2000, _mock_rates
-    ):
+    def test_download_empty_response_raises(self, _mock_raw, _mock_2010,
+                                            _mock_2000, _mock_rates):
         """Tests that an empty response payload raises RuntimeError."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -131,36 +130,33 @@ class DownloadTest(unittest.TestCase):
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         with self.assertRaises(RuntimeError):
-            download_all_years(
-                session=session, output_file=out_csv, fallback_to_cached=False
-            )
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
 
     @patch.object(download_mod, "ensure_literacy_rates_file")
     @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
     @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_network_failure_raises(
-        self, _mock_raw, _mock_2010, _mock_2000, _mock_rates
-    ):
+    def test_download_network_failure_raises(self, _mock_raw, _mock_2010,
+                                             _mock_2000, _mock_rates):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
-            "Connection timed out"
-        )
+            "Connection timed out")
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         with self.assertRaises(RuntimeError):
-            download_all_years(
-                session=session, output_file=out_csv, fallback_to_cached=False
-            )
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
 
     @patch.object(download_mod, "ensure_literacy_rates_file")
     @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
     @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_fallback_to_cached(
-        self, _mock_raw, _mock_2010, _mock_2000, _mock_rates
-    ):
+    def test_download_fallback_to_cached(self, _mock_raw, _mock_2010,
+                                         _mock_2000, _mock_rates):
         """Tests that fallback to existing CSV succeeds when fallback is enabled."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
@@ -169,12 +165,11 @@ class DownloadTest(unittest.TestCase):
         with open(cached_csv, "w", encoding="utf-8") as f:
             f.write(
                 "Ano,Localidade,FaixaEtaria,Raca,StatusAlfabetizacao,Sexo,Populacao\n"
-                "2022,Brazil,15 anos ou mais,Total,Alfabetizado,Total,100\n"
-            )
+                "2022,Brazil,15 anos ou mais,Total,Alfabetizado,Total,100\n")
 
-        saved = download_all_years(
-            session=session, output_file=cached_csv, fallback_to_cached=True
-        )
+        saved = download_all_years(session=session,
+                                   output_file=cached_csv,
+                                   fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
 

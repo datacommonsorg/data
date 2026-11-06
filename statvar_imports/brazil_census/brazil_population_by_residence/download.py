@@ -26,7 +26,7 @@ import json
 import os
 import sys
 import tempfile
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
@@ -68,7 +68,8 @@ if "fallback_to_cached" not in FLAGS:
     )
 
 DEFAULT_OUTPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
-DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR, "brazil_population_by_residence.csv")
+DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR,
+                                   "brazil_population_by_residence.csv")
 
 
 def get_robust_session() -> requests.Session:
@@ -84,7 +85,8 @@ def get_robust_session() -> requests.Session:
     return session
 
 
-def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]]:
+def fetch_sidra_data(session: requests.Session,
+                     url: str) -> List[Dict[str, Any]]:
     """Fetches raw JSON payload from IBGE SIDRA REST API."""
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     logging.info(f"Dispatching outbound HTTP request: url={url}")
@@ -92,11 +94,13 @@ def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]
     res.raise_for_status()
     raw_json = res.json()
     if not isinstance(raw_json, list) or len(raw_json) < 2:
-        raise RuntimeError(f"Invalid or empty response payload from SIDRA API: {url}")
+        raise RuntimeError(
+            f"Invalid or empty response payload from SIDRA API: {url}")
     return raw_json
 
 
-def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
+def parse_raw_residence_xls(content_bytes: bytes,
+                            year: int) -> List[Dict[str, Any]]:
     """Parses raw IBGE Table 1 residence XLS workbook."""
     rows: List[Dict[str, Any]] = []
     try:
@@ -129,7 +133,9 @@ def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, A
         for r_idx in range(7, len(df)):
             r = df.iloc[r_idx]
             place = str(r.iloc[0]).strip()
-            if not place or pd.isna(r.iloc[0]) or ("fonte" in place.lower() and "fonte boa" not in place.lower()) or "nota" in place.lower():
+            if not place or pd.isna(r.iloc[0]) or (
+                    "fonte" in place.lower() and "fonte boa"
+                    not in place.lower()) or "nota" in place.lower():
                 continue
             if place == "Brasil":
                 place = "Brazil"
@@ -142,13 +148,20 @@ def parse_raw_residence_xls(content_bytes: bytes, year: int) -> List[Dict[str, A
                     val_int = int(round(float(val)))
                 except (ValueError, TypeError):
                     continue
-                rows.append({"Ano": year, "Localidade": place, "Situacao": situacao, "Sexo": sexo, "Populacao": val_int})
+                rows.append({
+                    "Ano": year,
+                    "Localidade": place,
+                    "Situacao": situacao,
+                    "Sexo": sexo,
+                    "Populacao": val_int
+                })
     except Exception as e:
         logging.warning(f"Error parsing raw residence XLS: {e}")
     return rows
 
 
-def parse_raw_1991_residence(content_bytes: bytes, map_91: Dict[str, str]) -> List[Dict[str, Any]]:
+def parse_raw_1991_residence(content_bytes: bytes,
+                             map_91: Dict[str, str]) -> List[Dict[str, Any]]:
     """Parses raw 1991 residence workbook."""
     rows: List[Dict[str, Any]] = []
     try:
@@ -157,29 +170,50 @@ def parse_raw_1991_residence(content_bytes: bytes, map_91: Dict[str, str]) -> Li
             row = df.iloc[r_idx]
             place_raw = str(row.iloc[0]).strip()
             place_lower = place_raw.lower()
-            if not place_raw or pd.isna(row.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
+            if not place_raw or pd.isna(row.iloc[0]) or (
+                    "fonte" in place_lower and
+                    "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             if len(row) < 3:
                 continue
 
             rural_val = row.iloc[1]
             urban_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
+            place_resolved = map_91.get(place_raw,
+                                        place_raw).replace("dcid:", "")
 
             u_int = None
             r_int = None
             try:
                 u_int = int(round(float(urban_val)))
-                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Urbana", "Sexo": "Total", "Populacao": u_int})
+                rows.append({
+                    "Ano": 1991,
+                    "Localidade": place_resolved,
+                    "Situacao": "Urbana",
+                    "Sexo": "Total",
+                    "Populacao": u_int
+                })
             except (ValueError, TypeError):
                 pass
             try:
                 r_int = int(round(float(rural_val)))
-                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Rural", "Sexo": "Total", "Populacao": r_int})
+                rows.append({
+                    "Ano": 1991,
+                    "Localidade": place_resolved,
+                    "Situacao": "Rural",
+                    "Sexo": "Total",
+                    "Populacao": r_int
+                })
             except (ValueError, TypeError):
                 pass
             if u_int is not None and r_int is not None:
-                rows.append({"Ano": 1991, "Localidade": place_resolved, "Situacao": "Total", "Sexo": "Total", "Populacao": u_int + r_int})
+                rows.append({
+                    "Ano": 1991,
+                    "Localidade": place_resolved,
+                    "Situacao": "Total",
+                    "Sexo": "Total",
+                    "Populacao": u_int + r_int
+                })
     except Exception as e:
         logging.warning(f"Error parsing 1991 residence XLS: {e}")
     return rows
@@ -188,8 +222,10 @@ def parse_raw_1991_residence(content_bytes: bytes, map_91: Dict[str, str]) -> Li
 def load_1991_mapping() -> Dict[str, str]:
     """Loads 1991 place name mapping to resolved DCIDs."""
     cand = [
-        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files", "Brazil_Place_Mapping_1991.json"),
-        os.path.join("/data", "scratch", "intermediate_files", "Brazil_Place_Mapping_1991.json"),
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files",
+                     "Brazil_Place_Mapping_1991.json"),
+        os.path.join("/data", "scratch", "intermediate_files",
+                     "Brazil_Place_Mapping_1991.json"),
     ]
     for c in cand:
         if os.path.isfile(c):
@@ -199,14 +235,16 @@ def load_1991_mapping() -> Dict[str, str]:
         from google.cloud import storage
         client = storage.Client()
         bucket = client.bucket("unresolved_mcf")
-        blob = bucket.blob("country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
+        blob = bucket.blob(
+            "country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
         return json.loads(blob.download_as_text())
     except Exception as e:
         logging.warning(f"Could not load 1991 mapping from GCS: {e}")
     return {}
 
 
-def parse_raw_residence_gender_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
+def parse_raw_residence_gender_xls(content_bytes: bytes,
+                                   year: int) -> List[Dict[str, Any]]:
     """Backward-compatible alias for parse_raw_residence_xls."""
     return parse_raw_residence_xls(content_bytes, year)
 
@@ -217,9 +255,13 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
     year_files = [(1940, "tab001.xls"), (2000, "tab002.xls")]
 
     for year, fname in year_files:
-        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1940_2000_Residence", fname)
-        alt_scratch = os.path.join("/data", "scratch", "input_files", "Brazil_1940_2000_Residence", fname)
-        local_path = scratch_file if os.path.isfile(scratch_file) else (alt_scratch if os.path.isfile(alt_scratch) else None)
+        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
+                                    "input_files", "Brazil_1940_2000_Residence",
+                                    fname)
+        alt_scratch = os.path.join("/data", "scratch", "input_files",
+                                   "Brazil_1940_2000_Residence", fname)
+        local_path = scratch_file if os.path.isfile(scratch_file) else (
+            alt_scratch if os.path.isfile(alt_scratch) else None)
 
         if local_path:
             with open(local_path, "rb") as f:
@@ -229,7 +271,9 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
                 from google.cloud import storage
                 client = storage.Client()
                 bucket = client.bucket("unresolved_mcf")
-                blob = bucket.blob(f"country/brazil/input_files/Brazil_1940_2000_Residence/{fname}")
+                blob = bucket.blob(
+                    f"country/brazil/input_files/Brazil_1940_2000_Residence/{fname}"
+                )
                 content = blob.download_as_bytes()
                 rows.extend(parse_raw_residence_xls(content, year))
             except Exception as e:
@@ -238,15 +282,19 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
     # 1991 Residence
     map_91 = load_1991_mapping()
     cand_dirs = [
-        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1991_residence"),
-        os.path.join("/data", "scratch", "input_files", "Brazil_1991_residence"),
+        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files",
+                     "Brazil_1991_residence"),
+        os.path.join("/data", "scratch", "input_files",
+                     "Brazil_1991_residence"),
         os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files"),
         os.path.join("/data", "scratch", "input_files"),
     ]
     found_1991 = False
     for d in cand_dirs:
         if os.path.isdir(d):
-            pops_files = sorted(glob.glob(os.path.join(d, "POPS91*.XLS")) + glob.glob(os.path.join(d, "*.xls")))
+            pops_files = sorted(
+                glob.glob(os.path.join(d, "POPS91*.XLS")) +
+                glob.glob(os.path.join(d, "*.xls")))
             for pf in pops_files:
                 with open(pf, "rb") as f:
                     rows.extend(parse_raw_1991_residence(f.read(), map_91))
@@ -258,7 +306,12 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
             from google.cloud import storage
             client = storage.Client()
             bucket = client.bucket("unresolved_mcf")
-            blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_1991_residence/POPS91")) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPS91"))
+            blobs = list(
+                bucket.list_blobs(
+                    prefix=
+                    "country/brazil/input_files/Brazil_1991_residence/POPS91")
+            ) + list(
+                bucket.list_blobs(prefix="country/brazil/input_files/POPS91"))
             for b in blobs:
                 if b.name.upper().endswith(".XLS"):
                     content = b.download_as_bytes()
@@ -286,10 +339,16 @@ def download_all_years(
         # 2. 2010 Census from SIDRA API (Table 608)
         # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
         # Classification c1 is Situação (Total, Urbana, Rural) and c2 is Sexo (Total, Homens, Mulheres).
-        sexo_map = {"Homens": "Masculino", "Mulheres": "Feminino", "Total": "Total"}
+        sexo_map = {
+            "Homens": "Masculino",
+            "Mulheres": "Feminino",
+            "Total": "Total"
+        }
         for url in TABLE_608_API_URLS:
             raw_2010 = fetch_sidra_data(session, url)
-            logging.info(f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608 query: {url}")
+            logging.info(
+                f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 608 query: {url}"
+            )
             for r in raw_2010[1:]:
                 val_str = r.get("V")
                 if val_str in ["-", "...", "..", None, ""]:
@@ -319,7 +378,8 @@ def download_all_years(
 
         # 3. 2022+ Census from SIDRA API (Table 9923)
         raw_2022 = fetch_sidra_data(session, TABLE_9923_API_URL)
-        logging.info(f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9923.")
+        logging.info(
+            f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9923.")
         for r in raw_2022[1:]:
             val_str = r.get("V")
             if val_str in ["-", "...", "..", None, ""]:
@@ -353,27 +413,31 @@ def download_all_years(
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
-            logging.warning(f"Download failed ({e}). Falling back to cached copy: {target_path}")
+            logging.warning(
+                f"Download failed ({e}). Falling back to cached copy: {target_path}"
+            )
             return target_path
         logging.error(f"Download error: {e}")
-        raise RuntimeError(f"Error downloading Brazil Census residence data: {e}") from e
+        raise RuntimeError(
+            f"Error downloading Brazil Census residence data: {e}") from e
 
     if not all_rows:
         if fallback_to_cached and os.path.isfile(target_path):
             return target_path
         raise RuntimeError("No residence records retrieved from data sources.")
 
-    df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Situacao", "Sexo"], keep="last")
+    df = pd.DataFrame(all_rows).drop_duplicates(
+        subset=["Ano", "Localidade", "Situacao", "Sexo"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
 
     with tempfile.NamedTemporaryFile(
-        mode="w",
-        delete=False,
-        dir=target_dir,
-        suffix=".csv",
-        encoding="utf-8",
-        newline="",
+            mode="w",
+            delete=False,
+            dir=target_dir,
+            suffix=".csv",
+            encoding="utf-8",
+            newline="",
     ) as tmp_file:
         tmp_path = tmp_file.name
         df.to_csv(tmp_file, index=False, encoding="utf-8")
@@ -381,7 +445,8 @@ def download_all_years(
     if not os.path.isfile(tmp_path) or os.path.getsize(tmp_path) == 0:
         if os.path.isfile(tmp_path):
             os.remove(tmp_path)
-        raise RuntimeError(f"Atomic CSV write failed: {tmp_path} is missing or empty.")
+        raise RuntimeError(
+            f"Atomic CSV write failed: {tmp_path} is missing or empty.")
 
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
@@ -403,9 +468,12 @@ def main(argv: List[str]) -> None:
             output_file=target_file,
             fallback_to_cached=FLAGS.fallback_to_cached,
         )
-        logging.info(f"Successfully generated Brazil Census residence data at: {saved_file}")
+        logging.info(
+            f"Successfully generated Brazil Census residence data at: {saved_file}"
+        )
     except Exception as e:
-        logging.error(f"Fatal error executing Brazil Census residence download: {e}")
+        logging.error(
+            f"Fatal error executing Brazil Census residence download: {e}")
         sys.exit(1)
 
 

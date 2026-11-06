@@ -37,10 +37,8 @@ from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9605: População residente por cor ou raça (2010, 2022, 2030+ via p/all)
-TABLE_9605_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all"
-    f"/v/93/p/all/c86/all?formato=json"
-)
+TABLE_9605_API_URL = (f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all"
+                      f"/v/93/p/all/c86/all?formato=json")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_RACE_1940_FILE = "country/brazil/input_files/Brazil_1940_Race.xls"
@@ -61,7 +59,8 @@ if "fallback_to_cached" not in FLAGS:
     )
 
 DEFAULT_OUTPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
-DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR, "brazil_population_by_race.csv")
+DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR,
+                                   "brazil_population_by_race.csv")
 
 
 def get_robust_session() -> requests.Session:
@@ -77,7 +76,8 @@ def get_robust_session() -> requests.Session:
     return session
 
 
-def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]]:
+def fetch_sidra_data(session: requests.Session,
+                     url: str) -> List[Dict[str, Any]]:
     """Fetches raw JSON payload from IBGE SIDRA REST API."""
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     logging.info(f"Dispatching outbound HTTP request: url={url}")
@@ -85,7 +85,8 @@ def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]
     res.raise_for_status()
     raw_json = res.json()
     if not isinstance(raw_json, list) or len(raw_json) < 2:
-        raise RuntimeError(f"Invalid or empty response payload from SIDRA API: {url}")
+        raise RuntimeError(
+            f"Invalid or empty response payload from SIDRA API: {url}")
     return raw_json
 
 
@@ -120,7 +121,9 @@ def parse_raw_race_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
             r = df.iloc[r_idx]
             place = str(r.iloc[0]).strip()
             place_lower = place.lower()
-            if not place or pd.isna(r.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
+            if not place or pd.isna(
+                    r.iloc[0]) or ("fonte" in place_lower and "fonte boa"
+                                   not in place_lower) or "nota" in place_lower:
                 continue
             if place == "Brasil":
                 place = "Brazil"
@@ -133,7 +136,12 @@ def parse_raw_race_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
                     val_int = int(round(float(val)))
                 except (ValueError, TypeError):
                     continue
-                rows.append({"Ano": year, "Localidade": place, "Cor": cor, "Populacao": val_int})
+                rows.append({
+                    "Ano": year,
+                    "Localidade": place,
+                    "Cor": cor,
+                    "Populacao": val_int
+                })
     except Exception as e:
         logging.warning(f"Error parsing raw race XLS: {e}")
     return rows
@@ -146,9 +154,11 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
 
     for year, gcs_blob in year_files:
         basename = os.path.basename(gcs_blob)
-        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", basename)
+        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
+                                    "input_files", basename)
         alt_scratch = os.path.join("/data", "scratch", "input_files", basename)
-        local_path = scratch_file if os.path.isfile(scratch_file) else (alt_scratch if os.path.isfile(alt_scratch) else None)
+        local_path = scratch_file if os.path.isfile(scratch_file) else (
+            alt_scratch if os.path.isfile(alt_scratch) else None)
 
         if local_path:
             with open(local_path, "rb") as f:
@@ -164,7 +174,9 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
                 r = parse_raw_race_xls(content, year)
                 rows.extend(r)
             except Exception as e:
-                logging.warning(f"Could not load raw race file from GCS gs://{GCS_BUCKET_NAME}/{gcs_blob}: {e}")
+                logging.warning(
+                    f"Could not load raw race file from GCS gs://{GCS_BUCKET_NAME}/{gcs_blob}: {e}"
+                )
 
     return rows
 
@@ -186,7 +198,8 @@ def download_all_years(
 
         # 2. Primary Source: Live SIDRA API (Table 9605)
         raw_sidra = fetch_sidra_data(session, TABLE_9605_API_URL)
-        logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605.")
+        logging.info(
+            f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605.")
         for r in raw_sidra[1:]:
             val_str = r.get("V")
             if val_str in ["-", "...", "..", None, ""]:
@@ -219,27 +232,31 @@ def download_all_years(
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
-            logging.warning(f"Download failed ({e}). Falling back to cached copy: {target_path}")
+            logging.warning(
+                f"Download failed ({e}). Falling back to cached copy: {target_path}"
+            )
             return target_path
         logging.error(f"Download error: {e}")
-        raise RuntimeError(f"Error downloading Brazil Census race data: {e}") from e
+        raise RuntimeError(
+            f"Error downloading Brazil Census race data: {e}") from e
 
     if not all_rows:
         if fallback_to_cached and os.path.isfile(target_path):
             return target_path
         raise RuntimeError("No race records retrieved from data sources.")
 
-    df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "Cor"], keep="last")
+    df = pd.DataFrame(all_rows).drop_duplicates(
+        subset=["Ano", "Localidade", "Cor"], keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
 
     with tempfile.NamedTemporaryFile(
-        mode="w",
-        delete=False,
-        dir=target_dir,
-        suffix=".csv",
-        encoding="utf-8",
-        newline="",
+            mode="w",
+            delete=False,
+            dir=target_dir,
+            suffix=".csv",
+            encoding="utf-8",
+            newline="",
     ) as tmp_file:
         tmp_path = tmp_file.name
         df.to_csv(tmp_file, index=False, encoding="utf-8")
@@ -247,7 +264,8 @@ def download_all_years(
     if not os.path.isfile(tmp_path) or os.path.getsize(tmp_path) == 0:
         if os.path.isfile(tmp_path):
             os.remove(tmp_path)
-        raise RuntimeError(f"Atomic CSV write failed: {tmp_path} is missing or empty.")
+        raise RuntimeError(
+            f"Atomic CSV write failed: {tmp_path} is missing or empty.")
 
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
@@ -271,7 +289,8 @@ def main(argv: List[str]) -> None:
         )
         logging.info(f"Race download completed successfully: {saved_file}")
     except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census race data: {e}", exc_info=True)
+        logging.fatal(f"Fatal error downloading Brazil Census race data: {e}",
+                      exc_info=True)
 
 
 if __name__ == "__main__":

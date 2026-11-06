@@ -40,8 +40,7 @@ SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9952: População de 15 anos ou mais de idade por alfabetização e sexo (2022+ Census)
 TABLE_9952_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/9952/n1/all/n2/all/n3/all"
-    f"/v/950/p/all/c59/all/c2/all/c58/0/c2661/0/c1/0?formato=json"
-)
+    f"/v/950/p/all/c59/all/c2/all/c58/0/c2661/0/c1/0?formato=json")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_INPUT_FILE = "country/brazil/input_files/Brazil_1940_Literate.xls"
@@ -77,7 +76,8 @@ def get_robust_session() -> requests.Session:
     return session
 
 
-def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]]:
+def fetch_sidra_data(session: requests.Session,
+                     url: str) -> List[Dict[str, Any]]:
     """Fetches raw JSON payload from IBGE SIDRA REST API."""
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     logging.info(f"Dispatching outbound HTTP request: url={url}")
@@ -85,7 +85,8 @@ def fetch_sidra_data(session: requests.Session, url: str) -> List[Dict[str, Any]
     res.raise_for_status()
     raw_json = res.json()
     if not isinstance(raw_json, list) or len(raw_json) < 2:
-        raise RuntimeError(f"Invalid or empty response payload from SIDRA API: {url}")
+        raise RuntimeError(
+            f"Invalid or empty response payload from SIDRA API: {url}")
     return raw_json
 
 
@@ -109,26 +110,53 @@ def parse_raw_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
                 r = df.iloc[r_idx]
                 place = str(r.iloc[0]).strip()
                 place_lower = place.lower()
-                if not place or pd.isna(r.iloc[0]) or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower or "placename" in place_lower:
+                if not place or pd.isna(r.iloc[0]) or (
+                        "fonte" in place_lower and
+                        "fonte boa" not in place_lower
+                ) or "nota" in place_lower or "placename" in place_lower:
                     continue
                 if place == "Brasil":
                     place = "Brazil"
 
                 try:
                     tot_val = int(round(float(r.iloc[1])))
-                    rows.append({"Ano": 1940, "Localidade": place, "FaixaEtaria": "10 anos ou mais", "Raca": "Total", "StatusAlfabetizacao": "Total", "Sexo": sex, "Populacao": tot_val})
+                    rows.append({
+                        "Ano": 1940,
+                        "Localidade": place,
+                        "FaixaEtaria": "10 anos ou mais",
+                        "Raca": "Total",
+                        "StatusAlfabetizacao": "Total",
+                        "Sexo": sex,
+                        "Populacao": tot_val
+                    })
                 except (ValueError, TypeError):
                     pass
 
                 try:
                     lit_val = int(round(float(r.iloc[2])))
-                    rows.append({"Ano": 1940, "Localidade": place, "FaixaEtaria": "10 anos ou mais", "Raca": "Total", "StatusAlfabetizacao": "Alfabetizada", "Sexo": sex, "Populacao": lit_val})
+                    rows.append({
+                        "Ano": 1940,
+                        "Localidade": place,
+                        "FaixaEtaria": "10 anos ou mais",
+                        "Raca": "Total",
+                        "StatusAlfabetizacao": "Alfabetizada",
+                        "Sexo": sex,
+                        "Populacao": lit_val
+                    })
                 except (ValueError, TypeError):
                     pass
 
                 try:
                     illit_val = int(round(float(r.iloc[3])))
-                    rows.append({"Ano": 1940, "Localidade": place, "FaixaEtaria": "10 anos ou mais", "Raca": "Total", "StatusAlfabetizacao": "Analfabeta", "Sexo": sex, "Populacao": illit_val})
+                    rows.append({
+                        "Ano": 1940,
+                        "Localidade": place,
+                        "FaixaEtaria": "10 anos ou mais",
+                        "Raca": "Total",
+                        "StatusAlfabetizacao": "Analfabeta",
+                        "Sexo": sex,
+                        "Populacao": illit_val
+                    })
                 except (ValueError, TypeError):
                     pass
     except Exception as e:
@@ -139,16 +167,23 @@ def parse_raw_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
 def fetch_raw_input_files() -> List[Dict[str, Any]]:
     """Reads raw input files from GCS input_files or local scratch."""
     # 1. Try local input_files or scratch input_files
-    local_input = os.path.join(SCRIPT_DIR, "input_files", "Brazil_1940_Literate.xls")
-    scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_1940_Literate.xls")
-    alt_scratch = os.path.join("/data", "scratch", "input_files", "Brazil_1940_Literate.xls")
-    local_path = local_input if os.path.isfile(local_input) else (scratch_file if os.path.isfile(scratch_file) else (alt_scratch if os.path.isfile(alt_scratch) else None))
+    local_input = os.path.join(SCRIPT_DIR, "input_files",
+                               "Brazil_1940_Literate.xls")
+    scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
+                                "input_files", "Brazil_1940_Literate.xls")
+    alt_scratch = os.path.join("/data", "scratch", "input_files",
+                               "Brazil_1940_Literate.xls")
+    local_path = local_input if os.path.isfile(local_input) else (
+        scratch_file if os.path.isfile(scratch_file) else
+        (alt_scratch if os.path.isfile(alt_scratch) else None))
 
     if local_path:
         with open(local_path, "rb") as f:
             rows = parse_raw_literacy_xls(f.read())
             if rows:
-                logging.info(f"Parsed {len(rows)} rows from local raw literacy input file.")
+                logging.info(
+                    f"Parsed {len(rows)} rows from local raw literacy input file."
+                )
                 return rows
 
     # 2. Try GCS input_files
@@ -160,15 +195,19 @@ def fetch_raw_input_files() -> List[Dict[str, Any]]:
         content = blob.download_as_bytes()
         rows = parse_raw_literacy_xls(content)
         if rows:
-            logging.info(f"Parsed {len(rows)} rows from GCS raw literacy input file.")
+            logging.info(
+                f"Parsed {len(rows)} rows from GCS raw literacy input file.")
             return rows
     except Exception as e:
-        logging.warning(f"Could not load raw literacy file from GCS gs://{GCS_BUCKET_NAME}/{GCS_INPUT_FILE}: {e}")
+        logging.warning(
+            f"Could not load raw literacy file from GCS gs://{GCS_BUCKET_NAME}/{GCS_INPUT_FILE}: {e}"
+        )
 
     return []
 
 
-def parse_2010_illiterate_race_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
+def parse_2010_illiterate_race_xls(
+        content_bytes: bytes) -> List[Dict[str, Any]]:
     """Parses Brazil_2010_llliterate_race.xls across all sheets and municipalities."""
     sheet_race = {
         'tab3A': 'Total',
@@ -197,12 +236,15 @@ def parse_2010_illiterate_race_xls(content_bytes: bytes) -> List[Dict[str, Any]]
                 code_lower = code.lower()
                 if pd.isna(df.iloc[idx, 0]) or not code or code == "nan":
                     continue
-                if ("fonte" in code_lower and "fonte boa" not in code_lower) or "nota" in code_lower:
+                if ("fonte" in code_lower and
+                        "fonte boa" not in code_lower) or "nota" in code_lower:
                     continue
                 place = "Brazil" if code == "Brazil" else code
                 for c_idx, age in col_ages.items():
                     val = df.iloc[idx, c_idx]
-                    if pd.isna(val) or str(val).strip() in ["-", "...", "..", ""]:
+                    if pd.isna(val) or str(val).strip() in [
+                            "-", "...", "..", ""
+                    ]:
                         continue
                     try:
                         val_int = int(round(float(val)))
@@ -224,9 +266,13 @@ def parse_2010_illiterate_race_xls(content_bytes: bytes) -> List[Dict[str, Any]]
 
 def fetch_2010_illiterate_race() -> List[Dict[str, Any]]:
     """Loads Brazil_2010_llliterate_race.xls from scratch or GCS."""
-    scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_2010_llliterate_race.xls")
-    alt_scratch = os.path.join("/data", "scratch", "input_files", "Brazil_2010_llliterate_race.xls")
-    local_path = scratch_file if os.path.isfile(scratch_file) else (alt_scratch if os.path.isfile(alt_scratch) else None)
+    scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
+                                "input_files",
+                                "Brazil_2010_llliterate_race.xls")
+    alt_scratch = os.path.join("/data", "scratch", "input_files",
+                               "Brazil_2010_llliterate_race.xls")
+    local_path = scratch_file if os.path.isfile(scratch_file) else (
+        alt_scratch if os.path.isfile(alt_scratch) else None)
     if local_path:
         with open(local_path, "rb") as f:
             return parse_2010_illiterate_race_xls(f.read())
@@ -234,11 +280,13 @@ def fetch_2010_illiterate_race() -> List[Dict[str, Any]]:
         from google.cloud import storage
         client = storage.Client()
         bucket = client.bucket(GCS_BUCKET_NAME)
-        blob = bucket.blob("country/brazil/input_files/Brazil_2010_llliterate_race.xls")
+        blob = bucket.blob(
+            "country/brazil/input_files/Brazil_2010_llliterate_race.xls")
         content = blob.download_as_bytes()
         return parse_2010_illiterate_race_xls(content)
     except Exception as e:
-        logging.warning(f"Could not load Brazil_2010_llliterate_race.xls from GCS: {e}")
+        logging.warning(
+            f"Could not load Brazil_2010_llliterate_race.xls from GCS: {e}")
     return []
 
 
@@ -269,7 +317,9 @@ def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
         if code_col is None:
             for col_i in range(df.shape[1]):
                 for row_i in range(min(8, len(df))):
-                    if "código" in str(df.iloc[row_i, col_i]).lower() or "codigo" in str(df.iloc[row_i, col_i]).lower():
+                    if "código" in str(
+                            df.iloc[row_i, col_i]).lower() or "codigo" in str(
+                                df.iloc[row_i, col_i]).lower():
                         code_col = col_i
                         break
                 if code_col is not None:
@@ -278,12 +328,15 @@ def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
         for idx in range(len(df)):
             val0 = str(df.iloc[idx, 0]).strip()
             if val0 == "Total":
-                raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
+                raw_code = str(df.iloc[idx, code_col]).strip() if (
+                    code_col is not None and code_col < df.shape[1]) else ""
                 if raw_code and raw_code.isnumeric():
                     for c_idx, (age, status) in col_map.items():
                         if c_idx < df.shape[1]:
                             val = df.iloc[idx, c_idx]
-                            if pd.notna(val) and str(val).strip() not in ["-", "...", "..", ""]:
+                            if pd.notna(val) and str(val).strip() not in [
+                                    "-", "...", "..", ""
+                            ]:
                                 try:
                                     val_int = int(round(float(val)))
                                     rows.append({
@@ -300,10 +353,15 @@ def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
                 break
 
         for idx in range(muni_start, len(df)):
-            raw_code = str(df.iloc[idx, code_col]).strip() if (code_col is not None and code_col < df.shape[1]) else ""
-            place = raw_code if (raw_code and raw_code.isnumeric() and len(raw_code) == 7) else str(df.iloc[idx, 0]).strip()
+            raw_code = str(df.iloc[idx, code_col]).strip() if (
+                code_col is not None and code_col < df.shape[1]) else ""
+            place = raw_code if (raw_code and raw_code.isnumeric() and
+                                 len(raw_code) == 7) else str(
+                                     df.iloc[idx, 0]).strip()
             place_lower = place.lower()
-            if not place or pd.isna(df.iloc[idx, 0]) or place == "nan" or ("fonte" in place_lower and "fonte boa" not in place_lower) or "nota" in place_lower:
+            if not place or pd.isna(df.iloc[idx, 0]) or place == "nan" or (
+                    "fonte" in place_lower and
+                    "fonte boa" not in place_lower) or "nota" in place_lower:
                 continue
             for c_idx, (age, status) in col_map.items():
                 if c_idx >= df.shape[1]:
@@ -331,9 +389,12 @@ def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
 
 def parse_2000_literacy_files() -> List[Dict[str, Any]]:
     """Loads 2000 municipal literacy workbooks across all states from local scratch or GCS."""
-    scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files", "Brazil_2000_literacy_input")
-    alt_scratch = os.path.join("/data", "scratch", "input_files", "Brazil_2000_literacy_input")
-    local_dir = scratch_dir if os.path.isdir(scratch_dir) else (alt_scratch if os.path.isdir(alt_scratch) else None)
+    scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files",
+                               "Brazil_2000_literacy_input")
+    alt_scratch = os.path.join("/data", "scratch", "input_files",
+                               "Brazil_2000_literacy_input")
+    local_dir = scratch_dir if os.path.isdir(scratch_dir) else (
+        alt_scratch if os.path.isdir(alt_scratch) else None)
 
     rows: List[Dict[str, Any]] = []
     if local_dir:
@@ -348,7 +409,9 @@ def parse_2000_literacy_files() -> List[Dict[str, Any]]:
         from google.cloud import storage
         client = storage.Client()
         bucket = client.bucket(GCS_BUCKET_NAME)
-        blobs = list(bucket.list_blobs(prefix="country/brazil/input_files/Brazil_2000_literacy_input"))
+        blobs = list(
+            bucket.list_blobs(
+                prefix="country/brazil/input_files/Brazil_2000_literacy_input"))
         for b in blobs:
             if b.name.lower().endswith(".xls"):
                 rows.extend(parse_2000_literacy_xls(b.download_as_bytes()))
@@ -369,7 +432,8 @@ def download_all_years(
     try:
         # 1. Primary Source: Live SIDRA API (Table 9952)
         raw_sidra = fetch_sidra_data(session, TABLE_9952_API_URL)
-        logging.info(f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9952.")
+        logging.info(
+            f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9952.")
         for r in raw_sidra[1:]:
             val_str = r.get("V")
             if val_str in ["-", "...", "..", None, ""]:
@@ -427,27 +491,34 @@ def download_all_years(
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
-            logging.warning(f"Download failed ({e}). Falling back to cached copy: {target_path}")
+            logging.warning(
+                f"Download failed ({e}). Falling back to cached copy: {target_path}"
+            )
             return target_path
         logging.error(f"Download error: {e}")
-        raise RuntimeError(f"Error downloading Brazil Census literacy data: {e}") from e
+        raise RuntimeError(
+            f"Error downloading Brazil Census literacy data: {e}") from e
 
     if not all_rows:
         if fallback_to_cached and os.path.isfile(target_path):
             return target_path
         raise RuntimeError("No literacy records retrieved from data sources.")
 
-    df = pd.DataFrame(all_rows).drop_duplicates(subset=["Ano", "Localidade", "FaixaEtaria", "Raca", "StatusAlfabetizacao", "Sexo"], keep="last")
+    df = pd.DataFrame(all_rows).drop_duplicates(subset=[
+        "Ano", "Localidade", "FaixaEtaria", "Raca", "StatusAlfabetizacao",
+        "Sexo"
+    ],
+                                                keep="last")
     target_dir = os.path.dirname(os.path.abspath(target_path))
     os.makedirs(target_dir, exist_ok=True)
 
     with tempfile.NamedTemporaryFile(
-        mode="w",
-        delete=False,
-        dir=target_dir,
-        suffix=".csv",
-        encoding="utf-8",
-        newline="",
+            mode="w",
+            delete=False,
+            dir=target_dir,
+            suffix=".csv",
+            encoding="utf-8",
+            newline="",
     ) as tmp_file:
         tmp_path = tmp_file.name
         df.to_csv(tmp_file, index=False, encoding="utf-8")
@@ -455,7 +526,8 @@ def download_all_years(
     if not os.path.isfile(tmp_path) or os.path.getsize(tmp_path) == 0:
         if os.path.isfile(tmp_path):
             os.remove(tmp_path)
-        raise RuntimeError(f"Atomic CSV write failed: {tmp_path} is missing or empty.")
+        raise RuntimeError(
+            f"Atomic CSV write failed: {tmp_path} is missing or empty.")
 
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
@@ -470,12 +542,12 @@ def _write_rates_atomically(combined: pd.DataFrame, rates_out: str) -> None:
     out_dir = os.path.dirname(os.path.abspath(rates_out))
     os.makedirs(out_dir, exist_ok=True)
     with tempfile.NamedTemporaryFile(
-        mode="w",
-        delete=False,
-        dir=out_dir,
-        suffix=".csv",
-        encoding="utf-8",
-        newline="",
+            mode="w",
+            delete=False,
+            dir=out_dir,
+            suffix=".csv",
+            encoding="utf-8",
+            newline="",
     ) as tmp_file:
         tmp_path = tmp_file.name
         combined.to_csv(tmp_file, index=False, encoding="utf-8")
@@ -484,12 +556,15 @@ def _write_rates_atomically(combined: pd.DataFrame, rates_out: str) -> None:
 
 def ensure_literacy_rates_file(rates_out: Optional[str] = None) -> None:
     """Ensures fractional literacy rate observations (2000 & 2010) are generated."""
-    target_rates = rates_out or os.path.join(SCRIPT_DIR, "brazil_literacy_rates.csv")
+    target_rates = rates_out or os.path.join(SCRIPT_DIR,
+                                             "brazil_literacy_rates.csv")
     if os.path.isfile(target_rates) and os.path.getsize(target_rates) > 1000000:
         return
-    scratch_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files")
+    scratch_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
+                                "input_files")
     alt_base = os.path.join("/data", "scratch", "input_files")
-    golden_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "golden_output_files")
+    golden_base = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
+                               "golden_output_files")
     for base in [scratch_base, alt_base, golden_base]:
         if os.path.isdir(base):
             p1 = os.path.join(base, "Brazil_2000_2010_Illiterate_age.csv")
@@ -501,14 +576,16 @@ def ensure_literacy_rates_file(rates_out: Optional[str] = None) -> None:
                 combined = pd.concat([df1, df2_rates], ignore_index=True)
                 combined["scalingFactor"] = 100
                 _write_rates_atomically(combined, target_rates)
-                logging.info(f"Generated {len(combined)} rows in {target_rates}")
+                logging.info(
+                    f"Generated {len(combined)} rows in {target_rates}")
                 return
 
     try:
         from google.cloud import storage
         client = storage.Client()
         bucket = client.bucket(GCS_BUCKET_NAME)
-        b1 = bucket.blob("country/brazil/input_files/Brazil_2000_2010_Illiterate_age.csv")
+        b1 = bucket.blob(
+            "country/brazil/input_files/Brazil_2000_2010_Illiterate_age.csv")
         b2 = bucket.blob("country/brazil/input_files/Brazil_2000_literate.csv")
         df1 = pd.read_csv(io.BytesIO(b1.download_as_bytes()))
         df2 = pd.read_csv(io.BytesIO(b2.download_as_bytes()))
@@ -516,12 +593,16 @@ def ensure_literacy_rates_file(rates_out: Optional[str] = None) -> None:
         combined = pd.concat([df1, df2_rates], ignore_index=True)
         combined["scalingFactor"] = 100
         _write_rates_atomically(combined, target_rates)
-        logging.info(f"Generated {len(combined)} rows in {target_rates} from GCS")
+        logging.info(
+            f"Generated {len(combined)} rows in {target_rates} from GCS")
     except Exception as e:
         if os.path.isfile(target_rates) and os.path.getsize(target_rates) > 0:
-            logging.warning(f"Could not regenerate {target_rates} from GCS ({e}); using existing file.")
+            logging.warning(
+                f"Could not regenerate {target_rates} from GCS ({e}); using existing file."
+            )
             return
-        raise RuntimeError(f"Could not generate {target_rates} from GCS: {e}") from e
+        raise RuntimeError(
+            f"Could not generate {target_rates} from GCS: {e}") from e
 
 
 def main(argv: List[str]) -> None:
@@ -540,7 +621,9 @@ def main(argv: List[str]) -> None:
         )
         logging.info(f"Literacy download completed successfully: {saved_file}")
     except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census literacy data: {e}", exc_info=True)
+        logging.fatal(
+            f"Fatal error downloading Brazil Census literacy data: {e}",
+            exc_info=True)
 
 
 if __name__ == "__main__":

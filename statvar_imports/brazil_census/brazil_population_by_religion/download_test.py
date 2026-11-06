@@ -66,7 +66,9 @@ class DownloadTest(unittest.TestCase):
         session = MagicMock()
         mock_response = MagicMock()
         mock_payload = [
-            {"NC": "Nível Territorial"},
+            {
+                "NC": "Nível Territorial"
+            },
             {
                 "NC": "1",
                 "D1N": "Brasil",
@@ -109,21 +111,19 @@ class DownloadTest(unittest.TestCase):
         ]
 
         out_csv = os.path.join(self.test_dir, "output.csv")
-        saved_file = download_all_years(
-            session=session, output_file=out_csv, fallback_to_cached=False
-        )
+        saved_file = download_all_years(session=session,
+                                        output_file=out_csv,
+                                        fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
 
         df = pd.read_csv(saved_file)
         self.assertEqual(len(df), 4)
-        self.assertEqual(
-            list(df.columns), ["Ano", "Localidade", "Religiao", "Populacao"]
-        )
+        self.assertEqual(list(df.columns),
+                         ["Ano", "Localidade", "Religiao", "Populacao"])
         self.assertIn(1940, df["Ano"].values)
         self.assertIn(2022, df["Ano"].values)
         self.assertFalse(
-            ((df["Ano"] == 2022) & (df["Religiao"] == "Total")).any()
-        )
+            ((df["Ano"] == 2022) & (df["Religiao"] == "Total")).any())
 
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
     def test_download_empty_response_raises(self, _mock_raw_input):
@@ -136,23 +136,22 @@ class DownloadTest(unittest.TestCase):
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         with self.assertRaises(RuntimeError):
-            download_all_years(
-                session=session, output_file=out_csv, fallback_to_cached=False
-            )
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
 
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
     def test_download_network_failure_raises(self, _mock_raw_input):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
-            "Connection timed out"
-        )
+            "Connection timed out")
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         with self.assertRaises(RuntimeError):
-            download_all_years(
-                session=session, output_file=out_csv, fallback_to_cached=False
-            )
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
 
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
     def test_download_fallback_to_cached(self, _mock_raw_input):
@@ -162,11 +161,12 @@ class DownloadTest(unittest.TestCase):
 
         cached_csv = os.path.join(self.test_dir, "cached.csv")
         with open(cached_csv, "w", encoding="utf-8") as f:
-            f.write("Ano,Localidade,Religiao,Populacao\n1940,Brazil,Total,100\n")
+            f.write(
+                "Ano,Localidade,Religiao,Populacao\n1940,Brazil,Total,100\n")
 
-        saved = download_all_years(
-            session=session, output_file=cached_csv, fallback_to_cached=True
-        )
+        saved = download_all_years(session=session,
+                                   output_file=cached_csv,
+                                   fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
 
