@@ -1,0 +1,35 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCBI_Gene",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.ncbi.nlm.nih.gov/gene",
+            "provenance_description": "NCBI_Gene  hosts the Gene database provided by the National Center for Biotechnology Information (NCBI). This database integrates gene information across many species, including nomenclature, Reference Sequences (RefSeqs), maps, pathways, variations, and phenotypes",
+            "scripts": [
+                "download.sh",
+                "scripts/format_ncbi_gene.py --root=$PWD"
+                
+                
+                
+            ],
+            "source_files": [
+                "input/*.txt",
+                "input/gene2accession/*.txt",
+                "input/gene2go/*.txt",
+                "input/gene_info/*.txt",
+                "input/gene_neighbors/*.txt"
+            ],
+            "import_inputs": [
+                {
+                    "cleaned_csv": ["output/*.csv","output/gene2accession/*.csv","output/gene2go/*.csv","output/gene_info/*.csv","output/gene_neighbors/*.csv"],
+	                "node_mcf": "hg38_genome_assembly.mcf"
+
+                }
+            ],
+            
+            "cron_schedule": "0 0 1 * *"
+        }
+    ]
+}
