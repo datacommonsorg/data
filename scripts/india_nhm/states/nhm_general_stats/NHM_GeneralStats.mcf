@@ -1,0 +1,42 @@
+Node: dcid:Count_Inpatient
+description: "Number of Inpatients"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Inpatient
+statType: dcs:measuredValue
+
+Node: dcid:Count_Outpatient
+description: "Number of Outpatients"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Outpatient
+statType: dcs:measuredValue
+
+Node: dcid:Count_SurgicalProcedure_Major
+description: "Number of Major Surgeries"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_SurgicalProcedure_Major
+statType: dcs:measuredValue
+
+Node: dcid:Count_SurgicalProcedure_Minor
+description: "Number of Minor Surgeries"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_SurgicalProcedure_Minor
+statType: dcs:measuredValue
+
+Node: dcid:Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient
+description: "Percent of Inpatient Deaths to Total Inpatients"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient
+statType: dcs:measuredValue
+
+Node: dcid:Count_Outpatient_Ayush
+description: "Number of Outpatients - AYUSH (Ayurveda, Yoga and Naturopathy, Unani, Siddha and Homeopathy)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Outpatient_Ayush
+statType: dcs:measuredValue
+
