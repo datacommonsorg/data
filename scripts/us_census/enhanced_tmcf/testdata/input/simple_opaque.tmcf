@@ -10,9 +10,16 @@ name: C:T->NAME
 footnote: C:T->GEO_ID_F
 
 Node: E:T->E1
+typeOf: dcs:StatisticalVariable
+statType: measuredValue
+dcid: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
+name: T:ESTAB?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
+populationType: schema:Thing
+measuredProperty: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+
+Node: E:T->E2
 typeOf: schema:StatVarObservation
-name: Number of establishments
 value: C:T->ESTAB
-variableMeasured: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+variableMeasured: E:T->E1
 observationAbout: E:T->E0
 observationDate: C:T->YEAR
