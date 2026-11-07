@@ -1,0 +1,9 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+SAT,populationType,Student,measuredProperty,count,value,{Number},assessmentType,ScholasticAssessmentTest,unit,Percent,measurementDenominator,-assessmentType,,
+ACT,populationType,Student,measuredProperty,count,value,{Number},assessmentType,AmericanCollegeTesting,unit,Percent,measurementDenominator,-assessmentType,,
+PSAT,populationType,Student,measuredProperty,count,value,{Number},assessmentType,PreliminaryScholasticAssessmentTest,unit,Percent,measurementDenominator,-assessmentType,,
+STATE_SAT,populationType,Student,measuredProperty,count,value,{Number},assessmentType,StateScholasticAssessmentTest,unit,Percent,measurementDenominator,-assessmentType,,
+STATE_ACT,populationType,Student,measuredProperty,count,value,{Number},assessmentType,StateAmericanCollegeTesting,unit,Percent,measurementDenominator,-assessmentType,,
+STATE_PSAT,populationType,Student,measuredProperty,count,value,{Number},assessmentType,StatePreliminaryScholasticAssessmentTest,unit,Percent,measurementDenominator,-assessmentType,,
+Year,observationDate,{Number},,,,,,,,,,,,
