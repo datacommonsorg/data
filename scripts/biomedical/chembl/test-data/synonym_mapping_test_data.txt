@@ -1,0 +1,198 @@
+1	Acetyl-DL-carnitine
+1	acetylcarnitine
+1	DL-O-Acetylcarnitine
+1	DL-Acetylcarnitine
+1	3-acetyloxy-4-(trimethylazaniumyl)butanoate
+1	3-(acetyloxy)-4-(trimethylazaniumyl)butanoate
+1	14992-62-2
+1	Ammonium, (3-carboxy-2-hydroxypropyl)trimethyl-, hydroxide, inner salt, acetate, DL-
+1	1-Propanaminium, 2-(acetyloxy)-3-carboxy-N,N,N-trimethyl-, inner salt
+1	870-77-9
+1	(+/-)-acetylcarnitine
+1	bmse000142
+1	SCHEMBL69781
+1	DTXSID2048117
+1	CHEBI:73024
+1	LMFA07070060
+1	1-Propanaminium, 2-(acetoxy)-3-carboxy-N,N,N-trimethyl-, hydroxide, inner salt, (+-)-
+1	AS-82719
+1	HY-126358
+1	3-(acetyloxy)-4-(trimethylammonio)butanoate
+1	CS-0102945
+1	FT-0778235
+1	Q27140241
+1	1-Propanaminium, 2-(acetoxy)-3-carboxy-N,N,N-trimethyl-, hydroxide, inner salt, (+-)- (9CI)
+2	1-Propanaminium, 2-(acetyloxy)-3-carboxy-N,N,N-trimethyl-, inner salt
+2	SCHEMBL3259109
+2	CHEMBL1625375
+2	ALBB-032444
+2	AKOS024284761
+2	MCULE-4252227019
+2	3-Acetoxy-4-(trimethylaminio)butanoic acid
+2	5080-50-2
+2	992A622
+2	R-(-)-2-ACETOXY-3-CARBOXY-N,N,N-TRIMETHYL-1-PROPANAMINIUM HYDROCHLORIDE
+3	5,6-dihydroxycyclohexa-1,3-diene-1-carboxylic acid
+3	2,3-dihydroxy-2,3-dihydrobenzoic acid
+3	100459-00-5
+3	2,3-dihydro-2,3-dihydroxybenzoic acid
+3	SCHEMBL638361
+3	CHEBI:15941
+3	DTXSID30274252
+3	Q27098309
+4	1-Aminopropan-2-ol
+4	1-AMINO-2-PROPANOL
+4	78-96-6
+4	Isopropanolamine
+4	Monoisopropanolamine
+4	Amino-2-propanol
+4	Threamine
+4	2-Propanol, 1-amino-
+4	2-Hydroxypropylamine
+4	Mipa
+4	1-Methyl-2-aminoethanol
+4	2-Hydroxypropanamine
+4	2-Amino-1-methylethanol
+4	DL-1-Amino-2-propanol
+4	1-Amino-2-hydroxypropane
+4	2-Hydroxy-1-propylamine
+4	Mono-iso-propanolamine
+4	(+/-)-1-Amino-2-propanol
+4	alpha-Aminoisopropyl alcohol
+4	1-amino-propan-2-ol
+4	.alpha.-Aminoisopropyl alcohol
+4	CCRIS 2284
+4	HSDB 5224
+4	(+/-)-Isopropanolamine
+4	AI3-14653
+4	NSC 3188
+4	(RS)-1-amino-2-propanol
+4	beta-Aminoisopropanol
+4	(RS)-1-Amino-2-hydroxypropane
+4	D-1-amino-2-propanol
+4	D-1-aminopropan-2-ol
+4	2-Hydroxy-1-propanamine
+4	MFCD00008139
+4	CHEBI:19030
+4	DL-Isopropanolamine
+4	2-Propanol, 1-amino- (8CI,9CI)
+4	1674-56-2
+4	2-Propanol, 1-amino-, (.+/-.)-
+4	UNII-UE40BY1BZW
+4	EINECS 201-162-7
+4	BRN 0605275
+4	2-Propanol, 1-amino-, (R)-
+4	2-Propanol, 1-amino-, (S)-
+4	UE40BY1BZW
+4	Aminopropan-2-ol
+4	1-amino-2 propanol
+4	3-amino-2-propanol
+4	3-aminopropan-2-ol
+4	2-hydroxy-propylamine
+4	2-hydroxypropyl-amine
+4	1-Aminoisopropylalcohol
+4	1-Aminopropanol-(2)
+4	1-amino-propane-2-ol
+4	1-Amin-iso-proylalcohol
+4	rac-1-amino-2-propanol
+4	2-hydroxy-1-aminopropane
+4	DSSTox_CID_1764
+4	Amino-2-propanol, 93%
+4	bmse000305
+4	EC 201-162-7
+4	(rac)-1-amino-2-propanol
+4	racemic 1-amino-2-propanol
+4	1-amino-2(R,S)-propanol
+4	DSSTox_RID_76313
+4	WLN: Z1YQ1
+4	DSSTox_GSID_21764
+4	(2rs)-1-amino-2-propanol
+4	1-amino-2-Hydroxypropanamine
+4	(+-)-1-amino-2-propanol
+4	4-04-00-01665 (Beilstein Handbook Reference)
+4	(2RS) 1-amino-2-propanol
+4	2-hydroxy-2-methyl-ethylamine
+4	CHEMBL326602
+4	DTXSID9021764
+4	NSC3188
+4	(.+/-.)-1-Amino-2-propanol
+4	ACT02864
+4	BCP08083
+4	NSC-3188
+4	Tox21_301704
+4	BBL027685
+4	DL-1-Amino-2-propanol, >=90%
+4	STL308732
+4	AKOS000120495
+4	AKOS016042334
+4	CS-W016685
+4	HY-W015969
+4	MCULE-6406041538
+4	SB44651
+4	SB44696
+4	CAS-78-96-6
+4	NCGC00257540-01
+4	SY002691
+4	DB-013106
+4	A0406
+4	A5358
+4	AM20100779
+4	FT-0605031
+4	FT-0605237
+4	FT-0625381
+4	C05771
+4	(+/-)-1-Amino-2-propanol, analytical standard
+4	Q161580
+4	J-660020
+4	F2190-0369
+4	Z966690934
+4	(?)-1-Amino-2-propanol, 94%, remainder 2-amino-1-propanol
+4	(^+)-1-Amino-2-propanol, 94%, remainder 2-amino-1-propanol
+5	3-Amino-2-oxopropyl phosphate
+5	3-amino-2-oxopropyl dihydrogen phosphate
+5	1-Amino-3-(phosphohydroxy)propan-2-one
+5	205189-34-0
+5	(3-amino-2-oxopropyl) dihydrogen phosphate
+5	2-Propanone, 1-amino-3-(phosphonooxy)- (9CI)
+5	CHEBI:1449
+5	SCHEMBL1065797
+5	DTXSID90274253
+5	2-propanone, 1-amino-3-(phosphonooxy)-
+5	Q27105460
+6	1-chloro-2,4-dinitrobenzene
+6	2,4-Dinitrochlorobenzene
+6	97-00-7
+6	Dinitrochlorobenzene
+6	DNCB
+6	Chlorodinitrobenzene
+6	CDNB
+6	4-Chloro-1,3-dinitrobenzene
+6	2,4-Dinitrophenyl chloride
+6	Benzene, 1-chloro-2,4-dinitro-
+6	Dinitrochlorobenzol
+6	1,3-Dinitro-4-chlorobenzene
+6	2,4-Dinitro-1-chlorobenzene
+6	6-Chloro-1,3-dinitrobenzene
+6	1-Chloro-2,4-dinitrobenzol
+6	ClDNB
+6	DNPCl
+6	1-Chlor-2,4-dinitrobenzene
+6	1-Cloro-2,4-dinitrobenzene
+6	1-Chloor-2,4-dinitrobenzeen
+6	1-chloro-2,4-dinitro-benzene
+6	UNII-GE3IBT7BMN
+6	CHEBI:34718
+6	NSC 6292
+6	GE3IBT7BMN
+6	NSC-6292
+6	2,4-dinitro chlorobenzene
+6	NSC6292
+6	DSSTox_CID_278
+6	DSSTox_RID_75481
+6	DSSTox_GSID_20278
+6	1-Chlor-2,4-dinitrobenzol
+6	Caswell No. 389C
+6	Dinitrochlorobenzene (VAN)
+6	CAS-97-00-7
+6	SMR000857169
+6	CCRIS 1799
