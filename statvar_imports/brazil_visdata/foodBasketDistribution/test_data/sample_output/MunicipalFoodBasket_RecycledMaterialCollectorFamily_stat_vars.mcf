@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/FoodBasketDistribution/test_data/sample_input/MunicipalFoodBasket_RecycledMaterialCollectorFamily_data.csv --pv_map=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/FoodBasketDistribution/test_data/sample_input/MunicipalFoodBasket_RecycledMaterialCollectorFamily_pvmap.csv --config=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/FoodBasketDistribution/test_data/sample_input/MunicipalFoodBasket_RecycledMaterialCollectorFamily_metadata.csv --output_path=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/FoodBasketDistribution/test_data/sample_output/MunicipalFoodBasket_RecycledMaterialCollectorFamily" on 2024-06-05 09:37:56.668305
-
 Node: dcid:Amount_Food_RecyclableMaterialCollectorsFamily
 typeOf: dcid:StatisticalVariable
 name: "Kilograms of food delivered to families collecting recyclable material"

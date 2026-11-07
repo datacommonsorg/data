@@ -1,0 +1,9 @@
+Node: dcid:CumulativeCount_Household_BrazilRuralDevelopmentProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of families benefiting from the Rural Development Program (Accumulated)"
+populationType: dcid:Household
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Nº total de famílias beneficiárias do Programa Fomento Rural (Acumulado)"
+benefitProgram: dcid:Brazil_RuralDevelopmentProgram
+
