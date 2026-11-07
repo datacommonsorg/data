@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,scalingFactor,observationPeriod,measurementQualifier,unit
+country/BRA,2022-01,1600,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-02,1600,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-03,40000,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-04,647400,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-05,1082600,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-06,1156800,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-07,1294400,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-08,1391600,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-09,1402400,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-10,1443200,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-11,1467600,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
+country/BRA,2022-12,1468200,dcid:Amount_Person_BrazilRuralProductiveInclusionAidProgram,,P1M,Monthly,BRL
