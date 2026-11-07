@@ -170,6 +170,12 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
                 if iso == 'USA':
                     return pd.DataFrame({
                         'iso3_country': ['USA', 'USA'],
+                        'sector': ['agriculture', 'transportation'],
+                        'subsector': ['cropland-fires', 'domestic-shipping'],
+                        'start_time': [
+                            '2020-01-01 00:00:00',
+                            '2020-01-01 00:00:00',
+                        ],
                         'gas': [gas, gas],
                         'emissions_quantity': [1e-7, 0.0],
                     })
@@ -192,6 +198,16 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
                     content = f.read()
                 self.assertIn("0.0000001", content)
                 self.assertNotIn("1e-07", content)
+
+            ghg_csv_path = os.path.join(output_dir,
+                                        "greenhousegas_co2e_100yr.csv")
+            self.assertTrue(os.path.exists(ghg_csv_path))
+            ghg_df = pd.read_csv(ghg_csv_path, dtype=str)
+            self.assertIn("co2e_100yr", set(ghg_df["gas"]))
+            self.assertIn("sector_agriculture", set(ghg_df["gas"]))
+            self.assertIn("sector_maritime", set(ghg_df["gas"]))
+            self.assertIn("subsector_cropland-fires", set(ghg_df["gas"]))
+            self.assertIn("subsector_shipping", set(ghg_df["gas"]))
 
             mock_session.__exit__.assert_called_once()
 

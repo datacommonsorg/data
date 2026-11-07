@@ -103,6 +103,119 @@ def _format_emission(x):
         return ''
 
 
+# Legacy OldAPI categories that combine multiple v7 subsectors.
+LEGACY_COMPOSITE_GROUPS = {
+    "sector_maritime": [
+        "domestic-shipping",
+        "international-shipping",
+        "non-broadcasting-vessels",
+    ],
+    "subsector_shipping": [
+        "domestic-shipping",
+        "international-shipping",
+        "non-broadcasting-vessels",
+    ],
+    "subsector_aviation": ["domestic-aviation", "international-aviation"],
+    "subsector_wastewater-treatment-and-discharge": [
+        "domestic-wastewater-treatment-and-discharge",
+        "industrial-wastewater-treatment-and-discharge",
+    ],
+    "subsector_residential-commercial-onsite-heating": [
+        "residential-onsite-fuel-usage",
+        "non-residential-onsite-fuel-usage",
+    ],
+    "subsector_manure-management": [
+        "manure-left-on-pasture-cattle",
+        "manure-management-cattle-operation",
+        "manure-management-other",
+    ],
+    "subsector_managed-soils": [
+        "crop-residues",
+        "manure-applied-to-soils",
+        "other-agricultural-soil-emissions",
+        "synthetic-fertilizer-application",
+    ],
+    "subsector_enteric-fermentation": [
+        "enteric-fermentation-cattle-operation",
+        "enteric-fermentation-cattle-pasture",
+        "enteric-fermentation-other",
+    ],
+}
+
+
+def generate_greenhousegas_input(co2e_100yr_df, output_dir):
+    """Generates pre-aggregated greenhousegas_co2e_100yr.csv for GreenhouseGas StatVars."""
+    required_cols = {
+        'iso3_country', 'sector', 'subsector', 'start_time',
+        'emissions_quantity'
+    }
+    if not required_cols.issubset(co2e_100yr_df.columns):
+        logging.warning(
+            "Skipping greenhousegas_co2e_100yr.csv generation; missing required columns."
+        )
+        return
+
+    df = co2e_100yr_df[list(required_cols)].copy()
+    df['val'] = pd.to_numeric(df['emissions_quantity'], errors='coerce')
+    df = df.dropna(subset=['iso3_country', 'start_time', 'val'])
+
+    # 1. Country total, 2. Sector totals, 3. Subsector totals
+    total_grp = df.groupby(['iso3_country', 'start_time'],
+                           as_index=False)['val'].sum()
+    total_grp['gas'] = 'co2e_100yr'
+
+    sec_grp = df.groupby(['iso3_country', 'start_time', 'sector'],
+                         as_index=False)['val'].sum()
+    sec_grp['gas'] = 'sector_' + sec_grp['sector'].astype(str)
+
+    sub_grp = df.groupby(['iso3_country', 'start_time', 'subsector'],
+                         as_index=False)['val'].sum()
+    sub_grp['gas'] = 'subsector_' + sub_grp['subsector'].astype(str)
+
+    records = [
+        total_grp[['iso3_country', 'start_time', 'gas', 'val']],
+        sec_grp[['iso3_country', 'start_time', 'gas', 'val']],
+        sub_grp[['iso3_country', 'start_time', 'gas', 'val']],
+    ]
+
+    # 4. Multi-subsector legacy rollups
+    for gas_key, sub_list in LEGACY_COMPOSITE_GROUPS.items():
+        comp_df = df[df['subsector'].isin(sub_list)]
+        if not comp_df.empty:
+            comp_grp = comp_df.groupby(['iso3_country', 'start_time'],
+                                       as_index=False)['val'].sum()
+            comp_grp['gas'] = gas_key
+            records.append(
+                comp_grp[['iso3_country', 'start_time', 'gas', 'val']])
+
+    out_df = pd.concat(records, ignore_index=True)
+    out_df['sector'] = ''
+    out_df['subsector'] = ''
+    out_df['end_time'] = ''
+    out_df['emissions_quantity'] = out_df['val'].apply(_format_emission)
+    out_df = out_df[[
+        'iso3_country', 'sector', 'subsector', 'start_time', 'end_time', 'gas',
+        'emissions_quantity'
+    ]]
+
+    ghg_output_filename = os.path.join(output_dir,
+                                       "greenhousegas_co2e_100yr.csv")
+    ghg_temp_filename = f"{ghg_output_filename}.tmp"
+    try:
+        out_df.to_csv(ghg_temp_filename, index=False)
+        os.replace(ghg_temp_filename, ghg_output_filename)
+        logging.info(
+            f"  -> Successfully created {ghg_output_filename} with {len(out_df)} rows.\n"
+        )
+    except Exception:
+        if os.path.exists(ghg_temp_filename):
+            try:
+                os.remove(ghg_temp_filename)
+            except OSError:
+                pass
+        raise
+
+
 def download_and_segregate_by_gas():
     """
     Generates a fresh list of country download URLs and then downloads all
@@ -236,6 +349,8 @@ def download_and_segregate_by_gas():
                 logging.info(
                     f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n"
                 )
+                if gas == "co2e_100yr":
+                    generate_greenhousegas_input(final_df, output_dir)
             except Exception as e:
                 if os.path.exists(temp_filename):
                     try:
