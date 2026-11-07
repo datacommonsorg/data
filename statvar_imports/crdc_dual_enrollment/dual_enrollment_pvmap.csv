@@ -1,0 +1,23 @@
+key,,,,,,,,,,,,
+COMBOKEY,#Format,observationAbout=nces/{Data:0>12},statType,measuredValue,#Filter,Allow=int(value) >= 0,,,,,,
+Year,observationDate,{Number},,,,,,,,,,
+SCH_DUALENR_HI_M,populationType,Student,measuredProperty,count,gender,Male,ethnicity,HispanicOrLatino,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_HI_F,populationType,Student,measuredProperty,count,gender,Female,ethnicity,HispanicOrLatino,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_AM_M,populationType,Student,measuredProperty,count,gender,Male,race,AmericanIndianOrAlaskaNative,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_AM_F,populationType,Student,measuredProperty,count,gender,Female,race,AmericanIndianOrAlaskaNative,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_AS_M,populationType,Student,measuredProperty,count,gender,Male,race,Asian,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_AS_F,populationType,Student,measuredProperty,count,gender,Female,race,Asian,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_HP_M,populationType,Student,measuredProperty,count,gender,Male,race,NativeHawaiianOrPacificIslander,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_HP_F,populationType,Student,measuredProperty,count,gender,Female,race,NativeHawaiianOrPacificIslander,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_BL_M,populationType,Student,measuredProperty,count,gender,Male,race,AfricanAmerican,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_BL_F,populationType,Student,measuredProperty,count,gender,Female,race,AfricanAmerican,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_WH_M,populationType,Student,measuredProperty,count,gender,Male,race,White,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_WH_F,populationType,Student,measuredProperty,count,gender,Female,race,White,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_TR_M,populationType,Student,measuredProperty,count,gender,Male,race,TwoOrMoreRaces,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_TR_F,populationType,Student,measuredProperty,count,gender,Female,race,TwoOrMoreRaces,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_LEP_M,populationType,Student,measuredProperty,count,gender,Male,englishProficiency,LimitedEnglishProficient,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_EL_M,populationType,Student,measuredProperty,count,gender,Male,englishProficiency,LimitedEnglishProficient,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_LEP_F,populationType,Student,measuredProperty,count,gender,Female,englishProficiency,LimitedEnglishProficient,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_EL_F,populationType,Student,measuredProperty,count,gender,Female,englishProficiency,LimitedEnglishProficient,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_IDEA_M,populationType,Student,measuredProperty,count,gender,Male,disabilityStatus,WithDisability,educationalProgram,DualEnrollment,value,{Number}
+SCH_DUALENR_IDEA_F,populationType,Student,measuredProperty,count,gender,Female,disabilityStatus,WithDisability,educationalProgram,DualEnrollment,value,{Number}
