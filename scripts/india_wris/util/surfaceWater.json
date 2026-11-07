@@ -2,99 +2,69 @@
     {
         "Pollutant": [
             {
-                "name": "Aluminium (Al)",
+                "name": "Aluminium",
                 "statvar": "Aluminium",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Arsenic (As)",
+                "name": "Arsenic (mg/L)",
                 "statvar": "Arsenic",
                 "unit": "MicrogramsPerLitre"
             },
             {
-                "name": "cyanides (CN)",
-                "statvar": "Cyanide",
-                "unit": "MicrogramsPerLitre"
-            },
-            {
-                "name": "Carbonate (CO3)",
+                "name": "Carbonate (mg/L)",
                 "statvar": "Carbonate",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Calcium (Ca)",
+                "name": "Calcium (mg/L)",
                 "statvar": "Calcium",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Chloride (Cl)",
+                "name": "Chloride (mg/L)",
                 "statvar": "Chloride",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Fluorine (F)",
-                "statvar": "Fluorine",
-                "unit": "MilligramsPerLitre"
-            },
-            {
-                "name": "Iron (Fe)",
+                "name": "Iron (mg/L)",
                 "statvar": "Iron",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Hydrogencarbonate (HCO3)",
-                "statvar": "HydrogenCarbonate",
-                "unit": "MilligramsPerLitre"
-            },
-            {
-                "name": "Mercury (Hg)",
+                "name": "Mercury (mg/L)",
                 "statvar": "Mercury",
                 "unit": "MicrogramsPerLitre"
             },
             {
-                "name": "Potassium (K)",
+                "name": "Potassium (mg/L)",
                 "statvar": "Potassium",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Magnesium (Mg)",
+                "name": "Magnesium (mg/L)",
                 "statvar": "Magnesium",
                 "unit": "MilligramsPerLitre",
                 "property": "Pollutant"
             },
             {
-                "name": "ammonia (NH3)",
-                "statvar": "Ammonia",
-                "unit": "MilligramsPerLitre"
-            },
-            {
-                "name": "Nitrate (NO3)",
+                "name": "Nitrate (mg/L)",
                 "statvar": "Nitrate",
                 "unit": "MilligramsPerLitre"
             },
             {
-                "name": "Lead (Pb)",
+                "name": "Lead (mg/L)",
                 "statvar": "Lead",
                 "unit": "MicrogramsPerLitre",
                 "property": "Pollutant"
             },
             {
-                "name": "Silver (Ag)",
+                "name": "Silver (mg/L)",
                 "statvar": "Silver",
                 "unit": "MicrogramsPerLitre"
             },
             {
-                "name": "Sulfate (SO4)",
-                "statvar": "Sulfate",
-                "unit": "MilligramsPerLitre"
-            },
-            {
-                "name": "Silicon dioxide (SiO2)",
-                "statvar": "SiliconDioxide",
-                "unit": "MilligramsPerLitre"
-            },
-            {
-                "name": "Zinc (Zn)",
+                "name": "Zinc (mg/L)",
                 "statvar": "Zinc",
                 "unit": "MicrogramsPerLitre"
             }
@@ -103,25 +73,25 @@
     {
         "ChemicalProperty": [
             {
-                "name": "Disolved Oxygen (DO)",
+                "name": "Dissolved Oxygen1 (mg/L)",
                 "statvar": "DissolvedOxygen",
                 "unit": "MilligramsPerLitre",
                 "dcid": "dissolvedOxygen"
             },
             {
-                "name": "Electrical Conductivity",
+                "name": "Electrical Conductivity Field",
                 "statvar": "ElectricalConductivity",
                 "unit": "",
                 "dcid": "electricalConductivity"
             },
             {
-                "name": "Hardness Total",
+                "name": "Total Hardness (mg/L)",
                 "statvar": "WaterHardness",
                 "unit": "MilligramsCaCO3PerLitre",
                 "dcid": "waterHardness"
             },
             {
-                "name": "Alkalinity Total",
+                "name": "Total Alkalinity (mg/L)",
                 "statvar": "WaterAlkalinity",
                 "unit": "MilligramsCaCO3PerLitre",
                 "dcid": "waterAlkalinity"
@@ -133,22 +103,16 @@
                 "dcid": "residualSodiumCarbonate"
             },
             {
-                "name": "Sodium absorption ratio (SAR)",
+                "name": "Sodium Absorption Ratio",
                 "statvar": "SodiumAbsorptionRatio",
                 "unit": "",
                 "dcid": "sodiumAbsorptionRatio"
             },
             {
-                "name": "Total Dissolved Solids",
+                "name": "Total Dissolved Solids (mg/L)",
                 "statvar": "TotalDissolvedSolids",
                 "unit": "MilligramsPerLitre",
                 "dcid": "totalDissolvedSolids"
-            },
-            {
-                "name": "Potential of Hydrogen (pH)",
-                "statvar": "PotentialOfHydrogen",
-                "unit": "",
-                "dcid": "potentialOfHydrogen"
             }
         ]
     }
