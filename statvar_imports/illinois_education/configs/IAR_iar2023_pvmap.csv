@@ -1,0 +1,1122 @@
+key,prop,val,,,,,,,,
+RCDTS,measuredProperty,count,populationType,Student,assessmentType,IllinoisAssessmentOfReadiness,observationAbout,{Data},observationDate,2023
+% All students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,,
+% All students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,,
+% Male students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Male students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Female students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% Female students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% White students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,White
+% White students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,White
+% Black or African American students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Hispanic or Latino students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Asian students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Asian students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% American Indian or Alaska Native students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% Two or More Race students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Children with Disabilities students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% EL students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% IEP students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Low Income students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Non-Low Income students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Homeless students IAR ELA Level 1 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 2 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 3 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 4 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 5 - Grade 3,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 1 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 2 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 3 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 4 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 5 - Grade 3,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade3,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Youth in Care students IAR ELA Level 1 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR ELA Level 2 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR ELA Level 3 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR ELA Level 4 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR ELA Level 5 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 1 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 2 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 3 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 4 - Grade 3,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 5 - Grade 3,,,,,,,,,,
+% Migrant students IAR ELA Level 1 - Grade 3,,,,,,,,,,
+% Migrant students IAR ELA Level 2 - Grade 3,,,,,,,,,,
+% Migrant students IAR ELA Level 3 - Grade 3,,,,,,,,,,
+% Migrant students IAR ELA Level 4 - Grade 3,,,,,,,,,,
+% Migrant students IAR ELA Level 5 - Grade 3,,,,,,,,,,
+% Migrant students IAR Mathematics Level 1 - Grade 3,,,,,,,,,,
+% Migrant students IAR Mathematics Level 2 - Grade 3,,,,,,,,,,
+% Migrant students IAR Mathematics Level 3 - Grade 3,,,,,,,,,,
+% Migrant students IAR Mathematics Level 4 - Grade 3,,,,,,,,,,
+% Migrant students IAR Mathematics Level 5 - Grade 3,,,,,,,,,,
+% Military students IAR ELA Level 1 - Grade 3,,,,,,,,,,
+% Military students IAR ELA Level 2 - Grade 3,,,,,,,,,,
+% Military students IAR ELA Level 3 - Grade 3,,,,,,,,,,
+% Military students IAR ELA Level 4 - Grade 3,,,,,,,,,,
+% Military students IAR ELA Level 5 - Grade 3,,,,,,,,,,
+% Military students IAR Mathematics Level 1 - Grade 3,,,,,,,,,,
+% Military students IAR Mathematics Level 2 - Grade 3,,,,,,,,,,
+% Military students IAR Mathematics Level 3 - Grade 3,,,,,,,,,,
+% Military students IAR Mathematics Level 4 - Grade 3,,,,,,,,,,
+% Military students IAR Mathematics Level 5 - Grade 3,,,,,,,,,,
+% All students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,,
+% All students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,,
+% Male students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Male students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Female students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% Female students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% White students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,White
+% White students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,White
+% Black or African American students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Hispanic or Latino students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Asian students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Asian students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% American Indian or Alaska Native students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% Two or More Race students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Children with Disabilities students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% EL students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% IEP students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Low Income students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Non-Low Income students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Youth in Care students IAR ELA Level 1 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR ELA Level 2 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR ELA Level 3 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR ELA Level 4 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR ELA Level 5 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 1 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 2 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 3 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 4 - Grade 4,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 5 - Grade 4,,,,,,,,,,
+% Homeless students IAR ELA Level 1 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 2 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 3 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 4 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 5 - Grade 4,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 1 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 2 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 3 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 4 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 5 - Grade 4,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade4,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Migrant students IAR ELA Level 1 - Grade 4,,,,,,,,,,
+% Migrant students IAR ELA Level 2 - Grade 4,,,,,,,,,,
+% Migrant students IAR ELA Level 3 - Grade 4,,,,,,,,,,
+% Migrant students IAR ELA Level 4 - Grade 4,,,,,,,,,,
+% Migrant students IAR ELA Level 5 - Grade 4,,,,,,,,,,
+% Migrant students IAR Mathematics Level 1 - Grade 4,,,,,,,,,,
+% Migrant students IAR Mathematics Level 2 - Grade 4,,,,,,,,,,
+% Migrant students IAR Mathematics Level 3 - Grade 4,,,,,,,,,,
+% Migrant students IAR Mathematics Level 4 - Grade 4,,,,,,,,,,
+% Migrant students IAR Mathematics Level 5 - Grade 4,,,,,,,,,,
+% Military students IAR ELA Level 1 - Grade 4,,,,,,,,,,
+% Military students IAR ELA Level 2 - Grade 4,,,,,,,,,,
+% Military students IAR ELA Level 3 - Grade 4,,,,,,,,,,
+% Military students IAR ELA Level 4 - Grade 4,,,,,,,,,,
+% Military students IAR ELA Level 5 - Grade 4,,,,,,,,,,
+% Military students IAR Mathematics Level 1 - Grade 4,,,,,,,,,,
+% Military students IAR Mathematics Level 2 - Grade 4,,,,,,,,,,
+% Military students IAR Mathematics Level 3 - Grade 4,,,,,,,,,,
+% Military students IAR Mathematics Level 4 - Grade 4,,,,,,,,,,
+% Military students IAR Mathematics Level 5 - Grade 4,,,,,,,,,,
+% All students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,,
+% All students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,,
+% All students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,,
+% All students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,,
+% Male students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Male students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Female students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% Female students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% White students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,White
+% White students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,White
+% Black or African American students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Hispanic or Latino students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Asian students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Asian students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% American Indian or Alaska Native students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% Two or More Race students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Children with Disabilities students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% EL students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,"
+SchoolGrade5",educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% IEP students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Low Income students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Non-Low Income students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 1 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Youth in Care students IAR ELA Level 1 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR ELA Level 2 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR ELA Level 3 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR ELA Level 4 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR ELA Level 5 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 1 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 2 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 3 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 4 - Grade 5,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 5 - Grade 5,,,,,,,,,,
+% Homeless students IAR ELA Level 1 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 2 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 3 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 4 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 5 - Grade 5,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 1 - Grade 32,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 2 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 3 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 4 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 5 - Grade 5,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade5,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Migrant students IAR ELA Level 1 - Grade 5,,,,,,,,,,
+% Migrant students IAR ELA Level 2 - Grade 5,,,,,,,,,,
+% Migrant students IAR ELA Level 3 - Grade 5,,,,,,,,,,
+% Migrant students IAR ELA Level 4 - Grade 5,,,,,,,,,,
+% Migrant students IAR ELA Level 5 - Grade 5,,,,,,,,,,
+% Migrant students IAR Mathematics Level 1 - Grade 5,,,,,,,,,,
+% Migrant students IAR Mathematics Level 2 - Grade 5,,,,,,,,,,
+% Migrant students IAR Mathematics Level 3 - Grade 5,,,,,,,,,,
+% Migrant students IAR Mathematics Level 4 - Grade 5,,,,,,,,,,
+% Migrant students IAR Mathematics Level 5 - Grade 5,,,,,,,,,,
+% Military students IAR ELA Level 1 - Grade 5,,,,,,,,,,
+% Military students IAR ELA Level 2 - Grade 5,,,,,,,,,,
+% Military students IAR ELA Level 3 - Grade 5,,,,,,,,,,
+% Military students IAR ELA Level 4 - Grade 5,,,,,,,,,,
+% Military students IAR ELA Level 5 - Grade 5,,,,,,,,,,
+% Military students IAR Mathematics Level 1 - Grade 5,,,,,,,,,,
+% Military students IAR Mathematics Level 2 - Grade 5,,,,,,,,,,
+% Military students IAR Mathematics Level 3 - Grade 5,,,,,,,,,,
+% Military students IAR Mathematics Level 4 - Grade 5,,,,,,,,,,
+% Military students IAR Mathematics Level 5 - Grade 5,,,,,,,,,,
+% All students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,,
+% All students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,,
+% Male students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Male students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Female students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% Female students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% White students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,White
+% White students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,White
+% Black or African American students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Hispanic or Latino students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Asian students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Asian students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% American Indian or Alaska Native students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% Two or More Race students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Children with Disabilities students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% EL students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% IEP students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Low Income students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Non-Low Income students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Youth in Care students IAR ELA Level 1 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR ELA Level 2 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR ELA Level 3 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR ELA Level 4 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR ELA Level 5 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 1 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 2 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 3 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 4 - Grade 6,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 5 - Grade 6,,,,,,,,,,
+% Homeless students IAR ELA Level 1 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 2 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 3 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 4 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 5 - Grade 6,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 1 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 2 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 3 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 4 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 5 - Grade 6,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade6,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Migrant students IAR ELA Level 1 - Grade 6,,,,,,,,,,
+% Migrant students IAR ELA Level 2 - Grade 6,,,,,,,,,,
+% Migrant students IAR ELA Level 3 - Grade 6,,,,,,,,,,
+% Migrant students IAR ELA Level 4 - Grade 6,,,,,,,,,,
+% Migrant students IAR ELA Level 5 - Grade 6,,,,,,,,,,
+% Migrant students IAR Mathematics Level 1 - Grade 6,,,,,,,,,,
+% Migrant students IAR Mathematics Level 2 - Grade 6,,,,,,,,,,
+% Migrant students IAR Mathematics Level 3 - Grade 6,,,,,,,,,,
+% Migrant students IAR Mathematics Level 4 - Grade 6,,,,,,,,,,
+% Migrant students IAR Mathematics Level 5 - Grade 6,,,,,,,,,,
+% Military students IAR ELA Level 1 - Grade 6,,,,,,,,,,
+% Military students IAR ELA Level 2 - Grade 6,,,,,,,,,,
+% Military students IAR ELA Level 3 - Grade 6,,,,,,,,,,
+% Military students IAR ELA Level 4 - Grade 6,,,,,,,,,,
+% Military students IAR ELA Level 5 - Grade 6,,,,,,,,,,
+% Military students IAR Mathematics Level 1 - Grade 6,,,,,,,,,,
+% Military students IAR Mathematics Level 2 - Grade 6,,,,,,,,,,
+% Military students IAR Mathematics Level 3 - Grade 6,,,,,,,,,,
+% Military students IAR Mathematics Level 4 - Grade 6,,,,,,,,,,
+% Military students IAR Mathematics Level 5 - Grade 6,,,,,,,,,,
+% All students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,,
+% All students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,,
+% All students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,,
+% All students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,,
+% All students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,,
+% All students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,,
+% Male students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Male students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,gender,Male
+% Male students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,gender,Male
+% Male students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,gender,Male
+% Male students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,gender,Male
+% Male students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,gender,Male
+% Female students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% Female students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,gender,Female
+% Female students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,gender,Female
+% Female students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,gender,Female
+% Female students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,gender,Female
+% Female students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,gender,Female
+% White students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,White
+% White students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,White
+% White students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,White
+% White students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,White
+% White students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,White
+% White students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,White
+% Black or African American students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,BlackOrAfricanAmerican
+% Black or African American students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,BlackOrAfricanAmerican
+% Hispanic or Latino students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,HispanicOrLatino
+% Hispanic or Latino students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,HispanicOrLatino
+% Asian students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Asian students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,Asian
+% Asian students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,Asian
+% Asian students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,Asian
+% Asian students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,Asian
+% Asian students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,Asian
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,NativeHawaiianOrOtherPacificIslander
+% Native Hawaiian or Other Pacific Islander students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,NativeHawaiianOrOtherPacificIslander
+% American Indian or Alaska Native students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,AmericanIndianOrAlaskaNative
+% American Indian or Alaska Native students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,AmericanIndianOrAlaskaNative
+% Two or More Race students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,race,TwoOrMoreRaces
+% Two or More Race students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,race,TwoOrMoreRaces
+% Children with Disabilities students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,disabilityStatus,WithDisability
+% Children with Disabilities students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,disabilityStatus,WithDisability
+% EL students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,languageLearned,EnglishLearner
+% EL students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,languageLearned,EnglishLearner
+% IEP students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,educationalProgram,IndividualizedEducationProgram
+% IEP students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,IndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,educationalProgram,NonIndividualizedEducationProgram
+% Non-IEP students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,educationalProgram,NonIndividualizedEducationProgram
+% Low Income students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,incomeStatus,LowIncome
+% Low Income students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,LowIncome
+% Non-Low Income students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,incomeStatus,NonLowIncome
+% Non-Low Income students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,incomeStatus,NonLowIncome
+% Youth in Care students IAR ELA Level 1 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR ELA Level 2 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR ELA Level 3 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR ELA Level 4 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR ELA Level 5 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 1 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 2 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 3 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 4 - Grade 7,,,,,,,,,,
+% Youth in Care students IAR Mathematics Level 5 - Grade 7,,,,,,,,,,
+% Homeless students IAR ELA Level 1 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 2 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 3 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 4 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR ELA Level 5 - Grade 7,value,{Number},schoolSubject,EnglishLanguageArts,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 1 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNotMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 2 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_PartialStandards,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 3 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardNearlyMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 4 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardMet,socialVulnerabilityStatus,Homeless
+% Homeless students IAR Mathematics Level 5 - Grade 7,value,{Number},schoolSubject,Mathematics,schoolGradeLevel,SchoolGrade7,educationalAchievementLevel,IL_StandardExceeded,socialVulnerabilityStatus,Homeless
+% Migrant students IAR ELA Level 1 - Grade 7,,,,,,,,,,
+% Migrant students IAR ELA Level 2 - Grade 7,,,,,,,,,,
+% Migrant students IAR ELA Level 3 - Grade 7,,,,,,,,,,
+% Migrant students IAR ELA Level 4 - Grade 7,,,,,,,,,,
+% Migrant students IAR ELA Level 5 - Grade 7,,,,,,,,,,
+% Migrant students IAR Mathematics Level 1 - Grade 7,,,,,,,,,,
+% Migrant students IAR Mathematics Level 2 - Grade 7,,,,,,,,,,
+% Migrant students IAR Mathematics Level 3 - Grade 7,,,,,,,,,,
+% Migrant students IAR Mathematics Level 4 - Grade 7,,,,,,,,,,
+% Migrant students IAR Mathematics Level 5 - Grade 7,,,,,,,,,,
+% Military students IAR ELA Level 1 - Grade 7,,,,,,,,,,
+% Military students IAR ELA Level 2 - Grade 7,,,,,,,,,,
+% Military students IAR ELA Level 3 - Grade 7,,,,,,,,,,
+% Military students IAR ELA Level 4 - Grade 7,,,,,,,,,,
+% Military students IAR ELA Level 5 - Grade 7,,,,,,,,,,
+% Military students IAR Mathematics Level 1 - Grade 7,,,,,,,,,,
+% Military students IAR Mathematics Level 2 - Grade 7,,,,,,,,,,
+% Military students IAR Mathematics Level 3 - Grade 7,,,,,,,,,,
+% Military students IAR Mathematics Level 4 - Grade 7,,,,,,,,,,
+% Military students IAR Mathematics Level 5 - Grade 7,,,,,,,,,,
