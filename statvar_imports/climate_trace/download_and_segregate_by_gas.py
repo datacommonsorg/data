@@ -338,7 +338,7 @@ def download_and_segregate_by_gas():
                 # Format emissions_quantity to avoid scientific notation
                 if 'emissions_quantity' in final_df.columns:
                     logging.info(
-                        f"  -> Formatting 'emissions_quantity' column...")
+                        "  -> Formatting 'emissions_quantity' column...")
                     final_df['emissions_quantity'] = final_df[
                         'emissions_quantity'].apply(_format_emission)
 
