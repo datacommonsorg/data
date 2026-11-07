@@ -1,0 +1,8 @@
+Node: E:usda_psd->E0
+observationAbout: C:usda_psd->observationAbout
+observationDate: C:usda_psd->observationDate
+value: C:usda_psd->value
+variableMeasured: C:usda_psd->variableMeasured
+unit: C:usda_psd->unit
+scalingFactor: C:usda_psd->scalingFactor
+typeOf: dcs:StatVarObservation
