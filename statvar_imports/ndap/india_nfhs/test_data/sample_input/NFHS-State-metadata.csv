@@ -1,0 +1,7 @@
+config,value
+header_rows,1
+debug,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1BvFBZw_HvBckd3jFCWsrpUMIOwf10XzJdvdwCGxPLh4/edit#gid=604782284
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+drop_statvars_without_svobs,0
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1BvFBZw_HvBckd3jFCWsrpUMIOwf10XzJdvdwCGxPLh4/edit#gid=410145593
