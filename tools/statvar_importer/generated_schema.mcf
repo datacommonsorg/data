@@ -1,0 +1,99 @@
+Node: dcid:DataTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "DataTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:VALUE
+typeOf: dcid:DataTypeEnum
+name: "VALUE"
+isProvisional: dcs:True
+
+Node: dcid:value
+typeOf: dcs:Property
+name: "value"
+rangeIncludes: dcid:ValueEnum
+isProvisional: dcs:True
+
+Node: dcid:ValueEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ValueEnum"
+isProvisional: dcs:True
+
+Node: {Number}
+typeOf: dcid:ValueEnum
+name: "{ Number}"
+isProvisional: dcs:True
+
+Node: dcid:observationDate
+typeOf: dcs:Property
+name: "observationDate"
+rangeIncludes: dcid:ObservationDateEnum
+isProvisional: dcs:True
+
+Node: dcid:ObservationDateEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ObservationDateEnum"
+isProvisional: dcs:True
+
+Node: dcid:DateTime
+typeOf: dcid:ObservationDateEnum
+name: "Date Time"
+isProvisional: dcs:True
+
+Node: dcid:PLACE
+typeOf: dcid:DataTypeEnum
+name: "PLACE"
+isProvisional: dcs:True
+
+Node: dcid:observationAbout
+typeOf: dcs:Property
+name: "observationAbout"
+rangeIncludes: dcid:ObservationAboutEnum
+isProvisional: dcs:True
+
+Node: dcid:ObservationAboutEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ObservationAboutEnum"
+isProvisional: dcs:True
+
+Node: {Data}
+typeOf: dcid:ObservationAboutEnum
+name: "{ Data}"
+isProvisional: dcs:True
+
+Node: dcid:Place
+typeOf: dcid:ObservationAboutEnum
+name: "Place"
+isProvisional: dcs:True
+
+Node: dcid:unit
+typeOf: dcs:Property
+name: "unit"
+rangeIncludes: dcid:Class,dcid:MeasuredPropertyEnum
+isProvisional: dcs:True
+
+Node: dcid:MeasuredPropertyEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasuredPropertyEnum"
+isProvisional: dcs:True
+
+Node: dcid:Index
+typeOf: dcid:MeasuredPropertyEnum
+name: "Index"
+isProvisional: dcs:True
+
+Node: dcid:ElectricPowerSellingPriceIndex
+typeOf: dcid:MeasuredPropertyEnum
+name: "Electric Power Selling Price Index"
+isProvisional: dcs:True
+
+Node: dcid:ElectricPowerSellingPrice
+typeOf: dcid:MeasuredPropertyEnum
+name: "Electric Power Selling Price"
+isProvisional: dcs:True
+

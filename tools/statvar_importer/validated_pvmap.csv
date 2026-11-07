@@ -1,0 +1,55 @@
+key,property,value
+"﻿\""REF_DATE\",#Column,1,DataType,VALUE,value,{Number},observationDate,DateTime
+GEO,#Column,2,DataType,PLACE,observationAbout,"{Data},Place"
+UOM_ID,#Column,6,DataType,VALUE,value,{Number}
+SCALAR_FACTOR,#Column,7,DataType,PLACE,observationAbout,{Data},unit,Number
+SCALAR_ID,#Column,8,DataType,VALUE,value,{Number}
+COORDINATE,#Column,10,DataType,VALUE,value,{Number}
+VALUE,#Column,11,DataType,VALUE,value,{Number}
+DECIMALS,#Column,15,DataType,VALUE,value,{Number}
+DGUID,#Column,3
+2016A000011124,#Column,3
+2016A00011,#Column,3
+2016A000210,#Column,3
+2016A000211,#Column,3
+2016A000212,#Column,3
+2016A000213,#Column,3
+2016A000224,#Column,3
+2016A000235,#Column,3
+2016A00014,#Column,3
+2016A000246,#Column,3
+2016A000247,#Column,3
+2016A000259,#Column,3
+2016A000248,#Column,3
+Index,#Column,4,measuredProperty,Index
+"Electric power selling price indexes, national total",#Column,4,measuredProperty,ElectricPowerSellingPriceIndex
+Electric power selling price over 5000kw,#Column,4,measuredProperty,ElectricPowerSellingPrice
+Electric power selling price under 5000kw,#Column,4,measuredProperty,ElectricPowerSellingPrice
+UOM,#Column,5,unit,Text
+"Index, 2014=100",#Column,5,unit,Index
+VECTOR,#Column,9
+v107792869,#Column,9
+v107792870,#Column,9
+v107792871,#Column,9
+v107792873,#Column,9
+v107792874,#Column,9
+v107792876,#Column,9
+v107792877,#Column,9
+v107792880,#Column,9
+v107792882,#Column,9
+v107792883,#Column,9
+v107792885,#Column,9
+v107792886,#Column,9
+v107792888,#Column,9
+v107792889,#Column,9
+v107792891,#Column,9
+v107792892,#Column,9
+v107792894,#Column,9
+v107792895,#Column,9
+v107792897,#Column,9
+v107792901,#Column,9
+v107792906,#Column,9
+v107792904,#Column,9
+v107792903,#Column,9
+STATUS,#Column,12
+SYMBOL,#Column,13
