@@ -1,0 +1,10 @@
+Node: E:county_tier1_aggregate_output->E0
+observationAbout: C:county_tier1_aggregate_output->observationAbout
+observationDate: C:county_tier1_aggregate_output->observationDate
+value: C:county_tier1_aggregate_output->value
+variableMeasured: C:county_tier1_aggregate_output->variableMeasured
+unit: C:county_tier1_aggregate_output->unit
+scalingFactor: C:county_tier1_aggregate_output->scalingFactor
+measurementMethod: C:county_tier1_aggregate_output->measurementMethod
+#Aggregate: sum
+typeOf: dcs:StatVarObservation
