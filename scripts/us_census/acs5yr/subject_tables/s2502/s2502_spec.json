@@ -60,9 +60,17 @@
 			"Bachelor's degree or higher": "BachelorsDegreeOrHigher"
 		},
 		"dateMovedIn": {
+			"Moved in 2023 or later": "[2023 - Date]",
+			"Moved in 2021 or later": "[2021 - Date]",
+			"Moved in 2020 to 2022": "[2020 2022 Date]",
+			"Moved in 2019 or later": "[2019 - Date]",
+			"Moved in 2018 to 2020": "[2018 2020 Date]",
 			"Moved in 2017 or later": "[2017 - Date]",
+			"Moved in 2015 to 2018": "[2015 2018 Date]",
 			"Moved in 2015 to 2016": "[2015 2016 Date]",
 			"Moved in 2015 or later": "[2015 - Date]",
+			"Moved in 2010 to 2019": "[2010 2019 Date]",
+			"Moved in 2010 to 2017": "[2010 2017 Date]",
 			"Moved in 2010 to 2014": "[2010 2014 Date]",
 			"Moved in 2010 or later": "[2010 - Date]",
 			"Moved in 2000 to 2009": "[2000 2009 Date]",
