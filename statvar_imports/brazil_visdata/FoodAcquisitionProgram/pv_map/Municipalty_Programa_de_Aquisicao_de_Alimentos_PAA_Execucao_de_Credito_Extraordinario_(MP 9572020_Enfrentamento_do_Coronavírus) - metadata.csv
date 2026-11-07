@@ -1,0 +1,18 @@
+parameter,value
+url,
+description,Food Acquisition Program - PAA - Execution of Extraordinary Credit (MP 9572020 - Coping with Coronavirus)
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,Programa de Aquisição de Alimentos - PAA - Execução de Crédito Extraordinário (MP 9572020 - Enfrentamento do Coronavírus)
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1h5dmMxmQx8Vz5S4VkBGixy17q7XtLoDr0749mcsBOPg/edit?gid=0&resourcekey=0-aIOYn5welLV0hq3a6YVmxQ#gid=0
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+header_rows,1
+#input_rows,50
+#dropping_statvar_without_svobs,0
+schemaless,1
+number_decimal,","
+number_separator,""" """

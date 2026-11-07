@@ -1,0 +1,74 @@
+Node: dcid:distributionPartner
+typeOf: dcs:Property
+name: "distributionPartner"
+domainIncludes: dcid:Household,dcid:EconomicActivity,dcid:Food
+rangeIncludes: dcid:DistributionPartnerEnum,dcid:Class
+isProvisional: dcs:True
+
+Node: dcid:DistributionPartnerEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "DistributionPartnerEnum"
+isProvisional: dcs:True
+
+Node: dcid:Brazil_CONAB
+typeOf: dcid:DistributionPartnerEnum
+name: "Brazil_ CONAB"
+isProvisional: dcs:True
+
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:Household,dcid:EconomicActivity
+rangeIncludes: dcid:FamilyTypeEnum
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household,dcid:EconomicActivity,dcid:Food
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household,dcid:EconomicActivity,dcid:Food
+
+Node: dcid:Brazil_FoodAcquisitionProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Food Acquisition Program"
+isProvisional: dcs:True
+
+Node: dcid:foodSource
+typeOf: dcs:Property
+name: "foodSource"
+domainIncludes: dcid:Household,dcid:EconomicActivity,dcid:Food
+rangeIncludes: dcid:FoodSourceEnum
+isProvisional: dcs:True
+
+Node: dcid:FoodSourceEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FoodSourceEnum"
+isProvisional: dcs:True
+
+Node: dcid:Supply
+typeOf: dcid:FoodSourceEnum
+name: "Supply"
+isProvisional: dcs:True
+
+Node: dcid:governmentPaymentStatus
+typeOf: dcs:Property
+name: "governmentPaymentStatus"
+domainIncludes: dcid:EconomicActivity
+
+Node: dcid:with Conab as the distribution partner"
+typeOf: dcs:Property
+name: "with Conab as the distribution partner""
+rangeIncludes: dcid:With Conab as the distribution partner"Enum
+isProvisional: dcs:True
+
+Node: dcid:with State as the distribution partner"
+typeOf: dcs:Property
+name: "with State as the distribution partner""
+rangeIncludes: dcid:With State as the distribution partner"Enum
+isProvisional: dcs:True
+
