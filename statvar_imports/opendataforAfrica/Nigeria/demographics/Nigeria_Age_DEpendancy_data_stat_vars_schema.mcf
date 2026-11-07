@@ -1,0 +1,15 @@
+Node: dcid:age
+typeOf: dcid:Property
+name: "age"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:placeOfResidenceClassification
+typeOf: dcid:Property
+name: "placeOfResidenceClassification"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:HumanSettlementClassificationEnum
+
+Node: dcid:gender
+typeOf: dcid:Property
+name: "gender"
+rangeIncludes: dcid:GenderType

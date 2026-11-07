@@ -1,0 +1,669 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/health/Nigeria_Health_Sector_data.csv --pv_map=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/health/Nigeria_Health_Sector_pvmap.csv --config=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/health/Nigeria_Health_Sector_metadata.csv --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/health/Nigeria_health_data" on 2024-06-27 07:21:09.940746
+
+Node: dcid:Count_Person_Female_NurseOccupation_AccidentAndEmergency
+typeOf: dcid:StatisticalVariable
+name: "Accident and Emergency Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:AccidentAndEmergency
+
+Node: dcid:Count_Person_Female_NurseOccupation_Administrator
+typeOf: dcid:StatisticalVariable
+name: "Nurse Administrator"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Administrator
+
+Node: dcid:Count_Person_Female_NurseOccupation_Anasthetic
+typeOf: dcid:StatisticalVariable
+name: "Anaesthetic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Anasthetic
+
+Node: dcid:Count_Person_Female_NurseOccupation_BurnsAndPlastic
+typeOf: dcid:StatisticalVariable
+name: "Burns and Plastic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:BurnsAndPlastic
+
+Node: dcid:Count_Person_Female_NurseOccupation_CardioThoracicNurses
+typeOf: dcid:StatisticalVariable
+name: "Cardio Thoracic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:CardioThoracicNurses
+
+Node: dcid:Count_Person_Female_NurseOccupation_ENT
+typeOf: dcid:StatisticalVariable
+name: "Ear, Nose and Throat (ENT) Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:ENT
+
+Node: dcid:Count_Person_Female_NurseOccupation_Educator
+typeOf: dcid:StatisticalVariable
+name: "Nurse Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Educator
+
+Node: dcid:Count_Person_Female_NurseOccupation_GeneralNurse
+typeOf: dcid:StatisticalVariable
+name: "General Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:GeneralNurse
+
+Node: dcid:Count_Person_Female_NurseOccupation_IntensiveCareNurse
+typeOf: dcid:StatisticalVariable
+name: "Intensive-Care Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:IntensiveCareNurse
+
+Node: dcid:Count_Person_Female_NurseOccupation_MidwifeEducators
+typeOf: dcid:StatisticalVariable
+name: "Midwife Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:MidwifeEducators
+
+Node: dcid:Count_Person_Female_NurseOccupation_Midwives
+typeOf: dcid:StatisticalVariable
+name: "Midwives"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Midwives
+
+Node: dcid:Count_Person_Female_NurseOccupation_OccupationalHealth
+typeOf: dcid:StatisticalVariable
+name: "Occupational Health Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:OccupationalHealth
+
+Node: dcid:Count_Person_Female_NurseOccupation_Ophthalmic
+typeOf: dcid:StatisticalVariable
+name: "Ophthalmic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Ophthalmic
+
+Node: dcid:Count_Person_Female_NurseOccupation_Orthopedic
+typeOf: dcid:StatisticalVariable
+name: "Orthopaedic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Orthopedic
+
+Node: dcid:Count_Person_Female_NurseOccupation_Pediatric
+typeOf: dcid:StatisticalVariable
+name: "Paediatric Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Pediatric
+
+Node: dcid:Count_Person_Female_NurseOccupation_Perioperative
+typeOf: dcid:StatisticalVariable
+name: "Perioperative Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Perioperative
+
+Node: dcid:Count_Person_Female_NurseOccupation_Psychatric
+typeOf: dcid:StatisticalVariable
+name: "Psychiatric Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:Psychatric
+
+Node: dcid:Count_Person_Female_NurseOccupation_PublicHealth
+typeOf: dcid:StatisticalVariable
+name: "Public Health Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:PublicHealth
+
+Node: dcid:Count_Person_Female_NurseOccupation_PublicHealthNurseEducators
+typeOf: dcid:StatisticalVariable
+name: "Public Health Nurse Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+occupation: dcid:Nurse
+specialization: dcid:PublicHealthNurseEducators
+
+Node: dcid:Count_Person_Male_NurseOccupation_AccidentAndEmergency
+typeOf: dcid:StatisticalVariable
+name: "Accident and Emergency Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:AccidentAndEmergency
+
+Node: dcid:Count_Person_Male_NurseOccupation_Administrator
+typeOf: dcid:StatisticalVariable
+name: "Nurse Administrator"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Administrator
+
+Node: dcid:Count_Person_Male_NurseOccupation_Anasthetic
+typeOf: dcid:StatisticalVariable
+name: "Anaesthetic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Anasthetic
+
+Node: dcid:Count_Person_Male_NurseOccupation_BurnsAndPlastic
+typeOf: dcid:StatisticalVariable
+name: "Burns and Plastic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:BurnsAndPlastic
+
+Node: dcid:Count_Person_Male_NurseOccupation_CardioThoracicNurses
+typeOf: dcid:StatisticalVariable
+name: "Cardio Thoracic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:CardioThoracicNurses
+
+Node: dcid:Count_Person_Male_NurseOccupation_ENT
+typeOf: dcid:StatisticalVariable
+name: "Ear, Nose and Throat (ENT) Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:ENT
+
+Node: dcid:Count_Person_Male_NurseOccupation_Educator
+typeOf: dcid:StatisticalVariable
+name: "Nurse Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Educator
+
+Node: dcid:Count_Person_Male_NurseOccupation_GeneralNurse
+typeOf: dcid:StatisticalVariable
+name: "General Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:GeneralNurse
+
+Node: dcid:Count_Person_Male_NurseOccupation_IntensiveCareNurse
+typeOf: dcid:StatisticalVariable
+name: "Intensive-Care Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:IntensiveCareNurse
+
+Node: dcid:Count_Person_Male_NurseOccupation_Midwives
+typeOf: dcid:StatisticalVariable
+name: "Midwives"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Midwives
+
+Node: dcid:Count_Person_Male_NurseOccupation_OccupationalHealth
+typeOf: dcid:StatisticalVariable
+name: "Occupational Health Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:OccupationalHealth
+
+Node: dcid:Count_Person_Male_NurseOccupation_Ophthalmic
+typeOf: dcid:StatisticalVariable
+name: "Ophthalmic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Ophthalmic
+
+Node: dcid:Count_Person_Male_NurseOccupation_Orthopedic
+typeOf: dcid:StatisticalVariable
+name: "Orthopaedic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Orthopedic
+
+Node: dcid:Count_Person_Male_NurseOccupation_Pediatric
+typeOf: dcid:StatisticalVariable
+name: "Paediatric Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Pediatric
+
+Node: dcid:Count_Person_Male_NurseOccupation_Perioperative
+typeOf: dcid:StatisticalVariable
+name: "Perioperative Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Perioperative
+
+Node: dcid:Count_Person_Male_NurseOccupation_Psychatric
+typeOf: dcid:StatisticalVariable
+name: "Psychiatric Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:Psychatric
+
+Node: dcid:Count_Person_Male_NurseOccupation_PublicHealth
+typeOf: dcid:StatisticalVariable
+name: "Public Health Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:PublicHealth
+
+Node: dcid:Count_Person_Male_NurseOccupation_PublicHealthNurseEducators
+typeOf: dcid:StatisticalVariable
+name: "Public Health Nurse Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+occupation: dcid:Nurse
+specialization: dcid:PublicHealthNurseEducators
+
+Node: dcid:Count_Person_Nigerian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+
+Node: dcid:Count_Person_Nigerian_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+gender: dcid:Female
+
+Node: dcid:Count_Person_Nigerian_Female_DentistOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+gender: dcid:Female
+occupation: dcid:Dentist
+
+Node: dcid:Count_Person_Nigerian_Female_MedicalPractitionerOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+gender: dcid:Female
+occupation: dcid:MedicalPractitioner
+
+Node: dcid:Count_Person_Nigerian_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+gender: dcid:Male
+
+Node: dcid:Count_Person_Nigerian_Male_DentistOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+gender: dcid:Male
+occupation: dcid:Dentist
+
+Node: dcid:Count_Person_Nigerian_Male_MedicalPractitionerOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+gender: dcid:Male
+occupation: dcid:MedicalPractitioner
+
+Node: dcid:Count_Person_Nigerian_MedicalPractitionerOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:Nigerian
+occupation: dcid:MedicalPractitioner
+
+Node: dcid:Count_Person_NonNigerian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+
+Node: dcid:Count_Person_NonNigerian_Female_DentistOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+gender: dcid:Female
+occupation: dcid:Dentist
+
+Node: dcid:Count_Person_NonNigerian_Female_MedicalPractitionerOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+gender: dcid:Female
+occupation: dcid:MedicalPractitioner
+
+Node: dcid:Count_Person_NonNigerian_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+gender: dcid:Male
+
+Node: dcid:Count_Person_NonNigerian_Male_DentistOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+gender: dcid:Male
+occupation: dcid:Dentist
+
+Node: dcid:Count_Person_NonNigerian_Male_MedicalPractitionerOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+gender: dcid:Male
+occupation: dcid:MedicalPractitioner
+
+Node: dcid:Count_Person_NonNigerian_MedicalPractitionerOccupation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+ethnicity: dcid:NonNigerian
+occupation: dcid:MedicalPractitioner
+
+Node: dcid:Count_Person_NurseOccupation_AccidentAndEmergency
+typeOf: dcid:StatisticalVariable
+name: "Accident and Emergency Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:AccidentAndEmergency
+
+Node: dcid:Count_Person_NurseOccupation_Administrator
+typeOf: dcid:StatisticalVariable
+name: "Nurse Administrator"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Administrator
+
+Node: dcid:Count_Person_NurseOccupation_Anasthetic
+typeOf: dcid:StatisticalVariable
+name: "Anaesthetic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Anasthetic
+
+Node: dcid:Count_Person_NurseOccupation_BurnsAndPlastic
+typeOf: dcid:StatisticalVariable
+name: "Burns and Plastic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:BurnsAndPlastic
+
+Node: dcid:Count_Person_NurseOccupation_CardioThoracicNurses
+typeOf: dcid:StatisticalVariable
+name: "Cardio Thoracic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:CardioThoracicNurses
+
+Node: dcid:Count_Person_NurseOccupation_ENT
+typeOf: dcid:StatisticalVariable
+name: "Ear, Nose and Throat (ENT) Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:ENT
+
+Node: dcid:Count_Person_NurseOccupation_Educator
+typeOf: dcid:StatisticalVariable
+name: "Nurse Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Educator
+
+Node: dcid:Count_Person_NurseOccupation_GeneralNurse
+typeOf: dcid:StatisticalVariable
+name: "General Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:GeneralNurse
+
+Node: dcid:Count_Person_NurseOccupation_IntensiveCareNurse
+typeOf: dcid:StatisticalVariable
+name: "Intensive-Care Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:IntensiveCareNurse
+
+Node: dcid:Count_Person_NurseOccupation_MidwifeEducators
+typeOf: dcid:StatisticalVariable
+name: "Midwife Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:MidwifeEducators
+
+Node: dcid:Count_Person_NurseOccupation_Midwives
+typeOf: dcid:StatisticalVariable
+name: "Midwives"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Midwives
+
+Node: dcid:Count_Person_NurseOccupation_OccupationalHealth
+typeOf: dcid:StatisticalVariable
+name: "Occupational Health Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:OccupationalHealth
+
+Node: dcid:Count_Person_NurseOccupation_Ophthalmic
+typeOf: dcid:StatisticalVariable
+name: "Ophthalmic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Ophthalmic
+
+Node: dcid:Count_Person_NurseOccupation_Orthopedic
+typeOf: dcid:StatisticalVariable
+name: "Orthopaedic Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Orthopedic
+
+Node: dcid:Count_Person_NurseOccupation_Pediatric
+typeOf: dcid:StatisticalVariable
+name: "Paediatric Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Pediatric
+
+Node: dcid:Count_Person_NurseOccupation_Perioperative
+typeOf: dcid:StatisticalVariable
+name: "Perioperative Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Perioperative
+
+Node: dcid:Count_Person_NurseOccupation_Psychatric
+typeOf: dcid:StatisticalVariable
+name: "Psychiatric Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:Psychatric
+
+Node: dcid:Count_Person_NurseOccupation_PublicHealth
+typeOf: dcid:StatisticalVariable
+name: "Public Health Nurses"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:PublicHealth
+
+Node: dcid:Count_Person_NurseOccupation_PublicHealthNurseEducators
+typeOf: dcid:StatisticalVariable
+name: "Public Health Nurse Educators"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupation: dcid:Nurse
+specialization: dcid:PublicHealthNurseEducators
+

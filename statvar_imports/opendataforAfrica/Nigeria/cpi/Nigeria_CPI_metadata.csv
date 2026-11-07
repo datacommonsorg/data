@@ -1,0 +1,22 @@
+parameter,value
+url,https://nigeria.opendataforafrica.org/NGNBSNCPIR2017/cpi-and-inflation-report-december-2018
+description,CPI and Inflation Report December 2018
+start_date,1995
+end_date,2018
+release_frequency,Monthly
+process,"Download 
+
+The online link is an interactive report with multiple variables. From the left pane do the below selections 
+Location : Select All
+Indicators : Urban Consumer Price Index
+Item : Select All
+Measure : Index, Nov, 2009 = 100 
+Select the tabular view from the different reports availble. Export as MS Excel "
+comments,"License : Any books, articles, conference papers, theses, dissertations, reports, or other publications that employ data obtained from the National Bureau of Statistics will cite the source of data in accordance with the Citation Requirement provided with each dataset.
+
+Original Data Url: http://www.nigerianstat.gov.ng"
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor"
+mapped_rows,7
+mapped_columns,3
+header_rows,7
+drop_statvars_without_svobs,0
