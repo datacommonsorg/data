@@ -1,0 +1,15 @@
+parameter,value
+url,https://uganda.opendataforafrica.org/
+description,Uganda Regional Population Statistics
+#place_type,"Country,AA1,AA2"
+#places_within,country/UGA
+start_date,1969
+end_date,2016
+release_frequency,1years
+process,
+comments,"In the data sheet, manually unmerged column Region.name."
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1FRVa1tMXgt5VfVpV2lDN3IxzZtF38rRmIz1vCfEtKm4/edit#gid=0
+header_rows,3
+mapped_rows,3
+mapped_columns,2
