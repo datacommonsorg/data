@@ -55,10 +55,11 @@ class TestParseProteinAtlas(unittest.TestCase):
         uniprot_to_dcid = {'O43657': 'TSN6_HUMAN'}
         gene_to_dcid_list = parse_protein_atlas.get_gene_to_dcid_list(
             gene_to_uniprot_list, uniprot_to_dcid)
-        df = pd.read_csv(StringIO(CONST_INPUT),
-                         sep='\t',
-                         header=[0],
-                         squeeze=True)
+        df = pd.read_csv(
+            StringIO(CONST_INPUT),
+            sep='\t',
+            header=[0],
+        )
 
         df = df.dropna()
         df['mcf'] = df.apply(lambda row: parse_protein_atlas.mcf_from_row(
