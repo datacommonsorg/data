@@ -1,0 +1,9 @@
+Node: E:education_field_of_study_output->E0
+observationAbout: C:education_field_of_study_output->observationAbout
+observationPeriod: C:education_field_of_study_output->observationPeriod
+observationDate: C:education_field_of_study_output->observationDate
+value: C:education_field_of_study_output->value
+variableMeasured: C:education_field_of_study_output->variableMeasured
+unit: C:education_field_of_study_output->unit
+scalingFactor: C:education_field_of_study_output->scalingFactor
+typeOf: dcs:StatVarObservation
