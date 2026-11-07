@@ -1,0 +1,14 @@
+parameter,value
+url,https://www.oecd-ilibrary.org/environment/data/oecd-environment-statistics_env-data-en
+description,Area of built-up covered in different cities
+#place_type,country
+#places_within,
+start_date,1975
+end_date,2014
+release_frequency,
+process,"Go to the source url. Then click on the Land Cover. It opens a sub headers. Click on ""Built-up area and built-up area change in metropolitan areas"". It redirects to a webpage which have a ""Data"" at the botton of the page. Click on the ""Data"". Now the page with the data present on it opens. Click on the ""Export"" and choose the required format to download the data. "
+comments,
+places_resolved_csv,https://docs.google.com/spreadsheets/d/12SfWMgr8kKAyvE0L4ss82pKA10vM_z3muQcC2nLCQMc/edit?gid=1541185052#gid=1541185052
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0

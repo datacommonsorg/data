@@ -1,0 +1,17 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/kuru/DC_July08_2024/data/statvars_import/testdata/sample_input/OECD_LandBuiltups_data.csv --pv_map=/usr/local/google/home/kuru/DC_July08_2024/data/statvars_import/testdata/sample_input/OECD_LandBuiltups_pvmap.csv --places_resolved_csv=/usr/local/google/home/kuru/DC_July08_2024/data/statvars_import/testdata/sample_input/OECD_LandBuiltups_places_resolved.csv --config=/usr/local/google/home/kuru/DC_July08_2024/data/statvars_import/testdata/sample_input/OECD_LandBuiltups_metadata.csv --output_path=/usr/local/google/home/kuru/DC_July08_2024/data/statvars_import/testdata/sample_output/OECD_LandBuiltups" on 2024-07-08 09:29:55.651233
+
+Node: dcid:LandArea_LandCover_BuiltUp
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:BuiltUp
+
+Node: dcid:LandArea_LandCover_BuiltUp_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:BuiltUp
+
