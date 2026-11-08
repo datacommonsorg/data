@@ -24,8 +24,8 @@ import json
 import os
 import sys
 import tempfile
+from typing import Any, Dict
 import unittest
-from typing import Dict, Any
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

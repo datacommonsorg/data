@@ -16,6 +16,7 @@ This scirpt will generate UniProt entries from ABCD antibody dataset.
 Run "python3 generate_uniprot_entries.py --help" for usage.
 '''
 import collections
+
 from absl import app
 from absl import flags
 

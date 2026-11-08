@@ -76,14 +76,14 @@ This contains the following utilities to download data from URLS:
 
 import gzip
 import os
-import requests
-import requests_cache
 import time
+from typing import Union
 import urllib
 
 from absl import logging
 from google.cloud import storage
-from typing import Union
+import requests
+import requests_cache
 
 # Response pre-filled for tests.
 _PREFILLED_RESPONSE = {}

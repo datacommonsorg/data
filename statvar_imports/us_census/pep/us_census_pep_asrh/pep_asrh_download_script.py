@@ -14,11 +14,12 @@
 
 import os
 import shutil
-from absl import app
-from absl import logging
-from absl import flags
-import requests
 import time
+
+from absl import app
+from absl import flags
+from absl import logging
+import requests
 from retry import retry
 
 # Define command-line flags

@@ -22,8 +22,8 @@ import tempfile
 import unittest
 from unittest import mock
 
-import requests
 from absl import flags
+import requests
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:

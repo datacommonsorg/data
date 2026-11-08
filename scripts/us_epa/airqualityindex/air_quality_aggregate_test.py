@@ -16,7 +16,14 @@ Unit tests for air_quality_aggregate.py
 
 Usage: python3 -m unittest discover -v -s ../ -p "air_quality_aggregate_test.py"
 '''
-import unittest, csv, os, sys, tempfile, zipfile, io
+import csv
+import io
+import os
+import sys
+import tempfile
+import unittest
+import zipfile
+
 from absl import flags
 
 _FLAGS = flags.FLAGS
@@ -25,7 +32,9 @@ module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality_aggregate import create_csv, write_csv, process
+from air_quality_aggregate import create_csv
+from air_quality_aggregate import process
+from air_quality_aggregate import write_csv
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 

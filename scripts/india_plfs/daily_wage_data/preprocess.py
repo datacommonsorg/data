@@ -16,9 +16,10 @@
 __author__ = ["Thejesh GN <i@thejeshgn.com>"]
 
 import os
-import pandas as pd
 from os import path
+
 from india.geo.states import IndiaStatesMapper
+import pandas as pd
 
 DATASETS = [{
     "period": "2017-07",

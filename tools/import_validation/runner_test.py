@@ -13,15 +13,17 @@
 # limitations under the License.
 """Tests for the ValidationRunner."""
 
+import json
+import os
+import tempfile
 import unittest
 from unittest.mock import patch
-import pandas as pd
-import os
-import json
-import tempfile
 
+import pandas as pd
+
+from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationStatus
 from tools.import_validation.runner import ValidationRunner
-from tools.import_validation.result import ValidationResult, ValidationStatus
 from tools.import_validation.validation_util import DIFFER_COLUMNS
 
 

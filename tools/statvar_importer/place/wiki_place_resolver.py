@@ -88,13 +88,12 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
+from config_map import ConfigMap
+from counters import Counters
 import download_util
 import file_util
 import mcf_file_util
 import process_http_server
-
-from counters import Counters
-from config_map import ConfigMap
 from property_value_cache import PropertyValueCache
 
 _DEFAULT_CONFIG = {

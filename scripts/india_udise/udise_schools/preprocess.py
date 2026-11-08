@@ -16,10 +16,11 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import sys
 from os import path
-from india_udise.common.base_school_data import UDISEIndiaSchoolDataLoaderBase
+import sys
+
 from india_udise.common.base_school_data import BASE_DATA_FOLDER
+from india_udise.common.base_school_data import UDISEIndiaSchoolDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

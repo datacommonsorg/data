@@ -15,17 +15,17 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-import itertools
-import requests
-import zipfile
 import io
-import re
+import itertools
 import os
+import re
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
+import requests
 from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))

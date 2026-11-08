@@ -15,8 +15,9 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import pandas as pd
+
 from india.geo.districts import IndiaDistrictsMapper
+import pandas as pd
 
 PINCODE_TMCF = """Node: E:IndiaPost->E{index}
 typeOf: dcs:PinCodeArea

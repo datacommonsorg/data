@@ -17,8 +17,9 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
 
-import unittest
 import re
+import unittest
+
 from util import statvar_dcid_generator
 
 

@@ -16,7 +16,8 @@ import tempfile
 import unittest
 from unittest import mock
 
-from datacommons_wrappers import dc_check_existence, fetch_dcid_properties_enums
+from datacommons_wrappers import dc_check_existence
+from datacommons_wrappers import fetch_dcid_properties_enums
 
 
 class TestDCWrappers(unittest.TestCase):

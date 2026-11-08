@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import requests
 import sys
-import pandas as pd
+
 from absl import logging
+import pandas as pd
+import requests
 from retry import retry
 
 sys.path.append('../')

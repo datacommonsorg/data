@@ -29,8 +29,8 @@ sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
 import cloud_run
-import file_io
 import configs
+import file_io
 
 # Default settings.
 _DEFAULT_PROJECT = os.environ.get('GCS_PROJECT',

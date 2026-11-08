@@ -13,18 +13,21 @@
 # limitations under the License.
 
 from sys import path
+
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../')
 
 import csv
-import requests
+import logging
 import os
 
 import pandas as pd
-import logging
-from .geocode_cities import *
-from .common_util import *
+import requests
+
 import util.alpha2_to_dcid as alpha2_to_dcid
+
+from .common_util import *
+from .geocode_cities import *
 
 USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
 

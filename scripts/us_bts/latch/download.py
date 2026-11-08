@@ -15,11 +15,12 @@
 This Python Script downloads the datasets in a txt, zip format,
 Unzips it and makes it available for further processing
 """
+import gzip
 import io
 import os
 import urllib
-import gzip
 import zipfile
+
 import requests
 
 

@@ -12,8 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, shutil, re
-from absl import logging, app
+import os
+import re
+import shutil
+
+from absl import app
+from absl import logging
 
 
 def move_latest_files(input_dir, latest_dir):

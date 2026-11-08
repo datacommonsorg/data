@@ -1,14 +1,14 @@
+import datetime
 import os
 import shutil
 import unittest
 from unittest import mock
 import zipfile
+
 from absl import flags
 from absl.testing import flagsaver
-from requests.exceptions import HTTPError
-import datetime
-
 import download_util_script
+from requests.exceptions import HTTPError
 
 FLAGS = flags.FLAGS
 

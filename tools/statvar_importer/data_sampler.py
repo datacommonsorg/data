@@ -110,11 +110,10 @@ flags.DEFINE_string('sampler_output_delimiter', None,
 
 _FLAGS = flags.FLAGS
 
-import file_util
-import mcf_file_util
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+import mcf_file_util
 
 
 # Class to sample a data file.

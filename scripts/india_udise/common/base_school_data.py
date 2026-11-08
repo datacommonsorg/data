@@ -15,14 +15,15 @@
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
-import os
-import re
-import json
 import csv
 import enum
-import requests
-import time
+import json
+import os
 from os import path
+import re
+import time
+
+import requests
 
 module_dir_ = os.path.dirname(__file__)
 

@@ -27,9 +27,8 @@ sys.path.append(
 
 _TEST_DIR = os.path.join(_SCRIPT_DIR, 'test_data')
 
-import mcf_filter
-
 from mcf_file_util import load_mcf_nodes
+import mcf_filter
 
 
 class TestMCFFilter(unittest.TestCase):

@@ -43,10 +43,10 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import stat_var_processor
-import file_util
 import config_flags
+import file_util
 import process_http_server
+import stat_var_processor
 
 _FLAGS = flags.FLAGS
 

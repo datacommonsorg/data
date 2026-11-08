@@ -16,8 +16,9 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import sys
 from os import path
+import sys
+
 from india_udise.common.base import UDISEIndiaDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.

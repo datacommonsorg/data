@@ -20,9 +20,8 @@ python3 -m utility <IN_EXCEL_FILENAME> <OUT_CSV_FILENAME>
 import csv
 import sys
 
-import pandas as pd
 import numpy as np
-
+import pandas as pd
 from us_eia.eia_860 import utils
 
 # For import util.alpha2_to_dcid

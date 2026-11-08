@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import csv
 import copy
+import csv
+
 import pandas as pd
 
 TEMPLATE_STAT_VAR = """Node: dcid:{name}

@@ -18,10 +18,10 @@ import csv
 import os
 from typing import Dict, List
 
-import jinja2
 from absl import app
 from absl import flags
 from absl import logging
+import jinja2
 
 FLAGS = flags.FLAGS
 

@@ -27,8 +27,8 @@ sys.path.append(_DATA_DIR)
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
-import validator_goldens
 from counters import Counters
+import validator_goldens
 
 
 class TestValidatorGoldens(unittest.TestCase):

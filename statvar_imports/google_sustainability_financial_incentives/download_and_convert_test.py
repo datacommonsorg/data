@@ -13,12 +13,13 @@
 # limitations under the License.
 """Unit tests for download_and_convert.py script."""
 
-import unittest
 import os
+import shutil
 import sys
 import tempfile
-import shutil
-from unittest.mock import patch, MagicMock
+import unittest
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:

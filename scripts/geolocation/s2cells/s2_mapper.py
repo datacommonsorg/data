@@ -17,10 +17,10 @@ import csv
 import math
 import os
 
-import s2sphere
 from absl import app
 from absl import flags
 from dateutil import parser
+import s2sphere
 
 FLAGS = flags.FLAGS
 

@@ -24,7 +24,9 @@ from absl import logging
 from dateutil.relativedelta import relativedelta
 from geopy import distance
 import s2sphere
-from s2sphere import Cell, CellId, LatLng
+from s2sphere import Cell
+from s2sphere import CellId
+from s2sphere import LatLng
 from shapely.geometry import Polygon
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))

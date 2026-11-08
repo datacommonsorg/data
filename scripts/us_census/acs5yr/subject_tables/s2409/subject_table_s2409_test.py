@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+
 import pandas as pd
 
 # Allows the unittest to access table directories in relative path. Also used to
@@ -24,8 +25,8 @@ import pandas as pd
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))
 
-from s2409.process import set_column_map
 from s2409.data_loader import process_subject_tables
+from s2409.process import set_column_map
 
 table_dir_path = os.path.join(_SCRIPT_PATH, '.')
 

@@ -1,6 +1,7 @@
-import requests
 import os
+
 from absl import logging
+import requests
 
 input_file = 'input_file'
 # Create the input file if it doesn't exist

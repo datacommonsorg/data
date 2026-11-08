@@ -18,9 +18,10 @@ Wrappers for fetching schema from DataCommons API.
 import copy
 import json
 import os
+from sys import path
+
 from absl import app
 from absl import flags
-from sys import path
 
 FLAGS = flags.FLAGS
 

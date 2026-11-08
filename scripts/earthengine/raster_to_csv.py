@@ -70,11 +70,11 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+from config_map import ConfigMap
+from counters import CounterOptions
+from counters import Counters
 import file_util
 import utils
-
-from config_map import ConfigMap
-from counters import Counters, CounterOptions
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
 flags.DEFINE_string('ignore_geotiff', '',
