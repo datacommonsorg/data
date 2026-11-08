@@ -14,9 +14,8 @@
 """Module to test the methods in Downloader Class"""
 
 import unittest
-from unittest.mock import patch, MagicMock
 import os
-from .download import Downloader, _DIRECT_EMITTERS_SHEET, SHEET_NAMES_TO_CSV_FILENAMES
+from .download import Downloader, SHEET_NAMES_TO_CSV_FILENAMES
 
 
 class TestDownloader(unittest.TestCase):

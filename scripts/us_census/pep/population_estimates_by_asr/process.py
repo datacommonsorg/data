@@ -16,12 +16,8 @@ This Python Script Load the datasets, cleans it and generates
 cleaned CSV, MCF, TMCF file.
 """
 import io
-import json
 import os
-import shutil
 import sys
-import tempfile
-import time
 from absl import app
 from absl import flags
 from absl import logging

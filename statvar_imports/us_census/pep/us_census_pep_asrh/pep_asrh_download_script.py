@@ -20,7 +20,6 @@ from absl import flags
 import requests
 import time
 from retry import retry
-import ssl
 
 # Define command-line flags
 FLAGS = flags.FLAGS

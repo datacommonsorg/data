@@ -14,10 +14,7 @@
 """Tests for aggregate_util.py"""
 
 import os
-import sys
 import unittest
-
-from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPTS_DIR = os.path.dirname(__file__)

@@ -27,12 +27,9 @@ import concurrent.futures
 from absl import app, flags, logging
 import pandas as pd
 import numpy as np
-from datetime import datetime
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
-
-from util.statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 

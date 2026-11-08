@@ -41,7 +41,6 @@ To view task status, visit https://code.earthengine.google.com/tasks
 
 import ast
 import ee
-import glob
 import os
 import re
 import sys
@@ -57,9 +56,7 @@ from absl import app
 from absl import flags
 from absl import logging
 from datetime import date
-from datetime import datetime
 from datetime import timedelta
-from dateutil.relativedelta import relativedelta
 from google.auth import compute_engine
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))

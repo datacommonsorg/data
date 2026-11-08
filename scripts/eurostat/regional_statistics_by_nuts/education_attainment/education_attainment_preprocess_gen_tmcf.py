@@ -20,7 +20,6 @@ from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
 import numpy as np
 import pandas as pd
-import io
 import csv
 from absl import app
 from absl import logging

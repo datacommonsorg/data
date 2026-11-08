@@ -26,12 +26,9 @@ contains the resolved geos.
 """
 
 import re
-import collections
 from typing import Dict, List, Iterable
 
 import pandas as pd
-import numpy as np
-import requests
 import frozendict
 
 # Data CSV

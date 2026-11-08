@@ -23,7 +23,6 @@ Replace `INTL` with any of the other dataset codes
 
 import io
 import os
-import sys
 import zipfile
 import requests
 from retry import retry

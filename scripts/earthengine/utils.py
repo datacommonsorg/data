@@ -13,16 +13,11 @@
 # limitations under the License.
 """Utility functions"""
 
-import csv
 from datetime import date
 from datetime import datetime
-import glob
 import os
-from pathlib import Path
-import pickle
 import re
 import sys
-import tempfile
 from typing import Union
 
 from absl import logging
@@ -39,7 +34,6 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
 from dc_api_wrapper import dc_api_get_node_property
 
 # Constants

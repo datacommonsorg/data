@@ -8,7 +8,6 @@ import pandas as pd
 import numpy as np
 import sys
 import json
-from datetime import datetime
 from unittest.mock import patch
 
 module_dir_ = os.path.dirname(__file__)

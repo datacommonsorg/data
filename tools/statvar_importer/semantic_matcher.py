@@ -13,7 +13,6 @@
 # limitations under the License.
 """Utility for semantic text search using embeddings."""
 
-import csv
 import os
 import pickle
 import sys

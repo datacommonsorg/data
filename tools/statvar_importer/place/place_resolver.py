@@ -38,15 +38,12 @@ such as wikidataId, PlaceId, etc.
 Additional candidate places may be filled in columns dcid<N>.
 """
 
-import ast
 import csv
-import glob
 import os
 import pprint as pp
 import re
 import sys
 import time
-from typing import Union
 
 from absl import app
 from absl import flags

@@ -24,11 +24,7 @@ import sys
 from absl import app
 from absl import flags
 import requests
-import shutil
-import time
-from datetime import datetime as dt
 from absl import logging
-import pandas as pd
 
 import io
 from requests.adapters import HTTPAdapter

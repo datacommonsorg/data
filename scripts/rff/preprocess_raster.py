@@ -15,7 +15,6 @@ import csv
 import glob
 import json
 import numpy as np
-import os
 from osgeo import gdal
 from pathlib import Path
 from shapely import geometry

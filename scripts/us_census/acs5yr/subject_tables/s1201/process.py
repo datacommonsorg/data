@@ -27,8 +27,6 @@ while _curr and _curr != os.path.dirname(_curr):
 
 # TODO: Add unit tests
 import json
-from zipfile import ZipFile
-import pandas as pd
 
 from absl import app, flags
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked

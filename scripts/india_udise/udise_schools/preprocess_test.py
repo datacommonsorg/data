@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
-import json
-import tempfile
 import unittest
 from os import path
 from india_udise.udise_schools.preprocess import UDISESchools

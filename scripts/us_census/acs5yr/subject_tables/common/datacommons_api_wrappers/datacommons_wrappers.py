@@ -15,7 +15,6 @@
 Wrappers for fetching schema from DataCommons API.
 """
 
-import ast
 import copy
 import json
 import os

@@ -24,8 +24,7 @@ sys.path.append(module_dir_)
 
 from air_quality import (create_csv, create_sites_mcf, get_camel_case,
                          write_csv, write_sites_mcf, write_tmcf,
-                         _sanitize_dcid_component, _is_cross_border_site,
-                         _make_site_dcid, _format_site_node)
+                         _sanitize_dcid_component)
 
 
 class TestCriteriaGasesTest(unittest.TestCase):

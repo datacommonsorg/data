@@ -22,7 +22,6 @@ import csv
 import requests
 import time
 from os import path
-from csv import writer
 import pandas as pd
 
 DATA_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getTabularData"

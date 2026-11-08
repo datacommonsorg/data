@@ -1,9 +1,6 @@
 import requests
-import pandas as pd
 import os
-from absl import app
 from absl import logging
-from absl import flags
 
 input_file = 'input_file'
 # Create the input file if it doesn't exist

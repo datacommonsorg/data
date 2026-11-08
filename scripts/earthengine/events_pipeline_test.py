@@ -31,7 +31,6 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname((_MODULE_DIR))), 'util'))
 
 import file_util
-import utils
 import download_util
 
 from events_pipeline import EventPipeline

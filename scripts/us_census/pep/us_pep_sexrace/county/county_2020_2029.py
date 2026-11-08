@@ -20,7 +20,6 @@ is processed as is.
 import pandas as pd
 import os
 import sys
-import logging
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))

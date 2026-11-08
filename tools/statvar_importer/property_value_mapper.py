@@ -18,8 +18,6 @@ import os
 import re
 import sys
 
-from absl import app
-from absl import flags
 from absl import logging
 from collections import OrderedDict
 

@@ -1,8 +1,7 @@
 import os
 import sys
 import logging, unittest
-from absl import flags, app
-import shutil
+from absl import flags
 import io
 from cbp_co import CBPCOProcessor
 # from main import main, _LOCAL_OUTPUT_PATH, FLAGS # Import main and the path variable

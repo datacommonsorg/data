@@ -2,7 +2,6 @@ import requests
 import zipfile
 import pandas as pd
 import io
-import json
 import os
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed

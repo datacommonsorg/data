@@ -14,9 +14,8 @@
 
 import os
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import tempfile
-import json
 import sys
 
 # Adjust the path to import the script under test

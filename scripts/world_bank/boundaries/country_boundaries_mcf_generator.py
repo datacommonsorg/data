@@ -23,7 +23,6 @@ https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSerie
 
 NOTE: this file generates temporary folders that are not deleted.
 """
-import glob
 import io
 import json
 import os
@@ -33,8 +32,6 @@ import tempfile
 import zipfile
 
 import geopandas as gpd
-import numpy as np
-import pandas as pd
 import requests
 
 from absl import app

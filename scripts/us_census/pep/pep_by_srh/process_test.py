@@ -34,12 +34,10 @@ import us_census.pep.pep_by_srh.process as process_module
 from us_census.pep.pep_by_srh.process import (
     _BASELINE_YEAR,
     _create_retry_session,
-    _head_with_html_retry,
     add_future_year_urls,
     download_with_retry,
     process,
 )
-from us_census.pep.pep_by_srh.constants import OUTPUT_DIR
 
 _ACTUAL_RESULTS_DIR = os.path.join(_CODEDIR, "testdata", "actual_results")
 

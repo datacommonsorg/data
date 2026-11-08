@@ -16,8 +16,6 @@
 import unittest
 import os
 from PopulationDensity_preprocess_gen_tmcf import *
-import pandas as pd
-import tempfile
 import sys
 
 MODULE_DIR = os.path.dirname(__file__)

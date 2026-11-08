@@ -13,7 +13,6 @@
 # limitations under the License.
 """Script to import and clean WFIGS data.
 """
-from collections.abc import Sequence
 import datetime
 
 from absl import app
@@ -24,7 +23,6 @@ import json
 import numpy as np
 import os
 import pandas as pd
-import pickle
 import re
 import requests
 import sys

@@ -18,7 +18,6 @@ made available for further processing.
 import os
 import requests
 import subprocess
-import sys
 import ssl
 import json
 from absl import logging

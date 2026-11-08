@@ -15,14 +15,9 @@
 Module to generate a column map to their corresponding statistical variable defintions.
 """
 import os
-import io
 import sys
-import logging
 import json
-import re
-import csv
 from zipfile import ZipFile
-from collections import OrderedDict
 import pandas as pd
 
 # Allows the sibling/parent module imports to work when running as a script or module

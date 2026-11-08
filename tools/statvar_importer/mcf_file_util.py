@@ -42,7 +42,6 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf
 
 from collections import OrderedDict
 import csv
-import glob
 import hashlib
 import os
 import re

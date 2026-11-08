@@ -16,7 +16,6 @@ import requests
 from absl import app
 from absl import logging
 import zipfile
-import json
 import shutil
 import config
 

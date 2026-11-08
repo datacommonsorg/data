@@ -13,9 +13,7 @@
 # limitations under the License.
 """Script to generate csv and the mcf for the StatisticalVariables. """
 
-import requests
 import json
-import csv
 import re
 import os
 

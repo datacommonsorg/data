@@ -19,7 +19,6 @@ This module provides a client class for interacting with SDMX APIs.
 
 import logging
 import sdmx
-import pandas as pd
 from requests.exceptions import HTTPError
 from typing import Dict, Any
 

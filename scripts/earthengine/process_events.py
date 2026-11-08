@@ -15,10 +15,8 @@
 """
 
 import csv
-import datetime
 import json
 import os
-import pickle
 import sys
 import time
 
@@ -27,10 +25,8 @@ from absl import flags
 from absl import logging
 from datetime import timedelta
 from dateutil import parser
-from geopy import distance
-from s2sphere import LatLng, CellId
+from s2sphere import CellId
 from shapely.geometry import Polygon, mapping
-from typing import Union
 
 # Setup pprof
 #os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'

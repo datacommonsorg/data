@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import io
 import requests
 import sys
-import time
 import pandas as pd
 from absl import logging
 from retry import retry

@@ -21,7 +21,6 @@ Downloads and cleans GDP data from the Eurostat database.
 
 import sys
 from six.moves import urllib
-import numpy as np
 import json
 import pandas as pd
 from preprocess_data import preprocess_df

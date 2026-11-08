@@ -27,7 +27,6 @@ _SCRIPTS_DIR = os.path.abspath(os.path.join(module_dir_, '../../../'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-import us_census.pep.us_pep_sexrace.common as common
 import us_census.pep.us_pep_sexrace.preprocess as preprocess
 from us_census.pep.us_pep_sexrace.preprocess import process
 from us_census.pep.us_pep_sexrace.preprocess import add_future_year_urls

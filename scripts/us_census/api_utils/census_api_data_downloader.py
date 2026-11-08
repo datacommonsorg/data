@@ -21,7 +21,6 @@ import json
 import logging
 import os
 import pandas as pd
-import sys
 import time
 import zipfile
 from absl import app

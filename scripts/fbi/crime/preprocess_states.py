@@ -17,12 +17,7 @@ from sys import path
 path.insert(1, '../../../')
 
 import csv
-import io
-import ssl
-import urllib.request
-import sys
 import requests
-import re
 import os
 
 import pandas as pd

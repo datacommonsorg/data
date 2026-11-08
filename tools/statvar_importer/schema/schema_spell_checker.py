@@ -59,8 +59,8 @@ import property_value_utils as pv_utils
 
 from config_map import ConfigMap
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
 
 # properties ignored for spell check
 _DEFAULT_IGNORE_SPELL_PROPS = {

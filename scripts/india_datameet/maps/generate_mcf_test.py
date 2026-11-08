@@ -1,9 +1,7 @@
 """Tests for generate_mcf.py"""
 
-import csv
 import os
 import tempfile
-import sys
 import unittest
 from .generate_mcf import generate
 

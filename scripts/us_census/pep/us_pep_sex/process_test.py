@@ -22,7 +22,6 @@ import tempfile
 from unittest.mock import MagicMock, patch
 import numpy as np
 import pandas as pd
-from absl import flags
 
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -27,7 +27,6 @@ import os
 import sys
 import numpy as np
 import pandas as pd
-import json
 import csv
 
 # Allows the following module imports to work when running as a script

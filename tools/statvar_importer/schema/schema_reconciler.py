@@ -45,7 +45,6 @@ variableMeasured and measurementMethod, set the following command line option:
 
 import os
 import sys
-from typing import Union
 
 from absl import app
 from absl import flags

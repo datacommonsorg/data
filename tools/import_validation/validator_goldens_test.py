@@ -16,7 +16,7 @@
 import os
 import sys
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 # Set up paths as in validator_goldens.py
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

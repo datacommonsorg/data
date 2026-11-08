@@ -25,7 +25,6 @@ import requests
 import shutil
 import time
 import json
-from datetime import datetime as dt
 from absl import logging
 from retry import retry
 from requests.adapters import HTTPAdapter

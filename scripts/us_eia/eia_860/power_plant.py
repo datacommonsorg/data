@@ -18,8 +18,6 @@ To run this script as a standalone:
 python3 -m power_plant <IN_EXCEL_FILENAME> <OUT_CSV_FILENAME>
 """
 import csv
-import io
-import os
 import sys
 
 import pandas as pd

@@ -14,9 +14,7 @@
 """Helper functions used in the superfund data processing"""
 
 import numpy as np
-import pandas as pd
 import json
-import requests
 import os
 import sys
 

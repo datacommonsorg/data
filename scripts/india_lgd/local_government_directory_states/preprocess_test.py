@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
-import json
-import tempfile
 import unittest
 from india_lgd.local_government_directory_states.preprocess import LocalGovermentDirectoryStatesDataLoader
 

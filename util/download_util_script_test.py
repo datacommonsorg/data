@@ -5,7 +5,6 @@ from unittest import mock
 import zipfile
 from absl import flags
 from absl.testing import flagsaver
-import requests
 from requests.exceptions import HTTPError
 import datetime
 

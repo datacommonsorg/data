@@ -14,7 +14,7 @@
 """Tests for the ValidationRunner."""
 
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import pandas as pd
 import os
 import json

@@ -17,7 +17,7 @@ This includes aggregate API measurements at the county/CSBA level.
 
 Usage: python3 air_quality_aggregate.py <end_year>
 '''
-import csv, os, sys, requests, io, zipfile
+import csv, os, requests, io, zipfile
 
 from absl import app
 from absl import flags
@@ -26,7 +26,6 @@ from datetime import datetime
 from retry import retry
 import frozendict
 from pathlib import Path
-import time
 
 _FLAGS = flags.FLAGS
 

@@ -25,7 +25,7 @@ import sys
 import dataclasses
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Callable, Sequence
+from typing import Callable
 
 from absl import app, flags, logging
 

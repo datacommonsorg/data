@@ -64,4 +64,10 @@ select = [
     "F841",
     # f-strings without placeholders.
     "F541",
+    # Unused imports.
+    "F401",
 ]
+
+[lint.pyflakes]
+# Modules imported only for their side effect of defining absl flags.
+allowed-unused-imports = ["common_flags", "config_flags"]

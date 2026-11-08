@@ -19,7 +19,6 @@ import json
 from absl import logging
 import re
 from collections import defaultdict
-from sys import path
 
 # For import util.alpha2_to_dcid
 # Setup path for import from data/util

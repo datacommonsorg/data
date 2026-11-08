@@ -25,7 +25,6 @@ from retry import retry
 from urllib.parse import urlparse
 import zipfile
 import datetime
-import time
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('download_url', None, 'URL of the file to download')

@@ -17,7 +17,6 @@ for county 1990-2000 and Count_Person_Male
 and Count_person_Female are aggregated for this file.
 """
 
-from typing import final
 import pandas as pd
 import os
 import sys

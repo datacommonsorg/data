@@ -42,7 +42,6 @@ The output file will have the following columns:
   "CountryName": parent country name
 """
 
-import json
 import os
 import sys
 import urllib.parse
@@ -96,7 +95,6 @@ import process_http_server
 
 from counters import Counters
 from config_map import ConfigMap
-from download_util import request_url
 from property_value_cache import PropertyValueCache
 
 _DEFAULT_CONFIG = {

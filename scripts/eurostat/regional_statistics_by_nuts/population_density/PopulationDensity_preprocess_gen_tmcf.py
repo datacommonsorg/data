@@ -18,9 +18,7 @@ sys.path.insert(1, '../../../../util')
 from six.moves import urllib
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
-import numpy as np
 import pandas as pd
-import io
 import csv
 import os
 from absl import app

@@ -13,12 +13,7 @@
 # limitations under the License.
 
 import csv
-import io
-import ssl
-import urllib.request
-import sys
 import requests
-import re
 import os
 from .common_util import *
 

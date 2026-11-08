@@ -21,7 +21,6 @@ python3 process.py
 """
 
 import csv
-import io
 import os
 import sys
 import datetime

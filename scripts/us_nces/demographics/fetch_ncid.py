@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import time
-import csv
 import copy
 from selenium import webdriver
 from selenium.webdriver.common.by import By

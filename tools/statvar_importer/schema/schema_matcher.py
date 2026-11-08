@@ -27,9 +27,6 @@ a list one or more of property,value pairs:
 To enable semantic matching uisng embeddings, turn on '--schema_embeddings_lookup'
 """
 
-import ast
-from collections import OrderedDict
-import csv
 import os
 import sys
 
@@ -71,10 +68,9 @@ flags.DEFINE_string('schema_macher_embeddings', '',
 flags.DEFINE_bool('schema_matcher_debug', False, 'Enable debug messages.')
 
 import file_util
-import download_util
 import process_http_server
 
-from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, strip_namespace, add_pv_to_node
+from mcf_file_util import load_mcf_nodes, strip_namespace, add_pv_to_node
 from ngram_matcher import NgramMatcher
 from semantic_matcher import SemanticMatcher
 from config_map import ConfigMap

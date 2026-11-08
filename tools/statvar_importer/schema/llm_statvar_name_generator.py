@@ -23,7 +23,6 @@ To generate names for statvars in an MCF file, run the command:
     https://ai.google.dev/gemini-api/docs/api-key
 """
 
-import csv
 import os
 import sys
 import tempfile

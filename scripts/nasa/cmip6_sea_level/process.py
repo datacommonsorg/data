@@ -14,7 +14,6 @@
 
 # Code for processing CMIP6 Sea-level rise projections in netcdf4 format.
 
-import csv
 import glob
 import os
 import sys

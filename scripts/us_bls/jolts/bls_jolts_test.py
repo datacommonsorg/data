@@ -16,7 +16,7 @@ Script to automate the testing for BLS_Jolts import.
 """
 
 import os
-import sys, shutil
+import sys
 import unittest
 from absl import app, logging
 

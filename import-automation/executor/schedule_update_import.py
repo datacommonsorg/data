@@ -24,7 +24,6 @@ from absl import flags
 from app import configs
 from app.executor import import_target
 from app.executor import import_executor
-from app.executor import cloud_scheduler
 from app.executor import scheduler_job_manager
 from app.executor import validation
 from app.service import email_notifier

@@ -18,7 +18,6 @@ sys.path.append('../')
 from utils import multi_index_to_single_index
 import csv
 import json
-import pandas as pd
 from columns import *
 
 sys.path.append('../../')

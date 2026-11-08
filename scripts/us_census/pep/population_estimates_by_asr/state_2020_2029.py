@@ -26,7 +26,6 @@ if _SCRIPTS_DIR not in sys.path:
 from us_census.pep.population_estimates_by_asr.common_functions import (
     extract_year,
     gender_based_grouping,
-    input_url,
 )
 from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 

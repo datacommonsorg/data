@@ -15,8 +15,6 @@
 import unittest
 import os
 from import_data import *
-import pandas as pd
-import tempfile
 import sys
 
 MODULE_DIR = os.path.dirname(__file__)

@@ -16,7 +16,6 @@ import errno
 import os
 import sys
 import shutil
-import time
 import requests
 from typing import Optional
 from absl import logging

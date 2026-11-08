@@ -1,5 +1,4 @@
 import csv
-import json
 import os
 import requests
 from requests.adapters import HTTPAdapter

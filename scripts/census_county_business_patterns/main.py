@@ -18,7 +18,6 @@ import concurrent.futures
 from absl import app
 from absl import flags
 from absl import logging
-from google.cloud import storage
 
 # Import your MSAProcessor class
 from cbp_co import CBPCOProcessor
