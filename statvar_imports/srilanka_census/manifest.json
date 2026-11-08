@@ -20,14 +20,9 @@
             ],
             "source_files": [
                 "input_files/*.csv",
-                "srilanka_census_pvmap.csv",
-                "srilanka_census_metadata.csv",
-                "srilanka_places_resolved.csv",
-                "counters/*.csv",
-                "validation_config.json"
+                "counters/*.csv"
             ],
             "cron_schedule": "30 05 * * 1",
-            "_comment": "Schedule: Weekly on Monday at 05:30 UTC",
             "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 8,
