@@ -14,12 +14,15 @@
 
 import io
 import os
+import sys
 import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
 import zipfile
 import pandas as pd
 import requests
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import download_and_segregate_by_gas
 
 
@@ -210,6 +213,47 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
             self.assertIn("subsector_shipping", set(ghg_df["gas"]))
 
             mock_session.__exit__.assert_called_once()
+
+    def test_generate_greenhousegas_input(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            raw_df = pd.DataFrame({
+                'iso3_country': ['USA'] * 6,
+                'sector': [
+                    'transportation',
+                    'transportation',
+                    'waste',
+                    'waste',
+                    'agriculture',
+                    'fluorinated-gases',
+                ],
+                'subsector': [
+                    'domestic-shipping',
+                    'international-shipping',
+                    'domestic-wastewater-treatment-and-discharge',
+                    'industrial-wastewater-treatment-and-discharge',
+                    'net-soil-organic-carbon',
+                    'fluorinated-gases',
+                ],
+                'start_time': ['2020-01-01 00:00:00'] * 6,
+                'end_time': ['2020-12-31 00:00:00'] * 6,
+                'gas': ['co2e_100yr'] * 6,
+                'emissions_quantity': [10.0, 25.5, 5.0, 15.0, 100.0, 50.0],
+            })
+            download_and_segregate_by_gas.generate_greenhousegas_input(
+                raw_df, tmp_dir)
+            ghg_path = os.path.join(tmp_dir, 'greenhousegas_co2e_100yr.csv')
+            ghg_df = pd.read_csv(ghg_path, dtype=str)
+            ghg_map = dict(zip(ghg_df['gas'], ghg_df['emissions_quantity']))
+
+            self.assertEqual(ghg_map['co2e_100yr'], '205.5')
+            self.assertEqual(ghg_map['sector_maritime'], '35.5')
+            self.assertEqual(ghg_map['subsector_shipping'], '35.5')
+            self.assertEqual(
+                ghg_map['subsector_wastewater-treatment-and-discharge'], '20')
+            self.assertEqual(ghg_map['subsector_fluorinated-gases'], '50')
+            # Unmapped keys must be filtered out
+            self.assertNotIn('subsector_net-soil-organic-carbon', ghg_map)
+            self.assertNotIn('sector_fluorinated-gases', ghg_map)
 
 
 if __name__ == '__main__':

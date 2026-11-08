@@ -142,6 +142,60 @@ LEGACY_COMPOSITE_GROUPS = {
     ],
 }
 
+# Keys mapped in climate_pvmap_greenhousegas.csv.
+GREENHOUSEGAS_PVMAP_KEYS = frozenset({
+    "co2e_100yr",
+    "sector_agriculture",
+    "sector_buildings",
+    "sector_mineral-extraction",
+    "sector_forestry-and-land-use",
+    "sector_manufacturing",
+    "sector_maritime",
+    "sector_fossil-fuel-operations",
+    "sector_power",
+    "sector_transportation",
+    "sector_waste",
+    "subsector_wastewater-treatment-and-discharge",
+    "subsector_solid-waste-disposal",
+    "subsector_incineration-and-open-burning-of-waste",
+    "subsector_biological-treatment-of-solid-waste-and-biogenic",
+    "subsector_copper-mining",
+    "subsector_sand-quarrying",
+    "subsector_rock-quarrying",
+    "subsector_iron-mining",
+    "subsector_coal-mining",
+    "subsector_aluminum",
+    "subsector_fluorinated-gases",
+    "subsector_cement",
+    "subsector_food-beverage-tobacco",
+    "subsector_glass",
+    "subsector_iron-and-steel",
+    "subsector_pulp-and-paper",
+    "subsector_petrochemical-steam-cracking",
+    "subsector_lime",
+    "subsector_other-manufacturing",
+    "subsector_shrubgrass-fires",
+    "subsector_forest-land-fires",
+    "subsector_forest-land-clearing",
+    "subsector_residential-commercial-onsite-heating",
+    "subsector_rice-cultivation",
+    "subsector_manure-management",
+    "subsector_managed-soils",
+    "subsector_enteric-fermentation",
+    "subsector_cropland-fires",
+    "subsector_other-solid-fuels",
+    "subsector_oil-and-gas-refining",
+    "subsector_oil-and-gas-production",
+    "subsector_road-transportation",
+    "subsector_railways",
+    "subsector_aviation",
+    "subsector_other-transport",
+    "subsector_electricity-generation",
+    "subsector_other-energy-use",
+    "subsector_shipping",
+    "subsector_bauxite-mining",
+})
+
 
 def generate_greenhousegas_input(co2e_100yr_df, output_dir):
     """Generates pre-aggregated greenhousegas_co2e_100yr.csv for GreenhouseGas StatVars."""
@@ -167,10 +221,12 @@ def generate_greenhousegas_input(co2e_100yr_df, output_dir):
     sec_grp = df.groupby(['iso3_country', 'start_time', 'sector'],
                          as_index=False)['val'].sum()
     sec_grp['gas'] = 'sector_' + sec_grp['sector'].astype(str)
+    sec_grp = sec_grp[sec_grp['gas'].isin(GREENHOUSEGAS_PVMAP_KEYS)]
 
     sub_grp = df.groupby(['iso3_country', 'start_time', 'subsector'],
                          as_index=False)['val'].sum()
     sub_grp['gas'] = 'subsector_' + sub_grp['subsector'].astype(str)
+    sub_grp = sub_grp[sub_grp['gas'].isin(GREENHOUSEGAS_PVMAP_KEYS)]
 
     records = [
         total_grp[['iso3_country', 'start_time', 'gas', 'val']],
