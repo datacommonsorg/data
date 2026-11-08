@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://www.indec.gob.ar/",
+            "provenance_url": "https://www.indec.gob.ar",
             "provenance_description": "Argentina Census population, urban/rural population, literacy, and infant mortality statistics from Instituto Nacional de Estadística y Censos (INDEC)",
             "scripts": [
                 "download.py",
@@ -19,6 +19,7 @@
                 }
             ],
             "source_files": [
+                "input_files/raw/*",
                 "input_files/*.csv",
                 "counters/*.csv"
             ],

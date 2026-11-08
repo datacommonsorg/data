@@ -4,7 +4,7 @@
 * **Import Name:** `Argentina_Census`
 * **Import Group:** `international_stats` (`auto1w`)
 * **Source Agency:** Instituto Nacional de Estadística y Censos (INDEC), Republic of Argentina
-* **Provenance URL:** `https://www.indec.gob.ar/`
+* **Provenance URL:** `https://www.indec.gob.ar`
 * **Data Download Landing Page:** `https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-84`
 * **Release Frequency / Refresh Schedule:** Weekly check (`0 5 * * 1`, `P1Y` source release frequency)
 * **Date Range in KG:** `1980` – `2023`

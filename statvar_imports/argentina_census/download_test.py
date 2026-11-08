@@ -163,6 +163,16 @@ class DownloadTest(unittest.TestCase):
             test_url, {}, b'FAKE_XLS_BYTES')
         self.assertEqual(download.fetch_url(test_url), b'FAKE_XLS_BYTES')
 
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            results = download.fetch_all_urls([test_url],
+                                              max_workers=1,
+                                              raw_dir=tmp_dir)
+            self.assertEqual(results[test_url], b'FAKE_XLS_BYTES')
+            raw_file = os.path.join(tmp_dir, 'test_payload.xls')
+            self.assertTrue(os.path.exists(raw_file))
+            with open(raw_file, 'rb') as f:
+                self.assertEqual(f.read(), b'FAKE_XLS_BYTES')
+
         html_url = 'https://www.indec.gob.ar/ftp/error.xls'
         download.download_util.set_test_url_download_response(
             html_url, {}, b'<!DOCTYPE html><html>Error</html>')

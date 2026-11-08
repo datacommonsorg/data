@@ -1,5 +1,5 @@
 parameter,value
-url,https://www.indec.gob.ar/
+url,https://www.indec.gob.ar
 description,"Argentina Census population, urban/rural population, literacy, and infant mortality data from INDEC"
 header_rows,1
 mapped_rows,1

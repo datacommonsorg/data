@@ -431,18 +431,27 @@ def fetch_url(url: str, retries: int = 3, retry_secs: int = 5) -> bytes:
     return data
 
 
-def fetch_all_urls(urls: list[str], max_workers: int = 16) -> dict[str, bytes]:
+def fetch_all_urls(urls: list[str],
+                   max_workers: int = 16,
+                   raw_dir: str | None = None) -> dict[str, bytes]:
     """Downloads a list of URLs concurrently using download_util and returns {url: bytes}."""
     if not requests_cache.is_installed():
         requests_cache.install_cache(backend='memory', expires_after=300)
     unique_urls = sorted(set(urls))
     logging.info('Downloading %d unique files from INDEC...', len(unique_urls))
+    if raw_dir:
+        os.makedirs(raw_dir, exist_ok=True)
     results = {}
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         fut_to_url = {executor.submit(fetch_url, u): u for u in unique_urls}
         for fut in as_completed(fut_to_url):
             url = fut_to_url[fut]
-            results[url] = fut.result()
+            payload = fut.result()
+            results[url] = payload
+            if raw_dir:
+                raw_path = os.path.join(raw_dir, os.path.basename(url))
+                with open(raw_path, 'wb') as f:
+                    f.write(payload)
     logging.info('Successfully downloaded %d files.', len(results))
     return results
 
@@ -1105,7 +1114,8 @@ def collect_required_urls() -> list[str]:
 
 def main(_):
     urls = collect_required_urls()
-    cache = fetch_all_urls(urls, max_workers=FLAGS.max_workers)
+    raw_dir = os.path.join(FLAGS.output_dir, 'raw')
+    cache = fetch_all_urls(urls, max_workers=FLAGS.max_workers, raw_dir=raw_dir)
     build_datasets(cache, FLAGS.output_dir)
 
 
