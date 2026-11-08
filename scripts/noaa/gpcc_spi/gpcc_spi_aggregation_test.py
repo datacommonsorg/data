@@ -19,7 +19,11 @@ import unittest
 import os
 import tempfile
 import filecmp
-from .gpcc_spi_aggregation import run_gpcc_spi_aggregation
+
+try:
+    from .gpcc_spi_aggregation import run_gpcc_spi_aggregation
+except ImportError:
+    from gpcc_spi_aggregation import run_gpcc_spi_aggregation
 
 # module_dir is the path to where this test is running from.
 module_dir = os.path.dirname(__file__)

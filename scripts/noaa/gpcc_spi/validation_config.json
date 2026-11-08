@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records is within the allowed threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Ensures that all StatVars share a consistent maximum observation date.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "dcids": [
+            "*"
+          ]
+        }
+      }
+    },
+    {
+      "rule_id": "check_max_date_event_observations",
+      "description": "Checks that DroughtEvent observation StatVars have recent data.",
+      "validator": "SQL_VALIDATOR",
+      "scope": {
+        "data_source": "stats",
+        "input_files": [
+          "../../input4/genmcf/summary_report.csv"
+        ]
+      },
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Area_DroughtEvent', 'standardizedPrecipitationIndex')",
+        "condition": "MaxDate >= '2025-01'",
+        "failure_message": "MaxDate is older than 2025-01 for DroughtEvent observations."
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report",
+      "description": "Validates GPCC SPI grid summary report against golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_input1_summary_report",
+      "description": "Validates aggregated GPCC SPI place summary report against golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_agg.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_input2_summary_report",
+      "description": "Validates place-level DroughtEvent summary report against golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_place_svobs.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_input4_summary_report",
+      "description": "Validates DroughtEvent observation summary report against golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_event_svobs.csv",
+        "input_files": "../../input4/genmcf/summary_report.csv"
+      }
+    }
+  ]
+}

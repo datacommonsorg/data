@@ -1,0 +1,3 @@
+"StatVar","ScalingFactors","MinDate","Units","observationPeriods","MeasurementMethods"
+"Area_DroughtEvent","[]","2010-12","[SquareKilometer]","[]","[dcAggregate/PearsonDistribution]"
+"standardizedPrecipitationIndex","[]","2010-12","[]","[]","[dcAggregate/PearsonDistribution]"

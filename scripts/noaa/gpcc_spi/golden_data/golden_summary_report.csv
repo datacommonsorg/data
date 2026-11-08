@@ -1,0 +1,7 @@
+"Units","StatVar","MeasurementMethods","NumPlaces","ScalingFactors","observationPeriods","MinDate"
+"[]","StandardizedPrecipitationIndex_Atmosphere_36MonthPeriod","[PearsonDistribution]","18967","[]","[P36M]","2010-12"
+"[]","StandardizedPrecipitationIndex_Atmosphere_1MonthPeriod","[PearsonDistribution]","18967","[]","[P1M]","2010-12"
+"[]","StandardizedPrecipitationIndex_Atmosphere_3MonthPeriod","[PearsonDistribution]","18967","[]","[P3M]","2010-12"
+"[]","StandardizedPrecipitationIndex_Atmosphere_6MonthPeriod","[PearsonDistribution]","18967","[]","[P6M]","2010-12"
+"[]","StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod","[PearsonDistribution]","18967","[]","[P72M]","2010-12"
+"[]","StandardizedPrecipitationIndex_Atmosphere_9MonthPeriod","[PearsonDistribution]","18967","[]","[P9M]","2010-12"

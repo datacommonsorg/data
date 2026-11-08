@@ -62,9 +62,10 @@ output_file_name=("drought_spi_9m_polygon_events" "drought_spi_9m_polygon_svobs"
 index=0
 echo "input_folders ${input_folders[@]} - output_file_name ${output_file_name[@]}"
 for fld in "${input_folders[@]}"; do
-	csv_files=($(find "$fld" -type f -name "*.csv"))
-	echo "csv_files ${csv_files[@]}"
 	output_file="${fld}/${output_file_name[$index]}"
+	rm -f "${output_file}" "${output_file}.csv"
+	csv_files=($(find "$fld" -maxdepth 1 -type f -name "drought_${config}_*.csv" | sort))
+	echo "csv_files ${csv_files[@]}"
 	echo "output_file $output_file"
 	head -n 1 "${csv_files[0]}" > "$output_file"
 	echo "index -----> $index"
@@ -74,7 +75,10 @@ for fld in "${input_folders[@]}"; do
 	done
 	index=$((index+1))
 	echo "index after increment $index"
-	mv $output_file "${output_file}.csv"
+	mv "$output_file" "${output_file}.csv"
 	echo "Done processing $output_file"
 done
+
+# Deduplicate event observations and generate DroughtEvent entity nodes MCF
+python3 postprocess_events.py
 
