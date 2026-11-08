@@ -20,8 +20,9 @@ California Department of Education / Educational Testing Service (ETS) research 
 (2015–2019, 2021–present; 2020 was cancelled statewide due to COVID-19).
 
 It automatically handles differences in delimiter (comma vs caret) and column naming across
-eras, filters State and County aggregate records, preserves raw source archives in raw_files/,
-and streams normalization into a unified format ready for processing by process.py.
+eras, retains all entity levels (State, Counties, School Districts, and Schools) by default,
+preserves raw source archives in raw_files/, and streams normalization into a unified format
+ready for processing by process.py.
 
 Usage:
   python3 download.py --years=all

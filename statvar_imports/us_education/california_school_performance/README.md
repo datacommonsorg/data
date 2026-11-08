@@ -127,4 +127,5 @@ python3 -m unittest download_process_test.py
 The pipeline produces standard Data Commons import artifacts in `output_files/`:
 - `california_school_performance_all_years_output.csv`: Complete multi-year observations table
 - `california_school_performance_all_years_output.tmcf`: Template MCF linking columns to Data Commons schema nodes
-- `california_school_performance_all_years_output.mcf`: Place MCF definitions for newly opened California schools and districts not yet in `config/school_code_mapping.json`
+- `california_school_performance_all_years_output.mcf`: Place MCF definitions (`node_mcf`) for newly opened California schools and districts (`CA-<county><district>-<school>`) not yet in `config/school_code_mapping.json`.
+  - **Maintainer Note for Annual Updates**: While `node_mcf` satisfies local `dc-import` resolution in Cloud Batch, the Google3 manifest (`CaliforniaSchoolPerformance.textproto`) ingests this dataset via `table` entries. When a new annual release introduces new schools or districts not in `config/school_code_mapping.json`, add their NCES mapping to `config/school_code_mapping.json` or sync the new `CA-...` fallback `ProvisionalNode` entries emitted in `california_school_performance_all_years_output.mcf` to `third_party/datacommons/schema/core/ProvisionalNodePlaces.mcf` in Google3.
