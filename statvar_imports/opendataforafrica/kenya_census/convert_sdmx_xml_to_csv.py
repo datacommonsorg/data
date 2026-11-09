@@ -74,13 +74,12 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
             ]
             if 'OBS_VALUE' not in df.columns:
                 if 'VALUE' in df.columns:
-                    df.rename(columns={'VALUE': 'OBS_VALUE'}, inplace=True)
+                    df = df.rename(columns={'VALUE': 'OBS_VALUE'})
                 elif 0 in df.columns or '0' in df.columns:
-                    df.rename(columns={
+                    df = df.rename(columns={
                         0: 'OBS_VALUE',
-                        '0': 'OBS_VALUE'
-                    },
-                              inplace=True)
+                        '0': 'OBS_VALUE',
+                    })
             return df
 
     # 2. Fallback path for headerless / structure-less XML files
@@ -110,9 +109,9 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     df.columns = [str(c).lstrip('@').strip().upper() for c in df.columns]
     if 'OBS_VALUE' not in df.columns:
         if 'VALUE' in df.columns:
-            df.rename(columns={'VALUE': 'OBS_VALUE'}, inplace=True)
+            df = df.rename(columns={'VALUE': 'OBS_VALUE'})
         elif 0 in df.columns or '0' in df.columns:
-            df.rename(columns={0: 'OBS_VALUE', '0': 'OBS_VALUE'}, inplace=True)
+            df = df.rename(columns={0: 'OBS_VALUE', '0': 'OBS_VALUE'})
     return df
 
 

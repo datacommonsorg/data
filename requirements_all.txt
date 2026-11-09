@@ -25,7 +25,6 @@ rasterio
 rdp
 requests-mock
 s2sphere
-sdmx1
 sentence-transformers
 tabula-py
 yapf
