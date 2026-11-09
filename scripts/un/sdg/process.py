@@ -34,8 +34,6 @@ import pandas as pd
 import shutil
 import sys
 
-from string import punctuation
-
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))

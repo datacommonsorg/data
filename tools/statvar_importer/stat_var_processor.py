@@ -32,7 +32,6 @@ For configs, outputs, and counters, see tools/statvar_importer/README.md.
 from collections import OrderedDict
 import csv
 import datetime
-import glob
 import itertools
 import multiprocessing
 import os
@@ -40,17 +39,11 @@ import re
 import sys
 import tempfile
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
 from absl import logging
-import dateutil
-from dateutil import parser
-from dateutil.parser import parse
-import pandas as pd
 import process_http_server
-import requests
 
 # uncomment to run pprof
 # os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
@@ -78,10 +71,10 @@ import data_annotator
 import property_value_utils as pv_utils
 
 from filter_data_outliers import filter_data_svobs
-from mcf_file_util import get_numeric_value, get_value_list, add_pv_to_node
+from mcf_file_util import get_numeric_value
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
 from mcf_filter import drop_existing_mcf_nodes
-from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
+from mcf_diff import fingerprint_mcf_nodes, diff_mcf_node_pvs
 from place_resolver import PlaceResolver
 from property_value_mapper import PropertyValueMapper
 from schema_resolver import SchemaResolver
@@ -91,10 +84,9 @@ from schema_checker import sanity_check_nodes
 from schema_reconciler import SchemaReconciler
 
 # imports from ../../util
-from config_map import ConfigMap, read_py_dict_from_file
+from config_map import ConfigMap
 from counters import Counters, CounterOptions
 from dc_api_wrapper import dc_api_is_defined_dcid
-from download_util import download_file_from_url
 from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS

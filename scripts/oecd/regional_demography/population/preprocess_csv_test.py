@@ -14,7 +14,6 @@
 
 import unittest
 import os
-import pandas as pd
 import tempfile
 import sys
 

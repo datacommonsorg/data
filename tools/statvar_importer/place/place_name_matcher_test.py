@@ -18,9 +18,6 @@ import unittest
 import os
 import sys
 
-from absl import app
-from absl import logging
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))

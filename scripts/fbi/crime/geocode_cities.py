@@ -3,7 +3,6 @@
 Map cities to the corresponding geocodes.
 """
 
-import importlib
 import os
 import re
 import csv

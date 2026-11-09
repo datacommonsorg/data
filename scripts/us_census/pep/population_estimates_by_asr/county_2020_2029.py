@@ -25,9 +25,7 @@ if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
 from us_census.pep.population_estimates_by_asr.common_functions import (
-    input_url,
-    replace_agegrp,
-)
+    replace_agegrp,)
 from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 

@@ -31,7 +31,6 @@ import json
 from absl import logging
 from absl import flags
 from absl import app
-from google.cloud import storage
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))

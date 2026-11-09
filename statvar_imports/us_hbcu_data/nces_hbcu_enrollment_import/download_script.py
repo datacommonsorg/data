@@ -20,7 +20,6 @@ import time
 from absl import app, logging
 import os
 import shutil
-import pandas as pd
 from pathlib import Path
 
 tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")

@@ -44,7 +44,6 @@ import requests
 import time
 import re
 import tempfile
-from datetime import datetime as dt
 
 warnings.filterwarnings('ignore')
 import pandas as pd
@@ -77,9 +76,9 @@ from clean import (clean_data_df, clean_1970_1989_county_txt,
                    process_states_1900_1969, process_states_1970_1979,
                    process_states_1980_1989, process_states_1990_1999)
 
-from constants import (INPUT_DIRS, OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960,
-                       USA, USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
-                       DISTRICT_OF_COLUMBIA_COUNTY_CODE, INPUT_DIR)
+from constants import (OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960, USA,
+                       USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
+                       DISTRICT_OF_COLUMBIA_COUNTY_CODE)
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2todcid

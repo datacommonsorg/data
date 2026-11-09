@@ -14,9 +14,7 @@
 
 __author__ = ["Thejesh GN <i@thejeshgn.com>"]
 
-import filecmp
 import os
-import json
 import tempfile
 import unittest
 import pandas as pd

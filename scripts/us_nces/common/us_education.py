@@ -24,7 +24,6 @@ import json
 import os
 import re
 import sys
-import warnings
 import numpy as np
 import pandas as pd
 from absl import logging

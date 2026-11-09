@@ -51,14 +51,11 @@ Caveats:
 - Extra empty lines would be dropped
 """
 
-import ast
 import glob
 import logging
 import os
 import re
-import json
 from sys import path
-import requests
 from typing import Dict, Optional, Union
 from collections import OrderedDict
 

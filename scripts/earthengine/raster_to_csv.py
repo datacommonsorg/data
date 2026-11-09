@@ -49,19 +49,15 @@ Additional processing options:
 """
 
 import csv
-import glob
 import math
-import multiprocessing
 import os
 import re
 import sys
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
 from absl import logging
-from geopy import distance
 import numpy as np
 import rasterio
 import s2sphere

@@ -15,7 +15,6 @@
 Tests for cloud_scheduler.py.
 """
 
-import os
 import unittest
 from deepdiff.diff import DeepDiff
 

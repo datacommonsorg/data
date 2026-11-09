@@ -14,7 +14,6 @@
 
 import filecmp
 import os
-import json
 import tempfile
 import unittest
 from india_rbi.below_poverty_line.preprocess import BelowPovertyLineDataLoader

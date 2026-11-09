@@ -16,18 +16,11 @@
 For more details on configs and usage, please refer to the README.
 """
 
-import cgi
 import copy
-from http import server
 import multiprocessing
 import os
 import re
-import socket
-import subprocess
 import sys
-import threading
-import time
-from urllib import parse
 
 from absl import app
 from absl import flags
@@ -36,7 +29,6 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 import gspread
 
 flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')

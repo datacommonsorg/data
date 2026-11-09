@@ -33,12 +33,10 @@ import csv as py_csv
 import re
 import os
 import json
-import io
 from pathlib import Path
 from multiprocessing import Pool, cpu_count
 from absl import app, flags, logging
 from google.cloud import storage
-from google.api_core import exceptions
 
 logging.set_verbosity(logging.INFO)
 

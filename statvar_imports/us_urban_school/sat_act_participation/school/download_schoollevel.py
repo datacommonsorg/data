@@ -23,7 +23,6 @@ from absl import logging, app, flags
 from pathlib import Path
 from datetime import date
 from retry import retry
-import sys
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_type', "sat_act",

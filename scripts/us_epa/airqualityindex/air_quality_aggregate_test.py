@@ -17,9 +17,7 @@ Unit tests for air_quality_aggregate.py
 Usage: python3 -m unittest discover -v -s ../ -p "air_quality_aggregate_test.py"
 '''
 import unittest, csv, os, sys, tempfile, zipfile, io
-from absl import app
 from absl import flags
-from absl import logging
 
 _FLAGS = flags.FLAGS
 

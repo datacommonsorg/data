@@ -13,14 +13,11 @@
 # limitations under the License.
 
 import os
-import json
 import csv
 import copy
 import pandas as pd
-import numpy as np
 import tempfile
 from os import path
-import urllib.request
 from ..common.utils import title_case
 
 CENSUS_DATA_COLUMN_START = 7

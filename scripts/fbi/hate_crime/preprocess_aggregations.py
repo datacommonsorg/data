@@ -27,8 +27,7 @@ from absl import app
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-import file_util
-from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(

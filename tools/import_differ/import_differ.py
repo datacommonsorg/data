@@ -13,16 +13,11 @@
 # limitations under the License.
 """ Utility to generate a dataset diff for import analysis."""
 
-import csv
-import glob
-import json
 import os
 import pandas as pd
-import random
 import subprocess
 import sys
 import time
-from collections import defaultdict
 from enum import Enum
 
 from absl import app

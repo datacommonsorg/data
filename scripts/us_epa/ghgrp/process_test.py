@@ -13,7 +13,6 @@
 # limitations under the License.
 """Tests for process.py"""
 
-import csv
 import os
 import tempfile
 import sys

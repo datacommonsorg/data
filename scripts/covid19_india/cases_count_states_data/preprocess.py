@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import json
-import csv
 import pandas as pd
 import urllib.request
 

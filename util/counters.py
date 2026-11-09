@@ -22,7 +22,6 @@ It also supports the following:
 
 import os
 import psutil
-import sys
 import time
 
 from absl import flags

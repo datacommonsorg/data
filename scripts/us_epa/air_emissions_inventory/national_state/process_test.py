@@ -18,7 +18,6 @@ Script to automate the testing for US EPA Air Pollutant Emission Trends
 import os
 import sys
 import tempfile
-import unittest
 from unittest import mock
 import pandas as pd
 

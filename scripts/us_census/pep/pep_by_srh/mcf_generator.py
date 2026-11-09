@@ -27,7 +27,7 @@ _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-from us_census.pep.pep_by_srh.constants import OUTPUT_DIR, MCF_SRH, MCF_SH, MCF_RH
+from us_census.pep.pep_by_srh.constants import OUTPUT_DIR, MCF_SRH, MCF_RH
 
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
 

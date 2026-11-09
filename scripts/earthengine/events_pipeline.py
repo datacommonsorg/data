@@ -82,9 +82,7 @@ To run a sequence of specific stages, use:
 """
 
 import os
-import re
 import sys
-import time
 
 from absl import app
 from absl import flags
@@ -110,14 +108,16 @@ sys.path.append(
 
 import common_flags
 import file_util
-import pipeline_stage_bigquery
-import pipeline_stage_download
-import pipeline_stage_earthengine
-import pipeline_stage_events
-import pipeline_stage_raster_csv
+# Importing the pipeline_stage_* modules registers their stage runners, and
+# process_events/raster_to_csv define flags used by the stages.
+import pipeline_stage_bigquery  # noqa: F401
+import pipeline_stage_download  # noqa: F401
+import pipeline_stage_earthengine  # noqa: F401
+import pipeline_stage_events  # noqa: F401
+import pipeline_stage_raster_csv  # noqa: F401
 import pipeline_stage_runner
-import process_events
-import raster_to_csv
+import process_events  # noqa: F401
+import raster_to_csv  # noqa: F401
 import utils
 
 from counters import Counters

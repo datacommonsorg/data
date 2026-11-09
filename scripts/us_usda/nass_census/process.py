@@ -14,7 +14,6 @@
 """Import USDA Census of Agriculture."""
 
 import csv
-import io
 import os
 import sys
 import requests

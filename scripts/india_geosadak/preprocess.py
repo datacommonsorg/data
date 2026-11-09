@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-import shutil
 import pandas as pd
 from os import path
 import geopandas

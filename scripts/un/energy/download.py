@@ -21,11 +21,8 @@ python3 download.py
 
 from un_energy_codes import get_all_energy_source_codes
 import datetime
-import io
 import os
-import requests
 import sys
-import zipfile
 
 from absl import app
 from absl import flags

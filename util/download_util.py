@@ -75,7 +75,6 @@ This contains the following utilities to download data from URLS:
   '''
 
 import gzip
-import json
 import os
 import requests
 import requests_cache

@@ -18,7 +18,6 @@ from the official CDC website.
 
 import os
 import re
-import sys
 from urllib.parse import urljoin
 from absl import app, flags, logging
 import requests

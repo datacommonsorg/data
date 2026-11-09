@@ -17,7 +17,6 @@ https://firms.modaps.eosdis.nasa.gov/api/.
 These fire points are converted to S2Cells of level 13.
 """
 
-import ast
 import os
 import sys
 import time

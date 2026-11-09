@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import sys
-import time
 from absl import logging
 from absl import flags
 from absl import app

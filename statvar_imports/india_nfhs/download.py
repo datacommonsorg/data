@@ -16,14 +16,12 @@ import os
 import sys
 import hashlib
 import pandas as pd
-import requests
 import re
 import json
 import tempfile
 from urllib.parse import urlparse, parse_qs, urlencode
 from absl import logging
 from absl import app
-from google.cloud import storage
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(script_dir))

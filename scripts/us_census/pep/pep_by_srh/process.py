@@ -57,11 +57,8 @@ import os
 import sys
 import pandas as pd
 import requests
-import shutil
 import json
-import time
 import tempfile
-from datetime import datetime as dt
 from absl import logging
 
 from absl import app
@@ -77,7 +74,6 @@ if _SCRIPTS_DIR not in sys.path:
 
 from us_census.pep.pep_by_srh.constants import (
     DOWNLOAD_DIR,
-    OUTPUT_DIR,
     PROCESS_AGG_DIR,
     PROCESS_AS_IS_DIR,
     RACE,

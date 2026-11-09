@@ -14,8 +14,6 @@
 
 import os
 import sys
-from absl import app
-from absl import flags
 from absl import logging
 from os import remove, path as ospath
 from csv import DictReader, DictWriter

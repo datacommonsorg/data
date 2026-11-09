@@ -16,9 +16,7 @@ Function library to fetch the census API configuration and create usable configs
 """
 
 import json
-import logging
 import os
-import sys
 from absl import app
 from absl import flags
 from collections import OrderedDict

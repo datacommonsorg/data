@@ -16,10 +16,7 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import json
-import csv
 import pandas as pd
-import urllib.request
 from os import path
 
 INDIA_ISO_CODES = {

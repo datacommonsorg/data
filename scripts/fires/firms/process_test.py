@@ -33,7 +33,6 @@ from util.download_util import set_test_url_download_response
 from process import process_fires_data
 
 from util.config_map import ConfigMap
-from util.counters import Counters
 
 _TESTDIR = os.path.join(_MODULE_DIR, 'test_data')
 

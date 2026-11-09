@@ -30,7 +30,6 @@ import multiprocessing
 from itertools import repeat
 import os
 import datetime
-from google.cloud import storage
 from retry import retry
 from absl import app
 from absl import flags

@@ -23,7 +23,6 @@ import enum
 import requests
 import time
 from os import path
-from csv import writer
 
 module_dir_ = os.path.dirname(__file__)
 

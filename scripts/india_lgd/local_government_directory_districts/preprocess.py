@@ -15,7 +15,6 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import csv
 import difflib
 import pandas as pd
 from india.geo.states import IndiaStatesMapper

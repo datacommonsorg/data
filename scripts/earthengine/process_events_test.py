@@ -13,10 +13,7 @@
 # limitations under the License.
 """Test for events_processor.py"""
 
-import math
 import os
-import s2sphere
-import shapely
 import sys
 import tempfile
 import unittest
@@ -31,7 +28,6 @@ sys.path.append(_MODULE_DIR)
 sys.path.append(os.path.dirname(_MODULE_DIR))
 sys.path.append(os.path.dirname(os.path.dirname((_MODULE_DIR))))
 
-import utils
 import file_util
 
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),

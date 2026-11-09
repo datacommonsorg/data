@@ -19,7 +19,7 @@ import json
 import csv
 import copy
 import pandas as pd
-from absl import app, logging, flags
+from absl import app, logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

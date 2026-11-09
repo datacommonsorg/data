@@ -23,7 +23,6 @@ import zipfile
 from pathlib import Path
 from retry import retry
 import configparser
-import sys
 from absl import logging
 from absl import flags
 from absl import app

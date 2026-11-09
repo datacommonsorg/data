@@ -14,7 +14,6 @@
 
 import filecmp
 import os
-import json
 import unittest
 from .base import CensusPrimaryAbstractDataLoaderBase
 

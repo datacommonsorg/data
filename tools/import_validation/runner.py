@@ -20,7 +20,6 @@ from absl import logging
 import pandas as pd
 import json
 import sys
-from typing import Tuple
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
@@ -160,7 +159,6 @@ class ValidationRunner:
                 summary_csv_path) > 0:
             return pd.read_csv(summary_csv_path)
 
-        import glob
         from collections import defaultdict
         stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})
 

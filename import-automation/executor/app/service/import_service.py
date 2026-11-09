@@ -21,7 +21,6 @@ import logging
 import dataclasses
 from typing import Dict, Iterable
 
-import requests
 from google.cloud import storage
 
 from app.executor import import_target

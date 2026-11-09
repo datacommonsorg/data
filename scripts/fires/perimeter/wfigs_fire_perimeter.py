@@ -16,7 +16,6 @@
 import requests
 import pandas as pd
 import json
-import datetime
 from absl import app
 from shapely import geometry
 from arcgis2geojson import arcgis2geojson

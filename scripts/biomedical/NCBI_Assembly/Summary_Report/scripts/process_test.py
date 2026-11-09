@@ -22,12 +22,10 @@
 
 # Import all functions and classes from the process module
 import os
-import copy
 import filecmp
 import unittest
-from pathlib import Path
 from process import *
-from os.path import dirname, abspath, join
+from os.path import dirname, abspath
 
 _FLAGS = None
 

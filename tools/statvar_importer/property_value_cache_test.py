@@ -19,7 +19,6 @@ import csv
 import tempfile
 
 from absl import app
-from absl import logging
 from property_value_cache import PropertyValueCache, flatten_dict
 
 

@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import json
-import os
 import tempfile
 import unittest
 from pathlib import Path

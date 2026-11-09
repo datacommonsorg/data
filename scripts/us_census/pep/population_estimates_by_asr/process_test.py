@@ -16,12 +16,10 @@ Script to automate the testing for USA Population by Race preprocess script.
 """
 
 import os
-from os import path
 import sys
 import unittest
 from unittest import mock
 import shutil
-import pandas as pd
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +39,6 @@ from us_census.pep.population_estimates_by_asr.process import (
     USCensusPEPByASR,
     _BASELINE_YEAR,
     _create_retry_session,
-    _fetch_url_bytes,
     _is_html_response,
     add_future_year_urls,
 )

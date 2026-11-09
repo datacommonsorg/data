@@ -42,8 +42,7 @@ import types
 from types import MappingProxyType
 
 from absl import logging
-import dateutil
-from dateutil import parser
+import dateutil.parser
 from dateutil.relativedelta import relativedelta
 
 # String utility functions

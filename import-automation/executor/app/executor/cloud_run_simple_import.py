@@ -19,7 +19,6 @@ https://github.com/datacommonsorg/import/tree/master/simple
 import datetime
 import os
 import sys
-import time
 
 from absl import logging
 import pytz

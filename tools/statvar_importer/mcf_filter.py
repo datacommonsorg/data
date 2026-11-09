@@ -25,11 +25,8 @@ To remove nodes defined in another MCF file:
 """
 
 from collections import OrderedDict
-from itertools import islice
 import os
 import sys
-import time
-import urllib
 
 from absl import app
 from absl import flags

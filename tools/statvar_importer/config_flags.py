@@ -15,12 +15,9 @@
 
 import ast
 from collections import OrderedDict
-import collections.abc
 import os
 import sys
-from typing import Union
 
-from absl import app
 from absl import flags
 from absl import logging
 

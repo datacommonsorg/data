@@ -6,7 +6,7 @@ import types
 import pandas as pd
 import shutil
 import tempfile
-from unittest.mock import patch, mock_open, MagicMock
+from unittest.mock import patch, mock_open
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))

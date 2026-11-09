@@ -20,7 +20,6 @@ This script processes data from:
 """
 from absl import app, flags
 import os
-import sys
 import pandas as pd
 
 FLAGS = flags.FLAGS
