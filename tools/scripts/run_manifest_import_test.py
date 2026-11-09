@@ -248,6 +248,19 @@ class RunManifestImportTest(unittest.TestCase):
         self.assertEqual(exit_code, 3)
         self.assertEqual(self.mock_run.call_count, 1)
 
+    def test_fails_cleanly_when_tool_cannot_be_launched(self):
+        self.mock_run.side_effect = PermissionError('Permission denied')
+        self._touch('a.tmcf', 'a.csv')
+        self._write_manifest([{
+            'template_mcf': 'a.tmcf',
+            'cleaned_csv': 'a.csv'
+        }])
+
+        exit_code, stderr = self._run_cli()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn('Permission denied', stderr)
+
 
 if __name__ == '__main__':
     unittest.main()

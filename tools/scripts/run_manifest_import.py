@@ -195,7 +195,14 @@ def main(argv: Sequence[str]) -> int:
               file=sys.stderr)
         if args.dry_run:
             continue
-        result = subprocess.run(command, cwd=cwd, check=False)
+        try:
+            result = subprocess.run(command, cwd=cwd, check=False)
+        except OSError as e:
+            print(
+                f'[run_manifest_import] [ERROR] Failed to run the import tool '
+                f'for input{index}: {e}',
+                file=sys.stderr)
+            return 1
         if result.returncode != 0:
             print(
                 f'[run_manifest_import] [ERROR] Import tool failed for '
