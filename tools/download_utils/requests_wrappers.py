@@ -37,7 +37,6 @@ def request_url_json(url: str,
     JSON decoded response from the GET call.
       Empty dict is returned in case the call times out after max_retries.
   """
-    logging.info('Requesting url: %s', url)
     try:
         req = requests.get(url)
         if req.status_code == requests.codes.ok:
@@ -84,7 +83,6 @@ def request_post_json(url: str,
             req = requests.post(url,
                                 data=json.dumps(data_),
                                 headers=base_headers)
-            logging.info('Post request url: %s', req.request.url)
         except requests.exceptions.ConnectionError:
             logging.warning(
                 f'Timeout occoured, retrying after {retry_interval}s.')
