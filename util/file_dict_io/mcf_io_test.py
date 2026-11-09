@@ -23,12 +23,10 @@ _UTIL_DIR = os.path.dirname(_SCRIPT_DIR)
 if _UTIL_DIR not in sys.path:
     sys.path.insert(0, _UTIL_DIR)
 
-from file_dict_io import (
-    McfFileDictIO,
-    get_record_dcid,
-    is_mcf_file,
-    open_dict_file,
-)
+from file_dict_io import McfFileDictIO
+from file_dict_io import get_record_dcid
+from file_dict_io import is_mcf_file
+from file_dict_io import open_dict_file
 
 
 class McfFileDictIOTest(unittest.TestCase):

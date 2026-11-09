@@ -23,7 +23,9 @@ _UTIL_DIR = os.path.dirname(_SCRIPT_DIR)
 if _UTIL_DIR not in sys.path:
     sys.path.insert(0, _UTIL_DIR)
 
-from file_dict_io import CsvFileDictIO, is_csv_file, open_dict_file
+from file_dict_io import CsvFileDictIO
+from file_dict_io import is_csv_file
+from file_dict_io import open_dict_file
 
 
 class CsvFileDictIOTest(unittest.TestCase):

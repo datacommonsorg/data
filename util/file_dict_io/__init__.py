@@ -49,18 +49,24 @@ Examples:
         print(row)
 """
 
-from file_dict_io.avro_io import AvroFileDictIO, is_avro_file
-from file_dict_io.base import FileDictIO, get_file_extension
-from file_dict_io.csv_io import CsvFileDictIO, is_csv_file, is_tsv_file
-from file_dict_io.json_io import JsonFileDictIO, is_json_file, is_jsonl_file
-from file_dict_io.mcf_io import McfFileDictIO, get_record_dcid, is_mcf_file
-from file_dict_io.sharded_io import (
-    ShardedFileDictIO,
-    get_default_shard_config,
-    is_sharded_file,
-    record_to_canonical_str,
-    str_to_int_hash,
-)
+from file_dict_io.avro_io import AvroFileDictIO
+from file_dict_io.avro_io import is_avro_file
+from file_dict_io.base import FileDictIO
+from file_dict_io.base import get_file_extension
+from file_dict_io.csv_io import CsvFileDictIO
+from file_dict_io.csv_io import is_csv_file
+from file_dict_io.csv_io import is_tsv_file
+from file_dict_io.json_io import JsonFileDictIO
+from file_dict_io.json_io import is_json_file
+from file_dict_io.json_io import is_jsonl_file
+from file_dict_io.mcf_io import McfFileDictIO
+from file_dict_io.mcf_io import get_record_dcid
+from file_dict_io.mcf_io import is_mcf_file
+from file_dict_io.sharded_io import ShardedFileDictIO
+from file_dict_io.sharded_io import get_default_shard_config
+from file_dict_io.sharded_io import is_sharded_file
+from file_dict_io.sharded_io import record_to_canonical_str
+from file_dict_io.sharded_io import str_to_int_hash
 
 
 def open_dict_file(filename: str | list,

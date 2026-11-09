@@ -24,7 +24,10 @@ _UTIL_DIR = os.path.dirname(_SCRIPT_DIR)
 if _UTIL_DIR not in sys.path:
     sys.path.insert(0, _UTIL_DIR)
 
-from file_dict_io import JsonFileDictIO, is_json_file, is_jsonl_file, open_dict_file
+from file_dict_io import JsonFileDictIO
+from file_dict_io import is_json_file
+from file_dict_io import is_jsonl_file
+from file_dict_io import open_dict_file
 
 
 class JsonFileDictIOTest(unittest.TestCase):

@@ -52,11 +52,9 @@ _UTIL_DIR = os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util')
 if _UTIL_DIR not in sys.path:
     sys.path.append(_UTIL_DIR)
 
-from dcid_generator import (
-    generate_node_dcid,
-    generate_place_dcid,
-    generate_statvar_obs_dcid,
-)
+from dcid_generator import generate_node_dcid
+from dcid_generator import generate_place_dcid
+from dcid_generator import generate_statvar_obs_dcid
 from statvar_dcid_generator import get_statvar_dcid
 
 # String utility functions

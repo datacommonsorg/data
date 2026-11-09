@@ -36,19 +36,19 @@ import math
 import os
 import re
 import threading
-from absl import logging
 
-from counters import CounterOptions, Counters
+from absl import logging
+from counters import CounterOptions
+from counters import Counters
 from file_dict_io.avro_io import is_avro_file
 from file_dict_io.base import FileDictIO
 from file_dict_io.csv_io import is_csv_file
-from file_dict_io.json_io import is_json_file, is_jsonl_file
-from file_dict_io.mcf_io import (
-    NODE_ID_PROPS,
-    McfFileDictIO,
-    get_record_dcid,
-    is_mcf_file,
-)
+from file_dict_io.json_io import is_json_file
+from file_dict_io.json_io import is_jsonl_file
+from file_dict_io.mcf_io import NODE_ID_PROPS
+from file_dict_io.mcf_io import McfFileDictIO
+from file_dict_io.mcf_io import get_record_dcid
+from file_dict_io.mcf_io import is_mcf_file
 import file_util
 import mcf_file_util
 

@@ -70,7 +70,6 @@ Example usage within a Python script:
 import concurrent.futures
 import functools
 import hashlib
-import json
 import os
 import re
 import sys
@@ -90,32 +89,26 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(
     os.path.join(os.path.dirname(_SCRIPT_DIR), 'tools', 'statvar_importer'))
 
-from counters import CounterOptions, Counters
-from dcid_generator import (
-    DCID_IGNORE_PROPS,
-    generate_node_dcid,
-    generate_place_dcid,
-    generate_statvar_obs_dcid,
-    get_long_id,
-    get_sha256_long_id,
-)
+from counters import CounterOptions
+from counters import Counters
+from dcid_generator import DCID_IGNORE_PROPS
+from dcid_generator import generate_node_dcid
+from dcid_generator import get_sha256_long_id
+from eval_functions import EVAL_GLOBALS
+from eval_functions import evaluate_statement
+from file_dict_io import ShardedFileDictIO
+from file_dict_io import get_default_shard_config as get_base_shard_config
+from file_dict_io import get_record_dcid
+from file_dict_io import is_avro_file
+from file_dict_io import is_csv_file
+from file_dict_io import is_json_file
+from file_dict_io import is_jsonl_file
+from file_dict_io import is_mcf_file
+from file_dict_io import open_dict_file
+from file_dict_io import record_to_canonical_str
+from file_dict_io import str_to_int_hash
 import file_util
-from file_dict_io import (
-    FileDictIO,
-    ShardedFileDictIO,
-    get_default_shard_config as get_base_shard_config,
-    get_record_dcid,
-    is_avro_file,
-    is_csv_file,
-    is_json_file,
-    is_jsonl_file,
-    is_mcf_file,
-    open_dict_file,
-    record_to_canonical_str,
-    str_to_int_hash,
-)
 import mcf_file_util
-from eval_functions import EVAL_GLOBALS, evaluate_statement
 
 # Defaults
 _DEFAULT_RECORDS_PER_SHARD = 100000

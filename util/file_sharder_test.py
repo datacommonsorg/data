@@ -1,22 +1,26 @@
-import unittest
-from unittest import mock
+import csv
 import json
 import os
+import re
 import sys
 import tempfile
-import csv
-import re
+import unittest
+from unittest import mock
+
 import dateutil.parser
-from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
-from file_sharder import FileSharder, shard_file
-from file_dict_io import McfFileDictIO, open_dict_file, open_file_dict
 import counters as counters_lib
+from dcid_generator import get_long_id
+from file_dict_io import McfFileDictIO
+from file_dict_io import open_dict_file
+from file_dict_io import open_file_dict
 import file_sharder
+from file_sharder import FileSharder
+from file_sharder import shard_file
 
 
 class TestFileSharder(unittest.TestCase):
@@ -551,8 +555,8 @@ class TestFileSharder(unittest.TestCase):
         for record, key, dcid in vectors:
             self.assertEqual(dcid, file_sharder.generate_node_dcid(record),
                              record)
-            long_id_fn = (file_sharder.get_long_id if dcid.startswith('dc/o/')
-                          else file_sharder._get_long_id)
+            long_id_fn = (get_long_id if dcid.startswith('dc/o/') else
+                          file_sharder._get_long_id)
             self.assertEqual(dcid.rsplit('/', 1)[1], long_id_fn(key), key)
 
     def test_merge_counters(self):

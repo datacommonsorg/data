@@ -25,16 +25,14 @@ for _path in (_SCRIPT_DIR, _UTIL_DIR):
     if _path not in sys.path:
         sys.path.insert(0, _path)
 
-from file_dict_io import (
-    AvroFileDictIO,
-    CsvFileDictIO,
-    FileDictIO,
-    JsonFileDictIO,
-    McfFileDictIO,
-    ShardedFileDictIO,
-    open_dict_file,
-    open_file_dict,
-)
+from file_dict_io import AvroFileDictIO
+from file_dict_io import CsvFileDictIO
+from file_dict_io import FileDictIO
+from file_dict_io import JsonFileDictIO
+from file_dict_io import McfFileDictIO
+from file_dict_io import ShardedFileDictIO
+from file_dict_io import open_dict_file
+from file_dict_io import open_file_dict
 
 
 class FileDictIORegistryAndFactoryTest(unittest.TestCase):

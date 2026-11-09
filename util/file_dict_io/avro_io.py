@@ -22,10 +22,11 @@ Example:
 
 from io import UnsupportedOperation
 import os
+
 from absl import logging
 import fastavro
-
-from file_dict_io.base import FileDictIO, get_file_extension
+from file_dict_io.base import FileDictIO
+from file_dict_io.base import get_file_extension
 
 
 def is_avro_file(filename: str) -> bool:

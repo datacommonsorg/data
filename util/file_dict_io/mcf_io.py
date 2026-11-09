@@ -21,9 +21,10 @@ Example:
 """
 
 from io import UnsupportedOperation
-from absl import logging
 
-from file_dict_io.base import FileDictIO, get_file_extension
+from absl import logging
+from file_dict_io.base import FileDictIO
+from file_dict_io.base import get_file_extension
 import mcf_file_util
 
 
