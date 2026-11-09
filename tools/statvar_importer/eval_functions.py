@@ -44,8 +44,7 @@ import types
 from types import MappingProxyType
 
 from absl import logging
-import dateutil
-from dateutil import parser
+import dateutil.parser
 from dateutil.relativedelta import relativedelta
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

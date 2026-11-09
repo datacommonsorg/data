@@ -2,9 +2,9 @@
 # measures, we consider it as different units measuring the same
 # StatisticalVariable
 import json
-import pandas as pd
-import numpy as np
 import logging
+
+import pandas as pd
 
 IGNORED_FIELDS = [
     "OBJECTID", "Shape", "Shape_Length", "Shape_Area", "STATE", "STATEABBRV",

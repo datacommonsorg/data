@@ -22,15 +22,17 @@
 
 """
 
+from datetime import datetime as dt
+from io import StringIO
+import json
 import os
 import re
 import sys
-import requests
 import time
-import json
-from datetime import datetime as dt
+
 from absl import logging
-from io import StringIO
+import requests
+
 # To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
@@ -39,11 +41,12 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-import pandas as pd
 from absl import app
 from absl import flags
-from util.alpha2_to_dcid import USSTATE_MAP
+import pandas as pd
 from states_to_shortform import get_states
+
+from util.alpha2_to_dcid import USSTATE_MAP
 
 #pd.options.mode.copy_on_write = True
 

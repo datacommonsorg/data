@@ -22,6 +22,7 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
+
 import requests
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

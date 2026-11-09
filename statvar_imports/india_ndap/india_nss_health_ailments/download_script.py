@@ -21,8 +21,8 @@ from typing import List, Tuple
 from absl import app
 from absl import flags
 from absl import logging
-import pandas as pd
 from google.cloud import storage
+import pandas as pd
 
 _FLAGS = flags.FLAGS
 

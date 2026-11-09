@@ -17,12 +17,16 @@ This includes aggregate API measurements at the county/CSBA level.
 
 Usage: python3 air_quality_aggregate.py <end_year>
 '''
-import csv, os, sys, requests, io, zipfile
+import csv
+from datetime import datetime
+import io
+import os
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime
+import requests
 
 _FLAGS = flags.FLAGS
 

@@ -29,17 +29,13 @@ if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
 from us_census.pep.pep_by_srh.mcf_generator import generate_mcf
-from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
 import us_census.pep.pep_by_srh.process as process_module
-from us_census.pep.pep_by_srh.process import (
-    _BASELINE_YEAR,
-    _create_retry_session,
-    _head_with_html_retry,
-    add_future_year_urls,
-    download_with_retry,
-    process,
-)
-from us_census.pep.pep_by_srh.constants import OUTPUT_DIR
+from us_census.pep.pep_by_srh.process import _BASELINE_YEAR
+from us_census.pep.pep_by_srh.process import _create_retry_session
+from us_census.pep.pep_by_srh.process import add_future_year_urls
+from us_census.pep.pep_by_srh.process import download_with_retry
+from us_census.pep.pep_by_srh.process import process
+from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
 
 _ACTUAL_RESULTS_DIR = os.path.join(_CODEDIR, "testdata", "actual_results")
 

@@ -13,15 +13,16 @@
 # limitations under the License.
 """Module to download and do light processing on import data."""
 
-import io
-from absl import logging
-import os
-import ssl
-import re
-import requests
 from datetime import datetime
-import pandas as pd
+import io
+import os
+import re
+import ssl
 import zipfile
+
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
 
 # Set logging level

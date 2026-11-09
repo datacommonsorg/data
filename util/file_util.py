@@ -18,11 +18,9 @@ Spreadsheets.
 """
 
 import ast
-import chardet
 import csv
 import fnmatch
 import glob
-import gspread
 import io
 import json
 import os
@@ -31,15 +29,17 @@ import pprint
 import shutil
 import sys
 import tempfile
-
-import numpy as np
+from typing import Union
 
 from absl import app
 from absl import logging
-from aggregation_util import aggregate_dict, aggregate_value
+from aggregation_util import aggregate_dict
+from aggregation_util import aggregate_value
+import chardet
 from google.cloud import storage
+import gspread
+import numpy as np
 from retry.api import retry_call
-from typing import Union
 
 
 class FileIO:

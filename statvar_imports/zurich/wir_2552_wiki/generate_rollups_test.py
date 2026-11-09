@@ -18,7 +18,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
-import numpy as np
+
 import pandas as pd
 
 # Add module directory to sys.path
@@ -27,11 +27,15 @@ if _MODULE_DIR not in sys.path:
     sys.path.insert(0, _MODULE_DIR)
 
 from absl import flags
+
 for _flag_name in ('input_csv', 'output_csv'):
     if _flag_name in flags.FLAGS:
         delattr(flags.FLAGS, _flag_name)
 
-from generate_rollups import FLAGS, generate_rollups, main, process_rollups
+from generate_rollups import FLAGS
+from generate_rollups import generate_rollups
+from generate_rollups import main
+from generate_rollups import process_rollups
 
 
 class GenerateRollupsTest(unittest.TestCase):

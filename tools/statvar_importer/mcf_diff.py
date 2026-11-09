@@ -72,7 +72,10 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, normalize_mcf_node, normalize_value, node_dict_to_text, get_node_dcid, strip_namespace
+from mcf_file_util import filter_mcf_nodes
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import node_dict_to_text
+from mcf_file_util import normalize_mcf_node
 
 flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
 flags.DEFINE_string('mcf2', '', 'MCF file with nodes')

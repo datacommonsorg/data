@@ -13,8 +13,9 @@
 # limitations under the License.
 """Generates GeoJSON MCF for Indian State and Districts."""
 
-import os
 import json
+import os
+
 from absl import app
 from absl import flags
 

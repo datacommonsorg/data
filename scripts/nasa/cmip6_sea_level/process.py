@@ -14,15 +14,14 @@
 
 # Code for processing CMIP6 Sea-level rise projections in netcdf4 format.
 
-import csv
 import glob
 import os
 import sys
 
-import numpy as np
-import xarray
 from absl import app
 from absl import flags
+import numpy as np
+import xarray
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

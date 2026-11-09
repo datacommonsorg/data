@@ -12,13 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
 import csv
 import json
-import pandas as pd
-from absl import flags, logging
+import os
+import sys
+
 from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,8 +30,8 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../'))
-from utils import multi_index_to_single_index
 from download import download_data_to_file_and_df
+from utils import multi_index_to_single_index
 
 
 def process_data(df, output_file_path):

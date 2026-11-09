@@ -16,10 +16,11 @@ Script to automate the testing for USA Population by Race preprocess script.
 """
 
 import os
-import unittest
 import shutil
-from os import path
+import unittest
+
 from preprocess import CensusUSAPopulationByRace
+
 # module_dir is the path to where this test is running from.
 module_dir = os.path.dirname(__file__)
 TEST_DATA_FOLDER = os.path.join(module_dir, "test_data")

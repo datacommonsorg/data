@@ -20,9 +20,11 @@ This import uses the dataset:
     This file is a curated list of contaminant names and their respective ids on the Data Commons knowledge graph
 """
 
-from absl import app, flags
 import os
 import sys
+
+from absl import app
+from absl import flags
 import pandas as pd
 
 # Allows the following module imports to work when running as a script

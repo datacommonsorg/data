@@ -1,9 +1,9 @@
 """Tests for generate_cohort_set.py."""
 
 import io
+import unittest
 
 from .generate_cohort_set import write_mcf
-import unittest
 
 TEST_DIR = 'testdata/'
 

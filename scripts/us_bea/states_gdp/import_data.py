@@ -25,7 +25,7 @@ import csv
 import io
 import os
 import re
-from urllib.request import urlopen
+
 from absl import app
 from absl import flags
 from absl import logging

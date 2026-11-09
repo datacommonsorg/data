@@ -13,8 +13,8 @@
 # limitations under the License.
 """Tests for acs_spec_generator.py"""
 
-import unittest
 import tempfile
+import unittest
 
 from .acs_spec_generator import *
 
