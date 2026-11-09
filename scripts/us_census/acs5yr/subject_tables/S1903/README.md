@@ -40,7 +40,7 @@ cd scripts/us_census/acs5yr/subject_tables
 python3 process.py \
   --option=all \
   --table_prefix=S1903 \
-  --has_percent=False \
+  --has_percent=True \
   --debug=False \
   --spec_path=S1903/S1903_spec.json \
   --input_path=S1903/input_data/S1903.zip \

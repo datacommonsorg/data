@@ -45,5 +45,28 @@
         "FAMILY INCOME BY FAMILY SIZE",
         "FAMILY INCOME BY NUMBER OF EARNERS"
     ],
-    "denominators": {}
+    "denominators": {
+        "Total!!Estimate!!Households": [
+            "Total!!Estimate!!One race!!White",
+            "Total!!Estimate!!One race!!Black or African American",
+            "Total!!Estimate!!One race!!American Indian and Alaska Native",
+            "Total!!Estimate!!One race!!Asian",
+            "Total!!Estimate!!One race!!Native Hawaiian and Other Pacific Islander",
+            "Total!!Estimate!!One race!!Some other race",
+            "Total!!Estimate!!Two or more races",
+            "Total!!Estimate!!Households!!One race!!White",
+            "Total!!Estimate!!Households!!One race!!Black or African American",
+            "Total!!Estimate!!Households!!One race!!American Indian and Alaska Native",
+            "Total!!Estimate!!Households!!One race!!Asian",
+            "Total!!Estimate!!Households!!One race!!Native Hawaiian and Other Pacific Islander",
+            "Total!!Estimate!!Households!!One race!!Some other race",
+            "Total!!Estimate!!Households!!Two or more races",
+            "Total!!Estimate!!Hispanic or Latino origin (of any race)",
+            "Total!!Estimate!!White alone, not Hispanic or Latino",
+            "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!15 to 24 years",
+            "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!25 to 44 years",
+            "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!45 to 64 years",
+            "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!65 years and over"
+        ]
+    }
 }
