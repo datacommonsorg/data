@@ -425,6 +425,40 @@ prefix an existing method with `dcAggregate/`. `mean` also sets
 `statType: meanValue`. The generated TMCF can include an `#Aggregate` line; lint
 accepts it.
 
+## Test the PV map and places on a sample
+
+Make a sample with every value of the important columns; see the
+[data sampler guide](data_sampler.md#every-value-of-the-important-columns). Run
+`stat_var_processor.py` on the sample with `--debug`, so the counters name the
+values that failed:
+
+```bash
+./agents/common/run_python.sh tools/statvar_importer/stat_var_processor.py \
+  --input_data=/tmp/sample.csv \
+  --pv_map=<import-dir>/<import>_pvmap.csv,<import-dir>/<source>_places_pvmap.csv \
+  --config_file=<import-dir>/<Import>_statvar_processor_config.csv \
+  --output_path=/tmp/sample_output/<import> \
+  --output_counters=/tmp/sample_output/counters.csv \
+  --debug
+```
+
+Then check these counters:
+
+| Counter                                                    | Meaning                                                                                        | Fix                                                                                  |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `warning-missing-property-key_<column>:<text>`             | No key matches the whole text of a cell in that column, for example `Indicator:Literacy rate`. | Add a key, unless a partial key already maps the text.                               |
+| `dropped-svobs-unresolved-place`, `error-unresolved-place` | Some places didn't resolve to DCIDs.                                                           | Add the names to the places PV map or to `places_resolved_csv`.                      |
+| `error-statvar-missing-property`                           | Some StatVars lack a required property, such as `populationType`.                              | Usually an indicator without a key; see the `warning-missing-property-key` counters. |
+
+To list the texts without keys in one column:
+
+```bash
+grep 'warning-missing-property-key_Indicator:' /tmp/sample_output/counters.csv
+```
+
+After the counters are clean on the sample, process the full input; see
+[Check the results](../README.md#check-the-results).
+
 ## Speed up processing
 
 Before you process a large input, estimate the run time and remove work the

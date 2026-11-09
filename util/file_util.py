@@ -1095,6 +1095,11 @@ def file_get_csv_reader_options(
         'delimiter': delimiter character for CSV files.
         'dialect': File dialect, such as 'unix', 'excel'
     """
+    # TODO: Add an option to use a given delimiter instead of the detected
+    # one. default_options['delimiter'] is only used when no delimiter is
+    # detected, so callers such as file_load_csv_dict(delimiter=';') can't
+    # force a delimiter. For example, a ';' file with decimal commas is
+    # detected as a ',' file. Until then, pass delim_chars=[delimiter].
     result = dict(default_options)
 
     if data is None:
