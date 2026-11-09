@@ -82,9 +82,14 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
         # Simulate all downloads returning None (e.g., HTTP 404 or no relevant CSVs)
         mock_download_zip.return_value = None
 
-        with self.assertRaisesRegex(RuntimeError,
-                                    "No data was downloaded for gas: co2"):
-            download_and_segregate_by_gas.download_and_segregate_by_gas()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with patch.object(
+                    download_and_segregate_by_gas, '__file__',
+                    os.path.join(tmp_dir, 'download_and_segregate_by_gas.py')):
+                with self.assertRaisesRegex(
+                        RuntimeError, "No data was downloaded for gas: co2"):
+                    download_and_segregate_by_gas.download_and_segregate_by_gas(
+                    )
         self.assertEqual(mock_download_zip.call_count, 2)
         mock_session.__exit__.assert_called_once()
 
@@ -255,6 +260,39 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
             self.assertNotIn('subsector_net-soil-organic-carbon', ghg_map)
             self.assertNotIn('sector_fluorinated-gases', ghg_map)
 
+    def test_append_legacy_subsector_rollups(self):
+        raw_df = pd.DataFrame({
+            'iso3_country': ['USA'] * 5,
+            'sector': [
+                'transportation',
+                'transportation',
+                'waste',
+                'waste',
+                'agriculture',
+            ],
+            'subsector': [
+                'domestic-shipping',
+                'international-shipping',
+                'domestic-wastewater-treatment-and-discharge',
+                'industrial-wastewater-treatment-and-discharge',
+                'cropland-fires',
+            ],
+            'start_time': ['2020-01-01 00:00:00'] * 5,
+            'end_time': ['2020-12-31 00:00:00'] * 5,
+            'gas': ['co2'] * 5,
+            'emissions_quantity': ['10', '25.5', '5', '15', '100'],
+        })
+        rolled_df = download_and_segregate_by_gas.append_legacy_subsector_rollups(
+            raw_df)
+        sub_map = dict(
+            zip(rolled_df['subsector'], rolled_df['emissions_quantity']))
+        sec_map = dict(zip(rolled_df['subsector'], rolled_df['sector']))
+        self.assertEqual(sub_map['shipping'], '35.5')
+        self.assertEqual(sub_map['wastewater-treatment-and-discharge'], '20')
+        self.assertEqual(sec_map['shipping'], '')
+        self.assertEqual(sec_map['wastewater-treatment-and-discharge'], '')
+
 
 if __name__ == '__main__':
     unittest.main()
+

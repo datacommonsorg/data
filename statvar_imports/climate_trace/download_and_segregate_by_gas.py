@@ -103,6 +103,19 @@ def _format_emission(x):
         return ''
 
 
+# Legacy per-gas subsectors that combine multiple v7 subsectors.
+LEGACY_SUBSECTOR_ROLLUPS = {
+    "shipping": [
+        "domestic-shipping",
+        "international-shipping",
+        "non-broadcasting-vessels",
+    ],
+    "wastewater-treatment-and-discharge": [
+        "domestic-wastewater-treatment-and-discharge",
+        "industrial-wastewater-treatment-and-discharge",
+    ],
+}
+
 # Legacy OldAPI categories that combine multiple v7 subsectors.
 LEGACY_COMPOSITE_GROUPS = {
     "sector_maritime": [
@@ -197,6 +210,50 @@ GREENHOUSEGAS_PVMAP_KEYS = frozenset({
 })
 
 
+def append_legacy_subsector_rollups(df):
+    """Appends composite rows for legacy subsectors (shipping, wastewater-treatment-and-discharge)."""
+    required_cols = {
+        'iso3_country', 'subsector', 'start_time', 'gas', 'emissions_quantity'
+    }
+    if not required_cols.issubset(df.columns):
+        return df
+
+    base_df = df[~df['subsector'].isin(LEGACY_SUBSECTOR_ROLLUPS)].copy()
+    base_df['_val'] = pd.to_numeric(base_df['emissions_quantity'],
+                                    errors='coerce')
+    valid_df = base_df.dropna(subset=['iso3_country', 'start_time', '_val'])
+
+    extra_cols = [
+        c for c in df.columns if c not in {
+            'iso3_country', 'sector', 'subsector', 'start_time', 'gas',
+            'emissions_quantity'
+        }
+    ]
+    rollup_frames = []
+    for legacy_sub, sub_list in LEGACY_SUBSECTOR_ROLLUPS.items():
+        comp_df = valid_df[valid_df['subsector'].isin(sub_list)]
+        if comp_df.empty:
+            continue
+        agg_spec = {'_val': 'sum'}
+        for col in extra_cols:
+            agg_spec[col] = 'first'
+        grp = comp_df.groupby(['iso3_country', 'start_time', 'gas'],
+                              as_index=False).agg(agg_spec)
+        grp['sector'] = ''
+        grp['subsector'] = legacy_sub
+        grp['emissions_quantity'] = grp['_val'].apply(_format_emission)
+        grp = grp.drop(columns=['_val'])
+        for col in df.columns:
+            if col not in grp.columns:
+                grp[col] = ''
+        rollup_frames.append(grp[list(df.columns)])
+
+    if not rollup_frames:
+        return base_df.drop(columns=['_val'])
+    return pd.concat([base_df.drop(columns=['_val'])] + rollup_frames,
+                     ignore_index=True)
+
+
 def generate_greenhousegas_input(co2e_100yr_df, output_dir):
     """Generates pre-aggregated greenhousegas_co2e_100yr.csv for GreenhouseGas StatVars."""
     required_cols = {
@@ -209,7 +266,9 @@ def generate_greenhousegas_input(co2e_100yr_df, output_dir):
         )
         return
 
-    df = co2e_100yr_df[list(required_cols)].copy()
+    df = co2e_100yr_df[
+        ~co2e_100yr_df['subsector'].isin(LEGACY_SUBSECTOR_ROLLUPS)][
+            list(required_cols)].copy()
     df['val'] = pd.to_numeric(df['emissions_quantity'], errors='coerce')
     df = df.dropna(subset=['iso3_country', 'start_time', 'val'])
 
@@ -397,6 +456,8 @@ def download_and_segregate_by_gas():
                         "  -> Formatting 'emissions_quantity' column...")
                     final_df['emissions_quantity'] = final_df[
                         'emissions_quantity'].apply(_format_emission)
+
+                final_df = append_legacy_subsector_rollups(final_df)
 
                 logging.info(
                     f"  -> Saving combined data to {output_filename}...")
