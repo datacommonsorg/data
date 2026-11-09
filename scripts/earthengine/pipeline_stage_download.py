@@ -27,12 +27,12 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import file_util
-import utils
-
 from counters import Counters
 from download_util import request_url
-from pipeline_stage_runner import StageRunner, register_stage_runner
+import file_util
+from pipeline_stage_runner import StageRunner
+from pipeline_stage_runner import register_stage_runner
+import utils
 
 
 class DownloadRunner(StageRunner):

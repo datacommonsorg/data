@@ -13,22 +13,23 @@
 # limitations under the License.
 """A script to process FBI Hate Crime data."""
 
+import copy
+import json
 import os
 import sys
-import json
-import pandas as pd
-import numpy as np
-import copy
-from utils import flatten_by_column, make_time_place_aggregation
+
+from absl import app
 from absl import flags
 from absl import logging
-from absl import app
+import numpy as np
+import pandas as pd
+from utils import flatten_by_column
+from utils import make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-import file_util
-from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(

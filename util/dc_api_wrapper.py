@@ -26,16 +26,16 @@ import urllib
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
-from datacommons_client.utils.error_handling import APIError, DCConnectionError, DCStatusError
+from datacommons_client.utils.error_handling import APIError
+from datacommons_client.utils.error_handling import DCConnectionError
+from datacommons_client.utils.error_handling import DCStatusError
 import requests
 import requests_cache
-from tenacity import (
-    RetryCallState,
-    Retrying,
-    retry_if_exception,
-    stop_after_attempt,
-    wait_fixed,
-)
+from tenacity import RetryCallState
+from tenacity import Retrying
+from tenacity import retry_if_exception
+from tenacity import stop_after_attempt
+from tenacity import wait_fixed
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

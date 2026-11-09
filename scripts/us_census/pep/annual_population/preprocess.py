@@ -36,23 +36,23 @@ input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
-import os
-import sys
 import json
-import warnings
-import requests
-import time
+import os
 import re
+import sys
 import tempfile
-from datetime import datetime as dt
+import time
+import warnings
+
+import requests
 
 warnings.filterwarnings('ignore')
-import pandas as pd
 from absl import app
-from absl import logging
 from absl import flags
-from retry import retry
+from absl import logging
+import pandas as pd
 from requests.adapters import HTTPAdapter
+from retry import retry
 from urllib3.util.retry import Retry
 
 _FLAGS = flags.FLAGS
@@ -73,18 +73,24 @@ popchg_file_name_pattern = r"NST-EST\d{4}-POPCHG2020_\d{4}\.csv"
 sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from clean import (clean_data_df, clean_1970_1989_county_txt,
-                   process_states_1900_1969, process_states_1970_1979,
-                   process_states_1980_1989, process_states_1990_1999)
-
-from constants import (INPUT_DIRS, OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960,
-                       USA, USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
-                       DISTRICT_OF_COLUMBIA_COUNTY_CODE, INPUT_DIR)
+from clean import clean_1970_1989_county_txt
+from clean import clean_data_df
+from clean import process_states_1900_1969
+from clean import process_states_1970_1979
+from clean import process_states_1980_1989
+from clean import process_states_1990_1999
+from constants import DISTRICT_OF_COLUMBIA_COUNTY_CODE
+from constants import DISTRICT_OF_COLUMBIA_STATE_CODE
+from constants import OUTPUT_DIR
+from constants import SCALING_FACTOR_STATE_1900_1960
+from constants import USA
+from constants import USA_GEO_ID
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2todcid
-import util.name_to_alpha2 as statetoshortform
 import util.county_to_dcid as countytodcid
+import util.name_to_alpha2 as statetoshortform
+
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 _FILES_TO_DOWNLOAD = []

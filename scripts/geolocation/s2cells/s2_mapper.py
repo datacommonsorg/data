@@ -16,13 +16,11 @@ import ast
 import csv
 import math
 import os
-import sys
 
-import s2sphere
 from absl import app
 from absl import flags
-from datetime import datetime
 from dateutil import parser
+import s2sphere
 
 FLAGS = flags.FLAGS
 

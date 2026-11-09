@@ -29,21 +29,32 @@ SingleDose - boolean fomatted as string for DrugStrength property
 AdditionalInfo - string for additionalInformation Drug property
 DrugRef - either the ChEMBL ID for the drug or sanitized verison of DrugName
 """
-import re
+from collections import defaultdict
 import json
 from os import path
-from collections import defaultdict
-import pandas as pd
-from func_timeout import func_timeout
-from chembl_webresource_client.new_client import new_client
+import re
 
+from chembl_webresource_client.new_client import new_client
+from func_timeout import func_timeout
+import pandas as pd
+from utils.config import ADDITIONAL_INFO_TAGS
+from utils.config import ADMIN_ROUTE_ENUMS
+from utils.config import ADMIN_ROUTE_REPLACEMENTS
+from utils.config import ADMIN_ROUTES_W_COMMAS
+from utils.config import APPLICATION_TYPE_ENUMS
+from utils.config import DOSAGE_FORM_ENUMS
+from utils.config import DOSAGE_FORM_IN_ADMIN_ROUTE
+from utils.config import DOSAGE_FORM_REPLACEMENTS
+from utils.config import DOSE_TYPES
+from utils.config import DOSGAE_FORM_LISTS
+from utils.config import DRUG_COURSES
+from utils.config import DRUG_REF_REPLACEMENTS
+from utils.config import ILL_FORMATTED_FORMS
+from utils.config import ILL_FORMATTED_INGREDIENTS
+from utils.config import ILL_FORMATTED_STRENGTHS
+from utils.config import MARKETING_STATUS_ENUMS
+from utils.config import TE_CODE_ENUMS
 from utils.format import get_qty_format
-from utils.config import APPLICATION_TYPE_ENUMS, TE_CODE_ENUMS, \
-MARKETING_STATUS_ENUMS, DOSAGE_FORM_ENUMS, ADMIN_ROUTE_ENUMS, \
-ADMIN_ROUTES_W_COMMAS, ADMIN_ROUTE_REPLACEMENTS, DOSAGE_FORM_IN_ADMIN_ROUTE, \
-DOSAGE_FORM_REPLACEMENTS,DOSGAE_FORM_LISTS, DRUG_REF_REPLACEMENTS, \
-ILL_FORMATTED_FORMS, ILL_FORMATTED_STRENGTHS, ILL_FORMATTED_INGREDIENTS, \
-ADDITIONAL_INFO_TAGS, DOSE_TYPES, DRUG_COURSES
 
 molecule = new_client.molecule
 

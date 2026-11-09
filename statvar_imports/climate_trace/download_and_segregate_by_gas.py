@@ -1,11 +1,12 @@
-import requests
-import zipfile
-import pandas as pd
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import io
-import json
-import os
 import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import os
+import zipfile
+
+import pandas as pd
+import requests
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')

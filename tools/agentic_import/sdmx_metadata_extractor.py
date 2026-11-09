@@ -20,16 +20,18 @@ dataclasses for representing the JSON structure and functions to extract metadat
 from SDMX objects.
 """
 
+from dataclasses import asdict
+from dataclasses import dataclass
+from dataclasses import field
 import json
 import logging
-from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Literal, Any
+from typing import Any, List, Literal, Optional
 
 from absl import app
 from absl import flags
-
 import sdmx
-from sdmx.model.internationalstring import InternationalString, DEFAULT_LOCALE
+from sdmx.model.internationalstring import DEFAULT_LOCALE
+from sdmx.model.internationalstring import InternationalString
 
 
 def _get_localized_string(obj: Optional[InternationalString]) -> str:

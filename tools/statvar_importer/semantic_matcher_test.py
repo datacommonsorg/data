@@ -15,8 +15,6 @@
 
 import unittest
 
-from absl import app
-from absl import logging
 from semantic_matcher import SemanticMatcher
 
 

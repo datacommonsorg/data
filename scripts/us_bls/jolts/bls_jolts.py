@@ -24,11 +24,14 @@ Dataset being processed: https://download.bls.gov/pub/time.series/jt/
 """
 import os
 import textwrap
-from absl import app, logging, flags
-from retry import retry
+
+from absl import app
+from absl import flags
+from absl import logging
+from map_config import _dcid_map
 import pandas as pd
 import requests
-from map_config import _dcid_map
+from retry import retry
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('modes', '', 'Options: download or process')

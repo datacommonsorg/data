@@ -17,8 +17,9 @@ Script to automate the testing for USA Population preprocess script.
 
 import os
 import sys
-import unittest
 import tempfile
+import unittest
+
 # _MODULE_DIR is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
@@ -27,23 +28,24 @@ for path in (_SCRIPTS_DIR, _MODULE_DIR):
         sys.path.append(path)
 
 import re
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 import pandas as pd
+from us_census.pep.annual_population.constants import TEST_DATA_DIR
+import us_census.pep.annual_population.preprocess as prep
+from us_census.pep.annual_population.preprocess import USA
+from us_census.pep.annual_population.preprocess import _create_retry_session
+from us_census.pep.annual_population.preprocess import _process_nationals_2029
+from us_census.pep.annual_population.preprocess import _process_states_2029
+from us_census.pep.annual_population.preprocess import add_future_year_urls
+from us_census.pep.annual_population.preprocess import download_with_retry
+from us_census.pep.annual_population.preprocess import popchg_file_name_pattern
 
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from us_census.pep.annual_population.preprocess import (
-    process,
-    _process_nationals_2029,
-    _process_states_2029,
-    download_with_retry,
-    _create_retry_session,
-    add_future_year_urls,
-    popchg_file_name_pattern,
-    USA,
-)
-import us_census.pep.annual_population.preprocess as prep
-from us_census.pep.annual_population.constants import TEST_DATA_DIR
+from us_census.pep.annual_population.preprocess import process
+
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 

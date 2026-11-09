@@ -22,11 +22,11 @@
                         --out_path simplified-data/geoId-01-simple.geojson
 """
 
-import rdp
-import geojson
 from absl import app
 from absl import flags
 from absl import logging
+import geojson
+import rdp
 
 
 class GeojsonSimplifier:

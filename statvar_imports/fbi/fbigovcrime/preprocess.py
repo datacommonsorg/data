@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import time
-from absl import logging
-from absl import flags
-from absl import app
 import os
 import re
-import pandas as pd
 import shutil
 import subprocess
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')

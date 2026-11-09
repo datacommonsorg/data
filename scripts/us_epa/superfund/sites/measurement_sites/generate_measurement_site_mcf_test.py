@@ -13,7 +13,6 @@
 # limitations under the License.
 """Tests for generate_measurement_site_mcf.py"""
 
-from email.mime import base
 import os
 import unittest
 

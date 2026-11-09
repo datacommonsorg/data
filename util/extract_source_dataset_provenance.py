@@ -31,7 +31,8 @@ from absl import logging
 # Ensure local imports work correctly if run from repo root
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from util.dc_api_wrapper import dc_api_wrapper, get_datacommons_client
+from util.dc_api_wrapper import dc_api_wrapper
+from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 

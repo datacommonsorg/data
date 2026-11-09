@@ -14,10 +14,11 @@
 """Script to generate schema mcfs and get the mapping of dimensions/indicators
 to their corresponding schema dcid."""
 
-import requests
 import json
-import re
 import os
+import re
+
+import requests
 
 # Map of dimension code to title to use to build a dcid for that dimension
 PROP_TITLE_MAP = {

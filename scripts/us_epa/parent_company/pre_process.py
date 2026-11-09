@@ -13,24 +13,21 @@
 # limitations under the License.
 """A script to parse and pre-process the Parent Company Info for Facilities tracked by EPA."""
 
-import os.path
-import pathlib
-import sys
-
 import csv
 import difflib
-import json
-import pandas as pd
+import os.path
 import re
+import sys
 
 from absl import app
 from absl import flags
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
-from us_epa.util import facilities_helper as fh
 from us_epa.parent_company import static_corrections as sc
+from us_epa.util import facilities_helper as fh
 
 flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",

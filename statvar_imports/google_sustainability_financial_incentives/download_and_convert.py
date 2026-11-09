@@ -13,11 +13,11 @@
 # limitations under the License.
 """Script to download and convert sustainability financial incentives data from GCS."""
 
+from datetime import datetime
 import hashlib
 import json
 import os
 import sys
-from datetime import datetime
 from typing import Optional
 
 from absl import app

@@ -1,7 +1,8 @@
-import os
-import requests
 import io
+import os
+
 import pandas as pd
+import requests
 
 
 def download_tb_percentage_data():

@@ -22,22 +22,23 @@
     --input_folder=<input folder name> --source_folder=<source folder name>`
 """
 
-import requests
-import json
-import prettytable
-import os
-import csv
-import re
 import ast
-import time
-import shutil
+import csv
 from datetime import datetime
+import json
+import os
+import re
+import shutil
+import time
+
 from absl import app
 from absl import flags
 from absl import logging
-from retry import retry
-from google.cloud import storage
 from google.api_core.exceptions import NotFound
+from google.cloud import storage
+import prettytable
+import requests
+from retry import retry
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('place_type', '', 'state or national')
