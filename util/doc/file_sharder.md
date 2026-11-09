@@ -11,14 +11,14 @@
 - [Configuration options](#configuration-options)
 - [Progress counters](#progress-counters)
 - [Common recipes](#common-recipes)
-  - [1. Partition a large CSV by row count](#1-partition-a-large-csv-by-row-count)
-  - [2. Route MCF graph nodes into a fixed shard count](#2-route-mcf-graph-nodes-into-a-fixed-shard-count)
-  - [3. Read large seekable files with parallel workers](#3-read-large-seekable-files-with-parallel-workers)
-  - [4. Transform columns and evaluate expressions](#4-transform-columns-and-evaluate-expressions)
-  - [5. Convert observation CSV to MCF with generated DCID and typeOf:StatVarObservation](#5-convert-observation-csv-to-mcf-with-generated-dcid-and-typeofstatvarobservation)
-  - [6. Split a CSV into separate files by column prefix (e.g., state FIPS code)](#6-split-a-csv-into-separate-files-by-column-prefix-eg-state-fips-code)
-  - [7. Deduplicate records across inputs](#7-deduplicate-records-across-inputs)
-  - [8. Deterministic key sampling](#8-deterministic-key-sampling)
+  - [Recipe 1 Partition a large CSV by row count](#recipe-1-partition-a-large-csv-by-row-count)
+  - [Recipe 2 Route MCF graph nodes into a fixed shard count](#recipe-2-route-mcf-graph-nodes-into-a-fixed-shard-count)
+  - [Recipe 3 Read large seekable files with parallel workers](#recipe-3-read-large-seekable-files-with-parallel-workers)
+  - [Recipe 4 Transform columns and evaluate expressions](#recipe-4-transform-columns-and-evaluate-expressions)
+  - [Recipe 5 Convert observation CSV to MCF with generated DCID and StatVarObservation](#recipe-5-convert-observation-csv-to-mcf-with-generated-dcid-and-statvarobservation)
+  - [Recipe 6 Split a CSV into separate files by column prefix such as state FIPS code](#recipe-6-split-a-csv-into-separate-files-by-column-prefix-such-as-state-fips-code)
+  - [Recipe 7 Deduplicate records across inputs](#recipe-7-deduplicate-records-across-inputs)
+  - [Recipe 8 Deterministic key sampling](#recipe-8-deterministic-key-sampling)
 - [Limitations](#limitations)
 
 ## Overview
@@ -131,7 +131,7 @@ The table below lists all configuration options. Each option can be passed as a 
 
 ## Common recipes
 
-### 1. Partition a large CSV by row count
+### Recipe 1 Partition a large CSV by row count
 
 Partition a large CSV file into output shards containing approximately 50,000 rows each:
 
@@ -145,7 +145,7 @@ python3 util/file_sharder.py \
 
 Completion: The command exits with code 0 and produces shards named `data/shards/part-00000-of-NNNNN.csv`. The log prints final reader and writer record counts.
 
-### 2. Route MCF graph nodes into a fixed shard count
+### Recipe 2 Route MCF graph nodes into a fixed shard count
 
 Split an MCF dataset into exactly 10 shards. The reader routes records by `Node` or `dcid`:
 
@@ -158,7 +158,7 @@ python3 util/file_sharder.py \
 
 Completion: Produces exactly 10 files from `nodes-00000-of-00010.mcf` through `nodes-00009-of-00010.mcf`.
 
-### 3. Read large seekable files with parallel workers
+### Recipe 3 Read large seekable files with parallel workers
 
 When input files are uncompressed and seekable (`.csv`, `.tsv`, `.jsonl`, `.mcf`, `.avro`), specify `--shard_threads` to read different byte offsets of each file concurrently:
 
@@ -172,7 +172,7 @@ python3 util/file_sharder.py \
 
 Completion: Each thread reads a contiguous byte range without reading lines twice or dropping line-start records. The final log displays `shard-workers = 8` and `shard-tasks-completed = shard-tasks`.
 
-### 4. Transform columns and evaluate expressions
+### Recipe 4 Transform columns and evaluate expressions
 
 Select specific output columns and apply inline Python expressions:
 
@@ -185,7 +185,7 @@ python3 util/file_sharder.py \
 
 Completion: Output shards contain only the specified columns (`geoId`, `year`, `value`, `date`). The counter `shard-output-column-errors` confirms zero expression evaluation failures.
 
-### 5. Convert observation CSV to MCF with generated DCID and typeOf:StatVarObservation
+### Recipe 5 Convert observation CSV to MCF with generated DCID and StatVarObservation
 
 Convert an observation CSV file directly into sharded MCF files by adding `Node` (or `dcid`) and `typeOf=dcid:StatVarObservation` via `--shard_add_columns`. Leaving `Node` (or `dcid`) without a value automatically invokes `dcid_generator.generate_node_dcid`, which generates `DcidGenerator`-compatible `StatVarObservation` DCIDs (`dc/o/<id>` via 64-bit FarmHash). Any `#.*` columns (such as `#input` from `stat_var_processor.py`) are excluded automatically when writing to `.mcf`, and additional helper columns can be dropped with `--shard_ignore_columns`:
 
@@ -231,7 +231,7 @@ scalingFactor: 100
 
 Completion: Produces sharded `.mcf` files with `Node: dcid:dc/o/...` generated using `util/dcid_generator.py` (matching `DcidGenerator.forStatVarObs` in `datacommonsorg/import`), omitting `#input` and any ignored columns.
 
-### 6. Split a CSV into separate files by column prefix (e.g., state FIPS code)
+### Recipe 6 Split a CSV into separate files by column prefix such as state FIPS code
 
 Split a county-level CSV containing 5-digit `fips` codes (`06001`, `06075`, `36061`, ...) into separate output CSV files—one per state—named after the 2-digit state FIPS prefix (`06`, `36`, ...). Include `{fips}` in `--shard_output` and set `--shard_key_prefix_length=2` (`--shard_key="fips"` is inferred automatically from `{fips}` in the output filename):
 
@@ -268,7 +268,7 @@ This creates one output CSV per 2-digit state prefix:
 
 Completion: Produces one output file per distinct 2-character prefix (`counties-06.csv`, `counties-36.csv`, etc.), preserving leading zeros in the state FIPS code.
 
-### 7. Deduplicate records across inputs
+### Recipe 7 Deduplicate records across inputs
 
 Drop duplicate rows or graph nodes across multiple files using content fingerprinting:
 
@@ -281,7 +281,7 @@ python3 util/file_sharder.py \
 
 Completion: Outputs contain unique records only. Counter `shard-duplicate-dropped` reports the total number of duplicate records removed.
 
-### 8. Deterministic key sampling
+### Recipe 8 Deterministic key sampling
 
 Keep a random sample of 10% of entities while ensuring all observations for a selected entity stay together:
 

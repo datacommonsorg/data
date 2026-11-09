@@ -10,7 +10,7 @@
 - [Format examples](#format-examples)
   - [CSV and TSV](#csv-and-tsv)
   - [JSON and JSON Lines](#json-and-json-lines)
-  - [Meta Content Framework (MCF)](#meta-content-framework-mcf)
+  - [Meta Content Framework MCF](#meta-content-framework-mcf)
   - [Apache Avro](#apache-avro)
   - [Sharded collections](#sharded-collections)
 - [Parallel reading with seek and offsets](#parallel-reading-with-seek-and-offsets)
@@ -100,7 +100,7 @@ with open_dict_file('items.jsonl', mode='r') as reader:
         print(item['id'], item['tags'])
 ```
 
-### Meta Content Framework (MCF)
+### Meta Content Framework MCF
 
 `McfFileDictIO` parses and serializes Data Commons graph nodes. Each record maps node properties to dictionary values:
 

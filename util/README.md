@@ -3,11 +3,11 @@
 ## Table of contents
 
 - [Python](#python)
-  - [Util libraries](#util-libraries)
-  - [Testing libraries](#testing-libraries)
+  - [Python util libraries](#python-util-libraries)
+  - [Python testing libraries](#python-testing-libraries)
 - [Go](#go)
-  - [Util libraries](#util-libraries-1)
-  - [Testing libraries](#testing-libraries-1)
+  - [Go util libraries](#go-util-libraries)
+  - [Go testing libraries](#go-testing-libraries)
 
 This folder hosts utility libraries helpful for creating Meta Content Framework
 (MCF) files that the Data Commons graph can ingest. While you are free to use
@@ -19,7 +19,7 @@ To date, all our util libraries cater to writing MCF.
 
 ## Python
 
-### Util libraries
+### Python util libraries
 
 -   `alpha2_to_dcid`: This library contains mappings from 2-character country
     and US state codes to their unique Data Commons IDs.
@@ -78,7 +78,7 @@ To date, all our util libraries cater to writing MCF.
 -   `statvar_dcid_generator`: This library helps to generate the dcid for
     statistical variables.
 
-### Testing libraries
+### Python testing libraries
 
 #### Testing `mcf_template_filler`
 
@@ -106,7 +106,7 @@ Test coming soon.
 
 ## Go
 
-### Util libraries
+### Go util libraries
 
 -   `util/geo`: This package contains various mappings between geographic
     identifiers (such as 2-character country codes) and Data Commons IDs.
@@ -117,7 +117,7 @@ Test coming soon.
 
 Additional libraries coming soon.
 
-### Testing libraries
+### Go testing libraries
 
 To test all the packages within the util tree:
 
