@@ -1,0 +1,356 @@
+Node: dcid:Count_Person_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+age: [- 18 Years]
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_NoHealthInsurance
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+gender: dcs:Male
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_OneRace
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+race: dcs:OneRace
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenBornInTheUnitedStates_NoHealthInsurance_Native
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+citizenship: dcs:USCitizenBornInTheUnitedStates
+nativity: dcs:USC_Native
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+disabilityStatus: dcs:WithDisability
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_NoDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+disabilityStatus: dcs:NoDisability
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+residenceType: dcs:Household
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_SameHouse1YearAgo
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+residentStatus: dcs:SameHouse1YearAgo
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+residenceType: dcs:Household
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInTheUS
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+residentStatus: dcs:DifferentHouseInTheUS
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+residenceType: dcs:Household
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+residentStatus: dcs:DifferentHouseInSameCounty
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+residenceType: dcs:Household
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+residenceType: dcs:Household
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NoHealthInsurance_ResidesInHousehold_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+residentStatus: dcs:DifferentHouseAbroad
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+residenceType: dcs:Household
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_EducationalAttainmentLessThanHighSchoolGraduate_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_InLaborForce_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+employmentStatus: dcs:BLS_InLaborForce
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_NoHealthInsurance_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+workExperience: dcs:USC_FullTimeYearRoundWorker
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_Worker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_PrivatelyOwnedForProfitEstablishment_NoHealthInsurance_PaidWorker_Worker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+establishmentOwnership: dcs:PrivatelyOwnedForProfit
+workerClassification: dcs:PaidWorker
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_NAICSAgricultureForestryFishingHuntingMiningQuarryingOilGasExtraction_Worker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+naics: dcs:NAICS/11_21
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_SOCManagementBusinessScienceArtsOccupation_Worker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+occupation: dcs:SOCv2018/highLevelAggregation-1
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+workerStatus: dcs:Worker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_NoHealthInsurance_IncomeOf50000To74999USDollar_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+income: [50000 74999 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person_16OrMoreYears_NoHealthInsurance_WithEarnings
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+healthInsurance: dcs:NoHealthInsurance
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NoHealthInsurance_IncomeOf25000OrLessUSDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+healthInsurance: dcs:NoHealthInsurance
+income: [- 25000 USDollar]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_NoHealthInsurance
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+healthInsurance: dcs:NoHealthInsurance
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_PovertyStatusDetermined
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+povertyStatus: dcs:PovertyStatusDetermined
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoHealthInsurance_0.5OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+povertyStatus: [- 0.5 RatioToPovertyLine]
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19OrLessYears_NoHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+healthInsurance: dcs:NoHealthInsurance
+age: [- 19 Years]
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+

@@ -19,8 +19,14 @@ is processed as is.
 
 import pandas as pd
 import os
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_national_2000_2010(url: str) -> pd.DataFrame:
@@ -38,16 +44,17 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     # reading the csv format input file and converting it to a dataframe
     # skipping unwanted rows from top and bottom
     # removing commas from the row values
-    df = pd.read_csv(url, skiprows=3, skipfooter=8, header=0, thousands=',')
+    df = pd.read_csv(load_url_or_path(url),
+                     skiprows=3,
+                     skipfooter=8,
+                     header=0,
+                     thousands=',',
+                     engine='python')
     df.to_csv(_CODEDIR + "/../input_files/" + "nationals_result_2000_2010.csv")
-    df.rename(columns={
-        'Unnamed: 0': 'SRH',
-        'Unnamed: 13': '2010'
-    },
-              inplace=True)
+    df = df.rename(columns={'Unnamed: 0': 'SRH', 'Unnamed: 13': '2010'})
 
     # dropping unwanted columns
-    df.drop(['Unnamed: 1', 'Unnamed: 12'], axis=1, inplace=True)
+    df = df.drop(['Unnamed: 1', 'Unnamed: 12'], axis=1)
 
     sex = ''
     race = ''
@@ -90,7 +97,7 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     df.insert(0, 'LOCATION', 'country/USA', True)
 
     # dropping unwanted columns
-    df.drop(columns=[
+    df = df.drop(columns=[
         'LOCATION', 'OneRace__BothSexes', 'White__BothSexes',
         'Black__BothSexes', 'Aian__BothSexes', 'Asian__BothSexes',
         'Nhpi__BothSexes', 'TwoOrMoreRaces__BothSexes', 'NotHispanic',
@@ -117,8 +124,7 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
         'Black_Hispanic_Female', 'Aian_Hispanic_Female',
         'Asian_Hispanic_Female', 'Nhpi_Hispanic_Female',
         'TwoOrMoreRaces_Hispanic_Female'
-    ],
-            inplace=True)
+    ])
 
     df['Year'] = df.index
 
@@ -144,7 +150,7 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     # dropping unwanted columns
     df = df.drop(columns=['index', 'BothSexes'])
 
-    df.drop(df[df['Year'] == "2010"].index, inplace=True)
+    df = df[df['Year'] != '2010']
 
     df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
               "nationals_result_2000_2010.csv")

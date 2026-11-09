@@ -148,13 +148,12 @@ def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
     # Combine year, month columns to observationDate in YYYY-MM format
     try:
         logging.info(
-            f'Combine year, month columns to observationDate in YYYY-MM format:'
-        )
+            'Combine year, month columns to observationDate in YYYY-MM format:')
         df['Year'] = df['Year'].astype(str)
         df['Month'] = df['Month'].astype(str)
         df['Month'] = df['Month'].str.zfill(2)
         df['observationDate'] = df['Year'] + '-' + df['Month']
-        df.drop(columns=['Year', 'Month'], inplace=True)
+        df = df.drop(columns=['Year', 'Month'])
         return df
     except Exception as e:
         logging.fatal(f"Error while generating observationDate : {e}")
@@ -296,7 +295,7 @@ def write_svdicts_to_file(dict_list, file_path):
         file_path (str): The path to the file where the dictionaries will be written.
     """
     try:
-        logging.info(f"writing svs in a file .. ")
+        logging.info("writing svs in a file .. ")
         # Deduplicate deterministically using JSON with sorted keys
         seen = set()
         unique_dicts = []
@@ -326,11 +325,11 @@ def fix_place_names(clean_df):
         pd.DataFrame: DataFrame with standardized place names.
     """
     try:
-        logging.info(f"Fixing place name. ")
+        logging.info("Fixing place name. ")
         clean_df['observationAbout'] = clean_df['State'].apply(get_place_dcid)
         clean_df = clean_df[~(clean_df['observationAbout']
                               == '')]  # remove MultiState
-        clean_df.drop(columns=['State'], inplace=True)
+        clean_df = clean_df.drop(columns=['State'])
         return clean_df
     except Exception as e:
         logging.fatal(f"Error while fixing place name : {e}")
@@ -341,7 +340,7 @@ def process_non_infectious_data(input_file_path: str = None,
                                 schema_path: str = None,
                                 output_dir: str = None) -> None:
     try:
-        logging.info(f"Processing starts.")
+        logging.info("Processing starts.")
         target_schema = schema_path if schema_path else schema_map_path
         target_input = input_file_path if input_file_path else input_path
         target_sheet = sheet if sheet else sheet_name
@@ -436,9 +435,8 @@ def process_non_infectious_data(input_file_path: str = None,
         # another check to ensure there is only 1 Etiology in the clean_csv
         clean_df = clean_df[~(clean_df['Etiology'].str.contains(';'))]
         # removing unused columns
-        clean_df.drop(
-            columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'],
-            inplace=True)
+        clean_df = clean_df.drop(
+            columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'])
         clean_df.to_csv(os.path.join(target_output, f'{_FILE_PREFIX}.csv'),
                         index=False)
 

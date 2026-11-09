@@ -232,8 +232,8 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             lambda row: self._get_district_dcid(row), axis=1)
 
     def save(self):
-        self.clean_df.sort_values(by=["LGDStateCode", "LGDDistrictCode"],
-                                  inplace=True)
+        self.clean_df = self.clean_df.sort_values(
+            by=["LGDStateCode", "LGDDistrictCode"])
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
 
 

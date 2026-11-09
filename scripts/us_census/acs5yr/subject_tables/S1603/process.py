@@ -129,12 +129,10 @@ class S1603SubjectTableDataLoader(SubjectTableDataLoaderBase):
                 obs_df['Column'] = column
 
                 # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'].replace('', np.nan, inplace=True)
+                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                 # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
+                obs_df = obs_df.dropna(subset=['Place', 'Quantity'], axis=0)
 
                 # Write the processed observations to the clean_csv
                 if self.year_count == 0:
@@ -169,13 +167,9 @@ def set_column_map(input_path, spec_path, output_dir):
 
 
 def main(argv):
-    option = FLAGS.option.lower()
-    table_prefix = FLAGS.table_prefix
     spec_path = FLAGS.spec_path
     input_path = FLAGS.input_path
     output_dir = FLAGS.output_dir
-    has_percent = FLAGS.has_percent
-    debug = FLAGS.debug
 
     set_column_map(input_path, spec_path, output_dir)
     data_loader = S1603SubjectTableDataLoader(table_id='S1603',

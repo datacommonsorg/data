@@ -311,7 +311,7 @@ def consolidate_files(dataset: str,
                         drop_list.append(column_name)
                         logging.debug('dropping %s column in file:%s',
                                       column_name, cur_csv_path)
-            df2.drop(drop_list, axis=1, inplace=True)
+            df2 = df2.drop(drop_list, axis=1)
 
             if 'GEO_ID' not in list(df2) or 'NAME' not in list(df2):
                 print("Error: Check", cur_csv_path,
@@ -337,7 +337,7 @@ def consolidate_files(dataset: str,
                 logging.info('appending column names to dataframe')
                 df2.loc[-1] = new_row
                 df2.index = df2.index + 1
-                df2.sort_index(inplace=True)
+                df2 = df2.sort_index()
             df = pd.concat([df, df2], ignore_index=True)
         if not df.empty:
             out_file_name = os.path.join(

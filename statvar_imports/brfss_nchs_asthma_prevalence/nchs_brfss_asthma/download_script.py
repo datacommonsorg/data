@@ -24,7 +24,6 @@ from datetime import date
 from absl import logging
 from absl import app
 
-
 # Suppress pandas FutureWarnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -56,21 +55,21 @@ def generate_urls(start_year, end_year):
     for year in range(start_year, end_year + 1):
         # Handle 2-digit vs 4-digit year in URL path
         url_year = str(year) if year >= 2010 else str(year)[2:]
-        
+
         # Handle .htm vs .html file extension
         file_ext = 'html' if year >= 2018 else 'htm'
-        
+
         base_path = f"https://www.cdc.gov/asthma/brfss/{url_year}"
         adult_url = f"{base_path}/brfssdata.{file_ext}"
-        
+
         # Handle the change in URL structure for child data
         if year >= 2015:
             child_url = f"{base_path}/child/brfsschilddata.{file_ext}"
         else:
             child_url = f"{base_path}/brfsschilddata.{file_ext}"
-            
+
         generated_urls.extend([adult_url, child_url])
-        
+
     return generated_urls
 
 
@@ -101,14 +100,14 @@ def get_table_links(url):
         response = requests.get(url, timeout=30)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         table_links = []
         all_links = soup.find_all('a', href=re.compile(r'\.htm(l)?$'))
-        
+
         for link in all_links:
             absolute_url = urllib.parse.urljoin(url, link['href'])
             folder_name = None
-            
+
             # Strategy 1: Find text in the parent <li> tag
             li_tag = link.find_parent('li')
             if li_tag:
@@ -116,29 +115,37 @@ def get_table_links(url):
                 link_text = link.get_text(strip=True)
                 raw_text = full_text.replace(link_text, '', 1).strip()
                 if raw_text:
-                    folder_name = re.sub(r'Table L\d+:\s*', '', raw_text, flags=re.IGNORECASE).strip().lower()
-                    folder_name = re.sub(r'[^a-zA-Z0-9_]+', '_', folder_name).strip('_')
+                    folder_name = re.sub(r'Table L\d+:\s*',
+                                         '',
+                                         raw_text,
+                                         flags=re.IGNORECASE).strip().lower()
+                    folder_name = re.sub(r'[^a-zA-Z0-9_]+', '_',
+                                         folder_name).strip('_')
 
             # Strategy 2: Find text after a <br> tag
             if not folder_name:
                 br_tag = link.find('br')
-                if br_tag and br_tag.next_sibling and br_tag.next_sibling.strip():
-                    folder_name = get_link_text_and_normalize(br_tag.next_sibling)
+                if br_tag and br_tag.next_sibling and br_tag.next_sibling.strip(
+                ):
+                    folder_name = get_link_text_and_normalize(
+                        br_tag.next_sibling)
 
             # Strategy 3: Find text in a sibling <div> tag
             if not folder_name:
                 next_sibling = link.find_next_sibling('div')
                 if next_sibling:
                     folder_name = get_link_text_and_normalize(next_sibling)
-            
+
             # Fallback: Use link text and URL basename
             if not folder_name:
                 link_text = link.get_text(strip=True).lower()
-                folder_name = re.sub(r'[^a-zA-Z0-9_]+', '_', link_text + '_' + os.path.basename(absolute_url)).strip('_')
+                folder_name = re.sub(
+                    r'[^a-zA-Z0-9_]+', '_',
+                    link_text + '_' + os.path.basename(absolute_url)).strip('_')
 
             if (absolute_url, folder_name) not in table_links:
                 table_links.append((absolute_url, folder_name))
-        
+
         return table_links
     except requests.exceptions.RequestException as e:
         logging.error(f"Error fetching the URL {url}: {e}")
@@ -165,7 +172,6 @@ def get_metadata_from_url(url):
     return year, life_stage
 
 
-
 def move_and_remove_files_compact(root_dir):
     """
     Moves files from the old `by_race_and_state` directory to the new
@@ -180,13 +186,15 @@ def move_and_remove_files_compact(root_dir):
         return
 
     os.makedirs(destination_folder, exist_ok=True)
-    
+
     for filename in os.listdir(source_folder):
         shutil.move(os.path.join(source_folder, filename), destination_folder)
         logging.info(f"Moved {filename}.")
 
     os.rmdir(source_folder)
     logging.info(f"Removed source folder '{source_folder}'.")
+
+
 def download_table(url, year, life_stage, save_path):
     """
     Downloads, processes, and saves a single data table from a given URL.
@@ -211,36 +219,39 @@ def main(_):
     root_dir = 'input_files'
     current_year = date.today().year
     urls = generate_urls(2001, current_year)
-    
+
     for main_url in urls:
         logging.info(f"Processing main URL: {main_url}")
-        
+
         year, life_stage = get_metadata_from_url(main_url)
         all_urls_and_folders = get_table_links(main_url)
-        
+
         processed_unified_names = set()
-        
+
         for url, original_folder_name in all_urls_and_folders:
             unified_folder_name = None
             for keyword, unified_name in required_dataset.items():
                 if original_folder_name.startswith(keyword):
                     unified_folder_name = unified_name
                     break
-            
+
             if unified_folder_name:
                 if unified_folder_name in processed_unified_names:
-                    logging.warning(f"Skipping {original_folder_name}. '{unified_folder_name}' already processed for {year}.")
+                    logging.warning(
+                        f"Skipping {original_folder_name}. '{unified_folder_name}' already processed for {year}."
+                    )
                     continue
-                
+
                 # Create the directory for the unified name
                 tag_folder_path = os.path.join(root_dir, unified_folder_name)
                 os.makedirs(tag_folder_path, exist_ok=True)
-                
+
                 # Generate a unique filename and download
-                filename = generate_filename(original_folder_name, year, life_stage)
+                filename = generate_filename(original_folder_name, year,
+                                             life_stage)
                 save_path = os.path.join(tag_folder_path, filename)
                 download_table(url, year, life_stage, save_path)
-                
+
                 processed_unified_names.add(unified_folder_name)
 
     logging.info("All URL processing complete.")

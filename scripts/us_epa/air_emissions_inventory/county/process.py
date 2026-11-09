@@ -144,7 +144,6 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
         """
         df = pd.read_csv(file_path, header=0, encoding='utf-8')
         df['year'] = year
-        df_final = pd.DataFrame()
         df['geo_Id'] = ''
 
         df = self.data_standardize(df, 'POLLUTANT', SOURCE_POLLUTANT)
@@ -194,8 +193,9 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
 
         self._final_df = self._final_df.sort_values(
             by=['geo_Id', 'year', 'SV_TEMP', 'observation'])
-        self._final_df['observation'].replace('', np.nan, inplace=True)
-        self._final_df.dropna(subset=['observation'], inplace=True)
+        self._final_df['observation'] = self._final_df['observation'].replace(
+            '', np.nan)
+        self._final_df = self._final_df.dropna(subset=['observation'])
         self._add_sv_and_mcf_column_to_final_df()
 
 
