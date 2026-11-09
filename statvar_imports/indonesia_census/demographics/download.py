@@ -16,6 +16,7 @@
 import csv
 import html
 import json
+import logging as std_logging
 import os
 import re
 import sys
@@ -249,6 +250,50 @@ def _sanitize_url(url: str, api_key: str) -> str:
     return url
 
 
+class _RedactApiKeyFilter(std_logging.Filter):
+    """Logging filter that redacts the BPS WebAPI key from log records."""
+
+    def __init__(self, api_key: str):
+        super().__init__()
+        self._api_key = api_key
+
+    def filter(self, record: std_logging.LogRecord) -> bool:
+        if self._api_key:
+            if isinstance(record.msg, str) and self._api_key in record.msg:
+                record.msg = _sanitize_url(record.msg, self._api_key)
+            if record.args:
+                if isinstance(record.args, tuple):
+                    record.args = tuple(
+                        _sanitize_url(arg, self._api_key
+                                     ) if isinstance(arg, str) else arg
+                        for arg in record.args)
+                elif isinstance(record.args, dict):
+                    record.args = {
+                        k: (_sanitize_url(v, self._api_key) if isinstance(
+                            v, str) else v) for k, v in record.args.items()
+                    }
+        return True
+
+
+def _request_bps_json(url: str, api_key: str) -> Any:
+    """Calls download_util.request_url while redacting api_key from logs."""
+    redact_filter = _RedactApiKeyFilter(api_key)
+    loggers = [std_logging.getLogger(), logging.get_absl_logger()]
+    handlers = []
+    for lgr in loggers:
+        lgr.addFilter(redact_filter)
+        for hdlr in lgr.handlers:
+            hdlr.addFilter(redact_filter)
+            handlers.append(hdlr)
+    try:
+        return download_util.request_url(url=url, output='json')
+    finally:
+        for hdlr in handlers:
+            hdlr.removeFilter(redact_filter)
+        for lgr in loggers:
+            lgr.removeFilter(redact_filter)
+
+
 def clean_bps_label(raw_label: Any) -> str:
     """Strips HTML tags and normalizes whitespace in BPS labels."""
     text = html.unescape(str(raw_label))
@@ -312,7 +357,7 @@ def fetch_available_years(
     while True:
         url = (f'{BPS_API_BASE_URL}/model/th/lang/ind/domain/{domain}'
                f'/var/{var_id}/page/{page}/key/{api_key}/')
-        resp = download_util.request_url(url=url, output='json')
+        resp = _request_bps_json(url=url, api_key=api_key)
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
             safe_url = _sanitize_url(url, api_key)
             raise RuntimeError(
@@ -376,7 +421,7 @@ def fetch_variable_data(
         th_param = ';'.join(str(y['th_id']) for y in chunk)
         url = (f'{BPS_API_BASE_URL}/model/data/lang/ind/domain/{domain}'
                f'/var/{var_id}/th/{th_param}/key/{api_key}/')
-        resp = download_util.request_url(url=url, output='json')
+        resp = _request_bps_json(url=url, api_key=api_key)
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
             safe_url = _sanitize_url(url, api_key)
             raise RuntimeError(

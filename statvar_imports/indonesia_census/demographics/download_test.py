@@ -14,6 +14,7 @@
 """Unit tests for Indonesia Demographic Population download.py."""
 
 import csv
+import logging as std_logging
 import os
 import sys
 import tempfile
@@ -708,6 +709,42 @@ class DownloadTest(unittest.TestCase):
                     ],
                 ],
             )
+
+    def test_request_bps_json_redacts_api_key_in_logs(self):
+        api_key = 'super_secret_bps_key_999'
+        url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/'
+               f'domain/0000/var/2790/page/1/key/{api_key}/')
+        captured_messages: list[str] = []
+
+        class _CaptureHandler(std_logging.Handler):
+
+            def emit(self, record: std_logging.LogRecord) -> None:
+                captured_messages.append(record.getMessage())
+
+        handler = _CaptureHandler()
+        root_logger = std_logging.getLogger()
+        root_logger.setLevel(std_logging.INFO)
+        root_logger.addHandler(handler)
+        try:
+            with mock.patch.object(
+                    download_util,
+                    'request_url',
+                    side_effect=lambda url, output:
+                (root_logger.info('Downloading URL: %s', url) or {
+                    'status': 'OK',
+                    'data': [{
+                        'pages': 1
+                    }, []],
+                }),
+            ):
+                download.fetch_available_years('0000', 2790, api_key)
+        finally:
+            root_logger.removeHandler(handler)
+
+        self.assertTrue(captured_messages)
+        for msg in captured_messages:
+            self.assertNotIn(api_key, msg)
+            self.assertIn('<REDACTED>', msg)
 
 
 if __name__ == '__main__':

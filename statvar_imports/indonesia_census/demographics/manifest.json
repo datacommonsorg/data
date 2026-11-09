@@ -29,11 +29,13 @@
         }
       ],
       "source_files": [
-        "input_files/*.csv",
+        "input_files/idn_population.csv",
+        "input_files/idn_age_gender.csv",
         "pvmaps/*.csv",
         "idn_demographic_metadata.csv",
         "idn_places_resolved.csv",
-        "counters/*.csv",
+        "counters/idn_population_counters.csv",
+        "counters/idn_age_gender_counters.csv",
         "validation_config.json"
       ],
       "validation_config_file": "validation_config.json",
