@@ -35,7 +35,6 @@ flags.DEFINE_string('epa_output_path',
 _CONSOLIDATED_TABLE = 'PUB_DIM_FACILITY'
 _LEGACY_TABLES = ('V_GHG_EMITTER_FACILITIES', 'V_GHG_SUPPLIER_FACILITIES',
                   'V_GHG_INJECTION_FACILITIES')
-_TABLES = (_CONSOLIDATED_TABLE,) + _LEGACY_TABLES
 
 # Cleaned CSV Columns
 # - 'containedInPlace' is a repeated list of refs to County and Census ZCTA
@@ -447,7 +446,6 @@ def main(_):
     for t in _get_input_tables(FLAGS.epa_input_tables_path):
         assert os.path.exists(
             os.path.join(FLAGS.epa_input_tables_path, t + '.csv'))
-    Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
 
     process(FLAGS.epa_input_tables_path,
             FLAGS.epa_output_path,

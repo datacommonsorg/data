@@ -31,8 +31,11 @@ percentage and if no percentage is provided it is assumed to be 100.
 
 1. To extract existing facility ids, download the table and regenerate the TMCF/CSV, run:
 
-      ```
-      ./generate.sh
+      ```bash
+      python3 download_existing_facilities.py
+      python3 download_parent_companies.py --companies_table_name=V_PARENT_COMPANY_INFO
+      python3 pre_process.py
+      python3 process_parent_company.py
       ```
 
 2. To run unit tests (from the repository root):

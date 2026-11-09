@@ -115,11 +115,6 @@ def _fetch_page_csv(url,
     for attempt in range(1, max_retries + 1):
         try:
             resp = getter(url, timeout=timeout)
-            status_code = getattr(resp, 'status_code', None)
-            if isinstance(
-                    status_code,
-                    int) and 400 <= status_code < 500 and status_code != 429:
-                resp.raise_for_status()
             resp.raise_for_status()
             raw_bytes = getattr(resp, 'content', None)
             if isinstance(raw_bytes, bytes):

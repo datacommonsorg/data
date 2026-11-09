@@ -14,12 +14,10 @@
 """A script to parse and pre-process the Parent Company Info for Facilities tracked by EPA."""
 
 import os.path
-import pathlib
 import sys
 
 import csv
 import difflib
-import json
 import pandas as pd
 import re
 

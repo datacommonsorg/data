@@ -31,8 +31,9 @@ EIA power plant import), so we refer to them from `EpaReportingFacility` nodes.
 1. To download `PUB_DIM_FACILITY`, compute crosswalks in `input_files/`, and
    regenerate the TMCF/CSV in `output/`, run:
 
-      ```
-      ./generate.sh
+      ```bash
+      python3 download_efservice.py --epa_table_name=PUB_DIM_FACILITY
+      python3 process_facility.py
       ```
 
 2. To run unit tests (from the repository root):
