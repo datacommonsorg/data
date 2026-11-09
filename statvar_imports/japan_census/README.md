@@ -18,7 +18,7 @@ This project downloads, processes, and imports demographic, employment, educatio
     *   **Deaths (National & Prefecture)**: Annual (`1975`–`2023`, `sid=0000010101`).
     *   **Causes of Death (National & Prefecture)**: Annual (`1975`–`2023`, `sid=0000010109`).
 *   **Release Frequency**: Annual (vital, labor, and education statistics) and quinquennial (5-year Population Census).
-*   **Notes**: This dataset covers 83 StatisticalVariables across 1,965 places (`country/JPN`, 47 Prefectures, and 1,917 Municipalities).
+*   **Notes**: This dataset covers 101 StatisticalVariables across 1,965 places (`country/JPN`, 47 Prefectures, and 1,917 Municipalities).
 
 ---
 
@@ -30,7 +30,7 @@ The import pipeline downloads all 17 raw CSV tables directly from e-Stat (`https
     *   `download_script.py`: Downloads all 17 raw CSV tables directly from e-Stat `dbview` and Dashboard `dataSearch` into `input_files/`.
     *   `japan_census_metadata.csv`: Configuration file for `stat_var_processor.py` specifying `output_columns`, `mapped_rows,12`, and `mapped_columns,5`.
     *   `japan_census_pv_map.csv`: Property-value mapping file mapping e-Stat Japanese age/gender/metric headers, time codes, and 5-digit region codes (`01000`–`47382`) to Data Commons StatisticalVariables and place DCIDs (`country/JPN` and `wikidataId/Q...`).
-    *   `validation_config.json`: Configuration defining value bounds and date freshness validation rules.
+    *   `validation_config.json`: Configuration defining value bounds and date freshness validation rules across all 101 StatisticalVariables.
     *   `test_data/`: Sample input data (`sample_input.csv`) and expected outputs (`sample_expected_output.csv`, `sample_expected_output.tmcf`) for testing.
 
 *   **Transformation pipeline**:
@@ -40,7 +40,7 @@ The import pipeline downloads all 17 raw CSV tables directly from e-Stat (`https
 
 *   **Data Quality Checks**:
     *   Automated validation via `tools/import_validation/runner.py` evaluates the output against `validation_config.json` (alongside the default `<= 0.1%` historical deletion threshold), enforcing:
-        *   `check_max_date_freshness`: Verifies `MaxDate`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person`) across all 83 indicators.
+        *   `check_max_date_freshness`: Verifies `MaxDate`, `NumPlaces >= 1`, `MinValue >= 0`, and rate bounds (`MaxValue <= 100` for `UnemploymentRate_Person`) across all 101 indicators.
         *   `check_max_date_consistent_*`: Scoped `MAX_DATE_CONSISTENT` rules verifying uniform `MaxDate` within each co-released survey group (Population Census, Labor Force Survey, Teachers, Students, and Vital Statistics).
 
 ---
