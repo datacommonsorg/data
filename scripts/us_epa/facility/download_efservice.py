@@ -31,6 +31,12 @@ flags.DEFINE_string('epa_output_path',
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
+# EPA publishes a static crosswalk mapping GHGRP Facility IDs to EIA ORIS
+# Power Plant codes (up to 5 ORIS codes per facility). We use this mapping to
+# link EpaReportingFacility entities to existing EIA power plant nodes
+# (dcid:eia/pp/<ORIS_CODE>) in Data Commons via the `partOf` property.
+# A Wayback Machine mirror is configured as a fallback in case the primary
+# epa.gov URL is temporarily unavailable.
 _ORIS_CROSSWALK_URL = ('https://www.epa.gov/system/files/documents/2022-04/'
                        'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
 _ORIS_CROSSWALK_FALLBACK_URL = (
@@ -54,6 +60,12 @@ _STORAGE_OPTIONS = {
 def _load_oris_crosswalk(max_retries=3,
                          retry_backoff_sec=2.0,
                          request_timeout=60):
+    """Downloads the EPA GHGRP-to-ORIS power plant crosswalk Excel sheet.
+
+    Tries the primary EPA URL first and falls back to the Internet Archive
+    mirror with exponential backoff. Renames 'GHGRP Facility ID' to
+    'Facility Id' so it can be joined with the facility table.
+    """
     last_err = None
     for url in (_ORIS_CROSSWALK_URL, _ORIS_CROSSWALK_FALLBACK_URL):
         for attempt in range(1, max_retries + 1):
@@ -83,8 +95,28 @@ def _load_oris_crosswalk(max_retries=3,
 
 
 def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
+    """Builds crosswalks.csv mapping each GHGRP Facility Id to its FRS Id and EIA ORIS codes.
+
+     Output schema of `crosswalks.csv`:
+        Facility Id, FRS Id, ORIS CODE, ORIS CODE 2, ORIS CODE 3, ORIS CODE 4, ORIS CODE 5
+
+    How the crosswalk is constructed:
+      1. Extracts (Facility Id, FRS Id, year) from the downloaded facility table
+         (e.g., PUB_DIM_FACILITY.csv, which contains one row per facility per
+         reporting year).
+      2. Because a facility's FRS_ID may be missing in some reporting years,
+         sorts rows per facility chronologically by reporting year and
+         forward-fills (`ffill`) non-empty FRS IDs so the latest known FRS ID
+         is retained when deduplicating to one row per Facility Id.
+      3. Left-joins the deduplicated (Facility Id, FRS Id) pairs with the
+         EPA GHGRP-to-ORIS power plant crosswalk (`oris_df`) on `Facility Id`
+         to attach up to 5 EIA ORIS plant codes per facility.
+      4. Writes the resulting table atomically via a `.tmp` file to
+         `crosswalks.csv` for consumption by `process_facility.py`.
+    """
     oris_df = _load_oris_crosswalk()
     df = pd.read_csv(table_csv_path, dtype=str)
+    # Support both lowercase (PUB_DIM_FACILITY) and uppercase (legacy views) column names.
     fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'
     frs_col = 'frs_id' if 'frs_id' in df.columns else 'FRS_ID'
     year_col = ('year' if 'year' in df.columns else
@@ -100,21 +132,28 @@ def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
         })
         fac_df['Facility Id'] = fac_df['Facility Id'].fillna('').str.strip()
         fac_df = fac_df[fac_df['Facility Id'] != '']
+        # Preserve original facility appearance order while sorting each
+        # facility's multi-year rows chronologically by `_year`.
         fac_df['_fac_order'] = fac_df.groupby('Facility Id',
                                               sort=False).ngroup()
         fac_df = fac_df.sort_values(by=['_fac_order', '_year'],
                                     ascending=[True, True],
                                     kind='mergesort')
+        # Forward-fill missing FRS IDs across years within the same facility,
+        # then keep the most recent year's record (`keep='last'`).
         fac_df['FRS Id'] = fac_df['FRS Id'].replace('', pd.NA)
         fac_df['FRS Id'] = fac_df.groupby('Facility Id')['FRS Id'].ffill()
         fac_df['FRS Id'] = fac_df['FRS Id'].fillna('')
         fac_df = fac_df[['Facility Id',
                          'FRS Id']].drop_duplicates(subset=['Facility Id'],
                                                     keep='last')
+        # Attach EIA ORIS power plant codes (ORIS CODE .. ORIS CODE 5) to each facility.
         merged = fac_df.merge(oris_df, how='left',
                               on='Facility Id').drop_duplicates(
                                   subset=['Facility Id'], keep='first')
     else:
+        # Fallback if the input table lacks a facility_id column: emit ORIS
+        # crosswalk rows directly with empty FRS Ids.
         merged = oris_df.assign(**{'FRS Id': ''})[[
             'Facility Id', 'FRS Id', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3',
             'ORIS CODE 4', 'ORIS CODE 5'
@@ -135,6 +174,8 @@ def main(_):
                 FLAGS.epa_output_path)
     table_csv_path = os.path.join(FLAGS.epa_output_path,
                                   FLAGS.epa_table_name + '.csv')
+    # Generate crosswalks.csv (GHGRP Facility Id -> FRS Id + EIA ORIS codes)
+    # alongside the downloaded facility table in input_files/.
     crosswalk_path = os.path.join(FLAGS.epa_output_path, 'crosswalks.csv')
     _generate_crosswalk(table_csv_path, crosswalk_path)
 

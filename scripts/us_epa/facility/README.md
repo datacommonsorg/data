@@ -13,18 +13,24 @@ The generated facilities are of type `EpaReportingFacility` and they are
 attached to a `CensusZipCodeTabulationArea` and `County` (via
 `containedInPlace` relation).
 
-## Resolution
+## Resolution and Crosswalks
 
-We use the "crosswalk" maps between the GHG Facility ID
-(`epaGhgrpFacilityId`), FRS ID (`epaFrsId`) and ORIS ID (`partOf` reference to
-`eia/pp/<code>`).
+We use a crosswalk table (`input_files/crosswalks.csv`) to map each GHGRP
+Facility ID (`epaGhgrpFacilityId`) to:
+1. **EPA FRS ID (`epaFrsId`):** Extracted from `PUB_DIM_FACILITY.csv` by sorting
+   each facility's multi-year reporting rows chronologically and forward-filling
+   (`ffill`) non-empty `frs_id` values so the latest known FRS ID is retained.
+2. **EIA ORIS Power Plant Codes (`partOf` reference to `dcid:eia/pp/<code>`):**
+   Downloaded by `download_efservice.py` from the official EPA GHGRP-to-ORIS
+   Power Plant Crosswalk spreadsheet (`ORIS CODE` through `ORIS CODE 5`) and
+   left-joined onto the deduplicated `(Facility Id, FRS Id)` table. During
+   `process_facility.py`, each candidate `eia/pp/<code>` DCID is checked against
+   the Data Commons API so only existing EIA power plant nodes are linked.
 
-Note that a single FRS ID or ORIS ID can have multiple GHG Facility IDs.
-Thus, the DCID is constructed using `epaGhgrpFacilityId`, but include all the
-IDs as properties.
-
-Entities related to some of these facilities already exist in the KG (from
-EIA power plant import), so we refer to them from `EpaReportingFacility` nodes.
+Note that a single FRS ID or ORIS ID can map to multiple GHGRP Facility IDs.
+Thus, the facility DCID is constructed using `epaGhgrpFacilityId`
+(`epaGhgrpFacilityId/<ID>`), while `epaFrsId` and `partOf` (`eia/pp/<code>`) are
+emitted as properties on the `EpaReportingFacility` node.
 
 ## Generating and Validating Artifacts
 
