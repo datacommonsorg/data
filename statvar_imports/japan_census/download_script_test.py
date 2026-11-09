@@ -14,7 +14,6 @@
 # limitations under the License.
 """Unit tests for Japan Census download_script.py."""
 
-import csv
 import os
 import sys
 import tempfile
@@ -33,170 +32,50 @@ import download_script
 
 class DownloadScriptTest(unittest.TestCase):
 
-    def setUp(self):
-        super().setUp()
-        self.sample_api_response = {
-            'GET_STATS': {
-                'RESULT': {
-                    'status': '0',
-                    'errorMsg': 'Success.',
-                },
-                'STATISTICAL_DATA': {
-                    'CLASS_INF': {
-                        'CLASS_OBJ': [
-                            {
-                                '@id': 'indicator',
-                                'CLASS': {
-                                    '@code': '0301010000020020010',
-                                    '@name': 'Unemployment rate (Both sexes)',
-                                },
-                            },
-                            {
-                                '@id': 'unit',
-                                'CLASS': {
-                                    '@code': '001',
-                                    '$': '%',
-                                },
-                            },
-                            {
-                                '@id': 'regionCode',
-                                'CLASS': {
-                                    '@code': '00000',
-                                    '@name': 'Japan',
-                                },
-                            },
-                            {
-                                '@id':
-                                    'time',
-                                'CLASS': [
-                                    {
-                                        '@code': '1953CY00',
-                                        '@name': '1953'
-                                    },
-                                    {
-                                        '@code': '1954CY00',
-                                        '@name': '1954'
-                                    },
-                                ],
-                            },
-                        ]
-                    },
-                    'DATA_INF': {
-                        'DATA_OBJ': [
-                            {
-                                'VALUE': {
-                                    '@indicator': '0301010000020020010',
-                                    '@unit': '001',
-                                    '@stat': '00200531',
-                                    '@regionCode': '00000',
-                                    '@time': '1953CY00',
-                                    '@cycle': '3',
-                                    '@regionRank': '2',
-                                    '@isSeasonal': '1',
-                                    '@isProvisional': '0',
-                                    '$': '1.9',
-                                }
-                            },
-                            {
-                                'VALUE': {
-                                    '@indicator': '0301010000020020010',
-                                    '@unit': '001',
-                                    '@stat': '00200531',
-                                    '@regionCode': '00000',
-                                    '@time': '1954CY00',
-                                    '@cycle': '3',
-                                    '@regionRank': '2',
-                                    '@isSeasonal': '1',
-                                    '@isProvisional': '0',
-                                    '$': '2.3',
-                                }
-                            },
-                        ]
-                    },
-                },
-            }
-        }
-
-    def test_parse_estat_json_response_success(self):
-        records = download_script.parse_estat_json_response(
-            self.sample_api_response)
-        self.assertEqual(len(records), 2)
-        self.assertEqual(records[0]['indicatorCd'], '0301010000020020010')
-        self.assertEqual(records[0]['indicatorName'],
-                         'Unemployment rate (Both sexes)')
-        self.assertEqual(records[0]['unitName'], '%')
-        self.assertEqual(records[0]['regionCd'], '00000')
-        self.assertEqual(records[0]['regionName'], 'Japan')
-        self.assertEqual(records[0]['year'], '1953')
-        self.assertEqual(records[0]['value'], '1.9')
-
-    def test_parse_estat_json_response_error_raises(self):
-        for status in ('400', '100'):
-            error_payload = {
-                'GET_STATS': {
-                    'RESULT': {
-                        'status': status,
-                        'errorMsg': 'API error or no data.',
-                    }
-                }
-            }
-            with self.assertRaises(RuntimeError):
-                download_script.parse_estat_json_response(error_payload)
-
-    def test_write_csv_atomically_failure_cleanup(self):
+    def test_write_text_atomically_failure_cleanup(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             target_path = os.path.join(tmp_dir, 'test_output.csv')
             with mock.patch.object(os.path, 'getsize', return_value=0):
                 with self.assertRaises(RuntimeError):
-                    download_script._write_csv_atomically(
-                        target_path, [{
-                            'year': '2020'
-                        }])
+                    download_script._write_text_atomically(
+                        target_path, '"col1","col2"\n')
             self.assertFalse(os.path.exists(target_path))
             self.assertEqual(os.listdir(tmp_dir), [])
 
-    @mock.patch.object(download_script, '_request_estat_json')
-    def test_download_dataset_empty_error(self, mock_request_json):
-        mock_request_json.return_value = {
-            'GET_STATS': {
-                'RESULT': {
-                    'status': '100',
-                    'errorMsg': 'No data.',
-                }
-            }
-        }
+    @mock.patch.object(download_script, 'fetch_dbview_csv')
+    def test_download_dbview_dataset_writes_raw_csv(self, mock_fetch_dbview):
+        mock_fetch_dbview.return_value = '"col1","col2"\n"val1","val2"\n'
         with tempfile.TemporaryDirectory() as tmp_dir:
-            out_file = os.path.join(tmp_dir, 'jpn_unemploymentrate.csv')
-            with self.assertRaises(RuntimeError):
-                download_script.download_dataset(
-                    output_filepath=out_file,
-                    indicators=['0301010000020020010'],
-                    regional_ranks=['2'],
-                    batch_size=1,
-                )
-
-    @mock.patch.object(download_script, '_request_estat_json')
-    def test_download_dataset_writes_csv_atomically(self, mock_request_json):
-        mock_request_json.return_value = self.sample_api_response
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            out_file = os.path.join(tmp_dir, 'jpn_unemploymentrate.csv')
-            count = download_script.download_dataset(
+            out_file = os.path.join(tmp_dir,
+                                    'jpn_gender_age_total_population.csv')
+            line_count = download_script.download_dbview_dataset(
                 output_filepath=out_file,
-                indicators=['0301010000020020010'],
-                regional_ranks=['2'],
-                batch_size=1,
+                sid='0003410380',
+                select_filters={'18': {'020'}},
             )
-            self.assertEqual(count, 2)
+            self.assertEqual(line_count, 2)
             self.assertTrue(os.path.exists(out_file))
             with open(out_file, 'r', encoding='utf-8') as f:
-                reader = csv.reader(f)
-                header = next(reader)
-                self.assertEqual(header[:4],
-                                 ['year', 'indicatorCd', 'regionCd', 'value'])
-                rows = list(reader)
-            self.assertEqual(len(rows), 2)
-            self.assertEqual(rows[1][0], '1954')
-            self.assertEqual(rows[1][3], '2.3')
+                self.assertEqual(f.read(), '"col1","col2"\n"val1","val2"\n')
+
+    @mock.patch.object(download_script, 'fetch_dashboard_csv')
+    @mock.patch.object(download_script, 'fetch_dbview_csv')
+    def test_download_all_downloads_all_17_datasets_and_cleans_stale(
+        self,
+        mock_fetch_dbview,
+        mock_fetch_dashboard,
+    ):
+        mock_fetch_dbview.return_value = '"col1","col2"\n"val1","val2"\n'
+        mock_fetch_dashboard.return_value = '"col1","col2"\n"val1","val2"\n'
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            stale_file = os.path.join(tmp_dir, 'stale.csv')
+            with open(stale_file, 'w', encoding='utf-8') as f:
+                f.write('stale\n')
+            download_script.download_all(output_dir=tmp_dir, max_workers=1)
+            self.assertFalse(os.path.exists(stale_file))
+            self.assertEqual(set(os.listdir(tmp_dir)),
+                             set(download_script.DBVIEW_CONFIGS.keys()))
+            self.assertEqual(len(os.listdir(tmp_dir)), 17)
 
 
 if __name__ == '__main__':

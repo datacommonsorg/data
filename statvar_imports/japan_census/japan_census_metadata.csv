@@ -1,6 +1,5 @@
 parameter,value
-url,https://dashboard.e-stat.go.jp/en/
+url,https://www.e-stat.go.jp/
 output_columns,"observationAbout,observationDate,value,variableMeasured"
-header_rows,1
-mapped_columns,3
-
+mapped_rows,12
+mapped_columns,5
