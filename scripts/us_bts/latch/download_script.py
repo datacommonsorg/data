@@ -20,16 +20,20 @@ import json
 import os
 import subprocess
 import sys
-from typing import List, Dict
+from typing import Dict, List
 from urllib.parse import urlparse
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 
 logging.set_verbosity(logging.INFO)
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
-from download_util_script import _retry_method, download_file
+from download_util_script import _retry_method
+from download_util_script import download_file
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_dir', 'input_files',

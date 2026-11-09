@@ -23,7 +23,6 @@ https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSerie
 
 NOTE: this file generates temporary folders that are not deleted.
 """
-import glob
 import io
 import json
 import os
@@ -32,13 +31,10 @@ import sys
 import tempfile
 import zipfile
 
-import geopandas as gpd
-import numpy as np
-import pandas as pd
-import requests
-
 from absl import app
 from absl import flags
+import geopandas as gpd
+import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))

@@ -2,7 +2,6 @@ import filecmp
 import os
 import sys
 import unittest
-from absl import app
 
 # Allows the following module imports to work when running as a script
 # module_dir_ is the path to where this code is running from.

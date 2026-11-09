@@ -19,6 +19,7 @@ import csv
 import io
 import os
 import unittest
+
 from .aqicn import *
 
 MODULE = os.path.dirname(__file__)

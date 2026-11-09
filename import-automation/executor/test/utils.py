@@ -15,8 +15,8 @@
 Testing utilities.
 """
 
-import requests.exceptions
 import google.api_core.exceptions
+import requests.exceptions
 
 NUM_LINES_TO_CHECK = 50
 

@@ -13,21 +13,19 @@
 # limitations under the License.
 """Script to import and clean WFIGS data.
 """
-from collections.abc import Sequence
 import datetime
+import json
+import os
+import re
+import sys
 
 from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
-import json
 import numpy as np
-import os
 import pandas as pd
-import pickle
-import re
 import requests
-import sys
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH))  #for mapping

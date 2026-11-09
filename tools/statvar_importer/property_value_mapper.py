@@ -13,15 +13,13 @@
 # limitations under the License.
 """Utility class to store property:value mappings for data strings."""
 
+from collections import OrderedDict
 import csv
 import os
 import re
 import sys
 
-from absl import app
-from absl import flags
 from absl import logging
-from collections import OrderedDict
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -31,13 +29,13 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 import config_flags
+from config_map import ConfigMap
+from config_map import read_py_dict_from_file
+from counters import CounterOptions
+from counters import Counters
 import eval_functions
 import file_util
-
 import property_value_utils as pv_utils
-
-from config_map import ConfigMap, read_py_dict_from_file
-from counters import Counters, CounterOptions
 
 
 class PropertyValueMapper:

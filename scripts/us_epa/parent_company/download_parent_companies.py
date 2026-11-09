@@ -15,10 +15,7 @@
 
 import os
 import pathlib
-import ssl
 import sys
-
-import pandas as pd
 
 from absl import app
 from absl import flags

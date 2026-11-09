@@ -17,11 +17,12 @@ Import script to handle schema/place node files on GCS.
 Currently, it only checks the existince of the files on GCS.
 '''
 
+import os
+import sys
+
 from absl import app
 from absl import flags
 from absl import logging
-import os
-import sys
 
 # Add the scripts directory to sys.path
 script_dir = os.path.abspath(

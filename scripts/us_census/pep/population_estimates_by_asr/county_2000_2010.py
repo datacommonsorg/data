@@ -17,8 +17,9 @@ This Python Script is for County Level Data 2000-2010.
 
 import os
 import sys
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 
 _SCRIPTS_DIR = os.path.abspath(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))

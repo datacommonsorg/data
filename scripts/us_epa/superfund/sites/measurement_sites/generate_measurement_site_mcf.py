@@ -16,7 +16,9 @@ This script generates node mcf files from data/measurement_sites.csv
 """
 import os
 import re
-from absl import app, flags
+
+from absl import app
+from absl import flags
 import pandas as pd
 
 FLAGS = flags.FLAGS

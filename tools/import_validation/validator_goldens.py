@@ -84,12 +84,11 @@ sys.path.append(_DATA_DIR)
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
-import file_util
-import mcf_file_util
-import data_sampler
-
 from counters import Counters
+import data_sampler
+import file_util
 from mcf_diff import fingerprint_node
+import mcf_file_util
 
 flags.DEFINE_list('validate_goldens_input', None,
                   'List of files to be compared against goldens.')

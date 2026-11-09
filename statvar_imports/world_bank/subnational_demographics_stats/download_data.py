@@ -18,6 +18,7 @@ import zipfile
 
 from absl import app
 from absl import logging
+import config
 import pandas as pd
 from retry import retry
 from selenium import webdriver
@@ -25,8 +26,6 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-import config
 
 
 @retry(tries=3, delay=10, backoff=2)

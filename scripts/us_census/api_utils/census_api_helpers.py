@@ -17,9 +17,9 @@ Function library to extract usable form of API configuration.
 
 import base64
 import itertools
+
 from absl import app
 from absl import flags
-
 from census_api_config_fetcher import *
 
 FLAGS = flags.FLAGS

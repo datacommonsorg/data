@@ -6,7 +6,10 @@
 #
 # Formatting is still handled by yapf (see run_tests.sh).
 
-line-length = 80
+# Ruff only uses this to decide when to wrap imports (see [lint.isort] below);
+# line length for code is enforced by yapf (80 columns). If E501 is enabled
+# later, set its limit with `lint.pycodestyle.max-line-length` instead.
+line-length = 1000
 
 # Minimum Python version the code must run on. Ruff uses it to decide which
 # syntax is valid (e.g. 3.12-only syntax is flagged as an error on older
@@ -64,4 +67,24 @@ select = [
     "F841",
     # f-strings without placeholders.
     "F541",
+    # Unused imports.
+    "F401",
+    # Import sorting (isort).
+    "I001",
 ]
+
+[lint.isort]
+# Google Python style: one import per line, `import x` and `from x import y`
+# sorted together by module name within each section.
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["typing", "collections.abc"]
+# Keep each import on a single line, even if it's long (the Google style guide
+# exempts imports from the line limit). yapf never adds parentheses, so it
+# leaves these lines alone; wrapping them would make Ruff and yapf disagree on
+# where the closing parenthesis goes.
+split-on-trailing-comma = false
+
+[lint.pyflakes]
+# Modules imported only for their side effect of defining absl flags.
+allowed-unused-imports = ["common_flags", "config_flags"]

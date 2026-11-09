@@ -15,17 +15,15 @@
 Function library to make create list of URLs to be queried for census data download.
 """
 
-import base64
 import json
 import logging
 import os
-from absl import app
-from absl import flags
-from operator import ge
-from sys import path
 from typing import Any, Union
 
+from absl import app
+from absl import flags
 from census_api_helpers import *
+
 from scripts.us_census.api_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS

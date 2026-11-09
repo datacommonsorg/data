@@ -27,10 +27,10 @@ from absl import logging
 # for latlng_recon_service
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))
-from util import latlng_recon_service
-from util import gcs_file
-
 from place_cache import PlaceCache
+
+from util import gcs_file
+from util import latlng_recon_service
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('usgs_earthquake_input', '/tmp/usgs/*.csv',

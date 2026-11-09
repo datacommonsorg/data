@@ -21,8 +21,6 @@ import tempfile
 import unittest
 from unittest import mock
 
-import pandas as pd
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(_DATA_DIR)

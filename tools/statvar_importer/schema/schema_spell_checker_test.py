@@ -17,9 +17,6 @@ import os
 import sys
 import unittest
 
-from absl import app
-from absl import logging
-
 import schema_spell_checker
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

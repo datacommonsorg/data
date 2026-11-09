@@ -22,15 +22,15 @@
 # @file_output: formatted ncbi_assembly_summary.csv
 
 # import environment
-from absl import flags
+import csv
+import os
 from pathlib import Path
+import sys
 
 import absl
-import csv
+from absl import flags
 import numpy as np
 import pandas as pd
-import os
-import sys
 
 # Declare Universal Variables
 TAX_ID_DCID_MAPPING = {}
