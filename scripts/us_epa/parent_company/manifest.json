@@ -20,7 +20,6 @@
                 }
             ],
             "cron_schedule": "0 8 5,19 * *",
-            "validation_config_file": "validation_config.json",
             "source_files": [
                 "input_files/*.csv"
             ]
@@ -46,7 +45,6 @@
                 }
             ],
             "cron_schedule": "0 8 8,22 * *",
-            "validation_config_file": "ownership_validation_config.json",
             "source_files": [
                 "input_files/*.csv"
             ]
@@ -72,7 +70,6 @@
                 }
             ],
             "cron_schedule": "0 8 10,24 * *",
-            "validation_config_file": "validation_config.json",
             "source_files": [
                 "input_files/*.csv"
             ]
