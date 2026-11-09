@@ -15,6 +15,7 @@
 import filecmp
 import os
 import unittest
+
 from .base import CensusPrimaryAbstractDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.

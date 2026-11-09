@@ -15,11 +15,10 @@
 
 import os
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 from unittest import mock
-
-import sys
 
 from absl import flags
 

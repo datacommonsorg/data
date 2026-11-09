@@ -27,15 +27,13 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
+from download_current_year_data import _validate_horizontal_and_vertical_sums
+from download_current_year_data import check_and_download_nsi
+from download_current_year_data import list_gcs_files
+from download_current_year_data import normalize_cell
+from download_current_year_data import sanitize_csv_content
+from download_current_year_data import sanitize_directory_files
 import requests
-from download_current_year_data import (
-    _validate_horizontal_and_vertical_sums,
-    check_and_download_nsi,
-    list_gcs_files,
-    normalize_cell,
-    sanitize_csv_content,
-    sanitize_directory_files,
-)
 
 
 class DownloadCurrentYearDataTest(unittest.TestCase):

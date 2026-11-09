@@ -27,9 +27,8 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
-
 from counters import Counters
+import file_util
 
 flags.DEFINE_string('input_json', '', 'JSON file to be converted into csv')
 flags.DEFINE_string('csv_output', '', 'Output CSV file')

@@ -13,9 +13,11 @@
 # limitations under the License.
 """Module to test the methods in Downloader Class"""
 
-import unittest
 import os
-from .download import Downloader, SHEET_NAMES_TO_CSV_FILENAMES
+import unittest
+
+from .download import SHEET_NAMES_TO_CSV_FILENAMES
+from .download import Downloader
 
 
 class TestDownloader(unittest.TestCase):

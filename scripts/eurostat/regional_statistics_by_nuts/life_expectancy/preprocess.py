@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
 import os
 import urllib.request
-from absl import logging
+
 from absl import app
 from absl import flags
+from absl import logging
+import pandas as pd
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))

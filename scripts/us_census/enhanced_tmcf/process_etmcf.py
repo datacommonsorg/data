@@ -1,8 +1,8 @@
 import csv
-import os
-import sys
 from dataclasses import dataclass
+import os
 from pathlib import Path
+import sys
 from typing import Dict, List, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[3]

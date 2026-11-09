@@ -22,10 +22,11 @@ import csv
 import glob
 import os
 import re
-import pandas as pd
+
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_INPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')

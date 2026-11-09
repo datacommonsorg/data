@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import csv
 import copy
-import pandas as pd
-import tempfile
+import csv
+import os
 from os import path
+import tempfile
+
+import pandas as pd
+
 from ..common.utils import title_case
 
 CENSUS_DATA_COLUMN_START = 7

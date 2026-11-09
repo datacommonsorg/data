@@ -16,9 +16,11 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 try:
-    from .process import process_subject_tables, set_column_map
+    from .process import process_subject_tables
+    from .process import set_column_map
 except ImportError:
-    from process import process_subject_tables, set_column_map
+    from process import process_subject_tables
+    from process import set_column_map
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 

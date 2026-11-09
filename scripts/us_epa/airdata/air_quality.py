@@ -16,13 +16,18 @@ Generates cleaned CSV and template MCF files for the EPA AirData.
 
 Usage: python3 air_quality.py [--data_start_year=YYYY] [--data_end_year=YYYY]
 '''
-import csv, os, re, requests, io, zipfile
-from urllib3.util import Retry
+import csv
+from datetime import datetime
+import io
+import os
+import re
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime
+import requests
+from urllib3.util import Retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 

@@ -16,9 +16,9 @@ Tests for cloud_scheduler.py.
 """
 
 import unittest
-from deepdiff.diff import DeepDiff
 
 from app.executor import cloud_scheduler
+from deepdiff.diff import DeepDiff
 
 
 class CloudSchedulerTest(unittest.TestCase):

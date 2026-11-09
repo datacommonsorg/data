@@ -31,11 +31,10 @@ import sys
 import tempfile
 import zipfile
 
-import geopandas as gpd
-import requests
-
 from absl import app
 from absl import flags
+import geopandas as gpd
+import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))

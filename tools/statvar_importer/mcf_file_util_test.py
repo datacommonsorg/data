@@ -23,9 +23,8 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
-import mcf_file_util
-
 from mcf_diff import diff_mcf_nodes
+import mcf_file_util
 
 # module_dir_ is the path to where this test is running from.
 _module_dir_ = os.path.dirname(__file__)

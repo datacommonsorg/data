@@ -16,6 +16,7 @@ Script to automate the testing for EuroStat BMI (Body Mass Index) process script
 """
 import os
 import sys
+
 from absl import flags
 import pandas as pd
 
@@ -24,6 +25,7 @@ sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
 from bmi.process import EuroStatBMI
 from common.unitest_common_methods import CommonTestClass
+
 # pylint: enable=wrong-import-position
 while _COMMON_PATH in sys.path:
     sys.path.remove(_COMMON_PATH)

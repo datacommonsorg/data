@@ -15,11 +15,12 @@
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
-import os
 import json
+import os
+import time
+
 import pandas as pd
 import requests
-import time
 
 INDIA_ISO_CODES = {
     "Andhra Pradesh": "IN-AP",

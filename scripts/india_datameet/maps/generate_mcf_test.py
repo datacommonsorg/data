@@ -3,6 +3,7 @@
 import os
 import tempfile
 import unittest
+
 from .generate_mcf import generate
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))

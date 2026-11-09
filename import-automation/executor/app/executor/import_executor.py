@@ -17,22 +17,22 @@ based on manifests.
 """
 
 import dataclasses
+import datetime
+from enum import Enum
 import fnmatch
 import glob
 import json
 import logging
 import os
-import shutil
 import shlex
-import sys
+import shutil
 import subprocess
+import sys
 import tempfile
 import threading
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
-import datetime
-from enum import Enum
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(
@@ -42,15 +42,6 @@ sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-import file_util
-from log_util import log_function_call, log_metric
-
-from counters import Counters
-from timer import Timer
-from import_differ.import_differ import ImportDiffer
-from tools.import_validation.runner import ValidationRunner
-from tools.import_validation.result import ValidationStatus, ValidationResult
-from tools.import_validation.validation_config import merge_and_save_config
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -59,7 +50,18 @@ from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
+from counters import Counters
+import file_util
 from google.cloud import storage
+from import_differ.import_differ import ImportDiffer
+from log_util import log_function_call
+from log_util import log_metric
+from timer import Timer
+
+from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationStatus
+from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.validation_config import merge_and_save_config
 
 # Email address for status messages.
 _DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'

@@ -13,13 +13,14 @@
 # limitations under the License.
 """Generic proces module to generate the csv/tmcf and csv"""
 # TODO: Add unit tests
+import json
 import os
 import sys
-import json
 
-from absl import app, flags
+from absl import app
+from absl import flags
+
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
-
 from .data_loader import process_subject_tables
 
 # Allows the following module imports to work when running as a script

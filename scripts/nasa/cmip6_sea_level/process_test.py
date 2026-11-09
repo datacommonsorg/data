@@ -14,8 +14,8 @@
 """Tests for process.py"""
 
 import os
-import tempfile
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 

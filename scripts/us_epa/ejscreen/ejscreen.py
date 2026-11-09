@@ -12,17 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import zipfile
-import requests
-import pandas as pd
 import json
-from absl import logging, flags, app
+import os
+from pathlib import Path
+import shutil
 import sys
 import time
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
-import shutil
-from pathlib import Path
 
 # Setup path for import from data/util
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

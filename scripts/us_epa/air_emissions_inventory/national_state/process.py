@@ -17,11 +17,14 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 
 import os
-import sys
-from absl import app, flags, logging
-import pandas as pd
-import numpy as np
 import re
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import numpy as np
+import pandas as pd
 
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                 '..')))
@@ -38,8 +41,12 @@ from statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from metadata import (SHEETS_NATIONAL, SKIPHEAD_AMMONIA_NATIONAL,
-                      SKIPHEAD_OTHERS_NATIONAL, SHEET_STATE, SOURCE, POLLUTANT)
+from metadata import POLLUTANT
+from metadata import SHEET_STATE
+from metadata import SHEETS_NATIONAL
+from metadata import SKIPHEAD_AMMONIA_NATIONAL
+from metadata import SKIPHEAD_OTHERS_NATIONAL
+from metadata import SOURCE
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),

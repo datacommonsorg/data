@@ -67,14 +67,15 @@ flags.DEFINE_string('schema_macher_embeddings', '',
                     'File with embeddings for schema matcher.')
 flags.DEFINE_bool('schema_matcher_debug', False, 'Enable debug messages.')
 
-import file_util
-import process_http_server
-
-from mcf_file_util import load_mcf_nodes, strip_namespace, add_pv_to_node
-from ngram_matcher import NgramMatcher
-from semantic_matcher import SemanticMatcher
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+from mcf_file_util import add_pv_to_node
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+from ngram_matcher import NgramMatcher
+import process_http_server
+from semantic_matcher import SemanticMatcher
 
 
 def get_schema_matcher_config() -> dict:

@@ -16,10 +16,11 @@
     Typical usage:
     python3 simplify_test.py
 """
-import geojson
 from pathlib import Path
 import sys
 import unittest
+
+import geojson
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))

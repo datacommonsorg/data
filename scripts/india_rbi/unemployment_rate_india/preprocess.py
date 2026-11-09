@@ -16,8 +16,9 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import pandas as pd
 from os import path
+
+import pandas as pd
 
 INDIA_ISO_CODES = {
     "Andhra Pradesh": "IN-AP",

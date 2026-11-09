@@ -12,16 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import requests
-import zipfile
+from datetime import date
 import io
-import pandas as pd
+import os
+from pathlib import Path
 import re
 import shutil
-from absl import logging, app, flags
-from pathlib import Path
-from datetime import date
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
 
 FLAGS = flags.FLAGS

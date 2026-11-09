@@ -21,11 +21,13 @@
 # @expected_output: Expected output of the input file which is compared against output generated from test.
 
 # Import all functions and classes from the process module
-import os
 import filecmp
+import os
+from os.path import abspath
+from os.path import dirname
 import unittest
+
 from process import *
-from os.path import dirname, abspath
 
 _FLAGS = None
 

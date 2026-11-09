@@ -27,10 +27,10 @@ sys.path.append(
 
 _TEST_DIR = os.path.join(_SCRIPT_DIR, 'test_data')
 
-import mcf_diff
-
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
+import mcf_diff
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import write_mcf_nodes
 
 _SAMPLE_MCF_NODES = """
 # Sample nodes

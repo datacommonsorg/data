@@ -107,7 +107,10 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+from config_map import ConfigMap
+from counters import Counters
 import file_util
+
 # Importing the pipeline_stage_* modules registers their stage runners, and
 # process_events/raster_to_csv define flags used by the stages.
 import pipeline_stage_bigquery  # noqa: F401
@@ -116,13 +119,10 @@ import pipeline_stage_earthengine  # noqa: F401
 import pipeline_stage_events  # noqa: F401
 import pipeline_stage_raster_csv  # noqa: F401
 import pipeline_stage_runner
+from pipeline_stage_runner import StageRunner
 import process_events  # noqa: F401
 import raster_to_csv  # noqa: F401
 import utils
-
-from counters import Counters
-from config_map import ConfigMap
-from pipeline_stage_runner import StageRunner
 
 # Processing state persisted to a file
 # Includes dynamic parameter values for each stage of processing.

@@ -18,9 +18,10 @@ This module provides a client class for interacting with SDMX APIs.
 """
 
 import logging
-import sdmx
+from typing import Any, Dict
+
 from requests.exceptions import HTTPError
-from typing import Dict, Any
+import sdmx
 
 
 class SdmxClient:

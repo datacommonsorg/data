@@ -16,6 +16,7 @@ This Python Script contains methods to clean the county, state datasets
 """
 import os
 import sys
+
 import pandas as pd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,6 +24,7 @@ sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
 import util.alpha2_to_dcid as alpha2todcid
+
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 

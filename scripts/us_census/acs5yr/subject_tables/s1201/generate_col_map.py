@@ -14,10 +14,11 @@
 """
 Module to generate a column map to their corresponding statistical variable defintions.
 """
+import json
 import os
 import sys
-import json
 from zipfile import ZipFile
+
 import pandas as pd
 
 # Allows the sibling/parent module imports to work when running as a script or module

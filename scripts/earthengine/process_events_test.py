@@ -18,9 +18,9 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
-import pandas as pd
 
 from absl import logging
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _MODULE_DIR = os.path.dirname(__file__)
@@ -33,7 +33,8 @@ import file_util
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
 
-from process_events import process, GeoEventsProcessor
+from process_events import GeoEventsProcessor
+from process_events import process
 
 from util.config_map import ConfigMap
 

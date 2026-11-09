@@ -43,11 +43,10 @@ flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
                     'Output file with results per query.')
 flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
 
-import file_util
-import process_http_server
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+import process_http_server
 
 
 # Class to perform semantic search for text strings using embeddings.
@@ -154,7 +153,8 @@ class SemanticMatcher:
         # Import modules needed when running SemanticMatcher
         # This is not imported in import-executor automation
         # that calls stvtar processor, but doesn't need semantic matching.
-        from sentence_transformers import SentenceTransformer, util
+        from sentence_transformers import SentenceTransformer
+        from sentence_transformers import util
 
         model = self._config.get('embeddings_model', 'all-MiniLM-L6-v2')
         logging.info(f'Creating SentenceTransformer with {model}')

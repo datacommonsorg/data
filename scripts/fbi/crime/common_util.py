@@ -19,9 +19,9 @@ import sys
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../'))
 
-import sys
-import re
 import os
+import re
+import sys
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """

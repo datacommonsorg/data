@@ -1,10 +1,12 @@
 """Process data from Census ACS5Year Subject Table S1603."""
+import json
 import os
 import sys
-import pandas as pd
+
+from absl import app
+from absl import flags
 import numpy as np
-from absl import app, flags
-import json
+import pandas as pd
 
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-class-docstring
@@ -16,8 +18,9 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../', 'common'))
 
 from data_loader import SubjectTableDataLoaderBase  # commit hash - aee443ee
-from resolve_geo_id import convert_to_place_dcid
 from generate_col_map import process_zip_file
+from resolve_geo_id import convert_to_place_dcid
+
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 FLAGS = flags.FLAGS
