@@ -18,7 +18,8 @@ sys.path.append('../')
 import csv
 import json
 
-from columns import *
+from columns import VAR_to_statsvars
+from columns import reindex_column
 from utils import multi_index_to_single_index
 
 sys.path.append('../../')

@@ -20,7 +20,8 @@ import sys
 from absl import app
 from absl import flags
 from absl import logging
-from columns import *
+from columns import VAR_to_statsvars
+from columns import reindex_column
 import pandas as pd
 
 _FLAGS = flags.FLAGS

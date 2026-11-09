@@ -14,9 +14,18 @@
 
 from __future__ import absolute_import
 
+from collections import OrderedDict
 import unittest
 
-from mcf_dict_util import *
+from mcf_dict_util import dict_list_to_mcf_str
+from mcf_dict_util import drop_nodes
+from mcf_dict_util import get_dcid_node
+from mcf_dict_util import mcf_dict_rename_namespace
+from mcf_dict_util import mcf_dict_rename_prop
+from mcf_dict_util import mcf_dict_rename_prop_value
+from mcf_dict_util import mcf_to_dict_list
+from mcf_dict_util import node_list_check_existence_dc
+from mcf_dict_util import node_list_check_existence_node_list
 
 
 class TestMCFDict(unittest.TestCase):

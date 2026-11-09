@@ -38,12 +38,20 @@ _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 
 # pylint: disable=wrong-import-position
-# pylint: disable=wildcard-import
-# pylint: disable=unused-wildcard-import
-from constants import *
-
-# pylint: enable=wildcard-import
-# pylint: enable=unused-wildcard-import
+from constants import ACS_SRUVEY_MEASUREMENT_METHOD
+from constants import CONF_2009_FILE
+from constants import CONF_2017_FILE
+from constants import DEFAULT_MEASUREMENT_METHOD
+from constants import DF_DEFAULT_MCF_PROP
+from constants import FINAL_DATA_COLS
+from constants import FORM_STATVAR
+from constants import MELT_OBV_COL
+from constants import MELT_VAR_COL
+from constants import PADDING
+from constants import RENAME_COLUMNS
+from constants import SV_NODE_FORMAT
+from constants import SV_PROP_ORDER
+from constants import TMCF_TEMPLATE
 
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
