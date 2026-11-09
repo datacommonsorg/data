@@ -27,7 +27,7 @@ for _p in (_SCRIPT_DIR, _REPO_ROOT):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-import download_script
+from statvar_imports.japan_census import download_script
 
 
 class DownloadScriptTest(unittest.TestCase):
