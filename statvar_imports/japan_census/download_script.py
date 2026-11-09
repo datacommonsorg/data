@@ -37,18 +37,18 @@ from urllib3.util.retry import Retry
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_MODULE_DIR, 'input_files'),
-    'Directory path to save the downloaded CSV files.',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'max_workers',
-    4,
-    'Maximum number of parallel threads for e-Stat dbview requests.',
-    allow_override=True,
-)
+if 'output_dir' not in _FLAGS:
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_MODULE_DIR, 'input_files'),
+        'Directory path to save the downloaded CSV files.',
+    )
+if 'max_workers' not in _FLAGS:
+    flags.DEFINE_integer(
+        'max_workers',
+        4,
+        'Maximum number of parallel threads for e-Stat dbview requests.',
+    )
 
 ESTAT_DBVIEW_BASE_URL = 'https://www.e-stat.go.jp/dbview'
 ESTAT_DASHBOARD_DOWNLOAD_URL = (
