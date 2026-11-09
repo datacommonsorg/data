@@ -22,8 +22,9 @@ repository contracts and instructions take precedence.
 ## Documentation and organization
 
 - Document the source, dataset coverage, prerequisites, working directory,
-  download and processing steps, important files, testing, and refresh
-  procedure in `README.md`.
+  download and processing steps (including any custom preprocessing or
+  validation outside `stat_var_processor` and `validation_config.json`),
+  important files, testing, and refresh procedure in the import's `README.md`.
 - Preserve downloaded source files unchanged, and write transformed data to
   separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
