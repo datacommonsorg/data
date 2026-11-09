@@ -33,6 +33,10 @@ class RunManifestImportTest(unittest.TestCase):
         self._tmp = tempfile.TemporaryDirectory()
         self.import_dir = self._tmp.name
         self.manifest = os.path.join(self.import_dir, 'manifest.json')
+        patcher = mock.patch.object(run_manifest_import.subprocess, 'run')
+        self.mock_run = patcher.start()
+        self.mock_run.return_value = mock.Mock(returncode=0)
+        self.addCleanup(patcher.stop)
 
     def tearDown(self):
         self._tmp.cleanup()
@@ -59,15 +63,29 @@ class RunManifestImportTest(unittest.TestCase):
     def _path(self, *parts):
         return os.path.join(self.import_dir, *parts)
 
+    def _run_cli(self, *extra_args, import_name='MyImport'):
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            exit_code = run_manifest_import.main([
+                f'--manifest={self.manifest}',
+                f'--import_name={import_name}',
+                *extra_args,
+            ])
+        return exit_code, stderr.getvalue()
+
     def test_orders_tmcf_node_mcf_then_csv(self):
         self._touch('data.tmcf', 'schema.mcf', 'output/data.csv')
-        files = run_manifest_import.get_import_input_files(
-            {
-                'cleaned_csv': 'output/data.csv',
-                'node_mcf': 'schema.mcf',
-                'template_mcf': 'data.tmcf',
-            }, self.import_dir)
-        self.assertEqual(files, [
+        self._write_manifest([{
+            'cleaned_csv': 'output/data.csv',
+            'node_mcf': 'schema.mcf',
+            'template_mcf': 'data.tmcf',
+        }])
+
+        exit_code, _ = self._run_cli()
+
+        self.assertEqual(exit_code, 0)
+        command = self.mock_run.call_args.args[0]
+        self.assertEqual(command[-3:], [
             self._path('data.tmcf'),
             self._path('schema.mcf'),
             self._path('output', 'data.csv'),
@@ -76,12 +94,16 @@ class RunManifestImportTest(unittest.TestCase):
     def test_expands_globs_and_lists_in_sorted_order(self):
         self._touch('data.tmcf', 'output/b.csv', 'output/a.csv',
                     'output/sub/c.csv', 'extra.csv')
-        files = run_manifest_import.get_import_input_files(
-            {
-                'template_mcf': 'data.tmcf',
-                'cleaned_csv': ['output/**/*.csv', 'extra.csv'],
-            }, self.import_dir)
-        self.assertEqual(files, [
+        self._write_manifest([{
+            'template_mcf': 'data.tmcf',
+            'cleaned_csv': ['output/**/*.csv', 'extra.csv'],
+        }])
+
+        exit_code, _ = self._run_cli()
+
+        self.assertEqual(exit_code, 0)
+        command = self.mock_run.call_args.args[0]
+        self.assertEqual(command[-5:], [
             self._path('data.tmcf'),
             self._path('output', 'a.csv'),
             self._path('output', 'b.csv'),
@@ -89,28 +111,20 @@ class RunManifestImportTest(unittest.TestCase):
             self._path('extra.csv'),
         ])
 
-    def test_glob_without_matches_is_allowed(self):
-        self._touch('data.tmcf')
-        files = run_manifest_import.get_import_input_files(
-            {
-                'template_mcf': 'data.tmcf',
-                'cleaned_csv': 'output/*.csv'
-            }, self.import_dir)
-        self.assertEqual(files, [self._path('data.tmcf')])
-
-    def test_warns_when_glob_matches_no_files(self):
+    def test_warns_and_continues_when_glob_matches_no_files(self):
         self._touch('data.tmcf', 'extra.csv')
         self._write_manifest([{
             'template_mcf': 'data.tmcf',
             'cleaned_csv': ['output/*.csv', 'extra.csv'],
         }])
-        stderr = io.StringIO()
-        with contextlib.redirect_stderr(stderr):
-            commands = run_manifest_import.build_commands(
-                self.manifest, 'MyImport', run_import_tool='tool')
-        self.assertIn('[WARN] input0: no files match cleaned_csv:output/*.csv',
-                      stderr.getvalue())
-        self.assertEqual(commands[0][-2:],
+
+        exit_code, stderr = self._run_cli()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn('WARN', stderr)
+        self.assertIn('cleaned_csv:output/*.csv', stderr)
+        command = self.mock_run.call_args.args[0]
+        self.assertEqual(command[-2:],
                          [self._path('data.tmcf'),
                           self._path('extra.csv')])
 
@@ -120,36 +134,44 @@ class RunManifestImportTest(unittest.TestCase):
             'template_mcf': 'data.tmcf',
             'cleaned_csv': 'output/*.csv',
         }])
-        stderr = io.StringIO()
-        with contextlib.redirect_stderr(stderr):
-            run_manifest_import.build_commands(self.manifest,
-                                               'MyImport',
-                                               run_import_tool='tool')
-        self.assertNotIn('WARN', stderr.getvalue())
 
-    def test_missing_literal_file_raises(self):
+        exit_code, stderr = self._run_cli()
+
+        self.assertEqual(exit_code, 0)
+        self.assertNotIn('WARN', stderr)
+
+    def test_fails_when_literal_file_is_missing(self):
         self._touch('data.tmcf')
-        with self.assertRaisesRegex(run_manifest_import.ManifestImportError,
-                                    'cleaned_csv:output/data.csv'):
-            run_manifest_import.get_import_input_files(
-                {
-                    'template_mcf': 'data.tmcf',
-                    'cleaned_csv': 'output/data.csv'
-                }, self.import_dir)
+        self._write_manifest([{
+            'template_mcf': 'data.tmcf',
+            'cleaned_csv': 'output/data.csv',
+        }])
 
-    def test_unknown_import_name_lists_available_imports(self):
+        exit_code, stderr = self._run_cli()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn('cleaned_csv:output/data.csv', stderr)
+        self.mock_run.assert_not_called()
+
+    def test_fails_and_lists_available_imports_when_import_name_unknown(self):
         self._write_manifest([])
-        with self.assertRaisesRegex(run_manifest_import.ManifestImportError,
-                                    'OtherImport, MyImport'):
-            run_manifest_import.build_commands(self.manifest, 'Missing')
 
-    def test_no_import_inputs_raises(self):
+        exit_code, stderr = self._run_cli(import_name='Missing')
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn('OtherImport, MyImport', stderr)
+        self.mock_run.assert_not_called()
+
+    def test_fails_when_import_has_no_import_inputs(self):
         self._write_manifest([])
-        with self.assertRaisesRegex(run_manifest_import.ManifestImportError,
-                                    'no import_inputs'):
-            run_manifest_import.build_commands(self.manifest, 'MyImport')
 
-    def test_builds_one_command_per_import_input(self):
+        exit_code, stderr = self._run_cli()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn('no import_inputs', stderr)
+        self.mock_run.assert_not_called()
+
+    def test_runs_once_per_import_input_and_forwards_tool_args(self):
         self._touch('a.tmcf', 'output/a.csv', 'b.tmcf', 'output/b.csv')
         self._write_manifest([{
             'template_mcf': 'a.tmcf',
@@ -158,57 +180,60 @@ class RunManifestImportTest(unittest.TestCase):
             'template_mcf': 'b.tmcf',
             'cleaned_csv': 'output/b.csv'
         }])
-        commands = run_manifest_import.build_commands(self.manifest,
-                                                      'MyImport',
-                                                      tool_args=['-n=4'],
-                                                      run_import_tool='tool')
-        self.assertEqual(commands, [
-            [
-                'tool', '-o=' + self._path('MyImport', 'input0', 'genmcf'),
-                '-n=4', 'genmcf',
-                self._path('a.tmcf'),
-                self._path('output', 'a.csv')
-            ],
-            [
-                'tool', '-o=' + self._path('MyImport', 'input1', 'genmcf'),
-                '-n=4', 'genmcf',
-                self._path('b.tmcf'),
-                self._path('output', 'b.csv')
-            ],
+
+        exit_code, _ = self._run_cli('--', '-n=4', '--existence-checks=false')
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(self.mock_run.call_count, 2)
+        first_call, second_call = self.mock_run.call_args_list
+        self.assertEqual(first_call.kwargs['cwd'], self.import_dir)
+        self.assertEqual(first_call.args[0][1:], [
+            '-o=' + self._path('MyImport', 'input0', 'genmcf'),
+            '-n=4',
+            '--existence-checks=false',
+            'genmcf',
+            self._path('a.tmcf'),
+            self._path('output', 'a.csv'),
+        ])
+        self.assertEqual(second_call.args[0][1:], [
+            '-o=' + self._path('MyImport', 'input1', 'genmcf'),
+            '-n=4',
+            '--existence-checks=false',
+            'genmcf',
+            self._path('b.tmcf'),
+            self._path('output', 'b.csv'),
         ])
 
-    def test_lint_mode_and_custom_output_dir(self):
+    def test_supports_lint_mode_and_custom_output_dir(self):
         self._touch('a.tmcf', 'a.csv')
         self._write_manifest([{
             'template_mcf': 'a.tmcf',
             'cleaned_csv': 'a.csv'
         }])
         out_dir = self._path('custom_out')
-        commands = run_manifest_import.build_commands(self.manifest,
-                                                      'MyImport',
-                                                      mode='lint',
-                                                      output_dir=out_dir,
-                                                      run_import_tool='tool')
-        self.assertEqual(
-            commands[0][:3],
-            ['tool', '-o=' + os.path.join(out_dir, 'input0', 'lint'), 'lint'])
 
-    @mock.patch.object(run_manifest_import.subprocess, 'run')
-    def test_main_dry_run_does_not_run_tool(self, mock_run):
+        exit_code, _ = self._run_cli('--mode=lint', f'--output_dir={out_dir}')
+
+        self.assertEqual(exit_code, 0)
+        command = self.mock_run.call_args.args[0]
+        self.assertEqual(
+            command[1:3],
+            ['-o=' + os.path.join(out_dir, 'input0', 'lint'), 'lint'])
+
+    def test_dry_run_does_not_invoke_tool(self):
         self._touch('a.tmcf', 'a.csv')
         self._write_manifest([{
             'template_mcf': 'a.tmcf',
             'cleaned_csv': 'a.csv'
         }])
-        exit_code = run_manifest_import.main([
-            f'--manifest={self.manifest}', '--import_name=MyImport', '--dry_run'
-        ])
-        self.assertEqual(exit_code, 0)
-        mock_run.assert_not_called()
 
-    @mock.patch.object(run_manifest_import.subprocess, 'run')
-    def test_main_runs_each_input_and_passes_tool_args(self, mock_run):
-        mock_run.return_value = mock.Mock(returncode=0)
+        exit_code, _ = self._run_cli('--dry_run')
+
+        self.assertEqual(exit_code, 0)
+        self.mock_run.assert_not_called()
+
+    def test_stops_immediately_when_tool_fails(self):
+        self.mock_run.return_value = mock.Mock(returncode=3)
         self._touch('a.tmcf', 'a.csv', 'b.tmcf', 'b.csv')
         self._write_manifest([{
             'template_mcf': 'a.tmcf',
@@ -217,38 +242,11 @@ class RunManifestImportTest(unittest.TestCase):
             'template_mcf': 'b.tmcf',
             'cleaned_csv': 'b.csv'
         }])
-        exit_code = run_manifest_import.main([
-            f'--manifest={self.manifest}', '--import_name=MyImport', '--',
-            '--existence-checks=false'
-        ])
-        self.assertEqual(exit_code, 0)
-        self.assertEqual(mock_run.call_count, 2)
-        command = mock_run.call_args_list[0].args[0]
-        self.assertIn('--existence-checks=false', command)
-        self.assertEqual(mock_run.call_args_list[0].kwargs['cwd'],
-                         self.import_dir)
 
-    @mock.patch.object(run_manifest_import.subprocess, 'run')
-    def test_main_stops_on_tool_failure(self, mock_run):
-        mock_run.return_value = mock.Mock(returncode=3)
-        self._touch('a.tmcf', 'a.csv', 'b.tmcf', 'b.csv')
-        self._write_manifest([{
-            'template_mcf': 'a.tmcf',
-            'cleaned_csv': 'a.csv'
-        }, {
-            'template_mcf': 'b.tmcf',
-            'cleaned_csv': 'b.csv'
-        }])
-        exit_code = run_manifest_import.main(
-            [f'--manifest={self.manifest}', '--import_name=MyImport'])
+        exit_code, _ = self._run_cli()
+
         self.assertEqual(exit_code, 3)
-        self.assertEqual(mock_run.call_count, 1)
-
-    def test_main_missing_file_returns_error(self):
-        self._write_manifest([{'template_mcf': 'a.tmcf'}])
-        exit_code = run_manifest_import.main(
-            [f'--manifest={self.manifest}', '--import_name=MyImport'])
-        self.assertEqual(exit_code, 1)
+        self.assertEqual(self.mock_run.call_count, 1)
 
 
 if __name__ == '__main__':

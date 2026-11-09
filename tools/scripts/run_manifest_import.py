@@ -51,11 +51,11 @@ _RUN_IMPORT_TOOL_SH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'run_import_tool.sh')
 
 
-class ManifestImportError(Exception):
+class _ManifestImportError(Exception):
     """Raised when the manifest or its input files are invalid."""
 
 
-def load_import_spec(manifest_path: str, import_name: str) -> Dict:
+def _load_import_spec(manifest_path: str, import_name: str) -> Dict:
     """Returns the import specification named `import_name` in the manifest."""
     with open(manifest_path, 'r') as f:
         manifest = json.load(f)
@@ -64,13 +64,13 @@ def load_import_spec(manifest_path: str, import_name: str) -> Dict:
         if spec.get('import_name') == import_name:
             return spec
     available = ', '.join(spec.get('import_name', '?') for spec in specs)
-    raise ManifestImportError(
+    raise _ManifestImportError(
         f'Import "{import_name}" not found in {manifest_path}. '
         f'Available imports: {available or "(none)"}')
 
 
-def get_import_input_files(import_input: Dict,
-                           absolute_import_dir: str) -> List[str]:
+def _get_import_input_files(import_input: Dict,
+                            absolute_import_dir: str) -> List[str]:
     """Returns the input files for one entry of `import_inputs`.
 
     Keep in sync with `ImportExecutor._get_import_input_files` in
@@ -94,18 +94,18 @@ def get_import_input_files(import_input: Dict,
                 else:
                     input_files.extend(sorted(files))
     if errors:
-        raise ManifestImportError(
+        raise _ManifestImportError(
             f'Missing import files in {absolute_import_dir}: {errors}. '
             'Run the import\'s processing scripts first.')
     return input_files
 
 
-def get_unmatched_glob_patterns(import_input: Dict,
-                                absolute_import_dir: str) -> List[str]:
+def _get_unmatched_glob_patterns(import_input: Dict,
+                                 absolute_import_dir: str) -> List[str]:
     """Returns `file_type:pattern` for each wildcard pattern matching no files.
 
     The import executor silently skips these, so a missing processing output
-    can go unnoticed. This is kept separate from `get_import_input_files` so
+    can go unnoticed. This is kept separate from `_get_import_input_files` so
     that function stays identical to the import executor's.
     """
     unmatched = []
@@ -119,28 +119,28 @@ def get_unmatched_glob_patterns(import_input: Dict,
     return unmatched
 
 
-def build_commands(
-        manifest_path: str,
-        import_name: str,
-        mode: str = 'genmcf',
-        output_dir: Optional[str] = None,
-        tool_args: Sequence[str] = (),
-        run_import_tool: str = _RUN_IMPORT_TOOL_SH) -> List[List[str]]:
+def _build_commands(
+    manifest_path: str,
+    import_name: str,
+    mode: str = 'genmcf',
+    output_dir: Optional[str] = None,
+    tool_args: Sequence[str] = ()
+) -> List[List[str]]:
     """Returns one import tool command per entry of `import_inputs`."""
     absolute_import_dir = os.path.dirname(os.path.abspath(manifest_path))
-    spec = load_import_spec(manifest_path, import_name)
+    spec = _load_import_spec(manifest_path, import_name)
     import_inputs = spec.get('import_inputs', [])
     if not import_inputs:
-        raise ManifestImportError(
+        raise _ManifestImportError(
             f'Import "{import_name}" has no import_inputs in {manifest_path}.')
     if not output_dir:
         output_dir = os.path.join(absolute_import_dir, import_name)
 
     commands = []
     for index, import_input in enumerate(import_inputs):
-        input_files = get_import_input_files(import_input, absolute_import_dir)
-        for unmatched in get_unmatched_glob_patterns(import_input,
-                                                     absolute_import_dir):
+        input_files = _get_import_input_files(import_input, absolute_import_dir)
+        for unmatched in _get_unmatched_glob_patterns(import_input,
+                                                      absolute_import_dir):
             print(
                 f'[run_manifest_import] [WARN] input{index}: no files match '
                 f'{unmatched}. The import tool will run without them.',
@@ -148,7 +148,7 @@ def build_commands(
         output_path = os.path.join(os.path.abspath(output_dir), f'input{index}',
                                    mode)
         commands.append(
-            [run_import_tool, f'-o={output_path}', *tool_args, mode] +
+            [_RUN_IMPORT_TOOL_SH, f'-o={output_path}', *tool_args, mode] +
             input_files)
     return commands
 
@@ -182,9 +182,9 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
 def main(argv: Sequence[str]) -> int:
     args = _parse_args(argv)
     try:
-        commands = build_commands(args.manifest, args.import_name, args.mode,
-                                  args.output_dir, args.tool_args)
-    except (ManifestImportError, OSError, json.JSONDecodeError) as e:
+        commands = _build_commands(args.manifest, args.import_name, args.mode,
+                                   args.output_dir, args.tool_args)
+    except (_ManifestImportError, OSError, json.JSONDecodeError) as e:
         print(f'[run_manifest_import] [ERROR] {e}', file=sys.stderr)
         return 1
 
