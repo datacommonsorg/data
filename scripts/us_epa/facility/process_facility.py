@@ -3,8 +3,8 @@
 import csv
 import json
 import os.path
-import sys
 from pathlib import Path
+import sys
 
 from absl import app
 from absl import flags
@@ -18,8 +18,8 @@ from util.dc_api_wrapper import dc_api_get_node_property
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
-from us_epa.util.crosswalk import Crosswalk
 from us_epa.util import facilities_helper as fh
+from us_epa.util.crosswalk import Crosswalk
 
 FLAGS = flags.FLAGS
 

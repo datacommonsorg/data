@@ -3,11 +3,13 @@ Unit tests for deepsolar.py
 Usage: python3 deepsolar_test.py
 '''
 
-import unittest
 import os
 import tempfile
+import unittest
+
 import pandas as pd
 from pandas.testing import assert_frame_equal
+
 from .deepsolar import write_csv
 
 module_dir_ = os.path.dirname(__file__)

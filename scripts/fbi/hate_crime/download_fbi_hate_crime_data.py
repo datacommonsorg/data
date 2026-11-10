@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-import requests
+import shutil
+import zipfile
+
 from absl import app
 from absl import logging
-import zipfile
-import json
-import shutil
 import config
+import requests
 
 
 def download_hate_crime_data(json_api_url, output_folder):

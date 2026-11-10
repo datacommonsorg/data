@@ -3,8 +3,9 @@
 import os
 import tempfile
 import unittest
-from .process_facility import process
+
 from .process_facility import _COUNTERS
+from .process_facility import process
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _RAW_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')

@@ -53,21 +53,18 @@ process_files - intermediate processed files are placed in this folder.
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
+import json
 import os
 import sys
-import pandas as pd
-import requests
-import shutil
-import json
-import time
 import tempfile
-from datetime import datetime as dt
-from absl import logging
 
 from absl import app
 from absl import flags
-from retry import retry
+from absl import logging
+import pandas as pd
+import requests
 from requests.adapters import HTTPAdapter
+from retry import retry
 from urllib3.util.retry import Retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -75,15 +72,12 @@ _SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-from us_census.pep.pep_by_srh.constants import (
-    DOWNLOAD_DIR,
-    OUTPUT_DIR,
-    PROCESS_AGG_DIR,
-    PROCESS_AS_IS_DIR,
-    RACE,
-    STAT_VAR_COL_MAPPING,
-    WORKING_DIRECTORIES,
-)
+from us_census.pep.pep_by_srh.constants import DOWNLOAD_DIR
+from us_census.pep.pep_by_srh.constants import PROCESS_AGG_DIR
+from us_census.pep.pep_by_srh.constants import PROCESS_AS_IS_DIR
+from us_census.pep.pep_by_srh.constants import RACE
+from us_census.pep.pep_by_srh.constants import STAT_VAR_COL_MAPPING
+from us_census.pep.pep_by_srh.constants import WORKING_DIRECTORIES
 from us_census.pep.pep_by_srh.mcf_generator import generate_mcf
 from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
 

@@ -22,21 +22,21 @@ in a GCS config file. However, that file is available to DC team members only.
 
 """
 
-import json
-import requests
-import sys
+from collections import deque
 import csv
-import multiprocessing
-from itertools import repeat
-import os
 import datetime
-from google.cloud import storage
-from retry import retry
+from itertools import repeat
+import json
+import multiprocessing
+import os
+import sys
+import time
+
 from absl import app
 from absl import flags
 from absl import logging
-from collections import deque
-import time
+import requests
+from retry import retry
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))

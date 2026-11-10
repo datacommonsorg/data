@@ -40,7 +40,9 @@ import time
 from typing import List, Optional, Tuple
 from urllib.parse import urljoin
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 from bs4 import BeautifulSoup
 from google.cloud import storage
 import requests

@@ -16,8 +16,9 @@ This Python Script is for State Level Data 1990-2000.
 '''
 import os
 import sys
-import pandas as pd
 from urllib.parse import urlparse
+
+import pandas as pd
 
 _SCRIPTS_DIR = os.path.abspath(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))

@@ -18,16 +18,17 @@ Please see the data readme for release schedule.
 https://www.ncei.noaa.gov/pub/data/nidis/gpcc/nidis_gpcc_readme_c20220520.txt
 """
 
-from absl import app
-from absl import flags
 import concurrent.futures
-from absl import logging
+import os
+import shutil
+import sys
+from typing import List
 import urllib
 import urllib.request
-import shutil
-from typing import List
-import os
-import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 from retry import retry
 
 MODULE_DIR = os.path.dirname(__file__)

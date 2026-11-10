@@ -15,12 +15,9 @@
 
 import ast
 from collections import OrderedDict
-import collections.abc
 import os
 import sys
-from typing import Union
 
-from absl import app
 from absl import flags
 from absl import logging
 
@@ -31,8 +28,8 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
 from config_map import ConfigMap
+import file_util
 from mcf_file_util import get_numeric_value
 
 _FLAGS = flags.FLAGS

@@ -1,9 +1,10 @@
+import os
+import sys
+
 from absl import app
 from absl import flags
 from absl import logging
 import chardet
-import os
-import sys
 
 # Define flags using flags
 FLAGS = flags.FLAGS

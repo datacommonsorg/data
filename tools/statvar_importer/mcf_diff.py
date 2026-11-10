@@ -72,7 +72,10 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, normalize_mcf_node, normalize_value, node_dict_to_text, get_node_dcid, strip_namespace
+from mcf_file_util import filter_mcf_nodes
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import node_dict_to_text
+from mcf_file_util import normalize_mcf_node
 
 flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
 flags.DEFINE_string('mcf2', '', 'MCF file with nodes')
@@ -117,16 +120,22 @@ _FLAGS = flags.FLAGS
 # _FLAGS(sys.argv)  # Allow invocation without app.run()
 
 
+def _get_flag_value(name: str):
+    """Returns the flag value for `name` without mutating global parsed state."""
+    flag = _FLAGS[name]
+    return flag.value if _FLAGS.is_parsed() else flag._value
+
+
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
     return {
-        'ignore_property': _FLAGS.ignore_property,
-        'compare_property': _FLAGS.compare_property,
-        'fingerprint_dcid': _FLAGS.fingerprint_dcid,
-        'ignore_nodes_with_pv': _FLAGS.ignore_nodes_with_pv,
-        'compare_dcids': _FLAGS.compare_dcids,
-        'compare_nodes_with_pv': _FLAGS.compare_nodes_with_pv,
-        'show_diff_nodes_only': _FLAGS.show_diff_nodes_only,
+        'ignore_property': _get_flag_value('ignore_property'),
+        'compare_property': _get_flag_value('compare_property'),
+        'fingerprint_dcid': _get_flag_value('fingerprint_dcid'),
+        'ignore_nodes_with_pv': _get_flag_value('ignore_nodes_with_pv'),
+        'compare_dcids': _get_flag_value('compare_dcids'),
+        'compare_nodes_with_pv': _get_flag_value('compare_nodes_with_pv'),
+        'show_diff_nodes_only': _get_flag_value('show_diff_nodes_only'),
     }
 
 

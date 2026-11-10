@@ -1,10 +1,9 @@
 """Tests for process.py"""
 
-import csv
 import os
 import tempfile
-import sys
 import unittest
+
 from .process import process
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))

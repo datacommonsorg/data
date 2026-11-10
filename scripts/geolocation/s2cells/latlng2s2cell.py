@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import s2sphere
 from absl import app
 from absl import flags
+import s2sphere
 
 FLAGS = flags.FLAGS
 

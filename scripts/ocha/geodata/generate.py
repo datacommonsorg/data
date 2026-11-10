@@ -15,11 +15,12 @@
 
 import csv
 import glob
-import os
 import json
-from shapely import geometry
+import os
+
 from absl import app
 from absl import flags
+from shapely import geometry
 
 FLAGS = flags.FLAGS
 

@@ -1,6 +1,6 @@
-import pandas as pd
-from absl import flags
 from absl import app
+from absl import flags
+import pandas as pd
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('preprocess_file',

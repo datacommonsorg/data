@@ -43,7 +43,10 @@ import os
 import sys
 import urllib.parse
 import urllib.request
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 
 # Add the project root to the Python path for robust module imports
 script_dir = os.path.dirname(os.path.abspath(__file__))

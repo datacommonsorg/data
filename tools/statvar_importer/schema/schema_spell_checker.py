@@ -26,7 +26,6 @@ import sys
 from absl import app
 from absl import flags
 from absl import logging
-
 from spellchecker import SpellChecker
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -52,15 +51,13 @@ flags.DEFINE_bool('spell_check_text_only', False,
 _FLAGS = flags.FLAGS
 
 import config_flags
-import file_util
-import process_http_server
-
-import property_value_utils as pv_utils
-
 from config_map import ConfigMap
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
+import file_util
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+import process_http_server
+import property_value_utils as pv_utils
 
 # properties ignored for spell check
 _DEFAULT_IGNORE_SPELL_PROPS = {

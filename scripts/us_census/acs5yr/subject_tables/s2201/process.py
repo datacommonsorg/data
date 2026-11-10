@@ -17,12 +17,13 @@ import csv
 import io
 import json
 import os
-import requests
 import sys
 import zipfile
+
 from absl import app
 from absl import flags
 from absl import logging
+import requests
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))

@@ -18,9 +18,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from agents.common.scripts.list_imports import build_import_catalog
 from agents.common.scripts.list_imports import ImportCatalogError
 from agents.common.scripts.list_imports import ImportRecord
+from agents.common.scripts.list_imports import build_import_catalog
 from agents.common.scripts.list_imports import list_imports
 
 

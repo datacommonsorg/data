@@ -23,15 +23,15 @@ URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 python3 parse_cdc_places.py
 '''
 
+import json
 import os
 import sys
-import pandas as pd
-import numpy as np
-import json
-from absl import logging
-from absl import flags
+
 from absl import app
-from google.cloud import storage
+from absl import flags
+from absl import logging
+import numpy as np
+import pandas as pd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))

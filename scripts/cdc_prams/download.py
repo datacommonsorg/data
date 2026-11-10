@@ -18,9 +18,11 @@ from the official CDC website.
 
 import os
 import re
-import sys
 from urllib.parse import urljoin
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry

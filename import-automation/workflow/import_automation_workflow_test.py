@@ -18,7 +18,8 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 # Mock airflow modules before importing workflow modules
 mock_airflow = MagicMock()
@@ -144,13 +145,11 @@ if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
 import build_manifest_catalog
-import import_dag_e2e_test
 import golden_verification
-from golden_verification import (
-    HumanApprovalSensor,
-    get_golden_trigger_id,
-)
+from golden_verification import HumanApprovalSensor
+from golden_verification import get_golden_trigger_id
 import import_automation_workflow
+import import_dag_e2e_test
 import import_dags_factory
 
 

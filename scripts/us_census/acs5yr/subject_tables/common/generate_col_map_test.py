@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for generateColMap."""
-import os
 import csv
 import json
+import os
 import unittest
 
-from .generate_col_map import generate_stat_var_map, process_zip_file
+from .generate_col_map import generate_stat_var_map
+from .generate_col_map import process_zip_file
 
 
 # TODO: use a smaller spec which exercises all functions in the module

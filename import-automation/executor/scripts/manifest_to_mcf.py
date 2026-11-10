@@ -25,10 +25,11 @@ Usage:
 import hashlib
 import os
 from urllib.parse import urlparse
-from google.protobuf import text_format
+
 from absl import app
 from absl import flags
 import dc_manifest_pb2
+from google.protobuf import text_format
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("directory",
