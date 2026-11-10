@@ -22,13 +22,13 @@ run the command:
 """
 
 import calendar
+from datetime import datetime
 import os
 import sys
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -36,10 +36,9 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
 from mcf_file_util import get_numeric_value
 
 flags.DEFINE_string('filter_data_input', '',
@@ -195,12 +194,12 @@ def filter_data_series(data: dict,
                 pvs.pop('#Key')
             data.pop(date)
             data_dropped = True
-            counters.add_counter(f'filter-data-dropped', 1)
+            counters.add_counter('filter-data-dropped', 1)
         else:
             prev_value = value
             prev_dt = dt
     if data_dropped:
-        counters.add_counter(f'filter-data-series-with-drops', 1)
+        counters.add_counter('filter-data-series-with-drops', 1)
     return data
 
 

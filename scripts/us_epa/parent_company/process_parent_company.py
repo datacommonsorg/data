@@ -13,15 +13,14 @@
 # limitations under the License.
 """A script to download, parse and process the Parent Company Info for Facilities tracked by EPA."""
 
+import csv
 import os.path
 import pathlib
 import sys
 
-import csv
-import pandas as pd
-
 from absl import app
 from absl import flags
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

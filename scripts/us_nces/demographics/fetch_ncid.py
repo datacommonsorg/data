@@ -12,17 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import time
-import csv
 import copy
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from chromedriver_py import binary_path  # this will get you the path variable for ChromeDriver
+
 # from absl import logging
 import logging
+import time
+
+from chromedriver_py import binary_path  # this will get you the path variable for ChromeDriver
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 logging.basicConfig(level=logging.DEBUG)
 selenium_logger = logging.getLogger('selenium')

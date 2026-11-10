@@ -15,12 +15,9 @@
 
 import ast
 from collections import OrderedDict
-import collections.abc
 import os
 import sys
-from typing import Union
 
-from absl import app
 from absl import flags
 from absl import logging
 
@@ -31,8 +28,8 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
 from config_map import ConfigMap
+import file_util
 from mcf_file_util import get_numeric_value
 
 _FLAGS = flags.FLAGS
@@ -179,6 +176,38 @@ def get_default_config() -> dict:
         # 'config parameter in snake_case': value
         'ignore_numeric_commas':
             True,  # Numbers may have commas
+        # Boolean settings read by the processor. Listing them here lets a
+        # config file turn them off with 'False' or '0'.
+        'match_substring_word_boundary':
+            True,  # Partial key matches must be whole words.
+        'reconcile_nodes':
+            True,  # Reconcile generated nodes with the Data Commons schema.
+        'drop_statvars_with_dup_svobs':
+            True,  # Drop StatVars that have duplicate observations.
+        'resume':
+            _FLAGS.resume,  # Only create output files that don't exist.
+        'shard_input_by_column':
+            _FLAGS.shard_input_by_column,
+        'shard_prefix_length':
+            _FLAGS.shard_prefix_length,
+        # Boolean settings read by modules the processor calls, with the
+        # defaults used in their code.
+        'check_url':
+            True,  # Check URLs in generated nodes.
+        'ignore_non_alphanum':
+            True,  # Ignore non-alphanumeric characters in n-gram matches.
+        'maps_api_text_search':
+            True,  # Use the Maps API text search to resolve places.
+        'resolver_normalize_key':
+            True,  # Normalize place names before a resolver cache lookup.
+        'use_place_names':
+            True,  # Also match the place name without its parent names.
+        'recon_lookup_api':
+            True,  # Look up schema in the DC API for reconciliation.
+        'llm_response_drop_extra_output':
+            True,  # Drop LLM output outside the expected format.
+        'output_nodes_with_additions':
+            False,  # Output existing nodes whose PVs differ.
         'input_reference_column':
             '#input',
         'input_min_columns_per_row':
@@ -486,9 +515,20 @@ def set_config_value(param: str, value: str, config: dict):
     if isinstance(config, ConfigMap):
         config = config.get_configs()
     orig_value = config.get(param)
+    if orig_value is None:
+        # Use the default of a flag with the same name, if one is defined,
+        # so that values such as 'False' or '0' get the flag's type.
+        orig_value = _get_flag_default(param)
     if orig_value is not None:
         value = get_value_type(value, orig_value)
     config[param] = value
+
+
+def _get_flag_default(param: str):
+    """Returns the default value of the flag named param, or None."""
+    if param in _FLAGS:
+        return _FLAGS[param].default
+    return None
 
 
 def update_config(new_config: dict, config: dict) -> dict:
@@ -529,14 +569,17 @@ def get_value_type(value: str, default_value):
         if isinstance(value, bool):
             return value
         if isinstance(value, str):
-            match value.lower():
-                case 'true':
+            match value.strip().lower():
+                case 'true' | 'yes' | 'on':
                     return True
-                case 'false':
+                case 'false' | 'no' | 'off' | '':
                     return False
-                case '':
-                    return False
-        return get_numeric_value(value) > 0
+        number = get_numeric_value(value)
+        if number is None:
+            logging.error(
+                f'Invalid boolean value {value}, using default {default_value}')
+            return default_value
+        return number > 0
     if value_type is dict or value_type is OrderedDict:
         if isinstance(value, str):
             logging.info(f'Converting {value} to dict')
@@ -558,6 +601,6 @@ def _parse_dict(dict_str: str) -> dict:
     """Returns a dict parsed from text string."""
     try:
         return ast.literal_eval(dict_str)
-    except (NameError, ValueError) as e:
+    except (NameError, ValueError):
         logging.error(f'Unable to parse dict {dict_str}')
     return {}

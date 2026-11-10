@@ -18,22 +18,22 @@
     2. python3 preprocess.py -mode='download'
     3. python3 preprocess.py -mode='process'
 """
-from dataclasses import replace
+from datetime import datetime as dt
+import json
 import os
 import re
-import warnings
-import requests
-import numpy as np
-import time
-import json
 import sys
-from datetime import datetime as dt
+import time
+import warnings
+
+import numpy as np
+import requests
 
 warnings.filterwarnings('ignore')
-import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 
 pd.set_option("display.max_columns", None)
 
@@ -599,7 +599,6 @@ def download_files():
     This method allows to download the input files.
     """
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
@@ -612,7 +611,7 @@ def download_files():
         retry_number = 0
 
         is_file_downloaded = False
-        while is_file_downloaded == False:
+        while not is_file_downloaded:
             try:
                 df = None
                 file_name = url.split("/")[-1]

@@ -29,18 +29,19 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
 import subprocess
-import sys
 import time
-import uuid
-from datetime import datetime, timezone
 from typing import Any
+import uuid
 
 import google.auth
-from google.auth.transport.requests import AuthorizedSession, Request
+from google.auth.transport.requests import AuthorizedSession
+from google.auth.transport.requests import Request
 
 logging.basicConfig(
     level=logging.INFO,

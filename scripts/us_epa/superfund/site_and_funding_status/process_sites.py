@@ -22,18 +22,20 @@ This script processes data from two files namely:
 - ./data/401063.xlsx
   This file lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017. In this script, this dataset is used to map the ownership type (government-owned, privately-owned) of the site.
 """
-from absl import app, flags
+import csv
 import os
 import sys
+
+from absl import app
+from absl import flags
 import numpy as np
 import pandas as pd
-import json
-import csv
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))  # for utils
-from us_epa.util.superfund_helper import make_list_of_geos_to_resolve, resolve_with_recon
+from us_epa.util.superfund_helper import make_list_of_geos_to_resolve
+from us_epa.util.superfund_helper import resolve_with_recon
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('site_details_dir', './data',

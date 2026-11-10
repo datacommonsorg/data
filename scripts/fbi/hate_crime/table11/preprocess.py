@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A script to process FBI Hate Crime table 11 publications."""
+import csv
+import json
 import os
 import sys
 import tempfile
-import csv
-import json
-import pandas as pd
-import numpy as np
 
 from absl import app
 from absl import flags
 from absl import logging
+import numpy as np
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -30,9 +30,9 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))  # state map
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 
 from alpha2_to_dcid import USSTATE_MAP
+import file_util
 from name_to_alpha2 import USSTATE_MAP_SPACE
 import utils
-import file_util
 
 flags.DEFINE_string('config_file',
                     os.path.join(_SCRIPT_PATH, '../table_config.json'),
@@ -137,7 +137,6 @@ def main(argv):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
-    tmp_dir = '.'
     if table_num not in config:
         logging.fatal(
             f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."

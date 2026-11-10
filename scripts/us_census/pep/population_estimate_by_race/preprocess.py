@@ -22,15 +22,17 @@
 
 """
 
+from datetime import datetime as dt
+from io import StringIO
+import json
 import os
 import re
 import sys
-import requests
 import time
-import json
-from datetime import datetime as dt
+
 from absl import logging
-from io import StringIO
+import requests
+
 # To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
@@ -39,11 +41,12 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-import pandas as pd
 from absl import app
 from absl import flags
-from util.alpha2_to_dcid import USSTATE_MAP
+import pandas as pd
 from states_to_shortform import get_states
+
+from util.alpha2_to_dcid import USSTATE_MAP
 
 #pd.options.mode.copy_on_write = True
 
@@ -1242,7 +1245,7 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
             df['Geographic Area'] = "United States"
         return df
     except Exception as e:
-        logging.fatal(f"Error Downloading the file:", e)
+        logging.fatal("Error Downloading the file:", e)
 
 
 def add_future_yearurls():
@@ -1289,7 +1292,6 @@ def download_files():
     """
 
     global _FILES_TO_DOWNLOAD
-    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
@@ -1305,7 +1307,7 @@ def download_files():
         is_file_downloaded = False
         # headers = {'User-Agent': 'Mozilla/5.0'}
         # response = requests.get(url, headers=headers)
-        while is_file_downloaded == False:
+        while not is_file_downloaded:
             try:
                 headers = {'User-Agent': 'Mozilla/5.0'}
                 response = requests.get(url, headers=headers, timeout=60)
@@ -1408,7 +1410,6 @@ def main(_):
         os.mkdir(input_path)
     if not os.path.exists(output_path):
         os.mkdir(output_path)
-    cleaned_csv_path = output_path
     mcf_path = output_path
     tmcf_path = output_path
     input_path = _FLAGS.input_path

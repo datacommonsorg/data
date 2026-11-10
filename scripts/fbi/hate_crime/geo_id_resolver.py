@@ -13,9 +13,9 @@
 # limitations under the License.
 """Resolving place dcid from FBI hate crime dataset."""
 
+import csv
 import os
 import sys
-import csv
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

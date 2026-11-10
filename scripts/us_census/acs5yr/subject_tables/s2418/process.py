@@ -12,27 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """process module to generate the csv/tmcf and csv for S2418"""
+import json
 import os
 import sys
-import json
-from zipfile import ZipFile
 
+from absl import app
+from absl import flags
 import numpy as np
 import pandas as pd
-
-import os
-import sys
-import json
-
-from absl import app, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../common'))  # for col_map_generator, data_loader
 
-from generate_col_map import process_zip_file
 from data_loader import SubjectTableDataLoaderBase
+from generate_col_map import process_zip_file
 from resolve_geo_id import convert_to_place_dcid
 
 FLAGS = flags.FLAGS
@@ -104,7 +99,7 @@ class S2418SubjectTableLoader(SubjectTableDataLoaderBase):
         # percentage to count only for years from 2010 - 2014.
         percent_years = ['2010', '2011', '2012', '2013', '2014']
         if self.has_percent and year in percent_years:
-            print(f"Converting percent to counts", end=" |  ", flush=True)
+            print("Converting percent to counts", end=" |  ", flush=True)
             df = self._convert_percent_to_numbers(df)
 
         # if column map is not available generate, will rarely be False

@@ -19,7 +19,6 @@ COLUMNS_SELECTOR = {
     "sSection": "tableGenerator",
     "sZipCode": "",
     "sZipMiles": "",
-    "sState": "",
     "sCountyValue": "",
     "sDistrictValue": "",
     "sTableTitle": "",

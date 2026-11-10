@@ -15,10 +15,11 @@
 gets population (age 0 to 25) data for all world bank countries, and makes a csv acording to TMCF
 '''
 
-import requests
-import pandas as pd
 from absl import app
 from absl import flags
+import pandas as pd
+import requests
+
 from util import statvar_dcid_generator
 
 FLAGS = flags.FLAGS
@@ -128,7 +129,6 @@ def get_mcf(series_lst, path="World_bank_hnp_population.mcf"):
                     f'[Years {age}]'
             }
             node = get_statvars(gender, age)
-            desc = f'Age population, age {age}, {gender.lower()}, interpolated'
             nodes.append(node)
             property_dict['node'] = node
 

@@ -3,13 +3,12 @@
 Map cities to the corresponding geocodes.
 """
 
-import importlib
+import csv
+import logging
 import os
 import re
-import csv
-from .states import *
 
-import logging
+from .states import *
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 

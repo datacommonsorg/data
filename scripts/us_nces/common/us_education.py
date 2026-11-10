@@ -33,7 +33,9 @@ CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 
 from common.prop_conf import *
-from common.replacement_functions import (replace_values, _UNREADABLE_TEXT)
+from common.replacement_functions import _UNREADABLE_TEXT
+from common.replacement_functions import replace_values
+
 from util.alpha2_to_dcid import USSTATE_MAP
 from util.dc_api_wrapper import dc_api_is_defined_dcid
 from util.statvar_dcid_generator import get_statvar_dcid

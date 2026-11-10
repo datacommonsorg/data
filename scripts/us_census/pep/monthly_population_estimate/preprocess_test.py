@@ -15,10 +15,11 @@
 Script to automate the testing for USA Population preprocess script.
 """
 import os
-import unittest
 from os import path
+import unittest
+
 from preprocess import CensusUSACountryPopulation
-from absl import flags
+
 # module_dir_ is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "test_data", "input_files")

@@ -1,0 +1,90 @@
+# Ruff lint configuration.
+#
+# Lint rules are enabled incrementally. Only list explicit rule codes in
+# `select` (never "ALL" or whole groups) so that new Ruff releases cannot
+# silently enable new rules.
+#
+# Formatting is still handled by yapf (see run_tests.sh).
+
+# Ruff only uses this to decide when to wrap imports (see [lint.isort] below);
+# line length for code is enforced by yapf (80 columns). If E501 is enabled
+# later, set its limit with `lint.pycodestyle.max-line-length` instead.
+line-length = 1000
+
+# Minimum Python version the code must run on. Ruff uses it to decide which
+# syntax is valid (e.g. 3.12-only syntax is flagged as an error on older
+# targets) and which version-specific rules/fixes apply.
+#
+# Python 3.12 is what CI (cloudbuild.py.yaml) and the import-automation
+# executor/helper/validator Docker images use.
+target-version = "py312"
+
+extend-exclude = [
+    # Generated protobuf code.
+    "*_pb2.py",
+    # Local scratch outputs and virtual environments.
+    "**/scratch/**",
+    "**/.env/**",
+    # Jupyter notebooks (exploration only; also not checked by yapf).
+    "*.ipynb",
+]
+
+[per-file-target-version]
+# import-automation/workflow/ is still built and tested on Python 3.11:
+#   - import-automation/workflow/cloudbuild.yaml builds the manifest catalog
+#     and py_compile's the workflow/DAG files on python:3.11-slim.
+#   - import-automation/cloudbuild.yaml runs import_automation_e2e.py and the
+#     DAG E2E test on Python 3.11 images.
+# The Airflow DAGs here may also run on Cloud Composer, whose Python version
+# is managed outside this repo.
+# Keeping this at py311 makes Ruff flag 3.12-only syntax in these files.
+# TODO: Remove this override once the builds above move to Python 3.12 and
+# the Cloud Composer environment is confirmed to run Python 3.12+.
+"import-automation/workflow/**" = "py311"
+
+[lint]
+select = [
+    # Syntax errors and invalid statements.
+    "E9",
+    "F63",
+    "F7",
+    # Undefined names.
+    "F821",
+    "F822",
+    "F823",
+    # Repeated keys in dict literals.
+    "F601",
+    # Invalid escape sequences in strings.
+    "W605",
+    # Comparisons to None/True/False, `not in`/`is not`, type comparisons.
+    "E711",
+    "E712",
+    "E713",
+    "E714",
+    "E721",
+    # Redefined-but-unused names and unused local variables.
+    "F811",
+    "F841",
+    # f-strings without placeholders.
+    "F541",
+    # Unused imports.
+    "F401",
+    # Import sorting (isort).
+    "I001",
+]
+
+[lint.isort]
+# Google Python style: one import per line, `import x` and `from x import y`
+# sorted together by module name within each section.
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["typing", "collections.abc"]
+# Keep each import on a single line, even if it's long (the Google style guide
+# exempts imports from the line limit). yapf never adds parentheses, so it
+# leaves these lines alone; wrapping them would make Ruff and yapf disagree on
+# where the closing parenthesis goes.
+split-on-trailing-comma = false
+
+[lint.pyflakes]
+# Modules imported only for their side effect of defining absl flags.
+allowed-unused-imports = ["common_flags", "config_flags"]
