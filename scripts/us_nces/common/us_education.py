@@ -24,10 +24,10 @@ import json
 import os
 import re
 import sys
-import warnings
+
+from absl import logging
 import numpy as np
 import pandas as pd
-from absl import logging
 
 CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))

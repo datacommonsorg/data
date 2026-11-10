@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import os
-import unittest
-from unittest.mock import patch
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(__file__)
