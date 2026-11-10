@@ -1,0 +1,491 @@
+Node: dcid:Annual_IncomePovertyThreshold_Household
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With3Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 3 Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [3 Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With4Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 4 Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [4 Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With5Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 5 Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [5 Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With6Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 6 Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [6 Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder1RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With3Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 3 Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [3 Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With4Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 4 Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [4 Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With5Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 5 Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [5 Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With6Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 6 Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [6 Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder2RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 2 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [2 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder3RelatedChildren_With4Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 4 Person Household with 3 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [4 Person]
+householderRelatedChildrenUnder18Years: [3 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder3RelatedChildren_With5Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 5 Person Household with 3 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [5 Person]
+householderRelatedChildrenUnder18Years: [3 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder3RelatedChildren_With6Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 6 Person Household with 3 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [6 Person]
+householderRelatedChildrenUnder18Years: [3 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder3RelatedChildren_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household with 3 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+householderRelatedChildrenUnder18Years: [3 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder3RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 3 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [3 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder3RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 3 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [3 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder4RelatedChildren_With5Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 5 Person Household with 4 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [5 Person]
+householderRelatedChildrenUnder18Years: [4 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder4RelatedChildren_With6Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 6 Person Household with 4 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [6 Person]
+householderRelatedChildrenUnder18Years: [4 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder4RelatedChildren_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household with 4 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+householderRelatedChildrenUnder18Years: [4 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder4RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 4 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [4 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder4RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 4 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [4 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder5RelatedChildren_With6Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 6 Person Household with 5 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [6 Person]
+householderRelatedChildrenUnder18Years: [5 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder5RelatedChildren_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household with 5 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+householderRelatedChildrenUnder18Years: [5 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder5RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 5 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [5 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder5RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 5 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [5 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder6RelatedChildren_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household with 6 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+householderRelatedChildrenUnder18Years: [6 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder6RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 6 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [6 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder6RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 6 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [6 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder7RelatedChildren_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household with 7 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+householderRelatedChildrenUnder18Years: [7 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder7RelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 7 Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [7 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_Householder8OrMoreRelatedChildren_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household with 8 or more Related Children Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+householderRelatedChildrenUnder18Years: [8 - Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_HouseholderAge65OrLessYears_Householder1RelatedChildren_With2Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 2 Person Household with Householder Aged 65 or Less with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [2 Person]
+householderAge: [- 65 Years]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_HouseholderAge65OrLessYears_With1Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 1 Person Household with Householder Aged 65 or Less Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [1 Person]
+householderAge: [- 65 Years]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_HouseholderAge65OrLessYears_With2Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 2 Person Household with Householder Aged 65 or Less Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [2 Person]
+householderAge: [- 65 Years]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_HouseholderAge65OrMoreYears_Householder1RelatedChildren_With2Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 2 Person Household with Householder Aged 65 or More with 1 Related Child Under 18 Years"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [2 Person]
+householderAge: [65 - Years]
+householderRelatedChildrenUnder18Years: [1 Child]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_HouseholderAge65OrMoreYears_With1Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 1 Person Household with Householder Aged 65 or More Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [1 Person]
+householderAge: [65 - Years]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_HouseholderAge65OrMoreYears_With2Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 2 Person Household with Householder Aged 65 or More Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [2 Person]
+householderAge: [65 - Years]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With2Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 2 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [2 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With3Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 3 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [3 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With4Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 4 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [4 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With5Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 5 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [5 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With6Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 6 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [6 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With7Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 7 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [7 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With8Person
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 8 Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [8 Person]
+
+Node: dcid:Annual_IncomePovertyThreshold_Household_With9OrMorePerson
+typeOf: dcid:StatisticalVariable
+name: "Household Income Poverty Threshold 9 Or More Person Household Weighted average thresholds"
+populationType: dcid:Household
+measuredProperty: dcid:incomePovertyThreshold
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+householdSize: [9 - Person]
+
