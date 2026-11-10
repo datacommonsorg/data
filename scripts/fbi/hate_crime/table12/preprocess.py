@@ -41,12 +41,12 @@ def _define_flags() -> None:
                         'Input config file')
     flags.DEFINE_string(
         'output_dir', _SCRIPT_PATH,
-        'Directory path to write the cleaned CSV and'
-        'MCF. Default behaviour is to write the artifacts in the current working'
+        'Directory path to write the cleaned CSV and '
+        'MCF. Default behaviour is to write the artifacts in the current working '
         'directory.')
     flags.DEFINE_bool(
         'gen_statvar_mcf', False,
-        'Generate MCF of StatVars. Default behaviour is'
+        'Generate MCF of StatVars. Default behaviour is '
         'to not generate the MCF file.')
 
 
