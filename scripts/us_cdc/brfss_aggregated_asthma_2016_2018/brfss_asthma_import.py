@@ -19,8 +19,10 @@ Counties and County-Equivalents with Corresponding Current Asthma Prevalence, 20
 """
 import os
 import sys
+
+from absl import app
+from absl import flags
 import pandas as pd
-from absl import flags, app
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

@@ -17,15 +17,20 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
-from absl import app, flags, logging
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from common.euro_stat import EuroStat
+from common import download
+
 # pylint: enable=wrong-import-position
-from common import import_download_details, download
+from common import import_download_details
+from common.euro_stat import EuroStat
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
@@ -77,7 +82,7 @@ class EuroStatFruitsVegetables(EuroStat):
         "incomequin":
             "\nincome: [{property_value}]",
         "healthbehavior":
-            "\healthBehaviour: dcs:{property_value}",
+            r"\healthBehaviour: dcs:{property_value}",
         "healthbehavior_bmi":
             "__{property_value}",
     }
@@ -88,7 +93,6 @@ class EuroStatFruitsVegetables(EuroStat):
         "Male": "gender",
         "Female": "gender",
         "Education": "education",
-        "Percentile": "incomequin",
         "Urban": "residence",
         "Rural": "residence",
         "Limitation": "lev_limit",
@@ -259,8 +263,8 @@ def main(_):
             loader.generate_mcf()
             loader.generate_tmcf()
             logging.info("Processing completed!")
-        except Exception as e:
-            logging.fatal(f'Download error')
+        except Exception:
+            logging.fatal('Download error')
 
 
 if __name__ == "__main__":

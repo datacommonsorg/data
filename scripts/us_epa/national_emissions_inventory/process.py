@@ -16,6 +16,7 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+import concurrent.futures
 import gc
 import os
 import shutil
@@ -23,16 +24,15 @@ import sys
 import time
 import traceback
 import uuid
-import concurrent.futures
-from absl import app, flags, logging
-import pandas as pd
+
+from absl import app
+from absl import flags
+from absl import logging
 import numpy as np
-from datetime import datetime
+import pandas as pd
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
-
-from util.statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
@@ -297,7 +297,7 @@ class USAirEmissionTrends:
 
             pollutant_name = ''
             pollutant_value = ''
-            if pollutant_start != None:
+            if pollutant_start is not None:
                 for i in sv_property[pollutant_start:-3]:
                     pollutant = pollutant + i + '_'
                 pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')

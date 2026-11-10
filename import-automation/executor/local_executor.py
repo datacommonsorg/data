@@ -33,12 +33,11 @@ import dataclasses
 import json
 import os
 
-from absl import flags
 from absl import app
-
+from absl import flags
 from app import configs
-from app.executor import import_target
 from app.executor import import_executor
+from app.executor import import_target
 from app.service import file_uploader
 from app.service import github_api
 

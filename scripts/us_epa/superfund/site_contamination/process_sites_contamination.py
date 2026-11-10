@@ -20,9 +20,11 @@ This import uses the dataset:
     This file is a curated list of contaminant names and their respective ids on the Data Commons knowledge graph
 """
 
-from absl import app, flags
 import os
 import sys
+
+from absl import app
+from absl import flags
 import pandas as pd
 
 # Allows the following module imports to work when running as a script
@@ -92,7 +94,7 @@ def make_contamination_svobs(df: pd.DataFrame,
     ## write or create the statvar.mcf file
     f = open(os.path.join(output_path, "superfund_sites_contamination.mcf"),
              "w")
-    node_str = f"Node: dcid:ContaminatedThing_SuperfundSite\n"
+    node_str = "Node: dcid:ContaminatedThing_SuperfundSite\n"
     node_str += "typeOf: dcs:StatisticalVariable\n"
     node_str += "populationType: dcs:SuperfundSite\n"
     node_str += "name: \"Lists all the contaminanted media at a superfund site\"\n"
@@ -172,7 +174,7 @@ def process_site_contamination(input_path: str, contaminant_csv_path: str,
     contaminant_csv = contaminant_csv.loc[~pd.isnull(contaminant_csv['dcid'])]
     ## replace all non-alphanumeric with `_`
     contaminant_csv['CommonName'] = contaminant_csv['CommonName'].str.replace(
-        '[^\w\s]', '_', regex=True)
+        r'[^\w\s]', '_', regex=True)
     ## contamination at superfund sites
     contamination_data_path = os.path.join(input_path, _DATASET_NAME)
     contamination_data = pd.read_excel(contamination_data_path,

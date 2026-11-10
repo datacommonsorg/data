@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import pandas as pd
 from datetime import datetime
+import os
 from os import path
 import zipfile
+
+import pandas as pd
 
 module_dir = os.path.dirname(__file__)
 

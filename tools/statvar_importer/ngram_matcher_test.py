@@ -16,7 +16,6 @@
 import unittest
 
 from absl import app
-from absl import logging
 import ngram_matcher
 
 

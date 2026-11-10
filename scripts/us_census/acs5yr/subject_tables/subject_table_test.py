@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
@@ -26,6 +27,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
 
 from common.data_loader import process_subject_tables
+
 from .process import set_column_map
 
 # These directories are excluded from testing

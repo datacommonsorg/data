@@ -2,11 +2,12 @@
 It imports a dataset and checks if the processed output matches the
 expected output.
 """
-import unittest
 import json
 import os
-import pandas as pd
 import sys
+import unittest
+
+import pandas as pd
 
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)

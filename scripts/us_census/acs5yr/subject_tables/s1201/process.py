@@ -27,14 +27,14 @@ while _curr and _curr != os.path.dirname(_curr):
 
 # TODO: Add unit tests
 import json
-from zipfile import ZipFile
-import pandas as pd
 
-from absl import app, flags
-# TODO: logs from the column map step is empty when invoked from here, needs to be checked
+from absl import app
+from absl import flags
 
-from scripts.us_census.acs5yr.subject_tables.s1201.generate_col_map import process_zip_file
 from scripts.us_census.acs5yr.subject_tables.common.data_loader import process_subject_tables
+
+# TODO: logs from the column map step is empty when invoked from here, needs to be checked
+from scripts.us_census.acs5yr.subject_tables.s1201.generate_col_map import process_zip_file
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(

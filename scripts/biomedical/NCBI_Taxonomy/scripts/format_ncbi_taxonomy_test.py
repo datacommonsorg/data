@@ -17,11 +17,13 @@ Date: 18-Apr-2024
 Last Edited: 03-Sep-2024
 """
 
-import os
 import copy
+import os
 import tempfile
 import unittest
+
 from deepdiff.diff import DeepDiff
+
 from .format_ncbi_taxonomy import *
 
 MODULE_DIR_PATH = dirname(dirname(abspath(__file__)))

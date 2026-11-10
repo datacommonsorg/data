@@ -16,7 +16,7 @@ This scirpt will generate UniProt entries from ABCD antibody dataset.
 Run "python3 generate_uniprot_entries.py --help" for usage.
 '''
 import collections
-import pandas as pd
+
 from absl import app
 from absl import flags
 
@@ -33,7 +33,6 @@ flags.DEFINE_string(
 def main(argv):
     """Main function to generate the gene name to uniprot entries mapping."""
     database_file_path = FLAGS.database
-    uniprot_list_path = FLAGS.uniprot
 
     with open(database_file_path, 'r') as file:
         file_content = file.read()

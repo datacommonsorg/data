@@ -1,0 +1,25 @@
+"Döda efter region, ålder, kön och år"
+
+region,ålder,kön,2023,2024,2025
+SE1 Östra Sverige,0-4 år,män,62,58,60
+SE1 Östra Sverige,0-4 år,kvinnor,49,45,47
+SE1 Östra Sverige,5-14 år,män,19,17,18
+SE1 Östra Sverige,5-14 år,kvinnor,14,12,13
+SE1 Östra Sverige,15-24 år,män,115,108,110
+SE1 Östra Sverige,15-24 år,kvinnor,52,48,50
+SE1 Östra Sverige,25-34 år,män,210,198,202
+SE1 Östra Sverige,25-34 år,kvinnor,95,90,92
+SE1 Östra Sverige,35-44 år,män,285,275,280
+SE1 Östra Sverige,35-44 år,kvinnor,165,160,162
+SE1 Östra Sverige,45-54 år,män,590,570,580
+SE1 Östra Sverige,45-54 år,kvinnor,410,395,400
+SE1 Östra Sverige,55-64 år,män,1480,1430,1450
+SE1 Östra Sverige,55-64 år,kvinnor,980,950,960
+SE1 Östra Sverige,65-74 år,män,3250,3120,3160
+SE1 Östra Sverige,65-74 år,kvinnor,2310,2240,2270
+SE1 Östra Sverige,75-84 år,män,5890,5710,5770
+SE1 Östra Sverige,75-84 år,kvinnor,5120,4980,5030
+SE1 Östra Sverige,85-94 år,män,4180,4060,4100
+SE1 Östra Sverige,85-94 år,kvinnor,5390,5210,5270
+SE1 Östra Sverige,95+ år,män,723,704,710
+SE1 Östra Sverige,95+ år,kvinnor,1765,1720,1736

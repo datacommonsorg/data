@@ -27,9 +27,10 @@ There are a few city names that are still missing - these are left blank.
 Usage: python3 cities.py <API_KEY>
 '''
 import csv
-import requests
 import os
 import sys
+
+import requests
 
 BATCH = 1
 

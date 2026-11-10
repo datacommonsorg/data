@@ -45,6 +45,9 @@ function setup_python {
 # Fixes lint
 function run_py_lint_fix {
   setup_python
+  echo "#### Fixing Python lint (ruff)"
+  # Applies only safe fixes; remaining issues are reported for manual fixes.
+  ruff check --fix $PYTHON_FOLDERS || true
   echo "#### Fixing Python code"
   yapf -r -i -p --style=google $PYTHON_FOLDERS
 }
@@ -52,7 +55,12 @@ function run_py_lint_fix {
 # Tests Python code style
 function run_py_lint_test {
   setup_python
-  echo "#### Testing Python lint"
+  echo "#### Testing Python lint (ruff)"
+  if ! ruff check $PYTHON_FOLDERS; then
+    echo "ERROR: Fix lint errors (some can be fixed by running ./run_tests.sh -f)" >&2
+    exit 1
+  fi
+  echo "#### Testing Python format"
   if ! yapf -r --diff -p --style=google $PYTHON_FOLDERS; then
     echo "ERROR: Fix lint errors by running ./run_tests.sh -f" >&2
     exit 1

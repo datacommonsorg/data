@@ -22,19 +22,18 @@ import re
 import time
 from typing import Any, Dict, List, Optional
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
+from panel_specs import LOCATIONS
+from panel_specs import get_panel_1_specs
+from panel_specs import get_panel_2_specs
+from panel_specs import get_panel_3_specs
+from panel_specs import get_panel_4_specs
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-
-from panel_specs import (
-    LOCATIONS,
-    get_panel_1_specs,
-    get_panel_2_specs,
-    get_panel_3_specs,
-    get_panel_4_specs,
-)
 
 
 # --- Robust Session Setup ---

@@ -1,13 +1,13 @@
+from datetime import datetime
 import json
 import os
-import pandas as pd
-import numpy as np
-import sys
 from pathlib import Path
+import sys
+
 from absl import app
 from absl import flags
-from datetime import datetime
 from absl import logging
+import pandas as pd
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('process_output_path', 'output',

@@ -12,20 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from genericpath import exists
-import math
-import glob
-import xarray
 from datetime import datetime
+import glob
+import math
 import os
-import sys
 from pathlib import Path
+import sys
 from typing import Optional
-import pandas as pd
 
-from absl import flags
 from absl import app
+from absl import flags
 from absl import logging
+import pandas as pd
+import xarray
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

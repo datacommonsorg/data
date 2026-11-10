@@ -21,6 +21,7 @@ import io
 import json
 import os
 import zipfile
+
 from absl import app
 from absl import flags
 
@@ -260,7 +261,9 @@ def find_multiple_population(column_name_list: list,
                         if cur_population != spec_dict['populationType'][token]:
                             ret_list.append(column_name)
                     else:
-                        cur_population = spec_dict['populationType'][token]
+                        # Read on a later iteration of the token loop above.
+                        population_types = spec_dict['populationType']
+                        cur_population = population_types[token]  # noqa: F841
                     temp_flag = True
     return ret_list
 

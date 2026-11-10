@@ -12,17 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import requests
-import zipfile
-import io
-import pandas as pd
-import re
-from absl import logging, app, flags
-from pathlib import Path
 from datetime import date
-from retry import retry
+import io
+import os
+from pathlib import Path
+import re
 import sys
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+import requests
+from retry import retry
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_type', None, 'The type of data to download: "covid".')
@@ -206,7 +209,6 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
             target_member = None
 
             for name in zip_ref.namelist():
-                normalized_name = name.replace('\\', '/').lower()
 
                 general_match = False
                 for pattern in keywords:

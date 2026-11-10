@@ -15,8 +15,8 @@
 File uploaders for uploading generated data files.
 """
 
-import os
 import logging
+import os
 import shutil
 
 from google.cloud import storage

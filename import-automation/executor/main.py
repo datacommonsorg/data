@@ -14,8 +14,8 @@
 """
 Import executor entrypoint.
 """
-import logging
 import json
+import logging
 import os
 import sys
 import time
@@ -25,18 +25,18 @@ REPO_DIR = os.path.dirname(
 sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-from absl import flags
-from absl import app
+import dataclasses
 
+from absl import app
+from absl import flags
 from app import configs
 from app.executor import import_executor
+from app.executor.import_executor import ImportStage
+from app.executor.import_executor import ImportStatus
+from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
-from app.service import email_notifier
-import dataclasses
-from app.executor.import_executor import ImportStatus, ImportStage
 from google.cloud import secretmanager
-
 import log_util
 
 _FLAGS = flags.FLAGS

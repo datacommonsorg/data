@@ -19,17 +19,16 @@ Downloads and cleans GDP data from the Eurostat database.
     python3 import_data.py
 """
 
-import sys
-from six.moves import urllib
-import numpy as np
 import json
+import os
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 from preprocess_data import preprocess_df
-import sys
-from absl import app
-from absl import logging
-from absl import flags
-import os
+from six.moves import urllib
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -111,7 +110,7 @@ class EurostatGDPImporter:
             logging.info(f'Processing file: {input_file}')
             self.raw_df = pd.read_table(input_file)
             self.raw_df = self.raw_df.rename(columns=({
-                'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+                r'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
             }))
             self.raw_df['unit,geo\\time'] = self.raw_df[
                 'unit,geo\\time'].str.slice(2)

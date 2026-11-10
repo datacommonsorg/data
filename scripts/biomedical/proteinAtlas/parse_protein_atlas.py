@@ -15,10 +15,10 @@
 and two enum files: HumanTissueEnum.mcf, HumanCellTypeEnum.mcf
 """
 import re
-import pandas as pd
 
 from absl import app
 from absl import flags
+import pandas as pd
 
 FLAGS = flags.FLAGS
 

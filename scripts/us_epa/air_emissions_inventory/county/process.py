@@ -16,13 +16,14 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+import logging
 import os
 import sys
-import logging
-import pandas as pd
-import numpy as np
 
-from absl import app, flags
+from absl import app
+from absl import flags
+import numpy as np
+import pandas as pd
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
@@ -31,7 +32,8 @@ from util.statvar_dcid_generator import get_statvar_dcid
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                 '..')))
 from common.us_air_pollution_emission_trends import USAirPollutionEmissionTrends
-from metadata import SOURCE_POLLUTANT, SOURCE_CATEGORY
+from metadata import SOURCE_CATEGORY
+from metadata import SOURCE_POLLUTANT
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
@@ -144,7 +146,6 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
         """
         df = pd.read_csv(file_path, header=0, encoding='utf-8')
         df['year'] = year
-        df_final = pd.DataFrame()
         df['geo_Id'] = ''
 
         df = self.data_standardize(df, 'POLLUTANT', SOURCE_POLLUTANT)

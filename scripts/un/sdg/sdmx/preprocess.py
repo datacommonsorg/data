@@ -28,6 +28,7 @@ Usage: python3 preprocess.py
 '''
 import csv
 import os
+
 import requests
 
 from util import *

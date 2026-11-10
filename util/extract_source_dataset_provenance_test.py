@@ -15,13 +15,11 @@
 
 import json
 import os
-import sys
 import tempfile
 import unittest
 from unittest import mock
 
 # Python path is managed by running from the data directory.
-
 from util import extract_source_dataset_provenance
 
 

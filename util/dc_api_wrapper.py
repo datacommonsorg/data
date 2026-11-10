@@ -26,16 +26,16 @@ import urllib
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
-from datacommons_client.utils.error_handling import APIError, DCConnectionError, DCStatusError
+from datacommons_client.utils.error_handling import APIError
+from datacommons_client.utils.error_handling import DCConnectionError
+from datacommons_client.utils.error_handling import DCStatusError
 import requests
 import requests_cache
-from tenacity import (
-    RetryCallState,
-    Retrying,
-    retry_if_exception,
-    stop_after_attempt,
-    wait_fixed,
-)
+from tenacity import RetryCallState
+from tenacity import Retrying
+from tenacity import retry_if_exception
+from tenacity import stop_after_attempt
+from tenacity import wait_fixed
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -266,10 +266,10 @@ def get_dc_api_key(config: dict = None) -> str:
     if not api_key:
         logging.log_first_n(
             logging.WARNING,
-            f'Using default DC API key with limited quota. '
-            f'Please set an API key in the environment variable: DC_API_KEY.'
-            f'Refer https://docs.datacommons.org/api/python/v2/#authentication '
-            f'for more details.',
+            'Using default DC API key with limited quota. '
+            'Please set an API key in the environment variable: DC_API_KEY.'
+            'Refer https://docs.datacommons.org/api/python/v2/#authentication '
+            'for more details.',
             n=1,
         )
         api_key = _DEFAULT_DC_API_KEY

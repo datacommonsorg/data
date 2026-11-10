@@ -14,7 +14,9 @@
 
 import os
 import unittest
-from india_geosadak.preprocess import map_statvarnames, GeoSadakLoader
+
+from india_geosadak.preprocess import GeoSadakLoader
+from india_geosadak.preprocess import map_statvarnames
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
