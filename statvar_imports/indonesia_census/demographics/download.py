@@ -42,7 +42,7 @@ flags.DEFINE_string(
 )
 flags.DEFINE_string(
     'historical_gcs_dir',
-    'gs://unresolved_mcf/country/indonesia/demographic/historical',
+    'gs://unresolved_mcf/country/indonesia/demographics/historical',
     'GCS directory containing the consolidated historical CSV files.',
 )
 flags.DEFINE_string(

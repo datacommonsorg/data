@@ -619,8 +619,8 @@ class DownloadTest(unittest.TestCase):
                 self.assertFalse(
                     os.path.exists(os.path.join(tmp_dir, 'common_tmcf.tmcf')))
 
-                gcs_dir = ('gs://unresolved_mcf/country/indonesia/demographic/'
-                           'historical/')
+                gcs_dir = ('gs://unresolved_mcf/country/indonesia/'
+                           'demographics/historical/')
                 download.copy_historical_files_from_gcs(gcs_dir, tmp_dir)
 
                 dst_tmcf = os.path.join(tmp_dir, 'common_tmcf.tmcf')
@@ -630,7 +630,7 @@ class DownloadTest(unittest.TestCase):
 
                 expected_calls = [
                     mock.call(
-                        'gs://unresolved_mcf/country/indonesia/demographic/'
+                        'gs://unresolved_mcf/country/indonesia/demographics/'
                         f'historical/{fname}',
                         os.path.join(tmp_dir, fname),
                     ) for fname in download.HISTORICAL_CSVS
@@ -648,7 +648,7 @@ class DownloadTest(unittest.TestCase):
                     self.assertRaisesRegex(RuntimeError, 'GCS copy failed'),
             ):
                 download.copy_historical_files_from_gcs(
-                    'gs://unresolved_mcf/country/indonesia/demographic/'
+                    'gs://unresolved_mcf/country/indonesia/demographics/'
                     'historical',
                     tmp_dir,
                 )

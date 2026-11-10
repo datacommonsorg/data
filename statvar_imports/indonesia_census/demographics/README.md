@@ -20,8 +20,8 @@
 This import downloads and processes Indonesia's demographic population statistics from the BPS WebAPI (`download.py` + `stat_var_processor.py`):
 
 * **Historical Baseline in GCS (`1971–2022`)**:
-  * `gs://unresolved_mcf/country/indonesia/demographic/historical/idn_population_historical_1971_2022.csv` (`3,339` observations)
-  * `gs://unresolved_mcf/country/indonesia/demographic/historical/idn_age_gender_historical_2010_2022.csv` (`8,935` observations)
+  * `gs://unresolved_mcf/country/indonesia/demographics/historical/idn_population_historical_1971_2022.csv` (`3,339` observations)
+  * `gs://unresolved_mcf/country/indonesia/demographics/historical/idn_age_gender_historical_2010_2022.csv` (`8,935` observations)
   * Automatically copied by `download.py` into `output_files/` along with `output_files/common_tmcf.tmcf` on every run.
 * **BPS Variable IDs (`2023–2026+`)**:
   * `var_id=2790`: *Jumlah Penduduk menurut Kabupaten/Kota dan Kelompok Umur* (Total Population by Regency/City and Age Group)
