@@ -15,9 +15,9 @@
 # limitations under the License.
 """Backup inputs and outputs from statvar processor run."""
 
-import shutil
 from datetime import datetime
 from pathlib import Path
+import shutil
 
 from absl import app
 from absl import flags

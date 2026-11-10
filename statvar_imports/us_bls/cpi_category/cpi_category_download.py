@@ -15,15 +15,16 @@
 For c-cpi-u we are downloading alternative files because each file contains 2 month data. Same for cpi-u and cpi-w we are downloading the January month file of all years.
 '''
 
-from curl_cffi import requests
+import argparse
+import datetime
 import os
-import zipfile
 import re
 import shutil
-from retry import retry
+import zipfile
+
 from absl import logging
-import datetime
-import argparse
+from curl_cffi import requests
+from retry import retry
 
 logging.set_verbosity(logging.INFO)
 

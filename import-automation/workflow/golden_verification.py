@@ -21,7 +21,8 @@ All other imports skip this gate and auto-approve immediately.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
@@ -30,8 +31,10 @@ import sys
 import time
 from typing import Any
 
-from airflow.sdk import BaseSensorOperator, Variable, task
 from airflow.exceptions import AirflowFailException
+from airflow.sdk import BaseSensorOperator
+from airflow.sdk import Variable
+from airflow.sdk import task
 from airflow.utils.trigger_rule import TriggerRule
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -281,7 +284,8 @@ def _run_cloud_build_verification(
 def verify_golden_tests(**context) -> dict[str, Any]:
     """Runs staging verification gate for allowlisted imports (e.g. Schema, Place)."""
     # Lazy import to avoid circular dependency
-    from import_automation_workflow import resolve_workflow_context, _report_import_failure
+    from import_automation_workflow import _report_import_failure
+    from import_automation_workflow import resolve_workflow_context
 
     cfg = resolve_workflow_context(context)
     ti = context.get("ti")

@@ -16,12 +16,12 @@
 This module provides helper functions used across the StatVar import process.
 """
 
-import os
 import logging
+import os
 import re
 import sys
 import tempfile
-from typing import Union, Optional, Dict, List
+from typing import Dict, List, Optional, Union
 
 import pandas as pd
 
@@ -32,9 +32,8 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
-
 from download_util import download_file_from_url
+import file_util
 
 
 def capitalize_first_char(string: str) -> str:

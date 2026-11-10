@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from worldbank import *
-import numpy as np
 import unittest
+
+import numpy as np
+from worldbank import *
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_PATH = "test_data/output"

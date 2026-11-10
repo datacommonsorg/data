@@ -5,9 +5,9 @@ Matches historical schema prefixes (including schema:City for Places).
 Removes country containment from ZCTAs.
 """
 
+import glob
 import os
 import re
-import glob
 
 
 # Configuration

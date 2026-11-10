@@ -16,9 +16,11 @@ This script generates clean csv and tmcf files for statistics about the contamin
 """
 # NOTE: Please run ./process_report2020.py before running this script.
 import os
+
+from absl import app
+from absl import flags
 import numpy as np
 import pandas as pd
-from absl import app, flags
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(

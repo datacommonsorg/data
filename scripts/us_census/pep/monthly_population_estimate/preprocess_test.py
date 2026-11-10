@@ -18,8 +18,6 @@ import os
 import sys
 import tempfile
 import unittest
-from os import path
-from absl import flags
 
 # module_dir_ is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -29,10 +27,9 @@ for path_entry in (_SCRIPTS_DIR, _MODULE_DIR):
         sys.path.append(path_entry)
 
 # pylint: disable=wrong-import-position
-from us_census.pep.monthly_population_estimate.preprocess import (
-    CensusUSACountryPopulation,
-    parse_nat_total_txt,
-)
+from us_census.pep.monthly_population_estimate.preprocess import CensusUSACountryPopulation
+from us_census.pep.monthly_population_estimate.preprocess import parse_nat_total_txt
+
 # pylint: enable=wrong-import-position
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "test_data", "input_files")
 expected_op_folder = os.path.join(_MODULE_DIR, "test_data", "expected_output")

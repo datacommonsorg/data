@@ -13,11 +13,13 @@
 # limitations under the License.
 """Generic proces module to generate the csv/tmcf and csv"""
 # TODO: Add unit tests
+import json
 import os
 import sys
-import json
 
-from absl import app, flags
+from absl import app
+from absl import flags
+
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
 # Allows the following module imports to work when running as a script
@@ -25,8 +27,8 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              './common'))  # for col_map_generator, data_loader
 
-from generate_col_map import generate_stat_var_map, process_zip_file
 from data_loader import process_subject_tables
+from generate_col_map import process_zip_file
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(

@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
 import os
-import pandas as pd
-import tempfile
 import shutil
-from preprocess import obtain_value, preprocess
+import tempfile
+import unittest
+
+import pandas as pd
+from preprocess import obtain_value
+from preprocess import preprocess
 
 
 class PreprocessTest(unittest.TestCase):

@@ -18,11 +18,9 @@ Spreadsheets.
 """
 
 import ast
-import chardet
 import csv
 import fnmatch
 import glob
-import gspread
 import io
 import json
 import os
@@ -31,15 +29,17 @@ import pprint
 import shutil
 import sys
 import tempfile
-
-import numpy as np
+from typing import Union
 
 from absl import app
 from absl import logging
-from aggregation_util import aggregate_dict, aggregate_value
+from aggregation_util import aggregate_dict
+from aggregation_util import aggregate_value
+import chardet
 from google.cloud import storage
+import gspread
+import numpy as np
 from retry.api import retry_call
-from typing import Union
 
 
 class FileIO:
@@ -250,6 +250,14 @@ class FileIO:
         """Read from the file handle."""
         return self._fd.readline(*args, **kwargs)
 
+    def seek(self, *args, **kwargs):
+        """Seek in the file handle."""
+        return self._fd.seek(*args, **kwargs)
+
+    def tell(self, *args, **kwargs):
+        """Tell the position in the file handle."""
+        return self._fd.tell(*args, **kwargs)
+
     def write(self, *args, **kwargs):
         """Write into the file handle."""
         return self._fd.write(*args, **kwargs)
@@ -260,6 +268,10 @@ class FileIO:
             return self._tmp_filename
         else:
             return self._filename
+
+    def get_file_handle(self):
+        """Returns the file handle."""
+        return self._fd
 
 
 # Utilities for files.
@@ -1095,6 +1107,11 @@ def file_get_csv_reader_options(
         'delimiter': delimiter character for CSV files.
         'dialect': File dialect, such as 'unix', 'excel'
     """
+    # TODO: Add an option to use a given delimiter instead of the detected
+    # one. default_options['delimiter'] is only used when no delimiter is
+    # detected, so callers such as file_load_csv_dict(delimiter=';') can't
+    # force a delimiter. For example, a ';' file with decimal commas is
+    # detected as a ',' file. Until then, pass delim_chars=[delimiter].
     result = dict(default_options)
 
     if data is None:
@@ -1102,7 +1119,10 @@ def file_get_csv_reader_options(
         rawdata = file_get_sample_bytes(file)
         if encoding is None:
             encoding = file_get_encoding(file, rawdata=rawdata)
-        data = rawdata.decode(encoding)
+        try:
+            data = rawdata.decode(encoding)
+        except UnicodeDecodeError:
+            data = rawdata.decode('utf-8', errors='replace')
 
     # Get the dialect for the data
     try:

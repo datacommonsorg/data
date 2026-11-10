@@ -13,10 +13,11 @@
 # limitations under the License.
 """Script to download all the WHO GHO raw data."""
 
-import requests
 import json
-from absl import flags
+
 from absl import app
+from absl import flags
+import requests
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_folder',

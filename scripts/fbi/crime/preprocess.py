@@ -13,17 +13,13 @@
 # limitations under the License.
 
 import csv
-import io
-import ssl
-import urllib.request
-import sys
-import requests
-import re
+import logging
 import os
-from .common_util import *
 
 import pandas as pd
-import logging
+import requests
+
+from .common_util import *
 from .geocode_cities import *
 
 # Years that FBI doesn't public arson data.

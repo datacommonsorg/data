@@ -15,8 +15,9 @@
 Run "python3 parse_protein_atlas_test.py"
 """
 
-import unittest
 from io import StringIO
+import unittest
+
 import pandas as pd
 import parse_protein_atlas
 

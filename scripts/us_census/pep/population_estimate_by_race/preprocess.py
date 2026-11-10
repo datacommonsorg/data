@@ -22,6 +22,7 @@
 
 """
 
+from datetime import datetime as dt
 import io
 from io import StringIO
 import json
@@ -30,10 +31,13 @@ import re
 import shutil
 import sys
 import time
-from datetime import datetime as dt
 import warnings
-import requests
+
+from absl import app
+from absl import flags
 from absl import logging
+import pandas as pd
+import requests
 
 # To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
@@ -42,11 +46,9 @@ sys.path.insert(1, _COMMON_PATH)
 
 warnings.filterwarnings('ignore')
 
-import pandas as pd
-from absl import app
-from absl import flags
-from util.alpha2_to_dcid import USSTATE_MAP
 from states_to_shortform import get_states
+
+from util.alpha2_to_dcid import USSTATE_MAP
 
 _FLAGS = flags.FLAGS
 if 'mode' not in _FLAGS:
@@ -67,14 +69,12 @@ _SESSION = None
 _PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
 if _PEP_DIR not in sys.path:
     sys.path.insert(0, _PEP_DIR)
-from download_util import (
-    TransientDownloadError,
-    create_retry_session as _create_retry_session,
-    head_with_html_retry as _head_with_html_retry,
-    download_with_retry,
-    atomic_to_csv,
-    atomic_to_excel,
-)
+from download_util import TransientDownloadError
+from download_util import atomic_to_csv
+from download_util import atomic_to_excel
+from download_util import create_retry_session as _create_retry_session
+from download_util import download_with_retry
+from download_util import head_with_html_retry as _head_with_html_retry
 
 
 def _get_session():

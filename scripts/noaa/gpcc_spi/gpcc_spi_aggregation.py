@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
-import json
 from datetime import datetime
-import os
 import glob
+import json
+import os
 from pathlib import Path
 
-from absl import flags
 from absl import app
+from absl import flags
 from absl import logging
+import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 FLAGS = flags.FLAGS

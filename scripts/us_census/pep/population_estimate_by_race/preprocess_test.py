@@ -19,8 +19,6 @@ import os
 import sys
 import tempfile
 import unittest
-import shutil
-from os import path
 
 # module_dir is the path to where this test is running from.
 module_dir = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +29,7 @@ for path_entry in (_SCRIPTS_DIR, module_dir):
 
 # pylint: disable=wrong-import-position
 from us_census.pep.population_estimate_by_race.preprocess import CensusUSAPopulationByRace
+
 # pylint: enable=wrong-import-position
 TEST_DATA_FOLDER = os.path.join(module_dir, "test_data")
 

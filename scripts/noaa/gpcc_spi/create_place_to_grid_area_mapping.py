@@ -29,10 +29,9 @@ from pathlib import Path
 import sys
 from typing import List, Optional
 
-from shapely import geometry
-
-from absl import flags
 from absl import app
+from absl import flags
+from shapely import geometry
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))

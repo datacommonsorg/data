@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
 import tempfile
 import unittest
+
 from .preprocess import *
 
 # module_dir_ is the path to where this test is running from.

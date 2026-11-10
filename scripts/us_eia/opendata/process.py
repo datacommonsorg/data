@@ -23,15 +23,22 @@ Replace `INTL` with any of the other dataset codes
 
 import io
 import os
-import sys
 import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+from process import coal
+from process import common
+from process import elec
+from process import intl
+from process import ng
+from process import nuclear
+from process import pet
+from process import seds
+from process import total
 import requests
 from retry import retry
-from absl import flags
-from absl import app
-from absl import logging
-
-from process import common, coal, elec, intl, ng, nuclear, pet, seds, total
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))

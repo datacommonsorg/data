@@ -21,8 +21,6 @@ import tempfile
 import unittest
 from unittest import mock
 
-import pandas as pd
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(_DATA_DIR)
@@ -88,6 +86,7 @@ class BigQueryDifferTest(unittest.TestCase):
                 self.assertEqual(rows[0]['variableMeasured'],
                                  'dcid:Count_Person')
                 self.assertEqual(rows[0]['value'], '335000000')
+                self.assertEqual(rows[0]['node_id'], 'dcid:obs1')
                 self.assertIn('dcid:country/USA', rows[0]['key_combined'])
 
             with open(schema_csv, 'r', encoding='utf-8') as f:
@@ -105,19 +104,33 @@ class BigQueryDifferTest(unittest.TestCase):
         mock_client.get_table.return_value = mock_table
 
         mock_obs_query_job = mock.MagicMock()
-        mock_obs_query_job.to_dataframe.return_value = pd.DataFrame([{
-            'StatVar': 'Count_Person',
-            'ADDED': 1,
-            'DELETED': 0,
-            'MODIFIED': 1
-        }])
+        mock_obs_query_job.result.return_value = [
+            {
+                'key_combined': 'dcid:Count_Person;dcid:country/CAN;"2024";;;;',
+                'StatVar': 'Count_Person',
+                'curr_value': '40000000',
+                'prev_value': None,
+                'curr_node': 'dcid:obs2',
+                'prev_node': None,
+                'curr_dcid': '',
+                'prev_dcid': None,
+                'diff_type': 'ADDED',
+            },
+            {
+                'key_combined': 'dcid:Count_Person;dcid:country/USA;"2024";;;;',
+                'StatVar': 'Count_Person',
+                'curr_value': '335000000',
+                'prev_value': '330000000',
+                'curr_node': 'dcid:obs1',
+                'prev_node': 'dcid:obs1',
+                'curr_dcid': '',
+                'prev_dcid': '',
+                'diff_type': 'MODIFIED',
+            },
+        ]
 
-        mock_schema_row = mock.MagicMock()
-        mock_schema_row.added_schema_count = 0
-        mock_schema_row.deleted_schema_count = 0
-        mock_schema_row.modified_schema_count = 0
         mock_schema_query_job = mock.MagicMock()
-        mock_schema_query_job.result.return_value = [mock_schema_row]
+        mock_schema_query_job.result.return_value = []
 
         mock_client.query.side_effect = [
             mock_obs_query_job, mock_schema_query_job
@@ -149,8 +162,28 @@ class BigQueryDifferTest(unittest.TestCase):
 
             summary_json_path = os.path.join(out_dir, 'differ_summary.json')
             summary_csv_path = os.path.join(out_dir, 'differ_summary.csv')
+            added_mcf_path = os.path.join(out_dir, 'nodes-added.mcf')
+            modified_mcf_path = os.path.join(out_dir, 'nodes-modified.mcf')
+            original_mcf_path = os.path.join(out_dir, 'nodes-original.mcf')
+            deleted_mcf_path = os.path.join(out_dir, 'nodes-deleted.mcf')
+
             self.assertTrue(os.path.exists(summary_json_path))
             self.assertTrue(os.path.exists(summary_csv_path))
+            self.assertTrue(os.path.exists(added_mcf_path))
+            self.assertTrue(os.path.exists(modified_mcf_path))
+            self.assertTrue(os.path.exists(original_mcf_path))
+            self.assertFalse(os.path.exists(deleted_mcf_path))
+
+            with open(added_mcf_path, 'r', encoding='utf-8') as f:
+                added_text = f.read()
+                self.assertIn('Node: dcid:obs2', added_text)
+                self.assertIn('value: 40000000', added_text)
+
+            with open(modified_mcf_path, 'r', encoding='utf-8') as f:
+                self.assertIn('value: 335000000', f.read())
+
+            with open(original_mcf_path, 'r', encoding='utf-8') as f:
+                self.assertIn('value: 330000000', f.read())
 
             with open(summary_json_path, 'r', encoding='utf-8') as f:
                 saved_json = json.load(f)

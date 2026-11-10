@@ -18,21 +18,22 @@
     2. python3 preprocess.py -mode='download'
     3. python3 preprocess.py -mode='process'
 """
+from datetime import datetime as dt
+import json
 import os
 import re
-import warnings
-import requests
-import numpy as np
-import time
-import json
 import sys
-from datetime import datetime as dt
+import time
+import warnings
 
-warnings.filterwarnings('ignore')
-import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
+import numpy as np
+import pandas as pd
+import requests
+
+warnings.filterwarnings('ignore')
 
 pd.set_option("display.max_columns", None)
 
@@ -54,13 +55,11 @@ _SESSION = None
 _PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
 if _PEP_DIR not in sys.path:
     sys.path.insert(0, _PEP_DIR)
-from download_util import (
-    TransientDownloadError,
-    create_retry_session as _create_retry_session,
-    head_with_html_retry as _head_with_html_retry,
-    download_with_retry,
-    atomic_to_excel,
-)
+from download_util import TransientDownloadError
+from download_util import atomic_to_excel
+from download_util import create_retry_session as _create_retry_session
+from download_util import download_with_retry
+from download_util import head_with_html_retry as _head_with_html_retry
 
 
 def _get_session():

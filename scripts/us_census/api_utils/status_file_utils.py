@@ -19,7 +19,6 @@ import json
 import logging
 import os
 from shutil import copy2
-import base64
 
 _VALID_STATUS = ['pending', 'ok', 'fail', 'fail_http']
 

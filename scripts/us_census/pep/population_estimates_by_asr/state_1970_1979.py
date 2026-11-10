@@ -16,6 +16,7 @@ This Python Script is for State Level Data 1970-1979.
 '''
 import os
 import sys
+
 import pandas as pd
 
 _SCRIPTS_DIR = os.path.abspath(
@@ -23,11 +24,9 @@ _SCRIPTS_DIR = os.path.abspath(
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-from us_census.pep.population_estimates_by_asr.common_functions import (
-    gender_based_grouping,
-    input_url,
-    race_based_grouping,
-)
+from us_census.pep.population_estimates_by_asr.common_functions import gender_based_grouping
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.common_functions import race_based_grouping
 from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 

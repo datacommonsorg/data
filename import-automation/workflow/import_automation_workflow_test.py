@@ -18,7 +18,8 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 # Mock airflow modules before importing workflow modules
 mock_airflow = MagicMock()
@@ -144,13 +145,11 @@ if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
 import build_manifest_catalog
-import import_dag_e2e_test
 import golden_verification
-from golden_verification import (
-    HumanApprovalSensor,
-    get_golden_trigger_id,
-)
+from golden_verification import HumanApprovalSensor
+from golden_verification import get_golden_trigger_id
 import import_automation_workflow
+import import_dag_e2e_test
 import import_dags_factory
 
 
@@ -368,7 +367,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
             self.assertIn(task_id, tasks)
         self.assertNotIn('verify_golden_tests', tasks)
         self.assertNotIn('await_human_approval', tasks)
-        self.assertIn('runBQDiffer', dag.params)
+        self.assertNotIn('runBQDiffer', dag.params)
         self.assertNotIn('splitValidationJob', dag.params)
         self.assertNotIn('skipValidationJob', dag.params)
         self.assertNotIn('dryRunIngestion', dag.params)
@@ -402,22 +401,21 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
     @patch('import_automation_workflow.CloudBatchHook')
     def test_validation_job_and_batch_config(self, mock_batch_hook_cls):
         mock_hook = mock_batch_hook_cls.return_value
-        native_context = {
+        val_context = {
             'params': {
                 'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
-                'runBQDiffer': False,
                 'importConfig': {
                     'custom_flag': True,
                     'invoke_import_validation': True,
                 },
             }
         }
-        cfg = import_automation_workflow.resolve_workflow_context(
-            native_context)
+        cfg = import_automation_workflow.resolve_workflow_context(val_context)
         batch_cfg = json.loads(cfg['batchImportConfig'])
         orig_cfg = json.loads(cfg['importConfig'])
 
-        self.assertFalse(cfg['runBQDiffer'])
+        self.assertNotIn('runBQDiffer',
+                         import_automation_workflow.base_dag_params)
         self.assertFalse(batch_cfg['invoke_import_validation'])
         self.assertFalse(batch_cfg['invoke_differ_tool'])
         self.assertTrue(batch_cfg['custom_flag'])
@@ -431,7 +429,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         mock_hook.submit_batch_job.return_value = mock_submitted_job
 
         res = import_automation_workflow.run_validation_job.function(
-            **native_context)
+            **val_context)
         self.assertEqual(res['status'], 'SUCCESS')
         mock_hook.submit_batch_job.assert_called_once()
         call_kwargs = mock_hook.submit_batch_job.call_args[1]
@@ -445,24 +443,7 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertIn(
             '--import_name=scripts/us_fed:USFed_ConstantMaturityRates_Test',
             container_spec['commands'])
-        self.assertNotIn('--run_bq_differ', container_spec['commands'])
-
-        # Test with runBQDiffer=True
-        mock_hook.submit_batch_job.reset_mock()
-        bq_context = {
-            'params': {
-                'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
-                'runBQDiffer': True,
-            }
-        }
-        res_bq = import_automation_workflow.run_validation_job.function(
-            **bq_context)
-        self.assertEqual(res_bq['status'], 'SUCCESS')
-        mock_hook.submit_batch_job.assert_called_once()
-        bq_container_spec = (
-            mock_hook.submit_batch_job.call_args[1]['job']['taskGroups'][0]
-            ['taskSpec']['runnables'][0]['container'])
-        self.assertIn('--run_bq_differ', bq_container_spec['commands'])
+        self.assertIn('--run_bq_differ', container_spec['commands'])
 
     def test_skip_import_job_skips_batch_and_validation_jobs(self):
         context = {
@@ -481,6 +462,28 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         tasks = {t.task_id: t for t in dag.tasks}
         self.assertEqual(tasks['update_import_version'].trigger_rule,
                          'none_failed')
+
+        val_disabled_context = {
+            'params': {
+                'importName': 'scripts/noaa_gfs:NOAA_GlobalForecastSystem',
+                'importConfig': {
+                    'invoke_import_validation': False,
+                },
+            }
+        }
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_validation_job.function(
+                **val_disabled_context)
+
+        explicit_skip_val_context = {
+            'params': {
+                'importName': 'scripts/us_fed:USFed_ConstantMaturityRates_Test',
+                'skipValidationJob': True,
+            }
+        }
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.run_validation_job.function(
+                **explicit_skip_val_context)
 
     def test_normalize_manifest_resource_limits(self):
         dag = import_automation_workflow.build_dag(

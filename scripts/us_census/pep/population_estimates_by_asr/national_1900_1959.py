@@ -16,8 +16,8 @@ This Python Script is for National Level Data 1900-1959
 '''
 import os
 import sys
+
 import pandas as pd
-from absl import logging
 
 _SCRIPTS_DIR = os.path.abspath(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
