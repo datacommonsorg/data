@@ -25,6 +25,7 @@ import os
 import re
 import sys
 import warnings
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -36,34 +37,32 @@ warnings.simplefilter(action='ignore', category=DeprecationWarning)
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
-from config import (
-    CSV_DUPLICATE_NAME,
-    CSV_FILE_NAME,
-    CSV_FILE_PLACE,
-    DROP_BY_VALUE,
-    ELSI_58_COLUMN_TEMPLATE,
-    EXCLUDE_DATA_COLUMNS,
-    EXCLUDE_LIST,
-    EXCLUDE_PLACE_COLUMNS,
-    MCF_FILE_NAME,
-    OBSERVATION_PERIOD,
-    POSSIBLE_DATA_COLUMNS,
-    POSSIBLE_PLACE_COLUMNS,
-    PSS_COED_MAP,
-    PSS_COLUMN_ALIASES,
-    PSS_COMM_TYPE_MAP,
-    PSS_GRADE_CODE_MAP,
-    PSS_ORIENT_MAP,
-    PSS_RELIG_AFFIL_MAP,
-    PSS_SCHOOL_LEVEL_MAP,
-    PSS_SCHOOL_TYPE_MAP,
-    PSS_STATE_FIPS_TO_NAME,
-    RENAMING_PRIVATE_COLUMNS,
-    SCHOOL_TYPE,
-    SPLIT_HEADER_ON_SCHOOL_TYPE,
-    TMCF_FILE_NAME,
-    TMCF_FILE_PLACE,
-)
+from config import CSV_DUPLICATE_NAME
+from config import CSV_FILE_NAME
+from config import CSV_FILE_PLACE
+from config import DROP_BY_VALUE
+from config import ELSI_58_COLUMN_TEMPLATE
+from config import EXCLUDE_DATA_COLUMNS
+from config import EXCLUDE_LIST
+from config import EXCLUDE_PLACE_COLUMNS
+from config import MCF_FILE_NAME
+from config import OBSERVATION_PERIOD
+from config import POSSIBLE_DATA_COLUMNS
+from config import POSSIBLE_PLACE_COLUMNS
+from config import PSS_COED_MAP
+from config import PSS_COLUMN_ALIASES
+from config import PSS_COMM_TYPE_MAP
+from config import PSS_GRADE_CODE_MAP
+from config import PSS_ORIENT_MAP
+from config import PSS_RELIG_AFFIL_MAP
+from config import PSS_SCHOOL_LEVEL_MAP
+from config import PSS_SCHOOL_TYPE_MAP
+from config import PSS_STATE_FIPS_TO_NAME
+from config import RENAMING_PRIVATE_COLUMNS
+from config import SCHOOL_TYPE
+from config import SPLIT_HEADER_ON_SCHOOL_TYPE
+from config import TMCF_FILE_NAME
+from config import TMCF_FILE_PLACE
 
 FLAGS = flags.FLAGS
 flags.DEFINE_enum(

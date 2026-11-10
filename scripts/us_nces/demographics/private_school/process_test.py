@@ -26,8 +26,10 @@ import pandas as pd
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
-from config import CSV_DUPLICATE_NAME, ELSI_58_COLUMN_TEMPLATE
+from config import CSV_DUPLICATE_NAME
+from config import ELSI_58_COLUMN_TEMPLATE
 from process import NCESPrivateSchool
+
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
