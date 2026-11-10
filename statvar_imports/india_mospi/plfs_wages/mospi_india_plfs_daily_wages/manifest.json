@@ -21,7 +21,6 @@
             "source_files": [
                 "input_files/*.csv",
                 "counters/*.csv",
-                "*.csv",
                 "manifest.json"
             ],
             "cron_schedule": "0 3 * * 1",
