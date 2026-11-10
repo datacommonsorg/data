@@ -122,7 +122,7 @@ def process_df(df):
     df = df.drop_duplicates()
     logging.info("Initial size: %s, without duplicates: %s" %
                  (initial_size, df.shape[0]))
-    df["POOFips"] = df["POOFips"].astype(str)
+    df["POOFips"] = df["POOFips"].fillna("").astype(str)
 
     # convert epoch time in milliseconds to datetime
     def epoch_to_datetime(date_val):
