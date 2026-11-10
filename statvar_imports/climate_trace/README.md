@@ -13,7 +13,10 @@ The `download_and_segregate_by_gas.py` script aggregates greenhouse gas emission
 - **CO2e_20yr** (CO2 equivalent, 20-year global warming potential)
 - **CO2e_100yr** (CO2 equivalent, 100-year global warming potential)
 
-The current data is available at the subsector level. To maintain consistency with previous sector-level records, we used pvmap to aggregate the subsector data.
+The current data is available at the subsector level. To maintain consistency with previous sector-level records and consolidated legacy imports (`ClimateTrace_GreenhouseGas` and `ClimateTrace_GHG_Emissions_OldAPI`), the pipeline performs three aggregations:
+- **Sector Aggregation (`climate_pvmap_sectors.csv`)**: Uses `stat_var_processor.py` (`#aggregate,sum`) to aggregate subsector rows into sector-level Statistical Variables (`Annual_Emissions_<Gas>_<Sector>`, `150,000` observations across 50 StatVars).
+- **Per-Gas Legacy Subsector Rollups (`append_legacy_subsector_rollups` in `download_and_segregate_by_gas.py`)**: Sums split v7 subsectors into legacy composite `shipping` (`MaritimeShipping`) and `wastewater-treatment-and-discharge` (`WastewaterTreatmentAndDischarge`) rows in `input_files/all_countries_*.csv` with `sector=''` (preventing double-counting in sector aggregation), producing `1,050,000` subsector observations across 350 StatVars (`climate_pvmap_subsectors.csv`).
+- **Consolidated Greenhouse Gas Rollups (`generate_greenhousegas_input` in `download_and_segregate_by_gas.py`)**: Pre-aggregates `co2e_100yr` country totals (`dcid:Annual_Emissions_GreenhouseGas`), sector totals (`sector_*`), subsector totals (`subsector_*`), and legacy composite subsector rollups (`LEGACY_COMPOSITE_GROUPS`) into `input_files/greenhousegas_co2e_100yr.csv`, producing `150,000` observations across 50 `Annual_Emissions_GreenhouseGas*` StatVars (`climate_pvmap_greenhousegas.csv`).
 
 ## Features
 
