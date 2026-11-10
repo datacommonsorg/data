@@ -19,16 +19,21 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("csv", None, "Path to the raw csv containing the places.")
-flags.DEFINE_string("set_id", None, "DCID and name of the CohortSet.")
-flags.DEFINE_string(
-    "place_id_property", None,
-    "The CSV column with the place identifiers. It should also be the DCID of the property."
-)
-flags.DEFINE_string(
-    "set_description", None,
-    "Optional description of the CohortSet. Used as the value of `description`."
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("csv", None,
+                        "Path to the raw csv containing the places.")
+    flags.DEFINE_string("set_id", None, "DCID and name of the CohortSet.")
+    flags.DEFINE_string(
+        "place_id_property", None,
+        "The CSV column with the place identifiers. It should also be the DCID of the property."
+    )
+    flags.DEFINE_string(
+        "set_description", None,
+        "Optional description of the CohortSet. Used as the value of `description`."
+    )
 
 
 def write_mcf(f_in, f_out, set_id, place_id_property, set_description):
@@ -66,6 +71,7 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     flags.mark_flag_as_required('csv')
     flags.mark_flag_as_required('set_id')
     flags.mark_flag_as_required('place_id_property')

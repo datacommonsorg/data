@@ -18,9 +18,12 @@ import s2sphere
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_float('lat', 0, 'Latitude')
-flags.DEFINE_float('lng', 0, 'Longitude')
-flags.DEFINE_integer('level', 10, 'S2 Cell level')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_float('lat', 0, 'Latitude')
+    flags.DEFINE_float('lng', 0, 'Longitude')
+    flags.DEFINE_integer('level', 10, 'S2 Cell level')
 
 
 def latlng2s2cell(level, lat, lng):
@@ -38,4 +41,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
