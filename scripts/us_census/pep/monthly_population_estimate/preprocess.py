@@ -38,12 +38,19 @@ import pandas as pd
 pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
+
 _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
 
@@ -708,4 +715,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
