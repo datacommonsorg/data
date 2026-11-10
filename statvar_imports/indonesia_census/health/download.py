@@ -302,11 +302,18 @@ def clean_label(raw_label: str) -> str:
 
 
 def normalize_numeric_cell(val: str) -> str:
-    """Normalizes Indonesian-formatted numeric cells (e.g. '12,34' -> '12.34')."""
+    """Normalizes Indonesian-formatted numeric cells (e.g. '1.234,56' -> '1234.56')."""
     cleaned = val.strip()
     if cleaned in ('-', '--', '–', '—', '...', 'n.a', 'N/A', 'NA'):
         return ''
-    # Convert comma decimal separator to dot for numeric tokens.
+    # Handle Indonesian thousands separators (dots) and decimal commas:
+    # Case 1: Both dot thousands separator(s) and comma decimal (e.g. '1.234,56').
+    if re.fullmatch(r'-?\d{1,3}(?:\.\d{3})+,\d+', cleaned):
+        return cleaned.replace('.', '').replace(',', '.')
+    # Case 2: Dot thousands separator(s) on an integer (e.g. '4.969').
+    if re.fullmatch(r'-?\d{1,3}(?:\.\d{3})+', cleaned):
+        return cleaned.replace('.', '')
+    # Case 3: Comma decimal separator without thousands dots (e.g. '12,34').
     if re.fullmatch(r'-?\d+,\d+', cleaned):
         return cleaned.replace(',', '.')
     return cleaned
@@ -524,12 +531,16 @@ def process_aids_static_table(grid: list[list[str]], output_path: str) -> None:
 
     # Locate the metric category header row (first row with non-empty cells in
     # columns 1+ where at least one cell is not a 4-digit year).
-    metric_idx = 1
+    metric_idx = -1
     for idx in range(1, len(grid) - 1):
         non_empty = [c.strip() for c in grid[idx][1:] if c.strip()]
         if non_empty and not all(re.match(r'^\d{4}', c) for c in non_empty):
             metric_idx = idx
             break
+    if metric_idx == -1:
+        raise RuntimeError(
+            'Could not find the metric category header row in AIDS static table 1569'
+        )
 
     metric_row = ['Provinsi'] + [cell.strip() for cell in grid[metric_idx][1:]]
     year_row = ['']
@@ -569,12 +580,16 @@ def process_health_complaint_static_table(grid: list[list[str]],
             'Unexpected grid layout for Health Complaint static table 1617')
 
     # Locate the year header row (first row with 4-digit years in columns 1+).
-    year_idx = 1
+    year_idx = -1
     for idx in range(1, len(grid) - 2):
         non_empty = [c.strip() for c in grid[idx][1:] if c.strip()]
         if non_empty and all(re.match(r'^\d{4}$', c) for c in non_empty):
             year_idx = idx
             break
+    if year_idx == -1:
+        raise RuntimeError(
+            'Could not find the year header row in Health Complaint static table 1617'
+        )
 
     year_row = ['P R O V I N S I'] + [c.strip() for c in grid[year_idx][1:]]
     gender_row = [''] + [
@@ -635,13 +650,16 @@ def process_outpatient_static_table(grid: list[list[str]],
             if any(cell.strip() for cell in row):
                 current_section['rows'].append(row)
 
-    if len(sections) < 2:
+    male_section = next((s for s in sections if s['gender'] == 'male'), None)
+    female_section = next((s for s in sections if s['gender'] == 'female'),
+                          None)
+    if not male_section or not female_section:
         raise RuntimeError(
             'Expected both Male and Female sections in static table 1620')
 
     for section, out_path in (
-        (sections[0], male_output_path),
-        (sections[1], female_output_path),
+        (male_section, male_output_path),
+        (female_section, female_output_path),
     ):
         sec_rows = section['rows']
         if len(sec_rows) < 3:

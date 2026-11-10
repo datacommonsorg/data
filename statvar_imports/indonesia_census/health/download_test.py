@@ -377,6 +377,27 @@ class DownloadHealthTest(unittest.TestCase):
                 ],
             )
 
+    def test_normalize_numeric_cell_and_static_table_error_handling(self):
+        self.assertEqual(download.normalize_numeric_cell('4.969'), '4969')
+        self.assertEqual(download.normalize_numeric_cell('1.234,56'), '1234.56')
+        self.assertEqual(download.normalize_numeric_cell('12,34'), '12.34')
+        self.assertEqual(download.normalize_numeric_cell('–'), '')
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, 'out.csv')
+            with self.assertRaises(RuntimeError):
+                download.process_aids_static_table(
+                    [['Title'], ['Provinsi', '2008'], ['', '2009'],
+                     ['Aceh', '1']],
+                    out_file,
+                )
+            with self.assertRaises(RuntimeError):
+                download.process_health_complaint_static_table(
+                    [['Title'], ['Provinsi', 'NotAYear'], ['', 'L'], ['', 'U'],
+                     ['Aceh', '1']],
+                    out_file,
+                )
+
 
 if __name__ == '__main__':
     unittest.main()

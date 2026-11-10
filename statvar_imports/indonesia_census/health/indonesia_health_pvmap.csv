@@ -11,7 +11,7 @@ Male,gender,Male
 Female,gender,Female
 Infant Mortality Rate (IMR) Per 1000 Live Births by Province,populationType,MortalityEvent,measuredProperty,count,statType,measuredValue,age,Years0,measurementDenominator,Count_BirthEvent_LiveBirth,unit,Per1000LiveBirths,scalingFactor,1000
 # --- 2. Disease ---
-"Persentase Penduduk yang Mempunyai Keluhan Kesehatan menurut Provinsi, Tipe daerah dan Jenis Kelamin, 20092025",#IgnoreRow,True
+"Persentase Penduduk yang Mempunyai Keluhan Kesehatan menurut Provinsi, Tipe daerah dan Jenis Kelamin, 2009-2025",#IgnoreRow,True
 Malaria,populationType,MedicalConditionIncident,measuredProperty,count,medicalCondition,Malaria,alternateName,"""Malaria Diseases@id"""
 Tuberculosis,populationType,MedicalConditionIncident,measuredProperty,count,medicalCondition,Tuberculosis,alternateName,"""Tuberculosis Diseases@id"""
 Pneumonia,populationType,MedicalConditionIncident,measuredProperty,count,medicalCondition,Pneumonia,alternateName,"""Pneumonia Diseases@id"""
@@ -27,13 +27,13 @@ Kasus Kumulatif,populationType,MedicalConditionIncident,measurementQualifier,Ann
 Meninggal,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,PatientDeceased,alternateName,"""AIDS Meninggal@id"""
 Angka Kumulatif Kasus,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,ConfirmedCase,alternateName,"""AIDS Angka Kumulatif Kasus@id""",measurementDenominator,"-alternateName,-medicalStatus,-incidentType",scalingFactor,100000
 Kasus Baru,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,NewlyConfirmedCase,alternateName,"""AIDS Kasus Baru@id"""
-LAKILAKI,populationType,Person,gender,Male,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,Gender,LakaLaki
-PEREMPUAN,populationType,Person,gender,Female,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,Gender,PeremPuan
+LAKILAKI,populationType,Person,gender,Male,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,Gender,LAKILAKI
+PEREMPUAN,populationType,Person,gender,Female,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,Gender,PEREMPUAN
 Perkotaan,populationType,Person,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender,-placeOfResidenceClassification",measuredProperty,count,Place,Perkotaan,alternateName,"""Persentase  di {Gender}Perkotaan yang Melaporkan Masalah Kesehatan@id"""
 Perdesaan,populationType,Person,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender,-placeOfResidenceClassification",measuredProperty,count,Place,Perdesaan,alternateName,"""Persentase  di {Gender}Perdesaan yang Melaporkan Masalah Kesehatan@id"""
 Perkotaan+Perdesaan,populationType,Person,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,alternateName,"""Persentase  di {Gender} yang Melaporkan Masalah Kesehatan@id"""
 # --- 3. Risk Factors ---
-Percentage of Population Aged 15 Years and Older Who Smoked Tobacco by Province (Percent),measuredProperty,percent,populationType,Person,age,Count_Person_15OrMoreYears,healthBehavior,TobaccoSmoking,alternateName,"""Population Aged 15 Years Smoke Tobacco@id"""
+Percentage of Population Aged 15 Years and Older Who Smoked Tobacco by Province (Percent),dcid,Percent_Person_CountPerson15OrMoreYears_TobaccoSmoking,measuredProperty,percent,populationType,Person,age,Years15Onwards,healthBehavior,TobaccoSmoking,alternateName,"""Population Aged 15 Years Smoke Tobacco@id"""
 Prevalence of Obesity Among Population Aged 18 Years and Older,populationType,Person,measuredProperty,percent,age,Years18Onwards,medicalCondition,Obesity,unit,Percent
 Urban,placeOfResidenceClassification,Urban,alternateName,"""Prevalence of Obesity Among Urban Population Aged 18 Years and Older@id"""
 Rural,placeOfResidenceClassification,Rural,alternateName,"""Prevalence of Obesity Among Rural Population Aged 18 Years and Older@id"""
