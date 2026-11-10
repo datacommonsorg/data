@@ -32,7 +32,7 @@ from google.api_core import exceptions as api_core_exceptions
 from google.cloud import storage
 
 DEFAULT_API_KEY_GCS_PATH = (
-    'gs://unresolved_mcf/country/indonesia/demographic/api_key.json')
+    'gs://unresolved_mcf/country/indonesia/config.json')
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -93,8 +93,8 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     'api_key_gcs_path',
     DEFAULT_API_KEY_GCS_PATH,
-    'GCS or local JSON path containing {"api_key": "..."} used when '
-    '--api_key / BPS_API_KEY is not set.',
+    'GCS or local JSON path containing {"bps_api_key": "..."} (or '
+    '{"api_key": "..."}) used when --api_key / BPS_API_KEY is not set.',
 )
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
@@ -217,7 +217,9 @@ def _load_api_key_from_path(api_key_gcs_path: str) -> str:
             return ''
         payload = json.loads(raw)
         if isinstance(payload, dict):
-            val = payload.get('api_key')
+            val = payload.get('bps_api_key')
+            if not isinstance(val, str) or not val.strip():
+                val = payload.get('api_key')
             return val.strip() if isinstance(val, str) else ''
         return ''
     except (

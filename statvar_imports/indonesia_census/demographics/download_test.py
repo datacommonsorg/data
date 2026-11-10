@@ -328,7 +328,7 @@ class DownloadTest(unittest.TestCase):
                 mock_blob = (mock_client.return_value.bucket.return_value.blob.
                              return_value)
                 mock_blob.download_as_text.return_value = (
-                    f'{{"api_key": "{fallback_key}"}}')
+                    f'{{"bps_api_key": "{fallback_key}"}}')
                 self.assertEqual(
                     download._resolve_api_key(api_key=''),
                     fallback_key,
@@ -336,7 +336,7 @@ class DownloadTest(unittest.TestCase):
                 mock_client.return_value.bucket.assert_called_once_with(
                     'unresolved_mcf')
                 mock_client.return_value.bucket.return_value.blob.assert_called_once_with(
-                    'country/indonesia/demographic/api_key.json')
+                    'country/indonesia/config.json')
 
             pop_path, _ = download.download_demographic_data(
                 domain='0000',
