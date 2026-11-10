@@ -34,11 +34,11 @@ _FLAGS = flags.FLAGS
 def _define_flags() -> None:
     """Defines command-line flags for this script."""
     flags.DEFINE_integer('aggregate_start_year',
-                         os.getenv('START_YEAR', '1980'),
+                         int(os.getenv('START_YEAR', '1980')),
                          'Process data starting from this year.')
     flags.DEFINE_integer('aggregate_end_year',
-                         os.getenv('END_YEAR',
-                                   datetime.now().year),
+                         int(os.getenv('END_YEAR',
+                                       datetime.now().year)),
                          'Process data upto this year.')
 
 
