@@ -1,0 +1,43 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_health_max_date_consistency",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Percent_Person_CountPerson15OrMoreYears_TobaccoSmoking",
+                        "Count_Person_Year15To49_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_Year15To49_Female_Married",
+                        "Count_HealthEstablishment_WithUnmetNeed",
+                        "Count_MedicalConditionIncident_ConditionMalaria_AsAFractionOf_Count_Person"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_health_min_observations_and_freshness",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "LifeExpectancy_Person_Male",
+                        "LifeExpectancy_Person_Female",
+                        "Percent_Person_CountPerson15OrMoreYears_TobaccoSmoking",
+                        "Count_Person_Year15To49_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_Year15To49_Female_Married",
+                        "Count_HealthEstablishment_WithUnmetNeed",
+                        "Count_MedicalConditionIncident_ConditionMalaria_AsAFractionOf_Count_Person"
+                    ]
+                }
+            },
+            "params": {
+                "query": "SELECT SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE NumPlaces >= 35",
+                "condition": "TotalObs >= 16000 AND LatestDate >= 2025",
+                "failure_message": "Health StatVar observation count or freshness validation failed."
+            }
+        }
+    ]
+}

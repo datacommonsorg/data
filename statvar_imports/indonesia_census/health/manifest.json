@@ -1,0 +1,34 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Indonesia_Census_Health",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.bps.go.id/en/statistics-table?subject=519",
+            "provenance_description": "Badan Pusat Statistik (BPS - Statistics Indonesia) - Health Statistics (Mortality, Disease, Risk Factors, and Health Service Utilization)",
+            "scripts": [
+                "download.py --output_dir=input_files",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=indonesia_health_pvmap.csv --config_file=indonesia_health_metadata.csv --places_resolved_csv=indonesia_health_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_health_output --output_counters=counters/indonesia_health_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/indonesia_health_output.tmcf",
+                    "cleaned_csv": "output_files/indonesia_health_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv"
+            ],
+            "cron_schedule": "0 05 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 4,
+                "disk": 30
+            }
+        }
+    ]
+}

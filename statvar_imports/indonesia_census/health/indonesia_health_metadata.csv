@@ -1,0 +1,13 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table?subject=519
+description,"Indonesia Census Health Statistics (Mortality, Disease, Risk Factors, and Health Service Utilization)"
+start_date,2000
+end_date,2025
+release_frequency,1 year
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+drop_statvars_without_svobs,0
+reconcile_nodes,
+recon_lookup_api,
+output_only_new_statvars,0
+generate_schema_mcf,0
+spell_check,0
