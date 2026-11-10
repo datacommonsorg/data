@@ -26,10 +26,14 @@ import pandas as pd
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'config_file_path',
-    'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
-    'Input directory where config files are downloaded.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'config_file_path',
+        'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
+        'Input directory where config files are downloaded.')
+
 
 # --- ROBUST PATH RESOLUTION START ---
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -155,11 +159,17 @@ def preprocess_and_save(data: List[Tuple]) -> None:
     logging.info('Data saved to %s', output_path)
 
 
-def main(_) -> None:
-    raw_data = download_data(_FLAGS.config_file_path)
+def run(config_file_path: str) -> None:
+    """Downloads the data described by config_file_path and saves it."""
+    raw_data = download_data(config_file_path)
     if raw_data:
         preprocess_and_save(raw_data)
 
 
+def main(_) -> None:
+    run(_FLAGS.config_file_path)
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

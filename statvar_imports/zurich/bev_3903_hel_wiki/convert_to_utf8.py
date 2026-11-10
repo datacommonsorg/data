@@ -8,8 +8,12 @@ import chardet
 
 # Define flags using flags
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_csv_path', None,
-                    'The full or relative path to the input CSV file.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('input_csv_path', None,
+                        'The full or relative path to the input CSV file.')
 
 
 def convert_csv_to_utf8(input_csv_path):
@@ -122,4 +126,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
