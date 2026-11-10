@@ -103,6 +103,7 @@ _MULTI_WORD_TOKEN_REWRITES = (
     ('par_rank', 'parrank'),
     ('has_dad', 'hasdad'),
     ('has_mom', 'hasmom'),
+    # Maps in pvmap.csv to pre-existing core schema DCID householdIncomeRankImmigantMother (spelled without 'r').
     ('kfr_imm', 'kfrimm'),
     ('kir_imm', 'kirimm'),
     ('marr_24', 'marr24'),
