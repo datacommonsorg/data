@@ -53,13 +53,15 @@ _BASELINE_YEAR = 2025
 _SESSION = None
 
 _PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
-if _PEP_DIR not in sys.path:
-    sys.path.insert(0, _PEP_DIR)
-from download_util import TransientDownloadError
-from download_util import atomic_to_excel
-from download_util import create_retry_session as _create_retry_session
-from download_util import download_with_retry
-from download_util import head_with_html_retry as _head_with_html_retry
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_PEP_DIR, '../..'))
+for path_entry in (_SCRIPTS_DIR, _PEP_DIR):
+    if path_entry not in sys.path:
+        sys.path.insert(0, path_entry)
+from us_census.pep.download_util import TransientDownloadError
+from us_census.pep.download_util import atomic_to_excel
+from us_census.pep.download_util import create_retry_session as _create_retry_session
+from us_census.pep.download_util import download_with_retry
+from us_census.pep.download_util import head_with_html_retry as _head_with_html_retry
 
 
 def _get_session():
