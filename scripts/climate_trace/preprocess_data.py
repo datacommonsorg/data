@@ -6,8 +6,9 @@ calculates values for the whole sector and appends them to the data set with
 a stat-var representing the sector. The processed file is placed in the
 output_files directory.
 """
-from absl import app
 from datetime import datetime
+
+from absl import app
 import numpy as np
 import pandas as pd
 import statvar_mapping

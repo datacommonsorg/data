@@ -18,17 +18,18 @@ for US states.
     Typical usage:
     python3 generate_mcf.py
 """
-import geopandas as gpd
-import download
-import simplify
-import plotter
-import geojson
 import json
 import tempfile
-import matplotlib.pyplot as plt
-from absl import logging
+
 from absl import app
 from absl import flags
+from absl import logging
+import download
+import geojson
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import plotter
+import simplify
 
 
 class McfGenerator:

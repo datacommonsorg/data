@@ -15,9 +15,9 @@
 This script downloads SAIPE School District Estimates for 2003 to current year.
 URL: https://www.census.gov/programs-surveys/saipe/data/datasets.html
 """
-import sys
 import datetime
 from pathlib import Path
+import sys
 from typing import List
 
 from absl import app

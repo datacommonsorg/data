@@ -13,7 +13,8 @@
 # limitations under the License.
 """End-to-end test for import automation Cloud Workflow."""
 
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import json
 import os
 import sys

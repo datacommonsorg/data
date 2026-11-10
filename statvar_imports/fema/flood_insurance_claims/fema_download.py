@@ -14,21 +14,23 @@
 
 import errno
 import os
-import sys
 import shutil
-import time
-import requests
+import sys
 from typing import Optional
-from absl import logging
+
 from absl import app
+from absl import logging
+import requests
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
 if data_dir not in sys.path:
     sys.path.insert(0, data_dir)
 
-from util.download_util_script import download_file, _retry_method
 from absl import flags
+
+from util.download_util_script import _retry_method
+from util.download_util_script import download_file
 
 flags.DEFINE_string('api_url', 'https://www.fema.gov/api/open/v3/NfipClaims',
                     'The base URL of the API endpoint to download data from.')

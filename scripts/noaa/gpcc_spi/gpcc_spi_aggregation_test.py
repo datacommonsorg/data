@@ -15,10 +15,11 @@
 Unit tests for gpcc_spi_aggregation.py
 Usage: python3 -m unittest discover -v -s ../ -p "gpcc_spi_aggregation_test.py"
 '''
-import unittest
+import filecmp
 import os
 import tempfile
-import filecmp
+import unittest
+
 from .gpcc_spi_aggregation import run_gpcc_spi_aggregation
 
 # module_dir is the path to where this test is running from.

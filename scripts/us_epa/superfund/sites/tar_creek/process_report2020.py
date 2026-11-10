@@ -18,10 +18,11 @@ Currently this script only supports the 6th five-year report of Tar Creek which 
 """
 import os
 import sys
-import tabula
-import pandas as pd
 
-from absl import app, flags
+from absl import app
+from absl import flags
+import pandas as pd
+import tabula
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

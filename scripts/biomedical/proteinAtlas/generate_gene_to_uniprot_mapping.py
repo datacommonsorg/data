@@ -17,9 +17,9 @@ entries mapping.
 Run "python3 generate_gene_to_uniprot_mapping.py --help" for usage.
 '''
 
-import pandas as pd
 from absl import app
 from absl import flags
+import pandas as pd
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('atlas_file',

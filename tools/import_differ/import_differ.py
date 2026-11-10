@@ -13,21 +13,17 @@
 # limitations under the License.
 """ Utility to generate a dataset diff for import analysis."""
 
-import csv
-import glob
-import json
+from enum import Enum
 import os
-import pandas as pd
-import random
 import subprocess
 import sys
 import time
-from collections import defaultdict
-from enum import Enum
 
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
+
 try:
     from googleapiclient.discovery import build
 except ImportError:

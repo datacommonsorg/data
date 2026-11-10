@@ -17,8 +17,6 @@
 import os
 import sys
 
-from absl import logging
-
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
@@ -26,11 +24,11 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import process_events
-
 from config_map import ConfigMap
 from counters import Counters
-from pipeline_stage_runner import StageRunner, register_stage_runner
+from pipeline_stage_runner import StageRunner
+from pipeline_stage_runner import register_stage_runner
+import process_events
 
 
 class EventsRunner(StageRunner):

@@ -12,18 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import requests
-import zipfile
 import io
-import pandas as pd
-from absl import logging, app, flags
-from pathlib import Path
-from retry import retry
-import sys
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+from download_ap_ib_gt import BASE_URL_TEMPLATE
 
 # reusing configs from the main script
-from download_ap_ib_gt import DATA_CONFIGS, SCRIPT_DIR, add_year_column, get_file_keywords, get_req_cols_from_config, download_url_with_retry, BASE_URL_TEMPLATE
+from download_ap_ib_gt import DATA_CONFIGS
+from download_ap_ib_gt import SCRIPT_DIR
+from download_ap_ib_gt import add_year_column
+from download_ap_ib_gt import download_url_with_retry
+from download_ap_ib_gt import get_file_keywords
+from download_ap_ib_gt import get_req_cols_from_config
+import pandas as pd
+import requests
 
 FLAGS = flags.FLAGS
 

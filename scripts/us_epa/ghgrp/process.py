@@ -13,17 +13,21 @@
 # limitations under the License.
 """Module to generate flattened CSV file of all observations across years."""
 
-import os
-import sys
 import csv
 from datetime import datetime
-from absl import app, logging
+import os
+import sys
+
+from absl import app
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from us_epa.ghgrp import download, gas, sources
+from us_epa.ghgrp import download
+from us_epa.ghgrp import gas
+from us_epa.ghgrp import sources
 from us_epa.util import crosswalk as cw
 
 # Define constants

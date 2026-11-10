@@ -17,16 +17,18 @@ Tests for import_executor.py.
 
 import json
 import os
-import unittest
-from unittest import mock
 import subprocess
 import tempfile
 import threading
+import unittest
+from unittest import mock
 
 from app import configs
 from app.executor import import_executor
 from app.executor.import_executor import ImportStatus
-from tools.import_validation.result import ValidationResult, ValidationStatus
+
+from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationStatus
 from tools.import_validation.runner import ValidationRunner
 
 

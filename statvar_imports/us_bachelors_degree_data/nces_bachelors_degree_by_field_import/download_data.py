@@ -12,8 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, config, sys
-from absl import logging, app
+import os
+import sys
+
+from absl import app
+from absl import logging
+import config
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(SCRIPT_DIR, '../../../util'))

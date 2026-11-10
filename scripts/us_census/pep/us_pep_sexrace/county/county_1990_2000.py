@@ -17,10 +17,10 @@ for county 1990-2000 and Count_Person_Male
 and Count_person_Female are aggregated for this file.
 """
 
-from typing import final
-import pandas as pd
 import os
 import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))

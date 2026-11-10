@@ -19,7 +19,8 @@ import sys
 import tempfile
 import traceback
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
+from unittest.mock import patch
 
 from absl import logging as absl_logging
 import pandas as pd

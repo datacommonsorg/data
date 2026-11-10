@@ -11,12 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import unittest
 import os
-from education_enrollment_preprocess_gen_tmcf import *
-import pandas as pd
-import tempfile
 import sys
+import unittest
+
+from education_enrollment_preprocess_gen_tmcf import *
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
