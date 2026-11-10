@@ -13,12 +13,13 @@
 # limitations under the License.
 """Script to generate all the files needed for importing the WHO GHO dataset."""
 
-import os
 import json
+import os
+
 from absl import app
 from absl import flags
-from generate_schema import generate_schema
 from generate_csv_and_sv import generate_csv_and_sv
+from generate_schema import generate_schema
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(

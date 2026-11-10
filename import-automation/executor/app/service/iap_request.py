@@ -15,10 +15,9 @@
 Class for making HTTP requests to Identity-Aware Proxy-protected applications.
 """
 
-import requests
-
 import google.auth.transport.requests
 from google.oauth2 import id_token
+import requests
 
 
 class IAPRequest:

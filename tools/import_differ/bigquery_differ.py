@@ -45,7 +45,9 @@ Usage via import_differ.py:
 from collections import defaultdict
 import contextlib
 import csv
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
+from datetime import timedelta
+from datetime import timezone
 import io
 import os
 import re
@@ -68,7 +70,9 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
-from file_util import file_get_gcs_blob, file_get_matching, file_is_gcs
+from file_util import file_get_gcs_blob
+from file_util import file_get_matching
+from file_util import file_is_gcs
 from mcf_file_util import normalize_value
 
 OBSERVATION_KEY_PROPERTIES = [

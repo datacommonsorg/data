@@ -17,9 +17,9 @@ import os
 import re
 import shutil
 import subprocess
-import sys
 import tempfile
 import time
+
 from absl import app
 from absl import flags
 from absl import logging

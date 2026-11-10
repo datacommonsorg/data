@@ -18,6 +18,7 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
+
 from absl import flags
 import pandas as pd
 
@@ -35,10 +36,8 @@ _SAVED_FLAGS = {
 for _flag_name in _SAVED_FLAGS:
     delattr(flags.FLAGS, _flag_name)
 
-from statvar_imports.us_newyork.ny_brfss_health_indicators.download import (
-    atomic_to_csv,
-    download_health_indicators,
-)
+from statvar_imports.us_newyork.ny_brfss_health_indicators.download import atomic_to_csv
+from statvar_imports.us_newyork.ny_brfss_health_indicators.download import download_health_indicators
 
 for _flag_name, _flag_obj in _SAVED_FLAGS.items():
     delattr(flags.FLAGS, _flag_name)

@@ -32,8 +32,10 @@ import json
 import os
 import time
 
+from absl import app
+from absl import flags
+from absl import logging
 import requests
-from absl import app, flags, logging
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 

@@ -17,9 +17,10 @@ for national 2000-2009 and the file
 is processed as is.
 """
 
-import pandas as pd
 import os
 import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))

@@ -23,15 +23,15 @@ Run this script from this directory:
 python3 download_bulk.py
 """
 
-import os
-import requests
 import json
+import os
 import sys
 
-from absl import logging
-from retry import retry
-from absl import flags
 from absl import app
+from absl import flags
+from absl import logging
+import requests
+from retry import retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')

@@ -15,15 +15,16 @@
 # limitations under the License.
 """Render prompts and run the Gemini CLI with tracked run outputs."""
 
-import shutil
-import subprocess
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+import shutil
+import subprocess
 from typing import Callable, Mapping, Optional
 
 from absl import logging
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment
+from jinja2 import FileSystemLoader
 
 
 @dataclass

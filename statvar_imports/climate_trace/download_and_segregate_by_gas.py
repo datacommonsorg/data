@@ -1,8 +1,9 @@
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import io
-import json
 import os
 import zipfile
-from concurrent.futures import as_completed, ThreadPoolExecutor
+
 from absl import logging
 import numpy as np
 import pandas as pd
@@ -266,9 +267,8 @@ def generate_greenhousegas_input(co2e_100yr_df, output_dir):
         )
         return
 
-    df = co2e_100yr_df[
-        ~co2e_100yr_df['subsector'].isin(LEGACY_SUBSECTOR_ROLLUPS)][
-            list(required_cols)].copy()
+    df = co2e_100yr_df[~co2e_100yr_df['subsector'].isin(
+        LEGACY_SUBSECTOR_ROLLUPS)][list(required_cols)].copy()
     df['val'] = pd.to_numeric(df['emissions_quantity'], errors='coerce')
     df = df.dropna(subset=['iso3_country', 'start_time', 'val'])
 

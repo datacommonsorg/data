@@ -12,23 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from chromedriver_py import binary_path
-import time
-from absl import logging
-from absl import flags
-from absl import app
-import zipfile
 import os
 import re
-import pandas as pd
 import shutil
+import time
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+from chromedriver_py import binary_path
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')

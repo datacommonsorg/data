@@ -15,8 +15,9 @@
 Description: This script contains unit tests for the parse_precipitation_index.py script.
 """
 
-import unittest
 import os
+import unittest
+
 from parse_precipitation_index import clean_precipitation_data
 
 module_dir_ = os.path.dirname(__file__)

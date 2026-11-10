@@ -17,8 +17,10 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 import zipfile
+
 import pandas as pd
 import requests
 
@@ -295,4 +297,3 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

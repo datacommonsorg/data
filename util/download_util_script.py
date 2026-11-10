@@ -15,17 +15,17 @@
 # How to run the script to download the files:
 # python3 download_util_script.py --download_url="<url>" --unzip=<True if files have to be unzipped.>
 
+import datetime
 import os
 import sys
+from urllib.parse import urlparse
+import zipfile
+
 from absl import app
 from absl import flags
 from absl import logging
 import requests
 from retry import retry
-from urllib.parse import urlparse
-import zipfile
-import datetime
-import time
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('download_url', None, 'URL of the file to download')

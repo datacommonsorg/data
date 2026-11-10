@@ -16,7 +16,8 @@ import json
 import os
 import sys
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
+from unittest.mock import patch
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_PATH)
