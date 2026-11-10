@@ -581,7 +581,7 @@ class DownloadAndPvmapTest(unittest.TestCase):
             self.assertEqual(len(resolved), 17)
             self.assertEqual(resolved['kfr_p25'], ('2014', 'P2Y', 'dc/sv1', ''))
             self.assertTrue(os.path.exists(f'{dest_prefix}_stat_vars.mcf'))
-            self.assertTrue(
+            self.assertFalse(
                 os.path.exists(f'{dest_prefix}_stat_vars_schema.mcf'))
 
             def make_single_row_runner(val_str):

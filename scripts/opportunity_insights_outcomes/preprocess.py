@@ -446,10 +446,9 @@ def _resolve_headers_via_svp(
                 os.path.dirname(os.path.abspath(sv_output_prefix)),
                 exist_ok=True,
             )
-            for suffix in ('_stat_vars.mcf', '_stat_vars_schema.mcf'):
-                src_mcf = f'{out_prefix}{suffix}'
-                if os.path.exists(src_mcf):
-                    shutil.copyfile(src_mcf, f'{sv_output_prefix}{suffix}')
+            src_mcf = f'{out_prefix}_stat_vars.mcf'
+            if os.path.exists(src_mcf):
+                shutil.copyfile(src_mcf, f'{sv_output_prefix}_stat_vars.mcf')
 
     logging.info(
         'Resolved %d unique column headers via stat_var_processor.py',
