@@ -9,9 +9,9 @@
                 "variables": {
                     "dcids": [
                         "Percent_Person_CountPerson15OrMoreYears_TobaccoSmoking",
-                        "Count_Person_Year15To49_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_Year15To49_Female_Married",
                         "Count_HealthEstablishment_WithUnmetNeed",
-                        "Count_MedicalConditionIncident_ConditionMalaria_AsAFractionOf_Count_Person"
+                        "Count_Person_Male_ConditionDiseasedPerson_AsAFractionOf_Count_Person",
+                        "Count_Person_Female_ConditionDiseasedPerson_AsAFractionOf_Count_Person"
                     ]
                 }
             },
@@ -27,9 +27,9 @@
                         "LifeExpectancy_Person_Male",
                         "LifeExpectancy_Person_Female",
                         "Percent_Person_CountPerson15OrMoreYears_TobaccoSmoking",
-                        "Count_Person_Year15To49_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_Year15To49_Female_Married",
                         "Count_HealthEstablishment_WithUnmetNeed",
-                        "Count_MedicalConditionIncident_ConditionMalaria_AsAFractionOf_Count_Person"
+                        "Count_Person_Male_ConditionDiseasedPerson_AsAFractionOf_Count_Person",
+                        "Count_Person_Female_ConditionDiseasedPerson_AsAFractionOf_Count_Person"
                     ]
                 }
             },
