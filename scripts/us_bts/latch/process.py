@@ -28,7 +28,9 @@ import os
 import sys
 import warnings
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import numpy as np
 import pandas as pd
 
@@ -39,14 +41,16 @@ sys.path.insert(1, _CODEDIR)
 # pylint: disable=wildcard-import
 # pylint: disable=unused-wildcard-import
 from constants import *
+
 # pylint: enable=wildcard-import
 # pylint: enable=unused-wildcard-import
 
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 # pylint: disable=import-error
-from statvar_dcid_generator import get_statvar_dcid
 import file_util
+from statvar_dcid_generator import get_statvar_dcid
+
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS

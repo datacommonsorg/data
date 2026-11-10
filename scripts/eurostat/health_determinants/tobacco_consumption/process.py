@@ -17,15 +17,20 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
-from absl import app, flags, logging
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from common.euro_stat import EuroStat
+from common import download
+
 # pylint: enable=wrong-import-position
-from common import import_download_details, download
+from common import import_download_details
+from common.euro_stat import EuroStat
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')

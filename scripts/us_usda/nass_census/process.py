@@ -14,14 +14,16 @@
 """Import USDA Census of Agriculture."""
 
 import csv
-import io
-import os
-import sys
-import requests
-import gzip
-import shutil
 from datetime import datetime
-from absl import app, flags, logging
+import gzip
+import os
+import shutil
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import requests
 from retry import retry
 
 # Define flags

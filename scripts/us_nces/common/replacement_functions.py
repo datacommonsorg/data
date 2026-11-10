@@ -15,8 +15,8 @@
 Replacement Functions for specific Column Values
 which are common for all the US Education Inputs.
 """
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 _COEDUCATIONAL = {
     "1-Coed (school has male and female students)": "Coeducational",

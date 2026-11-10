@@ -16,9 +16,9 @@ Utilities to compile denominator section and related helper functions.
 """
 
 from typing import Any
+
 from absl import app
 from absl import flags
-
 from common_util import *
 
 FLAGS = flags.FLAGS

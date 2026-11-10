@@ -20,17 +20,16 @@ Run this script in this folder:
 python3 process.py
 """
 
+from collections import defaultdict
 import csv
-import io
+import datetime
 import os
 import sys
-import datetime
 import time
 
 from absl import app
 from absl import flags
 from absl import logging
-from collections import defaultdict
 
 # Allows the following module imports to work when running as a script
 # module_dir_ is the path to where this code is running from.
@@ -38,9 +37,9 @@ module_dir_ = os.path.dirname(__file__)
 sys.path.append(os.path.join(module_dir_))
 
 from country_codes import get_country_dcid
+import download
 from rename_mapping import new_mapping_names
 import un_energy_codes
-import download
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],

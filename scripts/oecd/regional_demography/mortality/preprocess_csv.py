@@ -15,14 +15,15 @@
 import sys
 
 sys.path.append('../')
-from utils import multi_index_to_single_index
 import csv
 import json
-import pandas as pd
+
 from columns import *
+from utils import multi_index_to_single_index
 
 sys.path.append('../../')
 from download import download_data_to_file_and_df
+
 # Read csv from source csv
 url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_LIFE_EXP,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
 filename = "REGION_DEMOGR_life_expectancy.csv"

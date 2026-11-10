@@ -17,22 +17,22 @@ based on manifests.
 """
 
 import dataclasses
+import datetime
+from enum import Enum
 import fnmatch
 import glob
 import json
 import logging
 import os
-import shutil
 import shlex
-import sys
+import shutil
 import subprocess
+import sys
 import tempfile
 import threading
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
-import datetime
-from enum import Enum
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(
@@ -42,15 +42,6 @@ sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-import file_util
-from log_util import log_function_call, log_metric
-
-from counters import Counters
-from timer import Timer
-from import_differ.import_differ import ImportDiffer
-from tools.import_validation.runner import ValidationRunner
-from tools.import_validation.result import ValidationStatus, ValidationResult
-from tools.import_validation.validation_config import merge_and_save_config
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -59,7 +50,18 @@ from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
+from counters import Counters
+import file_util
 from google.cloud import storage
+from import_differ.import_differ import ImportDiffer
+from log_util import log_function_call
+from log_util import log_metric
+from timer import Timer
+
+from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationStatus
+from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.validation_config import merge_and_save_config
 
 # Email address for status messages.
 _DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
@@ -388,12 +390,13 @@ class ImportExecutor:
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
-            import_tool_args = [f'-o={output_path}', 'genmcf']
-            import_tool_args.extend(input_files)
+            import_tool_args = _get_import_tool_args(
+                output_path, input_files, self.config.import_tool_num_threads)
             timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
-                script_path='-XX:MaxRAMPercentage=50.0 -jar ' +
+                script_path='-XX:MaxRAMPercentage='
+                f'{self.config.import_tool_max_ram_percentage} -jar ' +
                 self.config.import_tool_path,
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
@@ -1378,6 +1381,34 @@ def _run_user_script(
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)
+
+
+def _get_cpu_count() -> int:
+    """Returns the number of CPUs available to this process."""
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:  # Not available on some platforms (e.g. macOS).
+        return os.cpu_count() or 1
+
+
+def _get_import_tool_args(output_path: str, input_files: List[str],
+                          num_threads: int) -> List[str]:
+    """Returns the command line arguments for import tool genmcf.
+
+    Args:
+        output_path: Directory to write the genmcf output to.
+        input_files: Input files (TMCF, CSV, MCF) to process.
+        num_threads: Maximum number of threads to use. The number of threads
+            passed is capped at the number of available CPUs. If not positive,
+            -n is not passed and the import tool chooses the number of threads.
+    """
+    args = [f'-o={output_path}']
+    if num_threads > 0:
+        num_threads = min(num_threads, _get_cpu_count())
+        args.append(f'-n={num_threads}')
+    args.append('genmcf')
+    args.extend(input_files)
+    return args
 
 
 def _clean_time(

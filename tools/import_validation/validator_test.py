@@ -13,18 +13,19 @@
 # limitations under the License.
 
 import csv
+from datetime import datetime
 import os
 import sys
 import tempfile
-import pandas as pd
 import unittest
-from datetime import datetime
+
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
-from validator import Validator
 from result import ValidationStatus
+from validator import Validator
 
 
 class TestMaxDateLatestValidation(unittest.TestCase):

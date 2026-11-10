@@ -56,21 +56,22 @@ It only operates on files that are named '*_CSV.zip'.
 Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/sv_mappings.csv
 """
 
-import requests
-from absl import app
-from absl import logging
-import os
+import codecs
+import csv
+from datetime import datetime
+from itertools import repeat
 import json
 import multiprocessing
-import csv
+import os
 import re
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+import requests
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
-from absl import flags
-import zipfile
-import codecs
-from itertools import repeat
-from datetime import datetime
 
 FLAGS = flags.FLAGS
 

@@ -20,7 +20,9 @@ This script proecsses the file:
   The dataset lists all active and upcoming Superfund sites and their vulnerability to 12 natural hazards using a vulnerability score between 0 and 100. Additional risk/exposure metrices are also imported.
 """
 import os
-from absl import app, flags
+
+from absl import app
+from absl import flags
 import pandas as pd
 
 FLAGS = flags.FLAGS

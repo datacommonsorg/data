@@ -1,10 +1,13 @@
+from collections import Counter
+import csv
 import datetime
 import os
-import csv
 import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
-from absl import logging, flags, app
-from collections import Counter
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 current_year = datetime.datetime.now().year

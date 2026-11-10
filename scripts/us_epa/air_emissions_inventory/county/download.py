@@ -1,5 +1,6 @@
-import pandas as pd
 import os
+
+import pandas as pd
 
 input_directory = r'scripts/us_epa/air_emissions_inventory/input_html_files/'
 os.mkdir("scripts/us_epa/air_emissions_inventory/input_files")

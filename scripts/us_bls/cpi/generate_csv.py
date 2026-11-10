@@ -17,28 +17,29 @@ Downloads and converts BLS CPI raw csv files to csv files of two columns:
 
 Usage: python3 generate_csv.py
 '''
-from curl_cffi import requests
-import pandas as pd
-from absl import flags
-from absl import app
-from absl import logging
-from retry import retry
 # FIX: Monkey-patch for Python 3.10+ where collections.Mapping was moved to collections.abc
-
 import collections
 import collections.abc
 
+from absl import app
+from absl import flags
+from absl import logging
+from curl_cffi import requests
+import pandas as pd
+from retry import retry
+
 collections.Mapping = collections.abc.Mapping
-import frozendict
 import os
 from pathlib import Path
-'''Defining the retry_method which will accepts below parameters
-   url: input url
-   headers: headers if you want to set
-'''
+
+import frozendict
+
 global buffer
 
 
+# Defining the retry_method which will accepts below parameters
+#   url: input url
+#   headers: headers if you want to set
 @retry(tries=3, delay=5, backoff=5)
 def retry_method(url, header):
     # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.

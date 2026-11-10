@@ -13,12 +13,13 @@
 # limitations under the License.
 """Generates GeoJSON MCF for Indian State and Districts."""
 
-import os
 import json
+import os
+
 from absl import app
 from absl import flags
-from india.geo.states import IndiaStatesMapper
 from india.formatters import CodeFormatter
+from india.geo.states import IndiaStatesMapper
 
 FLAGS = flags.FLAGS
 

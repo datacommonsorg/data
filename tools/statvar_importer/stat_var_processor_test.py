@@ -31,7 +31,8 @@ sys.path.append(
 
 from counters import Counters
 from mcf_diff import diff_mcf_files
-from stat_var_processor import StatVarDataProcessor, process
+from stat_var_processor import StatVarDataProcessor
+from stat_var_processor import process
 
 
 class TestStatVarProcessor(unittest.TestCase):
