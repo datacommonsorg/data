@@ -40,11 +40,15 @@ from google.cloud import secretmanager
 import log_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('import_name', '', 'Absoluate import name.')
-flags.DEFINE_string('import_config', '{}', 'Import executor configuration.')
-flags.DEFINE_boolean(
-    'enable_cloud_logging', True,
-    'Enable Google Cloud Logging for proper severity levels in GCP.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('import_name', '', 'Absoluate import name.')
+    flags.DEFINE_string('import_config', '{}', 'Import executor configuration.')
+    flags.DEFINE_boolean(
+        'enable_cloud_logging', True,
+        'Enable Google Cloud Logging for proper severity levels in GCP.')
 
 
 def _override_configs(import_name: str, import_dir: str,
@@ -152,4 +156,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
