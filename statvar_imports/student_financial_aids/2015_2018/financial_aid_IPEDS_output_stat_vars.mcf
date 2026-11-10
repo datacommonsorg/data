@@ -1,0 +1,2810 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/IPEDS/2015_2018/input.csv --pv_map=statvar_imports/IPEDS/2015_2018/pvmap.csv --output_path=statvar_imports/IPEDS/2015_2018/output --config_file=statvar_imports/IPEDS/2015_2018/metadata.csv" on 2025-12-12 10:07:12.602314
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionAll_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionAll_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionAll_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionAll_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionAll_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionAll_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPublic_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPublic_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPublic_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPublic_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_InstitutionControlPublic_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_AllInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_AllInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_FourYearBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_FourYearBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_FourYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_FourYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_LessThanTwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_LessThanTwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_TwoYearInstitution_Adjusted
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Adjusted
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_TwoYearInstitution_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Received
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionAll_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionAll_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionAll_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionAll_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionAll_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPublic_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPublic_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPublic_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_InstitutionControlPublic_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_AllInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:AllInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_FourYearBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_FourYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_FourYearOtherThanBachelorsCohort_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:FourYearOtherThanBachelorsCohort
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_LessThanTwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:LessThanTwoYearInstitution
+institutionType: dcid:Graduation
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_TwoYearInstitution_Graduation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionLevel: dcid:TwoYearInstitution
+institutionType: dcid:Graduation
+
