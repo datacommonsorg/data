@@ -31,10 +31,10 @@ key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
 100～104歳,age,[100 104 Years]
 105～109歳,age,[105 109 Years]
 110歳以上,age,[110 - Years]
-（再掲）15歳未満,age,Upto14Years
+（再掲）15歳未満,age,YearsUpto14
 （再掲）15～64歳,age,[15 64 Years]
 （再掲）65歳以上,age,[65 - Years]
-15歳未満,age,Upto14Years
+15歳未満,age,YearsUpto14
 15～64歳,age,[15 64 Years]
 65歳以上,age,[65 - Years]
 男,gender,Male
