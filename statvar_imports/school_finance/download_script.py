@@ -41,11 +41,15 @@ def add_year_column(filepath: str, year: int):
     try:
         # Determine file type and read the DataFrame
         if filepath.endswith('.csv'):
-            df = pd.read_csv(filepath, encoding='utf-8', low_memory=False, dtype=str)
+            df = pd.read_csv(filepath,
+                             encoding='utf-8',
+                             low_memory=False,
+                             dtype=str)
         elif filepath.endswith('.xlsx'):
             df = pd.read_excel(filepath, dtype=str)
         else:
-            logging.warning(f"Unsupported file type for year column addition: {filepath}")
+            logging.warning(
+                f"Unsupported file type for year column addition: {filepath}")
             return
 
         # Added the 'year' column
@@ -61,7 +65,7 @@ def add_year_column(filepath: str, year: int):
         elif filepath.endswith('.xlsx'):
             with pd.ExcelWriter(filepath) as writer:
                 df.to_excel(writer, index=False, sheet_name='Sheet1')
-            
+
         logging.info(
             f"Added 'year' column with value {year} as the FIRST column to {os.path.basename(filepath)}"
         )
@@ -70,13 +74,12 @@ def add_year_column(filepath: str, year: int):
         logging.error(f"Could not add year column to {filepath}: {e}")
         # Kill the script immediately so you don't get bad data
         raise RuntimeError(e)
-        
-
 
 
 def main(_):
     os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
-    logging.info(f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
+    logging.info(
+        f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
 
     # CRDC data typically follows an odd-year reporting schedule (e.g., 2009-10, 2011-12)
     years_to_try = list(range(_START_YEAR, 2018, 2)) + list(
@@ -90,7 +93,8 @@ def main(_):
         temp_output_dir = os.path.join(_OUTPUT_DIRECTORY, f"{year_range}")
         os.makedirs(temp_output_dir, exist_ok=True)
         logging.info(f"Starting download process for year range {year_range}")
-        logging.info(f"Download Params: url={url}, "f"output_dir='{temp_output_dir}'")
+        logging.info(f"Download Params: url={url}, "
+                     f"output_dir='{temp_output_dir}'")
 
         success = download_file(url=url,
                                 output_folder=temp_output_dir,
@@ -99,17 +103,17 @@ def main(_):
         if not success:
             logging.warning(
                 f"Failed to download or process data for year {year}. "
-                f"Cleaning up temporary directory and continuing to next year."
-            )
+                f"Cleaning up temporary directory and continuing to next year.")
             # This is the 'cleanup' action being performed
             shutil.rmtree(temp_output_dir, ignore_errors=True)
             continue
 
-        logging.info(f"Successfully downloaded and extracted data for {year_range}.")
+        logging.info(
+            f"Successfully downloaded and extracted data for {year_range}.")
 
         # Find, rename, and move the files we want to keep
         search_pattern = os.path.join(temp_output_dir, '**', '*')
-        
+
         # Define the target category
         category_name = "school finance"
         category_dir = _OUTPUT_DIRECTORY
@@ -121,15 +125,17 @@ def main(_):
             filename = os.path.basename(item_path)
             base, extension = os.path.splitext(filename)
             extension = extension.lower()
-            
+
             # Use a cleaner check for the required files
-            if (extension in ['.csv', '.xlsx'] and 
-                category_name in base.lower()):
+            if (extension in ['.csv', '.xlsx'] and
+                    category_name in base.lower()):
                 if 'lea' in base.lower() and extension == '.xlsx':
-                    logging.info(f"Skipping and removing Excel file: '{filename}' because it contains 'LEA'.")
+                    logging.info(
+                        f"Skipping and removing Excel file: '{filename}' because it contains 'LEA'."
+                    )
                     os.remove(item_path)
                     continue
-            
+
                 clean_base = re.sub(r'[^a-zA-Z0-9]+', '_', base).lower()
 
                 new_filename = f"crdc_{year_range}_{clean_base}{extension}"

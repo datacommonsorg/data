@@ -22,6 +22,8 @@ import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
+sys.modules.pop('config', None)
+sys.modules.pop('preprocess', None)
 import preprocess
 
 

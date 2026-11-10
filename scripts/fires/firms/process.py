@@ -20,6 +20,7 @@ These fire points are converted to S2Cells of level 13.
 import ast
 import os
 import sys
+import time
 import pandas as pd
 
 from absl import app
@@ -68,7 +69,7 @@ def _download_fires_csv(urls: list, output_csv: str):
                                                  retries=3,
                                                  retry_secs=300)
             if not csv_data or ',' not in csv_data:
-                logging.debug(f'Failed to download csv data. retrying.')
+                logging.debug('Failed to download csv data. retrying.')
                 time.sleep(100)
             else:
                 break
