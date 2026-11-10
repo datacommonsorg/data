@@ -79,14 +79,14 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --output_counters=counters/japan_census_counters.csv
 ```
 
-### Run Sample Integration Test (Offline)
+### Run Sample Integration Test
 
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=test_data/sample_input.csv \
   --pv_map=japan_census_pv_map.csv \
   --config_file=japan_census_metadata.csv \
-  --existing_statvar_mcf=/dev/null \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_path=test_data/sample_expected_output
 ```
 

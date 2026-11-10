@@ -233,12 +233,15 @@ def fetch_dbview_csv(
     for attempt in range(4):
         try:
             session = _create_retry_session()
-            init_resp = session.get(f'{ESTAT_DBVIEW_BASE_URL}?sid={sid}',
-                                    timeout=timeout)
+            init_url = f'{ESTAT_DBVIEW_BASE_URL}?sid={sid}'
+            logging.info('GET %s (attempt %d/4)', init_url, attempt + 1)
+            init_resp = session.get(init_url, timeout=timeout)
             init_resp.raise_for_status()
 
+            model_url = f'{ESTAT_DBVIEW_BASE_URL}/api_get_model?sid={sid}'
+            logging.info('POST %s (payload_bytes=0)', model_url)
             model_resp = session.post(
-                f'{ESTAT_DBVIEW_BASE_URL}/api_get_model?sid={sid}',
+                model_url,
                 data=b'',
                 timeout=timeout,
             )
@@ -385,16 +388,26 @@ def fetch_dbview_csv(
                 'Referer':
                     f'{ESTAT_DBVIEW_BASE_URL}/file-download?sid={sid}',
             }
+            res_url = f'{ESTAT_DBVIEW_BASE_URL}/api_get_result?sid={sid}'
+            logging.info(
+                'POST %s (rows=%d, cols=%d, tops=%d)',
+                res_url,
+                len(rows_r),
+                len(cols_r),
+                len(tops_r),
+            )
             res_resp = session.post(
-                f'{ESTAT_DBVIEW_BASE_URL}/api_get_result?sid={sid}',
+                res_url,
                 data=res_payload,
                 headers=ajax_headers,
                 timeout=timeout,
             )
             res_resp.raise_for_status()
 
+            dl_page_url = f'{ESTAT_DBVIEW_BASE_URL}/file-download?sid={sid}'
+            logging.info('GET %s', dl_page_url)
             dl_page_resp = session.get(
-                f'{ESTAT_DBVIEW_BASE_URL}/file-download?sid={sid}',
+                dl_page_url,
                 timeout=timeout,
             )
             dl_page_resp.raise_for_status()
@@ -431,8 +444,15 @@ def fetch_dbview_csv(
                 'totalNum': '',
                 'toNum': '',
             }
+            create_url = f'{ESTAT_DBVIEW_BASE_URL}/api_download_create?sid={sid}'
+            logging.info(
+                'POST %s (charset=%s, fileFormat=%s)',
+                create_url,
+                create_payload['charset'],
+                create_payload['fileFormat'],
+            )
             create_resp = session.post(
-                f'{ESTAT_DBVIEW_BASE_URL}/api_download_create?sid={sid}',
+                create_url,
                 data=create_payload,
                 headers=ajax_headers,
                 timeout=timeout,
@@ -451,8 +471,15 @@ def fetch_dbview_csv(
                 'path1': create_json[0]['filePath'],
                 'name1': finfo['fileName'],
             }
+            run_url = f'{ESTAT_DBVIEW_BASE_URL}/api_download_run?sid={sid}'
+            logging.info(
+                'POST %s (index=%s, name1=%s)',
+                run_url,
+                run_payload['index'],
+                run_payload['name1'],
+            )
             run_resp = session.post(
-                f'{ESTAT_DBVIEW_BASE_URL}/api_download_run?sid={sid}',
+                run_url,
                 data=run_payload,
                 headers=ajax_headers,
                 timeout=timeout,
@@ -465,7 +492,15 @@ def fetch_dbview_csv(
         except Exception as err:  # pylint: disable=broad-except
             last_err = err
             if attempt < 3:
-                time.sleep(2.0 * (attempt + 1))
+                sleep_sec = 2.0 * (attempt + 1)
+                logging.warning(
+                    'dbview download attempt %d/4 for sid=%s failed: %s; retrying in %.1fs',
+                    attempt + 1,
+                    sid,
+                    err,
+                    sleep_sec,
+                )
+                time.sleep(sleep_sec)
     raise RuntimeError(
         f'Failed to download dbview CSV for sid={sid}: {last_err}'
     ) from last_err
@@ -514,6 +549,12 @@ def fetch_dashboard_csv(
                 'IsSeasonalAdjustment':
                     dashboard_params.get('IsSeasonalAdjustment', '1'),
             }
+            logging.info(
+                'GET %s (params=%s, attempt=%d/4)',
+                ESTAT_DASHBOARD_DOWNLOAD_URL,
+                params,
+                attempt + 1,
+            )
             resp = session.get(
                 ESTAT_DASHBOARD_DOWNLOAD_URL,
                 params=params,

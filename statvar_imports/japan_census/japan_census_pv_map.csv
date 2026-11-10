@@ -39,7 +39,10 @@ key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
 65歳以上,age,[65 - Years]
 男,gender,Male
 女,gender,Female
-人口【人】,measuredProperty,count,populationType,Person,value,{Number},#Filter,"Data != 'NA'"
+人口【人】,measuredProperty,count,populationType,Person,#Eval,"value='' if Data == '人口【人】' else Data",#Filter,"Data != 'NA'"
+13100,#IgnoreRow,True
+15216,#IgnoreRow,True
+39202,#IgnoreRow,True
 割合【%】,#ignore,True,value,{Number}
 年齢，男女別割合【%】,#ignore,True,value,{Number}
 人口性比,#ignore,True,value,{Number}
