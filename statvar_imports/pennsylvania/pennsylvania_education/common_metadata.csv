@@ -1,0 +1,5 @@
+parameter,value
+#places_within,
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+header_rows,1
+url,https://data.pa.gov/browse?sortBy=relevance&page=1&pageSize=20
