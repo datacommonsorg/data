@@ -26,16 +26,9 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 if _MODULE_DIR not in sys.path:
     sys.path.insert(0, _MODULE_DIR)
 
-from absl import flags
-
-for _flag_name in ('input_csv', 'output_csv'):
-    if _flag_name in flags.FLAGS:
-        delattr(flags.FLAGS, _flag_name)
-
-from generate_rollups import FLAGS
 from generate_rollups import generate_rollups
-from generate_rollups import main
 from generate_rollups import process_rollups
+from generate_rollups import run
 
 
 class GenerateRollupsTest(unittest.TestCase):
@@ -43,7 +36,6 @@ class GenerateRollupsTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
-        FLAGS.mark_as_parsed()
         self.sample_raw_data = pd.DataFrame({
             'Jahr': [2020, 2020, 2020, 2020],
             'RaumSort': [1, 1, 1, 1],
@@ -179,25 +171,21 @@ class GenerateRollupsTest(unittest.TestCase):
         self.assertEqual(len(result_df), 1)
         self.assertEqual(result_df.iloc[0]['Arbeitsstaetten'], 100.0)
 
-    def test_main_success(self):
-        """Verifies that main executes successfully with valid flag parameters."""
+    def test_run_success(self):
+        """Verifies that run executes successfully with valid parameters."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             input_csv = os.path.join(tmp_dir, 'input.csv')
             output_csv = os.path.join(tmp_dir, 'output.csv')
             self.sample_raw_data.to_csv(input_csv,
                                         index=False,
                                         encoding='utf-8')
-            FLAGS.input_csv = input_csv
-            FLAGS.output_csv = output_csv
-            main([])
+            run(input_csv, output_csv)
             self.assertTrue(os.path.exists(output_csv))
 
-    def test_main_failure_logs_fatal(self):
-        """Verifies that main logs a fatal error with exc_info on exception."""
-        FLAGS.input_csv = '/non/existent/path/file.csv'
-        FLAGS.output_csv = '/tmp/dummy_output.csv'
+    def test_run_failure_logs_fatal(self):
+        """Verifies that run logs a fatal error with exc_info on exception."""
         with patch('generate_rollups.logging.fatal') as mock_fatal:
-            main([])
+            run('/non/existent/path/file.csv', '/tmp/dummy_output.csv')
             mock_fatal.assert_called_once()
             self.assertIn('Failed to generate rollups',
                           mock_fatal.call_args[0][0])

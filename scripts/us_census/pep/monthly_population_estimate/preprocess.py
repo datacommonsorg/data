@@ -26,32 +26,100 @@ import sys
 import time
 import warnings
 
-import numpy as np
-import requests
-
-warnings.filterwarnings('ignore')
 from absl import app
 from absl import flags
 from absl import logging
+import numpy as np
 import pandas as pd
+import requests
+
+warnings.filterwarnings('ignore')
 
 pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
+
 _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
+_BASELINE_YEAR = 2025
+_SESSION = None
 
-#Creating folder to store the raw data from source
+_PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_PEP_DIR, '../..'))
+for path_entry in (_SCRIPTS_DIR, _PEP_DIR):
+    if path_entry not in sys.path:
+        sys.path.insert(0, path_entry)
+from us_census.pep.download_util import TransientDownloadError
+from us_census.pep.download_util import atomic_to_excel
+from us_census.pep.download_util import create_retry_session as _create_retry_session
+from us_census.pep.download_util import download_with_retry
+from us_census.pep.download_util import head_with_html_retry as _head_with_html_retry
+
+
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
+def parse_nat_total_txt(text_or_file_path: str) -> pd.DataFrame:
+    """Parses nat-total.txt content or file path into a DataFrame, filtering notes and prose."""
+    cols = [
+        "Year and Month", "Date", "Resident Population",
+        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
+        "Civilian NonInstitutionalized Population"
+    ]
+    months = {
+        'january', 'february', 'march', 'april', 'may', 'june', 'july',
+        'august', 'september', 'october', 'november', 'december'
+    }
+    rows = []
+    if os.path.exists(text_or_file_path):
+        with open(text_or_file_path, 'r', encoding='latin1') as f_in:
+            lines = f_in.readlines()
+    else:
+        lines = text_or_file_path.splitlines()
+    for line in lines:
+        line_clean = line.strip()
+        if not line_clean:
+            continue
+        tokens = line_clean.split()
+        if re.match(r'^\d{4}$', tokens[0]):
+            rows.append([tokens[0], np.nan, np.nan, np.nan, np.nan, np.nan])
+            continue
+        if (tokens[0].lower() in months and len(tokens) >= 4 and
+                tokens[1].isdigit()):
+            data_tokens = tokens[2:]
+            if data_tokens[0].lower() == '(census)':
+                data_tokens = data_tokens[1:]
+            if all(re.match(r'^[0-9,]+$', t) for t in data_tokens):
+                row = [tokens[0], tokens[1]]
+                for i in range(4):
+                    if i < len(data_tokens):
+                        row.append(data_tokens[i].replace(',', ''))
+                    else:
+                        row.append(np.nan)
+                rows.append(row)
+    return pd.DataFrame(rows, columns=cols)
+
+
+# Path to store the raw data from source
 raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              "raw_data")
-if not os.path.exists(raw_data_path):
-    os.mkdir(raw_data_path)
 
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -206,8 +274,9 @@ class CensusUSACountryPopulation:
         self._file_name = None
         self._scaling_factor = 1
         # Finding the Dir Path
-        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
-            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
+        dir_name = os.path.dirname(self._cleaned_csv_file_path)
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
 
     def _load_data(self, file: str) -> pd.DataFrame:
         """
@@ -314,19 +383,10 @@ class CensusUSACountryPopulation:
                 self._df = pd.concat([self._df, df], ignore_index=True)
 
             self._df = self._df.sort_values(by=['Date', 'date_range'],
-                                            ascending=False)
-            # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
+                                            ascending=[False, True])
             self._df = self._df.drop_duplicates("Date", keep="last")
-            self._df = self._df.drop(['date_range'], axis=1)
-            float_col = self._df.select_dtypes(include=['float64'])
-            for col in float_col.columns.values:
-                try:
-                    self._df[col] = self._df[col].astype('int64')
-                except:
-                    pass
-            self._df.to_csv(self._cleaned_csv_file_path, index=False)
         except Exception as e:
-            logging.fatal(f'Error when processing file:-{e}')
+            raise RuntimeError(f'Error when processing file: {e}') from e
         return True
 
     def _generate_mcf(self, df_cols: list) -> None:
@@ -420,9 +480,12 @@ class CensusUSACountryPopulation:
         cleaned CSV file, MCF file and TMCF file.
         """
         #input_path = FLAGS.input_path
-        ip_files = os.listdir(self.input_path)
+        ip_files = [
+            f for f in sorted(os.listdir(self.input_path))
+            if os.path.isfile(os.path.join(self.input_path, f))
+        ]
         self.input_files = [
-            self.input_path + os.sep + file for file in ip_files
+            os.path.join(self.input_path, file) for file in ip_files
         ]
         if len(self.input_files) == 0:
             logging.info("No files to process")
@@ -437,15 +500,28 @@ class CensusUSACountryPopulation:
             if result:
                 processed_count += 1
             else:
-                logging.fatal(f'Failed to process {file}')
+                raise RuntimeError(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
-        if total_files_to_process > 0 & (processed_count
-                                         == total_files_to_process):
+        if total_files_to_process > 0 and (processed_count
+                                           == total_files_to_process):
+            self._df = self._df.sort_values(by=['Date', 'date_range'],
+                                            ascending=[False, True])
+            self._df = self._df.drop_duplicates("Date", keep="last")
+            self._df = self._df.drop(['date_range'], axis=1)
+            float_col = self._df.select_dtypes(include=['float64'])
+            for col in float_col.columns.values:
+                try:
+                    self._df[col] = self._df[col].astype('Int64')
+                except Exception:
+                    pass
+            self._df.to_csv(self._cleaned_csv_file_path,
+                            index=False,
+                            float_format='%.0f')
             self._generate_mcf(self._df.columns)
             self._generate_tmcf(self._df.columns)
         else:
-            logging.fatal(
-                "Aborting output files as no of files to process not matching processed files"
+            raise RuntimeError(
+                f"Aborting output files: expected {total_files_to_process} files to process, but processed {processed_count}"
             )
 
 
@@ -459,25 +535,33 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
-    # This method checks for URLs from 2030 down to 2021. If a valid URL is found for any year, the method stops and adds it to the download URL.
-    #
-    with requests.Session() as session:
-        for url in urls_to_scan:
-            for future_year in range(2030, 2020, -1):
-                YEAR = future_year
-
-                url_to_check = url.format(YEAR=YEAR)
-                try:
-                    check_url = session.head(url_to_check,
-                                             allow_redirects=True,
-                                             timeout=5)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                        break
-
-                except requests.exceptions.RequestException as e:
-                    logging.error(f"URL is not accessible {url_to_check}: {e}")
+    # Check for URLs from dynamic future year down to _BASELINE_YEAR.
+    max_future_year = dt.today().year + 1
+    session = _get_session()
+    for url in urls_to_scan:
+        found_url = None
+        for future_year in range(max_future_year, _BASELINE_YEAR - 1, -1):
+            YEAR = future_year
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = _head_with_html_retry(session,
+                                                  url_to_check,
+                                                  timeout=10)
+                if check_url.status_code == 200:
+                    found_url = url_to_check
+                    break
+            except (TransientDownloadError,
+                    requests.exceptions.RequestException, OSError,
+                    ValueError) as e:
+                logging.debug(f"URL is not accessible {url_to_check}: {e}")
+        if found_url:
+            _FILES_TO_DOWNLOAD.append({"download_path": found_url})
+        else:
+            baseline_url = url.format(YEAR=_BASELINE_YEAR)
+            logging.info(
+                f"No future year URL found; falling back to baseline: {baseline_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": baseline_url})
 
 
 def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
@@ -598,91 +682,71 @@ def download_files():
     """
     This method allows to download the input files.
     """
-    global _FILES_TO_DOWNLOAD
-    max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
-        file_name = None
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name'] > 5):
-            file_name = file_to_dowload['file_name']
-        else:
-            file_name = url.split('/')[-1]
-        retry_number = 0
+    global _FILES_TO_DOWNLOAD, _SESSION
+    session = _get_session()
+    os.makedirs(raw_data_path, exist_ok=True)
+    os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
+    try:
+        for file_to_dowload in _FILES_TO_DOWNLOAD:
+            url = file_to_dowload['download_path']
+            if file_to_dowload.get('file_name', '').strip():
+                file_name = file_to_dowload['file_name'].strip()
+            else:
+                file_name = url.split('/')[-1]
 
-        is_file_downloaded = False
-        while not is_file_downloaded:
-            try:
-                df = None
-                file_name = url.split("/")[-1]
+            raw_file_dest = os.path.join(raw_data_path, file_name)
+            retry_number = 0
+            is_file_downloaded = False
+            while not is_file_downloaded:
+                try:
+                    download_with_retry(session, url, raw_file_dest)
 
-                if ".xls" in url:
-                    df = pd.read_excel(url, header=_HEADER)
-                    df.to_excel(os.path.join(raw_data_path, file_name),
-                                index=False,
-                                header=False,
-                                engine='xlsxwriter')
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                header=False,
-                                engine='xlsxwriter')
-                elif ".csv" in url:
-                    with requests.get(url, stream=True) as response:
-                        response.raise_for_status()
-                        if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
-                                f.write(response.content)
-                    file_name = file_name.replace(".csv", ".xlsx")
-                    df = pd.read_csv(url, header=None)
-                    df = _clean_csv_file(df)
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                engine='xlsxwriter')
-                elif ".txt" in url:
-                    with requests.get(url, stream=True) as response:
-                        response.raise_for_status()
-                        if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
-                                f.write(response.content)
-                    file_name = file_name.replace(".txt", ".xlsx")
-                    cols = [
-                        "Year and Month", "Date", "Resident Population",
-                        "Resident Population Plus Armed Forces Overseas",
-                        "Civilian Population",
-                        "Civilian NonInstitutionalized Population"
-                    ]
-                    df = pd.read_table(url,
-                                       index_col=False,
-                                       sep=r'\s+',
-                                       engine='python',
-                                       skiprows=17,
-                                       names=cols)
-                    # Skipping 17 rows as the initial 17 rows contains the information about
-                    # the file being used, heading files spread accross multiple lines and
-                    # other irrelevant information like source/contact details.
-                    df = _clean_txt_file(df)
-                    # Multiplying the data with scaling factor 1000.
-                    for col in df.columns:
-                        if "year" not in col.lower():
-                            df[col] = df[col].apply(_mulitply_scaling_factor)
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                engine='xlsxwriter')
+                    if ".xls" in url:
+                        df = pd.read_excel(raw_file_dest, header=_HEADER)
+                        atomic_to_excel(df,
+                                        os.path.join(_INPUT_FILE_PATH,
+                                                     file_name),
+                                        index=False,
+                                        header=False,
+                                        engine='xlsxwriter')
+                    elif ".csv" in url:
+                        out_file_name = file_name.replace(".csv", ".xlsx")
+                        df = pd.read_csv(raw_file_dest, header=None)
+                        df = _clean_csv_file(df)
+                        atomic_to_excel(df,
+                                        os.path.join(_INPUT_FILE_PATH,
+                                                     out_file_name),
+                                        index=False,
+                                        engine='xlsxwriter')
+                    elif ".txt" in url:
+                        out_file_name = file_name.replace(".txt", ".xlsx")
+                        df = parse_nat_total_txt(raw_file_dest)
+                        df = _clean_txt_file(df)
+                        # Multiplying the data with scaling factor 1000.
+                        for col in df.columns:
+                            if "year" not in col.lower():
+                                df[col] = df[col].apply(
+                                    _mulitply_scaling_factor)
+                        atomic_to_excel(df,
+                                        os.path.join(_INPUT_FILE_PATH,
+                                                     out_file_name),
+                                        index=False,
+                                        engine='xlsxwriter')
+                    is_file_downloaded = True
+                except (requests.exceptions.RequestException,
+                        TransientDownloadError, pd.errors.ParserError) as e:
+                    retry_number += 1
+                    if retry_number > 3:
+                        raise RuntimeError(
+                            f"Error downloading/processing file {url}: {e}"
+                        ) from e
+                    time.sleep(2)
 
-                is_file_downloaded = True
-                logging.info(f"Downloaded file : {url}")
-
-            except Exception as e:
-                logging.error(f"Retry file download {url} - {e}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.fatal(f"Error downloading {url}")
-                    logging.error("Exit from script")
-                    sys.exit(1)
-    return True
+            logging.info(f"Downloaded and processed file : {url}")
+        return True
+    finally:
+        session.close()
+        _SESSION = None
 
 
 def main(_):
@@ -708,4 +772,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

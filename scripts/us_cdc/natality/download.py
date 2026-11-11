@@ -32,11 +32,16 @@ from selenium.webdriver.support.ui import Select
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 
-flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
-                    'Directory where downloaded raw data files will be saved.')
-flags.DEFINE_boolean('headless', True, 'Run Chrome in headless mode.')
-flags.DEFINE_integer('timeout_seconds', 180,
-                     'Maximum time to wait for a download to complete.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir', _DEFAULT_OUTPUT_DIR,
+        'Directory where downloaded raw data files will be saved.')
+    flags.DEFINE_boolean('headless', True, 'Run Chrome in headless mode.')
+    flags.DEFINE_integer('timeout_seconds', 180,
+                         'Maximum time to wait for a download to complete.')
+
 
 _FLAGS = flags.FLAGS
 
@@ -355,4 +360,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
