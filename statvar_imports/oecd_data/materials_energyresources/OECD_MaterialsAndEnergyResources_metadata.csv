@@ -1,0 +1,13 @@
+parameter,value
+url,
+description,The amount of Minerals and Energy Resources extracted from different countires during different years
+#place_type,country
+#places_within,
+start_date,2000
+end_date,2022
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
