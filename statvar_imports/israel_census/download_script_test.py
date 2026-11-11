@@ -67,6 +67,22 @@ class DownloadScriptTest(unittest.TestCase):
                 session=mock_session,
             )
 
+    def test_fetch_cbs_series_path_rows_raises_on_incomplete_series_after_retries(
+            self):
+        mock_session = mock.MagicMock()
+        resp = mock.MagicMock()
+        resp.content = (b'id,time_name,obs_time_period,obs_value\n'
+                        b'3700,Year,2024-01,10065.5\n')
+        mock_session.get.return_value = resp
+
+        with self.assertRaises(RuntimeError):
+            download_script.fetch_cbs_series_path_rows(
+                path_id='2,1,1,1',
+                session=mock_session,
+                min_unique_series=5,
+            )
+        self.assertEqual(mock_session.get.call_count, 3)
+
     def test_fetch_cbs_boardsgenerator_census_to_csv(self):
         mock_session = mock.MagicMock()
         resp = mock.MagicMock()

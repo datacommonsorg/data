@@ -63,7 +63,7 @@
       "scope": {
         "variables": {
           "regex": [
-            "^Count_Person_(0To14Years|5OrMoreYears.*|15OrMoreYears.*|15To24Years.*|15To39Years.*|25To29Years.*|25To34Years.*|30To34Years.*|35To39Years.*|40To44Years.*|45To49Years.*|50To54Years.*|55To59Years.*|60To64Years.*|65OrMoreYears.*|65To69Years.*|70To74Years.*|75To79Years.*|80To84Years.*|85OrMoreYears.*|Male|Female|Urban.*|Rural.*|Employed.*|NeverMarried|MarriedAndNotSeparated|Divorced|Separated|Widowed)$"
+            "^Count_Person_(0To14Years.*|5OrMoreYears.*|15OrMoreYears.*|15To24Years.*|15To39Years.*|25To29Years.*|25To34Years.*|30To34Years.*|35To39Years.*|40To44Years.*|45To49Years.*|50To54Years.*|55To59Years.*|60To64Years.*|65OrMoreYears.*|65To69Years.*|70To74Years.*|75To79Years.*|80To84Years.*|85OrMoreYears.*|Male|Female|Urban.*|Rural.*|Employed.*|NeverMarried|MarriedAndNotSeparated|Divorced|Separated|Widowed)$"
           ]
         }
       },

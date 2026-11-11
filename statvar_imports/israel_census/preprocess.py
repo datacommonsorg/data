@@ -150,7 +150,7 @@ def _format_number(val: float) -> str:
 def _read_mifkad_table_rows(fpath: str) -> list[list[str]]:
     """Reads rows from a raw CBS Mifkad table (.xls/.xlsx binary or .csv text)."""
     if not os.path.exists(fpath):
-        return []
+        raise FileNotFoundError(f'Missing Mifkad table file: {fpath}')
     with open(fpath, 'rb') as fp:
         head = fp.read(8)
     if head.startswith(b'\xd0\xcf\x11\xe0') or head.startswith(b'PK\x03\x04'):
@@ -185,6 +185,9 @@ def _convert_dem1_2_xls_to_csv(xls_path: str, dest_path: str) -> None:
             vals.append('' if val is None else _format_number(val))
         if any(vals):
             rows_by_reg[reg] = vals
+
+    if not rows_by_reg:
+        raise RuntimeError(f'No data rows extracted from {xls_path}')
 
     os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
     with open(dest_path, 'w', encoding='utf-8', newline='') as fp:
@@ -236,6 +239,9 @@ def _convert_dem1_14_xls_to_csv(xls_path: str, dest_path: str) -> None:
             val = _parse_number(row[col_idx])
             if val is not None:
                 cell_map[(age_suf, marital_suf)] = _format_number(val)
+
+    if not cell_map:
+        raise RuntimeError(f'No data rows extracted from {xls_path}')
 
     headers = ['Year', 'Region', 'Age group'] + [m[1] for m in marital_cols]
     os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
@@ -297,6 +303,9 @@ def _convert_emp_xls_to_csv(
             else:
                 cell_map[(marital_suf, age_suf)] = _format_number(val)
 
+    if not cell_map and not widowed_15_39:
+        raise RuntimeError(f'No data rows extracted from {xls_path}')
+
     headers = ['Year', 'Region', 'code'] + [a[1] for a in age_cols]
     os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
     with open(dest_path, 'w', encoding='utf-8', newline='') as fp:
@@ -320,48 +329,50 @@ def _convert_emp_xls_to_csv(
 
 def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
     """Converts the 5 .xls files in raw_dir into CSVs and copies existing CSV files into output_dir."""
+    if not os.path.isdir(raw_dir):
+        raise FileNotFoundError(f'Input directory does not exist: {raw_dir}')
     os.makedirs(output_dir, exist_ok=True)
 
     # 1. Convert only the 5 Mifkad .xls tables into .csv tables in output_dir
-    _convert_dem1_2_xls_to_csv(
-        os.path.join(raw_dir, 'dem1_2.xls'),
-        os.path.join(output_dir, 'isr_urban_rural_gender_aa1_2008.csv'),
+    dem1_2_path = os.path.join(raw_dir, 'dem1_2.xls')
+    if os.path.exists(dem1_2_path):
+        _convert_dem1_2_xls_to_csv(
+            dem1_2_path,
+            os.path.join(output_dir, 'isr_urban_rural_gender_aa1_2008.csv'),
+        )
+    dem1_14_path = os.path.join(raw_dir, 'dem1_14.xls')
+    if os.path.exists(dem1_14_path):
+        _convert_dem1_14_xls_to_csv(
+            dem1_14_path,
+            os.path.join(output_dir, 'isr_age_maritalstatus_2008.csv'),
+        )
+    emp_tables = (
+        ('lab4_14.xls', 'isr_menemployed_age_martialstatus_2008.csv', '_Male',
+         False),
+        ('lab4_14_1.xls', 'isr_totalemployed_age_martialstatus_2008.csv', '',
+         False),
+        ('lab4_14_2.xls', 'isr_womenemployed_age_martialstatus_2008.csv',
+         '_Female', True),
     )
-    _convert_dem1_14_xls_to_csv(
-        os.path.join(raw_dir, 'dem1_14.xls'),
-        os.path.join(output_dir, 'isr_age_maritalstatus_2008.csv'),
-    )
-    _convert_emp_xls_to_csv(
-        os.path.join(raw_dir, 'lab4_14.xls'),
-        os.path.join(output_dir, 'isr_menemployed_age_martialstatus_2008.csv'),
-        gender_suf='_Male',
-        is_female=False,
-    )
-    _convert_emp_xls_to_csv(
-        os.path.join(raw_dir, 'lab4_14_1.xls'),
-        os.path.join(output_dir,
-                     'isr_totalemployed_age_martialstatus_2008.csv'),
-        gender_suf='',
-        is_female=False,
-    )
-    _convert_emp_xls_to_csv(
-        os.path.join(raw_dir, 'lab4_14_2.xls'),
-        os.path.join(output_dir,
-                     'isr_womenemployed_age_martialstatus_2008.csv'),
-        gender_suf='_Female',
-        is_female=True,
-    )
+    for xls_name, csv_name, gender_suf, is_female in emp_tables:
+        xls_path = os.path.join(raw_dir, xls_name)
+        if os.path.exists(xls_path):
+            _convert_emp_xls_to_csv(
+                xls_path,
+                os.path.join(output_dir, csv_name),
+                gender_suf=gender_suf,
+                is_female=is_female,
+            )
 
     # 2. Copy all .csv files from raw_dir into output_dir without processing them
-    if os.path.isdir(raw_dir):
-        for fname in sorted(os.listdir(raw_dir)):
-            if not fname.endswith('.csv'):
-                continue
-            src_csv = os.path.join(raw_dir, fname)
-            dst_csv = os.path.join(output_dir, fname)
-            if os.path.isfile(src_csv) and os.path.abspath(
-                    src_csv) != os.path.abspath(dst_csv):
-                shutil.copy2(src_csv, dst_csv)
+    for fname in sorted(os.listdir(raw_dir)):
+        if not fname.endswith('.csv'):
+            continue
+        src_csv = os.path.join(raw_dir, fname)
+        dst_csv = os.path.join(output_dir, fname)
+        if os.path.isfile(src_csv) and os.path.abspath(
+                src_csv) != os.path.abspath(dst_csv):
+            shutil.copy2(src_csv, dst_csv)
 
     expected_set = set(EXPECTED_INPUT_TABLE_FILENAMES)
     for existing_name in os.listdir(output_dir):
@@ -370,11 +381,20 @@ def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
             logging.info('Removing stale staged file: %s', existing_path)
             os.remove(existing_path)
 
-    return [
+    staged_paths = [
         os.path.join(output_dir, fname)
         for fname in EXPECTED_INPUT_TABLE_FILENAMES
         if os.path.exists(os.path.join(output_dir, fname))
     ]
+    if not staged_paths:
+        raise RuntimeError(f'No staged CSV files generated in {output_dir}')
+    for staged_path in staged_paths:
+        with open(staged_path, 'r', encoding='utf-8') as fp:
+            row_count = sum(1 for _ in csv.reader(fp))
+        if row_count < 2:
+            raise RuntimeError(
+                f'Staged CSV file contains no data rows: {staged_path}')
+    return staged_paths
 
 
 def main(argv: list[str] | None = None) -> None:

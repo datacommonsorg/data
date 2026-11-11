@@ -18,7 +18,7 @@ This directory contains the automated import pipeline for the **Israel Central B
   - CBS region codes (`ISR`, `DIST_1`..`DIST_7`, and `SUBDIST_21`..`SUBDIST_62`) are mapped to `country/ISR` and `wikidataId/Q*` DCIDs in `israel_census_pv_map.csv`.
 - **Statistical Variables (304 unique StatVars)**:
   - Population by religion (`id=2,1,1,1` on `apis.cbs.gov.il`, `1949`–`2024+`: Series IDs `3700`, `3701`, `3702`, `3703`, `3704`)
-  - Live births, infant deaths, and total deaths by religion (`id=2,3,1` on `apis.cbs.gov.il`, `1996`–`2024+`: Series IDs `3751`, `3752`, `3755`, `3759`, `3762`, `3729`, `3747`)
+  - Live births (`1996`–`2023+`), infant deaths (`1996`–`2024+`), and total deaths (`1996`–`2024+`) by religion (`id=2,3,1` on `apis.cbs.gov.il`: Series IDs `3751`, `3752`, `3755`, `3759`, `3762`, `3729`, `3747`)
   - Cause-of-death mortality rates per 100,000 by religion and gender (`id=4,2,1` on `apis.cbs.gov.il`, `1950`–`2022+`: 36 series across 6 causes × 6 demographic groups)
   - Population by age group, gender, and marital status (`2008` Census)
   - Employed population by age group, gender, and marital status (`2008` Census)
@@ -34,16 +34,17 @@ This directory contains the automated import pipeline for the **Israel Central B
 - `download_script_test.py` & `preprocess_test.py`: Hermetic unit tests for downloading and preprocessing.
 - `test_data/`: Sample test fixtures (`sample_input.csv`, `sample_output.csv`, and `sample_output.tmcf`).
 
-## Pipeline Architecture
+## Pipeline Architecture & Data Processing Notes
 1. **`download_script.py`**:
    - Downloads the 6 CSV files and 5 `.xls` files directly from `https://apis.cbs.gov.il/series/data/path` and `https://boardsgenerator.cbs.gov.il/` into `input_files/`:
-     - `isr_population_religion_1949_2021.csv` (`id=2,1,1,1`)
-     - `isr_livebirth_infantdeath_deaths_religion_1996_2021.csv` (`id=2,3,1`)
-     - `isr_causeofdeath_religion_1950_2020.csv` (`id=4,2,1`)
-     - `isr_agebracket_gender_aa1_2008.csv`, `isr_subdistrict_age_gender_2008.csv`, `isr_subdistrict_population_gender_2008.csv` (`YishuvHandler.ashx?mode=GetCensusData`)
-     - `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls`
+     - `isr_population_religion_1949_2021.csv` (`id=2,1,1,1`): Computes `Others` (`Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion`) as `Jews and Others (3703) - Jews (3701)` and skips incomplete/anomalous provisional years where `Total (3700) < Jews and Others (3703) + Arab (3704) - 1.0`.
+     - `isr_livebirth_infantdeath_deaths_religion_1996_2021.csv` (`id=2,3,1`): Preserves the `1996`–`2008` historical Arab Christian live-birth counts (`_CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK`) when the API series `3755` starts in `2009`.
+     - `isr_causeofdeath_religion_1950_2020.csv` (`id=4,2,1`): Preserves the 36 official `2019` CBS mortality rates (`_CBS_2019_CAUSE_OF_DEATH_FALLBACK`) omitted by the `id=4,2,1` API feed between `2018` and `2020`.
+     - `isr_agebracket_gender_aa1_2008.csv`, `isr_subdistrict_age_gender_2008.csv`, `isr_subdistrict_population_gender_2008.csv` (`YishuvHandler.ashx?mode=GetCensusData`).
+     - `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls`.
 2. **`preprocess.py`**:
    - Converts only the 5 `.xls` files in `input_files/` into `.csv` tables in `staged_inputs/` (`isr_urban_rural_gender_aa1_2008.csv`, `isr_age_maritalstatus_2008.csv`, `isr_menemployed_age_martialstatus_2008.csv`, `isr_totalemployed_age_martialstatus_2008.csv`, `isr_womenemployed_age_martialstatus_2008.csv`) and copies the 6 `.csv` files from `input_files/` directly into `staged_inputs/` without modifying them.
+   - Suppresses the national `2008` `Grand totalTotal` cell in `dem1_2.xls` and the `(All ages, Total)` cell in `dem1_14.xls` so they do not conflict with the authoritative `2008` national `Count_Person` observation from `isr_population_religion_1949_2021.csv`.
 3. **`stat_var_processor.py`**:
    - Invoked from `manifest.json` in a single process over `staged_inputs/*.csv` using `israel_census_pv_map.csv` and `israel_census_metadata.csv` to generate `output_files/israel_census_output.{csv,tmcf,mcf}` and `counters/israel_census_counters.csv`.
 

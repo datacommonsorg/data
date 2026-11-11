@@ -280,7 +280,7 @@ def _get_session() -> requests.Session:
         })
         retry_strategy = retry.Retry(
             total=3,
-            connect=0,
+            connect=3,
             backoff_factor=2.0,
             status_forcelist=(429, 500, 502, 503, 504),
             allowed_methods=('GET',),
@@ -377,55 +377,71 @@ def fetch_cbs_series_path_rows(
     page_size: int = 100,
     min_unique_series: int | None = None,
 ) -> list[dict[str, str]]:
-    """Downloads direct CSV rows from apis.cbs.gov.il/series/data/path."""
+    """Downloads direct CSV rows from apis.cbs.gov.il/series/data/path with pagination and retries."""
     sess = session or _get_session()
-    params = {
-        'id': path_id,
-        'Page': 1,
-        'PageSize': page_size,
-        'format': 'csv',
-        'download': 'true',
-        'lang': 'en',
-    }
     expected_min = (min_unique_series if min_unique_series is not None else (
         _CBS_SERIES_MIN_UNIQUE_IDS.get(path_id, 1) if session is None else 1))
 
     rows: list[dict[str, str]] = []
+    unique_sids: set[str] = set()
     for attempt in range(1, 4):
         if hasattr(sess, 'cookies') and hasattr(sess.cookies, 'clear'):
             sess.cookies.clear()
-        logging.info('HTTP GET %s params=%s (attempt %d)', CBS_SERIES_API_URL,
-                     params, attempt)
-        response = sess.get(
-            CBS_SERIES_API_URL,
-            params=params,
-            timeout=(5, 30),
-        )
-        response.raise_for_status()
-        content = response.content
-        if (not content or content.lstrip().startswith(
-            (b'<!DOCTYPE', b'<html')) or
-                b'obs_time_period' not in content.splitlines()[0]):
-            raise RuntimeError(
-                f'Invalid or empty CSV returned from {CBS_SERIES_API_URL} for id={path_id}'
-            )
-        text = content.decode('utf-8-sig', errors='replace')
         rows = []
-        for row in csv.DictReader(io.StringIO(text)):
-            rows.append({
-                'series_id': (row.get('id') or row.get('series_id') or
+        page = 1
+        while True:
+            params = {
+                'id': path_id,
+                'Page': page,
+                'PageSize': page_size,
+                'format': 'csv',
+                'download': 'true',
+                'lang': 'en',
+            }
+            logging.info(
+                'HTTP GET %s params=%s (attempt %d)',
+                CBS_SERIES_API_URL,
+                params,
+                attempt,
+            )
+            response = sess.get(
+                CBS_SERIES_API_URL,
+                params=params,
+                timeout=(5, 30),
+            )
+            response.raise_for_status()
+            content = response.content
+            if (not content or content.lstrip().startswith(
+                (b'<!DOCTYPE', b'<html')) or
+                    b'obs_time_period' not in content.splitlines()[0]):
+                if page == 1:
+                    raise RuntimeError(
+                        f'Invalid or empty CSV returned from {CBS_SERIES_API_URL} for id={path_id}'
+                    )
+                break
+            text = content.decode('utf-8-sig', errors='replace')
+            page_rows: list[dict[str, str]] = []
+            for row in csv.DictReader(io.StringIO(text)):
+                page_rows.append({
+                    'series_id': (row.get('id') or row.get('series_id') or
+                                  '').strip(),
+                    'time_unit': (row.get('time_name') or
+                                  row.get('time_unit') or '').strip(),
+                    'level4': (row.get('path_level4_name') or
+                               row.get('level4') or '').strip(),
+                    'name_id': (row.get('path_name_id_name') or
+                                row.get('name_id') or '').strip(),
+                    'time_period': (row.get('obs_time_period') or
+                                    row.get('time_period') or '').strip(),
+                    'value': (row.get('obs_value') or row.get('value') or
                               '').strip(),
-                'time_unit': (row.get('time_name') or row.get('time_unit') or
-                              '').strip(),
-                'level4': (row.get('path_level4_name') or row.get('level4') or
-                           '').strip(),
-                'name_id': (row.get('path_name_id_name') or
-                            row.get('name_id') or '').strip(),
-                'time_period': (row.get('obs_time_period') or
-                                row.get('time_period') or '').strip(),
-                'value': (row.get('obs_value') or row.get('value') or
-                          '').strip(),
-            })
+                })
+            rows.extend(page_rows)
+            page_sids = {r['series_id'] for r in page_rows if r['series_id']}
+            if len(page_sids) < page_size:
+                break
+            page += 1
+
         unique_sids = {r['series_id'] for r in rows if r['series_id']}
         if len(unique_sids) >= expected_min:
             return rows
@@ -436,7 +452,10 @@ def fetch_cbs_series_path_rows(
             expected_min,
             attempt,
         )
-    return rows
+
+    raise RuntimeError(
+        f'CBS Series CSV for id={path_id} returned only {len(unique_sids)}/{expected_min} '
+        'series after 3 attempts')
 
 
 def build_population_religion_rows(
@@ -561,40 +580,51 @@ def fetch_cbs_series_datasets_to_csv(
     session: requests.Session | None = None,
 ) -> list[str]:
     """Downloads CBS Series API datasets and writes the 3 wide CSV files into output_dir."""
+    pop_cols = ('total', 'jews', 'nonjews', 'Others', 'arab')
     pop_rows = build_population_religion_rows(
         fetch_cbs_series_path_rows(CBS_SERIES_POPULATION_PATH_ID,
                                    session=session))
+    found_pop_cols = {c for r in pop_rows for c in pop_cols if r.get(c)}
+    if not pop_rows or (session is None and found_pop_cols != set(pop_cols)):
+        raise RuntimeError(
+            f'Incomplete population series columns from CBS id={CBS_SERIES_POPULATION_PATH_ID}: '
+            f'found {sorted(found_pop_cols)}')
     pop_path = os.path.join(output_dir, 'isr_population_religion_1949_2021.csv')
     _write_rows_atomically(
         pop_path,
-        ('Region', 'Year', 'total', 'jews', 'nonjews', 'Others', 'arab'),
+        ('Region', 'Year') + pop_cols,
         pop_rows,
     )
 
+    vital_cols = tuple(VITAL_STATS_SERIES_COL_MAP.values())
     vital_rows = build_vital_statistics_rows(
         fetch_cbs_series_path_rows(CBS_SERIES_VITAL_STATS_PATH_ID,
                                    session=session))
+    found_vital_cols = {c for r in vital_rows for c in vital_cols if r.get(c)}
+    if not vital_rows or (session is None and
+                          found_vital_cols != set(vital_cols)):
+        raise RuntimeError(
+            f'Incomplete vital statistics columns from CBS id={CBS_SERIES_VITAL_STATS_PATH_ID}: '
+            f'found {len(found_vital_cols)}/{len(vital_cols)}')
     vital_path = os.path.join(
         output_dir, 'isr_livebirth_infantdeath_deaths_religion_1996_2021.csv')
     _write_rows_atomically(
         vital_path,
-        (
-            'Region',
-            'Year',
-            'Jews, Popululation no Religious Classification and Non-Arab Cristians - Infant Deaths',
-            'Arab Population - Infant Deaths',
-            'Jews, Popululation no Religious Classification and Non-Arab Cristians - Live-Births',
-            'Arab Population - Live-Births',
-            'Arab Christians - Live-Births',
-            'Jews, Popululation no Religious Classification and Non-Arab Cristians - Deaths',
-            'Arab Population - Deaths',
-        ),
+        ('Region', 'Year') + vital_cols,
         vital_rows,
     )
 
     cod_rows = build_cause_of_death_rows(
         fetch_cbs_series_path_rows(CBS_SERIES_CAUSE_OF_DEATH_PATH_ID,
                                    session=session))
+    found_cod_cols = {
+        c for r in cod_rows for c in CAUSE_OF_DEATH_COLS if r.get(c)
+    }
+    if not cod_rows or (session is None and
+                        found_cod_cols != set(CAUSE_OF_DEATH_COLS)):
+        raise RuntimeError(
+            f'Incomplete cause-of-death columns from CBS id={CBS_SERIES_CAUSE_OF_DEATH_PATH_ID}: '
+            f'found {len(found_cod_cols)}/{len(CAUSE_OF_DEATH_COLS)}')
     cod_path = os.path.join(output_dir,
                             'isr_causeofdeath_religion_1950_2020.csv')
     _write_rows_atomically(
@@ -660,17 +690,16 @@ def fetch_cbs_boardsgenerator_census_to_csv(
         )
         response.raise_for_status()
         payload = response.json()
-        all_rows.extend(
-            parse_cbs_boardsgenerator_census_payload(
-                payload,
-                region_code,
-                data_mode,
-            ))
-
-    if not all_rows:
-        raise RuntimeError(
-            f'No 2008 Census rows returned from {CBS_BOARDSGENERATOR_CENSUS_URL}'
+        region_rows = parse_cbs_boardsgenerator_census_payload(
+            payload,
+            region_code,
+            data_mode,
         )
+        if not region_rows:
+            raise RuntimeError(
+                f'No 2008 Census rows returned from {CBS_BOARDSGENERATOR_CENSUS_URL} '
+                f'for region_code={region_code} data_mode={data_mode}')
+        all_rows.extend(region_rows)
 
     machoz_age: dict[str, dict[str, str]] = defaultdict(dict)
     nafa_age: dict[str, dict[str, str]] = defaultdict(dict)
@@ -693,6 +722,21 @@ def fetch_cbs_boardsgenerator_census_to_csv(
         if data_mode == 'Nafa' and subject_id in CENSUS_2008_POP_SUBJECT_COL_MAP:
             col = CENSUS_2008_POP_SUBJECT_COL_MAP[subject_id]
             nafa_pop[reg_key][col] = _format_number(raw_val)
+
+    if session is None:
+        expected_age_cols = set(CENSUS_2008_AGE_SUBJECT_COL_MAP.values())
+        expected_pop_cols = set(CENSUS_2008_POP_SUBJECT_COL_MAP.values())
+        for region_code, data_mode in CBS_CENSUS_2008_REGIONS:
+            reg_key = CENSUS_2008_REGION_CODE_MAP[region_code]
+            age_target = machoz_age if data_mode == 'Machoz' else nafa_age
+            if set(age_target.get(reg_key, {})) != expected_age_cols:
+                raise RuntimeError(
+                    f'Missing 2008 Census age subjects for region {reg_key}')
+            if data_mode == 'Nafa' and set(nafa_pop.get(
+                    reg_key, {})) != expected_pop_cols:
+                raise RuntimeError(
+                    f'Missing 2008 Census population subjects for region {reg_key}'
+                )
 
     age_fields = (
         'Region',
