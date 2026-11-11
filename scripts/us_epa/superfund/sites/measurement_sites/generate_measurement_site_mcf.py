@@ -22,11 +22,16 @@ from absl import flags
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mmsite_input_file', './data/measurement_sites.csv',
-                    'Location of the measurement_sites.csv file')
-flags.DEFINE_string(
-    'mmsite_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mmsite_input_file', './data/measurement_sites.csv',
+                        'Location of the measurement_sites.csv file')
+    flags.DEFINE_string(
+        'mmsite_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 MCF_STR = """
 Node: {dcid}
@@ -75,4 +80,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
