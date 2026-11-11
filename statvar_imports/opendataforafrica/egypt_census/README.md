@@ -52,7 +52,9 @@ The import processes 17 tables from CAPMAS Egypt Open Data:
 
 ### Geography Resolution Notes
 - **Governorate `8` (`EG-SHR` / الشرقية = Al-Sharqia) & Governorate `11` (`EG-GH` / الغربية = Gharbia)**: Corrected in `places_resolved.csv` from legacy literal translation entities (`wikidataId/Q130840` and `wikidataId/Q127167`) to their canonical Egyptian governorate DCIDs (`wikidataId/Q31074` Al-Sharqia Governorate and `wikidataId/Q30835` Gharbia Governorate).
-- **Governorate `13` (`EG-BH` / البحيرة = Beheira)**: Added `"The lake",wikidataId/Q30630` in `places_resolved.csv` to restore 12 previously unmapped Beheira observations in `pqpump`.
+- **Governorate `13` (`EG-BH` / البحيرة = Beheira)**: Added `"The lake",wikidataId/Q30630` and `"البحيـرة",wikidataId/Q30630` in `places_resolved.csv` to restore 12 previously unmapped Beheira observations in `pqpump`.
+- **Direct SDMX XML Arabic Support (`pqpump`, `ulouknf`, `wcssteb`)**: Added native Arabic governorate names (`مصر`, `القاهـرة`, `الأسكندرية`, etc.) to `places_resolved.csv` and native Arabic indicator/stage names to `pqpump_pvmap.csv` (including `scalingFactor,100` on `Count_Person_15OrMoreYears_Employed_AsAFractionOf_Count_Person_15OrMoreYears`), `ulouknf_pvmap.csv`, and `wcssteb_pvmap.csv` so CSVs converted directly from raw SDMX XML via `convert_sdmx_xml_to_csv.py` process without manual translation.
+- **Scientific-Notation Scaling (`xovpotd`)**: Expanded scientific-notation `OBS_VALUE` strings (e.g., `2E-06`, `7E-05`) to plain decimals in `convert_sdmx_xml_to_csv.py` and formatted `{Number}` as fixed-point decimal in `xovpotd_pvmap.csv` before `#Multiply,1000000000000` so single-digit-mantissa values are neither dropped nor left unscaled.
 - **Infant Mortality (`zpdksog`)**: Mapped `NAMEARAB_GOVERNORATES` via `places_resolved.csv` to eliminate a 1-index offset where `ID_GOVERNORATES=28` (`EG`) was previously mapped to South Sinai (`wikidataId/Q30815`).
 
 ## 4. Ingestion Workflow
@@ -115,6 +117,9 @@ Run the hermetic unit tests for the XML conversion routine via `unittest discove
 ### 6.2 Pre-Submission Validation Rules
 
 The import configuration in `validation_config.json` enforces:
-- Scoped freshness checks ensuring active observations across all 1,365 StatVars.
-- Record retention limits (`threshold: 0.1`) between import versions.
-- Base validation checks for lint errors (`0`) and reference resolution (`0`).
+- `check_statvar_count_non_empty`: `SQL_VALIDATOR` verifying each input table generates at least one active StatVar (`total_svs > 0`).
+- `check_2016_2018_census_education_and_labor_freshness`: Scoped `SQL_VALIDATOR` freshness check for 2018 life expectancy (`ujtdaag`), 2017-Q4 labor force (`ulouknf`), 2017 census/employment/graduates/infant mortality (`behvqtc`, `bluhqme`, `lxoyale`, `mptocre`, `pqpump`, `szfufmb`, `zkjifzd`, `zpdksog`), and 2016 education enrollment/teachers (`txbrrac`, `wcssteb`, `wtxyghf`).
+- `check_2005_2014_health_fertility_and_macro_freshness`: Scoped `SQL_VALIDATOR` freshness check for 2014 health facilities/staff (`cjczlcd`), 2014 total fertility rate (`viytqvf`), and 2005–2014-09 socio-economic macro series (`xovpotd`).
+- `check_2002_2011_health_services_incidents_freshness`: Scoped `SQL_VALIDATOR` freshness check for 2002–2011 health services and incident series (`actytif`).
+
+Deleted records check (`check_deleted_records_percent`), empty import check (`check_empty_import`), missing references check (`check_missing_refs_count`), and zero lint errors (`check_lint_error_count`) are enforced by default in the execution pipeline.

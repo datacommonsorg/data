@@ -1,21 +1,21 @@
 GOVERNORATES,ID_GOVERNORATES,NAMEARAB_GOVERNORATES,REGIONID_GOVERNORATES,INDICATORS,ID_INDICATORS,NAMEARAB_INDICATORS,FREQ,TIME_PERIOD,OBS_VALUE
-1,1,Egypt,EG,1,1,Percentage distribution %,A,2012,98
-1,1,Egypt,EG,1,1,Percentage distribution %,A,2013,99
-1,1,Egypt,EG,1,1,Percentage distribution %,A,2014,98
-1,1,Egypt,EG,1,1,Percentage distribution %,A,2015,100
-1,1,Egypt,EG,1,1,Percentage distribution %,A,2016,100
-1,1,Egypt,EG,1,1,Percentage distribution %,A,2017,100
-1,1,Egypt,EG,2,2,Estimation of employees (15 years and over),A,2012,235945
-1,1,Egypt,EG,2,2,Estimation of employees (15 years and over),A,2013,239736
-1,1,Egypt,EG,2,2,Estimation of employees (15 years and over),A,2014,242985
-1,1,Egypt,EG,2,2,Estimation of employees (15 years and over),A,2015,247788
-1,1,Egypt,EG,2,2,Estimation of employees (15 years and over),A,2016,253312
-1,1,Egypt,EG,2,2,Estimation of employees (15 years and over),A,2017,260061
-2,2,Cairo,EG-C,1,1,Percentage distribution %,A,2012,9.9
-2,2,Cairo,EG-C,1,1,Percentage distribution %,A,2013,10
-2,2,Cairo,EG-C,1,1,Percentage distribution %,A,2014,10
-2,2,Cairo,EG-C,1,1,Percentage distribution %,A,2015,10.5
-2,2,Cairo,EG-C,1,1,Percentage distribution %,A,2016,10.7
-2,2,Cairo,EG-C,1,1,Percentage distribution %,A,2017,10.6
-2,2,Cairo,EG-C,2,2,Estimation of employees (15 years and over),A,2012,23773
-2,2,Cairo,EG-C,2,2,Estimation of employees (15 years and over),A,2013,24234
+1,1,مصر,EG,1,1,التوزيع النســبى %,A,2012,98
+1,1,مصر,EG,1,1,التوزيع النســبى %,A,2013,99
+1,1,مصر,EG,1,1,التوزيع النســبى %,A,2014,98
+1,1,مصر,EG,1,1,التوزيع النســبى %,A,2015,100
+1,1,مصر,EG,1,1,التوزيع النســبى %,A,2016,100
+1,1,مصر,EG,1,1,التوزيع النســبى %,A,2017,100
+1,1,مصر,EG,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2012,235945
+1,1,مصر,EG,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2013,239736
+1,1,مصر,EG,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2014,242985
+1,1,مصر,EG,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2015,247788
+1,1,مصر,EG,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2016,253312
+1,1,مصر,EG,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2017,260061
+2,2,القاهـرة,EG-C,1,1,التوزيع النســبى %,A,2012,9.9
+2,2,القاهـرة,EG-C,1,1,التوزيع النســبى %,A,2013,10
+2,2,القاهـرة,EG-C,1,1,التوزيع النســبى %,A,2014,10
+2,2,القاهـرة,EG-C,1,1,التوزيع النســبى %,A,2015,10.5
+2,2,القاهـرة,EG-C,1,1,التوزيع النســبى %,A,2016,10.7
+2,2,القاهـرة,EG-C,1,1,التوزيع النســبى %,A,2017,10.6
+2,2,القاهـرة,EG-C,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2012,23773
+2,2,القاهـرة,EG-C,2,2,تقدير المشتغـــــلين (15 سنة فاكثر),A,2013,24234

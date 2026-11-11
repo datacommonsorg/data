@@ -15,12 +15,16 @@
 
 import argparse
 import contextlib
+from decimal import Decimal
+from decimal import InvalidOperation
 import glob
 import io
 import logging
 import os
 import sys
+import tempfile
 import xml.etree.ElementTree as ET
+
 import pandas as pd
 import sdmx
 
@@ -30,6 +34,36 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 def _strip_ns(attrib: dict[str, str]) -> dict[str, str]:
     """Strips XML namespace prefixes from attribute keys."""
     return {k.split('}')[-1]: v for k, v in attrib.items()}
+
+
+def _format_obs_value(val: object) -> object:
+    """Formats scientific-notation numeric values as plain decimal strings."""
+    if pd.isna(val):
+        return val
+    s = str(val).strip()
+    if 'e' not in s.lower():
+        return val
+    try:
+        dec = Decimal(s)
+        formatted = format(dec, 'f')
+        if '.' in formatted:
+            formatted = formatted.rstrip('0').rstrip('.')
+        return formatted or '0'
+    except InvalidOperation:
+        return val
+
+
+def _normalize_obs_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Normalizes column names and expands scientific notation in OBS_VALUE."""
+    df.columns = [str(c).lstrip('@').strip().upper() for c in df.columns]
+    if 'OBS_VALUE' not in df.columns:
+        if 'VALUE' in df.columns:
+            df = df.rename(columns={'VALUE': 'OBS_VALUE'})
+        elif 0 in df.columns or '0' in df.columns:
+            df = df.rename(columns={0: 'OBS_VALUE', '0': 'OBS_VALUE'})
+    if 'OBS_VALUE' in df.columns:
+        df['OBS_VALUE'] = df['OBS_VALUE'].map(_format_obs_value)
+    return df
 
 
 def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
@@ -69,18 +103,7 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
             df = None
 
         if df is not None and not df.empty:
-            df.columns = [
-                str(c).lstrip('@').strip().upper() for c in df.columns
-            ]
-            if 'OBS_VALUE' not in df.columns:
-                if 'VALUE' in df.columns:
-                    df = df.rename(columns={'VALUE': 'OBS_VALUE'})
-                elif 0 in df.columns or '0' in df.columns:
-                    df = df.rename(columns={
-                        0: 'OBS_VALUE',
-                        '0': 'OBS_VALUE',
-                    })
-            return df
+            return _normalize_obs_column(df)
 
     # 2. Fallback path for headerless / structure-less XML files
     try:
@@ -106,21 +129,23 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
         raise ValueError(f'No <Series> or <Obs> records found in {xml_path}')
 
     df = pd.DataFrame(rows)
-    df.columns = [str(c).lstrip('@').strip().upper() for c in df.columns]
-    if 'OBS_VALUE' not in df.columns:
-        if 'VALUE' in df.columns:
-            df = df.rename(columns={'VALUE': 'OBS_VALUE'})
-        elif 0 in df.columns or '0' in df.columns:
-            df = df.rename(columns={0: 'OBS_VALUE', '0': 'OBS_VALUE'})
-    return df
+    return _normalize_obs_column(df)
 
 
 def convert_sdmx_xml_to_csv(xml_path: str, output_csv_path: str) -> None:
-    """Converts an SDMX XML file to a CSV file."""
+    """Converts an SDMX XML file to a CSV file atomically."""
     df = convert_sdmx_xml_to_dataframe(xml_path)
     out_dir = os.path.dirname(os.path.abspath(output_csv_path))
     os.makedirs(out_dir, exist_ok=True)
-    df.to_csv(output_csv_path, index=False)
+    fd, tmp_path = tempfile.mkstemp(dir=out_dir, suffix='.tmp')
+    try:
+        with os.fdopen(fd, 'w', encoding='utf-8', newline='') as f:
+            df.to_csv(f, index=False)
+        os.replace(tmp_path, output_csv_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
     logging.info('Converted %s -> %s (%d rows)', xml_path, output_csv_path,
                  len(df))
 

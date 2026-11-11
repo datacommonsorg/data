@@ -30,71 +30,88 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/actytif.tmcf",
-                    "cleaned_csv": "output/actytif.csv"
+                    "cleaned_csv": "output/actytif.csv",
+                    "node_mcf": "output/actytif*.mcf"
                 },
                 {
                     "template_mcf": "output/behvqtc.tmcf",
-                    "cleaned_csv": "output/behvqtc.csv"
+                    "cleaned_csv": "output/behvqtc.csv",
+                    "node_mcf": "output/behvqtc*.mcf"
                 },
                 {
                     "template_mcf": "output/bluhqme.tmcf",
-                    "cleaned_csv": "output/bluhqme.csv"
+                    "cleaned_csv": "output/bluhqme.csv",
+                    "node_mcf": "output/bluhqme*.mcf"
                 },
                 {
                     "template_mcf": "output/cjczlcd.tmcf",
-                    "cleaned_csv": "output/cjczlcd.csv"
+                    "cleaned_csv": "output/cjczlcd.csv",
+                    "node_mcf": "output/cjczlcd*.mcf"
                 },
                 {
                     "template_mcf": "output/lxoyale.tmcf",
-                    "cleaned_csv": "output/lxoyale.csv"
+                    "cleaned_csv": "output/lxoyale.csv",
+                    "node_mcf": "output/lxoyale*.mcf"
                 },
                 {
                     "template_mcf": "output/mptocre.tmcf",
-                    "cleaned_csv": "output/mptocre.csv"
+                    "cleaned_csv": "output/mptocre.csv",
+                    "node_mcf": "output/mptocre*.mcf"
                 },
                 {
                     "template_mcf": "output/pqpump.tmcf",
-                    "cleaned_csv": "output/pqpump.csv"
+                    "cleaned_csv": "output/pqpump.csv",
+                    "node_mcf": "output/pqpump*.mcf"
                 },
                 {
                     "template_mcf": "output/szfufmb.tmcf",
-                    "cleaned_csv": "output/szfufmb.csv"
+                    "cleaned_csv": "output/szfufmb.csv",
+                    "node_mcf": "output/szfufmb*.mcf"
                 },
                 {
                     "template_mcf": "output/txbrrac.tmcf",
-                    "cleaned_csv": "output/txbrrac.csv"
+                    "cleaned_csv": "output/txbrrac.csv",
+                    "node_mcf": "output/txbrrac*.mcf"
                 },
                 {
                     "template_mcf": "output/ujtdaag.tmcf",
-                    "cleaned_csv": "output/ujtdaag.csv"
+                    "cleaned_csv": "output/ujtdaag.csv",
+                    "node_mcf": "output/ujtdaag*.mcf"
                 },
                 {
                     "template_mcf": "output/ulouknf.tmcf",
-                    "cleaned_csv": "output/ulouknf.csv"
+                    "cleaned_csv": "output/ulouknf.csv",
+                    "node_mcf": "output/ulouknf*.mcf"
                 },
                 {
                     "template_mcf": "output/viytqvf.tmcf",
-                    "cleaned_csv": "output/viytqvf.csv"
+                    "cleaned_csv": "output/viytqvf.csv",
+                    "node_mcf": "output/viytqvf*.mcf"
                 },
                 {
                     "template_mcf": "output/wcssteb.tmcf",
-                    "cleaned_csv": "output/wcssteb.csv"
+                    "cleaned_csv": "output/wcssteb.csv",
+                    "node_mcf": "output/wcssteb*.mcf"
                 },
                 {
                     "template_mcf": "output/wtxyghf.tmcf",
-                    "cleaned_csv": "output/wtxyghf.csv"
+                    "cleaned_csv": "output/wtxyghf.csv",
+                    "node_mcf": "output/wtxyghf*.mcf"
                 },
                 {
                     "template_mcf": "output/xovpotd.tmcf",
-                    "cleaned_csv": "output/xovpotd.csv"
+                    "cleaned_csv": "output/xovpotd.csv",
+                    "node_mcf": "output/xovpotd*.mcf"
                 },
                 {
                     "template_mcf": "output/zkjifzd.tmcf",
-                    "cleaned_csv": "output/zkjifzd.csv"
+                    "cleaned_csv": "output/zkjifzd.csv",
+                    "node_mcf": "output/zkjifzd*.mcf"
                 },
                 {
                     "template_mcf": "output/zpdksog.tmcf",
-                    "cleaned_csv": "output/zpdksog.csv"
+                    "cleaned_csv": "output/zpdksog.csv",
+                    "node_mcf": "output/zpdksog*.mcf"
                 }
             ],
             "source_files": [

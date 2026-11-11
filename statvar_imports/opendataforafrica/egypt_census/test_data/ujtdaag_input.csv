@@ -1,21 +1,21 @@
 INDICATORS,ID_INDICATORS,NAMEARAB_INDICATORS,SEX,ID_SEX,NAMEARAB_SEX,FREQ,TIME_PERIOD,OBS_VALUE
-1,1,Expected survival at birth (years),1,1,females,A,2006,69.1
-1,1,Expected survival at birth (years),1,1,females,A,2007,69.6
-1,1,Expected survival at birth (years),1,1,females,A,2008,70
-1,1,Expected survival at birth (years),1,1,females,A,2009,70.5
-1,1,Expected survival at birth (years),1,1,females,A,2010,70.9
-1,1,Expected survival at birth (years),1,1,females,A,2011,71.4
-1,1,Expected survival at birth (years),1,1,females,A,2012,71.7
-1,1,Expected survival at birth (years),1,1,females,A,2013,72.1
-1,1,Expected survival at birth (years),1,1,females,A,2014,72.5
-1,1,Expected survival at birth (years),1,1,females,A,2015,72.9
-1,1,Expected survival at birth (years),1,1,females,A,2016,73.3
-1,1,Expected survival at birth (years),1,1,females,A,2017,73.6
-1,1,Expected survival at birth (years),1,1,females,A,2018,74
-1,1,Expected survival at birth (years),2,2,Males,A,2006,66.5
-1,1,Expected survival at birth (years),2,2,Males,A,2007,66.9
-1,1,Expected survival at birth (years),2,2,Males,A,2008,67.4
-1,1,Expected survival at birth (years),2,2,Males,A,2009,67.8
-1,1,Expected survival at birth (years),2,2,Males,A,2010,68.2
-1,1,Expected survival at birth (years),2,2,Males,A,2011,68.6
-1,1,Expected survival at birth (years),2,2,Males,A,2012,69
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2006,69.1
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2007,69.6
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2008,70
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2009,70.5
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2010,70.9
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2011,71.4
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2012,71.7
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2013,72.1
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2014,72.5
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2015,72.9
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2016,73.3
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2017,73.6
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),1,1,اناث,A,2018,74
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2006,66.5
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2007,66.9
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2008,67.4
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2009,67.8
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2010,68.2
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2011,68.6
+1,1,توقع البقاء على قيد الحياة عند الميالد (سنة),2,2,ذكور,A,2012,69

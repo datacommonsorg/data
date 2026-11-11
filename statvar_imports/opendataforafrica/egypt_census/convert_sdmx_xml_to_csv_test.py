@@ -18,17 +18,16 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
-from convert_sdmx_xml_to_csv import (
-    convert_sdmx_xml_to_dataframe,
-    convert_sdmx_xml_to_csv,
-    main,
-)
+from convert_sdmx_xml_to_csv import convert_sdmx_xml_to_csv
+from convert_sdmx_xml_to_csv import convert_sdmx_xml_to_dataframe
+from convert_sdmx_xml_to_csv import main
 
 
 class ConvertSdmxXmlToCsvTest(unittest.TestCase):
@@ -171,6 +170,29 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertIn("FREQ", df.columns)
         self.assertIn("TIME_PERIOD", df.columns)
         self.assertIn("OBS_VALUE", df.columns)
+
+    def test_convert_sdmx_xml_to_dataframe_scientific_notation_expanded(self):
+        """Tests that scientific notation in OBS_VALUE is expanded to decimal."""
+        sample_sci_xml = """<?xml version="1.0" encoding="utf-8"?>
+<StructureSpecificData>
+  <DataSet>
+    <Series INDICATOR="KN.L1" ID_INDICATOR="KN.L1" FREQ="A">
+      <Obs TIME_PERIOD="1993" OBS_VALUE="5.71E-05"/>
+      <Obs TIME_PERIOD="1999" OBS_VALUE="2E-06"/>
+      <Obs TIME_PERIOD="2005" OBS_VALUE="7E-05"/>
+    </Series>
+  </DataSet>
+</StructureSpecificData>
+"""
+        xml_file = os.path.join(self.test_dir.name, "sample_sci.xml")
+        with open(xml_file, "w") as f:
+            f.write(sample_sci_xml)
+
+        df = convert_sdmx_xml_to_dataframe(xml_file)
+        self.assertListEqual(
+            list(df["OBS_VALUE"]),
+            ["0.0000571", "0.000002", "0.00007"],
+        )
 
     def test_convert_sdmx_xml_to_dataframe_file_not_found(self):
         with self.assertRaises(FileNotFoundError):

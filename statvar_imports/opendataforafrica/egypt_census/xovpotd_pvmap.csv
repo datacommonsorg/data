@@ -1,5 +1,5 @@
 key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
-OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,,,,,,,
+OBS_VALUE,value,{Number},#Eval,"value=f'{float({Number}):.10f}'",observationAbout,country/EGY,,,,,,,,
 FREQ:A,observationPeriod,P1Y,,,,,,,,,,,,
 FREQ:Q,observationPeriod,P3M,,,,,,,,,,,,
 KN.L1,populationType,Person,#Multiply,1000000000000,name,"""Total Population""",,,,,,,,
