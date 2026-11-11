@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "DiseaseOntology",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://disease-ontology.org",
+            "provenance_description": "disease-ontology.org is the central access point for a critical bioinformatic resource aiming to standardize and integrate knowledge about human diseases across various biological and clinical domains",
+            "scripts": [
+                "download.sh",
+                "python3 format_disease_ontology.py"
+            ],
+            "source_files": [
+                "scratch/HumanDO.owl"
+            ],
+            "import_inputs": [
+                {
+                    "cleaned_csv": "scratch/HumanDO.csv"
+
+                }
+            ],
+            "cron_schedule": "0 0 1 * *"
+        }
+    ]
+}
