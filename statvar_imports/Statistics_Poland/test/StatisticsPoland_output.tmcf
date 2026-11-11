@@ -1,0 +1,6 @@
+Node: E:StatisticsPoland_output->E0
+observationDate: C:StatisticsPoland_output->observationDate
+observationAbout: C:StatisticsPoland_output->observationAbout
+value: C:StatisticsPoland_output->value
+variableMeasured: C:StatisticsPoland_output->variableMeasured
+typeOf: dcs:StatVarObservation
