@@ -46,43 +46,47 @@ _IMPORT_NAME_FORM = '''
 '''.strip()
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    name='import_name',
-    default=None,
-    help=('Absolute import name of the import to execute of the form '
-          f'{_IMPORT_NAME_FORM}.'),
-    short_name='i')
-flags.DEFINE_string(name='output_dir',
-                    default='.',
-                    help='Path to the output directory.',
-                    short_name='o')
-flags.DEFINE_string(name='repo_name',
-                    default='data',
-                    help='Name of the GitHub repository containing the import.',
-                    short_name='r')
-flags.DEFINE_string(
-    name='owner_username',
-    default='datacommonsorg',
-    help=('GitHub username of the owner of the GitHub repository '
-          'containing the import.'),
-    short_name='u')
-flags.DEFINE_string(name='username',
-                    default='',
-                    help='GitHub username for authentication.',
-                    short_name='n')
-flags.DEFINE_string(name='access_token',
-                    default='',
-                    help='GitHub access token for authentication.',
-                    short_name='t')
 
-flags.mark_flag_as_required('import_name')
-flags.register_validator('import_name',
-                         import_target.is_absolute_import_name,
-                         message=('--import_name must be of the form '
-                                  f'{_IMPORT_NAME_FORM}.'))
-flags.DEFINE_string('config_override', "config_override_test.json",
-                    'Config file with overridden parameters.')
-flags.DEFINE_string('repo_dir', None, 'Local repo directory.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        name='import_name',
+        default=None,
+        help=('Absolute import name of the import to execute of the form '
+              f'{_IMPORT_NAME_FORM}.'),
+        short_name='i')
+    flags.DEFINE_string(name='output_dir',
+                        default='.',
+                        help='Path to the output directory.',
+                        short_name='o')
+    flags.DEFINE_string(
+        name='repo_name',
+        default='data',
+        help='Name of the GitHub repository containing the import.',
+        short_name='r')
+    flags.DEFINE_string(
+        name='owner_username',
+        default='datacommonsorg',
+        help=('GitHub username of the owner of the GitHub repository '
+              'containing the import.'),
+        short_name='u')
+    flags.DEFINE_string(name='username',
+                        default='',
+                        help='GitHub username for authentication.',
+                        short_name='n')
+    flags.DEFINE_string(name='access_token',
+                        default='',
+                        help='GitHub access token for authentication.',
+                        short_name='t')
+    flags.mark_flag_as_required('import_name')
+    flags.register_validator('import_name',
+                             import_target.is_absolute_import_name,
+                             message=('--import_name must be of the form '
+                                      f'{_IMPORT_NAME_FORM}.'))
+    flags.DEFINE_string('config_override', "config_override_test.json",
+                        'Config file with overridden parameters.')
+    flags.DEFINE_string('repo_dir', None, 'Local repo directory.')
 
 
 def _override_configs(filename: str,
@@ -116,4 +120,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
