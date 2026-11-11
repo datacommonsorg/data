@@ -39,12 +39,12 @@ country/ISR,2021,472600,dcid:Count_Person_CBSIsraelNonJudaismOrNonArabChristianO
 country/ISR,2021,1997800,dcid:Count_Person_Arab,,,
 country/ISR,2022,9662000,dcid:Count_Person,,,
 country/ISR,2022,7101400,dcid:Count_Person_Judaism,,,
-country/ISR,2022,521800,dcid:Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion,,,dcAggregate/CBSIsraelSurvey
+country/ISR,2022,521800.0,dcid:Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion,,,dcAggregate/CBSIsraelSurvey
 country/ISR,2022,2038800,dcid:Count_Person_Arab,,,
 country/ISR,2023,9990300,dcid:Count_Person,,,
 country/ISR,2023,7201100,dcid:Count_Person_Judaism,,,
 country/ISR,2023,481500,dcid:Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion,,,dcAggregate/CBSIsraelSurvey
-country/ISR,2023,2092200,dcid:Count_Person_Arab,,,
+country/ISR,2023,2092200.0,dcid:Count_Person_Arab,,,
 country/ISR,2024,10065500,dcid:Count_Person,,,
 country/ISR,2024,7212900,dcid:Count_Person_Judaism,,,
 country/ISR,2024,480400,dcid:Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion,,,dcAggregate/CBSIsraelSurvey

@@ -20,11 +20,13 @@
         }
       ],
       "source_files": [
-        "input_files/*",
+        "input_files/*.xls",
+        "input_files/*.csv",
         "counters/*.csv",
         "validation_config.json"
       ],
       "cron_schedule": "0 5 * * 1",
+      "_comment": "Schedule: Weekly on Monday at 05:00 UTC",
       "validation_config_file": "validation_config.json",
       "resource_limits": {
         "cpu": 8,

@@ -1,18 +1,29 @@
 key,property,value
+Year,observationDate,{Number}
 observationDate,observationDate,{Number}
+Region,observationAbout,{@Data},populationType,Person,statType,measuredValue,measuredProperty,count
 observationAbout,observationAbout,{@Data},populationType,Person,statType,measuredValue,measuredProperty,count
 isr_menemployed_age_martialstatus_2008.csv,gender,Male
 isr_totalemployed_age_martialstatus_2008.csv,employmentStatus,Employed
 isr_womenemployed_age_martialstatus_2008.csv,gender,Female
 ISR,observationAbout,country/ISR
+999,observationAbout,country/ISR
+TOTAL,observationAbout,country/ISR
 country/ISR,observationAbout,country/ISR
 DIST_1,observationAbout,wikidataId/Q192232
+Jerusalem District,observationAbout,wikidataId/Q192232
 DIST_2,observationAbout,wikidataId/Q189942
+Northern District,observationAbout,wikidataId/Q189942
 DIST_3,observationAbout,wikidataId/Q185845
+Haifa District,observationAbout,wikidataId/Q185845
 DIST_4,observationAbout,wikidataId/Q188785
+Central District,observationAbout,wikidataId/Q188785
 DIST_5,observationAbout,wikidataId/Q192811
+Tel Aviv District,observationAbout,wikidataId/Q192811
 DIST_6,observationAbout,wikidataId/Q188781
+Southern District,observationAbout,wikidataId/Q188781
 DIST_7,observationAbout,wikidataId/Q513200
+Judea and Samaria Area,observationAbout,wikidataId/Q513200
 SUBDIST_21,observationAbout,wikidataId/Q5423089
 SUBDIST_24,observationAbout,wikidataId/Q5423103
 SUBDIST_29,observationAbout,wikidataId/Q5423040
@@ -24,11 +35,11 @@ SUBDIST_43,observationAbout,wikidataId/Q5419070
 SUBDIST_44,observationAbout,wikidataId/Q46992983
 SUBDIST_61,observationAbout,wikidataId/Q5423623
 SUBDIST_62,observationAbout,wikidataId/Q5423629
-total,value,{Number}
-jews,religion,Judaism,value,{Number}
-nonjews,religion,NonJudaism,value,{Number}
-Others,religion,CBS_Israel_NonJudaismOrNonArabChristianOrNoReligion,value,{Number},measurementMethod,dcAggregate/CBSIsraelSurvey
-arab,religion,Arab,value,{Number}
+total,value,{Number},#Multiply,1000
+jews,religion,Judaism,value,{Number},#Multiply,1000
+nonjews,religion,NonJudaism,value,{Number},#Multiply,1000
+Others,religion,CBS_Israel_NonJudaismOrNonArabChristianOrNoReligion,value,{Number},#Multiply,1000,measurementMethod,dcAggregate/CBSIsraelSurvey
+arab,religion,Arab,value,{Number},#Multiply,1000
 "Jews, Popululation no Religious Classification and Non-Arab Cristians - Infant Deaths",populationType,MortalityEvent,ageGroupClassification,Infant,measuredProperty,count,religion,CBS_Israel_JudaismOrNonArabChristianOrNoReligion,value,{Number}
 Arab Population - Infant Deaths,populationType,MortalityEvent,ageGroupClassification,Infant,measuredProperty,count,religion,Arab,value,{Number}
 "Jews, Popululation no Religious Classification and Non-Arab Cristians - Live-Births",medicalStatus,LiveBirth,statType,measuredValue,measuredProperty,count,religion,CBS_Israel_JudaismOrNonArabChristianOrNoReligion,value,{Number},populationType,BirthEvent
@@ -72,25 +83,25 @@ cer_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAnd
 ex_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
 pne_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
 infd_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
-Those aged 15 and over – total,age,[15 - Years],value,{Number}
-Men aged 15 and over– total,age,[15 - Years],gender,Male,value,{Number}
-Women aged 15 and over– total,age,[15 - Years],gender,Female,value,{Number}
-Those aged 5 and over – total **,age,[5 - Years],value,{Number}
+Those aged 15 and over – total,age,[15 - Years],value,{Number},#Multiply,1000
+Men aged 15 and over– total,age,[15 - Years],gender,Male,value,{Number},#Multiply,1000
+Women aged 15 and over– total,age,[15 - Years],gender,Female,value,{Number},#Multiply,1000
+Those aged 5 and over – total **,age,[5 - Years],value,{Number},#Multiply,1000
 Percentage of males aged 5 and over **,age,[5 - Years],gender,Male,value,{Number},unit,Percent,scalingFactor,100,measurementDenominator,-age
 Percentage of females aged 5 and over **,age,[5 - Years],gender,Female,value,{Number},unit,Percent,scalingFactor,100,measurementDenominator,-age
-Those aged 65+ – total **,age,[65 - Years],value,{Number}
-Population – total,value,{Number}
-Males – total,gender,Male,value,{Number}
-Females – total,gender,Female,value,{Number}
-Grand totalTotal,value,{Number}
-Grand totalMales,gender,Male,value,{Number}
-Grand totalFemales,gender,Female,value,{Number}
-Urban localitiesTotal,placeOfResidenceClassification,Urban,value,{Number}
-Urban localitiesMales,dcid,Count_Person_Urban_Male,gender,Male,placeOfResidenceClassification,Urban,value,{Number}
-Urban localitiesFemales,dcid,Count_Person_Urban_Female,gender,Female,placeOfResidenceClassification,Urban,value,{Number}
-Rural localitiesTotal,placeOfResidenceClassification,Rural,value,{Number}
-Rural localitiesMales,dcid,Count_Person_Rural_Male,gender,Male,placeOfResidenceClassification,Rural,value,{Number}
-Rural localitiesFemales,dcid,Count_Person_Rural_Female,gender,Female,placeOfResidenceClassification,Rural,value,{Number}
+Those aged 65+ – total **,age,[65 - Years],value,{Number},#Multiply,1000
+Population – total,value,{Number},#Multiply,1000
+Males – total,gender,Male,value,{Number},#Multiply,1000
+Females – total,gender,Female,value,{Number},#Multiply,1000
+Grand totalTotal,value,{Number},#Multiply,100
+Grand totalMales,gender,Male,value,{Number},#Multiply,100
+Grand totalFemales,gender,Female,value,{Number},#Multiply,100
+Urban localitiesTotal,placeOfResidenceClassification,Urban,value,{Number},#Multiply,100
+Urban localitiesMales,dcid,Count_Person_Urban_Male,gender,Male,placeOfResidenceClassification,Urban,value,{Number},#Multiply,100
+Urban localitiesFemales,dcid,Count_Person_Urban_Female,gender,Female,placeOfResidenceClassification,Urban,value,{Number},#Multiply,100
+Rural localitiesTotal,placeOfResidenceClassification,Rural,value,{Number},#Multiply,100
+Rural localitiesMales,dcid,Count_Person_Rural_Male,gender,Male,placeOfResidenceClassification,Rural,value,{Number},#Multiply,100
+Rural localitiesFemales,dcid,Count_Person_Rural_Female,gender,Female,placeOfResidenceClassification,Rural,value,{Number},#Multiply,100
 0-14,age,[0 14 Years]
 15-24,age,[15 24 Years]
 25-34,age,[25 34 Years]
@@ -105,23 +116,23 @@ Rural localitiesFemales,dcid,Count_Person_Rural_Female,gender,Female,placeOfResi
 75-79,age,[75 79 Years]
 80-84,age,[80 84 Years]
 85+,age,[85 - Years]
-Total,value,{Number}
-Never married,maritalStatus,NeverMarried,value,{Number}
-Married,maritalStatus,MarriedAndNotSeparated,value,{Number}
-Divorced,maritalStatus,Divorced,value,{Number}
-Widowed,maritalStatus,Widowed,value,{Number}
-Married but separated,maritalStatus,Separated,value,{Number}
-סך הכל,value,{Number}
-24-15,employmentStatus,Employed,age,[15 24 Years],value,{Number}
-29-25,employmentStatus,Employed,age,[25 29 Years],value,{Number}
-34-30,employmentStatus,Employed,age,[30 34 Years],value,{Number}
-39-35,employmentStatus,Employed,age,[35 39 Years],value,{Number}
-44-40,employmentStatus,Employed,age,[40 44 Years],value,{Number}
-49-45,employmentStatus,Employed,age,[45 49 Years],value,{Number}
-54-50,employmentStatus,Employed,age,[50 54 Years],value,{Number}
-59-55,employmentStatus,Employed,age,[55 59 Years],value,{Number}
-64-60,employmentStatus,Employed,age,[60 64 Years],value,{Number}
-+65,employmentStatus,Employed,age,[65 - Years],value,{Number}
+Total,value,{Number},#Multiply,100
+Never married,maritalStatus,NeverMarried,value,{Number},#Multiply,100
+Married,maritalStatus,MarriedAndNotSeparated,value,{Number},#Multiply,100
+Divorced,maritalStatus,Divorced,value,{Number},#Multiply,100
+Widowed,maritalStatus,Widowed,value,{Number},#Multiply,100
+Married but separated,maritalStatus,Separated,value,{Number},#Multiply,100
+סך הכל,value,{Number},#Multiply,100
+24-15,employmentStatus,Employed,age,[15 24 Years],value,{Number},#Multiply,100
+29-25,employmentStatus,Employed,age,[25 29 Years],value,{Number},#Multiply,100
+34-30,employmentStatus,Employed,age,[30 34 Years],value,{Number},#Multiply,100
+39-35,employmentStatus,Employed,age,[35 39 Years],value,{Number},#Multiply,100
+44-40,employmentStatus,Employed,age,[40 44 Years],value,{Number},#Multiply,100
+49-45,employmentStatus,Employed,age,[45 49 Years],value,{Number},#Multiply,100
+54-50,employmentStatus,Employed,age,[50 54 Years],value,{Number},#Multiply,100
+59-55,employmentStatus,Employed,age,[55 59 Years],value,{Number},#Multiply,100
+64-60,employmentStatus,Employed,age,[60 64 Years],value,{Number},#Multiply,100
++65,employmentStatus,Employed,age,[65 - Years],value,{Number},#Multiply,100
 מועסקים,employment,Employed
 רווק,employmentStatus,Employed,maritalStatus,NeverMarried
 נשוי,employmentStatus,Employed,maritalStatus,MarriedAndNotSeparated

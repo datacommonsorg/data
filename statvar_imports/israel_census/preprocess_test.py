@@ -29,265 +29,95 @@ from statvar_imports.israel_census import preprocess  # pylint: disable=g-import
 
 class PreprocessTest(unittest.TestCase):
 
-    def test_extract_cbs_series_population_vital_and_cod_from_raw_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            pop_csv = os.path.join(tmp_dir,
-                                   'cbs_series_population_religion.csv')
-            with open(pop_csv, 'w', encoding='utf-8', newline='') as fp:
-                writer = csv.writer(fp, lineterminator='\n')
-                writer.writerow([
-                    'id',
-                    'time_name',
-                    'unit_name',
-                    'path_level4_name',
-                    'path_name_id_name',
-                    'obs_time_period',
-                    'obs_value',
-                ])
-                writer.writerow([
-                    '3700',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Total',
-                    '2024-01',
-                    '10065.5',
-                ])
-                writer.writerow([
-                    '3701',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Jews',
-                    '2024-01',
-                    '7212.9',
-                ])
-                writer.writerow([
-                    '3703',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Jews and Others',
-                    '2024-01',
-                    '7693.3',
-                ])
-                writer.writerow([
-                    '3704',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Arab Population',
-                    '2024-01',
-                    '2111.8',
-                ])
-                writer.writerow([
-                    '3700',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Total',
-                    '2025-01',
-                    '7766.7',
-                ])
-                writer.writerow([
-                    '3703',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Jews and Others',
-                    '2025-01',
-                    '7730.0',
-                ])
-                writer.writerow([
-                    '3704',
-                    'Year',
-                    'Thousands',
-                    'At End of Period',
-                    'Arab Population',
-                    '2025-01',
-                    '2130.6',
-                ])
-
-            pop_obs = preprocess._extract_cbs_series_population_religion_obs(
-                pop_csv)
-            self.assertNotIn(('country/ISR', '2025', 'IND_Count_Person'),
-                             pop_obs)
-            self.assertEqual(
-                pop_obs[('country/ISR', '2024', 'IND_Count_Person')],
-                '10065500')
-            self.assertEqual(
-                pop_obs[('country/ISR', '2024', 'IND_Count_Person_Judaism')],
-                '7212900',
-            )
-            self.assertEqual(
-                pop_obs[('country/ISR', '2024', 'IND_Count_Person_Arab')],
-                '2111800',
-            )
-            self.assertEqual(
-                pop_obs[(
-                    'country/ISR',
-                    '2024',
-                    'IND_Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion',
-                )],
-                '480400',
-            )
-
-            vital_csv = os.path.join(tmp_dir, 'cbs_series_vital_statistics.csv')
-            with open(vital_csv, 'w', encoding='utf-8', newline='') as fp:
-                writer = csv.writer(fp, lineterminator='\n')
-                writer.writerow([
-                    'id',
-                    'time_name',
-                    'path_level4_name',
-                    'path_name_id_name',
-                    'obs_time_period',
-                    'obs_value',
-                ])
-                writer.writerow([
-                    '3752',
-                    'Year',
-                    'Arab Population',
-                    'Live-Births',
-                    '2023-01',
-                    '42862',
-                ])
-
-            vital_obs = preprocess._extract_cbs_series_vital_statistics_obs(
-                vital_csv)
-            self.assertEqual(
-                vital_obs[(
-                    'country/ISR',
-                    '2023',
-                    'IND_Count_BirthEvent_LiveBirth_Arab',
-                )],
-                '42862',
-            )
-
-            cod_csv = os.path.join(tmp_dir, 'cbs_series_cause_of_death.csv')
-            with open(cod_csv, 'w', encoding='utf-8', newline='') as fp:
-                writer = csv.writer(fp, lineterminator='\n')
-                writer.writerow([
-                    'id',
-                    'time_name',
-                    'path_level4_name',
-                    'path_name_id_name',
-                    'obs_time_period',
-                    'obs_value',
-                ])
-                writer.writerow([
-                    '70015',
-                    'Year',
-                    'Ischaemic Heart Diseases',
-                    'Total Population| Males',
-                    '2022-01',
-                    '24.0',
-                ])
-
-            cod_obs = preprocess._extract_cbs_series_cause_of_death_obs(cod_csv)
-            self.assertEqual(
-                cod_obs[(
-                    'country/ISR',
-                    '2022',
-                    'IND_Count_MortalityEvent_CoronaryHeartDisease_Male_AsAFractionOf_Count_Person_Male',
-                )],
-                '24',
-            )
-
-    def test_extract_cbs_boardsgenerator_census_2008_obs_from_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            c2008_csv = os.path.join(tmp_dir, 'cbs_census_2008_regions.csv')
-            with open(c2008_csv, 'w', encoding='utf-8', newline='') as fp:
-                writer = csv.writer(fp, lineterminator='\n')
-                writer.writerow([
-                    'region_code',
-                    'data_mode',
-                    'group_id',
-                    'group_name',
-                    'subject_id',
-                    'subject_name',
-                    'value',
-                ])
-                writer.writerow([
-                    '999',
-                    'Machoz',
-                    '3',
-                    'Total',
-                    '218',
-                    'Those aged 15 and over – total (thousands)',
-                    '5227.3',
-                ])
-                writer.writerow([
-                    '21',
-                    'Nafa',
-                    '2',
-                    'Demography',
-                    '18',
-                    'Population – total (thousands)',
-                    '104.5',
-                ])
-                writer.writerow([
-                    '21',
-                    'Nafa',
-                    '3',
-                    'Total',
-                    '224',
-                    'Those aged 65+ – total (thousands) **',
-                    '8.4',
-                ])
-
-            by_ds = preprocess._extract_cbs_boardsgenerator_census_2008_obs(
-                c2008_csv)
-            self.assertEqual(
-                by_ds['isr_agebracket_gender_aa1_2008'][(
-                    'country/ISR',
-                    '2008',
-                    'IND_Count_Person_15OrMoreYears',
-                )],
-                '5227300',
-            )
-            self.assertEqual(
-                by_ds['isr_subdistrict_population_gender_2008'][(
-                    'wikidataId/Q5423089',
-                    '2008',
-                    'IND_Count_Person',
-                )],
-                '104500',
-            )
-            self.assertEqual(
-                by_ds['isr_subdistrict_age_gender_2008'][(
-                    'wikidataId/Q5423089',
-                    '2008',
-                    'IND_Count_Person_65OrMoreYears',
-                )],
-                '8400',
-            )
-
-    def test_build_input_tables_writes_all_11_wide_and_2d_csvs(self):
+    def test_convert_dem1_2_and_dem1_14_xls_to_unscaled_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             raw_dir = os.path.join(tmp_dir, 'input_files')
             out_dir = os.path.join(tmp_dir, 'staged_inputs')
             os.makedirs(raw_dir, exist_ok=True)
-            pop_csv = os.path.join(raw_dir,
-                                   'cbs_series_population_religion.csv')
-            with open(pop_csv, 'w', encoding='utf-8', newline='') as fp:
-                writer = csv.writer(fp, lineterminator='\n')
-                writer.writerow(
-                    ['id', 'time_name', 'obs_time_period', 'obs_value'])
-                writer.writerow(['3700', 'Year', '2020-01', '9289.8'])
 
-            tables = preprocess.build_input_tables(raw_dir, out_dir)
-            self.assertEqual(len(tables), 11)
+            # Write mock dem1_2.xls (as CSV rows for _read_mifkad_table_rows)
+            with open(os.path.join(raw_dir, 'dem1_2.xls'),
+                      'w',
+                      encoding='utf-8',
+                      newline='') as fp:
+                writer = csv.writer(fp, lineterminator='\n')
+                writer.writerow([
+                    '',
+                    '74121.8',
+                    '36638.9',
+                    '37482.9',
+                    '68232.0',
+                    '33630.3',
+                    '34601.8',
+                    '5889.8',
+                    '3008.7',
+                    '2881.1',
+                    'TOTAL',
+                ])
+
+            # Write mock dem1_14.xls
+            with open(os.path.join(raw_dir, 'dem1_14.xls'),
+                      'w',
+                      encoding='utf-8',
+                      newline='') as fp:
+                writer = csv.writer(fp, lineterminator='\n')
+                writer.writerow([
+                    '0-14',
+                    '20906',
+                    '20906',
+                    '-',
+                    '-',
+                    '-',
+                    '-',
+                    '14-0',
+                ])
+
+            preprocess.build_input_tables(raw_dir, out_dir)
+
             with open(
                     os.path.join(out_dir,
-                                 'isr_population_religion_1949_2021.csv'),
+                                 'isr_urban_rural_gender_aa1_2008.csv'),
                     'r',
                     encoding='utf-8',
             ) as fp:
-                rows = list(csv.DictReader(fp))
-            self.assertEqual(len(rows), 1)
-            self.assertEqual(rows[0]['observationAbout'], 'country/ISR')
-            self.assertEqual(rows[0]['observationDate'], '2020')
-            self.assertEqual(rows[0]['total'], '9289800')
+                urb_rows = list(csv.DictReader(fp))
+            self.assertEqual(len(urb_rows), 1)
+            self.assertEqual(urb_rows[0]['Region'], 'ISR')
+            self.assertEqual(urb_rows[0]['Year'], '2008')
+            self.assertEqual(urb_rows[0]['Grand totalTotal'], '')
+            self.assertEqual(urb_rows[0]['Grand totalMales'], '36638.9')
+            self.assertEqual(urb_rows[0]['Urban localitiesTotal'], '68232')
+
+            with open(
+                    os.path.join(out_dir, 'isr_age_maritalstatus_2008.csv'),
+                    'r',
+                    encoding='utf-8',
+            ) as fp:
+                age_rows = list(csv.DictReader(fp))
+            self.assertEqual(len(age_rows), 1)
+            self.assertEqual(age_rows[0]['Region'], 'ISR')
+            self.assertEqual(age_rows[0]['Year'], '2008')
+            self.assertEqual(age_rows[0]['Age group'], '0-14')
+            self.assertEqual(age_rows[0]['Total'], '20906')
+            self.assertEqual(age_rows[0]['Never married'], '20906')
+
+    def test_build_input_tables_copies_existing_csv_files_untouched(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            raw_dir = os.path.join(tmp_dir, 'input_files')
+            out_dir = os.path.join(tmp_dir, 'staged_inputs')
+            os.makedirs(raw_dir, exist_ok=True)
+
+            pop_csv = os.path.join(raw_dir,
+                                   'isr_population_religion_1949_2021.csv')
+            raw_content = 'Region,Year,total,jews,nonjews,Others,arab\nISR,1949,1173.9,1013.9,160,0,160\n'
+            with open(pop_csv, 'w', encoding='utf-8', newline='') as fp:
+                fp.write(raw_content)
+
+            preprocess.build_input_tables(raw_dir, out_dir)
+            staged_pop = os.path.join(out_dir,
+                                      'isr_population_religion_1949_2021.csv')
+            with open(staged_pop, 'r', encoding='utf-8') as fp:
+                self.assertEqual(fp.read(), raw_content)
 
 
 if __name__ == '__main__':
