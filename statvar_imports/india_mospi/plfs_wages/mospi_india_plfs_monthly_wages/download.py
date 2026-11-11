@@ -83,60 +83,64 @@ KEY_COLUMNS = [
 _RETRYABLE_STATUS_CODES = frozenset({429, 500, 502, 503, 504})
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'mospi_monthly_api_url',
-    DEFAULT_API_URL,
-    'MoSPI eSankhyiki PLFS getData REST endpoint.',
-    allow_override=True,
-)
-flags.DEFINE_string(
-    'mospi_monthly_gcs_baseline_path',
-    DEFAULT_GCS_BASELINE,
-    'GCS URI (or local path) of the staged historical baseline CSV.',
-    allow_override=True,
-)
-flags.DEFINE_string(
-    'mospi_monthly_output_file',
-    DEFAULT_OUTPUT_FILE,
-    'Destination CSV path for merged raw input data.',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'mospi_monthly_page_size',
-    MAX_PAGE_SIZE,
-    'Records per API page (MoSPI enforces <= 200).',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'mospi_monthly_timeout_seconds',
-    30,
-    'Per-request HTTP timeout.',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'mospi_monthly_max_retries',
-    3,
-    'Maximum retry attempts for transient HTTP/network errors.',
-    allow_override=True,
-)
-flags.DEFINE_float(
-    'mospi_monthly_retry_delay_seconds',
-    5.0,
-    'Initial backoff delay in seconds between retries.',
-    allow_override=True,
-)
-flags.DEFINE_float(
-    'mospi_monthly_retry_backoff',
-    2.0,
-    'Exponential backoff multiplier between retry attempts.',
-    allow_override=True,
-)
-flags.DEFINE_bool(
-    'mospi_monthly_skip_live_api',
-    False,
-    'If true, only stage the GCS baseline without querying the live MoSPI API.',
-    allow_override=True,
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'mospi_monthly_api_url',
+        DEFAULT_API_URL,
+        'MoSPI eSankhyiki PLFS getData REST endpoint.',
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        'mospi_monthly_gcs_baseline_path',
+        DEFAULT_GCS_BASELINE,
+        'GCS URI (or local path) of the staged historical baseline CSV.',
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        'mospi_monthly_output_file',
+        DEFAULT_OUTPUT_FILE,
+        'Destination CSV path for merged raw input data.',
+        allow_override=True,
+    )
+    flags.DEFINE_integer(
+        'mospi_monthly_page_size',
+        MAX_PAGE_SIZE,
+        'Records per API page (MoSPI enforces <= 200).',
+        allow_override=True,
+    )
+    flags.DEFINE_integer(
+        'mospi_monthly_timeout_seconds',
+        30,
+        'Per-request HTTP timeout.',
+        allow_override=True,
+    )
+    flags.DEFINE_integer(
+        'mospi_monthly_max_retries',
+        3,
+        'Maximum retry attempts for transient HTTP/network errors.',
+        allow_override=True,
+    )
+    flags.DEFINE_float(
+        'mospi_monthly_retry_delay_seconds',
+        5.0,
+        'Initial backoff delay in seconds between retries.',
+        allow_override=True,
+    )
+    flags.DEFINE_float(
+        'mospi_monthly_retry_backoff',
+        2.0,
+        'Exponential backoff multiplier between retry attempts.',
+        allow_override=True,
+    )
+    flags.DEFINE_bool(
+        'mospi_monthly_skip_live_api',
+        False,
+        'If true, only stage the GCS baseline without querying the live MoSPI API.',
+        allow_override=True,
+    )
 
 
 class _LegacyTLSAdapter(HTTPAdapter):
@@ -414,4 +418,5 @@ def main(argv: list[str]) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

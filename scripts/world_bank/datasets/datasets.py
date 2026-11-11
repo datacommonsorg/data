@@ -84,13 +84,15 @@ class Mode:
     WRITE_OBSERVATIONS = 'write_observations'
 
 
-flags.DEFINE_string(
-    'mode', Mode.WRITE_OBSERVATIONS,
-    f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
-)
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'mode', Mode.WRITE_OBSERVATIONS,
+        f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
+    )
+    flags.DEFINE_string('stat_vars_file', 'statvars.csv',
+                        'Path to CSV file with Stat Var mappings.')
 
-flags.DEFINE_string('stat_vars_file', 'statvars.csv',
-                    'Path to CSV file with Stat Var mappings.')
 
 ctx = create_urllib3_context()
 ctx.load_default_certs()
@@ -588,4 +590,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
