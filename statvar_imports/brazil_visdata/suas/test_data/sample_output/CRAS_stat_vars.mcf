@@ -1,0 +1,11 @@
+Node: dcid:Count_CivicStructure_MinistryOfCitizenship_Cofinancing_BRASocialAssistanceReferenceCenters
+typeOf: dcid:StatisticalVariable
+name: "Social Assistance Reference Centers (CRAS) with co-financing from the Ministry of Citizenship (Accumulated)"
+populationType: dcid:CivicStructure
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+financePartner: dcid:MinistryOfCitizenship
+financeType: dcid:Cofinancing
+nameWithLanguage: "Centros de Referência em Assistência Social (CRAS) com cofinanciamento do Ministério da Cidadania (Acumulado)@pt"
+placeCategory: dcid:BRA_SocialAssistanceReferenceCenters
+
