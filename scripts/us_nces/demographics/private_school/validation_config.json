@@ -1,0 +1,10 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+                {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verify all NCES StatVars share a consistent maximum observation date",
+            "validator": "MAX_DATE_CONSISTENT"
+        }
+    ]
+}
